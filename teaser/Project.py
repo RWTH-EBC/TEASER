@@ -172,9 +172,9 @@ class Project(object):
                          number_of_floors,
                          height_of_floors,
                          net_leased_area,
-                         office_layout,
-                         window_layout,
-                         construction_type):
+                         office_layout=None,
+                         window_layout=None,
+                         construction_type=None):
 
         '''Create and calculate an office building
 
@@ -192,21 +192,21 @@ class Project(object):
         net_leased_area : float
             total net leased area of building
         office_layout : int
-            type of floor plan
+            type of floor plan (default = 0)
 
             0: use default values
             1: elongated 1 floor
             2: elongated 2 floors
             3: compact
         window_layout : int
-            type of window layout
+            type of window layout (default = 0)
 
             0: use default values
             1: punctuated facade
             2: banner facade
             3: full glazing
         construction_type : str
-            construction type
+            construction type (default = "heavy")
 
             heavy: heavy construction
             light: light construction
