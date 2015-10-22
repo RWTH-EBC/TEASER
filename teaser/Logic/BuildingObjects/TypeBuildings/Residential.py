@@ -303,6 +303,9 @@ class Residential(TypeBuilding):
         self._top_floor_area = self._est_area_per_roof * \
                 self._living_area_per_floor
 
+        if self._est_roof_area == 0:
+            self._est_roof_area = self._top_floor_area
+
         self._est_facade_area = self._est_facade_to_floor_area * \
                 self._living_area_per_floor + self._est_extra_floor_area
 
