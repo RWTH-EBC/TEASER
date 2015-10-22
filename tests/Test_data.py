@@ -233,12 +233,12 @@ class Test_teaser(object):
                          number_of_floors=7,
                          height_of_floors=1,
                          net_leased_area=1988 ,
-                         residential_layout=1,
-                         neighbour_buildings=1,
-                         attic=1,
-                         cellar=1,
+                         residential_layout=0,
+                         neighbour_buildings=0,
+                         attic=0,
+                         cellar=0,
                          construction_type="heavy",
-                         dormer=1)       
+                         dormer=0)       
              
     '''methods in Building'''
         
