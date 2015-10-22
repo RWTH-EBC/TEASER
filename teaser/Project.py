@@ -498,8 +498,8 @@ class Project(object):
                                 neighbour_buildings,
                                 attic,
                                 cellar,
-                                construction_type,
-                                dormer)
+                                dormer,
+                                construction_type)
 
         type_bldg.generate_residential()
         type_bldg.calc_building_parameter(self.calculation_method)

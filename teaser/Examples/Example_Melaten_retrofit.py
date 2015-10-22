@@ -178,8 +178,8 @@ def create_reference_project(info_list):
                                       neighbour_buildings=0,
                                       attic=0,
                                       cellar=0,
-                                      construction_type=building.weight,
-                                      dormer=0)
+                                      dormer=0,
+                                      construction_type=building.weight)
     return prj
 
     
