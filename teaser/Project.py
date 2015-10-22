@@ -103,7 +103,7 @@ class Project(object):
 
         '''
         self.weather_file_name = file_name
-        weather_file = weather_path+file_name
+        weather_file = weather_path + file_name
         output_path = (utilis.get_full_path(
                        "InputData\\BoundariesTypeBuilding\\") + file_name)
         print(output_path)
@@ -450,28 +450,28 @@ class Project(object):
         residential_layout : int
             type of floor plan
 
-            1: compact
-            2: elongated/complex
+            0: compact
+            1: elongated/complex
         neighbour_buildings : int
             neighbour
 
-            1: no neighbour
-            2: one neighbour
-            3: two neighbours
+            0: no neighbour
+            1: one neighbour
+            2: two neighbours
         attic : int
             type of attic
 
-            1: flat roof
-            2: non heated attic
-            3: partly heated attic
-            4: heated attic
+            0: flat roof
+            1: non heated attic
+            2: partly heated attic
+            3: heated attic
         cellar : int
             type of cellar
 
-            1: no cellar
-            2: non heated cellar
-            3: partly heated cellar
-            4: heated cellar
+            0: no cellar
+            1: non heated cellar
+            2: partly heated cellar
+            3: heated cellar
         construction_type : str
             construction type
 
@@ -480,8 +480,8 @@ class Project(object):
         dormer : str
             construction type
 
-            1: dormer
-            2: no dormer
+            0: no dormer
+            : dormer
 
         Returns
         ----------
@@ -526,9 +526,9 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = utilis.get_full_path("OutputData")+"\\"+name
+            new_path = utilis.get_full_path("OutputData") + "\\" + name
         else:
-            new_path = path+"\\"+name
+            new_path = path + "\\" + name
             utilis.create_path(utilis.get_full_path(path))
 
         txml.save_teaser_xml(new_path, self)
@@ -577,16 +577,16 @@ class Project(object):
 
         '''
         if path is None:
-            path = "OutputData\\"+self.name
+            path = "OutputData\\" + self.name
         else:
-            path = path+"\\"+self.name
+            path = path + "\\" + self.name
 
         utilis.create_path(utilis.get_full_path(path))
 
         input_path = utilis.get_full_path("InputData\\BoundariesTypeBuilding")
 
         try:
-            shutil.copytree(input_path, utilis.get_full_path(path)+"\\Tables")
+            shutil.copytree(input_path, utilis.get_full_path(path) + "\\Tables")
         except:
             pass
         else:
@@ -667,10 +667,10 @@ class Project(object):
 
         for bldg in self.list_of_buildings:
 
-            bldg_path = path+"\\"+bldg.name+"\\"
+            bldg_path = path + "\\" + bldg.name + "\\"
             utilis.create_path(utilis.get_full_path(bldg_path))
             utilis.create_path(utilis.get_full_path
-                               (bldg_path+bldg.name+"_DataBase"))
+                               (bldg_path + bldg.name + "_DataBase"))
 
             self._help_package(bldg_path, bldg.name)
             self._help_package_order(bldg_path, [bldg], None,
@@ -678,29 +678,29 @@ class Project(object):
 
             if model_type == "CitiesRWin" or model_type == "CitiesType_old":
                 out_file = open(utilis.get_full_path
-                                (bldg_path+bldg.name+".mo"), 'w')
+                                (bldg_path + bldg.name + ".mo"), 'w')
                 out_file.write(building_template.render_unicode
                                (bldg=bldg, mod_prj=self.modelica_project))
                 out_file.close()
 
             for zone in bldg.thermal_zones:
-                zone_path = bldg_path+bldg.name+"_DataBase"+"\\"
+                zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
 
                 out_file = open(utilis.get_full_path(
-                    zone_path + "\\" + bldg.name+"_" + zone.name + ".mo"), 'w')
+                    zone_path + "\\" + bldg.name + "_" + zone.name + ".mo"), 'w')
                 out_file.write(zone_template.render_unicode(
                     bldg=bldg, zone=zone))
                 out_file.close()
 
                 if model_type == "CitiesRWin" or\
                         model_type == "CitiesType_old":
-                    self._help_package(zone_path, bldg.name+"_DataBase")
+                    self._help_package(zone_path, bldg.name + "_DataBase")
                     self._help_package_order(
                         zone_path, bldg.thermal_zones, bldg.name + "_",
                         bldg.name + "_base")
 
                     out_file = open(utilis.get_full_path
-                                    (zone_path+bldg.name+"_base.mo"), 'w')
+                                    (zone_path + bldg.name + "_base.mo"), 'w')
                     out_file.write(zone_base_template.render_unicode(
                         bldg=bldg, zone=zone, mod_prj=self.modelica_project))
                     out_file.close()
@@ -725,7 +725,7 @@ class Project(object):
         package_template = Template(filename=utilis.get_full_path
                                     ("InputData\\RecordTemplate\\package"))
 
-        out_file = open(utilis.get_full_path(path+"\\"+"package"+".mo"), 'w')
+        out_file = open(utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
         out_file.write(package_template.render_unicode(name=name, uses=uses))
         out_file.close()
 
@@ -753,7 +753,7 @@ class Project(object):
         order_template = Template(filename=utilis.get_full_path
                                   ("InputData\\RecordTemplate\\package_order"))
 
-        out_file = open(utilis.get_full_path(path+"\\"+"package"+".order"),
+        out_file = open(utilis.get_full_path(path + "\\" + "package" + ".order"),
                         'w')
         out_file.write(order_template.render_unicode
                        (list=package_list, addition=addition, extra=extra))
