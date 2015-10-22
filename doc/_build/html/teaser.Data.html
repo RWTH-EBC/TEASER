@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Data package &mdash; TEASER4 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TEASER4 0.1.0 documentation" href="index.html" />
+    <link rel="up" title="TEASER Doc" href="teaser.html" />
+    <link rel="next" title="DataHelp package" href="teaser.Data.DataHelp.html" />
+    <link rel="prev" title="TypeBuildings package" href="teaser.Logic.BuildingObjects.TypeBuildings.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Data.DataHelp.html" title="DataHelp package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.TypeBuildings.html" title="TypeBuildings package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER4 0.1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" accesskey="U">TEASER Doc</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="data-package">
+<h1>Data package<a class="headerlink" href="#data-package" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="teaser.Data.DataHelp.html">DataHelp package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Data.DataHelp.html#module-teaser.Data.DataHelp.OldTeaser">OldTeaser module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="module-teaser.Data.DataClass">
+<span id="dataclass-module"></span><h2>DataClass module<a class="headerlink" href="#module-teaser.Data.DataClass" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.Data.DataClass.DataClass">
+<em class="property">class </em><code class="descclassname">teaser.Data.DataClass.</code><code class="descname">DataClass</code><span class="sig-paren">(</span><em>type_element_file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.DataClass.DataClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Class for XML data bindings</p>
+<p>This class loads all XML files with statistic or template data. It creates 
+the binding automatically. The binding needs the Python Package PyXB.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>type_element_file</strong> : string</p>
+<blockquote class="last">
+<div><p>name of the XML file with the project specific type elements
+default: TypeBuildingElements.xml for general investigation</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>element_bind</td>
+<td>(instance of PyXB TypeBuilding elements) PyXB instance of the TypeBuildingElements binding</td>
+</tr>
+<tr class="row-even"><td>conditions_bind</td>
+<td>(instance of PyXB UseConditions) PyXB instance of the UseConditions binding</td>
+</tr>
+<tr class="row-odd"><td>material_bind</td>
+<td>(instance of PyXB Material) PyXB instance of the Material binding</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.Data.TeaserXML">
+<span id="teaserxml-module"></span><h2>TeaserXML module<a class="headerlink" href="#module-teaser.Data.TeaserXML" title="Permalink to this headline">¶</a></h2>
+<p>TeaserXML</p>
+<p>This module contains function to save and load Projects in the proprietary 
+TEASER file format .tXML</p>
+<dl class="function">
+<dt id="teaser.Data.TeaserXML.load_teaser_xml">
+<code class="descclassname">teaser.Data.TeaserXML.</code><code class="descname">load_teaser_xml</code><span class="sig-paren">(</span><em>path</em>, <em>prj</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.TeaserXML.load_teaser_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function loads a project from new teaserXML</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path: string</strong></p>
+<blockquote>
+<div><p>path of teaserXML file</p>
+</div></blockquote>
+<p><strong>project: Project()</strong></p>
+<blockquote class="last">
+<div><p>Teaser instance of Project()</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.Data.TeaserXML.save_teaser_xml">
+<code class="descclassname">teaser.Data.TeaserXML.</code><code class="descname">save_teaser_xml</code><span class="sig-paren">(</span><em>path</em>, <em>project</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.TeaserXML.save_teaser_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function saves a project to a tXML</p>
+<p>The function needs the Python Package PyXB.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path: string</strong></p>
+<blockquote>
+<div><p>complete path to the output file</p>
+</div></blockquote>
+<p><strong>project: Project()</strong></p>
+<blockquote class="last">
+<div><p>Teaser instance of Project()</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.Data.TeaserXML.set_basic_data_pyxb">
+<code class="descclassname">teaser.Data.TeaserXML.</code><code class="descname">set_basic_data_pyxb</code><span class="sig-paren">(</span><em>pyxb_class</em>, <em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.TeaserXML.set_basic_data_pyxb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for save_teaser_xml to set the basic data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pyxb_class</strong> : PyXBClass</p>
+<blockquote>
+<div><p>pyxb class represantation of xml</p>
+</div></blockquote>
+<p><strong>element</strong> : TEASERClass</p>
+<blockquote class="last">
+<div><p>teaser class representation of a building element</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.Data.TeaserXML.set_basic_data_teaser">
+<code class="descclassname">teaser.Data.TeaserXML.</code><code class="descname">set_basic_data_teaser</code><span class="sig-paren">(</span><em>pyxb_class</em>, <em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.TeaserXML.set_basic_data_teaser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for load_teaser_xml to set the basic data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pyxb_class</strong> : PyXBClass</p>
+<blockquote>
+<div><p>pyxb class represantation of xml</p>
+</div></blockquote>
+<p><strong>element</strong> : TEASERClass</p>
+<blockquote class="last">
+<div><p>teaser class representation of a building element</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.Data.TeaserXML.set_layer_data_pyxb">
+<code class="descclassname">teaser.Data.TeaserXML.</code><code class="descname">set_layer_data_pyxb</code><span class="sig-paren">(</span><em>pyxb_class</em>, <em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.TeaserXML.set_layer_data_pyxb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for save_teaser_xml to set the layer data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pyxb_class</strong> : PyXBClass</p>
+<blockquote>
+<div><p>pyxb class represantation of xml</p>
+</div></blockquote>
+<p><strong>element</strong> : TEASERClass</p>
+<blockquote class="last">
+<div><p>teaser class representation of a building element</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.Data.TeaserXML.set_layer_data_teaser">
+<code class="descclassname">teaser.Data.TeaserXML.</code><code class="descname">set_layer_data_teaser</code><span class="sig-paren">(</span><em>pyxb_class</em>, <em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.TeaserXML.set_layer_data_teaser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for load_teaser_xml to set the layer data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pyxb_class</strong> : PyXBClass</p>
+<blockquote>
+<div><p>pyxb class represantation of xml</p>
+</div></blockquote>
+<p><strong>element</strong> : TEASERClass</p>
+<blockquote class="last">
+<div><p>teaser class representation of a building element</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Data package</a><ul>
+<li><a class="reference internal" href="#module-teaser.Data.DataClass">DataClass module</a></li>
+<li><a class="reference internal" href="#module-teaser.Data.TeaserXML">TeaserXML module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.TypeBuildings.html"
+                        title="previous chapter">TypeBuildings package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Data.DataHelp.html"
+                        title="next chapter">DataHelp package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Data.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Data.DataHelp.html" title="DataHelp package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.TypeBuildings.html" title="TypeBuildings package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER4 0.1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER Doc</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

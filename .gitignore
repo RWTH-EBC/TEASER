@@ -1,0 +1,36 @@
+# Ignore the following files in GIT #
+######################################
+
+# Python compiled files #
+#########################
+*.pyc
+*.orig
+
+# temporary files for calculation #
+#########################
+
+
+# temporary boundary condition files #
+######################################
+
+
+# Output-Files #
+########################
+/teaser/OutputData/
+
+#Eclipse Settings #
+#####################
+/.settings
+.project
+.pydevproject
+
+#Unit tests #
+#####################
+.cache/
+__pycache__/
+
+#pip install #
+#####################
+*.egg-info/
+*.egg/
+*.eggs

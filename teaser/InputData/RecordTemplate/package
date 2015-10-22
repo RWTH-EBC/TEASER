@@ -1,0 +1,11 @@
+package ${name}
+  extends Modelica.Icons.Package;
+  
+  %if uses is not None:
+  annotation (uses(
+	%for use in uses:
+    ${use}${',' if not loop.last else '),'}\
+	%endfor 
+    version="1");
+  %endif
+end ${name};

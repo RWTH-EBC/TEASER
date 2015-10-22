@@ -1,0 +1,688 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>TypeBuildings package &mdash; TEASER4 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TEASER4 0.1.0 documentation" href="index.html" />
+    <link rel="up" title="BuildingObjects package" href="teaser.Logic.BuildingObjects.html" />
+    <link rel="next" title="Data package" href="teaser.Data.html" />
+    <link rel="prev" title="BuildingPhysics package" href="teaser.Logic.BuildingObjects.BuildingPhysics.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Data.html" title="Data package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.BuildingPhysics.html" title="BuildingPhysics package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER4 0.1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER Doc</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >Logic package</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" accesskey="U">BuildingObjects package</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="typebuildings-package">
+<h1>TypeBuildings package<a class="headerlink" href="#typebuildings-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Office">
+<span id="office-module"></span><h2>Office module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Office" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office">
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Office.</code><code class="descname">Office</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding" title="teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding</span></code></a></p>
+<p>Type Office Building</p>
+<p>Subclass from TypeBuilding to represent office buildings. Allows for
+easier distinction between different building types and specific functions
+and attributes.
+Superclass for institute building.</p>
+<p>German office building, containing 6 zones. Each zone has 4 outer walls,
+4 windows a roof and a floor. Default values are given according to BMVBS.
+Changing these default values is expert mode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Project()</strong></p>
+<blockquote>
+<div><p>The parent class of this object, the Project the Building belongs
+to. Allows for better control of hierarchical structures.
+Default is None</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>office_layout</strong> : int</p>
+<blockquote>
+<div><p>type of floor plan</p>
+<p>0: use default values
+1: elongated 1 floor
+2: elongated 2 floors
+3: compact</p>
+</div></blockquote>
+<p><strong>window_layout</strong> : int</p>
+<blockquote>
+<div><p>type of window layout</p>
+<p>0: use default values
+1: punctuated facade
+2: banner facade
+3: full glazing</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str</p>
+<blockquote class="last">
+<div><p>construction type</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>zone_area_factors</td>
+<td>(dict) This dictionary contains the name of the zone (str), the zone area factor (float) and the zone usage (str). The values can be taken from Lichtmess</td>
+</tr>
+<tr class="row-even"><td>outer_wall_names</td>
+<td>(dict) This dictionary contains the name of the outer walls, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>roof_names</td>
+<td>(dict) This dictionary contains the name of the roofs, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>ground_floor_names</td>
+<td>(dict) This dictionary contains the name of the ground floors, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>window_names</td>
+<td>(dict) This dictionary contains the name of the window, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>inner_wall_names</td>
+<td>(dict) This dictionary contains the name of the inner walls, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>ceiling_names</td>
+<td>(dict) This dictionary contains the name of the ceilings, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>floor_names</td>
+<td>(dict) This dictionary contains the name of the floors, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>gross_factor</td>
+<td>(float) gross factor used to calculate the area of the different zones</td>
+</tr>
+<tr class="row-even"><td>est_factor_wall_area</td>
+<td>(float) estimation factor to calculate outer wall area</td>
+</tr>
+<tr class="row-odd"><td>est_exponent_wall</td>
+<td>(float) another estimation factor to calculate outer wall area</td>
+</tr>
+<tr class="row-even"><td>est_factor_win_area</td>
+<td>(float) estimation factor to calculate window area</td>
+</tr>
+<tr class="row-odd"><td>est_exponent_win</td>
+<td>(float) another estimation factor to calculate window area</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office.construction_type">
+<code class="descname">construction_type</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office.construction_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office.generate_office">
+<code class="descname">generate_office</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office.generate_office" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an office building.</p>
+<p>With given values, this class generates a type building according to
+TEASER requirements.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office.office_layout">
+<code class="descname">office_layout</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office.office_layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office.window_layout">
+<code class="descname">window_layout</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office.window_layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Residential">
+<span id="residential-module"></span><h2>Residential module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Residential" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential">
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Residential.</code><code class="descname">Residential</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>construction_type=None</em>, <em>dormer=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding" title="teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding</span></code></a></p>
+<p>Type Building Residential.</p>
+<p>Subclass from Building to represent Residential Buildings. Allows for
+easier distinction between different building types and specific functions
+and attributes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Project()</strong></p>
+<blockquote>
+<div><p>The parent class of this object, the Project the Building belongs
+to. Allows for better control of hierarchical structures.
+Default is None</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>residential_layout</strong> : int</p>
+<blockquote>
+<div><p>type of floor plan</p>
+<p>1: compact
+2: elongated/complex</p>
+</div></blockquote>
+<p><strong>neighbour_buildings</strong> : int</p>
+<blockquote>
+<div><p>neighbour</p>
+<p>1: no neighbour
+2: one neighbour
+3: two neighbours</p>
+</div></blockquote>
+<p><strong>attic</strong> : int</p>
+<blockquote>
+<div><p>type of attic</p>
+<p>1: flat roof
+2: non heated attic
+3: partly heated attic
+4: heated attic</p>
+</div></blockquote>
+<p><strong>cellar</strong> : int</p>
+<blockquote>
+<div><p>type of cellar</p>
+<p>1: no cellar
+2: non heated cellar
+3: partly heated cellar
+4: heated cellar</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str</p>
+<blockquote>
+<div><p>construction type</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+<p><strong>dormer</strong> : str</p>
+<blockquote class="last">
+<div><p>construction type</p>
+<p>1: dormer
+2: no dormer</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>zone_area_factors</td>
+<td>(dict) This dictionary contains the name of the zone (str), the zone area factor (float) and the zone usage (str). The values can be taken from Lichtmess</td>
+</tr>
+<tr class="row-even"><td>outer_wall_names</td>
+<td>(dict) This dictionary contains the name of the outer walls, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>roof_names</td>
+<td>(dict) This dictionary contains the name of the roofs, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>ground_floor_names</td>
+<td>(dict) This dictionary contains the name of the ground floors, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>window_names</td>
+<td>(dict) This dictionary contains the name of the window, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>inner_wall_names</td>
+<td>(dict) This dictionary contains the name of the inner walls, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>ceiling_names</td>
+<td>(dict) This dictionary contains the name of the ceilings, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>floor_names</td>
+<td>(dict) This dictionary contains the name of the floors, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>est_living_area_factor</td>
+<td>(float) estimation factor for calculation of number of heated floors</td>
+</tr>
+<tr class="row-even"><td>est_bottom_building_closure</td>
+<td>(float) estimation factor to calculate ground floor area</td>
+</tr>
+<tr class="row-odd"><td>est_upper_building_closure</td>
+<td>(float) estimation factor to calculate attic area</td>
+</tr>
+<tr class="row-even"><td>est_factor_win_area</td>
+<td>(float) estimation factor to calculate window area</td>
+</tr>
+<tr class="row-odd"><td>est_factor_cellar_area</td>
+<td>(float) estimation factor to calculate heated cellar area</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.generate_residential">
+<code class="descname">generate_residential</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.generate_residential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a residential building.</p>
+<p>With given values, this class generates a type residential
+building according to TEASER requirements
+Berechnungsgrundlagen: IWU, &#8220;Kurzverfahren Energieprofil&#8221;; 2005.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute">
+<span id="institute-module"></span><h2>Institute module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute.Institute">
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute.</code><code class="descname">Institute</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute.Institute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.Office.Office</span></code></a></p>
+<p>Type Institute Building (type 4)</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute.Institute.file_internal_gains">
+<code class="descname">file_internal_gains</code><em class="property"> = None</em><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute.Institute.file_internal_gains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Institute.mat</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute4">
+<span id="institute4-module"></span><h2>Institute4 module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute4" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute4.Institute4">
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute4.</code><code class="descname">Institute4</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute4.Institute4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.Office.Office</span></code></a></p>
+<p>Type Institute Building (type 4)</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute4.Institute4.file_internal_gains">
+<code class="descname">file_internal_gains</code><em class="property"> = None</em><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute4.Institute4.file_internal_gains" title="Permalink to this definition">¶</a></dt>
+<dd><p>_Institute4.mat</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute8">
+<span id="institute8-module"></span><h2>Institute8 module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute8" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute8.Institute8">
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute8.</code><code class="descname">Institute8</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute8.Institute8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.Office.Office</span></code></a></p>
+<p>Type Institute Building (type 8)</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute8.Institute8.file_internal_gains">
+<code class="descname">file_internal_gains</code><em class="property"> = None</em><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute8.Institute8.file_internal_gains" title="Permalink to this definition">¶</a></dt>
+<dd><p>_Institute8.mat</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding">
+<span id="typebuilding-module"></span><h2>TypeBuilding module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding">
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.</code><code class="descname">TypeBuilding</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.Logic.BuildingObjects.html#teaser.Logic.BuildingObjects.Building.Building" title="teaser.Logic.BuildingObjects.Building.Building"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.Building.Building</span></code></a></p>
+<p>Root Class for each type building.</p>
+<p>Class as parent of specific type buildings. Subclass from Building to
+represent Type Buildings. Superclass for every type building.</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599">
+<span id="useconditionsoffice18599-module"></span><h2>UseConditionsOffice18599 module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599">
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.</code><code class="descname">UseConditionsOffice18599</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.Logic.BuildingObjects.html#teaser.Logic.BuildingObjects.UseConditions.UseConditions" title="teaser.Logic.BuildingObjects.UseConditions.UseConditions"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.UseConditions.UseConditions</span></code></a></p>
+<p>Use Conditions DIN 18599</p>
+<p>CLass that contains the boundary conditions of use for non-residential
+buildings defined in DIN V 18599-10</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="63%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Note: the attributes description are the translation from DIN guideline</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>USAGE AND OPERATION TIMES</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>usage: str</td>
+<td>usage type - Nutzungsart</td>
+</tr>
+<tr class="row-even"><td>typical_length:</td>
+<td>typical length of a usage zone - typische Zonenlaenge</td>
+</tr>
+<tr class="row-odd"><td>typical width:</td>
+<td>typical width of a usage zone - typische Zonenbreite</td>
+</tr>
+<tr class="row-even"><td>usage_time</td>
+<td>([int]) usage time [begin, end] (h) -  Nutzungszeit</td>
+</tr>
+<tr class="row-odd"><td>daily_usage_hours</td>
+<td>(int) daily usage time (h) - taegliche Nutzungsstunden</td>
+</tr>
+<tr class="row-even"><td>yearly_usage_days</td>
+<td>(int) operating days per year (d) - jaehrliche Nutzungstage</td>
+</tr>
+<tr class="row-odd"><td>yearly_usage_hours_day</td>
+<td>(int) operating hours per year during daytime (h) - jaehrliche Nutzungsstunden zur Tagzeit</td>
+</tr>
+<tr class="row-even"><td>yearly_usage_hours_night</td>
+<td>(int) operating hours per year during nighttime (h) - jaehrliche Nutzungsstunden zur Nachtzeit</td>
+</tr>
+<tr class="row-odd"><td>daily_operation_ahu_cooling: int</td>
+<td>operating hours of AHU and cooling  - taegliche Betriebsstunden RLT und Kuehlung</td>
+</tr>
+<tr class="row-even"><td>yearly_ahu_days</td>
+<td>(int) operating days AHU per year (d) -  jaehrliche Betriebstage fuer RLT</td>
+</tr>
+<tr class="row-odd"><td>yearly_heating_days</td>
+<td>(int) operating days heating per year - jaehrliche Betriebstage fuer Heizung</td>
+</tr>
+<tr class="row-even"><td>yearly_cooling_days</td>
+<td>(int) operating days Cooling per year (h) - jaehrliche Betriebstage fuer Kuehlung</td>
+</tr>
+<tr class="row-odd"><td>daily_operation_heating</td>
+<td>(int) operating hours of heating (h) - taegliche Betriebsstunden Heizung</td>
+</tr>
+<tr class="row-even"><td>LIGHTING</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>maintained_illuminace</td>
+<td>(int) maintained illuminance value (lx) - Wartungswert der Beleuchtungsstaerke</td>
+</tr>
+<tr class="row-even"><td>usage_level_hight: float</td>
+<td>hight of the usage level (m)  - Hoehe der Nutzebene</td>
+</tr>
+<tr class="row-odd"><td>red_factor_visual</td>
+<td>(float) reduction factor for visual task Sector -  Minderungsfaktor Bereich Sehaufgabe</td>
+</tr>
+<tr class="row-even"><td>rel_absence</td>
+<td>(float) relative absence - Raumindex</td>
+</tr>
+<tr class="row-odd"><td>room_index</td>
+<td>(float) room Index - jaehrliche Betriebstage fuer Kuehlung</td>
+</tr>
+<tr class="row-even"><td>part_load_factor_lighting</td>
+<td>(float) part load factor of building usage time for lighting - Teilbetriebsfaktor der Gebaeudebetriebszeit fuer Beleuchtung</td>
+</tr>
+<tr class="row-odd"><td>ROOM CLIMATE</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>set_temp_heat: float</td>
+<td>internal set temperature heating - Raum-Solltemperatur Heizung</td>
+</tr>
+<tr class="row-odd"><td>set_temp_cool: float</td>
+<td>internal set temperature cooling - Raum-Solltemperatur Kuehlung</td>
+</tr>
+<tr class="row-even"><td>temp_set_back: float</td>
+<td>set back in reduced operation - Temperaturabsenkung reduzierter Betrieb</td>
+</tr>
+<tr class="row-odd"><td>min_temp_heat</td>
+<td>(float) design minimal temperature heating -  Minimaltemperatur Auslegung Heizung</td>
+</tr>
+<tr class="row-even"><td>max_temp_cool</td>
+<td>(float) design maximal temperature cooling - Maximaltemperatur Auslegung Kuehlung</td>
+</tr>
+<tr class="row-odd"><td>rel_humidity</td>
+<td>(float) relative humidity - Feuchteanforderung d</td>
+</tr>
+<tr class="row-even"><td>min_air_exchange</td>
+<td>(float) required minimal air exchange, due to usage - Mindestaussenluftvolumenstrom</td>
+</tr>
+<tr class="row-odd"><td>rel_absence_ahu</td>
+<td>(float) relative absence for AHU - Relative Abwesenheit RLT</td>
+</tr>
+<tr class="row-even"><td>part_load_factor_ahu: float</td>
+<td>part load factor of building usage time for AHU  - Teilbetriebsfaktor der Gebaeudebetriebszeit RLT</td>
+</tr>
+<tr class="row-odd"><td>cooling_time</td>
+<td>([int]) cooling time [begin, end] -  Beginn/Ende Betriebszeit RLT und Kuehlung</td>
+</tr>
+<tr class="row-even"><td>heating_time</td>
+<td>([int]) heating time [begin, end] - Beginn/End Betriebszeit Heizung</td>
+</tr>
+<tr class="row-odd"><td>INTERNAL GAINS</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>persons</td>
+<td>(int) number of persons - Personen</td>
+</tr>
+<tr class="row-odd"><td>profile_persons</td>
+<td>([float]) timeline of internal gains from 0 - 100 - Nutzungsprofil Personen</td>
+</tr>
+<tr class="row-even"><td>machines: float</td>
+<td>number of Machines  - Arbeitshilfen</td>
+</tr>
+<tr class="row-odd"><td>profile_machines</td>
+<td>([float]) timeline of internal gains from 0 - 100  -  Nutzungsprofil Geraete</td>
+</tr>
+<tr class="row-even"><td>lighting_power</td>
+<td>(float) spec. elektr. Power for lighting - spez. Elektr. Leistung-Raumbeleuchtung</td>
+</tr>
+<tr class="row-odd"><td>MISC</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>min_ahu: float</td>
+<td>min ahu  - minAHU</td>
+</tr>
+<tr class="row-odd"><td>max_ahu</td>
+<td>(float) max ahu - maxAHU</td>
+</tr>
+<tr class="row-even"><td>with_ahu</td>
+<td>(boolean) with ahu - withAHU</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.load_use_conditions">
+<code class="descname">load_use_conditions</code><span class="sig-paren">(</span><em>zone_usage</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.load_use_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>load typical use conditions</p>
+<p>loads Use conditions specified in the XML, according to 18599</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>zone_usage</strong> : str</p>
+<blockquote class="last">
+<div><p>code list for zone_usage according to 18599</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.save_use_conditions">
+<code class="descname">save_use_conditions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.save_use_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves typical use conditions</p>
+<p>Saves use conditions specified in the XML, according to 18599</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_length">
+<code class="descname">typical_length</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_width">
+<code class="descname">typical_width</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">TypeBuildings package</a><ul>
+<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Office">Office module</a></li>
+<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Residential">Residential module</a></li>
+<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute">Institute module</a></li>
+<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute4">Institute4 module</a></li>
+<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute8">Institute8 module</a></li>
+<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding">TypeBuilding module</a></li>
+<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599">UseConditionsOffice18599 module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.BuildingPhysics.html"
+                        title="previous chapter">BuildingPhysics package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Data.html"
+                        title="next chapter">Data package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Logic.BuildingObjects.TypeBuildings.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Data.html" title="Data package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.BuildingPhysics.html" title="BuildingPhysics package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER4 0.1.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER Doc</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >Logic package</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" >BuildingObjects package</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>TEASER Doc &mdash; TEASER4 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TEASER4 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Project module" href="teaser.Project.html" />
+    <link rel="prev" title="TEASER4 - Tool for Energy Analysis and Simulation for Efficient Retrofit" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Project.html" title="Project module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="TEASER4 - Tool for Energy Analysis and Simulation for Efficient Retrofit"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER4 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="teaser-doc">
+<h1>TEASER Doc<a class="headerlink" href="#teaser-doc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>The best option to install TEASER is to clone the repository by using:</p>
+<p><cite>git clone [SSH-Key/Https]</cite></p>
+<p>and then run:</p>
+<p><cite>pip install -e [Path/to/your/Teaser/Clone]</cite></p>
+</div>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Python 2.7 &lt;= v &gt;=3.3 - WinPython is recommended (includes a lot of packages).</li>
+<li>Mako: template Engine
+install on a python-enabled command line with <cite>pip install mako</cite></li>
+<li>PyXB: XML binding Engine
+install on a python-enabled command line with <cite>pip install pyxb</cite></li>
+<li>pytest: Unit Tests engine
+install on a python-enabled command line with <cite>pip install pytest</cite></li>
+</ol>
+</div>
+<div class="section" id="teaser-content">
+<h2>TEASER Content<a class="headerlink" href="#teaser-content" title="Permalink to this headline">¶</a></h2>
+<p>The source folder contains different subpackages and one Project module</p>
+<div class="section" id="project-module">
+<h3>Project module<a class="headerlink" href="#project-module" title="Permalink to this headline">¶</a></h3>
+<p>TEASER4 API</p>
+</div>
+<div class="section" id="data-package">
+<h3>Data package<a class="headerlink" href="#data-package" title="Permalink to this headline">¶</a></h3>
+<p>This package contains interfaces to different data sources (right now only internal data format is supported) as well as PyXB Data Bindings for XML based data.</p>
+</div>
+<div class="section" id="examples-package">
+<h3>Examples package<a class="headerlink" href="#examples-package" title="Permalink to this headline">¶</a></h3>
+<p>This package contains some examples how to use TEASER in a script based manner, as well as some verification of the calculation core</p>
+</div>
+<div class="section" id="inputdata-folder">
+<h3>InputData Folder<a class="headerlink" href="#inputdata-folder" title="Permalink to this headline">¶</a></h3>
+<p>This folder contains predefined data for typical building elements, different materials, use conditions following DIN 18599 as well as templates for Modelica Records and Boundary condition for the type buildings.</p>
+</div>
+<div class="section" id="logic-package">
+<h3>Logic package<a class="headerlink" href="#logic-package" title="Permalink to this headline">¶</a></h3>
+<p>This package contains all classes of the internal data model of TEASER, as well as the archetype buildings and parameter calculation.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="teaser.Project.html">Project module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.Examples.html">Examples package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Examples.html#example-typebuilding">Example_TypeBuilding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Examples.html#example-createbuilding">Example_CreateBuilding</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.Logic.html">Logic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.html">BuildingObjects package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html">BuildingPhysics package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement">BuildingElement module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling">Ceiling module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Floor">Floor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor">GroundFloor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall">InnerWall module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Layer">Layer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Material">Material module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall">OuterWall module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop">Rooftop module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Wall">Wall module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Window">Window module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html">TypeBuildings package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#module-teaser.Logic.BuildingObjects.TypeBuildings.Office">Office module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#module-teaser.Logic.BuildingObjects.TypeBuildings.Residential">Residential module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute">Institute module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute4">Institute4 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute8">Institute8 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#module-teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding">TypeBuilding module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#module-teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599">UseConditionsOffice18599 module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.html#module-teaser.Logic.BuildingObjects.Building">Building module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.html#module-teaser.Logic.BuildingObjects.ThermalZone">ThermalZone module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.html#module-teaser.Logic.BuildingObjects.UseConditions">UseConditions module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.html#module-teaser.Logic.Utilis">Utilis module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.Data.html">Data package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Data.DataHelp.html">DataHelp package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Data.DataHelp.html#module-teaser.Data.DataHelp.OldTeaser">OldTeaser module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Data.html#module-teaser.Data.DataClass">DataClass module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Data.html#module-teaser.Data.TeaserXML">TeaserXML module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.InputData.html">InputData package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.InputData.html#boundariestypebuilding-folder">BoundariesTypeBuilding folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.InputData.html#recordtemplate-folder">RecordTemplate folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.InputData.html#xsd-definitions-folder">XSD_Definitions folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.InputData.html#materialtemplates-file">MaterialTemplates file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.InputData.html#typebuildingelements-file">TypeBuildingElements file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.InputData.html#useconditions-file">UseConditions file</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="future-developments">
+<h2>Future Developments<a class="headerlink" href="#future-developments" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Data interfaces to information models like CityGML.</li>
+<li>Graphical User Interface</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">TEASER Doc</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#teaser-content">TEASER Content</a><ul>
+<li><a class="reference internal" href="#project-module">Project module</a></li>
+<li><a class="reference internal" href="#data-package">Data package</a></li>
+<li><a class="reference internal" href="#examples-package">Examples package</a></li>
+<li><a class="reference internal" href="#inputdata-folder">InputData Folder</a></li>
+<li><a class="reference internal" href="#logic-package">Logic package</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#future-developments">Future Developments</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">TEASER4 - Tool for Energy Analysis and Simulation for Efficient Retrofit</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Project.html"
+                        title="next chapter">Project module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Project.html" title="Project module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="TEASER4 - Tool for Energy Analysis and Simulation for Efficient Retrofit"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER4 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

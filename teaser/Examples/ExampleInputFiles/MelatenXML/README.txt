@@ -1,0 +1,1 @@
+This folder contains XML data for all buildings in the Melaten district. This is used in the `Example_Melaten_retrofit.py` code.

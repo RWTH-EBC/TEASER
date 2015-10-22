@@ -1,0 +1,89 @@
+record ${bldg.name}_base "${bldg.name}_base"
+  extends DataBase.Buildings.BuildingBaseRecord(
+    numZones = ${get_n(bldg.thermal_zones)},
+    zoneSetup = {
+		%for i in bldg.thermal_zones:
+		%if i == bldg.thermal_zones[-1]:
+		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name}()
+		%else:
+		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name}(),
+		%endif
+		%endfor
+		},
+    Vair = ${bldg.volume} ,
+    BuildingArea = ${bldg.net_leased_area},
+    h_heater = ${bldg.sum_heating_load},
+    l_cooler = 0);
+end ${bldg.name}_base;
+
+##get n
+<%def name="get_n(list)", filter="trim">
+	<%
+	n=0
+	for element in list:
+		if type(element).__name__ == "ThermalZone":
+			n += 1
+		else:
+			pass
+	return n
+	%>
+</%def>
+
+##convert sunblind to string
+<%def name="sunblind_string(list)", filter="trim">
+	<%
+	i = 0
+	string_of_list = ""
+	while i < len(list):
+		if string_of_list == "":
+			string_of_list += str(list[i].shading_g_total) 
+		else:
+			string_of_list += ", "  + str(list[i].shading_g_total) 
+		i += 1
+	return string_of_list	
+	%>
+</%def>
+
+##convert areas to string
+<%def name="area_string(list)", filter="trim">
+	<%
+	i = 0
+	string_of_list = ""
+	while i < len(list):
+		if string_of_list == "":
+			string_of_list += str(list[i].area) 
+		else:
+			string_of_list += ", "  + str(list[i].area) 
+		i += 1
+	return string_of_list	
+	%>
+</%def>
+
+
+##check if element is existent
+<%def name="element_check(element)", filter ="trim">
+	<%
+	if len(element)!= 0:
+		return "True"
+	else:
+		return "False"
+	%>
+</%def>
+
+##convert the weightfactors into list of strings
+<%def name="weightfactor_to_string(list)", filter="trim"> 
+	<%
+	i = 0
+	string_of_list = ""
+	
+	while i < len(list):
+		
+		if string_of_list == "":
+			string_of_list += str(list[i]) 
+		else:
+			string_of_list += ", "  + str(list[i]) 
+		i += 1
+	
+	return string_of_list
+	%>
+</%def>

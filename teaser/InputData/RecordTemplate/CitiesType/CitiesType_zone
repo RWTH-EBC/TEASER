@@ -1,0 +1,129 @@
+record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
+  extends DataBase.Buildings.ZoneBaseRecord(
+    n = ${get_n(zone.outer_walls)},
+    aowo = 0.7,
+    Heater_on = true,
+    Cooler_on = false,
+    l_cooler = 0,
+    RatioConvectiveHeatLighting = 0.5,
+    zoneID = "${zone.name}",
+    usage = "${zone.use_conditions.usage}",
+    RoomArea = ${zone.area},
+    Vair = ${zone.volume},
+    minAHU = ${zone.use_conditions.min_ahu},
+    maxAHU = ${zone.use_conditions.max_ahu},
+    withAHU = ${zone.use_conditions.with_ahu},
+    alphaiwi = ${zone.alpha_conv_iw},
+    alphaowi = ${zone.alpha_conv_inner_ow},
+    alphaowo = ${zone.alpha_comb_outer_ow},
+    g = ${zone.weighted_g_value},
+    NrPeople = ${zone.use_conditions.persons},
+    NrPeopleMachines = ${zone.use_conditions.machines},
+    LightingPower = ${zone.use_conditions.lighting_power},
+    h_heater = ${zone.heating_load},
+    gsunblind = {${sunblind_string(zone.windows)}},
+    Aw = {${area_string(zone.windows)}},
+    withWindows = ${element_check(zone.windows)},
+    weightfactorswindow = {${weightfactor_to_string(zone.weightfactor_win)}},
+    weightfactorswall = {${weightfactor_to_string(zone.weightfactor_ow)}},
+    weightfactorground = ${weightfactor_to_string(zone.weightfactor_ground)},
+    Ai = ${zone.area_iw},
+    withInnerwalls = ${element_check(zone.inner_walls)},
+    R1i = ${zone.r1_iw},
+    C1i = ${zone.c1_iw},
+    Ao = ${zone.area_ow},
+    withOuterwalls = ${element_check(zone.outer_walls)},
+    R1o = ${zone.r1_ow},
+    RRest = ${zone.r_rest_ow},
+    C1o = ${zone.c1_ow});
+end ${bldg.name}_${zone.name};
+
+##get n
+<%def name="get_n(list)", filter="trim">
+	<%
+	n=0
+	for element in list:
+		if type(element).__name__ == "OuterWall" or type(element).__name__ == "Rooftop":
+			n += 1
+		else:
+			pass
+	return n
+	%>
+</%def>
+
+##convert sunblind to string
+<%def name="sunblind_string(list)", filter="trim">
+	<%
+	i = 0
+	length = max(len(zone.weightfactor_ow),len(zone.weightfactor_win))
+	
+	string_of_list = ""
+	for i in range(length):
+		if i+1 < length:
+			if string_of_list == "":
+				string_of_list += str(list[i].shading_g_total) 
+			else:
+				string_of_list += ", "  + str(list[i].shading_g_total) 
+		else:
+			string_of_list += ", " + str(0)
+		i += 1
+	return string_of_list	
+	%>
+</%def>
+
+##convert areas to string
+<%def name="area_string(list)", filter="trim">
+	<%
+		
+		
+		length = max(len(zone.weightfactor_ow),len(zone.weightfactor_win))
+		orientation_area = {}
+		
+		for item in list:
+			orientation_area[item.orientation] = item.area
+		
+		string_of_list = ""
+		for key in orientation_area:
+			
+			if string_of_list == "":
+				string_of_list += str(orientation_area[key]) 
+			else:
+				string_of_list += ", "  + str(orientation_area[key])  
+		if len(orientation_area) < length:
+			string_of_list += ", "+ str(0)
+		else:
+			pass	
+			
+		return string_of_list
+	%>
+		
+</%def>
+
+
+##check if element is existent
+<%def name="element_check(element)", filter ="trim">
+	<%
+	if len(element)!= 0:
+		return "true"
+	else:
+		return "false"
+	%>
+</%def>
+
+##convert the weightfactors into list of strings
+<%def name="weightfactor_to_string(list)", filter="trim"> 
+	<%
+	i = 0
+	string_of_list = ""
+	
+	while i < len(list):
+		
+		if string_of_list == "":
+			string_of_list += str(list[i]) 
+		else:
+			string_of_list += ", "  + str(list[i]) 
+		i += 1
+	
+	return string_of_list
+	%>
+</%def>

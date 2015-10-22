@@ -1,0 +1,1947 @@
+﻿<?xml version="1.0" ?>
+<MaterialTemplates>
+	<Material>
+		<name>EPS035</name>
+		<density>20.0</density>
+		<thermal_conduc>0.035</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Asphalt</name>
+		<density>2100.0</density>
+		<thermal_conduc>0.7</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bitumen - als Stoff</name>
+		<density>1050.0</density>
+		<thermal_conduc>0.17</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>ww</name>
+		<density>1100.0</density>
+		<thermal_conduc>0.23</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Beton - mittlere Rohdichte 1</name>
+		<density>1800.0</density>
+		<thermal_conduc>1.15</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Beton - mittlere Rohdichte 2</name>
+		<density>2000.0</density>
+		<thermal_conduc>1.35</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Beton - mittlere Rohdichte 3</name>
+		<density>2200.0</density>
+		<thermal_conduc>1.65</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Beton - hohe Rohdichte</name>
+		<density>2400.0</density>
+		<thermal_conduc>2.0</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Beton - armiert (mit 1 Stahl)</name>
+		<density>2300.0</density>
+		<thermal_conduc>2.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Beton - armiert (mit 2 Stahl)</name>
+		<density>2400.0</density>
+		<thermal_conduc>2.5</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>ww</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.17</thermal_conduc>
+		<heat_capac>1.4</heat_capac>
+	</Material>
+	<Material>
+		<name>Fussbodenbelaege - Kunststoff</name>
+		<density>1700.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.4</heat_capac>
+	</Material>
+	<Material>
+		<name>Fussbodenbelaege - Unterlagen, poroeser Gummi oder Kunststoff</name>
+		<density>270.0</density>
+		<thermal_conduc>0.1</thermal_conduc>
+		<heat_capac>1.4</heat_capac>
+	</Material>
+	<Material>
+		<name>Fussbodenbelaege - Filzunterlage</name>
+		<density>120.0</density>
+		<thermal_conduc>0.05</thermal_conduc>
+		<heat_capac>1.3</heat_capac>
+	</Material>
+	<Material>
+		<name>Fussbodenbelaege - Wollunterlage</name>
+		<density>200.0</density>
+		<thermal_conduc>0.06</thermal_conduc>
+		<heat_capac>1.3</heat_capac>
+	</Material>
+	<Material>
+		<name>Fussbodenbelaege - Korkunterlage</name>
+		<density>200.0</density>
+		<thermal_conduc>0.05</thermal_conduc>
+		<heat_capac>1.5</heat_capac>
+	</Material>
+	<Material>
+		<name>Fussbodenbelaege - Korkfliesen</name>
+		<density>400.0</density>
+		<thermal_conduc>0.065</thermal_conduc>
+		<heat_capac>1.5</heat_capac>
+	</Material>
+	<Material>
+		<name>Fussbodenbelaege - Teppich/Teppichboeden</name>
+		<density>200.0</density>
+		<thermal_conduc>0.06</thermal_conduc>
+		<heat_capac>1.3</heat_capac>
+	</Material>
+	<Material>
+		<name>Fussbodenbelaege - Linoleum</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.17</thermal_conduc>
+		<heat_capac>1.4</heat_capac>
+	</Material>
+	<Material>
+		<name>Gase - trockene Luft</name>
+		<density>1.23</density>
+		<thermal_conduc>0.025</thermal_conduc>
+		<heat_capac>1.008</heat_capac>
+	</Material>
+	<Material>
+		<name>Gase - Kohlendioxid</name>
+		<density>1.95</density>
+		<thermal_conduc>0.014</thermal_conduc>
+		<heat_capac>0.82</heat_capac>
+	</Material>
+	<Material>
+		<name>Gase - Argon</name>
+		<density>1.7</density>
+		<thermal_conduc>0.017</thermal_conduc>
+		<heat_capac>0.519</heat_capac>
+	</Material>
+	<Material>
+		<name>Gase - Schwefelhexafluorid</name>
+		<density>6.36</density>
+		<thermal_conduc>0.013</thermal_conduc>
+		<heat_capac>0.614</heat_capac>
+	</Material>
+	<Material>
+		<name>Gase - Krypton</name>
+		<density>3.56</density>
+		<thermal_conduc>0.009</thermal_conduc>
+		<heat_capac>0.245</heat_capac>
+	</Material>
+	<Material>
+		<name>Gase - Xenon</name>
+		<density>5.68</density>
+		<thermal_conduc>0.005</thermal_conduc>
+		<heat_capac>0.16</heat_capac>
+	</Material>
+	<Material>
+		<name>Glas - Natronglas (einschliesslich Floatglas)</name>
+		<density>2500.0</density>
+		<thermal_conduc>1.0</thermal_conduc>
+		<heat_capac>0.75</heat_capac>
+	</Material>
+	<Material>
+		<name>Glas - Quarzglas</name>
+		<density>2200.0</density>
+		<thermal_conduc>1.4</thermal_conduc>
+		<heat_capac>0.75</heat_capac>
+	</Material>
+	<Material>
+		<name>Glas - Glasmosaik</name>
+		<density>2000.0</density>
+		<thermal_conduc>1.2</thermal_conduc>
+		<heat_capac>0.75</heat_capac>
+	</Material>
+	<Material>
+		<name>Wasser - Eis bei –10 C</name>
+		<density>920.0</density>
+		<thermal_conduc>2.3</thermal_conduc>
+		<heat_capac>2.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Wasser - Eis bei 0 C</name>
+		<density>900.0</density>
+		<thermal_conduc>2.2</thermal_conduc>
+		<heat_capac>2.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Wasser - Schnee, frisch gefallen (lt; 30mm)</name>
+		<density>100.0</density>
+		<thermal_conduc>0.05</thermal_conduc>
+		<heat_capac>2.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Wasser - Neuschnee, weich (30...70mm)</name>
+		<density>200.0</density>
+		<thermal_conduc>0.12</thermal_conduc>
+		<heat_capac>2.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Wasser - Schnee, leicht verharscht (70...100mm)</name>
+		<density>300.0</density>
+		<thermal_conduc>0.23</thermal_conduc>
+		<heat_capac>2.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Wasser - Schnee, verharscht (lt; 200mm)</name>
+		<density>500.0</density>
+		<thermal_conduc>0.6</thermal_conduc>
+		<heat_capac>2.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Wasser - Wasser bei 0 C</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.6</thermal_conduc>
+		<heat_capac>4.19</heat_capac>
+	</Material>
+	<Material>
+		<name>Wasser - Wasser bei 40 C</name>
+		<density>990.0</density>
+		<thermal_conduc>0.63</thermal_conduc>
+		<heat_capac>4.19</heat_capac>
+	</Material>
+	<Material>
+		<name>Wasser - Wasser bei 80 C</name>
+		<density>970.0</density>
+		<thermal_conduc>0.67</thermal_conduc>
+		<heat_capac>4.19</heat_capac>
+	</Material>
+	<Material>
+		<name>Metalle - Aluminiumlegierungen</name>
+		<density>2800.0</density>
+		<thermal_conduc>160.0</thermal_conduc>
+		<heat_capac>0.88</heat_capac>
+	</Material>
+	<Material>
+		<name>Metalle - Bronze</name>
+		<density>8700.0</density>
+		<thermal_conduc>65.0</thermal_conduc>
+		<heat_capac>0.38</heat_capac>
+	</Material>
+	<Material>
+		<name>Metalle - Messing</name>
+		<density>8400.0</density>
+		<thermal_conduc>120.0</thermal_conduc>
+		<heat_capac>0.38</heat_capac>
+	</Material>
+	<Material>
+		<name>Metalle - Kupfer</name>
+		<density>8900.0</density>
+		<thermal_conduc>380.0</thermal_conduc>
+		<heat_capac>0.38</heat_capac>
+	</Material>
+	<Material>
+		<name>Metalle - Gusseisen</name>
+		<density>7500.0</density>
+		<thermal_conduc>50.0</thermal_conduc>
+		<heat_capac>0.45</heat_capac>
+	</Material>
+	<Material>
+		<name>Metalle - Blei</name>
+		<density>11300.0</density>
+		<thermal_conduc>35.0</thermal_conduc>
+		<heat_capac>0.13</heat_capac>
+	</Material>
+	<Material>
+		<name>Metalle - Stahl</name>
+		<density>7800.0</density>
+		<thermal_conduc>50.0</thermal_conduc>
+		<heat_capac>0.45</heat_capac>
+	</Material>
+	<Material>
+		<name>Metalle - Nichtrostender Stahl</name>
+		<density>7900.0</density>
+		<thermal_conduc>17.0</thermal_conduc>
+		<heat_capac>0.46</heat_capac>
+	</Material>
+	<Material>
+		<name>Metalle - Zink</name>
+		<density>7200.0</density>
+		<thermal_conduc>110.0</thermal_conduc>
+		<heat_capac>0.38</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Akrylkunststoffe</name>
+		<density>1050.0</density>
+		<thermal_conduc>0.2</thermal_conduc>
+		<heat_capac>1.5</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polykarbonate</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.2</thermal_conduc>
+		<heat_capac>1.2</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polytetrafluorethylenkunststoffe (PTFE)</name>
+		<density>2200.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polyvinylchlorid (PVC)</name>
+		<density>1390.0</density>
+		<thermal_conduc>0.17</thermal_conduc>
+		<heat_capac>0.9</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polymethylmethakrylat (PMMA)</name>
+		<density>1180.0</density>
+		<thermal_conduc>0.18</thermal_conduc>
+		<heat_capac>1.5</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polyazetatkunststoffe</name>
+		<density>1410.0</density>
+		<thermal_conduc>0.3</thermal_conduc>
+		<heat_capac>1.4</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polyamid (Nylon)</name>
+		<density>1150.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.6</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polyamid 6.6 mit 25  Glasfasern</name>
+		<density>1450.0</density>
+		<thermal_conduc>0.3</thermal_conduc>
+		<heat_capac>1.6</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polyethylen/hoher Rohdichte</name>
+		<density>980.0</density>
+		<thermal_conduc>0.5</thermal_conduc>
+		<heat_capac>1.8</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polyethylen/niedriger Rohdichte</name>
+		<density>920.0</density>
+		<thermal_conduc>0.33</thermal_conduc>
+		<heat_capac>2.2</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polystyrol</name>
+		<density>1050.0</density>
+		<thermal_conduc>0.16</thermal_conduc>
+		<heat_capac>1.3</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polypropylen</name>
+		<density>910.0</density>
+		<thermal_conduc>0.22</thermal_conduc>
+		<heat_capac>1.8</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polypropylen mit 25 Glasfasern</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.8</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polyurethan (PU)</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.8</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Epoxyharz</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.2</thermal_conduc>
+		<heat_capac>1.4</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Phenolharz</name>
+		<density>1300.0</density>
+		<thermal_conduc>0.3</thermal_conduc>
+		<heat_capac>1.7</heat_capac>
+	</Material>
+	<Material>
+		<name>Massive Kunststoffe - Polyesterharz</name>
+		<density>1400.0</density>
+		<thermal_conduc>0.19</thermal_conduc>
+		<heat_capac>1.2</heat_capac>
+	</Material>
+	<Material>
+		<name>Gummi - Naturkautschuk</name>
+		<density>910.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.1</heat_capac>
+	</Material>
+	<Material>
+		<name>Gummi - Neopren (Plychloropren)</name>
+		<density>1240.0</density>
+		<thermal_conduc>0.23</thermal_conduc>
+		<heat_capac>2.14</heat_capac>
+	</Material>
+	<Material>
+		<name>Gummi - Butylkautschuk (Isobutylenkautschuk), hart/heiss geschmolzen</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.24</thermal_conduc>
+		<heat_capac>1.4</heat_capac>
+	</Material>
+	<Material>
+		<name>Gummi - Schaumgummi</name>
+		<density>70.0</density>
+		<thermal_conduc>0.06</thermal_conduc>
+		<heat_capac>1.5</heat_capac>
+	</Material>
+	<Material>
+		<name>Gummi - Hartgummi (Ebonit), hart</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.17</thermal_conduc>
+		<heat_capac>1.4</heat_capac>
+	</Material>
+	<Material>
+		<name>Gummi - Ethylen-Propylenedien, Monomer (EPDM )</name>
+		<density>1150.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gummi - Polyisobutylenkautschuk</name>
+		<density>930.0</density>
+		<thermal_conduc>0.2</thermal_conduc>
+		<heat_capac>1.1</heat_capac>
+	</Material>
+	<Material>
+		<name>Gummi - Polysulfid</name>
+		<density>1700.0</density>
+		<thermal_conduc>0.4</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gummi - Butadien</name>
+		<density>980.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Dichtungsstoffe, Dichtungen und waermetechnische Trennungen - Silicagel (Trockenmittel)</name>
+		<density>720.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Dichtungsstoffe, Dichtungen und waermetechnische Trennungen - Silikon ohne Fuellstoff</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.35</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Dichtungsstoffe, Dichtungen und waermetechnische Trennungen - Silikon mit Fuellstoffen</name>
+		<density>1450.0</density>
+		<thermal_conduc>0.5</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Dichtungsstoffe, Dichtungen und waermetechnische Trennungen - Silikonschaum</name>
+		<density>750.0</density>
+		<thermal_conduc>0.12</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Dichtungsstoffe, Dichtungen und waermetechnische Trennungen - Urethan/Polyurethanschaum (als waermetechnische Trennung)</name>
+		<density>1300.0</density>
+		<thermal_conduc>0.21</thermal_conduc>
+		<heat_capac>1.8</heat_capac>
+	</Material>
+	<Material>
+		<name>Dichtungsstoffe, Dichtungen und waermetechnische Trennungen - Weichpolyvinylchlorid (PVC-P) mit 40 Weichmacher</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.14</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Dichtungsstoffe, Dichtungen und waermetechnische Trennungen - Elastomerschaum, flexibel</name>
+		<density>70.0</density>
+		<thermal_conduc>0.05</thermal_conduc>
+		<heat_capac>1.5</heat_capac>
+	</Material>
+	<Material>
+		<name>Dichtungsstoffe, Dichtungen und waermetechnische Trennungen - Polyurethanschaum (PU)</name>
+		<density>70.0</density>
+		<thermal_conduc>0.05</thermal_conduc>
+		<heat_capac>1.5</heat_capac>
+	</Material>
+	<Material>
+		<name>Dichtungsstoffe, Dichtungen und waermetechnische Trennungen - Polyethylenschaum</name>
+		<density>70.0</density>
+		<thermal_conduc>0.05</thermal_conduc>
+		<heat_capac>2.3</heat_capac>
+	</Material>
+	<Material>
+		<name>Gips - Gips 1</name>
+		<density>600.0</density>
+		<thermal_conduc>0.18</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gips - Gips 2</name>
+		<density>900.0</density>
+		<thermal_conduc>0.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gips - Gips 3</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.43</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gips - Gips 4</name>
+		<density>1500.0</density>
+		<thermal_conduc>0.56</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gips - Gipskartonplatten</name>
+		<density>900.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze und Moertel - Gipsdaemmputz</name>
+		<density>600.0</density>
+		<thermal_conduc>0.18</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze und Moertel - Gipsputz 1</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.4</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze und Moertel - Gipsputz 2</name>
+		<density>1300.0</density>
+		<thermal_conduc>0.57</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze und Moertel - Gips, Sand</name>
+		<density>1600.0</density>
+		<thermal_conduc>0.8</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze und Moertel - Kalk, Sand</name>
+		<density>1600.0</density>
+		<thermal_conduc>0.8</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze und Moertel - Zement, Sand</name>
+		<density>1800.0</density>
+		<thermal_conduc>1.0</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Erdreich - Ton oder Schlick oder Schlamm</name>
+		<density>1500.0</density>
+		<thermal_conduc>1.5</thermal_conduc>
+		<heat_capac>2.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Erdreich - Sand und Kies</name>
+		<density>2000.0</density>
+		<thermal_conduc>2.0</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Kristalliner Naturstein</name>
+		<density>2800.0</density>
+		<thermal_conduc>3.5</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Sediment-Naturstein</name>
+		<density>2600.0</density>
+		<thermal_conduc>2.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Leichter Sediment-Naturstein</name>
+		<density>1500.0</density>
+		<thermal_conduc>0.85</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Poroeses Gestein, z. B. Lava</name>
+		<density>1600.0</density>
+		<thermal_conduc>0.55</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Basalt</name>
+		<density>2800.0</density>
+		<thermal_conduc>3.5</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Gneis</name>
+		<density>2600.0</density>
+		<thermal_conduc>3.5</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Granit</name>
+		<density>2600.0</density>
+		<thermal_conduc>2.8</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Marmor</name>
+		<density>2800.0</density>
+		<thermal_conduc>3.5</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Schiefer</name>
+		<density>2400.0</density>
+		<thermal_conduc>2.2</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Kalkstein, extraweich</name>
+		<density>1600.0</density>
+		<thermal_conduc>0.85</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Kalkstein, weich</name>
+		<density>1800.0</density>
+		<thermal_conduc>1.1</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Kalkstein, halbhart</name>
+		<density>2000.0</density>
+		<thermal_conduc>1.4</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Kalkstein, hart</name>
+		<density>2200.0</density>
+		<thermal_conduc>1.7</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Kalkstein, extrahart</name>
+		<density>2600.0</density>
+		<thermal_conduc>2.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Sandstein (Quarzit)</name>
+		<density>2600.0</density>
+		<thermal_conduc>2.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Naturbims</name>
+		<density>400.0</density>
+		<thermal_conduc>0.12</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Gestein - Kunststein</name>
+		<density>1750.0</density>
+		<thermal_conduc>1.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Dachziegelsteine - Ton</name>
+		<density>2000.0</density>
+		<thermal_conduc>1.0</thermal_conduc>
+		<heat_capac>0.8</heat_capac>
+	</Material>
+	<Material>
+		<name>Dachziegelsteine - Beton</name>
+		<density>2100.0</density>
+		<thermal_conduc>1.5</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Platten - Keramik/Porzellan</name>
+		<density>2300.0</density>
+		<thermal_conduc>1.3</thermal_conduc>
+		<heat_capac>0.84</heat_capac>
+	</Material>
+	<Material>
+		<name>Platten - Kunststoff</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.2</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Konstruktionsholz - Nr 1</name>
+		<density>500.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.6</heat_capac>
+	</Material>
+	<Material>
+		<name>Konstruktionsholz - Nr 2</name>
+		<density>700.0</density>
+		<thermal_conduc>0.18</thermal_conduc>
+		<heat_capac>1.6</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Sperrholz 1</name>
+		<density>300.0</density>
+		<thermal_conduc>0.09</thermal_conduc>
+		<heat_capac>1.6</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Sperrholz 2</name>
+		<density>500.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.6</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Sperrholz 3</name>
+		<density>700.0</density>
+		<thermal_conduc>0.17</thermal_conduc>
+		<heat_capac>1.6</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Sperrholz 4</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.24</thermal_conduc>
+		<heat_capac>1.6</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Zementgebundene Spanplatte</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.23</thermal_conduc>
+		<heat_capac>1.5</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Spanplatte 1</name>
+		<density>300.0</density>
+		<thermal_conduc>0.1</thermal_conduc>
+		<heat_capac>1.7</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Spanplatte 2</name>
+		<density>600.0</density>
+		<thermal_conduc>0.14</thermal_conduc>
+		<heat_capac>1.7</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Spanplatte 3</name>
+		<density>900.0</density>
+		<thermal_conduc>0.18</thermal_conduc>
+		<heat_capac>1.7</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - OSB-Platten</name>
+		<density>650.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.7</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Holzfaserplatte, einschliesslich MDF 1</name>
+		<density>250.0</density>
+		<thermal_conduc>0.07</thermal_conduc>
+		<heat_capac>1.7</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Holzfaserplatte, einschliesslich MDF 2</name>
+		<density>400.0</density>
+		<thermal_conduc>0.1</thermal_conduc>
+		<heat_capac>1.7</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Holzfaserplatte, einschliesslich MDF 3</name>
+		<density>600.0</density>
+		<thermal_conduc>0.14</thermal_conduc>
+		<heat_capac>1.7</heat_capac>
+	</Material>
+	<Material>
+		<name>Holzwerkstoffe - Holzfaserplatte, einschliesslich MDF 4</name>
+		<density>800.0</density>
+		<thermal_conduc>0.18</thermal_conduc>
+		<heat_capac>1.7</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Putzmoertel aus Kalk, Kalkzement und hydraulischem Kalk</name>
+		<density>1800.0</density>
+		<thermal_conduc>1.0</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Putzmoertel aus Kalkgips, Gips, Anhydrit und Kalkanhydrit</name>
+		<density>1400.0</density>
+		<thermal_conduc>0.7</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Leichtputz 1</name>
+		<density>1300.0</density>
+		<thermal_conduc>0.56</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Leichtputz 2</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.38</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Leichtputz 3</name>
+		<density>700.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Gipsputz ohne Zuschlag</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.51</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Waermedaemmputz 060</name>
+		<density>200.0</density>
+		<thermal_conduc>0.06</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Waermedaemmputz 070</name>
+		<density>200.0</density>
+		<thermal_conduc>0.07</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Waermedaemmputz 080</name>
+		<density>200.0</density>
+		<thermal_conduc>0.08</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Waermedaemmputz 090</name>
+		<density>200.0</density>
+		<thermal_conduc>0.09</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Waermedaemmputz 100</name>
+		<density>200.0</density>
+		<thermal_conduc>0.1</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Putze - Kunstharzputz</name>
+		<density>1100.0</density>
+		<thermal_conduc>0.7</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauermoertel - Zementmoertel</name>
+		<density>2000.0</density>
+		<thermal_conduc>1.6</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauermoertel - Normalmoertel NM</name>
+		<density>1800.0</density>
+		<thermal_conduc>1.2</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauermoertel - Duennbettmauermoertel</name>
+		<density>1600.0</density>
+		<thermal_conduc>1.0</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauermoertel - Leichtmauermoertel 1</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.36</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauermoertel - Leichtmauermoertel 2</name>
+		<density>700.0</density>
+		<thermal_conduc>0.21</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauermoertel - Leichtmauermoertel 3</name>
+		<density>250.0</density>
+		<thermal_conduc>0.1</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauermoertel - Leichtmauermoertel 4</name>
+		<density>400.0</density>
+		<thermal_conduc>0.14</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauermoertel - Leichtmauermoertel 5</name>
+		<density>700.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauermoertel - Leichtmauermoertel 6</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.38</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauermoertel - Leichtmauermoertel 7</name>
+		<density>1500.0</density>
+		<thermal_conduc>0.69</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Estriche - Asphalt</name>
+		<density>2000.0</density>
+		<thermal_conduc>1.4</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Estriche - Zement-Estrich</name>
+		<density>2100.0</density>
+		<thermal_conduc>1.2</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Estriche - Anhydrit-Estrich</name>
+		<density>1400.0</density>
+		<thermal_conduc>0.47</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Estriche - Magnesia-Estrich</name>
+		<density>2300.0</density>
+		<thermal_conduc>0.7</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton und Stahlleichtbeton mit geschlossenem Gefuege 1</name>
+		<density>800.0</density>
+		<thermal_conduc>0.39</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton und Stahlleichtbeton mit geschlossenem Gefuege 2</name>
+		<density>900.0</density>
+		<thermal_conduc>0.44</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton und Stahlleichtbeton mit geschlossenem Gefuege 3</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.49</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton und Stahlleichtbeton mit geschlossenem Gefuege 4</name>
+		<density>1100.0</density>
+		<thermal_conduc>0.55</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton und Stahlleichtbeton mit geschlossenem Gefuege 5</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.62</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton und Stahlleichtbeton mit geschlossenem Gefuege 6</name>
+		<density>1300.0</density>
+		<thermal_conduc>0.7</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton und Stahlleichtbeton mit geschlossenem Gefuege 7</name>
+		<density>1400.0</density>
+		<thermal_conduc>0.79</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton und Stahlleichtbeton mit geschlossenem Gefuege 8</name>
+		<density>1500.0</density>
+		<thermal_conduc>0.89</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton und Stahlleichtbeton mit geschlossenem Gefuege 9</name>
+		<density>1600.0</density>
+		<thermal_conduc>1.0</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton und Stahlleichtbeton mit geschlossenem Gefuege 10</name>
+		<density>1800.0</density>
+		<thermal_conduc>1.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton und Stahlleichtbeton mit geschlossenem Gefuege 11</name>
+		<density>2000.0</density>
+		<thermal_conduc>1.6</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 1</name>
+		<density>350.0</density>
+		<thermal_conduc>0.11</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 2</name>
+		<density>400.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 3</name>
+		<density>150.0</density>
+		<thermal_conduc>0.15</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 4</name>
+		<density>500.0</density>
+		<thermal_conduc>0.15</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 5</name>
+		<density>550.0</density>
+		<thermal_conduc>0.18</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 6</name>
+		<density>600.0</density>
+		<thermal_conduc>0.19</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 7</name>
+		<density>650.0</density>
+		<thermal_conduc>0.21</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 8</name>
+		<density>700.0</density>
+		<thermal_conduc>0.22</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 9</name>
+		<density>750.0</density>
+		<thermal_conduc>0.24</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 10</name>
+		<density>800.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 11</name>
+		<density>900.0</density>
+		<thermal_conduc>0.29</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Dampfgehaerteter Porenbeton 12</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.31</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit nichtporigen Zuschlaegen 1</name>
+		<density>1600.0</density>
+		<thermal_conduc>0.81</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit nichtporigen Zuschlaegen 2</name>
+		<density>1800.0</density>
+		<thermal_conduc>1.1</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit nichtporigen Zuschlaegen 3</name>
+		<density>2000.0</density>
+		<thermal_conduc>1.4</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit porigen Zuschlaegen 1</name>
+		<density>600.0</density>
+		<thermal_conduc>0.22</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit porigen Zuschlaegen 2</name>
+		<density>700.0</density>
+		<thermal_conduc>0.26</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit porigen Zuschlaegen 3</name>
+		<density>800.0</density>
+		<thermal_conduc>0.28</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit porigen Zuschlaegen 4</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.36</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit porigen Zuschlaegen 5</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.46</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit porigen Zuschlaegen 6</name>
+		<density>1400.0</density>
+		<thermal_conduc>0.57</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit porigen Zuschlaegen 7</name>
+		<density>1600.0</density>
+		<thermal_conduc>0.75</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit porigen Zuschlaegen 8</name>
+		<density>1800.0</density>
+		<thermal_conduc>0.92</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit porigen Zuschlaegen 9</name>
+		<density>2000.0</density>
+		<thermal_conduc>1.2</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 1</name>
+		<density>400.0</density>
+		<thermal_conduc>0.12</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 2</name>
+		<density>450.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 3</name>
+		<density>500.0</density>
+		<thermal_conduc>0.15</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 4</name>
+		<density>550.0</density>
+		<thermal_conduc>0.16</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 5</name>
+		<density>600.0</density>
+		<thermal_conduc>0.18</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 6</name>
+		<density>650.0</density>
+		<thermal_conduc>0.19</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 7</name>
+		<density>700.0</density>
+		<thermal_conduc>0.2</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 8</name>
+		<density>750.0</density>
+		<thermal_conduc>0.22</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 9</name>
+		<density>800.0</density>
+		<thermal_conduc>0.24</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 10</name>
+		<density>900.0</density>
+		<thermal_conduc>0.27</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 11</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.32</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 12</name>
+		<density>1100.0</density>
+		<thermal_conduc>0.37</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 13</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.41</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Naturbims 14</name>
+		<density>1300.0</density>
+		<thermal_conduc>0.47</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 1</name>
+		<density>400.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 2</name>
+		<density>450.0</density>
+		<thermal_conduc>0.15</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 3</name>
+		<density>500.0</density>
+		<thermal_conduc>0.16</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 4</name>
+		<density>550.0</density>
+		<thermal_conduc>0.18</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 5</name>
+		<density>600.0</density>
+		<thermal_conduc>0.19</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 6</name>
+		<density>650.0</density>
+		<thermal_conduc>0.21</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 7</name>
+		<density>700.0</density>
+		<thermal_conduc>0.23</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 8</name>
+		<density>800.0</density>
+		<thermal_conduc>0.26</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 9</name>
+		<density>900.0</density>
+		<thermal_conduc>0.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 10</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.35</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 11</name>
+		<density>1100.0</density>
+		<thermal_conduc>0.39</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 12</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.44</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 13</name>
+		<density>1300.0</density>
+		<thermal_conduc>0.5</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 14</name>
+		<density>1400.0</density>
+		<thermal_conduc>0.55</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 15</name>
+		<density>1500.0</density>
+		<thermal_conduc>0.6</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 16</name>
+		<density>1600.0</density>
+		<thermal_conduc>0.68</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Betonbauteile - Leichtbeton mit Blaehton 17</name>
+		<density>1700.0</density>
+		<thermal_conduc>0.76</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Bauplatten mit normaler Fugendicke 1</name>
+		<density>400.0</density>
+		<thermal_conduc>0.2</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Bauplatten mit normaler Fugendicke 2</name>
+		<density>500.0</density>
+		<thermal_conduc>0.22</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Bauplatten mit normaler Fugendicke 3</name>
+		<density>600.0</density>
+		<thermal_conduc>0.24</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Bauplatten mit normaler Fugendicke 4</name>
+		<density>700.0</density>
+		<thermal_conduc>0.27</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Bauplatten mit normaler Fugendicke 5</name>
+		<density>800.0</density>
+		<thermal_conduc>0.29</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Planbauplatten , duennfugig verlegt 1</name>
+		<density>350.0</density>
+		<thermal_conduc>0.11</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Planbauplatten , duennfugig verlegt 2</name>
+		<density>400.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Planbauplatten , duennfugig verlegt 3</name>
+		<density>450.0</density>
+		<thermal_conduc>0.15</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Planbauplatten , duennfugig verlegt 4</name>
+		<density>500.0</density>
+		<thermal_conduc>0.16</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Planbauplatten , duennfugig verlegt 5</name>
+		<density>550.0</density>
+		<thermal_conduc>0.18</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Planbauplatten , duennfugig verlegt 6</name>
+		<density>600.0</density>
+		<thermal_conduc>0.19</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Planbauplatten , duennfugig verlegt 7</name>
+		<density>650.0</density>
+		<thermal_conduc>0.21</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Planbauplatten , duennfugig verlegt 8</name>
+		<density>700.0</density>
+		<thermal_conduc>0.22</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Planbauplatten , duennfugig verlegt 9</name>
+		<density>750.0</density>
+		<thermal_conduc>0.24</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Porenbeton-Planbauplatten , duennfugig verlegt 10</name>
+		<density>800.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Wandplatten aus Leichtbeton 1</name>
+		<density>800.0</density>
+		<thermal_conduc>0.29</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Wandplatten aus Leichtbeton 2</name>
+		<density>900.0</density>
+		<thermal_conduc>0.32</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Wandplatten aus Leichtbeton 3</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.37</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Wandplatten aus Leichtbeton 4</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.47</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Wandplatten aus Leichtbeton 5</name>
+		<density>1400.0</density>
+		<thermal_conduc>0.58</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Wandbauplatten aus Gips 1</name>
+		<density>750.0</density>
+		<thermal_conduc>0.35</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Wandbauplatten aus Gips 2</name>
+		<density>900.0</density>
+		<thermal_conduc>0.41</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Wandbauplatten aus Gips 3</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.47</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Wandbauplatten aus Gips 4</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.58</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Bauplatten - Gipskartonplatten</name>
+		<density>800.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Vollklinker, Hochlochklinker, Keramikklinker 1</name>
+		<density>1800.0</density>
+		<thermal_conduc>0.81</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Vollklinker, Hochlochklinker, Keramikklinker 2</name>
+		<density>2000.0</density>
+		<thermal_conduc>0.96</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Vollklinker, Hochlochklinker, Keramikklinker 3</name>
+		<density>2200.0</density>
+		<thermal_conduc>1.2</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Vollklinker, Hochlochklinker, Keramikklinker 4</name>
+		<density>2400.0</density>
+		<thermal_conduc>1.4</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Vollziegel, Hochlochziegel, Fuellziegel 1</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.5</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Vollziegel, Hochlochziegel, Fuellziegel 2</name>
+		<density>1400.0</density>
+		<thermal_conduc>0.58</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Vollziegel, Hochlochziegel, Fuellziegel 3</name>
+		<density>1600.0</density>
+		<thermal_conduc>0.68</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Vollziegel, Hochlochziegel, Fuellziegel 4</name>
+		<density>1800.0</density>
+		<thermal_conduc>0.81</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Vollziegel, Hochlochziegel, Fuellziegel 5</name>
+		<density>2000.0</density>
+		<thermal_conduc>0.96</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Vollziegel, Hochlochziegel, Fuellziegel 6</name>
+		<density>2200.0</density>
+		<thermal_conduc>1.2</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Vollziegel, Hochlochziegel, Fuellziegel 7</name>
+		<density>2400.0</density>
+		<thermal_conduc>1.4</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel (mit Lochung A und B) 1</name>
+		<density>550.0</density>
+		<thermal_conduc>0.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel (mit Lochung A und B) 2</name>
+		<density>600.0</density>
+		<thermal_conduc>0.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel (mit Lochung A und B) 3</name>
+		<density>650.0</density>
+		<thermal_conduc>0.32</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel (mit Lochung A und B) 4</name>
+		<density>700.0</density>
+		<thermal_conduc>0.34</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel (mit Lochung A und B) 5</name>
+		<density>750.0</density>
+		<thermal_conduc>0.36</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel (mit Lochung A und B) 6</name>
+		<density>800.0</density>
+		<thermal_conduc>0.36</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel (mit Lochung A und B) 7</name>
+		<density>850.0</density>
+		<thermal_conduc>0.38</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel (mit Lochung A und B) 8</name>
+		<density>900.0</density>
+		<thermal_conduc>0.39</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel (mit Lochung A und B) 9</name>
+		<density>950.0</density>
+		<thermal_conduc>0.41</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel (mit Lochung A und B) 10</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.42</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel HLzW und Waermedaemmziegel 1</name>
+		<density>550.0</density>
+		<thermal_conduc>0.2</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel HLzW und Waermedaemmziegel 2</name>
+		<density>600.0</density>
+		<thermal_conduc>0.21</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel HLzW und Waermedaemmziegel 3</name>
+		<density>650.0</density>
+		<thermal_conduc>0.21</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel HLzW und Waermedaemmziegel 4</name>
+		<density>700.0</density>
+		<thermal_conduc>0.22</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel HLzW und Waermedaemmziegel 5</name>
+		<density>750.0</density>
+		<thermal_conduc>0.23</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel HLzW und Waermedaemmziegel 6</name>
+		<density>800.0</density>
+		<thermal_conduc>0.24</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel HLzW und Waermedaemmziegel 7</name>
+		<density>850.0</density>
+		<thermal_conduc>0.24</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel HLzW und Waermedaemmziegel 8</name>
+		<density>900.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel HLzW und Waermedaemmziegel 9</name>
+		<density>950.0</density>
+		<thermal_conduc>0.26</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Hochlochziegel HLzW und Waermedaemmziegel 10</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.27</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Kalksandsteinen 1</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.5</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Kalksandsteinen 2</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.56</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Kalksandsteinen 3</name>
+		<density>1400.0</density>
+		<thermal_conduc>0.7</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Kalksandsteinen 4</name>
+		<density>1600.0</density>
+		<thermal_conduc>0.79</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Kalksandsteinen 5</name>
+		<density>1800.0</density>
+		<thermal_conduc>0.99</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Kalksandsteinen 6</name>
+		<density>2000.0</density>
+		<thermal_conduc>1.1</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Kalksandsteinen 7</name>
+		<density>2200.0</density>
+		<thermal_conduc>1.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Huettensteinen 1</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.47</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Huettensteinen 2</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.52</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Huettensteinen 3</name>
+		<density>1400.0</density>
+		<thermal_conduc>0.58</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Huettensteinen 4</name>
+		<density>1600.0</density>
+		<thermal_conduc>0.64</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Huettensteinen 5</name>
+		<density>1800.0</density>
+		<thermal_conduc>0.7</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Huettensteinen 6</name>
+		<density>2000.0</density>
+		<thermal_conduc>0.76</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Porenbeton-Plansteinen 1</name>
+		<density>350.0</density>
+		<thermal_conduc>0.11</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Porenbeton-Plansteinen 2</name>
+		<density>400.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Porenbeton-Plansteinen 3</name>
+		<density>450.0</density>
+		<thermal_conduc>0.15</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Porenbeton-Plansteinen 4</name>
+		<density>500.0</density>
+		<thermal_conduc>0.16</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Porenbeton-Plansteinen 5</name>
+		<density>550.0</density>
+		<thermal_conduc>0.18</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Porenbeton-Plansteinen 6</name>
+		<density>600.0</density>
+		<thermal_conduc>0.19</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Porenbeton-Plansteinen 7</name>
+		<density>650.0</density>
+		<thermal_conduc>0.21</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Porenbeton-Plansteinen 8</name>
+		<density>700.0</density>
+		<thermal_conduc>0.22</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Porenbeton-Plansteinen 9</name>
+		<density>750.0</density>
+		<thermal_conduc>0.24</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Mauerwerk - Mauerwerk aus Porenbeton-Plansteinen 10</name>
+		<density>800.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Belaege, Abdichtstoffe und Abdichtungsbahnen - Bitumendachbahn</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.17</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Belaege, Abdichtstoffe und Abdichtungsbahnen - Nackte Bitumenbahnen</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.17</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lose Schuettungen aus Blaehperlit</name>
+		<density>100.0</density>
+		<thermal_conduc>0.06</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lose Schuettungen aus Blaehglimmer</name>
+		<density>100.0</density>
+		<thermal_conduc>0.07</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lose Schuettungen aus Korkschrot, expandiert</name>
+		<density>200.0</density>
+		<thermal_conduc>0.055</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lose Schuettungen aus Huettenbims</name>
+		<density>600.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lose Schuettungen aus Blaehton, Blaehschiefer</name>
+		<density>400.0</density>
+		<thermal_conduc>0.16</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lose Schuettungen aus Bimskies</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.19</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lose Schuettungen aus Schaumlava</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.22</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lose Schuettungen aus Polystyrolschaumstoff-Partikeln</name>
+		<density>15.0</density>
+		<thermal_conduc>0.05</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lose Schuettungen aus Sand, Kies, Splitt (trocken)</name>
+		<density>1800.0</density>
+		<thermal_conduc>0.7</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lehmbaustoffe 1</name>
+		<density>500.0</density>
+		<thermal_conduc>0.14</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lehmbaustoffe 2</name>
+		<density>600.0</density>
+		<thermal_conduc>0.17</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lehmbaustoffe 3</name>
+		<density>700.0</density>
+		<thermal_conduc>0.21</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lehmbaustoffe 4</name>
+		<density>800.0</density>
+		<thermal_conduc>0.25</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lehmbaustoffe 5</name>
+		<density>900.0</density>
+		<thermal_conduc>0.3</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lehmbaustoffe 6</name>
+		<density>1000.0</density>
+		<thermal_conduc>0.35</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lehmbaustoffe 7</name>
+		<density>1200.0</density>
+		<thermal_conduc>0.47</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lehmbaustoffe 8</name>
+		<density>1400.0</density>
+		<thermal_conduc>0.59</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lehmbaustoffe 9</name>
+		<density>1600.0</density>
+		<thermal_conduc>0.73</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lehmbaustoffe 10</name>
+		<density>1800.0</density>
+		<thermal_conduc>0.91</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>sonstige gebraeuchliche Stoffe - Lehmbaustoffe 11</name>
+		<density>2000.0</density>
+		<thermal_conduc>1.1</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
+	<Material>
+		<name>Diele</name>
+		<density>600.0</density>
+		<thermal_conduc>0.13</thermal_conduc>
+		<heat_capac>1.6</heat_capac>
+	</Material>
+</MaterialTemplates>

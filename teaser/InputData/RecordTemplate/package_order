@@ -1,0 +1,10 @@
+%if extra != None: 
+${extra} 
+%endif
+%for i in list:
+%if addition != None: 
+${addition}${i.name}
+%else:
+${i.name}
+%endif
+%endfor
