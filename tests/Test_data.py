@@ -237,8 +237,8 @@ class Test_teaser(object):
                          neighbour_buildings=0,
                          attic=0,
                          cellar=0,
-                         construction_type="heavy",
-                         dormer=0)       
+                         dormer=0,
+                         construction_type="heavy")       
              
     '''methods in Building'''
         
