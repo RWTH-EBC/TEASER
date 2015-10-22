@@ -237,9 +237,9 @@ class Project(object):
                             number_of_floors,
                             height_of_floors,
                             net_leased_area,
-                            office_layout,
-                            window_layout,
-                            construction_type):
+                            office_layout=None,
+                            window_layout=None,
+                            construction_type=None):
         '''Create and calculate an institute building
 
         Parameters
@@ -256,20 +256,20 @@ class Project(object):
         net_leased_area : float
             total net leased area of building
         office_layout : int
-            type of floor plan
+            type of floor plan (default = 0)
 
             0: use default values
             1: elongated 1 floor
             2: elongated 2 floors
             3: compact
         window_layout : int
-            type of window layout
+            type of window layout (default = 0)
 
             0: use default values
             1: punctuated facade
             2: banner facade
             3: full glazing
-        construction_type : str
+        construction_type : str (default = "heavy")
             construction type
 
             heavy: heavy construction
@@ -300,9 +300,9 @@ class Project(object):
                              number_of_floors,
                              height_of_floors,
                              net_leased_area,
-                             office_layout,
-                             window_layout,
-                             construction_type):
+                             office_layout=None,
+                             window_layout=None,
+                             construction_type=None):
         '''Create and calculate an institute4 building
 
         Parameters
@@ -319,20 +319,20 @@ class Project(object):
         net_leased_area : float
             total net leased area of building
         office_layout : int
-            type of floor plan
+            type of floor plan (default = 0)
 
             0: use default values
             1: elongated 1 floor
             2: elongated 2 floors
             3: compact
         window_layout : int
-            type of window layout
+            type of window layout (default = 0)
 
             0: use default values
             1: punctuated facade
             2: banner facade
             3: full glazing
-        construction_type : str
+        construction_type : str (default = "heavy")
             construction type
 
             heavy: heavy construction
@@ -363,9 +363,9 @@ class Project(object):
                              number_of_floors,
                              height_of_floors,
                              net_leased_area,
-                             office_layout,
-                             window_layout,
-                             construction_type):
+                             office_layout=None,
+                             window_layout=None,
+                             construction_type=None):
         '''Create and calculate an institute8 building
 
         Parameters
@@ -382,20 +382,20 @@ class Project(object):
         net_leased_area : float
             total net leased area of building
         office_layout : int
-            type of floor plan
+            type of floor plan (default = 0)
 
             0: use default values
             1: elongated 1 floor
             2: elongated 2 floors
             3: compact
         window_layout : int
-            type of window layout
+            type of window layout (default = 0)
 
             0: use default values
             1: punctuated facade
             2: banner facade
             3: full glazing
-        construction_type : str
+        construction_type : str (default = "heavy")
             construction type
 
             heavy: heavy construction
@@ -426,12 +426,12 @@ class Project(object):
                               number_of_floors,
                               height_of_floors,
                               net_leased_area,
-                              residential_layout,
-                              neighbour_buildings,
-                              attic,
-                              cellar,
-                              construction_type,
-                              dormer):
+                              residential_layout=None,
+                              neighbour_buildings=None,
+                              attic=None,
+                              cellar=None,
+                              dormer=None,
+                              construction_type=None):
         '''Create and calculate an residential building
 
         Parameters
@@ -448,32 +448,32 @@ class Project(object):
         net_leased_area : float
             total net leased area of building
         residential_layout : int
-            type of floor plan
+            type of floor plan (default = 0)
 
             0: compact
             1: elongated/complex
         neighbour_buildings : int
-            neighbour
+            neighbour (default = 0)
 
             0: no neighbour
             1: one neighbour
             2: two neighbours
         attic : int
-            type of attic
+            type of attic (default = 0)
 
             0: flat roof
             1: non heated attic
             2: partly heated attic
             3: heated attic
         cellar : int
-            type of cellar
+            type of cellar (default = 0)
 
             0: no cellar
             1: non heated cellar
             2: partly heated cellar
             3: heated cellar
         construction_type : str
-            construction type
+            construction type (default = "heavy")
 
             heavy: heavy construction
             light: light construction
@@ -481,7 +481,7 @@ class Project(object):
             construction type
 
             0: no dormer
-            : dormer
+            1: dormer
 
         Returns
         ----------

@@ -53,7 +53,7 @@ class Office(TypeBuilding):
         total net leased area of building
 
     office_layout : int
-        type of floor plan
+        type of floor plan (default = 0)
 
         0: use default values
         1: elongated 1 floor
@@ -61,7 +61,7 @@ class Office(TypeBuilding):
         3: compact
 
     window_layout : int
-        type of window layout
+        type of window layout (default = 0)
 
         0: use default values
         1: punctuated facade
@@ -69,7 +69,7 @@ class Office(TypeBuilding):
         3: full glazing
 
     construction_type : str
-        construction type
+        construction type (default = "heavy")
 
         heavy: heavy construction
         light: light construction
