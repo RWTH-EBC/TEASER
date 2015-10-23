@@ -48,31 +48,31 @@ class Residential(TypeBuilding):
     residential_layout : int
         type of floor plan
 
-        1: compact
-        2: elongated/complex
+        0: compact
+        1: elongated/complex
 
     neighbour_buildings : int
         neighbour
 
-        1: no neighbour
-        2: one neighbour
-        3: two neighbours
+        0: no neighbour
+        1: one neighbour
+        2: two neighbours
 
     attic : int
         type of attic
 
-        1: flat roof
-        2: non heated attic
-        3: partly heated attic
-        4: heated attic
+        0: flat roof
+        1: non heated attic
+        2: partly heated attic
+        3: heated attic
 
     cellar : int
         type of cellar
 
-        1: no cellar
-        2: non heated cellar
-        3: partly heated cellar
-        4: heated cellar
+        0: no cellar
+        1: non heated cellar
+        2: partly heated cellar
+        3: heated cellar
 
     construction_type : str
         construction type
@@ -83,8 +83,8 @@ class Residential(TypeBuilding):
     dormer : str
         construction type
 
+        0: no dormer
         1: dormer
-        2: no dormer
 
     Note
     ----------
@@ -213,69 +213,69 @@ class Residential(TypeBuilding):
         self._est_cellar_wall_area = 0
         self._est_factor_volume = 0.0
 
-        self.est_factor_neighbour = 0.0   # n_Nachbar
-        self.est_extra_floor_area = 0.0   # q_Fa
+        self.est_factor_neighbour = 0.0  # n_Nachbar
+        self.est_extra_floor_area = 0.0  # q_Fa
 
-        if self.neighbour_buildings == 1:
+        if self.neighbour_buildings == 0:
             self._est_factor_neighbour = 0.0
             self._est_extra_floor_area = 50.0
-        elif self.neighbour_buildings == 2:
+        elif self.neighbour_buildings == 1:
             self._est_factor_neighbour = 1.0
             self._est_extra_floor_area = 30.0
-        elif self.neighbour_buildings == 3:
+        elif self.neighbour_buildings == 2:
             self._est_factor_neighbour = 2.0
             self._est_extra_floor_area = 10.0
 
         self._est_facade_to_floor_area = 0.0  # p_Fa
 
-        if self.residential_layout == 1:
+        if self.residential_layout == 0:
             self._est_facade_to_floor_area = 0.66
-        elif self.residential_layout == 2:
+        elif self.residential_layout == 1:
             self.est_facade_to_floor_area = 0.8
 
         self._est_factor_heated_attic = 0.0  # f_TB_DG
         self._est_area_per_floor = 0.0  # p_DA
         self._est_area_per_roof = 0.0  # p_OG
 
-        if self.attic == 1:
+        if self.attic == 0:
             self._est_factor_heated_attic = 0.0
             self._est_area_per_floor = 1.33
             self._est_area_per_roof = 0.0
-        elif self.attic == 2:
+        elif self.attic == 1:
             self._est_factor_heated_attic = 0.0
             self._est_area_per_floor = 0.0
             self._est_area_per_roof = 1.33
-        elif self.attic == 3:
+        elif self.attic == 2:
             self._est_factor_heated_attic = 0.5
             self._est_area_per_floor = 0.75
             self._est_area_per_roof = 0.67
-        elif self.attic == 4:
+        elif self.attic == 3:
             self._est_factor_heated_attic = 1.0
             self._est_area_per_floor = 1.5
             self._est_area_per_roof = 0.0
 
         self._est_factor_heated_cellar = 0.0  # f_TB_KG
 
-        if self.cellar == 1:
+        if self.cellar == 0:
+            self._est_factor_heated_cellar = 0.0
+        elif self.cellar == 1:
             self._est_factor_heated_cellar = 0.0
         elif self.cellar == 2:
-            self._est_factor_heated_cellar = 0.0
-        elif self.cellar == 3:
             self._est_factor_heated_cellar = 0.5
-        elif self.cellar == 4:
+        elif self.cellar == 3:
             self._est_factor_heated_cellar = 1.0
 
         self._est_factor_dormer = 0.0
 
-        if self.dormer == 1:
-            self._est_factor_dormer = 1.3
-        elif self.dormer == 2:
+        if self.dormer == 0:
             self._est_factor_dormer = 1.0
+        elif self.dormer == 1:
+            self._est_factor_dormer = 1.3
 
         self.file_ahu = "./Tables/Residential/AHU_Residential.mat"
         self.file_internal_gains = "./Tables/Residential/InternalGains_Residential.mat"
         self.file_set_t = "./Tables/Residential/Tset_Residential.mat"
-        self.file_weather = "./Tables/"+self.parent.weather_file_name
+        self.file_weather = "./Tables/" + self.parent.weather_file_name
 
     def generate_residential(self):
         '''Generates a residential building.
@@ -286,24 +286,27 @@ class Residential(TypeBuilding):
 
         '''
 
-        self._number_of_heated_floors = self._est_factor_heated_cellar +\
+        self._number_of_heated_floors = self._est_factor_heated_cellar + \
                     self.number_of_floors + self.est_living_area_factor\
                      *self._est_factor_heated_attic
 
-        self._living_area_per_floor = self.net_leased_area /\
+        self._living_area_per_floor = self.net_leased_area / \
                 self._number_of_heated_floors
 
         self._est_ground_floor_area = self.est_bottom_building_closure * \
                     self._living_area_per_floor
 
-        self._est_roof_area =self.est_upper_building_closure* \
-                self._est_factor_dormer*self._est_area_per_floor *\
+        self._est_roof_area = self.est_upper_building_closure * \
+                self._est_factor_dormer * self._est_area_per_floor * \
                 self._living_area_per_floor 
 
         self._top_floor_area = self._est_area_per_roof * \
                 self._living_area_per_floor
 
-        self._est_facade_area =self._est_facade_to_floor_area *\
+        if self._est_roof_area == 0:
+            self._est_roof_area = self._top_floor_area
+
+        self._est_facade_area = self._est_facade_to_floor_area * \
                 self._living_area_per_floor + self._est_extra_floor_area
 
         self._est_win_area = self.est_factor_win_area * self.net_leased_area
@@ -335,7 +338,7 @@ class Residential(TypeBuilding):
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
-                self.outer_area[value[1]] = self._est_outer_wall_area /\
+                self.outer_area[value[1]] = self._est_outer_wall_area / \
                         self.nr_of_orientation
 
             for zone in self.thermal_zones:
