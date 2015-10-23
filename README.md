@@ -27,5 +27,5 @@ The current version is 0.1.0. As the idea of TEASER4 came up at the Institute fo
 ### How to contribute to the development of TEASER
 You are invited to contribute to the development of TEASER. 
 You may report any issues by using the [Issues](https://github.com/RWTH-EBC/TEASER/issues) button.
-Furthermore, you are welcome to contribute via [Pull Requests](https://github.com/RWTH-EBC/TEASER/pulls). The workflow for changes is described in our [Wiki](https://github.com/RWTH-EBC/AixLib/wiki).
+Furthermore, you are welcome to contribute via [Pull Requests](https://github.com/RWTH-EBC/TEASER/pulls). The workflow for changes is described in our [Wiki](https://github.com/RWTH-EBC/TEASER/wiki).
 
