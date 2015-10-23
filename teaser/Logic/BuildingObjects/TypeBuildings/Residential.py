@@ -46,20 +46,20 @@ class Residential(TypeBuilding):
         total net leased area of building
 
     residential_layout : int
-        type of floor plan
+        type of floor plan (default = 0)
 
         0: compact
         1: elongated/complex
 
     neighbour_buildings : int
-        neighbour
+        neighbour (default = 0)
 
         0: no neighbour
         1: one neighbour
         2: two neighbours
 
     attic : int
-        type of attic
+        type of attic (default = 0)
 
         0: flat roof
         1: non heated attic
@@ -67,7 +67,7 @@ class Residential(TypeBuilding):
         3: heated attic
 
     cellar : int
-        type of cellar
+        type of cellar (default = 0)
 
         0: no cellar
         1: non heated cellar
@@ -75,7 +75,7 @@ class Residential(TypeBuilding):
         3: heated cellar
 
     construction_type : str
-        construction type
+        construction type (default = "heavy")
 
         heavy: heavy construction
         light: light construction
@@ -149,7 +149,7 @@ class Residential(TypeBuilding):
                  number_of_floors=None, height_of_floors=None,
                  net_leased_area=None, residential_layout=None,
                  neighbour_buildings=None, attic=None, cellar=None,
-                 construction_type=None, dormer=None):
+                 dormer=None, construction_type=None):
 
         '''Constructor of Residential
 
@@ -164,8 +164,9 @@ class Residential(TypeBuilding):
         self.neighbour_buildings = neighbour_buildings
         self.attic = attic
         self.cellar = cellar
-        self.construction_type = construction_type
         self.dormer = dormer
+        self.construction_type = construction_type
+        
         # Parameters are default values for current calculation following IWU
 
         # [area factor, usage type(has to be set)]
@@ -444,3 +445,72 @@ class Residential(TypeBuilding):
         for zone in self.thermal_zones:
             zone.set_inner_wall_area()
             zone.set_volume_zone()
+    
+    @property
+    def residential_layout(self):
+        return self._residential_layout
+
+    @residential_layout.setter
+    def residential_layout(self, value):
+        if value is not None:
+            self._residential_layout = value
+        else:
+            self._residential_layout = 0
+
+    @property
+    def neighbour_buildings(self):
+        return self._neighbour_buildings
+
+    @neighbour_buildings.setter
+    def neighbour_buildings(self, value):
+        if value is not None:
+            self._neighbour_buildings = value
+        else:
+            self._neighbour_buildings = 0
+
+    @property
+    def attic(self):
+        return self._attic
+
+    @attic.setter
+    def attic(self, value):
+        if value is not None:
+            self._attic = value
+        else:
+            self._attic = 0
+
+    @property
+    def cellar(self):
+        return self._cellar
+    
+    @cellar.setter
+    def cellar(self, value):
+        if value is not None:
+            self._cellar = value
+        else:
+            self._cellar = 0
+
+    @property
+    def dormer(self):
+        return self._dormer
+    
+    @dormer.setter
+    def dormer(self, value):
+        if value is not None:
+            self._dormer = value
+        else:
+            self._dormer = 0
+
+    @property
+    def construction_type(self):
+        return self._construction_type
+
+    @construction_type.setter
+    def construction_type(self, value):
+        if value is not None:
+            if value == "heavy" or value == "light":
+                self._construction_type = value
+            else:
+                raise ValueError("Construction_type has to be light or heavy")
+        else:
+            self._construction_type = "heavy"
