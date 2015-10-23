@@ -53,7 +53,7 @@ class Office(TypeBuilding):
         total net leased area of building
 
     office_layout : int
-        type of floor plan
+        type of floor plan (default = 0)
 
         0: use default values
         1: elongated 1 floor
@@ -61,7 +61,7 @@ class Office(TypeBuilding):
         3: compact
 
     window_layout : int
-        type of window layout
+        type of window layout (default = 0)
 
         0: use default values
         1: punctuated facade
@@ -69,7 +69,7 @@ class Office(TypeBuilding):
         3: full glazing
 
     construction_type : str
-        construction type
+        construction type (default = "heavy")
 
         heavy: heavy construction
         light: light construction
@@ -219,18 +219,18 @@ class Office(TypeBuilding):
         elif self.office_layout == 2:
             self._est_width = 15.0
         elif self.office_layout == 3:
-            self._est_width = math.sqrt((net_leased_area / number_of_floors) *
+            self._est_width = math.sqrt((net_leased_area / number_of_floors) * 
                                         self.gross_factor)
         else:
             raise ValueError("office_layout value has to be between 0 - 3")
 
-        self._est_length = ((net_leased_area / number_of_floors) *
+        self._est_length = ((net_leased_area / number_of_floors) * 
                             self.gross_factor) / self._est_width
 
         self.file_ahu = "./Tables/Office/AHU_Office.mat"
         self.file_internal_gains = "./Tables/Office/InternalGains_Office.mat"
         self.file_set_t = "./Tables/Office/Tset_Office.mat"
-        self.file_weather = "./Tables/"+self.parent.weather_file_name
+        self.file_weather = "./Tables/" + self.parent.weather_file_name
 
     def generate_office(self):
         '''Generates an office building.
@@ -249,9 +249,9 @@ class Office(TypeBuilding):
             use_cond.load_use_conditions(value[1])
             zone.use_conditions = use_cond
 
-            zone.use_conditions.persons = zone.area * 0.01 *\
+            zone.use_conditions.persons = zone.area * 0.01 * \
                 zone.use_conditions.persons
-            zone.use_conditions.machines = zone.area * 0.01 *\
+            zone.use_conditions.machines = zone.area * 0.01 * \
                 zone.use_conditions.machines
 
             # self.thermal_zones.append(zone)
@@ -259,12 +259,12 @@ class Office(TypeBuilding):
         # statistical estimation of the facade
 
         self._est_outer_wall_area = self.est_factor_wall_area * \
-                                self.net_leased_area**self.est_exponent_wall
+                                self.net_leased_area ** self.est_exponent_wall
         self._est_win_area = self.est_factor_win_area * \
                              self.net_leased_area ** self.est_exponent_win
-        self._est_roof_area = (self.net_leased_area / self.number_of_floors)*\
+        self._est_roof_area = (self.net_leased_area / self.number_of_floors) * \
                               self.gross_factor
-        self._est_floor_area = (self.net_leased_area / self.number_of_floors)*\
+        self._est_floor_area = (self.net_leased_area / self.number_of_floors) * \
                                self.gross_factor
 
         # manipulation of wall according to facade design 
@@ -284,13 +284,13 @@ class Office(TypeBuilding):
         for key, value in self.outer_wall_names.items():
             # North and South
             if value[1] == 0 or value[1] == 180:
-                self.outer_area[value[1]] = self._est_outer_wall_area *\
-                 (self._est_length/(2*self._est_width+2*self._est_length))
+                self.outer_area[value[1]] = self._est_outer_wall_area * \
+                 (self._est_length / (2 * self._est_width + 2 * self._est_length))
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
                 self.outer_area[value[1]] = self._est_outer_wall_area * \
-                (self._est_width/(2*self._est_width+2*self._est_length))
+                (self._est_width / (2 * self._est_width + 2 * self._est_length))
             for zone in self.thermal_zones:
                 # create wall and set building elements
                 outer_wall = OuterWall(zone)
@@ -305,12 +305,12 @@ class Office(TypeBuilding):
             if value[1] == 0 or value[1] == 180:
 
                 self.window_area[value[1]] = self._est_win_area * \
-                (self._est_length /(2 * self._est_width +2 * self._est_length))
+                (self._est_length / (2 * self._est_width + 2 * self._est_length))
 
             elif value[1] == 90 or value[1] == 270:
 
                 self.window_area[value[1]] = self._est_win_area * \
-                (self._est_width /(2 * self._est_width + 2*self._est_length))
+                (self._est_width / (2 * self._est_width + 2 * self._est_length))
 
             '''
             There is no real classification for windows, so this is a bit hard
@@ -405,8 +405,7 @@ class Office(TypeBuilding):
         if value is not None:
             self._office_layout = value
         else:
-            raise ValueError("To initialize TypeBuilding, \
-                    you need to define office_layout.")
+            self._office_layout = 0
 
     @property
     def window_layout(self):
@@ -417,8 +416,7 @@ class Office(TypeBuilding):
         if value is not None:
             self._window_layout = value
         else:
-            raise ValueError("To initialize TypeBuilding, \
-                    you need to define window_layout.")
+            self._window_layout = 0
 
     @property
     def construction_type(self):
@@ -432,5 +430,4 @@ class Office(TypeBuilding):
             else:
                 raise ValueError("Construction_type has to be light or heavy")
         else:
-            raise ValueError("To initialize TypeBuilding, \
-                    you need to define construction_type.")
+            self._construction_type = "heavy"
