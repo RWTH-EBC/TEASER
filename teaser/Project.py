@@ -726,12 +726,14 @@ class Project(object):
         utilis.create_path(utilis.get_full_path(path))
 
         for bldg in self.list_of_buildings:
+            bldg_path = path + "\\" + bldg.name + "\\"
+            print(bldg_path)
             readable_template = Template(
                 filename=utilis.get_full_path(
                     "InputData\\ReadableOutputTemplate\\ReadableBuilding"))
 
             out_file = open(utilis.get_full_path
-                            (path+"\\"+"ReadableOutput.txt"), 'w')
+                            (bldg_path+"\\"+"ReadableOutput.txt"), 'w')
             out_file.write(readable_template.render_unicode
                            (bldg=bldg, mod_prj=self.modelica_project))
             out_file.close()
