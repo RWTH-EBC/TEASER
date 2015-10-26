@@ -16,6 +16,8 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
 from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
+from teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599\
+    import UseConditionsOffice18599
 
 
 class Controller():
@@ -66,8 +68,11 @@ class Controller():
         '''
 
         zone = ThermalZone(parent)
+        usecon = UseConditionsOffice18599()
+        usecon.usage = usage
         zone.name = name
         zone.area = area
+        zone.use_conditions = usecon
         return parent
 
     @classmethod

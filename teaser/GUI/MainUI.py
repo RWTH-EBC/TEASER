@@ -1060,18 +1060,18 @@ class MainUI(QDialog):
             QtGui.QMessageBox.warning(self,
                                       u"Can't add Zone!",
                                       u"You need to fill out the Area field.")
-        if self.generate_zone_usage_line_edit.text() == "":
+        if self.generate_zone_usage_combobox.currentText() == "":
             QtGui.QMessageBox.warning(self,
                                       u"Can't add Zone!",
                                       u"You need to fill out the Usage field.")
         if self.generate_zone_id_line_edit.text() != \
             "" and self.generate_zone_area_line_edit.text() != ""\
-                and self.generate_zone_usage_line_edit.text() != "":
+                and self.generate_zone_usage_combobox.currentText() != "":
 
             Controller.click_add_zone_button(
                 self.current_building, self.generate_zone_id_line_edit.text(),
                 self.generate_zone_area_line_edit.text(),
-                self.generate_zone_usage_line_edit.text())
+                self.generate_zone_usage_combobox.currentText())
             self.display_current_building()
 
     def check_inputs_edit_element(self):
@@ -1166,31 +1166,31 @@ class MainUI(QDialog):
         self.element_model.clear()
         if self.current_zone.inner_walls:
                     for inner_wall in self.current_zone.inner_walls:
-                        item3 = TrackableItem(
+                        item = TrackableItem(
                             "Name:\t".expandtabs(8) + str(inner_wall.name) + 
                             "\nType:\t".expandtabs(11) + 
-                            "Inner Wall \n Area:\n".expandtabs(11) + 
+                            "Inner Wall \n Area:\t".expandtabs(11) + 
                             str(inner_wall.area) + 
                             "\n Orientation:\t".expandtabs(11) + 
                             str(inner_wall.orientation),
                             inner_wall.internal_id)
-                        self.element_model.appendRow(item3)
+                        self.element_model.appendRow(item)
         if self.current_zone.outer_walls:
                     for outer_wall in self.current_zone.outer_walls:
                         if type(outer_wall).__name__ == "OuterWall":
-                            item2 = TrackableItem(
+                            item = TrackableItem(
                                 "Name:\t".expandtabs(8) + 
                                 str(outer_wall.name) + 
                                 "\nType:\t".expandtabs(11) + 
-                                "Outer Wall \n Area:\n".expandtabs(11) + 
+                                "Outer Wall \n Area:\t".expandtabs(11) + 
                                 str(outer_wall.area) + 
                                 "\n Orientation:\t".expandtabs(11) + 
                                 str(outer_wall.orientation),
                                 outer_wall.internal_id)
-                            self.element_model.appendRow(item2)
+                            self.element_model.appendRow(item)
                         if type(outer_wall).__name__ == \
                                 "GroundFloor":
-                            item3 = TrackableItem(
+                            item = TrackableItem(
                                 "Name:\t".expandtabs(8) + 
                                 str(outer_wall.name) + 
                                 "\nType:\t".expandtabs(11) + 
@@ -1199,9 +1199,9 @@ class MainUI(QDialog):
                                 "\n Orientation:\t".expandtabs(11) + 
                                 str(outer_wall.orientation),
                                 outer_wall.internal_id)
-                            self.element_model.appendRow(item3)
+                            self.element_model.appendRow(item)
                         if type(outer_wall).__name__ == "Rooftop":
-                            item5 = TrackableItem(
+                            item = TrackableItem(
                                 "Name:\t".expandtabs(8) + 
                                 str(outer_wall.name) + 
                                 "\nType:\t".expandtabs(11) + 
@@ -1210,18 +1210,17 @@ class MainUI(QDialog):
                                 "\n Orientation:\t".expandtabs(11) + 
                                 str(outer_wall.orientation),
                                 outer_wall.internal_id)
-                            self.element_model.appendRow(item5)
-
+                            self.element_model.appendRow(item)
         if self.current_zone.windows:
                     for window in self.current_zone.windows:
-                        item5 = TrackableItem(
+                        item = TrackableItem(
                             "Name:\t".expandtabs(8) + str(window.name) + 
                             "\nType:\t".expandtabs(11) + 
                             "Windows \n Area:\t".expandtabs(11) + 
                             str(window.area) + 
                             "\n Orientation:\t".expandtabs(11) + 
                             str(window.orientation), window.internal_id)
-                        self.element_model.appendRow(item5)
+                        self.element_model.appendRow(item)
 
     def update_element_details(self):
         self.element_layer_model.clear()
@@ -1925,6 +1924,8 @@ class MainUI(QDialog):
         self.current_zone.name = self.zone_id_textbox.text()
         self.current_zone.area = float(
             self.zone_net_leased_area_textbox.text())
+        self.current_zone.use_conditions.usage =\
+            self.zone_type_groupbox.currentText()
         if self.cooling_ahu_start_dropdown.currentText().startswith('0'):
             self.current_zone.use_conditions.cooling_time[0] = \
                 int(self.cooling_ahu_start_dropdown.currentText()[1])
@@ -2669,6 +2670,9 @@ class MainUI(QDialog):
         self.zone_type_groupbox.setObjectName(_fromUtf8("ZoneTypeGroupBox"))
         for thermal_zone_type in self.guiinfo.thermal_zone_types:
             self.zone_type_groupbox.addItem(thermal_zone_type, userData=None)
+        self.zone_type_groupbox.setCurrentIndex(
+            self.zone_type_groupbox.findText(
+                str(self.current_zone.use_conditions.usage)))
 
         self.zone_id_label = QtGui.QLabel("Zone Id")
         self.zone_id_textbox = QtGui.QLineEdit()
@@ -3406,9 +3410,11 @@ class MainUI(QDialog):
             "generate_zone_area_line_edit")
 
         self.generateZoneUsageLabel = QtGui.QLabel("Type: ")
-        self.generate_zone_usage_line_edit = QtGui.QLineEdit()
-        self.generate_zone_usage_line_edit.setObjectName(
-            "generate_zone_usage_line_edit")
+        self.generate_zone_usage_combobox = QtGui.QComboBox()
+        self.generate_zone_usage_combobox.setObjectName(
+            "generate_zone_usage_combobox")
+        for zone_type in self.guiinfo.thermal_zone_types:
+            self.generate_zone_usage_combobox.addItem(zone_type)
 
         self.generateZoneSaveButton = QtGui.QPushButton()
         self.generateZoneSaveButton.setText("Save")
@@ -3433,7 +3439,7 @@ class MainUI(QDialog):
         self.generateZoneWindowLayout.addWidget(
             self.generateZoneUsageLabel, 3, 0)
         self.generateZoneWindowLayout.addWidget(
-            self.generate_zone_usage_line_edit, 3, 1)
+            self.generate_zone_usage_combobox, 3, 1)
         self.generateZoneWindowLayout.addWidget(
             self.generateZoneSaveButton, 4, 0)
         self.generateZoneWindowLayout.addWidget(
