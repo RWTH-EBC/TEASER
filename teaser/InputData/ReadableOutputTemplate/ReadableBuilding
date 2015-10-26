@@ -92,28 +92,30 @@ number of thermal zones = ${get_n(bldg.thermal_zones)} -
 ##convert sunblind to string
 <%def name="sunblind_string(list)", filter="trim">
   <%
-  help = []
+  help = "["
   for element in list:
-    help.append(element.shading_g_total)
-  help.append(0)
+    if len(help) == 1:
+      help += str(element.shading_g_total)
+    else:
+      help += ", " + str(element.shading_g_total)
+  help += ", 0]"
+  help = help.replace("[", "{").replace("]", "}")
   return help
-
   %>
 </%def>
 
 ##convert areas to string
 <%def name="area_string(list)", filter="trim">
   <%
-    
-  help = []
-    
-  for item in list:
-    help.append(item.area)
-
-  help.append(0)
-    
-  return help    
-
+  help = "["
+  for element in list:
+    if len(help) == 1:
+      help += str(element.area)
+    else:
+      help += ", " + str(element.area)
+  help += ", 0]"
+  help = help.replace("[", "{").replace("]", "}")
+  return help   
   %>
     
 </%def>
