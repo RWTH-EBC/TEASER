@@ -45,7 +45,6 @@ number of thermal zones = ${get_n(bldg.thermal_zones)} -
     ## inner walls functionality = ${on_off_checker(zone.inner_walls)} - (withInnerwalls)
     resistor 1 inner wall = ${zone.r1_iw} K/W (R1i)
     capacity 1 inner wall = ${round_2(zone.c1_iw)} J/K  (C1i)
-  
 
   * Outer Walls *
 
