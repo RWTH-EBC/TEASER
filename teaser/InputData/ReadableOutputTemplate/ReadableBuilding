@@ -38,19 +38,23 @@ number of thermal zones = ${get_n(bldg.thermal_zones)} -
     windows functionality = ${on_off_checker(zone.windows)} - (withWindows)
     ## fixme = ${weightfactors_to_string(zone.weightfactor_win)} - (weightfactorswindow)
 
-  * Walls *
+  * Inner Walls *
 
-    outer wall's coefficient of absorption = 0.7 - #hardcoded, unimportant? (aowo) 
+    inner wall area = ${round_2(zone.area_iw)} m² (Ai)
     inner wall's coefficient of heat transfer = ${round_2(zone.alpha_conv_iw)} W/(m² K) (alphaiwi)
+    ## inner walls functionality = ${on_off_checker(zone.inner_walls)} - (withInnerwalls)
+    resistor 1 inner wall = ${zone.r1_iw} K/W (R1i)
+    capacity 1 inner wall = ${round_2(zone.c1_iw)} J/K  (C1i)
+  
+
+  * Outer Walls *
+
+    outer wall area = ${round_2(zone.area_ow)} m² (Ao)
+    outer wall's coefficient of absorption = 0.7 - (aowo) 
     outer wall's coefficient of heat transfer (inner side) = ${round_2(zone.alpha_conv_inner_ow)} W/(m² K)  (alphaowi)
     outer wall's coefficient of heat transfer (outer side) = ${round_2(zone.alpha_comb_outer_ow)} W/(m² K) (alphaowo)
     ## fixme = ${weightfactors_to_string(zone.weightfactor_ow)} - (weightfactorswall)
     ## fixme = ${weightfactors_to_string(zone.weightfactor_ground)} - (weightfactorground)
-    inner wall area = ${round_2(zone.area_iw)} m² (Ai)
-    ## inner walls functionality = ${on_off_checker(zone.inner_walls)} - (withInnerwalls)
-    resistor 1 inner wall = ${zone.r1_iw} K/W (R1i)
-    capacity 1 inner wall = ${round_2(zone.c1_iw)} J/K  (C1i)
-    outer wall area = ${round_2(zone.area_ow)} m² (Ao)
     ## outer walls functionality = ${on_off_checker(zone.outer_walls)} - (withOuterwalls)
     resistor 1 outer wall = ${zone.r1_ow} K/W (R1o)
     capacity 1 outer wall = ${round_2(zone.c1_ow)} J/K  (C1o)
