@@ -707,6 +707,35 @@ class Project(object):
                 else:
                     pass
 
+    def export_human_readable_building(self, path=None):
+        '''Exports values and parameters of the used building in a readable text function
+
+        Parameters:
+        ----------
+
+        path : string
+            if the Files should not be stored in OutputData, an alternative
+            can be specified  
+
+        '''
+        if path is None:
+            path = "OutputData\\"+self.name
+        else:
+            path = path+"\\"+self.name
+
+        utilis.create_path(utilis.get_full_path(path))
+
+        for bldg in self.list_of_buildings:
+            readable_template = Template(
+                filename=utilis.get_full_path(
+                    "InputData\\ReadableOutputTemplate\\ReadableBuilding"))
+
+            out_file = open(utilis.get_full_path
+                            (path+"\\"+"ReadableOutput.txt"), 'w')
+            out_file.write(readable_template.render_unicode
+                           (bldg=bldg, mod_prj=self.modelica_project))
+            out_file.close()
+
     def _help_package(self, path, name, uses=None):
         '''creates a package.mo file
 
