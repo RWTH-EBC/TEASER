@@ -707,7 +707,7 @@ class Project(object):
                 else:
                     pass
 
-    def export_human_readable_building(self, path=None):
+    def export_parameters_txt(self, path=None):
         '''Exports values and parameters of the used building in a readable text function
 
         Parameters:

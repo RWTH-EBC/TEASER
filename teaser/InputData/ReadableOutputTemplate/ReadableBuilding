@@ -3,8 +3,8 @@
 building name = ${bldg.name} - 
 building type = ${bldg.type_of_building} - 
 building year of construction = ${bldg.year_of_construction} - 
-building number of floors = ${bldg.number_of_floors} m
-building height of floors = ${bldg.height_of_floors} - 
+building number of floors = ${bldg.number_of_floors} -
+building height of floors = ${bldg.height_of_floors} m 
 building net leased area = ${bldg.net_leased_area} m²
 
 static heat load = ${round_2(bldg.sum_heating_load)} W
@@ -23,26 +23,26 @@ number of thermal zones = ${get_n(bldg.thermal_zones)} -
     number of people in the zone = ${zone.use_conditions.persons} - (NrPeople)
     number of people with machines = ${zone.use_conditions.machines} -  (NrPeopleMachines)
     heating power of lighting = ${zone.use_conditions.lighting_power} W (LightingPower)
-    ## Ratio of convective heat from overall heat output = 0.5 (RatioConvectiveHeatLighting)
+    Ratio of convective heat from overall heat output = 0.5 (RatioConvectiveHeatLighting)
     upper limit of heater = ${round_2(zone.heating_load)} W (h_heater)
     minimum specific air flow supplied by the AHU = ${zone.use_conditions.min_ahu} m³/(h m²) (minAHU)
     maximum specific air flow supplied by the AHU = ${zone.use_conditions.max_ahu} m³/(h m²) (maxAHU)
-    ## AHU functionality = ${on_off_checker(zone.use_conditions.with_ahu)} - (withAHU)
-    ## lower limit of cooler = 0 W #hardcoded, unimportant? (l_cool)
-    ## total energy transmittance = ${round_2(zone.weighted_g_value)} - (g)
+    AHU functionality = ${on_off_checker(zone.use_conditions.with_ahu)} - (withAHU)
+    lower limit of cooler = 0 W (l_cool)
+    total energy transmittance = ${round_2(zone.weighted_g_value)} - (g)
 
   * Windows *
 
     energy transmittances if sunblind is closed = ${sunblind_string(zone.windows)} - (gsunblind)
     list of window areas = ${area_string(zone.windows)} - (Aw)
     windows functionality = ${on_off_checker(zone.windows)} - (withWindows)
-    ## fixme = ${weightfactors_to_string(zone.weightfactor_win)} - (weightfactorswindow)
+    weigthfactors for the windows = ${weightfactors_to_string(zone.weightfactor_win)} - (weightfactorswindow)
 
   * Inner Walls *
 
     inner wall area = ${round_2(zone.area_iw)} m² (Ai)
     inner wall's coefficient of heat transfer = ${round_2(zone.alpha_conv_iw)} W/(m² K) (alphaiwi)
-    ## inner walls functionality = ${on_off_checker(zone.inner_walls)} - (withInnerwalls)
+    inner walls functionality = ${on_off_checker(zone.inner_walls)} - (withInnerwalls)
     resistor 1 inner wall = ${zone.r1_iw} K/W (R1i)
     capacity 1 inner wall = ${round_2(zone.c1_iw)} J/K  (C1i)
 
@@ -52,9 +52,9 @@ number of thermal zones = ${get_n(bldg.thermal_zones)} -
     outer wall's coefficient of absorption = 0.7 - (aowo) 
     outer wall's coefficient of heat transfer (inner side) = ${round_2(zone.alpha_conv_inner_ow)} W/(m² K)  (alphaowi)
     outer wall's coefficient of heat transfer (outer side) = ${round_2(zone.alpha_comb_outer_ow)} W/(m² K) (alphaowo)
-    ## fixme = ${weightfactors_to_string(zone.weightfactor_ow)} - (weightfactorswall)
-    ## fixme = ${weightfactors_to_string(zone.weightfactor_ground)} - (weightfactorground)
-    ## outer walls functionality = ${on_off_checker(zone.outer_walls)} - (withOuterwalls)
+    weigthfactors for the walls = ${weightfactors_to_string(zone.weightfactor_ow)} - (weightfactorswall)
+    weigthfactors for the ground = ${weightfactors_to_string_ground(zone.weightfactor_ground)} - (weightfactorground)
+    outer walls functionality = ${on_off_checker(zone.outer_walls)} - (withOuterwalls)
     resistor 1 outer wall = ${zone.r1_ow} K/W (R1o)
     capacity 1 outer wall = ${round_2(zone.c1_ow)} J/K  (C1o)
     resistor "Rest" = ${round_2(zone.r_rest_ow)} K/W (RRest)
@@ -136,10 +136,24 @@ number of thermal zones = ${get_n(bldg.thermal_zones)} -
 ##convert the weightfactors
 <%def name="weightfactors_to_string(list)", filter="trim"> 
   <%
-  help = []
-  for item in list:
-    help.append(item)
-    
+  help = "["
+  for element in list:
+    if len(help) == 1:
+      help += str(element)
+    else:
+      help += ", " + str(element)
+  help += "]"
+  help = help.replace("[", "{").replace("]", "}")
+  return help    
+  %>
+</%def>
+
+##convert the weightfactors
+<%def name="weightfactors_to_string_ground(list)", filter="trim"> 
+  <%
+  help = ""
+  for element in list:
+    help += str(element)
   return help    
   %>
 </%def>

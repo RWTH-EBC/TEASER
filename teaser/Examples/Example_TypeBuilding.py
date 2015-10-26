@@ -59,7 +59,7 @@ def example_type_building():
     '''   
     Save the human readable output txt
     '''
-    prj.export_human_readable_building(path=None)
+    prj.export_parameters_txt(path=None)
     
 
 if __name__ == '__main__':
