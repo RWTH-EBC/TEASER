@@ -104,7 +104,7 @@ Default is None</p>
 </div></blockquote>
 <p><strong>office_layout</strong> : int</p>
 <blockquote>
-<div><p>type of floor plan</p>
+<div><p>type of floor plan (default = 0)</p>
 <p>0: use default values
 1: elongated 1 floor
 2: elongated 2 floors
@@ -112,7 +112,7 @@ Default is None</p>
 </div></blockquote>
 <p><strong>window_layout</strong> : int</p>
 <blockquote>
-<div><p>type of window layout</p>
+<div><p>type of window layout (default = 0)</p>
 <p>0: use default values
 1: punctuated facade
 2: banner facade
@@ -120,7 +120,7 @@ Default is None</p>
 </div></blockquote>
 <p><strong>construction_type</strong> : str</p>
 <blockquote class="last">
-<div><p>construction type</p>
+<div><p>construction type (default = &#8220;heavy&#8221;)</p>
 <p>heavy: heavy construction
 light: light construction</p>
 </div></blockquote>
@@ -207,7 +207,7 @@ TEASER requirements.</p>
 <span id="residential-module"></span><h2>Residential module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Residential" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential">
-<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Residential.</code><code class="descname">Residential</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>construction_type=None</em>, <em>dormer=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Residential.</code><code class="descname">Residential</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>dormer=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding" title="teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding</span></code></a></p>
 <p>Type Building Residential.</p>
 <p>Subclass from Building to represent Residential Buildings. Allows for
@@ -245,44 +245,44 @@ Default is None</p>
 </div></blockquote>
 <p><strong>residential_layout</strong> : int</p>
 <blockquote>
-<div><p>type of floor plan</p>
-<p>1: compact
-2: elongated/complex</p>
+<div><p>type of floor plan (default = 0)</p>
+<p>0: compact
+1: elongated/complex</p>
 </div></blockquote>
 <p><strong>neighbour_buildings</strong> : int</p>
 <blockquote>
-<div><p>neighbour</p>
-<p>1: no neighbour
-2: one neighbour
-3: two neighbours</p>
+<div><p>neighbour (default = 0)</p>
+<p>0: no neighbour
+1: one neighbour
+2: two neighbours</p>
 </div></blockquote>
 <p><strong>attic</strong> : int</p>
 <blockquote>
-<div><p>type of attic</p>
-<p>1: flat roof
-2: non heated attic
-3: partly heated attic
-4: heated attic</p>
+<div><p>type of attic (default = 0)</p>
+<p>0: flat roof
+1: non heated attic
+2: partly heated attic
+3: heated attic</p>
 </div></blockquote>
 <p><strong>cellar</strong> : int</p>
 <blockquote>
-<div><p>type of cellar</p>
-<p>1: no cellar
-2: non heated cellar
-3: partly heated cellar
-4: heated cellar</p>
+<div><p>type of cellar (default = 0)</p>
+<p>0: no cellar
+1: non heated cellar
+2: partly heated cellar
+3: heated cellar</p>
 </div></blockquote>
 <p><strong>construction_type</strong> : str</p>
 <blockquote>
-<div><p>construction type</p>
+<div><p>construction type (default = &#8220;heavy&#8221;)</p>
 <p>heavy: heavy construction
 light: light construction</p>
 </div></blockquote>
 <p><strong>dormer</strong> : str</p>
 <blockquote class="last">
 <div><p>construction type</p>
-<p>1: dormer
-2: no dormer</p>
+<p>0: no dormer
+1: dormer</p>
 </div></blockquote>
 </td>
 </tr>
@@ -337,6 +337,26 @@ light: light construction</p>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.attic">
+<code class="descname">attic</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.attic" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.cellar">
+<code class="descname">cellar</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.cellar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.construction_type">
+<code class="descname">construction_type</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.construction_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.dormer">
+<code class="descname">dormer</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.dormer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.generate_residential">
 <code class="descname">generate_residential</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.generate_residential" title="Permalink to this definition">¶</a></dt>
@@ -345,6 +365,16 @@ light: light construction</p>
 building according to TEASER requirements
 Berechnungsgrundlagen: IWU, &#8220;Kurzverfahren Energieprofil&#8221;; 2005.</p>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.neighbour_buildings">
+<code class="descname">neighbour_buildings</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.neighbour_buildings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.residential_layout">
+<code class="descname">residential_layout</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.residential_layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

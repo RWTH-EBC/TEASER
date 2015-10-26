@@ -1,5 +1,5 @@
-#Created July 2015
-#Marcus Fuchs
+# Created July 2015
+# Marcus Fuchs
 
 '''
 This module contains an example for the retrofit of an entire district (Melaten)
@@ -37,10 +37,10 @@ class BuildingInfo(object):
 def main(): 
     
     this_path = os.path.dirname(__file__)
-    input_path = os.path.join(this_path, 
+    input_path = os.path.join(this_path,
                               'ExampleInputFiles',
                               'MelatenXML')  
-    output_path = os.path.join(os.path.dirname(this_path), 
+    output_path = os.path.join(os.path.dirname(this_path),
                                'OutputData'
                                )
     
@@ -133,7 +133,7 @@ def create_reference_project(info_list):
         print(building)
         
         if building.usage_type == 'office':
-            prj.type_bldg_office(name=str(building.building_number), 
+            prj.type_bldg_office(name=str(building.building_number),
                                 year_of_construction=building.year_of_construction,
                                 number_of_floors=building.floors,
                                 height_of_floors=building.height_of_floors,
@@ -142,7 +142,7 @@ def create_reference_project(info_list):
                                 window_layout=0,
                                 construction_type=building.weight)
         elif building.usage_type == 'institute8':
-            prj.type_bldg_institute8(name=str(building.building_number), 
+            prj.type_bldg_institute8(name=str(building.building_number),
                                      year_of_construction=building.year_of_construction,
                                      number_of_floors=building.floors,
                                      height_of_floors=building.height_of_floors,
@@ -151,7 +151,7 @@ def create_reference_project(info_list):
                                      window_layout=0,
                                      construction_type=building.weight)
         elif building.usage_type == 'institute4':
-            prj.type_bldg_institute4(name=str(building.building_number), 
+            prj.type_bldg_institute4(name=str(building.building_number),
                                      year_of_construction=building.year_of_construction,
                                      number_of_floors=building.floors,
                                      height_of_floors=building.height_of_floors,
@@ -160,7 +160,7 @@ def create_reference_project(info_list):
                                      window_layout=0,
                                      construction_type=building.weight)
         elif building.usage_type == 'institute':
-            prj.type_bldg_institute(name=str(building.building_number), 
+            prj.type_bldg_institute(name=str(building.building_number),
                                     year_of_construction=building.year_of_construction,
                                     number_of_floors=building.floors,
                                     height_of_floors=building.height_of_floors,
@@ -169,17 +169,17 @@ def create_reference_project(info_list):
                                     window_layout=0,
                                     construction_type=building.weight)
         elif building.usage_type == 'residential':
-            prj.type_bldg_residential(name=str(building.building_number), 
+            prj.type_bldg_residential(name=str(building.building_number),
                                       year_of_construction=building.year_of_construction,
                                       number_of_floors=building.floors,
                                       height_of_floors=building.height_of_floors,
                                       net_leased_area=building.area,
-                                      residential_layout=1,
-                                      neighbour_buildings=1,
-                                      attic=1,
-                                      cellar=1,
-                                      construction_type=building.weight,
-                                      dormer=1)
+                                      residential_layout=0,
+                                      neighbour_buildings=0,
+                                      attic=0,
+                                      cellar=0,
+                                      dormer=0,
+                                      construction_type=building.weight)
     return prj
 
     

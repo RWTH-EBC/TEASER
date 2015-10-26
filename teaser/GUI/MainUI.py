@@ -3619,11 +3619,12 @@ class MainUI(QDialog):
             self.element_outer_radiation_textbox.setText(
                 str(self.current_element.outer_radiation))
 
-        self.element_uvalue_label = QtGui.QLabel("U-Value")
+        self.element_uvalue_label = QtGui.QLabel("U-Value (U/A)")
         self.element_uvalue_textbox = QtGui.QLineEdit()
         self.element_uvalue_textbox.setObjectName(
             _fromUtf8("ElementUValueTextBox"))
         self.element_uvalue_textbox.setText(str(self.current_element.ua_value))
+        self.element_uvalue_textbox.setReadOnly(True)
 
         self.element_add_material_button = QtGui.QPushButton()
         self.element_add_material_button.setText("Add Layer")

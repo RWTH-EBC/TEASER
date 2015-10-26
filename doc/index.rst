@@ -41,7 +41,7 @@ How to contribute to TEASER
 You are invited to contribute to the development of TEASER. 
 You may report any issues by using the Issues(https://github.com/RWTH-EBC/TEASER/issues) button.
 Furthermore, you are welcome to contribute via Pull Requests(https://github.com/RWTH-EBC/TEASER/pulls). 
-The workflow for changes is described in our Wiki(https://github.com/RWTH-EBC/AixLib/wiki).
+The workflow for changes is described in our Wiki(https://github.com/RWTH-EBC/TEASER/wiki).
 
 
 Contents:
