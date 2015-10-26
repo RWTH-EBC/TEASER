@@ -3807,72 +3807,12 @@ class MainUI(QDialog):
         self.simulation_window_ui = QtGui.QWizardPage()
         self.simulation_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.simulation_window_ui.setWindowTitle("Simulation")
-        self.simulation_window_ui.setFixedWidth(750)
-        self.simulation_window_ui.setFixedHeight(650)
+        self.simulation_window_ui.setFixedWidth(650)
+        self.simulation_window_ui.setFixedHeight(400)
         self.simulation_window_ui_layout = QtGui.QGridLayout()
         self.simulation_window_ui.setLayout(self.simulation_window_ui_layout)
 
-        self.manual_RC_display_groupbox = QtGui.QGroupBox("Manual RC Display")
-        self.manual_RC_display_groupbox.setGeometry(
-            QtCore.QRect(10, 10, 360, 105))
-        self.manual_RC_display_groupbox.setMinimumSize(QtCore.QSize(360, 105))
-        self.manual_RC_display_groupbox.setMaximumSize(QtCore.QSize(360, 105))
-        self.manual_RC_display_groupbox.setObjectName(
-            _fromUtf8("manualRCDisplayGroupBox"))
-        self.manual_RC_display_button = QtGui.QPushButton(
-            self.manual_RC_display_groupbox)
-        self.manual_RC_display_button.setGeometry(QtCore.QRect(5, 20, 300, 25))
-        self.manual_RC_display_button.setText("R-C-Display")
-        self.manual_RC_display_save_button = QtGui.QPushButton(
-            self.manual_RC_display_groupbox)
-        self.manual_RC_display_save_button.setGeometry(
-            QtCore.QRect(5, 55, 300, 25))
-        self.manual_RC_display_save_button.setText("Save R-C-Displayer as...")
-        self.manual_RC_display_checkbox = QtGui.QCheckBox(
-            self.manual_RC_display_groupbox)
-        self.manual_RC_display_checkbox.setGeometry(
-            QtCore.QRect(5, 80, 300, 20))
-        self.manual_RC_display_checkbox.setText("Export Matfiles (Dymola "
-                                                "Input Data)")
-        self.modelling_groupbox = QtGui.QGroupBox("Modelling")
-        self.modelling_groupbox.setGeometry(QtCore.QRect(10, 120, 360, 150))
-        self.modelling_groupbox.setMinimumSize(QtCore.QSize(360, 150))
-        self.modelling_groupbox.setMaximumSize(QtCore.QSize(360, 150))
-        self.modelling_groupbox.setObjectName(_fromUtf8("modellingGroupBox"))
-        self.modelling_dymola_project_label = QtGui.QLabel(
-            self.modelling_groupbox)
-        self.modelling_dymola_project_label.setGeometry(
-            QtCore.QRect(5, 20, 80, 25))
-        self.modelling_dymola_project_label.setText("Dymola Project:")
-        self.modelling_dymola_project_lineedit = QtGui.QLineEdit(
-            self.modelling_groupbox)
-        self.modelling_dymola_project_lineedit.setGeometry(
-            QtCore.QRect(90, 20, 215, 25))
-        self.modelling_dymola_project_lineedit.setText(
-            self.guiinfo.dymolaProject)
-        self.modelling_building_label = QtGui.QLabel(self.modelling_groupbox)
-        self.modelling_building_label.setGeometry(QtCore.QRect(5, 55, 80, 25))
-        self.modelling_building_label.setText("Building model:")
-        self.modelling_building_combobox = QtGui.QComboBox(
-            self.modelling_groupbox)
-        self.modelling_building_combobox.setGeometry(
-            QtCore.QRect(90, 55, 215, 25))
-        for building_model in self.guiinfo.building_model:
-            self.modelling_building_combobox.addItem(building_model)
-        self.modelling_building_combobox.setCurrentIndex(4)
-        self.modelling_ventilation_label = QtGui.QLabel(
-            self.modelling_groupbox)
-        self.modelling_ventilation_label.setGeometry(
-            QtCore.QRect(5, 90, 80, 25))
-        self.modelling_ventilation_label.setText("Ventilation model:")
-        self.modelling_ventilation_combobox = QtGui.QComboBox(
-            self.modelling_groupbox)
-        self.modelling_ventilation_combobox.setGeometry(
-            QtCore.QRect(90, 90, 215, 25))
-        for ventilation_model in self.guiinfo.ventilation_model:
-            self.modelling_ventilation_combobox.addItem(ventilation_model)
-        self.modelling_ventilation_combobox.setCurrentIndex(5)
-
+        """
         self.export_groupbox = QtGui.QGroupBox("Export")
         self.export_groupbox.setGeometry(QtCore.QRect(380, 245, 360, 160))
         self.export_groupbox.setMinimumSize(QtCore.QSize(360, 160))
@@ -3910,15 +3850,15 @@ class MainUI(QDialog):
         #    self.clickBrowseButton)
         for template_name in os.listdir(self.create_path_to_template_folder()):
             self.export_create_template_combobox.addItem(template_name)
-
+        """
         self.heatingload_calculation_groupbox = QtGui.QGroupBox("Heating Load"
                                                                 " Calculation")
         self.heatingload_calculation_groupbox.setGeometry(
-            QtCore.QRect(10, 245, 360, 160))
+            QtCore.QRect(10, 245, 315, 160))
         self.heatingload_calculation_groupbox.setMinimumSize(
-            QtCore.QSize(360, 160))
+            QtCore.QSize(315, 160))
         self.heatingload_calculation_groupbox.setMaximumSize(
-            QtCore.QSize(360, 160))
+            QtCore.QSize(315, 160))
         self.heatingload_calculation_groupbox.setObjectName(
             _fromUtf8("heatingloadCalculationGroupBox"))
         self.heatingload_avg_temp_outer_label_1 = QtGui.QLabel(
@@ -3941,7 +3881,7 @@ class MainUI(QDialog):
             self.heatingload_calculation_groupbox)
         self.heatingload_avg_temp_inner_label_1.setGeometry(
             QtCore.QRect(5, 55, 90, 25))
-        self.heatingload_avg_temp_inner_label_1.setText("Inner Temp:")
+        self.heatingload_avg_temp_inner_label_1.setText("Indoor Temp:")
         self.heatingload_avg_temp_inner_lineedit = QtGui.QLineEdit(
             self.heatingload_calculation_groupbox)
         self.heatingload_avg_temp_inner_lineedit.setGeometry(
@@ -3957,7 +3897,7 @@ class MainUI(QDialog):
             self.heatingload_calculation_groupbox)
         self.heatingload_air_changerate_label.setGeometry(
             QtCore.QRect(5, 90, 90, 25))
-        self.heatingload_air_changerate_label.setText("Air Changerate:")
+        self.heatingload_air_changerate_label.setText("Airchange Rate:")
         self.heatingload_air_changerate_combobox = QtGui.QComboBox(
             self.heatingload_calculation_groupbox)
         self.heatingload_air_changerate_combobox.setGeometry(
@@ -3970,28 +3910,11 @@ class MainUI(QDialog):
             QtCore.QRect(5, 125, 290, 20))
         self.heatingload_old_calculation_checkbox.setText("Use old heatingload"
                                                           " calculation")
-
-        self.pyled_RC_display_groupbox = QtGui.QGroupBox("Pyled RC Display")
-        self.pyled_RC_display_groupbox.setGeometry(
-            QtCore.QRect(380, 10, 360, 70))
-        self.pyled_RC_display_groupbox.setMinimumSize(QtCore.QSize(360, 105))
-        self.pyled_RC_display_groupbox.setMaximumSize(QtCore.QSize(360, 105))
-        self.pyled_RC_display_groupbox.setObjectName(
-            _fromUtf8("pyledRCDisplayGroupBox"))
-        self.pyled_RC_display_button = QtGui.QPushButton(
-            self.pyled_RC_display_groupbox)
-        self.pyled_RC_display_button.setGeometry(QtCore.QRect(5, 20, 305, 25))
-        self.pyled_RC_display_button.setText("Auto...")
-        self.pyled_RC_display_checkbox = QtGui.QCheckBox(
-            self.pyled_RC_display_groupbox)
-        self.pyled_RC_display_checkbox.setGeometry(
-            QtCore.QRect(5, 45, 305, 25))
-        self.pyled_RC_display_checkbox.setText("Read windows and Outer Walls "
-                                               "from XML")
+        
         self.simulation_groupbox = QtGui.QGroupBox("Simulation")
-        self.simulation_groupbox.setGeometry(QtCore.QRect(380, 85, 310, 150))
-        self.simulation_groupbox.setMinimumSize(QtCore.QSize(360, 150))
-        self.simulation_groupbox.setMaximumSize(QtCore.QSize(360, 150))
+        self.simulation_groupbox.setGeometry(QtCore.QRect(380, 85, 315, 160))
+        self.simulation_groupbox.setMinimumSize(QtCore.QSize(315, 160))
+        self.simulation_groupbox.setMaximumSize(QtCore.QSize(315, 160))
         self.simulation_groupbox.setObjectName(_fromUtf8("simulationGroupBox"))
         self.simulation_runtime_label_1 = QtGui.QLabel(
             self.simulation_groupbox)
@@ -4045,11 +3968,11 @@ class MainUI(QDialog):
         self.boundary_conditions_groupbox = QtGui.QGroupBox("Boundary"
                                                             " Conditions")
         self.boundary_conditions_groupbox.setGeometry(
-            QtCore.QRect(10, 400, 725, 125))
+            QtCore.QRect(10, 400, 620, 125))
         self.boundary_conditions_groupbox.setMinimumSize(
-            QtCore.QSize(725, 125))
+            QtCore.QSize(620, 125))
         self.boundary_conditions_groupbox.setMaximumSize(
-            QtCore.QSize(725, 125))
+            QtCore.QSize(620, 125))
         self.boundary_conditions_groupbox.setObjectName(
             _fromUtf8("boundaryConditionsGroupBox"))
         self.simulation_AHU_label = QtGui.QLabel(
@@ -4084,7 +4007,7 @@ class MainUI(QDialog):
         self.simulation_tset_label = QtGui.QLabel(
             self.boundary_conditions_groupbox)
         self.simulation_tset_label.setGeometry(QtCore.QRect(5, 90, 90, 25))
-        self.simulation_tset_label.setText("Average Temperature File:")
+        self.simulation_tset_label.setText("Set Temperature File:")
         self.simulation_tset_lineedit = QtGui.QLineEdit(
             self.boundary_conditions_groupbox)
         self.simulation_tset_lineedit.setGeometry(
@@ -4094,21 +4017,31 @@ class MainUI(QDialog):
             self.boundary_conditions_groupbox)
         self.simulation_tset_button.setGeometry(QtCore.QRect(535, 90, 80, 25))
         self.simulation_tset_button.setText("Browse")
+        
+        self.simulation_save_cancel_groupbox = QtGui.QGroupBox()
+        self.simulation_save_cancel_groupbox.setGeometry(
+            QtCore.QRect(10, 530, 620, 35))
+        self.simulation_save_cancel_groupbox.setMinimumSize(
+            QtCore.QSize(620, 35))
+        self.simulation_save_cancel_groupbox.setMaximumSize(
+            QtCore.QSize(620, 35))
+        self.simulation_save_button = QtGui.QPushButton(
+            self.simulation_save_cancel_groupbox)
+        self.simulation_save_button.setText("Save")
+        self.simulation_save_button.setGeometry(QtCore.QRect(95, 5, 120, 25))
+        self.simulation_cancel_button = QtGui.QPushButton(
+            self.simulation_save_cancel_groupbox)
+        self.simulation_cancel_button.setText("Cancel")
+        self.simulation_cancel_button.setGeometry(QtCore.QRect(390, 5, 120, 25))
 
         self.simulation_window_ui_layout.addWidget(
-            self.manual_RC_display_groupbox, 1, 1)
+            self.simulation_groupbox, 1, 1)
         self.simulation_window_ui_layout.addWidget(
-            self.modelling_groupbox, 2, 1)
+            self.heatingload_calculation_groupbox, 1, 2)
         self.simulation_window_ui_layout.addWidget(
-            self.export_groupbox, 3, 1)
+            self.boundary_conditions_groupbox, 2, 1)
         self.simulation_window_ui_layout.addWidget(
-            self.pyled_RC_display_groupbox, 1, 2)
-        self.simulation_window_ui_layout.addWidget(
-            self.simulation_groupbox, 2, 2)
-        self.simulation_window_ui_layout.addWidget(
-            self.heatingload_calculation_groupbox, 3, 2)
-        self.simulation_window_ui_layout.addWidget(
-            self.boundary_conditions_groupbox, 4, 1)
+            self.simulation_save_cancel_groupbox, 4, 1)
         self.simulation_window_ui.setWindowModality(Qt.ApplicationModal)
         self.simulation_window_ui.show()
 

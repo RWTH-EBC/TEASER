@@ -92,8 +92,8 @@ class GUIInfo():
                                   "Full AHU System"]
         self.avgTempOuter = "-12"
         self.innerTemp = "20"
-        self.airchange_rate = ["airtight", "not as tight",
-                                           "really little tight"]
+        self.airchange_rate = ["airtight", "semi pervious to air",
+                                           "pervious to air"]
         self.ahuFile = "./Tables/Melaten/AHU_Institut 4.mat"
         self.internalGainsFile = \
             "./Tables/Melaten/InternalGains_Institut 4.mat"
