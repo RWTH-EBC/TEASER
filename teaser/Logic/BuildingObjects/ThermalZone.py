@@ -738,9 +738,7 @@ class ThermalZone(object):
         ass_error_1 = "Use condition has to be an instance of UseConditions()"
 
         assert type(value).__name__ == ("UseConditions") or \
-            type(value).__name__ == ("UseConditionsOffice18599") or \
-            type(value).__name__ == ("UseConditionsResedential18599"),\
-            ass_error_1
+            type(value).__name__ == ("UseConditions18599"), ass_error_1
 
         if value is not None:
             self._use_conditions = value

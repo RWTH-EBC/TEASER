@@ -19,7 +19,7 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 from teaser.Logic.BuildingObjects.TypeBuildings.\
-                       UseConditionsOffice18599 import UseConditionsOffice18599
+                       UseConditions18599 import UseConditions18599
 
 
 def load_teaser_xml(path, project):
@@ -63,7 +63,7 @@ def load_teaser_xml(path, project):
     # Parse the zones
     for zone_count in (root.findall("Zonen/Zone")):
         thermal_zone = ThermalZone(building)
-        use_conditions = UseConditionsOffice18599()
+        use_conditions = UseConditions18599()
         thermal_zone.name = zone_count.find("Name").text
         # not sure we need this (use_conditions.usage), but first keep it
         use_conditions.usage = zone_count.find("Typ").text
