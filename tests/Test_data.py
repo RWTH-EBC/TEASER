@@ -166,14 +166,10 @@ class Test_teaser(object):
         prj.export_record('CitiesType_old')
         prj.calc_all_buildings('ebc')
         prj.export_record('CitiesRWin')
-        prj.set_default()#
 
     def test_export_parameters_txt(self):
         '''test of the export of the readable parameter output'''
         
-        bldg1 = HelpTest.building_test2(prj)
-        prj.calc_all_buildings('ebc')
-        prj.export_record('CitiesRWin')
         prj.export_parameters_txt()
         prj.set_default()
     
