@@ -707,6 +707,35 @@ class Project(object):
                 else:
                     pass
 
+    def export_parameters_txt(self, path=None):
+        '''Exports parameters of all buildings in a readable text file
+
+        Parameters
+        ----------
+
+        path : string
+            if the Files should not be stored in OutputData, an alternative
+            can be specified  
+
+        '''
+        if path is None:
+            path = "OutputData\\"+self.name
+        else:
+            path = path+"\\"+self.name
+
+        for bldg in self.list_of_buildings:
+            bldg_path = path + "\\" + bldg.name + "\\"
+            utilis.create_path(utilis.get_full_path(bldg_path))
+            readable_template = Template(
+                filename=utilis.get_full_path(
+                    "InputData\\ReadableOutputTemplate\\ReadableBuilding"))
+
+            out_file = open(utilis.get_full_path
+                            (bldg_path+"ReadableOutput.txt"), 'w')
+            out_file.write(readable_template.render_unicode
+                           (bldg=bldg, prj = self))
+            out_file.close()
+
     def _help_package(self, path, name, uses=None):
         '''creates a package.mo file
 
