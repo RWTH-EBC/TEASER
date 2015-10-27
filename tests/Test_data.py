@@ -141,19 +141,20 @@ class Test_teaser(object):
 
         prj.set_default()
         prj.type_bldg_office(name="TestBuilding",
-                 year_of_construction=1988,
-                 number_of_floors=3,
-                 height_of_floors=3,
-                 net_leased_area=2500 ,
-                 office_layout=0,
-                 window_layout=0,
-                 construction_type="heavy")
+                             year_of_construction=1988,
+                             number_of_floors=3,
+                             height_of_floors=3,
+                             net_leased_area=2500,
+                             office_layout=0,
+                             window_layout=0,
+                             construction_type="heavy")
 
         '''
         general parameters
         '''
         assert len(prj.list_of_buildings[0].thermal_zones) == 6
-        assert round(prj.list_of_buildings[0].get_outer_wall_area(-2), 0) == 958
+        assert round(
+            prj.list_of_buildings[0].get_outer_wall_area(-2), 0) == 958
         '''
         zone specific parameters
         '''
@@ -168,10 +169,8 @@ class Test_teaser(object):
                 assert i.area == 100
             if i.name == "ICT":
                 assert i.area == 50
-            if i.name == "Floor"   :
+            if i.name == "Floor":
                 assert i.area == 625
-
-
 
 
     '''methods in Project, these tests only test if the API function works,
