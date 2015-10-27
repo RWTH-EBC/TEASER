@@ -708,9 +708,9 @@ class Project(object):
                     pass
 
     def export_parameters_txt(self, path=None):
-        '''Exports values and parameters of the used building in a readable text function
+        '''Exports parameters of all buildings in a readable text file
 
-        Parameters:
+        Parameters
         ----------
 
         path : string
@@ -723,17 +723,15 @@ class Project(object):
         else:
             path = path+"\\"+self.name
 
-        utilis.create_path(utilis.get_full_path(path))
-
         for bldg in self.list_of_buildings:
             bldg_path = path + "\\" + bldg.name + "\\"
-            print(bldg_path)
+            utilis.create_path(utilis.get_full_path(bldg_path))
             readable_template = Template(
                 filename=utilis.get_full_path(
                     "InputData\\ReadableOutputTemplate\\ReadableBuilding"))
 
             out_file = open(utilis.get_full_path
-                            (bldg_path+"\\"+"ReadableOutput.txt"), 'w')
+                            (bldg_path+"ReadableOutput.txt"), 'w')
             out_file.write(readable_template.render_unicode
                            (bldg=bldg, mod_prj=self.modelica_project))
             out_file.close()
