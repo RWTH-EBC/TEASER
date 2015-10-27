@@ -5,7 +5,7 @@ building type = ${bldg.type_of_building} -
 building year of construction = ${bldg.year_of_construction} - 
 building number of floors = ${bldg.number_of_floors} -
 building height of floors = ${bldg.height_of_floors} m 
-building net leased area = ${bldg.net_leased_area} m²
+building net leased area = ${bldg.net_leased_area} m^2
 
 static heat load = ${round_2(bldg.sum_heating_load)} W
 static cooling load = 0
@@ -15,8 +15,8 @@ number of thermal zones = ${get_number_of_zones(bldg.thermal_zones)} -
 %for zone in bldg.thermal_zones:
 ---- ${zone.name} ----
 
-    ${zone.name} area = ${zone.area} m² (RoomArea)
-    ${zone.name} volume = ${zone.volume} m³ (Vair)
+    ${zone.name} area = ${zone.area} m^2 (RoomArea)
+    ${zone.name} volume = ${zone.volume} m^3 (Vair)
     ${zone.name} number of orientations = ${get_n(zone.outer_walls)} - (n)
 
   * Activity, usage and systems engineering *
@@ -26,8 +26,8 @@ number of thermal zones = ${get_number_of_zones(bldg.thermal_zones)} -
     heating power of lighting = ${zone.use_conditions.lighting_power} W (LightingPower)
     Ratio of convective heat from overall heat output = 0.5 (RatioConvectiveHeatLighting)
     upper limit of heater = ${round_2(zone.heating_load)} W (h_heater)
-    minimum specific air flow supplied by the AHU = ${zone.use_conditions.min_ahu} m³/(h m²) (minAHU)
-    maximum specific air flow supplied by the AHU = ${zone.use_conditions.max_ahu} m³/(h m²) (maxAHU)
+    minimum specific air flow supplied by the AHU = ${zone.use_conditions.min_ahu} m^3/(h m^2) (minAHU)
+    maximum specific air flow supplied by the AHU = ${zone.use_conditions.max_ahu} m^3/(h m^2) (maxAHU)
     AHU functionality = ${on_off_checker(zone.use_conditions.with_ahu)} - (withAHU)
     lower limit of cooler = 0 W (l_cool)
     total energy transmittance = ${round_2(zone.weighted_g_value)} - (g)
@@ -38,26 +38,28 @@ number of thermal zones = ${get_number_of_zones(bldg.thermal_zones)} -
     list of window areas = ${area_string(zone.windows)} - (Aw)
     windows functionality = ${on_off_checker(zone.windows)} - (withWindows)
     weigthfactors for the windows = ${weightfactors_to_string(zone.weightfactor_win)} - (weightfactorswindow)
-    resistor window = ${round_2(zone.r1_win)} K/W (RWin)
     coefficient of absorption of the window = 0.03 - (awin)
-    window's coefficient of heat transfer (inner side) = ${round_2(zone.alpha_conv_outer_win)} W/(m² K) (alphaConvWinOuter)
-    window's coefficient of heat transfer (outer side) = ${zone.alpha_conv_inner_win} W/(m² K) (alphaConvWinInner)
+    %if prj.calculation_method == "ebc":
+    resistor window = ${round_2(zone.r1_win)} K/W (RWin)
+    window's coefficient of heat transfer (inner side) = ${zone.alpha_conv_inner_win} W/(m^2 K) (alphaConvWinInner)
+    window's coefficient of heat transfer (outer side) = ${round_2(zone.alpha_conv_outer_win)} W/(m^2 K) (alphaConvWinOuter)
+    %endif
 
 
   * Inner Walls *
 
-    inner wall area = ${round_2(zone.area_iw)} m² (Ai)
-    inner wall's coefficient of heat transfer = ${round_2(zone.alpha_conv_iw)} W/(m² K) (alphaiwi)
+    inner wall area = ${round_2(zone.area_iw)} m^2 (Ai)
+    inner wall's coefficient of heat transfer = ${round_2(zone.alpha_conv_iw)} W/(m^2 K) (alphaiwi)
     inner walls functionality = ${on_off_checker(zone.inner_walls)} - (withInnerwalls)
     resistor 1 inner wall = ${zone.r1_iw} K/W (R1i)
     capacity 1 inner wall = ${round_2(zone.c1_iw)} J/K  (C1i)
 
   * Outer Walls *
 
-    outer wall area = ${round_2(zone.area_ow)} m² (Ao)
+    outer wall area = ${round_2(zone.area_ow)} m^2 (Ao)
     outer wall's coefficient of absorption = 0.7 - (aowo) 
-    outer wall's coefficient of heat transfer (inner side) = ${round_2(zone.alpha_conv_inner_ow)} W/(m² K)  (alphaowi)
-    outer wall's coefficient of heat transfer (outer side) = ${round_2(zone.alpha_comb_outer_ow)} W/(m² K) (alphaowo)
+    outer wall's coefficient of heat transfer (inner side) = ${round_2(zone.alpha_conv_inner_ow)} W/(m^2 K)  (alphaowi)
+    outer wall's coefficient of heat transfer (outer side) = ${round_2(zone.alpha_comb_outer_ow)} W/(m^2 K) (alphaowo)
     weigthfactors for the walls = ${weightfactors_to_string(zone.weightfactor_ow)} - (weightfactorswall)
     weigthfactors for the ground = ${weightfactors_to_string_ground(zone.weightfactor_ground)} - (weightfactorground)
     outer walls functionality = ${on_off_checker(zone.outer_walls)} - (withOuterwalls)

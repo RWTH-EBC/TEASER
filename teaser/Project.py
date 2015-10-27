@@ -733,7 +733,7 @@ class Project(object):
             out_file = open(utilis.get_full_path
                             (bldg_path+"ReadableOutput.txt"), 'w')
             out_file.write(readable_template.render_unicode
-                           (bldg=bldg, mod_prj=self.modelica_project))
+                           (bldg=bldg, prj = self))
             out_file.close()
 
     def _help_package(self, path, name, uses=None):
