@@ -133,6 +133,47 @@ class Test_teaser(object):
         assert round(thermalZone.weightfactor_win[0], 5) == 0.33333
         assert round(thermalZone.weightfactor_ground[0], 5) == 0.54398
 
+    def test_type_bldg_office_with_calc(self):
+        '''
+        Verification of the type building generation of an office building. 
+        Values are compared with fixme.
+        '''
+
+        prj.set_default()
+        prj.type_bldg_office(name="TestBuilding",
+                 year_of_construction=1988,
+                 number_of_floors=3,
+                 height_of_floors=3,
+                 net_leased_area=2500 ,
+                 office_layout=0,
+                 window_layout=0,
+                 construction_type="heavy")
+
+        '''
+        general parameters
+        '''
+        assert len(prj.list_of_buildings[0].thermal_zones) == 6
+        assert round(prj.list_of_buildings[0].get_outer_wall_area(-2), 0) == 958
+        '''
+        zone specific parameters
+        '''
+        for i in prj.list_of_buildings[0].thermal_zones:
+            if i.name == "Meeting":
+                assert i.area == 100
+            if i.name == "Storage":
+                assert i.area == 375
+            if i.name == "Office":
+                assert i.area == 1250
+            if i.name == "Restroom":
+                assert i.area == 100
+            if i.name == "ICT":
+                assert i.area == 50
+            if i.name == "Floor"   :
+                assert i.area == 625
+
+
+
+
     '''methods in Project, these tests only test if the API function works,
     not if it produces reliable results.'''
     def test_load_save_project(self):
