@@ -10,13 +10,14 @@ building net leased area = ${bldg.net_leased_area} m²
 static heat load = ${round_2(bldg.sum_heating_load)} W
 static cooling load = 0
 
-number of thermal zones = ${get_n(bldg.thermal_zones)} - 
+number of thermal zones = ${get_number_of_zones(bldg.thermal_zones)} - 
 
 %for zone in bldg.thermal_zones:
 ---- ${zone.name} ----
 
-    ${zone.name} area = ${zone.area} m²
-    ${zone.name} volume = ${zone.volume} m³
+    ${zone.name} area = ${zone.area} m² (RoomArea)
+    ${zone.name} volume = ${zone.volume} m³ (Vair)
+    ${zone.name} number of orientations = ${get_n(zone.outer_walls)} - (n)
 
   * Activity, usage and systems engineering *
 
@@ -37,6 +38,11 @@ number of thermal zones = ${get_n(bldg.thermal_zones)} -
     list of window areas = ${area_string(zone.windows)} - (Aw)
     windows functionality = ${on_off_checker(zone.windows)} - (withWindows)
     weigthfactors for the windows = ${weightfactors_to_string(zone.weightfactor_win)} - (weightfactorswindow)
+    resistor window = ${round_2(zone.r1_win)} K/W (RWin)
+    coefficient of absorption of the window = 0.03 - (awin)
+    window's coefficient of heat transfer (inner side) = ${round_2(zone.alpha_conv_outer_win)} W/(m² K) (alphaConvWinOuter)
+    window's coefficient of heat transfer (outer side) = ${zone.alpha_conv_inner_win} W/(m² K) (alphaConvWinInner)
+
 
   * Inner Walls *
 
@@ -64,6 +70,19 @@ number of thermal zones = ${get_n(bldg.thermal_zones)} -
 
 ##get n
 <%def name="get_n(list)", filter="trim">
+  <%
+  n=0
+  for element in list:
+    if type(element).__name__ == "OuterWall" or type(element).__name__ == "Rooftop":
+      n += 1
+    else:
+      pass
+  return n
+  %>
+</%def>
+
+##get n
+<%def name="get_number_of_zones(list)", filter="trim">
   <%
   n=0
   for element in list:
