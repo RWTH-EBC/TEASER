@@ -979,6 +979,9 @@ class MainUI(QDialog):
                                     self.material_transmittance_textbox.text()
                                 break
 
+    def save_changed_simulation_values(self):
+        todo=0
+
     def save_changed_element_values(self):
         for zone in self.current_building.thermal_zones:
             if zone.internal_id == self.current_zone.internal_id:
@@ -4051,6 +4054,11 @@ class MainUI(QDialog):
             self.simulation_save_cancel_groupbox)
         self.simulation_save_button.setText("Save")
         self.simulation_save_button.setGeometry(QtCore.QRect(95, 5, 120, 25))
+        self.connect(self.simulation_save_button, SIGNAL("clicked()"),
+                     self.save_changed_simulation_values)
+        self.connect(self.simulation_save_button, SIGNAL(
+                "clicked()"), self.simulation_window_ui, QtCore.SLOT(
+                "close()"))
         self.simulation_cancel_button = QtGui.QPushButton(
             self.simulation_save_cancel_groupbox)
         self.simulation_cancel_button.setText("Cancel")
