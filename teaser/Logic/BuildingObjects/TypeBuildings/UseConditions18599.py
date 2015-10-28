@@ -7,7 +7,7 @@ import teaser.Data.SchemaBindings.UseConditions18599Bind as uc_bind
 import teaser.Logic.Utilis as utilis
 
 
-class UseConditionsOffice18599(UseConditions):
+class UseConditions18599(UseConditions):
     '''Use Conditions DIN 18599
 
     CLass that contains the boundary conditions of use for non-residential
@@ -157,10 +157,10 @@ class UseConditionsOffice18599(UseConditions):
     '''
 
     def __init__(self, parent=None):
-        '''Constructor UseConditionsOffice18599
+        '''Constructor UseConditions18599
         '''
 
-        super(UseConditionsOffice18599, self).__init__(parent)
+        super(UseConditions18599, self).__init__(parent)
 
         self.usage = "single office"
 

@@ -14,7 +14,7 @@ import teaser.Logic.Utilis as utilis
 
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599 import UseConditionsOffice18599
+from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599 import UseConditions18599
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
@@ -396,7 +396,7 @@ def load_teaser_xml(path, prj):
             # zone.use_conditions.typical_length = pyxb_zone.typical_length
             # zone.use_conditions.typical_width = pyxb_zone.typical_width
          
-            zone.use_conditions = UseConditionsOffice18599()
+            zone.use_conditions = UseConditions18599()
             
             pyxb_use = pyxb_zone.UseCondition.UseConditionsOffice18599
             
