@@ -232,7 +232,7 @@ class Residential(TypeBuilding):
         if self.residential_layout == 0:
             self._est_facade_to_floor_area = 0.66
         elif self.residential_layout == 1:
-            self.est_facade_to_floor_area = 0.8
+            self._est_facade_to_floor_area = 0.8
 
         self._est_factor_heated_attic = 0.0  # f_TB_DG
         self._est_area_per_floor = 0.0  # p_DA
