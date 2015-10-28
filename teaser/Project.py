@@ -59,7 +59,7 @@ class Project(object):
         self.modelica_project = self.name
         self.weather_file_name = "TRY_5_Essen.txt"
         self.list_of_buildings = []
-        self.calculation_method = "vdi"
+        self._calculation_method = "vdi"
 
         self.load_data = load_data
         self._type_element_file = None
@@ -124,6 +124,12 @@ class Project(object):
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
+        
+        if calculation_core == self.calculation_method:
+            pass
+        else:
+            self.calculation_method = calculation_core
+        
         for bldg in self.list_of_buildings:
 
             bldg.calc_building_parameter(calculation_core)
@@ -812,3 +818,16 @@ class Project(object):
     def type_element_file(self, value):
         self._type_element_file = value
         self.instantiate_data_class(value)
+
+    @property
+    def calculation_method(self):
+        return self._calculation_method
+
+    @calculation_method.setter
+    def calculation_method(self, value):
+        
+        ass_error_1 = "calculation_method has to be vdi or ebc"
+
+        assert value != "ebc" or value != "vdi", ass_error_1
+                
+        self._calculation_method = value
