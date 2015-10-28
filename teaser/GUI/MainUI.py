@@ -878,6 +878,16 @@ class MainUI(QDialog):
         self.open_simulation_label = QtGui.QLabel(self.ribbon_group_box)
         self.open_simulation_label.setGeometry(QtCore.QRect(605, 80, 70, 25))
         self.open_simulation_label.setText("Open Simu-\n lation Tab")
+        self.open_export_button = PictureButton(QtGui.QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Keyschedule_rc4.png")),
+            self.ribbon_widget)
+        self.open_export_button.setGeometry(QtCore.QRect(685, 5, 70, 70))
+        self.open_export_button.clicked.connect(
+            self.show_export_window)
+        self.open_export_button.setToolTip("Opens the Export Tab.")
+        self.open_export_label = QtGui.QLabel(self.ribbon_group_box)
+        self.open_export_label.setGeometry(QtCore.QRect(685, 80, 70, 25))
+        self.open_export_label.setText("Open Ex-\n port Tab")
 
         self.side_animation = QtCore.QPropertyAnimation(
             self.side_bar_widget, "geometry")
@@ -1052,7 +1062,7 @@ class MainUI(QDialog):
         """ Checks if all necessary values to create a new zone have been
         put in """
 
-        if self.generate_zone_id_line_edit.text() == "":
+        if self.generate_zone_name_line_edit.text() == "":
             QtGui.QMessageBox.warning(self,
                                       u"Can't add Zone!",
                                       u"You need to fill out the Name field.")
@@ -1064,12 +1074,12 @@ class MainUI(QDialog):
             QtGui.QMessageBox.warning(self,
                                       u"Can't add Zone!",
                                       u"You need to fill out the Usage field.")
-        if self.generate_zone_id_line_edit.text() != \
+        if self.generate_zone_name_line_edit.text() != \
             "" and self.generate_zone_area_line_edit.text() != ""\
                 and self.generate_zone_usage_combobox.currentText() != "":
 
             Controller.click_add_zone_button(
-                self.current_building, self.generate_zone_id_line_edit.text(),
+                self.current_building, self.generate_zone_name_line_edit.text(),
                 self.generate_zone_area_line_edit.text(),
                 self.generate_zone_usage_combobox.currentText())
             self.display_current_building()
@@ -1487,7 +1497,7 @@ class MainUI(QDialog):
                 list_of_buildings[self.project.list_of_buildings.
                                   index(self.current_building)].thermal_zones:
                 item = TrackableItem(
-                    " Name:\t".expandtabs(8) + str(zone.name) + 
+                    "Name:\t".expandtabs(8) + str(zone.name) + 
                     "\n" + "Type:\t".expandtabs(11) + 
                     str(type(zone).__name__) + "\n Area:\t".expandtabs(11) + 
                     str(zone.area), zone.internal_id)
@@ -1572,7 +1582,7 @@ class MainUI(QDialog):
 
             self.layer_model.clear()
             for layer in self.current_element.layer:
-                item = TrackableItem(" Name:\t".expandtabs(8) + 
+                item = TrackableItem("Name:\t".expandtabs(8) + 
                                      str(layer.id) + "\n" + 
                                      "Material:\t".expandtabs(11) + 
                                      str(layer.material.name) + 
@@ -1673,7 +1683,7 @@ class MainUI(QDialog):
                                       u"No building error!",
                                       u"You need to specify a building first.")
         else:
-            self.generateZoneUI()
+            self.generate_zone_ui()
 
     def switch_material(self):
         if self.is_switchable:
@@ -3390,62 +3400,62 @@ class MainUI(QDialog):
         self.popup_window_type_building.setWindowModality(Qt.ApplicationModal)
         self.popup_window_type_building.show()
 
-    def generateZoneUI(self):
-        self.generateZoneUIPage = QtGui.QWizardPage()
-        self.generateZoneUIPage.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        self.generateZoneUIPage.setWindowTitle("Create new Zone")
-        self.generateZoneUIPage.setFixedWidth(350)
-        self.generateZoneUIPage.setFixedHeight(200)
-        self.generateZoneWindowLayout = QtGui.QGridLayout()
-        self.generateZoneUIPage.setLayout(self.generateZoneWindowLayout)
+    def generate_zone_ui(self):
+        self.generate_zone_ui_page = QtGui.QWizardPage()
+        self.generate_zone_ui_page.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.generate_zone_ui_page.setWindowTitle("Create new Zone")
+        self.generate_zone_ui_page.setFixedWidth(350)
+        self.generate_zone_ui_page.setFixedHeight(200)
+        self.generate_zone_window_layout = QtGui.QGridLayout()
+        self.generate_zone_ui_page.setLayout(self.generate_zone_window_layout)
 
-        self.generateZoneIdLabel = QtGui.QLabel("Id: ")
-        self.generate_zone_id_line_edit = QtGui.QLineEdit()
-        self.generate_zone_id_line_edit.setObjectName(
-            "generate_zone_id_line_edit")
+        self.generate_zone_name_label = QtGui.QLabel("Name: ")
+        self.generate_zone_name_line_edit = QtGui.QLineEdit()
+        self.generate_zone_name_line_edit.setObjectName(
+            "generate_zone_name_line_edit")
 
-        self.generateZoneAreaLabel = QtGui.QLabel("Area: ")
+        self.generate_zone_area_label = QtGui.QLabel("Area: ")
         self.generate_zone_area_line_edit = QtGui.QLineEdit()
         self.generate_zone_area_line_edit.setObjectName(
             "generate_zone_area_line_edit")
 
-        self.generateZoneUsageLabel = QtGui.QLabel("Type: ")
+        self.generate_zone_usage_label = QtGui.QLabel("Type: ")
         self.generate_zone_usage_combobox = QtGui.QComboBox()
         self.generate_zone_usage_combobox.setObjectName(
             "generate_zone_usage_combobox")
         for zone_type in self.guiinfo.thermal_zone_types:
             self.generate_zone_usage_combobox.addItem(zone_type)
 
-        self.generateZoneSaveButton = QtGui.QPushButton()
-        self.generateZoneSaveButton.setText("Save")
-        self.connect(self.generateZoneSaveButton, SIGNAL(
+        self.generate_zone_save_button = QtGui.QPushButton()
+        self.generate_zone_save_button.setText("Save")
+        self.connect(self.generate_zone_save_button, SIGNAL(
             "clicked()"), self.check_inputs_new_zone)
-        self.connect(self.generateZoneSaveButton, SIGNAL(
-            "clicked()"), self.generateZoneUIPage, QtCore.SLOT("close()"))
+        self.connect(self.generate_zone_save_button, SIGNAL(
+            "clicked()"), self.generate_zone_ui_page, QtCore.SLOT("close()"))
 
-        self.generateZoneCancelButton = QtGui.QPushButton()
-        self.generateZoneCancelButton.setText("Cancel")
-        self.connect(self.generateZoneCancelButton, SIGNAL("clicked()"),
-                     self.generateZoneUIPage, QtCore.SLOT("close()"))
+        self.generate_zone_cancel_button = QtGui.QPushButton()
+        self.generate_zone_cancel_button.setText("Cancel")
+        self.connect(self.generate_zone_cancel_button, SIGNAL("clicked()"),
+                     self.generate_zone_ui_page, QtCore.SLOT("close()"))
 
-        self.generateZoneWindowLayout.addWidget(
-            self.generateZoneIdLabel, 1, 0)
-        self.generateZoneWindowLayout.addWidget(
-            self.generate_zone_id_line_edit, 1, 1)
-        self.generateZoneWindowLayout.addWidget(
-            self.generateZoneAreaLabel, 2, 0)
-        self.generateZoneWindowLayout.addWidget(
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_name_label, 1, 0)
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_name_line_edit, 1, 1)
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_area_label, 2, 0)
+        self.generate_zone_window_layout.addWidget(
             self.generate_zone_area_line_edit, 2, 1)
-        self.generateZoneWindowLayout.addWidget(
-            self.generateZoneUsageLabel, 3, 0)
-        self.generateZoneWindowLayout.addWidget(
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_usage_label, 3, 0)
+        self.generate_zone_window_layout.addWidget(
             self.generate_zone_usage_combobox, 3, 1)
-        self.generateZoneWindowLayout.addWidget(
-            self.generateZoneSaveButton, 4, 0)
-        self.generateZoneWindowLayout.addWidget(
-            self.generateZoneCancelButton, 4, 1)
-        self.generateZoneUIPage.setWindowModality(Qt.ApplicationModal)
-        self.generateZoneUIPage.show()
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_save_button, 4, 0)
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_cancel_button, 4, 1)
+        self.generate_zone_ui_page.setWindowModality(Qt.ApplicationModal)
+        self.generate_zone_ui_page.show()
 
     def show_element_build_ui(self, item):
         self.element_build_ui = QtGui.QWizardPage()
@@ -3802,19 +3812,18 @@ class MainUI(QDialog):
             self.element_save_cancel_layoutGroupBox)
         self.element_build_ui.setWindowModality(Qt.ApplicationModal)
         self.element_build_ui.show()
-
-    def show_simulation_window(self):
-        self.simulation_window_ui = QtGui.QWizardPage()
-        self.simulation_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        self.simulation_window_ui.setWindowTitle("Simulation")
-        self.simulation_window_ui.setFixedWidth(650)
-        self.simulation_window_ui.setFixedHeight(400)
-        self.simulation_window_ui_layout = QtGui.QGridLayout()
-        self.simulation_window_ui.setLayout(self.simulation_window_ui_layout)
-
-        """
+        
+    def show_export_window(self):
+        self.export_window_ui = QtGui.QWizardPage()
+        self.export_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.export_window_ui.setWindowTitle("Simulation")
+        self.export_window_ui.setFixedWidth(380)
+        self.export_window_ui.setFixedHeight(180)
+        self.export_window_ui_layout = QtGui.QGridLayout()
+        self.export_window_ui.setLayout(self.export_window_ui_layout)
+        
         self.export_groupbox = QtGui.QGroupBox("Export")
-        self.export_groupbox.setGeometry(QtCore.QRect(380, 245, 360, 160))
+        self.export_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 160))
         self.export_groupbox.setMinimumSize(QtCore.QSize(360, 160))
         self.export_groupbox.setMaximumSize(QtCore.QSize(360, 160))
         self.export_groupbox.setObjectName(_fromUtf8("exportGroupBox"))
@@ -3850,7 +3859,20 @@ class MainUI(QDialog):
         #    self.clickBrowseButton)
         for template_name in os.listdir(self.create_path_to_template_folder()):
             self.export_create_template_combobox.addItem(template_name)
-        """
+        
+        self.export_window_ui_layout.addWidget(
+            self.export_groupbox, 1, 1)
+        self.export_window_ui.setWindowModality(Qt.ApplicationModal)
+        self.export_window_ui.show()
+
+    def show_simulation_window(self):
+        self.simulation_window_ui = QtGui.QWizardPage()
+        self.simulation_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.simulation_window_ui.setWindowTitle("Simulation")
+        self.simulation_window_ui.setFixedWidth(650)
+        self.simulation_window_ui.setFixedHeight(400)
+        self.simulation_window_ui_layout = QtGui.QGridLayout()
+        self.simulation_window_ui.setLayout(self.simulation_window_ui_layout)
         self.heatingload_calculation_groupbox = QtGui.QGroupBox("Heating Load"
                                                                 " Calculation")
         self.heatingload_calculation_groupbox.setGeometry(
@@ -4033,6 +4055,9 @@ class MainUI(QDialog):
             self.simulation_save_cancel_groupbox)
         self.simulation_cancel_button.setText("Cancel")
         self.simulation_cancel_button.setGeometry(QtCore.QRect(390, 5, 120, 25))
+        self.connect(self.simulation_cancel_button, SIGNAL(
+                "clicked()"), self.simulation_window_ui, QtCore.SLOT(
+                "close()"))
 
         self.simulation_window_ui_layout.addWidget(
             self.simulation_groupbox, 1, 1)
