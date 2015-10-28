@@ -21,7 +21,7 @@ TEASER4 contains an archetype building generator as well as parameter calculatio
 
 ### Version
 
-The current version is 0.1.0. As the idea of TEASER4 came up at the Institute for Energy Efficient Buildings and Indoor Climate (EBC) at RWTH Aachen University in 2012 we leave the number 4 as a reminder.
+The current version is 0.1.1. As the idea of TEASER4 came up at the Institute for Energy Efficient Buildings and Indoor Climate (EBC) at RWTH Aachen University in 2012 we leave the number 4 as a reminder.
 
 
 ### How to contribute to the development of TEASER
