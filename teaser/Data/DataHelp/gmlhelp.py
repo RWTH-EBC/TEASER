@@ -84,8 +84,101 @@ def set_reference_boundary(gml_out, lower_coords, upper_coords):
 
     return gml_out
 
+def set_lod_2(gml_bldg, length, width, height, bldg_center):
+    """Adds a LOD 2 representation of the building based on building length, 
+    width and height
 
-def set_lod_1(gml_bldg, coords, height=6.51769):
+    alternative way to handle building position
+
+    Parameters
+    ----------
+
+    gml_bldg : bldg.Building() object
+        A building object, where bldg is a reference to
+        `pyxb.bundles.opengis.citygml.building`.
+    length : float
+        length of the building
+    width : float
+        width of the building
+    height : float
+        height of the building
+    bldg_center : list
+        coordinates in the reference system of the building center
+
+    Returns
+    -------
+
+    gml_bldg : bldg.Building() object
+        Returns the modified building object
+
+    """
+
+    lod_2_solid = gml.SolidPropertyType()
+    
+    #fixme what is arcrole?
+    #lod_2_solid.arcrole = 'Test'
+    
+    lod_2_solid.Solid = gml.Solid_()
+    exterior_solid = gml.SurfacePropertyType()
+    composite_surface = gml.CompositeSurface()
+    
+    bldg_center[0] = bldg_center[0]-length/2
+    bldg_center[1] = bldg_center[1]-width/2
+    # Ground surface   
+    coords = [[bldg_center[0],bldg_center[1],bldg_center[2]],
+              [length + bldg_center[0],bldg_center[1],bldg_center[2]],
+              [length + bldg_center[0],width + bldg_center[1],bldg_center[2]],
+              [bldg_center[0],width + bldg_center[1],bldg_center[2]]]
+              
+    composite_surface = _add_surface(composite_surface, coords)
+    composite_surface.surfaceMember[-1].Surface.id = gml_bldg.name[0].value()+"_ground"
+    # Roof surface
+    coords = [[bldg_center[0],bldg_center[1],bldg_center[2]+height],
+              [length + bldg_center[0],bldg_center[1],bldg_center[2]+height],
+              [length + bldg_center[0],width + bldg_center[1],bldg_center[2]+height],
+              [bldg_center[0],width + bldg_center[1],bldg_center[2]+height]]
+              
+    composite_surface = _add_surface(composite_surface, coords)
+    composite_surface.surfaceMember[-1].Surface.id = gml_bldg.name[0].value()+"_roof"
+
+    # Side a surface
+    coords = [[bldg_center[0],bldg_center[1],bldg_center[2]],
+              [length + bldg_center[0],bldg_center[1],bldg_center[2]],
+              [length + bldg_center[0],bldg_center[1],bldg_center[2]+height],
+              [bldg_center[0],bldg_center[1],bldg_center[2]+height]]
+              
+    composite_surface = _add_surface(composite_surface, coords)
+    composite_surface.surfaceMember[-1].Surface.id = gml_bldg.name[0].value()+"_a"
+    # Side b surface
+    
+    coords = [[bldg_center[0],width + bldg_center[1],bldg_center[2]],
+              [length + bldg_center[0],width + bldg_center[1],bldg_center[2]],
+              [length + bldg_center[0],width + bldg_center[1],bldg_center[2]+height],
+              [bldg_center[0],width + bldg_center[1],bldg_center[2]+height]]
+    composite_surface = _add_surface(composite_surface, coords)
+    composite_surface.surfaceMember[-1].Surface.id = gml_bldg.name[0].value()+"_b"
+    # Side c surface
+    coords = [[bldg_center[0],bldg_center[1],bldg_center[2]],
+              [bldg_center[0],width + bldg_center[1],bldg_center[2]],
+              [bldg_center[0],width + bldg_center[1],bldg_center[2]+height],
+              [bldg_center[0],bldg_center[1],bldg_center[2]+height]]
+    composite_surface = _add_surface(composite_surface, coords)
+    composite_surface.surfaceMember[-1].Surface.id = gml_bldg.name[0].value()+"_c"
+    # Side d surface
+    coords = [[length + bldg_center[0],bldg_center[1],bldg_center[2]],
+              [length + bldg_center[0],width + bldg_center[1],bldg_center[2]],
+              [length + bldg_center[0],width + bldg_center[1],bldg_center[2]+height],
+              [length + bldg_center[0],bldg_center[1],bldg_center[2]+height]]
+    composite_surface = _add_surface(composite_surface, coords)
+    composite_surface.surfaceMember[-1].Surface.id = gml_bldg.name[0].value()+"_d"
+    exterior_solid.Surface = composite_surface
+    lod_2_solid.Solid.exterior = exterior_solid
+
+    gml_bldg.lod2Solid = lod_2_solid
+
+    return gml_bldg
+
+def set_lod_1(gml_bldg, coords, height=0):
     """Adds a LOD 1 representation of the building based on 4 coordinates
 
     Parameters
@@ -188,6 +281,7 @@ def set_lod_1(gml_bldg, coords, height=6.51769):
     return gml_bldg
 
 
+
 def _add_surface(composite_surface, coords):
     """Adds a surface to the  LOD 1 representation of the building 
 
@@ -224,15 +318,18 @@ def _add_surface(composite_surface, coords):
             input_list.append(value)
     for value in coords[0]:
         input_list.append(value)
-
+    
     pos_list = gml.posList(input_list)
+    """
+    fixme what is srsDimension
     pos_list.srsDimension = 3
-
+    """
     linear_ring.posList = pos_list
     exterior_polygon.LinearRing = linear_ring
     polygon.exterior = exterior_polygon
+    
     composite_surface.surfaceMember[-1].Surface = polygon
-
+    
     return composite_surface
 
 #     def setLOD2Composite(self):
