@@ -230,7 +230,8 @@ class Project(object):
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
-
+        return type_bldg
+    
     def type_bldg_institute(self,
                             name,
                             year_of_construction,
