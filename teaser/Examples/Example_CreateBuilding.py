@@ -23,7 +23,7 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599 import UseConditionsOffice18599
+from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599 import UseConditions18599
 
 
 def example_create_building():
@@ -51,10 +51,10 @@ def example_create_building():
     tz.volume = 123.0
     tz.infiltration_rate = 0.5
     
-    '''Instantiate UseConditionsOffice18599 class with thermal zone as parent,
+    '''Instantiate UseConditions18599 class with thermal zone as parent,
     and load the use conditions for the usage 'Living' '''
     
-    tz.use_conditions = UseConditionsOffice18599(parent = tz)
+    tz.use_conditions = UseConditions18599(parent = tz)
     tz.use_conditions.load_use_conditions("Living")
     
     '''

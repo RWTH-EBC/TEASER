@@ -7,7 +7,7 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599 import UseConditionsOffice18599
+from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599 import UseConditions18599
 
 def building_test2(prj):
     """
@@ -48,7 +48,7 @@ def building_test2(prj):
     tz.area = 10.0
     tz.volume = 25.0
     tz.infiltration_rate = 5.0
-    tz.use_conditions = UseConditionsOffice18599()
+    tz.use_conditions = UseConditions18599()
     '''
     outerwall
     '''
