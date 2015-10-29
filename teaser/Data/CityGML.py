@@ -82,8 +82,8 @@ def save_gml(project, path):
         #fixme what could be a method for placing the building 
         bldg_center = [i*100,0,0]     
                         
-        building_length = bldg_count._est_length
-        building_width = bldg_count._est_width
+        building_length = bldg_count.thermal_zones[0].area / bldg_count.thermal_zones[0].typical_width
+        building_width = bldg_count.thermal_zones[0].typical_width
         building_height = (bldg_count.number_of_floors * 
                             bldg_count.height_of_floors)
 
@@ -106,28 +106,61 @@ def save_gml(project, path):
             gml_zone.ThermalZone.infiltrationRate.uom = bd.datatypes.anyURI(
                                                                         '1/h')
                                                 
-            for out_wall_count in zone_count.outer_walls:
-                
-                gml_zone.ThermalZone.boundedBy_.append(
-                        energy.ThermalBoundarySurfacePropertyType())
-
-                gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface =\
-                     energy.ThermalBoundarySurfaceType()
-                gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.type =\
-                     'OuterWall' 
-                gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.\
-                     composedOf.append(energy.SurfaceComponentPropertyType())
-                 
-                gml_surf_comp = energy.SurfaceComponent()
-                gml_surf_comp.area = gml.AreaType(out_wall_count.area)
-                gml_surf_comp.area.uom = bd.datatypes.anyURI('m^2')
-                #fixme: how to relate to corresponding boundarySurface
-                gml_surf_comp.relates = gml.ReferenceType()
-                gml_surf_comp.relates.href = "asd"
-                gml_surf_comp.isSunExposed = bd.datatypes.boolean("true")
-                gml_surf_comp.isGroundCoupled = bd.datatypes.boolean("true")
-                gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.composedOf[-1].SurfaceComponent = gml_surf_comp
-
+            for i, out_wall_count in enumerate(zone_count.outer_walls):
+                if type(out_wall_count).__name__ == "OuterWall":
+                    gml_zone.ThermalZone.boundedBy_.append(
+                            energy.ThermalBoundarySurfacePropertyType())
+    
+                    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface =\
+                         energy.ThermalBoundarySurfaceType()
+                    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.type =\
+                         'OuterWall' 
+                    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.\
+                         composedOf.append(energy.SurfaceComponentPropertyType())
+                     
+                    gml_surf_comp = energy.SurfaceComponent()
+                    gml_surf_comp.area = gml.AreaType(out_wall_count.area)
+                    gml_surf_comp.area.uom = bd.datatypes.anyURI('m^2')
+                    #fixme: how to relate to corresponding boundarySurface
+                    gml_surf_comp.relates = gml.ReferenceType()
+                    gml_surf_comp.relates.href = "asd"
+                    gml_surf_comp.isSunExposed = bd.datatypes.boolean("true")
+                    gml_surf_comp.isGroundCoupled = bd.datatypes.boolean("true")
+                    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.composedOf[-1].SurfaceComponent = gml_surf_comp
+                    
+                    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.\
+                         composedOf.append(energy.SurfaceComponentPropertyType())
+                    gml_surf_comp1 = energy.SurfaceComponent()
+                    gml_surf_comp1.area = gml.AreaType(zone_count.windows[i].area)
+                    gml_surf_comp1.area.uom = bd.datatypes.anyURI('m^2')
+                    #fixme: how to relate to corresponding boundarySurface
+                    
+                    gml_surf_comp1.isSunExposed = bd.datatypes.boolean("true")
+                    gml_surf_comp1.isGroundCoupled = bd.datatypes.boolean("false")
+                    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.composedOf[-1].SurfaceComponent = gml_surf_comp1
+                    
+                if type(out_wall_count).__name__ == "Rooftop":
+                    
+                    gml_zone.ThermalZone.boundedBy_.append(
+                            energy.ThermalBoundarySurfacePropertyType())
+    
+                    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface =\
+                         energy.ThermalBoundarySurfaceType()
+                    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.type =\
+                         'FlatRoof' 
+                    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.\
+                         composedOf.append(energy.SurfaceComponentPropertyType())
+                     
+                    gml_surf_comp = energy.SurfaceComponent()
+                    gml_surf_comp.area = gml.AreaType(out_wall_count.area)
+                    gml_surf_comp.area.uom = bd.datatypes.anyURI('m^2')
+                    #fixme: how to relate to corresponding boundarySurface
+                    gml_surf_comp.relates = gml.ReferenceType()
+                    gml_surf_comp.relates.href = "asd"
+                    gml_surf_comp.isSunExposed = bd.datatypes.boolean("true")
+                    gml_surf_comp.isGroundCoupled = bd.datatypes.boolean("true")
+                    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.composedOf[-1].SurfaceComponent = gml_surf_comp
+                    
             gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(gml_zone)
         
         gml_out.featureMember[-1].Feature = gml_bldg  
@@ -168,23 +201,11 @@ def setEnergyBoundary(self, boundedBy_en, wallType ,href, area, areaWin,nrOfWall
 """
     
 prj = Project(True)
-prj.type_bldg_office(name="TestBuilding",
+prj.type_bldg_residential(name="TestBuilding",
                          year_of_construction=1988,
                          number_of_floors=2,
                          height_of_floors=3,
-                         net_leased_area=500 ,
-                         office_layout=0,
-                         window_layout=0,
-                         construction_type="heavy")
-
-prj.type_bldg_office(name="TestBuisdfsdfsdflding",
-                         year_of_construction=1988,
-                         number_of_floors=2,
-                         height_of_floors=3,
-                         net_leased_area=500 ,
-                         office_layout=0,
-                         window_layout=0,
-                         construction_type="heavy")                      
+                         net_leased_area=100)
 
 save_gml(prj, "D:\\GIT\\TEASER\\teaser\\OutputData\\Test")
 print("ahhasd")

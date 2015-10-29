@@ -330,4 +330,8 @@ def _add_gml_boundary(boundary_surface, id):
     boundary_surface.lod2MultiSurface.MultiSurface.surfaceMember.append(gml.SurfacePropertyType())
     boundary_surface.lod2MultiSurface.MultiSurface.surfaceMember[-1].href = id
     
+    boundary_surface.opening.append(bldg.OpeningPropertyType())
+    boundary_surface.opening[-1].Opening = bldg.Window()
+    boundary_surface.opening[-1].Opening.id =id+"_win"    
+    
     return boundary_surface
