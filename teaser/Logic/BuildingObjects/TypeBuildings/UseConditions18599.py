@@ -230,7 +230,7 @@ class UseConditions18599(UseConditions):
 
         for usage in \
             self.parent.parent.parent.data.conditions_bind.\
-                UseConditionsOffice18599:
+                UseConditions18599:
 
             if usage.usage == zone_usage:
 
@@ -265,6 +265,8 @@ class UseConditions18599(UseConditions):
                 self.room_index = usage.Lighting.room_index
                 self.part_load_factor_lighting = \
                     usage.Lighting.part_load_factor_lighting
+                self.ratio_conv_rad_lighting = \
+                    usage.Lighting.ratio_conv_rad_lighting
 
                 self.set_temp_heat = usage.RoomClimate.set_temp_heat
                 self.set_temp_cool = usage.RoomClimate.set_temp_cool
@@ -295,7 +297,7 @@ class UseConditions18599(UseConditions):
 
         '''
 
-        usage_pyxb = uc_bind.UseConditionsOffice18599Type()
+        usage_pyxb = uc_bind.UseConditions18599Type()
         usage_pyxb.UsageOperationTime = uc_bind.UsageOperationTimeType()
         usage_pyxb.Lighting = uc_bind.LightingType()
         usage_pyxb.RoomClimate = uc_bind.RoomClimateType()
@@ -332,7 +334,9 @@ class UseConditions18599(UseConditions):
         usage_pyxb.Lighting.room_index = self.room_index
         usage_pyxb.Lighting.part_load_factor_lighting = \
             self.part_load_factor_lighting
-
+        usage_pyxb.Lighting.ratio_conv_rad_lighting = \
+            self.ratio_conv_rad_lighting
+        
         usage_pyxb.RoomClimate.set_temp_heat = self.set_temp_heat
         usage_pyxb.RoomClimate.set_temp_cool = self.set_temp_cool
         usage_pyxb.RoomClimate.temp_set_back = self.temp_set_back
