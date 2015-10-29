@@ -53,7 +53,7 @@ class Window(BuildingElement):
         for layer_count in c_layer:
             self.c1 += layer_count
 
-    def replace_window(self, year_of_refurbishment, window_type=None):
+    def replace_window(self, year_of_retrofit, window_type=None):
         '''Replace a window, with a newer one.
 
         Replaces all attributes from the window and replaces it with a high
@@ -75,4 +75,4 @@ class Window(BuildingElement):
 
         self.set_calc_default()
 
-        self.load_type_element(year_of_refurbishment, window_type)
+        self.load_type_element(year_of_retrofit, window_type)
