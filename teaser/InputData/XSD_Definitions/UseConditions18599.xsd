@@ -57,7 +57,7 @@
       <xs:element minOccurs="0" type="xs:boolean" name="with_ahu"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="UseConditionsOffice18599Type">
+  <xs:complexType name="UseConditions18599Type">
     <xs:sequence>
       <xs:element minOccurs="0" type="xs:string" name="usage"/>
       <xs:element minOccurs="0" type="xs:float" name="typical_length"/>
