@@ -77,8 +77,7 @@ def save_gml(project, path):
         '''set general attributes of the building, as far as they are known and
         are defined in cityGML'''
         gml_bldg.name = [og.gml.CodeType(bldg_count.name)]
-        print(gml_bldg.name[0].value())
-        print(str(gml_bldg.name))
+        
         gml_bldg.yearOfConstruction = bd.datatypes.gYear(
                                             bldg_count.year_of_construction)
         gml_bldg.measuredHeight = gml.LengthType(bldg_count.number_of_floors * 
@@ -89,6 +88,7 @@ def save_gml(project, path):
             [bldg_count.height_of_floors]*int(bldg_count.number_of_floors))
         gml_bldg.storeyHeightsAboveGround.uom = bd.datatypes.anyURI('m')
 
+        #fixme what could be a method for placing the building 
         bldg_center = [i*100,0,0]     
                         
         building_length = bldg_count._est_length
@@ -100,6 +100,8 @@ def save_gml(project, path):
                                      building_width, 
                                      building_height,
                                      bldg_center)
+                                     
+                                     
         """
         for zone_count in bldg_count.thermal_zones:
             
