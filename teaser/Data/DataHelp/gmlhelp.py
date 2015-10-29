@@ -31,7 +31,35 @@ import pyxb.bundles.opengis.citygml.utility_core as network_core
 import pyxb.bundles.opengis.citygml.utility_network_components as network_comp
 import pyxb.bundles.opengis.citygml.energy as energy
 
-
+def set_bldg_elements(gml_bldg, bldg_count):
+    
+    
+    gml_bldg.name = [og.gml.CodeType(bldg_count.name)]
+    gml_bldg.function = [bldg.BuildingFunctionType(1120)]
+    gml_bldg.yearOfConstruction = bd.datatypes.gYear(
+                                        bldg_count.year_of_construction)
+    gml_bldg.roofType = bldg.RoofTypeType(1000)
+    gml_bldg.measuredHeight = gml.LengthType(bldg_count.number_of_floors * 
+                                            bldg_count.height_of_floors)
+    gml_bldg.measuredHeight.uom = bd.datatypes.anyURI('m')
+    gml_bldg.storeysAboveGround = bldg_count.number_of_floors
+    gml_bldg.storeyHeightsAboveGround = gml.MeasureOrNullListType(
+        [bldg_count.height_of_floors]*int(bldg_count.number_of_floors))
+    gml_bldg.storeyHeightsAboveGround.uom = bd.datatypes.anyURI('m')
+    
+    #building attributes from energyADE we can in principle provide
+    
+    gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+                    energy.atticType("None"))
+    gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+                    energy.basementType("None"))
+    gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+                    energy.constructionStyle(bldg_count.construction_type))       
+    gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+                    energy.yearOfRefurbishment(
+                    bd.datatypes.gYear(bldg_count.year_of_construction)))
+    return gml_bldg                    
+                    
 def set_reference_boundary(gml_out, lower_coords, upper_coords):
     """Adds a reference coordinate system with `Envelope`'s corners
 
