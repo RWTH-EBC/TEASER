@@ -284,19 +284,16 @@ def _add_gml_boundary(boundary_surface, id):
     Parameters
     ----------
 
-    composite_surface : gml.CompositeSurface() object
-        A surface object object for one side of the building
-    coords : list
-        A list that contains the coordinates of the 4 points defining the
-        ground area of the building. Each of the 4 list elements should consist
-        of a list with 3 ints or floats for the x, y, and z coordinates of one
-        point.
+    boundary_surface : bldg.BoundarySurfacePropertyType() object
+        A boundary surface object (Roof, Wall, Floor) for one side of the bldg
+    id : str
+        gmlID of the corresponding gml.Solid to reference the Surface
 
     Returns
     -------
 
-    composite_surface : gml.CompositeSurface() object
-        Returns the modified composite surface object
+    boundary_surface : gml.BoundarySurfacePropertyType() object
+        Returns the modified boundary surface object
 
     """
     boundary_surface.id = "b_"+id
