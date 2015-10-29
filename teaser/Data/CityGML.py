@@ -88,13 +88,26 @@ def save_gml(project, path):
         gml_bldg.storeyHeightsAboveGround = gml.MeasureOrNullListType(
             [bldg_count.height_of_floors]*int(bldg_count.number_of_floors))
         gml_bldg.storeyHeightsAboveGround.uom = bd.datatypes.anyURI('m')
-
+        
+        #building attributes from energyADE we can in principle provide
+        
+        gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+                        energy.atticType("None"))
+        gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+                        energy.basementType("None"))
+        gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+                        energy.constructionStyle(bldg_count.construction_type))       
+        gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+                        energy.yearOfRefurbishment(
+                        bd.datatypes.gYear(bldg_count.year_of_construction)))
+        #unsolved problem with volume?
         #fixme what could be a method for placing the building 
         bldg_center = [i*100,0,0]     
                         
         building_length = bldg_count._est_length
         building_width = bldg_count._est_width
-        building_height = bldg_count.number_of_floors * bldg_count.height_of_floors
+        building_height = (bldg_count.number_of_floors * 
+                            bldg_count.height_of_floors)
 
         gml_bldg = gmlhelp.set_lod_2(gml_bldg, 
                                      building_length, 
@@ -143,7 +156,7 @@ def save_gml(project, path):
            
     
 """
-ef setEnergyBoundary(self, boundedBy_en, wallType ,href, area, areaWin,nrOfWall):
+def setEnergyBoundary(self, boundedBy_en, wallType ,href, area, areaWin,nrOfWall):
         '''
         sets the energy boundary surfaces
         arguments:

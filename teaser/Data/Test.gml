@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<core:CityModel xmlns:bldg="http://www.opengis.net/citygml/building/1.0" xmlns:core="http://www.opengis.net/citygml/1.0" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
+<core:CityModel xmlns:bldg="http://www.opengis.net/citygml/building/1.0" xmlns:core="http://www.opengis.net/citygml/1.0" xmlns:energy="http://www.sig3d.org/citygml/2.0/energy/0.5.0" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<gml:name>Project</gml:name>
 	<core:cityObjectMember>
 		<bldg:Building>
@@ -126,6 +126,509 @@
 					</bldg:lod2MultiSurface>
 				</bldg:WallSurface>
 			</bldg:boundedBy>
+			<energy:atticType>None</energy:atticType>
+			<energy:basementType>None</energy:basementType>
+			<energy:atticType>None</energy:atticType>
+			<energy:constructionStyle>heavy</energy:constructionStyle>
+			<energy:yearOfRefurbishment>1988</energy:yearOfRefurbishment>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">75.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">6.49074181171552</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.04194243117285</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.04194243117285</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">6.49074181171552</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">43.125</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">43.125</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">250.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">21.63580603905173</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">36.806474770576166</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">36.806474770576166</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">21.63580603905173</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">143.75</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">143.75</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">10.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">0.8654322415620692</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.4722589908230466</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.4722589908230466</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">0.8654322415620692</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">5.75</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">5.75</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">125.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">10.817903019525865</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">18.403237385288083</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">18.403237385288083</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">10.817903019525865</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">71.875</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">71.875</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">20.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.7308644831241384</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">2.944517981646093</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">2.944517981646093</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.7308644831241384</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.5</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.5</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">20.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.7308644831241384</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">2.944517981646093</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">2.944517981646093</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.7308644831241384</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.5</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.5</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
 		</bldg:Building>
 	</core:cityObjectMember>
 	<core:cityObjectMember>
@@ -253,6 +756,509 @@
 					</bldg:lod2MultiSurface>
 				</bldg:WallSurface>
 			</bldg:boundedBy>
+			<energy:atticType>None</energy:atticType>
+			<energy:basementType>None</energy:basementType>
+			<energy:atticType>None</energy:atticType>
+			<energy:constructionStyle>heavy</energy:constructionStyle>
+			<energy:yearOfRefurbishment>1988</energy:yearOfRefurbishment>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">75.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">6.49074181171552</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.04194243117285</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.04194243117285</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">6.49074181171552</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">43.125</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">43.125</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">250.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">21.63580603905173</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">36.806474770576166</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">36.806474770576166</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">21.63580603905173</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">143.75</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">143.75</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">10.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">0.8654322415620692</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.4722589908230466</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.4722589908230466</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">0.8654322415620692</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">5.75</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">5.75</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">125.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">10.817903019525865</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">18.403237385288083</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">18.403237385288083</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">10.817903019525865</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">71.875</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">71.875</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">20.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.7308644831241384</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">2.944517981646093</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">2.944517981646093</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.7308644831241384</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.5</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.5</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
+			<energy:thermalZones>
+				<energy:ThermalZone>
+					<energy:heatedFloorArea uom="m^2">20.0</energy:heatedFloorArea>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.7308644831241384</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">2.944517981646093</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">2.944517981646093</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">1.7308644831241384</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.5</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+					<energy:boundedBy>
+						<energy:ThermalBoundarySurface>
+							<energy:type>OuterWall</energy:type>
+							<energy:composedOf>
+								<energy:SurfaceComponent>
+									<energy:area uom="m^2">11.5</energy:area>
+									<energy:isGroundCoupled>true</energy:isGroundCoupled>
+									<energy:isSunExposed>true</energy:isSunExposed>
+									<energy:relates xlink:href="asd"/>
+								</energy:SurfaceComponent>
+							</energy:composedOf>
+						</energy:ThermalBoundarySurface>
+					</energy:boundedBy>
+				</energy:ThermalZone>
+			</energy:thermalZones>
 		</bldg:Building>
 	</core:cityObjectMember>
 </core:CityModel>
