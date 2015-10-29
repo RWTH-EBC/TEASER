@@ -77,9 +77,10 @@ def save_gml(project, path):
         '''set general attributes of the building, as far as they are known and
         are defined in cityGML'''
         gml_bldg.name = [og.gml.CodeType(bldg_count.name)]
-        
+        gml_bldg.function = [bldg.BuildingFunctionType(1120)]
         gml_bldg.yearOfConstruction = bd.datatypes.gYear(
                                             bldg_count.year_of_construction)
+        gml_bldg.roofType = bldg.RoofTypeType(1000)
         gml_bldg.measuredHeight = gml.LengthType(bldg_count.number_of_floors * 
                                                 bldg_count.height_of_floors)
         gml_bldg.measuredHeight.uom = bd.datatypes.anyURI('m')
