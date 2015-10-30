@@ -82,7 +82,8 @@ def save_gml(project, path):
         #fixme what could be a method for placing the building 
         bldg_center = [i*100,0,0]     
                         
-        building_length = bldg_count.thermal_zones[0].area / bldg_count.thermal_zones[0].typical_width
+        building_length = (bldg_count.thermal_zones[0].area / 
+                            bldg_count.thermal_zones[0].typical_width)
         building_width = bldg_count.thermal_zones[0].typical_width
         building_height = (bldg_count.number_of_floors * 
                             bldg_count.height_of_floors)
@@ -126,6 +127,35 @@ def save_gml(project, path):
                     gml_surf_comp.relates.href = "asd"
                     gml_surf_comp.isSunExposed = bd.datatypes.boolean("true")
                     gml_surf_comp.isGroundCoupled = bd.datatypes.boolean("true")
+                    
+                    construction = energy.construction()
+                    
+                    construction.Construction = energy.ConstructionType()
+                    
+                    layer = energy.LayerPropertyType()
+                    layer.Layer = energy.LayerType()
+                    layer.Layer.layerComponent.append(energy.LayerComponentPropertyType())  
+                    layer.Layer.layerComponent.append(energy.LayerComponentPropertyType()) 
+                    layer.Layer.layerComponent.append(energy.LayerComponentPropertyType()) 
+                    
+                    layer.Layer.layerComponent[-1].LayerComponent = energy.LayerComponentType()
+                    
+                    layer.Layer.layerComponent[-1].LayerComponent.thickness = gml.LengthType(123.123) 
+                    layer.Layer.layerComponent[-1].LayerComponent.thickness.uom = bd.datatypes.anyURI('m')
+                    
+                    layer.Layer.layerComponent[-1].LayerComponent.material = energy.AbstractMaterialPropertyType()
+                    layer.Layer.layerComponent[-1].LayerComponent.material.AbstractMaterial = energy.OpaqueMaterial()
+                                
+                    
+                                      
+                    layer.Layer.layerComponent[-1].LayerComponent.material.AbstractMaterial.conductivity = gml.MeasureType(123.123)
+                    layer.Layer.layerComponent[-1].LayerComponent.material.AbstractMaterial.conductivity.uom = bd.datatypes.anyURI('W/mK')  
+                    construction.Construction.layer.append(layer)                    
+                    
+                    gml_surf_comp.GenericApplicationPropertyOfCityObject.append(construction)
+
+                                    
+                    
                     gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.composedOf[-1].SurfaceComponent = gml_surf_comp
                     
                     gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.\
@@ -137,6 +167,8 @@ def save_gml(project, path):
                     
                     gml_surf_comp1.isSunExposed = bd.datatypes.boolean("true")
                     gml_surf_comp1.isGroundCoupled = bd.datatypes.boolean("false")
+                    
+                    
                     gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.composedOf[-1].SurfaceComponent = gml_surf_comp1
                     
                 if type(out_wall_count).__name__ == "Rooftop":
