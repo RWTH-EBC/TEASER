@@ -86,7 +86,7 @@ def save_teaser_xml(path, project):
             
             pyxb_zone.UseCondition = pb.UseConditionType()
             
-            pyxb_use = pb.UseConditionsOffice18599Type()
+            pyxb_use = pb.UseConditions18599Type()
             
             pyxb_use.usage = zone.use_conditions.usage
             pyxb_use.UsageOperationTime = pb.UsageOperationTimeType()
@@ -168,7 +168,7 @@ def save_teaser_xml(path, project):
             pyxb_use.AHU.with_ahu = \
                         zone.use_conditions.with_ahu
             
-            pyxb_zone.UseCondition.UseConditionsOffice18599 = pyxb_use
+            pyxb_zone.UseCondition.UseConditions18599 = pyxb_use
             
             for out_wall in zone.outer_walls:
                 
@@ -398,7 +398,7 @@ def load_teaser_xml(path, prj):
          
             zone.use_conditions = UseConditions18599()
             
-            pyxb_use = pyxb_zone.UseCondition.UseConditionsOffice18599
+            pyxb_use = pyxb_zone.UseCondition.UseConditions18599
             
             zone.use_conditions.usage = \
                         pyxb_use.usage
