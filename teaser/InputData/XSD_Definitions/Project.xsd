@@ -28,7 +28,7 @@
     <xs:sequence>
       <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_renovation" minOccurs="0"/>
+      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -43,7 +43,7 @@
     <xs:sequence>
       <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_renovation" minOccurs="0"/>
+      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -58,7 +58,7 @@
     <xs:sequence>
       <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_renovation" minOccurs="0"/>
+      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -71,7 +71,7 @@
     <xs:sequence>
       <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_renovation" minOccurs="0"/>
+      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -84,7 +84,7 @@
     <xs:sequence>
       <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_renovation" minOccurs="0"/>
+      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -97,7 +97,7 @@
     <xs:sequence>
       <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_renovation" minOccurs="0"/>
+      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -110,7 +110,7 @@
     <xs:sequence>
       <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_renovation" minOccurs="0"/>
+      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
