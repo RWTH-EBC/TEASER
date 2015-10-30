@@ -1,7 +1,7 @@
 # .\ProjectBind.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:e92452c8d3e28a9e27abfc9994d2007779e7f4c9
-# Generated 2015-10-30 09:34:52.717564 by PyXB version 1.2.4 using Python 3.4.3.final.0
+# Generated 2015-10-30 09:44:14.122533 by PyXB version 1.2.4 using Python 3.4.3.final.0
 # Namespace AbsentNamespace0
 
 from __future__ import unicode_literals
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:171c3b1a-7ee1-11e5-aaea-f4b7e2dccf42')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:65bbfaf0-7ee2-11e5-bcc3-f4b7e2dccf42')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
@@ -757,11 +757,11 @@ class OuterWallType (pyxb.binding.basis.complexTypeDefinition):
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
-    # Element year_of_renovation uses Python identifier year_of_renovation
-    __year_of_renovation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), 'year_of_renovation', '__AbsentNamespace0_OuterWallType_year_of_renovation', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 31, 6), )
+    # Element year_of_retrofit uses Python identifier year_of_retrofit
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_OuterWallType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 31, 6), )
 
     
-    year_of_renovation = property(__year_of_renovation.value, __year_of_renovation.set, None, None)
+    year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
@@ -822,7 +822,7 @@ class OuterWallType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap.update({
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
-        __year_of_renovation.name() : __year_of_renovation,
+        __year_of_retrofit.name() : __year_of_retrofit,
         __area.name() : __area,
         __tilt.name() : __tilt,
         __orientation.name() : __orientation,
@@ -864,11 +864,11 @@ class RooftopType (pyxb.binding.basis.complexTypeDefinition):
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
-    # Element year_of_renovation uses Python identifier year_of_renovation
-    __year_of_renovation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), 'year_of_renovation', '__AbsentNamespace0_RooftopType_year_of_renovation', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 46, 6), )
+    # Element year_of_retrofit uses Python identifier year_of_retrofit
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_RooftopType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 46, 6), )
 
     
-    year_of_renovation = property(__year_of_renovation.value, __year_of_renovation.set, None, None)
+    year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
@@ -929,7 +929,7 @@ class RooftopType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap.update({
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
-        __year_of_renovation.name() : __year_of_renovation,
+        __year_of_retrofit.name() : __year_of_retrofit,
         __area.name() : __area,
         __tilt.name() : __tilt,
         __orientation.name() : __orientation,
@@ -971,11 +971,11 @@ class InnerWallType (pyxb.binding.basis.complexTypeDefinition):
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
-    # Element year_of_renovation uses Python identifier year_of_renovation
-    __year_of_renovation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), 'year_of_renovation', '__AbsentNamespace0_InnerWallType_year_of_renovation', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 61, 6), )
+    # Element year_of_retrofit uses Python identifier year_of_retrofit
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_InnerWallType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 61, 6), )
 
     
-    year_of_renovation = property(__year_of_renovation.value, __year_of_renovation.set, None, None)
+    year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
@@ -1022,7 +1022,7 @@ class InnerWallType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap.update({
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
-        __year_of_renovation.name() : __year_of_renovation,
+        __year_of_retrofit.name() : __year_of_retrofit,
         __area.name() : __area,
         __tilt.name() : __tilt,
         __orientation.name() : __orientation,
@@ -1062,11 +1062,11 @@ class CeilingType (pyxb.binding.basis.complexTypeDefinition):
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
-    # Element year_of_renovation uses Python identifier year_of_renovation
-    __year_of_renovation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), 'year_of_renovation', '__AbsentNamespace0_CeilingType_year_of_renovation', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 74, 6), )
+    # Element year_of_retrofit uses Python identifier year_of_retrofit
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_CeilingType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 74, 6), )
 
     
-    year_of_renovation = property(__year_of_renovation.value, __year_of_renovation.set, None, None)
+    year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
@@ -1113,7 +1113,7 @@ class CeilingType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap.update({
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
-        __year_of_renovation.name() : __year_of_renovation,
+        __year_of_retrofit.name() : __year_of_retrofit,
         __area.name() : __area,
         __tilt.name() : __tilt,
         __orientation.name() : __orientation,
@@ -1153,11 +1153,11 @@ class FloorType (pyxb.binding.basis.complexTypeDefinition):
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
-    # Element year_of_renovation uses Python identifier year_of_renovation
-    __year_of_renovation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), 'year_of_renovation', '__AbsentNamespace0_FloorType_year_of_renovation', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 87, 6), )
+    # Element year_of_retrofit uses Python identifier year_of_retrofit
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_FloorType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 87, 6), )
 
     
-    year_of_renovation = property(__year_of_renovation.value, __year_of_renovation.set, None, None)
+    year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
@@ -1204,7 +1204,7 @@ class FloorType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap.update({
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
-        __year_of_renovation.name() : __year_of_renovation,
+        __year_of_retrofit.name() : __year_of_retrofit,
         __area.name() : __area,
         __tilt.name() : __tilt,
         __orientation.name() : __orientation,
@@ -1244,11 +1244,11 @@ class GroundFloorType (pyxb.binding.basis.complexTypeDefinition):
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
-    # Element year_of_renovation uses Python identifier year_of_renovation
-    __year_of_renovation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), 'year_of_renovation', '__AbsentNamespace0_GroundFloorType_year_of_renovation', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 100, 6), )
+    # Element year_of_retrofit uses Python identifier year_of_retrofit
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_GroundFloorType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 100, 6), )
 
     
-    year_of_renovation = property(__year_of_renovation.value, __year_of_renovation.set, None, None)
+    year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
@@ -1295,7 +1295,7 @@ class GroundFloorType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap.update({
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
-        __year_of_renovation.name() : __year_of_renovation,
+        __year_of_retrofit.name() : __year_of_retrofit,
         __area.name() : __area,
         __tilt.name() : __tilt,
         __orientation.name() : __orientation,
@@ -1335,11 +1335,11 @@ class WindowType (pyxb.binding.basis.complexTypeDefinition):
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
-    # Element year_of_renovation uses Python identifier year_of_renovation
-    __year_of_renovation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), 'year_of_renovation', '__AbsentNamespace0_WindowType_year_of_renovation', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 113, 6), )
+    # Element year_of_retrofit uses Python identifier year_of_retrofit
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_WindowType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 113, 6), )
 
     
-    year_of_renovation = property(__year_of_renovation.value, __year_of_renovation.set, None, None)
+    year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
@@ -1428,7 +1428,7 @@ class WindowType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap.update({
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
-        __year_of_renovation.name() : __year_of_renovation,
+        __year_of_retrofit.name() : __year_of_retrofit,
         __area.name() : __area,
         __tilt.name() : __tilt,
         __orientation.name() : __orientation,
@@ -3103,7 +3103,7 @@ OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName
 
 OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 30, 6)))
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), pyxb.binding.datatypes.string, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 31, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 31, 6)))
 
 OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 32, 6)))
 
@@ -3158,7 +3158,7 @@ def _BuildAutomaton_10 ():
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_renovation')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 31, 6))
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 31, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
@@ -3357,7 +3357,7 @@ RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(N
 
 RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 45, 6)))
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), pyxb.binding.datatypes.string, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 46, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 46, 6)))
 
 RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 47, 6)))
 
@@ -3412,7 +3412,7 @@ def _BuildAutomaton_11 ():
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_renovation')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 46, 6))
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 46, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
@@ -3611,7 +3611,7 @@ InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName
 
 InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 60, 6)))
 
-InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), pyxb.binding.datatypes.string, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 61, 6)))
+InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 61, 6)))
 
 InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 62, 6)))
 
@@ -3658,7 +3658,7 @@ def _BuildAutomaton_12 ():
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_renovation')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 61, 6))
+    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 61, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
@@ -3803,7 +3803,7 @@ CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(N
 
 CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 73, 6)))
 
-CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), pyxb.binding.datatypes.string, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 74, 6)))
+CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 74, 6)))
 
 CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 75, 6)))
 
@@ -3850,7 +3850,7 @@ def _BuildAutomaton_13 ():
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_renovation')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 74, 6))
+    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 74, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
@@ -3995,7 +3995,7 @@ FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Non
 
 FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=FloorType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 86, 6)))
 
-FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), pyxb.binding.datatypes.string, scope=FloorType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 87, 6)))
+FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=FloorType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 87, 6)))
 
 FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=FloorType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 88, 6)))
 
@@ -4042,7 +4042,7 @@ def _BuildAutomaton_14 ():
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_renovation')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 87, 6))
+    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 87, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
@@ -4187,7 +4187,7 @@ GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedNa
 
 GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 99, 6)))
 
-GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), pyxb.binding.datatypes.string, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 100, 6)))
+GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 100, 6)))
 
 GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 101, 6)))
 
@@ -4234,7 +4234,7 @@ def _BuildAutomaton_15 ():
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_renovation')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 100, 6))
+    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 100, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
@@ -4379,7 +4379,7 @@ WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(No
 
 WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=WindowType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 112, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_renovation'), pyxb.binding.datatypes.string, scope=WindowType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 113, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=WindowType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 113, 6)))
 
 WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 114, 6)))
 
@@ -4450,7 +4450,7 @@ def _BuildAutomaton_16 ():
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_renovation')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 113, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 113, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
