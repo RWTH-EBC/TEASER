@@ -581,10 +581,11 @@ class BuildingElement(object):
 
     @year_of_retrofit.setter
     def year_of_retrofit(self, value):
-        if self.year_of_construction is not None:  # year_of_construction(!)
-            self._year_of_retrofit = value
-        else:
-            raise ValueError("Specify year of construction first")
+        if value is not None:
+            if self.year_of_construction is not None: 
+                self._year_of_retrofit = value
+            else:
+                raise ValueError("Specify year of construction first")
 
     @property
     def orientation(self):

@@ -37,6 +37,7 @@
 						<rel_absence>0.3</rel_absence>
 						<room_index>0.9</room_index>
 						<part_load_factor_lighting>0.7</part_load_factor_lighting>
+                                  <ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
 					</Lighting>
 					<RoomClimate>
 						<set_temp_heat>21.0</set_temp_heat>

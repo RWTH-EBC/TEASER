@@ -38,6 +38,7 @@
 						<rel_absence>0.3</rel_absence>
 						<room_index>0.9</room_index>
 						<part_load_factor_lighting>0.7</part_load_factor_lighting>
+                                   <ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
 					</Lighting>
 					<RoomClimate>
 						<set_temp_heat>21.0</set_temp_heat>
@@ -113,7 +114,7 @@
 				</Layer>
 			</OuterWall>
 			<InnerWall>
-				<year_of_construction>ASD</year_of_construction>
+				<year_of_construction>1960</year_of_construction>
 				<construction_type>ASD</construction_type>
 				<area>38.5</area>
 				<inner_convection>2.7</inner_convection>
@@ -132,6 +133,7 @@
 				</Layer>
 			</InnerWall>
 			<InnerWall>
+                       <year_of_construction>1960</year_of_construction>
 				<area>2.0</area>
 				<inner_convection>2.7</inner_convection>
 				<inner_radiation>5.0</inner_radiation>
@@ -259,6 +261,7 @@
 				</Layer>
 			</Floor>
 			<Window>
+                       <year_of_construction>1960</year_of_construction>
 				<construction_type>1</construction_type>
 				<area>7.0</area>
 				<tilt>90.0</tilt>
