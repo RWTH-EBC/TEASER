@@ -150,6 +150,7 @@
       <xs:element type="xs:string" name="city" minOccurs="0"/>
       <xs:element type="xs:string" name="type_of_building" minOccurs="0"/>
       <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:int" name="number_of_floors" minOccurs="0"/>
       <xs:element type="xs:float" name="height_of_floors" minOccurs="0"/>
       <xs:element type="xs:float" name="net_leased_area" minOccurs="0"/>
@@ -165,6 +166,7 @@
       <xs:element type="xs:string" name="city" minOccurs="0"/>
       <xs:element type="xs:string" name="type_of_building" minOccurs="0"/>
       <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:int" name="number_of_floors" minOccurs="0"/>
       <xs:element type="xs:float" name="height_of_floors" minOccurs="0"/>
       <xs:element type="xs:float" name="net_leased_area" minOccurs="0"/>
@@ -180,6 +182,7 @@
       <xs:element type="xs:string" name="city" minOccurs="0"/>
       <xs:element type="xs:string" name="type_of_building" minOccurs="0"/>
       <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:int" name="number_of_floors" minOccurs="0"/>
       <xs:element type="xs:float" name="height_of_floors" minOccurs="0"/>
       <xs:element type="xs:float" name="net_leased_area" minOccurs="0"/>

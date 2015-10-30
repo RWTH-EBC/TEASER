@@ -1,7 +1,7 @@
 # .\ProjectBind.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:e92452c8d3e28a9e27abfc9994d2007779e7f4c9
-# Generated 2015-10-30 09:44:14.122533 by PyXB version 1.2.4 using Python 3.4.3.final.0
+# Generated 2015-10-30 09:46:39.212040 by PyXB version 1.2.4 using Python 3.4.3.final.0
 # Namespace AbsentNamespace0
 
 from __future__ import unicode_literals
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:65bbfaf0-7ee2-11e5-bcc3-f4b7e2dccf42')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:bc35f76e-7ee2-11e5-bab9-f4b7e2dccf42')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
@@ -1626,43 +1626,50 @@ class BuildingType (pyxb.binding.basis.complexTypeDefinition):
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
+    # Element year_of_retrofit uses Python identifier year_of_retrofit
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_BuildingType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 153, 3), )
+
+    
+    year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
+
+    
     # Element number_of_floors uses Python identifier number_of_floors
-    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_BuildingType_number_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 153, 6), )
+    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_BuildingType_number_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 154, 6), )
 
     
     number_of_floors = property(__number_of_floors.value, __number_of_floors.set, None, None)
 
     
     # Element height_of_floors uses Python identifier height_of_floors
-    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_BuildingType_height_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 154, 6), )
+    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_BuildingType_height_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 155, 6), )
 
     
     height_of_floors = property(__height_of_floors.value, __height_of_floors.set, None, None)
 
     
     # Element net_leased_area uses Python identifier net_leased_area
-    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_BuildingType_net_leased_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 155, 6), )
+    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_BuildingType_net_leased_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 156, 6), )
 
     
     net_leased_area = property(__net_leased_area.value, __net_leased_area.set, None, None)
 
     
     # Element outer_area uses Python identifier outer_area
-    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_BuildingType_outer_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 156, 6), )
+    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_BuildingType_outer_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 157, 6), )
 
     
     outer_area = property(__outer_area.value, __outer_area.set, None, None)
 
     
     # Element window_area uses Python identifier window_area
-    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_BuildingType_window_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 157, 3), )
+    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_BuildingType_window_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 158, 3), )
 
     
     window_area = property(__window_area.value, __window_area.set, None, None)
 
     
     # Element ThermalZone uses Python identifier ThermalZone
-    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_BuildingType_ThermalZone', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 158, 6), )
+    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_BuildingType_ThermalZone', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 159, 6), )
 
     
     ThermalZone = property(__ThermalZone.value, __ThermalZone.set, None, None)
@@ -1673,6 +1680,7 @@ class BuildingType (pyxb.binding.basis.complexTypeDefinition):
         __city.name() : __city,
         __type_of_building.name() : __type_of_building,
         __year_of_construction.name() : __year_of_construction,
+        __year_of_retrofit.name() : __year_of_retrofit,
         __number_of_floors.name() : __number_of_floors,
         __height_of_floors.name() : __height_of_floors,
         __net_leased_area.name() : __net_leased_area,
@@ -1693,83 +1701,90 @@ class OfficeType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'OfficeType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 161, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 162, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element name uses Python identifier name
-    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_OfficeType_name', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 163, 6), )
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_OfficeType_name', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 164, 6), )
 
     
     name = property(__name.value, __name.set, None, None)
 
     
     # Element street_name uses Python identifier street_name
-    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_OfficeType_street_name', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 164, 6), )
+    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_OfficeType_street_name', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 165, 6), )
 
     
     street_name = property(__street_name.value, __street_name.set, None, None)
 
     
     # Element city uses Python identifier city
-    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_OfficeType_city', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 165, 6), )
+    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_OfficeType_city', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 166, 6), )
 
     
     city = property(__city.value, __city.set, None, None)
 
     
     # Element type_of_building uses Python identifier type_of_building
-    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_OfficeType_type_of_building', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 166, 6), )
+    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_OfficeType_type_of_building', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 167, 6), )
 
     
     type_of_building = property(__type_of_building.value, __type_of_building.set, None, None)
 
     
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_OfficeType_year_of_construction', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 167, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_OfficeType_year_of_construction', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 168, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
+    # Element year_of_retrofit uses Python identifier year_of_retrofit
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_OfficeType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 169, 3), )
+
+    
+    year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
+
+    
     # Element number_of_floors uses Python identifier number_of_floors
-    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_OfficeType_number_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 168, 6), )
+    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_OfficeType_number_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 170, 6), )
 
     
     number_of_floors = property(__number_of_floors.value, __number_of_floors.set, None, None)
 
     
     # Element height_of_floors uses Python identifier height_of_floors
-    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_OfficeType_height_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 169, 6), )
+    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_OfficeType_height_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 171, 6), )
 
     
     height_of_floors = property(__height_of_floors.value, __height_of_floors.set, None, None)
 
     
     # Element net_leased_area uses Python identifier net_leased_area
-    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_OfficeType_net_leased_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 170, 6), )
+    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_OfficeType_net_leased_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 172, 6), )
 
     
     net_leased_area = property(__net_leased_area.value, __net_leased_area.set, None, None)
 
     
     # Element outer_area uses Python identifier outer_area
-    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_OfficeType_outer_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 171, 6), )
+    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_OfficeType_outer_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 173, 6), )
 
     
     outer_area = property(__outer_area.value, __outer_area.set, None, None)
 
     
     # Element window_area uses Python identifier window_area
-    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_OfficeType_window_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 172, 3), )
+    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_OfficeType_window_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 174, 3), )
 
     
     window_area = property(__window_area.value, __window_area.set, None, None)
 
     
     # Element ThermalZone uses Python identifier ThermalZone
-    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_OfficeType_ThermalZone', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 173, 6), )
+    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_OfficeType_ThermalZone', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 175, 6), )
 
     
     ThermalZone = property(__ThermalZone.value, __ThermalZone.set, None, None)
@@ -1780,6 +1795,7 @@ class OfficeType (pyxb.binding.basis.complexTypeDefinition):
         __city.name() : __city,
         __type_of_building.name() : __type_of_building,
         __year_of_construction.name() : __year_of_construction,
+        __year_of_retrofit.name() : __year_of_retrofit,
         __number_of_floors.name() : __number_of_floors,
         __height_of_floors.name() : __height_of_floors,
         __net_leased_area.name() : __net_leased_area,
@@ -1800,83 +1816,90 @@ class ResidentialType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ResidentialType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 176, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 178, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element name uses Python identifier name
-    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_ResidentialType_name', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 178, 6), )
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_ResidentialType_name', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 180, 6), )
 
     
     name = property(__name.value, __name.set, None, None)
 
     
     # Element street_name uses Python identifier street_name
-    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_ResidentialType_street_name', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 179, 6), )
+    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_ResidentialType_street_name', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 181, 6), )
 
     
     street_name = property(__street_name.value, __street_name.set, None, None)
 
     
     # Element city uses Python identifier city
-    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_ResidentialType_city', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 180, 6), )
+    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_ResidentialType_city', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 182, 6), )
 
     
     city = property(__city.value, __city.set, None, None)
 
     
     # Element type_of_building uses Python identifier type_of_building
-    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_ResidentialType_type_of_building', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 181, 6), )
+    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_ResidentialType_type_of_building', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 183, 6), )
 
     
     type_of_building = property(__type_of_building.value, __type_of_building.set, None, None)
 
     
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_ResidentialType_year_of_construction', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 182, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_ResidentialType_year_of_construction', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 184, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
+    # Element year_of_retrofit uses Python identifier year_of_retrofit
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_ResidentialType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 185, 3), )
+
+    
+    year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
+
+    
     # Element number_of_floors uses Python identifier number_of_floors
-    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_ResidentialType_number_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 183, 6), )
+    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_ResidentialType_number_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 186, 6), )
 
     
     number_of_floors = property(__number_of_floors.value, __number_of_floors.set, None, None)
 
     
     # Element height_of_floors uses Python identifier height_of_floors
-    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_ResidentialType_height_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 184, 6), )
+    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_ResidentialType_height_of_floors', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 187, 6), )
 
     
     height_of_floors = property(__height_of_floors.value, __height_of_floors.set, None, None)
 
     
     # Element net_leased_area uses Python identifier net_leased_area
-    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_ResidentialType_net_leased_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 185, 6), )
+    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_ResidentialType_net_leased_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 188, 6), )
 
     
     net_leased_area = property(__net_leased_area.value, __net_leased_area.set, None, None)
 
     
     # Element outer_area uses Python identifier outer_area
-    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_ResidentialType_outer_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 186, 6), )
+    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_ResidentialType_outer_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 189, 6), )
 
     
     outer_area = property(__outer_area.value, __outer_area.set, None, None)
 
     
     # Element window_area uses Python identifier window_area
-    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_ResidentialType_window_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 187, 3), )
+    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_ResidentialType_window_area', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 190, 3), )
 
     
     window_area = property(__window_area.value, __window_area.set, None, None)
 
     
     # Element ThermalZone uses Python identifier ThermalZone
-    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_ResidentialType_ThermalZone', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 188, 6), )
+    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_ResidentialType_ThermalZone', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 191, 6), )
 
     
     ThermalZone = property(__ThermalZone.value, __ThermalZone.set, None, None)
@@ -1887,6 +1910,7 @@ class ResidentialType (pyxb.binding.basis.complexTypeDefinition):
         __city.name() : __city,
         __type_of_building.name() : __type_of_building,
         __year_of_construction.name() : __year_of_construction,
+        __year_of_retrofit.name() : __year_of_retrofit,
         __number_of_floors.name() : __number_of_floors,
         __height_of_floors.name() : __height_of_floors,
         __net_leased_area.name() : __net_leased_area,
@@ -1907,27 +1931,27 @@ class ProjectType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ProjectType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 191, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 194, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element Building uses Python identifier Building
-    __Building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Building'), 'Building', '__AbsentNamespace0_ProjectType_Building', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 193, 6), )
+    __Building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Building'), 'Building', '__AbsentNamespace0_ProjectType_Building', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 196, 6), )
 
     
     Building = property(__Building.value, __Building.set, None, None)
 
     
     # Element Office uses Python identifier Office
-    __Office = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Office'), 'Office', '__AbsentNamespace0_ProjectType_Office', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 194, 3), )
+    __Office = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Office'), 'Office', '__AbsentNamespace0_ProjectType_Office', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 197, 3), )
 
     
     Office = property(__Office.value, __Office.set, None, None)
 
     
     # Element Residential uses Python identifier Residential
-    __Residential = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Residential'), 'Residential', '__AbsentNamespace0_ProjectType_Residential', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 195, 3), )
+    __Residential = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Residential'), 'Residential', '__AbsentNamespace0_ProjectType_Residential', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 198, 3), )
 
     
     Residential = property(__Residential.value, __Residential.set, None, None)
@@ -5165,17 +5189,19 @@ BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(
 
 BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 152, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 153, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 153, 3)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 154, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 154, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 155, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 155, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 156, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 156, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 157, 3)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 157, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 158, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 158, 3)))
+
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 159, 6)))
 
 def _BuildAutomaton_18 ():
     # Remove this helper function from the namespace after it is invoked
@@ -5194,7 +5220,7 @@ def _BuildAutomaton_18 ():
     counters.add(cc_3)
     cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 152, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 153, 6))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 153, 3))
     counters.add(cc_5)
     cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 154, 6))
     counters.add(cc_6)
@@ -5202,10 +5228,12 @@ def _BuildAutomaton_18 ():
     counters.add(cc_7)
     cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 156, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 157, 3))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 157, 6))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 158, 6))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 158, 3))
     counters.add(cc_10)
+    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 159, 6))
+    counters.add(cc_11)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
@@ -5234,34 +5262,39 @@ def _BuildAutomaton_18 ():
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 153, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 153, 3))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 154, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 154, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 155, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 155, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 156, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 156, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 157, 3))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 157, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 158, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 158, 3))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
+    final_update = set()
+    final_update.add(fac.UpdateInstruction(cc_11, False))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 159, 6))
+    st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
+    states.append(st_11)
     transitions = []
     transitions.append(fac.Transition(st_0, [
         fac.UpdateInstruction(cc_0, True) ]))
@@ -5285,6 +5318,8 @@ def _BuildAutomaton_18 ():
         fac.UpdateInstruction(cc_0, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_0, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_0, False) ]))
     st_0._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_1, [
@@ -5307,6 +5342,8 @@ def _BuildAutomaton_18 ():
         fac.UpdateInstruction(cc_1, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_1, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_1, False) ]))
     st_1._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_2, [
@@ -5327,6 +5364,8 @@ def _BuildAutomaton_18 ():
         fac.UpdateInstruction(cc_2, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_2, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_2, False) ]))
     st_2._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_3, [
@@ -5345,6 +5384,8 @@ def _BuildAutomaton_18 ():
         fac.UpdateInstruction(cc_3, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_3, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_3, False) ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
@@ -5361,6 +5402,8 @@ def _BuildAutomaton_18 ():
         fac.UpdateInstruction(cc_4, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_4, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_4, False) ]))
     st_4._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_5, [
@@ -5375,6 +5418,8 @@ def _BuildAutomaton_18 ():
         fac.UpdateInstruction(cc_5, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_5, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_5, False) ]))
     st_5._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_6, [
@@ -5387,6 +5432,8 @@ def _BuildAutomaton_18 ():
         fac.UpdateInstruction(cc_6, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_6, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_6, False) ]))
     st_6._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_7, [
@@ -5397,6 +5444,8 @@ def _BuildAutomaton_18 ():
         fac.UpdateInstruction(cc_7, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_7, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_7, False) ]))
     st_7._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_8, [
@@ -5405,44 +5454,56 @@ def _BuildAutomaton_18 ():
         fac.UpdateInstruction(cc_8, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_8, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_8, False) ]))
     st_8._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_9, [
         fac.UpdateInstruction(cc_9, True) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_9, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_9, False) ]))
     st_9._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_10, True) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_10, False) ]))
     st_10._set_transitionSet(transitions)
+    transitions = []
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_11, True) ]))
+    st_11._set_transitionSet(transitions)
     return fac.Automaton(states, counters, True, containing_state=None)
 BuildingType._Automaton = _BuildAutomaton_18()
 
 
 
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 163, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 164, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 164, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 165, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 165, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 166, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 166, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 167, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 167, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 168, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 168, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 169, 3)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 169, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 170, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 170, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 171, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 171, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 172, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 172, 3)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 173, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 173, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 174, 3)))
+
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 175, 6)))
 
 def _BuildAutomaton_19 ():
     # Remove this helper function from the namespace after it is invoked
@@ -5451,84 +5512,91 @@ def _BuildAutomaton_19 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 163, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 164, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 164, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 165, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 165, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 166, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 166, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 167, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 167, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 168, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 168, 6))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 169, 3))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 169, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 170, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 170, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 171, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 171, 6))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 172, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 172, 3))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 173, 6))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 173, 6))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 174, 3))
     counters.add(cc_10)
+    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 175, 6))
+    counters.add(cc_11)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 163, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 164, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 164, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 165, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 165, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 166, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 166, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 167, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 167, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 168, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 168, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 169, 3))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 169, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 170, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 170, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 171, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 171, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 172, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 172, 3))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 173, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 173, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 174, 3))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
+    final_update = set()
+    final_update.add(fac.UpdateInstruction(cc_11, False))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 175, 6))
+    st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
+    states.append(st_11)
     transitions = []
     transitions.append(fac.Transition(st_0, [
         fac.UpdateInstruction(cc_0, True) ]))
@@ -5552,6 +5620,8 @@ def _BuildAutomaton_19 ():
         fac.UpdateInstruction(cc_0, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_0, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_0, False) ]))
     st_0._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_1, [
@@ -5574,6 +5644,8 @@ def _BuildAutomaton_19 ():
         fac.UpdateInstruction(cc_1, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_1, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_1, False) ]))
     st_1._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_2, [
@@ -5594,6 +5666,8 @@ def _BuildAutomaton_19 ():
         fac.UpdateInstruction(cc_2, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_2, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_2, False) ]))
     st_2._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_3, [
@@ -5612,6 +5686,8 @@ def _BuildAutomaton_19 ():
         fac.UpdateInstruction(cc_3, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_3, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_3, False) ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
@@ -5628,6 +5704,8 @@ def _BuildAutomaton_19 ():
         fac.UpdateInstruction(cc_4, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_4, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_4, False) ]))
     st_4._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_5, [
@@ -5642,6 +5720,8 @@ def _BuildAutomaton_19 ():
         fac.UpdateInstruction(cc_5, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_5, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_5, False) ]))
     st_5._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_6, [
@@ -5654,6 +5734,8 @@ def _BuildAutomaton_19 ():
         fac.UpdateInstruction(cc_6, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_6, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_6, False) ]))
     st_6._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_7, [
@@ -5664,6 +5746,8 @@ def _BuildAutomaton_19 ():
         fac.UpdateInstruction(cc_7, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_7, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_7, False) ]))
     st_7._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_8, [
@@ -5672,44 +5756,56 @@ def _BuildAutomaton_19 ():
         fac.UpdateInstruction(cc_8, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_8, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_8, False) ]))
     st_8._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_9, [
         fac.UpdateInstruction(cc_9, True) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_9, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_9, False) ]))
     st_9._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_10, True) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_10, False) ]))
     st_10._set_transitionSet(transitions)
+    transitions = []
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_11, True) ]))
+    st_11._set_transitionSet(transitions)
     return fac.Automaton(states, counters, True, containing_state=None)
 OfficeType._Automaton = _BuildAutomaton_19()
 
 
 
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 178, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 180, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 179, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 181, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 180, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 182, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 181, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 183, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 182, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 184, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 183, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 185, 3)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 184, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 186, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 185, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 187, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 186, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 188, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 187, 3)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 189, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 188, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 190, 3)))
+
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 191, 6)))
 
 def _BuildAutomaton_20 ():
     # Remove this helper function from the namespace after it is invoked
@@ -5718,84 +5814,91 @@ def _BuildAutomaton_20 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 178, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 180, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 179, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 181, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 180, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 182, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 181, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 183, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 182, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 184, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 183, 6))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 185, 3))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 184, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 186, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 185, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 187, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 186, 6))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 188, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 187, 3))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 189, 6))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 188, 6))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 190, 3))
     counters.add(cc_10)
+    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 191, 6))
+    counters.add(cc_11)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 178, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 180, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 179, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 181, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 180, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 182, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 181, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 183, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 182, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 184, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 183, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 185, 3))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 184, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 186, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 185, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 187, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 186, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 188, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 187, 3))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 189, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 188, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 190, 3))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
+    final_update = set()
+    final_update.add(fac.UpdateInstruction(cc_11, False))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 191, 6))
+    st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
+    states.append(st_11)
     transitions = []
     transitions.append(fac.Transition(st_0, [
         fac.UpdateInstruction(cc_0, True) ]))
@@ -5819,6 +5922,8 @@ def _BuildAutomaton_20 ():
         fac.UpdateInstruction(cc_0, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_0, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_0, False) ]))
     st_0._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_1, [
@@ -5841,6 +5946,8 @@ def _BuildAutomaton_20 ():
         fac.UpdateInstruction(cc_1, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_1, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_1, False) ]))
     st_1._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_2, [
@@ -5861,6 +5968,8 @@ def _BuildAutomaton_20 ():
         fac.UpdateInstruction(cc_2, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_2, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_2, False) ]))
     st_2._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_3, [
@@ -5879,6 +5988,8 @@ def _BuildAutomaton_20 ():
         fac.UpdateInstruction(cc_3, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_3, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_3, False) ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
@@ -5895,6 +6006,8 @@ def _BuildAutomaton_20 ():
         fac.UpdateInstruction(cc_4, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_4, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_4, False) ]))
     st_4._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_5, [
@@ -5909,6 +6022,8 @@ def _BuildAutomaton_20 ():
         fac.UpdateInstruction(cc_5, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_5, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_5, False) ]))
     st_5._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_6, [
@@ -5921,6 +6036,8 @@ def _BuildAutomaton_20 ():
         fac.UpdateInstruction(cc_6, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_6, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_6, False) ]))
     st_6._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_7, [
@@ -5931,6 +6048,8 @@ def _BuildAutomaton_20 ():
         fac.UpdateInstruction(cc_7, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_7, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_7, False) ]))
     st_7._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_8, [
@@ -5939,28 +6058,38 @@ def _BuildAutomaton_20 ():
         fac.UpdateInstruction(cc_8, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_8, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_8, False) ]))
     st_8._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_9, [
         fac.UpdateInstruction(cc_9, True) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_9, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_9, False) ]))
     st_9._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_10, True) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_10, False) ]))
     st_10._set_transitionSet(transitions)
+    transitions = []
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_11, True) ]))
+    st_11._set_transitionSet(transitions)
     return fac.Automaton(states, counters, True, containing_state=None)
 ResidentialType._Automaton = _BuildAutomaton_20()
 
 
 
 
-ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Building'), BuildingType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 193, 6)))
+ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Building'), BuildingType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 196, 6)))
 
-ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Office'), OfficeType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 194, 3)))
+ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Office'), OfficeType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 197, 3)))
 
-ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Residential'), ResidentialType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 195, 3)))
+ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Residential'), ResidentialType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 198, 3)))
 
 def _BuildAutomaton_21 ():
     # Remove this helper function from the namespace after it is invoked
@@ -5969,22 +6098,22 @@ def _BuildAutomaton_21 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 192, 4))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 195, 4))
     counters.add(cc_0)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Building')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 193, 6))
+    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Building')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 196, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Office')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 194, 3))
+    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Office')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 197, 3))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Residential')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 195, 3))
+    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Residential')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 198, 3))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     transitions = []
