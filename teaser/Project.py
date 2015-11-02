@@ -126,10 +126,10 @@ class Project(object):
 
         '''
 
-        if calculation_core == self._calculation_method:
+        if calculation_core == self.calculation_method:
             pass
         else:
-            self._calculation_method = calculation_core
+            self.calculation_method = calculation_core
 
         for bldg in self.list_of_buildings:
 
