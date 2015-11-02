@@ -380,7 +380,7 @@ class Test_teaser(object):
 
         prj.list_of_buildings[-1].thermal_zones[-1].parallel_connection("vdi")
         assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_ow, 14) == 0.00738585853265
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].c1_ow, 6) == 217636.980184
+        assert round(prj.list_of_buildings[-1].thermal_zones[-1].c1_ow, 5) == 217636.98018
         assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_iw, 13) == 0.0198372019253
         assert round(prj.list_of_buildings[-1].thermal_zones[-1].c1_iw, 7) == 68489.5680589
         assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_win, 1) == 48.0
@@ -391,7 +391,7 @@ class Test_teaser(object):
 
         prj.list_of_buildings[-1].thermal_zones[-1].parallel_connection("ebc")
         assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_ow, 13) == 0.0114424496081
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].c1_ow, 6) == 217636.980184
+        assert round(prj.list_of_buildings[-1].thermal_zones[-1].c1_ow, 5) == 217636.98018
         assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_iw, 13) == 0.0198372019253
         assert round(prj.list_of_buildings[-1].thermal_zones[-1].c1_iw, 7) == 68489.5680589
         assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_win, 12) == 0.128333333333
