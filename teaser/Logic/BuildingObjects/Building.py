@@ -9,6 +9,7 @@ import inspect
 
 
 class Building(object):
+
     '''Building Class
 
     This class represents a general building
@@ -67,7 +68,6 @@ class Building(object):
                  number_of_floors=None,
                  height_of_floors=None,
                  net_leased_area=None):
-
         '''Constructor of Building Class
         '''
 
@@ -81,7 +81,7 @@ class Building(object):
         self.type_of_building = type(self).__name__
 
         self.year_of_construction = year_of_construction
-        
+
         if number_of_floors is not None:
             self.number_of_floors = float(number_of_floors)
         else:
@@ -248,14 +248,14 @@ class Building(object):
                         pass
                     elif zone_count is spec_zone:
                         wall_count.area = \
-                         (actual_area * (zone_count.area /
-                          self.net_leased_area)) / \
-                         (float(len(zone_count.outer_walls)) - 1)
+                            (actual_area * (zone_count.area /
+                                            self.net_leased_area)) / \
+                            (float(len(zone_count.outer_walls)) - 1)
                     else:
                         wall_count.area = \
-                         (actual_area * (zone_count.area /
-                          self.net_leased_area)) / \
-                         (float(len(zone_count.outer_walls)))
+                            (actual_area * (zone_count.area /
+                                            self.net_leased_area)) / \
+                            (float(len(zone_count.outer_walls)))
 
     def fill_outer_area_dict(self):
         '''fill the outer area dict
@@ -306,9 +306,9 @@ class Building(object):
             self.volume += zone.volume
             self.sum_heating_load += zone.heating_load
 
-    def retrofit_building(self, year_of_retrofit = None, 
-                                window_type=None, 
-                                material=None):
+    def retrofit_building(self, year_of_retrofit=None,
+                          window_type=None,
+                          material=None):
         ''' Retrofits all zones in the building
 
         Function call for each zone.
@@ -322,11 +322,11 @@ class Building(object):
         material : str
             Default: EPS035
         '''
-        if year_of_retrofit != None:
+        if year_of_retrofit is not None:
             self.year_of_retrofit = year_of_retrofit
         else:
             pass
-        
+
         for zone in self.thermal_zones:
             zone.retrofit_zone(window_type, material)
 
@@ -389,7 +389,7 @@ class Building(object):
     def window_area(self, value):
         # some improvement needed here
         self.__window_area = value
-        
+
     @property
     def year_of_retrofit(self):
         # some improvement needed here
@@ -397,7 +397,7 @@ class Building(object):
 
     @year_of_retrofit.setter
     def year_of_retrofit(self, value):
-        if self.year_of_construction is not None: 
+        if self.year_of_construction is not None:
             self._year_of_retrofit = value
         else:
             raise ValueError("Specify year of construction first")
