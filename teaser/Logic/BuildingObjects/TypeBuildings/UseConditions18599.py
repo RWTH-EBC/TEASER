@@ -8,6 +8,7 @@ import teaser.Logic.Utilis as utilis
 
 
 class UseConditions18599(UseConditions):
+
     '''Use Conditions DIN 18599
 
     CLass that contains the boundary conditions of use for non-residential
@@ -86,9 +87,9 @@ class UseConditions18599(UseConditions):
     part_load_factor_lighting : float
         part load factor of building usage time for lighting -
         Teilbetriebsfaktor der Gebaeudebetriebszeit fuer Beleuchtung
-        
+
     ratio_conv_rad_lighting : float
-        describes the ratio between convective and radiative heat transer 
+        describes the ratio between convective and radiative heat transer
         of the lighting
 
     ROOM CLIMATE
@@ -189,7 +190,7 @@ class UseConditions18599(UseConditions):
         self.room_index = 0.9
         self.part_load_factor_lighting = 0.7
         self.ratio_conv_rad_lighting = 0.5
-        
+
         self.set_temp_heat = 21.0
         self.set_temp_cool = 24.0
         self.temp_set_back = 4.0
@@ -336,7 +337,7 @@ class UseConditions18599(UseConditions):
             self.part_load_factor_lighting
         usage_pyxb.Lighting.ratio_conv_rad_lighting = \
             self.ratio_conv_rad_lighting
-        
+
         usage_pyxb.RoomClimate.set_temp_heat = self.set_temp_heat
         usage_pyxb.RoomClimate.set_temp_cool = self.set_temp_cool
         usage_pyxb.RoomClimate.temp_set_back = self.temp_set_back
