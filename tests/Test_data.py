@@ -452,7 +452,7 @@ class Test_teaser(object):
 
     def test_export_parameters_txt(self):
         '''test of the export of the readable parameter output'''
-        
+
         prj.export_parameters_txt()
         prj.set_default()
 
@@ -675,26 +675,30 @@ class Test_teaser(object):
         '''test of test_parallel_connection'''
 
         prj.list_of_buildings[-1].thermal_zones[-1].parallel_connection("vdi")
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_ow, 14) == 0.00738585853265
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].c1_ow, 5) == 217636.98018
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_iw, 13) == 0.0198372019253
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].c1_iw, 7) == 68489.5680589
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_win, 1) == 48.0
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_ow, 14) == 0.00738585853265
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r_total, 17) == 0.05741190415875247
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r_rad_ow_iw, 5) == 0.00625
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r_rest_ow, 13) == 0.0457959271828
+        thermalZone = prj.list_of_buildings[-1].thermal_zones[-1]
+
+        assert round(thermalZone.r1_ow, 14) == 0.00738585853265
+        assert round(thermalZone.c1_ow, 5) == 217636.98018
+        assert round(thermalZone.r1_iw, 13) == 0.0198372019253
+        assert round(thermalZone.c1_iw, 7) == 68489.5680589
+        assert round(thermalZone.r1_win, 1) == 48.0
+        assert round(thermalZone.r1_ow, 14) == 0.00738585853265
+        assert round(thermalZone.r_total, 17) == 0.05741190415875247
+        assert round(thermalZone.r_rad_ow_iw, 5) == 0.00625
+        assert round(thermalZone.r_rest_ow, 13) == 0.0457959271828
 
         prj.list_of_buildings[-1].thermal_zones[-1].parallel_connection("ebc")
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_ow, 13) == 0.0114424496081
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].c1_ow, 5) == 217636.98018
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_iw, 13) == 0.0198372019253
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].c1_iw, 7) == 68489.5680589
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_win, 12) == 0.128333333333
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r1_ow, 13) == 0.0114424496081
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r_total, 18) == 0.09580735571294165
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r_rad_ow_iw, 19) == 0.00909090909090909
-        assert round(prj.list_of_buildings[-1].thermal_zones[-1].r_rest_ow, 13) == 0.0784617183834
+        thermalZone = prj.list_of_buildings[-1].thermal_zones[-1]
+
+        assert round(thermalZone.r1_ow, 13) == 0.0114424496081
+        assert round(thermalZone.c1_ow, 5) == 217636.98018
+        assert round(thermalZone.r1_iw, 13) == 0.0198372019253
+        assert round(thermalZone.c1_iw, 7) == 68489.5680589
+        assert round(thermalZone.r1_win, 12) == 0.128333333333
+        assert round(thermalZone.r1_ow, 13) == 0.0114424496081
+        assert round(thermalZone.r_total, 18) == 0.09580735571294165
+        assert round(thermalZone.r_rad_ow_iw, 19) == 0.00909090909090909
+        assert round(thermalZone.r_rest_ow, 13) == 0.0784617183834
 
     def test_calc_weightfactor(self):
         '''test of calc_weightfactor'''
