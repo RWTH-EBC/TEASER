@@ -138,7 +138,7 @@ class Test_teaser(object):
     def test_type_bldg_office_with_calc(self):
         '''
         Verification of the type building generation of an office building.
-        Values are compared with fixme.
+        Values are compared with TEASER3 values.
         '''
         from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
 
@@ -159,7 +159,7 @@ class Test_teaser(object):
         general parameters
         '''
         assert len(testOffice.thermal_zones) == 6
-        assert round(testOffice.get_outer_wall_area(-2), 0) == 958
+
         '''
         zone specific parameters
         '''
@@ -176,6 +176,20 @@ class Test_teaser(object):
                 assert zone.area == 50
             if zone.name == "Floor":
                 assert zone.area == 625
+
+        '''
+        facade specific parameters
+        '''
+        assert round(testOffice.get_outer_wall_area(-2), 0) == 958
+        assert round(testOffice.get_outer_wall_area(-1), 0) == 958
+        assert round(testOffice.get_outer_wall_area(0), 0) == 437
+        assert round(testOffice.get_outer_wall_area(180), 0) == 437
+        assert round(testOffice.get_outer_wall_area(90), 0) == 77
+        assert round(testOffice.get_outer_wall_area(270), 0) == 77
+        assert round(testOffice.get_window_area(0), 0) == 158
+        assert round(testOffice.get_window_area(180), 0) == 158
+        assert round(testOffice.get_window_area(90), 0) == 28
+        assert round(testOffice.get_window_area(270), 0) == 28
 
         for key in testOffice.outer_area:
             if (key == "Exterior Facade North or key" or
@@ -196,8 +210,6 @@ class Test_teaser(object):
             elif (key == "Window Facade East" or
                     key == "Window Facade West"):
                 assert round(testOffice.window_area[key], 0) == 28
-
-        # for key, value in testOffice.roof
 
     '''methods in Project, these tests only test if the API function works,
     not if it produces reliable results.'''
