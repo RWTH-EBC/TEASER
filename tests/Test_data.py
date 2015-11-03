@@ -448,6 +448,73 @@ class Test_teaser(object):
                     key == "Window Facade West"):
                 assert round(testInstitute.window_area[key], 0) == 28
 
+    def test_type_bldg_residential_with_calc(self):
+        '''
+        Verification of the type building generation of an office building.
+        Values are compared with TEASER3 values.
+        '''
+        from teaser.Logic.BuildingObjects.TypeBuildings.Residential import \
+            Residential
+
+        prj.set_default()
+        testResidential = Residential(parent=prj,
+                                      name="TestBuilding",
+                                      year_of_construction=1988,
+                                      number_of_floors=3,
+                                      height_of_floors=3,
+                                      net_leased_area=2500,
+                                      residential_layout=0,
+                                      neighbour_buildings=0,
+                                      construction_type="heavy")
+
+        testResidential.generate_residential()
+
+        '''
+        general parameters
+        '''
+        assert len(testResidential.thermal_zones) == 1
+
+        '''
+        zone specific parameters
+        '''
+        for zone in testResidential.thermal_zones:
+            if zone.name == "SingleDwelling":
+                assert zone.area == 2500
+
+        '''
+        facade specific parameters
+        '''
+        assert round(testResidential.get_outer_wall_area(-2), 0) == 1108
+        assert round(testResidential.get_outer_wall_area(-1), 0) == 1108
+        assert round(testResidential.get_outer_wall_area(0), 0) == 325
+        assert round(testResidential.get_outer_wall_area(180), 0) == 325
+        assert round(testResidential.get_outer_wall_area(90), 0) == 325
+        assert round(testResidential.get_outer_wall_area(270), 0) == 325
+        assert round(testResidential.get_window_area(0), 0) == 125
+        assert round(testResidential.get_window_area(180), 0) == 125
+        assert round(testResidential.get_window_area(90), 0) == 125
+        assert round(testResidential.get_window_area(270), 0) == 125
+
+        for key in testResidential.outer_area:
+            if (key == "Exterior Facade North or key" or
+                    key == "Exterior Facade South"):
+                assert round(testResidential.outer_area[key], 0) == 325
+            elif (key == "Exterior Facade East" or
+                    key == "Exterior Facade West"):
+                assert round(testResidential.outer_area[key], 0) == 325
+            elif key == "Rooftop":
+                assert round(testResidential.outer_area[key], 0) == 1108
+            elif key == "Ground Floor":
+                assert round(testResidential.outer_area[key], 0) == 1108
+
+        for key in testResidential.window_area:
+            if (key == "Window Facade North" or
+                    key == "Window Facade North"):
+                assert round(testResidential.window_area[key], 0) == 125
+            elif (key == "Window Facade East" or
+                    key == "Window Facade West"):
+                assert round(testResidential.window_area[key], 0) == 125
+
     '''methods in Project, these tests only test if the API function works,
     not if it produces reliable results.'''
 
