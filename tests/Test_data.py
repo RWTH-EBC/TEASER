@@ -163,19 +163,41 @@ class Test_teaser(object):
         '''
         zone specific parameters
         '''
-        for i in testOffice.thermal_zones:
-            if i.name == "Meeting":
-                assert i.area == 100
-            if i.name == "Storage":
-                assert i.area == 375
-            if i.name == "Office":
-                assert i.area == 1250
-            if i.name == "Restroom":
-                assert i.area == 100
-            if i.name == "ICT":
-                assert i.area == 50
-            if i.name == "Floor":
-                assert i.area == 625
+        for zone in testOffice.thermal_zones:
+            if zone.name == "Meeting":
+                assert zone.area == 100
+            if zone.name == "Storage":
+                assert zone.area == 375
+            if zone.name == "Office":
+                assert zone.area == 1250
+            if zone.name == "Restroom":
+                assert zone.area == 100
+            if zone.name == "ICT":
+                assert zone.area == 50
+            if zone.name == "Floor":
+                assert zone.area == 625
+
+        for key in testOffice.outer_area:
+            if (key == "Exterior Facade North or key" or
+                    key == "Exterior Facade South"):
+                assert round(testOffice.outer_area[key], 0) == 437
+            elif (key == "Exterior Facade East" or
+                    key == "Exterior Facade West"):
+                assert round(testOffice.outer_area[key], 0) == 77
+            elif key == "Rooftop":
+                assert round(testOffice.outer_area[key], 0) == 958
+            elif key == "Ground Floor":
+                assert round(testOffice.outer_area[key], 0) == 958
+
+        for key in testOffice.window_area:
+            if (key == "Window Facade North" or
+                    key == "Window Facade North"):
+                assert round(testOffice.window_area[key], 0) == 158
+            elif (key == "Window Facade East" or
+                    key == "Window Facade West"):
+                assert round(testOffice.window_area[key], 0) == 28
+
+        # for key, value in testOffice.roof
 
     '''methods in Project, these tests only test if the API function works,
     not if it produces reliable results.'''
