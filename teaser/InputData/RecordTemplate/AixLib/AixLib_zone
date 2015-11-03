@@ -100,9 +100,9 @@ end ${bldg.name}_${zone.name};
 <%def name="element_check(element)", filter ="trim">
 	<%
 	if len(element)!= 0:
-		return "True"
+		return "true"
 	else:
-		return "False"
+		return "false"
 	%>
 </%def>
 
