@@ -34,7 +34,7 @@ def example_type_building():
                               cellar =  1,
                               construction_type = "heavy",
                               dormer = 1)
-    
+   
     """To export the parameters to a Modelica record, we use the export_record
     function. path = None indicates, that we want to store the records in 
     TEASER'S Output folder""" 
@@ -55,7 +55,11 @@ def example_type_building():
     
     prj.save_project("Retrofit_Building",
                       path = None)
-    
+
+    '''   
+    Save the human readable output txt
+    '''
+    prj.export_parameters_txt(path=None)
     
 
 if __name__ == '__main__':
