@@ -191,26 +191,6 @@ class Test_teaser(object):
         assert round(testOffice.get_window_area(90), 0) == 28
         assert round(testOffice.get_window_area(270), 0) == 28
 
-        for key in testOffice.outer_area:
-            if (key == "Exterior Facade North or key" or
-                    key == "Exterior Facade South"):
-                assert round(testOffice.outer_area[key], 0) == 437
-            elif (key == "Exterior Facade East" or
-                    key == "Exterior Facade West"):
-                assert round(testOffice.outer_area[key], 0) == 77
-            elif key == "Rooftop":
-                assert round(testOffice.outer_area[key], 0) == 958
-            elif key == "Ground Floor":
-                assert round(testOffice.outer_area[key], 0) == 958
-
-        for key in testOffice.window_area:
-            if (key == "Window Facade North" or
-                    key == "Window Facade North"):
-                assert round(testOffice.window_area[key], 0) == 158
-            elif (key == "Window Facade East" or
-                    key == "Window Facade West"):
-                assert round(testOffice.window_area[key], 0) == 28
-
     def test_type_bldg_institute4_with_calc(self):
         '''
         Verification of the type building generation of an office building.
@@ -269,26 +249,6 @@ class Test_teaser(object):
         assert round(testInstitute4.get_window_area(180), 0) == 158
         assert round(testInstitute4.get_window_area(90), 0) == 28
         assert round(testInstitute4.get_window_area(270), 0) == 28
-
-        for key in testInstitute4.outer_area:
-            if (key == "Exterior Facade North or key" or
-                    key == "Exterior Facade South"):
-                assert round(testInstitute4.outer_area[key], 0) == 437
-            elif (key == "Exterior Facade East" or
-                    key == "Exterior Facade West"):
-                assert round(testInstitute4.outer_area[key], 0) == 77
-            elif key == "Rooftop":
-                assert round(testInstitute4.outer_area[key], 0) == 958
-            elif key == "Ground Floor":
-                assert round(testInstitute4.outer_area[key], 0) == 958
-
-        for key in testInstitute4.window_area:
-            if (key == "Window Facade North" or
-                    key == "Window Facade North"):
-                assert round(testInstitute4.window_area[key], 0) == 158
-            elif (key == "Window Facade East" or
-                    key == "Window Facade West"):
-                assert round(testInstitute4.window_area[key], 0) == 28
 
     def test_type_bldg_institute8_with_calc(self):
         '''
@@ -349,26 +309,6 @@ class Test_teaser(object):
         assert round(testInstitute8.get_window_area(90), 0) == 28
         assert round(testInstitute8.get_window_area(270), 0) == 28
 
-        for key in testInstitute8.outer_area:
-            if (key == "Exterior Facade North or key" or
-                    key == "Exterior Facade South"):
-                assert round(testInstitute8.outer_area[key], 0) == 437
-            elif (key == "Exterior Facade East" or
-                    key == "Exterior Facade West"):
-                assert round(testInstitute8.outer_area[key], 0) == 77
-            elif key == "Rooftop":
-                assert round(testInstitute8.outer_area[key], 0) == 958
-            elif key == "Ground Floor":
-                assert round(testInstitute8.outer_area[key], 0) == 958
-
-        for key in testInstitute8.window_area:
-            if (key == "Window Facade North" or
-                    key == "Window Facade North"):
-                assert round(testInstitute8.window_area[key], 0) == 158
-            elif (key == "Window Facade East" or
-                    key == "Window Facade West"):
-                assert round(testInstitute8.window_area[key], 0) == 28
-
     def test_type_bldg_institute_with_calc(self):
         '''
         Verification of the type building generation of an office building.
@@ -428,26 +368,6 @@ class Test_teaser(object):
         assert round(testInstitute.get_window_area(90), 0) == 28
         assert round(testInstitute.get_window_area(270), 0) == 28
 
-        for key in testInstitute.outer_area:
-            if (key == "Exterior Facade North or key" or
-                    key == "Exterior Facade South"):
-                assert round(testInstitute.outer_area[key], 0) == 437
-            elif (key == "Exterior Facade East" or
-                    key == "Exterior Facade West"):
-                assert round(testInstitute.outer_area[key], 0) == 77
-            elif key == "Rooftop":
-                assert round(testInstitute.outer_area[key], 0) == 958
-            elif key == "Ground Floor":
-                assert round(testInstitute.outer_area[key], 0) == 958
-
-        for key in testInstitute.window_area:
-            if (key == "Window Facade North" or
-                    key == "Window Facade North"):
-                assert round(testInstitute.window_area[key], 0) == 158
-            elif (key == "Window Facade East" or
-                    key == "Window Facade West"):
-                assert round(testInstitute.window_area[key], 0) == 28
-
     def test_type_bldg_residential_with_calc(self):
         '''
         Verification of the type building generation of an office building.
@@ -494,26 +414,6 @@ class Test_teaser(object):
         assert round(testResidential.get_window_area(180), 0) == 125
         assert round(testResidential.get_window_area(90), 0) == 125
         assert round(testResidential.get_window_area(270), 0) == 125
-
-        for key in testResidential.outer_area:
-            if (key == "Exterior Facade North or key" or
-                    key == "Exterior Facade South"):
-                assert round(testResidential.outer_area[key], 0) == 325
-            elif (key == "Exterior Facade East" or
-                    key == "Exterior Facade West"):
-                assert round(testResidential.outer_area[key], 0) == 325
-            elif key == "Rooftop":
-                assert round(testResidential.outer_area[key], 0) == 1108
-            elif key == "Ground Floor":
-                assert round(testResidential.outer_area[key], 0) == 1108
-
-        for key in testResidential.window_area:
-            if (key == "Window Facade North" or
-                    key == "Window Facade North"):
-                assert round(testResidential.window_area[key], 0) == 125
-            elif (key == "Window Facade East" or
-                    key == "Window Facade West"):
-                assert round(testResidential.window_area[key], 0) == 125
 
     '''methods in Project, these tests only test if the API function works,
     not if it produces reliable results.'''
