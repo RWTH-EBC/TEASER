@@ -211,6 +211,243 @@ class Test_teaser(object):
                     key == "Window Facade West"):
                 assert round(testOffice.window_area[key], 0) == 28
 
+    def test_type_bldg_institute4_with_calc(self):
+        '''
+        Verification of the type building generation of an office building.
+        Values are compared with TEASER3 values.
+        '''
+        from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import \
+            Institute4
+
+        prj.set_default()
+        testInstitute4 = Institute4(parent=prj,
+                                    name="TestBuilding",
+                                    year_of_construction=1988,
+                                    number_of_floors=3,
+                                    height_of_floors=3,
+                                    net_leased_area=2500,
+                                    office_layout=0,
+                                    window_layout=0,
+                                    construction_type="heavy")
+
+        testInstitute4.generate_office()
+
+        '''
+        general parameters
+        '''
+        assert len(testInstitute4.thermal_zones) == 7
+
+        '''
+        zone specific parameters
+        '''
+        for zone in testInstitute4.thermal_zones:
+            if zone.name == "Meeting":
+                assert zone.area == 100
+            if zone.name == "Storage":
+                assert zone.area == 250
+            if zone.name == "Office":
+                assert zone.area == 937.5
+            if zone.name == "Restroom":
+                assert zone.area == 100
+            if zone.name == "ICT":
+                assert zone.area == 50
+            if zone.name == "Floor":
+                assert zone.area == 562.5
+            if zone.name == "Laboratory":
+                assert zone.area == 500
+
+        '''
+        facade specific parameters
+        '''
+        assert round(testInstitute4.get_outer_wall_area(-2), 0) == 958
+        assert round(testInstitute4.get_outer_wall_area(-1), 0) == 958
+        assert round(testInstitute4.get_outer_wall_area(0), 0) == 437
+        assert round(testInstitute4.get_outer_wall_area(180), 0) == 437
+        assert round(testInstitute4.get_outer_wall_area(90), 0) == 77
+        assert round(testInstitute4.get_outer_wall_area(270), 0) == 77
+        assert round(testInstitute4.get_window_area(0), 0) == 158
+        assert round(testInstitute4.get_window_area(180), 0) == 158
+        assert round(testInstitute4.get_window_area(90), 0) == 28
+        assert round(testInstitute4.get_window_area(270), 0) == 28
+
+        for key in testInstitute4.outer_area:
+            if (key == "Exterior Facade North or key" or
+                    key == "Exterior Facade South"):
+                assert round(testInstitute4.outer_area[key], 0) == 437
+            elif (key == "Exterior Facade East" or
+                    key == "Exterior Facade West"):
+                assert round(testInstitute4.outer_area[key], 0) == 77
+            elif key == "Rooftop":
+                assert round(testInstitute4.outer_area[key], 0) == 958
+            elif key == "Ground Floor":
+                assert round(testInstitute4.outer_area[key], 0) == 958
+
+        for key in testInstitute4.window_area:
+            if (key == "Window Facade North" or
+                    key == "Window Facade North"):
+                assert round(testInstitute4.window_area[key], 0) == 158
+            elif (key == "Window Facade East" or
+                    key == "Window Facade West"):
+                assert round(testInstitute4.window_area[key], 0) == 28
+
+    def test_type_bldg_institute8_with_calc(self):
+        '''
+        Verification of the type building generation of an office building.
+        Values are compared with TEASER3 values.
+        '''
+        from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import \
+            Institute8
+
+        prj.set_default()
+        testInstitute8 = Institute8(parent=prj,
+                                    name="TestBuilding",
+                                    year_of_construction=1988,
+                                    number_of_floors=3,
+                                    height_of_floors=3,
+                                    net_leased_area=2500,
+                                    office_layout=0,
+                                    window_layout=0,
+                                    construction_type="heavy")
+
+        testInstitute8.generate_office()
+
+        '''
+        general parameters
+        '''
+        assert len(testInstitute8.thermal_zones) == 7
+
+        '''
+        zone specific parameters
+        '''
+        for zone in testInstitute8.thermal_zones:
+            if zone.name == "Meeting":
+                assert zone.area == 100
+            if zone.name == "Storage":
+                assert zone.area == 50
+            if zone.name == "Office":
+                assert zone.area == 250
+            if zone.name == "Restroom":
+                assert zone.area == 100
+            if zone.name == "ICT":
+                assert zone.area == 50
+            if zone.name == "Floor":
+                assert zone.area == 450
+            if zone.name == "Laboratory":
+                assert zone.area == 1500
+
+        '''
+        facade specific parameters
+        '''
+        assert round(testInstitute8.get_outer_wall_area(-2), 0) == 958
+        assert round(testInstitute8.get_outer_wall_area(-1), 0) == 958
+        assert round(testInstitute8.get_outer_wall_area(0), 0) == 437
+        assert round(testInstitute8.get_outer_wall_area(180), 0) == 437
+        assert round(testInstitute8.get_outer_wall_area(90), 0) == 77
+        assert round(testInstitute8.get_outer_wall_area(270), 0) == 77
+        assert round(testInstitute8.get_window_area(0), 0) == 158
+        assert round(testInstitute8.get_window_area(180), 0) == 158
+        assert round(testInstitute8.get_window_area(90), 0) == 28
+        assert round(testInstitute8.get_window_area(270), 0) == 28
+
+        for key in testInstitute8.outer_area:
+            if (key == "Exterior Facade North or key" or
+                    key == "Exterior Facade South"):
+                assert round(testInstitute8.outer_area[key], 0) == 437
+            elif (key == "Exterior Facade East" or
+                    key == "Exterior Facade West"):
+                assert round(testInstitute8.outer_area[key], 0) == 77
+            elif key == "Rooftop":
+                assert round(testInstitute8.outer_area[key], 0) == 958
+            elif key == "Ground Floor":
+                assert round(testInstitute8.outer_area[key], 0) == 958
+
+        for key in testInstitute8.window_area:
+            if (key == "Window Facade North" or
+                    key == "Window Facade North"):
+                assert round(testInstitute8.window_area[key], 0) == 158
+            elif (key == "Window Facade East" or
+                    key == "Window Facade West"):
+                assert round(testInstitute8.window_area[key], 0) == 28
+
+    def test_type_bldg_institute_with_calc(self):
+        '''
+        Verification of the type building generation of an office building.
+        Values are compared with TEASER3 values.
+        '''
+        from teaser.Logic.BuildingObjects.TypeBuildings.Institute import \
+            Institute
+
+        prj.set_default()
+        testInstitute = Institute(parent=prj,
+                                  name="TestBuilding",
+                                  year_of_construction=1988,
+                                  number_of_floors=3,
+                                  height_of_floors=3,
+                                  net_leased_area=2500,
+                                  office_layout=0,
+                                  window_layout=0,
+                                  construction_type="heavy")
+
+        testInstitute.generate_office()
+
+        '''
+        general parameters
+        '''
+        assert len(testInstitute.thermal_zones) == 7
+
+        '''
+        zone specific parameters
+        '''
+        for zone in testInstitute.thermal_zones:
+            if zone.name == "Meeting":
+                assert zone.area == 100
+            if zone.name == "Storage":
+                assert zone.area == 250
+            if zone.name == "Office":
+                assert zone.area == 1000
+            if zone.name == "Restroom":
+                assert zone.area == 100
+            if zone.name == "ICT":
+                assert zone.area == 50
+            if zone.name == "Floor":
+                assert zone.area == 625
+            if zone.name == "Laboratory":
+                assert zone.area == 375
+
+        '''
+        facade specific parameters
+        '''
+        assert round(testInstitute.get_outer_wall_area(-2), 0) == 958
+        assert round(testInstitute.get_outer_wall_area(-1), 0) == 958
+        assert round(testInstitute.get_outer_wall_area(0), 0) == 437
+        assert round(testInstitute.get_outer_wall_area(180), 0) == 437
+        assert round(testInstitute.get_outer_wall_area(90), 0) == 77
+        assert round(testInstitute.get_outer_wall_area(270), 0) == 77
+        assert round(testInstitute.get_window_area(0), 0) == 158
+        assert round(testInstitute.get_window_area(180), 0) == 158
+        assert round(testInstitute.get_window_area(90), 0) == 28
+        assert round(testInstitute.get_window_area(270), 0) == 28
+
+        for key in testInstitute.outer_area:
+            if (key == "Exterior Facade North or key" or
+                    key == "Exterior Facade South"):
+                assert round(testInstitute.outer_area[key], 0) == 437
+            elif (key == "Exterior Facade East" or
+                    key == "Exterior Facade West"):
+                assert round(testInstitute.outer_area[key], 0) == 77
+            elif key == "Rooftop":
+                assert round(testInstitute.outer_area[key], 0) == 958
+            elif key == "Ground Floor":
+                assert round(testInstitute.outer_area[key], 0) == 958
+
+        for key in testInstitute.window_area:
+            if (key == "Window Facade North" or
+                    key == "Window Facade North"):
+                assert round(testInstitute.window_area[key], 0) == 158
+            elif (key == "Window Facade East" or
+                    key == "Window Facade West"):
+                assert round(testInstitute.window_area[key], 0) == 28
+
     '''methods in Project, these tests only test if the API function works,
     not if it produces reliable results.'''
 
