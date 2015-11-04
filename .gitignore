@@ -24,6 +24,10 @@
 .project
 .pydevproject
 
+#Spyder Settings #
+#####################
+.spyderproject
+
 #Unit tests #
 #####################
 .cache/

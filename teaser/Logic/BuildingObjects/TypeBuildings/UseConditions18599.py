@@ -8,6 +8,7 @@ import teaser.Logic.Utilis as utilis
 
 
 class UseConditions18599(UseConditions):
+
     '''Use Conditions DIN 18599
 
     CLass that contains the boundary conditions of use for non-residential
@@ -86,6 +87,10 @@ class UseConditions18599(UseConditions):
     part_load_factor_lighting : float
         part load factor of building usage time for lighting -
         Teilbetriebsfaktor der Gebaeudebetriebszeit fuer Beleuchtung
+
+    ratio_conv_rad_lighting : float
+        describes the ratio between convective and radiative heat transer
+        of the lighting
 
     ROOM CLIMATE
 
@@ -184,6 +189,7 @@ class UseConditions18599(UseConditions):
         self.rel_absence = 0.3
         self.room_index = 0.9
         self.part_load_factor_lighting = 0.7
+        self.ratio_conv_rad_lighting = 0.5
 
         self.set_temp_heat = 21.0
         self.set_temp_cool = 24.0
@@ -225,7 +231,7 @@ class UseConditions18599(UseConditions):
 
         for usage in \
             self.parent.parent.parent.data.conditions_bind.\
-                UseConditionsOffice18599:
+                UseConditions18599:
 
             if usage.usage == zone_usage:
 
@@ -260,6 +266,8 @@ class UseConditions18599(UseConditions):
                 self.room_index = usage.Lighting.room_index
                 self.part_load_factor_lighting = \
                     usage.Lighting.part_load_factor_lighting
+                self.ratio_conv_rad_lighting = \
+                    usage.Lighting.ratio_conv_rad_lighting
 
                 self.set_temp_heat = usage.RoomClimate.set_temp_heat
                 self.set_temp_cool = usage.RoomClimate.set_temp_cool
@@ -290,7 +298,7 @@ class UseConditions18599(UseConditions):
 
         '''
 
-        usage_pyxb = uc_bind.UseConditionsOffice18599Type()
+        usage_pyxb = uc_bind.UseConditions18599Type()
         usage_pyxb.UsageOperationTime = uc_bind.UsageOperationTimeType()
         usage_pyxb.Lighting = uc_bind.LightingType()
         usage_pyxb.RoomClimate = uc_bind.RoomClimateType()
@@ -327,6 +335,8 @@ class UseConditions18599(UseConditions):
         usage_pyxb.Lighting.room_index = self.room_index
         usage_pyxb.Lighting.part_load_factor_lighting = \
             self.part_load_factor_lighting
+        usage_pyxb.Lighting.ratio_conv_rad_lighting = \
+            self.ratio_conv_rad_lighting
 
         usage_pyxb.RoomClimate.set_temp_heat = self.set_temp_heat
         usage_pyxb.RoomClimate.set_temp_cool = self.set_temp_cool
