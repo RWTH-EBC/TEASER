@@ -15,6 +15,7 @@ from teaser.Logic.BuildingObjects.TypeBuildings.Institute import Institute
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import Institute4
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import Institute8
 from teaser.Logic.BuildingObjects.TypeBuildings.Residential import Residential
+from teaser.Logic.Simulation.Simulation import Simulation
 
 
 class Project(object):
@@ -55,6 +56,7 @@ class Project(object):
 
         '''
         self.name = "Project"
+        self.simulation = Simulation
 
         self.modelica_project = self.name
         self.weather_file_name = "TRY_5_Essen.txt"

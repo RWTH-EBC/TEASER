@@ -10,6 +10,7 @@ import teaser.Logic.Utilis as utilis
 from teaser.GUI.GUIHelperClasses.PictureButton import PictureButton
 from teaser.Project import Project
 from teaser.Logic.Controller.Controller import Controller
+from teaser.Logic.Simulation.Simulation import Simulation
 from teaser.GUI.GUIHelperClasses.TrackableItem import TrackableItem
 from teaser.GUI.GUIHelperClasses.ListViewZonesFiller import ListViewZonesFiller
 from teaser.GUI.GUIHelperClasses.GUIInfo import GUIInfo
@@ -70,6 +71,7 @@ class MainUI(QDialog):
         self.layer_model = QStandardItemModel()
         self.element_layer_model = QStandardItemModel()
         self.project = Project()
+        self.project.simulation = Simulation()
         self.guiinfo = GUIInfo()
         self.lVZF = ListViewZonesFiller()
         self.is_empty_building_button = False
@@ -980,7 +982,26 @@ class MainUI(QDialog):
                                 break
 
     def save_changed_simulation_values(self):
-        todo=0
+        self.project.simulation.runtimeSimulation =\
+            self.simulation_runtime_lineedit.text()
+        self.project.simulation.intervalOutput =\
+            self.simulation_interval_output_lineedit.text()
+        self.project.simulation.avgTempOuter =\
+            self.heatingload_avg_temp_outer_lineedit.text()
+        self.project.simulation.innerTemp =\
+            self.heatingload_avg_temp_inner_lineedit.text()
+        self.project.simulation.ahuFile = self.simulation_AHU_lineedit.text()
+        self.project.simulation.internalGainsFile =\
+            self.simulation_internal_gains_lineedit.text()
+        self.project.simulation.tsetFile = self.simulation_tset_lineedit.text()
+        self.project.simulation.current_solver =\
+            self.simulation_solver_combobox.currentText()
+        self.project.simulation.current_airchange_rate =\
+            self.heatingload_air_changerate_combobox.currentText()
+        if self.simulation_equidistant_output_checkbox.isChecked():
+            self.project.simulation.equidistant_output = True
+        else:
+            self.project.simulation.equidistant_output = False
 
     def save_changed_element_values(self):
         for zone in self.current_building.thermal_zones:
@@ -3896,7 +3917,7 @@ class MainUI(QDialog):
         self.heatingload_avg_temp_outer_lineedit.setGeometry(
             QtCore.QRect(100, 20, 180, 25))
         self.heatingload_avg_temp_outer_lineedit.setText(
-            self.guiinfo.avgTempOuter)
+            str(self.project.simulation.avgTempOuter))
         self.heatingload_avg_temp_outer_label_2 = QtGui.QLabel(
             self.heatingload_calculation_groupbox)
         self.heatingload_avg_temp_outer_label_2.setGeometry(
@@ -3912,7 +3933,7 @@ class MainUI(QDialog):
         self.heatingload_avg_temp_inner_lineedit.setGeometry(
             QtCore.QRect(100, 55, 180, 25))
         self.heatingload_avg_temp_inner_lineedit.setText(
-            self.guiinfo.innerTemp)
+            self.project.simulation.innerTemp)
         self.heatingload_avg_temp_inner_label_2 = QtGui.QLabel(
             self.heatingload_calculation_groupbox)
         self.heatingload_avg_temp_inner_label_2.setGeometry(
@@ -3927,14 +3948,11 @@ class MainUI(QDialog):
             self.heatingload_calculation_groupbox)
         self.heatingload_air_changerate_combobox.setGeometry(
             QtCore.QRect(100, 90, 180, 25))
-        for airchange_rate in self.guiinfo.airchange_rate:
+        for airchange_rate in self.project.simulation.airchange_rate:
             self.heatingload_air_changerate_combobox.addItem(airchange_rate)
-        self.heatingload_old_calculation_checkbox = QtGui.QCheckBox(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_old_calculation_checkbox.setGeometry(
-            QtCore.QRect(5, 125, 290, 20))
-        self.heatingload_old_calculation_checkbox.setText("Use old heatingload"
-                                                          " calculation")
+        self.heatingload_air_changerate_combobox.setCurrentIndex(
+            self.heatingload_air_changerate_combobox.findText(
+                self.project.simulation.current_airchange_rate))
         
         self.simulation_groupbox = QtGui.QGroupBox("Simulation")
         self.simulation_groupbox.setGeometry(QtCore.QRect(380, 85, 315, 160))
@@ -3951,7 +3969,7 @@ class MainUI(QDialog):
         self.simulation_runtime_lineedit.setGeometry(
             QtCore.QRect(100, 20, 180, 25))
         self.simulation_runtime_lineedit.setText(
-            self.guiinfo.runtimeSimulation)
+            self.project.simulation.runtimeSimulation)
         self.simulation_runtime_label_2 = QtGui.QLabel(
             self.simulation_groupbox)
         self.simulation_runtime_label_2.setGeometry(
@@ -3967,7 +3985,7 @@ class MainUI(QDialog):
         self.simulation_interval_output_lineedit.setGeometry(
             QtCore.QRect(100, 55, 180, 25))
         self.simulation_interval_output_lineedit.setText(
-            self.guiinfo.intervalOutput)
+            self.project.simulation.intervalOutput)
         self.simulation_interval_output_label_2 = QtGui.QLabel(
             self.simulation_groupbox)
         self.simulation_interval_output_label_2.setGeometry(
@@ -3980,14 +3998,17 @@ class MainUI(QDialog):
             self.simulation_groupbox)
         self.simulation_solver_combobox.setGeometry(
             QtCore.QRect(100, 90, 180, 25))
-        for solver in self.guiinfo.solver:
+        for solver in self.project.simulation.solver:
             self.simulation_solver_combobox.addItem(solver)
-        self.simulation_solver_combobox.setCurrentIndex(1)
+        self.simulation_solver_combobox.setCurrentIndex(
+            self.simulation_solver_combobox.findText(
+                self.project.simulation.current_solver))
         self.simulation_equidistant_output_checkbox = QtGui.QCheckBox(
             self.simulation_groupbox)
         self.simulation_equidistant_output_checkbox.setGeometry(
             QtCore.QRect(5, 125, 290, 20))
-        self.simulation_equidistant_output_checkbox.setChecked(True)
+        self.simulation_equidistant_output_checkbox.setChecked(
+            self.project.simulation.equidistant_output)
         self.simulation_equidistant_output_checkbox.setText(
             "Equidistant Output")
         self.boundary_conditions_groupbox = QtGui.QGroupBox("Boundary"
@@ -4008,7 +4029,7 @@ class MainUI(QDialog):
             self.boundary_conditions_groupbox)
         self.simulation_AHU_lineedit.setGeometry(
             QtCore.QRect(105, 20, 420, 25))
-        self.simulation_AHU_lineedit.setText(self.guiinfo.ahuFile)
+        self.simulation_AHU_lineedit.setText(self.project.simulation.ahuFile)
         self.simulation_AHU_button = QtGui.QPushButton(
             self.boundary_conditions_groupbox)
         self.simulation_AHU_button.setGeometry(QtCore.QRect(535, 20, 80, 25))
@@ -4023,7 +4044,7 @@ class MainUI(QDialog):
         self.simulation_internal_gains_lineedit.setGeometry(
             QtCore.QRect(105, 55, 420, 25))
         self.simulation_internal_gains_lineedit.setText(
-            self.guiinfo.internalGainsFile)
+            self.project.simulation.internalGainsFile)
         self.simulation_internal_gains_button = QtGui.QPushButton(
             self.boundary_conditions_groupbox)
         self.simulation_internal_gains_button.setGeometry(
@@ -4037,7 +4058,7 @@ class MainUI(QDialog):
             self.boundary_conditions_groupbox)
         self.simulation_tset_lineedit.setGeometry(
             QtCore.QRect(105, 90, 420, 25))
-        self.simulation_tset_lineedit.setText(self.guiinfo.tsetFile)
+        self.simulation_tset_lineedit.setText(self.project.simulation.tsetFile)
         self.simulation_tset_button = QtGui.QPushButton(
             self.boundary_conditions_groupbox)
         self.simulation_tset_button.setGeometry(QtCore.QRect(535, 90, 80, 25))
