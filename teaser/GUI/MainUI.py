@@ -982,6 +982,7 @@ class MainUI(QDialog):
                                 break
 
     def save_changed_simulation_values(self):
+        self.project.name = self.project_name_lineedit.text()
         self.project.simulation.runtimeSimulation =\
             self.simulation_runtime_lineedit.text()
         self.project.simulation.intervalOutput =\
@@ -2069,6 +2070,7 @@ class MainUI(QDialog):
         for building in self.project.list_of_buildings:
             loaded_project.list_of_buildings.insert(0, building)
         self.project = loaded_project
+        self.project.simulation = Simulation()
 
         self.current_building = self.project.list_of_buildings[-1]
         self.display_current_building()
@@ -2221,6 +2223,7 @@ class MainUI(QDialog):
 
     def create_new_project(self):
         self.project = Project()
+        self.project.simulation = Simulation()
         self.current_building = 0
         self.current_zone = 0
         self.current_element = 0
@@ -3894,9 +3897,21 @@ class MainUI(QDialog):
         self.simulation_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.simulation_window_ui.setWindowTitle("Simulation")
         self.simulation_window_ui.setFixedWidth(650)
-        self.simulation_window_ui.setFixedHeight(400)
+        self.simulation_window_ui.setFixedHeight(420)
         self.simulation_window_ui_layout = QtGui.QGridLayout()
         self.simulation_window_ui.setLayout(self.simulation_window_ui_layout)
+        
+        self.project_name_groupbox = QtGui.QGroupBox("Project")
+        self.project_name_groupbox.setGeometry(QtCore.QRect(10, 10, 620, 40))
+        self.project_name_groupbox.setMinimumSize(QtCore.QSize(620, 40))
+        self.project_name_groupbox.setMaximumSize(QtCore.QSize(620, 40))
+        self.project_name_label = QtGui.QLabel(self.project_name_groupbox)
+        self.project_name_label.setGeometry(QtCore.QRect(210, 10, 90, 25))
+        self.project_name_label.setText("Project Name:")
+        self.project_name_lineedit = QtGui.QLineEdit(self.project_name_groupbox)
+        self.project_name_lineedit.setGeometry(QtCore.QRect(320, 10, 180, 25))
+        self.project_name_lineedit.setText(str(self.project.name))
+        
         self.heatingload_calculation_groupbox = QtGui.QGroupBox("Heating Load"
                                                                 " Calculation")
         self.heatingload_calculation_groupbox.setGeometry(
@@ -4089,13 +4104,15 @@ class MainUI(QDialog):
                 "close()"))
 
         self.simulation_window_ui_layout.addWidget(
-            self.simulation_groupbox, 1, 1)
+            self.project_name_groupbox, 1, 1)
         self.simulation_window_ui_layout.addWidget(
-            self.heatingload_calculation_groupbox, 1, 2)
+            self.simulation_groupbox, 2, 1)
         self.simulation_window_ui_layout.addWidget(
-            self.boundary_conditions_groupbox, 2, 1)
+            self.heatingload_calculation_groupbox, 2, 2)
         self.simulation_window_ui_layout.addWidget(
-            self.simulation_save_cancel_groupbox, 4, 1)
+            self.boundary_conditions_groupbox, 3, 1)
+        self.simulation_window_ui_layout.addWidget(
+            self.simulation_save_cancel_groupbox, 5, 1)
         self.simulation_window_ui.setWindowModality(Qt.ApplicationModal)
         self.simulation_window_ui.show()
 
