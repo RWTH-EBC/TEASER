@@ -19,6 +19,7 @@ from teaser.Logic.Simulation.Simulation import Simulation
 
 
 class Project(object):
+
     '''Base class for each project, serves also as API
 
         The Project class is the root class for each action in TEASER and
@@ -61,15 +62,15 @@ class Project(object):
         self.modelica_project = self.name
         self.weather_file_name = "TRY_5_Essen.txt"
         self.list_of_buildings = []
-        self.calculation_method = "vdi"
+        self._calculation_method = "vdi"
 
         self.load_data = load_data
         self._type_element_file = None
 
         if load_data is True:
-                self.data = self.instantiate_data_class()
+            self.data = self.instantiate_data_class()
         else:
-                self.data = None
+            self.data = None
 
     def instantiate_data_class(self, type_element_file=None):
         '''Initialization of DataClass
@@ -126,6 +127,12 @@ class Project(object):
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
+
+        if calculation_core == self.calculation_method:
+            pass
+        else:
+            self.calculation_method = calculation_core
+
         for bldg in self.list_of_buildings:
 
             bldg.calc_building_parameter(calculation_core)
@@ -177,7 +184,6 @@ class Project(object):
                          office_layout=None,
                          window_layout=None,
                          construction_type=None):
-
         '''Create and calculate an office building
 
         Parameters
@@ -233,7 +239,7 @@ class Project(object):
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
         return type_bldg
-    
+
     def type_bldg_institute(self,
                             name,
                             year_of_construction,
@@ -589,7 +595,8 @@ class Project(object):
         input_path = utilis.get_full_path("InputData\\BoundariesTypeBuilding")
 
         try:
-            shutil.copytree(input_path, utilis.get_full_path(path) + "\\Tables")
+            shutil.copytree(
+                input_path, utilis.get_full_path(path) + "\\Tables")
         except:
             pass
         else:
@@ -648,8 +655,8 @@ class Project(object):
                     'Modelica (version="3.2.1")']
 
             for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "vdi", ("CitiesType_old needs \
-                calculation core vdi")
+                assert bldg._calculation_method == "vdi", ("CitiesType_old \
+                    needs calculation core vdi")
 
             zone_template = Template(
                 filename=utilis.get_full_path(
@@ -690,7 +697,8 @@ class Project(object):
                 zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
 
                 out_file = open(utilis.get_full_path(
-                    zone_path + "\\" + bldg.name + "_" + zone.name + ".mo"), 'w')
+                    zone_path + "\\" + bldg.name + "_" + zone.name + ".mo"),
+                    'w')
                 out_file.write(zone_template.render_unicode(
                     bldg=bldg, zone=zone))
                 out_file.close()
@@ -718,8 +726,7 @@ class Project(object):
 
         path : string
             if the Files should not be stored in OutputData, an alternative
-            can be specified  
-
+            can be specified
         '''
         if path is None:
             path = "OutputData\\"+self.name
@@ -736,7 +743,7 @@ class Project(object):
             out_file = open(utilis.get_full_path
                             (bldg_path+"ReadableOutput.txt"), 'w')
             out_file.write(readable_template.render_unicode
-                           (bldg=bldg, prj = self))
+                           (bldg=bldg, prj=self))
             out_file.close()
 
     def _help_package(self, path, name, uses=None):
@@ -757,7 +764,8 @@ class Project(object):
         package_template = Template(filename=utilis.get_full_path
                                     ("InputData\\RecordTemplate\\package"))
 
-        out_file = open(utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
+        out_file = open(
+            utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
         out_file.write(package_template.render_unicode(name=name, uses=uses))
         out_file.close()
 
@@ -785,16 +793,15 @@ class Project(object):
         order_template = Template(filename=utilis.get_full_path
                                   ("InputData\\RecordTemplate\\package_order"))
 
-        out_file = open(utilis.get_full_path(path + "\\" + "package" + ".order"),
-                        'w')
+        out_file = open(
+            utilis.get_full_path(path + "\\" + "package" + ".order"), 'w')
         out_file.write(order_template.render_unicode
                        (list=package_list, addition=addition, extra=extra))
         out_file.close()
 
-
     def set_default(self):
         '''sets all attributes except self.data to default
-        
+
         '''
 
         self.name = "Project"
@@ -814,3 +821,16 @@ class Project(object):
     def type_element_file(self, value):
         self._type_element_file = value
         self.instantiate_data_class(value)
+
+    @property
+    def calculation_method(self):
+        return self._calculation_method
+
+    @calculation_method.setter
+    def calculation_method(self, value):
+
+        ass_error_1 = "calculation_method has to be vdi or ebc"
+
+        assert value != "ebc" or value != "vdi", ass_error_1
+
+        self._calculation_method = value
