@@ -81,13 +81,22 @@ def save_gml(project, path):
         
         #unsolved problem with volume?
         #fixme what could be a method for placing the building 
-        bldg_center = [i*100,0,0]     
-                        
-        building_length = (bldg_count.thermal_zones[0].area / 
-                            bldg_count.thermal_zones[0].typical_width)
-        building_width = bldg_count.thermal_zones[0].typical_width
-        building_height = (bldg_count.number_of_floors * 
-                            bldg_count.height_of_floors)
+        bldg_center = [i*80,0,0]  
+        
+        if type(bldg_count).__name__ == "Residential":
+            building_length = (bldg_count.thermal_zones[0].area / 
+                                bldg_count.thermal_zones[0].typical_width)
+            building_width = bldg_count.thermal_zones[0].typical_width
+            building_height = (bldg_count.number_of_floors * 
+                                bldg_count.height_of_floors)
+                                
+        else:
+            building_width = 0.05 * (bldg_count.net_leased_area /
+                                bldg_count.number_of_floors)
+            building_length = (bldg_count.net_leased_area / 
+                                bldg_count.number_of_floors) / building_width
+            building_height = (bldg_count.number_of_floors * 
+                                bldg_count.height_of_floors)
 
         gml_bldg = gmlhelp.set_lod_2(gml_bldg, 
                                      building_length, 
@@ -100,14 +109,27 @@ def save_gml(project, path):
             gml_zone = gmlhelp.gml_thermal_zone(zone_count) 
                                                 
             for i, out_wall_count in enumerate(zone_count.outer_walls):
+                
+                tb = gmlhelp.gml_thermal_boundary(gml_zone, out_wall_count)  
+                
+                for i, win_count in enumerate(zone_count.windows):
                     
-                gmlhelp.gml_thermal_boundary(gml_zone, out_wall_count)                    
+                    if out_wall_count.orientation == win_count.orientation and\
+                        out_wall_count.tilt == win_count.tilt:
+                            
+                        gmlhelp.gml_surface_component(tb, 
+                                                      win_count, 
+                                                      "true", 
+                                                      "false")                   
+            
+            for i, in_wall_count in enumerate(zone_count.inner_walls):
+                
+                gmlhelp.gml_thermal_boundary(gml_zone, in_wall_count)
 
             gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(gml_zone)
         
         gml_out.featureMember[-1].Feature = gml_bldg  
-        
-    
+
     out_file.write(gml_out.toDOM().toprettyxml())
            
     
@@ -148,6 +170,16 @@ prj.type_bldg_residential(name="TestBuilding",
                          number_of_floors=2,
                          height_of_floors=3,
                          net_leased_area=100)
+prj.type_bldg_office(name="TestBuilding1",
+                         year_of_construction=1988,
+                         number_of_floors=3,
+                         height_of_floors=3,
+                         net_leased_area=1500)
+prj.type_bldg_office(name="TestBuilding3",
+                         year_of_construction=1988,
+                         number_of_floors=3,
+                         height_of_floors=3,
+                         net_leased_area=2100)
 
 save_gml(prj, "D:\\GIT\\TEASER\\teaser\\OutputData\\Test")
 print("ahhasd")
