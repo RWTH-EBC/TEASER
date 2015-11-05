@@ -335,3 +335,150 @@ def _add_gml_boundary(boundary_surface, id):
     boundary_surface.opening[-1].Opening.id =id+"_win"    
     
     return boundary_surface
+    
+def gml_thermal_zone(thermal_zone):
+    """creates a gml instance of a thermal zone
+    
+    EnergyADE includes information of a thermal zone, these values are set in
+    this class.    
+
+    Parameters
+    ----------
+
+    thermal_zone : ThermalZone() object
+        A ThermalZone object, from TEASER
+
+    Returns
+    -------
+
+    gml_zone : energy.thermalZones() object
+        A thermalZone object, where energy is a reference to 
+        `pyxb.bundles.opengis.citygml.energy`.
+    """
+    gml_zone = energy.thermalZones()
+    gml_zone.ThermalZone = energy.ThermalZoneType()
+    gml_zone.ThermalZone.heatedFloorArea = gml.AreaType(
+                                                    thermal_zone.area)
+    gml_zone.ThermalZone.heatedFloorArea.uom = bd.datatypes.anyURI(
+                                                                'm^2')
+    gml_zone.ThermalZone.infiltrationRate = gml.MeasureType(
+                                        thermal_zone.infiltration_rate)
+    gml_zone.ThermalZone.infiltrationRate.uom = bd.datatypes.anyURI(
+                                                                '1/h')
+    
+    return gml_zone                                                            
+
+def gml_thermal_boundary(gml_zone, outer_wall):
+    _current_tb = None
+    if type(outer_wall).__name__ == "OuterWall":
+        
+        gml_zone.ThermalZone.boundedBy_.append(
+                            energy.ThermalBoundarySurfacePropertyType())
+        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface =\
+                            energy.ThermalBoundarySurfaceType()
+                            
+        _current_tb = gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface
+        _current_tb.type = 'OuterWall' 
+        _current_tb.azimuth = gml.AngleType(outer_wall.orientation)
+        _current_tb.azimuth.uom = bd.datatypes.anyURI('deg')
+        _current_tb.inclination = gml.AngleType(outer_wall.tilt)
+        _current_tb.inclination.uom = bd.datatypes.anyURI('deg')      
+                           
+        gml_surface_component(_current_tb, outer_wall)
+    
+
+def gml_surface_component(thermal_boundary, outer_wall):   
+
+    thermal_boundary.composedOf.append(energy.SurfaceComponentPropertyType())
+
+    gml_surf_comp = energy.SurfaceComponent()
+    gml_surf_comp.area = gml.AreaType(outer_wall.area)
+    gml_surf_comp.area.uom = bd.datatypes.anyURI('m^2')
+    #fixme: how to relate to corresponding boundarySurface
+    gml_surf_comp.relates = gml.ReferenceType()
+    gml_surf_comp.relates.href = "asd"
+    gml_surf_comp.isSunExposed = bd.datatypes.boolean("true")
+    gml_surf_comp.isGroundCoupled = bd.datatypes.boolean("true")
+    
+    gml_layer(gml_surf_comp, outer_wall)    
+    
+    thermal_boundary.composedOf[-1].SurfaceComponent = gml_surf_comp
+    
+def gml_layer(gml_surf_comp, outer_wall):
+
+    construction = energy.construction()
+    construction.Construction = energy.ConstructionType()
+    
+    for lay_count in outer_wall.layer:
+        layer = energy.LayerPropertyType()
+        layer.Layer = energy.LayerType()
+        layer.Layer.layerComponent.append(energy.LayerComponentPropertyType())         
+        layer.Layer.layerComponent[-1].LayerComponent = energy.LayerComponentType()
+    
+        _current_layer =  layer.Layer.layerComponent[-1].LayerComponent       
+        
+        _current_layer.thickness = gml.LengthType(lay_count.thickness) 
+        _current_layer.thickness.uom = bd.datatypes.anyURI('m')
+        _current_layer.material = energy.AbstractMaterialPropertyType()
+        _current_layer.material.AbstractMaterial = energy.OpaqueMaterial()
+        
+        _current_material = _current_layer.material.AbstractMaterial
+        _current_material.name = [og.gml.CodeType(lay_count.material.name)]
+        _current_material.conductivity = gml.MeasureType(
+                                            lay_count.material.thermal_conduc)
+        _current_material.conductivity.uom = bd.datatypes.anyURI('W/mK') 
+        _current_material.density = gml.MeasureType(lay_count.material.density)
+        _current_material.density.uom = bd.datatypes.anyURI('kg/m^3') 
+        _current_material.specificHeat = gml.MeasureType(
+                                            lay_count.material.heat_capac)
+        _current_material.specificHeat.uom = bd.datatypes.anyURI('kJ/kg') 
+        
+        construction.Construction.layer.append(layer)                    
+    
+    gml_surf_comp.GenericApplicationPropertyOfCityObject.append(construction)
+
+    """
+    
+                 self.name = ""
+        self.density = 0.0
+        self.thermal_conduc = 0.0
+        self.heat_capac = 0.0
+        self.solar_absorp = 0.0
+        self.ir_emissivity = 0.0
+        self.transmittance = 0.0   
+    
+    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.\
+         composedOf.append(energy.SurfaceComponentPropertyType())
+    gml_surf_comp1 = energy.SurfaceComponent()
+    gml_surf_comp1.area = gml.AreaType(zone_count.windows[i].area)
+    gml_surf_comp1.area.uom = bd.datatypes.anyURI('m^2')
+    #fixme: how to relate to corresponding boundarySurface
+    
+    gml_surf_comp1.isSunExposed = bd.datatypes.boolean("true")
+    gml_surf_comp1.isGroundCoupled = bd.datatypes.boolean("false")
+    
+    
+    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.composedOf[-1].SurfaceComponent = gml_surf_comp1
+        
+    if type(out_wall_count).__name__ == "Rooftop":
+        
+        gml_zone.ThermalZone.boundedBy_.append(
+                energy.ThermalBoundarySurfacePropertyType())
+
+        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface =\
+             energy.ThermalBoundarySurfaceType()
+        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.type =\
+             'FlatRoof' 
+        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.\
+             composedOf.append(energy.SurfaceComponentPropertyType())
+         
+        gml_surf_comp = energy.SurfaceComponent()
+        gml_surf_comp.area = gml.AreaType(out_wall_count.area)
+        gml_surf_comp.area.uom = bd.datatypes.anyURI('m^2')
+        #fixme: how to relate to corresponding boundarySurface
+        gml_surf_comp.relates = gml.ReferenceType()
+        gml_surf_comp.relates.href = "asd"
+        gml_surf_comp.isSunExposed = bd.datatypes.boolean("true")
+        gml_surf_comp.isGroundCoupled = bd.datatypes.boolean("true")
+        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.composedOf[-1].SurfaceComponent = gml_surf_comp
+    """
