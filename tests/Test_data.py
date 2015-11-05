@@ -148,10 +148,7 @@ class Test_teaser(object):
                             year_of_construction=1988,
                             number_of_floors=3,
                             height_of_floors=3,
-                            net_leased_area=2500,
-                            office_layout=0,
-                            window_layout=0,
-                            construction_type="heavy")
+                            net_leased_area=2500)
 
         testOffice.generate_office()
 
@@ -190,6 +187,87 @@ class Test_teaser(object):
         assert round(testOffice.get_window_area(180), 0) == 158
         assert round(testOffice.get_window_area(90), 0) == 28
         assert round(testOffice.get_window_area(270), 0) == 28
+
+        prj.set_default()
+        testOffice = Office(parent=prj,
+                            name="TestBuilding",
+                            year_of_construction=1988,
+                            number_of_floors=3,
+                            height_of_floors=3,
+                            net_leased_area=2500,
+                            office_layout=1,
+                            window_layout=1,
+                            construction_type="light")
+
+        testOffice.generate_office()
+
+        '''
+        facade specific parameters
+        '''
+        assert round(testOffice.get_outer_wall_area(-2), 0) == 958
+        assert round(testOffice.get_outer_wall_area(-1), 0) == 958
+        assert round(testOffice.get_outer_wall_area(0), 0) == 446
+        assert round(testOffice.get_outer_wall_area(180), 0) == 446
+        assert round(testOffice.get_outer_wall_area(90), 0) == 79
+        assert round(testOffice.get_outer_wall_area(270), 0) == 79
+        assert round(testOffice.get_window_area(0), 0) == 149
+        assert round(testOffice.get_window_area(180), 0) == 149
+        assert round(testOffice.get_window_area(90), 0) == 26
+        assert round(testOffice.get_window_area(270), 0) == 26
+
+        prj.set_default()
+        testOffice = Office(parent=prj,
+                            name="TestBuilding",
+                            year_of_construction=1988,
+                            number_of_floors=3,
+                            height_of_floors=3,
+                            net_leased_area=2500,
+                            office_layout=2,
+                            window_layout=2,
+                            construction_type="heavy")
+
+        testOffice.generate_office()
+
+        '''
+        facade specific parameters
+        '''
+        assert round(testOffice.get_outer_wall_area(-2), 0) == 958
+        assert round(testOffice.get_outer_wall_area(-1), 0) == 958
+        assert round(testOffice.get_outer_wall_area(0), 0) == 283
+        assert round(testOffice.get_outer_wall_area(180), 0) == 283
+        assert round(testOffice.get_outer_wall_area(90), 0) == 67
+        assert round(testOffice.get_outer_wall_area(270), 0) == 67
+        assert round(testOffice.get_window_area(0), 0) == 283
+        assert round(testOffice.get_window_area(180), 0) == 283
+        assert round(testOffice.get_window_area(90), 0) == 67
+        assert round(testOffice.get_window_area(270), 0) == 67
+
+        prj.set_default()
+        testOffice = Office(parent=prj,
+                            name="TestBuilding",
+                            year_of_construction=1988,
+                            number_of_floors=3,
+                            height_of_floors=3,
+                            net_leased_area=2500,
+                            office_layout=3,
+                            window_layout=3,
+                            construction_type="light")
+
+        testOffice.generate_office()
+
+        '''
+        facade specific parameters
+        '''
+        assert round(testOffice.get_outer_wall_area(-2), 0) == 958
+        assert round(testOffice.get_outer_wall_area(-1), 0) == 958
+        assert round(testOffice.get_outer_wall_area(0), 0) == 35
+        assert round(testOffice.get_outer_wall_area(180), 0) == 35
+        assert round(testOffice.get_outer_wall_area(90), 0) == 35
+        assert round(testOffice.get_outer_wall_area(270), 0) == 35
+        assert round(testOffice.get_window_area(0), 0) == 315
+        assert round(testOffice.get_window_area(180), 0) == 315
+        assert round(testOffice.get_window_area(90), 0) == 315
+        assert round(testOffice.get_window_area(270), 0) == 315
 
     def test_type_bldg_institute4_with_calc(self):
         '''
@@ -382,10 +460,7 @@ class Test_teaser(object):
                                       year_of_construction=1988,
                                       number_of_floors=3,
                                       height_of_floors=3,
-                                      net_leased_area=2500,
-                                      residential_layout=0,
-                                      neighbour_buildings=0,
-                                      construction_type="heavy")
+                                      net_leased_area=2500)
 
         testResidential.generate_residential()
 
@@ -410,6 +485,96 @@ class Test_teaser(object):
         assert round(testResidential.get_outer_wall_area(180), 0) == 325
         assert round(testResidential.get_outer_wall_area(90), 0) == 325
         assert round(testResidential.get_outer_wall_area(270), 0) == 325
+        assert round(testResidential.get_window_area(0), 0) == 125
+        assert round(testResidential.get_window_area(180), 0) == 125
+        assert round(testResidential.get_window_area(90), 0) == 125
+        assert round(testResidential.get_window_area(270), 0) == 125
+
+        prj.set_default()
+        testResidential = Residential(parent=prj,
+                                      name="TestBuilding",
+                                      year_of_construction=1988,
+                                      number_of_floors=3,
+                                      height_of_floors=3,
+                                      net_leased_area=2500,
+                                      residential_layout=1,
+                                      neighbour_buildings=1,
+                                      attic=1,
+                                      dormer=1,
+                                      cellar=1,
+                                      construction_type="light")
+
+        testResidential.generate_residential()
+
+        '''
+        facade specific parameters
+        '''
+        assert round(testResidential.get_outer_wall_area(-2), 0) == 1108
+        assert round(testResidential.get_outer_wall_area(-1), 0) == 1108
+        assert round(testResidential.get_outer_wall_area(0), 0) == 398
+        assert round(testResidential.get_outer_wall_area(180), 0) == 398
+        assert round(testResidential.get_outer_wall_area(90), 0) == 398
+        assert round(testResidential.get_outer_wall_area(270), 0) == 398
+        assert round(testResidential.get_window_area(0), 0) == 125
+        assert round(testResidential.get_window_area(180), 0) == 125
+        assert round(testResidential.get_window_area(90), 0) == 125
+        assert round(testResidential.get_window_area(270), 0) == 125
+
+        prj.set_default()
+        testResidential = Residential(parent=prj,
+                                      name="TestBuilding",
+                                      year_of_construction=1988,
+                                      number_of_floors=3,
+                                      height_of_floors=3,
+                                      net_leased_area=2500,
+                                      residential_layout=0,
+                                      neighbour_buildings=2,
+                                      attic=2,
+                                      dormer=0,
+                                      cellar=2,
+                                      construction_type="heavy")
+
+        testResidential.generate_residential()
+
+        '''
+        facade specific parameters
+        '''
+        assert round(testResidential.get_outer_wall_area(-2), 0) == 858
+        assert round(testResidential.get_outer_wall_area(-1), 0) == 484
+        assert round(testResidential.get_outer_wall_area(0), 0) == 270
+        assert round(testResidential.get_outer_wall_area(180), 0) == 270
+        assert round(testResidential.get_outer_wall_area(90), 0) == 270
+        assert round(testResidential.get_outer_wall_area(270), 0) == 270
+        assert round(testResidential.get_window_area(0), 0) == 125
+        assert round(testResidential.get_window_area(180), 0) == 125
+        assert round(testResidential.get_window_area(90), 0) == 125
+        assert round(testResidential.get_window_area(270), 0) == 125
+
+        prj.set_default()
+        testResidential = Residential(parent=prj,
+                                      name="TestBuilding",
+                                      year_of_construction=1988,
+                                      number_of_floors=3,
+                                      height_of_floors=3,
+                                      net_leased_area=2500,
+                                      residential_layout=0,
+                                      neighbour_buildings=2,
+                                      attic=3,
+                                      dormer=0,
+                                      cellar=3,
+                                      construction_type="light")
+
+        testResidential.generate_residential()
+
+        '''
+        facade specific parameters
+        '''
+        assert round(testResidential.get_outer_wall_area(-2), 0) == 700
+        assert round(testResidential.get_outer_wall_area(-1), 0) == 789
+        assert round(testResidential.get_outer_wall_area(0), 0) == 255
+        assert round(testResidential.get_outer_wall_area(180), 0) == 255
+        assert round(testResidential.get_outer_wall_area(90), 0) == 255
+        assert round(testResidential.get_outer_wall_area(270), 0) == 255
         assert round(testResidential.get_window_area(0), 0) == 125
         assert round(testResidential.get_window_area(180), 0) == 125
         assert round(testResidential.get_window_area(90), 0) == 125
