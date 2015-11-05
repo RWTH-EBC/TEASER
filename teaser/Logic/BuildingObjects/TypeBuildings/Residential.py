@@ -4,8 +4,8 @@
 from teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding \
  import TypeBuilding
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599\
- import UseConditionsOffice18599 as UseCond
+from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599\
+ import UseConditions18599 as UseCond
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor\
  import GroundFloor
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
