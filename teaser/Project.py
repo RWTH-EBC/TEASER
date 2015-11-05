@@ -713,7 +713,8 @@ class Project(object):
                 out_file = open(utilis.get_full_path
                                 (bldg_path + bldg.name + ".mo"), 'w')
                 out_file.write(building_template.render_unicode
-                               (bldg=bldg, mod_prj=self.modelica_project))
+                               (bldg=bldg, mod_prj=self.modelica_project,
+                                weather=self.weather_file_name))
                 out_file.close()
 
             for zone in bldg.thermal_zones:
