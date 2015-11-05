@@ -18,6 +18,7 @@ from teaser.Logic.BuildingObjects.TypeBuildings.Residential import Residential
 
 
 class Project(object):
+
     '''Base class for each project, serves also as API
 
         The Project class is the root class for each action in TEASER and
@@ -65,9 +66,9 @@ class Project(object):
         self._type_element_file = None
 
         if load_data is True:
-                self.data = self.instantiate_data_class()
+            self.data = self.instantiate_data_class()
         else:
-                self.data = None
+            self.data = None
 
     def instantiate_data_class(self, type_element_file=None):
         '''Initialization of DataClass
@@ -175,7 +176,6 @@ class Project(object):
                          office_layout=None,
                          window_layout=None,
                          construction_type=None):
-
         '''Create and calculate an office building
 
         Parameters
@@ -586,7 +586,8 @@ class Project(object):
         input_path = utilis.get_full_path("InputData\\BoundariesTypeBuilding")
 
         try:
-            shutil.copytree(input_path, utilis.get_full_path(path) + "\\Tables")
+            shutil.copytree(input_path,
+                            utilis.get_full_path(path) + "\\Tables")
         except:
             pass
         else:
@@ -645,7 +646,8 @@ class Project(object):
                     'Modelica (version="3.2.1")']
 
             for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "vdi", ("CitiesType_old needs \
+                assert bldg._calculation_method == "vdi", ("CitiesType_old \
+                 needs \
                 calculation core vdi")
 
             zone_template = Template(
@@ -657,6 +659,30 @@ class Project(object):
             building_template = Template(
                 filename=utilis.get_full_path(
                     "InputData\\RecordTemplate\\CitiesType\\CitiesType_bldg"))
+
+        elif model_type == "AixLib_Multizone":
+
+            uses = ['Modelica(version = "3.2.1")',
+                    "AixLib(version=\"0.1.0\")"]
+
+            for bldg in self.list_of_buildings:
+                assert bldg._calculation_method == "ebc", ("CitiesRWin needs \
+                calculation core ebc")
+                """ i asume that the calculation method should be ebc because \
+                it's a ROM with modifications"""
+
+            zone_template = Template(
+                filename=utilis.get_full_path(
+                    "InputData\\RecordTemplate\\AixLibMultizone\\"
+                    "AixLib_zone"))
+            zone_base_template = Template(
+                filename=utilis.get_full_path(
+                    "InputData\\RecordTemplate\\AixLibMultizone\\"
+                    "AixLib_base"))
+            building_template = Template(
+                filename=utilis.get_full_path(
+                    "InputData\\RecordTemplate\\AixLibMultizone\\"
+                    "AixLib_bldg"))
 
             self._help_package(path, self.name, uses)
             self._help_package_order(path, self.list_of_buildings)
@@ -676,7 +702,8 @@ class Project(object):
             self._help_package_order(bldg_path, [bldg], None,
                                      bldg.name + "_DataBase")
 
-            if model_type == "CitiesRWin" or model_type == "CitiesType_old":
+            if model_type in ["CitiesRWin", "CitiesType_old",
+                              "AixLib_Multizone"]:
                 out_file = open(utilis.get_full_path
                                 (bldg_path + bldg.name + ".mo"), 'w')
                 out_file.write(building_template.render_unicode
@@ -687,17 +714,18 @@ class Project(object):
                 zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
 
                 out_file = open(utilis.get_full_path(
-                    zone_path + "\\" + bldg.name + "_" + zone.name + ".mo"), 'w')
+                    zone_path + "\\" + bldg.name + "_" + zone.name + ".mo"),
+                    'w')
                 out_file.write(zone_template.render_unicode(
                     bldg=bldg, zone=zone))
                 out_file.close()
 
-                if model_type == "CitiesRWin" or\
-                        model_type == "CitiesType_old":
+                if model_type in ["CitiesRWin", "CitiesType_old",
+                                  "AixLib_Multizone"]:
                     self._help_package(zone_path, bldg.name + "_DataBase")
                     self._help_package_order(
-                        zone_path, bldg.thermal_zones, bldg.name + "_",
-                        bldg.name + "_base")
+                        zone_path, bldg.thermal_zones,
+                        bldg.name + "_", bldg.name + "_base")
 
                     out_file = open(utilis.get_full_path
                                     (zone_path + bldg.name + "_base.mo"), 'w')
@@ -725,7 +753,8 @@ class Project(object):
         package_template = Template(filename=utilis.get_full_path
                                     ("InputData\\RecordTemplate\\package"))
 
-        out_file = open(utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
+        out_file = open(
+            utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
         out_file.write(package_template.render_unicode(name=name, uses=uses))
         out_file.close()
 
@@ -739,7 +768,7 @@ class Project(object):
         ----------
 
         path : string
-            path of where the package.mo should be placed
+            path of where the package.order should be placed
         package_list : [string]
             name of all models or packages contained in the package
         addition : string
@@ -753,17 +782,14 @@ class Project(object):
         order_template = Template(filename=utilis.get_full_path
                                   ("InputData\\RecordTemplate\\package_order"))
 
-        out_file = open(utilis.get_full_path(path + "\\" + "package" + ".order"),
-                        'w')
+        out_file = open(
+            utilis.get_full_path(path + "\\" + "package" + ".order"), 'w')
         out_file.write(order_template.render_unicode
                        (list=package_list, addition=addition, extra=extra))
         out_file.close()
 
-
     def set_default(self):
-        '''sets all attributes except self.data to default
-        
-        '''
+        '''sets all attributes except self.data to default'''
 
         self.name = "Project"
 
