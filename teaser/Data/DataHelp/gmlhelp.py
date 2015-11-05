@@ -445,9 +445,7 @@ def gml_thermal_boundary(gml_zone, wall):
                               wall, 
                               sun_exp="false", 
                               grnd_coupled="false")
-                              
-    
-    
+
 def gml_surface_component(thermal_boundary, wall, sun_exp, grnd_coupled):   
 
     thermal_boundary.composedOf.append(energy.SurfaceComponentPropertyType())
@@ -468,7 +466,14 @@ def gml_surface_component(thermal_boundary, wall, sun_exp, grnd_coupled):
 def gml_layer(gml_surf_comp, wall):
 
     construction = energy.construction()
-    construction.Construction = energy.ConstructionType()
+    construction.Construction = energy.ConstructionType() 
+    
+    if type(wall).__name__ == "Window":
+        
+        construction.Construction.transmittance.append(energy.TransmittancePropertyType())
+        construction.Construction.transmittance[-1].Transmittance = energy.Transmittance() 
+        construction.Construction.transmittance[-1].Transmittance.percentage = wall.g_value
+        construction.Construction.transmittance[-1].Transmittance.wavelengthRange = energy.WavelengthRangeTypeType("Solar")
     
     for lay_count in wall.layer:
         layer = energy.LayerPropertyType()
@@ -523,60 +528,6 @@ def gml_glazing_material(gml_layer, teaser_layer):
     _current_material.name = [og.gml.CodeType(teaser_layer.material.name)]
     _current_material.hemisphericalTransmittance = energy.TransmittancePropertyType()
     _current_material.hemisphericalTransmittance.Transmittance = energy.Transmittance() 
-    _current_material.hemisphericalTransmittance.Transmittance.percentage = 0.5    
+    _current_material.hemisphericalTransmittance.Transmittance.percentage = 0.5
     _current_material.hemisphericalTransmittance.Transmittance.wavelengthRange = energy.WavelengthRangeTypeType("Solar")
     
-    #_current_material.conductivity = gml.MeasureType(
-    #                                    teaser_layer.material.thermal_conduc)
-    #_current_material.conductivity.uom = bd.datatypes.anyURI('W/mK') 
-    #_current_material.density = gml.MeasureType(teaser_layer.material.density)
-    #_current_material.density.uom = bd.datatypes.anyURI('kg/m^3') 
-    #_current_material.specificHeat = gml.MeasureType(
-    #                                   teaser_layer.material.heat_capac)
-    #_current_material.specificHeat.uom = bd.datatypes.anyURI('kJ/kg')
-    
-    """
-    
-                 self.name = ""
-        self.density = 0.0
-        self.thermal_conduc = 0.0
-        self.heat_capac = 0.0
-        self.solar_absorp = 0.0
-        self.ir_emissivity = 0.0
-        self.transmittance = 0.0   
-    
-    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.\
-         composedOf.append(energy.SurfaceComponentPropertyType())
-    gml_surf_comp1 = energy.SurfaceComponent()
-    gml_surf_comp1.area = gml.AreaType(zone_count.windows[i].area)
-    gml_surf_comp1.area.uom = bd.datatypes.anyURI('m^2')
-    #fixme: how to relate to corresponding boundarySurface
-    
-    gml_surf_comp1.isSunExposed = bd.datatypes.boolean("true")
-    gml_surf_comp1.isGroundCoupled = bd.datatypes.boolean("false")
-    
-    
-    gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.composedOf[-1].SurfaceComponent = gml_surf_comp1
-        
-    if type(out_wall_count).__name__ == "Rooftop":
-        
-        gml_zone.ThermalZone.boundedBy_.append(
-                energy.ThermalBoundarySurfacePropertyType())
-
-        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface =\
-             energy.ThermalBoundarySurfaceType()
-        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.type =\
-             'FlatRoof' 
-        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.\
-             composedOf.append(energy.SurfaceComponentPropertyType())
-         
-        gml_surf_comp = energy.SurfaceComponent()
-        gml_surf_comp.area = gml.AreaType(out_wall_count.area)
-        gml_surf_comp.area.uom = bd.datatypes.anyURI('m^2')
-        #fixme: how to relate to corresponding boundarySurface
-        gml_surf_comp.relates = gml.ReferenceType()
-        gml_surf_comp.relates.href = "asd"
-        gml_surf_comp.isSunExposed = bd.datatypes.boolean("true")
-        gml_surf_comp.isGroundCoupled = bd.datatypes.boolean("true")
-        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundarySurface.composedOf[-1].SurfaceComponent = gml_surf_comp
-    """

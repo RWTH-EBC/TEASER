@@ -132,38 +132,7 @@ def save_gml(project, path):
 
     out_file.write(gml_out.toDOM().toprettyxml())
            
-    
-"""
-def setEnergyBoundary(self, boundedBy_en, wallType ,href, area, areaWin,nrOfWall):
-        '''
-        sets the energy boundary surfaces
-        arguments:
-        ----------
-        boundedBy_en: list of the walls that are bounding the building for energy (first call empty)
-        wallType: wall Type defined in gml (OuterWall, FlatRoof, BasementFloor)
-        href: connection to boundary of gml
-        area: area of wall surface
-        areaWin: area of window surface
-        nrOfWall: counter of the number of wall of the building
-        '''
-        boundedBy_en.append(energy.ThermalBoundarySurfacePropertyType())
-        boundedBy_en[nrOfWall].ThermalBoundarySurface = energy.ThermalBoundarySurfaceType()
-        boundedBy_en[nrOfWall].ThermalBoundarySurface.type = wallType
-        boundedBy_en[nrOfWall].ThermalBoundarySurface.composedOf.append(energy.SurfaceComponentPropertyType())
-        
-        wall = self.setSurfaceComponent(area, href, wallType)
-        
-        boundedBy_en[nrOfWall].ThermalBoundarySurface.composedOf[0].SurfaceComponent = wall
-        
-        boundedBy_en[nrOfWall].ThermalBoundarySurface.composedOf.append(energy.SurfaceComponentPropertyType())
-        if wallType == "OuterWall":
-            window = self.setSurfaceComponent(areaWin, href, "Window")
-            boundedBy_en[nrOfWall].ThermalBoundarySurface.composedOf[1].SurfaceComponent = window
-        else:
-            pass
-        return boundedBy_en
-"""
-    
+
 prj = Project(True)
 prj.type_bldg_residential(name="TestBuilding",
                          year_of_construction=1988,
