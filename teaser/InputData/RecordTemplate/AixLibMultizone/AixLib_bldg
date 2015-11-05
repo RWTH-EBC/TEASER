@@ -1,9 +1,9 @@
-model M4000
-  "This is an example for a multizone office building"
+model ${bldg.name}
+  "This is the simulation model of ${bldg.name}"
   extends Modelica.Icons.Example;
 
  AixLib.Building.LowOrder.Multizone.MultizoneEquipped multizoneEquipped(
-      buildingParam=Project.M4000.M4000_DataBase.M4000_base())
+      buildingParam=${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_base())
     annotation (Placement(transformation(extent={{-26,-14},{28,36}})));
   AixLib.Building.Components.Weather.Weather weather(
     Outopt=1,
@@ -12,7 +12,7 @@ model M4000
     Sky_rad=true,
     Ter_rad=true,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"))
+        "./Tables/${weather}"))
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
     tableOnFile=true,
@@ -20,7 +20,7 @@ model M4000
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     columns=2:7,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/Tset_6Zone.txt"))
+        "${bldg.file_set_t}"))
     annotation (Placement(transformation(extent={{-92,8},{-72,28}})));
   Modelica.Blocks.Sources.CombiTimeTable tableAHU(
     tableOnFile=true,
@@ -28,7 +28,7 @@ model M4000
     tableName="AHU",
     columns=2:5,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/AHU_Input_6Zone_SIA_4Columns.txt"))
+        "${bldg.file_ahu}"))
     annotation (Placement(transformation(extent={{66,-50},{46,-30}})));
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
     tableOnFile=true,
@@ -36,7 +36,7 @@ model M4000
     tableName="Internals",
     columns=2:19,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/LowOrder_ExampleData/Internals_Input_6Zone_SIA.txt"))
+        "${bldg.file_internal_gains}"))
     annotation (Placement(transformation(extent={{84,18},{64,38}})));
   Modelica.Blocks.Sources.Constant const[6](each k=0)
     annotation (Placement(transformation(extent={{-92,-22},{-72,-2}})));
@@ -56,9 +56,11 @@ equation
   connect(const.y, multizoneEquipped.TSetCooler) annotation (Line(points={{-71,
           -12},{-66,-12},{-66,-14},{-48,-14},{-48,5.5},{-24.38,5.5}}, color=
          {0,0,127}));
-  annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-            -100},{100,100}})), experiment(StopTime=3.1536e+007, Interval=3600));
-end M4000;
+  annotation (experiment(
+      StopTime=31536000,
+      Interval=3600,
+      __Dymola_Algorithm="Lsodar"), __Dymola_experimentSetupOutput(events=false));
+end ${bldg.name};
 
 
 ##get n
