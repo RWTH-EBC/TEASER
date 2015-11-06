@@ -12,6 +12,7 @@ import random
 
 
 class BuildingElement(object):
+
     '''Building element class.
 
     This is the base class for all building elements.
@@ -76,7 +77,7 @@ class BuildingElement(object):
 
     layer : list
         List of all layers of a building element (to be filled with Layer
-        objects)
+        objects). Use element.layer = None
 
     Raises
     ----------
@@ -140,7 +141,7 @@ class BuildingElement(object):
         self.r_outer_comb = 0.0
 
         for count_layer in self.layer:
-            self.r_conduc += (count_layer.thickness / 
+            self.r_conduc += (count_layer.thickness /
                               count_layer.material.thermal_conduc)
 
         self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
@@ -152,9 +153,10 @@ class BuildingElement(object):
 
             self.r_outer_conv = (1 / self.outer_convection) * (1 / self.area)
             self.r_outer_rad = (1 / self.outer_radiation) * (1 / self.area)
-            self.r_outer_comb = 1 / (1 / self.r_outer_conv + 1 / self.r_outer_rad)
+            self.r_outer_comb = 1 / \
+                (1 / self.r_outer_conv + 1 / self.r_outer_rad)
 
-        self.ua_value = (1 / (self.r_inner_comb + self.r_conduc * 
+        self.ua_value = (1 / (self.r_inner_comb + self.r_conduc *
                               (1 / self.area) + self.r_outer_comb))
 
     def gather_element_properties(self):
@@ -387,8 +389,8 @@ class BuildingElement(object):
         '''
 
         xml_file = open(
-                utilis.get_full_path("InputData\\TypeBuildingElements.xml",
-                                     'r', encoding='UTF-8'))
+            utilis.get_full_path("InputData\\TypeBuildingElements.xml",
+                                 'r', encoding='UTF-8'))
 
         xml_parse = tb_bind.CreateFromDocument(xml_file.read())
 
@@ -456,8 +458,8 @@ class BuildingElement(object):
             xml_parse.Window.append(pyxb_wall)
 
         out_file = open(
-                utilis.get_full_path("InputData\\TypeBuildingElements.xml",
-                                     'w', encoding='UTF-8'))
+            utilis.get_full_path("InputData\\TypeBuildingElements.xml",
+                                 'w', encoding='UTF-8'))
 
         out_file.write(xml_parse.toDOM().toprettyxml())
 
@@ -581,10 +583,11 @@ class BuildingElement(object):
 
     @year_of_retrofit.setter
     def year_of_retrofit(self, value):
-        if self.year_of_construction is not None:  # year_of_construction(!)
-            self._year_of_retrofit = value
-        else:
-            raise ValueError("Specify year of construction first")
+        if value is not None:
+            if self.year_of_construction is not None:
+                self._year_of_retrofit = value
+            else:
+                raise ValueError("Specify year of construction first")
 
     @property
     def orientation(self):
@@ -606,13 +609,17 @@ class BuildingElement(object):
 
     @layer.setter
     def layer(self, value):
-
-        ass_error_1 = "Value has to be an instance of Layer()"
-
-        assert isinstance(value, Layer), ass_error_1
-
-        if self._layer is None:
-            self._layer = [value]
-
+        
+        if value == None:
+            self._layer = []
         else:
-            self._layer.append(value)
+            ass_error_1 = "Value has to be an instance of Layer()"
+    
+            assert isinstance(value, Layer), ass_error_1
+            
+                
+            if self._layer is None:
+                self._layer = [value]
+    
+            else:
+                self._layer.append(value)
