@@ -572,7 +572,7 @@ class Project(object):
         old_teaser.load_teaser_xml(path, self)
 
     def save_citygml(self, file_name=None, path=None):
-        '''Saves the project to an xml file
+        '''Saves the project to a citygml file
 
         calls the function save_gml in Data.CityGML we make use of CityGML core
         and EnergyADE to store semantic information
