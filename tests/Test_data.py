@@ -557,10 +557,11 @@ class Test_teaser(object):
         therm_zone = prj.list_of_buildings[-1].thermal_zones[0]
         assert therm_zone.outer_walls[0].area == 40.0
         prj.save_project("unitTest")
+        prj.set_default()
 
-    def test_save_gml(self):
+    def test_save_citygml(self):
         '''test of save_gml'''
-
+        HelpTest.building_test2(prj)
         prj.save_citygml("unitTest")
         prj.set_default()
 
