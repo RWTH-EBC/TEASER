@@ -5,6 +5,7 @@
 """
 
 import teaser.Data.TeaserXML as txml
+import teaser.Data.CityGML as citygml
 import teaser.Data.DataHelp.OldTeaser as old_teaser
 from teaser.Data.DataClass import DataClass
 from mako.template import Template
@@ -568,6 +569,37 @@ class Project(object):
         '''
 
         old_teaser.load_teaser_xml(path, self)
+
+    def save_citygml(self, file_name=None, path=None):
+        '''Saves the project to an xml file
+
+        calls the function save_gml in Data.CityGML we make use of CityGML core
+        and EnergyADE to store semantic information
+
+
+        Parameters
+        ----------
+
+        file_name : string
+            name of the new file
+        path : string
+            if the Files should not be stored in OutputData, an alternative
+            can be specified
+
+        '''
+        if file_name is None:
+            name = self.name
+        else:
+            name = file_name
+
+        if path is None:
+            new_path = utilis.get_full_path("OutputData") + "\\" + name
+        else:
+            new_path = path + "\\" + name
+            utilis.create_path(utilis.get_full_path(path))
+
+        citygml.save_gml(self, new_path)
+        
 
     def export_record(self, model_type, path=None):
         '''Exports values to a record file for Modelica simulation
