@@ -577,7 +577,7 @@ class Project(object):
         ----------
 
         model_type : string
-            setter of the used Modelica model (AixLib or CitiesRWin)
+            setter of the used Modelica model (AixLib or AixLib_Multizone)
         path : string
             if the Files should not be stored in OutputData, an alternative
             path can be specified
@@ -600,34 +600,7 @@ class Project(object):
         else:
             pass
 
-        if model_type == "CitiesRWin":
-
-            uses = ['BaseLib (version="2.4")',
-                    'DataBase (version="2.4")',
-                    'Building (version="2.4")',
-                    'HVAC (version="2.4")',
-                    'Cities (version="2.4")',
-                    'Modelica (version="3.2.1")',
-                    'AixLib(version="0.1.0")']
-
-            for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "ebc", ("CitiesRWin needs \
-                calculation core ebc")
-
-            zone_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesRWin\\CitiesRWin_zone"))
-            zone_base_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesRWin\\CitiesRWin_base"))
-            building_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesRWin\\CitiesRWin_bldg"))
-
-            self._help_package(path, self.name)
-            self._help_package_order(path, self.list_of_buildings)
-
-        elif model_type == "AixLib":
+        if model_type == "AixLib":
 
             uses = ['Modelica(version = "3.2.1")',
                     "AixLib(version=\"0.1.0\")"]
@@ -642,29 +615,6 @@ class Project(object):
 
             self._help_package(path, self.name, uses)
             self._help_package_order(path, self.list_of_buildings)
-
-        elif model_type == "CitiesType_old":
-
-            uses = ['BaseLib (version="2.2")',
-                    'DataBase (version="2.2")',
-                    'Building (version="2.2")',
-                    'HVAC (version="2.2")',
-                    'Cities (version="2.2")',
-                    'Modelica (version="3.2.1")']
-
-            for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "vdi", ("CitiesType_old \
-                    needs calculation core vdi")
-
-            zone_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesType\\CitiesType_zone"))
-            zone_base_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesType\\CitiesType_base"))
-            building_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesType\\CitiesType_bldg"))
 
         elif model_type == "AixLib_Multizone":
 
@@ -708,8 +658,7 @@ class Project(object):
             self._help_package_order(bldg_path, [bldg], None,
                                      bldg.name + "_DataBase")
 
-            if model_type in ["CitiesRWin", "CitiesType_old",
-                              "AixLib_Multizone"]:
+            if model_type == "AixLib_Multizone":
                 out_file = open(utilis.get_full_path
                                 (bldg_path + bldg.name + ".mo"), 'w')
                 out_file.write(building_template.render_unicode
@@ -727,8 +676,7 @@ class Project(object):
                     bldg=bldg, zone=zone))
                 out_file.close()
 
-                if model_type in ["CitiesRWin", "CitiesType_old",
-                                  "AixLib_Multizone"]:
+                if model_type == "AixLib_Multizone":
                     self._help_package(zone_path, bldg.name + "_DataBase")
                     self._help_package_order(
                         zone_path, bldg.thermal_zones,
