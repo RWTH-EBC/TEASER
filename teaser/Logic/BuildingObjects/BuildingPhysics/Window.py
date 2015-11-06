@@ -74,5 +74,5 @@ class Window(BuildingElement):
             pass
 
         self.set_calc_default()
-
+        self.layer = None
         self.load_type_element(year_of_refurbishment, window_type)
