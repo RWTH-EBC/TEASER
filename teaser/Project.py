@@ -106,9 +106,10 @@ class Project(object):
         '''
         self.weather_file_name = file_name
         weather_file = weather_path + file_name
-        output_path = (utilis.get_full_path(
-                       "InputData\\BoundariesTypeBuilding\\") + file_name)
-        print(output_path)
+        output_path = (utilis.get_full_path("InputData\\Boundaries \
+                                            TypeBuilding\\") +
+                                            file_name)
+
         try:
             shutil.copyfile(weather_file, output_path)
         except:
@@ -599,7 +600,7 @@ class Project(object):
             utilis.create_path(utilis.get_full_path(path))
 
         citygml.save_gml(self, new_path)
-        
+
 
     def export_record(self, model_type, path=None):
         '''Exports values to a record file for Modelica simulation
@@ -728,7 +729,7 @@ class Project(object):
 
                 out_file = open(utilis.get_full_path(
                     zone_path + "\\" + bldg.name + "_" + zone.name + ".mo"),
-                    'w')
+                                                                           'w')
                 out_file.write(zone_template.render_unicode(
                     bldg=bldg, zone=zone))
                 out_file.close()
