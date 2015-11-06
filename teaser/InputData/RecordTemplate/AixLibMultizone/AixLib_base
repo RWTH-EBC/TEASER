@@ -13,7 +13,7 @@ record ${bldg.name}_base "${bldg.name}_base"
     Vair = ${bldg.volume} ,
     BuildingArea = ${bldg.net_leased_area},
     h_heater = ${bldg.sum_heating_load},
-    l_cooler = 0);
+    l_cooler = ${bldg.sum_cooling_load});
 end ${bldg.name}_base;
 
 ##get n
