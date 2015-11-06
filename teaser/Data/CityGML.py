@@ -22,7 +22,6 @@ import pyxb.bundles.opengis.citygml.appearance as app
 import pyxb.bundles.opengis.citygml.building as bldg
 import pyxb.bundles.opengis.citygml.energy as energy
 
-from teaser.Project import Project
 import teaser.Data.DataHelp.gmlhelp as gmlhelp
 
 def save_gml(project, path):
@@ -73,12 +72,8 @@ def save_gml(project, path):
         
         gml_out.featureMember.append(citygml.cityObjectMember())
         
-        gml_bldg = bldg.Building()
-        
-        gmlhelp.set_bldg_elements(gml_bldg, bldg_count)
-        '''set general attributes of the building, as far as they are known and
-        are defined in cityGML'''
-        
+        gml_bldg = gmlhelp.set_gml_building(bldg_count)
+
         #unsolved problem with volume?
         #fixme what could be a method for placing the building 
         bldg_center = [n*80,0,0]  
@@ -106,59 +101,28 @@ def save_gml(project, path):
         
         for zone_count in bldg_count.thermal_zones:
             
-            gml_zone = gmlhelp.gml_thermal_zone(zone_count) 
+            gml_zone = gmlhelp.set_gml_thermal_zone(zone_count) 
                                                 
             for i, out_wall_count in enumerate(zone_count.outer_walls):
                 
-                tb = gmlhelp.gml_thermal_boundary(gml_zone, out_wall_count)  
+                tb = gmlhelp.set_gml_thermal_boundary(gml_zone, out_wall_count)  
                 
                 for i, win_count in enumerate(zone_count.windows):
                     
                     if out_wall_count.orientation == win_count.orientation and\
                         out_wall_count.tilt == win_count.tilt:
                             
-                        gmlhelp.gml_surface_component(tb, 
-                                                      win_count, 
-                                                      "true", 
-                                                      "false")                   
+                        gmlhelp.set_gml_surface_component(tb, 
+                                                          win_count, 
+                                                          "true", 
+                                                          "false")                   
             
             for i, in_wall_count in enumerate(zone_count.inner_walls):
                 
-                gmlhelp.gml_thermal_boundary(gml_zone, in_wall_count)
+                gmlhelp.set_gml_thermal_boundary(gml_zone, in_wall_count)
 
             gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(gml_zone)
         
-        gml_out.featureMember[-1].Feature = gml_bldg  
-        print("one gml bldg",n)
+        gml_out.featureMember[-1].Feature = gml_bldg 
+        
     out_file.write(gml_out.toDOM().toprettyxml())
-           
-import time
-
-start = time.time()
-prj = Project(True)
-for i in range(1):
-
-    
-    """
-    prj.type_bldg_residential(name="TestBuilding",
-                         year_of_construction=1988,
-                         number_of_floors=2,
-                         height_of_floors=3,
-                         net_leased_area=100)
-    prj.type_bldg_office(name="TestBuilding1",
-                         year_of_construction=1988,
-                         number_of_floors=3,
-                         height_of_floors=3,
-                         net_leased_area=1500)
-    """
-    prj.type_bldg_office(name="TestBuilding3"+str(i),
-                         year_of_construction=1988,
-                         number_of_floors=3,
-                         height_of_floors=3,
-                         net_leased_area=2100)
-    print(i)
-print("all building", len(prj.list_of_buildings))
-print("bldg:" , time.time() - start)
-save_gml(prj, "D:\\GIT\\TEASER\\teaser\\OutputData\\Test")
-print("End:" , time.time() - start)
-print("ahhasd")
