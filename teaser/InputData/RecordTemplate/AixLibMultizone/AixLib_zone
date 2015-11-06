@@ -12,7 +12,7 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     Vair = ${zone.volume},
     minAHU = ${zone.use_conditions.min_ahu},
     maxAHU = ${zone.use_conditions.max_ahu},
-    withAHU = ${zone.use_conditions.with_ahu},
+    withAHU = ${get_false(zone.use_conditions.with_ahu)},
     alphaiwi = ${zone.alpha_conv_iw},
     alphaowi = ${zone.alpha_conv_inner_ow},
     alphaowo = ${zone.alpha_comb_outer_ow},
@@ -143,4 +143,14 @@ end ${bldg.name}_${zone.name};
 	
 	return string_of_list
 	%>
+</%def>
+
+##get false
+<%def name="get_false(value)", filter="trim">
+  <%
+  if value == False:
+    return "false"
+  else:
+  	return value
+  %>
 </%def>
