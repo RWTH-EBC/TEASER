@@ -227,10 +227,10 @@ class Office(TypeBuilding):
         self._est_length = ((net_leased_area / number_of_floors) * 
                             self.gross_factor) / self._est_width
 
-        self.file_ahu = "./Tables/Office/AHU_Office.mat"
-        self.file_internal_gains = "./Tables/Office/InternalGains_Office.mat"
-        self.file_set_t = "./Tables/Office/Tset_Office.mat"
-        self.file_weather = "./Tables/" + self.parent.weather_file_name
+        self.file_ahu = "Office/AHU_Office.mat"
+        self.file_internal_gains = "Office/InternalGains_Office.mat"
+        self.file_set_t = "Office/Tset_Office.mat"
+        self.file_weather = self.parent.weather_file_name
 
     def generate_office(self):
         '''Generates an office building.

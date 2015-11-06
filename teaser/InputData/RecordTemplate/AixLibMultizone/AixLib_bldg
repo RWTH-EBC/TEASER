@@ -19,7 +19,7 @@ model ${bldg.name}
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     columns=2:7,
     fileName=Modelica.Utilities.Files.loadResource(
-        "${bldg.file_set_t}"))
+        "modelica://${mod_prj}/Tables/${bldg.file_set_t}"))
     annotation (Placement(transformation(extent={{-92,8},{-72,28}})));
   Modelica.Blocks.Sources.CombiTimeTable tableAHU(
     tableOnFile=true,
@@ -27,7 +27,7 @@ model ${bldg.name}
     tableName="AHU",
     columns=2:5,
     fileName=Modelica.Utilities.Files.loadResource(
-        "${bldg.file_ahu}"))
+        "modelica://${mod_prj}/Tables/${bldg.file_ahu}"))
     annotation (Placement(transformation(extent={{66,-50},{46,-30}})));
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
     tableOnFile=true,
@@ -35,7 +35,7 @@ model ${bldg.name}
     tableName="Internals",
     columns=2:19,
     fileName=Modelica.Utilities.Files.loadResource(
-        "${bldg.file_internal_gains}"))
+        "modelica://${mod_prj}/Tables/${bldg.file_internal_gains}"))
     annotation (Placement(transformation(extent={{84,18},{64,38}})));
   Modelica.Blocks.Sources.Constant const[6](each k=0)
     annotation (Placement(transformation(extent={{-92,-22},{-72,-2}})));
