@@ -672,10 +672,10 @@ class Project(object):
                     "AixLib(version=\"0.1.0\")"]
 
             for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "ebc", ("CitiesRWin needs \
-                calculation core ebc")
+                assert bldg._calculation_method == "ebc", ("AixLib_Multizone \
+                    needs calculation core ebc")
                 """ i asume that the calculation method should be ebc because \
-                it's a ROM with modifications"""
+                it's a ROM with modifications and looks like RWin"""
 
             zone_template = Template(
                 filename=utilis.get_full_path(
