@@ -39,7 +39,20 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     withOuterwalls = ${element_check(zone.outer_walls)},
     R1o = ${zone.r1_ow},
     RRest = ${zone.r_rest_ow},
-    C1o = ${zone.c1_ow});
+    C1o = ${zone.c1_ow},
+    ActivityTypePeople = 3,
+    RatioConvectiveHeatPeople = 0.5,
+    T0all = 273.15 + 20.1,
+    ActivityTypeMachines = 2,
+    RatioConvectiveHeatMachines = 0.6,
+    epso = 0.9,
+    rhoair = 1.19,
+    cair = 1007,
+    epsi = 0.9,
+    epsw = 0.9,
+    Imax = 200,
+    temperatureground = 286.15,
+    splitfac = 0);
 end ${bldg.name}_${zone.name};
 
 ##get n

@@ -1,6 +1,5 @@
 model ${bldg.name}
   "This is the simulation model of ${bldg.name}"
-  extends Modelica.Icons.Example;
 
  AixLib.Building.LowOrder.Multizone.MultizoneEquipped multizoneEquipped(
       buildingParam=${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_base())
@@ -12,7 +11,7 @@ model ${bldg.name}
     Sky_rad=true,
     Ter_rad=true,
     fileName=Modelica.Utilities.Files.loadResource(
-        "./Tables/${weather}"))
+        "modelica://${mod_prj}/Tables/${weather}"))
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
     tableOnFile=true,
@@ -59,7 +58,25 @@ equation
   annotation (experiment(
       StopTime=31536000,
       Interval=3600,
-      __Dymola_Algorithm="Lsodar"), __Dymola_experimentSetupOutput(events=false));
+      __Dymola_Algorithm="Lsodar"), __Dymola_experimentSetupOutput(events=false),
+    Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+        graphics={
+        Line(points={{80,-82}}, color={28,108,200}),
+        Rectangle(
+          extent={{-80,20},{80,-80}},
+          lineColor={0,0,0},
+          lineThickness=0.5),
+        Line(
+          points={{-80,20},{0,100},{80,20}},
+          color={0,0,0},
+          thickness=0.5),
+        Text(
+          extent={{-52,-10},{62,-48}},
+          lineColor={0,0,0},
+          lineThickness=0.5,
+          fillColor={0,0,255},
+          fillPattern=FillPattern.Solid,
+          textString="TB")}));
 end ${bldg.name};
 
 
