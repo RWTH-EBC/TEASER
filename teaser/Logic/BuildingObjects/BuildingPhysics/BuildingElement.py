@@ -77,7 +77,8 @@ class BuildingElement(object):
 
     layer : list
         List of all layers of a building element (to be filled with Layer
-        objects). Use element.layer = None
+        objects). Use element.layer = None to delete all layers of the building
+        element
 
     Raises
     ----------
