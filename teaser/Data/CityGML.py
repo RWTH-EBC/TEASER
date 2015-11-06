@@ -69,7 +69,7 @@ def save_gml(project, path):
                                                            5438363,
                                                            6.317669])
     """                                                       
-    for i,bldg_count in enumerate(project.list_of_buildings):
+    for n,bldg_count in enumerate(project.list_of_buildings):
         
         gml_out.featureMember.append(citygml.cityObjectMember())
         
@@ -81,7 +81,7 @@ def save_gml(project, path):
         
         #unsolved problem with volume?
         #fixme what could be a method for placing the building 
-        bldg_center = [i*80,0,0]  
+        bldg_center = [n*80,0,0]  
         
         if type(bldg_count).__name__ == "Residential":
             building_length = (bldg_count.thermal_zones[0].area / 
@@ -103,7 +103,7 @@ def save_gml(project, path):
                                      building_width, 
                                      building_height,
                                      bldg_center)
-
+        
         for zone_count in bldg_count.thermal_zones:
             
             gml_zone = gmlhelp.gml_thermal_zone(zone_count) 
@@ -129,26 +129,36 @@ def save_gml(project, path):
             gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(gml_zone)
         
         gml_out.featureMember[-1].Feature = gml_bldg  
-
+        print("one gml bldg",n)
     out_file.write(gml_out.toDOM().toprettyxml())
            
+import time
 
+start = time.time()
 prj = Project(True)
-prj.type_bldg_residential(name="TestBuilding",
+for i in range(1):
+
+    
+    """
+    prj.type_bldg_residential(name="TestBuilding",
                          year_of_construction=1988,
                          number_of_floors=2,
                          height_of_floors=3,
                          net_leased_area=100)
-prj.type_bldg_office(name="TestBuilding1",
+    prj.type_bldg_office(name="TestBuilding1",
                          year_of_construction=1988,
                          number_of_floors=3,
                          height_of_floors=3,
                          net_leased_area=1500)
-prj.type_bldg_office(name="TestBuilding3",
+    """
+    prj.type_bldg_office(name="TestBuilding3"+str(i),
                          year_of_construction=1988,
                          number_of_floors=3,
                          height_of_floors=3,
                          net_leased_area=2100)
-
+    print(i)
+print("all building", len(prj.list_of_buildings))
+print("bldg:" , time.time() - start)
 save_gml(prj, "D:\\GIT\\TEASER\\teaser\\OutputData\\Test")
+print("End:" , time.time() - start)
 print("ahhasd")

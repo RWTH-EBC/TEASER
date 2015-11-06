@@ -467,7 +467,7 @@ def gml_layer(gml_surf_comp, wall):
 
     construction = energy.construction()
     construction.Construction = energy.ConstructionType() 
-    
+    construction.Construction.name = [og.gml.CodeType(wall.name)]
     if type(wall).__name__ == "Window":
         
         construction.Construction.transmittance.append(energy.TransmittancePropertyType())
@@ -495,9 +495,9 @@ def gml_layer(gml_surf_comp, wall):
             
         else:
             
+            
             gml_glazing_material(_current_layer, lay_count)
     
-            
             construction.Construction.layer.append(layer)                    
     
     gml_surf_comp.GenericApplicationPropertyOfCityObject.append(construction)
@@ -522,12 +522,11 @@ def gml_opaque_material(gml_layer, teaser_layer):
 def gml_glazing_material(gml_layer, teaser_layer):
     
     gml_layer.material = energy.AbstractMaterialPropertyType()
-    gml_layer.material.AbstractMaterial = energy.Glazing()
+    gml_layer.material.AbstractMaterial = energy.OpaqueMaterial()
             
     _current_material = gml_layer.material.AbstractMaterial
     _current_material.name = [og.gml.CodeType(teaser_layer.material.name)]
-    _current_material.hemisphericalTransmittance = energy.TransmittancePropertyType()
-    _current_material.hemisphericalTransmittance.Transmittance = energy.Transmittance() 
-    _current_material.hemisphericalTransmittance.Transmittance.percentage = 0.5
-    _current_material.hemisphericalTransmittance.Transmittance.wavelengthRange = energy.WavelengthRangeTypeType("Solar")
+    _current_material.conductivity = gml.MeasureType(
+                                        teaser_layer.material.thermal_conduc)
+    _current_material.conductivity.uom = bd.datatypes.anyURI('W/mK') 
     
