@@ -577,7 +577,7 @@ class Project(object):
         ----------
 
         model_type : string
-            setter of the used Modelica model (AixLib or AixLib_Multizone)
+            setter of the used Modelica model (AixLib or AixLibMultizone)
         path : string
             if the Files should not be stored in OutputData, an alternative
             path can be specified
@@ -616,13 +616,13 @@ class Project(object):
             self._help_package(path, self.name, uses)
             self._help_package_order(path, self.list_of_buildings)
 
-        elif model_type == "AixLib_Multizone":
+        elif model_type == "AixLibMultizone":
 
             uses = ['Modelica(version = "3.2.1")',
                     "AixLib(version=\"0.1.0\")"]
 
             for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "ebc", ("AixLib_Multizone \
+                assert bldg._calculation_method == "ebc", ("AixLibMultizone \
                     needs calculation core ebc")
                 """ i asume that the calculation method should be ebc because \
                 it's a ROM with modifications and looks like RWin"""
@@ -658,7 +658,7 @@ class Project(object):
             self._help_package_order(bldg_path, [bldg], None,
                                      bldg.name + "_DataBase")
 
-            if model_type == "AixLib_Multizone":
+            if model_type == "AixLibMultizone":
                 out_file = open(utilis.get_full_path
                                 (bldg_path + bldg.name + ".mo"), 'w')
                 out_file.write(building_template.render_unicode
@@ -676,7 +676,7 @@ class Project(object):
                     bldg=bldg, zone=zone))
                 out_file.close()
 
-                if model_type == "AixLib_Multizone":
+                if model_type == "AixLibMultizone":
                     self._help_package(zone_path, bldg.name + "_DataBase")
                     self._help_package_order(
                         zone_path, bldg.thermal_zones,
