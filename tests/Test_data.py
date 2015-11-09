@@ -899,6 +899,22 @@ class Test_teaser(object):
         therm_zone.outer_walls[0].load_type_element(1988, "heavy")
         therm_zone.inner_walls[0].load_type_element(1988, "light")
         therm_zone.windows[0].load_type_element(1988, "heavy")
+        
+    def test_save_type_element(self):
+        '''test of load_type_element, no parameter checking'''
+
+        # test load function
+        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        path = "D:\\"
+        therm_zone.outer_walls[0].parent = None
+        therm_zone.outer_walls[0].save_type_element(path=path,
+                                                    file_name="unitTestTB")
+        therm_zone.inner_walls[0].parent = None
+        therm_zone.inner_walls[0].save_type_element(path=path,
+                                                    file_name="unitTestTB")
+        therm_zone.windows[0].parent = None
+        therm_zone.windows[0].save_type_element(path=path,
+                                                    file_name="unitTestTB")
 
     #methods in Wall
 
