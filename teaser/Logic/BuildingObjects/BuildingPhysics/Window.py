@@ -7,7 +7,6 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement \
 
 
 class Window(BuildingElement):
-
     '''This class represents a window and is a child of BuildingElement().
 
     Attributes
@@ -43,7 +42,7 @@ class Window(BuildingElement):
             time constant according to VDI 6007 (default t_bt = 7)
         '''
         number_of_layer, density, thermal_conduc, heat_capac, thickness = \
-            self.gather_element_properties()
+        self.gather_element_properties()
 
         r_layer = thickness/thermal_conduc
         c_layer = heat_capac*density*thickness  # *1000
@@ -54,7 +53,7 @@ class Window(BuildingElement):
         for layer_count in c_layer:
             self.c1 += layer_count
 
-    def replace_window(self, year_of_retrofit, window_type=None):
+    def replace_window(self, year_of_refurbishment, window_type=None):
         '''Replace a window, with a newer one.
 
         Replaces all attributes from the window and replaces it with a high
@@ -75,5 +74,5 @@ class Window(BuildingElement):
             pass
 
         self.set_calc_default()
-
-        self.load_type_element(year_of_retrofit, window_type)
+        self.layer = None
+        self.load_type_element(year_of_refurbishment, window_type)
