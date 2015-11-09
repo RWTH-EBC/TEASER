@@ -1535,8 +1535,8 @@ class MainUI(QDialog):
         os.chdir(template_folder)
 
         for template_name in (os.listdir(template_folder)):
-            if(self.export_create_template_combobox.currentText()
-               == template_name):
+            if(self.export_create_template_combobox.currentText() ==
+               template_name):
                 path_template = template_folder + template_name
                 # pathTemplate shows which template will be used
 
@@ -1585,9 +1585,8 @@ class MainUI(QDialog):
                 export_project = Controller.click_export_button("package_order")
                 QtGui.QMessageBox.question(self, 'Message',
                                          "package_order finished")
-            # os.chdir(path_output_folder)
             else:
-                QtGui.QMessageBox.question(self, 'Message', "Fehler")
+                QtGui.QMessageBox.question(self, 'Message', "Failed")
 
         else:
             current_building_id = \
@@ -1598,13 +1597,16 @@ class MainUI(QDialog):
                 self.project, path_template, path_output_folder,
                 current_building_id, currentBuildingName)
             os.chdir(path_output_folder)
-            
+
+    #def clickBrowseButton(self):
+    #self.exportSaveTemplateLineEdit.setText(_translate("MainWindow", QtGui.QFileDialog.getExistingDirectory(), None))
+
     def click_export_button_dummy(self):
         QtGui.QWidget.__init__(self)
         self.setGeometry(300, 300, 250, 150)
         self.setWindowTitle('message box')
         QtGui.QMessageBox.question(self, 'Message', "Do nothing")
-    
+
     def create_path_to_template_folder(self,):
         path = "InputData\\RecordTemplate\\"
         pathTemplate = utilis.get_default_path()
@@ -3897,6 +3899,7 @@ class MainUI(QDialog):
         self.export_save_template_label.setText("Saving Path:")
         self.export_save_template_lineedit = QtGui.QLineEdit(
             self.export_groupbox)
+        self.export_save_template_lineedit.setText(utilis.get_default_path())
         self.export_save_template_lineedit .setGeometry(
             QtCore.QRect(130, 125, 130, 25))
         self.export_save_template_button = QtGui.QPushButton(
