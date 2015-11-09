@@ -139,7 +139,7 @@ class Controller():
                 type_building_attributes['layoutArea'],
                 type_building_attributes['layoutWindowArea'],
                 type_building_attributes['constructionType'])
-            
+
             building.street_name = street
             building.city = location
             id = building.internal_id
@@ -180,7 +180,7 @@ class Controller():
         i = 0
 
     @classmethod
-    def click_export_button(self, model_type):
+    def click_export_button(self, model_type, path):
         loaded_prj = Project()
-        loaded_prj.export_record(model_type)
+        loaded_prj.export_record(model_type, path)
 
