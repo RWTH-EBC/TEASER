@@ -611,9 +611,9 @@ class Test_teaser(object):
 
         prj.calc_all_buildings('vdi')
         prj.export_record('AixLib')
-        prj.export_record('CitiesType_old')
+        prj.export_record('AixLibMultizone')
         prj.calc_all_buildings('ebc')
-        prj.export_record('CitiesRWin')
+        prj.export_record('AixLibMultizone')
 
     def test_export_parameters_txt(self):
         '''test of the export of the readable parameter output'''
