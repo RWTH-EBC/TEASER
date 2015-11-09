@@ -379,31 +379,33 @@ class BuildingElement(object):
         '''Typical element saver.
 
         Saves typical building elements according to their construction
-        year and their construction type in the TypeBuildingElements.xml.
-
+        year and their construction type in the the XML file for type buidling
+        elements. If the Project parent is set, it automatically saves it to
+        the file given in Project.data. Alternatively you can specify a path to
+        an existing file of TypeBuildingElements. If this file does not exist,
+        a new file is created.
+        
         Parameters
         ----------
-        path : str
-            Path, where the XML should be stored. Default it teaser\\
-            InputData\\ If not existent, the file will be created.
-        file_name : str
-            Name of XML file, default is TypeBuildingElement
-            
-        '''
-        """
-        if path is None:
-            path = "InputData\\TypeBuildingElements"+".xml"
-        else:
-            path = path+"\\"+file_name+".xml"
-
-        xml_file = open(utilis.get_full_path(path),'r', encoding='UTF-8')
-
-        xml_parse = tb_bind.CreateFromDocument(xml_file.read())
         
-        self.parent.parent.\
-                    parent.data.element_bind.InnerWall
-        """
-        xml_parse = self.parent.parent.parent.data.element_bind        
+        path : str
+            path where unique file should be stored
+        name : strt
+            name of of unique file
+
+        '''
+        
+        if self.parent != None:
+            path = self.parent.parent.parent.data.__path_tb
+            xml_parse = self.parent.parent.parent.data.element_bind   
+        else:
+            path = path + "\\" + file_name + ".xml"
+            try:
+                xml_file = open(utilis.get_full_path(path),'r', encoding='UTF-8')
+                xml_parse = tb_bind.CreateFromDocument(xml_file.read())
+            except:
+                xml_parse = tb_bind.TypeBuildingElements()
+        
         add_to_xml = True
         
         if type(self).__name__ == "OuterWall":
@@ -547,11 +549,10 @@ class BuildingElement(object):
     
                 xml_parse.Window.append(pyxb_wall)
 
-        if add_to_xml == True:   
-            out_file = open(
-                utilis.get_full_path("InputData\\TypeBuildingElements.xml"),
-                                     'w', encoding='UTF-8')
-    
+        if add_to_xml == True:
+
+            out_file = open(utilis.get_full_path(path),'w', encoding='UTF-8') 
+     
             out_file.write(xml_parse.toDOM().toprettyxml())
 
     def set_basic_data_pyxb(self, pyxb_class):
