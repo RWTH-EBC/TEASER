@@ -178,3 +178,9 @@ class Controller():
     @classmethod
     def clickConstructionYearCatagoryButton(self):
         i = 0
+
+    @classmethod
+    def click_export_button(self, model_type):
+        loaded_prj = Project()
+        loaded_prj.export_record(model_type)
+
