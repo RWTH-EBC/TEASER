@@ -1598,8 +1598,8 @@ class MainUI(QDialog):
                 current_building_id, currentBuildingName)
             os.chdir(path_output_folder)
 
-    #def clickBrowseButton(self):
-    #self.exportSaveTemplateLineEdit.setText(_translate("MainWindow", QtGui.QFileDialog.getExistingDirectory(), None))
+    def click_browse_button(self):
+        self.export_save_template_lineedit.setText((QtGui.QFileDialog.getExistingDirectory(), None))
 
     def click_export_button_dummy(self):
         QtGui.QWidget.__init__(self)
@@ -3907,8 +3907,8 @@ class MainUI(QDialog):
         self.export_save_template_button.setGeometry(
             QtCore.QRect(265, 125, 80, 25))
         self.export_save_template_button.setText("Browse")
-        # self.export_save_template_button.clicked.connect(
-        #    self.clickBrowseButton)
+        self.export_save_template_button.clicked.connect(
+            self.click_browse_button)
         for template_name in os.listdir(self.create_path_to_template_folder()):
             self.export_create_template_combobox.addItem(template_name)
 
