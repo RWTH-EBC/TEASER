@@ -1443,7 +1443,7 @@ class MainUI(QDialog):
                             "Name:\t".expandtabs(8) + str(window.name) +
                             "\nType:\t".expandtabs(11) +
                             "Windows \n Area:\t".expandtabs(11) +
-                            str(window.area) + 
+                            str(window.area) +
                             "\n Orientation:\t".expandtabs(11) +
                             str(window.orientation),
                             window.internal_id)
@@ -1484,7 +1484,7 @@ class MainUI(QDialog):
                     self.side_bar_buildings_combo_box.setCurrentIndex(
                         self.side_bar_buildings_combo_box.findData(
                             str(self.current_building.internal_id)))
-                elif (self.side_bar_buildings_combo_box.currentText != 
+                elif (self.side_bar_buildings_combo_box.currentText !=
                       self.side_bar_id_line_edit.text):
                     self.side_bar_buildings_combo_box.setItemText(
                         self.side_bar_buildings_combo_box.currentIndex(),
@@ -1526,6 +1526,9 @@ class MainUI(QDialog):
                     self.outer_elements_model.appendRow(item2)
 
     def click_export_button(self):
+        QtGui.QWidget.__init__(self)
+        self.setGeometry(300, 300, 250, 150)
+        self.setWindowTitle('message box')
         # path in GUI, which is need for the output
         path_output_folder = str(self.export_save_template_lineedit.text())
         template_folder = self.create_path_to_template_folder()
@@ -1541,6 +1544,7 @@ class MainUI(QDialog):
         for i in range(self.side_bar_buildings_combo_box.count()):
             list_of_building_name.append(
                 self.side_bar_buildings_combo_box.itemText(i))
+
         sender = self.sender()
         if(sender.text() == self.export_button.text()):
             """
@@ -1551,14 +1555,39 @@ class MainUI(QDialog):
                 path_output_folder, building_id, list_of_building_name)
             os.chdir(path_output_folder)
             """
-            export_project = Controller.click_export_button("AixLib")
 
+            elemInCombobox = self.export_create_template_combobox.currentText()
+            if(elemInCombobox == "AixLib"):
+                export_project = Controller.click_export_button("AixLib")
+                QtGui.QMessageBox.question(self, 'Message',
+                                       "Aixlib finished ")
+
+            elif(elemInCombobox == "AixlibMultizones"):
+                export_project = Controller.click_export_button("AixlibMultizones")
+                QtGui.QMessageBox.question(self, 'Message',
+                                                "AixlibMultizones finished")
+
+            elif(elemInCombobox == "CitiesRWin"):
+                export_project = Controller.click_export_button("CitiesRWin")
+                QtGui.QMessageBox.question(self, 'Message',
+                                                "CitiesRWin finished")
+            elif(elemInCombobox == "CitiesType"):
+                export_project = Controller.click_export_button("CitiesType")
+                QtGui.QMessageBox.question(self, 'Message',
+                                           "CitiesType finished")
+
+            elif(elemInCombobox == "package"):
+                export_project = Controller.click_export_button("package")
+                QtGui.QMessageBox.question(self, 'Message',
+                                                "package finished")
+
+            elif(elemInCombobox == "package_order"):
+                export_project = Controller.click_export_button("package_order")
+                QtGui.QMessageBox.question(self, 'Message',
+                                         "package_order finished")
             # os.chdir(path_output_folder)
-            QtGui.QWidget.__init__(self)
-            self.setGeometry(300, 300, 250, 150)
-            self.setWindowTitle('message box')
-            QtGui.QMessageBox.question(self, 'Message',
-             "Template finished ")
+            else:
+                QtGui.QMessageBox.question(self, 'Message', "Fehler")
 
         else:
             current_building_id = \
@@ -1569,10 +1598,13 @@ class MainUI(QDialog):
                 self.project, path_template, path_output_folder,
                 current_building_id, currentBuildingName)
             os.chdir(path_output_folder)
-
-
-
-
+            
+    def click_export_button_dummy(self):
+        QtGui.QWidget.__init__(self)
+        self.setGeometry(300, 300, 250, 150)
+        self.setWindowTitle('message box')
+        QtGui.QMessageBox.question(self, 'Message', "Do nothing")
+    
     def create_path_to_template_folder(self,):
         path = "InputData\\RecordTemplate\\"
         pathTemplate = utilis.get_default_path()
@@ -3850,7 +3882,7 @@ class MainUI(QDialog):
         self.export_button.setText("Export template for all buildings")
         self.export_button_one = QtGui.QPushButton(self.export_groupbox)
         self.export_button_one.setGeometry(QtCore.QRect(5, 55, 305, 25))
-        # self.export_button_one.clicked.connect(self.export_groupbox)
+        self.export_button_one.clicked.connect(self.click_export_button_dummy)
         self.export_button_one.setText("Export template for current building")
         self.export_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_template_label.setGeometry(QtCore.QRect(5, 90, 120, 25))
