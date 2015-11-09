@@ -621,11 +621,11 @@ class Project(object):
             uses = ['Modelica(version = "3.2.1")',
                     "AixLib(version=\"0.1.0\")"]
 
-            for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "ebc", ("AixLibMultizone \
-                    needs calculation core ebc")
-                """ i asume that the calculation method should be ebc because \
-                it's a ROM with modifications and looks like RWin"""
+            # for bldg in self.list_of_buildings:
+            #     assert bldg._calculation_method == "ebc", ("AixLibMultizone \
+            #         needs calculation core ebc")
+            #     """ i asume that the calculation method should be ebc because \
+            #     it's a ROM with modifications and looks like RWin"""
 
             zone_template = Template(
                 filename=utilis.get_full_path(
@@ -635,10 +635,10 @@ class Project(object):
                 filename=utilis.get_full_path(
                     "InputData\\RecordTemplate\\AixLibMultizone\\"
                     "AixLib_base"))
-            building_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\AixLibMultizone\\"
-                    "AixLib_bldg"))
+            # building_template = Template(
+            #     filename=utilis.get_full_path(
+            #         "InputData\\RecordTemplate\\AixLibMultizone\\"
+            #         "AixLib_bldg"))
 
             self._help_package(path, self.name, uses)
             self._help_package_order(path, self.list_of_buildings)
@@ -661,6 +661,19 @@ class Project(object):
             if model_type == "AixLibMultizone":
                 out_file = open(utilis.get_full_path
                                 (bldg_path + bldg.name + ".mo"), 'w')
+                if bldg._calculation_method == "ebc":
+                    building_template = Template(
+                        filename=utilis.get_full_path(
+                            "InputData\\RecordTemplate\\AixLibMultizone\\"
+                            "AixLib_bldg"))
+                elif bldg._calculation_method == "vdi":
+                    building_template = Template(
+                        filename=utilis.get_full_path(
+                            "InputData\\RecordTemplate\\AixLibMultizone\\"
+                            "AixLib_bldg_vdi"))
+                else:
+                    pass
+
                 out_file.write(building_template.render_unicode
                                (bldg=bldg, mod_prj=self.modelica_project,
                                 weather=self.weather_file_name))
