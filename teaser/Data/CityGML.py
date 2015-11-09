@@ -23,7 +23,7 @@ import pyxb.bundles.opengis.citygml.energy as energy
 
 import teaser.Data.DataHelp.gmlhelp as gmlhelp
 
-def save_gml(project, path):
+def save_gml(project, path, ref_coordinates=None):
     '''This function saves a project to a cityGML file
 
     The function needs the Python Package PyXB. And the opengis bundle for GML
@@ -35,6 +35,10 @@ def save_gml(project, path):
         Teaser instance of Project()
     path: string
         complete path to the output file
+    ref_coordinates: list
+        list with  lower and one upper reference coordinates. Each coordiante
+        should contain 3 ints or floats for x, y, and z coordinates of the 
+        point. e.g: [[458877,,5438353, -0.2], [458889,5438363,6.317669]]
     '''
 
     out_file = open(path + ".gml", 'w')
@@ -55,25 +59,21 @@ def save_gml(project, path):
     gml_out = citygml.CityModel()
     gml_out.name = [og.gml.CodeType(project.name)]
 
-
-    #fixme: what kind of coordiantes we have to use e.g. for Aachen?
-
-#    gml_out = gmlhelp.set_reference_boundary(gml_out,
-#                                             lower_coords=[458877,
-#                                                           5438353,
-#                                                           -0.2],
-#                                             upper_coords=[458889,
-#                                                           5438363,
-#                                                           6.317669])
+    if ref_coordinates != None:
+        
+        gml_out = gmlhelp.set_reference_boundary(gml_out,
+                                                 ref_coordinates[0],
+                                                 ref_coordinates[1])
+    else: 
+        bldg_center = [0,0,0]
+        pass
 
     for i, bldg_count in enumerate(project.list_of_buildings):
 
         gml_out.featureMember.append(citygml.cityObjectMember())
 
         gml_bldg = gmlhelp.set_gml_building(bldg_count)
-
-        #unsolved problem with volume?
-        #fixme what could be a method for placing the building
+        
         bldg_center = [i*80, 0, 0]
         building_length = None
         building_width = None
