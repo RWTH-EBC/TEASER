@@ -142,9 +142,6 @@ def set_lod_2(gml_bldg, length, width, height, bldg_center):
     boundary_surface = []
     lod_2_solid = gml.SolidPropertyType()
 
-    #fixme what is arcrole?
-    #lod_2_solid.arcrole = 'Test'
-
     lod_2_solid.Solid = gml.Solid_()
     exterior_solid = gml.SurfacePropertyType()
     composite_surface = gml.CompositeSurface()
@@ -303,10 +300,7 @@ def _add_surface(composite_surface, coords):
         input_list.append(value)
 
     pos_list = gml.posList(input_list)
-    
-    #fixme what is srsDimension
-    #pos_list.srsDimension = 3
-    
+        
     linear_ring.posList = pos_list
     exterior_polygon.LinearRing = linear_ring
     polygon.exterior = exterior_polygon
