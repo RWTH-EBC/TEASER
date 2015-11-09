@@ -1375,20 +1375,20 @@ class MainUI(QDialog):
                 list_of_buildings[self.project.list_of_buildings.index(
                     self.current_building)].thermal_zones:
                 item = TrackableItem(
-                    "Name:\t".expandtabs(8) + str(zone.name) + 
-                    "\n" + "Type:\t".expandtabs(11) + 
-                    str(type(zone).__name__) + "\n Area:\t".expandtabs(11) + 
+                    "Name:\t".expandtabs(8) + str(zone.name) +
+                    "\n" + "Type:\t".expandtabs(11) +
+                    str(type(zone).__name__) + "\n Area:\t".expandtabs(11) +
                     str(zone.area), zone.internal_id)
                 item.setAccessibleText(str(zone.internal_id))
                 self.zone_model.appendRow(item)
                 if zone.inner_walls:
                     for inner_wall in zone.inner_walls:
                         item = TrackableItem(
-                            "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                            "\nType:\t".expandtabs(11) + 
-                            "Inner Wall \n Area:\t".expandtabs(11) + 
-                            str(inner_wall.area) + 
-                            "\n Orientation:\t".expandtabs(11) + 
+                            "Name:\t".expandtabs(8) + str(inner_wall.name) +
+                            "\nType:\t".expandtabs(11) +
+                            "Inner Wall \n Area:\t".expandtabs(11) +
+                            str(inner_wall.area) +
+                            "\n Orientation:\t".expandtabs(11) +
                             str(inner_wall.orientation),
                             inner_wall.internal_id)
                         item.setAccessibleText(str(zone.internal_id))
@@ -1398,12 +1398,12 @@ class MainUI(QDialog):
                         if type(outer_wall).__name__ == \
                                 "GroundFloor":
                             item = TrackableItem(
-                                "Name:\t".expandtabs(8) + 
-                                str(outer_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Ground Floor \n Area:\t".expandtabs(11) + 
-                                str(outer_wall.area) + 
-                                "\n Orientation:\t".expandtabs(11) + 
+                                "Name:\t".expandtabs(8) +
+                                str(outer_wall.name) +
+                                "\nType:\t".expandtabs(11) +
+                                "Ground Floor \n Area:\t".expandtabs(11) +
+                                str(outer_wall.area) +
+                                "\n Orientation:\t".expandtabs(11) +
                                 str(outer_wall.orientation),
                                 outer_wall.internal_id)
                             self.element_model.appendRow(item)
@@ -1412,12 +1412,12 @@ class MainUI(QDialog):
                         if type(outer_wall).__name__ == \
                                 "Rooftop":
                             item = TrackableItem(
-                                "Name:\t".expandtabs(8) + 
-                                str(outer_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Rooftop \n Area:\t".expandtabs(11) + 
-                                str(outer_wall.area) + 
-                                "\n Orientation:\t".expandtabs(11) + 
+                                "Name:\t".expandtabs(8) +
+                                str(outer_wall.name) +
+                                "\nType:\t".expandtabs(11) +
+                                "Rooftop \n Area:\t".expandtabs(11) +
+                                str(outer_wall.area) +
+                                "\n Orientation:\t".expandtabs(11) +
                                 str(outer_wall.orientation),
                                 outer_wall.internal_id)
                             self.element_model.appendRow(item)
@@ -1426,12 +1426,12 @@ class MainUI(QDialog):
                         if type(outer_wall).__name__ == \
                                 "OuterWall":
                             item = TrackableItem(
-                                "Name:\t".expandtabs(8) + 
-                                str(outer_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Outer Wall \n Area:\t".expandtabs(11) + 
-                                str(outer_wall.area) + 
-                                "\n Orientation:\t".expandtabs(11) + 
+                                "Name:\t".expandtabs(8) +
+                                str(outer_wall.name) +
+                                "\nType:\t".expandtabs(11) +
+                                "Outer Wall \n Area:\t".expandtabs(11) +
+                                str(outer_wall.area) +
+                                "\n Orientation:\t".expandtabs(11) +
                                 str(outer_wall.orientation),
                                 outer_wall.internal_id)
                             self.element_model.appendRow(item)
@@ -1440,11 +1440,11 @@ class MainUI(QDialog):
                 if zone.windows:
                     for window in zone.windows:
                         item = TrackableItem(
-                            "Name:\t".expandtabs(8) + str(window.name) + 
-                            "\nType:\t".expandtabs(11) + 
-                            "Windows \n Area:\t".expandtabs(11) + 
+                            "Name:\t".expandtabs(8) + str(window.name) +
+                            "\nType:\t".expandtabs(11) +
+                            "Windows \n Area:\t".expandtabs(11) +
                             str(window.area) + 
-                            "\n Orientation:\t".expandtabs(11) + 
+                            "\n Orientation:\t".expandtabs(11) +
                             str(window.orientation),
                             window.internal_id)
                         item.setAccessibleText(str(zone.internal_id))
@@ -1500,9 +1500,9 @@ class MainUI(QDialog):
                 list_of_buildings[self.project.list_of_buildings.
                                   index(self.current_building)].thermal_zones:
                 item = TrackableItem(
-                    "Name:\t".expandtabs(8) + str(zone.name) + 
-                    "\n" + "Type:\t".expandtabs(11) + 
-                    str(type(zone).__name__) + "\n Area:\t".expandtabs(11) + 
+                    "Name:\t".expandtabs(8) + str(zone.name) +
+                    "\n" + "Type:\t".expandtabs(11) +
+                    str(type(zone).__name__) + "\n Area:\t".expandtabs(11) +
                     str(zone.area), zone.internal_id)
                 item.setAccessibleText(str(zone.internal_id))
                 self.zone_model.appendRow(item)
@@ -1510,17 +1510,17 @@ class MainUI(QDialog):
             for orientation in self.guiinfo.orientations_numbers.keys():
                 if self.current_building.get_outer_wall_area(orientation) != 0:
                     item1 = QStandardItem(
-                        "Outer Wall Orientation: " + 
-                        str(self.guiinfo.orientations_numbers[orientation]) + 
-                        "\t".expandtabs(12) + "\n" + " Area: " + 
+                        "Outer Wall Orientation: " +
+                        str(self.guiinfo.orientations_numbers[orientation]) +
+                        "\t".expandtabs(12) + "\n" + " Area: " +
                         str(self.current_building.
                             get_outer_wall_area(orientation)))
                     self.outer_elements_model.appendRow(item1)
                 if self.current_building.get_window_area(orientation) != 0:
                     item2 = QStandardItem(
-                        "Window Orientation: " + 
-                        str(self.guiinfo.orientations_numbers[orientation]) + 
-                        "\t".expandtabs(16) + "\n" + " Area: " + 
+                        "Window Orientation: " +
+                        str(self.guiinfo.orientations_numbers[orientation]) +
+                        "\t".expandtabs(16) + "\n" + " Area: " +
                         str(self.current_building.
                             get_window_area(orientation)))
                     self.outer_elements_model.appendRow(item2)
@@ -1543,11 +1543,22 @@ class MainUI(QDialog):
                 self.side_bar_buildings_combo_box.itemText(i))
         sender = self.sender()
         if(sender.text() == self.export_button.text()):
+            """
             building_id = -1
+
             export_project = self.controller.clickExportButton(
                 self.project, path_template,
                 path_output_folder, building_id, list_of_building_name)
             os.chdir(path_output_folder)
+            """
+            export_project = Controller.click_export_button("AixLib")
+
+            # os.chdir(path_output_folder)
+            QtGui.QWidget.__init__(self)
+            self.setGeometry(300, 300, 250, 150)
+            self.setWindowTitle('message box')
+            QtGui.QMessageBox.question(self, 'Message',
+             "Template finished ")
 
         else:
             current_building_id = \
@@ -1558,6 +1569,9 @@ class MainUI(QDialog):
                 self.project, path_template, path_output_folder,
                 current_building_id, currentBuildingName)
             os.chdir(path_output_folder)
+
+
+
 
     def create_path_to_template_folder(self,):
         path = "InputData\\RecordTemplate\\"
@@ -1585,11 +1599,11 @@ class MainUI(QDialog):
 
             self.layer_model.clear()
             for layer in self.current_element.layer:
-                item = TrackableItem("Name:\t".expandtabs(8) + 
-                                     str(layer.id) + "\n" + 
-                                     "Material:\t".expandtabs(11) + 
-                                     str(layer.material.name) + 
-                                     "\n Thickness:\t".expandtabs(11) + 
+                item = TrackableItem("Name:\t".expandtabs(8) +
+                                     str(layer.id) + "\n" +
+                                     "Material:\t".expandtabs(11) +
+                                     str(layer.material.name) +
+                                     "\n Thickness:\t".expandtabs(11) +
                                      str(layer.thickness), layer.internal_id)
                 self.layer_model.appendRow(item)
 
@@ -1944,28 +1958,28 @@ class MainUI(QDialog):
                 int(self.cooling_ahu_start_dropdown.currentText()[1])
         else:
             self.current_zone.use_conditions.cooling_time[0] = \
-                int(self.cooling_ahu_start_dropdown.currentText()[0] + 
+                int(self.cooling_ahu_start_dropdown.currentText()[0] +
                     self.cooling_ahu_start_dropdown.currentText()[1])
         if self.cooling_ahu_end_dropdown.currentText().startswith('0'):
             self.current_zone.use_conditions.cooling_time[1] = \
                 int(self.cooling_ahu_end_dropdown.currentText()[1])
         else:
             self.current_zone.use_conditions.cooling_time[1] = \
-                int(self.cooling_ahu_end_dropdown.currentText()[0] + 
+                int(self.cooling_ahu_end_dropdown.currentText()[0] +
                     self.cooling_ahu_end_dropdown.currentText()[1])
         if self.heating_ahu_start_dropdown.currentText().startswith('0'):
             self.current_zone.use_conditions.heating_time[0] = \
                 int(self.heating_ahu_start_dropdown.currentText()[1])
         else:
             self.current_zone.use_conditions.heating_time[0] = \
-                int(self.heating_ahu_start_dropdown.currentText()[0] + 
+                int(self.heating_ahu_start_dropdown.currentText()[0] +
                     self.heating_ahu_start_dropdown.currentText()[1])
         if self.heating_ahu_end_dropdown.currentText().startswith('0'):
             self.current_zone.use_conditions.heating_time[1] = \
                 int(self.heating_ahu_end_dropdown.currentText()[1])
         else:
             self.current_zone.use_conditions.heating_time[1] = \
-                int(self.heating_ahu_end_dropdown.currentText()[0] + 
+                int(self.heating_ahu_end_dropdown.currentText()[0] +
                     self.heating_ahu_end_dropdown.currentText()[1])
 
         self.current_zone.use_conditions.set_temp_heat = float(
@@ -3815,7 +3829,7 @@ class MainUI(QDialog):
             self.element_save_cancel_layoutGroupBox)
         self.element_build_ui.setWindowModality(Qt.ApplicationModal)
         self.element_build_ui.show()
-        
+
     def show_export_window(self):
         self.export_window_ui = QtGui.QWizardPage()
         self.export_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -3824,7 +3838,7 @@ class MainUI(QDialog):
         self.export_window_ui.setFixedHeight(180)
         self.export_window_ui_layout = QtGui.QGridLayout()
         self.export_window_ui.setLayout(self.export_window_ui_layout)
-        
+
         self.export_groupbox = QtGui.QGroupBox("Export")
         self.export_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 160))
         self.export_groupbox.setMinimumSize(QtCore.QSize(360, 160))
@@ -3840,7 +3854,7 @@ class MainUI(QDialog):
         self.export_button_one.setText("Export template for current building")
         self.export_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_template_label.setGeometry(QtCore.QRect(5, 90, 120, 25))
-        self.export_template_label.setText("Export template:")
+        self.export_template_label.setText("Export Modelica Record:")
         self.export_create_template_combobox = QtGui.QComboBox(
             self.export_groupbox)
         self.export_create_template_combobox.setGeometry(
@@ -3848,7 +3862,7 @@ class MainUI(QDialog):
         self.export_save_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_save_template_label.setGeometry(
             QtCore.QRect(5, 125, 110, 25))
-        self.export_save_template_label.setText("Export save template:")
+        self.export_save_template_label.setText("Saving Path:")
         self.export_save_template_lineedit = QtGui.QLineEdit(
             self.export_groupbox)
         self.export_save_template_lineedit .setGeometry(
@@ -3862,7 +3876,7 @@ class MainUI(QDialog):
         #    self.clickBrowseButton)
         for template_name in os.listdir(self.create_path_to_template_folder()):
             self.export_create_template_combobox.addItem(template_name)
-        
+
         self.export_window_ui_layout.addWidget(
             self.export_groupbox, 1, 1)
         self.export_window_ui.setWindowModality(Qt.ApplicationModal)
