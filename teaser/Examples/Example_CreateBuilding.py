@@ -114,7 +114,7 @@ def example_create_building():
     '''
     Export the Modelica Record
     '''
-    prj.export_record("CitiesRWin")
+    prj.export_record("AixLibMultizone")
     '''
     Save new TEASER XML
     '''
