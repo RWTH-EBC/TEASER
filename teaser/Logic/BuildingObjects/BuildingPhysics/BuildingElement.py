@@ -9,6 +9,7 @@ import teaser.Logic.Utilis as utilis
 
 import numpy as np
 import random
+import warnings
 
 
 class BuildingElement(object):
@@ -374,7 +375,7 @@ class BuildingElement(object):
             self.shading_g_total = pyxb_class.shading_g_total
             self.shading_max_irr = pyxb_class.shading_max_irr
 
-    def save_type_element(self):
+    def save_type_element(self, path=None, file_name=None):
         '''Typical element saver.
 
         Saves typical building elements according to their construction
@@ -382,87 +383,176 @@ class BuildingElement(object):
 
         Parameters
         ----------
-        year : str
-            Year of construction
-
-        construction : str
-            Construction type, code list ('heavy', 'light')
+        path : str
+            Path, where the XML should be stored. Default it teaser\\
+            InputData\\ If not existent, the file will be created.
+        file_name : str
+            Name of XML file, default is TypeBuildingElement
+            
         '''
+        """
+        if path is None:
+            path = "InputData\\TypeBuildingElements"+".xml"
+        else:
+            path = path+"\\"+file_name+".xml"
 
-        xml_file = open(
-            utilis.get_full_path("InputData\\TypeBuildingElements.xml",
-                                 'r', encoding='UTF-8'))
+        xml_file = open(utilis.get_full_path(path),'r', encoding='UTF-8')
 
         xml_parse = tb_bind.CreateFromDocument(xml_file.read())
-
+        
+        self.parent.parent.\
+                    parent.data.element_bind.InnerWall
+        """
+        xml_parse = self.parent.parent.parent.data.element_bind        
+        add_to_xml = True
+        
         if type(self).__name__ == "OuterWall":
-
-            pyxb_wall = tb_bind.OuterWallType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
-
-            xml_parse.OuterWall.append(pyxb_wall)
+            
+            for check in xml_parse.OuterWall:
+                if check.building_age_group == self.building_age_group and\
+                    check.construction_type == self.construction_type:
+                        warnings.warn("Construction Type and building age "
+                        "group already exist in this XML, consider revising "
+                        "your inputs. The Element is NOT saved into XML")
+                        add_to_xml = False
+                        break
+                    
+            if add_to_xml == True:   
+                
+                pyxb_wall = tb_bind.OuterWallType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+    
+                xml_parse.OuterWall.append(pyxb_wall)
+                    
 
         elif type(self).__name__ == 'InnerWall':
+            
+            for check in xml_parse.InnerWall:
+                if check.building_age_group == self.building_age_group and\
+                    check.construction_type == self.construction_type:
+                        warnings.warn("Construction Type and building age "
+                        "group already exist in this XML, consider revising "
+                        "your inputs. The Element is NOT saved into XML")
+                        add_to_xml = False
+                        break
+                    
+            if add_to_xml == True: 
 
-            pyxb_wall = tb_bind.InnerWallType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
-
-            xml_parse.InnerWall.append(pyxb_wall)
+                pyxb_wall = tb_bind.InnerWallType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+    
+                xml_parse.InnerWall.append(pyxb_wall)
 
         elif type(self).__name__ == 'Ceiling':
 
-            pyxb_wall = tb_bind.CeilingType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.Ceiling:
+                if check.building_age_group == self.building_age_group and\
+                    check.construction_type == self.construction_type:
+                        warnings.warn("Construction Type and building age "
+                        "group already exist in this XML, consider revising "
+                        "your inputs. The Element is NOT saved into XML")
+                        add_to_xml = False
+                        break
+                    
+            if add_to_xml == True: 
 
-            xml_parse.Ceiling.append(pyxb_wall)
+                pyxb_wall = tb_bind.CeilingType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+    
+                xml_parse.Ceiling.append(pyxb_wall)
 
         elif type(self).__name__ == 'Floor':
 
-            pyxb_wall = tb_bind.FloorType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.Floor:
+                if check.building_age_group == self.building_age_group and\
+                    check.construction_type == self.construction_type:
+                        warnings.warn("Construction Type and building age "
+                        "group already exist in this XML, consider revising "
+                        "your inputs. The Element is NOT saved into XML")
+                        add_to_xml = False
+                        break
+                    
+            if add_to_xml == True: 
 
-            xml_parse.Floor.append(pyxb_wall)
+                pyxb_wall = tb_bind.FloorType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+    
+                xml_parse.Floor.append(pyxb_wall)
 
         elif type(self).__name__ == 'GroundFloor':
 
-            pyxb_wall = tb_bind.GroundFloorType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.GroundFloor:
+                if check.building_age_group == self.building_age_group and\
+                    check.construction_type == self.construction_type:
+                        warnings.warn("Construction Type and building age "
+                        "group already exist in this XML, consider revising "
+                        "your inputs. The Element is NOT saved into XML")
+                        add_to_xml = False
+                        break
 
-            xml_parse.GroundFloor.append(pyxb_wall)
+            if add_to_xml == True:
+
+                pyxb_wall = tb_bind.GroundFloorType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+    
+                xml_parse.GroundFloor.append(pyxb_wall)
 
         elif type(self).__name__ == 'Rooftop':
 
-            pyxb_wall = tb_bind.RooftopType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.Rooftop:
+                if check.building_age_group == self.building_age_group and\
+                    check.construction_type == self.construction_type:
+                        warnings.warn("Construction Type and building age "
+                        "group already exist in this XML, consider revising "
+                        "your inputs. The Element is NOT saved into XML")
+                        add_to_xml = False
+                        break
 
-            xml_parse.Rooftop.append(pyxb_wall)
+            if add_to_xml == True:
+
+                pyxb_wall = tb_bind.RooftopType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+    
+                xml_parse.Rooftop.append(pyxb_wall)
 
         elif type(self).__name__ == 'Window':
 
-            pyxb_wall = tb_bind.WindowType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.Window:
+                if check.building_age_group == self.building_age_group and\
+                    check.construction_type == self.construction_type:
+                        warnings.warn("Construction Type and building age "
+                        "group already exist in this XML, consider revising "
+                        "your inputs. The Element is NOT saved into XML")
+                        add_to_xml = False
+                        break
 
-            xml_parse.Window.append(pyxb_wall)
+            if add_to_xml == True:
 
-        out_file = open(
-            utilis.get_full_path("InputData\\TypeBuildingElements.xml",
-                                 'w', encoding='UTF-8'))
+                pyxb_wall = tb_bind.WindowType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+    
+                xml_parse.Window.append(pyxb_wall)
 
-        out_file.write(xml_parse.toDOM().toprettyxml())
+        if add_to_xml == True:   
+            out_file = open(
+                utilis.get_full_path("InputData\\TypeBuildingElements.xml"),
+                                     'w', encoding='UTF-8')
+    
+            out_file.write(xml_parse.toDOM().toprettyxml())
 
     def set_basic_data_pyxb(self, pyxb_class):
         '''Helper function for save_type_element to set the layer data.
