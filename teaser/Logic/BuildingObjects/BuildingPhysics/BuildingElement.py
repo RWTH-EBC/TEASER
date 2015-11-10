@@ -100,7 +100,7 @@ class BuildingElement(object):
         self.year_of_construction = None
         self.building_age_group = [None, None]
 
-        self.area = None
+        self._area = None
         self.tilt = None
         self._orientation = None
         self._inner_convection = None
@@ -679,3 +679,12 @@ class BuildingElement(object):
                 self.inner_radiation is not None and\
                 self.area is not None:
             self.calc_ua_value()
+
+    @property
+    def area(self):
+        return self._area
+
+    @area.setter
+    def area(self, value):
+        if value is not None:
+            self._area = value
