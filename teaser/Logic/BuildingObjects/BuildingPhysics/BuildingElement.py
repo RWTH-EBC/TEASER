@@ -103,10 +103,10 @@ class BuildingElement(object):
         self.area = None
         self.tilt = None
         self._orientation = None
-        self.inner_convection = None
-        self.inner_radiation = None
-        self.outer_convection = None
-        self.outer_radiation = None
+        self._inner_convection = None
+        self._inner_radiation = None
+        self._outer_convection = None
+        self._outer_radiation = None
 
         self._layer = []
 
@@ -624,3 +624,43 @@ class BuildingElement(object):
     
             else:
                 self._layer.append(value)
+
+    @property
+    def inner_convection(self):
+        return self._inner_convection
+
+    @inner_convection.setter
+    def inner_convection(self, value):
+        if value is not None:
+            self._inner_convection = value
+        self.calc_ua_value()
+
+    @property
+    def inner_radiation(self):
+        return self._inner_radiation
+
+    @inner_radiation.setter
+    def inner_radiation(self, value):
+        if value is not None:
+            self._inner_radiation = value
+        self.calc_ua_value()
+
+    @property
+    def outer_convection(self):
+        return self._outer_convection
+
+    @outer_convection.setter
+    def outer_convection(self, value):
+        if value is not None:
+            self._outer_convection = value
+        self.calc_ua_value()
+
+    @property
+    def outer_radiation(self):
+        return self._outer_radiation
+
+    @outer_radiation.setter
+    def outer_radiation(self, value):
+        if value is not None:
+            self._outer_radiation = value
+        self.calc_ua_value()
