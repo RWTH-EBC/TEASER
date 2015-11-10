@@ -610,20 +610,23 @@ class BuildingElement(object):
 
     @layer.setter
     def layer(self, value):
-        
-        if value == None:
+
+        if value is None:
             self._layer = []
         else:
             ass_error_1 = "Value has to be an instance of Layer()"
-    
+
             assert isinstance(value, Layer), ass_error_1
-            
-                
+
             if self._layer is None:
                 self._layer = [value]
-    
+
             else:
                 self._layer.append(value)
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.area is not None:
+            self.calc_ua_value()
 
     @property
     def inner_convection(self):
@@ -637,7 +640,6 @@ class BuildingElement(object):
                 self.inner_radiation is not None and\
                 self.area is not None:
             self.calc_ua_value()
-
 
     @property
     def inner_radiation(self):
