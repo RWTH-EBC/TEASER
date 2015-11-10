@@ -310,7 +310,9 @@ class UseConditions18599(UseConditions):
         '''
         
         if self.parent != None:
-            path = self.parent.parent.parent.data.__path_uc
+            print(self.parent.parent.parent.data.path_uc)
+            path = self.parent.parent.parent.data.path_uc
+            print(path)
             xml_parse = self.parent.parent.parent.data.conditions_bind   
         else:
             path = path + "\\" + file_name + ".xml"
@@ -320,7 +322,7 @@ class UseConditions18599(UseConditions):
                                 encoding='UTF-8')
                 xml_parse = uc_bind.CreateFromDocument(xml_file.read())
             except:
-                xml_parse = uc_bind.UseConditionsType()
+                xml_parse = uc_bind.UseConditions()
         
         add_to_xml = True        
         

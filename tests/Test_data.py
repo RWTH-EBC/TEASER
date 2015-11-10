@@ -866,7 +866,21 @@ class Test_teaser(object):
         for wall in prj.list_of_buildings[-1].thermal_zones[-1].inner_walls:
             assert round(wall.area, 16) == 0.2439024390243902
 
-    #methods in BuildingElement
+   #methods in UseConditions18599()
+
+    def test_load_use_conditions(self):
+        '''test of load_use_conditions, no parameter checking'''
+        use_cond = prj.list_of_buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.load_use_conditions("Living")
+
+    def test_save_use_conditions(self):
+        '''test of save_use_conditions, no parameter checking'''
+        path = Utilis.get_default_path()
+        use_cond = prj.list_of_buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.parent = None
+        use_cond.save_use_conditions(path=path, file_name="UseCondUT")
+        
+   #methods in BuildingElement
 
     def test_ua_value(self):
         '''test of ua_value'''
