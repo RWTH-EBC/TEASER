@@ -77,7 +77,8 @@ class BuildingElement(object):
 
     layer : list
         List of all layers of a building element (to be filled with Layer
-        objects)
+        objects). Use element.layer = None to delete all layers of the building
+        element
 
     Raises
     ----------
@@ -609,13 +610,17 @@ class BuildingElement(object):
 
     @layer.setter
     def layer(self, value):
-
-        ass_error_1 = "Value has to be an instance of Layer()"
-
-        assert isinstance(value, Layer), ass_error_1
-
-        if self._layer is None:
-            self._layer = [value]
-
+        
+        if value == None:
+            self._layer = []
         else:
-            self._layer.append(value)
+            ass_error_1 = "Value has to be an instance of Layer()"
+    
+            assert isinstance(value, Layer), ass_error_1
+            
+                
+            if self._layer is None:
+                self._layer = [value]
+    
+            else:
+                self._layer.append(value)
