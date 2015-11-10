@@ -399,15 +399,13 @@ class BuildingElement(object):
 
         '''
 
-        if self.parent != None:
+        if self.parent is not None:
             path = self.parent.parent.parent.data.path_tb
             xml_parse = self.parent.parent.parent.data.element_bind
         else:
             path = path + "\\" + file_name + ".xml"
             try:
-                xml_file = open(utilis.get_full_path(path),
-                                'r',
-                                encoding='UTF-8')
+                xml_file = open(utilis.get_full_path(path))
                 xml_parse = tb_bind.CreateFromDocument(xml_file.read())
             except:
                 xml_parse = tb_bind.TypeBuildingElements()
@@ -425,7 +423,7 @@ class BuildingElement(object):
                     add_to_xml = False
                     break
 
-            if add_to_xml == True:
+            if add_to_xml is True:
 
                 pyxb_wall = tb_bind.OuterWallType()
                 self.set_basic_data_pyxb(pyxb_wall)
@@ -443,7 +441,7 @@ class BuildingElement(object):
                     add_to_xml = False
                     break
 
-            if add_to_xml == True:
+            if add_to_xml is True:
 
                 pyxb_wall = tb_bind.InnerWallType()
                 self.set_basic_data_pyxb(pyxb_wall)
@@ -461,7 +459,7 @@ class BuildingElement(object):
                     add_to_xml = False
                     break
 
-            if add_to_xml == True:
+            if add_to_xml is True:
 
                 pyxb_wall = tb_bind.CeilingType()
                 self.set_basic_data_pyxb(pyxb_wall)
@@ -479,7 +477,7 @@ class BuildingElement(object):
                     add_to_xml = False
                     break
 
-            if add_to_xml == True:
+            if add_to_xml is True:
 
                 pyxb_wall = tb_bind.FloorType()
                 self.set_basic_data_pyxb(pyxb_wall)
@@ -497,7 +495,7 @@ class BuildingElement(object):
                     add_to_xml = False
                     break
 
-            if add_to_xml == True:
+            if add_to_xml is True:
 
                 pyxb_wall = tb_bind.GroundFloorType()
                 self.set_basic_data_pyxb(pyxb_wall)
@@ -515,7 +513,7 @@ class BuildingElement(object):
                     add_to_xml = False
                     break
 
-            if add_to_xml == True:
+            if add_to_xml is True:
 
                 pyxb_wall = tb_bind.RooftopType()
                 self.set_basic_data_pyxb(pyxb_wall)
@@ -533,7 +531,7 @@ class BuildingElement(object):
                     add_to_xml = False
                     break
 
-            if add_to_xml == True:
+            if add_to_xml is True:
 
                 pyxb_wall = tb_bind.WindowType()
                 self.set_basic_data_pyxb(pyxb_wall)
@@ -544,7 +542,7 @@ class BuildingElement(object):
 
         if add_to_xml == True:
 
-            out_file = open(utilis.get_full_path(path), 'w', encoding='UTF-8')
+            out_file = open(utilis.get_full_path(path))
 
             out_file.write(xml_parse.toDOM().toprettyxml())
 
@@ -695,7 +693,7 @@ class BuildingElement(object):
     @layer.setter
     def layer(self, value):
 
-        if value == None:
+        if value is None:
             self._layer = []
         else:
             ass_error_1 = "Value has to be an instance of Layer()"

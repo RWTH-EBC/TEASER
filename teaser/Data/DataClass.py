@@ -41,7 +41,7 @@ class DataClass(object):
         '''Constructor of DataClass
 
         '''
-        if type_element_file == None:
+        if type_element_file is None:
             self.path_tb = utilis.get_full_path("InputData/TypeBuildingElements.xml")
         else:
             self.path_tb = utilis.get_full_path("InputData/"+str(type_element_file))
