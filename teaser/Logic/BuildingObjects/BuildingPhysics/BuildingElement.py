@@ -384,69 +384,68 @@ class BuildingElement(object):
         the file given in Project.data. Alternatively you can specify a path to
         a file of TypeBuildingElements. If this file does not exist,
         a new file is created.
-        
+
         Parameters
         ----------
-        
+
         path : str
             path where unique file should be stored
         name : strt
             name of of unique file
 
         '''
-        
+
         if self.parent != None:
-            print(self.parent)
-            print("ahlo")
             path = self.parent.parent.parent.data.path_tb
-            xml_parse = self.parent.parent.parent.data.element_bind   
+            xml_parse = self.parent.parent.parent.data.element_bind
         else:
             path = path + "\\" + file_name + ".xml"
             try:
-                xml_file = open(utilis.get_full_path(path),'r', encoding='UTF-8')
+                xml_file = open(utilis.get_full_path(path),
+                                'r',
+                                encoding='UTF-8')
                 xml_parse = tb_bind.CreateFromDocument(xml_file.read())
             except:
                 xml_parse = tb_bind.TypeBuildingElements()
-        
+
         add_to_xml = True
         warning_text = ("Construction Type and building age "
                         "group already exist in this XML, consider revising "
                         "your inputs. The Element is NOT saved into XML")
         if type(self).__name__ == "OuterWall":
-            
+
             for check in xml_parse.OuterWall:
                 if check.building_age_group == self.building_age_group and\
                     check.construction_type == self.construction_type:
                         warnings.warn(warning_text)
                         add_to_xml = False
                         break
-                    
-            if add_to_xml == True:   
-                
+
+            if add_to_xml == True:
+
                 pyxb_wall = tb_bind.OuterWallType()
                 self.set_basic_data_pyxb(pyxb_wall)
                 pyxb_wall.Layers = tb_bind.LayersType()
                 self.set_layer_data_pyxb(pyxb_wall)
-    
+
                 xml_parse.OuterWall.append(pyxb_wall)
-                    
 
         elif type(self).__name__ == 'InnerWall':
-            
+
             for check in xml_parse.InnerWall:
                 if check.building_age_group == self.building_age_group and\
                     check.construction_type == self.construction_type:
                         warnings.warn(warning_text)
                         add_to_xml = False
                         break
-                    
-            if add_to_xml == True: 
+
+            if add_to_xml == True:
 
                 pyxb_wall = tb_bind.InnerWallType()
                 self.set_basic_data_pyxb(pyxb_wall)
                 pyxb_wall.Layers = tb_bind.LayersType()
                 self.set_layer_data_pyxb(pyxb_wall)
-    
+
                 xml_parse.InnerWall.append(pyxb_wall)
 
         elif type(self).__name__ == 'Ceiling':
@@ -457,14 +456,14 @@ class BuildingElement(object):
                         warnings.warn(warning_text)
                         add_to_xml = False
                         break
-                    
-            if add_to_xml == True: 
+
+            if add_to_xml == True:
 
                 pyxb_wall = tb_bind.CeilingType()
                 self.set_basic_data_pyxb(pyxb_wall)
                 pyxb_wall.Layers = tb_bind.LayersType()
                 self.set_layer_data_pyxb(pyxb_wall)
-    
+
                 xml_parse.Ceiling.append(pyxb_wall)
 
         elif type(self).__name__ == 'Floor':
@@ -475,14 +474,14 @@ class BuildingElement(object):
                         warnings.warn(warning_text)
                         add_to_xml = False
                         break
-                    
-            if add_to_xml == True: 
+
+            if add_to_xml == True:
 
                 pyxb_wall = tb_bind.FloorType()
                 self.set_basic_data_pyxb(pyxb_wall)
                 pyxb_wall.Layers = tb_bind.LayersType()
                 self.set_layer_data_pyxb(pyxb_wall)
-    
+
                 xml_parse.Floor.append(pyxb_wall)
 
         elif type(self).__name__ == 'GroundFloor':
@@ -500,7 +499,7 @@ class BuildingElement(object):
                 self.set_basic_data_pyxb(pyxb_wall)
                 pyxb_wall.Layers = tb_bind.LayersType()
                 self.set_layer_data_pyxb(pyxb_wall)
-    
+
                 xml_parse.GroundFloor.append(pyxb_wall)
 
         elif type(self).__name__ == 'Rooftop':
@@ -518,7 +517,7 @@ class BuildingElement(object):
                 self.set_basic_data_pyxb(pyxb_wall)
                 pyxb_wall.Layers = tb_bind.LayersType()
                 self.set_layer_data_pyxb(pyxb_wall)
-    
+
                 xml_parse.Rooftop.append(pyxb_wall)
 
         elif type(self).__name__ == 'Window':
@@ -536,13 +535,13 @@ class BuildingElement(object):
                 self.set_basic_data_pyxb(pyxb_wall)
                 pyxb_wall.Layers = tb_bind.LayersType()
                 self.set_layer_data_pyxb(pyxb_wall)
-    
+
                 xml_parse.Window.append(pyxb_wall)
 
         if add_to_xml == True:
 
             out_file = open(utilis.get_full_path(path),'w', encoding='UTF-8') 
-     
+
             out_file.write(xml_parse.toDOM().toprettyxml())
 
     def set_basic_data_pyxb(self, pyxb_class):
