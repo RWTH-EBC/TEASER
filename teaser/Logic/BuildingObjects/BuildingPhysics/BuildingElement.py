@@ -1,6 +1,10 @@
 # created June 2015
 # by TEASER4 Development Team
 
+"""BuildingElement
+
+This module contains the Base class for all building elements.
+"""
 
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
@@ -416,10 +420,10 @@ class BuildingElement(object):
 
             for check in xml_parse.OuterWall:
                 if check.building_age_group == self.building_age_group and\
-                    check.construction_type == self.construction_type:
-                        warnings.warn(warning_text)
-                        add_to_xml = False
-                        break
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
             if add_to_xml == True:
 
@@ -434,10 +438,10 @@ class BuildingElement(object):
 
             for check in xml_parse.InnerWall:
                 if check.building_age_group == self.building_age_group and\
-                    check.construction_type == self.construction_type:
-                        warnings.warn(warning_text)
-                        add_to_xml = False
-                        break
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
             if add_to_xml == True:
 
@@ -452,10 +456,10 @@ class BuildingElement(object):
 
             for check in xml_parse.Ceiling:
                 if check.building_age_group == self.building_age_group and\
-                    check.construction_type == self.construction_type:
-                        warnings.warn(warning_text)
-                        add_to_xml = False
-                        break
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
             if add_to_xml == True:
 
@@ -470,10 +474,10 @@ class BuildingElement(object):
 
             for check in xml_parse.Floor:
                 if check.building_age_group == self.building_age_group and\
-                    check.construction_type == self.construction_type:
-                        warnings.warn(warning_text)
-                        add_to_xml = False
-                        break
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
             if add_to_xml == True:
 
@@ -488,10 +492,10 @@ class BuildingElement(object):
 
             for check in xml_parse.GroundFloor:
                 if check.building_age_group == self.building_age_group and\
-                    check.construction_type == self.construction_type:
-                        warnings.warn(warning_text)
-                        add_to_xml = False
-                        break
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
             if add_to_xml == True:
 
@@ -506,10 +510,10 @@ class BuildingElement(object):
 
             for check in xml_parse.Rooftop:
                 if check.building_age_group == self.building_age_group and\
-                    check.construction_type == self.construction_type:
-                        warnings.warn(warning_text)
-                        add_to_xml = False
-                        break
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
             if add_to_xml == True:
 
@@ -524,10 +528,10 @@ class BuildingElement(object):
 
             for check in xml_parse.Window:
                 if check.building_age_group == self.building_age_group and\
-                    check.construction_type == self.construction_type:
-                        warnings.warn(warning_text)
-                        add_to_xml = False
-                        break
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
             if add_to_xml == True:
 
@@ -540,7 +544,7 @@ class BuildingElement(object):
 
         if add_to_xml == True:
 
-            out_file = open(utilis.get_full_path(path),'w', encoding='UTF-8') 
+            out_file = open(utilis.get_full_path(path), 'w', encoding='UTF-8')
 
             out_file.write(xml_parse.toDOM().toprettyxml())
 
@@ -690,17 +694,16 @@ class BuildingElement(object):
 
     @layer.setter
     def layer(self, value):
-        
+
         if value == None:
             self._layer = []
         else:
             ass_error_1 = "Value has to be an instance of Layer()"
-    
+
             assert isinstance(value, Layer), ass_error_1
-            
-                
+
             if self._layer is None:
                 self._layer = [value]
-    
+
             else:
                 self._layer.append(value)
