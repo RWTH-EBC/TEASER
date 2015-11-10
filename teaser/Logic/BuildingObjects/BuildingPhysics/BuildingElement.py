@@ -540,7 +540,7 @@ class BuildingElement(object):
 
                 xml_parse.Window.append(pyxb_wall)
 
-        if add_to_xml == True:
+        if add_to_xml is True:
 
             out_file = open(utilis.get_full_path(path))
 
