@@ -5,7 +5,7 @@
 from teaser.Logic.BuildingObjects.UseConditions import UseConditions
 import teaser.Data.SchemaBindings.UseConditions18599Bind as uc_bind
 import teaser.Logic.Utilis as utilis
-
+import warnings
 
 class UseConditions18599(UseConditions):
 
@@ -291,86 +291,120 @@ class UseConditions18599(UseConditions):
                 self.max_ahu = usage.AHU.max_ahu
                 self.with_ahu = usage.AHU.with_ahu
 
-    def save_use_conditions(self):
-        '''Saves typical use conditions
+    def save_use_conditions(self, path=None, file_name=None):
+        '''Use conditions saver.
 
-        Saves use conditions specified in the XML, according to 18599
-
+        Saves use conditions according to their usage type in the the XML file 
+        for use conditions in InputData. If the Project parent is set, it 
+        automatically saves it to the file given in Project.data. Alternatively
+        you can specify a path to a file of UseConditions. If this
+        file does not exist, a new file is created.
+        
+        Parameters
+        ----------
+        
+        path : str
+            path where unique file should be stored
+        name : strt
+            name of of unique file
         '''
+        
+        if self.parent != None:
+            path = self.parent.parent.parent.data.__path_uc
+            xml_parse = self.parent.parent.parent.data.conditions_bind   
+        else:
+            path = path + "\\" + file_name + ".xml"
+            try:
+                xml_file = open(utilis.get_full_path(path),
+                                'r',
+                                encoding='UTF-8')
+                xml_parse = uc_bind.CreateFromDocument(xml_file.read())
+            except:
+                xml_parse = uc_bind.UseConditionsType()
+        
+        add_to_xml = True        
+        
+        for check in xml_parse.UseConditions18599:
+            if check.usage == self.usage:
+                warnings.warn("Usage already exist in this XML, consider "
+                        "revising your inputs. The UseConditions is NOT saved "
+                        "into XML")
+                add_to_xml = False
+                break
+        
+        if add_to_xml == True:
+        
+            usage_pyxb = uc_bind.UseConditions18599Type()
+            usage_pyxb.UsageOperationTime = uc_bind.UsageOperationTimeType()
+            usage_pyxb.Lighting = uc_bind.LightingType()
+            usage_pyxb.RoomClimate = uc_bind.RoomClimateType()
+            usage_pyxb.InternalGains = uc_bind.InternalGainsType()
+            usage_pyxb.AHU = uc_bind.AHUType()
+    
+            usage_pyxb.usage = self.usage
+    
+            usage_pyxb.UsageOperationTime.usage_time =\
+                self.usage_time
+            usage_pyxb.UsageOperationTime.daily_usage_hours = \
+                self.daily_usage_hours
+            usage_pyxb.UsageOperationTime.yearly_usage_days = \
+                self.yearly_usage_days
+            usage_pyxb.UsageOperationTime.yearly_usage_hours_day = \
+                self.yearly_usage_hours_day
+            usage_pyxb.UsageOperationTime.yearly_usage_hours_night = \
+                self.yearly_usage_hours_night
+            usage_pyxb.UsageOperationTime.daily_operation_ahu_cooling = \
+                self.daily_operation_ahu_cooling
+            usage_pyxb.UsageOperationTime.yearly_heating_days = \
+                self.yearly_heating_days
+            usage_pyxb.UsageOperationTime.yearly_ahu_days = \
+                self.yearly_ahu_days
+            usage_pyxb.UsageOperationTime.yearly_cooling_days = \
+                self.yearly_cooling_days
+            usage_pyxb.UsageOperationTime.daily_operation_heating = \
+                self.daily_operation_heating
+    
+            usage_pyxb.Lighting.maintained_illuminace = \
+                self.maintained_illuminace
+            usage_pyxb.Lighting.usage_level_hight = self.usage_level_hight
+            usage_pyxb.Lighting.red_factor_visual = self.red_factor_visual
+            usage_pyxb.Lighting.rel_absence = self.rel_absence
+            usage_pyxb.Lighting.room_index = self.room_index
+            usage_pyxb.Lighting.part_load_factor_lighting = \
+                self.part_load_factor_lighting
+            usage_pyxb.Lighting.ratio_conv_rad_lighting = \
+                self.ratio_conv_rad_lighting
+    
+            usage_pyxb.RoomClimate.set_temp_heat = self.set_temp_heat
+            usage_pyxb.RoomClimate.set_temp_cool = self.set_temp_cool
+            usage_pyxb.RoomClimate.temp_set_back = self.temp_set_back
+            usage_pyxb.RoomClimate.min_temp_heat = self.min_temp_heat
+            usage_pyxb.RoomClimate.max_temp_cool = self.max_temp_cool
+            usage_pyxb.RoomClimate.rel_humidity = self.rel_humidity
+            usage_pyxb.RoomClimate.cooling_time = self.cooling_time
+            usage_pyxb.RoomClimate.heating_time = self.heating_time
+            usage_pyxb.RoomClimate.min_air_exchange = self.min_air_exchange
+            usage_pyxb.RoomClimate.rel_absence_ahu = self.rel_absence_ahu
+            usage_pyxb.RoomClimate.part_load_factor_ahu = \
+                self.part_load_factor_ahu
+    
+            usage_pyxb.InternalGains.persons = self.persons
+            usage_pyxb.InternalGains.profile_persons = self.profile_persons
+            usage_pyxb.InternalGains.machines = self.machines
+            usage_pyxb.InternalGains.profile_machines = self.profile_machines
+            usage_pyxb.InternalGains.lighting_power = self.lighting_power
+    
+            usage_pyxb.AHU.min_ahu = self.min_ahu
+            usage_pyxb.AHU.max_ahu = self.max_ahu
+            usage_pyxb.AHU.with_ahu = self.with_ahu
+            usage_pyxb.typical_length = self.typical_length
+            usage_pyxb.typical_width = self.typical_width
 
-        usage_pyxb = uc_bind.UseConditions18599Type()
-        usage_pyxb.UsageOperationTime = uc_bind.UsageOperationTimeType()
-        usage_pyxb.Lighting = uc_bind.LightingType()
-        usage_pyxb.RoomClimate = uc_bind.RoomClimateType()
-        usage_pyxb.InternalGains = uc_bind.InternalGainsType()
-        usage_pyxb.AHU = uc_bind.AHUType()
-
-        usage_pyxb.usage = self.usage
-
-        usage_pyxb.UsageOperationTime.usage_time =\
-            self.usage_time
-        usage_pyxb.UsageOperationTime.daily_usage_hours = \
-            self.daily_usage_hours
-        usage_pyxb.UsageOperationTime.yearly_usage_days = \
-            self.yearly_usage_days
-        usage_pyxb.UsageOperationTime.yearly_usage_hours_day = \
-            self.yearly_usage_hours_day
-        usage_pyxb.UsageOperationTime.yearly_usage_hours_night = \
-            self.yearly_usage_hours_night
-        usage_pyxb.UsageOperationTime.daily_operation_ahu_cooling = \
-            self.daily_operation_ahu_cooling
-        usage_pyxb.UsageOperationTime.yearly_heating_days = \
-            self.yearly_heating_days
-        usage_pyxb.UsageOperationTime.yearly_ahu_days = \
-            self.yearly_ahu_days
-        usage_pyxb.UsageOperationTime.yearly_cooling_days = \
-            self.yearly_cooling_days
-        usage_pyxb.UsageOperationTime.daily_operation_heating = \
-            self.daily_operation_heating
-
-        usage_pyxb.Lighting.maintained_illuminace = self.maintained_illuminace
-        usage_pyxb.Lighting.usage_level_hight = self.usage_level_hight
-        usage_pyxb.Lighting.red_factor_visual = self.red_factor_visual
-        usage_pyxb.Lighting.rel_absence = self.rel_absence
-        usage_pyxb.Lighting.room_index = self.room_index
-        usage_pyxb.Lighting.part_load_factor_lighting = \
-            self.part_load_factor_lighting
-        usage_pyxb.Lighting.ratio_conv_rad_lighting = \
-            self.ratio_conv_rad_lighting
-
-        usage_pyxb.RoomClimate.set_temp_heat = self.set_temp_heat
-        usage_pyxb.RoomClimate.set_temp_cool = self.set_temp_cool
-        usage_pyxb.RoomClimate.temp_set_back = self.temp_set_back
-        usage_pyxb.RoomClimate.min_temp_heat = self.min_temp_heat
-        usage_pyxb.RoomClimate.max_temp_cool = self.max_temp_cool
-        usage_pyxb.RoomClimate.rel_humidity = self.rel_humidity
-        usage_pyxb.RoomClimate.cooling_time = self.cooling_time
-        usage_pyxb.RoomClimate.heating_time = self.heating_time
-        usage_pyxb.RoomClimate.min_air_exchange = self.min_air_exchange
-        usage_pyxb.RoomClimate.rel_absence_ahu = self.rel_absence_ahu
-        usage_pyxb.RoomClimate.part_load_factor_ahu = self.part_load_factor_ahu
-
-        usage_pyxb.InternalGains.persons = self.persons
-        usage_pyxb.InternalGains.profile_persons = self.profile_persons
-        usage_pyxb.InternalGains.machines = self.machines
-        usage_pyxb.InternalGains.profile_machines = self.profile_machines
-        usage_pyxb.InternalGains.lighting_power = self.lighting_power
-
-        usage_pyxb.AHU.min_ahu = self.min_ahu
-        usage_pyxb.AHU.max_ahu = self.max_ahu
-        usage_pyxb.AHU.with_ahu = self.with_ahu
-        usage_pyxb.typical_length = self.typical_length
-        usage_pyxb.typical_width = self.typical_width
-
-        path = utilis.get_full_path("InputData/UseConditions.xml")
-        xml_file = open(path, 'r')
-
-        xml_parse = uc_bind.CreateFromDocument(xml_file.read())
-        xml_parse.append(usage_pyxb)
-
-        out_file = open(path, 'w')
-
-        out_file.write(xml_parse.toDOM().toprettyxml())
+            xml_parse.append(usage_pyxb)
+            
+            out_file = open(utilis.get_full_path(path),'w', encoding='UTF-8')
+    
+            out_file.write(xml_parse.toDOM().toprettyxml())
 
     @property
     def typical_length(self):
@@ -395,3 +429,26 @@ class UseConditions18599(UseConditions):
             self.parent.typical_width = self._typical_width
 
         self._typical_width = value
+
+
+def save_type_element(self, path=None, file_name=None):
+        '''Typical element saver.
+
+        Saves typical building elements according to their construction
+        year and their construction type in the the XML file for type buidling
+        elements. If the Project parent is set, it automatically saves it to
+        the file given in Project.data. Alternatively you can specify a path to
+        an existing file of TypeBuildingElements. If this file does not exist,
+        a new file is created.
+        
+        Parameters
+        ----------
+        
+        path : str
+            path where unique file should be stored
+        name : strt
+            name of of unique file
+
+        '''
+        
+        

@@ -382,7 +382,7 @@ class BuildingElement(object):
         year and their construction type in the the XML file for type buidling
         elements. If the Project parent is set, it automatically saves it to
         the file given in Project.data. Alternatively you can specify a path to
-        an existing file of TypeBuildingElements. If this file does not exist,
+        a file of TypeBuildingElements. If this file does not exist,
         a new file is created.
         
         Parameters
@@ -407,15 +407,15 @@ class BuildingElement(object):
                 xml_parse = tb_bind.TypeBuildingElements()
         
         add_to_xml = True
-        
+        warning_text = ("Construction Type and building age "
+                        "group already exist in this XML, consider revising "
+                        "your inputs. The Element is NOT saved into XML")
         if type(self).__name__ == "OuterWall":
             
             for check in xml_parse.OuterWall:
                 if check.building_age_group == self.building_age_group and\
                     check.construction_type == self.construction_type:
-                        warnings.warn("Construction Type and building age "
-                        "group already exist in this XML, consider revising "
-                        "your inputs. The Element is NOT saved into XML")
+                        warnings.warn(warning_text)
                         add_to_xml = False
                         break
                     
@@ -434,9 +434,7 @@ class BuildingElement(object):
             for check in xml_parse.InnerWall:
                 if check.building_age_group == self.building_age_group and\
                     check.construction_type == self.construction_type:
-                        warnings.warn("Construction Type and building age "
-                        "group already exist in this XML, consider revising "
-                        "your inputs. The Element is NOT saved into XML")
+                        warnings.warn(warning_text)
                         add_to_xml = False
                         break
                     
@@ -454,9 +452,7 @@ class BuildingElement(object):
             for check in xml_parse.Ceiling:
                 if check.building_age_group == self.building_age_group and\
                     check.construction_type == self.construction_type:
-                        warnings.warn("Construction Type and building age "
-                        "group already exist in this XML, consider revising "
-                        "your inputs. The Element is NOT saved into XML")
+                        warnings.warn(warning_text)
                         add_to_xml = False
                         break
                     
@@ -474,9 +470,7 @@ class BuildingElement(object):
             for check in xml_parse.Floor:
                 if check.building_age_group == self.building_age_group and\
                     check.construction_type == self.construction_type:
-                        warnings.warn("Construction Type and building age "
-                        "group already exist in this XML, consider revising "
-                        "your inputs. The Element is NOT saved into XML")
+                        warnings.warn(warning_text)
                         add_to_xml = False
                         break
                     
@@ -494,9 +488,7 @@ class BuildingElement(object):
             for check in xml_parse.GroundFloor:
                 if check.building_age_group == self.building_age_group and\
                     check.construction_type == self.construction_type:
-                        warnings.warn("Construction Type and building age "
-                        "group already exist in this XML, consider revising "
-                        "your inputs. The Element is NOT saved into XML")
+                        warnings.warn(warning_text)
                         add_to_xml = False
                         break
 
@@ -514,9 +506,7 @@ class BuildingElement(object):
             for check in xml_parse.Rooftop:
                 if check.building_age_group == self.building_age_group and\
                     check.construction_type == self.construction_type:
-                        warnings.warn("Construction Type and building age "
-                        "group already exist in this XML, consider revising "
-                        "your inputs. The Element is NOT saved into XML")
+                        warnings.warn(warning_text)
                         add_to_xml = False
                         break
 
@@ -534,9 +524,7 @@ class BuildingElement(object):
             for check in xml_parse.Window:
                 if check.building_age_group == self.building_age_group and\
                     check.construction_type == self.construction_type:
-                        warnings.warn("Construction Type and building age "
-                        "group already exist in this XML, consider revising "
-                        "your inputs. The Element is NOT saved into XML")
+                        warnings.warn(warning_text)
                         add_to_xml = False
                         break
 
