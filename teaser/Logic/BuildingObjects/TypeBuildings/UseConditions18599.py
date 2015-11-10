@@ -312,15 +312,13 @@ class UseConditions18599(UseConditions):
             name of of unique file
         '''
 
-        if self.parent != None:
+        if self.parent is not None:
             path = self.parent.parent.parent.data.path_uc
             xml_parse = self.parent.parent.parent.data.conditions_bind
         else:
             path = path + "\\" + file_name + ".xml"
             try:
-                xml_file = open(utilis.get_full_path(path),
-                                'r',
-                                encoding='UTF-8')
+                xml_file = open(utilis.get_full_path(path))
                 xml_parse = uc_bind.CreateFromDocument(xml_file.read())
             except:
                 xml_parse = uc_bind.UseConditions()
@@ -335,7 +333,7 @@ class UseConditions18599(UseConditions):
                 add_to_xml = False
                 break
 
-        if add_to_xml == True:
+        if add_to_xml is True:
 
             usage_pyxb = uc_bind.UseConditions18599Type()
             usage_pyxb.UsageOperationTime = uc_bind.UsageOperationTimeType()
@@ -405,7 +403,7 @@ class UseConditions18599(UseConditions):
 
             xml_parse.append(usage_pyxb)
 
-            out_file = open(utilis.get_full_path(path), 'w', encoding='UTF-8')
+            out_file = open(utilis.get_full_path(path))
 
             out_file.write(xml_parse.toDOM().toprettyxml())
 
