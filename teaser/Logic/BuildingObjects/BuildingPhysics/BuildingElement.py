@@ -542,7 +542,7 @@ class BuildingElement(object):
 
         if add_to_xml is True:
 
-            out_file = open(utilis.get_full_path(path))
+            out_file = open(utilis.get_full_path(path),"w")
 
             out_file.write(xml_parse.toDOM().toprettyxml())
 
