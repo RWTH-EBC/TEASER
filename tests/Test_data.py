@@ -905,7 +905,7 @@ class Test_teaser(object):
 
         # test load function
         therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
-        path = "D:\\"
+        path = Utilis.get_default_path()
         therm_zone.outer_walls[0].parent = None
         therm_zone.outer_walls[0].save_type_element(path=path,
                                                     file_name="unitTestTB")
