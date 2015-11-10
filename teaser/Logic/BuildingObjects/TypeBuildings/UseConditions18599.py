@@ -1,6 +1,9 @@
 # created June 2015
 # by TEASER4 Development Team
+"""UseConditions18599
 
+This module is a container for UseConditions following 18599 and SIA
+"""
 
 from teaser.Logic.BuildingObjects.UseConditions import UseConditions
 import teaser.Data.SchemaBindings.UseConditions18599Bind as uc_bind
@@ -224,8 +227,8 @@ class UseConditions18599(UseConditions):
             code list for zone_usage according to 18599
         '''
 
-        ass_error_1 = "you need to specify parents for "
-        "use cond and thermal zone"
+        ass_error_1 = ("you need to specify parents for "
+                       "use cond and thermal zone")
 
         assert self.parent.parent.parent is not None, ass_error_1
 
@@ -294,26 +297,24 @@ class UseConditions18599(UseConditions):
     def save_use_conditions(self, path=None, file_name=None):
         '''Use conditions saver.
 
-        Saves use conditions according to their usage type in the the XML file 
-        for use conditions in InputData. If the Project parent is set, it 
+        Saves use conditions according to their usage type in the the XML file
+        for use conditions in InputData. If the Project parent is set, it
         automatically saves it to the file given in Project.data. Alternatively
         you can specify a path to a file of UseConditions. If this
         file does not exist, a new file is created.
-        
+
         Parameters
         ----------
-        
+
         path : str
             path where unique file should be stored
-        name : strt
+        name : str
             name of of unique file
         '''
-        
+
         if self.parent != None:
-            print(self.parent.parent.parent.data.path_uc)
             path = self.parent.parent.parent.data.path_uc
-            print(path)
-            xml_parse = self.parent.parent.parent.data.conditions_bind   
+            xml_parse = self.parent.parent.parent.data.conditions_bind
         else:
             path = path + "\\" + file_name + ".xml"
             try:
@@ -323,28 +324,28 @@ class UseConditions18599(UseConditions):
                 xml_parse = uc_bind.CreateFromDocument(xml_file.read())
             except:
                 xml_parse = uc_bind.UseConditions()
-        
-        add_to_xml = True        
-        
+
+        add_to_xml = True
+
         for check in xml_parse.UseConditions18599:
             if check.usage == self.usage:
                 warnings.warn("Usage already exist in this XML, consider "
-                        "revising your inputs. The UseConditions is NOT saved "
-                        "into XML")
+                              "revising your inputs. The UseConditions is  "
+                              "NOT saved into XML")
                 add_to_xml = False
                 break
-        
+
         if add_to_xml == True:
-        
+
             usage_pyxb = uc_bind.UseConditions18599Type()
             usage_pyxb.UsageOperationTime = uc_bind.UsageOperationTimeType()
             usage_pyxb.Lighting = uc_bind.LightingType()
             usage_pyxb.RoomClimate = uc_bind.RoomClimateType()
             usage_pyxb.InternalGains = uc_bind.InternalGainsType()
             usage_pyxb.AHU = uc_bind.AHUType()
-    
+
             usage_pyxb.usage = self.usage
-    
+
             usage_pyxb.UsageOperationTime.usage_time =\
                 self.usage_time
             usage_pyxb.UsageOperationTime.daily_usage_hours = \
@@ -365,7 +366,7 @@ class UseConditions18599(UseConditions):
                 self.yearly_cooling_days
             usage_pyxb.UsageOperationTime.daily_operation_heating = \
                 self.daily_operation_heating
-    
+
             usage_pyxb.Lighting.maintained_illuminace = \
                 self.maintained_illuminace
             usage_pyxb.Lighting.usage_level_hight = self.usage_level_hight
@@ -376,7 +377,7 @@ class UseConditions18599(UseConditions):
                 self.part_load_factor_lighting
             usage_pyxb.Lighting.ratio_conv_rad_lighting = \
                 self.ratio_conv_rad_lighting
-    
+
             usage_pyxb.RoomClimate.set_temp_heat = self.set_temp_heat
             usage_pyxb.RoomClimate.set_temp_cool = self.set_temp_cool
             usage_pyxb.RoomClimate.temp_set_back = self.temp_set_back
@@ -389,13 +390,13 @@ class UseConditions18599(UseConditions):
             usage_pyxb.RoomClimate.rel_absence_ahu = self.rel_absence_ahu
             usage_pyxb.RoomClimate.part_load_factor_ahu = \
                 self.part_load_factor_ahu
-    
+
             usage_pyxb.InternalGains.persons = self.persons
             usage_pyxb.InternalGains.profile_persons = self.profile_persons
             usage_pyxb.InternalGains.machines = self.machines
             usage_pyxb.InternalGains.profile_machines = self.profile_machines
             usage_pyxb.InternalGains.lighting_power = self.lighting_power
-    
+
             usage_pyxb.AHU.min_ahu = self.min_ahu
             usage_pyxb.AHU.max_ahu = self.max_ahu
             usage_pyxb.AHU.with_ahu = self.with_ahu
@@ -403,9 +404,9 @@ class UseConditions18599(UseConditions):
             usage_pyxb.typical_width = self.typical_width
 
             xml_parse.append(usage_pyxb)
-            
-            out_file = open(utilis.get_full_path(path),'w', encoding='UTF-8')
-    
+
+            out_file = open(utilis.get_full_path(path), 'w', encoding='UTF-8')
+
             out_file.write(xml_parse.toDOM().toprettyxml())
 
     @property
@@ -431,26 +432,3 @@ class UseConditions18599(UseConditions):
             self.parent.typical_width = self._typical_width
 
         self._typical_width = value
-
-
-def save_type_element(self, path=None, file_name=None):
-        '''Typical element saver.
-
-        Saves typical building elements according to their construction
-        year and their construction type in the the XML file for type buidling
-        elements. If the Project parent is set, it automatically saves it to
-        the file given in Project.data. Alternatively you can specify a path to
-        an existing file of TypeBuildingElements. If this file does not exist,
-        a new file is created.
-        
-        Parameters
-        ----------
-        
-        path : str
-            path where unique file should be stored
-        name : strt
-            name of of unique file
-
-        '''
-        
-        
