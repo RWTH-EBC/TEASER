@@ -396,7 +396,9 @@ class BuildingElement(object):
         '''
         
         if self.parent != None:
-            path = self.parent.parent.parent.data.__path_tb
+            print(self.parent)
+            print("ahlo")
+            path = self.parent.parent.parent.data.path_tb
             xml_parse = self.parent.parent.parent.data.element_bind   
         else:
             path = path + "\\" + file_name + ".xml"

@@ -38,16 +38,16 @@ class DataClass(object):
 
         '''
         if type_element_file==None:
-            __path_tb = utilis.get_full_path("InputData/TypeBuildingElements.xml")
+            self.path_tb = utilis.get_full_path("InputData/TypeBuildingElements.xml")
         else:
-            __path_tb = utilis.get_full_path("InputData/"+str(type_element_file))
+            self.path_tb = utilis.get_full_path("InputData/"+str(type_element_file))
            
 
-        __xml_file_tb = open(__path_tb,'r')
+        __xml_file_tb = open(self.path_tb,'r')
         self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
 
-        __path_uc = utilis.get_full_path("InputData/UseConditions.xml")
-        __xml_file_uc = open(__path_uc,'r')
+        self.path_uc = utilis.get_full_path("InputData/UseConditions.xml")
+        __xml_file_uc = open(self.path_uc,'r')
         self.conditions_bind = uc_bind.CreateFromDocument(__xml_file_uc.read())
 
         __path_mat = utilis.get_full_path("InputData/MaterialTemplates.xml")
