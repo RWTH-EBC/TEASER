@@ -145,7 +145,6 @@ class BuildingElement(object):
             self.r_conduc += (count_layer.thickness /
                               count_layer.material.thermal_conduc)
 
-        import pdb; pdb.set_trace()
         self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
         self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
         self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
