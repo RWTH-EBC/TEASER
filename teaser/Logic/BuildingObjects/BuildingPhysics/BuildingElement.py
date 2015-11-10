@@ -145,6 +145,7 @@ class BuildingElement(object):
             self.r_conduc += (count_layer.thickness /
                               count_layer.material.thermal_conduc)
 
+        import pdb; pdb.set_trace()
         self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
         self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
         self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
@@ -635,8 +636,7 @@ class BuildingElement(object):
             self._inner_convection = value
         if self.inner_convection is not None and\
                 self.inner_radiation is not None and\
-                self.outer_convection is not None and\
-                self.outer_radiation is not None:
+                self.area is not None:
             self.calc_ua_value()
 
 
@@ -650,8 +650,7 @@ class BuildingElement(object):
             self._inner_radiation = value
         if self.inner_convection is not None and\
                 self.inner_radiation is not None and\
-                self.outer_convection is not None and\
-                self.outer_radiation is not None:
+                self.area is not None:
             self.calc_ua_value()
 
     @property
@@ -664,8 +663,7 @@ class BuildingElement(object):
             self._outer_convection = value
         if self.inner_convection is not None and\
                 self.inner_radiation is not None and\
-                self.outer_convection is not None and\
-                self.outer_radiation is not None:
+                self.area is not None:
             self.calc_ua_value()
 
     @property
@@ -678,6 +676,5 @@ class BuildingElement(object):
             self._outer_radiation = value
         if self.inner_convection is not None and\
                 self.inner_radiation is not None and\
-                self.outer_convection is not None and\
-                self.outer_radiation is not None:
+                self.area is not None:
             self.calc_ua_value()
