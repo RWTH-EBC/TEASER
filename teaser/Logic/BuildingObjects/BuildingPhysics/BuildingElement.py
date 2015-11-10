@@ -633,7 +633,12 @@ class BuildingElement(object):
     def inner_convection(self, value):
         if value is not None:
             self._inner_convection = value
-        self.calc_ua_value()
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.outer_convection is not None and\
+                self.outer_radiation is not None:
+            self.calc_ua_value()
+
 
     @property
     def inner_radiation(self):
@@ -643,7 +648,11 @@ class BuildingElement(object):
     def inner_radiation(self, value):
         if value is not None:
             self._inner_radiation = value
-        self.calc_ua_value()
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.outer_convection is not None and\
+                self.outer_radiation is not None:
+            self.calc_ua_value()
 
     @property
     def outer_convection(self):
@@ -653,7 +662,11 @@ class BuildingElement(object):
     def outer_convection(self, value):
         if value is not None:
             self._outer_convection = value
-        self.calc_ua_value()
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.outer_convection is not None and\
+                self.outer_radiation is not None:
+            self.calc_ua_value()
 
     @property
     def outer_radiation(self):
@@ -663,4 +676,8 @@ class BuildingElement(object):
     def outer_radiation(self, value):
         if value is not None:
             self._outer_radiation = value
-        self.calc_ua_value()
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.outer_convection is not None and\
+                self.outer_radiation is not None:
+            self.calc_ua_value()
