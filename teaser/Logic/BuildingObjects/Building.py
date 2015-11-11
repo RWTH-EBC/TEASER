@@ -263,7 +263,7 @@ class Building(object):
         fills self.outer_area with the sum of outer wall area corresponding to
         the orientations of the building
         '''
-
+        self.outer_area = {}
         for zone_count in self.thermal_zones:
             for wall_count in zone_count.outer_walls:
                 self.outer_area[wall_count.orientation] = None
@@ -278,8 +278,9 @@ class Building(object):
         the orientations of the building
 
         '''
+        self.window_area = {}
         for zone_count in self.thermal_zones:
-            for win_count in zone_count.outer_walls:
+            for win_count in zone_count.windows:
                 self.window_area[win_count.orientation] = None
 
         for key in self.window_area:
@@ -388,7 +389,7 @@ class Building(object):
     @window_area.setter
     def window_area(self, value):
         # some improvement needed here
-        self.__window_area = value
+        self._window_area = value
 
     @property
     def year_of_retrofit(self):
