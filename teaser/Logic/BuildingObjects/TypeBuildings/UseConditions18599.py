@@ -402,8 +402,8 @@ class UseConditions18599(UseConditions):
             usage_pyxb.typical_width = self.typical_width
 
             xml_parse.append(usage_pyxb)
-            print(path)
-            out_file = open(utilis.get_full_path(path),'w')
+
+            out_file = open(utilis.get_full_path(path), 'w')
 
             out_file.write(xml_parse.toDOM().toprettyxml())
 
