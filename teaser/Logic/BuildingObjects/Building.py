@@ -174,7 +174,8 @@ class Building(object):
         sum_area = 0.0
         for zone_count in self.thermal_zones:
             for wall_count in zone_count.outer_walls:
-                if wall_count.orientation == orientation:
+                if wall_count.orientation == orientation and\
+                        wall_count.area is not None:
                     sum_area += (wall_count.area)
         return sum_area
 
@@ -200,7 +201,8 @@ class Building(object):
         sum_area = 0.0
         for zone_count in self.thermal_zones:
             for win_count in zone_count.windows:
-                if win_count.orientation == orientation:
+                if win_count.orientation == orientation and\
+                        win_count.area is not None:
                     sum_area += (win_count.area)
         return sum_area
 
