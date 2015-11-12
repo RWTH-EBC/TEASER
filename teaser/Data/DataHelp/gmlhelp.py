@@ -6,10 +6,10 @@ This module contains function to instantiate and set citygml classes and
 attributes
 """
 import pyxb.binding as bd
-import pyxb.bundles.opengis.raw as og
-import pyxb.bundles.opengis.raw.gml as gml
-import pyxb.bundles.opengis.citygml.building as bldg
-import pyxb.bundles.opengis.citygml.energy as energy
+import teaser.Data.SchemaBindings.opengis.raw as og
+import teaser.Data.SchemaBindings.opengis.raw.gml as gml
+import teaser.Data.SchemaBindings.opengis.citygml.raw.building as bldg
+import teaser.Data.SchemaBindings.opengis.citygml.raw.energy as energy
 
 def set_gml_building(teaser_building):
     """Creates an instance of a citygml Building with attributes
