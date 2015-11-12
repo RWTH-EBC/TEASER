@@ -1059,6 +1059,11 @@ class MainUI(QDialog):
                         zone.windows[index].ua_value = \
                             float(self.element_uvalue_textbox.text())
                         break
+                    
+    def switch_type_building(self):
+        cIndex = self.window_construct_building_combo_box.currentIndex()
+        if cIndex == "Office":
+            displayOffice = True
 
     def check_inputs_new_zone(self):
 
@@ -2977,6 +2982,8 @@ class MainUI(QDialog):
             QtCore.QRect(110, 25, 120, 25))
         for type_building in self.guiinfo.type_buildings:
             self.window_construct_building_combo_box.addItem(type_building)
+        self.connect(self.window_construct_building_combo_box, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.switch_type_building)
         self.window_construct_building_name_label = QtGui.QLabel(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_name_label.setGeometry(
