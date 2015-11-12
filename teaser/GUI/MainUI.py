@@ -2004,15 +2004,21 @@ class MainUI(QDialog):
             self.machines_line_edit.text())
         self.current_zone.use_conditions.maintained_illuminace = float(
             self.lighting_line_edit.text())
-        if self.avg_temp_inner_line_edit.text() is not "None":
+        try:
             self.current_zone.t_inside = float(
-                self.avg_temp_inner_line_edit.text())
-        if self.avg_temp_outer_line_edit.text() is not "None":
+                self.mean_temp_inner_line_edit.text())
+        except ValueError:
+            print ("Please insert a value for Mean indoor temperature")
+        try:
             self.current_zone.t_outside = float(
-                self.avg_temp_inner_line_edit.text())
-        if self.airchange_rate_line_edit.text() is not "None":
+                self.mean_temp_inner_line_edit.text())
+        except ValueError:
+            print ("Please insert a value for Mean outdoor temperature")
+        try:
             self.current_zone.infiltration_rate = float(
-                self.avg_temp_inner_line_edit.text())
+                self.infiltration_rate_line_edit.text())
+        except ValueError:
+            print ("Please insert a value for infiltration rate")
 
         for zone in self.current_building.thermal_zones:
             if zone.internal_id == self.current_zone.internal_id:
@@ -2685,25 +2691,26 @@ class MainUI(QDialog):
         self.save_cancel_layout = QtGui.QGridLayout()
         self.zone_usage_times_layout = QtGui.QGridLayout()
         self.zone_usage_layout = QtGui.QGridLayout()
-        self.modelica_info_layout = QtGui.QGridLayout()
+        self.static_heat_layout = QtGui.QGridLayout()
 
         tab_1 = QTabWidget()
         tab_2 = QTabWidget()
         tab_3 = QTabWidget()
         tab_4 = QTabWidget()
 
-        self.zone_values_tab.addTab(tab_1, u"           Elements     ")
-        self.zone_values_tab.addTab(tab_2, u"            Usage       ")
-        self.zone_values_tab.addTab(tab_3, u"         Usage Times    ")
-        self.zone_values_tab.addTab(tab_4, u"        Modelica Info   ")
-        self.zone_values_tab.setStyleSheet("QTabBar::tab { height: 25px; width: 100px; }")
+        self.zone_values_tab.addTab(tab_1, u"     Elements      ")
+        self.zone_values_tab.addTab(tab_2, u"      Usage        ")
+        self.zone_values_tab.addTab(tab_3, u"   Usage Times     ")
+        self.zone_values_tab.addTab(tab_4, u"  Static Heat Load ")
+        self.zone_values_tab.setStyleSheet(
+            "QTabBar::tab { height: 25px; width: 104px; }")
 
         self.groupbox_general_zone_values_layout.setLayout(
             self.general_zone_values_layout)
         tab_1.setLayout(self.element_values_layout)
         tab_2.setLayout(self.zone_usage_times_layout)
         tab_3.setLayout(self.zone_usage_layout)
-        tab_4.setLayout(self.modelica_info_layout)
+        tab_4.setLayout(self.static_heat_layout)
         self.groupbox_save_cancel_buttons.setLayout(self.save_cancel_layout)
 
         self.zone_type_label = QtGui.QLabel("Zone Type")
@@ -2901,23 +2908,23 @@ class MainUI(QDialog):
             self.current_zone.use_conditions.maintained_illuminace))
         self.lighting_label_2 = QtGui.QLabel("W/m^2")
         
-        self.avg_temp_outer_label_1 = QtGui.QLabel("Average outer Temp: ")
-        self.avg_temp_outer_line_edit = QtGui.QLineEdit()
-        self.avg_temp_outer_line_edit.setText(str(
+        self.mean_temp_out_label_1 = QtGui.QLabel("Mean outdoor temp: ")
+        self.mean_temp_outer_line_edit = QtGui.QLineEdit()
+        self.mean_temp_outer_line_edit.setText(str(
             self.current_zone.t_outside))
-        self.avg_temp_outer_label_2 = QtGui.QLabel("C")
+        self.mean_temp_out_label_2 = QtGui.QLabel("C")
         
-        self.avg_temp_inner_label_1 = QtGui.QLabel("Average inner Temp: ")
-        self.avg_temp_inner_line_edit = QtGui.QLineEdit()
-        self.avg_temp_inner_line_edit.setText(str(
+        self.mean_temp_in_label_1 = QtGui.QLabel("Mean indoor temp: ")
+        self.mean_temp_inner_line_edit = QtGui.QLineEdit()
+        self.mean_temp_inner_line_edit.setText(str(
             self.current_zone.t_inside))
-        self.avg_temp_inner_label_2 = QtGui.QLabel("C")
+        self.mean_temp_in_label_2 = QtGui.QLabel("C")
         
-        self.airchange_rate_label_1 = QtGui.QLabel("Infiltration Rate: ")
-        self.airchange_rate_line_edit = QtGui.QLineEdit()
-        self.airchange_rate_line_edit.setText(str(
+        self.infiltration_rate_label_1 = QtGui.QLabel("Infiltration Rate: ")
+        self.infiltration_rate_line_edit = QtGui.QLineEdit()
+        self.infiltration_rate_line_edit.setText(str(
             self.current_zone.infiltration_rate))
-        self.airchange_rate_label_2 = QtGui.QLabel("l/h")
+        self.infiltration_rate_label_2 = QtGui.QLabel("l/h")
 
         self.zone_usage_times_layout.addWidget(
             self.cooling_ahu_start_label, 1, 1)
@@ -2981,18 +2988,18 @@ class MainUI(QDialog):
         self.zone_usage_layout.addWidget(self.lighting_line_edit, 6, 2)
         self.zone_usage_layout.addWidget(self.lighting_label_2, 6, 3)
         
-        self.modelica_info_layout.addWidget(self.avg_temp_outer_label_1, 1, 1)
-        self.modelica_info_layout.addWidget(
-            self.avg_temp_outer_line_edit, 1, 2)
-        self.modelica_info_layout.addWidget(self.avg_temp_outer_label_2, 1, 3)
-        self.modelica_info_layout.addWidget(self.avg_temp_inner_label_1, 2, 1)
-        self.modelica_info_layout.addWidget(
-            self.avg_temp_inner_line_edit, 2, 2)
-        self.modelica_info_layout.addWidget(self.avg_temp_inner_label_2, 2, 3)
-        self.modelica_info_layout.addWidget(self.airchange_rate_label_1, 3, 1)
-        self.modelica_info_layout.addWidget(
-            self.airchange_rate_line_edit, 3, 2)
-        self.modelica_info_layout.addWidget(self.airchange_rate_label_2, 3, 3)
+        self.static_heat_layout.addWidget(self.mean_temp_out_label_1, 1, 1)
+        self.static_heat_layout.addWidget(
+            self.mean_temp_outer_line_edit, 1, 2)
+        self.static_heat_layout.addWidget(self.mean_temp_out_label_2, 1, 3)
+        self.static_heat_layout.addWidget(self.mean_temp_in_label_1, 2, 1)
+        self.static_heat_layout.addWidget(
+            self.mean_temp_inner_line_edit, 2, 2)
+        self.static_heat_layout.addWidget(self.mean_temp_in_label_2, 2, 3)
+        self.static_heat_layout.addWidget(self.infiltration_rate_label_1, 3, 1)
+        self.static_heat_layout.addWidget(
+            self.infiltration_rate_line_edit, 3, 2)
+        self.static_heat_layout.addWidget(self.infiltration_rate_label_2, 3, 3)
 
         self.save_cancel_layout.addWidget(self.zone_element_save_button, 1, 0)
         self.save_cancel_layout.addWidget(
