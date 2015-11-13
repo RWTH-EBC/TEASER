@@ -560,11 +560,11 @@ class Test_teaser(object):
         prj.set_default()
 
     #commented until we find solution for opengis PyXB bindings
-    #def test_save_citygml(self):
-    #    '''test of save_gml'''
-    #    HelpTest.building_test2(prj)
-    #    prj.save_citygml("unitTest")
-    #    prj.set_default()
+    def test_save_citygml(self):
+        '''test of save_gml'''
+        HelpTest.building_test2(prj)
+        prj.save_citygml("unitTest")
+        prj.set_default()
 
     def test_calc_all_buildings(self):
         '''test of calc_all_buildings, no calculation verification'''
@@ -866,7 +866,21 @@ class Test_teaser(object):
         for wall in prj.list_of_buildings[-1].thermal_zones[-1].inner_walls:
             assert round(wall.area, 16) == 0.2439024390243902
 
-    #methods in BuildingElement
+   #methods in UseConditions18599()
+
+    def test_load_use_conditions(self):
+        '''test of load_use_conditions, no parameter checking'''
+        use_cond = prj.list_of_buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.load_use_conditions("Living")
+
+    def test_save_use_conditions(self):
+        '''test of save_use_conditions, no parameter checking'''
+        path = Utilis.get_default_path()
+        use_cond = prj.list_of_buildings[-1].thermal_zones[-1].use_conditions
+        use_cond.parent = None
+        use_cond.save_use_conditions(path=path, file_name="UseCondUT")
+        
+   #methods in BuildingElement
 
     def test_ua_value(self):
         '''test of ua_value'''
@@ -899,6 +913,22 @@ class Test_teaser(object):
         therm_zone.outer_walls[0].load_type_element(1988, "heavy")
         therm_zone.inner_walls[0].load_type_element(1988, "light")
         therm_zone.windows[0].load_type_element(1988, "heavy")
+        
+    def test_save_type_element(self):
+        '''test of load_type_element, no parameter checking'''
+
+        # test load function
+        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        path = Utilis.get_default_path()
+        therm_zone.outer_walls[0].parent = None
+        therm_zone.outer_walls[0].save_type_element(path=path,
+                                                    file_name="unitTestTB")
+        therm_zone.inner_walls[0].parent = None
+        therm_zone.inner_walls[0].save_type_element(path=path,
+                                                    file_name="unitTestTB")
+        therm_zone.windows[0].parent = None
+        therm_zone.windows[0].save_type_element(path=path,
+                                                    file_name="unitTestTB")
 
     #methods in Wall
 
