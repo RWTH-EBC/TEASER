@@ -2040,9 +2040,9 @@ class MainUI(QDialog):
         from the .xml file """
 
         path = QtGui.QFileDialog.getOpenFileName(
-            self, caption='Choose Filepath', directory='', filter=None)
+            self, caption='Choose Filepath', directory='')
         if path:
-            loaded_project = Controller.click_load_button(path)
+            loaded_project = Controller.click_load_button(str(path))
             self.merge_projects(loaded_project)
 
     def merge_projects(self, loaded_project):
