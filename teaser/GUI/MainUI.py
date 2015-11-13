@@ -1575,7 +1575,7 @@ class MainUI(QDialog):
         path = "InputData\\RecordTemplate\\"
         pathTemplate = utilis.get_default_path()
         leng = len(pathTemplate)
-        fullPath = pathTemplate[:leng - 22] + path
+        fullPath = pathTemplate[:leng - 10] + path
         return(str(fullPath))
 
     def display_current_element(self):
@@ -2005,13 +2005,13 @@ class MainUI(QDialog):
         self.current_zone.use_conditions.maintained_illuminace = float(
             self.lighting_line_edit.text())
         try:
-            self.current_zone.t_inside = float(
-                self.mean_temp_inner_line_edit.text())
+            self.current_zone.t_inside = utilis.celsius_to_kelvin(float(
+                self.mean_temp_inner_line_edit.text()))
         except ValueError:
             print ("Please insert a value for Mean indoor temperature")
         try:
-            self.current_zone.t_outside = float(
-                self.mean_temp_inner_line_edit.text())
+            self.current_zone.t_outside = utilis.celsius_to_kelvin(float(
+                self.mean_temp_outer_line_edit.text()))
         except ValueError:
             print ("Please insert a value for Mean outdoor temperature")
         try:
@@ -2837,13 +2837,13 @@ class MainUI(QDialog):
         self.set_temp_heat_line_edit = QtGui.QLineEdit()
         self.set_temp_heat_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_heat))
-        self.set_temp_heat_label_2 = QtGui.QLabel("C")
+        self.set_temp_heat_label_2 = QtGui.QLabel("\u00B0C")
 
         self.set_temp_cool_label_1 = QtGui.QLabel("Set Temp Cooling: ")
         self.set_temp_cool_line_edit = QtGui.QLineEdit()
         self.set_temp_cool_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_cool))
-        self.set_temp_cool_label_2 = QtGui.QLabel("C")
+        self.set_temp_cool_label_2 = QtGui.QLabel("\u00B0C")
 
         self.temp_set_back_label_1 = QtGui.QLabel("Temp Setback: ")
         self.temp_set_back_line_edit = QtGui.QLineEdit()
@@ -2910,21 +2910,21 @@ class MainUI(QDialog):
         
         self.mean_temp_out_label_1 = QtGui.QLabel("Mean outdoor temp: ")
         self.mean_temp_outer_line_edit = QtGui.QLineEdit()
-        self.mean_temp_outer_line_edit.setText(str(
-            self.current_zone.t_outside))
-        self.mean_temp_out_label_2 = QtGui.QLabel("C")
+        self.mean_temp_outer_line_edit.setText(str(utilis.kelvin_to_celsius(
+            self.current_zone.t_outside)))
+        self.mean_temp_out_label_2 = QtGui.QLabel("\u00B0C")
         
         self.mean_temp_in_label_1 = QtGui.QLabel("Mean indoor temp: ")
         self.mean_temp_inner_line_edit = QtGui.QLineEdit()
-        self.mean_temp_inner_line_edit.setText(str(
-            self.current_zone.t_inside))
-        self.mean_temp_in_label_2 = QtGui.QLabel("C")
+        self.mean_temp_inner_line_edit.setText(str(utilis.kelvin_to_celsius(
+            self.current_zone.t_inside)))
+        self.mean_temp_in_label_2 = QtGui.QLabel("\u00B0C")
         
         self.infiltration_rate_label_1 = QtGui.QLabel("Infiltration Rate: ")
         self.infiltration_rate_line_edit = QtGui.QLineEdit()
         self.infiltration_rate_line_edit.setText(str(
             self.current_zone.infiltration_rate))
-        self.infiltration_rate_label_2 = QtGui.QLabel("l/h")
+        self.infiltration_rate_label_2 = QtGui.QLabel("1/h")
 
         self.zone_usage_times_layout.addWidget(
             self.cooling_ahu_start_label, 1, 1)

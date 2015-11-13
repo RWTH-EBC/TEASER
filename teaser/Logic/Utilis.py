@@ -7,6 +7,19 @@ classes
 
 import os
 
+def kelvin_to_celsius(value):
+    try:
+        f_value = float(value)
+    except TypeError:
+        f_value = 273.15
+    return f_value-273.15
+    
+def celsius_to_kelvin(value):
+    try:
+        f_value = float(value)
+    except TypeError:
+        f_value = 0
+    return f_value+273.15
 
 def create_path(path):
     '''Create a folder.
