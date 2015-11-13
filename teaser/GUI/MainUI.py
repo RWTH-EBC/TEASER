@@ -1550,7 +1550,7 @@ class MainUI(QDialog):
                     
     def click_save_current_project(self):
         path = QtGui.QFileDialog.getSaveFileName(
-            caption='Choose Filepath', directory=utilis.get_default_path()+"\\"+self.project.name)
+            caption='Choose Filepath', directory=utilis.get_default_path()+"\\"+self.project.name+".teaserXML")
         last_name = path.split('\\')
         length = len(last_name)
         self.project.name = last_name[length-1]

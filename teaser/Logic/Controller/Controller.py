@@ -156,7 +156,7 @@ class Controller():
     @classmethod
     def click_save_button(self, project, path):
         teaser_xml.save_teaser_xml(path, project)
-        print("Saved under: "+path+".teaserXML")
+        print("Saved under: "+path)
 
     @classmethod
     def click_load_button(self, path):
