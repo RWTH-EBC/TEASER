@@ -2909,13 +2909,13 @@ class MainUI(QDialog):
             self.current_zone.use_conditions.maintained_illuminace))
         self.lighting_label_2 = QtGui.QLabel("W/m^2")
         
-        self.mean_temp_out_label_1 = QtGui.QLabel("Mean outdoor temp: ")
+        self.mean_temp_out_label_1 = QtGui.QLabel("Mean Outdoor Temp: ")
         self.mean_temp_outer_line_edit = QtGui.QLineEdit()
         self.mean_temp_outer_line_edit.setText(str(utilis.kelvin_to_celsius(
             self.current_zone.t_outside)))
         self.mean_temp_out_label_2 = QtGui.QLabel("\u00B0C")
         
-        self.mean_temp_in_label_1 = QtGui.QLabel("Mean indoor temp: ")
+        self.mean_temp_in_label_1 = QtGui.QLabel("Mean Indoor Temp: ")
         self.mean_temp_inner_line_edit = QtGui.QLineEdit()
         self.mean_temp_inner_line_edit.setText(str(utilis.kelvin_to_celsius(
             self.current_zone.t_inside)))
