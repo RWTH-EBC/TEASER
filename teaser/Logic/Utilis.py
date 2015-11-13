@@ -43,7 +43,7 @@ def get_default_path():
     '''
 
     directory = os.path.dirname(__file__)
-    src = "\\src"
+    src = "\\teaser"
     last_index = directory.rfind(src)
     default_path = directory[:last_index] + "\\teaser\\OutputData"
 
