@@ -2692,6 +2692,7 @@ class MainUI(QDialog):
         self.zone_usage_times_layout = QtGui.QGridLayout()
         self.zone_usage_layout = QtGui.QGridLayout()
         self.static_heat_layout = QtGui.QGridLayout()
+        self.static_heat_layout.setHorizontalSpacing(10)
 
         tab_1 = QTabWidget()
         tab_2 = QTabWidget()
@@ -2925,6 +2926,8 @@ class MainUI(QDialog):
         self.infiltration_rate_line_edit.setText(str(
             self.current_zone.infiltration_rate))
         self.infiltration_rate_label_2 = QtGui.QLabel("1/h")
+        
+        self.space_label = QtGui.QLabel()
 
         self.zone_usage_times_layout.addWidget(
             self.cooling_ahu_start_label, 1, 1)
@@ -3000,6 +3003,7 @@ class MainUI(QDialog):
         self.static_heat_layout.addWidget(
             self.infiltration_rate_line_edit, 3, 2)
         self.static_heat_layout.addWidget(self.infiltration_rate_label_2, 3, 3)
+        self.static_heat_layout.addWidget(self.space_label, 4, 0, 9, 3)
 
         self.save_cancel_layout.addWidget(self.zone_element_save_button, 1, 0)
         self.save_cancel_layout.addWidget(
