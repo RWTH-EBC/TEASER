@@ -53,6 +53,7 @@ class MainUI(QDialog):
         self.current_element = 0
         self.current_layer = 0
         self.current_transformation = "standard"
+        self.current_type_building = "Office"
         self.is_switchable = False
         self.type_building_ind_att = dict(layout_area=0.0,
                                           layout_window_area=0.0,
@@ -1062,8 +1063,11 @@ class MainUI(QDialog):
                     
     def switch_type_building(self):
         cIndex = self.window_construct_building_combo_box.currentIndex()
-        if cIndex == "Office":
-            displayOffice = True
+        self.current_type_building = str(cIndex)
+        if self.current_type_building == "Residential":
+            self.group_box_office_architecture.setVisible(False)
+            self.group_box_office_layout.setVisible(False)
+            self.group_box_office_window_area.setVisible(False)
 
     def check_inputs_new_zone(self):
 
