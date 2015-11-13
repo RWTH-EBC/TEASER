@@ -3,9 +3,12 @@
 
 """This module includes the Project class, which serves as base class and API
 """
-
+import warnings
 import teaser.Data.TeaserXML as txml
-import teaser.Data.CityGML as citygml
+try:
+    import teaser.Data.CityGML as citygml
+except:
+    warnings.warn("No CityGML module found, no CityGML import/export")    
 import teaser.Data.DataHelp.OldTeaser as old_teaser
 from teaser.Data.DataClass import DataClass
 from mako.template import Template
