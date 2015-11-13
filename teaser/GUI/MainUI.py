@@ -2927,7 +2927,7 @@ class MainUI(QDialog):
             self.current_zone.infiltration_rate))
         self.infiltration_rate_label_2 = QtGui.QLabel("1/h")
         
-        self.space_label = QtGui.QLabel()
+        self.space_label = QtGui.QLabel() # Cheat to group the other controls on top
 
         self.zone_usage_times_layout.addWidget(
             self.cooling_ahu_start_label, 1, 1)
