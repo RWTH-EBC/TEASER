@@ -180,6 +180,6 @@ class Controller():
         i = 0
 
     @classmethod
-    def click_export_button(self, model_type, path):
+    def click_export_button(self, model_type, path, buildingID=None):
         loaded_prj = Project()
-        loaded_prj.export_record(model_type, path)
+        loaded_prj.export_record(model_type, path, buildingID)
