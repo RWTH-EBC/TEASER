@@ -16,6 +16,7 @@ from teaser.GUI.GUIHelperClasses.ListViewZonesFiller import ListViewZonesFiller
 from teaser.GUI.GUIHelperClasses.GUIInfo import GUIInfo
 import sys
 import os
+from numpy.distutils.pathccompiler import PathScaleCCompiler
 
 
 try:
@@ -890,6 +891,16 @@ class MainUI(QDialog):
         self.open_export_label = QtGui.QLabel(self.ribbon_group_box)
         self.open_export_label.setGeometry(QtCore.QRect(685, 80, 70, 25))
         self.open_export_label.setText("Open Ex-\n port Tab")
+        self.save_project_button = PictureButton(QtGui.QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Keyschedule_rc4.png")),
+            self.ribbon_widget)
+        self.save_project_button.setGeometry(QtCore.QRect(765, 5, 70, 70))
+        self.save_project_button.clicked.connect(
+            self.click_save_current_project)
+        self.save_project_button.setToolTip("Saves the current project.")
+        self.save_project_label = QtGui.QLabel(self.ribbon_group_box)
+        self.save_project_label.setGeometry(QtCore.QRect(765, 80, 70, 25))
+        self.save_project_label.setText("Save Pro-\n ject Tab")
 
         self.side_animation = QtCore.QPropertyAnimation(
             self.side_bar_widget, "geometry")
@@ -1536,6 +1547,20 @@ class MainUI(QDialog):
                         str(self.current_building.
                             get_window_area(orientation)))
                     self.outer_elements_model.appendRow(item2)
+                    
+    def click_save_current_project(self):
+        path = QtGui.QFileDialog.getSaveFileName(
+            caption='Choose Filepath',
+            directory=utilis.get_default_path()+"\\"+self.project.name,
+            filter="Teaser File (*.teaserXML);; GML (*.gml)")
+        last_name = path.split('/')
+        length = len(last_name)
+        last_part = last_name[length-1]
+        if last_part.endswith("teaserXML"):
+            self.project.name = last_part[:-10]
+        elif last_part.endswith("gml"):
+            self.project.name = last_part[:-4]
+        Controller.click_save_button(self.project, path)
 
     def click_export_button(self):
         # path in GUI, which is need for the output
