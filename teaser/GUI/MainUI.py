@@ -182,6 +182,8 @@ class MainUI(QDialog):
             _fromUtf8("envelopes_list_view"))
         self.envelopes_list_view.setModel(self.outer_elements_model)
         self.envelopes_list_view.setItemDelegate(self.lVZF)
+        # self.envelopes_list_view.doubleClicked.connect(
+        #     self.show_element_build_ui2)
         self.envelopes_list_view.doubleClicked.connect(
              self.change_envelopes_values_ui)
         self.envelopes_list_view.setEditTriggers(
@@ -1509,7 +1511,7 @@ class MainUI(QDialog):
                     self.side_bar_buildings_combo_box.setCurrentIndex(
                         self.side_bar_buildings_combo_box.findData(
                             str(self.current_building.internal_id)))
-                elif (self.side_bar_buildings_combo_box.currentText != 
+                elif (self.side_bar_buildings_combo_box.currentText !=
                       self.side_bar_id_line_edit.text):
                     self.side_bar_buildings_combo_box.setItemText(
                         self.side_bar_buildings_combo_box.currentIndex(),
@@ -1525,9 +1527,9 @@ class MainUI(QDialog):
                 list_of_buildings[self.project.list_of_buildings.
                                   index(self.current_building)].thermal_zones:
                 item = TrackableItem(
-                    "Name:\t".expandtabs(8) + str(zone.name) + 
-                    "\n" + "Type:\t".expandtabs(11) + 
-                    str(type(zone).__name__) + "\n Area:\t".expandtabs(11) + 
+                    "Name:\t".expandtabs(8) + str(zone.name) +
+                    "\n" + "Type:\t".expandtabs(11) +
+                    str(type(zone).__name__) + "\n Area:\t".expandtabs(11) +
                     str(zone.area), zone.internal_id)
                 item.setAccessibleText(str(zone.internal_id))
                 self.zone_model.appendRow(item)
@@ -1535,21 +1537,22 @@ class MainUI(QDialog):
             for orientation in self.guiinfo.orientations_numbers.keys():
                 if self.current_building.get_outer_wall_area(orientation) != 0:
                     item1 = QStandardItem(
-                        "Outer Wall Orientation: " + 
-                        str(self.guiinfo.orientations_numbers[orientation]) + 
-                        "\t".expandtabs(12) + "\n" + " Area: " + 
+                        "Outer Wall Orientation: " +
+                        str(self.guiinfo.orientations_numbers[orientation]) +
+                        "\t".expandtabs(12) + "\n" + " Area: " +
                         str(self.current_building.
                             get_outer_wall_area(orientation)))
                     self.outer_elements_model.appendRow(item1)
+
                 if self.current_building.get_window_area(orientation) != 0:
                     item2 = QStandardItem(
-                        "Window Orientation: " + 
-                        str(self.guiinfo.orientations_numbers[orientation]) + 
-                        "\t".expandtabs(16) + "\n" + " Area: " + 
+                        "Window Orientation: " +
+                        str(self.guiinfo.orientations_numbers[orientation]) +
+                        "\t".expandtabs(16) + "\n" + " Area: " +
                         str(self.current_building.
                             get_window_area(orientation)))
                     self.outer_elements_model.appendRow(item2)
-                    
+
     def click_save_current_project(self):
         path = QtGui.QFileDialog.getSaveFileName(
             caption='Choose Filepath',
@@ -2935,25 +2938,25 @@ class MainUI(QDialog):
         self.lighting_line_edit.setText(str(
             self.current_zone.use_conditions.maintained_illuminace))
         self.lighting_label_2 = QtGui.QLabel("W/m^2")
-        
+
         self.mean_temp_out_label_1 = QtGui.QLabel("Mean Outdoor Temp: ")
         self.mean_temp_outer_line_edit = QtGui.QLineEdit()
         self.mean_temp_outer_line_edit.setText(str(utilis.kelvin_to_celsius(
             self.current_zone.t_outside)))
         self.mean_temp_out_label_2 = QtGui.QLabel("\u00B0C")
-        
+
         self.mean_temp_in_label_1 = QtGui.QLabel("Mean Indoor Temp: ")
         self.mean_temp_inner_line_edit = QtGui.QLineEdit()
         self.mean_temp_inner_line_edit.setText(str(utilis.kelvin_to_celsius(
             self.current_zone.t_inside)))
         self.mean_temp_in_label_2 = QtGui.QLabel("\u00B0C")
-        
+
         self.infiltration_rate_label_1 = QtGui.QLabel("Infiltration Rate: ")
         self.infiltration_rate_line_edit = QtGui.QLineEdit()
         self.infiltration_rate_line_edit.setText(str(
             self.current_zone.infiltration_rate))
         self.infiltration_rate_label_2 = QtGui.QLabel("1/h")
-        
+
         self.space_label = QtGui.QLabel() # Cheat to group the other controls on top
 
         self.zone_usage_times_layout.addWidget(
@@ -3017,7 +3020,7 @@ class MainUI(QDialog):
         self.zone_usage_layout.addWidget(self.lighting_label_1, 6, 1)
         self.zone_usage_layout.addWidget(self.lighting_line_edit, 6, 2)
         self.zone_usage_layout.addWidget(self.lighting_label_2, 6, 3)
-        
+
         self.static_heat_layout.addWidget(self.mean_temp_out_label_1, 1, 1)
         self.static_heat_layout.addWidget(
             self.mean_temp_outer_line_edit, 1, 2)
@@ -3081,8 +3084,21 @@ class MainUI(QDialog):
         self.envelope_name_textbox = QtGui.QLineEdit()
         self.envelope_name_textbox.setObjectName(_fromUtf8(
                                                 u"EnvelopeNameTextBox"))
-        # self.envelope_name_textbox.setText(str(self.current_element.area))
-        self.envelope_name_textbox.setText(str("Envelope-name"))
+
+        Current_item = self.outer_elements_model.itemFromIndex(item)
+        stringCurrentItem = Current_item.text()
+        if stringCurrentItem.startswith("Outer Wall"):
+            self.envelope_name_textbox.setText(str("Outer Wall"))
+            stringList12 = stringCurrentItem.split()
+            stringList = stringCurrentItem.split("Area: ")
+            self.envelope_name_textbox.setText(str(stringList12[5]))
+            self.envelope_orientation_groupbox.setCurrentIndex(self.envelope_orientation_groupbox.findText(
+                str(stringList12[3])))
+
+        elif stringCurrentItem.startswith("Window"):
+            self.envelope_name_textbox.setText(str("Window"))
+            stringList = stringCurrentItem.split("Area: ")
+            self.envelope_name_textbox.setText(str(stringList[1]))
 
         self.general_envelope_values_layout.addWidget(
                                     self.envelope_type_label, 1, 0)
@@ -3100,6 +3116,42 @@ class MainUI(QDialog):
         self.general_envelope_values_groupbox.setMaximumHeight(120)
         self.general_envelope_values_groupbox.setMinimumHeight(120)
 
+        self.envelope_element_list_view = QtGui.QListView()
+        self.envelope_element_list_view.setObjectName(
+            _fromUtf8("envelope_element_list_view"))
+        self.envelope_element_list_view.setModel(self.outer_elements_model)
+        self.envelope_element_list_view.setItemDelegate(self.lVZF)
+
+        """
+        current_item = self.outer_elements_model.itemFromIndex(item)
+        if "Outer Wall" in current_item.text():
+            for element in self.current_zone.outer_walls:
+                if element.internal_id == current_item.internal_id:
+                    self.current_element = element
+        if "Window" in current_item.text():
+            for element in self.current_zone.windows:
+                if element.internal_id == current_item.internal_id:
+                    self.current_element = element
+
+        self.element_orientation_label = QtGui.QLabel("Orientation")
+        self.element_orientation_combobox = QtGui.QComboBox()
+        self.element_orientation_combobox.setObjectName(
+            _fromUtf8("ElementOrientationComboBox"))
+        for orientation in self.guiinfo.orientations:
+            self.element_orientation_combobox.addItem(
+                orientation, userData=None)
+        self.element_orientation_combobox.setCurrentIndex(
+            self.element_orientation_combobox.findText(
+                str(self.current_element.orientation)))
+
+        self.element_area_label = QtGui.QLabel("Area")
+        self.element_area_textbox = QtGui.QLineEdit()
+        self.element_area_textbox.setObjectName(
+            _fromUtf8("ElementAreaTextBox"))
+        self.element_area_textbox.setText(str(round(
+            self.current_element.area, 2)))
+        """
+        
         self.envelopes_value_window_layout.addWidget(
                                 self.general_envelope_values_groupbox, 0, 0)
         self.envelopes_value_window.setWindowModality(Qt.ApplicationModal)
@@ -3971,7 +4023,7 @@ class MainUI(QDialog):
             self.element_save_cancel_layoutGroupBox)
         self.element_build_ui.setWindowModality(Qt.ApplicationModal)
         self.element_build_ui.show()
-        
+
     def show_export_window(self):
         self.export_window_ui = QtGui.QWizardPage()
         self.export_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -3980,7 +4032,7 @@ class MainUI(QDialog):
         self.export_window_ui.setFixedHeight(180)
         self.export_window_ui_layout = QtGui.QGridLayout()
         self.export_window_ui.setLayout(self.export_window_ui_layout)
-        
+
         self.export_groupbox = QtGui.QGroupBox("Export")
         self.export_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 160))
         self.export_groupbox.setMinimumSize(QtCore.QSize(360, 160))
@@ -4018,7 +4070,7 @@ class MainUI(QDialog):
         #    self.clickBrowseButton)
         for template_name in os.listdir(self.create_path_to_template_folder()):
             self.export_create_template_combobox.addItem(template_name)
-        
+
         self.export_window_ui_layout.addWidget(
             self.export_groupbox, 1, 1)
         self.export_window_ui.setWindowModality(Qt.ApplicationModal)
@@ -4032,7 +4084,7 @@ class MainUI(QDialog):
         self.simulation_window_ui.setFixedHeight(280)
         self.simulation_window_ui_layout = QtGui.QGridLayout()
         self.simulation_window_ui.setLayout(self.simulation_window_ui_layout)
-        
+
         self.project_name_groupbox = QtGui.QGroupBox("Project")
         self.project_name_groupbox.setGeometry(QtCore.QRect(10, 10, 315, 40))
         self.project_name_groupbox.setMinimumSize(QtCore.QSize(315, 40))
@@ -4043,7 +4095,7 @@ class MainUI(QDialog):
         self.project_name_lineedit = QtGui.QLineEdit(self.project_name_groupbox)
         self.project_name_lineedit.setGeometry(QtCore.QRect(100, 10, 180, 25))
         self.project_name_lineedit.setText(str(self.project.name))
-        
+
         self.simulation_groupbox = QtGui.QGroupBox("Simulation")
         self.simulation_groupbox.setGeometry(QtCore.QRect(380, 85, 315, 160))
         self.simulation_groupbox.setMinimumSize(QtCore.QSize(315, 160))
@@ -4101,7 +4153,7 @@ class MainUI(QDialog):
             self.project.modelica_info.equidistant_output)
         self.simulation_equidistant_output_checkbox.setText(
             "Equidistant Output")
-        
+
         self.simulation_save_cancel_groupbox = QtGui.QGroupBox()
         self.simulation_save_cancel_groupbox.setGeometry(
             QtCore.QRect(10, 530, 315, 35))
@@ -4134,7 +4186,6 @@ class MainUI(QDialog):
             self.simulation_save_cancel_groupbox, 3, 1)
         self.simulation_window_ui.setWindowModality(Qt.ApplicationModal)
         self.simulation_window_ui.show()
-
 
 class EmittingStream(QtCore.QObject):
 
