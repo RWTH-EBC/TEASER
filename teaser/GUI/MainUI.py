@@ -1550,10 +1550,16 @@ class MainUI(QDialog):
                     
     def click_save_current_project(self):
         path = QtGui.QFileDialog.getSaveFileName(
-            caption='Choose Filepath', directory=utilis.get_default_path()+"\\"+self.project.name+".teaserXML")
-        last_name = path.split('\\')
+            caption='Choose Filepath',
+            directory=utilis.get_default_path()+"\\"+self.project.name,
+            filter="Teaser File (*.teaserXML);; GML (*.gml)")
+        last_name = path.split('/')
         length = len(last_name)
-        self.project.name = last_name[length-1]
+        last_part = last_name[length-1]
+        if last_part.endswith("teaserXML"):
+            self.project.name = last_part[:-10]
+        elif last_part.endswith("gml"):
+            self.project.name = last_part[:-4]
         Controller.click_save_button(self.project, path)
 
     def click_export_button(self):
