@@ -140,19 +140,25 @@ class UseConditions18599(UseConditions):
         number of persons - Personen
 
     profile_persons : [float]
-        timeline of internal gains from 0 - 100 - Nutzungsprofil Personen
+        timeline of internal gains (persons) from 0 - 100 - Nutzungsprofil 
+        Personen
 
     machines: float
         number of Machines  - Arbeitshilfen
 
     profile_machines : [float]
-      timeline of internal gains from 0 - 100  -  Nutzungsprofil Geraete
+      timeline of internal gains (machines) from 0 - 100  -  Nutzungsprofil 
+      Geraete
 
     lighting_power : float
         spec. elektr. Power for lighting - spez. Elektr.
         Leistung-Raumbeleuchtung
+        
+    profile_lighting : [float]
+      timeline of internal gains (lighting) from 0 - 100  -  Nutzungsprofil 
+      Licht
 
-    MISC
+    MISC/AHU
 
     min_ahu: float
         min ahu  - minAHU
@@ -162,6 +168,16 @@ class UseConditions18599(UseConditions):
 
     with_ahu : boolean
         with ahu - withAHU
+        
+    profile_relative_humidity : [float]
+        timeline of relative humidity requirements for AHU simulation
+        
+    profile_status_AHU : [Boolean]
+        timeline of status of the AHU simulation (on/off)
+        
+    profile_temeprature_AHU : [float]
+        timeline of temperatures requirements for AHU simulation
+        
     '''
 
     def __init__(self, parent=None):
@@ -211,10 +227,14 @@ class UseConditions18599(UseConditions):
         self.machines = 0.0
         self.profile_machines = []
         self.lighting_power = 0.0
+        self.profile_lighting = []
 
         self.min_ahu = 0.0
         self.max_ahu = 0.5
         self.with_ahu = False
+        self.profile_relative_humidity = []
+        self.profile_status_AHU = []
+        self.profile_temeprature_AHU = []
 
     def load_use_conditions(self, zone_usage):
         '''load typical use conditions
