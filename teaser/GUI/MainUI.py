@@ -182,6 +182,8 @@ class MainUI(QDialog):
             _fromUtf8("envelopes_list_view"))
         self.envelopes_list_view.setModel(self.outer_elements_model)
         self.envelopes_list_view.setItemDelegate(self.lVZF)
+        self.envelopes_list_view.doubleClicked.connect(
+             self.change_envelopes_values_ui)
         self.envelopes_list_view.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
 
@@ -3043,6 +3045,65 @@ class MainUI(QDialog):
             self.groupbox_save_cancel_buttons, 8, 0, 1, 0)
         self.zone_value_window.setWindowModality(Qt.ApplicationModal)
         self.zone_value_window.show()
+
+    def change_envelopes_values_ui(self, item):
+        self.envelopes_value_window = QtGui.QWizardPage()
+        self.envelopes_value_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.envelopes_value_window.setWindowTitle("Envelopes Details")
+        self.envelopes_value_window.setFixedWidth(300)
+        self.envelopes_value_window.setFixedHeight(200)
+        self.envelopes_value_window_layout = QtGui.QGridLayout()
+        self.envelopes_value_window.setLayout(
+                                    self.envelopes_value_window_layout)
+
+        self.general_envelope_values_groupbox = QtGui.QGroupBox(
+                                                 u"General Envelope Values")
+        self.general_envelope_values_groupbox.setGeometry(
+                                              QtCore.QRect(0, 0, 280, 120))
+        self.general_envelope_values_layout = QtGui.QGridLayout()
+        self.general_envelope_values_groupbox.setLayout(
+                                      self.general_envelope_values_layout)
+
+        self.envelope_type_label = QtGui.QLabel("Envelope Type")
+        self.envelope_type_groupbox = QtGui.QComboBox()
+        self.envelope_type_groupbox.setObjectName(_fromUtf8("Envelope"
+                                                            "TypeGroupBox"))
+
+        self.envelope_orientation_label = QtGui.QLabel("Orientation")
+        self.envelope_orientation_groupbox = QtGui.QComboBox()
+        self.envelope_orientation_groupbox.setObjectName(_fromUtf8(
+                                            "EnvelopeOrientationGroupBox"))
+        for orientation in self.guiinfo.orientations:
+            self.envelope_orientation_groupbox.addItem(
+                                                orientation, userData=None)
+
+        self.envelope_name_label = QtGui.QLabel("Name")
+        self.envelope_name_textbox = QtGui.QLineEdit()
+        self.envelope_name_textbox.setObjectName(_fromUtf8(
+                                                u"EnvelopeNameTextBox"))
+        # self.envelope_name_textbox.setText(str(self.current_element.area))
+        self.envelope_name_textbox.setText(str("Envelope-name"))
+
+        self.general_envelope_values_layout.addWidget(
+                                    self.envelope_type_label, 1, 0)
+        self.general_envelope_values_layout.addWidget(
+                                    self.envelope_type_groupbox, 1, 1)
+        self.general_envelope_values_layout.addWidget(
+                                    self.envelope_orientation_label, 2, 0)
+        self.general_envelope_values_layout.addWidget(
+                                    self.envelope_orientation_groupbox, 2, 1)
+        self.general_envelope_values_layout.addWidget(
+                                    self.envelope_name_label, 3, 0)
+        self.general_envelope_values_layout.addWidget(
+                                    self.envelope_name_textbox, 3, 1)
+
+        self.general_envelope_values_groupbox.setMaximumHeight(120)
+        self.general_envelope_values_groupbox.setMinimumHeight(120)
+
+        self.envelopes_value_window_layout.addWidget(
+                                self.general_envelope_values_groupbox, 0, 0)
+        self.envelopes_value_window.setWindowModality(Qt.ApplicationModal)
+        self.envelopes_value_window.show()
 
     def generate_type_building_ui(self, building_type):
 
