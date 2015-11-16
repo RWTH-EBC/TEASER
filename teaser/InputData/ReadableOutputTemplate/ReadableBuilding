@@ -25,12 +25,12 @@ number of thermal zones = ${get_number_of_zones(bldg.thermal_zones)} -
     number of people with machines = ${zone.use_conditions.machines} -  (NrPeopleMachines)
     heating power of lighting = ${zone.use_conditions.lighting_power} W (LightingPower)
     Ratio of convective heat from overall heat output = 0.5 (RatioConvectiveHeatLighting)
-    upper limit of heater = ${round_2(zone.heating_load)} W (h_heater)
+    upper limit of heater = ${zone.heating_load} W (h_heater)
     minimum specific air flow supplied by the AHU = ${zone.use_conditions.min_ahu} m^3/(h m^2) (minAHU)
     maximum specific air flow supplied by the AHU = ${zone.use_conditions.max_ahu} m^3/(h m^2) (maxAHU)
     AHU functionality = ${on_off_checker(zone.use_conditions.with_ahu)} - (withAHU)
     lower limit of cooler = 0 W (l_cool)
-    total energy transmittance = ${round_2(zone.weighted_g_value)} - (g)
+    total energy transmittance = ${zone.weighted_g_value} - (g)
 
   * Windows *
 
@@ -40,32 +40,32 @@ number of thermal zones = ${get_number_of_zones(bldg.thermal_zones)} -
     weigthfactors for the windows = ${weightfactors_to_string(zone.weightfactor_win)} - (weightfactorswindow)
     coefficient of absorption of the window = 0.03 - (awin)
     %if prj.calculation_method == "ebc":
-    resistor window = ${round_2(zone.r1_win)} K/W (RWin)
+    resistor window = ${zone.r1_win} K/W (RWin)
     window's coefficient of heat transfer (inner side) = ${zone.alpha_conv_inner_win} W/(m^2 K) (alphaConvWinInner)
-    window's coefficient of heat transfer (outer side) = ${round_2(zone.alpha_conv_outer_win)} W/(m^2 K) (alphaConvWinOuter)
+    window's coefficient of heat transfer (outer side) = ${zone.alpha_conv_outer_win} W/(m^2 K) (alphaConvWinOuter)
     %endif
 
 
   * Inner Walls *
 
     inner wall area = ${round_2(zone.area_iw)} m^2 (Ai)
-    inner wall's coefficient of heat transfer = ${round_2(zone.alpha_conv_iw)} W/(m^2 K) (alphaiwi)
+    inner wall's coefficient of heat transfer = ${zone.alpha_conv_iw} W/(m^2 K) (alphaiwi)
     inner walls functionality = ${on_off_checker(zone.inner_walls)} - (withInnerwalls)
     resistor 1 inner wall = ${zone.r1_iw} K/W (R1i)
-    capacity 1 inner wall = ${round_2(zone.c1_iw)} J/K  (C1i)
+    capacity 1 inner wall = ${zone.c1_iw} J/K  (C1i)
 
   * Outer Walls *
 
     outer wall area = ${round_2(zone.area_ow)} m^2 (Ao)
     outer wall's coefficient of absorption = 0.7 - (aowo) 
-    outer wall's coefficient of heat transfer (inner side) = ${round_2(zone.alpha_conv_inner_ow)} W/(m^2 K)  (alphaowi)
-    outer wall's coefficient of heat transfer (outer side) = ${round_2(zone.alpha_comb_outer_ow)} W/(m^2 K) (alphaowo)
+    outer wall's coefficient of heat transfer (inner side) = ${zone.alpha_conv_inner_ow} W/(m^2 K)  (alphaowi)
+    outer wall's coefficient of heat transfer (outer side) = ${zone.alpha_comb_outer_ow} W/(m^2 K) (alphaowo)
     weigthfactors for the walls = ${weightfactors_to_string(zone.weightfactor_ow)} - (weightfactorswall)
     weigthfactors for the ground = ${weightfactors_to_string_ground(zone.weightfactor_ground)} - (weightfactorground)
     outer walls functionality = ${on_off_checker(zone.outer_walls)} - (withOuterwalls)
     resistor 1 outer wall = ${zone.r1_ow} K/W (R1o)
     capacity 1 outer wall = ${round_2(zone.c1_ow)} J/K  (C1o)
-    resistor "Rest" = ${round_2(zone.r_rest_ow)} K/W (RRest)
+    resistor "Rest" = ${zone.r_rest_ow} K/W (RRest)
 
 
 %endfor
