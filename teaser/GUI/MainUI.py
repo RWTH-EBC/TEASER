@@ -3957,7 +3957,9 @@ class MainUI(QDialog):
         self.export_save_template_button.clicked.connect(
             self.click_browse_button)
         for template_name in os.listdir(self.create_path_to_template_folder()):
-            self.export_create_template_combobox.addItem(template_name)
+            if(template_name == "AixLib" or template_name == "CitiesRWin" or
+               template_name == "CitiesType"):
+                self.export_create_template_combobox.addItem(template_name)
 
         self.export_window_ui_layout.addWidget(
             self.export_groupbox, 1, 1)
