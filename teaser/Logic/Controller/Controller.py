@@ -183,4 +183,3 @@ class Controller():
     def click_export_button(self, model_type, path):
         loaded_prj = Project()
         loaded_prj.export_record(model_type, path)
-
