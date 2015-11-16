@@ -158,9 +158,10 @@ class Controller():
     def click_save_button(self, project, path):
         if path.endswith("teaserXML"):
             teaser_xml.save_teaser_xml(path, project)
+            print("Saved under: "+path)
         elif path.endswith("gml"):
             city_gml.save_gml(project, path)
-        print("Saved under: "+path)
+            print("Saved under: "+path)
 
     @classmethod
     def click_load_button(self, path):
