@@ -1555,47 +1555,29 @@ class MainUI(QDialog):
                 self.side_bar_buildings_combo_box.itemText(i))
 
         sender = self.sender()
+        elemInCombobox = self.export_create_template_combobox.currentText()
         if(sender.text() == self.export_button.text()):
-            """
-            building_id = -1
-            export_project = self.controller.clickExportButton(
-                self.project, path_template,
-                path_output_folder, building_id, list_of_building_name)
-            os.chdir(path_output_folder)
-            """
-            elemInCombobox = self.export_create_template_combobox.currentText()
+
             Controller.click_export_button(elemInCombobox, path_output_folder)
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
-                                          " finished ")
+                                          " all building finished ")
 
         elif(sender.text() == self.export_button_one.text()):
-            """
+
             current_building_id = \
                 self.side_bar_buildings_combo_box.currentIndex()
-            currentBuildingName = \
-                str(self.side_bar_buildings_combo_box.currentText())
-            export_project = self.controller.clickExportButton(
-                self.project, path_template, path_output_folder,
-                current_building_id, currentBuildingName)
-            os.chdir(path_output_folder)
-            """
-            current_building_id = \
-                self.side_bar_buildings_combo_box.currentIndex()
-            currentBuildingName = \
-                str(self.side_bar_buildings_combo_box.currentText())
-            export_project = Controller.click_export_button(elemInCombobox,
-                                                            path_output_folder,
-                                                            current_building_id)
+            Controller.click_export_button(elemInCombobox, path_output_folder,
+                                           current_building_id)
+            QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
+                                          "record " + elemInCombobox +
+                                          " for current building finished ")
 
             os.chdir(path_output_folder)
 
     def click_browse_button(self):
         self.export_save_template_lineedit.setText(QtGui.QFileDialog.
                                                    getExistingDirectory())
-
-    def click_export_button_dummy(self):
-        QtGui.QMessageBox.information(self, 'Message', "Do nothing")
 
     def create_path_to_template_folder(self,):
         path = "InputData\\RecordTemplate\\"
@@ -3932,7 +3914,7 @@ class MainUI(QDialog):
         self.export_button.setText("Export template for all buildings")
         self.export_button_one = QtGui.QPushButton(self.export_groupbox)
         self.export_button_one.setGeometry(QtCore.QRect(5, 55, 305, 25))
-        self.export_button_one.clicked.connect(self.click_export_button_dummy)
+        self.export_button_one.clicked.connect(self.click_export_button)
         self.export_button_one.setText("Export template for current building")
         self.export_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_template_label.setGeometry(QtCore.QRect(5, 90, 120, 25))
