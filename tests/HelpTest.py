@@ -17,7 +17,7 @@ def building_test2(prj):
 
     bldg = Building(prj)
 
-    bldg.name = "RWTH Building"
+    bldg.name = "RWTHBuilding"
     bldg.street_name = "Templergraben 55"
     bldg.city = "52062 Aachen"
 
@@ -27,6 +27,7 @@ def building_test2(prj):
     bldg.number_of_floors = 5.0
     bldg.height_of_floors = 1.0
     bldg.net_leased_area = 2000.0
+    bldg.construction_type = "heavy"
 
     # bldg.thermal_zones = []
     # bldg.outer_area = {}
@@ -48,7 +49,7 @@ def building_test2(prj):
     tz.area = 10.0
     tz.volume = 25.0
     tz.infiltration_rate = 5.0
-    tz.use_conditions = UseConditions18599()
+    tz.use_conditions = UseConditions18599(tz)
     '''
     outerwall
     '''

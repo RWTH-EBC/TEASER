@@ -2452,7 +2452,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.8</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2478,7 +2478,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.12</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2504,7 +2504,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.147</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2530,7 +2530,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.384</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2556,7 +2556,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.12</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2582,7 +2582,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.147</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2608,7 +2608,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.384</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2634,7 +2634,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.12</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2660,7 +2660,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.147</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2686,7 +2686,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.168</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2712,7 +2712,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.053</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2738,7 +2738,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.067</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2790,7 +2790,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.067</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2816,7 +2816,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.038</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
@@ -2842,7 +2842,7 @@
 				<id>1</id>
 				<thickness>0.024</thickness>
 				<Material>
-					<name>Holzbalken mit Daemmung</name>
+					<name>Glas</name>
 					<density>0.0</density>
 					<thermal_conduc>0.0222</thermal_conduc>
 					<heat_capac>0.0</heat_capac>
