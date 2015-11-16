@@ -2,15 +2,15 @@
 <Project>
 	<Building>
 		<name>VDI6007_1_TEASER_Matlab</name>
-		<street_name>nicht angegeben</street_name>
-		<city>nicht angegeben</city>
-		<type_of_building>Buerogebaeude</type_of_building>
+		<street_name>none</street_name>
+		<city>none</city>
+		<type_of_building>Office Building</type_of_building>
 		<year_of_construction>1960</year_of_construction>
 		<number_of_floors>1</number_of_floors>
 		<height_of_floors>3.5</height_of_floors>
 		<net_leased_area>17.5</net_leased_area>
 		<ThermalZone>
-			<name>Eins</name>
+			<name>One</name>
 			<area>17.5</area>
 			<volume>61.25</volume>
 			<infiltration_rate>0.5</infiltration_rate>
@@ -68,7 +68,7 @@
 			</UseCondition>
 			<OuterWall>
 				<year_of_construction>1960</year_of_construction>
-				<construction_type>massiv</construction_type>
+				<construction_type>heavy</construction_type>
 				<area>3.5</area>
 				<tilt>90.0</tilt>
 				<orientation>0.0</orientation>
@@ -80,7 +80,7 @@
 					<id>0</id>
 					<thickness>0.24</thickness>
 					<Material>
-						<name>generisch</name>
+						<name>generic</name>
 						<density>2100.0</density>
 						<thermal_conduc>2.035</thermal_conduc>
 						<heat_capac>0.92</heat_capac>
@@ -92,7 +92,7 @@
 					<id>0</id>
 					<thickness>0.062</thickness>
 					<Material>
-						<name>generisch</name>
+						<name>generic</name>
 						<density>75.0</density>
 						<thermal_conduc>0.047</thermal_conduc>
 						<heat_capac>0.84</heat_capac>
@@ -104,7 +104,7 @@
 					<id>0</id>
 					<thickness>0.025</thickness>
 					<Material>
-						<name>generisch</name>
+						<name>generic</name>
 						<density>1300.0</density>
 						<thermal_conduc>0.45</thermal_conduc>
 						<heat_capac>1.05</heat_capac>
@@ -152,7 +152,7 @@
 			</InnerWall>
 			<Ceiling>
 				<year_of_construction>1960</year_of_construction>
-				<construction_type>massiv</construction_type>
+				<construction_type>heavy</construction_type>
 				<area>17.5</area>
 				<inner_convection>1.7000000000000002</inner_convection>
 				<inner_radiation>5.0</inner_radiation>
@@ -160,7 +160,7 @@
 					<id>0</id>
 					<thickness>0.15</thickness>
 					<Material>
-						<name>generisch</name>
+						<name>generic</name>
 						<density>2400.0</density>
 						<thermal_conduc>2.035</thermal_conduc>
 						<heat_capac>1.05</heat_capac>
@@ -172,7 +172,7 @@
 					<id>0</id>
 					<thickness>0.012</thickness>
 					<Material>
-						<name>generisch</name>
+						<name>generic</name>
 						<density>50.0</density>
 						<thermal_conduc>0.06</thermal_conduc>
 						<heat_capac>0.84</heat_capac>
@@ -184,7 +184,7 @@
 					<id>0</id>
 					<thickness>0.045</thickness>
 					<Material>
-						<name>generisch</name>
+						<name>generic</name>
 						<density>2200.0</density>
 						<thermal_conduc>1.4</thermal_conduc>
 						<heat_capac>1.05</heat_capac>
@@ -196,7 +196,7 @@
 					<id>0</id>
 					<thickness>0.002</thickness>
 					<Material>
-						<name>generisch</name>
+						<name>generic</name>
 						<density>1300.0</density>
 						<thermal_conduc>0.21</thermal_conduc>
 						<heat_capac>1.47</heat_capac>
