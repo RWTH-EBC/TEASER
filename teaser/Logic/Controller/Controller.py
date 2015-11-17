@@ -18,6 +18,10 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599\
     import UseConditions18599
+import teaser.Data.TeaserXML as teaser_xml
+import teaser.Data.CityGML as city_gml
+import teaser.Logic.Utilis as utilis
+from PyQt4.uic.Compiler.qtproxies import QtGui
 
 
 class Controller():
@@ -203,8 +207,13 @@ class Controller():
         i = 0
 
     @classmethod
-    def clicksaveButton(self):
-        i = 0
+    def click_save_button(self, project, path):
+        if path.endswith("teaserXML"):
+            teaser_xml.save_teaser_xml(path, project)
+            print("Saved under: "+path)
+        elif path.endswith("gml"):
+            city_gml.save_gml(project, path)
+            print("Saved under: "+path)
 
     @classmethod
     def click_load_button(self, path):
