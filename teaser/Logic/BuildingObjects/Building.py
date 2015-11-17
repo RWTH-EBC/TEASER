@@ -375,17 +375,23 @@ class Building(object):
 
         This function creates a matfile (-v4) for building AHU boundary 
         conditions
+        
+        1. Column : time step
+        2. Column : AHU profile temperature
+        3. Column : AHU humidity requirements
+        4. Columb : AHU status (On/Off)
 
         Parameters
         ----------
         time_line :[[int]]
             list of time steps 
-        profile_relative_humidity : [float]
-            timeline of relative humidity requirements for AHU simulation
-        profile_status_AHU : [Boolean]
-            timeline of status of the AHU simulation (on/off)
         profile_temperature_AHU : [float]
             timeline of temperatures requirements for AHU simulation
+        profile_relative_humidity : [float]
+            timeline of relative humidity requirements for AHU simulation
+        profile_status_AHU : [int]
+            timeline of status of the AHU simulation (on/off)
+        
         path : str
             optional path, when matfile is exported seperately
         Returns
