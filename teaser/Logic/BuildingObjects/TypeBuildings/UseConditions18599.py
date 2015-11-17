@@ -234,7 +234,7 @@ class UseConditions18599(UseConditions):
         self.with_ahu = False
         self.profile_relative_humidity = []
         self.profile_status_AHU = []
-        self.profile_temeprature_AHU = []
+        self.profile_temperature_AHU = []
 
     def load_use_conditions(self, zone_usage):
         '''load typical use conditions
