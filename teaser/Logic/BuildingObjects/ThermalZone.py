@@ -610,20 +610,16 @@ class ThermalZone(object):
 
         Parameters
         ----------
-        time_line :[[int]]
-            list of time steps 
         profile_persons : [float]
             timeline of persons internal gains
         profile_machines : [Boolean]
             timeline of machine internal gains
         profile_lighting : [float]
             timeline of lighting internal gains
-        path : str
-            optional path, when matfile is exported seperately
         Returns
         ---------
-        ahu_boundary : np.array
-            np.array with the boundaries for AHU
+        internal_boundary : np.array
+            np.array with the boundaries for internal gains
         
         '''
         ass_error_1 = "use_conditions have to be set to UseConditions18599"+\
@@ -649,11 +645,11 @@ class ThermalZone(object):
         assert len(profile_persons) == len(profile_lighting), (ass_error_2 + 
                                                 ",profile_lighting")
 
-        internal_boundary = np.shape(len(profile_persons), 3)
+        internal_boundary = np.zeros(len(profile_persons), 3)
         
         internal_boundary[:,0] = profile_persons
-        internal_boundary[:,0] = profile_machines
-        internal_boundary[:,0] = profile_lighting
+        internal_boundary[:,1] = profile_machines
+        internal_boundary[:,2] = profile_lighting
 
         return internal_boundary
         
