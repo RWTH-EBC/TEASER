@@ -6,10 +6,10 @@
 import random
 import numpy as np
 import inspect
-
+import scipy.io
+import teaser.Logic.Utilis as utilis
 
 class Building(object):
-
     '''Building Class
 
     This class represents a general building
@@ -106,10 +106,10 @@ class Building(object):
         self.sum_heating_load = 0
         self.sum_cooling_load = 0
 
-        self.file_ahu = ""
-        self.file_internal_gains = ""
-        self.file_set_t = ""
-        self.file_weather = ""
+        self.file_ahu = None
+        self.file_internal_gains = None
+        self.file_set_t = None
+        self.file_weather = None
 
         #self._calculation_method = self.parent.calculation_method
 
@@ -369,7 +369,8 @@ class Building(object):
                               time_line,
                               profile_temperature_AHU,
                               profile_relative_humidity,
-                              profile_status_AHU):
+                              profile_status_AHU,
+                              path = None):
         '''creates numpy array for AHU boundary conditions
 
         This function creates a numpy array, ready for export to a .mat -v4 
@@ -385,7 +386,8 @@ class Building(object):
             timeline of status of the AHU simulation (on/off)
         profile_temperature_AHU : [float]
             timeline of temperatures requirements for AHU simulation
-            
+        path : str
+            optional path, when matfile is exported seperately
         Returns
         ---------
         ahu_boundary : np.array
@@ -396,11 +398,11 @@ class Building(object):
         ass_error_1 = "time line and input have to have the same length"
         
         assert len(time_line) == len(profile_temperature_AHU), (ass_error_1 + 
-                                                    ",profile_temperature_AHU")
+                                                ",profile_temperature_AHU")
         assert len(time_line) == len(profile_relative_humidity), (ass_error_1 + 
-                                                    ",profile_relative_humidity")
+                                                ",profile_relative_humidity")
         assert len(time_line) == len(profile_status_AHU), (ass_error_1 + 
-                                                    ",profile_status_AHU")
+                                                ",profile_status_AHU")
         
         
         for i, time in enumerate(time_line):
@@ -410,8 +412,21 @@ class Building(object):
             time.append(profile_status_AHU[i])
 
         ahu_boundary = np.array(time_line)
+        
+        if self.file_ahu is None:
+            self.file_ahu = "\\AHU_Building.mat"
+        else:
+            pass
 
-        return ahu_boundary
+        if path is None:
+            path = utilis.get_default_path() + self.file_ahu
+        else:
+            path = utilis.create_path(path) + self.file_ahu
+
+        scipy.io.savemat(path,
+                         mdict={'AHU': ahu_boundary},
+                         appendmat = False,
+                         format = '4')
 
     @property
     def parent(self):
