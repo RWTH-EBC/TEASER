@@ -4,7 +4,7 @@
 """This module includes the Buidling class
 """
 import random
-# import collections
+import numpy as np
 import inspect
 
 
@@ -111,7 +111,7 @@ class Building(object):
         self.file_set_t = ""
         self.file_weather = ""
 
-        self._calculation_method = self.parent.calculation_method
+        #self._calculation_method = self.parent.calculation_method
 
     def set_outer_wall_area(self, new_area, orientation):
         '''Outer area wall setter
@@ -331,6 +331,87 @@ class Building(object):
             zone.retrofit_zone(window_type, material)
 
         self.calc_building_parameter(self._calculation_method)
+
+    def create_timeline(self, duration_profile = 86400, time_step = 3600):
+        ''' Creates a timeline for building boundary conditions
+
+        This function creates a list with a equidistant timeline given the
+        duration of the profile in seconds (default one day, 86400 s) and the
+        time_step in seconds (default one hour, 3600 s). Needed for boundary
+        input of the building.
+
+        Parameters
+        ----------
+        duration_profile : int
+            duration of the profile in seconds (default one day, 86400 s)
+        time_step : int
+            time step used in the profile in seconds (default one hour, 3600 s)
+
+
+        Returns
+        ---------
+        time_line : [[int]]
+            list of time steps as preparation for the output of boundary 
+            conditions
+        '''
+        ass_error_1 = "duration musst be a multiple of time_step"
+
+        assert float(duration_profile/time_step).is_integer(), ass_error_1
+
+        time_line = []
+
+        for i in range(int(duration_profile/time_step)+1):
+            time_line.append([i*time_step])
+
+        return time_line
+    
+    def modelica_AHU_boundary(self,
+                              time_line,
+                              profile_temperature_AHU,
+                              profile_relative_humidity,
+                              profile_status_AHU):
+        '''creates numpy array for AHU boundary conditions
+
+        This function creates a numpy array, ready for export to a .mat -v4 
+        file
+
+        Parameters
+        ----------
+        time_line :[[int]]
+            list of time steps 
+        profile_relative_humidity : [float]
+            timeline of relative humidity requirements for AHU simulation
+        profile_status_AHU : [Boolean]
+            timeline of status of the AHU simulation (on/off)
+        profile_temperature_AHU : [float]
+            timeline of temperatures requirements for AHU simulation
+            
+        Returns
+        ---------
+        ahu_boundary : np.array
+            np.array with the boundaries for AHU
+        
+        '''
+
+        ass_error_1 = "time line and input have to have the same length"
+        
+        assert len(time_line) == len(profile_temperature_AHU), (ass_error_1 + 
+                                                    ",profile_temperature_AHU")
+        assert len(time_line) == len(profile_relative_humidity), (ass_error_1 + 
+                                                    ",profile_relative_humidity")
+        assert len(time_line) == len(profile_status_AHU), (ass_error_1 + 
+                                                    ",profile_status_AHU")
+        
+        
+        for i, time in enumerate(time_line):
+
+            time.append(profile_temperature_AHU[i])
+            time.append(profile_relative_humidity[i])
+            time.append(profile_status_AHU[i])
+
+        ahu_boundary = np.array(time_line)
+
+        return ahu_boundary
 
     @property
     def parent(self):
