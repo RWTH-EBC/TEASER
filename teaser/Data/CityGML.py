@@ -10,16 +10,15 @@ import pyxb
 import pyxb.utils
 import pyxb.namespace
 import pyxb.bundles
-import pyxb.bundles.opengis
+import teaser.Data.SchemaBindings.opengis
 import pyxb.bundles.common.raw.xlink as xlink
-import pyxb.bundles.opengis.raw as og
-import pyxb.bundles.opengis.raw.gml as gml
-import pyxb.bundles.opengis.citygml
-import pyxb.bundles.opengis.citygml.raw
-import pyxb.bundles.opengis.citygml.base as citygml
-import pyxb.bundles.opengis.citygml.appearance as app
-import pyxb.bundles.opengis.citygml.building as bldg
-import pyxb.bundles.opengis.citygml.energy as energy
+import teaser.Data.SchemaBindings.opengis.raw as og
+import teaser.Data.SchemaBindings.opengis.raw.gml as gml
+import teaser.Data.SchemaBindings.opengis.citygml
+import teaser.Data.SchemaBindings.opengis.citygml.raw
+import teaser.Data.SchemaBindings.opengis.citygml.raw.base as citygml
+import teaser.Data.SchemaBindings.opengis.citygml.raw.building as bldg
+import teaser.Data.SchemaBindings.opengis.citygml.raw.energy as energy
 
 import teaser.Data.DataHelp.gmlhelp as gmlhelp
 
@@ -40,8 +39,11 @@ def save_gml(project, path, ref_coordinates=None):
         should contain 3 ints or floats for x, y, and z coordinates of the 
         point. e.g: [[458877,,5438353, -0.2], [458889,5438363,6.317669]]
     '''
-
-    out_file = open(path + ".gml", 'w')
+    
+    if path.endswith("gml"):
+        out_file = open(path, 'w')
+    else:
+        out_file = open(path + ".gml", 'w')
 
     pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
         citygml.Namespace, 'core')
@@ -49,8 +51,6 @@ def save_gml(project, path, ref_coordinates=None):
         gml.Namespace, 'gml')
     pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
         bldg.Namespace, 'bldg')
-    pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
-        app.Namespace, 'app')
     pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
         energy.Namespace, 'energy')
     pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
