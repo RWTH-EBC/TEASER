@@ -452,7 +452,71 @@ class Building(object):
                          mdict={'AHU': ahu_boundary},
                          appendmat = False,
                          format = '4')
+    
+    def modelica_gains_boundary(self, 
+                                time_line = None,
+                                path = None):
+        '''creates .mat file for internal gains boundary conditions (building)
 
+        This function creates a matfile (-v4) for building internal gains 
+        boundary conditions. It collects all internal gain profiles of the
+        zones and stores them into one file. The file is extended for each 
+        zone. Only applicable if zones are defined
+        
+        1. Column : time step
+        2,5,8,...  Column : profile_persons
+        3,6,9,...  Column : profile_machines
+        4,7,10,... Column : profile_lighting
+
+        Parameters
+        ----------
+        time_line :[[int]]
+            list of time steps 
+        path : str
+            optional path, when matfile is exported seperately
+        
+        '''
+        if time_line is None:
+            time_line = self.create_timeline()
+                   
+        if self.file_internal_gains is None:
+            self.file_internal_gains = "\\InternalGains_Building.mat"
+        else:
+            pass
+
+        if path is None:
+            path = utilis.get_default_path() + self.file_internal_gains
+        else:
+            path = utilis.create_path(path) + self.file_internal_gains
+
+        for zone_count in self.thermal_zones:
+            ass_error_1 = "time line and input have to have the same length"
+            """
+            assert len(time_line) == len(zone_count.use_conditions.profile_persons), \
+                                (ass_error_1 + ",profile_persons")
+            assert len(time_line) == len(zone_count.use_conditions.profile_machines), \
+                                (ass_error_1 + ",profile_machines")
+            assert len(time_line) == len(zone_count.use_conditions.profile_lighting), \
+                                (ass_error_1 + ",profile_lighting")
+            """
+            for i, time in enumerate(time_line):
+                if i == 0:
+                    time.append(i)
+                    time.append(i)
+                    time.append(i)
+                else:
+                    
+                    time.append(zone_count.use_conditions.profile_persons[i-1])
+                    time.append(zone_count.use_conditions.profile_machines[i-1])
+                    time.append(zone_count.use_conditions.profile_lighting[i-1])
+
+        internal_boundary = np.array(time_line)
+
+        scipy.io.savemat(path,
+                         mdict={'Internals': internal_boundary},
+                         appendmat = False,
+                         format = '4')
+    
     @property
     def parent(self):
         return self.__parent
