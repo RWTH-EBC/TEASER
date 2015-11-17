@@ -60,6 +60,12 @@ class Building(object):
         path of internal gains Matlab file for boundary condition
     file_set_t : string
         path of temperature Matlab file for boundary condition
+    profile_relative_humidity : [float]
+        timeline of relative humidity requirements for AHU simulation
+    profile_status_AHU : [Boolean]
+        timeline of status of the AHU simulation (on/off)
+    profile_temeprature_AHU : [float]
+        timeline of temperatures requirements for AHU simulation
 
     '''
 
@@ -110,6 +116,10 @@ class Building(object):
         self.file_internal_gains = None
         self.file_set_t = None
         self.file_weather = None
+
+        self.profile_relative_humidity = []
+        self.profile_status_AHU = []
+        self.profile_temperature_AHU = []
 
         #self._calculation_method = self.parent.calculation_method
 
@@ -366,10 +376,10 @@ class Building(object):
         return time_line
     
     def modelica_AHU_boundary(self,
-                              time_line,
-                              profile_temperature_AHU,
-                              profile_relative_humidity,
-                              profile_status_AHU,
+                              time_line = None,
+                              profile_temperature_AHU = None,
+                              profile_relative_humidity = None,
+                              profile_status_AHU = None,
                               path = None):
         '''creates matfile for AHU boundary conditions (building)
 
@@ -400,7 +410,16 @@ class Building(object):
             np.array with the boundaries for AHU
         
         '''
-
+        
+        if time_line is None:
+            time_line = self.create_timeline()
+        if profile_temperature_AHU is None:
+            profile_temperature_AHU = self.profile_temperature_AHU
+        if profile_relative_humidity is None:
+            profile_relative_humidity = self.profile_relative_humidity
+        if profile_status_AHU is None:
+            profile_status_AHU = self.profile_status_AHU
+            
         ass_error_1 = "time line and input have to have the same length"
         
         assert len(time_line) == len(profile_temperature_AHU), (ass_error_1 + 
