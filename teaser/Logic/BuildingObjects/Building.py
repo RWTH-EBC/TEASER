@@ -371,10 +371,10 @@ class Building(object):
                               profile_relative_humidity,
                               profile_status_AHU,
                               path = None):
-        '''creates numpy array for AHU boundary conditions
+        '''creates matfile for AHU boundary conditions (building)
 
-        This function creates a numpy array, ready for export to a .mat -v4 
-        file
+        This function creates a matfile (-v4) for building AHU boundary 
+        conditions
 
         Parameters
         ----------
