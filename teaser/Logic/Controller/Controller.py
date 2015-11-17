@@ -22,6 +22,8 @@ import teaser.Data.TeaserXML as teaser_xml
 import teaser.Data.CityGML as city_gml
 import teaser.Logic.Utilis as utilis
 from PyQt4.uic.Compiler.qtproxies import QtGui
+from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
 
 
 class Controller():
@@ -94,11 +96,19 @@ class Controller():
             element.name = name
             element.area = area
         if type == "GroundFloor":
-            element = Floor(parent)
+            element = GroundFloor(parent)
+            element.name = name
+            element.area = area
+        if type == "Ceiling":
+            element = Ceiling(parent)
             element.name = name
             element.area = area
         if type == "Rooftop":
             element = Rooftop(parent)
+            element.name = name
+            element.area = area
+        if type == "Floor":
+            element = Floor(parent)
             element.name = name
             element.area = area
         return parent
