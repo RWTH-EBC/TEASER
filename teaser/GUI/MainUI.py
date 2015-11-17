@@ -5,11 +5,12 @@ from PyQt4 import QtCore, QtGui
 from PyQt4.Qt import QDialog, QStandardItemModel
 from PyQt4.Qt import Qt
 from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap
+from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap, QTabBar
 import teaser.Logic.Utilis as utilis
 from teaser.GUI.GUIHelperClasses.PictureButton import PictureButton
 from teaser.Project import Project
 from teaser.Logic.Controller.Controller import Controller
+from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 from teaser.GUI.GUIHelperClasses.TrackableItem import TrackableItem
 from teaser.GUI.GUIHelperClasses.ListViewZonesFiller import ListViewZonesFiller
 from teaser.GUI.GUIHelperClasses.GUIInfo import GUIInfo
@@ -57,10 +58,11 @@ class MainUI(QDialog):
         self.is_switchable = False
         self.type_building_ind_att = dict(layout_area=0.0,
                                           layout_window_area=0.0,
-                                          layout_roof=0.0,
-                                          layout_basement=0.0,
+                                          layout_attic=0.0,
+                                          layout_cellar=0.0,
                                           construction_type=0.0,
-                                          neighbour_building=0.0)
+                                          neighbour_building=0.0,
+                                          dormer=0.0)
         self.saved_values_for_edit = {"year": "", "height": "", "name": "",
                                       "location": "", "area": "", "number": "",
                                       "street": ""}
@@ -71,6 +73,7 @@ class MainUI(QDialog):
         self.layer_model = QStandardItemModel()
         self.element_layer_model = QStandardItemModel()
         self.project = Project()
+        self.project.modelica_info = ModelicaInfo()
         self.guiinfo = GUIInfo()
         self.lVZF = ListViewZonesFiller()
         self.is_empty_building_button = False
@@ -981,7 +984,17 @@ class MainUI(QDialog):
                                 break
 
     def save_changed_simulation_values(self):
-        todo=0
+        self.project.name = self.project_name_lineedit.text()
+        self.project.modelica_info.runtime_simulation =\
+            self.simulation_runtime_lineedit.text()
+        self.project.modelica_info.interval_output =\
+            self.simulation_interval_output_lineedit.text()
+        self.project.modelica_info.current_solver =\
+            self.simulation_solver_combobox.currentText()
+        if self.simulation_equidistant_output_checkbox.isChecked():
+            self.project.modelica_info.equidistant_output = True
+        else:
+            self.project.modelica_info.equidistant_output = False
 
     def save_changed_element_values(self):
         for zone in self.current_building.thermal_zones:
@@ -1062,12 +1075,52 @@ class MainUI(QDialog):
                         break
                     
     def switch_type_building(self):
-        cIndex = self.window_construct_building_combo_box.currentIndex()
+        cIndex = self.window_construct_building_combo_box.currentText()
         self.current_type_building = str(cIndex)
         if self.current_type_building == "Residential":
-            self.group_box_office_architecture.setVisible(False)
-            self.group_box_office_layout.setVisible(False)
-            self.group_box_office_window_area.setVisible(False)
+            self.popup_window_type_building.setFixedWidth(620)
+            self.group_box_type_building_right_office.setVisible(False)
+            self.group_box_type_building_right_residential.setVisible(True)
+            self.construct_type_building_button.clicked.disconnect()
+            self.connect(self.construct_type_building_button, SIGNAL(
+            "clicked()"), self.check_inputs_typebuilding_residential)
+            self.connect(self.construct_type_building_button, SIGNAL(
+                "clicked()"), self.popup_window_type_building,
+                    QtCore.SLOT("close()"))
+        elif self.current_type_building == "Office" or self.current_type_building ==\
+            "Institute 4" or self.current_type_building == "Institute 8" or\
+                self.current_type_building == "Institute General":
+            self.popup_window_type_building.setFixedWidth(520)
+            self.group_box_type_building_right_office.setVisible(True)
+            self.group_box_type_building_right_residential.setVisible(False)
+            if self.current_type_building == "Office":
+                self.construct_type_building_button.clicked.disconnect()
+                self.connect(self.construct_type_building_button, SIGNAL(
+                    "clicked()"), self.check_inputs_typebuilding_office)
+                self.connect(self.construct_type_building_button, SIGNAL(
+                    "clicked()"), self.popup_window_type_building,
+                        QtCore.SLOT("close()"))
+            if self.current_type_building == "Institute 4":
+                self.construct_type_building_button.clicked.disconnect()
+                self.connect(self.construct_type_building_button, SIGNAL(
+                    "clicked()"), self.check_inputs_typebuilding_institute_4)
+                self.connect(self.construct_type_building_button, SIGNAL(
+                "clicked()"), self.popup_window_type_building,
+                    QtCore.SLOT("close()"))
+            if self.current_type_building == "Institute 8":
+                self.construct_type_building_button.clicked.disconnect()
+                self.connect(self.construct_type_building_button, SIGNAL(
+                    "clicked()"), self.check_inputs_typebuilding_institute_8)
+                self.connect(self.construct_type_building_button, SIGNAL(
+                "clicked()"), self.popup_window_type_building,
+                    QtCore.SLOT("close()"))
+            if self.current_type_building == "Institute General":
+                self.construct_type_building_button.clicked.disconnect()
+                self.connect(self.construct_type_building_button, SIGNAL(
+                    "clicked()"), self.check_inputs_typebuilding_institute_general)
+                self.connect(self.construct_type_building_button, SIGNAL(
+                "clicked()"), self.popup_window_type_building,
+                    QtCore.SLOT("close()"))
 
     def check_inputs_new_zone(self):
 
@@ -1153,7 +1206,7 @@ class MainUI(QDialog):
 
     def check_inputs_typebuilding_office(self):
         self.fill_typebuilding_attributes()
-        self.project, id = Controller.click_generate_type_building_button(
+        self.project, int_id = Controller.click_generate_type_building_button(
             self.project,
             self.window_construct_building_name_line_edit.text(),
             self.window_construct_building_year_line_edit.text(),
@@ -1165,13 +1218,67 @@ class MainUI(QDialog):
             self.window_construct_building_location_line_edit.text(),
             self.type_building_ind_att)
         for building in self.project.list_of_buildings:
-            if building.internal_id == id:
+            if building.internal_id == int_id:
+                self.current_building = building
+        self.display_current_building()
+        
+    def check_inputs_typebuilding_institute_4(self):
+        self.fill_typebuilding_attributes()
+        self.project, int_id = Controller.click_generate_type_building_button(
+            self.project,
+            self.window_construct_building_name_line_edit.text(),
+            self.window_construct_building_year_line_edit.text(),
+            self.window_construct_building_number_of_floors_line_edit.text(),
+            self.window_construct_building_height_of_floors_line_edit.text(),
+            "Residential 4",
+            self.window_construct_building_area_line_edit.text(),
+            self.window_construct_building_street_line_edit.text(),
+            self.window_construct_building_location_line_edit.text(),
+            self.type_building_ind_att)
+        for building in self.project.list_of_buildings:
+            if building.internal_id == int_id:
+                self.current_building = building
+        self.display_current_building()
+        
+    def check_inputs_typebuilding_institute_8(self):
+        self.fill_typebuilding_attributes()
+        self.project, int_id = Controller.click_generate_type_building_button(
+            self.project,
+            self.window_construct_building_name_line_edit.text(),
+            self.window_construct_building_year_line_edit.text(),
+            self.window_construct_building_number_of_floors_line_edit.text(),
+            self.window_construct_building_height_of_floors_line_edit.text(),
+            "Residential 8",
+            self.window_construct_building_area_line_edit.text(),
+            self.window_construct_building_street_line_edit.text(),
+            self.window_construct_building_location_line_edit.text(),
+            self.type_building_ind_att)
+        for building in self.project.list_of_buildings:
+            if building.internal_id == int_id:
+                self.current_building = building
+        self.display_current_building()
+        
+    def check_inputs_typebuilding_institute_general(self):
+        self.fill_typebuilding_attributes()
+        self.project, int_id = Controller.click_generate_type_building_button(
+            self.project,
+            self.window_construct_building_name_line_edit.text(),
+            self.window_construct_building_year_line_edit.text(),
+            self.window_construct_building_number_of_floors_line_edit.text(),
+            self.window_construct_building_height_of_floors_line_edit.text(),
+            "Residential General",
+            self.window_construct_building_area_line_edit.text(),
+            self.window_construct_building_street_line_edit.text(),
+            self.window_construct_building_location_line_edit.text(),
+            self.type_building_ind_att)
+        for building in self.project.list_of_buildings:
+            if building.internal_id == int_id:
                 self.current_building = building
         self.display_current_building()
 
     def check_inputs_typebuilding_residential(self):
         self.fill_typebuilding_attributes()
-        self.project = Controller.click_generate_type_building_button(
+        self.project, int_id = Controller.click_generate_type_building_button(
             self.project,
             self.window_construct_building_name_line_edit.text(),
             self.window_construct_building_year_line_edit.text(),
@@ -1180,8 +1287,11 @@ class MainUI(QDialog):
             "Residential",
             self.window_construct_building_area_line_edit.text(),
             self.window_construct_building_street_line_edit.text(),
-            self.window_construct_building_location_line_edit.text())
-        self.project.list_of_buildings.append(self.current_building)
+            self.window_construct_building_location_line_edit.text(),
+            self.type_building_ind_att)
+        for building in self.project.list_of_buildings:
+            if building.internal_id == int_id:
+                self.current_building = building
         self.display_current_building()
 
     def update_zone_details(self):
@@ -1572,7 +1682,7 @@ class MainUI(QDialog):
         path = "InputData\\RecordTemplate\\"
         pathTemplate = utilis.get_default_path()
         leng = len(pathTemplate)
-        fullPath = pathTemplate[:leng - 22] + path
+        fullPath = pathTemplate[:leng - 10] + path
         return(str(fullPath))
 
     def display_current_element(self):
@@ -1629,8 +1739,11 @@ class MainUI(QDialog):
 
         """ Returns specific values for the selected combo boxes for the
         layouts during creation of a new type building """
+        
+        text = self.window_construct_building_combo_box.currentText()
 
-        if self.window_construct_building_combo_box.currentText() == "Office":
+        if text == "Office" or text == "Institute 4" or text ==\
+                "Institute 8" or text == "Institute General":
             if self.radio_button_office_layout_1.isChecked():
                 self.type_building_ind_att['layoutArea'] = 1
             if self.radio_button_office_layout_2.isChecked():
@@ -1653,26 +1766,43 @@ class MainUI(QDialog):
                 self.type_building_ind_att['constructionType'] = "heavy"
             if self.radio_button_architecture_office_3.isChecked():
                 self.type_building_ind_att['constructionType'] = "light"
-        if self.window_construct_building_combo_box.currentText() == \
-                "Residential":
+        if text == "Residential":
+            if self.radio_button_residential_layout_1.isChecked():
+                self.type_building_ind_att['layoutArea'] = 1
+            if self.radio_button_residential_layout_2.isChecked():
+                self.type_building_ind_att['layoutArea'] = 2
             if self.radio_button_neighbour_1.isChecked():
                 self.type_building_ind_att['neighbour_building'] = 1
             if self.radio_button_neighbour_2.isChecked():
                 self.type_building_ind_att['neighbour_building'] = 2
             if self.radio_button_neighbour_3.isChecked():
                 self.type_building_ind_att['neighbour_building'] = 3
-            if self.radio_button_residential_layout_1.isChecked():
-                self.type_building_ind_att['layoutArea'] = 1
-            if self.radio_button_residential_layout_2.isChecked():
-                self.type_building_ind_att['layoutArea'] = 2
             if self.radio_button_residential_roof_1.isChecked():
-                self.type_building_ind_att['layout_roof'] = 1
-            if self.radio_button_residential_roof_1.isChecked():
-                self.type_building_ind_att['layout_roof'] = 2
-            if self.radio_button_residential_roof_1.isChecked():
-                self.type_building_ind_att['layout_roof'] = 3
-            if self.radio_button_residential_roof_1.isChecked():
-                self.type_building_ind_att['layout_roof'] = 4
+                self.type_building_ind_att['layout_attic'] = 1
+            if self.radio_button_residential_roof_2.isChecked():
+                self.type_building_ind_att['layout_attic'] = 2
+            if self.radio_button_residential_roof_3.isChecked():
+                self.type_building_ind_att['layout_attic'] = 3
+            if self.radio_button_residential_roof_4.isChecked():
+                self.type_building_ind_att['layout_attic'] = 4
+            if self.radio_button_residential_basement_1.isChecked():
+                self.type_building_ind_att['layout_cellar'] = 1
+            if self.radio_button_residential_basement_2.isChecked():
+                self.type_building_ind_att['layout_cellar'] = 2
+            if self.radio_button_residential_basement_3.isChecked():
+                self.type_building_ind_att['layout_cellar'] = 3
+            if self.radio_button_residential_basement_4.isChecked():
+                self.type_building_ind_att['layout_cellar'] = 4
+            if self.check_box_button_roof.isChecked():
+                self.type_building_ind_att['dormer'] = 1
+            else:
+                self.type_building_ind_att['dormer'] = 0
+            if self.radio_button_residential_architecture_1.isChecked():
+                self.type_building_ind_att['constructionType'] = "light"
+            if self.radio_button_residential_architecture_2.isChecked():
+                self.type_building_ind_att['constructionType'] = "heavy"
+            if self.radio_button_residential_architecture_3.isChecked():
+                self.type_building_ind_att['constructionType'] = "light"
 
     def set_text_color(self, qObject, color):
 
@@ -2001,6 +2131,21 @@ class MainUI(QDialog):
             self.machines_line_edit.text())
         self.current_zone.use_conditions.maintained_illuminace = float(
             self.lighting_line_edit.text())
+        try:
+            self.current_zone.t_inside = utilis.celsius_to_kelvin(float(
+                self.mean_temp_inner_line_edit.text()))
+        except ValueError:
+            print ("Please insert a value for Mean indoor temperature")
+        try:
+            self.current_zone.t_outside = utilis.celsius_to_kelvin(float(
+                self.mean_temp_outer_line_edit.text()))
+        except ValueError:
+            print ("Please insert a value for Mean outdoor temperature")
+        try:
+            self.current_zone.infiltration_rate = float(
+                self.infiltration_rate_line_edit.text())
+        except ValueError:
+            print ("Please insert a value for infiltration rate")
 
         for zone in self.current_building.thermal_zones:
             if zone.internal_id == self.current_zone.internal_id:
@@ -2057,6 +2202,7 @@ class MainUI(QDialog):
         for building in self.project.list_of_buildings:
             loaded_project.list_of_buildings.insert(0, building)
         self.project = loaded_project
+        self.project.modelica_info = ModelicaInfo()
 
         self.current_building = self.project.list_of_buildings[-1]
         self.display_current_building()
@@ -2209,6 +2355,7 @@ class MainUI(QDialog):
 
     def create_new_project(self):
         self.project = Project()
+        self.project.modelica_info = ModelicaInfo()
         self.current_building = 0
         self.current_zone = 0
         self.current_element = 0
@@ -2671,20 +2818,27 @@ class MainUI(QDialog):
         self.save_cancel_layout = QtGui.QGridLayout()
         self.zone_usage_times_layout = QtGui.QGridLayout()
         self.zone_usage_layout = QtGui.QGridLayout()
+        self.static_heat_layout = QtGui.QGridLayout()
+        self.static_heat_layout.setHorizontalSpacing(10)
 
         tab_1 = QTabWidget()
         tab_2 = QTabWidget()
         tab_3 = QTabWidget()
+        tab_4 = QTabWidget()
 
-        self.zone_values_tab.addTab(tab_1, u"           Elements     ")
-        self.zone_values_tab.addTab(tab_2, u"            Usage       ")
-        self.zone_values_tab.addTab(tab_3, u"         Usage Times    ")
+        self.zone_values_tab.addTab(tab_1, u"     Elements      ")
+        self.zone_values_tab.addTab(tab_2, u"      Usage        ")
+        self.zone_values_tab.addTab(tab_3, u"   Usage Times     ")
+        self.zone_values_tab.addTab(tab_4, u"  Static Heat Load ")
+        self.zone_values_tab.setStyleSheet(
+            "QTabBar::tab { height: 25px; width: 104px; }")
 
         self.groupbox_general_zone_values_layout.setLayout(
             self.general_zone_values_layout)
         tab_1.setLayout(self.element_values_layout)
         tab_2.setLayout(self.zone_usage_times_layout)
         tab_3.setLayout(self.zone_usage_layout)
+        tab_4.setLayout(self.static_heat_layout)
         self.groupbox_save_cancel_buttons.setLayout(self.save_cancel_layout)
 
         self.zone_type_label = QtGui.QLabel("Zone Type")
@@ -2811,13 +2965,13 @@ class MainUI(QDialog):
         self.set_temp_heat_line_edit = QtGui.QLineEdit()
         self.set_temp_heat_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_heat))
-        self.set_temp_heat_label_2 = QtGui.QLabel("C")
+        self.set_temp_heat_label_2 = QtGui.QLabel("\u00B0C")
 
         self.set_temp_cool_label_1 = QtGui.QLabel("Set Temp Cooling: ")
         self.set_temp_cool_line_edit = QtGui.QLineEdit()
         self.set_temp_cool_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_cool))
-        self.set_temp_cool_label_2 = QtGui.QLabel("C")
+        self.set_temp_cool_label_2 = QtGui.QLabel("\u00B0C")
 
         self.temp_set_back_label_1 = QtGui.QLabel("Temp Setback: ")
         self.temp_set_back_line_edit = QtGui.QLineEdit()
@@ -2881,6 +3035,26 @@ class MainUI(QDialog):
         self.lighting_line_edit.setText(str(
             self.current_zone.use_conditions.maintained_illuminace))
         self.lighting_label_2 = QtGui.QLabel("W/m^2")
+        
+        self.mean_temp_out_label_1 = QtGui.QLabel("Mean Outdoor Temp: ")
+        self.mean_temp_outer_line_edit = QtGui.QLineEdit()
+        self.mean_temp_outer_line_edit.setText(str(utilis.kelvin_to_celsius(
+            self.current_zone.t_outside)))
+        self.mean_temp_out_label_2 = QtGui.QLabel("\u00B0C")
+        
+        self.mean_temp_in_label_1 = QtGui.QLabel("Mean Indoor Temp: ")
+        self.mean_temp_inner_line_edit = QtGui.QLineEdit()
+        self.mean_temp_inner_line_edit.setText(str(utilis.kelvin_to_celsius(
+            self.current_zone.t_inside)))
+        self.mean_temp_in_label_2 = QtGui.QLabel("\u00B0C")
+        
+        self.infiltration_rate_label_1 = QtGui.QLabel("Infiltration Rate: ")
+        self.infiltration_rate_line_edit = QtGui.QLineEdit()
+        self.infiltration_rate_line_edit.setText(str(
+            self.current_zone.infiltration_rate))
+        self.infiltration_rate_label_2 = QtGui.QLabel("1/h")
+        
+        self.space_label = QtGui.QLabel() # Cheat to group the other controls on top
 
         self.zone_usage_times_layout.addWidget(
             self.cooling_ahu_start_label, 1, 1)
@@ -2943,6 +3117,20 @@ class MainUI(QDialog):
         self.zone_usage_layout.addWidget(self.lighting_label_1, 6, 1)
         self.zone_usage_layout.addWidget(self.lighting_line_edit, 6, 2)
         self.zone_usage_layout.addWidget(self.lighting_label_2, 6, 3)
+        
+        self.static_heat_layout.addWidget(self.mean_temp_out_label_1, 1, 1)
+        self.static_heat_layout.addWidget(
+            self.mean_temp_outer_line_edit, 1, 2)
+        self.static_heat_layout.addWidget(self.mean_temp_out_label_2, 1, 3)
+        self.static_heat_layout.addWidget(self.mean_temp_in_label_1, 2, 1)
+        self.static_heat_layout.addWidget(
+            self.mean_temp_inner_line_edit, 2, 2)
+        self.static_heat_layout.addWidget(self.mean_temp_in_label_2, 2, 3)
+        self.static_heat_layout.addWidget(self.infiltration_rate_label_1, 3, 1)
+        self.static_heat_layout.addWidget(
+            self.infiltration_rate_line_edit, 3, 2)
+        self.static_heat_layout.addWidget(self.infiltration_rate_label_2, 3, 3)
+        self.static_heat_layout.addWidget(self.space_label, 4, 0, 9, 3)
 
         self.save_cancel_layout.addWidget(self.zone_element_save_button, 1, 0)
         self.save_cancel_layout.addWidget(
@@ -2967,13 +3155,17 @@ class MainUI(QDialog):
             QtCore.Qt.WA_DeleteOnClose)
         self.popup_window_type_building.setWindowTitle(
             u"generate " + building_type + " ...")
-        self.popup_window_type_building.setFixedWidth(500)
-        self.popup_window_type_building.setFixedHeight(700)
+        self.popup_window_type_building.setFixedWidth(520)
+        self.popup_window_type_building.setFixedHeight(800)
         self.popup_layout_type_building = QtGui.QGridLayout()
         self.popup_window_type_building.setLayout(
             self.popup_layout_type_building)
         self.group_box_type_building_sidecontrols = QtGui.QGroupBox(
             u"General Information")
+        self.group_box_type_building_right_office = QtGui.QGroupBox(
+            u"Specific Type Building Information")
+        self.group_box_type_building_right_residential = QtGui.QGroupBox(
+            u"Specific Type Building Information")
 
         self.window_construct_building_type_label = QtGui.QLabel(
             self.group_box_type_building_sidecontrols)
@@ -3055,362 +3247,360 @@ class MainUI(QDialog):
             QtCore.QRect(110, 585, 120, 25))
 
         # Differentiates between the different types of buildings from combobox
-        if building_type == "Office":
+        
+        self.type_building_office_layout = QtGui.QGridLayout()
+        self.group_box_type_building_right_office.setLayout(
+                self.type_building_office_layout)
 
-            self.group_box_office_layout = QtGui.QGroupBox(u"Layout")
-            self.group_box_office_window_area = QtGui.QGroupBox(u"Window area")
-            self.group_box_office_architecture = QtGui.QGroupBox(
-                u"Architecture")
+        self.group_box_office_layout = QtGui.QGroupBox(u"Layout")
+        self.group_box_office_window_area = QtGui.QGroupBox(u"Window area")
+        self.group_box_office_architecture = QtGui.QGroupBox(
+            u"Architecture")
 
-            self.office_layout = QtGui.QGridLayout()
-            self.office_layoutWindowArea = QtGui.QGridLayout()
-            self.office_layout_architecture = QtGui.QGridLayout()
+        self.office_layout = QtGui.QGridLayout()
+        self.office_layoutWindowArea = QtGui.QGridLayout()
+        self.office_layout_architecture = QtGui.QGridLayout()
 
-            self.group_box_office_layout.setLayout(self.office_layout)
-            self.group_box_office_window_area.setLayout(
-                self.office_layoutWindowArea)
-            self.group_box_office_architecture.setLayout(
-                self.office_layout_architecture)
+        self.group_box_office_layout.setLayout(self.office_layout)
+        self.group_box_office_window_area.setLayout(
+            self.office_layoutWindowArea)
+        self.group_box_office_architecture.setLayout(
+            self.office_layout_architecture)
 
-            self.radio_button_office_layout_1 = QtGui.QRadioButton(
-                u"Use basic values")
-            self.radio_button_office_layout_2 = QtGui.QRadioButton(
-                u"elongated, 1 floor")
-            self.radio_button_office_layout_3 = QtGui.QRadioButton(
-                u"elongated, 2 floors")
-            self.radio_button_office_layout_4 = QtGui.QRadioButton(
-                u"compact")
-            self.radio_button_office_layout_1.setChecked(True)
+        self.radio_button_office_layout_1 = QtGui.QRadioButton(
+            u"Use basic values")
+        self.radio_button_office_layout_2 = QtGui.QRadioButton(
+            u"elongated, 1 floor")
+        self.radio_button_office_layout_3 = QtGui.QRadioButton(
+            u"elongated, 2 floors")
+        self.radio_button_office_layout_4 = QtGui.QRadioButton(
+            u"compact")
+        self.radio_button_office_layout_1.setChecked(True)
 
-            self.picture_layout_office_2 = QtGui.QLabel()
-            self.picture_layout_office_3 = QtGui.QLabel()
-            self.picture_layout_office_4 = QtGui.QLabel()
-            self.picture_layout_office_2.setPixmap(
-                QtGui.QPixmap(utilis.get_full_path(
-                    "GUI\\GUIImages\\OfficeBuildings\\Zweibund.png")).scaled(
-                        70, 70))
-            self.picture_layout_office_3.setPixmap(
-                QtGui.QPixmap(utilis.get_full_path(
-                    "GUI\\GUIImages\\OfficeBuildings\\Dreibund.png")).scaled(
-                        70, 70))
-            self.picture_layout_office_4.setPixmap(QtGui.QPixmap(
-                utilis.get_full_path(
-                    "GUI\\GUIImages\\OfficeBuildings\\Kompakt.png")).scaled(
-                        70, 70))
-            self.office_layout.addWidget(
-                self.radio_button_office_layout_1, 1, 0)
-            self.office_layout.addWidget(
-                self.radio_button_office_layout_2, 2, 0)
-            self.office_layout.addWidget(
-                self.radio_button_office_layout_3, 3, 0)
-            self.office_layout.addWidget(
-                self.radio_button_office_layout_4, 4, 0)
-            self.office_layout.addWidget(
-                self.picture_layout_office_2, 2, 1, Qt.AlignRight)
-            self.office_layout.addWidget(
-                self.picture_layout_office_3, 3, 1, Qt.AlignRight)
-            self.office_layout.addWidget(
-                self.picture_layout_office_4, 4, 1, Qt.AlignRight)
+        self.picture_layout_office_2 = QtGui.QLabel()
+        self.picture_layout_office_3 = QtGui.QLabel()
+        self.picture_layout_office_4 = QtGui.QLabel()
+        self.picture_layout_office_2.setPixmap(
+            QtGui.QPixmap(utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\Zweibund.png")).scaled(
+                    70, 70))
+        self.picture_layout_office_3.setPixmap(
+            QtGui.QPixmap(utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\Dreibund.png")).scaled(
+                    70, 70))
+        self.picture_layout_office_4.setPixmap(QtGui.QPixmap(
+            utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\Kompakt.png")).scaled(
+                    70, 70))
+        self.office_layout.addWidget(
+            self.radio_button_office_layout_1, 1, 0)
+        self.office_layout.addWidget(
+            self.radio_button_office_layout_2, 2, 0)
+        self.office_layout.addWidget(
+            self.radio_button_office_layout_3, 3, 0)
+        self.office_layout.addWidget(
+            self.radio_button_office_layout_4, 4, 0)
+        self.office_layout.addWidget(
+            self.picture_layout_office_2, 2, 1, Qt.AlignRight)
+        self.office_layout.addWidget(
+            self.picture_layout_office_3, 3, 1, Qt.AlignRight)
+        self.office_layout.addWidget(
+            self.picture_layout_office_4, 4, 1, Qt.AlignRight)
 
-            self.radio_button_window_area_office_1 = QtGui.QRadioButton(
-                u"average window area")
-            self.radio_button_window_area_office_2 = QtGui.QRadioButton(
-                u"Lochfassade")
-            self.radio_button_window_area_office_3 = QtGui.QRadioButton(
-                u"Bandfassade")
-            self.radio_button_window_area_office_4 = QtGui.QRadioButton(
-                u"Vollverglasung")
-            self.radio_button_window_area_office_1.setChecked(True)
+        self.radio_button_window_area_office_1 = QtGui.QRadioButton(
+            u"average window area")
+        self.radio_button_window_area_office_2 = QtGui.QRadioButton(
+            u"Lochfassade")
+        self.radio_button_window_area_office_3 = QtGui.QRadioButton(
+            u"Bandfassade")
+        self.radio_button_window_area_office_4 = QtGui.QRadioButton(
+            u"Vollverglasung")
+        self.radio_button_window_area_office_1.setChecked(True)
 
-            self.picture_window_area_office_2 = QtGui.QLabel()
-            self.picture_window_area_office_3 = QtGui.QLabel()
-            self.picture_window_area_office_4 = QtGui.QLabel()
-            self.picture_window_area_office_2.setPixmap(QtGui.QPixmap(
-                utilis.get_full_path(
-                    "GUI\\GUIImages\\OfficeBuildings\\Lochfassade.png"))
-                .scaled(70, 70))
-            self.picture_window_area_office_3.setPixmap(QtGui.QPixmap(
-                utilis.get_full_path(
-                    "GUI\\GUIImages\\OfficeBuildings\\Bandfassade.png"))
-                .scaled(70, 70))
-            self.picture_window_area_office_4.setPixmap(QtGui.QPixmap(
-                utilis.get_full_path(
-                    "GUI\\GUIImages\\OfficeBuildings\\Vollverglasung.png"))
-                .scaled(70, 70))
-            self.office_layoutWindowArea.addWidget(
-                self.radio_button_window_area_office_1, 1, 0)
-            self.office_layoutWindowArea.addWidget(
-                self.radio_button_window_area_office_2, 2, 0)
-            self.office_layoutWindowArea.addWidget(
-                self.radio_button_window_area_office_3, 3, 0)
-            self.office_layoutWindowArea.addWidget(
-                self.radio_button_window_area_office_4, 4, 0)
-            self.office_layoutWindowArea.addWidget(
-                self.picture_window_area_office_2, 2, 1, Qt.AlignRight)
-            self.office_layoutWindowArea.addWidget(
-                self.picture_window_area_office_3, 3, 1, Qt.AlignRight)
-            self.office_layoutWindowArea.addWidget(
-                self.picture_window_area_office_4, 4, 1, Qt.AlignRight)
+        self.picture_window_area_office_2 = QtGui.QLabel()
+        self.picture_window_area_office_3 = QtGui.QLabel()
+        self.picture_window_area_office_4 = QtGui.QLabel()
+        self.picture_window_area_office_2.setPixmap(QtGui.QPixmap(
+            utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\Lochfassade.png"))
+            .scaled(70, 70))
+        self.picture_window_area_office_3.setPixmap(QtGui.QPixmap(
+            utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\Bandfassade.png"))
+            .scaled(70, 70))
+        self.picture_window_area_office_4.setPixmap(QtGui.QPixmap(
+            utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\Vollverglasung.png"))
+            .scaled(70, 70))
+        self.office_layoutWindowArea.addWidget(
+            self.radio_button_window_area_office_1, 1, 0)
+        self.office_layoutWindowArea.addWidget(
+            self.radio_button_window_area_office_2, 2, 0)
+        self.office_layoutWindowArea.addWidget(
+            self.radio_button_window_area_office_3, 3, 0)
+        self.office_layoutWindowArea.addWidget(
+            self.radio_button_window_area_office_4, 4, 0)
+        self.office_layoutWindowArea.addWidget(
+            self.picture_window_area_office_2, 2, 1, Qt.AlignRight)
+        self.office_layoutWindowArea.addWidget(
+            self.picture_window_area_office_3, 3, 1, Qt.AlignRight)
+        self.office_layoutWindowArea.addWidget(
+            self.picture_window_area_office_4, 4, 1, Qt.AlignRight)
 
-            self.radio_button_architecture_office_1 = QtGui.QRadioButton(
-                u"Standartwert nutzen")
-            self.radio_button_architecture_office_2 = QtGui.QRadioButton(
-                u"massiv")
-            self.radio_button_architecture_office_3 = QtGui.QRadioButton(
-                u"leicht")
-            self.radio_button_architecture_office_1.setChecked(True)
+        self.radio_button_architecture_office_1 = QtGui.QRadioButton(
+            u"Standartwert nutzen")
+        self.radio_button_architecture_office_2 = QtGui.QRadioButton(
+            u"massiv")
+        self.radio_button_architecture_office_3 = QtGui.QRadioButton(
+            u"leicht")
+        self.radio_button_architecture_office_1.setChecked(True)
 
-            self.office_layout_architecture.addWidget(
-                self.radio_button_architecture_office_1, 1, 0)
-            self.office_layout_architecture.addWidget(
-                self.radio_button_architecture_office_2, 2, 0)
-            self.office_layout_architecture.addWidget(
-                self.radio_button_architecture_office_3, 3, 0)
-            # self.office_layout_architecture.addWidget(
-            #     self.radio_button_architecture_office_4, 4, 0)
+        self.office_layout_architecture.addWidget(
+            self.radio_button_architecture_office_1, 1, 0)
+        self.office_layout_architecture.addWidget(
+            self.radio_button_architecture_office_2, 2, 0)
+        self.office_layout_architecture.addWidget(
+            self.radio_button_architecture_office_3, 3, 0)
 
-            self.construct_office_button = QtGui.QPushButton(
-                u"Generate " + building_type + " Building ...")
-            self.connect(self.construct_office_button, SIGNAL(
-                "clicked()"), self.check_inputs_typebuilding_office)
-            self.connect(self.construct_office_button, SIGNAL(
-                "clicked()"), self.popup_window_type_building,
-                QtCore.SLOT("close()"))
-            self.popup_layout_type_building.addWidget(
-                self.group_box_type_building_sidecontrols, 0, 0, 7, 2)
-            self.popup_layout_type_building.addWidget(
-                self.group_box_office_layout, 0, 2, 1, 1)
-            self.popup_layout_type_building.addWidget(
-                self.group_box_office_window_area, 3, 2, 1, 1)
-            self.popup_layout_type_building.addWidget(
-                self.group_box_office_architecture, 6, 2, 1, 1)
-            self.popup_layout_type_building.addWidget(
-                self.construct_office_button, 7, 0, 1, 3)
-            self.popup_window_type_building.setLayout(
-                self.popup_layout_type_building)
+        self.construct_type_building_button = QtGui.QPushButton(
+            u"Generate " + building_type + " Building ...")
+        self.connect(self.construct_type_building_button, SIGNAL(
+            "clicked()"), self.check_inputs_typebuilding_office)
+        self.connect(self.construct_type_building_button, SIGNAL(
+            "clicked()"), self.popup_window_type_building,
+            QtCore.SLOT("close()"))
 
-        elif building_type == "Residential":
+        self.type_building_residential_layout = QtGui.QGridLayout()
+        self.group_box_type_building_right_residential.setLayout(
+            self.type_building_residential_layout)
 
-            self.group_box_residential_neighbour_buildings = QtGui.QGroupBox(
-                u"Direct neighbour buildings")
-            self.group_box_residential_layout = QtGui.QGroupBox(u"Layout")
-            self.group_box_residential_roof = QtGui.QGroupBox(u"Roof")
-            self.group_box_residential_basement = QtGui.QGroupBox(u"Basement")
-            self.group_box_residential_architecture = QtGui.QGroupBox(
-                u"Architecture")
+        self.group_box_residential_neighbour_buildings = QtGui.QGroupBox(
+            u"Direct neighbour buildings")
+        self.group_box_residential_layout = QtGui.QGroupBox(u"Layout")
+        self.group_box_residential_roof = QtGui.QGroupBox(u"Roof")
+        self.group_box_residential_basement = QtGui.QGroupBox(u"Basement")
+        self.group_box_residential_architecture = QtGui.QGroupBox(
+            u"Architecture")
 
-            self.layout_residential_neighbour_buildings = QtGui.QGridLayout()
-            self.layout_residential_layout = QtGui.QGridLayout()
-            self.layout_residential_layout = QtGui.QGridLayout()
-            self.layout_residential_basement = QtGui.QGridLayout()
-            self.layout_residential_architecture = QtGui.QGridLayout()
+        self.layout_residential_neighbour_buildings = QtGui.QGridLayout()
+        self.layout_residential_layout = QtGui.QGridLayout()
+        self.layout_residential_roof = QtGui.QGridLayout()
+        self.layout_residential_basement = QtGui.QGridLayout()
+        self.layout_residential_architecture = QtGui.QGridLayout()
 
-            self.group_box_residential_neighbour_buildings.setLayout(
-                self.layout_residential_neighbour_buildings)
-            self.group_box_residential_layout.setLayout(
-                self.layout_residential_layout)
-            self.group_box_residential_roof.setLayout(
-                self.layout_residential_layout)
-            self.group_box_residential_basement.setLayout(
-                self.layout_residential_basement)
-            self.group_box_residential_architecture.setLayout(
-                self.layout_residential_architecture)
+        self.group_box_residential_neighbour_buildings.setLayout(
+            self.layout_residential_neighbour_buildings)
+        self.group_box_residential_layout.setLayout(
+            self.layout_residential_layout)
+        self.group_box_residential_roof.setLayout(
+            self.layout_residential_roof)
+        self.group_box_residential_basement.setLayout(
+            self.layout_residential_basement)
+        self.group_box_residential_architecture.setLayout(
+            self.layout_residential_architecture)
 
-            self.radio_button_neighbour_1 = QtGui.QRadioButton(
-                u"none (freestanding)")
-            self.radio_button_neighbour_2 = QtGui.QRadioButton(
-                u"annex to one side")
-            self.radio_button_neighbour_3 = QtGui.QRadioButton(
-                u"annex to both sides")
-            self.radio_button_neighbour_1.setChecked(True)
+        self.radio_button_neighbour_1 = QtGui.QRadioButton(
+            u"none (freestanding)")
+        self.radio_button_neighbour_2 = QtGui.QRadioButton(
+            u"annex to one side")
+        self.radio_button_neighbour_3 = QtGui.QRadioButton(
+            u"annex to both sides")
+        self.radio_button_neighbour_1.setChecked(True)
 
-            self.picture_neighbour_building_residential_1 = QtGui.QLabel()
-            self.picture_neighbour_building_residential_2 = QtGui.QLabel()
-            self.picture_neighbour_building_residential_3 = QtGui.QLabel()
-            self.picture_neighbour_building_residential_1.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\\
-                    freistehend.png")).scaled(29, 23))
-            self.picture_neighbour_building_residential_2.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\\
-                    einseitigangebaut.png")).scaled(46, 23))
-            self.picture_neighbour_building_residential_3.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\\
-                    beidseitigangebaut.png")).scaled(56, 23))
-            self.layout_residential_neighbour_buildings.addWidget(
-                self.radio_button_neighbour_1, 1, 0)
-            self.layout_residential_neighbour_buildings.addWidget(
-                self.radio_button_neighbour_2, 2, 0)
-            self.layout_residential_neighbour_buildings.addWidget(
-                self.radio_button_neighbour_3, 3, 0)
-            self.layout_residential_neighbour_buildings.addWidget(
-                self.picture_neighbour_building_residential_1, 1, 1,
-                Qt.AlignRight)
-            self.layout_residential_neighbour_buildings.addWidget(
-                self.picture_neighbour_building_residential_2, 2, 1,
-                Qt.AlignRight)
-            self.layout_residential_neighbour_buildings.addWidget(
-                self.picture_neighbour_building_residential_3, 3, 1,
-                Qt.AlignRight)
+        self.picture_neighbour_building_residential_1 = QtGui.QLabel()
+        self.picture_neighbour_building_residential_2 = QtGui.QLabel()
+        self.picture_neighbour_building_residential_3 = QtGui.QLabel()
+        self.picture_neighbour_building_residential_1.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                "freistehend.png")).scaled(29, 23))
+        self.picture_neighbour_building_residential_2.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                "einseitigangebaut.png")).scaled(46, 23))
+        self.picture_neighbour_building_residential_3.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                "beidseitigangebaut.png")).scaled(56, 23))
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.radio_button_neighbour_1, 1, 0)
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.radio_button_neighbour_2, 2, 0)
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.radio_button_neighbour_3, 3, 0)
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.picture_neighbour_building_residential_1, 1, 1,
+            Qt.AlignRight)
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.picture_neighbour_building_residential_2, 2, 1,
+            Qt.AlignRight)
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.picture_neighbour_building_residential_3, 3, 1,
+            Qt.AlignRight)
 
-            self.radio_button_residential_layout_1 = QtGui.QRadioButton(
-                u"kompakt")
-            self.radio_button_residential_layout_2 = QtGui.QRadioButton(
-                u"langgestreckt/ komplex")
-            self.radio_button_residential_layout_1.setChecked(True)
+        self.radio_button_residential_layout_1 = QtGui.QRadioButton(
+            u"kompakt")
+        self.radio_button_residential_layout_2 = QtGui.QRadioButton(
+            u"langgestreckt/ komplex")
+        self.radio_button_residential_layout_1.setChecked(True)
 
-            self.picture_layout_residential_1 = QtGui.QLabel()
-            self.picture_layout_residential_2 = QtGui.QLabel()
-            self.picture_layout_residential_1.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                     "kompakt.png")).scaled(28, 28))
-            self.picture_layout_residential_2.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                     "laenglich.png")).scaled(28, 28))
-            self.layout_residential_layout.addWidget(
-                self.radio_button_residential_layout_1, 1, 0)
-            self.layout_residential_layout.addWidget(
-                self.radio_button_residential_layout_2, 2, 0)
-            self.layout_residential_layout.addWidget(
-                self.picture_layout_residential_1, 1, 1, Qt.AlignRight)
-            self.layout_residential_layout.addWidget(
-                self.picture_layout_residential_2, 2, 1, Qt.AlignRight)
+        self.picture_layout_residential_1 = QtGui.QLabel()
+        self.picture_layout_residential_2 = QtGui.QLabel()
+        self.picture_layout_residential_1.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                                 "kompakt.png")).scaled(28, 28))
+        self.picture_layout_residential_2.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                                 "laenglich.png")).scaled(28, 28))
+        self.layout_residential_layout.addWidget(
+            self.radio_button_residential_layout_1, 1, 0)
+        self.layout_residential_layout.addWidget(
+            self.radio_button_residential_layout_2, 2, 0)
+        self.layout_residential_layout.addWidget(
+            self.picture_layout_residential_1, 1, 1, Qt.AlignRight)
+        self.layout_residential_layout.addWidget(
+            self.picture_layout_residential_2, 2, 1, Qt.AlignRight)
 
-            self.radio_button_residential_roof_1 = QtGui.QRadioButton(
-                u"Flachdach")
-            self.radio_button_residential_roof_2 = QtGui.QRadioButton(
-                u"unbeheiztes Dachgeschoss")
-            self.radio_button_residential_roof_3 = QtGui.QRadioButton(
-                u"teilweise beheiztes Dachgeschoss")
-            self.radio_button_residential_roof_4 = QtGui.QRadioButton(
-                u"beheiztes Dachgeschoss")
-            self.radio_button_residential_roof_1.setChecked(True)
+        self.radio_button_residential_roof_1 = QtGui.QRadioButton(
+            u"Flachdach")
+        self.radio_button_residential_roof_2 = QtGui.QRadioButton(
+            u"unbeheiztes Dachgeschoss")
+        self.radio_button_residential_roof_3 = QtGui.QRadioButton(
+            u"teilweise beheiztes Dachgeschoss")
+        self.radio_button_residential_roof_4 = QtGui.QRadioButton(
+            u"beheiztes Dachgeschoss")
+        self.radio_button_residential_roof_1.setChecked(True)
 
-            self.h_line_roof = QtGui.QFrame()
-            self.h_line_roof.setFrameShape(QtGui.QFrame.HLine)
-            self.h_line_roof.setFrameShadow(QtGui.QFrame.Sunken)
-            self.check_box_button_roof = QtGui.QCheckBox(
-                u"Dachgauben oder andere Dachaufbauten vorhanden")
-            self.picture_roof_residential_1 = QtGui.QLabel()
-            self.picture_roof_residential_2 = QtGui.QLabel()
-            self.picture_roof_residential_3 = QtGui.QLabel()
-            self.picture_roof_residential_4 = QtGui.QLabel()
-            self.picture_roof_residential_1.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                     "Flachdach.png")).scaled(32, 23))
-            self.picture_roof_residential_2.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                     "Satteldachunbeheizt.png")).
-                scaled(34, 23))
-            self.picture_roof_residential_3.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                     "Satteldachteilweisebeheizt.png")).
-                scaled(34, 23))
-            self.picture_roof_residential_4.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                     "Satteldachbeheizt.png")).scaled(34, 23))
-            self.layout_residential_layout.addWidget(
-                self.radio_button_residential_roof_1, 1, 0)
-            self.layout_residential_layout.addWidget(
-                self.radio_button_residential_roof_2, 2, 0)
-            self.layout_residential_layout.addWidget(
-                self.radio_button_residential_roof_3, 3, 0)
-            self.layout_residential_layout.addWidget(
-                self.radio_button_residential_roof_4, 4, 0)
-            self.layout_residential_layout.addWidget(
-                self.picture_roof_residential_1, 1, 1, Qt.AlignRight)
-            self.layout_residential_layout.addWidget(
-                self.picture_roof_residential_2, 2, 1, Qt.AlignRight)
-            self.layout_residential_layout.addWidget(
-                self.picture_roof_residential_3, 3, 1, Qt.AlignRight)
-            self.layout_residential_layout.addWidget(
-                self.picture_roof_residential_4, 4, 1, Qt.AlignRight)
-            self.layout_residential_layout.addWidget(
-                self.h_line_roof, 5, 0, 1, 0)
-            self.layout_residential_layout.addWidget(
-                self.check_box_button_roof, 6, 0, 1, 1)
+        self.h_line_roof = QtGui.QFrame()
+        self.h_line_roof.setFrameShape(QtGui.QFrame.HLine)
+        self.h_line_roof.setFrameShadow(QtGui.QFrame.Sunken)
+        self.check_box_button_roof = QtGui.QCheckBox(
+            u"Dachgauben oder andere Dachaufbauten vorhanden")
+        self.picture_roof_residential_1 = QtGui.QLabel()
+        self.picture_roof_residential_2 = QtGui.QLabel()
+        self.picture_roof_residential_3 = QtGui.QLabel()
+        self.picture_roof_residential_4 = QtGui.QLabel()
+        self.picture_roof_residential_1.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                                 "Flachdach.png")).scaled(32, 23))
+        self.picture_roof_residential_2.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                                 "Satteldachunbeheizt.png")).
+            scaled(34, 23))
+        self.picture_roof_residential_3.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                                 "Satteldachteilweisebeheizt.png")).
+            scaled(34, 23))
+        self.picture_roof_residential_4.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                                 "Satteldachbeheizt.png")).scaled(34, 23))
+        self.layout_residential_roof.addWidget(
+            self.radio_button_residential_roof_1, 1, 0)
+        self.layout_residential_roof.addWidget(
+            self.radio_button_residential_roof_2, 2, 0)
+        self.layout_residential_roof.addWidget(
+            self.radio_button_residential_roof_3, 3, 0)
+        self.layout_residential_roof.addWidget(
+            self.radio_button_residential_roof_4, 4, 0)
+        self.layout_residential_roof.addWidget(
+            self.picture_roof_residential_1, 1, 1, Qt.AlignRight)
+        self.layout_residential_roof.addWidget(
+            self.picture_roof_residential_2, 2, 1, Qt.AlignRight)
+        self.layout_residential_roof.addWidget(
+            self.picture_roof_residential_3, 3, 1, Qt.AlignRight)
+        self.layout_residential_roof.addWidget(
+            self.picture_roof_residential_4, 4, 1, Qt.AlignRight)
+        self.layout_residential_roof.addWidget(
+            self.h_line_roof, 5, 0, 1, 0)
+        self.layout_residential_roof.addWidget(
+            self.check_box_button_roof, 6, 0, 1, 1)
 
-            self.radio_button_residential_basement_1 = QtGui.QRadioButton(
-                u"nicht unterkellert")
-            self.radio_button_residential_basement_2 = QtGui.QRadioButton(
-                u"unbeheizter Keller")
-            self.radio_button_residential_basement_3 = QtGui.QRadioButton(
-                u"teilweise unbeheizter Keller")
-            self.radio_button_residential_basement_4 = QtGui.QRadioButton(
-                u"beheizter Keller")
-            self.radio_button_residential_basement_1.setChecked(True)
+        self.radio_button_residential_basement_1 = QtGui.QRadioButton(
+            u"nicht unterkellert")
+        self.radio_button_residential_basement_2 = QtGui.QRadioButton(
+            u"unbeheizter Keller")
+        self.radio_button_residential_basement_3 = QtGui.QRadioButton(
+            u"teilweise unbeheizter Keller")
+        self.radio_button_residential_basement_4 = QtGui.QRadioButton(
+            u"beheizter Keller")
+        self.radio_button_residential_basement_1.setChecked(True)
 
-            self.picture_residential_basement_1 = QtGui.QLabel()
-            self.picture_residential_basement_2 = QtGui.QLabel()
-            self.picture_residential_basement_3 = QtGui.QLabel()
-            self.picture_residential_basement_4 = QtGui.QLabel()
-            self.picture_residential_basement_1.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                     "keinKeller.png")).scaled(32, 28))
-            self.picture_residential_basement_2.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                     "Kellerunbeheizt.png")).scaled(32, 28))
-            self.picture_residential_basement_3.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                     "Kellerteilweisebeheizt.png")).
-                scaled(32, 28))
-            self.picture_residential_basement_4.setPixmap(QPixmap(
-                utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                     "Kellerbeheizt.png")).scaled(32, 28))
-            self.layout_residential_basement.addWidget(
-                self.radio_button_residential_basement_1, 1, 0)
-            self.layout_residential_basement.addWidget(
-                self.radio_button_residential_basement_2, 2, 0)
-            self.layout_residential_basement.addWidget(
-                self.radio_button_residential_basement_3, 3, 0)
-            self.layout_residential_basement.addWidget(
-                self.radio_button_residential_basement_4, 4, 0)
-            self.layout_residential_basement.addWidget(
-                self.picture_residential_basement_1, 1, 1, Qt.AlignRight)
-            self.layout_residential_basement.addWidget(
-                self.picture_residential_basement_2, 2, 1, Qt.AlignRight)
-            self.layout_residential_basement.addWidget(
-                self.picture_residential_basement_3, 3, 1, Qt.AlignRight)
-            self.layout_residential_basement.addWidget(
-                self.picture_residential_basement_4, 4, 1, Qt.AlignRight)
+        self.picture_residential_basement_1 = QtGui.QLabel()
+        self.picture_residential_basement_2 = QtGui.QLabel()
+        self.picture_residential_basement_3 = QtGui.QLabel()
+        self.picture_residential_basement_4 = QtGui.QLabel()
+        self.picture_residential_basement_1.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                                 "keinKeller.png")).scaled(32, 28))
+        self.picture_residential_basement_2.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                                 "Kellerunbeheizt.png")).scaled(32, 28))
+        self.picture_residential_basement_3.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                                 "Kellerteilweisebeheizt.png")).
+            scaled(32, 28))
+        self.picture_residential_basement_4.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
+                                 "Kellerbeheizt.png")).scaled(32, 28))
+        self.layout_residential_basement.addWidget(
+            self.radio_button_residential_basement_1, 1, 0)
+        self.layout_residential_basement.addWidget(
+            self.radio_button_residential_basement_2, 2, 0)
+        self.layout_residential_basement.addWidget(
+            self.radio_button_residential_basement_3, 3, 0)
+        self.layout_residential_basement.addWidget(
+            self.radio_button_residential_basement_4, 4, 0)
+        self.layout_residential_basement.addWidget(
+            self.picture_residential_basement_1, 1, 1, Qt.AlignRight)
+        self.layout_residential_basement.addWidget(
+            self.picture_residential_basement_2, 2, 1, Qt.AlignRight)
+        self.layout_residential_basement.addWidget(
+            self.picture_residential_basement_3, 3, 1, Qt.AlignRight)
+        self.layout_residential_basement.addWidget(
+            self.picture_residential_basement_4, 4, 1, Qt.AlignRight)
 
-            self.radio_button_residential_architecture_1 = QtGui.QRadioButton(
-                u"Standardwert nutzen")
-            self.radio_button_residential_architecture_2 = QtGui.QRadioButton(
-                u"massiv")
-            self.radio_button_residential_architecture_3 = QtGui.QRadioButton(
-                u"leicht")
-            self.radio_button_residential_architecture_1.setChecked(True)
+        self.radio_button_residential_architecture_1 = QtGui.QRadioButton(
+            u"Standardwert nutzen")
+        self.radio_button_residential_architecture_2 = QtGui.QRadioButton(
+            u"massiv")
+        self.radio_button_residential_architecture_3 = QtGui.QRadioButton(
+            u"leicht")
+        self.radio_button_residential_architecture_1.setChecked(True)
 
-            self.layout_residential_architecture.addWidget(
-                self.radio_button_residential_architecture_1, 1, 0)
-            self.layout_residential_architecture.addWidget(
-                self.radio_button_residential_architecture_2, 2, 0)
-            self.layout_residential_architecture.addWidget(
-                self.radio_button_residential_architecture_3, 3, 0)
+        self.layout_residential_architecture.addWidget(
+            self.radio_button_residential_architecture_1, 1, 0)
+        self.layout_residential_architecture.addWidget(
+            self.radio_button_residential_architecture_2, 2, 0)
+        self.layout_residential_architecture.addWidget(
+            self.radio_button_residential_architecture_3, 3, 0)
 
-            self.construct_residential_button = QtGui.QPushButton(
-                u"Generate " + building_type + " Building ...")
-            self.connect(self.construct_residential_button, SIGNAL(
-                "clicked()"), self.check_inputs_typebuilding_residential)
-            self.connect(self.construct_residential_button, SIGNAL(
-                "clicked()"), self.updateBuildingList)
-            self.connect(self.construct_residential_button, SIGNAL(
-                "clicked()"), self.popup_window_type_building, QtCore.SLOT(
-                "close()"))
-            self.popup_layout_type_building.addWidget(
-                self.group_box_residential_neighbour_buildings, 2, 0, 1, 0)
-            self.popup_layout_type_building.addWidget(
-                self.group_box_residential_layout, 3, 0, 1, 0)
-            self.popup_layout_type_building.addWidget(
-                self.group_box_residential_roof, 4, 0, 1, 0)
-            self.popup_layout_type_building.addWidget(
-                self.group_box_residential_basement, 5, 0, 1, 0)
-            self.popup_layout_type_building.addWidget(
-                self.group_box_residential_architecture, 6, 0, 1, 0)
-            self.popup_layout_type_building.addWidget(
-                self.construct_residential_button, 7, 0, 1, 0)
-            self.popup_window_type_building.setLayout(
-                self.popup_layout_type_building)
+        self.popup_layout_type_building.addWidget(
+            self.group_box_type_building_sidecontrols, 0, 0, 7, 3)
+        self.type_building_office_layout.addWidget(
+            self.group_box_office_layout, 0, 0, 1, 1)
+        self.type_building_office_layout.addWidget(
+            self.group_box_office_window_area, 3, 0, 1, 1)
+        self.type_building_office_layout.addWidget(
+            self.group_box_office_architecture, 6, 0, 1, 1)
+
+        self.type_building_residential_layout.addWidget(
+            self.group_box_residential_neighbour_buildings, 0, 0, 1, 1)
+        self.type_building_residential_layout.addWidget(
+            self.group_box_residential_layout, 1, 0, 1, 1)
+        self.type_building_residential_layout.addWidget(
+            self.group_box_residential_roof, 2, 0, 1, 1)
+        self.type_building_residential_layout.addWidget(
+            self.group_box_residential_basement, 3, 0, 1, 1)
+        self.type_building_residential_layout.addWidget(
+            self.group_box_residential_architecture, 4, 0, 1, 1)
+
+        self.popup_layout_type_building.addWidget(
+                self.group_box_type_building_right_office, 0, 3, 7, 1)
+        self.popup_layout_type_building.addWidget(
+                self.group_box_type_building_right_residential, 0, 3, 7, 1)
+        self.group_box_type_building_right_residential.setVisible(False)
+        self.popup_layout_type_building.addWidget(
+            self.construct_type_building_button, 7, 0, 1, 4)
+
+        self.popup_window_type_building.setLayout(
+            self.popup_layout_type_building)
         self.popup_window_type_building.setWindowModality(Qt.ApplicationModal)
         self.popup_window_type_building.show()
 
@@ -3883,69 +4073,21 @@ class MainUI(QDialog):
         self.simulation_window_ui = QtGui.QWizardPage()
         self.simulation_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.simulation_window_ui.setWindowTitle("Simulation")
-        self.simulation_window_ui.setFixedWidth(650)
-        self.simulation_window_ui.setFixedHeight(400)
+        self.simulation_window_ui.setFixedWidth(330)
+        self.simulation_window_ui.setFixedHeight(280)
         self.simulation_window_ui_layout = QtGui.QGridLayout()
         self.simulation_window_ui.setLayout(self.simulation_window_ui_layout)
-        self.heatingload_calculation_groupbox = QtGui.QGroupBox("Heating Load"
-                                                                " Calculation")
-        self.heatingload_calculation_groupbox.setGeometry(
-            QtCore.QRect(10, 245, 315, 160))
-        self.heatingload_calculation_groupbox.setMinimumSize(
-            QtCore.QSize(315, 160))
-        self.heatingload_calculation_groupbox.setMaximumSize(
-            QtCore.QSize(315, 160))
-        self.heatingload_calculation_groupbox.setObjectName(
-            _fromUtf8("heatingloadCalculationGroupBox"))
-        self.heatingload_avg_temp_outer_label_1 = QtGui.QLabel(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_outer_label_1.setGeometry(
-            QtCore.QRect(5, 20, 90, 25))
-        self.heatingload_avg_temp_outer_label_1.setText("Average Outer Temp:")
-        self.heatingload_avg_temp_outer_lineedit = QtGui.QLineEdit(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_outer_lineedit.setGeometry(
-            QtCore.QRect(100, 20, 180, 25))
-        self.heatingload_avg_temp_outer_lineedit.setText(
-            self.guiinfo.avgTempOuter)
-        self.heatingload_avg_temp_outer_label_2 = QtGui.QLabel(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_outer_label_2.setGeometry(
-            QtCore.QRect(285, 20, 10, 25))
-        self.heatingload_avg_temp_outer_label_2.setText(u"\u00b0C")
-        self.heatingload_avg_temp_inner_label_1 = QtGui.QLabel(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_inner_label_1.setGeometry(
-            QtCore.QRect(5, 55, 90, 25))
-        self.heatingload_avg_temp_inner_label_1.setText("Indoor Temp:")
-        self.heatingload_avg_temp_inner_lineedit = QtGui.QLineEdit(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_inner_lineedit.setGeometry(
-            QtCore.QRect(100, 55, 180, 25))
-        self.heatingload_avg_temp_inner_lineedit.setText(
-            self.guiinfo.innerTemp)
-        self.heatingload_avg_temp_inner_label_2 = QtGui.QLabel(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_inner_label_2.setGeometry(
-            QtCore.QRect(285, 55, 10, 25))
-        self.heatingload_avg_temp_inner_label_2.setText(u"\u00b0C")
-        self.heatingload_air_changerate_label = QtGui.QLabel(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_air_changerate_label.setGeometry(
-            QtCore.QRect(5, 90, 90, 25))
-        self.heatingload_air_changerate_label.setText("Airchange Rate:")
-        self.heatingload_air_changerate_combobox = QtGui.QComboBox(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_air_changerate_combobox.setGeometry(
-            QtCore.QRect(100, 90, 180, 25))
-        for airchange_rate in self.guiinfo.airchange_rate:
-            self.heatingload_air_changerate_combobox.addItem(airchange_rate)
-        self.heatingload_old_calculation_checkbox = QtGui.QCheckBox(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_old_calculation_checkbox.setGeometry(
-            QtCore.QRect(5, 125, 290, 20))
-        self.heatingload_old_calculation_checkbox.setText("Use old heatingload"
-                                                          " calculation")
+        
+        self.project_name_groupbox = QtGui.QGroupBox("Project")
+        self.project_name_groupbox.setGeometry(QtCore.QRect(10, 10, 315, 40))
+        self.project_name_groupbox.setMinimumSize(QtCore.QSize(315, 40))
+        self.project_name_groupbox.setMaximumSize(QtCore.QSize(315, 40))
+        self.project_name_label = QtGui.QLabel(self.project_name_groupbox)
+        self.project_name_label.setGeometry(QtCore.QRect(5, 10, 90, 25))
+        self.project_name_label.setText("Project Name:")
+        self.project_name_lineedit = QtGui.QLineEdit(self.project_name_groupbox)
+        self.project_name_lineedit.setGeometry(QtCore.QRect(100, 10, 180, 25))
+        self.project_name_lineedit.setText(str(self.project.name))
         
         self.simulation_groupbox = QtGui.QGroupBox("Simulation")
         self.simulation_groupbox.setGeometry(QtCore.QRect(380, 85, 315, 160))
@@ -3962,7 +4104,7 @@ class MainUI(QDialog):
         self.simulation_runtime_lineedit.setGeometry(
             QtCore.QRect(100, 20, 180, 25))
         self.simulation_runtime_lineedit.setText(
-            self.guiinfo.runtimeSimulation)
+            self.project.modelica_info.runtime_simulation)
         self.simulation_runtime_label_2 = QtGui.QLabel(
             self.simulation_groupbox)
         self.simulation_runtime_label_2.setGeometry(
@@ -3978,7 +4120,7 @@ class MainUI(QDialog):
         self.simulation_interval_output_lineedit.setGeometry(
             QtCore.QRect(100, 55, 180, 25))
         self.simulation_interval_output_lineedit.setText(
-            self.guiinfo.intervalOutput)
+            self.project.modelica_info.interval_output)
         self.simulation_interval_output_label_2 = QtGui.QLabel(
             self.simulation_groupbox)
         self.simulation_interval_output_label_2.setGeometry(
@@ -3991,80 +4133,31 @@ class MainUI(QDialog):
             self.simulation_groupbox)
         self.simulation_solver_combobox.setGeometry(
             QtCore.QRect(100, 90, 180, 25))
-        for solver in self.guiinfo.solver:
+        for solver in self.project.modelica_info.solver:
             self.simulation_solver_combobox.addItem(solver)
-        self.simulation_solver_combobox.setCurrentIndex(1)
+        self.simulation_solver_combobox.setCurrentIndex(
+            self.simulation_solver_combobox.findText(
+                self.project.modelica_info.current_solver))
         self.simulation_equidistant_output_checkbox = QtGui.QCheckBox(
             self.simulation_groupbox)
         self.simulation_equidistant_output_checkbox.setGeometry(
             QtCore.QRect(5, 125, 290, 20))
-        self.simulation_equidistant_output_checkbox.setChecked(True)
+        self.simulation_equidistant_output_checkbox.setChecked(
+            self.project.modelica_info.equidistant_output)
         self.simulation_equidistant_output_checkbox.setText(
             "Equidistant Output")
-        self.boundary_conditions_groupbox = QtGui.QGroupBox("Boundary"
-                                                            " Conditions")
-        self.boundary_conditions_groupbox.setGeometry(
-            QtCore.QRect(10, 400, 620, 125))
-        self.boundary_conditions_groupbox.setMinimumSize(
-            QtCore.QSize(620, 125))
-        self.boundary_conditions_groupbox.setMaximumSize(
-            QtCore.QSize(620, 125))
-        self.boundary_conditions_groupbox.setObjectName(
-            _fromUtf8("boundaryConditionsGroupBox"))
-        self.simulation_AHU_label = QtGui.QLabel(
-            self.boundary_conditions_groupbox)
-        self.simulation_AHU_label.setGeometry(QtCore.QRect(5, 20, 90, 25))
-        self.simulation_AHU_label.setText("AHU File:")
-        self.simulation_AHU_lineedit = QtGui.QLineEdit(
-            self.boundary_conditions_groupbox)
-        self.simulation_AHU_lineedit.setGeometry(
-            QtCore.QRect(105, 20, 420, 25))
-        self.simulation_AHU_lineedit.setText(self.guiinfo.ahuFile)
-        self.simulation_AHU_button = QtGui.QPushButton(
-            self.boundary_conditions_groupbox)
-        self.simulation_AHU_button.setGeometry(QtCore.QRect(535, 20, 80, 25))
-        self.simulation_AHU_button.setText("Browse")
-        self.simulation_internal_gains_label = QtGui.QLabel(
-            self.boundary_conditions_groupbox)
-        self.simulation_internal_gains_label.setGeometry(
-            QtCore.QRect(5, 55, 90, 25))
-        self.simulation_internal_gains_label.setText("Internal Gains File:")
-        self.simulation_internal_gains_lineedit = QtGui.QLineEdit(
-            self.boundary_conditions_groupbox)
-        self.simulation_internal_gains_lineedit.setGeometry(
-            QtCore.QRect(105, 55, 420, 25))
-        self.simulation_internal_gains_lineedit.setText(
-            self.guiinfo.internalGainsFile)
-        self.simulation_internal_gains_button = QtGui.QPushButton(
-            self.boundary_conditions_groupbox)
-        self.simulation_internal_gains_button.setGeometry(
-            QtCore.QRect(535, 55, 80, 25))
-        self.simulation_internal_gains_button.setText("Browse")
-        self.simulation_tset_label = QtGui.QLabel(
-            self.boundary_conditions_groupbox)
-        self.simulation_tset_label.setGeometry(QtCore.QRect(5, 90, 90, 25))
-        self.simulation_tset_label.setText("Set Temperature File:")
-        self.simulation_tset_lineedit = QtGui.QLineEdit(
-            self.boundary_conditions_groupbox)
-        self.simulation_tset_lineedit.setGeometry(
-            QtCore.QRect(105, 90, 420, 25))
-        self.simulation_tset_lineedit.setText(self.guiinfo.tsetFile)
-        self.simulation_tset_button = QtGui.QPushButton(
-            self.boundary_conditions_groupbox)
-        self.simulation_tset_button.setGeometry(QtCore.QRect(535, 90, 80, 25))
-        self.simulation_tset_button.setText("Browse")
         
         self.simulation_save_cancel_groupbox = QtGui.QGroupBox()
         self.simulation_save_cancel_groupbox.setGeometry(
-            QtCore.QRect(10, 530, 620, 35))
+            QtCore.QRect(10, 530, 315, 35))
         self.simulation_save_cancel_groupbox.setMinimumSize(
-            QtCore.QSize(620, 35))
+            QtCore.QSize(315, 35))
         self.simulation_save_cancel_groupbox.setMaximumSize(
-            QtCore.QSize(620, 35))
+            QtCore.QSize(315, 35))
         self.simulation_save_button = QtGui.QPushButton(
             self.simulation_save_cancel_groupbox)
         self.simulation_save_button.setText("Save")
-        self.simulation_save_button.setGeometry(QtCore.QRect(95, 5, 120, 25))
+        self.simulation_save_button.setGeometry(QtCore.QRect(5, 5, 90, 25))
         self.connect(self.simulation_save_button, SIGNAL("clicked()"),
                      self.save_changed_simulation_values)
         self.connect(self.simulation_save_button, SIGNAL(
@@ -4073,19 +4166,17 @@ class MainUI(QDialog):
         self.simulation_cancel_button = QtGui.QPushButton(
             self.simulation_save_cancel_groupbox)
         self.simulation_cancel_button.setText("Cancel")
-        self.simulation_cancel_button.setGeometry(QtCore.QRect(390, 5, 120, 25))
+        self.simulation_cancel_button.setGeometry(QtCore.QRect(100, 5, 80, 25))
         self.connect(self.simulation_cancel_button, SIGNAL(
                 "clicked()"), self.simulation_window_ui, QtCore.SLOT(
                 "close()"))
 
         self.simulation_window_ui_layout.addWidget(
-            self.simulation_groupbox, 1, 1)
+            self.project_name_groupbox, 1, 1)
         self.simulation_window_ui_layout.addWidget(
-            self.heatingload_calculation_groupbox, 1, 2)
+            self.simulation_groupbox, 2, 1)
         self.simulation_window_ui_layout.addWidget(
-            self.boundary_conditions_groupbox, 2, 1)
-        self.simulation_window_ui_layout.addWidget(
-            self.simulation_save_cancel_groupbox, 4, 1)
+            self.simulation_save_cancel_groupbox, 3, 1)
         self.simulation_window_ui.setWindowModality(Qt.ApplicationModal)
         self.simulation_window_ui.show()
 

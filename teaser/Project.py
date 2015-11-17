@@ -19,6 +19,7 @@ from teaser.Logic.BuildingObjects.TypeBuildings.Institute import Institute
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import Institute4
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import Institute8
 from teaser.Logic.BuildingObjects.TypeBuildings.Residential import Residential
+from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 
 
 class Project(object):
@@ -60,6 +61,7 @@ class Project(object):
 
         '''
         self.name = "Project"
+        self.modelica_info = ModelicaInfo()
 
         self.modelica_project = self.name
         self.weather_file_name = "TRY_5_Essen.txt"
@@ -305,6 +307,7 @@ class Project(object):
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_institute4(self,
                              name,
@@ -368,6 +371,7 @@ class Project(object):
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_institute8(self,
                              name,
@@ -431,6 +435,7 @@ class Project(object):
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_residential(self,
                               name,
