@@ -381,7 +381,7 @@ class Building(object):
                               profile_relative_humidity = None,
                               profile_status_AHU = None,
                               path = None):
-        '''creates matfile for AHU boundary conditions (building)
+        '''creates .mat file for AHU boundary conditions (building)
 
         This function creates a matfile (-v4) for building AHU boundary 
         conditions
