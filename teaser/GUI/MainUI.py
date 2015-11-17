@@ -1091,6 +1091,8 @@ class MainUI(QDialog):
         if self.current_type_building == "Residential":
             self.group_box_type_building_right_office.setVisible(False)
             self.group_box_type_building_right_residential.setVisible(True)
+            self.group_box_office_architecture.setVisible(False)
+            self.group_box_residential_architecture.setVisible(True)
             self.construct_type_building_button.clicked.disconnect()
             self.connect(self.construct_type_building_button, SIGNAL(
             "clicked()"), self.check_inputs_typebuilding_residential)
@@ -1102,6 +1104,8 @@ class MainUI(QDialog):
                 self.current_type_building == "Institute General":
             self.group_box_type_building_right_office.setVisible(True)
             self.group_box_type_building_right_residential.setVisible(False)
+            self.group_box_office_architecture.setVisible(True)
+            self.group_box_residential_architecture.setVisible(False)
             if self.current_type_building == "Office":
                 self.construct_type_building_button.clicked.disconnect()
                 self.connect(self.construct_type_building_button, SIGNAL(
@@ -3206,68 +3210,68 @@ class MainUI(QDialog):
         self.window_construct_building_name_label = QtGui.QLabel(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_name_label.setGeometry(
-            QtCore.QRect(10, 105, 90, 25))
+            QtCore.QRect(10, 65, 90, 25))
         self.window_construct_building_name_label.setText("Name:")
         self.window_construct_building_name_line_edit = QtGui.QLineEdit(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_name_line_edit.setGeometry(
-            QtCore.QRect(110, 105, 120, 25))
+            QtCore.QRect(110, 65, 120, 25))
         self.window_construct_building_street_label = QtGui.QLabel(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_street_label.setGeometry(
-            QtCore.QRect(10, 185, 90, 25))
+            QtCore.QRect(10, 105, 90, 25))
         self.window_construct_building_street_label.setText("Street/Nr.:")
         self.window_construct_building_street_line_edit = QtGui.QLineEdit(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_street_line_edit.setGeometry(
-            QtCore.QRect(110, 185, 120, 25))
+            QtCore.QRect(110, 105, 120, 25))
         self.window_construct_building_location_label = QtGui.QLabel(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_location_label.setGeometry(
-            QtCore.QRect(10, 265, 90, 25))
+            QtCore.QRect(10, 145, 90, 25))
         self.window_construct_building_location_label.setText("ZIP/City:")
         self.window_construct_building_location_line_edit = QtGui.QLineEdit(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_location_line_edit.setGeometry(
-            QtCore.QRect(110, 265, 120, 25))
+            QtCore.QRect(110, 145, 120, 25))
         self.window_construct_building_year_label = QtGui.QLabel(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_year_label.setGeometry(
-            QtCore.QRect(10, 345, 90, 25))
+            QtCore.QRect(10, 185, 90, 25))
         self.window_construct_building_year_label.setText("Construction Year:")
         self.window_construct_building_year_line_edit = QtGui.QLineEdit(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_year_line_edit.setGeometry(
-            QtCore.QRect(110, 345, 120, 25))
+            QtCore.QRect(110, 185, 120, 25))
         self.window_construct_building_number_of_floors_label = QtGui.QLabel(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_number_of_floors_label.setGeometry(
-            QtCore.QRect(10, 425, 90, 25))
+            QtCore.QRect(10, 225, 90, 25))
         self.window_construct_building_number_of_floors_label.setText(
             "Number of Floors:")
         self.window_construct_building_number_of_floors_line_edit = \
             QtGui.QLineEdit(self.group_box_type_building_sidecontrols)
         self.window_construct_building_number_of_floors_line_edit.setGeometry(
-            QtCore.QRect(110, 425, 120, 25))
+            QtCore.QRect(110, 225, 120, 25))
         self.window_construct_building_height_of_floors_label = QtGui.QLabel(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_height_of_floors_label.setGeometry(
-            QtCore.QRect(10, 505, 90, 25))
+            QtCore.QRect(10, 265, 90, 25))
         self.window_construct_building_height_of_floors_label.setText(
             "Height of Floors:")
         self.window_construct_building_height_of_floors_line_edit = \
             QtGui.QLineEdit(self.group_box_type_building_sidecontrols)
         self.window_construct_building_height_of_floors_line_edit.setGeometry(
-            QtCore.QRect(110, 505, 120, 25))
+            QtCore.QRect(110, 265, 120, 25))
         self.window_construct_building_area_label = QtGui.QLabel(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_area_label.setGeometry(
-            QtCore.QRect(10, 585, 90, 25))
+            QtCore.QRect(10, 305, 90, 25))
         self.window_construct_building_area_label.setText("Net leased Area:")
         self.window_construct_building_area_line_edit = QtGui.QLineEdit(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_area_line_edit.setGeometry(
-            QtCore.QRect(110, 585, 120, 25))
+            QtCore.QRect(110, 305, 120, 25))
 
         # Differentiates between the different types of buildings from combobox
         
@@ -3278,7 +3282,7 @@ class MainUI(QDialog):
         self.group_box_office_layout = QtGui.QGroupBox(u"Layout")
         self.group_box_office_window_area = QtGui.QGroupBox(u"Window Layout")
         self.group_box_office_architecture = QtGui.QGroupBox(
-            u"Architecture")
+            u"Construction Type")
 
         self.office_layout = QtGui.QGridLayout()
         self.office_layoutWindowArea = QtGui.QGridLayout()
@@ -3403,7 +3407,7 @@ class MainUI(QDialog):
         self.group_box_residential_roof = QtGui.QGroupBox(u"Roof")
         self.group_box_residential_basement = QtGui.QGroupBox(u"Basement")
         self.group_box_residential_architecture = QtGui.QGroupBox(
-            u"Architecture")
+            u"Construction Type")
 
         self.layout_residential_neighbour_buildings = QtGui.QGridLayout()
         self.layout_residential_layout = QtGui.QGridLayout()
@@ -3595,13 +3599,13 @@ class MainUI(QDialog):
             self.radio_button_residential_architecture_3, 3, 0)
 
         self.popup_layout_type_building.addWidget(
-            self.group_box_type_building_sidecontrols, 0, 0, 7, 3)
+            self.group_box_type_building_sidecontrols, 0, 0, 5, 3)
+        self.popup_layout_type_building.addWidget(
+            self.group_box_office_architecture, 5, 0, 2, 3)
         self.type_building_office_layout.addWidget(
             self.group_box_office_layout, 0, 0, 1, 1)
         self.type_building_office_layout.addWidget(
             self.group_box_office_window_area, 3, 0, 1, 1)
-        self.type_building_office_layout.addWidget(
-            self.group_box_office_architecture, 6, 0, 1, 1)
 
         self.type_building_residential_layout.addWidget(
             self.group_box_residential_neighbour_buildings, 0, 0, 1, 1)
@@ -3611,8 +3615,8 @@ class MainUI(QDialog):
             self.group_box_residential_roof, 2, 0, 1, 1)
         self.type_building_residential_layout.addWidget(
             self.group_box_residential_basement, 3, 0, 1, 1)
-        self.type_building_residential_layout.addWidget(
-            self.group_box_residential_architecture, 4, 0, 1, 1)
+        self.popup_layout_type_building.addWidget(
+            self.group_box_residential_architecture, 5, 0, 2, 3)
 
         self.popup_layout_type_building.addWidget(
                 self.group_box_type_building_right_office, 0, 3, 7, 1)
