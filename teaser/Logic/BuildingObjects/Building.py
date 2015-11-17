@@ -370,7 +370,7 @@ class Building(object):
 
         time_line = []
 
-        for i in range(int(duration_profile/time_step)+1):
+        for i in range(int(duration_profile/time_step)):
             time_line.append([i*time_step])
 
         return time_line
@@ -475,10 +475,7 @@ class Building(object):
         path : str
             optional path, when matfile is exported seperately
         
-        '''
-        if time_line is None:
-            time_line = self.create_timeline()
-                   
+        '''     
         if self.file_internal_gains is None:
             self.file_internal_gains = "\\InternalGains_Building.mat"
         else:
@@ -490,25 +487,25 @@ class Building(object):
             path = utilis.create_path(path) + self.file_internal_gains
 
         for zone_count in self.thermal_zones:
+            if time_line is None:
+                duration= len(zone_count.use_conditions.profile_persons) * \
+                            3600
+                time_line = self.create_timeline(duration_profile = duration)
+                
             ass_error_1 = "time line and input have to have the same length"
-            """
+            
             assert len(time_line) == len(zone_count.use_conditions.profile_persons), \
                                 (ass_error_1 + ",profile_persons")
             assert len(time_line) == len(zone_count.use_conditions.profile_machines), \
                                 (ass_error_1 + ",profile_machines")
             assert len(time_line) == len(zone_count.use_conditions.profile_lighting), \
                                 (ass_error_1 + ",profile_lighting")
-            """
+            
             for i, time in enumerate(time_line):
-                if i == 0:
-                    time.append(i)
-                    time.append(i)
-                    time.append(i)
-                else:
-                    
-                    time.append(zone_count.use_conditions.profile_persons[i-1])
-                    time.append(zone_count.use_conditions.profile_machines[i-1])
-                    time.append(zone_count.use_conditions.profile_lighting[i-1])
+
+                time.append(zone_count.use_conditions.profile_persons[i])
+                time.append(zone_count.use_conditions.profile_machines[i])
+                time.append(zone_count.use_conditions.profile_lighting[i])
 
         internal_boundary = np.array(time_line)
 
