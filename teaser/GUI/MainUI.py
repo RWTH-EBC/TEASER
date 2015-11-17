@@ -811,7 +811,7 @@ class MainUI(QDialog):
             "Click to create a new typebuilding.")
         self.new_type_building_label = QtGui.QLabel(self.ribbon_group_box)
         self.new_type_building_label.setGeometry(QtCore.QRect(10, 80, 70, 25))
-        self.new_type_building_label.setText("C" + "reate Exa- \nmple Building")
+        self.new_type_building_label.setText("C" + "reate Type- \nBuilding")
         self.new_empty_building_button = PictureButton(QtGui.QPixmap(
             utilis.get_full_path("GUI\\GUIImages\\NewEmptyBuilding.png")),
             self.ribbon_widget)
@@ -1089,7 +1089,6 @@ class MainUI(QDialog):
         cIndex = self.window_construct_building_combo_box.currentText()
         self.current_type_building = str(cIndex)
         if self.current_type_building == "Residential":
-            self.popup_window_type_building.setFixedWidth(620)
             self.group_box_type_building_right_office.setVisible(False)
             self.group_box_type_building_right_residential.setVisible(True)
             self.construct_type_building_button.clicked.disconnect()
@@ -1101,7 +1100,6 @@ class MainUI(QDialog):
         elif self.current_type_building == "Office" or self.current_type_building ==\
             "Institute 4" or self.current_type_building == "Institute 8" or\
                 self.current_type_building == "Institute General":
-            self.popup_window_type_building.setFixedWidth(520)
             self.group_box_type_building_right_office.setVisible(True)
             self.group_box_type_building_right_residential.setVisible(False)
             if self.current_type_building == "Office":
@@ -3196,7 +3194,7 @@ class MainUI(QDialog):
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_type_label.setGeometry(
             QtCore.QRect(10, 25, 90, 25))
-        self.window_construct_building_type_label.setText("Example Building:")
+        self.window_construct_building_type_label.setText("Type Building:")
         self.window_construct_building_combo_box = QtGui.QComboBox(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_combo_box.setGeometry(
@@ -3278,7 +3276,7 @@ class MainUI(QDialog):
                 self.type_building_office_layout)
 
         self.group_box_office_layout = QtGui.QGroupBox(u"Layout")
-        self.group_box_office_window_area = QtGui.QGroupBox(u"Window area")
+        self.group_box_office_window_area = QtGui.QGroupBox(u"Window Layout")
         self.group_box_office_architecture = QtGui.QGroupBox(
             u"Architecture")
 
@@ -3293,13 +3291,13 @@ class MainUI(QDialog):
             self.office_layout_architecture)
 
         self.radio_button_office_layout_1 = QtGui.QRadioButton(
-            u"Use basic values")
+            u"Use default values")
         self.radio_button_office_layout_2 = QtGui.QRadioButton(
-            u"elongated, 1 floor")
+            u"Elongated, 1 floor")
         self.radio_button_office_layout_3 = QtGui.QRadioButton(
-            u"elongated, 2 floors")
+            u"Elongated, 2 floors")
         self.radio_button_office_layout_4 = QtGui.QRadioButton(
-            u"compact")
+            u"Compact")
         self.radio_button_office_layout_1.setChecked(True)
 
         self.picture_layout_office_2 = QtGui.QLabel()
@@ -3307,15 +3305,15 @@ class MainUI(QDialog):
         self.picture_layout_office_4 = QtGui.QLabel()
         self.picture_layout_office_2.setPixmap(
             QtGui.QPixmap(utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\Zweibund.png")).scaled(
+                "GUI\\GUIImages\\OfficeBuildings\\elongated1floor.png")).scaled(
                     70, 70))
         self.picture_layout_office_3.setPixmap(
             QtGui.QPixmap(utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\Dreibund.png")).scaled(
+                "GUI\\GUIImages\\OfficeBuildings\\elongated2floors.png")).scaled(
                     70, 70))
         self.picture_layout_office_4.setPixmap(QtGui.QPixmap(
             utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\Kompakt.png")).scaled(
+                "GUI\\GUIImages\\OfficeBuildings\\compact.png")).scaled(
                     70, 70))
         self.office_layout.addWidget(
             self.radio_button_office_layout_1, 1, 0)
@@ -3333,13 +3331,13 @@ class MainUI(QDialog):
             self.picture_layout_office_4, 4, 1, Qt.AlignRight)
 
         self.radio_button_window_area_office_1 = QtGui.QRadioButton(
-            u"average window area")
+            u"Use default values")
         self.radio_button_window_area_office_2 = QtGui.QRadioButton(
-            u"Lochfassade")
+            u"Punctuated facade")
         self.radio_button_window_area_office_3 = QtGui.QRadioButton(
-            u"Bandfassade")
+            u"Banner facade")
         self.radio_button_window_area_office_4 = QtGui.QRadioButton(
-            u"Vollverglasung")
+            u"Full glazing")
         self.radio_button_window_area_office_1.setChecked(True)
 
         self.picture_window_area_office_2 = QtGui.QLabel()
@@ -3347,15 +3345,15 @@ class MainUI(QDialog):
         self.picture_window_area_office_4 = QtGui.QLabel()
         self.picture_window_area_office_2.setPixmap(QtGui.QPixmap(
             utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\Lochfassade.png"))
+                "GUI\\GUIImages\\OfficeBuildings\\punctuatedFacade.png"))
             .scaled(70, 70))
         self.picture_window_area_office_3.setPixmap(QtGui.QPixmap(
             utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\Bandfassade.png"))
+                "GUI\\GUIImages\\OfficeBuildings\\bannerFacade.png"))
             .scaled(70, 70))
         self.picture_window_area_office_4.setPixmap(QtGui.QPixmap(
             utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\Vollverglasung.png"))
+                "GUI\\GUIImages\\OfficeBuildings\\fullGlazing.png"))
             .scaled(70, 70))
         self.office_layoutWindowArea.addWidget(
             self.radio_button_window_area_office_1, 1, 0)
@@ -3373,11 +3371,11 @@ class MainUI(QDialog):
             self.picture_window_area_office_4, 4, 1, Qt.AlignRight)
 
         self.radio_button_architecture_office_1 = QtGui.QRadioButton(
-            u"Standartwert nutzen")
+            u"Use default values")
         self.radio_button_architecture_office_2 = QtGui.QRadioButton(
-            u"massiv")
+            u"Heavy")
         self.radio_button_architecture_office_3 = QtGui.QRadioButton(
-            u"leicht")
+            u"Light")
         self.radio_button_architecture_office_1.setChecked(True)
 
         self.office_layout_architecture.addWidget(
@@ -3425,25 +3423,25 @@ class MainUI(QDialog):
             self.layout_residential_architecture)
 
         self.radio_button_neighbour_1 = QtGui.QRadioButton(
-            u"none (freestanding)")
+            u"No neighbour")
         self.radio_button_neighbour_2 = QtGui.QRadioButton(
-            u"annex to one side")
+            u"One neighbour")
         self.radio_button_neighbour_3 = QtGui.QRadioButton(
-            u"annex to both sides")
+            u"Two neighbours")
         self.radio_button_neighbour_1.setChecked(True)
 
         self.picture_neighbour_building_residential_1 = QtGui.QLabel()
         self.picture_neighbour_building_residential_2 = QtGui.QLabel()
         self.picture_neighbour_building_residential_3 = QtGui.QLabel()
         self.picture_neighbour_building_residential_1.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                "freistehend.png")).scaled(29, 23))
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                "noNeighbour.png")).scaled(29, 23))
         self.picture_neighbour_building_residential_2.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                "einseitigangebaut.png")).scaled(46, 23))
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                "oneNeighbour.png")).scaled(46, 23))
         self.picture_neighbour_building_residential_3.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                "beidseitigangebaut.png")).scaled(56, 23))
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                "twoNeighbours.png")).scaled(56, 23))
         self.layout_residential_neighbour_buildings.addWidget(
             self.radio_button_neighbour_1, 1, 0)
         self.layout_residential_neighbour_buildings.addWidget(
@@ -3461,19 +3459,19 @@ class MainUI(QDialog):
             Qt.AlignRight)
 
         self.radio_button_residential_layout_1 = QtGui.QRadioButton(
-            u"kompakt")
+            u"Compact")
         self.radio_button_residential_layout_2 = QtGui.QRadioButton(
-            u"langgestreckt/ komplex")
+            u"Elongated/Complex")
         self.radio_button_residential_layout_1.setChecked(True)
 
         self.picture_layout_residential_1 = QtGui.QLabel()
         self.picture_layout_residential_2 = QtGui.QLabel()
         self.picture_layout_residential_1.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                 "kompakt.png")).scaled(28, 28))
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "compact.png")).scaled(28, 28))
         self.picture_layout_residential_2.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                 "laenglich.png")).scaled(28, 28))
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "elongatedComplex.png")).scaled(28, 28))
         self.layout_residential_layout.addWidget(
             self.radio_button_residential_layout_1, 1, 0)
         self.layout_residential_layout.addWidget(
@@ -3484,38 +3482,38 @@ class MainUI(QDialog):
             self.picture_layout_residential_2, 2, 1, Qt.AlignRight)
 
         self.radio_button_residential_roof_1 = QtGui.QRadioButton(
-            u"Flachdach")
+            u"Flat Roof")
         self.radio_button_residential_roof_2 = QtGui.QRadioButton(
-            u"unbeheiztes Dachgeschoss")
+            u"Non heated attic")
         self.radio_button_residential_roof_3 = QtGui.QRadioButton(
-            u"teilweise beheiztes Dachgeschoss")
+            u"Partly heated attic")
         self.radio_button_residential_roof_4 = QtGui.QRadioButton(
-            u"beheiztes Dachgeschoss")
+            u"Heated attic")
         self.radio_button_residential_roof_1.setChecked(True)
 
         self.h_line_roof = QtGui.QFrame()
         self.h_line_roof.setFrameShape(QtGui.QFrame.HLine)
         self.h_line_roof.setFrameShadow(QtGui.QFrame.Sunken)
         self.check_box_button_roof = QtGui.QCheckBox(
-            u"Dachgauben oder andere Dachaufbauten vorhanden")
+            u"Dormer or similar installations")
         self.picture_roof_residential_1 = QtGui.QLabel()
         self.picture_roof_residential_2 = QtGui.QLabel()
         self.picture_roof_residential_3 = QtGui.QLabel()
         self.picture_roof_residential_4 = QtGui.QLabel()
         self.picture_roof_residential_1.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                 "Flachdach.png")).scaled(32, 23))
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "flatRoof.png")).scaled(32, 23))
         self.picture_roof_residential_2.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                 "Satteldachunbeheizt.png")).
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "nonHeatedAttic.png")).
             scaled(34, 23))
         self.picture_roof_residential_3.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                 "Satteldachteilweisebeheizt.png")).
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "partyHeatedAttic.png")).
             scaled(34, 23))
         self.picture_roof_residential_4.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                 "Satteldachbeheizt.png")).scaled(34, 23))
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "heatedAttic.png")).scaled(34, 23))
         self.layout_residential_roof.addWidget(
             self.radio_button_residential_roof_1, 1, 0)
         self.layout_residential_roof.addWidget(
@@ -3538,13 +3536,13 @@ class MainUI(QDialog):
             self.check_box_button_roof, 6, 0, 1, 1)
 
         self.radio_button_residential_basement_1 = QtGui.QRadioButton(
-            u"nicht unterkellert")
+            u"No cellar")
         self.radio_button_residential_basement_2 = QtGui.QRadioButton(
-            u"unbeheizter Keller")
+            u"Non heated cellar")
         self.radio_button_residential_basement_3 = QtGui.QRadioButton(
-            u"teilweise unbeheizter Keller")
+            u"Partly heated cellar")
         self.radio_button_residential_basement_4 = QtGui.QRadioButton(
-            u"beheizter Keller")
+            u"Heated cellar")
         self.radio_button_residential_basement_1.setChecked(True)
 
         self.picture_residential_basement_1 = QtGui.QLabel()
@@ -3552,18 +3550,18 @@ class MainUI(QDialog):
         self.picture_residential_basement_3 = QtGui.QLabel()
         self.picture_residential_basement_4 = QtGui.QLabel()
         self.picture_residential_basement_1.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                 "keinKeller.png")).scaled(32, 28))
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "noCellar.png")).scaled(32, 28))
         self.picture_residential_basement_2.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                 "Kellerunbeheizt.png")).scaled(32, 28))
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "nonHeatedCellar.png")).scaled(32, 28))
         self.picture_residential_basement_3.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                 "Kellerteilweisebeheizt.png")).
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "partlyHeatedCellar.png")).
             scaled(32, 28))
         self.picture_residential_basement_4.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Wohngebaeude\\"
-                                 "Kellerbeheizt.png")).scaled(32, 28))
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "heatedCellar.png")).scaled(32, 28))
         self.layout_residential_basement.addWidget(
             self.radio_button_residential_basement_1, 1, 0)
         self.layout_residential_basement.addWidget(
@@ -3582,11 +3580,11 @@ class MainUI(QDialog):
             self.picture_residential_basement_4, 4, 1, Qt.AlignRight)
 
         self.radio_button_residential_architecture_1 = QtGui.QRadioButton(
-            u"Standardwert nutzen")
+            u"Use default values")
         self.radio_button_residential_architecture_2 = QtGui.QRadioButton(
-            u"massiv")
+            u"Heavy")
         self.radio_button_residential_architecture_3 = QtGui.QRadioButton(
-            u"leicht")
+            u"Light")
         self.radio_button_residential_architecture_1.setChecked(True)
 
         self.layout_residential_architecture.addWidget(
