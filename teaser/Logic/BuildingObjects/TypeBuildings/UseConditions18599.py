@@ -169,15 +169,6 @@ class UseConditions18599(UseConditions):
     with_ahu : boolean
         with ahu - withAHU
         
-    profile_relative_humidity : [float]
-        timeline of relative humidity requirements for AHU simulation
-        
-    profile_status_AHU : [Boolean]
-        timeline of status of the AHU simulation (on/off)
-        
-    profile_temeprature_AHU : [float]
-        timeline of temperatures requirements for AHU simulation
-        
     '''
 
     def __init__(self, parent=None):
@@ -232,9 +223,6 @@ class UseConditions18599(UseConditions):
         self.min_ahu = 0.0
         self.max_ahu = 0.5
         self.with_ahu = False
-        self.profile_relative_humidity = []
-        self.profile_status_AHU = []
-        self.profile_temperature_AHU = []
 
     def load_use_conditions(self, zone_usage):
         '''load typical use conditions
