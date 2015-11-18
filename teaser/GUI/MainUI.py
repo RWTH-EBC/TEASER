@@ -3194,7 +3194,7 @@ class MainUI(QDialog):
         ax_p.plot(data_persons, '*-')
         ax_m.plot(data_machines, '*-')
         ax_p.set_ylim([0,1])
-        ax_m.set_ylim([0,1])
+        #ax_m.set_ylim([0,1])
         self.canvas_persons.draw()
         self.canvas_machines.draw()
 
