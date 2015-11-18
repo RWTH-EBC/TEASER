@@ -298,7 +298,7 @@ class UseConditions18599(UseConditions):
                 self.machines = usage.InternalGains.machines
                 self.profile_machines = usage.InternalGains.profile_machines
                 self.lighting_power = usage.InternalGains.lighting_power
-                self.profile_lighting = usage.InternalGains.profile_machines
+                self.profile_lighting = usage.InternalGains.profile_lighting
                 self.min_ahu = usage.AHU.min_ahu
                 self.max_ahu = usage.AHU.max_ahu
                 self.with_ahu = usage.AHU.with_ahu
@@ -403,7 +403,8 @@ class UseConditions18599(UseConditions):
             usage_pyxb.InternalGains.machines = self.machines
             usage_pyxb.InternalGains.profile_machines = self.profile_machines
             usage_pyxb.InternalGains.lighting_power = self.lighting_power
-
+            usage_pyxb.InternalGains.profile_lighting = self.profile_lighting
+            
             usage_pyxb.AHU.min_ahu = self.min_ahu
             usage_pyxb.AHU.max_ahu = self.max_ahu
             usage_pyxb.AHU.with_ahu = self.with_ahu
