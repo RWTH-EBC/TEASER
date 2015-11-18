@@ -1865,37 +1865,37 @@ class MainUI(QDialog):
                 self.type_building_ind_att['constructionType'] = "light"
         if text == "Residential":
             if self.radio_button_residential_layout_1.isChecked():
-                self.type_building_ind_att['layoutArea'] = 1
+                self.type_building_ind_att['layoutArea'] = 0
             if self.radio_button_residential_layout_2.isChecked():
-                self.type_building_ind_att['layoutArea'] = 2
+                self.type_building_ind_att['layoutArea'] = 1
             if self.radio_button_neighbour_1.isChecked():
-                self.type_building_ind_att['neighbour_building'] = 1
+                self.type_building_ind_att['neighbour_building'] = 0
             if self.radio_button_neighbour_2.isChecked():
-                self.type_building_ind_att['neighbour_building'] = 2
+                self.type_building_ind_att['neighbour_building'] = 1
             if self.radio_button_neighbour_3.isChecked():
-                self.type_building_ind_att['neighbour_building'] = 3
+                self.type_building_ind_att['neighbour_building'] = 2
             if self.radio_button_residential_roof_1.isChecked():
-                self.type_building_ind_att['layout_attic'] = 1
+                self.type_building_ind_att['layout_attic'] = 0
             if self.radio_button_residential_roof_2.isChecked():
-                self.type_building_ind_att['layout_attic'] = 2
+                self.type_building_ind_att['layout_attic'] = 1
             if self.radio_button_residential_roof_3.isChecked():
-                self.type_building_ind_att['layout_attic'] = 3
+                self.type_building_ind_att['layout_attic'] = 2
             if self.radio_button_residential_roof_4.isChecked():
-                self.type_building_ind_att['layout_attic'] = 4
+                self.type_building_ind_att['layout_attic'] = 3
             if self.radio_button_residential_basement_1.isChecked():
-                self.type_building_ind_att['layout_cellar'] = 1
+                self.type_building_ind_att['layout_cellar'] = 0
             if self.radio_button_residential_basement_2.isChecked():
-                self.type_building_ind_att['layout_cellar'] = 2
+                self.type_building_ind_att['layout_cellar'] = 1
             if self.radio_button_residential_basement_3.isChecked():
-                self.type_building_ind_att['layout_cellar'] = 3
+                self.type_building_ind_att['layout_cellar'] = 2
             if self.radio_button_residential_basement_4.isChecked():
-                self.type_building_ind_att['layout_cellar'] = 4
+                self.type_building_ind_att['layout_cellar'] = 3
             if self.check_box_button_roof.isChecked():
                 self.type_building_ind_att['dormer'] = 1
             else:
                 self.type_building_ind_att['dormer'] = 0
             if self.radio_button_residential_architecture_1.isChecked():
-                self.type_building_ind_att['constructionType'] = "light"
+                self.type_building_ind_att['constructionType'] = "heavy"
             if self.radio_button_residential_architecture_2.isChecked():
                 self.type_building_ind_att['constructionType'] = "heavy"
             if self.radio_button_residential_architecture_3.isChecked():
