@@ -2133,9 +2133,9 @@ class MainUI(QDialog):
         self.element_model.clear()
         for element in self.current_zone.inner_walls:
             item = TrackableItem(
-                "Name:\t".expandtabs(8) + str(element.name) + 
-                "\nType:\t".expandtabs(11) + 
-                "Inner Wall \n Area:\t".expandtabs(11) + 
+                "Name:\t".expandtabs(8) + str(element.name) +
+                "\nType:\t".expandtabs(11) +
+                "Inner Wall \n Area:\t".expandtabs(11) +
                 str(element.area), element.internal_id)
             item.setAccessibleText(str(self.current_zone.internal_id))
             self.element_model.appendRow(item)
@@ -2143,12 +2143,12 @@ class MainUI(QDialog):
             if type(element).__name__ == \
                     "GroundFloor":
                 item = TrackableItem(
-                    "Name:\t".expandtabs(8) + 
-                    str(element.name) + 
-                    "\nType:\t".expandtabs(11) + 
-                    "Ground Floor \n Area:\t".expandtabs(11) + 
-                    str(element.area) + 
-                    "\n Orientation:\t".expandtabs(11) + 
+                    "Name:\t".expandtabs(8) +
+                    str(element.name) +
+                    "\nType:\t".expandtabs(11) +
+                    "Ground Floor \n Area:\t".expandtabs(11) +
+                    str(element.area) +
+                    "\n Orientation:\t".expandtabs(11) +
                     str(element.orientation),
                     element.internal_id)
                 item.setAccessibleText(str(element.internal_id))
