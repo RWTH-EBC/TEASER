@@ -145,6 +145,7 @@ class Controller():
                                 "construction, number of floors, height of "
                                 "floors or net leased area are empty or do "
                                 "not contain valid values")
+        int_id = 0
 
         if typeOfBuilding == "Office":
             building = parent.type_bldg_office(
@@ -156,9 +157,60 @@ class Controller():
             
             building.street_name = street
             building.city = location
-            id = building.internal_id
+            int_id = building.internal_id
+        
+        if typeOfBuilding == "Insitute 4":
+            building = parent.type_bldg_institute4(
+                name, int(yearOfConstruction), int(numberOfFloors),
+                float(heightOfFloors), float(netLeasedArea),
+                type_building_attributes['layoutArea'],
+                type_building_attributes['layoutWindowArea'],
+                type_building_attributes['constructionType'])
+            
+            building.street_name = street
+            building.city = location
+            int_id = building.internal_id
+            
+        if typeOfBuilding == "Institute 8":
+            building = parent.type_bldg_institute8(
+                name, int(yearOfConstruction), int(numberOfFloors),
+                float(heightOfFloors), float(netLeasedArea),
+                type_building_attributes['layoutArea'],
+                type_building_attributes['layoutWindowArea'],
+                type_building_attributes['constructionType'])
+            
+            building.street_name = street
+            building.city = location
+            int_id = building.internal_id
+            
+        if typeOfBuilding == "Institute General":
+            building = parent.type_bldg_institute(
+                name, int(yearOfConstruction), int(numberOfFloors),
+                float(heightOfFloors), float(netLeasedArea),
+                type_building_attributes['layoutArea'],
+                type_building_attributes['layoutWindowArea'],
+                type_building_attributes['constructionType'])
+            
+            building.street_name = street
+            building.city = location
+            int_id = building.internal_id
+            
+        if typeOfBuilding == "Residential":
+            building = parent.type_bldg_residential(
+                name, int(yearOfConstruction), int(numberOfFloors),
+                float(heightOfFloors), float(netLeasedArea),
+                type_building_attributes['layoutArea'],
+                type_building_attributes['neighbour_building'],
+                type_building_attributes['layout_attic'],
+                type_building_attributes['layout_cellar'],
+                type_building_attributes['dormer'],
+                type_building_attributes['constructionType'])
+            
+            building.street_name = street
+            building.city = location
+            int_id = building.internal_id
 
-        return (parent, id)
+        return (parent, int_id)
 
     @classmethod
     def clickMatrixButton(self):
@@ -197,3 +249,12 @@ class Controller():
     @classmethod
     def clickConstructionYearCatagoryButton(self):
         i = 0
+        
+    @classmethod
+    def switch_zone_type(self, zone_type, project, zone_id):
+        for building in project.list_of_buildings:
+            for zone in building.thermal_zones:
+                if zone.internal_id == zone_id:
+                    zone.use_conditions.load_use_conditions(zone_type)
+                    break
+        return project
