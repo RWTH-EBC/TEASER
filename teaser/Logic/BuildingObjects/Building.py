@@ -117,7 +117,8 @@ class Building(object):
         self.file_set_t = None
         self.file_weather = None
 
-        self.profile_relative_humidity = []
+        self.profile_min_relative_humidity = []
+        self.profile_max_relative_humidity = []
         self.profile_status_AHU = []
         self.profile_temperature_AHU = []
 
@@ -383,7 +384,8 @@ class Building(object):
     def modelica_AHU_boundary(self,
                               time_line = None,
                               profile_temperature_AHU = None,
-                              profile_relative_humidity = None,
+                              profile_min_relative_humidity = None,
+                              profile_max_relative_humidity = None,
                               profile_status_AHU = None,
                               path = None):
         '''creates .mat file for AHU boundary conditions (building)
@@ -392,9 +394,10 @@ class Building(object):
         conditions
         
         1. Column : time step
-        2. Column : AHU profile temperature
-        3. Column : AHU humidity requirements
-        4. Columb : AHU status (On/Off)
+        2. Column : desired AHU profile temperature
+        3. Column : Desired minimal relative humidity
+        4. Column : desired maximal relative humidity 
+        5. Columb : AHU status (On/Off)
 
         Parameters
         ----------
@@ -402,7 +405,9 @@ class Building(object):
             list of time steps 
         profile_temperature_AHU : [float]
             timeline of temperatures requirements for AHU simulation
-        profile_relative_humidity : [float]
+        profile_min_relative_humidity : [float]
+            timeline of relative humidity requirements for AHU simulation
+        profile_max_relative_humidity : [float]
             timeline of relative humidity requirements for AHU simulation
         profile_status_AHU : [int]
             timeline of status of the AHU simulation (on/off)
@@ -420,25 +425,30 @@ class Building(object):
             time_line = self.create_timeline()
         if profile_temperature_AHU is None:
             profile_temperature_AHU = self.profile_temperature_AHU
-        if profile_relative_humidity is None:
-            profile_relative_humidity = self.profile_relative_humidity
+        if profile_min_relative_humidity is None:
+            profile_min_relative_humidity = self.profile_min_relative_humidity
+        if profile_max_relative_humidity is None:
+            profile_max_relative_humidity = self.profile_max_relative_humidity
         if profile_status_AHU is None:
             profile_status_AHU = self.profile_status_AHU
             
         ass_error_1 = "time line and input have to have the same length"
         
-        assert len(time_line) == len(profile_temperature_AHU), (ass_error_1 + 
-                                                ",profile_temperature_AHU")
-        assert len(time_line) == len(profile_relative_humidity), (ass_error_1 + 
-                                                ",profile_relative_humidity")
-        assert len(time_line) == len(profile_status_AHU), (ass_error_1 + 
-                                                ",profile_status_AHU")
+        assert len(time_line) == len(profile_temperature_AHU), \
+                            (ass_error_1 + ",profile_temperature_AHU")
+        assert len(time_line) == len(profile_min_relative_humidity), \
+                            (ass_error_1 + ",profile_min_relative_humidity")
+        assert len(time_line) == len(profile_max_relative_humidity), \
+                            (ass_error_1 + ",profile_max_relative_humidity")
+        assert len(time_line) == len(profile_status_AHU), \
+                            (ass_error_1 + ",profile_status_AHU")
         
         
         for i, time in enumerate(time_line):
 
             time.append(profile_temperature_AHU[i])
-            time.append(profile_relative_humidity[i])
+            time.append(profile_min_relative_humidity[i])
+            time.append(profile_max_relative_humidity[i])
             time.append(profile_status_AHU[i])
 
         ahu_boundary = np.array(time_line)
@@ -491,11 +501,6 @@ class Building(object):
         else:
             pass
 
-        if path is None:
-            path = utilis.get_default_path() + self.file_internal_gains
-        else:
-            path = utilis.create_path(path) + self.file_internal_gains
-
         for zone_count in self.thermal_zones:
             if time_line is None:
                 duration= len(zone_count.use_conditions.profile_persons) * \
@@ -521,6 +526,11 @@ class Building(object):
                 time.append(zone_count.use_conditions.profile_lighting[i])
 
         internal_boundary = np.array(time_line)
+
+        if path is None:
+            path = utilis.get_default_path() + self.file_internal_gains
+        else:
+            path = utilis.create_path(path) + self.file_internal_gains
 
         scipy.io.savemat(path,
                          mdict={'Internals': internal_boundary},
