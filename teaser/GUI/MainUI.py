@@ -3059,6 +3059,34 @@ class MainUI(QDialog):
         self.envelopes_value_window.setLayout(
                                     self.envelopes_value_window_layout)
 
+        self.groupbox_save_cancel_buttons = QtGui.QGroupBox()
+        self.save_cancel_layout = QtGui.QGridLayout()
+        self.groupbox_save_cancel_buttons.setLayout(self.save_cancel_layout)
+
+        self.envelope_element_save_button = QtGui.QPushButton()
+        self.envelope_element_save_button.setText("Save")
+
+        self.envelope_element_cancel_button = QtGui.QPushButton()
+        self.envelope_element_cancel_button.setText("cancel")
+
+        self.envelope_element_set_all_construction_button = QtGui.QPushButton()
+        self.envelope_element_set_all_construction_button.setText(
+                                                        "set all construction")
+        # self.connect(self.envelope_element_save_button, SIGNAL(
+        #   "clicked()"), self.saveChangedZoneValues)
+        self.connect(self.envelope_element_save_button, SIGNAL(
+           "clicked()"), self.envelopes_value_window, QtCore.SLOT("close()"))
+
+        self.connect(self.envelope_element_cancel_button, SIGNAL(
+            "clicked()"), self.envelopes_value_window, QtCore.SLOT("close()"))
+
+        self.save_cancel_layout.addWidget(
+                    self.envelope_element_save_button, 0, 0)
+        self.save_cancel_layout.addWidget(
+                    self.envelope_element_set_all_construction_button, 0, 1)
+        self.save_cancel_layout.addWidget(
+                    self.envelope_element_cancel_button, 0, 2)
+
         self.general_envelope_values_groupbox = QtGui.QGroupBox(
                                                  u"General Envelope Values")
         self.general_envelope_values_groupbox.setGeometry(
@@ -3125,6 +3153,8 @@ class MainUI(QDialog):
         self.envelope_element_list_view.setItemDelegate(self.lVZF)
         self.envelopes_value_window_layout.addWidget(
                                 self.general_envelope_values_groupbox, 0, 0)
+        self.envelopes_value_window_layout.addWidget(
+                                self.groupbox_save_cancel_buttons, 1, 0)
         self.envelopes_value_window.setWindowModality(Qt.ApplicationModal)
         self.envelopes_value_window.show()
 
