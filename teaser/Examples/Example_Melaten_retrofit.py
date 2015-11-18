@@ -48,9 +48,11 @@ def main():
     
     prj = create_reference_project(info_list)
     print(os.path.join(output_path, 'Reference'))
-    prj.export_record("AixLibMultizone", os.path.join(output_path, 'Reference')) 
+    prj.export_record("AixLibMultizoneEquipped", os.path.join(output_path,
+      'Reference')) 
     prj.retrofit_all_buildings(2015)
-    prj.export_record("AixLibMultizone", os.path.join(output_path, 'Retrofit'))      
+    prj.export_record("AixLibMultizoneEquipped", os.path.join(output_path,
+      'Retrofit'))
 
     
     
