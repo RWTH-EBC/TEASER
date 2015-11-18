@@ -925,7 +925,7 @@ class MainUI(QDialog):
         # if self.slide_mode_radiobutton.isChecked():
         #    self.transform_ctbui()
         # elif self.window_mode_radiobutton.isChecked():
-        self.generate_type_building_ui("Office")
+        self.generate_type_building_ui("Type Building")
 
     def save_changed_layer_values(self):
         for zone in self.current_building.thermal_zones:
@@ -1869,11 +1869,13 @@ class MainUI(QDialog):
             if self.radio_button_residential_layout_2.isChecked():
                 self.type_building_ind_att['layoutArea'] = 2
             if self.radio_button_neighbour_1.isChecked():
-                self.type_building_ind_att['neighbour_building'] = 1
+                self.type_building_ind_att['neighbour_building'] = 0
             if self.radio_button_neighbour_2.isChecked():
-                self.type_building_ind_att['neighbour_building'] = 2
+                self.type_building_ind_att['neighbour_building'] = 0
             if self.radio_button_neighbour_3.isChecked():
-                self.type_building_ind_att['neighbour_building'] = 3
+                self.type_building_ind_att['neighbour_building'] = 1
+            if self.radio_button_neighbour_3.isChecked():
+                self.type_building_ind_att['neighbour_building'] = 2
             if self.radio_button_residential_roof_1.isChecked():
                 self.type_building_ind_att['layout_attic'] = 1
             if self.radio_button_residential_roof_2.isChecked():
@@ -2394,7 +2396,7 @@ class MainUI(QDialog):
         if key == QtCore.Qt.Key_C and\
                 QtGui.QApplication.keyboardModifiers() == \
                 QtCore.Qt.ControlModifier:
-            self.generate_type_building_ui("Office")
+            self.generate_type_building_ui("Type Building")
         if key == QtCore.Qt.Key_E and\
                 QtGui.QApplication.keyboardModifiers() == \
                 QtCore.Qt.ControlModifier:
@@ -3504,25 +3506,27 @@ class MainUI(QDialog):
             self.layout_residential_basement)
         self.group_box_residential_architecture.setLayout(
             self.layout_residential_architecture)
-
+        
         self.radio_button_neighbour_1 = QtGui.QRadioButton(
-            u"No neighbour")
+            u"Use default")
         self.radio_button_neighbour_2 = QtGui.QRadioButton(
-            u"One neighbour")
+            u"No neighbour")
         self.radio_button_neighbour_3 = QtGui.QRadioButton(
+            u"One neighbour")
+        self.radio_button_neighbour_4 = QtGui.QRadioButton(
             u"Two neighbours")
         self.radio_button_neighbour_1.setChecked(True)
 
-        self.picture_neighbour_building_residential_1 = QtGui.QLabel()
         self.picture_neighbour_building_residential_2 = QtGui.QLabel()
         self.picture_neighbour_building_residential_3 = QtGui.QLabel()
-        self.picture_neighbour_building_residential_1.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                "noNeighbour.png")).scaled(29, 23))
+        self.picture_neighbour_building_residential_4 = QtGui.QLabel()
         self.picture_neighbour_building_residential_2.setPixmap(QPixmap(
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                "oneNeighbour.png")).scaled(46, 23))
+                "noNeighbour.png")).scaled(29, 23))
         self.picture_neighbour_building_residential_3.setPixmap(QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                "oneNeighbour.png")).scaled(46, 23))
+        self.picture_neighbour_building_residential_4.setPixmap(QPixmap(
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                 "twoNeighbours.png")).scaled(56, 23))
         self.layout_residential_neighbour_buildings.addWidget(
@@ -3532,13 +3536,15 @@ class MainUI(QDialog):
         self.layout_residential_neighbour_buildings.addWidget(
             self.radio_button_neighbour_3, 3, 0)
         self.layout_residential_neighbour_buildings.addWidget(
-            self.picture_neighbour_building_residential_1, 1, 1,
-            Qt.AlignRight)
+            self.radio_button_neighbour_4, 4, 0)
         self.layout_residential_neighbour_buildings.addWidget(
             self.picture_neighbour_building_residential_2, 2, 1,
             Qt.AlignRight)
         self.layout_residential_neighbour_buildings.addWidget(
             self.picture_neighbour_building_residential_3, 3, 1,
+            Qt.AlignRight)
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.picture_neighbour_building_residential_4, 4, 1,
             Qt.AlignRight)
 
         self.radio_button_residential_layout_1 = QtGui.QRadioButton(
