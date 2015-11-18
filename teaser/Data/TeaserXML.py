@@ -40,8 +40,10 @@ def save_teaser_xml(path, project):
     project: Project()
         Teaser instance of Project()
     '''
-
-    new_path = path + ".teaserXML"
+    if path.endswith("teaserXML"):
+        new_path = path
+    else:
+        new_path = path + ".teaserXML"
     out_file = open(new_path, 'w')
 
     teaser_out = pb.Project()
