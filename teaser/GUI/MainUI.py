@@ -1842,23 +1842,23 @@ class MainUI(QDialog):
         if text == "Office" or text == "Institute 4" or text ==\
                 "Institute 8" or text == "Institute General":
             if self.radio_button_office_layout_1.isChecked():
-                self.type_building_ind_att['layoutArea'] = 1
+                self.type_building_ind_att['layoutArea'] = 0
             if self.radio_button_office_layout_2.isChecked():
-                self.type_building_ind_att['layoutArea'] = 2
+                self.type_building_ind_att['layoutArea'] = 1
             if self.radio_button_office_layout_3.isChecked():
-                self.type_building_ind_att['layoutArea'] = 3
+                self.type_building_ind_att['layoutArea'] = 2
             if self.radio_button_office_layout_4.isChecked():
-                self.type_building_ind_att['layoutArea'] = 4
+                self.type_building_ind_att['layoutArea'] = 3
             if self.radio_button_window_area_office_1.isChecked():
-                self.type_building_ind_att['layoutWindowArea'] = 1
+                self.type_building_ind_att['layoutWindowArea'] = 0
             if self.radio_button_window_area_office_2.isChecked():
-                self.type_building_ind_att['layoutWindowArea'] = 2
+                self.type_building_ind_att['layoutWindowArea'] = 1
             if self.radio_button_window_area_office_3.isChecked():
-                self.type_building_ind_att['layoutWindowArea'] = 3
+                self.type_building_ind_att['layoutWindowArea'] = 2
             if self.radio_button_window_area_office_4.isChecked():
-                self.type_building_ind_att['layoutWindowArea'] = 4
+                self.type_building_ind_att['layoutWindowArea'] = 3
             if self.radio_button_architecture_office_1.isChecked():
-                self.type_building_ind_att['constructionType'] = "light"
+                self.type_building_ind_att['constructionType'] = "heavy"
             if self.radio_button_architecture_office_2.isChecked():
                 self.type_building_ind_att['constructionType'] = "heavy"
             if self.radio_button_architecture_office_3.isChecked():
