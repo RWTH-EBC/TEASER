@@ -348,7 +348,13 @@ class Building(object):
         This function creates a list with a equidistant timeline given the
         duration of the profile in seconds (default one day, 86400 s) and the
         time_step in seconds (default one hour, 3600 s). Needed for boundary
-        input of the building.
+        input of the building for Modelica simulation
+        
+        Note
+        ----------
+        As Python starts from counting the range from zero, but Modelica needs
+        0 as start value and additional 24 entries. We add one interation 
+        step in the time line.
 
         Parameters
         ----------
@@ -370,9 +376,8 @@ class Building(object):
 
         time_line = []
 
-        for i in range(int(duration_profile/time_step)):
+        for i in range(int(duration_profile/time_step)+1):
             time_line.append([i*time_step])
-
         return time_line
     
     def modelica_AHU_boundary(self,
@@ -467,7 +472,12 @@ class Building(object):
         2,5,8,...  Column : profile_persons
         3,6,9,...  Column : profile_machines
         4,7,10,... Column : profile_lighting
-
+        
+        Note
+        ----------
+        When time line is created, we need to add a 0 to first element of
+        all boundaries. This is due to to expected format in Modelica.
+        
         Parameters
         ----------
         time_line :[[int]]
@@ -491,9 +501,12 @@ class Building(object):
                 duration= len(zone_count.use_conditions.profile_persons) * \
                             3600
                 time_line = self.create_timeline(duration_profile = duration)
+                zone_count.use_conditions.profile_persons.insert(0,0)
+                zone_count.use_conditions.profile_machines.insert(0,0)
+                zone_count.use_conditions.profile_lighting.insert(0,0)
                 
             ass_error_1 = "time line and input have to have the same length"
-            
+
             assert len(time_line) == len(zone_count.use_conditions.profile_persons), \
                                 (ass_error_1 + ",profile_persons")
             assert len(time_line) == len(zone_count.use_conditions.profile_machines), \
