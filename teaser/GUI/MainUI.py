@@ -5,16 +5,18 @@ from PyQt4 import QtCore, QtGui
 from PyQt4.Qt import QDialog, QStandardItemModel
 from PyQt4.Qt import Qt
 from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap
+from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap, QTabBar
 import teaser.Logic.Utilis as utilis
 from teaser.GUI.GUIHelperClasses.PictureButton import PictureButton
 from teaser.Project import Project
 from teaser.Logic.Controller.Controller import Controller
+from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 from teaser.GUI.GUIHelperClasses.TrackableItem import TrackableItem
 from teaser.GUI.GUIHelperClasses.ListViewZonesFiller import ListViewZonesFiller
 from teaser.GUI.GUIHelperClasses.GUIInfo import GUIInfo
 import sys
 import os
+from numpy.distutils.pathccompiler import PathScaleCCompiler
 
 
 try:
@@ -70,6 +72,7 @@ class MainUI(QDialog):
         self.layer_model = QStandardItemModel()
         self.element_layer_model = QStandardItemModel()
         self.project = Project()
+        self.project.modelica_info = ModelicaInfo()
         self.guiinfo = GUIInfo()
         self.lVZF = ListViewZonesFiller()
         self.is_empty_building_button = False
@@ -888,6 +891,16 @@ class MainUI(QDialog):
         self.open_export_label = QtGui.QLabel(self.ribbon_group_box)
         self.open_export_label.setGeometry(QtCore.QRect(685, 80, 70, 25))
         self.open_export_label.setText("Open Ex-\n port Tab")
+        self.save_project_button = PictureButton(QtGui.QPixmap(
+            utilis.get_full_path("GUI\\GUIImages\\Keyschedule_rc4.png")),
+            self.ribbon_widget)
+        self.save_project_button.setGeometry(QtCore.QRect(765, 5, 70, 70))
+        self.save_project_button.clicked.connect(
+            self.click_save_current_project)
+        self.save_project_button.setToolTip("Saves the current project.")
+        self.save_project_label = QtGui.QLabel(self.ribbon_group_box)
+        self.save_project_label.setGeometry(QtCore.QRect(765, 80, 70, 25))
+        self.save_project_label.setText("Save Pro-\n ject Tab")
 
         self.side_animation = QtCore.QPropertyAnimation(
             self.side_bar_widget, "geometry")
@@ -980,7 +993,17 @@ class MainUI(QDialog):
                                 break
 
     def save_changed_simulation_values(self):
-        todo=0
+        self.project.name = self.project_name_lineedit.text()
+        self.project.modelica_info.runtime_simulation =\
+            self.simulation_runtime_lineedit.text()
+        self.project.modelica_info.interval_output =\
+            self.simulation_interval_output_lineedit.text()
+        self.project.modelica_info.current_solver =\
+            self.simulation_solver_combobox.currentText()
+        if self.simulation_equidistant_output_checkbox.isChecked():
+            self.project.modelica_info.equidistant_output = True
+        else:
+            self.project.modelica_info.equidistant_output = False
 
     def save_changed_element_values(self):
         for zone in self.current_building.thermal_zones:
@@ -1524,6 +1547,20 @@ class MainUI(QDialog):
                         str(self.current_building.
                             get_window_area(orientation)))
                     self.outer_elements_model.appendRow(item2)
+                    
+    def click_save_current_project(self):
+        path = QtGui.QFileDialog.getSaveFileName(
+            caption='Choose Filepath',
+            directory=utilis.get_default_path()+"\\"+self.project.name,
+            filter="Teaser File (*.teaserXML);; GML (*.gml)")
+        last_name = path.split('/')
+        length = len(last_name)
+        last_part = last_name[length-1]
+        if last_part.endswith("teaserXML"):
+            self.project.name = last_part[:-10]
+        elif last_part.endswith("gml"):
+            self.project.name = last_part[:-4]
+        Controller.click_save_button(self.project, path)
 
     def click_export_button(self):
         # path in GUI, which is need for the output
@@ -1563,7 +1600,7 @@ class MainUI(QDialog):
         path = "InputData\\RecordTemplate\\"
         pathTemplate = utilis.get_default_path()
         leng = len(pathTemplate)
-        fullPath = pathTemplate[:leng - 22] + path
+        fullPath = pathTemplate[:leng - 10] + path
         return(str(fullPath))
 
     def display_current_element(self):
@@ -1992,6 +2029,21 @@ class MainUI(QDialog):
             self.machines_line_edit.text())
         self.current_zone.use_conditions.maintained_illuminace = float(
             self.lighting_line_edit.text())
+        try:
+            self.current_zone.t_inside = utilis.celsius_to_kelvin(float(
+                self.mean_temp_inner_line_edit.text()))
+        except ValueError:
+            print ("Please insert a value for Mean indoor temperature")
+        try:
+            self.current_zone.t_outside = utilis.celsius_to_kelvin(float(
+                self.mean_temp_outer_line_edit.text()))
+        except ValueError:
+            print ("Please insert a value for Mean outdoor temperature")
+        try:
+            self.current_zone.infiltration_rate = float(
+                self.infiltration_rate_line_edit.text())
+        except ValueError:
+            print ("Please insert a value for infiltration rate")
 
         for zone in self.current_building.thermal_zones:
             if zone.internal_id == self.current_zone.internal_id:
@@ -2048,6 +2100,7 @@ class MainUI(QDialog):
         for building in self.project.list_of_buildings:
             loaded_project.list_of_buildings.insert(0, building)
         self.project = loaded_project
+        self.project.modelica_info = ModelicaInfo()
 
         self.current_building = self.project.list_of_buildings[-1]
         self.display_current_building()
@@ -2200,6 +2253,7 @@ class MainUI(QDialog):
 
     def create_new_project(self):
         self.project = Project()
+        self.project.modelica_info = ModelicaInfo()
         self.current_building = 0
         self.current_zone = 0
         self.current_element = 0
@@ -2662,20 +2716,27 @@ class MainUI(QDialog):
         self.save_cancel_layout = QtGui.QGridLayout()
         self.zone_usage_times_layout = QtGui.QGridLayout()
         self.zone_usage_layout = QtGui.QGridLayout()
+        self.static_heat_layout = QtGui.QGridLayout()
+        self.static_heat_layout.setHorizontalSpacing(10)
 
         tab_1 = QTabWidget()
         tab_2 = QTabWidget()
         tab_3 = QTabWidget()
+        tab_4 = QTabWidget()
 
-        self.zone_values_tab.addTab(tab_1, u"           Elements     ")
-        self.zone_values_tab.addTab(tab_2, u"            Usage       ")
-        self.zone_values_tab.addTab(tab_3, u"         Usage Times    ")
+        self.zone_values_tab.addTab(tab_1, u"     Elements      ")
+        self.zone_values_tab.addTab(tab_2, u"      Usage        ")
+        self.zone_values_tab.addTab(tab_3, u"   Usage Times     ")
+        self.zone_values_tab.addTab(tab_4, u"  Static Heat Load ")
+        self.zone_values_tab.setStyleSheet(
+            "QTabBar::tab { height: 25px; width: 104px; }")
 
         self.groupbox_general_zone_values_layout.setLayout(
             self.general_zone_values_layout)
         tab_1.setLayout(self.element_values_layout)
         tab_2.setLayout(self.zone_usage_times_layout)
         tab_3.setLayout(self.zone_usage_layout)
+        tab_4.setLayout(self.static_heat_layout)
         self.groupbox_save_cancel_buttons.setLayout(self.save_cancel_layout)
 
         self.zone_type_label = QtGui.QLabel("Zone Type")
@@ -2802,13 +2863,13 @@ class MainUI(QDialog):
         self.set_temp_heat_line_edit = QtGui.QLineEdit()
         self.set_temp_heat_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_heat))
-        self.set_temp_heat_label_2 = QtGui.QLabel("C")
+        self.set_temp_heat_label_2 = QtGui.QLabel("\u00B0C")
 
         self.set_temp_cool_label_1 = QtGui.QLabel("Set Temp Cooling: ")
         self.set_temp_cool_line_edit = QtGui.QLineEdit()
         self.set_temp_cool_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_cool))
-        self.set_temp_cool_label_2 = QtGui.QLabel("C")
+        self.set_temp_cool_label_2 = QtGui.QLabel("\u00B0C")
 
         self.temp_set_back_label_1 = QtGui.QLabel("Temp Setback: ")
         self.temp_set_back_line_edit = QtGui.QLineEdit()
@@ -2872,6 +2933,26 @@ class MainUI(QDialog):
         self.lighting_line_edit.setText(str(
             self.current_zone.use_conditions.maintained_illuminace))
         self.lighting_label_2 = QtGui.QLabel("W/m^2")
+        
+        self.mean_temp_out_label_1 = QtGui.QLabel("Mean Outdoor Temp: ")
+        self.mean_temp_outer_line_edit = QtGui.QLineEdit()
+        self.mean_temp_outer_line_edit.setText(str(utilis.kelvin_to_celsius(
+            self.current_zone.t_outside)))
+        self.mean_temp_out_label_2 = QtGui.QLabel("\u00B0C")
+        
+        self.mean_temp_in_label_1 = QtGui.QLabel("Mean Indoor Temp: ")
+        self.mean_temp_inner_line_edit = QtGui.QLineEdit()
+        self.mean_temp_inner_line_edit.setText(str(utilis.kelvin_to_celsius(
+            self.current_zone.t_inside)))
+        self.mean_temp_in_label_2 = QtGui.QLabel("\u00B0C")
+        
+        self.infiltration_rate_label_1 = QtGui.QLabel("Infiltration Rate: ")
+        self.infiltration_rate_line_edit = QtGui.QLineEdit()
+        self.infiltration_rate_line_edit.setText(str(
+            self.current_zone.infiltration_rate))
+        self.infiltration_rate_label_2 = QtGui.QLabel("1/h")
+        
+        self.space_label = QtGui.QLabel() # Cheat to group the other controls on top
 
         self.zone_usage_times_layout.addWidget(
             self.cooling_ahu_start_label, 1, 1)
@@ -2934,6 +3015,20 @@ class MainUI(QDialog):
         self.zone_usage_layout.addWidget(self.lighting_label_1, 6, 1)
         self.zone_usage_layout.addWidget(self.lighting_line_edit, 6, 2)
         self.zone_usage_layout.addWidget(self.lighting_label_2, 6, 3)
+        
+        self.static_heat_layout.addWidget(self.mean_temp_out_label_1, 1, 1)
+        self.static_heat_layout.addWidget(
+            self.mean_temp_outer_line_edit, 1, 2)
+        self.static_heat_layout.addWidget(self.mean_temp_out_label_2, 1, 3)
+        self.static_heat_layout.addWidget(self.mean_temp_in_label_1, 2, 1)
+        self.static_heat_layout.addWidget(
+            self.mean_temp_inner_line_edit, 2, 2)
+        self.static_heat_layout.addWidget(self.mean_temp_in_label_2, 2, 3)
+        self.static_heat_layout.addWidget(self.infiltration_rate_label_1, 3, 1)
+        self.static_heat_layout.addWidget(
+            self.infiltration_rate_line_edit, 3, 2)
+        self.static_heat_layout.addWidget(self.infiltration_rate_label_2, 3, 3)
+        self.static_heat_layout.addWidget(self.space_label, 4, 0, 9, 3)
 
         self.save_cancel_layout.addWidget(self.zone_element_save_button, 1, 0)
         self.save_cancel_layout.addWidget(
@@ -3872,69 +3967,21 @@ class MainUI(QDialog):
         self.simulation_window_ui = QtGui.QWizardPage()
         self.simulation_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.simulation_window_ui.setWindowTitle("Simulation")
-        self.simulation_window_ui.setFixedWidth(650)
-        self.simulation_window_ui.setFixedHeight(400)
+        self.simulation_window_ui.setFixedWidth(330)
+        self.simulation_window_ui.setFixedHeight(280)
         self.simulation_window_ui_layout = QtGui.QGridLayout()
         self.simulation_window_ui.setLayout(self.simulation_window_ui_layout)
-        self.heatingload_calculation_groupbox = QtGui.QGroupBox("Heating Load"
-                                                                " Calculation")
-        self.heatingload_calculation_groupbox.setGeometry(
-            QtCore.QRect(10, 245, 315, 160))
-        self.heatingload_calculation_groupbox.setMinimumSize(
-            QtCore.QSize(315, 160))
-        self.heatingload_calculation_groupbox.setMaximumSize(
-            QtCore.QSize(315, 160))
-        self.heatingload_calculation_groupbox.setObjectName(
-            _fromUtf8("heatingloadCalculationGroupBox"))
-        self.heatingload_avg_temp_outer_label_1 = QtGui.QLabel(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_outer_label_1.setGeometry(
-            QtCore.QRect(5, 20, 90, 25))
-        self.heatingload_avg_temp_outer_label_1.setText("Average Outer Temp:")
-        self.heatingload_avg_temp_outer_lineedit = QtGui.QLineEdit(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_outer_lineedit.setGeometry(
-            QtCore.QRect(100, 20, 180, 25))
-        self.heatingload_avg_temp_outer_lineedit.setText(
-            self.guiinfo.avgTempOuter)
-        self.heatingload_avg_temp_outer_label_2 = QtGui.QLabel(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_outer_label_2.setGeometry(
-            QtCore.QRect(285, 20, 10, 25))
-        self.heatingload_avg_temp_outer_label_2.setText(u"\u00b0C")
-        self.heatingload_avg_temp_inner_label_1 = QtGui.QLabel(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_inner_label_1.setGeometry(
-            QtCore.QRect(5, 55, 90, 25))
-        self.heatingload_avg_temp_inner_label_1.setText("Indoor Temp:")
-        self.heatingload_avg_temp_inner_lineedit = QtGui.QLineEdit(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_inner_lineedit.setGeometry(
-            QtCore.QRect(100, 55, 180, 25))
-        self.heatingload_avg_temp_inner_lineedit.setText(
-            self.guiinfo.innerTemp)
-        self.heatingload_avg_temp_inner_label_2 = QtGui.QLabel(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_avg_temp_inner_label_2.setGeometry(
-            QtCore.QRect(285, 55, 10, 25))
-        self.heatingload_avg_temp_inner_label_2.setText(u"\u00b0C")
-        self.heatingload_air_changerate_label = QtGui.QLabel(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_air_changerate_label.setGeometry(
-            QtCore.QRect(5, 90, 90, 25))
-        self.heatingload_air_changerate_label.setText("Airchange Rate:")
-        self.heatingload_air_changerate_combobox = QtGui.QComboBox(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_air_changerate_combobox.setGeometry(
-            QtCore.QRect(100, 90, 180, 25))
-        for airchange_rate in self.guiinfo.airchange_rate:
-            self.heatingload_air_changerate_combobox.addItem(airchange_rate)
-        self.heatingload_old_calculation_checkbox = QtGui.QCheckBox(
-            self.heatingload_calculation_groupbox)
-        self.heatingload_old_calculation_checkbox.setGeometry(
-            QtCore.QRect(5, 125, 290, 20))
-        self.heatingload_old_calculation_checkbox.setText("Use old heatingload"
-                                                          " calculation")
+        
+        self.project_name_groupbox = QtGui.QGroupBox("Project")
+        self.project_name_groupbox.setGeometry(QtCore.QRect(10, 10, 315, 40))
+        self.project_name_groupbox.setMinimumSize(QtCore.QSize(315, 40))
+        self.project_name_groupbox.setMaximumSize(QtCore.QSize(315, 40))
+        self.project_name_label = QtGui.QLabel(self.project_name_groupbox)
+        self.project_name_label.setGeometry(QtCore.QRect(5, 10, 90, 25))
+        self.project_name_label.setText("Project Name:")
+        self.project_name_lineedit = QtGui.QLineEdit(self.project_name_groupbox)
+        self.project_name_lineedit.setGeometry(QtCore.QRect(100, 10, 180, 25))
+        self.project_name_lineedit.setText(str(self.project.name))
         
         self.simulation_groupbox = QtGui.QGroupBox("Simulation")
         self.simulation_groupbox.setGeometry(QtCore.QRect(380, 85, 315, 160))
@@ -3951,7 +3998,7 @@ class MainUI(QDialog):
         self.simulation_runtime_lineedit.setGeometry(
             QtCore.QRect(100, 20, 180, 25))
         self.simulation_runtime_lineedit.setText(
-            self.guiinfo.runtimeSimulation)
+            self.project.modelica_info.runtime_simulation)
         self.simulation_runtime_label_2 = QtGui.QLabel(
             self.simulation_groupbox)
         self.simulation_runtime_label_2.setGeometry(
@@ -3967,7 +4014,7 @@ class MainUI(QDialog):
         self.simulation_interval_output_lineedit.setGeometry(
             QtCore.QRect(100, 55, 180, 25))
         self.simulation_interval_output_lineedit.setText(
-            self.guiinfo.intervalOutput)
+            self.project.modelica_info.interval_output)
         self.simulation_interval_output_label_2 = QtGui.QLabel(
             self.simulation_groupbox)
         self.simulation_interval_output_label_2.setGeometry(
@@ -3980,80 +4027,31 @@ class MainUI(QDialog):
             self.simulation_groupbox)
         self.simulation_solver_combobox.setGeometry(
             QtCore.QRect(100, 90, 180, 25))
-        for solver in self.guiinfo.solver:
+        for solver in self.project.modelica_info.solver:
             self.simulation_solver_combobox.addItem(solver)
-        self.simulation_solver_combobox.setCurrentIndex(1)
+        self.simulation_solver_combobox.setCurrentIndex(
+            self.simulation_solver_combobox.findText(
+                self.project.modelica_info.current_solver))
         self.simulation_equidistant_output_checkbox = QtGui.QCheckBox(
             self.simulation_groupbox)
         self.simulation_equidistant_output_checkbox.setGeometry(
             QtCore.QRect(5, 125, 290, 20))
-        self.simulation_equidistant_output_checkbox.setChecked(True)
+        self.simulation_equidistant_output_checkbox.setChecked(
+            self.project.modelica_info.equidistant_output)
         self.simulation_equidistant_output_checkbox.setText(
             "Equidistant Output")
-        self.boundary_conditions_groupbox = QtGui.QGroupBox("Boundary"
-                                                            " Conditions")
-        self.boundary_conditions_groupbox.setGeometry(
-            QtCore.QRect(10, 400, 620, 125))
-        self.boundary_conditions_groupbox.setMinimumSize(
-            QtCore.QSize(620, 125))
-        self.boundary_conditions_groupbox.setMaximumSize(
-            QtCore.QSize(620, 125))
-        self.boundary_conditions_groupbox.setObjectName(
-            _fromUtf8("boundaryConditionsGroupBox"))
-        self.simulation_AHU_label = QtGui.QLabel(
-            self.boundary_conditions_groupbox)
-        self.simulation_AHU_label.setGeometry(QtCore.QRect(5, 20, 90, 25))
-        self.simulation_AHU_label.setText("AHU File:")
-        self.simulation_AHU_lineedit = QtGui.QLineEdit(
-            self.boundary_conditions_groupbox)
-        self.simulation_AHU_lineedit.setGeometry(
-            QtCore.QRect(105, 20, 420, 25))
-        self.simulation_AHU_lineedit.setText(self.guiinfo.ahuFile)
-        self.simulation_AHU_button = QtGui.QPushButton(
-            self.boundary_conditions_groupbox)
-        self.simulation_AHU_button.setGeometry(QtCore.QRect(535, 20, 80, 25))
-        self.simulation_AHU_button.setText("Browse")
-        self.simulation_internal_gains_label = QtGui.QLabel(
-            self.boundary_conditions_groupbox)
-        self.simulation_internal_gains_label.setGeometry(
-            QtCore.QRect(5, 55, 90, 25))
-        self.simulation_internal_gains_label.setText("Internal Gains File:")
-        self.simulation_internal_gains_lineedit = QtGui.QLineEdit(
-            self.boundary_conditions_groupbox)
-        self.simulation_internal_gains_lineedit.setGeometry(
-            QtCore.QRect(105, 55, 420, 25))
-        self.simulation_internal_gains_lineedit.setText(
-            self.guiinfo.internalGainsFile)
-        self.simulation_internal_gains_button = QtGui.QPushButton(
-            self.boundary_conditions_groupbox)
-        self.simulation_internal_gains_button.setGeometry(
-            QtCore.QRect(535, 55, 80, 25))
-        self.simulation_internal_gains_button.setText("Browse")
-        self.simulation_tset_label = QtGui.QLabel(
-            self.boundary_conditions_groupbox)
-        self.simulation_tset_label.setGeometry(QtCore.QRect(5, 90, 90, 25))
-        self.simulation_tset_label.setText("Set Temperature File:")
-        self.simulation_tset_lineedit = QtGui.QLineEdit(
-            self.boundary_conditions_groupbox)
-        self.simulation_tset_lineedit.setGeometry(
-            QtCore.QRect(105, 90, 420, 25))
-        self.simulation_tset_lineedit.setText(self.guiinfo.tsetFile)
-        self.simulation_tset_button = QtGui.QPushButton(
-            self.boundary_conditions_groupbox)
-        self.simulation_tset_button.setGeometry(QtCore.QRect(535, 90, 80, 25))
-        self.simulation_tset_button.setText("Browse")
         
         self.simulation_save_cancel_groupbox = QtGui.QGroupBox()
         self.simulation_save_cancel_groupbox.setGeometry(
-            QtCore.QRect(10, 530, 620, 35))
+            QtCore.QRect(10, 530, 315, 35))
         self.simulation_save_cancel_groupbox.setMinimumSize(
-            QtCore.QSize(620, 35))
+            QtCore.QSize(315, 35))
         self.simulation_save_cancel_groupbox.setMaximumSize(
-            QtCore.QSize(620, 35))
+            QtCore.QSize(315, 35))
         self.simulation_save_button = QtGui.QPushButton(
             self.simulation_save_cancel_groupbox)
         self.simulation_save_button.setText("Save")
-        self.simulation_save_button.setGeometry(QtCore.QRect(95, 5, 120, 25))
+        self.simulation_save_button.setGeometry(QtCore.QRect(5, 5, 90, 25))
         self.connect(self.simulation_save_button, SIGNAL("clicked()"),
                      self.save_changed_simulation_values)
         self.connect(self.simulation_save_button, SIGNAL(
@@ -4062,19 +4060,17 @@ class MainUI(QDialog):
         self.simulation_cancel_button = QtGui.QPushButton(
             self.simulation_save_cancel_groupbox)
         self.simulation_cancel_button.setText("Cancel")
-        self.simulation_cancel_button.setGeometry(QtCore.QRect(390, 5, 120, 25))
+        self.simulation_cancel_button.setGeometry(QtCore.QRect(100, 5, 80, 25))
         self.connect(self.simulation_cancel_button, SIGNAL(
                 "clicked()"), self.simulation_window_ui, QtCore.SLOT(
                 "close()"))
 
         self.simulation_window_ui_layout.addWidget(
-            self.simulation_groupbox, 1, 1)
+            self.project_name_groupbox, 1, 1)
         self.simulation_window_ui_layout.addWidget(
-            self.heatingload_calculation_groupbox, 1, 2)
+            self.simulation_groupbox, 2, 1)
         self.simulation_window_ui_layout.addWidget(
-            self.boundary_conditions_groupbox, 2, 1)
-        self.simulation_window_ui_layout.addWidget(
-            self.simulation_save_cancel_groupbox, 4, 1)
+            self.simulation_save_cancel_groupbox, 3, 1)
         self.simulation_window_ui.setWindowModality(Qt.ApplicationModal)
         self.simulation_window_ui.show()
 
