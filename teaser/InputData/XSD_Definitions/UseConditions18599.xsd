@@ -48,6 +48,7 @@
       <xs:element minOccurs="0" type="xs:float" name="machines"/>
       <xs:element minOccurs="0" type="floatList" name="profile_machines"/>
 	  <xs:element minOccurs="0" type="xs:float" name="lighting_power"/>
+	  <xs:element minOccurs="0" type="floatList" name="profile_lighting"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="AHUType">
