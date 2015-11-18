@@ -1366,6 +1366,76 @@ class MainUI(QDialog):
                             "\n Orientation:\t".expandtabs(11) + 
                             str(window.orientation), window.internal_id)
                         self.element_model.appendRow(item)
+        
+        for time in self.guiinfo.hoursInADay:
+            if len(str(self.current_zone.use_conditions.cooling_time[0])) == 1:
+                fixed_c_t_s = "0" + str(
+                    self.current_zone.use_conditions.cooling_time[0]) + ":00"
+            else:
+                fixed_c_t_s = str(
+                    self.current_zone.use_conditions.cooling_time[0]) + ":00"
+            if len(str(self.current_zone.use_conditions.cooling_time[1])) == 1:
+                fixed_c_t_e = "0" + str(
+                    self.current_zone.use_conditions.cooling_time[1]) + ":00"
+            else:
+                fixed_c_t_e = str(
+                    self.current_zone.use_conditions.cooling_time[1]) + ":00"
+            if len(str(self.current_zone.use_conditions.heating_time[0])) == 1:
+                fixed_h_t_s = "0" + str(
+                    self.current_zone.use_conditions.heating_time[0]) + ":00"
+            else:
+                fixed_h_t_s = str(
+                    self.current_zone.use_conditions.heating_time[0]) + ":00"
+            if len(str(self.current_zone.use_conditions.heating_time[1])) == 1:
+                fixed_h_t_e = "0" + str(
+                    self.current_zone.use_conditions.heating_time[1]) + ":00"
+            else:
+                fixed_h_t_e = str(
+                    self.current_zone.use_conditions.heating_time[1]) + ":00"
+            if (time == fixed_c_t_s):
+                self.cooling_ahu_start_dropdown.setCurrentIndex(
+                    self.guiinfo.hoursInADay.index(time))
+            if (time == fixed_c_t_e):
+                self.cooling_ahu_end_dropdown.setCurrentIndex(
+                    self.guiinfo.hoursInADay.index(time))
+            if (time == fixed_h_t_s):
+                self.heating_ahu_start_dropdown.setCurrentIndex(
+                    self.guiinfo.hoursInADay.index(time))
+            if (time == fixed_h_t_e):
+                self.heating_ahu_end_dropdown.setCurrentIndex(
+                    self.guiinfo.hoursInADay.index(time))
+        self.set_temp_heat_line_edit.setText(str(
+            self.current_zone.use_conditions.set_temp_heat))
+        self.set_temp_cool_line_edit.setText(str(
+            self.current_zone.use_conditions.set_temp_cool))
+        self.temp_set_back_line_edit.setText(str(
+            self.current_zone.use_conditions.temp_set_back))
+        self.min_air_flow_line_edit.setText(str(
+            self.current_zone.use_conditions.min_air_exchange))
+        self.min_ahu_line_edit.setText(str(
+            self.current_zone.use_conditions.min_ahu))
+        self.max_ahu_line_edit.setText(str(
+            self.current_zone.use_conditions.max_ahu))
+        if (self.current_zone.use_conditions.with_ahu == "True"):
+            self.with_ahu_combobox.setCurrentIndex(
+                self.with_ahu_combobox.findText("True"))
+        else:
+            self.with_ahu_combobox.setCurrentIndex(
+                self.with_ahu_combobox.findText("False"))
+        self.re_humidity_line_edit.setText(str(
+            self.current_zone.use_conditions.rel_humidity))
+        self.persons_line_edit.setText(str(
+            self.current_zone.use_conditions.persons))
+        self.machines_line_edit.setText(str(
+            self.current_zone.use_conditions.machines))
+        self.lighting_line_edit.setText(str(
+            self.current_zone.use_conditions.maintained_illuminace))
+        self.mean_temp_outer_line_edit.setText(str(utilis.kelvin_to_celsius(
+            self.current_zone.t_outside)))
+        self.mean_temp_inner_line_edit.setText(str(utilis.kelvin_to_celsius(
+            self.current_zone.t_inside)))
+        self.infiltration_rate_line_edit.setText(str(
+            self.current_zone.infiltration_rate))
 
     def update_element_details(self):
         self.element_layer_model.clear()
@@ -1853,6 +1923,13 @@ class MainUI(QDialog):
                                       u"You need to specify a building first.")
         else:
             self.generate_zone_ui()
+            
+    def switch_current_zone_type(self):
+        zone_type = self.zone_type_combobox.currentText()
+        self.project = Controller.switch_zone_type(
+            zone_type, self.project, self.current_zone.internal_id)
+        self.update_zone_details()
+        
 
     def switch_material(self):
         if self.is_switchable:
@@ -2104,7 +2181,7 @@ class MainUI(QDialog):
         self.current_zone.area = float(
             self.zone_net_leased_area_textbox.text())
         self.current_zone.use_conditions.usage =\
-            self.zone_type_groupbox.currentText()
+            self.zone_type_combobox.currentText()
         if self.cooling_ahu_start_dropdown.currentText().startswith('0'):
             self.current_zone.use_conditions.cooling_time[0] = \
                 int(self.cooling_ahu_start_dropdown.currentText()[1])
@@ -2869,13 +2946,15 @@ class MainUI(QDialog):
         self.groupbox_save_cancel_buttons.setLayout(self.save_cancel_layout)
 
         self.zone_type_label = QtGui.QLabel("Zone Type")
-        self.zone_type_groupbox = QtGui.QComboBox()
-        self.zone_type_groupbox.setObjectName(_fromUtf8("ZoneTypeGroupBox"))
+        self.zone_type_combobox = QtGui.QComboBox()
+        self.zone_type_combobox.setObjectName(_fromUtf8("ZoneTypeGroupBox"))
         for thermal_zone_type in self.guiinfo.thermal_zone_types:
-            self.zone_type_groupbox.addItem(thermal_zone_type, userData=None)
-        self.zone_type_groupbox.setCurrentIndex(
-            self.zone_type_groupbox.findText(
+            self.zone_type_combobox.addItem(thermal_zone_type, userData=None)
+        self.zone_type_combobox.setCurrentIndex(
+            self.zone_type_combobox.findText(
                 str(self.current_zone.use_conditions.usage)))
+        self.connect(self.zone_type_combobox, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.switch_current_zone_type)
 
         self.zone_id_label = QtGui.QLabel("Zone Id")
         self.zone_id_textbox = QtGui.QLineEdit()
@@ -2890,7 +2969,7 @@ class MainUI(QDialog):
 
         self.general_zone_values_layout.addWidget(self.zone_type_label, 1, 0)
         self.general_zone_values_layout.addWidget(
-            self.zone_type_groupbox, 1, 1)
+            self.zone_type_combobox, 1, 1)
         self.general_zone_values_layout.addWidget(self.zone_id_label, 2, 0)
         self.general_zone_values_layout.addWidget(self.zone_id_textbox, 2, 1)
         self.general_zone_values_layout.addWidget(
