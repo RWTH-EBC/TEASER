@@ -2156,12 +2156,12 @@ class MainUI(QDialog):
             if type(element).__name__ == \
                     "Rooftop":
                 item = TrackableItem(
-                    "Name:\t".expandtabs(8) + 
-                    str(element.name) + 
-                    "\nType:\t".expandtabs(11) + 
-                    "Rooftop \n Area:\t".expandtabs(11) + 
-                    str(element.area) + 
-                    "\n Orientation:\t".expandtabs(11) + 
+                    "Name:\t".expandtabs(8) +
+                    str(element.name) +
+                    "\nType:\t".expandtabs(11) +
+                    "Rooftop \n Area:\t".expandtabs(11) +
+                    str(element.area) +
+                    "\n Orientation:\t".expandtabs(11) +
                     str(element.orientation),
                     element.internal_id)
                 item.setAccessibleText(str(element.internal_id))
@@ -2169,21 +2169,21 @@ class MainUI(QDialog):
             if type(element).__name__ == \
                     "OuterWall":
                 item = TrackableItem(
-                    "Name:\t".expandtabs(8) + 
-                    str(element.name) + 
-                    "\nType:\t".expandtabs(11) + 
-                    "Outer Wall \n Area:\t".expandtabs(11) + 
-                    str(element.area) + 
-                    "\n Orientation:\t".expandtabs(11) + 
+                    "Name:\t".expandtabs(8) +
+                    str(element.name) +
+                    "\nType:\t".expandtabs(11) +
+                    "Outer Wall \n Area:\t".expandtabs(11) +
+                    str(element.area) +
+                    "\n Orientation:\t".expandtabs(11) +
                     str(element.orientation),
                     element.internal_id)
                 item.setAccessibleText(str(element.internal_id))
                 self.element_model.appendRow(item)
         for element in self.current_zone.windows:
             item = TrackableItem(
-                "Name:\t".expandtabs(8) + str(element.name) + 
-                "\nType:\t".expandtabs(11) + 
-                "Window \n Area:\t".expandtabs(11) + 
+                "Name:\t".expandtabs(8) + str(element.name) +
+                "\nType:\t".expandtabs(11) +
+                "Window \n Area:\t".expandtabs(11) +
                 str(element.area), element.internal_id)
             item.setAccessibleText(str(self.current_zone.internal_id))
             self.element_model.appendRow(item)
@@ -2956,8 +2956,8 @@ class MainUI(QDialog):
         self.infiltration_rate_line_edit.setText(str(
             self.current_zone.infiltration_rate))
         self.infiltration_rate_label_2 = QtGui.QLabel("1/h")
-
-        self.space_label = QtGui.QLabel() # Cheat to group the other controls on top
+        # Cheat to group the other controls on top
+        self.space_label = QtGui.QLabel()
 
         self.zone_usage_times_layout.addWidget(
             self.cooling_ahu_start_label, 1, 1)
@@ -3062,15 +3062,21 @@ class MainUI(QDialog):
         self.general_envelope_values_groupbox = QtGui.QGroupBox(
                                                  u"General Envelope Values")
         self.general_envelope_values_groupbox.setGeometry(
-                                              QtCore.QRect(0, 0, 280, 120))
+                                              QtCore.QRect(0, 0, 120, 120))
         self.general_envelope_values_layout = QtGui.QGridLayout()
         self.general_envelope_values_groupbox.setLayout(
                                       self.general_envelope_values_layout)
 
-        self.envelope_type_label = QtGui.QLabel("Envelope Type")
-        self.envelope_type_groupbox = QtGui.QComboBox()
-        self.envelope_type_groupbox.setObjectName(_fromUtf8("Envelope"
-                                                            "TypeGroupBox"))
+        self.envelope_name_label = QtGui.QLabel("Name")
+        self.envelope_name_textbox = QtGui.QLineEdit()
+        self.envelope_name_textbox.setObjectName(_fromUtf8(
+                                                u"EnvelopeNameTextBox"))
+
+        self.envelope_area_label = QtGui.QLabel("Area")
+        self.envelope_area_textbox = QtGui.QLineEdit()
+        self.envelope_area_textbox.setObjectName(_fromUtf8(
+                                                u"EnvelopeAreaTextBox"))
+        self.envelope_area_textbox.setReadOnly(True)
 
         self.envelope_orientation_label = QtGui.QLabel("Orientation")
         self.envelope_orientation_groupbox = QtGui.QComboBox()
@@ -3080,78 +3086,43 @@ class MainUI(QDialog):
             self.envelope_orientation_groupbox.addItem(
                                                 orientation, userData=None)
 
-        self.envelope_name_label = QtGui.QLabel("Name")
-        self.envelope_name_textbox = QtGui.QLineEdit()
-        self.envelope_name_textbox.setObjectName(_fromUtf8(
-                                                u"EnvelopeNameTextBox"))
-
         Current_item = self.outer_elements_model.itemFromIndex(item)
         stringCurrentItem = Current_item.text()
+        listOfCurItem = stringCurrentItem.split()
         if stringCurrentItem.startswith("Outer Wall"):
             self.envelope_name_textbox.setText(str("Outer Wall"))
-            stringList12 = stringCurrentItem.split()
-            stringList = stringCurrentItem.split("Area: ")
-            self.envelope_name_textbox.setText(str(stringList12[5]))
-            self.envelope_orientation_groupbox.setCurrentIndex(self.envelope_orientation_groupbox.findText(
-                str(stringList12[3])))
+            self.envelope_area_textbox.setText(str(listOfCurItem[5]))
+            self.envelope_orientation_groupbox.setCurrentIndex(
+                self.envelope_orientation_groupbox.findText(
+                    str(listOfCurItem[3])))
 
         elif stringCurrentItem.startswith("Window"):
             self.envelope_name_textbox.setText(str("Window"))
-            stringList = stringCurrentItem.split("Area: ")
-            self.envelope_name_textbox.setText(str(stringList[1]))
+            self.envelope_area_textbox.setText(str(listOfCurItem[4]))
+            self.envelope_orientation_groupbox.setCurrentIndex(
+                self.envelope_orientation_groupbox.findText(
+                    str(listOfCurItem[2])))
 
         self.general_envelope_values_layout.addWidget(
-                                    self.envelope_type_label, 1, 0)
+                                    self.envelope_name_label, 1, 0)
         self.general_envelope_values_layout.addWidget(
-                                    self.envelope_type_groupbox, 1, 1)
+                            self.envelope_name_textbox, 1, 1)
         self.general_envelope_values_layout.addWidget(
                                     self.envelope_orientation_label, 2, 0)
         self.general_envelope_values_layout.addWidget(
                                     self.envelope_orientation_groupbox, 2, 1)
         self.general_envelope_values_layout.addWidget(
-                                    self.envelope_name_label, 3, 0)
+                                    self.envelope_area_label, 3, 0)
         self.general_envelope_values_layout.addWidget(
-                                    self.envelope_name_textbox, 3, 1)
+                                    self.envelope_area_textbox, 3, 1)
 
         self.general_envelope_values_groupbox.setMaximumHeight(120)
         self.general_envelope_values_groupbox.setMinimumHeight(120)
-
         self.envelope_element_list_view = QtGui.QListView()
         self.envelope_element_list_view.setObjectName(
             _fromUtf8("envelope_element_list_view"))
         self.envelope_element_list_view.setModel(self.outer_elements_model)
         self.envelope_element_list_view.setItemDelegate(self.lVZF)
-
-        """
-        current_item = self.outer_elements_model.itemFromIndex(item)
-        if "Outer Wall" in current_item.text():
-            for element in self.current_zone.outer_walls:
-                if element.internal_id == current_item.internal_id:
-                    self.current_element = element
-        if "Window" in current_item.text():
-            for element in self.current_zone.windows:
-                if element.internal_id == current_item.internal_id:
-                    self.current_element = element
-
-        self.element_orientation_label = QtGui.QLabel("Orientation")
-        self.element_orientation_combobox = QtGui.QComboBox()
-        self.element_orientation_combobox.setObjectName(
-            _fromUtf8("ElementOrientationComboBox"))
-        for orientation in self.guiinfo.orientations:
-            self.element_orientation_combobox.addItem(
-                orientation, userData=None)
-        self.element_orientation_combobox.setCurrentIndex(
-            self.element_orientation_combobox.findText(
-                str(self.current_element.orientation)))
-
-        self.element_area_label = QtGui.QLabel("Area")
-        self.element_area_textbox = QtGui.QLineEdit()
-        self.element_area_textbox.setObjectName(
-            _fromUtf8("ElementAreaTextBox"))
-        self.element_area_textbox.setText(str(round(
-            self.current_element.area, 2)))
-        """
-        
         self.envelopes_value_window_layout.addWidget(
                                 self.general_envelope_values_groupbox, 0, 0)
         self.envelopes_value_window.setWindowModality(Qt.ApplicationModal)
@@ -3702,10 +3673,10 @@ class MainUI(QDialog):
                     self.current_element = element
 
         for layer in self.current_element.layer:
-            item = TrackableItem("Material:\t".expandtabs(8) + 
-                                 str(layer.material.name) + 
-                                 "\nThickness:\t".expandtabs(14) + 
-                                 str(layer.thickness) + 
+            item = TrackableItem("Material:\t".expandtabs(8) +
+                                 str(layer.material.name) +
+                                 "\nThickness:\t".expandtabs(14) +
+                                 str(layer.thickness) +
                                  "\t", layer.internal_id)
             item.setAccessibleText(str(layer.internal_id))
             self.element_layer_model.appendRow(item)
@@ -4092,7 +4063,8 @@ class MainUI(QDialog):
         self.project_name_label = QtGui.QLabel(self.project_name_groupbox)
         self.project_name_label.setGeometry(QtCore.QRect(5, 10, 90, 25))
         self.project_name_label.setText("Project Name:")
-        self.project_name_lineedit = QtGui.QLineEdit(self.project_name_groupbox)
+        self.project_name_lineedit = QtGui.QLineEdit(
+                                                    self.project_name_groupbox)
         self.project_name_lineedit.setGeometry(QtCore.QRect(100, 10, 180, 25))
         self.project_name_lineedit.setText(str(self.project.name))
 
@@ -4186,6 +4158,7 @@ class MainUI(QDialog):
             self.simulation_save_cancel_groupbox, 3, 1)
         self.simulation_window_ui.setWindowModality(Qt.ApplicationModal)
         self.simulation_window_ui.show()
+
 
 class EmittingStream(QtCore.QObject):
 
