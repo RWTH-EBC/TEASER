@@ -3187,8 +3187,6 @@ class MainUI(QDialog):
         for hour in range(0,24):
             data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
             data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
-            print(str(self.current_zone.use_conditions.profile_persons[hour]))
-            print(str(self.current_zone.use_conditions.profile_machines[hour]))
         ax_p = self.figure_persons.add_subplot(111)
         ax_m = self.figure_machines.add_subplot(111)
         ax_p.hold(False)
