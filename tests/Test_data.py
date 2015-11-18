@@ -584,7 +584,7 @@ class Test_teaser(object):
 
         prj.calc_all_buildings('vdi')
         prj.export_record('AixLib')
-        prj.export_record('AixLibMultizone')
+        # prj.export_record('AixLibMultizone')
         prj.calc_all_buildings('ebc')
         prj.export_record('AixLibMultizone')
 
