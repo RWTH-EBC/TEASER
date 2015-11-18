@@ -288,6 +288,17 @@ class Building(object):
         for key in self.window_area:
             self.window_area[key] = self.get_window_area(key)
 
+    def compare_area_dicts(self):
+        '''Compares the outer area and window area dicts and rewrites them if
+        possible
+        '''
+        for key in self.window_area.keys():
+            if key not in self.outer_area.keys():
+                self.outer_area[key] = None
+        for key in self.outer_area.keys():
+            if key not in self.window_area.keys():
+                self.window_area[key] = None
+
     def calc_building_parameter(self, calculation_core):
         '''calc all building parameters
 
@@ -302,6 +313,8 @@ class Building(object):
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
+        self.compare_area_dicts()
+
         self._calculation_method = calculation_core
 
         for zone in self.thermal_zones:
