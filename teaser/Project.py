@@ -8,7 +8,7 @@ import teaser.Data.TeaserXML as txml
 try:
     import teaser.Data.CityGML as citygml
 except:
-    warnings.warn("No CityGML module found, no CityGML import/export")    
+    warnings.warn("No CityGML module found, no CityGML import/export")
 import teaser.Data.DataHelp.OldTeaser as old_teaser
 from teaser.Data.DataClass import DataClass
 from mako.template import Template
@@ -112,8 +112,7 @@ class Project(object):
         self.weather_file_name = file_name
         weather_file = weather_path + file_name
         output_path = (utilis.get_full_path("InputData\\Boundaries \
-                                            TypeBuilding\\") +
-                                            file_name)
+                                            TypeBuilding\\") + file_name)
 
         try:
             shutil.copyfile(weather_file, output_path)
@@ -606,16 +605,22 @@ class Project(object):
 
         citygml.save_gml(self, new_path)
 
-
-    def export_record(self, model_type, path=None, internal_id=None):
+    def export_record(self, building_model=None, zone_model=None,
+                      internal_id=None, path=None):
         '''Exports values to a record file for Modelica simulation
-
 
         Parameters
         ----------
 
-        model_type : string
-            setter of the used Modelica model (AixLib or AixLibMultizoneEquipped)
+        building_model : string
+            setter of the used Aixlib building model (None, MultizoneEquipped,
+            Multizone)
+        zone_model : string
+            setter of the used Aixlib zone model (ThermalZoneEquipped,
+            ThermalZone)
+        internal_id : float
+            setter of the used building which will be exported, if None then
+            all buildings will be exported
         path : string
             if the Files should not be stored in OutputData, an alternative
             path can be specified
