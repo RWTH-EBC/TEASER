@@ -770,7 +770,9 @@ class BuildingElement(object):
     def area(self, value):
         if value is not None:
             self._area = value
-        if type(self).__name__ == "OuterWall":
+        if type(self).__name__ == "OuterWall"\
+                    or type(self).__name__ == "Rooftop" \
+                    or type(self).__name__ == "GroundFloor":
             if self.parent.parent is not None and self.orientation is not None:
                 self.parent.parent.fill_outer_area_dict()
         elif type(self).__name__ == "Window":
