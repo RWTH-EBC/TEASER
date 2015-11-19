@@ -132,6 +132,7 @@ class Building(object):
             for wall in zone.outer_walls:
                 if wall.orientation == orientation:
                     wall.area = ((new_area / self.net_leased_area) * zone.area)
+        self.compare_area_dicts()
 
     def set_window_area(self, new_area, orientation):
         '''Window area setter
@@ -152,6 +153,7 @@ class Building(object):
             for win in zone.windows:
                 if win.orientation == orientation:
                     win.area = ((new_area / self.net_leased_area) * zone.area)
+        self.compare_area_dicts()
 
     def get_outer_wall_area(self, orientation):
         '''Get aggregated outer wall area of one orientation
