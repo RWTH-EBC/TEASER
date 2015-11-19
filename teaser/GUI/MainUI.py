@@ -1455,6 +1455,23 @@ class MainUI(QDialog):
             self.current_zone.t_inside)))
         self.infiltration_rate_line_edit.setText(str(
             self.current_zone.infiltration_rate))
+        self.canvas_persons.repaint()
+        self.canvas_machines.repaint()
+        data_persons = [1.0 for x in range(24)]
+        data_machines = [1.0 for x in range(24)]
+        for hour in range(0,24):
+            data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
+            data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
+        ax_p = self.figure_persons.add_subplot(111)
+        ax_m = self.figure_machines.add_subplot(111)
+        ax_p.hold(False)
+        ax_m.hold(False)
+        ax_p.plot(data_persons, '*-')
+        ax_m.plot(data_machines, '*-')
+        ax_p.set_ylim([0,1])
+        ax_m.set_ylim([0,1])
+        self.canvas_persons.draw()
+        self.canvas_machines.draw()
 
     def update_element_details(self):
         self.element_layer_model.clear()
@@ -3187,14 +3204,14 @@ class MainUI(QDialog):
         for hour in range(0,24):
             data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
             data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
-        ax_p = self.figure_persons.add_subplot(111)
-        ax_m = self.figure_machines.add_subplot(111)
+        ax_p = self.figure_persons.add_subplot(211)
+        ax_m = self.figure_machines.add_subplot(212)
         ax_p.hold(False)
         ax_m.hold(False)
         ax_p.plot(data_persons, '*-')
         ax_m.plot(data_machines, '*-')
         ax_p.set_ylim([0,1])
-        #ax_m.set_ylim([0,1])
+        ax_m.set_ylim([0,1])
         self.canvas_persons.draw()
         self.canvas_machines.draw()
 
@@ -3292,7 +3309,7 @@ class MainUI(QDialog):
         self.zone_usage_layout.addWidget(self.persons_line_edit, 1, 2)
         self.zone_usage_layout.addWidget(self.persons_label_2, 1, 3)
         self.zone_usage_layout.addWidget(self.canvas_persons, 3, 1)
-        self.zone_usage_layout.addWidget(self.canvas_machines, 3, 2)
+        self.zone_usage_layout.addWidget(self.canvas_machines, 3, 3)
         self.zone_usage_layout.addWidget(self.machines_label_1, 5, 1)
         self.zone_usage_layout.addWidget(self.machines_line_edit, 5, 2)
         self.zone_usage_layout.addWidget(self.machines_label_2, 5, 3)
