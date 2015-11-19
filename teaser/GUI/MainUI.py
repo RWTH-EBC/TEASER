@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 from PyQt4.Qt import QDialog, QStandardItemModel
 from PyQt4.Qt import Qt
 from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap, QTabBar
+from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap
 import teaser.Logic.Utilis as utilis
 from teaser.GUI.GUIHelperClasses.PictureButton import PictureButton
 from teaser.Project import Project
@@ -15,12 +15,9 @@ from teaser.GUI.GUIHelperClasses.TrackableItem import TrackableItem
 from teaser.GUI.GUIHelperClasses.ListViewZonesFiller import ListViewZonesFiller
 from teaser.GUI.GUIHelperClasses.GUIInfo import GUIInfo
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
 import matplotlib.pyplot as plt
 import sys
 import os
-from numpy.distutils.pathccompiler import PathScaleCCompiler
-import random
 
 
 try:
@@ -810,7 +807,7 @@ class MainUI(QDialog):
             self.ribbon_widget)
         self.new_type_building_button.setGeometry(QtCore.QRect(10, 5, 70, 70))
         self.new_type_building_button.clicked.connect(
-            self.check_window_slide_typebuilding)
+            self.generate_type_building_ui)
         self.new_type_building_button.setToolTip(
             "Click to create a new typebuilding.")
         self.new_type_building_label = QtGui.QLabel(self.ribbon_group_box)
@@ -924,12 +921,6 @@ class MainUI(QDialog):
         cursor.insertText(text)
         self.text_edit.setTextCursor(cursor)
         self.text_edit.ensureCursorVisible()
-
-    def check_window_slide_typebuilding(self):
-        # if self.slide_mode_radiobutton.isChecked():
-        #    self.transform_ctbui()
-        # elif self.window_mode_radiobutton.isChecked():
-        self.generate_type_building_ui("Office")
 
     def save_changed_layer_values(self):
         for zone in self.current_building.thermal_zones:
@@ -1092,6 +1083,8 @@ class MainUI(QDialog):
     def switch_type_building(self):
         cIndex = self.window_construct_building_combo_box.currentText()
         self.current_type_building = str(cIndex)
+        self.construct_type_building_button.setText(
+            u"Generate " + self.current_type_building + " Building ...")
         if self.current_type_building == "Residential":
             self.group_box_type_building_right_office.setVisible(False)
             self.group_box_type_building_right_residential.setVisible(True)
@@ -3326,15 +3319,16 @@ class MainUI(QDialog):
         self.zone_value_window.setWindowModality(Qt.ApplicationModal)
         self.zone_value_window.show()
 
-    def generate_type_building_ui(self, building_type):
+    def generate_type_building_ui(self):
 
         self.popup_window_type_building = QtGui.QWizardPage()
+        self.current_type_building = "Office"
         self.popup_window_type_building.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
         self.popup_window_type_building.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
         self.popup_window_type_building.setWindowTitle(
-            u"generate " + building_type + " ...")
+            u"generate " + self.current_type_building + " ...")
         self.popup_window_type_building.setFixedWidth(520)
         self.popup_window_type_building.setFixedHeight(800)
         self.popup_layout_type_building = QtGui.QGridLayout()
@@ -3543,7 +3537,7 @@ class MainUI(QDialog):
             self.radio_button_architecture_office_3, 3, 0)
 
         self.construct_type_building_button = QtGui.QPushButton(
-            u"Generate " + building_type + " Building ...")
+            u"Generate " + self.current_type_building + " Building ...")
         self.connect(self.construct_type_building_button, SIGNAL(
             "clicked()"), self.check_inputs_typebuilding_office)
         self.connect(self.construct_type_building_button, SIGNAL(
