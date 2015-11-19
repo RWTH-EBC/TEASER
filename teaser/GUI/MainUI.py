@@ -1455,23 +1455,20 @@ class MainUI(QDialog):
             self.current_zone.t_inside)))
         self.infiltration_rate_line_edit.setText(str(
             self.current_zone.infiltration_rate))
-        self.canvas_persons.repaint()
-        self.canvas_machines.repaint()
+        self.canvas_profiles.repaint()
         data_persons = [1.0 for x in range(24)]
         data_machines = [1.0 for x in range(24)]
+        # TODO: data_lighting = [1.0 for x in range(24)]
         for hour in range(0,24):
             data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
             data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
-        ax_p = self.figure_persons.add_subplot(111)
-        ax_m = self.figure_machines.add_subplot(111)
+            # TODO: data_lighting[hour] = self.current_zone.use_conditions.profile_lighting[hour]
+        ax_p = self.figure_profiles.add_subplot(111)
         ax_p.hold(False)
-        ax_m.hold(False)
-        ax_p.plot(data_persons, '*-')
-        ax_m.plot(data_machines, '*-')
+        ax_p.plot(range(24), data_persons, 'b-', range(24), data_machines, 'r-')
+        # TODO: ax_p.plot(range(24), data_persons, 'b-', range(24), data_machines, 'r-', data_lighting, 'g-')
         ax_p.set_ylim([0,1])
-        ax_m.set_ylim([0,1])
-        self.canvas_persons.draw()
-        self.canvas_machines.draw()
+        self.canvas_profiles.draw()
 
     def update_element_details(self):
         self.element_layer_model.clear()
@@ -1493,22 +1490,7 @@ class MainUI(QDialog):
             self.edit_zone_name_line_edit.setText(str(self.current_zone.name))
             self.edit_zone_volume_line_edit.setText(
                 str(self.current_zone.volume))
-            # TODO: Ceiling Area etc.
-
-            # self.edit_usage_infiltration_rate_line_edit.setText(
-            # str(self.current_zone.use_conditions.infiltration_rate))
-            # self.edit_usage_cooling_time_line_edit
-            # self.edit_usage_heating_time_line_edit
-            # self.edit_usage_set_temp_heat_line_edit
-            # self.edit_usage_set_temp_cool_line_edit
-            # self.edit_usage_temp_set_back_line_edit
-            # self.edit_usage_min_air_exchange_line_edit
-            # self.edit_usage_min_ahu_line_edit
-            # self.edit_usage_max_ahu_line_edit
-            # self.edit_usage_with_ahu_line_edit
-            # self.edit_usage_rel_humidity_line_edit
-            # self.edit_usage_persons_line_edit
-            # self.edit_usage_machines_line_edit
+            
             for inner_wall in self.current_zone.inner_walls:
                 if type(inner_wall).__name__ == \
                 "InnerWall":
@@ -3195,25 +3177,24 @@ class MainUI(QDialog):
             self.current_zone.use_conditions.persons))
         self.persons_label_2 = QtGui.QLabel("W/m^2")
         
-        self.figure_persons = plt.figure()
-        self.figure_machines = plt.figure()
-        self.canvas_persons = FigureCanvas(self.figure_persons)
-        self.canvas_machines = FigureCanvas(self.figure_machines)
+        self.figure_profiles = plt.figure()
+        self.canvas_profiles = FigureCanvas(self.figure_profiles)
         data_persons = [1.0 for x in range(24)]
         data_machines = [1.0 for x in range(24)]
+        # TODO: data_lighting = [1.0 for x in range(24)]
         for hour in range(0,24):
             data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
             data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
-        ax_p = self.figure_persons.add_subplot(211)
-        ax_m = self.figure_machines.add_subplot(212)
+            # TODO: data_lighting[hour] = self.current_zone.use_conditions.profile_lighting[hour]
+        ax_p = self.figure_profiles.add_subplot(111)
         ax_p.hold(False)
-        ax_m.hold(False)
-        ax_p.plot(data_persons, '*-')
-        ax_m.plot(data_machines, '*-')
+        ax_p.plot(data_persons, 'b-', data_machines, 'r-')
+        # TODO: ax_p.plot(data_persons, 'b-', data_machines, 'r-', data_lighting, 'g-')
         ax_p.set_ylim([0,1])
-        ax_m.set_ylim([0,1])
-        self.canvas_persons.draw()
-        self.canvas_machines.draw()
+        self.canvas_profiles.draw()
+        # TODO: Find a better way to set up a caption to explain the colors
+        self.graph_label = QtGui.QLabel("Red: Machines, Blue: Persons")
+        # TODO: self.graph_label = QtGui.QLabel("Red: Machines, Blue: Persons", Green: Lighting)
 
         self.usagePicPixMap = QtGui.QPixmap("GUI\\sheep_PNG2186.png")
         self.usage_pic_label = QtGui.QLabel()
@@ -3308,8 +3289,8 @@ class MainUI(QDialog):
         self.zone_usage_layout.addWidget(self.persons_label_1, 1, 1)
         self.zone_usage_layout.addWidget(self.persons_line_edit, 1, 2)
         self.zone_usage_layout.addWidget(self.persons_label_2, 1, 3)
-        self.zone_usage_layout.addWidget(self.canvas_persons, 3, 1)
-        self.zone_usage_layout.addWidget(self.canvas_machines, 3, 3)
+        self.zone_usage_layout.addWidget(self.canvas_profiles, 2, 1, 2, 3)
+        self.zone_usage_layout.addWidget(self.graph_label, 4, 1)
         self.zone_usage_layout.addWidget(self.machines_label_1, 5, 1)
         self.zone_usage_layout.addWidget(self.machines_line_edit, 5, 2)
         self.zone_usage_layout.addWidget(self.machines_label_2, 5, 3)
