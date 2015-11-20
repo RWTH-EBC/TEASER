@@ -50,6 +50,8 @@ class Building(object):
         name of the city the building is located at
     thermal_zones : list
         list of all containing thermal zones (ThermalZone())
+    central_ahu : BuildingAHU.py object
+        BuildingAHU.py object with information about central AHU 
     outer_area : dict
         dict with outer wall area and orientation
     window_area : dict
@@ -60,13 +62,6 @@ class Building(object):
         path of internal gains Matlab file for boundary condition
     file_set_t : string
         path of temperature Matlab file for boundary condition
-    profile_relative_humidity : [float]
-        timeline of relative humidity requirements for AHU simulation
-    profile_status_AHU : [Boolean]
-        timeline of status of the AHU simulation (on/off)
-    profile_temeprature_AHU : [float]
-        timeline of temperatures requirements for AHU simulation
-
     '''
 
     def __init__(self, parent=None, name=None,
@@ -101,6 +96,7 @@ class Building(object):
         else:
             self.net_leased_area = net_leased_area
 
+        self._central_ahu = None
         self._year_of_retrofit = None
 
         self._thermal_zones = []
@@ -117,12 +113,7 @@ class Building(object):
         self.file_set_t = None
         self.file_weather = None
 
-        self.profile_min_relative_humidity = []
-        self.profile_max_relative_humidity = []
-        self.profile_status_AHU = []
-        self.profile_temperature_AHU = []
-
-        #self._calculation_method = self.parent.calculation_method
+        self._calculation_method = self.parent.calculation_method
 
     def set_outer_wall_area(self, new_area, orientation):
         '''Outer area wall setter
@@ -640,3 +631,16 @@ class Building(object):
             self._year_of_retrofit = value
         else:
             raise ValueError("Specify year of construction first")
+    
+    @property
+    def central_ahu(self):
+        return self._central_ahu
+        
+    @central_ahu.setter
+    def central_ahu(self, value):
+
+        ass_error_1 = "A central AHU has to be an instance of BuildingAHU()"
+
+        assert type(value).__name__ == "BuildingAHU", ass_error_1
+
+        self._central_ahu = value
