@@ -52,7 +52,7 @@ class Controller():
         return parent
 
     @classmethod
-    def click_add_zone_button(self, parent, name, area, usage):
+    def click_add_zone_button(self, parent, name, area, zone_type):
         '''
         creates a thermal zone with specified area and type and blawnco use
         conditions
@@ -74,11 +74,10 @@ class Controller():
         '''
 
         zone = ThermalZone(parent)
-        usecon = UseConditions18599()
-        usecon.usage = usage
+        zone.use_conditions = UseConditions18599(zone)
+        zone.use_conditions.load_use_conditions(zone_type)
         zone.name = name
         zone.area = area
-        zone.use_conditions = usecon
         return parent
 
     @classmethod
