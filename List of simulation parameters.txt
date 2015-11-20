@@ -1,0 +1,2 @@
+parameter name		|		in export (no / hardcoded / full)		|		in TEASER (no / where)
+
