@@ -606,7 +606,7 @@ class Project(object):
         citygml.save_gml(self, new_path)
 
     def export_record(self, building_model=None, zone_model=None,
-                      internal_id=None, path=None):
+                      corG=None, internal_id=None, path=None):
         '''Exports values to a record file for Modelica simulation
 
         Parameters
@@ -643,116 +643,45 @@ class Project(object):
         else:
             pass
 
-        if model_type == "AixLib":
+        uses = ['Modelica(version = "3.2.1")',
+                "AixLib(version=\"0.1.0\")"]
 
-            uses = ['Modelica(version = "3.2.1")',
-                    "AixLib(version=\"0.1.0\")"]
+        # for bldg in self.list_of_buildings:
+        #     assert bldg._calculation_method == "vdi", ("AixLib needs \
+        #     calculation core vdi")
+        # might not need this, user only needs to know what kind of
+        # zone records are exported here
 
-            for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "vdi", ("AixLib needs \
-                calculation core vdi")
+        # use the same zone templates for all exports
+        zone_template = Template(
+            filename=utilis.get_full_path(
+                "InputData\\RecordTemplate\\AixLib\\AixLib_zone"))
 
-            zone_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\AixLib\\AixLib_zone"))
-
-            self._help_package(path, self.name, uses)
-            self._help_package_order(path, self.list_of_buildings)
-
-        elif model_type in ["AixLibMultizoneEquipped", "AixLibMultizone"]:
-
-            uses = ['Modelica(version = "3.2.1")',
-                    "AixLib(version=\"0.1.0\")"]
-
-            for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "ebc", ("\
-                    AixLibMultizoneEquipped needs calculation core ebc")
-
-            zone_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\AixLibMultizone\\"
-                    "AixLib_zone"))
-            zone_base_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\AixLibMultizone\\"
-                    "AixLib_base"))
-
-            self._help_package(path, self.name, uses)
-            self._help_package_order(path, self.list_of_buildings)
-
-        else:
-
-            raise ValueError("specify calculation method correctly")
-
+        # list which contains exported buildings
         if internal_id is not None:
-            bldg = [bldg for bldg in self.list_of_buildings if
-                    bldg.internal_id == internal_id]
-            bldg_path = path + "\\" + bldg.name + "\\"
-            utilis.create_path(utilis.get_full_path(bldg_path))
-            utilis.create_path(utilis.get_full_path
-                               (bldg_path + bldg.name + "_DataBase"))
+            exported_list_of_buildings = [bldg for bldg in
+                                          self.list_of_buildings if
+                                          bldg.internal_id == internal_id]
+        else:
+            exported_list_of_buildings = self.list_of_buildings
 
-            self._help_package(bldg_path, bldg.name)
-            self._help_package_order(bldg_path, [bldg], None,
-                                     bldg.name + "_DataBase")
+        # here we diff between zonerecord export and full model support
+        if building_model and zone_model and corG:
+            # full model support here
+            print("full model support")
 
-            if model_type == "AixLibMultizoneEquipped":
-                out_file = open(utilis.get_full_path
-                                (bldg_path + bldg.name + ".mo"), 'w')
-                building_template = Template(
-                    filename=utilis.get_full_path(
-                        "InputData\\RecordTemplate\\AixLibMultizone\\"
-                        "AixLib_MultizoneEquipped"))
 
-                out_file.write(building_template.render_unicode
-                               (bldg=bldg, mod_prj=self.modelica_project,
-                                weather=self.weather_file_name))
-                out_file.close()
 
-            elif model_type == "AixLibMultizone":
-                out_file = open(utilis.get_full_path
-                                (bldg_path + bldg.name + ".mo"), 'w')
-                building_template = Template(
-                    filename=utilis.get_full_path(
-                        "InputData\\RecordTemplate\\AixLibMultizone\\"
-                        "AixLib_Multizone"))
 
-                out_file.write(building_template.render_unicode
-                               (bldg=bldg, mod_prj=self.modelica_project,
-                                weather=self.weather_file_name))
-                out_file.close()
 
-            for zone in bldg.thermal_zones:
-                zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
 
-                out_file = open(utilis.get_full_path(
-                    zone_path + "\\" + bldg.name + "_" +
-                    zone.name + ".mo"), 'w')
-                out_file.write(zone_template.render_unicode(
-                    bldg=bldg, zone=zone))
-                out_file.close()
 
-                if model_type in ["AixLibMultizoneEquipped",
-                                  "AixLibMultizone"]:
-                    self._help_package(zone_path, bldg.name + "_DataBase")
-                    self._help_package_order(
-                        zone_path, bldg.thermal_zones,
-                        bldg.name + "_", bldg.name + "_base")
-
-                    out_file = open(utilis.get_full_path
-                                    (zone_path + bldg.name + "_base.mo"),
-                                    'w')
-                    out_file.write(zone_base_template.render_unicode(
-                        bldg=bldg, zone=zone,
-                        mod_prj=self.modelica_project))
-                    out_file.close()
-                else:
-                    pass
 
         else:
-
-            for bldg in self.list_of_buildings:
-
+            # only export the baserecords
+            self._help_package(path, self.name, uses)
+            self._help_package_order(path, exported_list_of_buildings)
+            for bldg in exported_list_of_buildings:
                 bldg_path = path + "\\" + bldg.name + "\\"
                 utilis.create_path(utilis.get_full_path(bldg_path))
                 utilis.create_path(utilis.get_full_path
@@ -761,33 +690,6 @@ class Project(object):
                 self._help_package(bldg_path, bldg.name)
                 self._help_package_order(bldg_path, [bldg], None,
                                          bldg.name + "_DataBase")
-
-                if model_type == "AixLibMultizoneEquipped":
-                    out_file = open(utilis.get_full_path
-                                    (bldg_path + bldg.name + ".mo"), 'w')
-                    building_template = Template(
-                        filename=utilis.get_full_path(
-                            "InputData\\RecordTemplate\\AixLibMultizone\\"
-                            "AixLib_MultizoneEquipped"))
-
-                    out_file.write(building_template.render_unicode
-                                   (bldg=bldg, mod_prj=self.modelica_project,
-                                    weather=self.weather_file_name))
-                    out_file.close()
-
-                elif model_type == "AixLibMultizone":
-                    out_file = open(utilis.get_full_path
-                                    (bldg_path + bldg.name + ".mo"), 'w')
-                    building_template = Template(
-                        filename=utilis.get_full_path(
-                            "InputData\\RecordTemplate\\AixLibMultizone\\"
-                            "AixLib_Multizone"))
-
-                    out_file.write(building_template.render_unicode
-                                   (bldg=bldg, mod_prj=self.modelica_project,
-                                    weather=self.weather_file_name))
-                    out_file.close()
-
                 for zone in bldg.thermal_zones:
                     zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
 
@@ -795,25 +697,172 @@ class Project(object):
                         zone_path + "\\" + bldg.name + "_" +
                         zone.name + ".mo"), 'w')
                     out_file.write(zone_template.render_unicode(
-                        bldg=bldg, zone=zone))
+                        bldg=bldg, zone=zone,
+                        calc_core=bdlg._calculation_method))
                     out_file.close()
 
-                    if model_type in ["AixLibMultizoneEquipped",
-                                      "AixLibMultizone"]:
-                        self._help_package(zone_path, bldg.name + "_DataBase")
-                        self._help_package_order(
-                            zone_path, bldg.thermal_zones,
-                            bldg.name + "_", bldg.name + "_base")
 
-                        out_file = open(utilis.get_full_path
-                                        (zone_path + bldg.name + "_base.mo"),
-                                        'w')
-                        out_file.write(zone_base_template.render_unicode(
-                            bldg=bldg, zone=zone,
-                            mod_prj=self.modelica_project))
-                        out_file.close()
-                    else:
-                        pass
+
+
+
+
+
+
+        # elif model_type in ["AixLibMultizoneEquipped", "AixLibMultizone"]:
+
+        #     uses = ['Modelica(version = "3.2.1")',
+        #             "AixLib(version=\"0.1.0\")"]
+
+        #     for bldg in self.list_of_buildings:
+        #         assert bldg._calculation_method == "ebc", ("\
+        #             AixLibMultizoneEquipped needs calculation core ebc")
+
+        #     zone_template = Template(
+        #         filename=utilis.get_full_path(
+        #             "InputData\\RecordTemplate\\AixLibMultizone\\"
+        #             "AixLib_zone"))
+        #     zone_base_template = Template(
+        #         filename=utilis.get_full_path(
+        #             "InputData\\RecordTemplate\\AixLibMultizone\\"
+        #             "AixLib_base"))
+
+        #     self._help_package(path, self.name, uses)
+        #     self._help_package_order(path, self.list_of_buildings)
+
+        # else:
+
+        #     raise ValueError("specify calculation method correctly")
+
+        # if internal_id is not None:
+        #     bldg = [bldg for bldg in self.list_of_buildings if
+        #             bldg.internal_id == internal_id]
+        #     bldg_path = path + "\\" + bldg.name + "\\"
+        #     utilis.create_path(utilis.get_full_path(bldg_path))
+        #     utilis.create_path(utilis.get_full_path
+        #                        (bldg_path + bldg.name + "_DataBase"))
+
+        #     self._help_package(bldg_path, bldg.name)
+        #     self._help_package_order(bldg_path, [bldg], None,
+        #                              bldg.name + "_DataBase")
+
+        #     if model_type == "AixLibMultizoneEquipped":
+        #         out_file = open(utilis.get_full_path
+        #                         (bldg_path + bldg.name + ".mo"), 'w')
+        #         building_template = Template(
+        #             filename=utilis.get_full_path(
+        #                 "InputData\\RecordTemplate\\AixLibMultizone\\"
+        #                 "AixLib_MultizoneEquipped"))
+
+        #         out_file.write(building_template.render_unicode
+        #                        (bldg=bldg, mod_prj=self.modelica_project,
+        #                         weather=self.weather_file_name))
+        #         out_file.close()
+
+        #     elif model_type == "AixLibMultizone":
+        #         out_file = open(utilis.get_full_path
+        #                         (bldg_path + bldg.name + ".mo"), 'w')
+        #         building_template = Template(
+        #             filename=utilis.get_full_path(
+        #                 "InputData\\RecordTemplate\\AixLibMultizone\\"
+        #                 "AixLib_Multizone"))
+
+        #         out_file.write(building_template.render_unicode(
+        #                        bldg=bldg, mod_prj=self.modelica_project,
+        #                        weather=self.weather_file_name))
+        #         out_file.close()
+
+        #     for zone in bldg.thermal_zones:
+        #         zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
+
+        #         out_file = open(utilis.get_full_path(
+        #             zone_path + "\\" + bldg.name + "_" +
+        #             zone.name + ".mo"), 'w')
+        #         out_file.write(zone_template.render_unicode(
+        #             bldg=bldg, zone=zone))
+        #         out_file.close()
+
+        #         if model_type in ["AixLibMultizoneEquipped",
+        #                           "AixLibMultizone"]:
+        #             self._help_package(zone_path, bldg.name + "_DataBase")
+        #             self._help_package_order(
+        #                 zone_path, bldg.thermal_zones,
+        #                 bldg.name + "_", bldg.name + "_base")
+
+        #             out_file = open(utilis.get_full_path
+        #                             (zone_path + bldg.name + "_base.mo"),
+        #                             'w')
+        #             out_file.write(zone_base_template.render_unicode(
+        #                 bldg=bldg, zone=zone,
+        #                 mod_prj=self.modelica_project))
+        #             out_file.close()
+        #         else:
+        #             pass
+
+        # else:
+
+        #     for bldg in self.list_of_buildings:
+
+        #         bldg_path = path + "\\" + bldg.name + "\\"
+        #         utilis.create_path(utilis.get_full_path(bldg_path))
+        #         utilis.create_path(utilis.get_full_path
+        #                            (bldg_path + bldg.name + "_DataBase"))
+
+        #         self._help_package(bldg_path, bldg.name)
+        #         self._help_package_order(bldg_path, [bldg], None,
+        #                                  bldg.name + "_DataBase")
+
+        #         if model_type == "AixLibMultizoneEquipped":
+        #             out_file = open(utilis.get_full_path
+        #                             (bldg_path + bldg.name + ".mo"), 'w')
+        #             building_template = Template(
+        #                 filename=utilis.get_full_path(
+        #                     "InputData\\RecordTemplate\\AixLibMultizone\\"
+        #                     "AixLib_MultizoneEquipped"))
+
+        #             out_file.write(building_template.render_unicode
+        #                            (bldg=bldg, mod_prj=self.modelica_project,
+        #                             weather=self.weather_file_name))
+        #             out_file.close()
+
+        #         elif model_type == "AixLibMultizone":
+        #             out_file = open(utilis.get_full_path
+        #                             (bldg_path + bldg.name + ".mo"), 'w')
+        #             building_template = Template(
+        #                 filename=utilis.get_full_path(
+        #                     "InputData\\RecordTemplate\\AixLibMultizone\\"
+        #                     "AixLib_Multizone"))
+
+        #             out_file.write(building_template.render_unicode
+        #                            (bldg=bldg, mod_prj=self.modelica_project,
+        #                             weather=self.weather_file_name))
+        #             out_file.close()
+
+        #         for zone in bldg.thermal_zones:
+        #             zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
+
+        #             out_file = open(utilis.get_full_path(
+        #                 zone_path + "\\" + bldg.name + "_" +
+        #                 zone.name + ".mo"), 'w')
+        #             out_file.write(zone_template.render_unicode(
+        #                 bldg=bldg, zone=zone))
+        #             out_file.close()
+
+        #             if model_type in ["AixLibMultizoneEquipped",
+        #                               "AixLibMultizone"]:
+        #                 self._help_package(zone_path, bldg.name + "_DataBase")
+        #                 self._help_package_order(
+        #                     zone_path, bldg.thermal_zones,
+        #                     bldg.name + "_", bldg.name + "_base")
+
+        #                 out_file = open(utilis.get_full_path
+        #                                 (zone_path + bldg.name + "_base.mo"),
+        #                                 'w')
+        #                 out_file.write(zone_base_template.render_unicode(
+        #                     bldg=bldg, zone=zone,
+        #                     mod_prj=self.modelica_project))
+        #                 out_file.close()
+        #             else:
+        #                 pass
 
     def export_parameters_txt(self, path=None):
         '''Exports parameters of all buildings in a readable text file
