@@ -381,6 +381,45 @@ class Building(object):
             time_line.append([i*time_step])
         return time_line
     
+    def modelica_set_temp(self, path = None):
+        '''creates .mat file for set temperatures for each zone
+
+        This function creates a matfile (-v4) for set temperatures of each 
+        zone
+        
+        1. Row: heat set temperature of all zones
+        2. Row: cool set temperature of all zones
+
+        Parameters
+        ----------
+        path : str
+            optional path, when matfile is exported seperately
+                
+        '''
+        pass
+        if self.file_set_t is None:
+            self.file_set_t = "\\Tset_Building.mat"
+        else:
+            pass
+
+        if path is None:
+            path = utilis.get_default_path() + self.file_set_t
+        else:
+            path = utilis.create_path(path) + self.file_set_t
+            
+        t_set_heat = [0]
+        t_set_cool = [0]
+        for zone_count in self.thermal_zones:
+            t_set_heat.append(zone_count.use_conditions.set_temp_heat)
+            t_set_cool.append(zone_count.use_conditions.set_temp_cool)
+            
+
+        scipy.io.savemat(path,
+                         mdict={'Tset': [t_set_heat,t_set_cool]},
+                         appendmat = False,
+                         format = '4')
+    
+    
     def modelica_AHU_boundary(self,
                               time_line = None,
                               profile_temperature_AHU = None,
@@ -411,14 +450,9 @@ class Building(object):
             timeline of relative humidity requirements for AHU simulation
         profile_status_AHU : [int]
             timeline of status of the AHU simulation (on/off)
-        
         path : str
             optional path, when matfile is exported seperately
-        Returns
-        ---------
-        ahu_boundary : np.array
-            np.array with the boundaries for AHU
-        
+
         '''
         
         if time_line is None:
