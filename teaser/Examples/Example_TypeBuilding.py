@@ -29,6 +29,7 @@ def example_type_building():
                               number_of_floors = 2,
                               height_of_floors = 3.5,
                               net_leased_area = 100,
+                              with_ahu=False,
                               residential_layout = 1,
                               neighbour_buildings = 1,
                               attic = 1,
