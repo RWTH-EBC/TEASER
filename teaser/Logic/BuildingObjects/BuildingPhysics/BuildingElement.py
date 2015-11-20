@@ -778,3 +778,7 @@ class BuildingElement(object):
         elif type(self).__name__ == "Window":
             if self.parent.parent is not None and self.orientation is not None:
                 self.parent.parent.fill_window_area_dict()
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.area is not None:
+            self.calc_ua_value()
