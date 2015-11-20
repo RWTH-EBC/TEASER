@@ -1,0 +1,29 @@
+model ${bldg.name}
+  "This is the simulation model of ${bldg.name}"
+
+% if model is "Multizone":
+	AixLib.Building.LowOrder.Multizone.Multizone multizone(
+      buildingParam=${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_base()
+% elif model is "MultizoneEquipped":
+	AixLib.Building.LowOrder.Multizone.MultizoneEquipped multizoneEquipped(
+      buildingParam=${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_base()
+% endif
+
+% if zone is "ThermalZone":
+	,redeclare AixLib.Building.LowOrder.ThermalZone.ThermalZone zone
+% endif
+
+% if physics is "vdi":
+	(redeclare redeclare 
+        AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
+        buildingPhysics
+% endif 
+
+% if gFac is "vdi":
+	(redeclare 
+          AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
+          corG)
+% else:
+	)
+% endif
+)
