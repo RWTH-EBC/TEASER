@@ -443,6 +443,7 @@ class Project(object):
                               number_of_floors,
                               height_of_floors,
                               net_leased_area,
+                              with_ahu=False,
                               residential_layout=None,
                               neighbour_buildings=None,
                               attic=None,
@@ -464,6 +465,8 @@ class Project(object):
             average height of the floors
         net_leased_area : float
             total net leased area of building
+        with_ahu : boolean
+            if building has a central AHU or not
         residential_layout : int
             type of floor plan (default = 0)
 
@@ -511,6 +514,7 @@ class Project(object):
                                 number_of_floors,
                                 height_of_floors,
                                 net_leased_area,
+                                with_ahu,
                                 residential_layout,
                                 neighbour_buildings,
                                 attic,

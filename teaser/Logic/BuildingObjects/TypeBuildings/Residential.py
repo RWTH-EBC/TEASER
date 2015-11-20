@@ -44,6 +44,9 @@ class Residential(TypeBuilding):
 
     net_leased_area : float
         total net leased area of building
+        
+    with_ahu : boolean
+        if building has a central AHU or not
 
     residential_layout : int
         type of floor plan (default = 0)
@@ -145,11 +148,20 @@ class Residential(TypeBuilding):
         estimation factor to calculate heated cellar area
     '''
 
-    def __init__(self, parent, name, year_of_construction=None,
-                 number_of_floors=None, height_of_floors=None,
-                 net_leased_area=None, residential_layout=None,
-                 neighbour_buildings=None, attic=None, cellar=None,
-                 dormer=None, construction_type=None):
+    def __init__(self, 
+                 parent, 
+                 name, 
+                 year_of_construction=None,
+                 number_of_floors=None, 
+                 height_of_floors=None,
+                 net_leased_area=None, 
+                 with_ahu=False,
+                 residential_layout=None,
+                 neighbour_buildings=None, 
+                 attic=None, 
+                 cellar=None,
+                 dormer=None,
+                 construction_type=None):
 
         '''Constructor of Residential
 

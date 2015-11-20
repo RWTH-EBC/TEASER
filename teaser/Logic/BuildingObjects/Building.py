@@ -8,7 +8,8 @@ import numpy as np
 import inspect
 import scipy.io
 import teaser.Logic.Utilis as utilis
-
+from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU \
+    import BuildingAHU
 class Building(object):
     '''Building Class
 
@@ -31,6 +32,9 @@ class Building(object):
         average height of the floors (default: None)
     net_leased_area = float
         total net leased area of building (default: None)
+    with_ahu : Boolean
+        If set to true, an instance of BuildingAHU.py object is assigned to
+        the attribute central_ahu
 
     Note: the listed attributes are just the ones that are set by the user
           calculated values are not included in this list
@@ -50,8 +54,7 @@ class Building(object):
         name of the city the building is located at
     thermal_zones : list
         list of all containing thermal zones (ThermalZone())
-    central_ahu : BuildingAHU.py object
-        BuildingAHU.py object with information about central AHU 
+    
     outer_area : dict
         dict with outer wall area and orientation
     window_area : dict
@@ -68,7 +71,8 @@ class Building(object):
                  year_of_construction=None,
                  number_of_floors=None,
                  height_of_floors=None,
-                 net_leased_area=None):
+                 net_leased_area=None,
+                 with_ahu=False):
         '''Constructor of Building Class
         '''
 
@@ -82,7 +86,11 @@ class Building(object):
         self.type_of_building = type(self).__name__
 
         self.year_of_construction = year_of_construction
-
+        self._central_ahu = None
+        
+        if with_ahu is True:
+            self._central_ahu = BuildingAHU(self)
+        
         if number_of_floors is not None:
             self.number_of_floors = float(number_of_floors)
         else:
@@ -96,7 +104,7 @@ class Building(object):
         else:
             self.net_leased_area = net_leased_area
 
-        self._central_ahu = None
+        
         self._year_of_retrofit = None
 
         self._thermal_zones = []
@@ -638,9 +646,9 @@ class Building(object):
         
     @central_ahu.setter
     def central_ahu(self, value):
+        
+        ass_error_1 = "central AHU has to be an instance of BuildingAHU()"
 
-        ass_error_1 = "A central AHU has to be an instance of BuildingAHU()"
-
-        assert type(value).__name__ == "BuildingAHU", ass_error_1
+        assert type(value).__name__ == ("BuildingAHU"), ass_error_1
 
         self._central_ahu = value
