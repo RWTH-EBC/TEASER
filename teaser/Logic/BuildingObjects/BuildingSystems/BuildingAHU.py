@@ -7,7 +7,9 @@
 class BuildingAHU(object):
     '''Building Class
 
-    This class represents a general building
+    This class represents a BuildingAHU. 
+    
+    !AixLib sepcific!
 
     Parameters
     ----------
@@ -16,9 +18,6 @@ class BuildingAHU(object):
         The parent class of this object, the Building the AHU belongs to.
         Allows for better control of hierarchical structures.
         (default: None)
-    
-    Note: the listed attributes are just the ones that are set by the user
-          calculated values are not included in this list
 
     Attributes
     ----------
@@ -66,4 +65,4 @@ class BuildingAHU(object):
            or type(value).__name__ == "Institute8" \
            or type(value).__name__ == "Residential":
 
-            self.__parent.central_ahu.append(self)
+            self.__parent.central_ahu = self
