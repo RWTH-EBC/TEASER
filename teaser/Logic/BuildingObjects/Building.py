@@ -33,8 +33,10 @@ class Building(object):
     net_leased_area = float
         total net leased area of building (default: None)
     with_ahu : Boolean
-        If set to true, an instance of BuildingAHU.py object is assigned to
-        the attribute central_ahu
+        If set to True, an empty instance of BuildingAHU is instantiated, to be
+        filled with AHU information
+        If set to False, all attributes are set to 0 as a dummy Output for 
+        AixLib models
 
     Note: the listed attributes are just the ones that are set by the user
           calculated values are not included in this list
@@ -89,7 +91,13 @@ class Building(object):
         self._central_ahu = None
         
         if with_ahu is True:
-            self._central_ahu = BuildingAHU(self)
+            self.central_ahu = BuildingAHU(self)
+        else:
+            self.central_ahu = BuildingAHU(self)
+            self.central_ahu.profile_min_relative_humidity = [0.5,0.5]
+            self.central_ahu.profile_max_relative_humidity = [0.6,0.6]
+            self.central_ahu.profile_status_AHU = [0,0]
+            self.central_ahu.profile_temperature_AHU = [293,293]
         
         if number_of_floors is not None:
             self.number_of_floors = float(number_of_floors)
@@ -385,6 +393,8 @@ class Building(object):
 
         This function creates a matfile (-v4) for set temperatures of each 
         zone
+
+        !AixLib sepcific!        
         
         1. Row: heat set temperature of all zones
         2. Row: cool set temperature of all zones
@@ -431,6 +441,10 @@ class Building(object):
         This function creates a matfile (-v4) for building AHU boundary 
         conditions
         
+        !AixLib sepcific!
+
+        Known limitation:        
+        
         1. Column : time step
         2. Column : desired AHU profile temperature
         3. Column : Desired minimal relative humidity
@@ -454,17 +468,24 @@ class Building(object):
 
         '''
         
+        
+
         if time_line is None:
             time_line = self.create_timeline()
         if profile_temperature_AHU is None:
-            profile_temperature_AHU = self.profile_temperature_AHU
+            profile_temperature_AHU = \
+                        self.central_ahu.profile_temperature_AHU
         if profile_min_relative_humidity is None:
-            profile_min_relative_humidity = self.profile_min_relative_humidity
+            profile_min_relative_humidity = \
+                        self.central_ahu.profile_min_relative_humidity
         if profile_max_relative_humidity is None:
-            profile_max_relative_humidity = self.profile_max_relative_humidity
+            profile_max_relative_humidity = \
+                        self.central_ahu.profile_max_relative_humidity
         if profile_status_AHU is None:
-            profile_status_AHU = self.profile_status_AHU
+            profile_status_AHU = \
+                        self.central_ahu.profile_status_AHU
             
+        
         ass_error_1 = "time line and input have to have the same length"
         
         assert len(time_line) == len(profile_temperature_AHU), \
@@ -510,6 +531,8 @@ class Building(object):
         boundary conditions. It collects all internal gain profiles of the
         zones and stores them into one file. The file is extended for each 
         zone. Only applicable if zones are defined
+
+        !AixLib sepcific!        
         
         1. Column : time step
         2,5,8,...  Column : profile_persons

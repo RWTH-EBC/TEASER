@@ -457,6 +457,18 @@ class Residential(TypeBuilding):
         for zone in self.thermal_zones:
             zone.set_inner_wall_area()
             zone.set_volume_zone()
+            
+        self.modelica_set_temp(path = self.file_set_t)
+        self.modelica_gains_boundary(path = self.file_internal_gains)
+        if self.central_ahu != None:
+            self.modelica_AHU_boundary(path = self.file_ahu)
+        else:
+            self.modelica_AHU_boundary(time_line = [0,3600],
+                                       profile_temperature_AHU = [293,293],
+                                       profile_min_relative_humidity = [0.5,0.5],
+                                       profile_max_relative_humidity = [0.6,0.6],
+                                       profile_status_AHU = [0,0],
+                                       path = self.file_ahu)
     
     @property
     def residential_layout(self):
