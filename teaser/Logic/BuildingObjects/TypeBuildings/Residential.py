@@ -285,10 +285,10 @@ class Residential(TypeBuilding):
         elif self.dormer == 1:
             self._est_factor_dormer = 1.3
 
-        self.file_ahu = "./Tables/Residential/AHU_Residential.mat"
-        self.file_internal_gains = "./Tables/Residential/InternalGains_Residential.mat"
-        self.file_set_t = "./Tables/Residential/Tset_Residential.mat"
-        self.file_weather = "./Tables/" + self.parent.weather_file_name
+        self.file_ahu = "AHU_Residential.mat"
+        self.file_internal_gains = "InternalGains_Residential.mat"
+        self.file_set_t = "Tset_Residential.mat"
+        self.file_weather = "D:\\" + self.parent.weather_file_name
 
     def generate_residential(self):
         '''Generates a residential building.
@@ -458,10 +458,10 @@ class Residential(TypeBuilding):
             zone.set_inner_wall_area()
             zone.set_volume_zone()
             
-        self.modelica_set_temp(path = self.file_set_t)
-        self.modelica_gains_boundary(path = self.file_internal_gains)
+        self.modelica_set_temp(path = "D:\\")
+        self.modelica_gains_boundary(path = "D:\\")
         if self.central_ahu != None:
-            self.modelica_AHU_boundary(path = self.file_ahu)
+            self.modelica_AHU_boundary(path = "D:\\")
         else:
             self.modelica_AHU_boundary(time_line = [0,3600],
                                        profile_temperature_AHU = [293,293],
