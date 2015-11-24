@@ -214,11 +214,11 @@ class UseConditions18599(UseConditions):
         self.heating_time = [5, 18]
 
         self.persons = 0
-        self.profile_persons = []
+        self._profile_persons = []
         self.machines = 0.0
-        self.profile_machines = []
+        self._profile_machines = []
         self.lighting_power = 0.0
-        self.profile_lighting = []
+        self._profile_lighting = []
 
         self.min_ahu = 0.0
         self.max_ahu = 0.5
@@ -299,6 +299,7 @@ class UseConditions18599(UseConditions):
                 self.profile_machines = usage.InternalGains.profile_machines
                 self.lighting_power = usage.InternalGains.lighting_power
                 self.profile_lighting = usage.InternalGains.profile_lighting
+                self.profile_lighting = self.profile_machines
                 self.min_ahu = usage.AHU.min_ahu
                 self.max_ahu = usage.AHU.max_ahu
                 self.with_ahu = usage.AHU.with_ahu
@@ -440,3 +441,52 @@ class UseConditions18599(UseConditions):
             self.parent.typical_width = self._typical_width
 
         self._typical_width = value
+
+    @property
+    def profile_persons(self):
+        return self._profile_persons
+
+    @profile_persons.setter
+    def profile_persons(self, value):
+        
+        if self._profile_persons is None:
+            pass
+        else:
+            if self.parent is not None:
+                self.parent.parent.file_ahu = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")
+        self._profile_persons = value
+                     
+    @property
+    def profile_machines(self):
+        return self._profile_machines
+
+    @profile_machines.setter
+    def profile_machines(self, value):
+        
+        if self._profile_machines is None:
+            pass
+        else:
+            if self.parent is not None:
+                self.parent.parent.file_ahu = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")
+        self._profile_machines = value  
+                                 
+    @property
+    def profile_lighting(self):
+        return self._profile_lighting
+
+    @profile_lighting.setter
+    def profile_lighting(self, value):
+        
+        if self._profile_lighting is None:
+            pass
+        else:
+            if self.parent is not None:
+                self.parent.parent.file_ahu = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")
+                                           
+        self._profile_lighting = value

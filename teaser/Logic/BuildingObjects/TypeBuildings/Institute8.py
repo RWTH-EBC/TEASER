@@ -10,10 +10,16 @@ class Institute8(Office):
 
     '''
 
-    def __init__(self, parent=None, name=None, year_of_construction=None,
-                 number_of_floors=None, height_of_floors=None,
-                 net_leased_area=None, office_layout=None,
-                 window_layout=None, construction_type=None):
+    def __init__(self, parent=None,
+                 name=None,
+                 year_of_construction=None,
+                 number_of_floors=None,
+                 height_of_floors=None,
+                 net_leased_area=None,
+                 with_ahu=False,
+                 office_layout=None,
+                 window_layout=None,
+                 construction_type=None):
 
         '''Constructor of Institute8
 
@@ -21,11 +27,16 @@ class Institute8(Office):
 
         '''
 
-        super(Institute8, self).__init__(parent, name,
-                                         year_of_construction,
-                                         number_of_floors, height_of_floors,
-                                         net_leased_area, office_layout,
-                                         window_layout, construction_type)
+        super(Institute8, self).__init__(parent,
+                                        name,
+                                        year_of_construction,
+                                        number_of_floors,
+                                        height_of_floors,
+                                        net_leased_area,
+                                        with_ahu,
+                                        office_layout,
+                                        window_layout,
+                                        construction_type)
 
         self.zone_area_factors = \
             {"Meeting": [0.04, "Meeting, Conference, seminar"],

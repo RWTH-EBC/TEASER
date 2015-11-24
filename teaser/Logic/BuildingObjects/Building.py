@@ -444,56 +444,59 @@ class Building(object):
         ----------
         time_line :[[int]]
             list of time steps 
-        profile_temperature_AHU : [float]
+        path : str
+            optional path, when matfile is exported seperately
+            
+        Attributes
+        ----------
+        profile_temperature : [float]
             timeline of temperatures requirements for AHU simulation
         profile_min_relative_humidity : [float]
             timeline of relative humidity requirements for AHU simulation
         profile_max_relative_humidity : [float]
             timeline of relative humidity requirements for AHU simulation
-        profile_status_AHU : [int]
-            timeline of status of the AHU simulation (on/off)
-        path : str
-            optional path, when matfile is exported seperately
+        profile_v_flow : [int]
+            timeline of desired relative v_flow of the AHU simulation (0..1)
 
         '''
         if time_line is None:
             time_line = self.create_timeline()
         if self.with_ahu is True:
-            profile_temperature_AHU = \
-                        self.central_ahu.profile_temperature_AHU
+            profile_temperature = \
+                        self.central_ahu.profile_temperature
             profile_min_relative_humidity = \
                         self.central_ahu.profile_min_relative_humidity
             profile_max_relative_humidity = \
                         self.central_ahu.profile_max_relative_humidity
-            profile_status_AHU = \
-                        self.central_ahu.profile_status_AHU
+            profile_v_flow = \
+                        self.central_ahu.profile_v_flow
         else:
             #Dummy values for Input Table (based on discussion with pme)
             time_line = [[0],[3600]]
-            profile_temperature_AHU = [293.15,293.15]
+            profile_temperature = [293.15,293.15]
             profile_min_relative_humidity = [0,0]
             profile_max_relative_humidity = [1,1]
-            profile_status_AHU = [0,1]
+            profile_v_flow = [0,1]
             
         
         ass_error_1 = "time line and input have to have the same length"
         
-        assert len(time_line) == len(profile_temperature_AHU), \
+        assert len(time_line) == len(profile_temperature), \
                             (ass_error_1 + ",profile_temperature_AHU")
         assert len(time_line) == len(profile_min_relative_humidity), \
                             (ass_error_1 + ",profile_min_relative_humidity")
         assert len(time_line) == len(profile_max_relative_humidity), \
                             (ass_error_1 + ",profile_max_relative_humidity")
-        assert len(time_line) == len(profile_status_AHU), \
+        assert len(time_line) == len(profile_v_flow), \
                             (ass_error_1 + ",profile_status_AHU")
         
         
         for i, time in enumerate(time_line):
 
-            time.append(profile_temperature_AHU[i])
+            time.append(profile_temperature[i])
             time.append(profile_min_relative_humidity[i])
             time.append(profile_max_relative_humidity[i])
-            time.append(profile_status_AHU[i])
+            time.append(profile_v_flow[i])
 
         ahu_boundary = np.array(time_line)
         
@@ -554,8 +557,8 @@ class Building(object):
                 time_line = self.create_timeline(duration_profile = duration)
                 zone_count.use_conditions.profile_persons.insert(0,0)
                 zone_count.use_conditions.profile_machines.insert(0,0)
-                zone_count.use_conditions.profile_lighting.insert(0,0)
-                
+                #zone_count.use_conditions.profile_lighting.insert(0,0)
+            
             ass_error_1 = "time line and input have to have the same length"
 
             assert len(time_line) == len(zone_count.use_conditions.profile_persons), \
