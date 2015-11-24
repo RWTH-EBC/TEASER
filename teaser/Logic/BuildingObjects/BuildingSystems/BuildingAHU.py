@@ -44,12 +44,14 @@ class BuildingAHU(object):
         taking a little heat transfer into account although HRS is disabled 
         (in case that a HRS is physically installed in the AHU) in AixLib:
         "efficiencyHRS_disabled"
-    profile_relative_humidity : [float]
-        timeline of relative humidity requirements for AHU simulation
-    profile_status_AHU : [Boolean]
-        timeline of status of the AHU simulation (on/off)
-    profile_temeprature_AHU : [float]
+    profile_temperature : [float]
         timeline of temperatures requirements for AHU simulation
+    profile_min_relative_humidity : [float]
+        timeline of relative humidity requirements for AHU simulation
+    profile_max_relative_humidity : [float]
+        timeline of relative humidity requirements for AHU simulation
+    profile_v_flow : [int]
+        timeline of desired relative v_flow of the AHU simulation (0..1)
 
     '''
     
@@ -67,10 +69,11 @@ class BuildingAHU(object):
         self.efficiency_recovery = 0.8
         self.efficiency_revocery_false = 0.2
 
-        self.profile_min_relative_humidity = []
-        self.profile_max_relative_humidity = []
-        self.profile_status_AHU = []
-        self.profile_temperature_AHU = []
+        self._profile_min_relative_humidity = None
+        self._profile_max_relative_humidity = None
+        self._profile_v_flow = None
+        self._profile_temperature = None
+     
         
     @property
     def parent(self):
@@ -98,3 +101,67 @@ class BuildingAHU(object):
            or type(value).__name__ == "Residential":
 
             self.__parent.central_ahu = self
+    
+    @property
+    def profile_min_relative_humidity(self):
+        return self._profile_min_relative_humidity
+
+    @profile_min_relative_humidity.setter
+    def profile_min_relative_humidity(self, value):
+        
+        if self._profile_min_relative_humidity is None:
+            pass
+        else:
+            self.parent.file_ahu = ("\\AHU_" +
+                                    self.parent.name +
+                                    ".mat")
+                                    
+        self._profile_min_relative_humidity = value
+                                    
+    @property
+    def profile_max_relative_humidity(self):
+        return self._profile_max_relative_humidity
+
+    @profile_max_relative_humidity.setter
+    def profile_max_relative_humidity(self, value):
+        
+        if self._profile_max_relative_humidity is None:
+            pass
+        else:
+            self.parent.file_ahu = ("\\AHU_" +
+                                    self.parent.name +
+                                    ".mat")
+                                    
+        self._profile_max_relative_humidity = value
+
+                                    
+    @property
+    def profile_v_flow(self):
+        return self._profile_v_flow
+
+    @profile_v_flow.setter
+    def profile_v_flow(self, value):
+        
+        if self._profile_v_flow is None:
+            pass
+        else:
+            self.parent.file_ahu = ("\\AHU_" +
+                                    self.parent.name +
+                                    ".mat")
+                                    
+        self._profile_v_flow = value
+
+    @property
+    def profile_temperature(self):
+        return self._profile_temperature
+
+    @profile_temperature.setter
+    def profile_temperature(self, value):
+        
+        if self._profile_temperature is None:
+            pass
+        else:
+            self.parent.file_ahu = ("\\AHU_" +
+                                    self.parent.name +
+                                    ".mat")
+        self._profile_temperature = value

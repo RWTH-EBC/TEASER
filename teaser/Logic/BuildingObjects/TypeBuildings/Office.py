@@ -52,6 +52,9 @@ class Office(TypeBuilding):
     net_leased_area : float
         total net leased area of building
 
+    with_ahu : boolean
+        if building has a central AHU or not    
+
     office_layout : int
         type of floor plan (default = 0)
 
@@ -135,17 +138,23 @@ class Office(TypeBuilding):
 
     '''
 
-    def __init__(self, parent=None, name=None, year_of_construction=None,
-                 number_of_floors=None, height_of_floors=None,
-                 net_leased_area=None, office_layout=None,
-                 window_layout=None, construction_type=None):
+    def __init__(self, parent=None,
+                 name=None,
+                 year_of_construction=None,
+                 number_of_floors=None,
+                 height_of_floors=None,
+                 net_leased_area=None,
+                 with_ahu=False,
+                 office_layout=None,
+                 window_layout=None,
+                 construction_type=None):
         '''Constructor of Office
 
         
         '''
         super(Office, self).__init__(parent, name, year_of_construction,
                                      number_of_floors, height_of_floors,
-                                     net_leased_area)
+                                     net_leased_area, with_ahu)
 
         self.office_layout = office_layout
         self.window_layout = window_layout
@@ -226,6 +235,15 @@ class Office(TypeBuilding):
 
         self._est_length = ((net_leased_area / number_of_floors) * 
                             self.gross_factor) / self._est_width
+
+
+        if self.with_ahu is True:
+            self.central_ahu.profile_temperature = (7*[293.15] +
+                                                    12*[295.15] +
+                                                    6*[293.15])
+            self.central_ahu.profile_min_relative_humidity = (25*[0.45])
+            self.central_ahu.profile_max_relative_humidity = (25*[0.55])
+            self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
 
         self.file_ahu = "./Tables/Office/AHU_Office.mat"
         self.file_internal_gains = "./Tables/Office/InternalGains_Office.mat"

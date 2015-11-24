@@ -154,7 +154,7 @@ class Residential(TypeBuilding):
                  year_of_construction=None,
                  number_of_floors=None, 
                  height_of_floors=None,
-                 net_leased_area=None, 
+                 net_leased_area=None,
                  with_ahu=False,
                  residential_layout=None,
                  neighbour_buildings=None, 
@@ -170,7 +170,7 @@ class Residential(TypeBuilding):
 
         super(Residential, self).__init__(parent, name, year_of_construction,
                                           number_of_floors, height_of_floors,
-                                          net_leased_area)
+                                          net_leased_area, with_ahu)
 
         self.residential_layout = residential_layout
         self.neighbour_buildings = neighbour_buildings
@@ -284,7 +284,15 @@ class Residential(TypeBuilding):
             self._est_factor_dormer = 1.0
         elif self.dormer == 1:
             self._est_factor_dormer = 1.3
-
+            
+        if self.with_ahu is True:
+            self.central_ahu.profile_temperature = (7*[293.15] +
+                                                    12*[295.15] +
+                                                    6*[293.15])
+            self.central_ahu.profile_min_relative_humidity = (25*[0.45])
+            self.central_ahu.profile_max_relative_humidity = (25*[0.55])
+            self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
+        
         self.file_ahu = "\\AHU_Residential.mat"
         self.file_internal_gains = "\\InternalGains_Residential.mat"
         self.file_set_t = "\\Tset_Residential.mat"

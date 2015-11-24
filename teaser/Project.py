@@ -186,6 +186,7 @@ class Project(object):
                          number_of_floors,
                          height_of_floors,
                          net_leased_area,
+                         with_ahu=True,
                          office_layout=None,
                          window_layout=None,
                          construction_type=None):
@@ -237,6 +238,7 @@ class Project(object):
                            number_of_floors,
                            height_of_floors,
                            net_leased_area,
+                           with_ahu,
                            office_layout,
                            window_layout,
                            construction_type)
@@ -251,6 +253,7 @@ class Project(object):
                             number_of_floors,
                             height_of_floors,
                             net_leased_area,
+                            with_ahu=True,
                             office_layout=None,
                             window_layout=None,
                             construction_type=None):
@@ -301,6 +304,7 @@ class Project(object):
                               number_of_floors,
                               height_of_floors,
                               net_leased_area,
+                              with_ahu,
                               office_layout,
                               window_layout,
                               construction_type)
@@ -315,6 +319,7 @@ class Project(object):
                              number_of_floors,
                              height_of_floors,
                              net_leased_area,
+                             with_ahu=True,
                              office_layout=None,
                              window_layout=None,
                              construction_type=None):
@@ -365,6 +370,7 @@ class Project(object):
                                number_of_floors,
                                height_of_floors,
                                net_leased_area,
+                               with_ahu,
                                office_layout,
                                window_layout,
                                construction_type)
@@ -379,6 +385,7 @@ class Project(object):
                              number_of_floors,
                              height_of_floors,
                              net_leased_area,
+                             with_ahu=True,
                              office_layout=None,
                              window_layout=None,
                              construction_type=None):
@@ -429,6 +436,7 @@ class Project(object):
                                number_of_floors,
                                height_of_floors,
                                net_leased_area,
+                               with_ahu,
                                office_layout,
                                window_layout,
                                construction_type)
