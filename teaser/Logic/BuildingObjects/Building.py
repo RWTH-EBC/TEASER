@@ -92,12 +92,6 @@ class Building(object):
         
         if with_ahu is True:
             self.central_ahu = BuildingAHU(self)
-        else:
-            self.central_ahu = BuildingAHU(self)
-            self.central_ahu.profile_min_relative_humidity = [0.5,0.5]
-            self.central_ahu.profile_max_relative_humidity = [0.6,0.6]
-            self.central_ahu.profile_status_AHU = [0,0]
-            self.central_ahu.profile_temperature_AHU = [293,293]
         
         if number_of_floors is not None:
             self.number_of_floors = float(number_of_floors)
@@ -405,7 +399,7 @@ class Building(object):
             optional path, when matfile is exported seperately
                 
         '''
-        pass
+        print(self.file_set_t)
         if self.file_set_t is None:
             self.file_set_t = "\\Tset_Building.mat"
         else:
@@ -414,8 +408,8 @@ class Building(object):
         if path is None:
             path = utilis.get_default_path() + self.file_set_t
         else:
-            path = utilis.create_path(path) + self.file_set_t
-            
+            path =  utilis.create_path(path) + self.file_set_t
+        print(path)
         t_set_heat = [0]
         t_set_cool = [0]
         for zone_count in self.thermal_zones:
