@@ -10,6 +10,7 @@ import scipy.io
 import teaser.Logic.Utilis as utilis
 from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU \
     import BuildingAHU
+
 class Building(object):
     '''Building Class
 
@@ -35,8 +36,6 @@ class Building(object):
     with_ahu : Boolean
         If set to True, an empty instance of BuildingAHU is instantiated, to be
         filled with AHU information
-        If set to False, all attributes are set to 0 as a dummy Output for 
-        AixLib models
 
     Note: the listed attributes are just the ones that are set by the user
           calculated values are not included in this list
@@ -89,6 +88,7 @@ class Building(object):
 
         self.year_of_construction = year_of_construction
         self._central_ahu = None
+        self.with_ahu = with_ahu
         
         if with_ahu is True:
             self.central_ahu = BuildingAHU(self)
@@ -106,7 +106,6 @@ class Building(object):
         else:
             self.net_leased_area = net_leased_area
 
-        
         self._year_of_retrofit = None
 
         self._thermal_zones = []
@@ -425,10 +424,6 @@ class Building(object):
     
     def modelica_AHU_boundary(self,
                               time_line = None,
-                              profile_temperature_AHU = None,
-                              profile_min_relative_humidity = None,
-                              profile_max_relative_humidity = None,
-                              profile_status_AHU = None,
                               path = None):
         '''creates .mat file for AHU boundary conditions (building)
 
@@ -461,23 +456,24 @@ class Building(object):
             optional path, when matfile is exported seperately
 
         '''
-        
-        
-
         if time_line is None:
             time_line = self.create_timeline()
-        if profile_temperature_AHU is None:
+        if self.with_ahu is True:
             profile_temperature_AHU = \
                         self.central_ahu.profile_temperature_AHU
-        if profile_min_relative_humidity is None:
             profile_min_relative_humidity = \
                         self.central_ahu.profile_min_relative_humidity
-        if profile_max_relative_humidity is None:
             profile_max_relative_humidity = \
                         self.central_ahu.profile_max_relative_humidity
-        if profile_status_AHU is None:
             profile_status_AHU = \
                         self.central_ahu.profile_status_AHU
+        else:
+            #Dummy values for Input Table (based on discussion with pme)
+            time_line = [[0],[3600]]
+            profile_temperature_AHU = [293.15,293.15]
+            profile_min_relative_humidity = [0,0]
+            profile_max_relative_humidity = [1,1]
+            profile_status_AHU = [0,1]
             
         
         ass_error_1 = "time line and input have to have the same length"
@@ -510,7 +506,7 @@ class Building(object):
             path = utilis.get_default_path() + self.file_ahu
         else:
             path = utilis.create_path(path) + self.file_ahu
-
+        print(path)
         scipy.io.savemat(path,
                          mdict={'AHU': ahu_boundary},
                          appendmat = False,
