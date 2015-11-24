@@ -36,7 +36,7 @@ def example_type_building():
                               cellar =  1,
                               construction_type = "heavy",
                               dormer = 1)
-    prj.list_of_buildings[-1].modelica_gains_boundary()
+    prj.list_of_buildings[-1].modelica_set_temp()
     """To export the parameters to a Modelica record, we use the export_record
     function. path = None indicates, that we want to store the records in 
     TEASER'S Output folder""" 

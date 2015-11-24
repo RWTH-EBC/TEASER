@@ -201,8 +201,8 @@ class UseConditions18599(UseConditions):
         self.part_load_factor_lighting = 0.7
         self.ratio_conv_rad_lighting = 0.5
 
-        self.set_temp_heat = 21.0
-        self.set_temp_cool = 24.0
+        self._set_temp_heat = None
+        self._set_temp_cool = None
         self.temp_set_back = 4.0
         self.min_temp_heat = 20.0
         self.max_temp_cool = 26.0
@@ -214,11 +214,11 @@ class UseConditions18599(UseConditions):
         self.heating_time = [5, 18]
 
         self.persons = 0
-        self._profile_persons = []
+        self._profile_persons = None
         self.machines = 0.0
-        self._profile_machines = []
+        self._profile_machines = None
         self.lighting_power = 0.0
-        self._profile_lighting = []
+        self._profile_lighting = None
 
         self.min_ahu = 0.0
         self.max_ahu = 0.5
@@ -490,3 +490,37 @@ class UseConditions18599(UseConditions):
                                                ".mat")
                                            
         self._profile_lighting = value
+        
+    @property
+    def set_temp_heat(self):
+        return self._set_temp_heat
+
+    @set_temp_heat.setter
+    def set_temp_heat(self, value):
+        
+        if self._set_temp_heat is None:
+            pass
+        else:
+            if self.parent is not None:
+                self.parent.parent.file_ahu = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")
+                                           
+        self._set_temp_heat = value
+        
+    @property
+    def set_temp_cool(self):
+        return self._set_temp_cool
+
+    @set_temp_cool.setter
+    def set_temp_cool(self, value):
+        
+        if self._set_temp_cool is None:
+            pass
+        else:
+            if self.parent is not None:
+                self.parent.parent.file_ahu = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")
+                                           
+        self._set_temp_cool = value
