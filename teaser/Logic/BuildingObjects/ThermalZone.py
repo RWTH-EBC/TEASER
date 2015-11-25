@@ -746,22 +746,22 @@ class ThermalZone(object):
             self.typical_width = value.typical_width
         self._use_conditions = value
 
-    # @property
-    # def area(self):
-    #     return self._area
+    @property
+    def area(self):
+        return self._area
 
-    # @area.setter
-    # def area(self, value):
-    #     if self.parent is not None:
-    #         if self._area is None:
-    #             self._area = value
-    #             self.parent.net_leased_area += value
-    #         else:
-    #             self.parent.net_leased_area -= self._area
-    #             self.parent.net_leased_area += value
-    #             self._area = value
-    #     else:
-    #         self._area = value
+    @area.setter
+    def area(self, value):
+        if self.parent is not None:
+            if self._area is None:
+                self._area = value
+                # self.parent.net_leased_area += value
+            else:
+                self.parent.net_leased_area -= self._area
+                self.parent.net_leased_area += value
+                self._area = value
+        else:
+            self._area = value
 
     @property
     def volume(self):
