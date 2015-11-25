@@ -634,7 +634,7 @@ class Project(object):
         #check the arguments
         assert(building_model) in [None, "MultizoneEquipped", "Multizone"]
         assert(zone_model) in [None, "ThermalZoneEquipped", "ThermalZone"]
-        assert(corG) in [None, "vdi"]
+        assert(corG) in [None, True, False]
         if path is None:
             path = "OutputData\\" + self.name
         else:
