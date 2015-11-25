@@ -248,3 +248,13 @@ class Controller():
                     zone.use_conditions.load_use_conditions(zone_type)
                     break
         return project
+
+    @classmethod
+    def save_building_area(self, project, area, orientation):
+        prj = project
+        for building in prj.list_of_buildings:
+            for zone in building.thermal_zones:
+                for outerwall in zone.outer_walls:
+                    if(outerwall.orientation == orientation):
+                        building.set_outer_wall_area(area, orientation)
+        return prj

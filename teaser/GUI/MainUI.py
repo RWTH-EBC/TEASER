@@ -2265,6 +2265,22 @@ class MainUI(QDialog):
 
         self.display_current_building()
 
+    def save_changed_envelopes_values(self):
+        if self.current_envelope.startswith("Outer Wall"):
+            for orientation_value in self.guiinfo.orientations_numbers.keys():
+                orientation_string = str(self.guiinfo.orientations_numbers
+                                         [orientation_value])
+                if self.envelope_orientation_groupbox.currentText() == \
+                        orientation_string:
+                        self.project =\
+                         Controller.save_building_area(self.project,
+                                    float(self.envelope_area_textbox.text()),
+                                    orientation_value)
+        self.display_current_building()
+
+
+
+
     def switch_current_element(self):
 
         """ Switches the display of the current element when a new zone is
@@ -2628,6 +2644,18 @@ class MainUI(QDialog):
         self.create_new_element_ui_page.setWindowModality(
             Qt.ApplicationModal)
         self.create_new_element_ui_page.show()
+
+    def create_new_envelope_ui(self):
+        self.create__envelope_ui = QtGui.QWizardPage()
+        self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.create__envelope_ui.setWindowTitle("Set all construction")
+        self.create__envelope_ui.setFixedWidth(300)
+        self.create__envelope_ui.setFixedHeight(150)
+        self.create__envelope_ui_window_layout = QtGui.QGridLayout()
+        self.create__envelope_ui.setLayout(
+                                 self.create__envelope_ui_window_layout)
+        self.create__envelope_ui.setWindowModality(Qt.ApplicationModal)
+        self.create__envelope_ui.show()
 
     def create_new_layer_ui(self):
         self.create_layer_ui = QtGui.QWizardPage()
@@ -3280,14 +3308,14 @@ class MainUI(QDialog):
         self.envelope_element_set_all_construction_button = QtGui.QPushButton()
         self.envelope_element_set_all_construction_button.setText(
                                                         "set all construction")
-        # self.connect(self.envelope_element_save_button, SIGNAL(
-        #   "clicked()"), self.saveChangedZoneValues)
+        self.connect(self.envelope_element_save_button, SIGNAL(
+           "clicked()"), self.save_changed_envelopes_values)
         self.connect(self.envelope_element_save_button, SIGNAL(
            "clicked()"), self.envelopes_value_window, QtCore.SLOT("close()"))
-
         self.connect(self.envelope_element_cancel_button, SIGNAL(
             "clicked()"), self.envelopes_value_window, QtCore.SLOT("close()"))
-
+        self.connect(self.envelope_element_set_all_construction_button, SIGNAL(
+           "clicked()"), self.create_new_envelope_ui)
         self.save_cancel_layout.addWidget(
                     self.envelope_element_save_button, 0, 0)
         self.save_cancel_layout.addWidget(
@@ -3312,7 +3340,7 @@ class MainUI(QDialog):
         self.envelope_area_textbox = QtGui.QLineEdit()
         self.envelope_area_textbox.setObjectName(_fromUtf8(
                                                 u"EnvelopeAreaTextBox"))
-        self.envelope_area_textbox.setReadOnly(True)
+        # self.envelope_area_textbox.setReadOnly(True)
 
         self.envelope_orientation_label = QtGui.QLabel("Orientation")
         self.envelope_orientation_groupbox = QtGui.QComboBox()
@@ -3322,17 +3350,18 @@ class MainUI(QDialog):
             self.envelope_orientation_groupbox.addItem(
                                                 orientation, userData=None)
 
-        Current_item = self.outer_elements_model.itemFromIndex(item)
-        stringCurrentItem = Current_item.text()
-        listOfCurItem = stringCurrentItem.split()
-        if stringCurrentItem.startswith("Outer Wall"):
+        current_item = self.outer_elements_model.itemFromIndex(item)
+        string_current_item = current_item.text()
+        listOfCurItem = string_current_item.split()
+        self.current_envelope = string_current_item
+        if string_current_item.startswith("Outer Wall"):
             self.envelope_name_textbox.setText(str("Outer Wall"))
             self.envelope_area_textbox.setText(str(listOfCurItem[5]))
             self.envelope_orientation_groupbox.setCurrentIndex(
                 self.envelope_orientation_groupbox.findText(
                     str(listOfCurItem[3])))
 
-        elif stringCurrentItem.startswith("Window"):
+        elif string_current_item.startswith("Window"):
             self.envelope_name_textbox.setText(str("Window"))
             self.envelope_area_textbox.setText(str(listOfCurItem[4]))
             self.envelope_orientation_groupbox.setCurrentIndex(
