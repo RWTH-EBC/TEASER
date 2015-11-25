@@ -80,7 +80,7 @@ class Layer(object):
     @thickness.setter
     def thickness(self, value):
         if value is not None:
-            self._thickness = value
+            self._thickness = float(value)
         if self.material is not None:
-            if vars(self.material)['thermal_conduc'] != 0:
+            if vars(self.material)['_thermal_conduc'] != 0:
                 self.parent.calc_ua_value()
