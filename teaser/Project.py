@@ -306,6 +306,7 @@ class Project(object):
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_institute4(self,
                              name,
@@ -369,6 +370,7 @@ class Project(object):
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_institute8(self,
                              name,
@@ -432,6 +434,7 @@ class Project(object):
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_residential(self,
                               name,
