@@ -132,6 +132,7 @@ class Building(object):
             for wall in zone.outer_walls:
                 if wall.orientation == orientation:
                     wall.area = ((new_area / self.net_leased_area) * zone.area)
+        self.compare_area_dicts()
 
     def set_window_area(self, new_area, orientation):
         '''Window area setter
@@ -152,6 +153,7 @@ class Building(object):
             for win in zone.windows:
                 if win.orientation == orientation:
                     win.area = ((new_area / self.net_leased_area) * zone.area)
+        self.compare_area_dicts()
 
     def get_outer_wall_area(self, orientation):
         '''Get aggregated outer wall area of one orientation
@@ -174,7 +176,8 @@ class Building(object):
         sum_area = 0.0
         for zone_count in self.thermal_zones:
             for wall_count in zone_count.outer_walls:
-                if wall_count.orientation == orientation:
+                if wall_count.orientation == orientation and\
+                        wall_count.area is not None:
                     sum_area += (wall_count.area)
         return sum_area
 
@@ -200,7 +203,8 @@ class Building(object):
         sum_area = 0.0
         for zone_count in self.thermal_zones:
             for win_count in zone_count.windows:
-                if win_count.orientation == orientation:
+                if win_count.orientation == orientation and\
+                        win_count.area is not None:
                     sum_area += (win_count.area)
         return sum_area
 
@@ -263,7 +267,7 @@ class Building(object):
         fills self.outer_area with the sum of outer wall area corresponding to
         the orientations of the building
         '''
-
+        self.outer_area = {}
         for zone_count in self.thermal_zones:
             for wall_count in zone_count.outer_walls:
                 self.outer_area[wall_count.orientation] = None
@@ -278,12 +282,24 @@ class Building(object):
         the orientations of the building
 
         '''
+        self.window_area = {}
         for zone_count in self.thermal_zones:
-            for win_count in zone_count.outer_walls:
+            for win_count in zone_count.windows:
                 self.window_area[win_count.orientation] = None
 
         for key in self.window_area:
             self.window_area[key] = self.get_window_area(key)
+
+    def compare_area_dicts(self):
+        '''Compares the outer area and window area dicts and rewrites them if
+        possible
+        '''
+        for key in self.window_area.keys():
+            if key not in self.outer_area.keys():
+                self.outer_area[key] = None
+        for key in self.outer_area.keys():
+            if key not in self.window_area.keys():
+                self.window_area[key] = None
 
     def calc_building_parameter(self, calculation_core):
         '''calc all building parameters
@@ -299,6 +315,8 @@ class Building(object):
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
+        self.compare_area_dicts()
+
         self._calculation_method = calculation_core
 
         for zone in self.thermal_zones:
@@ -388,7 +406,7 @@ class Building(object):
     @window_area.setter
     def window_area(self, value):
         # some improvement needed here
-        self.__window_area = value
+        self._window_area = value
 
     @property
     def year_of_retrofit(self):
