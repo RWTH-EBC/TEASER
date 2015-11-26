@@ -1,107 +1,107 @@
-parameter name				|	in export (no / hardcoded / full)	|	in TEASER (no / where)
-							|										|
-----------------------------|------BUILDING LEVEL-------------------|-------------------------
-numZones                    | baseRecord / fully automated          | Building
-T0all                       | NO                                    |
-MinHeating                  | NO                                    |
-MinHeatingShare             | NO                                    |
-Vair                        | baseRecord / fully automated          | Building
-BuildingArea                | baseRecord / fully automated          | Building
-Q_flow_heat                 | NO                                    |
-Q_N                         | NO                                    |
-weightfactor_heater         | NO                                    |
-Heater_on                   | NO                                    |
-h_heater                    | baseRecord / fully automated          | Building
-l_heater                    | NO                                    |
-KR_heater                   | NO                                    |
-TN_heater                   | NO                                    |
-Q_flow_cooler               | NO                                    |
-weightfactor_cooler         | NO                                    |
-Cooler_on                   | NO                                    |
-h_cooler                    | NO                                    |
-l_cooler                    | baseRecord / fully automated          | Building
-KR_cooler                   | NO                                    |
-TN_cooler                   | NO                                    |
-- - - - - AHUMODES- - - - - |- - - - - - - - - - - - - - - - - - - -| 
-heating                     | NO                                    |
-cooling                     | NO                                    |
-dehumidification            | NO                                    |
-humidification              | NO                                    |
-HRS                         | NO                                    |
-BPF_DeHu                    | NO                                    |
-efficiencyHRS_enabled       | NO                                    |
-efficiencyHRS_disabled      | NO                                    |
-----------------------------|----------ZONE PARAMETERS--------------|-------------------------
-T0all                       | zoneRecord / hardcoded                |  NO
-Lchar                       | NO                                    |
-Bchar                       | NO                                    |
-Hb                          | NO                                    |
-Nb                          | NO                                    |
-Q_flow_heat                 | NO                                    |
-Q_N                         | NO                                    |
-weightfactor_heater         | NO                                    |
-Heater_on                   | zoneRecord / hardcoded                | NO ?
-h_heater                    | zoneRecord / fully automated          | ZONE
-l_heater                    | NO                                    |
-KR_heater                   | NO                                    |
-TN_heater                   | NO                                    |
-Q_flow_cooler               | NO                                    |
-weightfactor_cooler         | NO                                    |
-Cooler_on                   | zoneRecord / hardcoded                | NO ?
-h_cooler                    | NO                                    |
-l_cooler                    | zoneRecord / hardcoded                | NO ?
-KR_cooler                   | NO                                    |
-TN_cooler                   | NO                                    |
-ActivityTypePeople          | zoneRecord / hardcoded                | NO ?
-NrPeople                    | zoneRecord / fully automated          | UseConditions
-RatioConvectiveHeatPeople   | zoneRecord / hardcoded                | NO
-ActivityTypeMachines        | zoneRecord / hardcoded                | NO
-NrPeopleMachines            | zoneRecord / fully automated          | UseConditions
-RatioConvetoveHeatMachines  | zoneRecord / hardcoded                | NO
-RoomArea                    | zoneRecord / fully automated          | Zone
-LightingPower               | zoneRecord / fully automated          | UseConditions
-RatioConvetiveHeatLighting  | zoneRecord / hardcoded                | UseConditions
-withInnerwalls              | zoneRecord / fully automated          | Zone.inner_walls
-R1i                         | zoneRecord / fully automated          | Zone
-C1i                         | zoneRecord / fully automated          | Zone
-Ai                          | zoneRecord / fully automated          | Zone
-alphaiwi                    | zoneRecord / fully automated          | Zone
-epsi                        | zoneRecord / hardcoded                |
-withOuterwalls              | zoneRecord / fully automated          | Zone.outer_walls
-RRest                       | zoneRecord / fully automated          | Zone
-R1o                         | zoneRecord / fully automated          | Zone
-C1o                         | zoneRecord / fully automated          | Zone
-Ao                          | zoneRecord / fully automated          | Zone
-alphaowi                    | zoneRecord / fully automated          | Zone
-alphaowo                    | zoneRecord / fully automated          | Zone
-epso                        | zoneRecord / hardcoded                |
-aowo                        | zoneRecord / hardcoded                |
-n                           | zoneRecord / fully automated          | Zone.outer_walls
-weightfactorswall           | zoneRecord / fully automated          | Zone.weightfactors_ow
-weightfactorground          | zoneRecord / fully automated          | Zone.weightfactor_ground
-temperatureground           | zoneRecord / hardcoded                | NO
-alphaConvWinInner           | zoneRecord / fully automated          | Zone
-alphaConvWinOuter           | zoneRecord / fully automated          | Zone
-awin                        | zoneRecord / hardcoded                | ?
-withWindows                 | zoneRecord / fully automated          | Zone.windows
-splitfac                    | zoneRecord / hardcoded                | ?
-Aw                          | zoneRecord / fully automated          | Zone.windows
-weightfactorswindow         | zoneRecord / fully automated          | Zone.weigthfactor_win
-epsw                        | zoneRecord / hardcoded                | ?
-g                           | zoneRecord / fully automated          | Zone
-RWin                        | zoneRecord / fully automated          | Zone
-UWin                        | NO                                    | ?
-gsunblind                   | zoneRecord / fully automated          | Zone.windows
-Imax                        | zoneRecord / hardcoded                | ?
-Vair                        | zoneRecord / fully automated          | Zone
-rhoair                      | zoneRecord / hardcoded                | ?
-cair                        | zoneRecord / hardcoded                | ?
-withAHU                     | zoneRecord / fully automated          | UseConditions
-minAHU                      | zoneRecord / fully automated          | UseConditions
-maxAHU                      | zoneRecord / fully automated          | UseConditions
-useConstantACHrate          | NO                                    |
-baseACH                     | NO                                    |
-maxUserACH                  | NO                                    |
-maxOverheatingACH           | NO                                    |
-maxSummerACH                | NO                                    |
-winterReduction             | NO                                    |
+parameter name (used in Model?) |	in export (no / hardcoded / full)	|	in TEASER (no / where)
+								|										|
+--------------------------------|------BUILDING LEVEL-------------------|-------------------------
+numZones (Yes)                 	| baseRecord / fully automated          | Building
+T0all                       	| NO                                    |
+MinHeating                  	| NO                                    |
+MinHeatingShare             	| NO                                    |
+Vair (Yes)                     	| baseRecord / fully automated          | Building
+BuildingArea                	| baseRecord / fully automated          | Building
+Q_flow_heat                 	| NO                                    |
+Q_N                         	| NO                                    |
+weightfactor_heater         	| NO                                    |
+Heater_on                   	| NO                                    |
+h_heater                    	| baseRecord / fully automated          | Building
+l_heater                    	| NO                                    |
+KR_heater                   	| NO                                    |
+TN_heater                   	| NO                                    |
+Q_flow_cooler               	| NO                                    |
+weightfactor_cooler         	| NO                                    |
+Cooler_on                   	| NO                                    |
+h_cooler                    	| NO                                    |
+l_cooler                    	| baseRecord / fully automated          | Building
+KR_cooler                   	| NO                                    |
+TN_cooler                   	| NO                                    |
+- - - - - AHUMODES- - - - - - -	|- - - - - - - - - - - - - - - - - - - -| 
+heating (Yes)                  	| NO                                    |
+cooling (Yes)                  	| NO                                    |
+dehumidification (Yes)         	| NO                                    |
+humidification (Yes)           	| NO                                    |
+HRS (Yes)                      	| NO                                    |
+BPF_DeHu (Yes)                 	| NO                                    |
+efficiencyHRS_enabled (Yes)    	| NO                                    |
+efficiencyHRS_disabled (Yes)   	| NO                                    |
+--------------------------------|----------ZONE PARAMETERS--------------|-------------------------
+T0all (Yes)                    	| zoneRecord / hardcoded                |  NO
+Lchar                       	| NO                                    |
+Bchar                       	| NO                                    |
+Hb                          	| NO                                    |
+Nb                          	| NO                                    |
+Q_flow_heat                 	| NO                                    |
+Q_N                         	| NO                                    |
+weightfactor_heater         	| NO                                    |
+Heater_on                   	| zoneRecord / hardcoded                | NO ?
+h_heater                    	| zoneRecord / fully automated          | ZONE
+l_heater                    	| NO                                    |
+KR_heater                   	| NO                                    |
+TN_heater                   	| NO                                    |
+Q_flow_cooler               	| NO                                    |
+weightfactor_cooler         	| NO                                    |
+Cooler_on                   	| zoneRecord / hardcoded                | NO ?
+h_cooler                    	| NO                                    |
+l_cooler                    	| zoneRecord / hardcoded                | NO ?
+KR_cooler                   	| NO                                    |
+TN_cooler                   	| NO                                    |
+ActivityTypePeople (Yes)       	| zoneRecord / hardcoded                | NO ?
+NrPeople (Yes)                 	| zoneRecord / fully automated          | UseConditions
+RatioConvectiveHeatPeople (Yes)	| zoneRecord / hardcoded                | NO
+ActivityTypeMachines (Yes)      | zoneRecord / hardcoded                | NO
+NrPeopleMachines (Yes)          | zoneRecord / fully automated          | UseConditions
+RatioConvetoveHeatMachines (Yes)| zoneRecord / hardcoded                | NO
+RoomArea (Yes)                 	| zoneRecord / fully automated          | Zone
+LightingPower (Yes)             | zoneRecord / fully automated          | UseConditions
+RatioConvetiveHeatLighting (Yes)| zoneRecord / hardcoded                | UseConditions
+withInnerwalls (Yes)           	| zoneRecord / fully automated          | Zone.inner_walls
+R1i (Yes)                      	| zoneRecord / fully automated          | Zone
+C1i (Yes)                      	| zoneRecord / fully automated          | Zone
+Ai  (Yes)                      	| zoneRecord / fully automated          | Zone
+alphaiwi (Yes)                 	| zoneRecord / fully automated          | Zone
+epsi (Yes)                     	| zoneRecord / hardcoded                |
+withOuterwalls (Yes)           	| zoneRecord / fully automated          | Zone.outer_walls
+RRest (Yes)                    	| zoneRecord / fully automated          | Zone
+R1o (Yes)                      	| zoneRecord / fully automated          | Zone
+C1o (Yes)                      	| zoneRecord / fully automated          | Zone
+Ao  (Yes)                      	| zoneRecord / fully automated          | Zone
+alphaowi (Yes)                 	| zoneRecord / fully automated          | Zone
+alphaowo (Yes)                 	| zoneRecord / fully automated          | Zone
+epso (Yes)                     	| zoneRecord / hardcoded                |
+aowo (Yes)                     	| zoneRecord / hardcoded                |
+n (Yes)                        	| zoneRecord / fully automated          | Zone.outer_walls
+weightfactorswall (Yes)        	| zoneRecord / fully automated          | Zone.weightfactors_ow
+weightfactorground (Yes)       	| zoneRecord / fully automated          | Zone.weightfactor_ground
+temperatureground (Yes)        	| zoneRecord / hardcoded                | NO
+alphaConvWinInner (Yes)        	| zoneRecord / fully automated          | Zone
+alphaConvWinOuter (Yes)        	| zoneRecord / fully automated          | Zone
+awin (Yes)                     	| zoneRecord / hardcoded                | ?
+withWindows (Yes)              	| zoneRecord / fully automated          | Zone.windows
+splitfac (Yes)                 	| zoneRecord / hardcoded                | ?
+Aw (Yes)                       	| zoneRecord / fully automated          | Zone.windows
+weightfactorswindow (Yes)      	| zoneRecord / fully automated          | Zone.weigthfactor_win
+epsw (Yes)                     	| zoneRecord / hardcoded                | ?
+g (Yes)                       	| zoneRecord / fully automated          | Zone
+RWin (Yes)                     	| zoneRecord / fully automated          | Zone
+UWin (Yes)                     	| NO                                    | ?
+gsunblind (Yes)                	| zoneRecord / fully automated          | Zone.windows
+Imax (Yes)                     	| zoneRecord / hardcoded                | ?
+Vair (Yes)                     	| zoneRecord / fully automated          | Zone
+rhoair (Yes)                   	| zoneRecord / hardcoded                | ?
+cair  (Yes)                    	| zoneRecord / hardcoded                | ?
+withAHU                     	| zoneRecord / fully automated          | UseConditions
+minAHU                      	| zoneRecord / fully automated          | UseConditions
+maxAHU                      	| zoneRecord / fully automated          | UseConditions
+useConstantACHrate (Yes)       	| NO                                    |
+baseACH (Yes)                  	| NO                                    |
+maxUserACH (Yes)               	| NO                                    |
+maxOverheatingACH (Yes)        	| NO                                    |
+maxSummerACH (Yes)            	| NO                                    |
+winterReduction             	| NO                                    |
