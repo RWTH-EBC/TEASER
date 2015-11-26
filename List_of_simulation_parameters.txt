@@ -41,17 +41,17 @@ Q_flow_heat                 	| NO                                    |
 Q_N                         	| NO                                    |
 weightfactor_heater         	| NO                                    |
 Heater_on                   	| zoneRecord / hardcoded                | NO ?
-h_heater                    	| zoneRecord / fully automated          | ZONE
-l_heater                    	| NO                                    |
-KR_heater                   	| NO                                    |
-TN_heater                   	| NO                                    |
+h_heater (Yes)                 	| zoneRecord / fully automated          | ZONE
+l_heater (Yes)                 	| NO                                    |
+KR_heater (Yes)                	| NO                                    |
+TN_heater (Yes)                	| NO                                    |
 Q_flow_cooler               	| NO                                    |
 weightfactor_cooler         	| NO                                    |
 Cooler_on                   	| zoneRecord / hardcoded                | NO ?
-h_cooler                    	| NO                                    |
-l_cooler                    	| zoneRecord / hardcoded                | NO ?
-KR_cooler                   	| NO                                    |
-TN_cooler                   	| NO                                    |
+h_cooler (Yes)                 	| NO                                    |
+l_cooler (Yes)                 	| zoneRecord / hardcoded                | NO ?
+KR_cooler (Yes)                	| NO                                    |
+TN_cooler (Yes)                	| NO                                    |
 ActivityTypePeople (Yes)       	| zoneRecord / hardcoded                | NO ?
 NrPeople (Yes)                 	| zoneRecord / fully automated          | UseConditions
 RatioConvectiveHeatPeople (Yes)	| zoneRecord / hardcoded                | NO
