@@ -239,11 +239,12 @@ class Office(TypeBuilding):
         TEASER requirements.
 
         '''
-
+        help_area = self.net_leased_area
+        self.net_leased_area = 0.0
         # create zones with their corresponding area, name and usage
         for key, value in self.zone_area_factors.items():
             zone = ThermalZone(self)
-            zone.area = self.net_leased_area * value[0]
+            zone.area = help_area * value[0]
             zone.name = key
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1])
@@ -259,12 +260,12 @@ class Office(TypeBuilding):
         # statistical estimation of the facade
 
         self._est_outer_wall_area = self.est_factor_wall_area * \
-                                self.net_leased_area ** self.est_exponent_wall
+                                help_area ** self.est_exponent_wall
         self._est_win_area = self.est_factor_win_area * \
-                             self.net_leased_area ** self.est_exponent_win
-        self._est_roof_area = (self.net_leased_area / self.number_of_floors) * \
+                             help_area ** self.est_exponent_win
+        self._est_roof_area = (help_area / self.number_of_floors) * \
                               self.gross_factor
-        self._est_floor_area = (self.net_leased_area / self.number_of_floors) * \
+        self._est_floor_area = (help_area / self.number_of_floors) * \
                                self.gross_factor
 
         # manipulation of wall according to facade design 

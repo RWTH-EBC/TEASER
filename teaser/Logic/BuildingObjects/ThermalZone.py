@@ -755,7 +755,7 @@ class ThermalZone(object):
         if self.parent is not None:
             if self._area is None:
                 self._area = value
-                # self.parent.net_leased_area += value
+                self.parent.net_leased_area += value
             else:
                 self.parent.net_leased_area -= self._area
                 self.parent.net_leased_area += value
