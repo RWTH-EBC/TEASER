@@ -754,6 +754,8 @@ class ThermalZone(object):
     def area(self, value):
         if self.parent is not None:
             if self._area is None:
+                if self.parent.net_leased_area is None:
+                    self.parent.net_leased_area = 0.0
                 self._area = value
                 self.parent.net_leased_area += value
             else:
