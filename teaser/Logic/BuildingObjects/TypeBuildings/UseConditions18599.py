@@ -177,7 +177,7 @@ class UseConditions18599(UseConditions):
 
         super(UseConditions18599, self).__init__(parent)
 
-        self.usage = "single office"
+        self.usage = "Single office"
 
         self._typical_length = 123.0
         self._typical_width = 123.0
@@ -250,6 +250,7 @@ class UseConditions18599(UseConditions):
                 self.typical_width = usage.typical_width
 
                 self.usage = usage.usage
+                self.usage_time = usage.UsageOperationTime.usage_time
                 self.daily_usage_hours = \
                     usage.UsageOperationTime.daily_usage_hours
                 self.yearly_usage_days = \
@@ -299,7 +300,6 @@ class UseConditions18599(UseConditions):
                 self.profile_machines = usage.InternalGains.profile_machines
                 self.lighting_power = usage.InternalGains.lighting_power
                 self.profile_lighting = usage.InternalGains.profile_lighting
-                self.profile_lighting = self.profile_machines
                 self.min_ahu = usage.AHU.min_ahu
                 self.max_ahu = usage.AHU.max_ahu
                 self.with_ahu = usage.AHU.with_ahu
@@ -337,8 +337,8 @@ class UseConditions18599(UseConditions):
 
         for check in xml_parse.UseConditions18599:
             if check.usage == self.usage:
-                warnings.warn("Usage already exist in this XML, consider "
-                              "revising your inputs. The UseConditions is  "
+                warnings.warn("Usage already exist in this XML, consider " +
+                              "revising your inputs. The UseConditions is  " +
                               "NOT saved into XML")
                 add_to_xml = False
                 break

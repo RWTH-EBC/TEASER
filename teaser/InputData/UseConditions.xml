@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <UseConditions>
 	<UseConditions18599>
 		<usage>Single office</usage>
@@ -43,6 +44,7 @@
 			<machines>7.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -94,6 +96,7 @@
 			<machines>7.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -145,6 +148,7 @@
 			<machines>10.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -196,6 +200,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.6 1.0 0.4 0.1 0.1 0.6 1.0 0.4 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -247,6 +252,7 @@
 			<machines>4.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.4 0.6 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>4.4</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -298,6 +304,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>9.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -349,6 +356,7 @@
 			<machines>5.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>9.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -400,6 +408,7 @@
 			<machines>4.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -451,6 +460,7 @@
 			<machines>4.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -502,6 +512,7 @@
 			<machines>4.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.8 0.6 0.4 0.2 0.2</profile_machines>
 			<lighting_power>4.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -553,6 +564,7 @@
 			<machines>4.0</machines>
 			<profile_machines>1.0 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.6 0.8 1.0</profile_machines>
 			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -604,6 +616,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 0.6 1.0 1.0 0.8 0.4 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -655,6 +668,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 0.4 1.0 1.0 0.1 0.1 0.1 0.1 0.4 0.4 0.4 1.0 0.8 0.4</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -706,6 +720,7 @@
 			<machines>300.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.2 0.8 1.0 1.0 0.6 0.4 0.2 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -757,6 +772,7 @@
 			<machines>30.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 1.0 1.0 0.6 0.4 0.1 0.1 0.1 0.4 0.8 1.0 0.4 0.2 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -808,6 +824,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>11.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -859,6 +876,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -910,6 +928,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -961,6 +980,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>7.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1012,6 +1032,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1063,6 +1084,7 @@
 			<machines>150.0</machines>
 			<profile_machines>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0</profile_machines>
 			<lighting_power>7.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1114,6 +1136,7 @@
 			<machines>35.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1165,6 +1188,7 @@
 			<machines>35.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1216,6 +1240,7 @@
 			<machines>35.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>14.7</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1267,6 +1292,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1318,6 +1344,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.4 0.6 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>4.4</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1369,6 +1396,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1420,6 +1448,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.1</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1471,6 +1500,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.1</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1522,6 +1552,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1573,6 +1604,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1624,6 +1656,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1675,6 +1708,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.1 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
 			<lighting_power>10.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1726,6 +1760,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1777,6 +1812,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1828,6 +1864,7 @@
 			<machines>50.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
 			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1879,6 +1916,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.1 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
 			<lighting_power>9.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1930,6 +1968,7 @@
 			<machines>18.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>24.0</min_ahu>
@@ -1981,6 +2020,7 @@
 			<machines>7.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -2032,6 +2072,7 @@
 			<machines>10.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -2083,6 +2124,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -2134,6 +2176,7 @@
 			<machines>5.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.2 0.4 1.0 0.6 0.6 0.6 0.6 1.0 0.6 0.6 0.6 0.6 1.0 0.4 0.2 0.2 0.2 0.2 0.2</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -2185,6 +2228,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -2236,6 +2280,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.5 1.0 0.5 0.5 0.5 1.0 1.0 0.5 0.5 0.5 1.0 1.0 1.0 1.0 0.5 0.5 0.5 0.1</profile_machines>
 			<lighting_power>7.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.3</min_ahu>
