@@ -2272,14 +2272,10 @@ class MainUI(QDialog):
                                          [orientation_value])
                 if self.envelope_orientation_groupbox.currentText() == \
                         orientation_string:
-                        self.project =\
-                         Controller.save_building_area(self.project,
-                                    float(self.envelope_area_textbox.text()),
-                                    orientation_value)
+                        self.current_building.set_outer_wall_area(
+                            float(self.envelope_area_textbox.text()),
+                            orientation_value)
         self.display_current_building()
-
-
-
 
     def switch_current_element(self):
 
