@@ -2270,7 +2270,7 @@ class MainUI(QDialog):
             for orientation_value in self.guiinfo.orientations_numbers.keys():
                 orientation_string = str(self.guiinfo.orientations_numbers
                                          [orientation_value])
-                if self.envelope_orientation_groupbox.currentText() == \
+                if self.envelope_orientation_combobox.currentText() == \
                         orientation_string:
                         self.current_building.set_outer_wall_area(
                             float(self.envelope_area_textbox.text()),
@@ -3339,11 +3339,11 @@ class MainUI(QDialog):
         # self.envelope_area_textbox.setReadOnly(True)
 
         self.envelope_orientation_label = QtGui.QLabel("Orientation")
-        self.envelope_orientation_groupbox = QtGui.QComboBox()
-        self.envelope_orientation_groupbox.setObjectName(_fromUtf8(
+        self.envelope_orientation_combobox = QtGui.QComboBox()
+        self.envelope_orientation_combobox.setObjectName(_fromUtf8(
                                             "EnvelopeOrientationGroupBox"))
         for orientation in self.guiinfo.orientations:
-            self.envelope_orientation_groupbox.addItem(
+            self.envelope_orientation_combobox.addItem(
                                                 orientation, userData=None)
 
         current_item = self.outer_elements_model.itemFromIndex(item)
@@ -3353,15 +3353,15 @@ class MainUI(QDialog):
         if string_current_item.startswith("Outer Wall"):
             self.envelope_name_textbox.setText(str("Outer Wall"))
             self.envelope_area_textbox.setText(str(listOfCurItem[5]))
-            self.envelope_orientation_groupbox.setCurrentIndex(
-                self.envelope_orientation_groupbox.findText(
+            self.envelope_orientation_combobox.setCurrentIndex(
+                self.envelope_orientation_combobox.findText(
                     str(listOfCurItem[3])))
 
         elif string_current_item.startswith("Window"):
             self.envelope_name_textbox.setText(str("Window"))
             self.envelope_area_textbox.setText(str(listOfCurItem[4]))
-            self.envelope_orientation_groupbox.setCurrentIndex(
-                self.envelope_orientation_groupbox.findText(
+            self.envelope_orientation_combobox.setCurrentIndex(
+                self.envelope_orientation_combobox.findText(
                     str(listOfCurItem[2])))
 
         self.general_envelope_values_layout.addWidget(
@@ -3371,7 +3371,7 @@ class MainUI(QDialog):
         self.general_envelope_values_layout.addWidget(
                                     self.envelope_orientation_label, 2, 0)
         self.general_envelope_values_layout.addWidget(
-                                    self.envelope_orientation_groupbox, 2, 1)
+                                    self.envelope_orientation_combobox, 2, 1)
         self.general_envelope_values_layout.addWidget(
                                     self.envelope_area_label, 3, 0)
         self.general_envelope_values_layout.addWidget(
