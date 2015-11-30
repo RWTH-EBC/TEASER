@@ -286,14 +286,15 @@ class Residential(TypeBuilding):
         Berechnungsgrundlagen: IWU, "Kurzverfahren Energieprofil"; 2005.
 
         '''
-        help_area = self.net_leased_area
+        #help area for the correct building area setting while using typeBldgs
+        type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
 
         self._number_of_heated_floors = self._est_factor_heated_cellar + \
                     self.number_of_floors + self.est_living_area_factor\
                      *self._est_factor_heated_attic
 
-        self._living_area_per_floor = help_area / \
+        self._living_area_per_floor = type_bldg_area / \
                 self._number_of_heated_floors
 
         self._est_ground_floor_area = self.est_bottom_building_closure * \
@@ -312,7 +313,7 @@ class Residential(TypeBuilding):
         self._est_facade_area = self._est_facade_to_floor_area * \
                 self._living_area_per_floor + self._est_extra_floor_area
 
-        self._est_win_area = self.est_factor_win_area * help_area
+        self._est_win_area = self.est_factor_win_area * type_bldg_area
 
         self._est_cellar_wall_area = self.est_factor_cellar_area * \
                 self._est_factor_heated_cellar * self._est_facade_area
@@ -321,12 +322,12 @@ class Residential(TypeBuilding):
                 self._est_facade_area) - self._est_cellar_wall_area - \
                 self._est_win_area
 
-        # self._est_factor_volume = help_area * 2.5
+        # self._est_factor_volume = type_bldg_area * 2.5
 
         for key, value in self.zone_area_factors.items():
             zone = ThermalZone(self)
             zone.name = key
-            zone.area = help_area * value[0]
+            zone.area = type_bldg_area * value[0]
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1])
 
