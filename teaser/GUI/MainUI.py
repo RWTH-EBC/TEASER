@@ -735,7 +735,7 @@ class MainUI(QDialog):
             self.buildings_combo_box_model)
         self.side_bar_buildings_combo_box.setModelColumn(0)
         self.connect(self.side_bar_buildings_combo_box, QtCore.SIGNAL(
-            "currentIndexChanged(int)"), self.switchBuilding)
+            "currentIndexChanged(int)"), self.switch_building)
         self.side_bar_id_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_id_label.setGeometry(QtCore.QRect(5, 60, 90, 25))
         self.side_bar_id_label.setText("Name:")
@@ -1537,7 +1537,7 @@ class MainUI(QDialog):
                 item.setAccessibleText(str(self.current_zone.internal_id))
                 self.element_model.appendRow(item)
 
-    def switchBuilding(self):
+    def switch_building(self):
 
         """ Triggers when the combobox for all buildings is used and changes
         all controls to the new building's values """
@@ -1577,6 +1577,7 @@ class MainUI(QDialog):
 
             self.zone_model.clear()
             self.element_model.clear()
+            self.outer_elements_model.clear()
             for zone in self.project.\
                 list_of_buildings[self.project.list_of_buildings.index(
                     self.current_building)].thermal_zones:
@@ -1646,15 +1647,34 @@ class MainUI(QDialog):
                 if zone.windows:
                     for window in zone.windows:
                         item = TrackableItem(
-                            "Name:\t".expandtabs(8) + str(window.name) + 
-                            "\nType:\t".expandtabs(11) + 
-                            "Windows \n Area:\t".expandtabs(11) + 
-                            str(window.area) + 
-                            "\n Orientation:\t".expandtabs(11) + 
+                            "Name:\t".expandtabs(8) + str(window.name) +
+                            "\nType:\t".expandtabs(11) +
+                            "Windows \n Area:\t".expandtabs(11) +
+                            str(window.area) +
+                            "\n Orientation:\t".expandtabs(11) +
                             str(window.orientation),
                             window.internal_id)
                         item.setAccessibleText(str(zone.internal_id))
                         self.element_model.appendRow(item)
+
+            for orientation in self.guiinfo.orientations_numbers.keys():
+                if self.current_building.get_outer_wall_area(orientation) != 0:
+                    item1 = QStandardItem(
+                        "Outer Wall Orientation: " +
+                        str(self.guiinfo.orientations_numbers[orientation]) +
+                        "\t".expandtabs(12) + "\n" + " Area: " +
+                        str(self.current_building.
+                            get_outer_wall_area(orientation)))
+                    self.outer_elements_model.appendRow(item1)
+
+                if self.current_building.get_window_area(orientation) != 0:
+                    item2 = QStandardItem(
+                        "Window Orientation: " +
+                        str(self.guiinfo.orientations_numbers[orientation]) +
+                        "\t".expandtabs(16) + "\n" + " Area: " +
+                        str(self.current_building.
+                            get_window_area(orientation)))
+                    self.outer_elements_model.appendRow(item2)
 
     def display_current_building(self):
 
@@ -2180,7 +2200,7 @@ class MainUI(QDialog):
                 self.current_zone = zone
         self.display_current_zone()
 
-    def saveChangedZoneValues(self):
+    def save_changed_zone_values(self):
 
         self.current_zone.name = self.zone_id_textbox.text()
         self.current_zone.area = float(
@@ -3087,7 +3107,7 @@ class MainUI(QDialog):
         self.zone_element_save_button = QtGui.QPushButton()
         self.zone_element_save_button.setText("Save")
         self.connect(self.zone_element_save_button, SIGNAL(
-            "clicked()"), self.saveChangedZoneValues)
+            "clicked()"), self.save_changed_zone_values)
         self.connect(self.zone_element_save_button, SIGNAL(
             "clicked()"), self.zone_value_window, QtCore.SLOT("close()"))
 
