@@ -10,6 +10,7 @@ import teaser.Data.SchemaBindings.UseConditions18599Bind as uc_bind
 import teaser.Logic.Utilis as utilis
 import warnings
 
+
 class UseConditions18599(UseConditions):
 
     '''Use Conditions DIN 18599
@@ -92,7 +93,7 @@ class UseConditions18599(UseConditions):
         Teilbetriebsfaktor der Gebaeudebetriebszeit fuer Beleuchtung
 
     ratio_conv_rad_lighting : float
-        describes the ratio between convective and radiative heat transer
+        describes the ratio between convective and radiative heat transfer
         of the lighting
 
     ROOM CLIMATE
@@ -139,11 +140,25 @@ class UseConditions18599(UseConditions):
     persons : int
         number of persons - Personen
 
+    activity_type_persons : int
+        persons activity
+
+    ratio_conv_rad_persons : float
+        describes the ratio between convective and radiative heat transfer
+        of the persons
+
     profile_persons : [float]
         timeline of internal gains from 0 - 100 - Nutzungsprofil Personen
 
     machines: float
         number of Machines  - Arbeitshilfen
+
+    activity_type_machines : int
+        machines activity
+
+    ratio_conv_rad_machines : float
+        describes the ratio between convective and radiative heat transfer
+        of the lighting
 
     profile_machines : [float]
       timeline of internal gains from 0 - 100  -  Nutzungsprofil Geraete
@@ -162,6 +177,22 @@ class UseConditions18599(UseConditions):
 
     with_ahu : boolean
         with ahu - withAHU
+
+    use_constant_ach_rate : boolean
+        choose if a constant ACH rate should be used
+
+    base_ach : float
+        base value for the infiltration rate
+
+    max_user_ach : float
+        additional infiltration rate for maximum persons activity
+
+    max_overheating_ach : list
+        additional infiltration rate when overheating appears
+
+    max_summer_ach : list
+        additional infiltration rate in the summer with
+        [infiltration_rate, Tmin, Tmax]
     '''
 
     def __init__(self, parent=None):
@@ -207,14 +238,24 @@ class UseConditions18599(UseConditions):
         self.heating_time = [5, 18]
 
         self.persons = 0
+        self.activity_type_persons = 0
+        self.ratio_conv_rad_persons = 0
         self.profile_persons = []
         self.machines = 0.0
+        self.activity_type_machines = 0
+        self.ratio_conv_rad_machines = 0
         self.profile_machines = []
         self.lighting_power = 0.0
 
         self.min_ahu = 0.0
         self.max_ahu = 0.5
         self.with_ahu = False
+
+        self.use_constant_ach_rate = False
+        self.base_ach = 0.2
+        self.max_user_ach = 1.0
+        self.max_overheating_ach = [3.0, 2.0]
+        self.max_summer_ach = [1.0, 273.15 + 10, 273.15 + 17]
 
     def load_use_conditions(self, zone_usage):
         '''load typical use conditions
