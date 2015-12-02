@@ -3997,8 +3997,7 @@ class MainUI(QDialog):
         if self.current_element.construction_type == "heavy":
             self.element_construction_type_combobox.setCurrentIndex(0)
         if self.current_element.construction_type == "light":
-            self.element_construction_type_combobox.setCurrentIndex(1)
-
+            self.element_construction_type_combobox.setCurrentIndex(1)                    
         self.element_orientation_label = QtGui.QLabel("Orientation")
         self.element_orientation_combobox = QtGui.QComboBox()
         self.element_orientation_combobox.setObjectName(
@@ -4006,9 +4005,12 @@ class MainUI(QDialog):
         for orientation in self.guiinfo.orientations:
             self.element_orientation_combobox.addItem(
                 orientation, userData=None)
-        self.element_orientation_combobox.setCurrentIndex(
+        if(self.current_element.orientation != None):
+            orientation_string = str(self.guiinfo.orientations_numbers
+                [self.current_element.orientation])
+            self.element_orientation_combobox.setCurrentIndex(
             self.element_orientation_combobox.findText(
-                str(self.current_element.orientation)))
+               orientation_string))
 
         self.element_name_label = QtGui.QLabel("Id")
         self.element_name_textbox = QtGui.QLineEdit()
