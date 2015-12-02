@@ -12,13 +12,13 @@ Q_N                         	| NO                                    |
 weightfactor_heater         	| NO                                    |
 Heater_on                   	| NO                                    |
 h_heater                    	| baseRecord / fully automated          | Building
-l_heater                    	| NO                                    |
+l_heater                    	| NO                                    | Could be standard 0
 KR_heater                   	| NO                                    |
 TN_heater                   	| NO                                    |
 Q_flow_cooler               	| NO                                    |
 weightfactor_cooler         	| NO                                    |
 Cooler_on                   	| NO                                    |
-h_cooler                    	| NO                                    |
+h_cooler                    	| NO                                    | Could be standard 0
 l_cooler                    	| baseRecord / fully automated          | Building
 KR_cooler                   	| NO                                    |
 TN_cooler                   	| NO                                    |
@@ -41,7 +41,7 @@ Q_flow_heat                 	| NO                                    |
 Q_N                         	| NO                                    |
 weightfactor_heater         	| NO                                    |
 Heater_on                   	| zoneRecord / hardcoded                | NO ?
-h_heater (Yes)                 	| zoneRecord / fully automated          | ZONE
+h_heater (Yes)                 	| zoneRecord / fully automated          | Zone
 l_heater (Yes)                 	| NO                                    |
 KR_heater (Yes)                	| NO                                    |
 TN_heater (Yes)                	| NO                                    |
@@ -52,12 +52,12 @@ h_cooler (Yes)                 	| NO                                    |
 l_cooler (Yes)                 	| zoneRecord / hardcoded                | NO ?
 KR_cooler (Yes)                	| NO                                    |
 TN_cooler (Yes)                	| NO                                    |
-ActivityTypePeople (Yes)       	| zoneRecord / hardcoded                | NO ?
+ActivityTypePeople (Yes)       	| zoneRecord / hardcoded                | UseConditions
 NrPeople (Yes)                 	| zoneRecord / fully automated          | UseConditions
-RatioConvectiveHeatPeople (Yes)	| zoneRecord / hardcoded                | NO
-ActivityTypeMachines (Yes)      | zoneRecord / hardcoded                | NO
+RatioConvectiveHeatPeople (Yes)	| zoneRecord / hardcoded                | UseConditions
+ActivityTypeMachines (Yes)      | zoneRecord / hardcoded                | UseConditions
 NrPeopleMachines (Yes)          | zoneRecord / fully automated          | UseConditions
-RatioConvetoveHeatMachines (Yes)| zoneRecord / hardcoded                | NO
+RatioConvetoveHeatMachines (Yes)| zoneRecord / hardcoded                | UseConditions
 RoomArea (Yes)                 	| zoneRecord / fully automated          | Zone
 LightingPower (Yes)             | zoneRecord / fully automated          | UseConditions
 RatioConvetiveHeatLighting (Yes)| zoneRecord / hardcoded                | UseConditions
@@ -99,9 +99,9 @@ cair  (Yes)                    	| zoneRecord / hardcoded                | ?
 withAHU                     	| zoneRecord / fully automated          | UseConditions
 minAHU                      	| zoneRecord / fully automated          | UseConditions
 maxAHU                      	| zoneRecord / fully automated          | UseConditions
-useConstantACHrate (Yes)       	| NO                                    |
-baseACH (Yes)                  	| NO                                    |
-maxUserACH (Yes)               	| NO                                    |
-maxOverheatingACH (Yes)        	| NO                                    |
-maxSummerACH (Yes)            	| NO                                    |
+useConstantACHrate (Yes)       	| NO                                    | UseConditions
+baseACH (Yes)                  	| NO                                    | UseConditions
+maxUserACH (Yes)               	| NO                                    | UseConditions
+maxOverheatingACH (Yes)        	| NO                                    | UseConditions
+maxSummerACH (Yes)            	| NO                                    | UseConditions
 winterReduction             	| NO                                    |
