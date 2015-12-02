@@ -27,9 +27,6 @@ class ListViewZonesFiller(QItemDelegate):
         painter.drawRect(option.rect)   
         painter.setPen(QPen(Qt.black))
         painter.setFont(self.font)
-        
-        # writes the actual text
-        text = index.data(Qt.DisplayRole)
-        painter.drawText(option.rect, Qt.AlignLeft, text)
+        text = index.data(Qt.DisplayRole)        
+        painter.drawText(option.rect, Qt.AlignLeft, text.toString())
         painter.restore()
-
