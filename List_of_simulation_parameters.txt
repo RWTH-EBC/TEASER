@@ -1,13 +1,10 @@
 parameter name (used in Model?) |	in export (no / hardcoded / full)	|	in TEASER (no / where)
 								|										|
 --------------------------------|------MODEL LEVEL----------------------|-------------------------
-Orientations/Azimut				|										|
-Longitude						|										|
-Latitude						|										|
-Tilt							|										|
-								|										|
-								|										|
-								|										|
+Orientations/Azimut	(Yes)		| NO									| Building.outer_area
+Longitude (Yes)					| NO									| Building
+Latitude (Yes)					| NO									| Building
+Tilt (Yes)						| NO									| BuildingElement
 --------------------------------|------BUILDING LEVEL-------------------|-------------------------
 numZones (Yes)                 	| baseRecord / fully automated          | Building
 T0all                       	| NO                                    |
