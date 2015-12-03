@@ -115,6 +115,9 @@ class BuildingElement(object):
 
         self._layer = []
 
+        #values for the AixLib Export
+        self.emissivity = 0.0  # Should we use the ir_emissivity here?
+
         # Calculated values for each Building Element
         self.r1 = 0.0
         self.r2 = 0.0

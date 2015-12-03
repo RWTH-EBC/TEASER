@@ -29,6 +29,9 @@ class Window(BuildingElement):
         self.shading_g_total = 0.0
         self.shading_max_irr = 0.0
         self._shading = None
+        #additional for simulation
+        self.alpha_win = None  # awin
+        self.splitfac = None  # splitfac
 
     def calc_equivalent_res(self):
         '''Equivalent resistance VDI 6007

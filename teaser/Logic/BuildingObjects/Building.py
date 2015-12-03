@@ -105,6 +105,9 @@ class Building(object):
         self.volume = 0
         self.sum_heating_load = 0
         self.sum_cooling_load = 0
+        #additional simulation parameters
+        self.density_air = 1.19
+        self.heat_capac_air = 1007
 
         self.file_ahu = ""
         self.file_internal_gains = ""

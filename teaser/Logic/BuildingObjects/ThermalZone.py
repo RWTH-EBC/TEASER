@@ -71,6 +71,8 @@ class ThermalZone(object):
         self.typical_width = None
         self.t_inside = None
         self.t_outside = None
+        #additional for simulation
+        self.t_ground = None
 
         # Calculated values for InnerWall for each Zone
         self.r1_iw = 0.0
@@ -103,6 +105,8 @@ class ThermalZone(object):
         self.alpha_comb_outer_ow = 0.0
         self.alpha_conv_outer_ow = 0.0
         self.r_rad_ow_iw = 0.0
+        #additional for simulation
+        self.alpha_rad_outer_ow = 0.0  # aowo
 
         # Calculated values for windows for each Zone
         self.r1_win = 0.0
