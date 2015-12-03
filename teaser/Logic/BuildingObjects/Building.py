@@ -108,6 +108,8 @@ class Building(object):
         #additional simulation parameters
         self.density_air = 1.19
         self.heat_capac_air = 1007
+        self.longitude = None
+        self.latidude = None
 
         self.file_ahu = ""
         self.file_internal_gains = ""
