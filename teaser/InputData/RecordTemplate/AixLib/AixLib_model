@@ -41,7 +41,9 @@ model ${bldg.name}
     Sky_rad=true,
     Ter_rad=true,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/Tables/${weather}"))
+        "modelica://${mod_prj}/Tables/${weather}")
+    Latitude=${bldg.latitude},
+    Longitude=${bldg.longitude})
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(

@@ -1,11 +1,11 @@
 record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
   extends AixLib.DataBase.Buildings.ZoneBaseRecord(
     n = ${get_n(zone.outer_walls)},
-    aowo = 0.7,
     Heater_on = true,
     Cooler_on = false,
     l_cooler = 0,
-    RatioConvectiveHeatLighting = 0.5,
+    RatioConvectiveHeatLighting = ${
+    	zone.use_conditions.ratio_conv_rad_lighting},
     zoneID = "${zone.name}",
     usage = "${zone.use_conditions.usage}",
     RoomArea = ${zone.area},
@@ -32,7 +32,6 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     R1i = ${zone.r1_iw},
     C1i = ${zone.c1_iw},
     RWin = ${zone.r1_win},
-    awin = 0.03,
     alphaConvWinOuter = ${zone.alpha_conv_outer_win},
     alphaConvWinInner = ${zone.alpha_conv_inner_win},
     Ao = ${zone.area_ow},
@@ -40,18 +39,24 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     R1o = ${zone.r1_ow},
     RRest = ${zone.r_rest_ow},
     C1o = ${zone.c1_ow},
-    ActivityTypePeople = 3,
-    RatioConvectiveHeatPeople = 0.5,
+    ActivityTypePeople = ${zone.use_conditions.activity_type_persons},
+    RatioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
+    ActivityTypeMachines = ${zone.use_conditions.activity_type_machines},
+    RatioConvectiveHeatMachines = ${
+    	zone.use_conditions.ratio_conv_rad_machines},
+    rhoair = ${bldg.density_air},
+    cair = ${bldg.heat_capac_air},
+
+    temperatureground = ${zone.temperatureground}, ## 286.15
+
+
+    awin = 0.03,
     T0all = 273.15 + 20.1,
-    ActivityTypeMachines = 2,
-    RatioConvectiveHeatMachines = 0.6,
+	aowo = 0.7,    
     epso = 0.9,
-    rhoair = 1.19,
-    cair = 1007,
     epsi = 0.9,
     epsw = 0.9,
     Imax = 200,
-    temperatureground = 286.15,
     splitfac = 0);
 end ${bldg.name}_${zone.name};
 
