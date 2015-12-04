@@ -41,9 +41,11 @@ model ${bldg.name}
     Sky_rad=true,
     Ter_rad=true,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/Tables/${weather}")
+        "modelica://${mod_prj}/Tables/${weather}"),
     Latitude=${bldg.latitude},
-    Longitude=${bldg.longitude})
+    Longitude=${bldg.longitude},
+    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(
+    Azimut=${get_azimut(bldg._outer_area)})
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
@@ -135,7 +137,11 @@ end ${bldg.name};
     Sky_rad=true,
     Ter_rad=true,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/Tables/${weather}"))
+        "modelica://${mod_prj}/Tables/${weather}"),
+    Latitude=${bldg.latitude},
+    Longitude=${bldg.longitude},
+    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(
+    Azimut=${get_azimut(bldg._outer_area)}))
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
@@ -226,5 +232,21 @@ end ${bldg.name};
     else:
       pass
   return n
+  %>
+</%def>
+
+##get azimut for modelica
+<%def name="get_azimut(dictionary)", filter="trim">
+  <%
+  lis = list(dictionary.keys())
+  lis = sorted(lis)
+  newlist = [((element-180)*-1) for element in lis if element is not -1 and 
+            element is not -2]
+  newlist[1], newlist[3] = newlist[3], newlist[1]
+  string_of_list = "{"
+  for element in newlist:
+    string_of_list = string_of_list + str(element) + ','
+  string_of_list = string_of_list[:-1] + ', 0}'
+return string_of_list
   %>
 </%def>
