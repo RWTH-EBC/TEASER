@@ -42,10 +42,18 @@ model ${bldg.name}
     Ter_rad=true,
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://${mod_prj}/Tables/${weather}"),
-    Latitude=${bldg.latitude},
-    Longitude=${bldg.longitude},
-    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(
-    Azimut=${get_azimut(bldg._outer_area)})
+    % if bldg.latitude is None:
+      Latitude=49.5,
+    % else:
+      Latitude=${bldg.latitude},
+    % endif
+    % if bldg.longitude is None:
+      Longitude=8.5,
+    % else:
+      Longitude=${bldg.longitude},
+    % endif
+    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(
+    Azimut=${get_azimut(bldg._outer_area)}))
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
@@ -100,7 +108,7 @@ end ${bldg.name};
 % elif model is "MultizoneEquipped":
 	AixLib.Building.LowOrder.Multizone.MultizoneEquipped multizoneEquipped(
       buildingParam=${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_base()
-% endif
+
 
 % if zone is "ThermalZone":
 	,redeclare AixLib.Building.LowOrder.ThermalZone.ThermalZone zone
@@ -138,9 +146,17 @@ end ${bldg.name};
     Ter_rad=true,
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://${mod_prj}/Tables/${weather}"),
-    Latitude=${bldg.latitude},
-    Longitude=${bldg.longitude},
-    SOD=DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(
+    % if bldg.latitude is None:
+      Latitude=49.5,
+    % else:
+      Latitude=${bldg.latitude},
+    % endif
+    % if bldg.longitude is None:
+      Longitude=8.5,
+    % else:
+      Longitude=${bldg.longitude},
+    % endif
+    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(
     Azimut=${get_azimut(bldg._outer_area)}))
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
@@ -219,7 +235,7 @@ equation
           fillPattern=FillPattern.Solid,
           textString="TB")}));
 end ${bldg.name};
-
+% endif
 
 
 ##get n
