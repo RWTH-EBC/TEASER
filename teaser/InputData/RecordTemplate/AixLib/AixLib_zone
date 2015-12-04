@@ -47,7 +47,7 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     rhoair = ${bldg.density_air},
     cair = ${bldg.heat_capac_air},
 
-    temperatureground = ${zone.temperatureground}, ## 286.15
+    temperatureground = ${zone.t_ground},
 
 
     awin = 0.03,
