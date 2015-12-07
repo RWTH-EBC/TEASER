@@ -2520,7 +2520,7 @@ class MainUI(QDialog):
     def create_new_project_ui(self):
         QtGui.QMessageBox.warning(
             self, u"Warning", u"When creating a new project,"
-            "all Values in Teaser will be removed.")
+            " all Values in Teaser will be removed.")
         self.create_new_project_ui_page = QtGui.QWizardPage()
         self.create_new_project_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
@@ -2665,6 +2665,9 @@ class MainUI(QDialog):
         self.create_new_element_ui_page.show()
 
     def create_new_envelope_ui(self):
+        QtGui.QMessageBox.warning(
+            self, u"Warning", "All walls with the current orientation "
+            "in the building will be overwritten.")
         self.create__envelope_ui = QtGui.QWizardPage()
         self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create__envelope_ui.setWindowTitle("Set all construction")
