@@ -27,6 +27,11 @@ class GUIInfo():
                                      180: "South", 225: "South-West",
                                      270: "West", 315: "North-West",
                                      - 1: "Roof", -2: "Floor"}
+        self.orientations_strings = {"North": 0, "North-East": 45,
+                                     "East": 90, "South-East": 135,
+                                     "South": 180, "South-West": 225,
+                                     "West": 270, "North-West": 315,
+                                     "Roof": -1, "Floor": -2}
         self.type_buildings = ["Office", "Institute 4",
                                "Institute 8", "Institute General",
                                "Residential"]
