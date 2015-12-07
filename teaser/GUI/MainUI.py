@@ -4014,6 +4014,8 @@ class MainUI(QDialog):
             self.element_orientation_combobox.setCurrentIndex(
             self.element_orientation_combobox.findText(
                orientation_string))
+        else:
+            self.element_orientation_combobox.setCurrentIndex(-1)
 
         self.element_name_label = QtGui.QLabel("Id")
         self.element_name_textbox = QtGui.QLineEdit()
