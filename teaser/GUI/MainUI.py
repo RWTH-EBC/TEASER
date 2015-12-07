@@ -1023,7 +1023,8 @@ class MainUI(QDialog):
                             self.element_construction_type_combobox.\
                             currentText()
                         zone.inner_walls[index].orientation = \
-                            self.element_orientation_combobox.currentText()
+                            self.guiinfo.orientations_strings \
+                            [self.element_orientation_combobox.currentText()]
                         zone.inner_walls[index].area = \
                             float(self.element_area_textbox.text())
                         zone.inner_walls[index].year_of_construction = \
@@ -1047,7 +1048,8 @@ class MainUI(QDialog):
                             self.element_construction_type_combobox.\
                             currentText()
                         zone.outer_walls[index].orientation = \
-                            self.element_orientation_combobox.currentText()
+                            self.guiinfo.orientations_strings\
+                            [self.element_orientation_combobox.currentText()]
                         zone.outer_walls[index].area = \
                             float(self.element_area_textbox.text())
                         zone.outer_walls[index].year_of_construction = \
@@ -1072,7 +1074,8 @@ class MainUI(QDialog):
                             self.element_construction_type_combobox.\
                             currentText()
                         zone.windows[index].orientation = \
-                            self.element_orientation_combobox.currentText()
+                            self.guiinfo.orientations_strings\
+                            [self.element_orientation_combobox.currentText()]
                         zone.windows[index].area = \
                             float(self.element_area_textbox.text())
                         zone.windows[index].year_of_construction = \
@@ -1088,7 +1091,7 @@ class MainUI(QDialog):
                         zone.windows[index].ua_value = \
                             float(self.element_uvalue_textbox.text())
                         break
-                    
+
     def switch_type_building(self):
         cIndex = self.window_construct_building_combo_box.currentText()
         self.current_type_building = str(cIndex)
@@ -1733,7 +1736,7 @@ class MainUI(QDialog):
                 item.setAccessibleText(str(zone.internal_id))
                 self.zone_model.appendRow(item)
 
-            for orientation in self.guiinfo.orientations_numbers.keys():
+            for orientation in self.guiinfo.orientations_numbers.keys():               
                 if self.current_building.get_outer_wall_area(orientation) != 0:
                     item1 = QStandardItem(
                         "Outer Wall Orientation: " +
