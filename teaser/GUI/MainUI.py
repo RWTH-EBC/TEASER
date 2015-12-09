@@ -19,6 +19,7 @@ from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 import sys
 import os
+from _operator import pos
 
 
 try:
@@ -2853,11 +2854,20 @@ class MainUI(QDialog):
             Qt.ApplicationModal)
         self.create_new_element_ui_page.show()
 
+    def onActivated(self, text):
+        print(text)
+        print(self.current_position)
+        if int(text) != self.current_position:
+            self.new_layer_position_combobox.removeItem(self.current_position)
+            self.new_layer_position_combobox.addItem(str(text))
+            self.layer_position_label =  QtGui.QLabel(str(text))
+            print("onActivated" + str(text))
+
     def create_new_layer_ui(self):
         ''' Opens the window to create a new layer.
-        
+
         '''
-        
+
         self.create_layer_ui = QtGui.QWizardPage()
         self.create_layer_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create_layer_ui.setWindowTitle("Layer Details")
@@ -2881,10 +2891,35 @@ class MainUI(QDialog):
             for x in range(0, num_layers):
                 self.new_layer_position_combobox.addItem(
                     str(x), userData=None)
+                print("hier")
         else:
             self.new_layer_position_combobox.addItem(
                 "0", userData=None)
+            print("hier")
         self.new_layer_position_combobox.setCurrentIndex(num_layers - 1)
+
+        self.current_position = num_layers - 1
+        self.new_layer_position_combobox.activated[int].connect(self.onActivated)
+
+        '''
+        self.current_position = 0
+        print(current_position)
+        print(self.current_position)
+        '''
+        '''
+        for position in self.new_layer_position_combobox.setCurrentIndex(num_layers - 1):
+            if self.new_layer_position_combobox.currentIndex() == position:
+                print(self.new_layer_position_combobox.currentIndex())
+        '''
+        #curItem = self.new_layer_position_combobox.currentIndex()
+        #print(curItem)
+        #print(self.new_layer_position_combobox.currentText())
+        # print(self.new_layer_position_combobox.current_changed())
+        # print(self.new_layer_position_combobox.keyPressEvent()())
+        #bla = (SIGNAL(self.new_layer_position_combobox.currentIndexChanged(curItem)))
+        # print(bla)
+        # print(self.new_layer_position_combobox.currentIndexChanged(curItem))
+
 
         self.new_layer_thickness_label = QtGui.QLabel("Layer Thickness")
         self.new_layer_thickness_textbox = QtGui.QLineEdit()
@@ -2996,9 +3031,9 @@ class MainUI(QDialog):
 
     def show_layer_build_ui(self, item):
         ''' Opens a window to see all attributes from the
-        currently selected layer.        
+        currently selected layer.
         '''
-        
+
         self.layer_build_ui = QtGui.QWizardPage()
         self.layer_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.layer_build_ui.setWindowTitle("Layer Details")
