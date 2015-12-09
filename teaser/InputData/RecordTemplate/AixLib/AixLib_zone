@@ -49,8 +49,8 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
 
     temperatureground = ${zone.t_ground},
 
+    awin = ${get_g_avg(zone.windows)},
 
-    awin = 0.03,
     T0all = 273.15 + 20.1,
 	aowo = 0.7,    
     epso = 0.9,
@@ -157,5 +157,14 @@ end ${bldg.name}_${zone.name};
     return "false"
   else:
   	return value
+  %>
+</%def>
+
+##get average transmission from g_values do we consider reflextion?
+<%def name="get_g_avg(list)", filter="trim">
+  <%
+  g_vals = [window.g_value for window in list]
+  average = sum(g_vals) / float(len(g_vals))
+  return str(1-average)
   %>
 </%def>
