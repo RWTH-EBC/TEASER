@@ -13,8 +13,8 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     minAHU = ${zone.use_conditions.min_ahu},
     maxAHU = ${zone.use_conditions.max_ahu},
     withAHU = ${get_false(zone.use_conditions.with_ahu)},
-    alphaiwi = ${zone.alpha_conv_iw},
-    alphaowi = ${zone.alpha_conv_inner_ow},
+    alphaiwi = ${zone.alpha_comb_iw},
+    alphaowi = ${zone.alpha_comb_inner_ow},
     alphaowo = ${zone.alpha_comb_outer_ow},
     g = ${zone.weighted_g_value},
     NrPeople = ${zone.use_conditions.persons},
@@ -49,15 +49,19 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
 
     temperatureground = ${zone.t_ground},
 
-    awin = ${get_g_avg(zone.windows)},
+    awin = ${get_g_trans(zone.windows)},
 
-    T0all = 273.15 + 20.1,
+
 	aowo = 0.7,    
     epso = 0.9,
     epsi = 0.9,
     epsw = 0.9,
+
+    T0all = 273.15 + 20.1,
+
     Imax = 200,
     splitfac = 0);
+
 end ${bldg.name}_${zone.name};
 
 ##get n
@@ -161,10 +165,10 @@ end ${bldg.name}_${zone.name};
 </%def>
 
 ##get average transmission from g_values do we consider reflextion?
-<%def name="get_g_avg(list)", filter="trim">
+<%def name="get_g_trans(list)", filter="trim">
   <%
-  g_vals = [window.g_value for window in list]
-  average = sum(g_vals) / float(len(g_vals))
-  return str(1-average)
+  ## g_vals = [window.g_value for window in list]
+  ## average = sum(g_vals) / float(len(g_vals))
+  ## return str(1-average)
   %>
 </%def>
