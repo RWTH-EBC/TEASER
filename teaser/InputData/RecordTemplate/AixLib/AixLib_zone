@@ -53,9 +53,9 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
 
 
 	aowo = 0.7,    
-    epso = 0.9,
-    epsi = 0.9,
-    epsw = 0.9,
+    epso = 0.9, ## calculation of emissivity could be done with Baehr P.32 (1.65) or set to 0.9 in the material? or thermal zone?
+    epsi = 0.9, ## calculation of emissivity could be done with Baehr P.32 (1.65) or set to 0.9 in the material? or thermal zone?
+    epsw = 0.9, ## calculation of emissivity could be done with Baehr P.32 (1.65) or set to 0.9 in the material? or thermal zone?
 
     T0all = 273.15 + 20.1,
 
@@ -170,5 +170,12 @@ end ${bldg.name}_${zone.name};
   ## g_vals = [window.g_value for window in list]
   ## average = sum(g_vals) / float(len(g_vals))
   ## return str(1-average)
+  %>
+</%def>
+
+<%def name="get_emittance(list)", filter="trim">
+  <%
+## Here we should return the coefficient of emittance of the given outerwall,
+## innerwall and window list
   %>
 </%def>
