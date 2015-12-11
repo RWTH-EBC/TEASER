@@ -716,7 +716,9 @@ class Test_teaser(object):
         '''test of fill_outer_wall_area_dict'''
 
         prj.list_of_buildings[-1].fill_outer_area_dict()
-        assert prj.list_of_buildings[-1].outer_area == {0.0: 500.05}
+        outwall_dict_round = {key:round(value,2) for key, value in
+                                prj.list_of_buildings[-1].outer_area.items()}
+        assert outwall_dict_round == {0.0: 500.05}
 
     def test_fill_window_area_dict(self):
         '''test of fill_window_area_dict'''
