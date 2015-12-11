@@ -321,7 +321,6 @@ class Building(object):
 
         for zone in self.thermal_zones:
             zone.calc_zone_parameters(calculation_core)
-            self.volume += zone.volume
             self.sum_heating_load += zone.heating_load
 
     def retrofit_building(self, year_of_retrofit=None,
