@@ -47,9 +47,9 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     rhoair = ${bldg.density_air},
     cair = ${bldg.heat_capac_air},
 
-    temperatureground = ${zone.t_ground},
+    temperatureground = ${bldg.t_ground},
 
-    T0all = ${modelicaInfo.initial_temperature},
+    T0all = ${bldg.t_initial},
 
 	Imax = ${zone.windows[0].imax},
 
@@ -59,7 +59,7 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
 	epsi = ${get_epsi(zone.inner_walls)},
 	epsw = ${get_epsw(zone.windows)},
 
-    awin = ${get_g_trans(zone.windows)},
+    awin = ${get_awin(zone.windows)},
 
     aowo = ${get_aowo(zone.outer_walls)});
 
@@ -167,11 +167,15 @@ end ${bldg.name}_${zone.name};
 </%def>
 
 ##get average transmission from g_values do we consider reflextion?
-<%def name="get_g_trans(list)", filter="trim">
+<%def name="get_awin(list)", filter="trim">
   <%
-  g_vals = [window.g_value for window in list]
-  average = sum(g_vals) / float(len(g_vals))
-  return str(1-average)
+  awin = 0.
+  sum_area = 0.
+  for window in list:
+  	awin += float(window.layer[-1].material.solar_absorp * window.area)
+  	sum_area += window.area
+  awin_weighted = awin/sum_area
+  return str(awin_weighted)
   %>
 </%def>
 
@@ -214,7 +218,7 @@ end ${bldg.name}_${zone.name};
   epsw = 0.
   sum_area = 0.
   for window in list:
-  	epsw += float(window.emittance * window.area)
+  	epsw += float(window.layer[-1].material.ir_emissivity * window.area)
   	sum_area += window.area
   epsw_weighted = epsw/sum_area
   return str(epsw_weighted)

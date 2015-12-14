@@ -71,8 +71,6 @@ class ThermalZone(object):
         self.typical_width = None
         self.t_inside = None
         self.t_outside = None
-        #additional for simulation
-        self.t_ground = 286.15
 
         # Calculated values for InnerWall for each Zone
         self.r1_iw = 0.0

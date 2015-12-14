@@ -110,6 +110,9 @@ class Building(object):
         self.heat_capac_air = 1007
         self.longitude = None
         self.latitude = None
+        self.t_initial = 273.15 + 20.1  # initial temp for all componets in
+                                        # the simulation
+        self.t_ground = 286.15  # groundtemperature of for the simulation
 
         self.file_ahu = ""
         self.file_internal_gains = ""
