@@ -7,7 +7,7 @@ Latitude (Yes)					| NO									| Building
 Tilt (Yes)						| NO									| BuildingElement
 --------------------------------|------BUILDING LEVEL-------------------|-------------------------
 numZones (Yes)                 	| baseRecord / fully automated          | Building
-T0all                       	| NO                                    |
+T0all                       	| NO                                    | Building
 MinHeating                  	| NO                                    |
 MinHeatingShare             	| NO                                    |
 Vair (Yes)                     	| baseRecord / fully automated          | Building
@@ -37,7 +37,7 @@ BPF_DeHu (Yes)                 	| NO                                    |
 efficiencyHRS_enabled (Yes)    	| NO                                    |
 efficiencyHRS_disabled (Yes)   	| NO                                    |
 --------------------------------|----------ZONE PARAMETERS--------------|-------------------------
-T0all (Yes)                    	| zoneRecord / hardcoded                |  NO
+T0all (Yes)                    	| zoneRecord / hardcoded                |  Building
 Lchar                       	| NO                                    | (Building/Typebuilding)
 Bchar                       	| NO                                    | (Building/Typebuilding)
 Hb                          	| NO                                    | (Building)
@@ -84,7 +84,7 @@ aowo (Yes)                     	| zoneRecord / hardcoded                | Zone
 n (Yes)                        	| zoneRecord / fully automated          | Zone.outer_walls
 weightfactorswall (Yes)        	| zoneRecord / fully automated          | Zone.weightfactors_ow
 weightfactorground (Yes)       	| zoneRecord / fully automated          | Zone.weightfactor_ground
-temperatureground (Yes)        	| zoneRecord / hardcoded                | Zone
+temperatureground (Yes)        	| zoneRecord / hardcoded                | Building
 alphaConvWinInner (Yes)        	| zoneRecord / fully automated          | Zone
 alphaConvWinOuter (Yes)        	| zoneRecord / fully automated          | Zone
 awin (Yes)                     	| zoneRecord / hardcoded                | Window
@@ -97,7 +97,7 @@ g (Yes)                       	| zoneRecord / fully automated          | Zone
 RWin (Yes)                     	| zoneRecord / fully automated          | Zone
 UWin (Yes)                     	| NO                                    | Zone.ua_value_win?
 gsunblind (Yes)                	| zoneRecord / fully automated          | Zone.windows
-Imax (Yes)                     	| zoneRecord / hardcoded                | ?
+Imax (Yes)                     	| zoneRecord / hardcoded                | Zone.indows
 Vair (Yes)                     	| zoneRecord / fully automated          | Zone
 rhoair (Yes)                   	| zoneRecord / hardcoded                | Building
 cair  (Yes)                    	| zoneRecord / hardcoded                | Building
