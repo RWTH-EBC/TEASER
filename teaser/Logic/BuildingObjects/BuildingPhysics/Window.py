@@ -30,8 +30,9 @@ class Window(BuildingElement):
         self.shading_max_irr = 0.0
         self._shading = None
         #additional for simulation
-        self.splitfac = None  # splitfac
-        self.imax = None  # Intensity where sunblind closes
+        self.splitfac = 0.0  # splitfac
+        self.imax = 200  # Intensity where sunblind closes
+        self.emittance = 0.0
 
     def calc_equivalent_res(self):
         '''Equivalent resistance VDI 6007
