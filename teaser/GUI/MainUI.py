@@ -19,7 +19,6 @@ from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 import sys
 import os
-from _operator import pos
 
 
 try:
@@ -1248,9 +1247,9 @@ class MainUI(QDialog):
         ''' Checks if all necessary values to create a type building are
         not empty/floats '''
 
-        # TODO: Fehler beim User-Input abfangen, �brigens wenn du die 5 Methoden hier
-        # zusammenlegen willst, musste dir was �berlegen, wie du den type_building typ
-        # �bergibst, weil du keine methoden mit parameter zu buttons connecten kannst,
+        # TODO: Fehler beim User-Input abfangen, uebrigens wenn du die 5 Methoden hier
+        # zusammenlegen willst, musste dir was ueberlegen, wie du den type_building typ
+        # uebergibst, weil du keine methoden mit parameter zu buttons connecten kannst,
         # allerdings sollts mit sowas wie self.type_building_type klappen
         self.fill_typebuilding_attributes()
         self.project, int_id = Controller.click_generate_type_building_button(
@@ -2007,9 +2006,9 @@ class MainUI(QDialog):
         '''Switches the color of text between red and black
         
         '''
-        # TODO: Kann wahrscheinlich gel�scht werden, k�nnte aber noch
-        # n�tzliches Know-How sein, falls sp�ter mit bunten Texten gearbeitet
-        # werden soll, beim L�schen auf weitere Abh�ngigkeiten �berpr�fen!
+        # TODO: Kann wahrscheinlich geloescht werden, koennte aber noch
+        # nuetzliches Know-How sein, falls spaeter mit bunten Texten gearbeitet
+        # werden soll, beim Loeschen auf weitere Abhaengigkeiten ueberpruefen!
 
         palette = QtGui.QPalette()
         if (color == "red"):
@@ -2166,7 +2165,7 @@ class MainUI(QDialog):
         # TODO: Ok das Design hat sich nicht wirklich durchgesetzt und
         # es funktioniert grad nicht besonders, Vorschlag: stattdessen
         # einfach ein Pop-Up Fenster wie bei Create-Type-Building, in dem
-        # man building attribute die links am rand stehen �ndern kann.
+        # man building attribute die links am rand stehen aendern kann.
 
         if self.current_building:
             self.side_bar_construction_year_line_edit.setReadOnly(False)
@@ -2443,9 +2442,9 @@ class MainUI(QDialog):
         puts it on display.
         
         '''
-        # TODO: Erstmal l�dt das eigentlich Projekte, also sollte der
-        # Name ge�ndert werden und dann sollte man noch unpassende Dateien
-        # abfangen bzw. den filter auf .xml und .teaserXML �ndern, wie bei
+        # TODO: Erstmal laedt das eigentlich Projekte, also sollte der
+        # Name geaendert werden und dann sollte man noch unpassende Dateien
+        # abfangen bzw. den filter auf .xml und .teaserXML aendern, wie bei
         # click_save_current_project
         path = QtGui.QFileDialog.getOpenFileName(
             self, caption='Choose Filepath', directory='')
@@ -2460,10 +2459,10 @@ class MainUI(QDialog):
         
         '''
         
-        # TODO: Eventuell k�nnte man hier �ndern, dass man sich aussuchen
-        # kann ob die Werte des alten oder neuen Projekts �bernommen werden?
-        # Au�erdem vielleicht identische Geb�ude aus der Liste wieder rausl�schen,
-        # wobei ich nicht wei� ob sich das Rechenzeit-technisch lohnt...
+        # TODO: Eventuell koennte man hier aendern, dass man sich aussuchen ä
+        # kann ob die Werte des alten oder neuen Projekts uebernommen werden?
+        # Ausserdem vielleicht identische Gebaeude aus der Liste wieder rausloeschen,
+        # wobei ich nicht weiss ob sich das Rechenzeit-technisch lohnt...
 
         for building in self.project.list_of_buildings:
             loaded_project.list_of_buildings.insert(0, building)
@@ -2479,7 +2478,7 @@ class MainUI(QDialog):
         '''
         
         # TODO: Eventuell wollt ihr hier mehr Optionen beim Erstellen
-        # erm�glichen, wie Grundfl�che, Standort, etc. die w�rde ich
+        # ermoeglichen, wie Grundflaeche, Standort, etc. die wuerde ich
         # allerdings optional machen
         
         self.current_building = Controller.click_add_new_building(
@@ -2589,7 +2588,7 @@ class MainUI(QDialog):
         # Problem: Der User muss die Shortcuts auch mitbekommen, also
         # am besten den jeweiligen shortcut-Buchstaben im Label unter dem
         # Button/ auf dem Button etwas hervorheben (unterstreichen oder fett machen)
-        # Der Modifier ist STRG also m�ssten f�r die buttons bspw. STRG+C gedr�ckt werden.
+        # Der Modifier ist STRG also muessten fuer die buttons bspw. STRG+C gedrueckt werden.
         
         key = event.key()
         if key == QtCore.Qt.Key_C and\
@@ -2731,7 +2730,7 @@ class MainUI(QDialog):
         '''
         
         # TODO: Bin mir nicht sicher ob das self.no_building_warning_label
-        # noch irgendwas tut, �berpr�fen und sonst l�schen.
+        # noch irgendwas tut, ueberpruefen und sonst loeschen.
         
         self.generate_new_building_ui_page = QtGui.QWizardPage()
         self.generate_new_building_ui_page.setAttribute(
@@ -2854,20 +2853,11 @@ class MainUI(QDialog):
             Qt.ApplicationModal)
         self.create_new_element_ui_page.show()
 
-    def onActivated(self, text):
-        print(text)
-        print(self.current_position)
-        if int(text) != self.current_position:
-            self.new_layer_position_combobox.removeItem(self.current_position)
-            self.new_layer_position_combobox.addItem(str(text))
-            self.layer_position_label =  QtGui.QLabel(str(text))
-            print("onActivated" + str(text))
-
     def create_new_layer_ui(self):
         ''' Opens the window to create a new layer.
-
+        
         '''
-
+        
         self.create_layer_ui = QtGui.QWizardPage()
         self.create_layer_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create_layer_ui.setWindowTitle("Layer Details")
@@ -2891,35 +2881,10 @@ class MainUI(QDialog):
             for x in range(0, num_layers):
                 self.new_layer_position_combobox.addItem(
                     str(x), userData=None)
-                print("hier")
         else:
             self.new_layer_position_combobox.addItem(
                 "0", userData=None)
-            print("hier")
         self.new_layer_position_combobox.setCurrentIndex(num_layers - 1)
-
-        self.current_position = num_layers - 1
-        self.new_layer_position_combobox.activated[int].connect(self.onActivated)
-
-        '''
-        self.current_position = 0
-        print(current_position)
-        print(self.current_position)
-        '''
-        '''
-        for position in self.new_layer_position_combobox.setCurrentIndex(num_layers - 1):
-            if self.new_layer_position_combobox.currentIndex() == position:
-                print(self.new_layer_position_combobox.currentIndex())
-        '''
-        #curItem = self.new_layer_position_combobox.currentIndex()
-        #print(curItem)
-        #print(self.new_layer_position_combobox.currentText())
-        # print(self.new_layer_position_combobox.current_changed())
-        # print(self.new_layer_position_combobox.keyPressEvent()())
-        #bla = (SIGNAL(self.new_layer_position_combobox.currentIndexChanged(curItem)))
-        # print(bla)
-        # print(self.new_layer_position_combobox.currentIndexChanged(curItem))
-
 
         self.new_layer_thickness_label = QtGui.QLabel("Layer Thickness")
         self.new_layer_thickness_textbox = QtGui.QLineEdit()
@@ -3031,9 +2996,9 @@ class MainUI(QDialog):
 
     def show_layer_build_ui(self, item):
         ''' Opens a window to see all attributes from the
-        currently selected layer.
+        currently selected layer.        
         '''
-
+        
         self.layer_build_ui = QtGui.QWizardPage()
         self.layer_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.layer_build_ui.setWindowTitle("Layer Details")
@@ -3401,27 +3366,15 @@ class MainUI(QDialog):
         self.persons_line_edit.setText(str(
             self.current_zone.use_conditions.persons))
         self.persons_label_2 = QtGui.QLabel("W/m^2")
-
+        
         self.figure_profiles = plt.figure()
         self.canvas_profiles = FigureCanvas(self.figure_profiles)
         data_persons = [1.0 for x in range(24)]
         data_machines = [1.0 for x in range(24)]
         # TODO: data_lighting = [1.0 for x in range(24)]
-        '''
-        for hour in range(len(data_persons)):
-            print (hour)
-        '''
         for hour in range(0,24):
-            try:
-                data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
-                data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
-            except IndexError:
-                print("IndexError : Number of persons = " +
-                      str(len(self.current_zone.use_conditions.profile_persons)))
-                print("IndexError : Number of maschines = " +
-                      str(len(self.current_zone.use_conditions.profile_persons)))
-                break
-
+            data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
+            data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
             # TODO: data_lighting[hour] = self.current_zone.use_conditions.profile_lighting[hour]
         ax_p = self.figure_profiles.add_subplot(111)
         ax_p.hold(False)
@@ -4090,7 +4043,7 @@ class MainUI(QDialog):
         ''' Opens a window to display all attributes
         of the currently selected element.
         '''
-
+        
         self.element_build_ui = QtGui.QWizardPage()
         self.element_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.element_build_ui.setWindowTitle("Element Details")
@@ -4106,23 +4059,15 @@ class MainUI(QDialog):
             for element in self.current_zone.inner_walls:
                 if element.internal_id == current_item.internal_id:
                     self.current_element = element
-        if "Floor" in current_item.text():
-            for element in self.current_zone.inner_walls:
-                if element.internal_id == current_item.internal_id:
-                    self.current_element = element
-        if "Ceiling" in current_item.text():
-            for element in self.current_zone.inner_walls:
-                if element.internal_id == current_item.internal_id:
-                    self.current_element = element
         if "Outer Wall" in current_item.text():
             for element in self.current_zone.outer_walls:
                 if element.internal_id == current_item.internal_id:
                     self.current_element = element
-        if "Rooftop" in current_item.text():
+        if "Ground Floor" in current_item.text():
             for element in self.current_zone.outer_walls:
                 if element.internal_id == current_item.internal_id:
                     self.current_element = element
-        if "Ground Floor" in current_item.text():
+        if "Rooftop" in current_item.text():
             for element in self.current_zone.outer_walls:
                 if element.internal_id == current_item.internal_id:
                     self.current_element = element
@@ -4132,10 +4077,10 @@ class MainUI(QDialog):
                     self.current_element = element
 
         for layer in self.current_element.layer:
-            item = TrackableItem("Material:\t".expandtabs(8) +
-                                 str(layer.material.name) +
-                                 "\nThickness:\t".expandtabs(14) +
-                                 str(layer.thickness) +
+            item = TrackableItem("Material:\t".expandtabs(8) + 
+                                 str(layer.material.name) + 
+                                 "\nThickness:\t".expandtabs(14) + 
+                                 str(layer.thickness) + 
                                  "\t", layer.internal_id)
             self.element_layer_model.appendRow(item)
 
