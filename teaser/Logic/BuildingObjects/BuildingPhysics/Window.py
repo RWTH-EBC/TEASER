@@ -31,6 +31,7 @@ class Window(BuildingElement):
         self._shading = None
         #additional for simulation
         self.splitfac = None  # splitfac
+        self.imax = None  # Intensity where sunblind closes
 
     def calc_equivalent_res(self):
         '''Equivalent resistance VDI 6007
@@ -44,7 +45,7 @@ class Window(BuildingElement):
             time constant according to VDI 6007 (default t_bt = 7)
         '''
         number_of_layer, density, thermal_conduc, heat_capac, thickness = \
-        self.gather_element_properties()
+            self.gather_element_properties()
 
         r_layer = thickness/thermal_conduc
         c_layer = heat_capac*density*thickness  # *1000
