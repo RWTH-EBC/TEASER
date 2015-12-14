@@ -1,7 +1,12 @@
 # created June 2015
 # by TEASER4 Development Team
 
+"""BuildingElement
 
+This module contains the Base class for all building elements.
+"""
+
+from __future__ import division
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 import teaser.Data.SchemaBindings.TypeBuildingBind as tb_bind
@@ -9,6 +14,7 @@ import teaser.Logic.Utilis as utilis
 
 import numpy as np
 import random
+import warnings
 
 
 class BuildingElement(object):
@@ -100,13 +106,13 @@ class BuildingElement(object):
         self.year_of_construction = None
         self.building_age_group = [None, None]
 
-        self.area = None
+        self._area = None
         self.tilt = None
         self._orientation = None
-        self.inner_convection = None
-        self.inner_radiation = None
-        self.outer_convection = None
-        self.outer_radiation = None
+        self._inner_convection = None
+        self._inner_radiation = None
+        self._outer_convection = None
+        self._outer_radiation = None
 
         self._layer = []
 
@@ -374,95 +380,172 @@ class BuildingElement(object):
             self.shading_g_total = pyxb_class.shading_g_total
             self.shading_max_irr = pyxb_class.shading_max_irr
 
-    def save_type_element(self):
+    def save_type_element(self, path=None, file_name=None):
         '''Typical element saver.
 
         Saves typical building elements according to their construction
-        year and their construction type in the TypeBuildingElements.xml.
+        year and their construction type in the the XML file for type buidling
+        elements. If the Project parent is set, it automatically saves it to
+        the file given in Project.data. Alternatively you can specify a path to
+        a file of TypeBuildingElements. If this file does not exist,
+        a new file is created.
 
         Parameters
         ----------
-        year : str
-            Year of construction
 
-        construction : str
-            Construction type, code list ('heavy', 'light')
+        path : str
+            path where unique file should be stored
+        name : strt
+            name of of unique file
+
         '''
 
-        xml_file = open(
-            utilis.get_full_path("InputData\\TypeBuildingElements.xml",
-                                 'r', encoding='UTF-8'))
+        if self.parent is not None:
+            path = self.parent.parent.parent.data.path_tb
+            xml_parse = self.parent.parent.parent.data.element_bind
+        else:
+            path = path + "\\" + file_name + ".xml"
+            try:
+                xml_file = open(utilis.get_full_path(path))
+                xml_parse = tb_bind.CreateFromDocument(xml_file.read())
+            except:
+                xml_parse = tb_bind.TypeBuildingElements()
 
-        xml_parse = tb_bind.CreateFromDocument(xml_file.read())
-
+        add_to_xml = True
+        warning_text = ("Construction Type and building age "
+                        "group already exist in this XML, consider revising "
+                        "your inputs. The Element is NOT saved into XML")
         if type(self).__name__ == "OuterWall":
 
-            pyxb_wall = tb_bind.OuterWallType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.OuterWall:
+                if check.building_age_group == self.building_age_group and\
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
-            xml_parse.OuterWall.append(pyxb_wall)
+            if add_to_xml is True:
+
+                pyxb_wall = tb_bind.OuterWallType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+
+                xml_parse.OuterWall.append(pyxb_wall)
 
         elif type(self).__name__ == 'InnerWall':
 
-            pyxb_wall = tb_bind.InnerWallType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.InnerWall:
+                if check.building_age_group == self.building_age_group and\
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
-            xml_parse.InnerWall.append(pyxb_wall)
+            if add_to_xml is True:
+
+                pyxb_wall = tb_bind.InnerWallType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+
+                xml_parse.InnerWall.append(pyxb_wall)
 
         elif type(self).__name__ == 'Ceiling':
 
-            pyxb_wall = tb_bind.CeilingType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.Ceiling:
+                if check.building_age_group == self.building_age_group and\
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
-            xml_parse.Ceiling.append(pyxb_wall)
+            if add_to_xml is True:
+
+                pyxb_wall = tb_bind.CeilingType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+
+                xml_parse.Ceiling.append(pyxb_wall)
 
         elif type(self).__name__ == 'Floor':
 
-            pyxb_wall = tb_bind.FloorType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.Floor:
+                if check.building_age_group == self.building_age_group and\
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
-            xml_parse.Floor.append(pyxb_wall)
+            if add_to_xml is True:
+
+                pyxb_wall = tb_bind.FloorType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+
+                xml_parse.Floor.append(pyxb_wall)
 
         elif type(self).__name__ == 'GroundFloor':
 
-            pyxb_wall = tb_bind.GroundFloorType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.GroundFloor:
+                if check.building_age_group == self.building_age_group and\
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
-            xml_parse.GroundFloor.append(pyxb_wall)
+            if add_to_xml is True:
+
+                pyxb_wall = tb_bind.GroundFloorType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+
+                xml_parse.GroundFloor.append(pyxb_wall)
 
         elif type(self).__name__ == 'Rooftop':
 
-            pyxb_wall = tb_bind.RooftopType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.Rooftop:
+                if check.building_age_group == self.building_age_group and\
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
-            xml_parse.Rooftop.append(pyxb_wall)
+            if add_to_xml is True:
+
+                pyxb_wall = tb_bind.RooftopType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
+
+                xml_parse.Rooftop.append(pyxb_wall)
 
         elif type(self).__name__ == 'Window':
 
-            pyxb_wall = tb_bind.WindowType()
-            self.set_basic_data_pyxb(pyxb_wall)
-            pyxb_wall.Layers = tb_bind.LayersType()
-            self.set_layer_data_pyxb(pyxb_wall)
+            for check in xml_parse.Window:
+                if check.building_age_group == self.building_age_group and\
+                   check.construction_type == self.construction_type:
+                    warnings.warn(warning_text)
+                    add_to_xml = False
+                    break
 
-            xml_parse.Window.append(pyxb_wall)
+            if add_to_xml is True:
 
-        out_file = open(
-            utilis.get_full_path("InputData\\TypeBuildingElements.xml",
-                                 'w', encoding='UTF-8'))
+                pyxb_wall = tb_bind.WindowType()
+                self.set_basic_data_pyxb(pyxb_wall)
+                pyxb_wall.Layers = tb_bind.LayersType()
+                self.set_layer_data_pyxb(pyxb_wall)
 
-        out_file.write(xml_parse.toDOM().toprettyxml())
+                xml_parse.Window.append(pyxb_wall)
+
+        if add_to_xml is True:
+
+            out_file = open(utilis.get_full_path(path),"w")
+
+            out_file.write(xml_parse.toDOM().toprettyxml())
 
     def set_basic_data_pyxb(self, pyxb_class):
         '''Helper function for save_type_element to set the layer data.
@@ -610,17 +693,93 @@ class BuildingElement(object):
 
     @layer.setter
     def layer(self, value):
-        
-        if value == None:
+
+        if value is None:
             self._layer = []
         else:
             ass_error_1 = "Value has to be an instance of Layer()"
-    
+
             assert isinstance(value, Layer), ass_error_1
-            
-                
+
             if self._layer is None:
                 self._layer = [value]
-    
+
             else:
                 self._layer.append(value)
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.area is not None:
+            self.calc_ua_value()
+
+    @property
+    def inner_convection(self):
+        return self._inner_convection
+
+    @inner_convection.setter
+    def inner_convection(self, value):
+        if value is not None:
+            self._inner_convection = value
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.area is not None:
+            self.calc_ua_value()
+
+    @property
+    def inner_radiation(self):
+        return self._inner_radiation
+
+    @inner_radiation.setter
+    def inner_radiation(self, value):
+        if value is not None:
+            self._inner_radiation = value
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.area is not None:
+            self.calc_ua_value()
+
+    @property
+    def outer_convection(self):
+        return self._outer_convection
+
+    @outer_convection.setter
+    def outer_convection(self, value):
+        if value is not None:
+            self._outer_convection = value
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.area is not None:
+            self.calc_ua_value()
+
+    @property
+    def outer_radiation(self):
+        return self._outer_radiation
+
+    @outer_radiation.setter
+    def outer_radiation(self, value):
+        if value is not None:
+            self._outer_radiation = value
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.area is not None:
+            self.calc_ua_value()
+
+    @property
+    def area(self):
+        return self._area
+
+    @area.setter
+    def area(self, value):
+        if value is not None:
+            self._area = value
+        if type(self).__name__ == "OuterWall"\
+                    or type(self).__name__ == "Rooftop" \
+                    or type(self).__name__ == "GroundFloor":
+            if self.parent.parent is not None and self.orientation is not None:
+                self.parent.parent.fill_outer_area_dict()
+        elif type(self).__name__ == "Window":
+            if self.parent.parent is not None and self.orientation is not None:
+                self.parent.parent.fill_window_area_dict()
+        if self.inner_convection is not None and\
+                self.inner_radiation is not None and\
+                self.area is not None:
+            self.calc_ua_value()
