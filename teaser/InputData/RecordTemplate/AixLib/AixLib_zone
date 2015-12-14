@@ -49,18 +49,20 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
 
     temperatureground = ${zone.t_ground},
 
+    T0all = ${modelicaInfo.initial_temperature},
+
+	Imax = ${zone.windows[0].imax},
+
+	splitfac = ${zone.windows[0].splitfac},
+
+	epso = ${get_epso(zone.outer_walls)},
+	epsi = ${get_epsi(zone.inner_walls)},
+	epsw = ${get_epsw(zone.windows)},
+
     awin = ${get_g_trans(zone.windows)},
 
+    aowo = ${get_aowo(zone.outer_walls)});
 
-	aowo = 0.7,    
-    epso = 0.9, ## calculation of emissivity could be done with Baehr P.32 (1.65) or set to 0.9 in the material? or thermal zone?
-    epsi = 0.9, ## calculation of emissivity could be done with Baehr P.32 (1.65) or set to 0.9 in the material? or thermal zone?
-    epsw = 0.9, ## calculation of emissivity could be done with Baehr P.32 (1.65) or set to 0.9 in the material? or thermal zone?
-
-    T0all = 273.15 + 20.1,
-
-    Imax = 200,
-    splitfac = 0);
 
 end ${bldg.name}_${zone.name};
 
@@ -167,9 +169,9 @@ end ${bldg.name}_${zone.name};
 ##get average transmission from g_values do we consider reflextion?
 <%def name="get_g_trans(list)", filter="trim">
   <%
-  ## g_vals = [window.g_value for window in list]
-  ## average = sum(g_vals) / float(len(g_vals))
-  ## return str(1-average)
+  g_vals = [window.g_value for window in list]
+  average = sum(g_vals) / float(len(g_vals))
+  return str(1-average)
   %>
 </%def>
 
@@ -177,5 +179,57 @@ end ${bldg.name}_${zone.name};
   <%
 ## Here we should return the coefficient of emittance of the given outerwall,
 ## innerwall and window list
+  %>
+</%def>
+
+## get outer wall emittance outer side
+<%def name="get_epso(list)", filter="trim">
+  <%
+  epso = 0.
+  sum_area = 0.
+  for wall in list:
+  	epso += float(wall.layer[-1].material.ir_emissivity * wall.area)
+  	sum_area += wall.area
+  epso_weighted = epso/sum_area
+  return str(epso_weighted)
+  %>
+</%def>
+
+## get outer wall emittance inner side
+<%def name="get_epsi(list)", filter="trim">
+  <%
+  epsi = 0.
+  sum_area = 0.
+  for wall in list:
+  	epsi += float(wall.layer[0].material.ir_emissivity * wall.area)
+  	sum_area += wall.area
+  epsi_weighted = epsi/sum_area
+  return str(epsi_weighted)
+  %>
+</%def>
+
+## get window emittance
+<%def name="get_epsw(list)", filter="trim">
+  <%
+  epsw = 0.
+  sum_area = 0.
+  for window in list:
+  	epsw += float(window.emittance * window.area)
+  	sum_area += window.area
+  epsw_weighted = epsw/sum_area
+  return str(epsw_weighted)
+  %>
+</%def>
+
+## get outer wall coefficient of absorbtion
+<%def name="get_aowo(list)", filter="trim">
+  <%
+  aowo = 0.
+  sum_area = 0.
+  for wall in list:
+  	aowo += float(wall.layer[-1].material.solar_absorp * wall.area)
+  	sum_area += wall.area
+  aowo_weighted = aowo/sum_area
+  return str(aowo_weighted)
   %>
 </%def>

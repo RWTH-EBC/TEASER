@@ -714,7 +714,7 @@ class Project(object):
                         zone_path + "\\" + bldg.name + "_" +
                         zone.name + ".mo"), 'w')
                     out_file.write(zone_template.render_unicode(
-                        bldg=bldg, zone=zone))
+                        bldg=bldg, zone=zone, modelicaInfo=self.modelica_info))
                     out_file.close()
 
                 self._help_package(zone_path, bldg.name + "_DataBase")
