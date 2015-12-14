@@ -6,6 +6,7 @@
 This module contains the Base class for all building elements.
 """
 
+from __future__ import division
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 import teaser.Data.SchemaBindings.TypeBuildingBind as tb_bind
