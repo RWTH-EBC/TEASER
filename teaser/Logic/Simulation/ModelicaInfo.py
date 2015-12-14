@@ -15,4 +15,3 @@ class ModelicaInfo():
         self.solver = ["Lsodar", "dassl"]
         self.current_solver = "dassl"
         self.equidistant_output = True
-        self.initial_temperature = 273.15 + 20.1
