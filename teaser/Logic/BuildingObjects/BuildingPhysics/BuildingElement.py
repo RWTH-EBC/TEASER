@@ -344,6 +344,10 @@ class BuildingElement(object):
         material.heat_capac = pyxb_class.Material.heat_capac
         material.solar_absorp = pyxb_class.Material.solar_absorp
         material.ir_emissivity = pyxb_class.Material.ir_emissivity
+        if material.solar_absorp == 0.0:
+            material.solar_absorp = 0.7
+        if material.ir_emissivity == 0.0:
+            material.ir_emissivity = 0.9
 
     def set_basic_data(self, pyxb_class):
         '''Helper function for load_type_element to set the layer data.
