@@ -54,7 +54,7 @@ Q_flow_cooler               	| NO                                    | Not in Mo
 weightfactor_cooler         	| NO                                    | Not in Model?
 Cooler_on                   	| zoneRecord / hardcoded                | Not in Model?
 h_cooler (Yes)                 	| NO                                    | Should be 0
-l_cooler (Yes)                 	| zoneRecord / hardcoded                | Zone.cooling_load
+l_cooler (Yes)                 	| zoneRecord / fully automated          | Zone.cooling_load
 KR_cooler (Yes)                	| NO                                    | Not a TEASER intergration? (PI Stuff)
 TN_cooler (Yes)                	| NO                                    | Not a TEASER intergration? (PI Stuff)
 ActivityTypePeople (Yes)       	| zoneRecord / hardcoded                | UseConditions
@@ -95,18 +95,18 @@ weightfactorswindow (Yes)      	| zoneRecord / fully automated          | Zone.w
 epsw (Yes)                     	| zoneRecord / hardcoded                | BuildingElement
 g (Yes)                       	| zoneRecord / fully automated          | Zone
 RWin (Yes)                     	| zoneRecord / fully automated          | Zone
-UWin (Yes)                     	| NO                                    | Zone.ua_value_win?
+UWin (Yes)                     	| zoneRecord / fully automated		    | Zone.ua_value_win?
 gsunblind (Yes)                	| zoneRecord / fully automated          | Zone.windows
-Imax (Yes)                     	| zoneRecord / hardcoded                | Zone.indows
+Imax (Yes)                     	| zoneRecord / hardcoded                | Zone.windows
 Vair (Yes)                     	| zoneRecord / fully automated          | Zone
 rhoair (Yes)                   	| zoneRecord / hardcoded                | Building
 cair  (Yes)                    	| zoneRecord / hardcoded                | Building
 withAHU                     	| zoneRecord / fully automated          | UseConditions
 minAHU                      	| zoneRecord / fully automated          | UseConditions
 maxAHU                      	| zoneRecord / fully automated          | UseConditions
-useConstantACHrate (Yes)       	| NO                                    | UseConditions
-baseACH (Yes)                  	| NO                                    | UseConditions
-maxUserACH (Yes)               	| NO                                    | UseConditions
-maxOverheatingACH (Yes)        	| NO                                    | UseConditions
-maxSummerACH (Yes)            	| NO                                    | UseConditions
+useConstantACHrate (Yes)       	| zoneRecord / fully automated          | UseConditions
+baseACH (Yes)                  	| zoneRecord / fully automated          | UseConditions
+maxUserACH (Yes)               	| zoneRecord / fully automated          | UseConditions
+maxOverheatingACH (Yes)        	| zoneRecord / fully automated          | UseConditions
+maxSummerACH (Yes)            	| zoneRecord / fully automated          | UseConditions
 winterReduction             	| NO                                    |

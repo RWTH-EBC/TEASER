@@ -3,7 +3,7 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     n = ${get_n(zone.outer_walls)},
     Heater_on = true,
     Cooler_on = false,
-    l_cooler = 0,
+    l_cooler = ${zone.cooling_load},
     RatioConvectiveHeatLighting = ${
     	zone.use_conditions.ratio_conv_rad_lighting},
     zoneID = "${zone.name}",
@@ -12,7 +12,7 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     Vair = ${zone.volume},
     minAHU = ${zone.use_conditions.min_ahu},
     maxAHU = ${zone.use_conditions.max_ahu},
-    withAHU = ${get_false(zone.use_conditions.with_ahu)},
+    withAHU = ${get_true_false(zone.use_conditions.with_ahu)},
     alphaiwi = ${zone.alpha_comb_iw},
     alphaowi = ${zone.alpha_comb_inner_ow},
     alphaowo = ${zone.alpha_comb_outer_ow},
@@ -32,8 +32,9 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     R1i = ${zone.r1_iw},
     C1i = ${zone.c1_iw},
     RWin = ${zone.r1_win},
-    alphaConvWinOuter = ${zone.alpha_conv_outer_win},
+    UWin = ${zone.ua_value_win/zone.area_win},
     alphaConvWinInner = ${zone.alpha_conv_inner_win},
+    alphaConvWinOuter = ${zone.alpha_conv_outer_win},
     Ao = ${zone.area_ow},
     withOuterwalls = ${element_check(zone.outer_walls)},
     R1o = ${zone.r1_ow},
@@ -48,13 +49,23 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     cair = ${bldg.heat_capac_air},
     temperatureground = ${bldg.t_ground},
     T0all = ${bldg.t_initial},
-	Imax = ${zone.windows[0].imax},
-	splitfac = ${zone.windows[0].splitfac},
-	epso = ${get_epso(zone.outer_walls)},
-	epsi = ${get_epsi(zone.inner_walls)},
-	epsw = ${get_epsw(zone.windows)},
+    Imax = ${zone.windows[0].imax},
+    splitfac = ${zone.windows[0].splitfac},
+    epso = ${get_epso(zone.outer_walls)},
+    epsi = ${get_epsi(zone.inner_walls)},
+    epsw = ${get_epsw(zone.windows)},
     awin = ${get_awin(zone.windows)},
-    aowo = ${get_aowo(zone.outer_walls)});
+    aowo = ${get_aowo(zone.outer_walls)},
+    useConstantACHrate = ${str(get_true_false(
+      zone.use_conditions.use_constant_ach_rate))},
+    baseACH = ${zone.use_conditions.base_ach},
+    maxUserACH = ${zone.use_conditions.max_user_ach},
+    maxOverheatingACH = ${str(zone.use_conditions.max_overheating_ach).replace(
+      '[', '{').replace(']', '}')},
+    maxSummerACH = ${str(zone.use_conditions.max_summer_ach).replace(
+      '[', '{').replace(']', '}')});
+
+
 
 end ${bldg.name}_${zone.name};
 
@@ -149,12 +160,14 @@ end ${bldg.name}_${zone.name};
 </%def>
 
 ##get false
-<%def name="get_false(value)", filter="trim">
+<%def name="get_true_false(value)", filter="trim">
   <%
   if value == False:
     return "false"
+  elif value == True:
+  	return "true"
   else:
-  	return value
+    return value
   %>
 </%def>
 
@@ -179,6 +192,7 @@ end ${bldg.name}_${zone.name};
   for wall in list:
   	epso += float(wall.layer[-1].material.ir_emissivity * wall.area)
   	sum_area += wall.area
+
   epso_weighted = epso/sum_area
   return str(epso_weighted)
   %>
