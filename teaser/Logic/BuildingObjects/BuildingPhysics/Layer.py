@@ -37,7 +37,7 @@ class Layer(object):
         self.internal_id = random.random()
         self.id = 0
         self._material = None
-        self.thickness = 0.0
+        self._thickness = 0.0
 
     @property
     def parent(self):
@@ -72,3 +72,15 @@ class Layer(object):
         assert type(value).__name__ == ("Material"), ass_error_1
 
         self._material = value
+
+    @property
+    def thickness(self):
+        return self._thickness
+
+    @thickness.setter
+    def thickness(self, value):
+        if value is not None:
+            self._thickness = float(value)
+        if self.material is not None:
+            if vars(self.material)['_thermal_conduc'] != 0:
+                self.parent.calc_ua_value()
