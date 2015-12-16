@@ -52,7 +52,7 @@ class Material(object):
         self.parent = parent
         self.name = ""
         self.density = 0.0
-        self.thermal_conduc = 0.0
+        self._thermal_conduc = 0.0
         self.heat_capac = 0.0
         self.solar_absorp = 0.0
         self.ir_emissivity = 0.0
@@ -121,3 +121,17 @@ class Material(object):
 
             self.__parent = value
             self.__parent.material = self
+
+    @property
+    def thermal_conduc(self):
+        return self._thermal_conduc
+
+    @thermal_conduc.setter
+    def thermal_conduc(self, value):
+        if value is not None:
+            self._thermal_conduc = float(value)
+            if self.parent.thickness is not None and\
+               self.parent.parent.inner_convection is not None and\
+               self.parent.parent.inner_radiation is not None and\
+               self.parent.parent.area is not None:
+                self.parent.parent.calc_ua_value()
