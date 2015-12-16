@@ -1514,8 +1514,11 @@ class MainUI(QDialog):
         data_machines = [1.0 for x in range(24)]
         # TODO: data_lighting = [1.0 for x in range(24)]
         for hour in range(0,24):
-            data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
-            data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
+            try:
+                data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
+                data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
+            except IndexError:
+                break;
             # TODO: data_lighting[hour] = self.current_zone.use_conditions.profile_lighting[hour]
         ax_p = self.figure_profiles.add_subplot(111)
         ax_p.hold(False)
@@ -3391,8 +3394,11 @@ class MainUI(QDialog):
         data_machines = [1.0 for x in range(24)]
         # TODO: data_lighting = [1.0 for x in range(24)]
         for hour in range(0,24):
+            try:
                 data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
                 data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
+            except IndexError:
+                break;
         ax_p = self.figure_profiles.add_subplot(111)
         ax_p.hold(False)
         ax_p.plot(data_persons, 'b-', data_machines, 'r-')
