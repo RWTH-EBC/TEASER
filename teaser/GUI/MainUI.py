@@ -3391,9 +3391,8 @@ class MainUI(QDialog):
         data_machines = [1.0 for x in range(24)]
         # TODO: data_lighting = [1.0 for x in range(24)]
         for hour in range(0,24):
-            data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
-            data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
-            # TODO: data_lighting[hour] = self.current_zone.use_conditions.profile_lighting[hour]
+                data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
+                data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
         ax_p = self.figure_profiles.add_subplot(111)
         ax_p.hold(False)
         ax_p.plot(data_persons, 'b-', data_machines, 'r-')
@@ -3440,6 +3439,9 @@ class MainUI(QDialog):
         else:
             self.infiltration_rate_line_edit.setText("1")
         self.infiltration_rate_label_2 = QtGui.QLabel("1/h")
+
+        self.space_label = QtGui.QLabel() # Cheat to group the other controls on top
+
         self.zone_usage_times_layout.addWidget(
             self.cooling_ahu_start_label, 1, 1)
         self.zone_usage_times_layout.addWidget(
