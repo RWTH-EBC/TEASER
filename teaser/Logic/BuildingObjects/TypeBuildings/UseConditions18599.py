@@ -256,6 +256,7 @@ class UseConditions18599(UseConditions):
         self.max_user_ach = 1.0
         self.max_overheating_ach = [3.0, 2.0]
         self.max_summer_ach = [1.0, 273.15 + 10, 273.15 + 17]
+        self.winter_reduction = [0.2, 273.15, 273.15 + 10]
 
     def load_use_conditions(self, zone_usage):
         '''load typical use conditions

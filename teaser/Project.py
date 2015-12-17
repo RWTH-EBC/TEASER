@@ -653,7 +653,7 @@ class Project(object):
             pass
 
         uses = ['Modelica(version = "3.2.1")',
-                "AixLib(version=\"0.1.0\")"]
+                "AixLib(version=\"0.2.1\")"]
 
         # for bldg in self.list_of_buildings:
         #     assert bldg._calculation_method == "vdi", ("AixLib needs \
