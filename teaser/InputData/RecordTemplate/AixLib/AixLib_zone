@@ -63,6 +63,8 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     maxOverheatingACH = ${str(zone.use_conditions.max_overheating_ach).replace(
       '[', '{').replace(']', '}')},
     maxSummerACH = ${str(zone.use_conditions.max_summer_ach).replace(
+      '[', '{').replace(']', '}')},
+    winterReduction = ${str(zone.use_conditions.winter_reduction).replace(
       '[', '{').replace(']', '}')});
 
 
