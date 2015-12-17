@@ -28,16 +28,18 @@ l_cooler                    	| baseRecord / fully automated          | Building
 KR_cooler                   	| NO                                    |
 TN_cooler                   	| NO                                    |
 - - - - - AHUMODES- - - - - - -	|- - - - - - - - - - - - - - - - - - - -| 
-heating (Yes)                  	| NO                                    |
-cooling (Yes)                  	| NO                                    |
-dehumidification (Yes)         	| NO                                    |
-humidification (Yes)           	| NO                                    |
-HRS (Yes)                      	| NO                                    |
-BPF_DeHu (Yes)                 	| NO                                    |
-efficiencyHRS_enabled (Yes)    	| NO                                    |
-efficiencyHRS_disabled (Yes)   	| NO                                    |
+heating (Yes)                  	| NO                                    |BuildingSystems.AHU
+cooling (Yes)                  	| NO                                    |BuildingSystems.AHU
+dehumidification (Yes)         	| NO                                    |BuildingSystems.AHU
+humidification (Yes)           	| NO                                    |BuildingSystems.AHU
+HRS (Yes)                      	| NO                                    |BuildingSystems.AHU
+BPF_DeHu (Yes)                 	| NO                                    |BuildingSystems.AHU
+efficiencyHRS_enabled (Yes)    	| NO                                    |BuildingSystems.AHU
+efficiencyHRS_disabled (Yes)   	| NO                                    |BuildingSystems.AHU
 --------------------------------|----------ZONE PARAMETERS--------------|-------------------------
-T0all (Yes)                    	| zoneRecord / hardcoded                |  Building
+withAHU                     	| zoneRecord / fully automated          | UseConditions
+minAHU                      	| zoneRecord / fully automated          | UseConditions
+maxAHU                      	| zoneRecord / fully automated          | UseConditions
 Lchar                       	| NO                                    | (Building/Typebuilding)
 Bchar                       	| NO                                    | (Building/Typebuilding)
 Hb                          	| NO                                    | (Building)
@@ -46,13 +48,15 @@ Q_flow_heat                 	| NO                                    | Not in Mo
 Q_N                         	| NO                                    | Not in Model?
 weightfactor_heater         	| NO                                    | Not in Model?
 Heater_on                   	| zoneRecord / hardcoded                | Not in Model?
+Q_flow_cooler               	| NO                                    | Not in Model?
+weightfactor_cooler         	| NO                                    | Not in Model?
+Cooler_on                   	| zoneRecord / hardcoded                | Not in Model?
+
+T0all (Yes)                    	| zoneRecord / hardcoded                | Building
 h_heater (Yes)                 	| zoneRecord / fully automated          | Zone
 l_heater (Yes)                 	| NO                                    | Should be 0
 KR_heater (Yes)                	| NO                                    | Not a TEASER intergration? (PI Stuff)
 TN_heater (Yes)                	| NO                                    | Not a TEASER intergration? (PI Stuff)
-Q_flow_cooler               	| NO                                    | Not in Model?
-weightfactor_cooler         	| NO                                    | Not in Model?
-Cooler_on                   	| zoneRecord / hardcoded                | Not in Model?
 h_cooler (Yes)                 	| NO                                    | Should be 0
 l_cooler (Yes)                 	| zoneRecord / fully automated          | Zone.cooling_load
 KR_cooler (Yes)                	| NO                                    | Not a TEASER intergration? (PI Stuff)
@@ -101,12 +105,9 @@ Imax (Yes)                     	| zoneRecord / hardcoded                | Zone.w
 Vair (Yes)                     	| zoneRecord / fully automated          | Zone
 rhoair (Yes)                   	| zoneRecord / hardcoded                | Building
 cair  (Yes)                    	| zoneRecord / hardcoded                | Building
-withAHU                     	| zoneRecord / fully automated          | UseConditions
-minAHU                      	| zoneRecord / fully automated          | UseConditions
-maxAHU                      	| zoneRecord / fully automated          | UseConditions
 useConstantACHrate (Yes)       	| zoneRecord / fully automated          | UseConditions
 baseACH (Yes)                  	| zoneRecord / fully automated          | UseConditions
 maxUserACH (Yes)               	| zoneRecord / fully automated          | UseConditions
 maxOverheatingACH (Yes)        	| zoneRecord / fully automated          | UseConditions
 maxSummerACH (Yes)            	| zoneRecord / fully automated          | UseConditions
-winterReduction             	| NO                                    |
+winterReduction             	| zoneRecord / fully automated          | UseConditions
