@@ -193,6 +193,10 @@ class UseConditions18599(UseConditions):
     max_summer_ach : list
         additional infiltration rate in the summer with
         [infiltration_rate, Tmin, Tmax]
+
+    winter_reduction : list
+        reduction factor of userACH for cold weather with
+        [infiltration_rate, Tmin, Tmax]
     '''
 
     def __init__(self, parent=None):
