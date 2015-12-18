@@ -344,7 +344,7 @@ class BuildingElement(object):
         material.heat_capac = pyxb_class.Material.heat_capac
         material.solar_absorp = pyxb_class.Material.solar_absorp
         material.ir_emissivity = pyxb_class.Material.ir_emissivity
-        if material.solar_absorp == 0.0:
+        if material.solar_absorp == 0.0 and type(self).__name__ != "Window":
             material.solar_absorp = 0.7
         if material.ir_emissivity == 0.0:
             material.ir_emissivity = 0.9
