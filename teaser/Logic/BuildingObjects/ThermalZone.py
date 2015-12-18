@@ -71,6 +71,9 @@ class ThermalZone(object):
         self.typical_width = None
         self.t_inside = None
         self.t_outside = None
+        self.density_air = 1.19     # only export for now
+        self.heat_capac_air = 1007  # only export for now
+        self.t_ground = 286.15  # groundtemperature of for the simulation
 
         # Calculated values for InnerWall for each Zone
         self.r1_iw = 0.0
