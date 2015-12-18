@@ -81,7 +81,7 @@ NrPeopleMachines (Yes)          | zoneRecord / fully automated          	| UseCo
 RatioConvetoveHeatMachines (Yes)| zoneRecord / hardcoded (since #13)    	| UseConditions (only instantiation)
 RoomArea (Yes)                 	| zoneRecord / fully automated          	| Zone
 LightingPower (Yes)             | zoneRecord / fully automated          	| UseConditions
-RatioConvetiveHeatLighting (Yes)| zoneRecord / hardcoded (since #13)    	| UseConditions (only instantiation)
+RatioConvetiveHeatLighting (Yes)| zoneRecord / fully automated 		    	| UseConditions 
 withInnerwalls (Yes)           	| zoneRecord / fully automated          	| Inner_walls
 R1i (Yes)                      	| zoneRecord / fully automated          	| Zone
 C1i (Yes)                      	| zoneRecord / fully automated          	| Zone

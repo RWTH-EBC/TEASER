@@ -242,7 +242,7 @@ class UseConditions18599(UseConditions):
         self.heating_time = [5, 18]
 
         self.persons = 0
-        self.activity_type_persons = 3 #physical activity
+        self.activity_type_persons = 3  # physical activity
         self.ratio_conv_rad_persons = 0.5
         self.profile_persons = []
         self.machines = 0.0
