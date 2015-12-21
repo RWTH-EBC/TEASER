@@ -1575,13 +1575,17 @@ class MainUI(QDialog):
                                           "record " + elemInCombobox +
                                           " for current building finished ")
 
-            os.chdir(path_output_folder)
+            # os.chdir(path_output_folder)
+        utilis.create_path(self.file_path)
 
     def click_browse_button(self):
         self.export_save_template_lineedit.setText(QtGui.QFileDialog.
                                                    getExistingDirectory())
-        utilis.create_path(self.export_save_template_lineedit.text())
-        self.file_path = self.export_save_template_lineedit.text()
+        if self.export_save_template_lineedit.text() != "":
+            utilis.create_path(self.export_save_template_lineedit.text())
+            self.file_path = self.export_save_template_lineedit.text()
+        else:
+            self.export_save_template_lineedit.setText(self.file_path)
 
     def create_path_to_template_folder(self,):
         path = "InputData\\RecordTemplate\\"
@@ -3938,8 +3942,11 @@ class MainUI(QDialog):
         if self.file_path == "":
             self.export_save_template_lineedit.setText(
                                                  utilis.get_default_path())
+            utilis.create_path(self.export_save_template_lineedit.text())
+            self.file_path = self.export_save_template_lineedit.text()
         else:
             self.export_save_template_lineedit.setText(self.file_path)
+            utilis.create_path(self.export_save_template_lineedit.text())
         self.export_save_template_button = QtGui.QPushButton(
             self.export_groupbox)
         self.export_save_template_button.setGeometry(
