@@ -3897,7 +3897,7 @@ class MainUI(QDialog):
     def show_export_window(self):
         self.export_window_ui = QtGui.QWizardPage()
         self.export_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        self.export_window_ui.setWindowTitle("Simulation")
+        self.export_window_ui.setWindowTitle("Export")
         self.export_window_ui.setFixedWidth(380)
         self.export_window_ui.setFixedHeight(180)
         self.export_window_ui_layout = QtGui.QGridLayout()
@@ -3911,14 +3911,14 @@ class MainUI(QDialog):
         self.export_button = QtGui.QPushButton(self.export_groupbox)
         self.export_button.setGeometry(QtCore.QRect(5, 20, 305, 25))
         self.export_button.clicked.connect(self.click_export_button)
-        self.export_button.setText("Export template for all buildings")
+        self.export_button.setText("Export model for all buildings")
         self.export_button_one = QtGui.QPushButton(self.export_groupbox)
         self.export_button_one.setGeometry(QtCore.QRect(5, 55, 305, 25))
         self.export_button_one.clicked.connect(self.click_export_button)
-        self.export_button_one.setText("Export template for current building")
+        self.export_button_one.setText("Export model for current building")
         self.export_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_template_label.setGeometry(QtCore.QRect(5, 90, 120, 25))
-        self.export_template_label.setText("Export Modelica Record:")
+        self.export_template_label.setText("Export model type:")
         self.export_create_template_combobox = QtGui.QComboBox(
             self.export_groupbox)
         self.export_create_template_combobox.setGeometry(
