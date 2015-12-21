@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # created June 2015
 # by TEASER4 Development Team
 
@@ -1246,9 +1247,9 @@ class MainUI(QDialog):
         ''' Checks if all necessary values to create a type building are
         not empty/floats '''
 
-        # TODO: Fehler beim User-Input abfangen, Übrigens wenn du die 5 Methoden hier
-        # zusammenlegen willst, musste dir was überlegen, wie du den type_building typ
-        # übergibst, weil du keine methoden mit parameter zu buttons connecten kannst,
+        # TODO: Fehler beim User-Input abfangen, uebrigens wenn du die 5 Methoden hier
+        # zusammenlegen willst, musste dir was ueberlegen, wie du den type_building typ
+        # uebergibst, weil du keine methoden mit parameter zu buttons connecten kannst,
         # allerdings sollts mit sowas wie self.type_building_type klappen
         self.fill_typebuilding_attributes()
         self.project, int_id = Controller.click_generate_type_building_button(
@@ -2005,9 +2006,9 @@ class MainUI(QDialog):
         '''Switches the color of text between red and black
         
         '''
-        # TODO: Kann wahrscheinlich gelöscht werden, könnte aber noch
-        # nützliches Know-How sein, falls später mit bunten Texten gearbeitet
-        # werden soll, beim Löschen auf weitere Abhängigkeiten überprüfen!
+        # TODO: Kann wahrscheinlich geloescht werden, koennte aber noch
+        # nuetzliches Know-How sein, falls spaeter mit bunten Texten gearbeitet
+        # werden soll, beim Loeschen auf weitere Abhaengigkeiten ueberpruefen!
 
         palette = QtGui.QPalette()
         if (color == "red"):
@@ -2164,7 +2165,7 @@ class MainUI(QDialog):
         # TODO: Ok das Design hat sich nicht wirklich durchgesetzt und
         # es funktioniert grad nicht besonders, Vorschlag: stattdessen
         # einfach ein Pop-Up Fenster wie bei Create-Type-Building, in dem
-        # man building attribute die links am rand stehen ändern kann.
+        # man building attribute die links am rand stehen aendern kann.
 
         if self.current_building:
             self.side_bar_construction_year_line_edit.setReadOnly(False)
@@ -2441,9 +2442,9 @@ class MainUI(QDialog):
         puts it on display.
         
         '''
-        # TODO: Erstmal lädt das eigentlich Projekte, also sollte der
-        # Name geändert werden und dann sollte man noch unpassende Dateien
-        # abfangen bzw. den filter auf .xml und .teaserXML ändern, wie bei
+        # TODO: Erstmal laedt das eigentlich Projekte, also sollte der
+        # Name geaendert werden und dann sollte man noch unpassende Dateien
+        # abfangen bzw. den filter auf .xml und .teaserXML aendern, wie bei
         # click_save_current_project
         path = QtGui.QFileDialog.getOpenFileName(
             self, caption='Choose Filepath', directory='')
@@ -2458,10 +2459,10 @@ class MainUI(QDialog):
         
         '''
         
-        # TODO: Eventuell könnte man hier ändern, dass man sich aussuchen
-        # kann ob die Werte des alten oder neuen Projekts übernommen werden?
-        # Außerdem vielleicht identische Gebäude aus der Liste wieder rauslöschen,
-        # wobei ich nicht weiß ob sich das Rechenzeit-technisch lohnt...
+        # TODO: Eventuell koennte man hier aendern, dass man sich aussuchen Ã¤
+        # kann ob die Werte des alten oder neuen Projekts uebernommen werden?
+        # Ausserdem vielleicht identische Gebaeude aus der Liste wieder rausloeschen,
+        # wobei ich nicht weiss ob sich das Rechenzeit-technisch lohnt...
 
         for building in self.project.list_of_buildings:
             loaded_project.list_of_buildings.insert(0, building)
@@ -2477,7 +2478,7 @@ class MainUI(QDialog):
         '''
         
         # TODO: Eventuell wollt ihr hier mehr Optionen beim Erstellen
-        # ermöglichen, wie Grundfläche, Standort, etc. die würde ich
+        # ermoeglichen, wie Grundflaeche, Standort, etc. die wuerde ich
         # allerdings optional machen
         
         self.current_building = Controller.click_add_new_building(
@@ -2587,7 +2588,7 @@ class MainUI(QDialog):
         # Problem: Der User muss die Shortcuts auch mitbekommen, also
         # am besten den jeweiligen shortcut-Buchstaben im Label unter dem
         # Button/ auf dem Button etwas hervorheben (unterstreichen oder fett machen)
-        # Der Modifier ist STRG also müssten für die buttons bspw. STRG+C gedrückt werden.
+        # Der Modifier ist STRG also muessten fuer die buttons bspw. STRG+C gedrueckt werden.
         
         key = event.key()
         if key == QtCore.Qt.Key_C and\
@@ -2729,7 +2730,7 @@ class MainUI(QDialog):
         '''
         
         # TODO: Bin mir nicht sicher ob das self.no_building_warning_label
-        # noch irgendwas tut, überprüfen und sonst löschen.
+        # noch irgendwas tut, ueberpruefen und sonst loeschen.
         
         self.generate_new_building_ui_page = QtGui.QWizardPage()
         self.generate_new_building_ui_page.setAttribute(
