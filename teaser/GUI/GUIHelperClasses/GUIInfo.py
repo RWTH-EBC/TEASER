@@ -30,50 +30,50 @@ class GUIInfo():
         self.type_buildings = ["Office", "Institute 4",
                                "Institute 8", "Institute General",
                                "Residential"]
-        self.thermal_zone_types = ["Cellular office",
+        self.thermal_zone_types = ["Single office",
                                    "Group Office (between 2 and 6 employees)",
                                    "Open-plan Office (7 or more employees)",
                                    "Meeting, Conference, seminar",
                                    "Main Hall, Reception",
                                    "Retail, department store",
                                    "Retail with cooling",
-                                   "Class room (school), group room \
-                                   (kindergarden)", "Lecture hall, auditorium",
+                                   "Class room (school), group room "
+                                   "(kindergarden)", "Lecture hall, auditorium",
                                    "Bed room", "Hotel room",
                                    "Canteen", "Restaurant",
                                    "Kitchen in non-residential buildings",
                                    "Kitchen - preparations, storage",
-                                   "WC and sanitary rooms in non-residential\
-                                    buildings", "Further common rooms",
+                                   "WC and sanitary rooms in non-residential"
+                                   "buildings", "Further common rooms",
                                    "Auxiliary areas (without common rooms)",
-                                   "Circulation area",
+                                   "Traffic area",
                                    "Stock, technical equipment, archives",
-                                   "Computing center",
-                                   "Commercial and industrial Halls - \
-                                    heavy work, standing activity",
-                                   "Commercial and industrial Halls - \
-                                   medium work, standing activity",
-                                   "Commercial and industrial Halls - \
-                                   light work, standing activity",
+                                   "Data center",
+                                   "Commercial and industrial Halls - "
+                                    "heavy work, standing activity",
+                                   "Commercial and industrial Halls - "
+                                   "medium work, standing activity",
+                                   "Commercial and industrial Halls - "
+                                   "light work, standing activity",
                                    "Spectator area (theater and event venues)",
                                    "Foyer (theater and event venues)",
                                    "Stage (theater and event venues)",
                                    "Exhibition, congress",
-                                   "Exhibition room and museum conservational\
-                                    demands",
+                                   "Exhibition room and museum conservational"
+                                   " demands",
                                    "Library - reading room",
                                    "Library - open stacks",
                                    "Library - magazine and depot",
                                    "Gym (without spectator area",
-                                   "Parking garages (office and private \
-                                   usage)", "Parking garages (public usage)",
-                                   "Sauna area", "Exercise room", "laboratory",
+                                   "Parking garages (office and private "
+                                   "usage)", "Parking garages (public usage)",
+                                   "Sauna area", "Exercise room", "Laboratory",
                                    "Examination- or treatment room",
-                                   "Special maintenance aera",
-                                   "Corridors in the general maintenance area",
-                                   "Doctor's office, therapeutic offices",
+                                   "Special care aera",
+                                   "Corridors in the general care area",
+                                   "Medical and therapeutic practices",
                                    "Storehouse, logistics building",
-                                   "Housing area"]
+                                   "Living"]
         self.building_model = ["AixLib.Building.LowOrder.ThermalZone",
                                "Cities.BuildingPhysics.ThermalZone",
                                "Cities.TypeBuilding",

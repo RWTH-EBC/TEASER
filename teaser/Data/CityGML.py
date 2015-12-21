@@ -39,8 +39,11 @@ def save_gml(project, path, ref_coordinates=None):
         should contain 3 ints or floats for x, y, and z coordinates of the 
         point. e.g: [[458877,,5438353, -0.2], [458889,5438363,6.317669]]
     '''
-
-    out_file = open(path + ".gml", 'w')
+    
+    if path.endswith("gml"):
+        out_file = open(path, 'w')
+    else:
+        out_file = open(path + ".gml", 'w')
 
     pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
         citygml.Namespace, 'core')
