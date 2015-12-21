@@ -16,6 +16,7 @@ from teaser.GUI.GUIHelperClasses.ListViewZonesFiller import ListViewZonesFiller
 from teaser.GUI.GUIHelperClasses.GUIInfo import GUIInfo
 import sys
 import os
+from teaser.Logic import Utilis
 
 
 try:
@@ -75,6 +76,7 @@ class MainUI(QDialog):
         self.guiinfo = GUIInfo()
         self.lVZF = ListViewZonesFiller()
         self.is_empty_building_button = False
+        self.file_path = ""
         self.setObjectName(_fromUtf8("MainWindow"))
         self.resize(900, 800)
         self.setMinimumSize(QtCore.QSize(900, 800))
@@ -1578,6 +1580,8 @@ class MainUI(QDialog):
     def click_browse_button(self):
         self.export_save_template_lineedit.setText(QtGui.QFileDialog.
                                                    getExistingDirectory())
+        utilis.create_path(self.export_save_template_lineedit.text())
+        self.file_path = self.export_save_template_lineedit.text()
 
     def create_path_to_template_folder(self,):
         path = "InputData\\RecordTemplate\\"
@@ -3926,11 +3930,16 @@ class MainUI(QDialog):
         self.export_save_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_save_template_label.setGeometry(
             QtCore.QRect(5, 125, 110, 25))
-        self.export_save_template_label.setText("Saving Path:")
+        self.export_save_template_label.setText("File path:")
         self.export_save_template_lineedit = QtGui.QLineEdit(
             self.export_groupbox)
-        self.export_save_template_lineedit .setGeometry(
+        self.export_save_template_lineedit.setGeometry(
             QtCore.QRect(130, 125, 130, 25))
+        if self.file_path == "":
+            self.export_save_template_lineedit.setText(
+                                                 utilis.get_default_path())
+        else:
+            self.export_save_template_lineedit.setText(self.file_path)
         self.export_save_template_button = QtGui.QPushButton(
             self.export_groupbox)
         self.export_save_template_button.setGeometry(
