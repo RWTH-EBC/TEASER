@@ -2432,6 +2432,15 @@ class MainUI(QDialog):
                         self.current_building.set_outer_wall_area(
                             float(self.envelope_area_textbox.text()),
                             orientation_value)
+        elif self.current_envelope.startswith("Window"):
+            for orientation_value in self.guiinfo.orientations_numbers.keys():
+                orientation_string = str(self.guiinfo.orientations_numbers
+                                         [orientation_value])
+                if self.envelope_orientation_combobox.currentText() == \
+                        orientation_string:
+                        self.current_building.set_window_area(
+                            float(self.envelope_area_textbox.text()),
+                            orientation_value)
         self.display_current_building()
 
     def switch_current_element(self):
