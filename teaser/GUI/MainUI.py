@@ -2859,17 +2859,32 @@ class MainUI(QDialog):
         self.create_new_element_ui_page.show()
 
     def create_new_envelope_ui(self):
-        QtGui.QMessageBox.warning(
-            self, u"Warning", "All walls with the current orientation "
-            "in the building will be overwritten.")
         self.create__envelope_ui = QtGui.QWizardPage()
         self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create__envelope_ui.setWindowTitle("Set all construction")
         self.create__envelope_ui.setFixedWidth(300)
-        self.create__envelope_ui.setFixedHeight(150)
+        self.create__envelope_ui.setFixedHeight(80)
         self.create__envelope_ui_window_layout = QtGui.QGridLayout()
         self.create__envelope_ui.setLayout(
                                  self.create__envelope_ui_window_layout)
+        self.warning_message_groupbox = QtGui.QGroupBox(
+                                                 u"Warning")
+        self.warning_message_groupbox.setAlignment(0x0004)
+        self.warning_message_groupbox = self.set_text_color(
+                self.warning_message_groupbox, "red")
+        self.warning_message_groupbox.setGeometry(
+                                              QtCore.QRect(0, 0, 60, 60))
+        self.warning_message_label = QtGui.QLabel(
+                                                self.warning_message_groupbox)
+        self.warning_message_label.setGeometry(QtCore.QRect(10, 5, 280, 25))
+        self.warning_message_label.setText(
+             "All walls with the current orientation in building will be")
+        self.warning_message_label2 = QtGui.QLabel(
+                                                self.warning_message_groupbox)
+        self.warning_message_label2.setGeometry(QtCore.QRect(115, 20, 225, 25))
+        self.warning_message_label2.setText("overwritten.")
+        self.create__envelope_ui_window_layout.addWidget(
+                                         self.warning_message_groupbox, 0, 0)
         self.create__envelope_ui.setWindowModality(Qt.ApplicationModal)
         self.create__envelope_ui.show()
 
