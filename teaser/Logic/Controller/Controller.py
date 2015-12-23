@@ -168,7 +168,7 @@ class Controller():
             building.street_name = street
             building.city = location
             int_id = building.internal_id
-            
+
         if typeOfBuilding == "Institute 8":
             building = parent.type_bldg_institute8(
                 name, int(yearOfConstruction), int(numberOfFloors),
@@ -176,11 +176,11 @@ class Controller():
                 type_building_attributes['layoutArea'],
                 type_building_attributes['layoutWindowArea'],
                 type_building_attributes['constructionType'])
-            
+
             building.street_name = street
             building.city = location
             int_id = building.internal_id
-            
+
         if typeOfBuilding == "Institute General":
             building = parent.type_bldg_institute(
                 name, int(yearOfConstruction), int(numberOfFloors),
@@ -188,11 +188,11 @@ class Controller():
                 type_building_attributes['layoutArea'],
                 type_building_attributes['layoutWindowArea'],
                 type_building_attributes['constructionType'])
-            
+
             building.street_name = street
             building.city = location
             int_id = building.internal_id
-            
+
         if typeOfBuilding == "Residential":
             building = parent.type_bldg_residential(
                 name, int(yearOfConstruction), int(numberOfFloors),
@@ -203,7 +203,7 @@ class Controller():
                 type_building_attributes['layout_cellar'],
                 type_building_attributes['dormer'],
                 type_building_attributes['constructionType'])
-            
+
             building.street_name = street
             building.city = location
             int_id = building.internal_id
@@ -248,7 +248,6 @@ class Controller():
     def clickConstructionYearCatagoryButton(self):
         i = 0
 
-        
     @classmethod
     def switch_zone_type(self, zone_type, project, zone_id):
         for building in project.list_of_buildings:
@@ -259,6 +258,5 @@ class Controller():
         return project
 
     @classmethod
-    def click_export_button(self, model_type, path, buildingID=None):
-        loaded_prj = Project()
-        loaded_prj.export_record(model_type, path, buildingID)
+    def click_export_button(self, prj, model_type, path, buildingID=None):
+        prj.export_record(model_type, path, buildingID)

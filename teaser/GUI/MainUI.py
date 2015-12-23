@@ -1848,7 +1848,8 @@ class MainUI(QDialog):
         sender = self.sender()
         elemInCombobox = self.export_create_template_combobox.currentText()
         if(sender.text() == self.export_button.text()):
-            Controller.click_export_button(elemInCombobox, path_output_folder)
+            Controller.click_export_button(self.project, elemInCombobox,
+                                           path_output_folder)
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
                                           " all building finished ")
@@ -1857,7 +1858,8 @@ class MainUI(QDialog):
 
             current_building_id = \
                 str(self.side_bar_buildings_combo_box.currentText())
-            Controller.click_export_button(elemInCombobox, path_output_folder,
+            Controller.click_export_button(self.project, elemInCombobox,
+                                           path_output_folder,
                                            current_building_id)
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
