@@ -583,10 +583,10 @@ class Test_teaser(object):
         '''test of export_record, no calculation verification'''
 
         prj.calc_all_buildings('vdi')
-        prj.export_record('AixLib')
+        prj.export_record('MultizoneEquipped')
         # prj.export_record('AixLibMultizone')
         prj.calc_all_buildings('ebc')
-        prj.export_record('AixLibMultizone')
+        prj.export_record('MultizoneEquipped')
 
     def test_export_parameters_txt(self):
         '''test of the export of the readable parameter output'''
