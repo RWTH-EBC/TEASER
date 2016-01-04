@@ -3,8 +3,12 @@
 
 """This module includes the Project class, which serves as base class and API
 """
-
+import warnings
 import teaser.Data.TeaserXML as txml
+try:
+    import teaser.Data.CityGML as citygml
+except:
+    warnings.warn("No CityGML module found, no CityGML import/export")    
 import teaser.Data.DataHelp.OldTeaser as old_teaser
 from teaser.Data.DataClass import DataClass
 from mako.template import Template
@@ -15,9 +19,11 @@ from teaser.Logic.BuildingObjects.TypeBuildings.Institute import Institute
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import Institute4
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import Institute8
 from teaser.Logic.BuildingObjects.TypeBuildings.Residential import Residential
+from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 
 
 class Project(object):
+
     '''Base class for each project, serves also as API
 
         The Project class is the root class for each action in TEASER and
@@ -55,19 +61,20 @@ class Project(object):
 
         '''
         self.name = "Project"
+        self.modelica_info = ModelicaInfo()
 
         self.modelica_project = self.name
         self.weather_file_name = "TRY_5_Essen.txt"
         self.list_of_buildings = []
-        self.calculation_method = "vdi"
+        self._calculation_method = "vdi"
 
         self.load_data = load_data
         self._type_element_file = None
 
         if load_data is True:
-                self.data = self.instantiate_data_class()
+            self.data = self.instantiate_data_class()
         else:
-                self.data = None
+            self.data = None
 
     def instantiate_data_class(self, type_element_file=None):
         '''Initialization of DataClass
@@ -104,9 +111,10 @@ class Project(object):
         '''
         self.weather_file_name = file_name
         weather_file = weather_path + file_name
-        output_path = (utilis.get_full_path(
-                       "InputData\\BoundariesTypeBuilding\\") + file_name)
-        print(output_path)
+        output_path = (utilis.get_full_path("InputData\\Boundaries \
+                                            TypeBuilding\\") +
+                                            file_name)
+
         try:
             shutil.copyfile(weather_file, output_path)
         except:
@@ -124,6 +132,12 @@ class Project(object):
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
+
+        if calculation_core == self.calculation_method:
+            pass
+        else:
+            self.calculation_method = calculation_core
+
         for bldg in self.list_of_buildings:
 
             bldg.calc_building_parameter(calculation_core)
@@ -175,7 +189,6 @@ class Project(object):
                          office_layout=None,
                          window_layout=None,
                          construction_type=None):
-
         '''Create and calculate an office building
 
         Parameters
@@ -230,6 +243,7 @@ class Project(object):
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_institute(self,
                             name,
@@ -293,6 +307,7 @@ class Project(object):
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_institute4(self,
                              name,
@@ -356,6 +371,7 @@ class Project(object):
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_institute8(self,
                              name,
@@ -419,6 +435,7 @@ class Project(object):
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_residential(self,
                               name,
@@ -562,7 +579,38 @@ class Project(object):
 
         old_teaser.load_teaser_xml(path, self)
 
-    def export_record(self, model_type, path=None):
+    def save_citygml(self, file_name=None, path=None):
+        '''Saves the project to a citygml file
+
+        calls the function save_gml in Data.CityGML we make use of CityGML core
+        and EnergyADE to store semantic information
+
+
+        Parameters
+        ----------
+
+        file_name : string
+            name of the new file
+        path : string
+            if the Files should not be stored in OutputData, an alternative
+            can be specified
+
+        '''
+        if file_name is None:
+            name = self.name
+        else:
+            name = file_name
+
+        if path is None:
+            new_path = utilis.get_full_path("OutputData") + "\\" + name
+        else:
+            new_path = path + "\\" + name
+            utilis.create_path(utilis.get_full_path(path))
+
+        citygml.save_gml(self, new_path)
+
+
+    def export_record(self, model_type, path=None, buildingID=None):
         '''Exports values to a record file for Modelica simulation
 
 
@@ -586,7 +634,8 @@ class Project(object):
         input_path = utilis.get_full_path("InputData\\BoundariesTypeBuilding")
 
         try:
-            shutil.copytree(input_path, utilis.get_full_path(path) + "\\Tables")
+            shutil.copytree(
+                input_path, utilis.get_full_path(path) + "\\Tables")
         except:
             pass
         else:
@@ -645,8 +694,8 @@ class Project(object):
                     'Modelica (version="3.2.1")']
 
             for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "vdi", ("CitiesType_old needs \
-                calculation core vdi")
+                assert bldg._calculation_method == "vdi", ("CitiesType_old \
+                    needs calculation core vdi")
 
             zone_template = Template(
                 filename=utilis.get_full_path(
@@ -687,7 +736,8 @@ class Project(object):
                 zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
 
                 out_file = open(utilis.get_full_path(
-                    zone_path + "\\" + bldg.name + "_" + zone.name + ".mo"), 'w')
+                    zone_path + "\\" + bldg.name + "_" + zone.name + ".mo"),
+                                                                           'w')
                 out_file.write(zone_template.render_unicode(
                     bldg=bldg, zone=zone))
                 out_file.close()
@@ -707,6 +757,34 @@ class Project(object):
                 else:
                     pass
 
+    def export_parameters_txt(self, path=None):
+        '''Exports parameters of all buildings in a readable text file
+
+        Parameters
+        ----------
+
+        path : string
+            if the Files should not be stored in OutputData, an alternative
+            can be specified
+        '''
+        if path is None:
+            path = "OutputData\\"+self.name
+        else:
+            path = path+"\\"+self.name
+
+        for bldg in self.list_of_buildings:
+            bldg_path = path + "\\" + bldg.name + "\\"
+            utilis.create_path(utilis.get_full_path(bldg_path))
+            readable_template = Template(
+                filename=utilis.get_full_path(
+                    "InputData\\ReadableOutputTemplate\\ReadableBuilding"))
+
+            out_file = open(utilis.get_full_path
+                            (bldg_path+"ReadableOutput.txt"), 'w')
+            out_file.write(readable_template.render_unicode
+                           (bldg=bldg, prj=self))
+            out_file.close()
+
     def _help_package(self, path, name, uses=None):
         '''creates a package.mo file
 
@@ -725,7 +803,8 @@ class Project(object):
         package_template = Template(filename=utilis.get_full_path
                                     ("InputData\\RecordTemplate\\package"))
 
-        out_file = open(utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
+        out_file = open(
+            utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
         out_file.write(package_template.render_unicode(name=name, uses=uses))
         out_file.close()
 
@@ -753,16 +832,15 @@ class Project(object):
         order_template = Template(filename=utilis.get_full_path
                                   ("InputData\\RecordTemplate\\package_order"))
 
-        out_file = open(utilis.get_full_path(path + "\\" + "package" + ".order"),
-                        'w')
+        out_file = open(
+            utilis.get_full_path(path + "\\" + "package" + ".order"), 'w')
         out_file.write(order_template.render_unicode
                        (list=package_list, addition=addition, extra=extra))
         out_file.close()
 
-
     def set_default(self):
         '''sets all attributes except self.data to default
-        
+
         '''
 
         self.name = "Project"
@@ -782,3 +860,16 @@ class Project(object):
     def type_element_file(self, value):
         self._type_element_file = value
         self.instantiate_data_class(value)
+
+    @property
+    def calculation_method(self):
+        return self._calculation_method
+
+    @calculation_method.setter
+    def calculation_method(self, value):
+
+        ass_error_1 = "calculation_method has to be vdi or ebc"
+
+        assert value != "ebc" or value != "vdi", ass_error_1
+
+        self._calculation_method = value

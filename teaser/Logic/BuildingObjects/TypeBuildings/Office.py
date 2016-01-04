@@ -6,8 +6,8 @@ import math
 from teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding\
  import TypeBuilding
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599\
- import UseConditionsOffice18599 as UseCond
+from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599\
+ import UseConditions18599 as UseCond
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor\
  import GroundFloor
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
@@ -239,11 +239,13 @@ class Office(TypeBuilding):
         TEASER requirements.
 
         '''
-
+        #help area for the correct building area setting while using typeBldgs
+        type_bldg_area = self.net_leased_area
+        self.net_leased_area = 0.0
         # create zones with their corresponding area, name and usage
         for key, value in self.zone_area_factors.items():
             zone = ThermalZone(self)
-            zone.area = self.net_leased_area * value[0]
+            zone.area = type_bldg_area * value[0]
             zone.name = key
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1])
@@ -259,12 +261,12 @@ class Office(TypeBuilding):
         # statistical estimation of the facade
 
         self._est_outer_wall_area = self.est_factor_wall_area * \
-                                self.net_leased_area ** self.est_exponent_wall
+                                type_bldg_area ** self.est_exponent_wall
         self._est_win_area = self.est_factor_win_area * \
-                             self.net_leased_area ** self.est_exponent_win
-        self._est_roof_area = (self.net_leased_area / self.number_of_floors) * \
+                             type_bldg_area ** self.est_exponent_win
+        self._est_roof_area = (type_bldg_area / self.number_of_floors) * \
                               self.gross_factor
-        self._est_floor_area = (self.net_leased_area / self.number_of_floors) * \
+        self._est_floor_area = (type_bldg_area / self.number_of_floors) * \
                                self.gross_factor
 
         # manipulation of wall according to facade design 

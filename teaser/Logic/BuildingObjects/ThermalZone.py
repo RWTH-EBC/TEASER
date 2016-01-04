@@ -60,8 +60,8 @@ class ThermalZone(object):
         self.parent = parent
         self.internal_id = random.random()
         self.name = None
-        self.area = None
-        self.volume = None
+        self._area = None
+        self._volume = None
         self.infiltration_rate = None
         self._outer_walls = []
         self._inner_walls = []
@@ -738,12 +738,46 @@ class ThermalZone(object):
         ass_error_1 = "Use condition has to be an instance of UseConditions()"
 
         assert type(value).__name__ == ("UseConditions") or \
-            type(value).__name__ == ("UseConditionsOffice18599") or \
-            type(value).__name__ == ("UseConditionsResedential18599"),\
-            ass_error_1
+            type(value).__name__ == ("UseConditions18599"), ass_error_1
 
         if value is not None:
             self._use_conditions = value
             self.typical_length = value.typical_length
             self.typical_width = value.typical_width
         self._use_conditions = value
+
+    @property
+    def area(self):
+        return self._area
+
+    @area.setter
+    def area(self, value):
+        if self.parent is not None:
+            if self._area is None:
+                if self.parent.net_leased_area is None:
+                    self.parent.net_leased_area = 0.0
+                self._area = value
+                self.parent.net_leased_area += value
+            else:
+                self.parent.net_leased_area -= self._area
+                self.parent.net_leased_area += value
+                self._area = value
+        else:
+            self._area = value
+
+    @property
+    def volume(self):
+        return self._volume
+
+    @volume.setter
+    def volume(self, value):
+        if self.parent is not None:
+            if self._volume is None:
+                self._volume = value
+                self.parent.volume += value
+            else:
+                self.parent.volume -= self._volume
+                self.parent.volume += value
+                self._volume = value
+        else:
+            self._volume = value
