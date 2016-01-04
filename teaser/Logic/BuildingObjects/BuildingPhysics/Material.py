@@ -55,7 +55,9 @@ class Material(object):
         self.thermal_conduc = 0.0
         self.heat_capac = 0.0
         self.solar_absorp = 0.0
-        self.ir_emissivity = 0.0
+        if self.parent.parent != "Window":
+            self.solar_absorp = 0.7
+        self.ir_emissivity = 0.9
         self.transmittance = 0.0
 
     def load_material_template(self, mat_name):
