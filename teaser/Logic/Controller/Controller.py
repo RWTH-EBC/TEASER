@@ -151,11 +151,10 @@ class Controller():
                                                type_building_attributes['layoutArea'],
                                                type_building_attributes['layoutWindowArea'],
                                                type_building_attributes['constructionType'])
-            
+
             building.street_name = street
             building.city = location
             int_id = building.internal_id
-        
         if typeOfBuilding == "Insitute 4":
             building = parent.type_bldg_institute4(name,
                                                    yearOfConstruction,
@@ -165,11 +164,11 @@ class Controller():
                                                    type_building_attributes['layoutArea'],
                                                    type_building_attributes['layoutWindowArea'],
                                                    type_building_attributes['constructionType'])
-            
+
             building.street_name = street
             building.city = location
             int_id = building.internal_id
-            
+
         if typeOfBuilding == "Institute 8":
             building = parent.type_bldg_institute8(name,
                                                    yearOfConstruction,
@@ -179,11 +178,11 @@ class Controller():
                                                    type_building_attributes['layoutArea'],
                                                    type_building_attributes['layoutWindowArea'],
                                                    type_building_attributes['constructionType'])
-            
+
             building.street_name = street
             building.city = location
             int_id = building.internal_id
-            
+
         if typeOfBuilding == "Institute General":
             building = parent.type_bldg_institute(name,
                                                    yearOfConstruction,
@@ -193,11 +192,11 @@ class Controller():
                                                    type_building_attributes['layoutArea'],
                                                    type_building_attributes['layoutWindowArea'],
                                                    type_building_attributes['constructionType'])
-            
+
             building.street_name = street
             building.city = location
             int_id = building.internal_id
-            
+
         if typeOfBuilding == "Residential":
             building = parent.type_bldg_residential(name,
                                                     yearOfConstruction,
@@ -210,7 +209,7 @@ class Controller():
                                                     type_building_attributes['layout_cellar'],
                                                     type_building_attributes['dormer'],
                                                     type_building_attributes['constructionType'])
-            
+
             building.street_name = street
             building.city = location
             int_id = building.internal_id
@@ -254,7 +253,7 @@ class Controller():
     @classmethod
     def clickConstructionYearCatagoryButton(self):
         i = 0
-        
+
     @classmethod
     def switch_zone_type(self, zone_type, project, zone_id):
         for building in project.list_of_buildings:
@@ -263,3 +262,7 @@ class Controller():
                     zone.use_conditions.load_use_conditions(zone_type)
                     break
         return project
+
+    @classmethod
+    def click_export_button(self, prj, model_type, path, buildingID=None):
+        prj.export_record(model_type, path, buildingID)
