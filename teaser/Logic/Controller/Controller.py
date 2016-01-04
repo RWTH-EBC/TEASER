@@ -143,6 +143,7 @@ class Controller():
         int_id = 0
 
         if typeOfBuilding == "Office":
+            print(netLeasedArea, type(netLeasedArea))
             building = parent.type_bldg_office(name,
                                                yearOfConstruction,
                                                numberOfFloors,

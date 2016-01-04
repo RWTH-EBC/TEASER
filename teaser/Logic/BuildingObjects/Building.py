@@ -439,19 +439,27 @@ class Building(object):
         
     @property
     def net_leased_area(self):
+        print("ich bin die getter methode")
+        print(type(self.__net_leased_area))
+        
         return self.__net_leased_area
 
     @net_leased_area.setter
     def net_leased_area(self, value):
+        print("ich bin die setter methode")
 
-        if isinstance(value, float) or value == None:
-            
+        if isinstance(value, float):
             self.__net_leased_area = value
+            print("ich bin float")
+        elif value is None:
+            self.__net_leased_area = value
+            print("ich bin None")
         else:
             try:
                 value = float(value)
                 self.__net_leased_area = value
-                
+                print(self.__net_leased_area, type(self.__net_leased_area))
+                print("ich bin irgendwas")
             except:
                 raise ValueError("Can't convert net leased area to float")
 
