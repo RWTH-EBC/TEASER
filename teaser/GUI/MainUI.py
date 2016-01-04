@@ -4468,7 +4468,7 @@ class MainUI(QDialog):
         self.export_button_one.setText("Export model for current building")
         self.export_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_template_label.setGeometry(QtCore.QRect(5, 90, 120, 25))
-        self.export_template_label.setText("Export model type:")
+        self.export_template_label.setText("Model type:")
         self.export_create_template_combobox = QtGui.QComboBox(
             self.export_groupbox)
         self.export_create_template_combobox.setGeometry(
