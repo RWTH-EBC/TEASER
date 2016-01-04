@@ -916,6 +916,8 @@ class MainUI(QDialog):
             self.side_bar_widget, "geometry")
         self.main_animation = QtCore.QPropertyAnimation(
             self.main_widget, "geometry")
+       
+        
 
     def __del__(self):
         sys.stdout = sys.__stdout__
@@ -1652,6 +1654,9 @@ class MainUI(QDialog):
                 str(self.current_building.city))
             self.side_bar_net_leased_area_line_edit.setText(
                 str(self.current_building.net_leased_area))
+            QtGui.QMessageBox.warning(self,
+                                      u"netleasedarea ",
+                                      str(self.current_building.net_leased_area))
             self.side_bar_number_of_floors_line_edit.setText(
                 str(self.current_building.number_of_floors))
             self.side_bar_street_line_edit.setText(
@@ -3250,6 +3255,9 @@ class MainUI(QDialog):
         self.zone_net_leased_area_textbox = QtGui.QLineEdit()
         self.zone_net_leased_area_textbox.setObjectName(_fromUtf8(
             "ZoneNetLeasedAreaTextBox"))
+        print("hierrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+        print(self.zone_net_leased_area_textbox.text())
+        print(str(self.current_zone.area))
         self.zone_net_leased_area_textbox.setText(str(self.current_zone.area))
 
         self.general_zone_values_layout.addWidget(self.zone_type_label, 1, 0)
