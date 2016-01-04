@@ -48,31 +48,24 @@ BPF_DeHu (Yes)                 	| NO                                    	|Buildi
 efficiencyHRS_enabled (Yes)    	| NO                                    	|BuildingSystems.AHU
 efficiencyHRS_disabled (Yes)   	| NO                                    	|BuildingSystems.AHU
 --------------------------------|----------ZONE PARAMETERS------------------|-------------------------
-withAHU                     	| NO / Not used in Model	            	| UseConditions
-minAHU                      	| NO / Not used in Model      		    	| UseConditions
-maxAHU                      	| NO / Not used in Model          			| UseConditions
-Lchar                       	| NO                                    	| (Building/Typebuilding)
-Bchar                       	| NO                                    	| (Building/Typebuilding)
-Hb                          	| NO                                    	| (Building)
-Nb                          	| NO                                    	| (Building)
-Q_flow_heat                 	| NO                                    	| Not in Model?
-Q_N                         	| NO                                    	| Not in Model?
-weightfactor_heater         	| NO                                    	| Not in Model?
+
+
 Heater_on                   	| zoneRecord / hardcoded                	| Not in Model?
-Q_flow_cooler               	| NO                                    	| Not in Model?
-weightfactor_cooler         	| NO                                    	| Not in Model?
 Cooler_on                   	| zoneRecord / hardcoded                	| Not in Model?
-	
+
 T0all (Yes)                    	| NO					                	| 
-h_heater (Yes)                 	| zoneRecord / fully automated          	| Zone
 l_heater (Yes)                 	| NO                                    	| 
 KR_heater (Yes)                	| NO                                    	| Not a TEASER intergration? (PI Stuff)
 TN_heater (Yes)                	| NO                                    	| Not a TEASER intergration? (PI Stuff)
 h_cooler (Yes)                 	| NO                                    	| 
-l_cooler (Yes)                 	| zoneRecord / fully automated          	| Zone.cooling_load
 KR_cooler (Yes)                	| NO                                    	| Not a TEASER intergration? (PI Stuff)
 TN_cooler (Yes)                	| NO                                    	| Not a TEASER intergration? (PI Stuff)
-	
+
+withAHU (Yes)                  	| zoneRecord / fully automated            	| UseConditions
+minAHU (Yes)                   	| zoneRecord / fully automated 		    	| UseConditions
+maxAHU (Yes)                   	| zoneRecord / fully automated     			| UseConditions	
+h_heater (Yes)                 	| zoneRecord / fully automated          	| Zone
+l_cooler (Yes)                 	| zoneRecord / fully automated          	| Zone.cooling_load	
 ActivityTypePeople (Yes)       	| zoneRecord / hardcoded (since #13)    	| UseConditions (only instantiation)
 NrPeople (Yes)                 	| zoneRecord / fully automated          	| UseConditions
 RatioConvectiveHeatPeople (Yes)	| zoneRecord / hardcoded (since #13)    	| UseConditions (only instantiation)
