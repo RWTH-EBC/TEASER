@@ -61,7 +61,10 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     maxSummerACH = ${str(zone.use_conditions.max_summer_ach).replace(
       '[', '{').replace(']', '}')},
     winterReduction = ${str(zone.use_conditions.winter_reduction).replace(
-      '[', '{').replace(']', '}')});
+      '[', '{').replace(']', '}')}),
+    withAHU = ${get_true_false(zone.use_conditions.with_ahu)},
+    minAHU = ${str(zone.use_conditions.min_ahu)},
+    maxAHU = ${str(zone.use_conditions.max_ahu)};
 
 
 
