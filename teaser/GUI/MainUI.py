@@ -3619,6 +3619,13 @@ class MainUI(QDialog):
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_area_line_edit.setGeometry(
             QtCore.QRect(110, 305, 120, 25))
+        self.test_button = QtGui.QPushButton(
+                                self.group_box_type_building_sidecontrols)
+        self.test_button.setText("Generate random parameters")
+        self.test_button.setGeometry(QtCore.QRect(10, 345, 230, 25))
+        self.connect(self.test_button,
+                     QtCore.SIGNAL("clicked()"),
+                     self.fill_random_parameters)
 
         # Differentiates between the different types of buildings from combobox
         
@@ -3977,6 +3984,20 @@ class MainUI(QDialog):
             self.popup_layout_type_building)
         self.popup_window_type_building.setWindowModality(Qt.ApplicationModal)
         self.popup_window_type_building.show()
+    
+    def fill_random_parameters(self):
+        import random
+        self.window_construct_building_name_line_edit.setText("Random")
+        self.window_construct_building_street_line_edit.setText("Random Street")
+        self.window_construct_building_location_line_edit.setText("Random City")
+        value = str(random.randint(1900,2015))
+        self.window_construct_building_year_line_edit.setText(value)
+        value = str(random.randint(1,10))
+        self.window_construct_building_number_of_floors_line_edit.setText(value)
+        value = str(round(random.uniform(2.5,5.5),2))
+        self.window_construct_building_height_of_floors_line_edit.setText(value)
+        value = str(round(random.uniform(100,10000),2))
+        self.window_construct_building_area_line_edit.setText(value)
 
     def generate_zone_ui(self):
         ''' Opens a window to create a new zone.
