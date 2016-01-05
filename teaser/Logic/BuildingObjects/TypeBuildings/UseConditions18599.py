@@ -194,11 +194,11 @@ class UseConditions18599(UseConditions):
         self.part_load_factor_lighting = 0.7
         self.ratio_conv_rad_lighting = 0.5
 
-        self.set_temp_heat = 21.0
-        self.set_temp_cool = 24.0
-        self.temp_set_back = 4.0
-        self.min_temp_heat = 20.0
-        self.max_temp_cool = 26.0
+        self._set_temp_heat = 294.15
+        self._set_temp_cool = 297.15
+        self._temp_set_back = 4.0
+        self._min_temp_heat = 20.0
+        self._max_temp_cool = 26.0
         self.rel_humidity = 45
         self.min_air_exchange = 0.5
         self.rel_absence_ahu = 0.3
@@ -430,3 +430,218 @@ class UseConditions18599(UseConditions):
             self.parent.typical_width = self._typical_width
 
         self._typical_width = value
+    
+    @property
+    def set_temp_heat(self):
+        return self._set_temp_heat
+
+    @set_temp_heat.setter
+    def set_temp_heat(self, value):
+
+        if isinstance(value, float):
+            self._set_temp_heat = value
+        elif value is None:
+            self._set_temp_heat = value
+        else:
+            try:
+                value = float(value)
+                self._set_temp_heat = value
+            except:
+                raise ValueError("Can't convert temperature to float")
+                
+    @property
+    def set_temp_cool(self):        
+        return self._set_temp_cool
+
+    @set_temp_cool.setter
+    def set_temp_cool(self, value):
+
+        if isinstance(value, float):
+            self._set_temp_cool = value
+        elif value is None:
+            self._set_temp_cool = value
+        else:
+            try:
+                value = float(value)
+                self._set_temp_cool = value
+            except:
+                raise ValueError("Can't convert temperature to float")
+                
+    @property
+    def temp_set_back(self):        
+        return self._temp_set_back
+
+    @temp_set_back.setter
+    def temp_set_back(self, value):
+
+        if isinstance(value, float):
+            self._temp_set_back = value
+        elif value is None:
+            self._temp_set_back = value
+        else:
+            try:
+                value = float(value)
+                self._temp_set_back = value
+            except:
+                raise ValueError("Can't convert temperature to float")
+                
+    @property
+    def min_temp_heat(self):        
+        return self._min_temp_heat
+
+    @min_temp_heat.setter
+    def min_temp_heat(self, value):
+
+        if isinstance(value, float):
+            self._min_temp_heat = value
+        elif value is None:
+            self._min_temp_heat = value
+        else:
+            try:
+                value = float(value)
+                self._min_temp_heat = value
+            except:
+                raise ValueError("Can't convert temperature to float")
+    @property
+    def max_temp_heat(self):        
+        return self._max_temp_heat
+
+    @max_temp_heat.setter
+    def max_temp_heat(self, value):
+
+        if isinstance(value, float):
+            self._max_temp_heat = value
+        elif value is None:
+            self._max_temp_heat = value
+        else:
+            try:
+                value = float(value)
+                self._max_temp_heat = value
+            except:
+                raise ValueError("Can't convert temperature to float")
+                
+    @property
+    def rel_humidity(self):        
+        return self._rel_humidity
+
+    @rel_humidity.setter
+    def rel_humidity(self, value):
+
+        if isinstance(value, float):
+            self._rel_humidity = value
+        elif value is None:
+            self._rel_humidity = value
+        else:
+            try:
+                value = float(value)
+                self._rel_humidity = value
+            except:
+                raise ValueError("Can't convert humidity to float")
+                
+    @property
+    def min_air_exchange(self):
+        return self._min_air_exchange
+
+    @min_air_exchange.setter
+    def min_air_exchange(self, value):
+
+        if isinstance(value, float):
+            self._min_air_exchange = value
+        elif value is None:
+            self._min_air_exchange = value
+        else:
+            try:
+                value = float(value)
+                self._min_air_exchange = value
+            except:
+                raise ValueError("Can't convert air exchange to float")
+                
+    @property
+    def min_ahu(self):
+        return self._min_ahu
+
+    @min_ahu.setter
+    def min_ahu(self, value):
+
+        if isinstance(value, float):
+            self._min_ahu = value
+        elif value is None:
+            self._min_ahu = value
+        else:
+            try:
+                value = float(value)
+                self._min_ahu = value
+            except:
+                raise ValueError("Can't convert AHU airflow to float")
+                
+    @property
+    def max_ahu(self):
+        return self._max_ahu
+
+    @max_ahu.setter
+    def max_ahu(self, value):
+
+        if isinstance(value, float):
+            self._max_ahu = value
+        elif value is None:
+            self._max_ahu = value
+        else:
+            try:
+                value = float(value)
+                self._max_ahu = value
+            except:
+                raise ValueError("Can't convert AHU airflow to float")
+                
+    @property
+    def persons(self):
+        return self._persons
+
+    @persons.setter
+    def persons(self, value):
+
+        if isinstance(value, float):
+            self._persons = value
+        elif value is None:
+            self._persons = value
+        else:
+            try:
+                value = float(value)
+                self._persons = value
+            except:
+                raise ValueError("Can't convert persons to float")
+                
+    @property
+    def machines(self):
+        return self._machines
+
+    @machines.setter
+    def machines(self, value):
+
+        if isinstance(value, float):
+            self._machines = value
+        elif value is None:
+            self._machines = value
+        else:
+            try:
+                value = float(value)
+                self._machines = value
+            except:
+                raise ValueError("Can't convert machines to float")
+                
+    @property
+    def lighting_power(self):
+        return self._lighting_power
+
+    @lighting_power.setter
+    def lighting_power(self, value):
+
+        if isinstance(value, float):
+            self._lighting_power = value
+        elif value is None:
+            self._lighting_power = value
+        else:
+            try:
+                value = float(value)
+                self._lighting_power = value
+            except:
+                raise ValueError("Can't convert lighting power to float")

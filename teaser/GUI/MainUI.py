@@ -2353,30 +2353,30 @@ class MainUI(QDialog):
                 int(self.heating_ahu_end_dropdown.currentText()[0] +
                     self.heating_ahu_end_dropdown.currentText()[1])
 
-        self.current_zone.use_conditions.set_temp_heat = float(
-            self.set_temp_heat_line_edit.text())
-        self.current_zone.use_conditions.set_temp_cool = float(
-            self.set_temp_cool_line_edit.text())
-        self.current_zone.use_conditions.temp_set_back = float(
-            self.temp_set_back_line_edit.text())
-        self.current_zone.use_conditions.min_air_exchange = float(
-            self.min_air_flow_line_edit.text())
-        self.current_zone.use_conditions.min_ahu = float(
-            self.min_ahu_line_edit.text())
-        self.current_zone.use_conditions.max_ahu = float(
-            self.max_ahu_line_edit.text())
+        self.current_zone.use_conditions.set_temp_heat = \
+            self.set_temp_heat_line_edit.text()
+        self.current_zone.use_conditions.set_temp_cool = \
+            self.set_temp_cool_line_edit.text()
+        self.current_zone.use_conditions.temp_set_back = \
+            self.temp_set_back_line_edit.text()
+        self.current_zone.use_conditions.min_air_exchange = \
+            self.min_air_flow_line_edit.text()
+        self.current_zone.use_conditions.min_ahu = \
+            self.min_ahu_line_edit.text()
+        self.current_zone.use_conditions.max_ahu = \
+            self.max_ahu_line_edit.text()
         if self.with_ahu_combobox.currentText() == 'True':
             self.current_zone.use_conditions.with_ahu = True
         else:
             self.current_zone.use_conditions.with_ahu = False
         self.current_zone.use_conditions.rel_humidity = float(
             self.re_humidity_line_edit.text())
-        self.current_zone.use_conditions.persons = float(
-            self.persons_line_edit.text())
-        self.current_zone.use_conditions.machines = float(
-            self.machines_line_edit.text())
-        self.current_zone.use_conditions.maintained_illuminace = float(
-            self.lighting_line_edit.text())
+        self.current_zone.use_conditions.persons = \
+            self.persons_line_edit.text()
+        self.current_zone.use_conditions.machines = \
+            self.machines_line_edit.text()
+        self.current_zone.use_conditions.lighting_power = \
+            self.lighting_line_edit.text()
         
         self.current_zone.t_inside = self.mean_temp_inner_line_edit.text()
         self.current_zone.t_outside = self.mean_temp_outer_line_edit.text()
@@ -3283,13 +3283,13 @@ class MainUI(QDialog):
         self.set_temp_heat_line_edit = QtGui.QLineEdit()
         self.set_temp_heat_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_heat))
-        self.set_temp_heat_label_2 = QtGui.QLabel("\u00B0C")
+        self.set_temp_heat_label_2 = QtGui.QLabel("K")
 
         self.set_temp_cool_label_1 = QtGui.QLabel("Set Temp Cooling: ")
         self.set_temp_cool_line_edit = QtGui.QLineEdit()
         self.set_temp_cool_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_cool))
-        self.set_temp_cool_label_2 = QtGui.QLabel("\u00B0C")
+        self.set_temp_cool_label_2 = QtGui.QLabel("K")
 
         self.temp_set_back_label_1 = QtGui.QLabel("Temp Setback: ")
         self.temp_set_back_line_edit = QtGui.QLineEdit()
