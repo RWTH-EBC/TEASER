@@ -2377,17 +2377,9 @@ class MainUI(QDialog):
             self.machines_line_edit.text())
         self.current_zone.use_conditions.maintained_illuminace = float(
             self.lighting_line_edit.text())
-        try:
-            self.current_zone.t_inside = utilis.celsius_to_kelvin(float(
-                self.mean_temp_inner_line_edit.text()))
-        except ValueError:
-            print ("Please insert a value for Mean indoor temperature")
-        try:
-            self.current_zone.t_outside = utilis.celsius_to_kelvin(float(
-                self.mean_temp_outer_line_edit.text()))
-        except ValueError:
-            print ("Please insert a value for Mean outdoor temperature")
         
+        self.current_zone.t_inside = self.mean_temp_inner_line_edit.text()
+        self.current_zone.t_outside = self.mean_temp_outer_line_edit.text()
         self.current_zone.infiltration_rate = \
                                         self.infiltration_rate_line_edit.text()
 
@@ -3380,18 +3372,16 @@ class MainUI(QDialog):
         self.lighting_line_edit.setText(str(
             self.current_zone.use_conditions.maintained_illuminace))
         self.lighting_label_2 = QtGui.QLabel("W/m^2")
-        
+
         self.mean_temp_out_label_1 = QtGui.QLabel("Mean Outdoor Temp: ")
         self.mean_temp_outer_line_edit = QtGui.QLineEdit()
-        self.mean_temp_outer_line_edit.setText(str(utilis.kelvin_to_celsius(
-            self.current_zone.t_outside)))
-        self.mean_temp_out_label_2 = QtGui.QLabel("\u00B0C")
-        
+        self.mean_temp_outer_line_edit.setText(str(self.current_zone.t_outside))
+        self.mean_temp_out_label_2 = QtGui.QLabel("K")
+
         self.mean_temp_in_label_1 = QtGui.QLabel("Mean Indoor Temp: ")
         self.mean_temp_inner_line_edit = QtGui.QLineEdit()
-        self.mean_temp_inner_line_edit.setText(str(utilis.kelvin_to_celsius(
-            self.current_zone.t_inside)))
-        self.mean_temp_in_label_2 = QtGui.QLabel("\u00B0C")
+        self.mean_temp_inner_line_edit.setText(str(self.current_zone.t_inside))
+        self.mean_temp_in_label_2 = QtGui.QLabel("K")
         
         self.infiltration_rate_label_1 = QtGui.QLabel("Infiltration Rate: ")
         self.infiltration_rate_line_edit = QtGui.QLineEdit()
