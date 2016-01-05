@@ -840,15 +840,15 @@ class ThermalZone(object):
 
     @t_inside.setter
     def t_inside(self, value):
-        "also convert to Kelvin!"
+
         if isinstance(value, float):
-            self._t_inside = value + 273.15
+            self._t_inside = value
         elif value is None:
             self._t_inside = value
         else:
             try:
                 value = float(value)
-                self._t_inside = value + 273.15
+                self._t_inside = value
             except:
                 raise ValueError("Can't convert temperature to float")
                 
@@ -858,14 +858,14 @@ class ThermalZone(object):
 
     @t_outside.setter
     def t_outside(self, value):
-        "also convert to Kelvin!"
+
         if isinstance(value, float):
-            self._t_outside = value + 273.15
+            self._t_outside = value
         elif value is None:
             self._t_outside = value
         else:
             try:
                 value = float(value)
-                self._t_outside = value + 273.15
+                self._t_outside = value
             except:
                 raise ValueError("Can't convert temperature to float")
