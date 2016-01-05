@@ -2387,11 +2387,9 @@ class MainUI(QDialog):
                 self.mean_temp_outer_line_edit.text()))
         except ValueError:
             print ("Please insert a value for Mean outdoor temperature")
-        try:
-            self.current_zone.infiltration_rate = float(
-                self.infiltration_rate_line_edit.text())
-        except ValueError:
-            print ("Please insert a value for infiltration rate")
+        
+        self.current_zone.infiltration_rate = \
+                                        self.infiltration_rate_line_edit.text()
 
         # TODO: Not sure if this for loop is really necessary
         for zone in self.current_building.thermal_zones:
