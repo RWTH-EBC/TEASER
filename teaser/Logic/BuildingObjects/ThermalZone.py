@@ -651,6 +651,15 @@ class ThermalZone(object):
         self.heating_load = 0.0
         self.cooling_load = 0.0
 
+    def delete(self):
+        '''Deletes the actual thermal zone and refreshs the thermal zones of
+        the building
+        '''
+        for index, tz in enumerate(self.parent.thermal_zones):
+            if tz.internal_id == self.internal_id:
+                self.area = 0.0
+                self.parent.thermal_zones.pop(index)
+
     @property
     def parent(self):
         return self.__parent
