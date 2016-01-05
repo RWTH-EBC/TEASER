@@ -82,7 +82,7 @@ class ThermalZone(object):
         self.typical_length = None
         self.typical_width = None
         self._t_inside = None
-        self.t_outside = None
+        self._t_outside = None
 
         # Calculated values for InnerWall for each Zone
         self.r1_iw = 0.0
@@ -848,6 +848,24 @@ class ThermalZone(object):
         else:
             try:
                 value = float(value)
-                self._t_inside = value
+                self._t_inside = value + 273.15
+            except:
+                raise ValueError("Can't convert temperature to float")
+                
+    @property
+    def t_outside(self):        
+        return self._t_outside
+
+    @t_outside.setter
+    def t_outside(self, value):
+        "also convert to Kelvin!"
+        if isinstance(value, float):
+            self._t_outside = value + 273.15
+        elif value is None:
+            self._t_outside = value
+        else:
+            try:
+                value = float(value)
+                self._t_outside = value + 273.15
             except:
                 raise ValueError("Can't convert temperature to float")
