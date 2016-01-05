@@ -45,11 +45,23 @@ class ThermalZone(object):
     outer_walls : list
         List with all outer walls including ground floor and rooftop
 
+    use_conditions : instance of UseConditions()
+        Class of UseConditions with all relevant information for the usage
+        of the thermal zone
+
     inner_walls : list
         List with all inner walls including  floor and ceiling
 
     typical_length : list
         List with all inner walls including  floor and ceiling
+        
+    t_inside : float
+        normative indoor temperature for static heat load calculation.
+        The input of t_inside is ALWAYS in degree Celsius
+        
+    t_outside : float
+        normative outdoor temperature for static heat load calculation.
+        The input of t_inside is ALWAYS in degree Celsius
     '''
 
     def __init__(self, parent=None):
@@ -69,7 +81,7 @@ class ThermalZone(object):
         self._use_conditions = None
         self.typical_length = None
         self.typical_width = None
-        self.t_inside = None
+        self._t_inside = None
         self.t_outside = None
 
         # Calculated values for InnerWall for each Zone
@@ -821,3 +833,21 @@ class ThermalZone(object):
                 self._infiltration_rate = value
             except:
                 raise ValueError("Can't convert infiltration rate to float")
+                
+    @property
+    def t_inside(self):        
+        return self._t_inside
+
+    @t_inside.setter
+    def t_inside(self, value):
+        "also convert to Kelvin!"
+        if isinstance(value, float):
+            self._t_inside = value + 273.15
+        elif value is None:
+            self._t_inside = value
+        else:
+            try:
+                value = float(value)
+                self._t_inside = value
+            except:
+                raise ValueError("Can't convert temperature to float")
