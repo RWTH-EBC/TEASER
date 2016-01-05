@@ -57,11 +57,11 @@ class ThermalZone(object):
         
     t_inside : float
         normative indoor temperature for static heat load calculation.
-        The input of t_inside is ALWAYS in degree Celsius
+        The input of t_inside is ALWAYS in Kelvin
         
     t_outside : float
         normative outdoor temperature for static heat load calculation.
-        The input of t_inside is ALWAYS in degree Celsius
+        The input of t_inside is ALWAYS in Kelvin
     '''
 
     def __init__(self, parent=None):
