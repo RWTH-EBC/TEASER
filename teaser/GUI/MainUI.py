@@ -2320,8 +2320,7 @@ class MainUI(QDialog):
         '''
 
         self.current_zone.name = self.zone_id_textbox.text()
-        self.current_zone.area = float(
-            self.zone_net_leased_area_textbox.text())
+        self.current_zone.area = self.zone_net_leased_area_textbox.text()
         self.current_zone.use_conditions.usage =\
             self.zone_type_combobox.currentText()
         if self.cooling_ahu_start_dropdown.currentText().startswith('0'):
