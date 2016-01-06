@@ -690,7 +690,7 @@ class BuildingElement(object):
 
     @orientation.setter
     def orientation(self, value):
-
+        """
         if isinstance(value, float):
             pass
         elif value is None:
@@ -700,7 +700,7 @@ class BuildingElement(object):
                 value = float(value)
             except:
                 raise ValueError("Can't convert orientation to float")        
-
+        """
         self._orientation = value
         if type(self).__name__ == "OuterWall":
             if self.parent.parent is not None and self.area is not None:

@@ -1041,7 +1041,7 @@ class MainUI(QDialog):
                         zone.inner_walls[index].orientation = \
                             self.element_orientation_combobox.currentText()
                         zone.inner_walls[index].area = \
-                            float(self.element_area_textbox.text())
+                           self.element_area_textbox.text()
                         zone.inner_walls[index].year_of_construction = \
                             self.element_year_of_construction_textbox.text()
                         zone.inner_walls[index].year_of_retrofit = \
@@ -1049,11 +1049,11 @@ class MainUI(QDialog):
                         zone.inner_walls[index].tilt = \
                             self.element_tilt_textbox.text()
                         zone.inner_walls[index].inner_convection = \
-                            float(self.element_inner_convection_textbox.text())
+                            self.element_inner_convection_textbox.text()
                         zone.inner_walls[index].inner_radiation = \
-                            float(self.element_inner_radiation_textbox.text())
+                           self.element_inner_radiation_textbox.text()
                         zone.inner_walls[index].ua_value = \
-                            float(self.element_uvalue_textbox.text())
+                           self.element_uvalue_textbox.text()
                 for element in zone.outer_walls:
                     if element.internal_id == self.current_element.internal_id:
                         index = zone.outer_walls.index(element)
@@ -1065,7 +1065,7 @@ class MainUI(QDialog):
                         zone.outer_walls[index].orientation = \
                             self.element_orientation_combobox.currentText()
                         zone.outer_walls[index].area = \
-                            float(self.element_area_textbox.text())
+                            self.element_area_textbox.text()
                         zone.outer_walls[index].year_of_construction = \
                             self.element_year_of_construction_textbox.text()
                         zone.outer_walls[index].year_of_retrofit = \
@@ -1073,11 +1073,11 @@ class MainUI(QDialog):
                         zone.outer_walls[index].tilt = \
                             self.element_tilt_textbox.text()
                         zone.outer_walls[index].inner_convection = \
-                            float(self.element_inner_convection_textbox.text())
+                            self.element_inner_convection_textbox.text()
                         zone.outer_walls[index].inner_radiation = \
-                            float(self.element_inner_radiation_textbox.text())
+                            self.element_inner_radiation_textbox.text()
                         zone.outer_walls[index].ua_value = \
-                            float(self.element_uvalue_textbox.text())
+                            self.element_uvalue_textbox.text()
                         break
                 for element in zone.windows:
                     if element.internal_id == self.current_element.internal_id:
@@ -1090,7 +1090,7 @@ class MainUI(QDialog):
                         zone.windows[index].orientation = \
                             self.element_orientation_combobox.currentText()
                         zone.windows[index].area = \
-                            float(self.element_area_textbox.text())
+                            self.element_area_textbox.text()
                         zone.windows[index].year_of_construction = \
                             self.element_year_of_construction_textbox.text()
                         zone.windows[index].year_of_retrofit = \
@@ -1098,11 +1098,11 @@ class MainUI(QDialog):
                         zone.windows[index].tilt = \
                             self.element_tilt_textbox.text()
                         zone.windows[index].inner_convection = \
-                            float(self.element_inner_convection_textbox.text())
+                            self.element_inner_convection_textbox.text()
                         zone.windows[index].inner_radiation = \
-                            float(self.element_inner_radiation_textbox.text())
+                            self.element_inner_radiation_textbox.text()
                         zone.windows[index].ua_value = \
-                            float(self.element_uvalue_textbox.text())
+                            self.element_uvalue_textbox.text()
                         break
 
     def switch_type_building(self):
