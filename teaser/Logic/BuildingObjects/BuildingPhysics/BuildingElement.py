@@ -103,11 +103,11 @@ class BuildingElement(object):
         self.name = None
         self.construction_type = None
         self._year_of_retrofit = None
-        self.year_of_construction = None
+        self._year_of_construction = None
         self.building_age_group = [None, None]
 
         self._area = None
-        self.tilt = None
+        self._tilt = None
         self._orientation = None
         self._inner_convection = None
         self._inner_radiation = None
@@ -861,3 +861,38 @@ class BuildingElement(object):
                 self.inner_radiation is not None and\
                 self.area is not None:
             self.calc_ua_value()
+    @property
+    def tilt(self):        
+        return self._tilt
+
+    @tilt.setter
+    def tilt(self, value):
+
+        if isinstance(value, float):
+            self._tilt = value
+        elif value is None:
+            self._tilt = value
+        else:
+            try:
+                value = float(value)
+                self._tilt = value
+            except:
+                raise ValueError("Can't convert tilt to float")
+                
+    @property
+    def year_of_construction(self):        
+        return self._year_of_construction
+
+    @year_of_construction.setter
+    def year_of_construction(self, value):
+
+        if isinstance(value, float):
+            self._year_of_construction = value
+        elif value is None:
+            self._year_of_construction = value
+        else:
+            try:
+                value = int(value)
+                self._year_of_construction = value
+            except:
+                raise ValueError("Can't convert year to int")
