@@ -1,6 +1,6 @@
 # created June 2015
 # by TEASER4 Development Team
-
+from __future__ import division
 import math
 import collections
 import random
