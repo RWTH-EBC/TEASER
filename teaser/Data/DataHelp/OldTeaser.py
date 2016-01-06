@@ -43,14 +43,15 @@ def load_teaser_xml(path, project):
         building = Building(project, bldg_node.find("Gebaeude").text,
                             bldg_node.find("Baujahr").text,
                             float(bldg_node.find("Geschosszahl").text),
-                            float(bldg_node.find("Geschosshoehe").text),
-                            float(bldg_node.find("Nettoflaeche").text))
+                            float(bldg_node.find("Geschosshoehe").text))
         building.street_name = bldg_node.find("Strasse").text
         building.city = bldg_node.find("Ort").text
         building.type_of_building = bldg_node.find("Gebaeudetyp").text
         building.height_of_floors = float(bldg_node.find("Geschosshoehe").text)
         building.number_of_floors = float(bldg_node.find("Geschosszahl").text)
-        building.net_leased_area = float(bldg_node.find("Nettoflaeche").text)
+        if root.findall("Zonen/Zone") is None:
+            building.net_leased_area = float(bldg_node.find(
+                "Nettoflaeche").text)
         '''
         building.structureFloorPlan = bldg_node.find("Grundrissstruktur").text
         building.neighbourBuildings = bldg_node.find("Nachbargebaeude").text
@@ -194,7 +195,7 @@ def set_basic_data_teaser(wall_node, element, orientation_dict=0):
             element.orientation = orientation_dict[float(wall_node.find
                                                          ("orientierung").text)
                                                    ]
-
+            element.area = float(wall_node.find("flaeche").text)
             if (type(element).__name__ == 'Rooftop'or
                type(element).__name__ == 'GroundFloor'):
                 element.tilt = 0.0
