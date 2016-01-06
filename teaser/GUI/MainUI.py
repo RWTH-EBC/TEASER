@@ -2883,8 +2883,6 @@ class MainUI(QDialog):
         self.warning_message_groupbox = QtGui.QGroupBox(
                                                  u"Warning")
         self.warning_message_groupbox.setAlignment(0x0004)
-        self.warning_message_groupbox = self.set_text_color(
-                self.warning_message_groupbox, "red")
         self.warning_message_groupbox.setGeometry(
                                               QtCore.QRect(0, 0, 60, 60))
         self.warning_message_label = QtGui.QLabel(
