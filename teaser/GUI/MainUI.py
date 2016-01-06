@@ -1545,17 +1545,15 @@ class MainUI(QDialog):
                         "\nType:\t".expandtabs(11) + 
                         "Inner Wall \n Area:\t".expandtabs(11) + 
                         str(inner_wall.area), inner_wall.internal_id)
-                self.element_model.appendRow(item)
-                if type(inner_wall).__name__ == \
-                "Floor":
+                    self.element_model.appendRow(item)
+                if type(inner_wall).__name__ == "Floor":
                     item = TrackableItem(
                         "Name:\t".expandtabs(8) + str(inner_wall.name) + 
                         "\nType:\t".expandtabs(11) + 
                         "Floor \n Area:\t".expandtabs(11) + 
                         str(inner_wall.area), inner_wall.internal_id)
                     self.element_model.appendRow(item)
-                if type(inner_wall).__name__ == \
-                "Ceiling":
+                if type(inner_wall).__name__ == "Ceiling":
                     item = TrackableItem(
                         "Name:\t".expandtabs(8) + str(inner_wall.name) + 
                         "\nType:\t".expandtabs(11) + 
@@ -1563,8 +1561,7 @@ class MainUI(QDialog):
                         str(inner_wall.area), inner_wall.internal_id)
                     self.element_model.appendRow(item)
             for element in self.current_zone.outer_walls:
-                if type(element).__name__ == \
-                        "GroundFloor":
+                if type(element).__name__ == "GroundFloor":
                     item = TrackableItem(
                         "Name:\t".expandtabs(8) + 
                         str(element.name) + 
@@ -1575,8 +1572,7 @@ class MainUI(QDialog):
                         str(element.orientation),
                         element.internal_id)
                     self.element_model.appendRow(item)
-                if type(element).__name__ == \
-                        "Rooftop":
+                if type(element).__name__ == "Rooftop":
                     item = TrackableItem(
                         "Name:\t".expandtabs(8) + 
                         str(element.name) + 
@@ -1587,8 +1583,7 @@ class MainUI(QDialog):
                         str(element.orientation),
                         element.internal_id)
                     self.element_model.appendRow(item)
-                if type(element).__name__ == \
-                        "OuterWall":
+                if type(element).__name__ == "OuterWall":
                     item = TrackableItem(
                         "Name:\t".expandtabs(8) + 
                         str(element.name) + 
