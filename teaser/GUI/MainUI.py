@@ -1744,12 +1744,8 @@ class MainUI(QDialog):
                             str(window.orientation),
                             window.internal_id)
                         self.element_model.appendRow(item)
-            for orientation in self.guiinfo.orientations_numbers.keys():
-                #print(orientation)
-                pass
-            for orientation in self.guiinfo.orientations_numbers.keys():
-                print(orientation)
 
+            for orientation in self.guiinfo.orientations_numbers.keys():
                 if self.current_building.get_outer_wall_area(orientation) != 0:
                     item1 = QStandardItem(
                         "Outer Wall Orientation: " +
@@ -1767,7 +1763,6 @@ class MainUI(QDialog):
                         str(self.current_building.
                             get_window_area(orientation)))
                     self.outer_elements_model.appendRow(item2)
-            print("----------------------------------------------------")
 
     def display_current_building(self):
         ''' Changes all the values to the new building
