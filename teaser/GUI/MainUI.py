@@ -1660,7 +1660,7 @@ class MainUI(QDialog):
                                 "\nType:\t".expandtabs(11) + 
                                 "Inner Wall \n Area:\t".expandtabs(11) + 
                                 str(inner_wall.area), inner_wall.internal_id)
-                        self.element_model.appendRow(item)
+                            self.element_model.appendRow(item)
                         if type(inner_wall).__name__ == \
                         "Floor":
                             item = TrackableItem(
@@ -2488,7 +2488,7 @@ class MainUI(QDialog):
                     "\nType:\t".expandtabs(11) + 
                     "Inner Wall \n Area:\t".expandtabs(11) + 
                     str(inner_wall.area), inner_wall.internal_id)
-            self.element_model.appendRow(item)
+                self.element_model.appendRow(item)
             if type(inner_wall).__name__ == "Floor":
                 item = TrackableItem(
                     "Name:\t".expandtabs(8) + str(inner_wall.name) + 
