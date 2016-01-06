@@ -392,6 +392,9 @@ def load_teaser_xml(path, prj):
         bldg.number_of_floors = pyxb_bld.number_of_floors
         bldg.height_of_floors = pyxb_bld.height_of_floors
 
+        if not pyxb_bld.ThermalZone:
+            bldg.net_leased_area = pyxb_bld.net_leased_area
+
         for pyxb_zone in pyxb_bld.ThermalZone:
 
             zone = ThermalZone(bldg)
