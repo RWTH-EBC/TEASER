@@ -199,21 +199,21 @@ class UseConditions18599(UseConditions):
         self._temp_set_back = 4.0
         self._min_temp_heat = 20.0
         self._max_temp_cool = 26.0
-        self.rel_humidity = 45
-        self.min_air_exchange = 0.5
+        self._rel_humidity = 45
+        self._min_air_exchange = 0.5
         self.rel_absence_ahu = 0.3
         self.part_load_factor_ahu = 1.0
         self.cooling_time = [5, 18]
         self.heating_time = [5, 18]
 
-        self.persons = 0
+        self._persons = 0
         self.profile_persons = []
-        self.machines = 0.0
+        self._machines = 0.0
         self.profile_machines = []
-        self.lighting_power = 0.0
+        self._lighting_power = 0.0
 
-        self.min_ahu = 0.0
-        self.max_ahu = 0.5
+        self._min_ahu = 0.0
+        self._max_ahu = 0.5
         self.with_ahu = False
 
     def load_use_conditions(self, zone_usage):
@@ -503,20 +503,20 @@ class UseConditions18599(UseConditions):
             except:
                 raise ValueError("Can't convert temperature to float")
     @property
-    def max_temp_heat(self):        
-        return self._max_temp_heat
+    def max_temp_cool(self):        
+        return self._max_temp_cool
 
-    @max_temp_heat.setter
-    def max_temp_heat(self, value):
+    @max_temp_cool.setter
+    def max_temp_cool(self, value):
 
         if isinstance(value, float):
-            self._max_temp_heat = value
+            self._max_temp_cool = value
         elif value is None:
-            self._max_temp_heat = value
+            self._max_temp_cool = value
         else:
             try:
                 value = float(value)
-                self._max_temp_heat = value
+                self._max_temp_cool = value
             except:
                 raise ValueError("Can't convert temperature to float")
                 

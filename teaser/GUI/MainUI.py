@@ -1495,10 +1495,10 @@ class MainUI(QDialog):
             self.current_zone.use_conditions.machines))
         self.lighting_line_edit.setText(str(
             self.current_zone.use_conditions.maintained_illuminace))
-        self.mean_temp_outer_line_edit.setText(str(utilis.kelvin_to_celsius(
-            self.current_zone.t_outside)))
-        self.mean_temp_inner_line_edit.setText(str(utilis.kelvin_to_celsius(
-            self.current_zone.t_inside)))
+        self.mean_temp_outer_line_edit.setText(str(
+            self.current_zone.t_outside))
+        self.mean_temp_inner_line_edit.setText(str(
+            self.current_zone.t_inside))
         self.infiltration_rate_line_edit.setText(str(
             self.current_zone.infiltration_rate))
         self.canvas_profiles.repaint()
