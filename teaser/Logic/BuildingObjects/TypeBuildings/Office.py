@@ -138,13 +138,13 @@ class Office(TypeBuilding):
 
     '''
 
-    def __init__(self, parent=None,
+    def __init__(self,
+                 parent=None,
                  name=None,
                  year_of_construction=None,
                  number_of_floors=None,
                  height_of_floors=None,
                  net_leased_area=None,
-                 with_ahu=False,
                  office_layout=None,
                  window_layout=None,
                  construction_type=None):
@@ -152,14 +152,16 @@ class Office(TypeBuilding):
 
         
         '''
-        super(Office, self).__init__(parent, name, year_of_construction,
-                                     number_of_floors, height_of_floors,
+        super(Office, self).__init__(parent, 
+                                     name,
+                                     year_of_construction,
+                                     number_of_floors,
+                                     height_of_floors,
                                      net_leased_area, with_ahu)
 
         self.office_layout = office_layout
         self.window_layout = window_layout
         self.construction_type = construction_type
-
         # Parameters are default values for current
         # calculation following Lichtmess
 
@@ -228,12 +230,13 @@ class Office(TypeBuilding):
         elif self.office_layout == 2:
             self._est_width = 15.0
         elif self.office_layout == 3:
-            self._est_width = math.sqrt((net_leased_area / number_of_floors) * 
-                                        self.gross_factor)
+            self._est_width = math.sqrt((self.net_leased_area / 
+                                         self.number_of_floors) * 
+                                         self.gross_factor)
         else:
             raise ValueError("office_layout value has to be between 0 - 3")
 
-        self._est_length = ((net_leased_area / number_of_floors) * 
+        self._est_length = ((self.net_leased_area / self.number_of_floors) * 
                             self.gross_factor) / self._est_width
 
 

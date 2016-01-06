@@ -36,7 +36,17 @@ def example_type_building():
                               cellar =  1,
                               construction_type = "heavy",
                               dormer = 1)
-    prj.list_of_buildings[-1].modelica_set_temp()
+                              
+    prj.type_bldg_office(name = "Office",
+                              year_of_construction = 1988,
+                              number_of_floors = 2,
+                              height_of_floors = 3.5,
+                              net_leased_area = 100,
+                              office_layout=1,
+                              window_layout=1,
+                              construction_type = "heavy")
+
+
     """To export the parameters to a Modelica record, we use the export_record
     function. path = None indicates, that we want to store the records in 
     TEASER'S Output folder""" 
