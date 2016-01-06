@@ -1041,7 +1041,7 @@ class MainUI(QDialog):
                         zone.inner_walls[index].orientation = \
                             self.element_orientation_combobox.currentText()
                         zone.inner_walls[index].area = \
-                            float(self.element_area_textbox.text())
+                           self.element_area_textbox.text()
                         zone.inner_walls[index].year_of_construction = \
                             self.element_year_of_construction_textbox.text()
                         zone.inner_walls[index].year_of_retrofit = \
@@ -1049,11 +1049,11 @@ class MainUI(QDialog):
                         zone.inner_walls[index].tilt = \
                             self.element_tilt_textbox.text()
                         zone.inner_walls[index].inner_convection = \
-                            float(self.element_inner_convection_textbox.text())
+                            self.element_inner_convection_textbox.text()
                         zone.inner_walls[index].inner_radiation = \
-                            float(self.element_inner_radiation_textbox.text())
+                           self.element_inner_radiation_textbox.text()
                         zone.inner_walls[index].ua_value = \
-                            float(self.element_uvalue_textbox.text())
+                           self.element_uvalue_textbox.text()
                 for element in zone.outer_walls:
                     if element.internal_id == self.current_element.internal_id:
                         index = zone.outer_walls.index(element)
@@ -1065,7 +1065,7 @@ class MainUI(QDialog):
                         zone.outer_walls[index].orientation = \
                             self.element_orientation_combobox.currentText()
                         zone.outer_walls[index].area = \
-                            float(self.element_area_textbox.text())
+                            self.element_area_textbox.text()
                         zone.outer_walls[index].year_of_construction = \
                             self.element_year_of_construction_textbox.text()
                         zone.outer_walls[index].year_of_retrofit = \
@@ -1073,11 +1073,11 @@ class MainUI(QDialog):
                         zone.outer_walls[index].tilt = \
                             self.element_tilt_textbox.text()
                         zone.outer_walls[index].inner_convection = \
-                            float(self.element_inner_convection_textbox.text())
+                            self.element_inner_convection_textbox.text()
                         zone.outer_walls[index].inner_radiation = \
-                            float(self.element_inner_radiation_textbox.text())
+                            self.element_inner_radiation_textbox.text()
                         zone.outer_walls[index].ua_value = \
-                            float(self.element_uvalue_textbox.text())
+                            self.element_uvalue_textbox.text()
                         break
                 for element in zone.windows:
                     if element.internal_id == self.current_element.internal_id:
@@ -1090,7 +1090,7 @@ class MainUI(QDialog):
                         zone.windows[index].orientation = \
                             self.element_orientation_combobox.currentText()
                         zone.windows[index].area = \
-                            float(self.element_area_textbox.text())
+                            self.element_area_textbox.text()
                         zone.windows[index].year_of_construction = \
                             self.element_year_of_construction_textbox.text()
                         zone.windows[index].year_of_retrofit = \
@@ -1098,11 +1098,11 @@ class MainUI(QDialog):
                         zone.windows[index].tilt = \
                             self.element_tilt_textbox.text()
                         zone.windows[index].inner_convection = \
-                            float(self.element_inner_convection_textbox.text())
+                            self.element_inner_convection_textbox.text()
                         zone.windows[index].inner_radiation = \
-                            float(self.element_inner_radiation_textbox.text())
+                            self.element_inner_radiation_textbox.text()
                         zone.windows[index].ua_value = \
-                            float(self.element_uvalue_textbox.text())
+                            self.element_uvalue_textbox.text()
                         break
 
     def switch_type_building(self):
@@ -1495,10 +1495,10 @@ class MainUI(QDialog):
             self.current_zone.use_conditions.machines))
         self.lighting_line_edit.setText(str(
             self.current_zone.use_conditions.maintained_illuminace))
-        self.mean_temp_outer_line_edit.setText(str(utilis.kelvin_to_celsius(
-            self.current_zone.t_outside)))
-        self.mean_temp_inner_line_edit.setText(str(utilis.kelvin_to_celsius(
-            self.current_zone.t_inside)))
+        self.mean_temp_outer_line_edit.setText(str(
+            self.current_zone.t_outside))
+        self.mean_temp_inner_line_edit.setText(str(
+            self.current_zone.t_inside))
         self.infiltration_rate_line_edit.setText(str(
             self.current_zone.infiltration_rate))
         self.canvas_profiles.repaint()
@@ -2315,8 +2315,7 @@ class MainUI(QDialog):
         '''
 
         self.current_zone.name = self.zone_id_textbox.text()
-        self.current_zone.area = float(
-            self.zone_net_leased_area_textbox.text())
+        self.current_zone.area = self.zone_net_leased_area_textbox.text()
         self.current_zone.use_conditions.usage =\
             self.zone_type_combobox.currentText()
         if self.cooling_ahu_start_dropdown.currentText().startswith('0'):
@@ -2348,45 +2347,35 @@ class MainUI(QDialog):
                 int(self.heating_ahu_end_dropdown.currentText()[0] +
                     self.heating_ahu_end_dropdown.currentText()[1])
 
-        self.current_zone.use_conditions.set_temp_heat = float(
-            self.set_temp_heat_line_edit.text())
-        self.current_zone.use_conditions.set_temp_cool = float(
-            self.set_temp_cool_line_edit.text())
-        self.current_zone.use_conditions.temp_set_back = float(
-            self.temp_set_back_line_edit.text())
-        self.current_zone.use_conditions.min_air_exchange = float(
-            self.min_air_flow_line_edit.text())
-        self.current_zone.use_conditions.min_ahu = float(
-            self.min_ahu_line_edit.text())
-        self.current_zone.use_conditions.max_ahu = float(
-            self.max_ahu_line_edit.text())
+        self.current_zone.use_conditions.set_temp_heat = \
+            self.set_temp_heat_line_edit.text()
+        self.current_zone.use_conditions.set_temp_cool = \
+            self.set_temp_cool_line_edit.text()
+        self.current_zone.use_conditions.temp_set_back = \
+            self.temp_set_back_line_edit.text()
+        self.current_zone.use_conditions.min_air_exchange = \
+            self.min_air_flow_line_edit.text()
+        self.current_zone.use_conditions.min_ahu = \
+            self.min_ahu_line_edit.text()
+        self.current_zone.use_conditions.max_ahu = \
+            self.max_ahu_line_edit.text()
         if self.with_ahu_combobox.currentText() == 'True':
             self.current_zone.use_conditions.with_ahu = True
         else:
             self.current_zone.use_conditions.with_ahu = False
         self.current_zone.use_conditions.rel_humidity = float(
             self.re_humidity_line_edit.text())
-        self.current_zone.use_conditions.persons = float(
-            self.persons_line_edit.text())
-        self.current_zone.use_conditions.machines = float(
-            self.machines_line_edit.text())
-        self.current_zone.use_conditions.maintained_illuminace = float(
-            self.lighting_line_edit.text())
-        try:
-            self.current_zone.t_inside = utilis.celsius_to_kelvin(float(
-                self.mean_temp_inner_line_edit.text()))
-        except ValueError:
-            print ("Please insert a value for Mean indoor temperature")
-        try:
-            self.current_zone.t_outside = utilis.celsius_to_kelvin(float(
-                self.mean_temp_outer_line_edit.text()))
-        except ValueError:
-            print ("Please insert a value for Mean outdoor temperature")
-        try:
-            self.current_zone.infiltration_rate = float(
-                self.infiltration_rate_line_edit.text())
-        except ValueError:
-            print ("Please insert a value for infiltration rate")
+        self.current_zone.use_conditions.persons = \
+            self.persons_line_edit.text()
+        self.current_zone.use_conditions.machines = \
+            self.machines_line_edit.text()
+        self.current_zone.use_conditions.lighting_power = \
+            self.lighting_line_edit.text()
+        
+        self.current_zone.t_inside = self.mean_temp_inner_line_edit.text()
+        self.current_zone.t_outside = self.mean_temp_outer_line_edit.text()
+        self.current_zone.infiltration_rate = \
+                                        self.infiltration_rate_line_edit.text()
 
         # TODO: Not sure if this for loop is really necessary
         for zone in self.current_building.thermal_zones:
@@ -3288,13 +3277,13 @@ class MainUI(QDialog):
         self.set_temp_heat_line_edit = QtGui.QLineEdit()
         self.set_temp_heat_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_heat))
-        self.set_temp_heat_label_2 = QtGui.QLabel("\u00B0C")
+        self.set_temp_heat_label_2 = QtGui.QLabel("K")
 
         self.set_temp_cool_label_1 = QtGui.QLabel("Set Temp Cooling: ")
         self.set_temp_cool_line_edit = QtGui.QLineEdit()
         self.set_temp_cool_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_cool))
-        self.set_temp_cool_label_2 = QtGui.QLabel("\u00B0C")
+        self.set_temp_cool_label_2 = QtGui.QLabel("K")
 
         self.temp_set_back_label_1 = QtGui.QLabel("Temp Setback: ")
         self.temp_set_back_line_edit = QtGui.QLineEdit()
@@ -3377,18 +3366,16 @@ class MainUI(QDialog):
         self.lighting_line_edit.setText(str(
             self.current_zone.use_conditions.maintained_illuminace))
         self.lighting_label_2 = QtGui.QLabel("W/m^2")
-        
+
         self.mean_temp_out_label_1 = QtGui.QLabel("Mean Outdoor Temp: ")
         self.mean_temp_outer_line_edit = QtGui.QLineEdit()
-        self.mean_temp_outer_line_edit.setText(str(utilis.kelvin_to_celsius(
-            self.current_zone.t_outside)))
-        self.mean_temp_out_label_2 = QtGui.QLabel("\u00B0C")
-        
+        self.mean_temp_outer_line_edit.setText(str(self.current_zone.t_outside))
+        self.mean_temp_out_label_2 = QtGui.QLabel("K")
+
         self.mean_temp_in_label_1 = QtGui.QLabel("Mean Indoor Temp: ")
         self.mean_temp_inner_line_edit = QtGui.QLineEdit()
-        self.mean_temp_inner_line_edit.setText(str(utilis.kelvin_to_celsius(
-            self.current_zone.t_inside)))
-        self.mean_temp_in_label_2 = QtGui.QLabel("\u00B0C")
+        self.mean_temp_inner_line_edit.setText(str(self.current_zone.t_inside))
+        self.mean_temp_in_label_2 = QtGui.QLabel("K")
         
         self.infiltration_rate_label_1 = QtGui.QLabel("Infiltration Rate: ")
         self.infiltration_rate_line_edit = QtGui.QLineEdit()
