@@ -622,7 +622,7 @@ class Project(object):
         citygml.save_gml(self, new_path)
 
 
-    def export_record(self, model_type, path=None):
+    def export_record(self, model_type, path=None, buildingID=None):
         '''Exports values to a record file for Modelica simulation
 
 
