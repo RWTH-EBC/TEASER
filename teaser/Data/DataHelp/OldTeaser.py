@@ -49,7 +49,7 @@ def load_teaser_xml(path, project):
         building.type_of_building = bldg_node.find("Gebaeudetyp").text
         building.height_of_floors = float(bldg_node.find("Geschosshoehe").text)
         building.number_of_floors = float(bldg_node.find("Geschosszahl").text)
-        if root.findall("Zonen/Zone") is None:
+        if not root.findall("Zonen/Zone"):
             building.net_leased_area = float(bldg_node.find(
                 "Nettoflaeche").text)
         '''
