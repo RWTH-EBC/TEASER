@@ -51,12 +51,12 @@ class Material(object):
 
         self.parent = parent
         self.name = ""
-        self.density = 0.0
+        self._density = 0.0
         self._thermal_conduc = 0.0
-        self.heat_capac = 0.0
-        self.solar_absorp = 0.0
-        self.ir_emissivity = 0.0
-        self.transmittance = 0.0
+        self._heat_capac = 0.0
+        self._solar_absorp = 0.0
+        self._ir_emissivity = 0.0
+        self._transmittance = 0.0
 
     def load_material_template(self, mat_name):
         '''Material loader.
@@ -128,6 +128,17 @@ class Material(object):
 
     @thermal_conduc.setter
     def thermal_conduc(self, value):
+        
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert thermal conduction to float")           
+        
         if value is not None:
             self._thermal_conduc = float(value)
             if self.parent.thickness is not None and\
@@ -135,3 +146,92 @@ class Material(object):
                self.parent.parent.inner_radiation is not None and\
                self.parent.parent.area is not None:
                 self.parent.parent.calc_ua_value()
+
+    @property
+    def density(self):        
+        return self._density
+
+    @density.setter
+    def density(self, value):
+
+        if isinstance(value, float):
+            self._density = value
+        elif value is None:
+            self._density = value
+        else:
+            try:
+                value = float(value)
+                self._density = value
+            except:
+                raise ValueError("Can't convert density to float")
+    @property
+    def heat_capac(self):        
+        return self._heat_capac
+
+    @heat_capac.setter
+    def heat_capac(self, value):
+
+        if isinstance(value, float):
+            self._heat_capac = value
+        elif value is None:
+            self._heat_capac = value
+        else:
+            try:
+                value = float(value)
+                self._heat_capac = value
+            except:
+                raise ValueError("Can't convert heat capacity to float")
+
+    @property
+    def solar_absorp(self):        
+        return self._solar_absorp
+
+    @solar_absorp.setter
+    def solar_absorp(self, value):
+
+        if isinstance(value, float):
+            self._solar_absorp = value
+        elif value is None:
+            self._solar_absorp = value
+        else:
+            try:
+                value = float(value)
+                self._solar_absorp = value
+            except:
+                raise ValueError("Can't convert solar absorption to float")
+                
+    @property
+    def ir_emissivity(self):        
+        return self._ir_emissivity
+
+    @ir_emissivity.setter
+    def ir_emissivity(self, value):
+
+        if isinstance(value, float):
+            self._ir_emissivity = value
+        elif value is None:
+            self._ir_emissivity = value
+        else:
+            try:
+                value = float(value)
+                self._ir_emissivity = value
+            except:
+                raise ValueError("Can't convert emissivity to float")
+                
+    @property
+    def transmittance(self):        
+        return self._transmittance
+
+    @transmittance.setter
+    def transmittance(self, value):
+
+        if isinstance(value, float):
+            self._transmittance = value
+        elif value is None:
+            self._transmittance = value
+        else:
+            try:
+                value = float(value)
+                self._transmittance = value
+            except:
+                raise ValueError("Can't convert transmittance to float")
