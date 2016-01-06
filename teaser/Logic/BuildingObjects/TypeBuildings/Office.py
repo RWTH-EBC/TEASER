@@ -145,6 +145,7 @@ class Office(TypeBuilding):
                  number_of_floors=None,
                  height_of_floors=None,
                  net_leased_area=None,
+                 with_ahu=False,
                  office_layout=None,
                  window_layout=None,
                  construction_type=None):
