@@ -93,7 +93,6 @@ class Building(object):
         self._year_of_retrofit = None
 
         self._thermal_zones = []
-        self._thermal_zones = []
         self._outer_area = {}
         self._window_area = {}
 
