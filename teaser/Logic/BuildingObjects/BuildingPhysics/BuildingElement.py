@@ -667,6 +667,17 @@ class BuildingElement(object):
 
     @year_of_retrofit.setter
     def year_of_retrofit(self, value):
+        
+        if isinstance(value, int):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = int(value)
+            except:
+                raise ValueError("Can't convert year of retrofit to float")
+                
         if value is not None:
             if self.year_of_construction is not None:
                 self._year_of_retrofit = value
@@ -679,6 +690,17 @@ class BuildingElement(object):
 
     @orientation.setter
     def orientation(self, value):
+
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert orientation to float")        
+
         self._orientation = value
         if type(self).__name__ == "OuterWall":
             if self.parent.parent is not None and self.area is not None:
@@ -717,6 +739,17 @@ class BuildingElement(object):
 
     @inner_convection.setter
     def inner_convection(self, value):
+        
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert inner convection to float")
+
         if value is not None:
             self._inner_convection = value
         if self.inner_convection is not None and\
@@ -730,6 +763,18 @@ class BuildingElement(object):
 
     @inner_radiation.setter
     def inner_radiation(self, value):
+        
+
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert inner radiation to float")
+
         if value is not None:
             self._inner_radiation = value
         if self.inner_convection is not None and\
@@ -743,6 +788,17 @@ class BuildingElement(object):
 
     @outer_convection.setter
     def outer_convection(self, value):
+
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert outer convection to float")
+
         if value is not None:
             self._outer_convection = value
         if self.inner_convection is not None and\
@@ -756,6 +812,17 @@ class BuildingElement(object):
 
     @outer_radiation.setter
     def outer_radiation(self, value):
+
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert outer radiation to float")
+
         if value is not None:
             self._outer_radiation = value
         if self.inner_convection is not None and\
@@ -769,6 +836,17 @@ class BuildingElement(object):
 
     @area.setter
     def area(self, value):
+
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert element area to float")   
+        
         if value is not None:
             self._area = value
         if type(self).__name__ == "OuterWall"\
