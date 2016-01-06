@@ -391,7 +391,6 @@ def load_teaser_xml(path, prj):
         bldg.year_of_retrofit = pyxb_bld.year_of_retrofit
         bldg.number_of_floors = pyxb_bld.number_of_floors
         bldg.height_of_floors = pyxb_bld.height_of_floors
-        bldg.net_leased_area = pyxb_bld.net_leased_area
 
         for pyxb_zone in pyxb_bld.ThermalZone:
 
