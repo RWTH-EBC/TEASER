@@ -657,23 +657,10 @@ class ThermalZone(object):
         '''
         for index, tz in enumerate(self.parent.thermal_zones):
             if tz.internal_id == self.internal_id:
+                self.parent.net_leased_area -= self.area
+                self.parent.thermal_zones.pop(index)
 
-                #solution 1
-                # self.area = 0.0
-
-                a = self.parent.thermal_zones.pop(index)
-
-                #solution2
-                new_net_leased_area = 0.0
-                for tz in self.parent.thermal_zones:
-                    new_net_leased_area += tz.area
-                self.parent.net_leased_area = new_net_leased_area
-
-                del a
-
-    def __del__(self):
-        print("thermal Zone deleted")
-
+                break
 
     @property
     def parent(self):
