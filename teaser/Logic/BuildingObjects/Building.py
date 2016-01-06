@@ -63,11 +63,14 @@ class Building(object):
 
     '''
 
-    def __init__(self, parent=None, name=None,
+    def __init__(self,
+                 parent=None,
+                 name=None,
                  year_of_construction=None,
                  number_of_floors=None,
                  height_of_floors=None,
                  net_leased_area=None):
+
         '''Constructor of Building Class
         '''
 
@@ -82,22 +85,13 @@ class Building(object):
 
         self.year_of_construction = year_of_construction
 
-        if number_of_floors is not None:
-            self.number_of_floors = float(number_of_floors)
-        else:
-            self.number_of_floors = number_of_floors
-        if height_of_floors is not None:
-            self.height_of_floors = float(height_of_floors)
-        else:
-            self.height_of_floors = height_of_floors
-        if net_leased_area is not None:
-            self.net_leased_area = float(net_leased_area)
-        else:
-            self.net_leased_area = net_leased_area
+        
+        self.number_of_floors = number_of_floors
+        self.height_of_floors = height_of_floors
+        self.net_leased_area = net_leased_area
 
         self._year_of_retrofit = None
 
-        self._thermal_zones = []
         self._thermal_zones = []
         self._outer_area = {}
         self._window_area = {}
@@ -369,6 +363,96 @@ class Building(object):
                 self.__parent.list_of_buildings.append(self)
         else:
             pass
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, value):
+
+        if isinstance(value, str):
+            
+            self.__name = value
+        else:
+            try:
+                value = str(value)
+                self.__name = value
+                
+            except ValueError:
+                print("Can't convert name to string")
+
+    @property
+    def year_of_construction(self):
+        return self.__year_of_construction
+
+    @year_of_construction.setter
+    def year_of_construction(self, value):
+
+        if isinstance(value, int) or value == None:
+            
+            self.__year_of_construction = value
+        else:
+            try:
+                value = int(value)
+                self.__year_of_construction = value
+                
+            except:
+                raise ValueError("Can't convert year of construction to int")
+
+    @property
+    def number_of_floors(self):
+        return self.__number_of_floors
+
+    @number_of_floors.setter
+    def number_of_floors(self, value):
+
+        if isinstance(value, int) or value == None:
+            
+            self.__number_of_floors = value
+        else:
+            try:
+                value = int(value)
+                self.__number_of_floors = value
+                
+            except:
+                raise ValueError("Can't convert number of floors to int")
+                
+    @property
+    def height_of_floors(self):
+        return self.__height_of_floors
+
+    @height_of_floors.setter
+    def height_of_floors(self, value):
+
+        if isinstance(value, float) or value == None:
+            
+            self.__height_of_floors = value
+        else:
+            try:
+                value = float(value)
+                self.__height_of_floors = value
+                
+            except:
+                raise ValueError("Can't convert height of floors to float")
+        
+    @property
+    def net_leased_area(self):        
+        return self.__net_leased_area
+
+    @net_leased_area.setter
+    def net_leased_area(self, value):
+
+        if isinstance(value, float):
+            self.__net_leased_area = value
+        elif value is None:
+            self.__net_leased_area = value
+        else:
+            try:
+                value = float(value)
+                self.__net_leased_area = value
+            except:
+                raise ValueError("Can't convert net leased area to float")
 
     @property
     def thermal_zones(self):

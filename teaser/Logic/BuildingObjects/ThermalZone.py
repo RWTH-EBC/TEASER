@@ -1,6 +1,6 @@
 # created June 2015
 # by TEASER4 Development Team
-
+from __future__ import division
 import math
 import collections
 import random
@@ -45,11 +45,23 @@ class ThermalZone(object):
     outer_walls : list
         List with all outer walls including ground floor and rooftop
 
+    use_conditions : instance of UseConditions()
+        Class of UseConditions with all relevant information for the usage
+        of the thermal zone
+
     inner_walls : list
         List with all inner walls including  floor and ceiling
 
     typical_length : list
         List with all inner walls including  floor and ceiling
+        
+    t_inside : float
+        normative indoor temperature for static heat load calculation.
+        The input of t_inside is ALWAYS in Kelvin
+        
+    t_outside : float
+        normative outdoor temperature for static heat load calculation.
+        The input of t_inside is ALWAYS in Kelvin
     '''
 
     def __init__(self, parent=None):
@@ -62,15 +74,15 @@ class ThermalZone(object):
         self.name = None
         self._area = None
         self._volume = None
-        self.infiltration_rate = None
+        self._infiltration_rate = None
         self._outer_walls = []
         self._inner_walls = []
         self._windows = []
         self._use_conditions = None
         self.typical_length = None
         self.typical_width = None
-        self.t_inside = None
-        self.t_outside = None
+        self._t_inside = None
+        self._t_outside = None
 
         # Calculated values for InnerWall for each Zone
         self.r1_iw = 0.0
@@ -763,6 +775,17 @@ class ThermalZone(object):
 
     @area.setter
     def area(self, value):
+        
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert zone area to float")        
+        
         if self.parent is not None:
             if self._area is None:
                 if self.parent.net_leased_area is None:
@@ -782,6 +805,17 @@ class ThermalZone(object):
 
     @volume.setter
     def volume(self, value):
+        
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert zone volume to float")         
+        
         if self.parent is not None:
             if self._volume is None:
                 self._volume = value
@@ -792,3 +826,57 @@ class ThermalZone(object):
                 self._volume = value
         else:
             self._volume = value
+
+    @property
+    def infiltration_rate(self):        
+        return self._infiltration_rate
+
+    @infiltration_rate.setter
+    def infiltration_rate(self, value):
+
+        if isinstance(value, float):
+            self._infiltration_rate = value
+        elif value is None:
+            self._infiltration_rate = value
+        else:
+            try:
+                value = float(value)
+                self._infiltration_rate = value
+            except:
+                raise ValueError("Can't convert infiltration rate to float")
+                
+    @property
+    def t_inside(self):        
+        return self._t_inside
+
+    @t_inside.setter
+    def t_inside(self, value):
+
+        if isinstance(value, float):
+            self._t_inside = value
+        elif value is None:
+            self._t_inside = value
+        else:
+            try:
+                value = float(value)
+                self._t_inside = value
+            except:
+                raise ValueError("Can't convert temperature to float")
+                
+    @property
+    def t_outside(self):        
+        return self._t_outside
+
+    @t_outside.setter
+    def t_outside(self, value):
+
+        if isinstance(value, float):
+            self._t_outside = value
+        elif value is None:
+            self._t_outside = value
+        else:
+            try:
+                value = float(value)
+                self._t_outside = value
+            except:
+                raise ValueError("Can't convert temperature to float")
