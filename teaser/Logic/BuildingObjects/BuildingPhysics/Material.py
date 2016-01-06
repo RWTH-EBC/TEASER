@@ -163,7 +163,7 @@ class Material(object):
                 value = float(value)
                 self._density = value
             except:
-                raise ValueError("Can't convert temperature to float")
+                raise ValueError("Can't convert density to float")
     @property
     def heat_capac(self):        
         return self._heat_capac
