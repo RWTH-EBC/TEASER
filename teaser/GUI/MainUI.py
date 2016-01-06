@@ -2082,7 +2082,7 @@ class MainUI(QDialog):
                     for zone in building.thermal_zones:
                         if (zone.internal_id == item.internal_id):
                             ind = building.thermal_zones.index(zone)
-                            del building.thermal_zones[ind]
+                            building.thermal_zones[ind].delete()
                             self.display_current_building()
             except (ValueError, AttributeError):
                 QtGui.QMessageBox.warning(self,
