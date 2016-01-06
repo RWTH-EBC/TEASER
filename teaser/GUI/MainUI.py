@@ -3,7 +3,7 @@
 # by TEASER4 Development Team
 
 from PyQt4 import QtCore, QtGui
-from PyQt4.Qt import QDialog, QStandardItemModel
+from PyQt4.Qt import QDialog, QStandardItemModel, QMessageBox
 from PyQt4.Qt import Qt
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap, QTabBar
@@ -19,6 +19,7 @@ from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 import sys
 import os
+from teaser.Logic import Utilis
 from numpy.distutils.pathccompiler import PathScaleCCompiler
 
 
@@ -83,6 +84,7 @@ class MainUI(QDialog):
         self.guiinfo = GUIInfo()
         self.lVZF = ListViewZonesFiller()
         self.is_empty_building_button = False
+        self.file_path = ""
         self.setObjectName(_fromUtf8("MainWindow"))
         self.resize(900, 800)
         self.setMinimumSize(QtCore.QSize(900, 800))
@@ -1208,7 +1210,6 @@ class MainUI(QDialog):
     def check_inputs_edit_zone(self):
         ''' Checks if all necessary values to edit a given zone are still
         not empty '''
-
         # TODO: Fehler beim User-Input abfangen
         if self.edit_zone_area_line_edit.text() == "":
             self.edit_zone_failed_label.setVisible(True)
@@ -1253,7 +1254,6 @@ class MainUI(QDialog):
     def check_inputs_typebuilding_office(self):
         ''' Checks if all necessary values to create a type building are
         not empty/floats '''
-
         # übergibst, weil du keine methoden mit parameter zu buttons connecten kannst,        # allerdings sollts mit sowas wie self.type_building_type klappen
         self.fill_typebuilding_attributes()
         self.project, int_id = Controller.click_generate_type_building_button(
@@ -1538,7 +1538,6 @@ class MainUI(QDialog):
 
     def display_current_zone(self):
         ''' Updates the lists in the main window
-        
         '''
 
         if (self.current_zone):
@@ -1547,26 +1546,22 @@ class MainUI(QDialog):
             self.edit_zone_name_line_edit.setText(str(self.current_zone.name))
             self.edit_zone_volume_line_edit.setText(
                 str(self.current_zone.volume))
-            
             for inner_wall in self.current_zone.inner_walls:
-                if type(inner_wall).__name__ == \
-                "InnerWall":
+                if type(inner_wall).__name__ == "InnerWall":
                     item = TrackableItem(
                         "Name:\t".expandtabs(8) + str(inner_wall.name) + 
                         "\nType:\t".expandtabs(11) + 
                         "Inner Wall \n Area:\t".expandtabs(11) + 
                         str(inner_wall.area), inner_wall.internal_id)
                     self.element_model.appendRow(item)
-                if type(inner_wall).__name__ == \
-                "Floor":
+                if type(inner_wall).__name__ == "Floor":
                     item = TrackableItem(
                         "Name:\t".expandtabs(8) + str(inner_wall.name) + 
                         "\nType:\t".expandtabs(11) + 
                         "Floor \n Area:\t".expandtabs(11) + 
                         str(inner_wall.area), inner_wall.internal_id)
                     self.element_model.appendRow(item)
-                if type(inner_wall).__name__ == \
-                "Ceiling":
+                if type(inner_wall).__name__ == "Ceiling":
                     item = TrackableItem(
                         "Name:\t".expandtabs(8) + str(inner_wall.name) + 
                         "\nType:\t".expandtabs(11) + 
@@ -1574,8 +1569,7 @@ class MainUI(QDialog):
                         str(inner_wall.area), inner_wall.internal_id)
                     self.element_model.appendRow(item)
             for element in self.current_zone.outer_walls:
-                if type(element).__name__ == \
-                        "GroundFloor":
+                if type(element).__name__ == "GroundFloor":
                     item = TrackableItem(
                         "Name:\t".expandtabs(8) + 
                         str(element.name) + 
@@ -1586,8 +1580,7 @@ class MainUI(QDialog):
                         str(element.orientation),
                         element.internal_id)
                     self.element_model.appendRow(item)
-                if type(element).__name__ == \
-                        "Rooftop":
+                if type(element).__name__ == "Rooftop":
                     item = TrackableItem(
                         "Name:\t".expandtabs(8) + 
                         str(element.name) + 
@@ -1598,8 +1591,7 @@ class MainUI(QDialog):
                         str(element.orientation),
                         element.internal_id)
                     self.element_model.appendRow(item)
-                if type(element).__name__ == \
-                        "OuterWall":
+                if type(element).__name__ == "OuterWall":
                     item = TrackableItem(
                         "Name:\t".expandtabs(8) + 
                         str(element.name) + 
@@ -1621,7 +1613,7 @@ class MainUI(QDialog):
 
 
     def switchBuilding(self):
-        ''' Triggers when the combobox for all buildings is used and changes
+        ''' Handles the buildings combobo
         '''
 
         cIndex = self.side_bar_buildings_combo_box.currentIndex()
@@ -1766,7 +1758,6 @@ class MainUI(QDialog):
 
     def display_current_building(self):
         ''' Changes all the values to the new building
-
         '''
 
         if (self.current_building):
@@ -1865,8 +1856,8 @@ class MainUI(QDialog):
         os.chdir(template_folder)
 
         for template_name in (os.listdir(template_folder)):
-            if(self.export_create_template_combobox.currentText()
-               == template_name):
+            if(self.export_create_template_combobox.currentText() ==
+               template_name):
                 path_template = template_folder + template_name
                 # pathTemplate shows which template will be used
 
@@ -1874,23 +1865,37 @@ class MainUI(QDialog):
         for i in range(self.side_bar_buildings_combo_box.count()):
             list_of_building_name.append(
                 self.side_bar_buildings_combo_box.itemText(i))
-        sender = self.sender()
-        if(sender.text() == self.export_button.text()):
-            building_id = -1
-            export_project = self.controller.clickExportButton(
-                self.project, path_template,
-                path_output_folder, building_id, list_of_building_name)
-            os.chdir(path_output_folder)
 
-        else:
+        sender = self.sender()
+        elemInCombobox = self.export_create_template_combobox.currentText()
+        if(sender.text() == self.export_button.text()):
+            Controller.click_export_button(self.project, elemInCombobox,
+                                           path_output_folder)
+            QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
+                                          "record " + elemInCombobox +
+                                          " all building finished ")
+        elif(sender.text() == self.export_button_one.text()):
+
             current_building_id = \
-                self.side_bar_buildings_combo_box.currentIndex()
-            currentBuildingName = \
                 str(self.side_bar_buildings_combo_box.currentText())
-            export_project = self.controller.clickExportButton(
-                self.project, path_template, path_output_folder,
-                current_building_id, currentBuildingName)
-            os.chdir(path_output_folder)
+            Controller.click_export_button(self.project, elemInCombobox,
+                                           path_output_folder,
+                                           current_building_id)
+            QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
+                                          "record " + elemInCombobox +
+                                          " for current building finished ")
+
+            # os.chdir(path_output_folder)
+        utilis.create_path(self.file_path)
+
+    def click_browse_button(self):
+        self.export_save_template_lineedit.setText(QtGui.QFileDialog.
+                                                   getExistingDirectory())
+        if self.export_save_template_lineedit.text() != "":
+            utilis.create_path(self.export_save_template_lineedit.text())
+            self.file_path = self.export_save_template_lineedit.text()
+        else:
+            self.export_save_template_lineedit.setText(self.file_path)
 
     def create_path_to_template_folder(self,):
         
@@ -1904,6 +1909,7 @@ class MainUI(QDialog):
     def display_current_element(self):
         ''' Transfers all relevant values of the current
         element to gui controls like text fields and the list of layers.
+
         '''
 
         if (self.current_element):
@@ -2028,7 +2034,6 @@ class MainUI(QDialog):
     def set_text_color(self, qObject, color):
         '''Switches the color of text between red and black
         '''
-        # werden soll, beim Löschen auf weitere Abhängigkeiten überprüfen!
 
         palette = QtGui.QPalette()
         if (color == "red"):
@@ -2102,7 +2107,7 @@ class MainUI(QDialog):
                     for zone in building.thermal_zones:
                         if (zone.internal_id == item.internal_id):
                             ind = building.thermal_zones.index(zone)
-                            del building.thermal_zones[ind]
+                            building.thermal_zones[ind].delete()
                             self.display_current_building()
             except (ValueError, AttributeError):
                 QtGui.QMessageBox.warning(self,
@@ -2182,7 +2187,7 @@ class MainUI(QDialog):
         # TODO: Ok das Design hat sich nicht wirklich durchgesetzt und
         # es funktioniert grad nicht besonders, Vorschlag: stattdessen
         # einfach ein Pop-Up Fenster wie bei Create-Type-Building, in dem
-        # man building attribute die links am rand stehen ändern kann.
+
         if self.current_building:
             self.side_bar_construction_year_line_edit.setReadOnly(False)
             self.side_bar_height_of_floors_line_edit.setReadOnly(False)
@@ -2318,7 +2323,7 @@ class MainUI(QDialog):
 
     def switch_current_zone(self):
         ''' Switches the current zone if the user clicks on it
-        used for things like delete_thermal_zone.
+        used for things like delete_thermal_zone.        
         '''
 
         current_item = self.zone_model.itemFromIndex(
@@ -2327,7 +2332,7 @@ class MainUI(QDialog):
             if zone.internal_id == current_item.internal_id:
                 self.current_zone = zone
         self.display_current_zone()
-    def save_changed_zone_values(self):
+    def saveChangedZoneValues(self):
         ''' Updates the displayed details of the currently
         selected zone after changes are saved.
 
@@ -2471,7 +2476,7 @@ class MainUI(QDialog):
 
     def load_building_button(self):
         ''' Loads the chosen building from a dialog window and
-        puts it on display.
+        puts it on display.        
         '''
         # click_save_current_project
         path = QtGui.QFileDialog.getOpenFileName(
@@ -2483,10 +2488,8 @@ class MainUI(QDialog):
     def merge_projects(self, loaded_project):
         ''' If a new project is loaded in the buildings are merged
         into the list of buildings of the older project and all the
-        values of the old project are overwritten
+        values of the old project are overwritten        
         '''
-
-
         for building in self.project.list_of_buildings:
             loaded_project.list_of_buildings.insert(0, building)
         self.project = loaded_project
@@ -2516,6 +2519,9 @@ class MainUI(QDialog):
         
         '''
         
+        # TODO: Wir wollten keine Messageboxes mehr, also userinput
+        # anders abfangen.
+        
         try:
             float(self.generate_new_element_area_line_edit.text())
         except ValueError:
@@ -2528,55 +2534,68 @@ class MainUI(QDialog):
             self.generate_new_element_type_combobox.currentText(),
             float(self.generate_new_element_area_line_edit.text()))
         self.element_model.clear()
-        for element in self.current_zone.inner_walls:
-            item = TrackableItem(
-                "Name:\t".expandtabs(8) + str(element.name) +
-                "\nType:\t".expandtabs(11) +
-                "Inner Wall \n Area:\t".expandtabs(11) +
-                str(element.area), element.internal_id)
-            self.element_model.appendRow(item)
+
+        for inner_wall in self.current_zone.inner_walls:
+            if type(inner_wall).__name__ == "InnerWall":
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Inner Wall \n Area:\t".expandtabs(11) + 
+                    str(inner_wall.area), inner_wall.internal_id)
+                self.element_model.appendRow(item)
+            if type(inner_wall).__name__ == "Floor":
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Floor \n Area:\t".expandtabs(11) + 
+                    str(inner_wall.area), inner_wall.internal_id)
+                self.element_model.appendRow(item)
+            if type(inner_wall).__name__ == "Ceiling":
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Ceiling \n Area:\t".expandtabs(11) + 
+                    str(inner_wall.area), inner_wall.internal_id)
+                self.element_model.appendRow(item)
         for element in self.current_zone.outer_walls:
-            if type(element).__name__ == \
-                    "GroundFloor":
+            if type(element).__name__ == "GroundFloor":
                 item = TrackableItem(
-                    "Name:\t".expandtabs(8) +
-                    str(element.name) +
-                    "\nType:\t".expandtabs(11) +
-                    "Ground Floor \n Area:\t".expandtabs(11) +
-                    str(element.area) +
-                    "\n Orientation:\t".expandtabs(11) +
+                    "Name:\t".expandtabs(8) + 
+                    str(element.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Ground Floor \n Area:\t".expandtabs(11) + 
+                    str(element.area) + 
+                    "\n Orientation:\t".expandtabs(11) + 
                     str(element.orientation),
                     element.internal_id)
                 self.element_model.appendRow(item)
-            if type(element).__name__ == \
-                    "Rooftop":
+            if type(element).__name__ == "Rooftop":
                 item = TrackableItem(
-                    "Name:\t".expandtabs(8) +
-                    str(element.name) +
-                    "\nType:\t".expandtabs(11) +
-                    "Rooftop \n Area:\t".expandtabs(11) +
-                    str(element.area) +
-                    "\n Orientation:\t".expandtabs(11) +
+                    "Name:\t".expandtabs(8) + 
+                    str(element.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Rooftop \n Area:\t".expandtabs(11) + 
+                    str(element.area) + 
+                    "\n Orientation:\t".expandtabs(11) + 
                     str(element.orientation),
                     element.internal_id)
                 self.element_model.appendRow(item)
-            if type(element).__name__ == \
-                    "OuterWall":
+            if type(element).__name__ == "OuterWall":
                 item = TrackableItem(
-                    "Name:\t".expandtabs(8) +
-                    str(element.name) +
-                    "\nType:\t".expandtabs(11) +
-                    "Outer Wall \n Area:\t".expandtabs(11) +
-                    str(element.area) +
-                    "\n Orientation:\t".expandtabs(11) +
+                    "Name:\t".expandtabs(8) + 
+                    str(element.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Outer Wall \n Area:\t".expandtabs(11) + 
+                    str(element.area) + 
+                    "\n Orientation:\t".expandtabs(11) + 
                     str(element.orientation),
                     element.internal_id)
                 self.element_model.appendRow(item)
         for element in self.current_zone.windows:
             item = TrackableItem(
-                "Name:\t".expandtabs(8) + str(element.name) +
-                "\nType:\t".expandtabs(11) +
-                "Window \n Area:\t".expandtabs(11) +
+                "Name:\t".expandtabs(8) + str(element.name) + 
+                "\nType:\t".expandtabs(11) + 
+                "Window \n Area:\t".expandtabs(11) + 
                 str(element.area), element.internal_id)
             self.element_model.appendRow(item)
             
@@ -2589,7 +2608,7 @@ class MainUI(QDialog):
         # Problem: Der User muss die Shortcuts auch mitbekommen, also
         # am besten den jeweiligen shortcut-Buchstaben im Label unter dem
         # Button/ auf dem Button etwas hervorheben (unterstreichen oder fett machen)
-        # Der Modifier ist STRG also müssten für die buttons bspw. STRG+C gedrückt werden.        
+        # Der Modifier ist STRG also muessten fuer die buttons bspw. STRG+C gedrueckt werden.
         key = event.key()
         if key == QtCore.Qt.Key_C and\
                 QtGui.QApplication.keyboardModifiers() == \
@@ -2730,7 +2749,7 @@ class MainUI(QDialog):
         '''
         
         # TODO: Bin mir nicht sicher ob das self.no_building_warning_label
-        # noch irgendwas tut, überprüfen und sonst löschen.        
+
         self.generate_new_building_ui_page = QtGui.QWizardPage()
         self.generate_new_building_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
@@ -3216,6 +3235,7 @@ class MainUI(QDialog):
         self.groupbox_save_cancel_buttons.setLayout(self.save_cancel_layout)
 
         self.zone_type_label = QtGui.QLabel("Zone Type")
+
         self.zone_type_combobox = QtGui.QComboBox()
         self.zone_type_combobox.setObjectName(_fromUtf8("ZoneTypeGroupBox"))
         for thermal_zone_type in self.guiinfo.thermal_zone_types:
@@ -3328,7 +3348,7 @@ class MainUI(QDialog):
         self.zone_element_save_button = QtGui.QPushButton()
         self.zone_element_save_button.setText("Save")
         self.connect(self.zone_element_save_button, SIGNAL(
-            "clicked()"), self.save_changed_zone_values)
+            "clicked()"), self.saveChangedZoneValues)
         self.connect(self.zone_element_save_button, SIGNAL(
             "clicked()"), self.zone_value_window, QtCore.SLOT("close()"))
 
@@ -3398,7 +3418,6 @@ class MainUI(QDialog):
 
         self.figure_profiles = plt.figure()
         self.canvas_profiles = FigureCanvas(self.figure_profiles)
-        
         data_persons = [1.0 for x in range(24)]
         data_machines = [1.0 for x in range(24)]
         # TODO: data_lighting = [1.0 for x in range(24)]
@@ -3547,7 +3566,6 @@ class MainUI(QDialog):
             self.groupbox_save_cancel_buttons, 8, 0, 1, 0)
         self.zone_value_window.setWindowModality(Qt.ApplicationModal)
         self.zone_value_window.show()
-
     def change_envelopes_values_ui(self, item):
         self.envelopes_value_window = QtGui.QWizardPage()
         self.envelopes_value_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -3760,6 +3778,13 @@ class MainUI(QDialog):
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_area_line_edit.setGeometry(
             QtCore.QRect(110, 305, 120, 25))
+        self.test_button = QtGui.QPushButton(
+                                self.group_box_type_building_sidecontrols)
+        self.test_button.setText("Generate random parameters")
+        self.test_button.setGeometry(QtCore.QRect(10, 345, 230, 25))
+        self.connect(self.test_button,
+                     QtCore.SIGNAL("clicked()"),
+                     self.fill_random_parameters)
 
         # Differentiates between the different types of buildings from combobox
         
@@ -3823,12 +3848,16 @@ class MainUI(QDialog):
             self.picture_layout_office_4, 4, 1, Qt.AlignRight)
 
         self.radio_button_window_area_office_1 = QtGui.QRadioButton(
+
             u"Use default values")
         self.radio_button_window_area_office_2 = QtGui.QRadioButton(
+
             u"Punctuated facade")
         self.radio_button_window_area_office_3 = QtGui.QRadioButton(
+
             u"Banner facade")
         self.radio_button_window_area_office_4 = QtGui.QRadioButton(
+
             u"Full glazing")
         self.radio_button_window_area_office_1.setChecked(True)
 
@@ -3881,10 +3910,10 @@ class MainUI(QDialog):
             u"Generate " + self.current_type_building + " Building ...")
         self.connect(self.construct_type_building_button, SIGNAL(
             "clicked()"), self.check_inputs_typebuilding_office)
+
         self.connect(self.construct_type_building_button, SIGNAL(
             "clicked()"), self.popup_window_type_building,
             QtCore.SLOT("close()"))
-
         self.type_building_residential_layout = QtGui.QGridLayout()
         self.group_box_type_building_right_residential.setLayout(
             self.type_building_residential_layout)
@@ -3915,8 +3944,10 @@ class MainUI(QDialog):
             self.layout_residential_architecture)
 
         self.radio_button_neighbour_1 = QtGui.QRadioButton(
+
             u"No neighbour")
         self.radio_button_neighbour_2 = QtGui.QRadioButton(
+
             u"One neighbour")
         self.radio_button_neighbour_3 = QtGui.QRadioButton(
             u"Two neighbours")
@@ -3926,12 +3957,15 @@ class MainUI(QDialog):
         self.picture_neighbour_building_residential_2 = QtGui.QLabel()
         self.picture_neighbour_building_residential_3 = QtGui.QLabel()
         self.picture_neighbour_building_residential_1.setPixmap(QPixmap(
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                 "noNeighbour.png")).scaled(29, 23))
         self.picture_neighbour_building_residential_2.setPixmap(QPixmap(
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                 "oneNeighbour.png")).scaled(46, 23))
         self.picture_neighbour_building_residential_3.setPixmap(QPixmap(
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                 "twoNeighbours.png")).scaled(56, 23))
         self.layout_residential_neighbour_buildings.addWidget(
@@ -3951,17 +3985,21 @@ class MainUI(QDialog):
             Qt.AlignRight)
 
         self.radio_button_residential_layout_1 = QtGui.QRadioButton(
+
             u"Compact")
         self.radio_button_residential_layout_2 = QtGui.QRadioButton(
+
             u"Elongated/Complex")
         self.radio_button_residential_layout_1.setChecked(True)
 
         self.picture_layout_residential_1 = QtGui.QLabel()
         self.picture_layout_residential_2 = QtGui.QLabel()
         self.picture_layout_residential_1.setPixmap(QPixmap(
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "compact.png")).scaled(28, 28))
         self.picture_layout_residential_2.setPixmap(QPixmap(
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "elongatedComplex.png")).scaled(28, 28))
         self.layout_residential_layout.addWidget(
@@ -3974,12 +4012,16 @@ class MainUI(QDialog):
             self.picture_layout_residential_2, 2, 1, Qt.AlignRight)
 
         self.radio_button_residential_roof_1 = QtGui.QRadioButton(
+
             u"Flat Roof")
         self.radio_button_residential_roof_2 = QtGui.QRadioButton(
+
             u"Non heated attic")
         self.radio_button_residential_roof_3 = QtGui.QRadioButton(
+
             u"Partly heated attic")
         self.radio_button_residential_roof_4 = QtGui.QRadioButton(
+
             u"Heated attic")
         self.radio_button_residential_roof_1.setChecked(True)
 
@@ -3993,47 +4035,65 @@ class MainUI(QDialog):
         self.picture_roof_residential_3 = QtGui.QLabel()
         self.picture_roof_residential_4 = QtGui.QLabel()
         self.picture_roof_residential_1.setPixmap(QPixmap(
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "flatRoof.png")).scaled(32, 23))
         self.picture_roof_residential_2.setPixmap(QPixmap(
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "nonHeatedAttic.png")).
             scaled(34, 23))
         self.picture_roof_residential_3.setPixmap(QPixmap(
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "partyHeatedAttic.png")).
             scaled(34, 23))
         self.picture_roof_residential_4.setPixmap(QPixmap(
+
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "heatedAttic.png")).scaled(34, 23))
         self.layout_residential_roof.addWidget(
             self.radio_button_residential_roof_1, 1, 0)
+
         self.layout_residential_roof.addWidget(
             self.radio_button_residential_roof_2, 2, 0)
+
         self.layout_residential_roof.addWidget(
             self.radio_button_residential_roof_3, 3, 0)
+
         self.layout_residential_roof.addWidget(
             self.radio_button_residential_roof_4, 4, 0)
+
         self.layout_residential_roof.addWidget(
             self.picture_roof_residential_1, 1, 1, Qt.AlignRight)
+
         self.layout_residential_roof.addWidget(
             self.picture_roof_residential_2, 2, 1, Qt.AlignRight)
+
         self.layout_residential_roof.addWidget(
             self.picture_roof_residential_3, 3, 1, Qt.AlignRight)
+
         self.layout_residential_roof.addWidget(
             self.picture_roof_residential_4, 4, 1, Qt.AlignRight)
+
         self.layout_residential_roof.addWidget(
             self.h_line_roof, 5, 0, 1, 0)
+
         self.layout_residential_roof.addWidget(
             self.check_box_button_roof, 6, 0, 1, 1)
 
         self.radio_button_residential_basement_1 = QtGui.QRadioButton(
+
             u"No cellar")
         self.radio_button_residential_basement_2 = QtGui.QRadioButton(
+
             u"Non heated cellar")
         self.radio_button_residential_basement_3 = QtGui.QRadioButton(
+
             u"Partly heated cellar")
         self.radio_button_residential_basement_4 = QtGui.QRadioButton(
+
             u"Heated cellar")
         self.radio_button_residential_basement_1.setChecked(True)
 
@@ -4042,16 +4102,24 @@ class MainUI(QDialog):
         self.picture_residential_basement_3 = QtGui.QLabel()
         self.picture_residential_basement_4 = QtGui.QLabel()
         self.picture_residential_basement_1.setPixmap(QPixmap(
+
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "noCellar.png")).scaled(32, 28))
         self.picture_residential_basement_2.setPixmap(QPixmap(
+
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "nonHeatedCellar.png")).scaled(32, 28))
         self.picture_residential_basement_3.setPixmap(QPixmap(
+
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "partlyHeatedCellar.png")).
             scaled(32, 28))
         self.picture_residential_basement_4.setPixmap(QPixmap(
+
+
             utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "heatedCellar.png")).scaled(32, 28))
         self.layout_residential_basement.addWidget(
@@ -4072,10 +4140,13 @@ class MainUI(QDialog):
             self.picture_residential_basement_4, 4, 1, Qt.AlignRight)
 
         self.radio_button_residential_architecture_1 = QtGui.QRadioButton(
+
             u"Use default values")
         self.radio_button_residential_architecture_2 = QtGui.QRadioButton(
+
             u"Heavy")
         self.radio_button_residential_architecture_3 = QtGui.QRadioButton(
+
             u"Light")
         self.radio_button_residential_architecture_1.setChecked(True)
 
@@ -4085,10 +4156,10 @@ class MainUI(QDialog):
             self.radio_button_residential_architecture_2, 2, 0)
         self.layout_residential_architecture.addWidget(
             self.radio_button_residential_architecture_3, 3, 0)
-
         self.popup_layout_type_building.addWidget(
             self.group_box_type_building_sidecontrols, 0, 0, 5, 3)
         self.popup_layout_type_building.addWidget(
+
             self.group_box_office_architecture, 5, 0, 2, 3)
         self.type_building_office_layout.addWidget(
             self.group_box_office_layout, 0, 0, 1, 1)
@@ -4105,7 +4176,6 @@ class MainUI(QDialog):
             self.group_box_residential_basement, 3, 0, 1, 1)
         self.popup_layout_type_building.addWidget(
             self.group_box_residential_architecture, 5, 0, 2, 3)
-
         self.popup_layout_type_building.addWidget(
                 self.group_box_type_building_right_office, 0, 3, 7, 1)
         self.popup_layout_type_building.addWidget(
@@ -4113,11 +4183,24 @@ class MainUI(QDialog):
         self.group_box_type_building_right_residential.setVisible(False)
         self.popup_layout_type_building.addWidget(
             self.construct_type_building_button, 7, 0, 1, 4)
-
         self.popup_window_type_building.setLayout(
             self.popup_layout_type_building)
         self.popup_window_type_building.setWindowModality(Qt.ApplicationModal)
         self.popup_window_type_building.show()
+
+    def fill_random_parameters(self):
+        import random
+        self.window_construct_building_name_line_edit.setText("Random")
+        self.window_construct_building_street_line_edit.setText("Random Street")
+        self.window_construct_building_location_line_edit.setText("Random City")
+        value = str(random.randint(1900,2015))
+        self.window_construct_building_year_line_edit.setText(value)
+        value = str(random.randint(1,10))
+        self.window_construct_building_number_of_floors_line_edit.setText(value)
+        value = str(round(random.uniform(2.5,5.5),2))
+        self.window_construct_building_height_of_floors_line_edit.setText(value)
+        value = str(round(random.uniform(100,10000),2))
+        self.window_construct_building_area_line_edit.setText(value)
 
     def generate_zone_ui(self):
         ''' Opens a window to create a new zone.
@@ -4550,7 +4633,7 @@ class MainUI(QDialog):
         
         self.export_window_ui = QtGui.QWizardPage()
         self.export_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        self.export_window_ui.setWindowTitle("Simulation")
+        self.export_window_ui.setWindowTitle("Export")
         self.export_window_ui.setFixedWidth(380)
         self.export_window_ui.setFixedHeight(180)
         self.export_window_ui_layout = QtGui.QGridLayout()
@@ -4564,14 +4647,14 @@ class MainUI(QDialog):
         self.export_button = QtGui.QPushButton(self.export_groupbox)
         self.export_button.setGeometry(QtCore.QRect(5, 20, 305, 25))
         self.export_button.clicked.connect(self.click_export_button)
-        self.export_button.setText("Export template for all buildings")
+        self.export_button.setText("Export model for all buildings")
         self.export_button_one = QtGui.QPushButton(self.export_groupbox)
         self.export_button_one.setGeometry(QtCore.QRect(5, 55, 305, 25))
-        # self.export_button_one.clicked.connect(self.export_groupbox)
-        self.export_button_one.setText("Export template for current building")
+        self.export_button_one.clicked.connect(self.click_export_button)
+        self.export_button_one.setText("Export model for current building")
         self.export_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_template_label.setGeometry(QtCore.QRect(5, 90, 120, 25))
-        self.export_template_label.setText("Export template:")
+        self.export_template_label.setText("Model type:")
         self.export_create_template_combobox = QtGui.QComboBox(
             self.export_groupbox)
         self.export_create_template_combobox.setGeometry(
@@ -4579,20 +4662,30 @@ class MainUI(QDialog):
         self.export_save_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_save_template_label.setGeometry(
             QtCore.QRect(5, 125, 110, 25))
-        self.export_save_template_label.setText("Export save template:")
+        self.export_save_template_label.setText("File path:")
         self.export_save_template_lineedit = QtGui.QLineEdit(
             self.export_groupbox)
         self.export_save_template_lineedit .setGeometry(
             QtCore.QRect(130, 125, 130, 25))
+        if self.file_path == "":
+            self.export_save_template_lineedit.setText(
+                                                 utilis.get_default_path())
+            utilis.create_path(self.export_save_template_lineedit.text())
+            self.file_path = self.export_save_template_lineedit.text()
+        else:
+            self.export_save_template_lineedit.setText(self.file_path)
+            utilis.create_path(self.export_save_template_lineedit.text())
         self.export_save_template_button = QtGui.QPushButton(
             self.export_groupbox)
         self.export_save_template_button.setGeometry(
             QtCore.QRect(265, 125, 80, 25))
         self.export_save_template_button.setText("Browse")
-        # self.export_save_template_button.clicked.connect(
-        #    self.clickBrowseButton)
+        self.export_save_template_button.clicked.connect(
+            self.click_browse_button)
         for template_name in os.listdir(self.create_path_to_template_folder()):
-            self.export_create_template_combobox.addItem(template_name)
+            if(template_name == "AixLib" or template_name == "CitiesRWin" or
+               template_name == "CitiesType"):
+                self.export_create_template_combobox.addItem(template_name)
 
         self.export_window_ui_layout.addWidget(
             self.export_groupbox, 1, 1)

@@ -257,3 +257,7 @@ class Controller():
                     zone.use_conditions.load_use_conditions(zone_type)
                     break
         return project
+
+    @classmethod
+    def click_export_button(self, prj, model_type, path, buildingID=None):
+        prj.export_record(model_type, path, buildingID)
