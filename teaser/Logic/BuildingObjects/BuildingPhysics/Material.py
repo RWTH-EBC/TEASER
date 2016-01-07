@@ -55,7 +55,7 @@ class Material(object):
         self.thermal_conduc = 0.0
         self.heat_capac = 0.0
         self.solar_absorp = 0.0
-        if self.parent.parent != "Window":
+        if type(self.parent.parent).__name__ != "Window":
             self.solar_absorp = 0.7
         self.ir_emissivity = 0.9
         self.transmittance = 0.0
