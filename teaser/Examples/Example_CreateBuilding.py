@@ -21,6 +21,9 @@ from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
+from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import\
+    GroundFloor
+from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599 import UseConditions18599
@@ -37,7 +40,7 @@ def example_create_building():
     
     '''Set some building parameters'''
     
-    bldg.name = "SuperBuilding"
+    bldg.name = "SuperExampleBuilding"
     bldg.street_name = "Awesome Avenue 42"
     bldg.city = "46325 Fantastic Town"
     bldg.year_of_construction = 1988
@@ -107,14 +110,61 @@ def example_create_building():
     win_material.name = "GlasWindow"
     win_material.thermal_conduc = 0.067
     win_material.transmittance = 0.9
+    
+    '''
+    Now the first outer wall and inner walls and window are set. For a full 
+    building we need to specify more
+    '''
+
+    out_wall2 = OuterWall(parent = tz)
+
+    out_wall2.load_type_element(2014,"heavy")
+
+    out_wall2.name = "Outer Wall"
+    out_wall2.area = 14.0
+    out_wall2.tilt = 90.0
+    out_wall2.orientation = 90.0
+
+    out_wall3 = OuterWall(parent = tz)
+    out_wall3.load_type_element(2014,"heavy")
+
+    out_wall3.name = "Outer Wall"
+    out_wall3.area = 14.0
+    out_wall3.tilt = 90.0
+    out_wall3.orientation = 180.0
+
+    out_wall4 = OuterWall(parent = tz)
+    out_wall4.load_type_element(2014,"heavy")
+
+    out_wall4.name = "Outer Wall"
+    out_wall4.area = 14.0
+    out_wall4.tilt = 90.0
+    out_wall4.orientation = 270.0
+
+    out_wall5 = GroundFloor(parent = tz)
+    out_wall5.load_type_element(2014,"heavy")
+
+    out_wall5.name = "Roof"
+    out_wall5.area = 14.0
+    out_wall5.tilt = 0.0
+    out_wall5.orientation = -1
+
+    out_wall6 = Rooftop(parent = tz)
+    out_wall6.load_type_element(2014,"heavy")
+
+    out_wall6.name = "Floor"
+    out_wall6.area = 14.0
+    out_wall6.tilt = 0.0
+    out_wall6.orientation = -2
+
     '''
     We calculate the RC Values according to ebc procedure
     '''
-    prj.calc_all_buildings('ebc' )
+    prj.calc_all_buildings('ebc')
     '''
     Export the Modelica Record
     '''
-    prj.export_record("CitiesRWin")
+    prj.export_record(building_model="MultizoneEquipped", zone_model="ThermalZoneEquipped", corG=False,)
     '''
     Save new TEASER XML
     '''
