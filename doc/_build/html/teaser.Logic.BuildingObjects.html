@@ -142,31 +142,34 @@ Allows for better control of hierarchical structures.
 <tr class="row-odd"><td>internal_id</td>
 <td>(float) random id for the destinction between different buildings</td>
 </tr>
-<tr class="row-even"><td>type_of_building</td>
+<tr class="row-even"><td>year_of_retrofit</td>
+<td>(int) year of last retrofit</td>
+</tr>
+<tr class="row-odd"><td>type_of_building</td>
 <td>(string) Type of a Building (e.g. Building (unspecified), Office etc.)</td>
 </tr>
-<tr class="row-odd"><td>street_name</td>
+<tr class="row-even"><td>street_name</td>
 <td>(string) name of the street the building is located at</td>
 </tr>
-<tr class="row-even"><td>city</td>
+<tr class="row-odd"><td>city</td>
 <td>(string) name of the city the building is located at</td>
 </tr>
-<tr class="row-odd"><td>thermal_zones</td>
+<tr class="row-even"><td>thermal_zones</td>
 <td>(list) list of all containing thermal zones (ThermalZone())</td>
 </tr>
-<tr class="row-even"><td>outer_area</td>
+<tr class="row-odd"><td>outer_area</td>
 <td>(dict) dict with outer wall area and orientation</td>
 </tr>
-<tr class="row-odd"><td>window_area</td>
+<tr class="row-even"><td>window_area</td>
 <td>(dict) dict with window area and orientation</td>
 </tr>
-<tr class="row-even"><td>file_ahu</td>
+<tr class="row-odd"><td>file_ahu</td>
 <td>(string) path of AHU Matlab file for boundary condition</td>
 </tr>
-<tr class="row-odd"><td>file_internal_gains</td>
+<tr class="row-even"><td>file_internal_gains</td>
 <td>(string) path of internal gains Matlab file for boundary condition</td>
 </tr>
-<tr class="row-even"><td>file_set_t</td>
+<tr class="row-odd"><td>file_set_t</td>
 <td>(string) path of temperature Matlab file for boundary condition</td>
 </tr>
 </tbody>
@@ -191,6 +194,13 @@ sums volume of all zones</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.compare_area_dicts">
+<code class="descname">compare_area_dicts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.compare_area_dicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compares the outer area and window area dicts and rewrites them if
+possible</p>
 </dd></dl>
 
 <dl class="method">
@@ -290,7 +300,7 @@ the orientations of the building</p>
 
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.Building.Building.retrofit_building">
-<code class="descname">retrofit_building</code><span class="sig-paren">(</span><em>window_type=None</em>, <em>material=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.retrofit_building" title="Permalink to this definition">¶</a></dt>
+<code class="descname">retrofit_building</code><span class="sig-paren">(</span><em>year_of_retrofit=None</em>, <em>window_type=None</em>, <em>material=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.retrofit_building" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrofits all zones in the building</p>
 <p>Function call for each zone.</p>
 <p>After retrofit, all parameters are calculated directly.</p>
@@ -398,6 +408,11 @@ them according to zone size</p>
 <code class="descname">window_area</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.window_area" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.year_of_retrofit">
+<code class="descname">year_of_retrofit</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.year_of_retrofit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
@@ -456,6 +471,11 @@ Default is None</p>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.area">
+<code class="descname">area</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.area" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.calc_heat_load">
 <code class="descname">calc_heat_load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.calc_heat_load" title="Permalink to this definition">¶</a></dt>
@@ -620,6 +640,11 @@ approach is used.</p>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.volume">
+<code class="descname">volume</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.volume" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.windows">
 <code class="descname">windows</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.windows" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -742,7 +767,7 @@ Default is None</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>
