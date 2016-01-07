@@ -124,7 +124,7 @@ def load_teaser_xml(path, project):
             set_basic_data_teaser(year_of_construction, in_wall_node, floor)
             set_layer_data_teaser(in_wall_node, floor)
 
-    orientation_dict = {0: 0.0, 2: 90.0, 4: 180.0, 6: 270.0, -1:-1, -2:-2}
+    orientation_dict = {0: 0.0, 2: 90.0, 4: 180.0, 6: 270.0, -1: -1, -2: -2}
 
     for zone_count in building.thermal_zones:
 
@@ -134,25 +134,25 @@ def load_teaser_xml(path, project):
             if type_of_outerwall == 0:
                 out_wall = OuterWall(zone_count)
                 set_basic_data_teaser(year_of_construction, out_wall_node,
-                    out_wall, orientation_dict)
+                                      out_wall, orientation_dict)
                 set_layer_data_teaser(out_wall_node, out_wall)
 
             elif type_of_outerwall == 1:
                 window = Window(zone_count)
                 set_basic_data_teaser(year_of_construction, out_wall_node,
-                    window, orientation_dict)
+                                      window, orientation_dict)
                 set_layer_data_teaser(out_wall_node, window)
 
             elif type_of_outerwall == 2:
                 rooftop = Rooftop(zone_count)
                 set_basic_data_teaser(year_of_construction, out_wall_node,
-                    rooftop, orientation_dict)
+                                      rooftop, orientation_dict)
                 set_layer_data_teaser(out_wall_node, rooftop)
 
             elif type_of_outerwall == 3:
                 groundfloor = GroundFloor(zone_count)
                 set_basic_data_teaser(year_of_construction, out_wall_node,
-                    groundfloor, orientation_dict)
+                                      groundfloor, orientation_dict)
                 set_layer_data_teaser(out_wall_node, groundfloor)
 
     for buildingCount in project.list_of_buildings:
@@ -165,7 +165,7 @@ def load_teaser_xml(path, project):
 
 
 def set_basic_data_teaser(year_of_construction, wall_node, element,
-                            orientation_dict=0):
+                          orientation_dict=0):
     '''
     Helper function to set the basic data
 
@@ -225,7 +225,8 @@ def set_basic_data_teaser(year_of_construction, wall_node, element,
                 element.outer_radiation = 5.0
                 element.outer_convection = float(wall_node.find
                                                  ("waermeuebergangAussen")
-                                                 .text) - element.outer_radiation
+                                                 .text) -\
+                                                 element.outer_radiation
 
             if(type(element).__name__ == 'Window'):
                 element.a_conv = float(wall_node.find("a_kon").text)
