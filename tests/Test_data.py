@@ -556,8 +556,21 @@ class Test_teaser(object):
                                                "/new.teaserXML")))
         therm_zone = prj.list_of_buildings[-1].thermal_zones[0]
         assert therm_zone.outer_walls[0].area == 40.0
+        tz_area = sum([tz.area for tz in prj.list_of_buildings[
+            -1].thermal_zones])
+        assert prj.list_of_buildings[-1].net_leased_area == tz_area
         prj.save_project("unitTest")
         prj.set_default()
+
+    # def test_load_old_teaser(self):
+    #     '''test of load_old_teaser'''
+
+    #     prj.load_old_teaser(Utilis.get_full_path(("Examples/ExampleInputFiles"
+    #                                            "/Teaser3/SixZoneOffice.xml")))
+    #     tz_area = sum([tz.area for tz in prj.list_of_buildings[
+    #         -1].thermal_zones])
+    #     assert prj.list_of_buildings[-1].net_leased_area == tz_area
+    #     prj.set_default()
 
     #commented until we find solution for opengis PyXB bindings
     def test_save_citygml(self):
@@ -716,7 +729,9 @@ class Test_teaser(object):
         '''test of fill_outer_wall_area_dict'''
 
         prj.list_of_buildings[-1].fill_outer_area_dict()
-        assert prj.list_of_buildings[-1].outer_area == {0.0: 500.05}
+        outwall_dict_round = {key:round(value,2) for key, value in
+                                prj.list_of_buildings[-1].outer_area.items()}
+        assert outwall_dict_round == {0.0: 500.05}
 
     def test_fill_window_area_dict(self):
         '''test of fill_window_area_dict'''

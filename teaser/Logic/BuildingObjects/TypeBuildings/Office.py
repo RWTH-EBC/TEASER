@@ -135,22 +135,30 @@ class Office(TypeBuilding):
 
     '''
 
-    def __init__(self, parent=None, name=None, year_of_construction=None,
-                 number_of_floors=None, height_of_floors=None,
-                 net_leased_area=None, office_layout=None,
-                 window_layout=None, construction_type=None):
+    def __init__(self,
+                 parent=None,
+                 name=None,
+                 year_of_construction=None,
+                 number_of_floors=None,
+                 height_of_floors=None,
+                 net_leased_area=None,
+                 office_layout=None,
+                 window_layout=None,
+                 construction_type=None):
         '''Constructor of Office
 
         
         '''
-        super(Office, self).__init__(parent, name, year_of_construction,
-                                     number_of_floors, height_of_floors,
+        super(Office, self).__init__(parent, 
+                                     name,
+                                     year_of_construction,
+                                     number_of_floors,
+                                     height_of_floors,
                                      net_leased_area)
 
         self.office_layout = office_layout
         self.window_layout = window_layout
         self.construction_type = construction_type
-
         # Parameters are default values for current
         # calculation following Lichtmess
 
@@ -219,12 +227,13 @@ class Office(TypeBuilding):
         elif self.office_layout == 2:
             self._est_width = 15.0
         elif self.office_layout == 3:
-            self._est_width = math.sqrt((net_leased_area / number_of_floors) * 
-                                        self.gross_factor)
+            self._est_width = math.sqrt((self.net_leased_area / 
+                                         self.number_of_floors) * 
+                                         self.gross_factor)
         else:
             raise ValueError("office_layout value has to be between 0 - 3")
 
-        self._est_length = ((net_leased_area / number_of_floors) * 
+        self._est_length = ((self.net_leased_area / self.number_of_floors) * 
                             self.gross_factor) / self._est_width
 
         self.file_ahu = "Office/AHU_Office.mat"
@@ -239,11 +248,13 @@ class Office(TypeBuilding):
         TEASER requirements.
 
         '''
-
+        #help area for the correct building area setting while using typeBldgs
+        type_bldg_area = self.net_leased_area
+        self.net_leased_area = 0.0
         # create zones with their corresponding area, name and usage
         for key, value in self.zone_area_factors.items():
             zone = ThermalZone(self)
-            zone.area = self.net_leased_area * value[0]
+            zone.area = type_bldg_area * value[0]
             zone.name = key
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1])
@@ -259,12 +270,12 @@ class Office(TypeBuilding):
         # statistical estimation of the facade
 
         self._est_outer_wall_area = self.est_factor_wall_area * \
-                                self.net_leased_area ** self.est_exponent_wall
+                                type_bldg_area ** self.est_exponent_wall
         self._est_win_area = self.est_factor_win_area * \
-                             self.net_leased_area ** self.est_exponent_win
-        self._est_roof_area = (self.net_leased_area / self.number_of_floors) * \
+                             type_bldg_area ** self.est_exponent_win
+        self._est_roof_area = (type_bldg_area / self.number_of_floors) * \
                               self.gross_factor
-        self._est_floor_area = (self.net_leased_area / self.number_of_floors) * \
+        self._est_floor_area = (type_bldg_area / self.number_of_floors) * \
                                self.gross_factor
 
         # manipulation of wall according to facade design 
