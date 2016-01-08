@@ -41,6 +41,7 @@ class Window(BuildingElement):
         t_bt : int
             time constant according to VDI 6007 (default t_bt = 7)
         '''
+        self.set_calc_default()
         number_of_layer, density, thermal_conduc, heat_capac, thickness = \
         self.gather_element_properties()
 
