@@ -158,7 +158,8 @@ class Office(TypeBuilding):
                                      year_of_construction,
                                      number_of_floors,
                                      height_of_floors,
-                                     net_leased_area, with_ahu)
+                                     net_leased_area, 
+                                     with_ahu)
 
         self.office_layout = office_layout
         self.window_layout = window_layout
@@ -248,12 +249,12 @@ class Office(TypeBuilding):
             self.central_ahu.profile_min_relative_humidity = (25*[0.45])
             self.central_ahu.profile_max_relative_humidity = (25*[0.55])
             self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
-
-        self.file_ahu = "./Tables/Office/AHU_Office.mat"
+        """
+        self.file_ahu = "\Tables\asdasdOffice\AHU_Office.mat"
         self.file_internal_gains = "./Tables/Office/InternalGains_Office.mat"
-        self.file_set_t = "./Tables/Office/Tset_Office.mat"
+        self.file_set_t = "\Tables\zOffice\Tset_Office.mat"
         self.file_weather = "./Tables/" + self.parent.weather_file_name
-
+        """
     def generate_office(self):
         '''Generates an office building.
 

@@ -416,9 +416,13 @@ class Building(object):
             pass
 
         if path is None:
-            path = utilis.get_default_path() + self.file_set_t
+            path = utilis.get_default_path()
+            utilis.create_path(path)
+            path = path + self.file_set_t
+            
         else:
-            path =  utilis.create_path(path) + self.file_set_t
+            utilis.create_path(path) 
+            path = path + self.file_set_t
         print(path)
         t_set_heat = [0]
         t_set_cool = [0]
@@ -470,6 +474,7 @@ class Building(object):
             timeline of desired relative v_flow of the AHU simulation (0..1)
 
         '''
+        print(self.file_ahu)
         if time_line is None:
             time_line = self.create_timeline()
         if self.with_ahu is True:
@@ -510,13 +515,14 @@ class Building(object):
             time.append(profile_v_flow[i])
 
         ahu_boundary = np.array(time_line)
-        
+        print(self.file_ahu)
         if self.file_ahu is None:
             self.file_ahu = "\\AHU_Building.mat"
         else:
             pass
-
+        print(path)
         if path is None:
+            print(self.file_ahu)
             path = utilis.get_default_path() + self.file_ahu
         else:
             path = utilis.create_path(path) + self.file_ahu
@@ -560,18 +566,22 @@ class Building(object):
             self.file_internal_gains = "\\InternalGains_Building.mat"
         else:
             pass
-
+        
         for zone_count in self.thermal_zones:
             if time_line is None:
                 duration= len(zone_count.use_conditions.profile_persons) * \
                             3600
                 time_line = self.create_timeline(duration_profile = duration)
-                zone_count.use_conditions.profile_persons.insert(0,0)
-                zone_count.use_conditions.profile_machines.insert(0,0)
-                #zone_count.use_conditions.profile_lighting.insert(0,0)
             
+            zone_count.use_conditions.profile_persons.insert(0,0)
+            zone_count.use_conditions.profile_machines.insert(0,0)
+            zone_count.use_conditions.profile_lighting.insert(0,0)
+            print(len(time_line))
+            print(zone_count.use_conditions.profile_persons)
+            print(zone_count.use_conditions.profile_machines)
+            print(zone_count.use_conditions.profile_lighting)
             ass_error_1 = "time line and input have to have the same length"
-
+            
             assert len(time_line) == len(zone_count.use_conditions.profile_persons), \
                                 (ass_error_1 + ",profile_persons")
             assert len(time_line) == len(zone_count.use_conditions.profile_machines), \

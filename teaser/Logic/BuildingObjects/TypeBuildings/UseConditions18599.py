@@ -452,7 +452,7 @@ class UseConditions18599(UseConditions):
             pass
         else:
             if self.parent is not None:
-                self.parent.parent.file_ahu = ("\\InternalGains_" +
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
         self._profile_persons = value
@@ -468,7 +468,7 @@ class UseConditions18599(UseConditions):
             pass
         else:
             if self.parent is not None:
-                self.parent.parent.file_ahu = ("\\InternalGains_" +
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
         self._profile_machines = value  
@@ -484,7 +484,7 @@ class UseConditions18599(UseConditions):
             pass
         else:
             if self.parent is not None:
-                self.parent.parent.file_ahu = ("\\InternalGains_" +
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
                                            
@@ -511,7 +511,7 @@ class UseConditions18599(UseConditions):
             pass
         else:
             if self.parent is not None:
-                self.parent.parent.file_ahu = ("\\InternalGains_" +
+                self.parent.parent.file_set_t = ("\\TSet" +
                                                self.parent.parent.name +
                                                ".mat")
                                            
@@ -538,7 +538,7 @@ class UseConditions18599(UseConditions):
             pass
         else:
             if self.parent is not None:
-                self.parent.parent.file_ahu = ("\\InternalGains_" +
+                self.parent.parent.file_set_t = ("\\TSet_" +
                                                self.parent.parent.name +
                                                ".mat")
                                            
