@@ -37,16 +37,18 @@ def example_type_building():
                               construction_type = "heavy",
                               dormer = 1)
                               
-    prj.type_bldg_office(name = "Office",
-                              year_of_construction = 1988,
-                              number_of_floors = 2,
-                              height_of_floors = 3.5,
-                              net_leased_area = 100,
-                              office_layout=1,
-                              window_layout=1,
-                              construction_type = "heavy")
+    prj.type_bldg_office(name = "Office1",
+                         year_of_construction = 1988,
+                         number_of_floors = 2,
+                         height_of_floors = 3.5,
+                         net_leased_area = 100,
+                         office_layout=1,
+                         window_layout=1,
+                         construction_type = "heavy")
 
-
+    #prj.list_of_buildings[-1].modelica_set_temp()
+    prj.list_of_buildings[-1].modelica_AHU_boundary()
+    prj.list_of_buildings[-1].modelica_gains_boundary()
     """To export the parameters to a Modelica record, we use the export_record
     function. path = None indicates, that we want to store the records in 
     TEASER'S Output folder""" 
