@@ -648,12 +648,12 @@ class Project(object):
         assert(zone_model) in [None, "ThermalZoneEquipped", "ThermalZone"]
         assert(corG) in [None, True, False]
         if path is None:
-            path = "OutputData\\" + self.name
+            path = utilis.get_default_path() + "\\" + self.name
         else:
             path = path + "\\" + self.name
 
-        utilis.create_path(utilis.get_full_path(path))
-
+        utilis.create_path(path)
+        """
         input_path = utilis.get_full_path("InputData\\BoundariesTypeBuilding")
 
         try:
@@ -663,7 +663,7 @@ class Project(object):
             pass
         else:
             pass
-
+        """
         uses = ['Modelica(version = "3.2.1")',
                 "AixLib(version=\"0.2.1\")"]
 
@@ -705,6 +705,9 @@ class Project(object):
                 utilis.create_path(utilis.get_full_path(bldg_path))
                 utilis.create_path(utilis.get_full_path
                                    (bldg_path + bldg.name + "_DataBase"))
+                bldg.modelica_set_temp(path = path + "\\" + bldg.name)
+                bldg.modelica_AHU_boundary(path = path + "\\" + bldg.name)
+                bldg.modelica_gains_boundary(path = path + "\\" + bldg.name)
 
                 self._help_package(bldg_path, bldg.name)
                 self._help_package_order(bldg_path, [bldg], None,
