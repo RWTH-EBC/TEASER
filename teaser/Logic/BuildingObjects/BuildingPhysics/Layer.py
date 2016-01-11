@@ -79,6 +79,17 @@ class Layer(object):
 
     @thickness.setter
     def thickness(self, value):
+        
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert thickness to float")           
+
         if value is not None:
             self._thickness = float(value)
         if self.material is not None:
