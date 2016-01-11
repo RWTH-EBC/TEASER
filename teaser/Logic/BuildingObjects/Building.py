@@ -412,20 +412,20 @@ class Building(object):
             optional path, when matfile is exported seperately
                 
         '''
-        print(self.file_set_t)
+        
         if self.file_set_t is None:
-            self.file_set_t = "\\Tset_Building.mat"
+            self.file_set_t = "\\Tset_"+self.name+".mat"
         else:
             pass
 
         if path is None:
             path = utilis.get_default_path()
-            utilis.create_path(path)
-            path = path + self.file_set_t
-            
         else:
-            utilis.create_path(path) 
-            path = path + self.file_set_t
+            pass
+        
+        utilis.create_path(path) 
+        path = path + self.file_set_t
+        
         print(path)
         t_set_heat = [0]
         t_set_cool = [0]
@@ -477,7 +477,20 @@ class Building(object):
             timeline of desired relative v_flow of the AHU simulation (0..1)
 
         '''
-        print(self.file_ahu)
+        
+        if self.file_ahu is None:
+            self.file_ahu = "\\AHU_"+self.name+".mat"
+        else:
+            pass
+
+        if path is None:
+            path = utilis.get_default_path()
+        else:
+            pass
+
+        utilis.create_path(path)
+        path = path + self.file_ahu
+
         if time_line is None:
             time_line = self.create_timeline()
         if self.with_ahu is True:
@@ -518,18 +531,7 @@ class Building(object):
             time.append(profile_v_flow[i])
 
         ahu_boundary = np.array(time_line)
-        print(self.file_ahu)
-        if self.file_ahu is None:
-            self.file_ahu = "\\AHU_Building.mat"
-        else:
-            pass
-        print(path)
-        if path is None:
-            print(self.file_ahu)
-            path = utilis.get_default_path() + self.file_ahu
-        else:
-            path = utilis.create_path(path) + self.file_ahu
-        print(path)
+
         scipy.io.savemat(path,
                          mdict={'AHU': ahu_boundary},
                          appendmat = False,
@@ -564,12 +566,21 @@ class Building(object):
         path : str
             optional path, when matfile is exported seperately
         
-        '''     
+        '''
+
         if self.file_internal_gains is None:
-            self.file_internal_gains = "\\InternalGains_Building.mat"
+            self.file_internal_gains = "\\InternalGains_"+self.name+".mat"
+        else:
+            pass
+
+        if path is None:
+            path = utilis.get_default_path()
         else:
             pass
         
+        utilis.create_path(path) 
+        path = path + self.file_internal_gains
+
         for zone_count in self.thermal_zones:
             if time_line is None:
                 duration= len(zone_count.use_conditions.profile_persons) * \
@@ -599,11 +610,6 @@ class Building(object):
                 time.append(zone_count.use_conditions.profile_lighting[i])
 
         internal_boundary = np.array(time_line)
-
-        if path is None:
-            path = utilis.get_default_path() + self.file_internal_gains
-        else:
-            path = utilis.create_path(path) + self.file_internal_gains
 
         scipy.io.savemat(path,
                          mdict={'Internals': internal_boundary},

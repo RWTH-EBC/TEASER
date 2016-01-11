@@ -293,10 +293,11 @@ class Residential(TypeBuilding):
             self.central_ahu.profile_max_relative_humidity = (25*[0.55])
             self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
         
-        self.file_ahu = "\\AHU_Residential.mat"
-        self.file_internal_gains = "\\InternalGains_Residential.mat"
-        self.file_set_t = "\\Tset_Residential.mat"
-        self.file_weather = self.parent.weather_file_name    
+        self.file_ahu = "\\AHU_"+self.name+".mat"
+        self.file_internal_gains = "\\InternalGains_"+self.name+".mat"
+        self.file_set_t = "\\Tset_"+self.name+".mat"
+        self.file_weather = self.parent.weather_file_name	
+
         
     def generate_residential(self):
         '''Generates a residential building.
