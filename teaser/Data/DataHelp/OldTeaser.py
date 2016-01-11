@@ -38,19 +38,21 @@ def load_teaser_xml(path, project):
     tree_teaser = ET.parse(path)
     root = tree_teaser.getroot()
 
-
     for bldg_node in (root.findall("Allgemein")):
         building = Building(project, bldg_node.find("Gebaeude").text,
                             bldg_node.find("Baujahr").text,
                             float(bldg_node.find("Geschosszahl").text),
-                            float(bldg_node.find("Geschosshoehe").text),
-                            float(bldg_node.find("Nettoflaeche").text))
+                            float(bldg_node.find("Geschosshoehe").text))
         building.street_name = bldg_node.find("Strasse").text
         building.city = bldg_node.find("Ort").text
         building.type_of_building = bldg_node.find("Gebaeudetyp").text
         building.height_of_floors = float(bldg_node.find("Geschosshoehe").text)
         building.number_of_floors = float(bldg_node.find("Geschosszahl").text)
-        building.net_leased_area = float(bldg_node.find("Nettoflaeche").text)
+        if not root.findall("Zonen/Zone"):
+            building.net_leased_area = float(bldg_node.find(
+                "Nettoflaeche").text)
+        #parse the year of constuction as variable
+        year_of_construction = bldg_node.find("Baujahr").text
         '''
         building.structureFloorPlan = bldg_node.find("Grundrissstruktur").text
         building.neighbourBuildings = bldg_node.find("Nachbargebaeude").text
@@ -107,22 +109,22 @@ def load_teaser_xml(path, project):
         # Get all elements from "innenwand" and assign them to innerWall class
         for in_wall_node in zone_count.findall("Innenwand"):
             in_wall = InnerWall(thermal_zone)
-            set_basic_data_teaser(in_wall_node, in_wall)
+            set_basic_data_teaser(year_of_construction, in_wall_node, in_wall)
             set_layer_data_teaser(in_wall_node, in_wall)
 
         # Get all elements from "Decke" and assign them to ceiling class
         for in_wall_node in zone_count.findall("Decke"):
             ceiling = Ceiling(thermal_zone)
-            set_basic_data_teaser(in_wall_node, ceiling)
+            set_basic_data_teaser(year_of_construction, in_wall_node, ceiling)
             set_layer_data_teaser(in_wall_node, ceiling)
 
         # Get all elements from "Boden" and assign them to floor class
         for in_wall_node in zone_count.findall("Boden"):
             floor = Floor(thermal_zone)
-            set_basic_data_teaser(in_wall_node, floor)
+            set_basic_data_teaser(year_of_construction, in_wall_node, floor)
             set_layer_data_teaser(in_wall_node, floor)
 
-    orientation_dict = {0: 0.0, 2: 90.0, 4: 180.0, 6: 270.0, -1:-1, -2:-2}
+    orientation_dict = {0: 0.0, 2: 90.0, 4: 180.0, 6: 270.0, -1: -1, -2: -2}
 
     for zone_count in building.thermal_zones:
 
@@ -131,24 +133,26 @@ def load_teaser_xml(path, project):
 
             if type_of_outerwall == 0:
                 out_wall = OuterWall(zone_count)
-                set_basic_data_teaser(out_wall_node, out_wall,
-                                      orientation_dict)
+                set_basic_data_teaser(year_of_construction, out_wall_node,
+                                      out_wall, orientation_dict)
                 set_layer_data_teaser(out_wall_node, out_wall)
 
             elif type_of_outerwall == 1:
                 window = Window(zone_count)
-                set_basic_data_teaser(out_wall_node, window, orientation_dict)
+                set_basic_data_teaser(year_of_construction, out_wall_node,
+                                      window, orientation_dict)
                 set_layer_data_teaser(out_wall_node, window)
 
             elif type_of_outerwall == 2:
                 rooftop = Rooftop(zone_count)
-                set_basic_data_teaser(out_wall_node, rooftop, orientation_dict)
+                set_basic_data_teaser(year_of_construction, out_wall_node,
+                                      rooftop, orientation_dict)
                 set_layer_data_teaser(out_wall_node, rooftop)
 
             elif type_of_outerwall == 3:
                 groundfloor = GroundFloor(zone_count)
-                set_basic_data_teaser(out_wall_node, groundfloor,
-                                      orientation_dict)
+                set_basic_data_teaser(year_of_construction, out_wall_node,
+                                      groundfloor, orientation_dict)
                 set_layer_data_teaser(out_wall_node, groundfloor)
 
     for buildingCount in project.list_of_buildings:
@@ -160,7 +164,8 @@ def load_teaser_xml(path, project):
             buildingCount.set_window_area(value, key)
 
 
-def set_basic_data_teaser(wall_node, element, orientation_dict=0):
+def set_basic_data_teaser(year_of_construction, wall_node, element,
+                          orientation_dict=0):
     '''
     Helper function to set the basic data
 
@@ -194,7 +199,7 @@ def set_basic_data_teaser(wall_node, element, orientation_dict=0):
             element.orientation = orientation_dict[float(wall_node.find
                                                          ("orientierung").text)
                                                    ]
-
+            element.area = float(wall_node.find("flaeche").text)
             if (type(element).__name__ == 'Rooftop'or
                type(element).__name__ == 'GroundFloor'):
                 element.tilt = 0.0
@@ -202,7 +207,13 @@ def set_basic_data_teaser(wall_node, element, orientation_dict=0):
                 element.tilt = 90.0
 
             element.construction_type = wall_node.find("bauart").text
-            element.year_of_construction = wall_node.find("baualter").text
+
+            # this leads to an error if baualter is a baualtersklasse
+            # e.g. (1956-1965), so its commented which should have no effect
+            # for using TEASER4 with old xmls
+            # element.year_of_construction = wall_node.find("baualter").text
+            element.year_of_construction = year_of_construction
+
             # this is a default value from old teaser
             element.inner_radiation = 5.0
             element.inner_convection = float(wall_node.find
@@ -214,7 +225,8 @@ def set_basic_data_teaser(wall_node, element, orientation_dict=0):
                 element.outer_radiation = 5.0
                 element.outer_convection = float(wall_node.find
                                                  ("waermeuebergangAussen")
-                                                 .text) - element.outer_radiation
+                                                 .text) -\
+                                                 element.outer_radiation
 
             if(type(element).__name__ == 'Window'):
                 element.a_conv = float(wall_node.find("a_kon").text)
@@ -227,7 +239,13 @@ def set_basic_data_teaser(wall_node, element, orientation_dict=0):
 
             element.id = wall_node.find("typ").text
             element.construction_type = wall_node.find("bauart").text
-            element.year_of_construction = (wall_node.find("baualter").text)
+
+            # this leads to an error if baualter is a baualtersklasse
+            # e.g. (1956-1965), so its commented which should have no effect
+            # for using TEASER4 with old xmls
+            # element.year_of_construction = wall_node.find("baualter").text
+            element.year_of_construction = year_of_construction
+
             element.area = float(wall_node.find("flaeche").text)
             element.inner_radiation = 5.0
             element.inner_convection = float(wall_node.find
