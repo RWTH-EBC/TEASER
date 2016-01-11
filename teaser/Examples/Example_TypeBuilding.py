@@ -29,7 +29,7 @@ def example_type_building():
                               number_of_floors = 2,
                               height_of_floors = 3.5,
                               net_leased_area = 100,
-                              with_ahu=False,
+                              with_ahu=True,
                               residential_layout = 1,
                               neighbour_buildings = 1,
                               attic = 1,
@@ -44,17 +44,19 @@ def example_type_building():
                          net_leased_area = 100,
                          office_layout=1,
                          window_layout=1,
+                         with_ahu=True,
                          construction_type = "heavy")
 
-    #prj.list_of_buildings[-1].modelica_set_temp()
-    prj.list_of_buildings[-1].modelica_AHU_boundary()
-    prj.list_of_buildings[-1].modelica_gains_boundary()
+
     """To export the parameters to a Modelica record, we use the export_record
     function. path = None indicates, that we want to store the records in \
     TEASER'S Output folder"""
 
-    prj.export_record(model_type='AixLibMultizone',
-                      path=None)
+    prj.export_record(building_model="MultizoneEquipped",
+                      zone_model="ThermalZoneEquipped",
+                      corG=True,
+                      internal_id=None,
+                      path="D:\\unsoirt")
 
     """Now we retrofit all buildings in the year 2015 (EnEV2014). \
     That includes new insulation layer and new windows. The name is changed \
@@ -62,8 +64,11 @@ def example_type_building():
 
     prj.name = "Project_Retrofit"
     prj.retrofit_all_buildings(2015)
-    prj.export_record(model_type='AixLibMultizone',
-                      path=None)
+    prj.export_record(building_model="MultizoneEquipped",
+                      zone_model="ThermalZoneEquipped",
+                      corG=True,
+                      internal_id=None,
+                      path="D:\\unsoirt")
 
     """To load our retrofitted building in TEASER, we can save to project \
     into a XML file"""
