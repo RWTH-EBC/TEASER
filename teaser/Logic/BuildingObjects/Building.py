@@ -110,6 +110,9 @@ class Building(object):
         self.volume = 0
         self.sum_heating_load = 0
         self.sum_cooling_load = 0
+        #additional simulation parameters
+        self.longitude = None
+        self.latitude = None
 
         self.file_ahu = None
         self.file_internal_gains = None

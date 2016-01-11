@@ -1,0 +1,28 @@
+record ${bldg.name}_base "${bldg.name}_base"
+  extends AixLib.DataBase.Buildings.BuildingBaseRecord(
+    numZones = ${get_n(bldg.thermal_zones)},
+    zoneSetup = {
+		%for i in bldg.thermal_zones:
+		%if i == bldg.thermal_zones[-1]:
+		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name}()
+		%else:
+		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name}(),
+		%endif
+		%endfor
+		},
+    Vair = ${bldg.volume} ,
+    BuildingArea = ${bldg.net_leased_area});
+end ${bldg.name}_base;
+
+##get n
+<%def name="get_n(list)", filter="trim">
+	<%
+	n=0
+	for element in list:
+		if type(element).__name__ == "ThermalZone":
+			n += 1
+		else:
+			pass
+	return n
+	%>
+</%def>
