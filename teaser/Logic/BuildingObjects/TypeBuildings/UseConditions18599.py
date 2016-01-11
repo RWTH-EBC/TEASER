@@ -496,7 +496,7 @@ class UseConditions18599(UseConditions):
         if self._profile_persons is None:
             pass
         else:
-            if self.parent is not None:
+            if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("\\InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
@@ -512,7 +512,7 @@ class UseConditions18599(UseConditions):
         if self._profile_machines is None:
             pass
         else:
-            if self.parent is not None:
+            if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("\\InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
@@ -528,7 +528,7 @@ class UseConditions18599(UseConditions):
         if self._profile_lighting is None:
             pass
         else:
-            if self.parent is not None:
+            if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("\\InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
@@ -555,7 +555,7 @@ class UseConditions18599(UseConditions):
         if self._set_temp_heat is None:
             pass
         else:
-            if self.parent is not None:
+            if self.parent.parent.file_set_t is None:
                 self.parent.parent.file_set_t = ("\\TSet" +
                                                self.parent.parent.name +
                                                ".mat")
@@ -582,7 +582,7 @@ class UseConditions18599(UseConditions):
         if self._set_temp_cool is None:
             pass
         else:
-            if self.parent is not None:
+            if self.parent.parent.file_set_t is None:
                 self.parent.parent.file_set_t = ("\\TSet_" +
                                                self.parent.parent.name +
                                                ".mat")
@@ -650,16 +650,24 @@ class UseConditions18599(UseConditions):
     def rel_humidity(self, value):
 
         if isinstance(value, float):
-            self._rel_humidity = value
+            pass
         elif value is None:
-            self._rel_humidity = value
+            pass
         else:
             try:
                 value = float(value)
-                self._rel_humidity = value
             except:
                 raise ValueError("Can't convert humidity to float")
-                
+
+        if self._rel_humidity is None:
+            pass
+        else:
+            if self.parent.parent.file_ahu is None:
+                self.parent.parent.file_ahu = ("\\AHU_" +
+                                               self.parent.parent.name +
+                                               ".mat")                 
+        self._rel_humidity = value  
+
     @property
     def min_air_exchange(self):
         return self._min_air_exchange
@@ -668,15 +676,23 @@ class UseConditions18599(UseConditions):
     def min_air_exchange(self, value):
 
         if isinstance(value, float):
-            self._min_air_exchange = value
+            pass
         elif value is None:
-            self._min_air_exchange = value
+            pass
         else:
             try:
                 value = float(value)
-                self._min_air_exchange = value
             except:
-                raise ValueError("Can't convert air exchange to float")
+                raise ValueError("Can't convert min_air_exchange to float")
+
+        if self._min_air_exchange is None:
+            pass
+        else:
+            if self.parent.parent.file_ahu is None:
+                self.parent.parent.file_ahu = ("\\AHU_" +
+                                               self.parent.parent.name +
+                                               ".mat")                 
+        self._min_air_exchange = value
                 
     @property
     def min_ahu(self):
@@ -686,16 +702,24 @@ class UseConditions18599(UseConditions):
     def min_ahu(self, value):
 
         if isinstance(value, float):
-            self._min_ahu = value
+            pass
         elif value is None:
-            self._min_ahu = value
+            pass
         else:
             try:
                 value = float(value)
-                self._min_ahu = value
             except:
-                raise ValueError("Can't convert AHU airflow to float")
-                
+                raise ValueError("Can't convert AHU airflow to float") 
+
+        if self._min_ahu is None:
+            pass
+        else:
+            if self.parent.parent.file_ahu is None:
+                self.parent.parent.file_ahu = ("\\AHU_" +
+                                               self.parent.parent.name +
+                                               ".mat")                 
+        self._min_ahu = value
+              
     @property
     def max_ahu(self):
         return self._max_ahu
@@ -704,15 +728,23 @@ class UseConditions18599(UseConditions):
     def max_ahu(self, value):
 
         if isinstance(value, float):
-            self._max_ahu = value
+            pass
         elif value is None:
-            self._max_ahu = value
+            pass
         else:
             try:
                 value = float(value)
-                self._max_ahu = value
             except:
-                raise ValueError("Can't convert AHU airflow to float")
+                raise ValueError("Can't convert AHU airflow to float") 
+
+        if self._max_ahu is None:
+            pass
+        else:
+            if self.parent.parent.file_ahu is None:
+                self.parent.parent.file_ahu = ("\\AHU_" +
+                                               self.parent.parent.name +
+                                               ".mat")                 
+        self._max_ahu = value
                 
     @property
     def persons(self):
@@ -722,16 +754,24 @@ class UseConditions18599(UseConditions):
     def persons(self, value):
 
         if isinstance(value, float):
-            self._persons = value
+            pass
         elif value is None:
-            self._persons = value
+            pass
         else:
             try:
                 value = float(value)
-                self._persons = value
             except:
                 raise ValueError("Can't convert persons to float")
-                
+
+        if self._persons is None:
+            pass
+        else:
+            if self.parent.parent.file_internal_gains is None:
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")           
+        self._persons = value
+                        
     @property
     def machines(self):
         return self._machines
@@ -740,15 +780,23 @@ class UseConditions18599(UseConditions):
     def machines(self, value):
 
         if isinstance(value, float):
-            self._machines = value
+            pass
         elif value is None:
-            self._machines = value
+            pass
         else:
             try:
                 value = float(value)
-                self._machines = value
             except:
                 raise ValueError("Can't convert machines to float")
+
+        if self._machines is None:
+            pass
+        else:
+            if self.parent.parent.file_internal_gains is None:
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")           
+        self._machines = value
                 
     @property
     def lighting_power(self):
@@ -758,12 +806,20 @@ class UseConditions18599(UseConditions):
     def lighting_power(self, value):
 
         if isinstance(value, float):
-            self._lighting_power = value
+            pass
         elif value is None:
-            self._lighting_power = value
+            pass
         else:
             try:
                 value = float(value)
-                self._lighting_power = value
             except:
-                raise ValueError("Can't convert lighting power to float")
+                raise ValueError("Can't convert lighting_power to float")
+
+        if self._lighting_power is None:
+            pass
+        else:
+            if self.parent.parent.file_internal_gains is None:
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")           
+        self._lighting_power = value
