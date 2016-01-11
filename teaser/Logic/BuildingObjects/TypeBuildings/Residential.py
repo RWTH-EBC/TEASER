@@ -273,10 +273,10 @@ class Residential(TypeBuilding):
         elif self.dormer == 1:
             self._est_factor_dormer = 1.3
 
-        self.file_ahu = "./Tables/Residential/AHU_Residential.mat"
-        self.file_internal_gains = "./Tables/Residential/InternalGains_Residential.mat"
-        self.file_set_t = "./Tables/Residential/Tset_Residential.mat"
-        self.file_weather = "./Tables/" + self.parent.weather_file_name
+        self.file_ahu = "Residential/AHU_Residential.mat"
+        self.file_internal_gains = "Residential/InternalGains_Residential.mat"
+        self.file_set_t = "Residential/Tset_Residential.mat"
+        self.file_weather = self.parent.weather_file_name
 
     def generate_residential(self):
         '''Generates a residential building.
