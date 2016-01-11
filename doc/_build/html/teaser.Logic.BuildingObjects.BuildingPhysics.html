@@ -346,6 +346,16 @@ a new file is created.</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.tilt">
+<code class="descname">tilt</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.tilt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.year_of_construction">
+<code class="descname">year_of_construction</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.year_of_construction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.year_of_retrofit">
 <code class="descname">year_of_retrofit</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.year_of_retrofit" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -510,6 +520,21 @@ Default is None</p>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.density">
+<code class="descname">density</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.density" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.heat_capac">
+<code class="descname">heat_capac</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.heat_capac" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.ir_emissivity">
+<code class="descname">ir_emissivity</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.ir_emissivity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.load_material_template">
 <code class="descname">load_material_template</code><span class="sig-paren">(</span><em>mat_name</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.load_material_template" title="Permalink to this definition">¶</a></dt>
@@ -542,8 +567,18 @@ Default is None</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.solar_absorp">
+<code class="descname">solar_absorp</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.solar_absorp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.thermal_conduc">
 <code class="descname">thermal_conduc</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.thermal_conduc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.transmittance">
+<code class="descname">transmittance</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.transmittance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -660,8 +695,8 @@ coefficients for outer and inner heat transfer are used.</p>
 <p class="rubric">Attributes</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="9%" />
-<col width="91%" />
+<col width="17%" />
+<col width="83%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td>g_value</td>
@@ -670,12 +705,20 @@ coefficients for outer and inner heat transfer are used.</p>
 <tr class="row-even"><td>a_conv</td>
 <td>(float) convective coefficient of inner side of wall according to VDI 6007</td>
 </tr>
-<tr class="row-odd"><td>shading</td>
-<td>(Shading()) instance of shading type</td>
+<tr class="row-odd"><td>shading_g_total</td>
+<td>(float) shaded g value of the window</td>
+</tr>
+<tr class="row-even"><td>shading_max_irr</td>
+<td>(float) threshold for automatic shading</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.a_conv">
+<code class="descname">a_conv</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.a_conv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.calc_equivalent_res">
 <code class="descname">calc_equivalent_res</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.calc_equivalent_res" title="Permalink to this definition">¶</a></dt>
@@ -695,6 +738,11 @@ coefficients for outer and inner heat transfer are used.</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.g_value">
+<code class="descname">g_value</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.g_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.replace_window">
@@ -719,6 +767,16 @@ insultaed one.</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.shading_g_total">
+<code class="descname">shading_g_total</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.shading_g_total" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.shading_max_irr">
+<code class="descname">shading_max_irr</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.shading_max_irr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

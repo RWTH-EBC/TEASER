@@ -4,16 +4,17 @@ TypeBuildings package
 **Description**
 
 The TEASER4 typebuilding package contains different modules for the creation 
-and parametrisation of typebuildings. In general these typebuildings are use to 
+and parametrisation of typebuildings. In TEASER4 these typebuildings are used to 
 create usable dataset of buildings out of limited building information. For 
 this, the methods are based on the following principles according to Lichtmess 
-(fixme):
+(fixme Lichtme.2010):
 
 #. The building envelopes are based on the building net floor area (net leased area in the following)
 
 #. The building envelopes can automatically assigned to the thermal zones
 
-In addition (fixme) it is necessary to use statistic data for the following Points:
+These principles are mainly used to handle the building envelopes of typebuildings. 
+In addition it is necessary to use statistic data for the following Points:
 
 * number of thermal zones
 
@@ -23,11 +24,30 @@ In addition (fixme) it is necessary to use statistic data for the following Poin
 
 * properties of the used construction materials
 
+With the help of this statistic data above it is possible to create 
+the typebuildings with the use of only five parameters:
+
+* type of building
+
+* net leased area
+
+* year of construction
+
+* number of floors
+
+* height of floors
+
 The exact number of zones and their zone area are show in the description of 
-each typebuilding. The building envelopes are based on the BMVBS where 
-different administrative buildings were investigated. 
-The typebuildings themselfes are divided 
-into different classes according to the BWZK (fixme)
+each typebuilding. The connection between the building envelope area and the 
+building net leased area are based on the BMVBS where different administrative 
+buildings were investigated. 
+In addition to the basic connection between the net leased area and the envelope 
+area it is possible to improve the building data with more information about the 
+structure of the building based on a method from Kaag. 
+The used information for the buildings physics are based on typical wall 
+structures based on the year of construction. This data is provided by the 
+BMVBS 2009 and is improved by data of the materials from DIN 12524 und 
+DIN 4108-4 [DIN, 2000, 2013].
 
 Office module
 --------------------------------------------------------
