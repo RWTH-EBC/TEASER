@@ -116,6 +116,10 @@ class BuildingElement(object):
 
         self._layer = []
 
+        #values for the AixLib Export
+        self.emissivity = 0.0   # Should we use the ir_emissivity here?
+                                # Better use in the thermal zone i think
+
         # Calculated values for each Building Element
         self.r1 = 0.0
         self.r2 = 0.0
@@ -339,8 +343,10 @@ class BuildingElement(object):
         material.density = pyxb_class.Material.density
         material.thermal_conduc = pyxb_class.Material.thermal_conduc
         material.heat_capac = pyxb_class.Material.heat_capac
-        material.solar_absorp = pyxb_class.Material.solar_absorp
-        material.ir_emissivity = pyxb_class.Material.ir_emissivity
+        if pyxb_class.Material.solar_absorp is not None:
+            material.solar_absorp = pyxb_class.Material.solar_absorp
+        if pyxb_class.Material.ir_emissivity is not None:
+            material.ir_emissivity = pyxb_class.Material.ir_emissivity
 
     def set_basic_data(self, pyxb_class):
         '''Helper function for load_type_element to set the layer data.

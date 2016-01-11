@@ -83,6 +83,9 @@ class ThermalZone(object):
         self.typical_width = None
         self._t_inside = None
         self._t_outside = None
+        self.density_air = 1.19     # only export for now
+        self.heat_capac_air = 1007  # only export for now
+        self.t_ground = 286.15  # groundtemperature of for the simulation
 
         # Calculated values for InnerWall for each Zone
         self.r1_iw = 0.0
@@ -94,7 +97,7 @@ class ThermalZone(object):
         self.area_iw = 0.0
         self.alpha_conv_iw = 0.0
         self.alpha_rad_iw = 0.0
-        self.alpa_comb_iw = 0.0
+        self.alpha_comb_iw = 0.0
 
         # Calculated values for OuterWall for each Zone
         self.r1_ow = 0.0
@@ -111,6 +114,7 @@ class ThermalZone(object):
         self.r_rad_outer_ow = 0.0
         self.r_comb_outer_ow = 0.0
         self.area_ow = 0.0
+        self.alpha_comb_inner_ow = 0.0
         self.alpha_conv_inner_ow = 0.0
         self.alpha_comb_outer_ow = 0.0
         self.alpha_conv_outer_ow = 0.0
@@ -403,6 +407,7 @@ class ThermalZone(object):
         self.r_comb_outer_ow = 1/sum_r_comb_outer_ow
 
         self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
+        self.alpha_comb_inner_ow = (1/(self.r_comb_inner_ow*self.area_ow))
         self.alpha_conv_outer_ow = (1/(self.r_conv_outer_ow*sum_area_ow_rt))
         self.alpha_comb_outer_ow = (1/(self.r_comb_outer_ow*sum_area_ow_rt))
 
@@ -677,7 +682,7 @@ class ThermalZone(object):
         self.area_iw = 0.0
         self.alpha_conv_iw = 0.0
         self.alpha_rad_iw = 0.0
-        self.alpa_comb_iw = 0.0
+        self.alpha_comb_iw = 0.0
 
         # Calculated values for OuterWall for each Zone
         self.r1_ow = 0.0
@@ -694,6 +699,7 @@ class ThermalZone(object):
         self.r_rad_outer_ow = 0.0
         self.r_comb_outer_ow = 0.0
         self.area_ow = 0.0
+        self.alpha_comb_inner_ow = 0.0
         self.alpha_conv_inner_ow = 0.0
         self.alpha_comb_outer_ow = 0.0
         self.alpha_conv_outer_ow = 0.0

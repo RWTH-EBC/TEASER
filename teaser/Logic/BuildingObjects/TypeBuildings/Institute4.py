@@ -45,8 +45,8 @@ class Institute4(Office):
              "Floor": [0.225, "Traffic area"],
              "Laboratory": [0.2, "Laboratory"]}
 
-        self.file_ahu = "./Tables/Institute4/AHU_Institute4.mat"
-        self.file_internal_gains = "./Tables/Institute4/InternalGains"
+        self.file_ahu = "Institute4/AHU_Institute4.mat"
+        self.file_internal_gains = "Institute4/InternalGains"
         "_Institute4.mat"
-        self.file_set_t = "./Tables/Institute4/Tset_Institute4.mat"
-        self.file_weather = "./Tables/"+self.parent.weather_file_name
+        self.file_set_t = "Institute4/Tset_Institute4.mat"
+        self.file_weather = self.parent.weather_file_name
