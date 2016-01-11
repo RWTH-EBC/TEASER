@@ -422,17 +422,16 @@ class Building(object):
             path = utilis.get_default_path()
         else:
             pass
-        
+
         utilis.create_path(path) 
         path = path + self.file_set_t
-        
-        print(path)
+
+
         t_set_heat = [0]
         t_set_cool = [0]
         for zone_count in self.thermal_zones:
             t_set_heat.append(zone_count.use_conditions.set_temp_heat)
             t_set_cool.append(zone_count.use_conditions.set_temp_cool)
-            
 
         scipy.io.savemat(path,
                          mdict={'Tset': [t_set_heat,t_set_cool]},
@@ -590,10 +589,7 @@ class Building(object):
             zone_count.use_conditions.profile_persons.insert(0,0)
             zone_count.use_conditions.profile_machines.insert(0,0)
             zone_count.use_conditions.profile_lighting.insert(0,0)
-            print(len(time_line))
-            print(zone_count.use_conditions.profile_persons)
-            print(zone_count.use_conditions.profile_machines)
-            print(zone_count.use_conditions.profile_lighting)
+
             ass_error_1 = "time line and input have to have the same length"
             
             assert len(time_line) == len(zone_count.use_conditions.profile_persons), \
