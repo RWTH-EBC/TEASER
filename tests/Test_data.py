@@ -562,15 +562,15 @@ class Test_teaser(object):
         prj.save_project("unitTest")
         prj.set_default()
 
-    # def test_load_old_teaser(self):
-    #     '''test of load_old_teaser'''
+    def test_load_old_teaser(self):
+        '''test of load_old_teaser'''
 
-    #     prj.load_old_teaser(Utilis.get_full_path(("Examples/ExampleInputFiles"
-    #                                            "/Teaser3/SixZoneOffice.xml")))
-    #     tz_area = sum([tz.area for tz in prj.list_of_buildings[
-    #         -1].thermal_zones])
-    #     assert prj.list_of_buildings[-1].net_leased_area == tz_area
-    #     prj.set_default()
+        prj.load_old_teaser(Utilis.get_full_path(("Examples/ExampleInputFiles"
+                                               "/Teaser3/SixZoneOffice.xml")))
+        tz_area = sum([tz.area for tz in prj.list_of_buildings[
+            -1].thermal_zones])
+        assert prj.list_of_buildings[-1].net_leased_area == tz_area
+        prj.set_default()
 
     #commented until we find solution for opengis PyXB bindings
     def test_save_citygml(self):
