@@ -422,7 +422,7 @@ class Building(object):
             path = utilis.get_default_path()
         else:
             pass
-        print(self.file_set_t)
+        
         utilis.create_path(path) 
         path = path + self.file_set_t
 
@@ -485,7 +485,7 @@ class Building(object):
             path = utilis.get_default_path()
         else:
             pass
-        print(self.file_ahu)
+        
         utilis.create_path(path)
         path = path + self.file_ahu
         
@@ -529,7 +529,7 @@ class Building(object):
             time.append(profile_v_flow[i])
 
         ahu_boundary = np.array(time_line)
-        print(path)
+        
         scipy.io.savemat(path,
                          mdict={'AHU': ahu_boundary},
                          appendmat = False,
