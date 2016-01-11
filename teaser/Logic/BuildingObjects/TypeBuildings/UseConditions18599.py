@@ -250,11 +250,11 @@ class UseConditions18599(UseConditions):
         self._persons = 0
         self.activity_type_persons = 3  # physical activity
         self.ratio_conv_rad_persons = 0.5
-        self.profile_persons = []
+        self._profile_persons = []
         self._machines = 0.0
         self.activity_type_machines = 2
         self.ratio_conv_rad_machines = 0.5
-        self.profile_machines = []
+        self._profile_machines = []
         self._lighting_power = 0.0
         self._profile_lighting = None
 

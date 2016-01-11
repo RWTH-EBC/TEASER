@@ -285,7 +285,7 @@ class Residential(TypeBuilding):
         elif self.dormer == 1:
             self._est_factor_dormer = 1.3
 
-		if self.with_ahu is True:
+        if self.with_ahu is True:
             self.central_ahu.profile_temperature = (7*[293.15] +
                                                     12*[295.15] +
                                                     6*[293.15])
@@ -296,7 +296,9 @@ class Residential(TypeBuilding):
         self.file_ahu = "\\AHU_Residential.mat"
         self.file_internal_gains = "\\InternalGains_Residential.mat"
         self.file_set_t = "\\Tset_Residential.mat"
-        self.file_weather = self.parent.weather_file_name    def generate_residential(self):
+        self.file_weather = self.parent.weather_file_name    
+        
+    def generate_residential(self):
         '''Generates a residential building.
 
         With given values, this class generates a type residential

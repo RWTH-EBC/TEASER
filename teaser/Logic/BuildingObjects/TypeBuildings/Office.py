@@ -244,7 +244,9 @@ class Office(TypeBuilding):
         self.file_ahu = "./Tables/Office/AHU_Office.mat"
         self.file_internal_gains = "./Tables/Office/InternalGains_Office.mat"
         self.file_set_t = "./Tables/Office/Tset_Office.mat"
-        self.file_weather = "./Tables/" + self.parent.weather_file_name		if self.with_ahu is True:
+        self.file_weather = "./Tables/" + self.parent.weather_file_name		
+        
+        if self.with_ahu is True:
             self.central_ahu.profile_temperature = (7*[293.15] +
                                                     12*[295.15] +
                                                     6*[293.15])
