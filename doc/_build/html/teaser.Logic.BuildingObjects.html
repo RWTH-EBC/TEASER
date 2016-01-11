@@ -289,6 +289,26 @@ the orientations of the building</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.height_of_floors">
+<code class="descname">height_of_floors</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.height_of_floors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.name">
+<code class="descname">name</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.net_leased_area">
+<code class="descname">net_leased_area</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.net_leased_area" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.number_of_floors">
+<code class="descname">number_of_floors</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.number_of_floors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.Building.Building.outer_area">
 <code class="descname">outer_area</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.outer_area" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -409,6 +429,11 @@ them according to zone size</p>
 <dd></dd></dl>
 
 <dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.year_of_construction">
+<code class="descname">year_of_construction</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.year_of_construction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.Building.Building.year_of_retrofit">
 <code class="descname">year_of_retrofit</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.year_of_retrofit" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -440,8 +465,8 @@ Default is None</p>
 <p class="rubric">Attributes</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="20%" />
-<col width="80%" />
+<col width="13%" />
+<col width="87%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td>internal_id</td>
@@ -462,11 +487,20 @@ Default is None</p>
 <tr class="row-even"><td>outer_walls</td>
 <td>(list) List with all outer walls including ground floor and rooftop</td>
 </tr>
-<tr class="row-odd"><td>inner_walls</td>
+<tr class="row-odd"><td>use_conditions</td>
+<td>(instance of UseConditions()) Class of UseConditions with all relevant information for the usage of the thermal zone</td>
+</tr>
+<tr class="row-even"><td>inner_walls</td>
 <td>(list) List with all inner walls including  floor and ceiling</td>
 </tr>
-<tr class="row-even"><td>typical_length</td>
+<tr class="row-odd"><td>typical_length</td>
 <td>(list) List with all inner walls including  floor and ceiling</td>
+</tr>
+<tr class="row-even"><td>t_inside</td>
+<td>(float) normative indoor temperature for static heat load calculation. The input of t_inside is ALWAYS in Kelvin</td>
+</tr>
+<tr class="row-odd"><td>t_outside</td>
+<td>(float) normative outdoor temperature for static heat load calculation. The input of t_inside is ALWAYS in Kelvin</td>
 </tr>
 </tbody>
 </table>
@@ -567,6 +601,18 @@ of heat transfer for walls, windows. Calculates the weighted g-Value
 for windows.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes the actual thermal zone and refreshs the thermal zones of
+the building</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.infiltration_rate">
+<code class="descname">infiltration_rate</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.infiltration_rate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.inner_walls">
 <code class="descname">inner_walls</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.inner_walls" title="Permalink to this definition">¶</a></dt>
@@ -633,6 +679,16 @@ approach is used.</p>
 <p>Sets the volume of a zone according area and height of floors
 (building attribute).</p>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.t_inside">
+<code class="descname">t_inside</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.t_inside" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.t_outside">
+<code class="descname">t_outside</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.t_outside" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.use_conditions">

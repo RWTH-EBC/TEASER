@@ -60,27 +60,42 @@
 <h1>TypeBuildings package<a class="headerlink" href="#typebuildings-package" title="Permalink to this headline">¶</a></h1>
 <p><strong>Description</strong></p>
 <p>The TEASER4 typebuilding package contains different modules for the creation
-and parametrisation of typebuildings. In general these typebuildings are use to
+and parametrisation of typebuildings. In TEASER4 these typebuildings are used to
 create usable dataset of buildings out of limited building information. For
 this, the methods are based on the following principles according to Lichtmess
-(fixme):</p>
+(fixme Lichtme.2010):</p>
 <ol class="arabic simple">
 <li>The building envelopes are based on the building net floor area (net leased area in the following)</li>
 <li>The building envelopes can automatically assigned to the thermal zones</li>
 </ol>
-<p>In addition (fixme) it is necessary to use statistic data for the following Points:</p>
+<p>These principles are mainly used to handle the building envelopes of typebuildings.
+In addition it is necessary to use statistic data for the following Points:</p>
 <ul class="simple">
-<li>ratio of building envelopes to net leased area</li>
 <li>number of thermal zones</li>
 <li>division of the net leased area into the zone area</li>
 <li>wall constructions</li>
 <li>properties of the used construction materials</li>
 </ul>
+<p>With the help of this statistic data above it is possible to create
+the typebuildings with the use of only five parameters:</p>
+<ul class="simple">
+<li>type of building</li>
+<li>net leased area</li>
+<li>year of construction</li>
+<li>number of floors</li>
+<li>height of floors</li>
+</ul>
 <p>The exact number of zones and their zone area are show in the description of
-each typebuilding. The building envelopes are based on the BMVBS where
-different verwaltungs fixme buildings were investigated.
-The typebuildings themselfes are divided
-into different classes according to the BWZK (fixme)</p>
+each typebuilding. The connection between the building envelope area and the
+building net leased area are based on the BMVBS where different administrative
+buildings were investigated.
+In addition to the basic connection between the net leased area and the envelope
+area it is possible to improve the building data with more information about the
+structure of the building based on a method from Kaag.
+The used information for the buildings physics are based on typical wall
+structures based on the year of construction. This data is provided by the
+BMVBS 2009 and is improved by data of the materials from DIN 12524 und
+DIN 4108-4 [DIN, 2000, 2013].</p>
 <div class="section" id="office-module">
 <h2>Office module<a class="headerlink" href="#office-module" title="Permalink to this headline">¶</a></h2>
 <p><strong>Description</strong></p>
@@ -541,6 +556,193 @@ In detail the attributes are structured in the following sections:</p>
 <li>Internal gains</li>
 <li>Misc</li>
 </ul>
+<span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599"></span><dl class="class">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599">
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.</code><code class="descname">UseConditionsOffice18599</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.Logic.BuildingObjects.html#teaser.Logic.BuildingObjects.UseConditions.UseConditions" title="teaser.Logic.BuildingObjects.UseConditions.UseConditions"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.UseConditions.UseConditions</span></code></a></p>
+<p>Use Conditions DIN 18599</p>
+<p>CLass that contains the boundary conditions of use for non-residential
+buildings defined in DIN V 18599-10</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="63%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Note: the attributes description are the translation from DIN guideline</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>USAGE AND OPERATION TIMES</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>usage: str</td>
+<td>usage type - Nutzungsart</td>
+</tr>
+<tr class="row-even"><td>typical_length:</td>
+<td>typical length of a usage zone - typische Zonenlaenge</td>
+</tr>
+<tr class="row-odd"><td>typical width:</td>
+<td>typical width of a usage zone - typische Zonenbreite</td>
+</tr>
+<tr class="row-even"><td>usage_time</td>
+<td>([int]) usage time [begin, end] (h) -  Nutzungszeit</td>
+</tr>
+<tr class="row-odd"><td>daily_usage_hours</td>
+<td>(int) daily usage time (h) - taegliche Nutzungsstunden</td>
+</tr>
+<tr class="row-even"><td>yearly_usage_days</td>
+<td>(int) operating days per year (d) - jaehrliche Nutzungstage</td>
+</tr>
+<tr class="row-odd"><td>yearly_usage_hours_day</td>
+<td>(int) operating hours per year during daytime (h) - jaehrliche Nutzungsstunden zur Tagzeit</td>
+</tr>
+<tr class="row-even"><td>yearly_usage_hours_night</td>
+<td>(int) operating hours per year during nighttime (h) - jaehrliche Nutzungsstunden zur Nachtzeit</td>
+</tr>
+<tr class="row-odd"><td>daily_operation_ahu_cooling: int</td>
+<td>operating hours of AHU and cooling  - taegliche Betriebsstunden RLT und Kuehlung</td>
+</tr>
+<tr class="row-even"><td>yearly_ahu_days</td>
+<td>(int) operating days AHU per year (d) -  jaehrliche Betriebstage fuer RLT</td>
+</tr>
+<tr class="row-odd"><td>yearly_heating_days</td>
+<td>(int) operating days heating per year - jaehrliche Betriebstage fuer Heizung</td>
+</tr>
+<tr class="row-even"><td>yearly_cooling_days</td>
+<td>(int) operating days Cooling per year (h) - jaehrliche Betriebstage fuer Kuehlung</td>
+</tr>
+<tr class="row-odd"><td>daily_operation_heating</td>
+<td>(int) operating hours of heating (h) - taegliche Betriebsstunden Heizung</td>
+</tr>
+<tr class="row-even"><td>LIGHTING</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>maintained_illuminace</td>
+<td>(int) maintained illuminance value (lx) - Wartungswert der Beleuchtungsstaerke</td>
+</tr>
+<tr class="row-even"><td>usage_level_hight: float</td>
+<td>hight of the usage level (m)  - Hoehe der Nutzebene</td>
+</tr>
+<tr class="row-odd"><td>red_factor_visual</td>
+<td>(float) reduction factor for visual task Sector -  Minderungsfaktor Bereich Sehaufgabe</td>
+</tr>
+<tr class="row-even"><td>rel_absence</td>
+<td>(float) relative absence - Raumindex</td>
+</tr>
+<tr class="row-odd"><td>room_index</td>
+<td>(float) room Index - jaehrliche Betriebstage fuer Kuehlung</td>
+</tr>
+<tr class="row-even"><td>part_load_factor_lighting</td>
+<td>(float) part load factor of building usage time for lighting - Teilbetriebsfaktor der Gebaeudebetriebszeit fuer Beleuchtung</td>
+</tr>
+<tr class="row-odd"><td>ROOM CLIMATE</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>set_temp_heat: float</td>
+<td>internal set temperature heating - Raum-Solltemperatur Heizung</td>
+</tr>
+<tr class="row-odd"><td>set_temp_cool: float</td>
+<td>internal set temperature cooling - Raum-Solltemperatur Kuehlung</td>
+</tr>
+<tr class="row-even"><td>temp_set_back: float</td>
+<td>set back in reduced operation - Temperaturabsenkung reduzierter Betrieb</td>
+</tr>
+<tr class="row-odd"><td>min_temp_heat</td>
+<td>(float) design minimal temperature heating -  Minimaltemperatur Auslegung Heizung</td>
+</tr>
+<tr class="row-even"><td>max_temp_cool</td>
+<td>(float) design maximal temperature cooling - Maximaltemperatur Auslegung Kuehlung</td>
+</tr>
+<tr class="row-odd"><td>rel_humidity</td>
+<td>(float) relative humidity - Feuchteanforderung d</td>
+</tr>
+<tr class="row-even"><td>min_air_exchange</td>
+<td>(float) required minimal air exchange, due to usage - Mindestaussenluftvolumenstrom</td>
+</tr>
+<tr class="row-odd"><td>rel_absence_ahu</td>
+<td>(float) relative absence for AHU - Relative Abwesenheit RLT</td>
+</tr>
+<tr class="row-even"><td>part_load_factor_ahu: float</td>
+<td>part load factor of building usage time for AHU  - Teilbetriebsfaktor der Gebaeudebetriebszeit RLT</td>
+</tr>
+<tr class="row-odd"><td>cooling_time</td>
+<td>([int]) cooling time [begin, end] -  Beginn/Ende Betriebszeit RLT und Kuehlung</td>
+</tr>
+<tr class="row-even"><td>heating_time</td>
+<td>([int]) heating time [begin, end] - Beginn/End Betriebszeit Heizung</td>
+</tr>
+<tr class="row-odd"><td>INTERNAL GAINS</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>persons</td>
+<td>(int) number of persons - Personen</td>
+</tr>
+<tr class="row-odd"><td>profile_persons</td>
+<td>([float]) timeline of internal gains from 0 - 100 - Nutzungsprofil Personen</td>
+</tr>
+<tr class="row-even"><td>machines: float</td>
+<td>number of Machines  - Arbeitshilfen</td>
+</tr>
+<tr class="row-odd"><td>profile_machines</td>
+<td>([float]) timeline of internal gains from 0 - 100  -  Nutzungsprofil Geraete</td>
+</tr>
+<tr class="row-even"><td>lighting_power</td>
+<td>(float) spec. elektr. Power for lighting - spez. Elektr. Leistung-Raumbeleuchtung</td>
+</tr>
+<tr class="row-odd"><td>MISC</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>min_ahu: float</td>
+<td>min ahu  - minAHU</td>
+</tr>
+<tr class="row-odd"><td>max_ahu</td>
+<td>(float) max ahu - maxAHU</td>
+</tr>
+<tr class="row-even"><td>with_ahu</td>
+<td>(boolean) with ahu - withAHU</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.load_use_conditions">
+<code class="descname">load_use_conditions</code><span class="sig-paren">(</span><em>zone_usage</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.load_use_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>load typical use conditions</p>
+<p>loads Use conditions specified in the XML, according to 18599</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>zone_usage</strong> : str</p>
+<blockquote class="last">
+<div><p>code list for zone_usage according to 18599</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.save_use_conditions">
+<code class="descname">save_use_conditions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.save_use_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves typical use conditions</p>
+<p>Saves use conditions specified in the XML, according to 18599</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_length">
+<code class="descname">typical_length</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_width">
+<code class="descname">typical_width</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
