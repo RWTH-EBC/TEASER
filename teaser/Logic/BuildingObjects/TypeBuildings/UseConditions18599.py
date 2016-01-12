@@ -247,22 +247,23 @@ class UseConditions18599(UseConditions):
         self.cooling_time = [5, 18]
         self.heating_time = [5, 18]
 
-		self._persons = 5.0
-		self.activity_type_persons = 3  # physical activity
+        self._persons = 5.0
+        self.activity_type_persons = 3  # physical activity
         self.ratio_conv_rad_persons = 0.5
         self.profile_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.4,
                                 0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self._machines = 7.0
-		self.activity_type_machines = 2
+        self.activity_type_machines = 2
         self.ratio_conv_rad_machines = 0.5
         self.profile_machines = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.4,
                                  0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
                                  0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
-		self._lighting_power = 15.9
-		self._profile_lighting = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0,
-								  1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
-								  0.0, 0.0, 0.0, 0.0, 0.0, 0.0]        self._min_ahu = 0.0
+        self._lighting_power = 15.9
+        self._profile_lighting = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0,
+                                  1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        self._min_ahu = 0.0
         self._max_ahu = 2.6
         self.with_ahu = True
 
