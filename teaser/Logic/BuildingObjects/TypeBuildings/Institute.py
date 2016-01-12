@@ -41,14 +41,7 @@ class Institute(Office):
             {"Meeting": [0.04, "Meeting, Conference, seminar"],
              "Storage": [0.1, "Stock, technical equipment, archives"],
              "Office": [0.4, "Group Office (between 2 and 6 employees)"],
-             "Sanitary": [0.04, "WC and sanitary rooms\
-              in non-residential buildings"],
+             "Sanitary": [0.04, "WC and sanitary rooms in non-residential buildings"],
              "ICT": [0.02, "Data center"],
              "Floor": [0.25, "Traffic area"],
              "Laboratory": [0.15, "Laboratory"]}
-
-        self.file_ahu = "Institute/AHU_Institute.mat"
-        self.file_internal_gains = "Institute/InternalGains_"
-        "Institute.mat"
-        self.file_set_t = "Institute/Tset_Institute.mat"
-        self.file_weather = self.parent.weather_file_name
