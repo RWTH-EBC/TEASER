@@ -587,13 +587,7 @@ class ThermalZone(object):
 
         Calculates the norm heat load of the thermal zone.
         '''
-        print(self.t_inside)
-        print(self.ua_value_ow)
-        print(self.ua_value_win)
-        print(self.volume)
-        print(self.infiltration_rate)
-        print(self.t_outside)
-        
+
         _heat_capac_air = 1.002
         _density_air = 1.25
 
