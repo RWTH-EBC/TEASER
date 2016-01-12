@@ -170,7 +170,7 @@ class UseConditions18599(UseConditions):
 
         super(UseConditions18599, self).__init__(parent)
 
-        self.usage = "single office"
+        self.usage = "Single office"
 
         self._typical_length = 123.0
         self._typical_width = 123.0
@@ -206,15 +206,19 @@ class UseConditions18599(UseConditions):
         self.cooling_time = [5, 18]
         self.heating_time = [5, 18]
 
-        self._persons = 0
-        self.profile_persons = []
-        self._machines = 0.0
-        self.profile_machines = []
-        self._lighting_power = 0.0
-
+        self._persons = 5.0
+        self.profile_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.4,
+                                0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
+                                0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        self._machines = 7.0
+        self.profile_machines = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.4,
+                                 0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
+                                 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+        self._lighting_power = 15.9
+        
         self._min_ahu = 0.0
-        self._max_ahu = 0.5
-        self.with_ahu = False
+        self._max_ahu = 2.6
+        self.with_ahu = True
 
     def load_use_conditions(self, zone_usage):
         '''load typical use conditions
