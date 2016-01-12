@@ -48,7 +48,7 @@ def building_test2(prj):
     tz.name = "test1"
     tz.area = 10.0
     tz.volume = 25.0
-    tz.infiltration_rate = 5.0
+    tz.infiltration_rate = 0.5
     tz.use_conditions = UseConditions18599(tz)
     '''
     outerwall

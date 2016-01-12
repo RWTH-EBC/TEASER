@@ -15,3 +15,12 @@ class Rooftop(OuterWall):
         '''
         '''
         super(Rooftop, self).__init__(parent)
+        
+        
+        self._tilt = 0.0
+        self._orientation = -1.0
+        self._inner_convection = 1.7
+        self._inner_radiation = 5.0
+        self._outer_convection = 20.0
+        self._outer_radiation = 5.0
+        

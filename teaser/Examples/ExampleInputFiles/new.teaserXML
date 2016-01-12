@@ -13,6 +13,7 @@
 			<name>Wohngebaeude</name>
 			<area>2000.0</area>
 			<volume>8000.0</volume>
+			<infiltration_rate>0.5</infiltration_rate>
 			<typical_length>123.0</typical_length>
 			<typical_width>123.0</typical_width>
 			<UseCondition>
