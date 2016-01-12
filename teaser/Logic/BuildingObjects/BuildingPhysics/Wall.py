@@ -126,7 +126,9 @@ class Wall(BuildingElement):
            or type(self).__name__ == "GroundFloor":
             self.c1 = self.c1_korr
 
-    def insulate_wall(self, material):
+    def insulate_wall(self,
+                      material=None,
+                      thickness=None):
         '''Retrofit the walls with an additional insulation layer
 
         Adds an additional layer on the wall, outer sight
@@ -134,13 +136,25 @@ class Wall(BuildingElement):
         Parameters
         ----------
         material : string
-            Type of material, that is used for insulation
+            Type of material, that is used for insulation, default = EPS035
+
+        thickness : float
+            thickness of the insulation layer, default = None
 
         '''
+        if material is None:
+            material = "EPS035"
+        else:
+            pass
 
         ext_layer = Layer(self)
         new_material = Material(ext_layer)
         new_material.load_material_template(material)
+
+        if thickness is None:
+            pass
+        else:
+            ext_layer.thickness = thickness
 
         ext_layer.material = new_material
 
