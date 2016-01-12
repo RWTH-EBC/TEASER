@@ -729,8 +729,8 @@ class Test_teaser(object):
         '''test of fill_outer_wall_area_dict'''
 
         prj.list_of_buildings[-1].fill_outer_area_dict()
-        outwall_dict_round = {key:round(value,2) for key, value in
-                                prj.list_of_buildings[-1].outer_area.items()}
+        outwall_dict_round = {key: round(value, 2) for key, value in
+                              prj.list_of_buildings[-1].outer_area.items()}
         assert outwall_dict_round == {0.0: 500.05}
 
     def test_fill_window_area_dict(self):
@@ -894,7 +894,7 @@ class Test_teaser(object):
         use_cond = prj.list_of_buildings[-1].thermal_zones[-1].use_conditions
         use_cond.parent = None
         use_cond.save_use_conditions(path=path, file_name="UseCondUT")
-        
+
    #methods in BuildingElement
 
     def test_ua_value(self):
@@ -928,7 +928,7 @@ class Test_teaser(object):
         therm_zone.outer_walls[0].load_type_element(1988, "heavy")
         therm_zone.inner_walls[0].load_type_element(1988, "light")
         therm_zone.windows[0].load_type_element(1988, "heavy")
-        
+
     def test_save_type_element(self):
         '''test of load_type_element, no parameter checking'''
 
@@ -943,7 +943,7 @@ class Test_teaser(object):
                                                     file_name="unitTestTB")
         therm_zone.windows[0].parent = None
         therm_zone.windows[0].save_type_element(path=path,
-                                                    file_name="unitTestTB")
+                                                file_name="unitTestTB")
 
     #methods in Wall
 
@@ -963,6 +963,18 @@ class Test_teaser(object):
         assert round(therm_zone.outer_walls[0].r2, 13) == 0.0549256129353
         assert round(therm_zone.outer_walls[0].r3, 12) == 0.137027879186
         assert round(therm_zone.outer_walls[0].c1_korr, 6) == 111237.213205
+
+    def test_insulate_wall(self):
+        '''test of insulate_wall'''
+        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone.outer_walls[0].insulate_wall("EPS035", 0.04)
+        assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.806838
+
+    def test_retrofit_wall(self):
+        '''test of retrofit_wall'''
+        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone.outer_walls[0].retrofit_wall(2016, "EPS035")
+        assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.4
 
     def test_calc_equivalent_res_win(self):
         '''test of calc_equivalent_res, win'''
