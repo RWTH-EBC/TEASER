@@ -268,3 +268,47 @@ class Controller():
     @classmethod
     def click_export_button(self, prj, model_type, path, buildingID=None):
         prj.export_record(model_type, path, buildingID)
+        
+    @classmethod
+    def click_change_all_constr(self,
+                                bldg,
+                                orientation,
+                                element_type,
+                                tilt,
+                                inner_convection,
+                                inner_radiation,
+                                outer_convection,
+                                outer_radiation,
+                                layer_set):
+        for zone in bldg.thermal_zones:
+            for wall in zone.outer_walls:
+                if element_type == "OuterWall" or element_type == "Rooftop":
+                    if wall.orientation == orientation:
+                        wall.tilt = tilt
+                        wall.inner_convection = inner_convection
+                        wall.inner_radiation = inner_radiation
+                        wall.outer_convection = outer_convection
+                        wall.outer_radiation = outer_radiation
+                        wall.layer = None
+                        wall.layer = layer_set
+                else:
+                    if wall.orientation == orientation:
+                        wall.tilt = tilt
+                        wall.inner_convection = inner_convection
+                        wall.inner_radiation = inner_radiation
+                        wall.layer = None
+                        wall.layer = layer_set
+            for win in zone.windows:
+                if element_type == "Window":
+                    if win.orientation == orientation:
+                        win.tilt = tilt
+                        win.inner_convection = inner_convection
+                        win.inner_radiation = inner_radiation
+                        win.outer_convection = outer_convection
+                        win.outer_radiation = outer_radiation
+                        win.layer = None
+                        win.layer = layer_set
+                    
+                    
+                
+                                
