@@ -60,7 +60,7 @@ class Project(object):
         '''Constructor of Project Class.
 
         '''
-        self.name = "Project"
+        self._name = "Project"
         self.modelica_info = ModelicaInfo()
 
         self.modelica_project = self.name
@@ -891,3 +891,13 @@ class Project(object):
         assert value != "ebc" or value != "vdi", ass_error_1
 
         self._calculation_method = value
+        
+    @property
+    def name(self):
+        return self._name
+        
+    @name.setter
+    def name(self, value):
+        
+        self._name = value
+        self.modelica_project = value
