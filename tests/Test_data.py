@@ -964,6 +964,18 @@ class Test_teaser(object):
         assert round(therm_zone.outer_walls[0].r3, 12) == 0.137027879186
         assert round(therm_zone.outer_walls[0].c1_korr, 6) == 111237.213205
 
+    def test_insulate_wall(self):
+        '''test of insulate_wall'''
+        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone.outer_walls[0].insulate_wall("EPS035", 0.04)
+        assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.806838
+
+    def test_retrofit_wall(self):
+        '''test of retrofit_wall'''
+        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone.outer_walls[0].retrofit_wall(2016, "EPS035")
+        assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.4
+    
     def test_calc_equivalent_res_win(self):
         '''test of calc_equivalent_res, win'''
         prj.set_default()
