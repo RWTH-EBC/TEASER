@@ -585,25 +585,33 @@ class Building(object):
                             3600
                 time_line = self.create_timeline(duration_profile = duration)
             
-            zone_count.use_conditions.profile_persons.insert(0,0)
-            zone_count.use_conditions.profile_machines.insert(0,0)
-            zone_count.use_conditions.profile_lighting.insert(0,0)
+#            zone_count.use_conditions.profile_persons.insert(0,0)
+#            zone_count.use_conditions.profile_machines.insert(0,0)
+#            zone_count.use_conditions.profile_lighting.insert(0,0)
 
             ass_error_1 = "time line and input have to have the same length"
             
-            assert len(time_line) == len(zone_count.use_conditions.profile_persons), \
+            assert len(time_line)-1 == len(zone_count.use_conditions.profile_persons), \
                                 (ass_error_1 + ",profile_persons")
-            assert len(time_line) == len(zone_count.use_conditions.profile_machines), \
+            assert len(time_line)-1 == len(zone_count.use_conditions.profile_machines), \
                                 (ass_error_1 + ",profile_machines")
-            assert len(time_line) == len(zone_count.use_conditions.profile_lighting), \
+            assert len(time_line)-1 == len(zone_count.use_conditions.profile_lighting), \
                                 (ass_error_1 + ",profile_lighting")
             
             for i, time in enumerate(time_line):
+                
+                if i == 0:
+                    time.append(0)
+                    time.append(0)
+                    time.append(0)
+                else:
+                    time.append(zone_count.use_conditions.profile_persons[i-1])
+                    time.append(zone_count.use_conditions.profile_machines[i-1])
+                    time.append(zone_count.use_conditions.profile_lighting[i-1])
 
-                time.append(zone_count.use_conditions.profile_persons[i])
-                time.append(zone_count.use_conditions.profile_machines[i])
-                time.append(zone_count.use_conditions.profile_lighting[i])
-
+#            zone_count.use_conditions.profile_persons.pop(0)
+#            zone_count.use_conditions.profile_machines.pop(0)
+#            zone_count.use_conditions.profile_lighting.pop(0)
         internal_boundary = np.array(time_line)
 
         scipy.io.savemat(path,
