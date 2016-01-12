@@ -74,15 +74,15 @@ class ThermalZone(object):
         self.name = None
         self._area = None
         self._volume = None
-        self._infiltration_rate = None
+        self._infiltration_rate = 0.5
         self._outer_walls = []
         self._inner_walls = []
         self._windows = []
         self._use_conditions = None
         self.typical_length = None
         self.typical_width = None
-        self._t_inside = None
-        self._t_outside = None
+        self._t_inside = 293.15
+        self._t_outside = 261.15
         self.density_air = 1.19     # only export for now
         self.heat_capac_air = 1007  # only export for now
         self.t_ground = 286.15  # groundtemperature of for the simulation
@@ -593,11 +593,6 @@ class ThermalZone(object):
         Calculates the norm heat load of the thermal zone.
         '''
 
-        # hard code to trick unit tests ;-)
-        self.t_inside = 293.15
-        self.t_outside = 261.15
-        self.infiltration_rate = 0.5
-
         _heat_capac_air = 1.002
         _density_air = 1.25
 
@@ -912,7 +907,7 @@ class ThermalZone(object):
 
     @t_inside.setter
     def t_inside(self, value):
-
+        print("setter")
         if isinstance(value, float):
             self._t_inside = value
         elif value is None:
