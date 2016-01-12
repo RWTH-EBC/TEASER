@@ -241,11 +241,6 @@ class Office(TypeBuilding):
         self._est_length = ((self.net_leased_area / self.number_of_floors) * 
                             self.gross_factor) / self._est_width
 
-        self.file_ahu = "\\AHU_"+self.name+".mat"
-        self.file_internal_gains = "\\InternalGains_"+self.name+".mat"
-        self.file_set_t = "\\Tset_"+self.name+".mat"
-        self.file_weather = self.parent.weather_file_name		
-        
         if self.with_ahu is True:
             self.central_ahu.profile_temperature = (7*[293.15] +
                                                     12*[295.15] +
