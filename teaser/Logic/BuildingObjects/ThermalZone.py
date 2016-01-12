@@ -74,15 +74,15 @@ class ThermalZone(object):
         self.name = None
         self._area = None
         self._volume = None
-        self.infiltration_rate = 0.5
+        self._infiltration_rate = 0.5
         self._outer_walls = []
         self._inner_walls = []
         self._windows = []
         self._use_conditions = None
         self.typical_length = None
         self.typical_width = None
-        self.t_inside = 293.15
-        self.t_outside = 261.15
+        self._t_inside = 293.15
+        self._t_outside = 261.15
 
         # Calculated values for InnerWall for each Zone
         self.r1_iw = 0.0
