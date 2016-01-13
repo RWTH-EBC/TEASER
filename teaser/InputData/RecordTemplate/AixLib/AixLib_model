@@ -81,7 +81,7 @@ equation
   annotation (experiment(
       StopTime=31536000,
       Interval=3600,
-      __Dymola_Algorithm="Lsodar"), __Dymola_experimentSetupOutput(events=false),
+      __Dymola_Algorithm="Dassl"), __Dymola_experimentSetupOutput(events=false),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Line(points={{80,-82}}, color={28,108,200}),
@@ -215,7 +215,7 @@ equation
   annotation (experiment(
       StopTime=31536000,
       Interval=3600,
-      __Dymola_Algorithm="Lsodar"), __Dymola_experimentSetupOutput(events=false),
+      __Dymola_Algorithm="Dassl"), __Dymola_experimentSetupOutput(events=false),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Line(points={{80,-82}}, color={28,108,200}),
