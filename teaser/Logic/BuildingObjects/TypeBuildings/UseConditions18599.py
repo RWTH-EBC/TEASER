@@ -561,10 +561,13 @@ class UseConditions18599(UseConditions):
         if self._set_temp_heat is None:
             pass
         else:
-            if self.parent.parent.file_set_t is None:
-                self.parent.parent.file_set_t = ("\\TSet" +
-                                               self.parent.parent.name +
-                                               ".mat")
+            if self.parent is not None:
+                if self.parent.parent.file_set_t is None:
+                    self.parent.parent.file_set_t = ("\\TSet" +
+                                                   self.parent.parent.name +
+                                                   ".mat")
+            else:
+                pass
                                            
         self._set_temp_heat = value
         
@@ -588,11 +591,13 @@ class UseConditions18599(UseConditions):
         if self._set_temp_cool is None:
             pass
         else:
-            if self.parent.parent.file_set_t is None:
-                self.parent.parent.file_set_t = ("\\TSet_" +
-                                               self.parent.parent.name +
-                                               ".mat")
-                                           
+            if self.parent is not None:
+                if self.parent.parent.file_set_t is None:
+                    self.parent.parent.file_set_t = ("\\TSet_" +
+                                                   self.parent.parent.name +
+                                                   ".mat")
+                else:
+                    pass
         self._set_temp_cool = value
           
     @property
