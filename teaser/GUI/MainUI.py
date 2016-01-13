@@ -4460,20 +4460,23 @@ class MainUI(QDialog):
             self.export_groupbox)
         self.export_create_template_model_combobox.setGeometry(
             QtCore.QRect(130, 90, 215, 25))
-        # self.export_template_label_zone = QtGui.QLabel(self.export_groupbox)
-        # self.export_template_label_zone.setGeometry(QtCore.QRect(5, 125, 120, 25))
-        # self.export_template_label_zone.setText("Zone type:")
-        # self.export_create_template_zone_combobox = QtGui.QComboBox(
-        #     self.export_groupbox)
-        # self.export_create_template_zone_combobox.setGeometry(
-        #     QtCore.QRect(130, 125, 215, 25))
-        # self.export_template_label_corG = QtGui.QLabel(self.export_groupbox)
-        # self.export_template_label_corG.setGeometry(QtCore.QRect(5, 125, 120, 25))
-        # self.export_template_label_corG.setText("corG:")
-        # self.radio_button_corG_1 = QtGui.QRadioButton(self.export_groupbox)
-        # self.radio_button_corG_1
-        # self.radio_button_corG_1
-        # self.radio_button_corG_2 = QtGui.QRadioButton(self.export_groupbox)
+        self.export_template_label_zone = QtGui.QLabel(self.export_groupbox)
+        self.export_template_label_zone.setGeometry(QtCore.QRect(5, 125, 120, 25))
+        self.export_template_label_zone.setText("Zone type:")
+        self.export_create_template_zone_combobox = QtGui.QComboBox(
+            self.export_groupbox)
+        self.export_create_template_zone_combobox.setGeometry(
+            QtCore.QRect(130, 125, 215, 25))
+        self.export_template_label_corG = QtGui.QLabel(self.export_groupbox)
+        self.export_template_label_corG.setGeometry(QtCore.QRect(5, 160, 120, 25))
+        self.export_template_label_corG.setText("corG:")
+        self.radio_button_corG_1 = QtGui.QRadioButton(self.export_groupbox)
+        self.radio_button_corG_1.setGeometry(QtCore.QRect(130, 160, 120, 25))
+        self.radio_button_corG_1.setText("with CorG")
+        self.radio_button_corG_2 = QtGui.QRadioButton(self.export_groupbox)
+        self.radio_button_corG_2.setGeometry(QtCore.QRect(250, 160, 120, 25))
+        self.radio_button_corG_2.setText("without CorG")
+        self.radio_button_corG_1.setChecked(True)
         self.export_save_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_save_template_label.setGeometry(
             QtCore.QRect(5, 195, 110, 25))
@@ -4497,15 +4500,10 @@ class MainUI(QDialog):
         self.export_save_template_button.setText("Browse")
         self.export_save_template_button.clicked.connect(
             self.click_browse_button)
-        # for template_name in os.listdir(self.create_path_to_template_folder()):
-        #     if(template_name == "AixLib" or template_name == "CitiesRWin" or
-        #        template_name == "CitiesType"):
-        #         self.export_create_template_combobox.addItem(template_name)
-
-        #adding the export models manualy
-
-
-
+        modelTypeList = ["MultizoneEquipped", "Multizone", "None"]
+        zoneTypeList = ["ThermalZoneEquipped", "ThermalZone", "None"]
+        self.export_create_template_model_combobox.addItems(modelTypeList)
+        self.export_create_template_zone_combobox.addItems(zoneTypeList)
         self.export_window_ui_layout.addWidget(
             self.export_groupbox, 1, 1)
         self.export_window_ui.setWindowModality(Qt.ApplicationModal)
