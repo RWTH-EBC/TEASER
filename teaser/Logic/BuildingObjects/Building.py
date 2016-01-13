@@ -425,13 +425,12 @@ class Building(object):
         path = path + self.file_set_t
 
         t_set_heat = [0]
-        t_set_cool = [0]
+        
         for zone_count in self.thermal_zones:
             t_set_heat.append(zone_count.use_conditions.set_temp_heat)
-            t_set_cool.append(zone_count.use_conditions.set_temp_cool)
 
         scipy.io.savemat(path,
-                         mdict={'Tset': [t_set_heat,t_set_cool]},
+                         mdict={'Tset': [t_set_heat]},
                          appendmat = False,
                          format = '4')
     
