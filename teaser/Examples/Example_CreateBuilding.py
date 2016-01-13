@@ -124,7 +124,8 @@ def example_create_building():
         win.outer_radiation = 5.0
         win.g_value = 0.789
         win.a_conv = 0.03
-        
+        win.shading_g_total = 1.0
+        win.shading_max_irr = 180.0
         '''Instantiate a Layer class, with window as parent, set attributes'''
         win_layer = Layer(parent = win)
         win_layer.id = 1
