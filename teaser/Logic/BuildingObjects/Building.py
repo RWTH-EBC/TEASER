@@ -119,7 +119,7 @@ class Building(object):
         self.file_set_t = None
         self.file_weather = None
 
-        self._calculation_method = self.parent.calculation_method
+        self._calculation_method = "vdi"
 
     def set_outer_wall_area(self, new_area, orientation):
         '''Outer area wall setter
@@ -325,8 +325,6 @@ class Building(object):
         '''
         self.compare_area_dicts()
 
-        self._calculation_method = calculation_core
-
         for zone in self.thermal_zones:
             zone.calc_zone_parameters(calculation_core)
             self.sum_heating_load += zone.heating_load
@@ -355,7 +353,7 @@ class Building(object):
         for zone in self.thermal_zones:
             zone.retrofit_zone(window_type, material)
 
-        self.calc_building_parameter(self._calculation_method)
+        self.calc_building_parameter(self.calculation_method)
 
     def create_timeline(self, duration_profile = 86400, time_step = 3600):
         ''' Creates a timeline for building boundary conditions
@@ -791,3 +789,17 @@ class Building(object):
         assert type(value).__name__ == ("BuildingAHU"), ass_error_1
 
         self._central_ahu = value
+
+    @property
+    def calculation_method(self):
+
+        return self._calculation_method
+
+    @calculation_method.setter
+    def calculation_method(self, value):
+
+        ass_error_1 = "calculation_method has to be vdi or ebc"
+
+        assert value != "ebc" or value != "vdi", ass_error_1
+
+        self._calculation_method = value
