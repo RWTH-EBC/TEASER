@@ -892,6 +892,9 @@ class Project(object):
 
         self._calculation_method = value
         
+        for bldg in self.list_of_buildings:
+            bldg.calculation_method = value
+        
     @property
     def name(self):
         return self._name
