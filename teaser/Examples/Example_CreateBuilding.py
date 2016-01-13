@@ -42,14 +42,15 @@ def example_create_building():
     bldg.city = "46325 Fantastic Town"
     bldg.year_of_construction = 1988
     bldg.number_of_floors = 1
+    bldg.height_of_floors = 3.5
 
     '''Instantiate a ThermalZone class, with building as parent and set  some 
     parameters of the thermal zone'''
 
     tz = ThermalZone(parent = bldg) 
     tz.name = "Living Room"
-    tz.area = 45.0
-    tz.volume = 123.0
+    tz.area = 140.0
+    tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
     tz.infiltration_rate = 0.5
 
     '''Instantiate UseConditions18599 class with thermal zone as parent,
