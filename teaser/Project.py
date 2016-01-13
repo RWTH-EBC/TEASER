@@ -740,10 +740,18 @@ class Project(object):
                 out_file = open(utilis.get_full_path
                                 (zone_path + bldg.name + "_base.mo"),
                                 'w')
-                out_file.write(zone_base_template.render_unicode(
-                    bldg=bldg, zone=zone,
-                    mod_prj=self.modelica_project))
-                out_file.close()
+                if bldg.central_ahu:
+                  out_file.write(zone_base_template.render_unicode(
+                      bldg=bldg, zone=zone,
+                      mod_prj=self.modelica_project,
+                      central_ahu=bldg.central_ahu))
+                  out_file.close()
+                else:
+                  out_file.write(zone_base_template.render_unicode(
+                      bldg=bldg, zone=zone,
+                      mod_prj=self.modelica_project))
+                  out_file.close()
+
 
         elif building_model is None and zone_model is None and corG is None:
             # only export the baserecords
