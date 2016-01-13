@@ -7,7 +7,7 @@ The TEASER4 typebuilding package contains different modules for the creation
 and parametrisation of typebuildings. In TEASER4 these typebuildings are used to 
 create usable dataset of buildings out of limited building information. For 
 this, the methods are based on the following principles according to Lichtmess 
-(fixme Lichtme.2010):
+:cite:`Lichtme.2010`:
 
 #. The building envelopes are based on the building net floor area (net leased area in the following)
 
@@ -39,23 +39,24 @@ the typebuildings with the use of only five parameters:
 
 The exact number of zones and their zone area are show in the description of 
 each typebuilding. The connection between the building envelope area and the 
-building net leased area are based on the BMVBS where different administrative 
+building net leased area are based on the BMVBS :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010` where different administrative 
 buildings were investigated. 
 In addition to the basic connection between the net leased area and the envelope 
 area it is possible to improve the building data with more information about the 
-structure of the building based on a method from Kaag. 
+structure of the building based on a method from Kaag :cite:`Kaag.March2008`. 
 The used information for the buildings physics are based on typical wall 
 structures based on the year of construction. This data is provided by the 
-BMVBS 2009 and is improved by data of the materials from DIN 12524 und 
-DIN 4108-4 [DIN, 2000, 2013].
+BMVBS :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.30.07.2009` and 
+is improved by data of the materials from DIN 12524 und 
+DIN 4108-4 :cite:`DeutschesInstitutfurNormung.Juli2000` :cite:`DeutschesInstitutfurNormung.Februar2013`.
 
 Office module
 --------------------------------------------------------
 
 **Description**
 
-The office module contains a multi zone building according to the BMVBS 2010 
-(fixme). In detail the net leased area is divided in the following thermal zone 
+The office module contains a multi zone building according to the BMVBS :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`. 
+In detail the net leased area is divided in the following thermal zone 
 areas:
 
 #. Office (50% of net leased area)
@@ -80,8 +81,8 @@ Residential module
 
 **Description**
 
-The residential module contains a single zone building according to the BMVBS 
-2010. In detail the net leased area is divided in the following thermal zone 
+The residential module contains a single zone building according to fixme. 
+In detail the net leased area is divided in the following thermal zone 
 area:
 
 #. Single dwelling (100% of net leased area)
@@ -190,7 +191,7 @@ UseConditionsOffice18599 module
 **Description**
 
 The UseConditionsOffice18599 module contains the useconditions for the 
-typebuildings according to the DIN V 18599 (fixme) and the SIA 2024 (fixme). 
+typebuildings according to the DIN V 18599 :cite:`DINV1859910` and the SIA 2024 :cite:`SwissSocietyofEngineersandArchitects.March2006`. 
 In detail the attributes are structured in the following sections:
 
 * Usage and operation times
@@ -209,4 +210,9 @@ In detail the attributes are structured in the following sections:
     :undoc-members:
     :show-inheritance:
 
+Literature
+-----------------------------------------------------------------------------
 
+.. bibliography:: Literatur.bib
+	:style: unsrt
+	:encoding: Cp1252
