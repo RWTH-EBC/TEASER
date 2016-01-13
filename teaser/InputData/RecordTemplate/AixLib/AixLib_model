@@ -41,7 +41,7 @@ model ${bldg.name}
     Sky_rad=true,
     Ter_rad=true,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/Tables/${weather}"),
+        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"),
     % if bldg.latitude is None:
       Latitude=49.5,
     % else:
@@ -62,7 +62,7 @@ model ${bldg.name}
     tableName="Internals",
     columns=2:${(3*get_n(bldg.thermal_zones))+1},
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/Tables/${bldg.file_internal_gains}"))
+        "modelica://${mod_prj}/${bldg.name}/${bldg.file_internal_gains}"))
     annotation (Placement(transformation(extent={{84,18},{64,38}})));
 
 
@@ -145,7 +145,7 @@ end ${bldg.name};
     Sky_rad=true,
     Ter_rad=true,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/Tables/${weather}"),
+        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"),
     % if bldg.latitude is None:
       Latitude=49.5,
     % else:
@@ -163,10 +163,10 @@ end ${bldg.name};
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
     tableOnFile=true,
     tableName="Tset",
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     columns=2:${get_n(bldg.thermal_zones)+1},
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/Tables/${bldg.file_set_t}"))
+        "modelica://${mod_prj}/${bldg.name}/${bldg.file_set_t}"))
     annotation (Placement(transformation(extent={{-92,8},{-72,28}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableAHU(
@@ -175,7 +175,7 @@ end ${bldg.name};
     tableName="AHU",
     columns=2:5,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/Tables/${bldg.file_ahu}"))
+        "modelica://${mod_prj}/${bldg.name}/${bldg.file_ahu}"))
     annotation (Placement(transformation(extent={{66,-50},{46,-30}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
@@ -184,7 +184,7 @@ end ${bldg.name};
     tableName="Internals",
     columns=2:${(3*get_n(bldg.thermal_zones))+1},
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/Tables/${bldg.file_internal_gains}"))
+        "modelica://${mod_prj}/${bldg.name}/${bldg.file_internal_gains}"))
     annotation (Placement(transformation(extent={{84,18},{64,38}})));
 
   Modelica.Blocks.Sources.Constant const[${get_n(bldg.thermal_zones)}](each k=0)
