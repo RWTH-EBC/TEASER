@@ -81,7 +81,8 @@ Residential module
 
 **Description**
 
-The residential module contains a single zone building according to fixme. 
+The residential module contains a single zone building where the envelopes are 
+computed based on a method from the IWU :cite:`KurzverfahrenIWU`. 
 In detail the net leased area is divided in the following thermal zone 
 area:
 
@@ -97,9 +98,10 @@ Institute module
 
 **Description**
 
-The institute module contains a multi zone building according to the data from
-(fixme Jülich?). In detail the net leased area is divided in the following 
-thermal zone areas:
+The institute module contains a multi zone building which is based on an office 
+building with an additional laboratory zone. The area of the laboratory zone is
+based on data from the Forschungszentrum Jülich fixme. In detail the net leased 
+area is divided in the following thermal zone areas:
 
 #. Office (40% of net leased area)
 
@@ -125,9 +127,10 @@ Institute4 module
 
 **Description**
 
-The institute type 4 module contains a multi zone building according to the data from
-(fixme Jülich?). In detail the net leased area is divided in the following 
-thermal zone areas:
+The institute type 4 module contains a multi zone building which is based on an office 
+building with an additional laboratory zone. The area of the laboratory zone is
+based on data from the Forschungszentrum Jülich fixme. In detail the net leased 
+area is divided in the following thermal zone areas:
 
 #. Office (37.5% of net leased area)
 
@@ -153,9 +156,10 @@ Institute8 module
 
 **Description**
 
-The institute type 8 module contains a multi zone building according to the data from
-(fixme Jülich?). In detail the net leased area is divided in the following 
-thermal zone areas:
+The institute type 8 module contains a multi zone building which is based on an office 
+building with an additional laboratory zone. The area of the laboratory zone is
+based on data from the Forschungszentrum Jülich fixme. In detail the net leased 
+area is divided in the following thermal zone areas:
 
 #. Office (10% of net leased area)
 
@@ -215,4 +219,4 @@ Literature
 
 .. bibliography:: Literatur.bib
 	:style: unsrt
-	:encoding: Cp1252
+	:encoding: latex+latin
