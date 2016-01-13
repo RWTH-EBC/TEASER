@@ -472,6 +472,9 @@ class ThermalZone(object):
                 orientation_win_help[win_count.orientation] =  \
                                                     win_count.ua_value
 
+        orientation_ow_help, orientation_win_help = \
+            self.compare_area_dicts(orientation_ow_help, orientation_win_help)
+
         orientation_ow = \
             collections.OrderedDict(sorted(orientation_ow_help.items()))
         orientation_win = \
@@ -535,6 +538,17 @@ class ThermalZone(object):
 
         else:
             raise ValueError("specify calculation method correctly")
+
+    def compare_area_dicts(self, dict1, dict2):
+        '''Compares the orientations of the dicts
+        '''
+        for key in dict1.keys():
+            if key not in dict2.keys():
+                dict2[key] = 0.0
+        for key in dict2.keys():
+            if key not in dict1.keys():
+                dict1[key] = 0.0
+        return dict1, dict2
 
     def set_inner_wall_area(self):
         '''Sets the inner wall area.
