@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <UseConditions>
 	<UseConditions18599>
 		<usage>Single office</usage>
@@ -25,11 +26,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -43,6 +44,7 @@
 			<machines>7.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -76,11 +78,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -94,6 +96,7 @@
 			<machines>7.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -127,11 +130,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -145,6 +148,7 @@
 			<machines>10.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -178,11 +182,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -196,6 +200,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.6 1.0 0.4 0.1 0.1 0.6 1.0 0.4 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -229,11 +234,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -247,6 +252,7 @@
 			<machines>4.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.4 0.6 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>4.4</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -280,11 +286,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 20</cooling_time>
 			<heating_time>6 20</heating_time>
@@ -298,6 +304,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>9.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -331,11 +338,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 20</cooling_time>
 			<heating_time>6 20</heating_time>
@@ -349,6 +356,7 @@
 			<machines>5.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>9.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -382,11 +390,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 15</cooling_time>
 			<heating_time>6 15</heating_time>
@@ -400,6 +408,7 @@
 			<machines>4.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -433,11 +442,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 18</cooling_time>
 			<heating_time>6 18</heating_time>
@@ -451,6 +460,7 @@
 			<machines>4.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -484,11 +494,11 @@
 			<ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>22.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -502,6 +512,7 @@
 			<machines>4.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.8 0.6 0.4 0.2 0.2</profile_machines>
 			<lighting_power>4.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -535,11 +546,11 @@
 			<ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -553,6 +564,7 @@
 			<machines>4.0</machines>
 			<profile_machines>1.0 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.6 0.8 1.0</profile_machines>
 			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -586,11 +598,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 15</cooling_time>
 			<heating_time>6 15</heating_time>
@@ -604,6 +616,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 0.6 1.0 1.0 0.8 0.4 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -637,11 +650,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>8 0</cooling_time>
 			<heating_time>8 0</heating_time>
@@ -655,6 +668,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 0.4 1.0 1.0 0.1 0.1 0.1 0.1 0.4 0.4 0.4 1.0 0.8 0.4</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -688,11 +702,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>8 23</cooling_time>
 			<heating_time>8 23</heating_time>
@@ -706,6 +720,7 @@
 			<machines>300.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.2 0.8 1.0 1.0 0.6 0.4 0.2 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -739,11 +754,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>8 23</cooling_time>
 			<heating_time>8 23</heating_time>
@@ -757,6 +772,7 @@
 			<machines>30.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 1.0 1.0 0.6 0.4 0.1 0.1 0.1 0.4 0.8 1.0 0.4 0.2 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -790,11 +806,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -808,6 +824,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>11.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -841,11 +858,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -859,6 +876,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -892,11 +910,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -910,6 +928,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -943,11 +962,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -961,6 +980,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>7.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -994,11 +1014,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -1012,6 +1032,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1045,11 +1066,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -1063,6 +1084,7 @@
 			<machines>150.0</machines>
 			<profile_machines>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0</profile_machines>
 			<lighting_power>7.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1096,11 +1118,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>15.0</set_temp_heat>
-			<set_temp_cool>28.0</set_temp_cool>
+			<set_temp_heat>288.15</set_temp_heat>
+			<set_temp_cool>301.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>15.0</min_temp_heat>
-			<max_temp_cool>30.0</max_temp_cool>
+			<min_temp_heat>288.15</min_temp_heat>
+			<max_temp_cool>303.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 16</cooling_time>
 			<heating_time>6 16</heating_time>
@@ -1114,6 +1136,7 @@
 			<machines>35.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1147,11 +1170,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>17.0</set_temp_heat>
-			<set_temp_cool>26.0</set_temp_cool>
+			<set_temp_heat>290.15</set_temp_heat>
+			<set_temp_cool>299.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>15.0</min_temp_heat>
-			<max_temp_cool>28.0</max_temp_cool>
+			<min_temp_heat>288.15</min_temp_heat>
+			<max_temp_cool>301.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 16</cooling_time>
 			<heating_time>6 16</heating_time>
@@ -1165,6 +1188,7 @@
 			<machines>35.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1198,11 +1222,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>20.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>293.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>18.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>291.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 16</cooling_time>
 			<heating_time>6 16</heating_time>
@@ -1216,6 +1240,7 @@
 			<machines>35.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>14.7</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1249,11 +1274,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>17 23</cooling_time>
 			<heating_time>17 23</heating_time>
@@ -1267,6 +1292,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1300,11 +1326,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>17 23</cooling_time>
 			<heating_time>17 23</heating_time>
@@ -1318,6 +1344,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.4 0.6 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>4.4</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1351,11 +1378,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>11 23</cooling_time>
 			<heating_time>11 23</heating_time>
@@ -1369,6 +1396,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1402,11 +1430,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>7 18</cooling_time>
 			<heating_time>7 18</heating_time>
@@ -1420,6 +1448,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.1</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1453,11 +1482,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -1471,6 +1500,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.1</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1504,11 +1534,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 20</cooling_time>
 			<heating_time>6 20</heating_time>
@@ -1522,6 +1552,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1555,11 +1586,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 20</cooling_time>
 			<heating_time>6 20</heating_time>
@@ -1573,6 +1604,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1606,11 +1638,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 20</cooling_time>
 			<heating_time>6 20</heating_time>
@@ -1624,6 +1656,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1657,11 +1690,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 23</cooling_time>
 			<heating_time>6 23</heating_time>
@@ -1675,6 +1708,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.1 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
 			<lighting_power>10.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1708,11 +1742,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -1726,6 +1760,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1759,11 +1794,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>7 0</cooling_time>
 			<heating_time>0 0</heating_time>
@@ -1777,6 +1812,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1810,11 +1846,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>24.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>297.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>23.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>296.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>8 22</cooling_time>
 			<heating_time>8 22</heating_time>
@@ -1828,6 +1864,7 @@
 			<machines>50.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
 			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1861,11 +1898,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>20.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>293.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>18.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>291.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 23</cooling_time>
 			<heating_time>6 23</heating_time>
@@ -1879,6 +1916,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.1 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
 			<lighting_power>9.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -1912,11 +1950,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>22.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -1930,6 +1968,7 @@
 			<machines>18.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>24.0</min_ahu>
@@ -1963,11 +2002,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>22.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -1981,6 +2020,7 @@
 			<machines>7.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -2014,11 +2054,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>24.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>297.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>22.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>295.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -2032,6 +2072,7 @@
 			<machines>10.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -2065,11 +2106,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>22.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -2083,6 +2124,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -2116,11 +2158,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>22.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 18</cooling_time>
 			<heating_time>6 18</heating_time>
@@ -2134,6 +2176,7 @@
 			<machines>5.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.2 0.4 1.0 0.6 0.6 0.6 0.6 1.0 0.6 0.6 0.6 0.6 1.0 0.4 0.2 0.2 0.2 0.2 0.2</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -2167,11 +2210,11 @@
 			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>12.0</set_temp_heat>
-			<set_temp_cool>26.0</set_temp_cool>
+			<set_temp_heat>285.15</set_temp_heat>
+			<set_temp_cool>299.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>12.0</min_temp_heat>
-			<max_temp_cool>28.0</max_temp_cool>
+			<min_temp_heat>285.15</min_temp_heat>
+			<max_temp_cool>301.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -2185,6 +2228,7 @@
 			<machines>0.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
@@ -2218,11 +2262,11 @@
 			<ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -2236,6 +2280,7 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.5 1.0 0.5 0.5 0.5 1.0 1.0 0.5 0.5 0.5 1.0 1.0 1.0 1.0 0.5 0.5 0.5 0.1</profile_machines>
 			<lighting_power>7.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.3</min_ahu>

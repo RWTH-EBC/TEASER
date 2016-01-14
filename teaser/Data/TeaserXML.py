@@ -406,7 +406,7 @@ def load_teaser_xml(path, prj):
             # zone.use_conditions.typical_length = pyxb_zone.typical_length
             # zone.use_conditions.typical_width = pyxb_zone.typical_width
 
-            zone.use_conditions = UseConditions18599()
+            zone.use_conditions = UseConditions18599(zone)
 
             pyxb_use = pyxb_zone.UseCondition.UseConditions18599
 

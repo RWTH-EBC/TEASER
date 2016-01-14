@@ -1,5 +1,5 @@
 %if extra != None: 
-${extra} 
+${extra}
 %endif
 %for i in list:
 %if addition != None: 
