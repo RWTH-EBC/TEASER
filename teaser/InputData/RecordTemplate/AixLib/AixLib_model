@@ -256,8 +256,8 @@ end ${bldg.name};
   <%
   lis = list(dictionary.keys())
   lis = sorted(lis)
-  newlist = [((element-180)*-1) for element in lis if element is not -1 and 
-            element is not -2]
+  newlist = [((element-180.0) * -1.0) for element in lis if element != -1.0
+             and element != -2.0]
   newlist[1], newlist[3] = newlist[3], newlist[1]
   string_of_list = "{"
   for element in newlist:

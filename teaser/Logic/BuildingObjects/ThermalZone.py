@@ -124,6 +124,8 @@ class ThermalZone(object):
         # Calculated values for windows for each Zone
         self.r1_win = 0.0
         self.weightfactor_win = []
+        self.g_sunblind_list = []
+        self.window_area_list = []
         self.ua_value_win = 0.0
         self.r_conv_inner_win = 0.0
         self.r_rad_inner_win = 0.0
@@ -478,9 +480,13 @@ class ThermalZone(object):
 
         orientation_ow = \
             collections.OrderedDict(sorted(orientation_ow_help.items()))
-        self.weightfactor_ow_dict = orientation_ow
         orientation_win = \
             collections.OrderedDict(sorted(orientation_win_help.items()))
+
+
+
+        self.weightfactor_ow_dict = orientation_ow
+
 
         roof_help = None
 
@@ -541,6 +547,9 @@ class ThermalZone(object):
         else:
             raise ValueError("specify calculation method correctly")
 
+        self.calc_g_sunblind(orientation_win)
+        self.calc_window_area_list(orientation_win)
+
     def compare_area_dicts(self, dict1, dict2):
         '''Compares the orientations of the dicts
         '''
@@ -551,6 +560,46 @@ class ThermalZone(object):
             if key not in dict1.keys():
                 dict1[key] = 0.0
         return dict1, dict2
+
+    def calc_g_sunblind(self, orientation_dict):
+        '''calculates the g value if the sunblind is closed'''
+
+        roof_help = 0.0
+        for key in orientation_dict:
+            key_help = True
+            if key != -2 and key != -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        key_help = False
+                        self.g_sunblind_list.append(window.shading_g_total)
+                        break
+                if key_help:
+                    self.g_sunblind_list.append(0.0)
+            elif key == -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        roof_help = window.shading_g_total
+        self.g_sunblind_list.append(roof_help)
+
+    def calc_window_area_list(self, orientation_dict):
+        '''calculates the window area list for modelica'''
+
+        roof_help = 0.0
+        for key in orientation_dict:
+            key_help = True
+            if key != -2 and key != -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        key_help = False
+                        self.window_area_list.append(window.area)
+                        break
+                if key_help:
+                    self.window_area_list.append(0.0)
+            elif key == -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        roof_help = window.area
+        self.window_area_list.append(roof_help)
 
     def set_inner_wall_area(self):
         '''Sets the inner wall area.
