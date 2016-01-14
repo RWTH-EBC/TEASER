@@ -547,8 +547,8 @@ class ThermalZone(object):
         else:
             raise ValueError("specify calculation method correctly")
 
-        self.calc_g_sunblind(orientation_win)
-        self.calc_window_area_list(orientation_win)
+        self.fill_sunblind_list(orientation_win)
+        self.fill_win_area_list(orientation_win)
 
     def compare_area_dicts(self, dict1, dict2):
         '''Compares the orientations of the dicts
@@ -561,8 +561,10 @@ class ThermalZone(object):
                 dict1[key] = 0.0
         return dict1, dict2
 
-    def calc_g_sunblind(self, orientation_dict):
-        '''calculates the g value if the sunblind is closed'''
+    def fill_sunblind_list(self, orientation_dict):
+        '''fills the g_sunblind_list in the right order with the right g values
+        when the sundblind is closed (needed for modelica specific export)
+        '''
 
         roof_help = 0.0
         for key in orientation_dict:
@@ -581,8 +583,10 @@ class ThermalZone(object):
                         roof_help = window.shading_g_total
         self.g_sunblind_list.append(roof_help)
 
-    def calc_window_area_list(self, orientation_dict):
-        '''calculates the window area list for modelica'''
+    def fill_win_area_list(self, orientation_dict):
+        '''fills the window_area_list in the right order with the right window
+        areas (needed for modelica specific export)
+        '''
 
         roof_help = 0.0
         for key in orientation_dict:
