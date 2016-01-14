@@ -100,7 +100,7 @@ Institute module
 
 The institute module contains a multi zone building which is based on an office 
 building with an additional laboratory zone. The area of the laboratory zone is
-based on data from the Forschungszentrum Jülich fixme. In detail the net leased 
+based on data from the Forschungszentrum Jülich :cite:`Abschlussbericht`. In detail the net leased 
 area is divided in the following thermal zone areas:
 
 #. Office (40% of net leased area)
@@ -129,7 +129,7 @@ Institute4 module
 
 The institute type 4 module contains a multi zone building which is based on an office 
 building with an additional laboratory zone. The area of the laboratory zone is
-based on data from the Forschungszentrum Jülich fixme. In detail the net leased 
+based on data from the Forschungszentrum Jülich :cite:`Abschlussbericht`. In detail the net leased 
 area is divided in the following thermal zone areas:
 
 #. Office (37.5% of net leased area)
@@ -158,7 +158,7 @@ Institute8 module
 
 The institute type 8 module contains a multi zone building which is based on an office 
 building with an additional laboratory zone. The area of the laboratory zone is
-based on data from the Forschungszentrum Jülich fixme. In detail the net leased 
+based on data from the Forschungszentrum Jülich :cite:`Abschlussbericht`. In detail the net leased 
 area is divided in the following thermal zone areas:
 
 #. Office (10% of net leased area)
@@ -218,5 +218,5 @@ Literature
 -----------------------------------------------------------------------------
 
 .. bibliography:: Literatur.bib
-	:style: unsrt
+	:style: plain
 	:encoding: latex+latin
