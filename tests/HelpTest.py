@@ -13,34 +13,28 @@ def building_test2(prj):
     """
     building which is hardcoded for testing
     """
-    
+    bldg = Building(parent = prj)
 
-    bldg = Building(prj)
+    '''Set some building parameters'''
 
-    bldg.name = "RWTHBuilding"
-    bldg.street_name = "Templergraben 55"
-    bldg.city = "52062 Aachen"
+    bldg.name = "UnitTestBuilding"
+    bldg.street_name = "Unit Street 42"
+    bldg.city = "46325 Testing Town"
+    bldg.year_of_construction = 1988
+    bldg.number_of_floors = 1
+    bldg.height_of_floors = 3.5
 
-    # bldg.type_of_building = "Buerogebaeude"
+    '''Instantiate a ThermalZone class, with building as parent and set  some 
+    parameters of the thermal zone'''
 
-    bldg.year_of_construction = "1988"
-    bldg.number_of_floors = 5.0
-    bldg.height_of_floors = 1.0
-    bldg.net_leased_area = 2000.0
-    bldg.construction_type = "heavy"
+    tz = ThermalZone(parent = bldg) 
+    tz.name = "Living Room"
+    tz.area = 140.0
+    tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+    tz.infiltration_rate = 0.5
+    tz.use_conditions = UseConditions18599(tz)
 
-    # bldg.thermal_zones = []
-    # bldg.outer_area = {}
-    # bldg.window_area ={}
 
-    bldg.volume = 30.0
-    # bldg.sum_heating_load = 0
-    # bldg.sum_cooling_load = 0
-
-    # bldg.file_ahu = ""
-    # bldg.file_internal_gains = ""
-    # bldg.file_set_t = ""
-    # bldg.file_weather = ""
     '''
      thermalzone
      '''
@@ -49,7 +43,7 @@ def building_test2(prj):
     tz.area = 10.0
     tz.volume = 25.0
     tz.infiltration_rate = 0.5
-    tz.use_conditions = UseConditions18599(tz)
+    
     '''
     outerwall
     '''
