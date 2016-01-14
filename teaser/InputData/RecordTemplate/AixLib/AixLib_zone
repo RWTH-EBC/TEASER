@@ -86,31 +86,28 @@ end ${bldg.name}_${zone.name};
 ##convert sunblind to string
 <%def name="sunblind_string(dict)", filter="trim">
   <%
-
   string_of_list = ""
-  print(string_of_list)
+  ## print(string_of_list)
   for key in dict.keys():
-
-    print(key)
-    for window in zone.windows:
-
-      if window.orientation == key:
+    if key != -1 and key != -2:
+      ## print(key)
+      help = True
+      for window in zone.windows:
+        if window.orientation == key:
+          help = False
+          if string_of_list == "":
+            string_of_list += str(window.shading_g_total)
+          else:
+            string_of_list += ", " + str(window.shading_g_total)
+      if help == True:
         if string_of_list == "":
-          string_of_list += str(window.shading_g_total)
+          string_of_list += str(0.0)
         else:
-          string_of_list += ", " + str(window.shading_g_total)
-
-
-  print(string_of_list)
-  string_of_list += ", " + str(0)
-  print(string_of_list)
+          string_of_list += ", " + str(0.0)      
+  ## print(string_of_list)
+  string_of_list += ", " + str(0.0)
+  ## print(string_of_list)
   return string_of_list
-
-
-
-
-
-
 	## i = 0
 	## length = max(len(zone.weightfactor_ow),len(zone.weightfactor_win))
 	
