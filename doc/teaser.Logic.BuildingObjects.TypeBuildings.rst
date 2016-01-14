@@ -226,5 +226,5 @@ Literature
 -----------------------------------------------------------------------------
 
 .. bibliography:: Literatur.bib
-	:style: plain
+	:style: unsrt
 	:encoding: latex+latin
