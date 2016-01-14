@@ -675,61 +675,6 @@ class ThermalZone(object):
         for win_count in self.windows:
             win_count.replace_window(self.parent.year_of_retrofit, window_type)
 
-    def numpy_internal_boundary(self,
-                                profile_persons = None,
-                                profile_machines = None,
-                                profile_lighting = None):
-        '''creates np.arry for internal gains boundary conditions (building)
-
-        This function creates a numpy array with the corresponding internal 
-        gains. This is a helper function to construct matfile of internal gains
-        in Building class
-
-        Parameters
-        ----------
-        profile_persons : [float]
-            timeline of persons internal gains
-        profile_machines : [Boolean]
-            timeline of machine internal gains
-        profile_lighting : [float]
-            timeline of lighting internal gains
-        Returns
-        ---------
-        internal_boundary : np.array
-            np.array with the boundaries for internal gains
-        
-        '''
-        ass_error_1 = "use_conditions have to be set to UseConditions18599"+\
-                        "in thermal zone"
-
-        if profile_persons is None:
-            assert type(self.use_conditions).__name__ == ("UseConditions18599"),\
-                                            ass_error_1
-            profile_persons = self.use_conditions.profile_persons
-        if profile_machines is None:
-            assert type(self.use_conditions).__name__ == ("UseConditions18599"),\
-                                            ass_error_1
-            profile_machines = self.use_conditions.profile_machines
-        if profile_lighting is None:
-            assert type(self.use_conditions).__name__ == ("UseConditions18599"),\
-                                            ass_error_1
-            profile_lighting = self.use_conditions.profile_lighting
-
-        ass_error_2 = "inputs have to have the same length"
-        
-        assert len(profile_persons) == len(profile_machines), (ass_error_2 + 
-                                                ",profile_machines")
-        assert len(profile_persons) == len(profile_lighting), (ass_error_2 + 
-                                                ",profile_lighting")
-
-        internal_boundary = np.zeros(len(profile_persons), 3)
-        
-        internal_boundary[:,0] = profile_persons
-        internal_boundary[:,1] = profile_machines
-        internal_boundary[:,2] = profile_lighting
-
-        return internal_boundary
-        
     def set_calc_default(self):
 
         # Calculated values for InnerWall for each Zone
