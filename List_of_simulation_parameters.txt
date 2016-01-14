@@ -39,14 +39,14 @@ l_cooler                    	| baseRecord / fully automated          	| Building
 KR_cooler                   	| NO                                    	|
 TN_cooler                   	| NO                                    	|
 - - - - - AHUMODES- - - - - - -	|- - - - - - - - - - - - - - - - - - - - - -| 
-heating (Yes)                  	| NO                                    	|BuildingSystems.AHU
-cooling (Yes)                  	| NO                                    	|BuildingSystems.AHU
-dehumidification (Yes)         	| NO                                    	|BuildingSystems.AHU
-humidification (Yes)           	| NO                                    	|BuildingSystems.AHU
-HRS (Yes)                      	| NO                                    	|BuildingSystems.AHU
-BPF_DeHu (Yes)                 	| NO                                    	|BuildingSystems.AHU
-efficiencyHRS_enabled (Yes)    	| NO                                    	|BuildingSystems.AHU
-efficiencyHRS_disabled (Yes)   	| NO                                    	|BuildingSystems.AHU
+heating (Yes)                  	| baseRecord / fully automated            	|BuildingSystems.AHU
+cooling (Yes)                  	| baseRecord / fully automated            	|BuildingSystems.AHU
+dehumidification (Yes)         	| baseRecord / fully automated            	|BuildingSystems.AHU
+humidification (Yes)           	| baseRecord / fully automated            	|BuildingSystems.AHU
+HRS (Yes)                      	| baseRecord / fully automated            	|BuildingSystems.AHU
+BPF_DeHu (Yes)                 	| baseRecord / fully automated            	|BuildingSystems.AHU
+efficiencyHRS_enabled (Yes)    	| baseRecord / fully automated            	|BuildingSystems.AHU
+efficiencyHRS_disabled (Yes)   	| baseRecord / fully automated            	|BuildingSystems.AHU
 --------------------------------|----------ZONE PARAMETERS------------------|-------------------------
 
 
