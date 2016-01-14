@@ -52,8 +52,8 @@ def set_gml_building(teaser_building):
                     energy.atticType("None"))
     gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
                     energy.basementType("None"))
-    gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
-                    energy.constructionStyle(teaser_building.construction_type))
+#    gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+#                    energy.constructionStyle(teaser_building.construction_type))
     gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
                     energy.yearOfRefurbishment(
                     bd.datatypes.gYear(teaser_building.year_of_construction)))
