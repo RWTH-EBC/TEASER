@@ -18,7 +18,7 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
     NrPeopleMachines = ${zone.use_conditions.machines},
     LightingPower = ${zone.use_conditions.lighting_power},
     h_heater = ${zone.heating_load},
-    gsunblind = {${sunblind_string(zone.windows)}},
+    gsunblind = {${sunblind_string(zone.weightfactor_ow_dict)}},
     Aw = {${area_string(zone.windows)}},
     withWindows = ${element_check(zone.windows)},
     weightfactorswindow = {${weightfactor_to_string(zone.weightfactor_win)}},
@@ -84,22 +84,47 @@ end ${bldg.name}_${zone.name};
 </%def>
 
 ##convert sunblind to string
-<%def name="sunblind_string(list)", filter="trim">
-	<%
-	i = 0
-	length = max(len(zone.weightfactor_ow),len(zone.weightfactor_win))
+<%def name="sunblind_string(dict)", filter="trim">
+  <%
+
+  string_of_list = ""
+  print(string_of_list)
+  for key in dict.keys():
+
+    print(key)
+    for window in zone.windows:
+
+      if window.orientation == key:
+        if string_of_list == "":
+          string_of_list += str(window.shading_g_total)
+        else:
+          string_of_list += ", " + str(window.shading_g_total)
+
+
+  print(string_of_list)
+  string_of_list += ", " + str(0)
+  print(string_of_list)
+  return string_of_list
+
+
+
+
+
+
+	## i = 0
+	## length = max(len(zone.weightfactor_ow),len(zone.weightfactor_win))
 	
-	string_of_list = ""
-	for i in range(length):
-		if i+1 < length:
-			if string_of_list == "":
-				string_of_list += str(list[i].shading_g_total) 
-			else:
-				string_of_list += ", "  + str(list[i].shading_g_total) 
-		else:
-			string_of_list += ", " + str(0)
-		i += 1
-	return string_of_list	
+	## string_of_list = ""
+	## for i in range(length):
+	## 	if i+1 < length:
+	## 		if string_of_list == "":
+	## 			string_of_list += str(list[i].shading_g_total) 
+	## 		else:
+	## 			string_of_list += ", "  + str(list[i].shading_g_total) 
+	## 	else:
+	## 		string_of_list += ", " + str(0)
+	## 	i += 1
+	## return string_of_list	
 	%>
 </%def>
 

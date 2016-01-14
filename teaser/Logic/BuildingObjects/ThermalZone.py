@@ -105,6 +105,7 @@ class ThermalZone(object):
         self.r_rest_ow = 0.0
         self.r_total = 0.0
         self.weightfactor_ow = []
+        self.weightfactor_ow_dict = {}
         self.weightfactor_ground = []
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
@@ -477,6 +478,7 @@ class ThermalZone(object):
 
         orientation_ow = \
             collections.OrderedDict(sorted(orientation_ow_help.items()))
+        self.weightfactor_ow_dict = orientation_ow
         orientation_win = \
             collections.OrderedDict(sorted(orientation_win_help.items()))
 
