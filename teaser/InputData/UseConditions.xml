@@ -17,7 +17,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.84</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
 			<room_index>0.9</room_index>
@@ -68,7 +68,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.92</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
 			<room_index>1.35</room_index>
@@ -119,7 +119,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
@@ -170,7 +170,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>1.25</room_index>
@@ -221,7 +221,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.87</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.5</room_index>
@@ -272,7 +272,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
@@ -323,7 +323,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
@@ -374,7 +374,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.97</red_factor_visual>
 			<rel_absence>0.25</rel_absence>
 			<room_index>2.0</room_index>
@@ -425,7 +425,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.92</red_factor_visual>
 			<rel_absence>0.25</rel_absence>
 			<room_index>2.5</room_index>
@@ -476,7 +476,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.5</room_index>
@@ -527,7 +527,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.25</rel_absence>
 			<room_index>1.25</room_index>
@@ -578,7 +578,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.97</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
@@ -629,7 +629,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
@@ -680,7 +680,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.96</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.5</room_index>
@@ -731,7 +731,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>1.5</room_index>
@@ -782,7 +782,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.9</rel_absence>
 			<room_index>0.8</room_index>
@@ -833,7 +833,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>1.25</room_index>
@@ -884,7 +884,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>100.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.9</rel_absence>
 			<room_index>1.5</room_index>
@@ -935,7 +935,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>100.0</maintained_illuminace>
-			<usage_level_hight>0.2</usage_level_hight>
+			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.8</rel_absence>
 			<room_index>0.8</room_index>
@@ -986,7 +986,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>100.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.98</rel_absence>
 			<room_index>1.5</room_index>
@@ -1037,7 +1037,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.96</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>1.5</room_index>
@@ -1088,7 +1088,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.85</red_factor_visual>
 			<rel_absence>0.1</rel_absence>
 			<room_index>2.5</room_index>
@@ -1139,7 +1139,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>400.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.85</red_factor_visual>
 			<rel_absence>0.1</rel_absence>
 			<room_index>2.5</room_index>
@@ -1190,7 +1190,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.85</red_factor_visual>
 			<rel_absence>0.1</rel_absence>
 			<room_index>2.5</room_index>
@@ -1241,7 +1241,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.97</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>4.0</room_index>
@@ -1292,7 +1292,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>4.0</room_index>
@@ -1343,7 +1343,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>1000.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>0.9</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
@@ -1394,7 +1394,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>5.0</room_index>
@@ -1445,7 +1445,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.88</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.0</room_index>
@@ -1496,7 +1496,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.88</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.5</room_index>
@@ -1547,7 +1547,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.5</room_index>
@@ -1598,7 +1598,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>100.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.9</rel_absence>
 			<room_index>1.5</room_index>
@@ -1649,7 +1649,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
 			<room_index>2.0</room_index>
@@ -1700,7 +1700,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>75.0</maintained_illuminace>
-			<usage_level_hight>0.2</usage_level_hight>
+			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.95</rel_absence>
 			<room_index>2.0</room_index>
@@ -1751,7 +1751,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>75.0</maintained_illuminace>
-			<usage_level_hight>0.2</usage_level_hight>
+			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.8</rel_absence>
 			<room_index>4.0</room_index>
@@ -1802,7 +1802,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.0</room_index>
@@ -1853,7 +1853,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.0</room_index>
@@ -1904,7 +1904,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>1.0</usage_level_hight>
+			<usage_level_height>1.0</usage_level_height>
 			<red_factor_visual>0.92</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
 			<room_index>1.25</room_index>
@@ -1955,7 +1955,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.2</room_index>
@@ -2006,7 +2006,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.2</room_index>
@@ -2057,7 +2057,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>125.0</maintained_illuminace>
-			<usage_level_hight>0.2</usage_level_hight>
+			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.8</rel_absence>
 			<room_index>1.0</room_index>
@@ -2108,7 +2108,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.2</room_index>
@@ -2159,7 +2159,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>150.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.6</rel_absence>
 			<room_index>2.4</room_index>
@@ -2210,7 +2210,7 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>150.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.6</rel_absence>
 			<room_index>2.4</room_index>

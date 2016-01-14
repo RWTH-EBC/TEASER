@@ -18,7 +18,7 @@
   <xs:complexType name="LightingType">
     <xs:sequence>
       <xs:element minOccurs="0" type="xs:float" name="maintained_illuminace"/>
-      <xs:element minOccurs="0" type="xs:float" name="usage_level_hight"/>
+      <xs:element minOccurs="0" type="xs:float" name="usage_level_height"/>
       <xs:element minOccurs="0" type="xs:float" name="red_factor_visual"/>
       <xs:element minOccurs="0" type="xs:float" name="rel_absence"/>
       <xs:element minOccurs="0" type="xs:float" name="room_index"/>
