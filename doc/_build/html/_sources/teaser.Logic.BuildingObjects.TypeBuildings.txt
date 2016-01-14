@@ -200,7 +200,7 @@ In detail the attributes are structured in the following sections:
 
 * Usage and operation times
 
-* Lighting
+* Lighting (The hourly profiles here are based on the usage and operation times)
 
 * Room climate
 
