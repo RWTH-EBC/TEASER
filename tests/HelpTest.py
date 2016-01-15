@@ -154,10 +154,12 @@ def building_test2(prj):
 
     for value in win_dict:
         win = Window(parent = tz)
+        win.construction_type = "Window"
         win.name = value[0]
         win.area = value[1][1]
         win.tilt = value[1][2]
         win.orientation = value[1][3]
+        win.building_age_group = [1994, 1998]
         
         win.inner_convection = 1.7
         win.inner_radiation = 5.0
