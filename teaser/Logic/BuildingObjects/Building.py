@@ -645,13 +645,13 @@ class Building(object):
     def name(self, value):
 
         if isinstance(value, str):
-            
-            self.__name = value
+
+            self.__name = value.replace(" ", "")
         else:
             try:
                 value = str(value)
-                self.__name = value
-                
+                self.__name = value.replace(" ", "")
+
             except ValueError:
                 print("Can't convert name to string")
 

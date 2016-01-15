@@ -639,6 +639,23 @@ class BuildingElement(object):
         self.r_outer_comb = 0.0
 
     @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        if isinstance(value, str):
+
+            self._name = value.replace(" ", "")
+        else:
+            try:
+                value = str(value)
+                self._name = value.replace(" ", "")
+
+            except ValueError:
+                print("Can't convert name to string")
+
+    @property
     def parent(self):
         return self.__parent
 
