@@ -1,0 +1,52 @@
+record ${bldg.name}_base "${bldg.name}_base"
+  extends AixLib.DataBase.Buildings.BuildingBaseRecord(
+    numZones = ${get_n(bldg.thermal_zones)},
+    zoneSetup = {
+		%for i in bldg.thermal_zones:
+		%if i == bldg.thermal_zones[-1]:
+		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name}()
+		%else:
+		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name}(),
+		%endif
+		%endfor
+		},
+    Vair = ${bldg.volume} ,
+    BuildingArea = ${bldg.net_leased_area}
+% if central_ahu:
+	,	
+	heating = ${get_true_false(central_ahu.heating)},
+	cooling = ${get_true_false(central_ahu.cooling)},
+	dehumidification = ${get_true_false(central_ahu.dehumidification)},
+	humidification = ${get_true_false(central_ahu.humidification)},
+	BPF_DeHu = ${central_ahu.by_pass_dehumidification},
+	HRS = ${get_true_false(central_ahu.heat_recovery)},
+	efficiencyHRS_enabled = ${central_ahu.efficiency_recovery},
+	efficiencyHRS_disabled = ${central_ahu.efficiency_revocery_false}
+% endif
+    );
+end ${bldg.name}_base;
+
+##get n
+<%def name="get_n(list)", filter="trim">
+	<%
+	n=0
+	for element in list:
+		if type(element).__name__ == "ThermalZone":
+			n += 1
+		else:
+			pass
+	return n
+	%>
+</%def>
+
+##get false
+<%def name="get_true_false(value)", filter="trim">
+  <%
+  if value == False:
+    return "false"
+  elif value == True:
+  	return "true"
+  else:
+    return value
+  %>
+</%def>

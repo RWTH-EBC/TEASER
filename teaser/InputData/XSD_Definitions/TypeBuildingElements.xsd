@@ -7,8 +7,8 @@
       <xs:element type="xs:float" name="density"/>
       <xs:element type="xs:float" name="thermal_conduc"/>
       <xs:element type="xs:float" name="heat_capac"/>
-      <xs:element type="xs:float" name="solar_absorp"/>
-      <xs:element type="xs:float" name="ir_emissivity"/>
+      <xs:element type="xs:float" name="solar_absorp" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="xs:float" name="ir_emissivity" maxOccurs="1" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="layerType">
