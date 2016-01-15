@@ -33,7 +33,7 @@
 					</UsageOperationTime>
 					<Lighting>
 						<maintained_illuminace>500.0</maintained_illuminace>
-						<usage_level_hight>0.8</usage_level_hight>
+						<usage_level_height>0.8</usage_level_height>
 						<red_factor_visual>0.84</red_factor_visual>
 						<rel_absence>0.3</rel_absence>
 						<room_index>0.9</room_index>
@@ -308,11 +308,11 @@
 				</Layer>
 			</Floor>
 			<Window>
-                       <year_of_construction>1960</year_of_construction>
+                <year_of_construction>1960</year_of_construction>
 				<construction_type>1</construction_type>
 				<area>7.0</area>
 				<tilt>90.0</tilt>
-				<orientation>0.0</orientation>
+				<orientation>180.0</orientation>
 				<inner_convection>2.7</inner_convection>
 				<inner_radiation>5.0</inner_radiation>
 				<outer_convection>20.0</outer_convection>
