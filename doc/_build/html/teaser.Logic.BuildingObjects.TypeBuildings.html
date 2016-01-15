@@ -571,22 +571,24 @@ In detail the attributes are structured in the following sections:</p>
 <li>Internal gains</li>
 <li>Misc</li>
 </ul>
-<span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599"></span><dl class="class">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599">
-<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.</code><code class="descname">UseConditionsOffice18599</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599"></span><p>UseConditions18599</p>
+<p>This module is a container for UseConditions following 18599 and SIA</p>
+<dl class="class">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599">
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.</code><code class="descname">UseConditions18599</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="teaser.Logic.BuildingObjects.html#teaser.Logic.BuildingObjects.UseConditions.UseConditions" title="teaser.Logic.BuildingObjects.UseConditions.UseConditions"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.UseConditions.UseConditions</span></code></a></p>
 <p>Use Conditions DIN 18599</p>
-<p>CLass that contains the boundary conditions of use for non-residential
+<p>Class that contains the boundary conditions of use for non-residential
 buildings defined in DIN V 18599-10</p>
 <p class="rubric">Attributes</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="37%" />
-<col width="63%" />
+<col width="36%" />
+<col width="64%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td>Note: the attributes description are the translation from DIN guideline</td>
-<td>&nbsp;</td>
+<tr class="row-odd"><td>Note: the attributes description are translations from DIN V 18599-10</td>
+<td>standard</td>
 </tr>
 <tr class="row-even"><td>USAGE AND OPERATION TIMES</td>
 <td>&nbsp;</td>
@@ -636,93 +638,101 @@ buildings defined in DIN V 18599-10</p>
 <tr class="row-odd"><td>maintained_illuminace</td>
 <td>(int) maintained illuminance value (lx) - Wartungswert der Beleuchtungsstaerke</td>
 </tr>
-<tr class="row-even"><td>usage_level_hight: float</td>
-<td>hight of the usage level (m)  - Hoehe der Nutzebene</td>
+<tr class="row-even"><td>usage_level_height: float</td>
+<td>height of the usage level (m)  - Hoehe der Nutzebene</td>
 </tr>
 <tr class="row-odd"><td>red_factor_visual</td>
-<td>(float) reduction factor for visual task Sector -  Minderungsfaktor Bereich Sehaufgabe</td>
+<td>(float) reduction factor for visual task sector -  Minderungsfaktor Bereich Sehaufgabe</td>
 </tr>
 <tr class="row-even"><td>rel_absence</td>
 <td>(float) relative absence - Raumindex</td>
 </tr>
 <tr class="row-odd"><td>room_index</td>
-<td>(float) room Index - jaehrliche Betriebstage fuer Kuehlung</td>
+<td>(float) room index - jaehrliche Betriebstage fuer Kuehlung</td>
 </tr>
 <tr class="row-even"><td>part_load_factor_lighting</td>
 <td>(float) part load factor of building usage time for lighting - Teilbetriebsfaktor der Gebaeudebetriebszeit fuer Beleuchtung</td>
 </tr>
-<tr class="row-odd"><td>ROOM CLIMATE</td>
+<tr class="row-odd"><td>ratio_conv_rad_lighting</td>
+<td>(float) describes the ratio between convective and radiative heat transer of the lighting</td>
+</tr>
+<tr class="row-even"><td>ROOM CLIMATE</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td>set_temp_heat: float</td>
+<tr class="row-odd"><td>set_temp_heat: float</td>
 <td>internal set temperature heating - Raum-Solltemperatur Heizung</td>
 </tr>
-<tr class="row-odd"><td>set_temp_cool: float</td>
+<tr class="row-even"><td>set_temp_cool: float</td>
 <td>internal set temperature cooling - Raum-Solltemperatur Kuehlung</td>
 </tr>
-<tr class="row-even"><td>temp_set_back: float</td>
-<td>set back in reduced operation - Temperaturabsenkung reduzierter Betrieb</td>
+<tr class="row-odd"><td>temp_set_back: float</td>
+<td>set back in reduced operation mode - Temperaturabsenkung reduzierter Betrieb</td>
 </tr>
-<tr class="row-odd"><td>min_temp_heat</td>
+<tr class="row-even"><td>min_temp_heat</td>
 <td>(float) design minimal temperature heating -  Minimaltemperatur Auslegung Heizung</td>
 </tr>
-<tr class="row-even"><td>max_temp_cool</td>
+<tr class="row-odd"><td>max_temp_cool</td>
 <td>(float) design maximal temperature cooling - Maximaltemperatur Auslegung Kuehlung</td>
 </tr>
-<tr class="row-odd"><td>rel_humidity</td>
+<tr class="row-even"><td>rel_humidity</td>
 <td>(float) relative humidity - Feuchteanforderung d</td>
 </tr>
-<tr class="row-even"><td>min_air_exchange</td>
+<tr class="row-odd"><td>min_air_exchange</td>
 <td>(float) required minimal air exchange, due to usage - Mindestaussenluftvolumenstrom</td>
 </tr>
-<tr class="row-odd"><td>rel_absence_ahu</td>
+<tr class="row-even"><td>rel_absence_ahu</td>
 <td>(float) relative absence for AHU - Relative Abwesenheit RLT</td>
 </tr>
-<tr class="row-even"><td>part_load_factor_ahu: float</td>
+<tr class="row-odd"><td>part_load_factor_ahu: float</td>
 <td>part load factor of building usage time for AHU  - Teilbetriebsfaktor der Gebaeudebetriebszeit RLT</td>
 </tr>
-<tr class="row-odd"><td>cooling_time</td>
+<tr class="row-even"><td>cooling_time</td>
 <td>([int]) cooling time [begin, end] -  Beginn/Ende Betriebszeit RLT und Kuehlung</td>
 </tr>
-<tr class="row-even"><td>heating_time</td>
+<tr class="row-odd"><td>heating_time</td>
 <td>([int]) heating time [begin, end] - Beginn/End Betriebszeit Heizung</td>
 </tr>
-<tr class="row-odd"><td>INTERNAL GAINS</td>
+<tr class="row-even"><td>INTERNAL GAINS</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td>persons</td>
+<tr class="row-odd"><td>persons</td>
 <td>(int) number of persons - Personen</td>
 </tr>
-<tr class="row-odd"><td>profile_persons</td>
+<tr class="row-even"><td>profile_persons</td>
 <td>([float]) timeline of internal gains from 0 - 100 - Nutzungsprofil Personen</td>
 </tr>
-<tr class="row-even"><td>machines: float</td>
+<tr class="row-odd"><td>machines: float</td>
 <td>number of Machines  - Arbeitshilfen</td>
 </tr>
-<tr class="row-odd"><td>profile_machines</td>
+<tr class="row-even"><td>profile_machines</td>
 <td>([float]) timeline of internal gains from 0 - 100  -  Nutzungsprofil Geraete</td>
 </tr>
-<tr class="row-even"><td>lighting_power</td>
-<td>(float) spec. elektr. Power for lighting - spez. Elektr. Leistung-Raumbeleuchtung</td>
+<tr class="row-odd"><td>lighting_power</td>
+<td>(float) spec. electr. Power for lighting - spez. Elektr. Leistung-Raumbeleuchtung</td>
 </tr>
-<tr class="row-odd"><td>MISC</td>
+<tr class="row-even"><td>MISC</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td>min_ahu: float</td>
+<tr class="row-odd"><td>min_ahu: float</td>
 <td>min ahu  - minAHU</td>
 </tr>
-<tr class="row-odd"><td>max_ahu</td>
+<tr class="row-even"><td>max_ahu</td>
 <td>(float) max ahu - maxAHU</td>
 </tr>
-<tr class="row-even"><td>with_ahu</td>
+<tr class="row-odd"><td>with_ahu</td>
 <td>(boolean) with ahu - withAHU</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.lighting_power">
+<code class="descname">lighting_power</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.lighting_power" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.load_use_conditions">
-<code class="descname">load_use_conditions</code><span class="sig-paren">(</span><em>zone_usage</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.load_use_conditions" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.load_use_conditions">
+<code class="descname">load_use_conditions</code><span class="sig-paren">(</span><em>zone_usage</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.load_use_conditions" title="Permalink to this definition">¶</a></dt>
 <dd><p>load typical use conditions</p>
 <p>loads Use conditions specified in the XML, according to 18599</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -739,21 +749,96 @@ buildings defined in DIN V 18599-10</p>
 </table>
 </dd></dl>
 
-<dl class="method">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.save_use_conditions">
-<code class="descname">save_use_conditions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.save_use_conditions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves typical use conditions</p>
-<p>Saves use conditions specified in the XML, according to 18599</p>
-</dd></dl>
-
 <dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_length">
-<code class="descname">typical_length</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_length" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.machines">
+<code class="descname">machines</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.machines" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_width">
-<code class="descname">typical_width</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_width" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.max_ahu">
+<code class="descname">max_ahu</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.max_ahu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.max_temp_cool">
+<code class="descname">max_temp_cool</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.max_temp_cool" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_ahu">
+<code class="descname">min_ahu</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_ahu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_air_exchange">
+<code class="descname">min_air_exchange</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_air_exchange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_temp_heat">
+<code class="descname">min_temp_heat</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_temp_heat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.persons">
+<code class="descname">persons</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.persons" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.rel_humidity">
+<code class="descname">rel_humidity</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.rel_humidity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.save_use_conditions">
+<code class="descname">save_use_conditions</code><span class="sig-paren">(</span><em>path=None</em>, <em>file_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.save_use_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use conditions saver.</p>
+<p>Saves use conditions according to their usage type in the the XML file
+for use conditions in InputData. If the Project parent is set, it
+automatically saves it to the file given in Project.data. Alternatively
+you can specify a path to a file of UseConditions. If this
+file does not exist, a new file is created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : str</p>
+<blockquote>
+<div><p>path where unique file should be stored</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote class="last">
+<div><p>name of of unique file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.set_temp_cool">
+<code class="descname">set_temp_cool</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.set_temp_cool" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.set_temp_heat">
+<code class="descname">set_temp_heat</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.set_temp_heat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.temp_set_back">
+<code class="descname">temp_set_back</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.temp_set_back" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.typical_length">
+<code class="descname">typical_length</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.typical_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.typical_width">
+<code class="descname">typical_width</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.typical_width" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -905,7 +990,7 @@ buildings defined in DIN V 18599-10</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>
