@@ -48,7 +48,7 @@ def example_create_building():
     parameters of the thermal zone'''
 
     tz = ThermalZone(parent = bldg) 
-    tz.name = "Living Room"
+    tz.name = "LivingRoom"
     tz.area = 140.0
     tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
     tz.infiltration_rate = 0.5

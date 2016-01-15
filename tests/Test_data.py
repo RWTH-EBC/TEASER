@@ -592,14 +592,8 @@ class Test_teaser(object):
 
         prj.retrofit_all_buildings(2015)
 
-#    def test_export_record(self):
-#        '''test of export_record, no calculation verification'''
-#
-#        prj.calc_all_buildings('vdi')
-#        prj.export_record('AixLib')
-#        prj.export_record('CitiesType_old')
-#        prj.calc_all_buildings('ebc')
-#        prj.export_record('CitiesRWin')
+    def test_export_record(self):
+        '''test of export_record, no calculation verification'''
 
         prj.calc_all_buildings('vdi')
         prj.export_record('MultizoneEquipped')
@@ -872,29 +866,45 @@ class Test_teaser(object):
         '''test of calc_weightfactor'''
         prj.list_of_buildings[-1].thermal_zones[-1].calc_weightfactors('vdi')
         therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
-        assert therm_zone.weightfactor_ow == [0.5992431763879407]
-        assert therm_zone.weightfactor_win == [0.4007568236120593]
+        assert therm_zone.weightfactor_ow == [0.02453065018076125,
+                                              0.03434291025306575,
+                                              0.02453065018076125,
+                                              0.03434291025306575,
+                                              0.34070003307297914]
+        assert therm_zone.weightfactor_win == [0.0,
+                                               0.05421464247265634,
+                                               0.08674342795625016,
+                                               0.05421464247265634,
+                                               0.0]
 
         prj.list_of_buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.list_of_buildings[-1].thermal_zones[-1].weightfactor_win = []
 
         prj.list_of_buildings[-1].thermal_zones[-1].calc_weightfactors('ebc')
         therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
-        assert therm_zone.weightfactor_ow == [1.0]
-        assert therm_zone.weightfactor_win == [1.0]
+        assert therm_zone.weightfactor_ow == [0.03047939672771177,
+                                              0.042671155418796486,
+                                              0.03047939672771177,
+                                              0.042671155418796486,
+                                              0.42332067828026887]
+        assert therm_zone.weightfactor_win == [0.0,
+                                               0.27777777777777778,
+                                               0.44444444444444453,
+                                               0.27777777777777778,
+                                               0.0]
 
     def test_volume_zone(self):
         '''test of volume_zone'''
 
         prj.list_of_buildings[-1].thermal_zones[-1].set_volume_zone()
-        assert prj.list_of_buildings[-1].thermal_zones[-1].volume == 10.0
+        assert prj.list_of_buildings[-1].thermal_zones[-1].volume == 490.0
 
     def test_set_inner_wall_area(self):
         '''test of set_inner_wall_area'''
 
         prj.list_of_buildings[-1].thermal_zones[-1].set_inner_wall_area()
         for wall in prj.list_of_buildings[-1].thermal_zones[-1].inner_walls:
-            assert round(wall.area, 16) == 0.2439024390243902
+            assert round(wall.area, 16) == 11.951219512195122
 
    #methods in UseConditions18599()
 
@@ -905,6 +915,11 @@ class Test_teaser(object):
 
     def test_save_use_conditions(self):
         '''test of save_use_conditions, no parameter checking'''
+        import os
+        try:
+            os.remove(Utilis.get_default_path() + "\\" + "UseCondUT.xml")
+        except:
+            pass
         path = Utilis.get_default_path()
         use_cond = prj.list_of_buildings[-1].thermal_zones[-1].use_conditions
         use_cond.parent = None
@@ -945,7 +960,12 @@ class Test_teaser(object):
         therm_zone.windows[0].load_type_element(1988, "heavy")
 
     def test_save_type_element(self):
-        '''test of load_type_element, no parameter checking'''
+        '''test of save_type_element, no parameter checking'''
+        import os
+        try:
+            os.remove(Utilis.get_default_path() + "\\" + "unitTestTB.xml")
+        except:
+            pass
 
         # test load function
         therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
@@ -998,4 +1018,4 @@ class Test_teaser(object):
         therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
         therm_zone.windows[0].calc_equivalent_res()
 
-        assert round(therm_zone.windows[0].r1, 3) == 0.125
+        assert round(therm_zone.windows[0].r1, 3) == 0.072
