@@ -866,8 +866,15 @@ class Test_teaser(object):
         '''test of calc_weightfactor'''
         prj.list_of_buildings[-1].thermal_zones[-1].calc_weightfactors('vdi')
         therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
-        assert therm_zone.weightfactor_ow == [0.5992431763879407]
-        assert therm_zone.weightfactor_win == [0.4007568236120593]
+        assert therm_zone.weightfactor_ow == [0.02453065018076125,
+                                              0.03434291025306575,
+                                              0.02453065018076125,
+                                              0.03434291025306575,
+                                              0.34070003307297914]
+        assert therm_zone.weightfactor_win == [0.05421464247265634,
+                                               0.08674342795625016,
+                                               0.05421464247265634,
+                                               0]
 
         prj.list_of_buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.list_of_buildings[-1].thermal_zones[-1].weightfactor_win = []
