@@ -5,7 +5,6 @@ import math
 import collections
 import random
 import warnings
-import numpy as np
 
 class ThermalZone(object):
     '''This class represents a Thermal Zone in a building
