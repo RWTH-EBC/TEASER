@@ -10,18 +10,20 @@ import teaser.Data.SchemaBindings.UseConditions18599Bind as uc_bind
 import teaser.Logic.Utilis as utilis
 import warnings
 
+
 class UseConditions18599(UseConditions):
 
     '''Use Conditions DIN 18599
 
-    CLass that contains the boundary conditions of use for non-residential
+    Class that contains the boundary conditions of use for non-residential
     buildings defined in DIN V 18599-10
 
 
     Attributes
     ----------
 
-    Note: the attributes description are the translation from DIN guideline
+    Note: the attributes description are translations from DIN V 18599-10
+            standard
 
     USAGE AND OPERATION TIMES
 
@@ -74,25 +76,25 @@ class UseConditions18599(UseConditions):
         maintained illuminance value (lx) - Wartungswert der
         Beleuchtungsstaerke
 
-    usage_level_hight: float
-        hight of the usage level (m)  - Hoehe der Nutzebene
+    usage_level_height: float
+        height of the usage level (m)  - Hoehe der Nutzebene
 
     red_factor_visual : float
-       reduction factor for visual task Sector -  Minderungsfaktor Bereich
+       reduction factor for visual task sector -  Minderungsfaktor Bereich
        Sehaufgabe
 
     rel_absence : float
         relative absence - Raumindex
 
     room_index : float
-        room Index - jaehrliche Betriebstage fuer Kuehlung
+        room index - jaehrliche Betriebstage fuer Kuehlung
 
     part_load_factor_lighting : float
         part load factor of building usage time for lighting -
         Teilbetriebsfaktor der Gebaeudebetriebszeit fuer Beleuchtung
 
     ratio_conv_rad_lighting : float
-        describes the ratio between convective and radiative heat transer
+        describes the ratio between convective and radiative heat transfer
         of the lighting
 
     ROOM CLIMATE
@@ -104,7 +106,8 @@ class UseConditions18599(UseConditions):
         internal set temperature cooling - Raum-Solltemperatur Kuehlung
 
     temp_set_back: float
-        set back in reduced operation - Temperaturabsenkung reduzierter Betrieb
+        set back in reduced operation mode - Temperaturabsenkung reduzierter
+        Betrieb
 
     min_temp_heat : float
         design minimal temperature heating -  Minimaltemperatur
@@ -139,20 +142,40 @@ class UseConditions18599(UseConditions):
     persons : int
         number of persons - Personen
 
+    activity_type_persons : int
+        persons activity
+
+    ratio_conv_rad_persons : float
+        describes the ratio between convective and radiative heat transfer
+        of the persons
+
     profile_persons : [float]
-        timeline of internal gains from 0 - 100 - Nutzungsprofil Personen
+        timeline of internal gains (persons) from 0 - 100 - Nutzungsprofil 
+        Personen
 
     machines: float
         number of Machines  - Arbeitshilfen
 
+    activity_type_machines : int
+        machines activity
+
+    ratio_conv_rad_machines : float
+        describes the ratio between convective and radiative heat transfer
+        of the lighting
+
     profile_machines : [float]
-      timeline of internal gains from 0 - 100  -  Nutzungsprofil Geraete
+      timeline of internal gains (machines) from 0 - 100  -  Nutzungsprofil 
+      Geraete
 
     lighting_power : float
-        spec. elektr. Power for lighting - spez. Elektr.
+        spec. electr. Power for lighting - spez. Elektr.
         Leistung-Raumbeleuchtung
+        
+    profile_lighting : [float]
+      timeline of internal gains (lighting) from 0 - 100  -  Nutzungsprofil 
+      Licht
 
-    MISC
+    MISC/AHU
 
     min_ahu: float
         min ahu  - minAHU
@@ -162,6 +185,26 @@ class UseConditions18599(UseConditions):
 
     with_ahu : boolean
         with ahu - withAHU
+
+    use_constant_ach_rate : boolean
+        choose if a constant ACH rate should be used
+
+    base_ach : float
+        base value for the infiltration rate
+
+    max_user_ach : float
+        additional infiltration rate for maximum persons activity
+
+    max_overheating_ach : list
+        additional infiltration rate when overheating appears
+
+    max_summer_ach : list
+        additional infiltration rate in the summer with
+        [infiltration_rate, Tmin, Tmax]
+
+    winter_reduction : list
+        reduction factor of userACH for cold weather with
+        [infiltration_rate, Tmin, Tmax]
     '''
 
     def __init__(self, parent=None):
@@ -187,7 +230,7 @@ class UseConditions18599(UseConditions):
         self.daily_operation_heating = 13
 
         self.maintained_illuminace = 500
-        self.usage_level_hight = 0.8
+        self.usage_level_height = 0.8
         self.red_factor_visual = 0.84
         self.rel_absence = 0.3
         self.room_index = 0.9
@@ -207,18 +250,31 @@ class UseConditions18599(UseConditions):
         self.heating_time = [5, 18]
 
         self._persons = 5.0
-        self.profile_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.4,
-                                0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
-                                0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        self.activity_type_persons = 3  # physical activity
+        self.ratio_conv_rad_persons = 0.5
+        self._profile_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.4,
+                                 0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
+                                 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self._machines = 7.0
-        self.profile_machines = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.4,
+        self.activity_type_machines = 2
+        self.ratio_conv_rad_machines = 0.5
+        self._profile_machines = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.4,
                                  0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
                                  0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
         self._lighting_power = 15.9
-        
+        self._profile_lighting = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0,
+                                  1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
+                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self._min_ahu = 0.0
         self._max_ahu = 2.6
         self.with_ahu = True
+
+        self.use_constant_ach_rate = False
+        self.base_ach = 0.2
+        self.max_user_ach = 1.0
+        self.max_overheating_ach = [3.0, 2.0]
+        self.max_summer_ach = [1.0, 273.15 + 10, 273.15 + 17]
+        self.winter_reduction = [0.2, 273.15, 273.15 + 10]
 
     def load_use_conditions(self, zone_usage):
         '''load typical use conditions
@@ -246,6 +302,7 @@ class UseConditions18599(UseConditions):
                 self.typical_width = usage.typical_width
 
                 self.usage = usage.usage
+                self.usage_time = usage.UsageOperationTime.usage_time
                 self.daily_usage_hours = \
                     usage.UsageOperationTime.daily_usage_hours
                 self.yearly_usage_days = \
@@ -267,7 +324,7 @@ class UseConditions18599(UseConditions):
 
                 self.maintained_illuminace = \
                     usage.Lighting.maintained_illuminace
-                self.usage_level_hight = usage.Lighting.usage_level_hight
+                self.usage_level_height = usage.Lighting.usage_level_height
                 self.red_factor_visual = usage.Lighting.red_factor_visual
                 self.rel_absence = usage.Lighting.rel_absence
                 self.room_index = usage.Lighting.room_index
@@ -294,6 +351,7 @@ class UseConditions18599(UseConditions):
                 self.machines = usage.InternalGains.machines
                 self.profile_machines = usage.InternalGains.profile_machines
                 self.lighting_power = usage.InternalGains.lighting_power
+                self.profile_lighting = usage.InternalGains.profile_lighting
                 self.min_ahu = usage.AHU.min_ahu
                 self.max_ahu = usage.AHU.max_ahu
                 self.with_ahu = usage.AHU.with_ahu
@@ -331,8 +389,8 @@ class UseConditions18599(UseConditions):
 
         for check in xml_parse.UseConditions18599:
             if check.usage == self.usage:
-                warnings.warn("Usage already exist in this XML, consider "
-                              "revising your inputs. The UseConditions is  "
+                warnings.warn("Usage already exist in this XML, consider " +
+                              "revising your inputs. The UseConditions is  " +
                               "NOT saved into XML")
                 add_to_xml = False
                 break
@@ -371,7 +429,7 @@ class UseConditions18599(UseConditions):
 
             usage_pyxb.Lighting.maintained_illuminace = \
                 self.maintained_illuminace
-            usage_pyxb.Lighting.usage_level_hight = self.usage_level_hight
+            usage_pyxb.Lighting.usage_level_height = self.usage_level_height
             usage_pyxb.Lighting.red_factor_visual = self.red_factor_visual
             usage_pyxb.Lighting.rel_absence = self.rel_absence
             usage_pyxb.Lighting.room_index = self.room_index
@@ -398,7 +456,8 @@ class UseConditions18599(UseConditions):
             usage_pyxb.InternalGains.machines = self.machines
             usage_pyxb.InternalGains.profile_machines = self.profile_machines
             usage_pyxb.InternalGains.lighting_power = self.lighting_power
-
+            usage_pyxb.InternalGains.profile_lighting = self.profile_lighting
+            
             usage_pyxb.AHU.min_ahu = self.min_ahu
             usage_pyxb.AHU.max_ahu = self.max_ahu
             usage_pyxb.AHU.with_ahu = self.with_ahu
@@ -434,7 +493,56 @@ class UseConditions18599(UseConditions):
             self.parent.typical_width = self._typical_width
 
         self._typical_width = value
-    
+    @property
+    def profile_persons(self):
+        return self._profile_persons
+
+    @profile_persons.setter
+    def profile_persons(self, value):
+        
+        if self._profile_persons is None:
+            pass
+        else:
+            if self.parent.parent.file_internal_gains is None:
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")
+        self._profile_persons = value
+                     
+    @property
+    def profile_machines(self):
+        return self._profile_machines
+
+    @profile_machines.setter
+    def profile_machines(self, value):
+        
+        if self._profile_machines is None:
+            pass
+        else:
+            if self.parent.parent.file_internal_gains is None:
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")
+        self._profile_machines = value  
+                                 
+    @property
+    def profile_lighting(self):
+
+        return self._profile_lighting
+
+    @profile_lighting.setter
+    def profile_lighting(self, value):
+        
+        if self._profile_lighting is None:
+            pass
+        else:
+            if self.parent.parent.file_internal_gains is None:
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")
+                                           
+        self._profile_lighting = value
+        
     @property
     def set_temp_heat(self):
         return self._set_temp_heat
@@ -443,34 +551,57 @@ class UseConditions18599(UseConditions):
     def set_temp_heat(self, value):
 
         if isinstance(value, float):
-            self._set_temp_heat = value
+            pass
         elif value is None:
-            self._set_temp_heat = value
+            pass
         else:
             try:
                 value = float(value)
-                self._set_temp_heat = value
             except:
-                raise ValueError("Can't convert temperature to float")
-                
+                raise ValueError("Can't convert temperature to float")        
+        
+        if self._set_temp_heat is None:
+            pass
+        else:
+            if self.parent is not None:
+                if self.parent.parent.file_set_t is None:
+                    self.parent.parent.file_set_t = ("\\TSet" +
+                                                   self.parent.parent.name +
+                                                   ".mat")
+            else:
+                pass
+                                           
+        self._set_temp_heat = value
+        
     @property
-    def set_temp_cool(self):        
+    def set_temp_cool(self):
         return self._set_temp_cool
 
     @set_temp_cool.setter
     def set_temp_cool(self, value):
-
+                
         if isinstance(value, float):
-            self._set_temp_cool = value
+            pass
         elif value is None:
-            self._set_temp_cool = value
+            pass
         else:
             try:
                 value = float(value)
-                self._set_temp_cool = value
             except:
-                raise ValueError("Can't convert temperature to float")
-                
+                raise ValueError("Can't convert temperature to float")  
+
+        if self._set_temp_cool is None:
+            pass
+        else:
+            if self.parent is not None:
+                if self.parent.parent.file_set_t is None:
+                    self.parent.parent.file_set_t = ("\\TSet_" +
+                                                   self.parent.parent.name +
+                                                   ".mat")
+                else:
+                    pass
+        self._set_temp_cool = value
+          
     @property
     def temp_set_back(self):        
         return self._temp_set_back
@@ -532,16 +663,24 @@ class UseConditions18599(UseConditions):
     def rel_humidity(self, value):
 
         if isinstance(value, float):
-            self._rel_humidity = value
+            pass
         elif value is None:
-            self._rel_humidity = value
+            pass
         else:
             try:
                 value = float(value)
-                self._rel_humidity = value
             except:
                 raise ValueError("Can't convert humidity to float")
-                
+
+        if self._rel_humidity is None:
+            pass
+        else:
+            if self.parent.parent.file_ahu is None:
+                self.parent.parent.file_ahu = ("\\AHU_" +
+                                               self.parent.parent.name +
+                                               ".mat")                 
+        self._rel_humidity = value  
+
     @property
     def min_air_exchange(self):
         return self._min_air_exchange
@@ -550,15 +689,23 @@ class UseConditions18599(UseConditions):
     def min_air_exchange(self, value):
 
         if isinstance(value, float):
-            self._min_air_exchange = value
+            pass
         elif value is None:
-            self._min_air_exchange = value
+            pass
         else:
             try:
                 value = float(value)
-                self._min_air_exchange = value
             except:
-                raise ValueError("Can't convert air exchange to float")
+                raise ValueError("Can't convert min_air_exchange to float")
+
+        if self._min_air_exchange is None:
+            pass
+        else:
+            if self.parent.parent.file_ahu is None:
+                self.parent.parent.file_ahu = ("\\AHU_" +
+                                               self.parent.parent.name +
+                                               ".mat")                 
+        self._min_air_exchange = value
                 
     @property
     def min_ahu(self):
@@ -568,16 +715,24 @@ class UseConditions18599(UseConditions):
     def min_ahu(self, value):
 
         if isinstance(value, float):
-            self._min_ahu = value
+            pass
         elif value is None:
-            self._min_ahu = value
+            pass
         else:
             try:
                 value = float(value)
-                self._min_ahu = value
             except:
-                raise ValueError("Can't convert AHU airflow to float")
-                
+                raise ValueError("Can't convert AHU airflow to float") 
+
+        if self._min_ahu is None:
+            pass
+        else:
+            if self.parent.parent.file_ahu is None:
+                self.parent.parent.file_ahu = ("\\AHU_" +
+                                               self.parent.parent.name +
+                                               ".mat")                 
+        self._min_ahu = value
+              
     @property
     def max_ahu(self):
         return self._max_ahu
@@ -586,15 +741,23 @@ class UseConditions18599(UseConditions):
     def max_ahu(self, value):
 
         if isinstance(value, float):
-            self._max_ahu = value
+            pass
         elif value is None:
-            self._max_ahu = value
+            pass
         else:
             try:
                 value = float(value)
-                self._max_ahu = value
             except:
-                raise ValueError("Can't convert AHU airflow to float")
+                raise ValueError("Can't convert AHU airflow to float") 
+
+        if self._max_ahu is None:
+            pass
+        else:
+            if self.parent.parent.file_ahu is None:
+                self.parent.parent.file_ahu = ("\\AHU_" +
+                                               self.parent.parent.name +
+                                               ".mat")                 
+        self._max_ahu = value
                 
     @property
     def persons(self):
@@ -604,16 +767,24 @@ class UseConditions18599(UseConditions):
     def persons(self, value):
 
         if isinstance(value, float):
-            self._persons = value
+            pass
         elif value is None:
-            self._persons = value
+            pass
         else:
             try:
                 value = float(value)
-                self._persons = value
             except:
                 raise ValueError("Can't convert persons to float")
-                
+
+        if self._persons is None:
+            pass
+        else:
+            if self.parent.parent.file_internal_gains is None:
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")           
+        self._persons = value
+                        
     @property
     def machines(self):
         return self._machines
@@ -622,15 +793,23 @@ class UseConditions18599(UseConditions):
     def machines(self, value):
 
         if isinstance(value, float):
-            self._machines = value
+            pass
         elif value is None:
-            self._machines = value
+            pass
         else:
             try:
                 value = float(value)
-                self._machines = value
             except:
                 raise ValueError("Can't convert machines to float")
+
+        if self._machines is None:
+            pass
+        else:
+            if self.parent.parent.file_internal_gains is None:
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")           
+        self._machines = value
                 
     @property
     def lighting_power(self):
@@ -640,12 +819,20 @@ class UseConditions18599(UseConditions):
     def lighting_power(self, value):
 
         if isinstance(value, float):
-            self._lighting_power = value
+            pass
         elif value is None:
-            self._lighting_power = value
+            pass
         else:
             try:
                 value = float(value)
-                self._lighting_power = value
             except:
-                raise ValueError("Can't convert lighting power to float")
+                raise ValueError("Can't convert lighting_power to float")
+
+        if self._lighting_power is None:
+            pass
+        else:
+            if self.parent.parent.file_internal_gains is None:
+                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                                               self.parent.parent.name +
+                                               ".mat")           
+        self._lighting_power = value
