@@ -639,7 +639,7 @@ VDI 6007 guideline.</p>
 
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Wall.Wall.insulate_wall">
-<code class="descname">insulate_wall</code><span class="sig-paren">(</span><em>material</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Wall.Wall.insulate_wall" title="Permalink to this definition">¶</a></dt>
+<code class="descname">insulate_wall</code><span class="sig-paren">(</span><em>material=None</em>, <em>thickness=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Wall.Wall.insulate_wall" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrofit the walls with an additional insulation layer</p>
 <p>Adds an additional layer on the wall, outer sight</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -647,8 +647,12 @@ VDI 6007 guideline.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>material</strong> : string</p>
+<blockquote>
+<div><p>Type of material, that is used for insulation, default = EPS035</p>
+</div></blockquote>
+<p><strong>thickness</strong> : float</p>
 <blockquote class="last">
-<div><p>Type of material, that is used for insulation</p>
+<div><p>thickness of the insulation layer, default = None</p>
 </div></blockquote>
 </td>
 </tr>

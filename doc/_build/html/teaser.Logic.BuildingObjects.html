@@ -91,7 +91,7 @@
 <p>This module includes the Buidling class</p>
 <dl class="class">
 <dt id="teaser.Logic.BuildingObjects.Building.Building">
-<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.Building.</code><code class="descname">Building</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.Building.</code><code class="descname">Building</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>Building Class</p>
 <p>This class represents a general building</p>
@@ -124,6 +124,11 @@ Allows for better control of hierarchical structures.
 <p><strong>net_leased_area = float</strong></p>
 <blockquote>
 <div><p>total net leased area of building (default: None)</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : Boolean</p>
+<blockquote>
+<div><p>If set to True, an empty instance of BuildingAHU is instantiated, to be
+filled with AHU information</p>
 </div></blockquote>
 <p><strong>Note: the listed attributes are just the ones that are set by the user</strong></p>
 <blockquote class="last">
@@ -197,11 +202,54 @@ sums volume of all zones</p>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.calculation_method">
+<code class="descname">calculation_method</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.calculation_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.central_ahu">
+<code class="descname">central_ahu</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.central_ahu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.Building.Building.compare_area_dicts">
 <code class="descname">compare_area_dicts</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.compare_area_dicts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compares the outer area and window area dicts and rewrites them if
 possible</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.create_timeline">
+<code class="descname">create_timeline</code><span class="sig-paren">(</span><em>duration_profile=86400</em>, <em>time_step=3600</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.create_timeline" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a timeline for building boundary conditions</p>
+<p>This function creates a list with a equidistant timeline given the
+duration of the profile in seconds (default one day, 86400 s) and the
+time_step in seconds (default one hour, 3600 s). Needed for boundary
+input of the building for Modelica simulation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>duration_profile</strong> : int</p>
+<blockquote>
+<div><p>duration of the profile in seconds (default one day, 86400 s)</p>
+</div></blockquote>
+<p><strong>time_step</strong> : int</p>
+<blockquote>
+<div><p>time step used in the profile in seconds (default one hour, 3600 s)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time_line</strong> : [[int]]</p>
+<blockquote class="last">
+<div><p>list of time steps as preparation for the output of boundary 
+conditions</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -293,6 +341,116 @@ the orientations of the building</p>
 <dt id="teaser.Logic.BuildingObjects.Building.Building.height_of_floors">
 <code class="descname">height_of_floors</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.height_of_floors" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.modelica_AHU_boundary">
+<code class="descname">modelica_AHU_boundary</code><span class="sig-paren">(</span><em>time_line=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.modelica_AHU_boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates .mat file for AHU boundary conditions (building)</p>
+<p>This function creates a matfile (-v4) for building AHU boundary 
+conditions</p>
+<p>!AixLib sepcific!</p>
+<p>Known limitation:</p>
+<ol class="arabic simple">
+<li>Column : time step</li>
+<li>Column : desired AHU profile temperature</li>
+<li>Column : Desired minimal relative humidity</li>
+<li>Column : desired maximal relative humidity</li>
+<li>Columb : AHU status (On/Off)</li>
+</ol>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time_line :[[int]]</strong></p>
+<blockquote>
+<div><p>list of time steps</p>
+</div></blockquote>
+<p><strong>path</strong> : str</p>
+<blockquote class="last">
+<div><p>optional path, when matfile is exported seperately</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>profile_temperature</td>
+<td>([float]) timeline of temperatures requirements for AHU simulation</td>
+</tr>
+<tr class="row-even"><td>profile_min_relative_humidity</td>
+<td>([float]) timeline of relative humidity requirements for AHU simulation</td>
+</tr>
+<tr class="row-odd"><td>profile_max_relative_humidity</td>
+<td>([float]) timeline of relative humidity requirements for AHU simulation</td>
+</tr>
+<tr class="row-even"><td>profile_v_flow</td>
+<td>([int]) timeline of desired relative v_flow of the AHU simulation (0..1)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.modelica_gains_boundary">
+<code class="descname">modelica_gains_boundary</code><span class="sig-paren">(</span><em>time_line=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.modelica_gains_boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates .mat file for internal gains boundary conditions (building)</p>
+<p>This function creates a matfile (-v4) for building internal gains 
+boundary conditions. It collects all internal gain profiles of the
+zones and stores them into one file. The file is extended for each 
+zone. Only applicable if zones are defined</p>
+<p>!AixLib sepcific!</p>
+<p>1. Column : time step
+2,5,8,...  Column : profile_persons
+3,6,9,...  Column : profile_machines
+4,7,10,... Column : profile_lighting</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time_line :[[int]]</strong></p>
+<blockquote>
+<div><p>list of time steps</p>
+</div></blockquote>
+<p><strong>path</strong> : str</p>
+<blockquote class="last">
+<div><p>optional path, when matfile is exported seperately</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.Building.Building.modelica_set_temp">
+<code class="descname">modelica_set_temp</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.Building.Building.modelica_set_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates .mat file for set temperatures for each zone</p>
+<p>This function creates a matfile (-v4) for set temperatures of each 
+zone</p>
+<p>!AixLib sepcific!</p>
+<ol class="arabic simple">
+<li>Row: heat set temperature of all zones</li>
+<li>Row: cool set temperature of all zones</li>
+</ol>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : str</p>
+<blockquote class="last">
+<div><p>optional path, when matfile is exported seperately</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.Building.Building.name">
@@ -603,10 +761,30 @@ for windows.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.compare_area_dicts">
+<code class="descname">compare_area_dicts</code><span class="sig-paren">(</span><em>dict1</em>, <em>dict2</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.compare_area_dicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compares the orientations of the dicts</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.delete">
 <code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deletes the actual thermal zone and refreshs the thermal zones of
 the building</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.fill_sunblind_list">
+<code class="descname">fill_sunblind_list</code><span class="sig-paren">(</span><em>orientation_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.fill_sunblind_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>fills the g_sunblind_list in the right order with the right g values
+when the sundblind is closed (needed for modelica specific export)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.fill_win_area_list">
+<code class="descname">fill_win_area_list</code><span class="sig-paren">(</span><em>orientation_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.ThermalZone.ThermalZone.fill_win_area_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>fills the window_area_list in the right order with the right window
+areas (needed for modelica specific export)</p>
 </dd></dl>
 
 <dl class="attribute">

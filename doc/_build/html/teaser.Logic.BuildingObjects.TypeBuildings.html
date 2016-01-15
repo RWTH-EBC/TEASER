@@ -114,7 +114,7 @@ areas:</p>
 </ol>
 <span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Office"></span><dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office">
-<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Office.</code><code class="descname">Office</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Office.</code><code class="descname">Office</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding" title="teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding</span></code></a></p>
 <p>Type Office Building</p>
 <p>Subclass from TypeBuilding to represent office buildings. Allows for
@@ -153,6 +153,10 @@ Default is None</p>
 <p><strong>net_leased_area</strong> : float</p>
 <blockquote>
 <div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
 </div></blockquote>
 <p><strong>office_layout</strong> : int</p>
 <blockquote>
@@ -267,7 +271,7 @@ area:</p>
 </ol>
 <span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Residential"></span><dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential">
-<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Residential.</code><code class="descname">Residential</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>dormer=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Residential.</code><code class="descname">Residential</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>dormer=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding" title="teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding</span></code></a></p>
 <p>Type Building Residential.</p>
 <p>Subclass from Building to represent Residential Buildings. Allows for
@@ -302,6 +306,10 @@ Default is None</p>
 <p><strong>net_leased_area</strong> : float</p>
 <blockquote>
 <div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
 </div></blockquote>
 <p><strong>residential_layout</strong> : int</p>
 <blockquote>
@@ -460,17 +468,11 @@ In detail the net leased area is divided into the following thermal zone areas:<
 </ol>
 <span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute"></span><dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute.Institute">
-<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute.</code><code class="descname">Institute</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute.Institute" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute.</code><code class="descname">Institute</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute.Institute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.Office.Office</span></code></a></p>
 <p>Type Institute Building (type 4)</p>
 <p class="rubric">Attributes</p>
 <p class="rubric">Methods</p>
-<dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute.Institute.file_internal_gains">
-<code class="descname">file_internal_gains</code><em class="property"> = None</em><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute.Institute.file_internal_gains" title="Permalink to this definition">¶</a></dt>
-<dd><p>Institute.mat</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -495,17 +497,11 @@ area is divided in the following thermal zone areas:</p>
 </ol>
 <span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute4"></span><dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute4.Institute4">
-<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute4.</code><code class="descname">Institute4</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute4.Institute4" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute4.</code><code class="descname">Institute4</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute4.Institute4" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.Office.Office</span></code></a></p>
 <p>Type Institute Building (type 4)</p>
 <p class="rubric">Attributes</p>
 <p class="rubric">Methods</p>
-<dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute4.Institute4.file_internal_gains">
-<code class="descname">file_internal_gains</code><em class="property"> = None</em><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute4.Institute4.file_internal_gains" title="Permalink to this definition">¶</a></dt>
-<dd><p>_Institute4.mat</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -530,17 +526,11 @@ area is divided in the following thermal zone areas:</p>
 </ol>
 <span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute8"></span><dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute8.Institute8">
-<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute8.</code><code class="descname">Institute8</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute8.Institute8" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute8.</code><code class="descname">Institute8</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute8.Institute8" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.Office.Office</span></code></a></p>
 <p>Type Institute Building (type 8)</p>
 <p class="rubric">Attributes</p>
 <p class="rubric">Methods</p>
-<dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute8.Institute8.file_internal_gains">
-<code class="descname">file_internal_gains</code><em class="property"> = None</em><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute8.Institute8.file_internal_gains" title="Permalink to this definition">¶</a></dt>
-<dd><p>_Institute8.mat</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -548,7 +538,7 @@ area is divided in the following thermal zone areas:</p>
 <span id="typebuilding-module"></span><h2>TypeBuilding module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding">
-<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.</code><code class="descname">TypeBuilding</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.</code><code class="descname">TypeBuilding</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="teaser.Logic.BuildingObjects.html#teaser.Logic.BuildingObjects.Building.Building" title="teaser.Logic.BuildingObjects.Building.Building"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.Building.Building</span></code></a></p>
 <p>Root Class for each type building.</p>
 <p>Class as parent of specific type buildings. Subclass from Building to
@@ -654,7 +644,7 @@ buildings defined in DIN V 18599-10</p>
 <td>(float) part load factor of building usage time for lighting - Teilbetriebsfaktor der Gebaeudebetriebszeit fuer Beleuchtung</td>
 </tr>
 <tr class="row-odd"><td>ratio_conv_rad_lighting</td>
-<td>(float) describes the ratio between convective and radiative heat transer of the lighting</td>
+<td>(float) describes the ratio between convective and radiative heat transfer of the lighting</td>
 </tr>
 <tr class="row-even"><td>ROOM CLIMATE</td>
 <td>&nbsp;</td>
@@ -698,29 +688,62 @@ buildings defined in DIN V 18599-10</p>
 <tr class="row-odd"><td>persons</td>
 <td>(int) number of persons - Personen</td>
 </tr>
+<tr class="row-even"><td>activity_type_persons</td>
+<td>(int) persons activity</td>
+</tr>
+<tr class="row-odd"><td>ratio_conv_rad_persons</td>
+<td>(float) describes the ratio between convective and radiative heat transfer of the persons</td>
+</tr>
 <tr class="row-even"><td>profile_persons</td>
-<td>([float]) timeline of internal gains from 0 - 100 - Nutzungsprofil Personen</td>
+<td>([float]) timeline of internal gains (persons) from 0 - 100 - Nutzungsprofil Personen</td>
 </tr>
 <tr class="row-odd"><td>machines: float</td>
 <td>number of Machines  - Arbeitshilfen</td>
 </tr>
+<tr class="row-even"><td>activity_type_machines</td>
+<td>(int) machines activity</td>
+</tr>
+<tr class="row-odd"><td>ratio_conv_rad_machines</td>
+<td>(float) describes the ratio between convective and radiative heat transfer of the lighting</td>
+</tr>
 <tr class="row-even"><td>profile_machines</td>
-<td>([float]) timeline of internal gains from 0 - 100  -  Nutzungsprofil Geraete</td>
+<td>([float]) timeline of internal gains (machines) from 0 - 100  -  Nutzungsprofil Geraete</td>
 </tr>
 <tr class="row-odd"><td>lighting_power</td>
 <td>(float) spec. electr. Power for lighting - spez. Elektr. Leistung-Raumbeleuchtung</td>
 </tr>
-<tr class="row-even"><td>MISC</td>
+<tr class="row-even"><td>profile_lighting</td>
+<td>([float]) timeline of internal gains (lighting) from 0 - 100  -  Nutzungsprofil Licht</td>
+</tr>
+<tr class="row-odd"><td>MISC/AHU</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-odd"><td>min_ahu: float</td>
+<tr class="row-even"><td>min_ahu: float</td>
 <td>min ahu  - minAHU</td>
 </tr>
-<tr class="row-even"><td>max_ahu</td>
+<tr class="row-odd"><td>max_ahu</td>
 <td>(float) max ahu - maxAHU</td>
 </tr>
-<tr class="row-odd"><td>with_ahu</td>
+<tr class="row-even"><td>with_ahu</td>
 <td>(boolean) with ahu - withAHU</td>
+</tr>
+<tr class="row-odd"><td>use_constant_ach_rate</td>
+<td>(boolean) choose if a constant ACH rate should be used</td>
+</tr>
+<tr class="row-even"><td>base_ach</td>
+<td>(float) base value for the infiltration rate</td>
+</tr>
+<tr class="row-odd"><td>max_user_ach</td>
+<td>(float) additional infiltration rate for maximum persons activity</td>
+</tr>
+<tr class="row-even"><td>max_overheating_ach</td>
+<td>(list) additional infiltration rate when overheating appears</td>
+</tr>
+<tr class="row-odd"><td>max_summer_ach</td>
+<td>(list) additional infiltration rate in the summer with [infiltration_rate, Tmin, Tmax]</td>
+</tr>
+<tr class="row-even"><td>winter_reduction</td>
+<td>(list) reduction factor of userACH for cold weather with [infiltration_rate, Tmin, Tmax]</td>
 </tr>
 </tbody>
 </table>
@@ -782,6 +805,21 @@ buildings defined in DIN V 18599-10</p>
 <dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.persons">
 <code class="descname">persons</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.persons" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.profile_lighting">
+<code class="descname">profile_lighting</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.profile_lighting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.profile_machines">
+<code class="descname">profile_machines</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.profile_machines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.profile_persons">
+<code class="descname">profile_persons</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.profile_persons" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
