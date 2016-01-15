@@ -1,7 +1,7 @@
-# .\UseConditions18599Bind.py
+# .\UseConditionsBind.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:e92452c8d3e28a9e27abfc9994d2007779e7f4c9
-# Generated 2015-10-29 18:07:11.025525 by PyXB version 1.2.4 using Python 3.4.3.final.0
+# Generated 2016-01-15 12:16:30.024648 by PyXB version 1.2.4 using Python 3.4.3.final.0
 # Namespace AbsentNamespace0
 
 from __future__ import unicode_literals
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:7e386126-7e5f-11e5-ad6b-f4b7e2dccf42')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:6d07b410-bb79-11e5-8d8c-f4b7e2dccf42')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
@@ -80,7 +80,7 @@ class integerList (pyxb.binding.basis.STD_list):
     """Simple type that is a list of pyxb.binding.datatypes.integer."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'integerList')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 77, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 78, 2)
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.integer
@@ -94,7 +94,7 @@ class floatList (pyxb.binding.basis.STD_list):
     """Simple type that is a list of pyxb.binding.datatypes.float."""
 
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'floatList')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 80, 4)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 81, 4)
     _Documentation = None
 
     _ItemType = pyxb.binding.datatypes.float
@@ -219,11 +219,11 @@ class LightingType (pyxb.binding.basis.complexTypeDefinition):
     maintained_illuminace = property(__maintained_illuminace.value, __maintained_illuminace.set, None, None)
 
     
-    # Element usage_level_hight uses Python identifier usage_level_hight
-    __usage_level_hight = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'usage_level_hight'), 'usage_level_hight', '__AbsentNamespace0_LightingType_usage_level_hight', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 21, 6), )
+    # Element usage_level_height uses Python identifier usage_level_height
+    __usage_level_height = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'usage_level_height'), 'usage_level_height', '__AbsentNamespace0_LightingType_usage_level_height', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 21, 6), )
 
     
-    usage_level_hight = property(__usage_level_hight.value, __usage_level_hight.set, None, None)
+    usage_level_height = property(__usage_level_height.value, __usage_level_height.set, None, None)
 
     
     # Element red_factor_visual uses Python identifier red_factor_visual
@@ -262,7 +262,7 @@ class LightingType (pyxb.binding.basis.complexTypeDefinition):
 
     _ElementMap.update({
         __maintained_illuminace.name() : __maintained_illuminace,
-        __usage_level_hight.name() : __usage_level_hight,
+        __usage_level_height.name() : __usage_level_height,
         __red_factor_visual.name() : __red_factor_visual,
         __rel_absence.name() : __rel_absence,
         __room_index.name() : __room_index,
@@ -428,12 +428,20 @@ class InternalGainsType (pyxb.binding.basis.complexTypeDefinition):
     
     lighting_power = property(__lighting_power.value, __lighting_power.set, None, None)
 
+    
+    # Element profile_lighting uses Python identifier profile_lighting
+    __profile_lighting = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'profile_lighting'), 'profile_lighting', '__AbsentNamespace0_InternalGainsType_profile_lighting', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 51, 3), )
+
+    
+    profile_lighting = property(__profile_lighting.value, __profile_lighting.set, None, None)
+
     _ElementMap.update({
         __persons.name() : __persons,
         __profile_persons.name() : __profile_persons,
         __machines.name() : __machines,
         __profile_machines.name() : __profile_machines,
-        __lighting_power.name() : __lighting_power
+        __lighting_power.name() : __lighting_power,
+        __profile_lighting.name() : __profile_lighting
     })
     _AttributeMap.update({
         
@@ -448,27 +456,27 @@ class AHUType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'AHUType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 53, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 54, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element min_ahu uses Python identifier min_ahu
-    __min_ahu = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'min_ahu'), 'min_ahu', '__AbsentNamespace0_AHUType_min_ahu', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 55, 6), )
+    __min_ahu = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'min_ahu'), 'min_ahu', '__AbsentNamespace0_AHUType_min_ahu', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 56, 6), )
 
     
     min_ahu = property(__min_ahu.value, __min_ahu.set, None, None)
 
     
     # Element max_ahu uses Python identifier max_ahu
-    __max_ahu = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'max_ahu'), 'max_ahu', '__AbsentNamespace0_AHUType_max_ahu', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 56, 6), )
+    __max_ahu = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'max_ahu'), 'max_ahu', '__AbsentNamespace0_AHUType_max_ahu', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 57, 6), )
 
     
     max_ahu = property(__max_ahu.value, __max_ahu.set, None, None)
 
     
     # Element with_ahu uses Python identifier with_ahu
-    __with_ahu = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'with_ahu'), 'with_ahu', '__AbsentNamespace0_AHUType_with_ahu', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 57, 6), )
+    __with_ahu = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'with_ahu'), 'with_ahu', '__AbsentNamespace0_AHUType_with_ahu', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 58, 6), )
 
     
     with_ahu = property(__with_ahu.value, __with_ahu.set, None, None)
@@ -491,62 +499,62 @@ class UseConditions18599Type (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'UseConditions18599Type')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 60, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 61, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element usage uses Python identifier usage
-    __usage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'usage'), 'usage', '__AbsentNamespace0_UseConditions18599Type_usage', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 62, 6), )
+    __usage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'usage'), 'usage', '__AbsentNamespace0_UseConditions18599Type_usage', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 63, 6), )
 
     
     usage = property(__usage.value, __usage.set, None, None)
 
     
     # Element typical_length uses Python identifier typical_length
-    __typical_length = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'typical_length'), 'typical_length', '__AbsentNamespace0_UseConditions18599Type_typical_length', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 63, 6), )
+    __typical_length = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'typical_length'), 'typical_length', '__AbsentNamespace0_UseConditions18599Type_typical_length', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 64, 6), )
 
     
     typical_length = property(__typical_length.value, __typical_length.set, None, None)
 
     
     # Element typical_width uses Python identifier typical_width
-    __typical_width = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'typical_width'), 'typical_width', '__AbsentNamespace0_UseConditions18599Type_typical_width', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 64, 6), )
+    __typical_width = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'typical_width'), 'typical_width', '__AbsentNamespace0_UseConditions18599Type_typical_width', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 65, 6), )
 
     
     typical_width = property(__typical_width.value, __typical_width.set, None, None)
 
     
     # Element UsageOperationTime uses Python identifier UsageOperationTime
-    __UsageOperationTime = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'UsageOperationTime'), 'UsageOperationTime', '__AbsentNamespace0_UseConditions18599Type_UsageOperationTime', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 65, 6), )
+    __UsageOperationTime = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'UsageOperationTime'), 'UsageOperationTime', '__AbsentNamespace0_UseConditions18599Type_UsageOperationTime', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 66, 6), )
 
     
     UsageOperationTime = property(__UsageOperationTime.value, __UsageOperationTime.set, None, None)
 
     
     # Element Lighting uses Python identifier Lighting
-    __Lighting = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Lighting'), 'Lighting', '__AbsentNamespace0_UseConditions18599Type_Lighting', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 66, 6), )
+    __Lighting = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Lighting'), 'Lighting', '__AbsentNamespace0_UseConditions18599Type_Lighting', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 67, 6), )
 
     
     Lighting = property(__Lighting.value, __Lighting.set, None, None)
 
     
     # Element RoomClimate uses Python identifier RoomClimate
-    __RoomClimate = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'RoomClimate'), 'RoomClimate', '__AbsentNamespace0_UseConditions18599Type_RoomClimate', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 67, 6), )
+    __RoomClimate = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'RoomClimate'), 'RoomClimate', '__AbsentNamespace0_UseConditions18599Type_RoomClimate', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 68, 6), )
 
     
     RoomClimate = property(__RoomClimate.value, __RoomClimate.set, None, None)
 
     
     # Element InternalGains uses Python identifier InternalGains
-    __InternalGains = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'InternalGains'), 'InternalGains', '__AbsentNamespace0_UseConditions18599Type_InternalGains', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 68, 6), )
+    __InternalGains = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'InternalGains'), 'InternalGains', '__AbsentNamespace0_UseConditions18599Type_InternalGains', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 69, 6), )
 
     
     InternalGains = property(__InternalGains.value, __InternalGains.set, None, None)
 
     
     # Element AHU uses Python identifier AHU
-    __AHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'AHU'), 'AHU', '__AbsentNamespace0_UseConditions18599Type_AHU', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 69, 6), )
+    __AHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'AHU'), 'AHU', '__AbsentNamespace0_UseConditions18599Type_AHU', False, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 70, 6), )
 
     
     AHU = property(__AHU.value, __AHU.set, None, None)
@@ -574,13 +582,13 @@ class UseConditionsType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'UseConditionsType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 72, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 73, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element UseConditions18599 uses Python identifier UseConditions18599
-    __UseConditions18599 = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'UseConditions18599'), 'UseConditions18599', '__AbsentNamespace0_UseConditionsType_UseConditions18599', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 74, 6), )
+    __UseConditions18599 = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'UseConditions18599'), 'UseConditions18599', '__AbsentNamespace0_UseConditionsType_UseConditions18599', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 75, 6), )
 
     
     UseConditions18599 = property(__UseConditions18599.value, __UseConditions18599.set, None, None)
@@ -835,7 +843,7 @@ UsageOperationTimeType._Automaton = _BuildAutomaton()
 
 LightingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'maintained_illuminace'), pyxb.binding.datatypes.float, scope=LightingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 20, 6)))
 
-LightingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'usage_level_hight'), pyxb.binding.datatypes.float, scope=LightingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 21, 6)))
+LightingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'usage_level_height'), pyxb.binding.datatypes.float, scope=LightingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 21, 6)))
 
 LightingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'red_factor_visual'), pyxb.binding.datatypes.float, scope=LightingType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 22, 6)))
 
@@ -876,7 +884,7 @@ def _BuildAutomaton_ ():
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(LightingType._UseForTag(pyxb.namespace.ExpandedName(None, 'usage_level_hight')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 21, 6))
+    symbol = pyxb.binding.content.ElementUse(LightingType._UseForTag(pyxb.namespace.ExpandedName(None, 'usage_level_height')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 21, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
@@ -1257,6 +1265,8 @@ InternalGainsType._AddElement(pyxb.binding.basis.element(pyxb.namespace.Expanded
 
 InternalGainsType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'lighting_power'), pyxb.binding.datatypes.float, scope=InternalGainsType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 50, 3)))
 
+InternalGainsType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'profile_lighting'), floatList, scope=InternalGainsType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 51, 3)))
+
 def _BuildAutomaton_3 ():
     # Remove this helper function from the namespace after it is invoked
     global _BuildAutomaton_3
@@ -1274,6 +1284,8 @@ def _BuildAutomaton_3 ():
     counters.add(cc_3)
     cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 50, 3))
     counters.add(cc_4)
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 51, 3))
+    counters.add(cc_5)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
@@ -1300,6 +1312,11 @@ def _BuildAutomaton_3 ():
     symbol = pyxb.binding.content.ElementUse(InternalGainsType._UseForTag(pyxb.namespace.ExpandedName(None, 'lighting_power')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 50, 3))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
+    final_update = set()
+    final_update.add(fac.UpdateInstruction(cc_5, False))
+    symbol = pyxb.binding.content.ElementUse(InternalGainsType._UseForTag(pyxb.namespace.ExpandedName(None, 'profile_lighting')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 51, 3))
+    st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
+    states.append(st_5)
     transitions = []
     transitions.append(fac.Transition(st_0, [
         fac.UpdateInstruction(cc_0, True) ]))
@@ -1311,6 +1328,8 @@ def _BuildAutomaton_3 ():
         fac.UpdateInstruction(cc_0, False) ]))
     transitions.append(fac.Transition(st_4, [
         fac.UpdateInstruction(cc_0, False) ]))
+    transitions.append(fac.Transition(st_5, [
+        fac.UpdateInstruction(cc_0, False) ]))
     st_0._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_1, [
@@ -1321,6 +1340,8 @@ def _BuildAutomaton_3 ():
         fac.UpdateInstruction(cc_1, False) ]))
     transitions.append(fac.Transition(st_4, [
         fac.UpdateInstruction(cc_1, False) ]))
+    transitions.append(fac.Transition(st_5, [
+        fac.UpdateInstruction(cc_1, False) ]))
     st_1._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_2, [
@@ -1329,28 +1350,38 @@ def _BuildAutomaton_3 ():
         fac.UpdateInstruction(cc_2, False) ]))
     transitions.append(fac.Transition(st_4, [
         fac.UpdateInstruction(cc_2, False) ]))
+    transitions.append(fac.Transition(st_5, [
+        fac.UpdateInstruction(cc_2, False) ]))
     st_2._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_3, [
         fac.UpdateInstruction(cc_3, True) ]))
     transitions.append(fac.Transition(st_4, [
         fac.UpdateInstruction(cc_3, False) ]))
+    transitions.append(fac.Transition(st_5, [
+        fac.UpdateInstruction(cc_3, False) ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
         fac.UpdateInstruction(cc_4, True) ]))
+    transitions.append(fac.Transition(st_5, [
+        fac.UpdateInstruction(cc_4, False) ]))
     st_4._set_transitionSet(transitions)
+    transitions = []
+    transitions.append(fac.Transition(st_5, [
+        fac.UpdateInstruction(cc_5, True) ]))
+    st_5._set_transitionSet(transitions)
     return fac.Automaton(states, counters, True, containing_state=None)
 InternalGainsType._Automaton = _BuildAutomaton_3()
 
 
 
 
-AHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'min_ahu'), pyxb.binding.datatypes.float, scope=AHUType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 55, 6)))
+AHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'min_ahu'), pyxb.binding.datatypes.float, scope=AHUType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 56, 6)))
 
-AHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'max_ahu'), pyxb.binding.datatypes.float, scope=AHUType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 56, 6)))
+AHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'max_ahu'), pyxb.binding.datatypes.float, scope=AHUType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 57, 6)))
 
-AHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'with_ahu'), pyxb.binding.datatypes.boolean, scope=AHUType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 57, 6)))
+AHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'with_ahu'), pyxb.binding.datatypes.boolean, scope=AHUType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 58, 6)))
 
 def _BuildAutomaton_4 ():
     # Remove this helper function from the namespace after it is invoked
@@ -1359,26 +1390,26 @@ def _BuildAutomaton_4 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 55, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 56, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 56, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 57, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 57, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 58, 6))
     counters.add(cc_2)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(AHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'min_ahu')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 55, 6))
+    symbol = pyxb.binding.content.ElementUse(AHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'min_ahu')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 56, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(AHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'max_ahu')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 56, 6))
+    symbol = pyxb.binding.content.ElementUse(AHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'max_ahu')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 57, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(AHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'with_ahu')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 57, 6))
+    symbol = pyxb.binding.content.ElementUse(AHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'with_ahu')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 58, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     transitions = []
@@ -1405,21 +1436,21 @@ AHUType._Automaton = _BuildAutomaton_4()
 
 
 
-UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'usage'), pyxb.binding.datatypes.string, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 62, 6)))
+UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'usage'), pyxb.binding.datatypes.string, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 63, 6)))
 
-UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'typical_length'), pyxb.binding.datatypes.float, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 63, 6)))
+UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'typical_length'), pyxb.binding.datatypes.float, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 64, 6)))
 
-UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'typical_width'), pyxb.binding.datatypes.float, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 64, 6)))
+UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'typical_width'), pyxb.binding.datatypes.float, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 65, 6)))
 
-UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'UsageOperationTime'), UsageOperationTimeType, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 65, 6)))
+UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'UsageOperationTime'), UsageOperationTimeType, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 66, 6)))
 
-UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Lighting'), LightingType, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 66, 6)))
+UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Lighting'), LightingType, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 67, 6)))
 
-UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'RoomClimate'), RoomClimateType, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 67, 6)))
+UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'RoomClimate'), RoomClimateType, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 68, 6)))
 
-UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'InternalGains'), InternalGainsType, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 68, 6)))
+UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'InternalGains'), InternalGainsType, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 69, 6)))
 
-UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'AHU'), AHUType, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 69, 6)))
+UseConditions18599Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'AHU'), AHUType, scope=UseConditions18599Type, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 70, 6)))
 
 def _BuildAutomaton_5 ():
     # Remove this helper function from the namespace after it is invoked
@@ -1428,61 +1459,61 @@ def _BuildAutomaton_5 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 62, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 63, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 63, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 64, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 64, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 65, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 65, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 66, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 66, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 67, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 67, 6))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 68, 6))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 68, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 69, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 69, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 70, 6))
     counters.add(cc_7)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'usage')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 62, 6))
+    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'usage')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 63, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'typical_length')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 63, 6))
+    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'typical_length')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 64, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'typical_width')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 64, 6))
+    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'typical_width')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 65, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'UsageOperationTime')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 65, 6))
+    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'UsageOperationTime')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 66, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'Lighting')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 66, 6))
+    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'Lighting')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 67, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'RoomClimate')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 67, 6))
+    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'RoomClimate')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 68, 6))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'InternalGains')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 68, 6))
+    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'InternalGains')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 69, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'AHU')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 69, 6))
+    symbol = pyxb.binding.content.ElementUse(UseConditions18599Type._UseForTag(pyxb.namespace.ExpandedName(None, 'AHU')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 70, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     transitions = []
@@ -1579,7 +1610,7 @@ UseConditions18599Type._Automaton = _BuildAutomaton_5()
 
 
 
-UseConditionsType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'UseConditions18599'), UseConditions18599Type, scope=UseConditionsType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 74, 6)))
+UseConditionsType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'UseConditions18599'), UseConditions18599Type, scope=UseConditionsType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 75, 6)))
 
 def _BuildAutomaton_6 ():
     # Remove this helper function from the namespace after it is invoked
@@ -1588,12 +1619,12 @@ def _BuildAutomaton_6 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 74, 6))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 75, 6))
     counters.add(cc_0)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(UseConditionsType._UseForTag(pyxb.namespace.ExpandedName(None, 'UseConditions18599')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 74, 6))
+    symbol = pyxb.binding.content.ElementUse(UseConditionsType._UseForTag(pyxb.namespace.ExpandedName(None, 'UseConditions18599')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\UseConditions18599.xsd', 75, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
