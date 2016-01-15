@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
-  <xs:include schemaLocation="D:\GIT\TEASER\teaser\InputData\XSD_Definitions\UseConditions18599.xsd"/>
+  <xs:include schemaLocation="D:\mla-mmn\TEASER\teaser\InputData\XSD_Definitions\UseConditions18599.xsd"/>
   <xs:element name="Project" type="ProjectType"/>
   <xs:complexType name="UseConditionType">
     <xs:sequence>
