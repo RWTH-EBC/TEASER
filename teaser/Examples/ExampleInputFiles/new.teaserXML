@@ -13,10 +13,11 @@
 			<name>Wohngebaeude</name>
 			<area>2000.0</area>
 			<volume>8000.0</volume>
+			<infiltration_rate>0.5</infiltration_rate>
 			<typical_length>123.0</typical_length>
 			<typical_width>123.0</typical_width>
 			<UseCondition>
-				<UseConditionsOffice18599>
+				<UseConditions18599>
 					<usage>43</usage>
 					<UsageOperationTime>
 						<usage_time>7 18</usage_time>
@@ -32,11 +33,12 @@
 					</UsageOperationTime>
 					<Lighting>
 						<maintained_illuminace>500.0</maintained_illuminace>
-						<usage_level_hight>0.8</usage_level_hight>
+						<usage_level_height>0.8</usage_level_height>
 						<red_factor_visual>0.84</red_factor_visual>
 						<rel_absence>0.3</rel_absence>
 						<room_index>0.9</room_index>
 						<part_load_factor_lighting>0.7</part_load_factor_lighting>
+                                  <ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
 					</Lighting>
 					<RoomClimate>
 						<set_temp_heat>21.0</set_temp_heat>
@@ -62,7 +64,7 @@
 						<max_ahu>0.5</max_ahu>
 						<with_ahu>false</with_ahu>
 					</AHU>
-				</UseConditionsOffice18599>
+				</UseConditions18599>
 			</UseCondition>
 			<OuterWall>
 				<year_of_construction>1988</year_of_construction>

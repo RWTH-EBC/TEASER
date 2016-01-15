@@ -126,7 +126,9 @@ class Wall(BuildingElement):
            or type(self).__name__ == "GroundFloor":
             self.c1 = self.c1_korr
 
-    def insulate_wall(self, material):
+    def insulate_wall(self,
+                      material=None,
+                      thickness=None):
         '''Retrofit the walls with an additional insulation layer
 
         Adds an additional layer on the wall, outer sight
@@ -134,17 +136,29 @@ class Wall(BuildingElement):
         Parameters
         ----------
         material : string
-            Type of material, that is used for insulation
+            Type of material, that is used for insulation, default = EPS035
+
+        thickness : float
+            thickness of the insulation layer, default = None
 
         '''
+        if material is None:
+            material = "EPS035"
+        else:
+            pass
 
         ext_layer = Layer(self)
         new_material = Material(ext_layer)
         new_material.load_material_template(material)
 
+        if thickness is None:
+            pass
+        else:
+            ext_layer.thickness = thickness
+
         ext_layer.material = new_material
 
-    def retrofit_wall(self, year_of_refurbishmet,  material=None):
+    def retrofit_wall(self, year_of_retrofit,  material=None):
         '''This function adds an additional layer of insulation and sets the
         thickness of the layer according to the retrofit standard in the
         year of refurbishment. Refurbishment year must be newer then 1995
@@ -171,46 +185,46 @@ class Wall(BuildingElement):
 
         if type(self).__name__ == 'OuterWall':
 
-            if 1995 <= year_of_refurbishmet and year_of_refurbishmet <= 2001:
+            if 1995 <= year_of_retrofit and year_of_retrofit <= 2001:
                 self.insulate_wall(material)
                 calc_u = 0.5*self.area
-            if 2002 <= year_of_refurbishmet and year_of_refurbishmet <= 2008:
+            if 2002 <= year_of_retrofit and year_of_retrofit <= 2008:
                 self.insulate_wall(material)
                 calc_u = 0.45*self.area
-            if 2009 <= year_of_refurbishmet and year_of_refurbishmet <= 2013:
+            if 2009 <= year_of_retrofit and year_of_retrofit <= 2013:
                 self.insulate_wall(material)
                 calc_u = 0.24*self.area
-            if year_of_refurbishmet >= 2014:
+            if year_of_retrofit >= 2014:
                 self.insulate_wall(material)
                 calc_u = 0.24*self.area
 
         elif type(self).__name__ == 'Rooftop':
 
-            if 1995 <= year_of_refurbishmet and year_of_refurbishmet <= 2001:
+            if 1995 <= year_of_retrofit and year_of_retrofit <= 2001:
                 self.insulate_wall(material)
                 calc_u = 0.3*self.area
-            if 2002 <= year_of_refurbishmet and year_of_refurbishmet <= 2008:
+            if 2002 <= year_of_retrofit and year_of_retrofit <= 2008:
                 self.insulate_wall(material)
                 calc_u = 0.3*self.area
-            if 2009 <= year_of_refurbishmet and year_of_refurbishmet <= 2013:
+            if 2009 <= year_of_retrofit and year_of_retrofit <= 2013:
                 self.insulate_wall(material)
                 calc_u = 0.2*self.area
-            if year_of_refurbishmet >= 2014:
+            if year_of_retrofit >= 2014:
                 self.insulate_wall(material)
                 calc_u = 0.2*self.area
 
         if type(self).__name__ == 'GroundFloor':
 
-            if 1995 <= year_of_refurbishmet and year_of_refurbishmet <= 2001:
+            if 1995 <= year_of_retrofit and year_of_retrofit <= 2001:
                 self.insulate_wall(material)
                 calc_u = 0.5*self.area
-            if 2002 <= year_of_refurbishmet and year_of_refurbishmet <= 2008:
+            if 2002 <= year_of_retrofit and year_of_retrofit <= 2008:
                 self.insulate_wall(material)
                 calc_u = 0.4*self.area
-            if 2009 <= year_of_refurbishmet and year_of_refurbishmet <= 2013:
+            if 2009 <= year_of_retrofit and year_of_retrofit <= 2013:
                 self.insulate_wall(material)
                 calc_u = 0.3*self.area
-            if year_of_refurbishmet >= 2014:
+            if year_of_retrofit >= 2014:
                 self.insulate_wall(material)
                 calc_u = 0.3*self.area
 

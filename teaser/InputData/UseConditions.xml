@@ -1,5 +1,6 @@
+<?xml version="1.0" ?>
 <UseConditions>
-	<UseConditionsOffice18599>
+	<UseConditions18599>
 		<usage>Single office</usage>
 		<typical_length>3.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -17,18 +18,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.84</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
 			<room_index>0.9</room_index>
 			<part_load_factor_lighting>0.7</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -42,14 +44,15 @@
 			<machines>7.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>2.6</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Group Office (between 2 and 6 employees)</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -67,18 +70,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.92</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
 			<room_index>1.35</room_index>
 			<part_load_factor_lighting>0.7</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -92,14 +96,15 @@
 			<machines>7.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>2.6</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Open-plan Office (7 or more employees)</usage>
 		<typical_length>12.0</typical_length>
 		<typical_width>12.0</typical_width>
@@ -117,18 +122,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -142,14 +148,15 @@
 			<machines>10.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>3.6</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Meeting, Conference, seminar</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -167,18 +174,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>1.25</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -192,14 +200,15 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.6 1.0 0.4 0.1 0.1 0.6 1.0 0.4 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>12.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Main Hall, Reception</usage>
 		<typical_length>10.0</typical_length>
 		<typical_width>10.0</typical_width>
@@ -217,18 +226,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.87</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -242,14 +252,15 @@
 			<machines>4.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.4 0.6 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>4.4</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>2.5</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Retail, department store</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -267,18 +278,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 20</cooling_time>
 			<heating_time>6 20</heating_time>
@@ -292,14 +304,15 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>9.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Retail with cooling</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -317,18 +330,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 20</cooling_time>
 			<heating_time>6 20</heating_time>
@@ -342,14 +356,15 @@
 			<machines>5.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>9.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Class room (school), group room (kindergarden)</usage>
 		<typical_length>10.0</typical_length>
 		<typical_width>10.0</typical_width>
@@ -367,18 +382,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.97</red_factor_visual>
 			<rel_absence>0.25</rel_absence>
 			<room_index>2.0</room_index>
 			<part_load_factor_lighting>0.9</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 15</cooling_time>
 			<heating_time>6 15</heating_time>
@@ -392,14 +408,15 @@
 			<machines>4.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Lecture hall, auditorium</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>10.0</typical_width>
@@ -417,18 +434,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.92</red_factor_visual>
 			<rel_absence>0.25</rel_absence>
 			<room_index>2.5</room_index>
 			<part_load_factor_lighting>0.7</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 18</cooling_time>
 			<heating_time>6 18</heating_time>
@@ -442,14 +460,15 @@
 			<machines>4.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>15.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Bed room</usage>
 		<typical_length>4.0</typical_length>
 		<typical_width>4.0</typical_width>
@@ -467,18 +486,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.5</room_index>
 			<part_load_factor_lighting>0.5</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>22.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -492,14 +512,15 @@
 			<machines>4.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.8 0.6 0.4 0.2 0.2</profile_machines>
 			<lighting_power>4.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Hotel room</usage>
 		<typical_length>4.0</typical_length>
 		<typical_width>4.0</typical_width>
@@ -517,18 +538,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.25</rel_absence>
 			<room_index>1.25</room_index>
 			<part_load_factor_lighting>0.3</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -542,14 +564,15 @@
 			<machines>4.0</machines>
 			<profile_machines>1.0 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.6 0.8 1.0</profile_machines>
 			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Canteen</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -567,18 +590,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.97</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 15</cooling_time>
 			<heating_time>6 15</heating_time>
@@ -592,14 +616,15 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 0.6 1.0 1.0 0.8 0.4 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>18.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Restaurant</usage>
 		<typical_length>12.0</typical_length>
 		<typical_width>12.0</typical_width>
@@ -617,18 +642,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>8 0</cooling_time>
 			<heating_time>8 0</heating_time>
@@ -642,14 +668,15 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 0.4 1.0 1.0 0.1 0.1 0.1 0.1 0.4 0.4 0.4 1.0 0.8 0.4</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Kitchen in non-residential buildings</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -667,18 +694,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.96</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>8 23</cooling_time>
 			<heating_time>8 23</heating_time>
@@ -692,14 +720,15 @@
 			<machines>300.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.2 0.8 1.0 1.0 0.6 0.4 0.2 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>70.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Kitchen - preparations, storage</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -717,18 +746,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>1.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>8 23</cooling_time>
 			<heating_time>8 23</heating_time>
@@ -742,14 +772,15 @@
 			<machines>30.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 1.0 1.0 0.6 0.4 0.1 0.1 0.1 0.4 0.8 1.0 0.4 0.2 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>WC and sanitary rooms in non-residential buildings</usage>
 		<typical_length>3.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -767,18 +798,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.9</rel_absence>
 			<room_index>0.8</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -792,14 +824,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>11.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>8.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Further common rooms</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -817,18 +850,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>1.25</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -842,14 +876,15 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Auxiliary areas (without common rooms)</usage>
 		<typical_length>3.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -867,18 +902,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>100.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.9</rel_absence>
 			<room_index>1.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -892,14 +928,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Traffic area</usage>
 		<typical_length>2.0</typical_length>
 		<typical_width>12.0</typical_width>
@@ -917,18 +954,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>100.0</maintained_illuminace>
-			<usage_level_hight>0.2</usage_level_hight>
+			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.8</rel_absence>
 			<room_index>0.8</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -942,14 +980,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>7.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>2.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Stock, technical equipment, archives</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -967,18 +1006,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>100.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.98</rel_absence>
 			<room_index>1.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -992,14 +1032,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.5</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Data center</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -1017,18 +1058,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.96</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>1.5</room_index>
 			<part_load_factor_lighting>0.5</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -1042,14 +1084,15 @@
 			<machines>150.0</machines>
 			<profile_machines>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0</profile_machines>
 			<lighting_power>7.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>130.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Commercial and industrial Halls - heavy work, standing activity</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1067,18 +1110,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.85</red_factor_visual>
 			<rel_absence>0.1</rel_absence>
 			<room_index>2.5</room_index>
 			<part_load_factor_lighting>0.9</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>15.0</set_temp_heat>
-			<set_temp_cool>28.0</set_temp_cool>
+			<set_temp_heat>288.15</set_temp_heat>
+			<set_temp_cool>301.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>15.0</min_temp_heat>
-			<max_temp_cool>30.0</max_temp_cool>
+			<min_temp_heat>288.15</min_temp_heat>
+			<max_temp_cool>303.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 16</cooling_time>
 			<heating_time>6 16</heating_time>
@@ -1092,14 +1136,15 @@
 			<machines>35.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>10.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Commercial and industrial Halls - medium work, standing activity</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1117,18 +1162,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>400.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.85</red_factor_visual>
 			<rel_absence>0.1</rel_absence>
 			<room_index>2.5</room_index>
 			<part_load_factor_lighting>0.9</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>17.0</set_temp_heat>
-			<set_temp_cool>26.0</set_temp_cool>
+			<set_temp_heat>290.15</set_temp_heat>
+			<set_temp_cool>299.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>15.0</min_temp_heat>
-			<max_temp_cool>28.0</max_temp_cool>
+			<min_temp_heat>288.15</min_temp_heat>
+			<max_temp_cool>301.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 16</cooling_time>
 			<heating_time>6 16</heating_time>
@@ -1142,14 +1188,15 @@
 			<machines>35.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>10.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Commercial and industrial Halls - light work, standing activity</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1167,18 +1214,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.85</red_factor_visual>
 			<rel_absence>0.1</rel_absence>
 			<room_index>2.5</room_index>
 			<part_load_factor_lighting>0.9</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>20.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>293.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>18.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>291.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 16</cooling_time>
 			<heating_time>6 16</heating_time>
@@ -1192,14 +1240,15 @@
 			<machines>35.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>14.7</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>10.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Spectator area (theater and event venues)</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>10.0</typical_width>
@@ -1217,18 +1266,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.97</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>4.0</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>17 23</cooling_time>
 			<heating_time>17 23</heating_time>
@@ -1242,14 +1292,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Foyer (theater and event venues)</usage>
 		<typical_length>12.0</typical_length>
 		<typical_width>12.0</typical_width>
@@ -1267,18 +1318,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>4.0</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>17 23</cooling_time>
 			<heating_time>17 23</heating_time>
@@ -1292,14 +1344,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.4 0.6 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>4.4</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Stage (theater and event venues)</usage>
 		<typical_length>10.0</typical_length>
 		<typical_width>5.0</typical_width>
@@ -1317,18 +1370,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>1000.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>0.9</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.5</room_index>
 			<part_load_factor_lighting>0.6</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>11 23</cooling_time>
 			<heating_time>11 23</heating_time>
@@ -1342,14 +1396,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Exhibition, congress</usage>
 		<typical_length>40.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1367,18 +1422,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
 			<room_index>5.0</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>7 18</cooling_time>
 			<heating_time>7 18</heating_time>
@@ -1392,14 +1448,15 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.1</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Exhibition room and museum conservational demands</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1417,18 +1474,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.88</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.0</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -1442,14 +1500,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.1</profile_machines>
 			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Library - reading room</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1467,18 +1526,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.88</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 20</cooling_time>
 			<heating_time>6 20</heating_time>
@@ -1492,14 +1552,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Library - open stacks</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -1517,18 +1578,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 20</cooling_time>
 			<heating_time>6 20</heating_time>
@@ -1542,14 +1604,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Library - magazine and depot</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -1567,18 +1630,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>100.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.9</rel_absence>
 			<room_index>1.5</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 20</cooling_time>
 			<heating_time>6 20</heating_time>
@@ -1592,14 +1656,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Gym (without spectator area)</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -1617,18 +1682,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
 			<room_index>2.0</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 23</cooling_time>
 			<heating_time>6 23</heating_time>
@@ -1642,14 +1708,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.1 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
 			<lighting_power>10.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Parking garages (office and private usage)</usage>
 		<typical_length>50.0</typical_length>
 		<typical_width>50.0</typical_width>
@@ -1667,18 +1734,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>75.0</maintained_illuminace>
-			<usage_level_hight>0.2</usage_level_hight>
+			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.95</rel_absence>
 			<room_index>2.0</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -1692,14 +1760,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Parking garages (public usage)</usage>
 		<typical_length>100.0</typical_length>
 		<typical_width>50.0</typical_width>
@@ -1717,18 +1786,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>75.0</maintained_illuminace>
-			<usage_level_hight>0.2</usage_level_hight>
+			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.8</rel_absence>
 			<room_index>4.0</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>7 0</cooling_time>
 			<heating_time>0 0</heating_time>
@@ -1742,14 +1812,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Sauna area</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -1767,18 +1838,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>200.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.0</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>24.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>297.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>23.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>296.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>8 22</cooling_time>
 			<heating_time>8 22</heating_time>
@@ -1792,14 +1864,15 @@
 			<machines>50.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
 			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Exercise room</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -1817,18 +1890,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>2.0</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>20.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>293.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>18.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>291.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 23</cooling_time>
 			<heating_time>6 23</heating_time>
@@ -1842,14 +1916,15 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.1 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
 			<lighting_power>9.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Laboratory</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -1867,18 +1942,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>1.0</usage_level_hight>
+			<usage_level_height>1.0</usage_level_height>
 			<red_factor_visual>0.92</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
 			<room_index>1.25</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>22.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -1892,14 +1968,15 @@
 			<machines>18.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>24.0</min_ahu>
 			<max_ahu>48.0</max_ahu>
 			<with_ahu>true</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Examination- or treatment room</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -1917,18 +1994,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.2</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>22.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>5 18</cooling_time>
 			<heating_time>5 18</heating_time>
@@ -1942,14 +2020,15 @@
 			<machines>7.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Special care area</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -1967,18 +2046,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>300.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.2</room_index>
 			<part_load_factor_lighting>0.8</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>24.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>297.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>22.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>295.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -1992,14 +2072,15 @@
 			<machines>10.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Corridors in the general care area</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -2017,18 +2098,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>125.0</maintained_illuminace>
-			<usage_level_hight>0.2</usage_level_hight>
+			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.8</rel_absence>
 			<room_index>1.0</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>22.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -2042,14 +2124,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
 			<lighting_power>14.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Medical and therapeutic practices</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -2067,18 +2150,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>500.0</maintained_illuminace>
-			<usage_level_hight>0.8</usage_level_hight>
+			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
 			<room_index>1.2</room_index>
 			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>22.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>6 18</cooling_time>
 			<heating_time>6 18</heating_time>
@@ -2092,14 +2176,15 @@
 			<machines>5.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.2 0.4 1.0 0.6 0.6 0.6 0.6 1.0 0.6 0.6 0.6 0.6 1.0 0.4 0.2 0.2 0.2 0.2 0.2</profile_machines>
 			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Storehouse, logistics building</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -2117,18 +2202,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>150.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.6</rel_absence>
 			<room_index>2.4</room_index>
 			<part_load_factor_lighting>0.4</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>12.0</set_temp_heat>
-			<set_temp_cool>26.0</set_temp_cool>
+			<set_temp_heat>285.15</set_temp_heat>
+			<set_temp_cool>299.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>12.0</min_temp_heat>
-			<max_temp_cool>28.0</max_temp_cool>
+			<min_temp_heat>285.15</min_temp_heat>
+			<max_temp_cool>301.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -2142,14 +2228,15 @@
 			<machines>0.0</machines>
 			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
 			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
-	<UseConditionsOffice18599>
+	</UseConditions18599>
+	<UseConditions18599>
 		<usage>Living</usage>
 		<typical_length>3.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -2167,18 +2254,19 @@
 		</UsageOperationTime>
 		<Lighting>
 			<maintained_illuminace>150.0</maintained_illuminace>
-			<usage_level_hight>0.0</usage_level_hight>
+			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.6</rel_absence>
 			<room_index>2.4</room_index>
 			<part_load_factor_lighting>0.4</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
 		</Lighting>
 		<RoomClimate>
-			<set_temp_heat>21.0</set_temp_heat>
-			<set_temp_cool>24.0</set_temp_cool>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
 			<temp_set_back>4.0</temp_set_back>
-			<min_temp_heat>20.0</min_temp_heat>
-			<max_temp_cool>26.0</max_temp_cool>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
 			<rel_humidity>0.0</rel_humidity>
 			<cooling_time>0 23</cooling_time>
 			<heating_time>0 23</heating_time>
@@ -2192,11 +2280,12 @@
 			<machines>2.0</machines>
 			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.5 1.0 0.5 0.5 0.5 1.0 1.0 0.5 0.5 0.5 1.0 1.0 1.0 1.0 0.5 0.5 0.5 0.1</profile_machines>
 			<lighting_power>7.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 		</InternalGains>
 		<AHU>
 			<min_ahu>0.3</min_ahu>
 			<max_ahu>0.6</max_ahu>
-			<with_ahu>true</with_ahu>
+			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditionsOffice18599>
+	</UseConditions18599>
 </UseConditions>

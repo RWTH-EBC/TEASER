@@ -3,8 +3,12 @@
 
 """This module includes the Project class, which serves as base class and API
 """
-
+import warnings
 import teaser.Data.TeaserXML as txml
+try:
+    import teaser.Data.CityGML as citygml
+except:
+    warnings.warn("No CityGML module found, no CityGML import/export")
 import teaser.Data.DataHelp.OldTeaser as old_teaser
 from teaser.Data.DataClass import DataClass
 from mako.template import Template
@@ -15,9 +19,11 @@ from teaser.Logic.BuildingObjects.TypeBuildings.Institute import Institute
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import Institute4
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import Institute8
 from teaser.Logic.BuildingObjects.TypeBuildings.Residential import Residential
+from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 
 
 class Project(object):
+
     '''Base class for each project, serves also as API
 
         The Project class is the root class for each action in TEASER and
@@ -54,20 +60,21 @@ class Project(object):
         '''Constructor of Project Class.
 
         '''
-        self.name = "Project"
+        self._name = "Project"
+        self.modelica_info = ModelicaInfo()
 
         self.modelica_project = self.name
         self.weather_file_name = "TRY_5_Essen.txt"
         self.list_of_buildings = []
-        self.calculation_method = "vdi"
+        self._calculation_method = "vdi"
 
         self.load_data = load_data
         self._type_element_file = None
 
         if load_data is True:
-                self.data = self.instantiate_data_class()
+            self.data = self.instantiate_data_class()
         else:
-                self.data = None
+            self.data = None
 
     def instantiate_data_class(self, type_element_file=None):
         '''Initialization of DataClass
@@ -104,9 +111,9 @@ class Project(object):
         '''
         self.weather_file_name = file_name
         weather_file = weather_path + file_name
-        output_path = (utilis.get_full_path(
-                       "InputData\\BoundariesTypeBuilding\\") + file_name)
-        print(output_path)
+        output_path = (utilis.get_full_path("InputData\\Boundaries \
+                                            TypeBuilding\\") + file_name)
+
         try:
             shutil.copyfile(weather_file, output_path)
         except:
@@ -124,6 +131,12 @@ class Project(object):
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
+
+        if calculation_core == self.calculation_method:
+            pass
+        else:
+            self.calculation_method = calculation_core
+
         for bldg in self.list_of_buildings:
 
             bldg.calc_building_parameter(calculation_core)
@@ -172,10 +185,10 @@ class Project(object):
                          number_of_floors,
                          height_of_floors,
                          net_leased_area,
+                         with_ahu=True,
                          office_layout=None,
                          window_layout=None,
                          construction_type=None):
-
         '''Create and calculate an office building
 
         Parameters
@@ -224,12 +237,14 @@ class Project(object):
                            number_of_floors,
                            height_of_floors,
                            net_leased_area,
+                           with_ahu,
                            office_layout,
                            window_layout,
                            construction_type)
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_institute(self,
                             name,
@@ -237,6 +252,7 @@ class Project(object):
                             number_of_floors,
                             height_of_floors,
                             net_leased_area,
+                            with_ahu=True,
                             office_layout=None,
                             window_layout=None,
                             construction_type=None):
@@ -287,12 +303,14 @@ class Project(object):
                               number_of_floors,
                               height_of_floors,
                               net_leased_area,
+                              with_ahu,
                               office_layout,
                               window_layout,
                               construction_type)
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_institute4(self,
                              name,
@@ -300,6 +318,7 @@ class Project(object):
                              number_of_floors,
                              height_of_floors,
                              net_leased_area,
+                             with_ahu=True,
                              office_layout=None,
                              window_layout=None,
                              construction_type=None):
@@ -350,12 +369,14 @@ class Project(object):
                                number_of_floors,
                                height_of_floors,
                                net_leased_area,
+                               with_ahu,
                                office_layout,
                                window_layout,
                                construction_type)
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_institute8(self,
                              name,
@@ -363,6 +384,7 @@ class Project(object):
                              number_of_floors,
                              height_of_floors,
                              net_leased_area,
+                             with_ahu=True,
                              office_layout=None,
                              window_layout=None,
                              construction_type=None):
@@ -413,12 +435,14 @@ class Project(object):
                                number_of_floors,
                                height_of_floors,
                                net_leased_area,
+                               with_ahu,
                                office_layout,
                                window_layout,
                                construction_type)
 
         type_bldg.generate_office()
         type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
 
     def type_bldg_residential(self,
                               name,
@@ -426,6 +450,7 @@ class Project(object):
                               number_of_floors,
                               height_of_floors,
                               net_leased_area,
+                              with_ahu=False,
                               residential_layout=None,
                               neighbour_buildings=None,
                               attic=None,
@@ -447,6 +472,8 @@ class Project(object):
             average height of the floors
         net_leased_area : float
             total net leased area of building
+        with_ahu : boolean
+            if building has a central AHU or not
         residential_layout : int
             type of floor plan (default = 0)
 
@@ -494,6 +521,7 @@ class Project(object):
                                 number_of_floors,
                                 height_of_floors,
                                 net_leased_area,
+                                with_ahu,
                                 residential_layout,
                                 neighbour_buildings,
                                 attic,
@@ -562,150 +590,226 @@ class Project(object):
 
         old_teaser.load_teaser_xml(path, self)
 
-    def export_record(self, model_type, path=None):
-        '''Exports values to a record file for Modelica simulation
+    def save_citygml(self, file_name=None, path=None):
+        '''Saves the project to a citygml file
+
+        calls the function save_gml in Data.CityGML we make use of CityGML core
+        and EnergyADE to store semantic information
 
 
         Parameters
         ----------
 
-        model_type : string
-            setter of the used Modelica model (AixLib or CitiesRWin)
+        file_name : string
+            name of the new file
+        path : string
+            if the Files should not be stored in OutputData, an alternative
+            can be specified
+
+        '''
+        if file_name is None:
+            name = self.name
+        else:
+            name = file_name
+
+        if path is None:
+            new_path = utilis.get_full_path("OutputData") + "\\" + name
+        else:
+            new_path = path + "\\" + name
+            utilis.create_path(utilis.get_full_path(path))
+
+        citygml.save_gml(self, new_path)
+
+    def export_record(self, building_model=None, zone_model=None,
+                      corG=None, internal_id=None, path=None):
+        '''Exports values to a record file for Modelica simulation
+
+        Parameters
+        ----------
+
+        building_model : string
+            setter of the used Aixlib building model (None, MultizoneEquipped,
+            Multizone)
+        zone_model : string
+            setter of the used Aixlib zone model (ThermalZoneEquipped,
+            ThermalZone)
+        corG : boolean
+            setter of the used g value calculation in the model
+        internal_id : float
+            setter of the used building which will be exported, if None then
+            all buildings will be exported
         path : string
             if the Files should not be stored in OutputData, an alternative
             path can be specified
 
         '''
+        #check the arguments
+        assert(building_model) in [None, "MultizoneEquipped", "Multizone"]
+        assert(zone_model) in [None, "ThermalZoneEquipped", "ThermalZone"]
+        assert(corG) in [None, True, False]
         if path is None:
-            path = "OutputData\\" + self.name
+            path = utilis.get_default_path() + "\\" + self.name
         else:
             path = path + "\\" + self.name
 
-        utilis.create_path(utilis.get_full_path(path))
-
+        utilis.create_path(path)
+        """
         input_path = utilis.get_full_path("InputData\\BoundariesTypeBuilding")
 
         try:
-            shutil.copytree(input_path, utilis.get_full_path(path) + "\\Tables")
+            shutil.copytree(
+                input_path, utilis.get_full_path(path) + "\\Tables")
         except:
             pass
         else:
             pass
+        """
+        uses = ['Modelica(version = "3.2.1")',
+                "AixLib(version=\"0.2.1\")"]
 
-        if model_type == "CitiesRWin":
+        # for bldg in self.list_of_buildings:
+        #     assert bldg._calculation_method == "vdi", ("AixLib needs \
+        #     calculation core vdi")
+        # might not need this, user only needs to know what kind of
+        # zone records are exported here
 
-            uses = ['BaseLib (version="2.4")',
-                    'DataBase (version="2.4")',
-                    'Building (version="2.4")',
-                    'HVAC (version="2.4")',
-                    'Cities (version="2.4")',
-                    'Modelica (version="3.2.1")',
-                    'AixLib(version="0.1.0")']
-
-            for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "ebc", ("CitiesRWin needs \
-                calculation core ebc")
-
-            zone_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesRWin\\CitiesRWin_zone"))
-            zone_base_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesRWin\\CitiesRWin_base"))
-            building_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesRWin\\CitiesRWin_bldg"))
-
-            self._help_package(path, self.name)
-            self._help_package_order(path, self.list_of_buildings)
-
-        elif model_type == "AixLib":
-
-            uses = ['Modelica(version = "3.2.1")',
-                    "AixLib(version=\"0.1.0\")"]
-
-            for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "vdi", ("AixLib needs \
-                calculation core vdi")
-
-            zone_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\AixLib\\AixLib_zone"))
-
-            self._help_package(path, self.name, uses)
-            self._help_package_order(path, self.list_of_buildings)
-
-        elif model_type == "CitiesType_old":
-
-            uses = ['BaseLib (version="2.2")',
-                    'DataBase (version="2.2")',
-                    'Building (version="2.2")',
-                    'HVAC (version="2.2")',
-                    'Cities (version="2.2")',
-                    'Modelica (version="3.2.1")']
-
-            for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "vdi", ("CitiesType_old needs \
-                calculation core vdi")
-
-            zone_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesType\\CitiesType_zone"))
-            zone_base_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesType\\CitiesType_base"))
-            building_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesType\\CitiesType_bldg"))
-
-            self._help_package(path, self.name, uses)
-            self._help_package_order(path, self.list_of_buildings)
-
+        # use the same zone templates for all exports
+        zone_template = Template(
+            filename=utilis.get_full_path(
+                "InputData\\RecordTemplate\\AixLib\\AixLib_zone"))
+        model_template = Template(
+            filename=utilis.get_full_path(
+                "InputData\\RecordTemplate\\AixLib\\AixLib_model"))
+        zone_base_template = Template(
+            filename=utilis.get_full_path(
+                "InputData\\RecordTemplate\\AixLib\\AixLib_base"))
+        # list which contains exported buildings
+        if internal_id is not None:
+            exported_list_of_buildings = [bldg for bldg in
+                                          self.list_of_buildings if
+                                          bldg.internal_id == internal_id]
         else:
+            exported_list_of_buildings = self.list_of_buildings
 
-            raise ValueError("specify calculation method correctly")
+        # here we diff between zonerecord export and full model support
+        if building_model and zone_model and corG is not None:
+            # full model support here
+            print("full model support")
 
-        for bldg in self.list_of_buildings:
+            self._help_package(path, self.name, uses)
+            self._help_package_order(path, exported_list_of_buildings)
 
-            bldg_path = path + "\\" + bldg.name + "\\"
-            utilis.create_path(utilis.get_full_path(bldg_path))
-            utilis.create_path(utilis.get_full_path
-                               (bldg_path + bldg.name + "_DataBase"))
+            for bldg in exported_list_of_buildings:
 
-            self._help_package(bldg_path, bldg.name)
-            self._help_package_order(bldg_path, [bldg], None,
-                                     bldg.name + "_DataBase")
+                bldg_path = path + "\\" + bldg.name + "\\"
+                utilis.create_path(utilis.get_full_path(bldg_path))
+                utilis.create_path(utilis.get_full_path
+                                   (bldg_path + bldg.name + "_DataBase"))
+                bldg.modelica_set_temp(path = path + "\\" + bldg.name)
+                bldg.modelica_AHU_boundary(path = path + "\\" + bldg.name)
+                bldg.modelica_gains_boundary(path = path + "\\" + bldg.name)
 
-            if model_type == "CitiesRWin" or model_type == "CitiesType_old":
+                self._help_package(bldg_path, bldg.name)
+                self._help_package_order(bldg_path, [bldg], None,
+                                         bldg.name + "_DataBase")
+
                 out_file = open(utilis.get_full_path
                                 (bldg_path + bldg.name + ".mo"), 'w')
-                out_file.write(building_template.render_unicode
-                               (bldg=bldg, mod_prj=self.modelica_project))
+                out_file.write(model_template.render_unicode(
+                               bldg=bldg, mod_prj=self.modelica_project,
+                               weather=self.weather_file_name,
+                               model=building_model, zone=zone_model,
+                               physics=bldg._calculation_method, gFac=corG))
                 out_file.close()
 
-            for zone in bldg.thermal_zones:
-                zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
+                for zone in bldg.thermal_zones:
+                    zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
 
-                out_file = open(utilis.get_full_path(
-                    zone_path + "\\" + bldg.name + "_" + zone.name + ".mo"), 'w')
-                out_file.write(zone_template.render_unicode(
-                    bldg=bldg, zone=zone))
-                out_file.close()
-
-                if model_type == "CitiesRWin" or\
-                        model_type == "CitiesType_old":
-                    self._help_package(zone_path, bldg.name + "_DataBase")
-                    self._help_package_order(
-                        zone_path, bldg.thermal_zones, bldg.name + "_",
-                        bldg.name + "_base")
-
-                    out_file = open(utilis.get_full_path
-                                    (zone_path + bldg.name + "_base.mo"), 'w')
-                    out_file.write(zone_base_template.render_unicode(
-                        bldg=bldg, zone=zone, mod_prj=self.modelica_project))
+                    out_file = open(utilis.get_full_path(
+                        zone_path + "\\" + bldg.name + "_" +
+                        zone.name.replace(" ", "") + ".mo"), 'w')
+                    out_file.write(zone_template.render_unicode(
+                        bldg=bldg, zone=zone))
                     out_file.close()
+
+                self._help_package(zone_path, bldg.name + "_DataBase")
+                self._help_package_order(
+                    zone_path, bldg.thermal_zones,
+                    bldg.name + "_", bldg.name + "_base")
+
+                out_file = open(utilis.get_full_path
+                                (zone_path + bldg.name + "_base.mo"),
+                                'w')
+                if bldg.central_ahu:
+                  out_file.write(zone_base_template.render_unicode(
+                      bldg=bldg, zone=zone,
+                      mod_prj=self.modelica_project,
+                      central_ahu=bldg.central_ahu))
+                  out_file.close()
                 else:
-                    pass
+                  out_file.write(zone_base_template.render_unicode(
+                      bldg=bldg, zone=zone,
+                      mod_prj=self.modelica_project))
+                  out_file.close()
+
+
+        elif building_model is None and zone_model is None and corG is None:
+            # only export the baserecords
+            self._help_package(path, self.name, uses)
+            self._help_package_order(path, exported_list_of_buildings)
+            for bldg in exported_list_of_buildings:
+
+                bldg_path = path + "\\" + bldg.name + "\\"
+                utilis.create_path(utilis.get_full_path(bldg_path))
+                utilis.create_path(utilis.get_full_path
+                                   (bldg_path + bldg.name + "_DataBase"))
+
+                self._help_package(bldg_path, bldg.name)
+                self._help_package_order(bldg_path, [bldg], None,
+                                         bldg.name + "_DataBase")
+                for zone in bldg.thermal_zones:
+                    zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
+
+                    out_file = open(utilis.get_full_path(
+                        zone_path + "\\" + bldg.name + "_" +
+                        zone.name.replace(" ", "") + ".mo"), 'w')
+                    out_file.write(zone_template.render_unicode(
+                        bldg=bldg, zone=zone,
+                        calc_core=bldg._calculation_method))
+                    # not sure if we need the calc
+                    out_file.close()
+
+        else:
+            # not clearly specified
+            print("please specifiy you export clearly")
+
+    def export_parameters_txt(self, path=None):
+        '''Exports parameters of all buildings in a readable text file
+
+        Parameters
+        ----------
+
+        path : string
+            if the Files should not be stored in OutputData, an alternative
+            can be specified
+        '''
+        if path is None:
+            path = "OutputData\\"+self.name
+        else:
+            path = path+"\\"+self.name
+
+        for bldg in self.list_of_buildings:
+            bldg_path = path + "\\" + bldg.name + "\\"
+            utilis.create_path(utilis.get_full_path(bldg_path))
+            readable_template = Template(
+                filename=utilis.get_full_path(
+                    "InputData\\ReadableOutputTemplate\\ReadableBuilding"))
+
+            out_file = open(utilis.get_full_path
+                            (bldg_path+"ReadableOutput.txt"), 'w')
+            out_file.write(readable_template.render_unicode
+                           (bldg=bldg, prj=self))
+            out_file.close()
 
     def _help_package(self, path, name, uses=None):
         '''creates a package.mo file
@@ -725,7 +829,8 @@ class Project(object):
         package_template = Template(filename=utilis.get_full_path
                                     ("InputData\\RecordTemplate\\package"))
 
-        out_file = open(utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
+        out_file = open(
+            utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
         out_file.write(package_template.render_unicode(name=name, uses=uses))
         out_file.close()
 
@@ -739,7 +844,7 @@ class Project(object):
         ----------
 
         path : string
-            path of where the package.mo should be placed
+            path of where the package.order should be placed
         package_list : [string]
             name of all models or packages contained in the package
         addition : string
@@ -753,16 +858,15 @@ class Project(object):
         order_template = Template(filename=utilis.get_full_path
                                   ("InputData\\RecordTemplate\\package_order"))
 
-        out_file = open(utilis.get_full_path(path + "\\" + "package" + ".order"),
-                        'w')
+        out_file = open(
+            utilis.get_full_path(path + "\\" + "package" + ".order"), 'w')
         out_file.write(order_template.render_unicode
                        (list=package_list, addition=addition, extra=extra))
         out_file.close()
 
-
     def set_default(self):
         '''sets all attributes except self.data to default
-        
+
         '''
 
         self.name = "Project"
@@ -782,3 +886,29 @@ class Project(object):
     def type_element_file(self, value):
         self._type_element_file = value
         self.instantiate_data_class(value)
+
+    @property
+    def calculation_method(self):
+        return self._calculation_method
+
+    @calculation_method.setter
+    def calculation_method(self, value):
+
+        ass_error_1 = "calculation_method has to be vdi or ebc"
+
+        assert value != "ebc" or value != "vdi", ass_error_1
+
+        self._calculation_method = value
+        
+        for bldg in self.list_of_buildings:
+            bldg.calculation_method = value
+        
+    @property
+    def name(self):
+        return self._name
+        
+    @name.setter
+    def name(self, value):
+        
+        self._name = value
+        self.modelica_project = value
