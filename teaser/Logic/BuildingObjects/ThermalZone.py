@@ -772,6 +772,23 @@ class ThermalZone(object):
             self.__parent.thermal_zones.append(self)
 
     @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        if isinstance(value, str):
+
+            self._name = value.replace(" ", "")
+        else:
+            try:
+                value = str(value)
+                self._name = value.replace(" ", "")
+
+            except ValueError:
+                print("Can't convert name to string")
+
+    @property
     def outer_walls(self):
         return self._outer_walls
 
