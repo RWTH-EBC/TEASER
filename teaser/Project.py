@@ -8,7 +8,7 @@ import teaser.Data.TeaserXML as txml
 try:
     import teaser.Data.CityGML as citygml
 except:
-    warnings.warn("No CityGML module found, no CityGML import/export")    
+    warnings.warn("No CityGML module found, no CityGML import/export")
 import teaser.Data.DataHelp.OldTeaser as old_teaser
 from teaser.Data.DataClass import DataClass
 from mako.template import Template
@@ -60,7 +60,7 @@ class Project(object):
         '''Constructor of Project Class.
 
         '''
-        self.name = "Project"
+        self._name = "Project"
         self.modelica_info = ModelicaInfo()
 
         self.modelica_project = self.name
@@ -112,8 +112,7 @@ class Project(object):
         self.weather_file_name = file_name
         weather_file = weather_path + file_name
         output_path = (utilis.get_full_path("InputData\\Boundaries \
-                                            TypeBuilding\\") +
-                                            file_name)
+                                            TypeBuilding\\") + file_name)
 
         try:
             shutil.copyfile(weather_file, output_path)
@@ -186,6 +185,7 @@ class Project(object):
                          number_of_floors,
                          height_of_floors,
                          net_leased_area,
+                         with_ahu=True,
                          office_layout=None,
                          window_layout=None,
                          construction_type=None):
@@ -237,6 +237,7 @@ class Project(object):
                            number_of_floors,
                            height_of_floors,
                            net_leased_area,
+                           with_ahu,
                            office_layout,
                            window_layout,
                            construction_type)
@@ -251,6 +252,7 @@ class Project(object):
                             number_of_floors,
                             height_of_floors,
                             net_leased_area,
+                            with_ahu=True,
                             office_layout=None,
                             window_layout=None,
                             construction_type=None):
@@ -301,6 +303,7 @@ class Project(object):
                               number_of_floors,
                               height_of_floors,
                               net_leased_area,
+                              with_ahu,
                               office_layout,
                               window_layout,
                               construction_type)
@@ -315,6 +318,7 @@ class Project(object):
                              number_of_floors,
                              height_of_floors,
                              net_leased_area,
+                             with_ahu=True,
                              office_layout=None,
                              window_layout=None,
                              construction_type=None):
@@ -365,6 +369,7 @@ class Project(object):
                                number_of_floors,
                                height_of_floors,
                                net_leased_area,
+                               with_ahu,
                                office_layout,
                                window_layout,
                                construction_type)
@@ -379,6 +384,7 @@ class Project(object):
                              number_of_floors,
                              height_of_floors,
                              net_leased_area,
+                             with_ahu=True,
                              office_layout=None,
                              window_layout=None,
                              construction_type=None):
@@ -429,6 +435,7 @@ class Project(object):
                                number_of_floors,
                                height_of_floors,
                                net_leased_area,
+                               with_ahu,
                                office_layout,
                                window_layout,
                                construction_type)
@@ -443,6 +450,7 @@ class Project(object):
                               number_of_floors,
                               height_of_floors,
                               net_leased_area,
+                              with_ahu=False,
                               residential_layout=None,
                               neighbour_buildings=None,
                               attic=None,
@@ -464,6 +472,8 @@ class Project(object):
             average height of the floors
         net_leased_area : float
             total net leased area of building
+        with_ahu : boolean
+            if building has a central AHU or not
         residential_layout : int
             type of floor plan (default = 0)
 
@@ -511,6 +521,7 @@ class Project(object):
                                 number_of_floors,
                                 height_of_floors,
                                 net_leased_area,
+                                with_ahu,
                                 residential_layout,
                                 neighbour_buildings,
                                 attic,
@@ -609,28 +620,40 @@ class Project(object):
 
         citygml.save_gml(self, new_path)
 
-
-    def export_record(self, model_type, path=None, buildingID=None):
+    def export_record(self, building_model=None, zone_model=None,
+                      corG=None, internal_id=None, path=None):
         '''Exports values to a record file for Modelica simulation
-
 
         Parameters
         ----------
 
-        model_type : string
-            setter of the used Modelica model (AixLib or CitiesRWin)
+        building_model : string
+            setter of the used Aixlib building model (None, MultizoneEquipped,
+            Multizone)
+        zone_model : string
+            setter of the used Aixlib zone model (ThermalZoneEquipped,
+            ThermalZone)
+        corG : boolean
+            setter of the used g value calculation in the model
+        internal_id : float
+            setter of the used building which will be exported, if None then
+            all buildings will be exported
         path : string
             if the Files should not be stored in OutputData, an alternative
             path can be specified
 
         '''
+        #check the arguments
+        assert(building_model) in [None, "MultizoneEquipped", "Multizone"]
+        assert(zone_model) in [None, "ThermalZoneEquipped", "ThermalZone"]
+        assert(corG) in [None, True, False]
         if path is None:
-            path = "OutputData\\" + self.name
+            path = utilis.get_default_path() + "\\" + self.name
         else:
             path = path + "\\" + self.name
 
-        utilis.create_path(utilis.get_full_path(path))
-
+        utilis.create_path(path)
+        """
         input_path = utilis.get_full_path("InputData\\BoundariesTypeBuilding")
 
         try:
@@ -640,122 +663,125 @@ class Project(object):
             pass
         else:
             pass
+        """
+        uses = ['Modelica(version = "3.2.1")',
+                "AixLib(version=\"0.2.1\")"]
 
-        if model_type == "CitiesRWin":
+        # for bldg in self.list_of_buildings:
+        #     assert bldg._calculation_method == "vdi", ("AixLib needs \
+        #     calculation core vdi")
+        # might not need this, user only needs to know what kind of
+        # zone records are exported here
 
-            uses = ['BaseLib (version="2.4")',
-                    'DataBase (version="2.4")',
-                    'Building (version="2.4")',
-                    'HVAC (version="2.4")',
-                    'Cities (version="2.4")',
-                    'Modelica (version="3.2.1")',
-                    'AixLib(version="0.1.0")']
-
-            for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "ebc", ("CitiesRWin needs \
-                calculation core ebc")
-
-            zone_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesRWin\\CitiesRWin_zone"))
-            zone_base_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesRWin\\CitiesRWin_base"))
-            building_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesRWin\\CitiesRWin_bldg"))
-
-            self._help_package(path, self.name)
-            self._help_package_order(path, self.list_of_buildings)
-
-        elif model_type == "AixLib":
-
-            uses = ['Modelica(version = "3.2.1")',
-                    "AixLib(version=\"0.1.0\")"]
-
-            for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "vdi", ("AixLib needs \
-                calculation core vdi")
-
-            zone_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\AixLib\\AixLib_zone"))
-
-            self._help_package(path, self.name, uses)
-            self._help_package_order(path, self.list_of_buildings)
-
-        elif model_type == "CitiesType_old":
-
-            uses = ['BaseLib (version="2.2")',
-                    'DataBase (version="2.2")',
-                    'Building (version="2.2")',
-                    'HVAC (version="2.2")',
-                    'Cities (version="2.2")',
-                    'Modelica (version="3.2.1")']
-
-            for bldg in self.list_of_buildings:
-                assert bldg._calculation_method == "vdi", ("CitiesType_old \
-                    needs calculation core vdi")
-
-            zone_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesType\\CitiesType_zone"))
-            zone_base_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesType\\CitiesType_base"))
-            building_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\RecordTemplate\\CitiesType\\CitiesType_bldg"))
-
-            self._help_package(path, self.name, uses)
-            self._help_package_order(path, self.list_of_buildings)
-
+        # use the same zone templates for all exports
+        zone_template = Template(
+            filename=utilis.get_full_path(
+                "InputData\\RecordTemplate\\AixLib\\AixLib_zone"))
+        model_template = Template(
+            filename=utilis.get_full_path(
+                "InputData\\RecordTemplate\\AixLib\\AixLib_model"))
+        zone_base_template = Template(
+            filename=utilis.get_full_path(
+                "InputData\\RecordTemplate\\AixLib\\AixLib_base"))
+        # list which contains exported buildings
+        if internal_id is not None:
+            exported_list_of_buildings = [bldg for bldg in
+                                          self.list_of_buildings if
+                                          bldg.internal_id == internal_id]
         else:
+            exported_list_of_buildings = self.list_of_buildings
 
-            raise ValueError("specify calculation method correctly")
+        # here we diff between zonerecord export and full model support
+        if building_model and zone_model and corG is not None:
+            # full model support here
+            print("full model support")
 
-        for bldg in self.list_of_buildings:
+            self._help_package(path, self.name, uses)
+            self._help_package_order(path, exported_list_of_buildings)
 
-            bldg_path = path + "\\" + bldg.name + "\\"
-            utilis.create_path(utilis.get_full_path(bldg_path))
-            utilis.create_path(utilis.get_full_path
-                               (bldg_path + bldg.name + "_DataBase"))
+            for bldg in exported_list_of_buildings:
 
-            self._help_package(bldg_path, bldg.name)
-            self._help_package_order(bldg_path, [bldg], None,
-                                     bldg.name + "_DataBase")
+                bldg_path = path + "\\" + bldg.name + "\\"
+                utilis.create_path(utilis.get_full_path(bldg_path))
+                utilis.create_path(utilis.get_full_path
+                                   (bldg_path + bldg.name + "_DataBase"))
+                bldg.modelica_set_temp(path = path + "\\" + bldg.name)
+                bldg.modelica_AHU_boundary(path = path + "\\" + bldg.name)
+                bldg.modelica_gains_boundary(path = path + "\\" + bldg.name)
 
-            if model_type == "CitiesRWin" or model_type == "CitiesType_old":
+                self._help_package(bldg_path, bldg.name)
+                self._help_package_order(bldg_path, [bldg], None,
+                                         bldg.name + "_DataBase")
+
                 out_file = open(utilis.get_full_path
                                 (bldg_path + bldg.name + ".mo"), 'w')
-                out_file.write(building_template.render_unicode
-                               (bldg=bldg, mod_prj=self.modelica_project))
+                out_file.write(model_template.render_unicode(
+                               bldg=bldg, mod_prj=self.modelica_project,
+                               weather=self.weather_file_name,
+                               model=building_model, zone=zone_model,
+                               physics=bldg._calculation_method, gFac=corG))
                 out_file.close()
 
-            for zone in bldg.thermal_zones:
-                zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
+                for zone in bldg.thermal_zones:
+                    zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
 
-                out_file = open(utilis.get_full_path(
-                    zone_path + "\\" + bldg.name + "_" + zone.name + ".mo"),
-                                                                           'w')
-                out_file.write(zone_template.render_unicode(
-                    bldg=bldg, zone=zone))
-                out_file.close()
-
-                if model_type == "CitiesRWin" or\
-                        model_type == "CitiesType_old":
-                    self._help_package(zone_path, bldg.name + "_DataBase")
-                    self._help_package_order(
-                        zone_path, bldg.thermal_zones, bldg.name + "_",
-                        bldg.name + "_base")
-
-                    out_file = open(utilis.get_full_path
-                                    (zone_path + bldg.name + "_base.mo"), 'w')
-                    out_file.write(zone_base_template.render_unicode(
-                        bldg=bldg, zone=zone, mod_prj=self.modelica_project))
+                    out_file = open(utilis.get_full_path(
+                        zone_path + "\\" + bldg.name + "_" +
+                        zone.name + ".mo"), 'w')
+                    out_file.write(zone_template.render_unicode(
+                        bldg=bldg, zone=zone))
                     out_file.close()
+
+                self._help_package(zone_path, bldg.name + "_DataBase")
+                self._help_package_order(
+                    zone_path, bldg.thermal_zones,
+                    bldg.name + "_", bldg.name + "_base")
+
+                out_file = open(utilis.get_full_path
+                                (zone_path + bldg.name + "_base.mo"),
+                                'w')
+                if bldg.central_ahu:
+                  out_file.write(zone_base_template.render_unicode(
+                      bldg=bldg, zone=zone,
+                      mod_prj=self.modelica_project,
+                      central_ahu=bldg.central_ahu))
+                  out_file.close()
                 else:
-                    pass
+                  out_file.write(zone_base_template.render_unicode(
+                      bldg=bldg, zone=zone,
+                      mod_prj=self.modelica_project))
+                  out_file.close()
+
+
+        elif building_model is None and zone_model is None and corG is None:
+            # only export the baserecords
+            self._help_package(path, self.name, uses)
+            self._help_package_order(path, exported_list_of_buildings)
+            for bldg in exported_list_of_buildings:
+
+                bldg_path = path + "\\" + bldg.name + "\\"
+                utilis.create_path(utilis.get_full_path(bldg_path))
+                utilis.create_path(utilis.get_full_path
+                                   (bldg_path + bldg.name + "_DataBase"))
+
+                self._help_package(bldg_path, bldg.name)
+                self._help_package_order(bldg_path, [bldg], None,
+                                         bldg.name + "_DataBase")
+                for zone in bldg.thermal_zones:
+                    zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
+
+                    out_file = open(utilis.get_full_path(
+                        zone_path + "\\" + bldg.name + "_" +
+                        zone.name + ".mo"), 'w')
+                    out_file.write(zone_template.render_unicode(
+                        bldg=bldg, zone=zone,
+                        calc_core=bldg._calculation_method))
+                    # not sure if we need the calc
+                    out_file.close()
+
+        else:
+            # not clearly specified
+            print("please specifiy you export clearly")
 
     def export_parameters_txt(self, path=None):
         '''Exports parameters of all buildings in a readable text file
@@ -818,7 +844,7 @@ class Project(object):
         ----------
 
         path : string
-            path of where the package.mo should be placed
+            path of where the package.order should be placed
         package_list : [string]
             name of all models or packages contained in the package
         addition : string
@@ -873,3 +899,16 @@ class Project(object):
         assert value != "ebc" or value != "vdi", ass_error_1
 
         self._calculation_method = value
+        
+        for bldg in self.list_of_buildings:
+            bldg.calculation_method = value
+        
+    @property
+    def name(self):
+        return self._name
+        
+    @name.setter
+    def name(self, value):
+        
+        self._name = value
+        self.modelica_project = value

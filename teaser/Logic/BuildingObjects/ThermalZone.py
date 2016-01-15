@@ -5,7 +5,7 @@ import math
 import collections
 import random
 import warnings
-
+import numpy as np
 
 class ThermalZone(object):
     '''This class represents a Thermal Zone in a building
@@ -83,6 +83,9 @@ class ThermalZone(object):
         self.typical_width = None
         self._t_inside = 293.15
         self._t_outside = 261.15
+        self.density_air = 1.19     # only export for now
+        self.heat_capac_air = 1007  # only export for now
+        self.t_ground = 286.15  # groundtemperature of for the simulation
 
         # Calculated values for InnerWall for each Zone
         self.r1_iw = 0.0
@@ -94,7 +97,7 @@ class ThermalZone(object):
         self.area_iw = 0.0
         self.alpha_conv_iw = 0.0
         self.alpha_rad_iw = 0.0
-        self.alpa_comb_iw = 0.0
+        self.alpha_comb_iw = 0.0
 
         # Calculated values for OuterWall for each Zone
         self.r1_ow = 0.0
@@ -102,6 +105,7 @@ class ThermalZone(object):
         self.r_rest_ow = 0.0
         self.r_total = 0.0
         self.weightfactor_ow = []
+        self.weightfactor_ow_dict = {}
         self.weightfactor_ground = []
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
@@ -111,6 +115,7 @@ class ThermalZone(object):
         self.r_rad_outer_ow = 0.0
         self.r_comb_outer_ow = 0.0
         self.area_ow = 0.0
+        self.alpha_comb_inner_ow = 0.0
         self.alpha_conv_inner_ow = 0.0
         self.alpha_comb_outer_ow = 0.0
         self.alpha_conv_outer_ow = 0.0
@@ -119,6 +124,8 @@ class ThermalZone(object):
         # Calculated values for windows for each Zone
         self.r1_win = 0.0
         self.weightfactor_win = []
+        self.g_sunblind_list = []
+        self.window_area_list = []
         self.ua_value_win = 0.0
         self.r_conv_inner_win = 0.0
         self.r_rad_inner_win = 0.0
@@ -403,6 +410,7 @@ class ThermalZone(object):
         self.r_comb_outer_ow = 1/sum_r_comb_outer_ow
 
         self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
+        self.alpha_comb_inner_ow = (1/(self.r_comb_inner_ow*self.area_ow))
         self.alpha_conv_outer_ow = (1/(self.r_conv_outer_ow*sum_area_ow_rt))
         self.alpha_comb_outer_ow = (1/(self.r_comb_outer_ow*sum_area_ow_rt))
 
@@ -467,10 +475,18 @@ class ThermalZone(object):
                 orientation_win_help[win_count.orientation] =  \
                                                     win_count.ua_value
 
+        orientation_ow_help, orientation_win_help = \
+            self.compare_area_dicts(orientation_ow_help, orientation_win_help)
+
         orientation_ow = \
             collections.OrderedDict(sorted(orientation_ow_help.items()))
         orientation_win = \
             collections.OrderedDict(sorted(orientation_win_help.items()))
+
+
+
+        self.weightfactor_ow_dict = orientation_ow
+
 
         roof_help = None
 
@@ -530,6 +546,64 @@ class ThermalZone(object):
 
         else:
             raise ValueError("specify calculation method correctly")
+
+        self.fill_sunblind_list(orientation_win)
+        self.fill_win_area_list(orientation_win)
+
+    def compare_area_dicts(self, dict1, dict2):
+        '''Compares the orientations of the dicts
+        '''
+        for key in dict1.keys():
+            if key not in dict2.keys():
+                dict2[key] = 0.0
+        for key in dict2.keys():
+            if key not in dict1.keys():
+                dict1[key] = 0.0
+        return dict1, dict2
+
+    def fill_sunblind_list(self, orientation_dict):
+        '''fills the g_sunblind_list in the right order with the right g values
+        when the sundblind is closed (needed for modelica specific export)
+        '''
+
+        roof_help = 0.0
+        for key in orientation_dict:
+            key_help = True
+            if key != -2 and key != -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        key_help = False
+                        self.g_sunblind_list.append(window.shading_g_total)
+                        break
+                if key_help:
+                    self.g_sunblind_list.append(0.0)
+            elif key == -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        roof_help = window.shading_g_total
+        self.g_sunblind_list.append(roof_help)
+
+    def fill_win_area_list(self, orientation_dict):
+        '''fills the window_area_list in the right order with the right window
+        areas (needed for modelica specific export)
+        '''
+
+        roof_help = 0.0
+        for key in orientation_dict:
+            key_help = True
+            if key != -2 and key != -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        key_help = False
+                        self.window_area_list.append(window.area)
+                        break
+                if key_help:
+                    self.window_area_list.append(0.0)
+            elif key == -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        roof_help = window.area
+        self.window_area_list.append(roof_help)
 
     def set_inner_wall_area(self):
         '''Sets the inner wall area.
@@ -617,7 +691,7 @@ class ThermalZone(object):
         self.area_iw = 0.0
         self.alpha_conv_iw = 0.0
         self.alpha_rad_iw = 0.0
-        self.alpa_comb_iw = 0.0
+        self.alpha_comb_iw = 0.0
 
         # Calculated values for OuterWall for each Zone
         self.r1_ow = 0.0
@@ -634,6 +708,7 @@ class ThermalZone(object):
         self.r_rad_outer_ow = 0.0
         self.r_comb_outer_ow = 0.0
         self.area_ow = 0.0
+        self.alpha_comb_inner_ow = 0.0
         self.alpha_conv_inner_ow = 0.0
         self.alpha_comb_outer_ow = 0.0
         self.alpha_conv_outer_ow = 0.0
