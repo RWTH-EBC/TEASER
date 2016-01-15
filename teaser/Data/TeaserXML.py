@@ -118,8 +118,8 @@ def save_teaser_xml(path, project):
             pyxb_use.Lighting = pb.LightingType()
             pyxb_use.Lighting.maintained_illuminace = \
                 zone.use_conditions.maintained_illuminace
-            pyxb_use.Lighting.usage_level_hight = \
-                zone.use_conditions.usage_level_hight
+            pyxb_use.Lighting.usage_level_height = \
+                zone.use_conditions.usage_level_height
             pyxb_use.Lighting.red_factor_visual = \
                 zone.use_conditions.red_factor_visual
             pyxb_use.Lighting.rel_absence = \
@@ -406,7 +406,7 @@ def load_teaser_xml(path, prj):
             # zone.use_conditions.typical_length = pyxb_zone.typical_length
             # zone.use_conditions.typical_width = pyxb_zone.typical_width
 
-            zone.use_conditions = UseConditions18599()
+            zone.use_conditions = UseConditions18599(zone)
 
             pyxb_use = pyxb_zone.UseCondition.UseConditions18599
 
@@ -436,8 +436,8 @@ def load_teaser_xml(path, prj):
 
             zone.use_conditions.maintained_illuminace = \
                 pyxb_use.Lighting.maintained_illuminace
-            zone.use_conditions.usage_level_hight = \
-                pyxb_use.Lighting.usage_level_hight
+            zone.use_conditions.usage_level_height = \
+                pyxb_use.Lighting.usage_level_height
             zone.use_conditions.red_factor_visual = \
                 pyxb_use.Lighting.red_factor_visual
             zone.use_conditions.rel_absence = \
