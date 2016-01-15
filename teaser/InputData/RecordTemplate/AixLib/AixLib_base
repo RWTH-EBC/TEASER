@@ -4,9 +4,9 @@ record ${bldg.name}_base "${bldg.name}_base"
     zoneSetup = {
 		%for i in bldg.thermal_zones:
 		%if i == bldg.thermal_zones[-1]:
-		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name}()
+		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}()
 		%else:
-		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name}(),
+		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
 		%endif
 		%endfor
 		},
@@ -22,10 +22,19 @@ record ${bldg.name}_base "${bldg.name}_base"
 	HRS = ${get_true_false(central_ahu.heat_recovery)},
 	efficiencyHRS_enabled = ${central_ahu.efficiency_recovery},
 	efficiencyHRS_disabled = ${central_ahu.efficiency_revocery_false}
+% else:
+	,	
+	heating = false,
+	cooling = false,
+	dehumidification = false,
+	humidification = false,
+	BPF_DeHu = 0.2,
+	HRS = false,
+	efficiencyHRS_enabled = 0.8,
+	efficiencyHRS_disabled = 0.2
 % endif
     );
 end ${bldg.name}_base;
-
 ##get n
 <%def name="get_n(list)", filter="trim">
 	<%

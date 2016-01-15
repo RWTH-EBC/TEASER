@@ -3,8 +3,8 @@ ${extra}
 %endif
 %for i in list:
 %if addition != None: 
-${addition}${i.name}
+${addition}${i.name.replace(" ", "")}
 %else:
-${i.name}
+${i.name.replace(" ", "")}
 %endif
 %endfor
