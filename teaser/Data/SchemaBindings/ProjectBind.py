@@ -1,7 +1,7 @@
 # .\ProjectBind.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:e92452c8d3e28a9e27abfc9994d2007779e7f4c9
-# Generated 2015-11-18 09:58:55.324670 by PyXB version 1.2.4 using Python 3.4.3.final.0
+# Generated 2016-01-15 12:17:47.544648 by PyXB version 1.2.4 using Python 3.4.3.final.0
 # Namespace AbsentNamespace0
 
 from __future__ import unicode_literals
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:98d0f0a4-8dd2-11e5-934b-f4b7e2dccf42')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:9b2a9dd0-bb79-11e5-b247-f4b7e2dccf42')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
@@ -219,11 +219,11 @@ class LightingType (pyxb.binding.basis.complexTypeDefinition):
     maintained_illuminace = property(__maintained_illuminace.value, __maintained_illuminace.set, None, None)
 
     
-    # Element usage_level_hight uses Python identifier usage_level_hight
-    __usage_level_hight = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'usage_level_hight'), 'usage_level_hight', '__AbsentNamespace0_LightingType_usage_level_hight', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\InputData\\XSD_Definitions\\UseConditions18599.xsd', 21, 6), )
+    # Element usage_level_height uses Python identifier usage_level_height
+    __usage_level_height = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'usage_level_height'), 'usage_level_height', '__AbsentNamespace0_LightingType_usage_level_height', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\InputData\\XSD_Definitions\\UseConditions18599.xsd', 21, 6), )
 
     
-    usage_level_hight = property(__usage_level_hight.value, __usage_level_hight.set, None, None)
+    usage_level_height = property(__usage_level_height.value, __usage_level_height.set, None, None)
 
     
     # Element red_factor_visual uses Python identifier red_factor_visual
@@ -262,7 +262,7 @@ class LightingType (pyxb.binding.basis.complexTypeDefinition):
 
     _ElementMap.update({
         __maintained_illuminace.name() : __maintained_illuminace,
-        __usage_level_hight.name() : __usage_level_hight,
+        __usage_level_height.name() : __usage_level_height,
         __red_factor_visual.name() : __red_factor_visual,
         __rel_absence.name() : __rel_absence,
         __room_index.name() : __room_index,
@@ -2219,7 +2219,7 @@ UsageOperationTimeType._Automaton = _BuildAutomaton()
 
 LightingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'maintained_illuminace'), pyxb.binding.datatypes.float, scope=LightingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\InputData\\XSD_Definitions\\UseConditions18599.xsd', 20, 6)))
 
-LightingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'usage_level_hight'), pyxb.binding.datatypes.float, scope=LightingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\InputData\\XSD_Definitions\\UseConditions18599.xsd', 21, 6)))
+LightingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'usage_level_height'), pyxb.binding.datatypes.float, scope=LightingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\InputData\\XSD_Definitions\\UseConditions18599.xsd', 21, 6)))
 
 LightingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'red_factor_visual'), pyxb.binding.datatypes.float, scope=LightingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\InputData\\XSD_Definitions\\UseConditions18599.xsd', 22, 6)))
 
@@ -2260,7 +2260,7 @@ def _BuildAutomaton_ ():
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(LightingType._UseForTag(pyxb.namespace.ExpandedName(None, 'usage_level_hight')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\InputData\\XSD_Definitions\\UseConditions18599.xsd', 21, 6))
+    symbol = pyxb.binding.content.ElementUse(LightingType._UseForTag(pyxb.namespace.ExpandedName(None, 'usage_level_height')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\InputData\\XSD_Definitions\\UseConditions18599.xsd', 21, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()

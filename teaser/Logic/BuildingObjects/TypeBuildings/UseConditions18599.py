@@ -15,14 +15,15 @@ class UseConditions18599(UseConditions):
 
     '''Use Conditions DIN 18599
 
-    CLass that contains the boundary conditions of use for non-residential
+    Class that contains the boundary conditions of use for non-residential
     buildings defined in DIN V 18599-10
 
 
     Attributes
     ----------
 
-    Note: the attributes description are the translation from DIN guideline
+    Note: the attributes description are translations from DIN V 18599-10
+            standard
 
     USAGE AND OPERATION TIMES
 
@@ -75,18 +76,18 @@ class UseConditions18599(UseConditions):
         maintained illuminance value (lx) - Wartungswert der
         Beleuchtungsstaerke
 
-    usage_level_hight: float
-        hight of the usage level (m)  - Hoehe der Nutzebene
+    usage_level_height: float
+        height of the usage level (m)  - Hoehe der Nutzebene
 
     red_factor_visual : float
-       reduction factor for visual task Sector -  Minderungsfaktor Bereich
+       reduction factor for visual task sector -  Minderungsfaktor Bereich
        Sehaufgabe
 
     rel_absence : float
         relative absence - Raumindex
 
     room_index : float
-        room Index - jaehrliche Betriebstage fuer Kuehlung
+        room index - jaehrliche Betriebstage fuer Kuehlung
 
     part_load_factor_lighting : float
         part load factor of building usage time for lighting -
@@ -105,7 +106,8 @@ class UseConditions18599(UseConditions):
         internal set temperature cooling - Raum-Solltemperatur Kuehlung
 
     temp_set_back: float
-        set back in reduced operation - Temperaturabsenkung reduzierter Betrieb
+        set back in reduced operation mode - Temperaturabsenkung reduzierter
+        Betrieb
 
     min_temp_heat : float
         design minimal temperature heating -  Minimaltemperatur
@@ -166,7 +168,7 @@ class UseConditions18599(UseConditions):
       Geraete
 
     lighting_power : float
-        spec. elektr. Power for lighting - spez. Elektr.
+        spec. electr. Power for lighting - spez. Elektr.
         Leistung-Raumbeleuchtung
         
     profile_lighting : [float]
@@ -228,7 +230,7 @@ class UseConditions18599(UseConditions):
         self.daily_operation_heating = 13
 
         self.maintained_illuminace = 500
-        self.usage_level_hight = 0.8
+        self.usage_level_height = 0.8
         self.red_factor_visual = 0.84
         self.rel_absence = 0.3
         self.room_index = 0.9
@@ -322,7 +324,7 @@ class UseConditions18599(UseConditions):
 
                 self.maintained_illuminace = \
                     usage.Lighting.maintained_illuminace
-                self.usage_level_hight = usage.Lighting.usage_level_hight
+                self.usage_level_height = usage.Lighting.usage_level_height
                 self.red_factor_visual = usage.Lighting.red_factor_visual
                 self.rel_absence = usage.Lighting.rel_absence
                 self.room_index = usage.Lighting.room_index
@@ -427,7 +429,7 @@ class UseConditions18599(UseConditions):
 
             usage_pyxb.Lighting.maintained_illuminace = \
                 self.maintained_illuminace
-            usage_pyxb.Lighting.usage_level_hight = self.usage_level_hight
+            usage_pyxb.Lighting.usage_level_height = self.usage_level_height
             usage_pyxb.Lighting.red_factor_visual = self.red_factor_visual
             usage_pyxb.Lighting.rel_absence = self.rel_absence
             usage_pyxb.Lighting.room_index = self.room_index
