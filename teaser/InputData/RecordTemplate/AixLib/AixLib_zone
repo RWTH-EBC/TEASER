@@ -1,4 +1,4 @@
-record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
+record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.replace(" ", "")}"
   extends AixLib.DataBase.Buildings.ZoneBaseRecord(
     n = ${get_n(zone.outer_walls)},
     Heater_on = true,
@@ -68,7 +68,7 @@ record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
 
 
 
-end ${bldg.name}_${zone.name};
+end ${bldg.name}_${zone.name.replace(" ", "")};
 
 ##get n
 <%def name="get_n(list)", filter="trim">
