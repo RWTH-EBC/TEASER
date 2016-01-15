@@ -217,7 +217,7 @@ In detail the attributes are structured in the following sections:
 * Misc
 
 
-.. automodule:: teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599
+.. automodule:: teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599
     :members:
     :undoc-members:
     :show-inheritance:
