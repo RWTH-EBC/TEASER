@@ -4,8 +4,8 @@
 from teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding \
  import TypeBuilding
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599\
- import UseConditionsOffice18599 as UseCond
+from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599\
+ import UseConditions18599 as UseCond
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor\
  import GroundFloor
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
@@ -44,6 +44,9 @@ class Residential(TypeBuilding):
 
     net_leased_area : float
         total net leased area of building
+        
+    with_ahu : boolean
+        if building has a central AHU or not
 
     residential_layout : int
         type of floor plan (default = 0)
@@ -145,11 +148,20 @@ class Residential(TypeBuilding):
         estimation factor to calculate heated cellar area
     '''
 
-    def __init__(self, parent, name, year_of_construction=None,
-                 number_of_floors=None, height_of_floors=None,
-                 net_leased_area=None, residential_layout=None,
-                 neighbour_buildings=None, attic=None, cellar=None,
-                 dormer=None, construction_type=None):
+    def __init__(self, 
+                 parent, 
+                 name, 
+                 year_of_construction=None,
+                 number_of_floors=None, 
+                 height_of_floors=None,
+                 net_leased_area=None,
+                 with_ahu=False,
+                 residential_layout=None,
+                 neighbour_buildings=None, 
+                 attic=None, 
+                 cellar=None,
+                 dormer=None,
+                 construction_type=None):
 
         '''Constructor of Residential
 
@@ -158,7 +170,7 @@ class Residential(TypeBuilding):
 
         super(Residential, self).__init__(parent, name, year_of_construction,
                                           number_of_floors, height_of_floors,
-                                          net_leased_area)
+                                          net_leased_area, with_ahu)
 
         self.residential_layout = residential_layout
         self.neighbour_buildings = neighbour_buildings
@@ -273,10 +285,14 @@ class Residential(TypeBuilding):
         elif self.dormer == 1:
             self._est_factor_dormer = 1.3
 
-        self.file_ahu = "./Tables/Residential/AHU_Residential.mat"
-        self.file_internal_gains = "./Tables/Residential/InternalGains_Residential.mat"
-        self.file_set_t = "./Tables/Residential/Tset_Residential.mat"
-        self.file_weather = "./Tables/" + self.parent.weather_file_name
+        if self.with_ahu is True:
+            self.central_ahu.profile_temperature = (7*[293.15] +
+                                                    12*[295.15] +
+                                                    6*[293.15])
+            self.central_ahu.profile_min_relative_humidity = (25*[0.45])
+            self.central_ahu.profile_max_relative_humidity = (25*[0.55])
+            self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
+        
 
     def generate_residential(self):
         '''Generates a residential building.
@@ -286,12 +302,15 @@ class Residential(TypeBuilding):
         Berechnungsgrundlagen: IWU, "Kurzverfahren Energieprofil"; 2005.
 
         '''
+        #help area for the correct building area setting while using typeBldgs
+        type_bldg_area = self.net_leased_area
+        self.net_leased_area = 0.0
 
         self._number_of_heated_floors = self._est_factor_heated_cellar + \
                     self.number_of_floors + self.est_living_area_factor\
                      *self._est_factor_heated_attic
 
-        self._living_area_per_floor = self.net_leased_area / \
+        self._living_area_per_floor = type_bldg_area / \
                 self._number_of_heated_floors
 
         self._est_ground_floor_area = self.est_bottom_building_closure * \
@@ -310,7 +329,7 @@ class Residential(TypeBuilding):
         self._est_facade_area = self._est_facade_to_floor_area * \
                 self._living_area_per_floor + self._est_extra_floor_area
 
-        self._est_win_area = self.est_factor_win_area * self.net_leased_area
+        self._est_win_area = self.est_factor_win_area * type_bldg_area
 
         self._est_cellar_wall_area = self.est_factor_cellar_area * \
                 self._est_factor_heated_cellar * self._est_facade_area
@@ -319,12 +338,12 @@ class Residential(TypeBuilding):
                 self._est_facade_area) - self._est_cellar_wall_area - \
                 self._est_win_area
 
-        # self._est_factor_volume = self.net_leased_area * 2.5
+        # self._est_factor_volume = type_bldg_area * 2.5
 
         for key, value in self.zone_area_factors.items():
             zone = ThermalZone(self)
             zone.name = key
-            zone.area = self.net_leased_area * value[0]
+            zone.area = type_bldg_area * value[0]
             use_cond = UseCond(zone)
             use_cond.load_use_conditions(value[1])
 
@@ -445,7 +464,7 @@ class Residential(TypeBuilding):
         for zone in self.thermal_zones:
             zone.set_inner_wall_area()
             zone.set_volume_zone()
-    
+            
     @property
     def residential_layout(self):
         return self._residential_layout

@@ -18,12 +18,13 @@
   <xs:complexType name="LightingType">
     <xs:sequence>
       <xs:element minOccurs="0" type="xs:float" name="maintained_illuminace"/>
-      <xs:element minOccurs="0" type="xs:float" name="usage_level_hight"/>
+      <xs:element minOccurs="0" type="xs:float" name="usage_level_height"/>
       <xs:element minOccurs="0" type="xs:float" name="red_factor_visual"/>
       <xs:element minOccurs="0" type="xs:float" name="rel_absence"/>
       <xs:element minOccurs="0" type="xs:float" name="room_index"/>
       <xs:element minOccurs="0" type="xs:float" name="part_load_factor_lighting"/>
-    </xs:sequence>
+	  <xs:element minOccurs="0" type="xs:float" name="ratio_conv_rad_lighting"/>
+	</xs:sequence>
   </xs:complexType>
   <xs:complexType name="RoomClimateType">
     <xs:sequence>
@@ -47,6 +48,7 @@
       <xs:element minOccurs="0" type="xs:float" name="machines"/>
       <xs:element minOccurs="0" type="floatList" name="profile_machines"/>
 	  <xs:element minOccurs="0" type="xs:float" name="lighting_power"/>
+	  <xs:element minOccurs="0" type="floatList" name="profile_lighting"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="AHUType">
@@ -56,7 +58,7 @@
       <xs:element minOccurs="0" type="xs:boolean" name="with_ahu"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="UseConditionsOffice18599Type">
+  <xs:complexType name="UseConditions18599Type">
     <xs:sequence>
       <xs:element minOccurs="0" type="xs:string" name="usage"/>
       <xs:element minOccurs="0" type="xs:float" name="typical_length"/>
@@ -70,7 +72,7 @@
   </xs:complexType>
   <xs:complexType name="UseConditionsType">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" type="UseConditionsOffice18599Type" name="UseConditionsOffice18599"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" type="UseConditions18599Type" name="UseConditions18599"/>
     </xs:sequence>
   </xs:complexType>
   <xs:simpleType name="integerList">

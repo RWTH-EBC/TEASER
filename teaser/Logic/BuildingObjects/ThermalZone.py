@@ -1,11 +1,10 @@
 # created June 2015
 # by TEASER4 Development Team
-
+from __future__ import division
 import math
 import collections
 import random
 import warnings
-
 
 class ThermalZone(object):
     '''This class represents a Thermal Zone in a building
@@ -45,11 +44,23 @@ class ThermalZone(object):
     outer_walls : list
         List with all outer walls including ground floor and rooftop
 
+    use_conditions : instance of UseConditions()
+        Class of UseConditions with all relevant information for the usage
+        of the thermal zone
+
     inner_walls : list
         List with all inner walls including  floor and ceiling
 
     typical_length : list
         List with all inner walls including  floor and ceiling
+        
+    t_inside : float
+        normative indoor temperature for static heat load calculation.
+        The input of t_inside is ALWAYS in Kelvin
+        
+    t_outside : float
+        normative outdoor temperature for static heat load calculation.
+        The input of t_inside is ALWAYS in Kelvin
     '''
 
     def __init__(self, parent=None):
@@ -60,17 +71,20 @@ class ThermalZone(object):
         self.parent = parent
         self.internal_id = random.random()
         self.name = None
-        self.area = None
-        self.volume = None
-        self.infiltration_rate = None
+        self._area = None
+        self._volume = None
+        self._infiltration_rate = 0.5
         self._outer_walls = []
         self._inner_walls = []
         self._windows = []
         self._use_conditions = None
         self.typical_length = None
         self.typical_width = None
-        self.t_inside = None
-        self.t_outside = None
+        self._t_inside = 293.15
+        self._t_outside = 261.15
+        self.density_air = 1.19     # only export for now
+        self.heat_capac_air = 1007  # only export for now
+        self.t_ground = 286.15  # groundtemperature of for the simulation
 
         # Calculated values for InnerWall for each Zone
         self.r1_iw = 0.0
@@ -82,7 +96,7 @@ class ThermalZone(object):
         self.area_iw = 0.0
         self.alpha_conv_iw = 0.0
         self.alpha_rad_iw = 0.0
-        self.alpa_comb_iw = 0.0
+        self.alpha_comb_iw = 0.0
 
         # Calculated values for OuterWall for each Zone
         self.r1_ow = 0.0
@@ -90,6 +104,7 @@ class ThermalZone(object):
         self.r_rest_ow = 0.0
         self.r_total = 0.0
         self.weightfactor_ow = []
+        self.weightfactor_ow_dict = {}
         self.weightfactor_ground = []
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
@@ -99,6 +114,7 @@ class ThermalZone(object):
         self.r_rad_outer_ow = 0.0
         self.r_comb_outer_ow = 0.0
         self.area_ow = 0.0
+        self.alpha_comb_inner_ow = 0.0
         self.alpha_conv_inner_ow = 0.0
         self.alpha_comb_outer_ow = 0.0
         self.alpha_conv_outer_ow = 0.0
@@ -107,6 +123,8 @@ class ThermalZone(object):
         # Calculated values for windows for each Zone
         self.r1_win = 0.0
         self.weightfactor_win = []
+        self.g_sunblind_list = []
+        self.window_area_list = []
         self.ua_value_win = 0.0
         self.r_conv_inner_win = 0.0
         self.r_rad_inner_win = 0.0
@@ -391,6 +409,7 @@ class ThermalZone(object):
         self.r_comb_outer_ow = 1/sum_r_comb_outer_ow
 
         self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
+        self.alpha_comb_inner_ow = (1/(self.r_comb_inner_ow*self.area_ow))
         self.alpha_conv_outer_ow = (1/(self.r_conv_outer_ow*sum_area_ow_rt))
         self.alpha_comb_outer_ow = (1/(self.r_comb_outer_ow*sum_area_ow_rt))
 
@@ -455,10 +474,18 @@ class ThermalZone(object):
                 orientation_win_help[win_count.orientation] =  \
                                                     win_count.ua_value
 
+        orientation_ow_help, orientation_win_help = \
+            self.compare_area_dicts(orientation_ow_help, orientation_win_help)
+
         orientation_ow = \
             collections.OrderedDict(sorted(orientation_ow_help.items()))
         orientation_win = \
             collections.OrderedDict(sorted(orientation_win_help.items()))
+
+
+
+        self.weightfactor_ow_dict = orientation_ow
+
 
         roof_help = None
 
@@ -519,6 +546,64 @@ class ThermalZone(object):
         else:
             raise ValueError("specify calculation method correctly")
 
+        self.fill_sunblind_list(orientation_win)
+        self.fill_win_area_list(orientation_win)
+
+    def compare_area_dicts(self, dict1, dict2):
+        '''Compares the orientations of the dicts
+        '''
+        for key in dict1.keys():
+            if key not in dict2.keys():
+                dict2[key] = 0.0
+        for key in dict2.keys():
+            if key not in dict1.keys():
+                dict1[key] = 0.0
+        return dict1, dict2
+
+    def fill_sunblind_list(self, orientation_dict):
+        '''fills the g_sunblind_list in the right order with the right g values
+        when the sundblind is closed (needed for modelica specific export)
+        '''
+
+        roof_help = 0.0
+        for key in orientation_dict:
+            key_help = True
+            if key != -2 and key != -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        key_help = False
+                        self.g_sunblind_list.append(window.shading_g_total)
+                        break
+                if key_help:
+                    self.g_sunblind_list.append(0.0)
+            elif key == -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        roof_help = window.shading_g_total
+        self.g_sunblind_list.append(roof_help)
+
+    def fill_win_area_list(self, orientation_dict):
+        '''fills the window_area_list in the right order with the right window
+        areas (needed for modelica specific export)
+        '''
+
+        roof_help = 0.0
+        for key in orientation_dict:
+            key_help = True
+            if key != -2 and key != -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        key_help = False
+                        self.window_area_list.append(window.area)
+                        break
+                if key_help:
+                    self.window_area_list.append(0.0)
+            elif key == -1:
+                for window in self.windows:
+                    if window.orientation == key:
+                        roof_help = window.area
+        self.window_area_list.append(roof_help)
+
     def set_inner_wall_area(self):
         '''Sets the inner wall area.
 
@@ -576,11 +661,6 @@ class ThermalZone(object):
         Calculates the norm heat load of the thermal zone.
         '''
 
-        # hard code to trick unit tests ;-)
-        self.t_inside = 293.15
-        self.t_outside = 261.15
-        self.infiltration_rate = 0.5
-
         _heat_capac_air = 1.002
         _density_air = 1.25
 
@@ -610,7 +690,7 @@ class ThermalZone(object):
         self.area_iw = 0.0
         self.alpha_conv_iw = 0.0
         self.alpha_rad_iw = 0.0
-        self.alpa_comb_iw = 0.0
+        self.alpha_comb_iw = 0.0
 
         # Calculated values for OuterWall for each Zone
         self.r1_ow = 0.0
@@ -627,6 +707,7 @@ class ThermalZone(object):
         self.r_rad_outer_ow = 0.0
         self.r_comb_outer_ow = 0.0
         self.area_ow = 0.0
+        self.alpha_comb_inner_ow = 0.0
         self.alpha_conv_inner_ow = 0.0
         self.alpha_comb_outer_ow = 0.0
         self.alpha_conv_outer_ow = 0.0
@@ -650,6 +731,17 @@ class ThermalZone(object):
 
         self.heating_load = 0.0
         self.cooling_load = 0.0
+
+    def delete(self):
+        '''Deletes the actual thermal zone and refreshs the thermal zones of
+        the building
+        '''
+        for index, tz in enumerate(self.parent.thermal_zones):
+            if tz.internal_id == self.internal_id:
+                self.parent.net_leased_area -= self.area
+                self.parent.thermal_zones.pop(index)
+
+                break
 
     @property
     def parent(self):
@@ -677,6 +769,23 @@ class ThermalZone(object):
            or type(value).__name__ == "Residential":
 
             self.__parent.thermal_zones.append(self)
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        if isinstance(value, str):
+
+            self._name = value.replace(" ", "")
+        else:
+            try:
+                value = str(value)
+                self._name = value.replace(" ", "")
+
+            except ValueError:
+                print("Can't convert name to string")
 
     @property
     def outer_walls(self):
@@ -738,12 +847,122 @@ class ThermalZone(object):
         ass_error_1 = "Use condition has to be an instance of UseConditions()"
 
         assert type(value).__name__ == ("UseConditions") or \
-            type(value).__name__ == ("UseConditionsOffice18599") or \
-            type(value).__name__ == ("UseConditionsResedential18599"),\
-            ass_error_1
+            type(value).__name__ == ("UseConditions18599"), ass_error_1
 
         if value is not None:
             self._use_conditions = value
             self.typical_length = value.typical_length
             self.typical_width = value.typical_width
         self._use_conditions = value
+
+    @property
+    def area(self):
+        return self._area
+
+    @area.setter
+    def area(self, value):
+        
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert zone area to float")        
+        
+        if self.parent is not None:
+            if self._area is None:
+                if self.parent.net_leased_area is None:
+                    self.parent.net_leased_area = 0.0
+                self._area = value
+                self.parent.net_leased_area += value
+            else:
+                self.parent.net_leased_area -= self._area
+                self.parent.net_leased_area += value
+                self._area = value
+        else:
+            self._area = value
+
+    @property
+    def volume(self):
+        return self._volume
+
+    @volume.setter
+    def volume(self, value):
+        
+        if isinstance(value, float):
+            pass
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert zone volume to float")         
+        
+        if self.parent is not None:
+            if self._volume is None:
+                self._volume = value
+                self.parent.volume += value
+            else:
+                self.parent.volume -= self._volume
+                self.parent.volume += value
+                self._volume = value
+        else:
+            self._volume = value
+
+    @property
+    def infiltration_rate(self):        
+        return self._infiltration_rate
+
+    @infiltration_rate.setter
+    def infiltration_rate(self, value):
+
+        if isinstance(value, float):
+            self._infiltration_rate = value
+        elif value is None:
+            self._infiltration_rate = value
+        else:
+            try:
+                value = float(value)
+                self._infiltration_rate = value
+            except:
+                raise ValueError("Can't convert infiltration rate to float")
+                
+    @property
+    def t_inside(self):        
+        return self._t_inside
+
+    @t_inside.setter
+    def t_inside(self, value):
+        print("setter")
+        if isinstance(value, float):
+            self._t_inside = value
+        elif value is None:
+            self._t_inside = value
+        else:
+            try:
+                value = float(value)
+                self._t_inside = value
+            except:
+                raise ValueError("Can't convert temperature to float")
+                
+    @property
+    def t_outside(self):        
+        return self._t_outside
+
+    @t_outside.setter
+    def t_outside(self, value):
+
+        if isinstance(value, float):
+            self._t_outside = value
+        elif value is None:
+            self._t_outside = value
+        else:
+            try:
+                value = float(value)
+                self._t_outside = value
+            except:
+                raise ValueError("Can't convert temperature to float")

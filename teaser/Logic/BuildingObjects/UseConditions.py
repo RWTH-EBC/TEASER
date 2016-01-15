@@ -50,3 +50,7 @@ class UseConditions(object):
             assert type(value).__name__ == "ThermalZone", ass_error_1
 
             self._parent = value
+
+        else:
+
+            self._parent = None

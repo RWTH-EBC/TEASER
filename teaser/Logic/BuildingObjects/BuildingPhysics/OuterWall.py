@@ -15,3 +15,10 @@ class OuterWall(Wall):
         '''
         '''
         super(OuterWall, self).__init__(parent)
+        
+        
+        self._tilt = 90.0
+        self._inner_convection = 2.7
+        self._inner_radiation = 5.0
+        self._outer_convection = 20.0
+        self._outer_radiation = 5.0

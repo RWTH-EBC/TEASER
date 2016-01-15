@@ -8,6 +8,13 @@ classes
 import os
 
 
+def celsius_to_kelvin(value):
+    try:
+        f_value = float(value)
+    except TypeError:
+        f_value = 0
+    return f_value+273.15
+
 def create_path(path):
     '''Create a folder.
 
@@ -22,6 +29,7 @@ def create_path(path):
     # if directory exists change into that directory
     if(os.path.isdir(path)):
         os.chdir(path)
+        return path
     else:
         if not os.path.exists(path):
             l = []
@@ -35,15 +43,18 @@ def create_path(path):
                     os.mkdir(p)
 
         os.chdir(p)
-
+    
+    return p
 
 def get_default_path():
-    '''Function to construct defaultPath.
+    '''Function to construct default path to OutputData folder
+    
+    This function constructs the default path to the OutputData folder
 
     '''
 
     directory = os.path.dirname(__file__)
-    src = "\\src"
+    src = "\\teaser"
     last_index = directory.rfind(src)
     default_path = directory[:last_index] + "\\teaser\\OutputData"
 
