@@ -58,9 +58,61 @@
             
   <div class="section" id="typebuildings-package">
 <h1>TypeBuildings package<a class="headerlink" href="#typebuildings-package" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Office">
-<span id="office-module"></span><h2>Office module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Office" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<p><strong>Description</strong></p>
+<p>The TEASER4 typebuilding package contains different modules for the creation
+and parametrisation of typebuildings. In TEASER4 these typebuildings are used to
+set up datasets for buildings out of limited building information. For
+this, the methods are based on the following principles according to Lichtmess
+<a class="reference internal" href="#lichtme-2010" id="id1">[1]</a>:</p>
+<ol class="arabic simple">
+<li>The building envelope is a function based on the building&#8217;s net leased area</li>
+<li>The building envelope can automatically be assigned to the thermal zones</li>
+</ol>
+<p>These principles are mainly used to handle the building envelopes.
+In addition it is necessary to use statistic data for the following aspects:</p>
+<ul class="simple">
+<li>number of thermal zones</li>
+<li>division of net leased area into zone areas</li>
+<li>wall constructions</li>
+<li>properties of construction materials</li>
+</ul>
+<dl class="docutils">
+<dt>With the help of such statistical data, it is possible to create typebuildings</dt>
+<dd>using five parameters:</dd>
+</dl>
+<ul class="simple">
+<li>type of building</li>
+<li>net leased area</li>
+<li>year of construction</li>
+<li>number of floors</li>
+<li>height of floors</li>
+</ul>
+<p>The number of zones and respective zone areas differ for different types of buildings.
+Detailed information for specific types are given below.
+The connection between the building envelope area and the
+building net leased area is based on BMVBS <a class="reference internal" href="#bundesministeriumfurverkehrbauundstadtentwicklung-december2010" id="id2">[2]</a> where various administrative
+buildings were investigated.
+In addition to this relationship, it is possible to refine the dataset with further
+information about the structure of the building using a method from Kaag <a class="reference internal" href="#kaag-march2008" id="id3">[3]</a>.
+Wall construction is often a function of year of construction. Such relationships are provided by
+BMVBS <a class="reference internal" href="#bundesministeriumfurverkehrbauundstadtentwicklung-30-07-2009" id="id4">[4]</a> and
+are enriched by data for materials from DIN 12524 and
+DIN 4108-4 <a class="reference internal" href="#deutschesinstitutfurnormung-juli2000" id="id5">[5]</a> <a class="reference internal" href="#deutschesinstitutfurnormung-februar2013" id="id6">[6]</a>.</p>
+<div class="section" id="office-module">
+<h2>Office module<a class="headerlink" href="#office-module" title="Permalink to this headline">¶</a></h2>
+<p><strong>Description</strong></p>
+<p>The office module contains a multi zone building according to BMVBS <a class="reference internal" href="#bundesministeriumfurverkehrbauundstadtentwicklung-december2010" id="id7">[2]</a>.
+In detail the net leased area is divided into the following thermal zone
+areas:</p>
+<ol class="arabic simple">
+<li>Office (50% of net leased area)</li>
+<li>Floor (25% of net leased area)</li>
+<li>Storage (15% of net leased area)</li>
+<li>Meeting (4% of net leased area)</li>
+<li>Restroom (4% of net leased area)</li>
+<li>ICT (2% of net leased area)</li>
+</ol>
+<span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Office"></span><dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office">
 <em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Office.</code><code class="descname">Office</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding" title="teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding</span></code></a></p>
@@ -203,9 +255,17 @@ TEASER requirements.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Residential">
-<span id="residential-module"></span><h2>Residential module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Residential" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="residential-module">
+<h2>Residential module<a class="headerlink" href="#residential-module" title="Permalink to this headline">¶</a></h2>
+<p><strong>Description</strong></p>
+<p>The residential module contains a single zone building where the envelopes are
+computed based on a method from the IWU <a class="reference internal" href="#kurzverfahreniwu" id="id8">[7]</a>.
+In detail the net leased area is divided into the following thermal zone
+area:</p>
+<ol class="arabic simple">
+<li>Single dwelling (100% of net leased area)</li>
+</ol>
+<span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Residential"></span><dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential">
 <em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Residential.</code><code class="descname">Residential</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>dormer=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding" title="teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding</span></code></a></p>
@@ -379,9 +439,26 @@ Berechnungsgrundlagen: IWU, &#8220;Kurzverfahren Energieprofil&#8221;; 2005.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute">
-<span id="institute-module"></span><h2>Institute module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="institute-module">
+<h2>Institute module<a class="headerlink" href="#institute-module" title="Permalink to this headline">¶</a></h2>
+<p><strong>Description</strong></p>
+<p>The institute module contains a multi zone building which is based on an office
+building with an additional laboratory zone. The area of the laboratory zone is
+based on the data from the Forschungszentrum Jülich <a class="reference internal" href="#abschlussbericht" id="id9">[8]</a>.
+According to the dataset from Jülich, the typebuilding institute is based on the
+buildingsclass of BWZK with the number 2200 which represents all institute
+buildings which are not institute type 4 or institute type 8 <a class="reference internal" href="#bauministerkonferenz-dezember2010" id="id10">[9]</a>.
+In detail the net leased area is divided into the following thermal zone areas:</p>
+<ol class="arabic simple">
+<li>Office (40% of net leased area)</li>
+<li>Floor (25% of net leased area)</li>
+<li>Storage (10% of net leased area)</li>
+<li>Meeting (4% of net leased area)</li>
+<li>Restroom (4% of net leased area)</li>
+<li>ICT (2% of net leased area)</li>
+<li>Laboratory (15% of the net leased area)</li>
+</ol>
+<span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute"></span><dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute.Institute">
 <em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute.</code><code class="descname">Institute</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute.Institute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.Office.Office</span></code></a></p>
@@ -397,9 +474,26 @@ Berechnungsgrundlagen: IWU, &#8220;Kurzverfahren Energieprofil&#8221;; 2005.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute4">
-<span id="institute4-module"></span><h2>Institute4 module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute4" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="institute4-module">
+<h2>Institute4 module<a class="headerlink" href="#institute4-module" title="Permalink to this headline">¶</a></h2>
+<p><strong>Description</strong></p>
+<p>The institute type 4 module contains a multi zone building which is based on an office
+building with an additional laboratory zone. The area of the laboratory zone is
+based on data from the Forschungszentrum Jülich <a class="reference internal" href="#abschlussbericht" id="id11">[8]</a>.
+According to the dataset from Jülich, the typebuilding institute type 4 is based on the
+buildingsclass of BWZK with the number 2240 <a class="reference internal" href="#bauministerkonferenz-dezember2010" id="id12">[9]</a>.
+In detail the net leased
+area is divided in the following thermal zone areas:</p>
+<ol class="arabic simple">
+<li>Office (37.5% of net leased area)</li>
+<li>Floor (22.5% of net leased area)</li>
+<li>Storage (10% of net leased area)</li>
+<li>Meeting (4% of net leased area)</li>
+<li>Restroom (4% of net leased area)</li>
+<li>ICT (2% of net leased area)</li>
+<li>Laboratory (20% of the net leased area)</li>
+</ol>
+<span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute4"></span><dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute4.Institute4">
 <em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute4.</code><code class="descname">Institute4</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute4.Institute4" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.Office.Office</span></code></a></p>
@@ -415,9 +509,26 @@ Berechnungsgrundlagen: IWU, &#8220;Kurzverfahren Energieprofil&#8221;; 2005.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute8">
-<span id="institute8-module"></span><h2>Institute8 module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute8" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<div class="section" id="institute8-module">
+<h2>Institute8 module<a class="headerlink" href="#institute8-module" title="Permalink to this headline">¶</a></h2>
+<p><strong>Description</strong></p>
+<p>The institute type 8 module contains a multi zone building which is based on an office
+building with an additional laboratory zone. The area of the laboratory zone is
+based on data from the Forschungszentrum Jülich <a class="reference internal" href="#abschlussbericht" id="id13">[8]</a>.
+According to the dataset from Jülich, the typebuilding institute type 8 is based on the
+buildingsclass of BWZK with the number 2240 <a class="reference internal" href="#bauministerkonferenz-dezember2010" id="id14">[9]</a>.
+In detail the net leased
+area is divided in the following thermal zone areas:</p>
+<ol class="arabic simple">
+<li>Office (10% of net leased area)</li>
+<li>Floor (18% of net leased area)</li>
+<li>Storage (2% of net leased area)</li>
+<li>Meeting (4% of net leased area)</li>
+<li>Restroom (4% of net leased area)</li>
+<li>ICT (2% of net leased area)</li>
+<li>Laboratory (60% of the net leased area)</li>
+</ol>
+<span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Institute8"></span><dl class="class">
 <dt id="teaser.Logic.BuildingObjects.TypeBuildings.Institute8.Institute8">
 <em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Institute8.</code><code class="descname">Institute8</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Institute8.Institute8" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.Office.Office" title="teaser.Logic.BuildingObjects.TypeBuildings.Office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.Office.Office</span></code></a></p>
@@ -447,24 +558,37 @@ represent Type Buildings. Superclass for every type building.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599">
-<span id="useconditionsoffice18599-module"></span><h2>UseConditionsOffice18599 module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="useconditionsoffice18599-module">
+<h2>UseConditionsOffice18599 module<a class="headerlink" href="#useconditionsoffice18599-module" title="Permalink to this headline">¶</a></h2>
+<p><strong>Description</strong></p>
+<p>The UseConditionsOffice18599 module contains the useconditions for the
+typebuildings according to the DIN V 18599 <a class="reference internal" href="#dinv1859910" id="id15">[10]</a> and the SIA 2024 <a class="reference internal" href="#swisssocietyofengineersandarchitects-march2006" id="id16">[11]</a>.
+In detail the attributes are structured in the following sections:</p>
+<ul class="simple">
+<li>Usage and operation times</li>
+<li>Lighting (The hourly profiles here are based on the usage and operation times)</li>
+<li>Room climate</li>
+<li>Internal gains</li>
+<li>Misc</li>
+</ul>
+<span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599"></span><p>UseConditions18599</p>
+<p>This module is a container for UseConditions following 18599 and SIA</p>
 <dl class="class">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599">
-<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.</code><code class="descname">UseConditionsOffice18599</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599">
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.</code><code class="descname">UseConditions18599</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="teaser.Logic.BuildingObjects.html#teaser.Logic.BuildingObjects.UseConditions.UseConditions" title="teaser.Logic.BuildingObjects.UseConditions.UseConditions"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.UseConditions.UseConditions</span></code></a></p>
 <p>Use Conditions DIN 18599</p>
-<p>CLass that contains the boundary conditions of use for non-residential
+<p>Class that contains the boundary conditions of use for non-residential
 buildings defined in DIN V 18599-10</p>
 <p class="rubric">Attributes</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="37%" />
-<col width="63%" />
+<col width="36%" />
+<col width="64%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td>Note: the attributes description are the translation from DIN guideline</td>
-<td>&nbsp;</td>
+<tr class="row-odd"><td>Note: the attributes description are translations from DIN V 18599-10</td>
+<td>standard</td>
 </tr>
 <tr class="row-even"><td>USAGE AND OPERATION TIMES</td>
 <td>&nbsp;</td>
@@ -514,93 +638,101 @@ buildings defined in DIN V 18599-10</p>
 <tr class="row-odd"><td>maintained_illuminace</td>
 <td>(int) maintained illuminance value (lx) - Wartungswert der Beleuchtungsstaerke</td>
 </tr>
-<tr class="row-even"><td>usage_level_hight: float</td>
-<td>hight of the usage level (m)  - Hoehe der Nutzebene</td>
+<tr class="row-even"><td>usage_level_height: float</td>
+<td>height of the usage level (m)  - Hoehe der Nutzebene</td>
 </tr>
 <tr class="row-odd"><td>red_factor_visual</td>
-<td>(float) reduction factor for visual task Sector -  Minderungsfaktor Bereich Sehaufgabe</td>
+<td>(float) reduction factor for visual task sector -  Minderungsfaktor Bereich Sehaufgabe</td>
 </tr>
 <tr class="row-even"><td>rel_absence</td>
 <td>(float) relative absence - Raumindex</td>
 </tr>
 <tr class="row-odd"><td>room_index</td>
-<td>(float) room Index - jaehrliche Betriebstage fuer Kuehlung</td>
+<td>(float) room index - jaehrliche Betriebstage fuer Kuehlung</td>
 </tr>
 <tr class="row-even"><td>part_load_factor_lighting</td>
 <td>(float) part load factor of building usage time for lighting - Teilbetriebsfaktor der Gebaeudebetriebszeit fuer Beleuchtung</td>
 </tr>
-<tr class="row-odd"><td>ROOM CLIMATE</td>
+<tr class="row-odd"><td>ratio_conv_rad_lighting</td>
+<td>(float) describes the ratio between convective and radiative heat transer of the lighting</td>
+</tr>
+<tr class="row-even"><td>ROOM CLIMATE</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td>set_temp_heat: float</td>
+<tr class="row-odd"><td>set_temp_heat: float</td>
 <td>internal set temperature heating - Raum-Solltemperatur Heizung</td>
 </tr>
-<tr class="row-odd"><td>set_temp_cool: float</td>
+<tr class="row-even"><td>set_temp_cool: float</td>
 <td>internal set temperature cooling - Raum-Solltemperatur Kuehlung</td>
 </tr>
-<tr class="row-even"><td>temp_set_back: float</td>
-<td>set back in reduced operation - Temperaturabsenkung reduzierter Betrieb</td>
+<tr class="row-odd"><td>temp_set_back: float</td>
+<td>set back in reduced operation mode - Temperaturabsenkung reduzierter Betrieb</td>
 </tr>
-<tr class="row-odd"><td>min_temp_heat</td>
+<tr class="row-even"><td>min_temp_heat</td>
 <td>(float) design minimal temperature heating -  Minimaltemperatur Auslegung Heizung</td>
 </tr>
-<tr class="row-even"><td>max_temp_cool</td>
+<tr class="row-odd"><td>max_temp_cool</td>
 <td>(float) design maximal temperature cooling - Maximaltemperatur Auslegung Kuehlung</td>
 </tr>
-<tr class="row-odd"><td>rel_humidity</td>
+<tr class="row-even"><td>rel_humidity</td>
 <td>(float) relative humidity - Feuchteanforderung d</td>
 </tr>
-<tr class="row-even"><td>min_air_exchange</td>
+<tr class="row-odd"><td>min_air_exchange</td>
 <td>(float) required minimal air exchange, due to usage - Mindestaussenluftvolumenstrom</td>
 </tr>
-<tr class="row-odd"><td>rel_absence_ahu</td>
+<tr class="row-even"><td>rel_absence_ahu</td>
 <td>(float) relative absence for AHU - Relative Abwesenheit RLT</td>
 </tr>
-<tr class="row-even"><td>part_load_factor_ahu: float</td>
+<tr class="row-odd"><td>part_load_factor_ahu: float</td>
 <td>part load factor of building usage time for AHU  - Teilbetriebsfaktor der Gebaeudebetriebszeit RLT</td>
 </tr>
-<tr class="row-odd"><td>cooling_time</td>
+<tr class="row-even"><td>cooling_time</td>
 <td>([int]) cooling time [begin, end] -  Beginn/Ende Betriebszeit RLT und Kuehlung</td>
 </tr>
-<tr class="row-even"><td>heating_time</td>
+<tr class="row-odd"><td>heating_time</td>
 <td>([int]) heating time [begin, end] - Beginn/End Betriebszeit Heizung</td>
 </tr>
-<tr class="row-odd"><td>INTERNAL GAINS</td>
+<tr class="row-even"><td>INTERNAL GAINS</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td>persons</td>
+<tr class="row-odd"><td>persons</td>
 <td>(int) number of persons - Personen</td>
 </tr>
-<tr class="row-odd"><td>profile_persons</td>
+<tr class="row-even"><td>profile_persons</td>
 <td>([float]) timeline of internal gains from 0 - 100 - Nutzungsprofil Personen</td>
 </tr>
-<tr class="row-even"><td>machines: float</td>
+<tr class="row-odd"><td>machines: float</td>
 <td>number of Machines  - Arbeitshilfen</td>
 </tr>
-<tr class="row-odd"><td>profile_machines</td>
+<tr class="row-even"><td>profile_machines</td>
 <td>([float]) timeline of internal gains from 0 - 100  -  Nutzungsprofil Geraete</td>
 </tr>
-<tr class="row-even"><td>lighting_power</td>
-<td>(float) spec. elektr. Power for lighting - spez. Elektr. Leistung-Raumbeleuchtung</td>
+<tr class="row-odd"><td>lighting_power</td>
+<td>(float) spec. electr. Power for lighting - spez. Elektr. Leistung-Raumbeleuchtung</td>
 </tr>
-<tr class="row-odd"><td>MISC</td>
+<tr class="row-even"><td>MISC</td>
 <td>&nbsp;</td>
 </tr>
-<tr class="row-even"><td>min_ahu: float</td>
+<tr class="row-odd"><td>min_ahu: float</td>
 <td>min ahu  - minAHU</td>
 </tr>
-<tr class="row-odd"><td>max_ahu</td>
+<tr class="row-even"><td>max_ahu</td>
 <td>(float) max ahu - maxAHU</td>
 </tr>
-<tr class="row-even"><td>with_ahu</td>
+<tr class="row-odd"><td>with_ahu</td>
 <td>(boolean) with ahu - withAHU</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.lighting_power">
+<code class="descname">lighting_power</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.lighting_power" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.load_use_conditions">
-<code class="descname">load_use_conditions</code><span class="sig-paren">(</span><em>zone_usage</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.load_use_conditions" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.load_use_conditions">
+<code class="descname">load_use_conditions</code><span class="sig-paren">(</span><em>zone_usage</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.load_use_conditions" title="Permalink to this definition">¶</a></dt>
 <dd><p>load typical use conditions</p>
 <p>loads Use conditions specified in the XML, according to 18599</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -617,25 +749,170 @@ buildings defined in DIN V 18599-10</p>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.machines">
+<code class="descname">machines</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.machines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.max_ahu">
+<code class="descname">max_ahu</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.max_ahu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.max_temp_cool">
+<code class="descname">max_temp_cool</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.max_temp_cool" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_ahu">
+<code class="descname">min_ahu</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_ahu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_air_exchange">
+<code class="descname">min_air_exchange</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_air_exchange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_temp_heat">
+<code class="descname">min_temp_heat</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.min_temp_heat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.persons">
+<code class="descname">persons</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.persons" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.rel_humidity">
+<code class="descname">rel_humidity</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.rel_humidity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.save_use_conditions">
-<code class="descname">save_use_conditions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.save_use_conditions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Saves typical use conditions</p>
-<p>Saves use conditions specified in the XML, according to 18599</p>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.save_use_conditions">
+<code class="descname">save_use_conditions</code><span class="sig-paren">(</span><em>path=None</em>, <em>file_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.save_use_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use conditions saver.</p>
+<p>Saves use conditions according to their usage type in the the XML file
+for use conditions in InputData. If the Project parent is set, it
+automatically saves it to the file given in Project.data. Alternatively
+you can specify a path to a file of UseConditions. If this
+file does not exist, a new file is created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : str</p>
+<blockquote>
+<div><p>path where unique file should be stored</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote class="last">
+<div><p>name of of unique file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_length">
-<code class="descname">typical_length</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_length" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.set_temp_cool">
+<code class="descname">set_temp_cool</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.set_temp_cool" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_width">
-<code class="descname">typical_width</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599.UseConditionsOffice18599.typical_width" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.set_temp_heat">
+<code class="descname">set_temp_heat</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.set_temp_heat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.temp_set_back">
+<code class="descname">temp_set_back</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.temp_set_back" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.typical_length">
+<code class="descname">typical_length</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.typical_length" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.typical_width">
+<code class="descname">typical_width</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599.UseConditions18599.typical_width" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
+</div>
+<div class="section" id="literature">
+<h2>Literature<a class="headerlink" href="#literature" title="Permalink to this headline">¶</a></h2>
+<p id="bibtex-bibliography-teaser.Logic.BuildingObjects.TypeBuildings-0"><table class="docutils citation" frame="void" id="lichtme-2010" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Markus Lichtmeß. <em>Vereinfachungen für die energetische Bewertung von Gebäuden</em>. Universitätsbibliothek Wuppertal, Wuppertal, 2010.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="bundesministeriumfurverkehrbauundstadtentwicklung-december2010" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id7">2</a>)</em> Bundesministerium für Verkehr, Bau und Stadtentwicklung. Vereinfachung zur geometrischen und technischen Datenaufnahme im Nichtwohngebäudebestand. 2010.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="kaag-march2008" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[3]</a></td><td>W.&nbsp;Kaag, T.&nbsp;Ummenhöfer, and M.&nbsp;N. Fisch. Forschungsprojekt energieeffiziente Sanierung von Bürogebäuden der 50er bis 70er Jahre - Erarbeitung einer Planungshilfe. 2008.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="bundesministeriumfurverkehrbauundstadtentwicklung-30-07-2009" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[4]</a></td><td>Bundesministerium für Verkehr, Bau und Stadtentwicklung. Bekanntmachung der Regeln für Energieverbrauchskennwerte und der Vergleichswerte im Nichtwohngebäudebestand. 2009.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="deutschesinstitutfurnormung-juli2000" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[5]</a></td><td>DIN 12524. Baustoffe und -produkte - Wärme- und feuchteschutztechnische Eigenschaften - Tabellierte Bemessungswerte - Deutsche Fassung. Juli 2000.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="deutschesinstitutfurnormung-februar2013" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[6]</a></td><td>DIN 4108. Wärmeschutz und Energie-Einsparung in Gebäuden - Teil 4: Wärme- und feuchteschutztechnische Bemessungswerte. Februar 2013.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="kurzverfahreniwu" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[7]</a></td><td>Tobias Loga, Nikolaus Diefenbach, Jens Knissel, and Rolf Born. <em>Ein vereinfachtes, statistisch abgesichertes Verfahren zur Erhebung von Gebäudedaten für die energetische Bewertung von Gebäuden</em>. volume Bauforschung für die Praxis. Institut Wohnen und Umwelt GmbH, Darmstadt, 2005.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="abschlussbericht" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[8]</td><td><em>(<a class="fn-backref" href="#id9">1</a>, <a class="fn-backref" href="#id11">2</a>, <a class="fn-backref" href="#id13">3</a>)</em> D.&nbsp;Müller, M.&nbsp;Fuchs, M.&nbsp;Lauster, and J.&nbsp;Teichmann. EnEff:Campus - Entwicklung eines integralen Planungshilfsmittels, Projekt - Abschlussbericht. Juni 2015.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="bauministerkonferenz-dezember2010" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[9]</td><td><em>(<a class="fn-backref" href="#id10">1</a>, <a class="fn-backref" href="#id12">2</a>, <a class="fn-backref" href="#id14">3</a>)</em> Bauministerkonferenz. Bauwerkszuordnungskatalog. 2010.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="dinv1859910" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15">[10]</a></td><td>DIN V 18599. Energetische Bewertung von Gebäuden – Berechnung des Nutz-, End- und Primärenergiebedarfs für Heizung, Kühlung, Lüftung, Trinkwarmwasser und Beleuchtung – Teil 10: Nutzungsrandbedingungen, Klimadaten. Dezember 2011.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="swisssocietyofengineersandarchitects-march2006" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id16">[11]</a></td><td>SIA 2024. Standard-Nutzungsbedingungen für die Energie- und Gebäudetechnik. 2006.</td></tr>
+</tbody>
+</table>
+</p>
 </div>
 </div>
 
@@ -648,13 +925,14 @@ buildings defined in DIN V 18599-10</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">TypeBuildings package</a><ul>
-<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Office">Office module</a></li>
-<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Residential">Residential module</a></li>
-<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute">Institute module</a></li>
-<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute4">Institute4 module</a></li>
-<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.Institute8">Institute8 module</a></li>
+<li><a class="reference internal" href="#office-module">Office module</a></li>
+<li><a class="reference internal" href="#residential-module">Residential module</a></li>
+<li><a class="reference internal" href="#institute-module">Institute module</a></li>
+<li><a class="reference internal" href="#institute4-module">Institute4 module</a></li>
+<li><a class="reference internal" href="#institute8-module">Institute8 module</a></li>
 <li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding">TypeBuilding module</a></li>
-<li><a class="reference internal" href="#module-teaser.Logic.BuildingObjects.TypeBuildings.UseConditionsOffice18599">UseConditionsOffice18599 module</a></li>
+<li><a class="reference internal" href="#useconditionsoffice18599-module">UseConditionsOffice18599 module</a></li>
+<li><a class="reference internal" href="#literature">Literature</a></li>
 </ul>
 </li>
 </ul>
