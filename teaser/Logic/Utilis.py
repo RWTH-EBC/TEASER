@@ -29,6 +29,7 @@ def create_path(path):
     # if directory exists change into that directory
     if(os.path.isdir(path)):
         os.chdir(path)
+        return path
     else:
         if not os.path.exists(path):
             l = []
@@ -42,10 +43,13 @@ def create_path(path):
                     os.mkdir(p)
 
         os.chdir(p)
-
+    
+    return p
 
 def get_default_path():
-    '''Function to construct defaultPath.
+    '''Function to construct default path to OutputData folder
+    
+    This function constructs the default path to the OutputData folder
 
     '''
 

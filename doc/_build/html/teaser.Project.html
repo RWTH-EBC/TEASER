@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Project module &mdash; TEASER4 0.1.2 documentation</title>
+    <title>Project module &mdash; TEASER 0.2.0 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.2',
+        VERSION:     '0.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="TEASER4 0.1.2 documentation" href="index.html" />
+    <link rel="top" title="TEASER 0.2.0 documentation" href="index.html" />
     <link rel="up" title="TEASER Doc" href="teaser.html" />
     <link rel="next" title="Examples package" href="teaser.Examples.html" />
     <link rel="prev" title="TEASER Doc" href="teaser.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="teaser.html" title="TEASER Doc"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER4 0.1.2 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.2.0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="teaser.html" accesskey="U">TEASER Doc</a> &raquo;</li> 
       </ul>
     </div>  
@@ -121,17 +121,56 @@ should be loaded (default = True)</p>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="teaser.Project.Project.calculation_method">
+<code class="descname">calculation_method</code><a class="headerlink" href="#teaser.Project.Project.calculation_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teaser.Project.Project.export_parameters_txt">
+<code class="descname">export_parameters_txt</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.export_parameters_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports parameters of all buildings in a readable text file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in OutputData, an alternative
+can be specified</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="teaser.Project.Project.export_record">
-<code class="descname">export_record</code><span class="sig-paren">(</span><em>model_type</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.export_record" title="Permalink to this definition">¶</a></dt>
+<code class="descname">export_record</code><span class="sig-paren">(</span><em>building_model=None</em>, <em>zone_model=None</em>, <em>corG=None</em>, <em>internal_id=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.export_record" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports values to a record file for Modelica simulation</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>model_type</strong> : string</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>building_model</strong> : string</p>
 <blockquote>
-<div><p>setter of the used Modelica model (AixLib or CitiesRWin)</p>
+<div><p>setter of the used Aixlib building model (None, MultizoneEquipped,
+Multizone)</p>
+</div></blockquote>
+<p><strong>zone_model</strong> : string</p>
+<blockquote>
+<div><p>setter of the used Aixlib zone model (ThermalZoneEquipped,
+ThermalZone)</p>
+</div></blockquote>
+<p><strong>corG</strong> : boolean</p>
+<blockquote>
+<div><p>setter of the used g value calculation in the model</p>
+</div></blockquote>
+<p><strong>internal_id</strong> : float</p>
+<blockquote>
+<div><p>setter of the used building which will be exported, if None then
+all buildings will be exported</p>
 </div></blockquote>
 <p><strong>path</strong> : string</p>
 <blockquote class="last">
@@ -228,6 +267,11 @@ is exported</p>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="teaser.Project.Project.name">
+<code class="descname">name</code><a class="headerlink" href="#teaser.Project.Project.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="teaser.Project.Project.retrofit_all_buildings">
 <code class="descname">retrofit_all_buildings</code><span class="sig-paren">(</span><em>year_of_retrofit</em>, <em>window_type=None</em>, <em>material=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.retrofit_all_buildings" title="Permalink to this definition">¶</a></dt>
@@ -270,6 +314,31 @@ and inner heat transfer are used.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="teaser.Project.Project.save_citygml">
+<code class="descname">save_citygml</code><span class="sig-paren">(</span><em>file_name=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.save_citygml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the project to a citygml file</p>
+<p>calls the function save_gml in Data.CityGML we make use of CityGML core
+and EnergyADE to store semantic information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>file_name</strong> : string</p>
+<blockquote>
+<div><p>name of the new file</p>
+</div></blockquote>
+<p><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in OutputData, an alternative
+can be specified</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
 <dt id="teaser.Project.Project.save_project">
 <code class="descname">save_project</code><span class="sig-paren">(</span><em>file_name=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.save_project" title="Permalink to this definition">¶</a></dt>
 <dd><p>Saves the project to a tXML file</p>
@@ -301,7 +370,7 @@ can be specified</p>
 
 <dl class="method">
 <dt id="teaser.Project.Project.type_bldg_institute">
-<code class="descname">type_bldg_institute</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.type_bldg_institute" title="Permalink to this definition">¶</a></dt>
+<code class="descname">type_bldg_institute</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=True</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.type_bldg_institute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create and calculate an institute building</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -360,7 +429,7 @@ light: light construction</p>
 
 <dl class="method">
 <dt id="teaser.Project.Project.type_bldg_institute4">
-<code class="descname">type_bldg_institute4</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.type_bldg_institute4" title="Permalink to this definition">¶</a></dt>
+<code class="descname">type_bldg_institute4</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=True</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.type_bldg_institute4" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create and calculate an institute4 building</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -419,7 +488,7 @@ light: light construction</p>
 
 <dl class="method">
 <dt id="teaser.Project.Project.type_bldg_institute8">
-<code class="descname">type_bldg_institute8</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.type_bldg_institute8" title="Permalink to this definition">¶</a></dt>
+<code class="descname">type_bldg_institute8</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=True</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.type_bldg_institute8" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create and calculate an institute8 building</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -478,7 +547,7 @@ light: light construction</p>
 
 <dl class="method">
 <dt id="teaser.Project.Project.type_bldg_office">
-<code class="descname">type_bldg_office</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.type_bldg_office" title="Permalink to this definition">¶</a></dt>
+<code class="descname">type_bldg_office</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=True</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.type_bldg_office" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create and calculate an office building</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -537,7 +606,7 @@ light: light construction</p>
 
 <dl class="method">
 <dt id="teaser.Project.Project.type_bldg_residential">
-<code class="descname">type_bldg_residential</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>dormer=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.type_bldg_residential" title="Permalink to this definition">¶</a></dt>
+<code class="descname">type_bldg_residential</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=False</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>dormer=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Project.Project.type_bldg_residential" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create and calculate an residential building</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -562,6 +631,10 @@ light: light construction</p>
 <p><strong>net_leased_area</strong> : float</p>
 <blockquote>
 <div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
 </div></blockquote>
 <p><strong>residential_layout</strong> : int</p>
 <blockquote>
@@ -673,7 +746,7 @@ light: light construction</p>
         <li class="right" >
           <a href="teaser.html" title="TEASER Doc"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER4 0.1.2 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.2.0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER Doc</a> &raquo;</li> 
       </ul>
     </div>
