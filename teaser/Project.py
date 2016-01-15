@@ -727,7 +727,7 @@ class Project(object):
 
                     out_file = open(utilis.get_full_path(
                         zone_path + "\\" + bldg.name + "_" +
-                        zone.name + ".mo"), 'w')
+                        zone.name.replace(" ", "") + ".mo"), 'w')
                     out_file.write(zone_template.render_unicode(
                         bldg=bldg, zone=zone))
                     out_file.close()
@@ -772,7 +772,7 @@ class Project(object):
 
                     out_file = open(utilis.get_full_path(
                         zone_path + "\\" + bldg.name + "_" +
-                        zone.name + ".mo"), 'w')
+                        zone.name.replace(" ", "") + ".mo"), 'w')
                     out_file.write(zone_template.render_unicode(
                         bldg=bldg, zone=zone,
                         calc_core=bldg._calculation_method))

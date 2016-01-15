@@ -4,9 +4,9 @@ record ${bldg.name}_base "${bldg.name}_base"
     zoneSetup = {
 		%for i in bldg.thermal_zones:
 		%if i == bldg.thermal_zones[-1]:
-		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name}()
+		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}()
 		%else:
-		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name}(),
+		${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
 		%endif
 		%endfor
 		},
