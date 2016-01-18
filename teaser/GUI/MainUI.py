@@ -1839,26 +1839,33 @@ class MainUI(QDialog):
                 self.side_bar_buildings_combo_box.itemText(i))
 
         sender = self.sender()
+        building_model = \
+            self.export_create_template_model_combobox.currentText()
+        zone_model = self.export_create_template_zone_combobox()
+        if self.radio_button_corG_1.isChecked():
+            corG = "true"
+        elif self.radio_button_corG_2.isChecked():
+            corG = "false"
         elemInCombobox = self.export_create_template_combobox.currentText()
+
         if(sender.text() == self.export_button.text()):
-            Controller.click_export_button(self.project, elemInCombobox,
+            Controller.click_export_button(self.project, building_model,
+                                           zone_model, corG,
                                            path_output_folder)
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
                                           " all building finished ")
 
         elif(sender.text() == self.export_button_one.text()):
-
             current_building_id = \
                 str(self.side_bar_buildings_combo_box.currentText())
-            Controller.click_export_button(self.project, elemInCombobox,
-                                           path_output_folder,
-                                           current_building_id)
+            Controller.click_export_button(self.project, building_model,
+                                           zone_model, corG,
+                                           current_building_id,
+                                           path_output_folder)
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
                                           " for current building finished ")
-
-            # os.chdir(path_output_folder)
         utilis.create_path(self.file_path)
 
     def click_browse_button(self):
