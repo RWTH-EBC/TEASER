@@ -716,6 +716,8 @@ class ThermalZone(object):
         # Calculated values for windows for each Zone
         self.r1_win = 0.0
         self.weightfactor_win = []
+        self.g_sunblind_list = []
+        self.window_area_list = []
         self.ua_value_win = 0.0
         self.r_conv_inner_win = 0.0
         self.r_rad_inner_win = 0.0
