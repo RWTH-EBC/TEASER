@@ -127,11 +127,11 @@ class Controller():
     def click_generate_type_building_button(self, 
                                             parent,
                                             name,
-                                            yearOfConstruction,
-                                            numberOfFloors,
-                                            heightOfFloors,
-                                            typeOfBuilding,
-                                            netLeasedArea,
+                                            year_of_construction,
+                                            number_of_floors,
+                                            height_of_floors,
+                                            type_of_building,
+                                            net_leased_area,
                                             street,
                                             location,
                                             type_building_attributes):
@@ -142,74 +142,83 @@ class Controller():
 
         int_id = 0
 
-        if typeOfBuilding == "Office":
-            
-            building = parent.type_bldg_office(name,
-                                               yearOfConstruction,
-                                               numberOfFloors,
-                                               heightOfFloors,
-                                               netLeasedArea,
-                                               type_building_attributes['layoutArea'],
-                                               type_building_attributes['layoutWindowArea'],
-                                               type_building_attributes['constructionType'])
+        if type_of_building == "Office":
+
+            building = parent.type_bldg_office(
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                office_layout=type_building_attributes['layoutArea'],
+                window_layout=type_building_attributes['layoutWindowArea'],
+                construction_type=type_building_attributes['constructionType'])
+
+
+
 
             building.street_name = street
             building.city = location
             int_id = building.internal_id
-        if typeOfBuilding == "Insitute 4":
-            building = parent.type_bldg_institute4(name,
-                                                   yearOfConstruction,
-                                                   numberOfFloors,
-                                                   heightOfFloors,
-                                                   netLeasedArea,
-                                                   type_building_attributes['layoutArea'],
-                                                   type_building_attributes['layoutWindowArea'],
-                                                   type_building_attributes['constructionType'])
-
-            building.street_name = street
-            building.city = location
-            int_id = building.internal_id
-
-        if typeOfBuilding == "Institute 8":
-            building = parent.type_bldg_institute8(name,
-                                                   yearOfConstruction,
-                                                   numberOfFloors,
-                                                   heightOfFloors,
-                                                   netLeasedArea,
-                                                   type_building_attributes['layoutArea'],
-                                                   type_building_attributes['layoutWindowArea'],
-                                                   type_building_attributes['constructionType'])
+        if type_of_building == "Insitute 4":
+            building = parent.type_bldg_institute4(
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                office_layout=type_building_attributes['layoutArea'],
+                window_layout=type_building_attributes['layoutWindowArea'],
+                construction_type=type_building_attributes['constructionType'])
 
             building.street_name = street
             building.city = location
             int_id = building.internal_id
 
-        if typeOfBuilding == "Institute General":
-            building = parent.type_bldg_institute(name,
-                                                   yearOfConstruction,
-                                                   numberOfFloors,
-                                                   heightOfFloors,
-                                                   netLeasedArea,
-                                                   type_building_attributes['layoutArea'],
-                                                   type_building_attributes['layoutWindowArea'],
-                                                   type_building_attributes['constructionType'])
+        if type_of_building == "Institute 8":
+            building = parent.type_bldg_institute8(
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                office_layout=type_building_attributes['layoutArea'],
+                window_layout=type_building_attributes['layoutWindowArea'],
+                construction_type=type_building_attributes['constructionType'])
 
             building.street_name = street
             building.city = location
             int_id = building.internal_id
 
-        if typeOfBuilding == "Residential":
-            building = parent.type_bldg_residential(name,
-                                                    yearOfConstruction,
-                                                    numberOfFloors,
-                                                    heightOfFloors,
-                                                    netLeasedArea,
-                                                    type_building_attributes['layoutArea'],
-                                                    type_building_attributes['neighbour_building'],
-                                                    type_building_attributes['layout_attic'],
-                                                    type_building_attributes['layout_cellar'],
-                                                    type_building_attributes['dormer'],
-                                                    type_building_attributes['constructionType'])
+        if type_of_building == "Institute General":
+            building = parent.type_bldg_institute(
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                office_layout=type_building_attributes['layoutArea'],
+                window_layout=type_building_attributes['layoutWindowArea'],
+                construction_type=type_building_attributes['constructionType'])
+
+            building.street_name = street
+            building.city = location
+            int_id = building.internal_id
+
+        if type_of_building == "Residential":
+            building = parent.type_bldg_residential(
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                residential_layout=type_building_attributes['layoutArea'],
+                neighbour_buildings=type_building_attributes[
+                    'neighbour_building'],
+                attic=type_building_attributes['layout_attic'],
+                cellar=type_building_attributes['layout_cellar'],
+                dormer=type_building_attributes['dormer'],
+                construction_type=type_building_attributes['constructionType'])
 
             building.street_name = street
             building.city = location
