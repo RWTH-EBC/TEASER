@@ -274,5 +274,7 @@ class Controller():
         return project
 
     @classmethod
-    def click_export_button(self, prj, model_type, path, buildingID=None):
-        prj.export_record(model_type, path, buildingID)
+    def click_export_button(self, project, building_model, zone_model, corG,
+                            internal_id, path_output_folder):
+        project.export_record(building_model, zone_model, corG,
+                              internal_id, path_output_folder)
