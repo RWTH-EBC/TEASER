@@ -1826,13 +1826,6 @@ class MainUI(QDialog):
         template_folder = self.create_path_to_template_folder()
         os.chdir(template_folder)
 
-        for template_name in (os.listdir(template_folder)):
-
-            if(self.export_create_template_combobox.currentText() ==
-               template_name):
-                path_template = template_folder + template_name
-                # pathTemplate shows which template will be used
-
         list_of_building_name = []
         for i in range(self.side_bar_buildings_combo_box.count()):
             list_of_building_name.append(
@@ -1841,16 +1834,17 @@ class MainUI(QDialog):
         sender = self.sender()
         building_model = \
             self.export_create_template_model_combobox.currentText()
-        zone_model = self.export_create_template_zone_combobox()
+        zone_model = self.export_create_template_zone_combobox.currentText()
         if self.radio_button_corG_1.isChecked():
-            corG = "true"
+            corG = True
         elif self.radio_button_corG_2.isChecked():
-            corG = "false"
-        elemInCombobox = self.export_create_template_combobox.currentText()
+            corG = False
+        elemInCombobox = \
+            self.export_create_template_model_combobox.currentText()
 
         if(sender.text() == self.export_button.text()):
             Controller.click_export_button(self.project, building_model,
-                                           zone_model, corG,
+                                           zone_model, corG, None,
                                            path_output_folder)
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
