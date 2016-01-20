@@ -188,6 +188,10 @@ def save_teaser_xml(path, project):
                 zone.use_conditions.machines
             pyxb_use.InternalGains.profile_machines = \
                 zone.use_conditions.profile_machines
+            pyxb_use.InternalGains.lighting_power = \
+                zone.use_conditions.lighting_power
+            pyxb_use.InternalGains.profile_lighting = \
+                zone.use_conditions.profile_lighting
 
             pyxb_use.AHU = pb.AHUType()
             pyxb_use.AHU.min_ahu = \
@@ -540,6 +544,10 @@ def load_teaser_xml(path, prj):
                 pyxb_use.InternalGains.machines
             zone.use_conditions.profile_machines = \
                 pyxb_use.InternalGains.profile_machines
+            zone.use_conditions.lighting_power = \
+                pyxb_use.InternalGains.lighting_power
+            zone.use_conditions.profile_lighting = \
+                pyxb_use.InternalGains.profile_lighting
 
             zone.use_conditions.min_ahu = \
                 pyxb_use.AHU.min_ahu
