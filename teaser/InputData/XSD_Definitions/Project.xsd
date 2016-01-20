@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
-  <xs:include schemaLocation="D:\mla-mmn\TEASER\teaser\InputData\XSD_Definitions\UseConditions18599.xsd"/>
+  <xs:include schemaLocation="D:\GIT\TEASER\teaser\InputData\XSD_Definitions\UseConditions18599.xsd"/>
   <xs:element name="Project" type="ProjectType"/>
   <xs:complexType name="UseConditionType">
     <xs:sequence>
@@ -153,10 +153,10 @@
       <xs:element type="xs:float" name="by_pass_dehumidification" minOccurs="0"/>     
       <xs:element type="xs:float" name="efficiency_recovery" minOccurs="0"/>
       <xs:element type="xs:float" name="efficiency_revocery_false" minOccurs="0"/>
-      <xs:element type="xs:floatList" name="profile_min_relative_humidity" minOccurs="0"/>
-      <xs:element type="xs:floatList" name="profile_max_relative_humidity" minOccurs="0"/>
-      <xs:element type="xs:floatList" name="profile_v_flow" minOccurs="0"/>
-      <xs:element type="xs:floatList" name="profile_temperature" minOccurs="0"/>
+      <xs:element type="floatList" name="profile_min_relative_humidity" minOccurs="0"/>
+      <xs:element type="floatList" name="profile_max_relative_humidity" minOccurs="0"/>
+      <xs:element type="floatList" name="profile_v_flow" minOccurs="0"/>
+      <xs:element type="floatList" name="profile_temperature" minOccurs="0"/>
 	</xs:sequence>  
   </xs:complexType>
   <xs:complexType name="BuildingType">
