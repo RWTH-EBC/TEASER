@@ -320,8 +320,8 @@ def set_basic_data_pyxb(pyxb_class, element):
     if type(element).__name__ == 'OuterWall' or \
             type(element).__name__ == 'Rooftop':
 
-        pyxb_class.year_of_construction = str(element.year_of_construction)
-        pyxb_class.year_of_retrofit = str(element.year_of_retrofit)
+        pyxb_class.year_of_construction = element.year_of_construction
+        pyxb_class.year_of_retrofit = element.year_of_retrofit
         pyxb_class.construction_type = element.construction_type
 
         pyxb_class.area = element.area
@@ -338,8 +338,8 @@ def set_basic_data_pyxb(pyxb_class, element):
             type(element).__name__ == 'Floor' or \
             type(element).__name__ == 'GroundFloor':
 
-        pyxb_class.year_of_construction = str(element.year_of_construction)
-        pyxb_class.year_of_retrofit = str(element.year_of_retrofit)
+        pyxb_class.year_of_construction = element.year_of_construction
+        pyxb_class.year_of_retrofit = element.year_of_retrofit
         pyxb_class.construction_type = element.construction_type
 
         pyxb_class.area = element.area
@@ -351,8 +351,8 @@ def set_basic_data_pyxb(pyxb_class, element):
 
     elif type(element).__name__ == 'Window':
 
-        pyxb_class.year_of_construction = str(element.year_of_construction)
-        pyxb_class.year_of_retrofit = str(element.year_of_retrofit)
+        pyxb_class.year_of_construction = element.year_of_construction
+        pyxb_class.year_of_retrofit = element.year_of_retrofit
         pyxb_class.construction_type = element.construction_type
 
         pyxb_class.area = element.area
