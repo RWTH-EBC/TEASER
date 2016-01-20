@@ -81,7 +81,7 @@
       <xs:element minOccurs="0" maxOccurs="unbounded" type="UseConditions18599Type" name="UseConditions18599"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:simpleType name="integerList">
+    <xs:simpleType name="integerList">
 	<xs:list itemType="xs:integer"/>
   </xs:simpleType>
     <xs:simpleType name="floatList">
