@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <Project>
 	<Building>
-		<name>VDI6007_1_TEASER_Matlab</name>
+		<name>VDI6007_10_TEASER_Matlab</name>
 		<street_name>none</street_name>
 		<city>none</city>
 		<type_of_building>Office Building</type_of_building>
