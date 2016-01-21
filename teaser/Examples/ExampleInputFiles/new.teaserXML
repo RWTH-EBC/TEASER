@@ -55,10 +55,12 @@
 						<part_load_factor_ahu>1.0</part_load_factor_ahu>
 					</RoomClimate>
 					<InternalGains>
-						<persons>1.5</persons>
-						<profile_persons></profile_persons>
-						<machines>2.0</machines>
-						<profile_machines></profile_machines>
+						<persons>0.0</persons>
+						<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+						<machines>0.0</machines>
+						<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+						<lighting_power>11.1</lighting_power>
+						<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 					</InternalGains>
 					<AHU>
 						<min_ahu>0.0</min_ahu>
