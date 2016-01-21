@@ -97,7 +97,7 @@ def save_teaser_xml(path, project):
                                 bldg.central_ahu.profile_v_flow
             pyxb_ahu.profile_temperature = \
                                 bldg.central_ahu.profile_temperature
-            pyxb_bldg.CentralAHU = pyxb_ahu
+            pyxb_bld.CentralAHU = pyxb_ahu
         else:
             pass
 
