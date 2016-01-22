@@ -5,9 +5,12 @@
 calculates all parameters and exports them as .txt. Differently to the other test cases,
 we don't have the original parameter calculated by Rouvel. This test case defines the floor
 as connected to an adjacent room with a fixed temperature. If you define the floor as ground floor,
-TEASER doesn't allow you to define a coefficient of heat transfer on the outer surface (what makes
-sense for a ground floor that is coupled to the ground). However, we need to define this coefficient,
-so we handle this floor simply as a rooftop.
+TEASERs calculation won't take the coefficient of heat transfer on the outer surface into account 
+(ThermalZone.combine_building_elements(), what makes sense for a ground floor 
+that is coupled to the ground). However, we need to define this coefficient,
+so we handle this floor as a rooftop. This does not affect the correctness of
+the calculted parameter, however, the weightfactor needs to be copied from, 
+(weightfactorswall) to (weightfactorground).
 """
 
 
