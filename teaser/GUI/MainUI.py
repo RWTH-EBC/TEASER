@@ -1851,11 +1851,9 @@ class MainUI(QDialog):
                                           " all building finished ")
 
         elif(sender.text() == self.export_button_one.text()):
-            current_building_id = \
-                str(self.side_bar_buildings_combo_box.currentText())
             Controller.click_export_button(self.project, building_model,
                                            zone_model, corG,
-                                           current_building_id,
+                                           self.current_building.internal_id,
                                            path_output_folder)
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
