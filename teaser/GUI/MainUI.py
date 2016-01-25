@@ -1278,7 +1278,7 @@ class MainUI(QDialog):
             self.window_construct_building_year_line_edit.text(),
             self.window_construct_building_number_of_floors_line_edit.text(),
             self.window_construct_building_height_of_floors_line_edit.text(),
-            "Residential 4",
+            "Insitute 4",
             self.window_construct_building_area_line_edit.text(),
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
@@ -1300,7 +1300,7 @@ class MainUI(QDialog):
             self.window_construct_building_year_line_edit.text(),
             self.window_construct_building_number_of_floors_line_edit.text(),
             self.window_construct_building_height_of_floors_line_edit.text(),
-            "Residential 8",
+            "Institute 8",
             self.window_construct_building_area_line_edit.text(),
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
@@ -1322,7 +1322,7 @@ class MainUI(QDialog):
             self.window_construct_building_year_line_edit.text(),
             self.window_construct_building_number_of_floors_line_edit.text(),
             self.window_construct_building_height_of_floors_line_edit.text(),
-            "Residential General",
+            "Institute General",
             self.window_construct_building_area_line_edit.text(),
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
@@ -1851,11 +1851,9 @@ class MainUI(QDialog):
                                           " all building finished ")
 
         elif(sender.text() == self.export_button_one.text()):
-            current_building_id = \
-                str(self.side_bar_buildings_combo_box.currentText())
             Controller.click_export_button(self.project, building_model,
                                            zone_model, corG,
-                                           current_building_id,
+                                           self.current_building.internal_id,
                                            path_output_folder)
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
