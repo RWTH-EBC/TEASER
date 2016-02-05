@@ -308,7 +308,6 @@ class BuildingElement(object):
                         self.set_layer_data(material, layer, pyxb_layer)
 
         elif type(self).__name__ == 'Window':
-            construction = "Kunststofffenster, Isolierverglasung"
 
             for win in self.parent.parent.parent.data.element_bind.Window:
                 if win.building_age_group[0] <= year and \
@@ -712,6 +711,12 @@ class BuildingElement(object):
             else:
                 raise ValueError("Specify year of construction first")
 
+        if self.parent.parent.parent.data is not None \
+                and self.construction_type is not None:
+            self.load_type_element(self.year_of_retrofit, self.construction_type)
+        else:
+            pass
+
     @property
     def orientation(self):
         return self._orientation
@@ -924,3 +929,20 @@ class BuildingElement(object):
                 self._year_of_construction = value
             except:
                 raise ValueError("Can't convert year to int")
+
+        if self.parent.parent.parent.data is not None\
+                and self.construction_type is not None:
+            self.load_type_element(self.year_of_construction, self.construction_type)
+        else:
+            pass
+
+    @property
+    def construction_type(self):
+        return self._construction_type
+
+    @construction_type.setter
+    def construction_type(self, value):
+
+        self._construction_type = value
+
+
