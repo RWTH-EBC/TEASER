@@ -96,12 +96,10 @@ class BuildingElement(object):
 
         '''
 
-        self.parent = parent
-
         self.internal_id = random.random()
 
         self.name = None
-        self.construction_type = None
+        self._construction_type = None
         self._year_of_retrofit = None
         self._year_of_construction = None
         self.building_age_group = [None, None]
@@ -119,6 +117,7 @@ class BuildingElement(object):
         #values for the AixLib Export
         self.emissivity = 0.0   # Should we use the ir_emissivity here?
                                 # Better use in the thermal zone i think
+        self.parent = parent
 
         # Calculated values for each Building Element
         self.r1 = 0.0
@@ -309,6 +308,7 @@ class BuildingElement(object):
                         self.set_layer_data(material, layer, pyxb_layer)
 
         elif type(self).__name__ == 'Window':
+            construction = "Kunststofffenster, Isolierverglasung"
 
             for win in self.parent.parent.parent.data.element_bind.Window:
                 if win.building_age_group[0] <= year and \
@@ -680,6 +680,11 @@ class BuildingElement(object):
             if type(self).__name__ == "Window":
                 self.__parent.windows.append(self)
 
+            if self.parent.parent is not None:
+                self.year_of_construction = \
+                    self.parent.parent.year_of_construction
+            else:
+                pass
         else:
 
             self.__parent = None
