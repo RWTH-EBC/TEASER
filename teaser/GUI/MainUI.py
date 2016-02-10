@@ -2861,6 +2861,7 @@ class MainUI(QDialog):
 
     def create_new_envelope_ui(self):
         dummy = "dummy"
+        dummy_writable = "is writable "
         self.create__envelope_ui = QtGui.QWizardPage()
         self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create__envelope_ui.setWindowTitle("Set all construction")
@@ -2879,7 +2880,7 @@ class MainUI(QDialog):
         # self.warning_message_label.setGeometry(QtCore.QRect(10, 10, 280, 40))
         self.warning_message_label.setText(
              "\n All walls with the current orientation in building will be" +
-             "overwritten")
+             " overwritten")
 
         self.warning_message_groupbox.setMaximumHeight(48)
         self.warning_message_groupbox.setMinimumHeight(48)
@@ -2911,42 +2912,36 @@ class MainUI(QDialog):
 
         self.set_all_constr_element_id_label = QtGui.QLabel("ID")
         self.set_all_constr_element_id_textbox = QtGui.QTextEdit()
-        self.set_all_constr_element_id_textbox.setText(dummy)
-        self.set_all_constr_element_id_textbox.setReadOnly(True)
+        self.set_all_constr_element_id_textbox.setText(dummy_writable)
         self.set_all_constr_element_id_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_tilt_label = QtGui.QLabel("Tilt")
         self.set_all_constr_element_tilt_textbox = QtGui.QTextEdit()
-        self.set_all_constr_element_tilt_textbox.setText(dummy)
-        self.set_all_constr_element_tilt_textbox.setReadOnly(True)
+        self.set_all_constr_element_tilt_textbox.setText(dummy_writable)
         self.set_all_constr_element_tilt_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_inner_con_label = QtGui.QLabel(
                                                         "Inner_convection")
         self.set_all_constr_element_inner_con_textbox = QtGui.QTextEdit()
-        self.set_all_constr_element_inner_con_textbox.setText(dummy)
-        self.set_all_constr_element_inner_con_textbox.setReadOnly(True)
+        self.set_all_constr_element_inner_con_textbox.setText(dummy_writable)
         self.set_all_constr_element_inner_con_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_inner_rad_label = QtGui.QLabel(
                                                         "Inner_radiation")
         self.set_all_constr_element_inner_rad_textbox = QtGui.QTextEdit()
-        self.set_all_constr_element_inner_rad_textbox.setText(dummy)
-        self.set_all_constr_element_inner_rad_textbox.setReadOnly(True)
+        self.set_all_constr_element_inner_rad_textbox.setText(dummy_writable)
         self.set_all_constr_element_inner_rad_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_outer_con_label = QtGui.QLabel(
                                                         "Outer_convection")
         self.set_all_constr_element_outer_con_textbox = QtGui.QTextEdit()
-        self.set_all_constr_element_outer_con_textbox.setText(dummy)
-        self.set_all_constr_element_outer_con_textbox.setReadOnly(True)
+        self.set_all_constr_element_outer_con_textbox.setText(dummy_writable)
         self.set_all_constr_element_outer_con_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_outer_rad_label = QtGui.QLabel(
                                                         "Outer_radiation")
         self.set_all_constr_element_outer_rad_textbox = QtGui.QTextEdit()
-        self.set_all_constr_element_outer_rad_textbox.setText(dummy)
-        self.set_all_constr_element_outer_rad_textbox.setReadOnly(True)
+        self.set_all_constr_element_outer_rad_textbox.setText(dummy_writable)
         self.set_all_constr_element_outer_rad_textbox.setMaximumHeight(24)
 
         self.set_all_constr_save_cancel_layout = QtGui.QGridLayout()
@@ -2957,14 +2952,14 @@ class MainUI(QDialog):
 
         self.set_all_constr_element_add_material_button = QtGui.QPushButton()
         self.set_all_constr_element_add_material_button.setText("Add Layer")
-        self.connect(self.set_all_constr_element_add_material_button,
-                     SIGNAL("clicked()"), self.create_new_layer_ui)
+        # self.connect(self.set_all_constr_element_add_material_button,
+        #             SIGNAL("clicked()"), self.create_new_layer_ui)
 
         self.set_all_constr_element_delete_material_button = QtGui.QPushButton()
         self.set_all_constr_element_delete_material_button.setText(
                                                                 "Delete Layer")
-        self.connect(self.set_all_constr_element_delete_material_button,
-                     SIGNAL("clicked()"), self.delete_selected_layer)
+        # self.connect(self.set_all_constr_element_delete_material_button,
+        #             SIGNAL("clicked()"), self.delete_selected_layer)
 
         self.set_all_constr_element_material_list_view = QtGui.QListView()
         self.set_all_constr_element_material_list_view.setGeometry(
@@ -2977,8 +2972,8 @@ class MainUI(QDialog):
                                                                     self.lVZF)
         self.set_all_constr_element_material_list_view.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
-        self.set_all_constr_element_material_list_view.doubleClicked.connect(
-            self.show_layer_build_ui)
+        # self.set_all_constr_element_material_list_view.doubleClicked.connect(
+        #    self.show_layer_build_ui)
 
         self.set_all_constr_save_button = QtGui.QPushButton()
         self.set_all_constr_save_button.setText("Save")
