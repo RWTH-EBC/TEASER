@@ -2886,7 +2886,7 @@ class MainUI(QDialog):
 
         self.set_all_constr_element_layout = QtGui.QGridLayout()
         self.set_all_constr_element_layout_groupBox = QtGui.QGroupBox(
-            "input values")
+            "Input values")
         self.set_all_constr_element_layout_groupBox.setLayout(
             self.set_all_constr_element_layout)
 
@@ -2982,10 +2982,6 @@ class MainUI(QDialog):
 
         self.set_all_constr_save_button = QtGui.QPushButton()
         self.set_all_constr_save_button.setText("Save")
-
-        self.set_all_constr_cancel_button = QtGui.QPushButton()
-        self.set_all_constr_cancel_button.setText("Cancel")
-
         """
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.save_changed_element_values)
@@ -2994,6 +2990,11 @@ class MainUI(QDialog):
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.element_build_ui, QtCore.SLOT("close()"))
         """
+
+        self.set_all_constr_cancel_button = QtGui.QPushButton()
+        self.set_all_constr_cancel_button.setText("Cancel")
+        self.connect(self.set_all_constr_cancel_button, SIGNAL("clicked()"),
+                     self.create__envelope_ui, QtCore.SLOT("close()"))
 
         self.set_all_constr_element_layout.addWidget(
                 self.set_all_constr_element_bldg_label, 1, 0)
