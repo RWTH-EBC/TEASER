@@ -6,6 +6,7 @@
 		<city>none</city>
 		<type_of_building>Office Building</type_of_building>
 		<year_of_construction>1960</year_of_construction>
+		<year_of_retrofit>None</year_of_retrofit>
 		<number_of_floors>1</number_of_floors>
 		<height_of_floors>3.5</height_of_floors>
 		<net_leased_area>17.5</net_leased_area>
@@ -33,12 +34,12 @@
 					</UsageOperationTime>
 					<Lighting>
 						<maintained_illuminace>500.0</maintained_illuminace>
-						<usage_level_hight>0.8</usage_level_hight>
+						<usage_level_height>0.8</usage_level_height>
 						<red_factor_visual>0.84</red_factor_visual>
 						<rel_absence>0.3</rel_absence>
 						<room_index>0.9</room_index>
 						<part_load_factor_lighting>0.7</part_load_factor_lighting>
-                                   <ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
+						<ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
 					</Lighting>
 					<RoomClimate>
 						<set_temp_heat>21.0</set_temp_heat>
@@ -54,15 +55,23 @@
 						<part_load_factor_ahu>1.0</part_load_factor_ahu>
 					</RoomClimate>
 					<InternalGains>
-						<persons>1.5</persons>
-						<profile_persons></profile_persons>
-						<machines>2.0</machines>
-						<profile_machines></profile_machines>
+						<persons>0.0</persons>
+						<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+						<machines>0.0</machines>
+						<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+						<lighting_power>11.1</lighting_power>
+						<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
 					</InternalGains>
 					<AHU>
 						<min_ahu>0.0</min_ahu>
 						<max_ahu>0.5</max_ahu>
 						<with_ahu>false</with_ahu>
+						<use_constant_ach_rate>false</use_constant_ach_rate>
+						<base_ach>0.2</base_ach>
+						<max_user_ach>1.0</max_user_ach>
+						<max_overheating_ach>3.0 2.0</max_overheating_ach>
+						<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+						<winter_reduction>0.2 273.15 283.15</winter_reduction>
 					</AHU>
 				</UseConditions18599>
 			</UseCondition>
@@ -133,7 +142,7 @@
 				</Layer>
 			</InnerWall>
 			<InnerWall>
-                       <year_of_construction>1960</year_of_construction>
+				<year_of_construction>1960</year_of_construction>
 				<area>2.0</area>
 				<inner_convection>2.7</inner_convection>
 				<inner_radiation>5.0</inner_radiation>
@@ -261,7 +270,7 @@
 				</Layer>
 			</Floor>
 			<Window>
-                       <year_of_construction>1960</year_of_construction>
+				<year_of_construction>1960</year_of_construction>
 				<construction_type>1</construction_type>
 				<area>7.0</area>
 				<tilt>90.0</tilt>

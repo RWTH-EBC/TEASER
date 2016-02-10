@@ -26,9 +26,9 @@
   </xs:complexType>
   <xs:complexType name="OuterWallType">
     <xs:sequence>
-      <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -41,9 +41,9 @@
   </xs:complexType>
    <xs:complexType name="RooftopType">
     <xs:sequence>
-      <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -56,9 +56,9 @@
   </xs:complexType>
    <xs:complexType name="InnerWallType">
     <xs:sequence>
-      <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -69,9 +69,9 @@
   </xs:complexType>
   <xs:complexType name="CeilingType">
     <xs:sequence>
-      <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -82,9 +82,9 @@
   </xs:complexType>
   <xs:complexType name="FloorType">
     <xs:sequence>
-      <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -95,9 +95,9 @@
   </xs:complexType>
   <xs:complexType name="GroundFloorType">
     <xs:sequence>
-      <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -108,9 +108,9 @@
   </xs:complexType>
   <xs:complexType name="WindowType">
     <xs:sequence>
-      <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
-      <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:float" name="area" minOccurs="0"/>
       <xs:element type="xs:float" name="tilt" minOccurs="0"/>
       <xs:element type="xs:float" name="orientation" minOccurs="0"/>
@@ -132,7 +132,7 @@
       <xs:element type="xs:float" name="volume" minOccurs="0"/>
       <xs:element type="xs:float" name="infiltration_rate" minOccurs="0"/>
       <xs:element type="xs:float" name="typical_length" minOccurs="0"/>
-	  <xs:element type="xs:float" name="typical_width" minOccurs="0"/>
+	 <xs:element type="xs:float" name="typical_width" minOccurs="0"/>
       <xs:element type="UseConditionType" name="UseCondition" minOccurs="0"/>
       <xs:element type="OuterWallType" name="OuterWall" minOccurs="0" maxOccurs = "unbounded"/>
       <xs:element type="RooftopType" name="Rooftop" minOccurs="0" maxOccurs = "unbounded"/>
@@ -143,6 +143,22 @@
       <xs:element type="WindowType" name="Window" minOccurs="0" maxOccurs = "unbounded"/>
 	</xs:sequence>  
   </xs:complexType>
+  <xs:complexType name="BuildingAHUType">
+	<xs:sequence>
+      <xs:element type="xs:boolean" name="heating" minOccurs="0"/>
+      <xs:element type="xs:boolean" name="cooling" minOccurs="0"/>
+      <xs:element type="xs:boolean" name="dehumidification" minOccurs="0"/>     
+      <xs:element type="xs:boolean" name="humidification" minOccurs="0"/>
+      <xs:element type="xs:boolean" name="heat_recovery" minOccurs="0"/>
+      <xs:element type="xs:float" name="by_pass_dehumidification" minOccurs="0"/>     
+      <xs:element type="xs:float" name="efficiency_recovery" minOccurs="0"/>
+      <xs:element type="xs:float" name="efficiency_revocery_false" minOccurs="0"/>
+      <xs:element type="floatList" name="profile_min_relative_humidity" minOccurs="0"/>
+      <xs:element type="floatList" name="profile_max_relative_humidity" minOccurs="0"/>
+      <xs:element type="floatList" name="profile_v_flow" minOccurs="0"/>
+      <xs:element type="floatList" name="profile_temperature" minOccurs="0"/>
+	</xs:sequence>  
+  </xs:complexType>
   <xs:complexType name="BuildingType">
     <xs:sequence>
       <xs:element type="xs:string" name="name" minOccurs="0"/>
@@ -150,13 +166,14 @@
       <xs:element type="xs:string" name="city" minOccurs="0"/>
       <xs:element type="xs:string" name="type_of_building" minOccurs="0"/>
       <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
-	  <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
+	<xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
       <xs:element type="xs:int" name="number_of_floors" minOccurs="0"/>
       <xs:element type="xs:float" name="height_of_floors" minOccurs="0"/>
       <xs:element type="xs:float" name="net_leased_area" minOccurs="0"/>
       <xs:element type="xs:float" name="outer_area" minOccurs="0"/>
-	  <xs:element type="xs:float" name="window_area" minOccurs="0"/>
+	<xs:element type="xs:float" name="window_area" minOccurs="0"/>
       <xs:element type="ThermalZoneType" name="ThermalZone" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="BuildingAHUType" name="CentralAHU" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="OfficeType">
@@ -173,6 +190,7 @@
       <xs:element type="xs:float" name="outer_area" minOccurs="0"/>
 	  <xs:element type="xs:float" name="window_area" minOccurs="0"/>
       <xs:element type="ThermalZoneType" name="ThermalZone" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="BuildingAHUType" name="CentralAHU" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ResidentialType">
@@ -189,6 +207,7 @@
       <xs:element type="xs:float" name="outer_area" minOccurs="0"/>
 	  <xs:element type="xs:float" name="window_area" minOccurs="0"/>
       <xs:element type="ThermalZoneType" name="ThermalZone" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="BuildingAHUType" name="CentralAHU" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ProjectType">

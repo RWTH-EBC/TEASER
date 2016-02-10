@@ -1,19 +1,19 @@
 <?xml version="1.0" ?>
 <Project>
 	<Building>
-		<name>VDI6007_2_TEASER_Matlab</name>
+		<name>VDI6007_10_TEASER_Matlab</name>
 		<street_name>none</street_name>
 		<city>none</city>
 		<type_of_building>Office Building</type_of_building>
 		<year_of_construction>1960</year_of_construction>
 		<year_of_retrofit>None</year_of_retrofit>
 		<number_of_floors>1</number_of_floors>
-		<height_of_floors>3.0</height_of_floors>
+		<height_of_floors>3.5</height_of_floors>
 		<net_leased_area>17.5</net_leased_area>
 		<ThermalZone>
 			<name>One</name>
 			<area>17.5</area>
-			<volume>52.5</volume>
+			<volume>61.25</volume>
 			<infiltration_rate>0.5</infiltration_rate>
 			<typical_length>123.0</typical_length>
 			<typical_width>123.0</typical_width>
@@ -87,74 +87,7 @@
 				<outer_radiation>5.0</outer_radiation>
 				<Layer>
 					<id>0</id>
-					<thickness>0.01</thickness>
-					<Material>
-						<name>generic</name>
-						<density>500.0</density>
-						<thermal_conduc>0.14</thermal_conduc>
-						<heat_capac>2.52</heat_capac>
-						<solar_absorp>0.0</solar_absorp>
-						<ir_emissivity>0.0</ir_emissivity>
-					</Material>
-				</Layer>
-				<Layer>
-					<id>0</id>
-					<thickness>0.064</thickness>
-					<Material>
-						<name>generic</name>
-						<density>75.0</density>
-						<thermal_conduc>0.047</thermal_conduc>
-						<heat_capac>0.84</heat_capac>
-						<solar_absorp>0.0</solar_absorp>
-						<ir_emissivity>0.0</ir_emissivity>
-					</Material>
-				</Layer>
-				<Layer>
-					<id>0</id>
-					<thickness>0.01</thickness>
-					<Material>
-						<name>generic</name>
-						<density>500.0</density>
-						<thermal_conduc>0.14</thermal_conduc>
-						<heat_capac>2.52</heat_capac>
-						<solar_absorp>0.0</solar_absorp>
-						<ir_emissivity>0.0</ir_emissivity>
-					</Material>
-				</Layer>
-			</OuterWall>
-			<InnerWall>
-				<year_of_construction>1960</year_of_construction>
-				<construction_type>heavy</construction_type>
-				<area>17.5</area>
-				<inner_convection>1.7000000000000002</inner_convection>
-				<inner_radiation>5.0</inner_radiation>
-				<Layer>
-					<id>0</id>
-					<thickness>0.03</thickness>
-					<Material>
-						<name>generic</name>
-						<density>2200.0</density>
-						<thermal_conduc>1.4</thermal_conduc>
-						<heat_capac>1.05</heat_capac>
-						<solar_absorp>0.0</solar_absorp>
-						<ir_emissivity>0.0</ir_emissivity>
-					</Material>
-				</Layer>
-				<Layer>
-					<id>0</id>
-					<thickness>0.02</thickness>
-					<Material>
-						<name>generic</name>
-						<density>75.0</density>
-						<thermal_conduc>0.047</thermal_conduc>
-						<heat_capac>0.84</heat_capac>
-						<solar_absorp>0.0</solar_absorp>
-						<ir_emissivity>0.0</ir_emissivity>
-					</Material>
-				</Layer>
-				<Layer>
-					<id>0</id>
-					<thickness>0.12</thickness>
+					<thickness>0.24</thickness>
 					<Material>
 						<name>generic</name>
 						<density>2100.0</density>
@@ -166,19 +99,7 @@
 				</Layer>
 				<Layer>
 					<id>0</id>
-					<thickness>0.2</thickness>
-					<Material>
-						<name>generic</name>
-						<density>1.0</density>
-						<thermal_conduc>1.085</thermal_conduc>
-						<heat_capac>1.2</heat_capac>
-						<solar_absorp>0.0</solar_absorp>
-						<ir_emissivity>0.0</ir_emissivity>
-					</Material>
-				</Layer>
-				<Layer>
-					<id>0</id>
-					<thickness>0.02</thickness>
+					<thickness>0.062</thickness>
 					<Material>
 						<name>generic</name>
 						<density>75.0</density>
@@ -190,12 +111,90 @@
 				</Layer>
 				<Layer>
 					<id>0</id>
-					<thickness>0.001</thickness>
+					<thickness>0.025</thickness>
 					<Material>
 						<name>generic</name>
-						<density>7800.0</density>
-						<thermal_conduc>58.0</thermal_conduc>
-						<heat_capac>0.48</heat_capac>
+						<density>1300.0</density>
+						<thermal_conduc>0.45</thermal_conduc>
+						<heat_capac>1.05</heat_capac>
+						<solar_absorp>0.0</solar_absorp>
+						<ir_emissivity>0.0</ir_emissivity>
+					</Material>
+				</Layer>
+			</OuterWall>
+			<Rooftop>
+				<year_of_construction>1960</year_of_construction>
+				<construction_type>leicht</construction_type>
+				<area>17.5</area>
+				<tilt>0.0</tilt>
+				<orientation>-1.0</orientation>
+				<inner_convection>1.7</inner_convection>
+				<inner_radiation>5.0</inner_radiation>
+				<outer_convection>1.7</outer_convection>
+				<outer_radiation>5.0</outer_radiation>
+				<Layer>
+					<id>0</id>
+					<thickness>0.002</thickness>
+					<Material>
+						<name>Hobeldielen</name>
+						<density>1300.0</density>
+						<thermal_conduc>0.21</thermal_conduc>
+						<heat_capac>1.47</heat_capac>
+						<solar_absorp>0.0</solar_absorp>
+						<ir_emissivity>0.0</ir_emissivity>
+					</Material>
+				</Layer>
+				<Layer>
+					<id>0</id>
+					<thickness>0.045</thickness>
+					<Material>
+						<name>Holzbalken mit Luftschicht und Lehmschlag</name>
+						<density>2200.0</density>
+						<thermal_conduc>1.4</thermal_conduc>
+						<heat_capac>1.05</heat_capac>
+						<solar_absorp>0.0</solar_absorp>
+						<ir_emissivity>0.0</ir_emissivity>
+					</Material>
+				</Layer>
+				<Layer>
+					<id>0</id>
+					<thickness>0.012</thickness>
+					<Material>
+						<name>Sparschalung</name>
+						<density>50.0</density>
+						<thermal_conduc>0.06</thermal_conduc>
+						<heat_capac>0.84</heat_capac>
+						<solar_absorp>0.0</solar_absorp>
+						<ir_emissivity>0.0</ir_emissivity>
+					</Material>
+				</Layer>
+				<Layer>
+					<id>0</id>
+					<thickness>0.15</thickness>
+					<Material>
+						<name>Kalkputz</name>
+						<density>2400.0</density>
+						<thermal_conduc>2.035</thermal_conduc>
+						<heat_capac>1.05</heat_capac>
+						<solar_absorp>0.0</solar_absorp>
+						<ir_emissivity>0.0</ir_emissivity>
+					</Material>
+				</Layer>
+			</Rooftop>
+			<InnerWall>
+				<year_of_construction>1960</year_of_construction>
+				<construction_type>ASD</construction_type>
+				<area>38.5</area>
+				<inner_convection>2.7</inner_convection>
+				<inner_radiation>5.0</inner_radiation>
+				<Layer>
+					<id>0</id>
+					<thickness>0.24</thickness>
+					<Material>
+						<name>Baustoff</name>
+						<density>1300.0</density>
+						<thermal_conduc>0.56</thermal_conduc>
+						<heat_capac>1.05</heat_capac>
 						<solar_absorp>0.0</solar_absorp>
 						<ir_emissivity>0.0</ir_emissivity>
 					</Material>
@@ -211,7 +210,7 @@
 					<thickness>0.04</thickness>
 					<Material>
 						<name>Buche</name>
-						<density>500.0</density>
+						<density>700.0</density>
 						<thermal_conduc>0.14</thermal_conduc>
 						<heat_capac>2.52</heat_capac>
 						<solar_absorp>0.0</solar_absorp>
@@ -227,59 +226,23 @@
 				<inner_radiation>5.0</inner_radiation>
 				<Layer>
 					<id>0</id>
-					<thickness>0.001</thickness>
+					<thickness>0.15</thickness>
 					<Material>
 						<name>generic</name>
-						<density>7800.0</density>
-						<thermal_conduc>58.0</thermal_conduc>
-						<heat_capac>0.48</heat_capac>
-						<solar_absorp>0.0</solar_absorp>
-						<ir_emissivity>0.0</ir_emissivity>
-					</Material>
-				</Layer>
-				<Layer>
-					<id>0</id>
-					<thickness>0.02</thickness>
-					<Material>
-						<name>generic</name>
-						<density>75.0</density>
-						<thermal_conduc>0.047</thermal_conduc>
-						<heat_capac>0.84</heat_capac>
-						<solar_absorp>0.0</solar_absorp>
-						<ir_emissivity>0.0</ir_emissivity>
-					</Material>
-				</Layer>
-				<Layer>
-					<id>0</id>
-					<thickness>0.2</thickness>
-					<Material>
-						<name>generic</name>
-						<density>1.0</density>
-						<thermal_conduc>1.085</thermal_conduc>
-						<heat_capac>1.2</heat_capac>
-						<solar_absorp>0.0</solar_absorp>
-						<ir_emissivity>0.0</ir_emissivity>
-					</Material>
-				</Layer>
-				<Layer>
-					<id>0</id>
-					<thickness>0.12</thickness>
-					<Material>
-						<name>generic</name>
-						<density>2100.0</density>
+						<density>2400.0</density>
 						<thermal_conduc>2.035</thermal_conduc>
-						<heat_capac>0.92</heat_capac>
+						<heat_capac>1.05</heat_capac>
 						<solar_absorp>0.0</solar_absorp>
 						<ir_emissivity>0.0</ir_emissivity>
 					</Material>
 				</Layer>
 				<Layer>
 					<id>0</id>
-					<thickness>0.02</thickness>
+					<thickness>0.012</thickness>
 					<Material>
 						<name>generic</name>
-						<density>75.0</density>
-						<thermal_conduc>0.047</thermal_conduc>
+						<density>50.0</density>
+						<thermal_conduc>0.06</thermal_conduc>
 						<heat_capac>0.84</heat_capac>
 						<solar_absorp>0.0</solar_absorp>
 						<ir_emissivity>0.0</ir_emissivity>
@@ -287,7 +250,7 @@
 				</Layer>
 				<Layer>
 					<id>0</id>
-					<thickness>0.03</thickness>
+					<thickness>0.045</thickness>
 					<Material>
 						<name>generic</name>
 						<density>2200.0</density>
@@ -297,26 +260,19 @@
 						<ir_emissivity>0.0</ir_emissivity>
 					</Material>
 				</Layer>
-			</Ceiling>
-			<Floor>
-				<year_of_construction>1960</year_of_construction>
-				<construction_type>heavy</construction_type>
-				<area>38.5</area>
-				<inner_convection>2.7</inner_convection>
-				<inner_radiation>5.0</inner_radiation>
 				<Layer>
 					<id>0</id>
-					<thickness>0.12</thickness>
+					<thickness>0.002</thickness>
 					<Material>
 						<name>generic</name>
-						<density>1200.0</density>
-						<thermal_conduc>0.4</thermal_conduc>
-						<heat_capac>1.05</heat_capac>
+						<density>1300.0</density>
+						<thermal_conduc>0.21</thermal_conduc>
+						<heat_capac>1.47</heat_capac>
 						<solar_absorp>0.0</solar_absorp>
 						<ir_emissivity>0.0</ir_emissivity>
 					</Material>
 				</Layer>
-			</Floor>
+			</Ceiling>
 			<Window>
 				<year_of_construction>1960</year_of_construction>
 				<construction_type>1</construction_type>

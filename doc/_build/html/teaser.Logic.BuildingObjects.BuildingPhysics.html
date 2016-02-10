@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>BuildingPhysics package &mdash; TEASER4 0.1.2 documentation</title>
+    <title>BuildingPhysics package &mdash; TEASER 0.2.3 documentation</title>
     
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.1.2',
+        VERSION:     '0.2.3',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="TEASER4 0.1.2 documentation" href="index.html" />
+    <link rel="top" title="TEASER 0.2.3 documentation" href="index.html" />
     <link rel="up" title="BuildingObjects package" href="teaser.Logic.BuildingObjects.html" />
     <link rel="next" title="TypeBuildings package" href="teaser.Logic.BuildingObjects.TypeBuildings.html" />
     <link rel="prev" title="BuildingObjects package" href="teaser.Logic.BuildingObjects.html" /> 
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="teaser.Logic.BuildingObjects.html" title="BuildingObjects package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER4 0.1.2 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.2.3 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER Doc</a> &raquo;</li>
           <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >Logic package</a> &raquo;</li>
           <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" accesskey="U">BuildingObjects package</a> &raquo;</li> 
@@ -60,6 +60,8 @@
 <h1>BuildingPhysics package<a class="headerlink" href="#buildingphysics-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="module-teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement">
 <span id="buildingelement-module"></span><h2>BuildingElement module<a class="headerlink" href="#module-teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement" title="Permalink to this headline">¶</a></h2>
+<p>BuildingElement</p>
+<p>This module contains the Base class for all building elements.</p>
 <dl class="class">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement">
 <em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.</code><code class="descname">BuildingElement</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement" title="Permalink to this definition">¶</a></dt>
@@ -132,6 +134,11 @@ Default is None.</p>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.area">
+<code class="descname">area</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.area" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.calc_ua_value">
 <code class="descname">calc_ua_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.calc_ua_value" title="Permalink to this definition">¶</a></dt>
@@ -160,6 +167,16 @@ equivalent_res(t_bt) especially for walls.</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.inner_convection">
+<code class="descname">inner_convection</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.inner_convection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.inner_radiation">
+<code class="descname">inner_radiation</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.inner_radiation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.layer">
@@ -195,8 +212,23 @@ year and their construction type from a XML.</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.name">
+<code class="descname">name</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.orientation">
 <code class="descname">orientation</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.orientation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.outer_convection">
+<code class="descname">outer_convection</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.outer_convection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.outer_radiation">
+<code class="descname">outer_radiation</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.outer_radiation" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -206,21 +238,25 @@ year and their construction type from a XML.</p>
 
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.save_type_element">
-<code class="descname">save_type_element</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.save_type_element" title="Permalink to this definition">¶</a></dt>
+<code class="descname">save_type_element</code><span class="sig-paren">(</span><em>path=None</em>, <em>file_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.save_type_element" title="Permalink to this definition">¶</a></dt>
 <dd><p>Typical element saver.</p>
 <p>Saves typical building elements according to their construction
-year and their construction type in the TypeBuildingElements.xml.</p>
+year and their construction type in the the XML file for type buidling
+elements. If the Project parent is set, it automatically saves it to
+the file given in Project.data. Alternatively you can specify a path to
+a file of TypeBuildingElements. If this file does not exist,
+a new file is created.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>year</strong> : str</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : str</p>
 <blockquote>
-<div><p>Year of construction</p>
+<div><p>path where unique file should be stored</p>
 </div></blockquote>
-<p><strong>construction</strong> : str</p>
+<p><strong>name</strong> : strt</p>
 <blockquote class="last">
-<div><p>Construction type, code list (&#8216;heavy&#8217;, &#8216;light&#8217;)</p>
+<div><p>name of of unique file</p>
 </div></blockquote>
 </td>
 </tr>
@@ -313,6 +349,16 @@ year and their construction type in the TypeBuildingElements.xml.</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.tilt">
+<code class="descname">tilt</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.tilt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.year_of_construction">
+<code class="descname">year_of_construction</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.year_of_construction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement.BuildingElement.year_of_retrofit">
@@ -419,6 +465,11 @@ Default is None</p>
 <code class="descname">parent</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Layer.Layer.parent" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Layer.Layer.thickness">
+<code class="descname">thickness</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Layer.Layer.thickness" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 </div>
@@ -474,6 +525,21 @@ Default is None</p>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.density">
+<code class="descname">density</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.density" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.heat_capac">
+<code class="descname">heat_capac</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.heat_capac" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.ir_emissivity">
+<code class="descname">ir_emissivity</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.ir_emissivity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.load_material_template">
 <code class="descname">load_material_template</code><span class="sig-paren">(</span><em>mat_name</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.load_material_template" title="Permalink to this definition">¶</a></dt>
@@ -504,6 +570,21 @@ Default is None</p>
 <dd><p>Material saver.</p>
 <p>Saves Material specified in the XML.</p>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.solar_absorp">
+<code class="descname">solar_absorp</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.solar_absorp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.thermal_conduc">
+<code class="descname">thermal_conduc</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.thermal_conduc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.transmittance">
+<code class="descname">transmittance</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Material.Material.transmittance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -563,7 +644,7 @@ VDI 6007 guideline.</p>
 
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Wall.Wall.insulate_wall">
-<code class="descname">insulate_wall</code><span class="sig-paren">(</span><em>material</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Wall.Wall.insulate_wall" title="Permalink to this definition">¶</a></dt>
+<code class="descname">insulate_wall</code><span class="sig-paren">(</span><em>material=None</em>, <em>thickness=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Wall.Wall.insulate_wall" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrofit the walls with an additional insulation layer</p>
 <p>Adds an additional layer on the wall, outer sight</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -571,8 +652,12 @@ VDI 6007 guideline.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>material</strong> : string</p>
+<blockquote>
+<div><p>Type of material, that is used for insulation, default = EPS035</p>
+</div></blockquote>
+<p><strong>thickness</strong> : float</p>
 <blockquote class="last">
-<div><p>Type of material, that is used for insulation</p>
+<div><p>thickness of the insulation layer, default = None</p>
 </div></blockquote>
 </td>
 </tr>
@@ -582,7 +667,7 @@ VDI 6007 guideline.</p>
 
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Wall.Wall.retrofit_wall">
-<code class="descname">retrofit_wall</code><span class="sig-paren">(</span><em>year_of_refurbishmet</em>, <em>material=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Wall.Wall.retrofit_wall" title="Permalink to this definition">¶</a></dt>
+<code class="descname">retrofit_wall</code><span class="sig-paren">(</span><em>year_of_retrofit</em>, <em>material=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Wall.Wall.retrofit_wall" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function adds an additional layer of insulation and sets the
 thickness of the layer according to the retrofit standard in the
 year of refurbishment. Refurbishment year must be newer then 1995</p>
@@ -619,8 +704,8 @@ coefficients for outer and inner heat transfer are used.</p>
 <p class="rubric">Attributes</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="9%" />
-<col width="91%" />
+<col width="17%" />
+<col width="83%" />
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td>g_value</td>
@@ -629,12 +714,20 @@ coefficients for outer and inner heat transfer are used.</p>
 <tr class="row-even"><td>a_conv</td>
 <td>(float) convective coefficient of inner side of wall according to VDI 6007</td>
 </tr>
-<tr class="row-odd"><td>shading</td>
-<td>(Shading()) instance of shading type</td>
+<tr class="row-odd"><td>shading_g_total</td>
+<td>(float) shaded g value of the window</td>
+</tr>
+<tr class="row-even"><td>shading_max_irr</td>
+<td>(float) threshold for automatic shading</td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.a_conv">
+<code class="descname">a_conv</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.a_conv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.calc_equivalent_res">
 <code class="descname">calc_equivalent_res</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.calc_equivalent_res" title="Permalink to this definition">¶</a></dt>
@@ -654,6 +747,11 @@ coefficients for outer and inner heat transfer are used.</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.g_value">
+<code class="descname">g_value</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.g_value" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.replace_window">
@@ -678,6 +776,16 @@ insultaed one.</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.shading_g_total">
+<code class="descname">shading_g_total</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.shading_g_total" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.shading_max_irr">
+<code class="descname">shading_max_irr</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.BuildingPhysics.Window.Window.shading_max_irr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -753,7 +861,7 @@ insultaed one.</p>
         <li class="right" >
           <a href="teaser.Logic.BuildingObjects.html" title="BuildingObjects package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER4 0.1.2 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.2.3 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER Doc</a> &raquo;</li>
           <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >Logic package</a> &raquo;</li>
           <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" >BuildingObjects package</a> &raquo;</li> 
