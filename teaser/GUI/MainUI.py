@@ -2882,6 +2882,13 @@ class MainUI(QDialog):
                                                 self.warning_message_groupbox)
         self.warning_message_label2.setGeometry(QtCore.QRect(115, 20, 225, 25))
         self.warning_message_label2.setText("overwritten.")
+        self.warning_message_groupbox.setMaximumHeight(48)
+
+        self.set_all_constr_elment_layout = QtGui.QGridLayout()
+        self.set_all_constr_elment_layout_groupBox = QtGui.QGroupBox(
+            "input values")
+        self.set_all_constr_elment_layout_groupBox.setLayout(
+            self.set_all_constr_elment_layout)
 
         self.set_all_constr_save_cancel_layout = QtGui.QGridLayout()
         self.set_all_constr_save_cancel_layout_GroupBox = QtGui.QGroupBox()
@@ -2911,12 +2918,14 @@ class MainUI(QDialog):
                      self.element_build_ui, QtCore.SLOT("close()"))
         """
         self.create__envelope_ui_window_layout.addWidget(
-                                         self.warning_message_groupbox, 0, 0)
+                    self.warning_message_groupbox, 0, 0)
         self.create__envelope_ui_window_layout.addWidget(
-                                         self.set_all_constr_save_cancel_layout_GroupBox, 1, 0)
+                    self.set_all_constr_elment_layout_groupBox, 1, 0)
+        self.create__envelope_ui_window_layout.addWidget(
+                    self.set_all_constr_save_cancel_layout_GroupBox, 2, 0)
+
         self.create__envelope_ui.setWindowModality(Qt.ApplicationModal)
         self.create__envelope_ui.show()
-
 
         """
         self.element_type_label = QtGui.QLabel("Type")
