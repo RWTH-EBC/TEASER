@@ -1814,7 +1814,7 @@ class MainUI(QDialog):
             for orientation in self.guiinfo.orientations_numbers.keys():               
                 if self.current_building.get_outer_wall_area(orientation) != 0:
                     item1 = QStandardItem(
-                        "Outer Wall Orientation: " +
+                        "Outer Wall \nOrientation:\t" +
                         str(self.guiinfo.orientations_numbers[orientation]) +
                         "\t".expandtabs(12) + "\n" + " Area: " +
                         str(self.current_building.
@@ -1822,7 +1822,7 @@ class MainUI(QDialog):
                     self.outer_elements_model.appendRow(item1)
                 if self.current_building.get_window_area(orientation) != 0:
                     item2 = QStandardItem(
-                        "Window Orientation: " +
+                        "Window \nOrientation:\t" +
                         str(self.guiinfo.orientations_numbers[orientation]) +
                         "\t".expandtabs(16) + "\n" + " Area: " +
                         str(self.current_building.
