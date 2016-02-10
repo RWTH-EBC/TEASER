@@ -2879,7 +2879,7 @@ class MainUI(QDialog):
         self.warning_message_label.setGeometry(QtCore.QRect(10, 10, 280, 40))
         self.warning_message_label.setText(
              "All walls with the current orientation in building will be" +
-             "\n"+  "overwritten")
+             "\n" + "overwritten")
 
         self.warning_message_groupbox.setMaximumHeight(48)
         self.warning_message_groupbox.setMinimumHeight(48)
@@ -2955,28 +2955,36 @@ class MainUI(QDialog):
             self.set_all_constr_save_cancel_layout)
         self.set_all_constr_save_cancel_layout_GroupBox.setMaximumHeight(48)
 
-        self.element_add_material_button = QtGui.QPushButton()
-        self.element_add_material_button.setText("Add Layer")
-        self.connect(self.element_add_material_button, SIGNAL("clicked()"),
-                     self.create_new_layer_ui)
+        self.set_all_constr_element_add_material_button = QtGui.QPushButton()
+        self.set_all_constr_element_add_material_button.setText("Add Layer")
+        self.connect(self.set_all_constr_element_add_material_button,
+                     SIGNAL("clicked()"), self.create_new_layer_ui)
 
-        self.element_delete_material_button = QtGui.QPushButton()
-        self.element_delete_material_button.setText("Delete Layer")
-        self.connect(self.element_delete_material_button, SIGNAL("clicked()"),
-                     self.delete_selected_layer)
+        self.set_all_constr_element_delete_material_button = QtGui.QPushButton()
+        self.set_all_constr_element_delete_material_button.setText(
+                                                                "Delete Layer")
+        self.connect(self.set_all_constr_element_delete_material_button,
+                     SIGNAL("clicked()"), self.delete_selected_layer)
+
+        self.set_all_constr_element_material_list_view = QtGui.QListView()
+        self.set_all_constr_element_material_list_view.setGeometry(
+            QtCore.QRect(10, 200, 170, 300))
+        self.set_all_constr_element_material_list_view.setObjectName(
+            _fromUtf8("ElementMaterialsListView"))
+        self.set_all_constr_element_material_list_view.setModel(
+                                                    self.outer_elements_model)
+        self.set_all_constr_element_material_list_view.setItemDelegate(
+                                                                    self.lVZF)
+        self.set_all_constr_element_material_list_view.setEditTriggers(
+            QtGui.QAbstractItemView.NoEditTriggers)
+        self.set_all_constr_element_material_list_view.doubleClicked.connect(
+            self.show_layer_build_ui)
 
         self.set_all_constr_save_button = QtGui.QPushButton()
         self.set_all_constr_save_button.setText("Save")
 
         self.set_all_constr_cancel_button = QtGui.QPushButton()
         self.set_all_constr_cancel_button.setText("Cancel")
-
-        self.set_all_constr_save_cancel_layout.addWidget(
-                                            self.set_all_constr_save_button,
-                                            0, 0)
-        self.set_all_constr_save_cancel_layout.addWidget(
-                                            self.set_all_constr_cancel_button,
-                                            0, 1)
 
         """
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
@@ -3023,21 +3031,20 @@ class MainUI(QDialog):
             self.set_all_constr_element_outer_rad_label, 9, 0)
         self.set_all_constr_element_layout.addWidget(
             self.set_all_constr_element_outer_rad_textbox, 9, 1)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_add_material_button, 10, 0)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_delete_material_button, 10, 1)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_material_list_view, 11, 0, 12, 2)
 
-        """
-        self.element_general_layout.addWidget(
-                self.element_add_material_button, 12, 0)
-            self.element_general_layout.addWidget(
-                self.element_delete_material_button, 12, 1)
-            self.element_general_layout.addWidget(
-                self.element_material_list_view, 13, 0, 14, 3)
-            self.element_general_layout.addWidget(
-                self.element_material_list_label, 13, 3, 14, 4)
-            self.element_save_cancel_layout.addWidget(
-                self.element_save_button, 0, 0)
-            self.element_save_cancel_layout.addWidget(
-                self.element_cancel_button, 0, 1)
-        """
+        self.set_all_constr_save_cancel_layout.addWidget(
+                                            self.set_all_constr_save_button,
+                                            0, 0)
+        self.set_all_constr_save_cancel_layout.addWidget(
+                                            self.set_all_constr_cancel_button,
+                                            0, 1)
+
         self.create__envelope_ui_window_layout.addWidget(
                     self.warning_message_groupbox, 0, 0)
         self.create__envelope_ui_window_layout.addWidget(
@@ -3048,180 +3055,6 @@ class MainUI(QDialog):
         self.create__envelope_ui.setWindowModality(Qt.ApplicationModal)
         self.create__envelope_ui.show()
 
-        """
-        self.element_type_label = QtGui.QLabel("Type")
-        self.element_set_all_constr_elment.QTextEdit()
-        self.element_type_textbox.setText(
-            type(self.current_element).__name__)
-        self.element_type_textbox.setReadOnly(True)
-        self.element_type_textbox.setMaximumHeight(24)
-
-        self.element_construction_type_label = QtGui.QLabel(
-            "Construction Type")
-        self.element_construction_type_combobox = QtGui.QComboBox()
-        self.element_construction_type_combobox.setObjectName(
-            _fromUtf8("ElementConstructionTypeComboBox"))
-        self.element_construction_type_combobox.addItem("heavy", userData=None)
-        self.element_construction_type_combobox.addItem("light", userData=None)
-        if self.current_element.construction_type == "heavy":
-            self.element_construction_type_combobox.setCurrentIndex(0)
-        if self.current_element.construction_type == "light":
-            self.element_construction_type_combobox.setCurrentIndex(1)                    
-        self.element_orientation_label = QtGui.QLabel("Orientation")
-        self.element_orientation_combobox = QtGui.QComboBox()
-        self.element_orientation_combobox.setObjectName(
-            _fromUtf8("ElementOrientationComboBox"))
-        for orientation in self.guiinfo.orientations:
-            self.element_orientation_combobox.addItem(
-                orientation, userData=None)
-        if(self.current_element.orientation != None):
-            orientation_string = str(self.guiinfo.orientations_numbers
-                [self.current_element.orientation])
-            self.element_orientation_combobox.setCurrentIndex(
-            self.element_orientation_combobox.findText(
-               orientation_string))
-        else:
-            self.element_orientation_combobox.setCurrentIndex(-1)
-
-        self.element_name_label = QtGui.QLabel("Id")
-        self.element_name_textbox = QtGui.QLineEdit()
-        self.element_name_textbox.setObjectName(
-            _fromUtf8("ElementNameTextBox"))
-        self.element_name_textbox.setText(str(self.current_element.name))
-
-        self.element_area_label = QtGui.QLabel("Area")
-        self.element_area_textbox = QtGui.QLineEdit()
-        self.element_area_textbox.setObjectName(
-            _fromUtf8("ElementAreaTextBox"))
-        self.element_area_textbox.setText(str(round(
-            self.current_element.area, 2)))
-
-        self.element_year_of_construction_label = QtGui.QLabel(
-            "Year Of Construction")
-        self.element_year_of_construction_textbox = QtGui.QLineEdit()
-        self.element_year_of_construction_textbox.setObjectName(
-            _fromUtf8("ElementYearOfConstructionTextBox"))
-        if self.current_element.year_of_construction is None:
-            self.element_year_of_construction_textbox.setText(
-                str(0))
-        else:
-            self.element_year_of_construction_textbox.setText(
-                str(self.current_element.year_of_construction))
-
-        self.element_year_of_retrofit_label = QtGui.QLabel(
-            "Year Of Retrofit")
-        self.element_year_of_retrofit_textbox = QtGui.QLineEdit()
-        self.element_year_of_retrofit_textbox.setObjectName(
-            _fromUtf8("ElementYearOfRetrofitTextBox"))
-        if self.current_element._year_of_retrofit is None:
-            self.element_year_of_retrofit_textbox.setText(
-                str(0))
-        else:
-            self.element_year_of_retrofit_textbox.setText(
-                str(self.current_element._year_of_retrofit))
-
-        self.element_tilt_label = QtGui.QLabel("Tilt")
-        self.element_tilt_textbox = QtGui.QLineEdit()
-        self.element_tilt_textbox.setObjectName(
-            _fromUtf8("ElementTiltTextBox"))
-        if self.current_element.tilt is None:
-            self.element_tilt_textbox.setText(
-                str(0))
-        else:
-            self.element_tilt_textbox.setText(
-                str(self.current_element.tilt))
-
-        self.element_inner_convection_label = QtGui.QLabel("Inner Convection")
-        self.element_inner_convection_textbox = QtGui.QLineEdit()
-        self.element_inner_convection_textbox.setObjectName(
-            _fromUtf8("ElementInnerConvectionTextBox"))
-        if self.current_element.inner_convection is None:
-            self.element_inner_convection_textbox.setText(
-                str(0))
-        else:
-            self.element_inner_convection_textbox.setText(
-                str(self.current_element.inner_convection))
-
-        self.element_inner_radiation_label = QtGui.QLabel("Inner Radiation")
-        self.element_inner_radiation_textbox = QtGui.QLineEdit()
-        self.element_inner_radiation_textbox.setObjectName(
-            _fromUtf8("ElementInnerRadiationTextBox"))
-        if self.current_element.inner_radiation is None:
-            self.element_inner_radiation_textbox.setText(
-                str(0))
-        else:
-            self.element_inner_radiation_textbox.setText(
-                str(self.current_element.inner_radiation))
-
-        if not type(self.current_element).__name__ == "InnerWall":
-
-            self.element_outer_convection_label = QtGui.QLabel(
-                "Outer Convection")
-            self.element_outer_convection_textbox = QtGui.QLineEdit()
-            self.element_outer_convection_textbox.setObjectName(
-                _fromUtf8("ElementOuterConvectionTextBox"))
-            self.element_outer_convection_textbox.setText(
-                str(self.current_element.outer_convection))
-
-            self.element_outer_radiation_label = QtGui.QLabel(
-                "Outer Radiation")
-            self.element_outer_radiation_textbox = QtGui.QLineEdit()
-            self.element_outer_radiation_textbox.setObjectName(
-                _fromUtf8("ElementOuterRadiationTextBox"))
-            self.element_outer_radiation_textbox.setText(
-                str(self.current_element.outer_radiation))
-
-        self.element_uvalue_label = QtGui.QLabel("U-Value (U/A)")
-        self.element_uvalue_textbox = QtGui.QLineEdit()
-        self.element_uvalue_textbox.setObjectName(
-            _fromUtf8("ElementUValueTextBox"))
-        self.element_uvalue_textbox.setText(str(self.current_element.ua_value))
-        self.element_uvalue_textbox.setReadOnly(True)
-
-        self.element_add_material_button = QtGui.QPushButton()
-        self.element_add_material_button.setText("Add Layer")
-        self.connect(self.element_add_material_button, SIGNAL("clicked()"),
-                     self.create_new_layer_ui)
-
-        self.element_delete_material_button = QtGui.QPushButton()
-        self.element_delete_material_button.setText("Delete Layer")
-        self.connect(self.element_delete_material_button, SIGNAL("clicked()"),
-                     self.delete_selected_layer)
-
-        self.element_material_list_view = QtGui.QListView()
-        self.element_material_list_view.setGeometry(
-            QtCore.QRect(10, 200, 170, 300))
-        self.element_material_list_view.setObjectName(
-            _fromUtf8("ElementMaterialsListView"))
-        self.element_material_list_view.setModel(self.element_layer_model)
-        self.element_material_list_view.setItemDelegate(self.lVZF)
-        self.element_material_list_view.setEditTriggers(
-            QtGui.QAbstractItemView.NoEditTriggers)
-        self.element_material_list_view.doubleClicked.connect(
-            self.show_layer_build_ui)
-        self.element_material_list_label = QtGui.QLabel()
-        self.element_material_list_label.setGeometry(
-            QtCore.QRect(175, 200, 25, 300))
-        self.element_material_list_label.setText("From inner\n\n\n\n\n\n\n\n"
-                                                 "To Outer")
-
-        self.element_save_button = QtGui.QPushButton()
-        self.element_save_button.setText("Save")
-        self.connect(self.element_save_button, SIGNAL("clicked()"),
-                     self.save_changed_element_values)
-        self.connect(self.element_save_button, SIGNAL("clicked()"),
-                     self.update_zone_details)
-        self.connect(self.element_save_button, SIGNAL("clicked()"),
-                     self.element_build_ui, QtCore.SLOT("close()"))
-        # self.connect(self.element_save_button, SIGNAL("clicked()"),
-        #              self.zone_value_window, QtCore.SLOT("update()"))
-
-        self.element_cancel_button = QtGui.QPushButton()
-        self.element_cancel_button.setText("Cancel")
-        self.connect(self.element_cancel_button, SIGNAL("clicked()"),
-                     self.element_build_ui, QtCore.SLOT("close()"))
-
-    """
     def create_new_layer_ui(self):
         ''' Opens the window to create a new layer.
         
