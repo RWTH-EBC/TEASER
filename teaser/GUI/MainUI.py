@@ -2876,15 +2876,13 @@ class MainUI(QDialog):
                                               QtCore.QRect(0, 0, 60, 60))
         self.warning_message_label = QtGui.QLabel(
                                                 self.warning_message_groupbox)
-        self.warning_message_label.setGeometry(QtCore.QRect(10, 5, 280, 25))
+        self.warning_message_label.setGeometry(QtCore.QRect(10, 10, 280, 40))
         self.warning_message_label.setText(
-             "All walls with the current orientation in building will be")
-        self.warning_message_label2 = QtGui.QLabel(
-                                                self.warning_message_groupbox)
-        self.warning_message_label2.setGeometry(QtCore.QRect(115, 20, 225, 25))
-        self.warning_message_label2.setText("overwritten.")
-        self.warning_message_groupbox.setMinimumHeight(48)
+             "All walls with the current orientation in building will be" +
+             "\n"+  "overwritten")
+
         self.warning_message_groupbox.setMaximumHeight(48)
+        self.warning_message_groupbox.setMinimumHeight(48)
 
         self.set_all_constr_element_layout = QtGui.QGridLayout()
         self.set_all_constr_element_layout_groupBox = QtGui.QGroupBox(
