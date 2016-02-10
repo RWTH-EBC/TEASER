@@ -65,7 +65,7 @@ def load_teaser_xml(path, project):
     # Parse the zones
     for zone_count in (root.findall("Zonen/Zone")):
         thermal_zone = ThermalZone(building)
-        use_conditions = UseConditions18599()
+        use_conditions = UseConditions18599(thermal_zone)
         thermal_zone.name = zone_count.find("Name").text
         # not sure we need this (use_conditions.usage), but first keep it
         use_conditions.usage = zone_count.find("Typ").text

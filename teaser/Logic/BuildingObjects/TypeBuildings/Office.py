@@ -52,6 +52,9 @@ class Office(TypeBuilding):
     net_leased_area : float
         total net leased area of building
 
+    with_ahu : boolean
+        if building has a central AHU or not    
+
     office_layout : int
         type of floor plan (default = 0)
 
@@ -142,6 +145,7 @@ class Office(TypeBuilding):
                  number_of_floors=None,
                  height_of_floors=None,
                  net_leased_area=None,
+                 with_ahu=False,
                  office_layout=None,
                  window_layout=None,
                  construction_type=None):
@@ -154,7 +158,8 @@ class Office(TypeBuilding):
                                      year_of_construction,
                                      number_of_floors,
                                      height_of_floors,
-                                     net_leased_area)
+                                     net_leased_area, 
+                                     with_ahu)
 
         self.office_layout = office_layout
         self.window_layout = window_layout
@@ -236,10 +241,13 @@ class Office(TypeBuilding):
         self._est_length = ((self.net_leased_area / self.number_of_floors) * 
                             self.gross_factor) / self._est_width
 
-        self.file_ahu = "./Tables/Office/AHU_Office.mat"
-        self.file_internal_gains = "./Tables/Office/InternalGains_Office.mat"
-        self.file_set_t = "./Tables/Office/Tset_Office.mat"
-        self.file_weather = "./Tables/" + self.parent.weather_file_name
+        if self.with_ahu is True:
+            self.central_ahu.profile_temperature = (7*[293.15] +
+                                                    12*[295.15] +
+                                                    6*[293.15])
+            self.central_ahu.profile_min_relative_humidity = (25*[0.45])
+            self.central_ahu.profile_max_relative_humidity = (25*[0.55])
+            self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
 
     def generate_office(self):
         '''Generates an office building.

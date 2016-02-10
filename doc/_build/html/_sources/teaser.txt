@@ -28,7 +28,7 @@ The source folder contains different subpackages and one Project module
 
 Project module
 `````````````
-TEASER4 API
+TEASER API
 
 Data package 
 `````````````

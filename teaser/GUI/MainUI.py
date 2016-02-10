@@ -938,7 +938,6 @@ class MainUI(QDialog):
         ''''Replaces the previous values of the current layer with the inputs
            from the text fields.
 
-
         '''
         # TODO: Fehler beim User-Input abfangen
         
@@ -1284,7 +1283,7 @@ class MainUI(QDialog):
             self.window_construct_building_year_line_edit.text(),
             self.window_construct_building_number_of_floors_line_edit.text(),
             self.window_construct_building_height_of_floors_line_edit.text(),
-            "Residential 4",
+            "Insitute 4",
             self.window_construct_building_area_line_edit.text(),
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
@@ -1306,7 +1305,7 @@ class MainUI(QDialog):
             self.window_construct_building_year_line_edit.text(),
             self.window_construct_building_number_of_floors_line_edit.text(),
             self.window_construct_building_height_of_floors_line_edit.text(),
-            "Residential 8",
+            "Institute 8",
             self.window_construct_building_area_line_edit.text(),
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
@@ -1328,7 +1327,7 @@ class MainUI(QDialog):
             self.window_construct_building_year_line_edit.text(),
             self.window_construct_building_number_of_floors_line_edit.text(),
             self.window_construct_building_height_of_floors_line_edit.text(),
-            "Residential General",
+            "Institute General",
             self.window_construct_building_area_line_edit.text(),
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
@@ -1524,6 +1523,7 @@ class MainUI(QDialog):
         # TODO: ax_p.plot(range(24), data_persons, 'b-', range(24), data_machines, 'r-', data_lighting, 'g-')
         ax_p.set_ylim([0,1])
         self.canvas_profiles.draw()
+
     def update_element_details(self):
         ''' Updates the element details after layers have been changed 
         
@@ -1610,7 +1610,6 @@ class MainUI(QDialog):
                     str(element.area) + "\n Orientation:\t".expandtabs(11) + 
                     str(element.orientation), element.internal_id)
                 self.element_model.appendRow(item)
-
 
     def switchBuilding(self):
         ''' Handles the buildings combobo
@@ -1815,7 +1814,7 @@ class MainUI(QDialog):
             for orientation in self.guiinfo.orientations_numbers.keys():               
                 if self.current_building.get_outer_wall_area(orientation) != 0:
                     item1 = QStandardItem(
-                        "Outer Wall \nOrientation:\t" +
+                        "Outer Wall Orientation: " +
                         str(self.guiinfo.orientations_numbers[orientation]) +
                         "\t".expandtabs(12) + "\n" + " Area: " +
                         str(self.current_building.
@@ -1823,7 +1822,7 @@ class MainUI(QDialog):
                     self.outer_elements_model.appendRow(item1)
                 if self.current_building.get_window_area(orientation) != 0:
                     item2 = QStandardItem(
-                        "Window \nOrientation:\t" +
+                        "Window Orientation: " +
                         str(self.guiinfo.orientations_numbers[orientation]) +
                         "\t".expandtabs(16) + "\n" + " Area: " +
                         str(self.current_building.
@@ -1855,37 +1854,37 @@ class MainUI(QDialog):
         template_folder = self.create_path_to_template_folder()
         os.chdir(template_folder)
 
-        for template_name in (os.listdir(template_folder)):
-            if(self.export_create_template_combobox.currentText() ==
-               template_name):
-                path_template = template_folder + template_name
-                # pathTemplate shows which template will be used
-
         list_of_building_name = []
         for i in range(self.side_bar_buildings_combo_box.count()):
             list_of_building_name.append(
                 self.side_bar_buildings_combo_box.itemText(i))
 
         sender = self.sender()
-        elemInCombobox = self.export_create_template_combobox.currentText()
+        building_model = \
+            self.export_create_template_model_combobox.currentText()
+        zone_model = self.export_create_template_zone_combobox.currentText()
+        if self.radio_button_corG_1.isChecked():
+            corG = True
+        elif self.radio_button_corG_2.isChecked():
+            corG = False
+        elemInCombobox = \
+            self.export_create_template_model_combobox.currentText()
+
         if(sender.text() == self.export_button.text()):
-            Controller.click_export_button(self.project, elemInCombobox,
+            Controller.click_export_button(self.project, building_model,
+                                           zone_model, corG, None,
                                            path_output_folder)
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
                                           " all building finished ")
         elif(sender.text() == self.export_button_one.text()):
-
-            current_building_id = \
-                str(self.side_bar_buildings_combo_box.currentText())
-            Controller.click_export_button(self.project, elemInCombobox,
-                                           path_output_folder,
-                                           current_building_id)
+            Controller.click_export_button(self.project, building_model,
+                                           zone_model, corG,
+                                           self.current_building.internal_id,
+                                           path_output_folder)
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
                                           " for current building finished ")
-
-            # os.chdir(path_output_folder)
         utilis.create_path(self.file_path)
 
     def click_browse_button(self):
@@ -2034,7 +2033,7 @@ class MainUI(QDialog):
     def set_text_color(self, qObject, color):
         '''Switches the color of text between red and black
         '''
-
+        # werden soll, beim Löschen auf weitere Abhängigkeiten überprüfen!
         palette = QtGui.QPalette()
         if (color == "red"):
             palette.setColor(QtGui.QPalette.Foreground, QtCore.Qt.red)
@@ -2187,7 +2186,7 @@ class MainUI(QDialog):
         # TODO: Ok das Design hat sich nicht wirklich durchgesetzt und
         # es funktioniert grad nicht besonders, Vorschlag: stattdessen
         # einfach ein Pop-Up Fenster wie bei Create-Type-Building, in dem
-
+        # man building attribute die links am rand stehen ändern kann.
         if self.current_building:
             self.side_bar_construction_year_line_edit.setReadOnly(False)
             self.side_bar_height_of_floors_line_edit.setReadOnly(False)
@@ -2597,7 +2596,7 @@ class MainUI(QDialog):
         # Problem: Der User muss die Shortcuts auch mitbekommen, also
         # am besten den jeweiligen shortcut-Buchstaben im Label unter dem
         # Button/ auf dem Button etwas hervorheben (unterstreichen oder fett machen)
-        # Der Modifier ist STRG also muessten fuer die buttons bspw. STRG+C gedrueckt werden.
+        # Der Modifier ist STRG also müssten für die buttons bspw. STRG+C gedrückt werden.        
         key = event.key()
         if key == QtCore.Qt.Key_C and\
                 QtGui.QApplication.keyboardModifiers() == \
@@ -2738,7 +2737,7 @@ class MainUI(QDialog):
         '''
         
         # TODO: Bin mir nicht sicher ob das self.no_building_warning_label
-
+        # noch irgendwas tut, überprüfen und sonst löschen.        
         self.generate_new_building_ui_page = QtGui.QWizardPage()
         self.generate_new_building_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
@@ -3617,6 +3616,7 @@ class MainUI(QDialog):
             try:
                 data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
                 data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
+            # TODO: data_lighting[hour] = self.current_zone.use_conditions.profile_lighting[hour]
             except IndexError:
                 break;
         ax_p = self.figure_profiles.add_subplot(111)
@@ -3868,6 +3868,7 @@ class MainUI(QDialog):
 
     def generate_type_building_ui(self):
         ''' Opens a window to create a new type building.
+
         '''
 
         self.popup_window_type_building = QtGui.QWizardPage()
@@ -4527,7 +4528,8 @@ class MainUI(QDialog):
         if self.current_element.construction_type == "heavy":
             self.element_construction_type_combobox.setCurrentIndex(0)
         if self.current_element.construction_type == "light":
-            self.element_construction_type_combobox.setCurrentIndex(1)                    
+            self.element_construction_type_combobox.setCurrentIndex(1)
+
         self.element_orientation_label = QtGui.QLabel("Orientation")
         self.element_orientation_combobox = QtGui.QComboBox()
         self.element_orientation_combobox.setObjectName(
@@ -4825,14 +4827,14 @@ class MainUI(QDialog):
         self.export_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.export_window_ui.setWindowTitle("Export")
         self.export_window_ui.setFixedWidth(380)
-        self.export_window_ui.setFixedHeight(180)
+        self.export_window_ui.setFixedHeight(250)
         self.export_window_ui_layout = QtGui.QGridLayout()
         self.export_window_ui.setLayout(self.export_window_ui_layout)
 
         self.export_groupbox = QtGui.QGroupBox("Export")
-        self.export_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 160))
-        self.export_groupbox.setMinimumSize(QtCore.QSize(360, 160))
-        self.export_groupbox.setMaximumSize(QtCore.QSize(360, 160))
+        self.export_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 230))
+        self.export_groupbox.setMinimumSize(QtCore.QSize(360, 230))
+        self.export_groupbox.setMaximumSize(QtCore.QSize(360, 230))
         self.export_groupbox.setObjectName(_fromUtf8("exportGroupBox"))
         self.export_button = QtGui.QPushButton(self.export_groupbox)
         self.export_button.setGeometry(QtCore.QRect(5, 20, 305, 25))
@@ -4842,21 +4844,38 @@ class MainUI(QDialog):
         self.export_button_one.setGeometry(QtCore.QRect(5, 55, 305, 25))
         self.export_button_one.clicked.connect(self.click_export_button)
         self.export_button_one.setText("Export model for current building")
-        self.export_template_label = QtGui.QLabel(self.export_groupbox)
-        self.export_template_label.setGeometry(QtCore.QRect(5, 90, 120, 25))
-        self.export_template_label.setText("Model type:")
-        self.export_create_template_combobox = QtGui.QComboBox(
+        self.export_template_label_model = QtGui.QLabel(self.export_groupbox)
+        self.export_template_label_model.setGeometry(QtCore.QRect(5, 90, 120, 25))
+        self.export_template_label_model.setText("Model type:")
+        self.export_create_template_model_combobox = QtGui.QComboBox(
             self.export_groupbox)
-        self.export_create_template_combobox.setGeometry(
+        self.export_create_template_model_combobox.setGeometry(
             QtCore.QRect(130, 90, 215, 25))
+        self.export_template_label_zone = QtGui.QLabel(self.export_groupbox)
+        self.export_template_label_zone.setGeometry(QtCore.QRect(5, 125, 120, 25))
+        self.export_template_label_zone.setText("Zone type:")
+        self.export_create_template_zone_combobox = QtGui.QComboBox(
+            self.export_groupbox)
+        self.export_create_template_zone_combobox.setGeometry(
+            QtCore.QRect(130, 125, 215, 25))
+        self.export_template_label_corG = QtGui.QLabel(self.export_groupbox)
+        self.export_template_label_corG.setGeometry(QtCore.QRect(5, 160, 120, 25))
+        self.export_template_label_corG.setText("corG:")
+        self.radio_button_corG_1 = QtGui.QRadioButton(self.export_groupbox)
+        self.radio_button_corG_1.setGeometry(QtCore.QRect(130, 160, 120, 25))
+        self.radio_button_corG_1.setText("with CorG")
+        self.radio_button_corG_2 = QtGui.QRadioButton(self.export_groupbox)
+        self.radio_button_corG_2.setGeometry(QtCore.QRect(250, 160, 120, 25))
+        self.radio_button_corG_2.setText("without CorG")
+        self.radio_button_corG_1.setChecked(True)
         self.export_save_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_save_template_label.setGeometry(
-            QtCore.QRect(5, 125, 110, 25))
+            QtCore.QRect(5, 195, 110, 25))
         self.export_save_template_label.setText("File path:")
         self.export_save_template_lineedit = QtGui.QLineEdit(
             self.export_groupbox)
         self.export_save_template_lineedit .setGeometry(
-            QtCore.QRect(130, 125, 130, 25))
+            QtCore.QRect(130, 195, 130, 25))
         if self.file_path == "":
             self.export_save_template_lineedit.setText(
                                                  utilis.get_default_path())
@@ -4868,15 +4887,14 @@ class MainUI(QDialog):
         self.export_save_template_button = QtGui.QPushButton(
             self.export_groupbox)
         self.export_save_template_button.setGeometry(
-            QtCore.QRect(265, 125, 80, 25))
+            QtCore.QRect(265, 195, 80, 25))
         self.export_save_template_button.setText("Browse")
         self.export_save_template_button.clicked.connect(
             self.click_browse_button)
-        for template_name in os.listdir(self.create_path_to_template_folder()):
-            if(template_name == "AixLib" or template_name == "CitiesRWin" or
-               template_name == "CitiesType"):
-                self.export_create_template_combobox.addItem(template_name)
-
+        modelTypeList = ["MultizoneEquipped", "Multizone", "None"]
+        zoneTypeList = ["ThermalZoneEquipped", "ThermalZone", "None"]
+        self.export_create_template_model_combobox.addItems(modelTypeList)
+        self.export_create_template_zone_combobox.addItems(zoneTypeList)
         self.export_window_ui_layout.addWidget(
             self.export_groupbox, 1, 1)
         self.export_window_ui.setWindowModality(Qt.ApplicationModal)
