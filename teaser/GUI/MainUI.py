@@ -2864,7 +2864,7 @@ class MainUI(QDialog):
         self.create__envelope_ui = QtGui.QWizardPage()
         self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create__envelope_ui.setWindowTitle("Set all construction")
-        self.create__envelope_ui.setFixedWidth(300)
+        self.create__envelope_ui.setFixedWidth(400)
         self.create__envelope_ui.setFixedHeight(600)
         self.create__envelope_ui_window_layout = QtGui.QGridLayout()
         self.create__envelope_ui.setLayout(
@@ -2876,10 +2876,10 @@ class MainUI(QDialog):
                                               QtCore.QRect(0, 0, 60, 60))
         self.warning_message_label = QtGui.QLabel(
                                                 self.warning_message_groupbox)
-        self.warning_message_label.setGeometry(QtCore.QRect(10, 10, 280, 40))
+        # self.warning_message_label.setGeometry(QtCore.QRect(10, 10, 280, 40))
         self.warning_message_label.setText(
-             "All walls with the current orientation in building will be" +
-             "\n" + "overwritten")
+             "\n All walls with the current orientation in building will be" +
+             "overwritten")
 
         self.warning_message_groupbox.setMaximumHeight(48)
         self.warning_message_groupbox.setMinimumHeight(48)
