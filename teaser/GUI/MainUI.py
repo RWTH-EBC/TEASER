@@ -2860,6 +2860,7 @@ class MainUI(QDialog):
         self.create_new_element_ui_page.show()
 
     def create_new_envelope_ui(self):
+        dummy = "dummy"
         self.create__envelope_ui = QtGui.QWizardPage()
         self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create__envelope_ui.setWindowTitle("Set all construction")
@@ -2882,19 +2883,89 @@ class MainUI(QDialog):
                                                 self.warning_message_groupbox)
         self.warning_message_label2.setGeometry(QtCore.QRect(115, 20, 225, 25))
         self.warning_message_label2.setText("overwritten.")
+        self.warning_message_groupbox.setMinimumHeight(48)
         self.warning_message_groupbox.setMaximumHeight(48)
 
-        self.set_all_constr_elment_layout = QtGui.QGridLayout()
-        self.set_all_constr_elment_layout_groupBox = QtGui.QGroupBox(
+        self.set_all_constr_element_layout = QtGui.QGridLayout()
+        self.set_all_constr_element_layout_groupBox = QtGui.QGroupBox(
             "input values")
-        self.set_all_constr_elment_layout_groupBox.setLayout(
-            self.set_all_constr_elment_layout)
+        self.set_all_constr_element_layout_groupBox.setLayout(
+            self.set_all_constr_element_layout)
+
+        self.set_all_constr_element_bldg_label = QtGui.QLabel("Building")
+        self.set_all_constr_element_bldg_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_bldg_textbox.setText(dummy)
+        self.set_all_constr_element_bldg_textbox.setReadOnly(True)
+        self.set_all_constr_element_bldg_textbox.setMaximumHeight(24)
+
+        self.set_all_constr_element_orientation_label = QtGui.QLabel(
+                                                                 "Orientation")
+        self.set_all_constr_element_orientation_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_orientation_textbox.setText(dummy)
+        self.set_all_constr_element_orientation_textbox.setReadOnly(True)
+        self.set_all_constr_element_orientation_textbox.setMaximumHeight(24)
+
+        self.set_all_constr_element_type_label = QtGui.QLabel("Type")
+        self.set_all_constr_element_type_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_type_textbox.setText(dummy)
+        self.set_all_constr_element_type_textbox.setReadOnly(True)
+        self.set_all_constr_element_type_textbox.setMaximumHeight(24)
+
+        self.set_all_constr_element_id_label = QtGui.QLabel("ID")
+        self.set_all_constr_element_id_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_id_textbox.setText(dummy)
+        self.set_all_constr_element_id_textbox.setReadOnly(True)
+        self.set_all_constr_element_id_textbox.setMaximumHeight(24)
+
+        self.set_all_constr_element_tilt_label = QtGui.QLabel("Tilt")
+        self.set_all_constr_element_tilt_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_tilt_textbox.setText(dummy)
+        self.set_all_constr_element_tilt_textbox.setReadOnly(True)
+        self.set_all_constr_element_tilt_textbox.setMaximumHeight(24)
+
+        self.set_all_constr_element_inner_con_label = QtGui.QLabel(
+                                                        "Inner_convection")
+        self.set_all_constr_element_inner_con_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_inner_con_textbox.setText(dummy)
+        self.set_all_constr_element_inner_con_textbox.setReadOnly(True)
+        self.set_all_constr_element_inner_con_textbox.setMaximumHeight(24)
+
+        self.set_all_constr_element_inner_rad_label = QtGui.QLabel(
+                                                        "Inner_radiation")
+        self.set_all_constr_element_inner_rad_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_inner_rad_textbox.setText(dummy)
+        self.set_all_constr_element_inner_rad_textbox.setReadOnly(True)
+        self.set_all_constr_element_inner_rad_textbox.setMaximumHeight(24)
+
+        self.set_all_constr_element_outer_con_label = QtGui.QLabel(
+                                                        "Outer_convection")
+        self.set_all_constr_element_outer_con_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_outer_con_textbox.setText(dummy)
+        self.set_all_constr_element_outer_con_textbox.setReadOnly(True)
+        self.set_all_constr_element_outer_con_textbox.setMaximumHeight(24)
+
+        self.set_all_constr_element_outer_rad_label = QtGui.QLabel(
+                                                        "Outer_radiation")
+        self.set_all_constr_element_outer_rad_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_outer_rad_textbox.setText(dummy)
+        self.set_all_constr_element_outer_rad_textbox.setReadOnly(True)
+        self.set_all_constr_element_outer_rad_textbox.setMaximumHeight(24)
 
         self.set_all_constr_save_cancel_layout = QtGui.QGridLayout()
         self.set_all_constr_save_cancel_layout_GroupBox = QtGui.QGroupBox()
         self.set_all_constr_save_cancel_layout_GroupBox.setLayout(
             self.set_all_constr_save_cancel_layout)
         self.set_all_constr_save_cancel_layout_GroupBox.setMaximumHeight(48)
+
+        self.element_add_material_button = QtGui.QPushButton()
+        self.element_add_material_button.setText("Add Layer")
+        self.connect(self.element_add_material_button, SIGNAL("clicked()"),
+                     self.create_new_layer_ui)
+
+        self.element_delete_material_button = QtGui.QPushButton()
+        self.element_delete_material_button.setText("Delete Layer")
+        self.connect(self.element_delete_material_button, SIGNAL("clicked()"),
+                     self.delete_selected_layer)
 
         self.set_all_constr_save_button = QtGui.QPushButton()
         self.set_all_constr_save_button.setText("Save")
@@ -2917,10 +2988,62 @@ class MainUI(QDialog):
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.element_build_ui, QtCore.SLOT("close()"))
         """
+
+        self.set_all_constr_element_layout.addWidget(
+                self.set_all_constr_element_bldg_label, 1, 0)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_bldg_textbox, 1, 1)
+        self.set_all_constr_element_layout.addWidget(
+                self.set_all_constr_element_orientation_label, 2, 0)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_orientation_textbox, 2, 1)
+        self.set_all_constr_element_layout.addWidget(
+                self.set_all_constr_element_type_label, 3, 0)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_type_textbox, 3, 1)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_id_label, 4, 0)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_id_textbox, 4, 1)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_tilt_label, 5, 0)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_tilt_textbox, 5, 1)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_inner_con_label, 6, 0)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_inner_con_textbox, 6, 1)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_inner_rad_label, 7, 0)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_inner_rad_textbox, 7, 1)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_outer_con_label, 8, 0)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_outer_con_textbox, 8, 1)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_outer_rad_label, 9, 0)
+        self.set_all_constr_element_layout.addWidget(
+            self.set_all_constr_element_outer_rad_textbox, 9, 1)
+
+        """
+        self.element_general_layout.addWidget(
+                self.element_add_material_button, 12, 0)
+            self.element_general_layout.addWidget(
+                self.element_delete_material_button, 12, 1)
+            self.element_general_layout.addWidget(
+                self.element_material_list_view, 13, 0, 14, 3)
+            self.element_general_layout.addWidget(
+                self.element_material_list_label, 13, 3, 14, 4)
+            self.element_save_cancel_layout.addWidget(
+                self.element_save_button, 0, 0)
+            self.element_save_cancel_layout.addWidget(
+                self.element_cancel_button, 0, 1)
+        """
         self.create__envelope_ui_window_layout.addWidget(
                     self.warning_message_groupbox, 0, 0)
         self.create__envelope_ui_window_layout.addWidget(
-                    self.set_all_constr_elment_layout_groupBox, 1, 0)
+                    self.set_all_constr_element_layout_groupBox, 1, 0)
         self.create__envelope_ui_window_layout.addWidget(
                     self.set_all_constr_save_cancel_layout_GroupBox, 2, 0)
 
@@ -2929,7 +3052,7 @@ class MainUI(QDialog):
 
         """
         self.element_type_label = QtGui.QLabel("Type")
-        self.element_type_textbox = QtGui.QTextEdit()
+        self.element_set_all_constr_elment.QTextEdit()
         self.element_type_textbox.setText(
             type(self.current_element).__name__)
         self.element_type_textbox.setReadOnly(True)
