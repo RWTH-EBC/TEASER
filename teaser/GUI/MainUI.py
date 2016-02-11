@@ -2893,20 +2893,24 @@ class MainUI(QDialog):
 
         self.set_all_constr_element_bldg_label = QtGui.QLabel("Building")
         self.set_all_constr_element_bldg_textbox = QtGui.QTextEdit()
-        self.set_all_constr_element_bldg_textbox.setText(dummy)
+        self.set_all_constr_element_bldg_textbox.setText(
+                                                    self.current_building.name)
         self.set_all_constr_element_bldg_textbox.setReadOnly(True)
         self.set_all_constr_element_bldg_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_orientation_label = QtGui.QLabel(
                                                                  "Orientation")
         self.set_all_constr_element_orientation_textbox = QtGui.QTextEdit()
-        self.set_all_constr_element_orientation_textbox.setText(dummy)
+        self.set_all_constr_element_orientation_textbox.setText(
+                            self.envelope_orientation_combobox.currentText())
         self.set_all_constr_element_orientation_textbox.setReadOnly(True)
         self.set_all_constr_element_orientation_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_type_label = QtGui.QLabel("Type")
         self.set_all_constr_element_type_textbox = QtGui.QTextEdit()
-        self.set_all_constr_element_type_textbox.setText(dummy)
+
+        self.set_all_constr_element_type_textbox.setText(
+                                            self.envelope_name_textbox.text())
         self.set_all_constr_element_type_textbox.setReadOnly(True)
         self.set_all_constr_element_type_textbox.setMaximumHeight(24)
 
@@ -2966,8 +2970,8 @@ class MainUI(QDialog):
             QtCore.QRect(10, 200, 170, 300))
         self.set_all_constr_element_material_list_view.setObjectName(
             _fromUtf8("ElementMaterialsListView"))
-        self.set_all_constr_element_material_list_view.setModel(
-                                                    self.outer_elements_model)
+        # self.set_all_constr_element_material_list_view.setModel(
+        #                                            self.outer_elements_model)
         self.set_all_constr_element_material_list_view.setItemDelegate(
                                                                     self.lVZF)
         self.set_all_constr_element_material_list_view.setEditTriggers(
@@ -3715,6 +3719,7 @@ class MainUI(QDialog):
             self.groupbox_save_cancel_buttons, 8, 0, 1, 0)
         self.zone_value_window.setWindowModality(Qt.ApplicationModal)
         self.zone_value_window.show()
+
     def change_envelopes_values_ui(self, item):
         self.envelopes_value_window = QtGui.QWizardPage()
         self.envelopes_value_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
