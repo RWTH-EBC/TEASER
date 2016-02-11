@@ -2881,7 +2881,6 @@ class MainUI(QDialog):
         self.create_new_element_ui_page.show()
 
     def create_new_envelope_ui(self):
-        dummy_writable = "is writable "
         self.create__envelope_ui = QtGui.QWizardPage()
         self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create__envelope_ui.setWindowTitle("Set all construction")
@@ -2938,41 +2937,35 @@ class MainUI(QDialog):
         self.set_all_constr_element_id_label = QtGui.QLabel("ID")
         self.set_all_constr_element_id_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_id_textbox.setValidator(validator)
-        self.set_all_constr_element_id_textbox.setText(dummy_writable)
         self.set_all_constr_element_id_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_tilt_label = QtGui.QLabel("Tilt")
         self.set_all_constr_element_tilt_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_tilt_textbox.setValidator(validator)
-        self.set_all_constr_element_tilt_textbox.setText(dummy_writable)
         self.set_all_constr_element_tilt_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_inner_con_label = QtGui.QLabel(
                                                         "Inner_convection")
         self.set_all_constr_element_inner_con_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_inner_con_textbox.setValidator(validator)
-        self.set_all_constr_element_inner_con_textbox.setText(dummy_writable)
         self.set_all_constr_element_inner_con_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_inner_rad_label = QtGui.QLabel(
                                                         "Inner_radiation")
         self.set_all_constr_element_inner_rad_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_inner_rad_textbox.setValidator(validator)
-        self.set_all_constr_element_inner_rad_textbox.setText(dummy_writable)
         self.set_all_constr_element_inner_rad_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_outer_con_label = QtGui.QLabel(
                                                         "Outer_convection")
         self.set_all_constr_element_outer_con_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_outer_con_textbox.setValidator(validator)
-        self.set_all_constr_element_outer_con_textbox.setText(dummy_writable)
         self.set_all_constr_element_outer_con_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_outer_rad_label = QtGui.QLabel(
                                                         "Outer_radiation")
         self.set_all_constr_element_outer_rad_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_outer_rad_textbox.setValidator(validator)
-        self.set_all_constr_element_outer_rad_textbox.setText(dummy_writable)
         self.set_all_constr_element_outer_rad_textbox.setMaximumHeight(24)
         self.set_all_constr_save_cancel_layout = QtGui.QGridLayout()
         self.set_all_constr_save_cancel_layout_GroupBox = QtGui.QGroupBox()
