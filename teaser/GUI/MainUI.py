@@ -1116,7 +1116,7 @@ class MainUI(QDialog):
     def save_input_values_set_all_constr(self):
 
         bldg = self.current_building
-        orientation = str(self.guiinfo.orientations_strings[
+        orientation = int(self.guiinfo.orientations_strings[
                     self.set_all_constr_element_orientation_textbox.text()])
         element_type = self.set_all_constr_element_type_textbox.text()
         if(element_type == "Outer Wall"):
