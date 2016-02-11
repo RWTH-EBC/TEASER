@@ -1113,6 +1113,27 @@ class MainUI(QDialog):
                             self.element_uvalue_textbox.text()
                         break
 
+    def save_input_values_set_all_constr(self):
+
+        bldg = self.current_building
+        orientation = str(self.guiinfo.orientations_strings[
+                    self.set_all_constr_element_orientation_textbox.text()])
+        element_type = self.set_all_constr_element_type_textbox.text()
+        if(element_type == "Outer Wall"):
+            element_type = "OuterWall"
+        id = float(self.set_all_constr_element_id_textbox.text())
+        tilt = float(self.set_all_constr_element_tilt_textbox.text())
+        inner_con = float(self.set_all_constr_element_inner_con_textbox.text())
+        inner_rad = float(self.set_all_constr_element_inner_rad_textbox.text())
+        outer_con = float(self.set_all_constr_element_outer_con_textbox.text())
+        outer_rad = float(self.set_all_constr_element_outer_rad_textbox.text())
+        layer_set = "nothing"
+
+        Controller.click_change_all_constr(bldg, orientation, element_type,
+                                           tilt, inner_con, inner_rad,
+                                           outer_con, outer_rad, layer_set)
+        self.display_current_building()
+
     def switch_type_building(self):
         '''After changing the index of the combobox this function replaces
         the controls to fit the current type building.
@@ -2860,7 +2881,6 @@ class MainUI(QDialog):
         self.create_new_element_ui_page.show()
 
     def create_new_envelope_ui(self):
-        dummy = "dummy"
         dummy_writable = "is writable "
         self.create__envelope_ui = QtGui.QWizardPage()
         self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -2891,8 +2911,10 @@ class MainUI(QDialog):
         self.set_all_constr_element_layout_groupBox.setLayout(
             self.set_all_constr_element_layout)
 
+        validator = QtGui.QDoubleValidator()
+
         self.set_all_constr_element_bldg_label = QtGui.QLabel("Building")
-        self.set_all_constr_element_bldg_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_bldg_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_bldg_textbox.setText(
                                                     self.current_building.name)
         self.set_all_constr_element_bldg_textbox.setReadOnly(True)
@@ -2900,54 +2922,58 @@ class MainUI(QDialog):
 
         self.set_all_constr_element_orientation_label = QtGui.QLabel(
                                                                  "Orientation")
-        self.set_all_constr_element_orientation_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_orientation_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_orientation_textbox.setText(
                             self.envelope_orientation_combobox.currentText())
         self.set_all_constr_element_orientation_textbox.setReadOnly(True)
         self.set_all_constr_element_orientation_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_type_label = QtGui.QLabel("Type")
-        self.set_all_constr_element_type_textbox = QtGui.QTextEdit()
-
+        self.set_all_constr_element_type_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_type_textbox.setText(
                                             self.envelope_name_textbox.text())
         self.set_all_constr_element_type_textbox.setReadOnly(True)
         self.set_all_constr_element_type_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_id_label = QtGui.QLabel("ID")
-        self.set_all_constr_element_id_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_id_textbox = QtGui.QLineEdit()
+        self.set_all_constr_element_id_textbox.setValidator(validator)
         self.set_all_constr_element_id_textbox.setText(dummy_writable)
         self.set_all_constr_element_id_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_tilt_label = QtGui.QLabel("Tilt")
-        self.set_all_constr_element_tilt_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_tilt_textbox = QtGui.QLineEdit()
+        self.set_all_constr_element_tilt_textbox.setValidator(validator)
         self.set_all_constr_element_tilt_textbox.setText(dummy_writable)
         self.set_all_constr_element_tilt_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_inner_con_label = QtGui.QLabel(
                                                         "Inner_convection")
-        self.set_all_constr_element_inner_con_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_inner_con_textbox = QtGui.QLineEdit()
+        self.set_all_constr_element_inner_con_textbox.setValidator(validator)
         self.set_all_constr_element_inner_con_textbox.setText(dummy_writable)
         self.set_all_constr_element_inner_con_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_inner_rad_label = QtGui.QLabel(
                                                         "Inner_radiation")
-        self.set_all_constr_element_inner_rad_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_inner_rad_textbox = QtGui.QLineEdit()
+        self.set_all_constr_element_inner_rad_textbox.setValidator(validator)
         self.set_all_constr_element_inner_rad_textbox.setText(dummy_writable)
         self.set_all_constr_element_inner_rad_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_outer_con_label = QtGui.QLabel(
                                                         "Outer_convection")
-        self.set_all_constr_element_outer_con_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_outer_con_textbox = QtGui.QLineEdit()
+        self.set_all_constr_element_outer_con_textbox.setValidator(validator)
         self.set_all_constr_element_outer_con_textbox.setText(dummy_writable)
         self.set_all_constr_element_outer_con_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_outer_rad_label = QtGui.QLabel(
                                                         "Outer_radiation")
-        self.set_all_constr_element_outer_rad_textbox = QtGui.QTextEdit()
+        self.set_all_constr_element_outer_rad_textbox = QtGui.QLineEdit()
+        self.set_all_constr_element_outer_rad_textbox.setValidator(validator)
         self.set_all_constr_element_outer_rad_textbox.setText(dummy_writable)
         self.set_all_constr_element_outer_rad_textbox.setMaximumHeight(24)
-
         self.set_all_constr_save_cancel_layout = QtGui.QGridLayout()
         self.set_all_constr_save_cancel_layout_GroupBox = QtGui.QGroupBox()
         self.set_all_constr_save_cancel_layout_GroupBox.setLayout(
@@ -2981,9 +3007,10 @@ class MainUI(QDialog):
 
         self.set_all_constr_save_button = QtGui.QPushButton()
         self.set_all_constr_save_button.setText("Save")
-        """
+
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
-                     self.save_changed_element_values)
+                     self.save_input_values_set_all_constr)
+        """
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.update_zone_details)
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
