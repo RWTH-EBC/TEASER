@@ -1121,7 +1121,6 @@ class MainUI(QDialog):
         element_type = self.set_all_constr_element_type_textbox.text()
         if(element_type == "Outer Wall"):
             element_type = "OuterWall"
-        id = float(self.set_all_constr_element_id_textbox.text())
         tilt = float(self.set_all_constr_element_tilt_textbox.text())
         inner_con = float(self.set_all_constr_element_inner_con_textbox.text())
         inner_rad = float(self.set_all_constr_element_inner_rad_textbox.text())
@@ -2934,11 +2933,6 @@ class MainUI(QDialog):
         self.set_all_constr_element_type_textbox.setReadOnly(True)
         self.set_all_constr_element_type_textbox.setMaximumHeight(24)
 
-        self.set_all_constr_element_id_label = QtGui.QLabel("ID")
-        self.set_all_constr_element_id_textbox = QtGui.QLineEdit()
-        self.set_all_constr_element_id_textbox.setValidator(validator)
-        self.set_all_constr_element_id_textbox.setMaximumHeight(24)
-
         self.set_all_constr_element_tilt_label = QtGui.QLabel("Tilt")
         self.set_all_constr_element_tilt_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_tilt_textbox.setValidator(validator)
@@ -3028,35 +3022,31 @@ class MainUI(QDialog):
         self.set_all_constr_element_layout.addWidget(
             self.set_all_constr_element_type_textbox, 3, 1)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_id_label, 4, 0)
+            self.set_all_constr_element_tilt_label, 4, 0)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_id_textbox, 4, 1)
+            self.set_all_constr_element_tilt_textbox, 4, 1)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_tilt_label, 5, 0)
+            self.set_all_constr_element_inner_con_label, 5, 0)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_tilt_textbox, 5, 1)
+            self.set_all_constr_element_inner_con_textbox, 5, 1)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_inner_con_label, 6, 0)
+            self.set_all_constr_element_inner_rad_label, 6, 0)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_inner_con_textbox, 6, 1)
+            self.set_all_constr_element_inner_rad_textbox, 6, 1)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_inner_rad_label, 7, 0)
+            self.set_all_constr_element_outer_con_label, 7, 0)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_inner_rad_textbox, 7, 1)
+            self.set_all_constr_element_outer_con_textbox, 7, 1)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_outer_con_label, 8, 0)
+            self.set_all_constr_element_outer_rad_label, 8, 0)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_outer_con_textbox, 8, 1)
+            self.set_all_constr_element_outer_rad_textbox, 8, 1)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_outer_rad_label, 9, 0)
+            self.set_all_constr_element_add_material_button, 9, 0)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_outer_rad_textbox, 9, 1)
+            self.set_all_constr_element_delete_material_button, 9, 1)
         self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_add_material_button, 10, 0)
-        self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_delete_material_button, 10, 1)
-        self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_material_list_view, 11, 0, 12, 2)
+            self.set_all_constr_element_material_list_view, 10, 0, 11, 2)
 
         self.set_all_constr_save_cancel_layout.addWidget(
                                             self.set_all_constr_save_button,
