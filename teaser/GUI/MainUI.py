@@ -22,6 +22,8 @@ import os
 from teaser.Logic import Utilis
 from numpy.distutils.pathccompiler import PathScaleCCompiler
 
+from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
+from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 
 try:
     _fromUtf8 = Qt.QString.fromUtf8
@@ -74,11 +76,13 @@ class MainUI(QDialog):
                                       "location": "", "area": "", "number": "",
                                       "street": ""}
         self.temp_zones = {}
+        self.all_constr_layer_list = []
         self.zone_model = QStandardItemModel()
         self.outer_elements_model = QStandardItemModel()
         self.element_model = QStandardItemModel()
         self.layer_model = QStandardItemModel()
         self.element_layer_model = QStandardItemModel()
+        self.element_layer_model_set_all_constr = QStandardItemModel()
         self.project = Project()
         self.project.modelica_info = ModelicaInfo()
         self.guiinfo = GUIInfo()
@@ -1555,6 +1559,18 @@ class MainUI(QDialog):
                 "\nThickness:\t".expandtabs(14) + str(layer.thickness) + 
                 "\t", layer.internal_id)
             self.element_layer_model.appendRow(item)
+            
+    def update_set_all_construction(self):
+        ''' Updates the set all construction after layers have been changed 
+        
+        '''
+
+        for layer in self.all_constr_layer_list:
+            item = TrackableItem(
+                "Material:\t".expandtabs(8) + str(layer.material.name) +
+                "\nThickness:\t".expandtabs(14) + str(layer.thickness) +
+                "\t", layer.internal_id)
+            self.element_layer_model_set_all_constr.appendRow(item)
 
     def display_current_zone(self):
         ''' Updates the lists in the main window
@@ -2682,11 +2698,57 @@ class MainUI(QDialog):
             trans = float(self.new_layer_material_transmittance_textbox.text())
         else:
             trans = 1
-        self.current_element = Controller.click_add_new_layer(
-            self.current_element,
-            int(self.new_layer_position_combobox.currentText()),
-            thick, self.new_layer_material_combobox.currentText(), dens,
-            therm, heat, solar, ir, trans)
+
+        sender = self.sender()
+        if(sender.text() == self.new_layer_save_button.text()):
+            self.current_element = Controller.click_add_new_layer(
+                self.current_element,
+                int(self.new_layer_position_combobox.currentText()),
+                thick, self.new_layer_material_combobox.currentText(), dens,
+                therm, heat, solar, ir, trans)
+
+    def check_new_layer_inputs_all_constr(self):
+        ''' Adds a new layer to the current element, checks if the
+        input is correct
+
+        '''
+
+        if self.new_layerX_thickness_textbox.text() is not "":
+            thick = float(self.new_layerX_thickness_textbox.text())
+        else:
+            thick = 1
+        if self.new_layerX_material_density_textbox.text() is not "":
+            dens = float(self.new_layerX_material_density_textbox.text())
+        else:
+            dens = 1
+        if self.new_layerX_material_thermal_conduc_textbox.text() is not "":
+            therm = float(
+                self.new_layerX_material_thermal_conduc_textbox.text())
+        else:
+            therm = 1
+        if self.new_layerX_material_heat_capac_textbox.text() is not "":
+            heat = float(self.new_layerX_material_heat_capac_textbox.text())
+        else:
+            heat = 1
+        if self.new_layerX_material_solar_absorp_textbox.text() is not "":
+            solar = float(self.new_layerX_material_solar_absorp_textbox.text())
+        else:
+            solar = 1
+        if self.new_layerX_material_ir_emissivity_textbox.text() is not "":
+            ir = float(self.new_layerX_material_ir_emissivity_textbox.text())
+        else:
+            ir = 1
+        if self.new_layerX_material_transmittance_textbox.text() is not "":
+            trans = float(self.new_layerX_material_transmittance_textbox.text())
+        else:
+            trans = 1
+
+        self.all_constr_layer_list.clear()
+        self.all_constr_layer_list.append(
+            Controller.click_add_new_layer_all_constr(
+                    # int(self.new_layerX_position_combobox.currentText()),
+                    2, thick, self.new_layerX_material_combobox.currentText(),
+                    dens, therm, heat, solar, ir, trans))
 
     def create_new_project(self):
         ''' Clears everything and sets the project back to default.
@@ -2895,7 +2957,6 @@ class MainUI(QDialog):
                                               QtCore.QRect(0, 0, 60, 60))
         self.warning_message_label = QtGui.QLabel(
                                                 self.warning_message_groupbox)
-        # self.warning_message_label.setGeometry(QtCore.QRect(10, 10, 280, 40))
         self.warning_message_label.setText(
              "\n All walls with the current orientation in building will be" +
              " overwritten")
@@ -2983,8 +3044,8 @@ class MainUI(QDialog):
             QtCore.QRect(10, 200, 170, 300))
         self.set_all_constr_element_material_list_view.setObjectName(
             _fromUtf8("ElementMaterialsListView"))
-        # self.set_all_constr_element_material_list_view.setModel(
-        #                                            self.outer_elements_model)
+        self.set_all_constr_element_material_list_view.setModel(
+                                                   self.element_layer_model_set_all_constr)
         self.set_all_constr_element_material_list_view.setItemDelegate(
                                                                     self.lVZF)
         self.set_all_constr_element_material_list_view.setEditTriggers(
@@ -3210,7 +3271,7 @@ class MainUI(QDialog):
         ''' Opens the window to create a new layer.
 
         '''
-        
+
         self.create_layer_ui = QtGui.QWizardPage()
         self.create_layer_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create_layer_ui.setWindowTitle("Layer Details")
@@ -3226,7 +3287,7 @@ class MainUI(QDialog):
             QtGui.QGroupBox("Layer Values")
         self.new_layerX_general_layout_group_box.setLayout(
             self.new_layerX_general_layout)
-        
+
         self.new_layerX_position_label = QtGui.QLabel("Position")
         self.new_layerX_position_combobox = QtGui.QComboBox()
         """
@@ -3298,13 +3359,16 @@ class MainUI(QDialog):
 
         self.new_layerX_save_button = QtGui.QPushButton()
         self.new_layerX_save_button.setText("Save")
+
+        self.connect(self.new_layerX_save_button, SIGNAL(
+            "clicked()"), self.check_new_layer_inputs_all_constr)
+
+        
+        self.connect(self.new_layerX_save_button, SIGNAL(
+            "clicked()"), self.update_set_all_construction)
         """
         self.connect(self.new_layerX_save_button, SIGNAL(
-            "clicked()"), self.check_new_layer_inputs)
-        self.connect(self.new_layerX_save_button, SIGNAL(
-            "clicked()"), self.update_element_details)
-        self.connect(self.new_layerX_save_button, SIGNAL(
-            "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
+            "clicked()"), self.create_new_layer_ui_set_all_constr, QtCore.SLOT("close()"))
         """
         self.new_layerX_cancel_button = QtGui.QPushButton()
         self.new_layerX_cancel_button.setText("Cancel")
