@@ -375,12 +375,14 @@ class Building(object):
                         wall_count.orientation = new_angle - 360.0
                     else:
                         wall_count.orientation = new_angle
-            for win_count in zone_count.windows:
-                new_angle = wall_count.orientation + angle
-                if new_angle > 360.0:
-                    wall_count.orientation = new_angle - 360.0
                 else:
-                    wall_count.orientation = new_angle
+                    pass
+            for win_count in zone_count.windows:
+                new_angle = win_count.orientation + angle
+                if new_angle > 360.0:
+                    win_count.orientation = new_angle - 360.0
+                else:
+                    win_count.orientation = new_angle
 
     def create_timeline(self, duration_profile = 86400, time_step = 3600):
         ''' Creates a timeline for building boundary conditions
