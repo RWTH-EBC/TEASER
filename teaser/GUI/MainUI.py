@@ -1137,6 +1137,10 @@ class MainUI(QDialog):
                                            outer_con, outer_rad, layer_set)
         self.display_current_building()
 
+    def clear_input_values_set_all_constr(self):
+        self.element_layer_model_set_all_constr.clear()
+        self.all_constr_layer_list.clear()
+
     def switch_type_building(self):
         '''After changing the index of the combobox this function replaces
         the controls to fit the current type building.
@@ -3060,6 +3064,10 @@ class MainUI(QDialog):
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.save_input_values_set_all_constr)
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
+                     self.save_input_values_set_all_constr)        
+        self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
+                     self.clear_input_values_set_all_constr)        
+        self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.create__envelope_ui, QtCore.SLOT("close()"))
         """
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
@@ -3364,7 +3372,7 @@ class MainUI(QDialog):
         self.connect(self.new_layerX_save_button, SIGNAL(
             "clicked()"), self.check_new_layer_inputs_all_constr)
         self.connect(self.new_layerX_save_button, SIGNAL(
-            "clicked()"), self.update_set_all_construction)
+           "clicked()"), self.update_set_all_construction)
         self.connect(self.new_layerX_save_button, SIGNAL(
             "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
 
