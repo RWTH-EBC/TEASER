@@ -300,14 +300,18 @@ class Controller():
                         wall.outer_convection = outer_convection
                         wall.outer_radiation = outer_radiation
                         wall.layer = None
-                        wall.layer = layer_set
+                        for lay_count in layer_set:
+                            lay_count.parent = wall
+                            wall.layer = lay_count
                 else:
                     if wall.orientation == orientation:
                         wall.tilt = tilt
                         wall.inner_convection = inner_convection
                         wall.inner_radiation = inner_radiation
                         wall.layer = None
-                        wall.layer = layer_set
+                        for lay_count in layer_set:
+                            lay_count.parent = wall
+                            wall.layer = lay_count
             for win in zone.windows:
                 if element_type == "Window":
                     if win.orientation == orientation:
@@ -317,5 +321,7 @@ class Controller():
                         win.outer_convection = outer_convection
                         win.outer_radiation = outer_radiation
                         win.layer = None
-                        win.layer = layer_set
+                        for lay_count in layer_set:
+                            lay_count.parent = win
+                            win.layer = lay_count
                     
