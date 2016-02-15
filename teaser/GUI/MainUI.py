@@ -3361,22 +3361,18 @@ class MainUI(QDialog):
 
         self.new_layerX_save_button = QtGui.QPushButton()
         self.new_layerX_save_button.setText("Save")
-
         self.connect(self.new_layerX_save_button, SIGNAL(
             "clicked()"), self.check_new_layer_inputs_all_constr)
-
         self.connect(self.new_layerX_save_button, SIGNAL(
             "clicked()"), self.update_set_all_construction)
-
         self.connect(self.new_layerX_save_button, SIGNAL(
             "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
 
         self.new_layerX_cancel_button = QtGui.QPushButton()
         self.new_layerX_cancel_button.setText("Cancel")
-        """
         self.connect(self.new_layerX_cancel_button, SIGNAL(
             "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
-        """
+
         self.new_layerX_general_layout.addWidget(
             self.new_layerX_position_label, 1, 0)
         self.new_layerX_general_layout.addWidget(
