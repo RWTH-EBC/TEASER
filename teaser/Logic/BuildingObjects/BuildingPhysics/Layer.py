@@ -98,7 +98,3 @@ class Layer(object):
         if self.material is not None:
             if vars(self.material)['_thermal_conduc'] != 0:
                 self.parent.calc_ua_value()
-
-
-test = Layer()
-print(test.parent)
