@@ -1130,7 +1130,7 @@ class MainUI(QDialog):
         inner_rad = float(self.set_all_constr_element_inner_rad_textbox.text())
         outer_con = float(self.set_all_constr_element_outer_con_textbox.text())
         outer_rad = float(self.set_all_constr_element_outer_rad_textbox.text())
-        layer_set = "nothing"
+        layer_set = self.all_constr_layer_list
 
         Controller.click_change_all_constr(bldg, orientation, element_type,
                                            tilt, inner_con, inner_rad,
@@ -1564,7 +1564,8 @@ class MainUI(QDialog):
         ''' Updates the set all construction after layers have been changed 
         
         '''
-
+        
+        self.element_layer_model_set_all_constr.clear()
         for layer in self.all_constr_layer_list:
             item = TrackableItem(
                 "Material:\t".expandtabs(8) + str(layer.material.name) +
@@ -2743,12 +2744,12 @@ class MainUI(QDialog):
         else:
             trans = 1
 
-        self.all_constr_layer_list.clear()
         self.all_constr_layer_list.append(
             Controller.click_add_new_layer_all_constr(
                     # int(self.new_layerX_position_combobox.currentText()),
                     2, thick, self.new_layerX_material_combobox.currentText(),
                     dens, therm, heat, solar, ir, trans))
+        print("geschafft")
 
     def create_new_project(self):
         ''' Clears everything and sets the project back to default.
@@ -3290,8 +3291,8 @@ class MainUI(QDialog):
 
         self.new_layerX_position_label = QtGui.QLabel("Position")
         self.new_layerX_position_combobox = QtGui.QComboBox()
-        """
-        num_layers = len(self.current_element.layer) + 1
+        
+        num_layers = len(self.all_constr_layer_list) + 1
         if num_layers > 1:
             for x in range(0, num_layers):
                 self.new_layerX_position_combobox.addItem(
@@ -3300,7 +3301,7 @@ class MainUI(QDialog):
             self.new_layerX_position_combobox.addItem(
                 "0", userData=None)
         self.new_layerX_position_combobox.setCurrentIndex(num_layers - 1)
-        """
+    
         validator = QtGui.QDoubleValidator()
         self.new_layerX_thickness_label = QtGui.QLabel("Layer Thickness")
         self.new_layerX_thickness_textbox = QtGui.QLineEdit()
@@ -3363,7 +3364,6 @@ class MainUI(QDialog):
         self.connect(self.new_layerX_save_button, SIGNAL(
             "clicked()"), self.check_new_layer_inputs_all_constr)
 
-        
         self.connect(self.new_layerX_save_button, SIGNAL(
             "clicked()"), self.update_set_all_construction)
         """
