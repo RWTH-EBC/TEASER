@@ -28,6 +28,10 @@
 #####################
 .spyderproject
 
+#PyCharm Settings #
+#####################
+.idea
+
 #Unit tests #
 #####################
 .cache/
