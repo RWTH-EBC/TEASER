@@ -48,7 +48,6 @@ def main():
     info_list = read_XMLs(input_path)
 
     prj = create_reference_project(info_list)
-    print(os.path.join(output_path, 'Reference'))
     prj.export_record(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=False,
