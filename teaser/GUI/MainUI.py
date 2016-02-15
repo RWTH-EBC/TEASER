@@ -3367,10 +3367,10 @@ class MainUI(QDialog):
 
         self.connect(self.new_layerX_save_button, SIGNAL(
             "clicked()"), self.update_set_all_construction)
-        """
+
         self.connect(self.new_layerX_save_button, SIGNAL(
-            "clicked()"), self.create_new_layer_ui_set_all_constr, QtCore.SLOT("close()"))
-        """
+            "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
+
         self.new_layerX_cancel_button = QtGui.QPushButton()
         self.new_layerX_cancel_button.setText("Cancel")
         """
