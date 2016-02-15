@@ -640,7 +640,7 @@ class Project(object):
             all buildings will be exported
         path : string
             if the Files should not be stored in OutputData, an alternative
-            path can be specified
+            path can be specified as a full and absolute path
 
         '''
         #check the arguments
