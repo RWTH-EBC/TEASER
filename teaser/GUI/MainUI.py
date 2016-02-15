@@ -3059,11 +3059,12 @@ class MainUI(QDialog):
 
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.save_input_values_set_all_constr)
+        self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
+                     self.create__envelope_ui, QtCore.SLOT("close()"))
         """
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.update_zone_details)
-        self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
-                     self.element_build_ui, QtCore.SLOT("close()"))
+
         """
 
         self.set_all_constr_cancel_button = QtGui.QPushButton()
