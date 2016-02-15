@@ -711,11 +711,6 @@ class BuildingElement(object):
             else:
                 raise ValueError("Specify year of construction first")
 
-        if self.parent.parent.parent.data is not None \
-                and self.construction_type is not None:
-            self.load_type_element(self.year_of_retrofit, self.construction_type)
-        else:
-            pass
 
     @property
     def orientation(self):
@@ -894,6 +889,7 @@ class BuildingElement(object):
                 self.inner_radiation is not None and\
                 self.area is not None:
             self.calc_ua_value()
+
     @property
     def tilt(self):        
         return self._tilt
@@ -930,11 +926,6 @@ class BuildingElement(object):
             except:
                 raise ValueError("Can't convert year to int")
 
-        if self.parent.parent.parent.data is not None\
-                and self.construction_type is not None:
-            self.load_type_element(self.year_of_construction, self.construction_type)
-        else:
-            pass
 
     @property
     def construction_type(self):
