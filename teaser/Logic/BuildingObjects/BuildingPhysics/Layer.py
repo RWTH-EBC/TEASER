@@ -95,6 +95,7 @@ class Layer(object):
 
         if value is not None:
             self._thickness = float(value)
-        if self.material is not None:
+
+        if self.material is not None and self.parent is not None:
             if vars(self.material)['_thermal_conduc'] != 0:
                 self.parent.calc_ua_value()
