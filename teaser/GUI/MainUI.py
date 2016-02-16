@@ -3468,7 +3468,7 @@ class MainUI(QDialog):
         ''' Opens a window to see all attributes from the
         currently selected layer.        
         '''
-        
+
         self.layer_build_ui = QtGui.QWizardPage()
         self.layer_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.layer_build_ui.setWindowTitle("Layer Details")
@@ -3555,10 +3555,9 @@ class MainUI(QDialog):
 
         self.layer_save_button = QtGui.QPushButton()
         self.layer_save_button.setText("Save")
-        """
+
         self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.save_changed_layer_values)
-        """
+            "clicked()"), self.save_changed_layer_values_set_all_constr)
         self.connect(self.layer_save_button, SIGNAL(
             "clicked()"), self.update_set_all_construction)
         self.connect(self.layer_save_button, SIGNAL(
