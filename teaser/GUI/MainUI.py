@@ -2226,6 +2226,7 @@ class MainUI(QDialog):
                 self.set_all_constr_element_material_list_view.currentIndex())
             for current_layer in self.all_constr_layer_list:
                 if (current_layer.internal_id == item.internal_id):
+
                     ind = self.all_constr_layer_list.index(current_layer)
                     del self.all_constr_layer_list[ind]
                     self.update_set_all_construction()
@@ -2764,9 +2765,9 @@ class MainUI(QDialog):
             trans = 1
 
         self.all_constr_layer_list.append(
-            Controller.click_add_new_layer_all_constr(
-                    # int(self.new_layerX_position_combobox.currentText()),
-                    2, thick, self.new_layerX_material_combobox.currentText(),
+            Controller.click_add_new_layer(
+                    None, int(self.new_layerX_position_combobox.currentText()),
+                    thick, self.new_layerX_material_combobox.currentText(),
                     dens, therm, heat, solar, ir, trans))
 
     def create_new_project(self):
@@ -3080,16 +3081,9 @@ class MainUI(QDialog):
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.save_input_values_set_all_constr)
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
-                     self.save_input_values_set_all_constr)
-        self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.clear_input_values_set_all_constr)
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.create__envelope_ui, QtCore.SLOT("close()"))
-        """
-        self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
-                     self.update_zone_details)
-
-        """
 
         self.set_all_constr_cancel_button = QtGui.QPushButton()
         self.set_all_constr_cancel_button.setText("Cancel")
