@@ -40,8 +40,10 @@ model ${bldg.name}
     Mass_frac=true,
     Sky_rad=true,
     Ter_rad=true,
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"),
+    % if weather:
+      fileName= "${weather}",
+      tableName= "${weather_header}",
+    % endif
     % if bldg.latitude is None:
       Latitude=49.5,
     % else:
@@ -144,8 +146,10 @@ end ${bldg.name};
     Mass_frac=true,
     Sky_rad=true,
     Ter_rad=true,
-    fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"),
+    % if weather:
+      fileName= "${weather}",
+      tableName= "${weather_header}",
+    % endif
     % if bldg.latitude is None:
       Latitude=49.5,
     % else:
