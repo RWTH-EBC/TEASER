@@ -225,6 +225,8 @@ class BuildingElement(object):
 
         assert self.parent.parent.parent is not None, ass_error_1
 
+        self.year_of_construction = year
+
         if type(self).__name__ == 'OuterWall':
 
             for out_wall in self.parent.parent.parent.\
@@ -356,7 +358,6 @@ class BuildingElement(object):
             Pyxb class represantation of xml
         '''
 
-        self.year_of_construction = pyxb_class.year_of_construction
         self.building_age_group = pyxb_class.building_age_group
         self.construction_type = pyxb_class.construction_type
         self.inner_radiation = pyxb_class.inner_radiation
@@ -562,7 +563,6 @@ class BuildingElement(object):
         '''
 
         pyxb_class.building_age_group = self.building_age_group
-        pyxb_class.year_of_construction = self.year_of_construction
         pyxb_class.construction_type = self.construction_type
 
         pyxb_class.inner_radiation = self.inner_radiation
