@@ -2220,6 +2220,21 @@ class MainUI(QDialog):
                                       u"No layer selected",
                                       u"You need to select a layer first.")
 
+    def delete_selected_layer_set_all_constr(self):
+        try:
+            item = self.element_layer_model_set_all_constr.itemFromIndex(
+                self.set_all_constr_element_material_list_view.currentIndex())
+            for current_layer in self.all_constr_layer_list:
+                if (current_layer.internal_id == item.internal_id):
+                    ind = self.all_constr_layer_list.index(current_layer)
+                    del self.all_constr_layer_list[ind]
+                    self.update_set_all_construction()
+
+        except (ValueError, AttributeError):
+            QtGui.QMessageBox.warning(self,
+                                      u"No layer selected",
+                                      u"You need to select a layer first.")
+
     def edit_building(self):
         ''' Goes into edit mode and darkens the uneditable parts.
         '''
@@ -2753,7 +2768,6 @@ class MainUI(QDialog):
                     # int(self.new_layerX_position_combobox.currentText()),
                     2, thick, self.new_layerX_material_combobox.currentText(),
                     dens, therm, heat, solar, ir, trans))
-        print("geschafft")
 
     def create_new_project(self):
         ''' Clears everything and sets the project back to default.
@@ -3042,8 +3056,9 @@ class MainUI(QDialog):
         self.set_all_constr_element_delete_material_button = QtGui.QPushButton()
         self.set_all_constr_element_delete_material_button.setText(
                                                                 "Delete Layer")
-        # self.connect(self.set_all_constr_element_delete_material_button,
-        #             SIGNAL("clicked()"), self.delete_selected_layer)
+        self.connect(self.set_all_constr_element_delete_material_button,
+                     SIGNAL("clicked()"), 
+                     self.delete_selected_layer_set_all_constr)
 
         self.set_all_constr_element_material_list_view = QtGui.QListView()
         self.set_all_constr_element_material_list_view.setGeometry(
