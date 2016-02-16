@@ -1804,12 +1804,29 @@ class MainUI(QDialog):
 
             for orientation in self.guiinfo.orientations_numbers.keys():
                 if self.current_building.get_outer_wall_area(orientation) != 0:
-                    item1 = QStandardItem(
-                        "Outer Wall \nOrientation:\t" +
-                        str(self.guiinfo.orientations_numbers[orientation]) +
-                        "\t".expandtabs(12) + "\n" + " Area: " +
-                        str(self.current_building.
-                            get_outer_wall_area(orientation)))
+                    if orientation == -1:
+                        item1 = QStandardItem(
+                         "Rooftop \nOrientation:\t" +
+                         str(self.guiinfo.orientations_numbers[orientation]) +
+                         "\t".expandtabs(12) + "\n" + " Area: " +
+                         str(self.current_building.
+                             get_outer_wall_area(orientation)))
+
+                    elif orientation == -2:
+                        item1 = QStandardItem(
+                         "Floor \nOrientation:\t" +
+                         str(self.guiinfo.orientations_numbers[orientation]) +
+                         "\t".expandtabs(12) + "\n" + " Area: " +
+                         str(self.current_building.
+                             get_outer_wall_area(orientation)))
+                    else:
+                        item1 = QStandardItem(
+                         "Outer Wall \nOrientation:\t" +
+                         str(self.guiinfo.orientations_numbers[orientation]) +
+                         "\t".expandtabs(12) + "\n" + " Area: " +
+                         str(self.current_building.
+                             get_outer_wall_area(orientation)))
+
                     self.outer_elements_model.appendRow(item1)
 
                 if self.current_building.get_window_area(orientation) != 0:
@@ -1877,15 +1894,33 @@ class MainUI(QDialog):
                     str(zone.area), zone.internal_id)
                 self.zone_model.appendRow(item)
 
-            for orientation in self.guiinfo.orientations_numbers.keys():               
+            for orientation in self.guiinfo.orientations_numbers.keys():
                 if self.current_building.get_outer_wall_area(orientation) != 0:
-                    item1 = QStandardItem(
-                        "Outer Wall \nOrientation:\t" +
-                        str(self.guiinfo.orientations_numbers[orientation]) +
-                        "\t".expandtabs(12) + "\n" + " Area: " +
-                        str(self.current_building.
-                            get_outer_wall_area(orientation)))
+                    if orientation == -1:
+                        item1 = QStandardItem(
+                         "Rooftop \nOrientation:\t" +
+                         str(self.guiinfo.orientations_numbers[orientation]) +
+                         "\t".expandtabs(12) + "\n" + " Area: " +
+                         str(self.current_building.
+                             get_outer_wall_area(orientation)))
+
+                    elif orientation == -2:
+                        item1 = QStandardItem(
+                         "Floor \nOrientation:\t" +
+                         str(self.guiinfo.orientations_numbers[orientation]) +
+                         "\t".expandtabs(12) + "\n" + " Area: " +
+                         str(self.current_building.
+                             get_outer_wall_area(orientation)))
+                    else:
+                        item1 = QStandardItem(
+                         "Outer Wall \nOrientation:\t" +
+                         str(self.guiinfo.orientations_numbers[orientation]) +
+                         "\t".expandtabs(12) + "\n" + " Area: " +
+                         str(self.current_building.
+                             get_outer_wall_area(orientation)))
+
                     self.outer_elements_model.appendRow(item1)
+
                 if self.current_building.get_window_area(orientation) != 0:
                     item2 = QStandardItem(
                         "Window \nOrientation:\t" +
