@@ -3036,7 +3036,8 @@ class MainUI(QDialog):
         self.set_all_constr_element_add_material_button = QtGui.QPushButton()
         self.set_all_constr_element_add_material_button.setText("Add Layer")
         self.connect(self.set_all_constr_element_add_material_button,
-                     SIGNAL("clicked()"), self.create_new_layer_ui_set_all_constr)
+                     SIGNAL("clicked()"),
+                     self.create_new_layer_ui_set_all_constr)
 
         self.set_all_constr_element_delete_material_button = QtGui.QPushButton()
         self.set_all_constr_element_delete_material_button.setText(
@@ -3050,7 +3051,7 @@ class MainUI(QDialog):
         self.set_all_constr_element_material_list_view.setObjectName(
             _fromUtf8("ElementMaterialsListView"))
         self.set_all_constr_element_material_list_view.setModel(
-                                                   self.element_layer_model_set_all_constr)
+                                    self.element_layer_model_set_all_constr)
         self.set_all_constr_element_material_list_view.setItemDelegate(
                                                                     self.lVZF)
         self.set_all_constr_element_material_list_view.setEditTriggers(
@@ -3064,9 +3065,9 @@ class MainUI(QDialog):
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.save_input_values_set_all_constr)
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
-                     self.save_input_values_set_all_constr)        
+                     self.save_input_values_set_all_constr)
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
-                     self.clear_input_values_set_all_constr)        
+                     self.clear_input_values_set_all_constr)
         self.connect(self.set_all_constr_save_button, SIGNAL("clicked()"),
                      self.create__envelope_ui, QtCore.SLOT("close()"))
         """
@@ -3077,6 +3078,8 @@ class MainUI(QDialog):
 
         self.set_all_constr_cancel_button = QtGui.QPushButton()
         self.set_all_constr_cancel_button.setText("Cancel")
+        self.connect(self.set_all_constr_cancel_button, SIGNAL("clicked()"),
+                     self.clear_input_values_set_all_constr)
         self.connect(self.set_all_constr_cancel_button, SIGNAL("clicked()"),
                      self.create__envelope_ui, QtCore.SLOT("close()"))
 
@@ -3300,7 +3303,7 @@ class MainUI(QDialog):
 
         self.new_layerX_position_label = QtGui.QLabel("Position")
         self.new_layerX_position_combobox = QtGui.QComboBox()
-        
+
         num_layers = len(self.all_constr_layer_list) + 1
         if num_layers > 1:
             for x in range(0, num_layers):
@@ -3310,7 +3313,7 @@ class MainUI(QDialog):
             self.new_layerX_position_combobox.addItem(
                 "0", userData=None)
         self.new_layerX_position_combobox.setCurrentIndex(num_layers - 1)
-    
+
         validator = QtGui.QDoubleValidator()
         self.new_layerX_thickness_label = QtGui.QLabel("Layer Thickness")
         self.new_layerX_thickness_textbox = QtGui.QLineEdit()
@@ -3425,7 +3428,7 @@ class MainUI(QDialog):
         self.create_layer_ui_window_layout.addWidget(
             self.new_layerX_general_layout_group_box)
         self.create_layer_ui.setWindowModality(Qt.ApplicationModal)
-        self.create_layer_ui.show()    
+        self.create_layer_ui.show()
     
 
     def show_layer_build_ui(self, item):
