@@ -642,16 +642,20 @@ def set_basic_data_teaser(pyxb_class, element):
         teaser class representation of a building element
 
     '''
-    if type(element).__name__ == 'OuterWall' or \
-            type(element).__name__ == 'Rooftop':
 
+    if pyxb_class.year_of_construction is not None:
         element.year_of_construction = pyxb_class.year_of_construction
+    if pyxb_class.year_of_retrofit is not None:
         element.year_of_retrofit = pyxb_class.year_of_retrofit
+    if pyxb_class.construction_type is not None:
         element.construction_type = pyxb_class.construction_type
 
-        element.area = pyxb_class.area
-        element.tilt = pyxb_class.tilt
-        element.orientation = pyxb_class.orientation
+    element.area = pyxb_class.area
+    element.tilt = pyxb_class.tilt
+    element.orientation = pyxb_class.orientation
+
+    if type(element).__name__ == 'OuterWall' or \
+            type(element).__name__ == 'Rooftop':
 
         element.inner_radiation = pyxb_class.inner_radiation
         element.inner_convection = pyxb_class.inner_convection
@@ -663,26 +667,10 @@ def set_basic_data_teaser(pyxb_class, element):
             type(element).__name__ == 'Floor' or \
             type(element).__name__ == 'GroundFloor':
 
-        element.year_of_construction = pyxb_class.year_of_construction
-        element.year_of_retrofit = pyxb_class.year_of_retrofit
-        element.construction_type = pyxb_class.construction_type
-
-        element.area = pyxb_class.area
-        element.tilt = pyxb_class.tilt
-        element.orientation = pyxb_class.orientation
-
         element.inner_radiation = pyxb_class.inner_radiation
         element.inner_convection = pyxb_class.inner_convection
 
     elif type(element).__name__ == 'Window':
-
-        element.year_of_construction = pyxb_class.year_of_construction
-        element.year_of_retrofit = pyxb_class.year_of_retrofit
-        element.construction_type = pyxb_class.construction_type
-
-        element.area = pyxb_class.area
-        element.tilt = pyxb_class.tilt
-        element.orientation = pyxb_class.orientation
 
         element.inner_radiation = pyxb_class.inner_radiation
         element.inner_convection = pyxb_class.inner_convection
