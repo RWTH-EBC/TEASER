@@ -49,29 +49,10 @@ class Controller():
         mat.ir_emissivity = ir
         mat.transmittance = trans
         layer.thickness = thick
-        return parent
-
-    @classmethod
-    def click_add_new_layer_all_constr(self, id, thick, mat_nam, den, therm, heat,
-                            solar, ir, trans):
-
-        #layer = Layer(otwall)
-        bldg = Building()
-        therm = ThermalZone(bldg)
-        otwall = OuterWall(therm)
-        layer = Layer(otwall)
-        layer.id = id
-        mat = Material(layer)
-        mat.name = mat_nam
-        mat.density = den
-        mat.thermal_conduc = therm
-        mat.heat_capac = heat
-        mat.solar_absorp = solar
-        mat.ir_emissivity = ir
-        mat.transmittance = trans
-        layer.thickness = thick
-        return layer
-
+        if parent is None:
+            return layer
+        else:
+            return parent
 
     @classmethod
     def click_add_zone_button(self, parent, name, area, zone_type):
