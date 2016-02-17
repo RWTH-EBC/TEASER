@@ -1162,6 +1162,7 @@ class MainUI(QDialog):
         Controller.click_change_all_constr(bldg, orientation, element_type,
                                            tilt, inner_con, inner_rad,
                                            outer_con, outer_rad, layer_set)
+        self.display_current_building()
 
     def clear_input_values_set_all_constr(self):
         self.element_layer_model_set_all_constr.clear()
@@ -3089,7 +3090,7 @@ class MainUI(QDialog):
         self.set_all_constr_element_type_label = QtGui.QLabel("Type")
         self.set_all_constr_element_type_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_type_textbox.setText(
-                                            self.envelope_name_textbox.text())
+                                            self.envelope_type_textbox.text())
         self.set_all_constr_element_type_textbox.setReadOnly(True)
         self.set_all_constr_element_type_textbox.setMaximumHeight(24)
 
@@ -4227,16 +4228,17 @@ class MainUI(QDialog):
         self.general_envelope_values_groupbox.setLayout(
                                       self.general_envelope_values_layout)
 
-        self.envelope_name_label = QtGui.QLabel("Name")
-        self.envelope_name_textbox = QtGui.QLineEdit()
-        self.envelope_name_textbox.setObjectName(_fromUtf8(
+        self.envelope_type_label = QtGui.QLabel("Type")
+        self.envelope_type_textbox = QtGui.QLineEdit()
+        self.envelope_type_textbox.setObjectName(_fromUtf8(
                                                 u"EnvelopeNameTextBox"))
+        self.envelope_type_textbox.setReadOnly(True)
 
         self.envelope_area_label = QtGui.QLabel("Area")
         self.envelope_area_textbox = QtGui.QLineEdit()
         self.envelope_area_textbox.setObjectName(_fromUtf8(
                                                 u"EnvelopeAreaTextBox"))
-        # self.envelope_area_textbox.setReadOnly(True)
+
 
         self.envelope_orientation_label = QtGui.QLabel("Orientation")
         self.envelope_orientation_combobox = QtGui.QComboBox()
@@ -4251,35 +4253,35 @@ class MainUI(QDialog):
         listOfCurItem = string_current_item.split()
         self.current_envelope = string_current_item
         if string_current_item.startswith("Outer Wall"):
-            self.envelope_name_textbox.setText(str("Outer Wall"))
+            self.envelope_type_textbox.setText(str("Outer Wall"))
             self.envelope_area_textbox.setText(str(listOfCurItem[5]))
             self.envelope_orientation_combobox.setCurrentIndex(
                 self.envelope_orientation_combobox.findText(
                     str(listOfCurItem[3])))
 
         elif string_current_item.startswith("Rooftop"):
-            self.envelope_name_textbox.setText(str("Rooftop"))
+            self.envelope_type_textbox.setText(str("Rooftop"))
             self.envelope_area_textbox.setText(str(listOfCurItem[4]))
             self.envelope_orientation_combobox.setCurrentIndex(
             self.envelope_orientation_combobox.findText(str(listOfCurItem[2])))
 
         elif string_current_item.startswith("Ground Floor"):
-            self.envelope_name_textbox.setText(str("Ground Floor"))
+            self.envelope_type_textbox.setText(str("Ground Floor"))
             self.envelope_area_textbox.setText(str(listOfCurItem[5]))
             self.envelope_orientation_combobox.setCurrentIndex(
             self.envelope_orientation_combobox.findText(str(listOfCurItem[3])))
 
         elif string_current_item.startswith("Window"):
-            self.envelope_name_textbox.setText(str("Window"))
+            self.envelope_type_textbox.setText(str("Window"))
             self.envelope_area_textbox.setText(str(listOfCurItem[4]))
             self.envelope_orientation_combobox.setCurrentIndex(
                 self.envelope_orientation_combobox.findText(
                     str(listOfCurItem[2])))
 
         self.general_envelope_values_layout.addWidget(
-                                    self.envelope_name_label, 1, 0)
+                                    self.envelope_type_label, 1, 0)
         self.general_envelope_values_layout.addWidget(
-                            self.envelope_name_textbox, 1, 1)
+                            self.envelope_type_textbox, 1, 1)
         self.general_envelope_values_layout.addWidget(
                                     self.envelope_orientation_label, 2, 0)
         self.general_envelope_values_layout.addWidget(
