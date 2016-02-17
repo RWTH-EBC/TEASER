@@ -595,7 +595,7 @@ class Project(object):
 
         citygml.save_gml(self, new_path)
 
-    def export_record(self, building_model=None, zone_model=None,
+    def export_record(self, building_model="None", zone_model="None",
                       corG=None, internal_id=None, path=None):
         '''Exports values to a record file for Modelica simulation
 
@@ -619,8 +619,8 @@ class Project(object):
 
         '''
         #check the arguments
-        assert(building_model) in [None, "MultizoneEquipped", "Multizone"]
-        assert(zone_model) in [None, "ThermalZoneEquipped", "ThermalZone"]
+        assert(building_model) in ["None", "MultizoneEquipped", "Multizone"]
+        assert(zone_model) in ["None", "ThermalZoneEquipped", "ThermalZone"]
         assert(corG) in [None, True, False]
         if path is None:
             path = utilis.get_default_path() + "\\" + self.name
@@ -667,7 +667,8 @@ class Project(object):
             exported_list_of_buildings = self.list_of_buildings
 
         # here we diff between zonerecord export and full model support
-        if building_model and zone_model and corG is not None:
+        if building_model != "None" and zone_model != "None" and\
+            corG is not None:
             # full model support here
             print("full model support")
 
@@ -729,7 +730,8 @@ class Project(object):
                   out_file.close()
 
 
-        elif building_model is None and zone_model is None and corG is None:
+        elif building_model == "None" and zone_model == "None" and\
+            corG is None:
             # only export the baserecords
             self._help_package(path, self.name, uses)
             self._help_package_order(path, exported_list_of_buildings)
