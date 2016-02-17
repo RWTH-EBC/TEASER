@@ -4200,11 +4200,11 @@ class MainUI(QDialog):
         self.envelope_element_save_button.setText("Save")
 
         self.envelope_element_cancel_button = QtGui.QPushButton()
-        self.envelope_element_cancel_button.setText("cancel")
+        self.envelope_element_cancel_button.setText("Cancel")
 
         self.envelope_element_set_all_construction_button = QtGui.QPushButton()
         self.envelope_element_set_all_construction_button.setText(
-                                                        "set all construction")
+                                                        "Set all construction")
         self.connect(self.envelope_element_save_button, SIGNAL(
            "clicked()"), self.save_changed_envelopes_values)
         self.connect(self.envelope_element_save_button, SIGNAL(
@@ -4216,9 +4216,9 @@ class MainUI(QDialog):
         self.save_cancel_layout.addWidget(
                     self.envelope_element_save_button, 0, 0)
         self.save_cancel_layout.addWidget(
-                    self.envelope_element_set_all_construction_button, 0, 1)
+                    self.envelope_element_cancel_button, 0, 1)
         self.save_cancel_layout.addWidget(
-                    self.envelope_element_cancel_button, 0, 2)
+            self.envelope_element_set_all_construction_button, 1, 0, 1, 0)
 
         self.general_envelope_values_groupbox = QtGui.QGroupBox(
                                                  u"General Envelope Values")
