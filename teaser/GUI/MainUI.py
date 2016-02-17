@@ -3100,25 +3100,25 @@ class MainUI(QDialog):
         self.set_all_constr_element_tilt_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_inner_con_label = QtGui.QLabel(
-                                                        "Inner_convection")
+                                                        "Inner Convection")
         self.set_all_constr_element_inner_con_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_inner_con_textbox.setValidator(validator)
         self.set_all_constr_element_inner_con_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_inner_rad_label = QtGui.QLabel(
-                                                        "Inner_radiation")
+                                                        "Inner Radiation")
         self.set_all_constr_element_inner_rad_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_inner_rad_textbox.setValidator(validator)
         self.set_all_constr_element_inner_rad_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_outer_con_label = QtGui.QLabel(
-                                                        "Outer_convection")
+                                                        "Outer Convection")
         self.set_all_constr_element_outer_con_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_outer_con_textbox.setValidator(validator)
         self.set_all_constr_element_outer_con_textbox.setMaximumHeight(24)
 
         self.set_all_constr_element_outer_rad_label = QtGui.QLabel(
-                                                        "Outer_radiation")
+                                                        "Outer Radiation")
         self.set_all_constr_element_outer_rad_textbox = QtGui.QLineEdit()
         self.set_all_constr_element_outer_rad_textbox.setValidator(validator)
         self.set_all_constr_element_outer_rad_textbox.setMaximumHeight(24)
