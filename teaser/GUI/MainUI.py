@@ -1162,7 +1162,6 @@ class MainUI(QDialog):
         Controller.click_change_all_constr(bldg, orientation, element_type,
                                            tilt, inner_con, inner_rad,
                                            outer_con, outer_rad, layer_set)
-        self.display_current_building()
 
     def clear_input_values_set_all_constr(self):
         self.element_layer_model_set_all_constr.clear()
