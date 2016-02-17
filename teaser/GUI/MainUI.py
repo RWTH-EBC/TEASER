@@ -3171,7 +3171,7 @@ class MainUI(QDialog):
                      self.clear_input_values_set_all_constr)
         self.connect(self.set_all_constr_cancel_button, SIGNAL("clicked()"),
                      self.create__envelope_ui, QtCore.SLOT("close()"))
-
+        
         self.set_all_constr_element_layout.addWidget(
                 self.set_all_constr_element_bldg_label, 1, 0)
         self.set_all_constr_element_layout.addWidget(
@@ -3196,14 +3196,15 @@ class MainUI(QDialog):
             self.set_all_constr_element_inner_rad_label, 6, 0)
         self.set_all_constr_element_layout.addWidget(
             self.set_all_constr_element_inner_rad_textbox, 6, 1)
-        self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_outer_con_label, 7, 0)
-        self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_outer_con_textbox, 7, 1)
-        self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_outer_rad_label, 8, 0)
-        self.set_all_constr_element_layout.addWidget(
-            self.set_all_constr_element_outer_rad_textbox, 8, 1)
+        if self.set_all_constr_element_type_textbox.text() != "Ground Floor":
+            self.set_all_constr_element_layout.addWidget(
+                self.set_all_constr_element_outer_con_label, 7, 0)
+            self.set_all_constr_element_layout.addWidget(
+                self.set_all_constr_element_outer_con_textbox, 7, 1)
+            self.set_all_constr_element_layout.addWidget(
+                self.set_all_constr_element_outer_rad_label, 8, 0)
+            self.set_all_constr_element_layout.addWidget(
+                self.set_all_constr_element_outer_rad_textbox, 8, 1)
         self.set_all_constr_element_layout.addWidget(
             self.set_all_constr_element_add_material_button, 9, 0)
         self.set_all_constr_element_layout.addWidget(
