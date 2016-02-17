@@ -4193,34 +4193,6 @@ class MainUI(QDialog):
         self.envelopes_value_window.setLayout(
                                     self.envelopes_value_window_layout)
 
-        self.groupbox_save_cancel_buttons = QtGui.QGroupBox()
-        self.save_cancel_layout = QtGui.QGridLayout()
-        self.groupbox_save_cancel_buttons.setLayout(self.save_cancel_layout)
-
-        self.envelope_element_save_button = QtGui.QPushButton()
-        self.envelope_element_save_button.setText("Save")
-
-        self.envelope_element_cancel_button = QtGui.QPushButton()
-        self.envelope_element_cancel_button.setText("Cancel")
-
-        self.envelope_element_set_all_construction_button = QtGui.QPushButton()
-        self.envelope_element_set_all_construction_button.setText(
-                                                        "Set all construction")
-        self.connect(self.envelope_element_save_button, SIGNAL(
-           "clicked()"), self.save_changed_envelopes_values)
-        self.connect(self.envelope_element_save_button, SIGNAL(
-           "clicked()"), self.envelopes_value_window, QtCore.SLOT("close()"))
-        self.connect(self.envelope_element_cancel_button, SIGNAL(
-            "clicked()"), self.envelopes_value_window, QtCore.SLOT("close()"))
-        self.connect(self.envelope_element_set_all_construction_button, SIGNAL(
-           "clicked()"), self.create_new_envelope_ui)
-        self.save_cancel_layout.addWidget(
-                    self.envelope_element_save_button, 0, 0)
-        self.save_cancel_layout.addWidget(
-                    self.envelope_element_cancel_button, 0, 1)
-        self.save_cancel_layout.addWidget(
-            self.envelope_element_set_all_construction_button, 1, 0, 1, 0)
-
         self.general_envelope_values_groupbox = QtGui.QGroupBox(
                                                  u"General Envelope Values")
         self.general_envelope_values_groupbox.setGeometry(
@@ -4278,6 +4250,34 @@ class MainUI(QDialog):
             self.envelope_orientation_combobox.setCurrentIndex(
                 self.envelope_orientation_combobox.findText(
                     str(listOfCurItem[2])))
+
+        self.groupbox_save_cancel_buttons = QtGui.QGroupBox()
+        self.save_cancel_layout = QtGui.QGridLayout()
+        self.groupbox_save_cancel_buttons.setLayout(self.save_cancel_layout)
+
+        self.envelope_element_save_button = QtGui.QPushButton()
+        self.envelope_element_save_button.setText("Save")
+
+        self.envelope_element_cancel_button = QtGui.QPushButton()
+        self.envelope_element_cancel_button.setText("Cancel")
+
+        self.envelope_element_set_all_construction_button = QtGui.QPushButton()
+        self.envelope_element_set_all_construction_button.setText(
+                                                        "Set all construction")
+        self.connect(self.envelope_element_save_button, SIGNAL(
+           "clicked()"), self.save_changed_envelopes_values)
+        self.connect(self.envelope_element_save_button, SIGNAL(
+           "clicked()"), self.envelopes_value_window, QtCore.SLOT("close()"))
+        self.connect(self.envelope_element_cancel_button, SIGNAL(
+            "clicked()"), self.envelopes_value_window, QtCore.SLOT("close()"))
+        self.connect(self.envelope_element_set_all_construction_button, SIGNAL(
+           "clicked()"), self.create_new_envelope_ui)
+        self.save_cancel_layout.addWidget(
+                    self.envelope_element_save_button, 0, 0)
+        self.save_cancel_layout.addWidget(
+                    self.envelope_element_cancel_button, 0, 1)
+        self.save_cancel_layout.addWidget(
+            self.envelope_element_set_all_construction_button, 1, 0, 1, 0)
 
         self.general_envelope_values_layout.addWidget(
                                     self.envelope_type_label, 1, 0)
