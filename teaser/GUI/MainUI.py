@@ -2530,43 +2530,62 @@ class MainUI(QDialog):
         self.display_current_building()
 
     def save_changed_envelopes_values(self):
+        orientation_before_changing = \
+            self.envelope_orientation_before_changing
+        orientation_after_changing = \
+            self.envelope_orientation_combobox.currentText()
+        area = float(self.envelope_area_textbox.text())
         if self.current_envelope.startswith("Outer Wall"):
-            for orientation_value in self.guiinfo.orientations_numbers.keys():
-                orientation_string = str(self.guiinfo.orientations_numbers
-                                         [orientation_value])
-                if self.envelope_orientation_combobox.currentText() == \
-                        orientation_string:
-                        self.current_building.set_outer_wall_area(
-                            float(self.envelope_area_textbox.text()),
-                            orientation_value)
+            element_type = "Outer Wall"
         elif self.current_envelope.startswith("Rooftop"):
-            for orientation_value in self.guiinfo.orientations_numbers.keys():
-                orientation_string = str(self.guiinfo.orientations_numbers
-                                         [orientation_value])
-                if self.envelope_orientation_combobox.currentText() == \
-                        orientation_string:
-                        self.current_building.set_outer_wall_area(
-                            float(self.envelope_area_textbox.text()),
-                            orientation_value)
-        elif self.current_envelope.startswith("Floor"):
-            for orientation_value in self.guiinfo.orientations_numbers.keys():
-                orientation_string = str(self.guiinfo.orientations_numbers
-                                         [orientation_value])
-                if self.envelope_orientation_combobox.currentText() == \
-                        orientation_string:
-                        self.current_building.set_outer_wall_area(
-                            float(self.envelope_area_textbox.text()),
-                            orientation_value)
+            element_type = "Rooftop"
+        elif self.current_envelope.startswith("Ground Floor"):
+            element_type = "Ground Floor"
         elif self.current_envelope.startswith("Window"):
-            for orientation_value in self.guiinfo.orientations_numbers.keys():
-                orientation_string = str(self.guiinfo.orientations_numbers
-                                         [orientation_value])
-                if self.envelope_orientation_combobox.currentText() == \
-                        orientation_string:
-                        self.current_building.set_window_area(
-                            float(self.envelope_area_textbox.text()),
-                            orientation_value)
-        self.display_current_building()
+            element_type = "Window"
+        print("elment_tpye: " + str(element_type))
+        print("area" + str(area))
+        """
+        print(orientation_before_changing)
+        print(orientation_after_changing)
+        """
+        if orientation_before_changing == orientation_after_changing:
+            print("bin drinne")
+            if self.current_envelope.startswith("Window"):
+                for orientation_value in self.guiinfo.orientations_numbers.\
+                                             keys():
+                    orientation_string = str(self.guiinfo.orientations_numbers
+                                             [orientation_value])
+                    if self.envelope_orientation_combobox.currentText() == \
+                            orientation_string:
+                            self.current_building.set_window_area(
+                                float(self.envelope_area_textbox.text()),
+                                orientation_value)
+            else:
+                for orientation_value in self.guiinfo.orientations_numbers.\
+                                             keys():
+                    orientation_string = str(self.guiinfo.orientations_numbers
+                                             [orientation_value])
+                    if self.envelope_orientation_combobox.currentText() == \
+                            orientation_string:
+                            self.current_building.set_outer_wall_area(
+                                float(self.envelope_area_textbox.text()),
+                                orientation_value)
+        else:
+            orientation_number_before_changing = \
+              self.guiinfo.orientations_strings[orientation_before_changing]
+            orientation_number_after_changing = \
+              self.guiinfo.orientations_strings[orientation_after_changing]
+            Controller.click_save_envelopes(self.current_building,
+                                            orientation_number_before_changing,
+                                            orientation_number_after_changing,
+                                            element_type, area)
+            """
+            self.current_building.set_outer_wall_area(area,
+                                        str(self.guiinfo.orientations_strings
+                                             [orientation_after_changing]))
+            """
+        # self.display_current_building()
 
     def switch_current_element(self):
         ''' Switches the current element if the user clicks on it
@@ -4236,13 +4255,15 @@ class MainUI(QDialog):
             self.envelope_type_textbox.setText(str("Rooftop"))
             self.envelope_area_textbox.setText(str(listOfCurItem[4]))
             self.envelope_orientation_combobox.setCurrentIndex(
-            self.envelope_orientation_combobox.findText(str(listOfCurItem[2])))
+                self.envelope_orientation_combobox.findText(
+                    str(listOfCurItem[2])))
 
         elif string_current_item.startswith("Ground Floor"):
             self.envelope_type_textbox.setText(str("Ground Floor"))
             self.envelope_area_textbox.setText(str(listOfCurItem[5]))
             self.envelope_orientation_combobox.setCurrentIndex(
-            self.envelope_orientation_combobox.findText(str(listOfCurItem[3])))
+                self.envelope_orientation_combobox.findText(
+                    str(listOfCurItem[3])))
 
         elif string_current_item.startswith("Window"):
             self.envelope_type_textbox.setText(str("Window"))
@@ -4251,6 +4272,8 @@ class MainUI(QDialog):
                 self.envelope_orientation_combobox.findText(
                     str(listOfCurItem[2])))
 
+        self.envelope_orientation_before_changing = \
+            self.envelope_orientation_combobox.currentText()
         self.groupbox_save_cancel_buttons = QtGui.QGroupBox()
         self.save_cancel_layout = QtGui.QGridLayout()
         self.groupbox_save_cancel_buttons.setLayout(self.save_cancel_layout)
