@@ -327,4 +327,36 @@ class Controller():
                         for lay_count in layer_set:
                             lay_count.parent = win
                             win.layer = lay_count
-                    
+
+    @classmethod
+    def click_save_envelopes(self, bldg, orientationB,
+                             orientation, element_type, area):
+
+        if element_type == "Window":
+            new_window_area = bldg.get_window_area(orientation) + area
+            print(new_window_area)
+            for zone in bldg.thermal_zones:
+                for win in zone.windows:
+                    if element_type == "Window":
+                        if win.orientation == orientationB:
+                            win.orientation = orientation
+            bldg.set_window_area(new_window_area, orientation)
+
+        else:
+            new_outer_wall_area = bldg.get_outer_wall_area(orientation) + area
+            print(new_outer_wall_area)
+            for zone in bldg.thermal_zones:
+                for wall in zone.outer_walls:
+                    if element_type == "Outer Wall":
+                        if wall.orientation == orientationB:
+                            wall.orientation = orientation
+
+                    elif element_type == "Rooftop":
+                        if wall.orientation == orientationB:
+                            wall.orientation = orientation
+                            bldg.set_outer_wall_area(area, orientation)
+
+                    elif element_type == "Ground Floor":
+                        if wall.orientation == orientationB:
+                            wall.orientation = orientation
+            bldg.set_outer_wall_area(new_outer_wall_area, orientation)
