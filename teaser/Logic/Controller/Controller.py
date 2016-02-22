@@ -305,7 +305,8 @@ class Controller():
                         wall.layer = None
                         for lay_count in layer_set:
                             lay_count.parent = wall
-                            wall.layer = lay_count
+                            wall.add_layer(lay_count.position, lay_count)
+
                 else:
                     if wall.orientation == orientation:
                         wall.tilt = tilt
@@ -315,6 +316,8 @@ class Controller():
                         for lay_count in layer_set:
                             lay_count.parent = wall
                             wall.layer = lay_count
+                            wall.add_layer(lay_count.position, lay_count)
+
             for win in zone.windows:
                 if element_type == "Window":
                     if win.orientation == orientation:
@@ -327,6 +330,7 @@ class Controller():
                         for lay_count in layer_set:
                             lay_count.parent = win
                             win.layer = lay_count
+                            win.add_layer(lay_count.position, lay_count)
 
     @classmethod
     def click_save_envelopes(self, bldg, orientation_old,
