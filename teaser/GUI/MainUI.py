@@ -2869,9 +2869,22 @@ class MainUI(QDialog):
             trans = float(self.new_layerX_material_transmittance_textbox.text())
         else:
             trans = 1
-
+        """
         self.all_constr_layer_list.append(
             Controller.click_add_new_layer(
+                    None, int(self.new_layerX_position_combobox.currentText()),
+                    thick, self.new_layerX_material_combobox.currentText(),
+                    dens, therm, heat, solar, ir, trans))
+        """
+        position = int(self.new_layerX_position_combobox.currentText())
+        exists = False
+        for layer in self.all_constr_layer_list:
+            if layer.position == position:
+                    exists = True
+            if exists:
+                layer.position = layer.position + 1
+
+        self.all_constr_layer_list.insert(position, Controller.click_add_new_layer(
                     None, int(self.new_layerX_position_combobox.currentText()),
                     thick, self.new_layerX_material_combobox.currentText(),
                     dens, therm, heat, solar, ir, trans))
