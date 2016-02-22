@@ -2543,14 +2543,7 @@ class MainUI(QDialog):
             element_type = "Ground Floor"
         elif self.current_envelope.startswith("Window"):
             element_type = "Window"
-        print("elment_tpye: " + str(element_type))
-        print("area" + str(area))
-        """
-        print(orientation_before_changing)
-        print(orientation_after_changing)
-        """
         if orientation_before_changing == orientation_after_changing:
-            print("bin drinne")
             if self.current_envelope.startswith("Window"):
                 for orientation_value in self.guiinfo.orientations_numbers.\
                                              keys():
@@ -2585,7 +2578,7 @@ class MainUI(QDialog):
                                         str(self.guiinfo.orientations_strings
                                              [orientation_after_changing]))
             """
-        # self.display_current_building()
+        self.display_current_building()
 
     def switch_current_element(self):
         ''' Switches the current element if the user clicks on it

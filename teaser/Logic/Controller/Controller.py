@@ -334,13 +334,12 @@ class Controller():
 
         if element_type == "Window":
             new_window_area = bldg.get_window_area(orientation) + area
-            print(new_window_area)
+            print("new_window_area: " + str(new_window_area))
             for zone in bldg.thermal_zones:
                 for win in zone.windows:
                     if element_type == "Window":
                         if win.orientation == orientationB:
                             win.orientation = orientation
-            bldg.set_window_area(new_window_area, orientation)
 
         else:
             new_outer_wall_area = bldg.get_outer_wall_area(orientation) + area
