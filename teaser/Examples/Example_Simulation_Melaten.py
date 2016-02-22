@@ -2,12 +2,33 @@
 # TEASER 4 Development Team
 
 '''
-This script demonstrates a automated district simulation of the RWTH Campus
-Melaten
+This script demonstrates a automated creation of a office typebuilding and its
+simulation with dymola and the AixLib controlled by the python package
+buildingspy
 
-This requires the buildingspy package from the berkley lab but ported to a
-python 3 version. One available version can be found on the github repository
-of the buildingspy as a fork
+General Requirements:
+- Buildingspy (pypi version not recommendend / use github version instead)
+- Dymola (with dymola.exe set to your environment variable PATH)
+- AixLib (the actual master from the github repository)
+- installed version of TEASER (sure you have this, your using it, but if not
+                               sure checkout the github documentation!)
+
+Python 2.7:
+you can use the buildingspy package which is available over pypip, but the
+actual versions are only available on github (links below)
+After installation (read the docu of buildingspy!) This script should be self
+describing
+
+Python 3:
+you need to install a port to python 3 from the buildingspy package. you can do
+it on your own or use the ported package (links below / Only simulator package
+is ported)
+If its installed correctly you should be able to use this script.
+
+Links:
+Buildingspy 2.7: https://github.com/lbl-srg/BuildingsPy
+Buildingspy 3.0: https://github.com/MichaMans/BuildingsPy/tree/python3
+AixLib master: https://github.com/RWTH-EBC/AixLib
 '''
 
 import os
@@ -95,7 +116,8 @@ def main():
 
 ### Timer
     endtime = time.time()
-    print('Simulation lasts: ', endtime-starttime, ' seconds or ', (endtime-starttime)/60, ' minutes! or', (endtime-starttime)/(60*60))
+    print('Simulation lasts: ', endtime-starttime, ' seconds or ',
+          (endtime-starttime)/60, ' minutes! or', (endtime-starttime)/(60*60))
 
 
 def read_XMLs(input_path):
@@ -146,7 +168,8 @@ def read_XMLs(input_path):
             this_building.area = float(info.find('Nettoflaeche').text)
 
             this_building.weight = 'light'
-            this_building.height_of_floors = float(info.find('Geschosshoehe').text)
+            this_building.height_of_floors =\
+                float(info.find('Geschosshoehe').text)
             this_building.office_layout = 0
 
             print(this_building.year_of_construction)
