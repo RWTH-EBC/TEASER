@@ -36,10 +36,10 @@ class Controller():
         ''' '''
 
     @classmethod
-    def click_add_new_layer(self, parent, id, thick, mat_nam, den, therm, heat,
-                            solar, ir, trans):
+    def click_add_new_layer(self, parent, position, thick, mat_nam, den, therm,
+                            heat, solar, ir, trans):
         layer = Layer(parent)
-        layer.id = id
+        layer.position = position
         mat = Material(layer)
         mat.name = mat_nam
         mat.density = den
