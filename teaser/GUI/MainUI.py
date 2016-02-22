@@ -2193,6 +2193,24 @@ class MainUI(QDialog):
                     self.material_heat_capac_textbox.setText(
                         str(self.current_layer.material.heat_capac))
 
+    def load_material(self):
+        '''If the current material is swapped, this gets the 
+        values for the new type and updates the window
+        
+        '''
+        cIndex = self.new_layerX_material_combobox.currentText()
+        for material in self.materials:
+            fIndex = material.name
+            if fIndex == cIndex:
+
+                self.new_layerX_material_density_textbox.setText(
+                    str(material.density))
+                self.new_layerX_material_thermal_conduc_textbox.setText(
+                    str(material.thermal_conduc))
+                self.new_layerX_material_heat_capac_textbox.setText(
+                    str(material.heat_capac))
+
+
     def delete_thermal_zone(self):
         '''Checks if a building exists, if it does the currently
         selected zone is deleted from the current building.
@@ -3419,15 +3437,6 @@ class MainUI(QDialog):
         self.new_layerX_thickness_textbox.setObjectName(
             _fromUtf8("ThicknessTextBox"))
 
-        self.new_layerX_material_label = QtGui.QLabel("Material")
-        self.new_layerX_material_combobox = QtGui.QComboBox()
-        temp_list = []
-        for material in self.materials:
-            if material.name not in temp_list:
-                temp_list.append(material.name)
-        self.new_layerX_material_combobox.addItems(sorted(temp_list))
-        self.is_switchable = True
-
         self.new_layerX_material_density_label = QtGui.QLabel("Density")
         self.new_layerX_material_density_textbox = QtGui.QLineEdit()
         self.new_layerX_material_density_textbox.setValidator(validator)
@@ -3467,6 +3476,18 @@ class MainUI(QDialog):
         self.new_layerX_material_transmittance_textbox.setValidator(validator)
         self.new_layerX_material_transmittance_textbox.setObjectName(
             _fromUtf8("MaterialTransmittanceTextBox"))
+
+        self.load_material
+        self.new_layerX_material_label = QtGui.QLabel("Material")
+        self.new_layerX_material_combobox = QtGui.QComboBox()
+        self.connect(self.new_layerX_material_combobox, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.load_material)
+        temp_list = []
+        for material in self.materials:
+            if material.name not in temp_list:
+                temp_list.append(material.name)
+        self.new_layerX_material_combobox.addItems(sorted(temp_list))
+        self.is_switchable = True
 
         self.new_layerX_save_button = QtGui.QPushButton()
         self.new_layerX_save_button.setText("Save")
