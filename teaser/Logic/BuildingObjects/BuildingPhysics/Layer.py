@@ -35,7 +35,7 @@ class Layer(object):
         '''
         self.parent = parent
         self.internal_id = random.random()
-        self.id = 0
+        self.position = 0
         self._material = None
         self._thickness = 0.0
 
