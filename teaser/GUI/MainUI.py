@@ -2530,6 +2530,7 @@ class MainUI(QDialog):
         self.display_current_building()
 
     def save_changed_envelopes_values(self):
+
         orientation_before_changing = \
             self.envelope_orientation_before_changing
         orientation_after_changing = \
@@ -2573,11 +2574,6 @@ class MainUI(QDialog):
                                             orientation_number_before_changing,
                                             orientation_number_after_changing,
                                             element_type, area)
-            """
-            self.current_building.set_outer_wall_area(area,
-                                        str(self.guiinfo.orientations_strings
-                                             [orientation_after_changing]))
-            """
         self.display_current_building()
 
     def switch_current_element(self):
