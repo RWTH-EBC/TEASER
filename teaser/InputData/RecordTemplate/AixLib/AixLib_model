@@ -41,7 +41,7 @@ model ${bldg.name}
     Sky_rad=true,
     Ter_rad=true,
     % if weather != "":
-      fileName="${weather}",
+      fileName=Modelica.Utilities.Files.loadResource("${weather}"),
       tableName="${weather_header}",
     % else:
       fileName=Modelica.Utilities.Files.loadResource(
@@ -151,7 +151,7 @@ end ${bldg.name};
     Sky_rad=true,
     Ter_rad=true,
     % if weather != "":
-      fileName="${weather}",
+      fileName=Modelica.Utilities.Files.loadResource("${weather}"),
       tableName="${weather_header}",
     % else:
       fileName=Modelica.Utilities.Files.loadResource(
