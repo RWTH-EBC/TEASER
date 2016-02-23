@@ -1,17 +1,17 @@
 model ${bldg.name}
   "This is the simulation model of ${bldg.name}"
 
-% if model is "Multizone":
+% if model == "Multizone":
 	AixLib.Building.LowOrder.Multizone.Multizone multizone(
       buildingParam=${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_base()
 
-% if zone is "ThermalZone":
+% if zone == "ThermalZone":
   ,redeclare AixLib.Building.LowOrder.ThermalZone.ThermalZone zone
 % else:
   ,redeclare AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone
 % endif
 
-% if physics is "vdi":
+% if physics == "vdi":
   (redeclare 
         AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
         buildingPhysics
@@ -107,18 +107,18 @@ end ${bldg.name};
 
 
 
-% elif model is "MultizoneEquipped":
+% elif model == "MultizoneEquipped":
 	AixLib.Building.LowOrder.Multizone.MultizoneEquipped multizoneEquipped(
       buildingParam=${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_base()
 
 
-% if zone is "ThermalZone":
+% if zone == "ThermalZone":
 	,redeclare AixLib.Building.LowOrder.ThermalZone.ThermalZone zone
 % else:
   ,redeclare AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone
 % endif
 
-% if physics is "vdi":
+% if physics == "vdi":
 	(redeclare 
         AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
         buildingPhysics
