@@ -850,8 +850,8 @@ class Project(object):
         self.name = "Project"
 
         self.modelica_project = self.name
-        self.weather_file_header = "weather"
-        self.weather_file_path = "TRY_5_Essen.txt"
+        self.weather_file_header = ""
+        self.weather_file_path = ""
         self.list_of_buildings = []
         self.calculation_method = "vdi"
 
