@@ -615,7 +615,7 @@ class Project(object):
             all buildings will be exported
         path : string
             if the Files should not be stored in OutputData, an alternative
-            path can be specified
+            path can be specified as a full and absolute path
 
         '''
         #check the arguments
@@ -640,7 +640,7 @@ class Project(object):
             pass
         """
         uses = ['Modelica(version = "3.2.1")',
-                "AixLib(version=\"0.2.2\")"]
+                "AixLib(version=\"0.2.5\")"]
 
         # for bldg in self.list_of_buildings:
         #     assert bldg._calculation_method == "vdi", ("AixLib needs \

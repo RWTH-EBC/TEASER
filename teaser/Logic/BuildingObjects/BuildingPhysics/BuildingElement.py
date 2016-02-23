@@ -96,12 +96,10 @@ class BuildingElement(object):
 
         '''
 
-        self.parent = parent
-
         self.internal_id = random.random()
 
         self.name = None
-        self.construction_type = None
+        self._construction_type = None
         self._year_of_retrofit = None
         self._year_of_construction = None
         self.building_age_group = [None, None]
@@ -119,6 +117,7 @@ class BuildingElement(object):
         #values for the AixLib Export
         self.emissivity = 0.0   # Should we use the ir_emissivity here?
                                 # Better use in the thermal zone i think
+        self.parent = parent
 
         # Calculated values for each Building Element
         self.r1 = 0.0
@@ -225,6 +224,8 @@ class BuildingElement(object):
         ass_error_1 = "You need to specify parents for element and thermalzone"
 
         assert self.parent.parent.parent is not None, ass_error_1
+
+        self.year_of_construction = year
 
         if type(self).__name__ == 'OuterWall':
 
@@ -357,7 +358,6 @@ class BuildingElement(object):
             Pyxb class represantation of xml
         '''
 
-        self.year_of_construction = pyxb_class.year_of_construction
         self.building_age_group = pyxb_class.building_age_group
         self.construction_type = pyxb_class.construction_type
         self.inner_radiation = pyxb_class.inner_radiation
@@ -563,7 +563,6 @@ class BuildingElement(object):
         '''
 
         pyxb_class.building_age_group = self.building_age_group
-        pyxb_class.year_of_construction = self.year_of_construction
         pyxb_class.construction_type = self.construction_type
 
         pyxb_class.inner_radiation = self.inner_radiation
@@ -680,6 +679,11 @@ class BuildingElement(object):
             if type(self).__name__ == "Window":
                 self.__parent.windows.append(self)
 
+            if self.parent.parent is not None:
+                self.year_of_construction = \
+                    self.parent.parent.year_of_construction
+            else:
+                pass
         else:
 
             self.__parent = None
@@ -706,6 +710,7 @@ class BuildingElement(object):
                 self._year_of_retrofit = value
             else:
                 raise ValueError("Specify year of construction first")
+
 
     @property
     def orientation(self):
@@ -884,6 +889,7 @@ class BuildingElement(object):
                 self.inner_radiation is not None and\
                 self.area is not None:
             self.calc_ua_value()
+
     @property
     def tilt(self):        
         return self._tilt
@@ -919,3 +925,15 @@ class BuildingElement(object):
                 self._year_of_construction = value
             except:
                 raise ValueError("Can't convert year to int")
+
+
+    @property
+    def construction_type(self):
+        return self._construction_type
+
+    @construction_type.setter
+    def construction_type(self, value):
+
+        self._construction_type = value
+
+
