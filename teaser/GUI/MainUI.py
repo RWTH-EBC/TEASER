@@ -3089,20 +3089,24 @@ class MainUI(QDialog):
         self.create__envelope_ui_window_layout = QtGui.QGridLayout()
         self.create__envelope_ui.setLayout(
                                  self.create__envelope_ui_window_layout)
+        self.warning_message_groupbox_layout = QtGui.QGridLayout()
         self.warning_message_groupbox = QtGui.QGroupBox(
                                                  u"Warning")
         self.warning_message_groupbox.setAlignment(0x0004)
         self.warning_message_groupbox.setGeometry(
                                               QtCore.QRect(0, 0, 60, 60))
+        self.warning_message_groupbox.setLayout(
+            self.warning_message_groupbox_layout)
         self.warning_message_label = QtGui.QLabel(
                                                 self.warning_message_groupbox)
         self.warning_message_label.setText(
-             "\n All walls with the current orientation in building will be" +
+             "All walls with the current orientation in building will be" +
              " overwritten")
-
+        self.warning_message_label.setAlignment(QtCore.Qt.AlignCenter)
         self.warning_message_groupbox.setMaximumHeight(48)
         self.warning_message_groupbox.setMinimumHeight(48)
-
+        self.warning_message_groupbox_layout.addWidget(
+            self.warning_message_label, 0, 0)
         self.set_all_constr_element_layout = QtGui.QGridLayout()
         self.set_all_constr_element_layout_groupBox = QtGui.QGroupBox(
             "Input values")
