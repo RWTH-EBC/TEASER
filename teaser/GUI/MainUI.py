@@ -3078,7 +3078,7 @@ class MainUI(QDialog):
         self.create_new_element_ui_page.show()
 
     def create_new_envelope_ui(self):
-        self.create__envelope_ui = QtGui.QWizardPage()
+        self.create__envelope_ui = WizardPage()
         self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create__envelope_ui.setWindowTitle("Set all construction")
         self.create__envelope_ui.setFixedWidth(400)
@@ -3211,7 +3211,7 @@ class MainUI(QDialog):
                      self.clear_input_values_set_all_constr)
         self.connect(self.set_all_constr_cancel_button, SIGNAL("clicked()"),
                      self.create__envelope_ui, QtCore.SLOT("close()"))
-        
+
         self.set_all_constr_element_layout.addWidget(
                 self.set_all_constr_element_bldg_label, 1, 0)
         self.set_all_constr_element_layout.addWidget(
@@ -3266,6 +3266,9 @@ class MainUI(QDialog):
         self.create__envelope_ui_window_layout.addWidget(
                     self.set_all_constr_save_cancel_layout_GroupBox, 2, 0)
 
+        self.create__envelope_ui.closeEvent(self,
+                        elem_layer=self.element_layer_model_set_all_constr,
+                        layer_list=self.all_constr_layer_list)
         self.create__envelope_ui.setWindowModality(Qt.ApplicationModal)
         self.create__envelope_ui.show()
 
@@ -5501,6 +5504,14 @@ class MainUI(QDialog):
             self.simulation_save_cancel_groupbox, 3, 1)
         self.simulation_window_ui.setWindowModality(Qt.ApplicationModal)
         self.simulation_window_ui.show()
+
+
+class WizardPage(QtGui.QWizardPage):
+    def closeEvent(self, evnt, elem_layer= None ,layer_list= None):
+            if(elem_layer is not None or layer_list is not None):
+                elem_layer.clear()
+                layer_list.clear()
+                
 
 class EmittingStream(QtCore.QObject):
     ''' Part of the package to display the console in the project.
