@@ -22,9 +22,6 @@ import os
 from teaser.Logic import Utilis
 from numpy.distutils.pathccompiler import PathScaleCCompiler
 
-from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
-
 try:
     _fromUtf8 = Qt.QString.fromUtf8
 except AttributeError:
