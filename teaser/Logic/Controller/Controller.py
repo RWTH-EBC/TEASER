@@ -304,7 +304,6 @@ class Controller():
                         wall.outer_radiation = outer_radiation
                         wall.layer = None
                         for lay_count in layer_set:
-                            lay_count.parent = wall
                             wall.add_layer(lay_count.position, lay_count)
 
                 else:
@@ -314,8 +313,6 @@ class Controller():
                         wall.inner_radiation = inner_radiation
                         wall.layer = None
                         for lay_count in layer_set:
-                            lay_count.parent = wall
-                            wall.layer = lay_count
                             wall.add_layer(lay_count.position, lay_count)
 
             for win in zone.windows:
@@ -328,8 +325,6 @@ class Controller():
                         win.outer_radiation = outer_radiation
                         win.layer = None
                         for lay_count in layer_set:
-                            lay_count.parent = win
-                            win.layer = lay_count
                             win.add_layer(lay_count.position, lay_count)
 
     @classmethod
