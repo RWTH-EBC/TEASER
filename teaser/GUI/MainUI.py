@@ -1145,15 +1145,20 @@ class MainUI(QDialog):
         orientation = int(self.guiinfo.orientations_strings[
                     self.set_all_constr_element_orientation_textbox.text()])
         element_type = self.set_all_constr_element_type_textbox.text()
-        if(element_type == "Outer Wall"):
-            element_type = "OuterWall"
-        elif element_type == "Ground Floor":
-            element_type = "GroundFLoor"
+
         tilt = float(self.set_all_constr_element_tilt_textbox.text())
         inner_con = float(self.set_all_constr_element_inner_con_textbox.text())
         inner_rad = float(self.set_all_constr_element_inner_rad_textbox.text())
-        outer_con = float(self.set_all_constr_element_outer_con_textbox.text())
-        outer_rad = float(self.set_all_constr_element_outer_rad_textbox.text())
+
+        if element_type != "Ground Floor":
+            if(element_type == "Outer Wall"):
+                element_type = "OuterWall"
+            outer_con = float(self.set_all_constr_element_outer_con_textbox.text())
+            outer_rad = float(self.set_all_constr_element_outer_rad_textbox.text())
+        elif element_type == "Ground Floor":
+            element_type = "GroundFLoor"
+            outer_con = None
+            outer_rad = None
         layer_set = self.all_constr_layer_list
 
         Controller.click_change_all_constr(bldg, orientation, element_type,
