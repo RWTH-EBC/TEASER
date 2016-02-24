@@ -706,9 +706,9 @@ class Project(object):
                 utilis.create_path(utilis.get_full_path(bldg_path))
                 utilis.create_path(utilis.get_full_path
                                    (bldg_path + bldg.name + "_DataBase"))
-                bldg.modelica_set_temp(path = path + "\\" + bldg.name)
-                bldg.modelica_AHU_boundary(path = path + "\\" + bldg.name)
-                bldg.modelica_gains_boundary(path = path + "\\" + bldg.name)
+                bldg.modelica_set_temp(path=path + "\\" + bldg.name)
+                bldg.modelica_AHU_boundary(path=path + "\\" + bldg.name)
+                bldg.modelica_gains_boundary(path=path + "\\" + bldg.name)
 
                 self._help_package(bldg_path, bldg.name)
                 self._help_package_order(bldg_path, [bldg], None,
@@ -742,17 +742,20 @@ class Project(object):
                                 (zone_path + bldg.name + "_base.mo"),
                                 'w')
                 if bldg.central_ahu:
-                  out_file.write(zone_base_template.render_unicode(
-                      bldg=bldg, zone=zone,
-                      mod_prj=self.modelica_project,
-                      central_ahu=bldg.central_ahu))
-                  out_file.close()
+                    out_file.write(zone_base_template.render_unicode(
+                        bldg=bldg,
+                        zone=zone,
+                        mod_prj=self.modelica_project,
+                        central_ahu=bldg.central_ahu))
+                    out_file.close()
                 else:
-                  out_file.write(zone_base_template.render_unicode(
-                      bldg=bldg, zone=zone,
-                      mod_prj=self.modelica_project))
-                  out_file.close()
-
+                    out_file.write(zone_base_template.render_unicode(
+                        bldg=bldg,
+                        zone=zone,
+                        mod_prj=self.modelica_project))
+                    out_file.close()
+            print("Exports can be found here:")
+            print(path)
 
         elif building_model == "None" and zone_model == "None" and\
             corG is None:
@@ -780,6 +783,8 @@ class Project(object):
                         calc_core=bldg._calculation_method))
                     # not sure if we need the calc
                     out_file.close()
+            print("Exports can be found here:")
+            print(path)
 
         else:
             # not clearly specified
