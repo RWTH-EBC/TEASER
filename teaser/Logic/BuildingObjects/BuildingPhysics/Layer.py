@@ -28,14 +28,14 @@ class Layer(object):
 
     '''
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, id = None):
         '''Constructor of Layer.
 
 
         '''
         self.parent = parent
         self.internal_id = random.random()
-        self.id = 0
+        self.position = 0
         self._material = None
         self._thickness = 0.0
 
@@ -61,6 +61,9 @@ class Layer(object):
             self.__parent = value
             self.__parent.layer.append(self)
 
+        else:
+            self.__parent = None
+
     @property
     def material(self):
         return self._material
@@ -79,7 +82,7 @@ class Layer(object):
 
     @thickness.setter
     def thickness(self, value):
-        
+
         if isinstance(value, float):
             pass
         elif value is None:
@@ -88,10 +91,11 @@ class Layer(object):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert thickness to float")           
+                raise ValueError("Can't convert thickness to float")
 
         if value is not None:
             self._thickness = float(value)
-        if self.material is not None:
+
+        if self.material is not None and self.parent is not None:
             if vars(self.material)['_thermal_conduc'] != 0:
                 self.parent.calc_ua_value()
