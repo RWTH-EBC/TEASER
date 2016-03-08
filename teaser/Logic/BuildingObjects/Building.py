@@ -4,6 +4,7 @@
 """This module includes the Buidling class
 """
 import random
+import re
 import numpy as np
 import inspect
 import scipy.io
@@ -645,12 +646,13 @@ class Building(object):
     def name(self, value):
 
         if isinstance(value, str):
-
-            self.__name = value.replace(" ", "")
+            regex = re.compile('[^a-zA-z]')
+            self.__name = regex.sub('', value) #.replace(" ", "")
         else:
             try:
                 value = str(value)
-                self.__name = value.replace(" ", "")
+                regex = re.compile('[^a-zA-z]')
+                self.__name = regex.sub('', value)
 
             except ValueError:
                 print("Can't convert name to string")
