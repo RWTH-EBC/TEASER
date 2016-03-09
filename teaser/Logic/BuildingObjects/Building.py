@@ -646,12 +646,12 @@ class Building(object):
     def name(self, value):
 
         if isinstance(value, str):
-            regex = re.compile('[^a-zA-z]')
-            self.__name = regex.sub('', value) #.replace(" ", "")
+            regex = re.compile('[^a-zA-z0-9]')
+            self.__name = regex.sub('', value)
         else:
             try:
                 value = str(value)
-                regex = re.compile('[^a-zA-z]')
+                regex = re.compile('[^a-zA-z0-9]')
                 self.__name = regex.sub('', value)
 
             except ValueError:
