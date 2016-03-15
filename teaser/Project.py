@@ -3,15 +3,17 @@
 
 """This module includes the Project class, which serves as base class and API
 """
-import warnings
-import teaser.Data.TeaserXML as txml
 try:
-    import teaser.Data.CityGML as citygml
+    import teaser.Data.Output.CityGML_output as citygml_out
 except:
     warnings.warn("No CityGML module found, no CityGML import/export")
-import teaser.Data.DataHelp.OldTeaser as old_teaser
+
+import warnings
+import teaser.Data.Input.TeaserXML_input as txml_in
+import teaser.Data.Output.TeaserXML_output as txml_out
+import teaser.Data.Input.OldTeaser_input as old_teaser
 from teaser.Data.DataClass import DataClass
-from mako.template import Template
+
 import teaser.Logic.Utilis as utilis
 import shutil
 from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
@@ -559,7 +561,7 @@ class Project(object):
             new_path = path + "\\" + name
             utilis.create_path(utilis.get_full_path(path))
 
-        txml.save_teaser_xml(new_path, self)
+        txml_out.save_teaser_xml(new_path, self)
 
     def load_project(self, path):
         '''Loads the project from a teaserXML file (new format)
@@ -573,7 +575,7 @@ class Project(object):
 
         '''
 
-        txml.load_teaser_xml(path, self)
+        txml_in.load_teaser_xml(path, self)
 
     def load_old_teaser(self, path):
         '''Loads the project from an old TEASER xml file
