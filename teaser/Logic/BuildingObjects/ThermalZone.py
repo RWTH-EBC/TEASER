@@ -802,10 +802,6 @@ class ThermalZone(object):
             or type(value).__name__ == ("Rooftop") \
             or type(value).__name__ == ("GroundFloor"), ass_error_1
 
-        if self._outer_walls is None:
-            self._outer_walls = [value]
-        else:
-            self._outer_walls.append(value)
 
     @property
     def inner_walls(self):
@@ -820,11 +816,6 @@ class ThermalZone(object):
             or type(value).__name__ == ("Ceiling") \
             or type(value).__name__ == ("Floor"), ass_error_1
 
-        if self._inner_walls is None:
-            self._inner_walls = [value]
-        else:
-            self._inner_walls.append(value)
-
     @property
     def windows(self):
         return self._windows
@@ -834,11 +825,6 @@ class ThermalZone(object):
         ass_error_1 = "Window has to be an instance of Window()"
 
         assert type(value).__name__ == ("Window"), ass_error_1
-
-        if self._windows is None:
-            self._windows = [value]
-        else:
-            self._windows.append(value)
 
     @property
     def use_conditions(self):
