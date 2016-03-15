@@ -644,7 +644,6 @@ class Building(object):
 
     @name.setter
     def name(self, value):
-
         if isinstance(value, str):
             regex = re.compile('[^a-zA-z0-9]')
             self.__name = regex.sub('', value)
@@ -653,9 +652,19 @@ class Building(object):
                 value = str(value)
                 regex = re.compile('[^a-zA-z0-9]')
                 self.__name = regex.sub('', value)
-
             except ValueError:
                 print("Can't convert name to string")
+
+        numbers = ""
+        if self.__name.startswith(('1', '2', '3', '4', '5',
+                                   '6', '7', '8', '9', '0')):
+            for ch in self.__name:
+                if ch in ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0'):
+                    numbers += ch
+                else:
+                    break
+
+        self.__name = self.__name.lstrip(numbers)
 
     @property
     def year_of_construction(self):
