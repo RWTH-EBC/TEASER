@@ -1,0 +1,233 @@
+# Created March 2016
+# TEASER Development Team
+
+"""Modelica_output
+
+This module contains function to call Templates for Modelica model generation
+"""
+
+import teaser.Logic.Utilis as utilis
+
+def export_record(prj, building_model="None", zone_model="None",
+                  corG=None, internal_id=None, path=None):
+    '''Exports values to a record file for Modelica simulation
+
+    Parameters
+    ----------
+
+    building_model : string
+        setter of the used Aixlib building model (None, MultizoneEquipped,
+        Multizone)
+    zone_model : string
+        setter of the used Aixlib zone model (ThermalZoneEquipped,
+        ThermalZone)
+    corG : boolean
+        setter of the used g value calculation in the model
+    internal_id : float
+        setter of the used building which will be exported, if None then
+        all buildings will be exported
+    path : string
+        if the Files should not be stored in OutputData, an alternative
+        path can be specified as a full and absolute path
+
+    '''
+    #check the arguments
+    assert(building_model) in ["None", "MultizoneEquipped", "Multizone"]
+    assert(zone_model) in ["None", "ThermalZoneEquipped", "ThermalZone"]
+    assert(corG) in [None, True, False]
+    if path is None:
+        path = utilis.get_default_path() + "\\" + prj.name
+    else:
+        path = path + "\\" + prj.name
+
+    utilis.create_path(path)
+    """
+    input_path = utilis.get_full_path("InputData\\BoundariesTypeBuilding")
+
+    try:
+        shutil.copytree(
+            input_path, utilis.get_full_path(path) + "\\Tables")
+    except:
+        pass
+    else:
+        pass
+    """
+    uses = ['Modelica(version = "3.2.1")',
+            "AixLib(version=\"0.2.5\")"]
+
+    # for bldg in prj.list_of_buildings:
+    #     assert bldg._calculation_method == "vdi", ("AixLib needs \
+    #     calculation core vdi")
+    # might not need this, user only needs to know what kind of
+    # zone records are exported here
+
+    # use the same zone templates for all exports
+    zone_template = Template(
+        filename=utilis.get_full_path(
+            "InputData\\RecordTemplate\\AixLib\\AixLib_zone"))
+    model_template = Template(
+        filename=utilis.get_full_path(
+            "InputData\\RecordTemplate\\AixLib\\AixLib_model"))
+    zone_base_template = Template(
+        filename=utilis.get_full_path(
+            "InputData\\RecordTemplate\\AixLib\\AixLib_base"))
+    # list which contains exported buildings
+    if internal_id is not None:
+        exported_list_of_buildings = [bldg for bldg in
+                                      prj.list_of_buildings if
+                                      bldg.internal_id == internal_id]
+    else:
+        exported_list_of_buildings = prj.list_of_buildings
+
+    # here we diff between zonerecord export and full model support
+    if building_model != "None" and zone_model != "None" and\
+        corG is not None:
+        # full model support here
+        print("full model support")
+
+        _help_package(path, prj.name, uses)
+        _help_package_order(path, exported_list_of_buildings)
+
+        for bldg in exported_list_of_buildings:
+
+            bldg_path = path + "\\" + bldg.name + "\\"
+            utilis.create_path(utilis.get_full_path(bldg_path))
+            utilis.create_path(utilis.get_full_path
+                               (bldg_path + bldg.name + "_DataBase"))
+            bldg.modelica_set_temp(path=path + "\\" + bldg.name)
+            bldg.modelica_AHU_boundary(path=path + "\\" + bldg.name)
+            bldg.modelica_gains_boundary(path=path + "\\" + bldg.name)
+
+            _help_package(bldg_path, bldg.name)
+            _help_package_order(bldg_path, [bldg], None,
+                                     bldg.name + "_DataBase")
+
+            out_file = open(utilis.get_full_path
+                            (bldg_path + bldg.name + ".mo"), 'w')
+            out_file.write(model_template.render_unicode(
+                           bldg=bldg, mod_prj=prj.modelica_project,
+                           weather=prj.weather_file_name,
+                           model=building_model, zone=zone_model,
+                           physics=bldg._calculation_method, gFac=corG))
+            out_file.close()
+
+            for zone in bldg.thermal_zones:
+                zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
+
+                out_file = open(utilis.get_full_path(
+                    zone_path + "\\" + bldg.name + "_" +
+                    zone.name.replace(" ", "") + ".mo"), 'w')
+                out_file.write(zone_template.render_unicode(
+                    bldg=bldg, zone=zone))
+                out_file.close()
+
+            _help_package(zone_path, bldg.name + "_DataBase")
+            _help_package_order(
+                zone_path, bldg.thermal_zones,
+                bldg.name + "_", bldg.name + "_base")
+
+            out_file = open(utilis.get_full_path
+                            (zone_path + bldg.name + "_base.mo"),
+                            'w')
+            if bldg.central_ahu:
+                out_file.write(zone_base_template.render_unicode(
+                    bldg=bldg,
+                    zone=zone,
+                    mod_prj=prj.modelica_project,
+                    central_ahu=bldg.central_ahu))
+                out_file.close()
+            else:
+                out_file.write(zone_base_template.render_unicode(
+                    bldg=bldg,
+                    zone=zone,
+                    mod_prj=prj.modelica_project))
+                out_file.close()
+        print("Exports can be found here:")
+        print(path)
+
+    elif building_model == "None" and zone_model == "None" and\
+        corG is None:
+        # only export the baserecords
+        _help_package(path, prj.name, uses)
+        _help_package_order(path, exported_list_of_buildings)
+        for bldg in exported_list_of_buildings:
+
+            bldg_path = path + "\\" + bldg.name + "\\"
+            utilis.create_path(utilis.get_full_path(bldg_path))
+            utilis.create_path(utilis.get_full_path
+                               (bldg_path + bldg.name + "_DataBase"))
+
+            _help_package(bldg_path, bldg.name)
+            _help_package_order(bldg_path, [bldg], None,
+                                     bldg.name + "_DataBase")
+            for zone in bldg.thermal_zones:
+                zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
+
+                out_file = open(utilis.get_full_path(
+                    zone_path + "\\" + bldg.name + "_" +
+                    zone.name.replace(" ", "") + ".mo"), 'w')
+                out_file.write(zone_template.render_unicode(
+                    bldg=bldg, zone=zone,
+                    calc_core=bldg._calculation_method))
+                # not sure if we need the calc
+                out_file.close()
+        print("Exports can be found here:")
+        print(path)
+
+    else:
+        # not clearly specified
+        print("please specifiy you export clearly")
+
+
+
+def _help_package(prj, path, name, uses=None):
+    '''creates a package.mo file
+
+    private function, do not call
+
+    Parameters
+    ----------
+
+    path : string
+        path of where the package.mo should be placed
+    name : string
+        name of the Modelica package
+
+    '''
+
+    package_template = Template(filename=utilis.get_full_path
+                                ("InputData\\RecordTemplate\\package"))
+
+    out_file = open(
+        utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
+    out_file.write(package_template.render_unicode(name=name, uses=uses))
+    out_file.close()
+
+def _help_package_order(path, package_list, addition=None, extra=None):
+    '''creates a package.order file
+
+    private function, do not call
+
+    Parameters
+    ----------
+
+    path : string
+        path of where the package.order should be placed
+    package_list : [string]
+        name of all models or packages contained in the package
+    addition : string
+        if there should be a suffix in front of package_list.string it can
+        be specified
+    extra : string
+        an extra package or model not contained in package_list can be
+        specified
+
+    '''
+    order_template = Template(filename=utilis.get_full_path
+                              ("InputData\\RecordTemplate\\package_order"))
+
+    out_file = open(
+        utilis.get_full_path(path + "\\" + "package" + ".order"), 'w')
+    out_file.write(order_template.render_unicode
+                   (list=package_list, addition=addition, extra=extra))
+    out_file.close()
