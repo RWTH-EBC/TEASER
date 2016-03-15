@@ -779,11 +779,6 @@ class BuildingElement(object):
 
             assert isinstance(value, Layer), ass_error_1
 
-            if self._layer is None:
-                self._layer = [value]
-
-            else:
-                self._layer.append(value)
         if self.inner_convection is not None and\
                 self.inner_radiation is not None and\
                 self.area is not None:
