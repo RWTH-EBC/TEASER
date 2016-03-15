@@ -738,10 +738,6 @@ class Building(object):
 
         assert type(value).__name__ == "ThermalZone", ass_error_1
 
-        if self.thermal_zones is None:
-            self._thermal_zones = [value]
-        else:
-            self._thermal_zones.append(value)
 
     @property
     def outer_area(self):
