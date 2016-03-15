@@ -744,6 +744,38 @@ class ThermalZone(object):
                 self.parent.thermal_zones.pop(index)
 
                 break
+    def add_element(self, building_element):
+        '''Adds a building element to the corresponding list
+
+        This function adds a BuildingElement instance to the the list
+        depending on the type of the Building Element
+
+        Parameters
+        ----------
+        building_element : BuildingElement()
+            inherited objects of BuildingElement() instance of TEASER
+
+        '''
+
+        ass_error_1 = ("building element has to be an instance of OuterWall(),"
+        " Rooftop(), GroundFloor(), Window(), InnerWall(), Ceiling() or "
+                       "Floor()")
+
+        assert type(building_element).__name__ in ("OuterWall", "Rooftop",
+                                                   "GroundFloor", "InnerWall",
+                                                   "Ceiling", "Floor",
+                                                   "Window"), ass_error_1
+
+        if type(building_element).__name__ in ("OuterWall", "Rooftop",
+                                              "GroundFloor"):
+            self._outer_walls.append(building_element)
+        elif type(building_element).__name__ in ("InnerWall",
+                                                   "Ceiling", "Floor"):
+            self._inner_walls.append(building_element)
+        elif type(building_element).__name__ in ("Window"):
+            self._windows.append(building_element)
+
+
 
     @property
     def parent(self):
@@ -799,14 +831,6 @@ class ThermalZone(object):
         if value is None:
             self._outer_walls = []
 
-        ass_error_1 = "outer wall has to be an instance of OuterWall(),"
-        " Rooftop() or GroundFloor()"
-
-        assert type(value).__name__ == ("OuterWall") \
-            or type(value).__name__ == ("Rooftop") \
-            or type(value).__name__ == ("GroundFloor"), ass_error_1
-
-
     @property
     def inner_walls(self):
         return self._inner_walls
@@ -817,13 +841,6 @@ class ThermalZone(object):
         if value is None:
             self._inner_walls = []
 
-        ass_error_1 = "inner wall has to be an instance of InnerWall()"
-        ", Ceiling() or Floor()"
-
-        assert type(value).__name__ == ("InnerWall") \
-            or type(value).__name__ == ("Ceiling") \
-            or type(value).__name__ == ("Floor"), ass_error_1
-
     @property
     def windows(self):
         return self._windows
@@ -833,10 +850,6 @@ class ThermalZone(object):
 
         if value is None:
             self._windows = []
-
-        ass_error_1 = "Window has to be an instance of Window()"
-
-        assert type(value).__name__ == ("Window"), ass_error_1
 
     @property
     def use_conditions(self):
