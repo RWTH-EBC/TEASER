@@ -795,6 +795,10 @@ class ThermalZone(object):
 
     @outer_walls.setter
     def outer_walls(self, value):
+
+        if value is None:
+            self._outer_walls = []
+
         ass_error_1 = "outer wall has to be an instance of OuterWall(),"
         " Rooftop() or GroundFloor()"
 
@@ -809,6 +813,10 @@ class ThermalZone(object):
 
     @inner_walls.setter
     def inner_walls(self, value):
+
+        if value is None:
+            self._inner_walls = []
+
         ass_error_1 = "inner wall has to be an instance of InnerWall()"
         ", Ceiling() or Floor()"
 
@@ -822,6 +830,10 @@ class ThermalZone(object):
 
     @windows.setter
     def windows(self, value):
+
+        if value is None:
+            self._windows = []
+
         ass_error_1 = "Window has to be an instance of Window()"
 
         assert type(value).__name__ == ("Window"), ass_error_1

@@ -734,6 +734,9 @@ class Building(object):
     @thermal_zones.setter
     def thermal_zones(self, value):
 
+        if value is None:
+            self._thermal_zones = []
+
         ass_error_1 = "A thermal zone has to be an instance of ThermalZone()"
 
         assert type(value).__name__ == "ThermalZone", ass_error_1
