@@ -7,6 +7,8 @@ This module contains function to call Templates for Modelica model generation
 """
 
 import teaser.Logic.Utilis as utilis
+from mako.template import Template
+
 
 def export_record(prj, building_model="None", zone_model="None",
                   corG=None, internal_id=None, path=None):

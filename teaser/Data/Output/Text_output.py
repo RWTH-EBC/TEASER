@@ -6,6 +6,7 @@
 This module contains function to call Templates for textual output
 """
 import teaser.Logic.Utilis as utilis
+from mako.template import Template
 
 def export_parameters_txt(prj, path=None):
     '''Exports parameters of all buildings in a readable text file
