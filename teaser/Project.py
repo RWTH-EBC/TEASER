@@ -12,6 +12,7 @@ import teaser.Data.Input.TeaserXML_input as txml_in
 import teaser.Data.Output.TeaserXML_output as txml_out
 import teaser.Data.Input.OldTeaser_input as old_teaser
 import teaser.Data.Output.Modelica_output as modelica_out
+import teaser.Data.Output.Text_output as text_out
 from teaser.Data.DataClass import DataClass
 from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute import Institute
@@ -660,6 +661,25 @@ class Project(object):
                                    corG=corG,
                                    internal_id=internal_id,
                                    path=path)
+
+    def export_parameters_txt(self, path=None):
+        '''Exports parameters of all buildings in a readable text file
+
+        Parameters
+        ----------
+
+        path : string
+            if the Files should not be stored in OutputData, an alternative
+            can be specified
+        '''
+
+        if path is None:
+            path = "OutputData\\"+self.name
+        else:
+            path = path+"\\"+self.name
+
+        text_out.export_parameters_txt(prj=self,
+                                       path=path)
 
     def set_default(self):
         '''sets all attributes except self.data to default

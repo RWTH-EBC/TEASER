@@ -8,7 +8,7 @@ This module contains function to call Templates for textual output
 import teaser.Logic.Utilis as utilis
 from mako.template import Template
 
-def export_parameters_txt(prj, path=None):
+def export_parameters_txt(prj, path):
     '''Exports parameters of all buildings in a readable text file
 
     Parameters
@@ -28,7 +28,7 @@ def export_parameters_txt(prj, path=None):
         utilis.create_path(utilis.get_full_path(bldg_path))
         readable_template = Template(
             filename=utilis.get_full_path(
-                "InputData\\ReadableOutputTemplate\\ReadableBuilding"))
+                "Data\\Output\\TextTemplate\\ReadableBuilding"))
 
         out_file = open(utilis.get_full_path
                         (bldg_path+"ReadableOutput.txt"), 'w')
