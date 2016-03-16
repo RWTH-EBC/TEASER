@@ -1071,7 +1071,7 @@ class MainUI(QDialog):
                             currentText()
                         zone.inner_walls[index].orientation = \
                             self.guiinfo.orientations_strings \
-                            [self.element_orientation_combobox.currentText()]
+                            [str(self.element_orientation_combobox.currentText())]
                         zone.inner_walls[index].area = \
                            self.element_area_textbox.text()
                         zone.inner_walls[index].year_of_construction = \
@@ -1143,7 +1143,7 @@ class MainUI(QDialog):
 
         bldg = self.current_building
         orientation = int(self.guiinfo.orientations_strings[
-                    self.set_all_constr_element_orientation_textbox.text()])
+                    str(self.set_all_constr_element_orientation_textbox.text())])
         element_type = self.set_all_constr_element_type_textbox.text()
 
         tilt = float(self.set_all_constr_element_tilt_textbox.text())
@@ -1167,8 +1167,12 @@ class MainUI(QDialog):
         self.display_current_building()
 
     def clear_input_values_set_all_constr(self):
-        self.element_layer_model_set_all_constr.clear()
-        self.all_constr_layer_list.clear()
+        try:
+            self.element_layer_model_set_all_constr.clear()
+            self.all_constr_layer_list.clear()
+        except:
+            self.element_layer_model_set_all_constr = QStandardItemModel()
+            self.all_constr_layer_list = []
 
     def switch_type_building(self):
         '''After changing the index of the combobox this function replaces
@@ -1946,12 +1950,12 @@ class MainUI(QDialog):
             filter="Teaser File (*.teaserXML);; GML (*.gml)")
         last_name = path.split('/')
         length = len(last_name)
-        last_part = last_name[length-1]
+        last_part = str(last_name[length-1])
         if last_part.endswith("teaserXML"):
             self.project.name = last_part[:-10]
         elif last_part.endswith("gml"):
             self.project.name = last_part[:-4]
-        Controller.click_save_button(self.project, path)
+        Controller.click_save_button(self.project, str(path))
 
     def click_export_button(self):
         # path in GUI, which is need for the output
@@ -1990,7 +1994,7 @@ class MainUI(QDialog):
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
                                           " for current building finished ")
-        utilis.create_path(self.file_path)
+        utilis.create_path(str(self.file_path))
 
     def click_browse_button(self):
         self.export_save_template_lineedit.setText(QtGui.QFileDialog.
@@ -2480,28 +2484,28 @@ class MainUI(QDialog):
         self.current_zone.area = self.zone_net_leased_area_textbox.text()
         self.current_zone.use_conditions.usage =\
             self.zone_type_combobox.currentText()
-        if self.cooling_ahu_start_dropdown.currentText().startswith('0'):
+        if str(self.cooling_ahu_start_dropdown.currentText()).startswith('0'):
             self.current_zone.use_conditions.cooling_time[0] = \
                 int(self.cooling_ahu_start_dropdown.currentText()[1])
         else:
             self.current_zone.use_conditions.cooling_time[0] = \
                 int(self.cooling_ahu_start_dropdown.currentText()[0] + 
                     self.cooling_ahu_start_dropdown.currentText()[1])
-        if self.cooling_ahu_end_dropdown.currentText().startswith('0'):
+        if str(self.cooling_ahu_end_dropdown.currentText()).startswith('0'):
             self.current_zone.use_conditions.cooling_time[1] = \
                 int(self.cooling_ahu_end_dropdown.currentText()[1])
         else:
             self.current_zone.use_conditions.cooling_time[1] = \
                 int(self.cooling_ahu_end_dropdown.currentText()[0] + 
                     self.cooling_ahu_end_dropdown.currentText()[1])
-        if self.heating_ahu_start_dropdown.currentText().startswith('0'):
+        if str(self.heating_ahu_start_dropdown.currentText()).startswith('0'):
             self.current_zone.use_conditions.heating_time[0] = \
                 int(self.heating_ahu_start_dropdown.currentText()[1])
         else:
             self.current_zone.use_conditions.heating_time[0] = \
                 int(self.heating_ahu_start_dropdown.currentText()[0] + 
                     self.heating_ahu_start_dropdown.currentText()[1])
-        if self.heating_ahu_end_dropdown.currentText().startswith('0'):
+        if str(self.heating_ahu_end_dropdown.currentText()).startswith('0'):
             self.current_zone.use_conditions.heating_time[1] = \
                 int(self.heating_ahu_end_dropdown.currentText()[1])
         else:
@@ -2554,7 +2558,7 @@ class MainUI(QDialog):
         orientation_before_changing = \
             self.envelope_orientation_before_changing
         orientation_after_changing = \
-            self.envelope_orientation_combobox.currentText()
+            str(self.envelope_orientation_combobox.currentText())
         area = float(self.envelope_area_textbox.text())
         if self.current_envelope.startswith("Outer Wall"):
             element_type = "Outer Wall"
@@ -4273,7 +4277,7 @@ class MainUI(QDialog):
                                                 orientation, userData=None)
 
         current_item = self.outer_elements_model.itemFromIndex(item)
-        string_current_item = current_item.text()
+        string_current_item = str(current_item.text())
         listOfCurItem = string_current_item.split()
         self.current_envelope = string_current_item
         if string_current_item.startswith("Outer Wall"):
@@ -4305,7 +4309,7 @@ class MainUI(QDialog):
                     str(listOfCurItem[2])))
 
         self.envelope_orientation_before_changing = \
-            self.envelope_orientation_combobox.currentText()
+            str(self.envelope_orientation_combobox.currentText())
         self.groupbox_save_cancel_buttons = QtGui.QGroupBox()
         self.save_cancel_layout = QtGui.QGridLayout()
         self.groupbox_save_cancel_buttons.setLayout(self.save_cancel_layout)
@@ -5374,11 +5378,11 @@ class MainUI(QDialog):
         if self.file_path == "":
             self.export_save_template_lineedit.setText(
                                                  utilis.get_default_path())
-            utilis.create_path(self.export_save_template_lineedit.text())
+            utilis.create_path(str(self.export_save_template_lineedit.text()))
             self.file_path = self.export_save_template_lineedit.text()
         else:
             self.export_save_template_lineedit.setText(self.file_path)
-            utilis.create_path(self.export_save_template_lineedit.text())
+            utilis.create_path(str(self.export_save_template_lineedit.text()))
         self.export_save_template_button = QtGui.QPushButton(
             self.export_groupbox)
         self.export_save_template_button.setGeometry(
@@ -5514,8 +5518,8 @@ class MainUI(QDialog):
 class WizardPage(QtGui.QWizardPage):
     def closeEvent(self, evnt, elem_layer= None ,layer_list= None):
             if(elem_layer is not None or layer_list is not None):
-                elem_layer.clear()
-                layer_list.clear()
+                elem_layer = []
+                layer_list = []
                 
 
 class EmittingStream(QtCore.QObject):
