@@ -51,8 +51,10 @@ class Project(object):
         modelica_project : str
             name of the Modelica Project used in type building creation
             (default: self.name)
-        weather_file_name : str
-            name of the weather file used for Modelica simulation
+        weather_file_header : str
+            header of weather file used for Modelica simulation
+        weather_file_path : str
+            path to weather file used for Modelica simulation
             (default: "TRY_5_Essen.txt")
         calculation_method : str
             specifier for the calculation method for building parameters,
@@ -68,7 +70,8 @@ class Project(object):
         self.modelica_info = ModelicaInfo()
 
         self.modelica_project = self.name
-        self.weather_file_name = "TRY_5_Essen.txt"
+        self.weather_file_header = ""
+        self.weather_file_path = ""
         self.list_of_buildings = []
         self._calculation_method = "vdi"
 
@@ -96,34 +99,6 @@ class Project(object):
 
         '''
         return DataClass(type_element_file)
-
-    def load_weather_file(self, weather_path, file_name):
-        '''Loads an arbitrary weather file into the InputData Folder
-
-        Load your own weather data into the project
-        Needs to be loaded before the type building is created and the record
-        is exported
-
-        Parameters
-        ----------
-
-        weather_path : string
-            Path to the folder where new weather file is stored
-        file_name : string
-            name of the weather file
-
-        '''
-        self.weather_file_name = file_name
-        weather_file = weather_path + file_name
-        output_path = (utilis.get_full_path("InputData\\Boundaries \
-                                            TypeBuilding\\") + file_name)
-
-        try:
-            shutil.copyfile(weather_file, output_path)
-        except:
-            pass
-        else:
-            pass
 
     def calc_all_buildings(self, calculation_core):
         '''Calculates values for all project buildings
@@ -689,7 +664,8 @@ class Project(object):
         self.name = "Project"
 
         self.modelica_project = self.name
-        self.weather_file_name = "TRY_5_Essen.txt"
+        self.weather_file_header = ""
+        self.weather_file_path = ""
         self.list_of_buildings = []
         self.calculation_method = "vdi"
 
