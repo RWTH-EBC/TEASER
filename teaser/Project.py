@@ -43,7 +43,7 @@ class Project(object):
         Attributes
         ----------
 
-        list_of_buildings : list
+        buildings : list
             list of all buildings in one project, instances of Building()
         data : list
             instance of Data containing the XML binding classes, instance of
@@ -72,7 +72,7 @@ class Project(object):
         self.modelica_project = self.name
         self.weather_file_header = ""
         self.weather_file_path = ""
-        self.list_of_buildings = []
+        self.buildings = []
         self._calculation_method = "vdi"
 
         self.load_data = load_data
@@ -116,7 +116,7 @@ class Project(object):
         else:
             self.calculation_method = calculation_core
 
-        for bldg in self.list_of_buildings:
+        for bldg in self.buildings:
 
             bldg.calc_building_parameter(calculation_core)
 
@@ -154,7 +154,7 @@ class Project(object):
 
         '''
 
-        for bldg in self.list_of_buildings:
+        for bldg in self.buildings:
             bldg.year_of_retrofit = year_of_retrofit
             bldg.retrofit_building()
 
@@ -666,7 +666,7 @@ class Project(object):
         self.modelica_project = self.name
         self.weather_file_header = ""
         self.weather_file_path = ""
-        self.list_of_buildings = []
+        self.buildings = []
         self.calculation_method = "vdi"
 
         self._type_element_file = None
@@ -693,7 +693,7 @@ class Project(object):
 
         self._calculation_method = value
         
-        for bldg in self.list_of_buildings:
+        for bldg in self.buildings:
             bldg.calculation_method = value
         
     @property

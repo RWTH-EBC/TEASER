@@ -68,7 +68,7 @@ def save_gml(project, path, ref_coordinates=None):
         bldg_center = [0,0,0]
         pass
 
-    for i, bldg_count in enumerate(project.list_of_buildings):
+    for i, bldg_count in enumerate(project.buildings):
 
         gml_out.featureMember.append(citygml.cityObjectMember())
 
