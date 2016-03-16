@@ -3,19 +3,16 @@
 
 """This module includes the Project class, which serves as base class and API
 """
-try:
-    import teaser.Data.Output.CityGML_output as citygml_out
-except:
-    warnings.warn("No CityGML module found, no CityGML import/export")
+
 
 import warnings
+import shutil
+import teaser.Logic.Utilis as utilis
 import teaser.Data.Input.TeaserXML_input as txml_in
 import teaser.Data.Output.TeaserXML_output as txml_out
 import teaser.Data.Input.OldTeaser_input as old_teaser
+import teaser.Data.Output.Modelica_output as modelica_out
 from teaser.Data.DataClass import DataClass
-
-import teaser.Logic.Utilis as utilis
-import shutil
 from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute import Institute
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import Institute4
@@ -23,6 +20,10 @@ from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import Institute8
 from teaser.Logic.BuildingObjects.TypeBuildings.Residential import Residential
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 
+try:
+    import teaser.Data.Output.CityGML_output as citygml_out
+except:
+    warnings.warn("No CityGML module found, no CityGML import/export")
 
 class Project(object):
 
@@ -620,8 +621,45 @@ class Project(object):
             new_path = path + "\\" + name
             utilis.create_path(utilis.get_full_path(path))
 
-        citygml.save_gml(self, new_path)
+        citygml_out.save_gml(self, new_path)
 
+    def export_record(self, building_model="None", zone_model="None",
+                  corG=None, internal_id=None, path=None):
+        '''Exports values to a record file for Modelica simulation
+
+        Parameters
+        ----------
+
+        building_model : string
+            setter of the used Aixlib building model (None, MultizoneEquipped,
+            Multizone)
+        zone_model : string
+            setter of the used Aixlib zone model (ThermalZoneEquipped,
+            ThermalZone)
+        corG : boolean
+            setter of the used g value calculation in the model
+        internal_id : float
+            setter of the used building which will be exported, if None then
+            all buildings will be exported
+        path : string
+            if the Files should not be stored in OutputData, an alternative
+            path can be specified as a full and absolute path
+
+        '''
+
+        if path is None:
+            path = utilis.get_default_path() + "\\" + self.name
+        else:
+            path = path + "\\" + self.name
+
+        utilis.create_path(path)
+
+        modelica_out.export_aixlib(prj=self,
+                                   building_model=building_model,
+                                   zone_model=zone_model,
+                                   corG=corG,
+                                   internal_id=internal_id,
+                                   path=path)
 
     def set_default(self):
         '''sets all attributes except self.data to default

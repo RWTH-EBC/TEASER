@@ -10,9 +10,11 @@ import teaser.Logic.Utilis as utilis
 from mako.template import Template
 
 
-def export_record(prj, building_model="None", zone_model="None",
-                  corG=None, internal_id=None, path=None):
+def export_aixlib(prj, building_model="None", zone_model="None",
+                corG=None, internal_id=None, path=None):
     '''Exports values to a record file for Modelica simulation
+
+    The Export function for creating a AixLib LOM Multizone model
 
     Parameters
     ----------
@@ -33,46 +35,25 @@ def export_record(prj, building_model="None", zone_model="None",
         path can be specified as a full and absolute path
 
     '''
+
     #check the arguments
-    assert(building_model) in ["None", "MultizoneEquipped", "Multizone"]
-    assert(zone_model) in ["None", "ThermalZoneEquipped", "ThermalZone"]
-    assert(corG) in [None, True, False]
-    if path is None:
-        path = utilis.get_default_path() + "\\" + prj.name
-    else:
-        path = path + "\\" + prj.name
+    assert building_model in ["None", "MultizoneEquipped", "Multizone"]
+    assert zone_model in ["None", "ThermalZoneEquipped", "ThermalZone"]
+    assert corG in [None, True, False]
 
-    utilis.create_path(path)
-    """
-    input_path = utilis.get_full_path("InputData\\BoundariesTypeBuilding")
-
-    try:
-        shutil.copytree(
-            input_path, utilis.get_full_path(path) + "\\Tables")
-    except:
-        pass
-    else:
-        pass
-    """
     uses = ['Modelica(version = "3.2.1")',
             "AixLib(version=\"0.2.5\")"]
-
-    # for bldg in prj.list_of_buildings:
-    #     assert bldg._calculation_method == "vdi", ("AixLib needs \
-    #     calculation core vdi")
-    # might not need this, user only needs to know what kind of
-    # zone records are exported here
 
     # use the same zone templates for all exports
     zone_template = Template(
         filename=utilis.get_full_path(
-            "InputData\\RecordTemplate\\AixLib\\AixLib_zone"))
+            "Data\\Output\\ModelicaTemplate\\AixLib\\AixLib_zone"))
     model_template = Template(
         filename=utilis.get_full_path(
-            "InputData\\RecordTemplate\\AixLib\\AixLib_model"))
+            "Data\\Output\\ModelicaTemplate\\AixLib\\AixLib_model"))
     zone_base_template = Template(
         filename=utilis.get_full_path(
-            "InputData\\RecordTemplate\\AixLib\\AixLib_base"))
+            "Data\\Output\\ModelicaTemplate\\AixLib\\AixLib_base"))
     # list which contains exported buildings
     if internal_id is not None:
         exported_list_of_buildings = [bldg for bldg in
@@ -171,7 +152,7 @@ def export_record(prj, building_model="None", zone_model="None",
                 out_file.write(zone_template.render_unicode(
                     bldg=bldg, zone=zone,
                     calc_core=bldg._calculation_method))
-                # not sure if we need the calc
+
                 out_file.close()
         print("Exports can be found here:")
         print(path)
@@ -182,7 +163,7 @@ def export_record(prj, building_model="None", zone_model="None",
 
 
 
-def _help_package(prj, path, name, uses=None):
+def _help_package(path, name, uses=None):
     '''creates a package.mo file
 
     private function, do not call
@@ -198,8 +179,7 @@ def _help_package(prj, path, name, uses=None):
     '''
 
     package_template = Template(filename=utilis.get_full_path
-                                ("InputData\\RecordTemplate\\package"))
-
+                                ("Data\\Output\\ModelicaTemplate\\package"))
     out_file = open(
         utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
     out_file.write(package_template.render_unicode(name=name, uses=uses))
@@ -226,7 +206,7 @@ def _help_package_order(path, package_list, addition=None, extra=None):
 
     '''
     order_template = Template(filename=utilis.get_full_path
-                              ("InputData\\RecordTemplate\\package_order"))
+                              ("Data\\Output\\ModelicaTemplate\\package_order"))
 
     out_file = open(
         utilis.get_full_path(path + "\\" + "package" + ".order"), 'w')
