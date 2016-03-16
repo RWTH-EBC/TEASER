@@ -23,7 +23,7 @@ def export_parameters_txt(prj, path):
     else:
         path = path+"\\"+prj.name
 
-    for bldg in prj.list_of_buildings:
+    for bldg in prj.buildings:
         bldg_path = path + "\\" + bldg.name + "\\"
         utilis.create_path(utilis.get_full_path(bldg_path))
         readable_template = Template(

@@ -57,10 +57,10 @@ def export_aixlib(prj, building_model="None", zone_model="None",
     # list which contains exported buildings
     if internal_id is not None:
         exported_list_of_buildings = [bldg for bldg in
-                                      prj.list_of_buildings if
+                                      prj.buildings if
                                       bldg.internal_id == internal_id]
     else:
-        exported_list_of_buildings = prj.list_of_buildings
+        exported_list_of_buildings = prj.buildings
 
     # here we diff between zonerecord export and full model support
     if building_model != "None" and zone_model != "None" and\

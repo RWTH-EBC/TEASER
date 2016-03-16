@@ -30,7 +30,7 @@ def save_teaser_xml(path, project):
 
     teaser_out = pb.Project()
 
-    for bldg in project.list_of_buildings:
+    for bldg in project.buildings:
 
         if type(bldg).__name__ == "Building":
 
