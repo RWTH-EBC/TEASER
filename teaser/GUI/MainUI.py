@@ -1067,78 +1067,78 @@ class MainUI(QDialog):
                     if element.internal_id == self.current_element.internal_id:
                         index = zone.inner_walls.index(element)
                         zone.inner_walls[index].name = \
-                            self.element_name_textbox.text()
+                            str(self.element_name_textbox.text())
                         zone.inner_walls[index].construction_type = \
-                            self.element_construction_type_combobox.\
-                            currentText()
+                            str(self.element_construction_type_combobox.\
+                            currentText())
                         zone.inner_walls[index].orientation = \
                             self.guiinfo.orientations_strings \
                             [str(self.element_orientation_combobox.currentText())]
                         zone.inner_walls[index].area = \
-                           self.element_area_textbox.text()
+                           str(self.element_area_textbox.text())
                         zone.inner_walls[index].year_of_construction = \
-                            self.element_year_of_construction_textbox.text()
+                            str(self.element_year_of_construction_textbox.text())
                         zone.inner_walls[index].year_of_retrofit = \
-                            self.element_year_of_retrofit_textbox.text()
+                            str(self.element_year_of_retrofit_textbox.text())
                         zone.inner_walls[index].tilt = \
-                            self.element_tilt_textbox.text()
+                            str(self.element_tilt_textbox.text())
                         zone.inner_walls[index].inner_convection = \
-                            self.element_inner_convection_textbox.text()
+                            str(self.element_inner_convection_textbox.text())
                         zone.inner_walls[index].inner_radiation = \
-                           self.element_inner_radiation_textbox.text()
+                            str(self.element_inner_radiation_textbox.text())
                         zone.inner_walls[index].ua_value = \
-                           self.element_uvalue_textbox.text()
+                           str(self.element_uvalue_textbox.text())
                 for element in zone.outer_walls:
                     if element.internal_id == self.current_element.internal_id:
                         index = zone.outer_walls.index(element)
                         zone.outer_walls[index].name = \
-                            self.element_name_textbox.text()
+                            str(self.element_name_textbox.text())
                         zone.outer_walls[index].construction_type = \
-                            self.element_construction_type_combobox.\
-                            currentText()
+                            str(self.element_construction_type_combobox.\
+                            currentText())
                         zone.outer_walls[index].orientation = \
                             self.guiinfo.orientations_strings\
                             [self.element_orientation_combobox.currentText()]
                         zone.outer_walls[index].area = \
-                            self.element_area_textbox.text()
+                            str(self.element_area_textbox.text())
                         zone.outer_walls[index].year_of_construction = \
-                            self.element_year_of_construction_textbox.text()
+                            str(self.element_year_of_construction_textbox.text())
                         zone.outer_walls[index].year_of_retrofit = \
-                            self.element_year_of_retrofit_textbox.text()
+                            str(self.element_year_of_retrofit_textbox.text())
                         zone.outer_walls[index].tilt = \
-                            self.element_tilt_textbox.text()
+                            str(self.element_tilt_textbox.text())
                         zone.outer_walls[index].inner_convection = \
-                            self.element_inner_convection_textbox.text()
+                            str(self.element_inner_convection_textbox.text())
                         zone.outer_walls[index].inner_radiation = \
-                            self.element_inner_radiation_textbox.text()
+                            str(self.element_inner_radiation_textbox.text())
                         zone.outer_walls[index].ua_value = \
-                            self.element_uvalue_textbox.text()
+                            str(self.element_uvalue_textbox.text())
                         break
                 for element in zone.windows:
                     if element.internal_id == self.current_element.internal_id:
                         index = zone.windows.index(element)
                         zone.windows[index].name = \
-                            self.element_name_textbox.text()
+                            str(self.element_name_textbox.text())
                         zone.windows[index].construction_type = \
-                            self.element_construction_type_combobox.\
-                            currentText()
+                            str(self.element_construction_type_combobox.\
+                            currentText())
                         zone.windows[index].orientation = \
                             self.guiinfo.orientations_strings\
                             [self.element_orientation_combobox.currentText()]
                         zone.windows[index].area = \
-                            self.element_area_textbox.text()
+                            str(self.element_area_textbox.text())
                         zone.windows[index].year_of_construction = \
-                            self.element_year_of_construction_textbox.text()
+                            str(self.element_year_of_construction_textbox.text())
                         zone.windows[index].year_of_retrofit = \
-                            self.element_year_of_retrofit_textbox.text()
+                            str(self.element_year_of_retrofit_textbox.text())
                         zone.windows[index].tilt = \
-                            self.element_tilt_textbox.text()
+                            str(self.element_tilt_textbox.text())
                         zone.windows[index].inner_convection = \
-                            self.element_inner_convection_textbox.text()
+                            str(self.element_inner_convection_textbox.text())
                         zone.windows[index].inner_radiation = \
-                            self.element_inner_radiation_textbox.text()
+                            str(self.element_inner_radiation_textbox.text())
                         zone.windows[index].ua_value = \
-                            self.element_uvalue_textbox.text()
+                            str(self.element_uvalue_textbox.text())
                         break
 
     def save_input_values_set_all_constr(self):
