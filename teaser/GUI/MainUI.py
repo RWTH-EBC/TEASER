@@ -5133,7 +5133,7 @@ class MainUI(QDialog):
         self.element_uvalue_textbox = QtGui.QLineEdit()
         self.element_uvalue_textbox.setObjectName(
             _fromUtf8("ElementUValueTextBox"))
-        self.element_uvalue_textbox.setText(str(self.current_element.ua_value))
+        self.element_uvalue_textbox.setText(str(self.current_element.ua_value/self.current_element.area))
         self.element_uvalue_textbox.setReadOnly(True)
 
         self.element_add_material_button = QtGui.QPushButton()
