@@ -1323,7 +1323,7 @@ class MainUI(QDialog):
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
             self.type_building_ind_att)
-        for building in self.project.list_of_buildings:
+        for building in self.project.buildings:
             if building.internal_id == int_id:
                 self.current_building = building
         self.display_current_building()
@@ -1345,7 +1345,7 @@ class MainUI(QDialog):
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
             self.type_building_ind_att)
-        for building in self.project.list_of_buildings:
+        for building in self.project.buildings:
             if building.internal_id == int_id:
                 self.current_building = building
         self.display_current_building()
@@ -1367,7 +1367,7 @@ class MainUI(QDialog):
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
             self.type_building_ind_att)
-        for building in self.project.list_of_buildings:
+        for building in self.project.buildings:
             if building.internal_id == int_id:
                 self.current_building = building
         self.display_current_building()
@@ -1389,7 +1389,7 @@ class MainUI(QDialog):
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
             self.type_building_ind_att)
-        for building in self.project.list_of_buildings:
+        for building in self.project.buildings:
             if building.internal_id == int_id:
                 self.current_building = building
         self.display_current_building()
@@ -1411,7 +1411,7 @@ class MainUI(QDialog):
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
             self.type_building_ind_att)
-        for building in self.project.list_of_buildings:
+        for building in self.project.buildings:
             if building.internal_id == int_id:
                 self.current_building = building
         self.display_current_building()
@@ -1686,7 +1686,7 @@ class MainUI(QDialog):
         '''
 
         cIndex = self.side_bar_buildings_combo_box.currentIndex()
-        for building in self.project.list_of_buildings:
+        for building in self.project.buildings:
             fIndex = self.side_bar_buildings_combo_box.findData(
                 str(building.internal_id))
             if fIndex == cIndex:
@@ -1722,7 +1722,7 @@ class MainUI(QDialog):
             self.element_model.clear()
             self.outer_elements_model.clear()
             for zone in self.project.\
-                list_of_buildings[self.project.list_of_buildings.index(
+                buildings[self.project.buildings.index(
                     self.current_building)].thermal_zones:
                 item = TrackableItem(
                     "Name:\t".expandtabs(8) + str(zone.name) + 
@@ -1889,7 +1889,7 @@ class MainUI(QDialog):
             self.zone_model.clear()
             self.outer_elements_model.clear()
             for zone in self.project.\
-                list_of_buildings[self.project.list_of_buildings.
+                buildings[self.project.buildings.
                                   index(self.current_building)].thermal_zones:
                 item = TrackableItem(
                     "Name:\t".expandtabs(8) + str(zone.name) +
@@ -2225,7 +2225,7 @@ class MainUI(QDialog):
             try:
                 item = self.zone_model.itemFromIndex(
                     self.zones_list_view.currentIndex())
-                for building in self.project.list_of_buildings:
+                for building in self.project.buildings:
                     for zone in building.thermal_zones:
                         if (zone.internal_id == item.internal_id):
                             ind = building.thermal_zones.index(zone)
@@ -2246,7 +2246,7 @@ class MainUI(QDialog):
         try:
             item = self.element_model.itemFromIndex(
                 self.zone_element_list_view.currentIndex())
-            for building in self.project.list_of_buildings:
+            for building in self.project.buildings:
                 for zone in building.thermal_zones:
                     for element in zone.outer_walls:
                         if (element.internal_id == item.internal_id):
@@ -2277,7 +2277,7 @@ class MainUI(QDialog):
         try:
             item = self.element_layer_model.itemFromIndex(
                 self.element_material_list_view.currentIndex())
-            for building in self.project.list_of_buildings:
+            for building in self.project.buildings:
                 for zone in building.thermal_zones:
                     for element in zone.outer_walls:
                         for current_layer in element.layer:
@@ -2643,12 +2643,12 @@ class MainUI(QDialog):
         into the list of buildings of the older project and all the
         values of the old project are overwritten        
         '''
-        for building in self.project.list_of_buildings:
-            loaded_project.list_of_buildings.insert(0, building)
+        for building in self.project.buildings:
+            loaded_project.buildings.insert(0, building)
         self.project = loaded_project
         self.project.modelica_info = ModelicaInfo()
 
-        self.current_building = self.project.list_of_buildings[-1]
+        self.current_building = self.project.buildings[-1]
         self.display_current_building()
 
     def check_new_building_inputs(self):
@@ -2663,7 +2663,7 @@ class MainUI(QDialog):
             self.project, "temp")
         self.current_building.name = \
             self.generate_new_building_id_line_edit.text()
-        self.project.list_of_buildings.append(self.current_building)
+        self.project.buildings.append(self.current_building)
         self.display_current_building()
 
     def check_new_element_inputs(self):
