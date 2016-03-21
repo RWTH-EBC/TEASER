@@ -6,6 +6,6 @@ python:
 install:
   - pip install -e .
 script:
-  - py.test
+  - python -m pytest
 notifications:
   email: false
