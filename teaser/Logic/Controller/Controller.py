@@ -24,7 +24,6 @@ import teaser.Logic.Utilis as utilis
 from PyQt4.uic.Compiler.qtproxies import QtGui
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
-from _ast import IsNot
 
 
 class Controller():
