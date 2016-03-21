@@ -6,7 +6,7 @@ python:
 install:
   - pip install -e .
   - pip install pytest
-  - pip install scipy
+  - sudo apt-get install python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose
 script:
   - py.test tests/Test_data.py
 notifications:
