@@ -2,25 +2,24 @@
 # created June 2015
 # by TEASER4 Development Team
 
+import matplotlib.pyplot as plt
+import os
+import sys
 from PyQt4 import QtCore, QtGui
-from PyQt4.Qt import QDialog, QStandardItemModel, QMessageBox
+from PyQt4.Qt import QDialog, QStandardItemModel
 from PyQt4.Qt import Qt
 from PyQt4.QtCore import SIGNAL
-from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap, QTabBar
-import teaser.Logic.Utilis as utilis
-from teaser.GUI.GUIHelperClasses.PictureButton import PictureButton
-from teaser.Project import Project
-from teaser.Logic.Controller.Controller import Controller
-from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
-from teaser.GUI.GUIHelperClasses.TrackableItem import TrackableItem
-from teaser.GUI.GUIHelperClasses.ListViewZonesFiller import ListViewZonesFiller
-from teaser.GUI.GUIHelperClasses.GUIInfo import GUIInfo
+from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-import matplotlib.pyplot as plt
-import sys
-import os
-from teaser.Logic import Utilis
-from numpy.distutils.pathccompiler import PathScaleCCompiler
+
+import teaser.Logic.Utilis as utilis
+from teaser.GUI.Controller.Controller import Controller
+from teaser.GUI.GUIHelperClasses.GUIInfo import GUIInfo
+from teaser.GUI.GUIHelperClasses.ListViewZonesFiller import ListViewZonesFiller
+from teaser.GUI.GUIHelperClasses.PictureButton import PictureButton
+from teaser.GUI.GUIHelperClasses.TrackableItem import TrackableItem
+from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
+from teaser.Project import Project
 
 try:
     _fromUtf8 = Qt.QString.fromUtf8
