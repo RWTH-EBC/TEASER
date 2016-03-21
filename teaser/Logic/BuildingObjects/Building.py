@@ -651,7 +651,7 @@ class Building(object):
 
             if inspect.isclass(Building):
 
-                self.__parent.list_of_buildings.append(self)
+                self.__parent.buildings.append(self)
         else:
             pass
 
