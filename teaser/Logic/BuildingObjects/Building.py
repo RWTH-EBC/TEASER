@@ -655,16 +655,8 @@ class Building(object):
             except ValueError:
                 print("Can't convert name to string")
 
-        numbers = ""
-        if self.__name.startswith(('1', '2', '3', '4', '5',
-                                   '6', '7', '8', '9', '0')):
-            for ch in self.__name:
-                if ch in ('1', '2', '3', '4', '5', '6', '7', '8', '9', '0'):
-                    numbers += ch
-                else:
-                    break
-
-        self.__name = self.__name.lstrip(numbers)
+        if self.__name[0].isdigit():
+            self.__name = "B" + self.__name
 
     @property
     def year_of_construction(self):
