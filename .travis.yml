@@ -5,7 +5,8 @@ python:
   - "3.4"
 install:
   - pip install -e .
+  - pip install pytest
 script:
-  - python -m pytest
+  - py.test
 notifications:
   email: false
