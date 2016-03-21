@@ -24,6 +24,7 @@ import teaser.Logic.Utilis as utilis
 from PyQt4.uic.Compiler.qtproxies import QtGui
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
+from _ast import IsNot
 
 
 class Controller():
@@ -38,8 +39,10 @@ class Controller():
     @classmethod
     def click_add_new_layer(self, parent, position, thick, mat_nam, den, therm,
                             heat, solar, ir, trans):
-        layer = Layer(parent)
-        layer.position = position
+        
+        layer = Layer()
+        if parent is not None:
+            parent.add_layer(position,layer)
         mat = Material(layer)
         mat.name = mat_nam
         mat.density = den
