@@ -5,6 +5,7 @@ python:
   - "3.4"
 install:
   - pip install --upgrade pip
+  - pip wheel scipy
   - pip install scipy
   - pip install -e .
   - pip install pytest
