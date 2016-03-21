@@ -269,7 +269,7 @@ class Controller():
 
     @classmethod
     def switch_zone_type(self, zone_type, project, zone_id):
-        for building in project.list_of_buildings:
+        for building in project.buildings:
             for zone in building.thermal_zones:
                 if zone.internal_id == zone_id:
                     zone.use_conditions.load_use_conditions(zone_type)
