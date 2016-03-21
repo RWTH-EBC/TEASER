@@ -39,7 +39,7 @@ class Project(object):
         Attributes
         ----------
 
-        list_of_buildings : list
+        buildings : list
             list of all buildings in one project, instances of Building()
         data : list
             instance of Data containing the XML binding classes, instance of
@@ -65,7 +65,7 @@ class Project(object):
 
         self.modelica_project = self.name
         self.weather_file_name = "TRY_5_Essen.txt"
-        self.list_of_buildings = []
+        self.buildings = []
         self._calculation_method = "vdi"
 
         self.load_data = load_data
@@ -137,7 +137,7 @@ class Project(object):
         else:
             self.calculation_method = calculation_core
 
-        for bldg in self.list_of_buildings:
+        for bldg in self.buildings:
 
             bldg.calc_building_parameter(calculation_core)
 
@@ -175,7 +175,7 @@ class Project(object):
 
         '''
 
-        for bldg in self.list_of_buildings:
+        for bldg in self.buildings:
             bldg.year_of_retrofit = year_of_retrofit
             bldg.retrofit_building()
 
@@ -667,7 +667,7 @@ class Project(object):
         uses = ['Modelica(version = "3.2.1")',
                 "AixLib(version=\"0.2.5\")"]
 
-        # for bldg in self.list_of_buildings:
+        # for bldg in self.buildings:
         #     assert bldg._calculation_method == "vdi", ("AixLib needs \
         #     calculation core vdi")
         # might not need this, user only needs to know what kind of
@@ -685,11 +685,11 @@ class Project(object):
                 "InputData\\RecordTemplate\\AixLib\\AixLib_base"))
         # list which contains exported buildings
         if internal_id is not None:
-            exported_list_of_buildings = [bldg for bldg in
-                                          self.list_of_buildings if
+            exported_buildings = [bldg for bldg in
+                                          self.buildings if
                                           bldg.internal_id == internal_id]
         else:
-            exported_list_of_buildings = self.list_of_buildings
+            exported_buildings = self.buildings
 
         # here we diff between zonerecord export and full model support
         if building_model != "None" and zone_model != "None" and\
@@ -698,9 +698,9 @@ class Project(object):
             print("full model support")
 
             self._help_package(path, self.name, uses)
-            self._help_package_order(path, exported_list_of_buildings)
+            self._help_package_order(path, exported_buildings)
 
-            for bldg in exported_list_of_buildings:
+            for bldg in exported_buildings:
 
                 bldg_path = path + "\\" + bldg.name + "\\"
                 utilis.create_path(utilis.get_full_path(bldg_path))
@@ -761,8 +761,8 @@ class Project(object):
             corG is None:
             # only export the baserecords
             self._help_package(path, self.name, uses)
-            self._help_package_order(path, exported_list_of_buildings)
-            for bldg in exported_list_of_buildings:
+            self._help_package_order(path, exported_buildings)
+            for bldg in exported_buildings:
 
                 bldg_path = path + "\\" + bldg.name + "\\"
                 utilis.create_path(utilis.get_full_path(bldg_path))
@@ -805,7 +805,7 @@ class Project(object):
         else:
             path = path+"\\"+self.name
 
-        for bldg in self.list_of_buildings:
+        for bldg in self.buildings:
             bldg_path = path + "\\" + bldg.name + "\\"
             utilis.create_path(utilis.get_full_path(bldg_path))
             readable_template = Template(
@@ -880,7 +880,7 @@ class Project(object):
 
         self.modelica_project = self.name
         self.weather_file_name = "TRY_5_Essen.txt"
-        self.list_of_buildings = []
+        self.buildings = []
         self.calculation_method = "vdi"
 
         self._type_element_file = None
@@ -907,7 +907,7 @@ class Project(object):
 
         self._calculation_method = value
         
-        for bldg in self.list_of_buildings:
+        for bldg in self.buildings:
             bldg.calculation_method = value
         
     @property
