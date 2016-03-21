@@ -155,7 +155,7 @@ def load_teaser_xml(path, project):
                                       groundfloor, orientation_dict)
                 set_layer_data_teaser(out_wall_node, groundfloor)
 
-    for buildingCount in project.list_of_buildings:
+    for buildingCount in project.buildings:
         for zone_count in buildingCount.thermal_zones:
             zone_count.set_volume_zone()
         for key, value in buildingCount.outer_area.items():
