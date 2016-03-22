@@ -2199,7 +2199,7 @@ class MainUI(QDialog):
         values for the new type and updates the window
         
         '''
-        print("hallo")
+
         try:
             cIndex = self.new_layerX_material_combobox.currentText()
             check = 0
