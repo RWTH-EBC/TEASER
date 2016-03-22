@@ -4,6 +4,7 @@
 
 import teaser.Data.SchemaBindings.MaterialBind as mat_bind
 import teaser.Logic.Utilis as utilis
+import re
 
 
 class Material(object):
