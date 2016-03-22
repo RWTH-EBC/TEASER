@@ -2,6 +2,7 @@
 # by TEASER4 Development Team
 from __future__ import division
 import math
+import re
 import collections
 import random
 import warnings
@@ -779,15 +780,16 @@ class ThermalZone(object):
     @name.setter
     def name(self, value):
         if isinstance(value, str):
-
-            self._name = value.replace(" ", "")
+            regex = re.compile('[^a-zA-z0-9]')
+            self._name = regex.sub('', value)
         else:
             try:
                 value = str(value)
-                self._name = value.replace(" ", "")
-
+                regex = re.compile('[^a-zA-z0-9]')
+                self._name = regex.sub('', value)
             except ValueError:
                 print("Can't convert name to string")
+
 
     @property
     def outer_walls(self):
