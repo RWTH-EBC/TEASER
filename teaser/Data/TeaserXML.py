@@ -7,26 +7,22 @@ This module contains function to save and load Projects in the proprietary
 TEASER file format .tXML
 """
 
-
 import teaser.Data.SchemaBindings.ProjectBind as pb
-
-import teaser.Logic.Utilis as utilis
-
-from teaser.Logic.BuildingObjects.Building import Building
-from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU import BuildingAHU
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599 import \
+from teaser.Logic.ArchetypeBuildings.UseConditions18599 import \
     UseConditions18599
-from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
-from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
+from teaser.Logic.BuildingObjects.Building import Building
+from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import \
     GroundFloor
 from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
-from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
+from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
+from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
+from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
+from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
+from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU import BuildingAHU
+from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 
 
 def save_teaser_xml(path, project):

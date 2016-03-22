@@ -4,8 +4,8 @@ Created July 2015
 @author: TEASER 4 Development Team
 '''
 
-from teaser.Project import Project
 from teaser.Logic import Utilis
+from teaser.Project import Project
 # import xml.etree.ElementTree as et
 
 import HelpTest
@@ -127,7 +127,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
+        from teaser.Logic.ArchetypeBuildings.BMVBS import Office
 
         prj.set_default()
         test_office = Office(parent=prj,
@@ -255,7 +255,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import \
+        from teaser.Logic.ArchetypeBuildings.BMVBS import \
             Institute4
 
         prj.set_default()
@@ -311,7 +311,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import \
+        from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import \
             Institute8
 
         prj.set_default()
@@ -367,7 +367,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.BuildingObjects.TypeBuildings.Institute import \
+        from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute import \
             Institute
 
         prj.set_default()
@@ -423,7 +423,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.BuildingObjects.TypeBuildings.Residential import \
+        from teaser.Logic.ArchetypeBuildings.BMVBS.Residential import \
             Residential
 
         prj.set_default()

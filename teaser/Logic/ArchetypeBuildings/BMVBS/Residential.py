@@ -1,19 +1,20 @@
 # created June 2015
 # by TEASER4 Development Team
 
-from teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding \
+from teaser.Logic.BuildingObjects.ArchetypeBuildings.TypeBuilding \
  import TypeBuilding
-from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599\
- import UseConditions18599 as UseCond
+
+from teaser.Logic.ArchetypeBuildings.UseConditions18599 \
+    import UseConditions18599 as UseCond
+from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor\
  import GroundFloor
+from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
-from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
-from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 
 
 class Residential(TypeBuilding):
