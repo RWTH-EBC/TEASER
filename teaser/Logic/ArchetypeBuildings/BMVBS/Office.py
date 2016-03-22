@@ -4,8 +4,8 @@
 
 import math
 
-from teaser.Logic.BuildingObjects.ArchetypeBuildings.TypeBuilding\
- import TypeBuilding
+from teaser.Logic.ArchetypeBuildings.ArchetypeBuilding\
+ import ArchetypeBuilding
 
 from teaser.Logic.ArchetypeBuildings.UseConditions18599 \
     import UseConditions18599 as UseCond
@@ -20,7 +20,7 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 
 
-class Office(TypeBuilding):
+class Office(ArchetypeBuilding):
     '''Type Office Building
 
     Subclass from TypeBuilding to represent office buildings. Allows for
