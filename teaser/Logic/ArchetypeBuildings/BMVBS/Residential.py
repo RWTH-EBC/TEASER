@@ -1,8 +1,8 @@
 # created June 2015
 # by TEASER4 Development Team
 
-from teaser.Logic.BuildingObjects.ArchetypeBuildings.TypeBuilding \
- import TypeBuilding
+from teaser.Logic.ArchetypeBuildings.ArchetypeBuilding \
+ import ArchetypeBuilding
 
 from teaser.Logic.ArchetypeBuildings.UseConditions18599 \
     import UseConditions18599 as UseCond
@@ -17,7 +17,7 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 
 
-class Residential(TypeBuilding):
+class Residential(ArchetypeBuilding):
     '''Type Building Residential.
 
     Subclass from Building to represent Residential Buildings. Allows for
