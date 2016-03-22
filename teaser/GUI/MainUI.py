@@ -1108,6 +1108,10 @@ class MainUI(QDialog):
                             self.element_inner_convection_textbox.text()
                         zone.outer_walls[index].inner_radiation = \
                             self.element_inner_radiation_textbox.text()
+                        zone.outer_walls[index].outer_convection = \
+                            float(self.element_outer_convection_textbox.text())
+                        zone.outer_walls[index].outer_radiation = \
+                            float(self.element_outer_radiation_textbox.text())
                         zone.outer_walls[index].ua_value = \
                             self.element_uvalue_textbox.text()
                         break
@@ -1134,6 +1138,10 @@ class MainUI(QDialog):
                             self.element_inner_convection_textbox.text()
                         zone.windows[index].inner_radiation = \
                             self.element_inner_radiation_textbox.text()
+                        zone.windows[index].outer_convection = \
+                            float(self.element_outer_convection_textbox.text())
+                        zone.windows[index].outer_radiation = \
+                            float(self.element_outer_radiation_textbox.text())
                         zone.windows[index].ua_value = \
                             self.element_uvalue_textbox.text()
                         break
