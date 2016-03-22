@@ -21,7 +21,7 @@ class Test_teaser(object):
         import teaser.Examples.Verification.ParameterVerification_1 as room1
 
         room1_prj = room1.parameter_room1()
-        therm_zone = room1_prj.list_of_buildings[0].thermal_zones[0]
+        therm_zone = room1_prj.buildings[0].thermal_zones[0]
 
         #parameters inner wall Typraum S
 
@@ -45,7 +45,7 @@ class Test_teaser(object):
         import teaser.Examples.Verification.ParameterVerification_3 as room3
 
         room3_prj = room3.parameter_room3()
-        therm_zone = room3_prj.list_of_buildings[0].thermal_zones[0]
+        therm_zone = room3_prj.buildings[0].thermal_zones[0]
 
         #parameters inner wall Typraum L
 
@@ -69,7 +69,7 @@ class Test_teaser(object):
         import teaser.Examples.Verification.ParameterVerification_8 as room8
 
         room8_prj = room8.parameter_room8()
-        therm_zone = room8_prj.list_of_buildings[0].thermal_zones[0]
+        therm_zone = room8_prj.buildings[0].thermal_zones[0]
 
         assert round(therm_zone.r1_iw, 13) == 0.0006688956391
         assert round(therm_zone.c1_iw / 1000, 7) == 12391.3638631
@@ -96,9 +96,9 @@ class Test_teaser(object):
         prj.set_default()
         prj.load_project(Utilis.get_full_path("Examples\\ExampleInputFiles"
                                               "\\new.teaserXML"))
-        therm_zone = prj.list_of_buildings[0].thermal_zones[0]
+        therm_zone = prj.buildings[0].thermal_zones[0]
 
-        prj.list_of_buildings[0].calc_building_parameter('ebc')
+        prj.buildings[0].calc_building_parameter('ebc')
 
         assert round(therm_zone.r1_iw, 11) == 4.62113e-06
         assert round(therm_zone.c1_iw, 2) == 1209810287.22
@@ -554,11 +554,11 @@ class Test_teaser(object):
 
         prj.load_project(Utilis.get_full_path(("Examples/ExampleInputFiles"
                                                "/new.teaserXML")))
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[0]
+        therm_zone = prj.buildings[-1].thermal_zones[0]
         assert therm_zone.outer_walls[0].area == 40.0
-        tz_area = sum([tz.area for tz in prj.list_of_buildings[
+        tz_area = sum([tz.area for tz in prj.buildings[
             -1].thermal_zones])
-        assert prj.list_of_buildings[-1].net_leased_area == tz_area
+        assert prj.buildings[-1].net_leased_area == tz_area
         prj.save_project("unitTest")
         prj.set_default()
 
@@ -567,9 +567,9 @@ class Test_teaser(object):
 
         prj.load_old_teaser(Utilis.get_full_path(("Examples/ExampleInputFiles"
                                                "/Teaser3/SixZoneOffice.xml")))
-        tz_area = sum([tz.area for tz in prj.list_of_buildings[
+        tz_area = sum([tz.area for tz in prj.buildings[
             -1].thermal_zones])
-        assert prj.list_of_buildings[-1].net_leased_area == tz_area
+        assert prj.buildings[-1].net_leased_area == tz_area
         prj.set_default()
 
     #commented until we find solution for opengis PyXB bindings
@@ -682,57 +682,57 @@ class Test_teaser(object):
         '''test of get_inner_wall_area'''
         prj.set_default()
         HelpTest.building_test2(prj)
-        sum_area = prj.list_of_buildings[-1].get_inner_wall_area()
+        sum_area = prj.buildings[-1].get_inner_wall_area()
         assert round(sum_area, 1) == 34.0
 
     def test_set_outer_wall_area(self):
         '''test of set_outer_wall_area'''
-        print(prj.list_of_buildings[-1].thermal_zones[-1].outer_walls[1].area)
-        prj.list_of_buildings[-1].set_outer_wall_area(2.0, 0.0)
+        print(prj.buildings[-1].thermal_zones[-1].outer_walls[1].area)
+        prj.buildings[-1].set_outer_wall_area(2.0, 0.0)
         
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         print(therm_zone.outer_walls[1].area)
         assert round(therm_zone.outer_walls[0].area, 3) == 2.0
         assert round(therm_zone.outer_walls[1].area, 3) == 14.0
 
     def test_get_outer_wall_area(self):
         '''test of get_outer_wall_area'''
-        prj.list_of_buildings[-1].get_outer_wall_area(0.0)
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        prj.buildings[-1].get_outer_wall_area(0.0)
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert round(therm_zone.outer_walls[0].area, 3) == 2.0
         assert round(therm_zone.outer_walls[1].area, 3) == 14.0
 
     def test_set_window_area(self):
         '''test of set_window_area'''
-        prj.list_of_buildings[-1].set_window_area(1.0, 90.0)
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        prj.buildings[-1].set_window_area(1.0, 90.0)
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert round(therm_zone.windows[0].area, 3) == 1.0
 
     def test_get_window_area(self):
         '''test of get_window_area'''
-        prj.list_of_buildings[-1].get_window_area(90.0)
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        prj.buildings[-1].get_window_area(90.0)
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert round(therm_zone.windows[0].area, 3) == 1.0
 
     def test_set_specific_wall_area(self):
         '''test of set_specific_wall_area'''
         prj.set_default()
         HelpTest.building_test2(prj)
-        prj.list_of_buildings[-1].set_specific_wall_area(
-            prj.list_of_buildings[-1].thermal_zones[-1],
-            prj.list_of_buildings[-1].thermal_zones[-1].outer_walls[1],
+        prj.buildings[-1].set_specific_wall_area(
+            prj.buildings[-1].thermal_zones[-1],
+            prj.buildings[-1].thermal_zones[-1].outer_walls[1],
             500)
 
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert round(therm_zone.outer_walls[0].area, 2) == 10.0
         assert round(therm_zone.outer_walls[1].area, 1) == 500
 
     def test_fill_outer_wall_area_dict(self):
         '''test of fill_outer_wall_area_dict'''
 
-        prj.list_of_buildings[-1].fill_outer_area_dict()
+        prj.buildings[-1].fill_outer_area_dict()
         outwall_dict_round = {key: round(value, 2) for key, value in
-                              prj.list_of_buildings[-1].outer_area.items()}
+                              prj.buildings[-1].outer_area.items()}
         assert outwall_dict_round == {-2.0: 140,
                                       -1.0: 140,
                                       0.0: 10.0,
@@ -742,8 +742,8 @@ class Test_teaser(object):
 
     def test_fill_window_area_dict(self):
         '''test of fill_window_area_dict'''
-        prj.list_of_buildings[-1].fill_window_area_dict()
-        assert prj.list_of_buildings[-1].window_area == {90.0: 5.0,
+        prj.buildings[-1].fill_window_area_dict()
+        assert prj.buildings[-1].window_area == {90.0: 5.0,
                                                          180.0: 8.0,
                                                          270.0: 5.0}
 
@@ -752,25 +752,25 @@ class Test_teaser(object):
         prj.set_default()
         HelpTest.building_test2(prj)
 
-        prj.list_of_buildings[-1].calc_building_parameter('vdi')
+        prj.buildings[-1].calc_building_parameter('vdi')
 
-        assert round(prj.list_of_buildings[-1].volume, 1) == 490.0
+        assert round(prj.buildings[-1].volume, 1) == 490.0
         assert round(
-            prj.list_of_buildings[-1].sum_heating_load, 4) == 15210.3459
+            prj.buildings[-1].sum_heating_load, 4) == 15210.3459
 
     #methods in therm_zone
 
     def test_calc_zone_parameters(self):
         '''test of calc zone parameter, no calculation verification'''
 
-        prj.list_of_buildings[-1].thermal_zones[-1].calc_zone_parameters('vdi')
-        prj.list_of_buildings[-1].thermal_zones[-1].calc_zone_parameters('ebc')
+        prj.buildings[-1].thermal_zones[-1].calc_zone_parameters('vdi')
+        prj.buildings[-1].thermal_zones[-1].calc_zone_parameters('ebc')
 
     def test_heating_load(self):
         '''test of heating_load'''
-        prj.list_of_buildings[-1].thermal_zones[-1].calc_heat_load()
+        prj.buildings[-1].thermal_zones[-1].calc_heat_load()
         assert round(
-            prj.list_of_buildings[-1].thermal_zones[-1].heating_load,
+            prj.buildings[-1].thermal_zones[-1].heating_load,
             4) == 15210.3459
 
     def test_combine_building_elements(self):
@@ -780,7 +780,7 @@ class Test_teaser(object):
 
         #execute zone parameters for therm_zone
 
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         for out_wall in therm_zone.outer_walls:
             out_wall.calc_equivalent_res()
             out_wall.calc_ua_value()
@@ -793,8 +793,8 @@ class Test_teaser(object):
             win.calc_equivalent_res()
             win.calc_ua_value()
 
-        prj.list_of_buildings[-1].thermal_zones[-1].combine_building_elements()
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        prj.buildings[-1].thermal_zones[-1].combine_building_elements()
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         # innerwall
 
         assert round(therm_zone.ua_value_iw, 16) == 14.286493860845841
@@ -836,8 +836,8 @@ class Test_teaser(object):
     def test_parallel_connection(self):
         '''test of test_parallel_connection'''
 
-        prj.list_of_buildings[-1].thermal_zones[-1].parallel_connection("vdi")
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        prj.buildings[-1].thermal_zones[-1].parallel_connection("vdi")
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
 
         assert round(therm_zone.r1_ow, 14) == 0.00077277329453
         assert round(therm_zone.c1_ow, 5) == 3648580.59312
@@ -849,8 +849,8 @@ class Test_teaser(object):
         assert round(therm_zone.r_rad_ow_iw, 5) == 0.00058
         assert round(therm_zone.r_rest_ow, 13) == 0.0047407069248
 
-        prj.list_of_buildings[-1].thermal_zones[-1].parallel_connection("ebc")
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        prj.buildings[-1].thermal_zones[-1].parallel_connection("ebc")
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         
         assert round(therm_zone.r1_ow, 12) == 0.001007515484
         assert round(therm_zone.c1_ow, 5) == 3648580.59312
@@ -864,8 +864,8 @@ class Test_teaser(object):
 
     def test_calc_weightfactor(self):
         '''test of calc_weightfactor'''
-        prj.list_of_buildings[-1].thermal_zones[-1].calc_weightfactors('vdi')
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        prj.buildings[-1].thermal_zones[-1].calc_weightfactors('vdi')
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert therm_zone.weightfactor_ow == [0.02453065018076125,
                                               0.03434291025306575,
                                               0.02453065018076125,
@@ -877,11 +877,11 @@ class Test_teaser(object):
                                                0.05421464247265634,
                                                0.0]
 
-        prj.list_of_buildings[-1].thermal_zones[-1].weightfactor_ow = []
-        prj.list_of_buildings[-1].thermal_zones[-1].weightfactor_win = []
+        prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
+        prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
 
-        prj.list_of_buildings[-1].thermal_zones[-1].calc_weightfactors('ebc')
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        prj.buildings[-1].thermal_zones[-1].calc_weightfactors('ebc')
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert therm_zone.weightfactor_ow == [0.03047939672771177,
                                               0.042671155418796486,
                                               0.03047939672771177,
@@ -896,21 +896,21 @@ class Test_teaser(object):
     def test_volume_zone(self):
         '''test of volume_zone'''
 
-        prj.list_of_buildings[-1].thermal_zones[-1].set_volume_zone()
-        assert prj.list_of_buildings[-1].thermal_zones[-1].volume == 490.0
+        prj.buildings[-1].thermal_zones[-1].set_volume_zone()
+        assert prj.buildings[-1].thermal_zones[-1].volume == 490.0
 
     def test_set_inner_wall_area(self):
         '''test of set_inner_wall_area'''
 
-        prj.list_of_buildings[-1].thermal_zones[-1].set_inner_wall_area()
-        for wall in prj.list_of_buildings[-1].thermal_zones[-1].inner_walls:
+        prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
+        for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
             assert round(wall.area, 16) == 11.951219512195122
 
    #methods in UseConditions18599()
 
     def test_load_use_conditions(self):
         '''test of load_use_conditions, no parameter checking'''
-        use_cond = prj.list_of_buildings[-1].thermal_zones[-1].use_conditions
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
         use_cond.load_use_conditions("Living")
 
     def test_save_use_conditions(self):
@@ -921,7 +921,7 @@ class Test_teaser(object):
         except:
             pass
         path = Utilis.get_default_path()
-        use_cond = prj.list_of_buildings[-1].thermal_zones[-1].use_conditions
+        use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
         use_cond.parent = None
         use_cond.save_use_conditions(path=path, file_name="UseCondUT")
 
@@ -932,7 +932,7 @@ class Test_teaser(object):
         prj.set_default()
         HelpTest.building_test2(prj)
 
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].calc_ua_value()
 
         assert round(
@@ -941,7 +941,7 @@ class Test_teaser(object):
 
     def test_gather_element_properties(self):
         '''test of gather_element_properties'''
-        outerWalls = prj.list_of_buildings[-1].thermal_zones[-1].outer_walls[0]
+        outerWalls = prj.buildings[-1].thermal_zones[-1].outer_walls[0]
         number_of_layer, density, thermal_conduc, heat_capac, thickness = \
             outerWalls.gather_element_properties()
         assert number_of_layer == 2
@@ -954,7 +954,7 @@ class Test_teaser(object):
         '''test of load_type_element, no parameter checking'''
 
         # test load function
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].load_type_element(1988, "heavy")
         therm_zone.inner_walls[0].load_type_element(1988, "light")
         therm_zone.windows[0].load_type_element(1988, "heavy")
@@ -968,7 +968,7 @@ class Test_teaser(object):
             pass
 
         # test load function
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         path = Utilis.get_default_path()
         therm_zone.outer_walls[0].parent = None
         therm_zone.outer_walls[0].save_type_element(path=path,
@@ -986,7 +986,7 @@ class Test_teaser(object):
         '''test of calc_equivalent_res, wall'''
         prj.set_default()
         HelpTest.building_test2(prj)
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
 
         therm_zone.outer_walls[0].calc_equivalent_res()
 
@@ -1001,13 +1001,13 @@ class Test_teaser(object):
 
     def test_insulate_wall(self):
         '''test of insulate_wall'''
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].insulate_wall("EPS035", 0.04)
         assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.806838
 
     def test_retrofit_wall(self):
         '''test of retrofit_wall'''
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].retrofit_wall(2016, "EPS035")
         assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.4
 
@@ -1015,7 +1015,7 @@ class Test_teaser(object):
         '''test of calc_equivalent_res, win'''
         prj.set_default()
         HelpTest.building_test2(prj)
-        therm_zone = prj.list_of_buildings[-1].thermal_zones[-1]
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.windows[0].calc_equivalent_res()
 
         assert round(therm_zone.windows[0].r1, 3) == 0.072
