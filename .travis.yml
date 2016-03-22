@@ -1,16 +1,35 @@
 language: python
 python:
-  # We don't actually use the Travis Python, but this keeps it organized.
-  - "2.7_with_system_site_packages"
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install python-numpy
-  - sudo apt-get install python-scipy
-  - sudo apt-get install python-matplotlib
-  - pip install pytest
+  - "2.7"
+install:
+  # Install conda
+  - sudo pip install conda
+  # install deps
+  - sudo conda init
+  - sudo conda update conda --yes
+  - deps='pip numpy pandas requests nose numpydoc sphinx scipy matplotlib'
+  - conda create -p $HOME/py --yes $deps "python=$TRAVIS_PYTHON_VERSION"
+  - export PATH=$HOME/py/bin:$PATH
+  # install your own package into the environment
+  - python setup.py install
   - pip install -e .
 script:
-  # Your test script goes here
-  - python -m pytest tests/Test_data.py
-notifications:
-  email: false
+- "py.test"
+
+
+# language: python
+# python:
+#   # We don't actually use the Travis Python, but this keeps it organized.
+#   - "2.7_with_system_site_packages"
+# before_install:
+#   - sudo apt-get update
+#   - sudo apt-get install python-numpy
+#   - sudo apt-get install python-scipy
+#   - sudo apt-get install python-matplotlib
+#   - pip install pytest
+#   - pip install -e .
+# script:
+#   # Your test script goes here
+#   - python -m pytest tests/Test_data.py
+# notifications:
+#   email: false
