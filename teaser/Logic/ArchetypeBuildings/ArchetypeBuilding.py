@@ -6,7 +6,7 @@
 from teaser.Logic.BuildingObjects.Building import Building
 
 
-class TypeBuilding(Building):
+class ArchetypeBuilding(Building):
     '''Root Class for each type building.
 
     Class as parent of specific type buildings. Subclass from Building to
@@ -25,13 +25,13 @@ class TypeBuilding(Building):
         '''Constructor of TypeBuilding
         '''
 
-        super(TypeBuilding, self).__init__(parent,
-                                           name,
-                                           year_of_construction,
-                                           number_of_floors,
-                                           height_of_floors,
-                                           net_leased_area,
-                                           with_ahu)
+        super(ArchetypeBuilding, self).__init__(parent,
+                                                name,
+                                                year_of_construction,
+                                                number_of_floors,
+                                                height_of_floors,
+                                                net_leased_area,
+                                                with_ahu)
         
         self.file_ahu = "\\AHU_"+self.name+".mat"
         self.file_internal_gains = "\\InternalGains_"+self.name+".mat"
