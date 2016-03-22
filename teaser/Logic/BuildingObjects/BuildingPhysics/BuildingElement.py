@@ -15,6 +15,7 @@ import teaser.Logic.Utilis as utilis
 import numpy as np
 import random
 import warnings
+import re
 
 
 class BuildingElement(object):
@@ -645,13 +646,13 @@ class BuildingElement(object):
     @name.setter
     def name(self, value):
         if isinstance(value, str):
-
-            self._name = value.replace(" ", "")
+            regex = re.compile('[^a-zA-z0-9]')
+            self._name = regex.sub('', value)
         else:
             try:
                 value = str(value)
-                self._name = value.replace(" ", "")
-
+                regex = re.compile('[^a-zA-z0-9]')
+                self._name = regex.sub('', value)
             except ValueError:
                 print("Can't convert name to string")
 
