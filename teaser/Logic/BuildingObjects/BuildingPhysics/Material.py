@@ -4,6 +4,7 @@
 
 import teaser.Data.SchemaBindings.MaterialBind as mat_bind
 import teaser.Logic.Utilis as utilis
+import re
 
 
 class Material(object):
@@ -50,7 +51,7 @@ class Material(object):
         '''
 
         self.parent = parent
-        self.name = ""
+        self._name = ""
         self._density = 0.0
         self._thermal_conduc = 0.0
         self._heat_capac = 0.0
@@ -123,6 +124,23 @@ class Material(object):
 
             self.__parent = value
             self.__parent.material = self
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        if isinstance(value, str):
+            regex = re.compile('[^a-zA-z0-9]')
+            self._name = regex.sub('', value)
+        else:
+            try:
+                value = str(value)
+                regex = re.compile('[^a-zA-z0-9]')
+                self._name = regex.sub('', value)
+            except ValueError:
+                print("Can't convert name to string")
 
     @property
     def thermal_conduc(self):
