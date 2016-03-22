@@ -2,7 +2,9 @@
 # by TEASER4 Development Team
 
 from PyQt4.QtCore import QAbstractListModel, QModelIndex, QVariant, Qt
-from teaser.Logic.Controller.Controller import Controller
+
+from teaser.GUI.Controller import Controller
+
 
 class ZoneUI(QAbstractListModel):
     """ GUI elements for the zones tab """
