@@ -5,6 +5,8 @@ import math
 import collections
 import random
 import warnings
+import re
+
 
 class ThermalZone(object):
     '''This class represents a Thermal Zone in a building
@@ -779,12 +781,13 @@ class ThermalZone(object):
     @name.setter
     def name(self, value):
         if isinstance(value, str):
-
-            self._name = value.replace(" ", "")
+            regex = re.compile('[^a-zA-z0-9]')
+            self._name = regex.sub('', value)
         else:
             try:
                 value = str(value)
-                self._name = value.replace(" ", "")
+                regex = re.compile('[^a-zA-z0-9]')
+                self._name = regex.sub('', value)
 
             except ValueError:
                 print("Can't convert name to string")
