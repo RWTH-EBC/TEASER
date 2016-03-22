@@ -6,6 +6,8 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install python-numpy
   - sudo apt-get install python-scipy
+  - sudo apt-get install python-matplotlib
+  - pip install pytest
   - pip install -e .
 script:
   # Your test script goes here
