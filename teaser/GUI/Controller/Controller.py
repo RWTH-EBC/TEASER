@@ -36,10 +36,10 @@ class Controller():
         ''' '''
 
     @classmethod
-    def click_add_new_layer(self, parent, id, thick, mat_nam, den, therm, heat,
-                            solar, ir, trans):
+    def click_add_new_layer(self, parent, position, thick, mat_nam, den, therm,
+                            heat, solar, ir, trans):
         layer = Layer(parent)
-        layer.id = id
+        layer.position = position
         mat = Material(layer)
         mat.name = mat_nam
         mat.density = den
@@ -49,7 +49,10 @@ class Controller():
         mat.ir_emissivity = ir
         mat.transmittance = trans
         layer.thickness = thick
-        return parent
+        if parent is None:
+            return layer
+        else:
+            return parent
 
     @classmethod
     def click_add_zone_button(self, parent, name, area, zone_type):
@@ -143,7 +146,7 @@ class Controller():
         int_id = 0
 
         if type_of_building == "Office":
-
+            
             building = parent.type_bldg_office(
                 name=name,
                 year_of_construction=year_of_construction,
@@ -266,7 +269,7 @@ class Controller():
 
     @classmethod
     def switch_zone_type(self, zone_type, project, zone_id):
-        for building in project.list_of_buildings:
+        for building in project.buildings:
             for zone in building.thermal_zones:
                 if zone.internal_id == zone_id:
                     zone.use_conditions.load_use_conditions(zone_type)
@@ -276,5 +279,80 @@ class Controller():
     @classmethod
     def click_export_button(self, project, building_model, zone_model, corG,
                             internal_id, path_output_folder):
-        project.export_record(building_model, zone_model, corG,
+               project.export_record(building_model, zone_model, corG,
                               internal_id, path_output_folder)
+
+    @classmethod
+    def click_change_all_constr(self,
+                                bldg,
+                                orientation,
+                                element_type,
+                                tilt,
+                                inner_convection,
+                                inner_radiation,
+                                outer_convection,
+                                outer_radiation,
+                                layer_set):
+        for zone in bldg.thermal_zones:
+            for wall in zone.outer_walls:
+                if element_type == "OuterWall" or element_type == "Rooftop":
+                    if wall.orientation == orientation:
+                        wall.tilt = tilt
+                        wall.inner_convection = inner_convection
+                        wall.inner_radiation = inner_radiation
+                        wall.outer_convection = outer_convection
+                        wall.outer_radiation = outer_radiation
+                        wall.layer = None
+                        for lay_count in layer_set:
+                            wall.add_layer(lay_count.position, lay_count)
+
+                else:
+                    if wall.orientation == orientation:
+                        wall.tilt = tilt
+                        wall.inner_convection = inner_convection
+                        wall.inner_radiation = inner_radiation
+                        wall.layer = None
+                        for lay_count in layer_set:
+                            wall.add_layer(lay_count.position, lay_count)
+
+            for win in zone.windows:
+                if element_type == "Window":
+                    if win.orientation == orientation:
+                        win.tilt = tilt
+                        win.inner_convection = inner_convection
+                        win.inner_radiation = inner_radiation
+                        win.outer_convection = outer_convection
+                        win.outer_radiation = outer_radiation
+                        win.layer = None
+                        for lay_count in layer_set:
+                            win.add_layer(lay_count.position, lay_count)
+
+    @classmethod
+    def click_save_envelopes(self, bldg, orientation_old,
+                             orientation_new, element_type, area):
+
+        if element_type == "Window":
+            # new_window_area = bldg.get_window_area(orientation_new) + area
+            for zone in bldg.thermal_zones:
+                for win in zone.windows:
+                    if element_type == "Window":
+                        if win.orientation == orientation_old:
+                            win.orientation = orientation_new
+            # bldg.set_window_area(new_window_area, orientation_new)
+        else:
+            # new_outer_wall_area = bldg.get_outer_wall_area(orientation_new)
+            # + area
+            for zone in bldg.thermal_zones:
+                for wall in zone.outer_walls:
+                    if element_type == "Outer Wall":
+                        if wall.orientation == orientation_old:
+                            wall.orientation = orientation_new
+
+                    elif element_type == "Rooftop":
+                        if wall.orientation == orientation_old:
+                            wall.orientation = orientation_new
+
+                    elif element_type == "Ground Floor":
+                        if wall.orientation == orientation_old:
+                            wall.orientation = orientation_new
+            # bldg.set_outer_wall_area(new_outer_wall_area, orientation_new)

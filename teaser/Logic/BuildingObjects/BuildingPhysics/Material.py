@@ -143,11 +143,12 @@ class Material(object):
         
         if value is not None:
             self._thermal_conduc = float(value)
-            if self.parent.thickness is not None and\
-               self.parent.parent.inner_convection is not None and\
-               self.parent.parent.inner_radiation is not None and\
-               self.parent.parent.area is not None:
-                self.parent.parent.calc_ua_value()
+            if self.parent.parent is not None:
+                if self.parent.thickness is not None and\
+                   self.parent.parent.inner_convection is not None and\
+                   self.parent.parent.inner_radiation is not None and\
+                   self.parent.parent.area is not None:
+                    self.parent.parent.calc_ua_value()
 
     @property
     def density(self):        

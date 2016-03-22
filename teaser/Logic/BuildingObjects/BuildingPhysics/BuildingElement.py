@@ -200,6 +200,34 @@ class BuildingElement(object):
 
         return number_of_layer, density, thermal_conduc, heat_capac, thickness
 
+
+    def add_layer(self, position, layer):
+        '''Adds a layer at a certain position
+
+        This function adds a Layer instance to the layer list at a given position
+
+        Parameters
+        ----------
+        position : int
+            position in the wall starting from 0 (inner side)
+
+        '''
+
+        self._layer.insert(position, layer)
+
+    def add_layer_list(self, layer_list):
+        '''Appends a layer set to the layer list
+
+        Parameters
+        ----------
+        layer_list : [Layer instance]
+            list of sorted layer instances
+        '''
+        for lay_count in layer_list:
+            self._layer.append(lay_count)
+
+
+
     def load_type_element(self, year, construction):
         '''Typical element loader.
 
