@@ -2212,18 +2212,31 @@ class MainUI(QDialog):
         values for the new type and updates the window
         
         '''
-        cIndex = self.new_layerX_material_combobox.currentText()
+
+        try:
+            cIndex = self.new_layerX_material_combobox.currentText()
+            check = 0
+        except:
+            cIndex = self.new_layer_material_combobox.currentText()
+            check = 1
         for material in self.materials:
             fIndex = material.name
             if fIndex == cIndex:
 
-                self.new_layerX_material_density_textbox.setText(
-                    str(material.density))
-                self.new_layerX_material_thermal_conduc_textbox.setText(
-                    str(material.thermal_conduc))
-                self.new_layerX_material_heat_capac_textbox.setText(
-                    str(material.heat_capac))
-
+                if check == 0:
+                    self.new_layerX_material_density_textbox.setText(
+                        str(material.density))
+                    self.new_layerX_material_thermal_conduc_textbox.setText(
+                        str(material.thermal_conduc))
+                    self.new_layerX_material_heat_capac_textbox.setText(
+                        str(material.heat_capac))
+                else:
+                    self.new_layer_material_density_textbox.setText(
+                        str(material.density))
+                    self.new_layer_material_thermal_conduc_textbox.setText(
+                        str(material.thermal_conduc))
+                    self.new_layer_material_heat_capac_textbox.setText(
+                        str(material.heat_capac))
 
     def delete_thermal_zone(self):
         '''Checks if a building exists, if it does the currently
@@ -3327,15 +3340,6 @@ class MainUI(QDialog):
         self.new_layer_thickness_textbox.setObjectName(
             _fromUtf8("ThicknessTextBox"))
 
-        self.new_layer_material_label = QtGui.QLabel("Material")
-        self.new_layer_material_combobox = QtGui.QComboBox()
-        temp_list = []
-        for material in self.materials:
-            if material.name not in temp_list:
-                temp_list.append(material.name)
-        self.new_layer_material_combobox.addItems(sorted(temp_list))
-        self.is_switchable = True
-
         self.new_layer_material_density_label = QtGui.QLabel("Density")
         self.new_layer_material_density_textbox = QtGui.QLineEdit()
         self.new_layer_material_density_textbox.setObjectName(
@@ -3369,6 +3373,17 @@ class MainUI(QDialog):
         self.new_layer_material_transmittance_textbox = QtGui.QLineEdit()
         self.new_layer_material_transmittance_textbox.setObjectName(
             _fromUtf8("MaterialTransmittanceTextBox"))
+
+        self.new_layer_material_label = QtGui.QLabel("Material")
+        self.new_layer_material_combobox = QtGui.QComboBox()
+        self.connect(self.new_layer_material_combobox, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.load_material)
+        temp_list = []
+        for material in self.materials:
+            if material.name not in temp_list:
+                temp_list.append(material.name)
+        self.new_layer_material_combobox.addItems(sorted(temp_list))
+        self.is_switchable = True
 
         self.new_layer_save_button = QtGui.QPushButton()
         self.new_layer_save_button.setText("Save")
@@ -3511,7 +3526,6 @@ class MainUI(QDialog):
         self.new_layerX_material_transmittance_textbox.setObjectName(
             _fromUtf8("MaterialTransmittanceTextBox"))
 
-        self.load_material
         self.new_layerX_material_label = QtGui.QLabel("Material")
         self.new_layerX_material_combobox = QtGui.QComboBox()
         self.connect(self.new_layerX_material_combobox, QtCore.SIGNAL(
