@@ -11,6 +11,6 @@ before_install:
   - pip install -e .
 script:
   # Your test script goes here
-  - py.test
+  - python -m pytest tests/Test_data.py
 notifications:
   email: false
