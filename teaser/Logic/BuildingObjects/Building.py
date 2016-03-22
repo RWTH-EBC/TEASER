@@ -355,6 +355,35 @@ class Building(object):
 
         self.calc_building_parameter(self.calculation_method)
 
+    def rotate_building(self, angle):
+        '''rotates the building to a given angle
+
+        Parameters
+        ----------
+
+        angle: float
+            rotation of the building clockwise, between 0 and 360 degrees
+
+        '''
+
+        for zone_count in self.thermal_zones:
+            new_angle = None
+            for wall_count in zone_count.outer_walls:
+                if type(wall_count).__name__ == "OuterWall":
+                    new_angle = wall_count.orientation + angle
+                    if new_angle > 360.0:
+                        wall_count.orientation = new_angle - 360.0
+                    else:
+                        wall_count.orientation = new_angle
+                else:
+                    pass
+            for win_count in zone_count.windows:
+                new_angle = win_count.orientation + angle
+                if new_angle > 360.0:
+                    win_count.orientation = new_angle - 360.0
+                else:
+                    win_count.orientation = new_angle
+
     def create_timeline(self, duration_profile = 86400, time_step = 3600):
         ''' Creates a timeline for building boundary conditions
 
