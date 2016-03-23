@@ -58,7 +58,7 @@ def save_teaser_xml(path, project):
 
             pyxb_bld = pb.OfficeType()
 
-        elif type(bldg).__name__ == "Residential":
+        elif type(bldg).__name__ == "SingleFamilyDwelling":
 
             pyxb_bld = pb.ResidentialType()
 
@@ -293,7 +293,7 @@ def save_teaser_xml(path, project):
 
             teaser_out.Office.append(pyxb_bld)
 
-        elif type(bldg).__name__ == "Residential":
+        elif type(bldg).__name__ == "SingleFamilyDwelling":
 
             teaser_out.Residential.append(pyxb_bld)
 

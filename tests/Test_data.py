@@ -423,16 +423,16 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.ArchetypeBuildings.BMVBS.Residential import \
-            Residential
+        from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import \
+            SingleFamilyDwelling
 
         prj.set_default()
-        test_residential = Residential(parent=prj,
-                                       name="TestBuilding",
-                                       year_of_construction=1988,
-                                       number_of_floors=3,
-                                       height_of_floors=3,
-                                       net_leased_area=2500)
+        test_residential = SingleFamilyDwelling(parent=prj,
+                                                name="TestBuilding",
+                                                year_of_construction=1988,
+                                                number_of_floors=3,
+                                                height_of_floors=3,
+                                                net_leased_area=2500)
 
         test_residential.generate_archetype()
 
@@ -460,18 +460,18 @@ class Test_teaser(object):
         assert round(test_residential.get_window_area(270), 0) == 125
 
         prj.set_default()
-        test_residential = Residential(parent=prj,
-                                       name="TestBuilding",
-                                       year_of_construction=1988,
-                                       number_of_floors=3,
-                                       height_of_floors=3,
-                                       net_leased_area=2500,
-                                       residential_layout=1,
-                                       neighbour_buildings=1,
-                                       attic=1,
-                                       dormer=1,
-                                       cellar=1,
-                                       construction_type="light")
+        test_residential = SingleFamilyDwelling(parent=prj,
+                                                name="TestBuilding",
+                                                year_of_construction=1988,
+                                                number_of_floors=3,
+                                                height_of_floors=3,
+                                                net_leased_area=2500,
+                                                residential_layout=1,
+                                                neighbour_buildings=1,
+                                                attic=1,
+                                                dormer=1,
+                                                cellar=1,
+                                                construction_type="light")
 
         test_residential.generate_archetype()
 
@@ -489,18 +489,18 @@ class Test_teaser(object):
         assert round(test_residential.get_window_area(270), 0) == 125
 
         prj.set_default()
-        test_residential = Residential(parent=prj,
-                                       name="TestBuilding",
-                                       year_of_construction=1988,
-                                       number_of_floors=3,
-                                       height_of_floors=3,
-                                       net_leased_area=2500,
-                                       residential_layout=0,
-                                       neighbour_buildings=2,
-                                       attic=2,
-                                       dormer=0,
-                                       cellar=2,
-                                       construction_type="heavy")
+        test_residential = SingleFamilyDwelling(parent=prj,
+                                                name="TestBuilding",
+                                                year_of_construction=1988,
+                                                number_of_floors=3,
+                                                height_of_floors=3,
+                                                net_leased_area=2500,
+                                                residential_layout=0,
+                                                neighbour_buildings=2,
+                                                attic=2,
+                                                dormer=0,
+                                                cellar=2,
+                                                construction_type="heavy")
 
         test_residential.generate_archetype()
 
@@ -518,18 +518,18 @@ class Test_teaser(object):
         assert round(test_residential.get_window_area(270), 0) == 125
 
         prj.set_default()
-        test_residential = Residential(parent=prj,
-                                       name="TestBuilding",
-                                       year_of_construction=1988,
-                                       number_of_floors=3,
-                                       height_of_floors=3,
-                                       net_leased_area=2500,
-                                       residential_layout=0,
-                                       neighbour_buildings=2,
-                                       attic=3,
-                                       dormer=0,
-                                       cellar=3,
-                                       construction_type="light")
+        test_residential = SingleFamilyDwelling(parent=prj,
+                                                name="TestBuilding",
+                                                year_of_construction=1988,
+                                                number_of_floors=3,
+                                                height_of_floors=3,
+                                                net_leased_area=2500,
+                                                residential_layout=0,
+                                                neighbour_buildings=2,
+                                                attic=3,
+                                                dormer=0,
+                                                cellar=3,
+                                                construction_type="light")
 
         test_residential.generate_archetype()
 

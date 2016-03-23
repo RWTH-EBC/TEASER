@@ -78,7 +78,7 @@ def save_gml(project, path, ref_coordinates=None):
         building_length = None
         building_width = None
         building_height = None
-        if type(bldg_count).__name__ == "Residential":
+        if type(bldg_count).__name__ == "SingleFamilyDwelling":
             building_length = (bldg_count.thermal_zones[0].area /
                                bldg_count.thermal_zones[0].typical_width)
             building_width = bldg_count.thermal_zones[0].typical_width
