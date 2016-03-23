@@ -347,7 +347,6 @@ class Building(object):
         for zone in self.thermal_zones:
             ground_help = []
             win_help = 0
-            #if len(zone.outer_walls) == max_orientation[0]:
             for count_wall in range(max_orientation[0]):
                 if count_wall < len(zone.outer_walls):
                     if type(zone.outer_walls[count_wall]).__name__ == \

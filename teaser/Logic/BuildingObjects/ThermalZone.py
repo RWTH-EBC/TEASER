@@ -110,6 +110,7 @@ class ThermalZone(object):
         self.weightfactor_ow_dict = {}
         self.weightfactor_ground = []
         self.tilt_zone = []
+        self.orientation_zone = []
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
         self.r_rad_inner_ow = 0.0
