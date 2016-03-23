@@ -127,7 +127,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.ArchetypeBuildings.BMVBS import Office
+        from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
 
         prj.set_default()
         test_office = Office(parent=prj,
@@ -255,7 +255,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.ArchetypeBuildings.BMVBS import \
+        from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import \
             Institute4
 
         prj.set_default()
