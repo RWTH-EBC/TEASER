@@ -645,7 +645,25 @@ class Building(object):
                          mdict={'Internals': internal_boundary},
                          appendmat = False,
                          format = '4')
-    
+
+    def add_zone(self, thermal_zone):
+        '''Adds a thermal zone to the corresponding list
+
+        This function adds a ThermalZone instance to the the thermal_zones list
+
+        Parameters
+        ----------
+        thermal_zone : ThermalZone()
+            ThermalZone() instance of TEASER
+
+        '''
+
+        ass_error_1 = ("Zone has to be an instance of ThermalZone()")
+
+        assert type(thermal_zone).__name__ == "ThermalZone", ass_error_1
+
+        self._thermal_zones.append(thermal_zone)
+
     @property
     def parent(self):
         return self.__parent
@@ -766,14 +784,8 @@ class Building(object):
     @thermal_zones.setter
     def thermal_zones(self, value):
 
-        ass_error_1 = "A thermal zone has to be an instance of ThermalZone()"
-
-        assert type(value).__name__ == "ThermalZone", ass_error_1
-
-        if self.thermal_zones is None:
-            self._thermal_zones = [value]
-        else:
-            self._thermal_zones.append(value)
+        if value is None:
+            self._thermal_zones = []
 
     @property
     def outer_area(self):

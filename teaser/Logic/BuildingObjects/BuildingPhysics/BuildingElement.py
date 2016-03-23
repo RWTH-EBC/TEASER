@@ -202,7 +202,7 @@ class BuildingElement(object):
         return number_of_layer, density, thermal_conduc, heat_capac, thickness
 
 
-    def add_layer(self, position, layer):
+    def add_layer(self, layer, position=None):
         '''Adds a layer at a certain position
 
         This function adds a Layer instance to the layer list at a given position
@@ -213,8 +213,14 @@ class BuildingElement(object):
             position in the wall starting from 0 (inner side)
 
         '''
+        ass_error_1 = "Layer has to be an instance of Layer()"
 
-        self._layer.insert(position, layer)
+        assert isinstance(layer, Layer), ass_error_1
+
+        if position is None:
+            self._layer.append(layer)
+        else:
+            self._layer.insert(position, layer)
 
     def add_layer_list(self, layer_list):
         '''Appends a layer set to the layer list
@@ -224,10 +230,12 @@ class BuildingElement(object):
         layer_list : [Layer instance]
             list of sorted layer instances
         '''
+        ass_error_1 = "Layer has to be an instance of Layer()"
         for lay_count in layer_list:
+
+            assert isinstance(lay_count, Layer), ass_error_1
+
             self._layer.append(lay_count)
-
-
 
     def load_type_element(self, year, construction):
         '''Typical element loader.
@@ -775,16 +783,7 @@ class BuildingElement(object):
 
         if value is None:
             self._layer = []
-        else:
-            ass_error_1 = "Value has to be an instance of Layer()"
 
-            assert isinstance(value, Layer), ass_error_1
-
-            if self._layer is None:
-                self._layer = [value]
-
-            else:
-                self._layer.append(value)
         if self.inner_convection is not None and\
                 self.inner_radiation is not None and\
                 self.area is not None:
