@@ -137,7 +137,7 @@ class Test_teaser(object):
                              height_of_floors=3,
                              net_leased_area=2500)
 
-        test_office.generate_office()
+        test_office.generate_archetype()
 
         #general parameters
 
@@ -183,7 +183,7 @@ class Test_teaser(object):
                              window_layout=1,
                              construction_type="light")
 
-        test_office.generate_office()
+        test_office.generate_archetype()
 
         #facade specific parameters
 
@@ -209,7 +209,7 @@ class Test_teaser(object):
                              window_layout=2,
                              construction_type="heavy")
 
-        test_office.generate_office()
+        test_office.generate_archetype()
 
         #facade specific parameters
 
@@ -235,7 +235,7 @@ class Test_teaser(object):
                              window_layout=3,
                              construction_type="light")
 
-        test_office.generate_office()
+        test_office.generate_archetype()
 
         #facade specific parameters
 
@@ -269,7 +269,7 @@ class Test_teaser(object):
                                      window_layout=0,
                                      construction_type="heavy")
 
-        test_institute4.generate_office()
+        test_institute4.generate_archetype()
 
         #general parameters
 
@@ -325,7 +325,7 @@ class Test_teaser(object):
                                      window_layout=0,
                                      construction_type="heavy")
 
-        test_institute8.generate_office()
+        test_institute8.generate_archetype()
 
         #general parameters
 
@@ -381,7 +381,7 @@ class Test_teaser(object):
                                    window_layout=0,
                                    construction_type="heavy")
 
-        test_institute.generate_office()
+        test_institute.generate_archetype()
 
         #general parameters
 
@@ -434,7 +434,7 @@ class Test_teaser(object):
                                        height_of_floors=3,
                                        net_leased_area=2500)
 
-        test_residential.generate_residential()
+        test_residential.generate_archetype()
 
         #general parameters
 
@@ -473,7 +473,7 @@ class Test_teaser(object):
                                        cellar=1,
                                        construction_type="light")
 
-        test_residential.generate_residential()
+        test_residential.generate_archetype()
 
         #facade specific parameters
 
@@ -502,7 +502,7 @@ class Test_teaser(object):
                                        cellar=2,
                                        construction_type="heavy")
 
-        test_residential.generate_residential()
+        test_residential.generate_archetype()
 
         #facade specific parameters
 
@@ -531,7 +531,7 @@ class Test_teaser(object):
                                        cellar=3,
                                        construction_type="light")
 
-        test_residential.generate_residential()
+        test_residential.generate_archetype()
 
         #facade specific parameters
 

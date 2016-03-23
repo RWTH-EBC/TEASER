@@ -244,7 +244,7 @@ class Project(object):
                            window_layout,
                            construction_type)
 
-        type_bldg.generate_office()
+        type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(self.calculation_method)
         return type_bldg
 
@@ -310,7 +310,7 @@ class Project(object):
                               window_layout,
                               construction_type)
 
-        type_bldg.generate_office()
+        type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(self.calculation_method)
         return type_bldg
 
@@ -376,7 +376,7 @@ class Project(object):
                                window_layout,
                                construction_type)
 
-        type_bldg.generate_office()
+        type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(self.calculation_method)
         return type_bldg
 
@@ -442,7 +442,7 @@ class Project(object):
                                window_layout,
                                construction_type)
 
-        type_bldg.generate_office()
+        type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(self.calculation_method)
         return type_bldg
 
@@ -531,7 +531,7 @@ class Project(object):
                                 dormer,
                                 construction_type)
 
-        type_bldg.generate_residential()
+        type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(self.calculation_method)
         return type_bldg
 
