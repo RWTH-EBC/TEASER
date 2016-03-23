@@ -251,7 +251,7 @@ class Office(ArchetypeBuilding):
             self.central_ahu.profile_max_relative_humidity = (25*[0.55])
             self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
 
-    def generate_office(self):
+    def generate_archetype(self):
         '''Generates an office building.
 
         With given values, this class generates a type building according to

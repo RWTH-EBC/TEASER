@@ -295,7 +295,7 @@ class Residential(ArchetypeBuilding):
             self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
         
 
-    def generate_residential(self):
+    def generate_archetype(self):
         '''Generates a residential building.
 
         With given values, this class generates a type residential
