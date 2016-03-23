@@ -2194,6 +2194,11 @@ class MainUI(QDialog):
                     self.material_heat_capac_textbox.setText(
                         str(self.current_layer.material.heat_capac))
 
+    def switch_constr_type(self):
+        self.current_element.load_type_element(
+                    self.current_building.year_of_construction,
+                    str(self.element_construction_type_combobox.currentText()))
+
     def load_material(self):
         '''If the current material is swapped, this gets the 
         values for the new type and updates the window
@@ -5023,6 +5028,8 @@ class MainUI(QDialog):
             self.element_construction_type_combobox.setCurrentIndex(0)
         if self.current_element.construction_type == "light":
             self.element_construction_type_combobox.setCurrentIndex(1)
+        self.connect(self.element_construction_type_combobox, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.switch_constr_type)
 
         self.element_orientation_label = QtGui.QLabel("Orientation")
         self.element_orientation_combobox = QtGui.QComboBox()
