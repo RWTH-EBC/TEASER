@@ -356,3 +356,9 @@ class Controller():
                         if wall.orientation == orientation_old:
                             wall.orientation = orientation_new
             # bldg.set_outer_wall_area(new_outer_wall_area, orientation_new)
+
+    @classmethod
+    def get_u_value(self, current_element):
+
+        u_value = float(current_element.ua_value)/current_element.area
+        return u_value
