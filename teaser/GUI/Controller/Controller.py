@@ -205,7 +205,7 @@ class Controller():
             building.city = location
             int_id = building.internal_id
 
-        if type_of_building == "Residential":
+        if type_of_building == "SingleFamilyDwelling":
             building = parent.type_bldg_residential(
                 name=name,
                 year_of_construction=year_of_construction,

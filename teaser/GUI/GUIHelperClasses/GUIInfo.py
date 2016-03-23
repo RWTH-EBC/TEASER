@@ -37,7 +37,7 @@ class GUIInfo():
                                      "Roof": -1, "Floor": -2}
         self.type_buildings = ["Office", "Institute 4",
                                "Institute 8", "Institute General",
-                               "Residential"]
+                               "SingleFamilyDwelling"]
         self.thermal_zone_types = ["Single office",
                                    "Group Office (between 2 and 6 employees)",
                                    "Open-plan Office (7 or more employees)",

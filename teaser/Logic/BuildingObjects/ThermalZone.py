@@ -759,7 +759,7 @@ class ThermalZone(object):
                 or type(value).__name__ == "Institute"\
                 or type(value).__name__ == "Institute4"\
                 or type(value).__name__ == "Institute8" \
-                or type(value).__name__ == "Residential", ass_error_1
+                or type(value).__name__ == "SingleFamilyDwelling", ass_error_1
 
             self.__parent = value
 
@@ -768,7 +768,7 @@ class ThermalZone(object):
            or type(value).__name__ == "Institute" \
            or type(value).__name__ == "Institute4" \
            or type(value).__name__ == "Institute8" \
-           or type(value).__name__ == "Residential":
+           or type(value).__name__ == "SingleFamilyDwelling":
 
             self.__parent.thermal_zones.append(self)
 
