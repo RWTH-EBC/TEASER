@@ -202,7 +202,7 @@ class BuildingElement(object):
         return number_of_layer, density, thermal_conduc, heat_capac, thickness
 
 
-    def add_layer(self, position, layer):
+    def add_layer(self, layer, position=None):
         '''Adds a layer at a certain position
 
         This function adds a Layer instance to the layer list at a given position
@@ -217,7 +217,10 @@ class BuildingElement(object):
 
         assert isinstance(layer, Layer), ass_error_1
 
-        self._layer.insert(position, layer)
+        if position is None:
+            self._layer.append(layer)
+        else:
+            self._layer.insert(position, layer)
 
     def add_layer_list(self, layer_list):
         '''Appends a layer set to the layer list
