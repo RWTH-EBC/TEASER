@@ -141,7 +141,6 @@ class Building(object):
             for wall in zone.outer_walls:
                 if wall.orientation == orientation:
                     wall.area = ((new_area / self.net_leased_area) * zone.area)
-        self.compare_area_dicts()
 
     def set_window_area(self, new_area, orientation):
         '''Window area setter
@@ -162,7 +161,6 @@ class Building(object):
             for win in zone.windows:
                 if win.orientation == orientation:
                     win.area = ((new_area / self.net_leased_area) * zone.area)
-        self.compare_area_dicts()
 
     def get_outer_wall_area(self, orientation):
         '''Get aggregated outer wall area of one orientation
@@ -299,17 +297,6 @@ class Building(object):
         for key in self.window_area:
             self.window_area[key] = self.get_window_area(key)
 
-    def compare_area_dicts(self):
-        '''Compares the outer area and window area dicts and rewrites them if
-        possible
-        '''
-        for key in self.window_area.keys():
-            if key not in self.outer_area.keys():
-                self.outer_area[key] = None
-        for key in self.outer_area.keys():
-            if key not in self.window_area.keys():
-                self.window_area[key] = None
-
     def calc_building_parameter(self, calculation_core):
         '''calc all building parameters
 
@@ -324,11 +311,73 @@ class Building(object):
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
-        self.compare_area_dicts()
 
         for zone in self.thermal_zones:
             zone.calc_zone_parameters(calculation_core)
             self.sum_heating_load += zone.heating_load
+        self.compare_list()
+
+    def compare_list(self):
+        '''dirty dirty function!!!!
+
+        compares orientation, tilts etc
+
+        to do: implement function, that sorts outer_walls and windows
+        '''
+
+        nr_of_walls = []
+        nr_of_win = []
+        self.tilt = []
+        self.orientation = []
+        self.orientation_name = []
+
+        for zone in self.thermal_zones:
+            nr_of_walls.append([len(zone.outer_walls), zone])
+            nr_of_win.append([len(zone.outer_walls), zone])
+
+        max_orientation = nr_of_walls[0]
+        for i in range(max_orientation[0]):
+            if max_orientation[1].outer_walls[i].orientation != -2:
+                self.tilt.append(max_orientation[1].outer_walls[i].tilt)
+                self.orientation.append(max_orientation[1].outer_walls[i].orientation)
+                self.orientation_name.append("\"i\"")
+            else:
+                pass
+
+        for zone in self.thermal_zones:
+            ground_help = []
+            win_help = 0
+            #if len(zone.outer_walls) == max_orientation[0]:
+            for count_wall in range(max_orientation[0]):
+                if count_wall < len(zone.outer_walls):
+                    if type(zone.outer_walls[count_wall]).__name__ == \
+                            "GroundFloor":
+                        zone.weightfactor_ground.append(zone.outer_walls[
+                                                        count_wall].wf_out)
+                        ground_help.append(count_wall)
+                    else:
+                        zone.weightfactor_ow.append(zone.outer_walls[
+                                                        count_wall].wf_out)
+                        zone.tilt_zone.append(zone.outer_walls[count_wall].tilt)
+                        zone.orientation_zone.append(zone.outer_walls[
+                                                     count_wall].orientation)
+                else:
+                        zone.weightfactor_ow.append(0)
+            for count_win in range(max_orientation[0]):
+                if count_win in ground_help:
+                    win_help += 1
+                else:
+                    if count_win-win_help < len(zone.windows):
+                        zone.weightfactor_win.append(zone.windows[
+                                                count_win-win_help].wf_out)
+                        zone.g_sunblind_list.append(zone.windows[
+                                                count_win-win_help].g_value)
+                        zone.window_area_list.append(zone.windows[
+                                                count_win-win_help].area)
+                    else:
+                        zone.weightfactor_win.append(0)
+                        zone.g_sunblind_list.append(0)
+                        zone.window_area_list.append(0)
 
     def retrofit_building(self, year_of_retrofit=None,
                           window_type=None,
