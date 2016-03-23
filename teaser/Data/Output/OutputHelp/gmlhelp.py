@@ -561,7 +561,6 @@ def _add_gml_layer(gml_surf_comp, element):
 
     gml_surf_comp.GenericApplicationPropertyOfCityObject.append(construction)
 
-
 def _add_gml_opaque_material(gml_layer, teaser_layer):
     """Adds gml opaque material to the given layer
 
