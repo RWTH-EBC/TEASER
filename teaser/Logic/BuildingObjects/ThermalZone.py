@@ -772,9 +772,11 @@ class ThermalZone(object):
         if type(building_element).__name__ in ("OuterWall", "Rooftop",
                                               "GroundFloor"):
             self._outer_walls.append(building_element)
+
         elif type(building_element).__name__ in ("InnerWall",
                                                    "Ceiling", "Floor"):
             self._inner_walls.append(building_element)
+
         elif type(building_element).__name__ in ("Window"):
             self._windows.append(building_element)
 

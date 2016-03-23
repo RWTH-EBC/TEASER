@@ -658,7 +658,7 @@ class Building(object):
 
         '''
 
-        ass_error_1 = ("building element has to be an instance of ThermalZone()")
+        ass_error_1 = ("Zone has to be an instance of ThermalZone()")
 
         assert type(thermal_zone).__name__ == "ThermalZone", ass_error_1
 

@@ -1092,8 +1092,6 @@ class MainUI(QDialog):
                             str(self.element_inner_convection_textbox.text())
                         zone.inner_walls[index].inner_radiation = \
                             str(self.element_inner_radiation_textbox.text())
-                        zone.inner_walls[index].ua_value = \
-                           str(self.element_uvalue_textbox.text())
                 for element in zone.outer_walls:
                     if element.internal_id == self.current_element.internal_id:
                         index = zone.outer_walls.index(element)
@@ -1121,8 +1119,6 @@ class MainUI(QDialog):
                             float(self.element_outer_convection_textbox.text())
                         zone.outer_walls[index].outer_radiation = \
                             float(self.element_outer_radiation_textbox.text())
-                        zone.outer_walls[index].ua_value = \
-                            str(self.element_uvalue_textbox.text())
                         break
                 for element in zone.windows:
                     if element.internal_id == self.current_element.internal_id:
@@ -1151,8 +1147,6 @@ class MainUI(QDialog):
                             float(self.element_outer_convection_textbox.text())
                         zone.windows[index].outer_radiation = \
                             float(self.element_outer_radiation_textbox.text())
-                        zone.windows[index].ua_value = \
-                            str(self.element_uvalue_textbox.text())
                         break
 
     def save_input_values_set_all_constr(self):
@@ -5163,11 +5157,12 @@ class MainUI(QDialog):
             self.element_outer_radiation_textbox.setText(
                 str(self.current_element.outer_radiation))
 
-        self.element_uvalue_label = QtGui.QLabel("U-Value (U/A)")
+        self.element_uvalue_label = QtGui.QLabel("U-Value (W/m2K)")
         self.element_uvalue_textbox = QtGui.QLineEdit()
         self.element_uvalue_textbox.setObjectName(
             _fromUtf8("ElementUValueTextBox"))
-        self.element_uvalue_textbox.setText(str(self.current_element.ua_value))
+        self.element_uvalue_textbox.setText(str(float(
+            Controller.get_u_value(self.current_element))))
         self.element_uvalue_textbox.setReadOnly(True)
 
         self.element_add_material_button = QtGui.QPushButton()
