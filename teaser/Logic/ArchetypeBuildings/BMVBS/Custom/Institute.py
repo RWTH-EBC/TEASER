@@ -9,7 +9,8 @@ class Institute(Office):
     '''Type Institute Building (type 4)
     '''
 
-    def __init__(self, parent=None,
+    def __init__(self,
+                 parent=None,
                  name=None,
                  year_of_construction=None,
                  number_of_floors=None,
