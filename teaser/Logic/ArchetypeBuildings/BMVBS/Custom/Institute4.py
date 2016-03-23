@@ -4,6 +4,7 @@
 
 from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
 
+
 class Institute4(Office):
     '''Type Institute Building (type 4)
     '''
