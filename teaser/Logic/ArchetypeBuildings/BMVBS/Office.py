@@ -4,8 +4,8 @@
 
 import math
 
-from teaser.Logic.ArchetypeBuildings.ArchetypeBuilding\
- import ArchetypeBuilding
+from teaser.Logic.ArchetypeBuildings.NonResidential\
+ import NonResidential
 
 from teaser.Logic.ArchetypeBuildings.UseConditions18599 \
     import UseConditions18599 as UseCond
@@ -20,7 +20,7 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 
 
-class Office(ArchetypeBuilding):
+class Office(NonResidential):
     '''Type Office Building
 
     Subclass from TypeBuilding to represent office buildings. Allows for
@@ -251,7 +251,7 @@ class Office(ArchetypeBuilding):
             self.central_ahu.profile_max_relative_humidity = (25*[0.55])
             self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
 
-    def generate_office(self):
+    def generate_archetype(self):
         '''Generates an office building.
 
         With given values, this class generates a type building according to

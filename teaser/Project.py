@@ -20,7 +20,7 @@ from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
 from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute import Institute
 from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import Institute4
 from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import Institute8
-from teaser.Logic.ArchetypeBuildings.BMVBS.Residential import Residential
+from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import SingleFamilyDwelling
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 
 
@@ -244,7 +244,7 @@ class Project(object):
                            window_layout,
                            construction_type)
 
-        type_bldg.generate_office()
+        type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(self.calculation_method)
         return type_bldg
 
@@ -310,7 +310,7 @@ class Project(object):
                               window_layout,
                               construction_type)
 
-        type_bldg.generate_office()
+        type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(self.calculation_method)
         return type_bldg
 
@@ -376,7 +376,7 @@ class Project(object):
                                window_layout,
                                construction_type)
 
-        type_bldg.generate_office()
+        type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(self.calculation_method)
         return type_bldg
 
@@ -442,7 +442,7 @@ class Project(object):
                                window_layout,
                                construction_type)
 
-        type_bldg.generate_office()
+        type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(self.calculation_method)
         return type_bldg
 
@@ -515,23 +515,23 @@ class Project(object):
         Returns
         ----------
 
-        type_bldg : Instance of Residential()
+        type_bldg : Instance of SingleFamilyDwelling()
         '''
-        type_bldg = Residential(self,
-                                name,
-                                year_of_construction,
-                                number_of_floors,
-                                height_of_floors,
-                                net_leased_area,
-                                with_ahu,
-                                residential_layout,
-                                neighbour_buildings,
-                                attic,
-                                cellar,
-                                dormer,
-                                construction_type)
+        type_bldg = SingleFamilyDwelling(self,
+                                         name,
+                                         year_of_construction,
+                                         number_of_floors,
+                                         height_of_floors,
+                                         net_leased_area,
+                                         with_ahu,
+                                         residential_layout,
+                                         neighbour_buildings,
+                                         attic,
+                                         cellar,
+                                         dormer,
+                                         construction_type)
 
-        type_bldg.generate_residential()
+        type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(self.calculation_method)
         return type_bldg
 
