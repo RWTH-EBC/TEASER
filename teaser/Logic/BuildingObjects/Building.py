@@ -4,6 +4,7 @@
 """This module includes the Buidling class
 """
 import random
+import re
 import numpy as np
 import inspect
 import scipy.io
@@ -355,6 +356,35 @@ class Building(object):
 
         self.calc_building_parameter(self.calculation_method)
 
+    def rotate_building(self, angle):
+        '''rotates the building to a given angle
+
+        Parameters
+        ----------
+
+        angle: float
+            rotation of the building clockwise, between 0 and 360 degrees
+
+        '''
+
+        for zone_count in self.thermal_zones:
+            new_angle = None
+            for wall_count in zone_count.outer_walls:
+                if type(wall_count).__name__ == "OuterWall":
+                    new_angle = wall_count.orientation + angle
+                    if new_angle > 360.0:
+                        wall_count.orientation = new_angle - 360.0
+                    else:
+                        wall_count.orientation = new_angle
+                else:
+                    pass
+            for win_count in zone_count.windows:
+                new_angle = win_count.orientation + angle
+                if new_angle > 360.0:
+                    win_count.orientation = new_angle - 360.0
+                else:
+                    win_count.orientation = new_angle
+
     def create_timeline(self, duration_profile = 86400, time_step = 3600):
         ''' Creates a timeline for building boundary conditions
 
@@ -615,7 +645,25 @@ class Building(object):
                          mdict={'Internals': internal_boundary},
                          appendmat = False,
                          format = '4')
-    
+
+    def add_zone(self, thermal_zone):
+        '''Adds a thermal zone to the corresponding list
+
+        This function adds a ThermalZone instance to the the thermal_zones list
+
+        Parameters
+        ----------
+        thermal_zone : ThermalZone()
+            ThermalZone() instance of TEASER
+
+        '''
+
+        ass_error_1 = ("Zone has to be an instance of ThermalZone()")
+
+        assert type(thermal_zone).__name__ == "ThermalZone", ass_error_1
+
+        self._thermal_zones.append(thermal_zone)
+
     @property
     def parent(self):
         return self.__parent
@@ -643,17 +691,19 @@ class Building(object):
 
     @name.setter
     def name(self, value):
-
         if isinstance(value, str):
-
-            self.__name = value.replace(" ", "")
+            regex = re.compile('[^a-zA-z0-9]')
+            self.__name = regex.sub('', value)
         else:
             try:
                 value = str(value)
-                self.__name = value.replace(" ", "")
-
+                regex = re.compile('[^a-zA-z0-9]')
+                self.__name = regex.sub('', value)
             except ValueError:
                 print("Can't convert name to string")
+
+        if self.__name[0].isdigit():
+            self.__name = "B" + self.__name
 
     @property
     def year_of_construction(self):
@@ -734,14 +784,8 @@ class Building(object):
     @thermal_zones.setter
     def thermal_zones(self, value):
 
-        ass_error_1 = "A thermal zone has to be an instance of ThermalZone()"
-
-        assert type(value).__name__ == "ThermalZone", ass_error_1
-
-        if self.thermal_zones is None:
-            self._thermal_zones = [value]
-        else:
-            self._thermal_zones.append(value)
+        if value is None:
+            self._thermal_zones = []
 
     @property
     def outer_area(self):
