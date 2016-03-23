@@ -18,8 +18,8 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599\
     import UseConditions18599
-import teaser.Data.TeaserXML as teaser_xml
-import teaser.Data.CityGML as city_gml
+import teaser.Data.Output.TeaserXML_output as teaser_xml
+import teaser.Data.Output.CityGML_output as city_gml
 import teaser.Logic.Utilis as utilis
 from PyQt4.uic.Compiler.qtproxies import QtGui
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
