@@ -2214,6 +2214,15 @@ class MainUI(QDialog):
                     self.current_building.year_of_construction,
                     str(self.element_construction_type_combobox.currentText()))
 
+        self.element_layer_model.clear()
+        for layer in self.current_element.layer:
+            item = TrackableItem("Material:\t".expandtabs(8) +
+                                 str(layer.material.name) +
+                                 "\nThickness:\t".expandtabs(14) +
+                                 str(layer.thickness) +
+                                 "\t", layer.internal_id)
+            self.element_layer_model.appendRow(item)
+
     def load_material(self):
         '''If the current material is swapped, this gets the 
         values for the new type and updates the window
