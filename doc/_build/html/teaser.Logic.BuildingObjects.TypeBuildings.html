@@ -260,7 +260,7 @@ TEASER requirements.</p>
 
 </div>
 <div class="section" id="residential-module">
-<h2>Residential module<a class="headerlink" href="#residential-module" title="Permalink to this headline">¶</a></h2>
+<h2>SingleFamilyDwelling module<a class="headerlink" href="#residential-module" title="Permalink to this headline">¶</a></h2>
 <p><strong>Description</strong></p>
 <p>The residential module contains a single zone building where the envelopes are
 computed based on a method from the IWU <a class="reference internal" href="#kurzverfahreniwu" id="id8">[7]</a>.
@@ -269,12 +269,12 @@ area:</p>
 <ol class="arabic simple">
 <li>Single dwelling (100% of net leased area)</li>
 </ol>
-<span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.Residential"></span><dl class="class">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential">
-<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.Residential.</code><code class="descname">Residential</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>dormer=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential" title="Permalink to this definition">¶</a></dt>
+<span class="target" id="module-teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling"></span><dl class="class">
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling">
+<em class="property">class </em><code class="descclassname">teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.</code><code class="descname">SingleFamilyDwelling</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>dormer=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding" title="teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding"><code class="xref py py-class docutils literal"><span class="pre">teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding.TypeBuilding</span></code></a></p>
-<p>Type Building Residential.</p>
-<p>Subclass from Building to represent Residential Buildings. Allows for
+<p>Type Building SingleFamilyDwelling.</p>
+<p>Subclass from Building to represent SingleFamilyDwelling Buildings. Allows for
 easier distinction between different building types and specific functions
 and attributes.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -406,28 +406,28 @@ light: light construction</p>
 </table>
 <p class="rubric">Methods</p>
 <dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.attic">
-<code class="descname">attic</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.attic" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.attic">
+<code class="descname">attic</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.attic" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.cellar">
-<code class="descname">cellar</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.cellar" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.cellar">
+<code class="descname">cellar</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.cellar" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.construction_type">
-<code class="descname">construction_type</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.construction_type" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.construction_type">
+<code class="descname">construction_type</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.construction_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.dormer">
-<code class="descname">dormer</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.dormer" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.dormer">
+<code class="descname">dormer</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.dormer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.generate_archetype">
-<code class="descname">generate_archetype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.generate_archetype" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.generate_archetype">
+<code class="descname">generate_archetype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.generate_archetype" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a residential building.</p>
 <p>With given values, this class generates a type residential
 building according to TEASER requirements
@@ -435,13 +435,13 @@ Berechnungsgrundlagen: IWU, &#8220;Kurzverfahren Energieprofil&#8221;; 2005.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.neighbour_buildings">
-<code class="descname">neighbour_buildings</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.neighbour_buildings" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.neighbour_buildings">
+<code class="descname">neighbour_buildings</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.neighbour_buildings" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.residential_layout">
-<code class="descname">residential_layout</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.Residential.Residential.residential_layout" title="Permalink to this definition">¶</a></dt>
+<dt id="teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.residential_layout">
+<code class="descname">residential_layout</code><a class="headerlink" href="#teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling.SingleFamilyDwelling.residential_layout" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -964,7 +964,7 @@ file does not exist, a new file is created.</p>
   <ul>
 <li><a class="reference internal" href="#">TypeBuildings package</a><ul>
 <li><a class="reference internal" href="#office-module">Office module</a></li>
-<li><a class="reference internal" href="#residential-module">Residential module</a></li>
+<li><a class="reference internal" href="#residential-module">SingleFamilyDwelling module</a></li>
 <li><a class="reference internal" href="#institute-module">Institute module</a></li>
 <li><a class="reference internal" href="#institute4-module">Institute4 module</a></li>
 <li><a class="reference internal" href="#institute8-module">Institute8 module</a></li>
