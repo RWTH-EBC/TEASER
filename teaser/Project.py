@@ -16,9 +16,9 @@ from teaser.Data.DataClass import DataClass
 from mako.template import Template
 import teaser.Logic.Utilis as utilis
 import shutil
-from teaser.Logic.ArchetypeBuildings.BMVBS import Office
+from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
 from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute import Institute
-from teaser.Logic.ArchetypeBuildings.BMVBS import Institute4
+from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import Institute4
 from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import Institute8
 from teaser.Logic.ArchetypeBuildings.BMVBS.Residential import Residential
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
