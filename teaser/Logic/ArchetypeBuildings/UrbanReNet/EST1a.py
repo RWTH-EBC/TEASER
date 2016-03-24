@@ -1,15 +1,14 @@
 # created June 2015
 # by TEASER4 Development Team
 
-from teaser.Logic.ArchetypeBuildings.ArchetypeBuilding \
- import ArchetypeBuilding
-
+from teaser.Logic.ArchetypeBuildings.Residential \
+    import Residential
 from teaser.Logic.ArchetypeBuildings.UseConditions18599 \
     import UseConditions18599 as UseCond
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
-from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor\
- import GroundFloor
+from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor \
+    import GroundFloor
 from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
@@ -17,8 +16,8 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 
 
-class EST1a(ArchetypeBuilding):
-    '''Urban Fabric Type EST1a.
+class EST1a(Residential):
+    """Urban Fabric Type EST1a.
 
     Subclass from Building for urban fabric type EST1a.
 
@@ -47,12 +46,6 @@ class EST1a(ArchetypeBuilding):
     with_ahu : boolean
         if building has a central AHU or not
 
-    residential_layout : int
-        type of floor plan (default = 0)
-
-        0: compact
-        1: elongated/complex
-
     neighbour_buildings : int
         neighbour (default = 0)
 
@@ -60,33 +53,11 @@ class EST1a(ArchetypeBuilding):
         1: one neighbour
         2: two neighbours
 
-    attic : int
-        type of attic (default = 0)
-
-        0: flat roof
-        1: non heated attic
-        2: partly heated attic
-        3: heated attic
-
-    cellar : int
-        type of cellar (default = 0)
-
-        0: no cellar
-        1: non heated cellar
-        2: partly heated cellar
-        3: heated cellar
-
     construction_type : str
         construction type (default = "heavy")
 
         heavy: heavy construction
         light: light construction
-
-    dormer : str
-        construction type
-
-        0: no dormer
-        1: dormer
 
     Note
     ----------
@@ -130,21 +101,9 @@ class EST1a(ArchetypeBuilding):
         This dictionary contains the name of the floors, their
         orientation and tilt
 
-    est_living_area_factor : float
-        estimation factor for calculation of number of heated floors
-
-    est_bottom_building_closure : float
-        estimation factor to calculate ground floor area
-
-    est_upper_building_closure : float
-        estimation factor to calculate attic area
-
     est_factor_win_area : float
         estimation factor to calculate window area
-
-    est_factor_cellar_area : float
-        estimation factor to calculate heated cellar area
-    '''
+    """
 
     def __init__(self,
                  parent,
@@ -154,30 +113,23 @@ class EST1a(ArchetypeBuilding):
                  height_of_floors=None,
                  net_leased_area=None,
                  with_ahu=False,
-                 residential_layout=None,
                  neighbour_buildings=None,
-                 attic=None,
-                 cellar=None,
-                 dormer=None,
                  construction_type=None):
 
-        '''Constructor of Residential
+        """Constructor of Residential
 
 
-        '''
+        """
 
         super(EST1a, self).__init__(parent, name, year_of_construction,
-                                          number_of_floors, height_of_floors,
-                                          net_leased_area, with_ahu)
+                                    number_of_floors, height_of_floors,
+                                    net_leased_area, with_ahu)
 
-        self.residential_layout = residential_layout
         self.neighbour_buildings = neighbour_buildings
-        self.attic = attic
-        self.cellar = cellar
-        self.dormer = dormer
         self.construction_type = construction_type
 
-        # Parameters are default values for current calculation following IWU
+        # Parameters are default values for current calculation following
+        # Hegger
 
         # [area factor, usage type(has to be set)]
         self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
@@ -204,139 +156,59 @@ class EST1a(ArchetypeBuilding):
 
         self.floor_names = {"Floor": [0.0, -2]}
 
-        self.est_living_area_factor = 0.75  # fW
-        self.est_bottom_building_closure = 1.33  # p_FB
-        self.est_upper_building_closure = 1.0
         self.est_factor_win_area = 0.2
-        self.est_factor_cellar_area = 0.5
+        self.est_factor_facade_to_volume = 0.87
 
         self.nr_of_orientation = len(self.outer_wall_names)
 
         # estimated intermediate calculated values
-        self._living_area_per_floor = 0
-        self._number_of_heated_floors = 0
-        self._est_factor_heated_cellar = 0
-        self._est_factor_heated_attic = 0
         self._est_roof_area = 0
         self._est_ground_floor_area = 0.0
         self._est_win_area = 0
         self._est_outer_wall_area = 0.0
-        self._est_cellar_wall_area = 0
-        self._est_factor_volume = 0.0
 
-        self.est_factor_neighbour = 0.0  # n_Nachbar
-        self.est_extra_floor_area = 0.0  # q_Fa
+        self.est_factor_neighbour = 0.0
 
         if self.neighbour_buildings == 0:
             self._est_factor_neighbour = 0.0
-            self._est_extra_floor_area = 50.0
         elif self.neighbour_buildings == 1:
             self._est_factor_neighbour = 1.0
-            self._est_extra_floor_area = 30.0
         elif self.neighbour_buildings == 2:
             self._est_factor_neighbour = 2.0
-            self._est_extra_floor_area = 10.0
-
-        self._est_facade_to_floor_area = 0.0  # p_Fa
-
-        if self.residential_layout == 0:
-            self._est_facade_to_floor_area = 0.66
-        elif self.residential_layout == 1:
-            self._est_facade_to_floor_area = 0.8
-
-        self._est_factor_heated_attic = 0.0  # f_TB_DG
-        self._est_area_per_floor = 0.0  # p_DA
-        self._est_area_per_roof = 0.0  # p_OG
-
-        if self.attic == 0:
-            self._est_factor_heated_attic = 0.0
-            self._est_area_per_floor = 1.33
-            self._est_area_per_roof = 0.0
-        elif self.attic == 1:
-            self._est_factor_heated_attic = 0.0
-            self._est_area_per_floor = 0.0
-            self._est_area_per_roof = 1.33
-        elif self.attic == 2:
-            self._est_factor_heated_attic = 0.5
-            self._est_area_per_floor = 0.75
-            self._est_area_per_roof = 0.67
-        elif self.attic == 3:
-            self._est_factor_heated_attic = 1.0
-            self._est_area_per_floor = 1.5
-            self._est_area_per_roof = 0.0
-
-        self._est_factor_heated_cellar = 0.0  # f_TB_KG
-
-        if self.cellar == 0:
-            self._est_factor_heated_cellar = 0.0
-        elif self.cellar == 1:
-            self._est_factor_heated_cellar = 0.0
-        elif self.cellar == 2:
-            self._est_factor_heated_cellar = 0.5
-        elif self.cellar == 3:
-            self._est_factor_heated_cellar = 1.0
-
-        self._est_factor_dormer = 0.0
-
-        if self.dormer == 0:
-            self._est_factor_dormer = 1.0
-        elif self.dormer == 1:
-            self._est_factor_dormer = 1.3
 
         if self.with_ahu is True:
-            self.central_ahu.profile_temperature = (7*[293.15] +
-                                                    12*[295.15] +
-                                                    6*[293.15])
-            self.central_ahu.profile_min_relative_humidity = (25*[0.45])
-            self.central_ahu.profile_max_relative_humidity = (25*[0.55])
-            self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
-
+            self.central_ahu.profile_temperature = (7 * [293.15] +
+                                                    12 * [295.15] +
+                                                    6 * [293.15])
+            self.central_ahu.profile_min_relative_humidity = (25 * [0.45])
+            self.central_ahu.profile_max_relative_humidity = (25 * [0.55])
+            self.central_ahu.profile_v_flow = \
+                (7 * [0.0] + 12 * [1.0] + 6 * [0.0])
 
     def generate_residential(self):
-        '''Generates a residential building.
+        """Generates a residential building.
 
         With given values, this class generates a type residential
-        building according to TEASER requirements
-        Berechnungsgrundlagen: IWU, "Kurzverfahren Energieprofil"; 2005.
+        building according to TEASER requirements.
 
-        '''
-        #help area for the correct building area setting while using typeBldgs
+        """
+        # help area for the correct building area setting while using typeBldgs
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
 
-        self._number_of_heated_floors = self._est_factor_heated_cellar + \
-                    self.number_of_floors + self.est_living_area_factor\
-                     *self._est_factor_heated_attic
+        self._est_ground_floor_area = type_bldg_area / self.number_of_floors
 
-        self._living_area_per_floor = type_bldg_area / \
-                self._number_of_heated_floors
-
-        self._est_ground_floor_area = self.est_bottom_building_closure * \
-                    self._living_area_per_floor
-
-        self._est_roof_area = self.est_upper_building_closure * \
-                self._est_factor_dormer * self._est_area_per_floor * \
-                self._living_area_per_floor
-
-        self._top_floor_area = self._est_area_per_roof * \
-                self._living_area_per_floor
-
-        if self._est_roof_area == 0:
-            self._est_roof_area = self._top_floor_area
-
-        self._est_facade_area = self._est_facade_to_floor_area * \
-                self._living_area_per_floor + self._est_extra_floor_area
+        self._est_roof_area = type_bldg_area / self.number_of_floors
 
         self._est_win_area = self.est_factor_win_area * type_bldg_area
 
-        self._est_cellar_wall_area = self.est_factor_cellar_area * \
-                self._est_factor_heated_cellar * self._est_facade_area
-
-        self._est_outer_wall_area = (self._number_of_heated_floors * \
-                self._est_facade_area) - self._est_cellar_wall_area - \
-                self._est_win_area
-
-        # self._est_factor_volume = type_bldg_area * 2.5
+        self._est_outer_wall_area = (1 - self._est_factor_neighbour / 4) * \
+            self.est_factor_facade_to_volume * \
+            type_bldg_area * \
+            self.height_of_floors - \
+            self._est_ground_floor_area - \
+            self._est_roof_area - \
+            self._est_win_area
 
         for key, value in self.zone_area_factors.items():
             zone = ThermalZone(self)
@@ -352,12 +224,12 @@ class EST1a(ArchetypeBuilding):
 
             if value[1] == 0 or value[1] == 180.0:
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                        self.nr_of_orientation
+                                            self.nr_of_orientation
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                        self.nr_of_orientation
+                                            self.nr_of_orientation
 
             for zone in self.thermal_zones:
                 # create wall and set building elements
@@ -373,12 +245,12 @@ class EST1a(ArchetypeBuilding):
             if value[1] == 0 or value[1] == 180:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                        self.nr_of_orientation
+                                             self.nr_of_orientation
 
             elif value[1] == 90 or value[1] == 270:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                        self.nr_of_orientation
+                                             self.nr_of_orientation
 
             '''
             There is no real classification for windows, so this is a bit hard
@@ -388,7 +260,8 @@ class EST1a(ArchetypeBuilding):
                 window = Window(zone)
 
                 window.load_type_element(self.year_of_construction,
-                                        "Kunststofffenster, Isolierverglasung")
+                                         "Kunststofffenster, Isolierverglasung"
+                                         )
                 window.name = key
                 window.tilt = value[0]
                 window.orientation = value[1]
@@ -399,7 +272,7 @@ class EST1a(ArchetypeBuilding):
 
             for zone in self.thermal_zones:
                 roof = Rooftop(zone)
-                roof.load_type_element(self.year_of_construction, \
+                roof.load_type_element(self.year_of_construction,
                                        self.construction_type)
                 roof.name = key
                 roof.tilt = value[0]
@@ -411,7 +284,7 @@ class EST1a(ArchetypeBuilding):
 
             for zone in self.thermal_zones:
                 ground_floor = GroundFloor(zone)
-                ground_floor.load_type_element(self.year_of_construction, \
+                ground_floor.load_type_element(self.year_of_construction,
                                                self.construction_type)
                 ground_floor.name = key
                 ground_floor.tilt = value[0]
@@ -464,70 +337,15 @@ class EST1a(ArchetypeBuilding):
             zone.set_volume_zone()
 
     @property
-    def residential_layout(self):
-        return self._residential_layout
-
-    @residential_layout.setter
-    def residential_layout(self, value):
-        if value is not None:
-            self._residential_layout = value
-        else:
-            self._residential_layout = 0
-
-    @property
-    def neighbour_buildings(self):
-        return self._neighbour_buildings
-
-    @neighbour_buildings.setter
-    def neighbour_buildings(self, value):
-        if value is not None:
-            self._neighbour_buildings = value
-        else:
-            self._neighbour_buildings = 0
-
-    @property
-    def attic(self):
-        return self._attic
-
-    @attic.setter
-    def attic(self, value):
-        if value is not None:
-            self._attic = value
-        else:
-            self._attic = 0
-
-    @property
-    def cellar(self):
-        return self._cellar
-
-    @cellar.setter
-    def cellar(self, value):
-        if value is not None:
-            self._cellar = value
-        else:
-            self._cellar = 0
-
-    @property
-    def dormer(self):
-        return self._dormer
-
-    @dormer.setter
-    def dormer(self, value):
-        if value is not None:
-            self._dormer = value
-        else:
-            self._dormer = 0
-
-    @property
     def construction_type(self):
-        return self._construction_type
+        return self.construction_type
 
     @construction_type.setter
     def construction_type(self, value):
         if value is not None:
             if value == "heavy" or value == "light":
-                self._construction_type = value
+                self.construction_type = value
             else:
                 raise ValueError("Construction_type has to be light or heavy")
         else:
-            self._construction_type = "heavy"
+            self.construction_type = "heavy"
