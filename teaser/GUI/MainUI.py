@@ -2209,7 +2209,7 @@ class MainUI(QDialog):
                     self.material_heat_capac_textbox.setText(
                         str(self.current_layer.material.heat_capac))
 
-    def switch_constr_type(self):
+    def load_constr_type(self):
         self.current_element.load_type_element(
                     self.current_building.year_of_construction,
                     str(self.element_construction_type_combobox.currentText()))
@@ -2222,6 +2222,12 @@ class MainUI(QDialog):
                                  str(layer.thickness) +
                                  "\t", layer.internal_id)
             self.element_layer_model.appendRow(item)
+
+    def switch_constr_type(self):
+        try:
+            self.element_material_list_view.doubleClicked.disconnect()
+        except:
+            pass
 
     def load_material(self):
         '''If the current material is swapped, this gets the 
@@ -5210,6 +5216,8 @@ class MainUI(QDialog):
 
         self.element_save_button = QtGui.QPushButton()
         self.element_save_button.setText("Save")
+        self.connect(self.element_save_button, SIGNAL("clicked()"),
+                     self.load_constr_type)
         self.connect(self.element_save_button, SIGNAL("clicked()"),
                      self.save_changed_element_values)
         self.connect(self.element_save_button, SIGNAL("clicked()"),
