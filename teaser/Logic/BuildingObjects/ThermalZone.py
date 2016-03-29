@@ -467,19 +467,67 @@ class ThermalZone(object):
             for wall in self.outer_walls:
                 wall.wf_out = wall.ua_value/(self.ua_value_ow +
                                                      self.ua_value_win)
+                if type(wall).__name__ ==  "GroundFloor":
+                    self.weightfactor_ground.append(wall.wf_out)
+                else:
+                    self.weightfactor_ow.append(wall.wf_out)
+                    self.orientation_wall.append(wall.orientation)
+
             for win in self.windows:
                 win.wf_out = win.ua_value/(self.ua_value_ow +
                                                      self.ua_value_win)
+                self.orientation_win.append(win.orientation)
+                self.weightfactor_win.append(win.wf_out)
 
         elif calculation_core == 'ebc':
 
             for wall in self.outer_walls:
                 wall.wf_out = wall.ua_value/self.ua_value_ow
+                if type(wall).__name__ == "GroundFloor":
+                    self.weightfactor_ground.append(wall.wf_out)
+                else:
+                    self.weightfactor_ow.append(wall.wf_out)
+                    self.orientation_wall.append(wall.orientation)
             for win in self.windows:
                 win.wf_out = win.ua_value/self.ua_value_win
+                self.weightfactor_win.append(win.wf_out)
+                self.orientation_win.append(win.orientation)
+
 
         else:
             raise ValueError("specify calculation method correctly")
+
+        zip_help_wall = sorted(zip(self.orientation_wall, self.weightfactor_ow))
+        zip_help_win = sorted(zip(self.orientation_win, self.weightfactor_win))
+
+        self.orientation_wall = []
+        self.orientation_win = []
+        self.weightfactor_ow = []
+        self.weightfactor_win = []
+
+        for y,x in zip_help_wall:
+            self.orientation_wall.append(y)
+            #self.weightfactor_ow.append(x)
+        for y,x in zip_help_win:
+            self.orientation_win.append(y)
+            #self.weightfactor_win.append(x)
+
+    def find_wall(self, orientation):
+        for i in self.outer_walls:
+            if i.orientation == orientation:
+                return i
+            else:
+                pass
+        return None
+
+    def find_win(self, orientation):
+        for i in self.windows:
+            if i.orientation == orientation:
+                return i
+            else:
+                pass
+        return None
+
 
     def set_inner_wall_area(self):
         '''Sets the inner wall area.
@@ -833,7 +881,6 @@ class ThermalZone(object):
 
     @t_inside.setter
     def t_inside(self, value):
-        print("setter")
         if isinstance(value, float):
             self._t_inside = value
         elif value is None:
