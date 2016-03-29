@@ -166,6 +166,7 @@ class ThermalZone(object):
                 out_wall.calc_equivalent_res()
                 out_wall.calc_ua_value()
                 self.orientation_wall.append(out_wall.orientation)
+
         else:
             warnings.warn("No outer walls are defined")
 
@@ -182,6 +183,7 @@ class ThermalZone(object):
                 win.calc_equivalent_res()
                 win.calc_ua_value()
                 self.orientation_win.append(win.orientation)
+
         else:
             warnings.warn("No outer walls are defined")
 
@@ -470,14 +472,11 @@ class ThermalZone(object):
                 if type(wall).__name__ ==  "GroundFloor":
                     self.weightfactor_ground.append(wall.wf_out)
                 else:
-                    self.weightfactor_ow.append(wall.wf_out)
-                    self.orientation_wall.append(wall.orientation)
+                    pass
 
             for win in self.windows:
                 win.wf_out = win.ua_value/(self.ua_value_ow +
                                                      self.ua_value_win)
-                self.orientation_win.append(win.orientation)
-                self.weightfactor_win.append(win.wf_out)
 
         elif calculation_core == 'ebc':
 
@@ -486,31 +485,14 @@ class ThermalZone(object):
                 if type(wall).__name__ == "GroundFloor":
                     self.weightfactor_ground.append(wall.wf_out)
                 else:
-                    self.weightfactor_ow.append(wall.wf_out)
-                    self.orientation_wall.append(wall.orientation)
+                    pass
+
             for win in self.windows:
                 win.wf_out = win.ua_value/self.ua_value_win
-                self.weightfactor_win.append(win.wf_out)
-                self.orientation_win.append(win.orientation)
-
 
         else:
             raise ValueError("specify calculation method correctly")
 
-        zip_help_wall = sorted(zip(self.orientation_wall, self.weightfactor_ow))
-        zip_help_win = sorted(zip(self.orientation_win, self.weightfactor_win))
-
-        self.orientation_wall = []
-        self.orientation_win = []
-        self.weightfactor_ow = []
-        self.weightfactor_win = []
-
-        for y,x in zip_help_wall:
-            self.orientation_wall.append(y)
-            #self.weightfactor_ow.append(x)
-        for y,x in zip_help_win:
-            self.orientation_win.append(y)
-            #self.weightfactor_win.append(x)
 
     def find_wall(self, orientation):
         for i in self.outer_walls:
