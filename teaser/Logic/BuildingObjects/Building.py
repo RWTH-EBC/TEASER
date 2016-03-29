@@ -327,6 +327,7 @@ class Building(object):
         nr_of_orientation = {}
 
         for zone in self.thermal_zones:
+            print(zone.orientation_wall, zone.orientation_win)
             zone.orientation_wall.sort()
             zone.orientation_win.sort()
             nr_of_orientation[zone] = [zone.orientation_wall,
@@ -339,12 +340,15 @@ class Building(object):
                     pass
                 else:
                     value[1].insert(i, None)
-        if value[0][0] == -2:
-            value[0] += [value[0].pop(0)]
-        if value[0][0] == -1:
-            value[0] += [value[0].pop(0)]
-        if value[1][0] == -1:
-            value[1] += [value[1].pop(0)]
+
+        if value[0][0] == -2 or None:
+            value[0].insert(len(value[0]), value[0].pop(0))
+            value[1].insert(len(value[1]), value[1].pop(0))
+        if value[0][0] == -1 or None:
+            value[0].insert(len(value[0]), value[0].pop(0))
+            value[1].insert(len(value[1]), value[1].pop(0))
+
+
 
         """
         for i in range(max_orientation[0]):
@@ -383,8 +387,6 @@ class Building(object):
                         zone.weightfactor_win.append(0)
                         zone.g_sunblind_list.append(0)
                         zone.window_area_list.append(0)
-            print(zone.weightfactor_ow)
-            print(zone.weightfactor_win)
 
     def retrofit_building(self, year_of_retrofit=None,
                           window_type=None,
