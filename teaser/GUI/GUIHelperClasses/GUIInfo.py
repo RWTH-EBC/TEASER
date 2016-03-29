@@ -51,8 +51,8 @@ class GUIInfo():
                                    "Canteen", "Restaurant",
                                    "Kitchen in non-residential buildings",
                                    "Kitchen - preparations, storage",
-                                   "WC and sanitary rooms in non-residential" +
-                                   "buildings", "Further common rooms",
+                                   "WC and sanitary rooms in non-residential" 
+                                   " buildings", "Further common rooms",
                                    "Auxiliary areas (without common rooms)",
                                    "Traffic area",
                                    "Stock, technical equipment, archives",
