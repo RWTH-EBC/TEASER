@@ -157,7 +157,7 @@ end ${bldg.name};
       Longitude=${bldg.longitude},
     % endif
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(nSurfaces=${len(bldg.orientation_bldg)},
-    Azimut={${list_to_string(bldg.orientation_bldg)}}, Tilt={${list_to_string(bldg.tilt)}}))
+    Azimut={${list_to_string(bldg.orientation_bldg)}}, Tilt={${list_to_string(bldg.tilt_bldg)}}))
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(

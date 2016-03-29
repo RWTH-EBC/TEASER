@@ -327,31 +327,30 @@ class Building(object):
         to do: implement function, that sorts outer_walls and windows
         '''
         nr_of_orientation = {}
-        self.tilt = []
+
         for zone in self.thermal_zones:
-            nr_of_orientation[zone] = [list(set(zone.orientation_wall) | set(
-                                                        zone.orientation_win))]
-            nr_of_orientation[zone][0].sort()
+            nr_of_orientation[zone] = list(set(zone.orientation_wall) | set(
+                                                        zone.orientation_win))
+            nr_of_orientation[zone].sort()
 
 
         for key, value in nr_of_orientation.items():
-            self.orientation_bldg = list(set(self.orientation_bldg) | set(
-                                                                    value[0]))
+            self.orientation_bldg = list(set(self.orientation_bldg) | set(value))
         self.orientation_bldg.sort()
         if self.orientation_bldg[0] == -1 or None:
-            value[0].insert(len(self.orientation_bldg), self.orientation_bldg.pop(0))
+            self.orientation_bldg.insert(len(self.orientation_bldg), self.orientation_bldg.pop(0))
 
         for zone in self.thermal_zones:
             for test in self.orientation_bldg:
                 if zone.find_wall(test) is not None:
                     zone.weightfactor_ow.append(zone.find_wall(test).wf_out)
-                    self.tilt.append(zone.find_wall(test).tilt)
                 else:
                     zone.weightfactor_ow.append(0)
                 if zone.find_win(test) is not None:
                     zone.weightfactor_win.append(zone.find_win(test).wf_out)
                 else:
                     zone.weightfactor_win.append(0)
+
 
     def retrofit_building(self, year_of_retrofit=None,
                           window_type=None,

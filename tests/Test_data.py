@@ -861,10 +861,11 @@ class Test_teaser(object):
         assert round(therm_zone.r_total, 12) == 0.007375618172
         assert round(therm_zone.r_rad_ow_iw, 15) == 0.000609756097561
         assert round(therm_zone.r_rest_ow, 13) == 0.0059227874045
-    """
+
     def test_calc_weightfactor(self):
         '''test of calc_weightfactor'''
         prj.buildings[-1].thermal_zones[-1].calc_weightfactors('vdi')
+        prj.buildings[-1].compare_list()
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert therm_zone.weightfactor_ow == [0.02453065018076125,
                                               0.03434291025306575,
@@ -882,6 +883,7 @@ class Test_teaser(object):
 
         prj.buildings[-1].thermal_zones[-1].calc_weightfactors('ebc')
         therm_zone = prj.buildings[-1].thermal_zones[-1]
+        prj.buildings[-1].compare_list()
         assert therm_zone.weightfactor_ow == [0.03047939672771177,
                                               0.042671155418796486,
                                               0.03047939672771177,
@@ -892,7 +894,7 @@ class Test_teaser(object):
                                                0.44444444444444453,
                                                0.27777777777777778,
                                                0.0]
-    """
+
     def test_volume_zone(self):
         '''test of volume_zone'''
 
