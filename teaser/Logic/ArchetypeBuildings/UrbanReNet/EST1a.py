@@ -338,14 +338,25 @@ class EST1a(Residential):
 
     @property
     def construction_type(self):
-        return self.construction_type
+        return self._construction_type
 
     @construction_type.setter
     def construction_type(self, value):
         if value is not None:
             if value == "heavy" or value == "light":
-                self.construction_type = value
+                self._construction_type = value
             else:
                 raise ValueError("Construction_type has to be light or heavy")
         else:
-            self.construction_type = "heavy"
+            self._construction_type = "heavy"
+
+    @property
+    def neighbour_buildings(self):
+        return self._neighbour_buildings
+
+    @neighbour_buildings.setter
+    def neighbour_buildings(self, value):
+        if value is not None:
+            self._neighbour_buildings = value
+        else:
+            self._neighbour_buildings = 0
