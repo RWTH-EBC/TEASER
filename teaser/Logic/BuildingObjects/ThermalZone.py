@@ -110,7 +110,7 @@ class ThermalZone(object):
         self.weightfactor_ow_dict = {}
         self.weightfactor_ground = []
         self.tilt_zone = []
-        self.orientation_zone = []
+        self.orientation_wall = []
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
         self.r_rad_inner_ow = 0.0
@@ -130,6 +130,7 @@ class ThermalZone(object):
         self.weightfactor_win = []
         self.g_sunblind_list = []
         self.window_area_list = []
+        self.orientation_win = []
         self.ua_value_win = 0.0
         self.r_conv_inner_win = 0.0
         self.r_rad_inner_win = 0.0
@@ -164,6 +165,7 @@ class ThermalZone(object):
             for out_wall in self.outer_walls:
                 out_wall.calc_equivalent_res()
                 out_wall.calc_ua_value()
+                self.orientation_wall.append(out_wall.orientation)
         else:
             warnings.warn("No outer walls are defined")
 
@@ -171,6 +173,7 @@ class ThermalZone(object):
             for in_wall in self.inner_walls:
                 in_wall.calc_equivalent_res()
                 in_wall.calc_ua_value()
+
         else:
             warnings.warn("No outer walls are defined")
 
@@ -178,6 +181,7 @@ class ThermalZone(object):
             for win in self.windows:
                 win.calc_equivalent_res()
                 win.calc_ua_value()
+                self.orientation_win.append(win.orientation)
         else:
             warnings.warn("No outer walls are defined")
 
@@ -476,50 +480,6 @@ class ThermalZone(object):
 
         else:
             raise ValueError("specify calculation method correctly")
-
-    def fill_sunblind_list(self, orientation_dict):
-        '''fills the g_sunblind_list in the right order with the right g values
-        when the sundblind is closed (needed for modelica specific export)
-        '''
-
-        roof_help = 0.0
-        for key in orientation_dict:
-            key_help = True
-            if key != -2 and key != -1:
-                for window in self.windows:
-                    if window.orientation == key:
-                        key_help = False
-                        self.g_sunblind_list.append(window.shading_g_total)
-                        break
-                if key_help:
-                    self.g_sunblind_list.append(0.0)
-            elif key == -1:
-                for window in self.windows:
-                    if window.orientation == key:
-                        roof_help = window.shading_g_total
-        self.g_sunblind_list.append(roof_help)
-
-    def fill_win_area_list(self, orientation_dict):
-        '''fills the window_area_list in the right order with the right window
-        areas (needed for modelica specific export)
-        '''
-
-        roof_help = 0.0
-        for key in orientation_dict:
-            key_help = True
-            if key != -2 and key != -1:
-                for window in self.windows:
-                    if window.orientation == key:
-                        key_help = False
-                        self.window_area_list.append(window.area)
-                        break
-                if key_help:
-                    self.window_area_list.append(0.0)
-            elif key == -1:
-                for window in self.windows:
-                    if window.orientation == key:
-                        roof_help = window.area
-        self.window_area_list.append(roof_help)
 
     def set_inner_wall_area(self):
         '''Sets the inner wall area.
