@@ -331,7 +331,6 @@ class Building(object):
         for zone in self.thermal_zones:
             nr_of_orientation[zone] = list(set(zone.orientation_wall) | set(
                                                         zone.orientation_win))
-            til[zone] = list
             nr_of_orientation[zone].sort()
 
 
