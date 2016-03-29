@@ -120,6 +120,8 @@ class Building(object):
         self.file_set_t = None
         self.file_weather = None
 
+        self.orientation_bldg = []
+        self.tilt_bldg = []
         self._calculation_method = "vdi"
 
     def set_outer_wall_area(self, new_area, orientation):
@@ -325,68 +327,31 @@ class Building(object):
         to do: implement function, that sorts outer_walls and windows
         '''
         nr_of_orientation = {}
-
+        self.tilt = []
         for zone in self.thermal_zones:
-            print(zone.orientation_wall, zone.orientation_win)
-            zone.orientation_wall.sort()
-            zone.orientation_win.sort()
-            nr_of_orientation[zone] = [zone.orientation_wall,
-                                       zone.orientation_win]
+            nr_of_orientation[zone] = [list(set(zone.orientation_wall) | set(
+                                                        zone.orientation_win))]
+            nr_of_orientation[zone][0].sort()
 
 
         for key, value in nr_of_orientation.items():
-            for i, orient in enumerate(value[0]):
-                if orient == value[1][i]:
-                    pass
-                else:
-                    value[1].insert(i, None)
+            self.orientation_bldg = list(set(self.orientation_bldg) | set(
+                                                                    value[0]))
+        self.orientation_bldg.sort()
+        if self.orientation_bldg[0] == -1 or None:
+            value[0].insert(len(self.orientation_bldg), self.orientation_bldg.pop(0))
 
-        if value[0][0] == -2 or None:
-            value[0].insert(len(value[0]), value[0].pop(0))
-            value[1].insert(len(value[1]), value[1].pop(0))
-        if value[0][0] == -1 or None:
-            value[0].insert(len(value[0]), value[0].pop(0))
-            value[1].insert(len(value[1]), value[1].pop(0))
-
-
-
-        """
-        for i in range(max_orientation[0]):
-            if max_orientation[1].outer_walls[i].orientation != -2:
-                self.tilt.append(max_orientation[1].outer_walls[i].tilt)
-                self.orientation.append(max_orientation[1].outer_walls[i].orientation)
-                self.orientation_name.append("\"i\"")
-            else:
-                pass
-        """
         for zone in self.thermal_zones:
-            ground_help = []
-            win_help = 0
-            for count_wall in range(len(value[0])):
-                if count_wall < len(zone.outer_walls):
-                    if type(zone.outer_walls[count_wall]).__name__ == \
-                            "GroundFloor":
-                        zone.weightfactor_ground.append(zone.outer_walls[count_wall].wf_out)
-                        ground_help.append(count_wall)
-                    else:
-                        zone.weightfactor_ow.append(zone.outer_walls[count_wall].wf_out)
-                        zone.tilt_zone.append(zone.outer_walls[count_wall].tilt)
+            for test in self.orientation_bldg:
+                if zone.find_wall(test) is not None:
+                    zone.weightfactor_ow.append(zone.find_wall(test).wf_out)
+                    self.tilt.append(zone.find_wall(test).tilt)
                 else:
-                        zone.weightfactor_ow.append(0)
-
-            for count_win in range(len(value[0])):
-                if count_win in ground_help:
-                    win_help += 1
+                    zone.weightfactor_ow.append(0)
+                if zone.find_win(test) is not None:
+                    zone.weightfactor_win.append(zone.find_win(test).wf_out)
                 else:
-                    if count_win < len(zone.windows) and value[1][count_win] \
-                            is not None:
-                        zone.weightfactor_win.append(zone.windows[count_win].wf_out)
-                        zone.g_sunblind_list.append(zone.windows[count_win].g_value)
-                        zone.window_area_list.append(zone.windows[count_win].area)
-                    else:
-                        zone.weightfactor_win.append(0)
-                        zone.g_sunblind_list.append(0)
-                        zone.window_area_list.append(0)
+                    zone.weightfactor_win.append(0)
 
     def retrofit_building(self, year_of_retrofit=None,
                           window_type=None,
