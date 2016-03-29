@@ -861,7 +861,7 @@ class Test_teaser(object):
         assert round(therm_zone.r_total, 12) == 0.007375618172
         assert round(therm_zone.r_rad_ow_iw, 15) == 0.000609756097561
         assert round(therm_zone.r_rest_ow, 13) == 0.0059227874045
-
+    """
     def test_calc_weightfactor(self):
         '''test of calc_weightfactor'''
         prj.buildings[-1].thermal_zones[-1].calc_weightfactors('vdi')
@@ -892,7 +892,7 @@ class Test_teaser(object):
                                                0.44444444444444453,
                                                0.27777777777777778,
                                                0.0]
-
+    """
     def test_volume_zone(self):
         '''test of volume_zone'''
 
