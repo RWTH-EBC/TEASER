@@ -1074,16 +1074,15 @@ class MainUI(QDialog):
                         index = zone.inner_walls.index(element)
                         zone.inner_walls[index].name = \
                             str(self.element_name_textbox.text())
-                        zone.inner_walls[index].construction_type = \
-                            str(self.element_construction_type_combobox.\
-                            currentText())
                         zone.inner_walls[index].orientation = \
                             self.guiinfo.orientations_strings \
                             [str(self.element_orientation_combobox.currentText())]
                         zone.inner_walls[index].area = \
                            str(self.element_area_textbox.text())
-                        zone.inner_walls[index].year_of_construction = \
-                            str(self.element_year_of_construction_textbox.text())
+                        zone.inner_walls[index].load_type_element(int(
+                            self.element_year_of_construction_textbox.text()),
+                            str(self.element_construction_type_combobox.
+                                currentText()))
                         zone.inner_walls[index].year_of_retrofit = \
                             str(self.element_year_of_retrofit_textbox.text())
                         zone.inner_walls[index].tilt = \
@@ -1097,16 +1096,15 @@ class MainUI(QDialog):
                         index = zone.outer_walls.index(element)
                         zone.outer_walls[index].name = \
                             str(self.element_name_textbox.text())
-                        zone.outer_walls[index].construction_type = \
-                            str(self.element_construction_type_combobox.\
-                            currentText())
                         zone.outer_walls[index].orientation = \
                             self.guiinfo.orientations_strings\
                             [self.element_orientation_combobox.currentText()]
                         zone.outer_walls[index].area = \
                             str(self.element_area_textbox.text())
-                        zone.outer_walls[index].year_of_construction = \
-                            str(self.element_year_of_construction_textbox.text())
+                        zone.outer_walls[index].load_type_element(int(
+                            self.element_year_of_construction_textbox.text()),
+                            str(self.element_construction_type_combobox.
+                                currentText()))
                         zone.outer_walls[index].year_of_retrofit = \
                             str(self.element_year_of_retrofit_textbox.text())
                         zone.outer_walls[index].tilt = \
@@ -1125,16 +1123,15 @@ class MainUI(QDialog):
                         index = zone.windows.index(element)
                         zone.windows[index].name = \
                             str(self.element_name_textbox.text())
-                        zone.windows[index].construction_type = \
-                            str(self.element_construction_type_combobox.\
-                            currentText())
                         zone.windows[index].orientation = \
                             self.guiinfo.orientations_strings\
                             [self.element_orientation_combobox.currentText()]
                         zone.windows[index].area = \
                             str(self.element_area_textbox.text())
-                        zone.windows[index].year_of_construction = \
-                            str(self.element_year_of_construction_textbox.text())
+                        zone.windows[index].load_type_element(int(
+                            self.element_year_of_construction_textbox.text()),
+                            str(self.element_construction_type_combobox.
+                                currentText()))
                         zone.windows[index].year_of_retrofit = \
                             str(self.element_year_of_retrofit_textbox.text())
                         zone.windows[index].tilt = \
@@ -2211,7 +2208,7 @@ class MainUI(QDialog):
 
     def load_constr_type(self):
         self.current_element.load_type_element(
-                    self.current_building.year_of_construction,
+                    int(self.element_year_of_construction_textbox.text()),
                     str(self.element_construction_type_combobox.currentText()))
 
         self.element_layer_model.clear()
