@@ -89,7 +89,7 @@ class BuildingAHU(object):
                 or type(value).__name__ == "Institute"\
                 or type(value).__name__ == "Institute4"\
                 or type(value).__name__ == "Institute8" \
-                or type(value).__name__ == "SingleFamilyDwelling", ass_error_1
+                or type(value).__name__ == "EST1a", ass_error_1
 
             self.__parent = value
 
@@ -98,7 +98,7 @@ class BuildingAHU(object):
            or type(value).__name__ == "Institute" \
            or type(value).__name__ == "Institute4" \
            or type(value).__name__ == "Institute8" \
-           or type(value).__name__ == "SingleFamilyDwelling":
+           or type(value).__name__ == "EST1a":
 
             self.__parent.central_ahu = self
     
