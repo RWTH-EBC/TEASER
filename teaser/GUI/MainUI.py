@@ -1705,156 +1705,7 @@ class MainUI(QDialog):
                 str(building.internal_id))
             if fIndex == cIndex:
                 self.current_building = building
-                self.display_current_building_after_switching()
-
-    def display_current_building_after_switching(self):
-        ''' Changes all the values to the new building after switching
-        in the buildings combobox
-        '''
-
-        if (self.current_building):
-
-            """ Displaying values on the sidebar controls"""
-
-            self.side_bar_id_line_edit.setText(str(self.current_building.name))
-            self.side_bar_construction_year_line_edit.setText(
-                str(self.current_building.year_of_construction))
-            self.side_bar_height_of_floors_line_edit.setText(
-                str(self.current_building.height_of_floors))
-            self.side_bar_location_line_edit.setText(
-                str(self.current_building.city))
-            self.side_bar_net_leased_area_line_edit.setText(
-                str(self.current_building.net_leased_area))
-            self.side_bar_number_of_floors_line_edit.setText(
-                str(self.current_building.number_of_floors))
-            self.side_bar_street_line_edit.setText(
-                str(self.current_building.street_name))
-
-            """ Displaying zones in the two list views in the main frame """
-
-            self.zone_model.clear()
-            self.element_model.clear()
-            self.outer_elements_model.clear()
-            for zone in self.project.\
-                buildings[self.project.buildings.index(
-                    self.current_building)].thermal_zones:
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) + str(zone.name) + 
-                    "\n" + "Type:\t".expandtabs(11) + 
-                    str(type(zone).__name__) + "\n Area:\t".expandtabs(11) + 
-                    str(zone.area), zone.internal_id)
-                self.zone_model.appendRow(item)
-                if zone.inner_walls:
-                    for inner_wall in zone.inner_walls:
-                        if type(inner_wall).__name__ == \
-                        "InnerWall":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Inner Wall \n Area:\t".expandtabs(11) + 
-                                str(inner_wall.area),inner_wall.internal_id)
-                            self.element_model.appendRow(item)
-                        if type(inner_wall).__name__ == \
-                        "Floor":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Floor \n Area:\t".expandtabs(11) + 
-                                str(inner_wall.area), inner_wall.internal_id)
-                            self.element_model.appendRow(item)
-                        if type(inner_wall).__name__ == \
-                        "Ceiling":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Ceiling \n Area:\t".expandtabs(11) + 
-                                str(inner_wall.area), inner_wall.internal_id)
-                            self.element_model.appendRow(item)
-                if zone.outer_walls:
-                    for outer_wall in zone.outer_walls:
-                        if type(outer_wall).__name__ == \
-                                "GroundFloor":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + 
-                                str(outer_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Ground Floor \n Area:\t".expandtabs(11) + 
-                                str(outer_wall.area) + 
-                                "\n Orientation:\t".expandtabs(11) + 
-                                str(outer_wall.orientation),
-                                outer_wall.internal_id)
-                            self.element_model.appendRow(item)
-                        if type(outer_wall).__name__ == \
-                                "Rooftop":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + 
-                                str(outer_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Rooftop \n Area:\t".expandtabs(11) + 
-                                str(outer_wall.area) + 
-                                "\n Orientation:\t".expandtabs(11) + 
-                                str(outer_wall.orientation),
-                                outer_wall.internal_id)
-                            self.element_model.appendRow(item)
-                        if type(outer_wall).__name__ == \
-                                "OuterWall":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + 
-                                str(outer_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Outer Wall \n Area:\t".expandtabs(11) + 
-                                str(outer_wall.area) + 
-                                "\n Orientation:\t".expandtabs(11) + 
-                                str(outer_wall.orientation),
-                                outer_wall.internal_id)
-                            self.element_model.appendRow(item)
-                if zone.windows:
-                    for window in zone.windows:
-                        item = TrackableItem(
-                            "Name:\t".expandtabs(8) + str(window.name) +
-                            "\nType:\t".expandtabs(11) +
-                            "Windows \n Area:\t".expandtabs(11) +
-                            str(window.area) +
-                            "\n Orientation:\t".expandtabs(11) +
-                            str(window.orientation),
-                            window.internal_id)
-                        self.element_model.appendRow(item)
-
-            for orientation in self.guiinfo.orientations_numbers.keys():
-                if self.current_building.get_outer_wall_area(orientation) != 0:
-                    if orientation == -1:
-                        item1 = QStandardItem(
-                         "Rooftop \nOrientation:\t" +
-                         str(self.guiinfo.orientations_numbers[orientation]) +
-                         "\t".expandtabs(12) + "\n" + " Area: " +
-                         str(self.current_building.
-                             get_outer_wall_area(orientation)))
-
-                    elif orientation == -2:
-                        item1 = QStandardItem(
-                         "Ground Floor \nOrientation:\t" +
-                         str(self.guiinfo.orientations_numbers[orientation]) +
-                         "\t".expandtabs(12) + "\n" + " Area: " +
-                         str(self.current_building.
-                             get_outer_wall_area(orientation)))
-                    else:
-                        item1 = QStandardItem(
-                         "Outer Wall \nOrientation:\t" +
-                         str(self.guiinfo.orientations_numbers[orientation]) +
-                         "\t".expandtabs(12) + "\n" + " Area: " +
-                         str(self.current_building.
-                             get_outer_wall_area(orientation)))
-
-                    self.outer_elements_model.appendRow(item1)
-
-                if self.current_building.get_window_area(orientation) != 0:
-                    item2 = QStandardItem(
-                        "Window \nOrientation:\t" +
-                        str(self.guiinfo.orientations_numbers[orientation]) +
-                        "\t".expandtabs(16) + "\n" + " Area: " +
-                        str(self.current_building.
-                            get_window_area(orientation)))
-                    self.outer_elements_model.appendRow(item2)
+                self.display_current_building()
 
     def display_current_building(self):
         ''' Changes all the values to the new building
@@ -1902,15 +1753,91 @@ class MainUI(QDialog):
 
             self.zone_model.clear()
             self.outer_elements_model.clear()
+            self.element_model.clear()
             for zone in self.project.\
-                buildings[self.project.buildings.
-                                  index(self.current_building)].thermal_zones:
+                buildings[self.project.buildings.index(
+                    self.current_building)].thermal_zones:
                 item = TrackableItem(
                     "Name:\t".expandtabs(8) + str(zone.name) +
                     "\n" + "Type:\t".expandtabs(11) +
                     str(type(zone).__name__) + "\n Area:\t".expandtabs(11) +
                     str(zone.area), zone.internal_id)
                 self.zone_model.appendRow(item)
+                if zone.inner_walls:
+                    for inner_wall in zone.inner_walls:
+                        if type(inner_wall).__name__ == \
+                                "InnerWall":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) + str(inner_wall.name)+
+                                "\nType:\t".expandtabs(11) +
+                                "Inner Wall \n Area:\t".expandtabs(11) +
+                                str(inner_wall.area),inner_wall.internal_id)
+                            self.element_model.appendRow(item)
+                        if type(inner_wall).__name__ == \
+                                "Floor":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) + str(inner_wall.name)+
+                                "\nType:\t".expandtabs(11) +
+                                "Floor \n Area:\t".expandtabs(11) +
+                                str(inner_wall.area), inner_wall.internal_id)
+                            self.element_model.appendRow(item)
+                        if type(inner_wall).__name__ == \
+                                "Ceiling":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) + str(inner_wall.name)+
+                                "\nType:\t".expandtabs(11) +
+                                "Ceiling \n Area:\t".expandtabs(11) +
+                                str(inner_wall.area), inner_wall.internal_id)
+                            self.element_model.appendRow(item)
+                if zone.outer_walls:
+                    for outer_wall in zone.outer_walls:
+                        if type(outer_wall).__name__ == \
+                                "GroundFloor":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) +
+                                str(outer_wall.name) +
+                                "\nType:\t".expandtabs(11) +
+                                "Ground Floor \n Area:\t".expandtabs(11) +
+                                str(outer_wall.area) +
+                                "\n Orientation:\t".expandtabs(11) +
+                                str(outer_wall.orientation),
+                                outer_wall.internal_id)
+                            self.element_model.appendRow(item)
+                        if type(outer_wall).__name__ == \
+                                "Rooftop":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) +
+                                str(outer_wall.name) +
+                                "\nType:\t".expandtabs(11) +
+                                "Rooftop \n Area:\t".expandtabs(11) +
+                                str(outer_wall.area) +
+                                "\n Orientation:\t".expandtabs(11) +
+                                str(outer_wall.orientation),
+                                outer_wall.internal_id)
+                            self.element_model.appendRow(item)
+                        if type(outer_wall).__name__ == \
+                                "OuterWall":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) +
+                                str(outer_wall.name) +
+                                "\nType:\t".expandtabs(11) +
+                                "Outer Wall \n Area:\t".expandtabs(11) +
+                                str(outer_wall.area) +
+                                "\n Orientation:\t".expandtabs(11) +
+                                str(outer_wall.orientation),
+                                outer_wall.internal_id)
+                            self.element_model.appendRow(item)
+                if zone.windows:
+                    for window in zone.windows:
+                        item = TrackableItem(
+                            "Name:\t".expandtabs(8) + str(window.name) +
+                            "\nType:\t".expandtabs(11) +
+                            "Windows \n Area:\t".expandtabs(11) +
+                            str(window.area) +
+                            "\n Orientation:\t".expandtabs(11) +
+                            str(window.orientation),
+                            window.internal_id)
+                        self.element_model.appendRow(item)
 
             for orientation in self.guiinfo.orientations_numbers.keys():
                 if self.current_building.get_outer_wall_area(orientation) != 0:
