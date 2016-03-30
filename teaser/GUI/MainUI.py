@@ -1867,7 +1867,7 @@ class MainUI(QDialog):
         self.construct_type_building_button = QtGui.QPushButton(
             u"Generate " + self.current_type_building + " Building ...")
         self.connect(self.construct_type_building_button, SIGNAL(
-            "clicked()"), self.check_inputs_typebuilding_office)
+            "clicked()"), self.check_inputs_typebuilding)
 
         self.connect(self.construct_type_building_button, SIGNAL(
             "clicked()"), self.popup_window_type_building,
@@ -2656,32 +2656,10 @@ class MainUI(QDialog):
                     self.edit_zone_volume_line_edit.text()
                 self.display_current_building()
 
-    def check_inputs_typebuilding_office(self):
-        ''' Checks if all necessary values to create a type building are
-        not empty/floats '''
-        # übergibst, weil du keine methoden mit parameter zu buttons connecten kannst,        # allerdings sollts mit sowas wie self.type_building_type klappen
-        self.fill_typebuilding_attributes()
-        self.project, int_id = Controller.click_generate_type_building_button(
-            self.project,
-            self.window_construct_building_name_line_edit.text(),
-            self.window_construct_building_year_line_edit.text(),
-            self.window_construct_building_number_of_floors_line_edit.text(),
-            self.window_construct_building_height_of_floors_line_edit.text(),
-            "Office",
-            self.window_construct_building_area_line_edit.text(),
-            self.window_construct_building_street_line_edit.text(),
-            self.window_construct_building_location_line_edit.text(),
-            self.type_building_ind_att)
-        for building in self.project.buildings:
-            if building.internal_id == int_id:
-                self.current_building = building
-        self.display_current_building()
-        
-    def check_inputs_typebuilding_institute_4(self):
+    def check_inputs_typebuilding(self):
         ''' Checks if all necessary values to create a type building are
         not empty/floats '''
 
-        # TODO: Fehler beim User-Input abfangen
         self.fill_typebuilding_attributes()
         self.project, int_id = Controller.click_generate_type_building_button(
             self.project,
@@ -2689,51 +2667,7 @@ class MainUI(QDialog):
             self.window_construct_building_year_line_edit.text(),
             self.window_construct_building_number_of_floors_line_edit.text(),
             self.window_construct_building_height_of_floors_line_edit.text(),
-            "Insitute 4",
-            self.window_construct_building_area_line_edit.text(),
-            self.window_construct_building_street_line_edit.text(),
-            self.window_construct_building_location_line_edit.text(),
-            self.type_building_ind_att)
-        for building in self.project.buildings:
-            if building.internal_id == int_id:
-                self.current_building = building
-        self.display_current_building()
-        
-    def check_inputs_typebuilding_institute_8(self):
-        ''' Checks if all necessary values to create a type building are
-        not empty/floats '''
-
-        # TODO: Fehler beim User-Input abfangen
-        self.fill_typebuilding_attributes()
-        self.project, int_id = Controller.click_generate_type_building_button(
-            self.project,
-            self.window_construct_building_name_line_edit.text(),
-            self.window_construct_building_year_line_edit.text(),
-            self.window_construct_building_number_of_floors_line_edit.text(),
-            self.window_construct_building_height_of_floors_line_edit.text(),
-            "Institute 8",
-            self.window_construct_building_area_line_edit.text(),
-            self.window_construct_building_street_line_edit.text(),
-            self.window_construct_building_location_line_edit.text(),
-            self.type_building_ind_att)
-        for building in self.project.buildings:
-            if building.internal_id == int_id:
-                self.current_building = building
-        self.display_current_building()
-        
-    def check_inputs_typebuilding_institute_general(self):
-        ''' Checks if all necessary values to create a type building are
-        not empty/floats '''
-
-        # TODO: Fehler beim User-Input abfangen
-        self.fill_typebuilding_attributes()
-        self.project, int_id = Controller.click_generate_type_building_button(
-            self.project,
-            self.window_construct_building_name_line_edit.text(),
-            self.window_construct_building_year_line_edit.text(),
-            self.window_construct_building_number_of_floors_line_edit.text(),
-            self.window_construct_building_height_of_floors_line_edit.text(),
-            "Institute General",
+            self.current_type_building,
             self.window_construct_building_area_line_edit.text(),
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
@@ -2743,28 +2677,6 @@ class MainUI(QDialog):
                 self.current_building = building
         self.display_current_building()
 
-    def check_inputs_typebuilding_residential(self):
-        ''' Checks if all necessary values to create a type building are
-        not empty/floats '''
-
-        # TODO: Fehler beim User-Input abfangen
-        self.fill_typebuilding_attributes()
-        self.project, int_id = Controller.click_generate_type_building_button(
-            self.project,
-            self.window_construct_building_name_line_edit.text(),
-            self.window_construct_building_year_line_edit.text(),
-            self.window_construct_building_number_of_floors_line_edit.text(),
-            self.window_construct_building_height_of_floors_line_edit.text(),
-            "Residential",
-            self.window_construct_building_area_line_edit.text(),
-            self.window_construct_building_street_line_edit.text(),
-            self.window_construct_building_location_line_edit.text(),
-            self.type_building_ind_att)
-        for building in self.project.buildings:
-            if building.internal_id == int_id:
-                self.current_building = building
-        self.display_current_building()
-        
     def check_new_building_inputs(self):
         ''' Creates a new empty building
         
@@ -4903,7 +4815,7 @@ class MainUI(QDialog):
             self.group_box_residential_architecture.setVisible(True)
             self.construct_type_building_button.clicked.disconnect()
             self.connect(self.construct_type_building_button, SIGNAL(
-            "clicked()"), self.check_inputs_typebuilding_residential)
+            "clicked()"), self.check_inputs_typebuilding)
             self.connect(self.construct_type_building_button, SIGNAL(
                 "clicked()"), self.popup_window_type_building,
                     QtCore.SLOT("close()"))
@@ -4914,35 +4826,13 @@ class MainUI(QDialog):
             self.group_box_type_building_right_residential.setVisible(False)
             self.group_box_office_architecture.setVisible(True)
             self.group_box_residential_architecture.setVisible(False)
-            if self.current_type_building == "Office":
-                self.construct_type_building_button.clicked.disconnect()
-                self.connect(self.construct_type_building_button, SIGNAL(
-                    "clicked()"), self.check_inputs_typebuilding_office)
-                self.connect(self.construct_type_building_button, SIGNAL(
-                    "clicked()"), self.popup_window_type_building,
-                        QtCore.SLOT("close()"))
-            if self.current_type_building == "Institute 4":
-                self.construct_type_building_button.clicked.disconnect()
-                self.connect(self.construct_type_building_button, SIGNAL(
-                    "clicked()"), self.check_inputs_typebuilding_institute_4)
-                self.connect(self.construct_type_building_button, SIGNAL(
+            self.construct_type_building_button.clicked.disconnect()
+            self.connect(self.construct_type_building_button, SIGNAL(
+                "clicked()"), self.check_inputs_typebuilding)
+            self.connect(self.construct_type_building_button, SIGNAL(
                 "clicked()"), self.popup_window_type_building,
                     QtCore.SLOT("close()"))
-            if self.current_type_building == "Institute 8":
-                self.construct_type_building_button.clicked.disconnect()
-                self.connect(self.construct_type_building_button, SIGNAL(
-                    "clicked()"), self.check_inputs_typebuilding_institute_8)
-                self.connect(self.construct_type_building_button, SIGNAL(
-                "clicked()"), self.popup_window_type_building,
-                    QtCore.SLOT("close()"))
-            if self.current_type_building == "Institute General":
-                self.construct_type_building_button.clicked.disconnect()
-                self.connect(self.construct_type_building_button, SIGNAL(
-                    "clicked()"), self.check_inputs_typebuilding_institute_general)
-                self.connect(self.construct_type_building_button, SIGNAL(
-                "clicked()"), self.popup_window_type_building,
-                    QtCore.SLOT("close()"))
-
+         
     def switch_current_zone_type(self):
         '''If the type of the current zone is swapped, this
         gets the values for the new type and updates the window
