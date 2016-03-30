@@ -56,9 +56,9 @@ class MainUI(QDialog):
         """ General layout and gui-global variables """
 
         # Used to display the console inside the program.
-        sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
-        sys.stdin = EmittingStream(textWritten=self.normalOutputWritten)
-        sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
+        sys.stdout = EmittingStream(textWritten=self.normal_output_written)
+        sys.stdin = EmittingStream(textWritten=self.normal_output_written)
+        sys.stderr = EmittingStream(textWritten=self.normal_output_written)
         
         self.setWindowFlags(self.windowFlags() | Qt.WindowMinMaxButtonsHint)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -751,7 +751,7 @@ class MainUI(QDialog):
             self.buildings_combo_box_model)
         self.side_bar_buildings_combo_box.setModelColumn(0)
         self.connect(self.side_bar_buildings_combo_box, QtCore.SIGNAL(
-            "currentIndexChanged(int)"), self.switchBuilding)
+            "currentIndexChanged(int)"), self.switch_building)
         self.side_bar_id_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_id_label.setGeometry(QtCore.QRect(5, 60, 90, 25))
         self.side_bar_id_label.setText("Name:")
@@ -932,7 +932,7 @@ class MainUI(QDialog):
     def __del__(self):
         sys.stdout = sys.__stdout__
 
-    def normalOutputWritten(self, text):
+    def normal_output_written(self, text):
         ''''Append text to the QTextEdit. Part of the
         package to display the console in the project.
         
@@ -1695,7 +1695,7 @@ class MainUI(QDialog):
                     str(element.orientation), element.internal_id)
                 self.element_model.appendRow(item)
 
-    def switchBuilding(self):
+    def switch_building(self):
         ''' Handles the buildings combobo
         '''
 
@@ -2424,7 +2424,8 @@ class MainUI(QDialog):
             if zone.internal_id == current_item.internal_id:
                 self.current_zone = zone
         self.display_current_zone()
-    def saveChangedZoneValues(self):
+
+    def save_changed_zone_values(self):
         ''' Updates the displayed details of the currently
         selected zone after changes are saved.
 
@@ -2706,7 +2707,7 @@ class MainUI(QDialog):
                 str(element.area), element.internal_id)
             self.element_model.appendRow(item)
             
-    def keyPressEvent(self, event):
+    def key_press_event(self, event):
         ''' Implements shortcuts for the most important buttons
         
         '''
@@ -3971,7 +3972,7 @@ class MainUI(QDialog):
         self.zone_element_save_button = QtGui.QPushButton()
         self.zone_element_save_button.setText("Save")
         self.connect(self.zone_element_save_button, SIGNAL(
-            "clicked()"), self.saveChangedZoneValues)
+            "clicked()"), self.save_changed_zone_values)
         self.connect(self.zone_element_save_button, SIGNAL(
             "clicked()"), self.zone_value_window, QtCore.SLOT("close()"))
 
