@@ -46,19 +46,20 @@ class GUIInfo():
                                    "Retail, department store",
                                    "Retail with cooling",
                                    "Class room (school), group room "
-                                   "(kindergarden)", "Lecture hall, auditorium",
+                                   "(kindergarden)",
+                                   "Lecture hall, auditorium",
                                    "Bed room", "Hotel room",
                                    "Canteen", "Restaurant",
                                    "Kitchen in non-residential buildings",
                                    "Kitchen - preparations, storage",
-                                   "WC and sanitary rooms in non-residential" 
+                                   "WC and sanitary rooms in non-residential"
                                    " buildings", "Further common rooms",
                                    "Auxiliary areas (without common rooms)",
                                    "Traffic area",
                                    "Stock, technical equipment, archives",
                                    "Data center",
                                    "Commercial and industrial Halls - "
-                                    "heavy work, standing activity",
+                                   "heavy work, standing activity",
                                    "Commercial and industrial Halls - "
                                    "medium work, standing activity",
                                    "Commercial and industrial Halls - "
