@@ -18,8 +18,8 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599\
     import UseConditions18599
-import teaser.Data.TeaserXML as teaser_xml
-import teaser.Data.CityGML as city_gml
+import teaser.Data.Output.TeaserXML_output as teaser_xml
+import teaser.Data.Output.CityGML_output as city_gml
 import teaser.Logic.Utilis as utilis
 from PyQt4.uic.Compiler.qtproxies import QtGui
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
@@ -357,3 +357,9 @@ class Controller():
                         if wall.orientation == orientation_old:
                             wall.orientation = orientation_new
             # bldg.set_outer_wall_area(new_outer_wall_area, orientation_new)
+
+    @classmethod
+    def get_u_value(self, current_element):
+
+        u_value = float(current_element.ua_value)/current_element.area
+        return u_value

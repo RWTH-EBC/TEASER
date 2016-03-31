@@ -3,17 +3,17 @@
 
 """This module includes the Project class, which serves as base class and API
 """
+
+
 import warnings
-import teaser.Data.TeaserXML as txml
-try:
-    import teaser.Data.CityGML as citygml
-except:
-    warnings.warn("No CityGML module found, no CityGML import/export")
-import teaser.Data.DataHelp.OldTeaser as old_teaser
-from teaser.Data.DataClass import DataClass
-from mako.template import Template
-import teaser.Logic.Utilis as utilis
 import shutil
+import teaser.Logic.Utilis as utilis
+import teaser.Data.Input.TeaserXML_input as txml_in
+import teaser.Data.Output.TeaserXML_output as txml_out
+import teaser.Data.Input.OldTeaser_input as old_teaser
+import teaser.Data.Output.Modelica_output as modelica_out
+import teaser.Data.Output.Text_output as text_out
+from teaser.Data.DataClass import DataClass
 from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute import Institute
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import Institute4
@@ -21,6 +21,10 @@ from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import Institute8
 from teaser.Logic.BuildingObjects.TypeBuildings.Residential import Residential
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 
+try:
+    import teaser.Data.Output.CityGML_output as citygml_out
+except:
+    warnings.warn("No CityGML module found, no CityGML import/export")
 
 class Project(object):
 
@@ -47,8 +51,10 @@ class Project(object):
         modelica_project : str
             name of the Modelica Project used in type building creation
             (default: self.name)
-        weather_file_name : str
-            name of the weather file used for Modelica simulation
+        weather_file_header : str
+            header of weather file used for Modelica simulation
+        weather_file_path : str
+            path to weather file used for Modelica simulation
             (default: "TRY_5_Essen.txt")
         calculation_method : str
             specifier for the calculation method for building parameters,
@@ -64,7 +70,8 @@ class Project(object):
         self.modelica_info = ModelicaInfo()
 
         self.modelica_project = self.name
-        self.weather_file_name = "TRY_5_Essen.txt"
+        self.weather_file_header = ""
+        self.weather_file_path = ""
         self.buildings = []
         self._calculation_method = "vdi"
 
@@ -92,34 +99,6 @@ class Project(object):
 
         '''
         return DataClass(type_element_file)
-
-    def load_weather_file(self, weather_path, file_name):
-        '''Loads an arbitrary weather file into the InputData Folder
-
-        Load your own weather data into the project
-        Needs to be loaded before the type building is created and the record
-        is exported
-
-        Parameters
-        ----------
-
-        weather_path : string
-            Path to the folder where new weather file is stored
-        file_name : string
-            name of the weather file
-
-        '''
-        self.weather_file_name = file_name
-        weather_file = weather_path + file_name
-        output_path = (utilis.get_full_path("InputData\\Boundaries \
-                                            TypeBuilding\\") + file_name)
-
-        try:
-            shutil.copyfile(weather_file, output_path)
-        except:
-            pass
-        else:
-            pass
 
     def calc_all_buildings(self, calculation_core):
         '''Calculates values for all project buildings
@@ -559,7 +538,7 @@ class Project(object):
             new_path = path + "\\" + name
             utilis.create_path(utilis.get_full_path(path))
 
-        txml.save_teaser_xml(new_path, self)
+        txml_out.save_teaser_xml(new_path, self)
 
     def load_project(self, path):
         '''Loads the project from a teaserXML file (new format)
@@ -573,7 +552,7 @@ class Project(object):
 
         '''
 
-        txml.load_teaser_xml(path, self)
+        txml_in.load_teaser_xml(path, self)
 
     def load_old_teaser(self, path):
         '''Loads the project from an old TEASER xml file
@@ -618,10 +597,10 @@ class Project(object):
             new_path = path + "\\" + name
             utilis.create_path(utilis.get_full_path(path))
 
-        citygml.save_gml(self, new_path)
+        citygml_out.save_gml(self, new_path)
 
     def export_record(self, building_model="None", zone_model="None",
-                      corG=None, internal_id=None, path=None):
+                  corG=None, internal_id=None, path=None):
         '''Exports values to a record file for Modelica simulation
 
         Parameters
@@ -643,152 +622,20 @@ class Project(object):
             path can be specified as a full and absolute path
 
         '''
-        #check the arguments
-        assert(building_model) in ["None", "MultizoneEquipped", "Multizone"]
-        assert(zone_model) in ["None", "ThermalZoneEquipped", "ThermalZone"]
-        assert(corG) in [None, True, False]
+
         if path is None:
             path = utilis.get_default_path() + "\\" + self.name
         else:
             path = path + "\\" + self.name
 
         utilis.create_path(path)
-        """
-        input_path = utilis.get_full_path("InputData\\BoundariesTypeBuilding")
 
-        try:
-            shutil.copytree(
-                input_path, utilis.get_full_path(path) + "\\Tables")
-        except:
-            pass
-        else:
-            pass
-        """
-        uses = ['Modelica(version = "3.2.1")',
-                "AixLib(version=\"0.2.5\")"]
-
-        # for bldg in self.buildings:
-        #     assert bldg._calculation_method == "vdi", ("AixLib needs \
-        #     calculation core vdi")
-        # might not need this, user only needs to know what kind of
-        # zone records are exported here
-
-        # use the same zone templates for all exports
-        zone_template = Template(
-            filename=utilis.get_full_path(
-                "InputData\\RecordTemplate\\AixLib\\AixLib_zone"))
-        model_template = Template(
-            filename=utilis.get_full_path(
-                "InputData\\RecordTemplate\\AixLib\\AixLib_model"))
-        zone_base_template = Template(
-            filename=utilis.get_full_path(
-                "InputData\\RecordTemplate\\AixLib\\AixLib_base"))
-        # list which contains exported buildings
-        if internal_id is not None:
-            exported_buildings = [bldg for bldg in
-                                          self.buildings if
-                                          bldg.internal_id == internal_id]
-        else:
-            exported_buildings = self.buildings
-
-        # here we diff between zonerecord export and full model support
-        if building_model != "None" and zone_model != "None" and\
-            corG is not None:
-            # full model support here
-            print("full model support")
-
-            self._help_package(path, self.name, uses)
-            self._help_package_order(path, exported_buildings)
-
-            for bldg in exported_buildings:
-
-                bldg_path = path + "\\" + bldg.name + "\\"
-                utilis.create_path(utilis.get_full_path(bldg_path))
-                utilis.create_path(utilis.get_full_path
-                                   (bldg_path + bldg.name + "_DataBase"))
-                bldg.modelica_set_temp(path=path + "\\" + bldg.name)
-                bldg.modelica_AHU_boundary(path=path + "\\" + bldg.name)
-                bldg.modelica_gains_boundary(path=path + "\\" + bldg.name)
-
-                self._help_package(bldg_path, bldg.name)
-                self._help_package_order(bldg_path, [bldg], None,
-                                         bldg.name + "_DataBase")
-
-                out_file = open(utilis.get_full_path
-                                (bldg_path + bldg.name + ".mo"), 'w')
-                out_file.write(model_template.render_unicode(
-                               bldg=bldg, mod_prj=self.modelica_project,
-                               weather=self.weather_file_name,
-                               model=building_model, zone=zone_model,
-                               physics=bldg._calculation_method, gFac=corG))
-                out_file.close()
-
-                for zone in bldg.thermal_zones:
-                    zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
-
-                    out_file = open(utilis.get_full_path(
-                        zone_path + "\\" + bldg.name + "_" +
-                        zone.name.replace(" ", "") + ".mo"), 'w')
-                    out_file.write(zone_template.render_unicode(
-                        bldg=bldg, zone=zone))
-                    out_file.close()
-
-                self._help_package(zone_path, bldg.name + "_DataBase")
-                self._help_package_order(
-                    zone_path, bldg.thermal_zones,
-                    bldg.name + "_", bldg.name + "_base")
-
-                out_file = open(utilis.get_full_path
-                                (zone_path + bldg.name + "_base.mo"),
-                                'w')
-                if bldg.central_ahu:
-                    out_file.write(zone_base_template.render_unicode(
-                        bldg=bldg,
-                        zone=zone,
-                        mod_prj=self.modelica_project,
-                        central_ahu=bldg.central_ahu))
-                    out_file.close()
-                else:
-                    out_file.write(zone_base_template.render_unicode(
-                        bldg=bldg,
-                        zone=zone,
-                        mod_prj=self.modelica_project))
-                    out_file.close()
-            print("Exports can be found here:")
-            print(path)
-
-        elif building_model == "None" and zone_model == "None" and\
-            corG is None:
-            # only export the baserecords
-            self._help_package(path, self.name, uses)
-            self._help_package_order(path, exported_buildings)
-            for bldg in exported_buildings:
-
-                bldg_path = path + "\\" + bldg.name + "\\"
-                utilis.create_path(utilis.get_full_path(bldg_path))
-                utilis.create_path(utilis.get_full_path
-                                   (bldg_path + bldg.name + "_DataBase"))
-
-                self._help_package(bldg_path, bldg.name)
-                self._help_package_order(bldg_path, [bldg], None,
-                                         bldg.name + "_DataBase")
-                for zone in bldg.thermal_zones:
-                    zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
-
-                    out_file = open(utilis.get_full_path(
-                        zone_path + "\\" + bldg.name + "_" +
-                        zone.name.replace(" ", "") + ".mo"), 'w')
-                    out_file.write(zone_template.render_unicode(
-                        bldg=bldg, zone=zone,
-                        calc_core=bldg._calculation_method))
-                    # not sure if we need the calc
-                    out_file.close()
-            print("Exports can be found here:")
-            print(path)
-
-        else:
-            # not clearly specified
-            print("please specifiy you export clearly")
+        modelica_out.export_aixlib(prj=self,
+                                   building_model=building_model,
+                                   zone_model=zone_model,
+                                   corG=corG,
+                                   internal_id=internal_id,
+                                   path=path)
 
     def export_parameters_txt(self, path=None):
         '''Exports parameters of all buildings in a readable text file
@@ -800,76 +647,14 @@ class Project(object):
             if the Files should not be stored in OutputData, an alternative
             can be specified
         '''
+
         if path is None:
             path = "OutputData\\"+self.name
         else:
             path = path+"\\"+self.name
 
-        for bldg in self.buildings:
-            bldg_path = path + "\\" + bldg.name + "\\"
-            utilis.create_path(utilis.get_full_path(bldg_path))
-            readable_template = Template(
-                filename=utilis.get_full_path(
-                    "InputData\\ReadableOutputTemplate\\ReadableBuilding"))
-
-            out_file = open(utilis.get_full_path
-                            (bldg_path+"ReadableOutput.txt"), 'w')
-            out_file.write(readable_template.render_unicode
-                           (bldg=bldg, prj=self))
-            out_file.close()
-
-    def _help_package(self, path, name, uses=None):
-        '''creates a package.mo file
-
-        private function, do not call
-
-        Parameters
-        ----------
-
-        path : string
-            path of where the package.mo should be placed
-        name : string
-            name of the Modelica package
-
-        '''
-
-        package_template = Template(filename=utilis.get_full_path
-                                    ("InputData\\RecordTemplate\\package"))
-
-        out_file = open(
-            utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
-        out_file.write(package_template.render_unicode(name=name, uses=uses))
-        out_file.close()
-
-    def _help_package_order(self, path, package_list,
-                            addition=None, extra=None):
-        '''creates a package.order file
-
-        private function, do not call
-
-        Parameters
-        ----------
-
-        path : string
-            path of where the package.order should be placed
-        package_list : [string]
-            name of all models or packages contained in the package
-        addition : string
-            if there should be a suffix in front of package_list.string it can
-            be specified
-        extra : string
-            an extra package or model not contained in package_list can be
-            specified
-
-        '''
-        order_template = Template(filename=utilis.get_full_path
-                                  ("InputData\\RecordTemplate\\package_order"))
-
-        out_file = open(
-            utilis.get_full_path(path + "\\" + "package" + ".order"), 'w')
-        out_file.write(order_template.render_unicode
-                       (list=package_list, addition=addition, extra=extra))
-        out_file.close()
+        text_out.export_parameters_txt(prj=self,
+                                       path=path)
 
     def set_default(self):
         '''sets all attributes except self.data to default
@@ -879,7 +664,8 @@ class Project(object):
         self.name = "Project"
 
         self.modelica_project = self.name
-        self.weather_file_name = "TRY_5_Essen.txt"
+        self.weather_file_header = ""
+        self.weather_file_path = ""
         self.buildings = []
         self.calculation_method = "vdi"
 

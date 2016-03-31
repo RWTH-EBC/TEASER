@@ -20,7 +20,7 @@ import teaser.Data.SchemaBindings.opengis.citygml.raw.base as citygml
 import teaser.Data.SchemaBindings.opengis.citygml.raw.building as bldg
 import teaser.Data.SchemaBindings.opengis.citygml.raw.energy as energy
 
-import teaser.Data.DataHelp.gmlhelp as gmlhelp
+import teaser.Data.Output.OutputHelp.gmlhelp as gmlhelp
 
 def save_gml(project, path, ref_coordinates=None):
     '''This function saves a project to a cityGML file

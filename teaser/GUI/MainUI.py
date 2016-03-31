@@ -12,7 +12,11 @@ from PyQt4.QtCore import SIGNAL
 from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 
-import teaser.Logic.Utilis as utilis
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+import matplotlib.pyplot as plt
+from numpy.distutils.pathccompiler import PathScaleCCompiler
+from teaser.GUI.GUIHelperClasses.GUIInfo import GUIInfo
+from teaser.GUI.GUIHelperClasses.ListViewZonesFiller import ListViewZonesFiller
 from teaser.GUI.Controller.Controller import Controller
 from teaser.GUI.GUIHelperClasses.GUIInfo import GUIInfo
 from teaser.GUI.GUIHelperClasses.ListViewZonesFiller import ListViewZonesFiller
@@ -20,6 +24,11 @@ from teaser.GUI.GUIHelperClasses.PictureButton import PictureButton
 from teaser.GUI.GUIHelperClasses.TrackableItem import TrackableItem
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 from teaser.Project import Project
+from teaser.GUI.Controller.Controller import Controller
+from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
+import teaser.Logic.Utilis as utilis
+
+
 
 try:
     _fromUtf8 = Qt.QString.fromUtf8
@@ -1064,85 +1073,87 @@ class MainUI(QDialog):
                     if element.internal_id == self.current_element.internal_id:
                         index = zone.inner_walls.index(element)
                         zone.inner_walls[index].name = \
-                            self.element_name_textbox.text()
+                            str(self.element_name_textbox.text())
                         zone.inner_walls[index].construction_type = \
-                            self.element_construction_type_combobox.\
-                            currentText()
+                            str(self.element_construction_type_combobox.\
+                            currentText())
                         zone.inner_walls[index].orientation = \
                             self.guiinfo.orientations_strings \
-                            [self.element_orientation_combobox.currentText()]
+                            [str(self.element_orientation_combobox.currentText())]
                         zone.inner_walls[index].area = \
-                           self.element_area_textbox.text()
+                           str(self.element_area_textbox.text())
                         zone.inner_walls[index].year_of_construction = \
-                            self.element_year_of_construction_textbox.text()
+                            str(self.element_year_of_construction_textbox.text())
                         zone.inner_walls[index].year_of_retrofit = \
-                            self.element_year_of_retrofit_textbox.text()
+                            str(self.element_year_of_retrofit_textbox.text())
                         zone.inner_walls[index].tilt = \
-                            self.element_tilt_textbox.text()
+                            str(self.element_tilt_textbox.text())
                         zone.inner_walls[index].inner_convection = \
-                            self.element_inner_convection_textbox.text()
+                            str(self.element_inner_convection_textbox.text())
                         zone.inner_walls[index].inner_radiation = \
-                           self.element_inner_radiation_textbox.text()
-                        zone.inner_walls[index].ua_value = \
-                           self.element_uvalue_textbox.text()
+                            str(self.element_inner_radiation_textbox.text())
                 for element in zone.outer_walls:
                     if element.internal_id == self.current_element.internal_id:
                         index = zone.outer_walls.index(element)
                         zone.outer_walls[index].name = \
-                            self.element_name_textbox.text()
+                            str(self.element_name_textbox.text())
                         zone.outer_walls[index].construction_type = \
-                            self.element_construction_type_combobox.\
-                            currentText()
+                            str(self.element_construction_type_combobox.\
+                            currentText())
                         zone.outer_walls[index].orientation = \
                             self.guiinfo.orientations_strings\
                             [self.element_orientation_combobox.currentText()]
                         zone.outer_walls[index].area = \
-                            self.element_area_textbox.text()
+                            str(self.element_area_textbox.text())
                         zone.outer_walls[index].year_of_construction = \
-                            self.element_year_of_construction_textbox.text()
+                            str(self.element_year_of_construction_textbox.text())
                         zone.outer_walls[index].year_of_retrofit = \
-                            self.element_year_of_retrofit_textbox.text()
+                            str(self.element_year_of_retrofit_textbox.text())
                         zone.outer_walls[index].tilt = \
-                            self.element_tilt_textbox.text()
+                            str(self.element_tilt_textbox.text())
                         zone.outer_walls[index].inner_convection = \
-                            self.element_inner_convection_textbox.text()
+                            str(self.element_inner_convection_textbox.text())
                         zone.outer_walls[index].inner_radiation = \
-                            self.element_inner_radiation_textbox.text()
-                        zone.outer_walls[index].ua_value = \
-                            self.element_uvalue_textbox.text()
+                            str(self.element_inner_radiation_textbox.text())
+                        zone.outer_walls[index].outer_convection = \
+                            float(self.element_outer_convection_textbox.text())
+                        zone.outer_walls[index].outer_radiation = \
+                            float(self.element_outer_radiation_textbox.text())
                         break
                 for element in zone.windows:
                     if element.internal_id == self.current_element.internal_id:
                         index = zone.windows.index(element)
                         zone.windows[index].name = \
-                            self.element_name_textbox.text()
+                            str(self.element_name_textbox.text())
                         zone.windows[index].construction_type = \
-                            self.element_construction_type_combobox.\
-                            currentText()
+                            str(self.element_construction_type_combobox.\
+                            currentText())
                         zone.windows[index].orientation = \
                             self.guiinfo.orientations_strings\
                             [self.element_orientation_combobox.currentText()]
                         zone.windows[index].area = \
-                            self.element_area_textbox.text()
+                            str(self.element_area_textbox.text())
                         zone.windows[index].year_of_construction = \
-                            self.element_year_of_construction_textbox.text()
+                            str(self.element_year_of_construction_textbox.text())
                         zone.windows[index].year_of_retrofit = \
-                            self.element_year_of_retrofit_textbox.text()
+                            str(self.element_year_of_retrofit_textbox.text())
                         zone.windows[index].tilt = \
-                            self.element_tilt_textbox.text()
+                            str(self.element_tilt_textbox.text())
                         zone.windows[index].inner_convection = \
-                            self.element_inner_convection_textbox.text()
+                            str(self.element_inner_convection_textbox.text())
                         zone.windows[index].inner_radiation = \
-                            self.element_inner_radiation_textbox.text()
-                        zone.windows[index].ua_value = \
-                            self.element_uvalue_textbox.text()
+                            str(self.element_inner_radiation_textbox.text())
+                        zone.windows[index].outer_convection = \
+                            float(self.element_outer_convection_textbox.text())
+                        zone.windows[index].outer_radiation = \
+                            float(self.element_outer_radiation_textbox.text())
                         break
 
     def save_input_values_set_all_constr(self):
 
         bldg = self.current_building
         orientation = int(self.guiinfo.orientations_strings[
-                    self.set_all_constr_element_orientation_textbox.text()])
+                    str(self.set_all_constr_element_orientation_textbox.text())])
         element_type = self.set_all_constr_element_type_textbox.text()
 
         tilt = float(self.set_all_constr_element_tilt_textbox.text())
@@ -1166,8 +1177,12 @@ class MainUI(QDialog):
         self.display_current_building()
 
     def clear_input_values_set_all_constr(self):
-        self.element_layer_model_set_all_constr.clear()
-        self.all_constr_layer_list.clear()
+        try:
+            self.element_layer_model_set_all_constr.clear()
+            self.all_constr_layer_list.clear()
+        except:
+            self.element_layer_model_set_all_constr = QStandardItemModel()
+            self.all_constr_layer_list = []
 
     def switch_type_building(self):
         '''After changing the index of the combobox this function replaces
@@ -1945,12 +1960,12 @@ class MainUI(QDialog):
             filter="Teaser File (*.teaserXML);; GML (*.gml)")
         last_name = path.split('/')
         length = len(last_name)
-        last_part = last_name[length-1]
+        last_part = str(last_name[length-1])
         if last_part.endswith("teaserXML"):
             self.project.name = last_part[:-10]
         elif last_part.endswith("gml"):
             self.project.name = last_part[:-4]
-        Controller.click_save_button(self.project, path)
+        Controller.click_save_button(self.project, str(path))
 
     def click_export_button(self):
         # path in GUI, which is need for the output
@@ -1989,7 +2004,7 @@ class MainUI(QDialog):
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
                                           " for current building finished ")
-        utilis.create_path(self.file_path)
+        utilis.create_path(str(self.file_path))
 
     def click_browse_button(self):
         self.export_save_template_lineedit.setText(QtGui.QFileDialog.
@@ -2199,18 +2214,31 @@ class MainUI(QDialog):
         values for the new type and updates the window
         
         '''
-        cIndex = self.new_layerX_material_combobox.currentText()
+
+        try:
+            cIndex = self.new_layerX_material_combobox.currentText()
+            check = 0
+        except:
+            cIndex = self.new_layer_material_combobox.currentText()
+            check = 1
         for material in self.materials:
             fIndex = material.name
             if fIndex == cIndex:
 
-                self.new_layerX_material_density_textbox.setText(
-                    str(material.density))
-                self.new_layerX_material_thermal_conduc_textbox.setText(
-                    str(material.thermal_conduc))
-                self.new_layerX_material_heat_capac_textbox.setText(
-                    str(material.heat_capac))
-
+                if check == 0:
+                    self.new_layerX_material_density_textbox.setText(
+                        str(material.density))
+                    self.new_layerX_material_thermal_conduc_textbox.setText(
+                        str(material.thermal_conduc))
+                    self.new_layerX_material_heat_capac_textbox.setText(
+                        str(material.heat_capac))
+                else:
+                    self.new_layer_material_density_textbox.setText(
+                        str(material.density))
+                    self.new_layer_material_thermal_conduc_textbox.setText(
+                        str(material.thermal_conduc))
+                    self.new_layer_material_heat_capac_textbox.setText(
+                        str(material.heat_capac))
 
     def delete_thermal_zone(self):
         '''Checks if a building exists, if it does the currently
@@ -2479,28 +2507,28 @@ class MainUI(QDialog):
         self.current_zone.area = self.zone_net_leased_area_textbox.text()
         self.current_zone.use_conditions.usage =\
             self.zone_type_combobox.currentText()
-        if self.cooling_ahu_start_dropdown.currentText().startswith('0'):
+        if str(self.cooling_ahu_start_dropdown.currentText()).startswith('0'):
             self.current_zone.use_conditions.cooling_time[0] = \
                 int(self.cooling_ahu_start_dropdown.currentText()[1])
         else:
             self.current_zone.use_conditions.cooling_time[0] = \
                 int(self.cooling_ahu_start_dropdown.currentText()[0] + 
                     self.cooling_ahu_start_dropdown.currentText()[1])
-        if self.cooling_ahu_end_dropdown.currentText().startswith('0'):
+        if str(self.cooling_ahu_end_dropdown.currentText()).startswith('0'):
             self.current_zone.use_conditions.cooling_time[1] = \
                 int(self.cooling_ahu_end_dropdown.currentText()[1])
         else:
             self.current_zone.use_conditions.cooling_time[1] = \
                 int(self.cooling_ahu_end_dropdown.currentText()[0] + 
                     self.cooling_ahu_end_dropdown.currentText()[1])
-        if self.heating_ahu_start_dropdown.currentText().startswith('0'):
+        if str(self.heating_ahu_start_dropdown.currentText()).startswith('0'):
             self.current_zone.use_conditions.heating_time[0] = \
                 int(self.heating_ahu_start_dropdown.currentText()[1])
         else:
             self.current_zone.use_conditions.heating_time[0] = \
                 int(self.heating_ahu_start_dropdown.currentText()[0] + 
                     self.heating_ahu_start_dropdown.currentText()[1])
-        if self.heating_ahu_end_dropdown.currentText().startswith('0'):
+        if str(self.heating_ahu_end_dropdown.currentText()).startswith('0'):
             self.current_zone.use_conditions.heating_time[1] = \
                 int(self.heating_ahu_end_dropdown.currentText()[1])
         else:
@@ -2553,7 +2581,7 @@ class MainUI(QDialog):
         orientation_before_changing = \
             self.envelope_orientation_before_changing
         orientation_after_changing = \
-            self.envelope_orientation_combobox.currentText()
+            str(self.envelope_orientation_combobox.currentText())
         area = float(self.envelope_area_textbox.text())
         if self.current_envelope.startswith("Outer Wall"):
             element_type = "Outer Wall"
@@ -3314,15 +3342,6 @@ class MainUI(QDialog):
         self.new_layer_thickness_textbox.setObjectName(
             _fromUtf8("ThicknessTextBox"))
 
-        self.new_layer_material_label = QtGui.QLabel("Material")
-        self.new_layer_material_combobox = QtGui.QComboBox()
-        temp_list = []
-        for material in self.materials:
-            if material.name not in temp_list:
-                temp_list.append(material.name)
-        self.new_layer_material_combobox.addItems(sorted(temp_list))
-        self.is_switchable = True
-
         self.new_layer_material_density_label = QtGui.QLabel("Density")
         self.new_layer_material_density_textbox = QtGui.QLineEdit()
         self.new_layer_material_density_textbox.setObjectName(
@@ -3356,6 +3375,17 @@ class MainUI(QDialog):
         self.new_layer_material_transmittance_textbox = QtGui.QLineEdit()
         self.new_layer_material_transmittance_textbox.setObjectName(
             _fromUtf8("MaterialTransmittanceTextBox"))
+
+        self.new_layer_material_label = QtGui.QLabel("Material")
+        self.new_layer_material_combobox = QtGui.QComboBox()
+        self.connect(self.new_layer_material_combobox, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.load_material)
+        temp_list = []
+        for material in self.materials:
+            if material.name not in temp_list:
+                temp_list.append(material.name)
+        self.new_layer_material_combobox.addItems(sorted(temp_list))
+        self.is_switchable = True
 
         self.new_layer_save_button = QtGui.QPushButton()
         self.new_layer_save_button.setText("Save")
@@ -3498,7 +3528,6 @@ class MainUI(QDialog):
         self.new_layerX_material_transmittance_textbox.setObjectName(
             _fromUtf8("MaterialTransmittanceTextBox"))
 
-        self.load_material
         self.new_layerX_material_label = QtGui.QLabel("Material")
         self.new_layerX_material_combobox = QtGui.QComboBox()
         self.connect(self.new_layerX_material_combobox, QtCore.SIGNAL(
@@ -4272,7 +4301,7 @@ class MainUI(QDialog):
                                                 orientation, userData=None)
 
         current_item = self.outer_elements_model.itemFromIndex(item)
-        string_current_item = current_item.text()
+        string_current_item = str(current_item.text())
         listOfCurItem = string_current_item.split()
         self.current_envelope = string_current_item
         if string_current_item.startswith("Outer Wall"):
@@ -4304,7 +4333,7 @@ class MainUI(QDialog):
                     str(listOfCurItem[2])))
 
         self.envelope_orientation_before_changing = \
-            self.envelope_orientation_combobox.currentText()
+            str(self.envelope_orientation_combobox.currentText())
         self.groupbox_save_cancel_buttons = QtGui.QGroupBox()
         self.save_cancel_layout = QtGui.QGridLayout()
         self.groupbox_save_cancel_buttons.setLayout(self.save_cancel_layout)
@@ -5040,7 +5069,7 @@ class MainUI(QDialog):
         else:
             self.element_orientation_combobox.setCurrentIndex(-1)
 
-        self.element_name_label = QtGui.QLabel("Id")
+        self.element_name_label = QtGui.QLabel("Name")
         self.element_name_textbox = QtGui.QLineEdit()
         self.element_name_textbox.setObjectName(
             _fromUtf8("ElementNameTextBox"))
@@ -5128,11 +5157,12 @@ class MainUI(QDialog):
             self.element_outer_radiation_textbox.setText(
                 str(self.current_element.outer_radiation))
 
-        self.element_uvalue_label = QtGui.QLabel("U-Value (U/A)")
+        self.element_uvalue_label = QtGui.QLabel("U-Value (W/m2K)")
         self.element_uvalue_textbox = QtGui.QLineEdit()
         self.element_uvalue_textbox.setObjectName(
             _fromUtf8("ElementUValueTextBox"))
-        self.element_uvalue_textbox.setText(str(self.current_element.ua_value))
+        self.element_uvalue_textbox.setText(str(float(
+            Controller.get_u_value(self.current_element))))
         self.element_uvalue_textbox.setReadOnly(True)
 
         self.element_add_material_button = QtGui.QPushButton()
@@ -5373,11 +5403,11 @@ class MainUI(QDialog):
         if self.file_path == "":
             self.export_save_template_lineedit.setText(
                                                  utilis.get_default_path())
-            utilis.create_path(self.export_save_template_lineedit.text())
+            utilis.create_path(str(self.export_save_template_lineedit.text()))
             self.file_path = self.export_save_template_lineedit.text()
         else:
             self.export_save_template_lineedit.setText(self.file_path)
-            utilis.create_path(self.export_save_template_lineedit.text())
+            utilis.create_path(str(self.export_save_template_lineedit.text()))
         self.export_save_template_button = QtGui.QPushButton(
             self.export_groupbox)
         self.export_save_template_button.setGeometry(
@@ -5513,8 +5543,8 @@ class MainUI(QDialog):
 class WizardPage(QtGui.QWizardPage):
     def closeEvent(self, evnt, elem_layer= None ,layer_list= None):
             if(elem_layer is not None or layer_list is not None):
-                elem_layer.clear()
-                layer_list.clear()
+                elem_layer = []
+                layer_list = []
                 
 
 class EmittingStream(QtCore.QObject):
