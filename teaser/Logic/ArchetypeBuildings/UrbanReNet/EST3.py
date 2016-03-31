@@ -16,10 +16,10 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 
 
-class EST1a(Residential):
-    """Urban Fabric Type EST1a.
+class EST3(Residential):
+    """Urban Fabric Type EST3.
 
-    Subclass from Building for urban fabric type EST1a.
+    Subclass from Building for urban fabric type EST3.
 
     Parameters
     ----------
@@ -58,6 +58,9 @@ class EST1a(Residential):
 
         heavy: heavy construction
         light: light construction
+
+    number_of_apartments : int
+        number of apartments (default = 1)
 
     Note
     ----------
@@ -114,25 +117,31 @@ class EST1a(Residential):
                  net_leased_area=None,
                  with_ahu=False,
                  neighbour_buildings=None,
-                 construction_type=None):
+                 construction_type=None,
+                 number_of_apartments=None):
 
         """Constructor of Residential
 
 
         """
 
-        super(EST1a, self).__init__(parent, name, year_of_construction,
+        super(EST3, self).__init__(parent, name, year_of_construction,
                                     number_of_floors, height_of_floors,
                                     net_leased_area, with_ahu)
 
         self.neighbour_buildings = neighbour_buildings
         self.construction_type = construction_type
+        self.number_of_apartments = number_of_apartments
 
         # Parameters are default values for current calculation following
         # Hegger
 
         # [area factor, usage type(has to be set)]
-        self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
+        self.zone_area_factors = {}
+        for value in range(1, number_of_apartments+1):
+            zone_name= "Apartment " + str(value)
+            zone={zone_name: [1/number_of_apartments, "Living"]}
+            self.zone_area_factors.update(zone)
 
         self.outer_wall_names = {"Exterior Facade North": [90.0, 0.0],
                                  "Exterior Facade East": [90.0, 90.0],
@@ -157,7 +166,7 @@ class EST1a(Residential):
         self.floor_names = {"Floor": [0.0, -2]}
 
         self.est_factor_win_area = 0.2
-        self.est_factor_facade_to_volume = 0.87
+        self.est_factor_facade_to_volume = 0.41
 
         self.nr_of_orientation = len(self.outer_wall_names)
 
@@ -360,3 +369,14 @@ class EST1a(Residential):
             self._neighbour_buildings = value
         else:
             self._neighbour_buildings = 0
+
+    @property
+    def number_of_apartments(self):
+        return self._number_of_apartments
+
+    @number_of_apartments.setter
+    def number_of_apartments(self, value):
+        if value is not None and value >= 1:
+            self._number_of_apartments = value
+        else:
+            self._number_of_apartments = 1

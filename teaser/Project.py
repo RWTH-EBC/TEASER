@@ -21,6 +21,9 @@ from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute import Institute
 from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import Institute4
 from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import Institute8
 from teaser.Logic.ArchetypeBuildings.UrbanReNet.EST1a import EST1a
+from teaser.Logic.ArchetypeBuildings.UrbanReNet.EST1b import EST1b
+from teaser.Logic.ArchetypeBuildings.UrbanReNet.EST4b import EST4b
+from teaser.Logic.ArchetypeBuildings.UrbanReNet.EST7 import EST7
 from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import SingleFamilyDwelling
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 
@@ -508,6 +511,186 @@ class Project(object):
                                with_ahu,
                                neighbour_buildings,
                                construction_type)
+
+        type_bldg.generate_archetype()
+        type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
+
+    def type_bldg_est1b(self,
+                             name,
+                             year_of_construction,
+                             number_of_floors,
+                             height_of_floors,
+                             net_leased_area,
+                             with_ahu=False,
+                             neighbour_buildings=None,
+                             construction_type=None,
+                             number_of_apartments=None):
+        '''Create and calculate an est1a building
+
+        Parameters
+        ----------
+
+        name : str
+            individual name
+        year_of_construction : int
+            year of first construction
+        number_of_floors : int
+            number of floors above ground
+        height_of_floors : float
+            average height of the floors
+        net_leased_area : float
+            total net leased area of building
+        with_ahu : boolean
+            if building has a central AHU or not
+        neighbour_buildings : int
+            neighbour (default = 0)
+
+            0: no neighbour
+            1: one neighbour
+            2: two neighbours
+        construction_type : str (default = "heavy")
+            construction type
+
+            heavy: heavy construction
+            light: light construction
+
+        Returns
+        ----------
+
+        type_bldg : Instance of EST1a()
+
+        '''
+        type_bldg = EST1b(self,
+                               name,
+                               year_of_construction,
+                               number_of_floors,
+                               height_of_floors,
+                               net_leased_area,
+                               with_ahu,
+                               neighbour_buildings,
+                               construction_type,
+                               number_of_apartments)
+
+        type_bldg.generate_archetype()
+        type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
+
+    def type_bldg_est4b(self,
+                             name,
+                             year_of_construction,
+                             number_of_floors,
+                             height_of_floors,
+                             net_leased_area,
+                             with_ahu=False,
+                             neighbour_buildings=None,
+                             construction_type=None,
+                             number_of_apartments=None):
+        '''Create and calculate an est1a building
+
+        Parameters
+        ----------
+
+        name : str
+            individual name
+        year_of_construction : int
+            year of first construction
+        number_of_floors : int
+            number of floors above ground
+        height_of_floors : float
+            average height of the floors
+        net_leased_area : float
+            total net leased area of building
+        with_ahu : boolean
+            if building has a central AHU or not
+        neighbour_buildings : int
+            neighbour (default = 0)
+
+            0: no neighbour
+            1: one neighbour
+            2: two neighbours
+        construction_type : str (default = "heavy")
+            construction type
+
+            heavy: heavy construction
+            light: light construction
+
+        Returns
+        ----------
+
+        type_bldg : Instance of EST1a()
+
+        '''
+        type_bldg = EST4b(self,
+                               name,
+                               year_of_construction,
+                               number_of_floors,
+                               height_of_floors,
+                               net_leased_area,
+                               with_ahu,
+                               neighbour_buildings,
+                               construction_type,
+                               number_of_apartments)
+
+        type_bldg.generate_archetype()
+        type_bldg.calc_building_parameter(self.calculation_method)
+        return type_bldg
+
+    def type_bldg_est7(self,
+                             name,
+                             year_of_construction,
+                             number_of_floors,
+                             height_of_floors,
+                             net_leased_area,
+                             with_ahu=False,
+                             neighbour_buildings=None,
+                             construction_type=None,
+                             number_of_apartments=None):
+        '''Create and calculate an est1a building
+
+        Parameters
+        ----------
+
+        name : str
+            individual name
+        year_of_construction : int
+            year of first construction
+        number_of_floors : int
+            number of floors above ground
+        height_of_floors : float
+            average height of the floors
+        net_leased_area : float
+            total net leased area of building
+        with_ahu : boolean
+            if building has a central AHU or not
+        neighbour_buildings : int
+            neighbour (default = 0)
+
+            0: no neighbour
+            1: one neighbour
+            2: two neighbours
+        construction_type : str (default = "heavy")
+            construction type
+
+            heavy: heavy construction
+            light: light construction
+
+        Returns
+        ----------
+
+        type_bldg : Instance of EST1a()
+
+        '''
+        type_bldg = EST7(self,
+                               name,
+                               year_of_construction,
+                               number_of_floors,
+                               height_of_floors,
+                               net_leased_area,
+                               with_ahu,
+                               neighbour_buildings,
+                               construction_type,
+                               number_of_apartments)
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(self.calculation_method)

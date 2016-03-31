@@ -41,7 +41,7 @@ class Residential(Building):
     def generate_archetype(self):
         '''Generates an archetype building.
 
-        Define your type of arechtype generation.
+        Define your type of archetype generation.
 
         '''
 
