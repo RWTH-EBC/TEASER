@@ -40,7 +40,7 @@ class Controller():
                             heat, solar, ir, trans):
         layer = Layer()
         if parent is not None:
-            parent.add_layer(position,layer)
+            parent.add_layer(layer, position=position)
         mat = Material(layer)
         mat.name = mat_nam
         mat.density = den
