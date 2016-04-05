@@ -310,7 +310,7 @@ class Building(object):
             if key not in self.window_area.keys():
                 self.window_area[key] = None
 
-    def calc_building_parameter(self, calculation_core):
+    def calc_building_parameter(self, calculation_method=None):
         '''calc all building parameters
 
         This functions calculates the parameters of all zones in a building
@@ -320,17 +320,22 @@ class Building(object):
         Parameters
         ----------
 
-        calculation_core : string
+        calculation_method : string
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
         self.compare_area_dicts()
+        if calculation_method is not None:
+            self.calculation_method = calculation_method
+        else:
+            pass
 
         for zone in self.thermal_zones:
-            zone.calc_zone_parameters(calculation_core)
+            zone.calc_zone_parameters(self.calculation_method)
             self.sum_heating_load += zone.heating_load
 
-    def retrofit_building(self, year_of_retrofit=None,
+    def retrofit_building(self,
+                          year_of_retrofit=None,
                           window_type=None,
                           material=None):
         ''' Retrofits all zones in the building
@@ -635,6 +640,7 @@ class Building(object):
             if inspect.isclass(Building):
 
                 self.__parent.list_of_buildings.append(self)
+                self.calculation_method = self.__parent.calculation_method
         else:
             pass
 
