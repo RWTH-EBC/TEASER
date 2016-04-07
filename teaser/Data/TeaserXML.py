@@ -13,6 +13,10 @@ import teaser.Data.SchemaBindings.ProjectBind as pb
 import teaser.Logic.Utilis as utilis
 
 from teaser.Logic.BuildingObjects.Building import Building
+from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
+from teaser.Logic.BuildingObjects.TypeBuildings.Institute import Institute
+from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import Institute4
+from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import Institute8
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU import BuildingAHU
 from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599 import \
@@ -55,12 +59,17 @@ def save_teaser_xml(path, project):
 
             pyxb_bld = pb.BuildingType()
 
-        elif type(bldg).__name__ == "Office"\
-            or type(bldg).__name__ == "Institute"\
-                or type(bldg).__name__ == "Institute4"\
-                or type(bldg).__name__ == "Institute8":
-
+        elif type(bldg).__name__ == "Office":
             pyxb_bld = pb.OfficeType()
+
+        elif type(bldg).__name__ == "Institute":
+            pyxb_bld = pb.InstituteType()
+
+        elif type(bldg).__name__ == "Institute4":
+            pyxb_bld = pb.Institute4Type()
+
+        elif type(bldg).__name__ == "Institute8":
+            pyxb_bld = pb.Institute8Type()
 
         elif type(bldg).__name__ == "Residential":
 
@@ -420,214 +429,250 @@ def load_teaser_xml(path, prj):
     project_bind = pb.CreateFromDocument(xml_file.read())
 
     for pyxb_bld in project_bind.Building:
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Building")
+    for pyxb_bld in project_bind.Office:
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Office")
 
+    for pyxb_bld in project_bind.Institute:
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute")
+
+    for pyxb_bld in project_bind.Institute4:
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute4")
+
+    for pyxb_bld in project_bind.Institute8:
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute8")
+
+    for pyxb_bld in project_bind.Residential:
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Residential")
+
+
+
+def _load_building(prj, pyxb_bld, type):
+
+    if type == "Building":
         bldg = Building(prj)
 
-        bldg.name = pyxb_bld.name
-        bldg.street_name = pyxb_bld.street_name
-        bldg.city = pyxb_bld.city
-        bldg.type_of_building = pyxb_bld.type_of_building
-        bldg.year_of_construction = pyxb_bld.year_of_construction
-        bldg.year_of_retrofit = pyxb_bld.year_of_retrofit
-        bldg.number_of_floors = pyxb_bld.number_of_floors
-        bldg.height_of_floors = pyxb_bld.height_of_floors
+    elif type == "Office":
+        bldg = Office(prj)
 
-        if not pyxb_bld.ThermalZone:
-            bldg.net_leased_area = pyxb_bld.net_leased_area
-        
-        if pyxb_bld.CentralAHU:
-            for pyxb_ahu in pyxb_bld.CentralAHU:
-                
-                bldg.central_ahu = BuildingAHU(bldg)
-                
-                bldg.central_ahu.heating = pyxb_ahu.heating
-                bldg.central_ahu.cooling = pyxb_ahu.cooling
-                bldg.central_ahu.dehumidification = pyxb_ahu.dehumidification
-                bldg.central_ahu.humidification = pyxb_ahu.humidification
-                bldg.central_ahu.heat_recovery = pyxb_ahu.heat_recovery
-                bldg.central_ahu.by_pass_dehumidification = \
-                                    pyxb_ahu.by_pass_dehumidification
-                bldg.central_ahu.efficiency_recovery =pyxb_ahu.efficiency_recovery
-                bldg.central_ahu.efficiency_revocery_false = \
-                                    pyxb_ahu.efficiency_revocery_false
-                bldg.central_ahu.profile_min_relative_humidity = \
-                                    pyxb_ahu.profile_min_relative_humidity
-                bldg.central_ahu.profile_max_relative_humidity = \
-                                    pyxb_ahu.profile_max_relative_humidity
-                bldg.central_ahu.profile_v_flow = \
-                                    pyxb_ahu.profile_v_flow
-                bldg.central_ahu.profile_temperature = \
-                                    pyxb_ahu.profile_temperature
+    elif type == "Institute":
 
-        for pyxb_zone in pyxb_bld.ThermalZone:
+        bldg = Institute(prj)
 
-            zone = ThermalZone(bldg)
+    elif type == "Institute4":
+        bldg = Institute4(prj)
 
-            zone.name = pyxb_zone.name
-            zone.area = pyxb_zone.area
-            zone.volume = pyxb_zone.volume
-            zone.infiltration_rate = pyxb_zone.infiltration_rate
-            # zone.use_conditions.typical_length = pyxb_zone.typical_length
-            # zone.use_conditions.typical_width = pyxb_zone.typical_width
+    elif type == "Institute8":
+        bldg = Institute8(prj)
 
-            zone.use_conditions = UseConditions18599(zone)
+    elif type == "Residential":
+        bldg = Residential(prj)
 
-            pyxb_use = pyxb_zone.UseCondition.UseConditions18599
+    bldg.name = pyxb_bld.name
+    bldg.street_name = pyxb_bld.street_name
+    bldg.city = pyxb_bld.city
+    bldg.type_of_building = pyxb_bld.type_of_building
+    bldg.year_of_construction = pyxb_bld.year_of_construction
+    bldg.year_of_retrofit = pyxb_bld.year_of_retrofit
+    bldg.number_of_floors = pyxb_bld.number_of_floors
+    bldg.height_of_floors = pyxb_bld.height_of_floors
 
-            zone.use_conditions.usage = \
-                pyxb_use.usage
+    if not pyxb_bld.ThermalZone:
+        bldg.net_leased_area = pyxb_bld.net_leased_area
 
-            zone.use_conditions.usage_time = \
-                pyxb_use.UsageOperationTime.usage_time
-            zone.use_conditions.daily_usage_hours = \
-                pyxb_use.UsageOperationTime.daily_usage_hours
-            zone.use_conditions.yearly_usage_days = \
-                pyxb_use.UsageOperationTime.yearly_usage_days
-            zone.use_conditions.yearly_usage_hours_day = \
-                pyxb_use.UsageOperationTime.yearly_usage_hours_day
-            zone.use_conditions.yearly_usage_hours_night = \
-                pyxb_use.UsageOperationTime.yearly_usage_hours_night
-            zone.use_conditions.daily_operation_ahu_cooling = \
-                pyxb_use.UsageOperationTime.daily_operation_ahu_cooling
-            zone.use_conditions.yearly_heating_days = \
-                pyxb_use.UsageOperationTime.yearly_heating_days
-            zone.use_conditions.yearly_ahu_days = \
-                pyxb_use.UsageOperationTime.yearly_ahu_days
-            zone.use_conditions.yearly_cooling_days = \
-                pyxb_use.UsageOperationTime.yearly_cooling_days
-            zone.use_conditions.daily_operation_heating = \
-                pyxb_use.UsageOperationTime.daily_operation_heating
+    if pyxb_bld.CentralAHU:
+        for pyxb_ahu in pyxb_bld.CentralAHU:
 
-            zone.use_conditions.maintained_illuminace = \
-                pyxb_use.Lighting.maintained_illuminace
-            zone.use_conditions.usage_level_height = \
-                pyxb_use.Lighting.usage_level_height
-            zone.use_conditions.red_factor_visual = \
-                pyxb_use.Lighting.red_factor_visual
-            zone.use_conditions.rel_absence = \
-                pyxb_use.Lighting.rel_absence
-            zone.use_conditions.room_index = \
-                pyxb_use.Lighting.room_index
-            zone.use_conditions.part_load_factor_lighting = \
-                pyxb_use.Lighting.part_load_factor_lighting
-            zone.use_conditions.ratio_conv_rad_lighting = \
-                pyxb_use.Lighting.ratio_conv_rad_lighting
+            bldg.central_ahu = BuildingAHU(bldg)
 
-            zone.use_conditions.set_temp_heat = \
-                pyxb_use.RoomClimate.set_temp_heat
-            zone.use_conditions.set_temp_cool = \
-                pyxb_use.RoomClimate.set_temp_cool
-            zone.use_conditions.temp_set_back = \
-                pyxb_use.RoomClimate.temp_set_back
-            zone.use_conditions.min_temp_heat = \
-                pyxb_use.RoomClimate.min_temp_heat
-            zone.use_conditions.max_temp_cool = \
-                pyxb_use.RoomClimate.max_temp_cool
-            zone.use_conditions.rel_humidity = \
-                pyxb_use.RoomClimate.rel_humidity
-            zone.use_conditions.cooling_time = \
-                pyxb_use.RoomClimate.cooling_time
-            zone.use_conditions.heating_time = \
-                pyxb_use.RoomClimate.heating_time
-            zone.use_conditions.min_air_exchange = \
-                pyxb_use.RoomClimate.min_air_exchange
-            zone.use_conditions.rel_absence_ahu = \
-                pyxb_use.RoomClimate.rel_absence_ahu
-            zone.use_conditions.part_load_factor_ahu = \
-                pyxb_use.RoomClimate.part_load_factor_ahu
+            bldg.central_ahu.heating = pyxb_ahu.heating
+            bldg.central_ahu.cooling = pyxb_ahu.cooling
+            bldg.central_ahu.dehumidification = pyxb_ahu.dehumidification
+            bldg.central_ahu.humidification = pyxb_ahu.humidification
+            bldg.central_ahu.heat_recovery = pyxb_ahu.heat_recovery
+            bldg.central_ahu.by_pass_dehumidification = \
+                                pyxb_ahu.by_pass_dehumidification
+            bldg.central_ahu.efficiency_recovery =pyxb_ahu.efficiency_recovery
+            bldg.central_ahu.efficiency_revocery_false = \
+                                pyxb_ahu.efficiency_revocery_false
+            bldg.central_ahu.profile_min_relative_humidity = \
+                                pyxb_ahu.profile_min_relative_humidity
+            bldg.central_ahu.profile_max_relative_humidity = \
+                                pyxb_ahu.profile_max_relative_humidity
+            bldg.central_ahu.profile_v_flow = \
+                                pyxb_ahu.profile_v_flow
+            bldg.central_ahu.profile_temperature = \
+                                pyxb_ahu.profile_temperature
 
-            zone.use_conditions.persons = \
-                pyxb_use.InternalGains.persons
-            zone.use_conditions.profile_persons = \
-                pyxb_use.InternalGains.profile_persons
-            zone.use_conditions.machines = \
-                pyxb_use.InternalGains.machines
-            zone.use_conditions.profile_machines = \
-                pyxb_use.InternalGains.profile_machines
-            zone.use_conditions.lighting_power = \
-                pyxb_use.InternalGains.lighting_power
-            zone.use_conditions.profile_lighting = \
-                pyxb_use.InternalGains.profile_lighting
+    for pyxb_zone in pyxb_bld.ThermalZone:
 
-            zone.use_conditions.min_ahu = \
-                pyxb_use.AHU.min_ahu
-            zone.use_conditions.max_ahu = \
-                pyxb_use.AHU.max_ahu
-            zone.use_conditions.with_ahu = \
-                pyxb_use.AHU.with_ahu
-            zone.use_constant_ach_rate = \
-                pyxb_use.AHU.use_constant_ach_rate
-            zone.base_ach = \
-                pyxb_use.AHU.base_ach
-            zone.max_user_ach = \
-                pyxb_use.AHU.max_user_ach
-            zone.max_overheating_ach = \
-                pyxb_use.AHU.max_overheating_ach
-            zone.max_summer_ach = \
-                pyxb_use.AHU.max_summer_ach
-            zone.winter_reduction = \
-                pyxb_use.AHU.winter_reduction
+        zone = ThermalZone(bldg)
 
-            for pyxb_wall in pyxb_zone.OuterWall:
+        zone.name = pyxb_zone.name
+        zone.area = pyxb_zone.area
+        zone.volume = pyxb_zone.volume
+        zone.infiltration_rate = pyxb_zone.infiltration_rate
+        # zone.use_conditions.typical_length = pyxb_zone.typical_length
+        # zone.use_conditions.typical_width = pyxb_zone.typical_width
 
-                out_wall = OuterWall(zone)
+        zone.use_conditions = UseConditions18599(zone)
 
-                set_basic_data_teaser(pyxb_wall, out_wall)
-                set_layer_data_teaser(pyxb_wall, out_wall)
+        pyxb_use = pyxb_zone.UseCondition.UseConditions18599
 
-                # zone.outer_walls.append(out_wall)
+        zone.use_conditions.usage = \
+            pyxb_use.usage
 
-            for pyxb_wall in pyxb_zone.Rooftop:
+        zone.use_conditions.usage_time = \
+            pyxb_use.UsageOperationTime.usage_time
+        zone.use_conditions.daily_usage_hours = \
+            pyxb_use.UsageOperationTime.daily_usage_hours
+        zone.use_conditions.yearly_usage_days = \
+            pyxb_use.UsageOperationTime.yearly_usage_days
+        zone.use_conditions.yearly_usage_hours_day = \
+            pyxb_use.UsageOperationTime.yearly_usage_hours_day
+        zone.use_conditions.yearly_usage_hours_night = \
+            pyxb_use.UsageOperationTime.yearly_usage_hours_night
+        zone.use_conditions.daily_operation_ahu_cooling = \
+            pyxb_use.UsageOperationTime.daily_operation_ahu_cooling
+        zone.use_conditions.yearly_heating_days = \
+            pyxb_use.UsageOperationTime.yearly_heating_days
+        zone.use_conditions.yearly_ahu_days = \
+            pyxb_use.UsageOperationTime.yearly_ahu_days
+        zone.use_conditions.yearly_cooling_days = \
+            pyxb_use.UsageOperationTime.yearly_cooling_days
+        zone.use_conditions.daily_operation_heating = \
+            pyxb_use.UsageOperationTime.daily_operation_heating
 
-                roof = Rooftop(zone)
+        zone.use_conditions.maintained_illuminace = \
+            pyxb_use.Lighting.maintained_illuminace
+        zone.use_conditions.usage_level_height = \
+            pyxb_use.Lighting.usage_level_height
+        zone.use_conditions.red_factor_visual = \
+            pyxb_use.Lighting.red_factor_visual
+        zone.use_conditions.rel_absence = \
+            pyxb_use.Lighting.rel_absence
+        zone.use_conditions.room_index = \
+            pyxb_use.Lighting.room_index
+        zone.use_conditions.part_load_factor_lighting = \
+            pyxb_use.Lighting.part_load_factor_lighting
+        zone.use_conditions.ratio_conv_rad_lighting = \
+            pyxb_use.Lighting.ratio_conv_rad_lighting
 
-                set_basic_data_teaser(pyxb_wall, roof)
-                set_layer_data_teaser(pyxb_wall, roof)
+        zone.use_conditions.set_temp_heat = \
+            pyxb_use.RoomClimate.set_temp_heat
+        zone.use_conditions.set_temp_cool = \
+            pyxb_use.RoomClimate.set_temp_cool
+        zone.use_conditions.temp_set_back = \
+            pyxb_use.RoomClimate.temp_set_back
+        zone.use_conditions.min_temp_heat = \
+            pyxb_use.RoomClimate.min_temp_heat
+        zone.use_conditions.max_temp_cool = \
+            pyxb_use.RoomClimate.max_temp_cool
+        zone.use_conditions.rel_humidity = \
+            pyxb_use.RoomClimate.rel_humidity
+        zone.use_conditions.cooling_time = \
+            pyxb_use.RoomClimate.cooling_time
+        zone.use_conditions.heating_time = \
+            pyxb_use.RoomClimate.heating_time
+        zone.use_conditions.min_air_exchange = \
+            pyxb_use.RoomClimate.min_air_exchange
+        zone.use_conditions.rel_absence_ahu = \
+            pyxb_use.RoomClimate.rel_absence_ahu
+        zone.use_conditions.part_load_factor_ahu = \
+            pyxb_use.RoomClimate.part_load_factor_ahu
 
-                # zone.outer_walls.append(roof)
+        zone.use_conditions.persons = \
+            pyxb_use.InternalGains.persons
+        zone.use_conditions.profile_persons = \
+            pyxb_use.InternalGains.profile_persons
+        zone.use_conditions.machines = \
+            pyxb_use.InternalGains.machines
+        zone.use_conditions.profile_machines = \
+            pyxb_use.InternalGains.profile_machines
+        zone.use_conditions.lighting_power = \
+            pyxb_use.InternalGains.lighting_power
+        zone.use_conditions.profile_lighting = \
+            pyxb_use.InternalGains.profile_lighting
 
-            for pyxb_wall in pyxb_zone.GroundFloor:
+        zone.use_conditions.min_ahu = \
+            pyxb_use.AHU.min_ahu
+        zone.use_conditions.max_ahu = \
+            pyxb_use.AHU.max_ahu
+        zone.use_conditions.with_ahu = \
+            pyxb_use.AHU.with_ahu
+        zone.use_constant_ach_rate = \
+            pyxb_use.AHU.use_constant_ach_rate
+        zone.base_ach = \
+            pyxb_use.AHU.base_ach
+        zone.max_user_ach = \
+            pyxb_use.AHU.max_user_ach
+        zone.max_overheating_ach = \
+            pyxb_use.AHU.max_overheating_ach
+        zone.max_summer_ach = \
+            pyxb_use.AHU.max_summer_ach
+        zone.winter_reduction = \
+            pyxb_use.AHU.winter_reduction
 
-                gr_floor = GroundFloor(zone)
+        for pyxb_wall in pyxb_zone.OuterWall:
 
-                set_basic_data_teaser(pyxb_wall, gr_floor)
-                set_layer_data_teaser(pyxb_wall, gr_floor)
+            out_wall = OuterWall(zone)
 
-                # zone.outer_walls.append(gr_floor)
+            set_basic_data_teaser(pyxb_wall, out_wall)
+            set_layer_data_teaser(pyxb_wall, out_wall)
 
-            for pyxb_wall in pyxb_zone.InnerWall:
+            # zone.outer_walls.append(out_wall)
 
-                in_wall = InnerWall(zone)
+        for pyxb_wall in pyxb_zone.Rooftop:
 
-                set_basic_data_teaser(pyxb_wall, in_wall)
-                set_layer_data_teaser(pyxb_wall, in_wall)
+            roof = Rooftop(zone)
 
-                # zone.inner_walls.append(in_wall)
+            set_basic_data_teaser(pyxb_wall, roof)
+            set_layer_data_teaser(pyxb_wall, roof)
 
-            for pyxb_wall in pyxb_zone.Ceiling:
+            # zone.outer_walls.append(roof)
 
-                ceiling = Ceiling(zone)
+        for pyxb_wall in pyxb_zone.GroundFloor:
 
-                set_basic_data_teaser(pyxb_wall, ceiling)
-                set_layer_data_teaser(pyxb_wall, ceiling)
+            gr_floor = GroundFloor(zone)
 
-                # zone.inner_walls.append(ceiling)
+            set_basic_data_teaser(pyxb_wall, gr_floor)
+            set_layer_data_teaser(pyxb_wall, gr_floor)
 
-            for pyxb_wall in pyxb_zone.Floor:
+            # zone.outer_walls.append(gr_floor)
 
-                floor = Floor(zone)
+        for pyxb_wall in pyxb_zone.InnerWall:
 
-                set_basic_data_teaser(pyxb_wall, floor)
-                set_layer_data_teaser(pyxb_wall, floor)
+            in_wall = InnerWall(zone)
 
-                # zone.inner_walls.append(floor)
+            set_basic_data_teaser(pyxb_wall, in_wall)
+            set_layer_data_teaser(pyxb_wall, in_wall)
 
-            for pyxb_win in pyxb_zone.Window:
+            # zone.inner_walls.append(in_wall)
 
-                win = Window(zone)
+        for pyxb_wall in pyxb_zone.Ceiling:
 
-                set_basic_data_teaser(pyxb_win, win)
-                set_layer_data_teaser(pyxb_win, win)
+            ceiling = Ceiling(zone)
+
+            set_basic_data_teaser(pyxb_wall, ceiling)
+            set_layer_data_teaser(pyxb_wall, ceiling)
+
+            # zone.inner_walls.append(ceiling)
+
+        for pyxb_wall in pyxb_zone.Floor:
+
+            floor = Floor(zone)
+
+            set_basic_data_teaser(pyxb_wall, floor)
+            set_layer_data_teaser(pyxb_wall, floor)
+
+            # zone.inner_walls.append(floor)
+
+        for pyxb_win in pyxb_zone.Window:
+
+            win = Window(zone)
+
+            set_basic_data_teaser(pyxb_win, win)
+            set_layer_data_teaser(pyxb_win, win)
 
 
 def set_basic_data_teaser(pyxb_class, element):
