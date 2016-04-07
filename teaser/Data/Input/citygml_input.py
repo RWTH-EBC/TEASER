@@ -13,15 +13,22 @@ import pyxb.namespace
 import pyxb.bundles
 import teaser.Data.SchemaBindings.opengis
 import pyxb.bundles.common.raw.xlink as xlink
+
 import numpy as np
 from numpy import linalg as LA
-import teaser.Data.SchemaBindings.opengis.raw as og
-import teaser.Data.SchemaBindings.opengis.raw.gml as gml
-import teaser.Data.SchemaBindings.opengis.citygml.raw.base as citygml
-import teaser.Data.SchemaBindings.opengis.citygml.raw.building as bldg
-import teaser.Data.SchemaBindings.opengis.citygml.raw.energy as energy
-import teaser.Data.SchemaBindings.opengis.citygml.raw.generics as generics
+import pyxb.bundles.opengis.citygml.base as citygml
+import pyxb.bundles.opengis.citygml.generics as gen
+import pyxb.bundles.opengis.citygml.vegetation as veg
+import pyxb.bundles.opengis.citygml.waterBody as wtr
+import pyxb.bundles.opengis.citygml.transportation as trans
+import pyxb.bundles.opengis.citygml.appearance as app
+import pyxb.bundles.opengis.citygml.cityFurniture as frn
+import pyxb.bundles.opengis.citygml.cityObjectGroup as grp
+import pyxb.bundles.opengis.citygml.building as bldg
+import pyxb.bundles.opengis.citygml.landUse as luse
+import pyxb.bundles.opengis.citygml.relief as dem
 from teaser.Logic.BuildingObjects.Building import Building
+
 
 def load_gml(path, prj):
     '''This function loads a project from CityGML file
