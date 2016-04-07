@@ -237,9 +237,12 @@ class Office(TypeBuilding):
                                          self.gross_factor)
         else:
             raise ValueError("office_layout value has to be between 0 - 3")
-
-        self._est_length = ((self.net_leased_area / self.number_of_floors) * 
+        if self.net_leased_area is not None and self.number_of_floors is not \
+                None:
+            self._est_length = ((self.net_leased_area / self.number_of_floors) *
                             self.gross_factor) / self._est_width
+        else:
+            pass
 
         if self.with_ahu is True:
             self.central_ahu.profile_temperature = (7*[293.15] +
@@ -248,6 +251,7 @@ class Office(TypeBuilding):
             self.central_ahu.profile_min_relative_humidity = (25*[0.45])
             self.central_ahu.profile_max_relative_humidity = (25*[0.55])
             self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
+
 
     def generate_office(self):
         '''Generates an office building.
