@@ -20,6 +20,8 @@ def example_type_district():
     that we load the XML data bases into our Project.
     This can take a few sec."""
 
+    starttime = time.time()
+
     prj_est1 = Project(load_data=True)
     prj_est1.name = "EST1"
     prj_est1.calculation_method = 'vdi'
@@ -39,12 +41,12 @@ def example_type_district():
 
     for building in range(1,round((number_of_buildings_est1)*0.67)+1):
         name_help="Building" + str(building)
-        year_of_construction_help = randint(1960,1970)
+        year_of_construction_help = randint(1960,1980)
         prj_est1.type_bldg_est1a(name=name_help,
                             year_of_construction=year_of_construction_help,
                             number_of_floors=2,
                             height_of_floors=3.15,
-                            net_leased_area=92*2,
+                            net_leased_area=92,
                             with_ahu=False,
                             neighbour_buildings=0,
                             construction_type="heavy")
@@ -52,7 +54,7 @@ def example_type_district():
     for building in range(round((number_of_buildings_est1)*0.67)+1,
                           number_of_buildings_est1+1):
         name_help="Building" + str(building)
-        year_of_construction_help = randint(1960,1970)
+        year_of_construction_help = randint(1960,1980)
         prj_est1.type_bldg_est1b(name=name_help,
                             year_of_construction=year_of_construction_help,
                             number_of_floors=2,
@@ -67,7 +69,7 @@ def example_type_district():
 
     for building in range(1,number_of_buildings_est4+1):
         name_help="Building" + str(building)
-        year_of_construction_help = randint(1980,1990)
+        year_of_construction_help = randint(1960,1980)
         prj_est4.type_bldg_est4b(name=name_help,
                             year_of_construction=year_of_construction_help,
                             number_of_floors=9,
@@ -82,7 +84,7 @@ def example_type_district():
 
     for building in range(1,round((number_of_buildings_est7)*0.45)+1):
         name_help="Building" + str(building)
-        year_of_construction_help = randint(1900,1920)
+        year_of_construction_help = randint(1900,1918)
         prj_est7.type_bldg_est7(name=name_help,
                             year_of_construction=year_of_construction_help,
                             number_of_floors=3,
@@ -96,7 +98,7 @@ def example_type_district():
     for building in range(round((number_of_buildings_est7)*0.45)+1,
                           number_of_buildings_est7+1):
         name_help="Building" + str(building)
-        year_of_construction_help = randint(1900,1920)
+        year_of_construction_help = randint(1900,1918)
         prj_est7.type_bldg_est7(name=name_help,
                             year_of_construction=year_of_construction_help,
                             number_of_floors=3,
@@ -156,6 +158,12 @@ def example_type_district():
                       corG=True,
                       internal_id=None,
                       path=None)
+
+    endtime = time.time()
+
+    print('Pre-processing lasts: ', endtime - starttime, ' seconds or ',
+          (endtime - starttime) / 60, ' minutes! or',
+          (endtime - starttime) / (60 * 60), 'hours.')
 
     starttime = time.time()
 
