@@ -120,7 +120,7 @@ class Building(object):
         self.file_set_t = None
         self.file_weather = None
 
-        self._calculation_method = "vdi"
+        self.calculation_method = None
 
     def set_outer_wall_area(self, new_area, orientation):
         '''Outer area wall setter
@@ -619,9 +619,9 @@ class Building(object):
 
         scipy.io.savemat(path,
                          mdict={'Internals': internal_boundary},
-                         appendmat = False,
-                         format = '4')
-    
+                         appendmat=False,
+                         format='4')
+
     @property
     def parent(self):
         return self.__parent
@@ -640,9 +640,9 @@ class Building(object):
             if inspect.isclass(Building):
 
                 self.__parent.list_of_buildings.append(self)
-                self.calculation_method = self.__parent.calculation_method
         else:
-            pass
+
+            self.__parent = None
 
     @property
     def name(self):
@@ -671,14 +671,14 @@ class Building(object):
     @year_of_construction.setter
     def year_of_construction(self, value):
 
-        if isinstance(value, int) or value == None:
-            
+        if isinstance(value, int) or value is None:
+
             self.__year_of_construction = value
         else:
             try:
                 value = int(value)
                 self.__year_of_construction = value
-                
+
             except:
                 raise ValueError("Can't convert year of construction to int")
 
@@ -689,17 +689,17 @@ class Building(object):
     @number_of_floors.setter
     def number_of_floors(self, value):
 
-        if isinstance(value, int) or value == None:
-            
+        if isinstance(value, int) or value is None:
+
             self.__number_of_floors = value
         else:
             try:
                 value = int(value)
                 self.__number_of_floors = value
-                
+
             except:
                 raise ValueError("Can't convert number of floors to int")
-                
+
     @property
     def height_of_floors(self):
         return self.__height_of_floors
@@ -707,19 +707,19 @@ class Building(object):
     @height_of_floors.setter
     def height_of_floors(self, value):
 
-        if isinstance(value, float) or value == None:
-            
+        if isinstance(value, float) or value is None:
+
             self.__height_of_floors = value
         else:
             try:
                 value = float(value)
                 self.__height_of_floors = value
-                
+
             except:
                 raise ValueError("Can't convert height of floors to float")
-        
+
     @property
-    def net_leased_area(self):        
+    def net_leased_area(self):
         return self.__net_leased_area
 
     @net_leased_area.setter
@@ -784,14 +784,14 @@ class Building(object):
             self._year_of_retrofit = value
         else:
             raise ValueError("Specify year of construction first")
-    
+
     @property
     def central_ahu(self):
         return self._central_ahu
-        
+
     @central_ahu.setter
     def central_ahu(self, value):
-        
+
         ass_error_1 = "central AHU has to be an instance of BuildingAHU()"
 
         assert type(value).__name__ == ("BuildingAHU"), ass_error_1
@@ -810,4 +810,9 @@ class Building(object):
 
         assert value != "ebc" or value != "vdi", ass_error_1
 
-        self._calculation_method = value
+        if self.parent is None and value is None:
+            self._calculation_method = "vdi"
+        elif self.parent is not None and value is None:
+            self._calculation_method = self.parent.calculation_method
+        elif value is not None:
+            self._calculation_method = value
