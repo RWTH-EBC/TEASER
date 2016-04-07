@@ -17,6 +17,7 @@ from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute import Institute
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import Institute4
 from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import Institute8
+from teaser.Logic.BuildingObjects.TypeBuildings.Residential import Residential
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU import BuildingAHU
 from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599 import \
@@ -481,28 +482,27 @@ def _load_building(prj, pyxb_bld, type):
         bldg.net_leased_area = pyxb_bld.net_leased_area
 
     if pyxb_bld.CentralAHU:
-        for pyxb_ahu in pyxb_bld.CentralAHU:
+        pyxb_ahu = pyxb_bld.CentralAHU
+        bldg.central_ahu = BuildingAHU(bldg)
 
-            bldg.central_ahu = BuildingAHU(bldg)
-
-            bldg.central_ahu.heating = pyxb_ahu.heating
-            bldg.central_ahu.cooling = pyxb_ahu.cooling
-            bldg.central_ahu.dehumidification = pyxb_ahu.dehumidification
-            bldg.central_ahu.humidification = pyxb_ahu.humidification
-            bldg.central_ahu.heat_recovery = pyxb_ahu.heat_recovery
-            bldg.central_ahu.by_pass_dehumidification = \
-                                pyxb_ahu.by_pass_dehumidification
-            bldg.central_ahu.efficiency_recovery =pyxb_ahu.efficiency_recovery
-            bldg.central_ahu.efficiency_revocery_false = \
-                                pyxb_ahu.efficiency_revocery_false
-            bldg.central_ahu.profile_min_relative_humidity = \
-                                pyxb_ahu.profile_min_relative_humidity
-            bldg.central_ahu.profile_max_relative_humidity = \
-                                pyxb_ahu.profile_max_relative_humidity
-            bldg.central_ahu.profile_v_flow = \
-                                pyxb_ahu.profile_v_flow
-            bldg.central_ahu.profile_temperature = \
-                                pyxb_ahu.profile_temperature
+        bldg.central_ahu.heating = pyxb_ahu.heating
+        bldg.central_ahu.cooling = pyxb_ahu.cooling
+        bldg.central_ahu.dehumidification = pyxb_ahu.dehumidification
+        bldg.central_ahu.humidification = pyxb_ahu.humidification
+        bldg.central_ahu.heat_recovery = pyxb_ahu.heat_recovery
+        bldg.central_ahu.by_pass_dehumidification = \
+                            pyxb_ahu.by_pass_dehumidification
+        bldg.central_ahu.efficiency_recovery =pyxb_ahu.efficiency_recovery
+        bldg.central_ahu.efficiency_revocery_false = \
+                            pyxb_ahu.efficiency_revocery_false
+        bldg.central_ahu.profile_min_relative_humidity = \
+                            pyxb_ahu.profile_min_relative_humidity
+        bldg.central_ahu.profile_max_relative_humidity = \
+                            pyxb_ahu.profile_max_relative_humidity
+        bldg.central_ahu.profile_v_flow = \
+                            pyxb_ahu.profile_v_flow
+        bldg.central_ahu.profile_temperature = \
+                            pyxb_ahu.profile_temperature
 
     for pyxb_zone in pyxb_bld.ThermalZone:
 
