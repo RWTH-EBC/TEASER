@@ -5,22 +5,27 @@ Created July 2015
 
 '''
 
-import teaser.Data.CityGML as city_gml
-import teaser.Data.TeaserXML as teaser_xml
+
+
 from teaser.Logic.ArchetypeBuildings.UseConditions18599 \
     import UseConditions18599
 from teaser.Logic.BuildingObjects.Building import Building
-from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
-from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
 from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
-from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
-from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 from teaser.Project import Project
+from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
+from PyQt4.QtGui import QMessageBox
+import teaser.Data.Output.TeaserXML_output as teaser_xml
+import teaser.Data.Output.CityGML_output as city_gml
+import teaser.Logic.Utilis as utilis
+from PyQt4.uic.Compiler.qtproxies import QtGui
+from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
 
 
 class Controller():
@@ -35,8 +40,9 @@ class Controller():
     @classmethod
     def click_add_new_layer(self, parent, position, thick, mat_nam, den, therm,
                             heat, solar, ir, trans):
-        layer = Layer(parent)
-        layer.position = position
+        layer = Layer()
+        if parent is not None:
+            parent.add_layer(layer, position=position)
         mat = Material(layer)
         mat.name = mat_nam
         mat.density = den
@@ -353,3 +359,9 @@ class Controller():
                         if wall.orientation == orientation_old:
                             wall.orientation = orientation_new
             # bldg.set_outer_wall_area(new_outer_wall_area, orientation_new)
+
+    @classmethod
+    def get_u_value(self, current_element):
+
+        u_value = float(current_element.ua_value)/current_element.area
+        return u_value
