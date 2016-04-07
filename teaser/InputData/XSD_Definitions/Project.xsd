@@ -210,11 +210,65 @@
       <xs:element type="BuildingAHUType" name="CentralAHU" minOccurs="0" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
+  <xs:complexType name="InstituteType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
+      <xs:element type="xs:string" name="street_name" minOccurs="0"/>
+      <xs:element type="xs:string" name="city" minOccurs="0"/>
+      <xs:element type="xs:string" name="type_of_building" minOccurs="0"/>
+      <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:int" name="number_of_floors" minOccurs="0"/>
+      <xs:element type="xs:float" name="height_of_floors" minOccurs="0"/>
+      <xs:element type="xs:float" name="net_leased_area" minOccurs="0"/>
+      <xs:element type="xs:float" name="outer_area" minOccurs="0"/>
+	  <xs:element type="xs:float" name="window_area" minOccurs="0"/>
+      <xs:element type="ThermalZoneType" name="ThermalZone" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="BuildingAHUType" name="CentralAHU" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Institute4Type">
+    <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
+      <xs:element type="xs:string" name="street_name" minOccurs="0"/>
+      <xs:element type="xs:string" name="city" minOccurs="0"/>
+      <xs:element type="xs:string" name="type_of_building" minOccurs="0"/>
+      <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:int" name="number_of_floors" minOccurs="0"/>
+      <xs:element type="xs:float" name="height_of_floors" minOccurs="0"/>
+      <xs:element type="xs:float" name="net_leased_area" minOccurs="0"/>
+      <xs:element type="xs:float" name="outer_area" minOccurs="0"/>
+	  <xs:element type="xs:float" name="window_area" minOccurs="0"/>
+      <xs:element type="ThermalZoneType" name="ThermalZone" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="BuildingAHUType" name="CentralAHU" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Institute8Type">
+    <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
+      <xs:element type="xs:string" name="street_name" minOccurs="0"/>
+      <xs:element type="xs:string" name="city" minOccurs="0"/>
+      <xs:element type="xs:string" name="type_of_building" minOccurs="0"/>
+      <xs:element type="xs:string" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="xs:string" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:int" name="number_of_floors" minOccurs="0"/>
+      <xs:element type="xs:float" name="height_of_floors" minOccurs="0"/>
+      <xs:element type="xs:float" name="net_leased_area" minOccurs="0"/>
+      <xs:element type="xs:float" name="outer_area" minOccurs="0"/>
+	  <xs:element type="xs:float" name="window_area" minOccurs="0"/>
+      <xs:element type="ThermalZoneType" name="ThermalZone" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="BuildingAHUType" name="CentralAHU" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="ProjectType">
     <xs:choice maxOccurs="unbounded" minOccurs="0">
       <xs:element type="BuildingType" name="Building"/>
 	  <xs:element type="OfficeType" name="Office"/>
 	  <xs:element type="ResidentialType" name="Residential"/>
+	  <xs:element type="InstituteType" name="Institute"/>
+	  <xs:element type="Institute4Type" name="Institute4"/>
+	  <xs:element type="Institute8Type" name="Institute8"/>
     </xs:choice>
   </xs:complexType>
 </xs:schema>
