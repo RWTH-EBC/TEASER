@@ -19,11 +19,8 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Project import Project
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from PyQt4.QtGui import QMessageBox
 import teaser.Data.Output.TeaserXML_output as teaser_xml
 import teaser.Data.Output.CityGML_output as city_gml
-import teaser.Logic.Utilis as utilis
-from PyQt4.uic.Compiler.qtproxies import QtGui
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
 

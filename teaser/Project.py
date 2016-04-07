@@ -6,7 +6,6 @@
 
 
 import warnings
-import shutil
 import teaser.Logic.Utilis as utilis
 import teaser.Data.Input.TeaserXML_input as txml_in
 import teaser.Data.Output.TeaserXML_output as txml_out
