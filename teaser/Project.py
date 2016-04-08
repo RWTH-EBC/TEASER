@@ -103,27 +103,25 @@ class Project(object):
         '''
         return DataClass(type_element_file)
 
-    def calc_all_buildings(self, calculation_core):
+    def calc_all_buildings(self, calculation_method):
         '''Calculates values for all project buildings
 
         Parameters
         ----------
 
-        calculation_core : string
+        calculation_method : string
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
 
-        if calculation_core == self.calculation_method:
-            pass
-        else:
-            self.calculation_method = calculation_core
+        self.calculation_method = calculation_method
 
         for bldg in self.buildings:
 
-            bldg.calc_building_parameter(calculation_core)
+            bldg.calc_building_parameter()
 
-    def retrofit_all_buildings(self, year_of_retrofit,
+    def retrofit_all_buildings(self,
+                               year_of_retrofit,
                                window_type=None,
                                material=None):
         ''' Retrofits all buildings in the project
@@ -227,7 +225,7 @@ class Project(object):
                            construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter()
         return type_bldg
 
     def type_bldg_institute(self,
@@ -295,7 +293,7 @@ class Project(object):
                               construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter()
         return type_bldg
 
     def type_bldg_institute4(self,
@@ -363,7 +361,7 @@ class Project(object):
                                construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter()
         return type_bldg
 
     def type_bldg_institute8(self,
@@ -431,7 +429,7 @@ class Project(object):
                                construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter()
         return type_bldg
 
     def type_bldg_est1a(self,
@@ -758,7 +756,7 @@ class Project(object):
                                          construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter()
         return type_bldg
 
     def save_project(self, file_name=None, path=None):
