@@ -8,7 +8,6 @@ This module contains the Base class for all building elements.
 
 from __future__ import division
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 import teaser.Data.SchemaBindings.TypeBuildingBind as tb_bind
 import teaser.Logic.Utilis as utilis
 
@@ -258,170 +257,11 @@ class BuildingElement(object):
         Assert if parents to Building are not set
         '''
 
-        ass_error_1 = "You need to specify parents for element and thermalzone"
+        import teaser.Data.Input.buildingelement_input as buildingelement_input
 
-        assert self.parent.parent.parent is not None, ass_error_1
-
-        self.year_of_construction = year
-
-        if type(self).__name__ == 'OuterWall':
-
-            for out_wall in self.parent.parent.parent.\
-                    data.element_bind.OuterWall:
-                if out_wall.building_age_group[0] <= year and \
-                    year <= out_wall.building_age_group[1] and \
-                        out_wall.construction_type == construction:
-                    self.set_basic_data(out_wall)
-                    for pyxb_layer in out_wall.Layers.layer:
-
-                        layer = Layer(self)
-                        material = Material(layer)
-                        self.set_layer_data(material, layer, pyxb_layer)
-
-        elif type(self).__name__ == 'InnerWall':
-
-            for in_wall in self.parent.parent.\
-                    parent.data.element_bind.InnerWall:
-                if in_wall.building_age_group[0] <= year and \
-                    year <= in_wall.building_age_group[1] and \
-                        in_wall.construction_type == construction:
-                    self.set_basic_data(in_wall)
-                    for pyxb_layer in in_wall.Layers.layer:
-
-                        layer = Layer(self)
-                        material = Material(layer)
-                        self.set_layer_data(material, layer, pyxb_layer)
-
-        elif type(self).__name__ == 'Floor':
-
-            for floor in self.parent.parent.parent.data.element_bind.Floor:
-                if floor.building_age_group[0] <= year and \
-                    year <= floor.building_age_group[1] and \
-                        floor.construction_type == construction:
-                    self.set_basic_data(floor)
-                    for pyxb_layer in floor.Layers.layer:
-
-                        layer = Layer(self)
-                        material = Material(layer)
-                        self.set_layer_data(material, layer, pyxb_layer)
-
-        elif type(self).__name__ == 'Ceiling':
-
-            for ceiling in self.parent.parent.\
-                    parent.data.element_bind.Ceiling:
-                if ceiling.building_age_group[0] <= year and \
-                    year <= ceiling.building_age_group[1] and \
-                        ceiling.construction_type == construction:
-                    self.set_basic_data(ceiling)
-                    for pyxb_layer in ceiling.Layers.layer:
-
-                        layer = Layer(self)
-                        material = Material(layer)
-                        self.set_layer_data(material, layer, pyxb_layer)
-
-        elif type(self).__name__ == 'GroundFloor':
-
-            for gr_floor in self.parent.parent.\
-                    parent.data.element_bind.GroundFloor:
-                if gr_floor.building_age_group[0] <= year and \
-                    year <= gr_floor.building_age_group[1] and \
-                        gr_floor.construction_type == construction:
-                    self.set_basic_data(gr_floor)
-                    for pyxb_layer in gr_floor.Layers.layer:
-
-                        layer = Layer(self)
-                        material = Material(layer)
-                        self.set_layer_data(material, layer, pyxb_layer)
-
-        elif type(self).__name__ == 'Rooftop':
-
-            for roof in self.parent.parent.parent.data.element_bind.Rooftop:
-                if roof.building_age_group[0] <= year and \
-                    year <= roof.building_age_group[1] and \
-                        roof.construction_type == construction:
-                    self.set_basic_data(roof)
-                    for pyxb_layer in roof.Layers.layer:
-
-                        layer = Layer(self)
-                        material = Material(layer)
-                        self.set_layer_data(material, layer, pyxb_layer)
-
-        elif type(self).__name__ == 'Window':
-
-            for win in self.parent.parent.parent.data.element_bind.Window:
-                if win.building_age_group[0] <= year and \
-                    year <= win.building_age_group[1] and \
-                        win.construction_type == construction:
-                    self.set_basic_data(win)
-                    for pyxb_layer in win.Layers.layer:
-
-                        layer = Layer(self)
-                        material = Material(layer)
-                        self.set_layer_data(material, layer, pyxb_layer)
-
-    def set_layer_data(self, material, layer, pyxb_class):
-        '''Helper function for load_type_element to set the layer data.
-
-        Parameters
-        ----------
-        material : Material()
-            Material() instance of TEASER
-
-        layer : Layer()
-            Layer() instance of TEASER
-
-        pyxb_class :
-            Pyxb class represantation of xml
-        '''
-
-        layer.thickness = pyxb_class.thickness
-        layer.id = pyxb_class.id
-
-        material.name = pyxb_class.Material.name
-        material.density = pyxb_class.Material.density
-        material.thermal_conduc = pyxb_class.Material.thermal_conduc
-        material.heat_capac = pyxb_class.Material.heat_capac
-        if pyxb_class.Material.solar_absorp is not None:
-            material.solar_absorp = pyxb_class.Material.solar_absorp
-        if pyxb_class.Material.ir_emissivity is not None:
-            material.ir_emissivity = pyxb_class.Material.ir_emissivity
-
-    def set_basic_data(self, pyxb_class):
-        '''Helper function for load_type_element to set the layer data.
-
-        Parameters
-        ----------
-        pyxb_class :
-            Pyxb class represantation of xml
-        '''
-
-        self.building_age_group = pyxb_class.building_age_group
-        self.construction_type = pyxb_class.construction_type
-        self.inner_radiation = pyxb_class.inner_radiation
-        self.inner_convection = pyxb_class.inner_convection
-
-        if type(self).__name__ == 'OuterWall' or \
-                type(self).__name__ == 'Rooftop':
-            self.inner_radiation = pyxb_class.inner_radiation
-            self.inner_convection = pyxb_class.inner_convection
-            self.outer_radiation = pyxb_class.outer_radiation
-            self.outer_convection = pyxb_class.outer_convection
-
-        elif type(self).__name__ == 'InnerWall' or \
-                type(self).__name__ == 'Ceiling' or \
-                type(self).__name__ == 'Floor' or \
-                type(self).__name__ == 'GroundFloor':
-
-            pass
-
-        elif type(self).__name__ == 'Window':
-
-            self.outer_radiation = pyxb_class.outer_radiation
-            self.outer_convection = pyxb_class.outer_convection
-            self.g_value = pyxb_class.g_value
-            self.a_conv = pyxb_class.a_conv
-            self.shading_g_total = pyxb_class.shading_g_total
-            self.shading_max_irr = pyxb_class.shading_max_irr
+        buildingelement_input.load_type_element(element=self,
+                                                year=year,
+                                                construction=construction)
 
     def save_type_element(self, path=None, file_name=None):
         '''Typical element saver.
