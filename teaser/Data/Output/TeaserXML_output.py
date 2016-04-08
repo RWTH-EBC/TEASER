@@ -8,7 +8,8 @@ TEASER file format .tXML
 """
 
 import teaser.Data.SchemaBindings.ProjectBind as pb
-
+import inspect
+from teaser.Logic.ArchetypeBuildings.Residential import Residential
 
 def save_teaser_xml(path, project):
     '''This function saves a project to a tXML
@@ -48,8 +49,7 @@ def save_teaser_xml(path, project):
         elif type(bldg).__name__ == "Institute8":
             pyxb_bld = pb.Institute8Type()
 
-        elif type(bldg).__name__ == "Residential" or type(bldg).__name__ == \
-                "SingleFamilyDwelling":
+        elif inspect.isclass(Residential):
 
             pyxb_bld = pb.ResidentialType()
 
