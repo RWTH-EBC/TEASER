@@ -2145,8 +2145,8 @@ class ProjectType (pyxb.binding.basis.complexTypeDefinition):
     Office = property(__Office.value, __Office.set, None, None)
 
     
-    # Element SingleFamilyDwelling uses Python identifier SingleFamilyDwelling
-    __Residential = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'SingleFamilyDwelling'), 'SingleFamilyDwelling', '__AbsentNamespace0_ProjectType_Residential', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 217, 3), )
+    # Element Residential uses Python identifier Residential
+    __Residential = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Residential'), 'Residential', '__AbsentNamespace0_ProjectType_Residential', True, pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 217, 3), )
 
     
     Residential = property(__Residential.value, __Residential.set, None, None)
@@ -6864,7 +6864,7 @@ ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(N
 
 ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Office'), OfficeType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 216, 3)))
 
-ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'SingleFamilyDwelling'), ResidentialType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 217, 3)))
+ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Residential'), ResidentialType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 217, 3)))
 
 def _BuildAutomaton_22 ():
     # Remove this helper function from the namespace after it is invoked
@@ -6888,7 +6888,7 @@ def _BuildAutomaton_22 ():
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'SingleFamilyDwelling')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 217, 3))
+    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Residential')), pyxb.utils.utility.Location('D:\\PyXB-1.2.4\\scripts\\Project.xsd', 217, 3))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     transitions = []

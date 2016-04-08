@@ -75,7 +75,7 @@ areas:
     :undoc-members:
     :show-inheritance:
 
-SingleFamilyDwelling module
+Residential module
 -------------------------------------------------------------
 
 **Description**
@@ -87,7 +87,7 @@ area:
 
 #. Single dwelling (100% of net leased area)
 
-.. automodule:: teaser.Logic.BuildingObjects.TypeBuildings.SingleFamilyDwelling
+.. automodule:: teaser.Logic.BuildingObjects.TypeBuildings.Residential
     :members:
     :undoc-members:
     :show-inheritance:
