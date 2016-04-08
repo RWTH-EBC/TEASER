@@ -41,6 +41,7 @@ def load_gml(path, prj):
     gml_bind = citygml.CreateFromDocument(xml_file.read())
 
     for i, city_object in enumerate(gml_bind.featureMember):
+
         #for LOD2 is used we check if boundary surfaces are described
         if city_object.Feature.boundedBy_:
             bldg = Building(parent=prj)
@@ -52,6 +53,16 @@ def load_gml(path, prj):
                     except: #modelling option 2
                         for pos_list in comp_member.Surface.surfaceMember:
                             Surface_gml(pos_list.Surface.exterior.Ring.posList.value())
+        #if a building Feature has no boundedBy_ but a lod1solid it is LOD1
+        elif city_object.Feature.lod1Solid:
+            bldg = Building(parent=prj)
+            for member in city_object.Feature.lod1Solid.Solid.exterior\
+                    .Surface.surfaceMember:
+                Surface_gml(member.Surface.exterior.Ring.posList.value())
+
+
+
+
 
 class Surface_gml(object):
 
