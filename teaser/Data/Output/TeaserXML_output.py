@@ -11,12 +11,12 @@ import teaser.Data.SchemaBindings.ProjectBind as pb
 from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions import \
     UseConditions18599
 from teaser.Logic.BuildingObjects.Building import Building
-from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
-from teaser.Logic.BuildingObjects.TypeBuildings.Institute import Institute
-from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import Institute4
-from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import Institute8
-from teaser.Logic.BuildingObjects.TypeBuildings.Residential import Residential
-import teaser.Logic.Utilis as utilis
+from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
+from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute import Institute
+from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import Institute4
+from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import Institute8
+from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import \
+    SingleFamilyDwelling
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import \
@@ -440,8 +440,8 @@ def load_teaser_xml(path, prj):
     for pyxb_bld in project_bind.Institute8:
         _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute8")
 
-    for pyxb_bld in project_bind.Residential:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Residential")
+    for pyxb_bld in project_bind.SingleFamilyDwelling:
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="SingleFamilyDwelling")
 
 
 
@@ -463,8 +463,8 @@ def _load_building(prj, pyxb_bld, type):
     elif type == "Institute8":
         bldg = Institute8(prj)
 
-    elif type == "Residential":
-        bldg = Residential(prj)
+    elif type == "SingleFamilyDwelling":
+        bldg = SingleFamilyDwelling(prj)
 
     bldg.name = pyxb_bld.name
     bldg.street_name = pyxb_bld.street_name

@@ -11,7 +11,6 @@ from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
-from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
 from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
@@ -22,8 +21,6 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Project import Project
 import teaser.Data.Output.TeaserXML_output as teaser_xml
 import teaser.Data.Output.CityGML_output as city_gml
-import teaser.Logic.Utilis as utilis
-from PyQt4.uic.Compiler.qtproxies import QtGui
 
 
 class Controller():
