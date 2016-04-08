@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
-  <xs:include schemaLocation="D:\GIT\TEASER\teaser\InputData\XSD_Definitions\UseConditions18599.xsd"/>
+  <xs:include schemaLocation="D:\GIT\TEASER\teaser\Data\SchemaBindings\schemas\BoundaryConditions.xsd"/>
   <xs:element name="Project" type="ProjectType"/>
   <xs:complexType name="UseConditionType">
     <xs:sequence>
-      <xs:element type="UseConditions18599Type" name="UseConditions18599" minOccurs="0"/>
+      <xs:element type="BoundaryConditionsType" name="BoundaryConditions" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="MaterialType">
