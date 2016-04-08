@@ -5,23 +5,22 @@ Created July 2015
 
 '''
 
-from PyQt4.QtGui import QMessageBox
-from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
+
+
+from teaser.Logic.ArchetypeBuildings.UseConditions18599 \
+    import UseConditions18599
 from teaser.Logic.BuildingObjects.Building import Building
-from teaser.Project import Project
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
-from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
+from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599\
-    import UseConditions18599
+from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
+from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
+from teaser.Project import Project
+from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 import teaser.Data.Output.TeaserXML_output as teaser_xml
 import teaser.Data.Output.CityGML_output as city_gml
-import teaser.Logic.Utilis as utilis
-from PyQt4.uic.Compiler.qtproxies import QtGui
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
 
@@ -209,7 +208,7 @@ class Controller():
             building.city = location
             int_id = building.internal_id
 
-        if type_of_building == "Residential":
+        if type_of_building == "SingleFamilyDwelling":
             building = parent.type_bldg_residential(
                 name=name,
                 year_of_construction=year_of_construction,
