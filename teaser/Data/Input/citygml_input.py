@@ -27,7 +27,7 @@ from teaser.Logic.BuildingObjects.Building import Building
 
 
 def load_gml(path, prj):
-    '''This function loads a project from CityGML file
+    '''This function loads buildings from a CityGML file
 
     Parameters
     ----------
@@ -42,25 +42,51 @@ def load_gml(path, prj):
 
     for i, city_object in enumerate(gml_bind.featureMember):
 
-        #for LOD2 is used we check if boundary surfaces are described
-        if city_object.Feature.boundedBy_:
+        if city_object.Feature.consistsOfBuildingPart:
+            for part in city_object.Feature.consistsOfBuildingPart:
+                bldg = Building(parent=prj)
+                _create_building_part(bldg=bldg, part=part)
+        else:
             bldg = Building(parent=prj)
-            for bound_surf in city_object.Feature.boundedBy_:
-                for comp_member in bound_surf.BoundarySurface.lod2MultiSurface.MultiSurface.surfaceMember:
-                    try: #modelling option 1
-                        Surface_gml(
-                            comp_member.Surface.exterior.Ring.posList.value())
-                    except: #modelling option 2
-                        for pos_list in comp_member.Surface.surfaceMember:
-                            Surface_gml(pos_list.Surface.exterior.Ring.posList.value())
-        #if a building Feature has no boundedBy_ but a lod1solid it is LOD1
-        elif city_object.Feature.lod1Solid:
-            bldg = Building(parent=prj)
-            for member in city_object.Feature.lod1Solid.Solid.exterior\
-                    .Surface.surfaceMember:
-                Surface_gml(member.Surface.exterior.Ring.posList.value())
+            _create_building(bldg=bldg, city_object=city_object)
 
 
+def _create_building(bldg, city_object):
+    #LOD2
+    if city_object.Feature.boundedBy_:
+        for bound_surf in city_object.Feature.boundedBy_:
+            for comp_member in bound_surf.BoundarySurface.lod2MultiSurface.MultiSurface.surfaceMember:
+                try: #modelling option 1
+                    bldg.gml_surfaces.append(Surface_gml(
+                        comp_member.Surface.exterior.Ring.posList.value()))
+                except: #modelling option 2
+                    for pos_list in comp_member.Surface.surfaceMember:
+                        bldg.gml_surfaces.append(Surface_gml(
+                            pos_list.Surface.exterior.Ring.posList.value()))
+    #if a building Feature has no boundedBy_ but a lod1solid it is LOD1
+    elif city_object.Feature.lod1Solid:
+        for member in city_object.Feature.lod1Solid.Solid.exterior\
+                .Surface.surfaceMember:
+            bldg.gml_surfaces.append(Surface_gml(
+                member.Surface.exterior.Ring.posList.value()))
+
+def _create_building_part(bldg, part):
+    if part.BuildingPart.boundedBy_:
+        for bound_surf in part.BuildingPart.boundedBy_:
+            for comp_member in bound_surf.BoundarySurface.lod2MultiSurface.MultiSurface.surfaceMember:
+                try: #modelling option 1
+                    bldg.gml_surfaces.append(Surface_gml(
+                        comp_member.Surface.exterior.Ring.posList.value()))
+                except: #modelling option 2
+                    for pos_list in comp_member.Surface.surfaceMember:
+                        bldg.gml_surfaces.append(Surface_gml(
+                            pos_list.Surface.exterior.Ring.posList.value()))
+    #if a building Feature has no boundedBy_ but a lod1solid it is LOD1
+    elif part.BuildingPart.lod1Solid:
+        for member in part.BuildingPart.lod1Solid.Solid.exterior\
+                .Surface.surfaceMember:
+            bldg.gml_surfaces.append(Surface_gml(
+                member.Surface.exterior.Ring.posList.value()))
 
 
 
