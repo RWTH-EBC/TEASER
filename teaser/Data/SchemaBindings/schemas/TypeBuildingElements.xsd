@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="TypeBuildingElements" type="TypeBuildingElementsType"/>
+  <xs:complexType name="MaterialType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="name"/>
+      <xs:element type="xs:float" name="density"/>
+      <xs:element type="xs:float" name="thermal_conduc"/>
+      <xs:element type="xs:float" name="heat_capac"/>
+      <xs:element type="xs:float" name="solar_absorp" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="xs:float" name="ir_emissivity" maxOccurs="1" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="layerType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="id"/>
+      <xs:element type="xs:float" name="thickness"/>
+      <xs:element type="MaterialType" name="Material"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LayersType">
+    <xs:sequence>
+      <xs:element type="layerType" name="layer" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OuterWallType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="integerList" name="building_age_group"/>
+      <xs:element type="xs:string" name="construction_type"/>
+      <xs:element type="xs:float" name="inner_convection"/>
+      <xs:element type="xs:float" name="inner_radiation"/>
+      <xs:element type="xs:float" name="outer_convection"/>
+      <xs:element type="xs:float" name="outer_radiation"/>
+      <xs:element type="LayersType" name="Layers"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InnerWallType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="integerList" name="building_age_group"/>
+      <xs:element type="xs:string" name="construction_type"/>
+      <xs:element type="xs:float" name="inner_convection"/>
+      <xs:element type="xs:float" name="inner_radiation"/>
+      <xs:element type="LayersType" name="Layers"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RooftopType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="integerList" name="building_age_group"/>
+      <xs:element type="xs:string" name="construction_type"/>
+      <xs:element type="xs:float" name="inner_convection"/>
+      <xs:element type="xs:float" name="inner_radiation"/>
+      <xs:element type="xs:float" name="outer_convection"/>
+      <xs:element type="xs:float" name="outer_radiation"/>
+      <xs:element type="LayersType" name="Layers"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GroundFloorType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="integerList" name="building_age_group"/>
+      <xs:element type="xs:string" name="construction_type"/>
+      <xs:element type="xs:float" name="inner_convection"/>
+      <xs:element type="xs:float" name="inner_radiation"/>
+      <xs:element type="LayersType" name="Layers"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WindowType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="integerList" name="building_age_group"/>
+      <xs:element type="xs:string" name="construction_type"/>
+      <xs:element type="xs:float" name="inner_convection"/>
+      <xs:element type="xs:float" name="inner_radiation"/>
+      <xs:element type="xs:float" name="outer_convection"/>
+      <xs:element type="xs:float" name="outer_radiation"/>
+      <xs:element type="xs:float" name="g_value"/>
+      <xs:element type="xs:float" name="a_conv"/>
+      <xs:element type="xs:float" name="shading_g_total"/>
+      <xs:element type="xs:float" name="shading_max_irr"/>
+      <xs:element type="LayersType" name="Layers"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CeilingType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="integerList" name="building_age_group"/>
+      <xs:element type="xs:string" name="construction_type"/>
+      <xs:element type="xs:float" name="inner_convection"/>
+      <xs:element type="xs:float" name="inner_radiation"/>
+      <xs:element type="LayersType" name="Layers"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FloorType">
+    <xs:sequence>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
+	  <xs:element type="integerList" name="building_age_group"/>
+      <xs:element type="xs:string" name="construction_type"/>
+      <xs:element type="xs:float" name="inner_convection"/>
+      <xs:element type="xs:float" name="inner_radiation"/>
+      <xs:element type="LayersType" name="Layers"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TypeBuildingElementsType">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element type="OuterWallType" name="OuterWall"/>
+      <xs:element type="InnerWallType" name="InnerWall" />
+      <xs:element type="RooftopType" name="Rooftop" />
+      <xs:element type="GroundFloorType" name="GroundFloor" />
+      <xs:element type="WindowType" name="Window" />
+      <xs:element type="CeilingType" name="Ceiling" />
+      <xs:element type="FloorType" name="Floor" />
+    </xs:choice>
+  </xs:complexType>
+  <xs:simpleType name="integerList">
+	<xs:list itemType="xs:integer"/>
+  </xs:simpleType>
+</xs:schema>
