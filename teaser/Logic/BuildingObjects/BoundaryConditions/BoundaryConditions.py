@@ -287,74 +287,11 @@ class BoundaryConditions(UseConditions):
             code list for zone_usage according to 18599
         '''
 
-        ass_error_1 = ("you need to specify parents for "
-                       "use cond and thermal zone")
+        import teaser.Data.Input.boundcond_input as boundcond_input
 
-        assert self.parent.parent.parent is not None, ass_error_1
+        boundcond_input.load_boundary_conditions(bound_cond=self,
+                                                 zone_usage=zone_usage)
 
-        for usage in \
-            self.parent.parent.parent.data.conditions_bind.\
-                BoundaryConditions:
-
-            if usage.usage == zone_usage:
-
-                self.typical_length = usage.typical_length
-                self.typical_width = usage.typical_width
-
-                self.usage = usage.usage
-                self.usage_time = usage.UsageOperationTime.usage_time
-                self.daily_usage_hours = \
-                    usage.UsageOperationTime.daily_usage_hours
-                self.yearly_usage_days = \
-                    usage.UsageOperationTime.yearly_usage_days
-                self.yearly_usage_hours_day = \
-                    usage.UsageOperationTime.yearly_usage_hours_day
-                self.yearly_usage_hours_night = \
-                    usage.UsageOperationTime.yearly_usage_hours_night
-                self.daily_operation_ahu_cooling = \
-                    usage.UsageOperationTime.daily_operation_ahu_cooling
-                self.yearly_heating_days = \
-                    usage.UsageOperationTime.yearly_heating_days
-                self.yearly_ahu_days = \
-                    usage.UsageOperationTime.yearly_ahu_days
-                self.yearly_cooling_days = \
-                    usage.UsageOperationTime.yearly_cooling_days
-                self.daily_operation_heating = \
-                    usage.UsageOperationTime.daily_operation_heating
-
-                self.maintained_illuminace = \
-                    usage.Lighting.maintained_illuminace
-                self.usage_level_height = usage.Lighting.usage_level_height
-                self.red_factor_visual = usage.Lighting.red_factor_visual
-                self.rel_absence = usage.Lighting.rel_absence
-                self.room_index = usage.Lighting.room_index
-                self.part_load_factor_lighting = \
-                    usage.Lighting.part_load_factor_lighting
-                self.ratio_conv_rad_lighting = \
-                    usage.Lighting.ratio_conv_rad_lighting
-
-                self.set_temp_heat = usage.RoomClimate.set_temp_heat
-                self.set_temp_cool = usage.RoomClimate.set_temp_cool
-                self.temp_set_back = usage.RoomClimate.temp_set_back
-                self.min_temp_heat = usage.RoomClimate.min_temp_heat
-                self.max_temp_cool = usage.RoomClimate.max_temp_cool
-                self.rel_humidity = usage.RoomClimate.rel_humidity
-                self.cooling_time = usage.RoomClimate.cooling_time
-                self.heating_time = usage.RoomClimate.heating_time
-                self.min_air_exchange = usage.RoomClimate.min_air_exchange
-                self.rel_absence_ahu = usage.RoomClimate.rel_absence_ahu
-                self.part_load_factor_ahu = \
-                    usage.RoomClimate.part_load_factor_ahu
-
-                self.persons = usage.InternalGains.persons
-                self.profile_persons = usage.InternalGains.profile_persons
-                self.machines = usage.InternalGains.machines
-                self.profile_machines = usage.InternalGains.profile_machines
-                self.lighting_power = usage.InternalGains.lighting_power
-                self.profile_lighting = usage.InternalGains.profile_lighting
-                self.min_ahu = usage.AHU.min_ahu
-                self.max_ahu = usage.AHU.max_ahu
-                self.with_ahu = usage.AHU.with_ahu
 
     def save_use_conditions(self, path=None, file_name=None):
         '''Use conditions saver.
