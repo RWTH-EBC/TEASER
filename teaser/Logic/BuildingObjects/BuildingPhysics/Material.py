@@ -6,6 +6,7 @@ import teaser.Data.SchemaBindings.MaterialBind as mat_bind
 import teaser.Logic.Utilis as utilis
 import re
 
+import teaser.Data.Input.material_input as material_input
 
 class Material(object):
     '''This class represents a Material.
@@ -73,19 +74,9 @@ class Material(object):
             Code list for Material
 
         '''
-        ass_error_1 = "You need to specify parents up to project"
 
-        assert self.parent.parent.parent.parent.parent is not None, ass_error_1
-
-        for mat in self.parent.parent.parent.parent.parent.\
-                data.material_bind.Material:
-
-            if mat.name == mat_name:
-
-                self.name = mat.name
-                self.density = mat.density
-                self.thermal_conduc = float(mat.thermal_conduc)
-                self.heat_capac = mat.heat_capac
+        material_input.load_material(material=self,
+                                     mat_name=mat_name)
 
     def save_material_template(self):
         '''Material saver.
