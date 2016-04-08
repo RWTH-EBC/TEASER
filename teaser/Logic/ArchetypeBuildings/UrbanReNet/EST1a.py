@@ -77,12 +77,13 @@ class EST1a(Residential):
         """
 
         super(EST1a, self).__init__(parent, name, year_of_construction,
-                                    number_of_floors, height_of_floors,
-                                    net_leased_area, with_ahu)
+                                    number_of_floors, with_ahu)
 
         self.neighbour_buildings = neighbour_buildings
         self.construction_type = construction_type
         self.number_of_apartments = 1
+        self.number_of_floors = number_of_floors
+        self.height_of_floors = height_of_floors
 
         # Parameters are default values for current calculation following
         # Hegger
