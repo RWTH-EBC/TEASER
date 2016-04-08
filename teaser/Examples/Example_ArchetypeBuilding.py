@@ -35,6 +35,25 @@ def example_type_building():
                               construction_type="heavy",
                               dormer=1)
 
+    prj.type_bldg_est1a(name="EST1aBuilding",
+                              year_of_construction=1988,
+                              number_of_floors=2,
+                              height_of_floors=3.5,
+                              net_leased_area=100,
+                              with_ahu=True,
+                              neighbour_buildings=1,
+                              construction_type="heavy")
+
+    prj.type_bldg_est1b(name="EST1bBuilding",
+                              year_of_construction=1988,
+                              number_of_floors=2,
+                              height_of_floors=3.5,
+                              net_leased_area=100,
+                              with_ahu=True,
+                              neighbour_buildings=1,
+                              construction_type="heavy",
+                              number_of_apartments=5)
+
     prj.type_bldg_office(name="Office1",
                          year_of_construction=1988,
                          number_of_floors=2,
