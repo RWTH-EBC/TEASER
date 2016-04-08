@@ -1,12 +1,12 @@
 '''
 Created April 2016
 
-@author: TEASER 4 Development Team
+@author: TEASER Development Team
 '''
 
-"""boundcond_input.py
+"""buildingelement_input.py
 
-This module contains function to load boundary conditions classes
+This module contains function to load building element classes
 """
 
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
@@ -23,6 +23,9 @@ def load_type_element(element, year, construction):
 
     Parameters
     ----------
+    element : BuildingElement()
+        Instance of BuildingElement or inherited Element of TEASER
+
     year : int
         Year of construction
 
