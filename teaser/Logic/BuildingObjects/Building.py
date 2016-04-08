@@ -108,6 +108,8 @@ class Building(object):
         self._outer_area = {}
         self._window_area = {}
 
+        self.gml_surfaces = []
+
         self.volume = 0
         self.sum_heating_load = 0
         self.sum_cooling_load = 0
