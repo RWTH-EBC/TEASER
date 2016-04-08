@@ -19,7 +19,7 @@ from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 class EST1a(Residential):
     """Urban Fabric Type EST1a.
 
-    Subclass from Building for urban fabric type EST1a.
+    Subclass from Residential for urban fabric type EST1a.
 
     Parameters
     ----------
@@ -58,51 +58,6 @@ class EST1a(Residential):
 
         heavy: heavy construction
         light: light construction
-
-    Note
-    ----------
-
-    The listed attributes are just the ones that are set by the user
-    calculated values are not included in this list.
-
-
-    Attributes
-    ----------
-
-    zone_area_factors : dict
-        This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage (str).
-
-    outer_wall_names : dict
-        This dictionary contains the name of the outer walls, their orientation
-        and tilt
-
-    roof_names : dict
-        This dictionary contains the name of the roofs, their orientation
-        and tilt
-
-    ground_floor_names : dict
-        This dictionary contains the name of the ground floors, their
-        orientation and tilt
-
-    window_names : dict
-        This dictionary contains the name of the window, their
-        orientation and tilt
-
-    inner_wall_names : dict
-        This dictionary contains the name of the inner walls, their
-        orientation and tilt
-
-    ceiling_names : dict
-        This dictionary contains the name of the ceilings, their
-        orientation and tilt
-
-    floor_names : dict
-        This dictionary contains the name of the floors, their
-        orientation and tilt
-
-    est_factor_win_area : float
-        estimation factor to calculate window area
     """
 
     def __init__(self,
@@ -127,12 +82,17 @@ class EST1a(Residential):
 
         self.neighbour_buildings = neighbour_buildings
         self.construction_type = construction_type
+        self.number_of_apartments = 1
 
         # Parameters are default values for current calculation following
         # Hegger
 
         # [area factor, usage type(has to be set)]
-        self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
+        self.zone_area_factors = {}
+        for value in range(1, self._number_of_apartments+1):
+            zone_name= "Apartment " + str(value)
+            zone={zone_name: [1/self._number_of_apartments, "Living"]}
+            self.zone_area_factors.update(zone)
 
         self.outer_wall_names = {"Exterior Facade North": [90.0, 0.0],
                                  "Exterior Facade East": [90.0, 90.0],
@@ -360,3 +320,14 @@ class EST1a(Residential):
             self._neighbour_buildings = value
         else:
             self._neighbour_buildings = 0
+
+    @property
+    def number_of_apartments(self):
+        return self._number_of_apartments
+
+    @number_of_apartments.setter
+    def number_of_apartments(self, value):
+        if value is not None and value >= 1:
+            self._number_of_apartments = value
+        else:
+            self._number_of_apartments = 1
