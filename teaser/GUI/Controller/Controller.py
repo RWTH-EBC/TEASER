@@ -9,7 +9,7 @@ from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
     import UseConditions18599
 from teaser.Logic.BuildingObjects.Building import Building
-from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
 from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
@@ -21,6 +21,8 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Project import Project
 import teaser.Data.Output.TeaserXML_output as teaser_xml
 import teaser.Data.Output.CityGML_output as city_gml
+from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
 
 
 class Controller():

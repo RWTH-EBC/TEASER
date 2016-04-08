@@ -8,27 +8,6 @@ TEASER file format .tXML
 """
 
 import teaser.Data.SchemaBindings.ProjectBind as pb
-from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions import \
-    UseConditions18599
-from teaser.Logic.BuildingObjects.Building import Building
-from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
-from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute import Institute
-from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import Institute4
-from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import Institute8
-from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import \
-    SingleFamilyDwelling
-from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
-from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
-from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import \
-    GroundFloor
-from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
-from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
-from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU import BuildingAHU
-from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 
 
 def save_teaser_xml(path, project):
@@ -69,7 +48,8 @@ def save_teaser_xml(path, project):
         elif type(bldg).__name__ == "Institute8":
             pyxb_bld = pb.Institute8Type()
 
-        elif type(bldg).__name__ == "SingleFamilyDwelling":
+        elif type(bldg).__name__ == "Residential" or type(bldg).__name__ == \
+                "SingleFamilyDwelling":
 
             pyxb_bld = pb.ResidentialType()
 
@@ -297,14 +277,24 @@ def save_teaser_xml(path, project):
 
             teaser_out.Building.append(pyxb_bld)
 
-        elif type(bldg).__name__ == "Office" \
-                or type(bldg).__name__ == "Institute"\
-                or type(bldg).__name__ == "Institute4"\
-                or type(bldg).__name__ == "Institute8":
+        elif type(bldg).__name__ == "Office":
 
             teaser_out.Office.append(pyxb_bld)
 
-        elif type(bldg).__name__ == "SingleFamilyDwelling":
+        elif type(bldg).__name__ == "Institute":
+
+            teaser_out.Institute.append(pyxb_bld)
+
+        elif type(bldg).__name__ == "Institute4":
+
+            teaser_out.Institute4.append(pyxb_bld)
+
+        elif type(bldg).__name__ == "Institute8":
+
+            teaser_out.Institute8.append(pyxb_bld)
+
+        elif type(bldg).__name__ == "SingleFamilyDwelling" or type(
+                bldg).__name__ == "Residential":
 
             teaser_out.Residential.append(pyxb_bld)
 
@@ -407,6 +397,4 @@ def set_layer_data_pyxb(pyxb_class, element):
         pyxb_layer.Material = pyxb_material
 
         pyxb_class.Layer.append(pyxb_layer)
-
-
 
