@@ -44,8 +44,8 @@ def load_type_element(element, year, construction):
 
         for out_wall in element.parent.parent.parent.\
                 data.element_bind.OuterWall:
-            if out_wall.building_age_group[0] <= year and \
-                year <= out_wall.building_age_group[1] and \
+            if out_wall.building_age_group[0] <= year <= \
+                    out_wall.building_age_group[1] and \
                     out_wall.construction_type == construction:
                 _set_basic_data(element=element,
                                 pyxb_class=out_wall)
@@ -62,8 +62,8 @@ def load_type_element(element, year, construction):
 
         for in_wall in element.parent.parent.\
                 parent.data.element_bind.InnerWall:
-            if in_wall.building_age_group[0] <= year and \
-                year <= in_wall.building_age_group[1] and \
+            if in_wall.building_age_group[0] <= year <= \
+                    in_wall.building_age_group[1] and \
                     in_wall.construction_type == construction:
                 _set_basic_data(element=element,
                                 pyxb_class=in_wall)
@@ -79,8 +79,8 @@ def load_type_element(element, year, construction):
     elif type(element).__name__ == 'Floor':
 
         for floor in element.parent.parent.parent.data.element_bind.Floor:
-            if floor.building_age_group[0] <= year and \
-                year <= floor.building_age_group[1] and \
+            if floor.building_age_group[0] <= year <= \
+                    floor.building_age_group[1] and \
                     floor.construction_type == construction:
                 _set_basic_data(element=element,
                                 pyxb_class=floor)
@@ -97,8 +97,8 @@ def load_type_element(element, year, construction):
 
         for ceiling in element.parent.parent.\
                 parent.data.element_bind.Ceiling:
-            if ceiling.building_age_group[0] <= year and \
-                year <= ceiling.building_age_group[1] and \
+            if ceiling.building_age_group[0] <= year <= \
+                    ceiling.building_age_group[1] and \
                     ceiling.construction_type == construction:
                 _set_basic_data(element=element,
                                 pyxb_class=ceiling)
@@ -115,8 +115,8 @@ def load_type_element(element, year, construction):
 
         for gr_floor in element.parent.parent.\
                 parent.data.element_bind.GroundFloor:
-            if gr_floor.building_age_group[0] <= year and \
-                year <= gr_floor.building_age_group[1] and \
+            if gr_floor.building_age_group[0] <= year <= \
+                    gr_floor.building_age_group[1] and \
                     gr_floor.construction_type == construction:
                 _set_basic_data(element=element,
                                 pyxb_class=gr_floor)
@@ -132,8 +132,8 @@ def load_type_element(element, year, construction):
     elif type(element).__name__ == 'Rooftop':
 
         for roof in element.parent.parent.parent.data.element_bind.Rooftop:
-            if roof.building_age_group[0] <= year and \
-                year <= roof.building_age_group[1] and \
+            if roof.building_age_group[0] <= year <= \
+                    roof.building_age_group[1] and \
                     roof.construction_type == construction:
                 _set_basic_data(element=element,
                                 pyxb_class=roof)
@@ -149,9 +149,9 @@ def load_type_element(element, year, construction):
     elif type(element).__name__ == 'Window':
 
         for win in element.parent.parent.parent.data.element_bind.Window:
-            if win.building_age_group[0] <= year and \
-                year <= win.building_age_group[1] and \
-                    win.construction_type == construction:
+            if win.building_age_group[0] <= year <= \
+                    win.building_age_group[1] and win.construction_type == \
+                    construction:
                 _set_basic_data(element=element,
                                 pyxb_class=win)
                 for pyxb_layer in win.Layers.layer:
