@@ -5,7 +5,7 @@ from teaser.Logic.ArchetypeBuildings.Residential \
  import Residential
 
 from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
-    import UseConditions18599 as UseCond
+    import BoundaryConditions as UseCond
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor\

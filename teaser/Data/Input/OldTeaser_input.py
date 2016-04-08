@@ -6,7 +6,8 @@ Created September 2015
 
 import xml.etree.ElementTree as ET
 
-from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions import UseConditions18599
+from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
+    import BoundaryConditions
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
@@ -38,10 +39,11 @@ def load_teaser_xml(path, project):
     root = tree_teaser.getroot()
 
     for bldg_node in (root.findall("Allgemein")):
-        building = Building(project, bldg_node.find("Gebaeude").text,
-                            bldg_node.find("Baujahr").text,
-                            float(bldg_node.find("Geschosszahl").text),
-                            float(bldg_node.find("Geschosshoehe").text))
+        building = Building(project,
+                            name=bldg_node.find("Gebaeude").text,
+                            year_of_construction=bldg_node.find("Baujahr").text)
+        building.number_of_floors = float(bldg_node.find("Geschosszahl").text)
+        building.height_of_floors =  float(bldg_node.find("Geschosshoehe").text)
         building.street_name = bldg_node.find("Strasse").text
         building.city = bldg_node.find("Ort").text
         building.type_of_building = bldg_node.find("Gebaeudetyp").text
@@ -64,7 +66,7 @@ def load_teaser_xml(path, project):
     # Parse the zones
     for zone_count in (root.findall("Zonen/Zone")):
         thermal_zone = ThermalZone(building)
-        use_conditions = UseConditions18599(thermal_zone)
+        use_conditions = BoundaryConditions(thermal_zone)
         thermal_zone.name = zone_count.find("Name").text
         # not sure we need this (use_conditions.usage), but first keep it
         use_conditions.usage = zone_count.find("Typ").text

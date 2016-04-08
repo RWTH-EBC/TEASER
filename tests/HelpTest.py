@@ -1,4 +1,5 @@
-from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions import UseConditions18599
+from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
+    import BoundaryConditions
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
 from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
@@ -34,7 +35,7 @@ def building_test2(prj):
     tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
     tz.infiltration_rate = 0.5
     
-    tz.use_conditions = UseConditions18599(tz)
+    tz.use_conditions = BoundaryConditions(tz)
     tz.use_conditions.cooling_time = [5,18]
     tz.use_conditions.heating_time = [5,18]
     tz.use_conditions.set_temp_heat = 288.15
