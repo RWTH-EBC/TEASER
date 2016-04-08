@@ -6,7 +6,7 @@ Created September 2015
 
 import xml.etree.ElementTree as ET
 
-from teaser.Logic.ArchetypeBuildings.UseConditions18599 import UseConditions18599
+from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions import UseConditions18599
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor

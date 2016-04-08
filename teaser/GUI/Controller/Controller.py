@@ -7,7 +7,7 @@ Created July 2015
 
 import teaser.Data.CityGML as city_gml
 import teaser.Data.TeaserXML as teaser_xml
-from teaser.Logic.ArchetypeBuildings.UseConditions18599 \
+from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
     import UseConditions18599
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling

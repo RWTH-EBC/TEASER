@@ -6,8 +6,7 @@ import math
 
 from teaser.Logic.ArchetypeBuildings.NonResidential\
  import NonResidential
-
-from teaser.Logic.ArchetypeBuildings.UseConditions18599 \
+from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
     import UseConditions18599 as UseCond
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
@@ -158,14 +157,14 @@ class Office(NonResidential):
         super(Office, self).__init__(parent, 
                                      name,
                                      year_of_construction,
-                                     number_of_floors,
-                                     height_of_floors,
                                      net_leased_area, 
                                      with_ahu)
 
         self.office_layout = office_layout
         self.window_layout = window_layout
         self.construction_type = construction_type
+        self.number_of_floors = number_of_floors
+        self.height_of_floors = height_of_floors
         # Parameters are default values for current
         # calculation following Lichtmess
 

@@ -8,7 +8,7 @@ TEASER file format .tXML
 """
 
 import teaser.Data.SchemaBindings.ProjectBind as pb
-from teaser.Logic.ArchetypeBuildings.UseConditions18599 import \
+from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions import \
     UseConditions18599
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling

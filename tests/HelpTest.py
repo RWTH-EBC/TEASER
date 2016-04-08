@@ -1,4 +1,4 @@
-from teaser.Logic.ArchetypeBuildings.UseConditions18599 import UseConditions18599
+from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions import UseConditions18599
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
 from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
