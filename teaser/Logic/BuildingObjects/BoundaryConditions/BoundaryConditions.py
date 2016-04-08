@@ -6,7 +6,7 @@ This module is a container for UseConditions following 18599 and SIA
 """
 
 from teaser.Logic.BuildingObjects.UseConditions import UseConditions
-import teaser.Data.SchemaBindings.UseConditions18599Bind as uc_bind
+import teaser.Data.SchemaBindings.BoundaryConditionsBind as uc_bind
 import teaser.Logic.Utilis as utilis
 import warnings
 
@@ -294,7 +294,7 @@ class BoundaryConditions(UseConditions):
 
         for usage in \
             self.parent.parent.parent.data.conditions_bind.\
-                UseConditions18599:
+                BoundaryConditions:
 
             if usage.usage == zone_usage:
 
@@ -387,7 +387,7 @@ class BoundaryConditions(UseConditions):
 
         add_to_xml = True
 
-        for check in xml_parse.UseConditions18599:
+        for check in xml_parse.BoundaryConditions:
             if check.usage == self.usage:
                 warnings.warn("Usage already exist in this XML, consider " +
                               "revising your inputs. The UseConditions is  " +
@@ -397,7 +397,7 @@ class BoundaryConditions(UseConditions):
 
         if add_to_xml is True:
 
-            usage_pyxb = uc_bind.UseConditions18599Type()
+            usage_pyxb = uc_bind.BoundaryConditionsType()
             usage_pyxb.UsageOperationTime = uc_bind.UsageOperationTimeType()
             usage_pyxb.Lighting = uc_bind.LightingType()
             usage_pyxb.RoomClimate = uc_bind.RoomClimateType()
