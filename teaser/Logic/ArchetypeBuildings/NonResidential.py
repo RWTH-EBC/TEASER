@@ -36,7 +36,7 @@ class NonResidential(Building):
         self.file_ahu = "\\AHU_"+self.name+".mat"
         self.file_internal_gains = "\\InternalGains_"+self.name+".mat"
         self.file_set_t = "\\Tset_"+self.name+".mat"
-        self.file_weather = self.parent.weather_file_name		
+        self.file_weather = self.parent.weather_file_path
 
     def generate_archetype(self):
         '''Generates an archetype building.
