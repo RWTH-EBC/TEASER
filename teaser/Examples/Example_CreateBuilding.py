@@ -32,8 +32,8 @@ def example_create_building():
     Building class, with the project as a parent. This automatically adds the 
     specific building and all its future changes to the project.
     '''
-    prj = Project(load_data = True)
-    bldg = Building(parent = prj)
+    prj = Project(load_data=True)
+    bldg = Building(parent=prj)
 
     '''Set some building parameters'''
 
@@ -74,7 +74,9 @@ def example_create_building():
                      "Outer Wall 3": [bldg.year_of_construction, 'heavy',
                                       10.0, 90.0, 180.0],
                      "Outer Wall 4": [bldg.year_of_construction, 'heavy',
-                                      14.0, 90.0, 270.0]}
+                                      14.0, 90.0, 270.0],
+                     "Outer Wall 5": [bldg.year_of_construction, 'heavy',
+                                      14.0, 45.0, 270.0]}
 
     in_wall_dict = {"Inner Wall 1": [bldg.year_of_construction, 'light', 10.0],
                     "Inner Wall 2": [bldg.year_of_construction, 'heavy', 14.0],
@@ -150,6 +152,108 @@ def example_create_building():
     ground.name = "Ground floor"
     ground.load_type_element(bldg.year_of_construction, 'heavy')
     ground.area = 140.0
+
+
+    tz2 = ThermalZone(parent = bldg)
+    tz2.name = "Living Roosdfm"
+    tz2.area = 140.0
+    tz2.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+    tz2.infiltration_rate = 0.5
+
+    '''Instantiate UseConditions18599 class with thermal zone as parent,
+    and load the use conditions for the usage 'Living' '''
+
+    tz2.use_conditions = UseConditions18599(parent = tz)
+    tz2.use_conditions.load_use_conditions("Living")
+
+    out_wall_dict2 = { "Outer Wall 1": [bldg.year_of_construction, 'heavy',
+                                      10.0, 90.0, 0.0],
+                     "Outer Wall 2": [bldg.year_of_construction, 'heavy',
+                                      14.0, 90.0, 90.0],
+                     "Outer Wall 3": [bldg.year_of_construction, 'heavy',
+                                      10.0, 90.0, 180.0],
+                     "Outer Wall 4": [bldg.year_of_construction, 'heavy',
+                                      14.0, 90.0, 270.0],
+                     "Outer Wall 5": [bldg.year_of_construction, 'heavy',
+                                      14.0, 80.0, 210.0]}
+
+    in_wall_dict2 = {"Inner Wall 1": [bldg.year_of_construction, 'light', 10.0],
+                    "Inner Wall 2": [bldg.year_of_construction, 'heavy', 14.0],
+                    "Inner Wall 3": [bldg.year_of_construction, 'light', 10.0]}
+
+    win_dict2 = {"Window 1": [bldg.year_of_construction,
+                             5.0, 90.0, 90.0],
+                "Window 2": [bldg.year_of_construction,
+                             8.0, 90.0, 180.0],
+                "Window 3": [bldg.year_of_construction,
+                             5.0, 90.0, 270.0]}
+    for key, value in out_wall_dict2.items():
+        '''instantiate OuterWall class'''
+        out_wall = OuterWall(parent = tz2)
+        out_wall.name = key
+        '''load typical construction, based on year of construction and
+        construction type'''
+        out_wall.load_type_element(year = value[0],
+                                   construction = value[1])
+        out_wall.area = value[2]
+        out_wall.tilt = value[3]
+        out_wall.orientation = value[4]
+
+    for key, value in in_wall_dict2.items():
+        print(value)
+        '''instantiate InnerWall class'''
+        in_wall = InnerWall(parent = tz2)
+        in_wall.name = key
+        '''load typical construction, based on year of construction and
+        construction type'''
+        in_wall.load_type_element(year = value[0],
+                                  construction = value[1])
+        in_wall.area = value[2]
+
+    for key, value in win_dict2.items():
+        '''instantiate Window class'''
+        win = Window(parent = tz2)
+        win.name = key
+        win.area = value[1]
+        win.tilt = value[2]
+        win.orientation = value[3]
+        '''
+        We know the exact properties of the window, thus we set them instead
+        of loading a typical construction
+        '''
+        win.inner_convection = 1.7
+        win.inner_radiation = 5.0
+        win.outer_convection = 20.0
+        win.outer_radiation = 5.0
+        win.g_value = 0.789
+        win.a_conv = 0.03
+        win.shading_g_total = 1.0
+        win.shading_max_irr = 180.0
+        '''Instantiate a Layer class, with window as parent, set attributes'''
+        win_layer = Layer(parent = win)
+        win_layer.id = 1
+        win_layer.thickness = 0.024
+        '''Instantiate a Material class, with window layer as parent,
+        set attributes'''
+        win_material = Material(win_layer)
+        win_material.name = "GlasWindow"
+        win_material.thermal_conduc = 0.067
+        win_material.transmittance = 0.9
+
+    '''Define a Rooftop and a Groundfloor, we don't need to set tilt and
+    orientation because we take the default values'''
+
+    roof = Rooftop(parent = tz2)
+    roof.name = "Roof"
+    roof.load_type_element(bldg.year_of_construction, 'heavy')
+    roof.area = 140.0
+
+    ground = GroundFloor(parent = tz2)
+    ground.name = "Ground floor"
+    ground.load_type_element(bldg.year_of_construction, 'heavy')
+    ground.area = 140.0
+
+
 
     '''
     We calculate the RC Values according to ebc procedure

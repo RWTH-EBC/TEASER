@@ -122,7 +122,7 @@ class Building(object):
 
         self.orientation_bldg = []
         self.tilt_bldg = []
-        self._calculation_method = None
+        self.calculation_method = None
 
     def set_outer_wall_area(self, new_area, orientation):
         '''Outer area wall setter
@@ -330,6 +330,104 @@ class Building(object):
 
         to do: implement function, that sorts outer_walls and windows
         '''
+
+        for zone in self.thermal_zones:
+            for wall in zone.outer_walls:
+                if wall.orientation in self.orientation_bldg:
+                    pass
+                else:
+                    self.orientation_bldg.append(wall.orientation)
+        self.orientation_bldg.sort()
+        for zone in self.thermal_zones:
+            zone.weightfactor_ow = []
+            zone.tilt_wall = []
+            zone.tilt_win = []
+            zone.orientation_wall = []
+            zone.orientation_win = []
+            for orientation in self.orientation_bldg:
+                zone.orientation_wall.append(zone.find_win_wall(
+                    orientation)[0])
+                zone.orientation_win.append(zone.find_win_wall(
+                    orientation)[1])
+
+        print(self.orientation_bldg)
+
+
+        """
+        self.test2 = []
+        for zone in self.thermal_zones:
+            self.test2.append([zone, zone.orientation_wall, zone.tilt_wall])
+        self.test3 = []
+        for test in self.test2:
+            if len(test[1]) > len(self.test3):
+                self.test3 = test[1]
+
+        for zone in self.thermal_zones:
+                for asd in zone.orientation_wall:
+                    if asd in self.test3:
+                        pass
+                    else:
+                        self.test3.append(asd)
+
+        self.test3.sort()
+
+        try:
+            i = self.test3.index(-2)
+            del self.test3[i]
+        except:
+            pass
+
+        if self.test3[0] == -1 or None:
+            self.test3.insert(len(self.test3), self.test3.pop(0))
+
+        for zone in self.thermal_zones:
+            zone.weightfactor_ow = []
+            zone.tilt_wall = []
+            zone.tilt_win = []
+            zone.orientation_wall = []
+            zone.orientation_win = []
+            for i,orient in enumerate(self.test3):
+                if zone.find_win_wall(orient) is not None:
+                    walls = zone.find_win_wall(orient)[0]
+                    wins = zone.find_win_wall(orient)[1]
+
+
+
+
+                    for wall in zone.find_wall(orient):
+                        zone.weightfactor_ow.append(wall.wf_out)
+                        zone.orientation_wall.append(wall.orientation)
+                        zone.tilt_wall.append(wall.tilt)
+                elif zone.find_wall(orient) is None:
+                    zone.weightfactor_ow.append(0)
+                    zone.orientation_wall.append(orient)
+                    zone.tilt_wall.append(None)
+                if zone.find_win(orient) is not None:
+                    for win in zone.find_win(orient):
+                        zone.weightfactor_win.append(win.wf_out)
+                        zone.orientation_win.append(win.orientation)
+                        zone.tilt_win.append(win.tilt)
+                elif zone.find_win(orient) is None:
+                    zone.weightfactor_win.append(0)
+                    zone.orientation_win.append(orient)
+                    zone.tilt_win.append(None)
+
+        for zone in self.thermal_zones:
+            print(zone.orientation_wall)
+            print(zone.tilt_wall)
+
+
+        self.orie = []
+        self.tilt = []
+        for key, value in self.orientation_bldg.items():
+            for i in value:
+                for j in i[1:]:
+                    for y in j:
+                        self.orie.append(i[0])
+                        self.tilt.append(y)
+        print(self.orie)
+        print(self.tilt)
+
         nr_of_orientation = {}
 
         for zone in self.thermal_zones:
@@ -342,14 +440,7 @@ class Building(object):
             self.orientation_bldg = list(set(self.orientation_bldg) | set(value))
         self.orientation_bldg.sort()
 
-        try:
-            i = self.orientation_bldg.index(-2)
-            del self.orientation_bldg[i]
-        except:
-            pass
 
-        if self.orientation_bldg[0] == -1 or None:
-            self.orientation_bldg.insert(len(self.orientation_bldg), self.orientation_bldg.pop(0))
 
         for zone in self.thermal_zones:
             for test in self.orientation_bldg:
@@ -361,6 +452,7 @@ class Building(object):
                     zone.weightfactor_win.append(zone.find_win(test).wf_out)
                 else:
                     zone.weightfactor_win.append(0)
+        """
 
     def retrofit_building(self, year_of_retrofit=None,
                           window_type=None,
