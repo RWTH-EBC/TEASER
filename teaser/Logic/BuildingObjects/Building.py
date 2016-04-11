@@ -346,7 +346,11 @@ class Building(object):
                 pass
             else:
                 self.orient_tilt.append(i)
+        self.orient_tilt.sort(key=lambda x: x[0])
 
+        if self.orient_tilt[0][0] == -1:
+            self.orient_tilt.insert(len(self.orient_tilt), self.orient_tilt.pop(0))
+        
         for i in self.orient_tilt:
             self.orientation_bldg.append(i[0])
             self.tilt_bldg.append(i[1])
