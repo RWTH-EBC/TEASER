@@ -3673,7 +3673,7 @@ class MainUI(QDialog):
         else:
             self.element_orientation_combobox.setCurrentIndex(-1)
 
-        self.element_name_label = QtGui.QLabel("Id")
+        self.element_name_label = QtGui.QLabel("Name")
         self.element_name_textbox = QtGui.QLineEdit()
         self.element_name_textbox.setObjectName(
             _fromUtf8("ElementNameTextBox"))
