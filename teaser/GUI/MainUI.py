@@ -1250,7 +1250,8 @@ class MainUI(QDialog):
         self.set_all_constr_element_material_list_view.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
         self.set_all_constr_element_material_list_view.doubleClicked.connect(
-            self.show_layer_build_ui_all_constr)
+            #self.show_layer_build_ui_all_constr)
+            self.show_layer_build_ui)
 
         self.set_all_constr_save_button = QtGui.QPushButton()
         self.set_all_constr_save_button.setText("Save")
@@ -4142,150 +4143,11 @@ class MainUI(QDialog):
         self.simulation_window_ui.setWindowModality(Qt.ApplicationModal)
         self.simulation_window_ui.show()
 
-    def show_layer_build_ui_all_constr(self, item):
-        ''' Opens a window to see all attributes from the
-        currently selected layer.        
-        '''
-
-        self.layer_build_ui = QtGui.QWizardPage()
-        self.layer_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        self.layer_build_ui.setWindowTitle("Layer Details")
-        self.layer_build_ui.setFixedWidth(450)
-        self.layer_build_ui.setFixedHeight(300)
-        self.layer_build_ui_window_layout = QtGui.QGridLayout()
-        self.layer_build_ui.setLayout(self.layer_build_ui_window_layout)
-        self.layer_model = QtGui.QStandardItemModel()
-        self.materials = Controller.get_materials_from_file(self.project)
-        self.is_switchable = False
-
-        current_item = self.element_layer_model_set_all_constr.itemFromIndex(item)
-        for layer in self.all_constr_layer_list:
-            if (layer.internal_id == current_item.internal_id):
-                self.current_layer = layer
-                break
-        self.layer_general_layout = QtGui.QGridLayout()
-        self.layer_general_layout_group_box = QtGui.QGroupBox("Layer Values")
-        self.layer_general_layout_group_box.setLayout(
-            self.layer_general_layout)
-
-        self.thickness_label = QtGui.QLabel("Layer Thickness")
-        self.thickness_textbox = QtGui.QLineEdit()
-        self.thickness_textbox.setObjectName(_fromUtf8("ThicknessTextBox"))
-        self.thickness_textbox.setText(str(self.current_layer.thickness))
-
-        self.material_label = QtGui.QLabel("Material")
-        self.material_combobox = QtGui.QComboBox()
-        self.connect(self.material_combobox, QtCore.SIGNAL(
-            "currentIndexChanged(int)"), self.switch_material)
-        temp_list = []
-        for material in self.materials:
-            if material.name not in temp_list:
-                temp_list.append(material.name)
-        if self.current_layer.material.name not in temp_list and\
-                self.current_layer.material.name is not None:
-            temp_list.append(self.current_layer.material.name)
-        self.material_combobox.addItems(sorted(temp_list))
-        self.material_combobox.setCurrentIndex(
-            self.material_combobox.findText(self.current_layer.material.name))
-        self.is_switchable = True
-
-        self.material_density_label = QtGui.QLabel("Density")
-        self.material_density_textbox = QtGui.QLineEdit()
-        self.material_density_textbox.setObjectName(
-            _fromUtf8("MaterialDensityTextBox"))
-        self.material_density_textbox.setText(
-            str(self.current_layer.material.density))
-
-        self.material_thermal_conduc_label = QtGui.QLabel("ThermalConduc")
-        self.material_thermal_conduc_textbox = QtGui.QLineEdit()
-        self.material_thermal_conduc_textbox.setObjectName(
-            _fromUtf8("MaterialThermalConducTextBox"))
-        self.material_thermal_conduc_textbox.setText(
-            str(self.current_layer.material.thermal_conduc))
-
-        self.material_heat_capac_label = QtGui.QLabel("HeatCapac")
-        self.material_heat_capac_textbox = QtGui.QLineEdit()
-        self.material_heat_capac_textbox.setObjectName(
-            _fromUtf8("MaterialHeatCapacTextBox"))
-        self.material_heat_capac_textbox.setText(
-            str(self.current_layer.material.heat_capac))
-
-        self.material_solar_absorp_label = QtGui.QLabel("SolarAbsorp")
-        self.material_solar_absorp_textbox = QtGui.QLineEdit()
-        self.material_solar_absorp_textbox.setObjectName(
-            _fromUtf8("MaterialSolarAbsorpTextBox"))
-        self.material_solar_absorp_textbox.setText(
-            str(self.current_layer.material.solar_absorp))
-
-        self.material_ir_emissivity_label = QtGui.QLabel("IrEmissivity")
-        self.material_ir_emissivity_textbox = QtGui.QLineEdit()
-        self.material_ir_emissivity_textbox.setObjectName(
-            _fromUtf8("MaterialIrEmissivityTextBox"))
-        self.material_ir_emissivity_textbox.setText(
-            str(self.current_layer.material.ir_emissivity))
-
-        self.material_transmittance_label = QtGui.QLabel("Transmittance")
-        self.material_transmittance_textbox = QtGui.QLineEdit()
-        self.material_transmittance_textbox.setObjectName(
-            _fromUtf8("MaterialTransmittanceTextBox"))
-        self.material_transmittance_textbox.setText(
-            str(self.current_layer.material.transmittance))
-
-        self.layer_save_button = QtGui.QPushButton()
-        self.layer_save_button.setText("Save")
-
-        self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.save_changed_layer_values_set_all_constr)
-        self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.update_set_all_construction)
-        self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
-
-        self.layer_cancel_button = QtGui.QPushButton()
-        self.layer_cancel_button.setText("Cancel")
-        self.connect(self.layer_cancel_button, SIGNAL(
-            "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
-
-        self.layer_general_layout.addWidget(self.thickness_label, 1, 0)
-        self.layer_general_layout.addWidget(self.thickness_textbox, 1, 1)
-        self.layer_general_layout.addWidget(self.material_label, 2, 0)
-        self.layer_general_layout.addWidget(self.material_combobox, 2, 1)
-        self.layer_general_layout.addWidget(self.material_density_label, 3, 0)
-        self.layer_general_layout.addWidget(
-            self.material_density_textbox, 3, 1)
-        self.layer_general_layout.addWidget(
-            self.material_thermal_conduc_label, 4, 0)
-        self.layer_general_layout.addWidget(
-            self.material_thermal_conduc_textbox, 4, 1)
-        self.layer_general_layout.addWidget(
-            self.material_heat_capac_label, 5, 0)
-        self.layer_general_layout.addWidget(
-            self.material_heat_capac_textbox, 5, 1)
-        self.layer_general_layout.addWidget(
-            self.material_solar_absorp_label, 6, 0)
-        self.layer_general_layout.addWidget(
-            self.material_solar_absorp_textbox, 6, 1)
-        self.layer_general_layout.addWidget(
-            self.material_ir_emissivity_label, 7, 0)
-        self.layer_general_layout.addWidget(
-            self.material_ir_emissivity_textbox, 7, 1)
-        self.layer_general_layout.addWidget(
-            self.material_transmittance_label, 8, 0)
-        self.layer_general_layout.addWidget(
-            self.material_transmittance_textbox, 8, 1)
-        self.layer_general_layout.addWidget(self.layer_save_button, 9, 0)
-        self.layer_general_layout.addWidget(self.layer_cancel_button, 9, 1)
-
-        self.layer_build_ui_window_layout.addWidget(
-            self.layer_general_layout_group_box)
-        self.layer_build_ui.setWindowModality(Qt.ApplicationModal)
-        self.layer_build_ui.show()
-        
     def show_layer_build_ui(self, item):
         ''' Opens a window to see all attributes from the
         currently selected layer.        
         '''
-        
+
         self.layer_build_ui = QtGui.QWizardPage()
         self.layer_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.layer_build_ui.setWindowTitle("Layer Details")
@@ -4297,8 +4159,16 @@ class MainUI(QDialog):
         self.materials = Controller.get_materials_from_file(self.project)
         self.is_switchable = False
 
-        current_item = self.element_layer_model.itemFromIndex(item)
-        for layer in self.current_element.layer:
+        sender = self.sender()
+        if(sender == self.element_material_list_view):
+            current_item = self.element_layer_model.itemFromIndex(item)
+            current_layer = self.current_element.layer
+        else:
+            current_item = \
+                self.element_layer_model_set_all_constr.itemFromIndex(item)
+            current_layer = self.all_constr_layer_list
+
+        for layer in current_layer:
             if (layer.internal_id == current_item.internal_id):
                 self.current_layer = layer
                 break
@@ -4372,10 +4242,19 @@ class MainUI(QDialog):
 
         self.layer_save_button = QtGui.QPushButton()
         self.layer_save_button.setText("Save")
-        self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.save_changed_layer_values)
-        self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.update_element_details)
+
+        if(sender == self.element_material_list_view):
+            self.connect(self.layer_save_button, SIGNAL(
+             "clicked()"), self.save_changed_layer_values)
+            self.connect(self.layer_save_button, SIGNAL(
+             "clicked()"), self.update_element_details)
+        else:
+            QtGui.QMessageBox.information(self, 'Message', "Geschafft2")
+            self.connect(self.layer_save_button, SIGNAL(
+             "clicked()"), self.save_changed_layer_values_set_all_constr)
+            self.connect(self.layer_save_button, SIGNAL(
+             "clicked()"), self.update_set_all_construction)
+
         self.connect(self.layer_save_button, SIGNAL(
             "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
 
