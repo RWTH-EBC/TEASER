@@ -374,7 +374,8 @@ class Building(object):
                     zone.weightfactor_ow.append(wall.wf_out)
                 if win is None:
                     zone.weightfactor_win.append(0.0)
-                    zone.weightfactor_win.append(0.0)
+                    zone.window_area_list.append(0.0)
+                    zone.g_sunblind_list.append(0.0)
                 else:
                     zone.weightfactor_win.append(win.wf_out)
                     zone.window_area_list.append(win.area)
