@@ -1251,7 +1251,6 @@ class MainUI(QDialog):
         self.set_all_constr_element_material_list_view.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
         self.set_all_constr_element_material_list_view.doubleClicked.connect(
-            #self.show_layer_build_ui_all_constr)
             self.show_layer_build_ui)
 
         self.set_all_constr_save_button = QtGui.QPushButton()
