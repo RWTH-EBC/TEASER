@@ -45,8 +45,6 @@ def example_type_building():
                          with_ahu=True,
                          construction_type="heavy")
 
-    prj.buildings[0].thermal_zones.append(prj.buildings.)
-
     """To export the parameters to a Modelica record, we use the export_record
     function. path = None indicates, that we want to store the records in \
     TEASER'S Output folder"""

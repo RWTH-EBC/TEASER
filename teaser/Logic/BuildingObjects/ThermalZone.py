@@ -606,6 +606,7 @@ class ThermalZone(object):
         self.weightfactor_ow = []
         self.weightfactor_ground = []
         self.orientation_wall = []
+        self.tilt_wall = []
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
         self.r_rad_inner_ow = 0.0
@@ -626,6 +627,7 @@ class ThermalZone(object):
         self.g_sunblind_list = []
         self.window_area_list = []
         self.orientation_win = []
+        self.tilt_win = []
         self.ua_value_win = 0.0
         self.r_conv_inner_win = 0.0
         self.r_rad_inner_win = 0.0
