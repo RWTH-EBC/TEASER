@@ -150,7 +150,7 @@ class Residential(TypeBuilding):
 
     def __init__(self, 
                  parent, 
-                 name, 
+                 name=None,
                  year_of_construction=None,
                  number_of_floors=None, 
                  height_of_floors=None,

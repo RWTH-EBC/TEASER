@@ -221,7 +221,7 @@ class ThermalZone(object):
         else:
             pass
 
-        if len(self.outer_walls) > 0:
+        if len(self.inner_walls) > 0:
 
             if len(self.inner_walls) == 1:
                 self.r1_iw = self.inner_walls[0].r1
