@@ -346,11 +346,12 @@ class Building(object):
                 pass
             else:
                 self.orient_tilt.append(i)
+
         self.orient_tilt.sort(key=lambda x: x[0])
 
         if self.orient_tilt[0][0] == -1:
             self.orient_tilt.insert(len(self.orient_tilt), self.orient_tilt.pop(0))
-        
+
         for i in self.orient_tilt:
             self.orientation_bldg.append(i[0])
             self.tilt_bldg.append(i[1])
@@ -373,7 +374,7 @@ class Building(object):
                     zone.weightfactor_ow.append(wall.wf_out)
                 if win is None:
                     zone.weightfactor_win.append(0.0)
-
+                    zone.weightfactor_win.append(0.0)
                 else:
                     zone.weightfactor_win.append(win.wf_out)
                     zone.window_area_list.append(win.area)

@@ -24,7 +24,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     weightfactorswindow = {${list_to_string(zone.weightfactor_win)}},
     weightfactorswall = {${list_to_string(zone.weightfactor_ow)}},
     weightfactorground = ${list_to_string(zone.weightfactor_ground)},
-	orientationswallshorizontal = {${list_to_string(zone.tilt_zone)}},
+	orientationswallshorizontal = {${list_to_string(zone.tilt_wall)}},
     Ai = ${zone.area_iw},
     withInnerwalls = ${element_check(zone.inner_walls)},
     R1i = ${zone.r1_iw},

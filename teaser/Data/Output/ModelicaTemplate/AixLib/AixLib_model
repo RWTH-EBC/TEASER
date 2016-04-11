@@ -53,6 +53,8 @@ model ${bldg.name}
       Longitude=${bldg.longitude},
     % endif
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(
+    ${list_to_string(bldg.orientation_bldg)},
+    ${list_to_string(bldg.tilt_bldg)}
     Azimut=${get_azimut(bldg._outer_area)}))
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
