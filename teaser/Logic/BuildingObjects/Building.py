@@ -122,7 +122,7 @@ class Building(object):
 
         self.orientation_bldg = []
         self.tilt_bldg = []
-        self._calculation_method = "vdi"
+        self._calculation_method = None
 
     def set_outer_wall_area(self, new_area, orientation):
         '''Outer area wall setter
@@ -299,7 +299,7 @@ class Building(object):
         for key in self.window_area:
             self.window_area[key] = self.get_window_area(key)
 
-    def calc_building_parameter(self, calculation_core):
+    def calc_building_parameter(self, calculation_method=None):
         '''calc all building parameters
 
         This functions calculates the parameters of all zones in a building
@@ -309,13 +309,17 @@ class Building(object):
         Parameters
         ----------
 
-        calculation_core : string
+        calculation_method : string
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
+        if calculation_method is not None:
+            self.calculation_method = calculation_method
+        else:
+            pass
 
         for zone in self.thermal_zones:
-            zone.calc_zone_parameters(calculation_core)
+            zone.calc_zone_parameters(self.calculation_method)
             self.sum_heating_load += zone.heating_load
         self.compare_list()
 
@@ -671,8 +675,8 @@ class Building(object):
 
         scipy.io.savemat(path,
                          mdict={'Internals': internal_boundary},
-                         appendmat = False,
-                         format = '4')
+                         appendmat=False,
+                         format='4')
 
     def add_zone(self, thermal_zone):
         '''Adds a thermal zone to the corresponding list
@@ -711,7 +715,8 @@ class Building(object):
 
                 self.__parent.buildings.append(self)
         else:
-            pass
+
+            self.__parent = None
 
     @property
     def name(self):
@@ -740,14 +745,14 @@ class Building(object):
     @year_of_construction.setter
     def year_of_construction(self, value):
 
-        if isinstance(value, int) or value == None:
-            
+        if isinstance(value, int) or value is None:
+
             self.__year_of_construction = value
         else:
             try:
                 value = int(value)
                 self.__year_of_construction = value
-                
+
             except:
                 raise ValueError("Can't convert year of construction to int")
 
@@ -758,17 +763,17 @@ class Building(object):
     @number_of_floors.setter
     def number_of_floors(self, value):
 
-        if isinstance(value, int) or value == None:
-            
+        if isinstance(value, int) or value is None:
+
             self.__number_of_floors = value
         else:
             try:
                 value = int(value)
                 self.__number_of_floors = value
-                
+
             except:
                 raise ValueError("Can't convert number of floors to int")
-                
+
     @property
     def height_of_floors(self):
         return self.__height_of_floors
@@ -776,19 +781,19 @@ class Building(object):
     @height_of_floors.setter
     def height_of_floors(self, value):
 
-        if isinstance(value, float) or value == None:
-            
+        if isinstance(value, float) or value is None:
+
             self.__height_of_floors = value
         else:
             try:
                 value = float(value)
                 self.__height_of_floors = value
-                
+
             except:
                 raise ValueError("Can't convert height of floors to float")
-        
+
     @property
-    def net_leased_area(self):        
+    def net_leased_area(self):
         return self.__net_leased_area
 
     @net_leased_area.setter
@@ -847,14 +852,14 @@ class Building(object):
             self._year_of_retrofit = value
         else:
             raise ValueError("Specify year of construction first")
-    
+
     @property
     def central_ahu(self):
         return self._central_ahu
-        
+
     @central_ahu.setter
     def central_ahu(self, value):
-        
+
         ass_error_1 = "central AHU has to be an instance of BuildingAHU()"
 
         assert type(value).__name__ == ("BuildingAHU"), ass_error_1
@@ -873,4 +878,9 @@ class Building(object):
 
         assert value != "ebc" or value != "vdi", ass_error_1
 
-        self._calculation_method = value
+        if self.parent is None and value is None:
+            self._calculation_method = "vdi"
+        elif self.parent is not None and value is None:
+            self._calculation_method = self.parent.calculation_method
+        elif value is not None:
+            self._calculation_method = value
