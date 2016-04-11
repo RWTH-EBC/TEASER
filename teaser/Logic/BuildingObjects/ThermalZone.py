@@ -107,7 +107,6 @@ class ThermalZone(object):
         self.r_rest_ow = 0.0
         self.r_total = 0.0
         self.weightfactor_ow = []
-        self.weightfactor_ow_dict = {}
         self.weightfactor_ground = []
         self.tilt_wall = []
         self.orientation_wall = []
@@ -166,8 +165,6 @@ class ThermalZone(object):
             for out_wall in self.outer_walls:
                 out_wall.calc_equivalent_res()
                 out_wall.calc_ua_value()
-                self.orientation_wall.append(out_wall.orientation)
-                self.tilt_wall.append(out_wall.tilt)
 
         else:
             warnings.warn("No outer walls are defined")
@@ -184,8 +181,6 @@ class ThermalZone(object):
             for win in self.windows:
                 win.calc_equivalent_res()
                 win.calc_ua_value()
-                self.orientation_win.append(win.orientation)
-                self.tilt_win.append(win.tilt)
 
         else:
             warnings.warn("No outer walls are defined")
@@ -497,45 +492,23 @@ class ThermalZone(object):
             raise ValueError("specify calculation method correctly")
 
 
-    def find_wall(self, orientation):
-        wall_list = []
+    def find_wall(self, orientation, tilt):
         for i in self.outer_walls:
-            if i.orientation == orientation:
-                wall_list.append(i)
-            else:
-                pass
-        if len(wall_list) != 0:
-            return wall_list
-        else:
-            return None
-
-    def find_win(self, orientation):
-        win_list = []
-        for i in self.windows:
-            if i.orientation == orientation:
+            if i.orientation == orientation and i.tilt == tilt:
                 return i
             else:
                 pass
-        else:
-            return None
 
-    def find_win_wall(self, orientation):
-        win_list = []
-        wall_list = []
-        for i in self.outer_walls:
-            if i.orientation == orientation:
-                wall_list.append(i)
-                if self.find_win(orientation) in win_list:
-                    win_list.append(None)
-                else:
-                    win_list.append(self.find_win(orientation))
+        return None
+
+    def find_win(self, orientation, tilt):
+        for i in self.windows:
+            if i.orientation == orientation and i.tilt == tilt:
+                return i
             else:
                 pass
-        if len(wall_list) != 0:
-            return wall_list, win_list
-        else:
-            return None
 
+        return None
 
     def set_inner_wall_area(self):
         '''Sets the inner wall area.
