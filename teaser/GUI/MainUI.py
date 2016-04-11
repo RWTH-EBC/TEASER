@@ -1238,6 +1238,7 @@ class MainUI(QDialog):
                      SIGNAL("clicked()"), 
                      self.delete_selected_layer_set_all_constr)
 
+        self.element_material_list_view = QtGui.QListView()
         self.set_all_constr_element_material_list_view = QtGui.QListView()
         self.set_all_constr_element_material_list_view.setGeometry(
             QtCore.QRect(10, 200, 170, 300))
@@ -3779,6 +3780,7 @@ class MainUI(QDialog):
         self.connect(self.element_delete_material_button, SIGNAL("clicked()"),
                      self.delete_selected_layer)
 
+        self.set_all_constr_element_material_list_view = QtGui.QListView()
         self.element_material_list_view = QtGui.QListView()
         self.element_material_list_view.setGeometry(
             QtCore.QRect(10, 200, 170, 300))
@@ -4249,7 +4251,6 @@ class MainUI(QDialog):
             self.connect(self.layer_save_button, SIGNAL(
              "clicked()"), self.update_element_details)
         else:
-            QtGui.QMessageBox.information(self, 'Message', "Geschafft2")
             self.connect(self.layer_save_button, SIGNAL(
              "clicked()"), self.save_changed_layer_values_set_all_constr)
             self.connect(self.layer_save_button, SIGNAL(
