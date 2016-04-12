@@ -322,14 +322,15 @@ class Building(object):
         for zone in self.thermal_zones:
             zone.calc_zone_parameters(self.calculation_method)
             self.sum_heating_load += zone.heating_load
-        self.compare_list()
+        self.compare_orientation()
 
-    def compare_list(self):
-        '''dirty dirty function!!!!
+    def compare_orientation(self):
+        '''Fills the zone weightfactors according to orientation and tilt of
+        building
 
-        compares orientation, tilts etc
+        compares orientation and tilt of all outer building elements and then
+        creates lists for zone weightfactors and building orientation and tilt
 
-        to do: implement function, that sorts outer_walls and windows
         '''
 
         orient_tilt_help = []
@@ -338,6 +339,11 @@ class Building(object):
             for wall in zone.outer_walls:
                 if wall.orientation != -2:
                     orient_tilt_help.append([wall.orientation, wall.tilt])
+                else:
+                    pass
+            for win in zone.windows:
+                if win.orientation != -2:
+                    orient_tilt_help.append([win.orientation, win.tilt])
                 else:
                     pass
 
