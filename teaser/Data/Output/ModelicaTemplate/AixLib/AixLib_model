@@ -54,9 +54,9 @@ model ${bldg.name}
     % endif
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition
     (nSurfaces=${len(bldg.orientation_bldg)},
-    Name={${orientation_name(bldg.orientation_bldg)}},
+    name={${orientation_name(bldg.orientation_bldg)}},
     Azimut={${get_azimut(bldg.orientation_bldg)}},
-    Tilt={${list_to_string(bldg.tilt_bldg)}})
+    Tilt={${list_to_string(bldg.tilt_bldg)}}))
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
@@ -161,9 +161,9 @@ end ${bldg.name};
     % endif
     SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition
     (nSurfaces=${len(bldg.orientation_bldg)},
-    Name={${orientation_name(bldg.orientation_bldg)}},
+    name={${orientation_name(bldg.orientation_bldg)}},
     Azimut={${get_azimut(bldg.orientation_bldg)}},
-    Tilt={${list_to_string(bldg.tilt_bldg)}})
+    Tilt={${list_to_string(bldg.tilt_bldg)}}))
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
@@ -269,10 +269,8 @@ end ${bldg.name};
 ##get azimut for modelica
 <%def name="get_azimut(list)", filter="trim">
   <%
-  print("Azimut")
   newlist = []
   for element in list:
-    print(element)
     if 0 < element < 360:
         newlist.append(-180.0+element)
     elif element == 0:
