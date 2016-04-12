@@ -109,7 +109,6 @@ class ThermalZone(object):
         self.weightfactor_ow = []
         self.weightfactor_ow_dict = {}
         self.weightfactor_ground = []
-        #self.walls_tilt_list = []
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
         self.r_rad_inner_ow = 0.0
@@ -552,7 +551,6 @@ class ThermalZone(object):
 
         self.fill_sunblind_list(orientation_win)
         self.fill_win_area_list(orientation_win)
-        #self.fill_walls_tilt_list()
 
     def compare_area_dicts(self, dict1, dict2):
         '''Compares the orientations of the dicts
@@ -608,25 +606,6 @@ class ThermalZone(object):
                     if window.orientation == key:
                         roof_help = window.area
         self.window_area_list.append(roof_help)
-
-    # def fill_walls_tilt_list(self):
-    #     '''fills the walls_tilt_list (needed for modelica specific export)
-    #     '''
-    #
-    #     orientation_ow_help = {}
-    #     for wall_count in self.outer_walls:
-    #         if wall_count.orientation in orientation_ow_help:
-    #             pass
-    #         else:
-    #             if wall_count.orientation != -2:
-    #                 orientation_ow_help[wall_count.orientation] =  \
-    #                                                 wall_count.tilt
-    #     orientation_ow = \
-    #         collections.OrderedDict(sorted(orientation_ow_help.items()))
-    #
-    #     self.walls_tilt_list.append(orientation_ow.values())
-    #     print(orientation_ow.values())
-
 
     def set_inner_wall_area(self):
         '''Sets the inner wall area.
@@ -723,7 +702,6 @@ class ThermalZone(object):
         self.r_total = 0.0
         self.weightfactor_ow = []
         self.weightfactor_ground = []
-        self.walls_tilt_list = []
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
         self.r_rad_inner_ow = 0.0
