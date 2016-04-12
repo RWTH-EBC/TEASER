@@ -1,6 +1,6 @@
 record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.replace(" ", "")}"
   extends AixLib.DataBase.Buildings.ZoneBaseRecord(
-    n = ${get_n(zone.outer_walls)},
+    n = ${len(zone.tilt_wall)},
     Heater_on = true,
     Cooler_on = false,
     l_cooler = ${zone.cooling_load},
