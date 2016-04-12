@@ -52,10 +52,11 @@ model ${bldg.name}
     % else:
       Longitude=${bldg.longitude},
     % endif
-    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(
-    ${list_to_string(bldg.orientation_bldg)},
-    ${list_to_string(bldg.tilt_bldg)}
-    Azimut=${get_azimut(bldg._outer_area)}))
+    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition
+    (nSurfaces=${len(bldg.orientation_bldg)},
+    Name={${orientation_name(bldg.orientation_bldg)}},
+    Azimut={${get_azimut(bldg.orientation_bldg)}},
+    Tilt={${list_to_string(bldg.tilt_bldg)}})
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
@@ -158,8 +159,11 @@ end ${bldg.name};
     % else:
       Longitude=${bldg.longitude},
     % endif
-    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(nSurfaces=${len(bldg.orientation_bldg)},
-    Azimut={${list_to_string(bldg.orientation_bldg)}}, Tilt={${list_to_string(bldg.tilt_bldg)}}))
+    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition
+    (nSurfaces=${len(bldg.orientation_bldg)},
+    Name={${orientation_name(bldg.orientation_bldg)}},
+    Azimut={${get_azimut(bldg.orientation_bldg)}},
+    Tilt={${list_to_string(bldg.tilt_bldg)}})
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
@@ -263,17 +267,34 @@ end ${bldg.name};
 </%def>
 
 ##get azimut for modelica
-<%def name="get_azimut(dictionary)", filter="trim">
+<%def name="get_azimut(list)", filter="trim">
   <%
-  lis = list(dictionary.keys())
-  lis = sorted(lis)
-  newlist = [((element-180.0) * -1.0) for element in lis if element != -1.0
-             and element != -2.0]
-  newlist[1], newlist[3] = newlist[3], newlist[1]
-  string_of_list = "{"
-  for element in newlist:
-    string_of_list = string_of_list + str(element) + ','
-  string_of_list = string_of_list[:-1] + ', 0}'
-return string_of_list
+  print("Azimut")
+  newlist = []
+  for element in list:
+    print(element)
+    if 0 < element < 360:
+        newlist.append(-180.0+element)
+    elif element == 0:
+        newlist.append(180.0)
+    elif element == -1:
+        newlist.append(0.0)
+    elif element == -2:
+        newlist.append(0.0)
+
+  string_of_list = ""
+  for item in newlist:
+    string_of_list += str(item) + ", "
+  string_of_list = string_of_list[:-2]
+  return string_of_list
+  %>
+</%def>
+<%def name="orientation_name(list)", filter="trim">
+  <%
+  string_of_list = ""
+  for item in list:
+    string_of_list += '\"' + str(item) + '\"' + ", "
+  string_of_list = string_of_list[:-2]
+  return string_of_list
   %>
 </%def>
