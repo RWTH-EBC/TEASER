@@ -141,11 +141,11 @@ end ${bldg.name};
           AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
           corG)
 % endif
-))
+)
 
-% if check_AHU(bldg.thermal_zones) is False:
-   ,redeclare AixLib.HVAC.AirHandlingUnit.NoAHU AirHandlingUnit "AHU does
-   not exist"
+% if check_AHU(bldg.thermal_zones) == False:
+    ,redeclare AixLib.HVAC.AirHandlingUnit.NoAHU AirHandlingUnit "AHU does
+    not exist"
 % endif
 )
 
@@ -291,7 +291,7 @@ return string_of_list
   <%
   check = False
   for element in list:
-    if element.use_conditions.with_ahu is True:
+    if element.use_conditions.with_ahu == True:
       check = True
       return check
     else:
