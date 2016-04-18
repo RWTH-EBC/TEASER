@@ -1229,14 +1229,14 @@ class MainUI(QDialog):
         self.set_all_constr_element_add_material_button.setText("Add Layer")
         self.connect(self.set_all_constr_element_add_material_button,
                      SIGNAL("clicked()"),
-                     self.create_new_layer_ui)
-                     #self.create_new_layer_ui_set_all_constr)
+                     lambda check_window="set all construction window":
+                     self.create_new_layer_ui(check_window))
 
         self.set_all_constr_element_delete_material_button = QtGui.QPushButton()
         self.set_all_constr_element_delete_material_button.setText(
                                                                 "Delete Layer")
         self.connect(self.set_all_constr_element_delete_material_button,
-                     SIGNAL("clicked()"), 
+                     SIGNAL("clicked()"),
                      self.delete_selected_layer_set_all_constr)
 
         self.element_material_list_view = QtGui.QListView()
