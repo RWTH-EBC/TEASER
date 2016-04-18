@@ -1229,7 +1229,8 @@ class MainUI(QDialog):
         self.set_all_constr_element_add_material_button.setText("Add Layer")
         self.connect(self.set_all_constr_element_add_material_button,
                      SIGNAL("clicked()"),
-                     self.create_new_layer_ui_set_all_constr)
+                     self.create_new_layer_ui)
+                     #self.create_new_layer_ui_set_all_constr)
 
         self.set_all_constr_element_delete_material_button = QtGui.QPushButton()
         self.set_all_constr_element_delete_material_button.setText(
@@ -1353,7 +1354,10 @@ class MainUI(QDialog):
 
         self.new_layer_position_label = QtGui.QLabel("Position")
         self.new_layer_position_combobox = QtGui.QComboBox()
-        num_layers = len(self.current_element.layer) + 1
+        
+        
+        num_layers = len(self.all_constr_layer_list) + 1
+        #num_layers = len(self.current_element.layer) + 1
         if num_layers > 1:
             for x in range(0, num_layers):
                 self.new_layer_position_combobox.addItem(
@@ -1413,6 +1417,27 @@ class MainUI(QDialog):
         self.new_layer_material_combobox.addItems(sorted(temp_list))
         self.is_switchable = True
 
+        check = str(self.element_add_material_button.text())
+        if(check == " "):
+            print("dadfkjls")
+
+        sender = self.sender()
+        if(sender.text() == self.set_all_constr_element_add_material_button.text()):
+            pass
+        self.new_layer_save_button = QtGui.QPushButton()
+        self.new_layer_save_button.setText("Save")
+        self.connect(self.new_layer_save_button, SIGNAL(
+            "clicked()"), self.check_new_layer_inputs_all_constr)
+        self.connect(self.new_layer_save_button, SIGNAL(
+           "clicked()"), self.update_set_all_construction)
+        self.connect(self.new_layer_save_button, SIGNAL(
+            "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
+
+        self.new_layer_cancel_button = QtGui.QPushButton()
+        self.new_layer_cancel_button.setText("Cancel")
+        self.connect(self.new_layer_cancel_button, SIGNAL(
+            "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
+
         self.new_layer_save_button = QtGui.QPushButton()
         self.new_layer_save_button.setText("Save")
         self.connect(self.new_layer_save_button, SIGNAL(
@@ -1426,7 +1451,7 @@ class MainUI(QDialog):
         self.new_layer_cancel_button.setText("Cancel")
         self.connect(self.new_layer_cancel_button, SIGNAL(
             "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
-
+        
         self.new_layer_general_layout.addWidget(
             self.new_layer_position_label, 1, 0)
         self.new_layer_general_layout.addWidget(
@@ -2823,7 +2848,7 @@ class MainUI(QDialog):
                 thick, self.new_layer_material_combobox.currentText(), dens,
                 therm, heat, solar, ir, trans)
 
-    def check_new_layer_inputs_all_constr(self):
+    def check_new_layer_inputs_all_constrAlt(self):
         ''' Adds a new layer to the current element, checks if the
         input is correct
 
@@ -2876,6 +2901,61 @@ class MainUI(QDialog):
         self.all_constr_layer_list.insert(position, Controller.click_add_new_layer(
                     None, int(self.new_layerX_position_combobox.currentText()),
                     thick, self.new_layerX_material_combobox.currentText(),
+                    dens, therm, heat, solar, ir, trans))
+        
+    def check_new_layer_inputs_all_constr(self):
+        ''' Adds a new layer to the current element, checks if the
+        input is correct
+
+        '''
+
+        if self.new_layer_thickness_textbox.text() is not "":
+            thick = float(self.new_layer_thickness_textbox.text())
+        else:
+            thick = 1
+        if self.new_layer_material_density_textbox.text() is not "":
+            dens = float(self.new_layer_material_density_textbox.text())
+        else:
+            dens = 1
+        if self.new_layer_material_thermal_conduc_textbox.text() is not "":
+            therm = float(
+                self.new_layer_material_thermal_conduc_textbox.text())
+        else:
+            therm = 1
+        if self.new_layer_material_heat_capac_textbox.text() is not "":
+            heat = float(self.new_layer_material_heat_capac_textbox.text())
+        else:
+            heat = 1
+        if self.new_layer_material_solar_absorp_textbox.text() is not "":
+            solar = float(self.new_layer_material_solar_absorp_textbox.text())
+        else:
+            solar = 1
+        if self.new_layer_material_ir_emissivity_textbox.text() is not "":
+            ir = float(self.new_layer_material_ir_emissivity_textbox.text())
+        else:
+            ir = 1
+        if self.new_layer_material_transmittance_textbox.text() is not "":
+            trans = float(self.new_layer_material_transmittance_textbox.text())
+        else:
+            trans = 1
+        """
+        self.all_constr_layer_list.append(
+            Controller.click_add_new_layer(
+                    None, int(self.new_layer_position_combobox.currentText()),
+                    thick, self.new_layer_material_combobox.currentText(),
+                    dens, therm, heat, solar, ir, trans))
+        """
+        position = int(self.new_layer_position_combobox.currentText())
+        exists = False
+        for layer in self.all_constr_layer_list:
+            if layer.position == position:
+                    exists = True
+            if exists:
+                layer.position = layer.position + 1
+
+        self.all_constr_layer_list.insert(position, Controller.click_add_new_layer(
+                    None, int(self.new_layer_position_combobox.currentText()),
+                    thick, self.new_layer_material_combobox.currentText(),
                     dens, therm, heat, solar, ir, trans))
 
     def change_zone_values_ui(self, item):
