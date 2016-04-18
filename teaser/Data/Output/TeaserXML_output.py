@@ -274,15 +274,16 @@ def save_teaser_xml(path, project):
             pyxb_bld.ThermalZone.append(pyxb_zone)
 
         if type(bldg).__name__ == "Building":
-
             teaser_out.Building.append(pyxb_bld)
-
         elif type(bldg).__name__ == "Office":
-
             teaser_out.Office.append(pyxb_bld)
-
         elif type(bldg).__name__ == "Institute":
-
+            teaser_out.Institute.append(pyxb_bld)
+        elif type(bldg).__name__ == "Institute4":
+            teaser_out.Institute4.append(pyxb_bld)
+        elif type(bldg).__name__ == "Institute8":
+            teaser_out.Institute8.append(pyxb_bld)
+        elif type(bldg).__name__ == "Institute":
             teaser_out.Institute.append(pyxb_bld)
 
         elif type(bldg).__name__ == "Institute4":
