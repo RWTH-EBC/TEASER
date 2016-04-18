@@ -70,6 +70,7 @@ class MainUI(QDialog):
         self.current_transformation = "standard"
         self.current_type_building = "Office"
         self.is_switchable = False
+        self.construction_type_switched = False
         self.type_building_ind_att = dict(layout_area=0.0,
                                           layout_window_area=0.0,
                                           layout_attic=0.0,
@@ -1063,10 +1064,10 @@ class MainUI(QDialog):
     def save_changed_element_values(self):
         '''Replaces the previous values of the current element with the inputs
            from the text fields.
-        
+
         '''
         # TODO: Fehler beim User-Input abfangen
-        
+
         for zone in self.current_building.thermal_zones:
             if zone.internal_id == self.current_zone.internal_id:
                 for element in zone.inner_walls:
@@ -1074,15 +1075,16 @@ class MainUI(QDialog):
                         index = zone.inner_walls.index(element)
                         zone.inner_walls[index].name = \
                             str(self.element_name_textbox.text())
+                        zone.inner_walls[index].construction_type = \
+                            str(self.element_construction_type_combobox.\
+                            currentText())
                         zone.inner_walls[index].orientation = \
                             self.guiinfo.orientations_strings \
                             [str(self.element_orientation_combobox.currentText())]
                         zone.inner_walls[index].area = \
-                           str(self.element_area_textbox.text())
-                        zone.inner_walls[index].load_type_element(int(
-                            self.element_year_of_construction_textbox.text()),
-                            str(self.element_construction_type_combobox.
-                                currentText()))
+                            str(self.element_area_textbox.text())
+                        zone.inner_walls[index].year_of_construction = \
+                            str(self.element_year_of_construction_textbox.text())
                         zone.inner_walls[index].year_of_retrofit = \
                             str(self.element_year_of_retrofit_textbox.text())
                         zone.inner_walls[index].tilt = \
@@ -1091,20 +1093,22 @@ class MainUI(QDialog):
                             str(self.element_inner_convection_textbox.text())
                         zone.inner_walls[index].inner_radiation = \
                             str(self.element_inner_radiation_textbox.text())
+                        break
                 for element in zone.outer_walls:
                     if element.internal_id == self.current_element.internal_id:
                         index = zone.outer_walls.index(element)
                         zone.outer_walls[index].name = \
                             str(self.element_name_textbox.text())
+                        zone.outer_walls[index].construction_type = \
+                            str(self.element_construction_type_combobox.
+                                currentText())
                         zone.outer_walls[index].orientation = \
                             self.guiinfo.orientations_strings\
                             [self.element_orientation_combobox.currentText()]
                         zone.outer_walls[index].area = \
                             str(self.element_area_textbox.text())
-                        zone.outer_walls[index].load_type_element(int(
-                            self.element_year_of_construction_textbox.text()),
-                            str(self.element_construction_type_combobox.
-                                currentText()))
+                        zone.outer_walls[index].year_of_construction = \
+                            str(self.element_year_of_construction_textbox.text())
                         zone.outer_walls[index].year_of_retrofit = \
                             str(self.element_year_of_retrofit_textbox.text())
                         zone.outer_walls[index].tilt = \
@@ -1123,15 +1127,16 @@ class MainUI(QDialog):
                         index = zone.windows.index(element)
                         zone.windows[index].name = \
                             str(self.element_name_textbox.text())
+                        zone.windows[index].construction_type = \
+                            str(self.element_construction_type_combobox.\
+                                currentText())
                         zone.windows[index].orientation = \
                             self.guiinfo.orientations_strings\
                             [self.element_orientation_combobox.currentText()]
                         zone.windows[index].area = \
                             str(self.element_area_textbox.text())
-                        zone.windows[index].load_type_element(int(
-                            self.element_year_of_construction_textbox.text()),
-                            str(self.element_construction_type_combobox.
-                                currentText()))
+                        zone.windows[index].year_of_construction = \
+                            str(self.element_year_of_construction_textbox.text())
                         zone.windows[index].year_of_retrofit = \
                             str(self.element_year_of_retrofit_textbox.text())
                         zone.windows[index].tilt = \
@@ -2207,21 +2212,16 @@ class MainUI(QDialog):
                         str(self.current_layer.material.heat_capac))
 
     def load_constr_type(self):
-        self.current_element.load_type_element(
+        if self.construction_type_switched is True:
+            self.current_element.load_type_element(
                     int(self.element_year_of_construction_textbox.text()),
                     str(self.element_construction_type_combobox.currentText()))
 
-        self.element_layer_model.clear()
-        for layer in self.current_element.layer:
-            item = TrackableItem("Material:\t".expandtabs(8) +
-                                 str(layer.material.name) +
-                                 "\nThickness:\t".expandtabs(14) +
-                                 str(layer.thickness) +
-                                 "\t", layer.internal_id)
-            self.element_layer_model.appendRow(item)
+        self.construction_type_switched = False
 
     def switch_constr_type(self):
         try:
+            self.construction_type_switched = True
             self.element_material_list_view.doubleClicked.disconnect()
         except:
             pass
@@ -4998,7 +4998,7 @@ class MainUI(QDialog):
         ''' Opens a window to display all attributes
         of the currently selected element.
         '''
-        
+
         self.element_build_ui = QtGui.QWizardPage()
         self.element_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.element_build_ui.setWindowTitle("Element Details")
@@ -5213,6 +5213,7 @@ class MainUI(QDialog):
 
         self.element_save_button = QtGui.QPushButton()
         self.element_save_button.setText("Save")
+
         self.connect(self.element_save_button, SIGNAL("clicked()"),
                      self.load_constr_type)
         self.connect(self.element_save_button, SIGNAL("clicked()"),
