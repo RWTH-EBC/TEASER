@@ -11,7 +11,7 @@ import teaser.Logic.Utilis as utilis
 import warnings
 
 
-class UseConditions18599(UseConditions):
+class BoundaryConditions(UseConditions):
 
     '''Use Conditions DIN 18599
 
@@ -211,7 +211,7 @@ class UseConditions18599(UseConditions):
         '''Constructor UseConditions18599
         '''
 
-        super(UseConditions18599, self).__init__(parent)
+        super(BoundaryConditions, self).__init__(parent)
 
         self.usage = "Single office"
 

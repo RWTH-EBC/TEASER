@@ -11,19 +11,19 @@ you can import all the classes at the beginning.
 First we need to import the classes we want to use
 '''
 
-from teaser.Project import Project
+from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions import \
+    UseConditions18599
 from teaser.Logic.BuildingObjects.Building import Building
-from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import\
     GroundFloor
-from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
+from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599 import \
-    UseConditions18599
+from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
+from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
+from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
+from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
+from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
+from teaser.Project import Project
 
 
 def example_create_building():

@@ -788,26 +788,12 @@ class ThermalZone(object):
 
     @parent.setter
     def parent(self, value):
-        if value is not None:
-            ass_error_1 = "Parent has to be an instance of Building()"
-
-            assert type(value).__name__ == "Building" \
-                or type(value).__name__ == "Office"\
-                or type(value).__name__ == "Institute"\
-                or type(value).__name__ == "Institute4"\
-                or type(value).__name__ == "Institute8" \
-                or type(value).__name__ == "Residential", ass_error_1
-
+        from teaser.Logic.BuildingObjects.Building import Building
+        import inspect
+        if inspect.isclass(Building):
             self.__parent = value
-
-        if type(value).__name__ == "Building" \
-           or type(value).__name__ == "Office" \
-           or type(value).__name__ == "Institute" \
-           or type(value).__name__ == "Institute4" \
-           or type(value).__name__ == "Institute8" \
-           or type(value).__name__ == "Residential":
-
             self.__parent.thermal_zones.append(self)
+
 
     @property
     def name(self):
@@ -867,7 +853,7 @@ class ThermalZone(object):
         ass_error_1 = "Use condition has to be an instance of UseConditions()"
 
         assert type(value).__name__ == ("UseConditions") or \
-            type(value).__name__ == ("UseConditions18599"), ass_error_1
+            type(value).__name__ == ("BoundaryConditions"), ass_error_1
 
         if value is not None:
             self._use_conditions = value

@@ -1,25 +1,26 @@
 # created June 2015
 # by TEASER4 Development Team
 
-from teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding \
- import TypeBuilding
-from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599\
- import UseConditions18599 as UseCond
+from teaser.Logic.ArchetypeBuildings.Residential \
+ import Residential
+
+from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
+    import BoundaryConditions as UseCond
+from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor\
  import GroundFloor
+from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
-from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
-from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 
 
-class Residential(TypeBuilding):
-    '''Type Building Residential.
+class SingleFamilyDwelling(Residential):
+    '''Type Building SingleFamilyDwelling.
 
-    Subclass from Building to represent Residential Buildings. Allows for
+    Subclass from Building to represent SingleFamilyDwelling Buildings. Allows for
     easier distinction between different building types and specific functions
     and attributes.
 
@@ -163,14 +164,13 @@ class Residential(TypeBuilding):
                  dormer=None,
                  construction_type=None):
 
-        '''Constructor of Residential
+        '''Constructor of SingleFamilyDwelling
 
         
         '''
 
-        super(Residential, self).__init__(parent, name, year_of_construction,
-                                          number_of_floors, height_of_floors,
-                                          net_leased_area, with_ahu)
+        super(SingleFamilyDwelling, self).__init__(parent, name, year_of_construction,
+                                                   net_leased_area, with_ahu)
 
         self.residential_layout = residential_layout
         self.neighbour_buildings = neighbour_buildings
@@ -178,6 +178,8 @@ class Residential(TypeBuilding):
         self.cellar = cellar
         self.dormer = dormer
         self.construction_type = construction_type
+        self.number_of_floors = number_of_floors
+        self.height_of_floors = height_of_floors
         
         # Parameters are default values for current calculation following IWU
 
@@ -294,7 +296,7 @@ class Residential(TypeBuilding):
             self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
         
 
-    def generate_residential(self):
+    def generate_archetype(self):
         '''Generates a residential building.
 
         With given values, this class generates a type residential
