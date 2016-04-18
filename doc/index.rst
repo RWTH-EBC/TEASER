@@ -32,7 +32,7 @@ TEASER contains an archetype building generator as well as parameter calculation
 Version
 ==================
 
-The current version is 0.2.6, which is a pre-release
+The current version is 0.2.8, which is a pre-release
 
 
 How to contribute to TEASER
