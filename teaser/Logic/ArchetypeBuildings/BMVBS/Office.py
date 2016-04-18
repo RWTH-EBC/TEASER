@@ -3,22 +3,23 @@
 
 
 import math
-from teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding\
- import TypeBuilding
-from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599\
- import UseConditions18599 as UseCond
+
+from teaser.Logic.ArchetypeBuildings.NonResidential\
+ import NonResidential
+from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
+    import BoundaryConditions as UseCond
+from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor\
  import GroundFloor
+from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
-from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
-from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 
 
-class Office(TypeBuilding):
+class Office(NonResidential):
     '''Type Office Building
 
     Subclass from TypeBuilding to represent office buildings. Allows for
@@ -156,14 +157,14 @@ class Office(TypeBuilding):
         super(Office, self).__init__(parent, 
                                      name,
                                      year_of_construction,
-                                     number_of_floors,
-                                     height_of_floors,
                                      net_leased_area, 
                                      with_ahu)
 
         self.office_layout = office_layout
         self.window_layout = window_layout
         self.construction_type = construction_type
+        self.number_of_floors = number_of_floors
+        self.height_of_floors = height_of_floors
         # Parameters are default values for current
         # calculation following Lichtmess
 
@@ -252,8 +253,7 @@ class Office(TypeBuilding):
             self.central_ahu.profile_max_relative_humidity = (25*[0.55])
             self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
 
-
-    def generate_office(self):
+    def generate_archetype(self):
         '''Generates an office building.
 
         With given values, this class generates a type building according to
