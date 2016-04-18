@@ -73,8 +73,6 @@ class Building(object):
                  parent=None,
                  name=None,
                  year_of_construction=None,
-                 number_of_floors=None,
-                 height_of_floors=None,
                  net_leased_area=None,
                  with_ahu=False):
 
@@ -98,8 +96,8 @@ class Building(object):
             self.central_ahu = BuildingAHU(self)
         
         
-        self.number_of_floors = number_of_floors
-        self.height_of_floors = height_of_floors
+        self.number_of_floors = None
+        self.height_of_floors = None
         self.net_leased_area = net_leased_area
 
         self._year_of_retrofit = None
