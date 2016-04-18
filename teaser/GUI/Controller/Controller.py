@@ -314,7 +314,7 @@ class Controller():
                         wall.inner_radiation = inner_radiation
                         wall.layer = None
                         for lay_count in layer_set:
-                            wall.add_layer(lay_count.position, lay_count)
+                            wall.add_layer(lay_count, lay_count.position)
 
             for win in zone.windows:
                 if element_type == "Window":
@@ -326,7 +326,7 @@ class Controller():
                         win.outer_radiation = outer_radiation
                         win.layer = None
                         for lay_count in layer_set:
-                            win.add_layer(lay_count.position, lay_count)
+                            win.add_layer(lay_count, lay_count.position)
 
     @classmethod
     def click_save_envelopes(self, bldg, orientation_old,
