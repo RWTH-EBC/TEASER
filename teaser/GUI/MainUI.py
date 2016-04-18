@@ -1331,7 +1331,7 @@ class MainUI(QDialog):
         self.create__envelope_ui.setWindowModality(Qt.ApplicationModal)
         self.create__envelope_ui.show()
 
-    def create_new_layer_ui(self):
+    def create_new_layer_ui(self, check):
         ''' Opens the window to create a new layer.
 
         '''
@@ -1354,10 +1354,12 @@ class MainUI(QDialog):
 
         self.new_layer_position_label = QtGui.QLabel("Position")
         self.new_layer_position_combobox = QtGui.QComboBox()
-        
-        
-        num_layers = len(self.all_constr_layer_list) + 1
-        #num_layers = len(self.current_element.layer) + 1
+
+        if check == "Element Details Window":
+            num_layers = len(self.current_element.layer) + 1
+        elif check == "set all construction window":
+            num_layers = len(self.all_constr_layer_list) + 1
+
         if num_layers > 1:
             for x in range(0, num_layers):
                 self.new_layer_position_combobox.addItem(
@@ -1417,19 +1419,21 @@ class MainUI(QDialog):
         self.new_layer_material_combobox.addItems(sorted(temp_list))
         self.is_switchable = True
 
-        check = str(self.element_add_material_button.text())
-        if(check == " "):
-            print("dadfkjls")
-
-        sender = self.sender()
-        if(sender.text() == self.set_all_constr_element_add_material_button.text()):
-            pass
         self.new_layer_save_button = QtGui.QPushButton()
         self.new_layer_save_button.setText("Save")
-        self.connect(self.new_layer_save_button, SIGNAL(
-            "clicked()"), self.check_new_layer_inputs_all_constr)
-        self.connect(self.new_layer_save_button, SIGNAL(
-           "clicked()"), self.update_set_all_construction)
+
+        if check == "Element Details Window":
+            self.connect(self.new_layer_save_button, SIGNAL(
+                "clicked()"), self.check_new_layer_inputs)
+            self.connect(self.new_layer_save_button, SIGNAL(
+                "clicked()"), self.update_element_details)
+
+        elif check == "set all construction window":
+            self.connect(self.new_layer_save_button, SIGNAL(
+                "clicked()"), self.check_new_layer_inputs_all_constr)
+            self.connect(self.new_layer_save_button, SIGNAL(
+                "clicked()"), self.update_set_all_construction)
+
         self.connect(self.new_layer_save_button, SIGNAL(
             "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
 
@@ -1438,20 +1442,6 @@ class MainUI(QDialog):
         self.connect(self.new_layer_cancel_button, SIGNAL(
             "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
 
-        self.new_layer_save_button = QtGui.QPushButton()
-        self.new_layer_save_button.setText("Save")
-        self.connect(self.new_layer_save_button, SIGNAL(
-            "clicked()"), self.check_new_layer_inputs)
-        self.connect(self.new_layer_save_button, SIGNAL(
-            "clicked()"), self.update_element_details)
-        self.connect(self.new_layer_save_button, SIGNAL(
-            "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
-
-        self.new_layer_cancel_button = QtGui.QPushButton()
-        self.new_layer_cancel_button.setText("Cancel")
-        self.connect(self.new_layer_cancel_button, SIGNAL(
-            "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
-        
         self.new_layer_general_layout.addWidget(
             self.new_layer_position_label, 1, 0)
         self.new_layer_general_layout.addWidget(
@@ -3852,7 +3842,8 @@ class MainUI(QDialog):
         self.element_add_material_button = QtGui.QPushButton()
         self.element_add_material_button.setText("Add Layer")
         self.connect(self.element_add_material_button, SIGNAL("clicked()"),
-                     self.create_new_layer_ui)
+                     lambda check_window="Element Details Window":
+                     self.create_new_layer_ui(check_window))
 
         self.element_delete_material_button = QtGui.QPushButton()
         self.element_delete_material_button.setText("Delete Layer")
