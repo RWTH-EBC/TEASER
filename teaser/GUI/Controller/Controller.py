@@ -305,7 +305,7 @@ class Controller():
                         wall.outer_radiation = outer_radiation
                         wall.layer = None
                         for lay_count in layer_set:
-                            wall.add_layer(lay_count.position, lay_count)
+                            wall.add_layer(lay_count, lay_count.position)
 
                 else:
                     if wall.orientation == orientation:
