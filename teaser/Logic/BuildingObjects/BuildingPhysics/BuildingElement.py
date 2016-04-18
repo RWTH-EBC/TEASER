@@ -264,6 +264,8 @@ class BuildingElement(object):
 
         self.year_of_construction = year
 
+        self._layer = []
+
         if type(self).__name__ == 'OuterWall':
 
             for out_wall in self.parent.parent.parent.\

@@ -957,7 +957,6 @@ class ThermalZone(object):
 
     @t_inside.setter
     def t_inside(self, value):
-        print("setter")
         if isinstance(value, float):
             self._t_inside = value
         elif value is None:
