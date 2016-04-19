@@ -120,6 +120,9 @@ class Building(object):
         self.file_set_t = None
         self.file_weather = None
 
+        self.orientation_bldg = []
+        self.tilt_bldg = []
+        self.orient_tilt = []
         self.calculation_method = None
 
 
@@ -142,7 +145,6 @@ class Building(object):
             for wall in zone.outer_walls:
                 if wall.orientation == orientation:
                     wall.area = ((new_area / self.net_leased_area) * zone.area)
-        self.compare_area_dicts()
 
     def set_window_area(self, new_area, orientation):
         '''Window area setter
@@ -163,7 +165,6 @@ class Building(object):
             for win in zone.windows:
                 if win.orientation == orientation:
                     win.area = ((new_area / self.net_leased_area) * zone.area)
-        self.compare_area_dicts()
 
     def get_outer_wall_area(self, orientation):
         '''Get aggregated outer wall area of one orientation
@@ -300,17 +301,6 @@ class Building(object):
         for key in self.window_area:
             self.window_area[key] = self.get_window_area(key)
 
-    def compare_area_dicts(self):
-        '''Compares the outer area and window area dicts and rewrites them if
-        possible
-        '''
-        for key in self.window_area.keys():
-            if key not in self.outer_area.keys():
-                self.outer_area[key] = None
-        for key in self.outer_area.keys():
-            if key not in self.window_area.keys():
-                self.window_area[key] = None
-
     def calc_building_parameter(self, calculation_method=None):
         '''calc all building parameters
 
@@ -325,7 +315,6 @@ class Building(object):
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
-        self.compare_area_dicts()
         if calculation_method is not None:
             self.calculation_method = calculation_method
         else:
@@ -334,9 +323,72 @@ class Building(object):
         for zone in self.thermal_zones:
             zone.calc_zone_parameters(self.calculation_method)
             self.sum_heating_load += zone.heating_load
+        self.compare_orientation()
 
-    def retrofit_building(self,
-                          year_of_retrofit=None,
+    def compare_orientation(self):
+        '''Fills the zone weightfactors according to orientation and tilt of
+        building
+
+        compares orientation and tilt of all outer building elements and then
+        creates lists for zone weightfactors and building orientation and tilt
+
+        '''
+
+        orient_tilt_help = []
+
+        for zone in self.thermal_zones:
+            for wall in zone.outer_walls:
+                if wall.orientation != -2:
+                    orient_tilt_help.append([wall.orientation, wall.tilt])
+                else:
+                    pass
+            for win in zone.windows:
+                if win.orientation != -2:
+                    orient_tilt_help.append([win.orientation, win.tilt])
+                else:
+                    pass
+
+        for i in orient_tilt_help:
+            if i in self.orient_tilt:
+                pass
+            else:
+                self.orient_tilt.append(i)
+
+        self.orient_tilt.sort(key=lambda x: x[0])
+
+        if self.orient_tilt[0][0] == -1:
+            self.orient_tilt.insert(len(self.orient_tilt), self.orient_tilt.pop(0))
+
+        for i in self.orient_tilt:
+            self.orientation_bldg.append(i[0])
+            self.tilt_bldg.append(i[1])
+
+        for zone in self.thermal_zones:
+
+            for i in self.orient_tilt:
+                wall = zone.find_wall(i[0], i[1])
+                win = zone.find_win(i[0], i[1])
+
+                zone.tilt_wall.append(i[1])
+                zone.orientation_wall.append(i[0])
+
+                zone.tilt_win.append(i[1])
+                zone.orientation_win.append(i[0])
+
+                if wall is None:
+                    zone.weightfactor_ow.append(0.0)
+                else:
+                    zone.weightfactor_ow.append(wall.wf_out)
+                if win is None:
+                    zone.weightfactor_win.append(0.0)
+                    zone.window_area_list.append(0.0)
+                    zone.g_sunblind_list.append(0.0)
+                else:
+                    zone.weightfactor_win.append(win.wf_out)
+                    zone.window_area_list.append(win.area)
+                    zone.g_sunblind_list.append(win.shading_g_total)
+
+    def retrofit_building(self, year_of_retrofit=None,
                           window_type=None,
                           material=None):
         ''' Retrofits all zones in the building
