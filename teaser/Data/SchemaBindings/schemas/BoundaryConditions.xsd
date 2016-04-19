@@ -64,7 +64,7 @@
       <xs:element minOccurs="0" type="floatList" name="winter_reduction"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="UseConditions18599Type">
+  <xs:complexType name="BoundaryConditionsType">
     <xs:sequence>
       <xs:element minOccurs="0" type="xs:string" name="usage"/>
       <xs:element minOccurs="0" type="xs:float" name="typical_length"/>
@@ -78,7 +78,7 @@
   </xs:complexType>
   <xs:complexType name="UseConditionsType">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" type="UseConditions18599Type" name="UseConditions18599"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" type="BoundaryConditionsType" name="BoundaryConditions"/>
     </xs:sequence>
   </xs:complexType>
     <xs:simpleType name="integerList">
