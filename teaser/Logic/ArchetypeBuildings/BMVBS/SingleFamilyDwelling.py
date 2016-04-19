@@ -490,7 +490,7 @@ class SingleFamilyDwelling(Residential):
             zone.use_conditions.persons *= zone.area * 0.01
             zone.use_conditions.machines *= zone.area * 0.01
 
-            for surface in self.gml_surface:
+            for surface in self.gml_surfaces:
                 if surface.surface_tilt == 90:
                     outer_wall = OuterWall(zone)
                     outer_wall.load_type_element(self.year_of_construction,
@@ -557,11 +557,11 @@ class SingleFamilyDwelling(Residential):
             else:
                 pass
 
-        for surface in self.gml_surface:
+        for surface in self.gml_surfaces:
             self.set_outer_wall_area(surface.surface_area *
                                      (1- self.est_factor_win_area),
                                      surface.surface_orientation)
-        for surface in self.gml_surface:
+        for surface in self.gml_surfaces:
 
             if surface.surface_tilt != 0 and surface.surface_orientation !=\
                     -2 and surface.surface_orientation != -1:
