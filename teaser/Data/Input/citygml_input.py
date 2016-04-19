@@ -51,12 +51,14 @@ def load_gml(path, prj):
                     bldg.set_height_gml()
 
 
+
         else:
             bldg = Building(parent=prj)
             _create_building(bldg=bldg, city_object=city_object)
             if city_object.Feature.function:
                 bldg.convert_bldg(city_object.Feature.function[0].value())
                 bldg.set_height_gml()
+
 
 
 def _create_building(bldg, city_object):
