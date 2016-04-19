@@ -160,6 +160,7 @@ class ThermalZone(object):
         '''
 
         self.set_calc_default()
+        self.test = []
         # Calculation of the equivalent resistances and capacities
         if len(self.outer_walls) > 0:
             for out_wall in self.outer_walls:
@@ -465,28 +466,59 @@ class ThermalZone(object):
         if calculation_core == 'vdi':
 
             for wall in self.outer_walls:
-                wall.wf_out = wall.ua_value/(self.ua_value_ow +
-                                                     self.ua_value_win)
+                ua_help = wall.ua_value
+                for wall2 in self.outer_walls:
+                    if wall is wall2:
+                        pass
+                    elif wall.orientation == wall2.orientation and wall.tilt \
+                            == wall2.tilt:
+                        ua_help = ua_help + wall2.ua_value
+
+                wall.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
                 if type(wall).__name__ == "GroundFloor":
                     self.weightfactor_ground.append(wall.wf_out)
                 else:
                     pass
 
             for win in self.windows:
-                win.wf_out = win.ua_value/(self.ua_value_ow +
-                                                     self.ua_value_win)
+                ua_help = win.ua_value
+                area_help = win.area
+                for win2 in self.windows:
+                    if win is win2:
+                        pass
+                    elif win.orientation == win2.orientation and win.tilt \
+                            == win2.tilt:
+                        ua_help = ua_help + win2.ua_value
+                        area_help = area_help + win2.area
+                win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+                win.area = area_help
 
         elif calculation_core == 'ebc':
 
             for wall in self.outer_walls:
-                wall.wf_out = wall.ua_value/self.ua_value_ow
+                ua_help = wall.ua_value
+                for wall2 in self.outer_walls:
+                    if wall is wall2:
+                        pass
+                    elif wall.orientation == wall2.orientation and wall.tilt \
+                            == wall2.tilt:
+                        ua_help = ua_help + wall2.ua_value
+                wall.wf_out = ua_help/self.ua_value_ow
                 if type(wall).__name__ == "GroundFloor":
                     self.weightfactor_ground.append(wall.wf_out)
                 else:
                     pass
 
             for win in self.windows:
-                win.wf_out = win.ua_value/self.ua_value_win
+                ua_help = win.ua_value
+                for win2 in self.windows:
+                    if win is win2:
+                        pass
+                    elif win.orientation == win2.orientation and win.tilt \
+                            == win2.tilt:
+                        ua_help = ua_help + win2.ua_value
+                win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+
 
         else:
             raise ValueError("specify calculation method correctly")
@@ -654,6 +686,7 @@ class ThermalZone(object):
                 self.parent.thermal_zones.pop(index)
 
                 break
+
     def add_element(self, building_element):
         '''Adds a building element to the corresponding list
 
