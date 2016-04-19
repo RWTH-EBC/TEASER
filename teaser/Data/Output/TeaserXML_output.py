@@ -8,7 +8,8 @@ TEASER file format .tXML
 """
 
 import teaser.Data.SchemaBindings.ProjectBind as pb
-
+import inspect
+from teaser.Logic.ArchetypeBuildings.Residential import Residential
 
 def save_teaser_xml(path, project):
     '''This function saves a project to a tXML
@@ -48,8 +49,7 @@ def save_teaser_xml(path, project):
         elif type(bldg).__name__ == "Institute8":
             pyxb_bld = pb.Institute8Type()
 
-        elif type(bldg).__name__ == "Residential" or type(bldg).__name__ == \
-                "SingleFamilyDwelling":
+        elif inspect.isclass(Residential):
 
             pyxb_bld = pb.ResidentialType()
 
@@ -101,7 +101,7 @@ def save_teaser_xml(path, project):
 
             pyxb_zone.UseCondition = pb.UseConditionType()
 
-            pyxb_use = pb.UseConditions18599Type()
+            pyxb_use = pb.BoundaryConditionsType()
 
             pyxb_use.usage = zone.use_conditions.usage
             pyxb_use.UsageOperationTime = pb.UsageOperationTimeType()
@@ -200,7 +200,7 @@ def save_teaser_xml(path, project):
             pyxb_use.AHU.winter_reduction = \
                 zone.use_conditions.winter_reduction
 
-            pyxb_zone.UseCondition.UseConditions18599 = pyxb_use
+            pyxb_zone.UseCondition.BoundaryConditions = pyxb_use
 
             for out_wall in zone.outer_walls:
 
