@@ -864,8 +864,11 @@ class Test_teaser(object):
 
     def test_calc_weightfactor(self):
         '''test of calc_weightfactor'''
-        prj.buildings[-1].thermal_zones[-1].calc_weightfactors('vdi')
+        prj.buildings[-1].thermal_zones[-1].calc_zone_parameters('vdi')
+        prj.buildings[-1].compare_orientation()
+
         therm_zone = prj.buildings[-1].thermal_zones[-1]
+
         assert therm_zone.weightfactor_ow == [0.02453065018076125,
                                               0.03434291025306575,
                                               0.02453065018076125,
@@ -880,8 +883,10 @@ class Test_teaser(object):
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
 
-        prj.buildings[-1].thermal_zones[-1].calc_weightfactors('ebc')
+        prj.buildings[-1].thermal_zones[-1].calc_zone_parameters('ebc')
         therm_zone = prj.buildings[-1].thermal_zones[-1]
+        prj.buildings[-1].compare_orientation()
+
         assert therm_zone.weightfactor_ow == [0.03047939672771177,
                                               0.042671155418796486,
                                               0.03047939672771177,

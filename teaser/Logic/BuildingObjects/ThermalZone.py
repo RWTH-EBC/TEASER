@@ -107,8 +107,9 @@ class ThermalZone(object):
         self.r_rest_ow = 0.0
         self.r_total = 0.0
         self.weightfactor_ow = []
-        self.weightfactor_ow_dict = {}
         self.weightfactor_ground = []
+        self.tilt_wall = []
+        self.orientation_wall = []
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
         self.r_rad_inner_ow = 0.0
@@ -128,6 +129,8 @@ class ThermalZone(object):
         self.weightfactor_win = []
         self.g_sunblind_list = []
         self.window_area_list = []
+        self.orientation_win = []
+        self.tilt_win = []
         self.ua_value_win = 0.0
         self.r_conv_inner_win = 0.0
         self.r_rad_inner_win = 0.0
@@ -162,6 +165,7 @@ class ThermalZone(object):
             for out_wall in self.outer_walls:
                 out_wall.calc_equivalent_res()
                 out_wall.calc_ua_value()
+
         else:
             warnings.warn("No outer walls are defined")
 
@@ -169,6 +173,7 @@ class ThermalZone(object):
             for in_wall in self.inner_walls:
                 in_wall.calc_equivalent_res()
                 in_wall.calc_ua_value()
+
         else:
             warnings.warn("No outer walls are defined")
 
@@ -176,6 +181,7 @@ class ThermalZone(object):
             for win in self.windows:
                 win.calc_equivalent_res()
                 win.calc_ua_value()
+
         else:
             warnings.warn("No outer walls are defined")
 
@@ -456,156 +462,53 @@ class ThermalZone(object):
             Setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
         '''
 
-        orientation_ow_help = {}
-        orientation_win_help = {}
-
-        for wall_count in self.outer_walls:
-
-            if wall_count.orientation in orientation_ow_help:
-                orientation_ow_help[wall_count.orientation] +=  \
-                                                    wall_count.ua_value
-            else:
-                orientation_ow_help[wall_count.orientation] =  \
-                                                    wall_count.ua_value
-
-        for win_count in self.windows:
-
-            if win_count.orientation in orientation_win_help:
-                orientation_win_help[win_count.orientation] +=  \
-                                                    win_count.ua_value
-            else:
-                orientation_win_help[win_count.orientation] =  \
-                                                    win_count.ua_value
-
-        orientation_ow_help, orientation_win_help = \
-            self.compare_area_dicts(orientation_ow_help, orientation_win_help)
-
-        orientation_ow = \
-            collections.OrderedDict(sorted(orientation_ow_help.items()))
-        orientation_win = \
-            collections.OrderedDict(sorted(orientation_win_help.items()))
-
-
-
-        self.weightfactor_ow_dict = orientation_ow
-
-
-        roof_help = None
-
         if calculation_core == 'vdi':
-            for key in orientation_ow:
-                if key != -2 and key != -1:
-                    self.weightfactor_ow.append(orientation_ow[key] /
-                                                (self.ua_value_ow +
-                                                 self.ua_value_win))
-                elif key == -1:
-                    roof_help = (orientation_ow[key] /
-                                 (self.ua_value_ow + self.ua_value_win))
+
+            for wall in self.outer_walls:
+                wall.wf_out = wall.ua_value/(self.ua_value_ow +
+                                                     self.ua_value_win)
+                if type(wall).__name__ == "GroundFloor":
+                    self.weightfactor_ground.append(wall.wf_out)
                 else:
-                    self.weightfactor_ground.append(orientation_ow[key] /
-                                                    (self.ua_value_ow +
-                                                     self.ua_value_win))
+                    pass
 
-            if roof_help is not None:
-                self.weightfactor_ow.append(roof_help)
-                roof_help = 0
-
-            for key in orientation_win:
-                if key != -2 and key != -1:
-                    self.weightfactor_win.append(orientation_win[key] /
-                                                 (self.ua_value_ow +
-                                                  self.ua_value_win))
-                elif key == -1:
-                    roof_help = (orientation_win[key] /
-                                 (self.ua_value_ow + self.ua_value_win))
-
-            if roof_help is not None:
-                self.weightfactor_win.append(roof_help)
+            for win in self.windows:
+                win.wf_out = win.ua_value/(self.ua_value_ow +
+                                                     self.ua_value_win)
 
         elif calculation_core == 'ebc':
-            for key in orientation_ow:
-                if key != -2 and key != -1:
-                    self.weightfactor_ow.append(orientation_ow[key] /
-                                                self.ua_value_ow)
-                elif key == -1:
-                    roof_help = (orientation_ow[key]/self.ua_value_ow)
+
+            for wall in self.outer_walls:
+                wall.wf_out = wall.ua_value/self.ua_value_ow
+                if type(wall).__name__ == "GroundFloor":
+                    self.weightfactor_ground.append(wall.wf_out)
                 else:
-                    self.weightfactor_ground.append(orientation_ow[key] /
-                                                    self.ua_value_ow)
-            if roof_help is not None:
-                self.weightfactor_ow.append(roof_help)
-                roof_help = 0
+                    pass
 
-            for key in orientation_win:
-                if key != -2 and key != -1:
-                    self.weightfactor_win.append(orientation_win[key] /
-                                                 self.ua_value_win)
-                elif key == -1:
-                    roof_help = (orientation_win[key]/self.ua_value_win)
-
-            if roof_help is not None:
-                self.weightfactor_win.append(roof_help)
+            for win in self.windows:
+                win.wf_out = win.ua_value/self.ua_value_win
 
         else:
             raise ValueError("specify calculation method correctly")
 
-        self.fill_sunblind_list(orientation_win)
-        self.fill_win_area_list(orientation_win)
 
-    def compare_area_dicts(self, dict1, dict2):
-        '''Compares the orientations of the dicts
-        '''
-        for key in dict1.keys():
-            if key not in dict2.keys():
-                dict2[key] = 0.0
-        for key in dict2.keys():
-            if key not in dict1.keys():
-                dict1[key] = 0.0
-        return dict1, dict2
+    def find_wall(self, orientation, tilt):
+        for i in self.outer_walls:
+            if i.orientation == orientation and i.tilt == tilt:
+                return i
+            else:
+                pass
 
-    def fill_sunblind_list(self, orientation_dict):
-        '''fills the g_sunblind_list in the right order with the right g values
-        when the sundblind is closed (needed for modelica specific export)
-        '''
+        return None
 
-        roof_help = 0.0
-        for key in orientation_dict:
-            key_help = True
-            if key != -2 and key != -1:
-                for window in self.windows:
-                    if window.orientation == key:
-                        key_help = False
-                        self.g_sunblind_list.append(window.shading_g_total)
-                        break
-                if key_help:
-                    self.g_sunblind_list.append(0.0)
-            elif key == -1:
-                for window in self.windows:
-                    if window.orientation == key:
-                        roof_help = window.shading_g_total
-        self.g_sunblind_list.append(roof_help)
+    def find_win(self, orientation, tilt):
+        for i in self.windows:
+            if i.orientation == orientation and i.tilt == tilt:
+                return i
+            else:
+                pass
 
-    def fill_win_area_list(self, orientation_dict):
-        '''fills the window_area_list in the right order with the right window
-        areas (needed for modelica specific export)
-        '''
-
-        roof_help = 0.0
-        for key in orientation_dict:
-            key_help = True
-            if key != -2 and key != -1:
-                for window in self.windows:
-                    if window.orientation == key:
-                        key_help = False
-                        self.window_area_list.append(window.area)
-                        break
-                if key_help:
-                    self.window_area_list.append(0.0)
-            elif key == -1:
-                for window in self.windows:
-                    if window.orientation == key:
-                        roof_help = window.area
-        self.window_area_list.append(roof_help)
+        return None
 
     def set_inner_wall_area(self):
         '''Sets the inner wall area.
@@ -702,6 +605,8 @@ class ThermalZone(object):
         self.r_total = 0.0
         self.weightfactor_ow = []
         self.weightfactor_ground = []
+        self.orientation_wall = []
+        self.tilt_wall = []
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
         self.r_rad_inner_ow = 0.0
@@ -721,6 +626,8 @@ class ThermalZone(object):
         self.weightfactor_win = []
         self.g_sunblind_list = []
         self.window_area_list = []
+        self.orientation_win = []
+        self.tilt_win = []
         self.ua_value_win = 0.0
         self.r_conv_inner_win = 0.0
         self.r_rad_inner_win = 0.0
