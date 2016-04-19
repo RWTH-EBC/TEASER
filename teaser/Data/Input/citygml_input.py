@@ -46,10 +46,13 @@ def load_gml(path, prj):
             for part in city_object.Feature.consistsOfBuildingPart:
                 bldg = Building(parent=prj)
                 _create_building_part(bldg=bldg, part=part)
+                if city_object.Feature.function:
+                    bldg.convert_bldg(part.function[0].value())
         else:
             bldg = Building(parent=prj)
             _create_building(bldg=bldg, city_object=city_object)
-
+            if city_object.Feature.function:
+                bldg.convert_bldg(city_object.Feature.function[0].value())
 
 def _create_building(bldg, city_object):
     #LOD2

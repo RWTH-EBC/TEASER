@@ -125,6 +125,27 @@ class Building(object):
         self.orient_tilt = []
         self.calculation_method = None
 
+    def convert_bldg(self, function):
+        """converts the instance to a specific archetype building
+
+        DANGEROUS function, should only be used in combination with CityGML
+        and if you know what you are doing
+
+        Parameters
+        ----------
+
+        function : str
+            function from CityGML code list 1000 is residential 1120 is office
+        """
+
+        if function == "1000":
+            from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
+                import SingleFamilyDwelling
+            self.__class__ = SingleFamilyDwelling
+        elif function == "1120":
+            from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
+            self.__class__ = Office
+
 
     def set_outer_wall_area(self, new_area, orientation):
         '''Outer area wall setter
