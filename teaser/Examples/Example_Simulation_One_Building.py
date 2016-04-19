@@ -32,16 +32,12 @@ AixLib master: https://github.com/RWTH-EBC/AixLib
 '''
 
 import os
-import xml.etree.ElementTree as ET
 import time
-from teaser.Project import Project
-from teaser.Logic.BuildingObjects.TypeBuildings.Residential import Residential
-from teaser.Logic.BuildingObjects.TypeBuildings.Institute8 import Institute8
-from teaser.Logic.BuildingObjects.TypeBuildings.Institute4 import Institute4
-from teaser.Logic.BuildingObjects.TypeBuildings.Institute import Institute
-from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
 from multiprocessing import Pool
+
 import buildingspy.simulate.Simulator as si
+
+from teaser.Project import Project
 
 
 class BuildingInfo(object):
