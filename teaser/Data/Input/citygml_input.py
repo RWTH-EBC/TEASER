@@ -46,13 +46,18 @@ def load_gml(path, prj):
             for part in city_object.Feature.consistsOfBuildingPart:
                 bldg = Building(parent=prj)
                 _create_building_part(bldg=bldg, part=part)
-                if city_object.Feature.function:
+                if part.function:
                     bldg.convert_bldg(part.function[0].value())
+                    bldg.set_height_gml()
+
+
         else:
             bldg = Building(parent=prj)
             _create_building(bldg=bldg, city_object=city_object)
             if city_object.Feature.function:
                 bldg.convert_bldg(city_object.Feature.function[0].value())
+                bldg.set_height_gml()
+
 
 def _create_building(bldg, city_object):
     #LOD2
@@ -100,13 +105,12 @@ class Surface_gml(object):
         self.surface_area = None
         self.surface_orientation = None
         self.surface_tilt = None
-        self.surface_height = None
         self.name = boundary
 
         self.surface_area = self.get_gml_area()
         self.surface_orientation = self.get_gml_orientation()
         self.surface_tilt = self.get_gml_tilt()
-        self.get_gml_height()
+
 
     def get_gml_area(self):
         '''calc the area of a gml_surface defined by 4 or 5 gml coordinates
@@ -241,20 +245,3 @@ class Surface_gml(object):
             self.surface_orientation = -1
 
         return self.surface_orientation
-
-    def get_gml_height(self):
-        """calculates the height (or width) of a gml surface
-        """
-
-        gml_surface = np.array(self.gml_surface)
-        gml1 = gml_surface[0:3]
-        gml2 = gml_surface[3:6]
-        gml3 = gml_surface[6:9]
-        gml4 = gml_surface[9:12]
-        print(len(gml_surface))
-        if len(gml_surface) < 18:
-            height = gml4 - gml1
-            self.surface_height = LA.norm(height)
-        else:
-            pass
-
