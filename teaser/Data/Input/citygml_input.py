@@ -23,6 +23,9 @@ import teaser.Data.SchemaBindings.opengis.raw._nsgroup as nsgroup
 import teaser.Data.SchemaBindings.opengis.raw.smil20 as smil
 import teaser.Data.SchemaBindings.opengis.misc.raw.xAL as xal
 
+from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
+                            import SingleFamilyDwelling
+from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
 from teaser.Logic.BuildingObjects.Building import Building
 
 
@@ -46,34 +49,57 @@ def load_gml(path, prj):
             for part in city_object.Feature.consistsOfBuildingPart:
                 if part.BuildingPart.function:
                     if part.BuildingPart.function[0].value() == "1000":
-                        from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
-                            import SingleFamilyDwelling
-                        bldg = SingleFamilyDwelling(parent=prj)
-                    elif part.BuildingPart.function[0].value()  == "1120":
-                        from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
-                        bldg = Office(parent=prj)
+                        bldg = SingleFamilyDwelling(parent=prj,
+                                                    name=part.BuildingPart.id)
+                    elif part.BuildingPart.function[0].value() == "1120":
+                        bldg = Office(parent=prj,
+                                      name=part.BuildingPart.id)
+                    else:
+                        bldg = Building(parent=prj,
+                                        name=part.BuildingPart.id)
 
                 else:
-                    bldg = Building(parent=prj)
-
+                    bldg = Building(parent=prj,
+                                    name=part.BuildingPart.id)
                 _create_building_part(bldg=bldg, part=part)
+                _set_attributes(bldg=bldg, gml_bldg=part.BuildingPart)
                 bldg.set_height_gml()
-
         else:
-
             if city_object.Feature.function:
                 if city_object.Feature.function[0].value() == "1000":
-                    from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
-                        import SingleFamilyDwelling
-                    bldg = SingleFamilyDwelling(parent=prj)
+                    bldg = SingleFamilyDwelling(parent=prj,
+                                    name=city_object.Feature.id)
                 elif city_object.Feature.function[0].value() == "1120":
-                    from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
-                    bldg = Office(parent=prj)
+                    bldg = Office(parent=prj,
+                                    name=city_object.Feature.id)
+                else:
+                    bldg = Building(parent=prj,
+                                    name=city_object.Feature.id)
             else:
-                bldg = Building(parent=prj)
+                bldg = Building(parent=prj,
+                                    name=city_object.Feature.id)
 
-                _create_building(bldg=bldg, city_object=city_object)
-                bldg.set_height_gml()
+            _create_building(bldg=bldg, city_object=city_object)
+            _set_attributes(bldg=bldg, gml_bldg=city_object.Feature)
+            bldg.set_height_gml()
+
+
+def _set_attributes(bldg, gml_bldg):
+    """tries to set attributes for type building generation
+    """
+
+    try:
+        bldg.number_of_floors = gml_bldg.storeysAboveGround
+    except:
+        pass
+    try:
+        bldg.height_of_floors = gml_bldg.storeyHeightsAboveGround.value()[0]
+    except:
+        pass
+    try:
+        bldg.year_of_construction = gml_bldg.yearOfConstruction.year
+    except:
+        pass
 
 
 def _create_building(bldg, city_object):
@@ -143,23 +169,8 @@ class Surface_gml(object):
         surface_area : float
             returns the area of the surface
         '''
-        gml_surface = np.array(self.gml_surface)
-
-        gml1 = gml_surface[0:3]
-        gml2 = gml_surface[3:6]
-        gml3 = gml_surface[6:9]
-        gml4 = gml_surface[9:12]
-
-        vektor_1 = gml2-gml1
-        vektor_2 = gml3-gml1
-        normal_1 = np.cross(vektor_1, vektor_2)
-
-        self.surface_area = LA.norm(normal_1)
-
-        if len(gml_surface) > 15:
-            vektor_3 = gml4-gml3
-            normal_2 = np.cross(vektor_1, vektor_3)
-            self.surface_area = 0.5*LA.norm(normal_2) + self.surface_area
+        split_surface = list(zip(*[iter(self.gml_surface)]*3))
+        self.surface_area = self.poly_area(poly=split_surface)
 
         return self.surface_area
 
@@ -261,3 +272,31 @@ class Surface_gml(object):
             self.surface_orientation = -1
 
         return self.surface_orientation
+
+    def unit_normal(self, a, b, c):
+        x = np.linalg.det([[1,a[1],a[2]],
+             [1,b[1],b[2]],
+             [1,c[1],c[2]]])
+        y = np.linalg.det([[a[0],1,a[2]],
+             [b[0],1,b[2]],
+             [c[0],1,c[2]]])
+        z = np.linalg.det([[a[0],a[1],1],
+             [b[0],b[1],1],
+             [c[0],c[1],1]])
+        magnitude = (x**2 + y**2 + z**2)**.5
+        return (x/magnitude, y/magnitude, z/magnitude)
+
+    def poly_area(self, poly):
+        if len(poly) < 3: # not a plane - no area
+            return 0
+        total = [0, 0, 0]
+        N = len(poly)
+        for i in range(N):
+            vi1 = poly[i]
+            vi2 = poly[(i+1) % N]
+            prod = np.cross(vi1, vi2)
+            total[0] += prod[0]
+            total[1] += prod[1]
+            total[2] += prod[2]
+        result = np.dot(total, self.unit_normal(poly[0], poly[1], poly[2]))
+        return abs(result/2)

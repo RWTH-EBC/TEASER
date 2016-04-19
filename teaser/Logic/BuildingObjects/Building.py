@@ -146,11 +146,13 @@ class Building(object):
         elif function == "1120":
             from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
             self.__class__ = Office
-        gml_help = self.gml_surfaces
+        gml_surfaces_help = self.gml_surfaces
         parent_help = self.parent
+        name_help = self.name
         self.__init__(parent=None)
-        self.gml_surfaces = gml_help
+        self.gml_surfaces = gml_surfaces_help
         self.__parent = parent_help
+        self.__name = name_help
 
 
 
@@ -174,18 +176,33 @@ class Building(object):
             if surface.surface_orientation == -2 and surface.surface_tilt == \
                     0.0:
                 return surface
+        for surface in self.gml_surfaces:
+            if surface.surface_orientation == -1 and surface.surface_tilt == \
+                    0.0:
+                return surface
 
-    def set_gml_attributes(self, height_of_floors):
+    def set_gml_attributes(self, height_of_floors=None):
+        if height_of_floors is not None and self.number_of_floors is not None:
+            self.net_leased_area = self.get_footprint_gml().surface_area * \
+                                    self.number_of_floors
+            return
+        else:
+            self.height_of_floors = height_of_floors
 
-        self.height_of_floors = height_of_floors
         if self.bldg_height is None:
             raise AttributeError("building height needs to be defined for gml")
         else:
             self.number_of_floors = int(round((self.bldg_height /
-                                          height_of_floors)))
+                                          self.height_of_floors)))
+            if self.number_of_floors == 0:
+                self.number_of_floors = 1
 
             self.net_leased_area = self.get_footprint_gml().surface_area * \
                                     self.number_of_floors
+
+            if self.net_leased_area < 10.0:
+                self.net_leased_area = 10.0
+
 
     def set_outer_wall_area(self, new_area, orientation):
         '''Outer area wall setter
