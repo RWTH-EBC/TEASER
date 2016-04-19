@@ -126,6 +126,34 @@ class Building(object):
         self.orient_tilt = []
         self.calculation_method = None
 
+    def convert_bldg(self, function):
+        """converts the instance to a specific archetype building
+
+        DANGEROUS function, should only be used in combination with CityGML
+        and if you know what you are doing
+
+        Parameters
+        ----------
+
+        function : str
+            function from CityGML code list 1000 is residential 1120 is office
+        """
+
+        if function == "1000":
+            from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
+                import SingleFamilyDwelling
+            self.__class__ = SingleFamilyDwelling
+        elif function == "1120":
+            from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
+            self.__class__ = Office
+        gml_help = self.gml_surfaces
+        parent_help = self.parent
+        self.__init__(parent=None)
+        self.gml_surfaces = gml_help
+        self.__parent = parent_help
+
+
+
     def set_height_gml(self):
         """calculates the height of a building from CityGML data
         """
@@ -155,9 +183,7 @@ class Building(object):
         else:
             self.number_of_floors = int(round((self.bldg_height /
                                           height_of_floors)))
-            print(self.number_of_floors)
 
-            print(self.get_footprint_gml())
             self.net_leased_area = self.get_footprint_gml().surface_area * \
                                     self.number_of_floors
 
