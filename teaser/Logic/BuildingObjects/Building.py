@@ -159,9 +159,26 @@ class Building(object):
 
         self.bldg_height = max_help - min_help
 
+    def get_footprint_gml(self):
+        """gets the footprint surface of a building from CityGML data
+        """
 
+        for surface in self.gml_surfaces:
+            if surface.surface_orientation == -2 and surface.surface_tilt == \
+                    0.0:
+                return surface
 
+    def set_gml_attributes(self, height_of_floors):
 
+        self.height_of_floors = height_of_floors
+        if self.bldg_height is None:
+            raise AttributeError("building height needs to be defined for gml")
+        else:
+            self.number_of_floors = int(round((self.bldg_height /
+                                          height_of_floors)))
+            print(self.number_of_floors)
+            self.net_leased_area = self.get_footprint_gml().surface_area * \
+                                    self.number_of_floors
 
     def set_outer_wall_area(self, new_area, orientation):
         '''Outer area wall setter
