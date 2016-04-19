@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <UseConditions>
-	<UseConditions18599>
+	<BoundaryConditions>
 		<usage>Single office</usage>
 		<typical_length>3.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -51,8 +51,8 @@
 			<max_ahu>2.6</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Group Office (between 2 and 6 employees)</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -103,8 +103,8 @@
 			<max_ahu>2.6</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Open-plan Office (7 or more employees)</usage>
 		<typical_length>12.0</typical_length>
 		<typical_width>12.0</typical_width>
@@ -155,8 +155,8 @@
 			<max_ahu>3.6</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Meeting, Conference, seminar</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -207,8 +207,8 @@
 			<max_ahu>12.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Main Hall, Reception</usage>
 		<typical_length>10.0</typical_length>
 		<typical_width>10.0</typical_width>
@@ -259,8 +259,8 @@
 			<max_ahu>2.5</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Retail, department store</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -311,8 +311,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Retail with cooling</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -363,8 +363,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Class room (school), group room (kindergarden)</usage>
 		<typical_length>10.0</typical_length>
 		<typical_width>10.0</typical_width>
@@ -415,8 +415,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Lecture hall, auditorium</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>10.0</typical_width>
@@ -467,8 +467,8 @@
 			<max_ahu>15.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Bed room</usage>
 		<typical_length>4.0</typical_length>
 		<typical_width>4.0</typical_width>
@@ -519,8 +519,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Hotel room</usage>
 		<typical_length>4.0</typical_length>
 		<typical_width>4.0</typical_width>
@@ -571,8 +571,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Canteen</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -623,8 +623,8 @@
 			<max_ahu>18.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Restaurant</usage>
 		<typical_length>12.0</typical_length>
 		<typical_width>12.0</typical_width>
@@ -675,8 +675,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Kitchen in non-residential buildings</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -727,8 +727,8 @@
 			<max_ahu>70.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Kitchen - preparations, storage</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -779,8 +779,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>WC and sanitary rooms in non-residential buildings</usage>
 		<typical_length>3.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -831,8 +831,8 @@
 			<max_ahu>8.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Further common rooms</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -883,8 +883,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Auxiliary areas (without common rooms)</usage>
 		<typical_length>3.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -935,8 +935,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Traffic area</usage>
 		<typical_length>2.0</typical_length>
 		<typical_width>12.0</typical_width>
@@ -987,8 +987,8 @@
 			<max_ahu>2.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Stock, technical equipment, archives</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -1039,8 +1039,8 @@
 			<max_ahu>0.5</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Data center</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -1091,8 +1091,8 @@
 			<max_ahu>130.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Commercial and industrial Halls - heavy work, standing activity</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1143,8 +1143,8 @@
 			<max_ahu>10.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Commercial and industrial Halls - medium work, standing activity</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1195,8 +1195,8 @@
 			<max_ahu>10.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Commercial and industrial Halls - light work, standing activity</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1247,8 +1247,8 @@
 			<max_ahu>10.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Spectator area (theater and event venues)</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>10.0</typical_width>
@@ -1299,8 +1299,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Foyer (theater and event venues)</usage>
 		<typical_length>12.0</typical_length>
 		<typical_width>12.0</typical_width>
@@ -1351,8 +1351,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Stage (theater and event venues)</usage>
 		<typical_length>10.0</typical_length>
 		<typical_width>5.0</typical_width>
@@ -1403,8 +1403,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Exhibition, congress</usage>
 		<typical_length>40.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1455,8 +1455,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Exhibition room and museum conservational demands</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1507,8 +1507,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Library - reading room</usage>
 		<typical_length>20.0</typical_length>
 		<typical_width>20.0</typical_width>
@@ -1559,8 +1559,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Library - open stacks</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -1611,8 +1611,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Library - magazine and depot</usage>
 		<typical_length>6.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -1663,8 +1663,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Gym (without spectator area)</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -1715,8 +1715,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Parking garages (office and private usage)</usage>
 		<typical_length>50.0</typical_length>
 		<typical_width>50.0</typical_width>
@@ -1767,8 +1767,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Parking garages (public usage)</usage>
 		<typical_length>100.0</typical_length>
 		<typical_width>50.0</typical_width>
@@ -1819,8 +1819,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Sauna area</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -1871,8 +1871,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Exercise room</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -1923,8 +1923,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Laboratory</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -1975,8 +1975,8 @@
 			<max_ahu>48.0</max_ahu>
 			<with_ahu>true</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Examination- or treatment room</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -2027,8 +2027,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Special care area</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -2079,8 +2079,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Corridors in the general care area</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -2131,8 +2131,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Medical and therapeutic practices</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -2183,8 +2183,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Storehouse, logistics building</usage>
 		<typical_length>1.0</typical_length>
 		<typical_width>1.0</typical_width>
@@ -2235,8 +2235,8 @@
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
-	<UseConditions18599>
+	</BoundaryConditions>
+	<BoundaryConditions>
 		<usage>Living</usage>
 		<typical_length>3.0</typical_length>
 		<typical_width>6.0</typical_width>
@@ -2287,5 +2287,5 @@
 			<max_ahu>0.6</max_ahu>
 			<with_ahu>false</with_ahu>
 		</AHU>
-	</UseConditions18599>
+	</BoundaryConditions>
 </UseConditions>
