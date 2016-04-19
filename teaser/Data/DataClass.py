@@ -8,7 +8,7 @@ This module holds file pathes and bindings for XML data
 
 import teaser.Logic.Utilis as utilis
 import teaser.Data.SchemaBindings.TypeBuildingBind as tb_bind
-import teaser.Data.SchemaBindings.UseConditions18599Bind as uc_bind
+import teaser.Data.SchemaBindings.BoundaryConditionsBind as uc_bind
 import teaser.Data.SchemaBindings.MaterialBind as mat_bind
 import codecs
 

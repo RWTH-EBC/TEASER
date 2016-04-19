@@ -11,10 +11,15 @@ TEASER file format .tXML
 import teaser.Data.SchemaBindings.ProjectBind as pb
 
 from teaser.Logic.BuildingObjects.Building import Building
+from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
+from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import SingleFamilyDwelling
+from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute import Institute
+from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import Institute4
+from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import Institute8
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU import BuildingAHU
-from teaser.Logic.BuildingObjects.TypeBuildings.UseConditions18599 import \
-    UseConditions18599
+from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
+    import BoundaryConditions
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
@@ -81,7 +86,7 @@ def _load_building(prj, pyxb_bld, type):
         bldg = Institute8(prj)
 
     elif type == "Residential":
-        bldg = Residential(prj)
+        bldg = SingleFamilyDwelling(prj)
 
     bldg.name = pyxb_bld.name
     bldg.street_name = pyxb_bld.street_name
@@ -129,9 +134,9 @@ def _load_building(prj, pyxb_bld, type):
         # zone.use_conditions.typical_length = pyxb_zone.typical_length
         # zone.use_conditions.typical_width = pyxb_zone.typical_width
 
-        zone.use_conditions = UseConditions18599(zone)
+        zone.use_conditions = BoundaryConditions(zone)
 
-        pyxb_use = pyxb_zone.UseCondition.UseConditions18599
+        pyxb_use = pyxb_zone.UseCondition.BoundaryConditions
 
         zone.use_conditions.usage = \
             pyxb_use.usage
