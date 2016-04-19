@@ -44,12 +44,12 @@ def load_gml(path, prj):
 
         if city_object.Feature.consistsOfBuildingPart:
             for part in city_object.Feature.consistsOfBuildingPart:
-                if part.function:
-                    if part.function[0].value() == "1000":
+                if part.BuildingPart.function:
+                    if part.BuildingPart.function[0].value() == "1000":
                         from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
                             import SingleFamilyDwelling
                         bldg = SingleFamilyDwelling(parent=prj)
-                    elif part.function[0].value()  == "1120":
+                    elif part.BuildingPart.function[0].value()  == "1120":
                         from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
                         bldg = Office(parent=prj)
 
@@ -69,8 +69,8 @@ def load_gml(path, prj):
                 elif city_object.Feature.function[0].value() == "1120":
                     from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
                     bldg = Office(parent=prj)
-                else:
-                    bldg = Building(parent=prj)
+            else:
+                bldg = Building(parent=prj)
 
                 _create_building(bldg=bldg, city_object=city_object)
                 bldg.set_height_gml()
@@ -113,31 +113,6 @@ def _create_building_part(bldg, part):
                 .Surface.surfaceMember:
             bldg.gml_surfaces.append(Surface_gml(
                 member.Surface.exterior.Ring.posList.value()))
-
-def convert_bldg(self, function):
-        """converts the instance to a specific archetype building
-
-        DANGEROUS function, should only be used in combination with CityGML
-        and if you know what you are doing
-
-        Parameters
-        ----------
-
-        function : str
-            function from CityGML code list 1000 is residential 1120 is office
-        """
-
-        if function == "1000":
-            from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
-                import SingleFamilyDwelling
-            self.__class__ = SingleFamilyDwelling
-        elif function == "1120":
-            from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
-            self.__class__ = Office
-
-        self.__init__(parent = self.parent)
-
-
 
 class Surface_gml(object):
 
