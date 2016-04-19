@@ -136,7 +136,7 @@ def _load_building(prj, pyxb_bld, type):
 
         zone.use_conditions = BoundaryConditions(zone)
 
-        pyxb_use = pyxb_zone.UseCondition.UseConditions18599
+        pyxb_use = pyxb_zone.UseCondition.BoundaryConditions
 
         zone.use_conditions.usage = \
             pyxb_use.usage
