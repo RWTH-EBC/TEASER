@@ -7,7 +7,7 @@ Created July 2015
 
 from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
-    import UseConditions18599
+    import UseConditions
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
@@ -77,7 +77,7 @@ class Controller():
         '''
 
         zone = ThermalZone(parent)
-        zone.use_conditions = UseConditions18599(zone)
+        zone.use_conditions = UseConditions(zone)
         zone.use_conditions.load_use_conditions(zone_type)
         zone.name = name
         zone.area = area
