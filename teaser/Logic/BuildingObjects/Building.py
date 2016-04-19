@@ -99,6 +99,7 @@ class Building(object):
         self.number_of_floors = None
         self.height_of_floors = None
         self.net_leased_area = net_leased_area
+        self.bldg_height = None
 
         self._year_of_retrofit = None
 
@@ -145,6 +146,21 @@ class Building(object):
         elif function == "1120":
             from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
             self.__class__ = Office
+
+    def set_height_gml(self):
+        """calculates the height of a building from CityGML data
+        """
+        max_help = 0
+        min_help = 9999
+        for surface in self.gml_surfaces:
+            z_value = surface.gml_surface[2::3]
+            max_help = max(max_help, max(z_value))
+            min_help = min(min_help, min(z_value))
+
+        self.bldg_height = max_help - min_help
+
+
+
 
 
     def set_outer_wall_area(self, new_area, orientation):
