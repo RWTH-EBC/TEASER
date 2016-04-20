@@ -267,7 +267,7 @@ class BoundaryConditions(UseConditions):
                                   0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self._min_ahu = 0.0
         self._max_ahu = 2.6
-        self.with_ahu = True
+        self.with_ahu = False
 
         self.use_constant_ach_rate = False
         self.base_ach = 0.2
