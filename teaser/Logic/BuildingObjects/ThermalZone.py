@@ -517,7 +517,7 @@ class ThermalZone(object):
                     elif win.orientation == win2.orientation and win.tilt \
                             == win2.tilt:
                         ua_help = ua_help + win2.ua_value
-                win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+                win.wf_out = ua_help/(self.ua_value_win)
 
 
         else:
