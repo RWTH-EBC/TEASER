@@ -1433,7 +1433,6 @@ class MainUI(QDialog):
             self.connect(self.new_layer_save_button, SIGNAL(
                 "clicked()"), lambda check_window=check:
                 self.check_new_layer_inputs(check_window))
-               # "clicked()"), self.check_new_layer_inputs_all_constr)
             self.connect(self.new_layer_save_button, SIGNAL(
                 "clicked()"), self.update_set_all_construction)
 
@@ -2702,105 +2701,6 @@ class MainUI(QDialog):
                         int(self.new_layer_position_combobox.currentText()),
                         thick, self.new_layer_material_combobox.currentText(),
                         dens, therm, heat, solar, ir, trans))
-
-    def check_new_layer_inputs_all_constrAlt(self):
-        ''' Adds a new layer to the current element, checks if the
-        input is correct
-
-        '''
-
-        if self.new_layerX_thickness_textbox.text() is not "":
-            thick = float(self.new_layerX_thickness_textbox.text())
-        else:
-            thick = 1
-        if self.new_layerX_material_density_textbox.text() is not "":
-            dens = float(self.new_layerX_material_density_textbox.text())
-        else:
-            dens = 1
-        if self.new_layerX_material_thermal_conduc_textbox.text() is not "":
-            therm = float(
-                self.new_layerX_material_thermal_conduc_textbox.text())
-        else:
-            therm = 1
-        if self.new_layerX_material_heat_capac_textbox.text() is not "":
-            heat = float(self.new_layerX_material_heat_capac_textbox.text())
-        else:
-            heat = 1
-        if self.new_layerX_material_solar_absorp_textbox.text() is not "":
-            solar = float(self.new_layerX_material_solar_absorp_textbox.text())
-        else:
-            solar = 1
-        if self.new_layerX_material_ir_emissivity_textbox.text() is not "":
-            ir = float(self.new_layerX_material_ir_emissivity_textbox.text())
-        else:
-            ir = 1
-        if self.new_layerX_material_transmittance_textbox.text() is not "":
-            trans = float(self.new_layerX_material_transmittance_textbox.text())
-        else:
-            trans = 1
-        """
-        self.all_constr_layer_list.append(
-            Controller.click_add_new_layer(
-                    None, int(self.new_layerX_position_combobox.currentText()),
-                    thick, self.new_layerX_material_combobox.currentText(),
-                    dens, therm, heat, solar, ir, trans))
-        """
-        position = int(self.new_layerX_position_combobox.currentText())
-        exists = False
-        for layer in self.all_constr_layer_list:
-            if layer.position == position:
-                    exists = True
-            if exists:
-                layer.position = layer.position + 1
-
-        self.all_constr_layer_list.insert(position, Controller.click_add_new_layer(
-                    None, int(self.new_layerX_position_combobox.currentText()),
-                    thick, self.new_layerX_material_combobox.currentText(),
-                    dens, therm, heat, solar, ir, trans))
-        
-    def check_new_layer_inputs_all_constr(self):
-        ''' Adds a new layer to the current element, checks if the
-        input is correct
-
-        '''
-
-        if self.new_layer_thickness_textbox.text() is not "":
-            thick = float(self.new_layer_thickness_textbox.text())
-        else:
-            thick = 1
-        if self.new_layer_material_density_textbox.text() is not "":
-            dens = float(self.new_layer_material_density_textbox.text())
-        else:
-            dens = 1
-        if self.new_layer_material_thermal_conduc_textbox.text() is not "":
-            therm = float(
-                self.new_layer_material_thermal_conduc_textbox.text())
-        else:
-            therm = 1
-        if self.new_layer_material_heat_capac_textbox.text() is not "":
-            heat = float(self.new_layer_material_heat_capac_textbox.text())
-        else:
-            heat = 1
-        if self.new_layer_material_solar_absorp_textbox.text() is not "":
-            solar = float(self.new_layer_material_solar_absorp_textbox.text())
-        else:
-            solar = 1
-        if self.new_layer_material_ir_emissivity_textbox.text() is not "":
-            ir = float(self.new_layer_material_ir_emissivity_textbox.text())
-        else:
-            ir = 1
-        if self.new_layer_material_transmittance_textbox.text() is not "":
-            trans = float(self.new_layer_material_transmittance_textbox.text())
-        else:
-            trans = 1
-        """
-        self.all_constr_layer_list.append(
-            Controller.click_add_new_layer(
-                    None, int(self.new_layer_position_combobox.currentText()),
-                    thick, self.new_layer_material_combobox.currentText(),
-                    dens, therm, heat, solar, ir, trans))
-        """
-        
 
     def change_zone_values_ui(self, item):
         ''' Opens a window to see all attributes from the
