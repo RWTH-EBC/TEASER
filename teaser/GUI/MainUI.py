@@ -70,6 +70,7 @@ class MainUI(QDialog):
         self.current_transformation = "standard"
         self.current_type_building = "Office"
         self.is_switchable = False
+        self.construction_type_switched = False
         self.type_building_ind_att = dict(layout_area=0.0,
                                           layout_window_area=0.0,
                                           layout_attic=0.0,
@@ -3406,7 +3407,7 @@ class MainUI(QDialog):
         ''' Opens a window to display all attributes
         of the currently selected element.
         '''
-        
+
         self.element_build_ui = QtGui.QWizardPage()
         self.element_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.element_build_ui.setWindowTitle("Element Details")
@@ -3477,6 +3478,8 @@ class MainUI(QDialog):
             self.element_construction_type_combobox.setCurrentIndex(0)
         if self.current_element.construction_type == "light":
             self.element_construction_type_combobox.setCurrentIndex(1)
+        self.connect(self.element_construction_type_combobox, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.switch_constr_type)
 
         self.element_orientation_label = QtGui.QLabel("Orientation")
         self.element_orientation_combobox = QtGui.QComboBox()
@@ -3621,6 +3624,9 @@ class MainUI(QDialog):
 
         self.element_save_button = QtGui.QPushButton()
         self.element_save_button.setText("Save")
+
+        self.connect(self.element_save_button, SIGNAL("clicked()"),
+                     self.load_constr_type)
         self.connect(self.element_save_button, SIGNAL("clicked()"),
                      self.save_changed_element_values)
         self.connect(self.element_save_button, SIGNAL("clicked()"),

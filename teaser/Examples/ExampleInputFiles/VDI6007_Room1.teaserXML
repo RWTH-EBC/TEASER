@@ -18,7 +18,7 @@
 			<typical_length>123.0</typical_length>
 			<typical_width>123.0</typical_width>
 			<UseCondition>
-				<UseConditions18599>
+				<BoundaryConditions>
 					<usage>43</usage>
 					<UsageOperationTime>
 						<usage_time>7 18</usage_time>
@@ -73,7 +73,7 @@
 						<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
 						<winter_reduction>0.2 273.15 283.15</winter_reduction>
 					</AHU>
-				</UseConditions18599>
+				</BoundaryConditions>
 			</UseCondition>
 			<OuterWall>
 				<year_of_construction>1960</year_of_construction>

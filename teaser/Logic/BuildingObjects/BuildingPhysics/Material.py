@@ -2,10 +2,10 @@
 # by TEASER4 Development Team
 
 
-import teaser.Data.SchemaBindings.MaterialBind as mat_bind
-import teaser.Logic.Utilis as utilis
 import re
 
+import teaser.Data.Input.material_input as material_input
+import teaser.Data.Output.material_output as material_output
 
 class Material(object):
     '''This class represents a Material.
@@ -73,19 +73,9 @@ class Material(object):
             Code list for Material
 
         '''
-        ass_error_1 = "You need to specify parents up to project"
 
-        assert self.parent.parent.parent.parent.parent is not None, ass_error_1
-
-        for mat in self.parent.parent.parent.parent.parent.\
-                data.material_bind.Material:
-
-            if mat.name == mat_name:
-
-                self.name = mat.name
-                self.density = mat.density
-                self.thermal_conduc = float(mat.thermal_conduc)
-                self.heat_capac = mat.heat_capac
+        material_input.load_material(material=self,
+                                     mat_name=mat_name)
 
     def save_material_template(self):
         '''Material saver.
@@ -94,20 +84,7 @@ class Material(object):
 
         '''
 
-        mat_pyxb = mat_bind.MaterialType()
-        mat_pyxb.name = self.name
-        mat_pyxb.density = self.density
-        mat_pyxb.thermal_conduc = self.thermal_conduc
-        mat_pyxb.heat_capac = self.heat_capac
-
-        path = utilis.get_full_path("InputData/MaterialTemplates.xml")
-        xml_file = open(path, 'r')
-
-        xml_parse = mat_bind.CreateFromDocument(xml_file.read())
-        xml_parse.Material.append(mat_pyxb)
-        out_file = open(path, 'w')
-
-        out_file.write(xml_parse.toDOM().toprettyxml())
+        material_output.save_material(material=self)
 
     @property
     def parent(self):
