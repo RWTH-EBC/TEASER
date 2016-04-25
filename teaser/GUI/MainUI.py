@@ -1424,13 +1424,16 @@ class MainUI(QDialog):
 
         if check == "Element Details Window":
             self.connect(self.new_layer_save_button, SIGNAL(
-                "clicked()"), self.check_new_layer_inputs)
+                "clicked()"), lambda check_window=check:
+                self.check_new_layer_inputs(check_window))
             self.connect(self.new_layer_save_button, SIGNAL(
                 "clicked()"), self.update_element_details)
 
         elif check == "set all construction window":
             self.connect(self.new_layer_save_button, SIGNAL(
-                "clicked()"), self.check_new_layer_inputs_all_constr)
+                "clicked()"), lambda check_window=check:
+                self.check_new_layer_inputs(check_window))
+               # "clicked()"), self.check_new_layer_inputs_all_constr)
             self.connect(self.new_layer_save_button, SIGNAL(
                 "clicked()"), self.update_set_all_construction)
 
@@ -2641,8 +2644,8 @@ class MainUI(QDialog):
                 "Window \n Area:\t".expandtabs(11) + 
                 str(element.area), element.internal_id)
             self.element_model.appendRow(item)
-            
-    def check_new_layer_inputs(self):
+
+    def check_new_layer_inputs(self, check):
         ''' Adds a new layer to the current element, checks if the
         input is correct
 
@@ -2678,13 +2681,27 @@ class MainUI(QDialog):
         else:
             trans = 1
 
-        sender = self.sender()
-        if(sender.text() == self.new_layer_save_button.text()):
-            self.current_element = Controller.click_add_new_layer(
-                self.current_element,
-                int(self.new_layer_position_combobox.currentText()),
-                thick, self.new_layer_material_combobox.currentText(), dens,
-                therm, heat, solar, ir, trans)
+        if check == "Element Details Window":
+                self.current_element = Controller.click_add_new_layer(
+                    self.current_element,
+                    int(self.new_layer_position_combobox.currentText()),
+                    thick, self.new_layer_material_combobox.currentText(),
+                    dens, therm, heat, solar, ir, trans)
+
+        elif check == "set all construction window":
+            position = int(self.new_layer_position_combobox.currentText())
+            exists = False
+            for layer in self.all_constr_layer_list:
+                if layer.position == position:
+                        exists = True
+                if exists:
+                    layer.position = layer.position + 1
+
+            self.all_constr_layer_list.insert(position,
+                        Controller.click_add_new_layer( None,
+                        int(self.new_layer_position_combobox.currentText()),
+                        thick, self.new_layer_material_combobox.currentText(),
+                        dens, therm, heat, solar, ir, trans))
 
     def check_new_layer_inputs_all_constrAlt(self):
         ''' Adds a new layer to the current element, checks if the
@@ -2783,18 +2800,7 @@ class MainUI(QDialog):
                     thick, self.new_layer_material_combobox.currentText(),
                     dens, therm, heat, solar, ir, trans))
         """
-        position = int(self.new_layer_position_combobox.currentText())
-        exists = False
-        for layer in self.all_constr_layer_list:
-            if layer.position == position:
-                    exists = True
-            if exists:
-                layer.position = layer.position + 1
-
-        self.all_constr_layer_list.insert(position, Controller.click_add_new_layer(
-                    None, int(self.new_layer_position_combobox.currentText()),
-                    thick, self.new_layer_material_combobox.currentText(),
-                    dens, therm, heat, solar, ir, trans))
+        
 
     def change_zone_values_ui(self, item):
         ''' Opens a window to see all attributes from the
