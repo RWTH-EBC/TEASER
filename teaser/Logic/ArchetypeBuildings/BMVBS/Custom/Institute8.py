@@ -2,11 +2,12 @@
 # by TEASER4 Development Team
 
 
-from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
+from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
 
 
-class Institute4(Office):
-    '''Type Institute Building (type 4)
+class Institute8(Office):
+    '''Type Institute Building (type 8)
+
     '''
 
     def __init__(self, parent=None,
@@ -19,13 +20,14 @@ class Institute4(Office):
                  office_layout=None,
                  window_layout=None,
                  construction_type=None):
-        '''Constructor of Institute4
 
-        adds an additional zone "Laboratory"
+        '''Constructor of Institute8
+
+        Adds an additional zone "Laboratory"
 
         '''
 
-        super(Institute4, self).__init__(parent,
+        super(Institute8, self).__init__(parent,
                                         name,
                                         year_of_construction,
                                         number_of_floors,
@@ -35,11 +37,12 @@ class Institute4(Office):
                                         office_layout,
                                         window_layout,
                                         construction_type)
-        self.zone_area_factors =\
+
+        self.zone_area_factors = \
             {"Meeting": [0.04, "Meeting, Conference, seminar"],
-             "Storage": [0.1, "Stock, technical equipment, archives"],
-             "Office": [0.375, "Group Office (between 2 and 6 employees)"],
+             "Storage": [0.02, "Stock, technical equipment, archives"],
+             "Office": [0.1, "Group Office (between 2 and 6 employees)"],
              "Sanitary": [0.04, "WC and sanitary rooms in non-residential buildings"],
-             "ICT": [0.02, "Data center"],
-             "Floor": [0.225, "Traffic area"],
-             "Laboratory": [0.2, "Laboratory"]}
+             "ICT": [0.02,  "Data center"],
+             "Floor": [0.18, "Traffic area"],
+             "Laboratory": [0.6, "Laboratory"]}

@@ -81,26 +81,12 @@ class BuildingAHU(object):
 
     @parent.setter
     def parent(self, value):
-        if value is not None:
-            ass_error_1 = "Parent has to be an instance of Building()"
-
-            assert type(value).__name__ == "Building" \
-                or type(value).__name__ == "Office"\
-                or type(value).__name__ == "Institute"\
-                or type(value).__name__ == "Institute4"\
-                or type(value).__name__ == "Institute8" \
-                or type(value).__name__ == "Residential", ass_error_1
-
+        from teaser.Logic.BuildingObjects.Building import Building
+        import inspect
+        if inspect.isclass(Building):
             self.__parent = value
-
-        if type(value).__name__ == "Building" \
-           or type(value).__name__ == "Office" \
-           or type(value).__name__ == "Institute" \
-           or type(value).__name__ == "Institute4" \
-           or type(value).__name__ == "Institute8" \
-           or type(value).__name__ == "Residential":
-
             self.__parent.central_ahu = self
+
     
     @property
     def profile_min_relative_humidity(self):

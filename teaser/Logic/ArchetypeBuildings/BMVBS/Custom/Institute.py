@@ -2,15 +2,15 @@
 # by TEASER4 Development Team
 
 
-from teaser.Logic.BuildingObjects.TypeBuildings.Office import Office
+from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
 
 
-class Institute8(Office):
-    '''Type Institute Building (type 8)
-
+class Institute(Office):
+    '''Type Institute Building (type 4)
     '''
 
-    def __init__(self, parent=None,
+    def __init__(self,
+                 parent=None,
                  name=None,
                  year_of_construction=None,
                  number_of_floors=None,
@@ -21,13 +21,13 @@ class Institute8(Office):
                  window_layout=None,
                  construction_type=None):
 
-        '''Constructor of Institute8
+        '''Constructor of Institute
 
         Adds an additional zone "Laboratory"
 
         '''
 
-        super(Institute8, self).__init__(parent,
+        super(Institute, self).__init__(parent,
                                         name,
                                         year_of_construction,
                                         number_of_floors,
@@ -38,11 +38,11 @@ class Institute8(Office):
                                         window_layout,
                                         construction_type)
 
-        self.zone_area_factors = \
+        self.zone_area_factors =\
             {"Meeting": [0.04, "Meeting, Conference, seminar"],
-             "Storage": [0.02, "Stock, technical equipment, archives"],
-             "Office": [0.1, "Group Office (between 2 and 6 employees)"],
+             "Storage": [0.1, "Stock, technical equipment, archives"],
+             "Office": [0.4, "Group Office (between 2 and 6 employees)"],
              "Sanitary": [0.04, "WC and sanitary rooms in non-residential buildings"],
-             "ICT": [0.02,  "Data center"],
-             "Floor": [0.18, "Traffic area"],
-             "Laboratory": [0.6, "Laboratory"]}
+             "ICT": [0.02, "Data center"],
+             "Floor": [0.25, "Traffic area"],
+             "Laboratory": [0.15, "Laboratory"]}
