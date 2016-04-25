@@ -1421,18 +1421,15 @@ class MainUI(QDialog):
 
         self.new_layer_save_button = QtGui.QPushButton()
         self.new_layer_save_button.setText("Save")
-
-        if check == "Element Details Window":
-            self.connect(self.new_layer_save_button, SIGNAL(
+        self.connect(self.new_layer_save_button, SIGNAL(
                 "clicked()"), lambda check_window=check:
                 self.check_new_layer_inputs(check_window))
+
+        if check == "Element Details Window":
             self.connect(self.new_layer_save_button, SIGNAL(
                 "clicked()"), self.update_element_details)
 
         elif check == "set all construction window":
-            self.connect(self.new_layer_save_button, SIGNAL(
-                "clicked()"), lambda check_window=check:
-                self.check_new_layer_inputs(check_window))
             self.connect(self.new_layer_save_button, SIGNAL(
                 "clicked()"), self.update_set_all_construction)
 
