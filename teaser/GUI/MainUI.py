@@ -5070,9 +5070,12 @@ class MainUI(QDialog):
 class WizardPage(QtGui.QWizardPage):
     def closeEvent(self, evnt, elem_layer= None ,layer_list= None):
             if(elem_layer is not None or layer_list is not None):
+                elem_layer.clear()
+                layer_list.clear()
+
                 elem_layer = []
                 layer_list = []
-                
+
 
 class EmittingStream(QtCore.QObject):
     ''' Part of the package to display the console in the project.
