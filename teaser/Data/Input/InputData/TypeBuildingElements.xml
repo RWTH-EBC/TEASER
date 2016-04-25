@@ -540,6 +540,134 @@
 			</layer>
 		</Layers>
 	</OuterWall>
+	<OuterWall>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>light_annex</construction_type>
+		<inner_convection>2.7</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<outer_convection>20.0</outer_convection>
+		<outer_radiation>5.0</outer_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.1</thickness>
+				<Material>
+					<name>Highdensitybrick</name>
+					<density>1850.0</density>
+					<thermal_conduc>1.1</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.03</thickness>
+				<Material>
+					<name>Aircavity</name>
+					<density>1.204</density>
+					<thermal_conduc>0.1667</thermal_conduc>
+					<heat_capac>1.005</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.06</thickness>
+				<Material>
+					<name>MW</name>
+					<density>1850.0</density>
+					<thermal_conduc>0.036</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>4</id>
+				<thickness>0.14</thickness>
+				<Material>
+					<name>Lowdensitybrick</name>
+					<density>850.0</density>
+					<thermal_conduc>0.41</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>5</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Plaster</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+		</Layers>
+	</OuterWall>
+	<OuterWall>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>heavy_annex</construction_type>
+		<inner_convection>2.7</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<outer_convection>20.0</outer_convection>
+		<outer_radiation>5.0</outer_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.08</thickness>
+				<Material>
+					<name>Highdensitybrick</name>
+					<density>1850.0</density>
+					<thermal_conduc>1.1</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.05</thickness>
+				<Material>
+					<name>Aircavity</name>
+					<density>1.204</density>
+					<thermal_conduc>0.3125</thermal_conduc>
+					<heat_capac>1.005</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.14</thickness>
+				<Material>
+					<name>Highdensitybrick</name>
+					<density>1850.0</density>
+					<thermal_conduc>0.9</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>4</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Plaster</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+		</Layers>
+	</OuterWall>
 	<InnerWall>
 		<building_age_group>0 1918</building_age_group>
 		<construction_type>heavy</construction_type>
@@ -1082,12 +1210,100 @@
 			</layer>
 		</Layers>
 	</InnerWall>
+	<InnerWall>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>light_annex</construction_type>
+		<inner_convection>2.7</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Plaster</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.1</thickness>
+				<Material>
+					<name>Highdensitybrick</name>
+					<density>1850.0</density>
+					<thermal_conduc>1.1</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Plaster</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+		</Layers>
+	</InnerWall>
+	<InnerWall>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>heavy_annex</construction_type>
+		<inner_convection>2.7</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Plaster</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.14</thickness>
+				<Material>
+					<name>Highdensitybrick</name>
+					<density>1850.0</density>
+					<thermal_conduc>1.1</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Plaster</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+		</Layers>
+	</InnerWall>
 	<Rooftop>
 		<building_age_group>0 1918</building_age_group>
 		<construction_type>heavy</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1117,7 +1333,7 @@
 		<construction_type>light</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1147,7 +1363,7 @@
 		<construction_type>heavy</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1177,7 +1393,7 @@
 		<construction_type>light</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1217,7 +1433,7 @@
 		<construction_type>heavy</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1247,7 +1463,7 @@
 		<construction_type>light</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1287,7 +1503,7 @@
 		<construction_type>heavy</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1327,7 +1543,7 @@
 		<construction_type>light</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1357,7 +1573,7 @@
 		<construction_type>heavy</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1397,7 +1613,7 @@
 		<construction_type>light</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1427,7 +1643,7 @@
 		<construction_type>heavy</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1467,7 +1683,7 @@
 		<construction_type>light</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1507,7 +1723,7 @@
 		<construction_type>heavy</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1547,7 +1763,7 @@
 		<construction_type>light</construction_type>
 		<inner_convection>1.7000000000000002</inner_convection>
 		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.000000000000002</outer_convection>
+		<outer_convection>20.000000000000004</outer_convection>
 		<outer_radiation>5.0</outer_radiation>
 		<Layers>
 			<layer>
@@ -1578,6 +1794,122 @@
 					<density>1800.0</density>
 					<thermal_conduc>0.7</thermal_conduc>
 					<heat_capac>1.0</heat_capac>
+				</Material>
+			</layer>
+		</Layers>
+	</Rooftop>
+	<Rooftop>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>light_annex</construction_type>
+		<inner_convection>2.7</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<outer_convection>20.0</outer_convection>
+		<outer_radiation>5.0</outer_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.025</thickness>
+				<Material>
+					<name>Tiledroof</name>
+					<density>1700.0</density>
+					<thermal_conduc>1.0</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.03</thickness>
+				<Material>
+					<name>Aircavity</name>
+					<density>1.204</density>
+					<thermal_conduc>0.1875</thermal_conduc>
+					<heat_capac>1.005</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.1</thickness>
+				<Material>
+					<name>MW</name>
+					<density>2100.0</density>
+					<thermal_conduc>0.036</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>4</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Wood</name>
+					<density>550.0</density>
+					<thermal_conduc>0.11</thermal_conduc>
+					<heat_capac>1.88</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>5</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Plaster</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+		</Layers>
+	</Rooftop>
+	<Rooftop>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>heavy_annex</construction_type>
+		<inner_convection>2.7</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<outer_convection>20.0</outer_convection>
+		<outer_radiation>5.0</outer_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Tiledroof</name>
+					<density>1700.0</density>
+					<thermal_conduc>1.3</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.03</thickness>
+				<Material>
+					<name>Aircavity</name>
+					<density>1.204</density>
+					<thermal_conduc>0.1875</thermal_conduc>
+					<heat_capac>1.005</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Gypsumboard</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
 				</Material>
 			</layer>
 		</Layers>
@@ -2110,6 +2442,106 @@
 					<density>50.0</density>
 					<thermal_conduc>0.12</thermal_conduc>
 					<heat_capac>1.0</heat_capac>
+				</Material>
+			</layer>
+		</Layers>
+	</GroundFloor>
+	<GroundFloor>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>light_annex</construction_type>
+		<inner_convection>2.7</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Tiles</name>
+					<density>2100.0</density>
+					<thermal_conduc>1.4</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.06</thickness>
+				<Material>
+					<name>Screed</name>
+					<density>1100.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.86</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.05</thickness>
+				<Material>
+					<name>XPS</name>
+					<density>40.0</density>
+					<thermal_conduc>0.024</thermal_conduc>
+					<heat_capac>1.47</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>4</id>
+				<thickness>0.2</thickness>
+				<Material>
+					<name>Concrete</name>
+					<density>2400.0</density>
+					<thermal_conduc>1.7</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+		</Layers>
+	</GroundFloor>
+	<GroundFloor>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>heavy_annex</construction_type>
+		<inner_convection>2.7</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Tiles</name>
+					<density>2100.0</density>
+					<thermal_conduc>1.4</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.05</thickness>
+				<Material>
+					<name>Screed</name>
+					<density>1100.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.86</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.12</thickness>
+				<Material>
+					<name>Concrete</name>
+					<density>2400.0</density>
+					<thermal_conduc>1.7</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
 				</Material>
 			</layer>
 		</Layers>
@@ -3030,6 +3462,118 @@
 			</layer>
 		</Layers>
 	</Ceiling>
+	<Ceiling>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>light_annex</construction_type>
+		<inner_convection>20.0</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Plaster</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.2</thickness>
+				<Material>
+					<name>Concrete</name>
+					<density>2400.0</density>
+					<thermal_conduc>1.7</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.06</thickness>
+				<Material>
+					<name>Screed</name>
+					<density>1100.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.86</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>4</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Tiles</name>
+					<density>2100.0</density>
+					<thermal_conduc>1.4</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+		</Layers>
+	</Ceiling>
+	<Ceiling>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>heavy_annex</construction_type>
+		<inner_convection>20.0</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Plaster</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.2</thickness>
+				<Material>
+					<name>Concrete</name>
+					<density>2400.0</density>
+					<thermal_conduc>1.7</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.08</thickness>
+				<Material>
+					<name>Screed</name>
+					<density>1100.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.86</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>4</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Woodenfloor</name>
+					<density>700.0</density>
+					<thermal_conduc>0.18</thermal_conduc>
+					<heat_capac>1.88</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+		</Layers>
+	</Ceiling>
 	<Floor>
 		<building_age_group>0 1918</building_age_group>
 		<construction_type>heavy</construction_type>
@@ -3558,6 +4102,118 @@
 					<density>50.0</density>
 					<thermal_conduc>0.12</thermal_conduc>
 					<heat_capac>1.0</heat_capac>
+				</Material>
+			</layer>
+		</Layers>
+	</Floor>
+	<Floor>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>light_annex</construction_type>
+		<inner_convection>2.7</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Tiles</name>
+					<density>2100.0</density>
+					<thermal_conduc>1.4</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.06</thickness>
+				<Material>
+					<name>Screed</name>
+					<density>1100.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.86</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.2</thickness>
+				<Material>
+					<name>Concrete</name>
+					<density>2400.0</density>
+					<thermal_conduc>1.7</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>4</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Plaster</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+		</Layers>
+	</Floor>
+	<Floor>
+		<building_age_group>0 2016</building_age_group>
+		<construction_type>heavy_annex</construction_type>
+		<inner_convection>2.7</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Woodenfloor</name>
+					<density>700.0</density>
+					<thermal_conduc>0.18</thermal_conduc>
+					<heat_capac>1.88</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>2</id>
+				<thickness>0.08</thickness>
+				<Material>
+					<name>Screed</name>
+					<density>1100.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.86</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>3</id>
+				<thickness>0.2</thickness>
+				<Material>
+					<name>Concrete</name>
+					<density>2400.0</density>
+					<thermal_conduc>1.7</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
+				</Material>
+			</layer>
+			<layer>
+				<id>4</id>
+				<thickness>0.02</thickness>
+				<Material>
+					<name>Plaster</name>
+					<density>975.0</density>
+					<thermal_conduc>0.6</thermal_conduc>
+					<heat_capac>0.84</heat_capac>
+					<solar_absorp>0.7</solar_absorp>
+					<ir_emissivity>0.9</ir_emissivity>
 				</Material>
 			</layer>
 		</Layers>
