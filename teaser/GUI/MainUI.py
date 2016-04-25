@@ -56,9 +56,9 @@ class MainUI(QDialog):
         """ General layout and gui-global variables """
 
         # Used to display the console inside the program.
-        sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
-        sys.stdin = EmittingStream(textWritten=self.normalOutputWritten)
-        sys.stderr = EmittingStream(textWritten=self.normalOutputWritten)
+        sys.stdout = EmittingStream(textWritten=self.normal_output_written)
+        sys.stdin = EmittingStream(textWritten=self.normal_output_written)
+        sys.stderr = EmittingStream(textWritten=self.normal_output_written)
         
         self.setWindowFlags(self.windowFlags() | Qt.WindowMinMaxButtonsHint)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -752,7 +752,7 @@ class MainUI(QDialog):
             self.buildings_combo_box_model)
         self.side_bar_buildings_combo_box.setModelColumn(0)
         self.connect(self.side_bar_buildings_combo_box, QtCore.SIGNAL(
-            "currentIndexChanged(int)"), self.switchBuilding)
+            "currentIndexChanged(int)"), self.switch_building)
         self.side_bar_id_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_id_label.setGeometry(QtCore.QRect(5, 60, 90, 25))
         self.side_bar_id_label.setText("Name:")
@@ -933,7 +933,7 @@ class MainUI(QDialog):
     def __del__(self):
         sys.stdout = sys.__stdout__
 
-    def normalOutputWritten(self, text):
+    def normal_output_written(self, text):
         ''''Append text to the QTextEdit. Part of the
         package to display the console in the project.
         
@@ -943,1997 +943,6 @@ class MainUI(QDialog):
         cursor.insertText(text)
         self.text_edit.setTextCursor(cursor)
         self.text_edit.ensureCursorVisible()
-
-    def save_changed_layer_values(self):
-        ''''Replaces the previous values of the current layer with the inputs
-           from the text fields.
-
-        '''
-        # TODO: Fehler beim User-Input abfangen
-        
-        for zone in self.current_building.thermal_zones:
-            if zone.internal_id == self.current_zone.internal_id:
-                for element in zone.inner_walls:
-                    if element.internal_id == self.current_element.internal_id:
-                        for layer in element.layer:
-                            if layer.internal_id == self.current_layer.\
-                                    internal_id:
-                                layer.thickness = self.thickness_textbox.text()
-                                layer.material.name = \
-                                    self.material_combobox.currentText()
-                                layer.material.density = \
-                                    self.material_density_textbox.text()
-                                layer.material.thermal_conduc = \
-                                    self.material_thermal_conduc_textbox.text()
-                                layer.material.heat_capac = \
-                                    self.material_heat_capac_textbox.text()
-                                layer.material.solar_absorp = \
-                                    self.material_solar_absorp_textbox.text()
-                                layer.material.ir_emissivity = \
-                                    self.material_ir_emissivity_textbox.text()
-                                layer.material.transmittance = \
-                                    self.material_transmittance_textbox.text()
-                                break
-                for element in zone.outer_walls:
-                    if element.internal_id == self.current_element.internal_id:
-                        for layer in element.layer:
-                            if layer.internal_id == self.current_layer.\
-                                    internal_id:
-                                layer.thickness = self.thickness_textbox.text()
-                                layer.material.name = \
-                                    self.material_combobox.currentText()
-                                layer.material.density = \
-                                    self.material_density_textbox.text()
-                                layer.material.thermal_conduc = \
-                                    self.material_thermal_conduc_textbox.text()
-                                layer.material.heat_capac = \
-                                    self.material_heat_capac_textbox.text()
-                                layer.material.solar_absorp = \
-                                    self.material_solar_absorp_textbox.text()
-                                layer.material.ir_emissivity = \
-                                    self.material_ir_emissivity_textbox.text()
-                                layer.material.transmittance = \
-                                    self.material_transmittance_textbox.text()
-                                break
-                for element in zone.windows:
-                    if element.internal_id == self.current_element.internal_id:
-                        for layer in element.layer:
-                            if layer.internal_id == self.current_layer.\
-                                    internal_id:
-                                layer.thickness = self.thickness_textbox.text()
-                                layer.material.name = \
-                                    self.material_combobox.currentText()
-                                layer.material.density = \
-                                    self.material_density_textbox.text()
-                                layer.material.thermal_conduc = \
-                                    self.material_thermal_conduc_textbox.text()
-                                layer.material.heat_capac = \
-                                    self.material_heat_capac_textbox.text()
-                                layer.material.solar_absorp = \
-                                    self.material_solar_absorp_textbox.text()
-                                layer.material.ir_emissivity = \
-                                    self.material_ir_emissivity_textbox.text()
-                                layer.material.transmittance = \
-                                    self.material_transmittance_textbox.text()
-                                break
-
-    def save_changed_layer_values_set_all_constr(self):
-        ''''Replaces the previous values of the current layer with the inputs
-           from the text fields.
-
-        '''
-
-        for layer in self.all_constr_layer_list:
-                if layer.internal_id == self.current_layer.internal_id:
-                                layer.thickness = self.thickness_textbox.text()
-                                layer.material.name =\
-                                    self.material_combobox.currentText()
-                                layer.material.density = \
-                                    self.material_density_textbox.text()
-                                layer.material.thermal_conduc = \
-                                    self.material_thermal_conduc_textbox.text()
-                                layer.material.heat_capac = \
-                                    self.material_heat_capac_textbox.text()
-                                layer.material.solar_absorp = \
-                                    self.material_solar_absorp_textbox.text()
-                                layer.material.ir_emissivity = \
-                                    self.material_ir_emissivity_textbox.text()
-                                layer.material.transmittance = \
-                                    self.material_transmittance_textbox.text()
-                                break
-
-    def save_changed_simulation_values(self):
-        '''Replaces the previous values of the current project with the inputs
-           from the text fields in the simulation window.
-           
-        '''
-        # TODO: Fehler beim User-Input abfangen
-        
-        self.project.name = self.project_name_lineedit.text()
-        self.project.modelica_info.runtime_simulation =\
-            self.simulation_runtime_lineedit.text()
-        self.project.modelica_info.interval_output =\
-            self.simulation_interval_output_lineedit.text()
-        self.project.modelica_info.current_solver =\
-            self.simulation_solver_combobox.currentText()
-        if self.simulation_equidistant_output_checkbox.isChecked():
-            self.project.modelica_info.equidistant_output = True
-        else:
-            self.project.modelica_info.equidistant_output = False
-
-    def save_changed_element_values(self):
-        '''Replaces the previous values of the current element with the inputs
-           from the text fields.
-
-        '''
-        # TODO: Fehler beim User-Input abfangen
-
-        for zone in self.current_building.thermal_zones:
-            if zone.internal_id == self.current_zone.internal_id:
-                for element in zone.inner_walls:
-                    if element.internal_id == self.current_element.internal_id:
-                        index = zone.inner_walls.index(element)
-                        zone.inner_walls[index].name = \
-                            str(self.element_name_textbox.text())
-                        zone.inner_walls[index].construction_type = \
-                            str(self.element_construction_type_combobox.\
-                            currentText())
-                        zone.inner_walls[index].orientation = \
-                            self.guiinfo.orientations_strings \
-                            [str(self.element_orientation_combobox.currentText())]
-                        zone.inner_walls[index].area = \
-                            str(self.element_area_textbox.text())
-                        zone.inner_walls[index].year_of_construction = \
-                            str(self.element_year_of_construction_textbox.text())
-                        zone.inner_walls[index].year_of_retrofit = \
-                            str(self.element_year_of_retrofit_textbox.text())
-                        zone.inner_walls[index].tilt = \
-                            str(self.element_tilt_textbox.text())
-                        zone.inner_walls[index].inner_convection = \
-                            str(self.element_inner_convection_textbox.text())
-                        zone.inner_walls[index].inner_radiation = \
-                            str(self.element_inner_radiation_textbox.text())
-                        break
-                for element in zone.outer_walls:
-                    if element.internal_id == self.current_element.internal_id:
-                        index = zone.outer_walls.index(element)
-                        zone.outer_walls[index].name = \
-                            str(self.element_name_textbox.text())
-                        zone.outer_walls[index].construction_type = \
-                            str(self.element_construction_type_combobox.
-                                currentText())
-                        zone.outer_walls[index].orientation = \
-                            self.guiinfo.orientations_strings\
-                            [self.element_orientation_combobox.currentText()]
-                        zone.outer_walls[index].area = \
-                            str(self.element_area_textbox.text())
-                        zone.outer_walls[index].year_of_construction = \
-                            str(self.element_year_of_construction_textbox.text())
-                        zone.outer_walls[index].year_of_retrofit = \
-                            str(self.element_year_of_retrofit_textbox.text())
-                        zone.outer_walls[index].tilt = \
-                            str(self.element_tilt_textbox.text())
-                        zone.outer_walls[index].inner_convection = \
-                            str(self.element_inner_convection_textbox.text())
-                        zone.outer_walls[index].inner_radiation = \
-                            str(self.element_inner_radiation_textbox.text())
-                        zone.outer_walls[index].outer_convection = \
-                            float(self.element_outer_convection_textbox.text())
-                        zone.outer_walls[index].outer_radiation = \
-                            float(self.element_outer_radiation_textbox.text())
-                        break
-                for element in zone.windows:
-                    if element.internal_id == self.current_element.internal_id:
-                        index = zone.windows.index(element)
-                        zone.windows[index].name = \
-                            str(self.element_name_textbox.text())
-                        zone.windows[index].construction_type = \
-                            str(self.element_construction_type_combobox.\
-                                currentText())
-                        zone.windows[index].orientation = \
-                            self.guiinfo.orientations_strings\
-                            [self.element_orientation_combobox.currentText()]
-                        zone.windows[index].area = \
-                            str(self.element_area_textbox.text())
-                        zone.windows[index].year_of_construction = \
-                            str(self.element_year_of_construction_textbox.text())
-                        zone.windows[index].year_of_retrofit = \
-                            str(self.element_year_of_retrofit_textbox.text())
-                        zone.windows[index].tilt = \
-                            str(self.element_tilt_textbox.text())
-                        zone.windows[index].inner_convection = \
-                            str(self.element_inner_convection_textbox.text())
-                        zone.windows[index].inner_radiation = \
-                            str(self.element_inner_radiation_textbox.text())
-                        zone.windows[index].outer_convection = \
-                            float(self.element_outer_convection_textbox.text())
-                        zone.windows[index].outer_radiation = \
-                            float(self.element_outer_radiation_textbox.text())
-                        break
-
-    def save_input_values_set_all_constr(self):
-
-        bldg = self.current_building
-        orientation = int(self.guiinfo.orientations_strings[
-                    str(self.set_all_constr_element_orientation_textbox.text())])
-        element_type = self.set_all_constr_element_type_textbox.text()
-
-        tilt = float(self.set_all_constr_element_tilt_textbox.text())
-        inner_con = float(self.set_all_constr_element_inner_con_textbox.text())
-        inner_rad = float(self.set_all_constr_element_inner_rad_textbox.text())
-
-        if element_type != "Ground Floor":
-            if(element_type == "Outer Wall"):
-                element_type = "OuterWall"
-            outer_con = float(self.set_all_constr_element_outer_con_textbox.text())
-            outer_rad = float(self.set_all_constr_element_outer_rad_textbox.text())
-        elif element_type == "Ground Floor":
-            element_type = "GroundFLoor"
-            outer_con = None
-            outer_rad = None
-        layer_set = self.all_constr_layer_list
-
-        Controller.click_change_all_constr(bldg, orientation, element_type,
-                                           tilt, inner_con, inner_rad,
-                                           outer_con, outer_rad, layer_set)
-        self.display_current_building()
-
-    def clear_input_values_set_all_constr(self):
-        try:
-            self.element_layer_model_set_all_constr.clear()
-            self.all_constr_layer_list.clear()
-        except:
-            self.element_layer_model_set_all_constr = QStandardItemModel()
-            self.all_constr_layer_list = []
-
-    def switch_type_building(self):
-        '''After changing the index of the combobox this function replaces
-        the controls to fit the current type building.
-        
-        '''
-        
-        cIndex = self.window_construct_building_combo_box.currentText()
-        self.current_type_building = str(cIndex)
-        self.construct_type_building_button.setText(
-            u"Generate " + self.current_type_building + " Building ...")
-        if self.current_type_building == "SingleFamilyDwelling":
-            self.group_box_type_building_right_office.setVisible(False)
-            self.group_box_type_building_right_residential.setVisible(True)
-            self.group_box_office_architecture.setVisible(False)
-            self.group_box_residential_architecture.setVisible(True)
-            self.construct_type_building_button.clicked.disconnect()
-            self.connect(self.construct_type_building_button, SIGNAL(
-            "clicked()"), self.check_inputs_typebuilding_residential)
-            self.connect(self.construct_type_building_button, SIGNAL(
-                "clicked()"), self.popup_window_type_building,
-                    QtCore.SLOT("close()"))
-        elif self.current_type_building == "Office" or self.current_type_building ==\
-            "Institute 4" or self.current_type_building == "Institute 8" or\
-                self.current_type_building == "Institute General":
-            self.group_box_type_building_right_office.setVisible(True)
-            self.group_box_type_building_right_residential.setVisible(False)
-            self.group_box_office_architecture.setVisible(True)
-            self.group_box_residential_architecture.setVisible(False)
-            if self.current_type_building == "Office":
-                self.construct_type_building_button.clicked.disconnect()
-                self.connect(self.construct_type_building_button, SIGNAL(
-                    "clicked()"), self.check_inputs_typebuilding_office)
-                self.connect(self.construct_type_building_button, SIGNAL(
-                    "clicked()"), self.popup_window_type_building,
-                        QtCore.SLOT("close()"))
-            if self.current_type_building == "Institute 4":
-                self.construct_type_building_button.clicked.disconnect()
-                self.connect(self.construct_type_building_button, SIGNAL(
-                    "clicked()"), self.check_inputs_typebuilding_institute_4)
-                self.connect(self.construct_type_building_button, SIGNAL(
-                "clicked()"), self.popup_window_type_building,
-                    QtCore.SLOT("close()"))
-            if self.current_type_building == "Institute 8":
-                self.construct_type_building_button.clicked.disconnect()
-                self.connect(self.construct_type_building_button, SIGNAL(
-                    "clicked()"), self.check_inputs_typebuilding_institute_8)
-                self.connect(self.construct_type_building_button, SIGNAL(
-                "clicked()"), self.popup_window_type_building,
-                    QtCore.SLOT("close()"))
-            if self.current_type_building == "Institute General":
-                self.construct_type_building_button.clicked.disconnect()
-                self.connect(self.construct_type_building_button, SIGNAL(
-                    "clicked()"), self.check_inputs_typebuilding_institute_general)
-                self.connect(self.construct_type_building_button, SIGNAL(
-                "clicked()"), self.popup_window_type_building,
-                    QtCore.SLOT("close()"))
-
-    def check_inputs_new_zone(self):
-        '''Checks if the inputs from the new_zone window fulfill the specified
-        criteria of not being empty.
-        '''
-        # TODO: Fehler beim User-Input abfangen
-        if self.generate_zone_name_line_edit.text() == "":
-            QtGui.QMessageBox.warning(self,
-                                      u"Can't add Zone!",
-                                      u"You need to fill out the Name field.")
-        if self.generate_zone_area_line_edit.text() == "":
-            QtGui.QMessageBox.warning(self,
-                                      u"Can't add Zone!",
-                                      u"You need to fill out the Area field.")
-        if self.generate_zone_usage_combobox.currentText() == "":
-            QtGui.QMessageBox.warning(self,
-                                      u"Can't add Zone!",
-                                      u"You need to fill out the Usage field.")
-        if self.generate_zone_name_line_edit.text() != \
-            "" and self.generate_zone_area_line_edit.text() != ""\
-                and self.generate_zone_usage_combobox.currentText() != "":
-
-            Controller.click_add_zone_button(
-                self.current_building, self.generate_zone_name_line_edit.text(),
-                self.generate_zone_area_line_edit.text(),
-                self.generate_zone_usage_combobox.currentText())
-            self.display_current_building()
-
-    def check_inputs_edit_element(self):
-        '''Checks conditions for inputs from the element edit window.
-        '''
-        # TODO: Fehler beim User-Input abfangen
-        self.current_element.name = self.edit_element_name_line_edit.text()
-        self.current_element.area = float(
-            self.edit_element_area_line_edit.text())
-        self.display_current_element()
-
-    def check_inputs_edit_zone(self):
-        ''' Checks if all necessary values to edit a given zone are still
-        not empty '''
-        # TODO: Fehler beim User-Input abfangen
-        if self.edit_zone_area_line_edit.text() == "":
-            self.edit_zone_failed_label.setVisible(True)
-            self.edit_zone_area_label = self.set_text_color(
-                self.edit_zone_area_label, "red")
-            self.edit_zone_failed_label = self.set_text_color(
-                self.edit_zone_failed_label, "red")
-            self.edit_gen_inf_tab_widget.setCurrentIndex(0)
-        else:
-            self.edit_zone_area_label = self.set_text_color(
-                self.edit_zone_area_label, "black")
-        if self.new_zone_name_line_edit.text() == "":
-            self.edit_zone_failed_label.setVisible(True)
-            self.edit_zone_name_label = self.set_text_color(
-                self.edit_zone_name_label, "red")
-            self.edit_zone_failed_label = self.set_text_color(
-                self.edit_zone_failed_label, "red")
-            self.edit_gen_inf_tab_widget.setCurrentIndex(0)
-        else:
-            self.edit_zone_name_label = self.set_text_color(
-                self.edit_zone_name_label, "black")
-        if self.edit_zone_volume_line_edit.text() == "":
-            self.edit_zone_failed_label.setVisible(True)
-            self.edit_zone_volume_label = self.set_text_color(
-                self.edit_zone_volume_label, "red")
-            self.edit_zone_failed_label = self.set_text_color(
-                self.edit_zone_failed_label, "red")
-            self.edit_gen_inf_tab_widget.setCurrentIndex(0)
-        else:
-            self.edit_zone_volume_label = self.set_text_color(
-                self.edit_zone_volume_label, "black")
-        if self.edit_zone_area_line_edit.text() != ""\
-            and self.edit_zone_name_line_edit.text() != ""\
-                and self.edit_zone_volume_line_edit.text() != "":
-
-                self.current_zone.area = self.edit_zone_area_line_edit.text()
-                self.current_zone.name = self.edit_zone_name_line_edit.text()
-                self.current_zone.volume = \
-                    self.edit_zone_volume_line_edit.text()
-                self.display_current_building()
-
-    def check_inputs_typebuilding_office(self):
-        ''' Checks if all necessary values to create a type building are
-        not empty/floats '''
-        # übergibst, weil du keine methoden mit parameter zu buttons connecten kannst,        # allerdings sollts mit sowas wie self.type_building_type klappen
-        self.fill_typebuilding_attributes()
-        self.project, int_id = Controller.click_generate_type_building_button(
-            self.project,
-            self.window_construct_building_name_line_edit.text(),
-            self.window_construct_building_year_line_edit.text(),
-            self.window_construct_building_number_of_floors_line_edit.text(),
-            self.window_construct_building_height_of_floors_line_edit.text(),
-            "Office",
-            self.window_construct_building_area_line_edit.text(),
-            self.window_construct_building_street_line_edit.text(),
-            self.window_construct_building_location_line_edit.text(),
-            self.type_building_ind_att)
-        for building in self.project.buildings:
-            if building.internal_id == int_id:
-                self.current_building = building
-        self.display_current_building()
-        
-    def check_inputs_typebuilding_institute_4(self):
-        ''' Checks if all necessary values to create a type building are
-        not empty/floats '''
-
-        # TODO: Fehler beim User-Input abfangen
-        self.fill_typebuilding_attributes()
-        self.project, int_id = Controller.click_generate_type_building_button(
-            self.project,
-            self.window_construct_building_name_line_edit.text(),
-            self.window_construct_building_year_line_edit.text(),
-            self.window_construct_building_number_of_floors_line_edit.text(),
-            self.window_construct_building_height_of_floors_line_edit.text(),
-            "Insitute 4",
-            self.window_construct_building_area_line_edit.text(),
-            self.window_construct_building_street_line_edit.text(),
-            self.window_construct_building_location_line_edit.text(),
-            self.type_building_ind_att)
-        for building in self.project.buildings:
-            if building.internal_id == int_id:
-                self.current_building = building
-        self.display_current_building()
-        
-    def check_inputs_typebuilding_institute_8(self):
-        ''' Checks if all necessary values to create a type building are
-        not empty/floats '''
-
-        # TODO: Fehler beim User-Input abfangen
-        self.fill_typebuilding_attributes()
-        self.project, int_id = Controller.click_generate_type_building_button(
-            self.project,
-            self.window_construct_building_name_line_edit.text(),
-            self.window_construct_building_year_line_edit.text(),
-            self.window_construct_building_number_of_floors_line_edit.text(),
-            self.window_construct_building_height_of_floors_line_edit.text(),
-            "Institute 8",
-            self.window_construct_building_area_line_edit.text(),
-            self.window_construct_building_street_line_edit.text(),
-            self.window_construct_building_location_line_edit.text(),
-            self.type_building_ind_att)
-        for building in self.project.buildings:
-            if building.internal_id == int_id:
-                self.current_building = building
-        self.display_current_building()
-        
-    def check_inputs_typebuilding_institute_general(self):
-        ''' Checks if all necessary values to create a type building are
-        not empty/floats '''
-
-        # TODO: Fehler beim User-Input abfangen
-        self.fill_typebuilding_attributes()
-        self.project, int_id = Controller.click_generate_type_building_button(
-            self.project,
-            self.window_construct_building_name_line_edit.text(),
-            self.window_construct_building_year_line_edit.text(),
-            self.window_construct_building_number_of_floors_line_edit.text(),
-            self.window_construct_building_height_of_floors_line_edit.text(),
-            "Institute General",
-            self.window_construct_building_area_line_edit.text(),
-            self.window_construct_building_street_line_edit.text(),
-            self.window_construct_building_location_line_edit.text(),
-            self.type_building_ind_att)
-        for building in self.project.buildings:
-            if building.internal_id == int_id:
-                self.current_building = building
-        self.display_current_building()
-
-    def check_inputs_typebuilding_residential(self):
-        ''' Checks if all necessary values to create a type building are
-        not empty/floats '''
-
-        # TODO: Fehler beim User-Input abfangen
-        self.fill_typebuilding_attributes()
-        self.project, int_id = Controller.click_generate_type_building_button(
-            self.project,
-            self.window_construct_building_name_line_edit.text(),
-            self.window_construct_building_year_line_edit.text(),
-            self.window_construct_building_number_of_floors_line_edit.text(),
-            self.window_construct_building_height_of_floors_line_edit.text(),
-            "SingleFamilyDwelling",
-            self.window_construct_building_area_line_edit.text(),
-            self.window_construct_building_street_line_edit.text(),
-            self.window_construct_building_location_line_edit.text(),
-            self.type_building_ind_att)
-        for building in self.project.buildings:
-            if building.internal_id == int_id:
-                self.current_building = building
-        self.display_current_building()
-
-    def update_zone_details(self):
-        ''' Updates the Zone Details window after something has been changed 
-        
-        '''
-        self.element_model.clear()
-        if self.current_zone.inner_walls:
-            for inner_wall in self.current_zone.inner_walls:
-                if type(inner_wall).__name__ == \
-                "InnerWall":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Inner Wall \n Area:\t".expandtabs(11) + 
-                        str(inner_wall.area), inner_wall.internal_id)
-                    self.element_model.appendRow(item)
-                if type(inner_wall).__name__ == \
-                "Floor":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Floor \n Area:\t".expandtabs(11) + 
-                        str(inner_wall.area), inner_wall.internal_id)
-                    self.element_model.appendRow(item)
-                if type(inner_wall).__name__ == \
-                "Ceiling":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Ceiling \n Area:\t".expandtabs(11) + 
-                        str(inner_wall.area), inner_wall.internal_id)
-                    self.element_model.appendRow(item)
-        if self.current_zone.outer_walls:
-            for outer_wall in self.current_zone.outer_walls:
-                if type(outer_wall).__name__ == "OuterWall":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + 
-                        str(outer_wall.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Outer Wall \n Area:\t".expandtabs(11) + 
-                        str(outer_wall.area) + 
-                        "\n Orientation:\t".expandtabs(11) + 
-                        str(outer_wall.orientation),
-                        outer_wall.internal_id)
-                    self.element_model.appendRow(item)
-                if type(outer_wall).__name__ == \
-                        "GroundFloor":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + 
-                        str(outer_wall.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Ground Floor \n Area:\t".expandtabs(11) + 
-                        str(outer_wall.area) + 
-                        "\n Orientation:\t".expandtabs(11) + 
-                        str(outer_wall.orientation),
-                        outer_wall.internal_id)
-                    self.element_model.appendRow(item)
-                if type(outer_wall).__name__ == "Rooftop":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + 
-                        str(outer_wall.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Rooftop \n Area:\t".expandtabs(11) + 
-                        str(outer_wall.area) + 
-                        "\n Orientation:\t".expandtabs(11) + 
-                        str(outer_wall.orientation),
-                        outer_wall.internal_id)
-                    self.element_model.appendRow(item)
-        if self.current_zone.windows:
-            for window in self.current_zone.windows:
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) + str(window.name) + 
-                    "\nType:\t".expandtabs(11) + 
-                    "Windows \n Area:\t".expandtabs(11) + 
-                    str(window.area) + 
-                    "\n Orientation:\t".expandtabs(11) + 
-                    str(window.orientation), window.internal_id)
-                self.element_model.appendRow(item)
-        
-        for time in self.guiinfo.hoursInADay:
-            if len(str(self.current_zone.use_conditions.cooling_time[0])) == 1:
-                fixed_c_t_s = "0" + str(
-                    self.current_zone.use_conditions.cooling_time[0]) + ":00"
-            else:
-                fixed_c_t_s = str(
-                    self.current_zone.use_conditions.cooling_time[0]) + ":00"
-            if len(str(self.current_zone.use_conditions.cooling_time[1])) == 1:
-                fixed_c_t_e = "0" + str(
-                    self.current_zone.use_conditions.cooling_time[1]) + ":00"
-            else:
-                fixed_c_t_e = str(
-                    self.current_zone.use_conditions.cooling_time[1]) + ":00"
-            if len(str(self.current_zone.use_conditions.heating_time[0])) == 1:
-                fixed_h_t_s = "0" + str(
-                    self.current_zone.use_conditions.heating_time[0]) + ":00"
-            else:
-                fixed_h_t_s = str(
-                    self.current_zone.use_conditions.heating_time[0]) + ":00"
-            if len(str(self.current_zone.use_conditions.heating_time[1])) == 1:
-                fixed_h_t_e = "0" + str(
-                    self.current_zone.use_conditions.heating_time[1]) + ":00"
-            else:
-                fixed_h_t_e = str(
-                    self.current_zone.use_conditions.heating_time[1]) + ":00"
-            if (time == fixed_c_t_s):
-                self.cooling_ahu_start_dropdown.setCurrentIndex(
-                    self.guiinfo.hoursInADay.index(time))
-            if (time == fixed_c_t_e):
-                self.cooling_ahu_end_dropdown.setCurrentIndex(
-                    self.guiinfo.hoursInADay.index(time))
-            if (time == fixed_h_t_s):
-                self.heating_ahu_start_dropdown.setCurrentIndex(
-                    self.guiinfo.hoursInADay.index(time))
-            if (time == fixed_h_t_e):
-                self.heating_ahu_end_dropdown.setCurrentIndex(
-                    self.guiinfo.hoursInADay.index(time))
-        self.set_temp_heat_line_edit.setText(str(
-            self.current_zone.use_conditions.set_temp_heat))
-        self.set_temp_cool_line_edit.setText(str(
-            self.current_zone.use_conditions.set_temp_cool))
-        self.temp_set_back_line_edit.setText(str(
-            self.current_zone.use_conditions.temp_set_back))
-        self.min_air_flow_line_edit.setText(str(
-            self.current_zone.use_conditions.min_air_exchange))
-        self.min_ahu_line_edit.setText(str(
-            self.current_zone.use_conditions.min_ahu))
-        self.max_ahu_line_edit.setText(str(
-            self.current_zone.use_conditions.max_ahu))
-        if (self.current_zone.use_conditions.with_ahu == "True"):
-            self.with_ahu_combobox.setCurrentIndex(
-                self.with_ahu_combobox.findText("True"))
-        else:
-            self.with_ahu_combobox.setCurrentIndex(
-                self.with_ahu_combobox.findText("False"))
-        self.re_humidity_line_edit.setText(str(
-            self.current_zone.use_conditions.rel_humidity))
-        self.persons_line_edit.setText(str(
-            self.current_zone.use_conditions.persons))
-        self.machines_line_edit.setText(str(
-            self.current_zone.use_conditions.machines))
-        self.lighting_line_edit.setText(str(
-            self.current_zone.use_conditions.maintained_illuminace))
-        self.mean_temp_outer_line_edit.setText(str(
-            self.current_zone.t_outside))
-        self.mean_temp_inner_line_edit.setText(str(
-            self.current_zone.t_inside))
-        self.infiltration_rate_line_edit.setText(str(
-            self.current_zone.infiltration_rate))
-        self.canvas_profiles.repaint()
-        data_persons = [1.0 for x in range(24)]
-        data_machines = [1.0 for x in range(24)]
-        # TODO: data_lighting = [1.0 for x in range(24)]
-        for hour in range(0,24):
-            try:
-                data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
-                data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
-            except IndexError:
-                break;
-            # TODO: data_lighting[hour] = self.current_zone.use_conditions.profile_lighting[hour]
-        ax_p = self.figure_profiles.add_subplot(111)
-        ax_p.hold(False)
-        ax_p.plot(range(24), data_persons, 'b-', range(24), data_machines, 'r-')
-        # TODO: ax_p.plot(range(24), data_persons, 'b-', range(24), data_machines, 'r-', data_lighting, 'g-')
-        ax_p.set_ylim([0,1])
-        self.canvas_profiles.draw()
-
-    def update_element_details(self):
-        ''' Updates the element details after layers have been changed 
-        
-        '''
-        self.element_layer_model.clear()
-        for layer in self.current_element.layer:
-            item = TrackableItem(
-                "Material:\t".expandtabs(8) + str(layer.material.name) + 
-                "\nThickness:\t".expandtabs(14) + str(layer.thickness) + 
-                "\t", layer.internal_id)
-            self.element_layer_model.appendRow(item)
-            
-    def update_set_all_construction(self):
-        ''' Updates the set all construction after layers have been changed 
-        
-        '''
-        
-        self.element_layer_model_set_all_constr.clear()
-        for layer in self.all_constr_layer_list:
-            item = TrackableItem(
-                "Material:\t".expandtabs(8) + str(layer.material.name) +
-                "\nThickness:\t".expandtabs(14) + str(layer.thickness) +
-                "\t", layer.internal_id)
-            self.element_layer_model_set_all_constr.appendRow(item)
-
-    def display_current_zone(self):
-        ''' Updates the lists in the main window
-        '''
-
-        if (self.current_zone):
-            self.element_model.clear()
-            self.edit_zone_area_line_edit.setText(str(self.current_zone.area))
-            self.edit_zone_name_line_edit.setText(str(self.current_zone.name))
-            self.edit_zone_volume_line_edit.setText(
-                str(self.current_zone.volume))
-            for inner_wall in self.current_zone.inner_walls:
-                if type(inner_wall).__name__ == "InnerWall":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Inner Wall \n Area:\t".expandtabs(11) + 
-                        str(inner_wall.area), inner_wall.internal_id)
-                    self.element_model.appendRow(item)
-                if type(inner_wall).__name__ == "Floor":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Floor \n Area:\t".expandtabs(11) + 
-                        str(inner_wall.area), inner_wall.internal_id)
-                    self.element_model.appendRow(item)
-                if type(inner_wall).__name__ == "Ceiling":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Ceiling \n Area:\t".expandtabs(11) + 
-                        str(inner_wall.area), inner_wall.internal_id)
-                    self.element_model.appendRow(item)
-            for element in self.current_zone.outer_walls:
-                if type(element).__name__ == "GroundFloor":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + 
-                        str(element.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Ground Floor \n Area:\t".expandtabs(11) + 
-                        str(element.area) + 
-                        "\n Orientation:\t".expandtabs(11) + 
-                        str(element.orientation),
-                        element.internal_id)
-                    self.element_model.appendRow(item)
-                if type(element).__name__ == "Rooftop":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + 
-                        str(element.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Rooftop \n Area:\t".expandtabs(11) + 
-                        str(element.area) + 
-                        "\n Orientation:\t".expandtabs(11) + 
-                        str(element.orientation),
-                        element.internal_id)
-                    self.element_model.appendRow(item)
-                if type(element).__name__ == "OuterWall":
-                    item = TrackableItem(
-                        "Name:\t".expandtabs(8) + 
-                        str(element.name) + 
-                        "\nType:\t".expandtabs(11) + 
-                        "Outer Wall \n Area:\t".expandtabs(11) + 
-                        str(element.area) + 
-                        "\n Orientation:\t".expandtabs(11) + 
-                        str(element.orientation),
-                        element.internal_id)
-                    self.element_model.appendRow(item)
-            for element in self.current_zone.windows:
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) + str(element.name) + 
-                    "\nType:\t".expandtabs(11) + 
-                    "Window \n Area:\t".expandtabs(11) + 
-                    str(element.area) + "\n Orientation:\t".expandtabs(11) + 
-                    str(element.orientation), element.internal_id)
-                self.element_model.appendRow(item)
-
-    def switchBuilding(self):
-        ''' Handles the buildings combobo
-        '''
-
-        cIndex = self.side_bar_buildings_combo_box.currentIndex()
-        for building in self.project.buildings:
-            fIndex = self.side_bar_buildings_combo_box.findData(
-                str(building.internal_id))
-            if fIndex == cIndex:
-                self.current_building = building
-                self.display_current_building_after_switching()
-
-    def display_current_building_after_switching(self):
-        ''' Changes all the values to the new building after switching
-        in the buildings combobox
-        '''
-
-        if (self.current_building):
-
-            """ Displaying values on the sidebar controls"""
-
-            self.side_bar_id_line_edit.setText(str(self.current_building.name))
-            self.side_bar_construction_year_line_edit.setText(
-                str(self.current_building.year_of_construction))
-            self.side_bar_height_of_floors_line_edit.setText(
-                str(self.current_building.height_of_floors))
-            self.side_bar_location_line_edit.setText(
-                str(self.current_building.city))
-            self.side_bar_net_leased_area_line_edit.setText(
-                str(self.current_building.net_leased_area))
-            self.side_bar_number_of_floors_line_edit.setText(
-                str(self.current_building.number_of_floors))
-            self.side_bar_street_line_edit.setText(
-                str(self.current_building.street_name))
-
-            """ Displaying zones in the two list views in the main frame """
-
-            self.zone_model.clear()
-            self.element_model.clear()
-            self.outer_elements_model.clear()
-            for zone in self.project.\
-                buildings[self.project.buildings.index(
-                    self.current_building)].thermal_zones:
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) + str(zone.name) + 
-                    "\n" + "Type:\t".expandtabs(11) + 
-                    str(type(zone).__name__) + "\n Area:\t".expandtabs(11) + 
-                    str(zone.area), zone.internal_id)
-                self.zone_model.appendRow(item)
-                if zone.inner_walls:
-                    for inner_wall in zone.inner_walls:
-                        if type(inner_wall).__name__ == \
-                        "InnerWall":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Inner Wall \n Area:\t".expandtabs(11) + 
-                                str(inner_wall.area),inner_wall.internal_id)
-                            self.element_model.appendRow(item)
-                        if type(inner_wall).__name__ == \
-                        "Floor":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Floor \n Area:\t".expandtabs(11) + 
-                                str(inner_wall.area), inner_wall.internal_id)
-                            self.element_model.appendRow(item)
-                        if type(inner_wall).__name__ == \
-                        "Ceiling":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Ceiling \n Area:\t".expandtabs(11) + 
-                                str(inner_wall.area), inner_wall.internal_id)
-                            self.element_model.appendRow(item)
-                if zone.outer_walls:
-                    for outer_wall in zone.outer_walls:
-                        if type(outer_wall).__name__ == \
-                                "GroundFloor":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + 
-                                str(outer_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Ground Floor \n Area:\t".expandtabs(11) + 
-                                str(outer_wall.area) + 
-                                "\n Orientation:\t".expandtabs(11) + 
-                                str(outer_wall.orientation),
-                                outer_wall.internal_id)
-                            self.element_model.appendRow(item)
-                        if type(outer_wall).__name__ == \
-                                "Rooftop":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + 
-                                str(outer_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Rooftop \n Area:\t".expandtabs(11) + 
-                                str(outer_wall.area) + 
-                                "\n Orientation:\t".expandtabs(11) + 
-                                str(outer_wall.orientation),
-                                outer_wall.internal_id)
-                            self.element_model.appendRow(item)
-                        if type(outer_wall).__name__ == \
-                                "OuterWall":
-                            item = TrackableItem(
-                                "Name:\t".expandtabs(8) + 
-                                str(outer_wall.name) + 
-                                "\nType:\t".expandtabs(11) + 
-                                "Outer Wall \n Area:\t".expandtabs(11) + 
-                                str(outer_wall.area) + 
-                                "\n Orientation:\t".expandtabs(11) + 
-                                str(outer_wall.orientation),
-                                outer_wall.internal_id)
-                            self.element_model.appendRow(item)
-                if zone.windows:
-                    for window in zone.windows:
-                        item = TrackableItem(
-                            "Name:\t".expandtabs(8) + str(window.name) +
-                            "\nType:\t".expandtabs(11) +
-                            "Windows \n Area:\t".expandtabs(11) +
-                            str(window.area) +
-                            "\n Orientation:\t".expandtabs(11) +
-                            str(window.orientation),
-                            window.internal_id)
-                        self.element_model.appendRow(item)
-
-            for orientation in self.guiinfo.orientations_numbers.keys():
-                if self.current_building.get_outer_wall_area(orientation) != 0:
-                    if orientation == -1:
-                        item1 = QStandardItem(
-                         "Rooftop \nOrientation:\t" +
-                         str(self.guiinfo.orientations_numbers[orientation]) +
-                         "\t".expandtabs(12) + "\n" + " Area: " +
-                         str(self.current_building.
-                             get_outer_wall_area(orientation)))
-
-                    elif orientation == -2:
-                        item1 = QStandardItem(
-                         "Ground Floor \nOrientation:\t" +
-                         str(self.guiinfo.orientations_numbers[orientation]) +
-                         "\t".expandtabs(12) + "\n" + " Area: " +
-                         str(self.current_building.
-                             get_outer_wall_area(orientation)))
-                    else:
-                        item1 = QStandardItem(
-                         "Outer Wall \nOrientation:\t" +
-                         str(self.guiinfo.orientations_numbers[orientation]) +
-                         "\t".expandtabs(12) + "\n" + " Area: " +
-                         str(self.current_building.
-                             get_outer_wall_area(orientation)))
-
-                    self.outer_elements_model.appendRow(item1)
-
-                if self.current_building.get_window_area(orientation) != 0:
-                    item2 = QStandardItem(
-                        "Window \nOrientation:\t" +
-                        str(self.guiinfo.orientations_numbers[orientation]) +
-                        "\t".expandtabs(16) + "\n" + " Area: " +
-                        str(self.current_building.
-                            get_window_area(orientation)))
-                    self.outer_elements_model.appendRow(item2)
-
-    def display_current_building(self):
-        ''' Changes all the values to the new building
-        '''
-
-        if (self.current_building):
-
-            """ Displaying values on the sidebar controls"""
-
-            self.side_bar_id_line_edit.setText(
-                str(self.current_building.name))
-            self.side_bar_construction_year_line_edit.setText(
-                str(self.current_building.year_of_construction))
-            self.side_bar_height_of_floors_line_edit.setText(
-                str(self.current_building.height_of_floors))
-            self.side_bar_location_line_edit.setText(
-                str(self.current_building.city))
-            self.side_bar_net_leased_area_line_edit.setText(
-                str(self.current_building.net_leased_area))
-            self.side_bar_number_of_floors_line_edit.setText(
-                str(self.current_building.number_of_floors))
-            self.side_bar_street_line_edit.setText(
-                str(self.current_building.street_name))
-
-            """ Updates the combobox displaying all buildings """
-
-            try:
-                if (self.side_bar_buildings_combo_box.findData(
-                        str(self.current_building.internal_id)) == -1):
-                    self.side_bar_buildings_combo_box.addItem(
-                        self.current_building.name,
-                        str(self.current_building.internal_id))
-                    self.side_bar_buildings_combo_box.setCurrentIndex(
-                        self.side_bar_buildings_combo_box.findData(
-                            str(self.current_building.internal_id)))
-                elif (self.side_bar_buildings_combo_box.currentText !=
-                      self.side_bar_id_line_edit.text):
-                    self.side_bar_buildings_combo_box.setItemText(
-                        self.side_bar_buildings_combo_box.currentIndex(),
-                        self.current_building.name)
-            except AttributeError:
-                pass
-
-            """ Displaying zones in the two list views in the main frame """
-
-            self.zone_model.clear()
-            self.outer_elements_model.clear()
-            for zone in self.project.\
-                buildings[self.project.buildings.
-                                  index(self.current_building)].thermal_zones:
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) + str(zone.name) +
-                    "\n" + "Type:\t".expandtabs(11) +
-                    str(type(zone).__name__) + "\n Area:\t".expandtabs(11) +
-                    str(zone.area), zone.internal_id)
-                self.zone_model.appendRow(item)
-
-            for orientation in self.guiinfo.orientations_numbers.keys():
-                if self.current_building.get_outer_wall_area(orientation) != 0:
-                    if orientation == -1:
-                        item1 = QStandardItem(
-                         "Rooftop \nOrientation:\t" +
-                         str(self.guiinfo.orientations_numbers[orientation]) +
-                         "\t".expandtabs(12) + "\n" + " Area: " +
-                         str(self.current_building.
-                             get_outer_wall_area(orientation)))
-
-                    elif orientation == -2:
-                        item1 = QStandardItem(
-                         "Ground Floor \nOrientation:\t" +
-                         str(self.guiinfo.orientations_numbers[orientation]) +
-                         "\t".expandtabs(12) + "\n" + " Area: " +
-                         str(self.current_building.
-                             get_outer_wall_area(orientation)))
-                    else:
-                        item1 = QStandardItem(
-                         "Outer Wall \nOrientation:\t" +
-                         str(self.guiinfo.orientations_numbers[orientation]) +
-                         "\t".expandtabs(12) + "\n" + " Area: " +
-                         str(self.current_building.
-                             get_outer_wall_area(orientation)))
-
-                    self.outer_elements_model.appendRow(item1)
-
-                if self.current_building.get_window_area(orientation) != 0:
-                    item2 = QStandardItem(
-                        "Window \nOrientation:\t" +
-                        str(self.guiinfo.orientations_numbers[orientation]) +
-                        "\t".expandtabs(16) + "\n" + " Area: " +
-                        str(self.current_building.
-                            get_window_area(orientation)))
-                    self.outer_elements_model.appendRow(item2)
-
-    def click_save_current_project(self):
-        '''Opens a dialog window for the user to input a path
-        then issues the controller to create and save the file.
-        
-        '''
-        
-        path = QtGui.QFileDialog.getSaveFileName(
-            caption='Choose Filepath',
-            directory=utilis.get_default_path()+"\\"+self.project.name,
-            filter="Teaser File (*.teaserXML);; GML (*.gml)")
-        last_name = path.split('/')
-        length = len(last_name)
-        last_part = str(last_name[length-1])
-        if last_part.endswith("teaserXML"):
-            self.project.name = last_part[:-10]
-        elif last_part.endswith("gml"):
-            self.project.name = last_part[:-4]
-        Controller.click_save_button(self.project, str(path))
-
-    def click_export_button(self):
-        # path in GUI, which is need for the output
-        path_output_folder = str(self.export_save_template_lineedit.text())
-        template_folder = self.create_path_to_template_folder()
-        os.chdir(template_folder)
-
-        list_of_building_name = []
-        for i in range(self.side_bar_buildings_combo_box.count()):
-            list_of_building_name.append(
-                self.side_bar_buildings_combo_box.itemText(i))
-
-        sender = self.sender()
-        building_model = \
-            self.export_create_template_model_combobox.currentText()
-        zone_model = self.export_create_template_zone_combobox.currentText()
-        if self.radio_button_corG_1.isChecked():
-            corG = True
-        elif self.radio_button_corG_2.isChecked():
-            corG = False
-        elemInCombobox = \
-            self.export_create_template_model_combobox.currentText()
-
-        if(sender.text() == self.export_button.text()):
-            Controller.click_export_button(self.project, building_model,
-                                           zone_model, corG, None,
-                                           path_output_folder)
-            QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
-                                          "record " + elemInCombobox +
-                                          " all building finished ")
-        elif(sender.text() == self.export_button_one.text()):
-            Controller.click_export_button(self.project, building_model,
-                                           zone_model, corG,
-                                           self.current_building.internal_id,
-                                           path_output_folder)
-            QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
-                                          "record " + elemInCombobox +
-                                          " for current building finished ")
-        utilis.create_path(str(self.file_path))
-
-    def click_browse_button(self):
-        self.export_save_template_lineedit.setText(QtGui.QFileDialog.
-                                                   getExistingDirectory())
-        if self.export_save_template_lineedit.text() != "":
-            utilis.create_path(self.export_save_template_lineedit.text())
-            self.file_path = self.export_save_template_lineedit.text()
-        else:
-            self.export_save_template_lineedit.setText(self.file_path)
-
-    def create_path_to_template_folder(self,):
-        
-        # TODO: This probably belongs to the Utilis class and not here ;)
-        path = "InputData\\RecordTemplate\\"
-        pathTemplate = utilis.get_default_path()
-        leng = len(pathTemplate)
-        fullPath = pathTemplate[:leng - 10] + path
-        return(str(fullPath))
-
-    def display_current_element(self):
-        ''' Transfers all relevant values of the current
-        element to gui controls like text fields and the list of layers.
-
-        '''
-
-        if (self.current_element):
-
-            """ Displaying values on the sidebar controls"""
-
-            self.edit_element_name_line_edit.setText(
-                str(self.current_element.name))
-            self.edit_element_area_line_edit.setText(
-                str(self.current_element.area))
-            self.edit_element_type_line_edit.setText(
-                str(self.current_element.construction_type))
-
-            """ Displaying layer in the list of layers in the main frame """
-
-            self.layer_model.clear()
-            for layer in self.current_element.layer:
-                item = TrackableItem("Name:\t".expandtabs(8) + 
-                                     str(layer.id) + "\n" + 
-                                     "Material:\t".expandtabs(11) + 
-                                     str(layer.material.name) + 
-                                     "\n Thickness:\t".expandtabs(11) + 
-                                     str(layer.thickness), layer.internal_id)
-                self.layer_model.appendRow(item)
-
-    def display_current_layer(self):
-        ''' Transfers all relevant values of the current
-        layer to gui text fields.
-
-        '''
-
-        if (self.current_layer):
-
-            self.edit_layer_name_line_edit.setText(
-                str(self.current_layer.id))
-            self.edit_layer_thickness_line_edit.setText(
-                str(self.current_layer.thickness))
-            self.edit_layer_material_name_line_edit.setText(
-                str(self.current_layer.material.name))
-            self.edit_layer_density_line_edit.setText(
-                str(self.current_layer.material.density))
-            self.edit_layer_thermal_conduct_line_edit.setText(
-                str(self.current_layer.material.thermal_conduc))
-            self.edit_layer_heat_capacity_line_edit.setText(
-                str(self.current_layer.material.heat_capac))
-            self.edit_layer_solar_absorp_line_edit.setText(
-                str(self.current_layer.material.solar_absorp))
-            self.edit_layer_ir_emissivity_line_edit.setText(
-                str(self.current_layer.material.ir_emissivity))
-            self.edit_layer_transmittance_line_edit.setText(
-                str(self.current_layer.material.transmittance))
-
-    def fill_typebuilding_attributes(self):
-        '''Fills in values for type buildings from the combo boxes
-        next to the pictures in the Create Type Building window.
-        '''
-        
-        text = self.window_construct_building_combo_box.currentText()
-
-        if text == "Office" or text == "Institute 4" or text ==\
-                "Institute 8" or text == "Institute General":
-            if self.radio_button_office_layout_1.isChecked():
-                self.type_building_ind_att['layoutArea'] = 0
-            if self.radio_button_office_layout_2.isChecked():
-                self.type_building_ind_att['layoutArea'] = 1
-            if self.radio_button_office_layout_3.isChecked():
-                self.type_building_ind_att['layoutArea'] = 2
-            if self.radio_button_office_layout_4.isChecked():
-                self.type_building_ind_att['layoutArea'] = 3
-            if self.radio_button_window_area_office_1.isChecked():
-                self.type_building_ind_att['layoutWindowArea'] = 0
-            if self.radio_button_window_area_office_2.isChecked():
-                self.type_building_ind_att['layoutWindowArea'] = 1
-            if self.radio_button_window_area_office_3.isChecked():
-                self.type_building_ind_att['layoutWindowArea'] = 2
-            if self.radio_button_window_area_office_4.isChecked():
-                self.type_building_ind_att['layoutWindowArea'] = 3
-            if self.radio_button_architecture_office_1.isChecked():
-                self.type_building_ind_att['constructionType'] = "heavy"
-            if self.radio_button_architecture_office_2.isChecked():
-                self.type_building_ind_att['constructionType'] = "heavy"
-            if self.radio_button_architecture_office_3.isChecked():
-                self.type_building_ind_att['constructionType'] = "light"
-        if text == "SingleFamilyDwelling":
-            if self.radio_button_residential_layout_1.isChecked():
-                self.type_building_ind_att['layoutArea'] = 0
-            if self.radio_button_residential_layout_2.isChecked():
-                self.type_building_ind_att['layoutArea'] = 1
-            if self.radio_button_neighbour_1.isChecked():
-                self.type_building_ind_att['neighbour_building'] = 0
-            if self.radio_button_neighbour_2.isChecked():
-                self.type_building_ind_att['neighbour_building'] = 1
-            if self.radio_button_neighbour_3.isChecked():
-                self.type_building_ind_att['neighbour_building'] = 2
-            if self.radio_button_residential_roof_1.isChecked():
-                self.type_building_ind_att['layout_attic'] = 0
-            if self.radio_button_residential_roof_2.isChecked():
-                self.type_building_ind_att['layout_attic'] = 1
-            if self.radio_button_residential_roof_3.isChecked():
-                self.type_building_ind_att['layout_attic'] = 2
-            if self.radio_button_residential_roof_4.isChecked():
-                self.type_building_ind_att['layout_attic'] = 3
-            if self.radio_button_residential_basement_1.isChecked():
-                self.type_building_ind_att['layout_cellar'] = 0
-            if self.radio_button_residential_basement_2.isChecked():
-                self.type_building_ind_att['layout_cellar'] = 1
-            if self.radio_button_residential_basement_3.isChecked():
-                self.type_building_ind_att['layout_cellar'] = 2
-            if self.radio_button_residential_basement_4.isChecked():
-                self.type_building_ind_att['layout_cellar'] = 3
-            if self.check_box_button_roof.isChecked():
-                self.type_building_ind_att['dormer'] = 1
-            else:
-                self.type_building_ind_att['dormer'] = 0
-            if self.radio_button_residential_architecture_1.isChecked():
-                self.type_building_ind_att['constructionType'] = "heavy"
-            if self.radio_button_residential_architecture_2.isChecked():
-                self.type_building_ind_att['constructionType'] = "heavy"
-            if self.radio_button_residential_architecture_3.isChecked():
-                self.type_building_ind_att['constructionType'] = "light"
-
-    def set_text_color(self, qObject, color):
-        '''Switches the color of text between red and black
-        '''
-        # werden soll, beim Löschen auf weitere Abhängigkeiten überprüfen!
-        palette = QtGui.QPalette()
-        if (color == "red"):
-            palette.setColor(QtGui.QPalette.Foreground, QtCore.Qt.red)
-        if (color == "black"):
-            palette.setColor(QtGui.QPalette.Foreground, QtCore.Qt.black)
-        qObject.setPalette(palette)
-        return qObject
-
-    def add_thermal_zone(self):
-        '''Checks if a building exists, if it does opens a window to create
-        a new zone.
-        '''
-
-        if(self.current_building == 0):
-            QtGui.QMessageBox.warning(self,
-                                      u"No building error!",
-                                      u"You need to specify a building first.")
-        else:
-            self.generate_zone_ui()
-            
-    def switch_current_zone_type(self):
-        '''If the type of the current zone is swapped, this
-        gets the values for the new type and updates the window
-        
-        '''
-                
-        zone_type = self.zone_type_combobox.currentText()
-        self.project = Controller.switch_zone_type(
-            zone_type, self.project, self.current_zone.internal_id)
-        self.update_zone_details()
-        
-
-    def switch_material(self):
-        '''If the current material is swapped, this gets the 
-        values for the new type and updates the window
-        
-        '''
-        
-        if self.is_switchable:
-            cIndex = self.material_combobox.currentText()
-            for material in self.materials:
-                fIndex = material.name
-                if fIndex == cIndex:
-                    self.current_layer.material.name = material.name
-                    self.current_layer.material.density = material.density
-                    self.current_layer.material.thermal_conduc = \
-                        material.thermal_conduc
-                    self.current_layer.material.heat_capac = \
-                        material.heat_capac
-                    self.material_density_textbox.setText(
-                        str(self.current_layer.material.density))
-                    self.material_thermal_conduc_textbox.setText(
-                        str(self.current_layer.material.thermal_conduc))
-                    self.material_heat_capac_textbox.setText(
-                        str(self.current_layer.material.heat_capac))
-
-    def load_constr_type(self):
-        if self.construction_type_switched is True:
-            self.current_element.load_type_element(
-                    int(self.element_year_of_construction_textbox.text()),
-                    str(self.element_construction_type_combobox.currentText()))
-
-        self.construction_type_switched = False
-
-    def switch_constr_type(self):
-        try:
-            self.construction_type_switched = True
-            self.element_material_list_view.doubleClicked.disconnect()
-        except:
-            pass
-
-    def load_material(self):
-        '''If the current material is swapped, this gets the 
-        values for the new type and updates the window
-        
-        '''
-
-        try:
-            cIndex = self.new_layerX_material_combobox.currentText()
-            check = 0
-        except:
-            cIndex = self.new_layer_material_combobox.currentText()
-            check = 1
-        for material in self.materials:
-            fIndex = material.name
-            if fIndex == cIndex:
-
-                if check == 0:
-                    self.new_layerX_material_density_textbox.setText(
-                        str(material.density))
-                    self.new_layerX_material_thermal_conduc_textbox.setText(
-                        str(material.thermal_conduc))
-                    self.new_layerX_material_heat_capac_textbox.setText(
-                        str(material.heat_capac))
-                else:
-                    self.new_layer_material_density_textbox.setText(
-                        str(material.density))
-                    self.new_layer_material_thermal_conduc_textbox.setText(
-                        str(material.thermal_conduc))
-                    self.new_layer_material_heat_capac_textbox.setText(
-                        str(material.heat_capac))
-
-    def delete_thermal_zone(self):
-        '''Checks if a building exists, if it does the currently
-        selected zone is deleted from the current building.
-        '''
-
-        if (self.current_building == 0):
-            QtGui.QMessageBox.warning(self, u"No building error!",
-                                      u"You need to specify a building first.")
-        else:
-            try:
-                item = self.zone_model.itemFromIndex(
-                    self.zones_list_view.currentIndex())
-                for building in self.project.buildings:
-                    for zone in building.thermal_zones:
-                        if (zone.internal_id == item.internal_id):
-                            ind = building.thermal_zones.index(zone)
-                            building.thermal_zones[ind].delete()
-                            self.display_current_building()
-            except (ValueError, AttributeError):
-                QtGui.QMessageBox.warning(self,
-                                          u"No zone selected",
-                                          u"You need to select a"
-                                          "thermal zone first.")
-
-    def delete_current_element(self):
-        '''Checks if an element is currently selected and
-        deletes the selected element.
-        
-        '''
-        
-        try:
-            item = self.element_model.itemFromIndex(
-                self.zone_element_list_view.currentIndex())
-            for building in self.project.buildings:
-                for zone in building.thermal_zones:
-                    for element in zone.outer_walls:
-                        if (element.internal_id == item.internal_id):
-                            ind = zone.outer_walls.index(element)
-                            del zone.outer_walls[ind]
-                            self.update_zone_details()
-                    for element in zone.inner_walls:
-                        if (element.internal_id == item.internal_id):
-                            ind = zone.inner_walls.index(element)
-                            del zone.inner_walls[ind]
-                            self.update_zone_details()
-                    for element in zone.windows:
-                        if (element.internal_id == item.internal_id):
-                            ind = zone.windows.index(element)
-                            del zone.windows[ind]
-                            self.update_zone_details()
-        except (ValueError, AttributeError):
-            QtGui.QMessageBox.warning(self,
-                                      u"No element selected",
-                                      u"You need to select an element first.")
-
-    def delete_selected_layer(self):
-        '''Checks if a layer is currently selected and
-        deletes the selected layer.
-        
-        '''
-        
-        try:
-            item = self.element_layer_model.itemFromIndex(
-                self.element_material_list_view.currentIndex())
-            for building in self.project.buildings:
-                for zone in building.thermal_zones:
-                    for element in zone.outer_walls:
-                        for current_layer in element.layer:
-                            if (current_layer.internal_id == item.internal_id):
-                                ind = element.layer.index(current_layer)
-                                del element.layer[ind]
-                                self.update_element_details()
-                    for element in zone.inner_walls:
-                        for current_layer in element.layer:
-                            if (current_layer.internal_id == item.internal_id):
-                                ind = element.layer.index(current_layer)
-                                del element.layer[ind]
-                                self.update_element_details()
-                    for element in zone.windows:
-                        for current_layer in element.layer:
-                            if (current_layer.internal_id == item.internal_id):
-                                ind = element.layer.index(current_layer)
-                                del element.layer[ind]
-                                self.update_element_details()
-        except (ValueError, AttributeError):
-            QtGui.QMessageBox.warning(self,
-                                      u"No layer selected",
-                                      u"You need to select a layer first.")
-
-    def delete_selected_layer_set_all_constr(self):
-        try:
-            item = self.element_layer_model_set_all_constr.itemFromIndex(
-                self.set_all_constr_element_material_list_view.currentIndex())
-            for current_layer in self.all_constr_layer_list:
-                if (current_layer.internal_id == item.internal_id):
-
-                    ind = self.all_constr_layer_list.index(current_layer)
-                    del self.all_constr_layer_list[ind]
-                    self.update_set_all_construction()
-
-        except (ValueError, AttributeError):
-            QtGui.QMessageBox.warning(self,
-                                      u"No layer selected",
-                                      u"You need to select a layer first.")
-
-    def edit_building(self):
-        ''' Goes into edit mode and darkens the uneditable parts.
-        '''
-
-        # TODO: Ok das Design hat sich nicht wirklich durchgesetzt und
-        # es funktioniert grad nicht besonders, Vorschlag: stattdessen
-        # einfach ein Pop-Up Fenster wie bei Create-Type-Building, in dem
-        # man building attribute die links am rand stehen ändern kann.
-        if self.current_building:
-            self.side_bar_construction_year_line_edit.setReadOnly(False)
-            self.side_bar_height_of_floors_line_edit.setReadOnly(False)
-            self.side_bar_id_line_edit.setReadOnly(False)
-            self.side_bar_location_line_edit.setReadOnly(False)
-            self.side_bar_net_leased_area_line_edit.setReadOnly(False)
-            self.side_bar_number_of_floors_line_edit.setReadOnly(False)
-            self.side_bar_street_line_edit.setReadOnly(False)
-            self.saved_values_for_edit["year"] = \
-                self.side_bar_construction_year_line_edit.text()
-            self.saved_values_for_edit["height"] = \
-                self.side_bar_height_of_floors_line_edit.text()
-            self.saved_values_for_edit["id"] = \
-                self.side_bar_id_line_edit.text()
-            self.saved_values_for_edit["location"] = \
-                self.side_bar_location_line_edit.text()
-            self.saved_values_for_edit["area"] = \
-                self.side_bar_net_leased_area_line_edit.text()
-            self.saved_values_for_edit["number"] = \
-                self.side_bar_number_of_floors_line_edit.text()
-            self.saved_values_for_edit["street"] = \
-                self.side_bar_street_line_edit.text()
-
-            self.mask_label_0.setVisible(True)
-            self.mask_label_0.raise_()
-            self.mask_label_1.setVisible(True)
-            self.mask_label_1.raise_()
-            self.mask_label_2.setVisible(True)
-            self.mask_label_2.raise_()
-            self.mask_label_3.setVisible(True)
-            self.mask_label_3.raise_()
-            self.mask_label_4.setVisible(True)
-            self.mask_label_4.raise_()
-            self.mask_label_5.setVisible(True)
-            self.mask_label_5.raise_()
-            self.mask_label_6.setVisible(True)
-            self.mask_label_6.raise_()
-            self.mask_label_7.setVisible(True)
-            self.mask_label_7.raise_()
-            self.mask_label_8.setVisible(True)
-            self.mask_label_8.raise_()
-
-            self.mask_label_9.setVisible(True)
-            self.mask_label_9.raise_()
-            self.mask_button_1.setVisible(True)
-            self.mask_button_1.raise_()
-            self.mask_button_2.setVisible(True)
-            self.mask_button_2.raise_()
-            self.current_transformation = "ebui"
-        else:
-            QtGui.QMessageBox.warning(self,
-                                      u"No building error!",
-                                      u"You need to specify a building first.")
-
-    def edit_building_save(self):
-        ''' Changes the program back after saving changes.
-        '''
-
-        # TODO: Siehe TODO in edit_building
-
-        self.mask_label_0.setVisible(False)
-        self.mask_label_1.setVisible(False)
-        self.mask_label_2.setVisible(False)
-        self.mask_label_3.setVisible(False)
-        self.mask_label_4.setVisible(False)
-        self.mask_label_5.setVisible(False)
-        self.mask_label_6.setVisible(False)
-        self.mask_label_7.setVisible(False)
-        self.mask_label_8.setVisible(False)
-        self.mask_label_9.setVisible(False)
-        self.mask_button_1.setVisible(False)
-        self.mask_button_2.setVisible(False)
-        self.side_bar_construction_year_line_edit.setReadOnly(True)
-        self.side_bar_height_of_floors_line_edit.setReadOnly(True)
-        self.side_bar_id_line_edit.setReadOnly(True)
-        self.side_bar_location_line_edit.setReadOnly(True)
-        self.side_bar_net_leased_area_line_edit.setReadOnly(True)
-        self.side_bar_number_of_floors_line_edit.setReadOnly(True)
-        self.side_bar_street_line_edit.setReadOnly(True)
-        self.current_building.year_of_construction = \
-            self.side_bar_construction_year_line_edit.text()
-        self.current_building.height_of_floors = \
-            self.side_bar_height_of_floors_line_edit.text()
-        self.current_building.name = self.side_bar_id_line_edit.text()
-        self.current_building.city = self.side_bar_location_line_edit.text()
-        self.current_building.net_leased_area = \
-            self.side_bar_net_leased_area_line_edit.text()
-        self.current_building.number_of_floors = \
-            self.side_bar_number_of_floors_line_edit.text()
-        self.current_building.street_name = \
-            self.side_bar_street_line_edit.text()
-        self.display_current_building()
-
-    def edit_building_cancel(self):
-        ''' Changes the program back after cancelling changes.
-        '''
-
-        # TODO: Siehe TODO in edit_building
-
-        self.mask_label_0.setVisible(False)
-        self.mask_label_1.setVisible(False)
-        self.mask_label_2.setVisible(False)
-        self.mask_label_3.setVisible(False)
-        self.mask_label_4.setVisible(False)
-        self.mask_label_5.setVisible(False)
-        self.mask_label_6.setVisible(False)
-        self.mask_label_7.setVisible(False)
-        self.mask_label_8.setVisible(False)
-        self.mask_label_9.setVisible(False)
-        self.mask_button_1.setVisible(False)
-        self.mask_button_2.setVisible(False)
-        self.side_bar_construction_year_line_edit.setReadOnly(True)
-        self.side_bar_height_of_floors_line_edit.setReadOnly(True)
-        self.side_bar_id_line_edit.setReadOnly(True)
-        self.side_bar_location_line_edit.setReadOnly(True)
-        self.side_bar_net_leased_area_line_edit.setReadOnly(True)
-        self.side_bar_number_of_floors_line_edit.setReadOnly(True)
-        self.side_bar_street_line_edit.setReadOnly(True)
-        self.side_bar_construction_year_line_edit.setText(
-            self.saved_values_for_edit["year"])
-        self.side_bar_height_of_floors_line_edit.setText(
-            self.saved_values_for_edit["height"])
-        self.side_bar_id_line_edit.setText(
-            self.saved_values_for_edit["id"])
-        self.side_bar_location_line_edit.setText(
-            self.saved_values_for_edit["location"])
-        self.side_bar_net_leased_area_line_edit.setText(
-            self.saved_values_for_edit["area"])
-        self.side_bar_number_of_floors_line_edit.setText(
-            self.saved_values_for_edit["number"])
-        self.side_bar_street_line_edit.setText(
-            self.saved_values_for_edit["street"])
-
-    def switch_current_zone(self):
-        ''' Switches the current zone if the user clicks on it
-        used for things like delete_thermal_zone.        
-        '''
-
-        current_item = self.zone_model.itemFromIndex(
-            self.edit_zone_list.currentIndex())
-        for zone in self.current_building.thermal_zones:
-            if zone.internal_id == current_item.internal_id:
-                self.current_zone = zone
-        self.display_current_zone()
-    def saveChangedZoneValues(self):
-        ''' Updates the displayed details of the currently
-        selected zone after changes are saved.
-
-        '''
-
-        self.current_zone.name = self.zone_id_textbox.text()
-        self.current_zone.area = self.zone_net_leased_area_textbox.text()
-        self.current_zone.use_conditions.usage =\
-            self.zone_type_combobox.currentText()
-        if str(self.cooling_ahu_start_dropdown.currentText()).startswith('0'):
-            self.current_zone.use_conditions.cooling_time[0] = \
-                int(self.cooling_ahu_start_dropdown.currentText()[1])
-        else:
-            self.current_zone.use_conditions.cooling_time[0] = \
-                int(self.cooling_ahu_start_dropdown.currentText()[0] + 
-                    self.cooling_ahu_start_dropdown.currentText()[1])
-        if str(self.cooling_ahu_end_dropdown.currentText()).startswith('0'):
-            self.current_zone.use_conditions.cooling_time[1] = \
-                int(self.cooling_ahu_end_dropdown.currentText()[1])
-        else:
-            self.current_zone.use_conditions.cooling_time[1] = \
-                int(self.cooling_ahu_end_dropdown.currentText()[0] + 
-                    self.cooling_ahu_end_dropdown.currentText()[1])
-        if str(self.heating_ahu_start_dropdown.currentText()).startswith('0'):
-            self.current_zone.use_conditions.heating_time[0] = \
-                int(self.heating_ahu_start_dropdown.currentText()[1])
-        else:
-            self.current_zone.use_conditions.heating_time[0] = \
-                int(self.heating_ahu_start_dropdown.currentText()[0] + 
-                    self.heating_ahu_start_dropdown.currentText()[1])
-        if str(self.heating_ahu_end_dropdown.currentText()).startswith('0'):
-            self.current_zone.use_conditions.heating_time[1] = \
-                int(self.heating_ahu_end_dropdown.currentText()[1])
-        else:
-            self.current_zone.use_conditions.heating_time[1] = \
-                int(self.heating_ahu_end_dropdown.currentText()[0] + 
-                    self.heating_ahu_end_dropdown.currentText()[1])
-
-        self.current_zone.use_conditions.set_temp_heat = \
-            self.set_temp_heat_line_edit.text()
-        self.current_zone.use_conditions.set_temp_cool = \
-            self.set_temp_cool_line_edit.text()
-        self.current_zone.use_conditions.temp_set_back = \
-            self.temp_set_back_line_edit.text()
-        self.current_zone.use_conditions.min_air_exchange = \
-            self.min_air_flow_line_edit.text()
-        self.current_zone.use_conditions.min_ahu = \
-            self.min_ahu_line_edit.text()
-        self.current_zone.use_conditions.max_ahu = \
-            self.max_ahu_line_edit.text()
-        if self.with_ahu_combobox.currentText() == 'True':
-            self.current_zone.use_conditions.with_ahu = True
-        else:
-            self.current_zone.use_conditions.with_ahu = False
-        self.current_zone.use_conditions.rel_humidity = float(
-            self.re_humidity_line_edit.text())
-        self.current_zone.use_conditions.persons = \
-            self.persons_line_edit.text()
-        self.current_zone.use_conditions.machines = \
-            self.machines_line_edit.text()
-        self.current_zone.use_conditions.lighting_power = \
-            self.lighting_line_edit.text()
-
-        self.current_zone.t_inside = self.mean_temp_inner_line_edit.text()
-        self.current_zone.t_outside = self.mean_temp_outer_line_edit.text()
-        self.current_zone.infiltration_rate = \
-                                        self.infiltration_rate_line_edit.text()
-
-        # TODO: Not sure if this for loop is really necessary
-        for zone in self.current_building.thermal_zones:
-            if zone.internal_id == self.current_zone.internal_id:
-                self.current_building.thermal_zones[self.current_building.
-                                                    thermal_zones.
-                                                    index(zone)] = \
-                    self.current_zone
-
-        self.display_current_building()
-
-    def save_changed_envelopes_values(self):
-
-        orientation_before_changing = \
-            self.envelope_orientation_before_changing
-        orientation_after_changing = \
-            str(self.envelope_orientation_combobox.currentText())
-        area = float(self.envelope_area_textbox.text())
-        if self.current_envelope.startswith("Outer Wall"):
-            element_type = "Outer Wall"
-        elif self.current_envelope.startswith("Rooftop"):
-            element_type = "Rooftop"
-        elif self.current_envelope.startswith("Ground Floor"):
-            element_type = "Ground Floor"
-        elif self.current_envelope.startswith("Window"):
-            element_type = "Window"
-        if orientation_before_changing == orientation_after_changing:
-            if self.current_envelope.startswith("Window"):
-                for orientation_value in self.guiinfo.orientations_numbers.\
-                                             keys():
-                    orientation_string = str(self.guiinfo.orientations_numbers
-                                             [orientation_value])
-                    if self.envelope_orientation_combobox.currentText() == \
-                            orientation_string:
-                            self.current_building.set_window_area(
-                                float(self.envelope_area_textbox.text()),
-                                orientation_value)
-            else:
-                for orientation_value in self.guiinfo.orientations_numbers.\
-                                             keys():
-                    orientation_string = str(self.guiinfo.orientations_numbers
-                                             [orientation_value])
-                    if self.envelope_orientation_combobox.currentText() == \
-                            orientation_string:
-                            self.current_building.set_outer_wall_area(
-                                float(self.envelope_area_textbox.text()),
-                                orientation_value)
-        else:
-            orientation_number_before_changing = \
-              self.guiinfo.orientations_strings[orientation_before_changing]
-            orientation_number_after_changing = \
-              self.guiinfo.orientations_strings[orientation_after_changing]
-            Controller.click_save_envelopes(self.current_building,
-                                            orientation_number_before_changing,
-                                            orientation_number_after_changing,
-                                            element_type, area)
-        self.display_current_building()
-
-    def switch_current_element(self):
-        ''' Switches the current element if the user clicks on it
-        used for things like delete_current_element.
-        '''
-
-        current_item = self.element_model.itemFromIndex(
-            self.edit_element_list.currentIndex())
-        for element in self.current_zone.outer_walls:
-            if element.internal_id == current_item.internal_id:
-                self.current_element = element
-        for element in self.current_zone.inner_walls:
-            if element.internal_id == current_item.internal_id:
-                self.current_element = element
-        for element in self.current_zone.windows:
-            if element.internal_id == current_item.internal_id:
-                self.current_element = element
-        self.display_current_element()
-
-    def switch_current_layer(self):
-        ''' Switches the current layer if the user clicks on it
-        used for things like delete_current_layer.
-
-        '''
-
-        current_item = self.layer_model.itemFromIndex(
-            self.edit_current_layer_list.currentIndex())
-        for layer in self.current_element.layer:
-            if layer.internal_id == current_item.internal_id:
-                self.current_layer = layer
-        self.display_current_layer()
-
-    def load_building_button(self):
-        ''' Loads the chosen building from a dialog window and
-        puts it on display.        
-        '''
-        # click_save_current_project
-        path = QtGui.QFileDialog.getOpenFileName(
-            self, caption='Choose Filepath', directory='')
-        if path:
-            loaded_project = Controller.click_load_button(str(path))
-            self.merge_projects(loaded_project)
-
-    def merge_projects(self, loaded_project):
-        ''' If a new project is loaded in the buildings are merged
-        into the list of buildings of the older project and all the
-        values of the old project are overwritten        
-        '''
-        for building in self.project.buildings:
-            loaded_project.buildings.insert(0, building)
-        self.project = loaded_project
-        self.project.modelica_info = ModelicaInfo()
-
-        self.current_building = self.project.buildings[-1]
-        self.display_current_building()
-
-    def check_new_building_inputs(self):
-        ''' Creates a new empty building
-        
-        '''
-        
-        # TODO: Eventuell wollt ihr hier mehr Optionen beim Erstellen
-        # ermöglichen, wie Grundfläche, Standort, etc. die würde ich        # allerdings optional machen
-        
-        self.current_building = Controller.click_add_new_building(
-            self.project, "temp")
-        self.current_building.name = \
-            self.generate_new_building_id_line_edit.text()
-        self.project.buildings.append(self.current_building)
-        self.display_current_building()
-
-    def check_new_element_inputs(self):
-        ''' Checks if all inputted values are correct and then updates
-        the list of elements of the currently displayed zone.
-        
-        '''
-        
-        # TODO: Wir wollten keine Messageboxes mehr, also userinput
-        # anders abfangen.
-        
-        try:
-            float(self.generate_new_element_area_line_edit.text())
-        except ValueError:
-            QtGui.QMessageBox.warning(
-                self, u"Warning", u"Area has to be a number.")
-            return
-
-        self.current_zone = Controller.click_add_new_element(
-            self.current_zone, self.generate_new_element_name_line_edit.text(),
-            self.generate_new_element_type_combobox.currentText(),
-            float(self.generate_new_element_area_line_edit.text()))
-        self.element_model.clear()
-
-        for inner_wall in self.current_zone.inner_walls:
-            if type(inner_wall).__name__ == "InnerWall":
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                    "\nType:\t".expandtabs(11) + 
-                    "Inner Wall \n Area:\t".expandtabs(11) + 
-                    str(inner_wall.area), inner_wall.internal_id)
-                self.element_model.appendRow(item)
-            if type(inner_wall).__name__ == "Floor":
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                    "\nType:\t".expandtabs(11) + 
-                    "Floor \n Area:\t".expandtabs(11) + 
-                    str(inner_wall.area), inner_wall.internal_id)
-                self.element_model.appendRow(item)
-            if type(inner_wall).__name__ == "Ceiling":
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) + str(inner_wall.name) + 
-                    "\nType:\t".expandtabs(11) + 
-                    "Ceiling \n Area:\t".expandtabs(11) + 
-                    str(inner_wall.area), inner_wall.internal_id)
-                self.element_model.appendRow(item)
-        for element in self.current_zone.outer_walls:
-            if type(element).__name__ == "GroundFloor":
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) + 
-                    str(element.name) + 
-                    "\nType:\t".expandtabs(11) + 
-                    "Ground Floor \n Area:\t".expandtabs(11) + 
-                    str(element.area) + 
-                    "\n Orientation:\t".expandtabs(11) + 
-                    str(element.orientation),
-                    element.internal_id)
-                self.element_model.appendRow(item)
-            if type(element).__name__ == "Rooftop":
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) + 
-                    str(element.name) + 
-                    "\nType:\t".expandtabs(11) + 
-                    "Rooftop \n Area:\t".expandtabs(11) + 
-                    str(element.area) + 
-                    "\n Orientation:\t".expandtabs(11) + 
-                    str(element.orientation),
-                    element.internal_id)
-                self.element_model.appendRow(item)
-            if type(element).__name__ == "OuterWall":
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) + 
-                    str(element.name) + 
-                    "\nType:\t".expandtabs(11) + 
-                    "Outer Wall \n Area:\t".expandtabs(11) + 
-                    str(element.area) + 
-                    "\n Orientation:\t".expandtabs(11) + 
-                    str(element.orientation),
-                    element.internal_id)
-                self.element_model.appendRow(item)
-        for element in self.current_zone.windows:
-            item = TrackableItem(
-                "Name:\t".expandtabs(8) + str(element.name) + 
-                "\nType:\t".expandtabs(11) + 
-                "Window \n Area:\t".expandtabs(11) + 
-                str(element.area), element.internal_id)
-            self.element_model.appendRow(item)
-            
-    def keyPressEvent(self, event):
-        ''' Implements shortcuts for the most important buttons
-        
-        '''
-        
-        # TODO: Ok also das hier funktioniert generell und tut auch schon
-        # Problem: Der User muss die Shortcuts auch mitbekommen, also
-        # am besten den jeweiligen shortcut-Buchstaben im Label unter dem
-        # Button/ auf dem Button etwas hervorheben (unterstreichen oder fett machen)
-        # Der Modifier ist STRG also müssten für die buttons bspw. STRG+C gedrückt werden.        
-        key = event.key()
-        if key == QtCore.Qt.Key_C and\
-                QtGui.QApplication.keyboardModifiers() == \
-                QtCore.Qt.ControlModifier:
-            self.generate_type_building_ui("Office")
-        if key == QtCore.Qt.Key_E and\
-                QtGui.QApplication.keyboardModifiers() == \
-                QtCore.Qt.ControlModifier:
-            self.create_new_building_ui()
-        if key == QtCore.Qt.Key_P and\
-                QtGui.QApplication.keyboardModifiers() == \
-                QtCore.Qt.ControlModifier:
-            self.create_new_project_ui()
-        if key == QtCore.Qt.Key_Z and\
-                QtGui.QApplication.keyboardModifiers() == \
-                QtCore.Qt.ControlModifier:
-            self.add_thermal_zone()
-        if key == QtCore.Qt.Key_D and\
-                QtGui.QApplication.keyboardModifiers() == \
-                QtCore.Qt.ControlModifier:
-            self.delete_thermal_zone()
-        if key == QtCore.Qt.Key_L and\
-                QtGui.QApplication.keyboardModifiers() == \
-                QtCore.Qt.ControlModifier:
-            self.load_building_button()
-        if key == QtCore.Qt.Key_B and\
-                QtGui.QApplication.keyboardModifiers() == \
-                QtCore.Qt.ControlModifier:
-            self.edit_building()
-
-    def check_new_layer_inputs(self):
-        ''' Adds a new layer to the current element, checks if the
-        input is correct
-
-        '''
-
-        if self.new_layer_thickness_textbox.text() is not "":
-            thick = float(self.new_layer_thickness_textbox.text())
-        else:
-            thick = 1
-        if self.new_layer_material_density_textbox.text() is not "":
-            dens = float(self.new_layer_material_density_textbox.text())
-        else:
-            dens = 1
-        if self.new_layer_material_thermal_conduc_textbox.text() is not "":
-            therm = float(
-                self.new_layer_material_thermal_conduc_textbox.text())
-        else:
-            therm = 1
-        if self.new_layer_material_heat_capac_textbox.text() is not "":
-            heat = float(self.new_layer_material_heat_capac_textbox.text())
-        else:
-            heat = 1
-        if self.new_layer_material_solar_absorp_textbox.text() is not "":
-            solar = float(self.new_layer_material_solar_absorp_textbox.text())
-        else:
-            solar = 1
-        if self.new_layer_material_ir_emissivity_textbox.text() is not "":
-            ir = float(self.new_layer_material_ir_emissivity_textbox.text())
-        else:
-            ir = 1
-        if self.new_layer_material_transmittance_textbox.text() is not "":
-            trans = float(self.new_layer_material_transmittance_textbox.text())
-        else:
-            trans = 1
-
-        sender = self.sender()
-        if(sender.text() == self.new_layer_save_button.text()):
-            self.current_element = Controller.click_add_new_layer(
-                self.current_element,
-                int(self.new_layer_position_combobox.currentText()),
-                thick, self.new_layer_material_combobox.currentText(), dens,
-                therm, heat, solar, ir, trans)
-
-    def check_new_layer_inputs_all_constr(self):
-        ''' Adds a new layer to the current element, checks if the
-        input is correct
-
-        '''
-
-        if self.new_layerX_thickness_textbox.text() is not "":
-            thick = float(self.new_layerX_thickness_textbox.text())
-        else:
-            thick = 1
-        if self.new_layerX_material_density_textbox.text() is not "":
-            dens = float(self.new_layerX_material_density_textbox.text())
-        else:
-            dens = 1
-        if self.new_layerX_material_thermal_conduc_textbox.text() is not "":
-            therm = float(
-                self.new_layerX_material_thermal_conduc_textbox.text())
-        else:
-            therm = 1
-        if self.new_layerX_material_heat_capac_textbox.text() is not "":
-            heat = float(self.new_layerX_material_heat_capac_textbox.text())
-        else:
-            heat = 1
-        if self.new_layerX_material_solar_absorp_textbox.text() is not "":
-            solar = float(self.new_layerX_material_solar_absorp_textbox.text())
-        else:
-            solar = 1
-        if self.new_layerX_material_ir_emissivity_textbox.text() is not "":
-            ir = float(self.new_layerX_material_ir_emissivity_textbox.text())
-        else:
-            ir = 1
-        if self.new_layerX_material_transmittance_textbox.text() is not "":
-            trans = float(self.new_layerX_material_transmittance_textbox.text())
-        else:
-            trans = 1
-        """
-        self.all_constr_layer_list.append(
-            Controller.click_add_new_layer(
-                    None, int(self.new_layerX_position_combobox.currentText()),
-                    thick, self.new_layerX_material_combobox.currentText(),
-                    dens, therm, heat, solar, ir, trans))
-        """
-        position = int(self.new_layerX_position_combobox.currentText())
-        exists = False
-        for layer in self.all_constr_layer_list:
-            if layer.position == position:
-                    exists = True
-            if exists:
-                layer.position = layer.position + 1
-
-        self.all_constr_layer_list.insert(position, Controller.click_add_new_layer(
-                    None, int(self.new_layerX_position_combobox.currentText()),
-                    thick, self.new_layerX_material_combobox.currentText(),
-                    dens, therm, heat, solar, ir, trans))
 
     def create_new_project(self):
         ''' Clears everything and sets the project back to default.
@@ -3221,15 +1230,17 @@ class MainUI(QDialog):
         self.set_all_constr_element_add_material_button.setText("Add Layer")
         self.connect(self.set_all_constr_element_add_material_button,
                      SIGNAL("clicked()"),
-                     self.create_new_layer_ui_set_all_constr)
+                     lambda check_window="set all construction window":
+                     self.create_new_layer_ui(check_window))
 
         self.set_all_constr_element_delete_material_button = QtGui.QPushButton()
         self.set_all_constr_element_delete_material_button.setText(
                                                                 "Delete Layer")
         self.connect(self.set_all_constr_element_delete_material_button,
-                     SIGNAL("clicked()"), 
+                     SIGNAL("clicked()"),
                      self.delete_selected_layer_set_all_constr)
 
+        self.element_material_list_view = QtGui.QListView()
         self.set_all_constr_element_material_list_view = QtGui.QListView()
         self.set_all_constr_element_material_list_view.setGeometry(
             QtCore.QRect(10, 200, 170, 300))
@@ -3242,7 +1253,7 @@ class MainUI(QDialog):
         self.set_all_constr_element_material_list_view.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
         self.set_all_constr_element_material_list_view.doubleClicked.connect(
-            self.show_layer_build_ui_all_constr)
+            self.show_layer_build_ui)
 
         self.set_all_constr_save_button = QtGui.QPushButton()
         self.set_all_constr_save_button.setText("Save")
@@ -3321,11 +1332,11 @@ class MainUI(QDialog):
         self.create__envelope_ui.setWindowModality(Qt.ApplicationModal)
         self.create__envelope_ui.show()
 
-    def create_new_layer_ui(self):
+    def create_new_layer_ui(self, check):
         ''' Opens the window to create a new layer.
-        
+
         '''
-        
+
         self.create_layer_ui = QtGui.QWizardPage()
         self.create_layer_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create_layer_ui.setWindowTitle("Layer Details")
@@ -3344,7 +1355,12 @@ class MainUI(QDialog):
 
         self.new_layer_position_label = QtGui.QLabel("Position")
         self.new_layer_position_combobox = QtGui.QComboBox()
-        num_layers = len(self.current_element.layer) + 1
+
+        if check == "Element Details Window":
+            num_layers = len(self.current_element.layer) + 1
+        elif check == "set all construction window":
+            num_layers = len(self.all_constr_layer_list) + 1
+
         if num_layers > 1:
             for x in range(0, num_layers):
                 self.new_layer_position_combobox.addItem(
@@ -3407,9 +1423,17 @@ class MainUI(QDialog):
         self.new_layer_save_button = QtGui.QPushButton()
         self.new_layer_save_button.setText("Save")
         self.connect(self.new_layer_save_button, SIGNAL(
-            "clicked()"), self.check_new_layer_inputs)
-        self.connect(self.new_layer_save_button, SIGNAL(
-            "clicked()"), self.update_element_details)
+                "clicked()"), lambda check_window=check:
+                self.check_new_layer_inputs(check_window))
+
+        if check == "Element Details Window":
+            self.connect(self.new_layer_save_button, SIGNAL(
+                "clicked()"), self.update_element_details)
+
+        elif check == "set all construction window":
+            self.connect(self.new_layer_save_button, SIGNAL(
+                "clicked()"), self.update_set_all_construction)
+
         self.connect(self.new_layer_save_button, SIGNAL(
             "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
 
@@ -3464,434 +1488,1217 @@ class MainUI(QDialog):
         self.create_layer_ui.setWindowModality(Qt.ApplicationModal)
         self.create_layer_ui.show()
 
-    def create_new_layer_ui_set_all_constr(self):
-        ''' Opens the window to create a new layer.
+    def create_path_to_template_folder(self,):
+
+        # TODO: This probably belongs to the Utilis class and not here ;)
+        path = "InputData\\RecordTemplate\\"
+        pathTemplate = utilis.get_default_path()
+        leng = len(pathTemplate)
+        fullPath = pathTemplate[:leng - 10] + path
+        return(str(fullPath))
+
+    def generate_type_building_ui(self):
+        ''' Opens a window to create a new type building.
 
         '''
 
-        self.create_layer_ui = QtGui.QWizardPage()
-        self.create_layer_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        self.create_layer_ui.setWindowTitle("Layer Details")
-        self.create_layer_ui.setFixedWidth(450)
-        self.create_layer_ui.setFixedHeight(300)
-        self.create_layer_ui_window_layout = QtGui.QGridLayout()
-        self.create_layer_ui.setLayout(self.create_layer_ui_window_layout)
-        self.materials = Controller.get_materials_from_file(self.project)
-        self.is_switchable = False
+        self.popup_window_type_building = QtGui.QWizardPage()
+        self.current_type_building = "Office"
+        self.popup_window_type_building.setAttribute(
+            QtCore.Qt.WA_DeleteOnClose)
+        self.popup_window_type_building.setAttribute(
+            QtCore.Qt.WA_DeleteOnClose)
+        self.popup_window_type_building.setWindowTitle(
+            u"generate " + self.current_type_building + " ...")
+        self.popup_window_type_building.setFixedWidth(520)
+        self.popup_window_type_building.setFixedHeight(800)
+        self.popup_layout_type_building = QtGui.QGridLayout()
+        self.popup_window_type_building.setLayout(
+            self.popup_layout_type_building)
+        self.group_box_type_building_sidecontrols = QtGui.QGroupBox(
+            u"General Information")
+        self.group_box_type_building_right_office = QtGui.QGroupBox(
+            u"Specific Type Building Information")
+        self.group_box_type_building_right_residential = QtGui.QGroupBox(
+            u"Specific Type Building Information")
 
-        self.new_layerX_general_layout = QtGui.QGridLayout()
-        self.new_layerX_general_layout_group_box = \
-            QtGui.QGroupBox("Layer Values")
-        self.new_layerX_general_layout_group_box.setLayout(
-            self.new_layerX_general_layout)
+        self.window_construct_building_type_label = QtGui.QLabel(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_type_label.setGeometry(
+            QtCore.QRect(10, 25, 90, 25))
+        self.window_construct_building_type_label.setText("Type Building:")
+        self.window_construct_building_combo_box = QtGui.QComboBox(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_combo_box.setGeometry(
+            QtCore.QRect(110, 25, 120, 25))
+        for type_building in self.guiinfo.type_buildings:
+            self.window_construct_building_combo_box.addItem(type_building)
+        self.connect(self.window_construct_building_combo_box, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.switch_type_building)
+        self.window_construct_building_name_label = QtGui.QLabel(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_name_label.setGeometry(
+            QtCore.QRect(10, 65, 90, 25))
+        self.window_construct_building_name_label.setText("Name:")
+        self.window_construct_building_name_line_edit = QtGui.QLineEdit(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_name_line_edit.setGeometry(
+            QtCore.QRect(110, 65, 120, 25))
+        self.window_construct_building_street_label = QtGui.QLabel(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_street_label.setGeometry(
+            QtCore.QRect(10, 105, 90, 25))
+        self.window_construct_building_street_label.setText("Street/Nr.:")
+        self.window_construct_building_street_line_edit = QtGui.QLineEdit(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_street_line_edit.setGeometry(
+            QtCore.QRect(110, 105, 120, 25))
+        self.window_construct_building_location_label = QtGui.QLabel(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_location_label.setGeometry(
+            QtCore.QRect(10, 145, 90, 25))
+        self.window_construct_building_location_label.setText("ZIP/City:")
+        self.window_construct_building_location_line_edit = QtGui.QLineEdit(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_location_line_edit.setGeometry(
+            QtCore.QRect(110, 145, 120, 25))
+        self.window_construct_building_year_label = QtGui.QLabel(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_year_label.setGeometry(
+            QtCore.QRect(10, 185, 90, 25))
+        self.window_construct_building_year_label.setText("Construction Year:")
+        self.window_construct_building_year_line_edit = QtGui.QLineEdit(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_year_line_edit.setGeometry(
+            QtCore.QRect(110, 185, 120, 25))
+        self.window_construct_building_number_of_floors_label = QtGui.QLabel(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_number_of_floors_label.setGeometry(
+            QtCore.QRect(10, 225, 90, 25))
+        self.window_construct_building_number_of_floors_label.setText(
+            "Number of Floors:")
+        self.window_construct_building_number_of_floors_line_edit = \
+            QtGui.QLineEdit(self.group_box_type_building_sidecontrols)
+        self.window_construct_building_number_of_floors_line_edit.setGeometry(
+            QtCore.QRect(110, 225, 120, 25))
+        self.window_construct_building_height_of_floors_label = QtGui.QLabel(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_height_of_floors_label.setGeometry(
+            QtCore.QRect(10, 265, 90, 25))
+        self.window_construct_building_height_of_floors_label.setText(
+            "Height of Floors:")
+        self.window_construct_building_height_of_floors_line_edit = \
+            QtGui.QLineEdit(self.group_box_type_building_sidecontrols)
+        self.window_construct_building_height_of_floors_line_edit.setGeometry(
+            QtCore.QRect(110, 265, 120, 25))
+        self.window_construct_building_area_label = QtGui.QLabel(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_area_label.setGeometry(
+            QtCore.QRect(10, 305, 90, 25))
+        self.window_construct_building_area_label.setText("Net leased Area:")
+        self.window_construct_building_area_line_edit = QtGui.QLineEdit(
+            self.group_box_type_building_sidecontrols)
+        self.window_construct_building_area_line_edit.setGeometry(
+            QtCore.QRect(110, 305, 120, 25))
+        self.test_button = QtGui.QPushButton(
+                                self.group_box_type_building_sidecontrols)
+        self.test_button.setText("Generate random parameters")
+        self.test_button.setGeometry(QtCore.QRect(10, 345, 230, 25))
+        self.connect(self.test_button,
+                     QtCore.SIGNAL("clicked()"),
+                     self.fill_random_parameters)
 
-        self.new_layerX_position_label = QtGui.QLabel("Position")
-        self.new_layerX_position_combobox = QtGui.QComboBox()
+        # Differentiates between the different types of buildings from combobox
+        
+        self.type_building_office_layout = QtGui.QGridLayout()
+        self.group_box_type_building_right_office.setLayout(
+                self.type_building_office_layout)
 
-        num_layers = len(self.all_constr_layer_list) + 1
-        if num_layers > 1:
-            for x in range(0, num_layers):
-                self.new_layerX_position_combobox.addItem(
-                    str(x), userData=None)
-        else:
-            self.new_layerX_position_combobox.addItem(
-                "0", userData=None)
-        self.new_layerX_position_combobox.setCurrentIndex(num_layers - 1)
+        self.group_box_office_layout = QtGui.QGroupBox(u"Layout")
+        self.group_box_office_window_area = QtGui.QGroupBox(u"Window Layout")
+        self.group_box_office_architecture = QtGui.QGroupBox(
+            u"Construction Type")
 
-        validator = QtGui.QDoubleValidator()
-        self.new_layerX_thickness_label = QtGui.QLabel("Layer Thickness")
-        self.new_layerX_thickness_textbox = QtGui.QLineEdit()
-        self.new_layerX_thickness_textbox.setValidator(validator)
-        self.new_layerX_thickness_textbox.setObjectName(
-            _fromUtf8("ThicknessTextBox"))
+        self.office_layout = QtGui.QGridLayout()
+        self.office_layoutWindowArea = QtGui.QGridLayout()
+        self.office_layout_architecture = QtGui.QGridLayout()
 
-        self.new_layerX_material_density_label = QtGui.QLabel("Density")
-        self.new_layerX_material_density_textbox = QtGui.QLineEdit()
-        self.new_layerX_material_density_textbox.setValidator(validator)
-        self.new_layerX_material_density_textbox.setObjectName(
-            _fromUtf8("MaterialDensityTextBox"))
+        self.group_box_office_layout.setLayout(self.office_layout)
+        self.group_box_office_window_area.setLayout(
+            self.office_layoutWindowArea)
+        self.group_box_office_architecture.setLayout(
+            self.office_layout_architecture)
 
-        self.new_layerX_material_thermal_conduc_label = \
-            QtGui.QLabel("ThermalConduc")
-        self.new_layerX_material_thermal_conduc_textbox = QtGui.QLineEdit()
-        self.new_layerX_material_thermal_conduc_textbox.setValidator(validator)
-        self.new_layerX_material_thermal_conduc_textbox.setObjectName(
-            _fromUtf8("MaterialThermalConducTextBox"))
+        self.radio_button_office_layout_1 = QtGui.QRadioButton(
+            u"Use default values")
+        self.radio_button_office_layout_2 = QtGui.QRadioButton(
+            u"Elongated, 1 floor")
+        self.radio_button_office_layout_3 = QtGui.QRadioButton(
+            u"Elongated, 2 floors")
+        self.radio_button_office_layout_4 = QtGui.QRadioButton(
+            u"Compact")
+        self.radio_button_office_layout_1.setChecked(True)
 
-        self.new_layerX_material_heat_capac_label = QtGui.QLabel("HeatCapac")
-        self.new_layerX_material_heat_capac_textbox = QtGui.QLineEdit()
-        self.new_layerX_material_heat_capac_textbox.setValidator(validator)
-        self.new_layerX_material_heat_capac_textbox.setObjectName(
-            _fromUtf8("MaterialHeatCapacTextBox"))
+        self.picture_layout_office_2 = QtGui.QLabel()
+        self.picture_layout_office_3 = QtGui.QLabel()
+        self.picture_layout_office_4 = QtGui.QLabel()
+        self.picture_layout_office_2.setPixmap(
+            QtGui.QPixmap(utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\elongated1floor.png")).scaled(
+                    70, 70))
+        self.picture_layout_office_3.setPixmap(
+            QtGui.QPixmap(utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\elongated2floors.png")).scaled(
+                    70, 70))
+        self.picture_layout_office_4.setPixmap(QtGui.QPixmap(
+            utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\compact.png")).scaled(
+                    70, 70))
+        self.office_layout.addWidget(
+            self.radio_button_office_layout_1, 1, 0)
+        self.office_layout.addWidget(
+            self.radio_button_office_layout_2, 2, 0)
+        self.office_layout.addWidget(
+            self.radio_button_office_layout_3, 3, 0)
+        self.office_layout.addWidget(
+            self.radio_button_office_layout_4, 4, 0)
+        self.office_layout.addWidget(
+            self.picture_layout_office_2, 2, 1, Qt.AlignRight)
+        self.office_layout.addWidget(
+            self.picture_layout_office_3, 3, 1, Qt.AlignRight)
+        self.office_layout.addWidget(
+            self.picture_layout_office_4, 4, 1, Qt.AlignRight)
 
-        self.new_layerX_material_solar_absorp_label = \
-            QtGui.QLabel("SolarAbsorp")
-        self.new_layerX_material_solar_absorp_textbox = QtGui.QLineEdit()
-        self.new_layerX_material_solar_absorp_textbox.setValidator(validator)
-        self.new_layerX_material_solar_absorp_textbox.setObjectName(
-            _fromUtf8("MaterialSolarAbsorpTextBox"))
+        self.radio_button_window_area_office_1 = QtGui.QRadioButton(
 
-        self.new_layerX_material_ir_emissivity_label = \
-            QtGui.QLabel("IrEmissivity")
-        self.new_layerX_material_ir_emissivity_textbox = QtGui.QLineEdit()
-        self.new_layerX_material_ir_emissivity_textbox.setValidator(validator)
-        self.new_layerX_material_ir_emissivity_textbox.setObjectName(
-            _fromUtf8("MaterialIrEmissivityTextBox"))
+            u"Use default values")
+        self.radio_button_window_area_office_2 = QtGui.QRadioButton(
 
-        self.new_layerX_material_transmittance_label = \
-            QtGui.QLabel("Transmittance")
-        self.new_layerX_material_transmittance_textbox = QtGui.QLineEdit()
-        self.new_layerX_material_transmittance_textbox.setValidator(validator)
-        self.new_layerX_material_transmittance_textbox.setObjectName(
-            _fromUtf8("MaterialTransmittanceTextBox"))
+            u"Punctuated facade")
+        self.radio_button_window_area_office_3 = QtGui.QRadioButton(
 
-        self.new_layerX_material_label = QtGui.QLabel("Material")
-        self.new_layerX_material_combobox = QtGui.QComboBox()
-        self.connect(self.new_layerX_material_combobox, QtCore.SIGNAL(
-            "currentIndexChanged(int)"), self.load_material)
-        temp_list = []
-        for material in self.materials:
-            if material.name not in temp_list:
-                temp_list.append(material.name)
-        self.new_layerX_material_combobox.addItems(sorted(temp_list))
-        self.is_switchable = True
+            u"Banner facade")
+        self.radio_button_window_area_office_4 = QtGui.QRadioButton(
 
-        self.new_layerX_save_button = QtGui.QPushButton()
-        self.new_layerX_save_button.setText("Save")
-        self.connect(self.new_layerX_save_button, SIGNAL(
-            "clicked()"), self.check_new_layer_inputs_all_constr)
-        self.connect(self.new_layerX_save_button, SIGNAL(
-           "clicked()"), self.update_set_all_construction)
-        self.connect(self.new_layerX_save_button, SIGNAL(
-            "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
+            u"Full glazing")
+        self.radio_button_window_area_office_1.setChecked(True)
 
-        self.new_layerX_cancel_button = QtGui.QPushButton()
-        self.new_layerX_cancel_button.setText("Cancel")
-        self.connect(self.new_layerX_cancel_button, SIGNAL(
-            "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
+        self.picture_window_area_office_2 = QtGui.QLabel()
+        self.picture_window_area_office_3 = QtGui.QLabel()
+        self.picture_window_area_office_4 = QtGui.QLabel()
+        self.picture_window_area_office_2.setPixmap(QtGui.QPixmap(
+            utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\punctuatedFacade.png"))
+            .scaled(70, 70))
+        self.picture_window_area_office_3.setPixmap(QtGui.QPixmap(
+            utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\bannerFacade.png"))
+            .scaled(70, 70))
+        self.picture_window_area_office_4.setPixmap(QtGui.QPixmap(
+            utilis.get_full_path(
+                "GUI\\GUIImages\\OfficeBuildings\\fullGlazing.png"))
+            .scaled(70, 70))
+        self.office_layoutWindowArea.addWidget(
+            self.radio_button_window_area_office_1, 1, 0)
+        self.office_layoutWindowArea.addWidget(
+            self.radio_button_window_area_office_2, 2, 0)
+        self.office_layoutWindowArea.addWidget(
+            self.radio_button_window_area_office_3, 3, 0)
+        self.office_layoutWindowArea.addWidget(
+            self.radio_button_window_area_office_4, 4, 0)
+        self.office_layoutWindowArea.addWidget(
+            self.picture_window_area_office_2, 2, 1, Qt.AlignRight)
+        self.office_layoutWindowArea.addWidget(
+            self.picture_window_area_office_3, 3, 1, Qt.AlignRight)
+        self.office_layoutWindowArea.addWidget(
+            self.picture_window_area_office_4, 4, 1, Qt.AlignRight)
 
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_position_label, 1, 0)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_position_combobox, 1, 1)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_thickness_label, 2, 0)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_thickness_textbox, 2, 1)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_label, 3, 0)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_combobox, 3, 1)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_density_label, 4, 0)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_density_textbox, 4, 1)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_thermal_conduc_label, 5, 0)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_thermal_conduc_textbox, 5, 1)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_heat_capac_label, 6, 0)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_heat_capac_textbox, 6, 1)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_solar_absorp_label, 7, 0)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_solar_absorp_textbox, 7, 1)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_ir_emissivity_label, 8, 0)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_ir_emissivity_textbox, 8, 1)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_transmittance_label, 9, 0)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_material_transmittance_textbox, 9, 1)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_save_button, 10, 0)
-        self.new_layerX_general_layout.addWidget(
-            self.new_layerX_cancel_button, 10, 1)
+        self.radio_button_architecture_office_1 = QtGui.QRadioButton(
+            u"Use default values")
+        self.radio_button_architecture_office_2 = QtGui.QRadioButton(
+            u"Heavy")
+        self.radio_button_architecture_office_3 = QtGui.QRadioButton(
+            u"Light")
+        self.radio_button_architecture_office_1.setChecked(True)
 
-        self.create_layer_ui_window_layout.addWidget(
-            self.new_layerX_general_layout_group_box)
-        self.create_layer_ui.setWindowModality(Qt.ApplicationModal)
-        self.create_layer_ui.show()
+        self.office_layout_architecture.addWidget(
+            self.radio_button_architecture_office_1, 1, 0)
+        self.office_layout_architecture.addWidget(
+            self.radio_button_architecture_office_2, 2, 0)
+        self.office_layout_architecture.addWidget(
+            self.radio_button_architecture_office_3, 3, 0)
 
-    def show_layer_build_ui_all_constr(self, item):
-        ''' Opens a window to see all attributes from the
-        currently selected layer.        
+        self.construct_type_building_button = QtGui.QPushButton(
+            u"Generate " + self.current_type_building + " Building ...")
+        self.connect(self.construct_type_building_button, SIGNAL(
+            "clicked()"), self.check_inputs_typebuilding)
+
+        self.connect(self.construct_type_building_button, SIGNAL(
+            "clicked()"), self.popup_window_type_building,
+            QtCore.SLOT("close()"))
+        self.type_building_residential_layout = QtGui.QGridLayout()
+        self.group_box_type_building_right_residential.setLayout(
+            self.type_building_residential_layout)
+
+        self.group_box_residential_neighbour_buildings = QtGui.QGroupBox(
+            u"Direct neighbour buildings")
+        self.group_box_residential_layout = QtGui.QGroupBox(u"Layout")
+        self.group_box_residential_roof = QtGui.QGroupBox(u"Roof")
+        self.group_box_residential_basement = QtGui.QGroupBox(u"Basement")
+        self.group_box_residential_architecture = QtGui.QGroupBox(
+            u"Construction Type")
+
+        self.layout_residential_neighbour_buildings = QtGui.QGridLayout()
+        self.layout_residential_layout = QtGui.QGridLayout()
+        self.layout_residential_roof = QtGui.QGridLayout()
+        self.layout_residential_basement = QtGui.QGridLayout()
+        self.layout_residential_architecture = QtGui.QGridLayout()
+
+        self.group_box_residential_neighbour_buildings.setLayout(
+            self.layout_residential_neighbour_buildings)
+        self.group_box_residential_layout.setLayout(
+            self.layout_residential_layout)
+        self.group_box_residential_roof.setLayout(
+            self.layout_residential_roof)
+        self.group_box_residential_basement.setLayout(
+            self.layout_residential_basement)
+        self.group_box_residential_architecture.setLayout(
+            self.layout_residential_architecture)
+
+        self.radio_button_neighbour_1 = QtGui.QRadioButton(
+
+            u"No neighbour")
+        self.radio_button_neighbour_2 = QtGui.QRadioButton(
+
+            u"One neighbour")
+        self.radio_button_neighbour_3 = QtGui.QRadioButton(
+            u"Two neighbours")
+        self.radio_button_neighbour_1.setChecked(True)
+
+        self.picture_neighbour_building_residential_1 = QtGui.QLabel()
+        self.picture_neighbour_building_residential_2 = QtGui.QLabel()
+        self.picture_neighbour_building_residential_3 = QtGui.QLabel()
+        self.picture_neighbour_building_residential_1.setPixmap(QPixmap(
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                "noNeighbour.png")).scaled(29, 23))
+        self.picture_neighbour_building_residential_2.setPixmap(QPixmap(
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                "oneNeighbour.png")).scaled(46, 23))
+        self.picture_neighbour_building_residential_3.setPixmap(QPixmap(
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                "twoNeighbours.png")).scaled(56, 23))
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.radio_button_neighbour_1, 1, 0)
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.radio_button_neighbour_2, 2, 0)
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.radio_button_neighbour_3, 3, 0)
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.picture_neighbour_building_residential_1, 1, 1,
+            Qt.AlignRight)
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.picture_neighbour_building_residential_2, 2, 1,
+            Qt.AlignRight)
+        self.layout_residential_neighbour_buildings.addWidget(
+            self.picture_neighbour_building_residential_3, 3, 1,
+            Qt.AlignRight)
+
+        self.radio_button_residential_layout_1 = QtGui.QRadioButton(
+
+            u"Compact")
+        self.radio_button_residential_layout_2 = QtGui.QRadioButton(
+
+            u"Elongated/Complex")
+        self.radio_button_residential_layout_1.setChecked(True)
+
+        self.picture_layout_residential_1 = QtGui.QLabel()
+        self.picture_layout_residential_2 = QtGui.QLabel()
+        self.picture_layout_residential_1.setPixmap(QPixmap(
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "compact.png")).scaled(28, 28))
+        self.picture_layout_residential_2.setPixmap(QPixmap(
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "elongatedComplex.png")).scaled(28, 28))
+        self.layout_residential_layout.addWidget(
+            self.radio_button_residential_layout_1, 1, 0)
+        self.layout_residential_layout.addWidget(
+            self.radio_button_residential_layout_2, 2, 0)
+        self.layout_residential_layout.addWidget(
+            self.picture_layout_residential_1, 1, 1, Qt.AlignRight)
+        self.layout_residential_layout.addWidget(
+            self.picture_layout_residential_2, 2, 1, Qt.AlignRight)
+
+        self.radio_button_residential_roof_1 = QtGui.QRadioButton(
+
+            u"Flat Roof")
+        self.radio_button_residential_roof_2 = QtGui.QRadioButton(
+
+            u"Non heated attic")
+        self.radio_button_residential_roof_3 = QtGui.QRadioButton(
+
+            u"Partly heated attic")
+        self.radio_button_residential_roof_4 = QtGui.QRadioButton(
+
+            u"Heated attic")
+        self.radio_button_residential_roof_1.setChecked(True)
+
+        self.h_line_roof = QtGui.QFrame()
+        self.h_line_roof.setFrameShape(QtGui.QFrame.HLine)
+        self.h_line_roof.setFrameShadow(QtGui.QFrame.Sunken)
+        self.check_box_button_roof = QtGui.QCheckBox(
+            u"Dormer or similar installations")
+        self.picture_roof_residential_1 = QtGui.QLabel()
+        self.picture_roof_residential_2 = QtGui.QLabel()
+        self.picture_roof_residential_3 = QtGui.QLabel()
+        self.picture_roof_residential_4 = QtGui.QLabel()
+        self.picture_roof_residential_1.setPixmap(QPixmap(
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "flatRoof.png")).scaled(32, 23))
+        self.picture_roof_residential_2.setPixmap(QPixmap(
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "nonHeatedAttic.png")).
+            scaled(34, 23))
+        self.picture_roof_residential_3.setPixmap(QPixmap(
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "partyHeatedAttic.png")).
+            scaled(34, 23))
+        self.picture_roof_residential_4.setPixmap(QPixmap(
+
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "heatedAttic.png")).scaled(34, 23))
+        self.layout_residential_roof.addWidget(
+            self.radio_button_residential_roof_1, 1, 0)
+
+        self.layout_residential_roof.addWidget(
+            self.radio_button_residential_roof_2, 2, 0)
+
+        self.layout_residential_roof.addWidget(
+            self.radio_button_residential_roof_3, 3, 0)
+
+        self.layout_residential_roof.addWidget(
+            self.radio_button_residential_roof_4, 4, 0)
+
+        self.layout_residential_roof.addWidget(
+            self.picture_roof_residential_1, 1, 1, Qt.AlignRight)
+
+        self.layout_residential_roof.addWidget(
+            self.picture_roof_residential_2, 2, 1, Qt.AlignRight)
+
+        self.layout_residential_roof.addWidget(
+            self.picture_roof_residential_3, 3, 1, Qt.AlignRight)
+
+        self.layout_residential_roof.addWidget(
+            self.picture_roof_residential_4, 4, 1, Qt.AlignRight)
+
+        self.layout_residential_roof.addWidget(
+            self.h_line_roof, 5, 0, 1, 0)
+
+        self.layout_residential_roof.addWidget(
+            self.check_box_button_roof, 6, 0, 1, 1)
+
+        self.radio_button_residential_basement_1 = QtGui.QRadioButton(
+
+            u"No cellar")
+        self.radio_button_residential_basement_2 = QtGui.QRadioButton(
+
+            u"Non heated cellar")
+        self.radio_button_residential_basement_3 = QtGui.QRadioButton(
+
+            u"Partly heated cellar")
+        self.radio_button_residential_basement_4 = QtGui.QRadioButton(
+
+            u"Heated cellar")
+        self.radio_button_residential_basement_1.setChecked(True)
+
+        self.picture_residential_basement_1 = QtGui.QLabel()
+        self.picture_residential_basement_2 = QtGui.QLabel()
+        self.picture_residential_basement_3 = QtGui.QLabel()
+        self.picture_residential_basement_4 = QtGui.QLabel()
+        self.picture_residential_basement_1.setPixmap(QPixmap(
+
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "noCellar.png")).scaled(32, 28))
+        self.picture_residential_basement_2.setPixmap(QPixmap(
+
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "nonHeatedCellar.png")).scaled(32, 28))
+        self.picture_residential_basement_3.setPixmap(QPixmap(
+
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "partlyHeatedCellar.png")).
+            scaled(32, 28))
+        self.picture_residential_basement_4.setPixmap(QPixmap(
+
+
+            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+                                 "heatedCellar.png")).scaled(32, 28))
+        self.layout_residential_basement.addWidget(
+            self.radio_button_residential_basement_1, 1, 0)
+        self.layout_residential_basement.addWidget(
+            self.radio_button_residential_basement_2, 2, 0)
+        self.layout_residential_basement.addWidget(
+            self.radio_button_residential_basement_3, 3, 0)
+        self.layout_residential_basement.addWidget(
+            self.radio_button_residential_basement_4, 4, 0)
+        self.layout_residential_basement.addWidget(
+            self.picture_residential_basement_1, 1, 1, Qt.AlignRight)
+        self.layout_residential_basement.addWidget(
+            self.picture_residential_basement_2, 2, 1, Qt.AlignRight)
+        self.layout_residential_basement.addWidget(
+            self.picture_residential_basement_3, 3, 1, Qt.AlignRight)
+        self.layout_residential_basement.addWidget(
+            self.picture_residential_basement_4, 4, 1, Qt.AlignRight)
+
+        self.radio_button_residential_architecture_1 = QtGui.QRadioButton(
+
+            u"Use default values")
+        self.radio_button_residential_architecture_2 = QtGui.QRadioButton(
+
+            u"Heavy")
+        self.radio_button_residential_architecture_3 = QtGui.QRadioButton(
+
+            u"Light")
+        self.radio_button_residential_architecture_1.setChecked(True)
+
+        self.layout_residential_architecture.addWidget(
+            self.radio_button_residential_architecture_1, 1, 0)
+        self.layout_residential_architecture.addWidget(
+            self.radio_button_residential_architecture_2, 2, 0)
+        self.layout_residential_architecture.addWidget(
+            self.radio_button_residential_architecture_3, 3, 0)
+        self.popup_layout_type_building.addWidget(
+            self.group_box_type_building_sidecontrols, 0, 0, 5, 3)
+        self.popup_layout_type_building.addWidget(
+
+            self.group_box_office_architecture, 5, 0, 2, 3)
+        self.type_building_office_layout.addWidget(
+            self.group_box_office_layout, 0, 0, 1, 1)
+        self.type_building_office_layout.addWidget(
+            self.group_box_office_window_area, 3, 0, 1, 1)
+
+        self.type_building_residential_layout.addWidget(
+            self.group_box_residential_neighbour_buildings, 0, 0, 1, 1)
+        self.type_building_residential_layout.addWidget(
+            self.group_box_residential_layout, 1, 0, 1, 1)
+        self.type_building_residential_layout.addWidget(
+            self.group_box_residential_roof, 2, 0, 1, 1)
+        self.type_building_residential_layout.addWidget(
+            self.group_box_residential_basement, 3, 0, 1, 1)
+        self.popup_layout_type_building.addWidget(
+            self.group_box_residential_architecture, 5, 0, 2, 3)
+        self.popup_layout_type_building.addWidget(
+                self.group_box_type_building_right_office, 0, 3, 7, 1)
+        self.popup_layout_type_building.addWidget(
+                self.group_box_type_building_right_residential, 0, 3, 7, 1)
+        self.group_box_type_building_right_residential.setVisible(False)
+        self.popup_layout_type_building.addWidget(
+            self.construct_type_building_button, 7, 0, 1, 4)
+        self.popup_window_type_building.setLayout(
+            self.popup_layout_type_building)
+        self.popup_window_type_building.setWindowModality(Qt.ApplicationModal)
+        self.popup_window_type_building.show()
+ 
+    def generate_zone_ui(self):
+        ''' Opens a window to create a new zone.
+        
+        '''
+        
+        self.generate_zone_ui_page = QtGui.QWizardPage()
+        self.generate_zone_ui_page.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.generate_zone_ui_page.setWindowTitle("Create new Zone")
+        self.generate_zone_ui_page.setFixedWidth(350)
+        self.generate_zone_ui_page.setFixedHeight(200)
+        self.generate_zone_window_layout = QtGui.QGridLayout()
+        self.generate_zone_ui_page.setLayout(self.generate_zone_window_layout)
+
+        self.generate_zone_name_label = QtGui.QLabel("Name: ")
+        self.generate_zone_name_line_edit = QtGui.QLineEdit()
+        self.generate_zone_name_line_edit.setObjectName(
+            "generate_zone_name_line_edit")
+
+        self.generate_zone_area_label = QtGui.QLabel("Area: ")
+        self.generate_zone_area_line_edit = QtGui.QLineEdit()
+        self.generate_zone_area_line_edit.setObjectName(
+            "generate_zone_area_line_edit")
+
+        self.generate_zone_usage_label = QtGui.QLabel("Type: ")
+        self.generate_zone_usage_combobox = QtGui.QComboBox()
+        self.generate_zone_usage_combobox.setObjectName(
+            "generate_zone_usage_combobox")
+        for zone_type in self.guiinfo.thermal_zone_types:
+            self.generate_zone_usage_combobox.addItem(zone_type)
+
+        self.generate_zone_save_button = QtGui.QPushButton()
+        self.generate_zone_save_button.setText("Save")
+        self.connect(self.generate_zone_save_button, SIGNAL(
+            "clicked()"), self.check_inputs_new_zone)
+        self.connect(self.generate_zone_save_button, SIGNAL(
+            "clicked()"), self.generate_zone_ui_page, QtCore.SLOT("close()"))
+
+        self.generate_zone_cancel_button = QtGui.QPushButton()
+        self.generate_zone_cancel_button.setText("Cancel")
+        self.connect(self.generate_zone_cancel_button, SIGNAL("clicked()"),
+                     self.generate_zone_ui_page, QtCore.SLOT("close()"))
+
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_name_label, 1, 0)
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_name_line_edit, 1, 1)
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_area_label, 2, 0)
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_area_line_edit, 2, 1)
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_usage_label, 3, 0)
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_usage_combobox, 3, 1)
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_save_button, 4, 0)
+        self.generate_zone_window_layout.addWidget(
+            self.generate_zone_cancel_button, 4, 1)
+        self.generate_zone_ui_page.setWindowModality(Qt.ApplicationModal)
+        self.generate_zone_ui_page.show()
+
+    def save_changed_layer_values(self):
+        ''''Replaces the previous values of the current layer with the inputs
+           from the text fields.
+
+        '''
+        # TODO: Fehler beim User-Input abfangen
+        
+        for zone in self.current_building.thermal_zones:
+            if zone.internal_id == self.current_zone.internal_id:
+                for element in zone.inner_walls:
+                    if element.internal_id == self.current_element.internal_id:
+                        for layer in element.layer:
+                            if layer.internal_id == self.current_layer.\
+                                    internal_id:
+                                layer.thickness = self.thickness_textbox.text()
+                                layer.material.name = \
+                                    self.material_combobox.currentText()
+                                layer.material.density = \
+                                    self.material_density_textbox.text()
+                                layer.material.thermal_conduc = \
+                                    self.material_thermal_conduc_textbox.text()
+                                layer.material.heat_capac = \
+                                    self.material_heat_capac_textbox.text()
+                                layer.material.solar_absorp = \
+                                    self.material_solar_absorp_textbox.text()
+                                layer.material.ir_emissivity = \
+                                    self.material_ir_emissivity_textbox.text()
+                                layer.material.transmittance = \
+                                    self.material_transmittance_textbox.text()
+                                break
+                for element in zone.outer_walls:
+                    if element.internal_id == self.current_element.internal_id:
+                        for layer in element.layer:
+                            if layer.internal_id == self.current_layer.\
+                                    internal_id:
+                                layer.thickness = self.thickness_textbox.text()
+                                layer.material.name = \
+                                    self.material_combobox.currentText()
+                                layer.material.density = \
+                                    self.material_density_textbox.text()
+                                layer.material.thermal_conduc = \
+                                    self.material_thermal_conduc_textbox.text()
+                                layer.material.heat_capac = \
+                                    self.material_heat_capac_textbox.text()
+                                layer.material.solar_absorp = \
+                                    self.material_solar_absorp_textbox.text()
+                                layer.material.ir_emissivity = \
+                                    self.material_ir_emissivity_textbox.text()
+                                layer.material.transmittance = \
+                                    self.material_transmittance_textbox.text()
+                                break
+                for element in zone.windows:
+                    if element.internal_id == self.current_element.internal_id:
+                        for layer in element.layer:
+                            if layer.internal_id == self.current_layer.\
+                                    internal_id:
+                                layer.thickness = self.thickness_textbox.text()
+                                layer.material.name = \
+                                    self.material_combobox.currentText()
+                                layer.material.density = \
+                                    self.material_density_textbox.text()
+                                layer.material.thermal_conduc = \
+                                    self.material_thermal_conduc_textbox.text()
+                                layer.material.heat_capac = \
+                                    self.material_heat_capac_textbox.text()
+                                layer.material.solar_absorp = \
+                                    self.material_solar_absorp_textbox.text()
+                                layer.material.ir_emissivity = \
+                                    self.material_ir_emissivity_textbox.text()
+                                layer.material.transmittance = \
+                                    self.material_transmittance_textbox.text()
+                                break
+
+    def save_changed_layer_values_set_all_constr(self):
+        ''''Replaces the previous values of the current layer with the inputs
+           from the text fields.
+
         '''
 
-        self.layer_build_ui = QtGui.QWizardPage()
-        self.layer_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        self.layer_build_ui.setWindowTitle("Layer Details")
-        self.layer_build_ui.setFixedWidth(450)
-        self.layer_build_ui.setFixedHeight(300)
-        self.layer_build_ui_window_layout = QtGui.QGridLayout()
-        self.layer_build_ui.setLayout(self.layer_build_ui_window_layout)
-        self.layer_model = QtGui.QStandardItemModel()
-        self.materials = Controller.get_materials_from_file(self.project)
-        self.is_switchable = False
-
-        current_item = self.element_layer_model_set_all_constr.itemFromIndex(item)
         for layer in self.all_constr_layer_list:
-            if (layer.internal_id == current_item.internal_id):
-                self.current_layer = layer
-                break
-        self.layer_general_layout = QtGui.QGridLayout()
-        self.layer_general_layout_group_box = QtGui.QGroupBox("Layer Values")
-        self.layer_general_layout_group_box.setLayout(
-            self.layer_general_layout)
+                if layer.internal_id == self.current_layer.internal_id:
+                                layer.thickness = self.thickness_textbox.text()
+                                layer.material.name =\
+                                    self.material_combobox.currentText()
+                                layer.material.density = \
+                                    self.material_density_textbox.text()
+                                layer.material.thermal_conduc = \
+                                    self.material_thermal_conduc_textbox.text()
+                                layer.material.heat_capac = \
+                                    self.material_heat_capac_textbox.text()
+                                layer.material.solar_absorp = \
+                                    self.material_solar_absorp_textbox.text()
+                                layer.material.ir_emissivity = \
+                                    self.material_ir_emissivity_textbox.text()
+                                layer.material.transmittance = \
+                                    self.material_transmittance_textbox.text()
+                                break
 
-        self.thickness_label = QtGui.QLabel("Layer Thickness")
-        self.thickness_textbox = QtGui.QLineEdit()
-        self.thickness_textbox.setObjectName(_fromUtf8("ThicknessTextBox"))
-        self.thickness_textbox.setText(str(self.current_layer.thickness))
-
-        self.material_label = QtGui.QLabel("Material")
-        self.material_combobox = QtGui.QComboBox()
-        self.connect(self.material_combobox, QtCore.SIGNAL(
-            "currentIndexChanged(int)"), self.switch_material)
-        temp_list = []
-        for material in self.materials:
-            if material.name not in temp_list:
-                temp_list.append(material.name)
-        if self.current_layer.material.name not in temp_list and\
-                self.current_layer.material.name is not None:
-            temp_list.append(self.current_layer.material.name)
-        self.material_combobox.addItems(sorted(temp_list))
-        self.material_combobox.setCurrentIndex(
-            self.material_combobox.findText(self.current_layer.material.name))
-        self.is_switchable = True
-
-        self.material_density_label = QtGui.QLabel("Density")
-        self.material_density_textbox = QtGui.QLineEdit()
-        self.material_density_textbox.setObjectName(
-            _fromUtf8("MaterialDensityTextBox"))
-        self.material_density_textbox.setText(
-            str(self.current_layer.material.density))
-
-        self.material_thermal_conduc_label = QtGui.QLabel("ThermalConduc")
-        self.material_thermal_conduc_textbox = QtGui.QLineEdit()
-        self.material_thermal_conduc_textbox.setObjectName(
-            _fromUtf8("MaterialThermalConducTextBox"))
-        self.material_thermal_conduc_textbox.setText(
-            str(self.current_layer.material.thermal_conduc))
-
-        self.material_heat_capac_label = QtGui.QLabel("HeatCapac")
-        self.material_heat_capac_textbox = QtGui.QLineEdit()
-        self.material_heat_capac_textbox.setObjectName(
-            _fromUtf8("MaterialHeatCapacTextBox"))
-        self.material_heat_capac_textbox.setText(
-            str(self.current_layer.material.heat_capac))
-
-        self.material_solar_absorp_label = QtGui.QLabel("SolarAbsorp")
-        self.material_solar_absorp_textbox = QtGui.QLineEdit()
-        self.material_solar_absorp_textbox.setObjectName(
-            _fromUtf8("MaterialSolarAbsorpTextBox"))
-        self.material_solar_absorp_textbox.setText(
-            str(self.current_layer.material.solar_absorp))
-
-        self.material_ir_emissivity_label = QtGui.QLabel("IrEmissivity")
-        self.material_ir_emissivity_textbox = QtGui.QLineEdit()
-        self.material_ir_emissivity_textbox.setObjectName(
-            _fromUtf8("MaterialIrEmissivityTextBox"))
-        self.material_ir_emissivity_textbox.setText(
-            str(self.current_layer.material.ir_emissivity))
-
-        self.material_transmittance_label = QtGui.QLabel("Transmittance")
-        self.material_transmittance_textbox = QtGui.QLineEdit()
-        self.material_transmittance_textbox.setObjectName(
-            _fromUtf8("MaterialTransmittanceTextBox"))
-        self.material_transmittance_textbox.setText(
-            str(self.current_layer.material.transmittance))
-
-        self.layer_save_button = QtGui.QPushButton()
-        self.layer_save_button.setText("Save")
-
-        self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.save_changed_layer_values_set_all_constr)
-        self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.update_set_all_construction)
-        self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
-
-        self.layer_cancel_button = QtGui.QPushButton()
-        self.layer_cancel_button.setText("Cancel")
-        self.connect(self.layer_cancel_button, SIGNAL(
-            "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
-
-        self.layer_general_layout.addWidget(self.thickness_label, 1, 0)
-        self.layer_general_layout.addWidget(self.thickness_textbox, 1, 1)
-        self.layer_general_layout.addWidget(self.material_label, 2, 0)
-        self.layer_general_layout.addWidget(self.material_combobox, 2, 1)
-        self.layer_general_layout.addWidget(self.material_density_label, 3, 0)
-        self.layer_general_layout.addWidget(
-            self.material_density_textbox, 3, 1)
-        self.layer_general_layout.addWidget(
-            self.material_thermal_conduc_label, 4, 0)
-        self.layer_general_layout.addWidget(
-            self.material_thermal_conduc_textbox, 4, 1)
-        self.layer_general_layout.addWidget(
-            self.material_heat_capac_label, 5, 0)
-        self.layer_general_layout.addWidget(
-            self.material_heat_capac_textbox, 5, 1)
-        self.layer_general_layout.addWidget(
-            self.material_solar_absorp_label, 6, 0)
-        self.layer_general_layout.addWidget(
-            self.material_solar_absorp_textbox, 6, 1)
-        self.layer_general_layout.addWidget(
-            self.material_ir_emissivity_label, 7, 0)
-        self.layer_general_layout.addWidget(
-            self.material_ir_emissivity_textbox, 7, 1)
-        self.layer_general_layout.addWidget(
-            self.material_transmittance_label, 8, 0)
-        self.layer_general_layout.addWidget(
-            self.material_transmittance_textbox, 8, 1)
-        self.layer_general_layout.addWidget(self.layer_save_button, 9, 0)
-        self.layer_general_layout.addWidget(self.layer_cancel_button, 9, 1)
-
-        self.layer_build_ui_window_layout.addWidget(
-            self.layer_general_layout_group_box)
-        self.layer_build_ui.setWindowModality(Qt.ApplicationModal)
-        self.layer_build_ui.show()
+    def save_changed_simulation_values(self):
+        '''Replaces the previous values of the current project with the inputs
+           from the text fields in the simulation window.
+           
+        '''
+        # TODO: Fehler beim User-Input abfangen
         
-    def show_layer_build_ui(self, item):
-        ''' Opens a window to see all attributes from the
-        currently selected layer.        
+        self.project.name = self.project_name_lineedit.text()
+        self.project.modelica_info.runtime_simulation =\
+            self.simulation_runtime_lineedit.text()
+        self.project.modelica_info.interval_output =\
+            self.simulation_interval_output_lineedit.text()
+        self.project.modelica_info.current_solver =\
+            self.simulation_solver_combobox.currentText()
+        if self.simulation_equidistant_output_checkbox.isChecked():
+            self.project.modelica_info.equidistant_output = True
+        else:
+            self.project.modelica_info.equidistant_output = False
+
+    def save_changed_element_values(self):
+        '''Replaces the previous values of the current element with the inputs
+           from the text fields.
+        
+        '''
+        # TODO: Fehler beim User-Input abfangen
+        
+        for zone in self.current_building.thermal_zones:
+            if zone.internal_id == self.current_zone.internal_id:
+                for element in zone.inner_walls:
+                    if element.internal_id == self.current_element.internal_id:
+                        index = zone.inner_walls.index(element)
+                        zone.inner_walls[index].name = \
+                            str(self.element_name_textbox.text())
+                        zone.inner_walls[index].construction_type = \
+                            str(self.element_construction_type_combobox.\
+                            currentText())
+                        zone.inner_walls[index].orientation = \
+                            self.guiinfo.orientations_strings \
+                            [str(self.element_orientation_combobox.currentText())]
+                        zone.inner_walls[index].area = \
+                           str(self.element_area_textbox.text())
+                        zone.inner_walls[index].year_of_construction = \
+                            str(self.element_year_of_construction_textbox.text())
+                        zone.inner_walls[index].year_of_retrofit = \
+                            str(self.element_year_of_retrofit_textbox.text())
+                        zone.inner_walls[index].tilt = \
+                            str(self.element_tilt_textbox.text())
+                        zone.inner_walls[index].inner_convection = \
+                            str(self.element_inner_convection_textbox.text())
+                        zone.inner_walls[index].inner_radiation = \
+                            str(self.element_inner_radiation_textbox.text())
+                for element in zone.outer_walls:
+                    if element.internal_id == self.current_element.internal_id:
+                        index = zone.outer_walls.index(element)
+                        zone.outer_walls[index].name = \
+                            str(self.element_name_textbox.text())
+                        zone.outer_walls[index].construction_type = \
+                            str(self.element_construction_type_combobox.\
+                            currentText())
+                        zone.outer_walls[index].orientation = \
+                            self.guiinfo.orientations_strings\
+                            [self.element_orientation_combobox.currentText()]
+                        zone.outer_walls[index].area = \
+                            str(self.element_area_textbox.text())
+                        zone.outer_walls[index].year_of_construction = \
+                            str(self.element_year_of_construction_textbox.text())
+                        zone.outer_walls[index].year_of_retrofit = \
+                            str(self.element_year_of_retrofit_textbox.text())
+                        zone.outer_walls[index].tilt = \
+                            str(self.element_tilt_textbox.text())
+                        zone.outer_walls[index].inner_convection = \
+                            str(self.element_inner_convection_textbox.text())
+                        zone.outer_walls[index].inner_radiation = \
+                            str(self.element_inner_radiation_textbox.text())
+                        zone.outer_walls[index].outer_convection = \
+                            float(self.element_outer_convection_textbox.text())
+                        zone.outer_walls[index].outer_radiation = \
+                            float(self.element_outer_radiation_textbox.text())
+                        break
+                for element in zone.windows:
+                    if element.internal_id == self.current_element.internal_id:
+                        index = zone.windows.index(element)
+                        zone.windows[index].name = \
+                            str(self.element_name_textbox.text())
+                        zone.windows[index].construction_type = \
+                            str(self.element_construction_type_combobox.\
+                            currentText())
+                        zone.windows[index].orientation = \
+                            self.guiinfo.orientations_strings\
+                            [self.element_orientation_combobox.currentText()]
+                        zone.windows[index].area = \
+                            str(self.element_area_textbox.text())
+                        zone.windows[index].year_of_construction = \
+                            str(self.element_year_of_construction_textbox.text())
+                        zone.windows[index].year_of_retrofit = \
+                            str(self.element_year_of_retrofit_textbox.text())
+                        zone.windows[index].tilt = \
+                            str(self.element_tilt_textbox.text())
+                        zone.windows[index].inner_convection = \
+                            str(self.element_inner_convection_textbox.text())
+                        zone.windows[index].inner_radiation = \
+                            str(self.element_inner_radiation_textbox.text())
+                        zone.windows[index].outer_convection = \
+                            float(self.element_outer_convection_textbox.text())
+                        zone.windows[index].outer_radiation = \
+                            float(self.element_outer_radiation_textbox.text())
+                        break
+
+    def save_input_values_set_all_constr(self):
+
+        bldg = self.current_building
+        orientation = int(self.guiinfo.orientations_strings[
+                    str(self.set_all_constr_element_orientation_textbox.text())])
+        element_type = self.set_all_constr_element_type_textbox.text()
+
+        tilt = float(self.set_all_constr_element_tilt_textbox.text())
+        inner_con = float(self.set_all_constr_element_inner_con_textbox.text())
+        inner_rad = float(self.set_all_constr_element_inner_rad_textbox.text())
+
+        if element_type != "Ground Floor":
+            if(element_type == "Outer Wall"):
+                element_type = "OuterWall"
+            outer_con = float(self.set_all_constr_element_outer_con_textbox.text())
+            outer_rad = float(self.set_all_constr_element_outer_rad_textbox.text())
+        elif element_type == "Ground Floor":
+            element_type = "GroundFLoor"
+            outer_con = None
+            outer_rad = None
+        layer_set = self.all_constr_layer_list
+
+        Controller.click_change_all_constr(bldg, orientation, element_type,
+                                           tilt, inner_con, inner_rad,
+                                           outer_con, outer_rad, layer_set)
+        self.display_current_building()
+
+    def save_changed_zone_values(self):
+        ''' Updates the displayed details of the currently
+        selected zone after changes are saved.
+
+        '''
+
+        self.current_zone.name = self.zone_id_textbox.text()
+        self.current_zone.area = self.zone_net_leased_area_textbox.text()
+        self.current_zone.use_conditions.usage =\
+            self.zone_type_combobox.currentText()
+        if str(self.cooling_ahu_start_dropdown.currentText()).startswith('0'):
+            self.current_zone.use_conditions.cooling_time[0] = \
+                int(self.cooling_ahu_start_dropdown.currentText()[1])
+        else:
+            self.current_zone.use_conditions.cooling_time[0] = \
+                int(self.cooling_ahu_start_dropdown.currentText()[0] + 
+                    self.cooling_ahu_start_dropdown.currentText()[1])
+        if str(self.cooling_ahu_end_dropdown.currentText()).startswith('0'):
+            self.current_zone.use_conditions.cooling_time[1] = \
+                int(self.cooling_ahu_end_dropdown.currentText()[1])
+        else:
+            self.current_zone.use_conditions.cooling_time[1] = \
+                int(self.cooling_ahu_end_dropdown.currentText()[0] + 
+                    self.cooling_ahu_end_dropdown.currentText()[1])
+        if str(self.heating_ahu_start_dropdown.currentText()).startswith('0'):
+            self.current_zone.use_conditions.heating_time[0] = \
+                int(self.heating_ahu_start_dropdown.currentText()[1])
+        else:
+            self.current_zone.use_conditions.heating_time[0] = \
+                int(self.heating_ahu_start_dropdown.currentText()[0] + 
+                    self.heating_ahu_start_dropdown.currentText()[1])
+        if str(self.heating_ahu_end_dropdown.currentText()).startswith('0'):
+            self.current_zone.use_conditions.heating_time[1] = \
+                int(self.heating_ahu_end_dropdown.currentText()[1])
+        else:
+            self.current_zone.use_conditions.heating_time[1] = \
+                int(self.heating_ahu_end_dropdown.currentText()[0] + 
+                    self.heating_ahu_end_dropdown.currentText()[1])
+
+        self.current_zone.use_conditions.set_temp_heat = \
+            self.set_temp_heat_line_edit.text()
+        self.current_zone.use_conditions.set_temp_cool = \
+            self.set_temp_cool_line_edit.text()
+        self.current_zone.use_conditions.temp_set_back = \
+            self.temp_set_back_line_edit.text()
+        self.current_zone.use_conditions.min_air_exchange = \
+            self.min_air_flow_line_edit.text()
+        self.current_zone.use_conditions.min_ahu = \
+            self.min_ahu_line_edit.text()
+        self.current_zone.use_conditions.max_ahu = \
+            self.max_ahu_line_edit.text()
+        if self.with_ahu_combobox.currentText() == 'True':
+            self.current_zone.use_conditions.with_ahu = True
+        else:
+            self.current_zone.use_conditions.with_ahu = False
+        self.current_zone.use_conditions.rel_humidity = float(
+            self.re_humidity_line_edit.text())
+        self.current_zone.use_conditions.persons = \
+            self.persons_line_edit.text()
+        self.current_zone.use_conditions.machines = \
+            self.machines_line_edit.text()
+        self.current_zone.use_conditions.lighting_power = \
+            self.lighting_line_edit.text()
+
+        self.current_zone.t_inside = self.mean_temp_inner_line_edit.text()
+        self.current_zone.t_outside = self.mean_temp_outer_line_edit.text()
+        self.current_zone.infiltration_rate = \
+                                        self.infiltration_rate_line_edit.text()
+
+        # TODO: Not sure if this for loop is really necessary
+        for zone in self.current_building.thermal_zones:
+            if zone.internal_id == self.current_zone.internal_id:
+                self.current_building.thermal_zones[self.current_building.
+                                                    thermal_zones.
+                                                    index(zone)] = \
+                    self.current_zone
+
+        self.display_current_building()
+
+    def save_changed_envelopes_values(self):
+
+        orientation_before_changing = \
+            self.envelope_orientation_before_changing
+        orientation_after_changing = \
+            str(self.envelope_orientation_combobox.currentText())
+        area = float(self.envelope_area_textbox.text())
+        if self.current_envelope.startswith("Outer Wall"):
+            element_type = "Outer Wall"
+        elif self.current_envelope.startswith("Rooftop"):
+            element_type = "Rooftop"
+        elif self.current_envelope.startswith("Ground Floor"):
+            element_type = "Ground Floor"
+        elif self.current_envelope.startswith("Window"):
+            element_type = "Window"
+        if orientation_before_changing == orientation_after_changing:
+            if self.current_envelope.startswith("Window"):
+                for orientation_value in self.guiinfo.orientations_numbers.\
+                                             keys():
+                    orientation_string = str(self.guiinfo.orientations_numbers
+                                             [orientation_value])
+                    if self.envelope_orientation_combobox.currentText() == \
+                            orientation_string:
+                            self.current_building.set_window_area(
+                                float(self.envelope_area_textbox.text()),
+                                orientation_value)
+            else:
+                for orientation_value in self.guiinfo.orientations_numbers.\
+                                             keys():
+                    orientation_string = str(self.guiinfo.orientations_numbers
+                                             [orientation_value])
+                    if self.envelope_orientation_combobox.currentText() == \
+                            orientation_string:
+                            self.current_building.set_outer_wall_area(
+                                float(self.envelope_area_textbox.text()),
+                                orientation_value)
+        else:
+            orientation_number_before_changing = \
+              self.guiinfo.orientations_strings[orientation_before_changing]
+            orientation_number_after_changing = \
+              self.guiinfo.orientations_strings[orientation_after_changing]
+            Controller.click_save_envelopes(self.current_building,
+                                            orientation_number_before_changing,
+                                            orientation_number_after_changing,
+                                            element_type, area)
+        self.display_current_building()
+
+    def clear_input_values_set_all_constr(self):
+        try:
+            self.element_layer_model_set_all_constr.clear()
+            self.all_constr_layer_list.clear()
+        except:
+            self.element_layer_model_set_all_constr = QStandardItemModel()
+            self.all_constr_layer_list = []
+
+    
+
+    def check_inputs_new_zone(self):
+        '''Checks if the inputs from the new_zone window fulfill the specified
+        criteria of not being empty.
+        '''
+        # TODO: Fehler beim User-Input abfangen
+        if self.generate_zone_name_line_edit.text() == "":
+            QtGui.QMessageBox.warning(self,
+                                      u"Can't add Zone!",
+                                      u"You need to fill out the Name field.")
+        if self.generate_zone_area_line_edit.text() == "":
+            QtGui.QMessageBox.warning(self,
+                                      u"Can't add Zone!",
+                                      u"You need to fill out the Area field.")
+        if self.generate_zone_usage_combobox.currentText() == "":
+            QtGui.QMessageBox.warning(self,
+                                      u"Can't add Zone!",
+                                      u"You need to fill out the Usage field.")
+        if self.generate_zone_name_line_edit.text() != \
+            "" and self.generate_zone_area_line_edit.text() != ""\
+                and self.generate_zone_usage_combobox.currentText() != "":
+
+            Controller.click_add_zone_button(
+                self.current_building, self.generate_zone_name_line_edit.text(),
+                self.generate_zone_area_line_edit.text(),
+                self.generate_zone_usage_combobox.currentText())
+            self.display_current_building()
+
+    def check_inputs_edit_element(self):
+        '''Checks conditions for inputs from the element edit window.
+        '''
+        # TODO: Fehler beim User-Input abfangen
+        self.current_element.name = self.edit_element_name_line_edit.text()
+        self.current_element.area = float(
+            self.edit_element_area_line_edit.text())
+        self.display_current_element()
+
+    def check_inputs_edit_zone(self):
+        ''' Checks if all necessary values to edit a given zone are still
+        not empty '''
+        # TODO: Fehler beim User-Input abfangen
+        if self.edit_zone_area_line_edit.text() == "":
+            self.edit_zone_failed_label.setVisible(True)
+            self.edit_zone_area_label = self.set_text_color(
+                self.edit_zone_area_label, "red")
+            self.edit_zone_failed_label = self.set_text_color(
+                self.edit_zone_failed_label, "red")
+            self.edit_gen_inf_tab_widget.setCurrentIndex(0)
+        else:
+            self.edit_zone_area_label = self.set_text_color(
+                self.edit_zone_area_label, "black")
+        if self.new_zone_name_line_edit.text() == "":
+            self.edit_zone_failed_label.setVisible(True)
+            self.edit_zone_name_label = self.set_text_color(
+                self.edit_zone_name_label, "red")
+            self.edit_zone_failed_label = self.set_text_color(
+                self.edit_zone_failed_label, "red")
+            self.edit_gen_inf_tab_widget.setCurrentIndex(0)
+        else:
+            self.edit_zone_name_label = self.set_text_color(
+                self.edit_zone_name_label, "black")
+        if self.edit_zone_volume_line_edit.text() == "":
+            self.edit_zone_failed_label.setVisible(True)
+            self.edit_zone_volume_label = self.set_text_color(
+                self.edit_zone_volume_label, "red")
+            self.edit_zone_failed_label = self.set_text_color(
+                self.edit_zone_failed_label, "red")
+            self.edit_gen_inf_tab_widget.setCurrentIndex(0)
+        else:
+            self.edit_zone_volume_label = self.set_text_color(
+                self.edit_zone_volume_label, "black")
+        if self.edit_zone_area_line_edit.text() != ""\
+            and self.edit_zone_name_line_edit.text() != ""\
+                and self.edit_zone_volume_line_edit.text() != "":
+
+                self.current_zone.area = self.edit_zone_area_line_edit.text()
+                self.current_zone.name = self.edit_zone_name_line_edit.text()
+                self.current_zone.volume = \
+                    self.edit_zone_volume_line_edit.text()
+                self.display_current_building()
+
+    def check_inputs_typebuilding(self):
+        ''' Checks if all necessary values to create a type building are
+        not empty/floats '''
+
+        self.fill_typebuilding_attributes()
+        self.project, int_id = Controller.click_generate_type_building_button(
+            self.project,
+            self.window_construct_building_name_line_edit.text(),
+            self.window_construct_building_year_line_edit.text(),
+            self.window_construct_building_number_of_floors_line_edit.text(),
+            self.window_construct_building_height_of_floors_line_edit.text(),
+            self.current_type_building,
+            self.window_construct_building_area_line_edit.text(),
+            self.window_construct_building_street_line_edit.text(),
+            self.window_construct_building_location_line_edit.text(),
+            self.type_building_ind_att)
+        for building in self.project.buildings:
+            if building.internal_id == int_id:
+                self.current_building = building
+        self.display_current_building()
+
+    def check_new_building_inputs(self):
+        ''' Creates a new empty building
+        
         '''
         
-        self.layer_build_ui = QtGui.QWizardPage()
-        self.layer_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        self.layer_build_ui.setWindowTitle("Layer Details")
-        self.layer_build_ui.setFixedWidth(450)
-        self.layer_build_ui.setFixedHeight(300)
-        self.layer_build_ui_window_layout = QtGui.QGridLayout()
-        self.layer_build_ui.setLayout(self.layer_build_ui_window_layout)
-        self.layer_model = QtGui.QStandardItemModel()
-        self.materials = Controller.get_materials_from_file(self.project)
-        self.is_switchable = False
+        # TODO: Eventuell wollt ihr hier mehr Optionen beim Erstellen
+        # ermöglichen, wie Grundfläche, Standort, etc. die würde ich        # allerdings optional machen
+        
+        self.current_building = Controller.click_add_new_building(
+            self.project, "temp")
+        self.current_building.name = \
+            self.generate_new_building_id_line_edit.text()
+        self.project.buildings.append(self.current_building)
+        self.display_current_building()
 
-        current_item = self.element_layer_model.itemFromIndex(item)
-        for layer in self.current_element.layer:
-            if (layer.internal_id == current_item.internal_id):
-                self.current_layer = layer
-                break
-        self.layer_general_layout = QtGui.QGridLayout()
-        self.layer_general_layout_group_box = QtGui.QGroupBox("Layer Values")
-        self.layer_general_layout_group_box.setLayout(
-            self.layer_general_layout)
+    def check_new_element_inputs(self):
+        ''' Checks if all inputted values are correct and then updates
+        the list of elements of the currently displayed zone.
+        
+        '''
+        
+        # TODO: Wir wollten keine Messageboxes mehr, also userinput
+        # anders abfangen.
+        
+        try:
+            float(self.generate_new_element_area_line_edit.text())
+        except ValueError:
+            QtGui.QMessageBox.warning(
+                self, u"Warning", u"Area has to be a number.")
+            return
 
-        self.thickness_label = QtGui.QLabel("Layer Thickness")
-        self.thickness_textbox = QtGui.QLineEdit()
-        self.thickness_textbox.setObjectName(_fromUtf8("ThicknessTextBox"))
-        self.thickness_textbox.setText(str(self.current_layer.thickness))
+        self.current_zone = Controller.click_add_new_element(
+            self.current_zone, self.generate_new_element_name_line_edit.text(),
+            self.generate_new_element_type_combobox.currentText(),
+            float(self.generate_new_element_area_line_edit.text()))
+        self.element_model.clear()
 
-        self.material_label = QtGui.QLabel("Material")
-        self.material_combobox = QtGui.QComboBox()
-        self.connect(self.material_combobox, QtCore.SIGNAL(
-            "currentIndexChanged(int)"), self.switch_material)
-        temp_list = []
-        for material in self.materials:
-            if material.name not in temp_list:
-                temp_list.append(material.name)
-        if self.current_layer.material.name not in temp_list and\
-                self.current_layer.material.name is not None:
-            temp_list.append(self.current_layer.material.name)
-        self.material_combobox.addItems(sorted(temp_list))
-        self.material_combobox.setCurrentIndex(
-            self.material_combobox.findText(self.current_layer.material.name))
-        self.is_switchable = True
+        for inner_wall in self.current_zone.inner_walls:
+            if type(inner_wall).__name__ == "InnerWall":
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Inner Wall \n Area:\t".expandtabs(11) + 
+                    str(inner_wall.area), inner_wall.internal_id)
+                self.element_model.appendRow(item)
+            if type(inner_wall).__name__ == "Floor":
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Floor \n Area:\t".expandtabs(11) + 
+                    str(inner_wall.area), inner_wall.internal_id)
+                self.element_model.appendRow(item)
+            if type(inner_wall).__name__ == "Ceiling":
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Ceiling \n Area:\t".expandtabs(11) + 
+                    str(inner_wall.area), inner_wall.internal_id)
+                self.element_model.appendRow(item)
+        for element in self.current_zone.outer_walls:
+            if type(element).__name__ == "GroundFloor":
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + 
+                    str(element.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Ground Floor \n Area:\t".expandtabs(11) + 
+                    str(element.area) + 
+                    "\n Orientation:\t".expandtabs(11) + 
+                    str(element.orientation),
+                    element.internal_id)
+                self.element_model.appendRow(item)
+            if type(element).__name__ == "Rooftop":
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + 
+                    str(element.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Rooftop \n Area:\t".expandtabs(11) + 
+                    str(element.area) + 
+                    "\n Orientation:\t".expandtabs(11) + 
+                    str(element.orientation),
+                    element.internal_id)
+                self.element_model.appendRow(item)
+            if type(element).__name__ == "OuterWall":
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + 
+                    str(element.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Outer Wall \n Area:\t".expandtabs(11) + 
+                    str(element.area) + 
+                    "\n Orientation:\t".expandtabs(11) + 
+                    str(element.orientation),
+                    element.internal_id)
+                self.element_model.appendRow(item)
+        for element in self.current_zone.windows:
+            item = TrackableItem(
+                "Name:\t".expandtabs(8) + str(element.name) + 
+                "\nType:\t".expandtabs(11) + 
+                "Window \n Area:\t".expandtabs(11) + 
+                str(element.area), element.internal_id)
+            self.element_model.appendRow(item)
 
-        self.material_density_label = QtGui.QLabel("Density")
-        self.material_density_textbox = QtGui.QLineEdit()
-        self.material_density_textbox.setObjectName(
-            _fromUtf8("MaterialDensityTextBox"))
-        self.material_density_textbox.setText(
-            str(self.current_layer.material.density))
+    def check_new_layer_inputs(self, check):
+        ''' Adds a new layer to the current element, checks if the
+        input is correct
 
-        self.material_thermal_conduc_label = QtGui.QLabel("ThermalConduc")
-        self.material_thermal_conduc_textbox = QtGui.QLineEdit()
-        self.material_thermal_conduc_textbox.setObjectName(
-            _fromUtf8("MaterialThermalConducTextBox"))
-        self.material_thermal_conduc_textbox.setText(
-            str(self.current_layer.material.thermal_conduc))
+        '''
 
-        self.material_heat_capac_label = QtGui.QLabel("HeatCapac")
-        self.material_heat_capac_textbox = QtGui.QLineEdit()
-        self.material_heat_capac_textbox.setObjectName(
-            _fromUtf8("MaterialHeatCapacTextBox"))
-        self.material_heat_capac_textbox.setText(
-            str(self.current_layer.material.heat_capac))
+        if self.new_layer_thickness_textbox.text() is not "":
+            thick = float(self.new_layer_thickness_textbox.text())
+        else:
+            thick = 1
+        if self.new_layer_material_density_textbox.text() is not "":
+            dens = float(self.new_layer_material_density_textbox.text())
+        else:
+            dens = 1
+        if self.new_layer_material_thermal_conduc_textbox.text() is not "":
+            therm = float(
+                self.new_layer_material_thermal_conduc_textbox.text())
+        else:
+            therm = 1
+        if self.new_layer_material_heat_capac_textbox.text() is not "":
+            heat = float(self.new_layer_material_heat_capac_textbox.text())
+        else:
+            heat = 1
+        if self.new_layer_material_solar_absorp_textbox.text() is not "":
+            solar = float(self.new_layer_material_solar_absorp_textbox.text())
+        else:
+            solar = 1
+        if self.new_layer_material_ir_emissivity_textbox.text() is not "":
+            ir = float(self.new_layer_material_ir_emissivity_textbox.text())
+        else:
+            ir = 1
+        if self.new_layer_material_transmittance_textbox.text() is not "":
+            trans = float(self.new_layer_material_transmittance_textbox.text())
+        else:
+            trans = 1
 
-        self.material_solar_absorp_label = QtGui.QLabel("SolarAbsorp")
-        self.material_solar_absorp_textbox = QtGui.QLineEdit()
-        self.material_solar_absorp_textbox.setObjectName(
-            _fromUtf8("MaterialSolarAbsorpTextBox"))
-        self.material_solar_absorp_textbox.setText(
-            str(self.current_layer.material.solar_absorp))
+        if check == "Element Details Window":
+                self.current_element = Controller.click_add_new_layer(
+                    self.current_element,
+                    int(self.new_layer_position_combobox.currentText()),
+                    thick, self.new_layer_material_combobox.currentText(),
+                    dens, therm, heat, solar, ir, trans)
 
-        self.material_ir_emissivity_label = QtGui.QLabel("IrEmissivity")
-        self.material_ir_emissivity_textbox = QtGui.QLineEdit()
-        self.material_ir_emissivity_textbox.setObjectName(
-            _fromUtf8("MaterialIrEmissivityTextBox"))
-        self.material_ir_emissivity_textbox.setText(
-            str(self.current_layer.material.ir_emissivity))
+        elif check == "set all construction window":
+            position = int(self.new_layer_position_combobox.currentText())
+            exists = False
+            for layer in self.all_constr_layer_list:
+                if layer.position == position:
+                        exists = True
+                if exists:
+                    layer.position = layer.position + 1
 
-        self.material_transmittance_label = QtGui.QLabel("Transmittance")
-        self.material_transmittance_textbox = QtGui.QLineEdit()
-        self.material_transmittance_textbox.setObjectName(
-            _fromUtf8("MaterialTransmittanceTextBox"))
-        self.material_transmittance_textbox.setText(
-            str(self.current_layer.material.transmittance))
-
-        self.layer_save_button = QtGui.QPushButton()
-        self.layer_save_button.setText("Save")
-        self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.save_changed_layer_values)
-        self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.update_element_details)
-        self.connect(self.layer_save_button, SIGNAL(
-            "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
-
-        self.layer_cancel_button = QtGui.QPushButton()
-        self.layer_cancel_button.setText("Cancel")
-        self.connect(self.layer_cancel_button, SIGNAL(
-            "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
-
-        self.layer_general_layout.addWidget(self.thickness_label, 1, 0)
-        self.layer_general_layout.addWidget(self.thickness_textbox, 1, 1)
-        self.layer_general_layout.addWidget(self.material_label, 2, 0)
-        self.layer_general_layout.addWidget(self.material_combobox, 2, 1)
-        self.layer_general_layout.addWidget(self.material_density_label, 3, 0)
-        self.layer_general_layout.addWidget(
-            self.material_density_textbox, 3, 1)
-        self.layer_general_layout.addWidget(
-            self.material_thermal_conduc_label, 4, 0)
-        self.layer_general_layout.addWidget(
-            self.material_thermal_conduc_textbox, 4, 1)
-        self.layer_general_layout.addWidget(
-            self.material_heat_capac_label, 5, 0)
-        self.layer_general_layout.addWidget(
-            self.material_heat_capac_textbox, 5, 1)
-        self.layer_general_layout.addWidget(
-            self.material_solar_absorp_label, 6, 0)
-        self.layer_general_layout.addWidget(
-            self.material_solar_absorp_textbox, 6, 1)
-        self.layer_general_layout.addWidget(
-            self.material_ir_emissivity_label, 7, 0)
-        self.layer_general_layout.addWidget(
-            self.material_ir_emissivity_textbox, 7, 1)
-        self.layer_general_layout.addWidget(
-            self.material_transmittance_label, 8, 0)
-        self.layer_general_layout.addWidget(
-            self.material_transmittance_textbox, 8, 1)
-        self.layer_general_layout.addWidget(self.layer_save_button, 9, 0)
-        self.layer_general_layout.addWidget(self.layer_cancel_button, 9, 1)
-
-        self.layer_build_ui_window_layout.addWidget(
-            self.layer_general_layout_group_box)
-        self.layer_build_ui.setWindowModality(Qt.ApplicationModal)
-        self.layer_build_ui.show()
+            self.all_constr_layer_list.insert(position,
+                        Controller.click_add_new_layer( None,
+                        int(self.new_layer_position_combobox.currentText()),
+                        thick, self.new_layer_material_combobox.currentText(),
+                        dens, therm, heat, solar, ir, trans))
 
     def change_zone_values_ui(self, item):
         ''' Opens a window to see all attributes from the
@@ -4061,7 +2868,7 @@ class MainUI(QDialog):
         self.zone_element_save_button = QtGui.QPushButton()
         self.zone_element_save_button.setText("Save")
         self.connect(self.zone_element_save_button, SIGNAL(
-            "clicked()"), self.saveChangedZoneValues)
+            "clicked()"), self.save_changed_zone_values)
         self.connect(self.zone_element_save_button, SIGNAL(
             "clicked()"), self.zone_value_window, QtCore.SLOT("close()"))
 
@@ -4406,594 +3213,197 @@ class MainUI(QDialog):
         self.envelopes_value_window.setWindowModality(Qt.ApplicationModal)
         self.envelopes_value_window.show()
 
-    def generate_type_building_ui(self):
-        ''' Opens a window to create a new type building.
-
-        '''
-
-        self.popup_window_type_building = QtGui.QWizardPage()
-        self.current_type_building = "Office"
-        self.popup_window_type_building.setAttribute(
-            QtCore.Qt.WA_DeleteOnClose)
-        self.popup_window_type_building.setAttribute(
-            QtCore.Qt.WA_DeleteOnClose)
-        self.popup_window_type_building.setWindowTitle(
-            u"generate " + self.current_type_building + " ...")
-        self.popup_window_type_building.setFixedWidth(520)
-        self.popup_window_type_building.setFixedHeight(800)
-        self.popup_layout_type_building = QtGui.QGridLayout()
-        self.popup_window_type_building.setLayout(
-            self.popup_layout_type_building)
-        self.group_box_type_building_sidecontrols = QtGui.QGroupBox(
-            u"General Information")
-        self.group_box_type_building_right_office = QtGui.QGroupBox(
-            u"Specific Type Building Information")
-        self.group_box_type_building_right_residential = QtGui.QGroupBox(
-            u"Specific Type Building Information")
-
-        self.window_construct_building_type_label = QtGui.QLabel(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_type_label.setGeometry(
-            QtCore.QRect(10, 25, 90, 25))
-        self.window_construct_building_type_label.setText("Type Building:")
-        self.window_construct_building_combo_box = QtGui.QComboBox(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_combo_box.setGeometry(
-            QtCore.QRect(110, 25, 120, 25))
-        for type_building in self.guiinfo.type_buildings:
-            self.window_construct_building_combo_box.addItem(type_building)
-        self.connect(self.window_construct_building_combo_box, QtCore.SIGNAL(
-            "currentIndexChanged(int)"), self.switch_type_building)
-        self.window_construct_building_name_label = QtGui.QLabel(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_name_label.setGeometry(
-            QtCore.QRect(10, 65, 90, 25))
-        self.window_construct_building_name_label.setText("Name:")
-        self.window_construct_building_name_line_edit = QtGui.QLineEdit(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_name_line_edit.setGeometry(
-            QtCore.QRect(110, 65, 120, 25))
-        self.window_construct_building_street_label = QtGui.QLabel(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_street_label.setGeometry(
-            QtCore.QRect(10, 105, 90, 25))
-        self.window_construct_building_street_label.setText("Street/Nr.:")
-        self.window_construct_building_street_line_edit = QtGui.QLineEdit(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_street_line_edit.setGeometry(
-            QtCore.QRect(110, 105, 120, 25))
-        self.window_construct_building_location_label = QtGui.QLabel(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_location_label.setGeometry(
-            QtCore.QRect(10, 145, 90, 25))
-        self.window_construct_building_location_label.setText("ZIP/City:")
-        self.window_construct_building_location_line_edit = QtGui.QLineEdit(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_location_line_edit.setGeometry(
-            QtCore.QRect(110, 145, 120, 25))
-        self.window_construct_building_year_label = QtGui.QLabel(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_year_label.setGeometry(
-            QtCore.QRect(10, 185, 90, 25))
-        self.window_construct_building_year_label.setText("Construction Year:")
-        self.window_construct_building_year_line_edit = QtGui.QLineEdit(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_year_line_edit.setGeometry(
-            QtCore.QRect(110, 185, 120, 25))
-        self.window_construct_building_number_of_floors_label = QtGui.QLabel(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_number_of_floors_label.setGeometry(
-            QtCore.QRect(10, 225, 90, 25))
-        self.window_construct_building_number_of_floors_label.setText(
-            "Number of Floors:")
-        self.window_construct_building_number_of_floors_line_edit = \
-            QtGui.QLineEdit(self.group_box_type_building_sidecontrols)
-        self.window_construct_building_number_of_floors_line_edit.setGeometry(
-            QtCore.QRect(110, 225, 120, 25))
-        self.window_construct_building_height_of_floors_label = QtGui.QLabel(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_height_of_floors_label.setGeometry(
-            QtCore.QRect(10, 265, 90, 25))
-        self.window_construct_building_height_of_floors_label.setText(
-            "Height of Floors:")
-        self.window_construct_building_height_of_floors_line_edit = \
-            QtGui.QLineEdit(self.group_box_type_building_sidecontrols)
-        self.window_construct_building_height_of_floors_line_edit.setGeometry(
-            QtCore.QRect(110, 265, 120, 25))
-        self.window_construct_building_area_label = QtGui.QLabel(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_area_label.setGeometry(
-            QtCore.QRect(10, 305, 90, 25))
-        self.window_construct_building_area_label.setText("Net leased Area:")
-        self.window_construct_building_area_line_edit = QtGui.QLineEdit(
-            self.group_box_type_building_sidecontrols)
-        self.window_construct_building_area_line_edit.setGeometry(
-            QtCore.QRect(110, 305, 120, 25))
-        self.test_button = QtGui.QPushButton(
-                                self.group_box_type_building_sidecontrols)
-        self.test_button.setText("Generate random parameters")
-        self.test_button.setGeometry(QtCore.QRect(10, 345, 230, 25))
-        self.connect(self.test_button,
-                     QtCore.SIGNAL("clicked()"),
-                     self.fill_random_parameters)
-
-        # Differentiates between the different types of buildings from combobox
+    def update_zone_details(self):
+        ''' Updates the Zone Details window after something has been changed 
         
-        self.type_building_office_layout = QtGui.QGridLayout()
-        self.group_box_type_building_right_office.setLayout(
-                self.type_building_office_layout)
-
-        self.group_box_office_layout = QtGui.QGroupBox(u"Layout")
-        self.group_box_office_window_area = QtGui.QGroupBox(u"Window Layout")
-        self.group_box_office_architecture = QtGui.QGroupBox(
-            u"Construction Type")
-
-        self.office_layout = QtGui.QGridLayout()
-        self.office_layoutWindowArea = QtGui.QGridLayout()
-        self.office_layout_architecture = QtGui.QGridLayout()
-
-        self.group_box_office_layout.setLayout(self.office_layout)
-        self.group_box_office_window_area.setLayout(
-            self.office_layoutWindowArea)
-        self.group_box_office_architecture.setLayout(
-            self.office_layout_architecture)
-
-        self.radio_button_office_layout_1 = QtGui.QRadioButton(
-            u"Use default values")
-        self.radio_button_office_layout_2 = QtGui.QRadioButton(
-            u"Elongated, 1 floor")
-        self.radio_button_office_layout_3 = QtGui.QRadioButton(
-            u"Elongated, 2 floors")
-        self.radio_button_office_layout_4 = QtGui.QRadioButton(
-            u"Compact")
-        self.radio_button_office_layout_1.setChecked(True)
-
-        self.picture_layout_office_2 = QtGui.QLabel()
-        self.picture_layout_office_3 = QtGui.QLabel()
-        self.picture_layout_office_4 = QtGui.QLabel()
-        self.picture_layout_office_2.setPixmap(
-            QtGui.QPixmap(utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\elongated1floor.png")).scaled(
-                    70, 70))
-        self.picture_layout_office_3.setPixmap(
-            QtGui.QPixmap(utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\elongated2floors.png")).scaled(
-                    70, 70))
-        self.picture_layout_office_4.setPixmap(QtGui.QPixmap(
-            utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\compact.png")).scaled(
-                    70, 70))
-        self.office_layout.addWidget(
-            self.radio_button_office_layout_1, 1, 0)
-        self.office_layout.addWidget(
-            self.radio_button_office_layout_2, 2, 0)
-        self.office_layout.addWidget(
-            self.radio_button_office_layout_3, 3, 0)
-        self.office_layout.addWidget(
-            self.radio_button_office_layout_4, 4, 0)
-        self.office_layout.addWidget(
-            self.picture_layout_office_2, 2, 1, Qt.AlignRight)
-        self.office_layout.addWidget(
-            self.picture_layout_office_3, 3, 1, Qt.AlignRight)
-        self.office_layout.addWidget(
-            self.picture_layout_office_4, 4, 1, Qt.AlignRight)
-
-        self.radio_button_window_area_office_1 = QtGui.QRadioButton(
-
-            u"Use default values")
-        self.radio_button_window_area_office_2 = QtGui.QRadioButton(
-
-            u"Punctuated facade")
-        self.radio_button_window_area_office_3 = QtGui.QRadioButton(
-
-            u"Banner facade")
-        self.radio_button_window_area_office_4 = QtGui.QRadioButton(
-
-            u"Full glazing")
-        self.radio_button_window_area_office_1.setChecked(True)
-
-        self.picture_window_area_office_2 = QtGui.QLabel()
-        self.picture_window_area_office_3 = QtGui.QLabel()
-        self.picture_window_area_office_4 = QtGui.QLabel()
-        self.picture_window_area_office_2.setPixmap(QtGui.QPixmap(
-            utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\punctuatedFacade.png"))
-            .scaled(70, 70))
-        self.picture_window_area_office_3.setPixmap(QtGui.QPixmap(
-            utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\bannerFacade.png"))
-            .scaled(70, 70))
-        self.picture_window_area_office_4.setPixmap(QtGui.QPixmap(
-            utilis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\fullGlazing.png"))
-            .scaled(70, 70))
-        self.office_layoutWindowArea.addWidget(
-            self.radio_button_window_area_office_1, 1, 0)
-        self.office_layoutWindowArea.addWidget(
-            self.radio_button_window_area_office_2, 2, 0)
-        self.office_layoutWindowArea.addWidget(
-            self.radio_button_window_area_office_3, 3, 0)
-        self.office_layoutWindowArea.addWidget(
-            self.radio_button_window_area_office_4, 4, 0)
-        self.office_layoutWindowArea.addWidget(
-            self.picture_window_area_office_2, 2, 1, Qt.AlignRight)
-        self.office_layoutWindowArea.addWidget(
-            self.picture_window_area_office_3, 3, 1, Qt.AlignRight)
-        self.office_layoutWindowArea.addWidget(
-            self.picture_window_area_office_4, 4, 1, Qt.AlignRight)
-
-        self.radio_button_architecture_office_1 = QtGui.QRadioButton(
-            u"Use default values")
-        self.radio_button_architecture_office_2 = QtGui.QRadioButton(
-            u"Heavy")
-        self.radio_button_architecture_office_3 = QtGui.QRadioButton(
-            u"Light")
-        self.radio_button_architecture_office_1.setChecked(True)
-
-        self.office_layout_architecture.addWidget(
-            self.radio_button_architecture_office_1, 1, 0)
-        self.office_layout_architecture.addWidget(
-            self.radio_button_architecture_office_2, 2, 0)
-        self.office_layout_architecture.addWidget(
-            self.radio_button_architecture_office_3, 3, 0)
-
-        self.construct_type_building_button = QtGui.QPushButton(
-            u"Generate " + self.current_type_building + " Building ...")
-        self.connect(self.construct_type_building_button, SIGNAL(
-            "clicked()"), self.check_inputs_typebuilding_office)
-
-        self.connect(self.construct_type_building_button, SIGNAL(
-            "clicked()"), self.popup_window_type_building,
-            QtCore.SLOT("close()"))
-        self.type_building_residential_layout = QtGui.QGridLayout()
-        self.group_box_type_building_right_residential.setLayout(
-            self.type_building_residential_layout)
-
-        self.group_box_residential_neighbour_buildings = QtGui.QGroupBox(
-            u"Direct neighbour buildings")
-        self.group_box_residential_layout = QtGui.QGroupBox(u"Layout")
-        self.group_box_residential_roof = QtGui.QGroupBox(u"Roof")
-        self.group_box_residential_basement = QtGui.QGroupBox(u"Basement")
-        self.group_box_residential_architecture = QtGui.QGroupBox(
-            u"Construction Type")
-
-        self.layout_residential_neighbour_buildings = QtGui.QGridLayout()
-        self.layout_residential_layout = QtGui.QGridLayout()
-        self.layout_residential_roof = QtGui.QGridLayout()
-        self.layout_residential_basement = QtGui.QGridLayout()
-        self.layout_residential_architecture = QtGui.QGridLayout()
-
-        self.group_box_residential_neighbour_buildings.setLayout(
-            self.layout_residential_neighbour_buildings)
-        self.group_box_residential_layout.setLayout(
-            self.layout_residential_layout)
-        self.group_box_residential_roof.setLayout(
-            self.layout_residential_roof)
-        self.group_box_residential_basement.setLayout(
-            self.layout_residential_basement)
-        self.group_box_residential_architecture.setLayout(
-            self.layout_residential_architecture)
-
-        self.radio_button_neighbour_1 = QtGui.QRadioButton(
-
-            u"No neighbour")
-        self.radio_button_neighbour_2 = QtGui.QRadioButton(
-
-            u"One neighbour")
-        self.radio_button_neighbour_3 = QtGui.QRadioButton(
-            u"Two neighbours")
-        self.radio_button_neighbour_1.setChecked(True)
-
-        self.picture_neighbour_building_residential_1 = QtGui.QLabel()
-        self.picture_neighbour_building_residential_2 = QtGui.QLabel()
-        self.picture_neighbour_building_residential_3 = QtGui.QLabel()
-        self.picture_neighbour_building_residential_1.setPixmap(QPixmap(
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                "noNeighbour.png")).scaled(29, 23))
-        self.picture_neighbour_building_residential_2.setPixmap(QPixmap(
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                "oneNeighbour.png")).scaled(46, 23))
-        self.picture_neighbour_building_residential_3.setPixmap(QPixmap(
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                "twoNeighbours.png")).scaled(56, 23))
-        self.layout_residential_neighbour_buildings.addWidget(
-            self.radio_button_neighbour_1, 1, 0)
-        self.layout_residential_neighbour_buildings.addWidget(
-            self.radio_button_neighbour_2, 2, 0)
-        self.layout_residential_neighbour_buildings.addWidget(
-            self.radio_button_neighbour_3, 3, 0)
-        self.layout_residential_neighbour_buildings.addWidget(
-            self.picture_neighbour_building_residential_1, 1, 1,
-            Qt.AlignRight)
-        self.layout_residential_neighbour_buildings.addWidget(
-            self.picture_neighbour_building_residential_2, 2, 1,
-            Qt.AlignRight)
-        self.layout_residential_neighbour_buildings.addWidget(
-            self.picture_neighbour_building_residential_3, 3, 1,
-            Qt.AlignRight)
-
-        self.radio_button_residential_layout_1 = QtGui.QRadioButton(
-
-            u"Compact")
-        self.radio_button_residential_layout_2 = QtGui.QRadioButton(
-
-            u"Elongated/Complex")
-        self.radio_button_residential_layout_1.setChecked(True)
-
-        self.picture_layout_residential_1 = QtGui.QLabel()
-        self.picture_layout_residential_2 = QtGui.QLabel()
-        self.picture_layout_residential_1.setPixmap(QPixmap(
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                                 "compact.png")).scaled(28, 28))
-        self.picture_layout_residential_2.setPixmap(QPixmap(
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                                 "elongatedComplex.png")).scaled(28, 28))
-        self.layout_residential_layout.addWidget(
-            self.radio_button_residential_layout_1, 1, 0)
-        self.layout_residential_layout.addWidget(
-            self.radio_button_residential_layout_2, 2, 0)
-        self.layout_residential_layout.addWidget(
-            self.picture_layout_residential_1, 1, 1, Qt.AlignRight)
-        self.layout_residential_layout.addWidget(
-            self.picture_layout_residential_2, 2, 1, Qt.AlignRight)
-
-        self.radio_button_residential_roof_1 = QtGui.QRadioButton(
-
-            u"Flat Roof")
-        self.radio_button_residential_roof_2 = QtGui.QRadioButton(
-
-            u"Non heated attic")
-        self.radio_button_residential_roof_3 = QtGui.QRadioButton(
-
-            u"Partly heated attic")
-        self.radio_button_residential_roof_4 = QtGui.QRadioButton(
-
-            u"Heated attic")
-        self.radio_button_residential_roof_1.setChecked(True)
-
-        self.h_line_roof = QtGui.QFrame()
-        self.h_line_roof.setFrameShape(QtGui.QFrame.HLine)
-        self.h_line_roof.setFrameShadow(QtGui.QFrame.Sunken)
-        self.check_box_button_roof = QtGui.QCheckBox(
-            u"Dormer or similar installations")
-        self.picture_roof_residential_1 = QtGui.QLabel()
-        self.picture_roof_residential_2 = QtGui.QLabel()
-        self.picture_roof_residential_3 = QtGui.QLabel()
-        self.picture_roof_residential_4 = QtGui.QLabel()
-        self.picture_roof_residential_1.setPixmap(QPixmap(
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                                 "flatRoof.png")).scaled(32, 23))
-        self.picture_roof_residential_2.setPixmap(QPixmap(
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                                 "nonHeatedAttic.png")).
-            scaled(34, 23))
-        self.picture_roof_residential_3.setPixmap(QPixmap(
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                                 "partyHeatedAttic.png")).
-            scaled(34, 23))
-        self.picture_roof_residential_4.setPixmap(QPixmap(
-
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                                 "heatedAttic.png")).scaled(34, 23))
-        self.layout_residential_roof.addWidget(
-            self.radio_button_residential_roof_1, 1, 0)
-
-        self.layout_residential_roof.addWidget(
-            self.radio_button_residential_roof_2, 2, 0)
-
-        self.layout_residential_roof.addWidget(
-            self.radio_button_residential_roof_3, 3, 0)
-
-        self.layout_residential_roof.addWidget(
-            self.radio_button_residential_roof_4, 4, 0)
-
-        self.layout_residential_roof.addWidget(
-            self.picture_roof_residential_1, 1, 1, Qt.AlignRight)
-
-        self.layout_residential_roof.addWidget(
-            self.picture_roof_residential_2, 2, 1, Qt.AlignRight)
-
-        self.layout_residential_roof.addWidget(
-            self.picture_roof_residential_3, 3, 1, Qt.AlignRight)
-
-        self.layout_residential_roof.addWidget(
-            self.picture_roof_residential_4, 4, 1, Qt.AlignRight)
-
-        self.layout_residential_roof.addWidget(
-            self.h_line_roof, 5, 0, 1, 0)
-
-        self.layout_residential_roof.addWidget(
-            self.check_box_button_roof, 6, 0, 1, 1)
-
-        self.radio_button_residential_basement_1 = QtGui.QRadioButton(
-
-            u"No cellar")
-        self.radio_button_residential_basement_2 = QtGui.QRadioButton(
-
-            u"Non heated cellar")
-        self.radio_button_residential_basement_3 = QtGui.QRadioButton(
-
-            u"Partly heated cellar")
-        self.radio_button_residential_basement_4 = QtGui.QRadioButton(
-
-            u"Heated cellar")
-        self.radio_button_residential_basement_1.setChecked(True)
-
-        self.picture_residential_basement_1 = QtGui.QLabel()
-        self.picture_residential_basement_2 = QtGui.QLabel()
-        self.picture_residential_basement_3 = QtGui.QLabel()
-        self.picture_residential_basement_4 = QtGui.QLabel()
-        self.picture_residential_basement_1.setPixmap(QPixmap(
-
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                                 "noCellar.png")).scaled(32, 28))
-        self.picture_residential_basement_2.setPixmap(QPixmap(
-
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                                 "nonHeatedCellar.png")).scaled(32, 28))
-        self.picture_residential_basement_3.setPixmap(QPixmap(
-
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                                 "partlyHeatedCellar.png")).
-            scaled(32, 28))
-        self.picture_residential_basement_4.setPixmap(QPixmap(
-
-
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
-                                 "heatedCellar.png")).scaled(32, 28))
-        self.layout_residential_basement.addWidget(
-            self.radio_button_residential_basement_1, 1, 0)
-        self.layout_residential_basement.addWidget(
-            self.radio_button_residential_basement_2, 2, 0)
-        self.layout_residential_basement.addWidget(
-            self.radio_button_residential_basement_3, 3, 0)
-        self.layout_residential_basement.addWidget(
-            self.radio_button_residential_basement_4, 4, 0)
-        self.layout_residential_basement.addWidget(
-            self.picture_residential_basement_1, 1, 1, Qt.AlignRight)
-        self.layout_residential_basement.addWidget(
-            self.picture_residential_basement_2, 2, 1, Qt.AlignRight)
-        self.layout_residential_basement.addWidget(
-            self.picture_residential_basement_3, 3, 1, Qt.AlignRight)
-        self.layout_residential_basement.addWidget(
-            self.picture_residential_basement_4, 4, 1, Qt.AlignRight)
-
-        self.radio_button_residential_architecture_1 = QtGui.QRadioButton(
-
-            u"Use default values")
-        self.radio_button_residential_architecture_2 = QtGui.QRadioButton(
-
-            u"Heavy")
-        self.radio_button_residential_architecture_3 = QtGui.QRadioButton(
-
-            u"Light")
-        self.radio_button_residential_architecture_1.setChecked(True)
-
-        self.layout_residential_architecture.addWidget(
-            self.radio_button_residential_architecture_1, 1, 0)
-        self.layout_residential_architecture.addWidget(
-            self.radio_button_residential_architecture_2, 2, 0)
-        self.layout_residential_architecture.addWidget(
-            self.radio_button_residential_architecture_3, 3, 0)
-        self.popup_layout_type_building.addWidget(
-            self.group_box_type_building_sidecontrols, 0, 0, 5, 3)
-        self.popup_layout_type_building.addWidget(
-
-            self.group_box_office_architecture, 5, 0, 2, 3)
-        self.type_building_office_layout.addWidget(
-            self.group_box_office_layout, 0, 0, 1, 1)
-        self.type_building_office_layout.addWidget(
-            self.group_box_office_window_area, 3, 0, 1, 1)
-
-        self.type_building_residential_layout.addWidget(
-            self.group_box_residential_neighbour_buildings, 0, 0, 1, 1)
-        self.type_building_residential_layout.addWidget(
-            self.group_box_residential_layout, 1, 0, 1, 1)
-        self.type_building_residential_layout.addWidget(
-            self.group_box_residential_roof, 2, 0, 1, 1)
-        self.type_building_residential_layout.addWidget(
-            self.group_box_residential_basement, 3, 0, 1, 1)
-        self.popup_layout_type_building.addWidget(
-            self.group_box_residential_architecture, 5, 0, 2, 3)
-        self.popup_layout_type_building.addWidget(
-                self.group_box_type_building_right_office, 0, 3, 7, 1)
-        self.popup_layout_type_building.addWidget(
-                self.group_box_type_building_right_residential, 0, 3, 7, 1)
-        self.group_box_type_building_right_residential.setVisible(False)
-        self.popup_layout_type_building.addWidget(
-            self.construct_type_building_button, 7, 0, 1, 4)
-        self.popup_window_type_building.setLayout(
-            self.popup_layout_type_building)
-        self.popup_window_type_building.setWindowModality(Qt.ApplicationModal)
-        self.popup_window_type_building.show()
-
-    def fill_random_parameters(self):
-        import random
-        self.window_construct_building_name_line_edit.setText("Random")
-        self.window_construct_building_street_line_edit.setText("Random Street")
-        self.window_construct_building_location_line_edit.setText("Random City")
-        value = str(random.randint(1900,2015))
-        self.window_construct_building_year_line_edit.setText(value)
-        value = str(random.randint(1,10))
-        self.window_construct_building_number_of_floors_line_edit.setText(value)
-        value = str(round(random.uniform(2.5,5.5),2))
-        self.window_construct_building_height_of_floors_line_edit.setText(value)
-        value = str(round(random.uniform(100,10000),2))
-        self.window_construct_building_area_line_edit.setText(value)
-
-    def generate_zone_ui(self):
-        ''' Opens a window to create a new zone.
+        '''
+        self.element_model.clear()
+        if self.current_zone.inner_walls:
+            for inner_wall in self.current_zone.inner_walls:
+                if type(inner_wall).__name__ == \
+                "InnerWall":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Inner Wall \n Area:\t".expandtabs(11) + 
+                        str(inner_wall.area), inner_wall.internal_id)
+                    self.element_model.appendRow(item)
+                if type(inner_wall).__name__ == \
+                "Floor":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Floor \n Area:\t".expandtabs(11) + 
+                        str(inner_wall.area), inner_wall.internal_id)
+                    self.element_model.appendRow(item)
+                if type(inner_wall).__name__ == \
+                "Ceiling":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Ceiling \n Area:\t".expandtabs(11) + 
+                        str(inner_wall.area), inner_wall.internal_id)
+                    self.element_model.appendRow(item)
+        if self.current_zone.outer_walls:
+            for outer_wall in self.current_zone.outer_walls:
+                if type(outer_wall).__name__ == "OuterWall":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + 
+                        str(outer_wall.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Outer Wall \n Area:\t".expandtabs(11) + 
+                        str(outer_wall.area) + 
+                        "\n Orientation:\t".expandtabs(11) + 
+                        str(outer_wall.orientation),
+                        outer_wall.internal_id)
+                    self.element_model.appendRow(item)
+                if type(outer_wall).__name__ == \
+                        "GroundFloor":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + 
+                        str(outer_wall.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Ground Floor \n Area:\t".expandtabs(11) + 
+                        str(outer_wall.area) + 
+                        "\n Orientation:\t".expandtabs(11) + 
+                        str(outer_wall.orientation),
+                        outer_wall.internal_id)
+                    self.element_model.appendRow(item)
+                if type(outer_wall).__name__ == "Rooftop":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + 
+                        str(outer_wall.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Rooftop \n Area:\t".expandtabs(11) + 
+                        str(outer_wall.area) + 
+                        "\n Orientation:\t".expandtabs(11) + 
+                        str(outer_wall.orientation),
+                        outer_wall.internal_id)
+                    self.element_model.appendRow(item)
+        if self.current_zone.windows:
+            for window in self.current_zone.windows:
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + str(window.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Windows \n Area:\t".expandtabs(11) + 
+                    str(window.area) + 
+                    "\n Orientation:\t".expandtabs(11) + 
+                    str(window.orientation), window.internal_id)
+                self.element_model.appendRow(item)
+        
+        for time in self.guiinfo.hoursInADay:
+            if len(str(self.current_zone.use_conditions.cooling_time[0])) == 1:
+                fixed_c_t_s = "0" + str(
+                    self.current_zone.use_conditions.cooling_time[0]) + ":00"
+            else:
+                fixed_c_t_s = str(
+                    self.current_zone.use_conditions.cooling_time[0]) + ":00"
+            if len(str(self.current_zone.use_conditions.cooling_time[1])) == 1:
+                fixed_c_t_e = "0" + str(
+                    self.current_zone.use_conditions.cooling_time[1]) + ":00"
+            else:
+                fixed_c_t_e = str(
+                    self.current_zone.use_conditions.cooling_time[1]) + ":00"
+            if len(str(self.current_zone.use_conditions.heating_time[0])) == 1:
+                fixed_h_t_s = "0" + str(
+                    self.current_zone.use_conditions.heating_time[0]) + ":00"
+            else:
+                fixed_h_t_s = str(
+                    self.current_zone.use_conditions.heating_time[0]) + ":00"
+            if len(str(self.current_zone.use_conditions.heating_time[1])) == 1:
+                fixed_h_t_e = "0" + str(
+                    self.current_zone.use_conditions.heating_time[1]) + ":00"
+            else:
+                fixed_h_t_e = str(
+                    self.current_zone.use_conditions.heating_time[1]) + ":00"
+            if (time == fixed_c_t_s):
+                self.cooling_ahu_start_dropdown.setCurrentIndex(
+                    self.guiinfo.hoursInADay.index(time))
+            if (time == fixed_c_t_e):
+                self.cooling_ahu_end_dropdown.setCurrentIndex(
+                    self.guiinfo.hoursInADay.index(time))
+            if (time == fixed_h_t_s):
+                self.heating_ahu_start_dropdown.setCurrentIndex(
+                    self.guiinfo.hoursInADay.index(time))
+            if (time == fixed_h_t_e):
+                self.heating_ahu_end_dropdown.setCurrentIndex(
+                    self.guiinfo.hoursInADay.index(time))
+        self.set_temp_heat_line_edit.setText(str(
+            self.current_zone.use_conditions.set_temp_heat))
+        self.set_temp_cool_line_edit.setText(str(
+            self.current_zone.use_conditions.set_temp_cool))
+        self.temp_set_back_line_edit.setText(str(
+            self.current_zone.use_conditions.temp_set_back))
+        self.min_air_flow_line_edit.setText(str(
+            self.current_zone.use_conditions.min_air_exchange))
+        self.min_ahu_line_edit.setText(str(
+            self.current_zone.use_conditions.min_ahu))
+        self.max_ahu_line_edit.setText(str(
+            self.current_zone.use_conditions.max_ahu))
+        if (self.current_zone.use_conditions.with_ahu == "True"):
+            self.with_ahu_combobox.setCurrentIndex(
+                self.with_ahu_combobox.findText("True"))
+        else:
+            self.with_ahu_combobox.setCurrentIndex(
+                self.with_ahu_combobox.findText("False"))
+        self.re_humidity_line_edit.setText(str(
+            self.current_zone.use_conditions.rel_humidity))
+        self.persons_line_edit.setText(str(
+            self.current_zone.use_conditions.persons))
+        self.machines_line_edit.setText(str(
+            self.current_zone.use_conditions.machines))
+        self.lighting_line_edit.setText(str(
+            self.current_zone.use_conditions.maintained_illuminace))
+        self.mean_temp_outer_line_edit.setText(str(
+            self.current_zone.t_outside))
+        self.mean_temp_inner_line_edit.setText(str(
+            self.current_zone.t_inside))
+        self.infiltration_rate_line_edit.setText(str(
+            self.current_zone.infiltration_rate))
+        self.canvas_profiles.repaint()
+        data_persons = [1.0 for x in range(24)]
+        data_machines = [1.0 for x in range(24)]
+        # TODO: data_lighting = [1.0 for x in range(24)]
+        for hour in range(0,24):
+            try:
+                data_persons[hour] = self.current_zone.use_conditions.profile_persons[hour]
+                data_machines[hour] = self.current_zone.use_conditions.profile_machines[hour]
+            except IndexError:
+                break;
+            # TODO: data_lighting[hour] = self.current_zone.use_conditions.profile_lighting[hour]
+        ax_p = self.figure_profiles.add_subplot(111)
+        ax_p.hold(False)
+        ax_p.plot(range(24), data_persons, 'b-', range(24), data_machines, 'r-')
+        # TODO: ax_p.plot(range(24), data_persons, 'b-', range(24), data_machines, 'r-', data_lighting, 'g-')
+        ax_p.set_ylim([0,1])
+        self.canvas_profiles.draw()
+
+    def update_element_details(self):
+        ''' Updates the element details after layers have been changed 
         
         '''
         
-        self.generate_zone_ui_page = QtGui.QWizardPage()
-        self.generate_zone_ui_page.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        self.generate_zone_ui_page.setWindowTitle("Create new Zone")
-        self.generate_zone_ui_page.setFixedWidth(350)
-        self.generate_zone_ui_page.setFixedHeight(200)
-        self.generate_zone_window_layout = QtGui.QGridLayout()
-        self.generate_zone_ui_page.setLayout(self.generate_zone_window_layout)
-
-        self.generate_zone_name_label = QtGui.QLabel("Name: ")
-        self.generate_zone_name_line_edit = QtGui.QLineEdit()
-        self.generate_zone_name_line_edit.setObjectName(
-            "generate_zone_name_line_edit")
-
-        self.generate_zone_area_label = QtGui.QLabel("Area: ")
-        self.generate_zone_area_line_edit = QtGui.QLineEdit()
-        self.generate_zone_area_line_edit.setObjectName(
-            "generate_zone_area_line_edit")
-
-        self.generate_zone_usage_label = QtGui.QLabel("Type: ")
-        self.generate_zone_usage_combobox = QtGui.QComboBox()
-        self.generate_zone_usage_combobox.setObjectName(
-            "generate_zone_usage_combobox")
-        for zone_type in self.guiinfo.thermal_zone_types:
-            self.generate_zone_usage_combobox.addItem(zone_type)
-
-        self.generate_zone_save_button = QtGui.QPushButton()
-        self.generate_zone_save_button.setText("Save")
-        self.connect(self.generate_zone_save_button, SIGNAL(
-            "clicked()"), self.check_inputs_new_zone)
-        self.connect(self.generate_zone_save_button, SIGNAL(
-            "clicked()"), self.generate_zone_ui_page, QtCore.SLOT("close()"))
-
-        self.generate_zone_cancel_button = QtGui.QPushButton()
-        self.generate_zone_cancel_button.setText("Cancel")
-        self.connect(self.generate_zone_cancel_button, SIGNAL("clicked()"),
-                     self.generate_zone_ui_page, QtCore.SLOT("close()"))
-
-        self.generate_zone_window_layout.addWidget(
-            self.generate_zone_name_label, 1, 0)
-        self.generate_zone_window_layout.addWidget(
-            self.generate_zone_name_line_edit, 1, 1)
-        self.generate_zone_window_layout.addWidget(
-            self.generate_zone_area_label, 2, 0)
-        self.generate_zone_window_layout.addWidget(
-            self.generate_zone_area_line_edit, 2, 1)
-        self.generate_zone_window_layout.addWidget(
-            self.generate_zone_usage_label, 3, 0)
-        self.generate_zone_window_layout.addWidget(
-            self.generate_zone_usage_combobox, 3, 1)
-        self.generate_zone_window_layout.addWidget(
-            self.generate_zone_save_button, 4, 0)
-        self.generate_zone_window_layout.addWidget(
-            self.generate_zone_cancel_button, 4, 1)
-        self.generate_zone_ui_page.setWindowModality(Qt.ApplicationModal)
-        self.generate_zone_ui_page.show()
-
+        self.element_layer_model.clear()
+        for layer in self.current_element.layer:
+            item = TrackableItem(
+                "Material:\t".expandtabs(8) + str(layer.material.name) + 
+                "\nThickness:\t".expandtabs(14) + str(layer.thickness) + 
+                "\t", layer.internal_id)
+            self.element_layer_model.appendRow(item)
+            
+    def update_set_all_construction(self):
+        ''' Updates the set all construction after layers have been changed 
+        
+        '''
+        
+        self.element_layer_model_set_all_constr.clear()
+        for layer in self.all_constr_layer_list:
+            item = TrackableItem(
+                "Material:\t".expandtabs(8) + str(layer.material.name) +
+                "\nThickness:\t".expandtabs(14) + str(layer.thickness) +
+                "\t", layer.internal_id)
+            self.element_layer_model_set_all_constr.appendRow(item)
+            
     def show_element_build_ui(self, item):
         ''' Opens a window to display all attributes
         of the currently selected element.
@@ -5187,13 +3597,15 @@ class MainUI(QDialog):
         self.element_add_material_button = QtGui.QPushButton()
         self.element_add_material_button.setText("Add Layer")
         self.connect(self.element_add_material_button, SIGNAL("clicked()"),
-                     self.create_new_layer_ui)
+                     lambda check_window="Element Details Window":
+                     self.create_new_layer_ui(check_window))
 
         self.element_delete_material_button = QtGui.QPushButton()
         self.element_delete_material_button.setText("Delete Layer")
         self.connect(self.element_delete_material_button, SIGNAL("clicked()"),
                      self.delete_selected_layer)
 
+        self.set_all_constr_element_material_list_view = QtGui.QListView()
         self.element_material_list_view = QtGui.QListView()
         self.element_material_list_view.setGeometry(
             QtCore.QRect(10, 200, 170, 300))
@@ -5561,6 +3973,1114 @@ class MainUI(QDialog):
         self.simulation_window_ui.setWindowModality(Qt.ApplicationModal)
         self.simulation_window_ui.show()
 
+    def show_layer_build_ui(self, item):
+        ''' Opens a window to see all attributes from the
+        currently selected layer.        
+        '''
+
+        self.layer_build_ui = QtGui.QWizardPage()
+        self.layer_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.layer_build_ui.setWindowTitle("Layer Details")
+        self.layer_build_ui.setFixedWidth(450)
+        self.layer_build_ui.setFixedHeight(300)
+        self.layer_build_ui_window_layout = QtGui.QGridLayout()
+        self.layer_build_ui.setLayout(self.layer_build_ui_window_layout)
+        self.layer_model = QtGui.QStandardItemModel()
+        self.materials = Controller.get_materials_from_file(self.project)
+        self.is_switchable = False
+
+        sender = self.sender()
+        if(sender == self.element_material_list_view):
+            current_item = self.element_layer_model.itemFromIndex(item)
+            current_layer = self.current_element.layer
+        else:
+            current_item = \
+                self.element_layer_model_set_all_constr.itemFromIndex(item)
+            current_layer = self.all_constr_layer_list
+
+        for layer in current_layer:
+            if (layer.internal_id == current_item.internal_id):
+                self.current_layer = layer
+                break
+        self.layer_general_layout = QtGui.QGridLayout()
+        self.layer_general_layout_group_box = QtGui.QGroupBox("Layer Values")
+        self.layer_general_layout_group_box.setLayout(
+            self.layer_general_layout)
+
+        self.thickness_label = QtGui.QLabel("Layer Thickness")
+        self.thickness_textbox = QtGui.QLineEdit()
+        self.thickness_textbox.setObjectName(_fromUtf8("ThicknessTextBox"))
+        self.thickness_textbox.setText(str(self.current_layer.thickness))
+
+        self.material_label = QtGui.QLabel("Material")
+        self.material_combobox = QtGui.QComboBox()
+        self.connect(self.material_combobox, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.switch_material)
+        temp_list = []
+        for material in self.materials:
+            if material.name not in temp_list:
+                temp_list.append(material.name)
+        if self.current_layer.material.name not in temp_list and\
+                self.current_layer.material.name is not None:
+            temp_list.append(self.current_layer.material.name)
+        self.material_combobox.addItems(sorted(temp_list))
+        self.material_combobox.setCurrentIndex(
+            self.material_combobox.findText(self.current_layer.material.name))
+        self.is_switchable = True
+
+        self.material_density_label = QtGui.QLabel("Density")
+        self.material_density_textbox = QtGui.QLineEdit()
+        self.material_density_textbox.setObjectName(
+            _fromUtf8("MaterialDensityTextBox"))
+        self.material_density_textbox.setText(
+            str(self.current_layer.material.density))
+
+        self.material_thermal_conduc_label = QtGui.QLabel("ThermalConduc")
+        self.material_thermal_conduc_textbox = QtGui.QLineEdit()
+        self.material_thermal_conduc_textbox.setObjectName(
+            _fromUtf8("MaterialThermalConducTextBox"))
+        self.material_thermal_conduc_textbox.setText(
+            str(self.current_layer.material.thermal_conduc))
+
+        self.material_heat_capac_label = QtGui.QLabel("HeatCapac")
+        self.material_heat_capac_textbox = QtGui.QLineEdit()
+        self.material_heat_capac_textbox.setObjectName(
+            _fromUtf8("MaterialHeatCapacTextBox"))
+        self.material_heat_capac_textbox.setText(
+            str(self.current_layer.material.heat_capac))
+
+        self.material_solar_absorp_label = QtGui.QLabel("SolarAbsorp")
+        self.material_solar_absorp_textbox = QtGui.QLineEdit()
+        self.material_solar_absorp_textbox.setObjectName(
+            _fromUtf8("MaterialSolarAbsorpTextBox"))
+        self.material_solar_absorp_textbox.setText(
+            str(self.current_layer.material.solar_absorp))
+
+        self.material_ir_emissivity_label = QtGui.QLabel("IrEmissivity")
+        self.material_ir_emissivity_textbox = QtGui.QLineEdit()
+        self.material_ir_emissivity_textbox.setObjectName(
+            _fromUtf8("MaterialIrEmissivityTextBox"))
+        self.material_ir_emissivity_textbox.setText(
+            str(self.current_layer.material.ir_emissivity))
+
+        self.material_transmittance_label = QtGui.QLabel("Transmittance")
+        self.material_transmittance_textbox = QtGui.QLineEdit()
+        self.material_transmittance_textbox.setObjectName(
+            _fromUtf8("MaterialTransmittanceTextBox"))
+        self.material_transmittance_textbox.setText(
+            str(self.current_layer.material.transmittance))
+
+        self.layer_save_button = QtGui.QPushButton()
+        self.layer_save_button.setText("Save")
+
+        if(sender == self.element_material_list_view):
+            self.connect(self.layer_save_button, SIGNAL(
+             "clicked()"), self.save_changed_layer_values)
+            self.connect(self.layer_save_button, SIGNAL(
+             "clicked()"), self.update_element_details)
+        else:
+            self.connect(self.layer_save_button, SIGNAL(
+             "clicked()"), self.save_changed_layer_values_set_all_constr)
+            self.connect(self.layer_save_button, SIGNAL(
+             "clicked()"), self.update_set_all_construction)
+
+        self.connect(self.layer_save_button, SIGNAL(
+            "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
+
+        self.layer_cancel_button = QtGui.QPushButton()
+        self.layer_cancel_button.setText("Cancel")
+        self.connect(self.layer_cancel_button, SIGNAL(
+            "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
+
+        self.layer_general_layout.addWidget(self.thickness_label, 1, 0)
+        self.layer_general_layout.addWidget(self.thickness_textbox, 1, 1)
+        self.layer_general_layout.addWidget(self.material_label, 2, 0)
+        self.layer_general_layout.addWidget(self.material_combobox, 2, 1)
+        self.layer_general_layout.addWidget(self.material_density_label, 3, 0)
+        self.layer_general_layout.addWidget(
+            self.material_density_textbox, 3, 1)
+        self.layer_general_layout.addWidget(
+            self.material_thermal_conduc_label, 4, 0)
+        self.layer_general_layout.addWidget(
+            self.material_thermal_conduc_textbox, 4, 1)
+        self.layer_general_layout.addWidget(
+            self.material_heat_capac_label, 5, 0)
+        self.layer_general_layout.addWidget(
+            self.material_heat_capac_textbox, 5, 1)
+        self.layer_general_layout.addWidget(
+            self.material_solar_absorp_label, 6, 0)
+        self.layer_general_layout.addWidget(
+            self.material_solar_absorp_textbox, 6, 1)
+        self.layer_general_layout.addWidget(
+            self.material_ir_emissivity_label, 7, 0)
+        self.layer_general_layout.addWidget(
+            self.material_ir_emissivity_textbox, 7, 1)
+        self.layer_general_layout.addWidget(
+            self.material_transmittance_label, 8, 0)
+        self.layer_general_layout.addWidget(
+            self.material_transmittance_textbox, 8, 1)
+        self.layer_general_layout.addWidget(self.layer_save_button, 9, 0)
+        self.layer_general_layout.addWidget(self.layer_cancel_button, 9, 1)
+
+        self.layer_build_ui_window_layout.addWidget(
+            self.layer_general_layout_group_box)
+        self.layer_build_ui.setWindowModality(Qt.ApplicationModal)
+        self.layer_build_ui.show()
+
+    def display_current_building(self):
+        ''' Changes all the values to the new building
+        '''
+
+        if (self.current_building):
+
+            """ Displaying values on the sidebar controls"""
+
+            self.side_bar_id_line_edit.setText(
+                str(self.current_building.name))
+            self.side_bar_construction_year_line_edit.setText(
+                str(self.current_building.year_of_construction))
+            self.side_bar_height_of_floors_line_edit.setText(
+                str(self.current_building.height_of_floors))
+            self.side_bar_location_line_edit.setText(
+                str(self.current_building.city))
+            self.side_bar_net_leased_area_line_edit.setText(
+                str(self.current_building.net_leased_area))
+            self.side_bar_number_of_floors_line_edit.setText(
+                str(self.current_building.number_of_floors))
+            self.side_bar_street_line_edit.setText(
+                str(self.current_building.street_name))
+
+            """ Updates the combobox displaying all buildings """
+
+            try:
+                if (self.side_bar_buildings_combo_box.findData(
+                        str(self.current_building.internal_id)) == -1):
+                    self.side_bar_buildings_combo_box.addItem(
+                        self.current_building.name,
+                        str(self.current_building.internal_id))
+                    self.side_bar_buildings_combo_box.setCurrentIndex(
+                        self.side_bar_buildings_combo_box.findData(
+                            str(self.current_building.internal_id)))
+                elif (self.side_bar_buildings_combo_box.currentText !=
+                      self.side_bar_id_line_edit.text):
+                    self.side_bar_buildings_combo_box.setItemText(
+                        self.side_bar_buildings_combo_box.currentIndex(),
+                        self.current_building.name)
+            except AttributeError:
+                pass
+
+            """ Displaying zones in the two list views in the main frame """
+
+            self.zone_model.clear()
+            self.outer_elements_model.clear()
+            self.element_model.clear()
+            for zone in self.project.\
+                buildings[self.project.buildings.index(
+                    self.current_building)].thermal_zones:
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + str(zone.name) +
+                    "\n" + "Type:\t".expandtabs(11) +
+                    str(type(zone).__name__) + "\n Area:\t".expandtabs(11) +
+                    str(zone.area), zone.internal_id)
+                self.zone_model.appendRow(item)
+                if zone.inner_walls:
+                    for inner_wall in zone.inner_walls:
+                        if type(inner_wall).__name__ == \
+                                "InnerWall":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) + str(inner_wall.name)+
+                                "\nType:\t".expandtabs(11) +
+                                "Inner Wall \n Area:\t".expandtabs(11) +
+                                str(inner_wall.area),inner_wall.internal_id)
+                            self.element_model.appendRow(item)
+                        if type(inner_wall).__name__ == \
+                                "Floor":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) + str(inner_wall.name)+
+                                "\nType:\t".expandtabs(11) +
+                                "Floor \n Area:\t".expandtabs(11) +
+                                str(inner_wall.area), inner_wall.internal_id)
+                            self.element_model.appendRow(item)
+                        if type(inner_wall).__name__ == \
+                                "Ceiling":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) + str(inner_wall.name)+
+                                "\nType:\t".expandtabs(11) +
+                                "Ceiling \n Area:\t".expandtabs(11) +
+                                str(inner_wall.area), inner_wall.internal_id)
+                            self.element_model.appendRow(item)
+                if zone.outer_walls:
+                    for outer_wall in zone.outer_walls:
+                        if type(outer_wall).__name__ == \
+                                "GroundFloor":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) +
+                                str(outer_wall.name) +
+                                "\nType:\t".expandtabs(11) +
+                                "Ground Floor \n Area:\t".expandtabs(11) +
+                                str(outer_wall.area) +
+                                "\n Orientation:\t".expandtabs(11) +
+                                str(outer_wall.orientation),
+                                outer_wall.internal_id)
+                            self.element_model.appendRow(item)
+                        if type(outer_wall).__name__ == \
+                                "Rooftop":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) +
+                                str(outer_wall.name) +
+                                "\nType:\t".expandtabs(11) +
+                                "Rooftop \n Area:\t".expandtabs(11) +
+                                str(outer_wall.area) +
+                                "\n Orientation:\t".expandtabs(11) +
+                                str(outer_wall.orientation),
+                                outer_wall.internal_id)
+                            self.element_model.appendRow(item)
+                        if type(outer_wall).__name__ == \
+                                "OuterWall":
+                            item = TrackableItem(
+                                "Name:\t".expandtabs(8) +
+                                str(outer_wall.name) +
+                                "\nType:\t".expandtabs(11) +
+                                "Outer Wall \n Area:\t".expandtabs(11) +
+                                str(outer_wall.area) +
+                                "\n Orientation:\t".expandtabs(11) +
+                                str(outer_wall.orientation),
+                                outer_wall.internal_id)
+                            self.element_model.appendRow(item)
+                if zone.windows:
+                    for window in zone.windows:
+                        item = TrackableItem(
+                            "Name:\t".expandtabs(8) + str(window.name) +
+                            "\nType:\t".expandtabs(11) +
+                            "Windows \n Area:\t".expandtabs(11) +
+                            str(window.area) +
+                            "\n Orientation:\t".expandtabs(11) +
+                            str(window.orientation),
+                            window.internal_id)
+                        self.element_model.appendRow(item)
+
+            for orientation in self.guiinfo.orientations_numbers.keys():
+                if self.current_building.get_outer_wall_area(orientation) != 0:
+                    if orientation == -1:
+                        item1 = QStandardItem(
+                         "Rooftop \nOrientation:\t" +
+                         str(self.guiinfo.orientations_numbers[orientation]) +
+                         "\t".expandtabs(12) + "\n" + " Area: " +
+                         str(self.current_building.
+                             get_outer_wall_area(orientation)))
+
+                    elif orientation == -2:
+                        item1 = QStandardItem(
+                         "Ground Floor \nOrientation:\t" +
+                         str(self.guiinfo.orientations_numbers[orientation]) +
+                         "\t".expandtabs(12) + "\n" + " Area: " +
+                         str(self.current_building.
+                             get_outer_wall_area(orientation)))
+                    else:
+                        item1 = QStandardItem(
+                         "Outer Wall \nOrientation:\t" +
+                         str(self.guiinfo.orientations_numbers[orientation]) +
+                         "\t".expandtabs(12) + "\n" + " Area: " +
+                         str(self.current_building.
+                             get_outer_wall_area(orientation)))
+
+                    self.outer_elements_model.appendRow(item1)
+
+                if self.current_building.get_window_area(orientation) != 0:
+                    item2 = QStandardItem(
+                        "Window \nOrientation:\t" +
+                        str(self.guiinfo.orientations_numbers[orientation]) +
+                        "\t".expandtabs(16) + "\n" + " Area: " +
+                        str(self.current_building.
+                            get_window_area(orientation)))
+                    self.outer_elements_model.appendRow(item2)
+
+    def display_current_zone(self):
+        ''' Updates the lists in the main window
+        '''
+
+        if (self.current_zone):
+            self.element_model.clear()
+            self.edit_zone_area_line_edit.setText(str(self.current_zone.area))
+            self.edit_zone_name_line_edit.setText(str(self.current_zone.name))
+            self.edit_zone_volume_line_edit.setText(
+                str(self.current_zone.volume))
+            for inner_wall in self.current_zone.inner_walls:
+                if type(inner_wall).__name__ == "InnerWall":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Inner Wall \n Area:\t".expandtabs(11) + 
+                        str(inner_wall.area), inner_wall.internal_id)
+                    self.element_model.appendRow(item)
+                if type(inner_wall).__name__ == "Floor":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Floor \n Area:\t".expandtabs(11) + 
+                        str(inner_wall.area), inner_wall.internal_id)
+                    self.element_model.appendRow(item)
+                if type(inner_wall).__name__ == "Ceiling":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + str(inner_wall.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Ceiling \n Area:\t".expandtabs(11) + 
+                        str(inner_wall.area), inner_wall.internal_id)
+                    self.element_model.appendRow(item)
+            for element in self.current_zone.outer_walls:
+                if type(element).__name__ == "GroundFloor":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + 
+                        str(element.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Ground Floor \n Area:\t".expandtabs(11) + 
+                        str(element.area) + 
+                        "\n Orientation:\t".expandtabs(11) + 
+                        str(element.orientation),
+                        element.internal_id)
+                    self.element_model.appendRow(item)
+                if type(element).__name__ == "Rooftop":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + 
+                        str(element.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Rooftop \n Area:\t".expandtabs(11) + 
+                        str(element.area) + 
+                        "\n Orientation:\t".expandtabs(11) + 
+                        str(element.orientation),
+                        element.internal_id)
+                    self.element_model.appendRow(item)
+                if type(element).__name__ == "OuterWall":
+                    item = TrackableItem(
+                        "Name:\t".expandtabs(8) + 
+                        str(element.name) + 
+                        "\nType:\t".expandtabs(11) + 
+                        "Outer Wall \n Area:\t".expandtabs(11) + 
+                        str(element.area) + 
+                        "\n Orientation:\t".expandtabs(11) + 
+                        str(element.orientation),
+                        element.internal_id)
+                    self.element_model.appendRow(item)
+            for element in self.current_zone.windows:
+                item = TrackableItem(
+                    "Name:\t".expandtabs(8) + str(element.name) + 
+                    "\nType:\t".expandtabs(11) + 
+                    "Window \n Area:\t".expandtabs(11) + 
+                    str(element.area) + "\n Orientation:\t".expandtabs(11) + 
+                    str(element.orientation), element.internal_id)
+                self.element_model.appendRow(item)
+
+    def display_current_element(self):
+        ''' Transfers all relevant values of the current
+        element to gui controls like text fields and the list of layers.
+
+        '''
+
+        if (self.current_element):
+
+            """ Displaying values on the sidebar controls"""
+
+            self.edit_element_name_line_edit.setText(
+                str(self.current_element.name))
+            self.edit_element_area_line_edit.setText(
+                str(self.current_element.area))
+            self.edit_element_type_line_edit.setText(
+                str(self.current_element.construction_type))
+
+            """ Displaying layer in the list of layers in the main frame """
+
+            self.layer_model.clear()
+            for layer in self.current_element.layer:
+                item = TrackableItem("Name:\t".expandtabs(8) + 
+                                     str(layer.id) + "\n" + 
+                                     "Material:\t".expandtabs(11) + 
+                                     str(layer.material.name) + 
+                                     "\n Thickness:\t".expandtabs(11) + 
+                                     str(layer.thickness), layer.internal_id)
+                self.layer_model.appendRow(item)
+
+    def display_current_layer(self):
+        ''' Transfers all relevant values of the current
+        layer to gui text fields.
+
+        '''
+
+        if (self.current_layer):
+
+            self.edit_layer_name_line_edit.setText(
+                str(self.current_layer.id))
+            self.edit_layer_thickness_line_edit.setText(
+                str(self.current_layer.thickness))
+            self.edit_layer_material_name_line_edit.setText(
+                str(self.current_layer.material.name))
+            self.edit_layer_density_line_edit.setText(
+                str(self.current_layer.material.density))
+            self.edit_layer_thermal_conduct_line_edit.setText(
+                str(self.current_layer.material.thermal_conduc))
+            self.edit_layer_heat_capacity_line_edit.setText(
+                str(self.current_layer.material.heat_capac))
+            self.edit_layer_solar_absorp_line_edit.setText(
+                str(self.current_layer.material.solar_absorp))
+            self.edit_layer_ir_emissivity_line_edit.setText(
+                str(self.current_layer.material.ir_emissivity))
+            self.edit_layer_transmittance_line_edit.setText(
+                str(self.current_layer.material.transmittance))
+
+
+    def click_save_current_project(self):
+        '''Opens a dialog window for the user to input a path
+        then issues the controller to create and save the file.
+        
+        '''
+        
+        path = QtGui.QFileDialog.getSaveFileName(
+            caption='Choose Filepath',
+            directory=utilis.get_default_path()+"\\"+self.project.name,
+            filter="Teaser File (*.teaserXML);; GML (*.gml)")
+        last_name = path.split('/')
+        length = len(last_name)
+        last_part = str(last_name[length-1])
+        if last_part.endswith("teaserXML"):
+            self.project.name = last_part[:-10]
+        elif last_part.endswith("gml"):
+            self.project.name = last_part[:-4]
+        Controller.click_save_button(self.project, str(path))
+
+    def click_export_button(self):
+        # path in GUI, which is need for the output
+        path_output_folder = str(self.export_save_template_lineedit.text())
+        template_folder = self.create_path_to_template_folder()
+        os.chdir(template_folder)
+
+        list_of_building_name = []
+        for i in range(self.side_bar_buildings_combo_box.count()):
+            list_of_building_name.append(
+                self.side_bar_buildings_combo_box.itemText(i))
+
+        sender = self.sender()
+        building_model = \
+            self.export_create_template_model_combobox.currentText()
+        zone_model = self.export_create_template_zone_combobox.currentText()
+        if self.radio_button_corG_1.isChecked():
+            corG = True
+        elif self.radio_button_corG_2.isChecked():
+            corG = False
+        elemInCombobox = \
+            self.export_create_template_model_combobox.currentText()
+
+        if(sender.text() == self.export_button.text()):
+            Controller.click_export_button(self.project, building_model,
+                                           zone_model, corG, None,
+                                           path_output_folder)
+            QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
+                                          "record " + elemInCombobox +
+                                          " all building finished ")
+        elif(sender.text() == self.export_button_one.text()):
+            Controller.click_export_button(self.project, building_model,
+                                           zone_model, corG,
+                                           self.current_building.internal_id,
+                                           path_output_folder)
+            QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
+                                          "record " + elemInCombobox +
+                                          " for current building finished ")
+        utilis.create_path(str(self.file_path))
+
+    def click_browse_button(self):
+        self.export_save_template_lineedit.setText(QtGui.QFileDialog.
+                                                   getExistingDirectory())
+        if self.export_save_template_lineedit.text() != "":
+            utilis.create_path(self.export_save_template_lineedit.text())
+            self.file_path = self.export_save_template_lineedit.text()
+        else:
+            self.export_save_template_lineedit.setText(self.file_path)
+
+    def switch_building(self):
+        ''' Handles the buildings combobo
+        '''
+
+        cIndex = self.side_bar_buildings_combo_box.currentIndex()
+        for building in self.project.buildings:
+            fIndex = self.side_bar_buildings_combo_box.findData(
+                str(building.internal_id))
+            if fIndex == cIndex:
+                self.current_building = building
+                self.display_current_building()
+
+    def switch_type_building(self):
+        '''After changing the index of the combobox this function replaces
+        the controls to fit the current type building.
+
+        '''
+
+        cIndex = self.window_construct_building_combo_box.currentText()
+        self.current_type_building = str(cIndex)
+        self.construct_type_building_button.setText(
+            u"Generate " + self.current_type_building + " Building ...")
+        if self.current_type_building == "Residential":
+            self.group_box_type_building_right_office.setVisible(False)
+            self.group_box_type_building_right_residential.setVisible(True)
+            self.group_box_office_architecture.setVisible(False)
+            self.group_box_residential_architecture.setVisible(True)
+            self.construct_type_building_button.clicked.disconnect()
+            self.connect(self.construct_type_building_button, SIGNAL(
+            "clicked()"), self.check_inputs_typebuilding)
+            self.connect(self.construct_type_building_button, SIGNAL(
+                "clicked()"), self.popup_window_type_building,
+                    QtCore.SLOT("close()"))
+        elif self.current_type_building == "Office" or self.current_type_building ==\
+            "Institute 4" or self.current_type_building == "Institute 8" or\
+                self.current_type_building == "Institute General":
+            self.group_box_type_building_right_office.setVisible(True)
+            self.group_box_type_building_right_residential.setVisible(False)
+            self.group_box_office_architecture.setVisible(True)
+            self.group_box_residential_architecture.setVisible(False)
+            self.construct_type_building_button.clicked.disconnect()
+            self.connect(self.construct_type_building_button, SIGNAL(
+                "clicked()"), self.check_inputs_typebuilding)
+            self.connect(self.construct_type_building_button, SIGNAL(
+                "clicked()"), self.popup_window_type_building,
+                    QtCore.SLOT("close()"))
+         
+    def switch_current_zone_type(self):
+        '''If the type of the current zone is swapped, this
+        gets the values for the new type and updates the window
+        
+        '''
+                
+        zone_type = self.zone_type_combobox.currentText()
+        self.project = Controller.switch_zone_type(
+            zone_type, self.project, self.current_zone.internal_id)
+        self.update_zone_details()
+
+    def switch_current_zone(self):
+        ''' Switches the current zone if the user clicks on it
+        used for things like delete_thermal_zone.        
+        '''
+
+        current_item = self.zone_model.itemFromIndex(
+            self.edit_zone_list.currentIndex())
+        for zone in self.current_building.thermal_zones:
+            if zone.internal_id == current_item.internal_id:
+                self.current_zone = zone
+        self.display_current_zone()
+
+   
+    def switch_current_element(self):
+        ''' Switches the current element if the user clicks on it
+        used for things like delete_current_element.
+        '''
+
+        current_item = self.element_model.itemFromIndex(
+            self.edit_element_list.currentIndex())
+        for element in self.current_zone.outer_walls:
+            if element.internal_id == current_item.internal_id:
+                self.current_element = element
+        for element in self.current_zone.inner_walls:
+            if element.internal_id == current_item.internal_id:
+                self.current_element = element
+        for element in self.current_zone.windows:
+            if element.internal_id == current_item.internal_id:
+                self.current_element = element
+        self.display_current_element()
+
+    def switch_current_layer(self):
+        ''' Switches the current layer if the user clicks on it
+        used for things like delete_current_layer.
+
+        '''
+
+        current_item = self.layer_model.itemFromIndex(
+            self.edit_current_layer_list.currentIndex())
+        for layer in self.current_element.layer:
+            if layer.internal_id == current_item.internal_id:
+                self.current_layer = layer
+        self.display_current_layer()
+
+    def switch_material(self):
+        '''If the current material is swapped, this gets the 
+        values for the new type and updates the window
+        
+        '''
+        
+        if self.is_switchable:
+            cIndex = self.material_combobox.currentText()
+            for material in self.materials:
+                fIndex = material.name
+                if fIndex == cIndex:
+                    self.current_layer.material.name = material.name
+                    self.current_layer.material.density = material.density
+                    self.current_layer.material.thermal_conduc = \
+                        material.thermal_conduc
+                    self.current_layer.material.heat_capac = \
+                        material.heat_capac
+                    self.material_density_textbox.setText(
+                        str(self.current_layer.material.density))
+                    self.material_thermal_conduc_textbox.setText(
+                        str(self.current_layer.material.thermal_conduc))
+                    self.material_heat_capac_textbox.setText(
+                        str(self.current_layer.material.heat_capac))
+
+    def switch_constr_type(self):
+        try:
+            self.construction_type_switched = True
+            self.element_material_list_view.doubleClicked.disconnect()
+        except:
+            pass
+
+    def add_thermal_zone(self):
+        '''Checks if a building exists, if it does opens a window to create
+        a new zone.
+        '''
+
+        if(self.current_building == 0):
+            QtGui.QMessageBox.warning(self,
+                                      u"No building error!",
+                                      u"You need to specify a building first.")
+        else:
+            self.generate_zone_ui()
+
+    def delete_thermal_zone(self):
+        '''Checks if a building exists, if it does the currently
+        selected zone is deleted from the current building.
+        '''
+
+        if (self.current_building == 0):
+            QtGui.QMessageBox.warning(self, u"No building error!",
+                                      u"You need to specify a building first.")
+        else:
+            try:
+                item = self.zone_model.itemFromIndex(
+                    self.zones_list_view.currentIndex())
+                for building in self.project.buildings:
+                    for zone in building.thermal_zones:
+                        if (zone.internal_id == item.internal_id):
+                            ind = building.thermal_zones.index(zone)
+                            building.thermal_zones[ind].delete()
+                            self.display_current_building()
+            except (ValueError, AttributeError):
+                QtGui.QMessageBox.warning(self,
+                                          u"No zone selected",
+                                          u"You need to select a"
+                                          "thermal zone first.")
+
+    def delete_current_element(self):
+        '''Checks if an element is currently selected and
+        deletes the selected element.
+        
+        '''
+        
+        try:
+            item = self.element_model.itemFromIndex(
+                self.zone_element_list_view.currentIndex())
+            for building in self.project.buildings:
+                for zone in building.thermal_zones:
+                    for element in zone.outer_walls:
+                        if (element.internal_id == item.internal_id):
+                            ind = zone.outer_walls.index(element)
+                            del zone.outer_walls[ind]
+                            self.update_zone_details()
+                    for element in zone.inner_walls:
+                        if (element.internal_id == item.internal_id):
+                            ind = zone.inner_walls.index(element)
+                            del zone.inner_walls[ind]
+                            self.update_zone_details()
+                    for element in zone.windows:
+                        if (element.internal_id == item.internal_id):
+                            ind = zone.windows.index(element)
+                            del zone.windows[ind]
+                            self.update_zone_details()
+        except (ValueError, AttributeError):
+            QtGui.QMessageBox.warning(self,
+                                      u"No element selected",
+                                      u"You need to select an element first.")
+
+    def delete_selected_layer(self):
+        '''Checks if a layer is currently selected and
+        deletes the selected layer.
+        
+        '''
+        
+        try:
+            item = self.element_layer_model.itemFromIndex(
+                self.element_material_list_view.currentIndex())
+            for building in self.project.buildings:
+                for zone in building.thermal_zones:
+                    for element in zone.outer_walls:
+                        for current_layer in element.layer:
+                            if (current_layer.internal_id == item.internal_id):
+                                ind = element.layer.index(current_layer)
+                                del element.layer[ind]
+                                self.update_element_details()
+                    for element in zone.inner_walls:
+                        for current_layer in element.layer:
+                            if (current_layer.internal_id == item.internal_id):
+                                ind = element.layer.index(current_layer)
+                                del element.layer[ind]
+                                self.update_element_details()
+                    for element in zone.windows:
+                        for current_layer in element.layer:
+                            if (current_layer.internal_id == item.internal_id):
+                                ind = element.layer.index(current_layer)
+                                del element.layer[ind]
+                                self.update_element_details()
+        except (ValueError, AttributeError):
+            QtGui.QMessageBox.warning(self,
+                                      u"No layer selected",
+                                      u"You need to select a layer first.")
+
+    def delete_selected_layer_set_all_constr(self):
+        try:
+            item = self.element_layer_model_set_all_constr.itemFromIndex(
+                self.set_all_constr_element_material_list_view.currentIndex())
+            for current_layer in self.all_constr_layer_list:
+                if (current_layer.internal_id == item.internal_id):
+                    ind = self.all_constr_layer_list.index(current_layer)
+                    del self.all_constr_layer_list[ind]
+                    self.update_set_all_construction()
+
+        except (ValueError, AttributeError):
+            QtGui.QMessageBox.warning(self,
+                                      u"No layer selected",
+                                      u"You need to select a layer first.")
+
+    def edit_building(self):
+        ''' Goes into edit mode and darkens the uneditable parts.
+        '''
+
+        # TODO: Ok das Design hat sich nicht wirklich durchgesetzt und
+        # es funktioniert grad nicht besonders, Vorschlag: stattdessen
+        # einfach ein Pop-Up Fenster wie bei Create-Type-Building, in dem
+        # man building attribute die links am rand stehen ändern kann.
+        if self.current_building:
+            self.side_bar_construction_year_line_edit.setReadOnly(False)
+            self.side_bar_height_of_floors_line_edit.setReadOnly(False)
+            self.side_bar_id_line_edit.setReadOnly(False)
+            self.side_bar_location_line_edit.setReadOnly(False)
+            self.side_bar_net_leased_area_line_edit.setReadOnly(False)
+            self.side_bar_number_of_floors_line_edit.setReadOnly(False)
+            self.side_bar_street_line_edit.setReadOnly(False)
+            self.saved_values_for_edit["year"] = \
+                self.side_bar_construction_year_line_edit.text()
+            self.saved_values_for_edit["height"] = \
+                self.side_bar_height_of_floors_line_edit.text()
+            self.saved_values_for_edit["id"] = \
+                self.side_bar_id_line_edit.text()
+            self.saved_values_for_edit["location"] = \
+                self.side_bar_location_line_edit.text()
+            self.saved_values_for_edit["area"] = \
+                self.side_bar_net_leased_area_line_edit.text()
+            self.saved_values_for_edit["number"] = \
+                self.side_bar_number_of_floors_line_edit.text()
+            self.saved_values_for_edit["street"] = \
+                self.side_bar_street_line_edit.text()
+
+            self.mask_label_0.setVisible(True)
+            self.mask_label_0.raise_()
+            self.mask_label_1.setVisible(True)
+            self.mask_label_1.raise_()
+            self.mask_label_2.setVisible(True)
+            self.mask_label_2.raise_()
+            self.mask_label_3.setVisible(True)
+            self.mask_label_3.raise_()
+            self.mask_label_4.setVisible(True)
+            self.mask_label_4.raise_()
+            self.mask_label_5.setVisible(True)
+            self.mask_label_5.raise_()
+            self.mask_label_6.setVisible(True)
+            self.mask_label_6.raise_()
+            self.mask_label_7.setVisible(True)
+            self.mask_label_7.raise_()
+            self.mask_label_8.setVisible(True)
+            self.mask_label_8.raise_()
+
+            self.mask_label_9.setVisible(True)
+            self.mask_label_9.raise_()
+            self.mask_button_1.setVisible(True)
+            self.mask_button_1.raise_()
+            self.mask_button_2.setVisible(True)
+            self.mask_button_2.raise_()
+            self.current_transformation = "ebui"
+        else:
+            QtGui.QMessageBox.warning(self,
+                                      u"No building error!",
+                                      u"You need to specify a building first.")
+
+    def edit_building_save(self):
+        ''' Changes the program back after saving changes.
+        '''
+
+        # TODO: Siehe TODO in edit_building
+
+        self.mask_label_0.setVisible(False)
+        self.mask_label_1.setVisible(False)
+        self.mask_label_2.setVisible(False)
+        self.mask_label_3.setVisible(False)
+        self.mask_label_4.setVisible(False)
+        self.mask_label_5.setVisible(False)
+        self.mask_label_6.setVisible(False)
+        self.mask_label_7.setVisible(False)
+        self.mask_label_8.setVisible(False)
+        self.mask_label_9.setVisible(False)
+        self.mask_button_1.setVisible(False)
+        self.mask_button_2.setVisible(False)
+        self.side_bar_construction_year_line_edit.setReadOnly(True)
+        self.side_bar_height_of_floors_line_edit.setReadOnly(True)
+        self.side_bar_id_line_edit.setReadOnly(True)
+        self.side_bar_location_line_edit.setReadOnly(True)
+        self.side_bar_net_leased_area_line_edit.setReadOnly(True)
+        self.side_bar_number_of_floors_line_edit.setReadOnly(True)
+        self.side_bar_street_line_edit.setReadOnly(True)
+        self.current_building.year_of_construction = \
+            self.side_bar_construction_year_line_edit.text()
+        self.current_building.height_of_floors = \
+            self.side_bar_height_of_floors_line_edit.text()
+        self.current_building.name = self.side_bar_id_line_edit.text()
+        self.current_building.city = self.side_bar_location_line_edit.text()
+        self.current_building.net_leased_area = \
+            self.side_bar_net_leased_area_line_edit.text()
+        self.current_building.number_of_floors = \
+            self.side_bar_number_of_floors_line_edit.text()
+        self.current_building.street_name = \
+            self.side_bar_street_line_edit.text()
+        self.display_current_building()
+
+    def edit_building_cancel(self):
+        ''' Changes the program back after cancelling changes.
+        '''
+
+        # TODO: Siehe TODO in edit_building
+
+        self.mask_label_0.setVisible(False)
+        self.mask_label_1.setVisible(False)
+        self.mask_label_2.setVisible(False)
+        self.mask_label_3.setVisible(False)
+        self.mask_label_4.setVisible(False)
+        self.mask_label_5.setVisible(False)
+        self.mask_label_6.setVisible(False)
+        self.mask_label_7.setVisible(False)
+        self.mask_label_8.setVisible(False)
+        self.mask_label_9.setVisible(False)
+        self.mask_button_1.setVisible(False)
+        self.mask_button_2.setVisible(False)
+        self.side_bar_construction_year_line_edit.setReadOnly(True)
+        self.side_bar_height_of_floors_line_edit.setReadOnly(True)
+        self.side_bar_id_line_edit.setReadOnly(True)
+        self.side_bar_location_line_edit.setReadOnly(True)
+        self.side_bar_net_leased_area_line_edit.setReadOnly(True)
+        self.side_bar_number_of_floors_line_edit.setReadOnly(True)
+        self.side_bar_street_line_edit.setReadOnly(True)
+        self.side_bar_construction_year_line_edit.setText(
+            self.saved_values_for_edit["year"])
+        self.side_bar_height_of_floors_line_edit.setText(
+            self.saved_values_for_edit["height"])
+        self.side_bar_id_line_edit.setText(
+            self.saved_values_for_edit["id"])
+        self.side_bar_location_line_edit.setText(
+            self.saved_values_for_edit["location"])
+        self.side_bar_net_leased_area_line_edit.setText(
+            self.saved_values_for_edit["area"])
+        self.side_bar_number_of_floors_line_edit.setText(
+            self.saved_values_for_edit["number"])
+        self.side_bar_street_line_edit.setText(
+            self.saved_values_for_edit["street"])
+
+    def load_material(self):
+        '''If the current material is swapped, this gets the 
+        values for the new type and updates the window
+        
+        '''
+
+        try:
+            cIndex = self.new_layerX_material_combobox.currentText()
+            check = 0
+        except:
+            cIndex = self.new_layer_material_combobox.currentText()
+            check = 1
+        for material in self.materials:
+            fIndex = material.name
+            if fIndex == cIndex:
+
+                if check == 0:
+                    self.new_layerX_material_density_textbox.setText(
+                        str(material.density))
+                    self.new_layerX_material_thermal_conduc_textbox.setText(
+                        str(material.thermal_conduc))
+                    self.new_layerX_material_heat_capac_textbox.setText(
+                        str(material.heat_capac))
+                else:
+                    self.new_layer_material_density_textbox.setText(
+                        str(material.density))
+                    self.new_layer_material_thermal_conduc_textbox.setText(
+                        str(material.thermal_conduc))
+                    self.new_layer_material_heat_capac_textbox.setText(
+                        str(material.heat_capac))
+
+    def load_constr_type(self):
+        if self.construction_type_switched is True:
+            self.current_element.load_type_element(
+                    int(self.element_year_of_construction_textbox.text()),
+                    str(self.element_construction_type_combobox.currentText()))
+
+        self.construction_type_switched = False
+
+    def load_building_button(self):
+        ''' Loads the chosen building from a dialog window and
+        puts it on display.        
+        '''
+        # click_save_current_project
+        path = QtGui.QFileDialog.getOpenFileName(
+            self, caption='Choose Filepath', directory='')
+        if path:
+            loaded_project = Controller.click_load_button(str(path))
+            self.merge_projects(loaded_project)
+
+    def merge_projects(self, loaded_project):
+        ''' If a new project is loaded in the buildings are merged
+        into the list of buildings of the older project and all the
+        values of the old project are overwritten        
+        '''
+        for building in self.project.buildings:
+            loaded_project.buildings.insert(0, building)
+        self.project = loaded_project
+        self.project.modelica_info = ModelicaInfo()
+
+        self.current_building = self.project.buildings[-1]
+        self.display_current_building()
+
+    def fill_random_parameters(self):
+        import random
+        self.window_construct_building_name_line_edit.setText("Random")
+        self.window_construct_building_street_line_edit.setText("Random Street")
+        self.window_construct_building_location_line_edit.setText("Random City")
+        value = str(random.randint(1900,2015))
+        self.window_construct_building_year_line_edit.setText(value)
+        value = str(random.randint(1,10))
+        self.window_construct_building_number_of_floors_line_edit.setText(value)
+        value = str(round(random.uniform(2.5,5.5),2))
+        self.window_construct_building_height_of_floors_line_edit.setText(value)
+        value = str(round(random.uniform(100,10000),2))
+        self.window_construct_building_area_line_edit.setText(value)
+
+    def fill_typebuilding_attributes(self):
+        '''Fills in values for type buildings from the combo boxes
+        next to the pictures in the Create Type Building window.
+        '''
+        
+        text = self.window_construct_building_combo_box.currentText()
+
+        if text == "Office" or text == "Institute 4" or text ==\
+                "Institute 8" or text == "Institute General":
+            if self.radio_button_office_layout_1.isChecked():
+                self.type_building_ind_att['layoutArea'] = 0
+            if self.radio_button_office_layout_2.isChecked():
+                self.type_building_ind_att['layoutArea'] = 1
+            if self.radio_button_office_layout_3.isChecked():
+                self.type_building_ind_att['layoutArea'] = 2
+            if self.radio_button_office_layout_4.isChecked():
+                self.type_building_ind_att['layoutArea'] = 3
+            if self.radio_button_window_area_office_1.isChecked():
+                self.type_building_ind_att['layoutWindowArea'] = 0
+            if self.radio_button_window_area_office_2.isChecked():
+                self.type_building_ind_att['layoutWindowArea'] = 1
+            if self.radio_button_window_area_office_3.isChecked():
+                self.type_building_ind_att['layoutWindowArea'] = 2
+            if self.radio_button_window_area_office_4.isChecked():
+                self.type_building_ind_att['layoutWindowArea'] = 3
+            if self.radio_button_architecture_office_1.isChecked():
+                self.type_building_ind_att['constructionType'] = "heavy"
+            if self.radio_button_architecture_office_2.isChecked():
+                self.type_building_ind_att['constructionType'] = "heavy"
+            if self.radio_button_architecture_office_3.isChecked():
+                self.type_building_ind_att['constructionType'] = "light"
+        if text == "Residential":
+            if self.radio_button_residential_layout_1.isChecked():
+                self.type_building_ind_att['layoutArea'] = 0
+            if self.radio_button_residential_layout_2.isChecked():
+                self.type_building_ind_att['layoutArea'] = 1
+            if self.radio_button_neighbour_1.isChecked():
+                self.type_building_ind_att['neighbour_building'] = 0
+            if self.radio_button_neighbour_2.isChecked():
+                self.type_building_ind_att['neighbour_building'] = 1
+            if self.radio_button_neighbour_3.isChecked():
+                self.type_building_ind_att['neighbour_building'] = 2
+            if self.radio_button_residential_roof_1.isChecked():
+                self.type_building_ind_att['layout_attic'] = 0
+            if self.radio_button_residential_roof_2.isChecked():
+                self.type_building_ind_att['layout_attic'] = 1
+            if self.radio_button_residential_roof_3.isChecked():
+                self.type_building_ind_att['layout_attic'] = 2
+            if self.radio_button_residential_roof_4.isChecked():
+                self.type_building_ind_att['layout_attic'] = 3
+            if self.radio_button_residential_basement_1.isChecked():
+                self.type_building_ind_att['layout_cellar'] = 0
+            if self.radio_button_residential_basement_2.isChecked():
+                self.type_building_ind_att['layout_cellar'] = 1
+            if self.radio_button_residential_basement_3.isChecked():
+                self.type_building_ind_att['layout_cellar'] = 2
+            if self.radio_button_residential_basement_4.isChecked():
+                self.type_building_ind_att['layout_cellar'] = 3
+            if self.check_box_button_roof.isChecked():
+                self.type_building_ind_att['dormer'] = 1
+            else:
+                self.type_building_ind_att['dormer'] = 0
+            if self.radio_button_residential_architecture_1.isChecked():
+                self.type_building_ind_att['constructionType'] = "heavy"
+            if self.radio_button_residential_architecture_2.isChecked():
+                self.type_building_ind_att['constructionType'] = "heavy"
+            if self.radio_button_residential_architecture_3.isChecked():
+                self.type_building_ind_att['constructionType'] = "light"
+                
+    def key_press_event(self, event):
+        ''' Implements shortcuts for the most important buttons
+        
+        '''
+        
+        # TODO: Ok also das hier funktioniert generell und tut auch schon
+        # Problem: Der User muss die Shortcuts auch mitbekommen, also
+        # am besten den jeweiligen shortcut-Buchstaben im Label unter dem
+        # Button/ auf dem Button etwas hervorheben (unterstreichen oder fett machen)
+        # Der Modifier ist STRG also müssten für die buttons bspw. STRG+C gedrückt werden.        
+        key = event.key()
+        if key == QtCore.Qt.Key_C and\
+                QtGui.QApplication.keyboardModifiers() == \
+                QtCore.Qt.ControlModifier:
+            self.generate_type_building_ui("Office")
+        if key == QtCore.Qt.Key_E and\
+                QtGui.QApplication.keyboardModifiers() == \
+                QtCore.Qt.ControlModifier:
+            self.create_new_building_ui()
+        if key == QtCore.Qt.Key_P and\
+                QtGui.QApplication.keyboardModifiers() == \
+                QtCore.Qt.ControlModifier:
+            self.create_new_project_ui()
+        if key == QtCore.Qt.Key_Z and\
+                QtGui.QApplication.keyboardModifiers() == \
+                QtCore.Qt.ControlModifier:
+            self.add_thermal_zone()
+        if key == QtCore.Qt.Key_D and\
+                QtGui.QApplication.keyboardModifiers() == \
+                QtCore.Qt.ControlModifier:
+            self.delete_thermal_zone()
+        if key == QtCore.Qt.Key_L and\
+                QtGui.QApplication.keyboardModifiers() == \
+                QtCore.Qt.ControlModifier:
+            self.load_building_button()
+        if key == QtCore.Qt.Key_B and\
+                QtGui.QApplication.keyboardModifiers() == \
+                QtCore.Qt.ControlModifier:
+            self.edit_building()
+
+    def set_text_color(self, qObject, color):
+        '''Switches the color of text between red and black
+        '''
+        # werden soll, beim Löschen auf weitere Abhängigkeiten überprüfen!
+        palette = QtGui.QPalette()
+        if (color == "red"):
+            palette.setColor(QtGui.QPalette.Foreground, QtCore.Qt.red)
+        if (color == "black"):
+            palette.setColor(QtGui.QPalette.Foreground, QtCore.Qt.black)
+        qObject.setPalette(palette)
+        return qObject
 
 class WizardPage(QtGui.QWizardPage):
     def closeEvent(self, evnt, elem_layer= None ,layer_list= None):
