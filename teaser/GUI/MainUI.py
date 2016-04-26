@@ -4577,6 +4577,13 @@ class MainUI(QDialog):
                 self.current_layer = layer
         self.display_current_layer()
 
+    def switch_constr_type(self):
+        try:
+            self.construction_type_switched = True
+            self.element_material_list_view.doubleClicked.disconnect()
+        except:
+            pass
+
     def switch_material(self):
         '''If the current material is swapped, this gets the
         values for the new type and updates the window
@@ -4900,6 +4907,14 @@ class MainUI(QDialog):
         if path:
             loaded_project = Controller.click_load_button(str(path))
             self.merge_projects(loaded_project)
+
+    def load_constr_type(self):
+        if self.construction_type_switched is True:
+            self.current_element.load_type_element(
+                int(self.element_year_of_construction_textbox.text()),
+                str(self.element_construction_type_combobox.currentText()))
+
+        self.construction_type_switched = False
 
     def merge_projects(self, loaded_project):
         ''' If a new project is loaded in the buildings are merged
