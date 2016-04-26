@@ -115,14 +115,12 @@ class Project(object):
         '''
 
         self.calculation_method = calculation_method
-        not_calc = []
-        for i, bldg in enumerate(self.buildings):
+        for bldg in reversed(self.buildings):
             try:
                 bldg.calc_building_parameter()
             except:
-                not_calc.append(bldg)
-                print(bldg)
-        return not_calc
+                print(bldg.name)
+                self.buildings.remove(bldg)
 
     def retrofit_all_buildings(self,
                                year_of_retrofit,

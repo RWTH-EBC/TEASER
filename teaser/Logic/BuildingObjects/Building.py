@@ -442,7 +442,6 @@ class Building(object):
             self.tilt_bldg.append(i[1])
 
         for zone in self.thermal_zones:
-            print(zone)
             for i in self.orient_tilt:
                 wall = zone.find_wall(i[0], i[1])
                 win = zone.find_win(i[0], i[1])
@@ -457,7 +456,6 @@ class Building(object):
                     zone.weightfactor_ow.append(0.0)
                 else:
                     zone.weightfactor_ow.append(wall.wf_out)
-                    print(wall.wf_out)
                 if win is None:
                     zone.weightfactor_win.append(0.0)
                     zone.window_area_list.append(0.0)
