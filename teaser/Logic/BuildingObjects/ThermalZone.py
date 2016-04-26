@@ -523,6 +523,11 @@ class ThermalZone(object):
         else:
             raise ValueError("specify calculation method correctly")
 
+        if len(self.weightfactor_ground) == 0:
+            self.weightfactor_ground.append(0)
+        else:
+            pass
+
 
     def find_wall(self, orientation, tilt):
         for i in self.outer_walls:
