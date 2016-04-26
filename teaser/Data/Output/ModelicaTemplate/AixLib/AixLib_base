@@ -23,11 +23,11 @@ record ${bldg.name}_base "${bldg.name}_base"
 	efficiencyHRS_enabled = ${central_ahu.efficiency_recovery},
 	efficiencyHRS_disabled = ${central_ahu.efficiency_revocery_false}
 % else:
-	,	
-	heating = false,
-	cooling = false,
-	dehumidification = false,
-	humidification = false,
+	,
+	heatingAHU = false,
+	coolingAHU = false,
+	dehumidificationAHU = false,
+	humidificationAHU = false,
 	BPF_DeHu = 0.2,
 	HRS = false,
 	efficiencyHRS_enabled = 0.8,
