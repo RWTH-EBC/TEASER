@@ -1482,15 +1482,6 @@ class MainUI(QDialog):
         self.create_layer_ui.setWindowModality(Qt.ApplicationModal)
         self.create_layer_ui.show()
 
-    def create_path_to_template_folder(self,):
-
-        # TODO: This probably belongs to the Utilis class and not here ;)
-        path = "InputData\\RecordTemplate\\"
-        pathTemplate = utilis.get_default_path()
-        leng = len(pathTemplate)
-        fullPath = pathTemplate[:leng - 10] + path
-        return(str(fullPath))
-
     def generate_type_building_ui(self):
         ''' Opens a window to create a new type building.
 
@@ -4424,7 +4415,7 @@ class MainUI(QDialog):
     def click_export_button(self):
         # path in GUI, which is need for the output
         path_output_folder = str(self.export_save_template_lineedit.text())
-        template_folder = self.create_path_to_template_folder()
+        template_folder = utilis.create_path_to_template_folder()
         os.chdir(template_folder)
 
         list_of_building_name = []
@@ -5072,7 +5063,6 @@ class WizardPage(QtGui.QWizardPage):
                 elif (str(platform.python_version())).startswith('3'):
                     elem_layer.clear()
                     layer_list.clear()
-
 
 class EmittingStream(QtCore.QObject):
     ''' Part of the package to display the console in the project.
