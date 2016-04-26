@@ -27,6 +27,7 @@ from teaser.Project import Project
 from teaser.GUI.Controller.Controller import Controller
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 import teaser.Logic.Utilis as utilis
+import platform
 
 
 
@@ -5070,11 +5071,14 @@ class MainUI(QDialog):
 class WizardPage(QtGui.QWizardPage):
     def closeEvent(self, evnt, elem_layer= None ,layer_list= None):
             if(elem_layer is not None or layer_list is not None):
-                elem_layer.clear()
-                layer_list.clear()
+                if (str(platform.python_version())).startswith('2'):
+                    elem_layer = []
+                    layer_list = []
+                elif (str(platform.python_version())).startswith('3'):
+                    elem_layer.clear()
+                    layer_list.clear()
 
-                elem_layer = []
-                layer_list = []
+
 
 
 class EmittingStream(QtCore.QObject):
