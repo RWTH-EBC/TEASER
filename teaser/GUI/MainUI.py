@@ -2027,7 +2027,6 @@ class MainUI(QDialog):
            from the text fields.
 
         '''
-        # TODO: Fehler beim User-Input abfangen
 
         for zone in self.current_building.thermal_zones:
             if zone.internal_id == self.current_zone.internal_id:
