@@ -267,10 +267,8 @@ class Surface_gml(object):
             self.surface_orientation = 450 - self.surface_orientation
 
         if normal_uni[2] == -1:
-            print(self, normal_uni)
             self.surface_orientation = -2
         elif normal_uni[2] == 1:
-            print(self, normal_uni)
             self.surface_orientation = -1
 
         return self.surface_orientation

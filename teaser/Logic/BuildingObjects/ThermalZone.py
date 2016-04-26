@@ -476,7 +476,14 @@ class ThermalZone(object):
 
                 wall.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
                 if type(wall).__name__ == "GroundFloor":
-                    self.weightfactor_ground.append(wall.wf_out)
+                    ground_ua_help = wall.ua_value
+                    for wall3 in self.outer_walls:
+                        if wall is wall3:
+                            pass
+                        elif type(wall3).__name__ == "GroundFloor":
+                            ground_ua_help += wall3.ua_value
+                    self.weightfactor_ground = [ground_ua_help/(
+                        self.ua_value_ow + self.ua_value_win)]
                 else:
                     pass
 
@@ -505,9 +512,14 @@ class ThermalZone(object):
                         ua_help = ua_help + wall2.ua_value
                 wall.wf_out = ua_help/self.ua_value_ow
                 if type(wall).__name__ == "GroundFloor":
-                    self.weightfactor_ground.append(wall.wf_out)
-                else:
-                    pass
+                    ground_ua_help = wall.ua_value
+                    for wall3 in self.outer_walls:
+                        if wall is wall3:
+                            pass
+                        elif type(wall3).__name__ == "GroundFloor":
+                            ground_ua_help += wall3.ua_value
+                    self.weightfactor_ground = [ground_ua_help/
+                        self.ua_value_ow]
 
             for win in self.windows:
                 ua_help = win.ua_value
