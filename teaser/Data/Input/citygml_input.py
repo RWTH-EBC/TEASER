@@ -82,7 +82,10 @@ def load_gml(path, prj):
             _create_building(bldg=bldg, city_object=city_object)
             _set_attributes(bldg=bldg, gml_bldg=city_object.Feature)
             bldg.set_height_gml()
-
+            try:
+                bldg.set_gml_attributes()
+            except:
+                pass
 
 def _set_attributes(bldg, gml_bldg):
     """tries to set attributes for type building generation

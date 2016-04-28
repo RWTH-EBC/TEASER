@@ -250,12 +250,17 @@ class ThermalZone(object):
                     lumped parameter cannot be calculated")
 
         elif calculation_core == 'ebc':
-            if len(self.outer_walls) > 0 and len(self.windows) > 0:
-                sum_r1_win = 0
-                for win_count in self.windows:
-                    sum_r1_win += 1/((win_count.r1) + win_count.r_outer_comb)
+            if len(self.outer_walls) > 0:
+                if len(self.windows) > 0:
+                    sum_r1_win = 0
+                    for win_count in self.windows:
+                        sum_r1_win += 1/((win_count.r1) + win_count.r_outer_comb)
 
-                self.r1_win = 1/sum_r1_win
+                    self.r1_win = 1/sum_r1_win
+
+                else:
+
+                    self.r1_win = None
 
                 self.r1_ow = 1/(1/self.r1_ow)
 
