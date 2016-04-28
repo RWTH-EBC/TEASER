@@ -97,9 +97,12 @@ class ThermalZone(object):
         self.r_rad_iw = 0.0
         self.r_comb_iw = 0.0
         self.area_iw = 0.0
-        self.alpha_conv_iw = 0.0
-        self.alpha_rad_iw = 0.0
-        self.alpha_comb_iw = 0.0
+        self.r_conv_inner_iw = 0.0
+        self.r_rad_inner_iw = 0.0
+        self.r_comb_inner_iw = 0.0
+        self.r_conv_outer_iw = 0.0
+        self.r_rad_outer_iw = 0.0
+        self.r_comb_outer_iw = 0.0
 
         # Calculated values for OuterWall for each Zone
         self.r1_ow = 0.0
@@ -124,6 +127,50 @@ class ThermalZone(object):
         self.alpha_conv_outer_ow = 0.0
         self.r_rad_ow_iw = 0.0
 
+        # Calculated values for Rooftop for each Zone
+        self.r1_rt = 0.0
+        self.c1_rt = 0.0
+        self.r_rest_rt = 0.0
+        self.r_total_rt = 0.0
+        self.weightfactor_rt = []
+        self.tilt_rt = []
+        self.orientation_rt = []
+        self.ua_value_rt = 0.0
+        self.r_conv_inner_rt = 0.0
+        self.r_rad_inner_rt = 0.0
+        self.r_comb_inner_rt = 0.0
+        self.r_conv_outer_rt = 0.0
+        self.r_rad_outer_rt = 0.0
+        self.r_comb_outer_rt = 0.0
+        self.area_rt = 0.0
+        self.alpha_comb_inner_rt = 0.0
+        self.alpha_conv_inner_rt = 0.0
+        self.alpha_comb_outer_rt = 0.0
+        self.alpha_conv_outer_rt = 0.0
+        self.r_rad_rt_iw = 0.0
+
+        # Calculated values for GroundFlor for each Zone
+        self.r1_gf = 0.0
+        self.c1_gf = 0.0
+        self.r_rest_gf = 0.0
+        self.r_total_gf = 0.0
+        self.weightfactor_gf = []
+        self.tilt_gf = []
+        self.orientation_gf = []
+        self.ua_value_gf = 0.0
+        self.r_conv_inner_gf = 0.0
+        self.r_rad_inner_gf = 0.0
+        self.r_comb_inner_gf = 0.0
+        self.r_conv_outer_gf = 0.0
+        self.r_rad_outer_gf = 0.0
+        self.r_comb_outer_gf = 0.0
+        self.area_gf = 0.0
+        self.alpha_comb_inner_gf = 0.0
+        self.alpha_conv_inner_gf = 0.0
+        self.alpha_comb_outer_gf = 0.0
+        self.alpha_conv_outer_gf = 0.0
+        self.r_rad_gf_iw = 0.0
+
         # Calculated values for windows for each Zone
         self.r1_win = 0.0
         self.weightfactor_win = []
@@ -146,28 +193,42 @@ class ThermalZone(object):
         self.heating_load = 0.0
         self.cooling_load = 0.0
 
-    def calc_zone_parameters(self, calculation_core='vdi'):
-        '''RC-Calculation.
+    def calc_zone_parameters(self,
+                             number_of_elements=2,
+                             merge_windows=False):
+        '''RC-Calculation for the thermal zone
 
         This functions calculates and sets all necessary parameters for the
-        zone. The Algorithm follows the VDI 6007 standard ('vdi') or an
-        adapted version ('ebc').
+        zone. The method distinguishes between the number of elements,
+        we distinguish between:
+            - one element: all walls are aggregated into one element
+            - two elements: exterior and interior walls are aggregated
+            - three elements: like 2, but floor are aggregated separately
+            - four elements: like 3 bit roofs are aggregated separately
+
+        For all four options we can chose if the thermal conduction through
+        the window is considered in a separate resistance or not.
 
         Parameters
         ----------
-        calculation_core : str
-            Setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
+        number_of_elements : int
+            defines the number of elements, that area aggregated, between 1
+            and 4, default is 2
+
+        windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
         '''
 
         self.set_calc_default()
-        # Calculation of the equivalent resistances and capacities
+
         if len(self.outer_walls) > 0:
             for out_wall in self.outer_walls:
                 out_wall.calc_equivalent_res()
                 out_wall.calc_ua_value()
-
         else:
-            warnings.warn("No outer walls are defined")
+            warnings.warn("No outer walls are defined, this will cause you a "
+                          "lot of troubles")
 
         if len(self.inner_walls) > 0:
             for in_wall in self.inner_walls:
@@ -175,7 +236,7 @@ class ThermalZone(object):
                 in_wall.calc_ua_value()
 
         else:
-            warnings.warn("No outer walls are defined")
+            warnings.warn("No inner walls are defined")
 
         if len(self.windows) > 0:
             for win in self.windows:
@@ -185,7 +246,8 @@ class ThermalZone(object):
         else:
             warnings.warn("No outer walls are defined")
 
-        self.combine_building_elements()
+
+        self.combine_building_elements(number_of_elements)
         self.parallel_connection(calculation_core)
         self.calc_weightfactors(calculation_core)
         self.calc_heat_load()
@@ -348,23 +410,43 @@ class ThermalZone(object):
                       element_list[wall_count+1].c1)
         return r1, c1
 
-    def combine_building_elements(self):
+    def combine_building_elements(self, number_of_elements):
         '''Combines values of several building elements.
 
         Sums UA-Values, R-Values and area. Calculates the weighted coeffiecient
-        of heat transfer for walls, windows. Calculates the weighted g-Value
-        for windows.
-        '''
+        of heat transfer for outer walls, inner walls, groundfloors, roofs and
+        windows
 
-        sum_r_conv_iw = 0
-        sum_r_rad_iw = 0
-        sum_r_comb_iw = 0
+        '''
+        #inner wall
+        sum_r_conv_inner_iw = 0
+        sum_r_rad_inner_iw = 0
+        sum_r_comb_inner_iw = 0
+        sum_r_conv_outer_iw = 0
+        sum_r_rad_outer_iw = 0
+        sum_r_comb_outer_iw = 0
+        #outer wall
         sum_r_conv_inner_ow = 0
         sum_r_rad_inner_ow = 0
         sum_r_comb_inner_ow = 0
         sum_r_conv_outer_ow = 0
         sum_r_rad_outer_ow = 0
         sum_r_comb_outer_ow = 0
+        #ground floor
+        sum_r_conv_inner_gf = 0
+        sum_r_rad_inner_gf = 0
+        sum_r_comb_inner_gf = 0
+        sum_r_conv_outer_gf = 0
+        sum_r_rad_outer_gf = 0
+        sum_r_comb_outer_gf = 0
+        #rooftop
+        sum_r_conv_inner_rt = 0
+        sum_r_rad_inner_rt = 0
+        sum_r_comb_inner_rt = 0
+        sum_r_conv_outer_rt = 0
+        sum_r_rad_outer_rt = 0
+        sum_r_comb_outer_rt = 0
+        #window
         sum_r_conv_inner_win = 0
         sum_r_rad_inner_win = 0
         sum_r_comb_inner_win = 0
@@ -372,82 +454,92 @@ class ThermalZone(object):
         sum_r_rad_outer_win = 0
         sum_r_comb_outer_win = 0
         sum_g_value = 0
-        sum_area_ow_rt = 0
 
-        for wall_count in self.inner_walls:
-            self.ua_value_iw += wall_count.ua_value
+        for in_wall in self.inner_walls:
+            self.ua_value_iw += in_wall.ua_value
+            self.area_iw += in_wall.area
+            sum_r_conv_inner_iw += 1 / in_wall.r_inner_conv
+            sum_r_rad_inner_iw += 1 / in_wall.r_inner_rad
+            sum_r_comb_inner_iw += 1 / in_wall.r_inner_comb
+            sum_r_conv_outer_iw += 1 / in_wall.r_outer_conv
+            sum_r_rad_outer_iw += 1 / in_wall.r_outer_rad
+            sum_r_comb_outer_iw += 1 / in_wall.r_outer_comb
 
-            sum_r_conv_iw += 1/(wall_count.r_inner_conv)
-            sum_r_rad_iw += 1/(wall_count.r_inner_rad)
-            sum_r_comb_iw += 1/(wall_count.r_inner_comb)
+        self.r_conv_inner_iw = 1 / sum_r_conv_inner_iw
+        self.r_rad_inner_iw = 1 / sum_r_rad_inner_iw
+        self.r_comb_inner_iw = 1 / sum_r_comb_inner_iw
+        self.r_conv_outer_iw = 1 / sum_r_conv_outer_iw
+        self.r_rad_outer_iw = 1 / sum_r_rad_outer_iw
+        self.r_comb_outer_iw = 1 / sum_r_comb_outer_iw
 
-            self.area_iw += wall_count.area
+        for out_wall in self.outer_walls:
+            if type(out_wall).__name__ == "OuterWall":
+                self.ua_value_ow += out_wall.ua_value
+                self.area_ow += out_wall.area
+                sum_r_conv_inner_ow += 1 / out_wall.r_inner_conv
+                sum_r_rad_inner_ow += 1 / out_wall.r_inner_rad
+                sum_r_comb_inner_ow += 1 / out_wall.r_inner_comb
+                sum_r_conv_outer_ow += 1 / out_wall.r_outer_conv
+                sum_r_rad_outer_ow += 1 / out_wall.r_outer_rad
+                sum_r_comb_outer_ow += 1 / out_wall.r_outer_comb
+            elif type(out_wall).__name__ == "Rooftop":
+                self.ua_value_rt += out_wall.ua_value
+                self.area_rt += out_wall.area
+                sum_r_conv_inner_rt += 1 / out_wall.r_inner_conv
+                sum_r_rad_inner_rt += 1 / out_wall.r_inner_rad
+                sum_r_comb_inner_rt += 1 / out_wall.r_inner_comb
+                sum_r_conv_outer_rt += 1 / out_wall.r_outer_conv
+                sum_r_rad_outer_rt += 1 / out_wall.r_outer_rad
+                sum_r_comb_outer_rt += 1 / out_wall.r_outer_comb
+            elif type(out_wall).__name__ == "GroundFloor":
+                self.ua_value_gf += out_wall.ua_value
+                self.area_gf += out_wall.area
+                sum_r_conv_inner_gf += 1 / out_wall.r_inner_conv
+                sum_r_rad_inner_gf += 1 / out_wall.r_inner_rad
+                sum_r_comb_inner_gf += 1 / out_wall.r_inner_comb
+                sum_r_conv_outer_gf += 1 / out_wall.r_outer_conv
+                sum_r_rad_outer_gf += 1 / out_wall.r_outer_rad
+                sum_r_comb_outer_gf += 1 / out_wall.r_outer_comb
 
-        self.r_conv_iw = 1/sum_r_conv_iw
-        self.r_rad_iw = 1/sum_r_rad_iw
-        self.r_comb_iw = 1/sum_r_comb_iw
+        self.r_conv_inner_ow = 1 / sum_r_conv_inner_ow
+        self.r_rad_inner_ow = 1 / sum_r_rad_inner_ow
+        self.r_comb_inner_ow = 1 / sum_r_comb_inner_ow
+        self.r_conv_outer_ow = 1 / sum_r_conv_outer_ow
+        self.r_rad_outer_ow = 1 / sum_r_rad_outer_ow
+        self.r_comb_outer_ow = 1 / sum_r_comb_outer_ow
 
-        self.alpha_conv_iw = (1/(self.r_conv_iw*self.area_iw))
-        self.alpha_rad_iw = 1/(self.r_rad_iw*self.area_iw)
-        self.alpha_comb_iw = 1/(self.r_comb_iw*self.area_iw)
+        self.r_conv_inner_rt = 1 / sum_r_conv_inner_rt
+        self.r_rad_inner_rt = 1 / sum_r_rad_inner_rt
+        self.r_comb_inner_rt = 1 / sum_r_comb_inner_rt
+        self.r_conv_outer_rt = 1 / sum_r_conv_outer_rt
+        self.r_rad_outer_rt = 1 / sum_r_rad_outer_rt
+        self.r_comb_outer_rt = 1 / sum_r_comb_outer_rt
 
-        for wall_count in self.outer_walls:
+        self.r_conv_inner_gf = 1 / sum_r_conv_inner_gf
+        self.r_rad_inner_gf = 1 / sum_r_rad_inner_gf
+        self.r_comb_inner_gf = 1 / sum_r_comb_inner_gf
+        self.r_conv_outer_gf = 1 / sum_r_conv_outer_gf
+        self.r_rad_outer_gf = 1 / sum_r_rad_outer_gf
+        self.r_comb_outer_gf = 1 / sum_r_comb_outer_gf
 
-            self.ua_value_ow += wall_count.ua_value
+        for win in self.windows:
 
-            sum_r_conv_inner_ow += 1/(wall_count.r_inner_conv)
-            sum_r_rad_inner_ow += 1/(wall_count.r_inner_rad)
-            sum_r_comb_inner_ow += 1/(wall_count.r_inner_comb)
+            self.ua_value_win += win.ua_value
+            self.area_win += win.area
+            sum_r_conv_inner_win += 1/ win.r_inner_conv
+            sum_r_rad_inner_win += 1/ win.r_inner_rad
+            sum_r_comb_inner_win += 1/ win.r_inner_comb
+            sum_r_conv_outer_win += 1/ win.r_outer_conv
+            sum_r_rad_outer_win += 1/ win.r_outer_rad
+            sum_r_comb_outer_win += 1/ win.r_outer_comb
+            sum_g_value += win.g_value * win.area
 
-            self.area_ow += wall_count.area
-
-            if type(wall_count).__name__ == "OuterWall" \
-                    or type(wall_count).__name__ == "Rooftop":
-                sum_r_conv_outer_ow += 1/(wall_count.r_outer_conv)
-                sum_r_rad_outer_ow += 1/(wall_count.r_outer_rad)
-                sum_r_comb_outer_ow += 1/(wall_count.r_outer_comb)
-                sum_area_ow_rt += wall_count.area
-            else:
-                pass
-
-        self.r_conv_inner_ow = 1/sum_r_conv_inner_ow
-        self.r_rad_inner_ow = 1/sum_r_rad_inner_ow
-        self.r_comb_inner_ow = 1/sum_r_comb_inner_ow
-        self.r_conv_outer_ow = 1/sum_r_conv_outer_ow
-        self.r_rad_outer_ow = 1/sum_r_rad_outer_ow
-        self.r_comb_outer_ow = 1/sum_r_comb_outer_ow
-
-        self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
-        self.alpha_comb_inner_ow = (1/(self.r_comb_inner_ow*self.area_ow))
-        self.alpha_conv_outer_ow = (1/(self.r_conv_outer_ow*sum_area_ow_rt))
-        self.alpha_comb_outer_ow = (1/(self.r_comb_outer_ow*sum_area_ow_rt))
-
-        for count_win in self.windows:
-
-            self.ua_value_win += count_win.ua_value
-
-            sum_r_conv_inner_win += 1/(count_win.r_inner_conv)
-            sum_r_rad_inner_win += 1/(count_win.r_inner_rad)
-            sum_r_comb_inner_win += 1/(count_win.r_inner_comb)
-            sum_r_conv_outer_win += 1/(count_win.r_outer_conv)
-            sum_r_rad_outer_win += 1/(count_win.r_outer_rad)
-            sum_r_comb_outer_win += 1/(count_win.r_outer_comb)
-
-            sum_g_value += count_win.g_value * count_win.area
-
-            self.area_win += count_win.area
-
-        self.r_conv_inner_win = 1/sum_r_conv_inner_win
-        self.r_rad_inner_win = 1/sum_r_rad_inner_win
-        self.r_comb_inner_win = 1/sum_r_comb_inner_win
-        self.r_conv_outer_win = 1/sum_r_conv_outer_win
-        self.r_rad_outer_win = 1/sum_r_rad_outer_win
-        self.r_comb_outer_win = 1/sum_r_comb_outer_win
-
-        self.alpha_conv_inner_win = (1/(self.r_conv_inner_win*self.area_win))
-        self.alpha_comb_outer_win = (1/(self.r_comb_outer_win*self.area_win))
-        self.alpha_conv_outer_win = (1/(self.r_conv_outer_win*self.area_win))
-
+        self.r_conv_inner_win = 1 / sum_r_conv_inner_win
+        self.r_rad_inner_win = 1 / sum_r_rad_inner_win
+        self.r_comb_inner_win = 1 / sum_r_comb_inner_win
+        self.r_conv_outer_win = 1 / sum_r_conv_outer_win
+        self.r_rad_outer_win = 1 / sum_r_rad_outer_win
+        self.r_comb_outer_win = 1 / sum_r_comb_outer_win
         self.weighted_g_value = sum_g_value / self.area_win
 
     def calc_weightfactors(self, calculation_core):
