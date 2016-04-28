@@ -186,6 +186,8 @@ class Building(object):
             self.net_leased_area = self.get_footprint_gml().surface_area * \
                                     self.number_of_floors
             return
+        elif height_of_floors is None:
+            self.height_of_floors = 3.5
         else:
             self.height_of_floors = height_of_floors
 
