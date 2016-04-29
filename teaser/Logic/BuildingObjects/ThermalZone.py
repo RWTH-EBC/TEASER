@@ -56,11 +56,11 @@ class ThermalZone(object):
 
     typical_length : list
         List with all inner walls including  floor and ceiling
-        
+
     t_inside : float
         normative indoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
-        
+
     t_outside : float
         normative outdoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
@@ -195,7 +195,8 @@ class ThermalZone(object):
 
     def calc_zone_parameters(self,
                              number_of_elements=2,
-                             merge_windows=False):
+                             merge_windows=False,
+                             t_bt=5):
         '''RC-Calculation for the thermal zone
 
         This functions calculates and sets all necessary parameters for the
@@ -218,6 +219,9 @@ class ThermalZone(object):
         windows : bool
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False
+
+        t_bt : int
+            Time constant according to VDI 6007 (default t_bt = 5)
         '''
 
         self.set_calc_default()
@@ -234,7 +238,6 @@ class ThermalZone(object):
             for in_wall in self.inner_walls:
                 in_wall.calc_equivalent_res()
                 in_wall.calc_ua_value()
-
         else:
             warnings.warn("No inner walls are defined")
 
@@ -242,15 +245,96 @@ class ThermalZone(object):
             for win in self.windows:
                 win.calc_equivalent_res()
                 win.calc_ua_value()
-
         else:
             warnings.warn("No outer walls are defined")
 
 
-        self.combine_building_elements(number_of_elements)
-        self.parallel_connection(calculation_core)
-        self.calc_weightfactors(calculation_core)
+        self.sum_building_elements()
+        if number_of_elements == 1:
+            self.calc_one_element(merge_windows=merge_windows, t_bt=t_bt)
+        elif number_of_elements ==2:
+            self.calc_two_element(merge_windows=merge_windows, t_bt=t_bt)
+
         self.calc_heat_load()
+
+
+    def calc_two_element(self, merge_windows, t_bt):
+        """calcs lumped parameter for two element model
+        """
+        omega = 2 * math.pi / 86400 / t_bt
+
+        self.ua_value_ow += (self.ua_value_gf + self.ua_value_rt)
+        #is this sum correct?
+        self.r_conv_inner_ow += 1 / ((1 / self.r_conv_inner_gf) + (1 / self.r_conv_inner_rt))
+        self.r_rad_inner_ow += 1 / ((1 / self.r_rad_inner_gf) + (1 / self.r_rad_inner_rt))
+        self.r_comb_inner_ow += 1 / ((1 / self.r_comb_inner_gf) + (1 / self.r_comb_inner_rt))
+        self.r_conv_outer_ow += 1 / ((1 / self.r_conv_outer_gf) + (1 / self.r_conv_outer_rt))
+        self.r_rad_outer_ow += 1 / ((1 / self.r_rad_outer_gf) + (1 / self.r_rad_outer_rt))
+        self.r_comb_outer_ow = 1 / ((1 / self.r_comb_outer_gf) + (1 / selfr_comb_outer_rt))
+
+
+        if len(self.outer_walls) > 0:
+            if len(self.outer_walls) == 1:
+                self.r1_ow = self.outer_walls[0].r1
+                self.c1_ow = self.outer_walls[0].c1_korr
+            else:
+                self.r1_ow, self.c1_ow = \
+                        self.calc_rc_wall_help(self.outer_walls, omega)
+        else:
+            pass
+
+        if len(self.inner_walls) > 0:
+            if len(self.inner_walls) == 1:
+                self.r1_iw = self.inner_walls[0].r1
+                self.c1_iw = self.inner_walls[0].c1
+            else:
+                self.r1_iw, self.c1_iw = \
+                        self.calc_rc_wall_help(self.inner_walls, omega)
+        else:
+            pass
+
+        if merge_windows is False:
+
+            if len(self.outer_walls) > 0 and len(self.windows) > 0:
+                for win_count in self.windows:
+                    self.r1_win += 1/(win_count.r1/6)
+
+                self.r1_ow = 1/(1/self.r1_ow + (self.r1_win))
+                self.r_total = 1/(self.ua_value_ow + self.ua_value_win)
+                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
+                                      (1/self.r_rad_inner_win))
+                self.r_rest_ow = self.r_total - self.r1_ow - \
+                    1/((1/self.r_conv_inner_ow) +
+                       (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
+        elif calculation_core == 'ebc':
+            if len(self.outer_walls) > 0 and len(self.windows) > 0:
+                sum_r1_win = 0
+                for win_count in self.windows:
+                    sum_r1_win += 1/((win_count.r1) + win_count.r_outer_comb)
+
+                self.r1_win = 1/sum_r1_win
+
+                self.r1_ow = 1/(1/self.r1_ow)
+
+                self.r_total = 1/(self.ua_value_ow)
+                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow))
+                self.r_rest_ow = self.r_total - self.r1_ow - \
+                    1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
+        else:
+            raise ValueError("specify calculation method correctly")
+
+
+
+        if merge_windows is False:
+
 
     def parallel_connection(self, calculation_core, t_bt=5):
         '''Parallel connection of several building elements.
@@ -410,8 +494,8 @@ class ThermalZone(object):
                       element_list[wall_count+1].c1)
         return r1, c1
 
-    def combine_building_elements(self, number_of_elements):
-        '''Combines values of several building elements.
+    def sum_building_elements(self):
+        '''sums values of several building elements to zone based parameters
 
         Sums UA-Values, R-Values and area. Calculates the weighted coeffiecient
         of heat transfer for outer walls, inner walls, groundfloors, roofs and
@@ -915,7 +999,7 @@ class ThermalZone(object):
 
     @area.setter
     def area(self, value):
-        
+
         if isinstance(value, float):
             pass
         elif value is None:
@@ -924,8 +1008,8 @@ class ThermalZone(object):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert zone area to float")        
-        
+                raise ValueError("Can't convert zone area to float")
+
         if self.parent is not None:
             if self._area is None:
                 if self.parent.net_leased_area is None:
@@ -945,7 +1029,7 @@ class ThermalZone(object):
 
     @volume.setter
     def volume(self, value):
-        
+
         if isinstance(value, float):
             pass
         elif value is None:
@@ -954,8 +1038,8 @@ class ThermalZone(object):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert zone volume to float")         
-        
+                raise ValueError("Can't convert zone volume to float")
+
         if self.parent is not None:
             if self._volume is None:
                 self._volume = value
@@ -968,7 +1052,7 @@ class ThermalZone(object):
             self._volume = value
 
     @property
-    def infiltration_rate(self):        
+    def infiltration_rate(self):
         return self._infiltration_rate
 
     @infiltration_rate.setter
@@ -984,9 +1068,9 @@ class ThermalZone(object):
                 self._infiltration_rate = value
             except:
                 raise ValueError("Can't convert infiltration rate to float")
-                
+
     @property
-    def t_inside(self):        
+    def t_inside(self):
         return self._t_inside
 
     @t_inside.setter
@@ -1001,9 +1085,9 @@ class ThermalZone(object):
                 self._t_inside = value
             except:
                 raise ValueError("Can't convert temperature to float")
-                
+
     @property
-    def t_outside(self):        
+    def t_outside(self):
         return self._t_outside
 
     @t_outside.setter
