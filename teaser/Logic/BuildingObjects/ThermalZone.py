@@ -248,30 +248,44 @@ class ThermalZone(object):
         else:
             warnings.warn("No outer walls are defined")
 
-
         self.sum_building_elements()
         if number_of_elements == 1:
-            self.calc_one_element(merge_windows=merge_windows, t_bt=t_bt)
+            pass
+            #self.calc_one_element(merge_windows=merge_windows, t_bt=t_bt)
         elif number_of_elements ==2:
             self.calc_two_element(merge_windows=merge_windows, t_bt=t_bt)
-
+        self.calc_weightfactors("ebc")
         self.calc_heat_load()
 
-
-    def calc_two_element(self, merge_windows, t_bt):
+    def calc_two_element(self,
+                         merge_windows,
+                         t_bt):
         """calcs lumped parameter for two element model
         """
         omega = 2 * math.pi / 86400 / t_bt
 
         self.ua_value_ow += (self.ua_value_gf + self.ua_value_rt)
         #is this sum correct?
-        self.r_conv_inner_ow += 1 / ((1 / self.r_conv_inner_gf) + (1 / self.r_conv_inner_rt))
-        self.r_rad_inner_ow += 1 / ((1 / self.r_rad_inner_gf) + (1 / self.r_rad_inner_rt))
-        self.r_comb_inner_ow += 1 / ((1 / self.r_comb_inner_gf) + (1 / self.r_comb_inner_rt))
-        self.r_conv_outer_ow += 1 / ((1 / self.r_conv_outer_gf) + (1 / self.r_conv_outer_rt))
-        self.r_rad_outer_ow += 1 / ((1 / self.r_rad_outer_gf) + (1 / self.r_rad_outer_rt))
-        self.r_comb_outer_ow = 1 / ((1 / self.r_comb_outer_gf) + (1 / selfr_comb_outer_rt))
 
+        """
+        self.r_conv_inner_ow += 1 / ((1 / self.r_conv_inner_gf) +
+                                     (1 / self.r_conv_inner_rt))
+        self.r_rad_inner_ow += 1 / ((1 / self.r_rad_inner_gf) +
+                                    (1 / self.r_rad_inner_rt))
+        self.r_comb_inner_ow += 1 / ((1 / self.r_comb_inner_gf) +
+                                     (1 / self.r_comb_inner_rt))
+        if self.r_conv_outer_gf != 0:
+            self.r_conv_outer_ow += 1 / ((1 / self.r_conv_outer_gf) +
+                                     (1 / self.r_conv_outer_rt))
+            self.r_rad_outer_ow += 1 / ((1 / self.r_rad_outer_gf) +
+                                    (1 / self.r_rad_outer_rt))
+            self.r_comb_outer_ow = 1 / ((1 / self.r_comb_outer_gf) +
+                                    (1 / self.r_comb_outer_rt))
+        else:
+            self.r_conv_outer_ow += 1 / ((1 / self.r_conv_outer_rt))
+            self.r_rad_outer_ow += 1 / ((1 / self.r_rad_outer_rt))
+            self.r_comb_outer_ow = 1 / ((1 / self.r_comb_outer_rt))
+        """
 
         if len(self.outer_walls) > 0:
             if len(self.outer_walls) == 1:
@@ -294,6 +308,25 @@ class ThermalZone(object):
             pass
 
         if merge_windows is False:
+            #this used to be calculation_core = ebc
+
+            if len(self.outer_walls) > 0:
+                for win_count in self.windows:
+                    self.r1_win += 1/(win_count.r1/6)
+
+                self.r1_ow = 1/(1/self.r1_ow + (self.r1_win))
+                self.r_total = 1/(self.ua_value_ow + self.ua_value_win)
+                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
+                                      (1/self.r_rad_inner_win))
+                self.r_rest_ow = self.r_total - self.r1_ow - \
+                    1/((1/self.r_conv_inner_ow) +
+                       (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
+        if merge_windows is True:
+            #this used to be calculation_core = vdi
 
             if len(self.outer_walls) > 0 and len(self.windows) > 0:
                 for win_count in self.windows:
@@ -310,110 +343,6 @@ class ThermalZone(object):
                 warnings.warn("As no outer walls or no windows are defined\
                     lumped parameter cannot be calculated")
 
-        elif calculation_core == 'ebc':
-            if len(self.outer_walls) > 0 and len(self.windows) > 0:
-                sum_r1_win = 0
-                for win_count in self.windows:
-                    sum_r1_win += 1/((win_count.r1) + win_count.r_outer_comb)
-
-                self.r1_win = 1/sum_r1_win
-
-                self.r1_ow = 1/(1/self.r1_ow)
-
-                self.r_total = 1/(self.ua_value_ow)
-                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow))
-                self.r_rest_ow = self.r_total - self.r1_ow - \
-                    1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
-            else:
-                warnings.warn("As no outer walls or no windows are defined\
-                    lumped parameter cannot be calculated")
-
-        else:
-            raise ValueError("specify calculation method correctly")
-
-
-
-        if merge_windows is False:
-
-
-    def parallel_connection(self, calculation_core, t_bt=5):
-        '''Parallel connection of several building elements.
-
-        According to VDI 6007 this function sets all building element of the
-        same type in parallel and calculates the total resistance and active
-        capacity.
-
-        Parameters
-        ----------
-        calculation_core : str
-            Setter of the used calculation core ('vdi' or 'ebc')
-
-        t_bt : int
-            Time constant according to VDI 6007 (default t_bt = 5)
-        '''
-
-        omega = 2 * math.pi / 86400 / t_bt
-        if len(self.outer_walls) > 0:
-
-            if len(self.outer_walls) == 1:
-                self.r1_ow = self.outer_walls[0].r1
-                self.c1_ow = self.outer_walls[0].c1_korr
-
-            else:
-                self.r1_ow, self.c1_ow = \
-                        self.calc_rc_wall_help(self.outer_walls, omega)
-        else:
-            pass
-
-        if len(self.inner_walls) > 0:
-
-            if len(self.inner_walls) == 1:
-                self.r1_iw = self.inner_walls[0].r1
-                self.c1_iw = self.inner_walls[0].c1
-
-            else:
-                self.r1_iw, self.c1_iw = \
-                        self.calc_rc_wall_help(self.inner_walls, omega)
-        else:
-            pass
-
-        if calculation_core == 'vdi':
-
-            if len(self.outer_walls) > 0 and len(self.windows) > 0:
-                for win_count in self.windows:
-                    self.r1_win += 1/(win_count.r1/6)
-
-                self.r1_ow = 1/(1/self.r1_ow + (self.r1_win))
-                self.r_total = 1/(self.ua_value_ow + self.ua_value_win)
-                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
-                                      (1/self.r_rad_inner_win))
-                self.r_rest_ow = self.r_total - self.r1_ow - \
-                    1/((1/self.r_conv_inner_ow) +
-                       (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
-            else:
-                warnings.warn("As no outer walls or no windows are defined\
-                    lumped parameter cannot be calculated")
-
-        elif calculation_core == 'ebc':
-            if len(self.outer_walls) > 0 and len(self.windows) > 0:
-                sum_r1_win = 0
-                for win_count in self.windows:
-                    sum_r1_win += 1/((win_count.r1) + win_count.r_outer_comb)
-
-                self.r1_win = 1/sum_r1_win
-
-                self.r1_ow = 1/(1/self.r1_ow)
-
-                self.r_total = 1/(self.ua_value_ow)
-                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow))
-                self.r_rest_ow = self.r_total - self.r1_ow - \
-                    1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
-            else:
-                warnings.warn("As no outer walls or no windows are defined\
-                    lumped parameter cannot be calculated")
-
-        else:
-            raise ValueError("specify calculation method correctly")
 
     def calc_rc_wall_help(self, element_list, omega):
         '''Matrix calculation.
@@ -581,30 +510,32 @@ class ThermalZone(object):
                 sum_r_conv_inner_gf += 1 / out_wall.r_inner_conv
                 sum_r_rad_inner_gf += 1 / out_wall.r_inner_rad
                 sum_r_comb_inner_gf += 1 / out_wall.r_inner_comb
-                sum_r_conv_outer_gf += 1 / out_wall.r_outer_conv
-                sum_r_rad_outer_gf += 1 / out_wall.r_outer_rad
-                sum_r_comb_outer_gf += 1 / out_wall.r_outer_comb
+                #sum_r_conv_outer_gf += 1 / out_wall.r_outer_conv
+                #sum_r_rad_outer_gf += 1 / out_wall.r_outer_rad
+                #sum_r_comb_outer_gf += 1 / out_wall.r_outer_comb
 
-        self.r_conv_inner_ow = 1 / sum_r_conv_inner_ow
-        self.r_rad_inner_ow = 1 / sum_r_rad_inner_ow
-        self.r_comb_inner_ow = 1 / sum_r_comb_inner_ow
-        self.r_conv_outer_ow = 1 / sum_r_conv_outer_ow
-        self.r_rad_outer_ow = 1 / sum_r_rad_outer_ow
-        self.r_comb_outer_ow = 1 / sum_r_comb_outer_ow
+        if [sum_r_comb_inner_ow, sum_r_comb_outer_ow] != 0:
+            self.r_conv_inner_ow = 1 / sum_r_conv_inner_ow
+            self.r_rad_inner_ow = 1 / sum_r_rad_inner_ow
+            self.r_comb_inner_ow = 1 / sum_r_comb_inner_ow
+            self.r_conv_outer_ow = 1 / sum_r_conv_outer_ow
+            self.r_rad_outer_ow = 1 / sum_r_rad_outer_ow
+            self.r_comb_outer_ow = 1 / sum_r_comb_outer_ow
 
-        self.r_conv_inner_rt = 1 / sum_r_conv_inner_rt
-        self.r_rad_inner_rt = 1 / sum_r_rad_inner_rt
-        self.r_comb_inner_rt = 1 / sum_r_comb_inner_rt
-        self.r_conv_outer_rt = 1 / sum_r_conv_outer_rt
-        self.r_rad_outer_rt = 1 / sum_r_rad_outer_rt
-        self.r_comb_outer_rt = 1 / sum_r_comb_outer_rt
-
-        self.r_conv_inner_gf = 1 / sum_r_conv_inner_gf
-        self.r_rad_inner_gf = 1 / sum_r_rad_inner_gf
-        self.r_comb_inner_gf = 1 / sum_r_comb_inner_gf
-        self.r_conv_outer_gf = 1 / sum_r_conv_outer_gf
-        self.r_rad_outer_gf = 1 / sum_r_rad_outer_gf
-        self.r_comb_outer_gf = 1 / sum_r_comb_outer_gf
+        if sum_r_comb_inner_rt != 0:
+            self.r_conv_inner_rt = 1 / sum_r_conv_inner_rt
+            self.r_rad_inner_rt = 1 / sum_r_rad_inner_rt
+            self.r_comb_inner_rt = 1 / sum_r_comb_inner_rt
+            self.r_conv_outer_rt = 1 / sum_r_conv_outer_rt
+            self.r_rad_outer_rt = 1 / sum_r_rad_outer_rt
+            self.r_comb_outer_rt = 1 / sum_r_comb_outer_rt
+        if sum_r_comb_inner_gf != 0:
+            self.r_conv_inner_gf = 1 / sum_r_conv_inner_gf
+            self.r_rad_inner_gf = 1 / sum_r_rad_inner_gf
+            self.r_comb_inner_gf = 1 / sum_r_comb_inner_gf
+            #self.r_conv_outer_gf = 1 / sum_r_conv_outer_gf
+            #self.r_rad_outer_gf = 1 / sum_r_rad_outer_gf
+            #self.r_comb_outer_gf = 1 / sum_r_comb_outer_gf
 
         for win in self.windows:
 
