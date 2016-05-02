@@ -318,7 +318,10 @@ class Building(object):
             pass
 
         for zone in self.thermal_zones:
-            zone.calc_zone_parameters(self.calculation_method)
+            zone.calc_zone_parameters(
+                             number_of_elements=2,
+                             merge_windows=True,
+                             t_bt=5)
             self.sum_heating_load += zone.heating_load
         self.compare_orientation()
 
