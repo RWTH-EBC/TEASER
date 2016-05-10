@@ -91,7 +91,8 @@ def export_aixlib(prj, building_model="None", zone_model="None",
                            bldg=bldg, mod_prj=prj.modelica_project,
                            weather=prj.weather_file_path,
                            weather_header=prj.weather_file_header,
-                           model=building_model, zone=zone_model,
+                           model=building_model,
+                           zone=zone_model,
                            physics=bldg._calculation_method, gFac=corG))
             out_file.close()
 
