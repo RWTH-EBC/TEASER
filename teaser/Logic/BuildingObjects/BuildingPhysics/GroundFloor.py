@@ -16,7 +16,7 @@ class GroundFloor(OuterWall):
         super(GroundFloor, self).__init__(parent)
         
         
-        self._tilt = 90.0
+        self._tilt = 0.0
         self._orientation = -2.0
         self._inner_convection = 1.7
         self._inner_radiation = 5.0
