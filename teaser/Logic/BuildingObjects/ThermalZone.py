@@ -79,6 +79,8 @@ class ThermalZone(object):
         self._infiltration_rate = 0.5
         self._outer_walls = []
         self._inner_walls = []
+        self.rooftops = []
+        self.ground_floors = []
         self._windows = []
         self._use_conditions = None
         self.typical_length = None
@@ -196,7 +198,8 @@ class ThermalZone(object):
     def calc_zone_parameters(self,
                              number_of_elements=2,
                              merge_windows=False,
-                             t_bt=5):
+                             t_bt=5,
+                             calculation_core='ebc'):
         '''RC-Calculation for the thermal zone
 
         This functions calculates and sets all necessary parameters for the
@@ -252,9 +255,9 @@ class ThermalZone(object):
         if number_of_elements == 1:
             pass
             #self.calc_one_element(merge_windows=merge_windows, t_bt=t_bt)
-        elif number_of_elements ==2:
+        elif number_of_elements == 2:
             self.calc_two_element(merge_windows=merge_windows, t_bt=t_bt)
-        self.calc_weightfactors("ebc")
+        self.calc_weightfactors("vdi")
         self.calc_heat_load()
 
     def calc_two_element(self,
@@ -266,26 +269,33 @@ class ThermalZone(object):
 
         self.ua_value_ow += (self.ua_value_gf + self.ua_value_rt)
         #is this sum correct?
+        if self.r_conv_inner_gf != 0:
+            self.r_conv_inner_ow += 1 / (1 / self.r_conv_inner_gf)
+        if self.r_rad_inner_gf != 0:
+            self.r_rad_inner_ow += 1 / (1 / self.r_rad_inner_gf)
+        if self.r_comb_inner_gf != 0:
+            self.r_comb_inner_ow += 1 / (1 / self.r_comb_inner_gf)
 
-        """
-        self.r_conv_inner_ow += 1 / ((1 / self.r_conv_inner_gf) +
-                                     (1 / self.r_conv_inner_rt))
-        self.r_rad_inner_ow += 1 / ((1 / self.r_rad_inner_gf) +
-                                    (1 / self.r_rad_inner_rt))
-        self.r_comb_inner_ow += 1 / ((1 / self.r_comb_inner_gf) +
-                                     (1 / self.r_comb_inner_rt))
         if self.r_conv_outer_gf != 0:
-            self.r_conv_outer_ow += 1 / ((1 / self.r_conv_outer_gf) +
-                                     (1 / self.r_conv_outer_rt))
-            self.r_rad_outer_ow += 1 / ((1 / self.r_rad_outer_gf) +
-                                    (1 / self.r_rad_outer_rt))
-            self.r_comb_outer_ow = 1 / ((1 / self.r_comb_outer_gf) +
-                                    (1 / self.r_comb_outer_rt))
-        else:
-            self.r_conv_outer_ow += 1 / ((1 / self.r_conv_outer_rt))
-            self.r_rad_outer_ow += 1 / ((1 / self.r_rad_outer_rt))
-            self.r_comb_outer_ow = 1 / ((1 / self.r_comb_outer_rt))
-        """
+            self.r_conv_outer_ow += 1 / (1 / self.r_conv_outer_gf)
+        if self.r_rad_outer_gf != 0:
+            self.r_rad_outer_ow += 1 / (1 / self.r_rad_outer_gf)
+        if self.r_comb_outer_gf != 0:
+            self.r_comb_outer_ow += 1 / (1 / self.r_comb_outer_gf)
+
+        if self.r_conv_inner_rt != 0:
+            self.r_conv_inner_ow += 1 / (1 / self.r_conv_inner_rt)
+        if self.r_rad_inner_rt != 0:
+            self.r_rad_inner_ow += 1 / (1 / self.r_rad_inner_rt)
+        if self.r_comb_inner_rt != 0:
+            self.r_comb_inner_ow += 1 / (1 / self.r_comb_inner_rt)
+
+        if self.r_conv_outer_rt != 0:
+            self.r_conv_outer_ow += 1 / (1 / self.r_conv_outer_rt)
+        if self.r_rad_outer_rt != 0:
+            self.r_rad_outer_ow += 1 / (1 / self.r_rad_outer_rt)
+        if self.r_comb_outer_rt != 0:
+            self.r_comb_outer_ow += 1 / (1 / self.r_comb_outer_rt)
 
         if len(self.outer_walls) > 0:
             if len(self.outer_walls) == 1:
@@ -496,6 +506,7 @@ class ThermalZone(object):
                 sum_r_rad_outer_ow += 1 / out_wall.r_outer_rad
                 sum_r_comb_outer_ow += 1 / out_wall.r_outer_comb
             elif type(out_wall).__name__ == "Rooftop":
+                self.rooftops.append(out_wall)
                 self.ua_value_rt += out_wall.ua_value
                 self.area_rt += out_wall.area
                 sum_r_conv_inner_rt += 1 / out_wall.r_inner_conv
@@ -505,6 +516,7 @@ class ThermalZone(object):
                 sum_r_rad_outer_rt += 1 / out_wall.r_outer_rad
                 sum_r_comb_outer_rt += 1 / out_wall.r_outer_comb
             elif type(out_wall).__name__ == "GroundFloor":
+                self.ground_floors.append(out_wall)
                 self.ua_value_gf += out_wall.ua_value
                 self.area_gf += out_wall.area
                 sum_r_conv_inner_gf += 1 / out_wall.r_inner_conv
