@@ -319,17 +319,17 @@ class Building(object):
             if self.calculation_method == 'vdi':
                 number_of_elements = 2
                 merge_windows = True
-            else:
+            elif self.calculation_method == 'ebc':
                 number_of_elements = 2
                 merge_windows = False
         else:
             pass
 
         for zone in self.thermal_zones:
-            zone.calc_zone_parameters(
-                             number_of_elements=number_of_elements,
-                             merge_windows=merge_windows,
-                             t_bt=5)
+            zone.calc_zone_parameters(number_of_elements=number_of_elements,
+                                      merge_windows=merge_windows,
+                                      t_bt=5,
+                                      calculation_core=self.calculation_method)
             self.sum_heating_load += zone.heating_load
         self.compare_orientation()
 
