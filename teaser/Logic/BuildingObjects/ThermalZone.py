@@ -288,6 +288,10 @@ class ThermalZone(object):
         elif number_of_elements == 2:
             self.calc_two_element(merge_windows=merge_windows, t_bt=t_bt)
             self.calc_wf_two_element(merge_windows=merge_windows)
+        elif number_of_elements == 3:
+            self.calc_three_element(merge_windows=merge_windows, t_bt=t_bt)
+        elif number_of_elements == 4:
+            self.calc_four_element(merge_windows=merge_windows, t_bt=t_bt)
         self.calc_heat_load()
 
     def calc_two_element(self,
@@ -374,6 +378,119 @@ class ThermalZone(object):
             else:
                 warnings.warn("As no outer walls or no windows are defined\
                     lumped parameter cannot be calculated")
+
+    def calc_four_element(self,
+                          merge_windows,
+                          t_bt):
+        """calcs lumped parameter for two element model
+        """
+        omega = 2 * math.pi / 86400 / t_bt
+
+
+        self.outer_walls_help = self.outer_walls
+        self._outer_walls = []
+        for wall in self.outer_walls_help:
+            if type(wall).__name__ == "OuterWall":
+                self._outer_walls.append(wall)
+            if type(wall).__name__ == "Rooftop":
+                self.rooftops.append(wall)
+            if type(wall).__name__ == "GroundFloor":
+                self.ground_floors.append(wall)
+
+        if len(self.outer_walls) > 0:
+            if len(self.outer_walls) == 1:
+                self.r1_ow = self.outer_walls[0].r1
+                self.c1_ow = self.outer_walls[0].c1_korr
+            else:
+                self.r1_ow, self.c1_ow = \
+                        self.calc_rc_wall_help(self.outer_walls, omega)
+        else:
+            pass
+
+
+        if len(self.rooftops) > 0:
+            if len(self.rooftops) == 1:
+                self.r1_rt = self.rooftops[0].r1
+                self.c1_rt = self.rooftops[0].c1_korr
+            else:
+                self.r1_rt, self.c1_rt = \
+                        self.calc_rc_wall_help(self.rooftops, omega)
+        else:
+            pass
+
+        if len(self.ground_floors) > 0:
+            if len(self.ground_floors) == 1:
+                self.r1_gf = self.ground_floors[0].r1
+                self.c1_gf = self.ground_floors[0].c1_korr
+            else:
+                self.r1_gf, self.c1_gf = \
+                        self.calc_rc_wall_help(self.ground_floors, omega)
+        else:
+            pass
+
+        if len(self.inner_walls) > 0:
+            if len(self.inner_walls) == 1:
+                self.r1_iw = self.inner_walls[0].r1
+                self.c1_iw = self.inner_walls[0].c1
+            else:
+                self.r1_iw, self.c1_iw = \
+                        self.calc_rc_wall_help(self.inner_walls, omega)
+        else:
+            pass
+
+        if merge_windows is False:
+            if len(self.outer_walls) > 0 and len(self.windows) > 0:
+                sum_r1_win = 0
+                for win_count in self.windows:
+                    sum_r1_win += 1/((win_count.r1) + win_count.r_outer_comb)
+
+                self.r1_win = 1/sum_r1_win
+
+                self.r1_ow = 1/(1/self.r1_ow)
+                self.r1_gf = 1/(1/self.r1_gf)
+                self.r1_rt = 1/(1/self.r1_rt)
+                self.r1_ow = 1/(1/self.r1_ow)
+
+                self.r_total = 1/(self.ua_value_ow)
+                self.r_total_gf = 1/(self.ua_value_gf)
+                self.r_total_rt = 1/(self.ua_value_rt)
+
+                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow))
+                self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
+                self.r_rad_rt_iw = 1/((1/self.r_rad_inner_rt))
+
+                self.r_rest_ow = self.r_total - self.r1_ow - \
+                    1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
+                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
+                self.r_rest_rt = self.r_total_rt - self.r1_rt - \
+                    1/(1/self.r_conv_inner_rt+1/self.r_rad_rt_iw)
+
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
+        if merge_windows is True:
+            #this used to be calculation_core = vdi
+            if len(self.outer_walls) > 0:
+                for win_count in self.windows:
+                    self.r1_win += 1/(win_count.r1/6)
+
+                self.r1_ow = 1/(1/self.r1_ow + (self.r1_win))
+                self.r_total = 1/(self.ua_value_ow + self.ua_value_win)
+                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
+                                      (1/self.r_rad_inner_win))
+                self.r_rest_ow = self.r_total - self.r1_ow - \
+                    1/((1/self.r_conv_inner_ow) +
+                       (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
+
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
+        print("bla")
+
+
 
 
     def calc_rc_wall_help(self, element_list, omega):
