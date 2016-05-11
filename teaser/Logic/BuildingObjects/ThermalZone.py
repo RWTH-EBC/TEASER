@@ -229,8 +229,7 @@ class ThermalZone(object):
     def calc_zone_parameters(self,
                              number_of_elements=2,
                              merge_windows=True,
-                             t_bt=5,
-                             calculation_core='ebc'):
+                             t_bt=5):
         '''RC-Calculation for the thermal zone
 
         This functions calculates and sets all necessary parameters for the
@@ -250,7 +249,7 @@ class ThermalZone(object):
             defines the number of elements, that area aggregated, between 1
             and 4, default is 2
 
-        windows : bool
+        merge_windows : bool
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False
 
@@ -288,7 +287,7 @@ class ThermalZone(object):
             #self.calc_one_element(merge_windows=merge_windows, t_bt=t_bt)
         elif number_of_elements == 2:
             self.calc_two_element(merge_windows=merge_windows, t_bt=t_bt)
-        self.calc_weightfactors(calculation_core)
+            self.calc_wf_two_element(merge_windows=merge_windows)
         self.calc_heat_load()
 
     def calc_two_element(self,
@@ -299,9 +298,7 @@ class ThermalZone(object):
         omega = 2 * math.pi / 86400 / t_bt
 
         self.ua_value_ow += (self.ua_value_gf + self.ua_value_rt)
-        self.area_ow += self.area_gf + self.area_rt
-        #is this sum correct?
-
+        self.area_ow += (self.area_gf + self.area_rt)
 
         if self.r_conv_inner_gf != 0:
             self.r_conv_inner_ow = 1/((1/self.r_conv_inner_ow)+(
@@ -616,7 +613,7 @@ class ThermalZone(object):
         self.alpha_rad_outer_win = (1/(self.r_rad_outer_win*self.area_win))
         self.alpha_comb_outer_win = (1/(self.r_comb_outer_win*self.area_win))
 
-    def calc_weightfactors(self, calculation_core):
+    def calc_wf_two_element(self, merge_windows=True):
         '''Calculation of weightfactors.
 
         Calculates the weightfactors of the outer walls, including ground and
@@ -624,11 +621,16 @@ class ThermalZone(object):
 
         Parameters
         ----------
-        calculation_core : str
-            Setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
+        number_of_elements : int
+            defines the number of elements, that area aggregated, between 1
+            and 4, default is 2
+
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
         '''
 
-        if calculation_core == 'vdi':
+        if merge_windows is True:
 
             for wall in self.outer_walls:
                 ua_help = wall.ua_value
@@ -665,7 +667,7 @@ class ThermalZone(object):
                 win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
                 win.area = area_help
 
-        elif calculation_core == 'ebc':
+        elif merge_windows is False:
 
             for wall in self.outer_walls:
                 ua_help = wall.ua_value
@@ -798,28 +800,16 @@ class ThermalZone(object):
             win_count.replace_window(self.parent.year_of_retrofit, window_type)
 
     def set_calc_default(self):
-
-        # Calculated values for InnerWall for each Zone
-        self.r1_iw = 0.0
-        self.c1_iw = 0.0
-        self.ua_value_iw = 0.0
-        self.r_conv_iw = 0.0
-        self.r_rad_iw = 0.0
-        self.r_comb_iw = 0.0
-        self.area_iw = 0.0
-        self.alpha_conv_iw = 0.0
-        self.alpha_rad_iw = 0.0
-        self.alpha_comb_iw = 0.0
-
-        # Calculated values for OuterWall for each Zone
         self.r1_ow = 0.0
         self.c1_ow = 0.0
         self.r_rest_ow = 0.0
         self.r_total = 0.0
+
         self.weightfactor_ow = []
         self.weightfactor_ground = []
-        self.orientation_wall = []
         self.tilt_wall = []
+        self.orientation_wall = []
+
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
         self.r_rad_inner_ow = 0.0
@@ -828,11 +818,69 @@ class ThermalZone(object):
         self.r_rad_outer_ow = 0.0
         self.r_comb_outer_ow = 0.0
         self.area_ow = 0.0
-        self.alpha_comb_inner_ow = 0.0
+
         self.alpha_conv_inner_ow = 0.0
-        self.alpha_comb_outer_ow = 0.0
+        self.alpha_rad_inner_ow = 0.0
+        self.alpha_comb_inner_ow = 0.0
+
         self.alpha_conv_outer_ow = 0.0
+        self.alpha_rad_outer_ow = 0.0
+        self.alpha_comb_outer_ow = 0.0
+
         self.r_rad_ow_iw = 0.0
+
+        self.r1_rt = 0.0
+        self.c1_rt = 0.0
+        self.r_rest_rt = 0.0
+        self.r_total_rt = 0.0
+        self.weightfactor_rt = []
+        self.tilt_rt = []
+        self.orientation_rt = []
+        self.ua_value_rt = 0.0
+        self.r_conv_inner_rt = 0.0
+        self.r_rad_inner_rt = 0.0
+        self.r_comb_inner_rt = 0.0
+        self.r_conv_outer_rt = 0.0
+        self.r_rad_outer_rt = 0.0
+        self.r_comb_outer_rt = 0.0
+        self.area_rt = 0.0
+
+        self.alpha_conv_inner_rt = 0.0
+        self.alpha_rad_inner_rt = 0.0
+        self.alpha_comb_inner_rt = 0.0
+
+        self.alpha_conv_outer_rt = 0.0
+        self.alpha_rad_outer_rt = 0.0
+        self.alpha_comb_outer_rt = 0.0
+
+        self.r_rad_rt_iw = 0.0
+
+        # Calculated values for GroundFlor for each Zone
+        self.r1_gf = 0.0
+        self.c1_gf = 0.0
+        self.r_rest_gf = 0.0
+        self.r_total_gf = 0.0
+        self.weightfactor_gf = []
+        self.tilt_gf = []
+        self.orientation_gf = []
+        self.ua_value_gf = 0.0
+        self.r_conv_inner_gf = 0.0
+        self.r_rad_inner_gf = 0.0
+        self.r_comb_inner_gf = 0.0
+        self.r_conv_outer_gf = 0.0
+        self.r_rad_outer_gf = 0.0
+        self.r_comb_outer_gf = 0.0
+        self.area_gf = 0.0
+
+        self.alpha_conv_inner_gf = 0.0
+        self.alpha_rad_inner_gf = 0.0
+        self.alpha_comb_inner_gf = 0.0
+
+        self.alpha_conv_outer_gf = 0.0
+        self.alpha_rad_outer_gf = 0.0
+        self.alpha_comb_outer_gf = 0.0
+
+        self.r_rad_gf_iw = 0.0
 
         # Calculated values for windows for each Zone
         self.r1_win = 0.0
@@ -849,11 +897,16 @@ class ThermalZone(object):
         self.r_rad_outer_win = 0.0
         self.r_comb_outer_win = 0.0
         self.area_win = 0.0
-        self.alpha_conv_inner_win = 0.0
-        self.alpha_comb_outer_win = 0.0
-        self.alpha_conv_outer_win = 0.0
-        self.weighted_g_value = 0.0
 
+        self.alpha_conv_inner_win = 0.0
+        self.alpha_rad_inner_win = 0.0
+        self.alpha_comb_inner_win = 0.0
+
+        self.alpha_conv_outer_win = 0.0
+        self.alpha_rad_outer_win = 0.0
+        self.alpha_comb_outer_win = 0.0
+
+        self.weighted_g_value = 0.0
         self.heating_load = 0.0
         self.cooling_load = 0.0
 
@@ -867,6 +920,7 @@ class ThermalZone(object):
                 self.parent.thermal_zones.pop(index)
 
                 break
+
     def add_element(self, building_element):
         '''Adds a building element to the corresponding list
 
@@ -899,8 +953,6 @@ class ThermalZone(object):
 
         elif type(building_element).__name__ in ("Window"):
             self._windows.append(building_element)
-
-
 
     @property
     def parent(self):
