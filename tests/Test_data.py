@@ -17,7 +17,7 @@ class Test_teaser(object):
     global prj
 
     def test_calc_vdi_room1(self):
-        """Parameter Verification for rouvel room1"""
+        '''Parameter Verification for rouvel room1'''
         import teaser.Examples.Verification.ParameterVerification_1 as room1
 
         room1_prj = room1.parameter_room1()
@@ -764,10 +764,17 @@ class Test_teaser(object):
         '''test of calc zone parameter, no calculation verification'''
 
         prj.buildings[-1].thermal_zones[-1].calc_zone_parameters('vdi')
-        prj.buildings[-1].thermal_zones[-1].calc_zone_parameters('ebc')
+        prj.buildings[-1].thermal_zones[-1].calc_zone_parameters(
+            merge_windows=False, calculation_core="ebc")
 
     def test_heating_load(self):
         '''test of heating_load'''
+        prj.set_default()
+        HelpTest.building_test2(prj)
+        prj.buildings[-1].thermal_zones[-1].calc_zone_parameters(number_of_elements=2,
+                                                                 merge_windows=True,
+                                                                 t_bt=5,
+                                                                 calculation_core='ebc')
         prj.buildings[-1].thermal_zones[-1].calc_heat_load()
         assert round(
             prj.buildings[-1].thermal_zones[-1].heating_load,
