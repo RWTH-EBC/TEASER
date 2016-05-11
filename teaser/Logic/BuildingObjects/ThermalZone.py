@@ -299,34 +299,28 @@ class ThermalZone(object):
         omega = 2 * math.pi / 86400 / t_bt
 
         self.ua_value_ow += (self.ua_value_gf + self.ua_value_rt)
+        self.area_ow += self.area_gf + self.area_rt
         #is this sum correct?
-        if self.r_conv_inner_gf != 0:
-            self.r_conv_inner_ow += 1 / (1 / self.r_conv_inner_gf)
-        if self.r_rad_inner_gf != 0:
-            self.r_rad_inner_ow += 1 / (1 / self.r_rad_inner_gf)
-        if self.r_comb_inner_gf != 0:
-            self.r_comb_inner_ow += 1 / (1 / self.r_comb_inner_gf)
 
-        if self.r_conv_outer_gf != 0:
-            self.r_conv_outer_ow += 1 / (1 / self.r_conv_outer_gf)
-        if self.r_rad_outer_gf != 0:
-            self.r_rad_outer_ow += 1 / (1 / self.r_rad_outer_gf)
-        if self.r_comb_outer_gf != 0:
-            self.r_comb_outer_ow += 1 / (1 / self.r_comb_outer_gf)
+
+        if self.r_conv_inner_gf != 0:
+            self.r_conv_inner_ow = 1/((1/self.r_conv_inner_ow)+(
+                1/self.r_conv_inner_gf))
+        if self.r_rad_inner_gf != 0:
+            self.r_rad_inner_ow = 1/((1/self.r_rad_inner_ow)+(
+            1/self.r_rad_inner_gf))
 
         if self.r_conv_inner_rt != 0:
-            self.r_conv_inner_ow += 1 / (1 / self.r_conv_inner_rt)
-        if self.r_rad_inner_rt != 0:
-            self.r_rad_inner_ow += 1 / (1 / self.r_rad_inner_rt)
-        if self.r_comb_inner_rt != 0:
-            self.r_comb_inner_ow += 1 / (1 / self.r_comb_inner_rt)
+            self.r_conv_inner_ow = 1/((1/self.r_conv_inner_ow)+(
+                1/self.r_conv_inner_rt))
+        if self.r_rad_inner_gf != 0:
+            self.r_rad_inner_ow = 1/((1/self.r_rad_inner_ow)+(
+            1/self.r_rad_inner_rt))
 
-        if self.r_conv_outer_rt != 0:
-            self.r_conv_outer_ow += 1 / (1 / self.r_conv_outer_rt)
-        if self.r_rad_outer_rt != 0:
-            self.r_rad_outer_ow += 1 / (1 / self.r_rad_outer_rt)
-        if self.r_comb_outer_rt != 0:
-            self.r_comb_outer_ow += 1 / (1 / self.r_comb_outer_rt)
+
+        self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
+        self.alpha_rad_inner_ow = (1/(self.r_rad_inner_ow*self.area_ow))
+
 
         if len(self.outer_walls) > 0:
             if len(self.outer_walls) == 1:
