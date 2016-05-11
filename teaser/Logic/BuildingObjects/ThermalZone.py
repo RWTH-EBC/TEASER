@@ -317,10 +317,8 @@ class ThermalZone(object):
             self.r_rad_inner_ow = 1/((1/self.r_rad_inner_ow)+(
             1/self.r_rad_inner_rt))
 
-
         self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
         self.alpha_rad_inner_ow = (1/(self.r_rad_inner_ow*self.area_ow))
-
 
         if len(self.outer_walls) > 0:
             if len(self.outer_walls) == 1:
@@ -706,8 +704,6 @@ class ThermalZone(object):
             self.weightfactor_ground.append(0)
         else:
             pass
-
-
 
     def find_wall(self, orientation, tilt):
         for i in self.outer_walls:
