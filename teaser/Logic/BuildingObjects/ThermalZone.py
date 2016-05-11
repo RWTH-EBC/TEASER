@@ -228,7 +228,7 @@ class ThermalZone(object):
 
     def calc_zone_parameters(self,
                              number_of_elements=2,
-                             merge_windows=False,
+                             merge_windows=True,
                              t_bt=5,
                              calculation_core='ebc'):
         '''RC-Calculation for the thermal zone
@@ -288,7 +288,7 @@ class ThermalZone(object):
             #self.calc_one_element(merge_windows=merge_windows, t_bt=t_bt)
         elif number_of_elements == 2:
             self.calc_two_element(merge_windows=merge_windows, t_bt=t_bt)
-        self.calc_weightfactors("vdi")
+        self.calc_weightfactors(calculation_core)
         self.calc_heat_load()
 
     def calc_two_element(self,
@@ -350,7 +350,26 @@ class ThermalZone(object):
 
         if merge_windows is False:
             #this used to be calculation_core = ebc
+            if len(self.outer_walls) > 0 and len(self.windows) > 0:
+                sum_r1_win = 0
+                for win_count in self.windows:
+                    sum_r1_win += 1/((win_count.r1) + win_count.r_outer_comb)
 
+                self.r1_win = 1/sum_r1_win
+
+                self.r1_ow = 1/(1/self.r1_ow)
+
+                self.r_total = 1/(self.ua_value_ow)
+                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow))
+                self.r_rest_ow = self.r_total - self.r1_ow - \
+                    1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
+
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
+        if merge_windows is True:
+            #this used to be calculation_core = vdi
             if len(self.outer_walls) > 0:
                 for win_count in self.windows:
                     self.r1_win += 1/(win_count.r1/6)
@@ -362,24 +381,7 @@ class ThermalZone(object):
                 self.r_rest_ow = self.r_total - self.r1_ow - \
                     1/((1/self.r_conv_inner_ow) +
                        (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
-            else:
-                warnings.warn("As no outer walls or no windows are defined\
-                    lumped parameter cannot be calculated")
 
-        if merge_windows is True:
-            #this used to be calculation_core = vdi
-
-            if len(self.outer_walls) > 0 and len(self.windows) > 0:
-                for win_count in self.windows:
-                    self.r1_win += 1/(win_count.r1/6)
-
-                self.r1_ow = 1/(1/self.r1_ow + (self.r1_win))
-                self.r_total = 1/(self.ua_value_ow + self.ua_value_win)
-                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
-                                      (1/self.r_rad_inner_win))
-                self.r_rest_ow = self.r_total - self.r1_ow - \
-                    1/((1/self.r_conv_inner_ow) +
-                       (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
             else:
                 warnings.warn("As no outer walls or no windows are defined\
                     lumped parameter cannot be calculated")
