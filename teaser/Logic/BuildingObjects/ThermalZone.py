@@ -56,11 +56,11 @@ class ThermalZone(object):
 
     typical_length : list
         List with all inner walls including  floor and ceiling
-        
+
     t_inside : float
         normative indoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
-        
+
     t_outside : float
         normative outdoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
@@ -79,7 +79,10 @@ class ThermalZone(object):
         self._infiltration_rate = 0.5
         self._outer_walls = []
         self._inner_walls = []
+        self.rooftops = []
+        self.ground_floors = []
         self._windows = []
+        self.outer_walls_help = []
         self._use_conditions = None
         self.typical_length = None
         self.typical_width = None
@@ -97,19 +100,32 @@ class ThermalZone(object):
         self.r_rad_iw = 0.0
         self.r_comb_iw = 0.0
         self.area_iw = 0.0
-        self.alpha_conv_iw = 0.0
-        self.alpha_rad_iw = 0.0
-        self.alpha_comb_iw = 0.0
+        self.r_conv_inner_iw = 0.0
+        self.r_rad_inner_iw = 0.0
+        self.r_comb_inner_iw = 0.0
+        self.r_conv_outer_iw = 0.0
+        self.r_rad_outer_iw = 0.0
+        self.r_comb_outer_iw = 0.0
+
+        self.alpha_conv_inner_iw = 0.0
+        self.alpha_rad_inner_iw = 0.0
+        self.alpha_comb_inner_iw = 0.0
+
+        self.alpha_conv_outer_iw = 0.0
+        self.alpha_rad_outer_iw = 0.0
+        self.alpha_comb_outer_iw = 0.0
 
         # Calculated values for OuterWall for each Zone
         self.r1_ow = 0.0
         self.c1_ow = 0.0
         self.r_rest_ow = 0.0
-        self.r_total = 0.0
+        self.r_total_ow = 0.0
+
         self.weightfactor_ow = []
         self.weightfactor_ground = []
         self.tilt_wall = []
         self.orientation_wall = []
+
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
         self.r_rad_inner_ow = 0.0
@@ -118,11 +134,70 @@ class ThermalZone(object):
         self.r_rad_outer_ow = 0.0
         self.r_comb_outer_ow = 0.0
         self.area_ow = 0.0
-        self.alpha_comb_inner_ow = 0.0
+
         self.alpha_conv_inner_ow = 0.0
-        self.alpha_comb_outer_ow = 0.0
+        self.alpha_rad_inner_ow = 0.0
+        self.alpha_comb_inner_ow = 0.0
+
         self.alpha_conv_outer_ow = 0.0
+        self.alpha_rad_outer_ow = 0.0
+        self.alpha_comb_outer_ow = 0.0
+
         self.r_rad_ow_iw = 0.0
+
+        # Calculated values for Rooftop for each Zone
+        self.r1_rt = 0.0
+        self.c1_rt = 0.0
+        self.r_rest_rt = 0.0
+        self.r_total_rt = 0.0
+        self.weightfactor_rt = []
+        self.tilt_rt = []
+        self.orientation_rt = []
+        self.ua_value_rt = 0.0
+        self.r_conv_inner_rt = 0.0
+        self.r_rad_inner_rt = 0.0
+        self.r_comb_inner_rt = 0.0
+        self.r_conv_outer_rt = 0.0
+        self.r_rad_outer_rt = 0.0
+        self.r_comb_outer_rt = 0.0
+        self.area_rt = 0.0
+
+        self.alpha_conv_inner_rt = 0.0
+        self.alpha_rad_inner_rt = 0.0
+        self.alpha_comb_inner_rt = 0.0
+
+        self.alpha_conv_outer_rt = 0.0
+        self.alpha_rad_outer_rt = 0.0
+        self.alpha_comb_outer_rt = 0.0
+
+        self.r_rad_rt_iw = 0.0
+
+        # Calculated values for GroundFlor for each Zone
+        self.r1_gf = 0.0
+        self.c1_gf = 0.0
+        self.r_rest_gf = 0.0
+        self.r_total_gf = 0.0
+        self.weightfactor_gf = []
+        self.tilt_gf = []
+        self.orientation_gf = []
+        self.ua_value_gf = 0.0
+        self.r_conv_inner_gf = 0.0
+        self.r_rad_inner_gf = 0.0
+        self.r_comb_inner_gf = 0.0
+        self.r_conv_outer_gf = 0.0
+        self.r_rad_outer_gf = 0.0
+        self.r_comb_outer_gf = 0.0
+        self.area_gf = 0.0
+
+        self.alpha_conv_inner_gf = 0.0
+        self.alpha_rad_inner_gf = 0.0
+        self.alpha_comb_inner_gf = 0.0
+
+        self.alpha_conv_outer_gf = 0.0
+        self.alpha_rad_outer_gf = 0.0
+        self.alpha_comb_outer_gf = 0.0
+
+        self.r_rad_gf_iw = 0.0
 
         # Calculated values for windows for each Zone
         self.r1_win = 0.0
@@ -139,143 +214,408 @@ class ThermalZone(object):
         self.r_rad_outer_win = 0.0
         self.r_comb_outer_win = 0.0
         self.area_win = 0.0
+
         self.alpha_conv_inner_win = 0.0
-        self.alpha_comb_outer_win = 0.0
+        self.alpha_rad_inner_win = 0.0
+        self.alpha_comb_inner_win = 0.0
+
         self.alpha_conv_outer_win = 0.0
+        self.alpha_rad_outer_win = 0.0
+        self.alpha_comb_outer_win = 0.0
+
         self.weighted_g_value = 0.0
         self.heating_load = 0.0
         self.cooling_load = 0.0
 
-    def calc_zone_parameters(self, calculation_core='vdi'):
-        '''RC-Calculation.
+    def calc_zone_parameters(self,
+                             number_of_elements=2,
+                             merge_windows=True,
+                             t_bt=5):
+        '''RC-Calculation for the thermal zone
 
         This functions calculates and sets all necessary parameters for the
-        zone. The Algorithm follows the VDI 6007 standard ('vdi') or an
-        adapted version ('ebc').
+        zone. The method distinguishes between the number of elements,
+        we distinguish between:
+            - one element: all walls are aggregated into one element
+            - two elements: exterior and interior walls are aggregated
+            - three elements: like 2, but floor are aggregated separately
+            - four elements: like 3 bit roofs are aggregated separately
+
+        For all four options we can chose if the thermal conduction through
+        the window is considered in a separate resistance or not.
 
         Parameters
         ----------
-        calculation_core : str
-            Setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
-        '''
+        number_of_elements : int
+            defines the number of elements, that area aggregated, between 1
+            and 4, default is 2
 
-        self.set_calc_default()
-        self.test = []
-        # Calculation of the equivalent resistances and capacities
-        if len(self.outer_walls) > 0:
-            for out_wall in self.outer_walls:
-                out_wall.calc_equivalent_res()
-                out_wall.calc_ua_value()
-
-        else:
-            warnings.warn("No outer walls are defined")
-
-        if len(self.inner_walls) > 0:
-            for in_wall in self.inner_walls:
-                in_wall.calc_equivalent_res()
-                in_wall.calc_ua_value()
-
-        else:
-            warnings.warn("No outer walls are defined")
-
-        if len(self.windows) > 0:
-            for win in self.windows:
-                win.calc_equivalent_res()
-                win.calc_ua_value()
-
-        else:
-            warnings.warn("No outer walls are defined")
-
-        self.combine_building_elements()
-        self.parallel_connection(calculation_core)
-        self.calc_weightfactors(calculation_core)
-        self.calc_heat_load()
-
-    def parallel_connection(self, calculation_core, t_bt=5):
-        '''Parallel connection of several building elements.
-
-        According to VDI 6007 this function sets all building element of the
-        same type in parallel and calculates the total resistance and active
-        capacity.
-
-        Parameters
-        ----------
-        calculation_core : str
-            Setter of the used calculation core ('vdi' or 'ebc')
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
 
         t_bt : int
             Time constant according to VDI 6007 (default t_bt = 5)
         '''
 
-        omega = 2 * math.pi / 86400 / t_bt
-        if len(self.outer_walls) > 0:
+        self.set_calc_default()
 
+        if len(self.outer_walls) > 0:
+            for out_wall in self.outer_walls:
+                out_wall.calc_equivalent_res()
+                out_wall.calc_ua_value()
+        else:
+            warnings.warn("No outer walls are defined, this will cause you a "
+                          "lot of troubles")
+
+        if len(self.inner_walls) > 0:
+            for in_wall in self.inner_walls:
+                in_wall.calc_equivalent_res()
+                in_wall.calc_ua_value()
+        else:
+            warnings.warn("No inner walls are defined")
+
+        if len(self.windows) > 0:
+            for win in self.windows:
+                win.calc_equivalent_res()
+                win.calc_ua_value()
+        else:
+            warnings.warn("No window are defined, this may eventually cause "
+                          "you some troubles")
+
+        self.sum_building_elements()
+        if number_of_elements == 1:
+            self.calc_one_element(merge_windows=merge_windows, t_bt=t_bt)
+            self.calc_wf_one_element(merge_windows=merge_windows)
+        elif number_of_elements == 2:
+            self.calc_two_element(merge_windows=merge_windows, t_bt=t_bt)
+            self.calc_wf_two_element(merge_windows=merge_windows)
+        elif number_of_elements == 3:
+            self.calc_three_element(merge_windows=merge_windows, t_bt=t_bt)
+            self.calc_wf_two_element(merge_windows=merge_windows)
+        elif number_of_elements == 4:
+            self.calc_four_element(merge_windows=merge_windows, t_bt=t_bt)
+            self.calc_wf_two_element(merge_windows=merge_windows)
+
+        self.calc_heat_load(number_of_elements=number_of_elements)
+
+    def calc_one_element(self,
+                         merge_windows,
+                         t_bt):
+
+        pass
+
+    def calc_two_element(self,
+                         merge_windows,
+                         t_bt):
+        """calcs lumped parameter for two element model
+        """
+        omega = 2 * math.pi / 86400 / t_bt
+
+        self.ua_value_ow += (self.ua_value_gf + self.ua_value_rt)
+        self.area_ow += (self.area_gf + self.area_rt)
+
+        if self.r_conv_inner_gf != 0:
+            self.r_conv_inner_ow = 1/((1/self.r_conv_inner_ow)+(
+                1/self.r_conv_inner_gf))
+        if self.r_rad_inner_gf != 0:
+            self.r_rad_inner_ow = 1/((1/self.r_rad_inner_ow)+(
+            1/self.r_rad_inner_gf))
+
+        if self.r_conv_inner_rt != 0:
+            self.r_conv_inner_ow = 1/((1/self.r_conv_inner_ow)+(
+                1/self.r_conv_inner_rt))
+        if self.r_rad_inner_gf != 0:
+            self.r_rad_inner_ow = 1/((1/self.r_rad_inner_ow)+(
+            1/self.r_rad_inner_rt))
+
+        self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
+        self.alpha_rad_inner_ow = (1/(self.r_rad_inner_ow*self.area_ow))
+
+        if len(self.outer_walls) > 0:
             if len(self.outer_walls) == 1:
                 self.r1_ow = self.outer_walls[0].r1
                 self.c1_ow = self.outer_walls[0].c1_korr
-
             else:
                 self.r1_ow, self.c1_ow = \
-                        self.calc_rc_wall_help(self.outer_walls, omega)
+                        self.calc_chain_matrix(self.outer_walls, omega)
         else:
             pass
 
         if len(self.inner_walls) > 0:
-
             if len(self.inner_walls) == 1:
                 self.r1_iw = self.inner_walls[0].r1
                 self.c1_iw = self.inner_walls[0].c1
-
             else:
                 self.r1_iw, self.c1_iw = \
-                        self.calc_rc_wall_help(self.inner_walls, omega)
+                        self.calc_chain_matrix(self.inner_walls, omega)
         else:
             pass
 
-        if calculation_core == 'vdi':
-
+        if merge_windows is False:
+            #this used to be calculation_core = ebc
             if len(self.outer_walls) > 0 and len(self.windows) > 0:
+                sum_r1_win = 0
+                for win_count in self.windows:
+                    sum_r1_win += 1/((win_count.r1) + win_count.r_outer_comb)
+
+                self.r1_win = 1/sum_r1_win
+
+                self.r1_ow = 1/(1/self.r1_ow)
+
+                self.r_total_ow = 1/(self.ua_value_ow)
+                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow))
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
+                    1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
+
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
+        if merge_windows is True:
+            #this used to be calculation_core = vdi
+            if len(self.outer_walls) > 0:
                 for win_count in self.windows:
                     self.r1_win += 1/(win_count.r1/6)
 
                 self.r1_ow = 1/(1/self.r1_ow + (self.r1_win))
-                self.r_total = 1/(self.ua_value_ow + self.ua_value_win)
+                self.r_total_ow = 1/(self.ua_value_ow + self.ua_value_win)
                 self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
                                       (1/self.r_rad_inner_win))
-                self.r_rest_ow = self.r_total - self.r1_ow - \
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/((1/self.r_conv_inner_ow) +
                        (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
+
             else:
                 warnings.warn("As no outer walls or no windows are defined\
                     lumped parameter cannot be calculated")
 
-        elif calculation_core == 'ebc':
-            if len(self.outer_walls) > 0:
-                if len(self.windows) > 0:
-                    sum_r1_win = 0
-                    for win_count in self.windows:
-                        sum_r1_win += 1/((win_count.r1) + win_count.r_outer_comb)
+    def calc_three_element(self,
+                           merge_windows,
+                           t_bt):
+        """calcs lumped parameter for three element model
+        """
+        omega = 2 * math.pi / 86400 / t_bt
 
-                    self.r1_win = 1/sum_r1_win
+        for wall in self.outer_walls:
+            if type(wall).__name__ == "OuterWall" or type(wall).__name__ == \
+                    "Rooftop":
+                self.outer_walls_help.append(wall)
+            if type(wall).__name__ == "GroundFloor":
+                self.ground_floors.append(wall)
 
-                else:
+        self.ua_value_ow += self.ua_value_rt
+        self.area_ow += self.area_rt
 
-                    self.r1_win = None
+        if self.r_conv_inner_rt != 0:
+            self.r_conv_inner_ow = 1/((1/self.r_conv_inner_ow)+(
+                1/self.r_conv_inner_rt))
+        if self.r_rad_inner_gf != 0:
+            self.r_rad_inner_ow = 1/((1/self.r_rad_inner_ow)+(
+            1/self.r_rad_inner_rt))
+
+        self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
+        self.alpha_rad_inner_ow = (1/(self.r_rad_inner_ow*self.area_ow))
+
+        if len(self.outer_walls_help) > 0:
+            if len(self.outer_walls_help) == 1:
+                self.r1_ow = self.outer_walls_help[0].r1
+                self.c1_ow = self.outer_walls_help[0].c1_korr
+            else:
+                self.r1_ow, self.c1_ow = \
+                        self.calc_chain_matrix(self.outer_walls_help, omega)
+        else:
+            pass
+
+        if len(self.ground_floors) > 0:
+            if len(self.ground_floors) == 1:
+                self.r1_gf = self.ground_floors[0].r1
+                self.c1_gf = self.ground_floors[0].c1_korr
+            else:
+                self.r1_gf, self.c1_gf = \
+                        self.calc_chain_matrix(self.ground_floors, omega)
+        else:
+            pass
+
+        if len(self.inner_walls) > 0:
+            if len(self.inner_walls) == 1:
+                self.r1_iw = self.inner_walls[0].r1
+                self.c1_iw = self.inner_walls[0].c1
+            else:
+                self.r1_iw, self.c1_iw = \
+                        self.calc_chain_matrix(self.inner_walls, omega)
+        else:
+            pass
+
+        if merge_windows is False:
+            if len(self.outer_walls) > 0 and len(self.windows) > 0:
+                sum_r1_win = 0
+                for win_count in self.windows:
+                    sum_r1_win += 1/(win_count.r1 + win_count.r_outer_comb)
+
+                self.r1_win = 1/sum_r1_win
 
                 self.r1_ow = 1/(1/self.r1_ow)
+                self.r1_gf = 1/(1/self.r1_gf)
 
-                self.r_total = 1/(self.ua_value_ow)
-                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow))
-                self.r_rest_ow = self.r_total - self.r1_ow - \
+                self.r_total_ow = 1/self.ua_value_ow
+                self.r_total_gf = 1/self.ua_value_gf
+
+                self.r_rad_ow_iw = 1/(1/self.r_rad_inner_ow)
+                self.r_rad_gf_iw = 1/(1/self.r_rad_inner_gf)
+
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
+                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
             else:
                 warnings.warn("As no outer walls or no windows are defined\
                     lumped parameter cannot be calculated")
 
-        else:
-            raise ValueError("specify calculation method correctly")
+        if merge_windows is True:
+            if len(self.outer_walls) > 0:
+                for win_count in self.windows:
+                    self.r1_win += 1/(win_count.r1/6)
 
-    def calc_rc_wall_help(self, element_list, omega):
+                self.r1_ow = 1/(1/self.r1_ow+ (self.r1_win))
+                self.r1_gf = 1/(1/self.r1_gf)
+
+                self.r_total_ow = 1/(self.ua_value_ow + self.ua_value_win)
+                self.r_total_gf = 1/(self.ua_value_gf)
+
+                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
+                                      (1/self.r_rad_inner_win))
+                self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
+
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
+                    1/((1/self.r_conv_inner_ow) +
+                       (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
+                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
+
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
+    def calc_four_element(self,
+                          merge_windows,
+                          t_bt):
+        """calcs lumped parameter for two element model
+        """
+        omega = 2 * math.pi / 86400 / t_bt
+
+        for wall in self.outer_walls:
+            if type(wall).__name__ == "OuterWall":
+                self.outer_walls_help.append(wall)
+            if type(wall).__name__ == "Rooftop":
+                self.rooftops.append(wall)
+            if type(wall).__name__ == "GroundFloor":
+                self.ground_floors.append(wall)
+
+        if len(self.outer_walls_help) > 0:
+            if len(self.outer_walls_help) == 1:
+                self.r1_ow = self.outer_walls_help[0].r1
+                self.c1_ow = self.outer_walls_help[0].c1_korr
+            else:
+                self.r1_ow, self.c1_ow = \
+                        self.calc_chain_matrix(self.outer_walls_help, omega)
+        else:
+            pass
+
+        if len(self.rooftops) > 0:
+            if len(self.rooftops) == 1:
+                self.r1_rt = self.rooftops[0].r1
+                self.c1_rt = self.rooftops[0].c1_korr
+            else:
+                self.r1_rt, self.c1_rt = \
+                        self.calc_chain_matrix(self.rooftops, omega)
+        else:
+            pass
+
+        if len(self.ground_floors) > 0:
+            if len(self.ground_floors) == 1:
+                self.r1_gf = self.ground_floors[0].r1
+                self.c1_gf = self.ground_floors[0].c1_korr
+            else:
+                self.r1_gf, self.c1_gf = \
+                        self.calc_chain_matrix(self.ground_floors, omega)
+        else:
+            pass
+
+        if len(self.inner_walls) > 0:
+            if len(self.inner_walls) == 1:
+                self.r1_iw = self.inner_walls[0].r1
+                self.c1_iw = self.inner_walls[0].c1
+            else:
+                self.r1_iw, self.c1_iw = \
+                        self.calc_chain_matrix(self.inner_walls, omega)
+        else:
+            pass
+
+        if merge_windows is False:
+            if len(self.outer_walls) > 0 and len(self.windows) > 0:
+                sum_r1_win = 0
+                for win_count in self.windows:
+                    sum_r1_win += 1/((win_count.r1) + win_count.r_outer_comb)
+
+                self.r1_win = 1/sum_r1_win
+
+                self.r1_ow = 1/(1/self.r1_ow)
+                self.r1_gf = 1/(1/self.r1_gf)
+                self.r1_rt = 1/(1/self.r1_rt)
+
+                self.r_total_ow = 1/(self.ua_value_ow)
+                self.r_total_gf = 1/(self.ua_value_gf)
+                self.r_total_rt = 1/(self.ua_value_rt)
+
+                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow))
+                self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
+                self.r_rad_rt_iw = 1/((1/self.r_rad_inner_rt))
+
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
+                    1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
+                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
+                self.r_rest_rt = self.r_total_rt - self.r1_rt - \
+                    1/(1/self.r_conv_inner_rt+1/self.r_rad_rt_iw)
+
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
+        if merge_windows is True:
+            #this used to be calculation_core = vdi
+            if len(self.outer_walls) > 0:
+                for win_count in self.windows:
+                    self.r1_win += 1/(win_count.r1/6)
+
+
+                self.r1_ow = 1/(1/self.r1_ow+ (self.r1_win))
+                self.r1_gf = 1/(1/self.r1_gf)
+                self.r1_rt = 1/(1/self.r1_rt)
+
+                self.r_total_ow = 1/(self.ua_value_ow + self.ua_value_win)
+                self.r_total_gf = 1/(self.ua_value_gf)
+                self.r_total_rt = 1/(self.ua_value_rt)
+
+                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
+                                      (1/self.r_rad_inner_win))
+                self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
+                self.r_rad_rt_iw = 1/((1/self.r_rad_inner_rt))
+
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
+                    1/((1/self.r_conv_inner_ow) +
+                       (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
+                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
+                self.r_rest_rt = self.r_total_rt - self.r1_rt - \
+                    1/(1/self.r_conv_inner_rt+1/self.r_rad_rt_iw)
+
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
+    def calc_chain_matrix(self, element_list, omega):
         '''Matrix calculation.
 
         This is a helper function for def parallel_connection() to keep the
@@ -354,23 +694,43 @@ class ThermalZone(object):
                       element_list[wall_count+1].c1)
         return r1, c1
 
-    def combine_building_elements(self):
-        '''Combines values of several building elements.
+    def sum_building_elements(self):
+        '''sums values of several building elements to zone based parameters
 
         Sums UA-Values, R-Values and area. Calculates the weighted coeffiecient
-        of heat transfer for walls, windows. Calculates the weighted g-Value
-        for windows.
-        '''
+        of heat transfer for outer walls, inner walls, groundfloors, roofs and
+        windows
 
-        sum_r_conv_iw = 0
-        sum_r_rad_iw = 0
-        sum_r_comb_iw = 0
+        '''
+        #inner wall
+        sum_r_conv_inner_iw = 0
+        sum_r_rad_inner_iw = 0
+        sum_r_comb_inner_iw = 0
+        sum_r_conv_outer_iw = 0
+        sum_r_rad_outer_iw = 0
+        sum_r_comb_outer_iw = 0
+        #outer wall
         sum_r_conv_inner_ow = 0
         sum_r_rad_inner_ow = 0
         sum_r_comb_inner_ow = 0
         sum_r_conv_outer_ow = 0
         sum_r_rad_outer_ow = 0
         sum_r_comb_outer_ow = 0
+        #ground floor
+        sum_r_conv_inner_gf = 0
+        sum_r_rad_inner_gf = 0
+        sum_r_comb_inner_gf = 0
+        sum_r_conv_outer_gf = 0
+        sum_r_rad_outer_gf = 0
+        sum_r_comb_outer_gf = 0
+        #rooftop
+        sum_r_conv_inner_rt = 0
+        sum_r_rad_inner_rt = 0
+        sum_r_comb_inner_rt = 0
+        sum_r_conv_outer_rt = 0
+        sum_r_rad_outer_rt = 0
+        sum_r_comb_outer_rt = 0
+        #window
         sum_r_conv_inner_win = 0
         sum_r_rad_inner_win = 0
         sum_r_comb_inner_win = 0
@@ -378,85 +738,124 @@ class ThermalZone(object):
         sum_r_rad_outer_win = 0
         sum_r_comb_outer_win = 0
         sum_g_value = 0
-        sum_area_ow_rt = 0
 
-        for wall_count in self.inner_walls:
-            self.ua_value_iw += wall_count.ua_value
+        for in_wall in self.inner_walls:
+            self.ua_value_iw += in_wall.ua_value
+            self.area_iw += in_wall.area
+            sum_r_conv_inner_iw += 1 / in_wall.r_inner_conv
+            sum_r_rad_inner_iw += 1 / in_wall.r_inner_rad
+            sum_r_comb_inner_iw += 1 / in_wall.r_inner_comb
+            sum_r_conv_outer_iw += 1 / in_wall.r_outer_conv
+            sum_r_rad_outer_iw += 1 / in_wall.r_outer_rad
+            sum_r_comb_outer_iw += 1 / in_wall.r_outer_comb
 
-            sum_r_conv_iw += 1/(wall_count.r_inner_conv)
-            sum_r_rad_iw += 1/(wall_count.r_inner_rad)
-            sum_r_comb_iw += 1/(wall_count.r_inner_comb)
+        self.r_conv_inner_iw = 1 / sum_r_conv_inner_iw
+        self.r_rad_inner_iw = 1 / sum_r_rad_inner_iw
+        self.r_comb_inner_iw = 1 / sum_r_comb_inner_iw
+        self.r_conv_outer_iw = 1 / sum_r_conv_outer_iw
+        self.r_rad_outer_iw = 1 / sum_r_rad_outer_iw
+        self.r_comb_outer_iw = 1 / sum_r_comb_outer_iw
 
-            self.area_iw += wall_count.area
+        self.alpha_conv_iw = 1/(self.r_conv_inner_iw * self.area_iw)
+        self.alpha_rad_iw = 1/(self.r_rad_inner_iw * self.area_iw)
+        self.alpha_comb_iw = 1/(self.r_comb_inner_iw * self.area_iw)
 
-        self.r_conv_iw = 1/sum_r_conv_iw
-        self.r_rad_iw = 1/sum_r_rad_iw
-        self.r_comb_iw = 1/sum_r_comb_iw
+        for out_wall in self.outer_walls:
+            if type(out_wall).__name__ == "OuterWall":
+                self.ua_value_ow += out_wall.ua_value
+                self.area_ow += out_wall.area
+                sum_r_conv_inner_ow += 1 / out_wall.r_inner_conv
+                sum_r_rad_inner_ow += 1 / out_wall.r_inner_rad
+                sum_r_comb_inner_ow += 1 / out_wall.r_inner_comb
+                sum_r_conv_outer_ow += 1 / out_wall.r_outer_conv
+                sum_r_rad_outer_ow += 1 / out_wall.r_outer_rad
+                sum_r_comb_outer_ow += 1 / out_wall.r_outer_comb
+            elif type(out_wall).__name__ == "Rooftop":
+                self.rooftops.append(out_wall)
+                self.ua_value_rt += out_wall.ua_value
+                self.area_rt += out_wall.area
+                sum_r_conv_inner_rt += 1 / out_wall.r_inner_conv
+                sum_r_rad_inner_rt += 1 / out_wall.r_inner_rad
+                sum_r_comb_inner_rt += 1 / out_wall.r_inner_comb
+                sum_r_conv_outer_rt += 1 / out_wall.r_outer_conv
+                sum_r_rad_outer_rt += 1 / out_wall.r_outer_rad
+                sum_r_comb_outer_rt += 1 / out_wall.r_outer_comb
+            elif type(out_wall).__name__ == "GroundFloor":
+                self.ground_floors.append(out_wall)
+                self.ua_value_gf += out_wall.ua_value
+                self.area_gf += out_wall.area
+                sum_r_conv_inner_gf += 1 / out_wall.r_inner_conv
+                sum_r_rad_inner_gf += 1 / out_wall.r_inner_rad
+                sum_r_comb_inner_gf += 1 / out_wall.r_inner_comb
+                #sum_r_conv_outer_gf += 1 / out_wall.r_outer_conv
+                #sum_r_rad_outer_gf += 1 / out_wall.r_outer_rad
+                #sum_r_comb_outer_gf += 1 / out_wall.r_outer_comb
 
-        self.alpha_conv_iw = (1/(self.r_conv_iw*self.area_iw))
-        self.alpha_rad_iw = 1/(self.r_rad_iw*self.area_iw)
-        self.alpha_comb_iw = 1/(self.r_comb_iw*self.area_iw)
+        if [sum_r_comb_inner_ow, sum_r_comb_outer_ow] != 0:
+            self.r_conv_inner_ow = 1 / sum_r_conv_inner_ow
+            self.r_rad_inner_ow = 1 / sum_r_rad_inner_ow
+            self.r_comb_inner_ow = 1 / sum_r_comb_inner_ow
+            self.r_conv_outer_ow = 1 / sum_r_conv_outer_ow
+            self.r_rad_outer_ow = 1 / sum_r_rad_outer_ow
+            self.r_comb_outer_ow = 1 / sum_r_comb_outer_ow
+            self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
+            self.alpha_rad_inner_ow = (1/(self.r_rad_inner_ow*self.area_ow))
+            self.alpha_comb_inner_ow = (1/(self.r_comb_inner_ow*self.area_ow))
+            self.alpha_conv_outer_ow = (1/(self.r_conv_outer_ow*self.area_ow))
+            self.alpha_rad_outer_ow = (1/(self.r_rad_outer_ow*self.area_ow))
+            self.alpha_comb_outer_ow = (1/(self.r_comb_outer_ow*self.area_ow))
 
-        for wall_count in self.outer_walls:
+        if sum_r_comb_inner_rt != 0:
+            self.r_conv_inner_rt = 1 / sum_r_conv_inner_rt
+            self.r_rad_inner_rt = 1 / sum_r_rad_inner_rt
+            self.r_comb_inner_rt = 1 / sum_r_comb_inner_rt
+            self.r_conv_outer_rt = 1 / sum_r_conv_outer_rt
+            self.r_rad_outer_rt = 1 / sum_r_rad_outer_rt
+            self.r_comb_outer_rt = 1 / sum_r_comb_outer_rt
+            self.alpha_conv_inner_rt = (1/(self.r_conv_inner_rt*self.area_rt))
+            self.alpha_rad_inner_rt = (1/(self.r_rad_inner_rt*self.area_rt))
+            self.alpha_comb_inner_rt = (1/(self.r_comb_inner_rt*self.area_rt))
+            self.alpha_conv_outer_rt = (1/(self.r_conv_outer_rt*self.area_rt))
+            self.alpha_rad_outer_rt = (1/(self.r_rad_outer_rt*self.area_rt))
+            self.alpha_comb_outer_rt = (1/(self.r_comb_outer_rt*self.area_rt))
+        if sum_r_comb_inner_gf != 0:
+            self.r_conv_inner_gf = 1 / sum_r_conv_inner_gf
+            self.r_rad_inner_gf = 1 / sum_r_rad_inner_gf
+            self.r_comb_inner_gf = 1 / sum_r_comb_inner_gf
+            self.alpha_conv_inner_gf = (1/(self.r_conv_inner_gf*self.area_gf))
+            self.alpha_rad_inner_gf = (1/(self.r_rad_inner_gf*self.area_gf))
+            self.alpha_comb_inner_gf = (1/(self.r_comb_inner_gf*self.area_gf))
 
-            self.ua_value_ow += wall_count.ua_value
+        for win in self.windows:
 
-            sum_r_conv_inner_ow += 1/(wall_count.r_inner_conv)
-            sum_r_rad_inner_ow += 1/(wall_count.r_inner_rad)
-            sum_r_comb_inner_ow += 1/(wall_count.r_inner_comb)
+            self.ua_value_win += win.ua_value
+            self.area_win += win.area
+            sum_r_conv_inner_win += 1/ win.r_inner_conv
+            sum_r_rad_inner_win += 1/ win.r_inner_rad
+            sum_r_comb_inner_win += 1/ win.r_inner_comb
+            sum_r_conv_outer_win += 1/ win.r_outer_conv
+            sum_r_rad_outer_win += 1/ win.r_outer_rad
+            sum_r_comb_outer_win += 1/ win.r_outer_comb
+            sum_g_value += win.g_value * win.area
 
-            self.area_ow += wall_count.area
-
-            if type(wall_count).__name__ == "OuterWall" \
-                    or type(wall_count).__name__ == "Rooftop":
-                sum_r_conv_outer_ow += 1/(wall_count.r_outer_conv)
-                sum_r_rad_outer_ow += 1/(wall_count.r_outer_rad)
-                sum_r_comb_outer_ow += 1/(wall_count.r_outer_comb)
-                sum_area_ow_rt += wall_count.area
-            else:
-                pass
-
-        self.r_conv_inner_ow = 1/sum_r_conv_inner_ow
-        self.r_rad_inner_ow = 1/sum_r_rad_inner_ow
-        self.r_comb_inner_ow = 1/sum_r_comb_inner_ow
-        self.r_conv_outer_ow = 1/sum_r_conv_outer_ow
-        self.r_rad_outer_ow = 1/sum_r_rad_outer_ow
-        self.r_comb_outer_ow = 1/sum_r_comb_outer_ow
-
-        self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
-        self.alpha_comb_inner_ow = (1/(self.r_comb_inner_ow*self.area_ow))
-        self.alpha_conv_outer_ow = (1/(self.r_conv_outer_ow*sum_area_ow_rt))
-        self.alpha_comb_outer_ow = (1/(self.r_comb_outer_ow*sum_area_ow_rt))
-
-        for count_win in self.windows:
-
-            self.ua_value_win += count_win.ua_value
-
-            sum_r_conv_inner_win += 1/(count_win.r_inner_conv)
-            sum_r_rad_inner_win += 1/(count_win.r_inner_rad)
-            sum_r_comb_inner_win += 1/(count_win.r_inner_comb)
-            sum_r_conv_outer_win += 1/(count_win.r_outer_conv)
-            sum_r_rad_outer_win += 1/(count_win.r_outer_rad)
-            sum_r_comb_outer_win += 1/(count_win.r_outer_comb)
-
-            sum_g_value += count_win.g_value * count_win.area
-
-            self.area_win += count_win.area
-
-        self.r_conv_inner_win = 1/sum_r_conv_inner_win
-        self.r_rad_inner_win = 1/sum_r_rad_inner_win
-        self.r_comb_inner_win = 1/sum_r_comb_inner_win
-        self.r_conv_outer_win = 1/sum_r_conv_outer_win
-        self.r_rad_outer_win = 1/sum_r_rad_outer_win
-        self.r_comb_outer_win = 1/sum_r_comb_outer_win
-
-        self.alpha_conv_inner_win = (1/(self.r_conv_inner_win*self.area_win))
-        self.alpha_comb_outer_win = (1/(self.r_comb_outer_win*self.area_win))
-        self.alpha_conv_outer_win = (1/(self.r_conv_outer_win*self.area_win))
-
+        self.r_conv_inner_win = 1 / sum_r_conv_inner_win
+        self.r_rad_inner_win = 1 / sum_r_rad_inner_win
+        self.r_comb_inner_win = 1 / sum_r_comb_inner_win
+        self.r_conv_outer_win = 1 / sum_r_conv_outer_win
+        self.r_rad_outer_win = 1 / sum_r_rad_outer_win
+        self.r_comb_outer_win = 1 / sum_r_comb_outer_win
         self.weighted_g_value = sum_g_value / self.area_win
+        self.alpha_conv_inner_win = (1/(self.r_conv_inner_win*self.area_win))
+        self.alpha_rad_inner_win = (1/(self.r_rad_inner_win*self.area_win))
+        self.alpha_comb_inner_win = (1/(self.r_comb_inner_win*self.area_win))
+        self.alpha_conv_outer_win = (1/(self.r_conv_outer_win*self.area_win))
+        self.alpha_rad_outer_win = (1/(self.r_rad_outer_win*self.area_win))
+        self.alpha_comb_outer_win = (1/(self.r_comb_outer_win*self.area_win))
 
-    def calc_weightfactors(self, calculation_core):
+    def calc_wf_one_element(self, merge_windows):
+        pass
+
+    def calc_wf_two_element(self, merge_windows):
         '''Calculation of weightfactors.
 
         Calculates the weightfactors of the outer walls, including ground and
@@ -464,11 +863,12 @@ class ThermalZone(object):
 
         Parameters
         ----------
-        calculation_core : str
-            Setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
         '''
 
-        if calculation_core == 'vdi':
+        if merge_windows is True:
 
             for wall in self.outer_walls:
                 ua_help = wall.ua_value
@@ -505,7 +905,7 @@ class ThermalZone(object):
                 win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
                 win.area = area_help
 
-        elif calculation_core == 'ebc':
+        elif merge_windows is False:
 
             for wall in self.outer_walls:
                 ua_help = wall.ua_value
@@ -545,6 +945,158 @@ class ThermalZone(object):
         else:
             pass
 
+    def calc_wf_three_element(self, merge_windows):
+        '''Calculation of weightfactors.
+
+        Calculates the weightfactors of the outer walls, rooftops and ground
+        with possibility to merge windows into outer walls
+
+        Parameters
+        ----------
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
+        '''
+        if merge_windows is True:
+
+            for wall in self.outer_walls_help:
+                ua_help = wall.ua_value
+                for wall2 in self.outer_walls_help:
+                    if wall is wall2:
+                        pass
+                    elif wall.orientation == wall2.orientation and wall.tilt \
+                            == wall2.tilt:
+                        ua_help = ua_help + wall2.ua_value
+
+                wall.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+
+            for win in self.windows:
+                ua_help = win.ua_value
+                area_help = win.area
+                for win2 in self.windows:
+                    if win is win2:
+                        pass
+                    elif win.orientation == win2.orientation and win.tilt \
+                            == win2.tilt:
+                        ua_help = ua_help + win2.ua_value
+                        area_help = area_help + win2.area
+                win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+                win.area = area_help
+
+        elif merge_windows is False:
+
+            for wall in self.outer_walls_help:
+                ua_help = wall.ua_value
+                for wall2 in self.outer_walls_help:
+                    if wall is wall2:
+                        pass
+                    elif wall.orientation == wall2.orientation and wall.tilt \
+                            == wall2.tilt:
+                        ua_help = ua_help + wall2.ua_value
+                wall.wf_out = ua_help/self.ua_value_ow
+
+            for win in self.windows:
+                ua_help = win.ua_value
+                for win2 in self.windows:
+                    if win is win2:
+                        pass
+                    elif win.orientation == win2.orientation and win.tilt \
+                            == win2.tilt:
+                        ua_help = ua_help + win2.ua_value
+                win.wf_out = ua_help/(self.ua_value_win)
+
+        for wall in self.ground_floors:
+            ua_help = wall.ua_value
+            for wall2 in self.ground_floors:
+                if wall is wall2:
+                    pass
+                elif wall.orientation == wall2.orientation and wall.tilt \
+                        == wall2.tilt:
+                    ua_help = ua_help + wall2.ua_value
+
+            wall.wf_out = ua_help/self.ua_value_gf
+
+    def calc_wf_four_element(self, merge_windows):
+        '''Calculation of weightfactors.
+
+        Calculates the weightfactors of the outer walls, rooftops and ground
+        with possibility to merge windows into outer walls
+
+        Parameters
+        ----------
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
+        '''
+        if merge_windows is True:
+
+            for wall in self.outer_walls_help:
+                ua_help = wall.ua_value
+                for wall2 in self.outer_walls_help:
+                    if wall is wall2:
+                        pass
+                    elif wall.orientation == wall2.orientation and wall.tilt \
+                            == wall2.tilt:
+                        ua_help = ua_help + wall2.ua_value
+
+                wall.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+
+            for win in self.windows:
+                ua_help = win.ua_value
+                area_help = win.area
+                for win2 in self.windows:
+                    if win is win2:
+                        pass
+                    elif win.orientation == win2.orientation and win.tilt \
+                            == win2.tilt:
+                        ua_help = ua_help + win2.ua_value
+                        area_help = area_help + win2.area
+                win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+                win.area = area_help
+
+        elif merge_windows is False:
+
+            for wall in self.outer_walls_help:
+                ua_help = wall.ua_value
+                for wall2 in self.outer_walls_help:
+                    if wall is wall2:
+                        pass
+                    elif wall.orientation == wall2.orientation and wall.tilt \
+                            == wall2.tilt:
+                        ua_help = ua_help + wall2.ua_value
+                wall.wf_out = ua_help/self.ua_value_ow
+
+            for win in self.windows:
+                ua_help = win.ua_value
+                for win2 in self.windows:
+                    if win is win2:
+                        pass
+                    elif win.orientation == win2.orientation and win.tilt \
+                            == win2.tilt:
+                        ua_help = ua_help + win2.ua_value
+                win.wf_out = ua_help/(self.ua_value_win)
+
+        for wall in self.ground_floors:
+            ua_help = wall.ua_value
+            for wall2 in self.ground_floors:
+                if wall is wall2:
+                    pass
+                elif wall.orientation == wall2.orientation and wall.tilt \
+                        == wall2.tilt:
+                    ua_help = ua_help + wall2.ua_value
+
+            wall.wf_out = ua_help/self.ua_value_gf
+
+        for wall in self.rooftops:
+            ua_help = wall.ua_value
+            for wall2 in self.ground_floors:
+                if wall is wall2:
+                    pass
+                elif wall.orientation == wall2.orientation and wall.tilt \
+                        == wall2.tilt:
+                    ua_help = ua_help + wall2.ua_value
+
+            wall.wf_out = ua_help/self.ua_value_rt
 
     def find_wall(self, orientation, tilt):
         for i in self.outer_walls:
@@ -615,7 +1167,7 @@ class ThermalZone(object):
                     self.typical_width * self.parent.height_of_floors
         """
 
-    def calc_heat_load(self):
+    def calc_heat_load(self, number_of_elements=2):
         '''Norm heat load calculation.
 
         Calculates the norm heat load of the thermal zone.
@@ -624,8 +1176,21 @@ class ThermalZone(object):
         _heat_capac_air = 1.002
         _density_air = 1.25
 
-        self.heating_load = ((self.ua_value_ow+self.ua_value_win) +
-                             self.volume * self.infiltration_rate *
+        if number_of_elements == 1 or number_of_elements == 2:
+            self.heating_load = ((self.ua_value_ow + self.ua_value_win) +
+                             self.volume * self.infiltration_rate *\
+                                 _heat_capac_air * _density_air) * \
+                            (self.t_inside - self.t_outside)
+        elif number_of_elements == 3:
+            self.heating_load = ((self.ua_value_ow + self.ua_value_gf +
+                                     self.ua_value_win) +
+                             self.volume * self.infiltration_rate *\
+                             _heat_capac_air * _density_air) * \
+                            (self.t_inside - self.t_outside)
+        elif number_of_elements == 4:
+            self.heating_load = ((self.ua_value_ow + self.ua_value_gf +
+                                  self.ua_value_rt + self.ua_value_win) +
+                             self.volume * self.infiltration_rate *\
                              _heat_capac_air*_density_air) * \
                             (self.t_inside - self.t_outside)
 
@@ -639,28 +1204,18 @@ class ThermalZone(object):
             win_count.replace_window(self.parent.year_of_retrofit, window_type)
 
     def set_calc_default(self):
+        self.outer_walls_help = []
 
-        # Calculated values for InnerWall for each Zone
-        self.r1_iw = 0.0
-        self.c1_iw = 0.0
-        self.ua_value_iw = 0.0
-        self.r_conv_iw = 0.0
-        self.r_rad_iw = 0.0
-        self.r_comb_iw = 0.0
-        self.area_iw = 0.0
-        self.alpha_conv_iw = 0.0
-        self.alpha_rad_iw = 0.0
-        self.alpha_comb_iw = 0.0
-
-        # Calculated values for OuterWall for each Zone
         self.r1_ow = 0.0
         self.c1_ow = 0.0
         self.r_rest_ow = 0.0
-        self.r_total = 0.0
+        self.r_total_ow = 0.0
+
         self.weightfactor_ow = []
         self.weightfactor_ground = []
-        self.orientation_wall = []
         self.tilt_wall = []
+        self.orientation_wall = []
+
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
         self.r_rad_inner_ow = 0.0
@@ -669,11 +1224,69 @@ class ThermalZone(object):
         self.r_rad_outer_ow = 0.0
         self.r_comb_outer_ow = 0.0
         self.area_ow = 0.0
-        self.alpha_comb_inner_ow = 0.0
+
         self.alpha_conv_inner_ow = 0.0
-        self.alpha_comb_outer_ow = 0.0
+        self.alpha_rad_inner_ow = 0.0
+        self.alpha_comb_inner_ow = 0.0
+
         self.alpha_conv_outer_ow = 0.0
+        self.alpha_rad_outer_ow = 0.0
+        self.alpha_comb_outer_ow = 0.0
+
         self.r_rad_ow_iw = 0.0
+
+        self.r1_rt = 0.0
+        self.c1_rt = 0.0
+        self.r_rest_rt = 0.0
+        self.r_total_rt = 0.0
+        self.weightfactor_rt = []
+        self.tilt_rt = []
+        self.orientation_rt = []
+        self.ua_value_rt = 0.0
+        self.r_conv_inner_rt = 0.0
+        self.r_rad_inner_rt = 0.0
+        self.r_comb_inner_rt = 0.0
+        self.r_conv_outer_rt = 0.0
+        self.r_rad_outer_rt = 0.0
+        self.r_comb_outer_rt = 0.0
+        self.area_rt = 0.0
+
+        self.alpha_conv_inner_rt = 0.0
+        self.alpha_rad_inner_rt = 0.0
+        self.alpha_comb_inner_rt = 0.0
+
+        self.alpha_conv_outer_rt = 0.0
+        self.alpha_rad_outer_rt = 0.0
+        self.alpha_comb_outer_rt = 0.0
+
+        self.r_rad_rt_iw = 0.0
+
+        # Calculated values for GroundFlor for each Zone
+        self.r1_gf = 0.0
+        self.c1_gf = 0.0
+        self.r_rest_gf = 0.0
+        self.r_total_gf = 0.0
+        self.weightfactor_gf = []
+        self.tilt_gf = []
+        self.orientation_gf = []
+        self.ua_value_gf = 0.0
+        self.r_conv_inner_gf = 0.0
+        self.r_rad_inner_gf = 0.0
+        self.r_comb_inner_gf = 0.0
+        self.r_conv_outer_gf = 0.0
+        self.r_rad_outer_gf = 0.0
+        self.r_comb_outer_gf = 0.0
+        self.area_gf = 0.0
+
+        self.alpha_conv_inner_gf = 0.0
+        self.alpha_rad_inner_gf = 0.0
+        self.alpha_comb_inner_gf = 0.0
+
+        self.alpha_conv_outer_gf = 0.0
+        self.alpha_rad_outer_gf = 0.0
+        self.alpha_comb_outer_gf = 0.0
+
+        self.r_rad_gf_iw = 0.0
 
         # Calculated values for windows for each Zone
         self.r1_win = 0.0
@@ -690,11 +1303,16 @@ class ThermalZone(object):
         self.r_rad_outer_win = 0.0
         self.r_comb_outer_win = 0.0
         self.area_win = 0.0
-        self.alpha_conv_inner_win = 0.0
-        self.alpha_comb_outer_win = 0.0
-        self.alpha_conv_outer_win = 0.0
-        self.weighted_g_value = 0.0
 
+        self.alpha_conv_inner_win = 0.0
+        self.alpha_rad_inner_win = 0.0
+        self.alpha_comb_inner_win = 0.0
+
+        self.alpha_conv_outer_win = 0.0
+        self.alpha_rad_outer_win = 0.0
+        self.alpha_comb_outer_win = 0.0
+
+        self.weighted_g_value = 0.0
         self.heating_load = 0.0
         self.cooling_load = 0.0
 
@@ -741,8 +1359,6 @@ class ThermalZone(object):
 
         elif type(building_element).__name__ in ("Window"):
             self._windows.append(building_element)
-
-
 
     @property
     def parent(self):
@@ -829,7 +1445,7 @@ class ThermalZone(object):
 
     @area.setter
     def area(self, value):
-        
+
         if isinstance(value, float):
             pass
         elif value is None:
@@ -838,8 +1454,8 @@ class ThermalZone(object):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert zone area to float")        
-        
+                raise ValueError("Can't convert zone area to float")
+
         if self.parent is not None:
             if self._area is None:
                 if self.parent.net_leased_area is None:
@@ -859,7 +1475,7 @@ class ThermalZone(object):
 
     @volume.setter
     def volume(self, value):
-        
+
         if isinstance(value, float):
             pass
         elif value is None:
@@ -868,8 +1484,8 @@ class ThermalZone(object):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert zone volume to float")         
-        
+                raise ValueError("Can't convert zone volume to float")
+
         if self.parent is not None:
             if self._volume is None:
                 self._volume = value
@@ -882,7 +1498,7 @@ class ThermalZone(object):
             self._volume = value
 
     @property
-    def infiltration_rate(self):        
+    def infiltration_rate(self):
         return self._infiltration_rate
 
     @infiltration_rate.setter
@@ -898,9 +1514,9 @@ class ThermalZone(object):
                 self._infiltration_rate = value
             except:
                 raise ValueError("Can't convert infiltration rate to float")
-                
+
     @property
-    def t_inside(self):        
+    def t_inside(self):
         return self._t_inside
 
     @t_inside.setter
@@ -915,9 +1531,9 @@ class ThermalZone(object):
                 self._t_inside = value
             except:
                 raise ValueError("Can't convert temperature to float")
-                
+
     @property
-    def t_outside(self):        
+    def t_outside(self):
         return self._t_outside
 
     @t_outside.setter
