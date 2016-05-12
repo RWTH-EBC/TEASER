@@ -188,15 +188,20 @@ class Building(object):
 
 
         """
+        if self.height_of_floors is None:
+            self.height_of_floors = height_of_floor
+        else:
+            pass
         if self.bldg_height is None:
             raise AttributeError("building height needs to be defined for gml")
 
         if self.number_of_floors is not None:
-            self.net_leased_area = self.get_footprint_gml().surface_area * \
+            self.net_leased_area = self.get_footprint_gml() * \
                                     self.number_of_floors
             return
 
         else:
+            print(self.bldg_height, self.height_of_floors)
             self.number_of_floors = int(round((self.bldg_height /
                                                self.height_of_floors)))
             if self.number_of_floors == 0:
@@ -835,8 +840,11 @@ class Building(object):
             self.__parent = value
 
             if inspect.isclass(Building):
+                if self in self.__parent.buildings:
+                    pass
+                else:
+                    self.__parent.buildings.append(self)
 
-                self.__parent.buildings.append(self)
         else:
 
             self.__parent = None

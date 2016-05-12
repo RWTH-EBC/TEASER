@@ -65,10 +65,12 @@ def load_gml(path, prj):
                 _set_attributes(bldg=bldg, gml_bldg=part.BuildingPart)
                 bldg.set_height_gml()
         else:
+
             if city_object.Feature.function:
                 if city_object.Feature.function[0].value() == "1000":
                     bldg = SingleFamilyDwelling(parent=prj,
-                                    name=city_object.Feature.id)
+                                                name=city_object.Feature.id)
+
                 elif city_object.Feature.function[0].value() == "1120":
                     bldg = Office(parent=prj,
                                     name=city_object.Feature.id)
@@ -86,6 +88,7 @@ def load_gml(path, prj):
                 bldg.set_gml_attributes()
             except:
                 pass
+
 
 def _set_attributes(bldg, gml_bldg):
     """tries to set attributes for type building generation
@@ -158,7 +161,7 @@ def _convert_bldg(bldg, function):
     function : str
         function from CityGML code list 1000 is residential 1120 is office
     """
-
+    parent_help = bldg.parent
     if function == "1000":
         from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
             import SingleFamilyDwelling
@@ -167,11 +170,11 @@ def _convert_bldg(bldg, function):
         from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
         bldg.__class__ = Office
     gml_surfaces_help = bldg.gml_surfaces
-    parent_help = bldg.parent
+
     name_help = bldg.name
     bldg.__init__(parent=None)
     bldg.gml_surfaces = gml_surfaces_help
-    bldg.__parent = parent_help
+    bldg.parent = parent_help
     bldg.__name = name_help
 
 
@@ -200,6 +203,9 @@ class SurfaceGML(object):
                  boundary=None):
         self.gml_surface = gml_surface
         self.name = boundary
+        self.surface_area = None
+        self.surface_orientation = None
+        self.surface_tilt = None
 
         self.surface_area = self.get_gml_area()
         self.surface_orientation = self.get_gml_orientation()
