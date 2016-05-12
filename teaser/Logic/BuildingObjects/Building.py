@@ -395,13 +395,23 @@ class Building(object):
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
+        number_of_elements = 2
+        merge_windows = True
         if calculation_method is not None:
             self.calculation_method = calculation_method
+            if self.calculation_method == 'vdi':
+                number_of_elements = 2
+                merge_windows = True
+            elif self.calculation_method == 'ebc':
+                number_of_elements = 2
+                merge_windows = False
         else:
             pass
 
         for zone in self.thermal_zones:
-            zone.calc_zone_parameters(self.calculation_method)
+            zone.calc_zone_parameters(number_of_elements=number_of_elements,
+                                      merge_windows=merge_windows,
+                                      t_bt=5)
             self.sum_heating_load += zone.heating_load
         self.compare_orientation()
 
@@ -411,6 +421,8 @@ class Building(object):
 
         compares orientation and tilt of all outer building elements and then
         creates lists for zone weightfactors and building orientation and tilt
+
+        This is an AixLib specific function!
 
         '''
 
