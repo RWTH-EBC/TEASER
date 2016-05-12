@@ -152,6 +152,9 @@ def _convert_bldg(bldg, function):
     Parameters
     ----------
 
+    bldg : Building()
+        TEASER instance of a building
+
     function : str
         function from CityGML code list 1000 is residential 1120 is office
     """
