@@ -111,17 +111,17 @@ def _create_building(bldg, city_object):
         for bound_surf in city_object.Feature.boundedBy_:
             for comp_member in bound_surf.BoundarySurface.lod2MultiSurface.MultiSurface.surfaceMember:
                 try: #modelling option 1
-                    bldg.gml_surfaces.append(Surface_gml(
+                    bldg.gml_surfaces.append(SurfaceGML(
                         comp_member.Surface.exterior.Ring.posList.value()))
                 except: #modelling option 2
                     for pos_list in comp_member.Surface.surfaceMember:
-                        bldg.gml_surfaces.append(Surface_gml(
+                        bldg.gml_surfaces.append(SurfaceGML(
                             pos_list.Surface.exterior.Ring.posList.value()))
     #if a building Feature has no boundedBy_ but a lod1solid it is LOD1
     elif city_object.Feature.lod1Solid:
         for member in city_object.Feature.lod1Solid.Solid.exterior\
                 .Surface.surfaceMember:
-            bldg.gml_surfaces.append(Surface_gml(
+            bldg.gml_surfaces.append(SurfaceGML(
                 member.Surface.exterior.Ring.posList.value()))
 
 
@@ -130,17 +130,17 @@ def _create_building_part(bldg, part):
         for bound_surf in part.BuildingPart.boundedBy_:
             for comp_member in bound_surf.BoundarySurface.lod2MultiSurface.MultiSurface.surfaceMember:
                 try: #modelling option 1
-                    bldg.gml_surfaces.append(Surface_gml(
+                    bldg.gml_surfaces.append(SurfaceGML(
                         comp_member.Surface.exterior.Ring.posList.value()))
                 except: #modelling option 2
                     for pos_list in comp_member.Surface.surfaceMember:
-                        bldg.gml_surfaces.append(Surface_gml(
+                        bldg.gml_surfaces.append(SurfaceGML(
                             pos_list.Surface.exterior.Ring.posList.value()))
     #if a building Feature has no boundedBy_ but a lod1solid it is LOD1
     elif part.BuildingPart.lod1Solid:
         for member in part.BuildingPart.lod1Solid.Solid.exterior\
                 .Surface.surfaceMember:
-            bldg.gml_surfaces.append(Surface_gml(
+            bldg.gml_surfaces.append(SurfaceGML(
                 member.Surface.exterior.Ring.posList.value()))
 
 def convert_bldg(bldg, function):
@@ -171,7 +171,8 @@ def convert_bldg(bldg, function):
         bldg.__parent = parent_help
         bldg.__name = name_help
 
-class Surface_gml(object):
+
+class SurfaceGML(object):
     """Class for calculating attributes of CityGML surfaces
 
     this class automatically calculates surface area using an algorithm for
@@ -368,4 +369,3 @@ class Surface_gml(object):
             total[2] += prod[2]
         result = np.dot(total, self.unit_normal(poly[0], poly[1], poly[2]))
         return abs(result/2)
-    
