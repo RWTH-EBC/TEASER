@@ -962,7 +962,9 @@ class Test_teaser(object):
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].load_type_element(1988, "heavy")
         therm_zone.inner_walls[0].load_type_element(1988, "light")
-        therm_zone.windows[0].load_type_element(1988, "heavy")
+        therm_zone.windows[0].load_type_element(
+            1988,
+            "Kunststofffenster, Isolierverglasung")
 
     def test_save_type_element(self):
         '''test of save_type_element, no parameter checking'''
