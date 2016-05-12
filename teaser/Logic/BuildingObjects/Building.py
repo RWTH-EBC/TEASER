@@ -339,6 +339,8 @@ class Building(object):
         compares orientation and tilt of all outer building elements and then
         creates lists for zone weightfactors and building orientation and tilt
 
+        This is an AixLib specific function!
+
         '''
 
         orient_tilt_help = []
