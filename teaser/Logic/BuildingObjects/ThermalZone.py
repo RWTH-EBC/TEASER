@@ -82,6 +82,7 @@ class ThermalZone(object):
         self.rooftops = []
         self.ground_floors = []
         self._windows = []
+        self.outer_walls_help = []
         self._use_conditions = None
         self.typical_length = None
         self.typical_width = None
@@ -379,6 +380,113 @@ class ThermalZone(object):
                 warnings.warn("As no outer walls or no windows are defined\
                     lumped parameter cannot be calculated")
 
+    def calc_three_element(self,
+                           merge_windows,
+                           t_bt):
+        """calcs lumped parameter for three element model
+        """
+        omega = 2 * math.pi / 86400 / t_bt
+
+        for wall in self.outer_walls:
+            if type(wall).__name__ == "OuterWall" or type(wall).__name__ == \
+                    "Rooftop":
+                self.outer_walls_help.append(wall)
+            if type(wall).__name__ == "GroundFloor":
+                self.ground_floors.append(wall)
+
+        self.ua_value_ow += self.ua_value_rt
+        self.area_ow += self.area_rt
+
+        if self.r_conv_inner_rt != 0:
+            self.r_conv_inner_ow = 1/((1/self.r_conv_inner_ow)+(
+                1/self.r_conv_inner_rt))
+        if self.r_rad_inner_gf != 0:
+            self.r_rad_inner_ow = 1/((1/self.r_rad_inner_ow)+(
+            1/self.r_rad_inner_rt))
+
+        self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
+        self.alpha_rad_inner_ow = (1/(self.r_rad_inner_ow*self.area_ow))
+
+        if len(self.outer_walls_help) > 0:
+            if len(self.outer_walls_help) == 1:
+                self.r1_ow = self.outer_walls_help[0].r1
+                self.c1_ow = self.outer_walls_help[0].c1_korr
+            else:
+                self.r1_ow, self.c1_ow = \
+                        self.calc_chain_matrix(self.outer_walls_help, omega)
+        else:
+            pass
+
+        if len(self.ground_floors) > 0:
+            if len(self.ground_floors) == 1:
+                self.r1_gf = self.ground_floors[0].r1
+                self.c1_gf = self.ground_floors[0].c1_korr
+            else:
+                self.r1_gf, self.c1_gf = \
+                        self.calc_chain_matrix(self.ground_floors, omega)
+        else:
+            pass
+
+        if len(self.inner_walls) > 0:
+            if len(self.inner_walls) == 1:
+                self.r1_iw = self.inner_walls[0].r1
+                self.c1_iw = self.inner_walls[0].c1
+            else:
+                self.r1_iw, self.c1_iw = \
+                        self.calc_chain_matrix(self.inner_walls, omega)
+        else:
+            pass
+
+        if merge_windows is False:
+            if len(self.outer_walls) > 0 and len(self.windows) > 0:
+                sum_r1_win = 0
+                for win_count in self.windows:
+                    sum_r1_win += 1/(win_count.r1 + win_count.r_outer_comb)
+
+                self.r1_win = 1/sum_r1_win
+
+                self.r1_ow = 1/(1/self.r1_ow)
+                self.r1_gf = 1/(1/self.r1_gf)
+
+                self.r_total_ow = 1/self.ua_value_ow
+                self.r_total_gf = 1/self.ua_value_gf
+
+                self.r_rad_ow_iw = 1/(1/self.r_rad_inner_ow)
+                self.r_rad_gf_iw = 1/(1/self.r_rad_inner_gf)
+
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
+                    1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
+                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
+        if merge_windows is True:
+            if len(self.outer_walls) > 0:
+                for win_count in self.windows:
+                    self.r1_win += 1/(win_count.r1/6)
+
+                self.r1_ow = 1/(1/self.r1_ow+ (self.r1_win))
+                self.r1_gf = 1/(1/self.r1_gf)
+
+                self.r_total_ow = 1/(self.ua_value_ow + self.ua_value_win)
+                self.r_total_gf = 1/(self.ua_value_gf)
+
+                self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
+                                      (1/self.r_rad_inner_win))
+                self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
+
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
+                    1/((1/self.r_conv_inner_ow) +
+                       (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
+                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
+
+            else:
+                warnings.warn("As no outer walls or no windows are defined\
+                    lumped parameter cannot be calculated")
+
     def calc_four_element(self,
                           merge_windows,
                           t_bt):
@@ -386,8 +494,6 @@ class ThermalZone(object):
         """
         omega = 2 * math.pi / 86400 / t_bt
 
-
-        self.outer_walls_help = []
         for wall in self.outer_walls:
             if type(wall).__name__ == "OuterWall":
                 self.outer_walls_help.append(wall)
@@ -825,6 +931,77 @@ class ThermalZone(object):
             self.weightfactor_ground.append(0)
         else:
             pass
+
+    def calc_wf_three_element(self, merge_windows):
+        '''Calculation of weightfactors.
+
+        Calculates the weightfactors of the outer walls, rooftops and ground
+        with possibility to merge windows into outer walls
+
+        Parameters
+        ----------
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
+        '''
+        if merge_windows is True:
+
+            for wall in self.outer_walls_help:
+                ua_help = wall.ua_value
+                for wall2 in self.outer_walls_help:
+                    if wall is wall2:
+                        pass
+                    elif wall.orientation == wall2.orientation and wall.tilt \
+                            == wall2.tilt:
+                        ua_help = ua_help + wall2.ua_value
+
+                wall.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+
+            for win in self.windows:
+                ua_help = win.ua_value
+                area_help = win.area
+                for win2 in self.windows:
+                    if win is win2:
+                        pass
+                    elif win.orientation == win2.orientation and win.tilt \
+                            == win2.tilt:
+                        ua_help = ua_help + win2.ua_value
+                        area_help = area_help + win2.area
+                win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+                win.area = area_help
+
+        elif merge_windows is False:
+
+            for wall in self.outer_walls_help:
+                ua_help = wall.ua_value
+                for wall2 in self.outer_walls_help:
+                    if wall is wall2:
+                        pass
+                    elif wall.orientation == wall2.orientation and wall.tilt \
+                            == wall2.tilt:
+                        ua_help = ua_help + wall2.ua_value
+                wall.wf_out = ua_help/self.ua_value_ow
+
+            for win in self.windows:
+                ua_help = win.ua_value
+                for win2 in self.windows:
+                    if win is win2:
+                        pass
+                    elif win.orientation == win2.orientation and win.tilt \
+                            == win2.tilt:
+                        ua_help = ua_help + win2.ua_value
+                win.wf_out = ua_help/(self.ua_value_win)
+
+        for wall in self.ground_floors:
+            ua_help = wall.ua_value
+            for wall2 in self.ground_floors:
+                if wall is wall2:
+                    pass
+                elif wall.orientation == wall2.orientation and wall.tilt \
+                        == wall2.tilt:
+                    ua_help = ua_help + wall2.ua_value
+
+            wall.wf_out = ua_help/self.ua_value_gf
 
     def calc_wf_four_element(self, merge_windows):
         '''Calculation of weightfactors.
