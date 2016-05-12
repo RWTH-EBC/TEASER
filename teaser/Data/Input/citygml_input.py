@@ -143,33 +143,33 @@ def _create_building_part(bldg, part):
             bldg.gml_surfaces.append(SurfaceGML(
                 member.Surface.exterior.Ring.posList.value()))
 
-def convert_bldg(bldg, function):
-        """converts the instance to a specific archetype building
+def _convert_bldg(bldg, function):
+    """converts the instance to a specific archetype building
 
-        DANGEROUS function, should only be used in combination with CityGML
-        and if you know what you are doing
+    DANGEROUS function, should only be used in combination with CityGML
+    and if you know what you are doing
 
-        Parameters
-        ----------
+    Parameters
+    ----------
 
-        function : str
-            function from CityGML code list 1000 is residential 1120 is office
-        """
+    function : str
+        function from CityGML code list 1000 is residential 1120 is office
+    """
 
-        if function == "1000":
-            from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
-                import SingleFamilyDwelling
-            bldg.__class__ = SingleFamilyDwelling
-        elif function == "1120":
-            from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
-            bldg.__class__ = Office
-        gml_surfaces_help = bldg.gml_surfaces
-        parent_help = bldg.parent
-        name_help = bldg.name
-        bldg.__init__(parent=None)
-        bldg.gml_surfaces = gml_surfaces_help
-        bldg.__parent = parent_help
-        bldg.__name = name_help
+    if function == "1000":
+        from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
+            import SingleFamilyDwelling
+        bldg.__class__ = SingleFamilyDwelling
+    elif function == "1120":
+        from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
+        bldg.__class__ = Office
+    gml_surfaces_help = bldg.gml_surfaces
+    parent_help = bldg.parent
+    name_help = bldg.name
+    bldg.__init__(parent=None)
+    bldg.gml_surfaces = gml_surfaces_help
+    bldg.__parent = parent_help
+    bldg.__name = name_help
 
 
 class SurfaceGML(object):
