@@ -143,55 +143,90 @@ def _create_building_part(bldg, part):
             bldg.gml_surfaces.append(Surface_gml(
                 member.Surface.exterior.Ring.posList.value()))
 
-class Surface_gml(object):
+def convert_bldg(bldg, function):
+        """converts the instance to a specific archetype building
 
-    def __init__(self, gml_surface, boundary = None):
+        DANGEROUS function, should only be used in combination with CityGML
+        and if you know what you are doing
+
+        Parameters
+        ----------
+
+        function : str
+            function from CityGML code list 1000 is residential 1120 is office
+        """
+
+        if function == "1000":
+            from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
+                import SingleFamilyDwelling
+            bldg.__class__ = SingleFamilyDwelling
+        elif function == "1120":
+            from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
+            bldg.__class__ = Office
+        gml_surfaces_help = bldg.gml_surfaces
+        parent_help = bldg.parent
+        name_help = bldg.name
+        bldg.__init__(parent=None)
+        bldg.gml_surfaces = gml_surfaces_help
+        bldg.__parent = parent_help
+        bldg.__name = name_help
+
+class Surface_gml(object):
+    """Class for calculating attributes of CityGML surfaces
+
+    this class automatically calculates surface area using an algorithm for
+    polygons with arbitrary number of points. The Surface orientation by
+    analysing the normal vector (caution: the orientations are then set to
+    TEASER orientation). The Surface tilt by analysing the normal vector.
+
+    Parameters
+    ----------
+
+    gml_surface : list
+        list of gml points with srsDimension=3 the first 3 and the last 3
+        entries must describe the same point in CityGML
+
+    boundary : str
+        Name of the boundary surface
+
+    """
+
+    def __init__(self,
+                 gml_surface,
+                 boundary=None):
         self.gml_surface = gml_surface
-        self.surface_area = None
-        self.surface_orientation = None
-        self.surface_tilt = None
         self.name = boundary
 
         self.surface_area = self.get_gml_area()
         self.surface_orientation = self.get_gml_orientation()
         self.surface_tilt = self.get_gml_tilt()
 
-
     def get_gml_area(self):
-        '''calc the area of a gml_surface defined by 4 or 5 gml coordinates
+        """calc the area of a gml_surface defined by gml coordinates
 
         Surface needs to be planar
-
-        Parameters
-        ----------
-        gml_surface : [float]
-            list of gml coordinates that describe a planar surface
 
         Returns
         ----------
         surface_area : float
             returns the area of the surface
-        '''
+        """
+
         split_surface = list(zip(*[iter(self.gml_surface)]*3))
         self.surface_area = self.poly_area(poly=split_surface)
 
         return self.surface_area
 
     def get_gml_tilt(self):
-        '''calc the tilt of a gml_surface defined by 4 or 5 gml coordinates
+        """calc the tilt of a gml_surface defined by 4 or 5 gml coordinates
 
         Surface needs to be planar
-
-        Parameters
-        ----------
-        gml_surface : [float]
-            list of gml coordinates that describe a planar surface
 
         Returns
         ----------
         surface_tilt : float
             returns the orientation of the surface
-        '''
+        """
 
         gml_surface = np.array(self.gml_surface)
         gml1 = gml_surface[0:3]
@@ -214,22 +249,17 @@ class Surface_gml(object):
         return self.surface_tilt
 
     def get_gml_orientation(self):
-        '''calc the orienation of a gml_surface defined by 4 or 5 gml
+        """calc the orientation of a gml_surface defined by 4 or 5 gml
         coordinates
 
         Surface needs to be planar, the orientation returned is in TEASER
         coordinates
 
-        Parameters
-        ----------
-        gml_surface : [float]
-            list of gml coordinates that describe a planar surface
-
         Returns
         ----------
         surface_orientation : float
             returns the orientation of the surface
-        '''
+        """
 
         gml_surface = np.array(self.gml_surface)
         gml1 = gml_surface[0:3]
@@ -277,6 +307,26 @@ class Surface_gml(object):
         return self.surface_orientation
 
     def unit_normal(self, a, b, c):
+        """calculates the unit normal vector of a surface described by 3 points
+
+        Parameters
+        ----------
+
+        a : float
+            point 1
+        b : float
+            point 2
+        c : float
+            point 3
+
+        Returns
+        ----------
+
+        unit_normal : list
+            unit normal vector as a list
+
+        """
+
         x = np.linalg.det([[1,a[1],a[2]],
              [1,b[1],b[2]],
              [1,c[1],c[2]]])
@@ -290,16 +340,32 @@ class Surface_gml(object):
         return (x/magnitude, y/magnitude, z/magnitude)
 
     def poly_area(self, poly):
+        """calculates the area of a polygon with arbitrary points
+
+        Parameters
+        ----------
+
+        poly : list
+            polygon as a list in srsDimension = 3
+
+        Returns
+        ----------
+
+        area : float
+            returns the area of a polygon
+        """
+
         if len(poly) < 3: # not a plane - no area
             return 0
         total = [0, 0, 0]
-        N = len(poly)
-        for i in range(N):
+        length = len(poly)
+        for i in range(length):
             vi1 = poly[i]
-            vi2 = poly[(i+1) % N]
+            vi2 = poly[(i+1) % length]
             prod = np.cross(vi1, vi2)
             total[0] += prod[0]
             total[1] += prod[1]
             total[2] += prod[2]
         result = np.dot(total, self.unit_normal(poly[0], poly[1], poly[2]))
         return abs(result/2)
+    
