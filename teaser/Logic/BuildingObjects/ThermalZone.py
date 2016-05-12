@@ -118,7 +118,7 @@ class ThermalZone(object):
         self.r1_ow = 0.0
         self.c1_ow = 0.0
         self.r_rest_ow = 0.0
-        self.r_total = 0.0
+        self.r_total_ow = 0.0
 
         self.weightfactor_ow = []
         self.weightfactor_ground = []
@@ -327,7 +327,7 @@ class ThermalZone(object):
                 self.c1_ow = self.outer_walls[0].c1_korr
             else:
                 self.r1_ow, self.c1_ow = \
-                        self.calc_rc_wall_help(self.outer_walls, omega)
+                        self.calc_chain_matrix(self.outer_walls, omega)
         else:
             pass
 
@@ -337,7 +337,7 @@ class ThermalZone(object):
                 self.c1_iw = self.inner_walls[0].c1
             else:
                 self.r1_iw, self.c1_iw = \
-                        self.calc_rc_wall_help(self.inner_walls, omega)
+                        self.calc_chain_matrix(self.inner_walls, omega)
         else:
             pass
 
@@ -352,9 +352,9 @@ class ThermalZone(object):
 
                 self.r1_ow = 1/(1/self.r1_ow)
 
-                self.r_total = 1/(self.ua_value_ow)
+                self.r_total_ow = 1/(self.ua_value_ow)
                 self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow))
-                self.r_rest_ow = self.r_total - self.r1_ow - \
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
 
             else:
@@ -368,10 +368,10 @@ class ThermalZone(object):
                     self.r1_win += 1/(win_count.r1/6)
 
                 self.r1_ow = 1/(1/self.r1_ow + (self.r1_win))
-                self.r_total = 1/(self.ua_value_ow + self.ua_value_win)
+                self.r_total_ow = 1/(self.ua_value_ow + self.ua_value_win)
                 self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
                                       (1/self.r_rad_inner_win))
-                self.r_rest_ow = self.r_total - self.r1_ow - \
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/((1/self.r_conv_inner_ow) +
                        (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
 
@@ -387,26 +387,24 @@ class ThermalZone(object):
         omega = 2 * math.pi / 86400 / t_bt
 
 
-        self.outer_walls_help = self.outer_walls
-        self._outer_walls = []
-        for wall in self.outer_walls_help:
+        self.outer_walls_help = []
+        for wall in self.outer_walls:
             if type(wall).__name__ == "OuterWall":
-                self._outer_walls.append(wall)
+                self.outer_walls_help.append(wall)
             if type(wall).__name__ == "Rooftop":
                 self.rooftops.append(wall)
             if type(wall).__name__ == "GroundFloor":
                 self.ground_floors.append(wall)
 
-        if len(self.outer_walls) > 0:
-            if len(self.outer_walls) == 1:
-                self.r1_ow = self.outer_walls[0].r1
-                self.c1_ow = self.outer_walls[0].c1_korr
+        if len(self.outer_walls_help) > 0:
+            if len(self.outer_walls_help) == 1:
+                self.r1_ow = self.outer_walls_help[0].r1
+                self.c1_ow = self.outer_walls_help[0].c1_korr
             else:
                 self.r1_ow, self.c1_ow = \
-                        self.calc_rc_wall_help(self.outer_walls, omega)
+                        self.calc_chain_matrix(self.outer_walls_help, omega)
         else:
             pass
-
 
         if len(self.rooftops) > 0:
             if len(self.rooftops) == 1:
@@ -414,7 +412,7 @@ class ThermalZone(object):
                 self.c1_rt = self.rooftops[0].c1_korr
             else:
                 self.r1_rt, self.c1_rt = \
-                        self.calc_rc_wall_help(self.rooftops, omega)
+                        self.calc_chain_matrix(self.rooftops, omega)
         else:
             pass
 
@@ -424,7 +422,7 @@ class ThermalZone(object):
                 self.c1_gf = self.ground_floors[0].c1_korr
             else:
                 self.r1_gf, self.c1_gf = \
-                        self.calc_rc_wall_help(self.ground_floors, omega)
+                        self.calc_chain_matrix(self.ground_floors, omega)
         else:
             pass
 
@@ -434,7 +432,7 @@ class ThermalZone(object):
                 self.c1_iw = self.inner_walls[0].c1
             else:
                 self.r1_iw, self.c1_iw = \
-                        self.calc_rc_wall_help(self.inner_walls, omega)
+                        self.calc_chain_matrix(self.inner_walls, omega)
         else:
             pass
 
@@ -449,9 +447,8 @@ class ThermalZone(object):
                 self.r1_ow = 1/(1/self.r1_ow)
                 self.r1_gf = 1/(1/self.r1_gf)
                 self.r1_rt = 1/(1/self.r1_rt)
-                self.r1_ow = 1/(1/self.r1_ow)
 
-                self.r_total = 1/(self.ua_value_ow)
+                self.r_total_ow = 1/(self.ua_value_ow)
                 self.r_total_gf = 1/(self.ua_value_gf)
                 self.r_total_rt = 1/(self.ua_value_rt)
 
@@ -459,7 +456,7 @@ class ThermalZone(object):
                 self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
                 self.r_rad_rt_iw = 1/((1/self.r_rad_inner_rt))
 
-                self.r_rest_ow = self.r_total - self.r1_ow - \
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
                 self.r_rest_gf = self.r_total_gf - self.r1_gf - \
                     1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
@@ -476,24 +473,33 @@ class ThermalZone(object):
                 for win_count in self.windows:
                     self.r1_win += 1/(win_count.r1/6)
 
-                self.r1_ow = 1/(1/self.r1_ow + (self.r1_win))
-                self.r_total = 1/(self.ua_value_ow + self.ua_value_win)
+
+                self.r1_ow = 1/(1/self.r1_ow+ (self.r1_win))
+                self.r1_gf = 1/(1/self.r1_gf)
+                self.r1_rt = 1/(1/self.r1_rt)
+
+                self.r_total_ow = 1/(self.ua_value_ow + self.ua_value_win)
+                self.r_total_gf = 1/(self.ua_value_gf)
+                self.r_total_rt = 1/(self.ua_value_rt)
+
                 self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
                                       (1/self.r_rad_inner_win))
-                self.r_rest_ow = self.r_total - self.r1_ow - \
+                self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
+                self.r_rad_rt_iw = 1/((1/self.r_rad_inner_rt))
+
+                self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/((1/self.r_conv_inner_ow) +
                        (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
+                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
+                self.r_rest_rt = self.r_total_rt - self.r1_rt - \
+                    1/(1/self.r_conv_inner_rt+1/self.r_rad_rt_iw)
 
             else:
                 warnings.warn("As no outer walls or no windows are defined\
                     lumped parameter cannot be calculated")
 
-        print("bla")
-
-
-
-
-    def calc_rc_wall_help(self, element_list, omega):
+    def calc_chain_matrix(self, element_list, omega):
         '''Matrix calculation.
 
         This is a helper function for def parallel_connection() to keep the
@@ -730,7 +736,7 @@ class ThermalZone(object):
         self.alpha_rad_outer_win = (1/(self.r_rad_outer_win*self.area_win))
         self.alpha_comb_outer_win = (1/(self.r_comb_outer_win*self.area_win))
 
-    def calc_wf_two_element(self, merge_windows=True):
+    def calc_wf_two_element(self, merge_windows):
         '''Calculation of weightfactors.
 
         Calculates the weightfactors of the outer walls, including ground and
@@ -738,10 +744,6 @@ class ThermalZone(object):
 
         Parameters
         ----------
-        number_of_elements : int
-            defines the number of elements, that area aggregated, between 1
-            and 4, default is 2
-
         merge_windows : bool
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False
@@ -823,6 +825,88 @@ class ThermalZone(object):
             self.weightfactor_ground.append(0)
         else:
             pass
+
+    def calc_wf_four_element(self, merge_windows):
+        '''Calculation of weightfactors.
+
+        Calculates the weightfactors of the outer walls, rooftops and ground
+        with possibility to merge windows into outer walls
+
+        Parameters
+        ----------
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
+        '''
+        if merge_windows is True:
+
+            for wall in self.outer_walls_help:
+                ua_help = wall.ua_value
+                for wall2 in self.outer_walls_help:
+                    if wall is wall2:
+                        pass
+                    elif wall.orientation == wall2.orientation and wall.tilt \
+                            == wall2.tilt:
+                        ua_help = ua_help + wall2.ua_value
+
+                wall.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+
+            for win in self.windows:
+                ua_help = win.ua_value
+                area_help = win.area
+                for win2 in self.windows:
+                    if win is win2:
+                        pass
+                    elif win.orientation == win2.orientation and win.tilt \
+                            == win2.tilt:
+                        ua_help = ua_help + win2.ua_value
+                        area_help = area_help + win2.area
+                win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+                win.area = area_help
+
+        elif merge_windows is False:
+
+            for wall in self.outer_walls_help:
+                ua_help = wall.ua_value
+                for wall2 in self.outer_walls_help:
+                    if wall is wall2:
+                        pass
+                    elif wall.orientation == wall2.orientation and wall.tilt \
+                            == wall2.tilt:
+                        ua_help = ua_help + wall2.ua_value
+                wall.wf_out = ua_help/self.ua_value_ow
+
+            for win in self.windows:
+                ua_help = win.ua_value
+                for win2 in self.windows:
+                    if win is win2:
+                        pass
+                    elif win.orientation == win2.orientation and win.tilt \
+                            == win2.tilt:
+                        ua_help = ua_help + win2.ua_value
+                win.wf_out = ua_help/(self.ua_value_win)
+
+        for wall in self.ground_floors:
+            ua_help = wall.ua_value
+            for wall2 in self.ground_floors:
+                if wall is wall2:
+                    pass
+                elif wall.orientation == wall2.orientation and wall.tilt \
+                        == wall2.tilt:
+                    ua_help = ua_help + wall2.ua_value
+
+            wall.wf_out = ua_help/self.ua_value_gf
+
+        for wall in self.rooftops:
+            ua_help = wall.ua_value
+            for wall2 in self.ground_floors:
+                if wall is wall2:
+                    pass
+                elif wall.orientation == wall2.orientation and wall.tilt \
+                        == wall2.tilt:
+                    ua_help = ua_help + wall2.ua_value
+
+            wall.wf_out = ua_help/self.ua_value_rt
 
     def find_wall(self, orientation, tilt):
         for i in self.outer_walls:
@@ -917,10 +1001,12 @@ class ThermalZone(object):
             win_count.replace_window(self.parent.year_of_retrofit, window_type)
 
     def set_calc_default(self):
+        self.outer_walls_help = []
+
         self.r1_ow = 0.0
         self.c1_ow = 0.0
         self.r_rest_ow = 0.0
-        self.r_total = 0.0
+        self.r_total_ow = 0.0
 
         self.weightfactor_ow = []
         self.weightfactor_ground = []
