@@ -280,20 +280,30 @@ class ThermalZone(object):
                 win.calc_equivalent_res()
                 win.calc_ua_value()
         else:
-            warnings.warn("No outer walls are defined")
+            warnings.warn("No window are defined, this may eventually cause "
+                          "you some troubles")
 
         self.sum_building_elements()
         if number_of_elements == 1:
-            pass
-            #self.calc_one_element(merge_windows=merge_windows, t_bt=t_bt)
+            self.calc_one_element(merge_windows=merge_windows, t_bt=t_bt)
+            self.calc_wf_one_element(merge_windows=merge_windows)
         elif number_of_elements == 2:
             self.calc_two_element(merge_windows=merge_windows, t_bt=t_bt)
             self.calc_wf_two_element(merge_windows=merge_windows)
         elif number_of_elements == 3:
             self.calc_three_element(merge_windows=merge_windows, t_bt=t_bt)
+            self.calc_wf_two_element(merge_windows=merge_windows)
         elif number_of_elements == 4:
             self.calc_four_element(merge_windows=merge_windows, t_bt=t_bt)
-        self.calc_heat_load()
+            self.calc_wf_two_element(merge_windows=merge_windows)
+
+        self.calc_heat_load(number_of_elements=number_of_elements)
+
+    def calc_one_element(self,
+                         merge_windows,
+                         t_bt):
+
+        pass
 
     def calc_two_element(self,
                          merge_windows,
@@ -842,6 +852,9 @@ class ThermalZone(object):
         self.alpha_rad_outer_win = (1/(self.r_rad_outer_win*self.area_win))
         self.alpha_comb_outer_win = (1/(self.r_comb_outer_win*self.area_win))
 
+    def calc_wf_one_element(self, merge_windows):
+        pass
+
     def calc_wf_two_element(self, merge_windows):
         '''Calculation of weightfactors.
 
@@ -1154,7 +1167,7 @@ class ThermalZone(object):
                     self.typical_width * self.parent.height_of_floors
         """
 
-    def calc_heat_load(self):
+    def calc_heat_load(self, number_of_elements=2):
         '''Norm heat load calculation.
 
         Calculates the norm heat load of the thermal zone.
@@ -1163,8 +1176,21 @@ class ThermalZone(object):
         _heat_capac_air = 1.002
         _density_air = 1.25
 
-        self.heating_load = ((self.ua_value_ow+self.ua_value_win) +
-                             self.volume * self.infiltration_rate *
+        if number_of_elements == 1 or number_of_elements == 2:
+            self.heating_load = ((self.ua_value_ow + self.ua_value_win) +
+                             self.volume * self.infiltration_rate *\
+                                 _heat_capac_air * _density_air) * \
+                            (self.t_inside - self.t_outside)
+        elif number_of_elements == 3:
+            self.heating_load = ((self.ua_value_ow + self.ua_value_gf +
+                                     self.ua_value_win) +
+                             self.volume * self.infiltration_rate *\
+                             _heat_capac_air * _density_air) * \
+                            (self.t_inside - self.t_outside)
+        elif number_of_elements == 4:
+            self.heating_load = ((self.ua_value_ow + self.ua_value_gf +
+                                  self.ua_value_rt + self.ua_value_win) +
+                             self.volume * self.infiltration_rate *\
                              _heat_capac_air*_density_air) * \
                             (self.t_inside - self.t_outside)
 
