@@ -292,10 +292,10 @@ class ThermalZone(object):
             self.calc_wf_two_element(merge_windows=merge_windows)
         elif number_of_elements == 3:
             self.calc_three_element(merge_windows=merge_windows, t_bt=t_bt)
-            self.calc_wf_two_element(merge_windows=merge_windows)
+            self.calc_wf_three_element(merge_windows=merge_windows)
         elif number_of_elements == 4:
             self.calc_four_element(merge_windows=merge_windows, t_bt=t_bt)
-            self.calc_wf_two_element(merge_windows=merge_windows)
+            self.calc_wf_four_element(merge_windows=merge_windows)
 
         self.calc_heat_load(number_of_elements=number_of_elements)
 
@@ -871,15 +871,9 @@ class ThermalZone(object):
         if merge_windows is True:
 
             for wall in self.outer_walls:
-                ua_help = wall.ua_value
-                for wall2 in self.outer_walls:
-                    if wall is wall2:
-                        pass
-                    elif wall.orientation == wall2.orientation and wall.tilt \
-                            == wall2.tilt:
-                        ua_help = ua_help + wall2.ua_value
+                wall.wf_out = wall.ua_value / (
+                    self.ua_value_ow + self.ua_value_win)
 
-                wall.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
                 if type(wall).__name__ == "GroundFloor":
                     ground_ua_help = wall.ua_value
                     for wall3 in self.outer_walls:
@@ -893,29 +887,14 @@ class ThermalZone(object):
                     pass
 
             for win in self.windows:
-                ua_help = win.ua_value
-                area_help = win.area
-                for win2 in self.windows:
-                    if win is win2:
-                        pass
-                    elif win.orientation == win2.orientation and win.tilt \
-                            == win2.tilt:
-                        ua_help = ua_help + win2.ua_value
-                        area_help = area_help + win2.area
-                win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
-                win.area = area_help
+                win.wf_out = win.ua_value / (
+                    self.ua_value_ow + self.ua_value_win)
 
         elif merge_windows is False:
 
             for wall in self.outer_walls:
-                ua_help = wall.ua_value
-                for wall2 in self.outer_walls:
-                    if wall is wall2:
-                        pass
-                    elif wall.orientation == wall2.orientation and wall.tilt \
-                            == wall2.tilt:
-                        ua_help = ua_help + wall2.ua_value
-                wall.wf_out = ua_help/self.ua_value_ow
+                wall.wf_out = wall.ua_value/self.ua_value_ow
+
                 if type(wall).__name__ == "GroundFloor":
                     ground_ua_help = wall.ua_value
                     for wall3 in self.outer_walls:
@@ -927,15 +906,7 @@ class ThermalZone(object):
                         self.ua_value_ow]
 
             for win in self.windows:
-                ua_help = win.ua_value
-                for win2 in self.windows:
-                    if win is win2:
-                        pass
-                    elif win.orientation == win2.orientation and win.tilt \
-                            == win2.tilt:
-                        ua_help = ua_help + win2.ua_value
-                win.wf_out = ua_help/(self.ua_value_win)
-
+                win.wf_out = win.ua_value/(self.ua_value_win)
 
         else:
             raise ValueError("specify calculation method correctly")
