@@ -12,7 +12,7 @@ First we need to import the classes we want to use
 '''
 
 from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions import \
-    UseConditions18599
+    BoundaryConditions
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import\
     GroundFloor
@@ -164,7 +164,7 @@ def example_create_building():
     '''
     Save new TEASER XML
     '''
-    prj.save_project("ExampleProject")
+    prj.save_gml("ExampleProject")
     
     
 if __name__ == '__main__':

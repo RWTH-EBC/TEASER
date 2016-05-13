@@ -32,7 +32,9 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 
 def load_teaser_xml(path, prj):
-    '''This function loads a project from new teaserXML
+    '''This function loads a project from teaserXML
+
+    TEASERs internal file format to store information.
 
     Parameters
     ----------

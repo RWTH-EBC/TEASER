@@ -1,7 +1,7 @@
 # Created July 2015
 # TEASER 4 Development Team
 
-"""This module contains an example how to create a type Buidling, to retrofit
+"""This module contains an example how to create an archetype Building, to retrofit
 that building and to export that building to internal XML and a Modelica record
 """
 
@@ -34,25 +34,6 @@ def example_type_building():
                               cellar=1,
                               construction_type="heavy",
                               dormer=1)
-
-    prj.type_bldg_est1a(name="EST1aBuilding",
-                              year_of_construction=1988,
-                              number_of_floors=2,
-                              height_of_floors=3.5,
-                              net_leased_area=100,
-                              with_ahu=True,
-                              neighbour_buildings=1,
-                              construction_type="heavy")
-
-    prj.type_bldg_est1b(name="EST1bBuilding",
-                              year_of_construction=1988,
-                              number_of_floors=2,
-                              height_of_floors=3.5,
-                              net_leased_area=100,
-                              with_ahu=True,
-                              neighbour_buildings=1,
-                              construction_type="heavy",
-                              number_of_apartments=5)
 
     prj.type_bldg_office(name="Office1",
                          year_of_construction=1988,

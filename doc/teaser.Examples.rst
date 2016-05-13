@@ -22,27 +22,27 @@ automatically calculates all the necessary parameter. If not specified different
 it uses vdi calculation method::
 
     prj.type_bldg_residential(name="ResidentialBuilding",
-							year_of_construction=1988,
-							number_of_floors=2,
-							height_of_floors=3.5,
-							net_leased_area=100,
-							with_ahu=True,
-							residential_layout=1,
-							neighbour_buildings=1,
-							attic=1,
-							cellar=1,
-							construction_type="heavy",
-							dormer=1)
+                              year_of_construction=1988,
+                              number_of_floors=2,
+                              height_of_floors=3.5,
+                              net_leased_area=100,
+                              with_ahu=True,
+                              residential_layout=1,
+                              neighbour_buildings=1,
+                              attic=1,
+                              cellar=1,
+                              construction_type="heavy",
+                              dormer=1)
 
     prj.type_bldg_office(name="Office1",
-                             year_of_construction=1988,
-                             number_of_floors=2,
-                             height_of_floors=3.5,
-                             net_leased_area=100,
-                             office_layout=1,
-                             window_layout=1,
-                             with_ahu=True,
-                             construction_type="heavy")
+                         year_of_construction=1988,
+                         number_of_floors=2,
+                         height_of_floors=3.5,
+                         net_leased_area=100,
+                         office_layout=1,
+                         window_layout=1,
+                         with_ahu=True,
+                         construction_type="heavy")
 
 To export the parameters to a Modelica record, we use the export_record
 function. path = None indicates, that we want to store the records in
