@@ -1069,23 +1069,33 @@ class ThermalZone(object):
 
             wall.wf_out = ua_help/self.ua_value_rt
 
-    def find_wall(self, orientation, tilt):
+    def find_walls(self, orientation, tilt):
+        '''
+        this function returns a list of all wall elemnts with the same
+        orientation and tilt to sum them in the building
+        '''
+        located = []
         for i in self.outer_walls:
             if i.orientation == orientation and i.tilt == tilt:
-                return i
+                located.append(i)
             else:
                 pass
 
-        return None
+        return located
 
-    def find_win(self, orientation, tilt):
+    def find_wins(self, orientation, tilt):
+        '''
+        this function returns a list of all window elemnts with the same
+        orientation and tilt to sum them in the building
+        '''
+        located = []
         for i in self.windows:
             if i.orientation == orientation and i.tilt == tilt:
-                return i
+                located.append(i)
             else:
                 pass
 
-        return None
+        return located
 
     def set_inner_wall_area(self):
         '''Sets the inner wall area.
