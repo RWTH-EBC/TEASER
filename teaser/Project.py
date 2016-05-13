@@ -9,7 +9,6 @@ import warnings
 import teaser.Logic.Utilis as utilis
 import teaser.Data.Input.TeaserXML_input as txml_in
 import teaser.Data.Output.TeaserXML_output as txml_out
-import teaser.Data.Input.OldTeaser_input as old_teaser
 import teaser.Data.Output.Modelica_output as modelica_out
 import teaser.Data.Output.Text_output as text_out
 from teaser.Data.DataClass import DataClass
@@ -801,20 +800,6 @@ class Project(object):
 
         txml_in.load_teaser_xml(path, self)
 
-    def load_old_teaser(self, path):
-        '''Loads the project from an old TEASER xml file
-
-        calls the function load_teaser_xml in Data.DataHelp.OldTeaser.py
-
-
-        Parameters
-        ----------
-        path : string
-            full path to a teaserXML file
-
-        '''
-
-        old_teaser.load_teaser_xml(path, self)
 
     def save_citygml(self, file_name=None, path=None):
         '''Saves the project to a citygml file
@@ -939,16 +924,16 @@ class Project(object):
         assert value != "ebc" or value != "vdi", ass_error_1
 
         self._calculation_method = value
-        
+
         for bldg in self.buildings:
             bldg.calculation_method = value
-        
+
     @property
     def name(self):
         return self._name
-        
+
     @name.setter
     def name(self, value):
-        
+
         self._name = value
         self.modelica_project = value
