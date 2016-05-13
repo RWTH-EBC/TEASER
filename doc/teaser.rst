@@ -1,65 +1,50 @@
-TEASER Doc
+teaser package structure
 ==================
 
-Installation
+The following docs will guide you through the structure of the Python package
+TEASER. This will help to understand the functionality in order to integrate
+TEASER in your workflow.
+
+teaser content
 -------------------------
-The best option to install TEASER is to clone the repository by using:
-
-`git clone [SSH-Key/Https]`
-
-and then run:
-
-`pip install -e [Path/to/your/Teaser/Clone]`
-
-
-Dependencies
--------------------------
-1. Python 2.7 <= v >=3.3 - WinPython is recommended (includes a lot of packages).
-2. Mako: template Engine
-   install on a python-enabled command line with `pip install mako`
-3. PyXB: XML binding Engine
-   install on a python-enabled command line with `pip install pyxb`
-4. pytest: Unit Tests engine
-   install on a python-enabled command line with `pip install pytest`
-   
-TEASER Content
--------------------------
-The source folder contains different subpackages and one Project module
-
-Project module
-`````````````
-TEASER API
-
-Data package 
-`````````````
-This package contains interfaces to different data sources (right now only internal data format is supported) as well as PyXB Data Bindings for XML based data.
-    
-Examples package 
-`````````````
-This package contains some examples how to use TEASER in a script based manner, as well as some verification of the calculation core
-    
-InputData Folder 
-`````````````
-This folder contains predefined data for typical building elements, different materials, use conditions following DIN 18599 as well as templates for Modelica Records and Boundary condition for the type buildings.	
-    
-Logic package 
-`````````````
-This package contains all classes of the internal data model of TEASER, as well as the archetype buildings and parameter calculation.
-
+TEASER provides modules, classes and functions to collect data, execute
+calculations for reduced order models and generate ready-to-run code for
+Modelica libraries AixLib and Annex 60.
+The package itself is subdivided into the following
+four packages:
 
 .. toctree::
-	teaser.Project
-	teaser.Examples
-	teaser.Logic
-	teaser.Data
-	teaser.InputData
-		
+  :maxdepth: 2
+
+  teaser.Data
+
+.. toctree::
+  :maxdepth: 2
+
+  teaser.Examples
+
+.. toctree::
+    :maxdepth: 2
+
+    teaser.Logic
+
+.. toctree::
+    :maxdepth: 2
+
+    teaser.GUI
+
+
+In TEASERS root package there are two additional Python modules:
+
+.. toctree::
+    :maxdepth: 2
+
+    teaser.Project
+    teaser.GuiStart
+
 
 Future Developments
 -------------------------
 
-- Data interfaces to information models like CityGML.
-- Graphical User Interface
-
-
-	
+TEASER is still under development, future implementations will include extended
+CityGML support and improvement of the graphical user interface.

@@ -2,8 +2,8 @@ Logic package
 ====================
 
 .. toctree::
-	
     teaser.Logic.BuildingObjects
+    teaser.Logic.ArchetypeBuildings
 
 Utilis module
 --------------------------

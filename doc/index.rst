@@ -67,7 +67,6 @@ Furthermore, you are welcome to contribute via Pull
 Requests(https://github.com/RWTH-EBC/TEASER/pulls). The workflow for changes is
 described in our Wiki(https://github.com/RWTH-EBC/TEASER/wiki).
 
-
 Contents:
 ==================
 
@@ -75,9 +74,19 @@ Contents:
    :maxdepth: 1
 
    install_teaser
-   teaser_start
    teaser
 
+People:
+==================
+The following people have directly contributed to the implementation of
+TEASER:
+
+   - Michael Mans
+   - Moritz Lauster
+   - Marcus Fuchs
+   - Yasin Goerguelue
+   - Christoph Gingter
+   - Peter Remmen
 
 Indices and tables
 ==================
