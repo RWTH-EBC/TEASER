@@ -1,7 +1,7 @@
 # ./pyxb/bundles/opengis/raw/smil20.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:21ae4a2357cfe334f6a0ce0b0ea28423d22a1453
-# Generated 2015-05-04 11:01:33.852456 by PyXB version 1.2.4 using Python 2.7.9.final.0
+# Generated 2016-04-07 16:02:40.462870 by PyXB version 1.2.4 using Python 2.7.11.final.0
 # Namespace http://www.w3.org/2001/SMIL20/ [xmlns:smil20]
 
 from __future__ import unicode_literals
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:28f33378-f23c-11e4-8104-000c29ce1afb')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:6373931a-fcc9-11e5-b0c9-000c29ce1afb')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
