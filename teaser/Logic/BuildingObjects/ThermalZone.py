@@ -874,18 +874,6 @@ class ThermalZone(object):
                 wall.wf_out = wall.ua_value / (
                     self.ua_value_ow + self.ua_value_win)
 
-                if type(wall).__name__ == "GroundFloor":
-                    ground_ua_help = wall.ua_value
-                    for wall3 in self.outer_walls:
-                        if wall is wall3:
-                            pass
-                        elif type(wall3).__name__ == "GroundFloor":
-                            ground_ua_help += wall3.ua_value
-                    self.weightfactor_ground = [ground_ua_help/(
-                        self.ua_value_ow + self.ua_value_win)]
-                else:
-                    pass
-
             for win in self.windows:
                 win.wf_out = win.ua_value / (
                     self.ua_value_ow + self.ua_value_win)
@@ -895,26 +883,12 @@ class ThermalZone(object):
             for wall in self.outer_walls:
                 wall.wf_out = wall.ua_value/self.ua_value_ow
 
-                if type(wall).__name__ == "GroundFloor":
-                    ground_ua_help = wall.ua_value
-                    for wall3 in self.outer_walls:
-                        if wall is wall3:
-                            pass
-                        elif type(wall3).__name__ == "GroundFloor":
-                            ground_ua_help += wall3.ua_value
-                    self.weightfactor_ground = [ground_ua_help/
-                        self.ua_value_ow]
-
             for win in self.windows:
                 win.wf_out = win.ua_value/(self.ua_value_win)
 
         else:
             raise ValueError("specify calculation method correctly")
 
-        if len(self.weightfactor_ground) == 0:
-            self.weightfactor_ground.append(0)
-        else:
-            pass
 
     def calc_wf_three_element(self, merge_windows):
         '''Calculation of weightfactors.
@@ -1080,7 +1054,6 @@ class ThermalZone(object):
                 located.append(i)
             else:
                 pass
-
         return located
 
     def find_wins(self, orientation, tilt):
@@ -1094,7 +1067,20 @@ class ThermalZone(object):
                 located.append(i)
             else:
                 pass
+        return located
 
+    def find_groundfloors(self, orientation, tilt):
+        '''
+        this function returns a list of all groundfloors elemnts with the same
+        orientation and tilt to sum them in the building
+        '''
+        located = []
+        for i in self.outer_walls:
+            if i.orientation == orientation and i.tilt == tilt and \
+                type(i).__name__ == "GroundFloor":
+                located.append(i)
+            else:
+                pass
         return located
 
     def set_inner_wall_area(self):
