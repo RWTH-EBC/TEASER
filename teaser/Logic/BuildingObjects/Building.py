@@ -374,10 +374,17 @@ class Building(object):
 
         for zone in self.thermal_zones:
 
+            groundfloors = zone.find_groundfloors(-2, 0)
+            if groundfloors == []:
+                zone.weightfactor_ground.append(0.0)
+            else:
+                zone.weightfactor_ground.append(
+                    sum([groundfl.wf_out for groundfl in groundfloors]))
+
             for i in self.orient_tilt:
                 walls = zone.find_walls(i[0], i[1])
-
                 wins = zone.find_wins(i[0], i[1])
+                
 
                 zone.tilt_wall.append(i[1])
                 zone.orientation_wall.append(i[0])
@@ -401,6 +408,7 @@ class Building(object):
                         sum([win.area for win in wins]))
                     zone.g_sunblind_list.append(
                         sum([win.shading_g_total for win in wins]))
+
 
     def retrofit_building(self, year_of_retrofit=None,
                           window_type=None,
