@@ -133,6 +133,7 @@ class BuildingElement(object):
         self.r_outer_conv = 0.0
         self.r_outer_rad = 0.0
         self.r_outer_comb = 0.0
+        self.wf_out = 0.0
 
     def calc_ua_value(self):
         '''U*A value for building element.
