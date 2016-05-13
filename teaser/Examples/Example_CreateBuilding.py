@@ -154,20 +154,18 @@ def example_create_building():
     '''
     We calculate the RC Values according to ebc procedure
     '''
-    #prj.calc_all_buildings('ebc')
-    prj.buildings[-1].thermal_zones[-1].calc_zone_parameters(
-        number_of_elements=2, merge_windows=False)
+    prj.calc_all_buildings('ebc')
     '''
     Export the Modelica Record
     '''
-    #prj.export_record(building_model="MultizoneEquipped",
-    #                  zone_model="ThermalZoneEquipped",
-     #                 corG=False,)
+    prj.export_record(building_model="MultizoneEquipped",
+                      zone_model="ThermalZoneEquipped",
+                      corG=False,)
     '''
     Save new TEASER XML
     '''
-    #prj.save_project("ExampleProject")
-    
+    prj.save_project("ExampleProject")
+    prj.save_citygml("Easypeasy")
     
 if __name__ == '__main__':
     example_create_building()
