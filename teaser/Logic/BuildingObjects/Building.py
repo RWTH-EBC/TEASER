@@ -375,8 +375,9 @@ class Building(object):
         for zone in self.thermal_zones:
 
             for i in self.orient_tilt:
-                wall = zone.find_wall(i[0], i[1])
-                win = zone.find_win(i[0], i[1])
+                walls = zone.find_walls(i[0], i[1])
+
+                wins = zone.find_wins(i[0], i[1])
 
                 zone.tilt_wall.append(i[1])
                 zone.orientation_wall.append(i[0])
@@ -384,18 +385,22 @@ class Building(object):
                 zone.tilt_win.append(i[1])
                 zone.orientation_win.append(i[0])
 
-                if wall is None:
+                if walls == []:
                     zone.weightfactor_ow.append(0.0)
                 else:
-                    zone.weightfactor_ow.append(wall.wf_out)
-                if win is None:
+                    zone.weightfactor_ow.append(
+                        sum([wall.wf_out for wall in walls]))
+                if wins == []:
                     zone.weightfactor_win.append(0.0)
                     zone.window_area_list.append(0.0)
                     zone.g_sunblind_list.append(0.0)
                 else:
-                    zone.weightfactor_win.append(win.wf_out)
-                    zone.window_area_list.append(win.area)
-                    zone.g_sunblind_list.append(win.shading_g_total)
+                    zone.weightfactor_win.append(
+                        sum([win.wf_out for win in wins]))
+                    zone.window_area_list.append(
+                        sum([win.area for win in wins]))
+                    zone.g_sunblind_list.append(
+                        sum([win.shading_g_total for win in wins]))
 
     def retrofit_building(self, year_of_retrofit=None,
                           window_type=None,
