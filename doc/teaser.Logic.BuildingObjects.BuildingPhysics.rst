@@ -55,7 +55,6 @@ Material module
 
 .. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.Material
     :members:
-    :undoc-members:
     :show-inheritance:
 
 OuterWall module
@@ -63,7 +62,6 @@ OuterWall module
 
 .. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall
     :members:
-    :undoc-members:
     :show-inheritance:
 
 Rooftop module
@@ -71,7 +69,6 @@ Rooftop module
 
 .. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop
     :members:
-    :undoc-members:
     :show-inheritance:
 
 Wall module
@@ -79,7 +76,6 @@ Wall module
 
 .. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.Wall
     :members:
-    :undoc-members:
     :show-inheritance:
 
 Window module
@@ -87,7 +83,4 @@ Window module
 
 .. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.Window
     :members:
-    :undoc-members:
     :show-inheritance:
-
-
