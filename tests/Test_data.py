@@ -780,8 +780,8 @@ class Test_teaser(object):
         assert round(
             prj.buildings[-1].thermal_zones[-1].heating_load,
             4) == 15210.3459
-    """
-    def test_combine_building_elements(self):
+
+    def test_sum_building_elements(self):
         '''test of combine_building_elements'''
         prj.set_default()
         HelpTest.building_test2(prj)
@@ -801,33 +801,62 @@ class Test_teaser(object):
             win.calc_equivalent_res()
             win.calc_ua_value()
 
-        prj.buildings[-1].thermal_zones[-1].combine_building_elements()
+        prj.buildings[-1].thermal_zones[-1].sum_building_elements()
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         # innerwall
 
-        assert round(therm_zone.ua_value_iw, 16) == 14.286493860845841
+        assert round(therm_zone.ua_value_iw, 16) == 13.443390622904332
         assert round(therm_zone.area_iw, 1) == 34.0
-        assert round(therm_zone.r_conv_iw, 18) == 0.010893246187363833
-        assert round(therm_zone.r_rad_iw, 19) == 0.0058823529411764705
-        assert round(therm_zone.r_comb_iw, 19) == 0.003819709702062643
+        assert round(therm_zone.r_conv_inner_iw, 18) == 0.010893246187363833
+        assert round(therm_zone.r_rad_inner_iw, 19) == 0.0058823529411764705
+        assert round(therm_zone.r_comb_inner_iw, 19) == 0.003819709702062643
         assert round(therm_zone.alpha_conv_iw, 1) == 2.7
         assert round(therm_zone.alpha_rad_iw, 1) == 5.0
         assert round(therm_zone.alpha_comb_iw, 1) == 7.7
 
         # outerwall
-        assert round(therm_zone.ua_value_ow, 16) == 135.58185588096563
-        assert round(therm_zone.area_ow, 1) == 328.0
-        assert round(therm_zone.r_conv_inner_ow, 19) == 0.0016512549537648611
-        assert round(therm_zone.r_rad_inner_ow, 18) == 0.000609756097560976
-        assert round(therm_zone.r_comb_inner_ow, 20) == 0.00044531528322052017
-        assert round(therm_zone.r_conv_outer_ow, 20) == 0.00026595744680851064
-        assert round(therm_zone.r_rad_outer_ow, 18) == 0.001063829787234043
-        assert round(therm_zone.r_comb_outer_ow, 20) == 0.0002127659574468085
-        assert round(therm_zone.alpha_conv_inner_ow, 5) == 1.84634
+        assert round(therm_zone.ua_value_ow, 16) == 19.83577523748189
+        assert round(therm_zone.area_ow, 1) == 48.0
+        assert round(therm_zone.r_conv_inner_ow, 19) == 0.007716049382716048
+        assert round(therm_zone.r_rad_inner_ow, 18) == 0.004166666666666667
+        assert round(therm_zone.r_comb_inner_ow, 20) == 0.0027056277056277055
+        assert round(therm_zone.r_conv_outer_ow, 20) == 0.0010416666666666667
+        assert round(therm_zone.r_rad_outer_ow, 18) == 0.004166666666666667
+        assert round(therm_zone.r_comb_outer_ow, 20) == 0.0008333333333333334
+        assert round(therm_zone.alpha_conv_inner_ow, 5) == 2.7
+        assert round(therm_zone.alpha_rad_inner_ow, 5) == 5.0
+        assert round(therm_zone.alpha_comb_inner_ow, 5) == 7.7
         assert round(therm_zone.alpha_conv_outer_ow, 1) == 20.0
+        assert round(therm_zone.alpha_rad_outer_ow, 5) == 5.0
         assert round(therm_zone.alpha_comb_outer_ow, 1) == 25.0
-        assert round(therm_zone.r_comb_outer_ow, 20) == 0.0002127659574468085
 
+        # groundfloor
+        assert round(therm_zone.ua_value_gf, 16) == 58.351477449455686
+        assert round(therm_zone.area_gf, 1) == 140.0
+        assert round(therm_zone.r_conv_inner_gf, 19) == 0.004201680672268907
+        assert round(therm_zone.r_rad_inner_gf, 18) == 0.001428571428571429
+        assert round(therm_zone.r_comb_inner_gf, 20) == 0.0010660980810234541
+        assert round(therm_zone.alpha_conv_inner_gf, 5) == 1.7
+        assert round(therm_zone.alpha_rad_inner_gf, 5) == 5.0
+        assert round(therm_zone.alpha_comb_inner_gf, 5) == 6.7
+
+        # outerwall
+        assert round(therm_zone.ua_value_rt, 16) == 57.394603194028036
+        assert round(therm_zone.area_rt, 1) == 140.0
+        assert round(therm_zone.r_conv_inner_rt, 19) == 0.004201680672268907
+        assert round(therm_zone.r_rad_inner_rt, 18) == 0.001428571428571429
+        assert round(therm_zone.r_comb_inner_rt, 20) == 0.0010660980810234541
+        assert round(therm_zone.r_conv_outer_rt, 20) == 0.00035714285714285714
+        assert round(therm_zone.r_rad_outer_rt, 18) == 0.001428571428571429
+        assert round(therm_zone.r_comb_outer_rt, 20) == 0.00028571428571428574
+        assert round(therm_zone.alpha_conv_inner_rt, 5) == 1.7
+        assert round(therm_zone.alpha_rad_inner_rt, 5) == 5.0
+        assert round(therm_zone.alpha_comb_inner_rt, 5) == 6.7
+        assert round(therm_zone.alpha_conv_outer_rt, 1) == 20.0
+        assert round(therm_zone.alpha_rad_outer_rt, 5) == 5.0
+        assert round(therm_zone.alpha_comb_outer_rt, 1) == 25.0
+
+        #window
         assert round(therm_zone.ua_value_win, 16) == 32.87895310796074
         assert round(therm_zone.area_win, 1) == 18.0
         assert round(therm_zone.r_conv_inner_win, 19) == 0.032679738562091505
@@ -840,7 +869,7 @@ class Test_teaser(object):
         assert round(therm_zone.alpha_comb_outer_win, 1) == 25.0
         assert round(therm_zone.alpha_conv_outer_win, 1) == 20.0
         assert round(therm_zone.weighted_g_value, 3) == 0.789
-
+    """
     def test_parallel_connection(self):
         '''test of test_parallel_connection'''
 
