@@ -43,12 +43,12 @@ def main():
     info_list = read_XMLs(input_path)
 
     prj = create_reference_project(info_list)
-    prj.export_record(building_model="MultizoneEquipped",
+    prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=False,
                       path=os.path.join(output_path, 'Reference'))
     prj.retrofit_all_buildings(2015)
-    prj.export_record(building_model="MultizoneEquipped",
+    prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=False,
                       path=os.path.join(output_path, 'Retrofit'))
@@ -125,7 +125,6 @@ def create_reference_project(info_list):
     """Reads building XMLs and creates type buildings into `prj`
     """
     prj = Project(True)
-    prj.calculation_method = 'ebc'
 
     for building in info_list[:]:
         print('------------')

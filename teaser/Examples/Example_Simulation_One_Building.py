@@ -76,11 +76,10 @@ def main():
 
     #path where the export is stored
     output_path = os.path.join('D:\Temp',
-                               'OutputData'
-                               )
+                               'OutputData')
 
     print(os.path.join(output_path, 'OneBuildingSim'))
-    prj.export_record(building_model="MultizoneEquipped",
+    prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=False,
                       path=os.path.join(output_path, 'OneBuildingSim'))
@@ -90,7 +89,7 @@ def main():
     buildings in this project
     """
     buildingNames = []
-    for bld in prj.list_of_buildings:
+    for bld in prj.buildings:
         buildingNames.append(bld.name)
 
     """
@@ -106,7 +105,7 @@ def main():
     """
 
     li = []
-    for bld in prj.list_of_buildings:
+    for bld in prj.buildings:
         #this is necessary for the correct names in the simulation script
         name = "Project." + bld.name + "." + bld.name
         s = si.Simulator(name, "dymola", outputDir, packageDir)
