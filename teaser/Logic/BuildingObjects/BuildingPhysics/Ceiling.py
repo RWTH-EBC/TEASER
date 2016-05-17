@@ -19,5 +19,3 @@ class Ceiling(InnerWall):
         
         self._tilt = 90.0
         self._orientation = -1.0
-        self._inner_convection = 1.7
-        self._inner_radiation = 5.0

@@ -3388,6 +3388,14 @@ class MainUI(QDialog):
             for element in self.current_zone.inner_walls:
                 if element.internal_id == current_item.internal_id:
                     self.current_element = element
+        if "Floor" in current_item.text():
+            for element in self.current_zone.inner_walls:
+                if element.internal_id == current_item.internal_id:
+                    self.current_element = element
+        if "Ceiling" in current_item.text():
+            for element in self.current_zone.inner_walls:
+                if element.internal_id == current_item.internal_id:
+                    self.current_element = element
         if "Outer Wall" in current_item.text():
             for element in self.current_zone.outer_walls:
                 if element.internal_id == current_item.internal_id:
@@ -4414,8 +4422,6 @@ class MainUI(QDialog):
     def click_export_button(self):
         # path in GUI, which is need for the output
         path_output_folder = str(self.export_save_template_lineedit.text())
-        template_folder = utilis.create_path_to_template_folder()
-        os.chdir(template_folder)
 
         list_of_building_name = []
         for i in range(self.side_bar_buildings_combo_box.count()):

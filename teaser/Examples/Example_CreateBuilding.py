@@ -56,7 +56,7 @@ def example_create_building():
     '''Instantiate UseConditions18599 class with thermal zone as parent,
     and load the use conditions for the usage 'Living' '''
 
-    tz.use_conditions = UseConditions18599(parent = tz)
+    tz.use_conditions = BoundaryConditions(parent = tz)
     tz.use_conditions.load_use_conditions("Living")
     
     '''We save information of the Outer and Inner walls as well as Windows
@@ -154,18 +154,23 @@ def example_create_building():
     '''
     We calculate the RC Values according to ebc procedure
     '''
-    prj.calc_all_buildings('ebc')
+    prj.calc_all_buildings(number_of_elements=2,
+                           merge_windows=False,
+                           used_library='AixLib')
+
     '''
     Export the Modelica Record
     '''
-    prj.export_record(building_model="MultizoneEquipped",
+    prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
-                      corG=False,)
+                      corG=False,
+                      internal_id=None
+                      path=None)
     '''
     Save new TEASER XML
     '''
     prj.save_gml("ExampleProject")
-    
+    prj.save_citygml("Easypeasy")
     
 if __name__ == '__main__':
     example_create_building()
