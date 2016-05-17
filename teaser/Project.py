@@ -83,7 +83,7 @@ class Project(object):
         self._type_element_file = None
 
         self._number_of_elements_calc = 2
-        self._merge_windows_calc = True
+        self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
 
         if load_data is True:

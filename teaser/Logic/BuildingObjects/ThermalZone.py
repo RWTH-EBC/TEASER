@@ -229,7 +229,7 @@ class ThermalZone(object):
 
     def calc_zone_parameters(self,
                              number_of_elements=2,
-                             merge_windows=True,
+                             merge_windows=False,
                              t_bt=5):
         '''RC-Calculation for the thermal zone
 
