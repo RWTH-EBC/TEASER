@@ -1,6 +1,6 @@
 record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.replace(" ", "")}"
   extends AixLib.DataBase.Buildings.ZoneBaseRecord(
-    n = ${get_n(zone.outer_walls)},
+    n = ${len(zone.tilt_wall)},
     Heater_on = true,
     Cooler_on = false,
     l_cooler = ${zone.cooling_load},
@@ -24,6 +24,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     weightfactorswindow = {${list_to_string(zone.weightfactor_win)}},
     weightfactorswall = {${list_to_string(zone.weightfactor_ow)}},
     weightfactorground = ${list_to_string(zone.weightfactor_ground)},
+	orientationswallshorizontal = {${list_to_string(zone.tilt_wall)}},
     Ai = ${zone.area_iw},
     withInnerwalls = ${element_check(zone.inner_walls)},
     R1i = ${zone.r1_iw},
@@ -93,6 +94,7 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   return string_of_list
   %>
 </%def>
+
 
 
 ##check if element is existent
