@@ -11,6 +11,8 @@ import scipy.io
 import teaser.Logic.Utilis as utilis
 from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU \
     import BuildingAHU
+import teaser.Logic.Simulation.aixlib as aixlib
+
 
 class Building(object):
     '''Building Class
@@ -94,8 +96,7 @@ class Building(object):
         
         if with_ahu is True:
             self.central_ahu = BuildingAHU(self)
-        
-        
+
         self.number_of_floors = None
         self.height_of_floors = None
         self.net_leased_area = net_leased_area
@@ -121,7 +122,9 @@ class Building(object):
         self.orientation_bldg = []
         self.tilt_bldg = []
         self.orient_tilt = []
-        self.calculation_method = None
+        self._number_of_elements_calc = 2
+        self._merge_windows_calc = False
+        self._used_library_calc = "AixLib"
 
     def set_outer_wall_area(self, new_area, orientation):
         '''Outer area wall setter
@@ -234,7 +237,10 @@ class Building(object):
                 sum_area += (wall_count.area)
         return sum_area
 
-    def set_specific_wall_area(self, spec_zone, spec_wall, new_area):
+    def set_specific_wall_area(self,
+                               spec_zone,
+                               spec_wall,
+                               new_area):
         '''set one specific wall area
 
         sets the area of a specific wall in a specific zone and weights the
@@ -298,8 +304,11 @@ class Building(object):
         for key in self.window_area:
             self.window_area[key] = self.get_window_area(key)
 
-    def calc_building_parameter(self, calculation_method=None):
-        '''calc all building parameters
+    def calc_building_parameter(self,
+                                number_of_elements=2,
+                                merge_windows=False,
+                                used_library='AixLib'):
+        """calc all building parameters
 
         This functions calculates the parameters of all zones in a building
         sums norm heat load of all zones
@@ -307,85 +316,36 @@ class Building(object):
 
         Parameters
         ----------
+        number_of_elements : int
+            defines the number of elements, that area aggregated, between 1
+            and 4, default is 2
 
-        calculation_method : string
-            setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
 
-        '''
-        if calculation_method is not None:
-            self.calculation_method = calculation_method
-        else:
+        used_library : str
+            used library (AixLib and Annex60 are supported)
+        """
+
+        self._number_of_elements_calc = number_of_elements
+        self._merge_windows_calc = merge_windows
+        self._used_library_calc = used_library
+
+        for zone in self.thermal_zones:
+            zone.calc_zone_parameters(number_of_elements=number_of_elements,
+                                      merge_windows=merge_windows,
+                                      t_bt=5)
+            self.sum_heating_load += zone.heating_load
+
+        if self.used_library_calc == 'AixLib':
+            aixlib.compare_orientation(self)
+        elif self.used_library_calc == 'Annex60':
             pass
 
-        for zone in self.thermal_zones:
-            zone.calc_zone_parameters(self.calculation_method)
-            self.sum_heating_load += zone.heating_load
-        self.compare_orientation()
 
-    def compare_orientation(self):
-        '''Fills the zone weightfactors according to orientation and tilt of
-        building
-
-        compares orientation and tilt of all outer building elements and then
-        creates lists for zone weightfactors and building orientation and tilt
-
-        '''
-
-        orient_tilt_help = []
-
-        for zone in self.thermal_zones:
-            for wall in zone.outer_walls:
-                if wall.orientation != -2:
-                    orient_tilt_help.append([wall.orientation, wall.tilt])
-                else:
-                    pass
-            for win in zone.windows:
-                if win.orientation != -2:
-                    orient_tilt_help.append([win.orientation, win.tilt])
-                else:
-                    pass
-
-        for i in orient_tilt_help:
-            if i in self.orient_tilt:
-                pass
-            else:
-                self.orient_tilt.append(i)
-
-        self.orient_tilt.sort(key=lambda x: x[0])
-
-        if self.orient_tilt[0][0] == -1:
-            self.orient_tilt.insert(len(self.orient_tilt), self.orient_tilt.pop(0))
-
-        for i in self.orient_tilt:
-            self.orientation_bldg.append(i[0])
-            self.tilt_bldg.append(i[1])
-
-        for zone in self.thermal_zones:
-
-            for i in self.orient_tilt:
-                wall = zone.find_wall(i[0], i[1])
-                win = zone.find_win(i[0], i[1])
-
-                zone.tilt_wall.append(i[1])
-                zone.orientation_wall.append(i[0])
-
-                zone.tilt_win.append(i[1])
-                zone.orientation_win.append(i[0])
-
-                if wall is None:
-                    zone.weightfactor_ow.append(0.0)
-                else:
-                    zone.weightfactor_ow.append(wall.wf_out)
-                if win is None:
-                    zone.weightfactor_win.append(0.0)
-                    zone.window_area_list.append(0.0)
-                    zone.g_sunblind_list.append(0.0)
-                else:
-                    zone.weightfactor_win.append(win.wf_out)
-                    zone.window_area_list.append(win.area)
-                    zone.g_sunblind_list.append(win.shading_g_total)
-
-    def retrofit_building(self, year_of_retrofit=None,
+    def retrofit_building(self,
+                          year_of_retrofit=None,
                           window_type=None,
                           material=None):
         ''' Retrofits all zones in the building
@@ -409,7 +369,9 @@ class Building(object):
         for zone in self.thermal_zones:
             zone.retrofit_zone(window_type, material)
 
-        self.calc_building_parameter(self.calculation_method)
+        self.calc_building_parameter(number_of_elements=self.used_library_calc,
+                                     merge_windows=self.merge_windows_calc,
+                                     used_library=self.used_library_calc)
 
     def rotate_building(self, angle):
         '''rotates the building to a given angle
@@ -440,266 +402,7 @@ class Building(object):
                 else:
                     win_count.orientation = new_angle
 
-    def create_timeline(self, duration_profile = 86400, time_step = 3600):
-        ''' Creates a timeline for building boundary conditions
 
-        This function creates a list with a equidistant timeline given the
-        duration of the profile in seconds (default one day, 86400 s) and the
-        time_step in seconds (default one hour, 3600 s). Needed for boundary
-        input of the building for Modelica simulation
-        
-        Note
-        ----------
-        As Python starts from counting the range from zero, but Modelica needs
-        0 as start value and additional 24 entries. We add one interation 
-        step in the time line.
-
-        Parameters
-        ----------
-        duration_profile : int
-            duration of the profile in seconds (default one day, 86400 s)
-        time_step : int
-            time step used in the profile in seconds (default one hour, 3600 s)
-
-
-        Returns
-        ---------
-        time_line : [[int]]
-            list of time steps as preparation for the output of boundary 
-            conditions
-        '''
-        ass_error_1 = "duration musst be a multiple of time_step"
-
-        assert float(duration_profile/time_step).is_integer(), ass_error_1
-
-        time_line = []
-
-        for i in range(int(duration_profile/time_step)+1):
-            time_line.append([i*time_step])
-        return time_line
-    
-    def modelica_set_temp(self, path = None):
-        '''creates .mat file for set temperatures for each zone
-
-        This function creates a matfile (-v4) for set temperatures of each 
-        zone
-
-        !AixLib sepcific!        
-        
-        1. Row: heat set temperature of all zones
-        2. Row: cool set temperature of all zones
-
-        Parameters
-        ----------
-        path : str
-            optional path, when matfile is exported seperately
-                
-        '''
-        
-        if self.file_set_t is None:
-            self.file_set_t = "\\Tset_"+self.name+".mat"
-        else:
-            pass
-
-        if path is None:
-            path = utilis.get_default_path()
-        else:
-            pass
-        
-        utilis.create_path(path) 
-        path = path + self.file_set_t
-
-        t_set_heat = [0]
-        
-        for zone_count in self.thermal_zones:
-            t_set_heat.append(zone_count.use_conditions.set_temp_heat)
-
-        scipy.io.savemat(path,
-                         mdict={'Tset': [t_set_heat]},
-                         appendmat = False,
-                         format = '4')
-    
-    
-    def modelica_AHU_boundary(self,
-                              time_line = None,
-                              path = None):
-        '''creates .mat file for AHU boundary conditions (building)
-
-        This function creates a matfile (-v4) for building AHU boundary 
-        conditions
-        
-        !AixLib sepcific!
-
-        Known limitation:        
-        
-        1. Column : time step
-        2. Column : desired AHU profile temperature
-        3. Column : Desired minimal relative humidity
-        4. Column : desired maximal relative humidity 
-        5. Columb : AHU status (On/Off)
-
-        Parameters
-        ----------
-        time_line :[[int]]
-            list of time steps 
-        path : str
-            optional path, when matfile is exported seperately
-            
-        Attributes
-        ----------
-        profile_temperature : [float]
-            timeline of temperatures requirements for AHU simulation
-        profile_min_relative_humidity : [float]
-            timeline of relative humidity requirements for AHU simulation
-        profile_max_relative_humidity : [float]
-            timeline of relative humidity requirements for AHU simulation
-        profile_v_flow : [int]
-            timeline of desired relative v_flow of the AHU simulation (0..1)
-
-        '''
-        
-        if self.file_ahu is None:
-            self.file_ahu = "\\AHU_"+self.name+".mat"
-        else:
-            pass
-
-        if path is None:
-            path = utilis.get_default_path()
-        else:
-            pass
-        
-        utilis.create_path(path)
-        path = path + self.file_ahu
-        
-        if time_line is None:
-            time_line = self.create_timeline()
-        if self.with_ahu is True:
-            profile_temperature = \
-                        self.central_ahu.profile_temperature
-            profile_min_relative_humidity = \
-                        self.central_ahu.profile_min_relative_humidity
-            profile_max_relative_humidity = \
-                        self.central_ahu.profile_max_relative_humidity
-            profile_v_flow = \
-                        self.central_ahu.profile_v_flow
-        else:
-            #Dummy values for Input Table (based on discussion with pme)
-            time_line = [[0],[3600]]
-            profile_temperature = [293.15,293.15]
-            profile_min_relative_humidity = [0,0]
-            profile_max_relative_humidity = [1,1]
-            profile_v_flow = [0,1]
-            
-        
-        ass_error_1 = "time line and input have to have the same length"
-        
-        assert len(time_line) == len(profile_temperature), \
-                            (ass_error_1 + ",profile_temperature_AHU")
-        assert len(time_line) == len(profile_min_relative_humidity), \
-                            (ass_error_1 + ",profile_min_relative_humidity")
-        assert len(time_line) == len(profile_max_relative_humidity), \
-                            (ass_error_1 + ",profile_max_relative_humidity")
-        assert len(time_line) == len(profile_v_flow), \
-                            (ass_error_1 + ",profile_status_AHU")
-        
-        
-        for i, time in enumerate(time_line):
-
-            time.append(profile_temperature[i])
-            time.append(profile_min_relative_humidity[i])
-            time.append(profile_max_relative_humidity[i])
-            time.append(profile_v_flow[i])
-
-        ahu_boundary = np.array(time_line)
-        
-        scipy.io.savemat(path,
-                         mdict={'AHU': ahu_boundary},
-                         appendmat = False,
-                         format = '4')
-    
-    def modelica_gains_boundary(self, 
-                                time_line = None,
-                                path = None):
-        '''creates .mat file for internal gains boundary conditions (building)
-
-        This function creates a matfile (-v4) for building internal gains 
-        boundary conditions. It collects all internal gain profiles of the
-        zones and stores them into one file. The file is extended for each 
-        zone. Only applicable if zones are defined
-
-        !AixLib sepcific!        
-        
-        1. Column : time step
-        2,5,8,...  Column : profile_persons
-        3,6,9,...  Column : profile_machines
-        4,7,10,... Column : profile_lighting
-        
-        Note
-        ----------
-        When time line is created, we need to add a 0 to first element of
-        all boundaries. This is due to to expected format in Modelica.
-        
-        Parameters
-        ----------
-        time_line :[[int]]
-            list of time steps 
-        path : str
-            optional path, when matfile is exported seperately
-        
-        '''
-
-        if self.file_internal_gains is None:
-            self.file_internal_gains = "\\InternalGains_"+self.name+".mat"
-        else:
-            pass
-
-        if path is None:
-            path = utilis.get_default_path()
-        else:
-            pass
-        
-        utilis.create_path(path) 
-        path = path + self.file_internal_gains
-
-        for zone_count in self.thermal_zones:
-            if time_line is None:
-                duration= len(zone_count.use_conditions.profile_persons) * \
-                            3600
-                time_line = self.create_timeline(duration_profile = duration)
-            
-#            zone_count.use_conditions.profile_persons.insert(0,0)
-#            zone_count.use_conditions.profile_machines.insert(0,0)
-#            zone_count.use_conditions.profile_lighting.insert(0,0)
-
-            ass_error_1 = "time line and input have to have the same length"
-            
-            assert len(time_line)-1 == len(zone_count.use_conditions.profile_persons), \
-                                (ass_error_1 + ",profile_persons")
-            assert len(time_line)-1 == len(zone_count.use_conditions.profile_machines), \
-                                (ass_error_1 + ",profile_machines")
-            assert len(time_line)-1 == len(zone_count.use_conditions.profile_lighting), \
-                                (ass_error_1 + ",profile_lighting")
-            
-            for i, time in enumerate(time_line):
-                
-                if i == 0:
-                    time.append(0)
-                    time.append(0)
-                    time.append(0)
-                else:
-                    time.append(zone_count.use_conditions.profile_persons[i-1])
-                    time.append(zone_count.use_conditions.profile_machines[i-1])
-                    time.append(zone_count.use_conditions.profile_lighting[i-1])
-
-#            zone_count.use_conditions.profile_persons.pop(0)
-#            zone_count.use_conditions.profile_machines.pop(0)
-#            zone_count.use_conditions.profile_lighting.pop(0)
-        internal_boundary = np.array(time_line)
-
-        scipy.io.savemat(path,
-                         mdict={'Internals': internal_boundary},
-                         appendmat=False,
-                         format='4')
 
     def add_zone(self, thermal_zone):
         '''Adds a thermal zone to the corresponding list
@@ -890,20 +593,58 @@ class Building(object):
         self._central_ahu = value
 
     @property
-    def calculation_method(self):
+    def number_of_elements_calc(self):
 
-        return self._calculation_method
+        return self._number_of_elements_calc
 
-    @calculation_method.setter
-    def calculation_method(self, value):
+    @number_of_elements_calc.setter
+    def number_of_elements_calc(self, value):
 
-        ass_error_1 = "calculation_method has to be vdi or ebc"
+        ass_error_1 = "calculation_method has to be 1,2,3 or 4"
 
-        assert value != "ebc" or value != "vdi", ass_error_1
+        assert value != [1, 2, 3, 4], ass_error_1
 
         if self.parent is None and value is None:
-            self._calculation_method = "vdi"
+            self._number_of_elements_calc = 2
         elif self.parent is not None and value is None:
-            self._calculation_method = self.parent.calculation_method
+            self._number_of_elements_calc = self.parent.number_of_elements_calc
         elif value is not None:
-            self._calculation_method = value
+            self._number_of_elements_calc = value
+
+    @property
+    def merge_windows_calc(self):
+
+        return self._merge_windows_calc
+
+    @merge_windows_calc.setter
+    def merge_windows_calc(self, value):
+
+        ass_error_1 = "merge windows needs to be True or False"
+
+        assert value != [True, False], ass_error_1
+
+        if self.parent is None and value is None:
+            self._merge_windows_calc = 2
+        elif self.parent is not None and value is None:
+            self._merge_windows_calc = self.parent.merge_windows_calc
+        elif value is not None:
+            self._merge_windows_calc = value
+
+    @property
+    def used_library_calc(self):
+
+        return self._used_library_calc
+
+    @used_library_calc.setter
+    def used_library_calc(self, value):
+
+        ass_error_1 = "used library needs to be AixLib or Annex60"
+
+        assert value != ["AixLib", "Annex60"], ass_error_1
+
+        if self.parent is None and value is None:
+            self._used_library_calc = 2
+        elif self.parent is not None and value is None:
+            self._used_library_calc = self.parent.used_library_calc
+        elif value is not None:
+            self._used_library_calc = value

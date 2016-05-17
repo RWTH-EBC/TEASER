@@ -1,0 +1,275 @@
+model ${bldg.name}
+  "This is the simulation model of ${bldg.name}"
+
+  BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
+    calTSky=Annex60.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+    computeWetBulbTemperature=false,
+    filNam="modelica://Annex60/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
+    "Weather data reader"
+    annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
+  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${len(bldg.orientation_bldg)}](
+    each outSkyCon=true,
+    each outGroCon=true,
+    til={${list_to_string(bldg.tilt_bldg)}},
+    % if bldg.latitude is None:
+      lat=0.87266462599716,
+    % else:
+      lat=${bldg.latitude},
+    % endif
+    azi={${get_azimut(bldg.orientation_bldg)}})
+    "Calculates diffuse solar radiation on titled surface for all directions"
+    annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
+  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${len(bldg.orientation_bldg)}](
+    til={${list_to_string(bldg.tilt_bldg)}},
+    % if bldg.latitude is None:
+      lat=0.87266462599716,
+    % else:
+      lat=${bldg.latitude},
+    % endif
+    azi={${get_azimut(bldg.orientation_bldg)}})
+    "Calculates direct solar radiation on titled surface for all directions"
+    annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
+  CorrectionSolarGain.CorrectionGDoublePane corGDoublePane(n=${len(bldg.orientation_bldg)}, UWin=${zone.ua_value_win/zone.area_win})
+    "Correction factor for solar transmission"
+    annotation (Placement(transformation(extent={{6,54},{26,74}})));
+  ReducedOrderZones.ThermalZoneTwoElements thermalZoneTwoElements(
+    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    VAir=${zone.volume},
+    alphaExt=${zone.alpha_comb_inner_ow},
+    alphaWin=${zone.alpha_conv_inner_win},
+    gWin=${zone.weighted_g_value},
+    ratioWinConRad=${zone.windows[0].a_conv},
+    nExt=1,
+    RExt={${zone.r1_ow}},
+    CExt={${zone.c1_ow}},
+    alphaRad=${zone.r_rad_inner_ow},
+    AInt=${zone.area_iw},
+    alphaInt=${zone.alpha_comb_iw},
+    nInt=1,
+    RInt={${zone.r1_iw}},
+    CInt={${zone.c1_iw}},
+    RWin=${zone.r1_win},
+    RExtRem=${zone.r_rest_ow},
+    nOrientations=${len(bldg.orientation_bldg)},
+    AWin={${list_to_string(zone.window_area_list)}},
+    ATransparent={${list_to_string(zone.window_area_list)}},
+    AExt={3.5,8}) "Thermal zone"
+    annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+  EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
+    n=${len(bldg.orientation_bldg)},
+    wfGround=${list_to_string(zone.weightfactor_ground)},
+    wfWall={${list_to_string(zone.weightfactor_ow)}},
+    wfWin={${list_to_string(zone.weightfactor_win)}},
+    withLongwave=true,
+    aExt=${get_aowo(zone.outer_walls)},
+    alphaExtOut=${zone.alpha_conv_outer_ow},
+    alphaRad=${zone.alpha_rad_outer_ow},
+    alphaWinOut=${zone.alpha_conv_outer_win},
+    aWin=${get_awin(zone.windows)},
+    eExt=0.9,
+    TGround=${zone.t_ground}) "Computes equivalent air temperature"
+    annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
+  Modelica.Blocks.Math.Add solRad[${len(bldg.orientation_bldg)}]
+    "Sums up solar radiation of both directions"
+    annotation (Placement(transformation(extent={{-38,6},{-28,16}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature
+    "Prescribed temperature for exterior walls outdoor surface temperature"
+    annotation (Placement(transformation(extent={{8,-6},{20,6}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature1
+    "Prescribed temperature for windows outdoor surface temperature"
+    annotation (Placement(transformation(extent={{8,14},{20,26}})));
+  Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWin
+    "Outdoor convective heat transfer of windows"
+    annotation (Placement(transformation(extent={{38,16},{28,26}})));
+  Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWall
+    "Outdoor convective heat transfer of walls"
+    annotation (Placement(transformation(extent={{36,6},{26,-4}})));
+  Modelica.Blocks.Sources.Constant const[${len(bldg.orientation_bldg)}](each k=0)
+    "Sets sunblind signal to zero (open)"
+    annotation (Placement(transformation(extent={{-20,14},{-14,20}})));
+  BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
+    annotation (Placement(
+    transformation(extent={{-100,-10},{-66,22}}),iconTransformation(
+    extent={{-70,-12},{-50,8}})));
+  Modelica.Blocks.Sources.Constant alphaWall(k=(${zone.alpha_conv_outer_ow}+5)*${zone.area_ow})
+    "Outdoor coefficient of heat transfer for walls"
+    annotation (Placement(
+    transformation(
+    extent={{-4,-4},{4,4}},
+    rotation=90,
+    origin={30,-16})));
+  Modelica.Blocks.Sources.Constant alphaWin(k=(${zone.alpha_conv_outer_win}+5)*sum({${list_to_string(zone.window_area_list)}})
+    "Outdoor coefficient of heat transfer for windows"
+    annotation (Placement(
+    transformation(
+    extent={{4,-4},{-4,4}},
+    rotation=90,
+    origin={32,38})));
+equation
+  connect(eqAirTemp.TEqAirWindow, prescribedTemperature1.T)
+    annotation (Line(
+    points={{-3,-0.2},{0,-0.2},{0,20},{6.8,20}},   color={0,0,127}));
+  connect(eqAirTemp.TEqAir, prescribedTemperature.T)
+    annotation (Line(points={{-3,-4},{4,-4},{4,0},{6.8,0}},
+    color={0,0,127}));
+  connect(weaDat.weaBus, weaBus)
+    annotation (Line(
+    points={{-78,62},{-74,62},{-74,18},{-84,18},{-84,12},{-83,12},{-83,6}},
+    color={255,204,51},
+    thickness=0.5), Text(
+    string="%second",
+    index=1,
+    extent={{6,3},{6,3}}));
+  connect(weaBus.TDryBul, eqAirTemp.TDryBul)
+    annotation (Line(
+    points={{-83,6},{-83,-2},{-38,-2},{-38,-10},{-26,-10}},
+    color={255,204,51},
+    thickness=0.5), Text(
+    string="%first",
+    index=-1,
+    extent={{-6,3},{-6,3}}));
+  connect(internalGains.y[1], personsRad.Q_flow)
+    annotation (Line(points={{22.8,
+    -52},{28,-52},{28,-32},{48,-32}}, color={0,0,127}));
+  connect(internalGains.y[2], personsConv.Q_flow)
+    annotation (Line(points={{22.8,-52},{36,-52},{48,-52}}, color={0,0,127}));
+  connect(internalGains.y[3], machinesConv.Q_flow)
+    annotation (Line(points={{22.8,
+    -52},{28,-52},{28,-74},{48,-74}}, color={0,0,127}));
+  connect(const.y, eqAirTemp.sunblind)
+    annotation (Line(points={{-13.7,17},{-12,17},{-12,8},{-14,8},{-14,8}},
+    color={0,0,127}));
+  connect(HDifTil.HSkyDifTil, corGDoublePane.HSkyDifTil)
+    annotation (Line(
+    points={{-47,36},{-28,36},{-6,36},{-6,66},{4,66}}, color={0,0,127}));
+  connect(HDirTil.H, corGDoublePane.HDirTil)
+    annotation (Line(points={{-47,62},{-10,62},{-10,70},{4,70}},
+    color={0,0,127}));
+  connect(HDirTil.H,solRad. u1)
+    annotation (Line(points={{-47,62},{-42,62},{-42,
+    14},{-39,14}}, color={0,0,127}));
+  connect(HDirTil.inc, corGDoublePane.inc)
+    annotation (Line(points={{-47,58},{4,58},{4,58}}, color={0,0,127}));
+  connect(HDifTil.H,solRad. u2)
+    annotation (Line(points={{-47,30},{-44,30},{-44,
+    8},{-39,8}}, color={0,0,127}));
+  connect(HDifTil.HGroDifTil, corGDoublePane.HGroDifTil)
+    annotation (Line(
+    points={{-47,24},{-4,24},{-4,62},{4,62}}, color={0,0,127}));
+  connect(solRad.y, eqAirTemp.HSol)
+    annotation (Line(points={{-27.5,11},{-26,11},{-26,2},{-26,2}},
+    color={0,0,127}));
+  connect(weaDat.weaBus, HDifTil[1].weaBus)
+    annotation (Line(
+    points={{-78,62},{-74,62},{-74,30},{-68,30}},
+    color={255,204,51},
+    thickness=0.5));
+  connect(weaDat.weaBus, HDifTil[2].weaBus)
+    annotation (Line(
+    points={{-78,62},{-74,62},{-74,30},{-68,30}},
+    color={255,204,51},
+    thickness=0.5));
+  connect(weaDat.weaBus, HDirTil[1].weaBus)
+    annotation (Line(
+    points={{-78,62},{-73,62},{-68,62}},
+    color={255,204,51},
+    thickness=0.5));
+  connect(weaDat.weaBus, HDirTil[2].weaBus)
+    annotation (Line(
+    points={{-78,62},{-73,62},{-68,62}},
+    color={255,204,51},
+    thickness=0.5));
+  connect(personsRad.port, thermalZoneTwoElements.intGainsRad)
+    annotation (Line(
+    points={{68,-32},{84,-32},{100,-32},{100,24},{92.2,24}},
+    color={191,0,0}));
+  connect(thermalConductorWin.solid, thermalZoneTwoElements.window)
+    annotation (
+     Line(points={{38,21},{40,21},{40,20},{43.8,20}}, color={191,0,0}));
+  connect(prescribedTemperature1.port, thermalConductorWin.fluid)
+    annotation (Line(points={{20,20},{28,20},{28,21}}, color={191,0,0}));
+  connect(thermalZoneTwoElements.extWall, thermalConductorWall.solid)
+    annotation (Line(points={{43.8,12},{40,12},{40,1},{36,1}},
+    color={191,0,0}));
+  connect(thermalConductorWall.fluid, prescribedTemperature.port)
+    annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
+  connect(alphaWall.y, thermalConductorWall.Gc)
+    annotation (Line(points={{30,-11.6},{30,-4},{31,-4}}, color={0,0,127}));
+  connect(alphaWin.y, thermalConductorWin.Gc)
+    annotation (Line(points={{32,33.6},{32,26},{33,26}}, color={0,0,127}));
+  connect(weaBus.TBlaSky, eqAirTemp.TBlaSky)
+    annotation (Line(
+    points={{-83,6},{-58,6},{-58,2},{-32,2},{-32,-4},{-26,-4}},
+    color={255,204,51},
+    thickness=0.5), Text(
+    string="%first",
+    index=-1,
+    extent={{-6,3},{-6,3}}));
+  connect(machinesConv.port, thermalZoneTwoElements.intGainsConv)
+    annotation (
+    Line(points={{68,-74},{82,-74},{96,-74},{96,20},{92,20}}, color={191,
+    0,0}));
+  connect(personsConv.port, thermalZoneTwoElements.intGainsConv)
+    annotation (
+    Line(points={{68,-52},{96,-52},{96,20},{92,20}}, color={191,0,0}));
+  connect(corGDoublePane.solarRadWinTrans, thermalZoneTwoElements.solRad)
+    annotation (Line(points={{27,64},{34,64},{40,64},{40,31},{43,31}}, color={0,
+    0,127}));
+end SimpleRoomTwoElements;
+
+##list to string
+<%def name="list_to_string(list)", filter="trim">
+  <%
+  string_of_list = ""
+  for item in list:
+    string_of_list += str(item) + ", "
+  string_of_list = string_of_list[:-2]
+  return string_of_list
+  %>
+
+##get azimut for modelica
+<%def name="get_azimut(list)", filter="trim">
+  <%
+  newlist = []
+  for element in list:
+    if 0 < element < 360:
+        newlist.append(-180.0+element)
+    elif element == 0:
+        newlist.append(180.0)
+    elif element == -1:
+        newlist.append(0.0)
+    elif element == -2:
+        newlist.append(0.0)
+
+  string_of_list = ""
+  for item in newlist:
+    string_of_list += str(item) + ", "
+  string_of_list = string_of_list[:-2]
+  return string_of_list
+  %>
+
+## get outer wall coefficient of absorbtion
+<%def name="get_aowo(list)", filter="trim">
+  <%
+  aowo = 0.
+  sum_area = 0.
+  for wall in list:
+  	aowo += float(wall.layer[-1].material.solar_absorp * wall.area)
+  	sum_area += wall.area
+  aowo_weighted = aowo/sum_area
+  return str(aowo_weighted)
+  %>
+</%def>
+
+##get the coefficient of absorption
+<%def name="get_awin(list)", filter="trim">
+  <%
+  awin = 0.
+  sum_area = 0.
+  for window in list:
+  	awin += float(window.layer[-1].material.solar_absorp * window.area)
+  	sum_area += window.area
+  awin_weighted = awin/sum_area
+  return str(awin_weighted)
+  %>
+</%def>

@@ -26,7 +26,9 @@ def parameter_room8():
     execute VDI calculation for single zone
     '''
     
-    prj.buildings[0].calc_building_parameter('vdi')
+    prj.buildings[0].calc_building_parameter(number_of_elements=2,
+                                             merge_windows=True,
+                                             used_library='AixLib')
     
     return prj
 
