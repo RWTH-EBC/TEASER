@@ -895,13 +895,13 @@ class Project(object):
 
         citygml_out.save_gml(self, new_path)
 
-    def export_record(self,
+    def export_aixlib(self,
                       building_model="None",
                       zone_model="None",
                       corG=None,
                       internal_id=None,
                       path=None):
-        '''Exports values to a record file for Modelica simulation
+        """Exports values to a record file for Modelica simulation
 
         Parameters
         ----------
@@ -920,8 +920,7 @@ class Project(object):
         path : string
             if the Files should not be stored in OutputData, an alternative
             path can be specified as a full and absolute path
-
-        '''
+        """
 
         if path is None:
             path = utilis.get_default_path() + "\\" + self.name
@@ -929,14 +928,45 @@ class Project(object):
             path = path + "\\" + self.name
 
         utilis.create_path(path)
-        """
+
         aixlib_output.export_aixlib(prj=self,
-                                   building_model=building_model,
-                                   zone_model=zone_model,
-                                   corG=corG,
-                                   internal_id=internal_id,
-                                   path=path)
+                                    building_model=building_model,
+                                    zone_model=zone_model,
+                                    corG=corG,
+                                    internal_id=internal_id,
+                                    path=path)
+
+    def export_annex(self,
+                     number_of_elements,
+                     merge_windows,
+                     internal_id,
+                     path):
+        """Exports values to a record file for Modelica simulation
+
+        Parameters
+        ----------
+
+        number_of_elements : int
+            defines the number of elements, that area aggregated, between 1
+            and 4, default is 2
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
+        internal_id : float
+            setter of the used building which will be exported, if None then
+            all buildings will be exported
+        path : string
+            if the Files should not be stored in OutputData, an alternative
+            path can be specified as a full and absolute path
         """
+
+        if path is None:
+            path = utilis.get_default_path() + "\\" + self.name
+        else:
+            path = path + "\\" + self.name
+
+        utilis.create_path(path)
+
         annex60_output.export_annex60(prj=self,
                                       number_of_elements=self.number_of_elements_calc,
                                       merge_windows=self.merge_windows_calc,
