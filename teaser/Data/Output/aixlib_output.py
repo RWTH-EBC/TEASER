@@ -1,17 +1,22 @@
 # Created March 2016
 # TEASER Development Team
 
-"""Modelica_output
+"""aixlib_output
 
-This module contains function to call Templates for Modelica model generation
+This module contains function to call Templates for AixLib model generation
 """
 
 import teaser.Logic.Utilis as utilis
 from mako.template import Template
+import scipy.io
+import teaser.Logic.Simulation.aixlib as aixlib
 
-
-def export_aixlib(prj, building_model="None", zone_model="None",
-                corG=None, internal_id=None, path=None):
+def export_aixlib(prj,
+                  building_model="None",
+                  zone_model="None",
+                  corG=None,
+                  internal_id=None,
+                  path=None):
     '''Exports values to a record file for Modelica simulation
 
     The Export function for creating a AixLib LOM Multizone model
@@ -73,13 +78,18 @@ def export_aixlib(prj, building_model="None", zone_model="None",
 
         for bldg in exported_list_of_buildings:
 
+            if bldg.merge_windows_calc is True:
+                calc_method = 'vdi'
+            elif bldg.merge_windows_calc is False:
+                calc_method = 'ebc'
+
             bldg_path = path + "\\" + bldg.name + "\\"
             utilis.create_path(utilis.get_full_path(bldg_path))
             utilis.create_path(utilis.get_full_path
                                (bldg_path + bldg.name + "_DataBase"))
-            bldg.modelica_set_temp(path=path + "\\" + bldg.name)
-            bldg.modelica_AHU_boundary(path=path + "\\" + bldg.name)
-            bldg.modelica_gains_boundary(path=path + "\\" + bldg.name)
+            aixlib.modelica_set_temp(bldg=bldg, path=path + "\\" + bldg.name)
+            aixlib.modelica_AHU_boundary(bldg=bldg, path=path + "\\" + bldg.name)
+            aixlib.modelica_gains_boundary(bldg=bldg, path=path + "\\" + bldg.name)
 
             _help_package(bldg_path, bldg.name)
             _help_package_order(bldg_path, [bldg], None,
@@ -87,13 +97,16 @@ def export_aixlib(prj, building_model="None", zone_model="None",
 
             out_file = open(utilis.get_full_path
                             (bldg_path + bldg.name + ".mo"), 'w')
+
+
             out_file.write(model_template.render_unicode(
                            bldg=bldg, mod_prj=prj.modelica_project,
                            weather=prj.weather_file_path,
                            weather_header=prj.weather_file_header,
                            model=building_model,
                            zone=zone_model,
-                           physics=bldg._calculation_method, gFac=corG))
+                           physics=calc_method,
+                           gFac=corG))
             out_file.close()
 
             for zone in bldg.thermal_zones:
@@ -161,7 +174,7 @@ def export_aixlib(prj, building_model="None", zone_model="None",
 
     else:
         # not clearly specified
-        print("please specifiy you export clearly")
+        print("please specify you export clearly")
 
 
 

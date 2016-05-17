@@ -77,7 +77,7 @@ def main():
 
     prj = create_reference_project(info_list)
     print(os.path.join(output_path, 'Reference'))
-    prj.export_record(building_model="MultizoneEquipped",
+    prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=False, path=os.path.join(output_path, 'Reference'))
 
@@ -86,7 +86,7 @@ def main():
     buildings in this project
     """
     buildingNames = []
-    for bld in prj.list_of_buildings:
+    for bld in prj.buildings:
         buildingNames.append(bld.name)
 
     """
@@ -102,7 +102,7 @@ def main():
     """
 
     li = []
-    for bld in prj.list_of_buildings:
+    for bld in prj.buildings:
         #this is necessary for the correct names in the simulation script
         name = "Project." + bld.name + "." + bld.name
         s = si.Simulator(name, "dymola", outputDir, packageDir)
@@ -188,7 +188,6 @@ def create_reference_project(info_list):
     """Reads building XMLs and creates type buildings into `prj`
     """
     prj = Project(True)
-    prj.calculation_method = 'ebc'
 
     for building in info_list[:]:
         print('------------')

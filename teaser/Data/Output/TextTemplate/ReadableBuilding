@@ -39,7 +39,7 @@ number of thermal zones = ${get_number_of_zones(bldg.thermal_zones)} -
     windows functionality = ${on_off_checker(zone.windows)} - (withWindows)
     weigthfactors for the windows = ${weightfactors_to_string(zone.weightfactor_win)} - (weightfactorswindow)
     coefficient of absorption of the window = 0.03 - (awin)
-    %if prj.calculation_method == "ebc":
+    %if prj.merge_windows_calc == False:
     resistor window = ${zone.r1_win} K/W (RWin)
     window's coefficient of heat transfer (inner side) = ${zone.alpha_conv_inner_win} W/(m^2 K) (alphaConvWinInner)
     window's coefficient of heat transfer (outer side) = ${zone.alpha_conv_outer_win} W/(m^2 K) (alphaConvWinOuter)

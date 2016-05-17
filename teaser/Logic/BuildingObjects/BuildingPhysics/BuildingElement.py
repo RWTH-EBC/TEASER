@@ -133,6 +133,7 @@ class BuildingElement(object):
         self.r_outer_conv = 0.0
         self.r_outer_rad = 0.0
         self.r_outer_comb = 0.0
+        self.wf_out = 0.0
 
     def calc_ua_value(self):
         '''U*A value for building element.
@@ -257,6 +258,12 @@ class BuildingElement(object):
         '''
 
         import teaser.Data.Input.buildingelement_input as buildingelement_input
+
+        self.layer = None
+        self._inner_convection = None
+        self._inner_radiation = None
+        self._outer_convection = None
+        self._outer_radiation = None
 
         buildingelement_input.load_type_element(element=self,
                                                 year=year,
