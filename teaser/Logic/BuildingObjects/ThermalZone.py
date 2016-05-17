@@ -904,7 +904,7 @@ class ThermalZone(object):
         '''
         if merge_windows is True:
 
-            for wall in self.outer_walls:
+            for wall in self.outer_walls_help:
                 wall.wf_out = wall.ua_value / (
                     self.ua_value_ow + self.ua_value_win)
 
@@ -914,7 +914,7 @@ class ThermalZone(object):
 
         elif merge_windows is False:
 
-            for wall in self.outer_walls:
+            for wall in self.outer_walls_help:
                 wall.wf_out = wall.ua_value/self.ua_value_ow
 
             for win in self.windows:
@@ -937,7 +937,7 @@ class ThermalZone(object):
         '''
         if merge_windows is True:
 
-            for wall in self.outer_walls:
+            for wall in self.outer_walls_help:
                 wall.wf_out = wall.ua_value / (
                     self.ua_value_ow + self.ua_value_win)
 
@@ -947,7 +947,7 @@ class ThermalZone(object):
 
         elif merge_windows is False:
 
-            for wall in self.outer_walls:
+            for wall in self.outer_walls_help:
                 wall.wf_out = wall.ua_value/self.ua_value_ow
 
             for win in self.windows:
