@@ -10,7 +10,8 @@ import teaser.Logic.Utilis as utilis
 import teaser.Data.Input.TeaserXML_input as txml_in
 import teaser.Data.Output.TeaserXML_output as txml_out
 import teaser.Data.Input.OldTeaser_input as old_teaser
-import teaser.Data.Output.aixlib_output as modelica_out
+import teaser.Data.Output.aixlib_output as aixlib_output
+import teaser.Data.Output.annex60_output as annex60_output
 import teaser.Data.Output.Text_output as text_out
 from teaser.Data.DataClass import DataClass
 from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
@@ -894,8 +895,12 @@ class Project(object):
 
         citygml_out.save_gml(self, new_path)
 
-    def export_record(self, building_model="None", zone_model="None",
-                  corG=None, internal_id=None, path=None):
+    def export_record(self,
+                      building_model="None",
+                      zone_model="None",
+                      corG=None,
+                      internal_id=None,
+                      path=None):
         '''Exports values to a record file for Modelica simulation
 
         Parameters
@@ -924,13 +929,19 @@ class Project(object):
             path = path + "\\" + self.name
 
         utilis.create_path(path)
-
-        modelica_out.export_aixlib(prj=self,
+        """
+        aixlib_output.export_aixlib(prj=self,
                                    building_model=building_model,
                                    zone_model=zone_model,
                                    corG=corG,
                                    internal_id=internal_id,
                                    path=path)
+        """
+        annex60_output.export_annex60(prj=self,
+                                      number_of_elements=self.number_of_elements_calc,
+                                      merge_windows=self.merge_windows_calc,
+                                      internal_id=internal_id,
+                                      path=path)
 
     def export_parameters_txt(self, path=None):
         '''Exports parameters of all buildings in a readable text file
