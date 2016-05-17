@@ -564,16 +564,7 @@ class Test_teaser(object):
         prj.save_project("unitTest")
         prj.set_default()
 
-    def test_load_old_teaser(self):
-        '''test of load_old_teaser'''
-
-        prj.load_old_teaser(Utilis.get_full_path(("Examples/ExampleInputFiles"
-                                               "/Teaser3/SixZoneOffice.xml")))
-        tz_area = sum([tz.area for tz in prj.buildings[
-            -1].thermal_zones])
-        assert prj.buildings[-1].net_leased_area == tz_area
-        prj.set_default()
-
+    
     #commented until we find solution for opengis PyXB bindings
     def test_save_citygml(self):
         '''test of save_gml'''
@@ -698,7 +689,7 @@ class Test_teaser(object):
         '''test of set_outer_wall_area'''
         print(prj.buildings[-1].thermal_zones[-1].outer_walls[1].area)
         prj.buildings[-1].set_outer_wall_area(2.0, 0.0)
-        
+
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         print(therm_zone.outer_walls[1].area)
         assert round(therm_zone.outer_walls[0].area, 3) == 2.0
@@ -868,7 +859,7 @@ class Test_teaser(object):
 
         prj.buildings[-1].thermal_zones[-1].parallel_connection("ebc")
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        
+
         assert round(therm_zone.r1_ow, 12) == 0.001007515484
         assert round(therm_zone.c1_ow, 5) == 3648580.59312
         assert round(therm_zone.r1_iw, 13) == 0.0097195611408
@@ -983,7 +974,9 @@ class Test_teaser(object):
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].load_type_element(1988, "heavy")
         therm_zone.inner_walls[0].load_type_element(1988, "light")
-        therm_zone.windows[0].load_type_element(1988, "heavy")
+        therm_zone.windows[0].load_type_element(
+            1988,
+            "Kunststofffenster, Isolierverglasung")
 
     def test_save_type_element(self):
         '''test of save_type_element, no parameter checking'''

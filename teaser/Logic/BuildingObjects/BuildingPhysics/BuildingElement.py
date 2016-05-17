@@ -259,6 +259,12 @@ class BuildingElement(object):
 
         import teaser.Data.Input.buildingelement_input as buildingelement_input
 
+        self.layer = None
+        self._inner_convection = None
+        self._inner_radiation = None
+        self._outer_convection = None
+        self._outer_radiation = None
+
         buildingelement_input.load_type_element(element=self,
                                                 year=year,
                                                 construction=construction)
