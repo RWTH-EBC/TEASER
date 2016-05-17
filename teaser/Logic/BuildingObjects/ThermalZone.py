@@ -745,16 +745,16 @@ class ThermalZone(object):
             sum_r_conv_inner_iw += 1 / in_wall.r_inner_conv
             sum_r_rad_inner_iw += 1 / in_wall.r_inner_rad
             sum_r_comb_inner_iw += 1 / in_wall.r_inner_comb
-            sum_r_conv_outer_iw += 1 / in_wall.r_outer_conv
-            sum_r_rad_outer_iw += 1 / in_wall.r_outer_rad
-            sum_r_comb_outer_iw += 1 / in_wall.r_outer_comb
+            #sum_r_conv_outer_iw += 1 / in_wall.r_outer_conv
+            #sum_r_rad_outer_iw += 1 / in_wall.r_outer_rad
+            #sum_r_comb_outer_iw += 1 / in_wall.r_outer_comb
 
         self.r_conv_inner_iw = 1 / sum_r_conv_inner_iw
         self.r_rad_inner_iw = 1 / sum_r_rad_inner_iw
         self.r_comb_inner_iw = 1 / sum_r_comb_inner_iw
-        self.r_conv_outer_iw = 1 / sum_r_conv_outer_iw
-        self.r_rad_outer_iw = 1 / sum_r_rad_outer_iw
-        self.r_comb_outer_iw = 1 / sum_r_comb_outer_iw
+        #self.r_conv_outer_iw = 1 / sum_r_conv_outer_iw
+        #self.r_rad_outer_iw = 1 / sum_r_rad_outer_iw
+        #self.r_comb_outer_iw = 1 / sum_r_comb_outer_iw
 
         self.alpha_conv_iw = 1/(self.r_conv_inner_iw * self.area_iw)
         self.alpha_rad_iw = 1/(self.r_rad_inner_iw * self.area_iw)

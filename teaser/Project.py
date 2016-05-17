@@ -9,7 +9,6 @@ import warnings
 import teaser.Logic.Utilis as utilis
 import teaser.Data.Input.TeaserXML_input as txml_in
 import teaser.Data.Output.TeaserXML_output as txml_out
-import teaser.Data.Input.OldTeaser_input as old_teaser
 import teaser.Data.Output.aixlib_output as aixlib_output
 import teaser.Data.Output.annex60_output as annex60_output
 import teaser.Data.Output.Text_output as text_out
