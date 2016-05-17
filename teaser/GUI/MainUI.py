@@ -4414,8 +4414,6 @@ class MainUI(QDialog):
     def click_export_button(self):
         # path in GUI, which is need for the output
         path_output_folder = str(self.export_save_template_lineedit.text())
-        template_folder = utilis.create_path_to_template_folder()
-        os.chdir(template_folder)
 
         list_of_building_name = []
         for i in range(self.side_bar_buildings_combo_box.count()):
