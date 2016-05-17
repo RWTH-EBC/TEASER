@@ -111,7 +111,7 @@ class Project(object):
 
     def calc_all_buildings(self,
                            number_of_elements=2,
-                           merge_windows=True,
+                           merge_windows=False,
                            used_library='AixLib'):
         '''Calculates values for all project buildings
 
@@ -119,12 +119,14 @@ class Project(object):
         ----------
 
         number_of_elements : int
-            defines the number of elements, that area aggregated, between 1
+            defines the number of elements, that areaaggregated, between 1
             and 4, default is 2
+            For AixLib you should always use 2 elements!!!
 
         merge_windows : bool
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False
+            For AixLib vdi calculation is True, ebc calculation is False
 
         used_library : str
             used library (AixLib and Annex60 are supported)
