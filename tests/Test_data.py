@@ -6,7 +6,7 @@ Created July 2015
 
 from teaser.Logic import Utilis
 from teaser.Project import Project
-# import xml.etree.ElementTree as et
+import math
 
 import HelpTest
 prj = Project(True)
@@ -869,36 +869,24 @@ class Test_teaser(object):
         assert round(therm_zone.alpha_comb_outer_win, 1) == 25.0
         assert round(therm_zone.alpha_conv_outer_win, 1) == 20.0
         assert round(therm_zone.weighted_g_value, 3) == 0.789
-    """
-    def test_parallel_connection(self):
-        '''test of test_parallel_connection'''
 
-        prj.buildings[-1].thermal_zones[-1].parallel_connection("vdi")
+    def test_calc_chain_matrix(self):
+        '''test of calc_chain_matrix'''
         therm_zone = prj.buildings[-1].thermal_zones[-1]
+        omega=(2 * math.pi / 86400 / 5)
+        r1_ow, c1_ow = prj.buildings[-1].thermal_zones[-1].calc_chain_matrix(
+            element_list=therm_zone.outer_walls,
+            omega=omega)
+        assert round(r1_ow, 14) == 0.00100751548411
+        assert round(c1_ow, 5) == 3648580.59312
 
-        assert round(therm_zone.r1_ow, 14) == 0.00077277329453
-        assert round(therm_zone.c1_ow, 5) == 3648580.59312
-        assert round(therm_zone.r1_iw, 13) == 0.0097195611408
-        assert round(therm_zone.c1_iw, 6) == 319983.518743
-        assert round(therm_zone.r1_win, 1) == 301.5
-        assert round(therm_zone.r1_ow, 14) == 0.00077277329453
-        assert round(therm_zone.r_total, 17) == 0.00593609876387175
-        assert round(therm_zone.r_rad_ow_iw, 5) == 0.00058
-        assert round(therm_zone.r_rest_ow, 13) == 0.0047407069248
+        r1_iw, c1_iw = prj.buildings[-1].thermal_zones[-1].calc_chain_matrix(
+            element_list=therm_zone.inner_walls,
+            omega=omega)
+        assert round(r1_iw, 13) == 0.0097195611408
+        assert round(c1_iw, 6) == 319983.518743
 
-        prj.buildings[-1].thermal_zones[-1].parallel_connection("ebc")
-        therm_zone = prj.buildings[-1].thermal_zones[-1]
 
-        assert round(therm_zone.r1_ow, 12) == 0.001007515484
-        assert round(therm_zone.c1_ow, 5) == 3648580.59312
-        assert round(therm_zone.r1_iw, 13) == 0.0097195611408
-        assert round(therm_zone.c1_iw, 6) == 319983.518743
-        assert round(therm_zone.r1_win, 12) == 0.022122719735
-        assert round(therm_zone.r1_ow, 12) == 0.001007515484
-        assert round(therm_zone.r_total, 12) == 0.007375618172
-        assert round(therm_zone.r_rad_ow_iw, 15) == 0.000609756097561
-        assert round(therm_zone.r_rest_ow, 13) == 0.0059227874045
-    """
     def test_calc_weightfactor(self):
         '''test of calc_weightfactor'''
         prj.set_default()
