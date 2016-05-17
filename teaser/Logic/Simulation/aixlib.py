@@ -12,8 +12,8 @@ and AHU operation values
 """
 import scipy.io
 import teaser.Logic.Utilis as utilis
-
-def compare_orientations(bldg):
+import numpy as np
+def compare_orientation(bldg):
     """Fills the zone weightfactors according to orientation and tilt of
         building
 
@@ -226,7 +226,7 @@ def modelica_AHU_boundary(bldg,
     path = path + bldg.file_ahu
 
     if time_line is None:
-        time_line = bldg.create_timeline()
+        time_line = create_timeline(bldg)
     if bldg.with_ahu is True:
         profile_temperature = \
                     bldg.central_ahu.profile_temperature
@@ -319,7 +319,8 @@ def modelica_gains_boundary(bldg,
         if time_line is None:
             duration= len(zone_count.use_conditions.profile_persons) * \
                         3600
-            time_line = bldg.create_timeline(duration_profile = duration)
+            time_line = create_timeline(bldg=bldg,
+                                        duration_profile = duration)
 
 #            zone_count.use_conditions.profile_persons.insert(0,0)
 #            zone_count.use_conditions.profile_machines.insert(0,0)

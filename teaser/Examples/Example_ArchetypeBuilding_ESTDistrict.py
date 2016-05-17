@@ -24,14 +24,10 @@ def example_type_district():
 
     prj_est1 = Project(load_data=True)
     prj_est1.name = "EST1"
-    prj_est1.calculation_method = 'vdi'
     prj_est4 = Project(load_data=True)
     prj_est4.name = "EST4"
-    prj_est4.calculation_method = 'vdi'
     prj_est7 = Project(load_data=True)
     prj_est7.name = "EST7"
-    prj_est7.calculation_method = 'vdi'
-
     """The functions starting with type_bldg giving us the opportunity to
     create the specific type building (e.g. type_bldg_residential). The function
     automatically calculates all the necessary parameter. If not specified different
@@ -40,7 +36,7 @@ def example_type_district():
     number_of_buildings_est1 = 14
 
     for building in range(1,round((number_of_buildings_est1)*0.67)+1):
-        name_help="Building" + str(building)
+        name_help = "Building" + str(building)
         year_of_construction_help = randint(1960,1980)
         prj_est1.type_bldg_est1a(name=name_help,
                             year_of_construction=year_of_construction_help,
@@ -53,7 +49,7 @@ def example_type_district():
 
     for building in range(round((number_of_buildings_est1)*0.67)+1,
                           number_of_buildings_est1+1):
-        name_help="Building" + str(building)
+        name_help = "Building" + str(building)
         year_of_construction_help = randint(1960,1980)
         prj_est1.type_bldg_est1b(name=name_help,
                             year_of_construction=year_of_construction_help,
@@ -68,7 +64,7 @@ def example_type_district():
     number_of_buildings_est4 = 4
 
     for building in range(1,number_of_buildings_est4+1):
-        name_help="Building" + str(building)
+        name_help = "Building" + str(building)
         year_of_construction_help = randint(1960,1980)
         prj_est4.type_bldg_est4b(name=name_help,
                             year_of_construction=year_of_construction_help,
@@ -83,7 +79,7 @@ def example_type_district():
     number_of_buildings_est7 = 29
 
     for building in range(1,round((number_of_buildings_est7)*0.45)+1):
-        name_help="Building" + str(building)
+        name_help = "Building" + str(building)
         year_of_construction_help = randint(1900,1918)
         prj_est7.type_bldg_est7(name=name_help,
                             year_of_construction=year_of_construction_help,
@@ -97,7 +93,7 @@ def example_type_district():
 
     for building in range(round((number_of_buildings_est7)*0.45)+1,
                           number_of_buildings_est7+1):
-        name_help="Building" + str(building)
+        name_help = "Building" + str(building)
         year_of_construction_help = randint(1900,1918)
         prj_est7.type_bldg_est7(name=name_help,
                             year_of_construction=year_of_construction_help,

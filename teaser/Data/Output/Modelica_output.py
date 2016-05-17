@@ -88,13 +88,18 @@ def export_aixlib(prj, building_model="None", zone_model="None",
 
             out_file = open(utilis.get_full_path
                             (bldg_path + bldg.name + ".mo"), 'w')
+            if bldg.merge_windows_calc is True:
+                calc_method = 'vdi'
+            elif bldg.merge_windows_calc is False:
+                calc_method = 'ebc'
             out_file.write(model_template.render_unicode(
                            bldg=bldg, mod_prj=prj.modelica_project,
                            weather=prj.weather_file_path,
                            weather_header=prj.weather_file_header,
                            model=building_model,
                            zone=zone_model,
-                           physics=bldg._calculation_method, gFac=corG))
+                           physics=calc_method,
+                           gFac=corG))
             out_file.close()
 
             for zone in bldg.thermal_zones:
