@@ -985,20 +985,6 @@ class ThermalZone(object):
                 pass
         return located
 
-    def find_groundfloors(self, orientation, tilt):
-        '''
-        this function returns a list of all groundfloors elemnts with the same
-        orientation and tilt to sum them in the building
-        '''
-        located = []
-        for i in self.outer_walls:
-            if i.orientation == orientation and i.tilt == tilt and \
-                type(i).__name__ == "GroundFloor":
-                located.append(i)
-            else:
-                pass
-        return located
-
     def set_inner_wall_area(self):
         '''Sets the inner wall area.
 
