@@ -83,12 +83,3 @@ def get_full_path(rel_path):
     full_path = os.path.join(first_path, rel_path)
 
     return full_path
-
-def create_path_to_template_folder(self,):
-
-    # TODO: This probably belongs to the Utilis class and not here ;)
-    path = "InputData\\RecordTemplate\\"
-    pathTemplate = self.get_default_path()
-    leng = len(pathTemplate)
-    fullPath = pathTemplate[:leng - 10] + path
-    return(str(fullPath))
