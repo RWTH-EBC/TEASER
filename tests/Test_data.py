@@ -98,7 +98,9 @@ class Test_teaser(object):
                                               "\\new.teaserXML"))
         therm_zone = prj.buildings[0].thermal_zones[0]
 
-        prj.buildings[0].calc_building_parameter('ebc')
+        prj.buildings[0].calc_building_parameter(number_of_elements=2,
+                                                 merge_windows=False,
+                                                 used_library='AixLib')
 
         assert round(therm_zone.r1_iw, 11) == 4.62113e-06
         assert round(therm_zone.c1_iw, 2) == 1209810287.22
@@ -584,22 +586,29 @@ class Test_teaser(object):
 
         HelpTest.building_test2(prj)
         HelpTest.building_test2(prj)
-        prj.calc_all_buildings('vdi')
-        prj.calc_all_buildings('ebc')
+        prj.calc_all_buildings(number_of_elements=2,
+                               merge_windows=True,
+                               used_library='AixLib')
+        prj.calc_all_buildings(number_of_elements=2,
+                               merge_windows=False,
+                               used_library='AixLib')
 
     def test_retrofit_all_buildings(self):
         '''test of retrofit_all_buildings, no calculation verification'''
 
         prj.retrofit_all_buildings(2015)
 
-    def test_export_record(self):
-        '''test of export_record, no calculation verification'''
+    def test_export_aixlib(self):
+        '''test of export_aixlib, no calculation verification'''
 
-        prj.calc_all_buildings('vdi')
-        prj.export_record('MultizoneEquipped')
-        # prj.export_record('AixLibMultizone')
-        prj.calc_all_buildings('ebc')
-        prj.export_record('MultizoneEquipped')
+        prj.calc_all_buildings(number_of_elements=2,
+                               merge_windows=True,
+                               used_library='AixLib')
+        prj.export_aixlib(building_model='MultizoneEquipped')
+        prj.calc_all_buildings(number_of_elements=2,
+                               merge_windows=False,
+                               used_library='AixLib')
+        prj.export_aixlib(building_model='MultizoneEquipped')
 
     def test_export_parameters_txt(self):
         '''test of the export of the readable parameter output'''
@@ -752,7 +761,9 @@ class Test_teaser(object):
         prj.set_default()
         HelpTest.building_test2(prj)
 
-        prj.buildings[-1].calc_building_parameter('vdi')
+        prj.buildings[-1].calc_building_parameter(number_of_elements=2,
+                                                 merge_windows=True,
+                                                 used_library='AixLib')
 
         assert round(prj.buildings[-1].volume, 1) == 490.0
         assert round(
@@ -872,8 +883,9 @@ class Test_teaser(object):
         '''test of calc_weightfactor'''
         prj.set_default()
         HelpTest.building_test2(prj)
-        prj.buildings[-1].thermal_zones[-1].calc_zone_parameters(number_of_elements=2, merge_windows=True)
-        prj.buildings[-1].compare_orientation()
+        prj.buildings[-1].calc_building_parameter(number_of_elements=2,
+                                                  merge_windows=True,
+                                                  used_library='AixLib')
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
 
@@ -891,10 +903,10 @@ class Test_teaser(object):
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
 
-        prj.buildings[-1].thermal_zones[-1].calc_zone_parameters(
-            number_of_elements=2, merge_windows=False)
+        prj.buildings[-1].calc_building_parameter(number_of_elements=2,
+                                                  merge_windows=False,
+                                                  used_library='AixLib')
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        prj.buildings[-1].compare_orientation()
 
         assert therm_zone.weightfactor_ow == [0.03047939672771178,
                                               0.04267115541879649,

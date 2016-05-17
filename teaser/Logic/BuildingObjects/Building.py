@@ -306,7 +306,7 @@ class Building(object):
 
     def calc_building_parameter(self,
                                 number_of_elements=2,
-                                merge_windows=True,
+                                merge_windows=False,
                                 used_library='AixLib'):
         """calc all building parameters
 

@@ -31,7 +31,9 @@ def parameter_room10():
     """Then we calculate all parameter with the calculation
     core 'vdi', that is exactly as defined in VDI 6007-1."""
 
-    prj.calc_all_buildings('vdi')
+    prj.calc_all_buildings(number_of_elements=2,
+                           merge_windows=True,
+                           used_library='AixLib')
 
     """After this, we can export our projects as .txt."""
 
