@@ -8,7 +8,8 @@ This module contains function to call Templates for Modelica model generation
 
 import teaser.Logic.Utilis as utilis
 from mako.template import Template
-
+import scipy.io
+import teaser.Logic.Simulation.aixlib as aixlib
 
 def export_aixlib(prj, building_model="None", zone_model="None",
                 corG=None, internal_id=None, path=None):
@@ -77,9 +78,9 @@ def export_aixlib(prj, building_model="None", zone_model="None",
             utilis.create_path(utilis.get_full_path(bldg_path))
             utilis.create_path(utilis.get_full_path
                                (bldg_path + bldg.name + "_DataBase"))
-            bldg.modelica_set_temp(path=path + "\\" + bldg.name)
-            bldg.modelica_AHU_boundary(path=path + "\\" + bldg.name)
-            bldg.modelica_gains_boundary(path=path + "\\" + bldg.name)
+            aixlib.modelica_set_temp(bldg=bldg, path=path + "\\" + bldg.name)
+            aixlib.modelica_AHU_boundary(bldg=bldg, path=path + "\\" + bldg.name)
+            aixlib.modelica_gains_boundary(bldg=bldg, path=path + "\\" + bldg.name)
 
             _help_package(bldg_path, bldg.name)
             _help_package_order(bldg_path, [bldg], None,

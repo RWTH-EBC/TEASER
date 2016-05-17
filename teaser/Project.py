@@ -76,6 +76,7 @@ class Project(object):
         self.weather_file_header = ""
         self.weather_file_path = ""
         self.buildings = []
+
         self._calculation_method = "vdi"
 
         self.load_data = load_data
