@@ -1,7 +1,10 @@
-examples package
+Examples
 =======================
 
-Example_TypeBuilding
+You can find more examples in the example package of the TEASER distribution.
+
+
+example_archetype.py
 -------------------------------------------
 
 This module contains an example how to create an archetype Building, to retrofit
@@ -48,7 +51,7 @@ To export the parameters to a Modelica record, we use the export_record
 function. path = None indicates, that we want to store the records in
 TEASER'S Output folder::
 
-prj.export_record(building_model="MultizoneEquipped",
+prj.export_aixlib(building_model="MultizoneEquipped",
 									zone_model="ThermalZoneEquipped",
 									corG=True,
 									internal_id=None,
@@ -72,7 +75,7 @@ XML file::
 
 
 
-Example_CreateBuilding
+example_createbuilding.py
 ---------------------------------------------
 
 This modeule shows how to create a building from scratch (or arbitrary sources)
@@ -83,8 +86,8 @@ you can import all the classes at the beginning.::
 	from teaser.Project import Project
 	from teaser.Logic.BuildingObjects.Building import Building
 
-	prj = Project(load_data = True)
-	bldg = Building(parent = prj)
+	prj = Project(load_data=True)
+	bldg = Building(parent=prj)
 
 Set some building parameters::
 
@@ -97,7 +100,7 @@ Instantiate a ThermalZone class, with building as parent and set  some parameter
 
     from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
 
-    tz = ThermalZone(parent = bldg)
+    tz = ThermalZone(parent=bldg)
     tz.name = "Living Room"
     tz.area = 45.0
     tz.volume = 123.0
@@ -108,7 +111,7 @@ Instantiate UseConditionsOffice18599 class with thermal zone as parent, and load
 		from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions import \
 			BoundaryConditions
 
-    tz.use_conditions = BoundaryConditions(parent = tz)
+    tz.use_conditions = BoundaryConditions(parent=tz)
     tz.use_conditions.load_use_conditions("Living")
 
 Instantiate, each one OuterWall class, InnerWall class and Window class, with thermal zone as parent::
@@ -117,9 +120,9 @@ Instantiate, each one OuterWall class, InnerWall class and Window class, with th
     from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
     from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 
-    out_wall = OuterWall(parent = tz)
-    in_wall = InnerWall(parent = tz)
-    win = Window(parent = tz)
+    out_wall = OuterWall(parent=tz)
+    in_wall = InnerWall(parent=tz)
+    win = Window(parent=tz)
 
 Out of typical construction the material properties for inner and outer wall are loaded::
 
@@ -154,7 +157,7 @@ Instantiate a Layer class, with window as parent, set attributes::
 
     from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
 
-    win_layer = Layer(parent = win)
+    win_layer = Layer(parent=win)
     win_layer.id = 1
     win_layer.thickness = 0.024
 
@@ -162,22 +165,27 @@ Instantiate a Material class, with window layer as parent, set attributes::
 
    from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
 
-    win_material = Material(parent = win_layer)
+    win_material = Material(parent=win_layer)
     win_material.name = "GlasWindow"
     win_material.thermal_conduc = 0.067
     win_material.transmittance = 0.9
 
-We calculate the RC Values according to ebc procedure::
+We calculate the RC Values for a reduced order model with two elements and an
+extra resistance for the windows using the AixLib::
 
-    prj.calc_all_buildings(calculation_core = 'ebc' )
+    prj.calc_all_buildings(number_of_elements=2,
+                           merge_windows=False,
+                           used_library="AixLib")
 
-Export the Modelica Record::
+Export the AixLib model::
 
-		prj.export_record(building_model="MultizoneEquipped",
-									zone_model="ThermalZoneEquipped",
-									corG=False,)
+		prj.export_aixlib(building_model="MultizoneEquipped",
+                      zone_model="ThermalZoneEquipped",
+                      corG=False,
+                      internal_id=None,
+                      path=None)
 
 Save CityGML::
 
     prj.save_gml(file_name = "ExampleProject",
-					path = None)
+                 path = None)

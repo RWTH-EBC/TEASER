@@ -18,10 +18,6 @@ four packages:
 
   teaser.Data
 
-.. toctree::
-  :maxdepth: 2
-
-  teaser.Examples
 
 .. toctree::
     :maxdepth: 2
