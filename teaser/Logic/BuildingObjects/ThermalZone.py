@@ -893,8 +893,8 @@ class ThermalZone(object):
     def calc_wf_three_element(self, merge_windows):
         '''Calculation of weightfactors.
 
-        Calculates the weightfactors of the outer walls, rooftops and ground
-        with possibility to merge windows into outer walls
+        Calculates the weightfactors of the outer walls (with rooftops) and
+        ground with possibility to merge windows into outer walls
 
         Parameters
         ----------
@@ -905,61 +905,23 @@ class ThermalZone(object):
         if merge_windows is True:
 
             for wall in self.outer_walls_help:
-                ua_help = wall.ua_value
-                for wall2 in self.outer_walls_help:
-                    if wall is wall2:
-                        pass
-                    elif wall.orientation == wall2.orientation and wall.tilt \
-                            == wall2.tilt:
-                        ua_help = ua_help + wall2.ua_value
-
-                wall.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+                wall.wf_out = wall.ua_value / (
+                    self.ua_value_ow + self.ua_value_win)
 
             for win in self.windows:
-                ua_help = win.ua_value
-                area_help = win.area
-                for win2 in self.windows:
-                    if win is win2:
-                        pass
-                    elif win.orientation == win2.orientation and win.tilt \
-                            == win2.tilt:
-                        ua_help = ua_help + win2.ua_value
-                        area_help = area_help + win2.area
-                win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
-                win.area = area_help
+                win.wf_out = win.ua_value / (
+                    self.ua_value_ow + self.ua_value_win)
 
         elif merge_windows is False:
 
             for wall in self.outer_walls_help:
-                ua_help = wall.ua_value
-                for wall2 in self.outer_walls_help:
-                    if wall is wall2:
-                        pass
-                    elif wall.orientation == wall2.orientation and wall.tilt \
-                            == wall2.tilt:
-                        ua_help = ua_help + wall2.ua_value
-                wall.wf_out = ua_help/self.ua_value_ow
+                wall.wf_out = wall.ua_value/self.ua_value_ow
 
             for win in self.windows:
-                ua_help = win.ua_value
-                for win2 in self.windows:
-                    if win is win2:
-                        pass
-                    elif win.orientation == win2.orientation and win.tilt \
-                            == win2.tilt:
-                        ua_help = ua_help + win2.ua_value
-                win.wf_out = ua_help/(self.ua_value_win)
+                win.wf_out = win.ua_value/(self.ua_value_win)
 
         for wall in self.ground_floors:
-            ua_help = wall.ua_value
-            for wall2 in self.ground_floors:
-                if wall is wall2:
-                    pass
-                elif wall.orientation == wall2.orientation and wall.tilt \
-                        == wall2.tilt:
-                    ua_help = ua_help + wall2.ua_value
-
-            wall.wf_out = ua_help/self.ua_value_gf
+            wall.wf_out = wall.ua_value/self.ua_value_gf
 
     def calc_wf_four_element(self, merge_windows):
         '''Calculation of weightfactors.
@@ -976,72 +938,26 @@ class ThermalZone(object):
         if merge_windows is True:
 
             for wall in self.outer_walls_help:
-                ua_help = wall.ua_value
-                for wall2 in self.outer_walls_help:
-                    if wall is wall2:
-                        pass
-                    elif wall.orientation == wall2.orientation and wall.tilt \
-                            == wall2.tilt:
-                        ua_help = ua_help + wall2.ua_value
-
-                wall.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
+                wall.wf_out = wall.ua_value / (
+                    self.ua_value_ow + self.ua_value_win)
 
             for win in self.windows:
-                ua_help = win.ua_value
-                area_help = win.area
-                for win2 in self.windows:
-                    if win is win2:
-                        pass
-                    elif win.orientation == win2.orientation and win.tilt \
-                            == win2.tilt:
-                        ua_help = ua_help + win2.ua_value
-                        area_help = area_help + win2.area
-                win.wf_out = ua_help/(self.ua_value_ow + self.ua_value_win)
-                win.area = area_help
+                win.wf_out = win.ua_value / (
+                    self.ua_value_ow + self.ua_value_win)
 
         elif merge_windows is False:
 
             for wall in self.outer_walls_help:
-                ua_help = wall.ua_value
-                for wall2 in self.outer_walls_help:
-                    if wall is wall2:
-                        pass
-                    elif wall.orientation == wall2.orientation and wall.tilt \
-                            == wall2.tilt:
-                        ua_help = ua_help + wall2.ua_value
-                wall.wf_out = ua_help/self.ua_value_ow
+                wall.wf_out = wall.ua_value/self.ua_value_ow
 
             for win in self.windows:
-                ua_help = win.ua_value
-                for win2 in self.windows:
-                    if win is win2:
-                        pass
-                    elif win.orientation == win2.orientation and win.tilt \
-                            == win2.tilt:
-                        ua_help = ua_help + win2.ua_value
-                win.wf_out = ua_help/(self.ua_value_win)
+                win.wf_out = win.ua_value/(self.ua_value_win)
 
         for wall in self.ground_floors:
-            ua_help = wall.ua_value
-            for wall2 in self.ground_floors:
-                if wall is wall2:
-                    pass
-                elif wall.orientation == wall2.orientation and wall.tilt \
-                        == wall2.tilt:
-                    ua_help = ua_help + wall2.ua_value
-
-            wall.wf_out = ua_help/self.ua_value_gf
+            wall.wf_out = wall.ua_value/self.ua_value_gf
 
         for wall in self.rooftops:
-            ua_help = wall.ua_value
-            for wall2 in self.ground_floors:
-                if wall is wall2:
-                    pass
-                elif wall.orientation == wall2.orientation and wall.tilt \
-                        == wall2.tilt:
-                    ua_help = ua_help + wall2.ua_value
-
-            wall.wf_out = ua_help/self.ua_value_rt
+            wall.wf_out = wall.ua_value/self.ua_value_rt
 
     def find_walls(self, orientation, tilt):
         '''
@@ -1064,20 +980,6 @@ class ThermalZone(object):
         located = []
         for i in self.windows:
             if i.orientation == orientation and i.tilt == tilt:
-                located.append(i)
-            else:
-                pass
-        return located
-
-    def find_groundfloors(self, orientation, tilt):
-        '''
-        this function returns a list of all groundfloors elemnts with the same
-        orientation and tilt to sum them in the building
-        '''
-        located = []
-        for i in self.outer_walls:
-            if i.orientation == orientation and i.tilt == tilt and \
-                type(i).__name__ == "GroundFloor":
                 located.append(i)
             else:
                 pass
