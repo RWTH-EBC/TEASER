@@ -75,8 +75,7 @@ def export_annex60(prj,
         for zone in bldg.thermal_zones:
             zone_path = os.path.join(bldg_path,
                                      bldg.name+"_DataBase")
-            print(zone_path)
-            print(utilis.get_full_path( zone_path + "\\" + zone.name + ".mo"))
+
             out_file = open(utilis.get_full_path(
                     zone_path + "\\" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
