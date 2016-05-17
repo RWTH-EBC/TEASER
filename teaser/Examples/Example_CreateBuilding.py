@@ -154,18 +154,22 @@ def example_create_building():
     '''
     We calculate the RC Values according to ebc procedure
     '''
-    prj.calc_all_buildings()
+    prj.calc_all_buildings(number_of_elements=2,
+                           merge_windows=False,
+                           used_library='AixLib')
 
     '''
     Export the Modelica Record
     '''
-    prj.export_record(building_model="MultizoneEquipped",
+    prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
-                      corG=False,)
+                      corG=False,
+                      internal_id=None
+                      path=None)
     '''
     Save new TEASER XML
     '''
-    #prj.save_project("ExampleProject")
+    prj.save_project("ExampleProject")
     
     
 if __name__ == '__main__':

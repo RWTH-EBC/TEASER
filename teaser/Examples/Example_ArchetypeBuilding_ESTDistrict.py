@@ -109,19 +109,19 @@ def example_type_district():
     function. path = None indicates, that we want to store the records in \
     TEASER'S Output folder"""
 
-    prj_est1.export_record(building_model="MultizoneEquipped",
+    prj_est1.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
                       path=None)
 
-    prj_est4.export_record(building_model="MultizoneEquipped",
+    prj_est4.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
                       path=None)
 
-    prj_est7.export_record(building_model="MultizoneEquipped",
+    prj_est7.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
@@ -133,7 +133,7 @@ def example_type_district():
 
     prj_est1.name = "EST1_Retrofit"
     prj_est1.retrofit_all_buildings(2015)
-    prj_est1.export_record(building_model="MultizoneEquipped",
+    prj_est1.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
@@ -141,7 +141,7 @@ def example_type_district():
 
     prj_est4.name = "EST4_Retrofit"
     prj_est4.retrofit_all_buildings(2015)
-    prj_est4.export_record(building_model="MultizoneEquipped",
+    prj_est4.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
@@ -149,7 +149,7 @@ def example_type_district():
 
     prj_est7.name = "EST7_Retrofit"
     prj_est7.retrofit_all_buildings(2015)
-    prj_est7.export_record(building_model="MultizoneEquipped",
+    prj_est7.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
