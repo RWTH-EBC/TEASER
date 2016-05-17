@@ -251,7 +251,7 @@ class Office(NonResidential):
                                                     6*[293.15])
             self.central_ahu.profile_min_relative_humidity = (25*[0.45])
             self.central_ahu.profile_max_relative_humidity = (25*[0.55])
-            self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
+            self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] + 6*[0.0])
 
     def generate_archetype(self):
         '''Generates an office building.
@@ -414,6 +414,112 @@ class Office(NonResidential):
             self.set_outer_wall_area(value, key)
         for key, value in self.window_area.items():
             self.set_window_area(value, key)
+
+        for zone in self.thermal_zones:
+            zone.set_inner_wall_area()
+            zone.set_volume_zone()
+
+    def generate_from_gml(self):
+        """enriches lod1 or lod2 data from citygml
+
+        adds Zones, BoundaryConditions, Material settings for walls and
+        windows to the geometric representation of CityGML
+
+        number or height of floors need to be specified
+        """
+
+        type_bldg_area = self.net_leased_area
+        self.net_leased_area = 0.0
+        # create zones with their corresponding area, name and usage
+        for key, value in self.zone_area_factors.items():
+            zone = ThermalZone(self)
+            zone.area = type_bldg_area * value[0]
+            zone.name = key
+            use_cond = UseCond(zone)
+            use_cond.load_use_conditions(value[1])
+            zone.use_conditions = use_cond
+            zone.use_conditions.with_ahu = False
+            zone.use_conditions.persons *= zone.area * 0.01
+            zone.use_conditions.machines *= zone.area * 0.01
+
+            for surface in self.gml_surfaces:
+                if surface.surface_tilt == 90:
+                    outer_wall = OuterWall(zone)
+                    outer_wall.load_type_element(self.year_of_construction,
+                                                 self.construction_type)
+                    outer_wall.name = surface.name
+                    outer_wall.tilt = surface.surface_tilt
+                    outer_wall.orientation = surface.surface_orientation
+
+                    window = Window(zone)
+                    window.load_type_element(self.year_of_construction,
+                                            "Kunststofffenster, Isolierverglasung")
+                    window.name = "asd"+str(surface.surface_tilt)
+                    window.tilt = surface.surface_tilt
+                    window.orientation = surface.surface_orientation
+
+                elif surface.surface_tilt == 0 and surface.surface_orientation ==\
+                        -2:
+                    outer_wall = GroundFloor(zone)
+                    outer_wall.load_type_element(self.year_of_construction,
+                                                 self.construction_type)
+                    outer_wall.name = surface.name
+                    outer_wall.tilt = surface.surface_tilt
+                    outer_wall.orientation = surface.surface_orientation
+
+                else:
+                    outer_wall = Rooftop(zone)
+                    outer_wall.load_type_element(self.year_of_construction,
+                                                 self.construction_type)
+                    outer_wall.name = surface.name
+                    outer_wall.tilt = surface.surface_tilt
+                    outer_wall.orientation = surface.surface_orientation
+
+            for key, value in self.inner_wall_names.items():
+
+                for zone in self.thermal_zones:
+                    inner_wall = InnerWall(zone)
+                    inner_wall.load_type_element(self.year_of_construction,
+                                                 self.construction_type)
+                    inner_wall.name = key
+                    inner_wall.tilt = value[0]
+                    inner_wall.orientation = value[1]
+
+            if self.number_of_floors > 1:
+
+                for key, value in self.ceiling_names.items():
+
+                    for zone in self.thermal_zones:
+                        ceiling = Ceiling(zone)
+                        ceiling.load_type_element(self.year_of_construction,
+                                                  self.construction_type)
+                        ceiling.name = key
+                        ceiling.tilt = value[0]
+                        ceiling.orientation = value[1]
+
+                for key, value in self.floor_names.items():
+
+                    for zone in self.thermal_zones:
+                        floor = Floor(zone)
+                        floor.load_type_element(self.year_of_construction,
+                                                self.construction_type)
+                        floor.name = key
+                        floor.tilt = value[0]
+                        floor.orientation = value[1]
+            else:
+                pass
+
+        for surface in self.gml_surfaces:
+            self.set_outer_wall_area(surface.surface_area *
+                                     (1- self.est_factor_win_area),
+                                     surface.surface_orientation)
+        for surface in self.gml_surfaces:
+
+            if surface.surface_tilt != 0 and surface.surface_orientation !=\
+                    -2 and surface.surface_orientation != -1:
+                self.set_window_area(surface.surface_area *
+                                     self.est_factor_win_area,
+                                     surface.surface_orientation)
 
         for zone in self.thermal_zones:
             zone.set_inner_wall_area()
