@@ -3388,6 +3388,14 @@ class MainUI(QDialog):
             for element in self.current_zone.inner_walls:
                 if element.internal_id == current_item.internal_id:
                     self.current_element = element
+        if "Floor" in current_item.text():
+            for element in self.current_zone.inner_walls:
+                if element.internal_id == current_item.internal_id:
+                    self.current_element = element
+        if "Ceiling" in current_item.text():
+            for element in self.current_zone.inner_walls:
+                if element.internal_id == current_item.internal_id:
+                    self.current_element = element
         if "Outer Wall" in current_item.text():
             for element in self.current_zone.outer_walls:
                 if element.internal_id == current_item.internal_id:
