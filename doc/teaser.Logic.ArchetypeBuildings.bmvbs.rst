@@ -1,10 +1,10 @@
-bmvbs package
+bmvbs 
 ==================================================
 
 **Description**
 
 The BMVBS package contains different modules for the creation
-and parametrisation of typebuildings. In TEASER4 these typebuildings are used to
+and parametrisation of typebuildings. In TEASER these typebuildings are used to
 set up datasets for buildings out of limited building information. For
 this, the methods are based on the following principles according to Lichtmess
 :cite:`Lichtme.2010`:

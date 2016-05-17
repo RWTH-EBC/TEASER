@@ -1,4 +1,4 @@
-Examples
+examples
 =======================
 
 You can find more examples in the example package of the TEASER distribution.

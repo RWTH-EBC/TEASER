@@ -1,8 +1,5 @@
-'''
-Created April 2016
-
-@author: TEASER Development Team
-'''
+#Created April 2016
+#TEASER 4 Development Team
 
 """material_output.py
 

@@ -1,4 +1,4 @@
-Data package
+data
 ===================
 
 .. toctree::

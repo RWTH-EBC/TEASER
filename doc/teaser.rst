@@ -27,7 +27,7 @@ four packages:
 .. toctree::
     :maxdepth: 2
 
-    teaser.GUI
+    teaser.gui
 
 
 In TEASERS root package there are two additional Python modules:
@@ -36,7 +36,7 @@ In TEASERS root package there are two additional Python modules:
     :maxdepth: 2
 
     teaser.Project
-    teaser.GuiStart
+    teaser.guistart
 
 
 Future Developments
