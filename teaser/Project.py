@@ -10,7 +10,7 @@ import teaser.Logic.Utilis as utilis
 import teaser.Data.Input.TeaserXML_input as txml_in
 import teaser.Data.Output.TeaserXML_output as txml_out
 import teaser.Data.Input.OldTeaser_input as old_teaser
-import teaser.Data.Output.Modelica_output as modelica_out
+import teaser.Data.Output.aixlib_output as modelica_out
 import teaser.Data.Output.Text_output as text_out
 from teaser.Data.DataClass import DataClass
 from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
