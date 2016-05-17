@@ -40,14 +40,8 @@ model ${bldg.name}
     Mass_frac=true,
     Sky_rad=true,
     Ter_rad=true,
-    % if weather != "":
-      fileName=Modelica.Utilities.Files.loadResource("${weather}"),
-      tableName="${weather_header}",
-    % else:
-      fileName=Modelica.Utilities.Files.loadResource(
+    fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"),
-      tableName="wetter",
-    % endif
     % if bldg.latitude is None:
       Latitude=49.5,
     % else:
@@ -58,8 +52,11 @@ model ${bldg.name}
     % else:
       Longitude=${bldg.longitude},
     % endif
-    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(
-    Azimut=${get_azimut(bldg._outer_area)}))
+    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition
+    (nSurfaces=${len(bldg.orientation_bldg)},
+    name={${orientation_name(bldg.orientation_bldg)}},
+    Azimut={${get_azimut(bldg.orientation_bldg)}},
+    Tilt={${list_to_string(bldg.tilt_bldg)}}))
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
@@ -72,7 +69,7 @@ model ${bldg.name}
     annotation (Placement(transformation(extent={{84,18},{64,38}})));
 
 
-equation 
+equation
   connect(weather.SolarRadiation_OrientedSurfaces, multizone.radIn)
     annotation (Line(points={{-16.8,67},{-16.8,50.5},{-15.74,50.5},{-15.74,33.5}},
         color={255,128,0}));
@@ -123,21 +120,21 @@ end ${bldg.name};
 % endif
 
 % if physics == "vdi":
-	(redeclare 
+	(redeclare
         AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
         buildingPhysics
 % else:
-  (redeclare 
+  (redeclare
         AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysics
         buildingPhysics
-% endif 
+% endif
 
 % if gFac is True:
-	(redeclare 
+	(redeclare
           AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
           corG)
 % else:
-	 (redeclare 
+	 (redeclare
           AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
           corG)
 % endif
@@ -150,14 +147,8 @@ end ${bldg.name};
     Mass_frac=true,
     Sky_rad=true,
     Ter_rad=true,
-    % if weather != "":
-      fileName=Modelica.Utilities.Files.loadResource("${weather}"),
-      tableName="${weather_header}",
-    % else:
-      fileName=Modelica.Utilities.Files.loadResource(
+    fileName=Modelica.Utilities.Files.loadResource(
         "modelica://AixLib/Resources/WeatherData/TRY2010_12_Jahr_Modelica-Library.txt"),
-      tableName="wetter",
-    % endif
     % if bldg.latitude is None:
       Latitude=49.5,
     % else:
@@ -168,8 +159,11 @@ end ${bldg.name};
     % else:
       Longitude=${bldg.longitude},
     % endif
-    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationData_N_E_S_W_Hor(
-    Azimut=${get_azimut(bldg._outer_area)}))
+    SOD=AixLib.DataBase.Weather.SurfaceOrientation.SurfaceOrientationBaseDataDefinition
+    (nSurfaces=${len(bldg.orientation_bldg)},
+    name={${orientation_name(bldg.orientation_bldg)}},
+    Azimut={${get_azimut(bldg.orientation_bldg)}},
+    Tilt={${list_to_string(bldg.tilt_bldg)}}))
     annotation (Placement(transformation(extent={{-24,68},{6,88}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
@@ -202,7 +196,7 @@ end ${bldg.name};
   Modelica.Blocks.Sources.Constant const[${get_n(bldg.thermal_zones)}](each k=0)
     annotation (Placement(transformation(extent={{-92,-22},{-72,-2}})));
 
-equation 
+equation
   connect(weather.SolarRadiation_OrientedSurfaces, multizoneEquipped.radIn)
     annotation (Line(points={{-16.8,67},{-16.8,50.5},{-15.74,50.5},{-15.74,33.5}},
         color={255,128,0}));
@@ -249,7 +243,16 @@ equation
 end ${bldg.name};
 % endif
 
-
+##list to string
+<%def name="list_to_string(list)", filter="trim">
+  <%
+  string_of_list = ""
+  for item in list:
+    string_of_list += str(item) + ", "
+  string_of_list = string_of_list[:-2]
+  return string_of_list
+  %>
+</%def>
 ##get n
 <%def name="get_n(list)", filter="trim">
   <%
@@ -264,17 +267,32 @@ end ${bldg.name};
 </%def>
 
 ##get azimut for modelica
-<%def name="get_azimut(dictionary)", filter="trim">
+<%def name="get_azimut(list)", filter="trim">
   <%
-  lis = list(dictionary.keys())
-  lis = sorted(lis)
-  newlist = [((element-180.0) * -1.0) for element in lis if element != -1.0
-             and element != -2.0]
-  newlist[1], newlist[3] = newlist[3], newlist[1]
-  string_of_list = "{"
-  for element in newlist:
-    string_of_list = string_of_list + str(element) + ','
-  string_of_list = string_of_list[:-1] + ', 0}'
-return string_of_list
+  newlist = []
+  for element in list:
+    if 0 < element < 360:
+        newlist.append(-180.0+element)
+    elif element == 0:
+        newlist.append(180.0)
+    elif element == -1:
+        newlist.append(0.0)
+    elif element == -2:
+        newlist.append(0.0)
+
+  string_of_list = ""
+  for item in newlist:
+    string_of_list += str(item) + ", "
+  string_of_list = string_of_list[:-2]
+  return string_of_list
+  %>
+</%def>
+<%def name="orientation_name(list)", filter="trim">
+  <%
+  string_of_list = ""
+  for item in list:
+    string_of_list += '\"' + str(item) + '\"' + ", "
+  string_of_list = string_of_list[:-2]
+  return string_of_list
   %>
 </%def>
