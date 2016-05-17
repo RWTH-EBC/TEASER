@@ -82,6 +82,10 @@ class Project(object):
         self.load_data = load_data
         self._type_element_file = None
 
+        self._number_of_elements_calc = 2
+        self._merge_windows_calc = True
+        self._used_library_calc = "AixLib"
+
         if load_data is True:
             self.data = self.instantiate_data_class()
         else:
@@ -93,7 +97,7 @@ class Project(object):
         Parameters
         ----------
 
-        type_element_files: str
+        type_element_file: str
             Name of project specific file (if needed). (default = None)
 
         Returns
@@ -104,22 +108,38 @@ class Project(object):
         '''
         return DataClass(type_element_file)
 
-    def calc_all_buildings(self, calculation_method):
+    def calc_all_buildings(self,
+                           number_of_elements=2,
+                           merge_windows=True,
+                           used_library='AixLib'):
         '''Calculates values for all project buildings
 
         Parameters
         ----------
 
-        calculation_method : string
-            setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
+        number_of_elements : int
+            defines the number of elements, that area aggregated, between 1
+            and 4, default is 2
+
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
+
+        used_library : str
+            used library (AixLib and Annex60 are supported)
 
         '''
 
-        self.calculation_method = calculation_method
+        self._number_of_elements_calc = number_of_elements
+        self._merge_windows_calc = merge_windows
+        self._used_library_calc = used_library
 
         for bldg in self.buildings:
 
-            bldg.calc_building_parameter()
+            bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
 
     def retrofit_all_buildings(self,
                                year_of_retrofit,
@@ -226,7 +246,10 @@ class Project(object):
                            construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter()
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_institute(self,
@@ -294,7 +317,10 @@ class Project(object):
                               construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter()
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_institute4(self,
@@ -362,7 +388,10 @@ class Project(object):
                                construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter()
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_institute8(self,
@@ -430,7 +459,10 @@ class Project(object):
                                construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter()
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est1a(self,
@@ -488,7 +520,10 @@ class Project(object):
                                construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est1b(self,
@@ -548,7 +583,10 @@ class Project(object):
                                number_of_apartments)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est4b(self,
@@ -608,7 +646,10 @@ class Project(object):
                                number_of_apartments)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est7(self,
@@ -668,7 +709,10 @@ class Project(object):
                                number_of_apartments)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_residential(self,
@@ -757,7 +801,10 @@ class Project(object):
                                          construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter()
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def save_project(self, file_name=None, path=None):
@@ -929,21 +976,53 @@ class Project(object):
         self.instantiate_data_class(value)
 
     @property
-    def calculation_method(self):
-        return self._calculation_method
+    def number_of_elements_calc(self):
+        return self._number_of_elements_calc
 
-    @calculation_method.setter
-    def calculation_method(self, value):
+    @number_of_elements_calc.setter
+    def number_of_elements_calc(self, value):
 
-        ass_error_1 = "calculation_method has to be vdi or ebc"
+        ass_error_1 = "calculation_method has to be 1,2,3 or 4"
 
-        assert value != "ebc" or value != "vdi", ass_error_1
+        assert value != [1, 2, 3, 4], ass_error_1
 
-        self._calculation_method = value
+        self._number_of_elements_calc = value
         
         for bldg in self.buildings:
-            bldg.calculation_method = value
-        
+            bldg.number_of_elements_calc = value
+
+    @property
+    def merge_windows_calc(self):
+        return self._merge_windows_calc
+
+    @merge_windows_calc.setter
+    def merge_windows_calc(self, value):
+
+        ass_error_1 = "merge windows needs to be True or False"
+
+        assert value != [True, False], ass_error_1
+
+        self._merge_windows_calc = value
+
+        for bldg in self.buildings:
+            bldg.merge_windows_calc = value
+
+    @property
+    def used_library_calc(self):
+        return self._used_library_calc
+
+    @used_library_calc.setter
+    def used_library_calc(self, value):
+
+        ass_error_1 = "used library needs to be AixLib or Annex60"
+
+        assert value != ["AixLib", "Annex60"], ass_error_1
+
+        self._used_library_calc = value
+
+        for bldg in self.buildings:
+            bldg.used_library_calc = value
+
     @property
     def name(self):
         return self._name
