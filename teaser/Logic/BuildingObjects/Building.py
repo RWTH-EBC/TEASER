@@ -308,7 +308,7 @@ class Building(object):
                                 number_of_elements=2,
                                 merge_windows=True,
                                 used_library='AixLib'):
-        '''calc all building parameters
+        """calc all building parameters
 
         This functions calculates the parameters of all zones in a building
         sums norm heat load of all zones
@@ -316,11 +316,18 @@ class Building(object):
 
         Parameters
         ----------
+        number_of_elements : int
+            defines the number of elements, that area aggregated, between 1
+            and 4, default is 2
 
-        calculation_method : string
-            setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
 
-        '''
+        used_library : str
+            used library (AixLib and Annex60 are supported)
+        """
+
         self._number_of_elements_calc = number_of_elements
         self._merge_windows_calc = merge_windows
         self._used_library_calc = used_library
