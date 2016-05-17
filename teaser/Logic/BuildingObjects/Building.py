@@ -374,12 +374,19 @@ class Building(object):
 
         for zone in self.thermal_zones:
 
-            groundfloors = zone.find_groundfloors(-2, 0)
+            groundfloors = zone.find_walls(-2, 0)
             if groundfloors == []:
                 zone.weightfactor_ground.append(0.0)
             else:
                 zone.weightfactor_ground.append(
                     sum([groundfl.wf_out for groundfl in groundfloors]))
+
+            rooftops = zone.find_walls(-1, 0)
+            if rooftops == []:
+                zone.weightfactor_rt.append(0.0)
+            else:
+                zone.weightfactor_rt.append(
+                    sum([roof.wf_out for roof in rooftops]))
 
             for i in self.orient_tilt:
                 walls = zone.find_walls(i[0], i[1])
