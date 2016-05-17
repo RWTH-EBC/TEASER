@@ -1,9 +1,9 @@
 # Created March 2016
 # TEASER Development Team
 
-"""Modelica_output
+"""aixlib_output
 
-This module contains function to call Templates for Modelica model generation
+This module contains function to call Templates for AixLib model generation
 """
 
 import teaser.Logic.Utilis as utilis
