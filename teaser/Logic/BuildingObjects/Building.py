@@ -11,6 +11,8 @@ import scipy.io
 import teaser.Logic.Utilis as utilis
 from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU \
     import BuildingAHU
+import teaser.Logic.Simulation.aixlib as aixlib
+
 
 class Building(object):
     '''Building Class
@@ -94,8 +96,7 @@ class Building(object):
         
         if with_ahu is True:
             self.central_ahu = BuildingAHU(self)
-        
-        
+
         self.number_of_floors = None
         self.height_of_floors = None
         self.net_leased_area = net_leased_area
@@ -121,7 +122,9 @@ class Building(object):
         self.orientation_bldg = []
         self.tilt_bldg = []
         self.orient_tilt = []
-        self.calculation_method = None
+        self._number_of_elements_calc = 2
+        self._merge_windows_calc = False
+        self._used_library_calc = "AixLib"
 
     def set_outer_wall_area(self, new_area, orientation):
         '''Outer area wall setter
@@ -234,7 +237,10 @@ class Building(object):
                 sum_area += (wall_count.area)
         return sum_area
 
-    def set_specific_wall_area(self, spec_zone, spec_wall, new_area):
+    def set_specific_wall_area(self,
+                               spec_zone,
+                               spec_wall,
+                               new_area):
         '''set one specific wall area
 
         sets the area of a specific wall in a specific zone and weights the
@@ -298,7 +304,10 @@ class Building(object):
         for key in self.window_area:
             self.window_area[key] = self.get_window_area(key)
 
-    def calc_building_parameter(self, calculation_method=None):
+    def calc_building_parameter(self,
+                                number_of_elements=2,
+                                merge_windows=True,
+                                used_library='AixLib'):
         '''calc all building parameters
 
         This functions calculates the parameters of all zones in a building
@@ -312,41 +321,24 @@ class Building(object):
             setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
 
         '''
-        number_of_elements = 2
-        merge_windows = True
-        if calculation_method is not None:
-            self.calculation_method = calculation_method
-            if self.calculation_method == 'vdi':
-                number_of_elements = 2
-                merge_windows = True
-            elif self.calculation_method == 'ebc':
-                number_of_elements = 2
-                merge_windows = False
-        else:
-            pass
+        self._number_of_elements_calc = number_of_elements
+        self._merge_windows_calc = merge_windows
+        self._used_library_calc = used_library
 
         for zone in self.thermal_zones:
             zone.calc_zone_parameters(number_of_elements=number_of_elements,
                                       merge_windows=merge_windows,
                                       t_bt=5)
             self.sum_heating_load += zone.heating_load
-        self.compare_orientation()
 
-    def compare_orientation(self):
-        '''Fills the zone weightfactors according to orientation and tilt of
-        building
+        if self.used_library_calc == 'AixLib':
+            aixlib.compare_orientation(self)
+        elif self.used_library_calc == 'Annex60':
+            pass
 
-        compares orientation and tilt of all outer building elements and then
-        creates lists for zone weightfactors and building orientation and tilt
 
-        This is an AixLib specific function!
-
-        '''
-        import teaser.Logic.Simulation.aixlib as aixlib
-
-        aixlib.compare_orientations(self)
-
-    def retrofit_building(self, year_of_retrofit=None,
+    def retrofit_building(self,
+                          year_of_retrofit=None,
                           window_type=None,
                           material=None):
         ''' Retrofits all zones in the building
@@ -370,7 +362,9 @@ class Building(object):
         for zone in self.thermal_zones:
             zone.retrofit_zone(window_type, material)
 
-        self.calc_building_parameter(self.calculation_method)
+        self.calc_building_parameter(number_of_elements=self.used_library_calc,
+                                     merge_windows=self.merge_windows_calc,
+                                     used_library=self.used_library_calc)
 
     def rotate_building(self, angle):
         '''rotates the building to a given angle
@@ -592,20 +586,58 @@ class Building(object):
         self._central_ahu = value
 
     @property
-    def calculation_method(self):
+    def number_of_elements_calc(self):
 
-        return self._calculation_method
+        return self._number_of_elements_calc
 
-    @calculation_method.setter
-    def calculation_method(self, value):
+    @number_of_elements_calc.setter
+    def number_of_elements_calc(self, value):
 
-        ass_error_1 = "calculation_method has to be vdi or ebc"
+        ass_error_1 = "calculation_method has to be 1,2,3 or 4"
 
-        assert value != "ebc" or value != "vdi", ass_error_1
+        assert value != [1, 2, 3, 4], ass_error_1
 
         if self.parent is None and value is None:
-            self._calculation_method = "vdi"
+            self._number_of_elements_calc = 2
         elif self.parent is not None and value is None:
-            self._calculation_method = self.parent.calculation_method
+            self._number_of_elements_calc = self.parent.number_of_elements_calc
         elif value is not None:
-            self._calculation_method = value
+            self._number_of_elements_calc = value
+
+    @property
+    def merge_windows_calc(self):
+
+        return self._merge_windows_calc
+
+    @merge_windows_calc.setter
+    def merge_windows_calc(self, value):
+
+        ass_error_1 = "merge windows needs to be True or False"
+
+        assert value != [True, False], ass_error_1
+
+        if self.parent is None and value is None:
+            self._merge_windows_calc = 2
+        elif self.parent is not None and value is None:
+            self._merge_windows_calc = self.parent.merge_windows_calc
+        elif value is not None:
+            self._merge_windows_calc = value
+
+    @property
+    def used_library_calc(self):
+
+        return self._used_library_calc
+
+    @used_library_calc.setter
+    def used_library_calc(self, value):
+
+        ass_error_1 = "used library needs to be AixLib or Annex60"
+
+        assert value != ["AixLib", "Annex60"], ass_error_1
+
+        if self.parent is None and value is None:
+            self._used_library_calc = 2
+        elif self.parent is not None and value is None:
+            self._used_library_calc = self.parent.used_library_calc
+        elif value is not None:
+            self._used_library_calc = value
