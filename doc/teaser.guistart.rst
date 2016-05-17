@@ -1,6 +1,6 @@
-project - teaser API
+guistart - teaser GUI
 -------------------------
 
-.. automodule:: teaser.Project
+.. automodule:: teaser.GUIStart
     :members:
     :show-inheritance:
