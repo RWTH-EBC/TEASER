@@ -49,7 +49,7 @@ def example_type_building():
     function. path = None indicates, that we want to store the records in \
     TEASER'S Output folder"""
 
-    prj.export_record(building_model="MultizoneEquipped",
+    prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
@@ -61,7 +61,7 @@ def example_type_building():
 
     prj.name = "Project_Retrofit"
     prj.retrofit_all_buildings(2015)
-    prj.export_record(building_model="MultizoneEquipped",
+    prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
