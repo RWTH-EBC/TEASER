@@ -11,8 +11,12 @@ from mako.template import Template
 import scipy.io
 import teaser.Logic.Simulation.aixlib as aixlib
 
-def export_aixlib(prj, building_model="None", zone_model="None",
-                corG=None, internal_id=None, path=None):
+def export_aixlib(prj,
+                  building_model="None",
+                  zone_model="None",
+                  corG=None,
+                  internal_id=None,
+                  path=None):
     '''Exports values to a record file for Modelica simulation
 
     The Export function for creating a AixLib LOM Multizone model
@@ -74,6 +78,11 @@ def export_aixlib(prj, building_model="None", zone_model="None",
 
         for bldg in exported_list_of_buildings:
 
+            if bldg.merge_windows_calc is True:
+                calc_method = 'vdi'
+            elif bldg.merge_windows_calc is False:
+                calc_method = 'ebc'
+
             bldg_path = path + "\\" + bldg.name + "\\"
             utilis.create_path(utilis.get_full_path(bldg_path))
             utilis.create_path(utilis.get_full_path
@@ -88,10 +97,8 @@ def export_aixlib(prj, building_model="None", zone_model="None",
 
             out_file = open(utilis.get_full_path
                             (bldg_path + bldg.name + ".mo"), 'w')
-            if bldg.merge_windows_calc is True:
-                calc_method = 'vdi'
-            elif bldg.merge_windows_calc is False:
-                calc_method = 'ebc'
+
+
             out_file.write(model_template.render_unicode(
                            bldg=bldg, mod_prj=prj.modelica_project,
                            weather=prj.weather_file_path,
@@ -167,7 +174,7 @@ def export_aixlib(prj, building_model="None", zone_model="None",
 
     else:
         # not clearly specified
-        print("please specifiy you export clearly")
+        print("please specify you export clearly")
 
 
 
