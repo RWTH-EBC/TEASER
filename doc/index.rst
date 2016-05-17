@@ -3,28 +3,32 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
+teaser
 ==================================
 
-The TEASER tool allows the creation of archetpye buidlings as well as the
+The TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) tool
+allows the creation of archetype buildings as well as the
 representation of existing buildings and the calculation of simulation
-parameters for reduced oder models. It is being developed at the E.ON Energy
+parameters for reduced oder models. It is being developed at the `E.ON Energy
 Research center, Institute for Energy Efficient Buildings and Indoor Climate,
-RWTH Aachen University.
+RWTH Aachen University <https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1>`_.
+
+
+This software is work-in-progress. Documentation will be incomplete or missing
+and the software may not run properly. In particular the Grahpical User
+Interface is a beta release and not fully tested. If you find any bugs, please
+report them (see `How to contribute to TEASER`_)
 
 If you have any questions regarding TEASER feel free to contact us at
-teaser@eonerc.rwth-aachen.de.
+`teaser@eonerc.rwth-aachen.de <teaser@eonerc.rwth-aachen.de>`_.
 
-Warning:
-This software is work-in-progress. Documentation will be incomplete or missing
-and the software may not run properly.
 
 License
 ==================
 
 TEASER is released by E.ON Energy Research center, Institute for Energy
 Efficient Buildings and Indoor Climate, RWTH Aachen University under the
-MIT License(http://opensource.org/licenses/MIT).
+`MIT License <http://opensource.org/licenses/MIT>`_.
 
 Acknowledgements
 ==================
@@ -49,8 +53,8 @@ time consuming and error-prone. To enable the use of BPS on urban scale we
 present the TEASER tool, an open framework for urban energy modelling of
 building stocks. TEASER provides an easy interface for multiple data sources,
 data enrichment, where necessary and export of ready-to-run Modelica simulation
-models for AixLib(https://github.com/RWTH-EBC/AixLib) and
-IEA-EBC Annex60(https://github.com/iea-annex60/modelica-annex60).
+models for `AixLib <https://github.com/RWTH-EBC/AixLib>`_ and
+IEA-EBC `Annex60 <https://github.com/iea-annex60/modelica-annex60>`_.
 
 Version
 ==================
@@ -62,21 +66,22 @@ How to contribute to TEASER
 ==================
 
 You are invited to contribute to the development of TEASER. You may report any
-issues by using the Issues(https://github.com/RWTH-EBC/TEASER/issues) button.
+issues by using the `Issues <https://github.com/RWTH-EBC/TEASER/issues>`_ button.
 Furthermore, you are welcome to contribute via Pull
-Requests(https://github.com/RWTH-EBC/TEASER/pulls). The workflow for changes is
-described in our Wiki(https://github.com/RWTH-EBC/TEASER/wiki).
+`Requests <https://github.com/RWTH-EBC/TEASER/pulls>`_. The workflow for changes is
+described in our `Wiki <https://github.com/RWTH-EBC/TEASER/wiki>`_.
 
-Contents:
+Contents
 ==================
 
 .. toctree::
    :maxdepth: 1
 
    install_teaser
+   teaser.Examples
    teaser
 
-People:
+People
 ==================
 The following people have directly contributed to the implementation of
 TEASER:
