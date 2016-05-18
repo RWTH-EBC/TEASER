@@ -95,8 +95,6 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   %>
 </%def>
 
-
-
 ##check if element is existent
 <%def name="element_check(element)", filter ="trim">
 	<%
