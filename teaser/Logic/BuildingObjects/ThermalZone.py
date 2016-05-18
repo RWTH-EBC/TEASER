@@ -143,6 +143,10 @@ class ThermalZone(object):
         self.alpha_rad_outer_ow = 0.0
         self.alpha_comb_outer_ow = 0.0
 
+        self.ir_emissivity_outer_ow_weighted = 0.0
+        self.ir_emissivity_inner_ow_weighted = 0.0
+        self.solar_absorp_ow_weighted = 0.0
+
         self.r_rad_ow_iw = 0.0
 
         # Calculated values for Rooftop for each Zone
@@ -222,6 +226,8 @@ class ThermalZone(object):
         self.alpha_conv_outer_win = 0.0
         self.alpha_rad_outer_win = 0.0
         self.alpha_comb_outer_win = 0.0
+        self.solar_absorp_win_weighted = 0.0
+        self.ir_emissivity_win_weighted = 0.0
 
         self.weighted_g_value = 0.0
         self.heating_load = 0.0
@@ -716,6 +722,9 @@ class ThermalZone(object):
         sum_r_conv_outer_ow = 0
         sum_r_rad_outer_ow = 0
         sum_r_comb_outer_ow = 0
+        sum_ir_emissivity_outer_ow = 0.0
+        sum_ir_emissivity_inner_ow = 0.0
+        sum_solar_absorp_ow = 0.0
         #ground floor
         sum_r_conv_inner_gf = 0
         sum_r_rad_inner_gf = 0
@@ -738,6 +747,8 @@ class ThermalZone(object):
         sum_r_rad_outer_win = 0
         sum_r_comb_outer_win = 0
         sum_g_value = 0
+        sum_solar_absorp_win = 0
+        sum_ir_emissivity_win = 0
 
         for in_wall in self.inner_walls:
             self.ua_value_iw += in_wall.ua_value
@@ -835,6 +846,8 @@ class ThermalZone(object):
             sum_r_rad_outer_win += 1/ win.r_outer_rad
             sum_r_comb_outer_win += 1/ win.r_outer_comb
             sum_g_value += win.g_value * win.area
+            sum_solar_absorp_win += win.layer[-1].material.solar_absorp
+            sum_ir_emissivity_win += win.layer[-1].material.ir_emissivity
 
         self.r_conv_inner_win = 1 / sum_r_conv_inner_win
         self.r_rad_inner_win = 1 / sum_r_rad_inner_win
@@ -849,6 +862,8 @@ class ThermalZone(object):
         self.alpha_conv_outer_win = (1/(self.r_conv_outer_win*self.area_win))
         self.alpha_rad_outer_win = (1/(self.r_rad_outer_win*self.area_win))
         self.alpha_comb_outer_win = (1/(self.r_comb_outer_win*self.area_win))
+        self.solar_absorp_win_weighted = sum_solar_absorp_win / self.area_win
+        self.ir_emissivity_win_weighted = sum_ir_emissivity_win / self.area_win
 
     def calc_wf_one_element(self, merge_windows):
         pass
