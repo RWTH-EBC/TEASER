@@ -66,21 +66,27 @@ def export_annex60(prj,
                                  bldg.name)
         utilis.create_path(utilis.get_full_path(bldg_path))
         utilis.create_path(utilis.get_full_path(bldg_path+ "\\" + bldg.name + \
-                                                     "_DataBase"))
+                                                     "_Models"))
         aixlib_output._help_package(bldg_path, bldg.name)
         aixlib_output._help_package_order(bldg_path,
                                           [bldg],
                                           None,
-                                          bldg.name + "_DataBase")
+                                          bldg.name + "_Models")
         for zone in bldg.thermal_zones:
             zone_path = os.path.join(bldg_path,
-                                     bldg.name+"_DataBase")
+                                     bldg.name+"_Models")
 
             out_file = open(utilis.get_full_path(
                     zone_path + "\\" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
             out_file.write(zone_template.render_unicode(bldg=bldg,
                                                         zone=zone))
+
+            aixlib_output._help_package(zone_path,
+                                        bldg.name + "_Models")
+            aixlib_output._help_package_order(zone_path,
+                                              bldg.thermal_zones,
+                                              bldg.name + "_")
 
             out_file.close()
 

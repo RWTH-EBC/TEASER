@@ -938,10 +938,10 @@ class Project(object):
                                     path=path)
 
     def export_annex(self,
-                     number_of_elements,
-                     merge_windows,
-                     internal_id,
-                     path):
+                     number_of_elements=2,
+                     merge_windows=False,
+                     internal_id=None,
+                     path=None):
         """Exports values to a record file for Modelica simulation
 
         Parameters
