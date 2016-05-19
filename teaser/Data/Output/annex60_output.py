@@ -13,7 +13,7 @@ from mako.template import Template
 
 def export_annex60(prj,
                    number_of_elements=2,
-                   merge_windows=2,
+                   merge_windows=False,
                    internal_id=None,
                    path=None):
     """Exports values to a record file for Annex60 simulation
@@ -79,6 +79,7 @@ def export_annex60(prj,
             out_file = open(utilis.get_full_path(
                     zone_path + "\\" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
+            print(merge_windows)
             out_file.write(zone_template.render_unicode(bldg=bldg,
                                                         zone=zone,
                                                         merge_windows=

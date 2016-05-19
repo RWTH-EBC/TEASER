@@ -108,9 +108,7 @@ class ThermalZone(object):
         self.rooftops = []
         self.ground_floors = []
         self._windows = []
-        self.window_areas = []
         self.outer_walls_help = []
-        self.outer_walls_areas = []
         self._use_conditions = None
         self.typical_length = None
         self.typical_width = None
@@ -153,6 +151,7 @@ class ThermalZone(object):
         self.weightfactor_ground = []
         self.tilt_wall = []
         self.orientation_wall = []
+        self.outer_walls_areas = []
 
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
@@ -242,7 +241,7 @@ class ThermalZone(object):
         self.r1_win = 0.0
         self.weightfactor_win = []
         self.g_sunblind_list = []
-        self.window_area_list = []
+        self.window_areas = []
         self.orientation_win = []
         self.tilt_win = []
         self.ua_value_win = 0.0
