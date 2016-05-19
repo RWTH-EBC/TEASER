@@ -1,38 +1,38 @@
-model ${bldg.name}
-  "This is the simulation model of ${bldg.name}"
+model ${zone.name}
+  "This is the simulation model of ${zone.name}"
 
-  BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
+  Annex60.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=Annex60.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam="modelica://Annex60/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
-  BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${len(bldg.orientation_bldg)}](
+  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${len(zone.orientation_wall)}](
     each outSkyCon=true,
     each outGroCon=true,
-    til={${list_to_string(deg_to_rad_list(bldg.tilt_bldg))}},
+    til={${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
     % if bldg.latitude is None:
       lat=0.87266462599716,
     % else:
       lat=${deg_to_rad(bldg.latitude)},
     % endif
-    azi={${get_azimut(deg_to_rad_list(bldg.orientation_bldg))}})
+    azi={${get_azimut(deg_to_rad_list(zone.orientation_wall))}})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
-  BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${len(bldg.orientation_bldg)}](
-    til={${list_to_string(deg_to_rad_list(bldg.tilt_bldg))}},
+  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${len(zone.orientation_wall)}](
+    til={${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
     % if bldg.latitude is None:
       lat=0.87266462599716,
     % else:
       lat=${bldg.latitude},
     % endif
-    azi={${get_azimut(deg_to_rad_list(bldg.orientation_bldg))}})
+    azi={${get_azimut(deg_to_rad_list(zone.orientation_wall))}})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  CorrectionSolarGain.CorrectionGDoublePane corGDoublePane(n=${len(bldg.orientation_bldg)}, UWin=${zone.ua_value_win/zone.area_win})
+  Annex60.Experimental.ThermalZones.ReducedOrder.CorrectionSolarGain.CorrectionGDoublePane corGDoublePane(n=${len(zone.orientation_wall)}, UWin=${zone.ua_value_win/zone.area_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
-  ReducedOrderZones.ThermalZoneTwoElements thermalZoneTwoElements(
+  Annex60.Experimental.ThermalZones.ReducedOrder.ReducedOrderZones.ThermalZoneTwoElements thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     VAir=${zone.volume},
     alphaExt=${zone.alpha_comb_inner_ow},
@@ -50,58 +50,58 @@ model ${bldg.name}
     CInt={${zone.c1_iw}},
     RWin=${zone.r1_win},
     RExtRem=${zone.r_rest_ow},
-    nOrientations=${len(bldg.orientation_bldg)},
-% if merge_windows == True:
-    AWin={${list_to_string([0] * len(bldg.orientation_bldg))}},
+    nOrientations=${len(zone.orientation_wall)},
+% if merge_windows is True:
+    AWin={${list_to_string([0] * len(zone.orientation_wall))}},
 % else:
-    AWin={${list_to_string(zone.window_area_list)}},
+    AWin={${list_to_string(zone.window_areas)}},
 % endif
-    ATransparent={${list_to_string(zone.window_area_list)}},
-% if merge_windows == True:
-    AExt={${list_to_string(zone.outer_wall_area_list + zone
-    .window_area_list)}}) "Thermal zone"
+    ATransparent={${list_to_string(zone.window_areas)}},
+% if merge_windows is True:
+    AExt={${list_to_string(zone.outer_walls_areas + zone
+    .window_areas)}}) "Thermal zone"
 % else:
-    AExt={${list_to_string(zone.outer_wall_area_list)}}) "Thermal zone"
+    AExt={${list_to_string(zone.outer_walls_areas)}}) "Thermal zone"
 % endif
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
-% if merge_windows == True:
-  EquivalentAirTemperature.VDI6007 eqAirTemp(
-    n=${len(bldg.orientation_bldg)},
+% if merge_windows is True:
+  Annex60.Experimental.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
+    n=${len(zone.orientation_wall)},
     wfGround=${list_to_string(zone.weightfactor_ground)},
     wfWall={${list_to_string(zone.weightfactor_ow)}},
     wfWin={${list_to_string(zone.weightfactor_win)}},
     withLongwave=true,
-    aExt=${zone.solar_absorp_ow_weighted},
+    aExt=${zone.solar_absorp_ow},
     alphaWallOut=${zone.alpha_conv_outer_ow},
     alphaRadWall=${zone.alpha_rad_outer_ow},
-    eExt=${zone.ir_emissivity_outer_ow_weighted},
+    eExt=${zone.ir_emissivity_outer_ow},
     TGround=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
-  EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
-    n=${len(bldg.orientation_bldg)},
+  Annex60.Experimental.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
+    n=${len(zone.orientation_wall)},
     wfGround=${list_to_string(zone.weightfactor_ground)},
     wfWall={${list_to_string(zone.weightfactor_ow)}},
     wfWin={${list_to_string(zone.weightfactor_win)}},
     withLongwave=true,
-    aExt=${zone.solar_absorp_ow_weighted},
+    aExt=${zone.solar_absorp_ow},
     alphaWallOut=${zone.alpha_conv_outer_ow},
     alphaRadWall=${zone.alpha_rad_outer_ow},
     alphaWinOut=${zone.alpha_conv_outer_win},
     alphaRadWin=${zone.alpha_rad_outer_win},
-    aWin=${solar_absorp_win_weighted},
-    eExt=${zone.ir_emissivity_outer_ow_weighted},
+    aWin=${zone.solar_absorp_win_weighted},
+    eExt=${zone.ir_emissivity_outer_ow},
     eWin=${zone.ir_emissivity_win_weighted},
     TGround=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif
-  Modelica.Blocks.Math.Add solRad[${len(bldg.orientation_bldg)}]
+  Modelica.Blocks.Math.Add solRad[${len(zone.orientation_wall)}]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,6},{-28,16}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,-6},{20,6}})));
-% if merge_windows == False:
+% if merge_windows is False:
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature1
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,14},{20,26}})));
@@ -112,10 +112,10 @@ model ${bldg.name}
   Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWall
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{36,6},{26,-4}})));
-  Modelica.Blocks.Sources.Constant const[${len(bldg.orientation_bldg)}](each k=0)
+  Modelica.Blocks.Sources.Constant const[${len(zone.orientation_wall)}](each k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{-20,14},{-14,20}})));
-  BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
+  Annex60.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(
     transformation(extent={{-100,-10},{-66,22}}),iconTransformation(
     extent={{-70,-12},{-50,8}})));
@@ -127,9 +127,8 @@ model ${bldg.name}
     extent={{-4,-4},{4,4}},
     rotation=90,
     origin={30,-16})));
-% if merge_windows == False:
-  Modelica.Blocks.Sources.Constant alphaWin(k=${zone.alpha_comb_outer_win}
-  *${sum_list(zone.window_area_list)})
+% if merge_windows is False:
+  Modelica.Blocks.Sources.Constant alphaWin(k=${zone.alpha_comb_outer_win}*${sum_list(zone.window_areas)})
     "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(
     transformation(
@@ -137,8 +136,28 @@ model ${bldg.name}
     rotation=90,
     origin={32,38})));
 % endif
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsRad
+    "Radiative heat flow of persons"
+    annotation (Placement(transformation(extent={{48,-42},{68,-22}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow personsConv
+    "Convective heat flow of persons"
+    annotation (Placement(transformation(extent={{48,-62},{68,-42}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConv
+    "Convective heat flow of machines"
+    annotation (Placement(transformation(extent={{48,-84},{68,-64}})));
+  Modelica.Blocks.Sources.CombiTimeTable internalGains(
+    table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
+        0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
+        80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,200;
+        50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200; 61200,
+        0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,0,0,0;
+        86400,0,0,0],
+    columns={2,3,4},
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) "Table with profiles for persons (radiative and convective) and machines
+    (convective)"
+    annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
 equation
-% if merge_windows == False:
+% if merge_windows is False:
   connect(eqAirTemp.TEqAirWindow, prescribedTemperature1.T)
     annotation (Line(
     points={{-3,-0.2},{0,-0.2},{0,20},{6.8,20}},   color={0,0,127}));
@@ -217,7 +236,7 @@ equation
     annotation (Line(
     points={{68,-32},{84,-32},{100,-32},{100,24},{92.2,24}},
     color={191,0,0}));
-% if merge_windows == False:
+% if merge_windows is False:
   connect(thermalConductorWin.solid, thermalZoneTwoElements.window)
     annotation (
      Line(points={{38,21},{40,21},{40,20},{43.8,20}}, color={191,0,0}));
@@ -231,7 +250,7 @@ equation
     annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
   connect(alphaWall.y, thermalConductorWall.Gc)
     annotation (Line(points={{30,-11.6},{30,-4},{31,-4}}, color={0,0,127}));
-% if merge_windows == False:
+% if merge_windows is False:
   connect(alphaWin.y, thermalConductorWin.Gc)
     annotation (Line(points={{32,33.6},{32,26},{33,26}}, color={0,0,127}));
 % endif
@@ -264,7 +283,7 @@ end SimpleRoomTwoElements;
   string_of_list = string_of_list[:-2]
   return string_of_list
   %>
-
+</%def>
 ##get azimut for modelica
 <%def name="get_azimut(list)", filter="trim">
   <%
@@ -274,7 +293,7 @@ end SimpleRoomTwoElements;
         newlist.append(-180.0+element)
     elif element == 0:
         newlist.append(180.0)
-    elif element == -1:
+    elif element == -1.0:
         newlist.append(0.0)
     elif element == -2:
         newlist.append(0.0)
@@ -285,7 +304,7 @@ end SimpleRoomTwoElements;
   string_of_list = string_of_list[:-2]
   return string_of_list
   %>
-
+</%def>
 ##transform deg to rad
 <%def name="deg_to_rad(value)", filter="trim">
   <%
@@ -330,8 +349,8 @@ end SimpleRoomTwoElements;
 <%def name="mean_alphaRad(zone)", filter="trim">
   <%
   total_area = zone.area_ow + zone.area_iw + zone.area_win
-  rad_mean = (zone.alpha_rad_inner_ow * zone.area_ow + alpha_rad_inner_iw *
-  zone.area_iw + alpha_rad_inner_win * zone.area_win) / total_area
-  return rad_mean
+  rad_mean = (zone.alpha_rad_inner_ow * zone.area_ow + zone.alpha_rad_inner_iw *
+  zone.area_iw + zone.alpha_rad_inner_win * zone.area_win) / total_area
+  return str(rad_mean)
   %>
 </%def>

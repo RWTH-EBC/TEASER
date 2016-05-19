@@ -156,16 +156,12 @@ def example_create_building():
     '''
     prj.calc_all_buildings(number_of_elements=2,
                            merge_windows=False,
-                           used_library='AixLib')
+                           used_library='Annex60')
 
     '''
     Export the Modelica Record
     '''
-    prj.export_aixlib(building_model="MultizoneEquipped",
-                      zone_model="ThermalZoneEquipped",
-                      corG=False,
-                      internal_id=None
-                      path=None)
+    prj.export_annex()
     '''
     Save new TEASER XML
     '''
