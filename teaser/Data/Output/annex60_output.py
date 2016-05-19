@@ -79,7 +79,8 @@ def export_annex60(prj,
             out_file = open(utilis.get_full_path(
                     zone_path + "\\" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
-            print(merge_windows)
+            print(zone_path + "\\" + bldg.name + "_" +
+                    zone.name.replace(" ", "") + ".mo")
             out_file.write(zone_template.render_unicode(bldg=bldg,
                                                         zone=zone,
                                                         merge_windows=
@@ -89,7 +90,7 @@ def export_annex60(prj,
                                         bldg.name + "_Models")
             aixlib_output._help_package_order(zone_path,
                                               bldg.thermal_zones,
-                                              bldg.name + "_")
+                                              (bldg.name + "_"))
 
             out_file.close()
 

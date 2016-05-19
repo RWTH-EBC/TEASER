@@ -1,5 +1,5 @@
-model ${zone.name}
-  "This is the simulation model of ${zone.name}"
+model ${bldg.name}_${zone.name.replace(" ", "")}
+  "This is the simulation model of ${bldg.name}_${zone.name.replace(" ", "")}"
 
   Annex60.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=Annex60.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -272,7 +272,7 @@ equation
   connect(corGDoublePane.solarRadWinTrans, thermalZoneTwoElements.solRad)
     annotation (Line(points={{27,64},{34,64},{40,64},{40,31},{43,31}}, color={0,
     0,127}));
-end SimpleRoomTwoElements;
+end ${bldg.name}_${zone.name.replace(" ", "")};
 
 ##list to string
 <%def name="list_to_string(list)", filter="trim">
@@ -329,8 +329,7 @@ end SimpleRoomTwoElements;
 ##sums entries of a list
 <%def name="sum_list(list)", filter="trim">
   <%
-  sum(list)
-  return sum
+  return sum(list)
   %>
 </%def>
 
