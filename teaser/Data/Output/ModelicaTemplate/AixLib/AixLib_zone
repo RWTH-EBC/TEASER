@@ -95,8 +95,6 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   %>
 </%def>
 
-
-
 ##check if element is existent
 <%def name="element_check(element)", filter ="trim">
 	<%
@@ -119,18 +117,6 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   %>
 </%def>
 
-##get the coefficient of absorption
-<%def name="get_awin(list)", filter="trim">
-  <%
-  awin = 0.
-  sum_area = 0.
-  for window in list:
-  	awin += float(window.layer[-1].material.solar_absorp * window.area)
-  	sum_area += window.area
-  awin_weighted = awin/sum_area
-  return str(awin_weighted)
-  %>
-</%def>
 
 ## get outer wall emittance outer side
 <%def name="get_epso(list)", filter="trim">
@@ -159,18 +145,6 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   %>
 </%def>
 
-## get window emittance
-<%def name="get_epsw(list)", filter="trim">
-  <%
-  epsw = 0.
-  sum_area = 0.
-  for window in list:
-  	epsw += float(window.layer[-1].material.ir_emissivity * window.area)
-  	sum_area += window.area
-  epsw_weighted = epsw/sum_area
-  return str(epsw_weighted)
-  %>
-</%def>
 
 ## get outer wall coefficient of absorbtion
 <%def name="get_aowo(list)", filter="trim">

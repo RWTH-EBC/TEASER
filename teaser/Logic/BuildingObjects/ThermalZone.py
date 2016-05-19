@@ -47,6 +47,19 @@ class ThermalZone(object):
     outer_walls : list
         List with all outer walls including ground floor and rooftop
 
+    rooftops : list
+        List with rooftops if number of elements is 4
+
+    grounfdloors : list
+        List with grounfdloors if number of elements is >2
+
+    outerwalls_help : list
+        List with outer walls and rooftops if number of elements is >2
+        List with outer walls only if number of elements is 4
+
+    windows : list
+        List with windows
+
     use_conditions : instance of UseConditions()
         Class of UseConditions with all relevant information for the usage
         of the thermal zone
@@ -55,7 +68,10 @@ class ThermalZone(object):
         List with all inner walls including  floor and ceiling
 
     typical_length : list
-        List with all inner walls including  floor and ceiling
+        normative typical length of the thermal zone
+
+    typical_width : list
+        normative typical width of the thermal zone
 
     t_inside : float
         normative indoor temperature for static heat load calculation.
@@ -64,6 +80,16 @@ class ThermalZone(object):
     t_outside : float
         normative outdoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
+
+    t_ground : float
+        slab temperature directly at the outer side of ground floors.
+        The input of t_ground is ALWAYS in Kelvin
+
+    density_air : float
+        average density of the air in the thermal zone
+
+    heat_capac_air : float
+        average heat capacity of the air in the thermal zone
     '''
 
     def __init__(self, parent=None):
@@ -143,6 +169,10 @@ class ThermalZone(object):
         self.alpha_rad_outer_ow = 0.0
         self.alpha_comb_outer_ow = 0.0
 
+        self.ir_emissivity_outer_ow_weighted = 0.0
+        self.ir_emissivity_inner_ow_weighted = 0.0
+        self.solar_absorp_ow_weighted = 0.0
+
         self.r_rad_ow_iw = 0.0
 
         # Calculated values for Rooftop for each Zone
@@ -169,6 +199,10 @@ class ThermalZone(object):
         self.alpha_conv_outer_rt = 0.0
         self.alpha_rad_outer_rt = 0.0
         self.alpha_comb_outer_rt = 0.0
+
+        self.ir_emissivity_outer_rt_weighted = 0.0
+        self.ir_emissivity_inner_rt_weighted = 0.0
+        self.solar_absorp_rt_weighted = 0.0
 
         self.r_rad_rt_iw = 0.0
 
@@ -197,6 +231,9 @@ class ThermalZone(object):
         self.alpha_rad_outer_gf = 0.0
         self.alpha_comb_outer_gf = 0.0
 
+        self.ir_emissivity_inner_gf_weighted = 0.0
+        self.solar_absorp_gf_weighted = 0.0     # necessary? @PRemmen
+
         self.r_rad_gf_iw = 0.0
 
         # Calculated values for windows for each Zone
@@ -222,6 +259,8 @@ class ThermalZone(object):
         self.alpha_conv_outer_win = 0.0
         self.alpha_rad_outer_win = 0.0
         self.alpha_comb_outer_win = 0.0
+        self.solar_absorp_win_weighted = 0.0
+        self.ir_emissivity_win_weighted = 0.0
 
         self.weighted_g_value = 0.0
         self.heating_load = 0.0
@@ -309,11 +348,17 @@ class ThermalZone(object):
                          merge_windows,
                          t_bt):
         """calcs lumped parameter for two element model
+
+        Parameters
+        ----------
+
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
         """
         omega = 2 * math.pi / 86400 / t_bt
 
         self.ua_value_ow += (self.ua_value_gf + self.ua_value_rt)
-        self.area_ow += (self.area_gf + self.area_rt)
 
         if self.r_conv_inner_gf != 0:
             self.r_conv_inner_ow = 1/((1/self.r_conv_inner_ow)+(
@@ -328,9 +373,6 @@ class ThermalZone(object):
         if self.r_rad_inner_gf != 0:
             self.r_rad_inner_ow = 1/((1/self.r_rad_inner_ow)+(
             1/self.r_rad_inner_rt))
-
-        self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
-        self.alpha_rad_inner_ow = (1/(self.r_rad_inner_ow*self.area_ow))
 
         if len(self.outer_walls) > 0:
             if len(self.outer_walls) == 1:
@@ -367,6 +409,22 @@ class ThermalZone(object):
                 self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow))
                 self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
+                self.ir_emissivity_outer_ow_weighted =\
+                    ((self.ir_emissivity_outer_ow_weighted * self.area_ow) +
+                        (self.ir_emissivity_outer_rt_weighted *
+                            self.area_rt)) /\
+                    (self.area_ow + self.area_rt)
+                self.ir_emissivity_inner_ow_weighted =\
+                    ((self.ir_emissivity_inner_ow_weighted * self.area_ow) +
+                        (self.ir_emissivity_inner_rt_weighted * self.area_rt) +
+                        (self.ir_emissivity_inner_gf_weighted *
+                            self.area_gf)) /\
+                    (self.area_ow + self.area_rt + self.area_gf)
+                self.solar_absorp_ow_weighted =\
+                    ((self.solar_absorp_ow_weighted * self.area_ow) +
+                        (self.solar_absorp_rt_weighted * self.area_rt) +
+                        (self.solar_absorp_gf_weighted * self.area_gf)) /\
+                    (self.area_ow + self.area_rt + self.area_gf)
 
             else:
                 warnings.warn("As no outer walls or no windows are defined\
@@ -385,10 +443,33 @@ class ThermalZone(object):
                 self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/((1/self.r_conv_inner_ow) +
                        (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
+                self.ir_emissivity_outer_ow_weighted =\
+                    ((self.ir_emissivity_outer_ow_weighted * self.area_ow) +
+                        (self.ir_emissivity_outer_rt_weighted * self.area_rt) +
+                        (self.ir_emissivity_win_weighted * self.area_win)) /\
+                    (self.area_ow + self.area_rt + self.area_win)
+                self.ir_emissivity_inner_ow_weighted =\
+                    ((self.ir_emissivity_inner_ow_weighted * self.area_ow) +
+                        (self.ir_emissivity_inner_rt_weighted * self.area_rt) +
+                        (self.ir_emissivity_inner_gf_weighted * self.area_gf) +
+                        (self.ir_emissivity_win_weighted * self.area_win)) /\
+                    (self.area_ow + self.area_rt + self.area_gf +
+                        self.area_win)
+                self.solar_absorp_ow_weighted =\
+                    ((self.solar_absorp_ow_weighted * self.area_ow) +
+                        (self.solar_absorp_rt_weighted * self.area_rt) +
+                        (self.solar_absorp_gf_weighted * self.area_gf) +
+                        (self.solar_absorp_win_weighted * self.area_win)) /\
+                    (self.area_ow + self.area_rt + self.area_gf +
+                        self.area_win)
 
             else:
                 warnings.warn("As no outer walls or no windows are defined\
                     lumped parameter cannot be calculated")
+
+        self.area_ow += (self.area_gf + self.area_rt)
+        self.alpha_conv_inner_ow = (1/(self.r_conv_inner_ow*self.area_ow))
+        self.alpha_rad_inner_ow = (1/(self.r_rad_inner_ow*self.area_ow))
 
     def calc_three_element(self,
                            merge_windows,
@@ -716,6 +797,9 @@ class ThermalZone(object):
         sum_r_conv_outer_ow = 0
         sum_r_rad_outer_ow = 0
         sum_r_comb_outer_ow = 0
+        sum_ir_emissivity_outer_ow = 0.0
+        sum_ir_emissivity_inner_ow = 0.0
+        sum_solar_absorp_ow = 0.0
         #ground floor
         sum_r_conv_inner_gf = 0
         sum_r_rad_inner_gf = 0
@@ -723,6 +807,8 @@ class ThermalZone(object):
         sum_r_conv_outer_gf = 0
         sum_r_rad_outer_gf = 0
         sum_r_comb_outer_gf = 0
+        sum_ir_emissivity_inner_gf = 0.0
+        sum_solar_absorp_gf = 0.0
         #rooftop
         sum_r_conv_inner_rt = 0
         sum_r_rad_inner_rt = 0
@@ -730,6 +816,9 @@ class ThermalZone(object):
         sum_r_conv_outer_rt = 0
         sum_r_rad_outer_rt = 0
         sum_r_comb_outer_rt = 0
+        sum_ir_emissivity_outer_rt = 0.0
+        sum_ir_emissivity_inner_rt = 0.0
+        sum_solar_absorp_rt = 0.0
         #window
         sum_r_conv_inner_win = 0
         sum_r_rad_inner_win = 0
@@ -738,6 +827,8 @@ class ThermalZone(object):
         sum_r_rad_outer_win = 0
         sum_r_comb_outer_win = 0
         sum_g_value = 0
+        sum_solar_absorp_win = 0
+        sum_ir_emissivity_win = 0
 
         for in_wall in self.inner_walls:
             self.ua_value_iw += in_wall.ua_value
@@ -770,6 +861,12 @@ class ThermalZone(object):
                 sum_r_conv_outer_ow += 1 / out_wall.r_outer_conv
                 sum_r_rad_outer_ow += 1 / out_wall.r_outer_rad
                 sum_r_comb_outer_ow += 1 / out_wall.r_outer_comb
+                sum_ir_emissivity_outer_ow +=\
+                    out_wall.layer[-1].material.ir_emissivity * out_wall.area
+                sum_ir_emissivity_inner_ow +=\
+                    out_wall.layer[0].material.ir_emissivity * out_wall.area
+                sum_solar_absorp_ow +=\
+                    out_wall.layer[-1].material.solar_absorp * out_wall.area
             elif type(out_wall).__name__ == "Rooftop":
                 self.ua_value_rt += out_wall.ua_value
                 self.area_rt += out_wall.area
@@ -779,12 +876,22 @@ class ThermalZone(object):
                 sum_r_conv_outer_rt += 1 / out_wall.r_outer_conv
                 sum_r_rad_outer_rt += 1 / out_wall.r_outer_rad
                 sum_r_comb_outer_rt += 1 / out_wall.r_outer_comb
+                sum_ir_emissivity_outer_rt +=\
+                    out_wall.layer[-1].material.ir_emissivity * out_wall.area
+                sum_ir_emissivity_inner_rt +=\
+                    out_wall.layer[0].material.ir_emissivity * out_wall.area
+                sum_solar_absorp_rt +=\
+                    out_wall.layer[-1].material.solar_absorp * out_wall.area
             elif type(out_wall).__name__ == "GroundFloor":
                 self.ua_value_gf += out_wall.ua_value
                 self.area_gf += out_wall.area
                 sum_r_conv_inner_gf += 1 / out_wall.r_inner_conv
                 sum_r_rad_inner_gf += 1 / out_wall.r_inner_rad
                 sum_r_comb_inner_gf += 1 / out_wall.r_inner_comb
+                sum_ir_emissivity_inner_gf +=\
+                    out_wall.layer[0].material.ir_emissivity * out_wall.area
+                sum_solar_absorp_gf +=\
+                    out_wall.layer[-1].material.solar_absorp * out_wall.area
                 #sum_r_conv_outer_gf += 1 / out_wall.r_outer_conv
                 #sum_r_rad_outer_gf += 1 / out_wall.r_outer_rad
                 #sum_r_comb_outer_gf += 1 / out_wall.r_outer_comb
@@ -802,6 +909,12 @@ class ThermalZone(object):
             self.alpha_conv_outer_ow = (1/(self.r_conv_outer_ow*self.area_ow))
             self.alpha_rad_outer_ow = (1/(self.r_rad_outer_ow*self.area_ow))
             self.alpha_comb_outer_ow = (1/(self.r_comb_outer_ow*self.area_ow))
+            self.ir_emissivity_outer_ow_weighted =\
+                sum_ir_emissivity_outer_ow / self.area_ow
+            self.ir_emissivity_inner_ow_weighted =\
+                sum_ir_emissivity_inner_ow / self.area_ow
+            self.solar_absorp_ow_weighted =\
+                sum_solar_absorp_ow / self.area_ow
 
         if sum_r_comb_inner_rt != 0:
             self.r_conv_inner_rt = 1 / sum_r_conv_inner_rt
@@ -816,6 +929,12 @@ class ThermalZone(object):
             self.alpha_conv_outer_rt = (1/(self.r_conv_outer_rt*self.area_rt))
             self.alpha_rad_outer_rt = (1/(self.r_rad_outer_rt*self.area_rt))
             self.alpha_comb_outer_rt = (1/(self.r_comb_outer_rt*self.area_rt))
+            self.ir_emissivity_outer_rt_weighted =\
+                sum_ir_emissivity_outer_rt / self.area_rt
+            self.ir_emissivity_inner_rt_weighted =\
+                sum_ir_emissivity_inner_rt / self.area_rt
+            self.solar_absorp_rt_weighted =\
+                sum_solar_absorp_rt / self.area_rt
         if sum_r_comb_inner_gf != 0:
             self.r_conv_inner_gf = 1 / sum_r_conv_inner_gf
             self.r_rad_inner_gf = 1 / sum_r_rad_inner_gf
@@ -823,6 +942,10 @@ class ThermalZone(object):
             self.alpha_conv_inner_gf = (1/(self.r_conv_inner_gf*self.area_gf))
             self.alpha_rad_inner_gf = (1/(self.r_rad_inner_gf*self.area_gf))
             self.alpha_comb_inner_gf = (1/(self.r_comb_inner_gf*self.area_gf))
+            self.ir_emissivity_inner_gf_weighted =\
+                sum_ir_emissivity_inner_gf / self.area_gf
+            self.solar_absorp_gf_weighted =\
+                sum_solar_absorp_gf / self.area_gf
 
         for win in self.windows:
 
@@ -835,6 +958,8 @@ class ThermalZone(object):
             sum_r_rad_outer_win += 1/ win.r_outer_rad
             sum_r_comb_outer_win += 1/ win.r_outer_comb
             sum_g_value += win.g_value * win.area
+            sum_solar_absorp_win += win.layer[-1].material.solar_absorp
+            sum_ir_emissivity_win += win.layer[-1].material.ir_emissivity
 
         self.r_conv_inner_win = 1 / sum_r_conv_inner_win
         self.r_rad_inner_win = 1 / sum_r_rad_inner_win
@@ -849,6 +974,8 @@ class ThermalZone(object):
         self.alpha_conv_outer_win = (1/(self.r_conv_outer_win*self.area_win))
         self.alpha_rad_outer_win = (1/(self.r_rad_outer_win*self.area_win))
         self.alpha_comb_outer_win = (1/(self.r_comb_outer_win*self.area_win))
+        self.solar_absorp_win_weighted = sum_solar_absorp_win / self.area_win
+        self.ir_emissivity_win_weighted = sum_ir_emissivity_win / self.area_win
 
     def calc_wf_one_element(self, merge_windows):
         pass
