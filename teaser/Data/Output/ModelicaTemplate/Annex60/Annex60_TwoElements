@@ -10,23 +10,23 @@ model ${bldg.name}
   BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${len(bldg.orientation_bldg)}](
     each outSkyCon=true,
     each outGroCon=true,
-    til={${list_to_string(bldg.tilt_bldg)}},
+    til={${list_to_string(deg_to_rad_list(bldg.tilt_bldg))}},
     % if bldg.latitude is None:
       lat=0.87266462599716,
     % else:
-      lat=${bldg.latitude},
+      lat=${deg_to_rad(bldg.latitude)},
     % endif
-    azi={${get_azimut(bldg.orientation_bldg)}})
+    azi={${get_azimut(deg_to_rad_list(bldg.orientation_bldg))}})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
   BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${len(bldg.orientation_bldg)}](
-    til={${list_to_string(bldg.tilt_bldg)}},
+    til={${list_to_string(deg_to_rad_list(bldg.tilt_bldg))}},
     % if bldg.latitude is None:
       lat=0.87266462599716,
     % else:
       lat=${bldg.latitude},
     % endif
-    azi={${get_azimut(bldg.orientation_bldg)}})
+    azi={${get_azimut(deg_to_rad_list(bldg.orientation_bldg))}})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
   CorrectionSolarGain.CorrectionGDoublePane corGDoublePane(n=${len(bldg.orientation_bldg)}, UWin=${zone.ua_value_win/zone.area_win})
@@ -42,7 +42,7 @@ model ${bldg.name}
     nExt=1,
     RExt={${zone.r1_ow}},
     CExt={${zone.c1_ow}},
-    alphaRad=${zone.r_rad_inner_ow},
+    alphaRad=${mean_alphaRad(zone)},
     AInt=${zone.area_iw},
     alphaInt=${zone.alpha_comb_iw},
     nInt=1,
@@ -51,10 +51,34 @@ model ${bldg.name}
     RWin=${zone.r1_win},
     RExtRem=${zone.r_rest_ow},
     nOrientations=${len(bldg.orientation_bldg)},
+% if merge_windows == True:
+    AWin={${list_to_string([0] * len(bldg.orientation_bldg))}},
+% else:
     AWin={${list_to_string(zone.window_area_list)}},
+% endif
     ATransparent={${list_to_string(zone.window_area_list)}},
-    AExt={3.5,8}) "Thermal zone"
+% if merge_windows == True:
+    AExt={${list_to_string(zone.outer_wall_area_list + zone
+    .window_area_list)}}) "Thermal zone"
+% else:
+    AExt={${list_to_string(zone.outer_wall_area_list)}}) "Thermal zone"
+% endif
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
+% if merge_windows == True:
+  EquivalentAirTemperature.VDI6007 eqAirTemp(
+    n=${len(bldg.orientation_bldg)},
+    wfGround=${list_to_string(zone.weightfactor_ground)},
+    wfWall={${list_to_string(zone.weightfactor_ow)}},
+    wfWin={${list_to_string(zone.weightfactor_win)}},
+    withLongwave=true,
+    aExt=${get_aowo(zone.outer_walls)},
+    alphaWallOut=${zone.alpha_conv_outer_ow},
+    alphaRadWall=${zone.alpha_rad_outer_ow},
+    aWin=${get_awin(zone.windows)},
+    eExt=0.9,
+    TGround=${zone.t_ground}) "Computes equivalent air temperature"
+    annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
+% else:
   EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     n=${len(bldg.orientation_bldg)},
     wfGround=${list_to_string(zone.weightfactor_ground)},
@@ -62,25 +86,29 @@ model ${bldg.name}
     wfWin={${list_to_string(zone.weightfactor_win)}},
     withLongwave=true,
     aExt=${get_aowo(zone.outer_walls)},
-    alphaExtOut=${zone.alpha_conv_outer_ow},
-    alphaRad=${zone.alpha_rad_outer_ow},
+    alphaWallOut=${zone.alpha_conv_outer_ow},
+    alphaRadWall=${zone.alpha_rad_outer_ow},
     alphaWinOut=${zone.alpha_conv_outer_win},
+    alphaRadWin=${zone.alpha_rad_outer_win},
     aWin=${get_awin(zone.windows)},
     eExt=0.9,
     TGround=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
+% endif
   Modelica.Blocks.Math.Add solRad[${len(bldg.orientation_bldg)}]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,6},{-28,16}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,-6},{20,6}})));
+% if merge_windows == False:
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature1
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,14},{20,26}})));
   Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWin
     "Outdoor convective heat transfer of windows"
     annotation (Placement(transformation(extent={{38,16},{28,26}})));
+% endif
   Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWall
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{36,6},{26,-4}})));
@@ -91,24 +119,30 @@ model ${bldg.name}
     annotation (Placement(
     transformation(extent={{-100,-10},{-66,22}}),iconTransformation(
     extent={{-70,-12},{-50,8}})));
-  Modelica.Blocks.Sources.Constant alphaWall(k=(${zone.alpha_conv_outer_ow}+5)*${zone.area_ow})
+  Modelica.Blocks.Sources.Constant alphaWall(k=${zone.alpha_comb_outer_ow}
+  *${zone.area_ow})
     "Outdoor coefficient of heat transfer for walls"
     annotation (Placement(
     transformation(
     extent={{-4,-4},{4,4}},
     rotation=90,
     origin={30,-16})));
-  Modelica.Blocks.Sources.Constant alphaWin(k=(${zone.alpha_conv_outer_win}+5)*sum({${list_to_string(zone.window_area_list)}})
+% if merge_windows == False:
+  Modelica.Blocks.Sources.Constant alphaWin(k=${zone.alpha_comb_outer_win}
+  *${sum_list(zone.window_area_list)})
     "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(
     transformation(
     extent={{4,-4},{-4,4}},
     rotation=90,
     origin={32,38})));
+% endif
 equation
+% if merge_windows == False:
   connect(eqAirTemp.TEqAirWindow, prescribedTemperature1.T)
     annotation (Line(
     points={{-3,-0.2},{0,-0.2},{0,20},{6.8,20}},   color={0,0,127}));
+% endif
   connect(eqAirTemp.TEqAir, prescribedTemperature.T)
     annotation (Line(points={{-3,-4},{4,-4},{4,0},{6.8,0}},
     color={0,0,127}));
@@ -183,11 +217,13 @@ equation
     annotation (Line(
     points={{68,-32},{84,-32},{100,-32},{100,24},{92.2,24}},
     color={191,0,0}));
+% if merge_windows == False:
   connect(thermalConductorWin.solid, thermalZoneTwoElements.window)
     annotation (
      Line(points={{38,21},{40,21},{40,20},{43.8,20}}, color={191,0,0}));
   connect(prescribedTemperature1.port, thermalConductorWin.fluid)
     annotation (Line(points={{20,20},{28,20},{28,21}}, color={191,0,0}));
+% endif
   connect(thermalZoneTwoElements.extWall, thermalConductorWall.solid)
     annotation (Line(points={{43.8,12},{40,12},{40,1},{36,1}},
     color={191,0,0}));
@@ -195,8 +231,10 @@ equation
     annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
   connect(alphaWall.y, thermalConductorWall.Gc)
     annotation (Line(points={{30,-11.6},{30,-4},{31,-4}}, color={0,0,127}));
+% if merge_windows == False:
   connect(alphaWin.y, thermalConductorWin.Gc)
     annotation (Line(points={{32,33.6},{32,26},{33,26}}, color={0,0,127}));
+% endif
   connect(weaBus.TBlaSky, eqAirTemp.TBlaSky)
     annotation (Line(
     points={{-83,6},{-58,6},{-58,2},{-32,2},{-32,-4},{-26,-4}},
@@ -271,5 +309,63 @@ end SimpleRoomTwoElements;
   	sum_area += window.area
   awin_weighted = awin/sum_area
   return str(awin_weighted)
+  %>
+</%def>
+
+##transform deg to rad
+<%def name="deg_to_rad(value)", filter="trim">
+  <%
+  import math
+  value_rad=value*math.pi/180
+  return value_rad
+  %>
+</%def>
+
+##transform deg to rad for lists
+<%def name="deg_to_rad_list(list)", filter="trim">
+  <%
+  import math
+  newlist = []
+  for element in list:
+    element_new=element*math.pi/180
+    newlist.append(element_new)
+  return newlist
+  %>
+</%def>
+
+##sums entries of a list
+<%def name="sum_list(list)", filter="trim">
+  <%
+  sum(list)
+  return sum
+  %>
+</%def>
+
+##returns string of list of exterior walls
+<%def name="get_AExt_list(zone)", filter="trim">
+  <%
+  wall_list = []
+  for wall in zone.outer_walls:
+    wall_list.append(wall.area)
+  string_list = list_to_string(wall_list)
+  return string_list
+  %>
+</%def>
+
+##sums entries of a list
+<%def name="sum_list(list)", filter="trim">
+  <%
+  sum(list)
+  return sum
+  %>
+</%def>
+
+##returns mean alphaRad for indoor calculations
+<%def name="mean_alphaRad(zone)", filter="trim">
+  <%
+  total_area = zone.area_ow + zone.area_iw + zone.area_win
+  rad_mean = (zone.alpha_rad_inner_ow * zone.area_ow + alpha_rad_inner_iw *
+  zone.area_iw + alpha_rad_inner_win * zone.area_win) / total_area
+  return rad_mean
   %>
 </%def>

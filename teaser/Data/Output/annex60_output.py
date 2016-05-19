@@ -80,7 +80,9 @@ def export_annex60(prj,
                     zone_path + "\\" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
             out_file.write(zone_template.render_unicode(bldg=bldg,
-                                                        zone=zone))
+                                                        zone=zone,
+                                                        merge_windows=
+                                                        merge_windows))
 
             aixlib_output._help_package(zone_path,
                                         bldg.name + "_Models")
