@@ -71,11 +71,10 @@ model ${bldg.name}
     wfWall={${list_to_string(zone.weightfactor_ow)}},
     wfWin={${list_to_string(zone.weightfactor_win)}},
     withLongwave=true,
-    aExt=${get_aowo(zone.outer_walls)},
+    aExt=${zone.solar_absorp_ow_weighted},
     alphaWallOut=${zone.alpha_conv_outer_ow},
     alphaRadWall=${zone.alpha_rad_outer_ow},
-    aWin=${get_awin(zone.windows)},
-    eExt=0.9,
+    eExt=${zone.ir_emissivity_outer_ow_weighted},
     TGround=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
@@ -85,13 +84,14 @@ model ${bldg.name}
     wfWall={${list_to_string(zone.weightfactor_ow)}},
     wfWin={${list_to_string(zone.weightfactor_win)}},
     withLongwave=true,
-    aExt=${get_aowo(zone.outer_walls)},
+    aExt=${zone.solar_absorp_ow_weighted},
     alphaWallOut=${zone.alpha_conv_outer_ow},
     alphaRadWall=${zone.alpha_rad_outer_ow},
     alphaWinOut=${zone.alpha_conv_outer_win},
     alphaRadWin=${zone.alpha_rad_outer_win},
-    aWin=${get_awin(zone.windows)},
-    eExt=0.9,
+    aWin=${solar_absorp_win_weighted},
+    eExt=${zone.ir_emissivity_outer_ow_weighted},
+    eWin=${zone.ir_emissivity_win_weighted},
     TGround=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif
@@ -286,32 +286,6 @@ end SimpleRoomTwoElements;
   return string_of_list
   %>
 
-## get outer wall coefficient of absorbtion
-<%def name="get_aowo(list)", filter="trim">
-  <%
-  aowo = 0.
-  sum_area = 0.
-  for wall in list:
-  	aowo += float(wall.layer[-1].material.solar_absorp * wall.area)
-  	sum_area += wall.area
-  aowo_weighted = aowo/sum_area
-  return str(aowo_weighted)
-  %>
-</%def>
-
-##get the coefficient of absorption
-<%def name="get_awin(list)", filter="trim">
-  <%
-  awin = 0.
-  sum_area = 0.
-  for window in list:
-  	awin += float(window.layer[-1].material.solar_absorp * window.area)
-  	sum_area += window.area
-  awin_weighted = awin/sum_area
-  return str(awin_weighted)
-  %>
-</%def>
-
 ##transform deg to rad
 <%def name="deg_to_rad(value)", filter="trim">
   <%
@@ -349,14 +323,6 @@ end SimpleRoomTwoElements;
     wall_list.append(wall.area)
   string_list = list_to_string(wall_list)
   return string_list
-  %>
-</%def>
-
-##sums entries of a list
-<%def name="sum_list(list)", filter="trim">
-  <%
-  sum(list)
-  return sum
   %>
 </%def>
 
