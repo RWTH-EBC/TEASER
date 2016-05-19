@@ -47,6 +47,19 @@ class ThermalZone(object):
     outer_walls : list
         List with all outer walls including ground floor and rooftop
 
+    rooftops : list
+        List with rooftops if number of elements is 4
+
+    grounfdloors : list
+        List with grounfdloors if number of elements is >2
+
+    outerwalls_help : list
+        List with outer walls and rooftops if number of elements is >2
+        List with outer walls only if number of elements is 4
+
+    windows : list
+        List with windows
+
     use_conditions : instance of UseConditions()
         Class of UseConditions with all relevant information for the usage
         of the thermal zone
@@ -55,7 +68,10 @@ class ThermalZone(object):
         List with all inner walls including  floor and ceiling
 
     typical_length : list
-        List with all inner walls including  floor and ceiling
+        normative typical length of the thermal zone
+
+    typical_width : list
+        normative typical width of the thermal zone
 
     t_inside : float
         normative indoor temperature for static heat load calculation.
@@ -64,6 +80,16 @@ class ThermalZone(object):
     t_outside : float
         normative outdoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
+
+    t_ground : float
+        slab temperature directly at the outer side of ground floors.
+        The input of t_ground is ALWAYS in Kelvin
+
+    density_air : float
+        average density of the air in the thermal zone
+
+    heat_capac_air : float
+        average heat capacity of the air in the thermal zone
     '''
 
     def __init__(self, parent=None):
