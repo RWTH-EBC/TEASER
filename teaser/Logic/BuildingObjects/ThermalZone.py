@@ -348,6 +348,13 @@ class ThermalZone(object):
                          merge_windows,
                          t_bt):
         """calcs lumped parameter for two element model
+
+        Parameters
+        ----------
+
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
         """
         omega = 2 * math.pi / 86400 / t_bt
 
