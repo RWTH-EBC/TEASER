@@ -48,11 +48,11 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     temperatureground = ${zone.t_ground},
     Imax = ${zone.windows[0].shading_max_irr},
     splitfac = ${zone.windows[0].a_conv},
-    epso = ${get_epso(zone.outer_walls)},
-    epsi = ${get_epsi(zone.inner_walls)},
+    epso = ${zone.ir_emissivity_outer_ow},
+    epsi = ${zone.ir_emissivity_inner_ow},
     epsw = ${get_epsw(zone.windows)},
     awin = ${get_awin(zone.windows)},
-    aowo = ${get_aowo(zone.outer_walls)},
+    aowo = ${zone.sum_solar_absorp_ow},
     useConstantACHrate = ${str(get_true_false(
       zone.use_conditions.use_constant_ach_rate))},
     baseACH = ${zone.use_conditions.base_ach},
@@ -114,47 +114,5 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   	return "true"
   else:
     return value
-  %>
-</%def>
-
-
-## get outer wall emittance outer side
-<%def name="get_epso(list)", filter="trim">
-  <%
-  epso = 0.
-  sum_area = 0.
-  for wall in list:
-  	epso += float(wall.layer[-1].material.ir_emissivity * wall.area)
-  	sum_area += wall.area
-
-  epso_weighted = epso/sum_area
-  return str(epso_weighted)
-  %>
-</%def>
-
-## get outer wall emittance inner side
-<%def name="get_epsi(list)", filter="trim">
-  <%
-  epsi = 0.
-  sum_area = 0.
-  for wall in list:
-  	epsi += float(wall.layer[0].material.ir_emissivity * wall.area)
-  	sum_area += wall.area
-  epsi_weighted = epsi/sum_area
-  return str(epsi_weighted)
-  %>
-</%def>
-
-
-## get outer wall coefficient of absorbtion
-<%def name="get_aowo(list)", filter="trim">
-  <%
-  aowo = 0.
-  sum_area = 0.
-  for wall in list:
-  	aowo += float(wall.layer[-1].material.solar_absorp * wall.area)
-  	sum_area += wall.area
-  aowo_weighted = aowo/sum_area
-  return str(aowo_weighted)
   %>
 </%def>
