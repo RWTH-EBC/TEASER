@@ -12,9 +12,9 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     each outGroCon=true,
     til={${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
     % if bldg.latitude is None:
-      lat=0.87266462599716,
+    each  lat=0.87266462599716,
     % else:
-      lat=${deg_to_rad(bldg.latitude)},
+    each  lat=${deg_to_rad(bldg.latitude)},
     % endif
     azi={${get_azimut(deg_to_rad_list(zone.orientation_wall))}})
     "Calculates diffuse solar radiation on titled surface for all directions"
@@ -22,9 +22,9 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
   Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${len(zone.orientation_wall)}](
     til={${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
     % if bldg.latitude is None:
-      lat=0.87266462599716,
+    each  lat=0.87266462599716,
     % else:
-      lat=${bldg.latitude},
+    each  lat=${bldg.latitude},
     % endif
     azi={${get_azimut(deg_to_rad_list(zone.orientation_wall))}})
     "Calculates direct solar radiation on titled surface for all directions"
@@ -212,26 +212,18 @@ equation
   connect(solRad.y, eqAirTemp.HSol)
     annotation (Line(points={{-27.5,11},{-26,11},{-26,2},{-26,2}},
     color={0,0,127}));
-  connect(weaDat.weaBus, HDifTil[1].weaBus)
+  %for i, orient in enumerate(zone.orientation_wall):
+    connect(weaDat.weaBus, HDifTil[${i+1}].weaBus)
     annotation (Line(
     points={{-78,62},{-74,62},{-74,30},{-68,30}},
     color={255,204,51},
     thickness=0.5));
-  connect(weaDat.weaBus, HDifTil[2].weaBus)
-    annotation (Line(
-    points={{-78,62},{-74,62},{-74,30},{-68,30}},
-    color={255,204,51},
-    thickness=0.5));
-  connect(weaDat.weaBus, HDirTil[1].weaBus)
+    connect(weaDat.weaBus, HDirTil[${i+1}].weaBus)
     annotation (Line(
     points={{-78,62},{-73,62},{-68,62}},
     color={255,204,51},
     thickness=0.5));
-  connect(weaDat.weaBus, HDirTil[2].weaBus)
-    annotation (Line(
-    points={{-78,62},{-73,62},{-68,62}},
-    color={255,204,51},
-    thickness=0.5));
+  %endfor
   connect(personsRad.port, thermalZoneTwoElements.intGainsRad)
     annotation (Line(
     points={{68,-32},{84,-32},{100,-32},{100,24},{92.2,24}},
