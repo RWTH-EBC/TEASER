@@ -155,7 +155,7 @@ def example_create_building():
     We calculate the RC Values according to ebc procedure
     '''
     prj.calc_all_buildings(number_of_elements=2,
-                           merge_windows=False,
+                           merge_windows=True,
                            used_library='Annex60')
 
     '''
