@@ -60,7 +60,8 @@ def export_annex60(prj,
         zone_template = Template(filename=utilis.get_full_path(
             "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_ThreeElements"))
     elif number_of_elements == 4:
-        pass
+        zone_template = Template(filename=utilis.get_full_path(
+            "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_FourElements"))
 
     for bldg in exported_list_of_buildings:
         bldg_path = os.path.join(path,
