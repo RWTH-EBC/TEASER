@@ -58,8 +58,9 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
 % endif
     ATransparent={${list_to_string(zone.window_areas)}},
 % if merge_windows is True:
-    AExt={${list_to_string(zone.outer_walls_areas + zone
-    .window_areas)}}) "Thermal zone"
+    AExt={${list_to_string([a + b for a, b in zip(zone.window_areas, zone
+    .outer_walls_areas)])}})
+    "Thermal zone"
 % else:
     AExt={${list_to_string(zone.outer_walls_areas)}}) "Thermal zone"
 % endif
