@@ -57,7 +57,8 @@ def export_annex60(prj,
         zone_template = Template(filename=utilis.get_full_path(
             "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_TwoElements"))
     elif number_of_elements == 3:
-        pass
+        zone_template = Template(filename=utilis.get_full_path(
+            "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_ThreeElements"))
     elif number_of_elements == 4:
         pass
 
