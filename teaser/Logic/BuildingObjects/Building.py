@@ -343,7 +343,8 @@ class Building(object):
         elif self.used_library_calc == 'Annex60':
             import teaser.Logic.Simulation.annex as annex
             print("asd")
-            annex.compare_orientation(self)
+            print(number_of_elements)
+            annex.compare_orientation(self, number_of_elements=number_of_elements)
 
 
     def retrofit_building(self,
@@ -371,9 +372,10 @@ class Building(object):
         for zone in self.thermal_zones:
             zone.retrofit_zone(window_type, material)
 
-        self.calc_building_parameter(number_of_elements=self.used_library_calc,
-                                     merge_windows=self.merge_windows_calc,
-                                     used_library=self.used_library_calc)
+        self.calc_building_parameter(
+            number_of_elements=self.number_of_elements_calc,
+            merge_windows=self.merge_windows_calc,
+            used_library=self.used_library_calc)
 
     def rotate_building(self, angle):
         '''rotates the building to a given angle
