@@ -26,6 +26,7 @@
   </xs:complexType>
   <xs:complexType name="OuterWallType">
     <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
@@ -41,6 +42,7 @@
   </xs:complexType>
    <xs:complexType name="RooftopType">
     <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
@@ -56,6 +58,7 @@
   </xs:complexType>
    <xs:complexType name="InnerWallType">
     <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
@@ -69,6 +72,7 @@
   </xs:complexType>
   <xs:complexType name="CeilingType">
     <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
@@ -82,6 +86,7 @@
   </xs:complexType>
   <xs:complexType name="FloorType">
     <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
@@ -95,6 +100,7 @@
   </xs:complexType>
   <xs:complexType name="GroundFloorType">
     <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
@@ -108,6 +114,7 @@
   </xs:complexType>
   <xs:complexType name="WindowType">
     <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
       <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>

@@ -1,7 +1,7 @@
 # D:\GIT\TEASER\teaser\Data\SchemaBindings\ProjectBind.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:e92452c8d3e28a9e27abfc9994d2007779e7f4c9
-# Generated 2016-04-08 18:15:08.359596 by PyXB version 1.2.4 using Python 3.4.3.final.0
+# Generated 2016-05-22 22:02:18.784671 by PyXB version 1.2.4 using Python 3.4.4.final.0
 # Namespace AbsentNamespace0
 
 from __future__ import unicode_literals
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:0fc9d864-fda5-11e5-8dc4-2cd444b2e704')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:16565664-2058-11e6-8f77-00059a3c7a00')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
@@ -799,83 +799,91 @@ class OuterWallType (pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
+    # Element name uses Python identifier name
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_OuterWallType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 29, 6), )
+
+    
+    name = property(__name.value, __name.set, None, None)
+
+    
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_OuterWallType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 29, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_OuterWallType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 30, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element construction_type uses Python identifier construction_type
-    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_OuterWallType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 30, 6), )
+    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_OuterWallType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 31, 6), )
 
     
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_OuterWallType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 31, 6), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_OuterWallType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 32, 6), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
-    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_OuterWallType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 32, 6), )
+    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_OuterWallType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 33, 6), )
 
     
     area = property(__area.value, __area.set, None, None)
 
     
     # Element tilt uses Python identifier tilt
-    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_OuterWallType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 33, 6), )
+    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_OuterWallType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 34, 6), )
 
     
     tilt = property(__tilt.value, __tilt.set, None, None)
 
     
     # Element orientation uses Python identifier orientation
-    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_OuterWallType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 34, 6), )
+    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_OuterWallType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 35, 6), )
 
     
     orientation = property(__orientation.value, __orientation.set, None, None)
 
     
     # Element inner_convection uses Python identifier inner_convection
-    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_OuterWallType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 35, 6), )
+    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_OuterWallType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 36, 6), )
 
     
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
     
     # Element inner_radiation uses Python identifier inner_radiation
-    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_OuterWallType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 36, 6), )
+    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_OuterWallType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 37, 6), )
 
     
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
     
     # Element outer_convection uses Python identifier outer_convection
-    __outer_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_convection'), 'outer_convection', '__AbsentNamespace0_OuterWallType_outer_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 37, 6), )
+    __outer_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_convection'), 'outer_convection', '__AbsentNamespace0_OuterWallType_outer_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 38, 6), )
 
     
     outer_convection = property(__outer_convection.value, __outer_convection.set, None, None)
 
     
     # Element outer_radiation uses Python identifier outer_radiation
-    __outer_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_radiation'), 'outer_radiation', '__AbsentNamespace0_OuterWallType_outer_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 38, 6), )
+    __outer_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_radiation'), 'outer_radiation', '__AbsentNamespace0_OuterWallType_outer_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 39, 6), )
 
     
     outer_radiation = property(__outer_radiation.value, __outer_radiation.set, None, None)
 
     
     # Element Layer uses Python identifier Layer
-    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_OuterWallType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 39, 6), )
+    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_OuterWallType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 40, 6), )
 
     
     Layer = property(__Layer.value, __Layer.set, None, None)
 
     _ElementMap.update({
+        __name.name() : __name,
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
         __year_of_retrofit.name() : __year_of_retrofit,
@@ -901,88 +909,96 @@ class RooftopType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'RooftopType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 42, 3)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 43, 3)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
+    # Element name uses Python identifier name
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_RooftopType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 45, 6), )
+
+    
+    name = property(__name.value, __name.set, None, None)
+
+    
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_RooftopType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 44, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_RooftopType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 46, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element construction_type uses Python identifier construction_type
-    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_RooftopType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 45, 6), )
+    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_RooftopType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 47, 6), )
 
     
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_RooftopType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 46, 6), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_RooftopType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 48, 6), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
-    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_RooftopType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 47, 6), )
+    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_RooftopType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 49, 6), )
 
     
     area = property(__area.value, __area.set, None, None)
 
     
     # Element tilt uses Python identifier tilt
-    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_RooftopType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 48, 6), )
+    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_RooftopType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 50, 6), )
 
     
     tilt = property(__tilt.value, __tilt.set, None, None)
 
     
     # Element orientation uses Python identifier orientation
-    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_RooftopType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 49, 6), )
+    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_RooftopType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 51, 6), )
 
     
     orientation = property(__orientation.value, __orientation.set, None, None)
 
     
     # Element inner_convection uses Python identifier inner_convection
-    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_RooftopType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 50, 6), )
+    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_RooftopType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 52, 6), )
 
     
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
     
     # Element inner_radiation uses Python identifier inner_radiation
-    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_RooftopType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 51, 6), )
+    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_RooftopType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 53, 6), )
 
     
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
     
     # Element outer_convection uses Python identifier outer_convection
-    __outer_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_convection'), 'outer_convection', '__AbsentNamespace0_RooftopType_outer_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 52, 6), )
+    __outer_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_convection'), 'outer_convection', '__AbsentNamespace0_RooftopType_outer_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 54, 6), )
 
     
     outer_convection = property(__outer_convection.value, __outer_convection.set, None, None)
 
     
     # Element outer_radiation uses Python identifier outer_radiation
-    __outer_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_radiation'), 'outer_radiation', '__AbsentNamespace0_RooftopType_outer_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 53, 6), )
+    __outer_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_radiation'), 'outer_radiation', '__AbsentNamespace0_RooftopType_outer_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 55, 6), )
 
     
     outer_radiation = property(__outer_radiation.value, __outer_radiation.set, None, None)
 
     
     # Element Layer uses Python identifier Layer
-    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_RooftopType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 54, 6), )
+    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_RooftopType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 56, 6), )
 
     
     Layer = property(__Layer.value, __Layer.set, None, None)
 
     _ElementMap.update({
+        __name.name() : __name,
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
         __year_of_retrofit.name() : __year_of_retrofit,
@@ -1008,74 +1024,82 @@ class InnerWallType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'InnerWallType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 57, 3)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 59, 3)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
+    # Element name uses Python identifier name
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_InnerWallType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 61, 6), )
+
+    
+    name = property(__name.value, __name.set, None, None)
+
+    
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_InnerWallType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 59, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_InnerWallType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 62, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element construction_type uses Python identifier construction_type
-    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_InnerWallType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 60, 6), )
+    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_InnerWallType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 63, 6), )
 
     
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_InnerWallType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 61, 6), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_InnerWallType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 64, 6), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
-    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_InnerWallType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 62, 6), )
+    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_InnerWallType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 65, 6), )
 
     
     area = property(__area.value, __area.set, None, None)
 
     
     # Element tilt uses Python identifier tilt
-    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_InnerWallType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 63, 6), )
+    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_InnerWallType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 66, 6), )
 
     
     tilt = property(__tilt.value, __tilt.set, None, None)
 
     
     # Element orientation uses Python identifier orientation
-    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_InnerWallType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 64, 6), )
+    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_InnerWallType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 67, 6), )
 
     
     orientation = property(__orientation.value, __orientation.set, None, None)
 
     
     # Element inner_convection uses Python identifier inner_convection
-    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_InnerWallType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 65, 6), )
+    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_InnerWallType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 68, 6), )
 
     
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
     
     # Element inner_radiation uses Python identifier inner_radiation
-    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_InnerWallType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 66, 6), )
+    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_InnerWallType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 69, 6), )
 
     
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
     
     # Element Layer uses Python identifier Layer
-    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_InnerWallType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 67, 6), )
+    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_InnerWallType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 70, 6), )
 
     
     Layer = property(__Layer.value, __Layer.set, None, None)
 
     _ElementMap.update({
+        __name.name() : __name,
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
         __year_of_retrofit.name() : __year_of_retrofit,
@@ -1099,74 +1123,82 @@ class CeilingType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'CeilingType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 70, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 73, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
+    # Element name uses Python identifier name
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_CeilingType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 75, 6), )
+
+    
+    name = property(__name.value, __name.set, None, None)
+
+    
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_CeilingType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 72, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_CeilingType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 76, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element construction_type uses Python identifier construction_type
-    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_CeilingType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 73, 6), )
+    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_CeilingType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 77, 6), )
 
     
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_CeilingType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 74, 6), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_CeilingType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 78, 6), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
-    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_CeilingType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 75, 6), )
+    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_CeilingType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 79, 6), )
 
     
     area = property(__area.value, __area.set, None, None)
 
     
     # Element tilt uses Python identifier tilt
-    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_CeilingType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 76, 6), )
+    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_CeilingType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 80, 6), )
 
     
     tilt = property(__tilt.value, __tilt.set, None, None)
 
     
     # Element orientation uses Python identifier orientation
-    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_CeilingType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 77, 6), )
+    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_CeilingType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 81, 6), )
 
     
     orientation = property(__orientation.value, __orientation.set, None, None)
 
     
     # Element inner_convection uses Python identifier inner_convection
-    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_CeilingType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 78, 6), )
+    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_CeilingType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 82, 6), )
 
     
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
     
     # Element inner_radiation uses Python identifier inner_radiation
-    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_CeilingType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 79, 6), )
+    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_CeilingType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 83, 6), )
 
     
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
     
     # Element Layer uses Python identifier Layer
-    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_CeilingType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 80, 6), )
+    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_CeilingType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 84, 6), )
 
     
     Layer = property(__Layer.value, __Layer.set, None, None)
 
     _ElementMap.update({
+        __name.name() : __name,
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
         __year_of_retrofit.name() : __year_of_retrofit,
@@ -1190,74 +1222,82 @@ class FloorType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'FloorType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 83, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 87, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
+    # Element name uses Python identifier name
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_FloorType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 89, 6), )
+
+    
+    name = property(__name.value, __name.set, None, None)
+
+    
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_FloorType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 85, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_FloorType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 90, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element construction_type uses Python identifier construction_type
-    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_FloorType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 86, 6), )
+    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_FloorType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 91, 6), )
 
     
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_FloorType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 87, 6), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_FloorType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 92, 6), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
-    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_FloorType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 88, 6), )
+    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_FloorType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 93, 6), )
 
     
     area = property(__area.value, __area.set, None, None)
 
     
     # Element tilt uses Python identifier tilt
-    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_FloorType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 89, 6), )
+    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_FloorType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 94, 6), )
 
     
     tilt = property(__tilt.value, __tilt.set, None, None)
 
     
     # Element orientation uses Python identifier orientation
-    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_FloorType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 90, 6), )
+    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_FloorType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 95, 6), )
 
     
     orientation = property(__orientation.value, __orientation.set, None, None)
 
     
     # Element inner_convection uses Python identifier inner_convection
-    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_FloorType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 91, 6), )
+    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_FloorType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 96, 6), )
 
     
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
     
     # Element inner_radiation uses Python identifier inner_radiation
-    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_FloorType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 92, 6), )
+    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_FloorType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 97, 6), )
 
     
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
     
     # Element Layer uses Python identifier Layer
-    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_FloorType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 93, 6), )
+    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_FloorType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 98, 6), )
 
     
     Layer = property(__Layer.value, __Layer.set, None, None)
 
     _ElementMap.update({
+        __name.name() : __name,
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
         __year_of_retrofit.name() : __year_of_retrofit,
@@ -1281,74 +1321,82 @@ class GroundFloorType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'GroundFloorType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 96, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 101, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
+    # Element name uses Python identifier name
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_GroundFloorType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 103, 6), )
+
+    
+    name = property(__name.value, __name.set, None, None)
+
+    
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_GroundFloorType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 98, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_GroundFloorType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 104, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element construction_type uses Python identifier construction_type
-    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_GroundFloorType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 99, 6), )
+    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_GroundFloorType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 105, 6), )
 
     
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_GroundFloorType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 100, 6), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_GroundFloorType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 106, 6), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
-    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_GroundFloorType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 101, 6), )
+    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_GroundFloorType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 107, 6), )
 
     
     area = property(__area.value, __area.set, None, None)
 
     
     # Element tilt uses Python identifier tilt
-    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_GroundFloorType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 102, 6), )
+    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_GroundFloorType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 108, 6), )
 
     
     tilt = property(__tilt.value, __tilt.set, None, None)
 
     
     # Element orientation uses Python identifier orientation
-    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_GroundFloorType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 103, 6), )
+    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_GroundFloorType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 109, 6), )
 
     
     orientation = property(__orientation.value, __orientation.set, None, None)
 
     
     # Element inner_convection uses Python identifier inner_convection
-    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_GroundFloorType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 104, 6), )
+    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_GroundFloorType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 110, 6), )
 
     
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
     
     # Element inner_radiation uses Python identifier inner_radiation
-    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_GroundFloorType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 105, 6), )
+    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_GroundFloorType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 111, 6), )
 
     
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
     
     # Element Layer uses Python identifier Layer
-    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_GroundFloorType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 106, 6), )
+    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_GroundFloorType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 112, 6), )
 
     
     Layer = property(__Layer.value, __Layer.set, None, None)
 
     _ElementMap.update({
+        __name.name() : __name,
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
         __year_of_retrofit.name() : __year_of_retrofit,
@@ -1372,116 +1420,124 @@ class WindowType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'WindowType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 109, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 115, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
+    # Element name uses Python identifier name
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_WindowType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 117, 6), )
+
+    
+    name = property(__name.value, __name.set, None, None)
+
+    
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_WindowType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 111, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_WindowType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 118, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element construction_type uses Python identifier construction_type
-    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_WindowType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 112, 6), )
+    __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'construction_type'), 'construction_type', '__AbsentNamespace0_WindowType_construction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 119, 6), )
 
     
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_WindowType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 113, 6), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_WindowType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 120, 6), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element area uses Python identifier area
-    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_WindowType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 114, 6), )
+    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_WindowType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 121, 6), )
 
     
     area = property(__area.value, __area.set, None, None)
 
     
     # Element tilt uses Python identifier tilt
-    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_WindowType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 115, 6), )
+    __tilt = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'tilt'), 'tilt', '__AbsentNamespace0_WindowType_tilt', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 122, 6), )
 
     
     tilt = property(__tilt.value, __tilt.set, None, None)
 
     
     # Element orientation uses Python identifier orientation
-    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_WindowType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 116, 6), )
+    __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'orientation'), 'orientation', '__AbsentNamespace0_WindowType_orientation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 123, 6), )
 
     
     orientation = property(__orientation.value, __orientation.set, None, None)
 
     
     # Element inner_convection uses Python identifier inner_convection
-    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_WindowType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 117, 6), )
+    __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_convection'), 'inner_convection', '__AbsentNamespace0_WindowType_inner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 124, 6), )
 
     
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
     
     # Element inner_radiation uses Python identifier inner_radiation
-    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_WindowType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 118, 6), )
+    __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'inner_radiation'), 'inner_radiation', '__AbsentNamespace0_WindowType_inner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 125, 6), )
 
     
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
     
     # Element outer_convection uses Python identifier outer_convection
-    __outer_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_convection'), 'outer_convection', '__AbsentNamespace0_WindowType_outer_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 119, 3), )
+    __outer_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_convection'), 'outer_convection', '__AbsentNamespace0_WindowType_outer_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 126, 3), )
 
     
     outer_convection = property(__outer_convection.value, __outer_convection.set, None, None)
 
     
     # Element outer_radiation uses Python identifier outer_radiation
-    __outer_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_radiation'), 'outer_radiation', '__AbsentNamespace0_WindowType_outer_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 120, 6), )
+    __outer_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_radiation'), 'outer_radiation', '__AbsentNamespace0_WindowType_outer_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 127, 6), )
 
     
     outer_radiation = property(__outer_radiation.value, __outer_radiation.set, None, None)
 
     
     # Element g_value uses Python identifier g_value
-    __g_value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'g_value'), 'g_value', '__AbsentNamespace0_WindowType_g_value', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 121, 3), )
+    __g_value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'g_value'), 'g_value', '__AbsentNamespace0_WindowType_g_value', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 128, 3), )
 
     
     g_value = property(__g_value.value, __g_value.set, None, None)
 
     
     # Element a_conv uses Python identifier a_conv
-    __a_conv = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'a_conv'), 'a_conv', '__AbsentNamespace0_WindowType_a_conv', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 122, 6), )
+    __a_conv = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'a_conv'), 'a_conv', '__AbsentNamespace0_WindowType_a_conv', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 129, 6), )
 
     
     a_conv = property(__a_conv.value, __a_conv.set, None, None)
 
     
     # Element shading_g_total uses Python identifier shading_g_total
-    __shading_g_total = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'shading_g_total'), 'shading_g_total', '__AbsentNamespace0_WindowType_shading_g_total', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 123, 6), )
+    __shading_g_total = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'shading_g_total'), 'shading_g_total', '__AbsentNamespace0_WindowType_shading_g_total', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 130, 6), )
 
     
     shading_g_total = property(__shading_g_total.value, __shading_g_total.set, None, None)
 
     
     # Element shading_max_irr uses Python identifier shading_max_irr
-    __shading_max_irr = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'shading_max_irr'), 'shading_max_irr', '__AbsentNamespace0_WindowType_shading_max_irr', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 124, 6), )
+    __shading_max_irr = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'shading_max_irr'), 'shading_max_irr', '__AbsentNamespace0_WindowType_shading_max_irr', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 131, 6), )
 
     
     shading_max_irr = property(__shading_max_irr.value, __shading_max_irr.set, None, None)
 
     
     # Element Layer uses Python identifier Layer
-    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_WindowType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 125, 6), )
+    __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Layer'), 'Layer', '__AbsentNamespace0_WindowType_Layer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 132, 6), )
 
     
     Layer = property(__Layer.value, __Layer.set, None, None)
 
     _ElementMap.update({
+        __name.name() : __name,
         __year_of_construction.name() : __year_of_construction,
         __construction_type.name() : __construction_type,
         __year_of_retrofit.name() : __year_of_retrofit,
@@ -1511,104 +1567,104 @@ class ThermalZoneType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ThermalZoneType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 128, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 135, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element name uses Python identifier name
-    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_ThermalZoneType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 130, 6), )
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_ThermalZoneType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 137, 6), )
 
     
     name = property(__name.value, __name.set, None, None)
 
     
     # Element area uses Python identifier area
-    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_ThermalZoneType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 131, 6), )
+    __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'area'), 'area', '__AbsentNamespace0_ThermalZoneType_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 138, 6), )
 
     
     area = property(__area.value, __area.set, None, None)
 
     
     # Element volume uses Python identifier volume
-    __volume = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'volume'), 'volume', '__AbsentNamespace0_ThermalZoneType_volume', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 132, 6), )
+    __volume = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'volume'), 'volume', '__AbsentNamespace0_ThermalZoneType_volume', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 139, 6), )
 
     
     volume = property(__volume.value, __volume.set, None, None)
 
     
     # Element infiltration_rate uses Python identifier infiltration_rate
-    __infiltration_rate = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'infiltration_rate'), 'infiltration_rate', '__AbsentNamespace0_ThermalZoneType_infiltration_rate', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 133, 6), )
+    __infiltration_rate = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'infiltration_rate'), 'infiltration_rate', '__AbsentNamespace0_ThermalZoneType_infiltration_rate', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 140, 6), )
 
     
     infiltration_rate = property(__infiltration_rate.value, __infiltration_rate.set, None, None)
 
     
     # Element typical_length uses Python identifier typical_length
-    __typical_length = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'typical_length'), 'typical_length', '__AbsentNamespace0_ThermalZoneType_typical_length', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 134, 6), )
+    __typical_length = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'typical_length'), 'typical_length', '__AbsentNamespace0_ThermalZoneType_typical_length', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 141, 6), )
 
     
     typical_length = property(__typical_length.value, __typical_length.set, None, None)
 
     
     # Element typical_width uses Python identifier typical_width
-    __typical_width = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'typical_width'), 'typical_width', '__AbsentNamespace0_ThermalZoneType_typical_width', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 135, 2), )
+    __typical_width = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'typical_width'), 'typical_width', '__AbsentNamespace0_ThermalZoneType_typical_width', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 142, 2), )
 
     
     typical_width = property(__typical_width.value, __typical_width.set, None, None)
 
     
     # Element UseCondition uses Python identifier UseCondition
-    __UseCondition = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'UseCondition'), 'UseCondition', '__AbsentNamespace0_ThermalZoneType_UseCondition', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 136, 6), )
+    __UseCondition = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'UseCondition'), 'UseCondition', '__AbsentNamespace0_ThermalZoneType_UseCondition', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 143, 6), )
 
     
     UseCondition = property(__UseCondition.value, __UseCondition.set, None, None)
 
     
     # Element OuterWall uses Python identifier OuterWall
-    __OuterWall = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'OuterWall'), 'OuterWall', '__AbsentNamespace0_ThermalZoneType_OuterWall', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 137, 6), )
+    __OuterWall = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'OuterWall'), 'OuterWall', '__AbsentNamespace0_ThermalZoneType_OuterWall', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 144, 6), )
 
     
     OuterWall = property(__OuterWall.value, __OuterWall.set, None, None)
 
     
     # Element Rooftop uses Python identifier Rooftop
-    __Rooftop = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Rooftop'), 'Rooftop', '__AbsentNamespace0_ThermalZoneType_Rooftop', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 138, 6), )
+    __Rooftop = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Rooftop'), 'Rooftop', '__AbsentNamespace0_ThermalZoneType_Rooftop', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 145, 6), )
 
     
     Rooftop = property(__Rooftop.value, __Rooftop.set, None, None)
 
     
     # Element GroundFloor uses Python identifier GroundFloor
-    __GroundFloor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'GroundFloor'), 'GroundFloor', '__AbsentNamespace0_ThermalZoneType_GroundFloor', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 139, 6), )
+    __GroundFloor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'GroundFloor'), 'GroundFloor', '__AbsentNamespace0_ThermalZoneType_GroundFloor', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 146, 6), )
 
     
     GroundFloor = property(__GroundFloor.value, __GroundFloor.set, None, None)
 
     
     # Element InnerWall uses Python identifier InnerWall
-    __InnerWall = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'InnerWall'), 'InnerWall', '__AbsentNamespace0_ThermalZoneType_InnerWall', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 140, 6), )
+    __InnerWall = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'InnerWall'), 'InnerWall', '__AbsentNamespace0_ThermalZoneType_InnerWall', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 147, 6), )
 
     
     InnerWall = property(__InnerWall.value, __InnerWall.set, None, None)
 
     
     # Element Ceiling uses Python identifier Ceiling
-    __Ceiling = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Ceiling'), 'Ceiling', '__AbsentNamespace0_ThermalZoneType_Ceiling', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 141, 6), )
+    __Ceiling = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Ceiling'), 'Ceiling', '__AbsentNamespace0_ThermalZoneType_Ceiling', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 148, 6), )
 
     
     Ceiling = property(__Ceiling.value, __Ceiling.set, None, None)
 
     
     # Element Floor uses Python identifier Floor
-    __Floor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Floor'), 'Floor', '__AbsentNamespace0_ThermalZoneType_Floor', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 142, 6), )
+    __Floor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Floor'), 'Floor', '__AbsentNamespace0_ThermalZoneType_Floor', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 149, 6), )
 
     
     Floor = property(__Floor.value, __Floor.set, None, None)
 
     
     # Element Window uses Python identifier Window
-    __Window = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Window'), 'Window', '__AbsentNamespace0_ThermalZoneType_Window', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 143, 6), )
+    __Window = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Window'), 'Window', '__AbsentNamespace0_ThermalZoneType_Window', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 150, 6), )
 
     
     Window = property(__Window.value, __Window.set, None, None)
@@ -1642,90 +1698,90 @@ class BuildingAHUType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'BuildingAHUType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 146, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 153, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element heating uses Python identifier heating
-    __heating = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'heating'), 'heating', '__AbsentNamespace0_BuildingAHUType_heating', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 148, 6), )
+    __heating = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'heating'), 'heating', '__AbsentNamespace0_BuildingAHUType_heating', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 155, 6), )
 
     
     heating = property(__heating.value, __heating.set, None, None)
 
     
     # Element cooling uses Python identifier cooling
-    __cooling = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'cooling'), 'cooling', '__AbsentNamespace0_BuildingAHUType_cooling', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 149, 6), )
+    __cooling = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'cooling'), 'cooling', '__AbsentNamespace0_BuildingAHUType_cooling', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 156, 6), )
 
     
     cooling = property(__cooling.value, __cooling.set, None, None)
 
     
     # Element dehumidification uses Python identifier dehumidification
-    __dehumidification = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'dehumidification'), 'dehumidification', '__AbsentNamespace0_BuildingAHUType_dehumidification', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 150, 6), )
+    __dehumidification = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'dehumidification'), 'dehumidification', '__AbsentNamespace0_BuildingAHUType_dehumidification', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 157, 6), )
 
     
     dehumidification = property(__dehumidification.value, __dehumidification.set, None, None)
 
     
     # Element humidification uses Python identifier humidification
-    __humidification = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'humidification'), 'humidification', '__AbsentNamespace0_BuildingAHUType_humidification', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 151, 6), )
+    __humidification = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'humidification'), 'humidification', '__AbsentNamespace0_BuildingAHUType_humidification', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 158, 6), )
 
     
     humidification = property(__humidification.value, __humidification.set, None, None)
 
     
     # Element heat_recovery uses Python identifier heat_recovery
-    __heat_recovery = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'heat_recovery'), 'heat_recovery', '__AbsentNamespace0_BuildingAHUType_heat_recovery', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 152, 6), )
+    __heat_recovery = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'heat_recovery'), 'heat_recovery', '__AbsentNamespace0_BuildingAHUType_heat_recovery', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 159, 6), )
 
     
     heat_recovery = property(__heat_recovery.value, __heat_recovery.set, None, None)
 
     
     # Element by_pass_dehumidification uses Python identifier by_pass_dehumidification
-    __by_pass_dehumidification = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'by_pass_dehumidification'), 'by_pass_dehumidification', '__AbsentNamespace0_BuildingAHUType_by_pass_dehumidification', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 153, 6), )
+    __by_pass_dehumidification = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'by_pass_dehumidification'), 'by_pass_dehumidification', '__AbsentNamespace0_BuildingAHUType_by_pass_dehumidification', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 160, 6), )
 
     
     by_pass_dehumidification = property(__by_pass_dehumidification.value, __by_pass_dehumidification.set, None, None)
 
     
     # Element efficiency_recovery uses Python identifier efficiency_recovery
-    __efficiency_recovery = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'efficiency_recovery'), 'efficiency_recovery', '__AbsentNamespace0_BuildingAHUType_efficiency_recovery', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 154, 6), )
+    __efficiency_recovery = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'efficiency_recovery'), 'efficiency_recovery', '__AbsentNamespace0_BuildingAHUType_efficiency_recovery', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 161, 6), )
 
     
     efficiency_recovery = property(__efficiency_recovery.value, __efficiency_recovery.set, None, None)
 
     
     # Element efficiency_revocery_false uses Python identifier efficiency_revocery_false
-    __efficiency_revocery_false = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'efficiency_revocery_false'), 'efficiency_revocery_false', '__AbsentNamespace0_BuildingAHUType_efficiency_revocery_false', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 155, 6), )
+    __efficiency_revocery_false = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'efficiency_revocery_false'), 'efficiency_revocery_false', '__AbsentNamespace0_BuildingAHUType_efficiency_revocery_false', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 162, 6), )
 
     
     efficiency_revocery_false = property(__efficiency_revocery_false.value, __efficiency_revocery_false.set, None, None)
 
     
     # Element profile_min_relative_humidity uses Python identifier profile_min_relative_humidity
-    __profile_min_relative_humidity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'profile_min_relative_humidity'), 'profile_min_relative_humidity', '__AbsentNamespace0_BuildingAHUType_profile_min_relative_humidity', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 156, 6), )
+    __profile_min_relative_humidity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'profile_min_relative_humidity'), 'profile_min_relative_humidity', '__AbsentNamespace0_BuildingAHUType_profile_min_relative_humidity', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 163, 6), )
 
     
     profile_min_relative_humidity = property(__profile_min_relative_humidity.value, __profile_min_relative_humidity.set, None, None)
 
     
     # Element profile_max_relative_humidity uses Python identifier profile_max_relative_humidity
-    __profile_max_relative_humidity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'profile_max_relative_humidity'), 'profile_max_relative_humidity', '__AbsentNamespace0_BuildingAHUType_profile_max_relative_humidity', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 157, 6), )
+    __profile_max_relative_humidity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'profile_max_relative_humidity'), 'profile_max_relative_humidity', '__AbsentNamespace0_BuildingAHUType_profile_max_relative_humidity', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 164, 6), )
 
     
     profile_max_relative_humidity = property(__profile_max_relative_humidity.value, __profile_max_relative_humidity.set, None, None)
 
     
     # Element profile_v_flow uses Python identifier profile_v_flow
-    __profile_v_flow = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'profile_v_flow'), 'profile_v_flow', '__AbsentNamespace0_BuildingAHUType_profile_v_flow', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 158, 6), )
+    __profile_v_flow = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'profile_v_flow'), 'profile_v_flow', '__AbsentNamespace0_BuildingAHUType_profile_v_flow', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 165, 6), )
 
     
     profile_v_flow = property(__profile_v_flow.value, __profile_v_flow.set, None, None)
 
     
     # Element profile_temperature uses Python identifier profile_temperature
-    __profile_temperature = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'profile_temperature'), 'profile_temperature', '__AbsentNamespace0_BuildingAHUType_profile_temperature', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 159, 6), )
+    __profile_temperature = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'profile_temperature'), 'profile_temperature', '__AbsentNamespace0_BuildingAHUType_profile_temperature', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 166, 6), )
 
     
     profile_temperature = property(__profile_temperature.value, __profile_temperature.set, None, None)
@@ -1757,97 +1813,97 @@ class BuildingType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'BuildingType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 162, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 169, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element name uses Python identifier name
-    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_BuildingType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 164, 6), )
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_BuildingType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 171, 6), )
 
     
     name = property(__name.value, __name.set, None, None)
 
     
     # Element street_name uses Python identifier street_name
-    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_BuildingType_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 165, 6), )
+    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_BuildingType_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 172, 6), )
 
     
     street_name = property(__street_name.value, __street_name.set, None, None)
 
     
     # Element city uses Python identifier city
-    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_BuildingType_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 166, 6), )
+    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_BuildingType_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 173, 6), )
 
     
     city = property(__city.value, __city.set, None, None)
 
     
     # Element type_of_building uses Python identifier type_of_building
-    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_BuildingType_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 167, 6), )
+    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_BuildingType_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 174, 6), )
 
     
     type_of_building = property(__type_of_building.value, __type_of_building.set, None, None)
 
     
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_BuildingType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 168, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_BuildingType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 175, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_BuildingType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 169, 1), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_BuildingType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 176, 1), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element number_of_floors uses Python identifier number_of_floors
-    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_BuildingType_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 170, 6), )
+    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_BuildingType_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 177, 6), )
 
     
     number_of_floors = property(__number_of_floors.value, __number_of_floors.set, None, None)
 
     
     # Element height_of_floors uses Python identifier height_of_floors
-    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_BuildingType_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 171, 6), )
+    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_BuildingType_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 178, 6), )
 
     
     height_of_floors = property(__height_of_floors.value, __height_of_floors.set, None, None)
 
     
     # Element net_leased_area uses Python identifier net_leased_area
-    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_BuildingType_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 172, 6), )
+    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_BuildingType_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 179, 6), )
 
     
     net_leased_area = property(__net_leased_area.value, __net_leased_area.set, None, None)
 
     
     # Element outer_area uses Python identifier outer_area
-    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_BuildingType_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 173, 6), )
+    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_BuildingType_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 180, 6), )
 
     
     outer_area = property(__outer_area.value, __outer_area.set, None, None)
 
     
     # Element window_area uses Python identifier window_area
-    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_BuildingType_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 174, 1), )
+    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_BuildingType_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 181, 1), )
 
     
     window_area = property(__window_area.value, __window_area.set, None, None)
 
     
     # Element ThermalZone uses Python identifier ThermalZone
-    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_BuildingType_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 175, 6), )
+    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_BuildingType_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 182, 6), )
 
     
     ThermalZone = property(__ThermalZone.value, __ThermalZone.set, None, None)
 
     
     # Element CentralAHU uses Python identifier CentralAHU
-    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_BuildingType_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 176, 6), )
+    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_BuildingType_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 183, 6), )
 
     
     CentralAHU = property(__CentralAHU.value, __CentralAHU.set, None, None)
@@ -1880,97 +1936,97 @@ class OfficeType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'OfficeType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 179, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 186, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element name uses Python identifier name
-    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_OfficeType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 181, 6), )
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_OfficeType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 188, 6), )
 
     
     name = property(__name.value, __name.set, None, None)
 
     
     # Element street_name uses Python identifier street_name
-    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_OfficeType_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 182, 6), )
+    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_OfficeType_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 189, 6), )
 
     
     street_name = property(__street_name.value, __street_name.set, None, None)
 
     
     # Element city uses Python identifier city
-    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_OfficeType_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 183, 6), )
+    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_OfficeType_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 190, 6), )
 
     
     city = property(__city.value, __city.set, None, None)
 
     
     # Element type_of_building uses Python identifier type_of_building
-    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_OfficeType_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 184, 6), )
+    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_OfficeType_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 191, 6), )
 
     
     type_of_building = property(__type_of_building.value, __type_of_building.set, None, None)
 
     
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_OfficeType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 185, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_OfficeType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 192, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_OfficeType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 186, 3), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_OfficeType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 193, 3), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element number_of_floors uses Python identifier number_of_floors
-    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_OfficeType_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 187, 6), )
+    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_OfficeType_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 194, 6), )
 
     
     number_of_floors = property(__number_of_floors.value, __number_of_floors.set, None, None)
 
     
     # Element height_of_floors uses Python identifier height_of_floors
-    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_OfficeType_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 188, 6), )
+    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_OfficeType_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 195, 6), )
 
     
     height_of_floors = property(__height_of_floors.value, __height_of_floors.set, None, None)
 
     
     # Element net_leased_area uses Python identifier net_leased_area
-    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_OfficeType_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 189, 6), )
+    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_OfficeType_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 196, 6), )
 
     
     net_leased_area = property(__net_leased_area.value, __net_leased_area.set, None, None)
 
     
     # Element outer_area uses Python identifier outer_area
-    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_OfficeType_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 190, 6), )
+    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_OfficeType_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 197, 6), )
 
     
     outer_area = property(__outer_area.value, __outer_area.set, None, None)
 
     
     # Element window_area uses Python identifier window_area
-    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_OfficeType_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 191, 3), )
+    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_OfficeType_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 198, 3), )
 
     
     window_area = property(__window_area.value, __window_area.set, None, None)
 
     
     # Element ThermalZone uses Python identifier ThermalZone
-    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_OfficeType_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 192, 6), )
+    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_OfficeType_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 199, 6), )
 
     
     ThermalZone = property(__ThermalZone.value, __ThermalZone.set, None, None)
 
     
     # Element CentralAHU uses Python identifier CentralAHU
-    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_OfficeType_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 193, 6), )
+    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_OfficeType_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 200, 6), )
 
     
     CentralAHU = property(__CentralAHU.value, __CentralAHU.set, None, None)
@@ -2003,97 +2059,97 @@ class ResidentialType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ResidentialType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 196, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 203, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element name uses Python identifier name
-    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_ResidentialType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 198, 6), )
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_ResidentialType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 205, 6), )
 
     
     name = property(__name.value, __name.set, None, None)
 
     
     # Element street_name uses Python identifier street_name
-    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_ResidentialType_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 199, 6), )
+    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_ResidentialType_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 206, 6), )
 
     
     street_name = property(__street_name.value, __street_name.set, None, None)
 
     
     # Element city uses Python identifier city
-    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_ResidentialType_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 200, 6), )
+    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_ResidentialType_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 207, 6), )
 
     
     city = property(__city.value, __city.set, None, None)
 
     
     # Element type_of_building uses Python identifier type_of_building
-    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_ResidentialType_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 201, 6), )
+    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_ResidentialType_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 208, 6), )
 
     
     type_of_building = property(__type_of_building.value, __type_of_building.set, None, None)
 
     
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_ResidentialType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 202, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_ResidentialType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 209, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_ResidentialType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 203, 3), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_ResidentialType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 210, 3), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element number_of_floors uses Python identifier number_of_floors
-    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_ResidentialType_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 204, 6), )
+    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_ResidentialType_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 211, 6), )
 
     
     number_of_floors = property(__number_of_floors.value, __number_of_floors.set, None, None)
 
     
     # Element height_of_floors uses Python identifier height_of_floors
-    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_ResidentialType_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 205, 6), )
+    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_ResidentialType_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 212, 6), )
 
     
     height_of_floors = property(__height_of_floors.value, __height_of_floors.set, None, None)
 
     
     # Element net_leased_area uses Python identifier net_leased_area
-    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_ResidentialType_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 206, 6), )
+    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_ResidentialType_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 213, 6), )
 
     
     net_leased_area = property(__net_leased_area.value, __net_leased_area.set, None, None)
 
     
     # Element outer_area uses Python identifier outer_area
-    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_ResidentialType_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 207, 6), )
+    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_ResidentialType_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 214, 6), )
 
     
     outer_area = property(__outer_area.value, __outer_area.set, None, None)
 
     
     # Element window_area uses Python identifier window_area
-    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_ResidentialType_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 208, 3), )
+    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_ResidentialType_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 215, 3), )
 
     
     window_area = property(__window_area.value, __window_area.set, None, None)
 
     
     # Element ThermalZone uses Python identifier ThermalZone
-    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_ResidentialType_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 209, 6), )
+    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_ResidentialType_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 216, 6), )
 
     
     ThermalZone = property(__ThermalZone.value, __ThermalZone.set, None, None)
 
     
     # Element CentralAHU uses Python identifier CentralAHU
-    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_ResidentialType_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 210, 6), )
+    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_ResidentialType_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 217, 6), )
 
     
     CentralAHU = property(__CentralAHU.value, __CentralAHU.set, None, None)
@@ -2126,97 +2182,97 @@ class InstituteType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'InstituteType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 213, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 220, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element name uses Python identifier name
-    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_InstituteType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 215, 6), )
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_InstituteType_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 222, 6), )
 
     
     name = property(__name.value, __name.set, None, None)
 
     
     # Element street_name uses Python identifier street_name
-    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_InstituteType_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 216, 6), )
+    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_InstituteType_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 223, 6), )
 
     
     street_name = property(__street_name.value, __street_name.set, None, None)
 
     
     # Element city uses Python identifier city
-    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_InstituteType_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 217, 6), )
+    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_InstituteType_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 224, 6), )
 
     
     city = property(__city.value, __city.set, None, None)
 
     
     # Element type_of_building uses Python identifier type_of_building
-    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_InstituteType_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 218, 6), )
+    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_InstituteType_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 225, 6), )
 
     
     type_of_building = property(__type_of_building.value, __type_of_building.set, None, None)
 
     
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_InstituteType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 219, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_InstituteType_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 226, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_InstituteType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 220, 3), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_InstituteType_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 227, 3), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element number_of_floors uses Python identifier number_of_floors
-    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_InstituteType_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 221, 6), )
+    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_InstituteType_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 228, 6), )
 
     
     number_of_floors = property(__number_of_floors.value, __number_of_floors.set, None, None)
 
     
     # Element height_of_floors uses Python identifier height_of_floors
-    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_InstituteType_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 222, 6), )
+    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_InstituteType_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 229, 6), )
 
     
     height_of_floors = property(__height_of_floors.value, __height_of_floors.set, None, None)
 
     
     # Element net_leased_area uses Python identifier net_leased_area
-    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_InstituteType_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 223, 6), )
+    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_InstituteType_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 230, 6), )
 
     
     net_leased_area = property(__net_leased_area.value, __net_leased_area.set, None, None)
 
     
     # Element outer_area uses Python identifier outer_area
-    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_InstituteType_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 224, 6), )
+    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_InstituteType_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 231, 6), )
 
     
     outer_area = property(__outer_area.value, __outer_area.set, None, None)
 
     
     # Element window_area uses Python identifier window_area
-    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_InstituteType_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 225, 3), )
+    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_InstituteType_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 232, 3), )
 
     
     window_area = property(__window_area.value, __window_area.set, None, None)
 
     
     # Element ThermalZone uses Python identifier ThermalZone
-    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_InstituteType_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 226, 6), )
+    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_InstituteType_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 233, 6), )
 
     
     ThermalZone = property(__ThermalZone.value, __ThermalZone.set, None, None)
 
     
     # Element CentralAHU uses Python identifier CentralAHU
-    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_InstituteType_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 227, 6), )
+    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_InstituteType_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 234, 6), )
 
     
     CentralAHU = property(__CentralAHU.value, __CentralAHU.set, None, None)
@@ -2249,97 +2305,97 @@ class Institute4Type (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'Institute4Type')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 230, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 237, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element name uses Python identifier name
-    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_Institute4Type_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 232, 6), )
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_Institute4Type_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 239, 6), )
 
     
     name = property(__name.value, __name.set, None, None)
 
     
     # Element street_name uses Python identifier street_name
-    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_Institute4Type_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 233, 6), )
+    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_Institute4Type_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 240, 6), )
 
     
     street_name = property(__street_name.value, __street_name.set, None, None)
 
     
     # Element city uses Python identifier city
-    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_Institute4Type_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 234, 6), )
+    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_Institute4Type_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 241, 6), )
 
     
     city = property(__city.value, __city.set, None, None)
 
     
     # Element type_of_building uses Python identifier type_of_building
-    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_Institute4Type_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 235, 6), )
+    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_Institute4Type_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 242, 6), )
 
     
     type_of_building = property(__type_of_building.value, __type_of_building.set, None, None)
 
     
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_Institute4Type_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 236, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_Institute4Type_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 243, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_Institute4Type_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 237, 3), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_Institute4Type_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 244, 3), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element number_of_floors uses Python identifier number_of_floors
-    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_Institute4Type_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 238, 6), )
+    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_Institute4Type_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 245, 6), )
 
     
     number_of_floors = property(__number_of_floors.value, __number_of_floors.set, None, None)
 
     
     # Element height_of_floors uses Python identifier height_of_floors
-    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_Institute4Type_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 239, 6), )
+    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_Institute4Type_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 246, 6), )
 
     
     height_of_floors = property(__height_of_floors.value, __height_of_floors.set, None, None)
 
     
     # Element net_leased_area uses Python identifier net_leased_area
-    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_Institute4Type_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 240, 6), )
+    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_Institute4Type_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 247, 6), )
 
     
     net_leased_area = property(__net_leased_area.value, __net_leased_area.set, None, None)
 
     
     # Element outer_area uses Python identifier outer_area
-    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_Institute4Type_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 241, 6), )
+    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_Institute4Type_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 248, 6), )
 
     
     outer_area = property(__outer_area.value, __outer_area.set, None, None)
 
     
     # Element window_area uses Python identifier window_area
-    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_Institute4Type_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 242, 3), )
+    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_Institute4Type_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 249, 3), )
 
     
     window_area = property(__window_area.value, __window_area.set, None, None)
 
     
     # Element ThermalZone uses Python identifier ThermalZone
-    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_Institute4Type_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 243, 6), )
+    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_Institute4Type_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 250, 6), )
 
     
     ThermalZone = property(__ThermalZone.value, __ThermalZone.set, None, None)
 
     
     # Element CentralAHU uses Python identifier CentralAHU
-    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_Institute4Type_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 244, 6), )
+    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_Institute4Type_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 251, 6), )
 
     
     CentralAHU = property(__CentralAHU.value, __CentralAHU.set, None, None)
@@ -2372,97 +2428,97 @@ class Institute8Type (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'Institute8Type')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 247, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 254, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element name uses Python identifier name
-    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_Institute8Type_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 249, 6), )
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__AbsentNamespace0_Institute8Type_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 256, 6), )
 
     
     name = property(__name.value, __name.set, None, None)
 
     
     # Element street_name uses Python identifier street_name
-    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_Institute8Type_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 250, 6), )
+    __street_name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'street_name'), 'street_name', '__AbsentNamespace0_Institute8Type_street_name', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 257, 6), )
 
     
     street_name = property(__street_name.value, __street_name.set, None, None)
 
     
     # Element city uses Python identifier city
-    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_Institute8Type_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 251, 6), )
+    __city = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'city'), 'city', '__AbsentNamespace0_Institute8Type_city', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 258, 6), )
 
     
     city = property(__city.value, __city.set, None, None)
 
     
     # Element type_of_building uses Python identifier type_of_building
-    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_Institute8Type_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 252, 6), )
+    __type_of_building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'type_of_building'), 'type_of_building', '__AbsentNamespace0_Institute8Type_type_of_building', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 259, 6), )
 
     
     type_of_building = property(__type_of_building.value, __type_of_building.set, None, None)
 
     
     # Element year_of_construction uses Python identifier year_of_construction
-    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_Institute8Type_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 253, 6), )
+    __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_construction'), 'year_of_construction', '__AbsentNamespace0_Institute8Type_year_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 260, 6), )
 
     
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
     
     # Element year_of_retrofit uses Python identifier year_of_retrofit
-    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_Institute8Type_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 254, 3), )
+    __year_of_retrofit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), 'year_of_retrofit', '__AbsentNamespace0_Institute8Type_year_of_retrofit', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 261, 3), )
 
     
     year_of_retrofit = property(__year_of_retrofit.value, __year_of_retrofit.set, None, None)
 
     
     # Element number_of_floors uses Python identifier number_of_floors
-    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_Institute8Type_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 255, 6), )
+    __number_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'number_of_floors'), 'number_of_floors', '__AbsentNamespace0_Institute8Type_number_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 262, 6), )
 
     
     number_of_floors = property(__number_of_floors.value, __number_of_floors.set, None, None)
 
     
     # Element height_of_floors uses Python identifier height_of_floors
-    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_Institute8Type_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 256, 6), )
+    __height_of_floors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'height_of_floors'), 'height_of_floors', '__AbsentNamespace0_Institute8Type_height_of_floors', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 263, 6), )
 
     
     height_of_floors = property(__height_of_floors.value, __height_of_floors.set, None, None)
 
     
     # Element net_leased_area uses Python identifier net_leased_area
-    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_Institute8Type_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 257, 6), )
+    __net_leased_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'net_leased_area'), 'net_leased_area', '__AbsentNamespace0_Institute8Type_net_leased_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 264, 6), )
 
     
     net_leased_area = property(__net_leased_area.value, __net_leased_area.set, None, None)
 
     
     # Element outer_area uses Python identifier outer_area
-    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_Institute8Type_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 258, 6), )
+    __outer_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'outer_area'), 'outer_area', '__AbsentNamespace0_Institute8Type_outer_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 265, 6), )
 
     
     outer_area = property(__outer_area.value, __outer_area.set, None, None)
 
     
     # Element window_area uses Python identifier window_area
-    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_Institute8Type_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 259, 3), )
+    __window_area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'window_area'), 'window_area', '__AbsentNamespace0_Institute8Type_window_area', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 266, 3), )
 
     
     window_area = property(__window_area.value, __window_area.set, None, None)
 
     
     # Element ThermalZone uses Python identifier ThermalZone
-    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_Institute8Type_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 260, 6), )
+    __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'ThermalZone'), 'ThermalZone', '__AbsentNamespace0_Institute8Type_ThermalZone', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 267, 6), )
 
     
     ThermalZone = property(__ThermalZone.value, __ThermalZone.set, None, None)
 
     
     # Element CentralAHU uses Python identifier CentralAHU
-    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_Institute8Type_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 261, 6), )
+    __CentralAHU = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'CentralAHU'), 'CentralAHU', '__AbsentNamespace0_Institute8Type_CentralAHU', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 268, 6), )
 
     
     CentralAHU = property(__CentralAHU.value, __CentralAHU.set, None, None)
@@ -2495,48 +2551,48 @@ class ProjectType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ProjectType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 264, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 271, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
     # Element Building uses Python identifier Building
-    __Building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Building'), 'Building', '__AbsentNamespace0_ProjectType_Building', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 266, 6), )
+    __Building = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Building'), 'Building', '__AbsentNamespace0_ProjectType_Building', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 273, 6), )
 
     
     Building = property(__Building.value, __Building.set, None, None)
 
     
     # Element Office uses Python identifier Office
-    __Office = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Office'), 'Office', '__AbsentNamespace0_ProjectType_Office', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 267, 3), )
+    __Office = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Office'), 'Office', '__AbsentNamespace0_ProjectType_Office', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 274, 3), )
 
     
     Office = property(__Office.value, __Office.set, None, None)
 
     
     # Element Residential uses Python identifier Residential
-    __Residential = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Residential'), 'Residential', '__AbsentNamespace0_ProjectType_Residential', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 268, 3), )
+    __Residential = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Residential'), 'Residential', '__AbsentNamespace0_ProjectType_Residential', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 275, 3), )
 
     
     Residential = property(__Residential.value, __Residential.set, None, None)
 
     
     # Element Institute uses Python identifier Institute
-    __Institute = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Institute'), 'Institute', '__AbsentNamespace0_ProjectType_Institute', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 269, 3), )
+    __Institute = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Institute'), 'Institute', '__AbsentNamespace0_ProjectType_Institute', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 276, 3), )
 
     
     Institute = property(__Institute.value, __Institute.set, None, None)
 
     
     # Element Institute4 uses Python identifier Institute4
-    __Institute4 = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Institute4'), 'Institute4', '__AbsentNamespace0_ProjectType_Institute4', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 270, 3), )
+    __Institute4 = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Institute4'), 'Institute4', '__AbsentNamespace0_ProjectType_Institute4', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 277, 3), )
 
     
     Institute4 = property(__Institute4.value, __Institute4.set, None, None)
 
     
     # Element Institute8 uses Python identifier Institute8
-    __Institute8 = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Institute8'), 'Institute8', '__AbsentNamespace0_ProjectType_Institute8', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 271, 3), )
+    __Institute8 = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(None, 'Institute8'), 'Institute8', '__AbsentNamespace0_ProjectType_Institute8', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 278, 3), )
 
     
     Institute8 = property(__Institute8.value, __Institute8.set, None, None)
@@ -3878,27 +3934,29 @@ LayerType._Automaton = _BuildAutomaton_9()
 
 
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 29, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 29, 6)))
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 30, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 30, 6)))
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 31, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 31, 6)))
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 32, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 32, 6)))
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 33, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 33, 6)))
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 34, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 34, 6)))
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 35, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 35, 6)))
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 36, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 36, 6)))
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_convection'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 37, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 37, 6)))
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_radiation'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 38, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_convection'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 38, 6)))
 
-OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 39, 6)))
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_radiation'), pyxb.binding.datatypes.float, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 39, 6)))
+
+OuterWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=OuterWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 40, 6)))
 
 def _BuildAutomaton_10 ():
     # Remove this helper function from the namespace after it is invoked
@@ -3927,51 +3985,57 @@ def _BuildAutomaton_10 ():
     counters.add(cc_8)
     cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 38, 6))
     counters.add(cc_9)
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 39, 6))
+    counters.add(cc_10)
     states = []
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 29, 6))
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 29, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 30, 6))
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 30, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 31, 6))
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 31, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 32, 6))
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 32, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 33, 6))
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 33, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 34, 6))
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 34, 6))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 35, 6))
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 35, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 36, 6))
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 36, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 37, 6))
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 37, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 38, 6))
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 38, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
-    final_update = set()
-    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 39, 6))
+    final_update = None
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 39, 6))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
+    final_update = set()
+    symbol = pyxb.binding.content.ElementUse(OuterWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 40, 6))
+    st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
+    states.append(st_11)
     transitions = []
     transitions.append(fac.Transition(st_0, [
         fac.UpdateInstruction(cc_0, True) ]))
@@ -3995,6 +4059,8 @@ def _BuildAutomaton_10 ():
         fac.UpdateInstruction(cc_0, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_0, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_0, False) ]))
     st_0._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_1, [
@@ -4017,6 +4083,8 @@ def _BuildAutomaton_10 ():
         fac.UpdateInstruction(cc_1, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_1, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_1, False) ]))
     st_1._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_2, [
@@ -4037,6 +4105,8 @@ def _BuildAutomaton_10 ():
         fac.UpdateInstruction(cc_2, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_2, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_2, False) ]))
     st_2._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_3, [
@@ -4055,6 +4125,8 @@ def _BuildAutomaton_10 ():
         fac.UpdateInstruction(cc_3, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_3, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_3, False) ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
@@ -4071,6 +4143,8 @@ def _BuildAutomaton_10 ():
         fac.UpdateInstruction(cc_4, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_4, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_4, False) ]))
     st_4._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_5, [
@@ -4085,6 +4159,8 @@ def _BuildAutomaton_10 ():
         fac.UpdateInstruction(cc_5, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_5, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_5, False) ]))
     st_5._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_6, [
@@ -4097,6 +4173,8 @@ def _BuildAutomaton_10 ():
         fac.UpdateInstruction(cc_6, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_6, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_6, False) ]))
     st_6._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_7, [
@@ -4107,6 +4185,8 @@ def _BuildAutomaton_10 ():
         fac.UpdateInstruction(cc_7, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_7, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_7, False) ]))
     st_7._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_8, [
@@ -4115,44 +4195,56 @@ def _BuildAutomaton_10 ():
         fac.UpdateInstruction(cc_8, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_8, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_8, False) ]))
     st_8._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_9, [
         fac.UpdateInstruction(cc_9, True) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_9, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_9, False) ]))
     st_9._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_10, [
-         ]))
+        fac.UpdateInstruction(cc_10, True) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_10, False) ]))
     st_10._set_transitionSet(transitions)
+    transitions = []
+    transitions.append(fac.Transition(st_11, [
+         ]))
+    st_11._set_transitionSet(transitions)
     return fac.Automaton(states, counters, False, containing_state=None)
 OuterWallType._Automaton = _BuildAutomaton_10()
 
 
 
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 44, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 45, 6)))
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 45, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 46, 6)))
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 46, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 47, 6)))
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 47, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 48, 6)))
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 48, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 49, 6)))
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 49, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 50, 6)))
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 50, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 51, 6)))
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 51, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 52, 6)))
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_convection'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 52, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 53, 6)))
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_radiation'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 53, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_convection'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 54, 6)))
 
-RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 54, 6)))
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_radiation'), pyxb.binding.datatypes.float, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 55, 6)))
+
+RooftopType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=RooftopType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 56, 6)))
 
 def _BuildAutomaton_11 ():
     # Remove this helper function from the namespace after it is invoked
@@ -4161,71 +4253,77 @@ def _BuildAutomaton_11 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 44, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 45, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 45, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 46, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 46, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 47, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 47, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 48, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 48, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 49, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 49, 6))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 50, 6))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 50, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 51, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 51, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 52, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 52, 6))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 53, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 53, 6))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 54, 6))
     counters.add(cc_9)
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 55, 6))
+    counters.add(cc_10)
     states = []
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 44, 6))
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 45, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 45, 6))
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 46, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 46, 6))
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 47, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 47, 6))
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 48, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 48, 6))
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 49, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 49, 6))
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 50, 6))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 50, 6))
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 51, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 51, 6))
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 52, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 52, 6))
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 53, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 53, 6))
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 54, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
-    final_update = set()
-    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 54, 6))
+    final_update = None
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 55, 6))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
+    final_update = set()
+    symbol = pyxb.binding.content.ElementUse(RooftopType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 56, 6))
+    st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
+    states.append(st_11)
     transitions = []
     transitions.append(fac.Transition(st_0, [
         fac.UpdateInstruction(cc_0, True) ]))
@@ -4249,6 +4347,8 @@ def _BuildAutomaton_11 ():
         fac.UpdateInstruction(cc_0, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_0, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_0, False) ]))
     st_0._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_1, [
@@ -4271,6 +4371,8 @@ def _BuildAutomaton_11 ():
         fac.UpdateInstruction(cc_1, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_1, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_1, False) ]))
     st_1._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_2, [
@@ -4291,6 +4393,8 @@ def _BuildAutomaton_11 ():
         fac.UpdateInstruction(cc_2, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_2, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_2, False) ]))
     st_2._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_3, [
@@ -4309,6 +4413,8 @@ def _BuildAutomaton_11 ():
         fac.UpdateInstruction(cc_3, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_3, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_3, False) ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
@@ -4325,6 +4431,8 @@ def _BuildAutomaton_11 ():
         fac.UpdateInstruction(cc_4, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_4, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_4, False) ]))
     st_4._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_5, [
@@ -4339,6 +4447,8 @@ def _BuildAutomaton_11 ():
         fac.UpdateInstruction(cc_5, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_5, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_5, False) ]))
     st_5._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_6, [
@@ -4351,6 +4461,8 @@ def _BuildAutomaton_11 ():
         fac.UpdateInstruction(cc_6, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_6, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_6, False) ]))
     st_6._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_7, [
@@ -4361,6 +4473,8 @@ def _BuildAutomaton_11 ():
         fac.UpdateInstruction(cc_7, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_7, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_7, False) ]))
     st_7._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_8, [
@@ -4369,40 +4483,52 @@ def _BuildAutomaton_11 ():
         fac.UpdateInstruction(cc_8, False) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_8, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_8, False) ]))
     st_8._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_9, [
         fac.UpdateInstruction(cc_9, True) ]))
     transitions.append(fac.Transition(st_10, [
         fac.UpdateInstruction(cc_9, False) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_9, False) ]))
     st_9._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_10, [
-         ]))
+        fac.UpdateInstruction(cc_10, True) ]))
+    transitions.append(fac.Transition(st_11, [
+        fac.UpdateInstruction(cc_10, False) ]))
     st_10._set_transitionSet(transitions)
+    transitions = []
+    transitions.append(fac.Transition(st_11, [
+         ]))
+    st_11._set_transitionSet(transitions)
     return fac.Automaton(states, counters, False, containing_state=None)
 RooftopType._Automaton = _BuildAutomaton_11()
 
 
 
 
-InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 59, 6)))
+InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 61, 6)))
 
-InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 60, 6)))
+InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 62, 6)))
 
-InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 61, 6)))
+InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 63, 6)))
 
-InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 62, 6)))
+InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 64, 6)))
 
-InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 63, 6)))
+InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 65, 6)))
 
-InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 64, 6)))
+InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 66, 6)))
 
-InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 65, 6)))
+InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 67, 6)))
 
-InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 66, 6)))
+InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 68, 6)))
 
-InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 67, 6)))
+InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 69, 6)))
+
+InnerWallType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=InnerWallType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 70, 6)))
 
 def _BuildAutomaton_12 ():
     # Remove this helper function from the namespace after it is invoked
@@ -4411,59 +4537,65 @@ def _BuildAutomaton_12 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 59, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 61, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 60, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 62, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 61, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 63, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 62, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 64, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 63, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 65, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 64, 6))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 66, 6))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 65, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 67, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 66, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 68, 6))
     counters.add(cc_7)
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 69, 6))
+    counters.add(cc_8)
     states = []
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 59, 6))
+    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 61, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 60, 6))
+    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 62, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 61, 6))
+    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 63, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 62, 6))
+    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 64, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 63, 6))
+    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 65, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 64, 6))
+    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 66, 6))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 65, 6))
+    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 67, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 66, 6))
+    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 68, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
-    final_update = set()
-    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 67, 6))
+    final_update = None
+    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 69, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
+    final_update = set()
+    symbol = pyxb.binding.content.ElementUse(InnerWallType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 70, 6))
+    st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
+    states.append(st_9)
     transitions = []
     transitions.append(fac.Transition(st_0, [
         fac.UpdateInstruction(cc_0, True) ]))
@@ -4483,6 +4615,8 @@ def _BuildAutomaton_12 ():
         fac.UpdateInstruction(cc_0, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_0, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_0, False) ]))
     st_0._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_1, [
@@ -4501,6 +4635,8 @@ def _BuildAutomaton_12 ():
         fac.UpdateInstruction(cc_1, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_1, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_1, False) ]))
     st_1._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_2, [
@@ -4517,6 +4653,8 @@ def _BuildAutomaton_12 ():
         fac.UpdateInstruction(cc_2, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_2, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_2, False) ]))
     st_2._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_3, [
@@ -4531,6 +4669,8 @@ def _BuildAutomaton_12 ():
         fac.UpdateInstruction(cc_3, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_3, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_3, False) ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
@@ -4543,6 +4683,8 @@ def _BuildAutomaton_12 ():
         fac.UpdateInstruction(cc_4, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_4, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_4, False) ]))
     st_4._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_5, [
@@ -4553,6 +4695,8 @@ def _BuildAutomaton_12 ():
         fac.UpdateInstruction(cc_5, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_5, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_5, False) ]))
     st_5._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_6, [
@@ -4561,40 +4705,52 @@ def _BuildAutomaton_12 ():
         fac.UpdateInstruction(cc_6, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_6, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_6, False) ]))
     st_6._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_7, [
         fac.UpdateInstruction(cc_7, True) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_7, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_7, False) ]))
     st_7._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_8, [
-         ]))
+        fac.UpdateInstruction(cc_8, True) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_8, False) ]))
     st_8._set_transitionSet(transitions)
+    transitions = []
+    transitions.append(fac.Transition(st_9, [
+         ]))
+    st_9._set_transitionSet(transitions)
     return fac.Automaton(states, counters, False, containing_state=None)
 InnerWallType._Automaton = _BuildAutomaton_12()
 
 
 
 
-CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 72, 6)))
+CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 75, 6)))
 
-CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 73, 6)))
+CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 76, 6)))
 
-CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 74, 6)))
+CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 77, 6)))
 
-CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 75, 6)))
+CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 78, 6)))
 
-CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 76, 6)))
+CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 79, 6)))
 
-CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 77, 6)))
+CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 80, 6)))
 
-CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 78, 6)))
+CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 81, 6)))
 
-CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 79, 6)))
+CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 82, 6)))
 
-CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 80, 6)))
+CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 83, 6)))
+
+CeilingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=CeilingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 84, 6)))
 
 def _BuildAutomaton_13 ():
     # Remove this helper function from the namespace after it is invoked
@@ -4603,59 +4759,65 @@ def _BuildAutomaton_13 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 72, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 75, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 73, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 76, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 74, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 77, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 75, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 78, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 76, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 79, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 77, 6))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 80, 6))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 78, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 81, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 79, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 82, 6))
     counters.add(cc_7)
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 83, 6))
+    counters.add(cc_8)
     states = []
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 72, 6))
+    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 75, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 73, 6))
+    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 76, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 74, 6))
+    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 77, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 75, 6))
+    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 78, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 76, 6))
+    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 79, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 77, 6))
+    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 80, 6))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 78, 6))
+    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 81, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 79, 6))
+    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 82, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
-    final_update = set()
-    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 80, 6))
+    final_update = None
+    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 83, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
+    final_update = set()
+    symbol = pyxb.binding.content.ElementUse(CeilingType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 84, 6))
+    st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
+    states.append(st_9)
     transitions = []
     transitions.append(fac.Transition(st_0, [
         fac.UpdateInstruction(cc_0, True) ]))
@@ -4675,6 +4837,8 @@ def _BuildAutomaton_13 ():
         fac.UpdateInstruction(cc_0, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_0, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_0, False) ]))
     st_0._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_1, [
@@ -4693,6 +4857,8 @@ def _BuildAutomaton_13 ():
         fac.UpdateInstruction(cc_1, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_1, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_1, False) ]))
     st_1._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_2, [
@@ -4709,6 +4875,8 @@ def _BuildAutomaton_13 ():
         fac.UpdateInstruction(cc_2, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_2, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_2, False) ]))
     st_2._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_3, [
@@ -4723,6 +4891,8 @@ def _BuildAutomaton_13 ():
         fac.UpdateInstruction(cc_3, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_3, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_3, False) ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
@@ -4735,6 +4905,8 @@ def _BuildAutomaton_13 ():
         fac.UpdateInstruction(cc_4, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_4, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_4, False) ]))
     st_4._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_5, [
@@ -4745,6 +4917,8 @@ def _BuildAutomaton_13 ():
         fac.UpdateInstruction(cc_5, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_5, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_5, False) ]))
     st_5._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_6, [
@@ -4753,40 +4927,52 @@ def _BuildAutomaton_13 ():
         fac.UpdateInstruction(cc_6, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_6, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_6, False) ]))
     st_6._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_7, [
         fac.UpdateInstruction(cc_7, True) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_7, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_7, False) ]))
     st_7._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_8, [
-         ]))
+        fac.UpdateInstruction(cc_8, True) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_8, False) ]))
     st_8._set_transitionSet(transitions)
+    transitions = []
+    transitions.append(fac.Transition(st_9, [
+         ]))
+    st_9._set_transitionSet(transitions)
     return fac.Automaton(states, counters, False, containing_state=None)
 CeilingType._Automaton = _BuildAutomaton_13()
 
 
 
 
-FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 85, 6)))
+FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 89, 6)))
 
-FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 86, 6)))
+FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 90, 6)))
 
-FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 87, 6)))
+FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 91, 6)))
 
-FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 88, 6)))
+FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 92, 6)))
 
-FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 89, 6)))
+FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 93, 6)))
 
-FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 90, 6)))
+FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 94, 6)))
 
-FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 91, 6)))
+FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 95, 6)))
 
-FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 92, 6)))
+FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 96, 6)))
 
-FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 93, 6)))
+FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 97, 6)))
+
+FloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=FloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 98, 6)))
 
 def _BuildAutomaton_14 ():
     # Remove this helper function from the namespace after it is invoked
@@ -4795,59 +4981,65 @@ def _BuildAutomaton_14 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 85, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 89, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 86, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 90, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 87, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 91, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 88, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 92, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 89, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 93, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 90, 6))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 94, 6))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 91, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 95, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 92, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 96, 6))
     counters.add(cc_7)
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 97, 6))
+    counters.add(cc_8)
     states = []
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 85, 6))
+    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 89, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 86, 6))
+    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 90, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 87, 6))
+    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 91, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 88, 6))
+    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 92, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 89, 6))
+    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 93, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 90, 6))
+    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 94, 6))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 91, 6))
+    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 95, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 92, 6))
+    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 96, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
-    final_update = set()
-    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 93, 6))
+    final_update = None
+    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 97, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
+    final_update = set()
+    symbol = pyxb.binding.content.ElementUse(FloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 98, 6))
+    st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
+    states.append(st_9)
     transitions = []
     transitions.append(fac.Transition(st_0, [
         fac.UpdateInstruction(cc_0, True) ]))
@@ -4867,6 +5059,8 @@ def _BuildAutomaton_14 ():
         fac.UpdateInstruction(cc_0, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_0, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_0, False) ]))
     st_0._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_1, [
@@ -4885,6 +5079,8 @@ def _BuildAutomaton_14 ():
         fac.UpdateInstruction(cc_1, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_1, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_1, False) ]))
     st_1._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_2, [
@@ -4901,6 +5097,8 @@ def _BuildAutomaton_14 ():
         fac.UpdateInstruction(cc_2, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_2, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_2, False) ]))
     st_2._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_3, [
@@ -4915,6 +5113,8 @@ def _BuildAutomaton_14 ():
         fac.UpdateInstruction(cc_3, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_3, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_3, False) ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
@@ -4927,6 +5127,8 @@ def _BuildAutomaton_14 ():
         fac.UpdateInstruction(cc_4, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_4, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_4, False) ]))
     st_4._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_5, [
@@ -4937,6 +5139,8 @@ def _BuildAutomaton_14 ():
         fac.UpdateInstruction(cc_5, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_5, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_5, False) ]))
     st_5._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_6, [
@@ -4945,40 +5149,52 @@ def _BuildAutomaton_14 ():
         fac.UpdateInstruction(cc_6, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_6, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_6, False) ]))
     st_6._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_7, [
         fac.UpdateInstruction(cc_7, True) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_7, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_7, False) ]))
     st_7._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_8, [
-         ]))
+        fac.UpdateInstruction(cc_8, True) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_8, False) ]))
     st_8._set_transitionSet(transitions)
+    transitions = []
+    transitions.append(fac.Transition(st_9, [
+         ]))
+    st_9._set_transitionSet(transitions)
     return fac.Automaton(states, counters, False, containing_state=None)
 FloorType._Automaton = _BuildAutomaton_14()
 
 
 
 
-GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 98, 6)))
+GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 103, 6)))
 
-GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 99, 6)))
+GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 104, 6)))
 
-GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 100, 6)))
+GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 105, 6)))
 
-GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 101, 6)))
+GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 106, 6)))
 
-GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 102, 6)))
+GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 107, 6)))
 
-GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 103, 6)))
+GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 108, 6)))
 
-GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 104, 6)))
+GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 109, 6)))
 
-GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 105, 6)))
+GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 110, 6)))
 
-GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 106, 6)))
+GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 111, 6)))
+
+GroundFloorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=GroundFloorType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 112, 6)))
 
 def _BuildAutomaton_15 ():
     # Remove this helper function from the namespace after it is invoked
@@ -4987,59 +5203,65 @@ def _BuildAutomaton_15 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 98, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 103, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 99, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 104, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 100, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 105, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 101, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 106, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 102, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 107, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 103, 6))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 108, 6))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 104, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 109, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 105, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 110, 6))
     counters.add(cc_7)
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 111, 6))
+    counters.add(cc_8)
     states = []
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 98, 6))
+    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 103, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 99, 6))
+    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 104, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 100, 6))
+    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 105, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 101, 6))
+    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 106, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 102, 6))
+    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 107, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 103, 6))
+    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 108, 6))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 104, 6))
+    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 109, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 105, 6))
+    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 110, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
-    final_update = set()
-    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 106, 6))
+    final_update = None
+    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 111, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
+    final_update = set()
+    symbol = pyxb.binding.content.ElementUse(GroundFloorType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 112, 6))
+    st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
+    states.append(st_9)
     transitions = []
     transitions.append(fac.Transition(st_0, [
         fac.UpdateInstruction(cc_0, True) ]))
@@ -5059,6 +5281,8 @@ def _BuildAutomaton_15 ():
         fac.UpdateInstruction(cc_0, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_0, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_0, False) ]))
     st_0._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_1, [
@@ -5077,6 +5301,8 @@ def _BuildAutomaton_15 ():
         fac.UpdateInstruction(cc_1, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_1, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_1, False) ]))
     st_1._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_2, [
@@ -5093,6 +5319,8 @@ def _BuildAutomaton_15 ():
         fac.UpdateInstruction(cc_2, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_2, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_2, False) ]))
     st_2._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_3, [
@@ -5107,6 +5335,8 @@ def _BuildAutomaton_15 ():
         fac.UpdateInstruction(cc_3, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_3, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_3, False) ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
@@ -5119,6 +5349,8 @@ def _BuildAutomaton_15 ():
         fac.UpdateInstruction(cc_4, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_4, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_4, False) ]))
     st_4._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_5, [
@@ -5129,6 +5361,8 @@ def _BuildAutomaton_15 ():
         fac.UpdateInstruction(cc_5, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_5, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_5, False) ]))
     st_5._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_6, [
@@ -5137,52 +5371,64 @@ def _BuildAutomaton_15 ():
         fac.UpdateInstruction(cc_6, False) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_6, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_6, False) ]))
     st_6._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_7, [
         fac.UpdateInstruction(cc_7, True) ]))
     transitions.append(fac.Transition(st_8, [
         fac.UpdateInstruction(cc_7, False) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_7, False) ]))
     st_7._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_8, [
-         ]))
+        fac.UpdateInstruction(cc_8, True) ]))
+    transitions.append(fac.Transition(st_9, [
+        fac.UpdateInstruction(cc_8, False) ]))
     st_8._set_transitionSet(transitions)
+    transitions = []
+    transitions.append(fac.Transition(st_9, [
+         ]))
+    st_9._set_transitionSet(transitions)
     return fac.Automaton(states, counters, False, containing_state=None)
 GroundFloorType._Automaton = _BuildAutomaton_15()
 
 
 
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 111, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 117, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 112, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.int, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 118, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 113, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'construction_type'), pyxb.binding.datatypes.string, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 119, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 114, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.int, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 120, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 115, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 121, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 116, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'tilt'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 122, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 117, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'orientation'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 123, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 118, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_convection'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 124, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_convection'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 119, 3)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'inner_radiation'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 125, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_radiation'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 120, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_convection'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 126, 3)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'g_value'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 121, 3)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_radiation'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 127, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'a_conv'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 122, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'g_value'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 128, 3)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'shading_g_total'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 123, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'a_conv'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 129, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'shading_max_irr'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 124, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'shading_g_total'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 130, 6)))
 
-WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 125, 6)))
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'shading_max_irr'), pyxb.binding.datatypes.float, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 131, 6)))
+
+WindowType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Layer'), LayerType, scope=WindowType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 132, 6)))
 
 def _BuildAutomaton_16 ():
     # Remove this helper function from the namespace after it is invoked
@@ -5191,95 +5437,101 @@ def _BuildAutomaton_16 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 111, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 117, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 112, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 118, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 113, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 119, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 114, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 120, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 115, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 121, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 116, 6))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 122, 6))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 117, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 123, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 118, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 124, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 119, 3))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 125, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 120, 6))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 126, 3))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 121, 3))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 127, 6))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 122, 6))
+    cc_11 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 128, 3))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 123, 6))
+    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 129, 6))
     counters.add(cc_12)
-    cc_13 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 124, 6))
+    cc_13 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 130, 6))
     counters.add(cc_13)
+    cc_14 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 131, 6))
+    counters.add(cc_14)
     states = []
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 111, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 117, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 112, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 118, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 113, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'construction_type')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 119, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 114, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 120, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 115, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 121, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 116, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'tilt')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 122, 6))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 117, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'orientation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 123, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 118, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 124, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 119, 3))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'inner_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 125, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 120, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_convection')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 126, 3))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'g_value')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 121, 3))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_radiation')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 127, 6))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'a_conv')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 122, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'g_value')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 128, 3))
     st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_11)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'shading_g_total')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 123, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'a_conv')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 129, 6))
     st_12 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_12)
     final_update = None
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'shading_max_irr')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 124, 6))
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'shading_g_total')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 130, 6))
     st_13 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_13)
-    final_update = set()
-    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 125, 6))
+    final_update = None
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'shading_max_irr')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 131, 6))
     st_14 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_14)
+    final_update = set()
+    symbol = pyxb.binding.content.ElementUse(WindowType._UseForTag(pyxb.namespace.ExpandedName(None, 'Layer')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 132, 6))
+    st_15 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
+    states.append(st_15)
     transitions = []
     transitions.append(fac.Transition(st_0, [
         fac.UpdateInstruction(cc_0, True) ]))
@@ -5311,6 +5563,8 @@ def _BuildAutomaton_16 ():
         fac.UpdateInstruction(cc_0, False) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_0, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_0, False) ]))
     st_0._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_1, [
@@ -5341,6 +5595,8 @@ def _BuildAutomaton_16 ():
         fac.UpdateInstruction(cc_1, False) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_1, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_1, False) ]))
     st_1._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_2, [
@@ -5369,6 +5625,8 @@ def _BuildAutomaton_16 ():
         fac.UpdateInstruction(cc_2, False) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_2, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_2, False) ]))
     st_2._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_3, [
@@ -5395,6 +5653,8 @@ def _BuildAutomaton_16 ():
         fac.UpdateInstruction(cc_3, False) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_3, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_3, False) ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
@@ -5419,6 +5679,8 @@ def _BuildAutomaton_16 ():
         fac.UpdateInstruction(cc_4, False) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_4, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_4, False) ]))
     st_4._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_5, [
@@ -5441,6 +5703,8 @@ def _BuildAutomaton_16 ():
         fac.UpdateInstruction(cc_5, False) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_5, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_5, False) ]))
     st_5._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_6, [
@@ -5461,6 +5725,8 @@ def _BuildAutomaton_16 ():
         fac.UpdateInstruction(cc_6, False) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_6, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_6, False) ]))
     st_6._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_7, [
@@ -5478,6 +5744,8 @@ def _BuildAutomaton_16 ():
     transitions.append(fac.Transition(st_13, [
         fac.UpdateInstruction(cc_7, False) ]))
     transitions.append(fac.Transition(st_14, [
+        fac.UpdateInstruction(cc_7, False) ]))
+    transitions.append(fac.Transition(st_15, [
         fac.UpdateInstruction(cc_7, False) ]))
     st_7._set_transitionSet(transitions)
     transitions = []
@@ -5495,6 +5763,8 @@ def _BuildAutomaton_16 ():
         fac.UpdateInstruction(cc_8, False) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_8, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_8, False) ]))
     st_8._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_9, [
@@ -5508,6 +5778,8 @@ def _BuildAutomaton_16 ():
     transitions.append(fac.Transition(st_13, [
         fac.UpdateInstruction(cc_9, False) ]))
     transitions.append(fac.Transition(st_14, [
+        fac.UpdateInstruction(cc_9, False) ]))
+    transitions.append(fac.Transition(st_15, [
         fac.UpdateInstruction(cc_9, False) ]))
     st_9._set_transitionSet(transitions)
     transitions = []
@@ -5521,6 +5793,8 @@ def _BuildAutomaton_16 ():
         fac.UpdateInstruction(cc_10, False) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_10, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_10, False) ]))
     st_10._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_11, [
@@ -5531,6 +5805,8 @@ def _BuildAutomaton_16 ():
         fac.UpdateInstruction(cc_11, False) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_11, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_11, False) ]))
     st_11._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_12, [
@@ -5539,50 +5815,60 @@ def _BuildAutomaton_16 ():
         fac.UpdateInstruction(cc_12, False) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_12, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_12, False) ]))
     st_12._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_13, [
         fac.UpdateInstruction(cc_13, True) ]))
     transitions.append(fac.Transition(st_14, [
         fac.UpdateInstruction(cc_13, False) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_13, False) ]))
     st_13._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_14, [
-         ]))
+        fac.UpdateInstruction(cc_14, True) ]))
+    transitions.append(fac.Transition(st_15, [
+        fac.UpdateInstruction(cc_14, False) ]))
     st_14._set_transitionSet(transitions)
+    transitions = []
+    transitions.append(fac.Transition(st_15, [
+         ]))
+    st_15._set_transitionSet(transitions)
     return fac.Automaton(states, counters, False, containing_state=None)
 WindowType._Automaton = _BuildAutomaton_16()
 
 
 
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 130, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 137, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 131, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'area'), pyxb.binding.datatypes.float, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 138, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'volume'), pyxb.binding.datatypes.float, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 132, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'volume'), pyxb.binding.datatypes.float, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 139, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'infiltration_rate'), pyxb.binding.datatypes.float, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 133, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'infiltration_rate'), pyxb.binding.datatypes.float, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 140, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'typical_length'), pyxb.binding.datatypes.float, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 134, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'typical_length'), pyxb.binding.datatypes.float, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 141, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'typical_width'), pyxb.binding.datatypes.float, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 135, 2)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'typical_width'), pyxb.binding.datatypes.float, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 142, 2)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'UseCondition'), UseConditionType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 136, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'UseCondition'), UseConditionType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 143, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'OuterWall'), OuterWallType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 137, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'OuterWall'), OuterWallType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 144, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Rooftop'), RooftopType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 138, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Rooftop'), RooftopType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 145, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'GroundFloor'), GroundFloorType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 139, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'GroundFloor'), GroundFloorType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 146, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'InnerWall'), InnerWallType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 140, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'InnerWall'), InnerWallType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 147, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Ceiling'), CeilingType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 141, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Ceiling'), CeilingType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 148, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Floor'), FloorType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 142, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Floor'), FloorType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 149, 6)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Window'), WindowType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 143, 6)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Window'), WindowType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 150, 6)))
 
 def _BuildAutomaton_17 ():
     # Remove this helper function from the namespace after it is invoked
@@ -5591,103 +5877,103 @@ def _BuildAutomaton_17 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 130, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 137, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 131, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 138, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 132, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 139, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 133, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 140, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 134, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 141, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 135, 2))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 142, 2))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 136, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 143, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 137, 6))
+    cc_7 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 144, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 138, 6))
+    cc_8 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 145, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 139, 6))
+    cc_9 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 146, 6))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 140, 6))
+    cc_10 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 147, 6))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 141, 6))
+    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 148, 6))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 142, 6))
+    cc_12 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 149, 6))
     counters.add(cc_12)
-    cc_13 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 143, 6))
+    cc_13 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 150, 6))
     counters.add(cc_13)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 130, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 137, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 131, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 138, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'volume')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 132, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'volume')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 139, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'infiltration_rate')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 133, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'infiltration_rate')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 140, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'typical_length')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 134, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'typical_length')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 141, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'typical_width')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 135, 2))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'typical_width')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 142, 2))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'UseCondition')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 136, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'UseCondition')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 143, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'OuterWall')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 137, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'OuterWall')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 144, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'Rooftop')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 138, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'Rooftop')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 145, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'GroundFloor')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 139, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'GroundFloor')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 146, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'InnerWall')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 140, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'InnerWall')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 147, 6))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_11, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'Ceiling')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 141, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'Ceiling')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 148, 6))
     st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_11)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_12, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'Floor')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 142, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'Floor')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 149, 6))
     st_12 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_12)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_13, False))
-    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'Window')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 143, 6))
+    symbol = pyxb.binding.content.ElementUse(ThermalZoneType._UseForTag(pyxb.namespace.ExpandedName(None, 'Window')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 150, 6))
     st_13 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_13)
     transitions = []
@@ -5934,29 +6220,29 @@ ThermalZoneType._Automaton = _BuildAutomaton_17()
 
 
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'heating'), pyxb.binding.datatypes.boolean, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 148, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'heating'), pyxb.binding.datatypes.boolean, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 155, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'cooling'), pyxb.binding.datatypes.boolean, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 149, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'cooling'), pyxb.binding.datatypes.boolean, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 156, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'dehumidification'), pyxb.binding.datatypes.boolean, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 150, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'dehumidification'), pyxb.binding.datatypes.boolean, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 157, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'humidification'), pyxb.binding.datatypes.boolean, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 151, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'humidification'), pyxb.binding.datatypes.boolean, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 158, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'heat_recovery'), pyxb.binding.datatypes.boolean, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 152, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'heat_recovery'), pyxb.binding.datatypes.boolean, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 159, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'by_pass_dehumidification'), pyxb.binding.datatypes.float, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 153, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'by_pass_dehumidification'), pyxb.binding.datatypes.float, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 160, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'efficiency_recovery'), pyxb.binding.datatypes.float, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 154, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'efficiency_recovery'), pyxb.binding.datatypes.float, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 161, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'efficiency_revocery_false'), pyxb.binding.datatypes.float, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 155, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'efficiency_revocery_false'), pyxb.binding.datatypes.float, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 162, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'profile_min_relative_humidity'), floatList, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 156, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'profile_min_relative_humidity'), floatList, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 163, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'profile_max_relative_humidity'), floatList, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 157, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'profile_max_relative_humidity'), floatList, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 164, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'profile_v_flow'), floatList, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 158, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'profile_v_flow'), floatList, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 165, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'profile_temperature'), floatList, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 159, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'profile_temperature'), floatList, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 166, 6)))
 
 def _BuildAutomaton_18 ():
     # Remove this helper function from the namespace after it is invoked
@@ -5965,89 +6251,89 @@ def _BuildAutomaton_18 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 148, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 155, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 149, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 156, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 150, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 157, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 151, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 158, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 152, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 159, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 153, 6))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 160, 6))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 154, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 161, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 155, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 162, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 156, 6))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 163, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 157, 6))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 164, 6))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 158, 6))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 165, 6))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 159, 6))
+    cc_11 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 166, 6))
     counters.add(cc_11)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'heating')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 148, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'heating')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 155, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'cooling')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 149, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'cooling')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 156, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'dehumidification')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 150, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'dehumidification')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 157, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'humidification')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 151, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'humidification')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 158, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'heat_recovery')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 152, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'heat_recovery')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 159, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'by_pass_dehumidification')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 153, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'by_pass_dehumidification')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 160, 6))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'efficiency_recovery')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 154, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'efficiency_recovery')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 161, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'efficiency_revocery_false')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 155, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'efficiency_revocery_false')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 162, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'profile_min_relative_humidity')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 156, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'profile_min_relative_humidity')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 163, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'profile_max_relative_humidity')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 157, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'profile_max_relative_humidity')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 164, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'profile_v_flow')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 158, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'profile_v_flow')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 165, 6))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_11, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'profile_temperature')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 159, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(None, 'profile_temperature')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 166, 6))
     st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_11)
     transitions = []
@@ -6236,31 +6522,31 @@ BuildingAHUType._Automaton = _BuildAutomaton_18()
 
 
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 164, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 171, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 165, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 172, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 166, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 173, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 167, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 174, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 168, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 175, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 169, 1)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 176, 1)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 170, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 177, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 171, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 178, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 172, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 179, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 173, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 180, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 174, 1)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 181, 1)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 175, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 182, 6)))
 
-BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 176, 6)))
+BuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=BuildingType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 183, 6)))
 
 def _BuildAutomaton_19 ():
     # Remove this helper function from the namespace after it is invoked
@@ -6269,96 +6555,96 @@ def _BuildAutomaton_19 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 164, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 171, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 165, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 172, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 166, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 173, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 167, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 174, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 168, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 175, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 169, 1))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 176, 1))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 170, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 177, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 171, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 178, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 172, 6))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 179, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 173, 6))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 180, 6))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 174, 1))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 181, 1))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 175, 6))
+    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 182, 6))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 176, 6))
+    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 183, 6))
     counters.add(cc_12)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 164, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 171, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 165, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 172, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 166, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 173, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 167, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 174, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 168, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 175, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 169, 1))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 176, 1))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 170, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 177, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 171, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 178, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 172, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 179, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 173, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 180, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 174, 1))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 181, 1))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_11, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 175, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 182, 6))
     st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_11)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_12, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 176, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingType._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 183, 6))
     st_12 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_12)
     transitions = []
@@ -6575,31 +6861,31 @@ BuildingType._Automaton = _BuildAutomaton_19()
 
 
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 181, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 188, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 182, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 189, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 183, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 190, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 184, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 191, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 185, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 192, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 186, 3)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 193, 3)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 187, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 194, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 188, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 195, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 189, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 196, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 190, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 197, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 191, 3)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 198, 3)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 192, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 199, 6)))
 
-OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 193, 6)))
+OfficeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=OfficeType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 200, 6)))
 
 def _BuildAutomaton_20 ():
     # Remove this helper function from the namespace after it is invoked
@@ -6608,96 +6894,96 @@ def _BuildAutomaton_20 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 181, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 188, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 182, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 189, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 183, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 190, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 184, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 191, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 185, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 192, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 186, 3))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 193, 3))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 187, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 194, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 188, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 195, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 189, 6))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 196, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 190, 6))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 197, 6))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 191, 3))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 198, 3))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 192, 6))
+    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 199, 6))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 193, 6))
+    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 200, 6))
     counters.add(cc_12)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 181, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 188, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 182, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 189, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 183, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 190, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 184, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 191, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 185, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 192, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 186, 3))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 193, 3))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 187, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 194, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 188, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 195, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 189, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 196, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 190, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 197, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 191, 3))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 198, 3))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_11, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 192, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 199, 6))
     st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_11)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_12, False))
-    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 193, 6))
+    symbol = pyxb.binding.content.ElementUse(OfficeType._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 200, 6))
     st_12 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_12)
     transitions = []
@@ -6914,31 +7200,31 @@ OfficeType._Automaton = _BuildAutomaton_20()
 
 
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 198, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 205, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 199, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 206, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 200, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 207, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 201, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 208, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 202, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 209, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 203, 3)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 210, 3)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 204, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 211, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 205, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 212, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 206, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 213, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 207, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 214, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 208, 3)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 215, 3)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 209, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 216, 6)))
 
-ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 210, 6)))
+ResidentialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=ResidentialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 217, 6)))
 
 def _BuildAutomaton_21 ():
     # Remove this helper function from the namespace after it is invoked
@@ -6947,96 +7233,96 @@ def _BuildAutomaton_21 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 198, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 205, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 199, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 206, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 200, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 207, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 201, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 208, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 202, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 209, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 203, 3))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 210, 3))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 204, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 211, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 205, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 212, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 206, 6))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 213, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 207, 6))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 214, 6))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 208, 3))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 215, 3))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 209, 6))
+    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 216, 6))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 210, 6))
+    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 217, 6))
     counters.add(cc_12)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 198, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 205, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 199, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 206, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 200, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 207, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 201, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 208, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 202, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 209, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 203, 3))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 210, 3))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 204, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 211, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 205, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 212, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 206, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 213, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 207, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 214, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 208, 3))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 215, 3))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_11, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 209, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 216, 6))
     st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_11)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_12, False))
-    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 210, 6))
+    symbol = pyxb.binding.content.ElementUse(ResidentialType._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 217, 6))
     st_12 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_12)
     transitions = []
@@ -7253,31 +7539,31 @@ ResidentialType._Automaton = _BuildAutomaton_21()
 
 
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 215, 6)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 222, 6)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 216, 6)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 223, 6)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 217, 6)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 224, 6)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 218, 6)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 225, 6)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 219, 6)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 226, 6)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 220, 3)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 227, 3)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 221, 6)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 228, 6)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 222, 6)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 229, 6)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 223, 6)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 230, 6)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 224, 6)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 231, 6)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 225, 3)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 232, 3)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 226, 6)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 233, 6)))
 
-InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 227, 6)))
+InstituteType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=InstituteType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 234, 6)))
 
 def _BuildAutomaton_22 ():
     # Remove this helper function from the namespace after it is invoked
@@ -7286,96 +7572,96 @@ def _BuildAutomaton_22 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 215, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 222, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 216, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 223, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 217, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 224, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 218, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 225, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 219, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 226, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 220, 3))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 227, 3))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 221, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 228, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 222, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 229, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 223, 6))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 230, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 224, 6))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 231, 6))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 225, 3))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 232, 3))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 226, 6))
+    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 233, 6))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 227, 6))
+    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 234, 6))
     counters.add(cc_12)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 215, 6))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 222, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 216, 6))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 223, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 217, 6))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 224, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 218, 6))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 225, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 219, 6))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 226, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 220, 3))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 227, 3))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 221, 6))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 228, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 222, 6))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 229, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 223, 6))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 230, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 224, 6))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 231, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 225, 3))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 232, 3))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_11, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 226, 6))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 233, 6))
     st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_11)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_12, False))
-    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 227, 6))
+    symbol = pyxb.binding.content.ElementUse(InstituteType._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 234, 6))
     st_12 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_12)
     transitions = []
@@ -7592,31 +7878,31 @@ InstituteType._Automaton = _BuildAutomaton_22()
 
 
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 232, 6)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 239, 6)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 233, 6)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 240, 6)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 234, 6)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 241, 6)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 235, 6)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 242, 6)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 236, 6)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 243, 6)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 237, 3)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 244, 3)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 238, 6)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 245, 6)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 239, 6)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 246, 6)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 240, 6)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 247, 6)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 241, 6)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 248, 6)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 242, 3)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 249, 3)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 243, 6)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 250, 6)))
 
-Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 244, 6)))
+Institute4Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=Institute4Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 251, 6)))
 
 def _BuildAutomaton_23 ():
     # Remove this helper function from the namespace after it is invoked
@@ -7625,96 +7911,96 @@ def _BuildAutomaton_23 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 232, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 239, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 233, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 240, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 234, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 241, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 235, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 242, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 236, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 243, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 237, 3))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 244, 3))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 238, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 245, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 239, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 246, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 240, 6))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 247, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 241, 6))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 248, 6))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 242, 3))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 249, 3))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 243, 6))
+    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 250, 6))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 244, 6))
+    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 251, 6))
     counters.add(cc_12)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 232, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 239, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 233, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 240, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 234, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 241, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 235, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 242, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 236, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 243, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 237, 3))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 244, 3))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 238, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 245, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 239, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 246, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 240, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 247, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 241, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 248, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 242, 3))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 249, 3))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_11, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 243, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 250, 6))
     st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_11)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_12, False))
-    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 244, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute4Type._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 251, 6))
     st_12 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_12)
     transitions = []
@@ -7931,31 +8217,31 @@ Institute4Type._Automaton = _BuildAutomaton_23()
 
 
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 249, 6)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'name'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 256, 6)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 250, 6)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'street_name'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 257, 6)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 251, 6)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'city'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 258, 6)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 252, 6)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'type_of_building'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 259, 6)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 253, 6)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_construction'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 260, 6)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 254, 3)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'year_of_retrofit'), pyxb.binding.datatypes.string, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 261, 3)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 255, 6)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'number_of_floors'), pyxb.binding.datatypes.int, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 262, 6)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 256, 6)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'height_of_floors'), pyxb.binding.datatypes.float, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 263, 6)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 257, 6)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'net_leased_area'), pyxb.binding.datatypes.float, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 264, 6)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 258, 6)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'outer_area'), pyxb.binding.datatypes.float, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 265, 6)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 259, 3)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'window_area'), pyxb.binding.datatypes.float, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 266, 3)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 260, 6)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'ThermalZone'), ThermalZoneType, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 267, 6)))
 
-Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 261, 6)))
+Institute8Type._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'CentralAHU'), BuildingAHUType, scope=Institute8Type, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 268, 6)))
 
 def _BuildAutomaton_24 ():
     # Remove this helper function from the namespace after it is invoked
@@ -7964,96 +8250,96 @@ def _BuildAutomaton_24 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 249, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 256, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 250, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 257, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 251, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 258, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 252, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 259, 6))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 253, 6))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 260, 6))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 254, 3))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 261, 3))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 255, 6))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 262, 6))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 256, 6))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 263, 6))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 257, 6))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 264, 6))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 258, 6))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 265, 6))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 259, 3))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 266, 3))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 260, 6))
+    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 267, 6))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 261, 6))
+    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 268, 6))
     counters.add(cc_12)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 249, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 256, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 250, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'street_name')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 257, 6))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 251, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'city')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 258, 6))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 252, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'type_of_building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 259, 6))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 253, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_construction')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 260, 6))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 254, 3))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'year_of_retrofit')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 261, 3))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 255, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'number_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 262, 6))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 256, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'height_of_floors')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 263, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 257, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'net_leased_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 264, 6))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 258, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'outer_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 265, 6))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 259, 3))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'window_area')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 266, 3))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_11, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 260, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'ThermalZone')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 267, 6))
     st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_11)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_12, False))
-    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 261, 6))
+    symbol = pyxb.binding.content.ElementUse(Institute8Type._UseForTag(pyxb.namespace.ExpandedName(None, 'CentralAHU')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 268, 6))
     st_12 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_12)
     transitions = []
@@ -8270,17 +8556,17 @@ Institute8Type._Automaton = _BuildAutomaton_24()
 
 
 
-ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Building'), BuildingType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 266, 6)))
+ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Building'), BuildingType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 273, 6)))
 
-ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Office'), OfficeType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 267, 3)))
+ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Office'), OfficeType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 274, 3)))
 
-ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Residential'), ResidentialType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 268, 3)))
+ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Residential'), ResidentialType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 275, 3)))
 
-ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Institute'), InstituteType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 269, 3)))
+ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Institute'), InstituteType, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 276, 3)))
 
-ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Institute4'), Institute4Type, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 270, 3)))
+ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Institute4'), Institute4Type, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 277, 3)))
 
-ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Institute8'), Institute8Type, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 271, 3)))
+ProjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(None, 'Institute8'), Institute8Type, scope=ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 278, 3)))
 
 def _BuildAutomaton_25 ():
     # Remove this helper function from the namespace after it is invoked
@@ -8289,37 +8575,37 @@ def _BuildAutomaton_25 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 265, 4))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 272, 4))
     counters.add(cc_0)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 266, 6))
+    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Building')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 273, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Office')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 267, 3))
+    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Office')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 274, 3))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Residential')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 268, 3))
+    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Residential')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 275, 3))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Institute')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 269, 3))
+    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Institute')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 276, 3))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Institute4')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 270, 3))
+    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Institute4')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 277, 3))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Institute8')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 271, 3))
+    symbol = pyxb.binding.content.ElementUse(ProjectType._UseForTag(pyxb.namespace.ExpandedName(None, 'Institute8')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\Data\\SchemaBindings\\schemas\\Project.xsd', 278, 3))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     transitions = []
