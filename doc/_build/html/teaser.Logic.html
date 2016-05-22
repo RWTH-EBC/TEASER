@@ -6,15 +6,15 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Logic package &mdash; TEASER 0.2.7 documentation</title>
+    <title>logic &mdash; TEASER 0.2.8 documentation</title>
     
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.7',
+        VERSION:     '0.2.8',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,10 +23,10 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="TEASER 0.2.7 documentation" href="index.html" />
-    <link rel="up" title="TEASER Doc" href="teaser.html" />
-    <link rel="next" title="BuildingObjects package" href="teaser.Logic.BuildingObjects.html" />
-    <link rel="prev" title="Examples package" href="teaser.Examples.html" /> 
+    <link rel="top" title="TEASER 0.2.8 documentation" href="index.html" />
+    <link rel="up" title="teaser package structure" href="teaser.html" />
+    <link rel="next" title="buildingobjects" href="teaser.Logic.BuildingObjects.html" />
+    <link rel="prev" title="schemabindings" href="teaser.Data.SchemaBindings.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -39,54 +39,110 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="teaser.Logic.BuildingObjects.html" title="BuildingObjects package"
+          <a href="teaser.Logic.BuildingObjects.html" title="buildingobjects"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="teaser.Examples.html" title="Examples package"
+          <a href="teaser.Data.SchemaBindings.html" title="schemabindings"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.2.7 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="teaser.html" accesskey="U">TEASER Doc</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.2.8 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" accesskey="U">teaser package structure</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">logic</a><ul>
+<li><a class="reference internal" href="#module-teaser.Logic.Utilis">Utilis module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser.Data.SchemaBindings.html"
+                        title="previous chapter">schemabindings</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.html"
+                        title="next chapter">buildingobjects</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Logic.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="logic-package">
-<h1>Logic package<a class="headerlink" href="#logic-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="logic">
+<h1>logic<a class="headerlink" href="#logic" title="Permalink to this headline">¶</a></h1>
+<p>The logic package holds python modules for the representation of general
+building objects and archetypes. In addition the simulation package holds
+modules to sort and calculate model syntax specific parameters for AixLib and
+Annex60 (e.g. in AixLib we need to define orientations and tilts for the
+whole building) The utility module helps us to do path handling.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="teaser.Logic.BuildingObjects.html">BuildingObjects package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html">BuildingPhysics package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement">BuildingElement module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling">Ceiling module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Floor">Floor module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor">GroundFloor module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall">InnerWall module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Layer">Layer module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Material">Material module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall">OuterWall module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop">Rooftop module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Wall">Wall module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Window">Window module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.Logic.BuildingObjects.html">buildingobjects</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.BoundaryConditions.html">boundaryconditions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BoundaryConditions.html#useconditionsoffice18599-module">UseConditionsOffice18599 module</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html">TypeBuildings package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#office-module">Office module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#residential-module">Residential module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#institute-module">Institute module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#institute4-module">Institute4 module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#institute8-module">Institute8 module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#module-teaser.Logic.BuildingObjects.TypeBuildings.TypeBuilding">TypeBuilding module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#useconditionsoffice18599-module">UseConditionsOffice18599 module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.TypeBuildings.html#literature">Literature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html">buildingphysics</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement">BuildingElement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling">Ceiling</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Floor">Floor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor">GroundFloor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall">InnerWall</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Layer">Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Material">Material</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall">OuterWall</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop">Rooftop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Wall">Wall</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingPhysics.html#module-teaser.Logic.BuildingObjects.BuildingPhysics.Window">Window</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.html#module-teaser.Logic.BuildingObjects.Building">Building module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.html#module-teaser.Logic.BuildingObjects.ThermalZone">ThermalZone module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.html#module-teaser.Logic.BuildingObjects.UseConditions">UseConditions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingSystems.html">buildingsystems</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.BuildingObjects.BuildingSystems.html#module-teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU">BuildingAHU</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.html#module-teaser.Logic.BuildingObjects.Building">building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.html#module-teaser.Logic.BuildingObjects.ThermalZone">thermalzone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.BuildingObjects.html#module-teaser.Logic.BuildingObjects.UseConditions">useconditions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.html">archetypebuildings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.bmvbs.html">bmvbs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.bmvbs.html#office-module">Office module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.bmvbs.html#singlefamilydwelling-module">SingleFamilyDwelling module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.bmvbs.html#institute-module">Institute module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.bmvbs.html#institute4-module">Institute4 module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.bmvbs.html#institute8-module">Institute8 module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.bmvbs.html#literature">Literature</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.urbanrenet.html">urbanrenet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.html#module-teaser.Logic.ArchetypeBuildings.Residential">residential</a></li>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.html#module-teaser.Logic.ArchetypeBuildings.NonResidential">nonresidential</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.Logic.Simulation.html">simulation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="teaser.Logic.Simulation.html#module-teaser.Logic.Simulation.aixlib">aixlib</a></li>
 </ul>
 </li>
 </ul>
@@ -95,11 +151,6 @@
 <span id="utilis-module"></span><h2>Utilis module<a class="headerlink" href="#module-teaser.Logic.Utilis" title="Permalink to this headline">¶</a></h2>
 <p>Utilis: Collection of all utility functions that are useful in several
 classes</p>
-<dl class="function">
-<dt id="teaser.Logic.Utilis.celsius_to_kelvin">
-<code class="descclassname">teaser.Logic.Utilis.</code><code class="descname">celsius_to_kelvin</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.Utilis.celsius_to_kelvin" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="function">
 <dt id="teaser.Logic.Utilis.create_path">
 <code class="descclassname">teaser.Logic.Utilis.</code><code class="descname">create_path</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Logic.Utilis.create_path" title="Permalink to this definition">¶</a></dt>
@@ -151,41 +202,6 @@ filename</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Logic package</a><ul>
-<li><a class="reference internal" href="#module-teaser.Logic.Utilis">Utilis module</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="teaser.Examples.html"
-                        title="previous chapter">Examples package</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="teaser.Logic.BuildingObjects.html"
-                        title="next chapter">BuildingObjects package</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/teaser.Logic.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -198,18 +214,18 @@ filename</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="teaser.Logic.BuildingObjects.html" title="BuildingObjects package"
+          <a href="teaser.Logic.BuildingObjects.html" title="buildingobjects"
              >next</a> |</li>
         <li class="right" >
-          <a href="teaser.Examples.html" title="Examples package"
+          <a href="teaser.Data.SchemaBindings.html" title="schemabindings"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.2.7 documentation</a> &raquo;</li>
-          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER Doc</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.2.8 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >teaser package structure</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &copy; Copyright 2015, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.
+        &copy; Copyright 2015, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate, RWTH Aachen University,.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>
