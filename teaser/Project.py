@@ -135,6 +135,12 @@ class Project(object):
         self._number_of_elements_calc = number_of_elements
         self._merge_windows_calc = merge_windows
         self._used_library_calc = used_library
+        for bldg in reversed(self.buildings):
+            try:
+                bldg.calc_building_parameter()
+            except:
+                print(bldg.name)
+                self.buildings.remove(bldg)
 
         for bldg in self.buildings:
 
