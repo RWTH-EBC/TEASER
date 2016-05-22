@@ -58,7 +58,9 @@ class Building(object):
         name of the city the building is located at
     thermal_zones : list
         list of all containing thermal zones (ThermalZone())
-    
+    gml_surfaces : list
+        list of all containing surfaces described by CityGML, the list should be
+        filled with SurfaceGML class from Data.Input.citygml_input
     outer_area : dict
         dict with outer wall area and orientation
     window_area : dict
@@ -100,6 +102,7 @@ class Building(object):
         self.number_of_floors = None
         self.height_of_floors = None
         self.net_leased_area = net_leased_area
+        self.bldg_height = None
 
         self._year_of_retrofit = None
 
@@ -107,9 +110,12 @@ class Building(object):
         self._outer_area = {}
         self._window_area = {}
 
+        self.gml_surfaces = []
+
         self.volume = 0
         self.sum_heating_load = 0
         self.sum_cooling_load = 0
+
         #additional simulation parameters
         self.longitude = None
         self.latitude = None
@@ -126,7 +132,93 @@ class Building(object):
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
 
-    def set_outer_wall_area(self, new_area, orientation):
+    def set_height_gml(self):
+        """calculates the height of a building from CityGML data
+
+        with given gml surfaces, this function computes the height of a building
+        of LoD 1 and LoD 2 buildings from CityGML data. All z-coordinates are
+        evaluated and the minimum z-value is subtracted by the maximal value.
+        """
+        max_help = 0
+        min_help = 9999
+        for surface in self.gml_surfaces:
+            z_value = surface.gml_surface[2::3]
+            max_help = max(max_help, max(z_value))
+            min_help = min(min_help, min(z_value))
+
+        self.bldg_height = max_help - min_help
+
+    def get_footprint_gml(self):
+        """gets the footprint surface of a building from CityGML data
+
+        with given gml surfaces, this function computes and returns the
+        footprint area of a building from LoD 0 to LoD2 from CityGML data.
+        This is done by either analysing the ground floor or the flat roof.
+
+        Returns
+        ----------
+
+        surface area : float
+            footprint area of a gml building
+        """
+
+        for surface in self.gml_surfaces:
+            if surface.surface_orientation == -2 and surface.surface_tilt == \
+                    0.0:
+                return surface.surface_area
+        for surface in self.gml_surfaces:
+            if surface.surface_orientation == -1 and surface.surface_tilt == \
+                    0.0:
+                return surface.surface_area
+
+    def set_gml_attributes(self,
+                           height_of_floor=3.5):
+        """sets building attributes from CityGML data
+
+        computes the net_leased_area depending on the footprint area,
+        the number and the height of floors. If the number of floors is
+        specified before it will use this value, if not it will compute the
+        number of floors based on the gml building height and the average
+        height of the floors. If the number of floors is zero it'll be set to
+        one. If the net leased area is below 50.0 sqm it'll be set to 50.0.
+
+        Parameters
+        ----------
+
+        height_of_floor : float
+            average height of each floor of the building, the default value
+            is 3.5 and is absolutely random.
+
+
+        """
+        if self.height_of_floors is None:
+            self.height_of_floors = height_of_floor
+        else:
+            pass
+        if self.bldg_height is None:
+            raise AttributeError("building height needs to be defined for gml")
+
+        if self.number_of_floors is not None:
+            self.net_leased_area = self.get_footprint_gml() * \
+                                    self.number_of_floors
+            return
+
+        else:
+            print(self.bldg_height, self.height_of_floors)
+            self.number_of_floors = int(round((self.bldg_height /
+                                               self.height_of_floors)))
+            if self.number_of_floors == 0:
+                self.number_of_floors = 1
+
+            self.net_leased_area = self.get_footprint_gml() * \
+                                    self.number_of_floors
+
+            if self.net_leased_area < 50.0:
+                self.net_leased_area = 50.0
+
+    def set_outer_wall_area(self,
+                            new_area,
+                            orientation):
         '''Outer area wall setter
 
         sets the outer wall area of all walls of one direction and weights
@@ -442,8 +534,11 @@ class Building(object):
             self.__parent = value
 
             if inspect.isclass(Building):
+                if self in self.__parent.buildings:
+                    pass
+                else:
+                    self.__parent.buildings.append(self)
 
-                self.__parent.buildings.append(self)
         else:
 
             self.__parent = None

@@ -138,7 +138,14 @@ end ${bldg.name};
           AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
           corG)
 % endif
-))
+)
+
+% if check_AHU(bldg.thermal_zones) == False:
+    ,redeclare AixLib.HVAC.AirHandlingUnit.NoAHU AirHandlingUnit "AHU does
+    not exist"
+% endif
+)
+
     annotation (Placement(transformation(extent={{-26,-14},{28,36}})));
 
   AixLib.Building.Components.Weather.Weather weather(
@@ -287,6 +294,7 @@ end ${bldg.name};
   return string_of_list
   %>
 </%def>
+
 <%def name="orientation_name(list)", filter="trim">
   <%
   string_of_list = ""
@@ -296,3 +304,18 @@ end ${bldg.name};
   return string_of_list
   %>
 </%def>
+
+##check if AHU is active
+<%def name="check_AHU(list)", filter="trim">
+  <%
+  check = False
+  for element in list:
+    if element.use_conditions.with_ahu == True:
+      check = True
+      return check
+    else:
+      pass
+return check
+  %>
+</%def>
+
