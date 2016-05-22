@@ -16,5 +16,3 @@ class Floor(InnerWall):
         
         self._tilt = 90.0
         self._orientation = -2.0
-        self._inner_convection = 1.7
-        self._inner_radiation = 5.0

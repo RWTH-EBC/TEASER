@@ -16,7 +16,9 @@ def example_type_building():
     This can take a few sec."""
 
     prj = Project(load_data=True)
-
+    prj.name = "annex"
+    prj.used_library_calc = 'Annex60'
+    prj.number_of_elements_calc = 4
     """The five functions starting with type_bldg giving us the opportunity to
     create the specific type building (e.g. type_bldg_residential). The function
     automatically calculates all the necessary parameter. If not specified different
@@ -35,25 +37,6 @@ def example_type_building():
                               construction_type="heavy",
                               dormer=1)
 
-    prj.type_bldg_est1a(name="EST1aBuilding",
-                              year_of_construction=1988,
-                              number_of_floors=2,
-                              height_of_floors=3.5,
-                              net_leased_area=100,
-                              with_ahu=True,
-                              neighbour_buildings=1,
-                              construction_type="heavy")
-
-    prj.type_bldg_est1b(name="EST1bBuilding",
-                              year_of_construction=1988,
-                              number_of_floors=2,
-                              height_of_floors=3.5,
-                              net_leased_area=100,
-                              with_ahu=True,
-                              neighbour_buildings=1,
-                              construction_type="heavy",
-                              number_of_apartments=5)
-
     prj.type_bldg_office(name="Office1",
                          year_of_construction=1988,
                          number_of_floors=2,
@@ -68,26 +51,30 @@ def example_type_building():
     function. path = None indicates, that we want to store the records in \
     TEASER'S Output folder"""
 
-    prj.export_record(building_model="MultizoneEquipped",
-                      zone_model="ThermalZoneEquipped",
-                      corG=True,
-                      internal_id=None,
-                      path=None)
+    prj.export_annex()
+
+    # prj.export_aixlib(building_model="MultizoneEquipped",
+    #                   zone_model="ThermalZoneEquipped",
+    #                   corG=True,
+    #                   internal_id=None,
+    #                   path=None)
 
     """Now we retrofit all buildings in the year 2015 (EnEV2014). \
     That includes new insulation layer and new windows. The name is changed \
     to Retrofit"""
-
+    """
     prj.name = "Project_Retrofit"
     prj.retrofit_all_buildings(2015)
-    prj.export_record(building_model="MultizoneEquipped",
+    prj.calc_all_buildings(number_of_elements=2,
+                           merge_windows=False,
+                           used_library='AixLib')
+    prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
                       path=None)
 
-    """To load our retrofitted building in TEASER, we can save to project \
-    into a XML file"""
+
 
     prj.save_project("Retrofit_Building",
                      path=None)
@@ -99,7 +86,7 @@ def example_type_building():
     Save the human readable output txt
     '''
     prj.save_citygml(path=None)
-
+    """
 
 if __name__ == '__main__':
     example_type_building()

@@ -9,7 +9,8 @@ import warnings
 import teaser.Logic.Utilis as utilis
 import teaser.Data.Input.TeaserXML_input as txml_in
 import teaser.Data.Output.TeaserXML_output as txml_out
-import teaser.Data.Output.Modelica_output as modelica_out
+import teaser.Data.Output.aixlib_output as aixlib_output
+import teaser.Data.Output.annex60_output as annex60_output
 import teaser.Data.Output.Text_output as text_out
 from teaser.Data.DataClass import DataClass
 from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
@@ -75,10 +76,15 @@ class Project(object):
         self.weather_file_header = ""
         self.weather_file_path = ""
         self.buildings = []
+
         self._calculation_method = "vdi"
 
         self.load_data = load_data
         self._type_element_file = None
+
+        self._number_of_elements_calc = 2
+        self._merge_windows_calc = False
+        self._used_library_calc = "AixLib"
 
         if load_data is True:
             self.data = self.instantiate_data_class()
@@ -91,7 +97,7 @@ class Project(object):
         Parameters
         ----------
 
-        type_element_files: str
+        type_element_file: str
             Name of project specific file (if needed). (default = None)
 
         Returns
@@ -102,22 +108,40 @@ class Project(object):
         '''
         return DataClass(type_element_file)
 
-    def calc_all_buildings(self, calculation_method):
+    def calc_all_buildings(self,
+                           number_of_elements=2,
+                           merge_windows=False,
+                           used_library='AixLib'):
         '''Calculates values for all project buildings
 
         Parameters
         ----------
 
-        calculation_method : string
-            setter of the used calculation core ('vdi' or 'ebc'), default:'vdi'
+        number_of_elements : int
+            defines the number of elements, that areaaggregated, between 1
+            and 4, default is 2
+            For AixLib you should always use 2 elements!!!
+
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
+            For AixLib vdi calculation is True, ebc calculation is False
+
+        used_library : str
+            used library (AixLib and Annex60 are supported)
 
         '''
 
-        self.calculation_method = calculation_method
+        self._number_of_elements_calc = number_of_elements
+        self._merge_windows_calc = merge_windows
+        self._used_library_calc = used_library
 
         for bldg in self.buildings:
 
-            bldg.calc_building_parameter()
+            bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
 
     def retrofit_all_buildings(self,
                                year_of_retrofit,
@@ -224,7 +248,10 @@ class Project(object):
                            construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter()
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_institute(self,
@@ -292,7 +319,10 @@ class Project(object):
                               construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter()
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_institute4(self,
@@ -360,7 +390,10 @@ class Project(object):
                                construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter()
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_institute8(self,
@@ -428,7 +461,10 @@ class Project(object):
                                construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter()
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est1a(self,
@@ -486,7 +522,10 @@ class Project(object):
                                construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est1b(self,
@@ -546,7 +585,10 @@ class Project(object):
                                number_of_apartments)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est4b(self,
@@ -606,7 +648,10 @@ class Project(object):
                                number_of_apartments)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est7(self,
@@ -666,7 +711,10 @@ class Project(object):
                                number_of_apartments)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter(self.calculation_method)
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_residential(self,
@@ -755,7 +803,10 @@ class Project(object):
                                          construction_type)
 
         type_bldg.generate_archetype()
-        type_bldg.calc_building_parameter()
+        type_bldg.calc_building_parameter(
+                number_of_elements=self._number_of_elements_calc,
+                merge_windows=self._merge_windows_calc,
+                used_library=self._used_library_calc)
         return type_bldg
 
     def save_project(self, file_name=None, path=None):
@@ -800,6 +851,20 @@ class Project(object):
 
         txml_in.load_teaser_xml(path, self)
 
+    def load_old_teaser(self, path):
+        '''Loads the project from an old TEASER xml file
+
+        calls the function load_teaser_xml in Data.DataHelp.OldTeaser.py
+
+
+        Parameters
+        ----------
+        path : string
+            full path to a teaserXML file
+
+        '''
+
+        old_teaser.load_teaser_xml(path, self)
 
     def save_citygml(self, file_name=None, path=None):
         '''Saves the project to a citygml file
@@ -831,9 +896,13 @@ class Project(object):
 
         citygml_out.save_gml(self, new_path)
 
-    def export_record(self, building_model="None", zone_model="None",
-                  corG=None, internal_id=None, path=None):
-        '''Exports values to a record file for Modelica simulation
+    def export_aixlib(self,
+                      building_model="None",
+                      zone_model="None",
+                      corG=None,
+                      internal_id=None,
+                      path=None):
+        """Exports values to a record file for Modelica simulation
 
         Parameters
         ----------
@@ -852,8 +921,7 @@ class Project(object):
         path : string
             if the Files should not be stored in OutputData, an alternative
             path can be specified as a full and absolute path
-
-        '''
+        """
 
         if path is None:
             path = utilis.get_default_path() + "\\" + self.name
@@ -862,12 +930,49 @@ class Project(object):
 
         utilis.create_path(path)
 
-        modelica_out.export_aixlib(prj=self,
-                                   building_model=building_model,
-                                   zone_model=zone_model,
-                                   corG=corG,
-                                   internal_id=internal_id,
-                                   path=path)
+        aixlib_output.export_aixlib(prj=self,
+                                    building_model=building_model,
+                                    zone_model=zone_model,
+                                    corG=corG,
+                                    internal_id=internal_id,
+                                    path=path)
+
+    def export_annex(self,
+                     number_of_elements=2,
+                     merge_windows=False,
+                     internal_id=None,
+                     path=None):
+        """Exports values to a record file for Modelica simulation
+
+        Parameters
+        ----------
+
+        number_of_elements : int
+            defines the number of elements, that area aggregated, between 1
+            and 4, default is 2
+        merge_windows : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
+        internal_id : float
+            setter of the used building which will be exported, if None then
+            all buildings will be exported
+        path : string
+            if the Files should not be stored in OutputData, an alternative
+            path can be specified as a full and absolute path
+        """
+
+        if path is None:
+            path = utilis.get_default_path() + "\\" + self.name
+        else:
+            path = path + "\\" + self.name
+
+        utilis.create_path(path)
+
+        annex60_output.export_annex60(prj=self,
+                                      number_of_elements=self.number_of_elements_calc,
+                                      merge_windows=self.merge_windows_calc,
+                                      internal_id=internal_id,
+                                      path=path)
 
     def export_parameters_txt(self, path=None):
         '''Exports parameters of all buildings in a readable text file
@@ -913,27 +1018,59 @@ class Project(object):
         self.instantiate_data_class(value)
 
     @property
-    def calculation_method(self):
-        return self._calculation_method
+    def number_of_elements_calc(self):
+        return self._number_of_elements_calc
 
-    @calculation_method.setter
-    def calculation_method(self, value):
+    @number_of_elements_calc.setter
+    def number_of_elements_calc(self, value):
 
-        ass_error_1 = "calculation_method has to be vdi or ebc"
+        ass_error_1 = "calculation_method has to be 1,2,3 or 4"
 
-        assert value != "ebc" or value != "vdi", ass_error_1
+        assert value != [1, 2, 3, 4], ass_error_1
 
-        self._calculation_method = value
+        self._number_of_elements_calc = value
+        
+        for bldg in self.buildings:
+            bldg.number_of_elements_calc = value
+
+    @property
+    def merge_windows_calc(self):
+        return self._merge_windows_calc
+
+    @merge_windows_calc.setter
+    def merge_windows_calc(self, value):
+
+        ass_error_1 = "merge windows needs to be True or False"
+
+        assert value != [True, False], ass_error_1
+
+        self._merge_windows_calc = value
 
         for bldg in self.buildings:
-            bldg.calculation_method = value
+            bldg.merge_windows_calc = value
+
+    @property
+    def used_library_calc(self):
+        return self._used_library_calc
+
+    @used_library_calc.setter
+    def used_library_calc(self, value):
+
+        ass_error_1 = "used library needs to be AixLib or Annex60"
+
+        assert value != ["AixLib", "Annex60"], ass_error_1
+
+        self._used_library_calc = value
+
+        for bldg in self.buildings:
+            bldg.used_library_calc = value
 
     @property
     def name(self):
         return self._name
-
+        
     @name.setter
     def name(self, value):
-
+        
         self._name = value
         self.modelica_project = value
