@@ -1,31 +1,31 @@
-BuildingObjects package
+buildingobjects
 ====================================
+
+The most important objects are `building`_ and `thermalzone`_
 
 .. toctree::
 
+    teaser.Logic.BuildingObjects.BoundaryConditions
     teaser.Logic.BuildingObjects.BuildingPhysics
-    teaser.Logic.BuildingObjects.TypeBuildings
+    teaser.Logic.BuildingObjects.BuildingSystems
 
-Building module
+building
 --------------------------------------------
 
 .. automodule:: teaser.Logic.BuildingObjects.Building
     :members:
-    :undoc-members:
     :show-inheritance:
 
-ThermalZone module
+thermalzone
 -----------------------------------------------
 
 .. automodule:: teaser.Logic.BuildingObjects.ThermalZone
     :members:
-    :undoc-members:
     :show-inheritance:
 
-UseConditions module
+useconditions
 -------------------------------------------------
 
 .. automodule:: teaser.Logic.BuildingObjects.UseConditions
     :members:
-    :undoc-members:
     :show-inheritance:

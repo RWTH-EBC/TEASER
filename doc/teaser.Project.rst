@@ -1,7 +1,6 @@
-Project module
+project - teaser API
 -------------------------
 
 .. automodule:: teaser.Project
     :members:
-    :undoc-members:
     :show-inheritance:

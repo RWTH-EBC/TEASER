@@ -1,7 +1,7 @@
 # Created July 2015
 # TEASER 4 Development Team
 
-"""This module contains an example how to create a type Buidling, to retrofit
+"""This module contains an example how to create an archetype Building, to retrofit
 that building and to export that building to internal XML and a Modelica record
 """
 

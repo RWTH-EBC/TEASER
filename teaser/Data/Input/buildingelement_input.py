@@ -1,8 +1,5 @@
-'''
-Created April 2016
-
-@author: TEASER Development Team
-'''
+#Created April 2016
+#TEASER 4 Development Team
 
 """buildingelement_input.py
 
@@ -17,7 +14,8 @@ def load_type_element(element, year, construction):
     '''Typical element loader.
 
     Loads typical building elements according to their construction
-    year and their construction type from a XML.
+    year and their construction type from a XML. The elements are created by
+    using IWU building characteristics combined with normative material data.
 
     This function will only work if the parents to Building are set.
 
