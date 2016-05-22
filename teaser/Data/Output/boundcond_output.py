@@ -1,8 +1,6 @@
-'''
-Created April 2016
+#Created April 2016
+#TEASER 4 Development Team
 
-@author: TEASER 4 Development Team
-'''
 
 """boundcond_output.py
 

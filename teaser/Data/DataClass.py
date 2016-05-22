@@ -15,15 +15,17 @@ import codecs
 class DataClass(object):
     '''Class for XML data bindings
 
-    This class loads all XML files with statistic or template data. It creates
-    the binding automatically. The binding needs the Python Package PyXB.
+    This class loads all XML files with statistic or template data needed
+    for statistical data enrichment. It creates the binding automatically.
+    The binding needs the Python Package PyXB.
 
     Parameters
     ----------
 
     type_element_file : string
         name of the XML file with the project specific type elements
-        default: TypeBuildingElements.xml for general investigation
+        default: TypeBuildingElements.xml for general investigation,
+        this file can be exchanged to project specific files.
 
     Attributes
     ----------

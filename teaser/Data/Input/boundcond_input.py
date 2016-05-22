@@ -1,8 +1,5 @@
-'''
-Created April 2016
-
-@author: TEASER 4 Development Team
-'''
+#Created April 2016
+#TEASER 4 Development Team
 
 """boundcond_input.py
 
@@ -11,9 +8,11 @@ This module contains function to load boundary conditions classes
 
 
 def load_boundary_conditions(bound_cond, zone_usage):
-    '''load typical use conditions
+    '''load use conditions according to DIN 18599 and SIA2024
 
-    loads Use conditions specified in the XML, according to 18599
+    loads Use conditions specified in the XML, according to DIN 18599,
+    SIA2024 in addition some AixLib specific use conditions for central AHU
+    are defined.
 
     Parameters
     ----------
