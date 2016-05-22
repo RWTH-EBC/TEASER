@@ -5,7 +5,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     Cooler_on = false,
     l_cooler = ${zone.cooling_load},
     RatioConvectiveHeatLighting = ${
-    	zone.use_conditions.ratio_conv_rad_lighting},
+      zone.use_conditions.ratio_conv_rad_lighting},
     zoneID = "${zone.name}",
     usage = "${zone.use_conditions.usage}",
     RoomArea = ${zone.area},
@@ -24,7 +24,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     weightfactorswindow = {${list_to_string(zone.weightfactor_win)}},
     weightfactorswall = {${list_to_string(zone.weightfactor_ow)}},
     weightfactorground = ${list_to_string(zone.weightfactor_ground)},
-	orientationswallshorizontal = {${list_to_string(zone.tilt_wall)}},
+    orientationswallshorizontal = {${list_to_string(zone.tilt_wall)}},
     Ai = ${zone.area_iw},
     withInnerwalls = ${element_check(zone.inner_walls)},
     R1i = ${zone.r1_iw},
@@ -42,17 +42,17 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     RatioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
     ActivityTypeMachines = ${zone.use_conditions.activity_type_machines},
     RatioConvectiveHeatMachines = ${
-    	zone.use_conditions.ratio_conv_rad_machines},
+      zone.use_conditions.ratio_conv_rad_machines},
     rhoair = ${zone.density_air},
     cair = ${zone.heat_capac_air},
     temperatureground = ${zone.t_ground},
     Imax = ${zone.windows[0].shading_max_irr},
     splitfac = ${zone.windows[0].a_conv},
-    epso = ${get_epso(zone.outer_walls)},
-    epsi = ${get_epsi(zone.inner_walls)},
-    epsw = ${get_epsw(zone.windows)},
-    awin = ${get_awin(zone.windows)},
-    aowo = ${get_aowo(zone.outer_walls)},
+    epso = ${zone.ir_emissivity_outer_ow},
+    epsi = ${zone.ir_emissivity_inner_ow},
+    epsw = ${zone.ir_emissivity_win},
+    awin = ${zone.solar_absorp_win},
+    aowo = ${zone.solar_absorp_ow},
     useConstantACHrate = ${str(get_true_false(
       zone.use_conditions.use_constant_ach_rate))},
     baseACH = ${zone.use_conditions.base_ach},
@@ -73,15 +73,15 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
 
 ##get n
 <%def name="get_n(list)", filter="trim">
-	<%
-	n=0
-	for element in list:
-		if type(element).__name__ == "OuterWall" or type(element).__name__ == "Rooftop":
-			n += 1
-		else:
-			pass
-	return n
-	%>
+  <%
+  n=0
+  for element in list:
+    if type(element).__name__ == "OuterWall" or type(element).__name__ == "Rooftop":
+      n += 1
+    else:
+      pass
+  return n
+  %>
 </%def>
 
 ##list to string
@@ -97,12 +97,12 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
 
 ##check if element is existent
 <%def name="element_check(element)", filter ="trim">
-	<%
-	if len(element)!= 0:
-		return "true"
-	else:
-		return "false"
-	%>
+  <%
+  if len(element)!= 0:
+    return "true"
+  else:
+    return "false"
+  %>
 </%def>
 
 ##get false
@@ -111,50 +111,8 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   if value == False:
     return "false"
   elif value == True:
-  	return "true"
+    return "true"
   else:
     return value
-  %>
-</%def>
-
-
-## get outer wall emittance outer side
-<%def name="get_epso(list)", filter="trim">
-  <%
-  epso = 0.
-  sum_area = 0.
-  for wall in list:
-  	epso += float(wall.layer[-1].material.ir_emissivity * wall.area)
-  	sum_area += wall.area
-
-  epso_weighted = epso/sum_area
-  return str(epso_weighted)
-  %>
-</%def>
-
-## get outer wall emittance inner side
-<%def name="get_epsi(list)", filter="trim">
-  <%
-  epsi = 0.
-  sum_area = 0.
-  for wall in list:
-  	epsi += float(wall.layer[0].material.ir_emissivity * wall.area)
-  	sum_area += wall.area
-  epsi_weighted = epsi/sum_area
-  return str(epsi_weighted)
-  %>
-</%def>
-
-
-## get outer wall coefficient of absorbtion
-<%def name="get_aowo(list)", filter="trim">
-  <%
-  aowo = 0.
-  sum_area = 0.
-  for wall in list:
-  	aowo += float(wall.layer[-1].material.solar_absorp * wall.area)
-  	sum_area += wall.area
-  aowo_weighted = aowo/sum_area
-  return str(aowo_weighted)
   %>
 </%def>

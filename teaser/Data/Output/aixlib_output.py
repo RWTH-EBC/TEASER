@@ -67,6 +67,8 @@ def export_aixlib(prj,
     else:
         exported_list_of_buildings = prj.buildings
 
+    print(building_model, zone_model, corG)
+
     # here we diff between zonerecord export and full model support
     if building_model != "None" and zone_model != "None" and\
         corG is not None:
