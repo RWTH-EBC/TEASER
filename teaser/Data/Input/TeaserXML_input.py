@@ -317,6 +317,7 @@ def set_basic_data_teaser(pyxb_class, element):
     if pyxb_class.construction_type is not None:
         element.construction_type = pyxb_class.construction_type
 
+    element.name = pyxb_class.name
     element.area = pyxb_class.area
     element.tilt = pyxb_class.tilt
     element.orientation = pyxb_class.orientation
