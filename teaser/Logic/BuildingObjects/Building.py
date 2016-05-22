@@ -433,7 +433,9 @@ class Building(object):
         if self.used_library_calc == 'AixLib':
             aixlib.compare_orientation(self)
         elif self.used_library_calc == 'Annex60':
-            pass
+            import teaser.Logic.Simulation.annex as annex
+            print("asd")
+            annex.compare_orientation(self)
 
 
     def retrofit_building(self,

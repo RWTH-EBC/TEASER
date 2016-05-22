@@ -32,7 +32,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
   Annex60.Experimental.ThermalZones.ReducedOrder.CorrectionSolarGain.CorrectionGDoublePane corGDoublePane(n=${len(zone.orientation_wall)}, UWin=${zone.ua_value_win/zone.area_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
-  Annex60.Experimental.ThermalZones.ReducedOrder.ReducedOrderZones.ThermalZoneTwoElements thermalZoneTwoElements(
+  Annex60.Experimental.ThermalZones.ReducedOrder.ReducedOrderZones.ThermalZoneThreeElements thermalZoneThreeElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     VAir=${zone.volume},
     alphaExt=${zone.alpha_comb_inner_ow},
@@ -50,6 +50,12 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     CInt={${zone.c1_iw}},
     RWin=${zone.r1_win},
     RExtRem=${zone.r_rest_ow},
+    AFloor=${zone.area_gf},
+    alphaFloor=${zone.alpha_conv_inner_gf},
+    nFloor=1,
+    RFloor={${zone.r1_gf}},
+    RFloorRem=${zone.r_rest_gf},
+    CFloor={${zone.c1_gf}},
     nOrientations=${len(zone.orientation_wall)},
 % if merge_windows is True:
     AWin={${list_to_string([0] * len(zone.orientation_wall))}},
@@ -157,6 +163,19 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic) "Table with profiles for persons (radiative and convective) and machines
     (convective)"
     annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
+  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperatureFloor
+    "Prescribed temperature for floor plate outdoor surface temperature"
+    annotation (Placement(transformation(
+    extent={{-6,-6},{6,6}},
+    rotation=90,
+    origin={67,-12})));
+  Modelica.Blocks.Sources.Constant TSoil(k=${zone.t_ground})
+    "Outdoor surface temperature for floor plate"
+    annotation (
+    Placement(transformation(
+    extent={{-4,-4},{4,4}},
+    rotation=180,
+    origin={84,-22})));
 equation
 % if merge_windows is False:
   connect(eqAirTemp.TEqAirWindow, prescribedTemperature1.T)
@@ -225,18 +244,18 @@ equation
     color={255,204,51},
     thickness=0.5));
   %endfor
-  connect(personsRad.port, thermalZoneTwoElements.intGainsRad)
+  connect(personsRad.port, thermalZoneThreeElements.intGainsRad)
     annotation (Line(
     points={{68,-32},{84,-32},{100,-32},{100,24},{92.2,24}},
     color={191,0,0}));
 % if merge_windows is False:
-  connect(thermalConductorWin.solid, thermalZoneTwoElements.window)
+  connect(thermalConductorWin.solid, thermalZoneThreeElements.window)
     annotation (
      Line(points={{38,21},{40,21},{40,20},{43.8,20}}, color={191,0,0}));
   connect(prescribedTemperature1.port, thermalConductorWin.fluid)
     annotation (Line(points={{20,20},{28,20},{28,21}}, color={191,0,0}));
 % endif
-  connect(thermalZoneTwoElements.extWall, thermalConductorWall.solid)
+  connect(thermalZoneThreeElements.extWall, thermalConductorWall.solid)
     annotation (Line(points={{43.8,12},{40,12},{40,1},{36,1}},
     color={191,0,0}));
   connect(thermalConductorWall.fluid, prescribedTemperature.port)
@@ -255,16 +274,20 @@ equation
     string="%first",
     index=-1,
     extent={{-6,3},{-6,3}}));
-  connect(machinesConv.port, thermalZoneTwoElements.intGainsConv)
+  connect(machinesConv.port, thermalZoneThreeElements.intGainsConv)
     annotation (
     Line(points={{68,-74},{82,-74},{96,-74},{96,20},{92,20}}, color={191,
     0,0}));
-  connect(personsConv.port, thermalZoneTwoElements.intGainsConv)
+  connect(personsConv.port, thermalZoneThreeElements.intGainsConv)
     annotation (
     Line(points={{68,-52},{96,-52},{96,20},{92,20}}, color={191,0,0}));
-  connect(corGDoublePane.solarRadWinTrans, thermalZoneTwoElements.solRad)
+  connect(corGDoublePane.solarRadWinTrans, thermalZoneThreeElements.solRad)
     annotation (Line(points={{27,64},{34,64},{40,64},{40,31},{43,31}}, color={0,
     0,127}));
+  connect(prescribedTemperatureFloor.port, thermalZoneThreeElements.floor)
+    annotation (Line(points={{67,-6},{68,-6},{68,-2}}, color={191,0,0}));
+  connect(prescribedTemperatureFloor.T, TSoil.y) annotation (Line(points={{67,-19.2},
+          {72.5,-19.2},{72.5,-22},{79.6,-22}}, color={0,0,127}));
 end ${bldg.name}_${zone.name.replace(" ", "")};
 
 ##list to string
