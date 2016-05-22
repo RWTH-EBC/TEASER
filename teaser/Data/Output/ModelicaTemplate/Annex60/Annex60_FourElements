@@ -188,8 +188,8 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     wfGround=0,
     alphaWallOut=${zone.alpha_conv_outer_rt},
     alphaRadWall=${zone.alpha_rad_outer_rt},
-    n=${len(zone.rooftops},
-    wfWall={${0}},
+    n=${len(zone.rooftops)},
+    wfWall={${list_to_string(zone.weightfactor_rt)}},
     wfWin={${list_to_string([0] * len(zone.rooftops))}},
     TGround=285.15) "Computes equivalent air temperature for roof"
     annotation (Placement(transformation(extent={{30,34},{50,54}})));
@@ -214,17 +214,23 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{4,76},{14,86}})));
   Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[${len(zone.rooftops)}](
-    each til=1.5707963267949,
-    each lat=0.87266462599716,
-    azi={3.1415926535898,4.7123889803847})
+    til={${list_to_string(deg_to_rad_list(zone.tilt_rt))}},
+    % if bldg.latitude is None:
+    each  lat=0.87266462599716,
+    % else:
+    each  lat=${deg_to_rad(bldg.latitude)},
+    % endif
+    azi={${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_rt)))}})
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,74},{-48,94}})));
   Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[${len(zone.rooftops)}](
-    each outSkyCon=true,
-    each outGroCon=true,
-    each til=1.5707963267949,
-    each lat=0.87266462599716,
-    azi={3.1415926535898,4.7123889803847})
+    til={${list_to_string(deg_to_rad_list(zone.tilt_rt))}},
+    % if bldg.latitude is None:
+    each  lat=0.87266462599716,
+    % else:
+    each  lat=${deg_to_rad(bldg.latitude)},
+    % endif
+    azi={${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_rt)))}})
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,48},{-48,68}})));
 
@@ -374,6 +380,11 @@ equation
     annotation (Line(points={{-47,84},{-22,84},{3,84}}, color={0,0,127}));
   connect(HDifTilRoof.H, solRadRoof.u2) annotation (Line(points={{-47,58},{-22,
           58},{-22,78},{3,78}}, color={0,0,127}));
+  connect(eqAirTempVDI.HSol, solRadRoof.y) annotation (Line(points={{28,50},
+          {6,50},{6,46},{-83,46},{-83,6}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
 end ${bldg.name}_${zone.name.replace(" ", "")};
 
 ##list to string

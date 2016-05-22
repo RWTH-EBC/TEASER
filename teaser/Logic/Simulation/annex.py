@@ -15,7 +15,7 @@ import teaser.Logic.Utilis as utilis
 import numpy as np
 
 
-def compare_orientation(bldg):
+def compare_orientation(bldg, number_of_elements=3):
     """Fills the zone weightfactors according to orientation and tilt of
         building
 
@@ -27,6 +27,9 @@ def compare_orientation(bldg):
 
         bldg: Building()
             TEASER instance of Building()
+
+        number_of_elements: int()
+            The number of elements calculated
     """
 
     orient_tilt_help1 = []
@@ -59,7 +62,8 @@ def compare_orientation(bldg):
             bldg.tilt_bldg.append(i[1])
 
         groundfloors = zone.find_walls(-2, 0)
-        if groundfloors == []:
+        print(number_of_elements)
+        if groundfloors == [] or number_of_elements in [3, 4]:
             zone.weightfactor_ground.append(0.0)
         else:
             zone.weightfactor_ground.append(
@@ -71,37 +75,63 @@ def compare_orientation(bldg):
 
             rts = zone.find_rts(i[0], i[1])
 
-            zone.tilt_wall.append(i[1])
-            zone.orientation_wall.append(i[0])
-
-            zone.tilt_win.append(i[1])
-            zone.orientation_win.append(i[0])
-
             if walls == []:
                 zone.weightfactor_ow.append(0.0)
                 zone.outer_walls_areas.append(0.0)
             else:
-                zone.weightfactor_ow.append(
-                    sum([wall.wf_out for wall in walls]))
-                [zone.outer_walls_areas.append(i.area) for i in walls]
+                print(number_of_elements)
+                if number_of_elements != 4:
+                    zone.weightfactor_ow.append(
+                        sum([wall.wf_out for wall in walls]))
+                    [zone.outer_walls_areas.append(i.area) for i in walls]
+                    zone.tilt_wall.append(i[1])
+                    zone.orientation_wall.append(i[0])
+                elif i[1] >= 90:
+                    zone.weightfactor_ow.append(
+                        sum([wall.wf_out for wall in walls]))
+                    [zone.outer_walls_areas.append(i.area) for i in walls]
+                    zone.tilt_wall.append(i[1])
+                    zone.orientation_wall.append(i[0])
+                else:
+                    pass
             if wins == []:
-                zone.weightfactor_win.append(0.0)
-                zone.window_area_list.append(0.0)
-                zone.g_sunblind_list.append(0.0)
-                zone.window_areas.append(0.0)
+                if number_of_elements != 4:
+                    zone.weightfactor_win.append(0.0)
+                    zone.window_area_list.append(0.0)
+                    zone.g_sunblind_list.append(0.0)
+                    zone.window_areas.append(0.0)
+                
             else:
-                zone.weightfactor_win.append(
-                    sum([win.wf_out for win in wins]))
-                zone.window_area_list.append(
-                    sum([win.area for win in wins]))
-                zone.g_sunblind_list.append(
-                    sum([win.shading_g_total for win in wins]))
-                [zone.window_areas.append(i.area) for i in wins]
-            if rts == []:
-                zone.weightfactor_rt.append(0.0)
-            else:
+                if number_of_elements != 4:
+                    zone.weightfactor_win.append(
+                        sum([win.wf_out for win in wins]))
+                    zone.window_area_list.append(
+                        sum([win.area for win in wins]))
+                    zone.g_sunblind_list.append(
+                        sum([win.shading_g_total for win in wins]))
+                    [zone.window_areas.append(i.area) for i in wins]
+                    zone.tilt_win.append(i[1])
+                    zone.orientation_win.append(i[0])
+                elif i[1] >= 90:
+                    zone.weightfactor_win.append(
+                        sum([win.wf_out for win in wins]))
+                    zone.window_area_list.append(
+                        sum([win.area for win in wins]))
+                    zone.g_sunblind_list.append(
+                        sum([win.shading_g_total for win in wins]))
+                    [zone.window_areas.append(i.area) for i in wins]
+                    zone.tilt_win.append(i[1])
+                    zone.orientation_win.append(i[0])
+
+            # if rts == []:
+            #     zone.weightfactor_rt.append(0.0)
+            if rts:
+                zone.orientation_rt.append(i[0])
+                zone.tilt_rt.append(i[1])
                 [zone.weightfactor_rt.append(i.wf_out) for i in rts]
         # print(zone.window_areas)
         # print(zone.outer_walls_areas)
+        # print(zone.weightfactor_ow)
         # print("asd",zone.orientation_wall)
-        print("ROTSATST")
+        # print("ROTSATST", zone.weightfactor_rt)
+        print(zone.tilt_rt, zone.orientation_rt)
