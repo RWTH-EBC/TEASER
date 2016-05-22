@@ -62,7 +62,7 @@ def example_type_building():
     """Now we retrofit all buildings in the year 2015 (EnEV2014). \
     That includes new insulation layer and new windows. The name is changed \
     to Retrofit"""
-
+    """
     prj.name = "Project_Retrofit"
     prj.retrofit_all_buildings(2015)
     prj.calc_all_buildings(number_of_elements=2,
@@ -74,8 +74,7 @@ def example_type_building():
                       internal_id=None,
                       path=None)
 
-    """To load our retrofitted building in TEASER, we can save to project \
-    into a XML file"""
+
 
     prj.save_project("Retrofit_Building",
                      path=None)
@@ -87,7 +86,7 @@ def example_type_building():
     Save the human readable output txt
     '''
     prj.save_citygml(path=None)
-
+    """
 
 if __name__ == '__main__':
     example_type_building()
