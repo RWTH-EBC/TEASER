@@ -69,6 +69,7 @@ def compare_orientation(bldg):
             walls = zone.find_walls(i[0], i[1])
             wins = zone.find_wins(i[0], i[1])
 
+            rts = zone.find_rts(i[0], i[1])
 
             zone.tilt_wall.append(i[1])
             zone.orientation_wall.append(i[0])
@@ -96,6 +97,11 @@ def compare_orientation(bldg):
                 zone.g_sunblind_list.append(
                     sum([win.shading_g_total for win in wins]))
                 [zone.window_areas.append(i.area) for i in wins]
-        print(zone.window_areas)
-        print(zone.outer_walls_areas)
-        print("asd",zone.orientation_wall)
+            if rts == []:
+                zone.weightfactor_rt.append(0.0)
+            else:
+                [zone.weightfactor_rt.append(i.wf_out) for i in rts]
+        # print(zone.window_areas)
+        # print(zone.outer_walls_areas)
+        # print("asd",zone.orientation_wall)
+        print("ROTSATST")

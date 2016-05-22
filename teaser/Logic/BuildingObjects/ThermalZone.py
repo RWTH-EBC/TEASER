@@ -1136,6 +1136,19 @@ class ThermalZone(object):
                 pass
         return located
 
+    def find_rts(self, orientation, tilt):
+        '''
+        this function returns a list of all wall elemnts with the same
+        orientation and tilt to sum them in the building
+        '''
+        located = []
+        for i in self.rooftops:
+            if i.orientation == orientation and i.tilt == tilt:
+                located.append(i)
+            else:
+                pass
+        return located
+
     def find_wins(self, orientation, tilt):
         '''
         this function returns a list of all window elemnts with the same
