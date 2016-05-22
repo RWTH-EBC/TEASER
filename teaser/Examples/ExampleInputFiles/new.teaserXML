@@ -19,7 +19,7 @@
 			<typical_width>123.0</typical_width>
 			<UseCondition>
 				<BoundaryConditions>
-					<usage>43</usage>
+					<usage>Living</usage>
 					<UsageOperationTime>
 						<usage_time>7 18</usage_time>
 						<daily_usage_hours>11</daily_usage_hours>

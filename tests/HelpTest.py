@@ -36,6 +36,7 @@ def building_test2(prj):
     tz.infiltration_rate = 0.5
     
     tz.use_conditions = BoundaryConditions(tz)
+    tz.use_conditions.usage = "Living"
     tz.use_conditions.cooling_time = [5,18]
     tz.use_conditions.heating_time = [5,18]
     tz.use_conditions.set_temp_heat = 288.15
