@@ -260,8 +260,8 @@ class ThermalZone(object):
         self.alpha_conv_outer_win = 0.0
         self.alpha_rad_outer_win = 0.0
         self.alpha_comb_outer_win = 0.0
-        self.solar_absorp_win_weighted = 0.0
-        self.ir_emissivity_win_weighted = 0.0
+        self.solar_absorp_win = 0.0
+        self.ir_emissivity_win = 0.0
 
         self.weighted_g_value = 0.0
         self.heating_load = 0.0
@@ -447,20 +447,20 @@ class ThermalZone(object):
                 self.ir_emissivity_outer_ow =\
                     ((self.ir_emissivity_outer_ow * self.area_ow) +
                         (self.ir_emissivity_outer_rt * self.area_rt) +
-                        (self.ir_emissivity_win_weighted * self.area_win)) /\
+                        (self.ir_emissivity_win * self.area_win)) /\
                     (self.area_ow + self.area_rt + self.area_win)
                 self.ir_emissivity_inner_ow =\
                     ((self.ir_emissivity_inner_ow * self.area_ow) +
                         (self.ir_emissivity_inner_rt * self.area_rt) +
                         (self.ir_emissivity_inner_gf * self.area_gf) +
-                        (self.ir_emissivity_win_weighted * self.area_win)) /\
+                        (self.ir_emissivity_win * self.area_win)) /\
                     (self.area_ow + self.area_rt + self.area_gf +
                         self.area_win)
                 self.solar_absorp_ow =\
                     ((self.solar_absorp_ow * self.area_ow) +
                         (self.solar_absorp_rt * self.area_rt) +
                         (self.solar_absorp_gf * self.area_gf) +
-                        (self.solar_absorp_win_weighted * self.area_win)) /\
+                        (self.solar_absorp_win * self.area_win)) /\
                     (self.area_ow + self.area_rt + self.area_gf +
                         self.area_win)
 
@@ -586,17 +586,17 @@ class ThermalZone(object):
                 self.ir_emissivity_outer_ow =\
                     ((self.ir_emissivity_outer_ow * self.area_ow) +
                         (self.ir_emissivity_outer_rt * self.area_rt) +
-                        (self.ir_emissivity_win_weighted * self.area_win)) /\
+                        (self.ir_emissivity_win * self.area_win)) /\
                     (self.area_ow + self.area_rt + self.area_win)
                 self.ir_emissivity_inner_ow =\
                     ((self.ir_emissivity_inner_ow * self.area_ow) +
                         (self.ir_emissivity_inner_rt * self.area_rt) +
-                        (self.ir_emissivity_win_weighted * self.area_win)) /\
+                        (self.ir_emissivity_win * self.area_win)) /\
                     (self.area_ow + self.area_rt + self.area_win)
                 self.solar_absorp_ow =\
                     ((self.solar_absorp_ow * self.area_ow) +
                         (self.solar_absorp_rt * self.area_rt) +
-                        (self.solar_absorp_win_weighted * self.area_win)) /\
+                        (self.solar_absorp_win * self.area_win)) /\
                     (self.area_ow + self.area_rt + self.area_win)
             else:
                 warnings.warn("As no outer walls or no windows are defined\
@@ -720,15 +720,15 @@ class ThermalZone(object):
                     1/(1/self.r_conv_inner_rt+1/self.r_rad_rt_iw)
                 self.ir_emissivity_outer_ow =\
                     ((self.ir_emissivity_outer_ow * self.area_ow) +
-                        (self.ir_emissivity_win_weighted * self.area_win)) /\
+                        (self.ir_emissivity_win * self.area_win)) /\
                     (self.area_ow + self.area_win)
                 self.ir_emissivity_inner_ow =\
                     ((self.ir_emissivity_inner_ow * self.area_ow) +
-                        (self.ir_emissivity_win_weighted * self.area_win)) /\
+                        (self.ir_emissivity_win * self.area_win)) /\
                     (self.area_ow + self.area_win)
                 self.solar_absorp_ow =\
                     ((self.solar_absorp_ow * self.area_ow) +
-                        (self.solar_absorp_win_weighted * self.area_win)) /\
+                        (self.solar_absorp_win * self.area_win)) /\
                     (self.area_ow + self.area_win)
 
             else:
@@ -1013,8 +1013,8 @@ class ThermalZone(object):
         self.alpha_conv_outer_win = (1/(self.r_conv_outer_win*self.area_win))
         self.alpha_rad_outer_win = (1/(self.r_rad_outer_win*self.area_win))
         self.alpha_comb_outer_win = (1/(self.r_comb_outer_win*self.area_win))
-        self.solar_absorp_win_weighted = sum_solar_absorp_win / self.area_win
-        self.ir_emissivity_win_weighted = sum_ir_emissivity_win / self.area_win
+        self.solar_absorp_win = sum_solar_absorp_win / self.area_win
+        self.ir_emissivity_win = sum_ir_emissivity_win / self.area_win
 
     def calc_wf_one_element(self, merge_windows):
         pass

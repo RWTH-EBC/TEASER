@@ -90,9 +90,9 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     alphaRadWall=${zone.alpha_rad_outer_ow},
     alphaWinOut=${zone.alpha_conv_outer_win},
     alphaRadWin=${zone.alpha_rad_outer_win},
-    aWin=${zone.solar_absorp_win_weighted},
+    aWin=${zone.solar_absorp_win},
     eExt=${zone.ir_emissivity_outer_ow},
-    eWin=${zone.ir_emissivity_win_weighted},
+    eWin=${zone.ir_emissivity_win},
     TGround=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif
