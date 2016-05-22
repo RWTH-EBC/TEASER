@@ -13,7 +13,7 @@ from mako.template import Template
 
 def export_annex60(prj,
                    number_of_elements=2,
-                   merge_windows=2,
+                   merge_windows=False,
                    internal_id=None,
                    path=None):
     """Exports values to a record file for Annex60 simulation
@@ -57,9 +57,11 @@ def export_annex60(prj,
         zone_template = Template(filename=utilis.get_full_path(
             "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_TwoElements"))
     elif number_of_elements == 3:
-        pass
+        zone_template = Template(filename=utilis.get_full_path(
+            "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_ThreeElements"))
     elif number_of_elements == 4:
-        pass
+        zone_template = Template(filename=utilis.get_full_path(
+            "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_FourElements"))
 
     for bldg in exported_list_of_buildings:
         bldg_path = os.path.join(path,
@@ -79,14 +81,18 @@ def export_annex60(prj,
             out_file = open(utilis.get_full_path(
                     zone_path + "\\" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
+            print(zone_path + "\\" + bldg.name + "_" +
+                    zone.name.replace(" ", "") + ".mo")
             out_file.write(zone_template.render_unicode(bldg=bldg,
-                                                        zone=zone))
+                                                        zone=zone,
+                                                        merge_windows=
+                                                        merge_windows))
 
             aixlib_output._help_package(zone_path,
                                         bldg.name + "_Models")
             aixlib_output._help_package_order(zone_path,
                                               bldg.thermal_zones,
-                                              bldg.name + "_")
+                                              (bldg.name + "_"))
 
             out_file.close()
 
