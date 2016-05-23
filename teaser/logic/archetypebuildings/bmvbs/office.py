@@ -6,7 +6,7 @@ import math
 
 from teaser.logic.archetypebuildings.nonresidential\
  import NonResidential
-from teaser.logic.buildingobjects.BoundaryConditions.BoundaryConditions \
+from teaser.logic.buildingobjects.BoundaryConditions.boundaryconditions \
     import BoundaryConditions as UseCond
 from teaser.logic.buildingobjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.logic.buildingobjects.BuildingPhysics.Floor import Floor
@@ -54,7 +54,7 @@ class Office(NonResidential):
         total net leased area of building
 
     with_ahu : boolean
-        if building has a central AHU or not    
+        if building has a central AHU or not
 
     office_layout : int
         type of floor plan (default = 0)
@@ -81,14 +81,14 @@ class Office(NonResidential):
 
     Note
     ----------
-    
+
     The listed attributes are just the ones that are set by the user
     calculated values are not included in this list.
 
 
     Attributes
     ----------
-   
+
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
         zone area factor (float) and the zone usage (str). The values can be
@@ -152,12 +152,12 @@ class Office(NonResidential):
                  construction_type=None):
         '''Constructor of Office
 
-        
+
         '''
-        super(Office, self).__init__(parent, 
+        super(Office, self).__init__(parent,
                                      name,
                                      year_of_construction,
-                                     net_leased_area, 
+                                     net_leased_area,
                                      with_ahu)
 
         self.office_layout = office_layout
@@ -233,8 +233,8 @@ class Office(NonResidential):
         elif self.office_layout == 2:
             self._est_width = 15.0
         elif self.office_layout == 3:
-            self._est_width = math.sqrt((self.net_leased_area / 
-                                         self.number_of_floors) * 
+            self._est_width = math.sqrt((self.net_leased_area /
+                                         self.number_of_floors) *
                                          self.gross_factor)
         else:
             raise ValueError("office_layout value has to be between 0 - 3")
@@ -290,7 +290,7 @@ class Office(NonResidential):
         self._est_floor_area = (type_bldg_area / self.number_of_floors) * \
                                self.gross_factor
 
-        # manipulation of wall according to facade design 
+        # manipulation of wall according to facade design
         # (received from window_layout)
 
         self._est_facade_area = self._est_outer_wall_area + self._est_win_area
