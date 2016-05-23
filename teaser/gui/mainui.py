@@ -12,11 +12,11 @@ from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 from numpy.distutils.pathccompiler import PathScaleCCompiler
-from teaser.gui.guiHelperClasses.guiInfo import GUIInfo
-from teaser.gui.guiHelperClasses.ListViewZonesFiller import ListViewZonesFiller
+from teaser.gui.guihelp.guiinfo import GUIInfo
+from teaser.gui.guihelp.listviewzonesfiller import ListViewZonesFiller
 from teaser.gui.controller.controller import Controller
-from teaser.gui.guiHelperClasses.PictureButton import PictureButton
-from teaser.gui.guiHelperClasses.TrackableItem import TrackableItem
+from teaser.gui.guihelp.picturebutton import PictureButton
+from teaser.gui.guihelp.trackableitem import TrackableItem
 from teaser.project import Project
 from teaser.Logic.simulation.modelicainfo import ModelicaInfo
 import teaser.Logic.utilities as utilitis
