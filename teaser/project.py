@@ -13,7 +13,7 @@ import teaser.data.output.aixlib_output as aixlib_output
 import teaser.data.output.annex60_output as annex60_output
 import teaser.data.output.text_output as text_out
 from teaser.data.dataclass import DataClass
-from teaser.Logic.archetypebuildings.bmvbs.Office import Office
+from teaser.Logic.archetypebuildings.bmvbs.office import Office
 from teaser.Logic.archetypebuildings.bmvbs.Custom.Institute import Institute
 from teaser.Logic.archetypebuildings.bmvbs.Custom.Institute4 import Institute4
 from teaser.Logic.archetypebuildings.bmvbs.Custom.Institute8 import Institute8

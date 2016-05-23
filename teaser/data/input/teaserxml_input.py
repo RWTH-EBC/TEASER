@@ -11,7 +11,7 @@ TEASER file format .tXML
 import teaser.data.bindings.project_bind as pb
 
 from teaser.logic.BuildingObjects.Building import Building
-from teaser.logic.archetypebuildings.bmvbs.Office import Office
+from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.SingleFamilyDwelling import SingleFamilyDwelling
 from teaser.logic.archetypebuildings.bmvbs.Custom.Institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.Custom.Institute4 import Institute4
