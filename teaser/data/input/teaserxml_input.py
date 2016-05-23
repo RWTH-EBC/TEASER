@@ -18,7 +18,7 @@ from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 from teaser.logic.buildingobjects.buildingsystems.buildingahu import BuildingAHU
-from teaser.logic.buildingobjects.BoundaryConditions.BoundaryConditions \
+from teaser.logic.buildingobjects.boundaryconditions.BoundaryConditions \
     import BoundaryConditions
 from teaser.logic.buildingobjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.logic.buildingobjects.BuildingPhysics.Layer import Layer
