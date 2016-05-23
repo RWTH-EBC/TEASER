@@ -5,14 +5,14 @@
 
 This module contains function to save material classes
 """
-import teaser.Data.SchemaBindings.MaterialBind as mat_bind
+import teaser.data.bindings.material_bind as mat_bind
 import teaser.Logic.Utilis as utilis
 
 def save_material(material):
     '''Material saver.
 
     Saves Material specified in the XML.
-    
+
     Parameters
     ----------
     material : Material()

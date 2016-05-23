@@ -5,7 +5,7 @@
 
 This module contains function to call Templates for Annex60 model generation
 """
-import teaser.Data.Output.aixlib_output as aixlib_output
+import teaser.data.output.aixlib_output as aixlib_output
 import os.path
 import teaser.Logic.Utilis as utilis
 from mako.template import Template

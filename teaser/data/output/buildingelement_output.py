@@ -6,7 +6,7 @@
 This module contains function to save building element classes
 """
 
-import teaser.Data.SchemaBindings.TypeBuildingBind as tb_bind
+import teaser.data.bindings.typeelement_bind as tb_bind
 import teaser.Logic.Utilis as utilis
 import warnings
 
@@ -23,7 +23,7 @@ def save_type_element(element, path=None, file_name=None):
 
     Parameters
     ----------
-    
+
     element : BuildingElement()
         Instance of BuildingElement or inherited Element of TEASER
 
