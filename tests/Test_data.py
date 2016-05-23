@@ -18,7 +18,7 @@ class Test_teaser(object):
 
     def test_calc_vdi_room1(self):
         '''Parameter Verification for rouvel room1'''
-        import teaser.Examples.Verification.ParameterVerification_1 as room1
+        import teaser.examples.verification.verification_room1 as room1
 
         room1_prj = room1.parameter_room1()
         therm_zone = room1_prj.buildings[0].thermal_zones[0]
@@ -42,7 +42,7 @@ class Test_teaser(object):
 
     def test_calc_vdi_room3(self):
         '''Parameter Verification for room 3'''
-        import teaser.Examples.Verification.ParameterVerification_3 as room3
+        import teaser.examples.verification.verification_room3 as room3
 
         room3_prj = room3.parameter_room3()
         therm_zone = room3_prj.buildings[0].thermal_zones[0]
@@ -66,7 +66,7 @@ class Test_teaser(object):
 
     def test_calc_vdi_room8(self):
         '''Parameter Verification for room 8'''
-        import teaser.Examples.Verification.ParameterVerification_8 as room8
+        import teaser.examples.verification.verification_room8 as room8
 
         room8_prj = room8.parameter_room8()
         therm_zone = room8_prj.buildings[0].thermal_zones[0]
