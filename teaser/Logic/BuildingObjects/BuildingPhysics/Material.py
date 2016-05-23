@@ -4,8 +4,8 @@
 
 import re
 
-import teaser.Data.Input.material_input as material_input
-import teaser.Data.Output.material_output as material_output
+import teaser.data.input.material_input as material_input
+import teaser.data.output.material_output as material_output
 
 class Material(object):
     '''This class represents a Material.
@@ -125,7 +125,7 @@ class Material(object):
 
     @thermal_conduc.setter
     def thermal_conduc(self, value):
-        
+
         if isinstance(value, float):
             pass
         elif value is None:
@@ -134,8 +134,8 @@ class Material(object):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert thermal conduction to float")           
-        
+                raise ValueError("Can't convert thermal conduction to float")
+
         if value is not None:
             self._thermal_conduc = float(value)
             if self.parent.parent is not None:
@@ -146,7 +146,7 @@ class Material(object):
                     self.parent.parent.calc_ua_value()
 
     @property
-    def density(self):        
+    def density(self):
         return self._density
 
     @density.setter
@@ -163,7 +163,7 @@ class Material(object):
             except:
                 raise ValueError("Can't convert density to float")
     @property
-    def heat_capac(self):        
+    def heat_capac(self):
         return self._heat_capac
 
     @heat_capac.setter
@@ -181,7 +181,7 @@ class Material(object):
                 raise ValueError("Can't convert heat capacity to float")
 
     @property
-    def solar_absorp(self):        
+    def solar_absorp(self):
         return self._solar_absorp
 
     @solar_absorp.setter
@@ -197,9 +197,9 @@ class Material(object):
                 self._solar_absorp = value
             except:
                 raise ValueError("Can't convert solar absorption to float")
-                
+
     @property
-    def ir_emissivity(self):        
+    def ir_emissivity(self):
         return self._ir_emissivity
 
     @ir_emissivity.setter
@@ -215,9 +215,9 @@ class Material(object):
                 self._ir_emissivity = value
             except:
                 raise ValueError("Can't convert emissivity to float")
-                
+
     @property
-    def transmittance(self):        
+    def transmittance(self):
         return self._transmittance
 
     @transmittance.setter

@@ -19,8 +19,8 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
 from teaser.Project import Project
-import teaser.Data.Output.TeaserXML_output as teaser_xml
-import teaser.Data.Output.CityGML_output as city_gml
+import teaser.data.output.teaserxml_output as teaser_xml
+import teaser.data.output.citygML_output as city_gml
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
 
@@ -127,7 +127,7 @@ class Controller():
         i = 0
 
     @classmethod
-    def click_generate_type_building_button(self, 
+    def click_generate_type_building_button(self,
                                             parent,
                                             name,
                                             year_of_construction,
@@ -139,14 +139,14 @@ class Controller():
                                             location,
                                             type_building_attributes):
         """
-        Creates a new TypeBuilding. Needs all given attributes and calls 
+        Creates a new TypeBuilding. Needs all given attributes and calls
         function in Project module. Returns the building.
         """
 
         int_id = 0
 
         if type_of_building == "Office":
-            
+
             building = parent.type_bldg_office(
                 name=name,
                 year_of_construction=year_of_construction,

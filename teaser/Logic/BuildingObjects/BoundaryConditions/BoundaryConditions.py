@@ -6,8 +6,8 @@ This module is a container for UseConditions following 18599 and SIA
 """
 
 from teaser.Logic.BuildingObjects.UseConditions import UseConditions
-import teaser.Data.Output.boundcond_output as boundcond_output
-import teaser.Data.Input.boundcond_input as boundcond_input
+import teaser.data.output.boundcond_output as boundcond_output
+import teaser.data.input.boundcond_input as boundcond_input
 
 
 
@@ -150,7 +150,7 @@ class BoundaryConditions(UseConditions):
         of the persons
 
     profile_persons : [float]
-        timeline of internal gains (persons) from 0 - 100 - Nutzungsprofil 
+        timeline of internal gains (persons) from 0 - 100 - Nutzungsprofil
         Personen
 
     machines: float
@@ -164,15 +164,15 @@ class BoundaryConditions(UseConditions):
         of the lighting
 
     profile_machines : [float]
-      timeline of internal gains (machines) from 0 - 100  -  Nutzungsprofil 
+      timeline of internal gains (machines) from 0 - 100  -  Nutzungsprofil
       Geraete
 
     lighting_power : float
         spec. electr. Power for lighting - spez. Elektr.
         Leistung-Raumbeleuchtung
-        
+
     profile_lighting : [float]
-      timeline of internal gains (lighting) from 0 - 100  -  Nutzungsprofil 
+      timeline of internal gains (lighting) from 0 - 100  -  Nutzungsprofil
       Licht
 
     MISC/AHU
@@ -342,7 +342,7 @@ class BoundaryConditions(UseConditions):
 
     @profile_persons.setter
     def profile_persons(self, value):
-        
+
         if self._profile_persons is None:
             pass
         else:
@@ -351,14 +351,14 @@ class BoundaryConditions(UseConditions):
                                                self.parent.parent.name +
                                                ".mat")
         self._profile_persons = value
-                     
+
     @property
     def profile_machines(self):
         return self._profile_machines
 
     @profile_machines.setter
     def profile_machines(self, value):
-        
+
         if self._profile_machines is None:
             pass
         else:
@@ -366,8 +366,8 @@ class BoundaryConditions(UseConditions):
                 self.parent.parent.file_internal_gains = ("\\InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
-        self._profile_machines = value  
-                                 
+        self._profile_machines = value
+
     @property
     def profile_lighting(self):
 
@@ -375,7 +375,7 @@ class BoundaryConditions(UseConditions):
 
     @profile_lighting.setter
     def profile_lighting(self, value):
-        
+
         if self._profile_lighting is None:
             pass
         else:
@@ -383,9 +383,9 @@ class BoundaryConditions(UseConditions):
                 self.parent.parent.file_internal_gains = ("\\InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
-                                           
+
         self._profile_lighting = value
-        
+
     @property
     def set_temp_heat(self):
         return self._set_temp_heat
@@ -401,8 +401,8 @@ class BoundaryConditions(UseConditions):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert temperature to float")        
-        
+                raise ValueError("Can't convert temperature to float")
+
         if self._set_temp_heat is None:
             pass
         else:
@@ -413,16 +413,16 @@ class BoundaryConditions(UseConditions):
                                                    ".mat")
             else:
                 pass
-                                           
+
         self._set_temp_heat = value
-        
+
     @property
     def set_temp_cool(self):
         return self._set_temp_cool
 
     @set_temp_cool.setter
     def set_temp_cool(self, value):
-                
+
         if isinstance(value, float):
             pass
         elif value is None:
@@ -431,7 +431,7 @@ class BoundaryConditions(UseConditions):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert temperature to float")  
+                raise ValueError("Can't convert temperature to float")
 
         if self._set_temp_cool is None:
             pass
@@ -444,9 +444,9 @@ class BoundaryConditions(UseConditions):
                 else:
                     pass
         self._set_temp_cool = value
-          
+
     @property
-    def temp_set_back(self):        
+    def temp_set_back(self):
         return self._temp_set_back
 
     @temp_set_back.setter
@@ -462,9 +462,9 @@ class BoundaryConditions(UseConditions):
                 self._temp_set_back = value
             except:
                 raise ValueError("Can't convert temperature to float")
-                
+
     @property
-    def min_temp_heat(self):        
+    def min_temp_heat(self):
         return self._min_temp_heat
 
     @min_temp_heat.setter
@@ -481,7 +481,7 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert temperature to float")
     @property
-    def max_temp_cool(self):        
+    def max_temp_cool(self):
         return self._max_temp_cool
 
     @max_temp_cool.setter
@@ -497,9 +497,9 @@ class BoundaryConditions(UseConditions):
                 self._max_temp_cool = value
             except:
                 raise ValueError("Can't convert temperature to float")
-                
+
     @property
-    def rel_humidity(self):        
+    def rel_humidity(self):
         return self._rel_humidity
 
     @rel_humidity.setter
@@ -521,8 +521,8 @@ class BoundaryConditions(UseConditions):
             if self.parent.parent.file_ahu is None:
                 self.parent.parent.file_ahu = ("\\AHU_" +
                                                self.parent.parent.name +
-                                               ".mat")                 
-        self._rel_humidity = value  
+                                               ".mat")
+        self._rel_humidity = value
 
     @property
     def min_air_exchange(self):
@@ -547,9 +547,9 @@ class BoundaryConditions(UseConditions):
             if self.parent.parent.file_ahu is None:
                 self.parent.parent.file_ahu = ("\\AHU_" +
                                                self.parent.parent.name +
-                                               ".mat")                 
+                                               ".mat")
         self._min_air_exchange = value
-                
+
     @property
     def min_ahu(self):
         return self._min_ahu
@@ -565,7 +565,7 @@ class BoundaryConditions(UseConditions):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert AHU airflow to float") 
+                raise ValueError("Can't convert AHU airflow to float")
 
         if self._min_ahu is None:
             pass
@@ -573,9 +573,9 @@ class BoundaryConditions(UseConditions):
             if self.parent.parent.file_ahu is None:
                 self.parent.parent.file_ahu = ("\\AHU_" +
                                                self.parent.parent.name +
-                                               ".mat")                 
+                                               ".mat")
         self._min_ahu = value
-              
+
     @property
     def max_ahu(self):
         return self._max_ahu
@@ -591,7 +591,7 @@ class BoundaryConditions(UseConditions):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert AHU airflow to float") 
+                raise ValueError("Can't convert AHU airflow to float")
 
         if self._max_ahu is None:
             pass
@@ -599,9 +599,9 @@ class BoundaryConditions(UseConditions):
             if self.parent.parent.file_ahu is None:
                 self.parent.parent.file_ahu = ("\\AHU_" +
                                                self.parent.parent.name +
-                                               ".mat")                 
+                                               ".mat")
         self._max_ahu = value
-                
+
     @property
     def persons(self):
         return self._persons
@@ -625,9 +625,9 @@ class BoundaryConditions(UseConditions):
             if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("\\InternalGains_" +
                                                self.parent.parent.name +
-                                               ".mat")           
+                                               ".mat")
         self._persons = value
-                        
+
     @property
     def machines(self):
         return self._machines
@@ -651,9 +651,9 @@ class BoundaryConditions(UseConditions):
             if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("\\InternalGains_" +
                                                self.parent.parent.name +
-                                               ".mat")           
+                                               ".mat")
         self._machines = value
-                
+
     @property
     def lighting_power(self):
         return self._lighting_power
@@ -677,5 +677,5 @@ class BoundaryConditions(UseConditions):
             if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("\\InternalGains_" +
                                                self.parent.parent.name +
-                                               ".mat")           
+                                               ".mat")
         self._lighting_power = value
