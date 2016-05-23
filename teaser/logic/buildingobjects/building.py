@@ -9,7 +9,7 @@ import numpy as np
 import inspect
 import scipy.io
 import teaser.logic.utilities as utilitis
-from teaser.logic.buildingobjects.buildingsystems.BuildingAHU \
+from teaser.logic.buildingobjects.buildingsystems.buildingahu \
     import BuildingAHU
 import teaser.logic.simulation.aixlib as aixlib
 
@@ -95,7 +95,7 @@ class Building(object):
         self.year_of_construction = year_of_construction
         self._central_ahu = None
         self.with_ahu = with_ahu
-        
+
         if with_ahu is True:
             self.central_ahu = BuildingAHU(self)
 
