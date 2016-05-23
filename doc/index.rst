@@ -28,7 +28,7 @@ License
 
 TEASER is released by E.ON Energy Research center, Institute for Energy
 Efficient Buildings and Indoor Climate, RWTH Aachen University under the
-`MIT License <http://opensource.org/licenses/MIT>`_.
+`MIT License <https://github.com/RWTH-EBC/TEASER/blob/master/License.md>`_.
 
 Acknowledgements
 ==================
@@ -92,6 +92,8 @@ TEASER:
    - Yasin Goerguelue
    - Christoph Gingter
    - Peter Remmen
+   
+ Special thanks goes to Gregor Hillebrand, who created the basis of TEASER (Retrofit Matrix).
 
 Indices and tables
 ==================
