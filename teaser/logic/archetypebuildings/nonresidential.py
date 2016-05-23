@@ -3,7 +3,7 @@
 
 
 
-from teaser.logic.buildingobjects.Building import Building
+from teaser.logic.buildingobjects.building import Building
 
 
 class NonResidential(Building):
@@ -28,7 +28,7 @@ class NonResidential(Building):
                                              year_of_construction,
                                              net_leased_area,
                                              with_ahu)
-        
+
         self.file_ahu = "\\AHU_"+self.name+".mat"
         self.file_internal_gains = "\\InternalGains_"+self.name+".mat"
         self.file_set_t = "\\Tset_"+self.name+".mat"
