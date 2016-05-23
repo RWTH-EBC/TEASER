@@ -1,14 +1,14 @@
 # created June 2015
 # by TEASER4 Development Team
 
-from teaser.logic.archetypebuildings.urbanrenet.EST1a \
+from teaser.logic.archetypebuildings.urbanrenet.est1a \
     import EST1a
 
 
-class EST8a(EST1a):
-    """Urban Fabric Type EST8a.
+class EST4b(EST1a):
+    """Urban Fabric Type EST4b.
 
-    Subclass from EST1a for urban fabric type EST8a.
+    Subclass from EST1a for urban fabric type EST4b.
 
     Parameters
     ----------
@@ -69,10 +69,10 @@ class EST8a(EST1a):
 
         """
 
-        super(EST8a, self).__init__(parent, name, year_of_construction,
+        super(EST4b, self).__init__(parent, name, year_of_construction,
                                     number_of_floors, height_of_floors,
                                     net_leased_area, with_ahu,
                                     neighbour_buildings, construction_type)
 
         self.number_of_apartments = number_of_apartments
-        self.est_factor_facade_to_volume = 0.66
+        self.est_factor_facade_to_volume = 0.28
