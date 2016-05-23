@@ -6,23 +6,23 @@
 
 
 import warnings
-import teaser.Logic.utilities as utilitis
+import teaser.logic.utilities as utilitis
 import teaser.data.input.teaserxml_input as txml_in
 import teaser.data.output.teaserxml_output as txml_out
 import teaser.data.output.aixlib_output as aixlib_output
 import teaser.data.output.annex60_output as annex60_output
 import teaser.data.output.text_output as text_out
 from teaser.data.dataclass import DataClass
-from teaser.Logic.archetypebuildings.bmvbs.office import Office
-from teaser.Logic.archetypebuildings.bmvbs.custom.institute import Institute
-from teaser.Logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
-from teaser.Logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
-from teaser.Logic.archetypebuildings.urbanrenet.EST1a import EST1a
-from teaser.Logic.archetypebuildings.urbanrenet.EST1b import EST1b
-from teaser.Logic.archetypebuildings.urbanrenet.EST4b import EST4b
-from teaser.Logic.archetypebuildings.urbanrenet.EST7 import EST7
-from teaser.Logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFamilyDwelling
-from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
+from teaser.logic.archetypebuildings.bmvbs.office import Office
+from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
+from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
+from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
+from teaser.logic.archetypebuildings.urbanrenet.EST1a import EST1a
+from teaser.logic.archetypebuildings.urbanrenet.EST1b import EST1b
+from teaser.logic.archetypebuildings.urbanrenet.EST4b import EST4b
+from teaser.logic.archetypebuildings.urbanrenet.EST7 import EST7
+from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFamilyDwelling
+from teaser.logic.Simulation.ModelicaInfo import ModelicaInfo
 
 try:
     import teaser.data.output.citygml_output as citygml_out

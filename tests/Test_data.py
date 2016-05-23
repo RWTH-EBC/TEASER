@@ -4,7 +4,7 @@ Created July 2015
 @author: TEASER 4 Development Team
 '''
 
-from teaser.Logic import Utilis
+from teaser.logic import utilities
 from teaser.project import Project
 import math
 
@@ -94,7 +94,7 @@ class Test_teaser(object):
         with TEASER3 values.
         '''
         prj.set_default()
-        prj.load_project(Utilis.get_full_path("examples\\examplefiles"
+        prj.load_project(utilities.get_full_path("examples\\examplefiles"
                                               "\\new.teaserXML"))
         therm_zone = prj.buildings[0].thermal_zones[0]
 
@@ -129,7 +129,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
+        from teaser.logic.archetypebuildings.bmvbs.office import Office
 
         prj.set_default()
         test_office = Office(parent=prj,
@@ -257,7 +257,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import \
+        from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import \
             Institute4
 
         prj.set_default()
@@ -313,7 +313,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import \
+        from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import \
             Institute8
 
         prj.set_default()
@@ -369,7 +369,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute import \
+        from teaser.logic.archetypebuildings.bmvbs.custom.institute import \
             Institute
 
         prj.set_default()
@@ -425,7 +425,7 @@ class Test_teaser(object):
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
         '''
-        from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import \
+        from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
             SingleFamilyDwelling
 
         prj.set_default()
@@ -554,7 +554,7 @@ class Test_teaser(object):
     def test_load_save_project(self):
         '''test of load_project and save_project'''
 
-        prj.load_project(Utilis.get_full_path(("examples/examplefiles"
+        prj.load_project(utilities.get_full_path(("examples/examplefiles"
                                                "/new.teaserXML")))
         therm_zone = prj.buildings[-1].thermal_zones[0]
         assert therm_zone.outer_walls[0].area == 40.0
@@ -564,7 +564,7 @@ class Test_teaser(object):
         prj.save_project("unitTest")
         prj.set_default()
 
-    
+
     #commented until we find solution for opengis PyXB bindings
     def test_save_citygml(self):
         '''test of save_gml'''
@@ -988,10 +988,10 @@ class Test_teaser(object):
         '''test of save_use_conditions, no parameter checking'''
         import os
         try:
-            os.remove(Utilis.get_default_path() + "\\" + "UseCondUT.xml")
+            os.remove(utilities.get_default_path() + "\\" + "UseCondUT.xml")
         except:
             pass
-        path = Utilis.get_default_path()
+        path = utilities.get_default_path()
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
         use_cond.parent = None
         use_cond.save_use_conditions(path=path, file_name="UseCondUT")
@@ -1036,13 +1036,13 @@ class Test_teaser(object):
         '''test of save_type_element, no parameter checking'''
         import os
         try:
-            os.remove(Utilis.get_default_path() + "\\" + "unitTestTB.xml")
+            os.remove(utilities.get_default_path() + "\\" + "unitTestTB.xml")
         except:
             pass
 
         # test load function
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        path = Utilis.get_default_path()
+        path = utilities.get_default_path()
         therm_zone.outer_walls[0].parent = None
         therm_zone.outer_walls[0].save_type_element(path=path,
                                                     file_name="unitTestTB")

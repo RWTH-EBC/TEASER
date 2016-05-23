@@ -1,14 +1,14 @@
-from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
+from teaser.logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
     import BoundaryConditions
-from teaser.Logic.BuildingObjects.Building import Building
-from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
-from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
-from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
-from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
+from teaser.logic.BuildingObjects.Building import Building
+from teaser.logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
+from teaser.logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
+from teaser.logic.BuildingObjects.BuildingPhysics.Layer import Layer
+from teaser.logic.BuildingObjects.BuildingPhysics.Material import Material
+from teaser.logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
+from teaser.logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
+from teaser.logic.BuildingObjects.BuildingPhysics.Window import Window
+from teaser.logic.BuildingObjects.ThermalZone import ThermalZone
 
 
 def building_test2(prj):
@@ -26,15 +26,15 @@ def building_test2(prj):
     bldg.number_of_floors = 1
     bldg.height_of_floors = 3.5
 
-    '''Instantiate a ThermalZone class, with building as parent and set  some 
+    '''Instantiate a ThermalZone class, with building as parent and set  some
     parameters of the thermal zone'''
 
-    tz = ThermalZone(parent = bldg) 
+    tz = ThermalZone(parent = bldg)
     tz.name = "Living Room"
     tz.area = 140.0
     tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
     tz.infiltration_rate = 0.5
-    
+
     tz.use_conditions = BoundaryConditions(tz)
     tz.use_conditions.usage = "Living"
     tz.use_conditions.cooling_time = [5,18]
@@ -79,7 +79,7 @@ def building_test2(prj):
                      ["Outer Wall 4", [bldg.year_of_construction, 'heavy',
                                       14.0, 90.0, 270.0]]]
     #import collections
-    #out_wall_dict = collections.OrderedDict(sorted(out_wall_dict.items(), key=lambda t: t[0]))                                      
+    #out_wall_dict = collections.OrderedDict(sorted(out_wall_dict.items(), key=lambda t: t[0]))
     for value in out_wall_dict:
         '''instantiate OuterWall class'''
         out_wall = OuterWall(parent = tz)
@@ -88,7 +88,7 @@ def building_test2(prj):
         out_wall.construction_type = value[1][1]
         out_wall.area = value[1][2]
         out_wall.tilt = value[1][3]
-        out_wall.orientation = value[1][4]  
+        out_wall.orientation = value[1][4]
         out_wall.building_age_group = [1994, 1998]
         out_wall.inner_radiation = 5.0
         out_wall.inner_convection = 2.7
@@ -104,7 +104,7 @@ def building_test2(prj):
         out_wall_material.thermal_conduc = 4.0
         out_wall_material.heat_capac = 0.48
         out_wall_material.transmittance = 0.0
-    
+
         out_wall_layer2 = Layer(out_wall)
         out_wall_layer2.id = 2
         out_wall_layer2.thickness = 2.0
@@ -118,7 +118,7 @@ def building_test2(prj):
     in_wall_dict = [["Inner Wall 1", [bldg.year_of_construction, 'light', 10.0]],
                     ["Inner Wall 2", [bldg.year_of_construction, 'heavy', 14.0]],
                     ["Inner Wall 3", [bldg.year_of_construction, 'light', 10.0]]]
-    
+
     for value in in_wall_dict:
         '''instantiate OuterWall class'''
         in_wall = InnerWall(parent = tz)
@@ -138,7 +138,7 @@ def building_test2(prj):
         in_wall_material.density = 5.0
         in_wall_material.thermal_conduc = 4.0
         in_wall_material.heat_capac = 0.48
-    
+
         in_wall_layer2 = Layer(in_wall)
         in_wall_layer2.id = 2
         in_wall_layer2.thickness = 2.0
@@ -147,7 +147,7 @@ def building_test2(prj):
         in_wall_material.density = 2.0
         in_wall_material.thermal_conduc = 2.0
         in_wall_material.heat_capac = 0.84
-    
+
     win_dict = [["Window 1", [bldg.year_of_construction,
                              5.0, 90.0, 90.0]],
                 ["Window 2", [bldg.year_of_construction,
@@ -163,7 +163,7 @@ def building_test2(prj):
         win.tilt = value[1][2]
         win.orientation = value[1][3]
         win.building_age_group = [1994, 1998]
-        
+
         win.inner_convection = 1.7
         win.inner_radiation = 5.0
         win.outer_convection = 20.0
@@ -175,7 +175,7 @@ def building_test2(prj):
         win_layer = Layer(parent = win)
         win_layer.id = 1
         win_layer.thickness = 0.024
-        
+
         win_material = Material(win_layer)
         win_material.name = "GlasWindow"
         win_material.thermal_conduc = 0.067
@@ -195,7 +195,7 @@ def building_test2(prj):
     roof_material.density = 5.0
     roof_material.thermal_conduc = 4.0
     roof_material.heat_capac = 0.48
-    
+
     roof_layer2 = Layer(roof)
     roof_layer2.id = 2
     roof_layer2.thickness = 2.0
@@ -219,7 +219,7 @@ def building_test2(prj):
     ground_material.density = 5.0
     ground_material.thermal_conduc = 4.0
     ground_material.heat_capac = 0.48
-    
+
     ground_layer2 = Layer(ground)
     ground_layer2.id = 2
     ground_layer2.thickness = 2.0
