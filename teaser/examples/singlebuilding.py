@@ -152,17 +152,30 @@ def example_create_building():
     ground.area = 140.0
 
     '''
-    We calculate the RC Values according to ebc procedure
+    We calculate the RC Values according to AixLib procedure
     '''
-    prj.calc_all_buildings(number_of_elements=4,
-                           merge_windows=False,
-                           used_library='Annex60')
 
+
+    prj.used_library_calc = 'AixLib'
+    prj.number_of_elements_calc = 2
+    prj.merge_windows_calc = False
+
+    prj.calc_all_buildings()
     '''
     Export the Modelica Record
     '''
-    prj.export_annex(number_of_elements=4,
-                     merge_windows=False)
+    prj.export_aixlib(building_model="MultizoneEquipped",
+                      zone_model="ThermalZoneEquipped",
+                      corG=True,
+                      internal_id=None,
+                      path=None)
+
+    '''Or we use Annex60 method with for elements'''
+    #prj.calc_all_buildings(number_of_elements=4,
+    #                       merge_windows=False,
+    #                       used_library='Annex60')
+    #prj.export_annex()
+
     '''
     Save new TEASER XML
     '''

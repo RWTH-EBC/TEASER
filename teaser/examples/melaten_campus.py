@@ -43,15 +43,34 @@ def main():
     info_list = read_XMLs(input_path)
 
     prj = create_reference_project(info_list)
+    prj.number_of_elements_calc = 2
+    prj.merge_windows_calc = False
+    prj.used_library_calc = "AixLib"
     prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
-                      corG=False,
-                      path=os.path.join(output_path, 'Reference'))
+                      corG=True,
+                      internal_id=None,
+                      path=None)
+
+    """or we could also use the Annex60 models"""
+    #prj.used_library_calc = "Annex60"
+    #prj.export_annex(number_of_elements=2,
+    #                 merge_windows=False,
+    #                 internal_id=None,
+    #                 path=None)
     prj.retrofit_all_buildings(2015)
     prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
-                      corG=False,
-                      path=os.path.join(output_path, 'Retrofit'))
+                      corG=True,
+                      internal_id=None,
+                      path=None)
+
+    """or we could also use the Annex60 models"""
+
+    #prj.export_annex(number_of_elements=2,
+    #                 merge_windows=False,
+    #                 internal_id=None,
+    #                 path=None)
 
 
 def read_XMLs(input_path):
