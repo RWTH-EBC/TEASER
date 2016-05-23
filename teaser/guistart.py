@@ -4,7 +4,7 @@
 
 import sys
 from PyQt4.QtGui import QApplication
-from teaser.GUI.MainUI import MainUI
+from teaser.gui.mainui import MainUI
 
 
 def startGUI():
@@ -20,5 +20,3 @@ def startGUI():
     app.exec_()
 if __name__ == '__main__':
     startGUI()
-
-

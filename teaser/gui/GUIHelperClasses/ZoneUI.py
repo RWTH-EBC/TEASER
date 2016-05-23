@@ -3,7 +3,7 @@
 
 from PyQt4.QtCore import QAbstractListModel, QModelIndex, QVariant, Qt
 
-from teaser.GUI.Controller import Controller
+from teaser.gui.controller import Controller
 
 
 class ZoneUI(QAbstractListModel):
