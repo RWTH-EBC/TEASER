@@ -7,7 +7,7 @@
 This module contains function to save boundary conditions classes
 """
 
-import teaser.Data.SchemaBindings.BoundaryConditionsBind as uc_bind
+import teaser.data.bindings.boundaryconditions_bind as uc_bind
 import teaser.Logic.Utilis as utilis
 import warnings
 

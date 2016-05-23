@@ -7,7 +7,7 @@ This module contains function to save Projects in the proprietary
 TEASER file format .tXML
 """
 
-import teaser.Data.SchemaBindings.ProjectBind as pb
+import teaser.data.bindings.project_bind as pb
 import inspect
 from teaser.Logic.ArchetypeBuildings.Residential import Residential
 
@@ -401,4 +401,3 @@ def set_layer_data_pyxb(pyxb_class, element):
         pyxb_layer.Material = pyxb_material
 
         pyxb_class.Layer.append(pyxb_layer)
-
