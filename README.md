@@ -46,7 +46,7 @@ IEA-EBC [Annex60](https://github.com/iea-annex60/modelica-annex60).
 
 ### Version
 
-The current version is 0.2.8, which is a pre-release
+The current version is 0.3.0, which is a pre-release.
 
 ### How to use TEASER
 
