@@ -22,7 +22,7 @@ from teaser.logic.archetypebuildings.urbanrenet.EST1b import EST1b
 from teaser.logic.archetypebuildings.urbanrenet.EST4b import EST4b
 from teaser.logic.archetypebuildings.urbanrenet.EST7 import EST7
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFamilyDwelling
-from teaser.logic.Simulation.ModelicaInfo import ModelicaInfo
+from teaser.logic.simulation.modelicainfo import ModelicaInfo
 
 try:
     import teaser.data.output.citygml_output as citygml_out
