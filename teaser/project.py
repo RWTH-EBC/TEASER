@@ -21,7 +21,7 @@ from teaser.Logic.archetypebuildings.urbanrenet.EST1a import EST1a
 from teaser.Logic.archetypebuildings.urbanrenet.EST1b import EST1b
 from teaser.Logic.archetypebuildings.urbanrenet.EST4b import EST4b
 from teaser.Logic.archetypebuildings.urbanrenet.EST7 import EST7
-from teaser.Logic.archetypebuildings.bmvbs.SingleFamilyDwelling import SingleFamilyDwelling
+from teaser.Logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFamilyDwelling
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 
 try:
