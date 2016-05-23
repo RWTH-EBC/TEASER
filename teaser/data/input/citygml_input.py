@@ -25,7 +25,7 @@ import teaser.data.bindings.opengis.misc.raw.xAL as xal
 
 from teaser.logic.archetypebuildings.bmvbs.SingleFamilyDwelling \
                             import SingleFamilyDwelling
-from teaser.logic.archetypebuildings.bmvbs.Office import Office
+from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.BuildingObjects.Building import Building
 
 
@@ -167,7 +167,7 @@ def _convert_bldg(bldg, function):
             import SingleFamilyDwelling
         bldg.__class__ = SingleFamilyDwelling
     elif function == "1120":
-        from teaser.logic.archetypebuildings.bmvbs.Office import Office
+        from teaser.logic.archetypebuildings.bmvbs.office import Office
         bldg.__class__ = Office
     gml_surfaces_help = bldg.gml_surfaces
 
