@@ -1,13 +1,13 @@
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions
 from teaser.logic.buildingobjects.building import Building
-from teaser.logic.buildingobjects.BuildingPhysics.GroundFloor import GroundFloor
-from teaser.logic.buildingobjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.logic.buildingobjects.BuildingPhysics.Layer import Layer
-from teaser.logic.buildingobjects.BuildingPhysics.Material import Material
-from teaser.logic.buildingobjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.logic.buildingobjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.logic.buildingobjects.BuildingPhysics.Window import Window
+from teaser.logic.buildingobjects.buildingphysics.GroundFloor import GroundFloor
+from teaser.logic.buildingobjects.buildingphysics.InnerWall import InnerWall
+from teaser.logic.buildingobjects.buildingphysics.Layer import Layer
+from teaser.logic.buildingobjects.buildingphysics.Material import Material
+from teaser.logic.buildingobjects.buildingphysics.OuterWall import OuterWall
+from teaser.logic.buildingobjects.buildingphysics.Rooftop import Rooftop
+from teaser.logic.buildingobjects.buildingphysics.Window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 

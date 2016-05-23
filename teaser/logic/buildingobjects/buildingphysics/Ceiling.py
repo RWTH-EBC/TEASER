@@ -2,7 +2,7 @@
 # by TEASER4 Development Team
 
 
-from teaser.logic.buildingobjects.BuildingPhysics.InnerWall import InnerWall
+from teaser.logic.buildingobjects.buildingphysics.InnerWall import InnerWall
 
 
 class Ceiling(InnerWall):

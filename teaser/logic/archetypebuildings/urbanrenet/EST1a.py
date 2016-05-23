@@ -5,14 +5,14 @@ from teaser.logic.archetypebuildings.residential \
     import Residential
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions as UseCond
-from teaser.logic.buildingobjects.BuildingPhysics.Ceiling import Ceiling
-from teaser.logic.buildingobjects.BuildingPhysics.Floor import Floor
-from teaser.logic.buildingobjects.BuildingPhysics.GroundFloor \
+from teaser.logic.buildingobjects.buildingphysics.Ceiling import Ceiling
+from teaser.logic.buildingobjects.buildingphysics.Floor import Floor
+from teaser.logic.buildingobjects.buildingphysics.GroundFloor \
     import GroundFloor
-from teaser.logic.buildingobjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.logic.buildingobjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.logic.buildingobjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.logic.buildingobjects.BuildingPhysics.Window import Window
+from teaser.logic.buildingobjects.buildingphysics.InnerWall import InnerWall
+from teaser.logic.buildingobjects.buildingphysics.OuterWall import OuterWall
+from teaser.logic.buildingobjects.buildingphysics.Rooftop import Rooftop
+from teaser.logic.buildingobjects.buildingphysics.Window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
