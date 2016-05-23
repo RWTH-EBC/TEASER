@@ -8,7 +8,7 @@ TEASER file format .tXML
 """
 
 
-import teaser.Data.SchemaBindings.ProjectBind as pb
+import teaser.data.bindings.ProjectBind as pb
 
 from teaser.Logic.BuildingObjects.Building import Building
 from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
