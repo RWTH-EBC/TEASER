@@ -25,19 +25,19 @@ if pyxb.__version__ != _PyXBVersion:
 
 # Import bindings for namespaces imported into schema
 import pyxb.bundles.common.xlink
-import teaser.Data.SchemaBindings.opengis.citygml.raw.building
-import teaser.Data.SchemaBindings.opengis.citygml.raw.base
+import teaser.data.bindings.opengis.citygml.raw.building
+import teaser.data.bindings.opengis.citygml.raw.base
 import pyxb.binding.datatypes
-import teaser.Data.SchemaBindings.opengis.raw.gml
+import teaser.data.bindings.opengis.raw.gml
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://www.sig3d.org/citygml/2.0/energy/0.6.0', create_if_missing=True)
 Namespace.configureCategories(['typeBinding', 'elementBinding'])
-_Namespace_gml = teaser.Data.SchemaBindings.opengis.raw.gml.Namespace
+_Namespace_gml = teaser.data.bindings.opengis.raw.gml.Namespace
 _Namespace_gml.configureCategories(['typeBinding', 'elementBinding'])
 _Namespace = pyxb.bundles.common.xlink.Namespace
 _Namespace.configureCategories(['typeBinding', 'elementBinding'])
-_Namespace_core = teaser.Data.SchemaBindings.opengis.citygml.raw.base.Namespace
+_Namespace_core = teaser.data.bindings.opengis.citygml.raw.base.Namespace
 _Namespace_core.configureCategories(['typeBinding', 'elementBinding'])
 
 def CreateFromDocument (xml_text, default_namespace=None, location_base=None):
@@ -311,29 +311,29 @@ WavelengthRangeType._InitializeFacetMap(WavelengthRangeType._CF_enumeration)
 Namespace.addCategoryObject('typeBinding', 'WavelengthRangeType', WavelengthRangeType)
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_ScheduleType with content type ELEMENT_ONLY
-class ScheduleType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractGMLType):
+class ScheduleType (teaser.data.bindings.opengis.raw.gml.AbstractGMLType):
     """Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_ScheduleType with content type ELEMENT_ONLY"""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = True
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, '_ScheduleType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 106, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractGMLType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractGMLType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractGMLType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractGMLType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractGMLType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractGMLType
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
-        
+
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', '_ScheduleType', ScheduleType)
 
@@ -349,75 +349,75 @@ class SchedulePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_Schedule uses Python identifier Schedule
     __Schedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_Schedule'), 'Schedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SchedulePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0_Schedule', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 105, 2), )
 
-    
+
     Schedule = property(__Schedule.value, __Schedule.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SchedulePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SchedulePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SchedulePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SchedulePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SchedulePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SchedulePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SchedulePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SchedulePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -447,75 +447,75 @@ class SolarEnergySystemPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_SolarEnergySystem uses Python identifier SolarEnergySystem
     __SolarEnergySystem = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_SolarEnergySystem'), 'SolarEnergySystem', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystem', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 120, 2), )
 
-    
+
     SolarEnergySystem = property(__SolarEnergySystem.value, __SolarEnergySystem.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -535,33 +535,33 @@ Namespace.addCategoryObject('typeBinding', '_SolarEnergySystemPropertyType', Sol
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_StorageSystemType with content type ELEMENT_ONLY
-class StorageSystemType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType):
+class StorageSystemType (teaser.data.bindings.opengis.raw.gml.AbstractFeatureType):
     """System storing energy. A same storage may store the energy of different end-users and different end-use."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = True
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, '_StorageSystemType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 152, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractFeatureType
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
-        
+
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', '_StorageSystemType', StorageSystemType)
 
@@ -577,75 +577,75 @@ class StorageSystemPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_StorageSystem uses Python identifier StorageSystem
     __StorageSystem = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_StorageSystem'), 'StorageSystem', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_StorageSystemPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0_StorageSystem', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 151, 2), )
 
-    
+
     StorageSystem = property(__StorageSystem.value, __StorageSystem.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_StorageSystemPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_StorageSystemPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_StorageSystemPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_StorageSystemPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_StorageSystemPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_StorageSystemPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_StorageSystemPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_StorageSystemPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -665,36 +665,36 @@ Namespace.addCategoryObject('typeBinding', '_StorageSystemPropertyType', Storage
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_TimeSeriesType with content type ELEMENT_ONLY
-class TimeSeriesType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractGMLType):
+class TimeSeriesType (teaser.data.bindings.opengis.raw.gml.AbstractGMLType):
     """Consistent series of time-depending values."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = True
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, '_TimeSeriesType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 170, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractGMLType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractGMLType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractGMLType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractGMLType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractGMLType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractGMLType
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}variableProperties uses Python identifier variableProperties
     __variableProperties = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'variableProperties'), 'variableProperties', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesType_httpwww_sig3d_orgcitygml2_0energy0_6_0variableProperties', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 177, 10), )
 
-    
+
     variableProperties = property(__variableProperties.value, __variableProperties.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __variableProperties.name() : __variableProperties
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', '_TimeSeriesType', TimeSeriesType)
 
@@ -710,75 +710,75 @@ class TimeSeriesPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_TimeSeries uses Python identifier TimeSeries
     __TimeSeries = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_TimeSeries'), 'TimeSeries', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeries', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 169, 2), )
 
-    
+
     TimeSeries = property(__TimeSeries.value, __TimeSeries.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -798,54 +798,54 @@ Namespace.addCategoryObject('typeBinding', '_TimeSeriesPropertyType', TimeSeries
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}AbstractMaterialType with content type ELEMENT_ONLY
-class AbstractMaterialType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class AbstractMaterialType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """Abstract superclass for all Material classes. A Material is a homogeneous substance that can be used to form elements."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = True
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'AbstractMaterialType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 192, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}imageTexture uses Python identifier imageTexture
     __imageTexture = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'imageTexture'), 'imageTexture', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_AbstractMaterialType_httpwww_sig3d_orgcitygml2_0energy0_6_0imageTexture', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 199, 10), )
 
-    
+
     imageTexture = property(__imageTexture.value, __imageTexture.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __imageTexture.name() : __imageTexture
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'AbstractMaterialType', AbstractMaterialType)
 
@@ -861,75 +861,75 @@ class AbstractMaterialPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}AbstractMaterial uses Python identifier AbstractMaterial
     __AbstractMaterial = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'AbstractMaterial'), 'AbstractMaterial', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_AbstractMaterialPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0AbstractMaterial', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 191, 2), )
 
-    
+
     AbstractMaterial = property(__AbstractMaterial.value, __AbstractMaterial.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_AbstractMaterialPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_AbstractMaterialPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_AbstractMaterialPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_AbstractMaterialPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_AbstractMaterialPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_AbstractMaterialPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_AbstractMaterialPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_AbstractMaterialPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -959,75 +959,75 @@ class BoilerPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}Boiler uses Python identifier Boiler
     __Boiler = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Boiler'), 'Boiler', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BoilerPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0Boiler', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 213, 2), )
 
-    
+
     Boiler = property(__Boiler.value, __Boiler.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BoilerPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BoilerPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BoilerPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BoilerPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BoilerPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BoilerPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BoilerPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BoilerPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -1047,90 +1047,90 @@ Namespace.addCategoryObject('typeBinding', 'BoilerPropertyType', BoilerPropertyT
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}BuildingUnitType with content type ELEMENT_ONLY
-class BuildingUnitType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class BuildingUnitType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """A building unit is a part of usage zone, such as dwelling or workplace, which is related to a single occupant entity."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'BuildingUnitType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 236, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}numberOfRooms uses Python identifier numberOfRooms
     __numberOfRooms = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'numberOfRooms'), 'numberOfRooms', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitType_httpwww_sig3d_orgcitygml2_0energy0_6_0numberOfRooms', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 243, 10), )
 
-    
+
     numberOfRooms = property(__numberOfRooms.value, __numberOfRooms.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ownerName uses Python identifier ownerName
     __ownerName = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ownerName'), 'ownerName', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitType_httpwww_sig3d_orgcitygml2_0energy0_6_0ownerName', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 244, 10), )
 
-    
+
     ownerName = property(__ownerName.value, __ownerName.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ownershipType uses Python identifier ownershipType
     __ownershipType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ownershipType'), 'ownershipType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitType_httpwww_sig3d_orgcitygml2_0energy0_6_0ownershipType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 245, 10), )
 
-    
+
     ownershipType = property(__ownershipType.value, __ownershipType.set, None, '')
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}floorArea uses Python identifier floorArea
     __floorArea = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'floorArea'), 'floorArea', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitType_httpwww_sig3d_orgcitygml2_0energy0_6_0floorArea', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 252, 10), )
 
-    
+
     floorArea = property(__floorArea.value, __floorArea.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}occupiedBy uses Python identifier occupiedBy
     __occupiedBy = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'occupiedBy'), 'occupiedBy', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitType_httpwww_sig3d_orgcitygml2_0energy0_6_0occupiedBy', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 253, 10), )
 
-    
+
     occupiedBy = property(__occupiedBy.value, __occupiedBy.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}address uses Python identifier address
     __address = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'address'), 'address', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitType_httpwww_sig3d_orgcitygml2_0energy0_6_0address', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 254, 10), )
 
-    
+
     address = property(__address.value, __address.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}has uses Python identifier has
     __has = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'has'), 'has', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitType_httpwww_sig3d_orgcitygml2_0energy0_6_0has', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 255, 10), )
 
-    
+
     has = property(__has.value, __has.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __numberOfRooms.name() : __numberOfRooms,
@@ -1142,7 +1142,7 @@ class BuildingUnitType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.Abst
         __has.name() : __has
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'BuildingUnitType', BuildingUnitType)
 
@@ -1158,75 +1158,75 @@ class BuildingUnitPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}BuildingUnit uses Python identifier BuildingUnit
     __BuildingUnit = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'BuildingUnit'), 'BuildingUnit', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0BuildingUnit', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 235, 2), )
 
-    
+
     BuildingUnit = property(__BuildingUnit.value, __BuildingUnit.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BuildingUnitPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -1256,75 +1256,75 @@ class CombinedHeatPowerPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}CombinedHeatPower uses Python identifier CombinedHeatPower
     __CombinedHeatPower = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'CombinedHeatPower'), 'CombinedHeatPower', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_CombinedHeatPowerPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0CombinedHeatPower', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 269, 2), )
 
-    
+
     CombinedHeatPower = property(__CombinedHeatPower.value, __CombinedHeatPower.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_CombinedHeatPowerPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_CombinedHeatPowerPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_CombinedHeatPowerPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_CombinedHeatPowerPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_CombinedHeatPowerPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_CombinedHeatPowerPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_CombinedHeatPowerPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_CombinedHeatPowerPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -1354,75 +1354,75 @@ class ConstantValueSchedulePropertyType (pyxb.binding.basis.complexTypeDefinitio
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ConstantValueSchedule uses Python identifier ConstantValueSchedule
     __ConstantValueSchedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ConstantValueSchedule'), 'ConstantValueSchedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstantValueSchedulePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0ConstantValueSchedule', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 304, 2), )
 
-    
+
     ConstantValueSchedule = property(__ConstantValueSchedule.value, __ConstantValueSchedule.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstantValueSchedulePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstantValueSchedulePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstantValueSchedulePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstantValueSchedulePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstantValueSchedulePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstantValueSchedulePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstantValueSchedulePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstantValueSchedulePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -1442,7 +1442,7 @@ Namespace.addCategoryObject('typeBinding', 'ConstantValueSchedulePropertyType', 
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ConstructionType with content type ELEMENT_ONLY
-class ConstructionType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class ConstructionType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """A Construction is a combination of layers, such as a wall or a roof.
 &lt;p&gt; &lt;img src="../png/Construction-Layer-Illustration.png"&gt;&lt;/p&gt;"""
     _TypeDefinition = None
@@ -1450,55 +1450,55 @@ class ConstructionType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.Abst
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ConstructionType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 327, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}uValue uses Python identifier uValue
     __uValue = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'uValue'), 'uValue', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionType_httpwww_sig3d_orgcitygml2_0energy0_6_0uValue', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 335, 10), )
 
-    
+
     uValue = property(__uValue.value, __uValue.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}opticalProperties uses Python identifier opticalProperties
     __opticalProperties = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'opticalProperties'), 'opticalProperties', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionType_httpwww_sig3d_orgcitygml2_0energy0_6_0opticalProperties', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 336, 10), )
 
-    
+
     opticalProperties = property(__opticalProperties.value, __opticalProperties.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}layer uses Python identifier layer
     __layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'layer'), 'layer', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionType_httpwww_sig3d_orgcitygml2_0energy0_6_0layer', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 337, 10), )
 
-    
+
     layer = property(__layer.value, __layer.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __uValue.name() : __uValue,
@@ -1506,7 +1506,7 @@ class ConstructionType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.Abst
         __layer.name() : __layer
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ConstructionType', ConstructionType)
 
@@ -1522,75 +1522,75 @@ class ConstructionPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}Construction uses Python identifier Construction
     __Construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Construction'), 'Construction', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0Construction', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 326, 2), )
 
-    
+
     Construction = property(__Construction.value, __Construction.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -1610,62 +1610,62 @@ Namespace.addCategoryObject('typeBinding', 'ConstructionPropertyType', Construct
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ConstructionOrientationType with content type ELEMENT_ONLY
-class ConstructionOrientationType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class ConstructionOrientationType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """Determines the usage of Construction in terms of the Layer order."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ConstructionOrientationType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 352, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}orientation uses Python identifier orientation
     __orientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'orientation'), 'orientation', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionOrientationType_httpwww_sig3d_orgcitygml2_0energy0_6_0orientation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 359, 10), )
 
-    
+
     orientation = property(__orientation.value, __orientation.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}baseConstruction uses Python identifier baseConstruction
     __baseConstruction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'baseConstruction'), 'baseConstruction', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionOrientationType_httpwww_sig3d_orgcitygml2_0energy0_6_0baseConstruction', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 360, 10), )
 
-    
+
     baseConstruction = property(__baseConstruction.value, __baseConstruction.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __orientation.name() : __orientation,
         __baseConstruction.name() : __baseConstruction
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ConstructionOrientationType', ConstructionOrientationType)
 
@@ -1681,75 +1681,75 @@ class ConstructionOrientationPropertyType (pyxb.binding.basis.complexTypeDefinit
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ConstructionOrientation uses Python identifier ConstructionOrientation
     __ConstructionOrientation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ConstructionOrientation'), 'ConstructionOrientation', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionOrientationPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0ConstructionOrientation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 351, 2), )
 
-    
+
     ConstructionOrientation = property(__ConstructionOrientation.value, __ConstructionOrientation.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionOrientationPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionOrientationPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionOrientationPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionOrientationPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionOrientationPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionOrientationPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionOrientationPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstructionOrientationPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -1779,75 +1779,75 @@ class DailyPatternSchedulePropertyType (pyxb.binding.basis.complexTypeDefinition
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}DailyPatternSchedule uses Python identifier DailyPatternSchedule
     __DailyPatternSchedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'DailyPatternSchedule'), 'DailyPatternSchedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyPatternSchedulePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0DailyPatternSchedule', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 374, 2), )
 
-    
+
     DailyPatternSchedule = property(__DailyPatternSchedule.value, __DailyPatternSchedule.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyPatternSchedulePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyPatternSchedulePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyPatternSchedulePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyPatternSchedulePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyPatternSchedulePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyPatternSchedulePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyPatternSchedulePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyPatternSchedulePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -1877,18 +1877,18 @@ class DailyScheduleType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}dayType uses Python identifier dayType
     __dayType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'dayType'), 'dayType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyScheduleType_httpwww_sig3d_orgcitygml2_0energy0_6_0dayType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 402, 6), )
 
-    
+
     dayType = property(__dayType.value, __dayType.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}schedule uses Python identifier schedule
     __schedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'schedule'), 'schedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyScheduleType_httpwww_sig3d_orgcitygml2_0energy0_6_0schedule', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 403, 6), )
 
-    
+
     schedule = property(__schedule.value, __schedule.set, None, None)
 
     _ElementMap.update({
@@ -1896,7 +1896,7 @@ class DailyScheduleType (pyxb.binding.basis.complexTypeDefinition):
         __schedule.name() : __schedule
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'DailyScheduleType', DailyScheduleType)
 
@@ -1912,18 +1912,18 @@ class DailySchedulePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}DailySchedule uses Python identifier DailySchedule
     __DailySchedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'DailySchedule'), 'DailySchedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailySchedulePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0DailySchedule', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 396, 2), )
 
-    
+
     DailySchedule = property(__DailySchedule.value, __DailySchedule.set, None, None)
 
     _ElementMap.update({
         __DailySchedule.name() : __DailySchedule
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'DailySchedulePropertyType', DailySchedulePropertyType)
 
@@ -1939,18 +1939,18 @@ class DateOfEventType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}instant uses Python identifier instant
     __instant = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'instant'), 'instant', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DateOfEventType_httpwww_sig3d_orgcitygml2_0energy0_6_0instant', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 420, 6), )
 
-    
+
     instant = property(__instant.value, __instant.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}period uses Python identifier period
     __period = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'period'), 'period', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DateOfEventType_httpwww_sig3d_orgcitygml2_0energy0_6_0period', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 421, 6), )
 
-    
+
     period = property(__period.value, __period.set, None, None)
 
     _ElementMap.update({
@@ -1958,7 +1958,7 @@ class DateOfEventType (pyxb.binding.basis.complexTypeDefinition):
         __period.name() : __period
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'DateOfEventType', DateOfEventType)
 
@@ -1974,18 +1974,18 @@ class DateOfEventPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}DateOfEvent uses Python identifier DateOfEvent
     __DateOfEvent = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'DateOfEvent'), 'DateOfEvent', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DateOfEventPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0DateOfEvent', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 414, 2), )
 
-    
+
     DateOfEvent = property(__DateOfEvent.value, __DateOfEvent.set, None, None)
 
     _ElementMap.update({
         __DateOfEvent.name() : __DateOfEvent
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'DateOfEventPropertyType', DateOfEventPropertyType)
 
@@ -2001,75 +2001,75 @@ class DHWFacilitiesPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}DHWFacilities uses Python identifier DHWFacilities
     __DHWFacilities = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'DHWFacilities'), 'DHWFacilities', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0DHWFacilities', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 457, 2), )
 
-    
+
     DHWFacilities = property(__DHWFacilities.value, __DHWFacilities.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -2099,75 +2099,75 @@ class DistrictNetworkSubstationPropertyType (pyxb.binding.basis.complexTypeDefin
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}DistrictNetworkSubstation uses Python identifier DistrictNetworkSubstation
     __DistrictNetworkSubstation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'DistrictNetworkSubstation'), 'DistrictNetworkSubstation', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DistrictNetworkSubstationPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0DistrictNetworkSubstation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 498, 2), )
 
-    
+
     DistrictNetworkSubstation = property(__DistrictNetworkSubstation.value, __DistrictNetworkSubstation.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DistrictNetworkSubstationPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DistrictNetworkSubstationPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DistrictNetworkSubstationPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DistrictNetworkSubstationPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DistrictNetworkSubstationPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DistrictNetworkSubstationPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DistrictNetworkSubstationPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DistrictNetworkSubstationPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -2197,75 +2197,75 @@ class DualValueSchedulePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}DualValueSchedule uses Python identifier DualValueSchedule
     __DualValueSchedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'DualValueSchedule'), 'DualValueSchedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueSchedulePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0DualValueSchedule', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 518, 2), )
 
-    
+
     DualValueSchedule = property(__DualValueSchedule.value, __DualValueSchedule.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueSchedulePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueSchedulePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueSchedulePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueSchedulePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueSchedulePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueSchedulePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueSchedulePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueSchedulePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -2295,75 +2295,75 @@ class ElectricalAppliancesPropertyType (pyxb.binding.basis.complexTypeDefinition
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ElectricalAppliances uses Python identifier ElectricalAppliances
     __ElectricalAppliances = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ElectricalAppliances'), 'ElectricalAppliances', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalAppliancesPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0ElectricalAppliances', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 543, 2), )
 
-    
+
     ElectricalAppliances = property(__ElectricalAppliances.value, __ElectricalAppliances.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalAppliancesPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalAppliancesPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalAppliancesPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalAppliancesPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalAppliancesPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalAppliancesPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalAppliancesPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalAppliancesPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -2393,75 +2393,75 @@ class ElectricalResistancePropertyType (pyxb.binding.basis.complexTypeDefinition
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ElectricalResistance uses Python identifier ElectricalResistance
     __ElectricalResistance = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ElectricalResistance'), 'ElectricalResistance', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalResistancePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0ElectricalResistance', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 565, 2), )
 
-    
+
     ElectricalResistance = property(__ElectricalResistance.value, __ElectricalResistance.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalResistancePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalResistancePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalResistancePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalResistancePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalResistancePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalResistancePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalResistancePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalResistancePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -2491,18 +2491,18 @@ class EmissivityType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}fraction uses Python identifier fraction
     __fraction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'fraction'), 'fraction', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EmissivityType_httpwww_sig3d_orgcitygml2_0energy0_6_0fraction', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 586, 6), )
 
-    
+
     fraction = property(__fraction.value, __fraction.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}surface uses Python identifier surface
     __surface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'surface'), 'surface', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EmissivityType_httpwww_sig3d_orgcitygml2_0energy0_6_0surface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 587, 6), )
 
-    
+
     surface = property(__surface.value, __surface.set, None, None)
 
     _ElementMap.update({
@@ -2510,7 +2510,7 @@ class EmissivityType (pyxb.binding.basis.complexTypeDefinition):
         __surface.name() : __surface
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'EmissivityType', EmissivityType)
 
@@ -2526,18 +2526,18 @@ class EmissivityPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}Emissivity uses Python identifier Emissivity
     __Emissivity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Emissivity'), 'Emissivity', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EmissivityPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0Emissivity', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 580, 2), )
 
-    
+
     Emissivity = property(__Emissivity.value, __Emissivity.set, None, None)
 
     _ElementMap.update({
         __Emissivity.name() : __Emissivity
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'EmissivityPropertyType', EmissivityPropertyType)
 
@@ -2553,32 +2553,32 @@ class EnergyCarrierType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}co2EmissionFactor uses Python identifier co2EmissionFactor
     __co2EmissionFactor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'co2EmissionFactor'), 'co2EmissionFactor', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyCarrierType_httpwww_sig3d_orgcitygml2_0energy0_6_0co2EmissionFactor', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 623, 6), )
 
-    
+
     co2EmissionFactor = property(__co2EmissionFactor.value, __co2EmissionFactor.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}energyDensity uses Python identifier energyDensity
     __energyDensity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'energyDensity'), 'energyDensity', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyCarrierType_httpwww_sig3d_orgcitygml2_0energy0_6_0energyDensity', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 624, 6), )
 
-    
+
     energyDensity = property(__energyDensity.value, __energyDensity.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}primaryEnergyFactor uses Python identifier primaryEnergyFactor
     __primaryEnergyFactor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'primaryEnergyFactor'), 'primaryEnergyFactor', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyCarrierType_httpwww_sig3d_orgcitygml2_0energy0_6_0primaryEnergyFactor', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 625, 6), )
 
-    
+
     primaryEnergyFactor = property(__primaryEnergyFactor.value, __primaryEnergyFactor.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}type uses Python identifier type
     __type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyCarrierType_httpwww_sig3d_orgcitygml2_0energy0_6_0type', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 626, 6), )
 
-    
+
     type = property(__type.value, __type.set, None, None)
 
     _ElementMap.update({
@@ -2588,7 +2588,7 @@ class EnergyCarrierType (pyxb.binding.basis.complexTypeDefinition):
         __type.name() : __type
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'EnergyCarrierType', EnergyCarrierType)
 
@@ -2604,135 +2604,135 @@ class EnergyCarrierPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyCarrier uses Python identifier EnergyCarrier
     __EnergyCarrier = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'EnergyCarrier'), 'EnergyCarrier', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyCarrierPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0EnergyCarrier', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 617, 2), )
 
-    
+
     EnergyCarrier = property(__EnergyCarrier.value, __EnergyCarrier.set, None, None)
 
     _ElementMap.update({
         __EnergyCarrier.name() : __EnergyCarrier
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'EnergyCarrierPropertyType', EnergyCarrierPropertyType)
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType with content type ELEMENT_ONLY
-class EnergyConversionSystemType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType):
+class EnergyConversionSystemType (teaser.data.bindings.opengis.raw.gml.AbstractFeatureType):
     """Energy conversion system is a system producing the energy necessary to satisfy the end-use (or to feed the networks) from an energy source."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'EnergyConversionSystemType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 661, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractFeatureType
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}efficiencyIndicator uses Python identifier efficiencyIndicator
     __efficiencyIndicator = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'efficiencyIndicator'), 'efficiencyIndicator', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0efficiencyIndicator', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 668, 10), )
 
-    
+
     efficiencyIndicator = property(__efficiencyIndicator.value, __efficiencyIndicator.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedNominalPower uses Python identifier installedNominalPower
     __installedNominalPower = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'installedNominalPower'), 'installedNominalPower', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0installedNominalPower', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 669, 10), )
 
-    
+
     installedNominalPower = property(__installedNominalPower.value, __installedNominalPower.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}model uses Python identifier model
     __model = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'model'), 'model', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0model', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 670, 10), )
 
-    
+
     model = property(__model.value, __model.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}nominalEfficiency uses Python identifier nominalEfficiency
     __nominalEfficiency = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'nominalEfficiency'), 'nominalEfficiency', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0nominalEfficiency', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 671, 10), )
 
-    
+
     nominalEfficiency = property(__nominalEfficiency.value, __nominalEfficiency.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}number uses Python identifier number
     __number = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'number'), 'number', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0number', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 672, 10), )
 
-    
+
     number = property(__number.value, __number.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}productAndInstallationDocument uses Python identifier productAndInstallationDocument
     __productAndInstallationDocument = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'productAndInstallationDocument'), 'productAndInstallationDocument', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0productAndInstallationDocument', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 673, 10), )
 
-    
+
     productAndInstallationDocument = property(__productAndInstallationDocument.value, __productAndInstallationDocument.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}yearOfManufacture uses Python identifier yearOfManufacture
     __yearOfManufacture = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'yearOfManufacture'), 'yearOfManufacture', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0yearOfManufacture', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 674, 10), )
 
-    
+
     yearOfManufacture = property(__yearOfManufacture.value, __yearOfManufacture.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}refurbishmentMeasureOnEnergySystem uses Python identifier refurbishmentMeasureOnEnergySystem
     __refurbishmentMeasureOnEnergySystem = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'refurbishmentMeasureOnEnergySystem'), 'refurbishmentMeasureOnEnergySystem', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0refurbishmentMeasureOnEnergySystem', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 675, 10), )
 
-    
+
     refurbishmentMeasureOnEnergySystem = property(__refurbishmentMeasureOnEnergySystem.value, __refurbishmentMeasureOnEnergySystem.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedIn uses Python identifier installedIn
     __installedIn = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'installedIn'), 'installedIn', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0installedIn', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 676, 10), )
 
-    
+
     installedIn = property(__installedIn.value, __installedIn.set, None, '')
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}has uses Python identifier has
     __has = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'has'), 'has', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0has', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 683, 10), )
 
-    
+
     has = property(__has.value, __has.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}consumes uses Python identifier consumes
     __consumes = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'consumes'), 'consumes', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0consumes', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 684, 10), )
 
-    
+
     consumes = property(__consumes.value, __consumes.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}produces uses Python identifier produces
     __produces = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'produces'), 'produces', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0produces', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 685, 10), )
 
-    
+
     produces = property(__produces.value, __produces.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}provides uses Python identifier provides
     __provides = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'provides'), 'provides', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0provides', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 686, 10), )
 
-    
+
     provides = property(__provides.value, __provides.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __efficiencyIndicator.name() : __efficiencyIndicator,
@@ -2750,7 +2750,7 @@ class EnergyConversionSystemType (teaser.Data.SchemaBindings.opengis.raw.gml.Abs
         __provides.name() : __provides
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'EnergyConversionSystemType', EnergyConversionSystemType)
 
@@ -2766,75 +2766,75 @@ class EnergyConversionSystemPropertyType (pyxb.binding.basis.complexTypeDefiniti
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystem uses Python identifier EnergyConversionSystem
     __EnergyConversionSystem = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'EnergyConversionSystem'), 'EnergyConversionSystem', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0EnergyConversionSystem', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 660, 2), )
 
-    
+
     EnergyConversionSystem = property(__EnergyConversionSystem.value, __EnergyConversionSystem.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyConversionSystemPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -2854,69 +2854,69 @@ Namespace.addCategoryObject('typeBinding', 'EnergyConversionSystemPropertyType',
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyDemandType with content type ELEMENT_ONLY
-class EnergyDemandType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType):
+class EnergyDemandType (teaser.data.bindings.opengis.raw.gml.AbstractFeatureType):
     """Energy demand is the useful energy required to satisfy a specific end-use, such as heating, cooling, domestic hot water etc."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'EnergyDemandType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 701, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractFeatureType
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}endUse uses Python identifier endUse
     __endUse = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'endUse'), 'endUse', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandType_httpwww_sig3d_orgcitygml2_0energy0_6_0endUse', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 708, 10), )
 
-    
+
     endUse = property(__endUse.value, __endUse.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}energyAmount uses Python identifier energyAmount
     __energyAmount = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'energyAmount'), 'energyAmount', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandType_httpwww_sig3d_orgcitygml2_0energy0_6_0energyAmount', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 709, 10), )
 
-    
+
     energyAmount = property(__energyAmount.value, __energyAmount.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}maximumLoad uses Python identifier maximumLoad
     __maximumLoad = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'maximumLoad'), 'maximumLoad', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandType_httpwww_sig3d_orgcitygml2_0energy0_6_0maximumLoad', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 710, 10), )
 
-    
+
     maximumLoad = property(__maximumLoad.value, __maximumLoad.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}energyDistribution uses Python identifier energyDistribution
     __energyDistribution = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'energyDistribution'), 'energyDistribution', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandType_httpwww_sig3d_orgcitygml2_0energy0_6_0energyDistribution', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 711, 10), )
 
-    
+
     energyDistribution = property(__energyDistribution.value, __energyDistribution.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}storage uses Python identifier storage
     __storage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'storage'), 'storage', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandType_httpwww_sig3d_orgcitygml2_0energy0_6_0storage', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 712, 10), )
 
-    
+
     storage = property(__storage.value, __storage.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}isProvidedBy uses Python identifier isProvidedBy
     __isProvidedBy = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'isProvidedBy'), 'isProvidedBy', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandType_httpwww_sig3d_orgcitygml2_0energy0_6_0isProvidedBy', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 713, 10), )
 
-    
+
     isProvidedBy = property(__isProvidedBy.value, __isProvidedBy.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __endUse.name() : __endUse,
@@ -2927,7 +2927,7 @@ class EnergyDemandType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatu
         __isProvidedBy.name() : __isProvidedBy
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'EnergyDemandType', EnergyDemandType)
 
@@ -2943,75 +2943,75 @@ class EnergyDemandPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyDemand uses Python identifier EnergyDemand
     __EnergyDemand = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'EnergyDemand'), 'EnergyDemand', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0EnergyDemand', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 700, 2), )
 
-    
+
     EnergyDemand = property(__EnergyDemand.value, __EnergyDemand.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDemandPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -3031,40 +3031,40 @@ Namespace.addCategoryObject('typeBinding', 'EnergyDemandPropertyType', EnergyDem
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyDistributionSystemType with content type ELEMENT_ONLY
-class EnergyDistributionSystemType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType):
+class EnergyDistributionSystemType (teaser.data.bindings.opengis.raw.gml.AbstractFeatureType):
     """Energy distribution system is a system in charge of delivering the energy inside the building, from the place of energy production to the place of end-use. It consists then in the storage (including battery/tank and pipe volumes), the circulation pumps, the distribution pipes and the end use units (radiators, fan coils etc.)."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'EnergyDistributionSystemType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 728, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractFeatureType
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}distributionPerimeter uses Python identifier distributionPerimeter
     __distributionPerimeter = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'distributionPerimeter'), 'distributionPerimeter', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDistributionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0distributionPerimeter', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 735, 10), )
 
-    
+
     distributionPerimeter = property(__distributionPerimeter.value, __distributionPerimeter.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __distributionPerimeter.name() : __distributionPerimeter
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'EnergyDistributionSystemType', EnergyDistributionSystemType)
 
@@ -3080,75 +3080,75 @@ class EnergyDistributionSystemPropertyType (pyxb.binding.basis.complexTypeDefini
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyDistributionSystem uses Python identifier EnergyDistributionSystem
     __EnergyDistributionSystem = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'EnergyDistributionSystem'), 'EnergyDistributionSystem', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDistributionSystemPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0EnergyDistributionSystem', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 727, 2), )
 
-    
+
     EnergyDistributionSystem = property(__EnergyDistributionSystem.value, __EnergyDistributionSystem.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDistributionSystemPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDistributionSystemPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDistributionSystemPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDistributionSystemPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDistributionSystemPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDistributionSystemPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDistributionSystemPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyDistributionSystemPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -3178,25 +3178,25 @@ class EnergyPerformanceCertificationType (pyxb.binding.basis.complexTypeDefiniti
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}certificationRating uses Python identifier certificationRating
     __certificationRating = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'certificationRating'), 'certificationRating', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyPerformanceCertificationType_httpwww_sig3d_orgcitygml2_0energy0_6_0certificationRating', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 755, 6), )
 
-    
+
     certificationRating = property(__certificationRating.value, __certificationRating.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}certificationName uses Python identifier certificationName
     __certificationName = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'certificationName'), 'certificationName', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyPerformanceCertificationType_httpwww_sig3d_orgcitygml2_0energy0_6_0certificationName', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 756, 6), )
 
-    
+
     certificationName = property(__certificationName.value, __certificationName.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}certificationId uses Python identifier certificationId
     __certificationId = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'certificationId'), 'certificationId', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyPerformanceCertificationType_httpwww_sig3d_orgcitygml2_0energy0_6_0certificationId', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 757, 6), )
 
-    
+
     certificationId = property(__certificationId.value, __certificationId.set, None, None)
 
     _ElementMap.update({
@@ -3205,7 +3205,7 @@ class EnergyPerformanceCertificationType (pyxb.binding.basis.complexTypeDefiniti
         __certificationId.name() : __certificationId
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'EnergyPerformanceCertificationType', EnergyPerformanceCertificationType)
 
@@ -3221,72 +3221,72 @@ class EnergyPerformanceCertificationPropertyType (pyxb.binding.basis.complexType
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyPerformanceCertification uses Python identifier EnergyPerformanceCertification
     __EnergyPerformanceCertification = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'EnergyPerformanceCertification'), 'EnergyPerformanceCertification', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergyPerformanceCertificationPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0EnergyPerformanceCertification', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 749, 2), )
 
-    
+
     EnergyPerformanceCertification = property(__EnergyPerformanceCertification.value, __EnergyPerformanceCertification.set, None, None)
 
     _ElementMap.update({
         __EnergyPerformanceCertification.name() : __EnergyPerformanceCertification
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'EnergyPerformanceCertificationPropertyType', EnergyPerformanceCertificationPropertyType)
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergySourceType with content type ELEMENT_ONLY
-class EnergySourceType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType):
+class EnergySourceType (teaser.data.bindings.opengis.raw.gml.AbstractFeatureType):
     """Energy being consumed by an energy conversion system. It can be non-renewable (fuel) or renewable. It may be produced by another energy conversion system.The Energy produced by a conversion system and fed-in in the electrical grid or district network is also considered as EnergySource, since it also aims to be consumed by an energy conversion system, in another building (building block)"""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'EnergySourceType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 769, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractFeatureType
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}energyAmount uses Python identifier energyAmount
     __energyAmount = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'energyAmount'), 'energyAmount', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourceType_httpwww_sig3d_orgcitygml2_0energy0_6_0energyAmount', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 776, 10), )
 
-    
+
     energyAmount = property(__energyAmount.value, __energyAmount.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}energyCarrier uses Python identifier energyCarrier
     __energyCarrier = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'energyCarrier'), 'energyCarrier', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourceType_httpwww_sig3d_orgcitygml2_0energy0_6_0energyCarrier', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 777, 10), )
 
-    
+
     energyCarrier = property(__energyCarrier.value, __energyCarrier.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}isConsumedBy uses Python identifier isConsumedBy
     __isConsumedBy = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'isConsumedBy'), 'isConsumedBy', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourceType_httpwww_sig3d_orgcitygml2_0energy0_6_0isConsumedBy', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 778, 10), )
 
-    
+
     isConsumedBy = property(__isConsumedBy.value, __isConsumedBy.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}isProducedBy uses Python identifier isProducedBy
     __isProducedBy = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'isProducedBy'), 'isProducedBy', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourceType_httpwww_sig3d_orgcitygml2_0energy0_6_0isProducedBy', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 779, 10), )
 
-    
+
     isProducedBy = property(__isProducedBy.value, __isProducedBy.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __energyAmount.name() : __energyAmount,
@@ -3295,7 +3295,7 @@ class EnergySourceType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatu
         __isProducedBy.name() : __isProducedBy
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'EnergySourceType', EnergySourceType)
 
@@ -3311,75 +3311,75 @@ class EnergySourcePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergySource uses Python identifier EnergySource
     __EnergySource = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'EnergySource'), 'EnergySource', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourcePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0EnergySource', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 768, 2), )
 
-    
+
     EnergySource = property(__EnergySource.value, __EnergySource.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourcePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourcePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourcePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourcePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourcePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourcePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourcePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_EnergySourcePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -3399,48 +3399,48 @@ Namespace.addCategoryObject('typeBinding', 'EnergySourcePropertyType', EnergySou
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}FacilitiesType with content type ELEMENT_ONLY
-class FacilitiesType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType):
+class FacilitiesType (teaser.data.bindings.opengis.raw.gml.AbstractFeatureType):
     """Facilities and Appliances inside the usage zone or building unit, which consumes and dissipate energy."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'FacilitiesType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 794, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractFeatureType
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}operationSchedule uses Python identifier operationSchedule
     __operationSchedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'operationSchedule'), 'operationSchedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FacilitiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0operationSchedule', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 801, 10), )
 
-    
+
     operationSchedule = property(__operationSchedule.value, __operationSchedule.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}heatDissipation uses Python identifier heatDissipation
     __heatDissipation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'heatDissipation'), 'heatDissipation', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FacilitiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0heatDissipation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 802, 10), )
 
-    
+
     heatDissipation = property(__heatDissipation.value, __heatDissipation.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __operationSchedule.name() : __operationSchedule,
         __heatDissipation.name() : __heatDissipation
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'FacilitiesType', FacilitiesType)
 
@@ -3456,75 +3456,75 @@ class FacilitiesPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}Facilities uses Python identifier Facilities
     __Facilities = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Facilities'), 'Facilities', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FacilitiesPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0Facilities', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 793, 2), )
 
-    
+
     Facilities = property(__Facilities.value, __Facilities.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FacilitiesPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FacilitiesPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FacilitiesPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FacilitiesPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FacilitiesPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FacilitiesPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FacilitiesPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FacilitiesPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -3554,18 +3554,18 @@ class FloorAreaType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}type uses Python identifier type
     __type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FloorAreaType_httpwww_sig3d_orgcitygml2_0energy0_6_0type', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 819, 6), )
 
-    
+
     type = property(__type.value, __type.set, None, '')
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}value uses Python identifier value_
     __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FloorAreaType_httpwww_sig3d_orgcitygml2_0energy0_6_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 826, 6), )
 
-    
+
     value_ = property(__value.value, __value.set, None, None)
 
     _ElementMap.update({
@@ -3573,7 +3573,7 @@ class FloorAreaType (pyxb.binding.basis.complexTypeDefinition):
         __value.name() : __value
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'FloorAreaType', FloorAreaType)
 
@@ -3589,18 +3589,18 @@ class FloorAreaPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}FloorArea uses Python identifier FloorArea
     __FloorArea = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'FloorArea'), 'FloorArea', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_FloorAreaPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0FloorArea', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 816, 2), )
 
-    
+
     FloorArea = property(__FloorArea.value, __FloorArea.set, None, None)
 
     _ElementMap.update({
         __FloorArea.name() : __FloorArea
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'FloorAreaPropertyType', FloorAreaPropertyType)
 
@@ -3616,75 +3616,75 @@ class GasPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}Gas uses Python identifier Gas
     __Gas = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Gas'), 'Gas', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_GasPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0Gas', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 837, 2), )
 
-    
+
     Gas = property(__Gas.value, __Gas.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_GasPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_GasPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_GasPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_GasPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_GasPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_GasPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_GasPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_GasPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -3714,32 +3714,32 @@ class HeatExchangeTypeType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}convectiveFraction uses Python identifier convectiveFraction
     __convectiveFraction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'convectiveFraction'), 'convectiveFraction', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatExchangeTypeType_httpwww_sig3d_orgcitygml2_0energy0_6_0convectiveFraction', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 866, 6), )
 
-    
+
     convectiveFraction = property(__convectiveFraction.value, __convectiveFraction.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}latentFraction uses Python identifier latentFraction
     __latentFraction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'latentFraction'), 'latentFraction', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatExchangeTypeType_httpwww_sig3d_orgcitygml2_0energy0_6_0latentFraction', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 867, 6), )
 
-    
+
     latentFraction = property(__latentFraction.value, __latentFraction.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}radiantFraction uses Python identifier radiantFraction
     __radiantFraction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'radiantFraction'), 'radiantFraction', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatExchangeTypeType_httpwww_sig3d_orgcitygml2_0energy0_6_0radiantFraction', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 868, 6), )
 
-    
+
     radiantFraction = property(__radiantFraction.value, __radiantFraction.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}totalValue uses Python identifier totalValue
     __totalValue = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'totalValue'), 'totalValue', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatExchangeTypeType_httpwww_sig3d_orgcitygml2_0energy0_6_0totalValue', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 869, 6), )
 
-    
+
     totalValue = property(__totalValue.value, __totalValue.set, None, None)
 
     _ElementMap.update({
@@ -3749,7 +3749,7 @@ class HeatExchangeTypeType (pyxb.binding.basis.complexTypeDefinition):
         __totalValue.name() : __totalValue
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'HeatExchangeTypeType', HeatExchangeTypeType)
 
@@ -3765,18 +3765,18 @@ class HeatExchangeTypePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}HeatExchangeType uses Python identifier HeatExchangeType
     __HeatExchangeType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'HeatExchangeType'), 'HeatExchangeType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatExchangeTypePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0HeatExchangeType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 860, 2), )
 
-    
+
     HeatExchangeType = property(__HeatExchangeType.value, __HeatExchangeType.set, None, None)
 
     _ElementMap.update({
         __HeatExchangeType.name() : __HeatExchangeType
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'HeatExchangeTypePropertyType', HeatExchangeTypePropertyType)
 
@@ -3792,75 +3792,75 @@ class HeatPumpPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}HeatPump uses Python identifier HeatPump
     __HeatPump = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'HeatPump'), 'HeatPump', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatPumpPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0HeatPump', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 880, 2), )
 
-    
+
     HeatPump = property(__HeatPump.value, __HeatPump.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatPumpPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatPumpPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatPumpPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatPumpPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatPumpPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatPumpPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatPumpPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatPumpPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -3880,48 +3880,48 @@ Namespace.addCategoryObject('typeBinding', 'HeatPumpPropertyType', HeatPumpPrope
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}HouseholdType with content type ELEMENT_ONLY
-class HouseholdType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType):
+class HouseholdType (teaser.data.bindings.opengis.raw.gml.AbstractFeatureType):
     """Household is a group of persons living in the same dwelling, in the case where occupant type is residents."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'HouseholdType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 913, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractFeatureType
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}residenceType uses Python identifier residenceType
     __residenceType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'residenceType'), 'residenceType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HouseholdType_httpwww_sig3d_orgcitygml2_0energy0_6_0residenceType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 920, 10), )
 
-    
+
     residenceType = property(__residenceType.value, __residenceType.set, None, '')
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}householdType uses Python identifier householdType
     __householdType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'householdType'), 'householdType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HouseholdType_httpwww_sig3d_orgcitygml2_0energy0_6_0householdType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 927, 10), )
 
-    
+
     householdType = property(__householdType.value, __householdType.set, None, '')
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __residenceType.name() : __residenceType,
         __householdType.name() : __householdType
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'HouseholdType', HouseholdType)
 
@@ -3937,75 +3937,75 @@ class HouseholdPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}Household uses Python identifier Household
     __Household = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Household'), 'Household', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HouseholdPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0Household', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 912, 2), )
 
-    
+
     Household = property(__Household.value, __Household.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HouseholdPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HouseholdPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HouseholdPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HouseholdPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HouseholdPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HouseholdPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HouseholdPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HouseholdPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -4025,48 +4025,48 @@ Namespace.addCategoryObject('typeBinding', 'HouseholdPropertyType', HouseholdPro
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ImageTextureType with content type ELEMENT_ONLY
-class ImageTextureType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType):
+class ImageTextureType (teaser.data.bindings.opengis.raw.gml.AbstractFeatureType):
     """This is an X3D element to map a texture to this material. From X3D specification: The ImageTexture node defines a texture map by specifying an image file and general parameters for mapping to geometry. Texture maps are defined in a 2D coordinate system (s, t) that ranges from [0.0, 1.0] in both directions. The bottom edge of the image corresponds to the S-axis of the texture map, and left edge of the image corresponds to the T-axis of the texture map. The lower-left pixel of the image corresponds to s=0, t=0, and the top-right pixel of the image corresponds to s=1, t=1. &lt;!--When fixed: add type="x3d:ImageTexture"--&gt;"""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ImageTextureType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 948, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractFeatureType
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}url uses Python identifier url
     __url = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'url'), 'url', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTextureType_httpwww_sig3d_orgcitygml2_0energy0_6_0url', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 955, 10), )
 
-    
+
     url = property(__url.value, __url.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}repeatS uses Python identifier repeatS
     __repeatS = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'repeatS'), 'repeatS', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTextureType_httpwww_sig3d_orgcitygml2_0energy0_6_0repeatS', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 956, 10), )
 
-    
+
     repeatS = property(__repeatS.value, __repeatS.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}repeatT uses Python identifier repeatT
     __repeatT = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'repeatT'), 'repeatT', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTextureType_httpwww_sig3d_orgcitygml2_0energy0_6_0repeatT', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 957, 10), )
 
-    
+
     repeatT = property(__repeatT.value, __repeatT.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __url.name() : __url,
@@ -4074,7 +4074,7 @@ class ImageTextureType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatu
         __repeatT.name() : __repeatT
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ImageTextureType', ImageTextureType)
 
@@ -4090,75 +4090,75 @@ class ImageTexturePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ImageTexture uses Python identifier ImageTexture
     __ImageTexture = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ImageTexture'), 'ImageTexture', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTexturePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0ImageTexture', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 947, 2), )
 
-    
+
     ImageTexture = property(__ImageTexture.value, __ImageTexture.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTexturePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTexturePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTexturePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTexturePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTexturePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTexturePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTexturePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ImageTexturePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -4188,75 +4188,75 @@ class IrregularTimeSeriesPropertyType (pyxb.binding.basis.complexTypeDefinition)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}IrregularTimeSeries uses Python identifier IrregularTimeSeries
     __IrregularTimeSeries = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'IrregularTimeSeries'), 'IrregularTimeSeries', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0IrregularTimeSeries', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 994, 2), )
 
-    
+
     IrregularTimeSeries = property(__IrregularTimeSeries.value, __IrregularTimeSeries.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -4286,75 +4286,75 @@ class IrregularTimeSeriesFilePropertyType (pyxb.binding.basis.complexTypeDefinit
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}IrregularTimeSeriesFile uses Python identifier IrregularTimeSeriesFile
     __IrregularTimeSeriesFile = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'IrregularTimeSeriesFile'), 'IrregularTimeSeriesFile', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFilePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0IrregularTimeSeriesFile', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1018, 2), )
 
-    
+
     IrregularTimeSeriesFile = property(__IrregularTimeSeriesFile.value, __IrregularTimeSeriesFile.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFilePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -4374,54 +4374,54 @@ Namespace.addCategoryObject('typeBinding', 'IrregularTimeSeriesFilePropertyType'
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}LayerType with content type ELEMENT_ONLY
-class LayerType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class LayerType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """A Layer is a combination of one of more materials, references via a LayerComponent."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'LayerType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1045, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}layerComponent uses Python identifier layerComponent
     __layerComponent = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'layerComponent'), 'layerComponent', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerType_httpwww_sig3d_orgcitygml2_0energy0_6_0layerComponent', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1052, 10), )
 
-    
+
     layerComponent = property(__layerComponent.value, __layerComponent.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __layerComponent.name() : __layerComponent
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'LayerType', LayerType)
 
@@ -4437,75 +4437,75 @@ class LayerPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}Layer uses Python identifier Layer
     __Layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Layer'), 'Layer', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0Layer', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1044, 2), )
 
-    
+
     Layer = property(__Layer.value, __Layer.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -4525,48 +4525,48 @@ Namespace.addCategoryObject('typeBinding', 'LayerPropertyType', LayerPropertyTyp
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}LayerComponentType with content type ELEMENT_ONLY
-class LayerComponentType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType):
+class LayerComponentType (teaser.data.bindings.opengis.raw.gml.AbstractFeatureType):
     """&lt;p&gt; &lt;img src="../png/LayerComponent-Illustration.png"&gt;&lt;/p&gt;"""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'LayerComponentType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1067, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractFeatureType
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}areaFraction uses Python identifier areaFraction
     __areaFraction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'areaFraction'), 'areaFraction', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentType_httpwww_sig3d_orgcitygml2_0energy0_6_0areaFraction', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1074, 10), )
 
-    
+
     areaFraction = property(__areaFraction.value, __areaFraction.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}thickness uses Python identifier thickness
     __thickness = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thickness'), 'thickness', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentType_httpwww_sig3d_orgcitygml2_0energy0_6_0thickness', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1075, 10), )
 
-    
+
     thickness = property(__thickness.value, __thickness.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}material uses Python identifier material
     __material = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'material'), 'material', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentType_httpwww_sig3d_orgcitygml2_0energy0_6_0material', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1076, 10), )
 
-    
+
     material = property(__material.value, __material.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __areaFraction.name() : __areaFraction,
@@ -4574,7 +4574,7 @@ class LayerComponentType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFea
         __material.name() : __material
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'LayerComponentType', LayerComponentType)
 
@@ -4590,75 +4590,75 @@ class LayerComponentPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}LayerComponent uses Python identifier LayerComponent
     __LayerComponent = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'LayerComponent'), 'LayerComponent', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0LayerComponent', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1066, 2), )
 
-    
+
     LayerComponent = property(__LayerComponent.value, __LayerComponent.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LayerComponentPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -4688,75 +4688,75 @@ class LightingFacilitiesPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}LightingFacilities uses Python identifier LightingFacilities
     __LightingFacilities = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'LightingFacilities'), 'LightingFacilities', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LightingFacilitiesPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0LightingFacilities', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1099, 2), )
 
-    
+
     LightingFacilities = property(__LightingFacilities.value, __LightingFacilities.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LightingFacilitiesPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LightingFacilitiesPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LightingFacilitiesPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LightingFacilitiesPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LightingFacilitiesPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LightingFacilitiesPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LightingFacilitiesPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LightingFacilitiesPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -4786,18 +4786,18 @@ class MeasurementPointType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}time uses Python identifier time
     __time = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'time'), 'time', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MeasurementPointType_httpwww_sig3d_orgcitygml2_0energy0_6_0time', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1121, 6), )
 
-    
+
     time = property(__time.value, __time.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}value uses Python identifier value_
     __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MeasurementPointType_httpwww_sig3d_orgcitygml2_0energy0_6_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1122, 6), )
 
-    
+
     value_ = property(__value.value, __value.set, None, None)
 
     _ElementMap.update({
@@ -4805,7 +4805,7 @@ class MeasurementPointType (pyxb.binding.basis.complexTypeDefinition):
         __value.name() : __value
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'MeasurementPointType', MeasurementPointType)
 
@@ -4821,18 +4821,18 @@ class MeasurementPointPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}MeasurementPoint uses Python identifier MeasurementPoint
     __MeasurementPoint = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'MeasurementPoint'), 'MeasurementPoint', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MeasurementPointPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0MeasurementPoint', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1118, 2), )
 
-    
+
     MeasurementPoint = property(__MeasurementPoint.value, __MeasurementPoint.set, None, None)
 
     _ElementMap.update({
         __MeasurementPoint.name() : __MeasurementPoint
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'MeasurementPointPropertyType', MeasurementPointPropertyType)
 
@@ -4848,75 +4848,75 @@ class MechanicalVentilationPropertyType (pyxb.binding.basis.complexTypeDefinitio
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}MechanicalVentilation uses Python identifier MechanicalVentilation
     __MechanicalVentilation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'MechanicalVentilation'), 'MechanicalVentilation', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MechanicalVentilationPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0MechanicalVentilation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1133, 2), )
 
-    
+
     MechanicalVentilation = property(__MechanicalVentilation.value, __MechanicalVentilation.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MechanicalVentilationPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MechanicalVentilationPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MechanicalVentilationPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MechanicalVentilationPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MechanicalVentilationPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MechanicalVentilationPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MechanicalVentilationPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MechanicalVentilationPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -4936,62 +4936,62 @@ Namespace.addCategoryObject('typeBinding', 'MechanicalVentilationPropertyType', 
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}OccupantsType with content type ELEMENT_ONLY
-class OccupantsType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType):
+class OccupantsType (teaser.data.bindings.opengis.raw.gml.AbstractFeatureType):
     """Occupants is an aggregated group of occupants of a usage zone or building unit, which can be residents, workers, visitors etc. """
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'OccupantsType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1164, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractFeatureType
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}heatDissipation uses Python identifier heatDissipation
     __heatDissipation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'heatDissipation'), 'heatDissipation', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsType_httpwww_sig3d_orgcitygml2_0energy0_6_0heatDissipation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1171, 10), )
 
-    
+
     heatDissipation = property(__heatDissipation.value, __heatDissipation.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}numberOfOccupants uses Python identifier numberOfOccupants
     __numberOfOccupants = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'numberOfOccupants'), 'numberOfOccupants', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsType_httpwww_sig3d_orgcitygml2_0energy0_6_0numberOfOccupants', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1172, 10), )
 
-    
+
     numberOfOccupants = property(__numberOfOccupants.value, __numberOfOccupants.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}occupancyRate uses Python identifier occupancyRate
     __occupancyRate = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'occupancyRate'), 'occupancyRate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsType_httpwww_sig3d_orgcitygml2_0energy0_6_0occupancyRate', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1173, 10), )
 
-    
+
     occupancyRate = property(__occupancyRate.value, __occupancyRate.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}occupantType uses Python identifier occupantType
     __occupantType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'occupantType'), 'occupantType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsType_httpwww_sig3d_orgcitygml2_0energy0_6_0occupantType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1174, 10), )
 
-    
+
     occupantType = property(__occupantType.value, __occupantType.set, None, '')
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}consiststOf uses Python identifier consiststOf
     __consiststOf = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'consiststOf'), 'consiststOf', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsType_httpwww_sig3d_orgcitygml2_0energy0_6_0consiststOf', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1181, 10), )
 
-    
+
     consiststOf = property(__consiststOf.value, __consiststOf.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __heatDissipation.name() : __heatDissipation,
@@ -5001,7 +5001,7 @@ class OccupantsType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureT
         __consiststOf.name() : __consiststOf
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'OccupantsType', OccupantsType)
 
@@ -5017,75 +5017,75 @@ class OccupantsPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}Occupants uses Python identifier Occupants
     __Occupants = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Occupants'), 'Occupants', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0Occupants', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1163, 2), )
 
-    
+
     Occupants = property(__Occupants.value, __Occupants.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OccupantsPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -5115,32 +5115,32 @@ class OpticalPropertiesType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}emittance uses Python identifier emittance
     __emittance = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'emittance'), 'emittance', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OpticalPropertiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0emittance', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1201, 6), )
 
-    
+
     emittance = property(__emittance.value, __emittance.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}reflectance uses Python identifier reflectance
     __reflectance = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'reflectance'), 'reflectance', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OpticalPropertiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0reflectance', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1202, 6), )
 
-    
+
     reflectance = property(__reflectance.value, __reflectance.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}transmittance uses Python identifier transmittance
     __transmittance = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'transmittance'), 'transmittance', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OpticalPropertiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0transmittance', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1203, 6), )
 
-    
+
     transmittance = property(__transmittance.value, __transmittance.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}glazingRatio uses Python identifier glazingRatio
     __glazingRatio = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'glazingRatio'), 'glazingRatio', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OpticalPropertiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0glazingRatio', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1204, 6), )
 
-    
+
     glazingRatio = property(__glazingRatio.value, __glazingRatio.set, None, None)
 
     _ElementMap.update({
@@ -5150,7 +5150,7 @@ class OpticalPropertiesType (pyxb.binding.basis.complexTypeDefinition):
         __glazingRatio.name() : __glazingRatio
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'OpticalPropertiesType', OpticalPropertiesType)
 
@@ -5166,18 +5166,18 @@ class OpticalPropertiesPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}OpticalProperties uses Python identifier OpticalProperties
     __OpticalProperties = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'OpticalProperties'), 'OpticalProperties', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_OpticalPropertiesPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0OpticalProperties', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1195, 2), )
 
-    
+
     OpticalProperties = property(__OpticalProperties.value, __OpticalProperties.set, None, None)
 
     _ElementMap.update({
         __OpticalProperties.name() : __OpticalProperties
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'OpticalPropertiesPropertyType', OpticalPropertiesPropertyType)
 
@@ -5193,75 +5193,75 @@ class PhotovoltaicSystemPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}PhotovoltaicSystem uses Python identifier PhotovoltaicSystem
     __PhotovoltaicSystem = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'PhotovoltaicSystem'), 'PhotovoltaicSystem', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PhotovoltaicSystemPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0PhotovoltaicSystem', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1215, 2), )
 
-    
+
     PhotovoltaicSystem = property(__PhotovoltaicSystem.value, __PhotovoltaicSystem.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PhotovoltaicSystemPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PhotovoltaicSystemPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PhotovoltaicSystemPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PhotovoltaicSystemPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PhotovoltaicSystemPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PhotovoltaicSystemPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PhotovoltaicSystemPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PhotovoltaicSystemPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -5291,75 +5291,75 @@ class PowerDistributionSystemPropertyType (pyxb.binding.basis.complexTypeDefinit
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}PowerDistributionSystem uses Python identifier PowerDistributionSystem
     __PowerDistributionSystem = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'PowerDistributionSystem'), 'PowerDistributionSystem', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerDistributionSystemPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0PowerDistributionSystem', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1234, 2), )
 
-    
+
     PowerDistributionSystem = property(__PowerDistributionSystem.value, __PowerDistributionSystem.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerDistributionSystemPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerDistributionSystemPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerDistributionSystemPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerDistributionSystemPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerDistributionSystemPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerDistributionSystemPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerDistributionSystemPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerDistributionSystemPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -5389,75 +5389,75 @@ class PowerStorageSystemPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}PowerStorageSystem uses Python identifier PowerStorageSystem
     __PowerStorageSystem = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'PowerStorageSystem'), 'PowerStorageSystem', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerStorageSystemPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0PowerStorageSystem', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1254, 2), )
 
-    
+
     PowerStorageSystem = property(__PowerStorageSystem.value, __PowerStorageSystem.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerStorageSystemPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerStorageSystemPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerStorageSystemPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerStorageSystemPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerStorageSystemPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerStorageSystemPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerStorageSystemPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerStorageSystemPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -5487,25 +5487,25 @@ class ReflectanceType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}fraction uses Python identifier fraction
     __fraction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'fraction'), 'fraction', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ReflectanceType_httpwww_sig3d_orgcitygml2_0energy0_6_0fraction', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1280, 6), )
 
-    
+
     fraction = property(__fraction.value, __fraction.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}surface uses Python identifier surface
     __surface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'surface'), 'surface', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ReflectanceType_httpwww_sig3d_orgcitygml2_0energy0_6_0surface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1281, 6), )
 
-    
+
     surface = property(__surface.value, __surface.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}wavelengthRange uses Python identifier wavelengthRange
     __wavelengthRange = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'wavelengthRange'), 'wavelengthRange', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ReflectanceType_httpwww_sig3d_orgcitygml2_0energy0_6_0wavelengthRange', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1282, 6), )
 
-    
+
     wavelengthRange = property(__wavelengthRange.value, __wavelengthRange.set, None, None)
 
     _ElementMap.update({
@@ -5514,7 +5514,7 @@ class ReflectanceType (pyxb.binding.basis.complexTypeDefinition):
         __wavelengthRange.name() : __wavelengthRange
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ReflectanceType', ReflectanceType)
 
@@ -5530,18 +5530,18 @@ class ReflectancePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}Reflectance uses Python identifier Reflectance
     __Reflectance = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Reflectance'), 'Reflectance', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ReflectancePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0Reflectance', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1274, 2), )
 
-    
+
     Reflectance = property(__Reflectance.value, __Reflectance.set, None, None)
 
     _ElementMap.update({
         __Reflectance.name() : __Reflectance
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ReflectancePropertyType', ReflectancePropertyType)
 
@@ -5557,25 +5557,25 @@ class RefurbishmentMeasureType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}dateOfRefurbishment uses Python identifier dateOfRefurbishment
     __dateOfRefurbishment = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'dateOfRefurbishment'), 'dateOfRefurbishment', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RefurbishmentMeasureType_httpwww_sig3d_orgcitygml2_0energy0_6_0dateOfRefurbishment', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1299, 6), )
 
-    
+
     dateOfRefurbishment = property(__dateOfRefurbishment.value, __dateOfRefurbishment.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}levelOfRefurbishment uses Python identifier levelOfRefurbishment
     __levelOfRefurbishment = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'levelOfRefurbishment'), 'levelOfRefurbishment', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RefurbishmentMeasureType_httpwww_sig3d_orgcitygml2_0energy0_6_0levelOfRefurbishment', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1300, 6), )
 
-    
+
     levelOfRefurbishment = property(__levelOfRefurbishment.value, __levelOfRefurbishment.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}descriptionOfRefurbishment uses Python identifier descriptionOfRefurbishment
     __descriptionOfRefurbishment = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'descriptionOfRefurbishment'), 'descriptionOfRefurbishment', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RefurbishmentMeasureType_httpwww_sig3d_orgcitygml2_0energy0_6_0descriptionOfRefurbishment', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1301, 6), )
 
-    
+
     descriptionOfRefurbishment = property(__descriptionOfRefurbishment.value, __descriptionOfRefurbishment.set, None, None)
 
     _ElementMap.update({
@@ -5584,7 +5584,7 @@ class RefurbishmentMeasureType (pyxb.binding.basis.complexTypeDefinition):
         __descriptionOfRefurbishment.name() : __descriptionOfRefurbishment
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'RefurbishmentMeasureType', RefurbishmentMeasureType)
 
@@ -5600,18 +5600,18 @@ class RefurbishmentMeasurePropertyType (pyxb.binding.basis.complexTypeDefinition
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}RefurbishmentMeasure uses Python identifier RefurbishmentMeasure
     __RefurbishmentMeasure = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'RefurbishmentMeasure'), 'RefurbishmentMeasure', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RefurbishmentMeasurePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0RefurbishmentMeasure', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1293, 2), )
 
-    
+
     RefurbishmentMeasure = property(__RefurbishmentMeasure.value, __RefurbishmentMeasure.set, None, None)
 
     _ElementMap.update({
         __RefurbishmentMeasure.name() : __RefurbishmentMeasure
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'RefurbishmentMeasurePropertyType', RefurbishmentMeasurePropertyType)
 
@@ -5627,75 +5627,75 @@ class RegularTimeSeriesPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}RegularTimeSeries uses Python identifier RegularTimeSeries
     __RegularTimeSeries = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'RegularTimeSeries'), 'RegularTimeSeries', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0RegularTimeSeries', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1312, 2), )
 
-    
+
     RegularTimeSeries = property(__RegularTimeSeries.value, __RegularTimeSeries.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -5725,75 +5725,75 @@ class RegularTimeSeriesFilePropertyType (pyxb.binding.basis.complexTypeDefinitio
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}RegularTimeSeriesFile uses Python identifier RegularTimeSeriesFile
     __RegularTimeSeriesFile = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'RegularTimeSeriesFile'), 'RegularTimeSeriesFile', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFilePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0RegularTimeSeriesFile', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1336, 2), )
 
-    
+
     RegularTimeSeriesFile = property(__RegularTimeSeriesFile.value, __RegularTimeSeriesFile.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFilePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFilePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -5823,25 +5823,25 @@ class ShadingTypeType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}maximumCoverRatio uses Python identifier maximumCoverRatio
     __maximumCoverRatio = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'maximumCoverRatio'), 'maximumCoverRatio', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ShadingTypeType_httpwww_sig3d_orgcitygml2_0energy0_6_0maximumCoverRatio', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1369, 6), )
 
-    
+
     maximumCoverRatio = property(__maximumCoverRatio.value, __maximumCoverRatio.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}name uses Python identifier name
     __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'name'), 'name', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ShadingTypeType_httpwww_sig3d_orgcitygml2_0energy0_6_0name', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1370, 6), )
 
-    
+
     name = property(__name.value, __name.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}transmittance uses Python identifier transmittance
     __transmittance = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'transmittance'), 'transmittance', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ShadingTypeType_httpwww_sig3d_orgcitygml2_0energy0_6_0transmittance', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1371, 6), )
 
-    
+
     transmittance = property(__transmittance.value, __transmittance.set, None, None)
 
     _ElementMap.update({
@@ -5850,7 +5850,7 @@ class ShadingTypeType (pyxb.binding.basis.complexTypeDefinition):
         __transmittance.name() : __transmittance
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ShadingTypeType', ShadingTypeType)
 
@@ -5866,18 +5866,18 @@ class ShadingTypePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ShadingType uses Python identifier ShadingType
     __ShadingType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ShadingType'), 'ShadingType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ShadingTypePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0ShadingType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1363, 2), )
 
-    
+
     ShadingType = property(__ShadingType.value, __ShadingType.set, None, None)
 
     _ElementMap.update({
         __ShadingType.name() : __ShadingType
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ShadingTypePropertyType', ShadingTypePropertyType)
 
@@ -5893,75 +5893,75 @@ class SolarThermalSystemPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}SolarThermalSystem uses Python identifier SolarThermalSystem
     __SolarThermalSystem = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'SolarThermalSystem'), 'SolarThermalSystem', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarThermalSystemPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0SolarThermalSystem', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1382, 2), )
 
-    
+
     SolarThermalSystem = property(__SolarThermalSystem.value, __SolarThermalSystem.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarThermalSystemPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarThermalSystemPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarThermalSystemPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarThermalSystemPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarThermalSystemPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarThermalSystemPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarThermalSystemPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarThermalSystemPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -5991,75 +5991,75 @@ class SolidMaterialPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}SolidMaterial uses Python identifier SolidMaterial
     __SolidMaterial = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'SolidMaterial'), 'SolidMaterial', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0SolidMaterial', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1404, 2), )
 
-    
+
     SolidMaterial = property(__SolidMaterial.value, __SolidMaterial.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -6079,48 +6079,48 @@ Namespace.addCategoryObject('typeBinding', 'SolidMaterialPropertyType', SolidMat
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}SystemOperationType with content type ELEMENT_ONLY
-class SystemOperationType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType):
+class SystemOperationType (teaser.data.bindings.opengis.raw.gml.AbstractFeatureType):
     """Operation mode details the operation of the energy conversion system for a specific end-use and operation time."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'SystemOperationType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1443, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFeatureType
-    
+    _ElementMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.raw.gml.AbstractFeatureType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.raw.gml.AbstractFeatureType
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}endUse uses Python identifier endUse
     __endUse = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'endUse'), 'endUse', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationType_httpwww_sig3d_orgcitygml2_0energy0_6_0endUse', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1450, 10), )
 
-    
+
     endUse = property(__endUse.value, __endUse.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}operationTime uses Python identifier operationTime
     __operationTime = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'operationTime'), 'operationTime', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationType_httpwww_sig3d_orgcitygml2_0energy0_6_0operationTime', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1451, 10), )
 
-    
+
     operationTime = property(__operationTime.value, __operationTime.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}yearlyGlobalEfficiency uses Python identifier yearlyGlobalEfficiency
     __yearlyGlobalEfficiency = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'yearlyGlobalEfficiency'), 'yearlyGlobalEfficiency', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationType_httpwww_sig3d_orgcitygml2_0energy0_6_0yearlyGlobalEfficiency', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1452, 10), )
 
-    
+
     yearlyGlobalEfficiency = property(__yearlyGlobalEfficiency.value, __yearlyGlobalEfficiency.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __endUse.name() : __endUse,
@@ -6128,7 +6128,7 @@ class SystemOperationType (teaser.Data.SchemaBindings.opengis.raw.gml.AbstractFe
         __yearlyGlobalEfficiency.name() : __yearlyGlobalEfficiency
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'SystemOperationType', SystemOperationType)
 
@@ -6144,75 +6144,75 @@ class SystemOperationPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}SystemOperation uses Python identifier SystemOperation
     __SystemOperation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'SystemOperation'), 'SystemOperation', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0SystemOperation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1442, 2), )
 
-    
+
     SystemOperation = property(__SystemOperation.value, __SystemOperation.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SystemOperationPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -6232,90 +6232,90 @@ Namespace.addCategoryObject('typeBinding', 'SystemOperationPropertyType', System
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ThermalBoundaryType with content type ELEMENT_ONLY
-class ThermalBoundaryType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class ThermalBoundaryType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """Thermal Boundaries delimit Thermal Zones. Thermal Boundaries represent physical relationships between two Thermal Zones or a Thermal Zone and the building environment."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ThermalBoundaryType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1467, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}azimuth uses Python identifier azimuth
     __azimuth = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'azimuth'), 'azimuth', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryType_httpwww_sig3d_orgcitygml2_0energy0_6_0azimuth', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1474, 10), )
 
-    
+
     azimuth = property(__azimuth.value, __azimuth.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}inclination uses Python identifier inclination
     __inclination = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inclination'), 'inclination', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryType_httpwww_sig3d_orgcitygml2_0energy0_6_0inclination', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1475, 10), )
 
-    
+
     inclination = property(__inclination.value, __inclination.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}thermalBoundaryType uses Python identifier thermalBoundaryType
     __thermalBoundaryType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thermalBoundaryType'), 'thermalBoundaryType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryType_httpwww_sig3d_orgcitygml2_0energy0_6_0thermalBoundaryType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1476, 10), )
 
-    
+
     thermalBoundaryType = property(__thermalBoundaryType.value, __thermalBoundaryType.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}surfaceGeometry uses Python identifier surfaceGeometry
     __surfaceGeometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'surfaceGeometry'), 'surfaceGeometry', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryType_httpwww_sig3d_orgcitygml2_0energy0_6_0surfaceGeometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1477, 10), )
 
-    
+
     surfaceGeometry = property(__surfaceGeometry.value, __surfaceGeometry.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}partOf uses Python identifier partOf
     __partOf = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'partOf'), 'partOf', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryType_httpwww_sig3d_orgcitygml2_0energy0_6_0partOf', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1478, 10), )
 
-    
+
     partOf = property(__partOf.value, __partOf.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}composedOf uses Python identifier composedOf
     __composedOf = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'composedOf'), 'composedOf', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryType_httpwww_sig3d_orgcitygml2_0energy0_6_0composedOf', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1479, 10), )
 
-    
+
     composedOf = property(__composedOf.value, __composedOf.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}correspondsTo uses Python identifier correspondsTo
     __correspondsTo = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'correspondsTo'), 'correspondsTo', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryType_httpwww_sig3d_orgcitygml2_0energy0_6_0correspondsTo', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1480, 10), )
 
-    
+
     correspondsTo = property(__correspondsTo.value, __correspondsTo.set, None, '')
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __azimuth.name() : __azimuth,
@@ -6327,7 +6327,7 @@ class ThermalBoundaryType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.A
         __correspondsTo.name() : __correspondsTo
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ThermalBoundaryType', ThermalBoundaryType)
 
@@ -6343,75 +6343,75 @@ class ThermalBoundaryPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ThermalBoundary uses Python identifier ThermalBoundary
     __ThermalBoundary = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ThermalBoundary'), 'ThermalBoundary', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0ThermalBoundary', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1466, 2), )
 
-    
+
     ThermalBoundary = property(__ThermalBoundary.value, __ThermalBoundary.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalBoundaryPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -6431,69 +6431,69 @@ Namespace.addCategoryObject('typeBinding', 'ThermalBoundaryPropertyType', Therma
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ThermalComponentType with content type ELEMENT_ONLY
-class ThermalComponentType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class ThermalComponentType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """Part of the thermal boundary surface corresponding to an homogeneous construction component (e.g. windows, wall, insulated part of a wall etc.)"""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ThermalComponentType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1519, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}area uses Python identifier area
     __area = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'area'), 'area', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentType_httpwww_sig3d_orgcitygml2_0energy0_6_0area', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1526, 10), )
 
-    
+
     area = property(__area.value, __area.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}isGroundCoupled uses Python identifier isGroundCoupled
     __isGroundCoupled = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'isGroundCoupled'), 'isGroundCoupled', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentType_httpwww_sig3d_orgcitygml2_0energy0_6_0isGroundCoupled', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1527, 10), )
 
-    
+
     isGroundCoupled = property(__isGroundCoupled.value, __isGroundCoupled.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}isSunExposed uses Python identifier isSunExposed
     __isSunExposed = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'isSunExposed'), 'isSunExposed', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentType_httpwww_sig3d_orgcitygml2_0energy0_6_0isSunExposed', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1528, 10), )
 
-    
+
     isSunExposed = property(__isSunExposed.value, __isSunExposed.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}relates uses Python identifier relates
     __relates = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'relates'), 'relates', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentType_httpwww_sig3d_orgcitygml2_0energy0_6_0relates', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1529, 10), )
 
-    
+
     relates = property(__relates.value, __relates.set, None, '')
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __area.name() : __area,
@@ -6502,7 +6502,7 @@ class ThermalComponentType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.
         __relates.name() : __relates
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ThermalComponentType', ThermalComponentType)
 
@@ -6518,75 +6518,75 @@ class ThermalComponentPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ThermalComponent uses Python identifier ThermalComponent
     __ThermalComponent = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ThermalComponent'), 'ThermalComponent', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0ThermalComponent', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1518, 2), )
 
-    
+
     ThermalComponent = property(__ThermalComponent.value, __ThermalComponent.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalComponentPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -6616,75 +6616,75 @@ class ThermalDistributionSystemPropertyType (pyxb.binding.basis.complexTypeDefin
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ThermalDistributionSystem uses Python identifier ThermalDistributionSystem
     __ThermalDistributionSystem = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ThermalDistributionSystem'), 'ThermalDistributionSystem', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0ThermalDistributionSystem', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1549, 2), )
 
-    
+
     ThermalDistributionSystem = property(__ThermalDistributionSystem.value, __ThermalDistributionSystem.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -6714,75 +6714,75 @@ class ThermalStorageSystemPropertyType (pyxb.binding.basis.complexTypeDefinition
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ThermalStorageSystem uses Python identifier ThermalStorageSystem
     __ThermalStorageSystem = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ThermalStorageSystem'), 'ThermalStorageSystem', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0ThermalStorageSystem', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1573, 2), )
 
-    
+
     ThermalStorageSystem = property(__ThermalStorageSystem.value, __ThermalStorageSystem.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -6802,7 +6802,7 @@ Namespace.addCategoryObject('typeBinding', 'ThermalStorageSystemPropertyType', T
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ThermalZoneType with content type ELEMENT_ONLY
-class ThermalZoneType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class ThermalZoneType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """A thermal zone is a zone of a building which serves as unit for the building heating and cooling simulation. For the simulation, a thermal zone is considered as isothermal.
 It is a semantic object, which may be or not related to a geometric entity. """
     _TypeDefinition = None
@@ -6810,125 +6810,125 @@ It is a semantic object, which may be or not related to a geometric entity. """
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'ThermalZoneType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1596, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}additionalThermalBridgeUValue uses Python identifier additionalThermalBridgeUValue
     __additionalThermalBridgeUValue = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'additionalThermalBridgeUValue'), 'additionalThermalBridgeUValue', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0additionalThermalBridgeUValue', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1604, 10), )
 
-    
+
     additionalThermalBridgeUValue = property(__additionalThermalBridgeUValue.value, __additionalThermalBridgeUValue.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}effectiveThermalCapacity uses Python identifier effectiveThermalCapacity
     __effectiveThermalCapacity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'effectiveThermalCapacity'), 'effectiveThermalCapacity', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0effectiveThermalCapacity', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1605, 10), )
 
-    
+
     effectiveThermalCapacity = property(__effectiveThermalCapacity.value, __effectiveThermalCapacity.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}floorArea uses Python identifier floorArea
     __floorArea = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'floorArea'), 'floorArea', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0floorArea', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1606, 10), )
 
-    
+
     floorArea = property(__floorArea.value, __floorArea.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}grossVolume uses Python identifier grossVolume
     __grossVolume = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'grossVolume'), 'grossVolume', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0grossVolume', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1607, 10), )
 
-    
+
     grossVolume = property(__grossVolume.value, __grossVolume.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}relates uses Python identifier relates
     __relates = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'relates'), 'relates', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0relates', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1608, 10), )
 
-    
+
     relates = property(__relates.value, __relates.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}indirectlyHeatedAreaRatio uses Python identifier indirectlyHeatedAreaRatio
     __indirectlyHeatedAreaRatio = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'indirectlyHeatedAreaRatio'), 'indirectlyHeatedAreaRatio', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0indirectlyHeatedAreaRatio', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1609, 10), )
 
-    
+
     indirectlyHeatedAreaRatio = property(__indirectlyHeatedAreaRatio.value, __indirectlyHeatedAreaRatio.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}infiltrationRate uses Python identifier infiltrationRate
     __infiltrationRate = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'infiltrationRate'), 'infiltrationRate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0infiltrationRate', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1610, 10), )
 
-    
+
     infiltrationRate = property(__infiltrationRate.value, __infiltrationRate.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}isCooled uses Python identifier isCooled
     __isCooled = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'isCooled'), 'isCooled', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0isCooled', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1611, 10), )
 
-    
+
     isCooled = property(__isCooled.value, __isCooled.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}isHeated uses Python identifier isHeated
     __isHeated = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'isHeated'), 'isHeated', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0isHeated', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1612, 10), )
 
-    
+
     isHeated = property(__isHeated.value, __isHeated.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}netVolume uses Python identifier netVolume
     __netVolume = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'netVolume'), 'netVolume', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0netVolume', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1613, 10), )
 
-    
+
     netVolume = property(__netVolume.value, __netVolume.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}volumeGeometry uses Python identifier volumeGeometry
     __volumeGeometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'volumeGeometry'), 'volumeGeometry', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0volumeGeometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1614, 10), )
 
-    
+
     volumeGeometry = property(__volumeGeometry.value, __volumeGeometry.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}interiorRoom uses Python identifier interiorRoom
     __interiorRoom = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'interiorRoom'), 'interiorRoom', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0interiorRoom', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1615, 10), )
 
-    
+
     interiorRoom = property(__interiorRoom.value, __interiorRoom.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}boundedBy uses Python identifier boundedBy_
     __boundedBy_ = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'boundedBy'), 'boundedBy_', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0boundedBy', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1616, 10), )
 
-    
+
     boundedBy_ = property(__boundedBy_.value, __boundedBy_.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __additionalThermalBridgeUValue.name() : __additionalThermalBridgeUValue,
@@ -6946,7 +6946,7 @@ It is a semantic object, which may be or not related to a geometric entity. """
         __boundedBy_.name() : __boundedBy_
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ThermalZoneType', ThermalZoneType)
 
@@ -6962,75 +6962,75 @@ class ThermalZonePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ThermalZone uses Python identifier ThermalZone
     __ThermalZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ThermalZone'), 'ThermalZone', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZonePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0ThermalZone', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1595, 2), )
 
-    
+
     ThermalZone = property(__ThermalZone.value, __ThermalZone.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZonePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZonePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZonePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZonePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZonePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZonePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZonePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalZonePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -7060,75 +7060,75 @@ class TimeSeriesSchedulePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}TimeSeriesSchedule uses Python identifier TimeSeriesSchedule
     __TimeSeriesSchedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'TimeSeriesSchedule'), 'TimeSeriesSchedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesSchedulePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0TimeSeriesSchedule', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1630, 2), )
 
-    
+
     TimeSeriesSchedule = property(__TimeSeriesSchedule.value, __TimeSeriesSchedule.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesSchedulePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesSchedulePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesSchedulePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesSchedulePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesSchedulePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesSchedulePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesSchedulePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesSchedulePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -7158,32 +7158,32 @@ class TimeValuesPropertiesType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}acquisitionMethod uses Python identifier acquisitionMethod
     __acquisitionMethod = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'acquisitionMethod'), 'acquisitionMethod', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeValuesPropertiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0acquisitionMethod', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1658, 6), )
 
-    
+
     acquisitionMethod = property(__acquisitionMethod.value, __acquisitionMethod.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}interpolationType uses Python identifier interpolationType
     __interpolationType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'interpolationType'), 'interpolationType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeValuesPropertiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0interpolationType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1659, 6), )
 
-    
+
     interpolationType = property(__interpolationType.value, __interpolationType.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}qualityDescription uses Python identifier qualityDescription
     __qualityDescription = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'qualityDescription'), 'qualityDescription', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeValuesPropertiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0qualityDescription', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1660, 6), )
 
-    
+
     qualityDescription = property(__qualityDescription.value, __qualityDescription.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}source uses Python identifier source
     __source = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'source'), 'source', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeValuesPropertiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0source', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1661, 6), )
 
-    
+
     source = property(__source.value, __source.set, None, None)
 
     _ElementMap.update({
@@ -7193,7 +7193,7 @@ class TimeValuesPropertiesType (pyxb.binding.basis.complexTypeDefinition):
         __source.name() : __source
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'TimeValuesPropertiesType', TimeValuesPropertiesType)
 
@@ -7209,18 +7209,18 @@ class TimeValuesPropertiesPropertyType (pyxb.binding.basis.complexTypeDefinition
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}TimeValuesProperties uses Python identifier TimeValuesProperties
     __TimeValuesProperties = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'TimeValuesProperties'), 'TimeValuesProperties', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeValuesPropertiesPropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0TimeValuesProperties', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1652, 2), )
 
-    
+
     TimeValuesProperties = property(__TimeValuesProperties.value, __TimeValuesProperties.set, None, None)
 
     _ElementMap.update({
         __TimeValuesProperties.name() : __TimeValuesProperties
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'TimeValuesPropertiesPropertyType', TimeValuesPropertiesPropertyType)
 
@@ -7236,18 +7236,18 @@ class TransmittanceType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}fraction uses Python identifier fraction
     __fraction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'fraction'), 'fraction', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TransmittanceType_httpwww_sig3d_orgcitygml2_0energy0_6_0fraction', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1678, 6), )
 
-    
+
     fraction = property(__fraction.value, __fraction.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}wavelengthRange uses Python identifier wavelengthRange
     __wavelengthRange = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'wavelengthRange'), 'wavelengthRange', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TransmittanceType_httpwww_sig3d_orgcitygml2_0energy0_6_0wavelengthRange', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1679, 6), )
 
-    
+
     wavelengthRange = property(__wavelengthRange.value, __wavelengthRange.set, None, None)
 
     _ElementMap.update({
@@ -7255,7 +7255,7 @@ class TransmittanceType (pyxb.binding.basis.complexTypeDefinition):
         __wavelengthRange.name() : __wavelengthRange
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'TransmittanceType', TransmittanceType)
 
@@ -7271,135 +7271,135 @@ class TransmittancePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}Transmittance uses Python identifier Transmittance
     __Transmittance = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Transmittance'), 'Transmittance', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TransmittancePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0Transmittance', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1672, 2), )
 
-    
+
     Transmittance = property(__Transmittance.value, __Transmittance.set, None, None)
 
     _ElementMap.update({
         __Transmittance.name() : __Transmittance
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'TransmittancePropertyType', TransmittancePropertyType)
 
 
 # Complex type {http://www.sig3d.org/citygml/2.0/energy/0.6.0}UsageZoneType with content type ELEMENT_ONLY
-class UsageZoneType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class UsageZoneType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """A usage zone is a zone of a building with homogeneous usage type."""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'UsageZoneType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1691, 2)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}coolingSchedule uses Python identifier coolingSchedule
     __coolingSchedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'coolingSchedule'), 'coolingSchedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0coolingSchedule', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1698, 10), )
 
-    
+
     coolingSchedule = property(__coolingSchedule.value, __coolingSchedule.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}heatingSchedule uses Python identifier heatingSchedule
     __heatingSchedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'heatingSchedule'), 'heatingSchedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0heatingSchedule', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1699, 10), )
 
-    
+
     heatingSchedule = property(__heatingSchedule.value, __heatingSchedule.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}usageZoneClass uses Python identifier usageZoneClass
     __usageZoneClass = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usageZoneClass'), 'usageZoneClass', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0usageZoneClass', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1700, 10), )
 
-    
+
     usageZoneClass = property(__usageZoneClass.value, __usageZoneClass.set, None, '')
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}usedFloors uses Python identifier usedFloors
     __usedFloors = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usedFloors'), 'usedFloors', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0usedFloors', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1707, 10), )
 
-    
+
     usedFloors = property(__usedFloors.value, __usedFloors.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}ventilationSchedule uses Python identifier ventilationSchedule
     __ventilationSchedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ventilationSchedule'), 'ventilationSchedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0ventilationSchedule', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1708, 10), )
 
-    
+
     ventilationSchedule = property(__ventilationSchedule.value, __ventilationSchedule.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}floorArea uses Python identifier floorArea
     __floorArea = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'floorArea'), 'floorArea', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0floorArea', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1709, 10), )
 
-    
+
     floorArea = property(__floorArea.value, __floorArea.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}volumeGeometry uses Python identifier volumeGeometry
     __volumeGeometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'volumeGeometry'), 'volumeGeometry', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0volumeGeometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1710, 10), )
 
-    
+
     volumeGeometry = property(__volumeGeometry.value, __volumeGeometry.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}internalGains uses Python identifier internalGains
     __internalGains = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'internalGains'), 'internalGains', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0internalGains', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1711, 10), )
 
-    
+
     internalGains = property(__internalGains.value, __internalGains.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}contains uses Python identifier contains
     __contains = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'contains'), 'contains', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0contains', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1712, 10), )
 
-    
+
     contains = property(__contains.value, __contains.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}occupiedBy uses Python identifier occupiedBy
     __occupiedBy = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'occupiedBy'), 'occupiedBy', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0occupiedBy', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1713, 10), )
 
-    
+
     occupiedBy = property(__occupiedBy.value, __occupiedBy.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}has uses Python identifier has
     __has = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'has'), 'has', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZoneType_httpwww_sig3d_orgcitygml2_0energy0_6_0has', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1714, 10), )
 
-    
+
     has = property(__has.value, __has.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __coolingSchedule.name() : __coolingSchedule,
@@ -7415,7 +7415,7 @@ class UsageZoneType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.Abstrac
         __has.name() : __has
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'UsageZoneType', UsageZoneType)
 
@@ -7431,75 +7431,75 @@ class UsageZonePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}UsageZone uses Python identifier UsageZone
     __UsageZone = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'UsageZone'), 'UsageZone', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZonePropertyType_httpwww_sig3d_orgcitygml2_0energy0_6_0UsageZone', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1690, 2), )
 
-    
+
     UsageZone = property(__UsageZone.value, __UsageZone.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZonePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZonePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZonePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZonePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZonePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZonePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZonePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_UsageZonePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -7529,71 +7529,71 @@ class SolarEnergySystemType (EnergyConversionSystemType):
     _ElementMap = EnergyConversionSystemType._ElementMap.copy()
     _AttributeMap = EnergyConversionSystemType._AttributeMap.copy()
     # Base type is EnergyConversionSystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}collectorSurface uses Python identifier collectorSurface
     __collectorSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'collectorSurface'), 'collectorSurface', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0collectorSurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 128, 10), )
 
-    
+
     collectorSurface = property(__collectorSurface.value, __collectorSurface.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}panelAzimuth uses Python identifier panelAzimuth
     __panelAzimuth = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'panelAzimuth'), 'panelAzimuth', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0panelAzimuth', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 129, 10), )
 
-    
+
     panelAzimuth = property(__panelAzimuth.value, __panelAzimuth.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}panelInclination uses Python identifier panelInclination
     __panelInclination = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'panelInclination'), 'panelInclination', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0panelInclination', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 130, 10), )
 
-    
+
     panelInclination = property(__panelInclination.value, __panelInclination.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedOn uses Python identifier installedOn
     __installedOn = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'installedOn'), 'installedOn', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarEnergySystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0installedOn', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 131, 10), )
 
-    
+
     installedOn = property(__installedOn.value, __installedOn.set, None, '')
 
-    
+
     # Element efficiencyIndicator ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}efficiencyIndicator) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedNominalPower ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedNominalPower) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element model ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}model) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element nominalEfficiency ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}nominalEfficiency) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element number ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}number) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element productAndInstallationDocument ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}productAndInstallationDocument) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element yearOfManufacture ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}yearOfManufacture) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element refurbishmentMeasureOnEnergySystem ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}refurbishmentMeasureOnEnergySystem) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedIn ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedIn) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element has ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}has) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element consumes ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}consumes) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element produces ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}produces) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element provides ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}provides) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __collectorSurface.name() : __collectorSurface,
@@ -7602,7 +7602,7 @@ class SolarEnergySystemType (EnergyConversionSystemType):
         __installedOn.name() : __installedOn
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', '_SolarEnergySystemType', SolarEnergySystemType)
 
@@ -7618,56 +7618,56 @@ class BoilerType (EnergyConversionSystemType):
     _ElementMap = EnergyConversionSystemType._ElementMap.copy()
     _AttributeMap = EnergyConversionSystemType._AttributeMap.copy()
     # Base type is EnergyConversionSystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}condensation uses Python identifier condensation
     __condensation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'condensation'), 'condensation', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_BoilerType_httpwww_sig3d_orgcitygml2_0energy0_6_0condensation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 221, 10), )
 
-    
+
     condensation = property(__condensation.value, __condensation.set, None, None)
 
-    
+
     # Element efficiencyIndicator ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}efficiencyIndicator) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedNominalPower ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedNominalPower) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element model ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}model) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element nominalEfficiency ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}nominalEfficiency) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element number ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}number) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element productAndInstallationDocument ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}productAndInstallationDocument) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element yearOfManufacture ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}yearOfManufacture) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element refurbishmentMeasureOnEnergySystem ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}refurbishmentMeasureOnEnergySystem) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedIn ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedIn) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element has ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}has) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element consumes ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}consumes) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element produces ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}produces) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element provides ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}provides) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __condensation.name() : __condensation
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'BoilerType', BoilerType)
 
@@ -7683,56 +7683,56 @@ class CombinedHeatPowerType (EnergyConversionSystemType):
     _ElementMap = EnergyConversionSystemType._ElementMap.copy()
     _AttributeMap = EnergyConversionSystemType._AttributeMap.copy()
     # Base type is EnergyConversionSystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}technologyType uses Python identifier technologyType
     __technologyType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'technologyType'), 'technologyType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_CombinedHeatPowerType_httpwww_sig3d_orgcitygml2_0energy0_6_0technologyType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 277, 10), )
 
-    
+
     technologyType = property(__technologyType.value, __technologyType.set, None, None)
 
-    
+
     # Element efficiencyIndicator ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}efficiencyIndicator) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedNominalPower ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedNominalPower) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element model ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}model) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element nominalEfficiency ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}nominalEfficiency) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element number ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}number) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element productAndInstallationDocument ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}productAndInstallationDocument) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element yearOfManufacture ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}yearOfManufacture) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element refurbishmentMeasureOnEnergySystem ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}refurbishmentMeasureOnEnergySystem) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedIn ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedIn) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element has ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}has) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element consumes ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}consumes) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element produces ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}produces) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element provides ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}provides) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __technologyType.name() : __technologyType
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'CombinedHeatPowerType', CombinedHeatPowerType)
 
@@ -7748,26 +7748,26 @@ class ConstantValueScheduleType (ScheduleType):
     _ElementMap = ScheduleType._ElementMap.copy()
     _AttributeMap = ScheduleType._AttributeMap.copy()
     # Base type is ScheduleType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}averageValue uses Python identifier averageValue
     __averageValue = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'averageValue'), 'averageValue', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ConstantValueScheduleType_httpwww_sig3d_orgcitygml2_0energy0_6_0averageValue', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 312, 10), )
 
-    
+
     averageValue = property(__averageValue.value, __averageValue.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __averageValue.name() : __averageValue
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ConstantValueScheduleType', ConstantValueScheduleType)
 
@@ -7783,26 +7783,26 @@ class DailyPatternScheduleType (ScheduleType):
     _ElementMap = ScheduleType._ElementMap.copy()
     _AttributeMap = ScheduleType._AttributeMap.copy()
     # Base type is ScheduleType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}dailySchedule uses Python identifier dailySchedule
     __dailySchedule = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'dailySchedule'), 'dailySchedule', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DailyPatternScheduleType_httpwww_sig3d_orgcitygml2_0energy0_6_0dailySchedule', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 382, 10), )
 
-    
+
     dailySchedule = property(__dailySchedule.value, __dailySchedule.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __dailySchedule.name() : __dailySchedule
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'DailyPatternScheduleType', DailyPatternScheduleType)
 
@@ -7818,49 +7818,49 @@ class DHWFacilitiesType (FacilitiesType):
     _ElementMap = FacilitiesType._ElementMap.copy()
     _AttributeMap = FacilitiesType._AttributeMap.copy()
     # Base type is FacilitiesType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}numberOfBaths uses Python identifier numberOfBaths
     __numberOfBaths = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'numberOfBaths'), 'numberOfBaths', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0numberOfBaths', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 465, 10), )
 
-    
+
     numberOfBaths = property(__numberOfBaths.value, __numberOfBaths.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}numberOfShowers uses Python identifier numberOfShowers
     __numberOfShowers = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'numberOfShowers'), 'numberOfShowers', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0numberOfShowers', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 466, 10), )
 
-    
+
     numberOfShowers = property(__numberOfShowers.value, __numberOfShowers.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}numberOfWashBasins uses Python identifier numberOfWashBasins
     __numberOfWashBasins = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'numberOfWashBasins'), 'numberOfWashBasins', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0numberOfWashBasins', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 467, 10), )
 
-    
+
     numberOfWashBasins = property(__numberOfWashBasins.value, __numberOfWashBasins.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}waterStorageVolume uses Python identifier waterStorageVolume
     __waterStorageVolume = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'waterStorageVolume'), 'waterStorageVolume', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DHWFacilitiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0waterStorageVolume', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 468, 10), )
 
-    
+
     waterStorageVolume = property(__waterStorageVolume.value, __waterStorageVolume.set, None, None)
 
-    
+
     # Element operationSchedule ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}operationSchedule) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}FacilitiesType
-    
+
     # Element heatDissipation ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}heatDissipation) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}FacilitiesType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __numberOfBaths.name() : __numberOfBaths,
@@ -7869,7 +7869,7 @@ class DHWFacilitiesType (FacilitiesType):
         __waterStorageVolume.name() : __waterStorageVolume
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'DHWFacilitiesType', DHWFacilitiesType)
 
@@ -7885,64 +7885,64 @@ class DistrictNetworkSubstationType (EnergyConversionSystemType):
     _ElementMap = EnergyConversionSystemType._ElementMap.copy()
     _AttributeMap = EnergyConversionSystemType._AttributeMap.copy()
     # Base type is EnergyConversionSystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}networkId uses Python identifier networkId
     __networkId = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'networkId'), 'networkId', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DistrictNetworkSubstationType_httpwww_sig3d_orgcitygml2_0energy0_6_0networkId', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 503, 10), )
 
-    
+
     networkId = property(__networkId.value, __networkId.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}networkNodeId uses Python identifier networkNodeId
     __networkNodeId = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'networkNodeId'), 'networkNodeId', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DistrictNetworkSubstationType_httpwww_sig3d_orgcitygml2_0energy0_6_0networkNodeId', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 504, 10), )
 
-    
+
     networkNodeId = property(__networkNodeId.value, __networkNodeId.set, None, None)
 
-    
+
     # Element efficiencyIndicator ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}efficiencyIndicator) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedNominalPower ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedNominalPower) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element model ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}model) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element nominalEfficiency ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}nominalEfficiency) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element number ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}number) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element productAndInstallationDocument ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}productAndInstallationDocument) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element yearOfManufacture ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}yearOfManufacture) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element refurbishmentMeasureOnEnergySystem ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}refurbishmentMeasureOnEnergySystem) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedIn ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedIn) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element has ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}has) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element consumes ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}consumes) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element produces ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}produces) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element provides ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}provides) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __networkId.name() : __networkId,
         __networkNodeId.name() : __networkNodeId
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'DistrictNetworkSubstationType', DistrictNetworkSubstationType)
 
@@ -7958,41 +7958,41 @@ class DualValueScheduleType (ScheduleType):
     _ElementMap = ScheduleType._ElementMap.copy()
     _AttributeMap = ScheduleType._AttributeMap.copy()
     # Base type is ScheduleType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}usageHoursPerDay uses Python identifier usageHoursPerDay
     __usageHoursPerDay = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usageHoursPerDay'), 'usageHoursPerDay', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueScheduleType_httpwww_sig3d_orgcitygml2_0energy0_6_0usageHoursPerDay', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 526, 10), )
 
-    
+
     usageHoursPerDay = property(__usageHoursPerDay.value, __usageHoursPerDay.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}usageDaysPerYear uses Python identifier usageDaysPerYear
     __usageDaysPerYear = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usageDaysPerYear'), 'usageDaysPerYear', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueScheduleType_httpwww_sig3d_orgcitygml2_0energy0_6_0usageDaysPerYear', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 527, 10), )
 
-    
+
     usageDaysPerYear = property(__usageDaysPerYear.value, __usageDaysPerYear.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}usageValue uses Python identifier usageValue
     __usageValue = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usageValue'), 'usageValue', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueScheduleType_httpwww_sig3d_orgcitygml2_0energy0_6_0usageValue', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 528, 10), )
 
-    
+
     usageValue = property(__usageValue.value, __usageValue.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}idleValue uses Python identifier idleValue
     __idleValue = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'idleValue'), 'idleValue', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_DualValueScheduleType_httpwww_sig3d_orgcitygml2_0energy0_6_0idleValue', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 529, 10), )
 
-    
+
     idleValue = property(__idleValue.value, __idleValue.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __usageHoursPerDay.name() : __usageHoursPerDay,
@@ -8001,7 +8001,7 @@ class DualValueScheduleType (ScheduleType):
         __idleValue.name() : __idleValue
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'DualValueScheduleType', DualValueScheduleType)
 
@@ -8017,34 +8017,34 @@ class ElectricalAppliancesType (FacilitiesType):
     _ElementMap = FacilitiesType._ElementMap.copy()
     _AttributeMap = FacilitiesType._AttributeMap.copy()
     # Base type is FacilitiesType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}electricalPower uses Python identifier electricalPower
     __electricalPower = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'electricalPower'), 'electricalPower', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ElectricalAppliancesType_httpwww_sig3d_orgcitygml2_0energy0_6_0electricalPower', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 551, 10), )
 
-    
+
     electricalPower = property(__electricalPower.value, __electricalPower.set, None, None)
 
-    
+
     # Element operationSchedule ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}operationSchedule) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}FacilitiesType
-    
+
     # Element heatDissipation ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}heatDissipation) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}FacilitiesType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __electricalPower.name() : __electricalPower
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ElectricalAppliancesType', ElectricalAppliancesType)
 
@@ -8060,49 +8060,49 @@ class ElectricalResistanceType (EnergyConversionSystemType):
     _ElementMap = EnergyConversionSystemType._ElementMap.copy()
     _AttributeMap = EnergyConversionSystemType._AttributeMap.copy()
     # Base type is EnergyConversionSystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element efficiencyIndicator ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}efficiencyIndicator) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedNominalPower ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedNominalPower) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element model ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}model) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element nominalEfficiency ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}nominalEfficiency) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element number ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}number) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element productAndInstallationDocument ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}productAndInstallationDocument) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element yearOfManufacture ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}yearOfManufacture) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element refurbishmentMeasureOnEnergySystem ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}refurbishmentMeasureOnEnergySystem) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedIn ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedIn) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element has ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}has) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element consumes ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}consumes) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element produces ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}produces) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element provides ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}provides) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
-        
+
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ElectricalResistanceType', ElectricalResistanceType)
 
@@ -8118,54 +8118,54 @@ class GasType (AbstractMaterialType):
     _ElementMap = AbstractMaterialType._ElementMap.copy()
     _AttributeMap = AbstractMaterialType._AttributeMap.copy()
     # Base type is AbstractMaterialType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element imageTexture ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}imageTexture) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}AbstractMaterialType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}isVentilated uses Python identifier isVentilated
     __isVentilated = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'isVentilated'), 'isVentilated', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_GasType_httpwww_sig3d_orgcitygml2_0energy0_6_0isVentilated', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 845, 10), )
 
-    
+
     isVentilated = property(__isVentilated.value, __isVentilated.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}rValue uses Python identifier rValue
     __rValue = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'rValue'), 'rValue', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_GasType_httpwww_sig3d_orgcitygml2_0energy0_6_0rValue', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 846, 10), )
 
-    
+
     rValue = property(__rValue.value, __rValue.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __isVentilated.name() : __isVentilated,
         __rValue.name() : __rValue
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'GasType', GasType)
 
@@ -8181,64 +8181,64 @@ class HeatPumpType (EnergyConversionSystemType):
     _ElementMap = EnergyConversionSystemType._ElementMap.copy()
     _AttributeMap = EnergyConversionSystemType._AttributeMap.copy()
     # Base type is EnergyConversionSystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element efficiencyIndicator ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}efficiencyIndicator) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedNominalPower ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedNominalPower) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element model ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}model) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element nominalEfficiency ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}nominalEfficiency) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element number ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}number) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element productAndInstallationDocument ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}productAndInstallationDocument) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element yearOfManufacture ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}yearOfManufacture) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element refurbishmentMeasureOnEnergySystem ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}refurbishmentMeasureOnEnergySystem) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedIn ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedIn) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element has ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}has) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element consumes ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}consumes) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element produces ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}produces) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element provides ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}provides) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}carnotEfficiency uses Python identifier carnotEfficiency
     __carnotEfficiency = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'carnotEfficiency'), 'carnotEfficiency', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatPumpType_httpwww_sig3d_orgcitygml2_0energy0_6_0carnotEfficiency', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 885, 10), )
 
-    
+
     carnotEfficiency = property(__carnotEfficiency.value, __carnotEfficiency.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}heatSource uses Python identifier heatSource
     __heatSource = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'heatSource'), 'heatSource', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_HeatPumpType_httpwww_sig3d_orgcitygml2_0energy0_6_0heatSource', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 886, 10), )
 
-    
+
     heatSource = property(__heatSource.value, __heatSource.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __carnotEfficiency.name() : __carnotEfficiency,
         __heatSource.name() : __heatSource
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'HeatPumpType', HeatPumpType)
 
@@ -8255,36 +8255,36 @@ http://www-01.ibm.com/support/knowledgecenter/SSCRJU_3.0.0/com.ibm.swg.im.infosp
     _ElementMap = TimeSeriesType._ElementMap.copy()
     _AttributeMap = TimeSeriesType._AttributeMap.copy()
     # Base type is TimeSeriesType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element variableProperties ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}variableProperties) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_TimeSeriesType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}uom uses Python identifier uom
     __uom = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'uom'), 'uom', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesType_httpwww_sig3d_orgcitygml2_0energy0_6_0uom', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1003, 10), )
 
-    
+
     uom = property(__uom.value, __uom.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}contains uses Python identifier contains
     __contains = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'contains'), 'contains', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesType_httpwww_sig3d_orgcitygml2_0energy0_6_0contains', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1004, 10), )
 
-    
+
     contains = property(__contains.value, __contains.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __uom.name() : __uom,
         __contains.name() : __contains
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'IrregularTimeSeriesType', IrregularTimeSeriesType)
 
@@ -8300,71 +8300,71 @@ class IrregularTimeSeriesFileType (TimeSeriesType):
     _ElementMap = TimeSeriesType._ElementMap.copy()
     _AttributeMap = TimeSeriesType._AttributeMap.copy()
     # Base type is TimeSeriesType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element variableProperties ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}variableProperties) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_TimeSeriesType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}uom uses Python identifier uom
     __uom = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'uom'), 'uom', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0uom', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1023, 10), )
 
-    
+
     uom = property(__uom.value, __uom.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}file uses Python identifier file
     __file = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'file'), 'file', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0file', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1024, 10), )
 
-    
+
     file = property(__file.value, __file.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}numberOfHeaderLines uses Python identifier numberOfHeaderLines
     __numberOfHeaderLines = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'numberOfHeaderLines'), 'numberOfHeaderLines', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0numberOfHeaderLines', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1025, 10), )
 
-    
+
     numberOfHeaderLines = property(__numberOfHeaderLines.value, __numberOfHeaderLines.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}recordSeparator uses Python identifier recordSeparator
     __recordSeparator = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'recordSeparator'), 'recordSeparator', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0recordSeparator', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1026, 10), )
 
-    
+
     recordSeparator = property(__recordSeparator.value, __recordSeparator.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}decimalSymbol uses Python identifier decimalSymbol
     __decimalSymbol = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'decimalSymbol'), 'decimalSymbol', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0decimalSymbol', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1027, 10), )
 
-    
+
     decimalSymbol = property(__decimalSymbol.value, __decimalSymbol.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}valueColumnNumber uses Python identifier valueColumnNumber
     __valueColumnNumber = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'valueColumnNumber'), 'valueColumnNumber', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0valueColumnNumber', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1028, 10), )
 
-    
+
     valueColumnNumber = property(__valueColumnNumber.value, __valueColumnNumber.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}timeColumnNumber uses Python identifier timeColumnNumber
     __timeColumnNumber = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'timeColumnNumber'), 'timeColumnNumber', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0timeColumnNumber', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1029, 10), )
 
-    
+
     timeColumnNumber = property(__timeColumnNumber.value, __timeColumnNumber.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}fieldSeparator uses Python identifier fieldSeparator
     __fieldSeparator = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'fieldSeparator'), 'fieldSeparator', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_IrregularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0fieldSeparator', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1030, 10), )
 
-    
+
     fieldSeparator = property(__fieldSeparator.value, __fieldSeparator.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __uom.name() : __uom,
@@ -8377,7 +8377,7 @@ class IrregularTimeSeriesFileType (TimeSeriesType):
         __fieldSeparator.name() : __fieldSeparator
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'IrregularTimeSeriesFileType', IrregularTimeSeriesFileType)
 
@@ -8393,34 +8393,34 @@ class LightingFacilitiesType (FacilitiesType):
     _ElementMap = FacilitiesType._ElementMap.copy()
     _AttributeMap = FacilitiesType._AttributeMap.copy()
     # Base type is FacilitiesType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element operationSchedule ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}operationSchedule) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}FacilitiesType
-    
+
     # Element heatDissipation ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}heatDissipation) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}FacilitiesType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}electricalPower uses Python identifier electricalPower
     __electricalPower = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'electricalPower'), 'electricalPower', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_LightingFacilitiesType_httpwww_sig3d_orgcitygml2_0energy0_6_0electricalPower', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1104, 10), )
 
-    
+
     electricalPower = property(__electricalPower.value, __electricalPower.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __electricalPower.name() : __electricalPower
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'LightingFacilitiesType', LightingFacilitiesType)
 
@@ -8436,64 +8436,64 @@ class MechanicalVentilationType (EnergyConversionSystemType):
     _ElementMap = EnergyConversionSystemType._ElementMap.copy()
     _AttributeMap = EnergyConversionSystemType._AttributeMap.copy()
     # Base type is EnergyConversionSystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element efficiencyIndicator ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}efficiencyIndicator) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedNominalPower ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedNominalPower) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element model ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}model) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element nominalEfficiency ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}nominalEfficiency) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element number ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}number) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element productAndInstallationDocument ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}productAndInstallationDocument) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element yearOfManufacture ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}yearOfManufacture) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element refurbishmentMeasureOnEnergySystem ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}refurbishmentMeasureOnEnergySystem) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedIn ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedIn) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element has ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}has) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element consumes ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}consumes) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element produces ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}produces) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element provides ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}provides) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}heatRecovery uses Python identifier heatRecovery
     __heatRecovery = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'heatRecovery'), 'heatRecovery', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MechanicalVentilationType_httpwww_sig3d_orgcitygml2_0energy0_6_0heatRecovery', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1138, 10), )
 
-    
+
     heatRecovery = property(__heatRecovery.value, __heatRecovery.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}recuperationFactor uses Python identifier recuperationFactor
     __recuperationFactor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'recuperationFactor'), 'recuperationFactor', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_MechanicalVentilationType_httpwww_sig3d_orgcitygml2_0energy0_6_0recuperationFactor', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1139, 10), )
 
-    
+
     recuperationFactor = property(__recuperationFactor.value, __recuperationFactor.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __heatRecovery.name() : __heatRecovery,
         __recuperationFactor.name() : __recuperationFactor
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'MechanicalVentilationType', MechanicalVentilationType)
 
@@ -8509,40 +8509,40 @@ class PowerDistributionSystemType (EnergyDistributionSystemType):
     _ElementMap = EnergyDistributionSystemType._ElementMap.copy()
     _AttributeMap = EnergyDistributionSystemType._AttributeMap.copy()
     # Base type is EnergyDistributionSystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element distributionPerimeter ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}distributionPerimeter) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyDistributionSystemType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}current uses Python identifier current
     __current = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'current'), 'current', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerDistributionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0current', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1239, 10), )
 
-    
+
     current = property(__current.value, __current.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}voltage uses Python identifier voltage
     __voltage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'voltage'), 'voltage', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerDistributionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0voltage', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1240, 10), )
 
-    
+
     voltage = property(__voltage.value, __voltage.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __current.name() : __current,
         __voltage.name() : __voltage
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'PowerDistributionSystemType', PowerDistributionSystemType)
 
@@ -8558,38 +8558,38 @@ class PowerStorageSystemType (StorageSystemType):
     _ElementMap = StorageSystemType._ElementMap.copy()
     _AttributeMap = StorageSystemType._AttributeMap.copy()
     # Base type is StorageSystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}batteryTechnology uses Python identifier batteryTechnology
     __batteryTechnology = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'batteryTechnology'), 'batteryTechnology', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerStorageSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0batteryTechnology', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1259, 10), )
 
-    
+
     batteryTechnology = property(__batteryTechnology.value, __batteryTechnology.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}powerCapacity uses Python identifier powerCapacity
     __powerCapacity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'powerCapacity'), 'powerCapacity', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PowerStorageSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0powerCapacity', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1260, 10), )
 
-    
+
     powerCapacity = property(__powerCapacity.value, __powerCapacity.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __batteryTechnology.name() : __batteryTechnology,
         __powerCapacity.name() : __powerCapacity
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'PowerStorageSystemType', PowerStorageSystemType)
 
@@ -8605,36 +8605,36 @@ class RegularTimeSeriesType (TimeSeriesType):
     _ElementMap = TimeSeriesType._ElementMap.copy()
     _AttributeMap = TimeSeriesType._AttributeMap.copy()
     # Base type is TimeSeriesType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element variableProperties ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}variableProperties) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_TimeSeriesType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}temporalExtent uses Python identifier temporalExtent
     __temporalExtent = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'temporalExtent'), 'temporalExtent', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesType_httpwww_sig3d_orgcitygml2_0energy0_6_0temporalExtent', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1320, 10), )
 
-    
+
     temporalExtent = property(__temporalExtent.value, __temporalExtent.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}timeInterval uses Python identifier timeInterval
     __timeInterval = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'timeInterval'), 'timeInterval', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesType_httpwww_sig3d_orgcitygml2_0energy0_6_0timeInterval', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1321, 10), )
 
-    
+
     timeInterval = property(__timeInterval.value, __timeInterval.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}values uses Python identifier values
     __values = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'values'), 'values', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesType_httpwww_sig3d_orgcitygml2_0energy0_6_0values', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1322, 10), )
 
-    
+
     values = property(__values.value, __values.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __temporalExtent.name() : __temporalExtent,
@@ -8642,7 +8642,7 @@ class RegularTimeSeriesType (TimeSeriesType):
         __values.name() : __values
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'RegularTimeSeriesType', RegularTimeSeriesType)
 
@@ -8658,78 +8658,78 @@ class RegularTimeSeriesFileType (TimeSeriesType):
     _ElementMap = TimeSeriesType._ElementMap.copy()
     _AttributeMap = TimeSeriesType._AttributeMap.copy()
     # Base type is TimeSeriesType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element variableProperties ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}variableProperties) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_TimeSeriesType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}uom uses Python identifier uom
     __uom = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'uom'), 'uom', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0uom', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1341, 10), )
 
-    
+
     uom = property(__uom.value, __uom.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}file uses Python identifier file
     __file = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'file'), 'file', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0file', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1342, 10), )
 
-    
+
     file = property(__file.value, __file.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}temporalExtent uses Python identifier temporalExtent
     __temporalExtent = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'temporalExtent'), 'temporalExtent', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0temporalExtent', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1343, 10), )
 
-    
+
     temporalExtent = property(__temporalExtent.value, __temporalExtent.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}timeInterval uses Python identifier timeInterval
     __timeInterval = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'timeInterval'), 'timeInterval', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0timeInterval', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1344, 10), )
 
-    
+
     timeInterval = property(__timeInterval.value, __timeInterval.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}numberOfHeaderLines uses Python identifier numberOfHeaderLines
     __numberOfHeaderLines = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'numberOfHeaderLines'), 'numberOfHeaderLines', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0numberOfHeaderLines', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1345, 10), )
 
-    
+
     numberOfHeaderLines = property(__numberOfHeaderLines.value, __numberOfHeaderLines.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}recordSeparator uses Python identifier recordSeparator
     __recordSeparator = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'recordSeparator'), 'recordSeparator', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0recordSeparator', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1346, 10), )
 
-    
+
     recordSeparator = property(__recordSeparator.value, __recordSeparator.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}decimalSymbol uses Python identifier decimalSymbol
     __decimalSymbol = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'decimalSymbol'), 'decimalSymbol', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0decimalSymbol', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1347, 10), )
 
-    
+
     decimalSymbol = property(__decimalSymbol.value, __decimalSymbol.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}valueColumnNumber uses Python identifier valueColumnNumber
     __valueColumnNumber = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'valueColumnNumber'), 'valueColumnNumber', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0valueColumnNumber', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1348, 10), )
 
-    
+
     valueColumnNumber = property(__valueColumnNumber.value, __valueColumnNumber.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}fieldSeparator uses Python identifier fieldSeparator
     __fieldSeparator = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'fieldSeparator'), 'fieldSeparator', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_RegularTimeSeriesFileType_httpwww_sig3d_orgcitygml2_0energy0_6_0fieldSeparator', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1349, 10), )
 
-    
+
     fieldSeparator = property(__fieldSeparator.value, __fieldSeparator.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __uom.name() : __uom,
@@ -8743,7 +8743,7 @@ class RegularTimeSeriesFileType (TimeSeriesType):
         __fieldSeparator.name() : __fieldSeparator
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'RegularTimeSeriesFileType', RegularTimeSeriesFileType)
 
@@ -8759,68 +8759,68 @@ class SolidMaterialType (AbstractMaterialType):
     _ElementMap = AbstractMaterialType._ElementMap.copy()
     _AttributeMap = AbstractMaterialType._AttributeMap.copy()
     # Base type is AbstractMaterialType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element imageTexture ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}imageTexture) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}AbstractMaterialType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}conductivity uses Python identifier conductivity
     __conductivity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'conductivity'), 'conductivity', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialType_httpwww_sig3d_orgcitygml2_0energy0_6_0conductivity', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1412, 10), )
 
-    
+
     conductivity = property(__conductivity.value, __conductivity.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}density uses Python identifier density
     __density = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'density'), 'density', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialType_httpwww_sig3d_orgcitygml2_0energy0_6_0density', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1413, 10), )
 
-    
+
     density = property(__density.value, __density.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}permeance uses Python identifier permeance
     __permeance = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'permeance'), 'permeance', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialType_httpwww_sig3d_orgcitygml2_0energy0_6_0permeance', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1414, 10), )
 
-    
+
     permeance = property(__permeance.value, __permeance.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}porosity uses Python identifier porosity
     __porosity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'porosity'), 'porosity', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialType_httpwww_sig3d_orgcitygml2_0energy0_6_0porosity', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1415, 10), )
 
-    
+
     porosity = property(__porosity.value, __porosity.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}specificHeat uses Python identifier specificHeat
     __specificHeat = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'specificHeat'), 'specificHeat', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolidMaterialType_httpwww_sig3d_orgcitygml2_0energy0_6_0specificHeat', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1416, 10), )
 
-    
+
     specificHeat = property(__specificHeat.value, __specificHeat.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __conductivity.name() : __conductivity,
@@ -8830,7 +8830,7 @@ class SolidMaterialType (AbstractMaterialType):
         __specificHeat.name() : __specificHeat
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'SolidMaterialType', SolidMaterialType)
 
@@ -8846,61 +8846,61 @@ class ThermalDistributionSystemType (EnergyDistributionSystemType):
     _ElementMap = EnergyDistributionSystemType._ElementMap.copy()
     _AttributeMap = EnergyDistributionSystemType._AttributeMap.copy()
     # Base type is EnergyDistributionSystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element distributionPerimeter ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}distributionPerimeter) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyDistributionSystemType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}isCirculation uses Python identifier isCirculation
     __isCirculation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'isCirculation'), 'isCirculation', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0isCirculation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1554, 10), )
 
-    
+
     isCirculation = property(__isCirculation.value, __isCirculation.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}medium uses Python identifier medium
     __medium = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'medium'), 'medium', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0medium', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1555, 10), )
 
-    
+
     medium = property(__medium.value, __medium.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}nominalFlow uses Python identifier nominalFlow
     __nominalFlow = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'nominalFlow'), 'nominalFlow', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0nominalFlow', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1556, 10), )
 
-    
+
     nominalFlow = property(__nominalFlow.value, __nominalFlow.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}returnTemperature uses Python identifier returnTemperature
     __returnTemperature = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'returnTemperature'), 'returnTemperature', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0returnTemperature', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1557, 10), )
 
-    
+
     returnTemperature = property(__returnTemperature.value, __returnTemperature.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}supplyTemperature uses Python identifier supplyTemperature
     __supplyTemperature = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'supplyTemperature'), 'supplyTemperature', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0supplyTemperature', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1558, 10), )
 
-    
+
     supplyTemperature = property(__supplyTemperature.value, __supplyTemperature.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}thermalLossesFactor uses Python identifier thermalLossesFactor
     __thermalLossesFactor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thermalLossesFactor'), 'thermalLossesFactor', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalDistributionSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0thermalLossesFactor', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1559, 10), )
 
-    
+
     thermalLossesFactor = property(__thermalLossesFactor.value, __thermalLossesFactor.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __isCirculation.name() : __isCirculation,
@@ -8911,7 +8911,7 @@ class ThermalDistributionSystemType (EnergyDistributionSystemType):
         __thermalLossesFactor.name() : __thermalLossesFactor
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ThermalDistributionSystemType', ThermalDistributionSystemType)
 
@@ -8927,45 +8927,45 @@ class ThermalStorageSystemType (StorageSystemType):
     _ElementMap = StorageSystemType._ElementMap.copy()
     _AttributeMap = StorageSystemType._AttributeMap.copy()
     # Base type is StorageSystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}preparationTemperature uses Python identifier preparationTemperature
     __preparationTemperature = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'preparationTemperature'), 'preparationTemperature', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0preparationTemperature', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1578, 10), )
 
-    
+
     preparationTemperature = property(__preparationTemperature.value, __preparationTemperature.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}medium uses Python identifier medium
     __medium = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'medium'), 'medium', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0medium', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1579, 10), )
 
-    
+
     medium = property(__medium.value, __medium.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}thermalLossesFactor uses Python identifier thermalLossesFactor
     __thermalLossesFactor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thermalLossesFactor'), 'thermalLossesFactor', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0thermalLossesFactor', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1580, 10), )
 
-    
+
     thermalLossesFactor = property(__thermalLossesFactor.value, __thermalLossesFactor.set, None, None)
 
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}volume uses Python identifier volume
     __volume = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'volume'), 'volume', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_ThermalStorageSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0volume', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1581, 10), )
 
-    
+
     volume = property(__volume.value, __volume.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __preparationTemperature.name() : __preparationTemperature,
@@ -8974,7 +8974,7 @@ class ThermalStorageSystemType (StorageSystemType):
         __volume.name() : __volume
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ThermalStorageSystemType', ThermalStorageSystemType)
 
@@ -8990,26 +8990,26 @@ class TimeSeriesScheduleType (ScheduleType):
     _ElementMap = ScheduleType._ElementMap.copy()
     _AttributeMap = ScheduleType._AttributeMap.copy()
     # Base type is ScheduleType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}timeDependingValues uses Python identifier timeDependingValues
     __timeDependingValues = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'timeDependingValues'), 'timeDependingValues', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_TimeSeriesScheduleType_httpwww_sig3d_orgcitygml2_0energy0_6_0timeDependingValues', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1638, 10), )
 
-    
+
     timeDependingValues = property(__timeDependingValues.value, __timeDependingValues.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __timeDependingValues.name() : __timeDependingValues
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'TimeSeriesScheduleType', TimeSeriesScheduleType)
 
@@ -9025,64 +9025,64 @@ class PhotovoltaicSystemType (SolarEnergySystemType):
     _ElementMap = SolarEnergySystemType._ElementMap.copy()
     _AttributeMap = SolarEnergySystemType._AttributeMap.copy()
     # Base type is SolarEnergySystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element collectorSurface ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}collectorSurface) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_SolarEnergySystemType
-    
+
     # Element panelAzimuth ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}panelAzimuth) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_SolarEnergySystemType
-    
+
     # Element panelInclination ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}panelInclination) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_SolarEnergySystemType
-    
+
     # Element installedOn ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedOn) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_SolarEnergySystemType
-    
+
     # Element efficiencyIndicator ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}efficiencyIndicator) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedNominalPower ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedNominalPower) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element model ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}model) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element nominalEfficiency ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}nominalEfficiency) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element number ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}number) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element productAndInstallationDocument ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}productAndInstallationDocument) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element yearOfManufacture ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}yearOfManufacture) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element refurbishmentMeasureOnEnergySystem ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}refurbishmentMeasureOnEnergySystem) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedIn ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedIn) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element has ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}has) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element consumes ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}consumes) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element produces ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}produces) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element provides ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}provides) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}cellMaterialType uses Python identifier cellMaterialType
     __cellMaterialType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'cellMaterialType'), 'cellMaterialType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_PhotovoltaicSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0cellMaterialType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1220, 10), )
 
-    
+
     cellMaterialType = property(__cellMaterialType.value, __cellMaterialType.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __cellMaterialType.name() : __cellMaterialType
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'PhotovoltaicSystemType', PhotovoltaicSystemType)
 
@@ -9098,96 +9098,96 @@ class SolarThermalSystemType (SolarEnergySystemType):
     _ElementMap = SolarEnergySystemType._ElementMap.copy()
     _AttributeMap = SolarEnergySystemType._AttributeMap.copy()
     # Base type is SolarEnergySystemType
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element collectorSurface ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}collectorSurface) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_SolarEnergySystemType
-    
+
     # Element panelAzimuth ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}panelAzimuth) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_SolarEnergySystemType
-    
+
     # Element panelInclination ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}panelInclination) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_SolarEnergySystemType
-    
+
     # Element installedOn ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedOn) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}_SolarEnergySystemType
-    
+
     # Element efficiencyIndicator ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}efficiencyIndicator) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedNominalPower ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedNominalPower) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element model ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}model) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element nominalEfficiency ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}nominalEfficiency) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element number ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}number) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element productAndInstallationDocument ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}productAndInstallationDocument) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element yearOfManufacture ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}yearOfManufacture) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element refurbishmentMeasureOnEnergySystem ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}refurbishmentMeasureOnEnergySystem) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element installedIn ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}installedIn) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element has ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}has) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element consumes ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}consumes) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element produces ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}produces) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element provides ({http://www.sig3d.org/citygml/2.0/energy/0.6.0}provides) inherited from {http://www.sig3d.org/citygml/2.0/energy/0.6.0}EnergyConversionSystemType
-    
+
     # Element {http://www.sig3d.org/citygml/2.0/energy/0.6.0}technologyType uses Python identifier technologyType
     __technologyType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'technologyType'), 'technologyType', '__httpwww_sig3d_orgcitygml2_0energy0_6_0_SolarThermalSystemType_httpwww_sig3d_orgcitygml2_0energy0_6_0technologyType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1390, 10), )
 
-    
+
     technologyType = property(__technologyType.value, __technologyType.set, None, None)
 
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __technologyType.name() : __technologyType
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'SolarThermalSystemType', SolarThermalSystemType)
 
 
-averageCeilingHeight = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'averageCeilingHeight'), teaser.Data.SchemaBindings.opengis.raw.gml.LengthType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 11, 2))
+averageCeilingHeight = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'averageCeilingHeight'), teaser.data.bindings.opengis.raw.gml.LengthType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 11, 2))
 Namespace.addCategoryObject('elementBinding', averageCeilingHeight.name().localName(), averageCeilingHeight)
 
-basementCeilingHeightAboveGroundSurface = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'basementCeilingHeightAboveGroundSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.LengthType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 12, 2))
+basementCeilingHeightAboveGroundSurface = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'basementCeilingHeightAboveGroundSurface'), teaser.data.bindings.opengis.raw.gml.LengthType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 12, 2))
 Namespace.addCategoryObject('elementBinding', basementCeilingHeightAboveGroundSurface.name().localName(), basementCeilingHeightAboveGroundSurface)
 
-buildingType = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'buildingType'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 14, 2))
+buildingType = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'buildingType'), teaser.data.bindings.opengis.raw.gml.CodeType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 14, 2))
 Namespace.addCategoryObject('elementBinding', buildingType.name().localName(), buildingType)
 
 constructionStyle = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'constructionStyle'), pyxb.binding.datatypes.string, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 21, 2))
 Namespace.addCategoryObject('elementBinding', constructionStyle.name().localName(), constructionStyle)
 
-eavesHeight = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'eavesHeight'), teaser.Data.SchemaBindings.opengis.raw.gml.LengthType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 22, 2))
+eavesHeight = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'eavesHeight'), teaser.data.bindings.opengis.raw.gml.LengthType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 22, 2))
 Namespace.addCategoryObject('elementBinding', eavesHeight.name().localName(), eavesHeight)
 
-grossVolume = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'grossVolume'), teaser.Data.SchemaBindings.opengis.raw.gml.VolumeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 24, 2))
+grossVolume = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'grossVolume'), teaser.data.bindings.opengis.raw.gml.VolumeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 24, 2))
 Namespace.addCategoryObject('elementBinding', grossVolume.name().localName(), grossVolume)
 
 landmarked = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'landmarked'), pyxb.binding.datatypes.boolean, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 25, 2))
 Namespace.addCategoryObject('elementBinding', landmarked.name().localName(), landmarked)
 
-referencePoint = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'referencePoint'), teaser.Data.SchemaBindings.opengis.raw.gml.PointPropertyType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 26, 2))
+referencePoint = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'referencePoint'), teaser.data.bindings.opengis.raw.gml.PointPropertyType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 26, 2))
 Namespace.addCategoryObject('elementBinding', referencePoint.name().localName(), referencePoint)
 
-ridgeHeight = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'ridgeHeight'), teaser.Data.SchemaBindings.opengis.raw.gml.LengthType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 27, 2))
+ridgeHeight = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'ridgeHeight'), teaser.data.bindings.opengis.raw.gml.LengthType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 27, 2))
 Namespace.addCategoryObject('elementBinding', ridgeHeight.name().localName(), ridgeHeight)
 
-openableRatio = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'openableRatio'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 99, 2))
+openableRatio = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'openableRatio'), teaser.data.bindings.opengis.raw.gml.ScaleType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 99, 2))
 Namespace.addCategoryObject('elementBinding', openableRatio.name().localName(), openableRatio)
 
 atticType = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'atticType'), ConditioningType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 10, 2))
@@ -10130,13 +10130,13 @@ BuildingUnitType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedN
 
 BuildingUnitType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'ownerName'), pyxb.binding.datatypes.string, scope=BuildingUnitType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 244, 10)))
 
-BuildingUnitType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'ownershipType'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=BuildingUnitType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 245, 10)))
+BuildingUnitType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'ownershipType'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=BuildingUnitType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 245, 10)))
 
 BuildingUnitType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'floorArea'), FloorAreaPropertyType, scope=BuildingUnitType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 252, 10)))
 
 BuildingUnitType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'occupiedBy'), OccupantsPropertyType, scope=BuildingUnitType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 253, 10)))
 
-BuildingUnitType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'address'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.AddressPropertyType, scope=BuildingUnitType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 254, 10)))
+BuildingUnitType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'address'), teaser.data.bindings.opengis.citygml.raw.base.AddressPropertyType, scope=BuildingUnitType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 254, 10)))
 
 BuildingUnitType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'has'), FacilitiesPropertyType, scope=BuildingUnitType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 255, 10)))
 
@@ -10786,7 +10786,7 @@ ConstantValueSchedulePropertyType._Automaton = _BuildAutomaton_13()
 
 
 
-ConstructionType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'uValue'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ConstructionType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 335, 10)))
+ConstructionType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'uValue'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ConstructionType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 335, 10)))
 
 ConstructionType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'opticalProperties'), OpticalPropertiesPropertyType, scope=ConstructionType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 336, 10)))
 
@@ -11629,9 +11629,9 @@ DailySchedulePropertyType._Automaton = _BuildAutomaton_20()
 
 
 
-DateOfEventType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'instant'), teaser.Data.SchemaBindings.opengis.raw.gml.TimePositionType, scope=DateOfEventType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 420, 6)))
+DateOfEventType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'instant'), teaser.data.bindings.opengis.raw.gml.TimePositionType, scope=DateOfEventType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 420, 6)))
 
-DateOfEventType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'period'), teaser.Data.SchemaBindings.opengis.raw.gml.TimePeriodPropertyType, scope=DateOfEventType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 421, 6)))
+DateOfEventType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'period'), teaser.data.bindings.opengis.raw.gml.TimePeriodPropertyType, scope=DateOfEventType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 421, 6)))
 
 def _BuildAutomaton_21 ():
     # Remove this helper function from the namespace after it is invoked
@@ -11821,7 +11821,7 @@ ElectricalResistancePropertyType._Automaton = _BuildAutomaton_27()
 
 
 
-EmissivityType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'fraction'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=EmissivityType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 586, 6)))
+EmissivityType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'fraction'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=EmissivityType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 586, 6)))
 
 EmissivityType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'surface'), SurfaceSide, scope=EmissivityType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 587, 6)))
 
@@ -11880,11 +11880,11 @@ EmissivityPropertyType._Automaton = _BuildAutomaton_29()
 
 
 
-EnergyCarrierType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'co2EmissionFactor'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=EnergyCarrierType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 623, 6)))
+EnergyCarrierType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'co2EmissionFactor'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=EnergyCarrierType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 623, 6)))
 
-EnergyCarrierType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'energyDensity'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=EnergyCarrierType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 624, 6)))
+EnergyCarrierType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'energyDensity'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=EnergyCarrierType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 624, 6)))
 
-EnergyCarrierType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'primaryEnergyFactor'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=EnergyCarrierType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 625, 6)))
+EnergyCarrierType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'primaryEnergyFactor'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=EnergyCarrierType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 625, 6)))
 
 EnergyCarrierType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'type'), EnergyCarrierTypeValues, scope=EnergyCarrierType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 626, 6)))
 
@@ -11967,21 +11967,21 @@ EnergyCarrierPropertyType._Automaton = _BuildAutomaton_31()
 
 EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'efficiencyIndicator'), pyxb.binding.datatypes.string, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 668, 10)))
 
-EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'installedNominalPower'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 669, 10)))
+EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'installedNominalPower'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 669, 10)))
 
 EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'model'), pyxb.binding.datatypes.string, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 670, 10)))
 
-EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'nominalEfficiency'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 671, 10)))
+EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'nominalEfficiency'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 671, 10)))
 
 EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'number'), pyxb.binding.datatypes.integer, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 672, 10)))
 
-EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'productAndInstallationDocument'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ExternalReferenceType, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 673, 10)))
+EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'productAndInstallationDocument'), teaser.data.bindings.opengis.citygml.raw.base.ExternalReferenceType, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 673, 10)))
 
 EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'yearOfManufacture'), pyxb.binding.datatypes.gYear, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 674, 10)))
 
 EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'refurbishmentMeasureOnEnergySystem'), RefurbishmentMeasurePropertyType, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 675, 10)))
 
-EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'installedIn'), teaser.Data.SchemaBindings.opengis.raw.gml.ReferenceType, scope=EnergyConversionSystemType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 676, 10)))
+EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'installedIn'), teaser.data.bindings.opengis.raw.gml.ReferenceType, scope=EnergyConversionSystemType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 676, 10)))
 
 EnergyConversionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'has'), SystemOperationPropertyType, scope=EnergyConversionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 683, 10)))
 
@@ -12540,7 +12540,7 @@ EnergyDemandType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedN
 
 EnergyDemandType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'energyAmount'), TimeSeriesPropertyType, scope=EnergyDemandType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 709, 10)))
 
-EnergyDemandType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'maximumLoad'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=EnergyDemandType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 710, 10)))
+EnergyDemandType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'maximumLoad'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=EnergyDemandType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 710, 10)))
 
 EnergyDemandType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'energyDistribution'), EnergyDistributionSystemPropertyType, scope=EnergyDemandType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 711, 10)))
 
@@ -13322,9 +13322,9 @@ FacilitiesPropertyType._Automaton = _BuildAutomaton_43()
 
 
 
-FloorAreaType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'type'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=FloorAreaType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 819, 6)))
+FloorAreaType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'type'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=FloorAreaType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 819, 6)))
 
-FloorAreaType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), teaser.Data.SchemaBindings.opengis.raw.gml.AreaType, scope=FloorAreaType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 826, 6)))
+FloorAreaType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), teaser.data.bindings.opengis.raw.gml.AreaType, scope=FloorAreaType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 826, 6)))
 
 def _BuildAutomaton_44 ():
     # Remove this helper function from the namespace after it is invoked
@@ -13408,13 +13408,13 @@ GasPropertyType._Automaton = _BuildAutomaton_46()
 
 
 
-HeatExchangeTypeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'convectiveFraction'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=HeatExchangeTypeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 866, 6)))
+HeatExchangeTypeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'convectiveFraction'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=HeatExchangeTypeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 866, 6)))
 
-HeatExchangeTypeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'latentFraction'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=HeatExchangeTypeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 867, 6)))
+HeatExchangeTypeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'latentFraction'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=HeatExchangeTypeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 867, 6)))
 
-HeatExchangeTypeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'radiantFraction'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=HeatExchangeTypeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 868, 6)))
+HeatExchangeTypeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'radiantFraction'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=HeatExchangeTypeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 868, 6)))
 
-HeatExchangeTypeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'totalValue'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=HeatExchangeTypeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 869, 6)))
+HeatExchangeTypeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'totalValue'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=HeatExchangeTypeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 869, 6)))
 
 def _BuildAutomaton_47 ():
     # Remove this helper function from the namespace after it is invoked
@@ -13532,9 +13532,9 @@ HeatPumpPropertyType._Automaton = _BuildAutomaton_49()
 
 
 
-HouseholdType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'residenceType'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=HouseholdType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 920, 10)))
+HouseholdType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'residenceType'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=HouseholdType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 920, 10)))
 
-HouseholdType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'householdType'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=HouseholdType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 927, 10)))
+HouseholdType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'householdType'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=HouseholdType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 927, 10)))
 
 def _BuildAutomaton_50 ():
     # Remove this helper function from the namespace after it is invoked
@@ -14226,9 +14226,9 @@ LayerPropertyType._Automaton = _BuildAutomaton_57()
 
 
 
-LayerComponentType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'areaFraction'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=LayerComponentType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1074, 10)))
+LayerComponentType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'areaFraction'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=LayerComponentType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1074, 10)))
 
-LayerComponentType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'thickness'), teaser.Data.SchemaBindings.opengis.raw.gml.LengthType, scope=LayerComponentType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1075, 10)))
+LayerComponentType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'thickness'), teaser.data.bindings.opengis.raw.gml.LengthType, scope=LayerComponentType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1075, 10)))
 
 LayerComponentType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'material'), AbstractMaterialPropertyType, scope=LayerComponentType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1076, 10)))
 
@@ -14432,7 +14432,7 @@ LightingFacilitiesPropertyType._Automaton = _BuildAutomaton_60()
 
 
 
-MeasurementPointType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'time'), teaser.Data.SchemaBindings.opengis.raw.gml.TimePositionType, scope=MeasurementPointType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1121, 6)))
+MeasurementPointType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'time'), teaser.data.bindings.opengis.raw.gml.TimePositionType, scope=MeasurementPointType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1121, 6)))
 
 MeasurementPointType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), pyxb.binding.datatypes.double, scope=MeasurementPointType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1122, 6)))
 
@@ -14524,7 +14524,7 @@ OccupantsType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName
 
 OccupantsType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'occupancyRate'), SchedulePropertyType, scope=OccupantsType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1173, 10)))
 
-OccupantsType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'occupantType'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=OccupantsType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1174, 10)))
+OccupantsType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'occupantType'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=OccupantsType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1174, 10)))
 
 OccupantsType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'consiststOf'), HouseholdPropertyType, scope=OccupantsType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1181, 10)))
 
@@ -14775,7 +14775,7 @@ OpticalPropertiesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.Expa
 
 OpticalPropertiesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'transmittance'), TransmittancePropertyType, scope=OpticalPropertiesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1203, 6)))
 
-OpticalPropertiesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'glazingRatio'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=OpticalPropertiesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1204, 6)))
+OpticalPropertiesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'glazingRatio'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=OpticalPropertiesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1204, 6)))
 
 def _BuildAutomaton_66 ():
     # Remove this helper function from the namespace after it is invoked
@@ -14955,7 +14955,7 @@ PowerStorageSystemPropertyType._Automaton = _BuildAutomaton_70()
 
 
 
-ReflectanceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'fraction'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=ReflectanceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1280, 6)))
+ReflectanceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'fraction'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=ReflectanceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1280, 6)))
 
 ReflectanceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'surface'), SurfaceSide, scope=ReflectanceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1281, 6)))
 
@@ -15152,7 +15152,7 @@ RegularTimeSeriesFilePropertyType._Automaton = _BuildAutomaton_76()
 
 
 
-ShadingTypeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'maximumCoverRatio'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=ShadingTypeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1369, 6)))
+ShadingTypeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'maximumCoverRatio'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=ShadingTypeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1369, 6)))
 
 ShadingTypeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'name'), pyxb.binding.datatypes.string, scope=ShadingTypeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1370, 6)))
 
@@ -15285,7 +15285,7 @@ SystemOperationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.Expand
 
 SystemOperationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'operationTime'), SchedulePropertyType, scope=SystemOperationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1451, 10)))
 
-SystemOperationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'yearlyGlobalEfficiency'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=SystemOperationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1452, 10)))
+SystemOperationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'yearlyGlobalEfficiency'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=SystemOperationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1452, 10)))
 
 def _BuildAutomaton_81 ():
     # Remove this helper function from the namespace after it is invoked
@@ -15442,19 +15442,19 @@ SystemOperationPropertyType._Automaton = _BuildAutomaton_82()
 
 
 
-ThermalBoundaryType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'azimuth'), teaser.Data.SchemaBindings.opengis.raw.gml.AngleType, scope=ThermalBoundaryType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1474, 10)))
+ThermalBoundaryType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'azimuth'), teaser.data.bindings.opengis.raw.gml.AngleType, scope=ThermalBoundaryType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1474, 10)))
 
-ThermalBoundaryType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'inclination'), teaser.Data.SchemaBindings.opengis.raw.gml.AngleType, scope=ThermalBoundaryType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1475, 10)))
+ThermalBoundaryType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'inclination'), teaser.data.bindings.opengis.raw.gml.AngleType, scope=ThermalBoundaryType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1475, 10)))
 
 ThermalBoundaryType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'thermalBoundaryType'), ThermalBoundaryTypeValues, scope=ThermalBoundaryType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1476, 10)))
 
-ThermalBoundaryType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'surfaceGeometry'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=ThermalBoundaryType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1477, 10)))
+ThermalBoundaryType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'surfaceGeometry'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=ThermalBoundaryType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1477, 10)))
 
 ThermalBoundaryType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'partOf'), ThermalZonePropertyType, scope=ThermalBoundaryType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1478, 10)))
 
 ThermalBoundaryType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'composedOf'), ThermalComponentPropertyType, scope=ThermalBoundaryType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1479, 10)))
 
-ThermalBoundaryType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'correspondsTo'), teaser.Data.SchemaBindings.opengis.raw.gml.ReferenceType, scope=ThermalBoundaryType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1480, 10)))
+ThermalBoundaryType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'correspondsTo'), teaser.data.bindings.opengis.raw.gml.ReferenceType, scope=ThermalBoundaryType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1480, 10)))
 
 def _BuildAutomaton_83 ():
     # Remove this helper function from the namespace after it is invoked
@@ -15902,13 +15902,13 @@ ThermalBoundaryPropertyType._Automaton = _BuildAutomaton_84()
 
 
 
-ThermalComponentType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'area'), teaser.Data.SchemaBindings.opengis.raw.gml.AreaType, scope=ThermalComponentType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1526, 10)))
+ThermalComponentType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'area'), teaser.data.bindings.opengis.raw.gml.AreaType, scope=ThermalComponentType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1526, 10)))
 
 ThermalComponentType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'isGroundCoupled'), pyxb.binding.datatypes.boolean, scope=ThermalComponentType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1527, 10)))
 
 ThermalComponentType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'isSunExposed'), pyxb.binding.datatypes.boolean, scope=ThermalComponentType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1528, 10)))
 
-ThermalComponentType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'relates'), teaser.Data.SchemaBindings.opengis.raw.gml.ReferenceType, scope=ThermalComponentType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1529, 10)))
+ThermalComponentType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'relates'), teaser.data.bindings.opengis.raw.gml.ReferenceType, scope=ThermalComponentType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1529, 10)))
 
 def _BuildAutomaton_85 ():
     # Remove this helper function from the namespace after it is invoked
@@ -16316,29 +16316,29 @@ ThermalStorageSystemPropertyType._Automaton = _BuildAutomaton_88()
 
 
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'additionalThermalBridgeUValue'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1604, 10)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'additionalThermalBridgeUValue'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1604, 10)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'effectiveThermalCapacity'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1605, 10)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'effectiveThermalCapacity'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1605, 10)))
 
 ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'floorArea'), FloorAreaPropertyType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1606, 10)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'grossVolume'), teaser.Data.SchemaBindings.opengis.raw.gml.VolumeType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1607, 10)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'grossVolume'), teaser.data.bindings.opengis.raw.gml.VolumeType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1607, 10)))
 
 ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'relates'), UsageZonePropertyType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1608, 10)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'indirectlyHeatedAreaRatio'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1609, 10)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'indirectlyHeatedAreaRatio'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1609, 10)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'infiltrationRate'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1610, 10)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'infiltrationRate'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1610, 10)))
 
 ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'isCooled'), pyxb.binding.datatypes.boolean, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1611, 10)))
 
 ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'isHeated'), pyxb.binding.datatypes.boolean, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1612, 10)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'netVolume'), teaser.Data.SchemaBindings.opengis.raw.gml.VolumeType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1613, 10)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'netVolume'), teaser.data.bindings.opengis.raw.gml.VolumeType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1613, 10)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'volumeGeometry'), teaser.Data.SchemaBindings.opengis.raw.gml.SolidPropertyType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1614, 10)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'volumeGeometry'), teaser.data.bindings.opengis.raw.gml.SolidPropertyType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1614, 10)))
 
-ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'interiorRoom'), teaser.Data.SchemaBindings.opengis.citygml.raw.building.InteriorRoomPropertyType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1615, 10)))
+ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'interiorRoom'), teaser.data.bindings.opengis.citygml.raw.building.InteriorRoomPropertyType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1615, 10)))
 
 ThermalZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'boundedBy'), ThermalBoundaryPropertyType, scope=ThermalZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1616, 10)))
 
@@ -17157,7 +17157,7 @@ TimeValuesPropertiesPropertyType._Automaton = _BuildAutomaton_93()
 
 
 
-TransmittanceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'fraction'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=TransmittanceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1678, 6)))
+TransmittanceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'fraction'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=TransmittanceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1678, 6)))
 
 TransmittanceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'wavelengthRange'), WavelengthRangeType, scope=TransmittanceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1679, 6)))
 
@@ -17220,15 +17220,15 @@ UsageZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName
 
 UsageZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'heatingSchedule'), SchedulePropertyType, scope=UsageZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1699, 10)))
 
-UsageZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usageZoneClass'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=UsageZoneType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1700, 10)))
+UsageZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usageZoneClass'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=UsageZoneType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1700, 10)))
 
-UsageZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usedFloors'), teaser.Data.SchemaBindings.opengis.raw.gml.integerList, scope=UsageZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1707, 10)))
+UsageZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usedFloors'), teaser.data.bindings.opengis.raw.gml.integerList, scope=UsageZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1707, 10)))
 
 UsageZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'ventilationSchedule'), SchedulePropertyType, scope=UsageZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1708, 10)))
 
 UsageZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'floorArea'), FloorAreaPropertyType, scope=UsageZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1709, 10)))
 
-UsageZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'volumeGeometry'), teaser.Data.SchemaBindings.opengis.raw.gml.SolidPropertyType, scope=UsageZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1710, 10)))
+UsageZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'volumeGeometry'), teaser.data.bindings.opengis.raw.gml.SolidPropertyType, scope=UsageZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1710, 10)))
 
 UsageZoneType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'internalGains'), HeatExchangeTypePropertyType, scope=UsageZoneType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1711, 10)))
 
@@ -17795,13 +17795,13 @@ UsageZonePropertyType._Automaton = _BuildAutomaton_97()
 
 
 
-SolarEnergySystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'collectorSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.AreaType, scope=SolarEnergySystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 128, 10)))
+SolarEnergySystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'collectorSurface'), teaser.data.bindings.opengis.raw.gml.AreaType, scope=SolarEnergySystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 128, 10)))
 
-SolarEnergySystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'panelAzimuth'), teaser.Data.SchemaBindings.opengis.raw.gml.AngleType, scope=SolarEnergySystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 129, 10)))
+SolarEnergySystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'panelAzimuth'), teaser.data.bindings.opengis.raw.gml.AngleType, scope=SolarEnergySystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 129, 10)))
 
-SolarEnergySystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'panelInclination'), teaser.Data.SchemaBindings.opengis.raw.gml.AngleType, scope=SolarEnergySystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 130, 10)))
+SolarEnergySystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'panelInclination'), teaser.data.bindings.opengis.raw.gml.AngleType, scope=SolarEnergySystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 130, 10)))
 
-SolarEnergySystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'installedOn'), teaser.Data.SchemaBindings.opengis.raw.gml.ReferenceType, scope=SolarEnergySystemType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 131, 10)))
+SolarEnergySystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'installedOn'), teaser.data.bindings.opengis.raw.gml.ReferenceType, scope=SolarEnergySystemType, documentation='', location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 131, 10)))
 
 def _BuildAutomaton_98 ():
     # Remove this helper function from the namespace after it is invoked
@@ -19462,7 +19462,7 @@ CombinedHeatPowerType._Automaton = _BuildAutomaton_100()
 
 
 
-ConstantValueScheduleType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'averageValue'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ConstantValueScheduleType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 312, 10)))
+ConstantValueScheduleType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'averageValue'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ConstantValueScheduleType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 312, 10)))
 
 def _BuildAutomaton_101 ():
     # Remove this helper function from the namespace after it is invoked
@@ -19598,7 +19598,7 @@ DHWFacilitiesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.Expanded
 
 DHWFacilitiesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'numberOfWashBasins'), pyxb.binding.datatypes.integer, scope=DHWFacilitiesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 467, 10)))
 
-DHWFacilitiesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'waterStorageVolume'), teaser.Data.SchemaBindings.opengis.raw.gml.VolumeType, scope=DHWFacilitiesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 468, 10)))
+DHWFacilitiesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'waterStorageVolume'), teaser.data.bindings.opengis.raw.gml.VolumeType, scope=DHWFacilitiesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 468, 10)))
 
 def _BuildAutomaton_103 ():
     # Remove this helper function from the namespace after it is invoked
@@ -20403,9 +20403,9 @@ DualValueScheduleType._AddElement(pyxb.binding.basis.element(pyxb.namespace.Expa
 
 DualValueScheduleType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usageDaysPerYear'), pyxb.binding.datatypes.double, scope=DualValueScheduleType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 527, 10)))
 
-DualValueScheduleType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usageValue'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=DualValueScheduleType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 528, 10)))
+DualValueScheduleType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usageValue'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=DualValueScheduleType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 528, 10)))
 
-DualValueScheduleType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'idleValue'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=DualValueScheduleType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 529, 10)))
+DualValueScheduleType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'idleValue'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=DualValueScheduleType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 529, 10)))
 
 def _BuildAutomaton_105 ():
     # Remove this helper function from the namespace after it is invoked
@@ -20515,7 +20515,7 @@ DualValueScheduleType._Automaton = _BuildAutomaton_105()
 
 
 
-ElectricalAppliancesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'electricalPower'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ElectricalAppliancesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 551, 10)))
+ElectricalAppliancesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'electricalPower'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ElectricalAppliancesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 551, 10)))
 
 def _BuildAutomaton_106 ():
     # Remove this helper function from the namespace after it is invoked
@@ -21195,7 +21195,7 @@ ElectricalResistanceType._Automaton = _BuildAutomaton_107()
 
 GasType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'isVentilated'), pyxb.binding.datatypes.boolean, scope=GasType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 845, 10)))
 
-GasType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'rValue'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=GasType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 846, 10)))
+GasType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'rValue'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=GasType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 846, 10)))
 
 def _BuildAutomaton_108 ():
     # Remove this helper function from the namespace after it is invoked
@@ -22180,7 +22180,7 @@ HeatPumpType._Automaton = _BuildAutomaton_109()
 
 
 
-IrregularTimeSeriesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'uom'), teaser.Data.SchemaBindings.opengis.raw.gml.UnitOfMeasureType, scope=IrregularTimeSeriesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1003, 10)))
+IrregularTimeSeriesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'uom'), teaser.data.bindings.opengis.raw.gml.UnitOfMeasureType, scope=IrregularTimeSeriesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1003, 10)))
 
 IrregularTimeSeriesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'contains'), MeasurementPointPropertyType, scope=IrregularTimeSeriesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1004, 10)))
 
@@ -22277,7 +22277,7 @@ IrregularTimeSeriesType._Automaton = _BuildAutomaton_110()
 
 
 
-IrregularTimeSeriesFileType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'uom'), teaser.Data.SchemaBindings.opengis.raw.gml.UnitOfMeasureType, scope=IrregularTimeSeriesFileType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1023, 10)))
+IrregularTimeSeriesFileType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'uom'), teaser.data.bindings.opengis.raw.gml.UnitOfMeasureType, scope=IrregularTimeSeriesFileType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1023, 10)))
 
 IrregularTimeSeriesFileType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'file'), pyxb.binding.datatypes.anyURI, scope=IrregularTimeSeriesFileType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1024, 10)))
 
@@ -22479,7 +22479,7 @@ IrregularTimeSeriesFileType._Automaton = _BuildAutomaton_111()
 
 
 
-LightingFacilitiesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'electricalPower'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=LightingFacilitiesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1104, 10)))
+LightingFacilitiesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'electricalPower'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=LightingFacilitiesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1104, 10)))
 
 def _BuildAutomaton_112 ():
     # Remove this helper function from the namespace after it is invoked
@@ -22641,7 +22641,7 @@ LightingFacilitiesType._Automaton = _BuildAutomaton_112()
 
 MechanicalVentilationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'heatRecovery'), pyxb.binding.datatypes.boolean, scope=MechanicalVentilationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1138, 10)))
 
-MechanicalVentilationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'recuperationFactor'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=MechanicalVentilationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1139, 10)))
+MechanicalVentilationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'recuperationFactor'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=MechanicalVentilationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1139, 10)))
 
 def _BuildAutomaton_113 ():
     # Remove this helper function from the namespace after it is invoked
@@ -23193,9 +23193,9 @@ MechanicalVentilationType._Automaton = _BuildAutomaton_113()
 
 
 
-PowerDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'current'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=PowerDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1239, 10)))
+PowerDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'current'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=PowerDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1239, 10)))
 
-PowerDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'voltage'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=PowerDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1240, 10)))
+PowerDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'voltage'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=PowerDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1240, 10)))
 
 def _BuildAutomaton_114 ():
     # Remove this helper function from the namespace after it is invoked
@@ -23357,7 +23357,7 @@ PowerDistributionSystemType._Automaton = _BuildAutomaton_114()
 
 PowerStorageSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'batteryTechnology'), pyxb.binding.datatypes.string, scope=PowerStorageSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1259, 10)))
 
-PowerStorageSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'powerCapacity'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=PowerStorageSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1260, 10)))
+PowerStorageSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'powerCapacity'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=PowerStorageSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1260, 10)))
 
 def _BuildAutomaton_115 ():
     # Remove this helper function from the namespace after it is invoked
@@ -23492,11 +23492,11 @@ PowerStorageSystemType._Automaton = _BuildAutomaton_115()
 
 
 
-RegularTimeSeriesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'temporalExtent'), teaser.Data.SchemaBindings.opengis.raw.gml.TimePeriodPropertyType, scope=RegularTimeSeriesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1320, 10)))
+RegularTimeSeriesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'temporalExtent'), teaser.data.bindings.opengis.raw.gml.TimePeriodPropertyType, scope=RegularTimeSeriesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1320, 10)))
 
-RegularTimeSeriesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'timeInterval'), teaser.Data.SchemaBindings.opengis.raw.gml.TimeIntervalLengthType, scope=RegularTimeSeriesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1321, 10)))
+RegularTimeSeriesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'timeInterval'), teaser.data.bindings.opengis.raw.gml.TimeIntervalLengthType, scope=RegularTimeSeriesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1321, 10)))
 
-RegularTimeSeriesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'values'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureListType, scope=RegularTimeSeriesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1322, 10)))
+RegularTimeSeriesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'values'), teaser.data.bindings.opengis.raw.gml.MeasureListType, scope=RegularTimeSeriesType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1322, 10)))
 
 def _BuildAutomaton_116 ():
     # Remove this helper function from the namespace after it is invoked
@@ -23594,13 +23594,13 @@ RegularTimeSeriesType._Automaton = _BuildAutomaton_116()
 
 
 
-RegularTimeSeriesFileType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'uom'), teaser.Data.SchemaBindings.opengis.raw.gml.UnitOfMeasureType, scope=RegularTimeSeriesFileType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1341, 10)))
+RegularTimeSeriesFileType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'uom'), teaser.data.bindings.opengis.raw.gml.UnitOfMeasureType, scope=RegularTimeSeriesFileType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1341, 10)))
 
 RegularTimeSeriesFileType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'file'), pyxb.binding.datatypes.anyURI, scope=RegularTimeSeriesFileType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1342, 10)))
 
-RegularTimeSeriesFileType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'temporalExtent'), teaser.Data.SchemaBindings.opengis.raw.gml.TimePeriodPropertyType, scope=RegularTimeSeriesFileType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1343, 10)))
+RegularTimeSeriesFileType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'temporalExtent'), teaser.data.bindings.opengis.raw.gml.TimePeriodPropertyType, scope=RegularTimeSeriesFileType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1343, 10)))
 
-RegularTimeSeriesFileType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'timeInterval'), teaser.Data.SchemaBindings.opengis.raw.gml.TimeIntervalLengthType, scope=RegularTimeSeriesFileType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1344, 10)))
+RegularTimeSeriesFileType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'timeInterval'), teaser.data.bindings.opengis.raw.gml.TimeIntervalLengthType, scope=RegularTimeSeriesFileType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1344, 10)))
 
 RegularTimeSeriesFileType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'numberOfHeaderLines'), pyxb.binding.datatypes.integer, scope=RegularTimeSeriesFileType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1345, 10)))
 
@@ -23792,15 +23792,15 @@ RegularTimeSeriesFileType._Automaton = _BuildAutomaton_117()
 
 
 
-SolidMaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'conductivity'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=SolidMaterialType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1412, 10)))
+SolidMaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'conductivity'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=SolidMaterialType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1412, 10)))
 
-SolidMaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'density'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=SolidMaterialType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1413, 10)))
+SolidMaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'density'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=SolidMaterialType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1413, 10)))
 
-SolidMaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'permeance'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=SolidMaterialType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1414, 10)))
+SolidMaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'permeance'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=SolidMaterialType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1414, 10)))
 
-SolidMaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'porosity'), teaser.Data.SchemaBindings.opengis.raw.gml.ScaleType, scope=SolidMaterialType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1415, 10)))
+SolidMaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'porosity'), teaser.data.bindings.opengis.raw.gml.ScaleType, scope=SolidMaterialType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1415, 10)))
 
-SolidMaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'specificHeat'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=SolidMaterialType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1416, 10)))
+SolidMaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'specificHeat'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=SolidMaterialType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1416, 10)))
 
 def _BuildAutomaton_118 ():
     # Remove this helper function from the namespace after it is invoked
@@ -24324,13 +24324,13 @@ ThermalDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namesp
 
 ThermalDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'medium'), MediumType, scope=ThermalDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1555, 10)))
 
-ThermalDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'nominalFlow'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ThermalDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1556, 10)))
+ThermalDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'nominalFlow'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ThermalDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1556, 10)))
 
-ThermalDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'returnTemperature'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ThermalDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1557, 10)))
+ThermalDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'returnTemperature'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ThermalDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1557, 10)))
 
-ThermalDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'supplyTemperature'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ThermalDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1558, 10)))
+ThermalDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'supplyTemperature'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ThermalDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1558, 10)))
 
-ThermalDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'thermalLossesFactor'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ThermalDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1559, 10)))
+ThermalDistributionSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'thermalLossesFactor'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ThermalDistributionSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1559, 10)))
 
 def _BuildAutomaton_119 ():
     # Remove this helper function from the namespace after it is invoked
@@ -24610,13 +24610,13 @@ ThermalDistributionSystemType._Automaton = _BuildAutomaton_119()
 
 
 
-ThermalStorageSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'preparationTemperature'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ThermalStorageSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1578, 10)))
+ThermalStorageSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'preparationTemperature'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ThermalStorageSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1578, 10)))
 
 ThermalStorageSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'medium'), MediumType, scope=ThermalStorageSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1579, 10)))
 
-ThermalStorageSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'thermalLossesFactor'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=ThermalStorageSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1580, 10)))
+ThermalStorageSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'thermalLossesFactor'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=ThermalStorageSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1580, 10)))
 
-ThermalStorageSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'volume'), teaser.Data.SchemaBindings.opengis.raw.gml.VolumeType, scope=ThermalStorageSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1581, 10)))
+ThermalStorageSystemType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'volume'), teaser.data.bindings.opengis.raw.gml.VolumeType, scope=ThermalStorageSystemType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/energy/energy.xsd', 1581, 10)))
 
 def _BuildAutomaton_120 ():
     # Remove this helper function from the namespace after it is invoked
@@ -26041,107 +26041,107 @@ def _BuildAutomaton_123 ():
 SolarThermalSystemType._Automaton = _BuildAutomaton_123()
 
 
-averageCeilingHeight._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+averageCeilingHeight._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-basementCeilingHeightAboveGroundSurface._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+basementCeilingHeightAboveGroundSurface._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-buildingType._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+buildingType._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-constructionStyle._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+constructionStyle._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-eavesHeight._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+eavesHeight._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-grossVolume._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+grossVolume._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-landmarked._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+landmarked._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-referencePoint._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+referencePoint._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-ridgeHeight._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+ridgeHeight._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-openableRatio._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfOpening)
+openableRatio._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfOpening)
 
-atticType._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+atticType._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-basementType._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+basementType._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-energyPerformanceCertification._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+energyPerformanceCertification._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-refurbishmentMeasureOnBuilding._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+refurbishmentMeasureOnBuilding._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-has._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+has._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-thermalZones._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+thermalZones._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-usageZones._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+usageZones._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-floorArea._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
+floorArea._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfAbstractBuilding)
 
-refurbishmentMeasureOnBoundarySurface._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfBoundarySurface)
+refurbishmentMeasureOnBoundarySurface._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfBoundarySurface)
 
-globalSolarIrradiance._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfBoundarySurface)
+globalSolarIrradiance._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfBoundarySurface)
 
-daylightIlluminance._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfBoundarySurface)
+daylightIlluminance._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfBoundarySurface)
 
-equippedWith._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfBoundarySurface)
+equippedWith._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfBoundarySurface)
 
-correspondsTo._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfBoundarySurface)
+correspondsTo._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfBoundarySurface)
 
-construction._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.GenericApplicationPropertyOfCityObject)
+construction._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.GenericApplicationPropertyOfCityObject)
 
-constructionOrientation._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.GenericApplicationPropertyOfCityObject)
+constructionOrientation._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.GenericApplicationPropertyOfCityObject)
 
-energyDemands._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.GenericApplicationPropertyOfCityObject)
+energyDemands._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.GenericApplicationPropertyOfCityObject)
 
-indoorShading._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfOpening)
+indoorShading._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfOpening)
 
-outdoorShading._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfOpening)
+outdoorShading._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfOpening)
 
-refurbishmentMeasureOnOpening._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.building.GenericApplicationPropertyOfOpening)
+refurbishmentMeasureOnOpening._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.building.GenericApplicationPropertyOfOpening)
 
-Schedule._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.GML)
+Schedule._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.GML)
 
-StorageSystem._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.Feature)
+StorageSystem._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.Feature)
 
-TimeSeries._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.GML)
+TimeSeries._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.GML)
 
-AbstractMaterial._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+AbstractMaterial._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-BuildingUnit._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+BuildingUnit._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-Construction._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+Construction._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-ConstructionOrientation._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+ConstructionOrientation._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-EnergyConversionSystem._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.Feature)
+EnergyConversionSystem._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.Feature)
 
-EnergyDemand._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.Feature)
+EnergyDemand._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.Feature)
 
-EnergyDistributionSystem._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.Feature)
+EnergyDistributionSystem._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.Feature)
 
-EnergySource._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.Feature)
+EnergySource._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.Feature)
 
-Facilities._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.Feature)
+Facilities._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.Feature)
 
-Household._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.Feature)
+Household._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.Feature)
 
-ImageTexture._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.Feature)
+ImageTexture._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.Feature)
 
-Layer._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+Layer._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-LayerComponent._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.Feature)
+LayerComponent._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.Feature)
 
-Occupants._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.Feature)
+Occupants._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.Feature)
 
-SystemOperation._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.raw.gml.Feature)
+SystemOperation._setSubstitutionGroup(teaser.data.bindings.opengis.raw.gml.Feature)
 
-ThermalBoundary._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+ThermalBoundary._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-ThermalComponent._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+ThermalComponent._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-ThermalZone._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+ThermalZone._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-UsageZone._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+UsageZone._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
 SolarEnergySystem._setSubstitutionGroup(EnergyConversionSystem)
 

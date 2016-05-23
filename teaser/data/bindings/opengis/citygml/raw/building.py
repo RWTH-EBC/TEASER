@@ -24,17 +24,17 @@ if pyxb.__version__ != _PyXBVersion:
     raise pyxb.PyXBVersionError(_PyXBVersion)
 
 # Import bindings for namespaces imported into schema
-import teaser.Data.SchemaBindings.opengis.citygml.raw.base
+import teaser.data.bindings.opengis.citygml.raw.base
 import pyxb.bundles.common.xlink
-import teaser.Data.SchemaBindings.opengis.raw.gml
+import teaser.data.bindings.opengis.raw.gml
 import pyxb.binding.datatypes
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://www.opengis.net/citygml/building/2.0', create_if_missing=True)
 Namespace.configureCategories(['typeBinding', 'elementBinding'])
-_Namespace_gml = teaser.Data.SchemaBindings.opengis.raw.gml.Namespace
+_Namespace_gml = teaser.data.bindings.opengis.raw.gml.Namespace
 _Namespace_gml.configureCategories(['typeBinding', 'elementBinding'])
-_Namespace_core = teaser.Data.SchemaBindings.opengis.citygml.raw.base.Namespace
+_Namespace_core = teaser.data.bindings.opengis.citygml.raw.base.Namespace
 _Namespace_core.configureCategories(['typeBinding', 'elementBinding'])
 _Namespace = pyxb.bundles.common.xlink.Namespace
 _Namespace.configureCategories(['typeBinding', 'elementBinding'])
@@ -83,7 +83,7 @@ def CreateFromDOM (node, default_namespace=None):
 
 
 # Complex type {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType with content type ELEMENT_ONLY
-class AbstractBuildingType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractSiteType):
+class AbstractBuildingType (teaser.data.bindings.opengis.citygml.raw.base.AbstractSiteType):
     """Type describing the thematic and geometric attributes and the associations of buildings. It is an abstract
 				type, only its subclasses Building and BuildingPart can be instantiated. An _AbstractBuilding may consist of
 				BuildingParts, which are again _AbstractBuildings by inheritance. Thus an aggregation hierarchy between _AbstractBuildings
@@ -98,281 +98,281 @@ class AbstractBuildingType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.
     _Abstract = True
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'AbstractBuildingType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 22, 1)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractSiteType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractSiteType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractSiteType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractSiteType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractSiteType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractSiteType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfSite ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfSite) inherited from {http://www.opengis.net/citygml/2.0}AbstractSiteType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}class uses Python identifier class_
     __class = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'class'), 'class_', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0class', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 44, 5), )
 
-    
+
     class_ = property(__class.value, __class.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}function uses Python identifier function
     __function = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'function'), 'function', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0function', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 45, 5), )
 
-    
+
     function = property(__function.value, __function.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}usage uses Python identifier usage
     __usage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usage'), 'usage', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0usage', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 46, 5), )
 
-    
+
     usage = property(__usage.value, __usage.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}yearOfConstruction uses Python identifier yearOfConstruction
     __yearOfConstruction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'yearOfConstruction'), 'yearOfConstruction', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0yearOfConstruction', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 47, 5), )
 
-    
+
     yearOfConstruction = property(__yearOfConstruction.value, __yearOfConstruction.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}yearOfDemolition uses Python identifier yearOfDemolition
     __yearOfDemolition = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'yearOfDemolition'), 'yearOfDemolition', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0yearOfDemolition', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 48, 5), )
 
-    
+
     yearOfDemolition = property(__yearOfDemolition.value, __yearOfDemolition.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}roofType uses Python identifier roofType
     __roofType = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'roofType'), 'roofType', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0roofType', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 49, 5), )
 
-    
+
     roofType = property(__roofType.value, __roofType.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}measuredHeight uses Python identifier measuredHeight
     __measuredHeight = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'measuredHeight'), 'measuredHeight', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0measuredHeight', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 50, 5), )
 
-    
+
     measuredHeight = property(__measuredHeight.value, __measuredHeight.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}storeysAboveGround uses Python identifier storeysAboveGround
     __storeysAboveGround = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'storeysAboveGround'), 'storeysAboveGround', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0storeysAboveGround', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 51, 5), )
 
-    
+
     storeysAboveGround = property(__storeysAboveGround.value, __storeysAboveGround.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}storeysBelowGround uses Python identifier storeysBelowGround
     __storeysBelowGround = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'storeysBelowGround'), 'storeysBelowGround', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0storeysBelowGround', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 52, 5), )
 
-    
+
     storeysBelowGround = property(__storeysBelowGround.value, __storeysBelowGround.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}storeyHeightsAboveGround uses Python identifier storeyHeightsAboveGround
     __storeyHeightsAboveGround = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'storeyHeightsAboveGround'), 'storeyHeightsAboveGround', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0storeyHeightsAboveGround', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 53, 5), )
 
-    
+
     storeyHeightsAboveGround = property(__storeyHeightsAboveGround.value, __storeyHeightsAboveGround.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}storeyHeightsBelowGround uses Python identifier storeyHeightsBelowGround
     __storeyHeightsBelowGround = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'storeyHeightsBelowGround'), 'storeyHeightsBelowGround', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0storeyHeightsBelowGround', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 54, 5), )
 
-    
+
     storeyHeightsBelowGround = property(__storeyHeightsBelowGround.value, __storeyHeightsBelowGround.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod0FootPrint uses Python identifier lod0FootPrint
     __lod0FootPrint = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod0FootPrint'), 'lod0FootPrint', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod0FootPrint', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 55, 5), )
 
-    
+
     lod0FootPrint = property(__lod0FootPrint.value, __lod0FootPrint.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod0RoofEdge uses Python identifier lod0RoofEdge
     __lod0RoofEdge = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod0RoofEdge'), 'lod0RoofEdge', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod0RoofEdge', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 56, 5), )
 
-    
+
     lod0RoofEdge = property(__lod0RoofEdge.value, __lod0RoofEdge.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod1Solid uses Python identifier lod1Solid
     __lod1Solid = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1Solid'), 'lod1Solid', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod1Solid', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 57, 5), )
 
-    
+
     lod1Solid = property(__lod1Solid.value, __lod1Solid.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod1MultiSurface uses Python identifier lod1MultiSurface
     __lod1MultiSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1MultiSurface'), 'lod1MultiSurface', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod1MultiSurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 58, 5), )
 
-    
+
     lod1MultiSurface = property(__lod1MultiSurface.value, __lod1MultiSurface.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod1TerrainIntersection uses Python identifier lod1TerrainIntersection
     __lod1TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection'), 'lod1TerrainIntersection', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod1TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 59, 5), )
 
-    
+
     lod1TerrainIntersection = property(__lod1TerrainIntersection.value, __lod1TerrainIntersection.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod2Solid uses Python identifier lod2Solid
     __lod2Solid = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2Solid'), 'lod2Solid', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod2Solid', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 60, 5), )
 
-    
+
     lod2Solid = property(__lod2Solid.value, __lod2Solid.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod2MultiSurface uses Python identifier lod2MultiSurface
     __lod2MultiSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2MultiSurface'), 'lod2MultiSurface', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod2MultiSurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 61, 5), )
 
-    
+
     lod2MultiSurface = property(__lod2MultiSurface.value, __lod2MultiSurface.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod2MultiCurve uses Python identifier lod2MultiCurve
     __lod2MultiCurve = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2MultiCurve'), 'lod2MultiCurve', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod2MultiCurve', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 62, 5), )
 
-    
+
     lod2MultiCurve = property(__lod2MultiCurve.value, __lod2MultiCurve.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod2TerrainIntersection uses Python identifier lod2TerrainIntersection
     __lod2TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection'), 'lod2TerrainIntersection', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod2TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 63, 5), )
 
-    
+
     lod2TerrainIntersection = property(__lod2TerrainIntersection.value, __lod2TerrainIntersection.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}outerBuildingInstallation uses Python identifier outerBuildingInstallation
     __outerBuildingInstallation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'outerBuildingInstallation'), 'outerBuildingInstallation', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0outerBuildingInstallation', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 64, 5), )
 
-    
+
     outerBuildingInstallation = property(__outerBuildingInstallation.value, __outerBuildingInstallation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}interiorBuildingInstallation uses Python identifier interiorBuildingInstallation
     __interiorBuildingInstallation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'interiorBuildingInstallation'), 'interiorBuildingInstallation', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0interiorBuildingInstallation', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 65, 5), )
 
-    
+
     interiorBuildingInstallation = property(__interiorBuildingInstallation.value, __interiorBuildingInstallation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}boundedBy uses Python identifier boundedBy_
     __boundedBy_ = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'boundedBy'), 'boundedBy_', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0boundedBy', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 67, 5), )
 
-    
+
     boundedBy_ = property(__boundedBy_.value, __boundedBy_.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod3Solid uses Python identifier lod3Solid
     __lod3Solid = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3Solid'), 'lod3Solid', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod3Solid', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 68, 5), )
 
-    
+
     lod3Solid = property(__lod3Solid.value, __lod3Solid.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod3MultiSurface uses Python identifier lod3MultiSurface
     __lod3MultiSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiSurface'), 'lod3MultiSurface', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod3MultiSurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 69, 5), )
 
-    
+
     lod3MultiSurface = property(__lod3MultiSurface.value, __lod3MultiSurface.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod3MultiCurve uses Python identifier lod3MultiCurve
     __lod3MultiCurve = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiCurve'), 'lod3MultiCurve', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod3MultiCurve', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 70, 5), )
 
-    
+
     lod3MultiCurve = property(__lod3MultiCurve.value, __lod3MultiCurve.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod3TerrainIntersection uses Python identifier lod3TerrainIntersection
     __lod3TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection'), 'lod3TerrainIntersection', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod3TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 71, 5), )
 
-    
+
     lod3TerrainIntersection = property(__lod3TerrainIntersection.value, __lod3TerrainIntersection.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4Solid uses Python identifier lod4Solid
     __lod4Solid = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4Solid'), 'lod4Solid', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod4Solid', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 72, 5), )
 
-    
+
     lod4Solid = property(__lod4Solid.value, __lod4Solid.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4MultiSurface uses Python identifier lod4MultiSurface
     __lod4MultiSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), 'lod4MultiSurface', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod4MultiSurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 73, 5), )
 
-    
+
     lod4MultiSurface = property(__lod4MultiSurface.value, __lod4MultiSurface.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4MultiCurve uses Python identifier lod4MultiCurve
     __lod4MultiCurve = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiCurve'), 'lod4MultiCurve', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod4MultiCurve', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 74, 5), )
 
-    
+
     lod4MultiCurve = property(__lod4MultiCurve.value, __lod4MultiCurve.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4TerrainIntersection uses Python identifier lod4TerrainIntersection
     __lod4TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection'), 'lod4TerrainIntersection', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0lod4TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 75, 5), )
 
-    
+
     lod4TerrainIntersection = property(__lod4TerrainIntersection.value, __lod4TerrainIntersection.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}interiorRoom uses Python identifier interiorRoom
     __interiorRoom = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'interiorRoom'), 'interiorRoom', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0interiorRoom', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 76, 5), )
 
-    
+
     interiorRoom = property(__interiorRoom.value, __interiorRoom.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}consistsOfBuildingPart uses Python identifier consistsOfBuildingPart
     __consistsOfBuildingPart = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'consistsOfBuildingPart'), 'consistsOfBuildingPart', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0consistsOfBuildingPart', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 77, 5), )
 
-    
+
     consistsOfBuildingPart = property(__consistsOfBuildingPart.value, __consistsOfBuildingPart.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}address uses Python identifier address
     __address = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'address'), 'address', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0address', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 78, 5), )
 
-    
+
     address = property(__address.value, __address.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfAbstractBuilding uses Python identifier GenericApplicationPropertyOfAbstractBuilding
     __GenericApplicationPropertyOfAbstractBuilding = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfAbstractBuilding'), 'GenericApplicationPropertyOfAbstractBuilding', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBuildingType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfAbstractBuilding', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 87, 1), )
 
-    
+
     GenericApplicationPropertyOfAbstractBuilding = property(__GenericApplicationPropertyOfAbstractBuilding.value, __GenericApplicationPropertyOfAbstractBuilding.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __class.name() : __class,
@@ -412,7 +412,7 @@ class AbstractBuildingType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.
         __GenericApplicationPropertyOfAbstractBuilding.name() : __GenericApplicationPropertyOfAbstractBuilding
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'AbstractBuildingType', AbstractBuildingType)
 
@@ -430,75 +430,75 @@ class BuildingPartPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}BuildingPart uses Python identifier BuildingPart
     __BuildingPart = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'BuildingPart'), 'BuildingPart', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingPartPropertyType_httpwww_opengis_netcitygmlbuilding2_0BuildingPart', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 113, 1), )
 
-    
+
     BuildingPart = property(__BuildingPart.value, __BuildingPart.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingPartPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingPartPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingPartPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingPartPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingPartPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingPartPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingPartPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingPartPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -518,7 +518,7 @@ Namespace.addCategoryObject('typeBinding', 'BuildingPartPropertyType', BuildingP
 
 
 # Complex type {http://www.opengis.net/citygml/building/2.0}BuildingInstallationType with content type ELEMENT_ONLY
-class BuildingInstallationType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class BuildingInstallationType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """A BuildingInstallation is a part of a Building which has not the significance of a BuildingPart. Examples
 				are stairs, antennas, balconies or small roofs. As subclass of _CityObject, a BuildingInstallation inherits all attributes
 				and relations, in particular an id, names, external references, and generalization relations. """
@@ -527,111 +527,111 @@ class BuildingInstallationType (teaser.Data.SchemaBindings.opengis.citygml.raw.b
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'BuildingInstallationType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 129, 1)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}class uses Python identifier class_
     __class = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'class'), 'class_', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0class', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 138, 5), )
 
-    
+
     class_ = property(__class.value, __class.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}function uses Python identifier function
     __function = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'function'), 'function', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0function', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 139, 5), )
 
-    
+
     function = property(__function.value, __function.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}usage uses Python identifier usage
     __usage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usage'), 'usage', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0usage', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 140, 5), )
 
-    
+
     usage = property(__usage.value, __usage.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod2Geometry uses Python identifier lod2Geometry
     __lod2Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry'), 'lod2Geometry', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0lod2Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 141, 5), )
 
-    
+
     lod2Geometry = property(__lod2Geometry.value, __lod2Geometry.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod3Geometry uses Python identifier lod3Geometry
     __lod3Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry'), 'lod3Geometry', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0lod3Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 142, 5), )
 
-    
+
     lod3Geometry = property(__lod3Geometry.value, __lod3Geometry.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4Geometry uses Python identifier lod4Geometry
     __lod4Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), 'lod4Geometry', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0lod4Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 143, 5), )
 
-    
+
     lod4Geometry = property(__lod4Geometry.value, __lod4Geometry.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod2ImplicitRepresentation uses Python identifier lod2ImplicitRepresentation
     __lod2ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation'), 'lod2ImplicitRepresentation', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0lod2ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 144, 5), )
 
-    
+
     lod2ImplicitRepresentation = property(__lod2ImplicitRepresentation.value, __lod2ImplicitRepresentation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod3ImplicitRepresentation uses Python identifier lod3ImplicitRepresentation
     __lod3ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), 'lod3ImplicitRepresentation', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0lod3ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 145, 5), )
 
-    
+
     lod3ImplicitRepresentation = property(__lod3ImplicitRepresentation.value, __lod3ImplicitRepresentation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4ImplicitRepresentation uses Python identifier lod4ImplicitRepresentation
     __lod4ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), 'lod4ImplicitRepresentation', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0lod4ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 146, 5), )
 
-    
+
     lod4ImplicitRepresentation = property(__lod4ImplicitRepresentation.value, __lod4ImplicitRepresentation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}boundedBy uses Python identifier boundedBy_
     __boundedBy_ = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'boundedBy'), 'boundedBy_', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0boundedBy', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 147, 5), )
 
-    
+
     boundedBy_ = property(__boundedBy_.value, __boundedBy_.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBuildingInstallation uses Python identifier GenericApplicationPropertyOfBuildingInstallation
     __GenericApplicationPropertyOfBuildingInstallation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfBuildingInstallation'), 'GenericApplicationPropertyOfBuildingInstallation', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfBuildingInstallation', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 156, 1), )
 
-    
+
     GenericApplicationPropertyOfBuildingInstallation = property(__GenericApplicationPropertyOfBuildingInstallation.value, __GenericApplicationPropertyOfBuildingInstallation.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __class.name() : __class,
@@ -647,7 +647,7 @@ class BuildingInstallationType (teaser.Data.SchemaBindings.opengis.citygml.raw.b
         __GenericApplicationPropertyOfBuildingInstallation.name() : __GenericApplicationPropertyOfBuildingInstallation
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'BuildingInstallationType', BuildingInstallationType)
 
@@ -665,75 +665,75 @@ class BuildingInstallationPropertyType (pyxb.binding.basis.complexTypeDefinition
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}BuildingInstallation uses Python identifier BuildingInstallation
     __BuildingInstallation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'BuildingInstallation'), 'BuildingInstallation', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationPropertyType_httpwww_opengis_netcitygmlbuilding2_0BuildingInstallation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 154, 1), )
 
-    
+
     BuildingInstallation = property(__BuildingInstallation.value, __BuildingInstallation.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingInstallationPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -753,7 +753,7 @@ Namespace.addCategoryObject('typeBinding', 'BuildingInstallationPropertyType', B
 
 
 # Complex type {http://www.opengis.net/citygml/building/2.0}IntBuildingInstallationType with content type ELEMENT_ONLY
-class IntBuildingInstallationType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class IntBuildingInstallationType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """An IntBuildingInstallation is an interior part of a Building which has a specific function or semantical
 				meaning. Examples are interior stairs, railings, radiators or pipes. As subclass of _CityObject, a
 				nIntBuildingInstallation inherits all attributes and relations, in particular an id, names, external references, and
@@ -763,83 +763,83 @@ class IntBuildingInstallationType (teaser.Data.SchemaBindings.opengis.citygml.ra
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'IntBuildingInstallationType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 170, 1)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}class uses Python identifier class_
     __class = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'class'), 'class_', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0class', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 180, 5), )
 
-    
+
     class_ = property(__class.value, __class.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}function uses Python identifier function
     __function = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'function'), 'function', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0function', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 181, 5), )
 
-    
+
     function = property(__function.value, __function.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}usage uses Python identifier usage
     __usage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usage'), 'usage', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0usage', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 182, 5), )
 
-    
+
     usage = property(__usage.value, __usage.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4Geometry uses Python identifier lod4Geometry
     __lod4Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), 'lod4Geometry', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0lod4Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 183, 5), )
 
-    
+
     lod4Geometry = property(__lod4Geometry.value, __lod4Geometry.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4ImplicitRepresentation uses Python identifier lod4ImplicitRepresentation
     __lod4ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), 'lod4ImplicitRepresentation', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0lod4ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 184, 5), )
 
-    
+
     lod4ImplicitRepresentation = property(__lod4ImplicitRepresentation.value, __lod4ImplicitRepresentation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}boundedBy uses Python identifier boundedBy_
     __boundedBy_ = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'boundedBy'), 'boundedBy_', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0boundedBy', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 185, 5), )
 
-    
+
     boundedBy_ = property(__boundedBy_.value, __boundedBy_.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfIntBuildingInstallation uses Python identifier GenericApplicationPropertyOfIntBuildingInstallation
     __GenericApplicationPropertyOfIntBuildingInstallation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfIntBuildingInstallation'), 'GenericApplicationPropertyOfIntBuildingInstallation', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfIntBuildingInstallation', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 194, 1), )
 
-    
+
     GenericApplicationPropertyOfIntBuildingInstallation = property(__GenericApplicationPropertyOfIntBuildingInstallation.value, __GenericApplicationPropertyOfIntBuildingInstallation.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __class.name() : __class,
@@ -851,7 +851,7 @@ class IntBuildingInstallationType (teaser.Data.SchemaBindings.opengis.citygml.ra
         __GenericApplicationPropertyOfIntBuildingInstallation.name() : __GenericApplicationPropertyOfIntBuildingInstallation
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'IntBuildingInstallationType', IntBuildingInstallationType)
 
@@ -869,75 +869,75 @@ class IntBuildingInstallationPropertyType (pyxb.binding.basis.complexTypeDefinit
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}IntBuildingInstallation uses Python identifier IntBuildingInstallation
     __IntBuildingInstallation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'IntBuildingInstallation'), 'IntBuildingInstallation', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationPropertyType_httpwww_opengis_netcitygmlbuilding2_0IntBuildingInstallation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 192, 1), )
 
-    
+
     IntBuildingInstallation = property(__IntBuildingInstallation.value, __IntBuildingInstallation.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_opengis_netcitygmlbuilding2_0_IntBuildingInstallationPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -957,7 +957,7 @@ Namespace.addCategoryObject('typeBinding', 'IntBuildingInstallationPropertyType'
 
 
 # Complex type {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType with content type ELEMENT_ONLY
-class AbstractBoundarySurfaceType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class AbstractBoundarySurfaceType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """A BoundarySurface is a thematic object which classifies surfaces bounding an _AbstractBuilding, Room,
 				BuildingInstallation, and IntBuildingInstallation. The geometry of a BoundarySurface is given by MultiSurfaces. As it is a
 				subclass of _CityObject, it inherits all atributes and relations, in particular the external references, and the
@@ -967,69 +967,69 @@ class AbstractBoundarySurfaceType (teaser.Data.SchemaBindings.opengis.citygml.ra
     _Abstract = True
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'AbstractBoundarySurfaceType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 210, 1)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod2MultiSurface uses Python identifier lod2MultiSurface
     __lod2MultiSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2MultiSurface'), 'lod2MultiSurface', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBoundarySurfaceType_httpwww_opengis_netcitygmlbuilding2_0lod2MultiSurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 220, 5), )
 
-    
+
     lod2MultiSurface = property(__lod2MultiSurface.value, __lod2MultiSurface.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod3MultiSurface uses Python identifier lod3MultiSurface
     __lod3MultiSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiSurface'), 'lod3MultiSurface', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBoundarySurfaceType_httpwww_opengis_netcitygmlbuilding2_0lod3MultiSurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 221, 5), )
 
-    
+
     lod3MultiSurface = property(__lod3MultiSurface.value, __lod3MultiSurface.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4MultiSurface uses Python identifier lod4MultiSurface
     __lod4MultiSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), 'lod4MultiSurface', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBoundarySurfaceType_httpwww_opengis_netcitygmlbuilding2_0lod4MultiSurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 222, 5), )
 
-    
+
     lod4MultiSurface = property(__lod4MultiSurface.value, __lod4MultiSurface.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}opening uses Python identifier opening
     __opening = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'opening'), 'opening', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBoundarySurfaceType_httpwww_opengis_netcitygmlbuilding2_0opening', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 223, 5), )
 
-    
+
     opening = property(__opening.value, __opening.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBoundarySurface uses Python identifier GenericApplicationPropertyOfBoundarySurface
     __GenericApplicationPropertyOfBoundarySurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfBoundarySurface'), 'GenericApplicationPropertyOfBoundarySurface', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractBoundarySurfaceType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfBoundarySurface', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 232, 1), )
 
-    
+
     GenericApplicationPropertyOfBoundarySurface = property(__GenericApplicationPropertyOfBoundarySurface.value, __GenericApplicationPropertyOfBoundarySurface.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __lod2MultiSurface.name() : __lod2MultiSurface,
@@ -1039,7 +1039,7 @@ class AbstractBoundarySurfaceType (teaser.Data.SchemaBindings.opengis.citygml.ra
         __GenericApplicationPropertyOfBoundarySurface.name() : __GenericApplicationPropertyOfBoundarySurface
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'AbstractBoundarySurfaceType', AbstractBoundarySurfaceType)
 
@@ -1060,75 +1060,75 @@ class BoundarySurfacePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_BoundarySurface uses Python identifier BoundarySurface
     __BoundarySurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_BoundarySurface'), 'BoundarySurface', '__httpwww_opengis_netcitygmlbuilding2_0_BoundarySurfacePropertyType_httpwww_opengis_netcitygmlbuilding2_0_BoundarySurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 230, 1), )
 
-    
+
     BoundarySurface = property(__BoundarySurface.value, __BoundarySurface.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_opengis_netcitygmlbuilding2_0_BoundarySurfacePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_opengis_netcitygmlbuilding2_0_BoundarySurfacePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_opengis_netcitygmlbuilding2_0_BoundarySurfacePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_opengis_netcitygmlbuilding2_0_BoundarySurfacePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_opengis_netcitygmlbuilding2_0_BoundarySurfacePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_opengis_netcitygmlbuilding2_0_BoundarySurfacePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_opengis_netcitygmlbuilding2_0_BoundarySurfacePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_opengis_netcitygmlbuilding2_0_BoundarySurfacePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -1160,75 +1160,75 @@ class OpeningPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_Opening uses Python identifier Opening
     __Opening = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_Opening'), 'Opening', '__httpwww_opengis_netcitygmlbuilding2_0_OpeningPropertyType_httpwww_opengis_netcitygmlbuilding2_0_Opening', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 412, 1), )
 
-    
+
     Opening = property(__Opening.value, __Opening.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_opengis_netcitygmlbuilding2_0_OpeningPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_opengis_netcitygmlbuilding2_0_OpeningPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_opengis_netcitygmlbuilding2_0_OpeningPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_opengis_netcitygmlbuilding2_0_OpeningPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_opengis_netcitygmlbuilding2_0_OpeningPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_opengis_netcitygmlbuilding2_0_OpeningPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_opengis_netcitygmlbuilding2_0_OpeningPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_opengis_netcitygmlbuilding2_0_OpeningPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -1248,7 +1248,7 @@ Namespace.addCategoryObject('typeBinding', 'OpeningPropertyType', OpeningPropert
 
 
 # Complex type {http://www.opengis.net/citygml/building/2.0}AbstractOpeningType with content type ELEMENT_ONLY
-class AbstractOpeningType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class AbstractOpeningType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """ Type for openings (doors, windows) in boundary surfaces. Used in LOD3 and LOD4 only. As subclass of
 				_CityObject, an _Opening inherits all attributes and relations, in particular an id, names, external references, and
 				generalization relations. """
@@ -1257,69 +1257,69 @@ class AbstractOpeningType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.A
     _Abstract = True
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'AbstractOpeningType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 393, 1)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod3MultiSurface uses Python identifier lod3MultiSurface
     __lod3MultiSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiSurface'), 'lod3MultiSurface', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractOpeningType_httpwww_opengis_netcitygmlbuilding2_0lod3MultiSurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 402, 5), )
 
-    
+
     lod3MultiSurface = property(__lod3MultiSurface.value, __lod3MultiSurface.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4MultiSurface uses Python identifier lod4MultiSurface
     __lod4MultiSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), 'lod4MultiSurface', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractOpeningType_httpwww_opengis_netcitygmlbuilding2_0lod4MultiSurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 403, 5), )
 
-    
+
     lod4MultiSurface = property(__lod4MultiSurface.value, __lod4MultiSurface.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod3ImplicitRepresentation uses Python identifier lod3ImplicitRepresentation
     __lod3ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), 'lod3ImplicitRepresentation', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractOpeningType_httpwww_opengis_netcitygmlbuilding2_0lod3ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 404, 5), )
 
-    
+
     lod3ImplicitRepresentation = property(__lod3ImplicitRepresentation.value, __lod3ImplicitRepresentation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4ImplicitRepresentation uses Python identifier lod4ImplicitRepresentation
     __lod4ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), 'lod4ImplicitRepresentation', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractOpeningType_httpwww_opengis_netcitygmlbuilding2_0lod4ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 405, 5), )
 
-    
+
     lod4ImplicitRepresentation = property(__lod4ImplicitRepresentation.value, __lod4ImplicitRepresentation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfOpening uses Python identifier GenericApplicationPropertyOfOpening
     __GenericApplicationPropertyOfOpening = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfOpening'), 'GenericApplicationPropertyOfOpening', '__httpwww_opengis_netcitygmlbuilding2_0_AbstractOpeningType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfOpening', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 414, 1), )
 
-    
+
     GenericApplicationPropertyOfOpening = property(__GenericApplicationPropertyOfOpening.value, __GenericApplicationPropertyOfOpening.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __lod3MultiSurface.name() : __lod3MultiSurface,
@@ -1329,13 +1329,13 @@ class AbstractOpeningType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.A
         __GenericApplicationPropertyOfOpening.name() : __GenericApplicationPropertyOfOpening
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'AbstractOpeningType', AbstractOpeningType)
 
 
 # Complex type {http://www.opengis.net/citygml/building/2.0}RoomType with content type ELEMENT_ONLY
-class RoomType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class RoomType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """A Room is a thematic object for modelling the closed parts inside a building. It has to be closed, if
 				necessary by using closure surfaces. The geometry may be either a solid, or a MultiSurface if the boundary is not
 				topologically clean. The room connectivity may be derived by detecting shared thematic openings or closure surfaces: two
@@ -1347,97 +1347,97 @@ class RoomType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCity
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'RoomType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 457, 1)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}class uses Python identifier class_
     __class = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'class'), 'class_', '__httpwww_opengis_netcitygmlbuilding2_0_RoomType_httpwww_opengis_netcitygmlbuilding2_0class', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 469, 5), )
 
-    
+
     class_ = property(__class.value, __class.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}function uses Python identifier function
     __function = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'function'), 'function', '__httpwww_opengis_netcitygmlbuilding2_0_RoomType_httpwww_opengis_netcitygmlbuilding2_0function', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 470, 5), )
 
-    
+
     function = property(__function.value, __function.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}usage uses Python identifier usage
     __usage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usage'), 'usage', '__httpwww_opengis_netcitygmlbuilding2_0_RoomType_httpwww_opengis_netcitygmlbuilding2_0usage', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 471, 5), )
 
-    
+
     usage = property(__usage.value, __usage.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4Solid uses Python identifier lod4Solid
     __lod4Solid = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4Solid'), 'lod4Solid', '__httpwww_opengis_netcitygmlbuilding2_0_RoomType_httpwww_opengis_netcitygmlbuilding2_0lod4Solid', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 472, 5), )
 
-    
+
     lod4Solid = property(__lod4Solid.value, __lod4Solid.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4MultiSurface uses Python identifier lod4MultiSurface
     __lod4MultiSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), 'lod4MultiSurface', '__httpwww_opengis_netcitygmlbuilding2_0_RoomType_httpwww_opengis_netcitygmlbuilding2_0lod4MultiSurface', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 473, 5), )
 
-    
+
     lod4MultiSurface = property(__lod4MultiSurface.value, __lod4MultiSurface.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}boundedBy uses Python identifier boundedBy_
     __boundedBy_ = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'boundedBy'), 'boundedBy_', '__httpwww_opengis_netcitygmlbuilding2_0_RoomType_httpwww_opengis_netcitygmlbuilding2_0boundedBy', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 474, 5), )
 
-    
+
     boundedBy_ = property(__boundedBy_.value, __boundedBy_.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}interiorFurniture uses Python identifier interiorFurniture
     __interiorFurniture = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'interiorFurniture'), 'interiorFurniture', '__httpwww_opengis_netcitygmlbuilding2_0_RoomType_httpwww_opengis_netcitygmlbuilding2_0interiorFurniture', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 475, 5), )
 
-    
+
     interiorFurniture = property(__interiorFurniture.value, __interiorFurniture.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}roomInstallation uses Python identifier roomInstallation
     __roomInstallation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'roomInstallation'), 'roomInstallation', '__httpwww_opengis_netcitygmlbuilding2_0_RoomType_httpwww_opengis_netcitygmlbuilding2_0roomInstallation', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 476, 5), )
 
-    
+
     roomInstallation = property(__roomInstallation.value, __roomInstallation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfRoom uses Python identifier GenericApplicationPropertyOfRoom
     __GenericApplicationPropertyOfRoom = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfRoom'), 'GenericApplicationPropertyOfRoom', '__httpwww_opengis_netcitygmlbuilding2_0_RoomType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfRoom', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 485, 1), )
 
-    
+
     GenericApplicationPropertyOfRoom = property(__GenericApplicationPropertyOfRoom.value, __GenericApplicationPropertyOfRoom.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __class.name() : __class,
@@ -1451,13 +1451,13 @@ class RoomType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCity
         __GenericApplicationPropertyOfRoom.name() : __GenericApplicationPropertyOfRoom
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'RoomType', RoomType)
 
 
 # Complex type {http://www.opengis.net/citygml/building/2.0}BuildingFurnitureType with content type ELEMENT_ONLY
-class BuildingFurnitureType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class BuildingFurnitureType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """Type for building furnitures. As subclass of _CityObject, a BuildingFurniture inherits all attributes and
 				relations, in particular an id, names, external references, and generalization relations. """
     _TypeDefinition = None
@@ -1465,76 +1465,76 @@ class BuildingFurnitureType (teaser.Data.SchemaBindings.opengis.citygml.raw.base
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'BuildingFurnitureType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 487, 1)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}class uses Python identifier class_
     __class = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'class'), 'class_', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingFurnitureType_httpwww_opengis_netcitygmlbuilding2_0class', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 495, 5), )
 
-    
+
     class_ = property(__class.value, __class.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}function uses Python identifier function
     __function = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'function'), 'function', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingFurnitureType_httpwww_opengis_netcitygmlbuilding2_0function', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 496, 5), )
 
-    
+
     function = property(__function.value, __function.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}usage uses Python identifier usage
     __usage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usage'), 'usage', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingFurnitureType_httpwww_opengis_netcitygmlbuilding2_0usage', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 497, 5), )
 
-    
+
     usage = property(__usage.value, __usage.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4Geometry uses Python identifier lod4Geometry
     __lod4Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), 'lod4Geometry', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingFurnitureType_httpwww_opengis_netcitygmlbuilding2_0lod4Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 498, 5), )
 
-    
+
     lod4Geometry = property(__lod4Geometry.value, __lod4Geometry.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}lod4ImplicitRepresentation uses Python identifier lod4ImplicitRepresentation
     __lod4ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), 'lod4ImplicitRepresentation', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingFurnitureType_httpwww_opengis_netcitygmlbuilding2_0lod4ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 499, 5), )
 
-    
+
     lod4ImplicitRepresentation = property(__lod4ImplicitRepresentation.value, __lod4ImplicitRepresentation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBuildingFurniture uses Python identifier GenericApplicationPropertyOfBuildingFurniture
     __GenericApplicationPropertyOfBuildingFurniture = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfBuildingFurniture'), 'GenericApplicationPropertyOfBuildingFurniture', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingFurnitureType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfBuildingFurniture', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 508, 1), )
 
-    
+
     GenericApplicationPropertyOfBuildingFurniture = property(__GenericApplicationPropertyOfBuildingFurniture.value, __GenericApplicationPropertyOfBuildingFurniture.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __class.name() : __class,
@@ -1545,7 +1545,7 @@ class BuildingFurnitureType (teaser.Data.SchemaBindings.opengis.citygml.raw.base
         __GenericApplicationPropertyOfBuildingFurniture.name() : __GenericApplicationPropertyOfBuildingFurniture
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'BuildingFurnitureType', BuildingFurnitureType)
 
@@ -1562,75 +1562,75 @@ class InteriorRoomPropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}Room uses Python identifier Room
     __Room = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Room'), 'Room', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorRoomPropertyType_httpwww_opengis_netcitygmlbuilding2_0Room', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 483, 1), )
 
-    
+
     Room = property(__Room.value, __Room.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorRoomPropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorRoomPropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorRoomPropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorRoomPropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorRoomPropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorRoomPropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorRoomPropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorRoomPropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -1662,75 +1662,75 @@ class InteriorFurniturePropertyType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}BuildingFurniture uses Python identifier BuildingFurniture
     __BuildingFurniture = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'BuildingFurniture'), 'BuildingFurniture', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorFurniturePropertyType_httpwww_opengis_netcitygmlbuilding2_0BuildingFurniture', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 506, 1), )
 
-    
+
     BuildingFurniture = property(__BuildingFurniture.value, __BuildingFurniture.set, None, None)
 
-    
+
     # Attribute {http://www.opengis.net/gml}remoteSchema uses Python identifier remoteSchema
     __remoteSchema = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace_gml, 'remoteSchema'), 'remoteSchema', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorFurniturePropertyType_httpwww_opengis_netgmlremoteSchema', pyxb.binding.datatypes.anyURI)
     __remoteSchema._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 258, 1)
     __remoteSchema._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 269, 2)
-    
+
     remoteSchema = property(__remoteSchema.value, __remoteSchema.set, None, 'Reference to an XML Schema fragment that specifies the content model of the propertys value. This is in conformance with the XML Schema Section 4.14 Referencing Schemas from Elsewhere.')
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}type uses Python identifier type
     __type = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'type'), 'type', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorFurniturePropertyType_httpwww_w3_org1999xlinktype', pyxb.bundles.common.xlink.typeType, fixed=True, unicode_default='simple')
     __type._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 29, 1)
     __type._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 112, 2)
-    
+
     type = property(__type.value, __type.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}href uses Python identifier href
     __href = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'href'), 'href', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorFurniturePropertyType_httpwww_w3_org1999xlinkhref', pyxb.bundles.common.xlink.hrefType)
     __href._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 42, 1)
     __href._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 113, 2)
-    
+
     href = property(__href.value, __href.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}role uses Python identifier role
     __role = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'role'), 'role', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorFurniturePropertyType_httpwww_w3_org1999xlinkrole', pyxb.bundles.common.xlink.roleType)
     __role._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 48, 1)
     __role._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 114, 2)
-    
+
     role = property(__role.value, __role.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}arcrole uses Python identifier arcrole
     __arcrole = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'arcrole'), 'arcrole', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorFurniturePropertyType_httpwww_w3_org1999xlinkarcrole', pyxb.bundles.common.xlink.arcroleType)
     __arcrole._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 56, 1)
     __arcrole._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 115, 2)
-    
+
     arcrole = property(__arcrole.value, __arcrole.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}title uses Python identifier title
     __title = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'title'), 'title', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorFurniturePropertyType_httpwww_w3_org1999xlinktitle', pyxb.bundles.common.xlink.titleAttrType)
     __title._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 64, 1)
     __title._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 116, 2)
-    
+
     title = property(__title.value, __title.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}show uses Python identifier show
     __show = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'show'), 'show', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorFurniturePropertyType_httpwww_w3_org1999xlinkshow', pyxb.bundles.common.xlink.showType)
     __show._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 70, 1)
     __show._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 117, 2)
-    
+
     show = property(__show.value, __show.set, None, None)
 
-    
+
     # Attribute {http://www.w3.org/1999/xlink}actuate uses Python identifier actuate
     __actuate = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(_Namespace, 'actuate'), 'actuate', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorFurniturePropertyType_httpwww_w3_org1999xlinkactuate', pyxb.bundles.common.xlink.actuateType)
     __actuate._DeclarationLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 82, 1)
     __actuate._UseLocation = pyxb.utils.utility.Location('/tmp/pyxbdist.mqXn05k/PyXB-1.2.4/pyxb/bundles/common/schemas/xlink.xsd', 118, 2)
-    
+
     actuate = property(__actuate.value, __actuate.set, None, None)
 
     _ElementMap.update({
@@ -1760,116 +1760,116 @@ class BuildingType (AbstractBuildingType):
     _ElementMap = AbstractBuildingType._ElementMap.copy()
     _AttributeMap = AbstractBuildingType._AttributeMap.copy()
     # Base type is AbstractBuildingType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfSite ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfSite) inherited from {http://www.opengis.net/citygml/2.0}AbstractSiteType
-    
+
     # Element class_ ({http://www.opengis.net/citygml/building/2.0}class) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element function ({http://www.opengis.net/citygml/building/2.0}function) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element usage ({http://www.opengis.net/citygml/building/2.0}usage) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element yearOfConstruction ({http://www.opengis.net/citygml/building/2.0}yearOfConstruction) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element yearOfDemolition ({http://www.opengis.net/citygml/building/2.0}yearOfDemolition) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element roofType ({http://www.opengis.net/citygml/building/2.0}roofType) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element measuredHeight ({http://www.opengis.net/citygml/building/2.0}measuredHeight) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element storeysAboveGround ({http://www.opengis.net/citygml/building/2.0}storeysAboveGround) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element storeysBelowGround ({http://www.opengis.net/citygml/building/2.0}storeysBelowGround) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element storeyHeightsAboveGround ({http://www.opengis.net/citygml/building/2.0}storeyHeightsAboveGround) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element storeyHeightsBelowGround ({http://www.opengis.net/citygml/building/2.0}storeyHeightsBelowGround) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod0FootPrint ({http://www.opengis.net/citygml/building/2.0}lod0FootPrint) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod0RoofEdge ({http://www.opengis.net/citygml/building/2.0}lod0RoofEdge) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod1Solid ({http://www.opengis.net/citygml/building/2.0}lod1Solid) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod1MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod1MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod1TerrainIntersection ({http://www.opengis.net/citygml/building/2.0}lod1TerrainIntersection) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod2Solid ({http://www.opengis.net/citygml/building/2.0}lod2Solid) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod2MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod2MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod2MultiCurve ({http://www.opengis.net/citygml/building/2.0}lod2MultiCurve) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod2TerrainIntersection ({http://www.opengis.net/citygml/building/2.0}lod2TerrainIntersection) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element outerBuildingInstallation ({http://www.opengis.net/citygml/building/2.0}outerBuildingInstallation) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element interiorBuildingInstallation ({http://www.opengis.net/citygml/building/2.0}interiorBuildingInstallation) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element boundedBy_ ({http://www.opengis.net/citygml/building/2.0}boundedBy) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod3Solid ({http://www.opengis.net/citygml/building/2.0}lod3Solid) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod3MultiCurve ({http://www.opengis.net/citygml/building/2.0}lod3MultiCurve) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod3TerrainIntersection ({http://www.opengis.net/citygml/building/2.0}lod3TerrainIntersection) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod4Solid ({http://www.opengis.net/citygml/building/2.0}lod4Solid) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod4MultiCurve ({http://www.opengis.net/citygml/building/2.0}lod4MultiCurve) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod4TerrainIntersection ({http://www.opengis.net/citygml/building/2.0}lod4TerrainIntersection) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element interiorRoom ({http://www.opengis.net/citygml/building/2.0}interiorRoom) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element consistsOfBuildingPart ({http://www.opengis.net/citygml/building/2.0}consistsOfBuildingPart) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element address ({http://www.opengis.net/citygml/building/2.0}address) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element GenericApplicationPropertyOfAbstractBuilding ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfAbstractBuilding) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBuilding uses Python identifier GenericApplicationPropertyOfBuilding
     __GenericApplicationPropertyOfBuilding = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfBuilding'), 'GenericApplicationPropertyOfBuilding', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfBuilding', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 101, 1), )
 
-    
+
     GenericApplicationPropertyOfBuilding = property(__GenericApplicationPropertyOfBuilding.value, __GenericApplicationPropertyOfBuilding.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfBuilding.name() : __GenericApplicationPropertyOfBuilding
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'BuildingType', BuildingType)
 
@@ -1885,116 +1885,116 @@ class BuildingPartType (AbstractBuildingType):
     _ElementMap = AbstractBuildingType._ElementMap.copy()
     _AttributeMap = AbstractBuildingType._AttributeMap.copy()
     # Base type is AbstractBuildingType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfSite ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfSite) inherited from {http://www.opengis.net/citygml/2.0}AbstractSiteType
-    
+
     # Element class_ ({http://www.opengis.net/citygml/building/2.0}class) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element function ({http://www.opengis.net/citygml/building/2.0}function) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element usage ({http://www.opengis.net/citygml/building/2.0}usage) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element yearOfConstruction ({http://www.opengis.net/citygml/building/2.0}yearOfConstruction) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element yearOfDemolition ({http://www.opengis.net/citygml/building/2.0}yearOfDemolition) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element roofType ({http://www.opengis.net/citygml/building/2.0}roofType) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element measuredHeight ({http://www.opengis.net/citygml/building/2.0}measuredHeight) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element storeysAboveGround ({http://www.opengis.net/citygml/building/2.0}storeysAboveGround) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element storeysBelowGround ({http://www.opengis.net/citygml/building/2.0}storeysBelowGround) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element storeyHeightsAboveGround ({http://www.opengis.net/citygml/building/2.0}storeyHeightsAboveGround) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element storeyHeightsBelowGround ({http://www.opengis.net/citygml/building/2.0}storeyHeightsBelowGround) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod0FootPrint ({http://www.opengis.net/citygml/building/2.0}lod0FootPrint) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod0RoofEdge ({http://www.opengis.net/citygml/building/2.0}lod0RoofEdge) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod1Solid ({http://www.opengis.net/citygml/building/2.0}lod1Solid) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod1MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod1MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod1TerrainIntersection ({http://www.opengis.net/citygml/building/2.0}lod1TerrainIntersection) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod2Solid ({http://www.opengis.net/citygml/building/2.0}lod2Solid) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod2MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod2MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod2MultiCurve ({http://www.opengis.net/citygml/building/2.0}lod2MultiCurve) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod2TerrainIntersection ({http://www.opengis.net/citygml/building/2.0}lod2TerrainIntersection) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element outerBuildingInstallation ({http://www.opengis.net/citygml/building/2.0}outerBuildingInstallation) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element interiorBuildingInstallation ({http://www.opengis.net/citygml/building/2.0}interiorBuildingInstallation) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element boundedBy_ ({http://www.opengis.net/citygml/building/2.0}boundedBy) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod3Solid ({http://www.opengis.net/citygml/building/2.0}lod3Solid) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod3MultiCurve ({http://www.opengis.net/citygml/building/2.0}lod3MultiCurve) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod3TerrainIntersection ({http://www.opengis.net/citygml/building/2.0}lod3TerrainIntersection) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod4Solid ({http://www.opengis.net/citygml/building/2.0}lod4Solid) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod4MultiCurve ({http://www.opengis.net/citygml/building/2.0}lod4MultiCurve) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element lod4TerrainIntersection ({http://www.opengis.net/citygml/building/2.0}lod4TerrainIntersection) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element interiorRoom ({http://www.opengis.net/citygml/building/2.0}interiorRoom) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element consistsOfBuildingPart ({http://www.opengis.net/citygml/building/2.0}consistsOfBuildingPart) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element address ({http://www.opengis.net/citygml/building/2.0}address) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element GenericApplicationPropertyOfAbstractBuilding ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfAbstractBuilding) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBuildingType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBuildingPart uses Python identifier GenericApplicationPropertyOfBuildingPart
     __GenericApplicationPropertyOfBuildingPart = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfBuildingPart'), 'GenericApplicationPropertyOfBuildingPart', '__httpwww_opengis_netcitygmlbuilding2_0_BuildingPartType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfBuildingPart', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 115, 1), )
 
-    
+
     GenericApplicationPropertyOfBuildingPart = property(__GenericApplicationPropertyOfBuildingPart.value, __GenericApplicationPropertyOfBuildingPart.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfBuildingPart.name() : __GenericApplicationPropertyOfBuildingPart
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'BuildingPartType', BuildingPartType)
 
@@ -2010,54 +2010,54 @@ class RoofSurfaceType (AbstractBoundarySurfaceType):
     _ElementMap = AbstractBoundarySurfaceType._ElementMap.copy()
     _AttributeMap = AbstractBoundarySurfaceType._AttributeMap.copy()
     # Base type is AbstractBoundarySurfaceType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element lod2MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod2MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element opening ({http://www.opengis.net/citygml/building/2.0}opening) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element GenericApplicationPropertyOfBoundarySurface ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBoundarySurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfRoofSurface uses Python identifier GenericApplicationPropertyOfRoofSurface
     __GenericApplicationPropertyOfRoofSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfRoofSurface'), 'GenericApplicationPropertyOfRoofSurface', '__httpwww_opengis_netcitygmlbuilding2_0_RoofSurfaceType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfRoofSurface', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 246, 1), )
 
-    
+
     GenericApplicationPropertyOfRoofSurface = property(__GenericApplicationPropertyOfRoofSurface.value, __GenericApplicationPropertyOfRoofSurface.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfRoofSurface.name() : __GenericApplicationPropertyOfRoofSurface
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'RoofSurfaceType', RoofSurfaceType)
 
@@ -2073,54 +2073,54 @@ class WallSurfaceType (AbstractBoundarySurfaceType):
     _ElementMap = AbstractBoundarySurfaceType._ElementMap.copy()
     _AttributeMap = AbstractBoundarySurfaceType._AttributeMap.copy()
     # Base type is AbstractBoundarySurfaceType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element lod2MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod2MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element opening ({http://www.opengis.net/citygml/building/2.0}opening) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element GenericApplicationPropertyOfBoundarySurface ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBoundarySurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfWallSurface uses Python identifier GenericApplicationPropertyOfWallSurface
     __GenericApplicationPropertyOfWallSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfWallSurface'), 'GenericApplicationPropertyOfWallSurface', '__httpwww_opengis_netcitygmlbuilding2_0_WallSurfaceType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfWallSurface', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 260, 1), )
 
-    
+
     GenericApplicationPropertyOfWallSurface = property(__GenericApplicationPropertyOfWallSurface.value, __GenericApplicationPropertyOfWallSurface.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfWallSurface.name() : __GenericApplicationPropertyOfWallSurface
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'WallSurfaceType', WallSurfaceType)
 
@@ -2136,54 +2136,54 @@ class GroundSurfaceType (AbstractBoundarySurfaceType):
     _ElementMap = AbstractBoundarySurfaceType._ElementMap.copy()
     _AttributeMap = AbstractBoundarySurfaceType._AttributeMap.copy()
     # Base type is AbstractBoundarySurfaceType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element lod2MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod2MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element opening ({http://www.opengis.net/citygml/building/2.0}opening) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element GenericApplicationPropertyOfBoundarySurface ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBoundarySurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfGroundSurface uses Python identifier GenericApplicationPropertyOfGroundSurface
     __GenericApplicationPropertyOfGroundSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfGroundSurface'), 'GenericApplicationPropertyOfGroundSurface', '__httpwww_opengis_netcitygmlbuilding2_0_GroundSurfaceType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfGroundSurface', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 274, 1), )
 
-    
+
     GenericApplicationPropertyOfGroundSurface = property(__GenericApplicationPropertyOfGroundSurface.value, __GenericApplicationPropertyOfGroundSurface.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfGroundSurface.name() : __GenericApplicationPropertyOfGroundSurface
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'GroundSurfaceType', GroundSurfaceType)
 
@@ -2199,54 +2199,54 @@ class ClosureSurfaceType (AbstractBoundarySurfaceType):
     _ElementMap = AbstractBoundarySurfaceType._ElementMap.copy()
     _AttributeMap = AbstractBoundarySurfaceType._AttributeMap.copy()
     # Base type is AbstractBoundarySurfaceType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element lod2MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod2MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element opening ({http://www.opengis.net/citygml/building/2.0}opening) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element GenericApplicationPropertyOfBoundarySurface ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBoundarySurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfClosureSurface uses Python identifier GenericApplicationPropertyOfClosureSurface
     __GenericApplicationPropertyOfClosureSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfClosureSurface'), 'GenericApplicationPropertyOfClosureSurface', '__httpwww_opengis_netcitygmlbuilding2_0_ClosureSurfaceType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfClosureSurface', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 288, 1), )
 
-    
+
     GenericApplicationPropertyOfClosureSurface = property(__GenericApplicationPropertyOfClosureSurface.value, __GenericApplicationPropertyOfClosureSurface.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfClosureSurface.name() : __GenericApplicationPropertyOfClosureSurface
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'ClosureSurfaceType', ClosureSurfaceType)
 
@@ -2262,54 +2262,54 @@ class FloorSurfaceType (AbstractBoundarySurfaceType):
     _ElementMap = AbstractBoundarySurfaceType._ElementMap.copy()
     _AttributeMap = AbstractBoundarySurfaceType._AttributeMap.copy()
     # Base type is AbstractBoundarySurfaceType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element lod2MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod2MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element opening ({http://www.opengis.net/citygml/building/2.0}opening) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element GenericApplicationPropertyOfBoundarySurface ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBoundarySurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfFloorSurface uses Python identifier GenericApplicationPropertyOfFloorSurface
     __GenericApplicationPropertyOfFloorSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfFloorSurface'), 'GenericApplicationPropertyOfFloorSurface', '__httpwww_opengis_netcitygmlbuilding2_0_FloorSurfaceType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfFloorSurface', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 304, 1), )
 
-    
+
     GenericApplicationPropertyOfFloorSurface = property(__GenericApplicationPropertyOfFloorSurface.value, __GenericApplicationPropertyOfFloorSurface.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfFloorSurface.name() : __GenericApplicationPropertyOfFloorSurface
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'FloorSurfaceType', FloorSurfaceType)
 
@@ -2325,54 +2325,54 @@ class OuterFloorSurfaceType (AbstractBoundarySurfaceType):
     _ElementMap = AbstractBoundarySurfaceType._ElementMap.copy()
     _AttributeMap = AbstractBoundarySurfaceType._AttributeMap.copy()
     # Base type is AbstractBoundarySurfaceType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element lod2MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod2MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element opening ({http://www.opengis.net/citygml/building/2.0}opening) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element GenericApplicationPropertyOfBoundarySurface ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBoundarySurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfOuterFloorSurface uses Python identifier GenericApplicationPropertyOfOuterFloorSurface
     __GenericApplicationPropertyOfOuterFloorSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfOuterFloorSurface'), 'GenericApplicationPropertyOfOuterFloorSurface', '__httpwww_opengis_netcitygmlbuilding2_0_OuterFloorSurfaceType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfOuterFloorSurface', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 318, 1), )
 
-    
+
     GenericApplicationPropertyOfOuterFloorSurface = property(__GenericApplicationPropertyOfOuterFloorSurface.value, __GenericApplicationPropertyOfOuterFloorSurface.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfOuterFloorSurface.name() : __GenericApplicationPropertyOfOuterFloorSurface
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'OuterFloorSurfaceType', OuterFloorSurfaceType)
 
@@ -2388,54 +2388,54 @@ class InteriorWallSurfaceType (AbstractBoundarySurfaceType):
     _ElementMap = AbstractBoundarySurfaceType._ElementMap.copy()
     _AttributeMap = AbstractBoundarySurfaceType._AttributeMap.copy()
     # Base type is AbstractBoundarySurfaceType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element lod2MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod2MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element opening ({http://www.opengis.net/citygml/building/2.0}opening) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element GenericApplicationPropertyOfBoundarySurface ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBoundarySurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfInteriorWallSurface uses Python identifier GenericApplicationPropertyOfInteriorWallSurface
     __GenericApplicationPropertyOfInteriorWallSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfInteriorWallSurface'), 'GenericApplicationPropertyOfInteriorWallSurface', '__httpwww_opengis_netcitygmlbuilding2_0_InteriorWallSurfaceType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfInteriorWallSurface', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 332, 1), )
 
-    
+
     GenericApplicationPropertyOfInteriorWallSurface = property(__GenericApplicationPropertyOfInteriorWallSurface.value, __GenericApplicationPropertyOfInteriorWallSurface.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfInteriorWallSurface.name() : __GenericApplicationPropertyOfInteriorWallSurface
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'InteriorWallSurfaceType', InteriorWallSurfaceType)
 
@@ -2451,54 +2451,54 @@ class CeilingSurfaceType (AbstractBoundarySurfaceType):
     _ElementMap = AbstractBoundarySurfaceType._ElementMap.copy()
     _AttributeMap = AbstractBoundarySurfaceType._AttributeMap.copy()
     # Base type is AbstractBoundarySurfaceType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element lod2MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod2MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element opening ({http://www.opengis.net/citygml/building/2.0}opening) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element GenericApplicationPropertyOfBoundarySurface ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBoundarySurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfCeilingSurface uses Python identifier GenericApplicationPropertyOfCeilingSurface
     __GenericApplicationPropertyOfCeilingSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfCeilingSurface'), 'GenericApplicationPropertyOfCeilingSurface', '__httpwww_opengis_netcitygmlbuilding2_0_CeilingSurfaceType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfCeilingSurface', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 346, 1), )
 
-    
+
     GenericApplicationPropertyOfCeilingSurface = property(__GenericApplicationPropertyOfCeilingSurface.value, __GenericApplicationPropertyOfCeilingSurface.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfCeilingSurface.name() : __GenericApplicationPropertyOfCeilingSurface
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'CeilingSurfaceType', CeilingSurfaceType)
 
@@ -2514,54 +2514,54 @@ class OuterCeilingSurfaceType (AbstractBoundarySurfaceType):
     _ElementMap = AbstractBoundarySurfaceType._ElementMap.copy()
     _AttributeMap = AbstractBoundarySurfaceType._AttributeMap.copy()
     # Base type is AbstractBoundarySurfaceType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element lod2MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod2MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element opening ({http://www.opengis.net/citygml/building/2.0}opening) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element GenericApplicationPropertyOfBoundarySurface ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfBoundarySurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractBoundarySurfaceType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfOuterCeilingSurface uses Python identifier GenericApplicationPropertyOfOuterCeilingSurface
     __GenericApplicationPropertyOfOuterCeilingSurface = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfOuterCeilingSurface'), 'GenericApplicationPropertyOfOuterCeilingSurface', '__httpwww_opengis_netcitygmlbuilding2_0_OuterCeilingSurfaceType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfOuterCeilingSurface', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 360, 1), )
 
-    
+
     GenericApplicationPropertyOfOuterCeilingSurface = property(__GenericApplicationPropertyOfOuterCeilingSurface.value, __GenericApplicationPropertyOfOuterCeilingSurface.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfOuterCeilingSurface.name() : __GenericApplicationPropertyOfOuterCeilingSurface
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'OuterCeilingSurfaceType', OuterCeilingSurfaceType)
 
@@ -2579,54 +2579,54 @@ class WindowType (AbstractOpeningType):
     _ElementMap = AbstractOpeningType._ElementMap.copy()
     _AttributeMap = AbstractOpeningType._AttributeMap.copy()
     # Base type is AbstractOpeningType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractOpeningType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractOpeningType
-    
+
     # Element lod3ImplicitRepresentation ({http://www.opengis.net/citygml/building/2.0}lod3ImplicitRepresentation) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractOpeningType
-    
+
     # Element lod4ImplicitRepresentation ({http://www.opengis.net/citygml/building/2.0}lod4ImplicitRepresentation) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractOpeningType
-    
+
     # Element GenericApplicationPropertyOfOpening ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfOpening) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractOpeningType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfWindow uses Python identifier GenericApplicationPropertyOfWindow
     __GenericApplicationPropertyOfWindow = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfWindow'), 'GenericApplicationPropertyOfWindow', '__httpwww_opengis_netcitygmlbuilding2_0_WindowType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfWindow', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 433, 1), )
 
-    
+
     GenericApplicationPropertyOfWindow = property(__GenericApplicationPropertyOfWindow.value, __GenericApplicationPropertyOfWindow.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __GenericApplicationPropertyOfWindow.name() : __GenericApplicationPropertyOfWindow
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'WindowType', WindowType)
 
@@ -2644,62 +2644,62 @@ class DoorType (AbstractOpeningType):
     _ElementMap = AbstractOpeningType._ElementMap.copy()
     _AttributeMap = AbstractOpeningType._AttributeMap.copy()
     # Base type is AbstractOpeningType
-    
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element lod3MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod3MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractOpeningType
-    
+
     # Element lod4MultiSurface ({http://www.opengis.net/citygml/building/2.0}lod4MultiSurface) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractOpeningType
-    
+
     # Element lod3ImplicitRepresentation ({http://www.opengis.net/citygml/building/2.0}lod3ImplicitRepresentation) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractOpeningType
-    
+
     # Element lod4ImplicitRepresentation ({http://www.opengis.net/citygml/building/2.0}lod4ImplicitRepresentation) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractOpeningType
-    
+
     # Element GenericApplicationPropertyOfOpening ({http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfOpening) inherited from {http://www.opengis.net/citygml/building/2.0}AbstractOpeningType
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}address uses Python identifier address
     __address = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'address'), 'address', '__httpwww_opengis_netcitygmlbuilding2_0_DoorType_httpwww_opengis_netcitygmlbuilding2_0address', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 444, 5), )
 
-    
+
     address = property(__address.value, __address.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/building/2.0}_GenericApplicationPropertyOfDoor uses Python identifier GenericApplicationPropertyOfDoor
     __GenericApplicationPropertyOfDoor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfDoor'), 'GenericApplicationPropertyOfDoor', '__httpwww_opengis_netcitygmlbuilding2_0_DoorType_httpwww_opengis_netcitygmlbuilding2_0_GenericApplicationPropertyOfDoor', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 453, 1), )
 
-    
+
     GenericApplicationPropertyOfDoor = property(__GenericApplicationPropertyOfDoor.value, __GenericApplicationPropertyOfDoor.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __address.name() : __address,
         __GenericApplicationPropertyOfDoor.name() : __GenericApplicationPropertyOfDoor
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'DoorType', DoorType)
 
@@ -2826,45 +2826,45 @@ Namespace.addCategoryObject('elementBinding', Door.name().localName(), Door)
 
 
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 44, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 44, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 45, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 45, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 46, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 46, 5)))
 
 AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'yearOfConstruction'), pyxb.binding.datatypes.gYear, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 47, 5)))
 
 AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'yearOfDemolition'), pyxb.binding.datatypes.gYear, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 48, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'roofType'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 49, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'roofType'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 49, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'measuredHeight'), teaser.Data.SchemaBindings.opengis.raw.gml.LengthType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 50, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'measuredHeight'), teaser.data.bindings.opengis.raw.gml.LengthType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 50, 5)))
 
 AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'storeysAboveGround'), pyxb.binding.datatypes.nonNegativeInteger, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 51, 5)))
 
 AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'storeysBelowGround'), pyxb.binding.datatypes.nonNegativeInteger, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 52, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'storeyHeightsAboveGround'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureOrNullListType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 53, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'storeyHeightsAboveGround'), teaser.data.bindings.opengis.raw.gml.MeasureOrNullListType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 53, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'storeyHeightsBelowGround'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureOrNullListType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 54, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'storeyHeightsBelowGround'), teaser.data.bindings.opengis.raw.gml.MeasureOrNullListType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 54, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0FootPrint'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 55, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0FootPrint'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 55, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0RoofEdge'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 56, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0RoofEdge'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 56, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1Solid'), teaser.Data.SchemaBindings.opengis.raw.gml.SolidPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 57, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1Solid'), teaser.data.bindings.opengis.raw.gml.SolidPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 57, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1MultiSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 58, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1MultiSurface'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 58, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 59, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 59, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2Solid'), teaser.Data.SchemaBindings.opengis.raw.gml.SolidPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 60, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2Solid'), teaser.data.bindings.opengis.raw.gml.SolidPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 60, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2MultiSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 61, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2MultiSurface'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 61, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2MultiCurve'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 62, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2MultiCurve'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 62, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 63, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 63, 5)))
 
 AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'outerBuildingInstallation'), BuildingInstallationPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 64, 5)))
 
@@ -2872,27 +2872,27 @@ AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.Expan
 
 AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'boundedBy'), BoundarySurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 67, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3Solid'), teaser.Data.SchemaBindings.opengis.raw.gml.SolidPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 68, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3Solid'), teaser.data.bindings.opengis.raw.gml.SolidPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 68, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 69, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiSurface'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 69, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiCurve'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 70, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiCurve'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 70, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 71, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 71, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Solid'), teaser.Data.SchemaBindings.opengis.raw.gml.SolidPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 72, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Solid'), teaser.data.bindings.opengis.raw.gml.SolidPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 72, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 73, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 73, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiCurve'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 74, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiCurve'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 74, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 75, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 75, 5)))
 
 AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'interiorRoom'), InteriorRoomPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 76, 5)))
 
 AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'consistsOfBuildingPart'), BuildingPartPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 77, 5)))
 
-AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'address'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.AddressPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 78, 5)))
+AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'address'), teaser.data.bindings.opengis.citygml.raw.base.AddressPropertyType, scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 78, 5)))
 
 AbstractBuildingType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfAbstractBuilding'), pyxb.binding.datatypes.anyType, abstract=pyxb.binding.datatypes.boolean(1), scope=AbstractBuildingType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 87, 1)))
 
@@ -5721,23 +5721,23 @@ BuildingPartPropertyType._Automaton = _BuildAutomaton_()
 
 
 
-BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 138, 5)))
+BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 138, 5)))
 
-BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 139, 5)))
+BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 139, 5)))
 
-BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 140, 5)))
+BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 140, 5)))
 
-BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry'), teaser.Data.SchemaBindings.opengis.raw.gml.GeometryPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 141, 5)))
+BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 141, 5)))
 
-BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry'), teaser.Data.SchemaBindings.opengis.raw.gml.GeometryPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 142, 5)))
+BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 142, 5)))
 
-BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), teaser.Data.SchemaBindings.opengis.raw.gml.GeometryPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 143, 5)))
+BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 143, 5)))
 
-BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 144, 5)))
+BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 144, 5)))
 
-BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 145, 5)))
+BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 145, 5)))
 
-BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 146, 5)))
+BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 146, 5)))
 
 BuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'boundedBy'), BoundarySurfacePropertyType, scope=BuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 147, 5)))
 
@@ -6543,15 +6543,15 @@ BuildingInstallationPropertyType._Automaton = _BuildAutomaton_3()
 
 
 
-IntBuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=IntBuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 180, 5)))
+IntBuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=IntBuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 180, 5)))
 
-IntBuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=IntBuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 181, 5)))
+IntBuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=IntBuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 181, 5)))
 
-IntBuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=IntBuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 182, 5)))
+IntBuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=IntBuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 182, 5)))
 
-IntBuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), teaser.Data.SchemaBindings.opengis.raw.gml.GeometryPropertyType, scope=IntBuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 183, 5)))
+IntBuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=IntBuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 183, 5)))
 
-IntBuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=IntBuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 184, 5)))
+IntBuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=IntBuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 184, 5)))
 
 IntBuildingInstallationType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'boundedBy'), BoundarySurfacePropertyType, scope=IntBuildingInstallationType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 185, 5)))
 
@@ -7149,11 +7149,11 @@ IntBuildingInstallationPropertyType._Automaton = _BuildAutomaton_5()
 
 
 
-AbstractBoundarySurfaceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2MultiSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBoundarySurfaceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 220, 5)))
+AbstractBoundarySurfaceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2MultiSurface'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBoundarySurfaceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 220, 5)))
 
-AbstractBoundarySurfaceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBoundarySurfaceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 221, 5)))
+AbstractBoundarySurfaceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiSurface'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBoundarySurfaceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 221, 5)))
 
-AbstractBoundarySurfaceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBoundarySurfaceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 222, 5)))
+AbstractBoundarySurfaceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractBoundarySurfaceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 222, 5)))
 
 AbstractBoundarySurfaceType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'opening'), OpeningPropertyType, scope=AbstractBoundarySurfaceType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 223, 5)))
 
@@ -7686,13 +7686,13 @@ OpeningPropertyType._Automaton = _BuildAutomaton_8()
 
 
 
-AbstractOpeningType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractOpeningType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 402, 5)))
+AbstractOpeningType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3MultiSurface'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractOpeningType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 402, 5)))
 
-AbstractOpeningType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractOpeningType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 403, 5)))
+AbstractOpeningType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=AbstractOpeningType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 403, 5)))
 
-AbstractOpeningType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=AbstractOpeningType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 404, 5)))
+AbstractOpeningType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=AbstractOpeningType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 404, 5)))
 
-AbstractOpeningType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=AbstractOpeningType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 405, 5)))
+AbstractOpeningType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=AbstractOpeningType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 405, 5)))
 
 AbstractOpeningType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfOpening'), pyxb.binding.datatypes.anyType, abstract=pyxb.binding.datatypes.boolean(1), scope=AbstractOpeningType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 414, 1)))
 
@@ -8169,15 +8169,15 @@ AbstractOpeningType._Automaton = _BuildAutomaton_9()
 
 
 
-RoomType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=RoomType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 469, 5)))
+RoomType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=RoomType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 469, 5)))
 
-RoomType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=RoomType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 470, 5)))
+RoomType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=RoomType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 470, 5)))
 
-RoomType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=RoomType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 471, 5)))
+RoomType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=RoomType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 471, 5)))
 
-RoomType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Solid'), teaser.Data.SchemaBindings.opengis.raw.gml.SolidPropertyType, scope=RoomType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 472, 5)))
+RoomType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Solid'), teaser.data.bindings.opengis.raw.gml.SolidPropertyType, scope=RoomType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 472, 5)))
 
-RoomType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiSurfacePropertyType, scope=RoomType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 473, 5)))
+RoomType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4MultiSurface'), teaser.data.bindings.opengis.raw.gml.MultiSurfacePropertyType, scope=RoomType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 473, 5)))
 
 RoomType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'boundedBy'), BoundarySurfacePropertyType, scope=RoomType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 474, 5)))
 
@@ -8852,15 +8852,15 @@ RoomType._Automaton = _BuildAutomaton_10()
 
 
 
-BuildingFurnitureType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=BuildingFurnitureType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 495, 5)))
+BuildingFurnitureType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=BuildingFurnitureType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 495, 5)))
 
-BuildingFurnitureType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=BuildingFurnitureType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 496, 5)))
+BuildingFurnitureType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=BuildingFurnitureType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 496, 5)))
 
-BuildingFurnitureType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=BuildingFurnitureType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 497, 5)))
+BuildingFurnitureType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=BuildingFurnitureType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 497, 5)))
 
-BuildingFurnitureType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), teaser.Data.SchemaBindings.opengis.raw.gml.GeometryPropertyType, scope=BuildingFurnitureType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 498, 5)))
+BuildingFurnitureType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=BuildingFurnitureType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 498, 5)))
 
-BuildingFurnitureType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=BuildingFurnitureType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 499, 5)))
+BuildingFurnitureType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=BuildingFurnitureType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 499, 5)))
 
 BuildingFurnitureType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfBuildingFurniture'), pyxb.binding.datatypes.anyType, abstract=pyxb.binding.datatypes.boolean(1), scope=BuildingFurnitureType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 508, 1)))
 
@@ -20450,7 +20450,7 @@ WindowType._Automaton = _BuildAutomaton_25()
 
 
 
-DoorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'address'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.AddressPropertyType, scope=DoorType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 444, 5)))
+DoorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'address'), teaser.data.bindings.opengis.citygml.raw.base.AddressPropertyType, scope=DoorType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 444, 5)))
 
 DoorType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, '_GenericApplicationPropertyOfDoor'), pyxb.binding.datatypes.anyType, abstract=pyxb.binding.datatypes.boolean(1), scope=DoorType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/building/2.0/building.xsd', 453, 1)))
 
@@ -21017,19 +21017,19 @@ def _BuildAutomaton_26 ():
 DoorType._Automaton = _BuildAutomaton_26()
 
 
-AbstractBuilding._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.Site)
+AbstractBuilding._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.Site)
 
-BuildingInstallation._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+BuildingInstallation._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-IntBuildingInstallation._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+IntBuildingInstallation._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-BoundarySurface._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+BoundarySurface._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-Opening._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+Opening._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-Room._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+Room._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-BuildingFurniture._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+BuildingFurniture._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
 Building._setSubstitutionGroup(AbstractBuilding)
 
