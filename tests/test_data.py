@@ -8,7 +8,7 @@ from teaser.logic import utilities
 from teaser.project import Project
 import math
 
-import HelpTest
+import helptest
 prj = Project(True)
 
 
@@ -568,15 +568,15 @@ class Test_teaser(object):
     #commented until we find solution for opengis PyXB bindings
     def test_save_citygml(self):
         '''test of save_gml'''
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
         prj.save_citygml("unitTest")
         prj.set_default()
 
     def test_calc_all_buildings(self):
         '''test of calc_all_buildings, no calculation verification'''
 
-        HelpTest.building_test2(prj)
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
+        helptest.building_test2(prj)
         prj.calc_all_buildings(number_of_elements=2,
                                merge_windows=True,
                                used_library='AixLib')
@@ -681,7 +681,7 @@ class Test_teaser(object):
     def test_get_inner_wall_area(self):
         '''test of get_inner_wall_area'''
         prj.set_default()
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
         sum_area = prj.buildings[-1].get_inner_wall_area()
         assert round(sum_area, 1) == 34.0
 
@@ -717,7 +717,7 @@ class Test_teaser(object):
     def test_set_specific_wall_area(self):
         '''test of set_specific_wall_area'''
         prj.set_default()
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
         prj.buildings[-1].set_specific_wall_area(
             prj.buildings[-1].thermal_zones[-1],
             prj.buildings[-1].thermal_zones[-1].outer_walls[1],
@@ -750,7 +750,7 @@ class Test_teaser(object):
     def test_calc_building_parameter(self):
         '''test of calc_building_parameter'''
         prj.set_default()
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
 
         prj.buildings[-1].calc_building_parameter(number_of_elements=2,
                                                  merge_windows=True,
@@ -773,7 +773,7 @@ class Test_teaser(object):
     def test_heating_load(self):
         '''test of heating_load'''
         prj.set_default()
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
         prj.buildings[-1].thermal_zones[-1].calc_zone_parameters(number_of_elements=2,
                                                                  merge_windows=True)
         prj.buildings[-1].thermal_zones[-1].calc_heat_load()
@@ -784,7 +784,7 @@ class Test_teaser(object):
     def test_sum_building_elements(self):
         '''test of combine_building_elements'''
         prj.set_default()
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
 
         #execute zone parameters for therm_zone
 
@@ -889,7 +889,7 @@ class Test_teaser(object):
     def test_calc_weightfactor(self):
         '''test of calc_weightfactor'''
         prj.set_default()
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
         prj.buildings[-1].calc_building_parameter(number_of_elements=2,
                                                   merge_windows=True,
                                                   used_library='AixLib')
@@ -929,7 +929,7 @@ class Test_teaser(object):
     def test_calc_two_element(self):
         '''test of calc_two_element'''
         prj.set_default()
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.calc_zone_parameters(number_of_elements=2,
@@ -1001,7 +1001,7 @@ class Test_teaser(object):
     def test_ua_value(self):
         '''test of ua_value'''
         prj.set_default()
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].calc_ua_value()
@@ -1058,7 +1058,7 @@ class Test_teaser(object):
     def test_calc_equivalent_res_wall(self):
         '''test of calc_equivalent_res, wall'''
         prj.set_default()
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
 
         therm_zone.outer_walls[0].calc_equivalent_res()
@@ -1087,7 +1087,7 @@ class Test_teaser(object):
     def test_calc_equivalent_res_win(self):
         '''test of calc_equivalent_res, win'''
         prj.set_default()
-        HelpTest.building_test2(prj)
+        helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.windows[0].calc_equivalent_res()
 
