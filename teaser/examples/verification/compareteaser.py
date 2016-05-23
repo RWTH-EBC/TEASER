@@ -8,14 +8,14 @@ This Scripts loads an project from TEASER 3 and executes the calculation
 '''
 
 from teaser.Project import Project
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 
 '''
 load project of VDI 6007 room from  TEASER file
 '''
 prj = Project(False)
 
-prj.load_project(utilis.get_full_path(
+prj.load_project(utilitis.get_full_path(
     "examples\\examplefiles\\new.teaserXML"))
 
 '''

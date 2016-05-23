@@ -6,7 +6,7 @@
 This module contains function to save material classes
 """
 import teaser.data.bindings.material_bind as mat_bind
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 
 def save_material(material):
     '''Material saver.
@@ -26,7 +26,7 @@ def save_material(material):
     mat_pyxb.thermal_conduc = material.thermal_conduc
     mat_pyxb.heat_capac = material.heat_capac
 
-    path = utilis.get_full_path("InputData/MaterialTemplates.xml")
+    path = utilitis.get_full_path("InputData/MaterialTemplates.xml")
     xml_file = open(path, 'r')
 
     xml_parse = mat_bind.CreateFromDocument(xml_file.read())

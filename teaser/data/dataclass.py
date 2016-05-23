@@ -6,7 +6,7 @@
 This module holds file pathes and bindings for XML data
 """
 
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 import teaser.data.bindings.typeelement_bind as tb_bind
 import teaser.data.bindings.boundaryconditions_bind as uc_bind
 import teaser.data.bindings.material_bind as mat_bind
@@ -44,20 +44,20 @@ class DataClass(object):
 
         '''
         if type_element_file is None:
-            self.path_tb = utilis.get_full_path(
+            self.path_tb = utilitis.get_full_path(
                 "Data/Input/InputData/TypeBuildingElements.xml")
         else:
-            self.path_tb = utilis.get_full_path("Data/Input/InputData/"+str(
+            self.path_tb = utilitis.get_full_path("Data/Input/InputData/"+str(
                 type_element_file))
 
         __xml_file_tb = open(self.path_tb, 'r')
         self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
-        self.path_uc = utilis.get_full_path(
+        self.path_uc = utilitis.get_full_path(
             "Data/Input/InputData/UseConditions.xml")
         __xml_file_uc = open(self.path_uc, 'r')
         self.conditions_bind = uc_bind.CreateFromDocument(__xml_file_uc.read())
 
-        __path_mat = utilis.get_full_path(
+        __path_mat = utilitis.get_full_path(
             "Data/Input/InputData/MaterialTemplates.xml")
         __xml_file_mat = codecs.open(__path_mat, 'r', encoding='utf-8')
         self.material_bind = mat_bind.CreateFromDocument(__xml_file_mat.read())
