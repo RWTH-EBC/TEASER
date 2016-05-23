@@ -7,12 +7,12 @@
 
 import warnings
 import teaser.Logic.Utilis as utilis
-import teaser.Data.Input.TeaserXML_input as txml_in
-import teaser.Data.Output.TeaserXML_output as txml_out
-import teaser.Data.Output.aixlib_output as aixlib_output
-import teaser.Data.Output.annex60_output as annex60_output
-import teaser.Data.Output.Text_output as text_out
-from teaser.Data.DataClass import DataClass
+import teaser.data.input.teaserxml_input as txml_in
+import teaser.data.output.teaserxml_output as txml_out
+import teaser.data.output.aixlib_output as aixlib_output
+import teaser.data.output.annex60_output as annex60_output
+import teaser.data.output.text_output as text_out
+from teaser.data.dataclass import DataClass
 from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
 from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute import Institute
 from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import Institute4
@@ -25,7 +25,7 @@ from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import SingleFam
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 
 try:
-    import teaser.Data.Output.CityGML_output as citygml_out
+    import teaser.data.output.citygml_output as citygml_out
 except:
     warnings.warn("No CityGML module found, no CityGML import/export")
 
@@ -818,7 +818,7 @@ class Project(object):
     def save_project(self, file_name=None, path=None):
         '''Saves the project to a tXML file
 
-        calls the function save_teaser_xml in Data.TeaserXML.py
+        calls the function save_teaser_xml in data.TeaserXML.py
 
         Parameters
         ----------
@@ -846,7 +846,7 @@ class Project(object):
     def load_project(self, path):
         '''Loads the project from a teaserXML file (new format)
 
-        calls the function load_teaser_xml in Data.TeaserXML.py
+        calls the function load_teaser_xml in data.TeaserXML.py
 
         Parameters
         ----------
@@ -860,7 +860,7 @@ class Project(object):
     def load_old_teaser(self, path):
         '''Loads the project from an old TEASER xml file
 
-        calls the function load_teaser_xml in Data.DataHelp.OldTeaser.py
+        calls the function load_teaser_xml in data.DataHelp.OldTeaser.py
 
 
         Parameters
@@ -875,7 +875,7 @@ class Project(object):
     def save_citygml(self, file_name=None, path=None):
         '''Saves the project to a citygml file
 
-        calls the function save_gml in Data.CityGML we make use of CityGML core
+        calls the function save_gml in data.CityGML we make use of CityGML core
         and EnergyADE to store semantic information
 
 
@@ -1035,7 +1035,7 @@ class Project(object):
         assert value != [1, 2, 3, 4], ass_error_1
 
         self._number_of_elements_calc = value
-        
+
         for bldg in self.buildings:
             bldg.number_of_elements_calc = value
 
@@ -1074,9 +1074,9 @@ class Project(object):
     @property
     def name(self):
         return self._name
-        
+
     @name.setter
     def name(self, value):
-        
+
         self._name = value
         self.modelica_project = value

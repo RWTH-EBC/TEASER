@@ -257,7 +257,7 @@ class BuildingElement(object):
         Assert if parents to Building are not set
         '''
 
-        import teaser.Data.Input.buildingelement_input as buildingelement_input
+        import teaser.data.input.buildingelement_input as buildingelement_input
 
         self.layer = None
         self._inner_convection = None
@@ -289,7 +289,7 @@ class BuildingElement(object):
 
         '''
 
-        import teaser.Data.Output.buildingelement_output as \
+        import teaser.data.output.buildingelement_output as \
             buildingelement_output
 
         buildingelement_output.save_type_element(element=self,
@@ -372,7 +372,7 @@ class BuildingElement(object):
 
     @year_of_retrofit.setter
     def year_of_retrofit(self, value):
-        
+
         if isinstance(value, int):
             pass
         elif value is None:
@@ -382,7 +382,7 @@ class BuildingElement(object):
                 value = int(value)
             except:
                 raise ValueError("Can't convert year of retrofit to float")
-                
+
         if value is not None:
             if self.year_of_construction is not None:
                 self._year_of_retrofit = value
@@ -405,7 +405,7 @@ class BuildingElement(object):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert orientation to float")        
+                raise ValueError("Can't convert orientation to float")
         """
         self._orientation = value
         if type(self).__name__ == "OuterWall":
@@ -436,7 +436,7 @@ class BuildingElement(object):
 
     @inner_convection.setter
     def inner_convection(self, value):
-        
+
         if isinstance(value, float):
             pass
         elif value is None:
@@ -460,7 +460,7 @@ class BuildingElement(object):
 
     @inner_radiation.setter
     def inner_radiation(self, value):
-        
+
 
         if isinstance(value, float):
             pass
@@ -542,8 +542,8 @@ class BuildingElement(object):
             try:
                 value = float(value)
             except:
-                raise ValueError("Can't convert element area to float")   
-        
+                raise ValueError("Can't convert element area to float")
+
         if value is not None:
             self._area = value
         if type(self).__name__ == "OuterWall"\
@@ -560,7 +560,7 @@ class BuildingElement(object):
             self.calc_ua_value()
 
     @property
-    def tilt(self):        
+    def tilt(self):
         return self._tilt
 
     @tilt.setter
@@ -576,9 +576,9 @@ class BuildingElement(object):
                 self._tilt = value
             except:
                 raise ValueError("Can't convert tilt to float")
-                
+
     @property
-    def year_of_construction(self):        
+    def year_of_construction(self):
         return self._year_of_construction
 
     @year_of_construction.setter
@@ -604,5 +604,3 @@ class BuildingElement(object):
     def construction_type(self, value):
 
         self._construction_type = value
-
-
