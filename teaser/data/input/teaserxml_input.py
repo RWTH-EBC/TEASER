@@ -13,9 +13,9 @@ import teaser.data.bindings.project_bind as pb
 from teaser.logic.BuildingObjects.Building import Building
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFamilyDwelling
-from teaser.logic.archetypebuildings.bmvbs.Custom.Institute import Institute
-from teaser.logic.archetypebuildings.bmvbs.Custom.Institute4 import Institute4
-from teaser.logic.archetypebuildings.bmvbs.Custom.Institute8 import Institute8
+from teaser.logic.archetypebuildings.bmvbs.custom.Institute import Institute
+from teaser.logic.archetypebuildings.bmvbs.custom.Institute4 import Institute4
+from teaser.logic.archetypebuildings.bmvbs.custom.Institute8 import Institute8
 from teaser.logic.BuildingObjects.ThermalZone import ThermalZone
 from teaser.logic.BuildingObjects.BuildingSystems.BuildingAHU import BuildingAHU
 from teaser.logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
