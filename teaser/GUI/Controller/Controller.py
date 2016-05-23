@@ -5,24 +5,24 @@ Created July 2015
 
 '''
 
-from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
+from teaser.Logic.buildingobjects.ThermalZone import ThermalZone
+from teaser.Logic.buildingobjects.BoundaryConditions.BoundaryConditions \
     import UseConditions
-from teaser.Logic.BuildingObjects.Building import Building
-from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
-from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
-from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
-from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
+from teaser.Logic.buildingobjects.Building import Building
+from teaser.Logic.buildingobjects.BuildingPhysics.OuterWall import OuterWall
+from teaser.Logic.buildingobjects.BuildingPhysics.Floor import Floor
+from teaser.Logic.buildingobjects.BuildingPhysics.InnerWall import InnerWall
+from teaser.Logic.buildingobjects.BuildingPhysics.Layer import Layer
+from teaser.Logic.buildingobjects.BuildingPhysics.Material import Material
+from teaser.Logic.buildingobjects.BuildingPhysics.GroundFloor import GroundFloor
+from teaser.Logic.buildingobjects.BuildingPhysics.OuterWall import OuterWall
+from teaser.Logic.buildingobjects.BuildingPhysics.Rooftop import Rooftop
+from teaser.Logic.buildingobjects.BuildingPhysics.Window import Window
 from teaser.project import Project
 import teaser.data.output.teaserxml_output as teaser_xml
 import teaser.data.output.citygML_output as city_gml
-from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
-from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
+from teaser.Logic.buildingobjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.Logic.buildingobjects.BuildingPhysics.GroundFloor import GroundFloor
 
 
 class Controller():

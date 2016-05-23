@@ -1,14 +1,14 @@
-from teaser.logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
+from teaser.logic.buildingobjects.BoundaryConditions.BoundaryConditions \
     import BoundaryConditions
-from teaser.logic.BuildingObjects.Building import Building
-from teaser.logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
-from teaser.logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.logic.BuildingObjects.BuildingPhysics.Material import Material
-from teaser.logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.logic.BuildingObjects.BuildingPhysics.Window import Window
-from teaser.logic.BuildingObjects.ThermalZone import ThermalZone
+from teaser.logic.buildingobjects.Building import Building
+from teaser.logic.buildingobjects.BuildingPhysics.GroundFloor import GroundFloor
+from teaser.logic.buildingobjects.BuildingPhysics.InnerWall import InnerWall
+from teaser.logic.buildingobjects.BuildingPhysics.Layer import Layer
+from teaser.logic.buildingobjects.BuildingPhysics.Material import Material
+from teaser.logic.buildingobjects.BuildingPhysics.OuterWall import OuterWall
+from teaser.logic.buildingobjects.BuildingPhysics.Rooftop import Rooftop
+from teaser.logic.buildingobjects.BuildingPhysics.Window import Window
+from teaser.logic.buildingobjects.ThermalZone import ThermalZone
 
 
 def building_test2(prj):

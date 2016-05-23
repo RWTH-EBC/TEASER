@@ -9,7 +9,7 @@ import numpy as np
 import inspect
 import scipy.io
 import teaser.logic.utilities as utilitis
-from teaser.logic.BuildingObjects.BuildingSystems.BuildingAHU \
+from teaser.logic.buildingobjects.BuildingSystems.BuildingAHU \
     import BuildingAHU
 import teaser.logic.Simulation.aixlib as aixlib
 
