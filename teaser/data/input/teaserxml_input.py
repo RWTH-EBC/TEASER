@@ -10,26 +10,26 @@ TEASER file format .tXML
 
 import teaser.data.bindings.project_bind as pb
 
-from teaser.Logic.BuildingObjects.Building import Building
-from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
-from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import SingleFamilyDwelling
-from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute import Institute
-from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import Institute4
-from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import Institute8
-from teaser.Logic.BuildingObjects.ThermalZone import ThermalZone
-from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU import BuildingAHU
-from teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
+from teaser.logic.BuildingObjects.Building import Building
+from teaser.logic.ArchetypeBuildings.BMVBS.Office import Office
+from teaser.logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import SingleFamilyDwelling
+from teaser.logic.ArchetypeBuildings.BMVBS.Custom.Institute import Institute
+from teaser.logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import Institute4
+from teaser.logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import Institute8
+from teaser.logic.BuildingObjects.ThermalZone import ThermalZone
+from teaser.logic.BuildingObjects.BuildingSystems.BuildingAHU import BuildingAHU
+from teaser.logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
     import BoundaryConditions
-from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
-from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import \
+from teaser.logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
+from teaser.logic.BuildingObjects.BuildingPhysics.Layer import Layer
+from teaser.logic.BuildingObjects.BuildingPhysics.Material import Material
+from teaser.logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
+from teaser.logic.BuildingObjects.BuildingPhysics.GroundFloor import \
     GroundFloor
-from teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
-from teaser.Logic.BuildingObjects.BuildingPhysics.Floor import Floor
-from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
+from teaser.logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
+from teaser.logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.logic.BuildingObjects.BuildingPhysics.Floor import Floor
+from teaser.logic.BuildingObjects.BuildingPhysics.Window import Window
 
 def load_teaser_xml(path, prj):
     '''This function loads a project from teaserXML

@@ -6,7 +6,7 @@
 This module contains function to save material classes
 """
 import teaser.data.bindings.material_bind as mat_bind
-import teaser.Logic.utilities as utilitis
+import teaser.logic.utilities as utilitis
 
 def save_material(material):
     '''Material saver.

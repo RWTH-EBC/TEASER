@@ -17,7 +17,7 @@ the calculted parameter, however, the weightfactor needs to be copied from,
 def parameter_room10():
     """"First thing we need to do is to import our Project API module"""
 
-    from teaser.Project import Project
+    from teaser.project import Project
 
     """We instantiate the Project class. The parameter load_data = True indicates
         that we load the XML data bases into our Project.

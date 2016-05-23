@@ -10,7 +10,7 @@ to internal XML and a Modelica record
 def example_type_district():
     """"First thing we need to do is to import our Project API module"""
 
-    from teaser.Project import Project
+    from teaser.project import Project
     from random import randint
     import buildingspy.simulate.Simulator as Si
     import time

@@ -6,8 +6,8 @@
 This module contains function to load building element classes
 """
 
-from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.Logic.BuildingObjects.BuildingPhysics.Material import Material
+from teaser.logic.BuildingObjects.BuildingPhysics.Layer import Layer
+from teaser.logic.BuildingObjects.BuildingPhysics.Material import Material
 
 
 def load_type_element(element, year, construction):

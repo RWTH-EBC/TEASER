@@ -5,7 +5,7 @@
 
 This module contains function to call Templates for textual output
 """
-import teaser.Logic.utilities as utilitis
+import teaser.logic.utilities as utilitis
 from mako.template import Template
 
 def export_parameters_txt(prj, path):

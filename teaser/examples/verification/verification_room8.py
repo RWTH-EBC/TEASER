@@ -10,9 +10,9 @@ computes the parameters. The parameters are then compared with the ones from
 Rouvel
 
 '''
-from teaser.Project import Project
+from teaser.project import Project
 
-import teaser.Logic.utilities as utilitis
+import teaser.logic.utilities as utilitis
 
 def parameter_room8():
     

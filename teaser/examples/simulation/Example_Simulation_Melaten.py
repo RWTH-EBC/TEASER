@@ -38,7 +38,7 @@ from multiprocessing import Pool
 
 import buildingspy.simulate.Simulator as si
 
-from teaser.Project import Project
+from teaser.project import Project
 
 
 class BuildingInfo(object):

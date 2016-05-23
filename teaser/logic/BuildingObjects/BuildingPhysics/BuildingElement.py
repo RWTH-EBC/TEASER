@@ -7,7 +7,7 @@ This module contains the Base class for all building elements.
 """
 
 from __future__ import division
-from teaser.Logic.BuildingObjects.BuildingPhysics.Layer import Layer
+from teaser.logic.BuildingObjects.BuildingPhysics.Layer import Layer
 
 
 import numpy as np

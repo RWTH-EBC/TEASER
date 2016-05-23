@@ -8,7 +8,7 @@ specific for AixLib simulation, including the export of boundary conditions
 and AHU operation values
 """
 import scipy.io
-import teaser.Logic.utilities as utilitis
+import teaser.logic.utilities as utilitis
 import numpy as np
 def compare_orientation(bldg):
     """Fills the zone weightfactors according to orientation and tilt of
