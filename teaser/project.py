@@ -19,8 +19,8 @@ from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
 from teaser.logic.archetypebuildings.urbanrenet.est1a import EST1a
 from teaser.logic.archetypebuildings.urbanrenet.est1b import EST1b
-from teaser.logic.archetypebuildings.urbanrenet.EST4b import EST4b
-from teaser.logic.archetypebuildings.urbanrenet.EST7 import EST7
+from teaser.logic.archetypebuildings.urbanrenet.est4b import EST4b
+from teaser.logic.archetypebuildings.urbanrenet.est7 import EST7
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFamilyDwelling
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
 
