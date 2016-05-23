@@ -18,7 +18,7 @@ from teaser.GUI.Controller.Controller import Controller
 from teaser.GUI.GUIHelperClasses.PictureButton import PictureButton
 from teaser.GUI.GUIHelperClasses.TrackableItem import TrackableItem
 from teaser.project import Project
-from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
+from teaser.Logic.simulation.modelicainfo import ModelicaInfo
 import teaser.Logic.utilities as utilitis
 import platform
 
