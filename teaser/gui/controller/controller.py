@@ -5,24 +5,24 @@ Created July 2015
 
 '''
 
-from teaser.Logic.buildingobjects.thermalzone import ThermalZone
-from teaser.Logic.buildingobjects.boundaryconditions.boundaryconditions \
+from teaser.logic.buildingobjects.thermalzone import ThermalZone
+from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import UseConditions
-from teaser.Logic.buildingobjects.Building import Building
-from teaser.Logic.buildingobjects.buildingphysics.outerwall import OuterWall
-from teaser.Logic.buildingobjects.buildingphysics.floor import Floor
-from teaser.Logic.buildingobjects.buildingphysics.innerwall import InnerWall
-from teaser.Logic.buildingobjects.buildingphysics.layer import Layer
-from teaser.Logic.buildingobjects.buildingphysics.material import Material
-from teaser.Logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
-from teaser.Logic.buildingobjects.buildingphysics.outerwall import OuterWall
-from teaser.Logic.buildingobjects.buildingphysics.rooftop import Rooftop
-from teaser.Logic.buildingobjects.buildingphysics.window import Window
+from teaser.logic.buildingobjects.building import Building
+from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+from teaser.logic.buildingobjects.buildingphysics.floor import Floor
+from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
+from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+from teaser.logic.buildingobjects.buildingphysics.material import Material
+from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
+from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
+from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.project import Project
 import teaser.data.output.teaserxml_output as teaser_xml
-import teaser.data.output.citygML_output as city_gml
-from teaser.Logic.buildingobjects.buildingphysics.ceiling import Ceiling
-from teaser.Logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
+import teaser.data.output.citygml_output as city_gml
+from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
+from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
 
 
 class Controller():
@@ -279,7 +279,7 @@ class Controller():
     @classmethod
     def click_export_button(self, project, building_model, zone_model, corG,
                             internal_id, path_output_folder):
-               project.export_record(building_model, zone_model, corG,
+               project.export_aixlib(building_model, zone_model, corG,
                               internal_id, path_output_folder)
 
     @classmethod

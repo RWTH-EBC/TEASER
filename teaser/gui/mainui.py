@@ -18,8 +18,8 @@ from teaser.gui.controller.controller import Controller
 from teaser.gui.guihelp.picturebutton import PictureButton
 from teaser.gui.guihelp.trackableitem import TrackableItem
 from teaser.project import Project
-from teaser.Logic.simulation.modelicainfo import ModelicaInfo
-import teaser.Logic.utilities as utilitis
+from teaser.logic.simulation.modelicainfo import ModelicaInfo
+import teaser.logic.utilities as utilitis
 import platform
 
 
@@ -4487,7 +4487,7 @@ class MainUI(QDialog):
         self.current_type_building = str(cIndex)
         self.construct_type_building_button.setText(
             u"Generate " + self.current_type_building + " Building ...")
-        if self.current_type_building == "Residential":
+        if self.current_type_building == "SingleFamilyDwelling":
             self.group_box_type_building_right_office.setVisible(False)
             self.group_box_type_building_right_residential.setVisible(True)
             self.group_box_office_architecture.setVisible(False)
@@ -4967,7 +4967,7 @@ class MainUI(QDialog):
                 self.type_building_ind_att['constructionType'] = "heavy"
             if self.radio_button_architecture_office_3.isChecked():
                 self.type_building_ind_att['constructionType'] = "light"
-        if text == "Residential":
+        if text == "SingleFamilyDwelling":
             if self.radio_button_residential_layout_1.isChecked():
                 self.type_building_ind_att['layoutArea'] = 0
             if self.radio_button_residential_layout_2.isChecked():
