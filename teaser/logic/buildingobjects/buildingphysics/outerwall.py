@@ -2,7 +2,7 @@
 # by TEASER4 Development Team
 
 
-from teaser.logic.buildingobjects.buildingphysics.Wall \
+from teaser.logic.buildingobjects.buildingphysics.wall \
     import Wall
 
 
@@ -15,8 +15,8 @@ class OuterWall(Wall):
         '''
         '''
         super(OuterWall, self).__init__(parent)
-        
-        
+
+
         self._tilt = 90.0
         self._inner_convection = 2.7
         self._inner_radiation = 5.0

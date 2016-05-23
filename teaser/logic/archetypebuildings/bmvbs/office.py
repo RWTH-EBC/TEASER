@@ -7,14 +7,14 @@ import math
 from teaser.logic.archetypebuildings.nonresidential\
  import NonResidential
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions import BoundaryConditions as UseCond
-from teaser.logic.buildingobjects.buildingphysics.Ceiling import Ceiling
-from teaser.logic.buildingobjects.buildingphysics.Floor import Floor
+from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
+from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.GroundFloor\
  import GroundFloor
-from teaser.logic.buildingobjects.buildingphysics.InnerWall import InnerWall
-from teaser.logic.buildingobjects.buildingphysics.OuterWall import OuterWall
-from teaser.logic.buildingobjects.buildingphysics.Rooftop import Rooftop
-from teaser.logic.buildingobjects.buildingphysics.Window import Window
+from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
+from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
+from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 

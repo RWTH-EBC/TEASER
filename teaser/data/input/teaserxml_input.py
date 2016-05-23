@@ -20,16 +20,16 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 from teaser.logic.buildingobjects.buildingsystems.buildingahu import BuildingAHU
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions
-from teaser.logic.buildingobjects.buildingphysics.OuterWall import OuterWall
-from teaser.logic.buildingobjects.buildingphysics.Layer import Layer
-from teaser.logic.buildingobjects.buildingphysics.Material import Material
-from teaser.logic.buildingobjects.buildingphysics.Rooftop import Rooftop
-from teaser.logic.buildingobjects.buildingphysics.GroundFloor import \
+from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+from teaser.logic.buildingobjects.buildingphysics.material import Material
+from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
+from teaser.logic.buildingobjects.buildingphysics.groundfloor import \
     GroundFloor
-from teaser.logic.buildingobjects.buildingphysics.InnerWall import InnerWall
-from teaser.logic.buildingobjects.buildingphysics.Ceiling import Ceiling
-from teaser.logic.buildingobjects.buildingphysics.Floor import Floor
-from teaser.logic.buildingobjects.buildingphysics.Window import Window
+from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
+from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
+from teaser.logic.buildingobjects.buildingphysics.floor import Floor
+from teaser.logic.buildingobjects.buildingphysics.window import Window
 
 def load_teaser_xml(path, prj):
     '''This function loads a project from teaserXML
