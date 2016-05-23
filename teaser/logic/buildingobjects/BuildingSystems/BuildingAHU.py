@@ -1,14 +1,14 @@
 # created November 2015
 # by TEASER4 Development Team
 
-"""This module includes a class for central AHU 
+"""This module includes a class for central AHU
 """
 
 class BuildingAHU(object):
     '''Building Class
 
-    This class represents a BuildingAHU. 
-    
+    This class represents a BuildingAHU.
+
     !AixLib sepcific!
 
     Parameters
@@ -33,15 +33,15 @@ class BuildingAHU(object):
         Is a HeatRecoverySystem physically integrated in the AHU? in AixLib:
         "HRS"
     by_pass_dehumidification : float (default = 0.2)
-         By-pass factor of cooling coil during dehumidification. Necessary to 
-         calculate the real outgoing enthalpy flow of heat exchanger in 
-         dehumidification mode taking the surface enthalpy of the cooling 
+         By-pass factor of cooling coil during dehumidification. Necessary to
+         calculate the real outgoing enthalpy flow of heat exchanger in
+         dehumidification mode taking the surface enthalpy of the cooling
          coil into account. In AixLib called "BPF_DeHu"
     efficiency_recovery : float (default = 0.8)
         efficiency of HRS in the AHU modes when HRS is enabled. in AixLib:
         "efficiencyHRS_enabled"
     efficiency_revocery_false : float (default = 0.2)
-        taking a little heat transfer into account although HRS is disabled 
+        taking a little heat transfer into account although HRS is disabled
         (in case that a HRS is physically installed in the AHU) in AixLib:
         "efficiencyHRS_disabled"
     profile_temperature : [float]
@@ -54,12 +54,12 @@ class BuildingAHU(object):
         timeline of desired relative v_flow of the AHU simulation (0..1)
 
     '''
-    
+
     def __init__(self, parent=None):
         '''Constructor of BuildingAHU Class
         '''
         self.parent = parent
-        
+
         self.heating = True
         self.cooling = True
         self.dehumidification = True
@@ -73,68 +73,68 @@ class BuildingAHU(object):
         self._profile_max_relative_humidity = None
         self._profile_v_flow = None
         self._profile_temperature = None
-     
-        
+
+
     @property
     def parent(self):
         return self.__parent
 
     @parent.setter
     def parent(self, value):
-        from teaser.logic.buildingobjects.Building import Building
+        from teaser.logic.buildingobjects.building import Building
         import inspect
         if inspect.isclass(Building):
             self.__parent = value
             self.__parent.central_ahu = self
 
-    
+
     @property
     def profile_min_relative_humidity(self):
         return self._profile_min_relative_humidity
 
     @profile_min_relative_humidity.setter
     def profile_min_relative_humidity(self, value):
-        
+
         if self._profile_min_relative_humidity is None:
             pass
         else:
             self.parent.file_ahu = ("\\AHU_" +
                                     self.parent.name +
                                     ".mat")
-                                    
+
         self._profile_min_relative_humidity = value
-                                    
+
     @property
     def profile_max_relative_humidity(self):
         return self._profile_max_relative_humidity
 
     @profile_max_relative_humidity.setter
     def profile_max_relative_humidity(self, value):
-        
+
         if self._profile_max_relative_humidity is None:
             pass
         else:
             self.parent.file_ahu = ("\\AHU_" +
                                     self.parent.name +
                                     ".mat")
-                                    
+
         self._profile_max_relative_humidity = value
 
-                                    
+
     @property
     def profile_v_flow(self):
         return self._profile_v_flow
 
     @profile_v_flow.setter
     def profile_v_flow(self, value):
-        
+
         if self._profile_v_flow is None:
             pass
         else:
             self.parent.file_ahu = ("\\AHU_" +
                                     self.parent.name +
                                     ".mat")
-                                    
+
         self._profile_v_flow = value
 
     @property
@@ -143,7 +143,7 @@ class BuildingAHU(object):
 
     @profile_temperature.setter
     def profile_temperature(self, value):
-        
+
         if self._profile_temperature is None:
             pass
         else:
