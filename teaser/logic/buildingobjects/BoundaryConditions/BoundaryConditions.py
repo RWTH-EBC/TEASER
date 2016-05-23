@@ -5,7 +5,7 @@
 This module is a container for UseConditions following 18599 and SIA
 """
 
-from teaser.logic.buildingobjects.UseConditions import UseConditions
+from teaser.logic.buildingobjects.useconditions import UseConditions
 import teaser.data.output.boundcond_output as boundcond_output
 import teaser.data.input.boundcond_input as boundcond_input
 
