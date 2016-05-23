@@ -51,18 +51,17 @@ def compare_orientation(bldg, number_of_elements=3):
                 pass
             else:
                 orient_tilt_help2.append(i)
-    
+
         orient_tilt_help2.sort(key=lambda x: x[0])
-    
+
         if orient_tilt_help2[0][0] == -1:
             orient_tilt_help2.insert(len(orient_tilt_help2), orient_tilt_help2.pop(0))
-    
+
         for i in orient_tilt_help2:
             bldg.orientation_bldg.append(i[0])
             bldg.tilt_bldg.append(i[1])
 
         groundfloors = zone.find_walls(-2, 0)
-        print(number_of_elements)
         if groundfloors == [] or number_of_elements in [3, 4]:
             zone.weightfactor_ground.append(0.0)
         else:
@@ -79,7 +78,6 @@ def compare_orientation(bldg, number_of_elements=3):
                 zone.weightfactor_ow.append(0.0)
                 zone.outer_walls_areas.append(0.0)
             else:
-                print(number_of_elements)
                 if number_of_elements != 4:
                     zone.weightfactor_ow.append(
                         sum([wall.wf_out for wall in walls]))
@@ -100,7 +98,7 @@ def compare_orientation(bldg, number_of_elements=3):
                     zone.window_area_list.append(0.0)
                     zone.g_sunblind_list.append(0.0)
                     zone.window_areas.append(0.0)
-                
+
             else:
                 if number_of_elements != 4:
                     zone.weightfactor_win.append(
@@ -129,9 +127,3 @@ def compare_orientation(bldg, number_of_elements=3):
                 zone.orientation_rt.append(i[0])
                 zone.tilt_rt.append(i[1])
                 [zone.weightfactor_rt.append(i.wf_out) for i in rts]
-        # print(zone.window_areas)
-        # print(zone.outer_walls_areas)
-        # print(zone.weightfactor_ow)
-        # print("asd",zone.orientation_wall)
-        # print("ROTSATST", zone.weightfactor_rt)
-        print(zone.tilt_rt, zone.orientation_rt)
