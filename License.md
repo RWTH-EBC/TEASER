@@ -1,7 +1,7 @@
 The MIT License (MIT)
 
-Copyright (c) [2015] [RWTH Aachen University, E.ON Energy Research Center, 
-Institute for Energy Efficienct Buildings and Indoor Climate]
+Copyright (c) 2016 RWTH Aachen University, E.ON Energy Research Center, 
+Institute for Energy Efficienct Buildings and Indoor Climate
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
