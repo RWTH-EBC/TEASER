@@ -20,7 +20,8 @@ def parameter_room8():
     load project of VDI 6007 room from old TEASER file
     '''
     prj = Project(False)
-    prj.load_project(utilis.get_full_path("Examples\\ExampleInputFiles\\VDI6007_Room8.teaserXML"))
+    prj.load_project(utilis.get_full_path(
+        "examples\\examplefiles\\VDI6007_Room8.teaserXML"))
 
     '''
     execute VDI calculation for single zone
