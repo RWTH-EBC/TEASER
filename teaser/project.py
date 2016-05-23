@@ -14,9 +14,9 @@ import teaser.data.output.annex60_output as annex60_output
 import teaser.data.output.text_output as text_out
 from teaser.data.dataclass import DataClass
 from teaser.Logic.archetypebuildings.bmvbs.office import Office
-from teaser.Logic.archetypebuildings.bmvbs.Custom.Institute import Institute
-from teaser.Logic.archetypebuildings.bmvbs.Custom.Institute4 import Institute4
-from teaser.Logic.archetypebuildings.bmvbs.Custom.Institute8 import Institute8
+from teaser.Logic.archetypebuildings.bmvbs.custom.Institute import Institute
+from teaser.Logic.archetypebuildings.bmvbs.custom.Institute4 import Institute4
+from teaser.Logic.archetypebuildings.bmvbs.custom.Institute8 import Institute8
 from teaser.Logic.archetypebuildings.urbanrenet.EST1a import EST1a
 from teaser.Logic.archetypebuildings.urbanrenet.EST1b import EST1b
 from teaser.Logic.archetypebuildings.urbanrenet.EST4b import EST4b
