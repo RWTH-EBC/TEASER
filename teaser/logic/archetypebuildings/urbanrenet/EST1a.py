@@ -3,7 +3,7 @@
 
 from teaser.logic.archetypebuildings.residential \
     import Residential
-from teaser.logic.buildingobjects.boundaryconditions.BoundaryConditions \
+from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions as UseCond
 from teaser.logic.buildingobjects.BuildingPhysics.Ceiling import Ceiling
 from teaser.logic.buildingobjects.BuildingPhysics.Floor import Floor
