@@ -1,4 +1,4 @@
-from teaser.logic.buildingobjects.BoundaryConditions.BoundaryConditions \
+from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.buildingobjects.BuildingPhysics.GroundFloor import GroundFloor

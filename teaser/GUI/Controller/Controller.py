@@ -6,7 +6,7 @@ Created July 2015
 '''
 
 from teaser.Logic.buildingobjects.thermalzone import ThermalZone
-from teaser.Logic.buildingobjects.boundaryconditions.BoundaryConditions \
+from teaser.Logic.buildingobjects.boundaryconditions.boundaryconditions \
     import UseConditions
 from teaser.Logic.buildingobjects.Building import Building
 from teaser.Logic.buildingobjects.BuildingPhysics.OuterWall import OuterWall
