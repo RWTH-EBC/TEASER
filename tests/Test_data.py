@@ -5,7 +5,7 @@ Created July 2015
 '''
 
 from teaser.Logic import Utilis
-from teaser.Project import Project
+from teaser.project import Project
 import math
 
 import HelpTest
