@@ -308,12 +308,10 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   <%
   import math
   newlist = []
-  print(list)
   for element in list:
 
     element_new=element*math.pi/180
     newlist.append(element_new)
-  print(newlist)
   return newlist
   %>
 </%def>

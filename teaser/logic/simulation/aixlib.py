@@ -93,8 +93,7 @@ def compare_orientation(bldg):
                 zone.g_sunblind_list.append(
                     sum([win.shading_g_total for win in wins]))
                 [zone.window_areas.append(i.area) for i in wins]
-    print(zone.window_areas)
-    print(zone.outer_walls_areas)
+
 
 def create_timeline(bldg, duration_profile = 86400, time_step = 3600):
     ''' Creates a timeline for building boundary conditions

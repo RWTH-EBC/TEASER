@@ -204,7 +204,6 @@ class Building(object):
             return
 
         else:
-            print(self.bldg_height, self.height_of_floors)
             self.number_of_floors = int(round((self.bldg_height /
                                                self.height_of_floors)))
             if self.number_of_floors == 0:
@@ -434,8 +433,7 @@ class Building(object):
             aixlib.compare_orientation(self)
         elif self.used_library_calc == 'Annex60':
             import teaser.logic.simulation.annex as annex
-            print("asd")
-            print(number_of_elements)
+
             annex.compare_orientation(self, number_of_elements=number_of_elements)
 
 

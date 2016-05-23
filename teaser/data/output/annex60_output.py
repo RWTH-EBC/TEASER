@@ -81,8 +81,6 @@ def export_annex60(prj,
             out_file = open(utilitis.get_full_path(
                     zone_path + "\\" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
-            print(zone_path + "\\" + bldg.name + "_" +
-                    zone.name.replace(" ", "") + ".mo")
             out_file.write(zone_template.render_unicode(bldg=bldg,
                                                         zone=zone,
                                                         merge_windows=
