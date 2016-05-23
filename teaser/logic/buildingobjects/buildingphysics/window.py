@@ -2,7 +2,7 @@
 # by TEASER4 Development Team
 
 
-from teaser.logic.buildingobjects.buildingphysics.BuildingElement \
+from teaser.logic.buildingobjects.buildingphysics.buildingelement \
     import BuildingElement
 
 
