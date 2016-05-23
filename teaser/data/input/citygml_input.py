@@ -23,7 +23,7 @@ import teaser.data.bindings.opengis.raw._nsgroup as nsgroup
 import teaser.data.bindings.opengis.raw.smil20 as smil
 import teaser.data.bindings.opengis.misc.raw.xAL as xal
 
-from teaser.logic.archetypebuildings.bmvbs.SingleFamilyDwelling \
+from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling \
                             import SingleFamilyDwelling
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.BuildingObjects.Building import Building
@@ -163,7 +163,7 @@ def _convert_bldg(bldg, function):
     """
     parent_help = bldg.parent
     if function == "1000":
-        from teaser.logic.archetypebuildings.bmvbs.SingleFamilyDwelling \
+        from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling \
             import SingleFamilyDwelling
         bldg.__class__ = SingleFamilyDwelling
     elif function == "1120":
