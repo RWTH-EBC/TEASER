@@ -9,8 +9,8 @@ This module contains an example for the retrofit of an entire district
 import os
 import xml.etree.ElementTree as ET
 
-import teaser.Logic.utilities as utilitis
-from teaser.Project import Project
+import teaser.logic.utilities as utilitis
+from teaser.project import Project
 
 
 class BuildingInfo(object):

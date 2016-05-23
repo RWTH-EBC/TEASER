@@ -18,7 +18,7 @@ from teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor import GroundFloor
 from teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
 from teaser.Logic.BuildingObjects.BuildingPhysics.Window import Window
-from teaser.Project import Project
+from teaser.project import Project
 import teaser.data.output.teaserxml_output as teaser_xml
 import teaser.data.output.citygML_output as city_gml
 from teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling

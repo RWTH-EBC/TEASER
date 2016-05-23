@@ -11,8 +11,8 @@ Rouvel
 
 '''
 
-from teaser.Project import Project
-import teaser.Logic.utilities as utilitis
+from teaser.project import Project
+import teaser.logic.utilities as utilitis
 
 
 def parameter_room1():

@@ -3,7 +3,7 @@
 
 
 
-from teaser.Logic.BuildingObjects.Building import Building
+from teaser.logic.BuildingObjects.Building import Building
 
 
 class Residential(Building):

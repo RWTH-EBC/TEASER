@@ -7,8 +7,8 @@ This Scripts loads an project from TEASER 3 and executes the calculation
 
 '''
 
-from teaser.Project import Project
-import teaser.Logic.utilities as utilitis
+from teaser.project import Project
+import teaser.logic.utilities as utilitis
 
 '''
 load project of VDI 6007 room from  TEASER file

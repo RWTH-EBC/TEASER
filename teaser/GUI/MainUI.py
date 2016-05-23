@@ -17,7 +17,7 @@ from teaser.GUI.GUIHelperClasses.ListViewZonesFiller import ListViewZonesFiller
 from teaser.GUI.Controller.Controller import Controller
 from teaser.GUI.GUIHelperClasses.PictureButton import PictureButton
 from teaser.GUI.GUIHelperClasses.TrackableItem import TrackableItem
-from teaser.Project import Project
+from teaser.project import Project
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 import teaser.Logic.utilities as utilitis
 import platform

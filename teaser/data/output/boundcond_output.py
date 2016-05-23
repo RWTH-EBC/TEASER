@@ -8,7 +8,7 @@ This module contains function to save boundary conditions classes
 """
 
 import teaser.data.bindings.boundaryconditions_bind as uc_bind
-import teaser.Logic.utilities as utilitis
+import teaser.logic.utilities as utilitis
 import warnings
 
 def save_bound_conditions(bound_cond, path=None, file_name=None):

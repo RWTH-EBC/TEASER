@@ -2,7 +2,7 @@
 # by TEASER4 Development Team
 
 
-from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
+from teaser.logic.ArchetypeBuildings.BMVBS.Office import Office
 
 
 class Institute4(Office):

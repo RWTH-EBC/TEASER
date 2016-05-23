@@ -11,7 +11,7 @@ specific for annex simulation, including the export of boundary conditions
 and AHU operation values
 """
 import scipy.io
-import teaser.Logic.utilities as utilitis
+import teaser.logic.utilities as utilitis
 import numpy as np
 
 

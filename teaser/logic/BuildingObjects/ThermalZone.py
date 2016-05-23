@@ -1412,7 +1412,7 @@ class ThermalZone(object):
 
     @parent.setter
     def parent(self, value):
-        from teaser.Logic.BuildingObjects.Building import Building
+        from teaser.logic.BuildingObjects.Building import Building
         import inspect
         if inspect.isclass(Building):
             self.__parent = value

@@ -8,10 +8,10 @@ import re
 import numpy as np
 import inspect
 import scipy.io
-import teaser.Logic.utilities as utilitis
-from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU \
+import teaser.logic.utilities as utilitis
+from teaser.logic.BuildingObjects.BuildingSystems.BuildingAHU \
     import BuildingAHU
-import teaser.Logic.Simulation.aixlib as aixlib
+import teaser.logic.Simulation.aixlib as aixlib
 
 
 class Building(object):
@@ -433,7 +433,7 @@ class Building(object):
         if self.used_library_calc == 'AixLib':
             aixlib.compare_orientation(self)
         elif self.used_library_calc == 'Annex60':
-            import teaser.Logic.Simulation.annex as annex
+            import teaser.logic.Simulation.annex as annex
             print("asd")
             print(number_of_elements)
             annex.compare_orientation(self, number_of_elements=number_of_elements)
