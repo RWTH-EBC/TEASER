@@ -8,7 +8,7 @@ This module contains function to save boundary conditions classes
 """
 
 import teaser.data.bindings.boundaryconditions_bind as uc_bind
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 import warnings
 
 def save_bound_conditions(bound_cond, path=None, file_name=None):
@@ -39,7 +39,7 @@ def save_bound_conditions(bound_cond, path=None, file_name=None):
     else:
         path = path + "\\" + file_name + ".xml"
         try:
-            xml_file = open(utilis.get_full_path(path))
+            xml_file = open(utilitis.get_full_path(path))
             xml_parse = uc_bind.CreateFromDocument(xml_file.read())
         except:
             xml_parse = uc_bind.UseConditions()
@@ -125,6 +125,6 @@ def save_bound_conditions(bound_cond, path=None, file_name=None):
 
         xml_parse.append(usage_pyxb)
 
-        out_file = open(utilis.get_full_path(path), 'w')
+        out_file = open(utilitis.get_full_path(path), 'w')
 
         out_file.write(xml_parse.toDOM().toprettyxml())

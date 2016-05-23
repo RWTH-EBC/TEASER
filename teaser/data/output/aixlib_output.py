@@ -6,7 +6,7 @@
 This module contains function to call Templates for AixLib model generation
 """
 
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 from mako.template import Template
 import scipy.io
 import teaser.Logic.Simulation.aixlib as aixlib
@@ -51,13 +51,13 @@ def export_aixlib(prj,
 
     # use the same zone templates for all exports
     zone_template = Template(
-        filename=utilis.get_full_path(
+        filename=utilitis.get_full_path(
             "Data\\Output\\ModelicaTemplate\\AixLib\\AixLib_zone"))
     model_template = Template(
-        filename=utilis.get_full_path(
+        filename=utilitis.get_full_path(
             "Data\\Output\\ModelicaTemplate\\AixLib\\AixLib_model"))
     zone_base_template = Template(
-        filename=utilis.get_full_path(
+        filename=utilitis.get_full_path(
             "Data\\Output\\ModelicaTemplate\\AixLib\\AixLib_base"))
     # list which contains exported buildings
     if internal_id is not None:
@@ -86,8 +86,8 @@ def export_aixlib(prj,
                 calc_method = 'ebc'
 
             bldg_path = path + "\\" + bldg.name + "\\"
-            utilis.create_path(utilis.get_full_path(bldg_path))
-            utilis.create_path(utilis.get_full_path
+            utilitis.create_path(utilitis.get_full_path(bldg_path))
+            utilitis.create_path(utilitis.get_full_path
                                (bldg_path + bldg.name + "_DataBase"))
             aixlib.modelica_set_temp(bldg=bldg, path=path + "\\" + bldg.name)
             aixlib.modelica_AHU_boundary(bldg=bldg, path=path + "\\" + bldg.name)
@@ -97,7 +97,7 @@ def export_aixlib(prj,
             _help_package_order(bldg_path, [bldg], None,
                                      bldg.name + "_DataBase")
 
-            out_file = open(utilis.get_full_path
+            out_file = open(utilitis.get_full_path
                             (bldg_path + bldg.name + ".mo"), 'w')
 
 
@@ -114,7 +114,7 @@ def export_aixlib(prj,
             for zone in bldg.thermal_zones:
                 zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
 
-                out_file = open(utilis.get_full_path(
+                out_file = open(utilitis.get_full_path(
                     zone_path + "\\" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
                 out_file.write(zone_template.render_unicode(
@@ -126,7 +126,7 @@ def export_aixlib(prj,
                 zone_path, bldg.thermal_zones,
                 bldg.name + "_", bldg.name + "_base")
 
-            out_file = open(utilis.get_full_path
+            out_file = open(utilitis.get_full_path
                             (zone_path + bldg.name + "_base.mo"),
                             'w')
             if bldg.central_ahu:
@@ -153,8 +153,8 @@ def export_aixlib(prj,
         for bldg in exported_list_of_buildings:
 
             bldg_path = path + "\\" + bldg.name + "\\"
-            utilis.create_path(utilis.get_full_path(bldg_path))
-            utilis.create_path(utilis.get_full_path
+            utilitis.create_path(utilitis.get_full_path(bldg_path))
+            utilitis.create_path(utilitis.get_full_path
                                (bldg_path + bldg.name + "_DataBase"))
 
             _help_package(bldg_path, bldg.name)
@@ -163,7 +163,7 @@ def export_aixlib(prj,
             for zone in bldg.thermal_zones:
                 zone_path = bldg_path + bldg.name + "_DataBase" + "\\"
 
-                out_file = open(utilis.get_full_path(
+                out_file = open(utilitis.get_full_path(
                     zone_path + "\\" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
                 out_file.write(zone_template.render_unicode(
@@ -195,10 +195,10 @@ def _help_package(path, name, uses=None):
 
     '''
 
-    package_template = Template(filename=utilis.get_full_path
+    package_template = Template(filename=utilitis.get_full_path
                                 ("Data\\Output\\ModelicaTemplate\\package"))
     out_file = open(
-        utilis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
+        utilitis.get_full_path(path + "\\" + "package" + ".mo"), 'w')
     out_file.write(package_template.render_unicode(name=name, uses=uses))
     out_file.close()
 
@@ -222,11 +222,11 @@ def _help_package_order(path, package_list, addition=None, extra=None):
         specified
 
     '''
-    order_template = Template(filename=utilis.get_full_path
+    order_template = Template(filename=utilitis.get_full_path
                               ("Data\\Output\\ModelicaTemplate\\package_order"))
 
     out_file = open(
-        utilis.get_full_path(path + "\\" + "package" + ".order"), 'w')
+        utilitis.get_full_path(path + "\\" + "package" + ".order"), 'w')
     out_file.write(order_template.render_unicode
                    (list=package_list, addition=addition, extra=extra))
     out_file.close()

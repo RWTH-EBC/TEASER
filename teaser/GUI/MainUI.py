@@ -19,7 +19,7 @@ from teaser.GUI.GUIHelperClasses.PictureButton import PictureButton
 from teaser.GUI.GUIHelperClasses.TrackableItem import TrackableItem
 from teaser.Project import Project
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 import platform
 
 
@@ -725,7 +725,7 @@ class MainUI(QDialog):
         self.mask_label_3.setVisible(False)
         self.mask_label_3.setStyleSheet("background-color:rgba(0,0,0,80)")
         self.image_1 = QtGui.QPixmap()
-        self.image_1.load(utilis.get_full_path("GUI\\GUIImages\\Bild1.png"))
+        self.image_1.load(utilitis.get_full_path("GUI\\GUIImages\\Bild1.png"))
         self.pix_label_1 = QtGui.QLabel(self.side_bar_group_box)
         self.pix_label_1.setPixmap(self.image_1)
         self.pix_label_1.setGeometry(QtCore.QRect(5, 500, 210, 137))
@@ -816,7 +816,7 @@ class MainUI(QDialog):
         self.mask_label_4.setVisible(False)
         self.mask_label_4.setStyleSheet("background-color:rgba(0,0,0,80)")
         self.new_type_building_button = PictureButton(QtGui.QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Haus1.png")),
+            utilitis.get_full_path("GUI\\GUIImages\\Haus1.png")),
             self.ribbon_widget)
         self.new_type_building_button.setGeometry(QtCore.QRect(10, 5, 70, 70))
         self.new_type_building_button.clicked.connect(
@@ -827,7 +827,7 @@ class MainUI(QDialog):
         self.new_type_building_label.setGeometry(QtCore.QRect(10, 80, 70, 25))
         self.new_type_building_label.setText("C" + "reate Type- \nBuilding")
         self.new_empty_building_button = PictureButton(QtGui.QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\NewEmptyBuilding.png")),
+            utilitis.get_full_path("GUI\\GUIImages\\NewEmptyBuilding.png")),
             self.ribbon_widget)
         self.new_empty_building_button.setGeometry(QtCore.QRect(95, 5, 70, 70))
         self.new_empty_building_button.clicked.connect(
@@ -838,7 +838,7 @@ class MainUI(QDialog):
         self.new_empty_building_label.setGeometry(QtCore.QRect(95, 80, 70, 25))
         self.new_empty_building_label.setText("Create Emp- \nty Building")
         self.add_zone_button = PictureButton(QtGui.QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\AddZone.png")),
+            utilitis.get_full_path("GUI\\GUIImages\\AddZone.png")),
             self.ribbon_widget)
         self.add_zone_button.setGeometry(QtCore.QRect(180, 5, 70, 70))
         self.add_zone_button.clicked.connect(self.add_thermal_zone)
@@ -849,7 +849,7 @@ class MainUI(QDialog):
         self.add_zone_label.setGeometry(QtCore.QRect(180, 80, 70, 25))
         self.add_zone_label.setText("Create New \n Zone")
         self.delete_zone_button = PictureButton(QtGui.QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\DeleteZone.png")),
+            utilitis.get_full_path("GUI\\GUIImages\\DeleteZone.png")),
             self.ribbon_widget)
         self.delete_zone_button.setGeometry(QtCore.QRect(265, 5, 70, 70))
         self.delete_zone_button.clicked.connect(self.delete_thermal_zone)
@@ -859,7 +859,7 @@ class MainUI(QDialog):
         self.delete_label.setGeometry(QtCore.QRect(265, 80, 70, 25))
         self.delete_label.setText("Delete Cur- \nrent Zone")
         self.edit_building_button = PictureButton(QtGui.QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\EditBuilding.png")),
+            utilitis.get_full_path("GUI\\GUIImages\\EditBuilding.png")),
             self.ribbon_widget)
         self.edit_building_button.setGeometry(QtCore.QRect(350, 5, 70, 70))
         self.edit_building_button.clicked.connect(self.edit_building)
@@ -870,7 +870,7 @@ class MainUI(QDialog):
         self.edit_label.setGeometry(QtCore.QRect(350, 80, 70, 25))
         self.edit_label.setText("Edit\nBuilding")
         self.load_button = PictureButton(QtGui.QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Load.png")),
+            utilitis.get_full_path("GUI\\GUIImages\\Load.png")),
             self.ribbon_widget)
         self.load_button.setGeometry(QtCore.QRect(435, 5, 70, 70))
         self.load_button.clicked.connect(self.load_building_button)
@@ -879,7 +879,7 @@ class MainUI(QDialog):
         self.load_label.setGeometry(QtCore.QRect(435, 80, 70, 25))
         self.load_label.setText("Load\nBuilding")
         self.new_project_button = PictureButton(QtGui.QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Project_manager.png")),
+            utilitis.get_full_path("GUI\\GUIImages\\Project_manager.png")),
             self.ribbon_widget)
         self.new_project_button.setGeometry(QtCore.QRect(520, 5, 70, 70))
         self.new_project_button.clicked.connect(self.create_new_project_ui)
@@ -888,7 +888,7 @@ class MainUI(QDialog):
         self.new_project_label.setGeometry(QtCore.QRect(520, 80, 70, 25))
         self.new_project_label.setText("Create empty\nProject")
         self.open_simulation_button = PictureButton(QtGui.QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Keyschedule_rc4.png")),
+            utilitis.get_full_path("GUI\\GUIImages\\Keyschedule_rc4.png")),
             self.ribbon_widget)
         self.open_simulation_button.setGeometry(QtCore.QRect(605, 5, 70, 70))
         self.open_simulation_button.clicked.connect(
@@ -898,7 +898,7 @@ class MainUI(QDialog):
         self.open_simulation_label.setGeometry(QtCore.QRect(605, 80, 70, 25))
         self.open_simulation_label.setText("Open Simu-\n lation Tab")
         self.open_export_button = PictureButton(QtGui.QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Keyschedule_rc4.png")),
+            utilitis.get_full_path("GUI\\GUIImages\\Keyschedule_rc4.png")),
             self.ribbon_widget)
         self.open_export_button.setGeometry(QtCore.QRect(685, 5, 70, 70))
         self.open_export_button.clicked.connect(
@@ -908,7 +908,7 @@ class MainUI(QDialog):
         self.open_export_label.setGeometry(QtCore.QRect(685, 80, 70, 25))
         self.open_export_label.setText("Open Ex-\n port Tab")
         self.save_project_button = PictureButton(QtGui.QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Keyschedule_rc4.png")),
+            utilitis.get_full_path("GUI\\GUIImages\\Keyschedule_rc4.png")),
             self.ribbon_widget)
         self.save_project_button.setGeometry(QtCore.QRect(765, 5, 70, 70))
         self.save_project_button.clicked.connect(
@@ -1627,15 +1627,15 @@ class MainUI(QDialog):
         self.picture_layout_office_3 = QtGui.QLabel()
         self.picture_layout_office_4 = QtGui.QLabel()
         self.picture_layout_office_2.setPixmap(
-            QtGui.QPixmap(utilis.get_full_path(
+            QtGui.QPixmap(utilitis.get_full_path(
                 "GUI\\GUIImages\\OfficeBuildings\\elongated1floor.png")).scaled(
                     70, 70))
         self.picture_layout_office_3.setPixmap(
-            QtGui.QPixmap(utilis.get_full_path(
+            QtGui.QPixmap(utilitis.get_full_path(
                 "GUI\\GUIImages\\OfficeBuildings\\elongated2floors.png")).scaled(
                     70, 70))
         self.picture_layout_office_4.setPixmap(QtGui.QPixmap(
-            utilis.get_full_path(
+            utilitis.get_full_path(
                 "GUI\\GUIImages\\OfficeBuildings\\compact.png")).scaled(
                     70, 70))
         self.office_layout.addWidget(
@@ -1671,15 +1671,15 @@ class MainUI(QDialog):
         self.picture_window_area_office_3 = QtGui.QLabel()
         self.picture_window_area_office_4 = QtGui.QLabel()
         self.picture_window_area_office_2.setPixmap(QtGui.QPixmap(
-            utilis.get_full_path(
+            utilitis.get_full_path(
                 "GUI\\GUIImages\\OfficeBuildings\\punctuatedFacade.png"))
             .scaled(70, 70))
         self.picture_window_area_office_3.setPixmap(QtGui.QPixmap(
-            utilis.get_full_path(
+            utilitis.get_full_path(
                 "GUI\\GUIImages\\OfficeBuildings\\bannerFacade.png"))
             .scaled(70, 70))
         self.picture_window_area_office_4.setPixmap(QtGui.QPixmap(
-            utilis.get_full_path(
+            utilitis.get_full_path(
                 "GUI\\GUIImages\\OfficeBuildings\\fullGlazing.png"))
             .scaled(70, 70))
         self.office_layoutWindowArea.addWidget(
@@ -1763,13 +1763,13 @@ class MainUI(QDialog):
         self.picture_neighbour_building_residential_2 = QtGui.QLabel()
         self.picture_neighbour_building_residential_3 = QtGui.QLabel()
         self.picture_neighbour_building_residential_1.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "noNeighbour.png")).scaled(29, 23))
         self.picture_neighbour_building_residential_2.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "oneNeighbour.png")).scaled(46, 23))
         self.picture_neighbour_building_residential_3.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "twoNeighbours.png")).scaled(56, 23))
         self.layout_residential_neighbour_buildings.addWidget(
             self.radio_button_neighbour_1, 1, 0)
@@ -1797,11 +1797,11 @@ class MainUI(QDialog):
         self.picture_layout_residential_2 = QtGui.QLabel()
         self.picture_layout_residential_1.setPixmap(QPixmap(
 
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "compact.png")).scaled(28, 28))
         self.picture_layout_residential_2.setPixmap(QPixmap(
 
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "elongatedComplex.png")).scaled(28, 28))
         self.layout_residential_layout.addWidget(
             self.radio_button_residential_layout_1, 1, 0)
@@ -1832,16 +1832,16 @@ class MainUI(QDialog):
         self.picture_roof_residential_3 = QtGui.QLabel()
         self.picture_roof_residential_4 = QtGui.QLabel()
         self.picture_roof_residential_1.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "flatRoof.png")).scaled(32, 23))
         self.picture_roof_residential_2.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "nonHeatedAttic.png")).scaled(34, 23))
         self.picture_roof_residential_3.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "partyHeatedAttic.png")).scaled(34, 23))
         self.picture_roof_residential_4.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "heatedAttic.png")).scaled(34, 23))
         self.layout_residential_roof.addWidget(
             self.radio_button_residential_roof_1, 1, 0)
@@ -1888,16 +1888,16 @@ class MainUI(QDialog):
         self.picture_residential_basement_3 = QtGui.QLabel()
         self.picture_residential_basement_4 = QtGui.QLabel()
         self.picture_residential_basement_1.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "noCellar.png")).scaled(32, 28))
         self.picture_residential_basement_2.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "nonHeatedCellar.png")).scaled(32, 28))
         self.picture_residential_basement_3.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "partlyHeatedCellar.png")).scaled(32, 28))
         self.picture_residential_basement_4.setPixmap(QPixmap(
-            utilis.get_full_path("GUI\\GUIImages\\Residentials\\"
+            utilitis.get_full_path("GUI\\GUIImages\\Residentials\\"
                                  "heatedCellar.png")).scaled(32, 28))
         self.layout_residential_basement.addWidget(
             self.radio_button_residential_basement_1, 1, 0)
@@ -3811,12 +3811,12 @@ class MainUI(QDialog):
             QtCore.QRect(130, 195, 130, 25))
         if self.file_path == "":
             self.export_save_template_lineedit.setText(
-                utilis.get_default_path())
-            utilis.create_path(str(self.export_save_template_lineedit.text()))
+                utilitis.get_default_path())
+            utilitis.create_path(str(self.export_save_template_lineedit.text()))
             self.file_path = self.export_save_template_lineedit.text()
         else:
             self.export_save_template_lineedit.setText(self.file_path)
-            utilis.create_path(str(self.export_save_template_lineedit.text()))
+            utilitis.create_path(str(self.export_save_template_lineedit.text()))
         self.export_save_template_button = QtGui.QPushButton(
             self.export_groupbox)
         self.export_save_template_button.setGeometry(
@@ -4408,7 +4408,7 @@ class MainUI(QDialog):
 
         path = QtGui.QFileDialog.getSaveFileName(
             caption='Choose Filepath',
-            directory=utilis.get_default_path()+"\\"+self.project.name,
+            directory=utilitis.get_default_path()+"\\"+self.project.name,
             filter="Teaser File (*.teaserXML);; GML (*.gml)")
         last_name = path.split('/')
         length = len(last_name)
@@ -4454,13 +4454,13 @@ class MainUI(QDialog):
             QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
                                           "record " + elemInCombobox +
                                           " for current building finished ")
-        utilis.create_path(str(self.file_path))
+        utilitis.create_path(str(self.file_path))
 
     def click_browse_button(self):
         self.export_save_template_lineedit.setText(QtGui.QFileDialog.
                                                    getExistingDirectory())
         if self.export_save_template_lineedit.text() != "":
-            utilis.create_path(self.export_save_template_lineedit.text())
+            utilitis.create_path(self.export_save_template_lineedit.text())
             self.file_path = self.export_save_template_lineedit.text()
         else:
             self.export_save_template_lineedit.setText(self.file_path)

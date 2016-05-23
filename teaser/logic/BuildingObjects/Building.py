@@ -8,7 +8,7 @@ import re
 import numpy as np
 import inspect
 import scipy.io
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 from teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU \
     import BuildingAHU
 import teaser.Logic.Simulation.aixlib as aixlib

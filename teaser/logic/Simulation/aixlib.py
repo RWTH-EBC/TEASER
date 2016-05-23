@@ -8,7 +8,7 @@ specific for AixLib simulation, including the export of boundary conditions
 and AHU operation values
 """
 import scipy.io
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 import numpy as np
 def compare_orientation(bldg):
     """Fills the zone weightfactors according to orientation and tilt of
@@ -158,11 +158,11 @@ def modelica_set_temp(bldg, path = None):
         pass
 
     if path is None:
-        path = utilis.get_default_path()
+        path = utilitis.get_default_path()
     else:
         pass
 
-    utilis.create_path(path)
+    utilitis.create_path(path)
     path = path + bldg.file_set_t
 
     t_set_heat = [0]
@@ -220,11 +220,11 @@ def modelica_AHU_boundary(bldg,
         pass
 
     if path is None:
-        path = utilis.get_default_path()
+        path = utilitis.get_default_path()
     else:
         pass
 
-    utilis.create_path(path)
+    utilitis.create_path(path)
     path = path + bldg.file_ahu
 
     if time_line is None:
@@ -310,11 +310,11 @@ def modelica_gains_boundary(bldg,
         pass
 
     if path is None:
-        path = utilis.get_default_path()
+        path = utilitis.get_default_path()
     else:
         pass
 
-    utilis.create_path(path)
+    utilitis.create_path(path)
     path = path + bldg.file_internal_gains
 
     for zone_count in bldg.thermal_zones:

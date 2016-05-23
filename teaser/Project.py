@@ -6,7 +6,7 @@
 
 
 import warnings
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 import teaser.data.input.teaserxml_input as txml_in
 import teaser.data.output.teaserxml_output as txml_out
 import teaser.data.output.aixlib_output as aixlib_output
@@ -836,10 +836,10 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = utilis.get_full_path("OutputData") + "\\" + name
+            new_path = utilitis.get_full_path("OutputData") + "\\" + name
         else:
             new_path = path + "\\" + name
-            utilis.create_path(utilis.get_full_path(path))
+            utilitis.create_path(utilitis.get_full_path(path))
 
         txml_out.save_teaser_xml(new_path, self)
 
@@ -895,10 +895,10 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = utilis.get_full_path("OutputData") + "\\" + name
+            new_path = utilitis.get_full_path("OutputData") + "\\" + name
         else:
             new_path = path + "\\" + name
-            utilis.create_path(utilis.get_full_path(path))
+            utilitis.create_path(utilitis.get_full_path(path))
 
         citygml_out.save_gml(self, new_path)
 
@@ -930,11 +930,11 @@ class Project(object):
         """
 
         if path is None:
-            path = utilis.get_default_path() + "\\" + self.name
+            path = utilitis.get_default_path() + "\\" + self.name
         else:
             path = path + "\\" + self.name
 
-        utilis.create_path(path)
+        utilitis.create_path(path)
 
         aixlib_output.export_aixlib(prj=self,
                                     building_model=building_model,
@@ -968,11 +968,11 @@ class Project(object):
         """
 
         if path is None:
-            path = utilis.get_default_path() + "\\" + self.name
+            path = utilitis.get_default_path() + "\\" + self.name
         else:
             path = path + "\\" + self.name
 
-        utilis.create_path(path)
+        utilitis.create_path(path)
 
         annex60_output.export_annex60(prj=self,
                                       number_of_elements=self.number_of_elements_calc,

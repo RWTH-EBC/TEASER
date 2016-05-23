@@ -5,7 +5,7 @@ teaser
 Tool for Energy Analysis and Simulation for Efficient Retrofit 
 '''
 import sys
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 import os
 
 v = sys.version_info
@@ -18,7 +18,7 @@ elif v >= (2, 7) and v < (3,):
 else:
     raise Exception('This software runs on python versions 2.7 or >=3.3 only!')
 
-new_path = utilis.get_full_path("OutputData\\")
+new_path = utilitis.get_full_path("OutputData\\")
 
 dire = os.path.dirname(new_path)
 

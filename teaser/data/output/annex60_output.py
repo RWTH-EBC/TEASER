@@ -7,7 +7,7 @@ This module contains function to call Templates for Annex60 model generation
 """
 import teaser.data.output.aixlib_output as aixlib_output
 import os.path
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 from mako.template import Template
 
 
@@ -54,20 +54,20 @@ def export_annex60(prj,
     if number_of_elements == 1:
         pass
     elif number_of_elements == 2:
-        zone_template = Template(filename=utilis.get_full_path(
+        zone_template = Template(filename=utilitis.get_full_path(
             "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_TwoElements"))
     elif number_of_elements == 3:
-        zone_template = Template(filename=utilis.get_full_path(
+        zone_template = Template(filename=utilitis.get_full_path(
             "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_ThreeElements"))
     elif number_of_elements == 4:
-        zone_template = Template(filename=utilis.get_full_path(
+        zone_template = Template(filename=utilitis.get_full_path(
             "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_FourElements"))
 
     for bldg in exported_list_of_buildings:
         bldg_path = os.path.join(path,
                                  bldg.name)
-        utilis.create_path(utilis.get_full_path(bldg_path))
-        utilis.create_path(utilis.get_full_path(bldg_path+ "\\" + bldg.name + \
+        utilitis.create_path(utilitis.get_full_path(bldg_path))
+        utilitis.create_path(utilitis.get_full_path(bldg_path+ "\\" + bldg.name + \
                                                      "_Models"))
         aixlib_output._help_package(bldg_path, bldg.name)
         aixlib_output._help_package_order(bldg_path,
@@ -78,7 +78,7 @@ def export_annex60(prj,
             zone_path = os.path.join(bldg_path,
                                      bldg.name+"_Models")
 
-            out_file = open(utilis.get_full_path(
+            out_file = open(utilitis.get_full_path(
                     zone_path + "\\" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
             print(zone_path + "\\" + bldg.name + "_" +

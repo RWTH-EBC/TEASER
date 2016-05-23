@@ -12,7 +12,7 @@ Rouvel
 '''
 from teaser.Project import Project
 
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 
 def parameter_room8():
     
@@ -20,7 +20,7 @@ def parameter_room8():
     load project of VDI 6007 room from old TEASER file
     '''
     prj = Project(False)
-    prj.load_project(utilis.get_full_path(
+    prj.load_project(utilitis.get_full_path(
         "examples\\examplefiles\\VDI6007_Room8.teaserXML"))
 
     '''

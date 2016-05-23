@@ -9,7 +9,7 @@ This module contains an example for the retrofit of an entire district
 import os
 import xml.etree.ElementTree as ET
 
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 from teaser.Project import Project
 
 
@@ -38,7 +38,7 @@ def main():
                               'ExampleInputFiles',
                               'MelatenXML')
 
-    output_path = utilis.get_default_path()
+    output_path = utilitis.get_default_path()
 
     info_list = read_XMLs(input_path)
 

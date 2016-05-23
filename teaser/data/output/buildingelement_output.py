@@ -7,7 +7,7 @@ This module contains function to save building element classes
 """
 
 import teaser.data.bindings.typeelement_bind as tb_bind
-import teaser.Logic.Utilis as utilis
+import teaser.Logic.utilities as utilitis
 import warnings
 
 
@@ -40,7 +40,7 @@ def save_type_element(element, path=None, file_name=None):
     else:
         path = path + "\\" + file_name + ".xml"
         try:
-            xml_file = open(utilis.get_full_path(path))
+            xml_file = open(utilitis.get_full_path(path))
             xml_parse = tb_bind.CreateFromDocument(xml_file.read())
         except:
             xml_parse = tb_bind.TypeBuildingElements()
@@ -192,7 +192,7 @@ def save_type_element(element, path=None, file_name=None):
 
     if add_to_xml is True:
 
-        out_file = open(utilis.get_full_path(path),"w")
+        out_file = open(utilitis.get_full_path(path),"w")
 
         out_file.write(xml_parse.toDOM().toprettyxml())
 
