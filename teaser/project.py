@@ -13,15 +13,15 @@ import teaser.data.output.aixlib_output as aixlib_output
 import teaser.data.output.annex60_output as annex60_output
 import teaser.data.output.text_output as text_out
 from teaser.data.dataclass import DataClass
-from teaser.Logic.ArchetypeBuildings.BMVBS.Office import Office
-from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute import Institute
-from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import Institute4
-from teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import Institute8
-from teaser.Logic.ArchetypeBuildings.UrbanReNet.EST1a import EST1a
-from teaser.Logic.ArchetypeBuildings.UrbanReNet.EST1b import EST1b
-from teaser.Logic.ArchetypeBuildings.UrbanReNet.EST4b import EST4b
-from teaser.Logic.ArchetypeBuildings.UrbanReNet.EST7 import EST7
-from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import SingleFamilyDwelling
+from teaser.Logic.archetypebuildings.BMVBS.Office import Office
+from teaser.Logic.archetypebuildings.BMVBS.Custom.Institute import Institute
+from teaser.Logic.archetypebuildings.BMVBS.Custom.Institute4 import Institute4
+from teaser.Logic.archetypebuildings.BMVBS.Custom.Institute8 import Institute8
+from teaser.Logic.archetypebuildings.UrbanReNet.EST1a import EST1a
+from teaser.Logic.archetypebuildings.UrbanReNet.EST1b import EST1b
+from teaser.Logic.archetypebuildings.UrbanReNet.EST4b import EST4b
+from teaser.Logic.archetypebuildings.UrbanReNet.EST7 import EST7
+from teaser.Logic.archetypebuildings.BMVBS.SingleFamilyDwelling import SingleFamilyDwelling
 from teaser.Logic.Simulation.ModelicaInfo import ModelicaInfo
 
 try:

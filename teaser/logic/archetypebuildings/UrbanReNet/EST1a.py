@@ -1,7 +1,7 @@
 # created June 2015
 # by TEASER4 Development Team
 
-from teaser.logic.ArchetypeBuildings.Residential \
+from teaser.logic.archetypebuildings.Residential \
     import Residential
 from teaser.logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
     import BoundaryConditions as UseCond

@@ -11,11 +11,11 @@ TEASER file format .tXML
 import teaser.data.bindings.project_bind as pb
 
 from teaser.logic.BuildingObjects.Building import Building
-from teaser.logic.ArchetypeBuildings.BMVBS.Office import Office
-from teaser.logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling import SingleFamilyDwelling
-from teaser.logic.ArchetypeBuildings.BMVBS.Custom.Institute import Institute
-from teaser.logic.ArchetypeBuildings.BMVBS.Custom.Institute4 import Institute4
-from teaser.logic.ArchetypeBuildings.BMVBS.Custom.Institute8 import Institute8
+from teaser.logic.archetypebuildings.BMVBS.Office import Office
+from teaser.logic.archetypebuildings.BMVBS.SingleFamilyDwelling import SingleFamilyDwelling
+from teaser.logic.archetypebuildings.BMVBS.Custom.Institute import Institute
+from teaser.logic.archetypebuildings.BMVBS.Custom.Institute4 import Institute4
+from teaser.logic.archetypebuildings.BMVBS.Custom.Institute8 import Institute8
 from teaser.logic.BuildingObjects.ThermalZone import ThermalZone
 from teaser.logic.BuildingObjects.BuildingSystems.BuildingAHU import BuildingAHU
 from teaser.logic.BuildingObjects.BoundaryConditions.BoundaryConditions \

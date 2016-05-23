@@ -9,7 +9,7 @@ TEASER file format .tXML
 
 import teaser.data.bindings.project_bind as pb
 import inspect
-from teaser.logic.ArchetypeBuildings.Residential import Residential
+from teaser.logic.archetypebuildings.Residential import Residential
 
 def save_teaser_xml(path, project):
     '''This function saves a project to a tXML
