@@ -94,7 +94,7 @@ class Test_teaser(object):
         with TEASER3 values.
         '''
         prj.set_default()
-        prj.load_project(Utilis.get_full_path("Examples\\ExampleInputFiles"
+        prj.load_project(Utilis.get_full_path("examples\\examplefiles"
                                               "\\new.teaserXML"))
         therm_zone = prj.buildings[0].thermal_zones[0]
 
@@ -554,7 +554,7 @@ class Test_teaser(object):
     def test_load_save_project(self):
         '''test of load_project and save_project'''
 
-        prj.load_project(Utilis.get_full_path(("Examples/ExampleInputFiles"
+        prj.load_project(Utilis.get_full_path(("examples/examplefiles"
                                                "/new.teaserXML")))
         therm_zone = prj.buildings[-1].thermal_zones[0]
         assert therm_zone.outer_walls[0].area == 40.0

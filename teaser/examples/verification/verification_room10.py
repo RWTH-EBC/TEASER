@@ -26,7 +26,8 @@ def parameter_room10():
     prj = Project(load_data=True)
     """We load the given test room defined in teaserXML-file"""
 
-    prj.load_project('D:/GIT/TEASER/teaser/Examples/ExampleInputFiles/VDI6007_Room10.teaserXML')
+    prj.load_project(utilis.get_full_path(
+        "examples\\examplefiles\\VDI6007_Room10.teaserXML"))
 
     """Then we calculate all parameter with the calculation
     core 'vdi', that is exactly as defined in VDI 6007-1."""
