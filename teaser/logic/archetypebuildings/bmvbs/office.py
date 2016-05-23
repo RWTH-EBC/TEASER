@@ -6,17 +6,17 @@ import math
 
 from teaser.logic.archetypebuildings.nonresidential\
  import NonResidential
-from teaser.logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
+from teaser.logic.buildingobjects.BoundaryConditions.BoundaryConditions \
     import BoundaryConditions as UseCond
-from teaser.logic.BuildingObjects.BuildingPhysics.Ceiling import Ceiling
-from teaser.logic.BuildingObjects.BuildingPhysics.Floor import Floor
-from teaser.logic.BuildingObjects.BuildingPhysics.GroundFloor\
+from teaser.logic.buildingobjects.BuildingPhysics.Ceiling import Ceiling
+from teaser.logic.buildingobjects.BuildingPhysics.Floor import Floor
+from teaser.logic.buildingobjects.BuildingPhysics.GroundFloor\
  import GroundFloor
-from teaser.logic.BuildingObjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.logic.BuildingObjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.logic.BuildingObjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.logic.BuildingObjects.BuildingPhysics.Window import Window
-from teaser.logic.BuildingObjects.ThermalZone import ThermalZone
+from teaser.logic.buildingobjects.BuildingPhysics.InnerWall import InnerWall
+from teaser.logic.buildingobjects.BuildingPhysics.OuterWall import OuterWall
+from teaser.logic.buildingobjects.BuildingPhysics.Rooftop import Rooftop
+from teaser.logic.buildingobjects.BuildingPhysics.Window import Window
+from teaser.logic.buildingobjects.ThermalZone import ThermalZone
 
 
 class Office(NonResidential):

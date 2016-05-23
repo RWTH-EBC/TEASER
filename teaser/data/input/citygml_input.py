@@ -26,7 +26,7 @@ import teaser.data.bindings.opengis.misc.raw.xAL as xal
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling \
                             import SingleFamilyDwelling
 from teaser.logic.archetypebuildings.bmvbs.office import Office
-from teaser.logic.BuildingObjects.Building import Building
+from teaser.logic.buildingobjects.Building import Building
 
 
 def load_gml(path, prj):

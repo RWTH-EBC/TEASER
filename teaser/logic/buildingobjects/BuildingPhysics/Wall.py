@@ -2,10 +2,10 @@
 # by TEASER4 Development Team
 
 
-from teaser.logic.BuildingObjects.BuildingPhysics.BuildingElement \
+from teaser.logic.buildingobjects.BuildingPhysics.BuildingElement \
     import BuildingElement
-from teaser.logic.BuildingObjects.BuildingPhysics.Layer import Layer
-from teaser.logic.BuildingObjects.BuildingPhysics.Material import Material
+from teaser.logic.buildingobjects.BuildingPhysics.Layer import Layer
+from teaser.logic.buildingobjects.BuildingPhysics.Material import Material
 import numpy as np
 
 
