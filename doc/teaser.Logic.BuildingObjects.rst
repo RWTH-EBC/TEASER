@@ -12,20 +12,20 @@ The most important objects are `building`_ and `thermalzone`_
 building
 --------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.Building
+.. automodule:: teaser.logic.buildingobjects.building
     :members:
     :show-inheritance:
 
 thermalzone
 -----------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.ThermalZone
+.. automodule:: teaser.logic.buildingobjects.thermalzone
     :members:
     :show-inheritance:
 
 useconditions
 -------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.UseConditions
+.. automodule:: teaser.logic.buildingobjects.useconditions
     :members:
     :show-inheritance:

@@ -1,6 +1,6 @@
 project - teaser API
 -------------------------
 
-.. automodule:: teaser.Project
+.. automodule:: teaser.project
     :members:
     :show-inheritance:

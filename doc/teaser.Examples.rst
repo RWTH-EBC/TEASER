@@ -47,15 +47,25 @@ it uses vdi calculation method::
                          with_ahu=True,
                          construction_type="heavy")
 
-To export the parameters to a Modelica record, we use the export_record
-function. path = None indicates, that we want to store the records in
+We need to set the projects calculation method. The library we want to use is
+AixLib, we are using a two element model and want an extra resistance for the
+windows. To export the parameters to a Modelica record, we use the export_aixlib
+function. path = None indicates, that we want to store the records in \
 TEASER'S Output folder::
 
-prj.export_aixlib(building_model="MultizoneEquipped",
-									zone_model="ThermalZoneEquipped",
-									corG=True,
-									internal_id=None,
-									path=None)
+    prj.used_library_calc = 'AixLib'
+    prj.number_of_elements_calc = 2
+    prj.merge_windows_calc = False
+    prj.export_aixlib(building_model="MultizoneEquipped",
+    									zone_model="ThermalZoneEquipped",
+    									corG=True,
+    									internal_id=None,
+    									path=None)
+
+We could also use Annex60 models with same calculation method::
+
+    prj.used_library_calc = "Annex60"
+    prj.export_annex()
 
 Now we retrofit all buildings in the year 2015 (EnEV2014). That includes new
 insulation layer and new windows. The name is changed to Retrofit::
@@ -170,20 +180,30 @@ Instantiate a Material class, with window layer as parent, set attributes::
     win_material.thermal_conduc = 0.067
     win_material.transmittance = 0.9
 
-We calculate the RC Values for a reduced order model with two elements and an
-extra resistance for the windows using the AixLib::
 
-    prj.calc_all_buildings(number_of_elements=2,
-                           merge_windows=False,
-                           used_library="AixLib")
+We calculate the RC Values according to AixLib procedure::
 
-Export the AixLib model::
+    prj.used_library_calc = 'AixLib'
+    prj.number_of_elements_calc = 2
+    prj.merge_windows_calc = False
 
-		prj.export_aixlib(building_model="MultizoneEquipped",
+    prj.calc_all_buildings()
+
+Export the Modelica model::
+
+    prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
-                      corG=False,
+                      corG=True,
                       internal_id=None,
                       path=None)
+
+Or we use Annex60 method with for elements::
+
+    prj.calc_all_buildings(number_of_elements=4,
+                          merge_windows=False,
+                           used_library='Annex60')
+    prj.export_annex()
+
 
 Save CityGML::
 

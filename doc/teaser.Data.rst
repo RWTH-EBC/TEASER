@@ -11,7 +11,7 @@ data
 DataClass module
 ----------------------------
 
-.. automodule:: teaser.Data.DataClass
+.. automodule:: teaser.data.dataclass
     :members:
     :undoc-members:
     :show-inheritance:

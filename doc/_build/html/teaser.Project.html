@@ -36,6 +36,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="teaser.guistart.html" title="guistart - teaser GUI"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -68,9 +71,6 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -81,8 +81,886 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="project-teaser-api">
-<h1>project - teaser API<a class="headerlink" href="#project-teaser-api" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-teaser.project">
+<span id="project-teaser-api"></span><h1>project - teaser API<a class="headerlink" href="#module-teaser.project" title="Permalink to this headline">¶</a></h1>
+<p>This module includes the Project class, which serves as base class and API</p>
+<dl class="class">
+<dt id="teaser.project.Project">
+<em class="property">class </em><code class="descclassname">teaser.project.</code><code class="descname">Project</code><span class="sig-paren">(</span><em>load_data=True</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Base class for each project, serves also as API</p>
+<p>The Project class is the root class for each action in TEASER and
+should be instantiated only once for each project. It also contains
+all API function to use main functionality of TEASER4</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>load_data</strong> : boolean</p>
+<blockquote class="last">
+<div><p>boolean if data bindings for type elements and use conditions
+should be loaded (default = True)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>buildings</td>
+<td>(list) list of all buildings in one project, instances of Building()</td>
+</tr>
+<tr class="row-even"><td>data</td>
+<td>(list) instance of Data containing the XML binding classes, instance of DataClass()</td>
+</tr>
+<tr class="row-odd"><td>modelica_project</td>
+<td>(str) name of the Modelica Project used in type building creation (default: self.name)</td>
+</tr>
+<tr class="row-even"><td>weather_file_header</td>
+<td>(str) header of weather file used for Modelica simulation</td>
+</tr>
+<tr class="row-odd"><td>weather_file_path</td>
+<td>(str) path to weather file used for Modelica simulation (default: &#8220;TRY_5_Essen.txt&#8221;)</td>
+</tr>
+<tr class="row-even"><td>calculation_method</td>
+<td>(str) specifier for the calculation method for building parameters, codelist (ebc or vdi), (default: &#8220;vdi&#8221;)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.project.Project.calc_all_buildings">
+<code class="descname">calc_all_buildings</code><span class="sig-paren">(</span><em>number_of_elements=2</em>, <em>merge_windows=False</em>, <em>used_library='AixLib'</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.calc_all_buildings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates values for all project buildings</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>number_of_elements</strong> : int</p>
+<blockquote>
+<div><p>defines the number of elements, that areaaggregated, between 1
+and 4, default is 2
+For AixLib you should always use 2 elements!!!</p>
+</div></blockquote>
+<p><strong>merge_windows</strong> : bool</p>
+<blockquote>
+<div><p>True for merging the windows into the outer walls, False for
+separate resistance for window, default is False
+For AixLib vdi calculation is True, ebc calculation is False</p>
+</div></blockquote>
+<p><strong>used_library</strong> : str</p>
+<blockquote class="last">
+<div><p>used library (AixLib and Annex60 are supported)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.export_aixlib">
+<code class="descname">export_aixlib</code><span class="sig-paren">(</span><em>building_model='None'</em>, <em>zone_model='None'</em>, <em>corG=None</em>, <em>internal_id=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.export_aixlib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports values to a record file for Modelica simulation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>building_model</strong> : string</p>
+<blockquote>
+<div><p>setter of the used Aixlib building model (None, MultizoneEquipped,
+Multizone)</p>
+</div></blockquote>
+<p><strong>zone_model</strong> : string</p>
+<blockquote>
+<div><p>setter of the used Aixlib zone model (ThermalZoneEquipped,
+ThermalZone)</p>
+</div></blockquote>
+<p><strong>corG</strong> : boolean</p>
+<blockquote>
+<div><p>setter of the used g value calculation in the model</p>
+</div></blockquote>
+<p><strong>internal_id</strong> : float</p>
+<blockquote>
+<div><p>setter of the used building which will be exported, if None then
+all buildings will be exported</p>
+</div></blockquote>
+<p><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in OutputData, an alternative
+path can be specified as a full and absolute path</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.export_annex">
+<code class="descname">export_annex</code><span class="sig-paren">(</span><em>number_of_elements=2</em>, <em>merge_windows=False</em>, <em>internal_id=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.export_annex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports values to a record file for Modelica simulation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>number_of_elements</strong> : int</p>
+<blockquote>
+<div><p>defines the number of elements, that area aggregated, between 1
+and 4, default is 2</p>
+</div></blockquote>
+<p><strong>merge_windows</strong> : bool</p>
+<blockquote>
+<div><p>True for merging the windows into the outer walls, False for
+separate resistance for window, default is False</p>
+</div></blockquote>
+<p><strong>internal_id</strong> : float</p>
+<blockquote>
+<div><p>setter of the used building which will be exported, if None then
+all buildings will be exported</p>
+</div></blockquote>
+<p><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in OutputData, an alternative
+path can be specified as a full and absolute path</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.export_parameters_txt">
+<code class="descname">export_parameters_txt</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.export_parameters_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports parameters of all buildings in a readable text file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in OutputData, an alternative
+can be specified</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.instantiate_data_class">
+<code class="descname">instantiate_data_class</code><span class="sig-paren">(</span><em>type_element_file=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.instantiate_data_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialization of DataClass</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>type_element_file: str</strong></p>
+<blockquote>
+<div><p>Name of project specific file (if needed). (default = None)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>DataClass</strong> : Instance of DataClass()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.load_old_teaser">
+<code class="descname">load_old_teaser</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.load_old_teaser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the project from an old TEASER xml file</p>
+<p>calls the function load_teaser_xml in data.DataHelp.OldTeaser.py</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>full path to a teaserXML file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.load_project">
+<code class="descname">load_project</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.load_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the project from a teaserXML file (new format)</p>
+<p>calls the function load_teaser_xml in data.TeaserXML.py</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>full path to a teaserXML file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.retrofit_all_buildings">
+<code class="descname">retrofit_all_buildings</code><span class="sig-paren">(</span><em>year_of_retrofit</em>, <em>window_type=None</em>, <em>material=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.retrofit_all_buildings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrofits all buildings in the project</p>
+<p>All Buildings in the project are retrofitted in the following manner:</p>
+<ul class="simple">
+<li>replace all windows of the building to retrofitted window according
+to the year of retrofit.</li>
+<li>add an additional insulation layer to all outer walls
+(including roof, and ground floor).
+The thickness of the insulation layer is calculated
+that the U-Value of the wall corresponds to the retrofit standard of
+the year of retrofit.</li>
+</ul>
+<p>The needed parameters for the Modelica Model are calculated
+automatically, using the calculation_method specified in the
+first scenario.</p>
+<p>Note: To Calculate U-Value, the standard TEASER coefficients for outer
+and inner heat transfer are used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>year_of_retrofit</strong> : int</p>
+<blockquote>
+<div><p>the year the buildings are retrofitted</p>
+</div></blockquote>
+<p><strong>window_type</strong> : str</p>
+<blockquote>
+<div><p>Default: EnEv 2014</p>
+</div></blockquote>
+<p><strong>material</strong> : str</p>
+<blockquote class="last">
+<div><p>Default: EPS035</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.save_citygml">
+<code class="descname">save_citygml</code><span class="sig-paren">(</span><em>file_name=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.save_citygml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the project to a citygml file</p>
+<p>calls the function save_gml in data.CityGML we make use of CityGML core
+and EnergyADE to store semantic information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>file_name</strong> : string</p>
+<blockquote>
+<div><p>name of the new file</p>
+</div></blockquote>
+<p><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in OutputData, an alternative
+can be specified</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.save_project">
+<code class="descname">save_project</code><span class="sig-paren">(</span><em>file_name=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.save_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the project to a tXML file</p>
+<p>calls the function save_teaser_xml in data.TeaserXML.py</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>file_name</strong> : string</p>
+<blockquote>
+<div><p>name of the new file</p>
+</div></blockquote>
+<p><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in OutputData, an alternative
+can be specified</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.set_default">
+<code class="descname">set_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.set_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets all attributes except self.data to default</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.type_bldg_est1a">
+<code class="descname">type_bldg_est1a</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=False</em>, <em>neighbour_buildings=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.type_bldg_est1a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and calculate an est1a building</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
+</div></blockquote>
+<p><strong>neighbour_buildings</strong> : int</p>
+<blockquote>
+<div><p>neighbour (default = 0)</p>
+<p>0: no neighbour
+1: one neighbour
+2: two neighbours</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str (default = &#8220;heavy&#8221;)</p>
+<blockquote>
+<div><p>construction type</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>type_bldg</strong> : Instance of EST1a()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.type_bldg_est1b">
+<code class="descname">type_bldg_est1b</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=False</em>, <em>neighbour_buildings=None</em>, <em>construction_type=None</em>, <em>number_of_apartments=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.type_bldg_est1b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and calculate an est1a building</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
+</div></blockquote>
+<p><strong>neighbour_buildings</strong> : int</p>
+<blockquote>
+<div><p>neighbour (default = 0)</p>
+<p>0: no neighbour
+1: one neighbour
+2: two neighbours</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str (default = &#8220;heavy&#8221;)</p>
+<blockquote>
+<div><p>construction type</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>type_bldg</strong> : Instance of EST1a()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.type_bldg_est4b">
+<code class="descname">type_bldg_est4b</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=False</em>, <em>neighbour_buildings=None</em>, <em>construction_type=None</em>, <em>number_of_apartments=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.type_bldg_est4b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and calculate an est1a building</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
+</div></blockquote>
+<p><strong>neighbour_buildings</strong> : int</p>
+<blockquote>
+<div><p>neighbour (default = 0)</p>
+<p>0: no neighbour
+1: one neighbour
+2: two neighbours</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str (default = &#8220;heavy&#8221;)</p>
+<blockquote>
+<div><p>construction type</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>type_bldg</strong> : Instance of EST1a()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.type_bldg_est7">
+<code class="descname">type_bldg_est7</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=False</em>, <em>neighbour_buildings=None</em>, <em>construction_type=None</em>, <em>number_of_apartments=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.type_bldg_est7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and calculate an est1a building</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
+</div></blockquote>
+<p><strong>neighbour_buildings</strong> : int</p>
+<blockquote>
+<div><p>neighbour (default = 0)</p>
+<p>0: no neighbour
+1: one neighbour
+2: two neighbours</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str (default = &#8220;heavy&#8221;)</p>
+<blockquote>
+<div><p>construction type</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>type_bldg</strong> : Instance of EST1a()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.type_bldg_institute">
+<code class="descname">type_bldg_institute</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=True</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.type_bldg_institute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and calculate an institute building</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
+</div></blockquote>
+<p><strong>office_layout</strong> : int</p>
+<blockquote>
+<div><p>type of floor plan (default = 0)</p>
+<p>0: use default values
+1: elongated 1 floor
+2: elongated 2 floors
+3: compact</p>
+</div></blockquote>
+<p><strong>window_layout</strong> : int</p>
+<blockquote>
+<div><p>type of window layout (default = 0)</p>
+<p>0: use default values
+1: punctuated facade
+2: banner facade
+3: full glazing</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str (default = &#8220;heavy&#8221;)</p>
+<blockquote>
+<div><p>construction type</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>type_bldg</strong> : Instance of Institute()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.type_bldg_institute4">
+<code class="descname">type_bldg_institute4</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=True</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.type_bldg_institute4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and calculate an institute4 building</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
+</div></blockquote>
+<p><strong>office_layout</strong> : int</p>
+<blockquote>
+<div><p>type of floor plan (default = 0)</p>
+<p>0: use default values
+1: elongated 1 floor
+2: elongated 2 floors
+3: compact</p>
+</div></blockquote>
+<p><strong>window_layout</strong> : int</p>
+<blockquote>
+<div><p>type of window layout (default = 0)</p>
+<p>0: use default values
+1: punctuated facade
+2: banner facade
+3: full glazing</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str (default = &#8220;heavy&#8221;)</p>
+<blockquote>
+<div><p>construction type</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>type_bldg</strong> : Instance of Institute4()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.type_bldg_institute8">
+<code class="descname">type_bldg_institute8</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=True</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.type_bldg_institute8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and calculate an institute8 building</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
+</div></blockquote>
+<p><strong>office_layout</strong> : int</p>
+<blockquote>
+<div><p>type of floor plan (default = 0)</p>
+<p>0: use default values
+1: elongated 1 floor
+2: elongated 2 floors
+3: compact</p>
+</div></blockquote>
+<p><strong>window_layout</strong> : int</p>
+<blockquote>
+<div><p>type of window layout (default = 0)</p>
+<p>0: use default values
+1: punctuated facade
+2: banner facade
+3: full glazing</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str (default = &#8220;heavy&#8221;)</p>
+<blockquote>
+<div><p>construction type</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>type_bldg</strong> : Instance of Institute8()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.type_bldg_office">
+<code class="descname">type_bldg_office</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=True</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.type_bldg_office" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and calculate an office building</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
+</div></blockquote>
+<p><strong>office_layout</strong> : int</p>
+<blockquote>
+<div><p>type of floor plan (default = 0)</p>
+<p>0: use default values
+1: elongated 1 floor
+2: elongated 2 floors
+3: compact</p>
+</div></blockquote>
+<p><strong>window_layout</strong> : int</p>
+<blockquote>
+<div><p>type of window layout (default = 0)</p>
+<p>0: use default values
+1: punctuated facade
+2: banner facade
+3: full glazing</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str</p>
+<blockquote>
+<div><p>construction type (default = &#8220;heavy&#8221;)</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>type_bldg</strong> : Instance of Office()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.type_bldg_residential">
+<code class="descname">type_bldg_residential</code><span class="sig-paren">(</span><em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=False</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>dormer=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.type_bldg_residential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create and calculate an residential building</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
+</div></blockquote>
+<p><strong>residential_layout</strong> : int</p>
+<blockquote>
+<div><p>type of floor plan (default = 0)</p>
+<p>0: compact
+1: elongated/complex</p>
+</div></blockquote>
+<p><strong>neighbour_buildings</strong> : int</p>
+<blockquote>
+<div><p>neighbour (default = 0)</p>
+<p>0: no neighbour
+1: one neighbour
+2: two neighbours</p>
+</div></blockquote>
+<p><strong>attic</strong> : int</p>
+<blockquote>
+<div><p>type of attic (default = 0)</p>
+<p>0: flat roof
+1: non heated attic
+2: partly heated attic
+3: heated attic</p>
+</div></blockquote>
+<p><strong>cellar</strong> : int</p>
+<blockquote>
+<div><p>type of cellar (default = 0)</p>
+<p>0: no cellar
+1: non heated cellar
+2: partly heated cellar
+3: heated cellar</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str</p>
+<blockquote>
+<div><p>construction type (default = &#8220;heavy&#8221;)</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+<p><strong>dormer</strong> : str</p>
+<blockquote>
+<div><p>construction type</p>
+<p>0: no dormer
+1: dormer</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>type_bldg</strong> : Instance of SingleFamilyDwelling()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -98,6 +976,9 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="teaser.guistart.html" title="guistart - teaser GUI"
              >next</a> |</li>
         <li class="right" >
@@ -109,7 +990,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate, RWTH Aachen University,.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>

@@ -36,6 +36,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="teaser.Logic.BuildingObjects.BuildingSystems.html" title="buildingsystems"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -52,17 +55,17 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">buildingphysics</a><ul>
-<li><a class="reference internal" href="#buildingelement">BuildingElement</a></li>
-<li><a class="reference internal" href="#ceiling">Ceiling</a></li>
-<li><a class="reference internal" href="#floor">Floor</a></li>
-<li><a class="reference internal" href="#groundfloor">GroundFloor</a></li>
-<li><a class="reference internal" href="#innerwall">InnerWall</a></li>
-<li><a class="reference internal" href="#layer">Layer</a></li>
-<li><a class="reference internal" href="#material">Material</a></li>
-<li><a class="reference internal" href="#outerwall">OuterWall</a></li>
-<li><a class="reference internal" href="#rooftop">Rooftop</a></li>
-<li><a class="reference internal" href="#wall">Wall</a></li>
-<li><a class="reference internal" href="#window">Window</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.buildingelement">BuildingElement</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.ceiling">Ceiling</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.floor">Floor</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.groundfloor">GroundFloor</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.innerwall">InnerWall</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.layer">Layer</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.material">Material</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.outerwall">OuterWall</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.rooftop">Rooftop</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.wall">Wall</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingphysics.window">Window</a></li>
 </ul>
 </li>
 </ul>
@@ -88,9 +91,6 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -103,38 +103,564 @@
             
   <div class="section" id="buildingphysics">
 <h1>buildingphysics<a class="headerlink" href="#buildingphysics" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="buildingelement">
-<h2>BuildingElement<a class="headerlink" href="#buildingelement" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingphysics.buildingelement">
+<span id="buildingelement"></span><h2>BuildingElement<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.buildingelement" title="Permalink to this headline">¶</a></h2>
+<p>BuildingElement</p>
+<p>This module contains the Base class for all building elements.</p>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingphysics.buildingelement.</code><code class="descname">BuildingElement</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Building element class.</p>
+<p>This is the base class for all building elements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent</strong> : ThermalZone()</p>
+<blockquote>
+<div><p>The parent class of this object, the ThermalZone the BE belongs to.
+Allows for better control of hierarchical structures.
+Default is None.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>None</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>internal_id</td>
+<td>(float) Random id for the destinction between different elements</td>
+</tr>
+<tr class="row-even"><td>name</td>
+<td>(str) Individual name</td>
+</tr>
+<tr class="row-odd"><td>construction_type</td>
+<td>(str) Type of construction (&#8220;heavy&#8221; or &#8220;light&#8221;)</td>
+</tr>
+<tr class="row-even"><td>year_of_refurbishment</td>
+<td>(int) Year of refurbishment</td>
+</tr>
+<tr class="row-odd"><td>year_of_construction</td>
+<td>(int) Year of first construction</td>
+</tr>
+<tr class="row-even"><td>area</td>
+<td>(float) Area of building element</td>
+</tr>
+<tr class="row-odd"><td>tilt</td>
+<td>(float) Tilt against horizontal</td>
+</tr>
+<tr class="row-even"><td>orientation</td>
+<td>(float) Compass direction of building element (0 : north, 90: est, 180: south, 270: west)</td>
+</tr>
+<tr class="row-odd"><td>inner_convection</td>
+<td>(float) Constant heat transfer coefficient of convection inner side</td>
+</tr>
+<tr class="row-even"><td>inner_radiation</td>
+<td>(float) Constant heat transfer coefficient of radiation inner side</td>
+</tr>
+<tr class="row-odd"><td>outer_convection</td>
+<td>(float) Constant heat transfer coefficient of convection outer side for inner walls and ground floor zero</td>
+</tr>
+<tr class="row-even"><td>outer_radiation</td>
+<td>(float) Constant heat transfer coefficient of radiation outer side for inner walls and ground floor zero</td>
+</tr>
+<tr class="row-odd"><td>layer</td>
+<td>(list) List of all layers of a building element (to be filled with Layer objects). Use element.layer = None to delete all layers of the building element</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer">
+<code class="descname">add_layer</code><span class="sig-paren">(</span><em>layer</em>, <em>position=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a layer at a certain position</p>
+<p>This function adds a Layer instance to the layer list at a given position</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>position</strong> : int</p>
+<blockquote class="last">
+<div><p>position in the wall starting from 0 (inner side)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer_list">
+<code class="descname">add_layer_list</code><span class="sig-paren">(</span><em>layer_list</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.add_layer_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appends a layer set to the layer list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>layer_list</strong> : [Layer instance]</p>
+<blockquote class="last">
+<div><p>list of sorted layer instances</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.calc_ua_value">
+<code class="descname">calc_ua_value</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.calc_ua_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>U*A value for building element.</p>
+<p>Calculates the U*A value and thermal resistances of a building element.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.gather_element_properties">
+<code class="descname">gather_element_properties</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.gather_element_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for matrix calculation.</p>
+<p>Gathers all material properties of the building element and returns
+them as a np.array. Needed for the calculation of the matrix in
+equivalent_res(t_bt) especially for walls.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">np.number_of_layer</p>
+<p>np.density</p>
+<p>np.thermal_conduc</p>
+<p>np.heat_capac</p>
+<p class="last">np.thickness</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.load_type_element">
+<code class="descname">load_type_element</code><span class="sig-paren">(</span><em>year</em>, <em>construction</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.load_type_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Typical element loader.</p>
+<p>Loads typical building elements according to their construction
+year and their construction type from a XML.</p>
+<p>This function will only work if the parents to Building are set.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>year</strong> : int</p>
+<blockquote>
+<div><p>Year of construction</p>
+</div></blockquote>
+<p><strong>construction</strong> : str</p>
+<blockquote>
+<div><p>Construction type, code list (&#8216;heavy&#8217;, &#8216;light&#8217;)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>Assert if parents to Building are not set</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.save_type_element">
+<code class="descname">save_type_element</code><span class="sig-paren">(</span><em>path=None</em>, <em>file_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.save_type_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Typical element saver.</p>
+<p>Saves typical building elements according to their construction
+year and their construction type in the the XML file for type buidling
+elements. If the Project parent is set, it automatically saves it to
+the file given in Project.data. Alternatively you can specify a path to
+a file of TypeBuildingElements. If this file does not exist,
+a new file is created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : str</p>
+<blockquote>
+<div><p>path where unique file should be stored</p>
+</div></blockquote>
+<p><strong>name</strong> : strt</p>
+<blockquote class="last">
+<div><p>name of of unique file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.set_calc_default">
+<code class="descname">set_calc_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement.set_calc_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all calculated values of the Building Element to zero</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="ceiling">
-<h2>Ceiling<a class="headerlink" href="#ceiling" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingphysics.ceiling">
+<span id="ceiling"></span><h2>Ceiling<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.ceiling" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingphysics.ceiling.Ceiling">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingphysics.ceiling.</code><code class="descname">Ceiling</code><span class="sig-paren">(</span><em>InnerWall</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.ceiling.Ceiling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall" title="teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall</span></code></a></p>
+<p>This class represents a ceiling and is a child of InnerWall()</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+</dd></dl>
+
 </div>
-<div class="section" id="floor">
-<h2>Floor<a class="headerlink" href="#floor" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingphysics.floor">
+<span id="floor"></span><h2>Floor<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.floor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingphysics.floor.Floor">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingphysics.floor.</code><code class="descname">Floor</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.floor.Floor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall" title="teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall</span></code></a></p>
+<p>This class represents a floor and is a child of InnerWall()</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+</dd></dl>
+
 </div>
-<div class="section" id="groundfloor">
-<h2>GroundFloor<a class="headerlink" href="#groundfloor" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingphysics.groundfloor">
+<span id="groundfloor"></span><h2>GroundFloor<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.groundfloor" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingphysics.groundfloor.GroundFloor">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingphysics.groundfloor.</code><code class="descname">GroundFloor</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.groundfloor.GroundFloor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall" title="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall</span></code></a></p>
+<p>This class represents a GroundFloor and is a child of OuterWall()</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+</dd></dl>
+
 </div>
-<div class="section" id="innerwall">
-<h2>InnerWall<a class="headerlink" href="#innerwall" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingphysics.innerwall">
+<span id="innerwall"></span><h2>InnerWall<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.innerwall" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingphysics.innerwall.</code><code class="descname">InnerWall</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.innerwall.InnerWall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall" title="teaser.logic.buildingobjects.buildingphysics.wall.Wall"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.buildingphysics.wall.Wall</span></code></a></p>
+<p>This class represents an inner wall and is a child of Wall()</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+</dd></dl>
+
 </div>
-<div class="section" id="layer">
-<h2>Layer<a class="headerlink" href="#layer" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingphysics.layer">
+<span id="layer"></span><h2>Layer<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.layer" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingphysics.layer.Layer">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingphysics.layer.</code><code class="descname">Layer</code><span class="sig-paren">(</span><em>parent=None</em>, <em>id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.layer.Layer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class represents a layer of a wall.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent</strong> : BuildingElement</p>
+<blockquote class="last">
+<div><p>The parent class of this object, the Building Element the layer
+belongs to. Allows for better control of hierarchical structures.
+Default is None</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>id</td>
+<td>(int) Position (starting from 1 and the inner side)</td>
+</tr>
+<tr class="row-even"><td>material</td>
+<td>(Material()) Material class of TEASER</td>
+</tr>
+<tr class="row-odd"><td>thickness</td>
+<td>(float) Thickness of the layer</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
-<div class="section" id="material">
-<h2>Material<a class="headerlink" href="#material" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingphysics.material">
+<span id="material"></span><h2>Material<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.material" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingphysics.material.Material">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingphysics.material.</code><code class="descname">Material</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class represents a Material.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent</strong> : Layer</p>
+<blockquote class="last">
+<div><p>The parent class of this object, the layer the material
+belongs to. Allows for better control of hierarchical structures.
+Default is None</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>name</td>
+<td>(str) Individual name</td>
+</tr>
+<tr class="row-even"><td>density</td>
+<td>(float) Density of material in kg/m^3</td>
+</tr>
+<tr class="row-odd"><td>thermal_conduc</td>
+<td>(float) Thermal conductivity of material in W/(m*K)</td>
+</tr>
+<tr class="row-even"><td>heat_capac</td>
+<td>(float) Specific heat capacity of material in kJ/(kg*K)</td>
+</tr>
+<tr class="row-odd"><td>solar_absorp</td>
+<td>(float) Coefficient of absorption of solar short wave</td>
+</tr>
+<tr class="row-even"><td>ir_emissivity</td>
+<td>(float) Coefficient of longwave emissivity of material</td>
+</tr>
+<tr class="row-odd"><td>transmittance</td>
+<td>(float) Coefficient of transmittanve of material</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.material.Material.load_material_template">
+<code class="descname">load_material_template</code><span class="sig-paren">(</span><em>mat_name</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.load_material_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Material loader.</p>
+<p>Loads Material specified in the XML.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>mat_name</strong> : str</p>
+<blockquote class="last">
+<div><p>Code list for Material</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.material.Material.save_material_template">
+<code class="descname">save_material_template</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.material.Material.save_material_template" title="Permalink to this definition">¶</a></dt>
+<dd><p>Material saver.</p>
+<p>Saves Material specified in the XML.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="outerwall">
-<h2>OuterWall<a class="headerlink" href="#outerwall" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingphysics.outerwall">
+<span id="outerwall"></span><h2>OuterWall<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.outerwall" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingphysics.outerwall.</code><code class="descname">OuterWall</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall" title="teaser.logic.buildingobjects.buildingphysics.wall.Wall"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.buildingphysics.wall.Wall</span></code></a></p>
+<p>This class represents an outer wall and is a child of Wall()</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+</dd></dl>
+
 </div>
-<div class="section" id="rooftop">
-<h2>Rooftop<a class="headerlink" href="#rooftop" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingphysics.rooftop">
+<span id="rooftop"></span><h2>Rooftop<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.rooftop" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingphysics.rooftop.Rooftop">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingphysics.rooftop.</code><code class="descname">Rooftop</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.rooftop.Rooftop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall" title="teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.buildingphysics.outerwall.OuterWall</span></code></a></p>
+<p>This class represents a roof top and is a child of OuterWall()</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+</dd></dl>
+
 </div>
-<div class="section" id="wall">
-<h2>Wall<a class="headerlink" href="#wall" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingphysics.wall">
+<span id="wall"></span><h2>Wall<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.wall" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingphysics.wall.Wall">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingphysics.wall.</code><code class="descname">Wall</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement" title="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement</span></code></a></p>
+<p>This class represents a wall and is a child of BuildingElement().</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_equivalent_res">
+<code class="descname">calc_equivalent_res</code><span class="sig-paren">(</span><em>t_bt=7</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.calc_equivalent_res" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equivalent resistance VDI 6007.</p>
+<p>Calculates the equivalent resistance of a wall according to
+VDI 6007 guideline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>t_bt</strong> : int</p>
+<blockquote class="last">
+<div><p>Time constant according to VDI 6007 (default t_bt = 7)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.insulate_wall">
+<code class="descname">insulate_wall</code><span class="sig-paren">(</span><em>material=None</em>, <em>thickness=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.insulate_wall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrofit the walls with an additional insulation layer</p>
+<p>Adds an additional layer on the wall, outer sight</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>material</strong> : string</p>
+<blockquote>
+<div><p>Type of material, that is used for insulation, default = EPS035</p>
+</div></blockquote>
+<p><strong>thickness</strong> : float</p>
+<blockquote class="last">
+<div><p>thickness of the insulation layer, default = None</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.wall.Wall.retrofit_wall">
+<code class="descname">retrofit_wall</code><span class="sig-paren">(</span><em>year_of_retrofit</em>, <em>material=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.wall.Wall.retrofit_wall" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function adds an additional layer of insulation and sets the
+thickness of the layer according to the retrofit standard in the
+year of refurbishment. Refurbishment year must be newer then 1995</p>
+<p>Note: To Calculate thickness and U-Value, the standard TEASER
+coefficients for outer and inner heat transfer are used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>material</strong> : string</p>
+<blockquote>
+<div><p>Type of material, that is used for insulation</p>
+</div></blockquote>
+<p><strong>year_of_refurbishment</strong> : int</p>
+<blockquote class="last">
+<div><p>Year of the retrofit of the wall/building</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="window">
-<h2>Window<a class="headerlink" href="#window" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingphysics.window">
+<span id="window"></span><h2>Window<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingphysics.window" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingphysics.window.Window">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingphysics.window.</code><code class="descname">Window</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.window.Window" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement" title="teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.buildingphysics.buildingelement.BuildingElement</span></code></a></p>
+<p>This class represents a window and is a child of BuildingElement().</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>g_value</td>
+<td>(float) g Value of the window</td>
+</tr>
+<tr class="row-even"><td>a_conv</td>
+<td>(float) convective coefficient of inner side of wall according to VDI 6007</td>
+</tr>
+<tr class="row-odd"><td>shading_g_total</td>
+<td>(float) shaded g value of the window</td>
+</tr>
+<tr class="row-even"><td>shading_max_irr</td>
+<td>(float) threshold for automatic shading</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.window.Window.calc_equivalent_res">
+<code class="descname">calc_equivalent_res</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.window.Window.calc_equivalent_res" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equivalent resistance VDI 6007</p>
+<p>Calculates the equivalent resistance of a wall according to  VDI
+6007 guideline.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>t_bt</strong> : int</p>
+<blockquote class="last">
+<div><p>time constant according to VDI 6007 (default t_bt = 7)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.buildingphysics.window.Window.replace_window">
+<code class="descname">replace_window</code><span class="sig-paren">(</span><em>year_of_refurbishment</em>, <em>window_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingphysics.window.Window.replace_window" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace a window, with a newer one.</p>
+<p>Replaces all attributes from the window and replaces it with a high
+insultaed one.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>year_of_refurbishment: int</strong></p>
+<blockquote>
+<div><p>The year, the building was refurbished</p>
+</div></blockquote>
+<p><strong>construction: str</strong></p>
+<blockquote class="last">
+<div><p>Default: EnEv 2014</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -151,6 +677,9 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="teaser.Logic.BuildingObjects.BuildingSystems.html" title="buildingsystems"
              >next</a> |</li>
         <li class="right" >
@@ -164,7 +693,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate, RWTH Aachen University,.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>

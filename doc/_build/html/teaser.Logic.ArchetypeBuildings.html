@@ -36,6 +36,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="teaser.Logic.ArchetypeBuildings.bmvbs.html" title="bmvbs"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -51,8 +54,8 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">archetypebuildings</a><ul>
-<li><a class="reference internal" href="#residential">residential</a></li>
-<li><a class="reference internal" href="#nonresidential">nonresidential</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.archetypebuildings.residential">residential</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.archetypebuildings.nonresidential">nonresidential</a></li>
 </ul>
 </li>
 </ul>
@@ -78,9 +81,6 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -110,11 +110,47 @@
 </div>
 <p>All new archetype buildings should inherit from either residential or
 nonresidential buildings:</p>
-<div class="section" id="residential">
-<h2>residential<a class="headerlink" href="#residential" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.archetypebuildings.residential">
+<span id="residential"></span><h2>residential<a class="headerlink" href="#module-teaser.logic.archetypebuildings.residential" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.archetypebuildings.residential.Residential">
+<em class="property">class </em><code class="descclassname">teaser.logic.archetypebuildings.residential.</code><code class="descname">Residential</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.residential.Residential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.Logic.BuildingObjects.html#teaser.logic.buildingobjects.building.Building" title="teaser.logic.buildingobjects.building.Building"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.building.Building</span></code></a></p>
+<p>Root Class for each type building.</p>
+<p>Class as parent of specific type buildings. Subclass from Building to
+represent Type Buildings. Superclass for every type building.</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.archetypebuildings.residential.Residential.generate_archetype">
+<code class="descname">generate_archetype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.residential.Residential.generate_archetype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an archetype building.</p>
+<p>Define your type of archetype generation.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="nonresidential">
-<h2>nonresidential<a class="headerlink" href="#nonresidential" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-teaser.logic.archetypebuildings.nonresidential">
+<span id="nonresidential"></span><h2>nonresidential<a class="headerlink" href="#module-teaser.logic.archetypebuildings.nonresidential" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.archetypebuildings.nonresidential.NonResidential">
+<em class="property">class </em><code class="descclassname">teaser.logic.archetypebuildings.nonresidential.</code><code class="descname">NonResidential</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.nonresidential.NonResidential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.Logic.BuildingObjects.html#teaser.logic.buildingobjects.building.Building" title="teaser.logic.buildingobjects.building.Building"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.building.Building</span></code></a></p>
+<p>Root Class for each type building.</p>
+<p>Class as parent of specific type buildings. Subclass from Building to
+represent Type Buildings. Superclass for every type building.</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.archetypebuildings.nonresidential.NonResidential.generate_archetype">
+<code class="descname">generate_archetype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.nonresidential.NonResidential.generate_archetype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an archetype building.</p>
+<p>Define your type of arechtype generation.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -131,6 +167,9 @@ nonresidential buildings:</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="teaser.Logic.ArchetypeBuildings.bmvbs.html" title="bmvbs"
              >next</a> |</li>
         <li class="right" >
@@ -143,7 +182,7 @@ nonresidential buildings:</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate, RWTH Aachen University,.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>
