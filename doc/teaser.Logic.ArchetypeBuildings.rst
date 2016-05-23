@@ -1,4 +1,4 @@
-archetypebuildings 
+archetypebuildings
 ==================================================
 
 Currently we implemented two methodologies to create archetype buildings:
@@ -14,13 +14,13 @@ nonresidential buildings:
 residential
 ----------------------------
 
-.. automodule:: teaser.Logic.ArchetypeBuildings.Residential
+.. automodule:: teaser.logic.archetypebuildings.residential
     :members:
     :show-inheritance:
 
 nonresidential
 ----------------------------
 
-.. automodule:: teaser.Logic.ArchetypeBuildings.NonResidential
+.. automodule:: teaser.logic.archetypebuildings.nonresidential
     :members:
     :show-inheritance:

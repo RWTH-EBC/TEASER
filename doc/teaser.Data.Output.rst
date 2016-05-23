@@ -21,55 +21,55 @@ Currently only the two element model is supported, but more are to come.
 aixlib_export
 ----------------------------
 
-.. automodule:: teaser.Data.Output.aixlib_output
+.. automodule:: teaser.data.output.aixlib_output
     :members:
     :show-inheritance:
 
 annex60_export
 ----------------------------
 
-.. automodule:: teaser.Data.Output.annex60_output
+.. automodule:: teaser.data.output.annex60_output
     :members:
     :show-inheritance:
 
 TeaserXML_output
 ----------------------------
 
-.. automodule:: teaser.Data.Output.TeaserXML_output
+.. automodule:: teaser.data.output.teaserxml_output
     :members:
     :show-inheritance:
 
 CityGML_output
 ----------------------------
 
-.. automodule:: teaser.Data.Output.CityGML_output
+.. automodule:: teaser.data.output.citygml_output
     :members:
     :show-inheritance:
 
 Text_output
 ----------------------------
 
-.. automodule:: teaser.Data.Output.Text_output
+.. automodule:: teaser.data.output.text_output
     :members:
     :show-inheritance:
 
 boundcond_output
 ----------------------------
 
-.. automodule:: teaser.Data.Output.boundcond_output
+.. automodule:: teaser.data.output.boundcond_output
     :members:
     :show-inheritance:
 
 buildingelement_output
 ----------------------------
 
-.. automodule:: teaser.Data.Output.buildingelement_output
+.. automodule:: teaser.data.output.buildingelement_output
     :members:
     :show-inheritance:
 
 material_output
 ----------------------------
 
-.. automodule:: teaser.Data.Output.material_output
+.. automodule:: teaser.data.output.material_output
     :members:
     :show-inheritance:

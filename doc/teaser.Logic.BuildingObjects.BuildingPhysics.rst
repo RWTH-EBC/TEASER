@@ -5,76 +5,76 @@ buildingphysics
 BuildingElement
 -------------------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.BuildingElement
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.buildingelement
     :members:
     :show-inheritance:
 
 Ceiling
 -----------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.Ceiling
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.ceiling
     :members:
     :show-inheritance:
 
 Floor
 ---------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.Floor
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.floor
     :members:
     :show-inheritance:
 
 GroundFloor
 ---------------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.GroundFloor
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.groundfloor
     :members:
     :show-inheritance:
 
 InnerWall
 -------------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.InnerWall
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.innerwall
     :members:
     :show-inheritance:
 
 Layer
 ---------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.Layer
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.layer
     :members:
     :show-inheritance:
 
 Material
 ------------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.Material
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.material
     :members:
     :show-inheritance:
 
 OuterWall
 -------------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.OuterWall
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.outerwall
     :members:
     :show-inheritance:
 
 Rooftop
 -----------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.Rooftop
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.rooftop
     :members:
     :show-inheritance:
 
 Wall
 --------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.Wall
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.wall
     :members:
     :show-inheritance:
 
 Window
 ----------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingPhysics.Window
+.. automodule:: teaser.logic.buildingobjects.buildingphysics.window
     :members:
     :show-inheritance:

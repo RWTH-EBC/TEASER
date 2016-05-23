@@ -6,6 +6,6 @@ More content to come :)
 BuildingAHU
 -------------------------------------------------------------------
 
-.. automodule:: teaser.Logic.BuildingObjects.BuildingSystems.BuildingAHU
+.. automodule:: teaser.logic.buildingobjects.buildingsystems.buildingahu
     :members:
     :show-inheritance:

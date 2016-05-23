@@ -16,6 +16,6 @@ whole building) The utility module helps us to do path handling.
 Utilis module
 --------------------------
 
-.. automodule:: teaser.Logic.Utilis
+.. automodule:: teaser.logic.utilities
     :members:
     :show-inheritance:

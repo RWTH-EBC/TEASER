@@ -1,4 +1,4 @@
-bmvbs 
+bmvbs
 ==================================================
 
 **Description**
@@ -70,7 +70,7 @@ areas:
 
 #. ICT (2% of net leased area)
 
-.. automodule:: teaser.Logic.ArchetypeBuildings.BMVBS.Office
+.. automodule:: teaser.logic.archetypebuildings.bmvbs.office
     :members:
     :show-inheritance:
 
@@ -86,7 +86,7 @@ area:
 
 #. Single dwelling (100% of net leased area)
 
-.. automodule:: teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling
+.. automodule:: teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling
     :members:
     :show-inheritance:
 
@@ -117,7 +117,7 @@ In detail the net leased area is divided into the following thermal zone areas:
 
 #. Laboratory (15% of the net leased area)
 
-.. automodule:: teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute
+.. automodule:: teaser.logic.archetypebuildings.bmvbs.custom.institute
     :members:
     :undoc-members:
     :show-inheritance:
@@ -149,7 +149,7 @@ area is divided in the following thermal zone areas:
 
 #. Laboratory (20% of the net leased area)
 
-.. automodule:: teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute4
+.. automodule:: teaser.logic.archetypebuildings.bmvbs.custom.institute4
     :members:
     :show-inheritance:
 
@@ -180,7 +180,7 @@ area is divided in the following thermal zone areas:
 
 #. Laboratory (60% of the net leased area)
 
-.. automodule:: teaser.Logic.ArchetypeBuildings.BMVBS.Custom.Institute8
+.. automodule:: teaser.logic.archetypebuildings.bmvbs.custom.institute8
     :members:
     :show-inheritance:
 

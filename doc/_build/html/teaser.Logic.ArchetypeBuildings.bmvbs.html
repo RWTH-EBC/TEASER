@@ -36,6 +36,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="teaser.Logic.ArchetypeBuildings.urbanrenet.html" title="urbanrenet"
              accesskey="N">next</a> |</li>
         <li class="right" >
@@ -83,9 +86,6 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -150,6 +150,146 @@ areas:</p>
 <li>Restroom (4% of net leased area)</li>
 <li>ICT (2% of net leased area)</li>
 </ol>
+<span class="target" id="module-teaser.logic.archetypebuildings.bmvbs.office"></span><dl class="class">
+<dt id="teaser.logic.archetypebuildings.bmvbs.office.Office">
+<em class="property">class </em><code class="descclassname">teaser.logic.archetypebuildings.bmvbs.office.</code><code class="descname">Office</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.office.Office" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.Logic.ArchetypeBuildings.html#teaser.logic.archetypebuildings.nonresidential.NonResidential" title="teaser.logic.archetypebuildings.nonresidential.NonResidential"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.archetypebuildings.nonresidential.NonResidential</span></code></a></p>
+<p>Type Office Building</p>
+<p>Subclass from TypeBuilding to represent office buildings. Allows for
+easier distinction between different building types and specific functions
+and attributes.
+Superclass for institute building.</p>
+<p>German office building, containing 6 zones. Each zone has 4 outer walls,
+4 windows a roof and a floor. Default values are given according to BMVBS.
+Changing these default values is expert mode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Project()</strong></p>
+<blockquote>
+<div><p>The parent class of this object, the Project the Building belongs
+to. Allows for better control of hierarchical structures.
+Default is None</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
+</div></blockquote>
+<p><strong>office_layout</strong> : int</p>
+<blockquote>
+<div><p>type of floor plan (default = 0)</p>
+<p>0: use default values
+1: elongated 1 floor
+2: elongated 2 floors
+3: compact</p>
+</div></blockquote>
+<p><strong>window_layout</strong> : int</p>
+<blockquote>
+<div><p>type of window layout (default = 0)</p>
+<p>0: use default values
+1: punctuated facade
+2: banner facade
+3: full glazing</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str</p>
+<blockquote class="last">
+<div><p>construction type (default = &#8220;heavy&#8221;)</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>zone_area_factors</td>
+<td>(dict) This dictionary contains the name of the zone (str), the zone area factor (float) and the zone usage (str). The values can be taken from Lichtmess</td>
+</tr>
+<tr class="row-even"><td>outer_wall_names</td>
+<td>(dict) This dictionary contains the name of the outer walls, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>roof_names</td>
+<td>(dict) This dictionary contains the name of the roofs, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>ground_floor_names</td>
+<td>(dict) This dictionary contains the name of the ground floors, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>window_names</td>
+<td>(dict) This dictionary contains the name of the window, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>inner_wall_names</td>
+<td>(dict) This dictionary contains the name of the inner walls, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>ceiling_names</td>
+<td>(dict) This dictionary contains the name of the ceilings, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>floor_names</td>
+<td>(dict) This dictionary contains the name of the floors, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>gross_factor</td>
+<td>(float) gross factor used to calculate the area of the different zones</td>
+</tr>
+<tr class="row-even"><td>est_factor_wall_area</td>
+<td>(float) estimation factor to calculate outer wall area</td>
+</tr>
+<tr class="row-odd"><td>est_exponent_wall</td>
+<td>(float) another estimation factor to calculate outer wall area</td>
+</tr>
+<tr class="row-even"><td>est_factor_win_area</td>
+<td>(float) estimation factor to calculate window area</td>
+</tr>
+<tr class="row-odd"><td>est_exponent_win</td>
+<td>(float) another estimation factor to calculate window area</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.archetypebuildings.bmvbs.office.Office.generate_archetype">
+<code class="descname">generate_archetype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.office.Office.generate_archetype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an office building.</p>
+<p>With given values, this class generates a type building according to
+TEASER requirements.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.archetypebuildings.bmvbs.office.Office.generate_from_gml">
+<code class="descname">generate_from_gml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.office.Office.generate_from_gml" title="Permalink to this definition">¶</a></dt>
+<dd><p>enriches lod1 or lod2 data from citygml</p>
+<p>adds Zones, BoundaryConditions, Material settings for walls and
+windows to the geometric representation of CityGML</p>
+<p>number or height of floors need to be specified</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="singlefamilydwelling-module">
 <h2>SingleFamilyDwelling module<a class="headerlink" href="#singlefamilydwelling-module" title="Permalink to this headline">¶</a></h2>
@@ -161,6 +301,162 @@ area:</p>
 <ol class="arabic simple">
 <li>Single dwelling (100% of net leased area)</li>
 </ol>
+<span class="target" id="module-teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling"></span><dl class="class">
+<dt id="teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling.SingleFamilyDwelling">
+<em class="property">class </em><code class="descclassname">teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling.</code><code class="descname">SingleFamilyDwelling</code><span class="sig-paren">(</span><em>parent</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>dormer=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling.SingleFamilyDwelling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.Logic.ArchetypeBuildings.html#teaser.logic.archetypebuildings.residential.Residential" title="teaser.logic.archetypebuildings.residential.Residential"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.archetypebuildings.residential.Residential</span></code></a></p>
+<p>Type Building SingleFamilyDwelling.</p>
+<p>Subclass from Building to represent SingleFamilyDwelling Buildings. Allows for
+easier distinction between different building types and specific functions
+and attributes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Project()</strong></p>
+<blockquote>
+<div><p>The parent class of this object, the Project the Building belongs
+to. Allows for better control of hierarchical structures.
+Default is None</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote>
+<div><p>individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>year of first construction</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>number of floors above ground</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float</p>
+<blockquote>
+<div><p>average height of the floors</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float</p>
+<blockquote>
+<div><p>total net leased area of building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : boolean</p>
+<blockquote>
+<div><p>if building has a central AHU or not</p>
+</div></blockquote>
+<p><strong>residential_layout</strong> : int</p>
+<blockquote>
+<div><p>type of floor plan (default = 0)</p>
+<p>0: compact
+1: elongated/complex</p>
+</div></blockquote>
+<p><strong>neighbour_buildings</strong> : int</p>
+<blockquote>
+<div><p>neighbour (default = 0)</p>
+<p>0: no neighbour
+1: one neighbour
+2: two neighbours</p>
+</div></blockquote>
+<p><strong>attic</strong> : int</p>
+<blockquote>
+<div><p>type of attic (default = 0)</p>
+<p>0: flat roof
+1: non heated attic
+2: partly heated attic
+3: heated attic</p>
+</div></blockquote>
+<p><strong>cellar</strong> : int</p>
+<blockquote>
+<div><p>type of cellar (default = 0)</p>
+<p>0: no cellar
+1: non heated cellar
+2: partly heated cellar
+3: heated cellar</p>
+</div></blockquote>
+<p><strong>construction_type</strong> : str</p>
+<blockquote>
+<div><p>construction type (default = &#8220;heavy&#8221;)</p>
+<p>heavy: heavy construction
+light: light construction</p>
+</div></blockquote>
+<p><strong>dormer</strong> : str</p>
+<blockquote class="last">
+<div><p>construction type</p>
+<p>0: no dormer
+1: dormer</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>zone_area_factors</td>
+<td>(dict) This dictionary contains the name of the zone (str), the zone area factor (float) and the zone usage (str). The values can be taken from Lichtmess</td>
+</tr>
+<tr class="row-even"><td>outer_wall_names</td>
+<td>(dict) This dictionary contains the name of the outer walls, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>roof_names</td>
+<td>(dict) This dictionary contains the name of the roofs, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>ground_floor_names</td>
+<td>(dict) This dictionary contains the name of the ground floors, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>window_names</td>
+<td>(dict) This dictionary contains the name of the window, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>inner_wall_names</td>
+<td>(dict) This dictionary contains the name of the inner walls, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>ceiling_names</td>
+<td>(dict) This dictionary contains the name of the ceilings, their orientation and tilt</td>
+</tr>
+<tr class="row-even"><td>floor_names</td>
+<td>(dict) This dictionary contains the name of the floors, their orientation and tilt</td>
+</tr>
+<tr class="row-odd"><td>est_living_area_factor</td>
+<td>(float) estimation factor for calculation of number of heated floors</td>
+</tr>
+<tr class="row-even"><td>est_bottom_building_closure</td>
+<td>(float) estimation factor to calculate ground floor area</td>
+</tr>
+<tr class="row-odd"><td>est_upper_building_closure</td>
+<td>(float) estimation factor to calculate attic area</td>
+</tr>
+<tr class="row-even"><td>est_factor_win_area</td>
+<td>(float) estimation factor to calculate window area</td>
+</tr>
+<tr class="row-odd"><td>est_factor_cellar_area</td>
+<td>(float) estimation factor to calculate heated cellar area</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling.SingleFamilyDwelling.generate_archetype">
+<code class="descname">generate_archetype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling.SingleFamilyDwelling.generate_archetype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a residential building.</p>
+<p>With given values, this class generates a type residential
+building according to TEASER requirements
+Berechnungsgrundlagen: IWU, &#8220;Kurzverfahren Energieprofil&#8221;; 2005.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling.SingleFamilyDwelling.generate_from_gml">
+<code class="descname">generate_from_gml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling.SingleFamilyDwelling.generate_from_gml" title="Permalink to this definition">¶</a></dt>
+<dd><p>enriches lod1 or lod2 data from citygml</p>
+<p>adds Zones, BoundaryConditions, Material settings for walls and
+windows to the geometric representation of CityGML</p>
+<p>number or height of floors need to be specified</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="institute-module">
 <h2>Institute module<a class="headerlink" href="#institute-module" title="Permalink to this headline">¶</a></h2>
@@ -181,6 +477,15 @@ In detail the net leased area is divided into the following thermal zone areas:<
 <li>ICT (2% of net leased area)</li>
 <li>Laboratory (15% of the net leased area)</li>
 </ol>
+<span class="target" id="module-teaser.logic.archetypebuildings.bmvbs.custom.institute"></span><dl class="class">
+<dt id="teaser.logic.archetypebuildings.bmvbs.custom.institute.Institute">
+<em class="property">class </em><code class="descclassname">teaser.logic.archetypebuildings.bmvbs.custom.institute.</code><code class="descname">Institute</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.custom.institute.Institute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.archetypebuildings.bmvbs.office.Office" title="teaser.logic.archetypebuildings.bmvbs.office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.archetypebuildings.bmvbs.office.Office</span></code></a></p>
+<p>Type Institute Building (type 4)</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+</dd></dl>
+
 </div>
 <div class="section" id="institute4-module">
 <h2>Institute4 module<a class="headerlink" href="#institute4-module" title="Permalink to this headline">¶</a></h2>
@@ -201,6 +506,15 @@ area is divided in the following thermal zone areas:</p>
 <li>ICT (2% of net leased area)</li>
 <li>Laboratory (20% of the net leased area)</li>
 </ol>
+<span class="target" id="module-teaser.logic.archetypebuildings.bmvbs.custom.institute4"></span><dl class="class">
+<dt id="teaser.logic.archetypebuildings.bmvbs.custom.institute4.Institute4">
+<em class="property">class </em><code class="descclassname">teaser.logic.archetypebuildings.bmvbs.custom.institute4.</code><code class="descname">Institute4</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.custom.institute4.Institute4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.archetypebuildings.bmvbs.office.Office" title="teaser.logic.archetypebuildings.bmvbs.office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.archetypebuildings.bmvbs.office.Office</span></code></a></p>
+<p>Type Institute Building (type 4)</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+</dd></dl>
+
 </div>
 <div class="section" id="institute8-module">
 <h2>Institute8 module<a class="headerlink" href="#institute8-module" title="Permalink to this headline">¶</a></h2>
@@ -221,6 +535,15 @@ area is divided in the following thermal zone areas:</p>
 <li>ICT (2% of net leased area)</li>
 <li>Laboratory (60% of the net leased area)</li>
 </ol>
+<span class="target" id="module-teaser.logic.archetypebuildings.bmvbs.custom.institute8"></span><dl class="class">
+<dt id="teaser.logic.archetypebuildings.bmvbs.custom.institute8.Institute8">
+<em class="property">class </em><code class="descclassname">teaser.logic.archetypebuildings.bmvbs.custom.institute8.</code><code class="descname">Institute8</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>number_of_floors=None</em>, <em>height_of_floors=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.bmvbs.custom.institute8.Institute8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#teaser.logic.archetypebuildings.bmvbs.office.Office" title="teaser.logic.archetypebuildings.bmvbs.office.Office"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.archetypebuildings.bmvbs.office.Office</span></code></a></p>
+<p>Type Institute Building (type 8)</p>
+<p class="rubric">Attributes</p>
+<p class="rubric">Methods</p>
+</dd></dl>
+
 </div>
 <div class="section" id="literature">
 <h2>Literature<a class="headerlink" href="#literature" title="Permalink to this headline">¶</a></h2>
@@ -278,18 +601,6 @@ area is divided in the following thermal zone areas:</p>
 <tr><td class="label">[9]</td><td><em>(<a class="fn-backref" href="#id10">1</a>, <a class="fn-backref" href="#id12">2</a>, <a class="fn-backref" href="#id14">3</a>)</em> Bauministerkonferenz. Bauwerkszuordnungskatalog. 2010.</td></tr>
 </tbody>
 </table>
-<table class="docutils citation" frame="void" id="dinv1859910" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[10]</td><td>DIN V 18599. Energetische Bewertung von Gebäuden – Berechnung des Nutz-, End- und Primärenergiebedarfs für Heizung, Kühlung, Lüftung, Trinkwarmwasser und Beleuchtung – Teil 10: Nutzungsrandbedingungen, Klimadaten. Dezember 2011.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="swisssocietyofengineersandarchitects-march2006" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[11]</td><td>SIA 2024. Standard-Nutzungsbedingungen für die Energie- und Gebäudetechnik. 2006.</td></tr>
-</tbody>
-</table>
 </p>
 </div>
 </div>
@@ -307,6 +618,9 @@ area is divided in the following thermal zone areas:</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
           <a href="teaser.Logic.ArchetypeBuildings.urbanrenet.html" title="urbanrenet"
              >next</a> |</li>
         <li class="right" >
@@ -320,7 +634,7 @@ area is divided in the following thermal zone areas:</p>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate, RWTH Aachen University,.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
     </div>
   </body>
 </html>

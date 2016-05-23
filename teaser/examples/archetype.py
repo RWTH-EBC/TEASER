@@ -17,9 +17,6 @@ def example_type_building():
 
     prj = Project(load_data=True)
     prj.name = "ArchetypeBuildings"
-    prj.used_library_calc = 'AixLib'
-    prj.number_of_elements_calc = 2
-    prj.merge_windows_calc = False
 
     """The five functions starting with type_bldg giving us the opportunity to
     create the specific type building (e.g. type_bldg_residential). The function
@@ -49,10 +46,12 @@ def example_type_building():
                          with_ahu=True,
                          construction_type="heavy")
 
-    """To export the parameters to a Modelica record, we use the export_record
+    """We need to set the projects calculation method. The library we want to use is AixLib, we are using a two element model and want an extra resistance for the windows. To export the parameters to a Modelica record, we use the export_aixlib
     function. path = None indicates, that we want to store the records in \
     TEASER'S Output folder"""
-
+    prj.used_library_calc = 'AixLib'
+    prj.number_of_elements_calc = 2
+    prj.merge_windows_calc = False
     prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,

@@ -21,6 +21,6 @@ In detail the attributes are structured in the following sections:
 * Misc
 
 
-.. automodule:: teaser.Logic.BuildingObjects.BoundaryConditions.BoundaryConditions
+.. automodule:: teaser.logic.buildingobjects.boundaryconditions.boundaryconditions
     :members:
     :show-inheritance:

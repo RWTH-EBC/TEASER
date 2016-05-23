@@ -1,6 +1,6 @@
 guistart - teaser GUI
 -------------------------
 
-.. automodule:: teaser.GUIStart
+.. automodule:: teaser.guistart
     :members:
     :show-inheritance:
