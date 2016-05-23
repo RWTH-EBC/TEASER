@@ -16,7 +16,7 @@ from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFam
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
-from teaser.logic.buildingobjects.ThermalZone import ThermalZone
+from teaser.logic.buildingobjects.thermalzone import ThermalZone
 from teaser.logic.buildingobjects.BuildingSystems.BuildingAHU import BuildingAHU
 from teaser.logic.buildingobjects.BoundaryConditions.BoundaryConditions \
     import BoundaryConditions

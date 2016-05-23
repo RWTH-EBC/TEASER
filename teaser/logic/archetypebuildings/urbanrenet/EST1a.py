@@ -13,7 +13,7 @@ from teaser.logic.buildingobjects.BuildingPhysics.InnerWall import InnerWall
 from teaser.logic.buildingobjects.BuildingPhysics.OuterWall import OuterWall
 from teaser.logic.buildingobjects.BuildingPhysics.Rooftop import Rooftop
 from teaser.logic.buildingobjects.BuildingPhysics.Window import Window
-from teaser.logic.buildingobjects.ThermalZone import ThermalZone
+from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
 class EST1a(Residential):
