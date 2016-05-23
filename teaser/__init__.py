@@ -1,11 +1,11 @@
 '''
 teaser
 =========
-  
-Tool for Energy Analysis and Simulation for Efficient Retrofit 
+
+Tool for Energy Analysis and Simulation for Efficient Retrofit
 '''
 import sys
-import teaser.Logic.utilities as utilitis
+import teaser.logic.utilities as utilitis
 import os
 
 v = sys.version_info
@@ -25,8 +25,8 @@ dire = os.path.dirname(new_path)
 try:
     os.stat(dire)
 except:
-    os.mkdir(dire) 
-    
+    os.mkdir(dire)
+
 if sys.platform.startswith('win'):
     def read_file(path, mode='r'):
         fp = open(path, mode)
