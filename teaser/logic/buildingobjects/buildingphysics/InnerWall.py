@@ -2,7 +2,7 @@
 # by TEASER4 Development Team
 
 
-from teaser.logic.buildingobjects.BuildingPhysics.Wall\
+from teaser.logic.buildingobjects.buildingphysics.Wall\
      import Wall
 
 

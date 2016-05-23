@@ -9,20 +9,20 @@ from teaser.Logic.buildingobjects.thermalzone import ThermalZone
 from teaser.Logic.buildingobjects.boundaryconditions.boundaryconditions \
     import UseConditions
 from teaser.Logic.buildingobjects.Building import Building
-from teaser.Logic.buildingobjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.Logic.buildingobjects.BuildingPhysics.Floor import Floor
-from teaser.Logic.buildingobjects.BuildingPhysics.InnerWall import InnerWall
-from teaser.Logic.buildingobjects.BuildingPhysics.Layer import Layer
-from teaser.Logic.buildingobjects.BuildingPhysics.Material import Material
-from teaser.Logic.buildingobjects.BuildingPhysics.GroundFloor import GroundFloor
-from teaser.Logic.buildingobjects.BuildingPhysics.OuterWall import OuterWall
-from teaser.Logic.buildingobjects.BuildingPhysics.Rooftop import Rooftop
-from teaser.Logic.buildingobjects.BuildingPhysics.Window import Window
+from teaser.Logic.buildingobjects.buildingphysics.OuterWall import OuterWall
+from teaser.Logic.buildingobjects.buildingphysics.Floor import Floor
+from teaser.Logic.buildingobjects.buildingphysics.InnerWall import InnerWall
+from teaser.Logic.buildingobjects.buildingphysics.Layer import Layer
+from teaser.Logic.buildingobjects.buildingphysics.Material import Material
+from teaser.Logic.buildingobjects.buildingphysics.GroundFloor import GroundFloor
+from teaser.Logic.buildingobjects.buildingphysics.OuterWall import OuterWall
+from teaser.Logic.buildingobjects.buildingphysics.Rooftop import Rooftop
+from teaser.Logic.buildingobjects.buildingphysics.Window import Window
 from teaser.project import Project
 import teaser.data.output.teaserxml_output as teaser_xml
 import teaser.data.output.citygML_output as city_gml
-from teaser.Logic.buildingobjects.BuildingPhysics.Ceiling import Ceiling
-from teaser.Logic.buildingobjects.BuildingPhysics.GroundFloor import GroundFloor
+from teaser.Logic.buildingobjects.buildingphysics.Ceiling import Ceiling
+from teaser.Logic.buildingobjects.buildingphysics.GroundFloor import GroundFloor
 
 
 class Controller():
