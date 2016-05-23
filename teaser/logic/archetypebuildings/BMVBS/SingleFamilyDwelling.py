@@ -1,7 +1,7 @@
 # created June 2015
 # by TEASER4 Development Team
 
-from teaser.logic.archetypebuildings.Residential \
+from teaser.logic.archetypebuildings.residential \
  import Residential
 
 from teaser.logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
@@ -45,7 +45,7 @@ class SingleFamilyDwelling(Residential):
 
     net_leased_area : float
         total net leased area of building
-        
+
     with_ahu : boolean
         if building has a central AHU or not
 
@@ -92,14 +92,14 @@ class SingleFamilyDwelling(Residential):
 
     Note
     ----------
-    
+
     The listed attributes are just the ones that are set by the user
     calculated values are not included in this list.
-    
+
 
     Attributes
     ----------
-    
+
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
         zone area factor (float) and the zone usage (str). The values can be
@@ -149,24 +149,24 @@ class SingleFamilyDwelling(Residential):
         estimation factor to calculate heated cellar area
     '''
 
-    def __init__(self, 
-                 parent, 
+    def __init__(self,
+                 parent,
                  name=None,
                  year_of_construction=None,
-                 number_of_floors=None, 
+                 number_of_floors=None,
                  height_of_floors=None,
                  net_leased_area=None,
                  with_ahu=False,
                  residential_layout=None,
-                 neighbour_buildings=None, 
-                 attic=None, 
+                 neighbour_buildings=None,
+                 attic=None,
                  cellar=None,
                  dormer=None,
                  construction_type=None):
 
         '''Constructor of SingleFamilyDwelling
 
-        
+
         '''
 
         super(SingleFamilyDwelling, self).__init__(parent, name, year_of_construction,
@@ -180,7 +180,7 @@ class SingleFamilyDwelling(Residential):
         self.construction_type = construction_type
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
-        
+
         # Parameters are default values for current calculation following IWU
 
         # [area factor, usage type(has to be set)]
@@ -294,7 +294,7 @@ class SingleFamilyDwelling(Residential):
             self.central_ahu.profile_min_relative_humidity = (25*[0.45])
             self.central_ahu.profile_max_relative_humidity = (25*[0.55])
             self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
-        
+
 
     def generate_archetype(self):
         '''Generates a residential building.
@@ -320,7 +320,7 @@ class SingleFamilyDwelling(Residential):
 
         self._est_roof_area = self.est_upper_building_closure * \
                 self._est_factor_dormer * self._est_area_per_floor * \
-                self._living_area_per_floor 
+                self._living_area_per_floor
 
         self._top_floor_area = self._est_area_per_roof * \
                 self._living_area_per_floor
@@ -609,7 +609,7 @@ class SingleFamilyDwelling(Residential):
     @property
     def cellar(self):
         return self._cellar
-    
+
     @cellar.setter
     def cellar(self, value):
         if value is not None:
@@ -620,7 +620,7 @@ class SingleFamilyDwelling(Residential):
     @property
     def dormer(self):
         return self._dormer
-    
+
     @dormer.setter
     def dormer(self, value):
         if value is not None:

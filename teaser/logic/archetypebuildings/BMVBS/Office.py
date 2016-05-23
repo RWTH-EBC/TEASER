@@ -4,7 +4,7 @@
 
 import math
 
-from teaser.logic.archetypebuildings.NonResidential\
+from teaser.logic.archetypebuildings.nonresidential\
  import NonResidential
 from teaser.logic.BuildingObjects.BoundaryConditions.BoundaryConditions \
     import BoundaryConditions as UseCond
