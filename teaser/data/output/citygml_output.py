@@ -11,15 +11,15 @@ import pyxb.utils
 import pyxb.namespace
 import pyxb.bundles
 import pyxb.binding as bd
-import teaser.Data.SchemaBindings.opengis
+import teaser.data.bindings.opengis
 import pyxb.bundles.common.raw.xlink as xlink
-import teaser.Data.SchemaBindings.opengis.raw as og
-import teaser.Data.SchemaBindings.opengis.raw.gml as gml
-import teaser.Data.SchemaBindings.opengis.citygml
-import teaser.Data.SchemaBindings.opengis.citygml.raw
-import teaser.Data.SchemaBindings.opengis.citygml.raw.base as citygml
-import teaser.Data.SchemaBindings.opengis.citygml.raw.building as bldg
-import teaser.Data.SchemaBindings.opengis.citygml.raw.energy as energy
+import teaser.data.bindings.opengis.raw as og
+import teaser.data.bindings.opengis.raw.gml as gml
+import teaser.data.bindings.opengis.citygml
+import teaser.data.bindings.opengis.citygml.raw
+import teaser.data.bindings.opengis.citygml.raw.base as citygml
+import teaser.data.bindings.opengis.citygml.raw.building as bldg
+import teaser.data.bindings.opengis.citygml.raw.energy as energy
 
 
 def save_gml(project, path, ref_coordinates=None):
@@ -36,10 +36,10 @@ def save_gml(project, path, ref_coordinates=None):
         complete path to the output file
     ref_coordinates: list
         list with  lower and one upper reference coordinates. Each coordiante
-        should contain 3 ints or floats for x, y, and z coordinates of the 
+        should contain 3 ints or floats for x, y, and z coordinates of the
         point. e.g: [[458877,,5438353, -0.2], [458889,5438363,6.317669]]
     '''
-    
+
     if path.endswith("gml"):
         out_file = open(path, 'w')
     else:
@@ -60,11 +60,11 @@ def save_gml(project, path, ref_coordinates=None):
     gml_out.name = [og.gml.CodeType(project.name)]
 
     if ref_coordinates != None:
-        
+
         gml_out = _set_reference_boundary(gml_out,
                                           ref_coordinates[0],
                                           ref_coordinates[1])
-    else: 
+    else:
         bldg_center = [0,0,0]
         pass
 
@@ -73,7 +73,7 @@ def save_gml(project, path, ref_coordinates=None):
         gml_out.featureMember.append(citygml.cityObjectMember())
 
         gml_bldg = _set_gml_building(bldg_count)
-        
+
         bldg_center = [i*80, 0, 0]
         building_length = None
         building_width = None
