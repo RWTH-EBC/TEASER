@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>input &mdash; TEASER 0.2.8 documentation</title>
+    <title>input &mdash; TEASER 0.3.0 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.2.8',
+        VERSION:     '0.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="TEASER 0.2.8 documentation" href="index.html" />
+    <link rel="top" title="TEASER 0.3.0 documentation" href="index.html" />
     <link rel="up" title="data" href="teaser.Data.html" />
     <link rel="next" title="output" href="teaser.Data.Output.html" />
     <link rel="prev" title="data" href="teaser.Data.html" /> 
@@ -36,15 +36,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="teaser.Data.Output.html" title="output"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="teaser.Data.html" title="data"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.2.8 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.3.0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="teaser.html" >teaser package structure</a> &raquo;</li>
           <li class="nav-item nav-item-2"><a href="teaser.Data.html" accesskey="U">data</a> &raquo;</li> 
       </ul>
@@ -55,10 +52,10 @@
   <ul>
 <li><a class="reference internal" href="#">input</a><ul>
 <li><a class="reference internal" href="#inputdata-folder">InputData folder</a></li>
-<li><a class="reference internal" href="#module-teaser.Data.Input.boundcond_input">boundcond_input</a></li>
-<li><a class="reference internal" href="#module-teaser.Data.Input.buildingelement_input">buildingelement_input</a></li>
-<li><a class="reference internal" href="#module-teaser.Data.Input.material_input">material_input</a></li>
-<li><a class="reference internal" href="#module-teaser.Data.Input.TeaserXML_input">TeaserXML_input</a></li>
+<li><a class="reference internal" href="#boundcond-input">boundcond_input</a></li>
+<li><a class="reference internal" href="#buildingelement-input">buildingelement_input</a></li>
+<li><a class="reference internal" href="#material-input">material_input</a></li>
+<li><a class="reference internal" href="#teaserxml-input">TeaserXML_input</a></li>
 </ul>
 </li>
 </ul>
@@ -84,6 +81,9 @@
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -107,175 +107,17 @@ German)</p>
 <p>Collection of boundary conditions (DIN 18599, SIA2024, AHU from AixLib)
 (currently in German)</p>
 </div>
-<div class="section" id="module-teaser.Data.Input.boundcond_input">
-<span id="boundcond-input"></span><h2>boundcond_input<a class="headerlink" href="#module-teaser.Data.Input.boundcond_input" title="Permalink to this headline">¶</a></h2>
-<p>boundcond_input.py</p>
-<p>This module contains function to load boundary conditions classes</p>
-<dl class="function">
-<dt id="teaser.Data.Input.boundcond_input.load_boundary_conditions">
-<code class="descclassname">teaser.Data.Input.boundcond_input.</code><code class="descname">load_boundary_conditions</code><span class="sig-paren">(</span><em>bound_cond</em>, <em>zone_usage</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.Input.boundcond_input.load_boundary_conditions" title="Permalink to this definition">¶</a></dt>
-<dd><p>load use conditions according to DIN 18599 and SIA2024</p>
-<p>loads Use conditions specified in the XML, according to DIN 18599,
-SIA2024 in addition some AixLib specific use conditions for central AHU
-are defined.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>bound_cond</strong> : BoundaryConditions()</p>
-<blockquote>
-<div><p>Instance of TEASERs
-BuildingObjects.BoundaryConditions.BoundaryConditions</p>
-</div></blockquote>
-<p><strong>zone_usage</strong> : str</p>
-<blockquote class="last">
-<div><p>code list for zone_usage according to 18599</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+<div class="section" id="boundcond-input">
+<h2>boundcond_input<a class="headerlink" href="#boundcond-input" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-teaser.Data.Input.buildingelement_input">
-<span id="buildingelement-input"></span><h2>buildingelement_input<a class="headerlink" href="#module-teaser.Data.Input.buildingelement_input" title="Permalink to this headline">¶</a></h2>
-<p>buildingelement_input.py</p>
-<p>This module contains function to load building element classes</p>
-<dl class="function">
-<dt id="teaser.Data.Input.buildingelement_input.load_type_element">
-<code class="descclassname">teaser.Data.Input.buildingelement_input.</code><code class="descname">load_type_element</code><span class="sig-paren">(</span><em>element</em>, <em>year</em>, <em>construction</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.Input.buildingelement_input.load_type_element" title="Permalink to this definition">¶</a></dt>
-<dd><p>Typical element loader.</p>
-<p>Loads typical building elements according to their construction
-year and their construction type from a XML. The elements are created by
-using IWU building characteristics combined with normative material data.</p>
-<p>This function will only work if the parents to Building are set.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>element</strong> : BuildingElement()</p>
-<blockquote>
-<div><p>Instance of BuildingElement or inherited Element of TEASER</p>
-</div></blockquote>
-<p><strong>year</strong> : int</p>
-<blockquote>
-<div><p>Year of construction</p>
-</div></blockquote>
-<p><strong>construction</strong> : str</p>
-<blockquote>
-<div><p>Construction type, code list (&#8216;heavy&#8217;, &#8216;light&#8217;)</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>Assert if parents to Building are not set</strong></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+<div class="section" id="buildingelement-input">
+<h2>buildingelement_input<a class="headerlink" href="#buildingelement-input" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-teaser.Data.Input.material_input">
-<span id="material-input"></span><h2>material_input<a class="headerlink" href="#module-teaser.Data.Input.material_input" title="Permalink to this headline">¶</a></h2>
-<p>material_input.py</p>
-<p>This module contains function to load material classes</p>
-<dl class="function">
-<dt id="teaser.Data.Input.material_input.load_material">
-<code class="descclassname">teaser.Data.Input.material_input.</code><code class="descname">load_material</code><span class="sig-paren">(</span><em>material</em>, <em>mat_name</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.Input.material_input.load_material" title="Permalink to this definition">¶</a></dt>
-<dd><p>Material loader.</p>
-<p>Loads Material specified in the XML.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>material</strong> : Material()</p>
-<blockquote>
-<div><p>instance of TEASERS Material class</p>
-</div></blockquote>
-<p><strong>mat_name</strong> : str</p>
-<blockquote class="last">
-<div><p>Code list for Material</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+<div class="section" id="material-input">
+<h2>material_input<a class="headerlink" href="#material-input" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-teaser.Data.Input.TeaserXML_input">
-<span id="teaserxml-input"></span><h2>TeaserXML_input<a class="headerlink" href="#module-teaser.Data.Input.TeaserXML_input" title="Permalink to this headline">¶</a></h2>
-<p>TeaserXML_input</p>
-<p>This module contains function to load Projects in the proprietary
-TEASER file format .tXML</p>
-<dl class="function">
-<dt id="teaser.Data.Input.TeaserXML_input.load_teaser_xml">
-<code class="descclassname">teaser.Data.Input.TeaserXML_input.</code><code class="descname">load_teaser_xml</code><span class="sig-paren">(</span><em>path</em>, <em>prj</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.Input.TeaserXML_input.load_teaser_xml" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function loads a project from teaserXML</p>
-<p>TEASERs internal file format to store information.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path: string</strong></p>
-<blockquote>
-<div><p>path of teaserXML file</p>
-</div></blockquote>
-<p><strong>project: Project()</strong></p>
-<blockquote class="last">
-<div><p>Teaser instance of Project()</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="teaser.Data.Input.TeaserXML_input.set_basic_data_teaser">
-<code class="descclassname">teaser.Data.Input.TeaserXML_input.</code><code class="descname">set_basic_data_teaser</code><span class="sig-paren">(</span><em>pyxb_class</em>, <em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.Input.TeaserXML_input.set_basic_data_teaser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Helper function for load_teaser_xml to set the basic data</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pyxb_class</strong> : PyXBClass</p>
-<blockquote>
-<div><p>pyxb class represantation of xml</p>
-</div></blockquote>
-<p><strong>element</strong> : TEASERClass</p>
-<blockquote class="last">
-<div><p>teaser class representation of a building element</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="teaser.Data.Input.TeaserXML_input.set_layer_data_teaser">
-<code class="descclassname">teaser.Data.Input.TeaserXML_input.</code><code class="descname">set_layer_data_teaser</code><span class="sig-paren">(</span><em>pyxb_class</em>, <em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.Data.Input.TeaserXML_input.set_layer_data_teaser" title="Permalink to this definition">¶</a></dt>
-<dd><p>Helper function for load_teaser_xml to set the layer data</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pyxb_class</strong> : PyXBClass</p>
-<blockquote>
-<div><p>pyxb class represantation of xml</p>
-</div></blockquote>
-<p><strong>element</strong> : TEASERClass</p>
-<blockquote class="last">
-<div><p>teaser class representation of a building element</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
+<div class="section" id="teaserxml-input">
+<h2>TeaserXML_input<a class="headerlink" href="#teaserxml-input" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -292,22 +134,19 @@ TEASER file format .tXML</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
           <a href="teaser.Data.Output.html" title="output"
              >next</a> |</li>
         <li class="right" >
           <a href="teaser.Data.html" title="data"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.2.8 documentation</a> &raquo;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.3.0 documentation</a> &raquo;</li>
           <li class="nav-item nav-item-1"><a href="teaser.html" >teaser package structure</a> &raquo;</li>
           <li class="nav-item nav-item-2"><a href="teaser.Data.html" >data</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &copy; Copyright 2015, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate, RWTH Aachen University,.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.3.
     </div>
   </body>
 </html>
