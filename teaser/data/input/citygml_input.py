@@ -13,15 +13,15 @@ import pyxb.utils
 import pyxb.namespace
 import pyxb.bundles
 import pyxb.bundles.common.raw.xlink as xlink
-import teaser.Data.SchemaBindings.opengis
-import teaser.Data.SchemaBindings.opengis.citygml.raw.base as citygml
-import teaser.Data.SchemaBindings.opengis.citygml.raw.energy as energy
-import teaser.Data.SchemaBindings.opengis.citygml.raw.building as bldg
-import teaser.Data.SchemaBindings.opengis.citygml.raw.generics as gen
-import teaser.Data.SchemaBindings.opengis.raw.gml as gml
-import teaser.Data.SchemaBindings.opengis.raw._nsgroup as nsgroup
-import teaser.Data.SchemaBindings.opengis.raw.smil20 as smil
-import teaser.Data.SchemaBindings.opengis.misc.raw.xAL as xal
+import teaser.data.bindings.opengis
+import teaser.data.bindings.opengis.citygml.raw.base as citygml
+import teaser.data.bindings.opengis.citygml.raw.energy as energy
+import teaser.data.bindings.opengis.citygml.raw.building as bldg
+import teaser.data.bindings.opengis.citygml.raw.generics as gen
+import teaser.data.bindings.opengis.raw.gml as gml
+import teaser.data.bindings.opengis.raw._nsgroup as nsgroup
+import teaser.data.bindings.opengis.raw.smil20 as smil
+import teaser.data.bindings.opengis.misc.raw.xAL as xal
 
 from teaser.Logic.ArchetypeBuildings.BMVBS.SingleFamilyDwelling \
                             import SingleFamilyDwelling
