@@ -24,16 +24,16 @@ if pyxb.__version__ != _PyXBVersion:
     raise pyxb.PyXBVersionError(_PyXBVersion)
 
 # Import bindings for namespaces imported into schema
-import teaser.Data.SchemaBindings.opengis.citygml.raw.base
+import teaser.data.bindings.opengis.citygml.raw.base
 import pyxb.binding.datatypes
-import teaser.Data.SchemaBindings.opengis.raw.gml
+import teaser.data.bindings.opengis.raw.gml
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://www.opengis.net/citygml/generics/2.0', create_if_missing=True)
 Namespace.configureCategories(['typeBinding', 'elementBinding'])
-_Namespace_gml = teaser.Data.SchemaBindings.opengis.raw.gml.Namespace
+_Namespace_gml = teaser.data.bindings.opengis.raw.gml.Namespace
 _Namespace_gml.configureCategories(['typeBinding', 'elementBinding'])
-_Namespace_core = teaser.Data.SchemaBindings.opengis.citygml.raw.base.Namespace
+_Namespace_core = teaser.data.bindings.opengis.citygml.raw.base.Namespace
 _Namespace_core.configureCategories(['typeBinding', 'elementBinding'])
 
 def CreateFromDocument (xml_text, default_namespace=None, location_base=None):
@@ -80,7 +80,7 @@ def CreateFromDOM (node, default_namespace=None):
 
 
 # Complex type {http://www.opengis.net/citygml/generics/2.0}GenericCityObjectType with content type ELEMENT_ONLY
-class GenericCityObjectType (teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType):
+class GenericCityObjectType (teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType):
     """Generic (user defined) city objects may be used to model features which are not covered explicitly by the
 				CityGML schema. Generic objects must be used with care; they shall only be used if there is no appropiate thematic class
 				available in the overall CityGML schema. Oherwise, problems concerning semantic interoperability may arise. As subclass of
@@ -91,160 +91,160 @@ class GenericCityObjectType (teaser.Data.SchemaBindings.opengis.citygml.raw.base
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'GenericCityObjectType')
     _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 24, 1)
-    _ElementMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
-    _AttributeMap = teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
-    # Base type is teaser.Data.SchemaBindings.opengis.citygml.raw.base.AbstractCityObjectType
-    
+    _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
+    _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
+    # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
+
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}class uses Python identifier class_
     __class = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'class'), 'class_', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0class', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 35, 5), )
 
-    
+
     class_ = property(__class.value, __class.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}function uses Python identifier function
     __function = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'function'), 'function', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0function', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 36, 5), )
 
-    
+
     function = property(__function.value, __function.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}usage uses Python identifier usage
     __usage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usage'), 'usage', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0usage', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 37, 5), )
 
-    
+
     usage = property(__usage.value, __usage.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod0Geometry uses Python identifier lod0Geometry
     __lod0Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod0Geometry'), 'lod0Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod0Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 38, 5), )
 
-    
+
     lod0Geometry = property(__lod0Geometry.value, __lod0Geometry.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod1Geometry uses Python identifier lod1Geometry
     __lod1Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1Geometry'), 'lod1Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod1Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 39, 5), )
 
-    
+
     lod1Geometry = property(__lod1Geometry.value, __lod1Geometry.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod2Geometry uses Python identifier lod2Geometry
     __lod2Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry'), 'lod2Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod2Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 40, 5), )
 
-    
+
     lod2Geometry = property(__lod2Geometry.value, __lod2Geometry.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod3Geometry uses Python identifier lod3Geometry
     __lod3Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry'), 'lod3Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod3Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 41, 5), )
 
-    
+
     lod3Geometry = property(__lod3Geometry.value, __lod3Geometry.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod4Geometry uses Python identifier lod4Geometry
     __lod4Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), 'lod4Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod4Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 42, 5), )
 
-    
+
     lod4Geometry = property(__lod4Geometry.value, __lod4Geometry.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod0TerrainIntersection uses Python identifier lod0TerrainIntersection
     __lod0TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod0TerrainIntersection'), 'lod0TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod0TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 43, 5), )
 
-    
+
     lod0TerrainIntersection = property(__lod0TerrainIntersection.value, __lod0TerrainIntersection.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod1TerrainIntersection uses Python identifier lod1TerrainIntersection
     __lod1TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection'), 'lod1TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod1TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 44, 5), )
 
-    
+
     lod1TerrainIntersection = property(__lod1TerrainIntersection.value, __lod1TerrainIntersection.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod2TerrainIntersection uses Python identifier lod2TerrainIntersection
     __lod2TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection'), 'lod2TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod2TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 45, 5), )
 
-    
+
     lod2TerrainIntersection = property(__lod2TerrainIntersection.value, __lod2TerrainIntersection.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod3TerrainIntersection uses Python identifier lod3TerrainIntersection
     __lod3TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection'), 'lod3TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod3TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 46, 5), )
 
-    
+
     lod3TerrainIntersection = property(__lod3TerrainIntersection.value, __lod3TerrainIntersection.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod4TerrainIntersection uses Python identifier lod4TerrainIntersection
     __lod4TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection'), 'lod4TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod4TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 47, 5), )
 
-    
+
     lod4TerrainIntersection = property(__lod4TerrainIntersection.value, __lod4TerrainIntersection.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod0ImplicitRepresentation uses Python identifier lod0ImplicitRepresentation
     __lod0ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod0ImplicitRepresentation'), 'lod0ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod0ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 48, 5), )
 
-    
+
     lod0ImplicitRepresentation = property(__lod0ImplicitRepresentation.value, __lod0ImplicitRepresentation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod1ImplicitRepresentation uses Python identifier lod1ImplicitRepresentation
     __lod1ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1ImplicitRepresentation'), 'lod1ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod1ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 49, 5), )
 
-    
+
     lod1ImplicitRepresentation = property(__lod1ImplicitRepresentation.value, __lod1ImplicitRepresentation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod2ImplicitRepresentation uses Python identifier lod2ImplicitRepresentation
     __lod2ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation'), 'lod2ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod2ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 50, 5), )
 
-    
+
     lod2ImplicitRepresentation = property(__lod2ImplicitRepresentation.value, __lod2ImplicitRepresentation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod3ImplicitRepresentation uses Python identifier lod3ImplicitRepresentation
     __lod3ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), 'lod3ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod3ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 51, 5), )
 
-    
+
     lod3ImplicitRepresentation = property(__lod3ImplicitRepresentation.value, __lod3ImplicitRepresentation.set, None, None)
 
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}lod4ImplicitRepresentation uses Python identifier lod4ImplicitRepresentation
     __lod4ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), 'lod4ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod4ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 52, 5), )
 
-    
+
     lod4ImplicitRepresentation = property(__lod4ImplicitRepresentation.value, __lod4ImplicitRepresentation.set, None, None)
 
-    
+
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-    
+
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-    
+
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __class.name() : __class,
@@ -267,7 +267,7 @@ class GenericCityObjectType (teaser.Data.SchemaBindings.opengis.citygml.raw.base
         __lod4ImplicitRepresentation.name() : __lod4ImplicitRepresentation
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'GenericCityObjectType', GenericCityObjectType)
 
@@ -286,16 +286,16 @@ class AbstractGenericAttributeType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Attribute name uses Python identifier name
     __name = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__httpwww_opengis_netcitygmlgenerics2_0_AbstractGenericAttributeType_name', pyxb.binding.datatypes.string, required=True)
     __name._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 70, 2)
     __name._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 70, 2)
-    
+
     name = property(__name.value, __name.set, None, None)
 
     _ElementMap.update({
-        
+
     })
     _AttributeMap.update({
         __name.name() : __name
@@ -314,20 +314,20 @@ class StringAttributeType (AbstractGenericAttributeType):
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
     __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_StringAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 83, 5), )
 
-    
+
     value_ = property(__value.value, __value.set, None, None)
 
-    
+
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'StringAttributeType', StringAttributeType)
 
@@ -343,20 +343,20 @@ class IntAttributeType (AbstractGenericAttributeType):
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
     __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_IntAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 98, 5), )
 
-    
+
     value_ = property(__value.value, __value.set, None, None)
 
-    
+
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'IntAttributeType', IntAttributeType)
 
@@ -372,20 +372,20 @@ class DoubleAttributeType (AbstractGenericAttributeType):
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
     __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_DoubleAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 113, 5), )
 
-    
+
     value_ = property(__value.value, __value.set, None, None)
 
-    
+
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'DoubleAttributeType', DoubleAttributeType)
 
@@ -401,20 +401,20 @@ class DateAttributeType (AbstractGenericAttributeType):
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
     __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_DateAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 128, 5), )
 
-    
+
     value_ = property(__value.value, __value.set, None, None)
 
-    
+
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'DateAttributeType', DateAttributeType)
 
@@ -430,20 +430,20 @@ class UriAttributeType (AbstractGenericAttributeType):
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
     __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_UriAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 143, 5), )
 
-    
+
     value_ = property(__value.value, __value.set, None, None)
 
-    
+
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'UriAttributeType', UriAttributeType)
 
@@ -459,20 +459,20 @@ class MeasureAttributeType (AbstractGenericAttributeType):
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
     __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_MeasureAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 158, 5), )
 
-    
+
     value_ = property(__value.value, __value.set, None, None)
 
-    
+
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-        
+
     })
 Namespace.addCategoryObject('typeBinding', 'MeasureAttributeType', MeasureAttributeType)
 
@@ -490,21 +490,21 @@ class GenericAttributeSetType (AbstractGenericAttributeType):
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-    
+
     # Element {http://www.opengis.net/citygml/generics/2.0}_genericAttribute uses Python identifier genericAttribute
     __genericAttribute = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_genericAttribute'), 'genericAttribute', '__httpwww_opengis_netcitygmlgenerics2_0_GenericAttributeSetType_httpwww_opengis_netcitygmlgenerics2_0_genericAttribute', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 73, 1), )
 
-    
+
     genericAttribute = property(__genericAttribute.value, __genericAttribute.set, None, None)
 
-    
+
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
-    
+
     # Attribute codeSpace uses Python identifier codeSpace
     __codeSpace = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'codeSpace'), 'codeSpace', '__httpwww_opengis_netcitygmlgenerics2_0_GenericAttributeSetType_codeSpace', pyxb.binding.datatypes.anyURI)
     __codeSpace._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 177, 4)
     __codeSpace._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 177, 4)
-    
+
     codeSpace = property(__codeSpace.value, __codeSpace.set, None, None)
 
     _ElementMap.update({
@@ -545,41 +545,41 @@ Namespace.addCategoryObject('elementBinding', genericAttributeSet.name().localNa
 
 
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 35, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 35, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 36, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 36, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.Data.SchemaBindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 37, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 37, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0Geometry'), teaser.Data.SchemaBindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 38, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 38, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1Geometry'), teaser.Data.SchemaBindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 39, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 39, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry'), teaser.Data.SchemaBindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 40, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 40, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry'), teaser.Data.SchemaBindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 41, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 41, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), teaser.Data.SchemaBindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 42, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 42, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0TerrainIntersection'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 43, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 43, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 44, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 44, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 45, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 45, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 46, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 46, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection'), teaser.Data.SchemaBindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 47, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 47, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 48, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 48, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 49, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 49, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 50, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 50, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 51, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 51, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.Data.SchemaBindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 52, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 52, 5)))
 
 def _BuildAutomaton ():
     # Remove this helper function from the namespace after it is invoked
@@ -1905,7 +1905,7 @@ UriAttributeType._Automaton = _BuildAutomaton_5()
 
 
 
-MeasureAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), teaser.Data.SchemaBindings.opengis.raw.gml.MeasureType, scope=MeasureAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 158, 5)))
+MeasureAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=MeasureAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 158, 5)))
 
 def _BuildAutomaton_6 ():
     # Remove this helper function from the namespace after it is invoked
@@ -1949,9 +1949,9 @@ def _BuildAutomaton_7 ():
 GenericAttributeSetType._Automaton = _BuildAutomaton_7()
 
 
-GenericCityObject._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.CityObject)
+GenericCityObject._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.CityObject)
 
-genericAttribute._setSubstitutionGroup(teaser.Data.SchemaBindings.opengis.citygml.raw.base.GenericApplicationPropertyOfCityObject)
+genericAttribute._setSubstitutionGroup(teaser.data.bindings.opengis.citygml.raw.base.GenericApplicationPropertyOfCityObject)
 
 stringAttribute._setSubstitutionGroup(genericAttribute)
 

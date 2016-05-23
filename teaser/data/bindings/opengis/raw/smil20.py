@@ -24,7 +24,7 @@ if pyxb.__version__ != _PyXBVersion:
     raise pyxb.PyXBVersionError(_PyXBVersion)
 
 # Import bindings for namespaces imported into schema
-import teaser.Data.SchemaBindings.opengis.raw._nsgroup
+import teaser.data.bindings.opengis.raw._nsgroup
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://www.w3.org/2001/SMIL20/', create_if_missing=True)
@@ -72,22 +72,22 @@ def CreateFromDOM (node, default_namespace=None):
         default_namespace = Namespace.fallbackNamespace()
     return pyxb.binding.basis.element.AnyCreateFromDOM(node, default_namespace)
 
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import animate # {http://www.w3.org/2001/SMIL20/}animate
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import animateMotion # {http://www.w3.org/2001/SMIL20/}animateMotion
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import animateColor # {http://www.w3.org/2001/SMIL20/}animateColor
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import set_ # {http://www.w3.org/2001/SMIL20/}set
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import nonNegativeDecimalType # {http://www.w3.org/2001/SMIL20/}nonNegativeDecimalType
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import STD_ANON # None
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import STD_ANON_ # None
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import STD_ANON_2 # None
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import STD_ANON_3 # None
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import syncBehaviorType # {http://www.w3.org/2001/SMIL20/}syncBehaviorType
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import syncBehaviorDefaultType # {http://www.w3.org/2001/SMIL20/}syncBehaviorDefaultType
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import restartTimingType # {http://www.w3.org/2001/SMIL20/}restartTimingType
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import restartDefaultType # {http://www.w3.org/2001/SMIL20/}restartDefaultType
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import fillTimingAttrsType # {http://www.w3.org/2001/SMIL20/}fillTimingAttrsType
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import fillDefaultType # {http://www.w3.org/2001/SMIL20/}fillDefaultType
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import animatePrototype # {http://www.w3.org/2001/SMIL20/}animatePrototype
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import animateMotionPrototype # {http://www.w3.org/2001/SMIL20/}animateMotionPrototype
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import animateColorPrototype # {http://www.w3.org/2001/SMIL20/}animateColorPrototype
-from teaser.Data.SchemaBindings.opengis.raw._nsgroup import setPrototype # {http://www.w3.org/2001/SMIL20/}setPrototype
+from teaser.data.bindings.opengis.raw._nsgroup import animate # {http://www.w3.org/2001/SMIL20/}animate
+from teaser.data.bindings.opengis.raw._nsgroup import animateMotion # {http://www.w3.org/2001/SMIL20/}animateMotion
+from teaser.data.bindings.opengis.raw._nsgroup import animateColor # {http://www.w3.org/2001/SMIL20/}animateColor
+from teaser.data.bindings.opengis.raw._nsgroup import set_ # {http://www.w3.org/2001/SMIL20/}set
+from teaser.data.bindings.opengis.raw._nsgroup import nonNegativeDecimalType # {http://www.w3.org/2001/SMIL20/}nonNegativeDecimalType
+from teaser.data.bindings.opengis.raw._nsgroup import STD_ANON # None
+from teaser.data.bindings.opengis.raw._nsgroup import STD_ANON_ # None
+from teaser.data.bindings.opengis.raw._nsgroup import STD_ANON_2 # None
+from teaser.data.bindings.opengis.raw._nsgroup import STD_ANON_3 # None
+from teaser.data.bindings.opengis.raw._nsgroup import syncBehaviorType # {http://www.w3.org/2001/SMIL20/}syncBehaviorType
+from teaser.data.bindings.opengis.raw._nsgroup import syncBehaviorDefaultType # {http://www.w3.org/2001/SMIL20/}syncBehaviorDefaultType
+from teaser.data.bindings.opengis.raw._nsgroup import restartTimingType # {http://www.w3.org/2001/SMIL20/}restartTimingType
+from teaser.data.bindings.opengis.raw._nsgroup import restartDefaultType # {http://www.w3.org/2001/SMIL20/}restartDefaultType
+from teaser.data.bindings.opengis.raw._nsgroup import fillTimingAttrsType # {http://www.w3.org/2001/SMIL20/}fillTimingAttrsType
+from teaser.data.bindings.opengis.raw._nsgroup import fillDefaultType # {http://www.w3.org/2001/SMIL20/}fillDefaultType
+from teaser.data.bindings.opengis.raw._nsgroup import animatePrototype # {http://www.w3.org/2001/SMIL20/}animatePrototype
+from teaser.data.bindings.opengis.raw._nsgroup import animateMotionPrototype # {http://www.w3.org/2001/SMIL20/}animateMotionPrototype
+from teaser.data.bindings.opengis.raw._nsgroup import animateColorPrototype # {http://www.w3.org/2001/SMIL20/}animateColorPrototype
+from teaser.data.bindings.opengis.raw._nsgroup import setPrototype # {http://www.w3.org/2001/SMIL20/}setPrototype
