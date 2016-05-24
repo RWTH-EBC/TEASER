@@ -8,10 +8,10 @@ Research center, Institute for Energy Efficient Buildings and Indoor Climate,
 RWTH Aachen University.
 
 This GitHub page will be used to further develop the library and make it
-available under the 
+available under the
 [MIT License](https://github.com/RWTH-EBC/TEASER/blob/master/License.md).
 
-If you have any questions regarding TEASER feel free to contact us at teaser@eonerc.rwth-aachen.de.
+If you have any questions regarding TEASER feel free to contact us at [ebc-teaser@eonerc.rwth-aachen.de](ebc-teaser@eonerc.rwth-aachen.de).
 
 ### License
 
@@ -22,8 +22,8 @@ RWTH Aachen University under the
 
 ### Acknowledgements
 
-Parts of TEASER have been developed within public funded projects 
-and with financial support by BMWi (German Federal Ministry for Economic 
+Parts of TEASER have been developed within public funded projects
+and with financial support by BMWi (German Federal Ministry for Economic
 Affairs and Energy).
 
 ### Description
@@ -50,13 +50,12 @@ The current version is 0.3.0, which is a pre-release.
 
 ### How to use TEASER
 
-For installation we like to refer you to the README in the [teaser 
+For installation we like to refer you to the README in the [teaser
 package]
 (https://github.com/RWTH-EBC/TEASER/blob/master/teaser/README.md) itself.
 
 ### How to contribute to the development of TEASER
-You are invited to contribute to the development of TEASER. 
+You are invited to contribute to the development of TEASER.
 You may report any issues by using the [Issues](https://github.com/RWTH-EBC/TEASER/issues) button.
-Furthermore, you are welcome to contribute via [Pull Requests](https://github.com/RWTH-EBC/TEASER/pulls). 
+Furthermore, you are welcome to contribute via [Pull Requests](https://github.com/RWTH-EBC/TEASER/pulls).
 The workflow for changes is described in our [Wiki](https://github.com/RWTH-EBC/TEASER/wiki).
-
