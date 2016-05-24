@@ -1628,15 +1628,15 @@ class MainUI(QDialog):
         self.picture_layout_office_4 = QtGui.QLabel()
         self.picture_layout_office_2.setPixmap(
             QtGui.QPixmap(utilitis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\elongated1floor.png")).scaled(
+                "GUI\\GUIImages\\OfficeBuildings\\elongated_1floor.png")).scaled(
                     70, 70))
         self.picture_layout_office_3.setPixmap(
             QtGui.QPixmap(utilitis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\elongated2floors.png")).scaled(
+                "GUI\\GUIImages\\OfficeBuildings\\elongated_2floors.png")).scaled(
                     70, 70))
         self.picture_layout_office_4.setPixmap(QtGui.QPixmap(
             utilitis.get_full_path(
-                "GUI\\GUIImages\\OfficeBuildings\\compact.png")).scaled(
+                "GUI\\GUIImages\\OfficeBuildings\\compact_floor.png")).scaled(
                     70, 70))
         self.office_layout.addWidget(
             self.radio_button_office_layout_1, 1, 0)
