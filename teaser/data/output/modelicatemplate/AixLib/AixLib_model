@@ -141,7 +141,7 @@ end ${bldg.name};
 )
 
 % if check_AHU(bldg.thermal_zones) == False:
-    ,redeclare AixLib.HVAC.AirHandlingUnit.NoAHU AirHandlingUnit "AHU does
+    ,redeclare AixLib.Airflow.AirHandlingUnit.NoAHU AirHandlingUnit "AHU does
     not exist"
 % endif
 )
