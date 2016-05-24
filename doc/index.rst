@@ -20,7 +20,7 @@ Interface is a beta release and not fully tested. If you find any bugs, please
 report them (see `How to contribute to TEASER`_)
 
 If you have any questions regarding TEASER feel free to contact us at
-`ebc-teaser@eonerc.rwth-aachen.de <teaser@eonerc.rwth-aachen.de>`_.
+`ebc-teaser@eonerc.rwth-aachen.de <ebc-teaser@eonerc.rwth-aachen.de>`_.
 
 
 License
