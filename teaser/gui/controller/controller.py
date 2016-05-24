@@ -163,7 +163,7 @@ class Controller():
             building.street_name = street
             building.city = location
             int_id = building.internal_id
-        if type_of_building == "Insitute 4":
+        if type_of_building == "Institute 4":
             building = parent.type_bldg_institute4(
                 name=name,
                 year_of_construction=year_of_construction,
