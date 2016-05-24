@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="UseConditions" type="UseConditionsType"/>
+  <xs:complexType name="UsageOperationTimeType">
+    <xs:sequence>
+      <xs:element minOccurs="0" type="integerList" name="usage_time"/>
+      <xs:element minOccurs="0" type="xs:integer" name="daily_usage_hours"/>
+      <xs:element minOccurs="0" type="xs:integer" name="yearly_usage_days"/>
+      <xs:element minOccurs="0" type="xs:integer" name="yearly_usage_hours_day"/>
+      <xs:element minOccurs="0" type="xs:integer" name="yearly_usage_hours_night"/>
+      <xs:element minOccurs="0" type="xs:integer" name="daily_operation_ahu_cooling"/>
+      <xs:element minOccurs="0" type="xs:integer" name="yearly_heating_days"/>
+      <xs:element minOccurs="0" type="xs:integer" name="yearly_ahu_days"/>
+      <xs:element minOccurs="0" type="xs:integer" name="yearly_cooling_days"/>
+      <xs:element minOccurs="0" type="xs:integer" name="daily_operation_heating"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LightingType">
+    <xs:sequence>
+      <xs:element minOccurs="0" type="xs:float" name="maintained_illuminace"/>
+      <xs:element minOccurs="0" type="xs:float" name="usage_level_height"/>
+      <xs:element minOccurs="0" type="xs:float" name="red_factor_visual"/>
+      <xs:element minOccurs="0" type="xs:float" name="rel_absence"/>
+      <xs:element minOccurs="0" type="xs:float" name="room_index"/>
+      <xs:element minOccurs="0" type="xs:float" name="part_load_factor_lighting"/>
+	  <xs:element minOccurs="0" type="xs:float" name="ratio_conv_rad_lighting"/>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RoomClimateType">
+    <xs:sequence>
+      <xs:element minOccurs="0" type="xs:float" name="set_temp_heat"/>
+      <xs:element minOccurs="0" type="xs:float" name="set_temp_cool"/>
+      <xs:element minOccurs="0" type="xs:float" name="temp_set_back"/>
+      <xs:element minOccurs="0" type="xs:float" name="min_temp_heat"/>
+      <xs:element minOccurs="0" type="xs:float" name="max_temp_cool"/>
+      <xs:element minOccurs="0" type="xs:float" name="rel_humidity"/>
+      <xs:element minOccurs="0" type="integerList" name="cooling_time"/>
+      <xs:element minOccurs="0" type="integerList" name="heating_time"/>
+      <xs:element minOccurs="0" type="xs:float" name="min_air_exchange"/>
+      <xs:element minOccurs="0" type="xs:float" name="rel_absence_ahu"/>
+      <xs:element minOccurs="0" type="xs:float" name="part_load_factor_ahu"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="InternalGainsType">
+    <xs:sequence>
+      <xs:element minOccurs="0" type="xs:float" name="persons"/>
+      <xs:element minOccurs="0" type="floatList" name="profile_persons"/>
+      <xs:element minOccurs="0" type="xs:float" name="machines"/>
+      <xs:element minOccurs="0" type="floatList" name="profile_machines"/>
+	  <xs:element minOccurs="0" type="xs:float" name="lighting_power"/>
+	  <xs:element minOccurs="0" type="floatList" name="profile_lighting"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AHUType">
+    <xs:sequence>
+      <xs:element minOccurs="0" type="xs:float" name="min_ahu"/>
+      <xs:element minOccurs="0" type="xs:float" name="max_ahu"/>
+      <xs:element minOccurs="0" type="xs:boolean" name="with_ahu"/>
+      <xs:element minOccurs="0" type="xs:boolean" name="use_constant_ach_rate"/>
+      <xs:element minOccurs="0" type="xs:float" name="base_ach"/>
+      <xs:element minOccurs="0" type="xs:float" name="max_user_ach"/>
+      <xs:element minOccurs="0" type="floatList" name="max_overheating_ach"/>
+      <xs:element minOccurs="0" type="floatList" name="max_summer_ach"/>
+      <xs:element minOccurs="0" type="floatList" name="winter_reduction"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BoundaryConditionsType">
+    <xs:sequence>
+      <xs:element minOccurs="0" type="xs:string" name="usage"/>
+      <xs:element minOccurs="0" type="xs:float" name="typical_length"/>
+      <xs:element minOccurs="0" type="xs:float" name="typical_width"/>
+      <xs:element minOccurs="0" type="UsageOperationTimeType" name="UsageOperationTime"/>
+      <xs:element minOccurs="0" type="LightingType" name="Lighting"/>
+      <xs:element minOccurs="0" type="RoomClimateType" name="RoomClimate"/>
+      <xs:element minOccurs="0" type="InternalGainsType" name="InternalGains"/>
+      <xs:element minOccurs="0" type="AHUType" name="AHU"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UseConditionsType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" type="BoundaryConditionsType" name="BoundaryConditions"/>
+    </xs:sequence>
+  </xs:complexType>
+    <xs:simpleType name="integerList">
+	<xs:list itemType="xs:integer"/>
+  </xs:simpleType>
+    <xs:simpleType name="floatList">
+	<xs:list itemType="xs:float"/>
+  </xs:simpleType>
+</xs:schema>

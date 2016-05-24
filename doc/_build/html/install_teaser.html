@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>How to install TEASER &mdash; TEASER 0.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TEASER 0.3.0 documentation" href="index.html" />
+    <link rel="next" title="examples" href="teaser.Examples.html" />
+    <link rel="prev" title="teaser" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Examples.html" title="examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="teaser"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How to install TEASER</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#deinstallation">Deinstallation</a></li>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">teaser</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Examples.html"
+                        title="next chapter">examples</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/install_teaser.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="how-to-install-teaser">
+<h1>How to install TEASER<a class="headerlink" href="#how-to-install-teaser" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>The best option to install TEASER is to clone the repository by using:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="p">[</span><span class="n">SSH</span><span class="o">-</span><span class="n">Key</span><span class="o">/</span><span class="n">Https</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>and then run:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="p">[</span><span class="n">Path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">Teaser</span><span class="o">/</span><span class="n">Clone</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>You need to have pip installed (see dependencies).</p>
+</div>
+<div class="section" id="deinstallation">
+<h2>Deinstallation<a class="headerlink" href="#deinstallation" title="Permalink to this headline">¶</a></h2>
+<p>The best option is not to uninstall TEASER at all:-). However, if you want to
+uninstall it, just use:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">uninstall</span> <span class="n">teaser</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>TEASER uses Python 2.7 &lt;= v &gt;=3.3. Further using a WinPython distribution is
+recommended (<a class="reference external" href="https://winpython.github.io/">https://winpython.github.io/</a>). WinPython comes along with a lot of
+Python packages (e.g. SciPy, NumPy, pip, PyQT, etc.) that are used in the
+TEASER code.</p>
+<p>In addition, TEASER requires some specific Python packages:</p>
+<ol class="arabic simple">
+<li>Mako: template Engine
+install on a python-enabled command line with <cite>pip install -U mako</cite></li>
+<li>PyXB: XML binding Engine
+install on a python-enabled command line with <cite>pip install -U pyxb</cite></li>
+<li>pytest: Unit Tests engine
+install on a python-enabled command line with <cite>pip install -U pytest</cite></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Examples.html" title="examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="teaser"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.3.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate, RWTH Aachen University,.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>

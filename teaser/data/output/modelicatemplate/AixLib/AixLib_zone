@@ -1,0 +1,118 @@
+record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.replace(" ", "")}"
+  extends AixLib.DataBase.Buildings.ZoneBaseRecord(
+    n = ${len(zone.tilt_wall)},
+    Heater_on = true,
+    Cooler_on = false,
+    l_cooler = ${zone.cooling_load},
+    RatioConvectiveHeatLighting = ${
+      zone.use_conditions.ratio_conv_rad_lighting},
+    zoneID = "${zone.name}",
+    usage = "${zone.use_conditions.usage}",
+    RoomArea = ${zone.area},
+    Vair = ${zone.volume},
+    alphaiwi = ${zone.alpha_comb_iw},
+    alphaowi = ${zone.alpha_comb_inner_ow},
+    alphaowo = ${zone.alpha_comb_outer_ow},
+    g = ${zone.weighted_g_value},
+    NrPeople = ${zone.use_conditions.persons},
+    NrPeopleMachines = ${zone.use_conditions.machines},
+    LightingPower = ${zone.use_conditions.lighting_power},
+    h_heater = ${zone.heating_load},
+    gsunblind = {${list_to_string(zone.g_sunblind_list)}},
+    Aw = {${list_to_string(zone.window_area_list)}},
+    withWindows = ${element_check(zone.windows)},
+    weightfactorswindow = {${list_to_string(zone.weightfactor_win)}},
+    weightfactorswall = {${list_to_string(zone.weightfactor_ow)}},
+    weightfactorground = ${list_to_string(zone.weightfactor_ground)},
+    orientationswallshorizontal = {${list_to_string(zone.tilt_wall)}},
+    Ai = ${zone.area_iw},
+    withInnerwalls = ${element_check(zone.inner_walls)},
+    R1i = ${zone.r1_iw},
+    C1i = ${zone.c1_iw},
+    RWin = ${zone.r1_win},
+    UWin = ${zone.ua_value_win/zone.area_win},
+    alphaConvWinInner = ${zone.alpha_conv_inner_win},
+    alphaConvWinOuter = ${zone.alpha_conv_outer_win},
+    Ao = ${zone.area_ow},
+    withOuterwalls = ${element_check(zone.outer_walls)},
+    R1o = ${zone.r1_ow},
+    RRest = ${zone.r_rest_ow},
+    C1o = ${zone.c1_ow},
+    ActivityTypePeople = ${zone.use_conditions.activity_type_persons},
+    RatioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
+    ActivityTypeMachines = ${zone.use_conditions.activity_type_machines},
+    RatioConvectiveHeatMachines = ${
+      zone.use_conditions.ratio_conv_rad_machines},
+    rhoair = ${zone.density_air},
+    cair = ${zone.heat_capac_air},
+    temperatureground = ${zone.t_ground},
+    Imax = ${zone.windows[0].shading_max_irr},
+    splitfac = ${zone.windows[0].a_conv},
+    epso = ${zone.ir_emissivity_outer_ow},
+    epsi = ${zone.ir_emissivity_inner_ow},
+    epsw = ${zone.ir_emissivity_win},
+    awin = ${zone.solar_absorp_win},
+    aowo = ${zone.solar_absorp_ow},
+    useConstantACHrate = ${str(get_true_false(
+      zone.use_conditions.use_constant_ach_rate))},
+    baseACH = ${zone.use_conditions.base_ach},
+    maxUserACH = ${zone.use_conditions.max_user_ach},
+    maxOverheatingACH = ${str(zone.use_conditions.max_overheating_ach).replace(
+      '[', '{').replace(']', '}')},
+    maxSummerACH = ${str(zone.use_conditions.max_summer_ach).replace(
+      '[', '{').replace(']', '}')},
+    winterReduction = ${str(zone.use_conditions.winter_reduction).replace(
+      '[', '{').replace(']', '}')},
+    withAHU = ${get_true_false(zone.use_conditions.with_ahu)},
+    minAHU = ${str(zone.use_conditions.min_ahu)},
+    maxAHU = ${str(zone.use_conditions.max_ahu)});
+
+
+
+end ${bldg.name}_${zone.name.replace(" ", "")};
+
+##get n
+<%def name="get_n(list)", filter="trim">
+  <%
+  n=0
+  for element in list:
+    if type(element).__name__ == "OuterWall" or type(element).__name__ == "Rooftop":
+      n += 1
+    else:
+      pass
+  return n
+  %>
+</%def>
+
+##list to string
+<%def name="list_to_string(list)", filter="trim">
+  <%
+  string_of_list = ""
+  for item in list:
+    string_of_list += str(item) + ", "
+  string_of_list = string_of_list[:-2]
+  return string_of_list
+  %>
+</%def>
+
+##check if element is existent
+<%def name="element_check(element)", filter ="trim">
+  <%
+  if len(element)!= 0:
+    return "true"
+  else:
+    return "false"
+  %>
+</%def>
+
+##get false
+<%def name="get_true_false(value)", filter="trim">
+  <%
+  if value == False:
+    return "false"
+  elif value == True:
+    return "true"
+  else:
+    return value
+  %>
+</%def>

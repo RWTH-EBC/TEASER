@@ -1,0 +1,2291 @@
+<?xml version="1.0" ?>
+<UseConditions>
+	<BoundaryConditions>
+		<usage>Single office</usage>
+		<typical_length>3.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.84</red_factor_visual>
+			<rel_absence>0.3</rel_absence>
+			<room_index>0.9</room_index>
+			<part_load_factor_lighting>0.7</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>4.0</min_air_exchange>
+			<rel_absence_ahu>0.3</rel_absence_ahu>
+			<part_load_factor_ahu>0.7</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>5.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>7.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>2.6</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Group Office (between 2 and 6 employees)</usage>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.92</red_factor_visual>
+			<rel_absence>0.3</rel_absence>
+			<room_index>1.35</room_index>
+			<part_load_factor_lighting>0.7</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>4.0</min_air_exchange>
+			<rel_absence_ahu>0.3</rel_absence_ahu>
+			<part_load_factor_ahu>0.7</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>5.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>7.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>2.6</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Open-plan Office (7 or more employees)</usage>
+		<typical_length>12.0</typical_length>
+		<typical_width>12.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.93</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>2.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>6.0</min_air_exchange>
+			<rel_absence_ahu>0.2</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>7.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>10.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>3.6</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Meeting, Conference, seminar</usage>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.93</red_factor_visual>
+			<rel_absence>0.5</rel_absence>
+			<room_index>1.25</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>15.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>0.5</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>24.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>2.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.6 1.0 0.4 0.1 0.1 0.6 1.0 0.4 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>12.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Main Hall, Reception</usage>
+		<typical_length>10.0</typical_length>
+		<typical_width>10.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>200.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.87</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>1.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>2.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>6.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>4.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.4 0.6 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>4.4</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>2.5</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Retail, department store</usage>
+		<typical_length>20.0</typical_length>
+		<typical_width>20.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>8 20</usage_time>
+			<daily_usage_hours>12</daily_usage_hours>
+			<yearly_usage_days>300</yearly_usage_days>
+			<yearly_usage_hours_day>3009</yearly_usage_hours_day>
+			<yearly_usage_hours_night>591</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>14</daily_operation_ahu_cooling>
+			<yearly_heating_days>300</yearly_heating_days>
+			<yearly_ahu_days>300</yearly_ahu_days>
+			<yearly_cooling_days>300</yearly_cooling_days>
+			<daily_operation_heating>14</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.93</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>2.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 20</cooling_time>
+			<heating_time>6 20</heating_time>
+			<min_air_exchange>4.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>14.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.4 0.4 0.6 0.6 0.6 0.4 0.4 0.6 0.8 0.6 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>2.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>9.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Retail with cooling</usage>
+		<typical_length>20.0</typical_length>
+		<typical_width>20.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>8 20</usage_time>
+			<daily_usage_hours>12</daily_usage_hours>
+			<yearly_usage_days>300</yearly_usage_days>
+			<yearly_usage_hours_day>3009</yearly_usage_hours_day>
+			<yearly_usage_hours_night>591</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>14</daily_operation_ahu_cooling>
+			<yearly_heating_days>300</yearly_heating_days>
+			<yearly_ahu_days>300</yearly_ahu_days>
+			<yearly_cooling_days>300</yearly_cooling_days>
+			<daily_operation_heating>14</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.93</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>2.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 20</cooling_time>
+			<heating_time>6 20</heating_time>
+			<min_air_exchange>4.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>14.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.4 0.4 0.6 0.6 0.6 0.4 0.4 0.6 0.8 0.6 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>5.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>9.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Class room (school), group room (kindergarden)</usage>
+		<typical_length>10.0</typical_length>
+		<typical_width>10.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>8 15</usage_time>
+			<daily_usage_hours>7</daily_usage_hours>
+			<yearly_usage_days>200</yearly_usage_days>
+			<yearly_usage_hours_day>1400</yearly_usage_hours_day>
+			<yearly_usage_hours_night>0</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>9</daily_operation_ahu_cooling>
+			<yearly_heating_days>200</yearly_heating_days>
+			<yearly_ahu_days>200</yearly_ahu_days>
+			<yearly_cooling_days>200</yearly_cooling_days>
+			<daily_operation_heating>9</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.97</red_factor_visual>
+			<rel_absence>0.25</rel_absence>
+			<room_index>2.0</room_index>
+			<part_load_factor_lighting>0.9</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 15</cooling_time>
+			<heating_time>6 15</heating_time>
+			<min_air_exchange>10.0</min_air_exchange>
+			<rel_absence_ahu>0.25</rel_absence_ahu>
+			<part_load_factor_ahu>0.9</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>20.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>4.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.8 0.8 0.4 0.2 0.4 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Lecture hall, auditorium</usage>
+		<typical_length>20.0</typical_length>
+		<typical_width>10.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>8 18</usage_time>
+			<daily_usage_hours>10</daily_usage_hours>
+			<yearly_usage_days>150</yearly_usage_days>
+			<yearly_usage_hours_day>1408</yearly_usage_hours_day>
+			<yearly_usage_hours_night>92</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>12</daily_operation_ahu_cooling>
+			<yearly_heating_days>150</yearly_heating_days>
+			<yearly_ahu_days>150</yearly_ahu_days>
+			<yearly_cooling_days>150</yearly_cooling_days>
+			<daily_operation_heating>12</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.92</red_factor_visual>
+			<rel_absence>0.25</rel_absence>
+			<room_index>2.5</room_index>
+			<part_load_factor_lighting>0.7</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 18</cooling_time>
+			<heating_time>6 18</heating_time>
+			<min_air_exchange>30.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>0.6</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>70.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>4.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>15.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Bed room</usage>
+		<typical_length>4.0</typical_length>
+		<typical_width>4.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>0 23</usage_time>
+			<daily_usage_hours>24</daily_usage_hours>
+			<yearly_usage_days>365</yearly_usage_days>
+			<yearly_usage_hours_day>4407</yearly_usage_hours_day>
+			<yearly_usage_hours_night>4353</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>24</daily_operation_ahu_cooling>
+			<yearly_heating_days>365</yearly_heating_days>
+			<yearly_ahu_days>365</yearly_ahu_days>
+			<yearly_cooling_days>365</yearly_cooling_days>
+			<daily_operation_heating>24</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>1.5</room_index>
+			<part_load_factor_lighting>0.5</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>0 23</cooling_time>
+			<heating_time>0 23</heating_time>
+			<min_air_exchange>5.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.8</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>5.0</persons>
+			<profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0</profile_persons>
+			<machines>4.0</machines>
+			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.2 0.8 0.6 0.4 0.2 0.2</profile_machines>
+			<lighting_power>4.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Hotel room</usage>
+		<typical_length>4.0</typical_length>
+		<typical_width>4.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>21 8</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>365</yearly_usage_days>
+			<yearly_usage_hours_day>743</yearly_usage_hours_day>
+			<yearly_usage_hours_night>3272</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>24</daily_operation_ahu_cooling>
+			<yearly_heating_days>365</yearly_heating_days>
+			<yearly_ahu_days>365</yearly_ahu_days>
+			<yearly_cooling_days>365</yearly_cooling_days>
+			<daily_operation_heating>24</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>200.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.25</rel_absence>
+			<room_index>1.25</room_index>
+			<part_load_factor_lighting>0.3</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>0 23</cooling_time>
+			<heating_time>0 23</heating_time>
+			<min_air_exchange>3.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>0.5</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>7.0</persons>
+			<profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 0.8 0.4 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.6 0.8 1.0</profile_persons>
+			<machines>4.0</machines>
+			<profile_machines>1.0 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.4 0.6 0.8 1.0</profile_machines>
+			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Canteen</usage>
+		<typical_length>20.0</typical_length>
+		<typical_width>20.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>8 15</usage_time>
+			<daily_usage_hours>7</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>1750</yearly_usage_hours_day>
+			<yearly_usage_hours_night>0</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>9</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>9</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>200.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.97</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>2.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 15</cooling_time>
+			<heating_time>6 15</heating_time>
+			<min_air_exchange>18.0</min_air_exchange>
+			<rel_absence_ahu>0.7</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>59.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.2 0.4 1.0 0.4 0.2 0.4 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>2.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 0.6 1.0 1.0 0.8 0.4 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>6.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>18.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Restaurant</usage>
+		<typical_length>12.0</typical_length>
+		<typical_width>12.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>10 0</usage_time>
+			<daily_usage_hours>14</daily_usage_hours>
+			<yearly_usage_days>300</yearly_usage_days>
+			<yearly_usage_hours_day>2411</yearly_usage_hours_day>
+			<yearly_usage_hours_night>1789</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>16</daily_operation_ahu_cooling>
+			<yearly_heating_days>300</yearly_heating_days>
+			<yearly_ahu_days>300</yearly_ahu_days>
+			<yearly_cooling_days>300</yearly_cooling_days>
+			<daily_operation_heating>16</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>200.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>2.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>8 0</cooling_time>
+			<heating_time>8 0</heating_time>
+			<min_air_exchange>18.0</min_air_exchange>
+			<rel_absence_ahu>0.6</rel_absence_ahu>
+			<part_load_factor_ahu>0.7</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>59.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.2 0.2 0.2 0.8 0.4 0.0 0.0 0.0 0.0 0.2 0.2 0.4 0.8 0.2 0.2</profile_persons>
+			<machines>2.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 0.4 1.0 1.0 0.1 0.1 0.1 0.1 0.4 0.4 0.4 1.0 0.8 0.4</profile_machines>
+			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Kitchen in non-residential buildings</usage>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>10 23</usage_time>
+			<daily_usage_hours>13</daily_usage_hours>
+			<yearly_usage_days>300</yearly_usage_days>
+			<yearly_usage_hours_day>2411</yearly_usage_hours_day>
+			<yearly_usage_hours_night>1489</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>15</daily_operation_ahu_cooling>
+			<yearly_heating_days>300</yearly_heating_days>
+			<yearly_ahu_days>300</yearly_ahu_days>
+			<yearly_cooling_days>300</yearly_cooling_days>
+			<daily_operation_heating>15</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.96</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>1.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>8 23</cooling_time>
+			<heating_time>8 23</heating_time>
+			<min_air_exchange>90.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>8.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.4 0.8 1.0 1.0 0.6 0.4 0.2 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>300.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.2 0.8 1.0 1.0 0.6 0.4 0.2 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>12.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>70.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Kitchen - preparations, storage</usage>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>10 23</usage_time>
+			<daily_usage_hours>13</daily_usage_hours>
+			<yearly_usage_days>300</yearly_usage_days>
+			<yearly_usage_hours_day>2411</yearly_usage_hours_day>
+			<yearly_usage_hours_night>1489</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>15</daily_operation_ahu_cooling>
+			<yearly_heating_days>300</yearly_heating_days>
+			<yearly_ahu_days>300</yearly_ahu_days>
+			<yearly_cooling_days>300</yearly_cooling_days>
+			<daily_operation_heating>15</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.5</rel_absence>
+			<room_index>1.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>8 23</cooling_time>
+			<heating_time>8 23</heating_time>
+			<min_air_exchange>15.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>8.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.4 0.4 1.0 1.0 0.6 0.4 0.0 0.0 0.0 0.4 0.8 1.0 0.4 0.2 0.0</profile_persons>
+			<machines>30.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.4 0.4 0.4 1.0 1.0 0.6 0.4 0.1 0.1 0.1 0.4 0.8 1.0 0.4 0.2 0.1</profile_machines>
+			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>WC and sanitary rooms in non-residential buildings</usage>
+		<typical_length>3.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>200.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.9</rel_absence>
+			<room_index>0.8</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>15.0</min_air_exchange>
+			<rel_absence_ahu>0.7</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>0.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>11.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>8.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Further common rooms</usage>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.93</red_factor_visual>
+			<rel_absence>0.5</rel_absence>
+			<room_index>1.25</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>7.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>0.8</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>23.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>2.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>6.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Auxiliary areas (without common rooms)</usage>
+		<typical_length>3.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>100.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.9</rel_absence>
+			<room_index>1.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>0.15</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>0.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>6.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Traffic area</usage>
+		<typical_length>2.0</typical_length>
+		<typical_width>12.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>100.0</maintained_illuminace>
+			<usage_level_height>0.2</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.8</rel_absence>
+			<room_index>0.8</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>0.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>0.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>7.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>2.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Stock, technical equipment, archives</usage>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>100.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.98</rel_absence>
+			<room_index>1.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>0.15</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>0.0</persons>
+			<profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
+			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.5</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Data center</usage>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 23</usage_time>
+			<daily_usage_hours>24</daily_usage_hours>
+			<yearly_usage_days>365</yearly_usage_days>
+			<yearly_usage_hours_day>4407</yearly_usage_hours_day>
+			<yearly_usage_hours_night>4353</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>24</daily_operation_ahu_cooling>
+			<yearly_heating_days>365</yearly_heating_days>
+			<yearly_ahu_days>365</yearly_ahu_days>
+			<yearly_cooling_days>365</yearly_cooling_days>
+			<daily_operation_heating>24</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.96</red_factor_visual>
+			<rel_absence>0.5</rel_absence>
+			<room_index>1.5</room_index>
+			<part_load_factor_lighting>0.5</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>0 23</cooling_time>
+			<heating_time>0 23</heating_time>
+			<min_air_exchange>1.3</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>3.0</persons>
+			<profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0</profile_persons>
+			<machines>150.0</machines>
+			<profile_machines>1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0</profile_machines>
+			<lighting_power>7.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>130.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Commercial and industrial Halls - heavy work, standing activity</usage>
+		<typical_length>20.0</typical_length>
+		<typical_width>20.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 16</usage_time>
+			<daily_usage_hours>9</daily_usage_hours>
+			<yearly_usage_days>230</yearly_usage_days>
+			<yearly_usage_hours_day>2018</yearly_usage_hours_day>
+			<yearly_usage_hours_night>52</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>10</daily_operation_ahu_cooling>
+			<yearly_heating_days>230</yearly_heating_days>
+			<yearly_ahu_days>230</yearly_ahu_days>
+			<yearly_cooling_days>230</yearly_cooling_days>
+			<daily_operation_heating>10</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.85</red_factor_visual>
+			<rel_absence>0.1</rel_absence>
+			<room_index>2.5</room_index>
+			<part_load_factor_lighting>0.9</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>288.15</set_temp_heat>
+			<set_temp_cool>301.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>288.15</min_temp_heat>
+			<max_temp_cool>303.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 16</cooling_time>
+			<heating_time>6 16</heating_time>
+			<min_air_exchange>3.5</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>5.0</persons>
+			<profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_persons>
+			<machines>35.0</machines>
+			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
+			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>10.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Commercial and industrial Halls - medium work, standing activity</usage>
+		<typical_length>20.0</typical_length>
+		<typical_width>20.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 16</usage_time>
+			<daily_usage_hours>9</daily_usage_hours>
+			<yearly_usage_days>230</yearly_usage_days>
+			<yearly_usage_hours_day>2018</yearly_usage_hours_day>
+			<yearly_usage_hours_night>52</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>10</daily_operation_ahu_cooling>
+			<yearly_heating_days>230</yearly_heating_days>
+			<yearly_ahu_days>230</yearly_ahu_days>
+			<yearly_cooling_days>230</yearly_cooling_days>
+			<daily_operation_heating>10</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>400.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.85</red_factor_visual>
+			<rel_absence>0.1</rel_absence>
+			<room_index>2.5</room_index>
+			<part_load_factor_lighting>0.9</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>290.15</set_temp_heat>
+			<set_temp_cool>299.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>288.15</min_temp_heat>
+			<max_temp_cool>301.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 16</cooling_time>
+			<heating_time>6 16</heating_time>
+			<min_air_exchange>2.5</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>4.0</persons>
+			<profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_persons>
+			<machines>35.0</machines>
+			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
+			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>10.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Commercial and industrial Halls - light work, standing activity</usage>
+		<typical_length>20.0</typical_length>
+		<typical_width>20.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 16</usage_time>
+			<daily_usage_hours>9</daily_usage_hours>
+			<yearly_usage_days>230</yearly_usage_days>
+			<yearly_usage_hours_day>2018</yearly_usage_hours_day>
+			<yearly_usage_hours_night>52</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>10</daily_operation_ahu_cooling>
+			<yearly_heating_days>230</yearly_heating_days>
+			<yearly_ahu_days>230</yearly_ahu_days>
+			<yearly_cooling_days>230</yearly_cooling_days>
+			<daily_operation_heating>10</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.85</red_factor_visual>
+			<rel_absence>0.1</rel_absence>
+			<room_index>2.5</room_index>
+			<part_load_factor_lighting>0.9</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>293.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>291.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 16</cooling_time>
+			<heating_time>6 16</heating_time>
+			<min_air_exchange>1.5</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>3.0</persons>
+			<profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_persons>
+			<machines>35.0</machines>
+			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
+			<lighting_power>14.7</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>10.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Spectator area (theater and event venues)</usage>
+		<typical_length>20.0</typical_length>
+		<typical_width>10.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>19 23</usage_time>
+			<daily_usage_hours>4</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>59</yearly_usage_hours_day>
+			<yearly_usage_hours_night>941</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>6</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>6</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>200.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.97</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>4.0</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>17 23</cooling_time>
+			<heating_time>17 23</heating_time>
+			<min_air_exchange>40.0</min_air_exchange>
+			<rel_absence_ahu>0.7</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>93.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</profile_machines>
+			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Foyer (theater and event venues)</usage>
+		<typical_length>12.0</typical_length>
+		<typical_width>12.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>19 23</usage_time>
+			<daily_usage_hours>4</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>59</yearly_usage_hours_day>
+			<yearly_usage_hours_night>941</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>6</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>6</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.0</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.5</rel_absence>
+			<room_index>4.0</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>17 23</cooling_time>
+			<heating_time>17 23</heating_time>
+			<min_air_exchange>25.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>88.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.4 0.6 0.8 0.8 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>4.4</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Stage (theater and event venues)</usage>
+		<typical_length>10.0</typical_length>
+		<typical_width>5.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>13 23</usage_time>
+			<daily_usage_hours>10</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>1259</yearly_usage_hours_day>
+			<yearly_usage_hours_night>1241</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>12</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>12</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>1000.0</maintained_illuminace>
+			<usage_level_height>0.0</usage_level_height>
+			<red_factor_visual>0.9</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>2.5</room_index>
+			<part_load_factor_lighting>0.6</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>11 23</cooling_time>
+			<heating_time>11 23</heating_time>
+			<min_air_exchange>0.3</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>0.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 0.6 0.6 0.6 0.6 0.6 1.0 1.0 1.0 0.6 0.2</profile_machines>
+			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Exhibition, congress</usage>
+		<typical_length>40.0</typical_length>
+		<typical_width>20.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>9 18</usage_time>
+			<daily_usage_hours>9</daily_usage_hours>
+			<yearly_usage_days>150</yearly_usage_days>
+			<yearly_usage_hours_day>1258</yearly_usage_hours_day>
+			<yearly_usage_hours_night>92</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>11</daily_operation_ahu_cooling>
+			<yearly_heating_days>150</yearly_heating_days>
+			<yearly_ahu_days>150</yearly_ahu_days>
+			<yearly_cooling_days>150</yearly_cooling_days>
+			<daily_operation_heating>11</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.93</red_factor_visual>
+			<rel_absence>0.5</rel_absence>
+			<room_index>5.0</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>7 18</cooling_time>
+			<heating_time>7 18</heating_time>
+			<min_air_exchange>7.0</min_air_exchange>
+			<rel_absence_ahu>0.7</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>23.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.0</profile_persons>
+			<machines>2.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.1</profile_machines>
+			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Exhibition room and museum conservational demands</usage>
+		<typical_length>20.0</typical_length>
+		<typical_width>20.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>10 18</usage_time>
+			<daily_usage_hours>8</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>1846</yearly_usage_hours_day>
+			<yearly_usage_hours_night>154</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>24</daily_operation_ahu_cooling>
+			<yearly_heating_days>365</yearly_heating_days>
+			<yearly_ahu_days>365</yearly_ahu_days>
+			<yearly_cooling_days>365</yearly_cooling_days>
+			<daily_operation_heating>24</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>200.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.88</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>2.0</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>0 23</cooling_time>
+			<heating_time>0 23</heating_time>
+			<min_air_exchange>2.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>7.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.6 0.6 0.6 1.0 1.0 0.6 0.2 0.1</profile_machines>
+			<lighting_power>10.8</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Library - reading room</usage>
+		<typical_length>20.0</typical_length>
+		<typical_width>20.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>8 20</usage_time>
+			<daily_usage_hours>12</daily_usage_hours>
+			<yearly_usage_days>300</yearly_usage_days>
+			<yearly_usage_hours_day>3009</yearly_usage_hours_day>
+			<yearly_usage_hours_night>591</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>14</daily_operation_ahu_cooling>
+			<yearly_heating_days>300</yearly_heating_days>
+			<yearly_ahu_days>300</yearly_ahu_days>
+			<yearly_cooling_days>300</yearly_cooling_days>
+			<daily_operation_heating>14</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>0.88</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>1.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 20</cooling_time>
+			<heating_time>6 20</heating_time>
+			<min_air_exchange>8.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>28.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Library - open stacks</usage>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>8 20</usage_time>
+			<daily_usage_hours>12</daily_usage_hours>
+			<yearly_usage_days>300</yearly_usage_days>
+			<yearly_usage_hours_day>3009</yearly_usage_hours_day>
+			<yearly_usage_hours_night>591</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>14</daily_operation_ahu_cooling>
+			<yearly_heating_days>300</yearly_heating_days>
+			<yearly_ahu_days>300</yearly_ahu_days>
+			<yearly_cooling_days>300</yearly_cooling_days>
+			<daily_operation_heating>14</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>200.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>1.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 20</cooling_time>
+			<heating_time>6 20</heating_time>
+			<min_air_exchange>2.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>7.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Library - magazine and depot</usage>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>8 20</usage_time>
+			<daily_usage_hours>12</daily_usage_hours>
+			<yearly_usage_days>300</yearly_usage_days>
+			<yearly_usage_hours_day>3009</yearly_usage_hours_day>
+			<yearly_usage_hours_night>591</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>14</daily_operation_ahu_cooling>
+			<yearly_heating_days>300</yearly_heating_days>
+			<yearly_ahu_days>300</yearly_ahu_days>
+			<yearly_cooling_days>300</yearly_cooling_days>
+			<daily_operation_heating>14</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>100.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.9</rel_absence>
+			<room_index>1.5</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 20</cooling_time>
+			<heating_time>6 20</heating_time>
+			<min_air_exchange>3.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>1.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>0.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>6.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Gym (without spectator area)</usage>
+		<typical_length>1.0</typical_length>
+		<typical_width>1.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>8 23</usage_time>
+			<daily_usage_hours>15</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2509</yearly_usage_hours_day>
+			<yearly_usage_hours_night>1241</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>17</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>17</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.0</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.3</rel_absence>
+			<room_index>2.0</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 23</cooling_time>
+			<heating_time>6 23</heating_time>
+			<min_air_exchange>3.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>0.9</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>6.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.4 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.1 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
+			<lighting_power>10.5</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Parking garages (office and private usage)</usage>
+		<typical_length>50.0</typical_length>
+		<typical_width>50.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>0</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>75.0</maintained_illuminace>
+			<usage_level_height>0.2</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.95</rel_absence>
+			<room_index>2.0</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>8.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>0.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Parking garages (public usage)</usage>
+		<typical_length>100.0</typical_length>
+		<typical_width>50.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>9 0</usage_time>
+			<daily_usage_hours>15</daily_usage_hours>
+			<yearly_usage_days>365</yearly_usage_days>
+			<yearly_usage_hours_day>3298</yearly_usage_hours_day>
+			<yearly_usage_hours_night>2177</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>17</daily_operation_ahu_cooling>
+			<yearly_heating_days>365</yearly_heating_days>
+			<yearly_ahu_days>365</yearly_ahu_days>
+			<yearly_cooling_days>365</yearly_cooling_days>
+			<daily_operation_heating>0</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>75.0</maintained_illuminace>
+			<usage_level_height>0.2</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.8</rel_absence>
+			<room_index>4.0</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>7 0</cooling_time>
+			<heating_time>0 0</heating_time>
+			<min_air_exchange>16.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>0.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>2.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Sauna area</usage>
+		<typical_length>1.0</typical_length>
+		<typical_width>1.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>10 22</usage_time>
+			<daily_usage_hours>12</daily_usage_hours>
+			<yearly_usage_days>365</yearly_usage_days>
+			<yearly_usage_hours_day>2933</yearly_usage_hours_day>
+			<yearly_usage_hours_night>1447</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>14</daily_operation_ahu_cooling>
+			<yearly_heating_days>365</yearly_heating_days>
+			<yearly_ahu_days>365</yearly_ahu_days>
+			<yearly_cooling_days>365</yearly_cooling_days>
+			<daily_operation_heating>14</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>200.0</maintained_illuminace>
+			<usage_level_height>0.0</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>1.0</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>297.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>296.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>8 22</cooling_time>
+			<heating_time>8 22</heating_time>
+			<min_air_exchange>15.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>6.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.5 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.0</profile_persons>
+			<machines>50.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
+			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Exercise room</usage>
+		<typical_length>1.0</typical_length>
+		<typical_width>1.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>8 23</usage_time>
+			<daily_usage_hours>15</daily_usage_hours>
+			<yearly_usage_days>365</yearly_usage_days>
+			<yearly_usage_hours_day>3663</yearly_usage_hours_day>
+			<yearly_usage_hours_night>1812</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>17</daily_operation_ahu_cooling>
+			<yearly_heating_days>365</yearly_heating_days>
+			<yearly_ahu_days>365</yearly_ahu_days>
+			<yearly_cooling_days>365</yearly_cooling_days>
+			<daily_operation_heating>17</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.0</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>2.0</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>293.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>291.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 23</cooling_time>
+			<heating_time>6 23</heating_time>
+			<min_air_exchange>12.0</min_air_exchange>
+			<rel_absence_ahu>0.5</rel_absence_ahu>
+			<part_load_factor_ahu>0.9</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>22.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.5 0.8 1.0 1.0 0.8 0.0 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.0</profile_persons>
+			<machines>2.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.5 0.8 1.0 1.0 0.8 0.1 0.8 1.0 1.0 0.8 0.5 0.8 0.8 0.8 0.5 0.5 0.1</profile_machines>
+			<lighting_power>9.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Laboratory</usage>
+		<typical_length>1.0</typical_length>
+		<typical_width>1.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>24</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>1.0</usage_level_height>
+			<red_factor_visual>0.92</red_factor_visual>
+			<rel_absence>0.3</rel_absence>
+			<room_index>1.25</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>0 23</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>25.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>6.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>18.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>24.0</min_ahu>
+			<max_ahu>48.0</max_ahu>
+			<with_ahu>true</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Examination- or treatment room</usage>
+		<typical_length>1.0</typical_length>
+		<typical_width>1.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>7 18</usage_time>
+			<daily_usage_hours>11</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2543</yearly_usage_hours_day>
+			<yearly_usage_hours_night>207</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>13</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>13</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>1.2</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>5 18</cooling_time>
+			<heating_time>5 18</heating_time>
+			<min_air_exchange>10.0</min_air_exchange>
+			<rel_absence_ahu>0.3</rel_absence_ahu>
+			<part_load_factor_ahu>0.7</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>12.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>7.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Special care area</usage>
+		<typical_length>1.0</typical_length>
+		<typical_width>1.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>0 23</usage_time>
+			<daily_usage_hours>24</daily_usage_hours>
+			<yearly_usage_days>365</yearly_usage_days>
+			<yearly_usage_hours_day>4407</yearly_usage_hours_day>
+			<yearly_usage_hours_night>4353</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>24</daily_operation_ahu_cooling>
+			<yearly_heating_days>365</yearly_heating_days>
+			<yearly_ahu_days>365</yearly_ahu_days>
+			<yearly_cooling_days>365</yearly_cooling_days>
+			<daily_operation_heating>24</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>300.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>1.2</room_index>
+			<part_load_factor_lighting>0.8</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>297.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>295.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>0 23</cooling_time>
+			<heating_time>0 23</heating_time>
+			<min_air_exchange>30.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>6.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>10.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.2 0.6 1.0 1.0 0.2 0.2 1.0 1.0 0.6 0.2 0.1 0.1 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>14.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Corridors in the general care area</usage>
+		<typical_length>1.0</typical_length>
+		<typical_width>1.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>0 23</usage_time>
+			<daily_usage_hours>24</daily_usage_hours>
+			<yearly_usage_days>365</yearly_usage_days>
+			<yearly_usage_hours_day>4407</yearly_usage_hours_day>
+			<yearly_usage_hours_night>4353</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>24</daily_operation_ahu_cooling>
+			<yearly_heating_days>365</yearly_heating_days>
+			<yearly_ahu_days>365</yearly_ahu_days>
+			<yearly_cooling_days>365</yearly_cooling_days>
+			<daily_operation_heating>24</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>125.0</maintained_illuminace>
+			<usage_level_height>0.2</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.8</rel_absence>
+			<room_index>1.0</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>0 23</cooling_time>
+			<heating_time>0 23</heating_time>
+			<min_air_exchange>10.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>0.0</persons>
+			<profile_persons>0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.2 0.4 0.6 0.8 0.8 0.4 0.6 0.8 0.8 0.4 0.2 0.0 0.0 0.0 0.0 0.0 0.0</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.1 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.1 0.1 0.1 0.1 0.1</profile_machines>
+			<lighting_power>14.1</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Medical and therapeutic practices</usage>
+		<typical_length>1.0</typical_length>
+		<typical_width>1.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>8 18</usage_time>
+			<daily_usage_hours>10</daily_usage_hours>
+			<yearly_usage_days>250</yearly_usage_days>
+			<yearly_usage_hours_day>2346</yearly_usage_hours_day>
+			<yearly_usage_hours_night>154</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>12</daily_operation_ahu_cooling>
+			<yearly_heating_days>250</yearly_heating_days>
+			<yearly_ahu_days>250</yearly_ahu_days>
+			<yearly_cooling_days>250</yearly_cooling_days>
+			<daily_operation_heating>12</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>500.0</maintained_illuminace>
+			<usage_level_height>0.8</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.0</rel_absence>
+			<room_index>1.2</room_index>
+			<part_load_factor_lighting>1.0</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>295.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>6 18</cooling_time>
+			<heating_time>6 18</heating_time>
+			<min_air_exchange>10.0</min_air_exchange>
+			<rel_absence_ahu>0.3</rel_absence_ahu>
+			<part_load_factor_ahu>0.7</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>8.0</persons>
+			<profile_persons>0.2 0.2 0.2 0.2 0.2 0.2 0.4 1.0 0.6 0.6 0.6 0.6 1.0 0.6 0.6 0.6 0.6 1.0 0.4 0.2 0.2 0.2 0.2 0.2</profile_persons>
+			<machines>5.0</machines>
+			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.2 0.4 1.0 0.6 0.6 0.6 0.6 1.0 0.6 0.6 0.6 0.6 1.0 0.4 0.2 0.2 0.2 0.2 0.2</profile_machines>
+			<lighting_power>15.9</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Storehouse, logistics building</usage>
+		<typical_length>1.0</typical_length>
+		<typical_width>1.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>0 23</usage_time>
+			<daily_usage_hours>24</daily_usage_hours>
+			<yearly_usage_days>365</yearly_usage_days>
+			<yearly_usage_hours_day>4407</yearly_usage_hours_day>
+			<yearly_usage_hours_night>4353</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>24</daily_operation_ahu_cooling>
+			<yearly_heating_days>365</yearly_heating_days>
+			<yearly_ahu_days>365</yearly_ahu_days>
+			<yearly_cooling_days>365</yearly_cooling_days>
+			<daily_operation_heating>24</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>150.0</maintained_illuminace>
+			<usage_level_height>0.0</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.6</rel_absence>
+			<room_index>2.4</room_index>
+			<part_load_factor_lighting>0.4</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.9</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>285.15</set_temp_heat>
+			<set_temp_cool>299.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>285.15</min_temp_heat>
+			<max_temp_cool>301.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>0 23</cooling_time>
+			<heating_time>0 23</heating_time>
+			<min_air_exchange>1.0</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>0.0</persons>
+			<profile_persons>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_persons>
+			<machines>0.0</machines>
+			<profile_machines>0.2 0.2 0.2 0.2 0.2 0.5 0.8 1.0 1.0 0.8 1.0 0.5 0.8 1.0 1.0 0.8 0.8 0.8 0.5 0.5 0.5 0.5 0.2 0.2</profile_machines>
+			<lighting_power>11.3</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.0</min_ahu>
+			<max_ahu>0.0</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+	<BoundaryConditions>
+		<usage>Living</usage>
+		<typical_length>3.0</typical_length>
+		<typical_width>6.0</typical_width>
+		<UsageOperationTime>
+			<usage_time>0 23</usage_time>
+			<daily_usage_hours>24</daily_usage_hours>
+			<yearly_usage_days>365</yearly_usage_days>
+			<yearly_usage_hours_day>4000</yearly_usage_hours_day>
+			<yearly_usage_hours_night>4000</yearly_usage_hours_night>
+			<daily_operation_ahu_cooling>24</daily_operation_ahu_cooling>
+			<yearly_heating_days>365</yearly_heating_days>
+			<yearly_ahu_days>365</yearly_ahu_days>
+			<yearly_cooling_days>365</yearly_cooling_days>
+			<daily_operation_heating>24</daily_operation_heating>
+		</UsageOperationTime>
+		<Lighting>
+			<maintained_illuminace>150.0</maintained_illuminace>
+			<usage_level_height>0.0</usage_level_height>
+			<red_factor_visual>1.0</red_factor_visual>
+			<rel_absence>0.6</rel_absence>
+			<room_index>2.4</room_index>
+			<part_load_factor_lighting>0.4</part_load_factor_lighting>
+			<ratio_conv_rad_lighting>0.5</ratio_conv_rad_lighting>
+		</Lighting>
+		<RoomClimate>
+			<set_temp_heat>294.15</set_temp_heat>
+			<set_temp_cool>297.15</set_temp_cool>
+			<temp_set_back>4.0</temp_set_back>
+			<min_temp_heat>293.15</min_temp_heat>
+			<max_temp_cool>299.15</max_temp_cool>
+			<rel_humidity>0.0</rel_humidity>
+			<cooling_time>0 23</cooling_time>
+			<heating_time>0 23</heating_time>
+			<min_air_exchange>0.5</min_air_exchange>
+			<rel_absence_ahu>0.0</rel_absence_ahu>
+			<part_load_factor_ahu>0.0</part_load_factor_ahu>
+		</RoomClimate>
+		<InternalGains>
+			<persons>1.5</persons>
+			<profile_persons>1.0 1.0 1.0 1.0 1.0 1.0 0.8 0.6 0.4 0.4 0.4 0.6 0.8 0.6 0.4 0.4 0.6 0.8 0.8 0.8 0.8 1.0 1.0 1.0</profile_persons>
+			<machines>2.0</machines>
+			<profile_machines>0.1 0.1 0.1 0.1 0.1 0.1 0.5 1.0 0.5 0.5 0.5 1.0 1.0 0.5 0.5 0.5 1.0 1.0 1.0 1.0 0.5 0.5 0.5 0.1</profile_machines>
+			<lighting_power>7.0</lighting_power>
+			<profile_lighting>0.0 0.0 0.0 0.0 0.0 0.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 0.0 0.0</profile_lighting>
+		</InternalGains>
+		<AHU>
+			<min_ahu>0.3</min_ahu>
+			<max_ahu>0.6</max_ahu>
+			<with_ahu>false</with_ahu>
+		</AHU>
+	</BoundaryConditions>
+</UseConditions>

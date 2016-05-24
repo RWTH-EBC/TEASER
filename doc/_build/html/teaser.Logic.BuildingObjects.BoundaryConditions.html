@@ -1,0 +1,379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>boundaryconditions &mdash; TEASER 0.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="TEASER 0.3.0 documentation" href="index.html" />
+    <link rel="up" title="buildingobjects" href="teaser.Logic.BuildingObjects.html" />
+    <link rel="next" title="buildingphysics" href="teaser.Logic.BuildingObjects.BuildingPhysics.html" />
+    <link rel="prev" title="buildingobjects" href="teaser.Logic.BuildingObjects.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.BuildingPhysics.html" title="buildingphysics"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.html" title="buildingobjects"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >teaser package structure</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" accesskey="U">buildingobjects</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">boundaryconditions</a><ul>
+<li><a class="reference internal" href="#useconditionsoffice18599-module">UseConditionsOffice18599 module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.html"
+                        title="previous chapter">buildingobjects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.BuildingPhysics.html"
+                        title="next chapter">buildingphysics</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Logic.BuildingObjects.BoundaryConditions.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="boundaryconditions">
+<h1>boundaryconditions<a class="headerlink" href="#boundaryconditions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="useconditionsoffice18599-module">
+<h2>UseConditionsOffice18599 module<a class="headerlink" href="#useconditionsoffice18599-module" title="Permalink to this headline">¶</a></h2>
+<p><strong>Description</strong></p>
+<p>The UseConditionsOffice18599 module contains the useconditions for the
+typebuildings according to the DIN V 18599 [DINV1859910] and the SIA 2024 [SwissSocietyofEngineersandArchitects.March2006].
+In detail the attributes are structured in the following sections:</p>
+<ul class="simple">
+<li>Usage and operation times</li>
+<li>Lighting (The hourly profiles here are based on the usage and operation times)</li>
+<li>Room climate</li>
+<li>Internal gains</li>
+<li>Misc</li>
+</ul>
+<span class="target" id="module-teaser.logic.buildingobjects.boundaryconditions.boundaryconditions"></span><p>UseConditions18599</p>
+<p>This module is a container for UseConditions following 18599 and SIA</p>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.boundaryconditions.boundaryconditions.BoundaryConditions">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.boundaryconditions.boundaryconditions.</code><code class="descname">BoundaryConditions</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.boundaryconditions.boundaryconditions.BoundaryConditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.Logic.BuildingObjects.html#teaser.logic.buildingobjects.useconditions.UseConditions" title="teaser.logic.buildingobjects.useconditions.UseConditions"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.useconditions.UseConditions</span></code></a></p>
+<p>Use Conditions DIN 18599</p>
+<p>Class that contains the boundary conditions of use for non-residential
+buildings defined in DIN V 18599-10</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="64%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Note: the attributes description are translations from DIN V 18599-10</td>
+<td>standard</td>
+</tr>
+<tr class="row-even"><td>USAGE AND OPERATION TIMES</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>usage: str</td>
+<td>usage type - Nutzungsart</td>
+</tr>
+<tr class="row-even"><td>typical_length:</td>
+<td>typical length of a usage zone - typische Zonenlaenge</td>
+</tr>
+<tr class="row-odd"><td>typical width:</td>
+<td>typical width of a usage zone - typische Zonenbreite</td>
+</tr>
+<tr class="row-even"><td>usage_time</td>
+<td>([int]) usage time [begin, end] (h) -  Nutzungszeit</td>
+</tr>
+<tr class="row-odd"><td>daily_usage_hours</td>
+<td>(int) daily usage time (h) - taegliche Nutzungsstunden</td>
+</tr>
+<tr class="row-even"><td>yearly_usage_days</td>
+<td>(int) operating days per year (d) - jaehrliche Nutzungstage</td>
+</tr>
+<tr class="row-odd"><td>yearly_usage_hours_day</td>
+<td>(int) operating hours per year during daytime (h) - jaehrliche Nutzungsstunden zur Tagzeit</td>
+</tr>
+<tr class="row-even"><td>yearly_usage_hours_night</td>
+<td>(int) operating hours per year during nighttime (h) - jaehrliche Nutzungsstunden zur Nachtzeit</td>
+</tr>
+<tr class="row-odd"><td>daily_operation_ahu_cooling: int</td>
+<td>operating hours of AHU and cooling  - taegliche Betriebsstunden RLT und Kuehlung</td>
+</tr>
+<tr class="row-even"><td>yearly_ahu_days</td>
+<td>(int) operating days AHU per year (d) -  jaehrliche Betriebstage fuer RLT</td>
+</tr>
+<tr class="row-odd"><td>yearly_heating_days</td>
+<td>(int) operating days heating per year - jaehrliche Betriebstage fuer Heizung</td>
+</tr>
+<tr class="row-even"><td>yearly_cooling_days</td>
+<td>(int) operating days Cooling per year (h) - jaehrliche Betriebstage fuer Kuehlung</td>
+</tr>
+<tr class="row-odd"><td>daily_operation_heating</td>
+<td>(int) operating hours of heating (h) - taegliche Betriebsstunden Heizung</td>
+</tr>
+<tr class="row-even"><td>LIGHTING</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>maintained_illuminace</td>
+<td>(int) maintained illuminance value (lx) - Wartungswert der Beleuchtungsstaerke</td>
+</tr>
+<tr class="row-even"><td>usage_level_height: float</td>
+<td>height of the usage level (m)  - Hoehe der Nutzebene</td>
+</tr>
+<tr class="row-odd"><td>red_factor_visual</td>
+<td>(float) reduction factor for visual task sector -  Minderungsfaktor Bereich Sehaufgabe</td>
+</tr>
+<tr class="row-even"><td>rel_absence</td>
+<td>(float) relative absence - Raumindex</td>
+</tr>
+<tr class="row-odd"><td>room_index</td>
+<td>(float) room index - jaehrliche Betriebstage fuer Kuehlung</td>
+</tr>
+<tr class="row-even"><td>part_load_factor_lighting</td>
+<td>(float) part load factor of building usage time for lighting - Teilbetriebsfaktor der Gebaeudebetriebszeit fuer Beleuchtung</td>
+</tr>
+<tr class="row-odd"><td>ratio_conv_rad_lighting</td>
+<td>(float) describes the ratio between convective and radiative heat transfer of the lighting</td>
+</tr>
+<tr class="row-even"><td>ROOM CLIMATE</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>set_temp_heat: float</td>
+<td>internal set temperature heating - Raum-Solltemperatur Heizung</td>
+</tr>
+<tr class="row-even"><td>set_temp_cool: float</td>
+<td>internal set temperature cooling - Raum-Solltemperatur Kuehlung</td>
+</tr>
+<tr class="row-odd"><td>temp_set_back: float</td>
+<td>set back in reduced operation mode - Temperaturabsenkung reduzierter Betrieb</td>
+</tr>
+<tr class="row-even"><td>min_temp_heat</td>
+<td>(float) design minimal temperature heating -  Minimaltemperatur Auslegung Heizung</td>
+</tr>
+<tr class="row-odd"><td>max_temp_cool</td>
+<td>(float) design maximal temperature cooling - Maximaltemperatur Auslegung Kuehlung</td>
+</tr>
+<tr class="row-even"><td>rel_humidity</td>
+<td>(float) relative humidity - Feuchteanforderung d</td>
+</tr>
+<tr class="row-odd"><td>min_air_exchange</td>
+<td>(float) required minimal air exchange, due to usage - Mindestaussenluftvolumenstrom</td>
+</tr>
+<tr class="row-even"><td>rel_absence_ahu</td>
+<td>(float) relative absence for AHU - Relative Abwesenheit RLT</td>
+</tr>
+<tr class="row-odd"><td>part_load_factor_ahu: float</td>
+<td>part load factor of building usage time for AHU  - Teilbetriebsfaktor der Gebaeudebetriebszeit RLT</td>
+</tr>
+<tr class="row-even"><td>cooling_time</td>
+<td>([int]) cooling time [begin, end] -  Beginn/Ende Betriebszeit RLT und Kuehlung</td>
+</tr>
+<tr class="row-odd"><td>heating_time</td>
+<td>([int]) heating time [begin, end] - Beginn/End Betriebszeit Heizung</td>
+</tr>
+<tr class="row-even"><td>INTERNAL GAINS</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>persons</td>
+<td>(int) number of persons - Personen</td>
+</tr>
+<tr class="row-even"><td>activity_type_persons</td>
+<td>(int) persons activity</td>
+</tr>
+<tr class="row-odd"><td>ratio_conv_rad_persons</td>
+<td>(float) describes the ratio between convective and radiative heat transfer of the persons</td>
+</tr>
+<tr class="row-even"><td>profile_persons</td>
+<td>([float]) timeline of internal gains (persons) from 0 - 100 - Nutzungsprofil Personen</td>
+</tr>
+<tr class="row-odd"><td>machines: float</td>
+<td>number of Machines  - Arbeitshilfen</td>
+</tr>
+<tr class="row-even"><td>activity_type_machines</td>
+<td>(int) machines activity</td>
+</tr>
+<tr class="row-odd"><td>ratio_conv_rad_machines</td>
+<td>(float) describes the ratio between convective and radiative heat transfer of the lighting</td>
+</tr>
+<tr class="row-even"><td>profile_machines</td>
+<td>([float]) timeline of internal gains (machines) from 0 - 100  -  Nutzungsprofil Geraete</td>
+</tr>
+<tr class="row-odd"><td>lighting_power</td>
+<td>(float) spec. electr. Power for lighting - spez. Elektr. Leistung-Raumbeleuchtung</td>
+</tr>
+<tr class="row-even"><td>profile_lighting</td>
+<td>([float]) timeline of internal gains (lighting) from 0 - 100  -  Nutzungsprofil Licht</td>
+</tr>
+<tr class="row-odd"><td>MISC/AHU</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>min_ahu: float</td>
+<td>min ahu  - minAHU</td>
+</tr>
+<tr class="row-odd"><td>max_ahu</td>
+<td>(float) max ahu - maxAHU</td>
+</tr>
+<tr class="row-even"><td>with_ahu</td>
+<td>(boolean) with ahu - withAHU</td>
+</tr>
+<tr class="row-odd"><td>use_constant_ach_rate</td>
+<td>(boolean) choose if a constant ACH rate should be used</td>
+</tr>
+<tr class="row-even"><td>base_ach</td>
+<td>(float) base value for the infiltration rate</td>
+</tr>
+<tr class="row-odd"><td>max_user_ach</td>
+<td>(float) additional infiltration rate for maximum persons activity</td>
+</tr>
+<tr class="row-even"><td>max_overheating_ach</td>
+<td>(list) additional infiltration rate when overheating appears</td>
+</tr>
+<tr class="row-odd"><td>max_summer_ach</td>
+<td>(list) additional infiltration rate in the summer with [infiltration_rate, Tmin, Tmax]</td>
+</tr>
+<tr class="row-even"><td>winter_reduction</td>
+<td>(list) reduction factor of userACH for cold weather with [infiltration_rate, Tmin, Tmax]</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.boundaryconditions.boundaryconditions.BoundaryConditions.load_use_conditions">
+<code class="descname">load_use_conditions</code><span class="sig-paren">(</span><em>zone_usage</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.boundaryconditions.boundaryconditions.BoundaryConditions.load_use_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>load typical use conditions</p>
+<p>loads Use conditions specified in the XML, according to 18599</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>zone_usage</strong> : str</p>
+<blockquote class="last">
+<div><p>code list for zone_usage according to 18599</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.boundaryconditions.boundaryconditions.BoundaryConditions.save_use_conditions">
+<code class="descname">save_use_conditions</code><span class="sig-paren">(</span><em>path=None</em>, <em>file_name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.boundaryconditions.boundaryconditions.BoundaryConditions.save_use_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use conditions saver.</p>
+<p>Saves use conditions according to their usage type in the the XML file
+for use conditions in InputData. If the Project parent is set, it
+automatically saves it to the file given in Project.data. Alternatively
+you can specify a path to a file of UseConditions. If this
+file does not exist, a new file is created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : str</p>
+<blockquote>
+<div><p>path where unique file should be stored</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote class="last">
+<div><p>name of of unique file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.BuildingPhysics.html" title="buildingphysics"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.html" title="buildingobjects"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.3.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >teaser package structure</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" >buildingobjects</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate, RWTH Aachen University,.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.1.
+    </div>
+  </body>
+</html>
