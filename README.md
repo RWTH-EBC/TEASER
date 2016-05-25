@@ -7,6 +7,9 @@ parameters for reduced oder models. It is being developed at the E.ON Energy
 Research center, Institute for Energy Efficient Buildings and Indoor Climate,
 RWTH Aachen University.
 
+The full docs how to use TEASER and documentation of all modules, classes and functions
+can be found in the [docs](http://pythonhosted.org/teaser/).
+
 This GitHub page will be used to further develop the library and make it
 available under the
 [MIT License](https://github.com/RWTH-EBC/TEASER/blob/master/License.md).
@@ -51,6 +54,7 @@ The current version is 0.3.0, which is a pre-release.
 ### How to cite TEASER
 
 A Journal Paper presenting TEASER is already submitted an is in review.
+
 
 ### How to use TEASER
 

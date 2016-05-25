@@ -6,7 +6,7 @@
 teaser
 ==================================
 
-The TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) tool
+TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit)
 allows the creation of archetype buildings as well as the
 representation of existing buildings and the calculation of simulation
 parameters for reduced oder models. It is being developed at the `E.ON Energy
@@ -59,8 +59,12 @@ IEA-EBC `Annex60 <https://github.com/iea-annex60/modelica-annex60>`_.
 Version
 ==================
 
-The current version is 0.3.0, which is a pre-release.
+The current version is 0.3.1, which is a pre-release.
 
+How to cite TEASER
+==================
+
+A Journal Paper presenting TEASER is already submitted an is in review.
 
 How to contribute to TEASER
 ==================
