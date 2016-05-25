@@ -179,7 +179,7 @@ def example_create_building():
     '''
     Save new TEASER XML
     '''
-    prj.save_gml("ExampleProject")
+    prj.save_project("ExampleProject")
     prj.save_citygml("Easypeasy")
 
 if __name__ == '__main__':
