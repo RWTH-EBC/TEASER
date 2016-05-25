@@ -7,8 +7,8 @@ parameters for reduced oder models. It is being developed at the E.ON Energy
 Research center, Institute for Energy Efficient Buildings and Indoor Climate,
 RWTH Aachen University.
 
-The full docs how to use TEASER and documentation of all modules, classes and functions
-can be found in the [docs](http://pythonhosted.org/teaser/).
+The full documentation of TEASER including examples and description of modules, classes and functions
+can be found in [here](http://pythonhosted.org/teaser/).
 
 This GitHub page will be used to further develop the library and make it
 available under the
@@ -58,12 +58,9 @@ A Journal Paper presenting TEASER is already submitted an is in review.
 
 ### How to use TEASER
 
-The full docs how to use TEASER and documentation of all modules, classes and functions
-can be found in the [docs](http://pythonhosted.org/teaser/).
-
-For installation we like to refer you to the README in the [teaser
-package]
-(https://github.com/RWTH-EBC/TEASER/blob/master/teaser/README.md) itself.
+For installation and usage we like to refer you to the README in the [teaser
+package](https://github.com/RWTH-EBC/TEASER/blob/master/teaser/README.md) itself and to 
+the [documentation](http://pythonhosted.org/teaser/install_teaser.html)
 
 ### How to contribute to the development of TEASER
 You are invited to contribute to the development of TEASER.

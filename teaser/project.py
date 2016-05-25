@@ -26,6 +26,7 @@ from teaser.logic.simulation.modelicainfo import ModelicaInfo
 
 try:
     import teaser.data.output.citygml_output as citygml_out
+    import teaser.data.output.citygml_input as citygml_in
 except:
     warnings.warn("No CityGML module found, no CityGML import/export")
 
@@ -828,7 +829,6 @@ class Project(object):
         path : string
             if the Files should not be stored in OutputData, an alternative
             can be specified
-
         '''
         if file_name is None:
             name = self.name
@@ -857,20 +857,6 @@ class Project(object):
 
         txml_in.load_teaser_xml(path, self)
 
-    def load_old_teaser(self, path):
-        '''Loads the project from an old TEASER xml file
-
-        calls the function load_teaser_xml in data.DataHelp.OldTeaser.py
-
-
-        Parameters
-        ----------
-        path : string
-            full path to a teaserXML file
-
-        '''
-
-        old_teaser.load_teaser_xml(path, self)
 
     def save_citygml(self, file_name=None, path=None):
         '''Saves the project to a citygml file
@@ -901,6 +887,25 @@ class Project(object):
             utilitis.create_path(utilitis.get_full_path(path))
 
         citygml_out.save_gml(self, new_path)
+
+    def load_citygml(self,
+                     path=None):
+        '''Loads buildings from a citygml file
+
+        calls the function load_gml in data.CityGML we make use of CityGML core
+        and possibly not all kinds of CityGML modelling techniques are
+        supported.
+
+
+        Parameters
+        ----------
+
+        path : string
+            full path to a teaserXML file
+
+        '''
+
+        citygml_in.load_teaser_xml(path, self)
 
     def export_aixlib(self,
                       building_model="None",
@@ -1001,7 +1006,6 @@ class Project(object):
 
     def set_default(self):
         '''sets all attributes except self.data to default
-
         '''
 
         self.name = "Project"
@@ -1010,7 +1014,10 @@ class Project(object):
         self.weather_file_header = ""
         self.weather_file_path = ""
         self.buildings = []
-        self.calculation_method = "vdi"
+        self._number_of_elements_calc = 2
+        self._merge_windows_calc = False
+        self._used_library_calc = "AixLib"
+
 
         self._type_element_file = None
 
