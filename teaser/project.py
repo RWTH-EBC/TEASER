@@ -60,9 +60,14 @@ class Project(object):
         weather_file_path : str
             path to weather file used for Modelica simulation
             (default: "TRY_5_Essen.txt")
-        calculation_method : str
-            specifier for the calculation method for building parameters,
-            codelist (ebc or vdi), (default: "vdi")
+        number_of_elements_calc : int
+            defines the number of elements, that area aggregated, between 1
+            and 4, default is 2
+        merge_windows_calc : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
+        used_library_calc : str
+            used library (AixLib and Annex60 are supported)
 
     '''
 
