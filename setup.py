@@ -64,5 +64,6 @@ setup(name='teaser',
                     'teaser.gui.guiimages': ['*.png'],
                     'teaser.gui.guiimages.OfficeBuildings': ['*.png'],
                     'teaser.gui.guiimages.Residentials': ['*.png']},
+      classifiers = ['License :: OSI Approved :: MIT License'],
       setup_requires = ['mako', 'pyxb', 'pytest'],
       install_requires = ['mako', 'pyxb', 'pytest'])
