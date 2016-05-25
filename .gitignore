@@ -46,4 +46,4 @@ __pycache__/
 #ignore docs#
 #####################
 
-docs/_build
+doc/_build
