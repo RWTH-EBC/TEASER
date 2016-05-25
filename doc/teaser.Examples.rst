@@ -17,35 +17,37 @@ First thing we need to do is to import our Project API module::
 We instantiate the Project class. The parameter load_data = True indicates
 that we load the XML data bases into our Project. This can take a few sec.::
 
-	prj = Project(load_data = True)
+    prj = Project(load_data = True)
 
 The five functions starting with type_bldg giving us the opportunity to
 create the specific type building (e.g. type_bldg_residential). The function
 automatically calculates all the necessary parameter. If not specified different
 it uses vdi calculation method::
 
-    prj.type_bldg_residential(name="ResidentialBuilding",
-                              year_of_construction=1988,
-                              number_of_floors=2,
-                              height_of_floors=3.5,
-                              net_leased_area=100,
-                              with_ahu=True,
-                              residential_layout=1,
-                              neighbour_buildings=1,
-                              attic=1,
-                              cellar=1,
-                              construction_type="heavy",
-                              dormer=1)
+    prj.type_bldg_residential(
+        name="ResidentialBuilding",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.5,
+        net_leased_area=100,
+        with_ahu=True,
+        residential_layout=1,
+        neighbour_buildings=1,
+        attic=1,
+        cellar=1,
+        construction_type="heavy",
+        dormer=1)
 
-    prj.type_bldg_office(name="Office1",
-                         year_of_construction=1988,
-                         number_of_floors=2,
-                         height_of_floors=3.5,
-                         net_leased_area=100,
-                         office_layout=1,
-                         window_layout=1,
-                         with_ahu=True,
-                         construction_type="heavy")
+    prj.type_bldg_office(
+        name="Office1",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.5,
+        net_leased_area=100,
+        office_layout=1,
+        window_layout=1,
+        with_ahu=True,
+        construction_type="heavy")
 
 We need to set the projects calculation method. The library we want to use is
 AixLib, we are using a two element model and want an extra resistance for the
@@ -56,11 +58,12 @@ TEASER'S Output folder::
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
     prj.merge_windows_calc = False
-    prj.export_aixlib(building_model="MultizoneEquipped",
-    								  zone_model="ThermalZoneEquipped",
-    								  corG=True,
-    								  internal_id=None,
-    								  path=None)
+    prj.export_aixlib(
+        building_model="MultizoneEquipped",
+        zone_model="ThermalZoneEquipped",
+        corG=True,
+        internal_id=None,
+        path=None)
 
 We could also use Annex60 models with same calculation method::
 
@@ -70,18 +73,19 @@ We could also use Annex60 models with same calculation method::
 Now we retrofit all buildings in the year 2015 (EnEV2014). That includes new
 insulation layer and new windows. The name is changed to Retrofit::
 
-	prj.name = "Project_Retrofit"
-	prj.retrofit_all_buildings(2015)
-	prj.export_record(building_model="MultizoneEquipped",
-                    zone_model="ThermalZoneEquipped",
-                    corG=True,
-                    internal_id=None,
-                    path=None)
+    prj.name = "Project_Retrofit"
+    prj.retrofit_all_buildings(2015)
+    prj.export_record(
+        building_model="MultizoneEquipped",
+        zone_model="ThermalZoneEquipped",
+        corG=True,
+        internal_id=None,
+        path=None)
 
 To load our retrofitted building in TEASER later on, we can save the project into a
 XML file::
 
-	prj.save_project("Retrofit_Building", path=None)
+    prj.save_project("Retrofit_Building", path=None)
 
 
 
@@ -93,10 +97,10 @@ calculate parameters for a Modelica model and save this example building in a
 XML based format. The used classes are imported one after another. Of course
 you can import all the classes at the beginning::
 
-	from teaser.project import Project
-	from teaser.logic.buildingobjects.building import Building
-	prj = Project(load_data=True)
-	bldg = Building(parent=prj)
+    from teaser.project import Project
+    from teaser.logic.buildingobjects.building import Building
+    prj = Project(load_data=True)
+    bldg = Building(parent=prj)
 
 Set some building parameters::
 
@@ -108,7 +112,7 @@ Set some building parameters::
 Instantiate a ThermalZone class, with building as parent and set 
 some parameters of the thermal zone::
 
-	from teaser.logic.buildingobjects.thermalzone import ThermalZone
+    from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
     tz = ThermalZone(parent=bldg)
     tz.name = "Living Room"
@@ -118,12 +122,12 @@ some parameters of the thermal zone::
 
 Instantiate UseConditionsOffice18599 class with thermal zone as parent, and load the use conditions for the usage 'Living'::
 
-	from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions import \
-		BoundaryConditions
+    from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions import \
+        BoundaryConditions
 
     tz.use_conditions = BoundaryConditions(parent=tz)
     tz.use_conditions.load_use_conditions("Living")
-	
+    
 Define two elements representing a pitched roof and define Layers and
 Materials explicitly::
 
@@ -146,7 +150,7 @@ Set coefficient of heat transfer::
     roof_south.inner_radiation = 20.0
     roof_south.outer_radiation = 5.0
 
-	
+    
 Set layer and material. The id indicates the position
 of the layer from inside to outside::
 
@@ -201,15 +205,15 @@ Set layer and material::
     material_1_1.density = 1400.0
     material_1_1.heat_capac = 0.6
     material_1_1.thermal_conduc = 2.5
-	
-	
+    
+    
 For the remaining Outer and Inner walls as well as Windows, we save the information
 in python dicitonaries, iterate them and instantiate the corresponding classes. In addition we
 are using the load_type_element function to determine the building physics from statistical data
 The key of the dict is the walls's name, while the value is a list with parameters the 
 [year of construciton, construction type, area, tilt,orientation]::
-	
-	out_wall_dict = {"Outer Wall 1": [bldg.year_of_construction, 'heavy',
+
+    out_wall_dict = {"Outer Wall 1": [bldg.year_of_construction, 'heavy',
                                       10.0, 90.0, 0.0],
                      "Outer Wall 2": [bldg.year_of_construction, 'heavy',
                                       14.0, 90.0, 90.0],
@@ -281,7 +285,7 @@ The key of the dict is the walls's name, while the value is a list with paramete
         win_material.name = "GlasWindow"
         win_material.thermal_conduc = 0.067
         win_material.transmittance = 0.9
-		
+        
 For a GroundFloor we are using the load_type_element function explicitly,
 which needs the year of construction and the construction type ('heavy'
 or 'light')::
@@ -301,22 +305,25 @@ We calculate the RC Values according to AixLib procedure::
 
 Export the Modelica model::
 
-    prj.export_aixlib(building_model="MultizoneEquipped",
-						zone_model="ThermalZoneEquipped",
-						corG=True,
-						internal_id=None,
-						path=None)
+    prj.export_aixlib(
+        building_model="MultizoneEquipped",
+        zone_model="ThermalZoneEquipped",
+        corG=True,
+        internal_id=None,
+        path=None)
 
 Or we use Annex60 method with for elements::
 
-    prj.calc_all_buildings(number_of_elements=4,
-                          merge_windows=False,
-                          used_library='Annex60')
+    prj.calc_all_buildings(
+        number_of_elements=4,
+        merge_windows=False,
+        used_library='Annex60')
     prj.export_annex()
 
 
 Save teaserXML and CityGML::
 
-	prj.save_project(file_name="ExampleProject")
-	prj.save_citygml(file_name="ExampleProject",
-                     path=None)
+    prj.save_project(file_name="ExampleProject")
+    prj.save_citygml(
+        file_name="ExampleProject",
+        path=None)
