@@ -43,6 +43,7 @@ __pycache__/
 *.egg/
 *.eggs
 dist
+*.pypirc
 
 #ignore docs#
 #####################
