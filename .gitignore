@@ -42,6 +42,7 @@ __pycache__/
 *.egg-info/
 *.egg/
 *.eggs
+dist
 
 #ignore docs#
 #####################
