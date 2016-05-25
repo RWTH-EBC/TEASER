@@ -48,7 +48,14 @@ IEA-EBC [Annex60](https://github.com/iea-annex60/modelica-annex60).
 
 The current version is 0.3.0, which is a pre-release.
 
+### How to cite TEASER
+
+A Journal Paper presenting TEASER is already submitted an is in review.
+
 ### How to use TEASER
+
+The full docs how to use TEASER and documentation of all modules, classes and functions
+can be found in the [docs](http://pythonhosted.org/teaser/).
 
 For installation we like to refer you to the README in the [teaser
 package]
