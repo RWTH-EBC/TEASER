@@ -4,11 +4,11 @@ The TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) tool
 allows the creation of archetype buildings as well as the
 representation of existing buildings and the calculation of simulation
 parameters for reduced oder models. It is being developed at the E.ON Energy
-Research center, Institute for Energy Efficient Buildings and Indoor Climate,
+Research Center, Institute for Energy Efficient Buildings and Indoor Climate,
 RWTH Aachen University.
 
-The full documentation of TEASER including examples and description of modules, classes and functions
-can be found in [here](http://pythonhosted.org/teaser/).
+The full documentation of TEASER including examples and description of modules, 
+classes and functions can be found [here](http://pythonhosted.org/teaser/).
 
 This GitHub page will be used to further develop the library and make it
 available under the
@@ -19,7 +19,7 @@ If you have any questions regarding TEASER feel free to contact us at [ebc-tease
 ### License
 
 TEASER is released by E.ON Energy
-Research center, Institute for Energy Efficient Buildings and Indoor Climate,
+Research Center, Institute for Energy Efficient Buildings and Indoor Climate,
 RWTH Aachen University under the
 [MIT License](https://github.com/RWTH-EBC/TEASER/blob/master/License.md).
 
@@ -49,11 +49,11 @@ IEA-EBC [Annex60](https://github.com/iea-annex60/modelica-annex60).
 
 ### Version
 
-The current version is 0.3.0, which is a pre-release.
+The current version is 0.3.1, which is a pre-release.
 
 ### How to cite TEASER
 
-A Journal Paper presenting TEASER is already submitted an is in review.
+A Journal Paper presenting TEASER is already submitted and is in review.
 
 
 ### How to use TEASER

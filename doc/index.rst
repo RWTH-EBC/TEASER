@@ -10,7 +10,7 @@ TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit)
 allows the creation of archetype buildings as well as the
 representation of existing buildings and the calculation of simulation
 parameters for reduced oder models. It is being developed at the `E.ON Energy
-Research center, Institute for Energy Efficient Buildings and Indoor Climate,
+Research Center, Institute for Energy Efficient Buildings and Indoor Climate,
 RWTH Aachen University <https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1>`_.
 
 
@@ -26,7 +26,7 @@ If you have any questions regarding TEASER feel free to contact us at
 License
 ==================
 
-TEASER is released by E.ON Energy Research center, Institute for Energy
+TEASER is released by E.ON Energy Research Center, Institute for Energy
 Efficient Buildings and Indoor Climate, RWTH Aachen University under the
 `MIT License <https://github.com/RWTH-EBC/TEASER/blob/master/License.md>`_.
 
