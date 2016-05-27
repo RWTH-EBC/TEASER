@@ -26,7 +26,7 @@ from teaser.logic.simulation.modelicainfo import ModelicaInfo
 
 try:
     import teaser.data.output.citygml_output as citygml_out
-    import teaser.data.output.citygml_input as citygml_in
+    import teaser.data.input.citygml_input as citygml_in
 except:
     warnings.warn("No CityGML module found, no CityGML import/export")
 
