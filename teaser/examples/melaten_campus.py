@@ -35,7 +35,7 @@ def main():
 
     this_path = os.path.dirname(__file__)
     input_path = os.path.join(this_path,
-                              'ExampleInputFiles',
+                              'examplefiles',
                               'MelatenXML')
 
     output_path = utilitis.get_default_path()
