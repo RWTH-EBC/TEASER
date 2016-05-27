@@ -26,6 +26,7 @@ from teaser.logic.simulation.modelicainfo import ModelicaInfo
 
 try:
     import teaser.data.output.citygml_output as citygml_out
+    import teaser.data.input.citygml_input as citygml_in
 except:
     warnings.warn("No CityGML module found, no CityGML import/export")
 
@@ -59,9 +60,14 @@ class Project(object):
         weather_file_path : str
             path to weather file used for Modelica simulation
             (default: "TRY_5_Essen.txt")
-        calculation_method : str
-            specifier for the calculation method for building parameters,
-            codelist (ebc or vdi), (default: "vdi")
+        number_of_elements_calc : int
+            defines the number of elements, that area aggregated, between 1
+            and 4, default is 2
+        merge_windows_calc : bool
+            True for merging the windows into the outer walls, False for
+            separate resistance for window, default is False
+        used_library_calc : str
+            used library (AixLib and Annex60 are supported)
 
     '''
 
@@ -137,17 +143,13 @@ class Project(object):
         self._used_library_calc = used_library
         for bldg in reversed(self.buildings):
             try:
-                bldg.calc_building_parameter()
+                bldg.calc_building_parameter(
+                    number_of_elements=self._number_of_elements_calc,
+                    merge_windows=self._merge_windows_calc,
+                    used_library=self._used_library_calc)
             except:
                 print(bldg.name)
                 self.buildings.remove(bldg)
-
-        for bldg in self.buildings:
-
-            bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
 
     def retrofit_all_buildings(self,
                                year_of_retrofit,
@@ -828,7 +830,6 @@ class Project(object):
         path : string
             if the Files should not be stored in OutputData, an alternative
             can be specified
-
         '''
         if file_name is None:
             name = self.name
@@ -857,20 +858,6 @@ class Project(object):
 
         txml_in.load_teaser_xml(path, self)
 
-    def load_old_teaser(self, path):
-        '''Loads the project from an old TEASER xml file
-
-        calls the function load_teaser_xml in data.DataHelp.OldTeaser.py
-
-
-        Parameters
-        ----------
-        path : string
-            full path to a teaserXML file
-
-        '''
-
-        old_teaser.load_teaser_xml(path, self)
 
     def save_citygml(self, file_name=None, path=None):
         '''Saves the project to a citygml file
@@ -901,6 +888,25 @@ class Project(object):
             utilitis.create_path(utilitis.get_full_path(path))
 
         citygml_out.save_gml(self, new_path)
+
+    def load_citygml(self,
+                     path=None):
+        '''Loads buildings from a citygml file
+
+        calls the function load_gml in data.CityGML we make use of CityGML core
+        and possibly not all kinds of CityGML modelling techniques are
+        supported.
+
+
+        Parameters
+        ----------
+
+        path : string
+            full path to a teaserXML file
+
+        '''
+
+        citygml_in.load_teaser_xml(path, self)
 
     def export_aixlib(self,
                       building_model="None",
@@ -1001,7 +1007,6 @@ class Project(object):
 
     def set_default(self):
         '''sets all attributes except self.data to default
-
         '''
 
         self.name = "Project"
@@ -1010,7 +1015,10 @@ class Project(object):
         self.weather_file_header = ""
         self.weather_file_path = ""
         self.buildings = []
-        self.calculation_method = "vdi"
+        self._number_of_elements_calc = 2
+        self._merge_windows_calc = False
+        self._used_library_calc = "AixLib"
+
 
         self._type_element_file = None
 

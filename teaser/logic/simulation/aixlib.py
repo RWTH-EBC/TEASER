@@ -25,6 +25,9 @@ def compare_orientation(bldg):
     """
 
     orient_tilt_help = []
+    bldg.orient_tilt = []
+    bldg.orientation_bldg = []
+    bldg.tilt_bldg = []
 
     for zone in bldg.thermal_zones:
         for wall in zone.outer_walls:

@@ -42,3 +42,10 @@ __pycache__/
 *.egg-info/
 *.egg/
 *.eggs
+dist
+*.pypirc
+
+#ignore docs#
+#####################
+
+doc/_build

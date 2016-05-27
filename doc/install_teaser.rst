@@ -3,13 +3,19 @@ How to install TEASER
 
 Installation
 -------------------------
-The best option to install TEASER is to clone the repository by using::
+The best option to install TEASER is to use pip::
 
- git clone [SSH-Key/Https]
+	pip install teaser
+
+If you actively want to develop TEASER you can clone the repository by using::
+
+	git clone [SSH-Key/Https]
 
 and then run::
 
- pip install -e [Path/to/your/Teaser/Clone]
+	pip install -e [Path/to/your/Teaser/Clone]
+
+which will install the local version of TEASER.
 
 You need to have pip installed (see dependencies).
 

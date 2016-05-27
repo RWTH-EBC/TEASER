@@ -34,6 +34,9 @@ def compare_orientation(bldg, number_of_elements=3):
 
     orient_tilt_help1 = []
     orient_tilt_help2 = []
+    bldg.orientation_bldg = []
+    bldg.tilt_bldg = []
+
     for zone in bldg.thermal_zones:
         for wall in zone.outer_walls:
             if wall.orientation != -2:
