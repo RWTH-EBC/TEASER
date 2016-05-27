@@ -143,17 +143,13 @@ class Project(object):
         self._used_library_calc = used_library
         for bldg in reversed(self.buildings):
             try:
-                bldg.calc_building_parameter()
+                bldg.calc_building_parameter(
+                    number_of_elements=self._number_of_elements_calc,
+                    merge_windows=self._merge_windows_calc,
+                    used_library=self._used_library_calc)
             except:
                 print(bldg.name)
                 self.buildings.remove(bldg)
-
-        for bldg in self.buildings:
-
-            bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
 
     def retrofit_all_buildings(self,
                                year_of_retrofit,
