@@ -28,14 +28,14 @@ class Layer(object):
 
     '''
 
-    def __init__(self, parent=None, id = None):
+    def __init__(self, parent=None, id = 0):
         '''Constructor of Layer.
 
 
         '''
         self.parent = parent
         self.internal_id = random.random()
-        self.position = 0
+        self.id = id
         self._material = None
         self._thickness = 0.0
 

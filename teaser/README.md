@@ -3,26 +3,28 @@
 This software is work-in-progress. Documentation will be incomplete or missing 
 and the software may not run properly.
 
-General Purpose
----------------
-TEASER is a tool for the generation of archetype buildings and parameter 
-calculation of Modelica building models.
 
 Installation
 -------------------------
-The best option to install TEASER is to clone the repository by using::
+The best option to install TEASER is to use pip:
+
+`pip install teaser`
+
+If you actively want to develop TEASER you can clone the repository by using:
 
  `git clone [SSH-Key/Https]`
 
-and then run::
+and then run:
 
  `pip install -e [Path/to/your/Teaser/Clone]`
+
+which will install the local version of TEASER.
 
 You need to have pip installed (see dependencies).
 
 Deinstallation
 -------------------------
-The best option is not to uninstall TEASER at all:-). However, if you want to
+The best option is not to uninstall TEASER at all :-). However, if you want to
 uninstall it, just use::
 
  `pip uninstall teaser`
@@ -42,7 +44,6 @@ In addition, TEASER requires some specific Python packages:
    install on a python-enabled command line with `pip install -U pyxb`
 3. pytest: Unit Tests engine
    install on a python-enabled command line with `pip install -U pytest`
-
 
 
 Contents
