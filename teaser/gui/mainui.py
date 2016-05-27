@@ -92,7 +92,7 @@ class MainUI(QDialog):
         self.resize(900, 800)
         self.setMinimumSize(QtCore.QSize(900, 800))
         self.setMaximumSize(QtCore.QSize(900, 800))
-        teaserVersion = "0.3.2 beta"
+        teaserVersion = "0.3.3 beta"
         self.setWindowTitle("TEASER Version %s" % teaserVersion)
         self.central_widget = QtGui.QWidget(self)
         self.central_widget.setObjectName(_fromUtf8("central_widget"))
