@@ -3,11 +3,9 @@
 The TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) tool
 allows the creation of archetype buildings as well as the
 representation of existing buildings and the calculation of simulation
-parameters for reduced oder models. It is being developed at the E.ON Energy
-Research Center, Institute for Energy Efficient Buildings and Indoor Climate,
-RWTH Aachen University.
+parameters for reduced oder models. It is being developed at the RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate.
 
-The full documentation of TEASER including examples and description of modules, 
+The full documentation of TEASER including examples and description of modules,
 classes and functions can be found [here](http://pythonhosted.org/teaser/).
 
 This GitHub page will be used to further develop the library and make it
@@ -18,9 +16,9 @@ If you have any questions regarding TEASER feel free to contact us at [ebc-tease
 
 ### License
 
-TEASER is released by E.ON Energy
+TEASER is released by RWTH Aachen University, E.ON Energy
 Research Center, Institute for Energy Efficient Buildings and Indoor Climate,
-RWTH Aachen University under the
+under the
 [MIT License](https://github.com/RWTH-EBC/TEASER/blob/master/License.md).
 
 ### Acknowledgements
@@ -49,7 +47,7 @@ IEA-EBC [Annex60](https://github.com/iea-annex60/modelica-annex60).
 
 ### Version
 
-The current version is 0.3.1, which is a pre-release.
+The current version is 0.3.2, which is a pre-release.
 
 ### How to cite TEASER
 
@@ -59,7 +57,7 @@ A Journal Paper presenting TEASER is already submitted and is in review.
 ### How to use TEASER
 
 For installation and usage we like to refer you to the README in the [teaser
-package](https://github.com/RWTH-EBC/TEASER/blob/master/teaser/README.md) itself and to 
+package](https://github.com/RWTH-EBC/TEASER/blob/master/teaser/README.md) itself and to
 the [documentation](http://pythonhosted.org/teaser/install_teaser.html)
 
 ### How to contribute to the development of TEASER

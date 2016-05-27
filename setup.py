@@ -1,11 +1,10 @@
 from setuptools import setup
 
 setup(name='teaser',
-      version='0.3.1',
+      version='0.3.2',
       description='Tool for Energy Analysis and Simulation for Efficient Retrofit ',
       url='https://github.com/RWTH-EBC/TEASER',
-      author='E.ON Energy Research Center, Institute of Energy Efficient '
-             'Buildings and Indoor Climate, RWTH Aachen University',
+      author='RWTH Aachen University, E.ON Energy Research Center, Institute of Energy Efficient Buildings and Indoor Climate',
       author_email='ebc-teaser@eonerc.rwth-aachen.de',
       license='MIT',
       packages=['teaser',
