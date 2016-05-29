@@ -270,7 +270,8 @@ class SurfaceGML(object):
 
         if self.surface_tilt == 180:
             self.surface_tilt = 0.0
-
+        elif str(self.surface_tilt) == "nan":
+            self.surface_tilt = None
         return self.surface_tilt
 
     def get_gml_orientation(self):
@@ -291,9 +292,12 @@ class SurfaceGML(object):
         gml2 = gml_surface[3:6]
         gml3 = gml_surface[6:9]
         gml4 = gml_surface[9:12]
-
-        vektor_1 = gml2-gml1
-        vektor_2 = gml4-gml1
+        if len(gml_surface) > 12:
+            vektor_1 = gml2-gml1
+            vektor_2 = gml4-gml1
+        else:
+            vektor_1 = gml2-gml1
+            vektor_2 = gml3-gml1
 
         normal_1 = np.cross(vektor_1, vektor_2)
         normal_uni = normal_1/LA.norm(normal_1)
