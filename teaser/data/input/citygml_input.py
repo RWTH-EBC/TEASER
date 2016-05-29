@@ -293,7 +293,7 @@ class SurfaceGML(object):
         gml4 = gml_surface[9:12]
 
         vektor_1 = gml2-gml1
-        vektor_2 = gml3-gml1
+        vektor_2 = gml4-gml1
 
         normal_1 = np.cross(vektor_1, vektor_2)
         normal_uni = normal_1/LA.norm(normal_1)
@@ -308,7 +308,6 @@ class SurfaceGML(object):
             phi = np.pi/2
         elif normal_uni[0] == 0 > normal_uni[1]:
             phi = -np.pi/2
-
 
         if phi is None:
             pass
