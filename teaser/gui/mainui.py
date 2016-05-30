@@ -3762,9 +3762,9 @@ class MainUI(QDialog):
         self.export_window_ui.setLayout(self.export_window_ui_layout)
 
         self.export_groupbox = QtGui.QGroupBox("Export")
-        self.export_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
-        self.export_groupbox.setMinimumSize(QtCore.QSize(360, 120))
-        self.export_groupbox.setMaximumSize(QtCore.QSize(360, 120))
+        self.export_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 155))
+        self.export_groupbox.setMinimumSize(QtCore.QSize(360, 155))
+        self.export_groupbox.setMaximumSize(QtCore.QSize(360, 155))
         self.export_groupbox.setObjectName(_fromUtf8("exportGroupBox"))
 
         # self.model_groupbox = QtGui.QGroupBox("Model")
@@ -3805,6 +3805,14 @@ class MainUI(QDialog):
         self.export_save_template_button.setText("Browse")
         self.export_save_template_button.clicked.connect(
             self.click_browse_button)
+        self.export_template_label_library = QtGui.QLabel(self.export_groupbox)
+        self.export_template_label_library.setGeometry(
+            QtCore.QRect(5, 125, 120, 25))
+        self.export_template_label_library.setText("Library:")
+        self.export_create_template_library_combobox = QtGui.QComboBox(
+            self.export_groupbox)
+        self.export_create_template_library_combobox.setGeometry(
+            QtCore.QRect(130, 125, 215, 25))
 
         self.export_template_label_model = QtGui.QLabel(self.model_groupbox)
         self.export_template_label_model.setGeometry(
@@ -3833,8 +3841,11 @@ class MainUI(QDialog):
         self.radio_button_corG_2.setGeometry(QtCore.QRect(250, 75, 120, 25))
         self.radio_button_corG_2.setText("without CorG")
         self.radio_button_corG_1.setChecked(True)
+        library_type_list = ["AixLib", "Annex60"]
         modelTypeList = ["MultizoneEquipped", "Multizone", "None"]
         zoneTypeList = ["ThermalZoneEquipped", "ThermalZone", "None"]
+        self.export_create_template_library_combobox.addItems(
+                                                            library_type_list)
         self.export_create_template_model_combobox.addItems(modelTypeList)
         self.export_create_template_zone_combobox.addItems(zoneTypeList)
 
