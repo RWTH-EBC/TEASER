@@ -4484,32 +4484,66 @@ class MainUI(QDialog):
             list_of_building_name.append(
                 self.side_bar_buildings_combo_box.itemText(i))
 
-        sender = self.sender()
-        building_model = \
-            self.export_create_template_model_combobox.currentText()
-        zone_model = self.export_create_template_zone_combobox.currentText()
-        if self.radio_button_corG_1.isChecked():
-            corG = True
-        elif self.radio_button_corG_2.isChecked():
-            corG = False
-        elemInCombobox = \
-            self.export_create_template_model_combobox.currentText()
+        if self.export_create_library_combobox.currentText() == "AixLib":
+            sender = self.sender()
+            building_model = \
+                self.export_create_template_model_combobox.currentText()
+            zone_model = \
+                self.export_create_template_zone_combobox.currentText()
+            if self.radio_button_corG_1.isChecked():
+                corG = True
+            elif self.radio_button_corG_2.isChecked():
+                corG = False
+            elemInCombobox = \
+                self.export_create_template_model_combobox.currentText()
 
-        if(sender.text() == self.export_button.text()):
-            Controller.click_export_button(self.project, building_model,
-                                           zone_model, corG, None,
-                                           path_output_folder)
-            QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
-                                          "record " + elemInCombobox +
-                                          " all building finished ")
-        elif(sender.text() == self.export_button_one.text()):
-            Controller.click_export_button(self.project, building_model,
-                                           zone_model, corG,
-                                           self.current_building.internal_id,
-                                           path_output_folder)
-            QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
-                                          "record " + elemInCombobox +
-                                          " for current building finished ")
+            if(sender.text() == self.export_button.text()):
+                Controller.click_export_button(self.project, building_model,
+                                               zone_model, corG, None,
+                                               path_output_folder)
+                QtGui.QMessageBox.information(self, 'Message',
+                                              "Export Modelica " +
+                                              "record " + elemInCombobox +
+                                              " all building finished ")
+            elif(sender.text() == self.export_button_one.text()):
+                Controller.click_export_button(self.project, building_model,
+                                               zone_model, corG,
+                                               self.current_building.internal_id,
+                                               path_output_folder)
+                QtGui.QMessageBox.information(self, 'Message',
+                                              "Export Modelica " +
+                                              "record " + elemInCombobox +
+                                              " for current building " +
+                                              "finished ")
+
+        elif self.export_create_library_combobox.currentText() == "Annex60":
+            sender = self.sender()
+            num_of_elem = \
+                self.annex_create_number_of_elements_combobox.currentText()
+            merge_win = \
+                self.annex_create_merge_windows_combobox.currentText()
+
+            if(sender.text() == self.export_button.text()):
+                Controller.click_export_button_annex(
+                                               self.project, num_of_elem,
+                                               merge_win, None,
+                                               path_output_folder)
+                QtGui.QMessageBox.information(self, 'Message',
+                                              "Export Modelica " +
+                                              "record " + "Annex" +
+                                              " all building finished ")
+            elif(sender.text() == self.export_button_one.text()):
+                Controller.click_export_button_annex(
+                                               self.project, num_of_elem,
+                                               merge_win,
+                                               self.current_building.internal_id,
+                                               path_output_folder)
+                QtGui.QMessageBox.information(self, 'Message',
+                                              "Export Modelica " +
+                                              "record " + "Annex" +
+                                              " for current building " +
+                                              "finished ")
+
         utilitis.create_path(str(self.file_path))
 
     def click_browse_button(self):
