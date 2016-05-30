@@ -3805,13 +3805,13 @@ class MainUI(QDialog):
         self.export_save_template_button.setText("Browse")
         self.export_save_template_button.clicked.connect(
             self.click_browse_button)
-        self.export_template_label_library = QtGui.QLabel(self.export_groupbox)
-        self.export_template_label_library.setGeometry(
+        self.export_label_library = QtGui.QLabel(self.export_groupbox)
+        self.export_label_library.setGeometry(
             QtCore.QRect(5, 125, 120, 25))
-        self.export_template_label_library.setText("Library:")
-        self.export_create_template_library_combobox = QtGui.QComboBox(
+        self.export_label_library.setText("Library:")
+        self.export_create_library_combobox = QtGui.QComboBox(
             self.export_groupbox)
-        self.export_create_template_library_combobox.setGeometry(
+        self.export_create_library_combobox.setGeometry(
             QtCore.QRect(130, 125, 215, 25))
 
         self.export_template_label_model = QtGui.QLabel(self.model_groupbox)
@@ -3844,7 +3844,7 @@ class MainUI(QDialog):
         library_type_list = ["AixLib", "Annex60"]
         modelTypeList = ["MultizoneEquipped", "Multizone", "None"]
         zoneTypeList = ["ThermalZoneEquipped", "ThermalZone", "None"]
-        self.export_create_template_library_combobox.addItems(
+        self.export_create_library_combobox.addItems(
                                                             library_type_list)
         self.export_create_template_model_combobox.addItems(modelTypeList)
         self.export_create_template_zone_combobox.addItems(zoneTypeList)
