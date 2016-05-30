@@ -3756,8 +3756,8 @@ class MainUI(QDialog):
         self.export_window_ui = QtGui.QWizardPage()
         self.export_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.export_window_ui.setWindowTitle("Export")
-        #self.export_window_ui.setFixedWidth(380)
-        #self.export_window_ui.setFixedHeight(250)
+        self.export_window_ui.setFixedWidth(380)
+        self.export_window_ui.setFixedHeight(320)
         self.export_window_ui_layout = QtGui.QGridLayout()
         self.export_window_ui.setLayout(self.export_window_ui_layout)
 
@@ -3768,14 +3768,12 @@ class MainUI(QDialog):
         self.export_groupbox.setObjectName(_fromUtf8("exportGroupBox"))
 
         self.aixlib_groupbox = QtGui.QGroupBox("AixLib")
-        #self.aixlib_groupbox = QtGui.QGroupBox("")
         self.aixlib_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
         self.aixlib_groupbox.setMinimumSize(QtCore.QSize(360, 120))
         self.aixlib_groupbox.setMaximumSize(QtCore.QSize(360, 120))
         self.aixlib_groupbox.setObjectName(_fromUtf8("AixLibGroupBox"))
-        
+
         self.annex_groupbox = QtGui.QGroupBox("Annex60")
-        #self.annex_groupbox = QtGui.QGroupBox("")
         self.annex_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
         self.annex_groupbox.setMinimumSize(QtCore.QSize(360, 120))
         self.annex_groupbox.setMaximumSize(QtCore.QSize(360, 120))
@@ -3855,15 +3853,33 @@ class MainUI(QDialog):
         self.annex_number_of_elements.setGeometry(
             QtCore.QRect(5, 20, 120, 25))
         self.annex_number_of_elements.setText("Number of elements:")
+        self.annex_create_number_of_elements_combobox = QtGui.QComboBox(
+            self.annex_groupbox)
+        self.annex_create_number_of_elements_combobox.setGeometry(
+            QtCore.QRect(130, 20, 215, 25))
+        self.annex_merge_windows = QtGui.QLabel(self.annex_groupbox)
+        self.annex_merge_windows.setGeometry(
+            QtCore.QRect(5, 55, 120, 25))
+        self.annex_merge_windows.setText("Merge windows:")
+        self.annex_create_merge_windows_combobox = QtGui.QComboBox(
+            self.annex_groupbox)
+        self.annex_create_merge_windows_combobox.setGeometry(
+            QtCore.QRect(130, 55, 215, 25))
 
         library_type_list = ["AixLib", "Annex60"]
         modelTypeList = ["MultizoneEquipped", "Multizone", "None"]
         zoneTypeList = ["ThermalZoneEquipped", "ThermalZone", "None"]
+        number_of_elements_list = ["2", "3", "4"]
+        merging_windows_list = ["True", "False"]
+
         self.export_create_library_combobox.addItems(
                                                             library_type_list)
         self.export_create_template_model_combobox.addItems(modelTypeList)
         self.export_create_template_zone_combobox.addItems(zoneTypeList)
-
+        self.annex_create_number_of_elements_combobox.addItems(
+                                                    number_of_elements_list)
+        self.annex_create_merge_windows_combobox.addItems(
+                                                    merging_windows_list)
         self.export_window_ui_layout.addWidget(
             self.export_groupbox, 1, 1)
         self.export_window_ui_layout.addWidget(
