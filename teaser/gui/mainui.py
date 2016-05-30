@@ -3767,12 +3767,19 @@ class MainUI(QDialog):
         self.export_groupbox.setMaximumSize(QtCore.QSize(360, 155))
         self.export_groupbox.setObjectName(_fromUtf8("exportGroupBox"))
 
-        # self.model_groupbox = QtGui.QGroupBox("Model")
-        self.model_groupbox = QtGui.QGroupBox("")
-        self.model_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
-        self.model_groupbox.setMinimumSize(QtCore.QSize(360, 120))
-        self.model_groupbox.setMaximumSize(QtCore.QSize(360, 120))
-        self.model_groupbox.setObjectName(_fromUtf8("ModelGroupBox"))
+        self.aixlib_groupbox = QtGui.QGroupBox("AixLib")
+        #self.aixlib_groupbox = QtGui.QGroupBox("")
+        self.aixlib_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
+        self.aixlib_groupbox.setMinimumSize(QtCore.QSize(360, 120))
+        self.aixlib_groupbox.setMaximumSize(QtCore.QSize(360, 120))
+        self.aixlib_groupbox.setObjectName(_fromUtf8("AixLibGroupBox"))
+        
+        self.annex_groupbox = QtGui.QGroupBox("Annex60")
+        #self.annex_groupbox = QtGui.QGroupBox("")
+        self.annex_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
+        self.annex_groupbox.setMinimumSize(QtCore.QSize(360, 120))
+        self.annex_groupbox.setMaximumSize(QtCore.QSize(360, 120))
+        self.annex_groupbox.setObjectName(_fromUtf8("AnnexGroupBox"))
 
         self.export_button = QtGui.QPushButton(self.export_groupbox)
         self.export_button.setGeometry(QtCore.QRect(5, 20, 305, 25))
@@ -3811,36 +3818,44 @@ class MainUI(QDialog):
         self.export_label_library.setText("Library:")
         self.export_create_library_combobox = QtGui.QComboBox(
             self.export_groupbox)
+        self.connect(self.export_create_library_combobox, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.switch_lib)
         self.export_create_library_combobox.setGeometry(
             QtCore.QRect(130, 125, 215, 25))
 
-        self.export_template_label_model = QtGui.QLabel(self.model_groupbox)
+        self.export_template_label_model = QtGui.QLabel(self.aixlib_groupbox)
         self.export_template_label_model.setGeometry(
-            QtCore.QRect(5, 5, 120, 25))
+            QtCore.QRect(5, 20, 120, 25))
         self.export_template_label_model.setText("Model type:")
         self.export_create_template_model_combobox = QtGui.QComboBox(
-            self.model_groupbox)
+            self.aixlib_groupbox)
         self.export_create_template_model_combobox.setGeometry(
-            QtCore.QRect(130, 5, 215, 25))
-        self.export_template_label_zone = QtGui.QLabel(self.model_groupbox)
+            QtCore.QRect(130, 20, 215, 25))
+        self.export_template_label_zone = QtGui.QLabel(self.aixlib_groupbox)
         self.export_template_label_zone.setGeometry(
-            QtCore.QRect(5, 40, 120, 25))
+            QtCore.QRect(5, 55, 120, 25))
         self.export_template_label_zone.setText("Zone type:")
         self.export_create_template_zone_combobox = QtGui.QComboBox(
-            self.model_groupbox)
+            self.aixlib_groupbox)
         self.export_create_template_zone_combobox.setGeometry(
-            QtCore.QRect(130, 40, 215, 25))
-        self.export_template_label_corG = QtGui.QLabel(self.model_groupbox)
+            QtCore.QRect(130, 55, 215, 25))
+        self.export_template_label_corG = QtGui.QLabel(self.aixlib_groupbox)
         self.export_template_label_corG.setGeometry(
-            QtCore.QRect(5, 75, 120, 25))
+            QtCore.QRect(5, 90, 120, 25))
         self.export_template_label_corG.setText("corG:")
-        self.radio_button_corG_1 = QtGui.QRadioButton(self.model_groupbox)
-        self.radio_button_corG_1.setGeometry(QtCore.QRect(130, 75, 120, 25))
+        self.radio_button_corG_1 = QtGui.QRadioButton(self.aixlib_groupbox)
+        self.radio_button_corG_1.setGeometry(QtCore.QRect(130, 90, 120, 25))
         self.radio_button_corG_1.setText("with CorG")
-        self.radio_button_corG_2 = QtGui.QRadioButton(self.model_groupbox)
-        self.radio_button_corG_2.setGeometry(QtCore.QRect(250, 75, 120, 25))
+        self.radio_button_corG_2 = QtGui.QRadioButton(self.aixlib_groupbox)
+        self.radio_button_corG_2.setGeometry(QtCore.QRect(250, 90, 120, 25))
         self.radio_button_corG_2.setText("without CorG")
         self.radio_button_corG_1.setChecked(True)
+
+        self.annex_number_of_elements = QtGui.QLabel(self.annex_groupbox)
+        self.annex_number_of_elements.setGeometry(
+            QtCore.QRect(5, 20, 120, 25))
+        self.annex_number_of_elements.setText("Number of elements:")
+
         library_type_list = ["AixLib", "Annex60"]
         modelTypeList = ["MultizoneEquipped", "Multizone", "None"]
         zoneTypeList = ["ThermalZoneEquipped", "ThermalZone", "None"]
@@ -3852,7 +3867,9 @@ class MainUI(QDialog):
         self.export_window_ui_layout.addWidget(
             self.export_groupbox, 1, 1)
         self.export_window_ui_layout.addWidget(
-            self.model_groupbox, 2, 1)
+            self.aixlib_groupbox, 2, 1)
+        self.export_window_ui_layout.addWidget(
+            self.annex_groupbox, 2, 1)
         self.export_window_ui.setWindowModality(Qt.ApplicationModal)
         self.export_window_ui.show()
 
@@ -4575,6 +4592,14 @@ class MainUI(QDialog):
             if element.internal_id == current_item.internal_id:
                 self.current_element = element
         self.display_current_element()
+
+    def switch_lib(self):
+        if self.export_create_library_combobox.currentText() == "AixLib":
+            self.annex_groupbox.setVisible(False)
+            self.aixlib_groupbox.setVisible(True)
+        else:
+            self.aixlib_groupbox.setVisible(False)
+            self.annex_groupbox.setVisible(True)
 
     def switch_current_layer(self):
         ''' Switches the current layer if the user clicks on it
