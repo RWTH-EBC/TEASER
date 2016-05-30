@@ -279,8 +279,18 @@ class Controller():
     @classmethod
     def click_export_button(self, project, building_model, zone_model, corG,
                             internal_id, path_output_folder):
-               project.export_aixlib(building_model, zone_model, corG,
-                              internal_id, path_output_folder)
+                                project.export_aixlib(building_model,
+                                                      zone_model, corG,
+                                                      internal_id,
+                                                      path_output_folder)
+
+    @classmethod
+    def click_export_button_annex(self, project, num_of_elem, merge_win,
+                                  internal_id, path_output_folder):
+                                    project.export_annex(
+                                                        num_of_elem, merge_win,
+                                                        internal_id,
+                                                        path_output_folder)
 
     @classmethod
     def click_change_all_constr(self,
