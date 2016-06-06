@@ -3778,6 +3778,13 @@ class MainUI(QDialog):
         self.annex_groupbox.setMinimumSize(QtCore.QSize(360, 120))
         self.annex_groupbox.setMaximumSize(QtCore.QSize(360, 120))
         self.annex_groupbox.setObjectName(_fromUtf8("AnnexGroupBox"))
+        self.annex_groupbox.setVisible(False)
+
+        self.export_model_groupbox = QtGui.QGroupBox("")
+        self.export_model_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
+        self.export_model_groupbox.setMinimumSize(QtCore.QSize(360, 120))
+        self.export_model_groupbox.setMaximumSize(QtCore.QSize(360, 120))
+        self.export_model_groupbox.setObjectName(_fromUtf8("GroupBoxModel"))
 
         self.export_button = QtGui.QPushButton(self.export_groupbox)
         self.export_button.setGeometry(QtCore.QRect(5, 20, 305, 25))
@@ -3816,8 +3823,6 @@ class MainUI(QDialog):
         self.export_label_library.setText("Library:")
         self.export_create_library_combobox = QtGui.QComboBox(
             self.export_groupbox)
-        self.connect(self.export_create_library_combobox, QtCore.SIGNAL(
-            "currentIndexChanged(int)"), self.switch_lib)
         self.export_create_library_combobox.setGeometry(
             QtCore.QRect(130, 125, 215, 25))
 
@@ -3872,6 +3877,7 @@ class MainUI(QDialog):
         number_of_elements_list = ["2", "3", "4"]
         merging_windows_list = ["True", "False"]
 
+
         self.export_create_library_combobox.addItems(
                                                             library_type_list)
         self.export_create_template_model_combobox.addItems(modelTypeList)
@@ -3880,12 +3886,17 @@ class MainUI(QDialog):
                                                     number_of_elements_list)
         self.annex_create_merge_windows_combobox.addItems(
                                                     merging_windows_list)
+
+        self.connect(self.export_create_library_combobox, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.switch_lib)
+
         self.export_window_ui_layout.addWidget(
             self.export_groupbox, 1, 1)
         self.export_window_ui_layout.addWidget(
             self.aixlib_groupbox, 2, 1)
         self.export_window_ui_layout.addWidget(
             self.annex_groupbox, 2, 1)
+
         self.export_window_ui.setWindowModality(Qt.ApplicationModal)
         self.export_window_ui.show()
 
@@ -4645,11 +4656,20 @@ class MainUI(QDialog):
 
     def switch_lib(self):
         if self.export_create_library_combobox.currentText() == "AixLib":
+            #self.export_model_groupbox = self.aixlib_groupbox
             self.annex_groupbox.setVisible(False)
             self.aixlib_groupbox.setVisible(True)
         else:
+            #self.export_model_groupbox = self.annex_groupbox
             self.aixlib_groupbox.setVisible(False)
             self.annex_groupbox.setVisible(True)
+        """
+        if self.export_create_library_combobox.currentText() == "AixLib":
+
+        else:
+            self.aixlib_groupbox.setVisible(False)
+            self.annex_groupbox.setVisible(True)
+        """
 
     def switch_current_layer(self):
         ''' Switches the current layer if the user clicks on it
