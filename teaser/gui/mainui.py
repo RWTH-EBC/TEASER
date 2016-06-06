@@ -4530,11 +4530,14 @@ class MainUI(QDialog):
 
         elif self.export_create_library_combobox.currentText() == "Annex60":
             sender = self.sender()
-            num_of_elem = \
-                self.annex_create_number_of_elements_combobox.currentText()
-            merge_win = \
-                self.annex_create_merge_windows_combobox.currentText()
-            print(num_of_elem + " num of elements")
+            num_of_elem = int(
+                self.annex_create_number_of_elements_combobox.currentText())
+            if self.annex_create_merge_windows_combobox.currentText() == \
+               "True":
+                    merge_win = True
+            else:
+                    merge_win = False
+
             if(sender.text() == self.export_button.text()):
                 Controller.click_export_button_annex(
                                                self.project, num_of_elem,
