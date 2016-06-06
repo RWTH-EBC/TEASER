@@ -897,16 +897,22 @@ class Project(object):
         and possibly not all kinds of CityGML modelling techniques are
         supported.
 
+        If the fucntion of the building is given as Residential (1000) or
+        Office (1120) the importer directly converts the building to
+        archetype buildings. If not only the citygml geometry is imported and
+        you need take care of either the material properties and zoning or you
+        may use the _convert_bldg fucntion in citygml_input module. 
+
 
         Parameters
         ----------
 
         path : string
-            full path to a teaserXML file
+            full path to a CityGML file
 
         '''
 
-        citygml_in.load_teaser_xml(path, self)
+        citygml_in.load_gml(path, self)
 
     def export_aixlib(self,
                       building_model="None",
