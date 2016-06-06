@@ -1496,7 +1496,8 @@ class MainUI(QDialog):
         self.popup_window_type_building.setWindowTitle(
             u"generate " + self.current_type_building + " ...")
         self.popup_window_type_building.setFixedWidth(520)
-        self.popup_window_type_building.setFixedHeight(800)
+        # self.popup_window_type_building.setFixedHeight(800)
+        self.popup_window_type_building.setFixedHeight(600)
         self.popup_layout_type_building = QtGui.QGridLayout()
         self.popup_window_type_building.setLayout(
             self.popup_layout_type_building)
@@ -3805,11 +3806,13 @@ class MainUI(QDialog):
         if self.file_path == "":
             self.export_save_template_lineedit.setText(
                 utilitis.get_default_path())
-            utilitis.create_path(str(self.export_save_template_lineedit.text()))
+            utilitis.create_path(str(
+                                self.export_save_template_lineedit.text()))
             self.file_path = self.export_save_template_lineedit.text()
         else:
             self.export_save_template_lineedit.setText(self.file_path)
-            utilitis.create_path(str(self.export_save_template_lineedit.text()))
+            utilitis.create_path(str(
+                                self.export_save_template_lineedit.text()))
         self.export_save_template_button = QtGui.QPushButton(
             self.export_groupbox)
         self.export_save_template_button.setGeometry(
@@ -3877,9 +3880,7 @@ class MainUI(QDialog):
         number_of_elements_list = ["2", "3", "4"]
         merging_windows_list = ["True", "False"]
 
-
-        self.export_create_library_combobox.addItems(
-                                                            library_type_list)
+        self.export_create_library_combobox.addItems(library_type_list)
         self.export_create_template_model_combobox.addItems(modelTypeList)
         self.export_create_template_zone_combobox.addItems(zoneTypeList)
         self.annex_create_number_of_elements_combobox.addItems(
@@ -4533,7 +4534,7 @@ class MainUI(QDialog):
                 self.annex_create_number_of_elements_combobox.currentText()
             merge_win = \
                 self.annex_create_merge_windows_combobox.currentText()
-
+            print(num_of_elem + " num of elements")
             if(sender.text() == self.export_button.text()):
                 Controller.click_export_button_annex(
                                                self.project, num_of_elem,
