@@ -1496,8 +1496,7 @@ class MainUI(QDialog):
         self.popup_window_type_building.setWindowTitle(
             u"generate " + self.current_type_building + " ...")
         self.popup_window_type_building.setFixedWidth(520)
-        # self.popup_window_type_building.setFixedHeight(800)
-        self.popup_window_type_building.setFixedHeight(600)
+        self.popup_window_type_building.setFixedHeight(800)
         self.popup_layout_type_building = QtGui.QGridLayout()
         self.popup_window_type_building.setLayout(
             self.popup_layout_type_building)
