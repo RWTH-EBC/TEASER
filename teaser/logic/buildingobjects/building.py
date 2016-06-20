@@ -139,14 +139,17 @@ class Building(object):
         of LoD 1 and LoD 2 buildings from CityGML data. All z-coordinates are
         evaluated and the minimum z-value is subtracted by the maximal value.
         """
-        max_help = 0
-        min_help = 9999
-        for surface in self.gml_surfaces:
-            z_value = surface.gml_surface[2::3]
-            max_help = max(max_help, max(z_value))
-            min_help = min(min_help, min(z_value))
+        if self.bldg_height is not None:
+            pass
+        else:
+            max_help = 0
+            min_help = 9999
+            for surface in self.gml_surfaces:
+                z_value = surface.gml_surface[2::3]
+                max_help = max(max_help, max(z_value))
+                min_help = min(min_help, min(z_value))
 
-        self.bldg_height = max_help - min_help
+            self.bldg_height = max_help - min_help
 
     def get_footprint_gml(self):
         """gets the footprint surface of a building from CityGML data
@@ -191,12 +194,16 @@ class Building(object):
 
 
         """
-        if self.height_of_floors is None:
-            self.height_of_floors = height_of_floor
-        else:
-            pass
         if self.bldg_height is None:
             raise AttributeError("building height needs to be defined for gml")
+
+        if self.height_of_floors is None and self.number_of_floors is None:
+            self.height_of_floors = height_of_floor
+        elif self.height_of_floors is None and self.number_of_floors is not \
+                None:
+            self.height_of_floors = self.bldg_height/self.number_of_floors
+        else:
+            pass
 
         if self.number_of_floors is not None:
             self.net_leased_area = self.get_footprint_gml() * \

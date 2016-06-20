@@ -23,6 +23,7 @@ def compare_orientation(bldg):
         bldg: Building()
             TEASER instance of Building()
     """
+    
 
     orient_tilt_help = []
     bldg.orient_tilt = []
