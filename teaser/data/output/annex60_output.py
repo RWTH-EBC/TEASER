@@ -69,7 +69,7 @@ def export_annex60(prj,
         utilitis.create_path(utilitis.get_full_path(bldg_path))
         utilitis.create_path(utilitis.get_full_path(bldg_path+ "\\" + bldg.name + \
                                                      "_Models"))
-        aixlib_output._help_package(bldg_path, bldg.name)
+        aixlib_output._help_package(bldg_path, bldg.name, within=prj.name)
         aixlib_output._help_package_order(bldg_path,
                                           [bldg],
                                           None,
@@ -87,7 +87,8 @@ def export_annex60(prj,
                                                         merge_windows))
 
             aixlib_output._help_package(zone_path,
-                                        bldg.name + "_Models")
+                                        bldg.name + "_Models",
+                                        within=prj.name + '.' + bldg.name)
             aixlib_output._help_package_order(zone_path,
                                               bldg.thermal_zones,
                                               (bldg.name + "_"))

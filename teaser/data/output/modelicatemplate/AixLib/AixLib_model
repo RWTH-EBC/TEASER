@@ -1,3 +1,4 @@
+within ${mod_prj}.${bldg.name};
 model ${bldg.name}
   "This is the simulation model of ${bldg.name}"
 
