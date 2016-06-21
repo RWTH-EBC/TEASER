@@ -1,3 +1,4 @@
+within ${within};
 model ${bldg.name}_${zone.name.replace(" ", "")}
   "This is the simulation model of ${bldg.name}_${zone.name.replace(" ", "")}"
 

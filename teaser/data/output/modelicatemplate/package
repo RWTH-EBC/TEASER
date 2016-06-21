@@ -1,3 +1,4 @@
+within ${within};
 package ${name}
   extends Modelica.Icons.Package;
   
