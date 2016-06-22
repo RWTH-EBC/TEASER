@@ -55,13 +55,13 @@ def export_annex60(prj,
         pass
     elif number_of_elements == 2:
         zone_template = Template(filename=utilitis.get_full_path(
-            "Data/Output/ModelicaTemplate/Annex60/Annex60_TwoElements"))
+            "data/output/modelicatemplate/Annex60/Annex60_TwoElements"))
     elif number_of_elements == 3:
         zone_template = Template(filename=utilitis.get_full_path(
-            "Data/Output/ModelicaTemplate/Annex60/Annex60_ThreeElements"))
+            "data/output/modelicatemplate/Annex60/Annex60_ThreeElements"))
     elif number_of_elements == 4:
         zone_template = Template(filename=utilitis.get_full_path(
-            "Data/Output/ModelicaTemplate/Annex60/Annex60_FourElements"))
+            "data/output/modelicatemplate/Annex60/Annex60_FourElements"))
 
     for bldg in exported_list_of_buildings:
         bldg_path = os.path.join(path,

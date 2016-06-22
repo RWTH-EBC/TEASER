@@ -52,13 +52,13 @@ def export_aixlib(prj,
     # use the same zone templates for all exports
     zone_template = Template(
         filename=utilitis.get_full_path(
-            "Data/Output/ModelicaTemplate/AixLib/AixLib_zone"))
+            "data/output/modelicatemplate/AixLib/AixLib_zone"))
     model_template = Template(
         filename=utilitis.get_full_path(
-            "Data/Output/ModelicaTemplate/AixLib/AixLib_model"))
+            "data/output/modelicatemplate/AixLib/AixLib_model"))
     zone_base_template = Template(
         filename=utilitis.get_full_path(
-            "Data/Output/ModelicaTemplate/AixLib/AixLib_base"))
+            "data/output/modelicatemplate/AixLib/AixLib_base"))
     # list which contains exported buildings
     if internal_id is not None:
         exported_list_of_buildings = [bldg for bldg in
