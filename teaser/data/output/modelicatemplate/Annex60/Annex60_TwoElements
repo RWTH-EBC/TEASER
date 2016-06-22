@@ -33,7 +33,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
   Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${len(zone.orientation_wall)}, UWin=${zone.ua_value_win/zone.area_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
-  Annex60.ThermalZones.ReducedOrder.RC.ThermalZoneTwoElements
+  Annex60.ThermalZones.ReducedOrder.RC.TwoElements
   thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     VAir=${zone.volume},
@@ -70,7 +70,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
 % if merge_windows is True:
   Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
     n=${len(zone.orientation_wall)},
-    wfGround=${list_to_string(zone.weightfactor_ground)},
+    wfGro=${list_to_string(zone.weightfactor_ground)},
     wfWall={${list_to_string(zone.weightfactor_ow)}},
     wfWin={${list_to_string(zone.weightfactor_win)}},
     withLongwave=true,
@@ -78,7 +78,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     alphaWallOut=${zone.alpha_conv_outer_ow},
     alphaRadWall=${zone.alpha_rad_outer_ow},
     eExt=${zone.ir_emissivity_outer_ow},
-    TGround=${zone.t_ground}) "Computes equivalent air temperature"
+    TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
   Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
