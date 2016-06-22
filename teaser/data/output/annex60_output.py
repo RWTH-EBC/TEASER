@@ -83,12 +83,18 @@ def export_annex60(prj,
                     zone.name.replace(" ", "") + ".mo"), 'w')
             out_file.write(zone_template.render_unicode(bldg=bldg,
                                                         zone=zone,
-                                                        merge_windows=
-                                                        merge_windows))
+                                                        merge_windows=merge_windows,
+                                                        within=(prj.name +
+                                                                '.' +
+                                                                bldg.name +
+                                                                '.' +
+                                                                bldg.name +
+                                                                "_Models")))
 
             aixlib_output._help_package(zone_path,
                                         bldg.name + "_Models",
                                         within=prj.name + '.' + bldg.name)
+
             aixlib_output._help_package_order(zone_path,
                                               bldg.thermal_zones,
                                               (bldg.name + "_"))
