@@ -16,7 +16,7 @@ load project of VDI 6007 room from  TEASER file
 prj = Project(False)
 
 prj.load_project(utilitis.get_full_path(
-    "examples\\examplefiles\\new.teaserXML"))
+    "examples/examplefiles/new.teaserXML"))
 
 '''
 execute VDI calculation for single zone

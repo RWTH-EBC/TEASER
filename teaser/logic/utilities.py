@@ -25,26 +25,18 @@ def create_path(path):
     path : str
 
     '''
-
+    path = os.path.normpath(path)
     # if directory exists change into that directory
     if(os.path.isdir(path)):
         os.chdir(path)
         return path
     else:
         if not os.path.exists(path):
-            l = []
-            p = "\\"
-            l = path.split("\\")
-            i = 1
-            while i < len(l):
-                p = p + l[i] + "\\"
-                i = i + 1
-                if not os.path.exists(p):
-                    os.mkdir(p)
+            os.makedirs(path)
 
-        os.chdir(p)
+        os.chdir(path)
     
-    return p
+    return path
 
 def get_default_path():
     '''Function to construct default path to OutputData folder
@@ -54,9 +46,10 @@ def get_default_path():
     '''
 
     directory = os.path.dirname(__file__)
-    src = "\\teaser"
+    src = "teaser"
     last_index = directory.rfind(src)
-    default_path = directory[:last_index] + "\\teaser\\OutputData"
+    default_path = os.path.join(directory[:last_index], "teaser", "OutputData")
+
 
     return default_path
 
@@ -77,9 +70,9 @@ def get_full_path(rel_path):
     '''
 
     directory = os.path.dirname(__file__)
-    src = "\\teaser"
+    src = "teaser"
     last_index = directory.rfind(src)
-    first_path = directory[:last_index]+"\\teaser\\"
+    first_path = os.path.join(directory[:last_index], "teaser")
     full_path = os.path.join(first_path, rel_path)
 
     return full_path
