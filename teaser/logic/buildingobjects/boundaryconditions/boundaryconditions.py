@@ -347,7 +347,7 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                self.parent.parent.file_internal_gains = ("/InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
         self._profile_persons = value
@@ -363,7 +363,7 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                self.parent.parent.file_internal_gains = ("/InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
         self._profile_machines = value
@@ -380,7 +380,7 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                self.parent.parent.file_internal_gains = ("/InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
 
@@ -408,7 +408,7 @@ class BoundaryConditions(UseConditions):
         else:
             if self.parent is not None:
                 if self.parent.parent.file_set_t is None:
-                    self.parent.parent.file_set_t = ("\\TSet" +
+                    self.parent.parent.file_set_t = ("/TSet" +
                                                    self.parent.parent.name +
                                                    ".mat")
             else:
@@ -438,7 +438,7 @@ class BoundaryConditions(UseConditions):
         else:
             if self.parent is not None:
                 if self.parent.parent.file_set_t is None:
-                    self.parent.parent.file_set_t = ("\\TSet_" +
+                    self.parent.parent.file_set_t = ("/TSet_" +
                                                    self.parent.parent.name +
                                                    ".mat")
                 else:
@@ -519,7 +519,7 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("\\AHU_" +
+                self.parent.parent.file_ahu = ("/AHU_" +
                                                self.parent.parent.name +
                                                ".mat")
         self._rel_humidity = value
@@ -545,7 +545,7 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("\\AHU_" +
+                self.parent.parent.file_ahu = ("/AHU_" +
                                                self.parent.parent.name +
                                                ".mat")
         self._min_air_exchange = value
@@ -571,7 +571,7 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("\\AHU_" +
+                self.parent.parent.file_ahu = ("/AHU_" +
                                                self.parent.parent.name +
                                                ".mat")
         self._min_ahu = value
@@ -597,7 +597,7 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("\\AHU_" +
+                self.parent.parent.file_ahu = ("/AHU_" +
                                                self.parent.parent.name +
                                                ".mat")
         self._max_ahu = value
@@ -623,7 +623,7 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                self.parent.parent.file_internal_gains = ("/InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
         self._persons = value
@@ -649,7 +649,7 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                self.parent.parent.file_internal_gains = ("/InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
         self._machines = value
@@ -675,7 +675,7 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("\\InternalGains_" +
+                self.parent.parent.file_internal_gains = ("/InternalGains_" +
                                                self.parent.parent.name +
                                                ".mat")
         self._lighting_power = value

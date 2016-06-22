@@ -38,7 +38,7 @@ def save_type_element(element, path=None, file_name=None):
         path = element.parent.parent.parent.data.path_tb
         xml_parse = element.parent.parent.parent.data.element_bind
     else:
-        path = path + "\\" + file_name + ".xml"
+        path = path + "/" + file_name + ".xml"
         try:
             xml_file = open(utilitis.get_full_path(path))
             xml_parse = tb_bind.CreateFromDocument(xml_file.read())

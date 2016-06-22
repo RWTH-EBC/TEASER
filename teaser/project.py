@@ -837,9 +837,9 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = utilitis.get_full_path("OutputData") + "\\" + name
+            new_path = utilitis.get_full_path("OutputData") + "/" + name
         else:
-            new_path = path + "\\" + name
+            new_path = path + "/" + name
             utilitis.create_path(utilitis.get_full_path(path))
 
         txml_out.save_teaser_xml(new_path, self)
@@ -882,9 +882,9 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = utilitis.get_full_path("OutputData") + "\\" + name
+            new_path = utilitis.get_full_path("OutputData") + "/" + name
         else:
-            new_path = path + "\\" + name
+            new_path = path + "/" + name
             utilitis.create_path(utilitis.get_full_path(path))
 
         citygml_out.save_gml(self, new_path)
@@ -942,9 +942,9 @@ class Project(object):
         """
 
         if path is None:
-            path = utilitis.get_default_path() + "\\" + self.name
+            path = utilitis.get_default_path() + "/" + self.name
         else:
-            path = path + "\\" + self.name
+            path = path + "/" + self.name
 
         utilitis.create_path(path)
 
@@ -980,9 +980,9 @@ class Project(object):
         """
 
         if path is None:
-            path = utilitis.get_default_path() + "\\" + self.name
+            path = utilitis.get_default_path() + "/" + self.name
         else:
-            path = path + "\\" + self.name
+            path = path + "/" + self.name
 
         utilitis.create_path(path)
 
@@ -1004,9 +1004,9 @@ class Project(object):
         '''
 
         if path is None:
-            path = "OutputData\\"+self.name
+            path = "OutputData/"+self.name
         else:
-            path = path+"\\"+self.name
+            path = path+"/"+self.name
 
         text_out.export_parameters_txt(prj=self,
                                        path=path)
