@@ -180,7 +180,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     origin={84,-22})));
 equation
 % if merge_windows is False:
-  connect(eqAirTemp.TEqAirWindow, prescribedTemperature1.T)
+  connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
     annotation (Line(
     points={{-3,-0.2},{0,-0.2},{0,20},{6.8,20}},   color={0,0,127}));
 % endif

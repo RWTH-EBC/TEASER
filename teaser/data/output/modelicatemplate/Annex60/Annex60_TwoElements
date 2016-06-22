@@ -83,7 +83,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
 % else:
   Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     n=${len(zone.orientation_wall)},
-    wfGround=${list_to_string(zone.weightfactor_ground)},
+    wfGro=${list_to_string(zone.weightfactor_ground)},
     wfWall={${list_to_string(zone.weightfactor_ow)}},
     wfWin={${list_to_string(zone.weightfactor_win)}},
     withLongwave=true,
@@ -95,7 +95,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     aWin=${zone.solar_absorp_win},
     eExt=${zone.ir_emissivity_outer_ow},
     eWin=${zone.ir_emissivity_win},
-    TGround=${zone.t_ground}) "Computes equivalent air temperature"
+    TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif
   Modelica.Blocks.Math.Add solRad[${len(zone.orientation_wall)}]
@@ -161,7 +161,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
 equation
 % if merge_windows is False:
-  connect(eqAirTemp.TEqAirWindow, prescribedTemperature1.T)
+  connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
     annotation (Line(
     points={{-3,-0.2},{0,-0.2},{0,20},{6.8,20}},   color={0,0,127}));
 % endif
