@@ -55,19 +55,19 @@ def export_annex60(prj,
         pass
     elif number_of_elements == 2:
         zone_template = Template(filename=utilitis.get_full_path(
-            "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_TwoElements"))
+            "data/output/modelicatemplate/Annex60/Annex60_TwoElements"))
     elif number_of_elements == 3:
         zone_template = Template(filename=utilitis.get_full_path(
-            "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_ThreeElements"))
+            "data/output/modelicatemplate/Annex60/Annex60_ThreeElements"))
     elif number_of_elements == 4:
         zone_template = Template(filename=utilitis.get_full_path(
-            "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_FourElements"))
+            "data/output/modelicatemplate/Annex60/Annex60_FourElements"))
 
     for bldg in exported_list_of_buildings:
         bldg_path = os.path.join(path,
                                  bldg.name)
         utilitis.create_path(utilitis.get_full_path(bldg_path))
-        utilitis.create_path(utilitis.get_full_path(bldg_path+ "\\" + bldg.name + \
+        utilitis.create_path(utilitis.get_full_path(bldg_path+ "/" + bldg.name + \
                                                      "_Models"))
         aixlib_output._help_package(bldg_path, bldg.name, within=prj.name)
         aixlib_output._help_package_order(bldg_path,
@@ -79,7 +79,7 @@ def export_annex60(prj,
                                      bldg.name+"_Models")
 
             out_file = open(utilitis.get_full_path(
-                    zone_path + "\\" + bldg.name + "_" +
+                    zone_path + "/" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
             out_file.write(zone_template.render_unicode(bldg=bldg,
                                                         zone=zone,

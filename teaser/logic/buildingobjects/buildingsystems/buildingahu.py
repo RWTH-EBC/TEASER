@@ -98,7 +98,7 @@ class BuildingAHU(object):
         if self._profile_min_relative_humidity is None:
             pass
         else:
-            self.parent.file_ahu = ("\\AHU_" +
+            self.parent.file_ahu = ("/AHU_" +
                                     self.parent.name +
                                     ".mat")
 
@@ -114,7 +114,7 @@ class BuildingAHU(object):
         if self._profile_max_relative_humidity is None:
             pass
         else:
-            self.parent.file_ahu = ("\\AHU_" +
+            self.parent.file_ahu = ("/AHU_" +
                                     self.parent.name +
                                     ".mat")
 
@@ -131,7 +131,7 @@ class BuildingAHU(object):
         if self._profile_v_flow is None:
             pass
         else:
-            self.parent.file_ahu = ("\\AHU_" +
+            self.parent.file_ahu = ("/AHU_" +
                                     self.parent.name +
                                     ".mat")
 
@@ -147,7 +147,7 @@ class BuildingAHU(object):
         if self._profile_temperature is None:
             pass
         else:
-            self.parent.file_ahu = ("\\AHU_" +
+            self.parent.file_ahu = ("/AHU_" +
                                     self.parent.name +
                                     ".mat")
         self._profile_temperature = value

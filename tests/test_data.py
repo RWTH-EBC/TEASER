@@ -94,8 +94,8 @@ class Test_teaser(object):
         with TEASER3 values.
         '''
         prj.set_default()
-        prj.load_project(utilities.get_full_path("examples\\examplefiles"
-                                              "\\new.teaserXML"))
+        prj.load_project(utilities.get_full_path("examples/examplefiles"
+                                              "/new.teaserXML"))
         therm_zone = prj.buildings[0].thermal_zones[0]
 
         prj.buildings[0].calc_building_parameter(number_of_elements=2,
@@ -988,7 +988,7 @@ class Test_teaser(object):
         '''test of save_use_conditions, no parameter checking'''
         import os
         try:
-            os.remove(utilities.get_default_path() + "\\" + "UseCondUT.xml")
+            os.remove(utilities.get_default_path() + "/" + "UseCondUT.xml")
         except:
             pass
         path = utilities.get_default_path()
@@ -1036,7 +1036,7 @@ class Test_teaser(object):
         '''test of save_type_element, no parameter checking'''
         import os
         try:
-            os.remove(utilities.get_default_path() + "\\" + "unitTestTB.xml")
+            os.remove(utilities.get_default_path() + "/" + "unitTestTB.xml")
         except:
             pass
 
