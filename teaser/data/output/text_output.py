@@ -28,7 +28,7 @@ def export_parameters_txt(prj, path):
         utilitis.create_path(utilitis.get_full_path(bldg_path))
         readable_template = Template(
             filename=utilitis.get_full_path(
-                "Data/Output/TextTemplate/ReadableBuilding"))
+                "data/output/texttemplate/ReadableBuilding"))
 
         out_file = open(utilitis.get_full_path
                         (bldg_path+"ReadableOutput.txt"), 'w')

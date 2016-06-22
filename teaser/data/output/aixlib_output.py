@@ -194,7 +194,7 @@ def _help_package(path, name, uses=None):
     '''
 
     package_template = Template(filename=utilitis.get_full_path
-                                ("Data/Output/ModelicaTemplate/package"))
+                                ("data/output/modelicatemplate/package"))
     out_file = open(
         utilitis.get_full_path(path + "/" + "package" + ".mo"), 'w')
     out_file.write(package_template.render_unicode(name=name, uses=uses))
@@ -221,7 +221,7 @@ def _help_package_order(path, package_list, addition=None, extra=None):
 
     '''
     order_template = Template(filename=utilitis.get_full_path
-                              ("Data/Output/ModelicaTemplate/package_order"))
+                              ("data/output/modelicatemplate/package_order"))
 
     out_file = open(
         utilitis.get_full_path(path + "/" + "package" + ".order"), 'w')
