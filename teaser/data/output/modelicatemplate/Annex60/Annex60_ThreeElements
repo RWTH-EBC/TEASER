@@ -30,10 +30,10 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     azi={${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_wall)))}})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  Annex60.Experimental.ThermalZones.ReducedOrder.CorrectionSolarGain.CorrectionGDoublePane corGDoublePane(n=${len(zone.orientation_wall)}, UWin=${zone.ua_value_win/zone.area_win})
+  Annex60.ThermalZones.ReducedOrder.CorrectionSolarGain.CorrectionGDoublePane corGDoublePane(n=${len(zone.orientation_wall)}, UWin=${zone.ua_value_win/zone.area_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
-  Annex60.Experimental.ThermalZones.ReducedOrder.ReducedOrderZones.ThermalZoneThreeElements thermalZoneThreeElements(
+  Annex60.ThermalZones.ReducedOrder.ReducedOrderZones.ThermalZoneThreeElements thermalZoneThreeElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     VAir=${zone.volume},
     alphaExt=${zone.alpha_comb_inner_ow},
@@ -73,7 +73,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
 % endif
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 % if merge_windows is True:
-  Annex60.Experimental.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
+  Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
     n=${len(zone.orientation_wall)},
     wfGround=${list_to_string(zone.weightfactor_ground)},
     wfWall={${list_to_string(zone.weightfactor_ow)}},
@@ -86,7 +86,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     TGround=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
-  Annex60.Experimental.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
+  Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     n=${len(zone.orientation_wall)},
     wfGround=${list_to_string(zone.weightfactor_ground)},
     wfWall={${list_to_string(zone.weightfactor_ow)}},
