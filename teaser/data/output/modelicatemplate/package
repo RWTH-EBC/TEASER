@@ -1,4 +1,6 @@
+%if within is not None:
 within ${within};
+%endif
 package ${name}
   extends Modelica.Icons.Package;
   

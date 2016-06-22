@@ -48,7 +48,7 @@ def export_annex60(prj,
     else:
         exported_list_of_buildings = prj.buildings
 
-    aixlib_output._help_package(path, prj.name, uses)
+    aixlib_output._help_package(path, prj.name, uses, within=None)
     aixlib_output._help_package_order(path, exported_list_of_buildings)
 
     if number_of_elements == 1:

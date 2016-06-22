@@ -73,7 +73,7 @@ def export_aixlib(prj,
         # full model support here
         print("full model support")
 
-        _help_package(path, prj.name, uses)
+        _help_package(path, prj.name, uses, within=None)
         _help_package_order(path, exported_list_of_buildings)
 
         for bldg in exported_list_of_buildings:
@@ -193,7 +193,7 @@ def export_aixlib(prj,
 
 
 
-def _help_package(path, name, uses=None, within=""):
+def _help_package(path, name, uses=None, within=None):
     '''creates a package.mo file
 
     private function, do not call
@@ -205,6 +205,8 @@ def _help_package(path, name, uses=None, within=""):
         path of where the package.mo should be placed
     name : string
         name of the Modelica package
+    within : string
+        path of Modelica package containing this package
 
     '''
 
