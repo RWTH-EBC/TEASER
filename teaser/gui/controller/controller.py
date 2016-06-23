@@ -35,13 +35,62 @@ class Controller():
         ''' '''
 
     @classmethod
-    def click_add_new_layer(self, parent, position, thick, mat_nam, den, therm,
+    def click_add_new_layer(self, parent, position, thick, name, den, therm,
                             heat, solar, ir, trans):
+        '''Add a new Layer
+
+        adds a new layer to the current element or envelope.
+        If it is an element then return his parent, if not then return the
+        layer.
+
+        Parameters
+        ----------
+
+        parent : wall()
+            The parent class of a layer this can be a ceiling,
+            floor, groundfloor, innerwall, outerwall, rooftop or window.
+
+        position : int
+            Adds the layer at specified position.
+
+        thick : float
+            Thickness of the layer.
+
+        name : string
+            Name of material.
+
+        den : float
+            density of material.
+
+        therm : float
+            thermal_conduc of material.
+
+        heat : float
+            heat_capac of material.
+
+        solar : float
+            solar_absorp of material.
+
+        ir : float
+            ir_emissivity of material.
+
+        trans : float
+            transmittance of material.
+
+        Returns
+        ----------
+
+        layer : layer()
+        parent : wall()
+            If the current element is an envelope then return a layer, but if
+            the current element is a wall then return the parent
+        '''
+
         layer = Layer()
         if parent is not None:
             parent.add_layer(layer, position=position)
         mat = Material(layer)
-        mat.name = mat_nam
+        mat.name = name
         mat.density = den
         mat.thermal_conduc = therm
         mat.heat_capac = heat
@@ -62,7 +111,7 @@ class Controller():
 
         Parameters:
         ----------
-        parent : Building()
+        parent : building()
             parent class of zone
 
         name : str
@@ -74,6 +123,11 @@ class Controller():
         usage : string
             usage type of zone
 
+        Returns
+        ----------
+
+        parent : Building()
+            parent class of zone
         '''
 
         zone = ThermalZone(parent)
@@ -85,6 +139,30 @@ class Controller():
 
     @classmethod
     def click_add_new_element(self, parent, name, type, area):
+        '''
+        adds a new element to a zone with specified name, area and type.
+
+        Parameters:
+        ----------
+        parent : wall()
+            parent class of an element
+
+        name : str
+            individual name
+
+        type : string
+            type of element
+
+        area : float
+            area of the element
+
+        Returns
+        ----------
+
+        parent : wall()
+            parent class of element
+        '''
+
         if type == "Outer Wall":
             element = OuterWall(parent)
             element.name = name
