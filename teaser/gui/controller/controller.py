@@ -201,10 +201,6 @@ class Controller():
         return Building(current_project, openId)
 
     @classmethod
-    def clickBugreportManualButton(self):
-        i = 0
-
-    @classmethod
     def click_generate_type_building_button(self,
                                             parent,
                                             name,
