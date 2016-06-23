@@ -212,10 +212,51 @@ class Controller():
                                             street,
                                             location,
                                             type_building_attributes):
-        """
+        '''
         Creates a new TypeBuilding. Needs all given attributes and calls
-        function in Project module. 
-        """
+        function in Project module.
+
+        Parameters:
+        ----------
+        parent : project()
+            parent class of a (type)building
+
+        name : str
+            individual name
+
+        year_of_construction : float
+            construction year of building
+
+        number_of_floors : int
+            number of floor in building
+
+        height_of_floors : float
+            height of floor in building
+
+        type_of_building : (non)residential()
+             building which can be a institute, institute4, institute8,
+             office or singlefamilydwelling
+
+        net_leased_area : float
+            net leased area of the building
+
+        street : str
+            individual street name
+
+        location : string
+            individual location name
+
+        type_building_attributes : string
+
+        Returns
+        ----------
+
+        parent : project()
+            parent class of building
+
+        int_id : int
+            internal id of building
+        '''
 
         int_id = 0
 
@@ -230,13 +271,10 @@ class Controller():
                 office_layout=type_building_attributes['layoutArea'],
                 window_layout=type_building_attributes['layoutWindowArea'],
                 construction_type=type_building_attributes['constructionType'])
-
-
-
-
             building.street_name = street
             building.city = location
             int_id = building.internal_id
+
         if type_of_building == "Institute 4":
             building = parent.type_bldg_institute4(
                 name=name,
@@ -247,7 +285,6 @@ class Controller():
                 office_layout=type_building_attributes['layoutArea'],
                 window_layout=type_building_attributes['layoutWindowArea'],
                 construction_type=type_building_attributes['constructionType'])
-
             building.street_name = street
             building.city = location
             int_id = building.internal_id
@@ -262,7 +299,6 @@ class Controller():
                 office_layout=type_building_attributes['layoutArea'],
                 window_layout=type_building_attributes['layoutWindowArea'],
                 construction_type=type_building_attributes['constructionType'])
-
             building.street_name = street
             building.city = location
             int_id = building.internal_id
@@ -305,6 +341,18 @@ class Controller():
 
     @classmethod
     def click_save_button(self, project, path):
+        '''
+        Saves a project with a given path.
+
+        Parameters:
+        ----------
+        project : project()
+            root class
+
+        path : str
+            individual path where the xml file will be saved
+        '''
+
         if path.endswith("teaserXML"):
             teaser_xml.save_teaser_xml(path, project)
             print("Saved under: "+path)
@@ -314,9 +362,19 @@ class Controller():
 
     @classmethod
     def click_load_button(self, path):
-        """
+        '''
         Returns a project loaded from XML.
-        """
+
+        path : str
+            individual path where the xml file will be loaded
+
+        Returns
+        ----------
+
+        loaded_prj : project()
+            project class filled with information from a file
+        '''
+
         loaded_prj = Project()
         if path.endswith(".xml"):
             loaded_prj.load_old_teaser(path)
@@ -327,6 +385,19 @@ class Controller():
 
     @classmethod
     def get_materials_from_file(self, project):
+        '''
+        Get a list with material from a file.
+
+        project : project()
+            root class
+
+        Returns
+        ----------
+
+        mat_list : list
+            list with filled material from a file
+        '''
+
         mat_list = []
         for mat in project.data.material_bind.Material:
             mat_list.append(mat)
@@ -335,6 +406,25 @@ class Controller():
 
     @classmethod
     def switch_zone_type(self, zone_type, project, zone_id):
+        '''
+        Switch type of a selected zone, with its internal id.
+
+        zone_type : string
+            Type of a zone
+
+        project : project()
+            root class
+
+        zone_id : int
+            internal id of a zone
+
+        Returns
+        ----------
+
+        project : project()
+            current project with switched zone type of selected zone
+        '''
+
         for building in project.buildings:
             for zone in building.thermal_zones:
                 if zone.internal_id == zone_id:
@@ -345,7 +435,32 @@ class Controller():
     @classmethod
     def click_export_button(self, project, building_model, zone_model, corG,
                             internal_id, path_output_folder):
-               project.export_aixlib(building_model, zone_model, corG,
+        '''
+        Execute an export with selected model.
+        Supoorted models are Annex60 and Aixlib.
+
+        project : project()
+            root class
+
+        building_model : string
+            Model type of export (e.g. Multizone etc.)
+
+        zone_model : string
+            Zone type of export (e.g. Thermalzone etc.)
+
+        corG : boolean
+            boolean which enables or disables the corG
+
+        internal_id : int
+            internal id of (current)building. If the value is none then the
+            export will executed for all buildings otherwise the export will
+            executed for one building.
+
+        path_output_folder : string
+            path of the output location
+        '''
+
+        project.export_aixlib(building_model, zone_model, corG,
                               internal_id, path_output_folder)
 
     @classmethod
@@ -359,6 +474,39 @@ class Controller():
                                 outer_convection,
                                 outer_radiation,
                                 layer_set):
+        '''
+        Overwrites all values of selected envelope with inputs
+
+        Parameters:
+        ----------
+        bldg : building()
+            current building
+
+        orientation : string
+            orientation of selected envelope
+
+        element_type : string
+            shows the element type
+
+        tilt : float
+            tilt of the envelope (default: None)
+
+        inner_convection : float
+            inner convection of the envelope
+
+        inner_radiation : flaot
+            inner radiation of the envelope
+
+        outer_convection : float
+            outer convectionof the envelope
+
+        outer_radiation : float
+            outer radiation of the envelope
+
+        layer_set : float
+            area of the envelope
+        '''
+
         for zone in bldg.thermal_zones:
             for wall in zone.outer_walls:
                 if element_type == "OuterWall" or element_type == "Rooftop":
@@ -396,6 +544,26 @@ class Controller():
     @classmethod
     def click_save_envelopes(self, bldg, orientation_old,
                              orientation_new, element_type, area):
+        '''
+        Saves an envelope with specified attributes.
+
+        Parameters:
+        ----------
+        bldg : building()
+            current building
+
+        orientation_old : string
+            old orientation of selected envelope
+
+        orientation_new : string
+            new orientation of selected envelope
+
+        element_type : string
+            type which is needed to specify the element
+
+        area : float
+            area of the envelope
+        '''
 
         if element_type == "Window":
             # new_window_area = bldg.get_window_area(orientation_new) + area
@@ -425,6 +593,18 @@ class Controller():
 
     @classmethod
     def get_u_value(self, current_element):
+        '''
+        Get the u value of current element
+
+        current_element : wall()
+            Current element this can be a ceiling, floor, groundfloor,
+            innerwall, outerwall, rooftop or window.
+
+        Returns
+        ----------
+        u_value : float
+                returns the calculated u value
+        '''
 
         u_value = float(current_element.ua_value)/current_element.area
         return u_value
