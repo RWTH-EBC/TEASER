@@ -214,7 +214,7 @@ class Controller():
                                             type_building_attributes):
         """
         Creates a new TypeBuilding. Needs all given attributes and calls
-        function in Project module. Returns the building.
+        function in Project module. 
         """
 
         int_id = 0
@@ -304,10 +304,6 @@ class Controller():
         return (parent, int_id)
 
     @classmethod
-    def clickMatrixButton(self):
-        i = 0
-
-    @classmethod
     def click_save_button(self, project, path):
         if path.endswith("teaserXML"):
             teaser_xml.save_teaser_xml(path, project)
@@ -336,10 +332,6 @@ class Controller():
             mat_list.append(mat)
 
         return mat_list
-
-    @classmethod
-    def clickConstructionYearCatagoryButton(self):
-        i = 0
 
     @classmethod
     def switch_zone_type(self, zone_type, project, zone_id):
