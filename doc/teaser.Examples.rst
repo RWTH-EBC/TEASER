@@ -69,6 +69,7 @@ TEASER'S Output folder::
         path=None)
 
 For OpenModelica you need to exclude the centralAHU (because it uses state machines). Therefore use the building_model "Multizone"::
+
     prj.export_aixlib(building_model="Multizone",
         zone_model="ThermalZoneEquipped",
         corG=True,
@@ -92,7 +93,7 @@ insulation layer and new windows. The name is changed to Retrofit::
 
 Again, we need to export the model, ou could also change the exports here as seen above::
 
-    prj.export_record(
+    prj.export_aixlib(
         building_model="MultizoneEquipped",
         zone_model="ThermalZoneEquipped",
         corG=True,
@@ -345,7 +346,7 @@ and institute buildings)::
 
 
 For OpenModelica you need to exclude the centralAHU (because it is using
-state machines). Therefore use the building_model "Multizone"
+state machines). Therefore use the building_model "Multizone"::
 
 
   prj.export_aixlib(building_model="Multizone",
@@ -355,8 +356,8 @@ state machines). Therefore use the building_model "Multizone"
       path=None)
 
 
-'''Or we use Annex60 method (e.g with four elements). Which exports one
-Model per zone'''
+Or we use Annex60 method (e.g with four elements). Which exports one
+Model per zone::
 
   prj.used_library_calc = 'Annex60'
   prj.number_of_elements_calc = 4
