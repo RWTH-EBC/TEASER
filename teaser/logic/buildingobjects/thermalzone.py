@@ -1251,6 +1251,8 @@ class ThermalZone(object):
 
     def set_calc_default(self):
         self.outer_walls_help = []
+        self.rooftops = []
+        self.ground_floors = []
 
         self.r1_ow = 0.0
         self.c1_ow = 0.0
