@@ -155,7 +155,7 @@ def modelica_set_temp(bldg, path = None):
     '''
 
     if bldg.file_set_t is None:
-        bldg.file_set_t = "\\Tset_"+bldg.name+".mat"
+        bldg.file_set_t = "/Tset_"+bldg.name+".mat"
     else:
         pass
 
@@ -217,7 +217,7 @@ def modelica_AHU_boundary(bldg,
     '''
 
     if bldg.file_ahu is None:
-        bldg.file_ahu = "\\AHU_"+bldg.name+".mat"
+        bldg.file_ahu = "/AHU_"+bldg.name+".mat"
     else:
         pass
 
@@ -307,7 +307,7 @@ def modelica_gains_boundary(bldg,
     '''
 
     if bldg.file_internal_gains is None:
-        bldg.file_internal_gains = "\\InternalGains_"+bldg.name+".mat"
+        bldg.file_internal_gains = "/InternalGains_"+bldg.name+".mat"
     else:
         pass
 

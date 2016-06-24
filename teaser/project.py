@@ -114,33 +114,27 @@ class Project(object):
         '''
         return DataClass(type_element_file)
 
-    def calc_all_buildings(self,
-                           number_of_elements=2,
-                           merge_windows=False,
-                           used_library='AixLib'):
+    def calc_all_buildings(self):
         '''Calculates values for all project buildings
 
-        Parameters
-        ----------
+        You need to set the following parameters in the Project class.
 
-        number_of_elements : int
-            defines the number of elements, that areaaggregated, between 1
+        number_of_elements_calc : int
+            defines the number of elements, that area aggregated, between 1
             and 4, default is 2
             For AixLib you should always use 2 elements!!!
 
-        merge_windows : bool
+        merge_windows_calc : bool
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False
             For AixLib vdi calculation is True, ebc calculation is False
 
-        used_library : str
+        used_library_calc : str
             used library (AixLib and Annex60 are supported)
 
         '''
 
-        self._number_of_elements_calc = number_of_elements
-        self._merge_windows_calc = merge_windows
-        self._used_library_calc = used_library
+
         for bldg in reversed(self.buildings):
             try:
                 bldg.calc_building_parameter(
@@ -837,9 +831,9 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = utilitis.get_full_path("OutputData") + "\\" + name
+            new_path = utilitis.get_full_path("OutputData") + "/" + name
         else:
-            new_path = path + "\\" + name
+            new_path = path + "/" + name
             utilitis.create_path(utilitis.get_full_path(path))
 
         txml_out.save_teaser_xml(new_path, self)
@@ -882,9 +876,9 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = utilitis.get_full_path("OutputData") + "\\" + name
+            new_path = utilitis.get_full_path("OutputData") + "/" + name
         else:
-            new_path = path + "\\" + name
+            new_path = path + "/" + name
             utilitis.create_path(utilitis.get_full_path(path))
 
         citygml_out.save_gml(self, new_path)
@@ -942,9 +936,9 @@ class Project(object):
         """
 
         if path is None:
-            path = utilitis.get_default_path() + "\\" + self.name
+            path = utilitis.get_default_path() + "/" + self.name
         else:
-            path = path + "\\" + self.name
+            path = path + "/" + self.name
 
         utilitis.create_path(path)
 
@@ -980,9 +974,9 @@ class Project(object):
         """
 
         if path is None:
-            path = utilitis.get_default_path() + "\\" + self.name
+            path = utilitis.get_default_path() + "/" + self.name
         else:
-            path = path + "\\" + self.name
+            path = path + "/" + self.name
 
         utilitis.create_path(path)
 
@@ -1004,9 +998,9 @@ class Project(object):
         '''
 
         if path is None:
-            path = "OutputData\\"+self.name
+            path = "OutputData/"+self.name
         else:
-            path = path+"\\"+self.name
+            path = path+"/"+self.name
 
         text_out.export_parameters_txt(prj=self,
                                        path=path)

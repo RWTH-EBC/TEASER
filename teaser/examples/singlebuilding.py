@@ -11,8 +11,8 @@ you can import all the classes at the beginning.
 First we need to import the classes we want to use
 '''
 
-from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions import \
-    BoundaryConditions
+from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+    import BoundaryConditions
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.buildingobjects.buildingphysics.groundfloor import\
     GroundFloor
@@ -223,7 +223,11 @@ def example_create_building():
     ground.area = 140.0
 
     '''
-    We calculate the RC Values according to AixLib procedure
+    We need to set the projects calculation method. The library we want to
+    use is AixLib, we are using a two element model and want an extra resistance
+    for the windows. To export the parameters to a Modelica record, we use
+    the export_aixlib function. path = None indicates, that we want to store
+    the records in TEASER'S Output folder
     '''
 
     prj.used_library_calc = 'AixLib'
@@ -231,19 +235,39 @@ def example_create_building():
     prj.merge_windows_calc = False
 
     prj.calc_all_buildings()
+
     '''
-    Export the Modelica Record
+    Export the Modelica Record. If you have a Dymola License you can  export
+    the model with a central AHU (MultizoneEquipped) (only default for office
+    and institute buildings)
     '''
+
     prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
                       path=None)
 
-    '''Or we use Annex60 method with for elements'''
-    #prj.calc_all_buildings(number_of_elements=4,
-    #                       merge_windows=False,
-    #                       used_library='Annex60')
+    '''
+    For OpenModelica you need to exclude the centralAHU (because it is using
+    state machines). Therefore use the building_model "Multizone"
+    '''
+
+    #prj.export_aixlib(building_model="Multizone",
+    #                  zone_model="ThermalZoneEquipped",
+    #                  corG=True,
+    #                  internal_id=None,
+    #                  path=None)
+
+
+    '''Or we use Annex60 method (e.g with four elements). Which exports one
+    Model per zone'''
+
+    #prj.used_library_calc = 'Annex60'
+    #prj.number_of_elements_calc = 4
+    #prj.merge_windows_calc = False
+
+    #prj.calc_all_buildings()
     #prj.export_annex()
 
     '''

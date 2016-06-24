@@ -63,7 +63,7 @@ def main():
 
     starttime = time.time()
     #Adjust this path to your TEASER teaser Examples path or whatever you want
-    this_path = "D:\\GIT\\TEASER\\teaser\\Examples"
+    this_path = "D:/GIT/TEASER/teaser/Examples"
     #path of the buildings xmls
     input_path = os.path.join(this_path,
                               'ExampleInputFiles',
@@ -94,8 +94,8 @@ def main():
     stored, in addition we need to define the path where the exported models
     are"""
 
-    outputDir = "D:\\TestCampusSimulation"
-    packageDir = output_path + "\\Reference" + "\\Project"
+    outputDir = "D:/TestCampusSimulation"
+    packageDir = output_path + "/Reference" + "/Project"
 
     """
     Now we need to create a simulation list for buildingspy

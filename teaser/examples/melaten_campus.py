@@ -43,34 +43,64 @@ def main():
     info_list = read_XMLs(input_path)
 
     prj = create_reference_project(info_list)
+
+    '''
+    We need to set the projects calculation method. The library we want to
+    use is AixLib, we are using a two element model and want an extra resistance
+    for the windows. To export the parameters to a Modelica record, we use
+    the export_aixlib function. path = None indicates, that we want to store
+    the records in TEASER'S Output folder
+    '''
+
+    prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
     prj.merge_windows_calc = False
-    prj.used_library_calc = "AixLib"
+
+    prj.calc_all_buildings()
+
+    '''
+    Export the Modelica Record. If you have a Dymola License you can  export
+    the model with a central AHU (MultizoneEquipped) (only default for office
+    and institute buildings)
+    '''
+
     prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
                       path=None)
 
-    """or we could also use the Annex60 models"""
-    #prj.used_library_calc = "Annex60"
-    #prj.export_annex(number_of_elements=2,
-    #                 merge_windows=False,
-    #                 internal_id=None,
-    #                 path=None)
+    '''
+    For OpenModelica you need to exclude the centralAHU (because it is using
+    state machines). Therefore use the building_model "Multizone"
+    '''
+
+    #prj.export_aixlib(building_model="Multizone",
+    #                  zone_model="ThermalZoneEquipped",
+    #                  corG=True,
+    #                  internal_id=None,
+    #                  path=None)
+
+
+    '''Or we use Annex60 method (e.g with four elements). Which exports one
+    Model per zone'''
+
+    #prj.used_library_calc = 'Annex60'
+    #prj.number_of_elements_calc = 4
+    #prj.merge_windows_calc = False
+
+    #prj.calc_all_buildings()
+    #prj.export_annex()
+
     prj.retrofit_all_buildings(2015)
+
+    '''You could also change the exports here as seen above'''
+
     prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
                       internal_id=None,
                       path=None)
-
-    """or we could also use the Annex60 models"""
-
-    #prj.export_annex(number_of_elements=2,
-    #                 merge_windows=False,
-    #                 internal_id=None,
-    #                 path=None)
 
 
 def read_XMLs(input_path):
