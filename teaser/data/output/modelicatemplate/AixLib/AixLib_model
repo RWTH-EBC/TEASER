@@ -69,6 +69,18 @@ model ${bldg.name}
         "modelica://${mod_prj}/${bldg.name}/${bldg.file_internal_gains}"))
     annotation (Placement(transformation(extent={{84,18},{64,38}})));
 
+  Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[
+  0
+  % for tz in bldg.thermal_zones:
+    ,${tz.infiltration_rate} ${';' if (loop.last) else ''}
+  %endfor
+  3600
+  % for tz in bldg.thermal_zones:
+    ,${tz.infiltration_rate}
+  %endfor
+  ])
+    annotation (Placement(transformation(extent={{-74,-2},{-54,18}})));
+
 
 equation
   connect(weather.SolarRadiation_OrientedSurfaces, multizone.radIn)
@@ -81,6 +93,14 @@ equation
   connect(tableInternalGains.y, multizone.internalGains)
     annotation (Line(points={{63,28},{46,28},{46,27.25},{26.11,27.25}},
         color={0,0,127}));
+  % for i, zo in enumerate(bldg.thermal_zones):
+  connect(weather.WeatherDataVector[${i+1}], multizone.ventilationTemperature[${i+1}])
+    annotation (Line(points={{-9.1,67},{-9.1,52.5},{-24.38,52.5},{-24.38,15}},
+        color={0,0,127}));
+  % endfor
+
+  connect(combiTimeTable.y, multizone.ventilationRate) annotation (Line(points={{-51,8},
+          {-24.38,8},{-24.38,7.5}}, color={0,0,127}));
 
   annotation (experiment(
       StopTime=31536000,
