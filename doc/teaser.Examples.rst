@@ -2,9 +2,11 @@ examples
 =======================
 
 You can find more examples in the example package of the TEASER distribution.
+e.g.:
 
+[PathOfYourPythonDistribution/Lib/site-packages/teaser]
 
-example_archetype.py
+archetype.py
 -------------------------------------------
 
 This module contains an example how to create an archetype Building, to retrofit
@@ -58,6 +60,7 @@ TEASER'S Output folder::
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
     prj.merge_windows_calc = False
+    prj.calc_all_buildings()
     prj.export_aixlib(
         building_model="MultizoneEquipped",
         zone_model="ThermalZoneEquipped",
@@ -68,7 +71,11 @@ TEASER'S Output folder::
 We could also use Annex60 models with same calculation method::
 
     prj.used_library_calc = "Annex60"
-    prj.export_annex()
+    prj.calc_all_buildings()
+    prj.export_annex(number_of_elements=2,
+                     merge_windows=False,
+                     internal_id=None,
+                     path=None)
 
 Now we retrofit all buildings in the year 2015 (EnEV2014). That includes new
 insulation layer and new windows. The name is changed to Retrofit::
@@ -89,7 +96,7 @@ XML file::
 
 
 
-example_createbuilding.py
+singlebuilding.py
 ---------------------------------------------
 
 This module shows how to create a building from scratch (or arbitrary sources)
@@ -97,8 +104,20 @@ calculate parameters for a Modelica model and save this example building in a
 XML based format. The used classes are imported one after another. Of course
 you can import all the classes at the beginning::
 
-    from teaser.project import Project
     from teaser.logic.buildingobjects.building import Building
+    from teaser.logic.buildingobjects.buildingphysics.groundfloor import\
+        GroundFloor
+    from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
+    from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+    from teaser.logic.buildingobjects.buildingphysics.material import Material
+    from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+    from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
+    from teaser.logic.buildingobjects.buildingphysics.window import Window
+    from teaser.logic.buildingobjects.thermalzone import ThermalZone
+    from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+        import BoundaryConditions
+    from teaser.project import Project
+
     prj = Project(load_data=True)
     bldg = Building(parent=prj)
 
@@ -112,8 +131,6 @@ Set some building parameters::
 Instantiate a ThermalZone class, with building as parent and set 
 some parameters of the thermal zone::
 
-    from teaser.logic.buildingobjects.thermalzone import ThermalZone
-
     tz = ThermalZone(parent=bldg)
     tz.name = "Living Room"
     tz.area = 45.0
@@ -121,9 +138,6 @@ some parameters of the thermal zone::
     tz.infiltration_rate = 0.5
 
 Instantiate UseConditionsOffice18599 class with thermal zone as parent, and load the use conditions for the usage 'Living'::
-
-    from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions import \
-        BoundaryConditions
 
     tz.use_conditions = BoundaryConditions(parent=tz)
     tz.use_conditions.load_use_conditions("Living")
@@ -314,11 +328,13 @@ Export the Modelica model::
 
 Or we use Annex60 method with for elements::
 
-    prj.calc_all_buildings(
-        number_of_elements=4,
-        merge_windows=False,
-        used_library='Annex60')
-    prj.export_annex()
+    prj.used_library_calc = 'Annex60'
+
+
+    prj.calc_all_buildings()
+    prj.export_annex(number_of_elements=2,
+                     merge_windows=False,
+                     used_library='Annex60')
 
 
 Save teaserXML and CityGML::

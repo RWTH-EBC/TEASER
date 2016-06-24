@@ -11,8 +11,8 @@ you can import all the classes at the beginning.
 First we need to import the classes we want to use
 '''
 
-from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions import \
-    BoundaryConditions
+from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+    import BoundaryConditions
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.buildingobjects.buildingphysics.groundfloor import\
     GroundFloor
