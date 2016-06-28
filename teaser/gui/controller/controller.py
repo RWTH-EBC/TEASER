@@ -436,8 +436,7 @@ class Controller():
     def click_export_button(self, project, building_model, zone_model, corG,
                             internal_id, path_output_folder):
         '''
-        Execute an export with selected model.
-        Supoorted models are Annex60 and Aixlib.
+        Execute an export with Aixlib model.
 
         project : project()
             root class
@@ -466,13 +465,33 @@ class Controller():
     @classmethod
     def click_export_button_annex(self, project, num_of_elem, merge_win,
                                   internal_id, path_output_folder):
-                                    project.calc_all_buildings(
-                                                        num_of_elem, merge_win,
-                                                        'Annex60')
-                                    project.export_annex(
-                                                        num_of_elem, merge_win,
-                                                        internal_id,
-                                                        path_output_folder)
+        '''
+        Execute an export with Annex60 model.
+
+        project : project()
+            root class
+
+        building_model : string
+            Model type of export (e.g. Multizone etc.)
+
+        zone_model : string
+            Zone type of export (e.g. Thermalzone etc.)
+
+        corG : boolean
+            boolean which enables or disables the corG
+
+        internal_id : int
+            internal id of (current)building. If the value is none then the
+            export will executed for all buildings otherwise the export will
+            executed for one building.
+
+        path_output_folder : string
+            path of the output location
+        '''
+
+        project.calc_all_buildings(num_of_elem, merge_win, 'Annex60')
+        project.export_annex(num_of_elem, merge_win, internal_id,
+                             path_output_folder)
 
     @classmethod
     def click_change_all_constr(self,
