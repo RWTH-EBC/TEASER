@@ -442,37 +442,38 @@ class Office(NonResidential):
             zone.use_conditions.machines *= zone.area * 0.01
 
             for surface in self.gml_surfaces:
-                if surface.surface_tilt == 90:
-                    outer_wall = OuterWall(zone)
-                    outer_wall.load_type_element(self.year_of_construction,
-                                                 self.construction_type)
-                    outer_wall.name = surface.name
-                    outer_wall.tilt = surface.surface_tilt
-                    outer_wall.orientation = surface.surface_orientation
+                if surface.surface_tilt is not None:
+                    if surface.surface_tilt == 90:
+                        outer_wall = OuterWall(zone)
+                        outer_wall.load_type_element(self.year_of_construction,
+                                                     self.construction_type)
+                        outer_wall.name = surface.name
+                        outer_wall.tilt = surface.surface_tilt
+                        outer_wall.orientation = surface.surface_orientation
 
-                    window = Window(zone)
-                    window.load_type_element(self.year_of_construction,
-                                            "Kunststofffenster, Isolierverglasung")
-                    window.name = "asd"+str(surface.surface_tilt)
-                    window.tilt = surface.surface_tilt
-                    window.orientation = surface.surface_orientation
+                        window = Window(zone)
+                        window.load_type_element(self.year_of_construction,
+                                                "Kunststofffenster, Isolierverglasung")
+                        window.name = "asd"+str(surface.surface_tilt)
+                        window.tilt = surface.surface_tilt
+                        window.orientation = surface.surface_orientation
 
-                elif surface.surface_tilt == 0 and surface.surface_orientation ==\
-                        -2:
-                    outer_wall = GroundFloor(zone)
-                    outer_wall.load_type_element(self.year_of_construction,
-                                                 self.construction_type)
-                    outer_wall.name = surface.name
-                    outer_wall.tilt = surface.surface_tilt
-                    outer_wall.orientation = surface.surface_orientation
+                    elif surface.surface_tilt == 0 and surface.surface_orientation ==\
+                            -2:
+                        outer_wall = GroundFloor(zone)
+                        outer_wall.load_type_element(self.year_of_construction,
+                                                     self.construction_type)
+                        outer_wall.name = surface.name
+                        outer_wall.tilt = surface.surface_tilt
+                        outer_wall.orientation = surface.surface_orientation
 
-                else:
-                    outer_wall = Rooftop(zone)
-                    outer_wall.load_type_element(self.year_of_construction,
-                                                 self.construction_type)
-                    outer_wall.name = surface.name
-                    outer_wall.tilt = surface.surface_tilt
-                    outer_wall.orientation = surface.surface_orientation
+                    else:
+                        outer_wall = Rooftop(zone)
+                        outer_wall.load_type_element(self.year_of_construction,
+                                                     self.construction_type)
+                        outer_wall.name = surface.name
+                        outer_wall.tilt = surface.surface_tilt
+                        outer_wall.orientation = surface.surface_orientation
 
             for key, value in self.inner_wall_names.items():
 
@@ -509,16 +510,23 @@ class Office(NonResidential):
                 pass
 
         for surface in self.gml_surfaces:
-            self.set_outer_wall_area(surface.surface_area *
-                                     (1- self.est_factor_win_area),
-                                     surface.surface_orientation)
-        for surface in self.gml_surfaces:
+            if surface.surface_tilt is not None:
+                if surface.surface_tilt != 0 and surface.surface_orientation !=\
+                        -2 and surface.surface_orientation != -1:
+                    self.set_outer_wall_area(surface.surface_area *
+                                             (1- self.est_factor_win_area),
+                                             surface.surface_orientation)
+                else:
+                    self.set_outer_wall_area(surface.surface_area,
+                                             surface.surface_orientation)
 
-            if surface.surface_tilt != 0 and surface.surface_orientation !=\
-                    -2 and surface.surface_orientation != -1:
-                self.set_window_area(surface.surface_area *
-                                     self.est_factor_win_area,
-                                     surface.surface_orientation)
+        for surface in self.gml_surfaces:
+            if surface.surface_tilt is not None:
+                if surface.surface_tilt != 0 and surface.surface_orientation !=\
+                        -2 and surface.surface_orientation != -1:
+                    self.set_window_area(surface.surface_area *
+                                         self.est_factor_win_area,
+                                         surface.surface_orientation)
 
         for zone in self.thermal_zones:
             zone.set_inner_wall_area()

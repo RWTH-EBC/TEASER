@@ -464,6 +464,17 @@ class Controller():
                               internal_id, path_output_folder)
 
     @classmethod
+    def click_export_button_annex(self, project, num_of_elem, merge_win,
+                                  internal_id, path_output_folder):
+                                    project.calc_all_buildings(
+                                                        num_of_elem, merge_win,
+                                                        'Annex60')
+                                    project.export_annex(
+                                                        num_of_elem, merge_win,
+                                                        internal_id,
+                                                        path_output_folder)
+
+    @classmethod
     def click_change_all_constr(self,
                                 bldg,
                                 orientation,
