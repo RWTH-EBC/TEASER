@@ -7,7 +7,7 @@ Created July 2015
 
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-    import UseConditions
+    import BoundaryConditions
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
@@ -77,7 +77,7 @@ class Controller():
         '''
 
         zone = ThermalZone(parent)
-        zone.use_conditions = UseConditions(zone)
+        zone.use_conditions = BoundaryConditions(zone)
         zone.use_conditions.load_use_conditions(zone_type)
         zone.name = name
         zone.area = area
@@ -279,8 +279,21 @@ class Controller():
     @classmethod
     def click_export_button(self, project, building_model, zone_model, corG,
                             internal_id, path_output_folder):
-               project.export_aixlib(building_model, zone_model, corG,
-                              internal_id, path_output_folder)
+                                project.export_aixlib(building_model,
+                                                      zone_model, corG,
+                                                      internal_id,
+                                                      path_output_folder)
+
+    @classmethod
+    def click_export_button_annex(self, project, num_of_elem, merge_win,
+                                  internal_id, path_output_folder):
+                                    project.calc_all_buildings(
+                                                        num_of_elem, merge_win,
+                                                        'Annex60')
+                                    project.export_annex(
+                                                        num_of_elem, merge_win,
+                                                        internal_id,
+                                                        path_output_folder)
 
     @classmethod
     def click_change_all_constr(self,

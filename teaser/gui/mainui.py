@@ -3757,15 +3757,35 @@ class MainUI(QDialog):
         self.export_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.export_window_ui.setWindowTitle("Export")
         self.export_window_ui.setFixedWidth(380)
-        self.export_window_ui.setFixedHeight(250)
+        self.export_window_ui.setFixedHeight(320)
         self.export_window_ui_layout = QtGui.QGridLayout()
         self.export_window_ui.setLayout(self.export_window_ui_layout)
 
         self.export_groupbox = QtGui.QGroupBox("Export")
-        self.export_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 230))
-        self.export_groupbox.setMinimumSize(QtCore.QSize(360, 230))
-        self.export_groupbox.setMaximumSize(QtCore.QSize(360, 230))
+        self.export_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 155))
+        self.export_groupbox.setMinimumSize(QtCore.QSize(360, 155))
+        self.export_groupbox.setMaximumSize(QtCore.QSize(360, 155))
         self.export_groupbox.setObjectName(_fromUtf8("exportGroupBox"))
+
+        self.aixlib_groupbox = QtGui.QGroupBox("AixLib")
+        self.aixlib_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
+        self.aixlib_groupbox.setMinimumSize(QtCore.QSize(360, 120))
+        self.aixlib_groupbox.setMaximumSize(QtCore.QSize(360, 120))
+        self.aixlib_groupbox.setObjectName(_fromUtf8("AixLibGroupBox"))
+
+        self.annex_groupbox = QtGui.QGroupBox("Annex60")
+        self.annex_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
+        self.annex_groupbox.setMinimumSize(QtCore.QSize(360, 120))
+        self.annex_groupbox.setMaximumSize(QtCore.QSize(360, 120))
+        self.annex_groupbox.setObjectName(_fromUtf8("AnnexGroupBox"))
+        self.annex_groupbox.setVisible(False)
+
+        self.export_model_groupbox = QtGui.QGroupBox("")
+        self.export_model_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
+        self.export_model_groupbox.setMinimumSize(QtCore.QSize(360, 120))
+        self.export_model_groupbox.setMaximumSize(QtCore.QSize(360, 120))
+        self.export_model_groupbox.setObjectName(_fromUtf8("GroupBoxModel"))
+
         self.export_button = QtGui.QPushButton(self.export_groupbox)
         self.export_button.setGeometry(QtCore.QRect(5, 20, 305, 25))
         self.export_button.clicked.connect(self.click_export_button)
@@ -3774,62 +3794,109 @@ class MainUI(QDialog):
         self.export_button_one.setGeometry(QtCore.QRect(5, 55, 305, 25))
         self.export_button_one.clicked.connect(self.click_export_button)
         self.export_button_one.setText("Export model for current building")
-        self.export_template_label_model = QtGui.QLabel(self.export_groupbox)
-        self.export_template_label_model.setGeometry(
-            QtCore.QRect(5, 90, 120, 25))
-        self.export_template_label_model.setText("Model type:")
-        self.export_create_template_model_combobox = QtGui.QComboBox(
-            self.export_groupbox)
-        self.export_create_template_model_combobox.setGeometry(
-            QtCore.QRect(130, 90, 215, 25))
-        self.export_template_label_zone = QtGui.QLabel(self.export_groupbox)
-        self.export_template_label_zone.setGeometry(
-            QtCore.QRect(5, 125, 120, 25))
-        self.export_template_label_zone.setText("Zone type:")
-        self.export_create_template_zone_combobox = QtGui.QComboBox(
-            self.export_groupbox)
-        self.export_create_template_zone_combobox.setGeometry(
-            QtCore.QRect(130, 125, 215, 25))
-        self.export_template_label_corG = QtGui.QLabel(self.export_groupbox)
-        self.export_template_label_corG.setGeometry(
-            QtCore.QRect(5, 160, 120, 25))
-        self.export_template_label_corG.setText("corG:")
-        self.radio_button_corG_1 = QtGui.QRadioButton(self.export_groupbox)
-        self.radio_button_corG_1.setGeometry(QtCore.QRect(130, 160, 120, 25))
-        self.radio_button_corG_1.setText("with CorG")
-        self.radio_button_corG_2 = QtGui.QRadioButton(self.export_groupbox)
-        self.radio_button_corG_2.setGeometry(QtCore.QRect(250, 160, 120, 25))
-        self.radio_button_corG_2.setText("without CorG")
-        self.radio_button_corG_1.setChecked(True)
         self.export_save_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_save_template_label.setGeometry(
-            QtCore.QRect(5, 195, 110, 25))
+            QtCore.QRect(5, 90, 110, 25))
         self.export_save_template_label.setText("File path:")
         self.export_save_template_lineedit = QtGui.QLineEdit(
             self.export_groupbox)
         self.export_save_template_lineedit .setGeometry(
-            QtCore.QRect(130, 195, 130, 25))
+            QtCore.QRect(130, 90, 130, 25))
         if self.file_path == "":
             self.export_save_template_lineedit.setText(
                 utilitis.get_default_path())
-            utilitis.create_path(str(self.export_save_template_lineedit.text()))
+            utilitis.create_path(str(
+                                self.export_save_template_lineedit.text()))
             self.file_path = self.export_save_template_lineedit.text()
         else:
             self.export_save_template_lineedit.setText(self.file_path)
-            utilitis.create_path(str(self.export_save_template_lineedit.text()))
+            utilitis.create_path(str(
+                                self.export_save_template_lineedit.text()))
         self.export_save_template_button = QtGui.QPushButton(
             self.export_groupbox)
         self.export_save_template_button.setGeometry(
-            QtCore.QRect(265, 195, 80, 25))
+            QtCore.QRect(265, 90, 80, 25))
         self.export_save_template_button.setText("Browse")
         self.export_save_template_button.clicked.connect(
             self.click_browse_button)
+        self.export_label_library = QtGui.QLabel(self.export_groupbox)
+        self.export_label_library.setGeometry(
+            QtCore.QRect(5, 125, 120, 25))
+        self.export_label_library.setText("Library:")
+        self.export_create_library_combobox = QtGui.QComboBox(
+            self.export_groupbox)
+        self.export_create_library_combobox.setGeometry(
+            QtCore.QRect(130, 125, 215, 25))
+
+        self.export_template_label_model = QtGui.QLabel(self.aixlib_groupbox)
+        self.export_template_label_model.setGeometry(
+            QtCore.QRect(5, 20, 120, 25))
+        self.export_template_label_model.setText("Model type:")
+        self.export_create_template_model_combobox = QtGui.QComboBox(
+            self.aixlib_groupbox)
+        self.export_create_template_model_combobox.setGeometry(
+            QtCore.QRect(130, 20, 215, 25))
+        self.export_template_label_zone = QtGui.QLabel(self.aixlib_groupbox)
+        self.export_template_label_zone.setGeometry(
+            QtCore.QRect(5, 55, 120, 25))
+        self.export_template_label_zone.setText("Zone type:")
+        self.export_create_template_zone_combobox = QtGui.QComboBox(
+            self.aixlib_groupbox)
+        self.export_create_template_zone_combobox.setGeometry(
+            QtCore.QRect(130, 55, 215, 25))
+        self.export_template_label_corG = QtGui.QLabel(self.aixlib_groupbox)
+        self.export_template_label_corG.setGeometry(
+            QtCore.QRect(5, 90, 120, 25))
+        self.export_template_label_corG.setText("corG:")
+        self.radio_button_corG_1 = QtGui.QRadioButton(self.aixlib_groupbox)
+        self.radio_button_corG_1.setGeometry(QtCore.QRect(130, 90, 120, 25))
+        self.radio_button_corG_1.setText("with CorG")
+        self.radio_button_corG_2 = QtGui.QRadioButton(self.aixlib_groupbox)
+        self.radio_button_corG_2.setGeometry(QtCore.QRect(250, 90, 120, 25))
+        self.radio_button_corG_2.setText("without CorG")
+        self.radio_button_corG_1.setChecked(True)
+
+        self.annex_number_of_elements = QtGui.QLabel(self.annex_groupbox)
+        self.annex_number_of_elements.setGeometry(
+            QtCore.QRect(5, 20, 120, 25))
+        self.annex_number_of_elements.setText("Number of elements:")
+        self.annex_create_number_of_elements_combobox = QtGui.QComboBox(
+            self.annex_groupbox)
+        self.annex_create_number_of_elements_combobox.setGeometry(
+            QtCore.QRect(130, 20, 215, 25))
+        self.annex_merge_windows = QtGui.QLabel(self.annex_groupbox)
+        self.annex_merge_windows.setGeometry(
+            QtCore.QRect(5, 55, 120, 25))
+        self.annex_merge_windows.setText("Merge windows:")
+        self.annex_create_merge_windows_combobox = QtGui.QComboBox(
+            self.annex_groupbox)
+        self.annex_create_merge_windows_combobox.setGeometry(
+            QtCore.QRect(130, 55, 215, 25))
+
+        library_type_list = ["AixLib", "Annex60"]
         modelTypeList = ["MultizoneEquipped", "Multizone", "None"]
         zoneTypeList = ["ThermalZoneEquipped", "ThermalZone", "None"]
+        number_of_elements_list = ["2", "3", "4"]
+        merging_windows_list = ["True", "False"]
+
+        self.export_create_library_combobox.addItems(library_type_list)
         self.export_create_template_model_combobox.addItems(modelTypeList)
         self.export_create_template_zone_combobox.addItems(zoneTypeList)
+        self.annex_create_number_of_elements_combobox.addItems(
+                                                    number_of_elements_list)
+        self.annex_create_merge_windows_combobox.addItems(
+                                                    merging_windows_list)
+
+        self.connect(self.export_create_library_combobox, QtCore.SIGNAL(
+            "currentIndexChanged(int)"), self.switch_lib)
+
         self.export_window_ui_layout.addWidget(
             self.export_groupbox, 1, 1)
+        self.export_window_ui_layout.addWidget(
+            self.aixlib_groupbox, 2, 1)
+        self.export_window_ui_layout.addWidget(
+            self.annex_groupbox, 2, 1)
+
         self.export_window_ui.setWindowModality(Qt.ApplicationModal)
         self.export_window_ui.show()
 
@@ -4428,32 +4495,69 @@ class MainUI(QDialog):
             list_of_building_name.append(
                 self.side_bar_buildings_combo_box.itemText(i))
 
-        sender = self.sender()
-        building_model = \
-            self.export_create_template_model_combobox.currentText()
-        zone_model = self.export_create_template_zone_combobox.currentText()
-        if self.radio_button_corG_1.isChecked():
-            corG = True
-        elif self.radio_button_corG_2.isChecked():
-            corG = False
-        elemInCombobox = \
-            self.export_create_template_model_combobox.currentText()
+        if self.export_create_library_combobox.currentText() == "AixLib":
+            sender = self.sender()
+            building_model = \
+                self.export_create_template_model_combobox.currentText()
+            zone_model = \
+                self.export_create_template_zone_combobox.currentText()
+            if self.radio_button_corG_1.isChecked():
+                corG = True
+            elif self.radio_button_corG_2.isChecked():
+                corG = False
+            elemInCombobox = \
+                self.export_create_template_model_combobox.currentText()
 
-        if(sender.text() == self.export_button.text()):
-            Controller.click_export_button(self.project, building_model,
-                                           zone_model, corG, None,
-                                           path_output_folder)
-            QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
-                                          "record " + elemInCombobox +
-                                          " all building finished ")
-        elif(sender.text() == self.export_button_one.text()):
-            Controller.click_export_button(self.project, building_model,
-                                           zone_model, corG,
-                                           self.current_building.internal_id,
-                                           path_output_folder)
-            QtGui.QMessageBox.information(self, 'Message', "Export Modelica " +
-                                          "record " + elemInCombobox +
-                                          " for current building finished ")
+            if(sender.text() == self.export_button.text()):
+                Controller.click_export_button(self.project, building_model,
+                                               zone_model, corG, None,
+                                               path_output_folder)
+                QtGui.QMessageBox.information(self, 'Message',
+                                              "Export Modelica " +
+                                              "record " + elemInCombobox +
+                                              " all building finished ")
+            elif(sender.text() == self.export_button_one.text()):
+                Controller.click_export_button(self.project, building_model,
+                                               zone_model, corG,
+                                               self.current_building.internal_id,
+                                               path_output_folder)
+                QtGui.QMessageBox.information(self, 'Message',
+                                              "Export Modelica " +
+                                              "record " + elemInCombobox +
+                                              " for current building " +
+                                              "finished ")
+
+        elif self.export_create_library_combobox.currentText() == "Annex60":
+            sender = self.sender()
+            num_of_elem = int(
+                self.annex_create_number_of_elements_combobox.currentText())
+            if self.annex_create_merge_windows_combobox.currentText() == \
+               "True":
+                    merge_win = True
+            else:
+                    merge_win = False
+
+            if(sender.text() == self.export_button.text()):
+                Controller.click_export_button_annex(
+                                               self.project, num_of_elem,
+                                               merge_win, None,
+                                               path_output_folder)
+                QtGui.QMessageBox.information(self, 'Message',
+                                              "Export Modelica " +
+                                              "record " + "Annex" +
+                                              " all building finished ")
+            elif(sender.text() == self.export_button_one.text()):
+                Controller.click_export_button_annex(
+                                               self.project, num_of_elem,
+                                               merge_win,
+                                               self.current_building.internal_id,
+                                               path_output_folder)
+                QtGui.QMessageBox.information(self, 'Message',
+                                              "Export Modelica " +
+                                              "record " + "Annex" +
+                                              " for current building " +
+                                              "finished ")
+
         utilitis.create_path(str(self.file_path))
 
     def click_browse_button(self):
@@ -4552,6 +4656,23 @@ class MainUI(QDialog):
             if element.internal_id == current_item.internal_id:
                 self.current_element = element
         self.display_current_element()
+
+    def switch_lib(self):
+        if self.export_create_library_combobox.currentText() == "AixLib":
+            #self.export_model_groupbox = self.aixlib_groupbox
+            self.annex_groupbox.setVisible(False)
+            self.aixlib_groupbox.setVisible(True)
+        else:
+            #self.export_model_groupbox = self.annex_groupbox
+            self.aixlib_groupbox.setVisible(False)
+            self.annex_groupbox.setVisible(True)
+        """
+        if self.export_create_library_combobox.currentText() == "AixLib":
+
+        else:
+            self.aixlib_groupbox.setVisible(False)
+            self.annex_groupbox.setVisible(True)
+        """
 
     def switch_current_layer(self):
         ''' Switches the current layer if the user clicks on it

@@ -142,7 +142,7 @@ class Project(object):
                     merge_windows=self._merge_windows_calc,
                     used_library=self._used_library_calc)
             except:
-                print(bldg.name)
+                print("Can't calculate building:", bldg.name, bldg)
                 self.buildings.remove(bldg)
 
     def retrofit_all_buildings(self,
