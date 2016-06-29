@@ -1,3 +1,4 @@
+within ${mod_prj}.${bldg.name}.${bldg.name}_DataBase;
 record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.replace(" ", "")}"
   extends AixLib.DataBase.Buildings.ZoneBaseRecord(
     n = ${len(zone.tilt_wall)},

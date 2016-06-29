@@ -1251,6 +1251,8 @@ class ThermalZone(object):
 
     def set_calc_default(self):
         self.outer_walls_help = []
+        self.rooftops = []
+        self.ground_floors = []
 
         self.r1_ow = 0.0
         self.c1_ow = 0.0
@@ -1261,6 +1263,7 @@ class ThermalZone(object):
         self.weightfactor_ground = []
         self.tilt_wall = []
         self.orientation_wall = []
+        self.outer_walls_areas = []
 
         self.ua_value_ow = 0.0
         self.r_conv_inner_ow = 0.0
@@ -1339,6 +1342,7 @@ class ThermalZone(object):
         self.weightfactor_win = []
         self.g_sunblind_list = []
         self.window_area_list = []
+        self.window_areas = []
         self.orientation_win = []
         self.tilt_win = []
         self.ua_value_win = 0.0

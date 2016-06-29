@@ -37,7 +37,7 @@ def save_bound_conditions(bound_cond, path=None, file_name=None):
         path = bound_cond.parent.parent.parent.data.path_uc
         xml_parse = bound_cond.parent.parent.parent.data.conditions_bind
     else:
-        path = path + "\\" + file_name + ".xml"
+        path = path + "/" + file_name + ".xml"
         try:
             xml_file = open(utilitis.get_full_path(path))
             xml_parse = uc_bind.CreateFromDocument(xml_file.read())
