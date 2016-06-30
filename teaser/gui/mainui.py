@@ -808,6 +808,10 @@ class MainUI(QDialog):
         self.side_bar_net_leased_area_line_edit.setGeometry(
             QtCore.QRect(105, 270, 90, 25))
         self.side_bar_net_leased_area_line_edit.setReadOnly(True)
+        self.side_bar_save_button = QtGui.QPushButton(self.side_bar_group_box)
+        self.side_bar_save_button.setText("Save")
+        self.side_bar_save_button.setGeometry(0, 300, 195, 25)
+        self.side_bar_save_button.clicked.connect(self.show_warning_window)
 
         """ All controls in the ribbon """
 
@@ -3368,6 +3372,44 @@ class MainUI(QDialog):
                 "\t", layer.internal_id)
             self.element_layer_model_set_all_constr.appendRow(item)
 
+    def show_warning_window(self):
+        self.warning_window = QtGui.QWizardPage()
+        self.warning_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.warning_window.setWindowTitle("Warning")
+        self.warning_window.setFixedWidth(300)
+        self.warning_window.setFixedHeight(100)
+        self.warning_window_layout = QtGui.QGridLayout()
+        self.warning_window.setLayout(self.warning_window_layout)
+
+        self.warning_label = QtGui.QLabel(self.warning_window)
+        self.warning_label.setGeometry(QtCore.QRect(10, 0, 280, 50))
+        self.warning_label.setText("This has no effect on your building" +
+                                   " parameters, its just \n" +
+                                   "general information.")
+        self.warning_window_save_button = QtGui.QPushButton(
+            self.warning_window)
+        self.warning_window_save_button.setText("Ok")
+        self.warning_window_save_button.setGeometry(
+            QtCore.QRect(0, 60, 145, 25))
+        self.warning_window_cancel_button = QtGui.QPushButton(
+            self.warning_window)
+        self.warning_window_cancel_button.setText("Cancel")
+        self.warning_window_cancel_button.setGeometry(
+            QtCore.QRect(155, 60, 145, 25))
+
+        if "building.archtertpye" == "1building.archtertpye":
+            self.warning_window_save_button.setGeometry(
+                    QtCore.QRect(0, 60, 100, 25))
+            self.warning_window_cancel_button.setGeometry(
+                    QtCore.QRect(100, 60, 100, 25))
+            self.warning_window_update_button = QtGui.QPushButton(
+                                                    self.warning_window)
+            self.warning_window_update_button.setText("Update Archetype")
+            self.warning_window_update_button.setGeometry(
+                QtCore.QRect(200, 60, 100, 25))
+        self.warning_window.setWindowModality(Qt.ApplicationModal)
+        self.warning_window.show()
+
     def show_element_build_ui(self, item):
         ''' Opens a window to display all attributes
         of the currently selected element.
@@ -5178,7 +5220,6 @@ class MainUI(QDialog):
             palette.setColor(QtGui.QPalette.Foreground, QtCore.Qt.black)
         qObject.setPalette(palette)
         return qObject
-
 
 class WizardPage(QtGui.QWizardPage):
     def closeEvent(self, evnt, elem_layer=None, layer_list=None):
