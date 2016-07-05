@@ -751,7 +751,6 @@ class MainUI(QDialog):
         self.side_bar_id_label.setText("Name:")
         self.side_bar_id_line_edit = QtGui.QLineEdit(self.side_bar_group_box)
         self.side_bar_id_line_edit.setGeometry(QtCore.QRect(105, 60, 90, 25))
-        self.side_bar_id_line_edit.setReadOnly(False)
         self.connect(self.side_bar_id_line_edit, QtCore.SIGNAL(
             "editingFinished()"), self.show_warning_window)
         self.side_bar_street_label = QtGui.QLabel(self.side_bar_group_box)
@@ -761,7 +760,8 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_street_line_edit.setGeometry(
             QtCore.QRect(105, 95, 90, 25))
-        self.side_bar_street_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_street_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window)
         self.side_bar_location_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_location_label.setGeometry(QtCore.QRect(5, 130, 90, 25))
         self.side_bar_location_label.setText("ZIP/City:")
@@ -769,7 +769,8 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_location_line_edit.setGeometry(
             QtCore.QRect(105, 130, 90, 25))
-        self.side_bar_location_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_location_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window)
         self.side_bar_construction_year_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_construction_year_label.setGeometry(
@@ -779,7 +780,8 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_construction_year_line_edit.setGeometry(
             QtCore.QRect(105, 165, 90, 25))
-        self.side_bar_construction_year_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_construction_year_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window)
         self.side_bar_number_of_floors_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_number_of_floors_label.setGeometry(
@@ -789,7 +791,8 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_number_of_floors_line_edit.setGeometry(
             QtCore.QRect(105, 200, 90, 25))
-        self.side_bar_number_of_floors_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_number_of_floors_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window)
         self.side_bar_height_of_floors_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_height_of_floors_label.setGeometry(
@@ -799,7 +802,8 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_height_of_floors_line_edit.setGeometry(
             QtCore.QRect(105, 235, 90, 25))
-        self.side_bar_height_of_floors_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_height_of_floors_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window)
         self.side_bar_net_leased_area_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_net_leased_area_label.setGeometry(
@@ -809,11 +813,8 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_net_leased_area_line_edit.setGeometry(
             QtCore.QRect(105, 270, 90, 25))
-        self.side_bar_net_leased_area_line_edit.setReadOnly(True)
-        self.side_bar_save_button = QtGui.QPushButton(self.side_bar_group_box)
-        self.side_bar_save_button.setText("Save")
-        self.side_bar_save_button.setGeometry(0, 300, 195, 25)
-        self.side_bar_save_button.clicked.connect(self.show_warning_window)
+        self.connect(self.side_bar_net_leased_area_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window)
 
         """ All controls in the ribbon """
 
