@@ -4,6 +4,7 @@
 
 import os
 import sys
+import inspect
 from PyQt4 import QtCore, QtGui
 from PyQt4.Qt import QDialog, QStandardItemModel
 from PyQt4.Qt import Qt
@@ -21,6 +22,8 @@ from teaser.project import Project
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
 import teaser.logic.utilities as utilitis
 import platform
+from teaser.logic.archetypebuildings.residential import Residential
+from teaser.logic.archetypebuildings.nonresidential import NonResidential
 
 
 try:
@@ -3396,11 +3399,13 @@ class MainUI(QDialog):
             QtCore.QRect(0, 60, 145, 25))
         self.warning_window_cancel_button = QtGui.QPushButton(
             self.warning_window)
+        self.warning_window_save_button.clicked.connect(self.click_warning_save_button)
         self.warning_window_cancel_button.setText("Cancel")
         self.warning_window_cancel_button.setGeometry(
             QtCore.QRect(155, 60, 145, 25))
+        self.warning_window_cancel_button.clicked.connect(self.click_warning_cancel_button)
 
-        if "building.archtertpye" == "1building.archtertpye":
+        if isinstance(self.current_building, NonResidential) or isinstance(self.current_building, Residential):
             self.warning_window_save_button.setGeometry(
                     QtCore.QRect(0, 60, 100, 25))
             self.warning_window_cancel_button.setGeometry(
@@ -3412,6 +3417,18 @@ class MainUI(QDialog):
                 QtCore.QRect(200, 60, 100, 25))
         self.warning_window.setWindowModality(Qt.ApplicationModal)
         self.warning_window.show()
+    
+    
+    def click_warning_save_button(self):
+        self.warning_window.close()
+    
+    def click_warning_cancel_button(self):
+        self.display_current_building()
+        self.warning_window.close()    
+    
+    def click_warning_update_button(self):
+        self.display_current_building()
+        self.warning_window.close()
 
     def show_element_build_ui(self, item):
         ''' Opens a window to display all attributes
