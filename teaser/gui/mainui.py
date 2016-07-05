@@ -751,7 +751,9 @@ class MainUI(QDialog):
         self.side_bar_id_label.setText("Name:")
         self.side_bar_id_line_edit = QtGui.QLineEdit(self.side_bar_group_box)
         self.side_bar_id_line_edit.setGeometry(QtCore.QRect(105, 60, 90, 25))
-        self.side_bar_id_line_edit.setReadOnly(True)
+        self.side_bar_id_line_edit.setReadOnly(False)
+        self.connect(self.side_bar_id_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window)
         self.side_bar_street_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_street_label.setGeometry(QtCore.QRect(5, 95, 90, 25))
         self.side_bar_street_label.setText("Street/Nr.:")
