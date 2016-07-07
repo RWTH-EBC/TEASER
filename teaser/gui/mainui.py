@@ -3379,6 +3379,7 @@ class MainUI(QDialog):
             self.element_layer_model_set_all_constr.appendRow(item)
 
     def show_warning_window(self):
+
         self.warning_window = QtGui.QWizardPage()
         self.warning_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.warning_window.setWindowTitle("Warning")
@@ -3399,13 +3400,18 @@ class MainUI(QDialog):
             QtCore.QRect(0, 60, 145, 25))
         self.warning_window_cancel_button = QtGui.QPushButton(
             self.warning_window)
-        self.warning_window_save_button.clicked.connect(self.click_warning_save_button)
+        self.warning_window_save_button.clicked.connect(
+            self.click_warning_save_button)
         self.warning_window_cancel_button.setText("Cancel")
         self.warning_window_cancel_button.setGeometry(
             QtCore.QRect(155, 60, 145, 25))
-        self.warning_window_cancel_button.clicked.connect(self.click_warning_cancel_button)
+        self.warning_window_cancel_button.clicked.connect(
+            self.click_warning_cancel_button)
+        self.warning_window_cancel_button.clicked.connect(
+                self.show_update_archertype)
 
-        if isinstance(self.current_building, NonResidential) or isinstance(self.current_building, Residential):
+        if isinstance(self.current_building, NonResidential) or \
+           isinstance(self.current_building, Residential):
             self.warning_window_save_button.setGeometry(
                     QtCore.QRect(0, 60, 100, 25))
             self.warning_window_cancel_button.setGeometry(
@@ -3415,20 +3421,108 @@ class MainUI(QDialog):
             self.warning_window_update_button.setText("Update Archetype")
             self.warning_window_update_button.setGeometry(
                 QtCore.QRect(200, 60, 100, 25))
+            self.warning_window_update_button.clicked.connect(
+                self.click_warning_update_button)
+            self.warning_window_update_button.clicked.connect(
+                self.show_update_archertype)
         self.warning_window.setWindowModality(Qt.ApplicationModal)
         self.warning_window.show()
-    
-    
+
     def click_warning_save_button(self):
         self.warning_window.close()
-    
+
     def click_warning_cancel_button(self):
         self.display_current_building()
-        self.warning_window.close()    
-    
+        self.warning_window.close()
+
     def click_warning_update_button(self):
         self.display_current_building()
         self.warning_window.close()
+
+    def show_update_archertype(self):
+        ''' Opens a window to create a new archtertype building.
+
+        '''
+
+        self.archtertype_building_window = QtGui.QWizardPage()
+        self.archtertype_building_window.setAttribute(
+            QtCore.Qt.WA_DeleteOnClose)
+        self.archtertype_building_window.setWindowTitle("Update Archertype")
+        self.archtertype_building_window.setFixedWidth(300)
+        self.archtertype_building_window.setFixedHeight(400)
+        self.popup_layout_type_building = QtGui.QGridLayout()
+        self.archtertype_building_window.setLayout(
+            self.popup_layout_type_building)
+        self.group_box_archtertype = QtGui.QGroupBox("Set Archertype values")
+
+        self.archtertype_building_name_label = QtGui.QLabel(
+            self.group_box_archtertype)
+        self.archtertype_building_name_label.setGeometry(
+            QtCore.QRect(10, 20, 90, 25))
+        self.archtertype_building_name_label.setText("Name:")
+        self.archtertype_building_name_line_edit = QtGui.QLineEdit(
+            self.group_box_archtertype)
+        self.archtertype_building_name_line_edit.setGeometry(
+            QtCore.QRect(110, 20, 120, 25))
+        self.archtertype_building_street_label = QtGui.QLabel(
+            self.group_box_archtertype)
+        self.archtertype_building_street_label.setGeometry(
+            QtCore.QRect(10, 60, 90, 25))
+        self.archtertype_building_street_label.setText("Street/Nr.:")
+        self.archtertype_building_street_line_edit = QtGui.QLineEdit(
+            self.group_box_archtertype)
+        self.archtertype_building_street_line_edit.setGeometry(
+            QtCore.QRect(110, 60, 120, 25))
+        self.archtertype_building_location_label = QtGui.QLabel(
+            self.group_box_archtertype)
+        self.archtertype_building_location_label.setGeometry(
+            QtCore.QRect(10, 100, 90, 25))
+        self.archtertype_building_location_label.setText("ZIP/City:")
+        self.archtertype_building_location_line_edit = QtGui.QLineEdit(
+            self.group_box_archtertype)
+        self.archtertype_building_location_line_edit.setGeometry(
+            QtCore.QRect(110, 100, 120, 25))
+        self.archtertype_building_year_label = QtGui.QLabel(
+            self.group_box_archtertype)
+        self.archtertype_building_year_label.setGeometry(
+            QtCore.QRect(10, 140, 90, 25))
+        self.archtertype_building_year_label.setText("Construction Year:")
+        self.archtertype_building_year_line_edit = QtGui.QLineEdit(
+            self.group_box_archtertype)
+        self.archtertype_building_year_line_edit.setGeometry(
+            QtCore.QRect(110, 140, 120, 25))
+        self.archtertype_building_number_of_floors_label = QtGui.QLabel(
+            self.group_box_archtertype)
+        self.archtertype_building_number_of_floors_label.setGeometry(
+            QtCore.QRect(10, 180, 90, 25))
+        self.archtertype_building_number_of_floors_label.setText(
+            "Number of Floors:")
+        self.archtertype_building_number_of_floors_line_edit = \
+            QtGui.QLineEdit(self.group_box_archtertype)
+        self.archtertype_building_number_of_floors_line_edit.setGeometry(
+            QtCore.QRect(110, 180, 120, 25))
+        self.archtertype_building_height_of_floors_label = QtGui.QLabel(
+            self.group_box_archtertype)
+        self.archtertype_building_height_of_floors_label.setGeometry(
+            QtCore.QRect(10, 220, 90, 25))
+        self.archtertype_building_height_of_floors_label.setText(
+            "Height of Floors:")
+        self.archtertype_building_height_of_floors_line_edit = \
+            QtGui.QLineEdit(self.group_box_archtertype)
+        self.archtertype_building_height_of_floors_line_edit.setGeometry(
+            QtCore.QRect(110, 220, 120, 25))
+        self.archtertype_building_area_label = QtGui.QLabel(
+            self.group_box_archtertype)
+        self.archtertype_building_area_label.setGeometry(
+            QtCore.QRect(10, 260, 90, 25))
+        self.archtertype_building_area_label.setText("Net leased Area:")
+        self.archtertype_building_area_line_edit = QtGui.QLineEdit(
+            self.group_box_archtertype)
+        self.archtertype_building_area_line_edit.setGeometry(
+            QtCore.QRect(110, 260, 120, 25))
+        self.popup_layout_type_building.addWidget(
+            self.group_box_archtertype)
+        self.archtertype_building_window.show()
 
     def show_element_build_ui(self, item):
         ''' Opens a window to display all attributes
