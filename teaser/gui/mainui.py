@@ -868,17 +868,18 @@ class MainUI(QDialog):
         self.delete_label = QtGui.QLabel(self.ribbon_group_box)
         self.delete_label.setGeometry(QtCore.QRect(265, 80, 70, 25))
         self.delete_label.setText("Delete Cur- \nrent Zone")
-        self.edit_building_button = PictureButton(QtGui.QPixmap(
+        self.delete_building_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI\\GUIImages\\EditBuilding.png")),
             self.ribbon_widget)
-        self.edit_building_button.setGeometry(QtCore.QRect(350, 5, 70, 70))
-        self.edit_building_button.clicked.connect(self.edit_building)
-        self.edit_building_button.setToolTip(
+        self.delete_building_button.setGeometry(QtCore.QRect(350, 5, 70, 70))
+        #self.delete_building_button.clicked.connect(self.edit_building)
+        self.delete_building_button.clicked.connect(self.delete_building)
+        self.delete_building_button.setToolTip(
             "Switches to edit-mode. Allows modification of general"
             "building values.")
-        self.edit_label = QtGui.QLabel(self.ribbon_group_box)
-        self.edit_label.setGeometry(QtCore.QRect(350, 80, 70, 25))
-        self.edit_label.setText("Edit\nBuilding")
+        self.delete_label = QtGui.QLabel(self.ribbon_group_box)
+        self.delete_label.setGeometry(QtCore.QRect(350, 80, 70, 25))
+        self.delete_label.setText("Delete\nBuilding")
         self.load_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI\\GUIImages\\Load.png")),
             self.ribbon_widget)
@@ -4913,6 +4914,38 @@ class MainUI(QDialog):
                                       u"You need to specify a building first.")
         else:
             self.generate_zone_ui()
+
+    def delete_building(self):
+        '''Checks if a building exists, if it does the currently
+        selected building is deleted from the Project.
+        '''
+
+        if (self.current_building == 0):
+            QtGui.QMessageBox.warning(self, u"No building error!",
+                                      u"You need to specify a building first.")
+        else:
+                for building in self.project.buildings:
+                    if building.internal_id == self.current_building.internal_id:
+                        ind = self.project.buildings.index(building)
+                self.project.buildings.pop(ind)
+                self.current_building = 0
+                self.current_zone = 0
+                self.current_element = 0
+                self.current_layer = 0
+                self.zone_model.clear()
+                self.outer_elements_model.clear()
+                self.element_model.clear()
+                self.layer_model.clear()
+                self.buildings_combo_box_model.removeColumn(ind+1)
+                self.side_bar_buildings_combo_box.removeItem(ind)
+                self.side_bar_construction_year_line_edit.clear()
+                self.side_bar_height_of_floors_line_edit.clear()
+                self.side_bar_id_line_edit.clear()
+                self.side_bar_location_line_edit.clear()
+                self.side_bar_net_leased_area_line_edit.clear()
+                self.side_bar_number_of_floors_line_edit.clear()
+                self.side_bar_street_line_edit.clear()
+                self.display_current_building()
 
     def delete_thermal_zone(self):
         '''Checks if a building exists, if it does the currently
