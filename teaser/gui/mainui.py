@@ -3520,9 +3520,35 @@ class MainUI(QDialog):
             self.group_box_archtertype)
         self.archtertype_building_area_line_edit.setGeometry(
             QtCore.QRect(110, 260, 120, 25))
+        self.archtertype_generate_button = QtGui.QPushButton(
+            self.group_box_archtertype)
+        self.archtertype_generate_button.setText("generate")
+        self.connect(self.archtertype_generate_button, SIGNAL("clicked()"),
+                     self.check_inputs_archertype)
+        self.archtertype_generate_button.setGeometry(
+            QtCore.QRect(10, 300, 90, 25))
         self.popup_layout_type_building.addWidget(
             self.group_box_archtertype)
         self.archtertype_building_window.show()
+
+    def check_inputs_archertype(self):
+        ''' Checks if all necessary values to create a archertype building'''
+
+        self.project, int_id = Controller.click_generate_type_building_button(
+            self.project,
+            self.archtertype_building_name_line_edit.text(),
+            self.archtertype_building_year_line_edit.text(),
+            self.archtertype_building_number_of_floors_line_edit.text(),
+            self.archtertype_building_height_of_floors_line_edit.text(),
+            self.current_type_building,
+            self.archtertype_building_area_line_edit.text(),
+            self.archtertype_building_street_line_edit.text(),
+            self.archtertype_building_location_line_edit.text(),
+            self.type_building_ind_att)
+        for building in self.project.buildings:
+            if building.internal_id == int_id:
+                self.current_building = building
+        self.display_current_building()
 
     def show_element_build_ui(self, item):
         ''' Opens a window to display all attributes
