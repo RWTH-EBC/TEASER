@@ -755,7 +755,7 @@ class MainUI(QDialog):
         self.side_bar_id_line_edit = QtGui.QLineEdit(self.side_bar_group_box)
         self.side_bar_id_line_edit.setGeometry(QtCore.QRect(105, 60, 90, 25))
         self.connect(self.side_bar_id_line_edit, QtCore.SIGNAL(
-            "editingFinished()"), self.show_warning_window)
+            "editingFinished()"), self.show_warning_window_ui)
         self.side_bar_street_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_street_label.setGeometry(QtCore.QRect(5, 95, 90, 25))
         self.side_bar_street_label.setText("Street/Nr.:")
@@ -764,7 +764,7 @@ class MainUI(QDialog):
         self.side_bar_street_line_edit.setGeometry(
             QtCore.QRect(105, 95, 90, 25))
         self.connect(self.side_bar_street_line_edit, QtCore.SIGNAL(
-            "editingFinished()"), self.show_warning_window)
+            "editingFinished()"), self.show_warning_window_ui)
         self.side_bar_location_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_location_label.setGeometry(QtCore.QRect(5, 130, 90, 25))
         self.side_bar_location_label.setText("ZIP/City:")
@@ -773,7 +773,7 @@ class MainUI(QDialog):
         self.side_bar_location_line_edit.setGeometry(
             QtCore.QRect(105, 130, 90, 25))
         self.connect(self.side_bar_location_line_edit, QtCore.SIGNAL(
-            "editingFinished()"), self.show_warning_window)
+            "editingFinished()"), self.show_warning_window_ui)
         self.side_bar_construction_year_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_construction_year_label.setGeometry(
@@ -784,7 +784,7 @@ class MainUI(QDialog):
         self.side_bar_construction_year_line_edit.setGeometry(
             QtCore.QRect(105, 165, 90, 25))
         self.connect(self.side_bar_construction_year_line_edit, QtCore.SIGNAL(
-            "editingFinished()"), self.show_warning_window)
+            "editingFinished()"), self.show_warning_window_ui)
         self.side_bar_number_of_floors_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_number_of_floors_label.setGeometry(
@@ -795,7 +795,7 @@ class MainUI(QDialog):
         self.side_bar_number_of_floors_line_edit.setGeometry(
             QtCore.QRect(105, 200, 90, 25))
         self.connect(self.side_bar_number_of_floors_line_edit, QtCore.SIGNAL(
-            "editingFinished()"), self.show_warning_window)
+            "editingFinished()"), self.show_warning_window_ui)
         self.side_bar_height_of_floors_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_height_of_floors_label.setGeometry(
@@ -806,7 +806,7 @@ class MainUI(QDialog):
         self.side_bar_height_of_floors_line_edit.setGeometry(
             QtCore.QRect(105, 235, 90, 25))
         self.connect(self.side_bar_height_of_floors_line_edit, QtCore.SIGNAL(
-            "editingFinished()"), self.show_warning_window)
+            "editingFinished()"), self.show_warning_window_ui)
         self.side_bar_net_leased_area_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_net_leased_area_label.setGeometry(
@@ -817,7 +817,7 @@ class MainUI(QDialog):
         self.side_bar_net_leased_area_line_edit.setGeometry(
             QtCore.QRect(105, 270, 90, 25))
         self.connect(self.side_bar_net_leased_area_line_edit, QtCore.SIGNAL(
-            "editingFinished()"), self.show_warning_window)
+            "editingFinished()"), self.show_warning_window_ui)
 
         """ All controls in the ribbon """
 
@@ -2507,6 +2507,25 @@ class MainUI(QDialog):
                 self.current_building = building
         self.display_current_building()
 
+    def check_inputs_archertype(self):
+        ''' Checks if all necessary values to create a archertype building'''
+
+        self.project, int_id = Controller.click_generate_type_building_button(
+            self.project,
+            self.archtertype_building_name_line_edit.text(),
+            self.archtertype_building_year_line_edit.text(),
+            self.archtertype_building_number_of_floors_line_edit.text(),
+            self.archtertype_building_height_of_floors_line_edit.text(),
+            self.current_type_building,
+            self.archtertype_building_area_line_edit.text(),
+            self.archtertype_building_street_line_edit.text(),
+            self.archtertype_building_location_line_edit.text(),
+            self.type_building_ind_att)
+        for building in self.project.buildings:
+            if building.internal_id == int_id:
+                self.current_building = building
+        self.display_current_building()
+
     def check_new_building_inputs(self):
         ''' Creates a new empty building
 
@@ -3378,7 +3397,7 @@ class MainUI(QDialog):
                 "\t", layer.internal_id)
             self.element_layer_model_set_all_constr.appendRow(item)
 
-    def show_warning_window(self):
+    def show_warning_window_ui(self):
 
         self.warning_window = QtGui.QWizardPage()
         self.warning_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -3426,11 +3445,11 @@ class MainUI(QDialog):
                          self.warning_window, QtCore.SLOT("close()"))
             self.connect(self.warning_window_update_button,
                          SIGNAL("clicked()"),
-                         self.show_update_archertype)
+                         self.show_update_archertype_ui)
         self.warning_window.setWindowModality(Qt.ApplicationModal)
         self.warning_window.show()
 
-    def show_update_archertype(self):
+    def show_update_archertype_ui(self):
         ''' Opens a window to create a new archtertype building.
 
         '''
@@ -3532,25 +3551,6 @@ class MainUI(QDialog):
             self.group_box_archtertype)
         self.archtertype_building_window.setWindowModality(Qt.ApplicationModal)
         self.archtertype_building_window.show()
-
-    def check_inputs_archertype(self):
-        ''' Checks if all necessary values to create a archertype building'''
-
-        self.project, int_id = Controller.click_generate_type_building_button(
-            self.project,
-            self.archtertype_building_name_line_edit.text(),
-            self.archtertype_building_year_line_edit.text(),
-            self.archtertype_building_number_of_floors_line_edit.text(),
-            self.archtertype_building_height_of_floors_line_edit.text(),
-            self.current_type_building,
-            self.archtertype_building_area_line_edit.text(),
-            self.archtertype_building_street_line_edit.text(),
-            self.archtertype_building_location_line_edit.text(),
-            self.type_building_ind_att)
-        for building in self.project.buildings:
-            if building.internal_id == int_id:
-                self.current_building = building
-        self.display_current_building()
 
     def show_element_build_ui(self, item):
         ''' Opens a window to display all attributes
