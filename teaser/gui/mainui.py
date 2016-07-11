@@ -3407,8 +3407,6 @@ class MainUI(QDialog):
             QtCore.QRect(155, 60, 145, 25))
         self.warning_window_cancel_button.clicked.connect(
             self.click_warning_cancel_button)
-        self.warning_window_cancel_button.clicked.connect(
-                self.show_update_archertype)
 
         if isinstance(self.current_building, NonResidential) or \
            isinstance(self.current_building, Residential):
