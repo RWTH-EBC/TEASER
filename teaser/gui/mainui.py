@@ -3398,15 +3398,17 @@ class MainUI(QDialog):
         self.warning_window_save_button.setText("Ok")
         self.warning_window_save_button.setGeometry(
             QtCore.QRect(0, 60, 145, 25))
+        self.connect(self.warning_window_save_button, SIGNAL("clicked()"),
+                     self.warning_window, QtCore.SLOT("close()"))
         self.warning_window_cancel_button = QtGui.QPushButton(
             self.warning_window)
-        self.warning_window_save_button.clicked.connect(
-            self.click_warning_save_button)
         self.warning_window_cancel_button.setText("Cancel")
         self.warning_window_cancel_button.setGeometry(
             QtCore.QRect(155, 60, 145, 25))
-        self.warning_window_cancel_button.clicked.connect(
-            self.click_warning_cancel_button)
+        self.connect(self.warning_window_cancel_button, SIGNAL("clicked()"),
+                     self.warning_window, QtCore.SLOT("close()"))
+        self.connect(self.warning_window_cancel_button, SIGNAL("clicked()"),
+                     self.display_current_building)
 
         if isinstance(self.current_building, NonResidential) or \
            isinstance(self.current_building, Residential):
@@ -3415,27 +3417,18 @@ class MainUI(QDialog):
             self.warning_window_cancel_button.setGeometry(
                     QtCore.QRect(100, 60, 100, 25))
             self.warning_window_update_button = QtGui.QPushButton(
-                                                    self.warning_window)
+                self.warning_window)
             self.warning_window_update_button.setText("Update Archetype")
             self.warning_window_update_button.setGeometry(
                 QtCore.QRect(200, 60, 100, 25))
-            self.warning_window_update_button.clicked.connect(
-                self.click_warning_update_button)
-            self.warning_window_update_button.clicked.connect(
-                self.show_update_archertype)
+            self.connect(self.warning_window_update_button,
+                         SIGNAL("clicked()"),
+                         self.warning_window, QtCore.SLOT("close()"))
+            self.connect(self.warning_window_update_button,
+                         SIGNAL("clicked()"),
+                         self.show_update_archertype)
         self.warning_window.setWindowModality(Qt.ApplicationModal)
         self.warning_window.show()
-
-    def click_warning_save_button(self):
-        self.warning_window.close()
-
-    def click_warning_cancel_button(self):
-        self.display_current_building()
-        self.warning_window.close()
-
-    def click_warning_update_button(self):
-        self.display_current_building()
-        self.warning_window.close()
 
     def show_update_archertype(self):
         ''' Opens a window to create a new archtertype building.
@@ -3531,10 +3524,13 @@ class MainUI(QDialog):
         self.archtertype_generate_button.setText("generate")
         self.connect(self.archtertype_generate_button, SIGNAL("clicked()"),
                      self.check_inputs_archertype)
+        self.connect(self.archtertype_generate_button, SIGNAL("clicked()"),
+                     self.archtertype_building_window, QtCore.SLOT("close()"))
         self.archtertype_generate_button.setGeometry(
             QtCore.QRect(10, 300, 90, 25))
         self.popup_layout_type_building.addWidget(
             self.group_box_archtertype)
+        self.archtertype_building_window.setWindowModality(Qt.ApplicationModal)
         self.archtertype_building_window.show()
 
     def check_inputs_archertype(self):
