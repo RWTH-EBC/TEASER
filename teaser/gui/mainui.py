@@ -3453,6 +3453,8 @@ class MainUI(QDialog):
             self.popup_layout_type_building)
         self.group_box_archtertype = QtGui.QGroupBox("Set Archertype values")
 
+        validator = QtGui.QDoubleValidator()
+
         self.archtertype_building_name_label = QtGui.QLabel(
             self.group_box_archtertype)
         self.archtertype_building_name_label.setGeometry(
@@ -3487,6 +3489,7 @@ class MainUI(QDialog):
         self.archtertype_building_year_label.setText("Construction Year:")
         self.archtertype_building_year_line_edit = QtGui.QLineEdit(
             self.group_box_archtertype)
+        self.archtertype_building_year_line_edit.setValidator(validator)
         self.archtertype_building_year_line_edit.setGeometry(
             QtCore.QRect(110, 140, 120, 25))
         self.archtertype_building_number_of_floors_label = QtGui.QLabel(
@@ -3497,6 +3500,8 @@ class MainUI(QDialog):
             "Number of Floors:")
         self.archtertype_building_number_of_floors_line_edit = \
             QtGui.QLineEdit(self.group_box_archtertype)
+        self.archtertype_building_number_of_floors_line_edit.setValidator(
+                                                             validator)
         self.archtertype_building_number_of_floors_line_edit.setGeometry(
             QtCore.QRect(110, 180, 120, 25))
         self.archtertype_building_height_of_floors_label = QtGui.QLabel(
@@ -3507,6 +3512,8 @@ class MainUI(QDialog):
             "Height of Floors:")
         self.archtertype_building_height_of_floors_line_edit = \
             QtGui.QLineEdit(self.group_box_archtertype)
+        self.archtertype_building_height_of_floors_line_edit.setValidator(
+                                                             validator)
         self.archtertype_building_height_of_floors_line_edit.setGeometry(
             QtCore.QRect(110, 220, 120, 25))
         self.archtertype_building_area_label = QtGui.QLabel(
@@ -3516,6 +3523,7 @@ class MainUI(QDialog):
         self.archtertype_building_area_label.setText("Net leased Area:")
         self.archtertype_building_area_line_edit = QtGui.QLineEdit(
             self.group_box_archtertype)
+        self.archtertype_building_area_line_edit.setValidator(validator)
         self.archtertype_building_area_line_edit.setGeometry(
             QtCore.QRect(110, 260, 120, 25))
         self.archtertype_generate_button = QtGui.QPushButton(
