@@ -26,7 +26,7 @@ def save_material(material):
     mat_pyxb.thermal_conduc = material.thermal_conduc
     mat_pyxb.heat_capac = material.heat_capac
 
-    path = utilitis.get_full_path("InputData/MaterialTemplates.xml")
+    path = utilitis.get_full_path("inputdata/MaterialTemplates.xml")
     xml_file = open(path, 'r')
 
     xml_parse = mat_bind.CreateFromDocument(xml_file.read())

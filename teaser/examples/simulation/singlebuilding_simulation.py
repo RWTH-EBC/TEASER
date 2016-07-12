@@ -97,8 +97,8 @@ def main():
     stored, in addition we need to define the path where the exported models
     are"""
 
-    outputDir = "D:\\TestCampusSimulation"
-    packageDir = output_path + "\\OneBuildingSim" + "\\Project"
+    outputDir = "D:/TestCampusSimulation"
+    packageDir = output_path + "/OneBuildingSim" + "/Project"
 
     """
     Now we need to create a simulation list for buildingspy

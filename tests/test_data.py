@@ -94,13 +94,13 @@ class Test_teaser(object):
         with TEASER3 values.
         '''
         prj.set_default()
-        prj.load_project(utilities.get_full_path("examples\\examplefiles"
-                                              "\\new.teaserXML"))
+        prj.load_project(utilities.get_full_path("examples/examplefiles"
+                                              "/new.teaserXML"))
         therm_zone = prj.buildings[0].thermal_zones[0]
-
-        prj.buildings[0].calc_building_parameter(number_of_elements=2,
-                                                 merge_windows=False,
-                                                 used_library='AixLib')
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.buildings[0].calc_building_parameter()
 
         assert round(therm_zone.r1_iw, 11) == 4.62113e-06
         assert round(therm_zone.c1_iw, 2) == 1209810287.22
@@ -577,12 +577,14 @@ class Test_teaser(object):
 
         helptest.building_test2(prj)
         helptest.building_test2(prj)
-        prj.calc_all_buildings(number_of_elements=2,
-                               merge_windows=True,
-                               used_library='AixLib')
-        prj.calc_all_buildings(number_of_elements=2,
-                               merge_windows=False,
-                               used_library='AixLib')
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
 
     def test_retrofit_all_buildings(self):
         '''test of retrofit_all_buildings, no calculation verification'''
@@ -592,13 +594,15 @@ class Test_teaser(object):
     def test_export_aixlib(self):
         '''test of export_aixlib, no calculation verification'''
 
-        prj.calc_all_buildings(number_of_elements=2,
-                               merge_windows=True,
-                               used_library='AixLib')
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
         prj.export_aixlib(building_model='MultizoneEquipped')
-        prj.calc_all_buildings(number_of_elements=2,
-                               merge_windows=False,
-                               used_library='AixLib')
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
         prj.export_aixlib(building_model='MultizoneEquipped')
 
     def test_export_parameters_txt(self):
@@ -988,7 +992,7 @@ class Test_teaser(object):
         '''test of save_use_conditions, no parameter checking'''
         import os
         try:
-            os.remove(utilities.get_default_path() + "\\" + "UseCondUT.xml")
+            os.remove(utilities.get_default_path() + "/" + "UseCondUT.xml")
         except:
             pass
         path = utilities.get_default_path()
@@ -1036,7 +1040,7 @@ class Test_teaser(object):
         '''test of save_type_element, no parameter checking'''
         import os
         try:
-            os.remove(utilities.get_default_path() + "\\" + "unitTestTB.xml")
+            os.remove(utilities.get_default_path() + "/" + "unitTestTB.xml")
         except:
             pass
 
