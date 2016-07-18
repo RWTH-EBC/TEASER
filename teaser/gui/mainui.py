@@ -43,6 +43,20 @@ except AttributeError:
 
 
 class MainUI(QDialog):
+    '''GUI Class
+
+    This class represents the GUI
+
+    Parameters
+    -----------
+
+    Note: the listed attributes are the ones that are need to show
+          the GUI
+
+    Attributes
+    ----------
+
+    '''
 
     # Constructor defines all elements in the GUI and sets the listModels for
     # the listViews
@@ -187,8 +201,6 @@ class MainUI(QDialog):
             _fromUtf8("envelopes_list_view"))
         self.envelopes_list_view.setModel(self.outer_elements_model)
         self.envelopes_list_view.setItemDelegate(self.lVZF)
-        # self.envelopes_list_view.doubleClicked.connect(
-        #     self.show_element_build_ui2)
         self.envelopes_list_view.doubleClicked.connect(
             self.change_envelopes_values_ui)
         self.envelopes_list_view.setEditTriggers(
@@ -894,7 +906,7 @@ class MainUI(QDialog):
         self.open_simulation_button.setGeometry(QtCore.QRect(605, 5, 70, 70))
         self.open_simulation_button.clicked.connect(
             self.show_simulation_window)
-        self.open_simulation_button.setToolTip("Opens the Simulation Tab.")
+        self.open_simulation_button.setToolTip("opens the Simulation Tab.")
         self.open_simulation_label = QtGui.QLabel(self.ribbon_group_box)
         self.open_simulation_label.setGeometry(QtCore.QRect(605, 80, 70, 25))
         self.open_simulation_label.setText("Open Simu-\n lation Tab")
@@ -904,7 +916,7 @@ class MainUI(QDialog):
         self.open_export_button.setGeometry(QtCore.QRect(685, 5, 70, 70))
         self.open_export_button.clicked.connect(
             self.show_export_window)
-        self.open_export_button.setToolTip("Opens the Export Tab.")
+        self.open_export_button.setToolTip("opens the Export Tab.")
         self.open_export_label = QtGui.QLabel(self.ribbon_group_box)
         self.open_export_label.setGeometry(QtCore.QRect(685, 80, 70, 25))
         self.open_export_label.setText("Open Ex-\n port Tab")
@@ -925,13 +937,17 @@ class MainUI(QDialog):
             self.main_widget, "geometry")
 
     def __del__(self):
+        '''Destructor
+
+        if the destructor is called then the instance is about to be destroyed.
+        '''
         sys.stdout = sys.__stdout__
 
     def normal_output_written(self, text):
-        ''''Append text to the QTextEdit. Part of the
-        package to display the console in the project.
-
+        '''Append text to the QTextEdit. Part of the package to display the
+        console in the project.
         '''
+
         cursor = self.text_edit.textCursor()
         cursor.movePosition(QtGui.QTextCursor.End)
         cursor.insertText(text)
@@ -939,12 +955,10 @@ class MainUI(QDialog):
         self.text_edit.ensureCursorVisible()
 
     def create_new_project(self):
-        ''' Clears everything and sets the project back to default.
+        '''Creates a new Project
 
+        clears everything and sets the project back to default.
         '''
-
-        # TODO: Bei sowas immer vorsichtig sein, hier auch neu hinzukommende
-        # Listen zu clearen, ansonsten gibts irgendwann lustige bugs.
 
         self.project = Project()
         self.project.modelica_info = ModelicaInfo()
@@ -966,8 +980,9 @@ class MainUI(QDialog):
         self.side_bar_street_line_edit.clear()
 
     def create_new_project_ui(self):
-        ''' Creates the window to set the project to default.
+        '''New project window
 
+        creates the window to set the project to default.
         '''
 
         QtGui.QMessageBox.warning(
@@ -1002,12 +1017,11 @@ class MainUI(QDialog):
         self.create_new_project_ui_page.show()
 
     def create_new_building_ui(self):
-        ''' Opens the create new building window.
+        '''New building window
 
+        opens the create new building window.
         '''
 
-        # TODO: Bin mir nicht sicher ob das self.no_building_warning_label
-        # noch irgendwas tut, überprüfen und sonst löschen.
         self.generate_new_building_ui_page = QtGui.QWizardPage()
         self.generate_new_building_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
@@ -1056,8 +1070,9 @@ class MainUI(QDialog):
         self.generate_new_building_ui_page.show()
 
     def create_new_element_ui(self):
-        ''' Opens the window to create a new element.
+        '''New element window
 
+        opens the window to create a new element.
         '''
 
         self.create_new_element_ui_page = QtGui.QWizardPage()
@@ -1130,6 +1145,11 @@ class MainUI(QDialog):
         self.create_new_element_ui_page.show()
 
     def create_new_envelope_ui(self):
+        '''New envelope window
+
+        opens the window to create a new envelope.
+        '''
+
         self.create__envelope_ui = WizardPage()
         self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create__envelope_ui.setWindowTitle("Set all construction")
@@ -1328,8 +1348,15 @@ class MainUI(QDialog):
         self.create__envelope_ui.show()
 
     def create_new_layer_ui(self, check):
-        ''' Opens the window to create a new layer.
+        '''New layer window
 
+        opens the window to create a new layer.
+
+        Parameters
+        ----------
+
+        check : string
+            checks in which window this method is called.
         '''
 
         self.create_layer_ui = QtGui.QWizardPage()
@@ -1484,8 +1511,9 @@ class MainUI(QDialog):
         self.create_layer_ui.show()
 
     def generate_type_building_ui(self):
-        ''' Opens a window to create a new type building.
+        '''New type building window
 
+        opens a window to create a new type building.
         '''
 
         self.popup_window_type_building = QtGui.QWizardPage()
@@ -1963,8 +1991,9 @@ class MainUI(QDialog):
         self.popup_window_type_building.show()
 
     def generate_zone_ui(self):
-        ''' Opens a window to create a new zone.
+        '''New zone window
 
+        opens a window to create a new zone.
         '''
 
         self.generate_zone_ui_page = QtGui.QWizardPage()
@@ -2024,9 +2053,10 @@ class MainUI(QDialog):
         self.generate_zone_ui_page.show()
 
     def save_changed_layer_values(self):
-        ''''Replaces the previous values of the current layer with the inputs
-           from the text fields.
+        '''Saves layer inputs
 
+        replaces the previous values of the current layer with the inputs
+        from the text fields.
         '''
 
         for zone in self.current_building.thermal_zones:
@@ -2096,9 +2126,10 @@ class MainUI(QDialog):
                                 break
 
     def save_changed_layer_values_set_all_constr(self):
-        ''''Replaces the previous values of the current layer with the inputs
-           from the text fields.
+        '''Saves the layer inputs in set all construction window
 
+        replaces the previous values of the current layer in envelope with
+        the inputs from the text fields in set all construction window.
         '''
 
         for layer in self.all_constr_layer_list:
@@ -2121,11 +2152,12 @@ class MainUI(QDialog):
                                 break
 
     def save_changed_simulation_values(self):
-        '''Replaces the previous values of the current project with the inputs
-           from the text fields in the simulation window.
+        '''Saves the inputs in the simulation window
+
+        replaces the previous values of the current project with the inputs
+        from the text fields in the simulation window.
 
         '''
-        # TODO: Fehler beim User-Input abfangen
 
         self.project.name = self.project_name_lineedit.text()
         self.project.modelica_info.runtime_simulation =\
@@ -2140,11 +2172,11 @@ class MainUI(QDialog):
             self.project.modelica_info.equidistant_output = False
 
     def save_changed_element_values(self):
-        '''Replaces the previous values of the current element with the inputs
-           from the text fields.
+        '''Saves element inputs
 
+        replaces the previous values of the current element with the inputs
+        from the text fields.
         '''
-        # TODO: Fehler beim User-Input abfangen
 
         for zone in self.current_building.thermal_zones:
             if zone.internal_id == self.current_zone.internal_id:
@@ -2233,6 +2265,11 @@ class MainUI(QDialog):
                         break
 
     def save_input_values_set_all_constr(self):
+        '''Saves element inputs in the set all construction window
+
+        replaces the previous values of the current element with the inputs
+        from the text fields in the set all construction window
+        '''
 
         bldg = self.current_building
         orientation = int(self.guiinfo.orientations_strings[
@@ -2263,9 +2300,10 @@ class MainUI(QDialog):
         self.display_current_building()
 
     def save_changed_zone_values(self):
-        ''' Updates the displayed details of the currently
-        selected zone after changes are saved.
+        '''Saves zone values
 
+        updates the displayed details of the currently selected zone after
+        changes are saved.
         '''
 
         self.current_zone.name = self.zone_id_textbox.text()
@@ -2342,6 +2380,11 @@ class MainUI(QDialog):
         self.display_current_building()
 
     def save_changed_envelopes_values(self):
+        '''Saves envelope values
+
+        updates the displayed details of the currently selected envelope after
+        changes are saved.
+        '''
 
         orientation_before_changing = \
             self.envelope_orientation_before_changing
@@ -2389,18 +2432,28 @@ class MainUI(QDialog):
         self.display_current_building()
 
     def clear_input_values_set_all_constr(self):
+        '''Clears layer values
+
+        clears the displayed layers of the currently selected envelope after
+        changes are saved.
+        '''
+
+        # clears the list in python 3
         try:
             self.element_layer_model_set_all_constr.clear()
             self.all_constr_layer_list.clear()
+        # clears the list in pyhton 2
         except:
             self.element_layer_model_set_all_constr = QStandardItemModel()
             self.all_constr_layer_list = []
 
     def check_inputs_new_zone(self):
-        '''Checks if the inputs from the new_zone window fulfill the specified
+        '''checks inputs of a new zone
+
+        checks if the inputs from the new_zone window fulfill the specified
         criteria of not being empty.
         '''
-        # TODO: Fehler beim User-Input abfangen
+
         if self.generate_zone_name_line_edit.text() == "":
             QtGui.QMessageBox.warning(self,
                                       u"Can't add Zone!",
@@ -2425,18 +2478,23 @@ class MainUI(QDialog):
             self.display_current_building()
 
     def check_inputs_edit_element(self):
-        '''Checks conditions for inputs from the element edit window.
+        '''checks inputs of a element, which is edit
+
+        checks conditions for inputs from the element edit window.
         '''
-        # TODO: Fehler beim User-Input abfangen
+
         self.current_element.name = self.edit_element_name_line_edit.text()
         self.current_element.area = float(
             self.edit_element_area_line_edit.text())
         self.display_current_element()
 
     def check_inputs_edit_zone(self):
-        ''' Checks if all necessary values to edit a given zone are still
-        not empty '''
-        # TODO: Fehler beim User-Input abfangen
+        '''checks inputs of a Zone, which is edit
+
+        checks if all necessary values to edit a given zone are still
+        not empty
+        '''
+
         if self.edit_zone_area_line_edit.text() == "":
             self.edit_zone_failed_label.setVisible(True)
             self.edit_zone_area_label = self.set_text_color(
@@ -2478,8 +2536,11 @@ class MainUI(QDialog):
                 self.display_current_building()
 
     def check_inputs_typebuilding(self):
-        ''' Checks if all necessary values to create a type building are
-        not empty/floats '''
+        '''checks inputs of a type building
+
+        checks if all necessary values to create a type building are
+        not empty/floats.
+        '''
 
         self.fill_typebuilding_attributes()
         self.project, int_id = Controller.click_generate_type_building_button(
@@ -2519,7 +2580,6 @@ class MainUI(QDialog):
 
     def check_new_building_inputs(self):
         ''' Creates a new empty building
-
         '''
 
         # TODO: Eventuell wollt ihr hier mehr Optionen beim Erstellen
@@ -2534,9 +2594,10 @@ class MainUI(QDialog):
         self.display_current_building()
 
     def check_new_element_inputs(self):
-        ''' Checks if all inputted values are correct and then updates
-        the list of elements of the currently displayed zone.
+        '''checks inputs of an new element
 
+        checks if all inputed values are correct and then updates
+        the list of elements of the currently displayed zone.
         '''
 
         # TODO: Wir wollten keine Messageboxes mehr, also userinput
@@ -2620,9 +2681,16 @@ class MainUI(QDialog):
             self.element_model.appendRow(item)
 
     def check_new_layer_inputs(self, check):
-        ''' Adds a new layer to the current element, checks if the
+        '''Check inputs of a new layer
+
+        adds a new layer to the current element or envelope and checks if the
         input is correct
 
+        Parameters
+        ----------
+
+        check : string
+            checks in which window this method is called.
         '''
 
         if self.new_layer_thickness_textbox.text() is not "":
@@ -2678,8 +2746,9 @@ class MainUI(QDialog):
                 therm, heat, solar, ir, trans))
 
     def change_zone_values_ui(self, item):
-        ''' Opens a window to see all attributes from the
-        currently selected zone.
+        '''Displays attributes of a selected zone
+
+        opens a window to see all attributes from the currently selected zone.
         '''
 
         self.zone_element_model = QStandardItemModel()
@@ -3071,6 +3140,12 @@ class MainUI(QDialog):
         self.zone_value_window.show()
 
     def change_envelopes_values_ui(self, item):
+        '''Displays attributes of a selected envelope
+
+        opens a window to see all attributes from the currently selected
+        envelope.
+        '''
+
         self.envelopes_value_window = QtGui.QWizardPage()
         self.envelopes_value_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.envelopes_value_window.setWindowTitle("Envelopes Details")
@@ -3197,9 +3272,11 @@ class MainUI(QDialog):
         self.envelopes_value_window.show()
 
     def update_zone_details(self):
-        ''' Updates the Zone Details window after something has been changed
+        '''Update the zone details window
 
+        updates the zone details window after something has been changed.
         '''
+
         self.element_model.clear()
         if self.current_zone.inner_walls:
             for inner_wall in self.current_zone.inner_walls:
@@ -3364,9 +3441,11 @@ class MainUI(QDialog):
         self.canvas_profiles.draw()
 
     def update_element_details(self):
-        ''' Updates the element details after layers have been changed
+        '''Update the element details window
 
+        updates the element details window after layers have been changed.
         '''
+
         self.element_layer_model.clear()
         for layer in self.current_element.layer:
             item = TrackableItem(
@@ -3376,8 +3455,9 @@ class MainUI(QDialog):
             self.element_layer_model.appendRow(item)
 
     def update_set_all_construction(self):
-        ''' Updates the set all construction after layers have been changed
+        '''Update the set all construction window
 
+        updates the set all construction window after layers have been changed.
         '''
 
         self.element_layer_model_set_all_constr.clear()
@@ -3544,8 +3624,10 @@ class MainUI(QDialog):
         self.archtertype_building_window.show()
 
     def show_element_build_ui(self, item):
-        ''' Opens a window to display all attributes
-        of the currently selected element.
+        '''Displays attributes of a selected element
+
+        opens a window to display all attributes of the currently selected
+        element.
         '''
 
         self.element_build_ui = QtGui.QWizardPage()
@@ -3924,8 +4006,9 @@ class MainUI(QDialog):
         self.element_build_ui.show()
 
     def show_export_window(self):
-        ''' Opens a window that displays the options to export the project.
+        '''Displays options of export
 
+        opens a window that displays the options to export the project.
         '''
 
         self.export_window_ui = QtGui.QWizardPage()
@@ -4076,8 +4159,10 @@ class MainUI(QDialog):
         self.export_window_ui.show()
 
     def show_simulation_window(self):
-        ''' Opens a window to display the project name and
-        all simulation attributes.
+        '''Displays attributes of simulation
+
+        opens a window to display the project name and all simulation
+        attributes.
         '''
 
         self.simulation_window_ui = QtGui.QWizardPage()
@@ -4190,8 +4275,9 @@ class MainUI(QDialog):
         self.simulation_window_ui.show()
 
     def show_layer_build_ui(self, item):
-        ''' Opens a window to see all attributes from the
-        currently selected layer.
+        '''Displays attributes of a selected layer
+
+        opens a window to see all attributes from the currently selected layer.
         '''
 
         self.layer_build_ui = QtGui.QWizardPage()
@@ -4344,7 +4430,12 @@ class MainUI(QDialog):
         self.layer_build_ui.show()
 
     def display_current_building(self):
-        ''' Changes all the values to the new building
+        '''Displays the current Building
+
+        if some values of the current builing has changed, this method shows
+        the updated building in the GUI.
+        If the building is switched all the values of the new Building will
+        taken over and displayed.
         '''
 
         if (self.current_building):
@@ -4366,7 +4457,7 @@ class MainUI(QDialog):
             self.side_bar_street_line_edit.setText(
                 str(self.current_building.street_name))
 
-            """ Updates the combobox displaying all buildings """
+            """ updates the combobox displaying all buildings """
 
             try:
                 if (self.side_bar_buildings_combo_box.findData(
@@ -4512,7 +4603,9 @@ class MainUI(QDialog):
                     self.outer_elements_model.appendRow(item2)
 
     def display_current_zone(self):
-        ''' Updates the lists in the main window
+        '''Displays the current zone
+
+        update and display the zone lists in the main window.
         '''
 
         if (self.current_zone):
@@ -4587,9 +4680,10 @@ class MainUI(QDialog):
                 self.element_model.appendRow(item)
 
     def display_current_element(self):
-        ''' Transfers all relevant values of the current
-        element to gui controls like text fields and the list of layers.
+        '''Displays the current element
 
+        transfers all relevant values of the current element to gui controls
+        like text fields and the list of layers.
         '''
 
         if (self.current_element):
@@ -4616,9 +4710,9 @@ class MainUI(QDialog):
                 self.layer_model.appendRow(item)
 
     def display_current_layer(self):
-        ''' Transfers all relevant values of the current
-        layer to gui text fields.
+        '''Displays the current layer
 
+        transfers all relevant values of the current layer to gui text fields.
         '''
 
         if (self.current_layer):
@@ -4643,9 +4737,10 @@ class MainUI(QDialog):
                 str(self.current_layer.material.transmittance))
 
     def click_save_current_project(self):
-        '''Opens a dialog window for the user to input a path
-        then issues the controller to create and save the file.
+        '''Saves the project
 
+        opens a dialog window for the user to input a path then issues the
+        controller to create and save the file.
         '''
 
         path = QtGui.QFileDialog.getSaveFileName(
@@ -4662,6 +4757,12 @@ class MainUI(QDialog):
         Controller.click_save_button(self.project, str(path))
 
     def click_export_button(self):
+        '''Executes the export
+
+        execute model after export is clicked, differentiate between current
+        and all buildings.
+        '''
+
         # path in GUI, which is need for the output
         path_output_folder = str(self.export_save_template_lineedit.text())
 
@@ -4736,6 +4837,12 @@ class MainUI(QDialog):
         utilitis.create_path(str(self.file_path))
 
     def click_browse_button(self):
+        '''Browses beetween the Directory
+
+        opens a dialog window for the user to search the location for the 
+        output files.
+        '''
+
         self.export_save_template_lineedit.setText(QtGui.QFileDialog.
                                                    getExistingDirectory())
         if self.export_save_template_lineedit.text() != "":
@@ -4745,7 +4852,10 @@ class MainUI(QDialog):
             self.export_save_template_lineedit.setText(self.file_path)
 
     def switch_building(self):
-        ''' Handles the buildings combobo
+        '''Handles the buildings combobox
+
+        updates the displayed details of the selected building after the
+        building is switched.
         '''
 
         cIndex = self.side_bar_buildings_combo_box.currentIndex()
@@ -4757,9 +4867,10 @@ class MainUI(QDialog):
                 self.display_current_building()
 
     def switch_type_building(self):
-        '''After changing the index of the combobox this function replaces
-        the controls to fit the current type building.
+        '''Switches between the type buildings
 
+        after changing the index of the combobox this function replaces the
+        controls to fit the current type building.
         '''
 
         cIndex = self.window_construct_building_combo_box.currentText()
@@ -4792,9 +4903,10 @@ class MainUI(QDialog):
                 QtCore.SLOT("close()"))
 
     def switch_current_zone_type(self):
-        '''If the type of the current zone is swapped, this
-        gets the values for the new type and updates the window
+        '''Switches between the types of a zone
 
+        if the type of the current zone is swapped, this gets the values for
+        the new type and updates the window.
         '''
 
         zone_type = self.zone_type_combobox.currentText()
@@ -4803,8 +4915,10 @@ class MainUI(QDialog):
         self.update_zone_details()
 
     def switch_current_zone(self):
-        ''' Switches the current zone if the user clicks on it
-        used for things like delete_thermal_zone.
+        '''Switches between the zones
+
+        switches the current zone if the user clicks on it used for things
+        like delete_thermal_zone.
         '''
 
         current_item = self.zone_model.itemFromIndex(
@@ -4815,8 +4929,10 @@ class MainUI(QDialog):
         self.display_current_zone()
 
     def switch_current_element(self):
-        ''' Switches the current element if the user clicks on it
-        used for things like delete_current_element.
+        '''Switch between the elements #
+
+        switches the current element if the user clicks on it used for things
+        like delete_current_element.
         '''
 
         current_item = self.element_model.itemFromIndex(
@@ -4850,9 +4966,10 @@ class MainUI(QDialog):
         """
 
     def switch_current_layer(self):
-        ''' Switches the current layer if the user clicks on it
-        used for things like delete_current_layer.
+        '''Switches between the layers
 
+        switches the current layer if the user clicks on it  used for things
+        like delete_current_layer.
         '''
 
         current_item = self.layer_model.itemFromIndex(
@@ -4863,6 +4980,13 @@ class MainUI(QDialog):
         self.display_current_layer()
 
     def switch_constr_type(self):
+        '''changes the construction type
+
+        after changing the index of the combobox this function disconnects the
+        layers of the element and after pressing the save button it updates
+        the layers.
+        '''
+
         try:
             self.construction_type_switched = True
             self.element_material_list_view.doubleClicked.disconnect()
@@ -4870,9 +4994,10 @@ class MainUI(QDialog):
             pass
 
     def switch_material(self):
-        '''If the current material is swapped, this gets the
-        values for the new type and updates the window
+        '''Switches between the materials
 
+        if the current material is swapped, this gets the values for the new
+        type and updates the window
         '''
 
         if self.is_switchable:
@@ -4894,7 +5019,9 @@ class MainUI(QDialog):
                         str(self.current_layer.material.heat_capac))
 
     def add_thermal_zone(self):
-        '''Checks if a building exists, if it does opens a window to create
+        '''Adds a new thermal zone
+
+        checks if a building exists, if it does opens a window to create
         a new zone.
         '''
 
@@ -4938,8 +5065,10 @@ class MainUI(QDialog):
                 self.display_current_building()
 
     def delete_thermal_zone(self):
-        '''Checks if a building exists, if it does the currently
-        selected zone is deleted from the current building.
+        '''Deletes a thermal zone
+
+        checks if a building exists, if it does the currentlyselected zone
+        is deleted from the current building.
         '''
 
         if (self.current_building == 0):
@@ -4962,9 +5091,10 @@ class MainUI(QDialog):
                                           "thermal zone first.")
 
     def delete_current_element(self):
-        '''Checks if an element is currently selected and
-        deletes the selected element.
+        '''Deletes an element
 
+        checks if an element is currently selected and deletes the selected
+        element.
         '''
 
         try:
@@ -4993,9 +5123,9 @@ class MainUI(QDialog):
                                       u"You need to select an element first.")
 
     def delete_selected_layer(self):
-        '''Checks if a layer is currently selected and
-        deletes the selected layer.
+        '''Deletes a layer
 
+        checks if a layer is currently selected and deletes the selected layer.
         '''
 
         try:
@@ -5027,6 +5157,13 @@ class MainUI(QDialog):
                                       u"You need to select a layer first.")
 
     def delete_selected_layer_set_all_constr(self):
+        '''Deletes a layer in set all construction window
+
+        this function only operates in the set all construction window.
+        It checks if a layer is currently selected and deletes the selected
+        layer.
+        '''
+
         try:
             item = self.element_layer_model_set_all_constr.itemFromIndex(
                 self.set_all_constr_element_material_list_view.currentIndex())
@@ -5042,10 +5179,158 @@ class MainUI(QDialog):
                                       u"No layer selected",
                                       u"You need to select a layer first.")
 
-    def load_material(self):
-        '''If the current material is swapped, this gets the
-        values for the new type and updates the window
+    def edit_building(self):
+        '''Switch to an edit mode
 
+        goes into edit mode and darkens the uneditable parts.
+        '''
+
+        # TODO: Ok das Design hat sich nicht wirklich durchgesetzt und
+        # es funktioniert grad nicht besonders, Vorschlag: stattdessen
+        # einfach ein Pop-Up Fenster wie bei Create-Type-Building, in dem
+        # man building attribute die links am rand stehen ändern kann.
+        if self.current_building:
+            self.side_bar_construction_year_line_edit.setReadOnly(False)
+            self.side_bar_height_of_floors_line_edit.setReadOnly(False)
+            self.side_bar_id_line_edit.setReadOnly(False)
+            self.side_bar_location_line_edit.setReadOnly(False)
+            self.side_bar_net_leased_area_line_edit.setReadOnly(False)
+            self.side_bar_number_of_floors_line_edit.setReadOnly(False)
+            self.side_bar_street_line_edit.setReadOnly(False)
+            self.saved_values_for_edit["year"] = \
+                self.side_bar_construction_year_line_edit.text()
+            self.saved_values_for_edit["height"] = \
+                self.side_bar_height_of_floors_line_edit.text()
+            self.saved_values_for_edit["id"] = \
+                self.side_bar_id_line_edit.text()
+            self.saved_values_for_edit["location"] = \
+                self.side_bar_location_line_edit.text()
+            self.saved_values_for_edit["area"] = \
+                self.side_bar_net_leased_area_line_edit.text()
+            self.saved_values_for_edit["number"] = \
+                self.side_bar_number_of_floors_line_edit.text()
+            self.saved_values_for_edit["street"] = \
+                self.side_bar_street_line_edit.text()
+
+            self.mask_label_0.setVisible(True)
+            self.mask_label_0.raise_()
+            self.mask_label_1.setVisible(True)
+            self.mask_label_1.raise_()
+            self.mask_label_2.setVisible(True)
+            self.mask_label_2.raise_()
+            self.mask_label_3.setVisible(True)
+            self.mask_label_3.raise_()
+            self.mask_label_4.setVisible(True)
+            self.mask_label_4.raise_()
+            self.mask_label_5.setVisible(True)
+            self.mask_label_5.raise_()
+            self.mask_label_6.setVisible(True)
+            self.mask_label_6.raise_()
+            self.mask_label_7.setVisible(True)
+            self.mask_label_7.raise_()
+            self.mask_label_8.setVisible(True)
+            self.mask_label_8.raise_()
+
+            self.mask_label_9.setVisible(True)
+            self.mask_label_9.raise_()
+            self.mask_button_1.setVisible(True)
+            self.mask_button_1.raise_()
+            self.mask_button_2.setVisible(True)
+            self.mask_button_2.raise_()
+            self.current_transformation = "ebui"
+        else:
+            QtGui.QMessageBox.warning(self,
+                                      u"No building error!",
+                                      u"You need to specify a building first.")
+
+    def edit_building_save(self):
+        '''Disables edit mode after saving
+
+        changes the program back after saving changes.
+        '''
+
+        # TODO: Siehe TODO in edit_building
+
+        self.mask_label_0.setVisible(False)
+        self.mask_label_1.setVisible(False)
+        self.mask_label_2.setVisible(False)
+        self.mask_label_3.setVisible(False)
+        self.mask_label_4.setVisible(False)
+        self.mask_label_5.setVisible(False)
+        self.mask_label_6.setVisible(False)
+        self.mask_label_7.setVisible(False)
+        self.mask_label_8.setVisible(False)
+        self.mask_label_9.setVisible(False)
+        self.mask_button_1.setVisible(False)
+        self.mask_button_2.setVisible(False)
+        self.side_bar_construction_year_line_edit.setReadOnly(True)
+        self.side_bar_height_of_floors_line_edit.setReadOnly(True)
+        self.side_bar_id_line_edit.setReadOnly(True)
+        self.side_bar_location_line_edit.setReadOnly(True)
+        self.side_bar_net_leased_area_line_edit.setReadOnly(True)
+        self.side_bar_number_of_floors_line_edit.setReadOnly(True)
+        self.side_bar_street_line_edit.setReadOnly(True)
+        self.current_building.year_of_construction = \
+            self.side_bar_construction_year_line_edit.text()
+        self.current_building.height_of_floors = \
+            self.side_bar_height_of_floors_line_edit.text()
+        self.current_building.name = self.side_bar_id_line_edit.text()
+        self.current_building.city = self.side_bar_location_line_edit.text()
+        self.current_building.net_leased_area = \
+            self.side_bar_net_leased_area_line_edit.text()
+        self.current_building.number_of_floors = \
+            self.side_bar_number_of_floors_line_edit.text()
+        self.current_building.street_name = \
+            self.side_bar_street_line_edit.text()
+        self.display_current_building()
+
+    def edit_building_cancel(self):
+        '''Cancels edit mode 
+
+        changes the program back after cancelling changes.
+        '''
+
+        # TODO: Siehe TODO in edit_building
+
+        self.mask_label_0.setVisible(False)
+        self.mask_label_1.setVisible(False)
+        self.mask_label_2.setVisible(False)
+        self.mask_label_3.setVisible(False)
+        self.mask_label_4.setVisible(False)
+        self.mask_label_5.setVisible(False)
+        self.mask_label_6.setVisible(False)
+        self.mask_label_7.setVisible(False)
+        self.mask_label_8.setVisible(False)
+        self.mask_label_9.setVisible(False)
+        self.mask_button_1.setVisible(False)
+        self.mask_button_2.setVisible(False)
+        self.side_bar_construction_year_line_edit.setReadOnly(True)
+        self.side_bar_height_of_floors_line_edit.setReadOnly(True)
+        self.side_bar_id_line_edit.setReadOnly(True)
+        self.side_bar_location_line_edit.setReadOnly(True)
+        self.side_bar_net_leased_area_line_edit.setReadOnly(True)
+        self.side_bar_number_of_floors_line_edit.setReadOnly(True)
+        self.side_bar_street_line_edit.setReadOnly(True)
+        self.side_bar_construction_year_line_edit.setText(
+            self.saved_values_for_edit["year"])
+        self.side_bar_height_of_floors_line_edit.setText(
+            self.saved_values_for_edit["height"])
+        self.side_bar_id_line_edit.setText(
+            self.saved_values_for_edit["id"])
+        self.side_bar_location_line_edit.setText(
+            self.saved_values_for_edit["location"])
+        self.side_bar_net_leased_area_line_edit.setText(
+            self.saved_values_for_edit["area"])
+        self.side_bar_number_of_floors_line_edit.setText(
+            self.saved_values_for_edit["number"])
+        self.side_bar_street_line_edit.setText(
+            self.saved_values_for_edit["street"])
+
+    def load_material(self):
+        '''loads material
+
+        if the current material is swapped, this gets the values for the new
+        type and updates the window.
         '''
 
         try:
@@ -5074,9 +5359,11 @@ class MainUI(QDialog):
                         str(material.heat_capac))
 
     def load_building_button(self):
-        ''' Loads the chosen building from a dialog window and
-        puts it on display.
+        '''Loads a building
+
+        loads the chosen building from a dialog window and puts it on display.
         '''
+
         # click_save_current_project
         path = QtGui.QFileDialog.getOpenFileName(
             self, caption='Choose Filepath', directory='')
@@ -5085,6 +5372,12 @@ class MainUI(QDialog):
             self.merge_projects(loaded_project)
 
     def load_constr_type(self):
+        '''loads a construction type
+
+        the currently construction type and year of construction will be taken
+        over to the element, after saving it.
+        '''
+
         if self.construction_type_switched is True:
             self.current_element.load_type_element(
                 int(self.element_year_of_construction_textbox.text()),
@@ -5093,10 +5386,13 @@ class MainUI(QDialog):
         self.construction_type_switched = False
 
     def merge_projects(self, loaded_project):
-        ''' If a new project is loaded in the buildings are merged
-        into the list of buildings of the older project and all the
-        values of the old project are overwritten
+        '''Merges two projects
+
+        if a new project is loaded, all the buildings are merged into the list
+        of buildings of the older project and all the values of the old
+        project are overwritten.
         '''
+
         for building in self.project.buildings:
             loaded_project.buildings.insert(0, building)
         self.project = loaded_project
@@ -5106,6 +5402,12 @@ class MainUI(QDialog):
         self.display_current_building()
 
     def fill_random_parameters(self):
+        '''Fills attributes
+
+        helper function which fills parameters with random values in generate
+        office window.
+        '''
+
         import random
         self.window_construct_building_name_line_edit.setText("Random")
         self.window_construct_building_street_line_edit.setText(
@@ -5124,8 +5426,10 @@ class MainUI(QDialog):
         self.window_construct_building_area_line_edit.setText(value)
 
     def fill_typebuilding_attributes(self):
-        '''Fills in values for type buildings from the combo boxes
-        next to the pictures in the Create Type Building window.
+        '''Fills type building attributes
+
+        fills in values for type buildings from the comboboxes next to the
+        pictures in the Create Type Building window.
         '''
 
         text = self.window_construct_building_combo_box.currentText()
@@ -5194,7 +5498,6 @@ class MainUI(QDialog):
 
     def key_press_event(self, event):
         ''' Implements shortcuts for the most important buttons
-
         '''
 
         # TODO: Ok also das hier funktioniert generell und tut auch schon
@@ -5234,7 +5537,9 @@ class MainUI(QDialog):
             self.edit_building()
 
     def set_text_color(self, qObject, color):
-        '''Switches the color of text between red and black
+        '''Sets the color of text
+
+        switches the color of text between red and black.
         '''
         # werden soll, beim Löschen auf weitere Abhängigkeiten überprüfen!
         palette = QtGui.QPalette()
@@ -5246,18 +5551,30 @@ class MainUI(QDialog):
         return qObject
 
 class WizardPage(QtGui.QWizardPage):
+    '''WizardPage class
+
+    '''
+
     def closeEvent(self, evnt, elem_layer=None, layer_list=None):
-            if(elem_layer is not None or layer_list is not None):
-                if (str(platform.python_version())).startswith('2'):
-                    elem_layer = []
-                    layer_list = []
-                elif (str(platform.python_version())).startswith('3'):
-                    elem_layer.clear()
-                    layer_list.clear()
+        '''Describes a close event
+
+        close event describes what is supposed to happen if a window is closed.
+        In this case, all layers in set all construction window will cleared.
+        '''
+
+        if(elem_layer is not None or layer_list is not None):
+            if (str(platform.python_version())).startswith('2'):
+                elem_layer = []
+                layer_list = []
+            elif (str(platform.python_version())).startswith('3'):
+                elem_layer.clear()
+                layer_list.clear()
+
 
 class EmittingStream(QtCore.QObject):
-    ''' Part of the package to display the console in the project.
+    '''Display the console
 
+    part of the package to display the console in the project.
     '''
 
     textWritten = QtCore.pyqtSignal(str)
