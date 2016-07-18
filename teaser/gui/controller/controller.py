@@ -199,6 +199,52 @@ class Controller():
         Lets CalcProject create a new building with the given ID.
         """
         return Building(current_project, openId)
+    
+    @classmethod
+    def click_update_archertype_button(self,
+                                            project,
+                                            current_building,
+                                            name,
+                                            year_of_construction,
+                                            number_of_floors,
+                                            height_of_floors,
+                                            net_leased_area,
+                                            street,
+                                            location):
+        for building in project.buildings:
+            if building.internal_id == current_building.internal_id:
+                building.net_leased_area = net_leased_area
+                building.name = name
+                building.street_name = street
+                building.city = location
+                building.year_of_construction = year_of_construction
+                building.number_of_floors = number_of_floors
+                building.height_of_floors = height_of_floors
+                building._thermal_zones = []
+                building.generate_archetype()
+        return project
+        
+    @classmethod
+    def click_update_archertype_button1(self,
+                                            building,
+                                            name,
+                                            year_of_construction,
+                                            number_of_floors,
+                                            height_of_floors,
+                                            net_leased_area,
+                                            street,
+                                            location):
+        building.net_leased_area = net_leased_area
+        building.name = name
+        building.street_name = street
+        building.city = location
+        building.year_of_construction = year_of_construction
+        building.number_of_floors = number_of_floors
+        building.height_of_floors = height_of_floors
+        building.generate_archetype()
+        # project.buildings[index] = building
+        return building
+        
 
     @classmethod
     def click_generate_type_building_button(self,
