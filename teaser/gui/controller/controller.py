@@ -222,29 +222,7 @@ class Controller():
                 building.height_of_floors = height_of_floors
                 building._thermal_zones = []
                 building.generate_archetype()
-        return project
-        
-    @classmethod
-    def click_update_archertype_button1(self,
-                                            building,
-                                            name,
-                                            year_of_construction,
-                                            number_of_floors,
-                                            height_of_floors,
-                                            net_leased_area,
-                                            street,
-                                            location):
-        building.net_leased_area = net_leased_area
-        building.name = name
-        building.street_name = street
-        building.city = location
-        building.year_of_construction = year_of_construction
-        building.number_of_floors = number_of_floors
-        building.height_of_floors = height_of_floors
-        building.generate_archetype()
-        # project.buildings[index] = building
-        return building
-        
+        return project        
 
     @classmethod
     def click_generate_type_building_button(self,
