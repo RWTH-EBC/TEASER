@@ -202,15 +202,15 @@ class Controller():
     
     @classmethod
     def click_update_archertype_button(self,
-                                            project,
-                                            current_building,
-                                            name,
-                                            year_of_construction,
-                                            number_of_floors,
-                                            height_of_floors,
-                                            net_leased_area,
-                                            street,
-                                            location):
+                                       project,
+                                       current_building,
+                                       name,
+                                       year_of_construction,
+                                       number_of_floors,
+                                       height_of_floors,
+                                       net_leased_area,
+                                       street,
+                                       location):
         for building in project.buildings:
             if building.internal_id == current_building.internal_id:
                 building.net_leased_area = net_leased_area
