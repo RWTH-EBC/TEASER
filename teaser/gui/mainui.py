@@ -3472,6 +3472,10 @@ class MainUI(QDialog):
             QtCore.QRect(0, 60, 145, 25))
         self.connect(self.warning_window_save_button, SIGNAL("clicked()"),
                      self.warning_window, QtCore.SLOT("close()"))
+        self.connect(self.warning_window_save_button, SIGNAL("clicked()"),
+                     self.update_building)
+        self.connect(self.warning_window_save_button, SIGNAL("clicked()"),
+                     self.display_current_building)
         self.warning_window_cancel_button = QtGui.QPushButton(
             self.warning_window)
         self.warning_window_cancel_button.setText("Cancel")
@@ -3502,7 +3506,32 @@ class MainUI(QDialog):
                                             
         self.warning_window.setWindowModality(Qt.ApplicationModal)
         self.warning_window.show()
-    
+        
+    def update_building(self):
+        self.project = Controller.click_update_building(
+                        self.project,
+                        self.current_building,
+                        str(self.side_bar_id_line_edit.text()),
+                        str(self.side_bar_construction_year_line_edit.text()),
+                        float(self.side_bar_number_of_floors_line_edit.text()),
+                        float(self.side_bar_height_of_floors_line_edit.text()),
+                        float(self.side_bar_net_leased_area_line_edit.text()),
+                        str(self.side_bar_street_line_edit.text()),
+                        str(self.side_bar_location_line_edit.text()))
+        self.display_current_building()
+        """
+        for building in self.project.buildings:
+            if self.current_building.internal_id == building.internal_id:
+                building.net_leased_area = net_leased_area
+                building.name = name
+                building.street_name = street
+                building.city = location
+                building.year_of_construction = year_of_construction
+                building.number_of_floors = number_of_floors
+                building.height_of_floors = height_of_floors
+        self.current_building = building     
+        """
+        
     def show_element_build_ui(self, item):
         '''Displays attributes of a selected element
 
