@@ -210,7 +210,8 @@ class Controller():
                                        height_of_floors,
                                        net_leased_area,
                                        street,
-                                       location):
+                                       location,
+                                       update_archtertype):
         for building in project.buildings:
             if building.internal_id == current_building.internal_id:
                 building.net_leased_area = net_leased_area
@@ -220,8 +221,9 @@ class Controller():
                 building.year_of_construction = year_of_construction
                 building.number_of_floors = number_of_floors
                 building.height_of_floors = height_of_floors
-                building._thermal_zones = []
-                building.generate_archetype()
+                if update_archtertype == True:
+                    building._thermal_zones = []
+                    building.generate_archetype()
         return project
     
     @classmethod
