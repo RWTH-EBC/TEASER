@@ -45,19 +45,19 @@ class DataClass(object):
         '''
         if type_element_file is None:
             self.path_tb = utilitis.get_full_path(
-                "Data/Input/InputData/TypeBuildingElements.xml")
+                "data/input/inputdata/TypeBuildingElements.xml")
         else:
-            self.path_tb = utilitis.get_full_path("Data/Input/InputData/"+str(
+            self.path_tb = utilitis.get_full_path("data/input/inputdata/"+str(
                 type_element_file))
 
         __xml_file_tb = open(self.path_tb, 'r')
         self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
         self.path_uc = utilitis.get_full_path(
-            "Data/Input/InputData/UseConditions.xml")
+            "data/input/inputdata/UseConditions.xml")
         __xml_file_uc = open(self.path_uc, 'r')
         self.conditions_bind = uc_bind.CreateFromDocument(__xml_file_uc.read())
 
         __path_mat = utilitis.get_full_path(
-            "Data/Input/InputData/MaterialTemplates.xml")
+            "data/input/inputdata/MaterialTemplates.xml")
         __xml_file_mat = codecs.open(__path_mat, 'r', encoding='utf-8')
         self.material_bind = mat_bind.CreateFromDocument(__xml_file_mat.read())

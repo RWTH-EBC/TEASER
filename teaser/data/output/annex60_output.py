@@ -48,28 +48,28 @@ def export_annex60(prj,
     else:
         exported_list_of_buildings = prj.buildings
 
-    aixlib_output._help_package(path, prj.name, uses)
+    aixlib_output._help_package(path, prj.name, uses, within=None)
     aixlib_output._help_package_order(path, exported_list_of_buildings)
 
     if number_of_elements == 1:
         pass
     elif number_of_elements == 2:
         zone_template = Template(filename=utilitis.get_full_path(
-            "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_TwoElements"))
+            "data/output/modelicatemplate/Annex60/Annex60_TwoElements"))
     elif number_of_elements == 3:
         zone_template = Template(filename=utilitis.get_full_path(
-            "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_ThreeElements"))
+            "data/output/modelicatemplate/Annex60/Annex60_ThreeElements"))
     elif number_of_elements == 4:
         zone_template = Template(filename=utilitis.get_full_path(
-            "Data\\Output\\ModelicaTemplate\\Annex60\\Annex60_FourElements"))
+            "data/output/modelicatemplate/Annex60/Annex60_FourElements"))
 
     for bldg in exported_list_of_buildings:
         bldg_path = os.path.join(path,
                                  bldg.name)
         utilitis.create_path(utilitis.get_full_path(bldg_path))
-        utilitis.create_path(utilitis.get_full_path(bldg_path+ "\\" + bldg.name + \
+        utilitis.create_path(utilitis.get_full_path(bldg_path+ "/" + bldg.name + \
                                                      "_Models"))
-        aixlib_output._help_package(bldg_path, bldg.name)
+        aixlib_output._help_package(bldg_path, bldg.name, within=prj.name)
         aixlib_output._help_package_order(bldg_path,
                                           [bldg],
                                           None,
@@ -79,15 +79,22 @@ def export_annex60(prj,
                                      bldg.name+"_Models")
 
             out_file = open(utilitis.get_full_path(
-                    zone_path + "\\" + bldg.name + "_" +
+                    zone_path + "/" + bldg.name + "_" +
                     zone.name.replace(" ", "") + ".mo"), 'w')
             out_file.write(zone_template.render_unicode(bldg=bldg,
                                                         zone=zone,
-                                                        merge_windows=
-                                                        merge_windows))
+                                                        merge_windows=merge_windows,
+                                                        within=(prj.name +
+                                                                '.' +
+                                                                bldg.name +
+                                                                '.' +
+                                                                bldg.name +
+                                                                "_Models")))
 
             aixlib_output._help_package(zone_path,
-                                        bldg.name + "_Models")
+                                        bldg.name + "_Models",
+                                        within=prj.name + '.' + bldg.name)
+
             aixlib_output._help_package_order(zone_path,
                                               bldg.thermal_zones,
                                               (bldg.name + "_"))

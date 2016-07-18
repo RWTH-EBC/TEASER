@@ -1,3 +1,4 @@
+within ${mod_prj}.${bldg.name}.${bldg.name}_DataBase;
 record ${bldg.name}_base "${bldg.name}_base"
   extends AixLib.DataBase.Buildings.BuildingBaseRecord(
     numZones = ${get_n(bldg.thermal_zones)},

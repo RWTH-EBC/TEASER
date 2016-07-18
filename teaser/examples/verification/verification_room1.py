@@ -23,7 +23,7 @@ def parameter_room1():
     prj = Project(False)
     
     prj.load_project(utilitis.get_full_path(
-        "examples\\examplefiles\\VDI6007_Room1.teaserXML"))
+        "examples/examplefiles/VDI6007_Room1.teaserXML"))
     
     '''
     execute VDI calculation for single zone

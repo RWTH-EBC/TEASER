@@ -1,3 +1,4 @@
+within ${within};
 model ${bldg.name}_${zone.name.replace(" ", "")}
   "This is the simulation model of ${bldg.name}_${zone.name.replace(" ", "")}"
 
@@ -29,10 +30,11 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     azi={${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_wall)))}})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  Annex60.Experimental.ThermalZones.ReducedOrder.CorrectionSolarGain.CorrectionGDoublePane corGDoublePane(n=${len(zone.orientation_wall)}, UWin=${zone.ua_value_win/zone.area_win})
+  Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${len(zone.orientation_wall)}, UWin=${zone.ua_value_win/zone.area_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
-  Annex60.Experimental.ThermalZones.ReducedOrder.ReducedOrderZones.ThermalZoneTwoElements thermalZoneTwoElements(
+  Annex60.ThermalZones.ReducedOrder.RC.TwoElements
+  thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     VAir=${zone.volume},
     alphaExt=${zone.alpha_comb_inner_ow},
@@ -66,9 +68,9 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
 % endif
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 % if merge_windows is True:
-  Annex60.Experimental.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
+  Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
     n=${len(zone.orientation_wall)},
-    wfGround=${list_to_string(zone.weightfactor_ground)},
+    wfGro=${list_to_string(zone.weightfactor_ground)},
     wfWall={${list_to_string(zone.weightfactor_ow)}},
     wfWin={${list_to_string(zone.weightfactor_win)}},
     withLongwave=true,
@@ -76,12 +78,12 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     alphaWallOut=${zone.alpha_conv_outer_ow},
     alphaRadWall=${zone.alpha_rad_outer_ow},
     eExt=${zone.ir_emissivity_outer_ow},
-    TGround=${zone.t_ground}) "Computes equivalent air temperature"
+    TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
-  Annex60.Experimental.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
+  Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     n=${len(zone.orientation_wall)},
-    wfGround=${list_to_string(zone.weightfactor_ground)},
+    wfGro=${list_to_string(zone.weightfactor_ground)},
     wfWall={${list_to_string(zone.weightfactor_ow)}},
     wfWin={${list_to_string(zone.weightfactor_win)}},
     withLongwave=true,
@@ -93,7 +95,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     aWin=${zone.solar_absorp_win},
     eExt=${zone.ir_emissivity_outer_ow},
     eWin=${zone.ir_emissivity_win},
-    TGround=${zone.t_ground}) "Computes equivalent air temperature"
+    TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif
   Modelica.Blocks.Math.Add solRad[${len(zone.orientation_wall)}]
@@ -159,7 +161,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
 equation
 % if merge_windows is False:
-  connect(eqAirTemp.TEqAirWindow, prescribedTemperature1.T)
+  connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
     annotation (Line(
     points={{-3,-0.2},{0,-0.2},{0,20},{6.8,20}},   color={0,0,127}));
 % endif

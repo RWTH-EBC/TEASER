@@ -2,9 +2,11 @@ examples
 =======================
 
 You can find more examples in the example package of the TEASER distribution.
+e.g.:
 
+[PathOfYourPythonDistribution/Lib/site-packages/teaser]
 
-example_archetype.py
+archetype.py
 -------------------------------------------
 
 This module contains an example how to create an archetype Building, to retrofit
@@ -58,6 +60,7 @@ TEASER'S Output folder::
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
     prj.merge_windows_calc = False
+    prj.calc_all_buildings()
     prj.export_aixlib(
         building_model="MultizoneEquipped",
         zone_model="ThermalZoneEquipped",
@@ -65,17 +68,32 @@ TEASER'S Output folder::
         internal_id=None,
         path=None)
 
-We could also use Annex60 models with same calculation method::
+For OpenModelica you need to exclude the centralAHU (because it uses state machines). Therefore use the building_model "Multizone"::
+
+    prj.export_aixlib(building_model="Multizone",
+        zone_model="ThermalZoneEquipped",
+        corG=True,
+        internal_id=None,
+        path=None)
+
+We could also use Annex60 models with same calculation method, which exports one model per zone::
 
     prj.used_library_calc = "Annex60"
-    prj.export_annex()
+    prj.calc_all_buildings()
+    prj.export_annex(number_of_elements=2,
+                     merge_windows=False,
+                     internal_id=None,
+                     path=None)
 
 Now we retrofit all buildings in the year 2015 (EnEV2014). That includes new
 insulation layer and new windows. The name is changed to Retrofit::
 
     prj.name = "Project_Retrofit"
     prj.retrofit_all_buildings(2015)
-    prj.export_record(
+
+Again, we need to export the model, ou could also change the exports here as seen above::
+
+    prj.export_aixlib(
         building_model="MultizoneEquipped",
         zone_model="ThermalZoneEquipped",
         corG=True,
@@ -89,7 +107,7 @@ XML file::
 
 
 
-example_createbuilding.py
+singlebuilding.py
 ---------------------------------------------
 
 This module shows how to create a building from scratch (or arbitrary sources)
@@ -97,8 +115,20 @@ calculate parameters for a Modelica model and save this example building in a
 XML based format. The used classes are imported one after another. Of course
 you can import all the classes at the beginning::
 
-    from teaser.project import Project
     from teaser.logic.buildingobjects.building import Building
+    from teaser.logic.buildingobjects.buildingphysics.groundfloor import\
+        GroundFloor
+    from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
+    from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+    from teaser.logic.buildingobjects.buildingphysics.material import Material
+    from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+    from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
+    from teaser.logic.buildingobjects.buildingphysics.window import Window
+    from teaser.logic.buildingobjects.thermalzone import ThermalZone
+    from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+        import BoundaryConditions
+    from teaser.project import Project
+
     prj = Project(load_data=True)
     bldg = Building(parent=prj)
 
@@ -109,10 +139,8 @@ Set some building parameters::
     bldg.city = "46325 Fantastic Town"
     bldg.year_of_construction = 1988
 
-Instantiate a ThermalZone class, with building as parent and set 
+Instantiate a ThermalZone class, with building as parent and set
 some parameters of the thermal zone::
-
-    from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
     tz = ThermalZone(parent=bldg)
     tz.name = "Living Room"
@@ -122,12 +150,9 @@ some parameters of the thermal zone::
 
 Instantiate UseConditionsOffice18599 class with thermal zone as parent, and load the use conditions for the usage 'Living'::
 
-    from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions import \
-        BoundaryConditions
-
     tz.use_conditions = BoundaryConditions(parent=tz)
     tz.use_conditions.load_use_conditions("Living")
-    
+
 Define two elements representing a pitched roof and define Layers and
 Materials explicitly::
 
@@ -150,11 +175,11 @@ Set coefficient of heat transfer::
     roof_south.inner_radiation = 20.0
     roof_south.outer_radiation = 5.0
 
-    
+
 Set layer and material. The id indicates the position
 of the layer from inside to outside::
 
-    layer_1s = Layer(parent=roof_south, id=0) 
+    layer_1s = Layer(parent=roof_south, id=0)
     layer_1s.thickness = 0.15
 
     material_1_2 = Material(layer_1s)
@@ -205,12 +230,12 @@ Set layer and material::
     material_1_1.density = 1400.0
     material_1_1.heat_capac = 0.6
     material_1_1.thermal_conduc = 2.5
-    
-    
+
+
 For the remaining Outer and Inner walls as well as Windows, we save the information
 in python dicitonaries, iterate them and instantiate the corresponding classes. In addition we
 are using the load_type_element function to determine the building physics from statistical data
-The key of the dict is the walls's name, while the value is a list with parameters the 
+The key of the dict is the walls's name, while the value is a list with parameters the
 [year of construciton, construction type, area, tilt,orientation]::
 
     out_wall_dict = {"Outer Wall 1": [bldg.year_of_construction, 'heavy',
@@ -285,7 +310,7 @@ The key of the dict is the walls's name, while the value is a list with paramete
         win_material.name = "GlasWindow"
         win_material.thermal_conduc = 0.067
         win_material.transmittance = 0.9
-        
+
 For a GroundFloor we are using the load_type_element function explicitly,
 which needs the year of construction and the construction type ('heavy'
 or 'light')::
@@ -295,7 +320,12 @@ or 'light')::
     ground.load_type_element(year=1988, construction='heavy')
     ground.area = 140.0
 
-We calculate the RC Values according to AixLib procedure::
+
+We need to set the projects calculation method. The library we want to
+use is AixLib, we are using a two element model and want an extra resistance
+for the windows. To export the parameters to a Modelica record, we use
+the export_aixlib function. path = None indicates, that we want to store
+the records in TEASER'S Output folder::
 
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
@@ -303,22 +333,38 @@ We calculate the RC Values according to AixLib procedure::
 
     prj.calc_all_buildings()
 
-Export the Modelica model::
 
-    prj.export_aixlib(
-        building_model="MultizoneEquipped",
-        zone_model="ThermalZoneEquipped",
-        corG=True,
-        internal_id=None,
-        path=None)
+Export the Modelica Record. If you have a Dymola License you can  export
+the model with a central AHU (MultizoneEquipped) (only default for office
+and institute buildings)::
 
-Or we use Annex60 method with for elements::
+  prj.export_aixlib(building_model="MultizoneEquipped",
+      zone_model="ThermalZoneEquipped",
+      corG=True,
+      internal_id=None,
+      path=None)
 
-    prj.calc_all_buildings(
-        number_of_elements=4,
-        merge_windows=False,
-        used_library='Annex60')
-    prj.export_annex()
+
+For OpenModelica you need to exclude the centralAHU (because it is using
+state machines). Therefore use the building_model "Multizone"::
+
+
+  prj.export_aixlib(building_model="Multizone",
+      zone_model="ThermalZoneEquipped",
+      corG=True,
+      internal_id=None,
+      path=None)
+
+
+Or we use Annex60 method (e.g with four elements). Which exports one
+Model per zone::
+
+  prj.used_library_calc = 'Annex60'
+  prj.number_of_elements_calc = 4
+  prj.merge_windows_calc = False
+
+  prj.calc_all_buildings()
+  prj.export_annex()
 
 
 Save teaserXML and CityGML::
