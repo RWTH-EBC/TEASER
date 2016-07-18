@@ -201,17 +201,17 @@ class Controller():
         return Building(current_project, openId)
     
     @classmethod
-    def click_update_building(self,
-                              project,
-                              current_building,
-                              name,
-                              year_of_construction,
-                              number_of_floors,
-                              height_of_floors,
-                              net_leased_area,
-                              street,
-                              location,
-                              update_archtertype):
+    def click_update_building_button(self,
+                                     project,
+                                     current_building,
+                                     name,
+                                     year_of_construction,
+                                     number_of_floors,
+                                     height_of_floors,
+                                     net_leased_area,
+                                     street,
+                                     location,
+                                     update_archtertype):  
         for building in project.buildings:
             if building.internal_id == current_building.internal_id:
                 building.net_leased_area = net_leased_area
