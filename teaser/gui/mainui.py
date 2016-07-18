@@ -3473,7 +3473,7 @@ class MainUI(QDialog):
         self.connect(self.warning_window_save_button, SIGNAL("clicked()"),
                      self.warning_window, QtCore.SLOT("close()"))
         self.connect(self.warning_window_save_button, SIGNAL("clicked()"),
-                     self.update_building)
+                     self.click_update_building)
         self.connect(self.warning_window_save_button, SIGNAL("clicked()"),
                      self.display_current_building)
         self.warning_window_cancel_button = QtGui.QPushButton(
@@ -3502,7 +3502,7 @@ class MainUI(QDialog):
                          self.warning_window, QtCore.SLOT("close()"))            
             self.connect(self.warning_window_update_button,
                          SIGNAL("clicked()"),
-                         self.click_update_archertype)
+                         self.click_update_building)
                                             
         self.warning_window.setWindowModality(Qt.ApplicationModal)
         self.warning_window.show()
@@ -4735,17 +4735,17 @@ class MainUI(QDialog):
         else:
             self.export_save_template_lineedit.setText(self.file_path)
             
-    def click_update_archertype(self):
+    def click_update_building(self):
         ''' Updates a existing building 
             
         '''
-        sender = sender()
+        sender = self.sender()
         if(sender.text() == self.warning_window_save_button.text()):
             update_archtertype = False
-        elif(sender.text() == self.export_button_one.text()):
+        elif(sender.text() == self.warning_window_update_button.text()):
             update_archtertype = True   
             
-        self.project = Controller.click_update_archertype_button(
+        self.project = Controller.click_update_building_button(
                         self.project,
                         self.current_building,
                         str(self.side_bar_id_line_edit.text()),
