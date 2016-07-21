@@ -79,8 +79,9 @@ class Project(object):
         self.modelica_info = ModelicaInfo()
 
         self.modelica_project = self.name
-        self.weather_file_header = ""
-        self.weather_file_path = ""
+        self.weather_file_header = "wetter"
+        self.weather_file_path = "modelica://AixLib/Resources/WeatherData/" \
+                                 "TRY2010_12_Jahr_Modelica-Library.txt"
         self.buildings = []
 
         self._calculation_method = "vdi"
@@ -1012,8 +1013,9 @@ class Project(object):
         self.name = "Project"
 
         self.modelica_project = self.name
-        self.weather_file_header = ""
-        self.weather_file_path = ""
+        self.weather_file_header = "wetter"
+        self.weather_file_path = "modelica://AixLib/Resources/WeatherData/" \
+                                 "TRY2010_12_Jahr_Modelica-Library.txt"
         self.buildings = []
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
