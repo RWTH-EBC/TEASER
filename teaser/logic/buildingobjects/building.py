@@ -52,7 +52,7 @@ class Building(object):
         year of last retrofit
     type_of_building : string
         Type of a Building (e.g. Building (unspecified), Office etc.)
-    building_id : int
+    building_id : None
         ID of building, can be set by the user to keep track of a building
         even outside of TEASER, e.g. in a simulation or in post-processing
     street_name : string
@@ -90,7 +90,7 @@ class Building(object):
 
         self.parent = parent
         self.name = name
-        self.building_id = int()
+        self.building_id = None
         self.street_name = ""
         self.city = ""
 

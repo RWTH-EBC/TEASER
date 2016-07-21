@@ -95,11 +95,15 @@ def export_aixlib(prj,
             _help_package(bldg_path, bldg.name, within=prj.name)
             _help_package_order(bldg_path, [bldg], None,
                                      bldg.name + "_DataBase")
-
-            try:
-                bldg.building_id = int(bldg.building_id)
-            except:
-                warnings.warn("Cannot convert building_id to integer")
+            if bldg.building_id is None:
+                bldg.building_id = 0
+            else:
+                try:
+                    bldg.building_id = int(bldg.building_id)
+                except ValueError:
+                    warnings.warn("Cannot convert building_id to integer, "
+                                  "is set to 0")
+                    bldg.building_id = 0
 
             out_file = open(utilitis.get_full_path
                             (bldg_path + bldg.name + ".mo"), 'w')
