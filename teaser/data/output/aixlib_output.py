@@ -10,6 +10,7 @@ import teaser.logic.utilities as utilitis
 from mako.template import Template
 import scipy.io
 import teaser.logic.simulation.aixlib as aixlib
+import warnings
 
 def export_aixlib(prj,
                   building_model="None",
@@ -94,6 +95,11 @@ def export_aixlib(prj,
             _help_package(bldg_path, bldg.name, within=prj.name)
             _help_package_order(bldg_path, [bldg], None,
                                      bldg.name + "_DataBase")
+
+            try:
+                bldg.building_id = int(bldg.building_id)
+            except:
+                warnings.warn("Cannot convert building_id to integer")
 
             out_file = open(utilitis.get_full_path
                             (bldg_path + bldg.name + ".mo"), 'w')
