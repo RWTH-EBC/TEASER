@@ -106,6 +106,10 @@ class MainUI(QDialog):
         self.resize(900, 800)
         self.setMinimumSize(QtCore.QSize(900, 800))
         self.setMaximumSize(QtCore.QSize(900, 800))
+        self.teaser_icon = QtGui.QIcon()
+        self.teaser_icon.addFile(utilitis.get_full_path(
+                    'gui/guiimages/Teaser_logo.png'), QtCore.QSize(16, 16))
+        self.setWindowIcon(self.teaser_icon)
         teaserVersion = "0.3.6 beta"
         self.setWindowTitle("TEASER Version %s" % teaserVersion)
         self.central_widget = QtGui.QWidget(self)
@@ -1022,6 +1026,7 @@ class MainUI(QDialog):
         '''
 
         self.generate_new_building_ui_page = QtGui.QWizardPage()
+        self.generate_new_building_ui_page.setWindowIcon(self.teaser_icon)
         self.generate_new_building_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
         self.generate_new_building_ui_page.setWindowTitle(
@@ -1075,6 +1080,7 @@ class MainUI(QDialog):
         '''
 
         self.create_new_element_ui_page = QtGui.QWizardPage()
+        self.create_new_element_ui_page.setWindowIcon(self.teaser_icon)
         self.create_new_element_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
         self.create_new_element_ui_page.setWindowTitle("Create new Element")
@@ -1150,6 +1156,7 @@ class MainUI(QDialog):
         '''
 
         self.create__envelope_ui = WizardPage()
+        self.create__envelope_ui.setWindowIcon(self.teaser_icon)
         self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create__envelope_ui.setWindowTitle("Set all construction")
         self.create__envelope_ui.setFixedWidth(400)
@@ -1359,6 +1366,7 @@ class MainUI(QDialog):
         '''
 
         self.create_layer_ui = QtGui.QWizardPage()
+        self.create_layer_ui.setWindowIcon(self.teaser_icon)
         self.create_layer_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create_layer_ui.setWindowTitle("Layer Details")
         self.create_layer_ui.setFixedWidth(450)
@@ -1516,6 +1524,7 @@ class MainUI(QDialog):
         '''
 
         self.popup_window_type_building = QtGui.QWizardPage()
+        self.popup_window_type_building.setWindowIcon(self.teaser_icon)
         self.current_type_building = "Office"
         self.popup_window_type_building.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
@@ -1996,6 +2005,7 @@ class MainUI(QDialog):
         '''
 
         self.generate_zone_ui_page = QtGui.QWizardPage()
+        self.generate_zone_ui_page.setWindowIcon(self.teaser_icon)
         self.generate_zone_ui_page.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.generate_zone_ui_page.setWindowTitle("Create new Zone")
         self.generate_zone_ui_page.setFixedWidth(350)
@@ -2739,7 +2749,7 @@ class MainUI(QDialog):
                 self.display_current_zone()
 
         self.zone_value_window = QtGui.QWizardPage()
-        self.zone_value_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.zone_value_window.setWindowIcon(self.teaser_icon)
         self.zone_value_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.zone_value_window.setWindowTitle("Zone Details")
         self.zone_value_window.setFixedWidth(450)
@@ -3127,6 +3137,7 @@ class MainUI(QDialog):
         '''
 
         self.envelopes_value_window = QtGui.QWizardPage()
+        self.envelopes_value_window.setWindowIcon(self.teaser_icon)
         self.envelopes_value_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.envelopes_value_window.setWindowTitle("Envelopes Details")
         self.envelopes_value_window.setFixedWidth(300)
@@ -3456,6 +3467,7 @@ class MainUI(QDialog):
         '''
 
         self.element_build_ui = QtGui.QWizardPage()
+        self.element_build_ui.setWindowIcon(self.teaser_icon)
         self.element_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.element_build_ui.setWindowTitle("Element Details")
         self.element_build_ui.setFixedWidth(450)
@@ -3837,6 +3849,7 @@ class MainUI(QDialog):
         '''
 
         self.export_window_ui = QtGui.QWizardPage()
+        self.export_window_ui.setWindowIcon(self.teaser_icon)
         self.export_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.export_window_ui.setWindowTitle("Export")
         self.export_window_ui.setFixedWidth(380)
@@ -3991,6 +4004,7 @@ class MainUI(QDialog):
         '''
 
         self.simulation_window_ui = QtGui.QWizardPage()
+        self.simulation_window_ui.setWindowIcon(self.teaser_icon)
         self.simulation_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.simulation_window_ui.setWindowTitle("Simulation")
         self.simulation_window_ui.setFixedWidth(330)
@@ -4106,6 +4120,7 @@ class MainUI(QDialog):
         '''
 
         self.layer_build_ui = QtGui.QWizardPage()
+        self.layer_build_ui.setWindowIcon(self.teaser_icon)
         self.layer_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.layer_build_ui.setWindowTitle("Layer Details")
         self.layer_build_ui.setFixedWidth(450)
