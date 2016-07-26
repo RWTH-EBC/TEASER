@@ -5182,22 +5182,6 @@ class MainUI(QDialog):
 
         self.construction_type_switched = False
 
-    def merge_projects(self, loaded_project):
-        '''Merges two projects
-
-        if a new project is loaded, all the buildings are merged into the list
-        of buildings of the older project and all the values of the old
-        project are overwritten.
-        '''
-
-        for building in self.project.buildings:
-            loaded_project.buildings.insert(0, building)
-        self.project = loaded_project
-        self.project.modelica_info = ModelicaInfo()
-
-        self.current_building = self.project.buildings[-1]
-        self.display_current_building()
-
     def fill_random_parameters(self):
         '''Fills attributes
 
