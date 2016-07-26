@@ -376,8 +376,6 @@ class Controller():
         '''
 
         loaded_prj = Project()
-        if path.endswith(".xml"):
-            loaded_prj.load_old_teaser(path)
         if path.endswith(".teaserXML"):
             loaded_prj.load_project(path)
 
