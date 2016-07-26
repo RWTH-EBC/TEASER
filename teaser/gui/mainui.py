@@ -1101,7 +1101,6 @@ class MainUI(QDialog):
             self.generate_new_building_net_leased_area_label, 6, 0)
         self.generate_new_building_window_layout.addWidget(
             self.generate_new_building_net_leased_area_line_edit, 6, 1)
-
         self.generate_new_building_window_layout.addWidget(
             self.generate_new_building_save_button, 7, 0)
         self.generate_new_building_window_layout.addWidget(
@@ -1164,6 +1163,7 @@ class MainUI(QDialog):
         self.connect(self.generate_new_element_cancel_button, SIGNAL(
             "clicked()"), self.create_new_element_ui_page,
             QtCore.SLOT("close()"))
+
         self.generate_new_element_window_layout.addWidget(
             self.generate_new_element_name_label, 1, 0)
         self.generate_new_element_window_layout.addWidget(
@@ -2558,14 +2558,22 @@ class MainUI(QDialog):
 
         '''
 
-        # TODO: Eventuell wollt ihr hier mehr Optionen beim Erstellen
-        # ermöglichen, wie Grundfläche, Standort, etc. die würde ich
-        # allerdings optional machen
-
         self.current_building = Controller.click_add_new_building(
             self.project, "temp")
         self.current_building.name = \
             self.generate_new_building_name_line_edit.text()
+        self.current_building.street_name = \
+            self.generate_new_building_street_line_edit.text()
+        self.current_building.city = \
+            self.generate_new_building_city_line_edit.text()
+        self.current_building.year_of_construction = \
+            self.generate_new_building_constr_year_line_edit.text()
+        self.current_building.number_of_floors = \
+            self.generate_new_building_number_of_floors_line_edit.text()
+        self.current_building.height_of_floors = \
+            self.generate_new_building_height_of_floors_line_edit.text()
+        self.current_building.net_leased_area = \
+            self.generate_new_building_net_leased_area_line_edit.text()
         self.project.buildings.append(self.current_building)
         self.display_current_building()
 
