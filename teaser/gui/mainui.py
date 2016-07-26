@@ -837,6 +837,7 @@ class MainUI(QDialog):
         self.new_building_label = QtGui.QLabel(self.ribbon_group_box)
         self.new_building_label.setGeometry(QtCore.QRect(95, 80, 70, 25))
         self.new_building_label.setText("Create \nBuilding")
+        self.new_building_label.setAlignment(QtCore.Qt.AlignCenter)
         self.add_zone_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI/GUIImages/AddZone.png")),
             self.ribbon_widget)
