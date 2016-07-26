@@ -1006,8 +1006,7 @@ class MainUI(QDialog):
 
         '''
 
-        # TODO: Bin mir nicht sicher ob das self.no_building_warning_label
-        # noch irgendwas tut, überprüfen und sonst löschen.
+
         self.generate_new_building_ui_page = QtGui.QWizardPage()
         self.generate_new_building_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
@@ -1018,9 +1017,6 @@ class MainUI(QDialog):
         self.generate_new_building_window_layout = QtGui.QGridLayout()
         self.generate_new_building_ui_page.setLayout(
             self.generate_new_building_window_layout)
-
-        self.no_building_warning_label = QtGui.QLabel(
-            "You need to specify a building first")
 
         self.generate_new_building_id_label = QtGui.QLabel("Id: ")
         self.generate_new_building_id_line_edit = QtGui.QLineEdit()
@@ -1041,8 +1037,6 @@ class MainUI(QDialog):
             "clicked()"), self.generate_new_building_ui_page,
             QtCore.SLOT("close()"))
 
-        self.generate_new_building_window_layout.addWidget(
-            self.no_building_warning_label, 0, 0)
         self.generate_new_building_window_layout.addWidget(
             self.generate_new_building_id_label, 1, 0)
         self.generate_new_building_window_layout.addWidget(
