@@ -1017,6 +1017,8 @@ class MainUI(QDialog):
         self.generate_new_building_ui_page.setLayout(
             self.generate_new_building_window_layout)
 
+        validator = QtGui.QDoubleValidator()
+
         self.generate_new_building_name_label = QtGui.QLabel("Name: ")
         self.generate_new_building_name_line_edit = QtGui.QLineEdit()
         self.generate_new_building_name_line_edit.setObjectName(
@@ -1035,6 +1037,8 @@ class MainUI(QDialog):
         self.generate_new_building_constr_year_label = QtGui.QLabel(
              "Contruction Year: ")
         self.generate_new_building_constr_year_line_edit = QtGui.QLineEdit()
+        self.generate_new_building_constr_year_line_edit.setValidator(
+             validator)
         self.generate_new_building_constr_year_line_edit.setObjectName(
             "generate_new_building_constr_year_line_edit")
 
@@ -1042,6 +1046,8 @@ class MainUI(QDialog):
              "Number of Floors: ")
         self.generate_new_building_number_of_floors_line_edit =\
             QtGui.QLineEdit()
+        self.generate_new_building_number_of_floors_line_edit.setValidator(
+             validator)
         self.generate_new_building_number_of_floors_line_edit.setObjectName(
             "generate_new_building_number_of_floors_line_edit")
 
@@ -1049,6 +1055,8 @@ class MainUI(QDialog):
              "Height of Floors: ")
         self.generate_new_building_height_of_floors_line_edit =\
             QtGui.QLineEdit()
+        self.generate_new_building_height_of_floors_line_edit.setValidator(
+             validator)
         self.generate_new_building_height_of_floors_line_edit.setObjectName(
             "generate_new_building_height_of_floors_line_edit")
 
@@ -1056,6 +1064,8 @@ class MainUI(QDialog):
              "Net leased Area: ")
         self.generate_new_building_net_leased_area_line_edit =\
             QtGui.QLineEdit()
+        self.generate_new_building_net_leased_area_line_edit.setValidator(
+             validator)
         self.generate_new_building_net_leased_area_line_edit.setObjectName(
             ".generate_new_building_net_leased_area_line_edit")
 
