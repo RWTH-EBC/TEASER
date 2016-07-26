@@ -1011,8 +1011,8 @@ class MainUI(QDialog):
             QtCore.Qt.WA_DeleteOnClose)
         self.generate_new_building_ui_page.setWindowTitle(
             "Create new Building")
-        self.generate_new_building_ui_page.setFixedWidth(350)
-        self.generate_new_building_ui_page.setFixedHeight(200)
+        self.generate_new_building_ui_page.setFixedWidth(300)
+        self.generate_new_building_ui_page.setFixedHeight(300)
         self.generate_new_building_window_layout = QtGui.QGridLayout()
         self.generate_new_building_ui_page.setLayout(
             self.generate_new_building_window_layout)
