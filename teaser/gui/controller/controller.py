@@ -361,7 +361,7 @@ class Controller():
             print("Saved under: "+path)
 
     @classmethod
-    def click_load_button(self, path):
+    def click_load_button(self, project, path):
         '''
         Returns a project loaded from XML.
 
@@ -379,7 +379,11 @@ class Controller():
         if path.endswith(".teaserXML"):
             loaded_prj.load_project(path)
 
-        return loaded_prj
+        for building in project.buildings:
+            loaded_prj.buildings.insert(0, building)
+
+        project = loaded_prj
+        return project
 
     @classmethod
     def get_materials_from_file(self, project):

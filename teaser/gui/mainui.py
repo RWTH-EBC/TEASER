@@ -5161,8 +5161,12 @@ class MainUI(QDialog):
         path = QtGui.QFileDialog.getOpenFileName(
             self, caption='Choose Filepath', directory='')
         if path:
-            loaded_project = Controller.click_load_button(str(path))
-            self.merge_projects(loaded_project)
+            self.project = Controller.click_load_button(
+                 self.project, str(path))
+            self.project.modelica_info = ModelicaInfo()
+
+            self.current_building = self.project.buildings[-1]
+            self.display_current_building()
 
     def load_constr_type(self):
         '''loads a construction type
