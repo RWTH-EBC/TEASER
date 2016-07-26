@@ -1017,7 +1017,7 @@ class MainUI(QDialog):
         self.generate_new_building_ui_page.setLayout(
             self.generate_new_building_window_layout)
 
-        self.generate_new_building_name_label = QtGui.QLabel(": ")
+        self.generate_new_building_name_label = QtGui.QLabel("Name: ")
         self.generate_new_building_name_line_edit = QtGui.QLineEdit()
         self.generate_new_building_name_line_edit.setObjectName(
             "generate_new_building_name_line_edit")
