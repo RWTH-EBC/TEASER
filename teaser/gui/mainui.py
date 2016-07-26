@@ -1017,10 +1017,10 @@ class MainUI(QDialog):
         self.generate_new_building_ui_page.setLayout(
             self.generate_new_building_window_layout)
 
-        self.generate_new_building_id_label = QtGui.QLabel("Id: ")
-        self.generate_new_building_id_line_edit = QtGui.QLineEdit()
-        self.generate_new_building_id_line_edit.setObjectName(
-            "generate_new_building_id_line_edit")
+        self.generate_new_building_name_label = QtGui.QLabel(": ")
+        self.generate_new_building_name_line_edit = QtGui.QLineEdit()
+        self.generate_new_building_name_line_edit.setObjectName(
+            "generate_new_building_name_line_edit")
 
         self.generate_new_building_street_label = QtGui.QLabel("Street/Nr: ")
         self.generate_new_building_street_line_edit = QtGui.QLineEdit()
@@ -1074,9 +1074,9 @@ class MainUI(QDialog):
             QtCore.SLOT("close()"))
 
         self.generate_new_building_window_layout.addWidget(
-            self.generate_new_building_id_label, 0, 0)
+            self.generate_new_building_name_label, 0, 0)
         self.generate_new_building_window_layout.addWidget(
-            self.generate_new_building_id_line_edit, 0, 1)
+            self.generate_new_building_name_line_edit, 0, 1)
         self.generate_new_building_window_layout.addWidget(
             self.generate_new_building_street_label, 1, 0)
         self.generate_new_building_window_layout.addWidget(
@@ -2565,7 +2565,7 @@ class MainUI(QDialog):
         self.current_building = Controller.click_add_new_building(
             self.project, "temp")
         self.current_building.name = \
-            self.generate_new_building_id_line_edit.text()
+            self.generate_new_building_name_line_edit.text()
         self.project.buildings.append(self.current_building)
         self.display_current_building()
 
