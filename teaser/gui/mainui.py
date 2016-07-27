@@ -1624,6 +1624,8 @@ class MainUI(QDialog):
             self.group_box_type_building_sidecontrols)
         self.fill_button.setText("Fill current building Information")
         self.fill_button.setGeometry(QtCore.QRect(10, 375, 230, 25))
+        self.connect(self.fill_button, QtCore.SIGNAL("clicked()"),
+                     self.fill_building_informations)
 
         # Differentiates between the different types of buildings from combobox
         self.type_building_office_layout = QtGui.QGridLayout()
@@ -5225,6 +5227,46 @@ class MainUI(QDialog):
             value)
         value = str(round(random.uniform(100, 10000), 2))
         self.window_construct_building_area_line_edit.setText(value)
+
+    def fill_building_informations(self):
+        '''Fills attributes
+
+        helper function which fills parameters with random values in generate
+        office window.
+        '''
+
+        if(self.current_building == 0):
+            QtGui.QMessageBox.warning(self,
+                                      u"No building error!",
+                                      u"You need to specify a building first.")
+        else:
+            if self.current_building.type_of_building == "Institute4":
+                index = int(self.window_construct_building_combo_box.findText(
+                            "Institute 4"))
+            elif self.current_building.type_of_building == "Institute8":
+                index = int(self.window_construct_building_combo_box.findText(
+                            "Institute 8"))
+            elif self.current_building.type_of_building == "Institute":
+                index = int(self.window_construct_building_combo_box.findText(
+                            "Institute General"))
+            else:
+                index = int(self.window_construct_building_combo_box.findText(
+                            self.current_building.type_of_building))
+            self.window_construct_building_combo_box.setCurrentIndex(index)
+            self.window_construct_building_name_line_edit.setText(
+                str(self.current_building.name))
+            self.window_construct_building_street_line_edit.setText(
+                str(self.current_building.street_name))
+            self.window_construct_building_location_line_edit.setText(
+                str(self.current_building.city))
+            self.window_construct_building_year_line_edit.setText(
+                str(self.current_building.year_of_construction))
+            self.window_construct_building_number_of_floors_line_edit.setText(
+                str(self.current_building.number_of_floors))
+            self.window_construct_building_height_of_floors_line_edit.setText(
+                str(self.current_building.height_of_floors))
+            self.window_construct_building_area_line_edit.setText(
+                str(self.current_building.net_leased_area))
 
     def fill_typebuilding_attributes(self):
         '''Fills type building attributes
