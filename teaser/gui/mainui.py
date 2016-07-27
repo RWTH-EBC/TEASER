@@ -1768,6 +1768,7 @@ class MainUI(QDialog):
         self.group_box_residential_basement = QtGui.QGroupBox(u"Basement")
         self.group_box_residential_architecture = QtGui.QGroupBox(
             u"Construction Type")
+        self.group_box_residential_architecture.setVisible(False)
 
         self.layout_residential_neighbour_buildings = QtGui.QGridLayout()
         self.layout_residential_layout = QtGui.QGridLayout()
@@ -5337,6 +5338,8 @@ class MainUI(QDialog):
                 self.radio_button_residential_architecture_2.setChecked(True)
             elif self.type_building_ind_att['constructionType'] == "light":
                 self.radio_button_residential_architecture_3.setChecked(True)
+
+
 
     def fill_typebuilding_attributes(self):
         '''Fills type building attributes
