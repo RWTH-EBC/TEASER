@@ -5231,8 +5231,7 @@ class MainUI(QDialog):
     def fill_building_informations(self):
         '''Fills attributes
 
-        helper function which fills parameters with random values in generate
-        office window.
+        function which fills parameters from the current building
         '''
 
         if(self.current_building == 0):
@@ -5267,6 +5266,77 @@ class MainUI(QDialog):
                 str(self.current_building.height_of_floors))
             self.window_construct_building_area_line_edit.setText(
                 str(self.current_building.net_leased_area))
+
+        text = self.window_construct_building_combo_box.currentText()
+
+        if text == "Office" or text == "Institute 4" or text ==\
+                "Institute 8" or text == "Institute General":
+            if self.type_building_ind_att['layoutArea'] == 0:
+                self.radio_button_office_layout_1.setChecked(True)
+            elif self.type_building_ind_att['layoutArea'] == 1:
+                self.radio_button_office_layout_2.setChecked(True)
+            elif self.type_building_ind_att['layoutArea'] == 2:
+                self.radio_button_office_layout_3.setChecked(True)
+            elif self.type_building_ind_att['layoutArea'] == 3:
+                self.radio_button_office_layout_4.setChecked(True)
+
+            if self.type_building_ind_att['layoutWindowArea'] == 0:
+                self.radio_button_window_area_office_1.setChecked(True)
+            elif self.type_building_ind_att['layoutWindowArea'] == 1:
+                self.radio_button_window_area_office_2.setChecked(True)
+            elif self.type_building_ind_att['layoutWindowArea'] == 2:
+                self.radio_button_window_area_office_3.setChecked(True)
+            elif self.type_building_ind_att['layoutWindowArea'] == 3:
+                self.radio_button_window_area_office_4.setChecked(True)
+
+            if self.type_building_ind_att['constructionType'] == "heavy":
+                self.radio_button_architecture_office_2.setChecked(True)
+
+            elif self.type_building_ind_att['constructionType'] == "light":
+                self.radio_button_architecture_office_3.setChecked(True)
+
+        if text == "SingleFamilyDwelling":
+            if self.type_building_ind_att['layoutArea'] == 0:
+                self.radio_button_residential_layout_1.setChecked(True)
+            elif self.type_building_ind_att['layoutArea'] == 1:
+                self.radio_button_residential_layout_2.setChecked(True)
+            elif self.type_building_ind_att['layoutArea'] == 2:
+                self.radio_button_residential_layout_3.setChecked(True)
+
+            if self.type_building_ind_att['neighbour_building'] == 0:
+                self.radio_button_neighbour_1.setChecked(True)
+            elif self.type_building_ind_att['neighbour_building'] == 1:
+                self.radio_button_neighbour_2.setChecked(True)
+            elif self.type_building_ind_att['neighbour_building'] == 2:
+                self.radio_button_neighbour_3.setChecked(True)
+
+            if self.type_building_ind_att['layout_attic'] == 0:
+                self.radio_button_residential_roof_1.setChecked(True)
+            elif self.type_building_ind_att['layout_attic'] == 1:
+                self.radio_button_residential_roof_2.setChecked(True)
+            elif self.type_building_ind_att['layout_attic'] == 2:
+                self.radio_button_residential_roof_3.setChecked(True)
+            elif self.type_building_ind_att['layout_attic'] == 3:
+                self.radio_button_residential_roof_4.setChecked(True)
+
+            if self.type_building_ind_att['layout_cellar'] == 0:
+                self.radio_button_residential_basement_1.setChecked(True)
+            elif self.type_building_ind_att['layout_cellar'] == 1:
+                self.radio_button_residential_basement_2.setChecked(True)
+            elif self.type_building_ind_att['layout_cellar'] == 2:
+                self.radio_button_residential_basement_3.setChecked(True)
+            elif self.type_building_ind_att['layout_cellar'] == 3:
+                self.radio_button_residential_basement_4.setChecked(True)
+
+            if self.type_building_ind_att['dormer'] == 1:
+                self.check_box_button_roof.setChecked(True)
+            elif self.type_building_ind_att['dormer'] == 0:
+                self.check_box_button_roof.setChecked(False)
+
+            if self.type_building_ind_att['constructionType'] == "heavy":
+                self.radio_button_residential_architecture_2.setChecked(True)
+            elif self.type_building_ind_att['constructionType'] == "light":
+                self.radio_button_residential_architecture_3.setChecked(True)
 
     def fill_typebuilding_attributes(self):
         '''Fills type building attributes
