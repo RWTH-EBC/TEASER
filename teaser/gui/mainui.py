@@ -1620,6 +1620,10 @@ class MainUI(QDialog):
         self.connect(self.test_button,
                      QtCore.SIGNAL("clicked()"),
                      self.fill_random_parameters)
+        self.fill_button = QtGui.QPushButton(
+            self.group_box_type_building_sidecontrols)
+        self.fill_button.setText("Fill current building Information")
+        self.fill_button.setGeometry(QtCore.QRect(10, 375, 230, 25))
 
         # Differentiates between the different types of buildings from combobox
         self.type_building_office_layout = QtGui.QGridLayout()
@@ -1740,8 +1744,11 @@ class MainUI(QDialog):
         self.office_layout_architecture.addWidget(
             self.radio_button_architecture_office_3, 3, 0)
 
+        self.override_building_button = QtGui.QPushButton()
+        self.override_building_button.setText("Override current Building")
+
         self.construct_type_building_button = QtGui.QPushButton(
-            u"Generate " + self.current_type_building + " Building ...")
+            u"Generate " + self.current_type_building + " Building")
         self.connect(self.construct_type_building_button, SIGNAL(
             "clicked()"), self.check_inputs_typebuilding)
 
@@ -1960,8 +1967,7 @@ class MainUI(QDialog):
         self.popup_layout_type_building.addWidget(
             self.group_box_type_building_sidecontrols, 0, 0, 5, 3)
         self.popup_layout_type_building.addWidget(
-
-            self.group_box_office_architecture, 5, 0, 2, 3)
+            self.group_box_office_architecture, 5, 0, 1, 3)
         self.type_building_office_layout.addWidget(
             self.group_box_office_layout, 0, 0, 1, 1)
         self.type_building_office_layout.addWidget(
@@ -1976,12 +1982,14 @@ class MainUI(QDialog):
         self.type_building_residential_layout.addWidget(
             self.group_box_residential_basement, 3, 0, 1, 1)
         self.popup_layout_type_building.addWidget(
-            self.group_box_residential_architecture, 5, 0, 2, 3)
+            self.group_box_residential_architecture, 5, 0, 1, 3)
         self.popup_layout_type_building.addWidget(
-            self.group_box_type_building_right_office, 0, 3, 7, 1)
+            self.group_box_type_building_right_office, 0, 3, 6, 1)
         self.popup_layout_type_building.addWidget(
-            self.group_box_type_building_right_residential, 0, 3, 7, 1)
+            self.group_box_type_building_right_residential, 0, 3, 6, 1)
         self.group_box_type_building_right_residential.setVisible(False)
+        self.popup_layout_type_building.addWidget(
+            self.override_building_button, 6, 0, 1, 4)
         self.popup_layout_type_building.addWidget(
             self.construct_type_building_button, 7, 0, 1, 4)
         self.popup_window_type_building.setLayout(
