@@ -758,6 +758,8 @@ class MainUI(QDialog):
         self.side_bar_id_line_edit.setGeometry(QtCore.QRect(105, 60, 90, 25))
         self.connect(self.side_bar_id_line_edit, QtCore.SIGNAL(
             "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_id_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_street_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_street_label.setGeometry(QtCore.QRect(5, 95, 90, 25))
         self.side_bar_street_label.setText("Street/Nr.:")
@@ -767,6 +769,8 @@ class MainUI(QDialog):
             QtCore.QRect(105, 95, 90, 25))
         self.connect(self.side_bar_street_line_edit, QtCore.SIGNAL(
             "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_street_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_location_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_location_label.setGeometry(QtCore.QRect(5, 130, 90, 25))
         self.side_bar_location_label.setText("ZIP/City:")
@@ -776,6 +780,8 @@ class MainUI(QDialog):
             QtCore.QRect(105, 130, 90, 25))
         self.connect(self.side_bar_location_line_edit, QtCore.SIGNAL(
             "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_location_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_construction_year_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_construction_year_label.setGeometry(
@@ -787,6 +793,8 @@ class MainUI(QDialog):
             QtCore.QRect(105, 165, 90, 25))
         self.connect(self.side_bar_construction_year_line_edit, QtCore.SIGNAL(
             "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_construction_year_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_number_of_floors_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_number_of_floors_label.setGeometry(
@@ -798,6 +806,8 @@ class MainUI(QDialog):
             QtCore.QRect(105, 200, 90, 25))
         self.connect(self.side_bar_number_of_floors_line_edit, QtCore.SIGNAL(
             "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_number_of_floors_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_height_of_floors_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_height_of_floors_label.setGeometry(
@@ -809,6 +819,8 @@ class MainUI(QDialog):
             QtCore.QRect(105, 235, 90, 25))
         self.connect(self.side_bar_height_of_floors_line_edit, QtCore.SIGNAL(
             "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_height_of_floors_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_net_leased_area_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_net_leased_area_label.setGeometry(
@@ -820,6 +832,8 @@ class MainUI(QDialog):
             QtCore.QRect(105, 270, 90, 25))
         self.connect(self.side_bar_net_leased_area_line_edit, QtCore.SIGNAL(
             "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_net_leased_area_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
 
         """ All controls in the ribbon """
 
@@ -2447,6 +2461,15 @@ class MainUI(QDialog):
             self.element_layer_model_set_all_constr = QStandardItemModel()
             self.all_constr_layer_list = []
 
+    def clear_focus_line_edits(self):
+        self.side_bar_id_line_edit.clearFocus()
+        self.side_bar_construction_year_line_edit.clearFocus()
+        self.side_bar_height_of_floors_line_edit.clearFocus()
+        self.side_bar_location_line_edit.clearFocus()
+        self.side_bar_net_leased_area_line_edit.clearFocus()
+        self.side_bar_number_of_floors_line_edit.clearFocus()
+        self.side_bar_street_line_edit.clearFocus()
+
     def check_inputs_new_zone(self):
         '''checks inputs of a new zone
 
@@ -3451,7 +3474,7 @@ class MainUI(QDialog):
             self.element_layer_model_set_all_constr.appendRow(item)
 
     def show_warning_window_ui(self):
-
+        
         self.warning_window = QtGui.QWizardPage()
         self.warning_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.warning_window.setWindowTitle("Warning")
