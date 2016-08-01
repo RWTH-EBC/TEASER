@@ -988,23 +988,24 @@ class MainUI(QDialog):
         creates the window to set the project to default.
         '''
 
-        QtGui.QMessageBox.warning(
-            self, u"Warning", u"When creating a new project,"
-            " all Values in Teaser will be removed.")
         self.create_new_project_ui_page = QtGui.QWizardPage()
         self.create_new_project_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
-        self.create_new_project_ui_page.setWindowTitle("Create new Zone")
+        self.create_new_project_ui_page.setWindowTitle("Empty Project")
         self.create_new_project_ui_page.setFixedWidth(350)
-        self.create_new_project_ui_page.setFixedHeight(200)
+        self.create_new_project_ui_page.setFixedHeight(100)
         self.create_new_project_window_layout = QtGui.QGridLayout()
         self.create_new_project_ui_page.setLayout(
             self.create_new_project_window_layout)
-        self.create_new_project_save_button = QtGui.QPushButton()
-        self.create_new_project_save_button.setText("Save")
-        self.connect(self.create_new_project_save_button,
+        self.warning_message_create_empty_prj_label = QtGui.QLabel()
+        self.warning_message_create_empty_prj_label.setText(
+            "When creating a new project, all Values in Teaser will be " +
+            "removed.")
+        self.create_new_project_clear_button = QtGui.QPushButton()
+        self.create_new_project_clear_button.setText("Clear")
+        self.connect(self.create_new_project_clear_button,
                      SIGNAL("clicked()"), self.create_new_project)
-        self.connect(self.create_new_project_save_button,
+        self.connect(self.create_new_project_clear_button,
                      SIGNAL("clicked()"), self.create_new_project_ui_page,
                      QtCore.SLOT("close()"))
         self.create_new_project_cancel_button = QtGui.QPushButton()
@@ -1012,8 +1013,11 @@ class MainUI(QDialog):
         self.connect(self.create_new_project_cancel_button,
                      SIGNAL("clicked()"), self.create_new_project_ui_page,
                      QtCore.SLOT("close()"))
+
         self.create_new_project_window_layout.addWidget(
-            self.create_new_project_save_button, 2, 0)
+            self.warning_message_create_empty_prj_label, 0, 0, 1, 0)
+        self.create_new_project_window_layout.addWidget(
+            self.create_new_project_clear_button, 2, 0)
         self.create_new_project_window_layout.addWidget(
             self.create_new_project_cancel_button, 2, 1)
         self.create_new_project_ui_page.setWindowModality(Qt.ApplicationModal)
