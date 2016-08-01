@@ -1655,27 +1655,25 @@ class MainUI(QDialog):
             self.office_layout_architecture)
 
         self.radio_button_office_layout_1 = QtGui.QRadioButton(
-            u"Use default values")
-        self.radio_button_office_layout_2 = QtGui.QRadioButton(
             u"Elongated, 1 floor")
-        self.radio_button_office_layout_3 = QtGui.QRadioButton(
+        self.radio_button_office_layout_2 = QtGui.QRadioButton(
             u"Elongated, 2 floors")
-        self.radio_button_office_layout_4 = QtGui.QRadioButton(
+        self.radio_button_office_layout_3 = QtGui.QRadioButton(
             u"Compact")
         self.radio_button_office_layout_1.setChecked(True)
 
+        self.picture_layout_office_1 = QtGui.QLabel()
         self.picture_layout_office_2 = QtGui.QLabel()
         self.picture_layout_office_3 = QtGui.QLabel()
-        self.picture_layout_office_4 = QtGui.QLabel()
-        self.picture_layout_office_2.setPixmap(
+        self.picture_layout_office_1.setPixmap(
             QtGui.QPixmap(utilitis.get_full_path(
                 "GUI/GUIImages/OfficeBuildings/elongated_1floor.png")).scaled(
                     70, 70))
-        self.picture_layout_office_3.setPixmap(
+        self.picture_layout_office_2.setPixmap(
             QtGui.QPixmap(utilitis.get_full_path(
                 "GUI/GUIImages/OfficeBuildings/elongated_2floors.png")).scaled(
                     70, 70))
-        self.picture_layout_office_4.setPixmap(QtGui.QPixmap(
+        self.picture_layout_office_3.setPixmap(QtGui.QPixmap(
             utilitis.get_full_path(
                 "GUI/GUIImages/OfficeBuildings/compact_floor.png")).scaled(
                     70, 70))
@@ -1686,13 +1684,11 @@ class MainUI(QDialog):
         self.office_layout.addWidget(
             self.radio_button_office_layout_3, 3, 0)
         self.office_layout.addWidget(
-            self.radio_button_office_layout_4, 4, 0)
+            self.picture_layout_office_1, 1, 1, Qt.AlignRight)
         self.office_layout.addWidget(
             self.picture_layout_office_2, 2, 1, Qt.AlignRight)
         self.office_layout.addWidget(
             self.picture_layout_office_3, 3, 1, Qt.AlignRight)
-        self.office_layout.addWidget(
-            self.picture_layout_office_4, 4, 1, Qt.AlignRight)
 
         self.radio_button_window_area_office_1 = QtGui.QRadioButton(
 
@@ -1739,10 +1735,8 @@ class MainUI(QDialog):
             self.picture_window_area_office_4, 4, 1, Qt.AlignRight)
 
         self.radio_button_architecture_office_1 = QtGui.QRadioButton(
-            u"Use default values")
-        self.radio_button_architecture_office_2 = QtGui.QRadioButton(
             u"Heavy")
-        self.radio_button_architecture_office_3 = QtGui.QRadioButton(
+        self.radio_button_architecture_office_2 = QtGui.QRadioButton(
             u"Light")
         self.radio_button_architecture_office_1.setChecked(True)
 
@@ -1750,8 +1744,6 @@ class MainUI(QDialog):
             self.radio_button_architecture_office_1, 1, 0)
         self.office_layout_architecture.addWidget(
             self.radio_button_architecture_office_2, 2, 0)
-        self.office_layout_architecture.addWidget(
-            self.radio_button_architecture_office_3, 3, 0)
 
         self.construct_type_building_button = QtGui.QPushButton(
             u"Generate " + self.current_type_building + " Building ...")
@@ -1957,10 +1949,8 @@ class MainUI(QDialog):
         self.layout_residential_basement.addWidget(
             self.picture_residential_basement_4, 4, 1, Qt.AlignRight)
         self.radio_button_residential_architecture_1 = QtGui.QRadioButton(
-            u"Use default values")
-        self.radio_button_residential_architecture_2 = QtGui.QRadioButton(
             u"Heavy")
-        self.radio_button_residential_architecture_3 = QtGui.QRadioButton(
+        self.radio_button_residential_architecture_2 = QtGui.QRadioButton(
             u"Light")
         self.radio_button_residential_architecture_1.setChecked(True)
 
@@ -1968,8 +1958,6 @@ class MainUI(QDialog):
             self.radio_button_residential_architecture_1, 1, 0)
         self.layout_residential_architecture.addWidget(
             self.radio_button_residential_architecture_2, 2, 0)
-        self.layout_residential_architecture.addWidget(
-            self.radio_button_residential_architecture_3, 3, 0)
         self.popup_layout_type_building.addWidget(
             self.group_box_type_building_sidecontrols, 0, 0, 5, 3)
         self.popup_layout_type_building.addWidget(
@@ -5237,12 +5225,10 @@ class MainUI(QDialog):
         if text == "Office" or text == "Institute 4" or text ==\
                 "Institute 8" or text == "Institute General":
             if self.radio_button_office_layout_1.isChecked():
-                self.type_building_ind_att['layoutArea'] = 0
-            if self.radio_button_office_layout_2.isChecked():
                 self.type_building_ind_att['layoutArea'] = 1
-            if self.radio_button_office_layout_3.isChecked():
+            if self.radio_button_office_layout_2.isChecked():
                 self.type_building_ind_att['layoutArea'] = 2
-            if self.radio_button_office_layout_4.isChecked():
+            if self.radio_button_office_layout_3.isChecked():
                 self.type_building_ind_att['layoutArea'] = 3
             if self.radio_button_window_area_office_1.isChecked():
                 self.type_building_ind_att['layoutWindowArea'] = 0
@@ -5255,8 +5241,6 @@ class MainUI(QDialog):
             if self.radio_button_architecture_office_1.isChecked():
                 self.type_building_ind_att['constructionType'] = "heavy"
             if self.radio_button_architecture_office_2.isChecked():
-                self.type_building_ind_att['constructionType'] = "heavy"
-            if self.radio_button_architecture_office_3.isChecked():
                 self.type_building_ind_att['constructionType'] = "light"
         if text == "SingleFamilyDwelling":
             if self.radio_button_residential_layout_1.isChecked():
@@ -5292,8 +5276,6 @@ class MainUI(QDialog):
             if self.radio_button_residential_architecture_1.isChecked():
                 self.type_building_ind_att['constructionType'] = "heavy"
             if self.radio_button_residential_architecture_2.isChecked():
-                self.type_building_ind_att['constructionType'] = "heavy"
-            if self.radio_button_residential_architecture_3.isChecked():
                 self.type_building_ind_att['constructionType'] = "light"
 
     def key_press_event(self, event):
