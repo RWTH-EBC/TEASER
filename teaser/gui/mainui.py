@@ -937,7 +937,7 @@ class MainUI(QDialog):
             utilitis.get_full_path("GUI/GUIImages/Keyschedule_rc4.png")),
             self.ribbon_widget)
         self.xml_ui.setGeometry(QtCore.QRect(845, 5, 70, 70))
-        #self.xml_ui.clicked.connect(self.)
+        self.xml_ui.clicked.connect(self.create_xml_ui)
         self.xml_ui_label = QtGui.QLabel(self.ribbon_group_box)
         self.xml_ui_label.setGeometry(QtCore.QRect(845, 80, 70, 25))
         self.xml_ui_label.setText("Update XMl")
@@ -1528,6 +1528,131 @@ class MainUI(QDialog):
             self.new_layer_general_layout_group_box)
         self.create_layer_ui.setWindowModality(Qt.ApplicationModal)
         self.create_layer_ui.show()
+        
+    def create_xml_ui(self):
+        '''New element window
+
+        opens the window to create a new element.
+        '''
+
+        self.create_new_xml_ui_page = QtGui.QWizardPage()
+        self.create_new_xml_ui_page.setWindowIcon(self.teaser_icon)
+        self.create_new_xml_ui_page.setAttribute(
+            QtCore.Qt.WA_DeleteOnClose)
+        self.create_new_xml_ui_page.setWindowTitle("XML")
+        self.create_new_xml_ui_page.setFixedWidth(350)
+        self.create_new_xml_ui_page.setFixedHeight(500)
+        self.generate_new_xml_window_layout = QtGui.QGridLayout()
+        self.create_new_xml_ui_page.setLayout(
+            self.generate_new_xml_window_layout)
+        self.generate_new_xml_ui_path_label = QtGui.QLabel("Path: ")
+        self.generate_new_xml_ui_path_line_edit = QtGui.QLineEdit()
+        self.generate_new_xml_ui_path_line_edit.setObjectName(
+            "generate_new_xml_ui_path_line_edit")
+        self.generate_new_xml_ui_type_label = QtGui.QLabel("Type: ")
+        self.generate_new_xml_ui_type_combobox = QtGui.QComboBox()
+        self.generate_new_xml_ui_type_combobox.setObjectName(
+            "generate_new_xml_ui_type_combobox")
+        self.generate_new_xml_ui_type_combobox.addItem("Inner Wall")
+        self.generate_new_xml_ui_type_combobox.addItem("Outer Wall")
+        self.generate_new_xml_ui_type_combobox.addItem("Window")
+        self.generate_new_xml_ui_type_combobox.addItem("GroundFloor")
+        self.generate_new_xml_ui_type_combobox.addItem("Rooftop")
+        self.generate_new_xml_ui_type_combobox.addItem("Ceiling")
+        self.generate_new_xml_ui_type_combobox.addItem("Floor")
+        self.generate_new_xml_ui_constr_type_label = QtGui.QLabel(
+            "Construction type: ")
+        self.generate_new_xml_ui_constr_type_combobox = QtGui.QComboBox()
+        self.generate_new_xml_ui_constr_type_combobox.setObjectName(
+            "generate_new_xml_ui_const_type_combobox")
+        self.generate_new_xml_ui_constr_type_combobox.addItem("Heavy")
+        self.generate_new_xml_ui_constr_type_combobox.addItem("Light")       
+        self.generate_new_xml_ui_age_group_label = QtGui.QLabel(
+            "Building age group: ")
+        self.generate_new_xml_ui_age_group_left_combobox = QtGui.QComboBox()
+        self.generate_new_xml_ui_age_group_left_combobox.setObjectName(
+            "generate_new_xml_ui_age_group_left_combobox")
+        self.generate_new_xml_ui_to_label = QtGui.QLabel("to: ")
+        self.generate_new_xml_ui_age_group_left_combobox.setMinimumWidth(100)
+        self.generate_new_xml_ui_age_group_right_combobox = QtGui.QComboBox()
+        self.generate_new_xml_ui_age_group_right_combobox.setObjectName(
+            "generate_new_xml_ui_age_group_right_combobox")
+        self.generate_new_xml_ui_age_group_right_combobox.setMinimumWidth(100)
+        self.generate_new_xml_ui_age_group_line_edit = QtGui.QLineEdit()
+        self.generate_new_xml_ui_age_group_line_edit.setObjectName(
+            "generate_new_xml_ui_age_group_line_edit")
+        self.generate_new_xml_ui_inner_convection_label = QtGui.QLabel(
+            "inner conv: ")
+        self.generate_new_xml_ui_inner_convection_line_edit = QtGui.QLineEdit()
+        self.generate_new_xml_ui_inner_convection_line_edit.setObjectName(
+            "generate_new_xml_ui_inner_convection_line_edit")
+        self.generate_new_xml_ui_outer_convection_label = QtGui.QLabel(
+            "outer conv: ")
+        self.generate_new_xml_ui_outer_convection_line_edit = QtGui.QLineEdit()
+        self.generate_new_xml_ui_outer_convection_line_edit.setObjectName(
+            "generate_new_xml_ui_outer_convection_line_edit")
+        self.generate_new_xml_ui_inner_radiation_label = QtGui.QLabel(
+            "inner rad ")
+        self.generate_new_xml_ui_inner_radiation_line_edit = QtGui.QLineEdit()
+        self.generate_new_xml_ui_inner_radiation_line_edit.setObjectName(
+            "generate_new_xml_ui_inner_radiation_line_edit")
+        self.generate_new_xml_ui_outer_radiation_label = QtGui.QLabel(
+            "outer rad: ")
+        self.generate_new_xml_ui_outer_radiation_line_edit = QtGui.QLineEdit()
+        self.generate_new_xml_ui_outer_radiation_line_edit.setObjectName(
+            "generate_new_xml_ui_outer_radiation_line_edit")        
+
+        self.generate_new_xml_ui_save_button = QtGui.QPushButton()
+        self.generate_new_xml_ui_save_button.setText("Save")
+
+        self.generate_new_xml_ui_cancel_button = QtGui.QPushButton()
+        self.generate_new_xml_ui_cancel_button.setText("Cancel")
+        self.connect(self.generate_new_xml_ui_cancel_button, SIGNAL(
+            "clicked()"), self.create_new_xml_ui_page,
+            QtCore.SLOT("close()"))
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_path_label, 1,0)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_path_line_edit, 1, 1)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_type_label, 2, 0)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_type_combobox, 2, 1)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_constr_type_label, 3, 0)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_constr_type_combobox, 3, 1)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_age_group_label, 4,0)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_age_group_left_combobox, 4,1, Qt.AlignLeft)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_to_label, 4,1, Qt.AlignCenter)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_age_group_right_combobox, 4,1, Qt.AlignRight)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_inner_convection_label, 5,0 )
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_inner_convection_line_edit, 5,1)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_outer_convection_label, 6,0)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_outer_convection_line_edit, 6,1)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_inner_radiation_label, 7,0 )
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_inner_radiation_line_edit, 7,1 )
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_outer_radiation_label, 8,0)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_outer_radiation_line_edit, 8,1)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_save_button, 9, 0)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_cancel_button, 9, 1)
+        self.create_new_xml_ui_page.setWindowModality(
+            Qt.ApplicationModal)
+        self.create_new_xml_ui_page.show()
 
     def generate_type_building_ui(self):
         '''New type building window
