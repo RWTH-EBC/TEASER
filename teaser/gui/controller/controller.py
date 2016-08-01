@@ -387,7 +387,7 @@ class Controller():
             print("Saved under: "+path)
 
     @classmethod
-    def click_load_button(self, path):
+    def click_load_button(self, project, path):
         '''
         Returns a project loaded from XML.
 
@@ -401,13 +401,12 @@ class Controller():
             project class filled with information from a file
         '''
 
-        loaded_prj = Project()
-        if path.endswith(".xml"):
-            loaded_prj.load_old_teaser(path)
         if path.endswith(".teaserXML"):
-            loaded_prj.load_project(path)
+            project.load_project(path)
+        elif path.endswith(".gml"):
+            project.load_citygml(path)
 
-        return loaded_prj
+        return project
 
     @classmethod
     def get_materials_from_file(self, project):

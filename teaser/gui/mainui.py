@@ -109,6 +109,10 @@ class MainUI(QDialog):
         self.resize(900, 800)
         self.setMinimumSize(QtCore.QSize(900, 800))
         self.setMaximumSize(QtCore.QSize(900, 800))
+        self.teaser_icon = QtGui.QIcon()
+        self.teaser_icon.addFile(utilitis.get_full_path(
+                    'gui/guiimages/Teaser_logo.png'), QtCore.QSize(16, 16))
+        self.setWindowIcon(self.teaser_icon)
         teaserVersion = "0.3.6 beta"
         self.setWindowTitle("TEASER Version %s" % teaserVersion)
         self.central_widget = QtGui.QWidget(self)
@@ -999,23 +1003,24 @@ class MainUI(QDialog):
         creates the window to set the project to default.
         '''
 
-        QtGui.QMessageBox.warning(
-            self, u"Warning", u"When creating a new project,"
-            " all Values in Teaser will be removed.")
         self.create_new_project_ui_page = QtGui.QWizardPage()
         self.create_new_project_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
-        self.create_new_project_ui_page.setWindowTitle("Create new Zone")
+        self.create_new_project_ui_page.setWindowTitle("Empty Project")
         self.create_new_project_ui_page.setFixedWidth(350)
-        self.create_new_project_ui_page.setFixedHeight(200)
+        self.create_new_project_ui_page.setFixedHeight(100)
         self.create_new_project_window_layout = QtGui.QGridLayout()
         self.create_new_project_ui_page.setLayout(
             self.create_new_project_window_layout)
-        self.create_new_project_save_button = QtGui.QPushButton()
-        self.create_new_project_save_button.setText("Save")
-        self.connect(self.create_new_project_save_button,
+        self.warning_message_create_empty_prj_label = QtGui.QLabel()
+        self.warning_message_create_empty_prj_label.setText(
+            "When creating a new project, all Values in Teaser will be " +
+            "removed.")
+        self.create_new_project_clear_button = QtGui.QPushButton()
+        self.create_new_project_clear_button.setText("Clear")
+        self.connect(self.create_new_project_clear_button,
                      SIGNAL("clicked()"), self.create_new_project)
-        self.connect(self.create_new_project_save_button,
+        self.connect(self.create_new_project_clear_button,
                      SIGNAL("clicked()"), self.create_new_project_ui_page,
                      QtCore.SLOT("close()"))
         self.create_new_project_cancel_button = QtGui.QPushButton()
@@ -1023,8 +1028,11 @@ class MainUI(QDialog):
         self.connect(self.create_new_project_cancel_button,
                      SIGNAL("clicked()"), self.create_new_project_ui_page,
                      QtCore.SLOT("close()"))
+
         self.create_new_project_window_layout.addWidget(
-            self.create_new_project_save_button, 2, 0)
+            self.warning_message_create_empty_prj_label, 0, 0, 1, 0)
+        self.create_new_project_window_layout.addWidget(
+            self.create_new_project_clear_button, 2, 0)
         self.create_new_project_window_layout.addWidget(
             self.create_new_project_cancel_button, 2, 1)
         self.create_new_project_ui_page.setWindowModality(Qt.ApplicationModal)
@@ -1037,6 +1045,7 @@ class MainUI(QDialog):
         '''
 
         self.generate_new_building_ui_page = QtGui.QWizardPage()
+        self.generate_new_building_ui_page.setWindowIcon(self.teaser_icon)
         self.generate_new_building_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
         self.generate_new_building_ui_page.setWindowTitle(
@@ -1090,6 +1099,7 @@ class MainUI(QDialog):
         '''
 
         self.create_new_element_ui_page = QtGui.QWizardPage()
+        self.create_new_element_ui_page.setWindowIcon(self.teaser_icon)
         self.create_new_element_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
         self.create_new_element_ui_page.setWindowTitle("Create new Element")
@@ -1165,6 +1175,7 @@ class MainUI(QDialog):
         '''
 
         self.create__envelope_ui = WizardPage()
+        self.create__envelope_ui.setWindowIcon(self.teaser_icon)
         self.create__envelope_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create__envelope_ui.setWindowTitle("Set all construction")
         self.create__envelope_ui.setFixedWidth(400)
@@ -1374,6 +1385,7 @@ class MainUI(QDialog):
         '''
 
         self.create_layer_ui = QtGui.QWizardPage()
+        self.create_layer_ui.setWindowIcon(self.teaser_icon)
         self.create_layer_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.create_layer_ui.setWindowTitle("Layer Details")
         self.create_layer_ui.setFixedWidth(450)
@@ -1531,6 +1543,7 @@ class MainUI(QDialog):
         '''
 
         self.popup_window_type_building = QtGui.QWizardPage()
+        self.popup_window_type_building.setWindowIcon(self.teaser_icon)
         self.current_type_building = "Office"
         self.popup_window_type_building.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
@@ -1657,27 +1670,25 @@ class MainUI(QDialog):
             self.office_layout_architecture)
 
         self.radio_button_office_layout_1 = QtGui.QRadioButton(
-            u"Use default values")
-        self.radio_button_office_layout_2 = QtGui.QRadioButton(
             u"Elongated, 1 floor")
-        self.radio_button_office_layout_3 = QtGui.QRadioButton(
+        self.radio_button_office_layout_2 = QtGui.QRadioButton(
             u"Elongated, 2 floors")
-        self.radio_button_office_layout_4 = QtGui.QRadioButton(
+        self.radio_button_office_layout_3 = QtGui.QRadioButton(
             u"Compact")
         self.radio_button_office_layout_1.setChecked(True)
 
+        self.picture_layout_office_1 = QtGui.QLabel()
         self.picture_layout_office_2 = QtGui.QLabel()
         self.picture_layout_office_3 = QtGui.QLabel()
-        self.picture_layout_office_4 = QtGui.QLabel()
-        self.picture_layout_office_2.setPixmap(
+        self.picture_layout_office_1.setPixmap(
             QtGui.QPixmap(utilitis.get_full_path(
                 "GUI/GUIImages/OfficeBuildings/elongated_1floor.png")).scaled(
                     70, 70))
-        self.picture_layout_office_3.setPixmap(
+        self.picture_layout_office_2.setPixmap(
             QtGui.QPixmap(utilitis.get_full_path(
                 "GUI/GUIImages/OfficeBuildings/elongated_2floors.png")).scaled(
                     70, 70))
-        self.picture_layout_office_4.setPixmap(QtGui.QPixmap(
+        self.picture_layout_office_3.setPixmap(QtGui.QPixmap(
             utilitis.get_full_path(
                 "GUI/GUIImages/OfficeBuildings/compact_floor.png")).scaled(
                     70, 70))
@@ -1688,13 +1699,11 @@ class MainUI(QDialog):
         self.office_layout.addWidget(
             self.radio_button_office_layout_3, 3, 0)
         self.office_layout.addWidget(
-            self.radio_button_office_layout_4, 4, 0)
+            self.picture_layout_office_1, 1, 1, Qt.AlignRight)
         self.office_layout.addWidget(
             self.picture_layout_office_2, 2, 1, Qt.AlignRight)
         self.office_layout.addWidget(
             self.picture_layout_office_3, 3, 1, Qt.AlignRight)
-        self.office_layout.addWidget(
-            self.picture_layout_office_4, 4, 1, Qt.AlignRight)
 
         self.radio_button_window_area_office_1 = QtGui.QRadioButton(
 
@@ -1741,10 +1750,8 @@ class MainUI(QDialog):
             self.picture_window_area_office_4, 4, 1, Qt.AlignRight)
 
         self.radio_button_architecture_office_1 = QtGui.QRadioButton(
-            u"Use default values")
-        self.radio_button_architecture_office_2 = QtGui.QRadioButton(
             u"Heavy")
-        self.radio_button_architecture_office_3 = QtGui.QRadioButton(
+        self.radio_button_architecture_office_2 = QtGui.QRadioButton(
             u"Light")
         self.radio_button_architecture_office_1.setChecked(True)
 
@@ -1752,8 +1759,6 @@ class MainUI(QDialog):
             self.radio_button_architecture_office_1, 1, 0)
         self.office_layout_architecture.addWidget(
             self.radio_button_architecture_office_2, 2, 0)
-        self.office_layout_architecture.addWidget(
-            self.radio_button_architecture_office_3, 3, 0)
 
         self.construct_type_building_button = QtGui.QPushButton(
             u"Generate " + self.current_type_building + " Building ...")
@@ -1959,10 +1964,8 @@ class MainUI(QDialog):
         self.layout_residential_basement.addWidget(
             self.picture_residential_basement_4, 4, 1, Qt.AlignRight)
         self.radio_button_residential_architecture_1 = QtGui.QRadioButton(
-            u"Use default values")
-        self.radio_button_residential_architecture_2 = QtGui.QRadioButton(
             u"Heavy")
-        self.radio_button_residential_architecture_3 = QtGui.QRadioButton(
+        self.radio_button_residential_architecture_2 = QtGui.QRadioButton(
             u"Light")
         self.radio_button_residential_architecture_1.setChecked(True)
 
@@ -1970,8 +1973,6 @@ class MainUI(QDialog):
             self.radio_button_residential_architecture_1, 1, 0)
         self.layout_residential_architecture.addWidget(
             self.radio_button_residential_architecture_2, 2, 0)
-        self.layout_residential_architecture.addWidget(
-            self.radio_button_residential_architecture_3, 3, 0)
         self.popup_layout_type_building.addWidget(
             self.group_box_type_building_sidecontrols, 0, 0, 5, 3)
         self.popup_layout_type_building.addWidget(
@@ -2011,6 +2012,7 @@ class MainUI(QDialog):
         '''
 
         self.generate_zone_ui_page = QtGui.QWizardPage()
+        self.generate_zone_ui_page.setWindowIcon(self.teaser_icon)
         self.generate_zone_ui_page.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.generate_zone_ui_page.setWindowTitle("Create new Zone")
         self.generate_zone_ui_page.setFixedWidth(350)
@@ -2764,7 +2766,7 @@ class MainUI(QDialog):
                 self.display_current_zone()
 
         self.zone_value_window = QtGui.QWizardPage()
-        self.zone_value_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.zone_value_window.setWindowIcon(self.teaser_icon)
         self.zone_value_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.zone_value_window.setWindowTitle("Zone Details")
         self.zone_value_window.setFixedWidth(450)
@@ -3152,6 +3154,7 @@ class MainUI(QDialog):
         '''
 
         self.envelopes_value_window = QtGui.QWizardPage()
+        self.envelopes_value_window.setWindowIcon(self.teaser_icon)
         self.envelopes_value_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.envelopes_value_window.setWindowTitle("Envelopes Details")
         self.envelopes_value_window.setFixedWidth(300)
@@ -3538,6 +3541,7 @@ class MainUI(QDialog):
         '''
 
         self.element_build_ui = QtGui.QWizardPage()
+        self.element_build_ui.setWindowIcon(self.teaser_icon)
         self.element_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.element_build_ui.setWindowTitle("Element Details")
         self.element_build_ui.setFixedWidth(450)
@@ -3919,6 +3923,7 @@ class MainUI(QDialog):
         '''
 
         self.export_window_ui = QtGui.QWizardPage()
+        self.export_window_ui.setWindowIcon(self.teaser_icon)
         self.export_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.export_window_ui.setWindowTitle("Export")
         self.export_window_ui.setFixedWidth(380)
@@ -4073,6 +4078,7 @@ class MainUI(QDialog):
         '''
 
         self.simulation_window_ui = QtGui.QWizardPage()
+        self.simulation_window_ui.setWindowIcon(self.teaser_icon)
         self.simulation_window_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.simulation_window_ui.setWindowTitle("Simulation")
         self.simulation_window_ui.setFixedWidth(330)
@@ -4188,6 +4194,7 @@ class MainUI(QDialog):
         '''
 
         self.layer_build_ui = QtGui.QWizardPage()
+        self.layer_build_ui.setWindowIcon(self.teaser_icon)
         self.layer_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.layer_build_ui.setWindowTitle("Layer Details")
         self.layer_build_ui.setFixedWidth(450)
@@ -5298,8 +5305,12 @@ class MainUI(QDialog):
         path = QtGui.QFileDialog.getOpenFileName(
             self, caption='Choose Filepath', directory='')
         if path:
-            loaded_project = Controller.click_load_button(str(path))
-            self.merge_projects(loaded_project)
+            self.project = Controller.click_load_button(
+                 self.project, str(path))
+            self.project.modelica_info = ModelicaInfo()
+
+            self.current_building = self.project.buildings[-1]
+            self.display_current_building()
 
     def load_constr_type(self):
         '''loads a construction type
@@ -5314,22 +5325,6 @@ class MainUI(QDialog):
                 str(self.element_construction_type_combobox.currentText()))
 
         self.construction_type_switched = False
-
-    def merge_projects(self, loaded_project):
-        '''Merges two projects
-
-        if a new project is loaded, all the buildings are merged into the list
-        of buildings of the older project and all the values of the old
-        project are overwritten.
-        '''
-
-        for building in self.project.buildings:
-            loaded_project.buildings.insert(0, building)
-        self.project = loaded_project
-        self.project.modelica_info = ModelicaInfo()
-
-        self.current_building = self.project.buildings[-1]
-        self.display_current_building()
 
     def fill_random_parameters(self):
         '''Fills attributes
@@ -5367,12 +5362,10 @@ class MainUI(QDialog):
         if text == "Office" or text == "Institute 4" or text ==\
                 "Institute 8" or text == "Institute General":
             if self.radio_button_office_layout_1.isChecked():
-                self.type_building_ind_att['layoutArea'] = 0
-            if self.radio_button_office_layout_2.isChecked():
                 self.type_building_ind_att['layoutArea'] = 1
-            if self.radio_button_office_layout_3.isChecked():
+            if self.radio_button_office_layout_2.isChecked():
                 self.type_building_ind_att['layoutArea'] = 2
-            if self.radio_button_office_layout_4.isChecked():
+            if self.radio_button_office_layout_3.isChecked():
                 self.type_building_ind_att['layoutArea'] = 3
             if self.radio_button_window_area_office_1.isChecked():
                 self.type_building_ind_att['layoutWindowArea'] = 0
@@ -5385,8 +5378,6 @@ class MainUI(QDialog):
             if self.radio_button_architecture_office_1.isChecked():
                 self.type_building_ind_att['constructionType'] = "heavy"
             if self.radio_button_architecture_office_2.isChecked():
-                self.type_building_ind_att['constructionType'] = "heavy"
-            if self.radio_button_architecture_office_3.isChecked():
                 self.type_building_ind_att['constructionType'] = "light"
         if text == "SingleFamilyDwelling":
             if self.radio_button_residential_layout_1.isChecked():
@@ -5422,8 +5413,6 @@ class MainUI(QDialog):
             if self.radio_button_residential_architecture_1.isChecked():
                 self.type_building_ind_att['constructionType'] = "heavy"
             if self.radio_button_residential_architecture_2.isChecked():
-                self.type_building_ind_att['constructionType'] = "heavy"
-            if self.radio_button_residential_architecture_3.isChecked():
                 self.type_building_ind_att['constructionType'] = "light"
 
     def key_press_event(self, event):
