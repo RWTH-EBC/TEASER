@@ -375,14 +375,11 @@ class Controller():
             project class filled with information from a file
         '''
 
-        loaded_prj = Project()
         if path.endswith(".teaserXML"):
-            loaded_prj.load_project(path)
+            project.load_project(path)
+        elif path.endswith(".gml"):
+            project.load_citygml(path)
 
-        for building in project.buildings:
-            loaded_prj.buildings.insert(0, building)
-
-        project = loaded_prj
         return project
 
     @classmethod
