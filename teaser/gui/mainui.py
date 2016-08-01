@@ -933,6 +933,14 @@ class MainUI(QDialog):
         self.save_project_label = QtGui.QLabel(self.ribbon_group_box)
         self.save_project_label.setGeometry(QtCore.QRect(765, 80, 70, 25))
         self.save_project_label.setText("Save Pro-\n ject Tab")
+        self.xml_ui = PictureButton(QtGui.QPixmap(
+            utilitis.get_full_path("GUI/GUIImages/Keyschedule_rc4.png")),
+            self.ribbon_widget)
+        self.xml_ui.setGeometry(QtCore.QRect(845, 5, 70, 70))
+        #self.xml_ui.clicked.connect(self.)
+        self.xml_ui_label = QtGui.QLabel(self.ribbon_group_box)
+        self.xml_ui_label.setGeometry(QtCore.QRect(845, 80, 70, 25))
+        self.xml_ui_label.setText("Update XMl")
 
         self.side_animation = QtCore.QPropertyAnimation(
             self.side_bar_widget, "geometry")
