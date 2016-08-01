@@ -5161,8 +5161,12 @@ class MainUI(QDialog):
         path = QtGui.QFileDialog.getOpenFileName(
             self, caption='Choose Filepath', directory='')
         if path:
-            loaded_project = Controller.click_load_button(str(path))
-            self.merge_projects(loaded_project)
+            self.project = Controller.click_load_button(
+                 self.project, str(path))
+            self.project.modelica_info = ModelicaInfo()
+
+            self.current_building = self.project.buildings[-1]
+            self.display_current_building()
 
     def load_constr_type(self):
         '''loads a construction type
@@ -5177,22 +5181,6 @@ class MainUI(QDialog):
                 str(self.element_construction_type_combobox.currentText()))
 
         self.construction_type_switched = False
-
-    def merge_projects(self, loaded_project):
-        '''Merges two projects
-
-        if a new project is loaded, all the buildings are merged into the list
-        of buildings of the older project and all the values of the old
-        project are overwritten.
-        '''
-
-        for building in self.project.buildings:
-            loaded_project.buildings.insert(0, building)
-        self.project = loaded_project
-        self.project.modelica_info = ModelicaInfo()
-
-        self.current_building = self.project.buildings[-1]
-        self.display_current_building()
 
     def fill_random_parameters(self):
         '''Fills attributes
