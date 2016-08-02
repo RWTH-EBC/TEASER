@@ -5293,14 +5293,12 @@ class MainUI(QDialog):
 
             if text == "Office" or text == "Institute 4" or text ==\
                     "Institute 8" or text == "Institute General":
-                if self.type_building_ind_att['layoutArea'] == 0:
+                if self.type_building_ind_att['layoutArea'] == 1:
                     self.radio_button_office_layout_1.setChecked(True)
-                elif self.type_building_ind_att['layoutArea'] == 1:
-                    self.radio_button_office_layout_2.setChecked(True)
                 elif self.type_building_ind_att['layoutArea'] == 2:
-                    self.radio_button_office_layout_3.setChecked(True)
+                    self.radio_button_office_layout_2.setChecked(True)
                 elif self.type_building_ind_att['layoutArea'] == 3:
-                    self.radio_button_office_layout_4.setChecked(True)
+                    self.radio_button_office_layout_3.setChecked(True)
 
                 if self.type_building_ind_att['layoutWindowArea'] == 0:
                     self.radio_button_window_area_office_1.setChecked(True)
