@@ -1756,6 +1756,9 @@ class MainUI(QDialog):
         self.connect(self.update_building_button, SIGNAL(
             "clicked()"), self.update_building)
 
+        self.connect(self.update_building_button, SIGNAL("clicked()"),
+                     self.popup_window_type_building, QtCore.SLOT("close()"))
+
         self.construct_type_building_button = QtGui.QPushButton(
             u"Generate " + self.current_type_building + " Building")
         self.connect(self.construct_type_building_button, SIGNAL(
