@@ -1746,8 +1746,10 @@ class MainUI(QDialog):
         self.office_layout_architecture.addWidget(
             self.radio_button_architecture_office_3, 3, 0)
 
-        self.override_building_button = QtGui.QPushButton()
-        self.override_building_button.setText("Override current Building")
+        self.update_building_button = QtGui.QPushButton()
+        self.update_building_button.setText("Update current Building")
+        self.connect(self.update_building_button, SIGNAL(
+            "clicked()"), self.update_building)
 
         self.construct_type_building_button = QtGui.QPushButton(
             u"Generate " + self.current_type_building + " Building")
@@ -1992,7 +1994,7 @@ class MainUI(QDialog):
             self.group_box_type_building_right_residential, 0, 3, 6, 1)
         self.group_box_type_building_right_residential.setVisible(False)
         self.popup_layout_type_building.addWidget(
-            self.override_building_button, 6, 0, 1, 4)
+            self.update_building_button, 6, 0, 1, 4)
         self.popup_layout_type_building.addWidget(
             self.construct_type_building_button, 7, 0, 1, 4)
         self.popup_window_type_building.setLayout(
@@ -2564,6 +2566,7 @@ class MainUI(QDialog):
             self.window_construct_building_street_line_edit.text(),
             self.window_construct_building_location_line_edit.text(),
             self.type_building_ind_att)
+
         for building in self.project.buildings:
             if building.internal_id == int_id:
                 self.current_building = building
@@ -5130,6 +5133,26 @@ class MainUI(QDialog):
         self.side_bar_street_line_edit.setText(
             self.saved_values_for_edit["street"])
 
+    def update_building(self):
+        '''Updates building
+
+        Updates all attributes of selected building, that are changed.
+        '''
+
+        index = self.side_bar_buildings_combo_box.currentIndex()
+        self.check_inputs_typebuilding()
+
+        self.project = Controller.click_update_building(self.project, index)
+
+        self.buildings_combo_box_model.clear()
+        self.side_bar_buildings_combo_box.clear()
+        for building in self.project.buildings:
+            self.side_bar_buildings_combo_box.addItem(
+                building.name,
+                str(building.internal_id))
+        self.side_bar_buildings_combo_box.setCurrentIndex(index)
+        self.display_current_building()
+
     def load_material(self):
         '''loads material
 
@@ -5268,78 +5291,78 @@ class MainUI(QDialog):
             self.window_construct_building_area_line_edit.setText(
                 str(self.current_building.net_leased_area))
 
-        text = self.window_construct_building_combo_box.currentText()
+            text = self.window_construct_building_combo_box.currentText()
 
-        if text == "Office" or text == "Institute 4" or text ==\
-                "Institute 8" or text == "Institute General":
-            if self.type_building_ind_att['layoutArea'] == 0:
-                self.radio_button_office_layout_1.setChecked(True)
-            elif self.type_building_ind_att['layoutArea'] == 1:
-                self.radio_button_office_layout_2.setChecked(True)
-            elif self.type_building_ind_att['layoutArea'] == 2:
-                self.radio_button_office_layout_3.setChecked(True)
-            elif self.type_building_ind_att['layoutArea'] == 3:
-                self.radio_button_office_layout_4.setChecked(True)
+            if text == "Office" or text == "Institute 4" or text ==\
+                    "Institute 8" or text == "Institute General":
+                if self.type_building_ind_att['layoutArea'] == 0:
+                    self.radio_button_office_layout_1.setChecked(True)
+                elif self.type_building_ind_att['layoutArea'] == 1:
+                    self.radio_button_office_layout_2.setChecked(True)
+                elif self.type_building_ind_att['layoutArea'] == 2:
+                    self.radio_button_office_layout_3.setChecked(True)
+                elif self.type_building_ind_att['layoutArea'] == 3:
+                    self.radio_button_office_layout_4.setChecked(True)
 
-            if self.type_building_ind_att['layoutWindowArea'] == 0:
-                self.radio_button_window_area_office_1.setChecked(True)
-            elif self.type_building_ind_att['layoutWindowArea'] == 1:
-                self.radio_button_window_area_office_2.setChecked(True)
-            elif self.type_building_ind_att['layoutWindowArea'] == 2:
-                self.radio_button_window_area_office_3.setChecked(True)
-            elif self.type_building_ind_att['layoutWindowArea'] == 3:
-                self.radio_button_window_area_office_4.setChecked(True)
+                if self.type_building_ind_att['layoutWindowArea'] == 0:
+                    self.radio_button_window_area_office_1.setChecked(True)
+                elif self.type_building_ind_att['layoutWindowArea'] == 1:
+                    self.radio_button_window_area_office_2.setChecked(True)
+                elif self.type_building_ind_att['layoutWindowArea'] == 2:
+                    self.radio_button_window_area_office_3.setChecked(True)
+                elif self.type_building_ind_att['layoutWindowArea'] == 3:
+                    self.radio_button_window_area_office_4.setChecked(True)
 
-            if self.type_building_ind_att['constructionType'] == "heavy":
-                self.radio_button_architecture_office_2.setChecked(True)
+                if self.type_building_ind_att['constructionType'] == "heavy":
+                    self.radio_button_architecture_office_2.setChecked(True)
 
-            elif self.type_building_ind_att['constructionType'] == "light":
-                self.radio_button_architecture_office_3.setChecked(True)
+                elif self.type_building_ind_att['constructionType'] == "light":
+                    self.radio_button_architecture_office_3.setChecked(True)
 
-        if text == "SingleFamilyDwelling":
-            if self.type_building_ind_att['layoutArea'] == 0:
-                self.radio_button_residential_layout_1.setChecked(True)
-            elif self.type_building_ind_att['layoutArea'] == 1:
-                self.radio_button_residential_layout_2.setChecked(True)
-            elif self.type_building_ind_att['layoutArea'] == 2:
-                self.radio_button_residential_layout_3.setChecked(True)
+            if text == "SingleFamilyDwelling":
+                if self.type_building_ind_att['layoutArea'] == 0:
+                    self.radio_button_residential_layout_1.setChecked(True)
+                elif self.type_building_ind_att['layoutArea'] == 1:
+                    self.radio_button_residential_layout_2.setChecked(True)
+                elif self.type_building_ind_att['layoutArea'] == 2:
+                    self.radio_button_residential_layout_3.setChecked(True)
 
-            if self.type_building_ind_att['neighbour_building'] == 0:
-                self.radio_button_neighbour_1.setChecked(True)
-            elif self.type_building_ind_att['neighbour_building'] == 1:
-                self.radio_button_neighbour_2.setChecked(True)
-            elif self.type_building_ind_att['neighbour_building'] == 2:
-                self.radio_button_neighbour_3.setChecked(True)
+                if self.type_building_ind_att['neighbour_building'] == 0:
+                    self.radio_button_neighbour_1.setChecked(True)
+                elif self.type_building_ind_att['neighbour_building'] == 1:
+                    self.radio_button_neighbour_2.setChecked(True)
+                elif self.type_building_ind_att['neighbour_building'] == 2:
+                    self.radio_button_neighbour_3.setChecked(True)
 
-            if self.type_building_ind_att['layout_attic'] == 0:
-                self.radio_button_residential_roof_1.setChecked(True)
-            elif self.type_building_ind_att['layout_attic'] == 1:
-                self.radio_button_residential_roof_2.setChecked(True)
-            elif self.type_building_ind_att['layout_attic'] == 2:
-                self.radio_button_residential_roof_3.setChecked(True)
-            elif self.type_building_ind_att['layout_attic'] == 3:
-                self.radio_button_residential_roof_4.setChecked(True)
+                if self.type_building_ind_att['layout_attic'] == 0:
+                    self.radio_button_residential_roof_1.setChecked(True)
+                elif self.type_building_ind_att['layout_attic'] == 1:
+                    self.radio_button_residential_roof_2.setChecked(True)
+                elif self.type_building_ind_att['layout_attic'] == 2:
+                    self.radio_button_residential_roof_3.setChecked(True)
+                elif self.type_building_ind_att['layout_attic'] == 3:
+                    self.radio_button_residential_roof_4.setChecked(True)
 
-            if self.type_building_ind_att['layout_cellar'] == 0:
-                self.radio_button_residential_basement_1.setChecked(True)
-            elif self.type_building_ind_att['layout_cellar'] == 1:
-                self.radio_button_residential_basement_2.setChecked(True)
-            elif self.type_building_ind_att['layout_cellar'] == 2:
-                self.radio_button_residential_basement_3.setChecked(True)
-            elif self.type_building_ind_att['layout_cellar'] == 3:
-                self.radio_button_residential_basement_4.setChecked(True)
+                if self.type_building_ind_att['layout_cellar'] == 0:
+                    self.radio_button_residential_basement_1.setChecked(True)
+                elif self.type_building_ind_att['layout_cellar'] == 1:
+                    self.radio_button_residential_basement_2.setChecked(True)
+                elif self.type_building_ind_att['layout_cellar'] == 2:
+                    self.radio_button_residential_basement_3.setChecked(True)
+                elif self.type_building_ind_att['layout_cellar'] == 3:
+                    self.radio_button_residential_basement_4.setChecked(True)
 
-            if self.type_building_ind_att['dormer'] == 1:
-                self.check_box_button_roof.setChecked(True)
-            elif self.type_building_ind_att['dormer'] == 0:
-                self.check_box_button_roof.setChecked(False)
+                if self.type_building_ind_att['dormer'] == 1:
+                    self.check_box_button_roof.setChecked(True)
+                elif self.type_building_ind_att['dormer'] == 0:
+                    self.check_box_button_roof.setChecked(False)
 
-            if self.type_building_ind_att['constructionType'] == "heavy":
-                self.radio_button_residential_architecture_2.setChecked(True)
-            elif self.type_building_ind_att['constructionType'] == "light":
-                self.radio_button_residential_architecture_3.setChecked(True)
-
-
+                if self.type_building_ind_att['constructionType'] == "heavy":
+                    self.radio_button_residential_architecture_2.setChecked(
+                                                                True)
+                elif self.type_building_ind_att['constructionType'] == "light":
+                    self.radio_button_residential_architecture_3.setChecked(
+                                                                True)
 
     def fill_typebuilding_attributes(self):
         '''Fills type building attributes
