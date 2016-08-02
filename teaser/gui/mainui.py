@@ -1546,7 +1546,7 @@ class MainUI(QDialog):
         self.create_new_xml_ui_page.setLayout(
             self.create_new_xml_ui_layout)
         self.generate_new_xml_window_layout = QtGui.QGridLayout()
-        self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"")
+        self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"Values")
         self.create_new_xml_ui_groupbox.setLayout(
             self.generate_new_xml_window_layout)
 
@@ -1571,7 +1571,7 @@ class MainUI(QDialog):
         self.generate_new_xml_ui_constr_type_combobox.setObjectName(
             "generate_new_xml_ui_const_type_combobox")
         self.generate_new_xml_ui_constr_type_combobox.addItem("Heavy")
-        self.generate_new_xml_ui_constr_type_combobox.addItem("Light")       
+        self.generate_new_xml_ui_constr_type_combobox.addItem("Light")
         self.generate_new_xml_ui_age_group_label = QtGui.QLabel(
             "Building age group: ")
         self.generate_new_xml_ui_age_group_left_combobox = QtGui.QComboBox()
@@ -1605,7 +1605,27 @@ class MainUI(QDialog):
             "outer rad: ")
         self.generate_new_xml_ui_outer_radiation_line_edit = QtGui.QLineEdit()
         self.generate_new_xml_ui_outer_radiation_line_edit.setObjectName(
-            "generate_new_xml_ui_outer_radiation_line_edit")        
+            "generate_new_xml_ui_outer_radiation_line_edit")
+
+        self.generate_new_xml_ui_add_layer_button = QtGui.QPushButton()
+        self.generate_new_xml_ui_add_layer_button.setText("Add Layer")
+
+        self.generate_new_xml_ui_delete_layer_button = QtGui.QPushButton()
+        self.generate_new_xml_ui_delete_layer_button.setText("Delete Layer")
+
+        self.generate_new_xml_ui_material_list_view = QtGui.QListView()
+        self.generate_new_xml_ui_material_list_view.setGeometry(
+            QtCore.QRect(10, 200, 170, 300))
+        self.generate_new_xml_ui_material_list_view.setObjectName(
+            _fromUtf8("XMLMaterialsListView"))
+        #self.generate_new_xml_ui_material_list_view.setModel(
+        #    self.element_layer_model_set_all_constr)
+        self.generate_new_xml_ui_material_list_view.setItemDelegate(
+            self.lVZF)
+        self.generate_new_xml_ui_material_list_view.setEditTriggers(
+            QtGui.QAbstractItemView.NoEditTriggers)
+        self.generate_new_xml_ui_material_list_view.doubleClicked.connect(
+            self.show_layer_build_ui)
 
         self.generate_new_xml_ui_save_button = QtGui.QPushButton()
         self.generate_new_xml_ui_save_button.setText("Save")
@@ -1652,9 +1672,15 @@ class MainUI(QDialog):
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_outer_radiation_line_edit, 8,1)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_save_button, 9, 0)
+            self.generate_new_xml_ui_add_layer_button, 9, 0)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_cancel_button, 9, 1)
+            self.generate_new_xml_ui_delete_layer_button, 9, 1)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_material_list_view, 10, 0, 11, 2)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_save_button, 12, 0)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_cancel_button, 12, 1)
 
         self.create_new_xml_ui_layout.addWidget(
             self.create_new_xml_ui_groupbox)
