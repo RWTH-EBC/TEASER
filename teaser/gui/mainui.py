@@ -5312,10 +5312,10 @@ class MainUI(QDialog):
                     self.radio_button_window_area_office_4.setChecked(True)
 
                 if self.type_building_ind_att['constructionType'] == "heavy":
-                    self.radio_button_architecture_office_2.setChecked(True)
+                    self.radio_button_architecture_office_1.setChecked(True)
 
                 elif self.type_building_ind_att['constructionType'] == "light":
-                    self.radio_button_architecture_office_3.setChecked(True)
+                    self.radio_button_architecture_office_2.setChecked(True)
 
             if text == "SingleFamilyDwelling":
                 if self.type_building_ind_att['layoutArea'] == 0:
@@ -5356,10 +5356,10 @@ class MainUI(QDialog):
                     self.check_box_button_roof.setChecked(False)
 
                 if self.type_building_ind_att['constructionType'] == "heavy":
-                    self.radio_button_residential_architecture_2.setChecked(
+                    self.radio_button_residential_architecture_1.setChecked(
                                                                 True)
                 elif self.type_building_ind_att['constructionType'] == "light":
-                    self.radio_button_residential_architecture_3.setChecked(
+                    self.radio_button_residential_architecture_2.setChecked(
                                                                 True)
 
     def fill_typebuilding_attributes(self):
