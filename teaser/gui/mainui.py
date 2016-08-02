@@ -1528,7 +1528,7 @@ class MainUI(QDialog):
             self.new_layer_general_layout_group_box)
         self.create_layer_ui.setWindowModality(Qt.ApplicationModal)
         self.create_layer_ui.show()
-        
+
     def create_xml_ui(self):
         '''New element window
 
@@ -1542,9 +1542,14 @@ class MainUI(QDialog):
         self.create_new_xml_ui_page.setWindowTitle("XML")
         self.create_new_xml_ui_page.setFixedWidth(350)
         self.create_new_xml_ui_page.setFixedHeight(500)
-        self.generate_new_xml_window_layout = QtGui.QGridLayout()
+        self.create_new_xml_ui_layout = QtGui.QGridLayout()
         self.create_new_xml_ui_page.setLayout(
+            self.create_new_xml_ui_layout)
+        self.generate_new_xml_window_layout = QtGui.QGridLayout()
+        self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"")
+        self.create_new_xml_ui_groupbox.setLayout(
             self.generate_new_xml_window_layout)
+
         self.generate_new_xml_ui_path_label = QtGui.QLabel("Path: ")
         self.generate_new_xml_ui_path_line_edit = QtGui.QLineEdit()
         self.generate_new_xml_ui_path_line_edit.setObjectName(
@@ -1650,6 +1655,9 @@ class MainUI(QDialog):
             self.generate_new_xml_ui_save_button, 9, 0)
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_cancel_button, 9, 1)
+
+        self.create_new_xml_ui_layout.addWidget(
+            self.create_new_xml_ui_groupbox)
         self.create_new_xml_ui_page.setWindowModality(
             Qt.ApplicationModal)
         self.create_new_xml_ui_page.show()
