@@ -6,6 +6,7 @@ classes
 """
 
 import os
+from ctypes.wintypes import WORD
 
 
 def celsius_to_kelvin(value):
@@ -76,3 +77,26 @@ def get_full_path(rel_path):
     full_path = os.path.join(first_path, rel_path)
 
     return full_path
+
+
+def clean_path(rel_path):
+    "Helperfunction which replaces all \ with / in a path"
+
+    new_path = ""
+    for index in rel_path:
+        # 92 is the asci code for \
+        if index == "\t":
+            new_path += "/t"
+        elif index == "\b":
+            new_path += "/b"
+        elif index == "\n":
+            new_path += "/n"
+        elif index == "\a":
+            new_path += "/a"
+        elif index == "\r":
+            new_path += "/r"
+        elif index == chr(92):
+            new_path += "/"
+        else:
+            new_path += index
+    return new_path
