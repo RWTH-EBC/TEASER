@@ -1280,7 +1280,7 @@ class MainUI(QDialog):
         self.set_all_constr_element_material_list_view.setGeometry(
             QtCore.QRect(10, 200, 170, 300))
         self.set_all_constr_element_material_list_view.setObjectName(
-            _fromUtf8("ElementMaterialsListView"))
+            _fromUtf8("ElementMaterialsListViewSetAllConstr"))
         self.set_all_constr_element_material_list_view.setModel(
             self.element_layer_model_set_all_constr)
         self.set_all_constr_element_material_list_view.setItemDelegate(
@@ -4439,19 +4439,22 @@ class MainUI(QDialog):
         self.materials = Controller.get_materials_from_file(self.project)
         self.is_switchable = False
 
-        sender = self.sender()
+        sender = self.sender().objectName()
         try:
-            if sender == self.element_material_list_view:
+            if sender == self.element_material_list_view.objectName():
                 current_item = self.element_layer_model.itemFromIndex(item)
                 current_layer = self.current_element.layer
         except:
             try:
-                if sender == self.set_all_constr_element_material_list_view:
+                if sender == \
+                  self.set_all_constr_element_material_list_view.objectName():
                     current_item = \
-                        self.element_layer_model_set_all_constr.itemFromIndex(item)
+                     self.element_layer_model_set_all_constr.itemFromIndex(
+                                                             item)
                     current_layer = self.all_constr_layer_list
             except:
-                if sender == self.generate_new_xml_ui_material_list_view:
+                if sender == \
+                  self.generate_new_xml_ui_material_list_view.objectName():
                     current_item = \
                         self.element_layer_model_update_xml.itemFromIndex(item)
                     current_layer = self.xml_layer_list
@@ -4532,21 +4535,23 @@ class MainUI(QDialog):
         self.layer_save_button.setText("Save")
 
         try:
-            if sender == self.element_material_list_view:
+            if sender == self.element_material_list_view.objectName():
                 self.connect(self.layer_save_button, SIGNAL(
                     "clicked()"), self.save_changed_layer_values)
                 self.connect(self.layer_save_button, SIGNAL(
                     "clicked()"), self.update_element_details)
         except:
             try:
-                if sender == self.set_all_constr_element_material_list_view:
+                if sender == \
+                  self.set_all_constr_element_material_list_view.objectName():
                     self.connect(self.layer_save_button, SIGNAL(
                         "clicked()"),
                         self.save_changed_layer_values_set_all_constr)
                     self.connect(self.layer_save_button, SIGNAL(
                         "clicked()"), self.update_set_all_construction)
             except:
-                if sender == self.generate_new_xml_ui_material_list_view:
+                if sender == \
+                  self.generate_new_xml_ui_material_list_view.objectName():
                     self.connect(self.layer_save_button, SIGNAL(
                         "clicked()"), self.save_changed_layer_values_xml)
                     self.connect(self.layer_save_button, SIGNAL(
