@@ -2656,10 +2656,6 @@ class MainUI(QDialog):
         self.display_current_building()
 
     def add_element_to_xml(self):
-        self.generate_new_xml_ui_inner_convection_line_edit.setText("10")
-        self.generate_new_xml_ui_outer_convection_line_edit.setText("10")
-        self.generate_new_xml_ui_inner_radiation_line_edit.setText("10")
-        self.generate_new_xml_ui_outer_radiation_line_edit.setText("10")
 
         path = str(self.generate_new_xml_ui_path_line_edit.text())
         type_of_element = self.generate_new_xml_ui_type_combobox.currentText()
