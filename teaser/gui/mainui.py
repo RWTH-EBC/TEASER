@@ -1550,7 +1550,7 @@ class MainUI(QDialog):
         self.create_new_xml_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
         self.create_new_xml_ui_page.setWindowTitle("XML")
-        self.create_new_xml_ui_page.setFixedWidth(350)
+        self.create_new_xml_ui_page.setFixedWidth(380)
         self.create_new_xml_ui_page.setFixedHeight(500)
         self.create_new_xml_ui_layout = QtGui.QGridLayout()
         self.create_new_xml_ui_page.setLayout(
@@ -1581,6 +1581,7 @@ class MainUI(QDialog):
             "generate_new_xml_ui_path_line_edit")
         self.generate_new_xml_ui_path_line_edit.setText(
             utilitis.get_full_path("Data\Input\InputData\Test.xml"))
+        self.generate_new_xml_ui_browse = QtGui.QPushButton("Browse")
         self.generate_new_xml_ui_type_label = QtGui.QLabel("Type: ")
         self.generate_new_xml_ui_type_combobox = QtGui.QComboBox()
         self.generate_new_xml_ui_type_combobox.setObjectName(
@@ -1650,8 +1651,7 @@ class MainUI(QDialog):
             QtCore.QRect(10, 200, 170, 300))
         self.generate_new_xml_ui_material_list_view.setObjectName(
             _fromUtf8("XMLMaterialsListView"))
-        #self.generate_new_xml_ui_material_list_view.setModel(
-        #    self.element_layer_model_set_all_constr)
+        # self.generate_new_xml_ui_material_list_view.setModel()
         self.generate_new_xml_ui_material_list_view.setItemDelegate(
             self.lVZF)
         self.generate_new_xml_ui_material_list_view.setEditTriggers(
@@ -1691,43 +1691,47 @@ class MainUI(QDialog):
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_path_line_edit, 1, 1)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_type_label, 2, 0)
+            self.generate_new_xml_ui_browse, 2, 1)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_type_combobox, 2, 1)
+            self.generate_new_xml_ui_type_label, 3, 0)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_constr_type_label, 3, 0)
+            self.generate_new_xml_ui_type_combobox, 3, 1)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_constr_type_combobox, 3, 1)
+            self.generate_new_xml_ui_constr_type_label, 4, 0)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_age_group_label, 4,0)
+            self.generate_new_xml_ui_constr_type_combobox, 4, 1)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_age_group_left_combobox, 4,1, Qt.AlignLeft)
+            self.generate_new_xml_ui_age_group_label, 5, 0)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_to_label, 4,1, Qt.AlignCenter)
+            self.generate_new_xml_ui_age_group_left_combobox, 5, 1,
+            Qt.AlignLeft)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_age_group_right_combobox, 4,1, Qt.AlignRight)
+            self.generate_new_xml_ui_to_label, 5, 1, Qt.AlignCenter)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_inner_convection_label, 5,0 )
+            self.generate_new_xml_ui_age_group_right_combobox, 5, 1,
+            Qt.AlignRight)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_inner_convection_line_edit, 5,1)
+            self.generate_new_xml_ui_inner_convection_label, 6, 0)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_outer_convection_label, 6,0)
+            self.generate_new_xml_ui_inner_convection_line_edit, 6, 1)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_outer_convection_line_edit, 6,1)
+            self.generate_new_xml_ui_outer_convection_label, 7, 0)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_inner_radiation_label, 7,0 )
+            self.generate_new_xml_ui_outer_convection_line_edit, 7, 1)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_inner_radiation_line_edit, 7,1 )
+            self.generate_new_xml_ui_inner_radiation_label, 8, 0)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_outer_radiation_label, 8,0)
+            self.generate_new_xml_ui_inner_radiation_line_edit, 8, 1)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_outer_radiation_line_edit, 8,1)
+            self.generate_new_xml_ui_outer_radiation_label, 9, 0)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_add_layer_button, 9, 0)
+            self.generate_new_xml_ui_outer_radiation_line_edit, 9, 1)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_delete_layer_button, 9, 1)
+            self.generate_new_xml_ui_add_layer_button, 10, 0)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_material_list_view, 10, 0, 11, 2)
+            self.generate_new_xml_ui_delete_layer_button, 10, 1)
+        self.generate_new_xml_window_layout.addWidget(
+            self.generate_new_xml_ui_material_list_view, 11, 0, 12, 2)
 
         self.generate_new_xml_save_cancel_layout.addWidget(
             self.generate_new_xml_ui_save_button, 1, 0)
