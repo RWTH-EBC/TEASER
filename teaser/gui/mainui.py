@@ -91,12 +91,14 @@ class MainUI(QDialog):
                                       "street": ""}
         self.temp_zones = {}
         self.all_constr_layer_list = []
+        self.xml_layer_list = []
         self.zone_model = QStandardItemModel()
         self.outer_elements_model = QStandardItemModel()
         self.element_model = QStandardItemModel()
         self.layer_model = QStandardItemModel()
         self.element_layer_model = QStandardItemModel()
         self.element_layer_model_set_all_constr = QStandardItemModel()
+        self.element_layer_model_update_xml = QStandardItemModel()
         self.project = Project()
         self.project.modelica_info = ModelicaInfo()
         self.guiinfo = GUIInfo()
@@ -1274,7 +1276,6 @@ class MainUI(QDialog):
                      SIGNAL("clicked()"),
                      self.delete_selected_layer_set_all_constr)
 
-        self.element_material_list_view = QtGui.QListView()
         self.set_all_constr_element_material_list_view = QtGui.QListView()
         self.set_all_constr_element_material_list_view.setGeometry(
             QtCore.QRect(10, 200, 170, 300))
@@ -1402,6 +1403,8 @@ class MainUI(QDialog):
             num_layers = len(self.current_element.layer) + 1
         elif check == "set all construction window":
             num_layers = len(self.all_constr_layer_list) + 1
+        elif check == "Update XML":
+            num_layers = len(self.xml_layer_list) + 1
 
         if num_layers > 1:
             for x in range(0, num_layers):
@@ -1476,6 +1479,10 @@ class MainUI(QDialog):
             self.connect(self.new_layer_save_button, SIGNAL(
                 "clicked()"), self.update_set_all_construction)
 
+        elif check == "Update XML":
+            self.connect(self.new_layer_save_button, SIGNAL(
+                "clicked()"), self.update_xml_window)
+
         self.connect(self.new_layer_save_button, SIGNAL(
             "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
 
@@ -1549,7 +1556,7 @@ class MainUI(QDialog):
         self.create_new_xml_ui_page.setWindowIcon(self.teaser_icon)
         self.create_new_xml_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
-        self.create_new_xml_ui_page.setWindowTitle("XML")
+        self.create_new_xml_ui_page.setWindowTitle("Update XML")
         self.create_new_xml_ui_page.setFixedWidth(380)
         self.create_new_xml_ui_page.setFixedHeight(500)
         self.create_new_xml_ui_layout = QtGui.QGridLayout()
@@ -1582,6 +1589,8 @@ class MainUI(QDialog):
         self.generate_new_xml_ui_path_line_edit.setText(
             utilitis.get_full_path("Data\Input\InputData\Test.xml"))
         self.generate_new_xml_ui_browse = QtGui.QPushButton("Browse")
+        self.connect(self.generate_new_xml_ui_browse, SIGNAL(
+            "clicked()"), self.click_browse_button_xml)
         self.generate_new_xml_ui_type_label = QtGui.QLabel("Type: ")
         self.generate_new_xml_ui_type_combobox = QtGui.QComboBox()
         self.generate_new_xml_ui_type_combobox.setObjectName(
@@ -1642,6 +1651,10 @@ class MainUI(QDialog):
 
         self.generate_new_xml_ui_add_layer_button = QtGui.QPushButton()
         self.generate_new_xml_ui_add_layer_button.setText("Add Layer")
+        self.connect(self.generate_new_xml_ui_add_layer_button,
+                     SIGNAL("clicked()"),
+                     lambda check_window="Update XML":
+                     self.create_new_layer_ui(check_window))
 
         self.generate_new_xml_ui_delete_layer_button = QtGui.QPushButton()
         self.generate_new_xml_ui_delete_layer_button.setText("Delete Layer")
@@ -1651,7 +1664,8 @@ class MainUI(QDialog):
             QtCore.QRect(10, 200, 170, 300))
         self.generate_new_xml_ui_material_list_view.setObjectName(
             _fromUtf8("XMLMaterialsListView"))
-        # self.generate_new_xml_ui_material_list_view.setModel()
+        self.generate_new_xml_ui_material_list_view.setModel(
+            self.element_layer_model_update_xml)
         self.generate_new_xml_ui_material_list_view.setItemDelegate(
             self.lVZF)
         self.generate_new_xml_ui_material_list_view.setEditTriggers(
@@ -2379,6 +2393,32 @@ class MainUI(QDialog):
                                     self.material_transmittance_textbox.text()
                                 break
 
+    def save_changed_layer_values_xml(self):
+        '''Saves the layer inputs in set all construction window
+
+        replaces the previous values of the current layer in envelope with
+        the inputs from the text fields in set all construction window.
+        '''
+
+        for layer in self.xml_layer_list:
+                if layer.internal_id == self.current_layer.internal_id:
+                                layer.thickness = self.thickness_textbox.text()
+                                layer.material.name =\
+                                    self.material_combobox.currentText()
+                                layer.material.density = \
+                                    self.material_density_textbox.text()
+                                layer.material.thermal_conduc = \
+                                    self.material_thermal_conduc_textbox.text()
+                                layer.material.heat_capac = \
+                                    self.material_heat_capac_textbox.text()
+                                layer.material.solar_absorp = \
+                                    self.material_solar_absorp_textbox.text()
+                                layer.material.ir_emissivity = \
+                                    self.material_ir_emissivity_textbox.text()
+                                layer.material.transmittance = \
+                                    self.material_transmittance_textbox.text()
+                                break
+
     def save_changed_simulation_values(self):
         '''Saves the inputs in the simulation window
 
@@ -2979,6 +3019,16 @@ class MainUI(QDialog):
                 None, int(self.new_layer_position_combobox.currentText()),
                 thick, self.new_layer_material_combobox.currentText(), dens,
                 therm, heat, solar, ir, trans))
+
+        elif check == "Update XML":
+            parent = None
+            position = int(self.new_layer_position_combobox.currentText())
+            material = self.new_layer_material_combobox.currentText()
+
+            self.xml_layer_list.insert(
+                position, Controller.click_add_new_layer(
+                                    parent, position, thick, material, dens,
+                                    therm, heat, solar, ir, trans))
 
     def change_zone_values_ui(self, item):
         '''Displays attributes of a selected zone
@@ -3704,6 +3754,19 @@ class MainUI(QDialog):
                 "\t", layer.internal_id)
             self.element_layer_model_set_all_constr.appendRow(item)
 
+    def update_xml_window(self):
+        '''Update the xml window
+
+        updates the set all construction window after layers have been changed.
+        '''
+        self.element_layer_model_update_xml.clear()
+        for layer in self.xml_layer_list:
+            item = TrackableItem(
+                "Material:\t".expandtabs(8) + str(layer.material.name) +
+                "\nThickness:\t".expandtabs(14) + str(layer.thickness) +
+                "\t", layer.internal_id)
+            self.element_layer_model_update_xml.appendRow(item)
+
     def show_element_build_ui(self, item):
         '''Displays attributes of a selected element
 
@@ -4377,16 +4440,24 @@ class MainUI(QDialog):
         self.is_switchable = False
 
         sender = self.sender()
-        if(sender == self.element_material_list_view):
-            current_item = self.element_layer_model.itemFromIndex(item)
-            current_layer = self.current_element.layer
-        else:
-            current_item = \
-                self.element_layer_model_set_all_constr.itemFromIndex(item)
-            current_layer = self.all_constr_layer_list
+        try:
+            if sender == self.element_material_list_view:
+                current_item = self.element_layer_model.itemFromIndex(item)
+                current_layer = self.current_element.layer
+        except:
+            try:
+                if sender == self.set_all_constr_element_material_list_view:
+                    current_item = \
+                        self.element_layer_model_set_all_constr.itemFromIndex(item)
+                    current_layer = self.all_constr_layer_list
+            except:
+                if sender == self.generate_new_xml_ui_material_list_view:
+                    current_item = \
+                        self.element_layer_model_update_xml.itemFromIndex(item)
+                    current_layer = self.xml_layer_list
 
         for layer in current_layer:
-            if (layer.internal_id == current_item.internal_id):
+            if layer.internal_id == current_item.internal_id:
                 self.current_layer = layer
                 break
         self.layer_general_layout = QtGui.QGridLayout()
@@ -4460,17 +4531,26 @@ class MainUI(QDialog):
         self.layer_save_button = QtGui.QPushButton()
         self.layer_save_button.setText("Save")
 
-        if(sender == self.element_material_list_view):
-            self.connect(self.layer_save_button, SIGNAL(
-                "clicked()"), self.save_changed_layer_values)
-            self.connect(self.layer_save_button, SIGNAL(
-                "clicked()"), self.update_element_details)
-        else:
-            self.connect(self.layer_save_button, SIGNAL(
-                "clicked()"), self.save_changed_layer_values_set_all_constr)
-            self.connect(self.layer_save_button, SIGNAL(
-                "clicked()"), self.update_set_all_construction)
-
+        try:
+            if sender == self.element_material_list_view:
+                self.connect(self.layer_save_button, SIGNAL(
+                    "clicked()"), self.save_changed_layer_values)
+                self.connect(self.layer_save_button, SIGNAL(
+                    "clicked()"), self.update_element_details)
+        except:
+            try:
+                if sender == self.set_all_constr_element_material_list_view:
+                    self.connect(self.layer_save_button, SIGNAL(
+                        "clicked()"),
+                        self.save_changed_layer_values_set_all_constr)
+                    self.connect(self.layer_save_button, SIGNAL(
+                        "clicked()"), self.update_set_all_construction)
+            except:
+                if sender == self.generate_new_xml_ui_material_list_view:
+                    self.connect(self.layer_save_button, SIGNAL(
+                        "clicked()"), self.save_changed_layer_values_xml)
+                    self.connect(self.layer_save_button, SIGNAL(
+                        "clicked()"), self.update_xml_window)
         self.connect(self.layer_save_button, SIGNAL(
             "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
 
@@ -4935,6 +5015,14 @@ class MainUI(QDialog):
             self.file_path = self.export_save_template_lineedit.text()
         else:
             self.export_save_template_lineedit.setText(self.file_path)
+
+    def click_browse_button_xml(self):
+        '''Browses beetween the Directory
+
+        opens a dialog window for the user to search the location.
+        '''
+
+        self.generate_new_xml_ui_path_line_edit.setText(QtGui.QFileDialog.getOpenFileName())
 
     def switch_building(self):
         '''Handles the buildings combobox
