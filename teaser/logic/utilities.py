@@ -6,7 +6,6 @@ classes
 """
 
 import os
-from ctypes.wintypes import WORD
 
 
 def celsius_to_kelvin(value):
@@ -100,3 +99,30 @@ def clean_path(rel_path):
         else:
             new_path += index
     return new_path
+
+
+def split_path(path):
+
+    path = clean_path(path)
+    count = 0
+    for index in path:
+        if index == "/":
+            count += 1
+
+    head = ""
+    tail = ""
+    count2 = 0
+    for index in path:
+        if index == "/":
+            count2 += 1
+        if count2 < count:
+            head += index
+        elif count2 >= count:
+            tail += index
+
+    tailList = tail.split(sep="/")
+    tail = tailList[1]
+    tailList = tail.split(sep=".")
+    tail = tailList[0]
+
+    return head, tail
