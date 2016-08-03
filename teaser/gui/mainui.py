@@ -21,6 +21,7 @@ from teaser.project import Project
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
 import teaser.logic.utilities as utilitis
 import platform
+from scipy._lib.six import xrange
 
 
 try:
@@ -1529,6 +1530,15 @@ class MainUI(QDialog):
         self.create_layer_ui.setWindowModality(Qt.ApplicationModal)
         self.create_layer_ui.show()
 
+    def click_radio_button_add(self):
+        self.create_new_xml_ui_groupbox.setVisible(True)
+
+    def click_radio_button_del(self):
+        self.create_new_xml_ui_groupbox.setVisible(False)
+
+    def click_radio_button_modify(self):
+        self.create_new_xml_ui_groupbox.setVisible(False)
+
     def create_xml_ui(self):
         '''New element window
 
@@ -1550,10 +1560,27 @@ class MainUI(QDialog):
         self.create_new_xml_ui_groupbox.setLayout(
             self.generate_new_xml_window_layout)
 
+        self.generate_new_xml_options_layout = QtGui.QGridLayout()
+        self.generate_new_xml_options_groupbox = QtGui.QGroupBox()
+        self.generate_new_xml_options_groupbox.setLayout(
+            self.generate_new_xml_options_layout)
+        self.generate_new_xml_options_groupbox.setMaximumHeight(48)
+
+        self.radio_button_xml_add = QtGui.QRadioButton(u"Add")
+        self.radio_button_xml_add.toggled.connect(self.click_radio_button_add)
+        self.radio_button_xml_delete = QtGui.QRadioButton(u"delete")
+        self.radio_button_xml_delete.toggled.connect(
+            self.click_radio_button_del)
+        self.radio_button_xml_modify = QtGui.QRadioButton(u"Modify")
+        self.radio_button_xml_modify.toggled.connect(
+            self.click_radio_button_modify)
+
         self.generate_new_xml_ui_path_label = QtGui.QLabel("Path: ")
         self.generate_new_xml_ui_path_line_edit = QtGui.QLineEdit()
         self.generate_new_xml_ui_path_line_edit.setObjectName(
             "generate_new_xml_ui_path_line_edit")
+        self.generate_new_xml_ui_path_line_edit.setText(
+            utilitis.get_full_path("Data\Input\InputData\Test.xml"))
         self.generate_new_xml_ui_type_label = QtGui.QLabel("Type: ")
         self.generate_new_xml_ui_type_combobox = QtGui.QComboBox()
         self.generate_new_xml_ui_type_combobox.setObjectName(
@@ -1583,6 +1610,11 @@ class MainUI(QDialog):
         self.generate_new_xml_ui_age_group_right_combobox.setObjectName(
             "generate_new_xml_ui_age_group_right_combobox")
         self.generate_new_xml_ui_age_group_right_combobox.setMinimumWidth(100)
+        for i in xrange(1950, 2020):
+            self.generate_new_xml_ui_age_group_left_combobox.addItem(
+                str(i), userData=None)
+            self.generate_new_xml_ui_age_group_right_combobox.addItem(
+                str(i), userData=None)
         self.generate_new_xml_ui_age_group_line_edit = QtGui.QLineEdit()
         self.generate_new_xml_ui_age_group_line_edit.setObjectName(
             "generate_new_xml_ui_age_group_line_edit")
@@ -1627,6 +1659,12 @@ class MainUI(QDialog):
         self.generate_new_xml_ui_material_list_view.doubleClicked.connect(
             self.show_layer_build_ui)
 
+        self.generate_new_xml_save_cancel_layout = QtGui.QGridLayout()
+        self.generate_new_xml_save_cancel_layout_GroupBox = QtGui.QGroupBox()
+        self.generate_new_xml_save_cancel_layout_GroupBox.setLayout(
+            self.generate_new_xml_save_cancel_layout)
+        self.generate_new_xml_save_cancel_layout_GroupBox.setMaximumHeight(48)
+
         self.generate_new_xml_ui_save_button = QtGui.QPushButton()
         self.generate_new_xml_ui_save_button.setText("Save")
 
@@ -1635,8 +1673,16 @@ class MainUI(QDialog):
         self.connect(self.generate_new_xml_ui_cancel_button, SIGNAL(
             "clicked()"), self.create_new_xml_ui_page,
             QtCore.SLOT("close()"))
+
+        self.generate_new_xml_options_layout.addWidget(
+            self.radio_button_xml_add, 1, 0)
+        self.generate_new_xml_options_layout.addWidget(
+            self.radio_button_xml_delete, 1, 1)
+        self.generate_new_xml_options_layout.addWidget(
+            self.radio_button_xml_modify, 1, 2)
+
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_path_label, 1,0)
+            self.generate_new_xml_ui_path_label, 1, 0)
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_path_line_edit, 1, 1)
         self.generate_new_xml_window_layout.addWidget(
@@ -1677,13 +1723,18 @@ class MainUI(QDialog):
             self.generate_new_xml_ui_delete_layer_button, 9, 1)
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_material_list_view, 10, 0, 11, 2)
-        self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_save_button, 12, 0)
-        self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_cancel_button, 12, 1)
+
+        self.generate_new_xml_save_cancel_layout.addWidget(
+            self.generate_new_xml_ui_save_button, 1, 0)
+        self.generate_new_xml_save_cancel_layout.addWidget(
+            self.generate_new_xml_ui_cancel_button, 1, 1)
 
         self.create_new_xml_ui_layout.addWidget(
-            self.create_new_xml_ui_groupbox)
+            self.generate_new_xml_options_groupbox, 0, 0)
+        self.create_new_xml_ui_layout.addWidget(
+            self.create_new_xml_ui_groupbox, 1, 0)
+        self.create_new_xml_ui_layout.addWidget(
+            self.generate_new_xml_save_cancel_layout_GroupBox, 2, 0)
         self.create_new_xml_ui_page.setWindowModality(
             Qt.ApplicationModal)
         self.create_new_xml_ui_page.show()
