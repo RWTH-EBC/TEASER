@@ -637,3 +637,79 @@ class Controller():
 
         u_value = float(current_element.ua_value)/current_element.area
         return u_value
+
+    @classmethod
+    def create_element(self, type_of_element, constr_type, building_age_group,
+                       inner_con, outer_con, inner_rad, outer_rad):
+
+        if type_of_element == "Outer Wall":
+            element = OuterWall()
+            element.name = type
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = outer_con
+            element.outer_convection = inner_rad
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+
+        elif type_of_element == "Inner Wall":
+            element = InnerWall()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = outer_con
+            element.outer_convection = inner_rad
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+
+        elif type_of_element == "Window":
+            element = Window()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = outer_con
+            element.outer_convection = inner_rad
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+
+        elif type_of_element == "GroundFloor":
+            element = GroundFloor()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = outer_con
+            element.outer_convection = inner_rad
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+
+        elif type_of_element == "Ceiling":
+            element = Ceiling()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = outer_con
+            element.outer_convection = inner_rad
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+
+        elif type_of_element == "Rooftop":
+            element = Rooftop()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = outer_con
+            element.outer_convection = inner_rad
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+
+        elif type_of_element == "Floor":
+            element = Floor()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = outer_con
+            element.outer_convection = inner_rad
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+
+        return element
