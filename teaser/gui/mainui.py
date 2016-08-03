@@ -22,7 +22,7 @@ from teaser.logic.simulation.modelicainfo import ModelicaInfo
 import teaser.logic.utilities as utilitis
 import platform
 from scipy._lib.six import xrange
-
+import teaser.data.output.buildingelement_output as be_output
 
 try:
     _fromUtf8 = Qt.QString.fromUtf8
@@ -1667,6 +1667,11 @@ class MainUI(QDialog):
 
         self.generate_new_xml_ui_save_button = QtGui.QPushButton()
         self.generate_new_xml_ui_save_button.setText("Save")
+        self.connect(self.generate_new_xml_ui_save_button, SIGNAL(
+            "clicked()"), self.add_element_to_xml)
+        self.connect(self.generate_new_xml_ui_save_button, SIGNAL(
+            "clicked()"), self.create_new_xml_ui_page,
+            QtCore.SLOT("close()"))
 
         self.generate_new_xml_ui_cancel_button = QtGui.QPushButton()
         self.generate_new_xml_ui_cancel_button.setText("Cancel")
@@ -2649,6 +2654,38 @@ class MainUI(QDialog):
                                             orientation_number_after_changing,
                                             element_type, area)
         self.display_current_building()
+
+    def add_element_to_xml(self):
+        self.generate_new_xml_ui_inner_convection_line_edit.setText("10")
+        self.generate_new_xml_ui_outer_convection_line_edit.setText("10")
+        self.generate_new_xml_ui_inner_radiation_line_edit.setText("10")
+        self.generate_new_xml_ui_outer_radiation_line_edit.setText("10")
+
+        path = str(self.generate_new_xml_ui_path_line_edit.text())
+        type_of_element = self.generate_new_xml_ui_type_combobox.currentText()
+        constr_type = \
+            self.generate_new_xml_ui_constr_type_combobox.currentText()
+        building_from = float(
+            self.generate_new_xml_ui_age_group_left_combobox.currentText())
+        building_to = float(
+            self.generate_new_xml_ui_age_group_right_combobox.currentText())
+        building_age_group = [building_from, building_to]
+        inner_con = float(
+            self.generate_new_xml_ui_inner_convection_line_edit.text())
+        outer_con = float(
+            self.generate_new_xml_ui_outer_convection_line_edit.text())
+        inner_rad = float(
+            self.generate_new_xml_ui_inner_radiation_line_edit.text())
+        outer_rad = float(
+            self.generate_new_xml_ui_outer_radiation_line_edit.text())
+
+        element = Controller.create_element(type_of_element, constr_type,
+                                            building_age_group, inner_con,
+                                            outer_con, inner_rad, outer_rad)
+        be_output.save_type_element(element,
+                                    utilitis.clean_path(
+                                     "Data\Input\InputData"),
+                                    "Test")
 
     def clear_input_values_set_all_constr(self):
         '''Clears layer values
