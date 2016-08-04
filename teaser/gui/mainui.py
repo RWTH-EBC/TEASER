@@ -850,9 +850,10 @@ class MainUI(QDialog):
             self.create_new_building_ui)
         self.new_empty_building_button.setToolTip(
             "Creates a new building without any zones or values.")
-        self.new_empty_building_label = QtGui.QLabel(self.ribbon_group_box)
-        self.new_empty_building_label.setGeometry(QtCore.QRect(95, 80, 70, 25))
-        self.new_empty_building_label.setText("Create Emp- \nty Building")
+        self.new_building_label = QtGui.QLabel(self.ribbon_group_box)
+        self.new_building_label.setGeometry(QtCore.QRect(95, 80, 70, 25))
+        self.new_building_label.setText("Create \nBuilding")
+        self.new_building_label.setAlignment(QtCore.Qt.AlignCenter)
         self.add_zone_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI/GUIImages/AddZone.png")),
             self.ribbon_widget)
@@ -1035,19 +1036,63 @@ class MainUI(QDialog):
             QtCore.Qt.WA_DeleteOnClose)
         self.generate_new_building_ui_page.setWindowTitle(
             "Create new Building")
-        self.generate_new_building_ui_page.setFixedWidth(350)
-        self.generate_new_building_ui_page.setFixedHeight(200)
+        self.generate_new_building_ui_page.setFixedWidth(300)
+        self.generate_new_building_ui_page.setFixedHeight(300)
         self.generate_new_building_window_layout = QtGui.QGridLayout()
         self.generate_new_building_ui_page.setLayout(
             self.generate_new_building_window_layout)
 
-        self.no_building_warning_label = QtGui.QLabel(
-            "You need to specify a building first")
+        validator = QtGui.QDoubleValidator()
 
-        self.generate_new_building_id_label = QtGui.QLabel("Id: ")
-        self.generate_new_building_id_line_edit = QtGui.QLineEdit()
-        self.generate_new_building_id_line_edit.setObjectName(
-            "generate_new_building_id_line_edit")
+        self.generate_new_building_name_label = QtGui.QLabel("Name: ")
+        self.generate_new_building_name_line_edit = QtGui.QLineEdit()
+        self.generate_new_building_name_line_edit.setObjectName(
+            "generate_new_building_name_line_edit")
+
+        self.generate_new_building_street_label = QtGui.QLabel("Street/Nr: ")
+        self.generate_new_building_street_line_edit = QtGui.QLineEdit()
+        self.generate_new_building_street_line_edit.setObjectName(
+            "generate_new_building_street_line_edit")
+
+        self.generate_new_building_city_label = QtGui.QLabel("ZIP/City: ")
+        self.generate_new_building_city_line_edit = QtGui.QLineEdit()
+        self.generate_new_building_city_line_edit.setObjectName(
+            "generate_new_building_city_line_edit")
+
+        self.generate_new_building_constr_year_label = QtGui.QLabel(
+             "Contruction Year: ")
+        self.generate_new_building_constr_year_line_edit = QtGui.QLineEdit()
+        self.generate_new_building_constr_year_line_edit.setValidator(
+             validator)
+        self.generate_new_building_constr_year_line_edit.setObjectName(
+            "generate_new_building_constr_year_line_edit")
+
+        self.generate_new_building_number_of_floors_label = QtGui.QLabel(
+             "Number of Floors: ")
+        self.generate_new_building_number_of_floors_line_edit =\
+            QtGui.QLineEdit()
+        self.generate_new_building_number_of_floors_line_edit.setValidator(
+             validator)
+        self.generate_new_building_number_of_floors_line_edit.setObjectName(
+            "generate_new_building_number_of_floors_line_edit")
+
+        self.generate_new_building_height_of_floors_label = QtGui.QLabel(
+             "Height of Floors: ")
+        self.generate_new_building_height_of_floors_line_edit =\
+            QtGui.QLineEdit()
+        self.generate_new_building_height_of_floors_line_edit.setValidator(
+             validator)
+        self.generate_new_building_height_of_floors_line_edit.setObjectName(
+            "generate_new_building_height_of_floors_line_edit")
+
+        self.generate_new_building_net_leased_area_label = QtGui.QLabel(
+             "Net leased Area: ")
+        self.generate_new_building_net_leased_area_line_edit =\
+            QtGui.QLineEdit()
+        self.generate_new_building_net_leased_area_line_edit.setValidator(
+             validator)
+        self.generate_new_building_net_leased_area_line_edit.setObjectName(
+            ".generate_new_building_net_leased_area_line_edit")
 
         self.generate_new_building_save_button = QtGui.QPushButton()
         self.generate_new_building_save_button.setText("Save")
@@ -1064,15 +1109,37 @@ class MainUI(QDialog):
             QtCore.SLOT("close()"))
 
         self.generate_new_building_window_layout.addWidget(
-            self.no_building_warning_label, 0, 0)
+            self.generate_new_building_name_label, 0, 0)
         self.generate_new_building_window_layout.addWidget(
-            self.generate_new_building_id_label, 1, 0)
+            self.generate_new_building_name_line_edit, 0, 1)
         self.generate_new_building_window_layout.addWidget(
-            self.generate_new_building_id_line_edit, 1, 1)
+            self.generate_new_building_street_label, 1, 0)
         self.generate_new_building_window_layout.addWidget(
-            self.generate_new_building_save_button, 2, 0)
+            self.generate_new_building_street_line_edit, 1, 1)
         self.generate_new_building_window_layout.addWidget(
-            self.generate_new_building_cancel_button, 2, 1)
+            self.generate_new_building_city_label, 2, 0)
+        self.generate_new_building_window_layout.addWidget(
+            self.generate_new_building_city_line_edit, 2, 1)
+        self.generate_new_building_window_layout.addWidget(
+            self.generate_new_building_constr_year_label, 3, 0)
+        self.generate_new_building_window_layout.addWidget(
+            self.generate_new_building_constr_year_line_edit, 3, 1)
+        self.generate_new_building_window_layout.addWidget(
+            self.generate_new_building_number_of_floors_label, 4, 0)
+        self.generate_new_building_window_layout.addWidget(
+            self.generate_new_building_number_of_floors_line_edit, 4, 1)
+        self.generate_new_building_window_layout.addWidget(
+            self.generate_new_building_height_of_floors_label, 5, 0)
+        self.generate_new_building_window_layout.addWidget(
+            self.generate_new_building_height_of_floors_line_edit, 5, 1)
+        self.generate_new_building_window_layout.addWidget(
+            self.generate_new_building_net_leased_area_label, 6, 0)
+        self.generate_new_building_window_layout.addWidget(
+            self.generate_new_building_net_leased_area_line_edit, 6, 1)
+        self.generate_new_building_window_layout.addWidget(
+            self.generate_new_building_save_button, 7, 0)
+        self.generate_new_building_window_layout.addWidget(
+            self.generate_new_building_cancel_button, 7, 1)
         self.generate_new_building_ui_page.setWindowModality(
             Qt.ApplicationModal)
         self.generate_new_building_ui_page.show()
@@ -1133,6 +1200,7 @@ class MainUI(QDialog):
         self.connect(self.generate_new_element_cancel_button, SIGNAL(
             "clicked()"), self.create_new_element_ui_page,
             QtCore.SLOT("close()"))
+
         self.generate_new_element_window_layout.addWidget(
             self.generate_new_element_name_label, 1, 0)
         self.generate_new_element_window_layout.addWidget(
@@ -2564,14 +2632,22 @@ class MainUI(QDialog):
         ''' Creates a new empty building
         '''
 
-        # TODO: Eventuell wollt ihr hier mehr Optionen beim Erstellen
-        # ermöglichen, wie Grundfläche, Standort, etc. die würde ich
-        # allerdings optional machen
-
         self.current_building = Controller.click_add_new_building(
             self.project, "temp")
         self.current_building.name = \
-            self.generate_new_building_id_line_edit.text()
+            self.generate_new_building_name_line_edit.text()
+        self.current_building.street_name = \
+            self.generate_new_building_street_line_edit.text()
+        self.current_building.city = \
+            self.generate_new_building_city_line_edit.text()
+        self.current_building.year_of_construction = \
+            self.generate_new_building_constr_year_line_edit.text()
+        self.current_building.number_of_floors = \
+            self.generate_new_building_number_of_floors_line_edit.text()
+        self.current_building.height_of_floors = \
+            self.generate_new_building_height_of_floors_line_edit.text()
+        self.current_building.net_leased_area = \
+            self.generate_new_building_net_leased_area_line_edit.text()
         self.project.buildings.append(self.current_building)
         self.display_current_building()
 
