@@ -227,6 +227,20 @@ class Controller():
         return project
     
     @classmethod
+    def click_update_building(self, project, index):
+        """
+        Updates all changed attributes of selected building
+        """
+
+        last_index = len(project.buildings) - 1
+        updated_building = project.buildings[last_index]
+        project.buildings.pop(last_index)
+        project.buildings.pop(index)
+        project.buildings.insert(index, updated_building)
+
+        return project
+
+    @classmethod
     def click_generate_type_building_button(self,
                                             parent,
                                             name,
