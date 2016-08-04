@@ -1556,12 +1556,15 @@ class MainUI(QDialog):
         self.create_new_xml_ui_page.setWindowIcon(self.teaser_icon)
         self.create_new_xml_ui_page.setAttribute(
             QtCore.Qt.WA_DeleteOnClose)
-        self.create_new_xml_ui_page.setWindowTitle("Update XML")
+        self.create_new_xml_ui_page.setWindowTitle("Update")
         self.create_new_xml_ui_page.setFixedWidth(380)
         self.create_new_xml_ui_page.setFixedHeight(500)
         self.create_new_xml_ui_layout = QtGui.QGridLayout()
         self.create_new_xml_ui_page.setLayout(
             self.create_new_xml_ui_layout)
+        self.connect(self.create_new_xml_ui_page, SIGNAL("destroyed()"),
+                     lambda check_window="Update XML":
+                     self.delete_elements_in_lists(check_window))
         self.generate_new_xml_window_layout = QtGui.QGridLayout()
         self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"Values")
         self.create_new_xml_ui_groupbox.setLayout(
@@ -1658,6 +1661,8 @@ class MainUI(QDialog):
 
         self.generate_new_xml_ui_delete_layer_button = QtGui.QPushButton()
         self.generate_new_xml_ui_delete_layer_button.setText("Delete Layer")
+        self.connect(self.generate_new_xml_ui_delete_layer_button, SIGNAL(
+            "clicked()"), self.delete_selected_layer_xml_window)
 
         self.generate_new_xml_ui_material_list_view = QtGui.QListView()
         self.generate_new_xml_ui_material_list_view.setGeometry(
@@ -5328,6 +5333,44 @@ class MainUI(QDialog):
                                       u"No layer selected",
                                       u"You need to select a layer first.")
 
+    def delete_selected_layer_xml_window(self):
+        '''Deletes a layer in xml window
+
+        this function only operates in the xml window.
+        Checks if a layer is selected and deletes it.
+        '''
+
+        try:
+            item = self.element_layer_model_update_xml.itemFromIndex(
+                self.generate_new_xml_ui_material_list_view.currentIndex())
+            for current_layer in self.xml_layer_list:
+                if (current_layer.internal_id == item.internal_id):
+                    ind = self.xml_layer_list.index(current_layer)
+                    del self.xml_layer_list[ind]
+                    self.update_xml_window()
+
+        except (ValueError, AttributeError):
+            QtGui.QMessageBox.warning(self,
+                                      u"No layer selected",
+                                      u"You need to select a layer first.")
+
+    def delete_elements_in_lists(self, check):
+        if (str(platform.python_version())).startswith('2'):
+            if check == "Set all construction window":
+                self.element_layer_model_set_all_constr = []
+                self.all_constr_layer_list = []
+            elif check == "Update XML":
+                self.xml_layer_list = []
+                self.element_layer_model_update_xml = []
+        elif (str(platform.python_version())).startswith('3'):
+            if check == "Set all construction window":
+                self.element_layer_model_set_all_constr.clear()
+                self.all_constr_layer_list.clear()
+            elif check == "Update XML":
+                self.xml_layer_list.clear()
+                self.element_layer_model_update_xml.clear()
+
+
     def edit_building(self):
         '''Switch to an edit mode
 
@@ -5689,7 +5732,7 @@ class WizardPage(QtGui.QWizardPage):
 
     def closeEvent(self, evnt, elem_layer=None, layer_list=None):
         '''Describes a close event
-
+        
         close event describes what is supposed to happen if a window is closed.
         In this case, all layers in set all construction window will cleared.
         '''
