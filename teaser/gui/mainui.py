@@ -4,6 +4,7 @@
 
 import os
 import sys
+import inspect
 from PyQt4 import QtCore, QtGui
 from PyQt4.Qt import QDialog, QStandardItemModel
 from PyQt4.Qt import Qt
@@ -21,6 +22,8 @@ from teaser.project import Project
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
 import teaser.logic.utilities as utilitis
 import platform
+from teaser.logic.archetypebuildings.residential import Residential
+from teaser.logic.archetypebuildings.nonresidential import NonResidential
 
 
 try:
@@ -181,16 +184,6 @@ class MainUI(QDialog):
                                         "rgba(255,255,255,255)")
         f = QtGui.QFont("Arial", 11)
         self.mask_label_9.setFont(f)
-        self.mask_button_1 = QtGui.QPushButton(self.main_widget)
-        self.mask_button_1.setGeometry(QtCore.QRect(265, 155, 95, 30))
-        self.mask_button_1.setText("Save\n(Enter)")
-        self.mask_button_1.setVisible(False)
-        self.mask_button_1.clicked.connect(self.edit_building_save)
-        self.mask_button_2 = QtGui.QPushButton(self.main_widget)
-        self.mask_button_2.setGeometry(QtCore.QRect(365, 155, 95, 30))
-        self.mask_button_2.setText("Cancel\n(Escape)")
-        self.mask_button_2.setVisible(False)
-        self.mask_button_2.clicked.connect(self.edit_building_cancel)
         self.zones_list_label = QtGui.QLabel(self.standard_view_group_box)
         self.zones_list_label.setGeometry(QtCore.QRect(165, 5, 50, 20))
         self.zones_list_label.setText("Zones")
@@ -767,7 +760,10 @@ class MainUI(QDialog):
         self.side_bar_id_label.setText("Name:")
         self.side_bar_id_line_edit = QtGui.QLineEdit(self.side_bar_group_box)
         self.side_bar_id_line_edit.setGeometry(QtCore.QRect(105, 60, 90, 25))
-        self.side_bar_id_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_id_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_id_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_street_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_street_label.setGeometry(QtCore.QRect(5, 95, 90, 25))
         self.side_bar_street_label.setText("Street/Nr.:")
@@ -775,7 +771,10 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_street_line_edit.setGeometry(
             QtCore.QRect(105, 95, 90, 25))
-        self.side_bar_street_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_street_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_street_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_location_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_location_label.setGeometry(QtCore.QRect(5, 130, 90, 25))
         self.side_bar_location_label.setText("ZIP/City:")
@@ -783,7 +782,10 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_location_line_edit.setGeometry(
             QtCore.QRect(105, 130, 90, 25))
-        self.side_bar_location_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_location_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_location_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_construction_year_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_construction_year_label.setGeometry(
@@ -793,7 +795,10 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_construction_year_line_edit.setGeometry(
             QtCore.QRect(105, 165, 90, 25))
-        self.side_bar_construction_year_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_construction_year_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_construction_year_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_number_of_floors_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_number_of_floors_label.setGeometry(
@@ -803,7 +808,10 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_number_of_floors_line_edit.setGeometry(
             QtCore.QRect(105, 200, 90, 25))
-        self.side_bar_number_of_floors_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_number_of_floors_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_number_of_floors_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_height_of_floors_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_height_of_floors_label.setGeometry(
@@ -813,7 +821,10 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_height_of_floors_line_edit.setGeometry(
             QtCore.QRect(105, 235, 90, 25))
-        self.side_bar_height_of_floors_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_height_of_floors_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_height_of_floors_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_net_leased_area_label = QtGui.QLabel(
             self.side_bar_group_box)
         self.side_bar_net_leased_area_label.setGeometry(
@@ -823,7 +834,10 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_net_leased_area_line_edit.setGeometry(
             QtCore.QRect(105, 270, 90, 25))
-        self.side_bar_net_leased_area_line_edit.setReadOnly(True)
+        self.connect(self.side_bar_net_leased_area_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.show_warning_window_ui)
+        self.connect(self.side_bar_net_leased_area_line_edit, QtCore.SIGNAL(
+            "editingFinished()"), self.clear_focus_line_edits)
 
         """ All controls in the ribbon """
 
@@ -875,17 +889,18 @@ class MainUI(QDialog):
         self.delete_label = QtGui.QLabel(self.ribbon_group_box)
         self.delete_label.setGeometry(QtCore.QRect(265, 80, 70, 25))
         self.delete_label.setText("Delete Cur- \nrent Zone")
-        self.edit_building_button = PictureButton(QtGui.QPixmap(
+        self.delete_building_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI/GUIImages/EditBuilding.png")),
             self.ribbon_widget)
-        self.edit_building_button.setGeometry(QtCore.QRect(350, 5, 70, 70))
-        self.edit_building_button.clicked.connect(self.edit_building)
-        self.edit_building_button.setToolTip(
+        self.delete_building_button.setGeometry(QtCore.QRect(350, 5, 70, 70))
+        self.delete_building_button.clicked.connect(
+            self.warning_delete_building)
+        self.delete_building_button.setToolTip(
             "Switches to edit-mode. Allows modification of general"
             "building values.")
-        self.edit_label = QtGui.QLabel(self.ribbon_group_box)
-        self.edit_label.setGeometry(QtCore.QRect(350, 80, 70, 25))
-        self.edit_label.setText("Edit\nBuilding")
+        self.delete_label = QtGui.QLabel(self.ribbon_group_box)
+        self.delete_label.setGeometry(QtCore.QRect(350, 80, 70, 25))
+        self.delete_label.setText("Delete\nBuilding")
         self.load_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI/GUIImages/Load.png")),
             self.ribbon_widget)
@@ -2516,6 +2531,15 @@ class MainUI(QDialog):
             self.element_layer_model_set_all_constr = QStandardItemModel()
             self.all_constr_layer_list = []
 
+    def clear_focus_line_edits(self):
+        self.side_bar_id_line_edit.clearFocus()
+        self.side_bar_construction_year_line_edit.clearFocus()
+        self.side_bar_height_of_floors_line_edit.clearFocus()
+        self.side_bar_location_line_edit.clearFocus()
+        self.side_bar_net_leased_area_line_edit.clearFocus()
+        self.side_bar_number_of_floors_line_edit.clearFocus()
+        self.side_bar_street_line_edit.clearFocus()
+
     def check_inputs_new_zone(self):
         '''checks inputs of a new zone
 
@@ -2627,6 +2651,7 @@ class MainUI(QDialog):
             if building.internal_id == int_id:
                 self.current_building = building
         self.display_current_building()
+
 
     def check_new_building_inputs(self):
         ''' Creates a new empty building
@@ -3527,6 +3552,63 @@ class MainUI(QDialog):
                 "\t", layer.internal_id)
             self.element_layer_model_set_all_constr.appendRow(item)
 
+    def show_warning_window_ui(self):
+        
+        self.warning_window = QtGui.QWizardPage()
+        self.warning_window.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.warning_window.setWindowTitle("Warning")
+        self.warning_window.setFixedWidth(300)
+        self.warning_window.setFixedHeight(100)
+        self.warning_window_layout = QtGui.QGridLayout()
+        self.warning_window.setLayout(self.warning_window_layout)
+
+        self.warning_label = QtGui.QLabel(self.warning_window)
+        self.warning_label.setGeometry(QtCore.QRect(10, 0, 280, 50))
+        self.warning_label.setText("This has no effect on your building" +
+                                   " parameters, its just \n" +
+                                   "general information.")
+        self.warning_window_save_button = QtGui.QPushButton(
+            self.warning_window)
+        self.warning_window_save_button.setText("Ok")
+        self.warning_window_save_button.setGeometry(
+            QtCore.QRect(0, 60, 145, 25))
+        self.connect(self.warning_window_save_button, SIGNAL("clicked()"),
+                     self.warning_window, QtCore.SLOT("close()"))
+        self.connect(self.warning_window_save_button, SIGNAL("clicked()"),
+                     self.click_update_building)
+        self.connect(self.warning_window_save_button, SIGNAL("clicked()"),
+                     self.display_current_building)
+        self.warning_window_cancel_button = QtGui.QPushButton(
+            self.warning_window)
+        self.warning_window_cancel_button.setText("Cancel")
+        self.warning_window_cancel_button.setGeometry(
+            QtCore.QRect(155, 60, 145, 25))
+        self.connect(self.warning_window_cancel_button, SIGNAL("clicked()"),
+                     self.warning_window, QtCore.SLOT("close()"))
+        self.connect(self.warning_window_cancel_button, SIGNAL("clicked()"),
+                     self.display_current_building)
+
+        if isinstance(self.current_building, NonResidential) or \
+           isinstance(self.current_building, Residential):
+            self.warning_window_save_button.setGeometry(
+                    QtCore.QRect(0, 60, 100, 25))
+            self.warning_window_cancel_button.setGeometry(
+                    QtCore.QRect(100, 60, 100, 25))
+            self.warning_window_update_button = QtGui.QPushButton(
+                self.warning_window)
+            self.warning_window_update_button.setText("Update Archetype")
+            self.warning_window_update_button.setGeometry(
+                QtCore.QRect(200, 60, 100, 25))
+            self.connect(self.warning_window_update_button,
+                         SIGNAL("clicked()"),
+                         self.warning_window, QtCore.SLOT("close()"))            
+            self.connect(self.warning_window_update_button,
+                         SIGNAL("clicked()"),
+                         self.click_update_building)
+                                            
+        self.warning_window.setWindowModality(Qt.ApplicationModal)
+        self.warning_window.show()
+        
     def show_element_build_ui(self, item):
         '''Displays attributes of a selected element
 
@@ -4758,6 +4840,29 @@ class MainUI(QDialog):
             self.file_path = self.export_save_template_lineedit.text()
         else:
             self.export_save_template_lineedit.setText(self.file_path)
+            
+    def click_update_building(self):
+        ''' Updates a existing building 
+            
+        '''
+        sender = self.sender()
+        if(sender.text() == self.warning_window_save_button.text()):
+            update_archtertype = False
+        elif(sender.text() == self.warning_window_update_button.text()):
+            update_archtertype = True   
+            
+        self.project = Controller.click_update_building_button(
+                        self.project,
+                        self.current_building,
+                        str(self.side_bar_id_line_edit.text()),
+                        str(self.side_bar_construction_year_line_edit.text()),
+                        float(self.side_bar_number_of_floors_line_edit.text()),
+                        float(self.side_bar_height_of_floors_line_edit.text()),
+                        float(self.side_bar_net_leased_area_line_edit.text()),
+                        str(self.side_bar_street_line_edit.text()),
+                        str(self.side_bar_location_line_edit.text()),
+                        update_archtertype)
+        self.display_current_building()
 
     def switch_building(self):
         '''Handles the buildings combobox
@@ -4939,6 +5044,63 @@ class MainUI(QDialog):
                                       u"You need to specify a building first.")
         else:
             self.generate_zone_ui()
+
+    def warning_delete_building(self):
+        '''Warning message
+
+        Warning message, which checks if user really want to delete a building.
+        '''
+
+        message_box = QtGui.QMessageBox()
+        message_box.setWindowIcon(self.teaser_icon)
+        message_box.setWindowTitle("Warning")
+        message_box.setText("Are you really want to detele it?")
+
+        message_box.addButton(QtGui.QPushButton('Delete'),
+                              QtGui.QMessageBox.YesRole)
+        message_box.addButton(QtGui.QPushButton('Cancel'),
+                              QtGui.QMessageBox.RejectRole)
+        message_box.buttonClicked.connect(self.delete_building_message_box)
+        message_box.exec_()
+
+    def delete_building_message_box(self, button):
+        '''checks if the delete button is pressed if it is deletes selected
+        building'''
+
+        if button.text() == "Delete":
+            self.delete_building()
+
+    def delete_building(self):
+        '''Checks if a building exists, if it does the currently
+        selected building is deleted from the Project.
+        '''
+
+        if (self.current_building == 0):
+            QtGui.QMessageBox.warning(self, u"No building error!",
+                                      u"You need to specify a building first.")
+        else:
+                for building in self.project.buildings:
+                    if building.internal_id == self.current_building.internal_id:
+                        ind = self.project.buildings.index(building)
+                self.project.buildings.pop(ind)
+                self.current_building = 0
+                self.current_zone = 0
+                self.current_element = 0
+                self.current_layer = 0
+                self.zone_model.clear()
+                self.outer_elements_model.clear()
+                self.element_model.clear()
+                self.layer_model.clear()
+                self.buildings_combo_box_model.removeColumn(ind+1)
+                self.side_bar_buildings_combo_box.removeItem(ind)
+                self.side_bar_construction_year_line_edit.clear()
+                self.side_bar_height_of_floors_line_edit.clear()
+                self.side_bar_id_line_edit.clear()
+                self.side_bar_location_line_edit.clear()
+                self.side_bar_net_leased_area_line_edit.clear()
+                self.side_bar_number_of_floors_line_edit.clear()
+                self.side_bar_street_line_edit.clear()
+                self.display_current_building()
 
     def delete_thermal_zone(self):
         '''Deletes a thermal zone
@@ -5407,7 +5569,6 @@ class MainUI(QDialog):
             palette.setColor(QtGui.QPalette.Foreground, QtCore.Qt.black)
         qObject.setPalette(palette)
         return qObject
-
 
 class WizardPage(QtGui.QWizardPage):
     '''WizardPage class
