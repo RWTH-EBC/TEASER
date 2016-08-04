@@ -640,7 +640,7 @@ class Controller():
 
     @classmethod
     def create_element(self, type_of_element, constr_type, building_age_group,
-                       inner_con, outer_con, inner_rad, outer_rad):
+                       inner_con, outer_con, inner_rad, outer_rad, layer_set):
 
         if type_of_element == "Outer Wall":
             element = OuterWall()
@@ -651,6 +651,7 @@ class Controller():
             element.outer_convection = inner_rad
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
 
         elif type_of_element == "Inner Wall":
             element = InnerWall()
@@ -661,6 +662,7 @@ class Controller():
             element.outer_convection = inner_rad
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
 
         elif type_of_element == "Window":
             element = Window()
@@ -671,6 +673,7 @@ class Controller():
             element.outer_convection = inner_rad
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
 
         elif type_of_element == "GroundFloor":
             element = GroundFloor()
@@ -681,6 +684,7 @@ class Controller():
             element.outer_convection = inner_rad
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
 
         elif type_of_element == "Ceiling":
             element = Ceiling()
@@ -691,6 +695,7 @@ class Controller():
             element.outer_convection = inner_rad
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
 
         elif type_of_element == "Rooftop":
             element = Rooftop()
@@ -701,6 +706,7 @@ class Controller():
             element.outer_convection = inner_rad
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
 
         elif type_of_element == "Floor":
             element = Floor()
@@ -711,5 +717,6 @@ class Controller():
             element.outer_convection = inner_rad
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
 
         return element

@@ -2719,11 +2719,14 @@ class MainUI(QDialog):
             self.generate_new_xml_ui_inner_radiation_line_edit.text())
         outer_rad = float(
             self.generate_new_xml_ui_outer_radiation_line_edit.text())
+        layer_set = self.xml_layer_list
 
         element = Controller.create_element(type_of_element, constr_type,
                                             building_age_group, inner_con,
-                                            outer_con, inner_rad, outer_rad)
+                                            outer_con, inner_rad, outer_rad,
+                                            layer_set)
         be_output.save_type_element(element, prefix_path, suffix_path)
+        os.system("explorer " + path )
 
     def clear_input_values_set_all_constr(self):
         '''Clears layer values
