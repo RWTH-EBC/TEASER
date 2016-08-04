@@ -893,8 +893,8 @@ class MainUI(QDialog):
             utilitis.get_full_path("GUI/GUIImages/EditBuilding.png")),
             self.ribbon_widget)
         self.delete_building_button.setGeometry(QtCore.QRect(350, 5, 70, 70))
-        #self.delete_building_button.clicked.connect(self.edit_building)
-        self.delete_building_button.clicked.connect(self.delete_building)
+        self.delete_building_button.clicked.connect(
+            self.warning_delete_building)
         self.delete_building_button.setToolTip(
             "Switches to edit-mode. Allows modification of general"
             "building values.")
@@ -5044,6 +5044,31 @@ class MainUI(QDialog):
                                       u"You need to specify a building first.")
         else:
             self.generate_zone_ui()
+
+    def warning_delete_building(self):
+        '''Warning message
+
+        Warning message, which checks if user really want to delete a building.
+        '''
+
+        message_box = QtGui.QMessageBox()
+        message_box.setWindowIcon(self.teaser_icon)
+        message_box.setWindowTitle("Warning")
+        message_box.setText("Are you really want to detele it?")
+
+        message_box.addButton(QtGui.QPushButton('Delete'),
+                              QtGui.QMessageBox.YesRole)
+        message_box.addButton(QtGui.QPushButton('Cancel'),
+                              QtGui.QMessageBox.RejectRole)
+        message_box.buttonClicked.connect(self.delete_building_message_box)
+        message_box.exec_()
+
+    def delete_building_message_box(self, button):
+        '''checks if the delete button is pressed if it is deletes selected
+        building'''
+
+        if button.text() == "Delete":
+            self.delete_building()
 
     def delete_building(self):
         '''Checks if a building exists, if it does the currently
