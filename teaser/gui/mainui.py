@@ -3032,11 +3032,11 @@ class MainUI(QDialog):
             parent = None
             position = int(self.new_layer_position_combobox.currentText())
             material = self.new_layer_material_combobox.currentText()
-
             self.xml_layer_list.insert(
                 position, Controller.click_add_new_layer(
                                     parent, position, thick, material, dens,
                                     therm, heat, solar, ir, trans))
+            self.xml_layer_list[position].id = position + 1
 
     def change_zone_values_ui(self, item):
         '''Displays attributes of a selected zone
