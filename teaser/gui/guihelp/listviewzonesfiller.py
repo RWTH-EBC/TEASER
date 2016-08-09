@@ -17,7 +17,7 @@ class ListViewZonesFiller(QItemDelegate):
 
 
     def sizeHint(self, option, index): 
-        return QSize(self.height, self.weight)
+        return QSize(self.weight ,self.height)
 
     def paint(self, painter, option, index):
         painter.save()

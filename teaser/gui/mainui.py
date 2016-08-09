@@ -1555,8 +1555,8 @@ class MainUI(QDialog):
         self.create_new_xml_ui_groupbox.setVisible(False)
 
     def set_size_lVZF(self):
-        self.lVZF.height = 170
-        self.lVZF.weight = 45
+        self.lVZF.height = 45
+        self.lVZF.weight = 170
 
     def create_xml_ui(self):
         '''New element window
@@ -1686,7 +1686,7 @@ class MainUI(QDialog):
             QtGui.QAbstractItemView.NoEditTriggers)
         self.generate_new_xml_ui_material_list_view.doubleClicked.connect(
             self.show_layer_build_ui)
-
+        
         self.generate_new_xml_save_cancel_layout = QtGui.QGridLayout()
         self.generate_new_xml_save_cancel_layout_GroupBox = QtGui.QGroupBox()
         self.generate_new_xml_save_cancel_layout_GroupBox.setLayout(
@@ -1726,6 +1726,7 @@ class MainUI(QDialog):
             QtGui.QAbstractItemView.NoEditTriggers)
         #self.xml_ui_wall_list_view.doubleClicked.connect(
         #    self.show_layer_build_ui)
+        self.lVZF.height = 100
 
         self.element_model_update_xml.clear()
         for wall in self.xml_element_list:
