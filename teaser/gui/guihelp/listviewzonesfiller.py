@@ -12,9 +12,11 @@ class ListViewZonesFiller(QItemDelegate):
         # Set Color and font style
         self.font = QFont("Helvetica", 9)  # , QFont.Bold
         self.pencil = QPen(QColor(Qt.black))
+        self.height = 170
+        self.weight = 40
 
     def sizeHint(self, option, index): 
-        return QSize(170, 45)        
+        return QSize(self.height, self.weight)
 
     def paint(self, painter, option, index):
         painter.save()
