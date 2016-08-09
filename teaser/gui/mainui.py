@@ -1554,6 +1554,10 @@ class MainUI(QDialog):
         self.xml_ui_modify_groupbox.setVisible(True)
         self.create_new_xml_ui_groupbox.setVisible(False)
 
+    def set_size_lVZF(self):
+        self.lVZF.height = 170
+        self.lVZF.weight = 45
+
     def create_xml_ui(self):
         '''New element window
 
@@ -1572,6 +1576,8 @@ class MainUI(QDialog):
         self.connect(self.create_new_xml_ui_page, SIGNAL("destroyed()"),
                      lambda check_window="Update XML":
                      self.delete_elements_in_lists(check_window))
+        self.connect(self.create_new_xml_ui_page, SIGNAL("destroyed()"),
+                     self.set_size_lVZF)
         self.generate_new_xml_window_layout = QtGui.QGridLayout()
         self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"Values")
         self.create_new_xml_ui_groupbox.setLayout(
@@ -1721,7 +1727,6 @@ class MainUI(QDialog):
             self.element_model_update_xml)
         self.xml_ui_wall_list_view.setItemDelegate(
             self.lVZF)
-
         self.xml_ui_wall_list_view.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
         #self.xml_ui_wall_list_view.doubleClicked.connect(
@@ -1732,48 +1737,66 @@ class MainUI(QDialog):
             type_of_wall = ""
             if type(wall).__name__ == "OuterWallType":
                 type_of_wall = "OuterWall"
-                print(wall.outer_convection)
-                print(wall.outer_radiation)
             elif type(wall).__name__ == "InnerWallType":
                 type_of_wall = "InnerWall"
             elif type(wall).__name__ == "RooftopType":
                 type_of_wall = "Rooftop"
-                print(wall.outer_convection)
-                print(wall.outer_radiation)
             elif type(wall).__name__ == "GroundFloorType":
                 type_of_wall = "GroundFloor"
             elif type(wall).__name__ == "WindowType":
                 type_of_wall = "Window"
-                wall.g_value
-                wall.a_conv
-                wall.shading_g_total
-                wall.shading_max_irr
             elif type(wall).__name__ == "CeilingType":
                 type_of_wall = "Ceiling"
             elif type(wall).__name__ == "FloorType":
                 type_of_wall = "Floor"
 
-            print(wall.construction_type)
-            print(wall.year_of_construction)
-            print(wall.building_age_group)
-            print(wall.inner_convection)
-            print(wall.inner_radiation)
+            #print(wall.construction_type)
+            #print(wall.year_of_construction)
+            #print(wall.building_age_group)
+            #print(wall.inner_convection)
+            #print(wall.inner_radiation)
             #print(wall.outer_convection)
             #print(wall.outer_radiation)
-            for wall1 in wall.Layers.layer:
-                print(wall1)
-            print(wall.Layers.layer)
+            #for wall1 in wall.Layers.layer:
+            #    print(wall1)
+            #print(wall.Layers.layer)
             #print(inspect.getmembers(wall.Layers))
-            item = TrackableItem(
-                "Type:\t".expandtabs(8) + type_of_wall +
-                "\nconstruction_type:\t".expandtabs(11) + str(wall.construction_type) +
-                "\nyear_of_construction:\t".expandtabs(11) + str(wall.year_of_construction) +
-                "\nbuilding_age_group:\t".expandtabs(11) + str(wall.building_age_group) +
-                "\ninner_convection:\t".expandtabs(11) + str(wall.inner_convection) +
-                "\ninner_radiation:\t".expandtabs(11) + str(wall.inner_radiation) +
-                "\nouter_convection:\t".expandtabs(11) + str(wall.outer_convection) +
-                "\nouter_radiation:\t".expandtabs(11) + str(wall.outer_radiation), 0)
-            self.element_model_update_xml.appendRow(item)
+            if type_of_wall == "OuterWall": 
+                # or "GroundFloor" or "Rooftop" :
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + type_of_wall +
+                    "\nconstruction_type:\t".expandtabs(11) + str(wall.construction_type) +
+                    "\nyear_of_construction:\t".expandtabs(11) + str(wall.year_of_construction) +
+                    "\nbuilding_age_group:\t".expandtabs(11) + str(wall.building_age_group) +
+                    "\ninner_convection:\t".expandtabs(11) + str(wall.inner_convection) + "\t".expandtabs(10) +
+                    "inner_radiation:\t".expandtabs(11) + str(wall.inner_radiation) + "\t".expandtabs(10) +
+                    "\nouter_convection:\t".expandtabs(11) + str(wall.outer_convection) + "\t".expandtabs(10)+
+                    "outer_radiation:\t".expandtabs(11) + str(wall.outer_radiation), 0)
+                self.element_model_update_xml.appendRow(item)
+            elif type_of_wall == "Floor" or "Ceiling" or "InnerWall":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + type_of_wall +
+                    "\nconstruction_type:\t".expandtabs(11) + str(wall.construction_type) +
+                    "\nyear_of_construction:\t".expandtabs(11) + str(wall.year_of_construction) +
+                    "\nbuilding_age_group:\t".expandtabs(11) + str(wall.building_age_group) +
+                    "\ninner_convection:\t".expandtabs(11) + str(wall.inner_convection) + "\t".expandtabs(10) +
+                    "inner_radiation:\t".expandtabs(11) + str(wall.inner_radiation) + "\t".expandtabs(10), 0)
+                self.element_model_update_xml.appendRow(item)
+            elif type_of_wall == "Window":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + type_of_wall +
+                    "\nconstruction_type:\t".expandtabs(11) + str(wall.construction_type) +
+                    "\nyear_of_construction:\t".expandtabs(11) + str(wall.year_of_construction) +
+                    "\nbuilding_age_group:\t".expandtabs(11) + str(wall.building_age_group) +
+                    "\ninner_convection:\t".expandtabs(11) + str(wall.inner_convection) + "\t".expandtabs(10) +
+                    "inner_radiation:\t".expandtabs(11) + str(wall.inner_radiation) + "\t".expandtabs(10) +
+                    "\nouter_convection:\t".expandtabs(11) + str(wall.outer_convection) + "\t".expandtabs(10)+
+                    "\outer_radiation:\t".expandtabs(11) + str(wall.outer_radiation) + "\t".expandtabs(10)+
+                    "\g_value:\t".expandtabs(11) + str(wall.g_value) + "\t".expandtabs(10)+
+                    "\a_conv:\t".expandtabs(11) + str(wall.a_conv) + "\t".expandtabs(10)+
+                    "\shading_g_total:\t".expandtabs(11) + str(wall.shading_g_total) + "\t".expandtabs(10)+
+                    "shading_max_irr:\t".expandtabs(11) + str(wall.shading_max_irr), 0)
+                self.element_model_update_xml.appendRow(item)
 
         self.generate_new_xml_options_layout.addWidget(
             self.radio_button_xml_add, 1, 0)
