@@ -1628,40 +1628,35 @@ class MainUI(QDialog):
         self.generate_new_xml_ui_constr_type_combobox.addItem("Light")
         self.generate_new_xml_ui_age_group_label = QtGui.QLabel(
             "Building age group: ")
-        self.generate_new_xml_ui_age_group_left_combobox = QtGui.QComboBox()
-        self.generate_new_xml_ui_age_group_left_combobox.setObjectName(
-            "generate_new_xml_ui_age_group_left_combobox")
+        self.generate_new_xml_ui_age_group_left_line_edit = QtGui.QLineEdit()
+        self.generate_new_xml_ui_age_group_left_line_edit.setObjectName(
+            "generate_new_xml_ui_age_group_left_line_edit")
         self.generate_new_xml_ui_to_label = QtGui.QLabel("to: ")
-        self.generate_new_xml_ui_age_group_left_combobox.setMinimumWidth(100)
-        self.generate_new_xml_ui_age_group_right_combobox = QtGui.QComboBox()
-        self.generate_new_xml_ui_age_group_right_combobox.setObjectName(
-            "generate_new_xml_ui_age_group_right_combobox")
-        self.generate_new_xml_ui_age_group_right_combobox.setMinimumWidth(100)
-        for i in xrange(1950, 2020):
-            self.generate_new_xml_ui_age_group_left_combobox.addItem(
-                str(i), userData=None)
-            self.generate_new_xml_ui_age_group_right_combobox.addItem(
-                str(i), userData=None)
+        self.generate_new_xml_ui_age_group_left_line_edit.setMaximumWidth(100)
+        self.generate_new_xml_ui_age_group_right_line_edit = QtGui.QLineEdit()
+        self.generate_new_xml_ui_age_group_right_line_edit.setObjectName(
+            "generate_new_xml_ui_age_group_right__line_edit ")
+        self.generate_new_xml_ui_age_group_right_line_edit.setMaximumWidth(100)
         self.generate_new_xml_ui_age_group_line_edit = QtGui.QLineEdit()
         self.generate_new_xml_ui_age_group_line_edit.setObjectName(
             "generate_new_xml_ui_age_group_line_edit")
         self.generate_new_xml_ui_inner_convection_label = QtGui.QLabel(
-            "inner conv: ")
+            "Inner convection: ")
         self.generate_new_xml_ui_inner_convection_line_edit = QtGui.QLineEdit()
         self.generate_new_xml_ui_inner_convection_line_edit.setObjectName(
             "generate_new_xml_ui_inner_convection_line_edit")
         self.generate_new_xml_ui_outer_convection_label = QtGui.QLabel(
-            "outer conv: ")
+            "Outer convection: ")
         self.generate_new_xml_ui_outer_convection_line_edit = QtGui.QLineEdit()
         self.generate_new_xml_ui_outer_convection_line_edit.setObjectName(
             "generate_new_xml_ui_outer_convection_line_edit")
         self.generate_new_xml_ui_inner_radiation_label = QtGui.QLabel(
-            "inner rad ")
+            "Inner radiation ")
         self.generate_new_xml_ui_inner_radiation_line_edit = QtGui.QLineEdit()
         self.generate_new_xml_ui_inner_radiation_line_edit.setObjectName(
             "generate_new_xml_ui_inner_radiation_line_edit")
         self.generate_new_xml_ui_outer_radiation_label = QtGui.QLabel(
-            "outer rad: ")
+            "Outer radiation: ")
         self.generate_new_xml_ui_outer_radiation_line_edit = QtGui.QLineEdit()
         self.generate_new_xml_ui_outer_radiation_line_edit.setObjectName(
             "generate_new_xml_ui_outer_radiation_line_edit")
@@ -1822,12 +1817,12 @@ class MainUI(QDialog):
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_age_group_label, 5, 0)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_age_group_left_combobox, 5, 1,
+            self.generate_new_xml_ui_age_group_left_line_edit, 5, 1,
             Qt.AlignLeft)
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_to_label, 5, 1, Qt.AlignCenter)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_age_group_right_combobox, 5, 1,
+            self.generate_new_xml_ui_age_group_right_line_edit, 5, 1,
             Qt.AlignRight)
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_inner_convection_label, 6, 0)
@@ -2817,9 +2812,9 @@ class MainUI(QDialog):
         constr_type = \
             self.generate_new_xml_ui_constr_type_combobox.currentText()
         building_from = float(
-            self.generate_new_xml_ui_age_group_left_combobox.currentText())
+            self.generate_new_xml_ui_age_group_left_line_edit.text())
         building_to = float(
-            self.generate_new_xml_ui_age_group_right_combobox.currentText())
+            self.generate_new_xml_ui_age_group_right_line_edit.text())
         building_age_group = [building_from, building_to]
         inner_con = float(
             self.generate_new_xml_ui_inner_convection_line_edit.text())
@@ -3137,11 +3132,11 @@ class MainUI(QDialog):
             parent = None
             position = int(self.new_layer_position_combobox.currentText())
             material = self.new_layer_material_combobox.currentText()
-
             self.xml_layer_list.insert(
                 position, Controller.click_add_new_layer(
                                     parent, position, thick, material, dens,
                                     therm, heat, solar, ir, trans))
+            self.xml_layer_list[position].id = position + 1
 
     def change_zone_values_ui(self, item):
         '''Displays attributes of a selected zone
