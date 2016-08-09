@@ -105,6 +105,7 @@ class MainUI(QDialog):
         self.element_layer_model_set_all_constr = QStandardItemModel()
         self.element_layer_model_update_xml = QStandardItemModel()
         self.element_model_update_xml = QStandardItemModel()
+        self.wall_layer_model = QStandardItemModel()
         self.project = Project()
         self.project.modelica_info = ModelicaInfo()
         self.guiinfo = GUIInfo()
@@ -1554,9 +1555,12 @@ class MainUI(QDialog):
         self.xml_ui_modify_groupbox.setVisible(True)
         self.create_new_xml_ui_groupbox.setVisible(False)
 
-    def set_size_lVZF(self):
+    def set_default_size_lVZF(self):
         self.lVZF.height = 45
         self.lVZF.weight = 170
+    
+    def set_xml_size_lVZF(self):
+        self.lVZF.height = 100
 
     def create_xml_ui(self):
         '''New element window
@@ -1577,7 +1581,7 @@ class MainUI(QDialog):
                      lambda check_window="Update XML":
                      self.delete_elements_in_lists(check_window))
         self.connect(self.create_new_xml_ui_page, SIGNAL("destroyed()"),
-                     self.set_size_lVZF)
+                     self.set_default_size_lVZF)
         self.generate_new_xml_window_layout = QtGui.QGridLayout()
         self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"Values")
         self.create_new_xml_ui_groupbox.setLayout(
@@ -1686,7 +1690,7 @@ class MainUI(QDialog):
             QtGui.QAbstractItemView.NoEditTriggers)
         self.generate_new_xml_ui_material_list_view.doubleClicked.connect(
             self.show_layer_build_ui)
-        
+
         self.generate_new_xml_save_cancel_layout = QtGui.QGridLayout()
         self.generate_new_xml_save_cancel_layout_GroupBox = QtGui.QGroupBox()
         self.generate_new_xml_save_cancel_layout_GroupBox.setLayout(
@@ -1724,11 +1728,12 @@ class MainUI(QDialog):
             self.lVZF)
         self.xml_ui_wall_list_view.setEditTriggers(
             QtGui.QAbstractItemView.NoEditTriggers)
-        #self.xml_ui_wall_list_view.doubleClicked.connect(
-        #    self.show_layer_build_ui)
+        self.xml_ui_wall_list_view.doubleClicked.connect(
+                    self.show_wall_build_ui)
         self.lVZF.height = 100
 
         self.element_model_update_xml.clear()
+        wall_id = 0
         for wall in self.xml_element_list:
             type_of_wall = ""
             if type(wall).__name__ == "OuterWallType":
@@ -1767,7 +1772,7 @@ class MainUI(QDialog):
                     "\ninner_convection:\t".expandtabs(11) + str(wall.inner_convection) + "\t".expandtabs(10) +
                     "inner_radiation:\t".expandtabs(11) + str(wall.inner_radiation) + "\t".expandtabs(10) +
                     "\nouter_convection:\t".expandtabs(11) + str(wall.outer_convection) + "\t".expandtabs(10)+
-                    "outer_radiation:\t".expandtabs(11) + str(wall.outer_radiation), 0)
+                    "outer_radiation:\t".expandtabs(11) + str(wall.outer_radiation), wall_id)
                 self.element_model_update_xml.appendRow(item)
             elif type_of_wall == "Floor" or "Ceiling" or "InnerWall":
                 item = TrackableItem(
@@ -1776,7 +1781,7 @@ class MainUI(QDialog):
                     "\nyear_of_construction:\t".expandtabs(11) + str(wall.year_of_construction) +
                     "\nbuilding_age_group:\t".expandtabs(11) + str(wall.building_age_group) +
                     "\ninner_convection:\t".expandtabs(11) + str(wall.inner_convection) + "\t".expandtabs(10) +
-                    "inner_radiation:\t".expandtabs(11) + str(wall.inner_radiation) + "\t".expandtabs(10), 0)
+                    "inner_radiation:\t".expandtabs(11) + str(wall.inner_radiation) + "\t".expandtabs(10), wall_id)
                 self.element_model_update_xml.appendRow(item)
             elif type_of_wall == "Window":
                 item = TrackableItem(
@@ -1791,8 +1796,9 @@ class MainUI(QDialog):
                     "\g_value:\t".expandtabs(11) + str(wall.g_value) + "\t".expandtabs(10)+
                     "\a_conv:\t".expandtabs(11) + str(wall.a_conv) + "\t".expandtabs(10)+
                     "\shading_g_total:\t".expandtabs(11) + str(wall.shading_g_total) + "\t".expandtabs(10)+
-                    "shading_max_irr:\t".expandtabs(11) + str(wall.shading_max_irr), 0)
+                    "shading_max_irr:\t".expandtabs(11) + str(wall.shading_max_irr), wall_id)
                 self.element_model_update_xml.appendRow(item)
+            wall_id += 1
 
         self.generate_new_xml_options_layout.addWidget(
             self.radio_button_xml_add, 1, 0)
@@ -1867,6 +1873,8 @@ class MainUI(QDialog):
         self.create_new_xml_ui_page.setWindowModality(
             Qt.ApplicationModal)
         self.create_new_xml_ui_page.show()
+
+        self.click_radio_button_modify()
 
     def generate_type_building_ui(self):
         '''New type building window
@@ -4258,6 +4266,225 @@ class MainUI(QDialog):
             self.element_save_cancel_layoutGroupBox)
         self.element_build_ui.setWindowModality(Qt.ApplicationModal)
         self.element_build_ui.show()
+
+    def show_wall_build_ui(self, item):
+        '''Displays attributes of a selected wall
+
+        opens a window to display all attributes of the currently selected
+        wall.
+        '''
+
+        self.wall_build_ui = QtGui.QWizardPage()
+        self.wall_build_ui.setWindowIcon(self.teaser_icon)
+        self.wall_build_ui.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.wall_build_ui.setWindowTitle("Wall Details")
+        self.wall_build_ui.setFixedWidth(450)
+        self.wall_build_ui.setFixedHeight(600)
+        self.wall_build_ui_window_layout = QtGui.QGridLayout()
+        self.wall_build_ui.setLayout(self.wall_build_ui_window_layout)
+        self.connect(self.wall_build_ui, SIGNAL("destroyed()"),
+                     self.set_xml_size_lVZF)
+
+        self.wall_general_layout = QtGui.QGridLayout()
+        self.wall_general_layout_groupBox = QtGui.QGroupBox(
+            "General Wall Values")
+        self.wall_general_layout_groupBox.setLayout(
+            self.wall_general_layout)
+
+        self.wall_save_cancel_layout = QtGui.QGridLayout()
+        self.wall_save_cancel_layoutGroupBox = QtGui.QGroupBox()
+        self.wall_save_cancel_layoutGroupBox.setLayout(
+            self.wall_save_cancel_layout)
+        self.wall_save_cancel_layoutGroupBox.setMaximumHeight(48)
+
+        current_item_from_index = self.element_model_update_xml.itemFromIndex(
+                                       item)
+        for wall in self.xml_element_list:
+                if self.xml_element_list.index(wall) == \
+                   current_item_from_index.internal_id:
+                        current_wall = wall
+                        break
+
+        self.wall_type_label = QtGui.QLabel("Type")
+        self.wall_type_line_edit = QtGui.QLineEdit()
+        if "OuterWall" in current_item_from_index.text():
+            self.wall_type_line_edit.setText("OuterWall")
+        elif "Rooftop" in current_item_from_index.text():
+            self.wall_type_line_edit.setText("OuterWall")
+        elif "Window" in current_item_from_index.text():
+            self.wall_type_line_edit.setText("Window")
+        elif "Rooftop" in current_item_from_index.text():
+            self.wall_type_line_edit.setText("Rooftop")
+        elif "GroundFloor" in current_item_from_index.text():
+            self.wall_type_line_edit.setText("GroundFloor")
+        elif "InnerWall" in current_item_from_index.text():
+            self.wall_type_line_edit.setText("InnerWall")
+        elif "Ceiling" in current_item_from_index.text():
+            self.wall_type_line_edit.setText("Ceiling")
+        elif "Floor" in current_item_from_index.text():
+            self.wall_type_line_edit.setText("Floor")
+        self.wall_type_line_edit.setReadOnly(True)
+        self.wall_type_line_edit.setMaximumHeight(24)
+
+        self.wall_construction_type_label = QtGui.QLabel(
+            "Construction Type")
+        self.wall_construction_type_combobox = QtGui.QComboBox()
+        self.wall_construction_type_combobox.setObjectName(
+            _fromUtf8("WallConstructionTypeComboBox"))
+        self.wall_construction_type_combobox.addItem("heavy", userData=None)
+        self.wall_construction_type_combobox.addItem("light", userData=None)
+
+        self.wall_year_of_construction_label = QtGui.QLabel(
+            "Year Of Construction")
+        self.wall_year_of_construction_textbox = QtGui.QLineEdit()
+        self.wall_year_of_construction_textbox.setObjectName(
+            _fromUtf8("WallYearOfConstructionTextBox"))
+        self.wall_year_of_construction_textbox.setText(str(
+             current_wall.year_of_construction))
+
+        self.wall_Building_age_group_label = QtGui.QLabel(
+             "Building_age_group")
+        self.wall_Building_age_group_textbox = QtGui.QLineEdit()
+        self.wall_Building_age_group_textbox.setObjectName(
+            _fromUtf8("building_age_group_text_box"))
+        building_age_group_str = ""
+        for value in current_wall.building_age_group:
+            building_age_group_str += str(value) + " "
+        self.wall_Building_age_group_textbox.setText(building_age_group_str)
+
+        self.wall_inner_convection_label = QtGui.QLabel("Inner Convection")
+        self.wall_inner_convection_textbox = QtGui.QLineEdit()
+        self.wall_inner_convection_textbox.setObjectName(
+            _fromUtf8("WallInnerConvectionTextBox"))
+        self.wall_inner_convection_textbox.setText(str(
+            current_wall.inner_convection))
+
+        self.wall_inner_radiation_label = QtGui.QLabel("Inner Radiation")
+        self.wall_inner_radiation_textbox = QtGui.QLineEdit()
+        self.wall_inner_radiation_textbox.setObjectName(
+            _fromUtf8("WallInnerRadiationTextBox"))
+        self.wall_inner_radiation_textbox.setText(str(
+            current_wall.inner_radiation))
+
+        self.wall_outer_convection_label = QtGui.QLabel(
+                "Outer Convection")
+        self.wall_outer_convection_textbox = QtGui.QLineEdit()
+        self.wall_outer_convection_textbox.setObjectName(
+            _fromUtf8("WallOuterConvectionTextBox"))
+
+        self.wall_outer_radiation_label = QtGui.QLabel(
+            "Outer Radiation")
+        self.wall_outer_radiation_textbox = QtGui.QLineEdit()
+        self.wall_outer_radiation_textbox.setObjectName(
+            _fromUtf8("WallOuterRadiationTextBox"))
+
+        if self.wall_type_line_edit.text() != \
+                "InnerWall" and "Floor" and "Ceiling":
+            self.wall_outer_convection_textbox.setText(str(
+                current_wall.outer_convection))
+            self.wall_outer_radiation_textbox.setText(str(
+                current_wall.outer_radiation))
+
+        self.wall_add_material_button = QtGui.QPushButton()
+        self.wall_add_material_button.setText("Add Layer")
+        # self.connect(self.wall_add_material_button, SIGNAL("clicked()"),
+
+        self.wall_delete_material_button = QtGui.QPushButton()
+        self.wall_delete_material_button.setText("Delete Layer")
+        # self.connect(self.wall_delete_material_button, SIGNAL("clicked()"),
+        #             self.delete_selected_layer)
+
+        self.wall_layer_model.clear()
+        for wall in self.xml_element_list:
+                if self.xml_element_list.index(wall) == \
+                   current_item_from_index.internal_id:
+                    for layer in wall.Layers.layer:
+                        item = TrackableItem("Material:\t".expandtabs(8) +
+                                             str(layer.Material.name) +
+                                             "\nThickness:\t".expandtabs(14) +
+                                             str(layer.thickness) +
+                                             "\t", layer.id)
+                        self.wall_layer_model.appendRow(item)
+
+        self.wall_material_list_view = QtGui.QListView()
+        self.wall_material_list_view.setGeometry(
+            QtCore.QRect(10, 200, 170, 300))
+        self.wall_material_list_view.setObjectName(
+            _fromUtf8("WallMaterialsListView"))
+        self.wall_material_list_view.setModel(self.wall_layer_model)
+        self.wall_material_list_view.setItemDelegate(self.lVZF)
+        self.wall_material_list_view.setEditTriggers(
+            QtGui.QAbstractItemView.NoEditTriggers)
+        self.lVZF.height = 45
+        # self.wall_material_list_view.doubleClicked.connect(
+        #    self.show_layer_build_ui)
+
+        self.wall_material_list_label = QtGui.QLabel()
+        self.wall_material_list_label.setGeometry(
+            QtCore.QRect(175, 200, 25, 300))
+        self.wall_material_list_label.setText("From inner\n\n\n\n\n\n\n\n"
+                                              "To Outer")
+        self.wall_save_button = QtGui.QPushButton()
+        self.wall_save_button.setText("Save")
+
+        self.wall_cancel_button = QtGui.QPushButton()
+        self.wall_cancel_button.setText("Cancel")
+        self.connect(self.wall_cancel_button, SIGNAL("clicked()"),
+                     self.wall_build_ui, QtCore.SLOT("close()"))
+
+        self.wall_general_layout.addWidget(
+            self.wall_type_label, 1, 0)
+        self.wall_general_layout.addWidget(
+            self.wall_type_line_edit, 1, 1)
+        self.wall_general_layout.addWidget(
+            self.wall_construction_type_label, 2, 0)
+        self.wall_general_layout.addWidget(
+            self.wall_construction_type_combobox, 2, 1)
+        self.wall_general_layout.addWidget(
+            self.wall_year_of_construction_label, 3, 0)
+        self.wall_general_layout.addWidget(
+            self.wall_year_of_construction_textbox, 3, 1)
+        self.wall_general_layout.addWidget(
+            self.wall_Building_age_group_label, 4, 0)
+        self.wall_general_layout.addWidget(
+            self.wall_Building_age_group_textbox, 4, 1)
+        self.wall_general_layout.addWidget(
+            self.wall_inner_convection_label, 5, 0)
+        self.wall_general_layout.addWidget(
+            self.wall_inner_convection_textbox, 5, 1)
+        self.wall_general_layout.addWidget(
+            self.wall_inner_radiation_label, 6, 0)
+        self.wall_general_layout.addWidget(
+            self.wall_inner_radiation_textbox, 6, 1)
+        if self.wall_type_line_edit.text() != \
+                "InnerWall" and "Floor" and "Ceiling":
+            self.wall_general_layout.addWidget(
+                self.wall_outer_convection_label, 7, 0)
+            self.wall_general_layout.addWidget(
+                self.wall_outer_convection_textbox, 7, 1)
+            self.wall_general_layout.addWidget(
+                self.wall_outer_radiation_label, 8, 0)
+            self.wall_general_layout.addWidget(
+                self.wall_outer_radiation_textbox, 8, 1)
+        self.wall_general_layout.addWidget(
+            self.wall_add_material_button, 9, 0)
+        self.wall_general_layout.addWidget(
+            self.wall_delete_material_button, 9, 1)
+        self.wall_general_layout.addWidget(
+            self.wall_material_list_view, 10, 0, 10, 3)
+        self.wall_general_layout.addWidget(
+            self.wall_material_list_label, 10, 3, 10, 4)
+        self.wall_save_cancel_layout.addWidget(
+            self.wall_save_button, 0, 0)
+        self.wall_save_cancel_layout.addWidget(
+            self.wall_cancel_button, 0, 1)
+
+        self.wall_build_ui_window_layout.addWidget(
+            self.wall_general_layout_groupBox)
+        self.wall_build_ui_window_layout.addWidget(
+            self.wall_save_cancel_layoutGroupBox)
+        self.wall_build_ui.setWindowModality(Qt.ApplicationModal)
+        self.wall_build_ui.show()
 
     def show_export_window(self):
         '''Displays options of export
