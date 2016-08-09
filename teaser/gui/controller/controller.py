@@ -404,6 +404,40 @@ class Controller():
         return mat_list
 
     @classmethod
+    def get_elements_from_file(self, project):
+        '''
+        Get a list with material from a file.
+
+        project : project()
+            root class
+
+        Returns
+        ----------
+
+        wall_list : list
+            list with filled wall elements from a file
+        '''
+
+        wall_list = []
+        # print(inspect.getmembers(project.data.element_bind)) 
+        for mat in project.data.element_bind.OuterWall:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.InnerWall:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.Rooftop:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.GroundFloor:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.Window:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.Ceiling:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.Floor:
+            wall_list.append(mat)
+
+        return wall_list
+
+    @classmethod
     def switch_zone_type(self, zone_type, project, zone_id):
         '''
         Switch type of a selected zone, with its internal id.

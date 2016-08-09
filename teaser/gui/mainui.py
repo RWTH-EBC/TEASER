@@ -2,27 +2,31 @@
 # created June 2015
 # by TEASER4 Development Team
 
+import inspect
 import os
+import platform
 import sys
+
 from PyQt4 import QtCore, QtGui
 from PyQt4.Qt import QDialog, QStandardItemModel
 from PyQt4.Qt import Qt
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-import matplotlib.pyplot as plt
 from numpy.distutils.pathccompiler import PathScaleCCompiler
+from scipy._lib.six import xrange
+
+import matplotlib.pyplot as plt
+import teaser.data.output.buildingelement_output as be_output
+from teaser.gui.controller.controller import Controller
 from teaser.gui.guihelp.guiinfo import GUIInfo
 from teaser.gui.guihelp.listviewzonesfiller import ListViewZonesFiller
-from teaser.gui.controller.controller import Controller
 from teaser.gui.guihelp.picturebutton import PictureButton
 from teaser.gui.guihelp.trackableitem import TrackableItem
-from teaser.project import Project
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
 import teaser.logic.utilities as utilitis
-import platform
-from scipy._lib.six import xrange
-import teaser.data.output.buildingelement_output as be_output
+from teaser.project import Project
+
 
 try:
     _fromUtf8 = Qt.QString.fromUtf8
@@ -92,6 +96,7 @@ class MainUI(QDialog):
         self.temp_zones = {}
         self.all_constr_layer_list = []
         self.xml_layer_list = []
+        self.xml_element_list = []
         self.zone_model = QStandardItemModel()
         self.outer_elements_model = QStandardItemModel()
         self.element_model = QStandardItemModel()
@@ -99,6 +104,7 @@ class MainUI(QDialog):
         self.element_layer_model = QStandardItemModel()
         self.element_layer_model_set_all_constr = QStandardItemModel()
         self.element_layer_model_update_xml = QStandardItemModel()
+        self.element_model_update_xml = QStandardItemModel()
         self.project = Project()
         self.project.modelica_info = ModelicaInfo()
         self.guiinfo = GUIInfo()
@@ -1539,11 +1545,13 @@ class MainUI(QDialog):
 
     def click_radio_button_add(self):
         self.create_new_xml_ui_groupbox.setVisible(True)
+        self.xml_ui_modify_groupbox.setVisible(False)
 
     def click_radio_button_del(self):
         self.create_new_xml_ui_groupbox.setVisible(False)
 
     def click_radio_button_modify(self):
+        self.xml_ui_modify_groupbox.setVisible(True)
         self.create_new_xml_ui_groupbox.setVisible(False)
 
     def create_xml_ui(self):
@@ -1551,7 +1559,6 @@ class MainUI(QDialog):
 
         opens the window to create a new element.
         '''
-
         self.create_new_xml_ui_page = QtGui.QWizardPage()
         self.create_new_xml_ui_page.setWindowIcon(self.teaser_icon)
         self.create_new_xml_ui_page.setAttribute(
@@ -1569,6 +1576,7 @@ class MainUI(QDialog):
         self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"Values")
         self.create_new_xml_ui_groupbox.setLayout(
             self.generate_new_xml_window_layout)
+        self.xml_element_list = Controller.get_elements_from_file(self.project)
 
         self.generate_new_xml_options_layout = QtGui.QGridLayout()
         self.generate_new_xml_options_groupbox = QtGui.QGroupBox()
@@ -1698,6 +1706,75 @@ class MainUI(QDialog):
             "clicked()"), self.create_new_xml_ui_page,
             QtCore.SLOT("close()"))
 
+        self.xml_window_layout_modify = QtGui.QGridLayout()
+        self.xml_ui_modify_groupbox = QtGui.QGroupBox(u"Values")
+        self.xml_ui_modify_groupbox.setLayout(
+                   self.xml_window_layout_modify)
+        self.xml_ui_modify_groupbox.setVisible(False)
+
+        self.xml_ui_wall_list_view = QtGui.QListView()
+        self.xml_ui_wall_list_view.setGeometry(
+            QtCore.QRect(10, 200, 170, 300))
+        self.xml_ui_wall_list_view.setObjectName(
+            _fromUtf8("XMLElementListView"))
+        self.xml_ui_wall_list_view.setModel(
+            self.element_model_update_xml)
+        self.xml_ui_wall_list_view.setItemDelegate(
+            self.lVZF)
+
+        self.xml_ui_wall_list_view.setEditTriggers(
+            QtGui.QAbstractItemView.NoEditTriggers)
+        #self.xml_ui_wall_list_view.doubleClicked.connect(
+        #    self.show_layer_build_ui)
+
+        self.element_model_update_xml.clear()
+        for wall in self.xml_element_list:
+            type_of_wall = ""
+            if type(wall).__name__ == "OuterWallType":
+                type_of_wall = "OuterWall"
+                print(wall.outer_convection)
+                print(wall.outer_radiation)
+            elif type(wall).__name__ == "InnerWallType":
+                type_of_wall = "InnerWall"
+            elif type(wall).__name__ == "RooftopType":
+                type_of_wall = "Rooftop"
+                print(wall.outer_convection)
+                print(wall.outer_radiation)
+            elif type(wall).__name__ == "GroundFloorType":
+                type_of_wall = "GroundFloor"
+            elif type(wall).__name__ == "WindowType":
+                type_of_wall = "Window"
+                wall.g_value
+                wall.a_conv
+                wall.shading_g_total
+                wall.shading_max_irr
+            elif type(wall).__name__ == "CeilingType":
+                type_of_wall = "Ceiling"
+            elif type(wall).__name__ == "FloorType":
+                type_of_wall = "Floor"
+
+            print(wall.construction_type)
+            print(wall.year_of_construction)
+            print(wall.building_age_group)
+            print(wall.inner_convection)
+            print(wall.inner_radiation)
+            #print(wall.outer_convection)
+            #print(wall.outer_radiation)
+            for wall1 in wall.Layers.layer:
+                print(wall1)
+            print(wall.Layers.layer)
+            #print(inspect.getmembers(wall.Layers))
+            item = TrackableItem(
+                "Type:\t".expandtabs(8) + type_of_wall +
+                "\nconstruction_type:\t".expandtabs(11) + str(wall.construction_type) +
+                "\nyear_of_construction:\t".expandtabs(11) + str(wall.year_of_construction) +
+                "\nbuilding_age_group:\t".expandtabs(11) + str(wall.building_age_group) +
+                "\ninner_convection:\t".expandtabs(11) + str(wall.inner_convection) +
+                "\ninner_radiation:\t".expandtabs(11) + str(wall.inner_radiation) +
+                "\nouter_convection:\t".expandtabs(11) + str(wall.outer_convection) +
+                "\nouter_radiation:\t".expandtabs(11) + str(wall.outer_radiation), 0)
+            self.element_model_update_xml.appendRow(item)
+
         self.generate_new_xml_options_layout.addWidget(
             self.radio_button_xml_add, 1, 0)
         self.generate_new_xml_options_layout.addWidget(
@@ -1752,6 +1829,9 @@ class MainUI(QDialog):
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_material_list_view, 11, 0, 12, 2)
 
+        self.xml_window_layout_modify.addWidget(
+                self.xml_ui_wall_list_view, 1, 0, 2, 2)
+
         self.generate_new_xml_save_cancel_layout.addWidget(
             self.generate_new_xml_ui_save_button, 1, 0)
         self.generate_new_xml_save_cancel_layout.addWidget(
@@ -1761,6 +1841,8 @@ class MainUI(QDialog):
             self.generate_new_xml_options_groupbox, 0, 0)
         self.create_new_xml_ui_layout.addWidget(
             self.create_new_xml_ui_groupbox, 1, 0)
+        self.create_new_xml_ui_layout.addWidget(
+            self.xml_ui_modify_groupbox, 1, 0)
         self.create_new_xml_ui_layout.addWidget(
             self.generate_new_xml_save_cancel_layout_GroupBox, 2, 0)
         self.create_new_xml_ui_page.setWindowModality(
