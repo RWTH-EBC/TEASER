@@ -2833,6 +2833,37 @@ class MainUI(QDialog):
                                             outer_con, inner_rad, outer_rad,
                                             layer_set)
         Controller.add_element_to_xml(element, path)
+        
+    def modify_element_in_xml(self):
+
+        # path = str(self.generate_new_xml_ui_path_line_edit.text())
+        type_of_element = self.wall_type_line_edit.text()
+        if type_of_element == "InnerWall":
+            type_of_element = "Inner Wall"
+        if type_of_element == "OuterWall":
+            type_of_element = "Outer Wall"
+        constr_type = \
+            self.generate_new_xml_ui_constr_type_line_edit.text()
+        building_from = float(
+            self.wall_Building_age_group_textbox_from.text())
+        building_to = float(
+            self.wall_Building_age_group_textbox_to.text())
+        building_age_group = [building_from, building_to]
+        inner_con = float(
+            self.wall_inner_convection_textbox.text())
+        outer_con = float(
+            self.wall_outer_convection_textbox.text())
+        inner_rad = float(
+            self.wall_inner_radiation_textbox.text())
+        outer_rad = float(
+            self.wall_outer_radiation_textbox.text())
+        layer_set = self.current_wall_layer
+        layer_set = []
+        element = Controller.create_element(type_of_element, constr_type,
+                                            building_age_group, inner_con,
+                                            outer_con, inner_rad, outer_rad,
+                                            layer_set)
+        Controller.modify_element_in_xml(element, path = None)
 
     def clear_input_values_set_all_constr(self):
         '''Clears layer values
@@ -4444,6 +4475,10 @@ class MainUI(QDialog):
                                               "To Outer")
         self.wall_save_button = QtGui.QPushButton()
         self.wall_save_button.setText("Save")
+        self.connect(self.wall_save_button, SIGNAL("clicked()"),
+                     self.modify_element_in_xml)
+        self.connect(self.wall_save_button, SIGNAL("clicked()"),
+                     self.wall_build_ui, QtCore.SLOT("close()"))
 
         self.wall_cancel_button = QtGui.QPushButton()
         self.wall_cancel_button.setText("Cancel")

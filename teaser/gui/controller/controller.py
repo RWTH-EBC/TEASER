@@ -760,4 +760,10 @@ class Controller():
     def add_element_to_xml(self, element, path):
         prefix_path, suffix_path = utilitis.split_path(path)
         element.save_type_element(prefix_path, suffix_path)
+        
+    @classmethod
+    def modify_element_in_xml(self, element, path):
+        'dummy'
+        print("dummy")
+        
             
