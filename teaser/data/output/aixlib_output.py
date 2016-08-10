@@ -47,7 +47,7 @@ def export_aixlib(prj,
     assert zone_model in ["None", "ThermalZoneEquipped", "ThermalZone"]
     assert corG in [None, True, False]
 
-    uses = ['Modelica(version = "3.2.1")',
+    uses = ['Modelica(version = "3.2.2")',
             "AixLib(version=\"0.3.1\")"]
 
     # use the same zone templates for all exports
