@@ -1551,14 +1551,15 @@ class MainUI(QDialog):
 
     def click_radio_button_add(self):
         self.create_new_xml_ui_groupbox.setVisible(True)
+        self.generate_new_xml_save_cancel_layout_GroupBox.setVisible(True)
         self.xml_ui_modify_groupbox.setVisible(False)
-
-    def click_radio_button_del(self):
-        self.create_new_xml_ui_groupbox.setVisible(False)
+        self.modify_xml_save_cancel_layout_groupBox.setVisible(False)
 
     def click_radio_button_modify(self):
         self.xml_ui_modify_groupbox.setVisible(True)
+        self.modify_xml_save_cancel_layout_groupBox.setVisible(True)
         self.create_new_xml_ui_groupbox.setVisible(False)
+        self.generate_new_xml_save_cancel_layout_GroupBox.setVisible(False)
 
     def create_xml_ui(self):
         '''New element window
@@ -1594,7 +1595,7 @@ class MainUI(QDialog):
         self.radio_button_xml_add.toggled.connect(self.click_radio_button_add)
         self.radio_button_xml_delete = QtGui.QRadioButton(u"delete")
         self.radio_button_xml_delete.toggled.connect(
-            self.click_radio_button_del)
+            self.click_radio_button_modify)
         self.radio_button_xml_modify = QtGui.QRadioButton(u"Modify")
         self.radio_button_xml_modify.toggled.connect(
             self.click_radio_button_modify)
@@ -1770,6 +1771,26 @@ class MainUI(QDialog):
                     str(wall.building_age_group), wall_id)
                 self.element_model_update_xml.appendRow(item)
             wall_id += 1
+            
+        self.modify_xml_save_cancel_layout = QtGui.QGridLayout()
+        self.modify_xml_save_cancel_layout_groupBox = QtGui.QGroupBox()
+        self.modify_xml_save_cancel_layout_groupBox.setLayout(
+            self.modify_xml_save_cancel_layout)
+        self.modify_xml_save_cancel_layout_groupBox.setMaximumHeight(48)
+
+        self.modify_xml_ui_save_button = QtGui.QPushButton()
+        self.modify_xml_ui_save_button.setText("Save")
+        #self.connect(self.modify_xml_ui_save_button, SIGNAL(
+        #    "clicked()"), self.)
+        self.connect(self.modify_xml_ui_save_button, SIGNAL(
+            "clicked()"), self.create_new_xml_ui_page,
+            QtCore.SLOT("close()"))
+
+        self.modify_xml_ui_cancel_button = QtGui.QPushButton()
+        self.modify_xml_ui_cancel_button.setText("Cancel")
+        self.connect(self.modify_xml_ui_cancel_button, SIGNAL(
+            "clicked()"), self.create_new_xml_ui_page,
+            QtCore.SLOT("close()"))
 
         self.generate_new_xml_options_layout.addWidget(
             self.radio_button_xml_add, 1, 0)
@@ -1832,7 +1853,12 @@ class MainUI(QDialog):
             self.generate_new_xml_ui_save_button, 1, 0)
         self.generate_new_xml_save_cancel_layout.addWidget(
             self.generate_new_xml_ui_cancel_button, 1, 1)
-
+        
+        self.modify_xml_save_cancel_layout.addWidget(
+            self.modify_xml_ui_save_button, 1, 0)
+        self.modify_xml_save_cancel_layout.addWidget(
+            self.modify_xml_ui_cancel_button, 1, 1)
+        
         self.create_new_xml_ui_layout.addWidget(
             self.generate_new_xml_options_groupbox, 0, 0)
         self.create_new_xml_ui_layout.addWidget(
@@ -1841,6 +1867,8 @@ class MainUI(QDialog):
             self.xml_ui_modify_groupbox, 1, 0)
         self.create_new_xml_ui_layout.addWidget(
             self.generate_new_xml_save_cancel_layout_GroupBox, 2, 0)
+        self.create_new_xml_ui_layout.addWidget(
+            self.modify_xml_save_cancel_layout_groupBox, 2, 0)
         self.create_new_xml_ui_page.setWindowModality(
             Qt.ApplicationModal)
         self.create_new_xml_ui_page.show()
