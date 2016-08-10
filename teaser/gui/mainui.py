@@ -1747,17 +1747,6 @@ class MainUI(QDialog):
             elif type(wall).__name__ == "FloorType":
                 type_of_wall = "Floor"
 
-            #print(wall.construction_type)
-            #print(wall.year_of_construction)
-            #print(wall.building_age_group)
-            #print(wall.inner_convection)
-            #print(wall.inner_radiation)
-            #print(wall.outer_convection)
-            #print(wall.outer_radiation)
-            #for wall1 in wall.Layers.layer:
-            #    print(wall1)
-            #print(wall.Layers.layer)
-            #print(inspect.getmembers(wall.Layers))
             if type_of_wall == "OuterWall": 
                 # or "GroundFloor" or "Rooftop" :
                 item = TrackableItem(
