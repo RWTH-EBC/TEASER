@@ -1412,6 +1412,8 @@ class MainUI(QDialog):
             num_layers = len(self.all_constr_layer_list) + 1
         elif check == "Update XML":
             num_layers = len(self.xml_layer_list) + 1
+        elif check =="xml_modify_layer_window":
+            num_layers = len(self.current_wall_layer) + 1
 
         if num_layers > 1:
             for x in range(0, num_layers):
@@ -1489,6 +1491,10 @@ class MainUI(QDialog):
         elif check == "Update XML":
             self.connect(self.new_layer_save_button, SIGNAL(
                 "clicked()"), self.update_xml_window)
+        
+        elif check =="xml_modify_layer_window":
+                self.connect(self.new_layer_save_button, SIGNAL(
+                "clicked()"), self.update_xml_window_modify)
 
         self.connect(self.new_layer_save_button, SIGNAL(
             "clicked()"), self.create_layer_ui, QtCore.SLOT("close()"))
@@ -2532,6 +2538,31 @@ class MainUI(QDialog):
                                 layer.material.transmittance = \
                                     self.material_transmittance_textbox.text()
                                 break
+                            
+    def save_changed_layer_values_xml_modify(self):
+        '''Saves the layer inputs in set all construction window
+        replaces the previous values of the current layer in envelope with
+        the inputs from the text fields in set all construction window.
+        '''
+    
+        for layer in self.current_wall_layer:
+                if layer.id == self.current_layer.id:
+                                layer.thickness = float(self.thickness_textbox.text())
+                                layer.Material.name =\
+                                    self.material_combobox.currentText()
+                                layer.Material.density = \
+                                    float(self.material_density_textbox.text())
+                                layer.Material.thermal_conduc = \
+                                    float(self.material_thermal_conduc_textbox.text())
+                                layer.Material.heat_capac = \
+                                    float(self.material_heat_capac_textbox.text())
+                                layer.Material.solar_absorp = \
+                                    float(self.material_solar_absorp_textbox.text())
+                                layer.Material.ir_emissivity = \
+                                    float(self.material_ir_emissivity_textbox.text())
+                                layer.Material.transmittance = \
+                                    float(self.material_transmittance_textbox.text())
+                                break
 
     def save_changed_simulation_values(self):
         '''Saves the inputs in the simulation window
@@ -3146,6 +3177,17 @@ class MainUI(QDialog):
                                     parent, position, thick, material, dens,
                                     therm, heat, solar, ir, trans))
             self.xml_layer_list[position].id = position + 1
+            
+        elif check == "xml_modify_layer_window":
+            parent = None
+            position = int(self.new_layer_position_combobox.currentText())
+            material = self.new_layer_material_combobox.currentText()
+            self.current_wall_layer.insert(
+                position, Controller.click_add_new_layer(
+                                    parent, position, thick, material, dens,
+                                    therm, heat, solar, ir, trans))
+            self.current_wall_layer[position].id = position + 1
+
 
     def change_zone_values_ui(self, item):
         '''Displays attributes of a selected zone
@@ -3884,6 +3926,19 @@ class MainUI(QDialog):
                 "\t", layer.internal_id)
             self.element_layer_model_update_xml.appendRow(item)
 
+    def update_xml_window_modify(self):
+        '''Update the listView in the layer details window 
+
+        updates the window after layers have been changed.
+        '''
+        self.wall_layer_model.clear()
+        for layer in self.current_wall_layer:
+            item = TrackableItem(
+                "Material:\t".expandtabs(8) + str(layer.Material.name) +
+                "\nThickness:\t".expandtabs(14) + str(layer.thickness) +
+                "\t", layer.id)
+            self.wall_layer_model.appendRow(item)
+
     def show_element_build_ui(self, item):
         '''Displays attributes of a selected element
 
@@ -4394,7 +4449,9 @@ class MainUI(QDialog):
 
         self.wall_add_material_button = QtGui.QPushButton()
         self.wall_add_material_button.setText("Add Layer")
-        # self.connect(self.wall_add_material_button, SIGNAL("clicked()"),
+        self.connect(self.wall_add_material_button, SIGNAL("clicked()"),
+                     lambda check_window="xml_modify_layer_window":
+                     self.create_new_layer_ui(check_window))
 
         self.wall_delete_material_button = QtGui.QPushButton()
         self.wall_delete_material_button.setText("Delete Layer")
@@ -5045,10 +5102,16 @@ class MainUI(QDialog):
         self.material_transmittance_textbox.setObjectName(
             _fromUtf8("MaterialTransmittanceTextBox"))
         # self.material_transmittance_textbox.setText(
-        #    str(self.current_layer.Material.transmittance))
+        #    str(self.current_layer.Material.transmittance))      
 
         self.layer_save_button = QtGui.QPushButton()
         self.layer_save_button.setText("Save")
+        self.connect(self.layer_save_button, SIGNAL("clicked()"),
+                     self.save_changed_layer_values_xml_modify)
+        self.connect(self.layer_save_button, SIGNAL("clicked()"),
+                     self.update_xml_window_modify)
+        self.connect(self.layer_save_button, SIGNAL(
+            "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
 
         self.connect(self.layer_save_button, SIGNAL(
             "clicked()"), self.layer_build_ui, QtCore.SLOT("close()"))
