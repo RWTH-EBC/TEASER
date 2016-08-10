@@ -1593,9 +1593,9 @@ class MainUI(QDialog):
 
         self.radio_button_xml_add = QtGui.QRadioButton(u"Add")
         self.radio_button_xml_add.toggled.connect(self.click_radio_button_add)
-        self.radio_button_xml_delete = QtGui.QRadioButton(u"delete")
-        self.radio_button_xml_delete.toggled.connect(
-            self.click_radio_button_modify)
+        # self.radio_button_xml_delete = QtGui.QRadioButton(u"delete")
+        # self.radio_button_xml_delete.toggled.connect(
+        #     self.click_radio_button_modify)
         self.radio_button_xml_modify = QtGui.QRadioButton(u"Modify")
         self.radio_button_xml_modify.toggled.connect(
             self.click_radio_button_modify)
@@ -1711,6 +1711,11 @@ class MainUI(QDialog):
         self.xml_ui_modify_groupbox.setLayout(
                    self.xml_window_layout_modify)
         self.xml_ui_modify_groupbox.setVisible(False)
+        
+        self.xml_ui_del_button = QtGui.QPushButton()
+        self.xml_ui_del_button.setText("Delete")
+        # self.connect(self.xml_ui_del_button, SIGNAL("clicked()"),
+        self.xml_ui_del_button.setMinimumWidth(340)
 
         self.xml_ui_wall_list_view = QtGui.QListView()
         self.xml_ui_wall_list_view.setGeometry(
@@ -1793,11 +1798,11 @@ class MainUI(QDialog):
             QtCore.SLOT("close()"))
 
         self.generate_new_xml_options_layout.addWidget(
-            self.radio_button_xml_add, 1, 0)
+            self.radio_button_xml_add, 1, 0, Qt.AlignLeft)
+        #self.generate_new_xml_options_layout.addWidget(
+        #    self.radio_button_xml_delete, 1, 1)
         self.generate_new_xml_options_layout.addWidget(
-            self.radio_button_xml_delete, 1, 1)
-        self.generate_new_xml_options_layout.addWidget(
-            self.radio_button_xml_modify, 1, 2)
+            self.radio_button_xml_modify, 1, 1, Qt.AlignRight)
 
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_path_label, 1, 0)
@@ -1848,7 +1853,9 @@ class MainUI(QDialog):
 
         self.xml_window_layout_modify.addWidget(
                 self.xml_ui_wall_list_view, 1, 0, 2, 2)
-
+        self.xml_window_layout_modify.addWidget(
+                self.xml_ui_del_button, 0, 0, 1, 1)
+        
         self.generate_new_xml_save_cancel_layout.addWidget(
             self.generate_new_xml_ui_save_button, 1, 0)
         self.generate_new_xml_save_cancel_layout.addWidget(
