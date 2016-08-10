@@ -1622,11 +1622,9 @@ class MainUI(QDialog):
         self.generate_new_xml_ui_type_combobox.addItem("Floor")
         self.generate_new_xml_ui_constr_type_label = QtGui.QLabel(
             "Construction type: ")
-        self.generate_new_xml_ui_constr_type_combobox = QtGui.QComboBox()
-        self.generate_new_xml_ui_constr_type_combobox.setObjectName(
-            "generate_new_xml_ui_const_type_combobox")
-        self.generate_new_xml_ui_constr_type_combobox.addItem("Heavy")
-        self.generate_new_xml_ui_constr_type_combobox.addItem("Light")
+        self.generate_new_xml_ui_constr_type_line_edit = QtGui.QLineEdit()
+        self.generate_new_xml_ui_constr_type_line_edit.setObjectName(
+            "generate_new_xml_ui_constr_type_line_edit")
         self.generate_new_xml_ui_age_group_label = QtGui.QLabel(
             "Building age group: ")
         self.generate_new_xml_ui_age_group_left_line_edit = QtGui.QLineEdit()
@@ -1794,7 +1792,7 @@ class MainUI(QDialog):
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_constr_type_label, 4, 0)
         self.generate_new_xml_window_layout.addWidget(
-            self.generate_new_xml_ui_constr_type_combobox, 4, 1)
+            self.generate_new_xml_ui_constr_type_line_edit, 4, 1)
         self.generate_new_xml_window_layout.addWidget(
             self.generate_new_xml_ui_age_group_label, 5, 0)
         self.generate_new_xml_window_layout.addWidget(
@@ -2816,7 +2814,7 @@ class MainUI(QDialog):
         prefix_path, suffix_path = utilitis.split_path(path)
         type_of_element = self.generate_new_xml_ui_type_combobox.currentText()
         constr_type = \
-            self.generate_new_xml_ui_constr_type_combobox.currentText()
+            self.generate_new_xml_ui_constr_type_line_edit.text()
         building_from = float(
             self.generate_new_xml_ui_age_group_left_line_edit.text())
         building_to = float(
