@@ -4353,14 +4353,6 @@ class MainUI(QDialog):
         self.wall_construction_type_combobox.addItem("heavy", userData=None)
         self.wall_construction_type_combobox.addItem("light", userData=None)
 
-        self.wall_year_of_construction_label = QtGui.QLabel(
-            "Year Of Construction")
-        self.wall_year_of_construction_textbox = QtGui.QLineEdit()
-        self.wall_year_of_construction_textbox.setObjectName(
-            _fromUtf8("WallYearOfConstructionTextBox"))
-        self.wall_year_of_construction_textbox.setText(str(
-             current_wall.year_of_construction))
-
         self.wall_Building_age_group_label = QtGui.QLabel(
              "Building_age_group")
         self.wall_Building_age_group_textbox_from = QtGui.QLineEdit()
@@ -4472,43 +4464,39 @@ class MainUI(QDialog):
         self.wall_general_layout.addWidget(
             self.wall_construction_type_combobox, 2, 1)
         self.wall_general_layout.addWidget(
-            self.wall_year_of_construction_label, 3, 0)
+            self.wall_Building_age_group_label, 3, 0)
         self.wall_general_layout.addWidget(
-            self.wall_year_of_construction_textbox, 3, 1)
+            self.wall_Building_age_group_textbox_from, 3, 1, Qt.AlignLeft )
         self.wall_general_layout.addWidget(
-            self.wall_Building_age_group_label, 4, 0)
+            self.wall_Building_age_group_label_to, 3, 1, Qt.AlignCenter)        
         self.wall_general_layout.addWidget(
-            self.wall_Building_age_group_textbox_from, 4, 1, Qt.AlignLeft )
+            self.wall_Building_age_group_textbox_to, 3, 1, Qt.AlignRight)
         self.wall_general_layout.addWidget(
-            self.wall_Building_age_group_label_to, 4, 1, Qt.AlignCenter)        
+            self.wall_inner_convection_label, 4, 0)
         self.wall_general_layout.addWidget(
-            self.wall_Building_age_group_textbox_to, 4, 1, Qt.AlignRight)
+            self.wall_inner_convection_textbox, 4, 1)
         self.wall_general_layout.addWidget(
-            self.wall_inner_convection_label, 5, 0)
+            self.wall_inner_radiation_label, 5, 0)
         self.wall_general_layout.addWidget(
-            self.wall_inner_convection_textbox, 5, 1)
-        self.wall_general_layout.addWidget(
-            self.wall_inner_radiation_label, 6, 0)
-        self.wall_general_layout.addWidget(
-            self.wall_inner_radiation_textbox, 6, 1)
+            self.wall_inner_radiation_textbox, 5, 1)
         if self.wall_type_line_edit.text() != \
                 "InnerWall" and "Floor" and "Ceiling":
             self.wall_general_layout.addWidget(
-                self.wall_outer_convection_label, 7, 0)
+                self.wall_outer_convection_label, 6, 0)
             self.wall_general_layout.addWidget(
-                self.wall_outer_convection_textbox, 7, 1)
+                self.wall_outer_convection_textbox, 6, 1)
             self.wall_general_layout.addWidget(
-                self.wall_outer_radiation_label, 8, 0)
+                self.wall_outer_radiation_label, 7, 0)
             self.wall_general_layout.addWidget(
-                self.wall_outer_radiation_textbox, 8, 1)
+                self.wall_outer_radiation_textbox, 7, 1)
         self.wall_general_layout.addWidget(
-            self.wall_add_material_button, 9, 0)
+            self.wall_add_material_button, 8, 0)
         self.wall_general_layout.addWidget(
-            self.wall_delete_material_button, 9, 1)
+            self.wall_delete_material_button, 8, 1)
         self.wall_general_layout.addWidget(
-            self.wall_material_list_view, 10, 0, 10, 3)
+            self.wall_material_list_view, 9, 0, 9, 3)
         self.wall_general_layout.addWidget(
-            self.wall_material_list_label, 10, 3, 10, 4)
+            self.wall_material_list_label, 9, 3, 9, 4)
         self.wall_save_cancel_layout.addWidget(
             self.wall_save_button, 0, 0)
         self.wall_save_cancel_layout.addWidget(
