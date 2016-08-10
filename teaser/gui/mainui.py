@@ -1561,13 +1561,6 @@ class MainUI(QDialog):
         self.xml_ui_modify_groupbox.setVisible(True)
         self.create_new_xml_ui_groupbox.setVisible(False)
 
-    def set_default_size_lVZF(self):
-        self.lVZF.height = 45
-        self.lVZF.weight = 170
-    
-    def set_xml_size_lVZF(self):
-        self.lVZF.height = 100
-
     def create_xml_ui(self):
         '''New element window
 
@@ -1586,8 +1579,6 @@ class MainUI(QDialog):
         self.connect(self.create_new_xml_ui_page, SIGNAL("destroyed()"),
                      lambda check_window="Update XML":
                      self.delete_elements_in_lists(check_window))
-        self.connect(self.create_new_xml_ui_page, SIGNAL("destroyed()"),
-                     self.set_default_size_lVZF)
         self.generate_new_xml_window_layout = QtGui.QGridLayout()
         self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"Values")
         self.create_new_xml_ui_groupbox.setLayout(
@@ -1736,7 +1727,6 @@ class MainUI(QDialog):
             QtGui.QAbstractItemView.NoEditTriggers)
         self.xml_ui_wall_list_view.doubleClicked.connect(
                     self.show_wall_build_ui)
-        self.lVZF.height = 100
 
         self.element_model_update_xml.clear()
         wall_id = 0
@@ -4337,9 +4327,7 @@ class MainUI(QDialog):
         self.wall_build_ui.setFixedHeight(600)
         self.wall_build_ui_window_layout = QtGui.QGridLayout()
         self.wall_build_ui.setLayout(self.wall_build_ui_window_layout)
-        self.connect(self.wall_build_ui, SIGNAL("destroyed()"),
-                     self.set_xml_size_lVZF)
-
+        
         self.wall_general_layout = QtGui.QGridLayout()
         self.wall_general_layout_groupBox = QtGui.QGroupBox(
             "General Wall Values")
