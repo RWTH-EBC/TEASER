@@ -1751,37 +1751,26 @@ class MainUI(QDialog):
                 # or "GroundFloor" or "Rooftop" :
                 item = TrackableItem(
                     "Type:\t".expandtabs(8) + type_of_wall +
-                    "\nconstruction_type:\t".expandtabs(11) + str(wall.construction_type) +
-                    "\nyear_of_construction:\t".expandtabs(11) + str(wall.year_of_construction) +
-                    "\nbuilding_age_group:\t".expandtabs(11) + str(wall.building_age_group) +
-                    "\ninner_convection:\t".expandtabs(11) + str(wall.inner_convection) + "\t".expandtabs(10) +
-                    "inner_radiation:\t".expandtabs(11) + str(wall.inner_radiation) + "\t".expandtabs(10) +
-                    "\nouter_convection:\t".expandtabs(11) + str(wall.outer_convection) + "\t".expandtabs(10)+
-                    "outer_radiation:\t".expandtabs(11) + str(wall.outer_radiation), wall_id)
+                    "\nconstruction_type:\t".expandtabs(11) + 
+                    str(wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) + 
+                    str(wall.building_age_group), wall_id)
                 self.element_model_update_xml.appendRow(item)
             elif type_of_wall == "Floor" or "Ceiling" or "InnerWall":
                 item = TrackableItem(
                     "Type:\t".expandtabs(8) + type_of_wall +
-                    "\nconstruction_type:\t".expandtabs(11) + str(wall.construction_type) +
-                    "\nyear_of_construction:\t".expandtabs(11) + str(wall.year_of_construction) +
-                    "\nbuilding_age_group:\t".expandtabs(11) + str(wall.building_age_group) +
-                    "\ninner_convection:\t".expandtabs(11) + str(wall.inner_convection) + "\t".expandtabs(10) +
-                    "inner_radiation:\t".expandtabs(11) + str(wall.inner_radiation) + "\t".expandtabs(10), wall_id)
+                    "\nconstruction_type:\t".expandtabs(11) + 
+                    str(wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) + 
+                    str(wall.building_age_group), wall_id)
                 self.element_model_update_xml.appendRow(item)
             elif type_of_wall == "Window":
                 item = TrackableItem(
                     "Type:\t".expandtabs(8) + type_of_wall +
-                    "\nconstruction_type:\t".expandtabs(11) + str(wall.construction_type) +
-                    "\nyear_of_construction:\t".expandtabs(11) + str(wall.year_of_construction) +
-                    "\nbuilding_age_group:\t".expandtabs(11) + str(wall.building_age_group) +
-                    "\ninner_convection:\t".expandtabs(11) + str(wall.inner_convection) + "\t".expandtabs(10) +
-                    "inner_radiation:\t".expandtabs(11) + str(wall.inner_radiation) + "\t".expandtabs(10) +
-                    "\nouter_convection:\t".expandtabs(11) + str(wall.outer_convection) + "\t".expandtabs(10)+
-                    "\outer_radiation:\t".expandtabs(11) + str(wall.outer_radiation) + "\t".expandtabs(10)+
-                    "\g_value:\t".expandtabs(11) + str(wall.g_value) + "\t".expandtabs(10)+
-                    "\a_conv:\t".expandtabs(11) + str(wall.a_conv) + "\t".expandtabs(10)+
-                    "\shading_g_total:\t".expandtabs(11) + str(wall.shading_g_total) + "\t".expandtabs(10)+
-                    "shading_max_irr:\t".expandtabs(11) + str(wall.shading_max_irr), wall_id)
+                    "\nconstruction_type:\t".expandtabs(11) + 
+                    str(wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) + 
+                    str(wall.building_age_group), wall_id)
                 self.element_model_update_xml.appendRow(item)
             wall_id += 1
 
@@ -1858,8 +1847,6 @@ class MainUI(QDialog):
         self.create_new_xml_ui_page.setWindowModality(
             Qt.ApplicationModal)
         self.create_new_xml_ui_page.show()
-
-        self.click_radio_button_modify()
 
     def generate_type_building_ui(self):
         '''New type building window
