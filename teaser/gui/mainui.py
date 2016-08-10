@@ -4344,13 +4344,20 @@ class MainUI(QDialog):
 
         self.wall_Building_age_group_label = QtGui.QLabel(
              "Building_age_group")
-        self.wall_Building_age_group_textbox = QtGui.QLineEdit()
-        self.wall_Building_age_group_textbox.setObjectName(
+        self.wall_Building_age_group_textbox_from = QtGui.QLineEdit()
+        self.wall_Building_age_group_textbox_from.setObjectName(
+            _fromUtf8("building_age_group_text_box_from"))
+        self.wall_Building_age_group_textbox_from.setText(
+            str(current_wall.building_age_group[0]))
+        self.wall_Building_age_group_textbox_from.setMaximumWidth(100)
+        self.wall_Building_age_group_label_to = QtGui.QLabel(
+             "to:")
+        self.wall_Building_age_group_textbox_to = QtGui.QLineEdit()
+        self.wall_Building_age_group_textbox_to.setObjectName(
             _fromUtf8("building_age_group_text_box"))
-        building_age_group_str = ""
-        for value in current_wall.building_age_group:
-            building_age_group_str += str(value) + " "
-        self.wall_Building_age_group_textbox.setText(building_age_group_str)
+        self.wall_Building_age_group_textbox_to.setText(
+            str(current_wall.building_age_group[1]))
+        self.wall_Building_age_group_textbox_to.setMaximumWidth(100)
 
         self.wall_inner_convection_label = QtGui.QLabel("Inner Convection")
         self.wall_inner_convection_textbox = QtGui.QLineEdit()
@@ -4450,7 +4457,11 @@ class MainUI(QDialog):
         self.wall_general_layout.addWidget(
             self.wall_Building_age_group_label, 4, 0)
         self.wall_general_layout.addWidget(
-            self.wall_Building_age_group_textbox, 4, 1)
+            self.wall_Building_age_group_textbox_from, 4, 1, Qt.AlignLeft )
+        self.wall_general_layout.addWidget(
+            self.wall_Building_age_group_label_to, 4, 1, Qt.AlignCenter)        
+        self.wall_general_layout.addWidget(
+            self.wall_Building_age_group_textbox_to, 4, 1, Qt.AlignRight)
         self.wall_general_layout.addWidget(
             self.wall_inner_convection_label, 5, 0)
         self.wall_general_layout.addWidget(
