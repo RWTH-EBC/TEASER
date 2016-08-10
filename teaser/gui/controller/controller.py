@@ -23,6 +23,7 @@ import teaser.data.output.teaserxml_output as teaser_xml
 import teaser.data.output.citygml_output as city_gml
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
+import teaser.logic.utilities as utilitis
 
 
 class Controller():
@@ -754,3 +755,9 @@ class Controller():
             element.add_layer_list(layer_set)
 
         return element
+    
+    @classmethod
+    def add_element_to_xml(self, element, path):
+        prefix_path, suffix_path = utilitis.split_path(path)
+        element.save_type_element(prefix_path, suffix_path)
+            

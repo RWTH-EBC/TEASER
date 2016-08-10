@@ -2810,7 +2810,6 @@ class MainUI(QDialog):
     def add_element_to_xml(self):
 
         path = str(self.generate_new_xml_ui_path_line_edit.text())
-        prefix_path, suffix_path = utilitis.split_path(path)
         type_of_element = self.generate_new_xml_ui_type_combobox.currentText()
         constr_type = \
             self.generate_new_xml_ui_constr_type_line_edit.text()
@@ -2833,8 +2832,7 @@ class MainUI(QDialog):
                                             building_age_group, inner_con,
                                             outer_con, inner_rad, outer_rad,
                                             layer_set)
-        
-        element.save_type_element(prefix_path, suffix_path)
+        Controller.add_element_to_xml(element, path)
 
     def clear_input_values_set_all_constr(self):
         '''Clears layer values
