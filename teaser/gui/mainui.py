@@ -4455,8 +4455,8 @@ class MainUI(QDialog):
 
         self.wall_delete_material_button = QtGui.QPushButton()
         self.wall_delete_material_button.setText("Delete Layer")
-        # self.connect(self.wall_delete_material_button, SIGNAL("clicked()"),
-        #             self.delete_selected_layer)
+        self.connect(self.wall_delete_material_button, SIGNAL("clicked()"),
+                     self.delete_selected_layer_xml__modify_window)
 
         self.wall_layer_model.clear()
         self.current_wall_layer = []
@@ -5922,6 +5922,27 @@ class MainUI(QDialog):
                     ind = self.xml_layer_list.index(current_layer)
                     del self.xml_layer_list[ind]
                     self.update_xml_window()
+
+        except (ValueError, AttributeError):
+            QtGui.QMessageBox.warning(self,
+                                      u"No layer selected",
+                                      u"You need to select a layer first.")
+            
+    def delete_selected_layer_xml__modify_window(self):
+        '''Deletes a layer in xml modify window
+
+        this function only operates in the xml modify window.
+        Checks if a layer is selected and deletes it.
+        '''
+
+        try:
+            item = self.wall_layer_model.itemFromIndex(
+                self.wall_material_list_view.currentIndex())
+            for current_layer in self.current_wall_layer:
+                if (current_layer.internal_id == item.internal_id):
+                    ind = self.xml_layer_list.index(current_layer)
+                    del self.current_wall_layer[ind]
+                    self.update_xml_window_modify()
 
         except (ValueError, AttributeError):
             QtGui.QMessageBox.warning(self,
