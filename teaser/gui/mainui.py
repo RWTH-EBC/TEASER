@@ -17,7 +17,6 @@ from numpy.distutils.pathccompiler import PathScaleCCompiler
 from scipy._lib.six import xrange
 
 import matplotlib.pyplot as plt
-import teaser.data.output.buildingelement_output as be_output
 from teaser.gui.controller.controller import Controller
 from teaser.gui.guihelp.guiinfo import GUIInfo
 from teaser.gui.guihelp.listviewzonesfiller import ListViewZonesFiller
@@ -2834,8 +2833,8 @@ class MainUI(QDialog):
                                             building_age_group, inner_con,
                                             outer_con, inner_rad, outer_rad,
                                             layer_set)
-        be_output.save_type_element(element, prefix_path, suffix_path)
-        os.system("explorer " + path )
+        
+        element.save_type_element(prefix_path, suffix_path)
 
     def clear_input_values_set_all_constr(self):
         '''Clears layer values
