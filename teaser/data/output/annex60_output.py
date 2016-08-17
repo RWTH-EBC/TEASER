@@ -38,7 +38,7 @@ def export_annex60(prj,
 
     """
 
-    uses = ['Modelica(version = "3.2.1")',
+    uses = ['Modelica(version = "3.2.2")',
             'Annex60(version="0.1")']
 
     if internal_id is not None:
