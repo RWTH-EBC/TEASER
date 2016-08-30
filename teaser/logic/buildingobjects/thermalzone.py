@@ -1284,6 +1284,29 @@ class ThermalZone(object):
 
         self.r_rad_ow_iw = 0.0
 
+        self.r1_iw = 0.0
+        self.c1_iw = 0.0
+        self.ua_value_iw = 0.0
+        self.r_conv_iw = 0.0
+        self.r_rad_iw = 0.0
+        self.r_comb_iw = 0.0
+        self.area_iw = 0.0
+        self.r_conv_inner_iw = 0.0
+        self.r_rad_inner_iw = 0.0
+        self.r_comb_inner_iw = 0.0
+        self.r_conv_outer_iw = 0.0
+        self.r_rad_outer_iw = 0.0
+        self.r_comb_outer_iw = 0.0
+
+        self.alpha_conv_inner_iw = 0.0
+        self.alpha_rad_inner_iw = 0.0
+        self.alpha_comb_inner_iw = 0.0
+
+        self.alpha_conv_outer_iw = 0.0
+        self.alpha_rad_outer_iw = 0.0
+        self.alpha_comb_outer_iw = 0.0
+
+
         self.r1_rt = 0.0
         self.c1_rt = 0.0
         self.r_rest_rt = 0.0
