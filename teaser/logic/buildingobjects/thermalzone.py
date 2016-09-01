@@ -1250,6 +1250,8 @@ class ThermalZone(object):
             win_count.replace_window(self.parent.year_of_retrofit, window_type)
 
     def set_calc_default(self):
+        '''sets default calculation parameters
+        '''
         self.outer_walls_help = []
         self.rooftops = []
         self.ground_floors = []
@@ -1305,7 +1307,6 @@ class ThermalZone(object):
         self.alpha_conv_outer_iw = 0.0
         self.alpha_rad_outer_iw = 0.0
         self.alpha_comb_outer_iw = 0.0
-
 
         self.r1_rt = 0.0
         self.c1_rt = 0.0
