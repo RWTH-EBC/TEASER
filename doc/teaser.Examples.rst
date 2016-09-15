@@ -14,7 +14,7 @@ that building and to export that building to internal XML and a Modelica record
 
 First thing we need to do is to import our Project API module::
 
-    from teaser.project import project
+    from teaser.project import Project
 
 We instantiate the Project class. The parameter load_data = True indicates
 that we load the XML data bases into our Project. This can take a few sec.::
