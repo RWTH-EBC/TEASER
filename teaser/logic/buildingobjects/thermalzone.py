@@ -1418,9 +1418,10 @@ class ThermalZone(object):
     def parent(self, value):
         from teaser.logic.buildingobjects.building import Building
         import inspect
-        if inspect.isclass(Building):
-            self.__parent = value
-            self.__parent.thermal_zones.append(self)
+        if value is not None:
+            if inspect.isclass(Building):
+                self.__parent = value
+                self.__parent.thermal_zones.append(self)
 
 
     @property
