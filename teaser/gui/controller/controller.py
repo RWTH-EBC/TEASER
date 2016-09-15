@@ -4,7 +4,7 @@ Created July 2015
 @author: TEASER 4 Development Team
 
 '''
-
+import inspect
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions
@@ -399,6 +399,7 @@ class Controller():
         '''
 
         mat_list = []
+        print(inspect.getmembers(project.data.material_bind))
         for mat in project.data.material_bind.Material:
             mat_list.append(mat)
 
@@ -419,8 +420,176 @@ class Controller():
             list with filled wall elements from a file
         '''
 
+        # project.buildings[0].thermal_zones
+        # building = Building()
+        # zone = ThermalZone(project.buildings[1])
+        zone = ThermalZone()
+
+        for outerwall in project.data.element_bind.OuterWall:
+                wall = OuterWall()
+                wall.name = "OuterWall"
+                wall.construction_type = outerwall.construction_type
+                wall.year_of_construction = \
+                    outerwall.year_of_construction
+                wall.building_age_group = outerwall.building_age_group
+                wall.inner_convection = outerwall.inner_convection
+                wall.inner_radiation = outerwall.inner_radiation
+                wall.outer_convection = outerwall.outer_convection
+                wall.outer_radiation = outerwall.outer_radiation
+                for layerBind in outerwall.Layers.layer:
+                    layer = Layer(wall)
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for innerwall in project.data.element_bind.InnerWall:
+                wall = InnerWall()
+                wall.name = "InnerWall"
+                wall.construction_type = innerwall.construction_type
+                wall.year_of_construction = \
+                    innerwall.year_of_construction
+                wall.building_age_group = innerwall.building_age_group
+                wall.inner_convection = innerwall.inner_convection
+                wall.inner_radiation = innerwall.inner_radiation
+                wall.outer_convection = innerwall.outer_convection
+                wall.outer_radiation = innerwall.outer_radiation
+                for layerBind in innerwall.Layers.layer:
+                    layer = Layer(wall)
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for rooftop in project.data.element_bind.Rooftop:
+                wall = Rooftop()
+                wall.name = "Rooftop"
+                wall.construction_type = rooftop.construction_type
+                wall.year_of_construction = \
+                    rooftop.year_of_construction
+                wall.building_age_group = rooftop.building_age_group
+                wall.inner_convection = rooftop.inner_convection
+                wall.inner_radiation = rooftop.inner_radiation
+                wall.outer_convection = rooftop.outer_convection
+                wall.outer_radiation = rooftop.outer_radiation
+                for layerBind in rooftop.Layers.layer:
+                    layer = Layer(wall)
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for groundfloor in project.data.element_bind.GroundFloor:
+                wall = GroundFloor()
+                wall.name = "GroundFloor"
+                wall.construction_type = groundfloor.construction_type
+                wall.year_of_construction = \
+                    groundfloor.year_of_construction
+                wall.building_age_group = groundfloor.building_age_group
+                wall.inner_convection = groundfloor.inner_convection
+                wall.inner_radiation = groundfloor.inner_radiation
+                wall.outer_convection = groundfloor.outer_convection
+                wall.outer_radiation = groundfloor.outer_radiation
+                for layerBind in groundfloor.Layers.layer:
+                    layer = Layer(wall)
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for window in project.data.element_bind.Window:
+                wall = Window()
+                wall.name = "Window"
+                wall.construction_type = window.construction_type
+                wall.year_of_construction = \
+                    window.year_of_construction
+                wall.building_age_group = window.building_age_group
+                wall.inner_convection = window.inner_convection
+                wall.inner_radiation = window.inner_radiation
+                wall.outer_convection = window.outer_convection
+                wall.outer_radiation = window.outer_radiation
+                for layerBind in window.Layers.layer:
+                    layer = Layer(wall)
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for ceiling in project.data.element_bind.Ceiling:
+                wall = Ceiling()
+                wall.name = "Ceiling"
+                wall.construction_type = ceiling.construction_type
+                wall.year_of_construction = \
+                    ceiling.year_of_construction
+                wall.building_age_group = ceiling.building_age_group
+                wall.inner_convection = ceiling.inner_convection
+                wall.inner_radiation = ceiling.inner_radiation
+                wall.outer_convection = ceiling.outer_convection
+                wall.outer_radiation = ceiling.outer_radiation
+                for layerBind in ceiling.Layers.layer:
+                    layer = Layer(wall)
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for floor in project.data.element_bind.Floor:
+                wall = Floor()
+                wall.name = "Floor"
+                wall.construction_type = floor.construction_type
+                wall.year_of_construction = \
+                    floor.year_of_construction
+                wall.building_age_group = floor.building_age_group
+                wall.inner_convection = floor.inner_convection
+                wall.inner_radiation = floor.inner_radiation
+                wall.outer_convection = floor.outer_convection
+                wall.outer_radiation = floor.outer_radiation
+                for layerBind in floor.Layers.layer:
+                    layer = Layer(wall)
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+
         wall_list = []
-        # print(inspect.getmembers(project.data.element_bind)) 
+        # print(inspect.getmembers(project.data.element_bind))
+        print()
         for mat in project.data.element_bind.OuterWall:
             wall_list.append(mat)
         for mat in project.data.element_bind.InnerWall:
