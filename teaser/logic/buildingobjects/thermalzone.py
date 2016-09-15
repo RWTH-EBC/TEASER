@@ -491,7 +491,7 @@ class ThermalZone(object):
         if self.r_conv_inner_rt != 0:
             self.r_conv_inner_ow = 1/((1/self.r_conv_inner_ow)+(
                 1/self.r_conv_inner_rt))
-        if self.r_rad_inner_gf != 0:
+        if self.r_rad_inner_rt != 0:
             self.r_rad_inner_ow = 1/((1/self.r_rad_inner_ow)+(
                 1/self.r_rad_inner_rt))
 
