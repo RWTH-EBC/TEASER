@@ -84,13 +84,13 @@ def compare_orientation(bldg, number_of_elements=3):
                 if number_of_elements != 4:
                     zone.weightfactor_ow.append(
                         sum([wall.wf_out for wall in walls]))
-                    [zone.outer_walls_areas.append(i.area) for i in walls]
+                    [zone.outer_walls_areas.append(x.area) for x in walls]
                     zone.tilt_wall.append(i[1])
                     zone.orientation_wall.append(i[0])
                 elif i[1] >= 90:
                     zone.weightfactor_ow.append(
                         sum([wall.wf_out for wall in walls]))
-                    [zone.outer_walls_areas.append(i.area) for i in walls]
+                    [zone.outer_walls_areas.append(x.area) for x in walls]
                     zone.tilt_wall.append(i[1])
                     zone.orientation_wall.append(i[0])
                 else:
@@ -115,7 +115,7 @@ def compare_orientation(bldg, number_of_elements=3):
                         sum([win.area for win in wins]))
                     zone.g_sunblind_list.append(
                         sum([win.shading_g_total for win in wins]))
-                    [zone.window_areas.append(i.area) for i in wins]
+                    [zone.window_areas.append(x.area) for x in wins]
                     zone.tilt_win.append(i[1])
                     zone.orientation_win.append(i[0])
                 elif i[1] >= 90:
@@ -125,7 +125,7 @@ def compare_orientation(bldg, number_of_elements=3):
                         sum([win.area for win in wins]))
                     zone.g_sunblind_list.append(
                         sum([win.shading_g_total for win in wins]))
-                    [zone.window_areas.append(i.area) for i in wins]
+                    [zone.window_areas.append(x.area) for x in wins]
                     zone.tilt_win.append(i[1])
                     zone.orientation_win.append(i[0])
 
@@ -134,4 +134,4 @@ def compare_orientation(bldg, number_of_elements=3):
             if rts:
                 zone.orientation_rt.append(i[0])
                 zone.tilt_rt.append(i[1])
-                [zone.weightfactor_rt.append(i.wf_out) for i in rts]
+                [zone.weightfactor_rt.append(x.wf_out) for x in rts]
