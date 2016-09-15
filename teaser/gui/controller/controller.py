@@ -457,8 +457,6 @@ class Controller():
                 wall.building_age_group = innerwall.building_age_group
                 wall.inner_convection = innerwall.inner_convection
                 wall.inner_radiation = innerwall.inner_radiation
-                wall.outer_convection = innerwall.outer_convection
-                wall.outer_radiation = innerwall.outer_radiation
                 for layerBind in innerwall.Layers.layer:
                     layer = Layer(wall)
                     layer.id = layerBind.id - 1
@@ -503,8 +501,6 @@ class Controller():
                 wall.building_age_group = groundfloor.building_age_group
                 wall.inner_convection = groundfloor.inner_convection
                 wall.inner_radiation = groundfloor.inner_radiation
-                wall.outer_convection = groundfloor.outer_convection
-                wall.outer_radiation = groundfloor.outer_radiation
                 for layerBind in groundfloor.Layers.layer:
                     layer = Layer(wall)
                     layer.id = layerBind.id - 1
@@ -549,8 +545,6 @@ class Controller():
                 wall.building_age_group = ceiling.building_age_group
                 wall.inner_convection = ceiling.inner_convection
                 wall.inner_radiation = ceiling.inner_radiation
-                wall.outer_convection = ceiling.outer_convection
-                wall.outer_radiation = ceiling.outer_radiation
                 for layerBind in ceiling.Layers.layer:
                     layer = Layer(wall)
                     layer.id = layerBind.id - 1
@@ -572,8 +566,6 @@ class Controller():
                 wall.building_age_group = floor.building_age_group
                 wall.inner_convection = floor.inner_convection
                 wall.inner_radiation = floor.inner_radiation
-                wall.outer_convection = floor.outer_convection
-                wall.outer_radiation = floor.outer_radiation
                 for layerBind in floor.Layers.layer:
                     layer = Layer(wall)
                     layer.id = layerBind.id - 1
