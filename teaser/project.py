@@ -182,8 +182,7 @@ class Project(object):
         '''
 
         for bldg in self.buildings:
-            bldg.year_of_retrofit = year_of_retrofit
-            bldg.retrofit_building()
+            bldg.retrofit_building(year_of_retrofit, window_type, material)
 
     def type_bldg_office(self,
                          name,
@@ -252,9 +251,9 @@ class Project(object):
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_institute(self,
