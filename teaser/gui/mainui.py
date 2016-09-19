@@ -4455,7 +4455,7 @@ class MainUI(QDialog):
         for wall in self.xml_element_list:
                 if self.xml_element_list.index(wall) == \
                    current_item_from_index.internal_id:
-                        current_wall = wall
+                        self.current_wall= wall
                         break
         '''
         current_item_from_index = self.element_model_update_xml.itemFromIndex(
@@ -4464,43 +4464,43 @@ class MainUI(QDialog):
             for element in self.thermalZoneFromXML.inner_walls:
                 if self.thermalZoneFromXML.inner_walls.index(element) == \
                    current_item_from_index.internal_id:
-                        current_wall = element
-                        break
+                    self.current_wall= element
+                    break
         if "Floor" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.inner_walls:
                 if self.thermalZoneFromXML.inner_walls.index(element) == \
                    current_item_from_index.internal_id:
-                    current_wall = element
+                    self.current_wall= element
                     break
         if "Ceiling" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.inner_walls:
                 if self.thermalZoneFromXML.inner_walls.index(element) == \
                    current_item_from_index.internal_id:
-                    current_wall = element
+                    self.current_wall= element
                     break
         if "OuterWall" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.outer_walls:
                 if self.thermalZoneFromXML.outer_walls.index(element) == \
                    current_item_from_index.internal_id:
-                    current_wall = element
+                    self.current_wall= element
                     break
         if "GroundFloor" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.outer_walls:
                 if self.thermalZoneFromXML.outer_walls.index(element) == \
                    current_item_from_index.internal_id:
-                    current_wall = element
+                    self.current_wall= element
                     break
         if "Rooftop" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.outer_walls:
                 if self.thermalZoneFromXML.outer_walls.index(element) == \
                    current_item_from_index.internal_id:
-                    current_wall = element
+                    self.current_wall= element
                     break
         if "Window" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.windows:
                 if self.thermalZoneFromXML.windows.index(element) == \
                    current_item_from_index.internal_id:
-                    current_wall = element
+                    self.current_wall= element
                     break
 
         self.wall_type_label = QtGui.QLabel("Type")
@@ -4538,7 +4538,7 @@ class MainUI(QDialog):
         self.wall_Building_age_group_textbox_from.setObjectName(
             _fromUtf8("building_age_group_text_box_from"))
         self.wall_Building_age_group_textbox_from.setText(
-            str(current_wall.building_age_group[0]))
+            str(self.current_wall.building_age_group[0]))
         self.wall_Building_age_group_textbox_from.setMaximumWidth(100)
         self.wall_Building_age_group_label_to = QtGui.QLabel(
              "to:")
@@ -4546,7 +4546,7 @@ class MainUI(QDialog):
         self.wall_Building_age_group_textbox_to.setObjectName(
             _fromUtf8("building_age_group_text_box"))
         self.wall_Building_age_group_textbox_to.setText(
-            str(current_wall.building_age_group[1]))
+            str(self.current_wall.building_age_group[1]))
         self.wall_Building_age_group_textbox_to.setMaximumWidth(100)
 
         self.wall_inner_convection_label = QtGui.QLabel("Inner Convection")
@@ -4554,14 +4554,14 @@ class MainUI(QDialog):
         self.wall_inner_convection_textbox.setObjectName(
             _fromUtf8("WallInnerConvectionTextBox"))
         self.wall_inner_convection_textbox.setText(str(
-            current_wall.inner_convection))
+            self.current_wall.inner_convection))
 
         self.wall_inner_radiation_label = QtGui.QLabel("Inner Radiation")
         self.wall_inner_radiation_textbox = QtGui.QLineEdit()
         self.wall_inner_radiation_textbox.setObjectName(
             _fromUtf8("WallInnerRadiationTextBox"))
         self.wall_inner_radiation_textbox.setText(str(
-            current_wall.inner_radiation))
+            self.current_wall.inner_radiation))
 
         self.wall_outer_convection_label = QtGui.QLabel(
                 "Outer Convection")
@@ -4578,9 +4578,9 @@ class MainUI(QDialog):
         if self.wall_type_line_edit.text() != \
                 "InnerWall" and "Floor" and "Ceiling":
             self.wall_outer_convection_textbox.setText(str(
-                current_wall.outer_convection))
+                self.current_wall.outer_convection))
             self.wall_outer_radiation_textbox.setText(str(
-                current_wall.outer_radiation))
+                self.current_wall.outer_radiation))
 
         self.wall_add_material_button = QtGui.QPushButton()
         self.wall_add_material_button.setText("Add Layer")
@@ -4609,7 +4609,7 @@ class MainUI(QDialog):
                     break
         '''
 
-        for layer in current_wall.layer:
+        for layer in self.current_wall.layer:
             item = TrackableItem("Material:\t".expandtabs(8) +
                                  str(layer.material.name) +
                                  "\nThickness:\t".expandtabs(14) +
@@ -4658,9 +4658,9 @@ class MainUI(QDialog):
         self.wall_general_layout.addWidget(
             self.wall_Building_age_group_label, 3, 0)
         self.wall_general_layout.addWidget(
-            self.wall_Building_age_group_textbox_from, 3, 1, Qt.AlignLeft )
+            self.wall_Building_age_group_textbox_from, 3, 1, Qt.AlignLeft)
         self.wall_general_layout.addWidget(
-            self.wall_Building_age_group_label_to, 3, 1, Qt.AlignCenter)        
+            self.wall_Building_age_group_label_to, 3, 1, Qt.AlignCenter)
         self.wall_general_layout.addWidget(
             self.wall_Building_age_group_textbox_to, 3, 1, Qt.AlignRight)
         self.wall_general_layout.addWidget(
@@ -5172,9 +5172,9 @@ class MainUI(QDialog):
         try:
             if sender == self.wall_material_list_view.objectName():
                 current_item = self.wall_layer_model.itemFromIndex(item)
-                for layer in self.current_wall_layer:
-                    if self.current_wall_layer.index(layer) + 1 == \
-                       current_item.internal_id:
+                current_layer = self.current_wall.layer
+                for layer in current_layer:
+                    if layer.id == current_item.internal_id:
                         self.current_layer = layer
                         break
         except:
@@ -5198,12 +5198,12 @@ class MainUI(QDialog):
         for material in self.materials:
             if material.name not in temp_list:
                 temp_list.append(material.name)
-        if self.current_layer.Material.name not in temp_list and\
-                self.current_layer.Material.name is not None:
-            temp_list.append(self.current_layer.Material.name)
+        if self.current_layer.material.name not in temp_list and\
+                self.current_layer.material.name is not None:
+            temp_list.append(self.current_layer.material.name)
         self.material_combobox.addItems(sorted(temp_list))
         self.material_combobox.setCurrentIndex(
-            self.material_combobox.findText(self.current_layer.Material.name))
+            self.material_combobox.findText(self.current_layer.material.name))
         self.is_switchable = True
 
         self.material_density_label = QtGui.QLabel("Density")
@@ -5211,42 +5211,40 @@ class MainUI(QDialog):
         self.material_density_textbox.setObjectName(
             _fromUtf8("MaterialDensityTextBox"))
         self.material_density_textbox.setText(
-            str(self.current_layer.Material.density))
+            str(self.current_layer.material.density))
 
         self.material_thermal_conduc_label = QtGui.QLabel("ThermalConduc")
         self.material_thermal_conduc_textbox = QtGui.QLineEdit()
         self.material_thermal_conduc_textbox.setObjectName(
             _fromUtf8("MaterialThermalConducTextBox"))
         self.material_thermal_conduc_textbox.setText(
-            str(self.current_layer.Material.thermal_conduc))
+            str(self.current_layer.material.thermal_conduc))
 
         self.material_heat_capac_label = QtGui.QLabel("HeatCapac")
         self.material_heat_capac_textbox = QtGui.QLineEdit()
         self.material_heat_capac_textbox.setObjectName(
             _fromUtf8("MaterialHeatCapacTextBox"))
         self.material_heat_capac_textbox.setText(
-            str(self.current_layer.Material.heat_capac))
+            str(self.current_layer.material.heat_capac))
 
         self.material_solar_absorp_label = QtGui.QLabel("SolarAbsorp")
         self.material_solar_absorp_textbox = QtGui.QLineEdit()
         self.material_solar_absorp_textbox.setObjectName(
             _fromUtf8("MaterialSolarAbsorpTextBox"))
         self.material_solar_absorp_textbox.setText(
-            str(self.current_layer.Material.solar_absorp))
+            str(self.current_layer.material.solar_absorp))
 
         self.material_ir_emissivity_label = QtGui.QLabel("IrEmissivity")
         self.material_ir_emissivity_textbox = QtGui.QLineEdit()
         self.material_ir_emissivity_textbox.setObjectName(
             _fromUtf8("MaterialIrEmissivityTextBox"))
         self.material_ir_emissivity_textbox.setText(
-            str(self.current_layer.Material.ir_emissivity))
+            str(self.current_layer.material.ir_emissivity))
 
         self.material_transmittance_label = QtGui.QLabel("Transmittance")
         self.material_transmittance_textbox = QtGui.QLineEdit()
         self.material_transmittance_textbox.setObjectName(
             _fromUtf8("MaterialTransmittanceTextBox"))
-        # self.material_transmittance_textbox.setText(
-        #    str(self.current_layer.Material.transmittance))      
 
         self.layer_save_button = QtGui.QPushButton()
         self.layer_save_button.setText("Save")
