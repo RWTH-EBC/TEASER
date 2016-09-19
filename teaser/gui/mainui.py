@@ -1733,6 +1733,67 @@ class MainUI(QDialog):
 
         self.element_model_update_xml.clear()
         wall_id = 0
+        
+        self.element_model_update_xml.clear()
+        for inner_wall in self.thermalZoneFromXML.inner_walls:
+            if type(inner_wall).__name__ == "InnerWall":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + inner_wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(inner_wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(inner_wall.building_age_group), inner_wall.internal_id)
+                self.element_model_update_xml.appendRow(item)
+            if type(inner_wall).__name__ == "Floor":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + inner_wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(inner_wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(inner_wall.building_age_group), inner_wall.internal_id)
+                self.element_model_update_xml.appendRow(item)
+            if type(inner_wall).__name__ == "Ceiling":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + inner_wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(inner_wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(inner_wall.building_age_group), inner_wall.internal_id)
+                self.element_model_update_xml.appendRow(item)
+        for wall in self.thermalZoneFromXML.outer_walls:
+            if type(wall).__name__ == "GroundFloor":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(wall.building_age_group), wall.internal_id)
+                self.element_model_update_xml.appendRow(item)
+            if type(wall).__name__ == "Rooftop":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(wall.building_age_group), wall.internal_id)
+                self.element_model_update_xml.appendRow(item)
+            if type(wall).__name__ == "OuterWall":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(wall.building_age_group), wall.internal_id)
+                self.element_model_update_xml.appendRow(item)
+        for window in self.thermalZoneFromXML.windows:
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + window.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(wall.building_age_group), window.internal_id)
+                self.element_model_update_xml.appendRow(item)
+        """
         for inner_wall in self.thermalZoneFromXML.inner_walls:
             if type(inner_wall).__name__ == "InnerWall":
                 item = TrackableItem(
@@ -1800,6 +1861,7 @@ class MainUI(QDialog):
                     str(wall.building_age_group), wall_id)
                 self.element_model_update_xml.appendRow(item)
                 wall_id += 1
+        """
 
         self.modify_xml_save_cancel_layout = QtGui.QGridLayout()
         self.modify_xml_save_cancel_layout_groupBox = QtGui.QGroupBox()
@@ -4474,48 +4536,48 @@ class MainUI(QDialog):
         self.wall_save_cancel_layoutGroupBox.setLayout(
             self.wall_save_cancel_layout)
         self.wall_save_cancel_layoutGroupBox.setMaximumHeight(48)
-        
+
         current_item_from_index = self.element_model_update_xml.itemFromIndex(
                                        item)
         if "InnerWall" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.inner_walls:
-                if self.thermalZoneFromXML.inner_walls.index(element) == \
+                if element.internal_id == \
                    current_item_from_index.internal_id:
-                    self.current_wall= element
+                    self.current_wall = element
                     break
         if "Floor" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.inner_walls:
-                if self.thermalZoneFromXML.inner_walls.index(element) == \
+                if element.internal_id == \
                    current_item_from_index.internal_id:
                     self.current_wall= element
                     break
         if "Ceiling" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.inner_walls:
-                if self.thermalZoneFromXML.inner_walls.index(element) == \
+                if element.internal_id == \
                    current_item_from_index.internal_id:
                     self.current_wall= element
                     break
         if "OuterWall" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.outer_walls:
-                if self.thermalZoneFromXML.outer_walls.index(element) == \
+                if element.internal_id == \
                    current_item_from_index.internal_id:
                     self.current_wall= element
                     break
         if "GroundFloor" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.outer_walls:
-                if self.thermalZoneFromXML.outer_walls.index(element) == \
+                if element.internal_id == \
                    current_item_from_index.internal_id:
                     self.current_wall= element
                     break
         if "Rooftop" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.outer_walls:
-                if self.thermalZoneFromXML.outer_walls.index(element) == \
+                if element.internal_id == \
                    current_item_from_index.internal_id:
                     self.current_wall= element
                     break
         if "Window" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.windows:
-                if self.thermalZoneFromXML.windows.index(element) == \
+                if element.internal_id == \
                    current_item_from_index.internal_id:
                     self.current_wall= element
                     break
@@ -5983,19 +6045,17 @@ class MainUI(QDialog):
                     self.xml_ui_wall_list_view.currentIndex())
             zone = self.thermalZoneFromXML
             for wall in self.thermalZoneFromXML.inner_walls:
-                if self.thermalZoneFromXML.inner_walls.index(wall) == item.internal_id:
+                if wall.internal_id == item.internal_id:
                     ind = zone.inner_walls.index(wall)
                     del zone.inner_walls[ind]
                     self.update_wall_details()
-
             for wall in zone.outer_walls:
-                if self.thermalZoneFromXML.outer_walls.index(wall) == item.internal_id:
+                if wall.internal_id == item.internal_id:
                     ind = zone.outer_walls.index(wall)
                     del zone.outer_walls[ind]
                     self.update_wall_details()
-
             for wall in self.thermalZoneFromXML.windows:
-                if self.thermalZoneFromXML.windows.index(wall) == item.internal_id:
+                if wall.internal_id == item.internal_id:
                     ind = zone.windows.index(wall)
                     del zone.windows[ind]
                     self.update_wall_details()
