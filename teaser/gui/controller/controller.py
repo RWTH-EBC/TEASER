@@ -399,7 +399,6 @@ class Controller():
         '''
 
         mat_list = []
-        print(inspect.getmembers(project.data.material_bind))
         for mat in project.data.material_bind.Material:
             mat_list.append(mat)
 
@@ -843,8 +842,8 @@ class Controller():
             element.name = type
             element.construction_type = constr_type
             element.inner_convection = inner_con
-            element.inner_radiation = outer_con
-            element.outer_convection = inner_rad
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
             element.add_layer_list(layer_set)
@@ -854,8 +853,8 @@ class Controller():
             element.name = type_of_element
             element.construction_type = constr_type
             element.inner_convection = inner_con
-            element.inner_radiation = outer_con
-            element.outer_convection = inner_rad
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
             element.add_layer_list(layer_set)
@@ -865,8 +864,8 @@ class Controller():
             element.name = type_of_element
             element.construction_type = constr_type
             element.inner_convection = inner_con
-            element.inner_radiation = outer_con
-            element.outer_convection = inner_rad
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
             element.add_layer_list(layer_set)
@@ -876,8 +875,8 @@ class Controller():
             element.name = type_of_element
             element.construction_type = constr_type
             element.inner_convection = inner_con
-            element.inner_radiation = outer_con
-            element.outer_convection = inner_rad
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
             element.add_layer_list(layer_set)
@@ -887,8 +886,8 @@ class Controller():
             element.name = type_of_element
             element.construction_type = constr_type
             element.inner_convection = inner_con
-            element.inner_radiation = outer_con
-            element.outer_convection = inner_rad
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
             element.add_layer_list(layer_set)
@@ -898,8 +897,8 @@ class Controller():
             element.name = type_of_element
             element.construction_type = constr_type
             element.inner_convection = inner_con
-            element.inner_radiation = outer_con
-            element.outer_convection = inner_rad
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
             element.add_layer_list(layer_set)
@@ -909,8 +908,8 @@ class Controller():
             element.name = type_of_element
             element.construction_type = constr_type
             element.inner_convection = inner_con
-            element.inner_radiation = outer_con
-            element.outer_convection = inner_rad
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
             element.outer_radiation = outer_rad
             element.building_age_group = building_age_group
             element.add_layer_list(layer_set)
