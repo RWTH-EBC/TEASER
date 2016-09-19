@@ -1736,51 +1736,6 @@ class MainUI(QDialog):
 
         self.element_model_update_xml.clear()
         wall_id = 0
-        '''
-        for wall in self.xml_element_list:
-            type_of_wall = ""
-            if type(wall).__name__ == "OuterWallType":
-                type_of_wall = "OuterWall"
-            elif type(wall).__name__ == "InnerWallType":
-                type_of_wall = "InnerWall"
-            elif type(wall).__name__ == "RooftopType":
-                type_of_wall = "Rooftop"
-            elif type(wall).__name__ == "GroundFloorType":
-                type_of_wall = "GroundFloor"
-            elif type(wall).__name__ == "WindowType":
-                type_of_wall = "Window"
-            elif type(wall).__name__ == "CeilingType":
-                type_of_wall = "Ceiling"
-            elif type(wall).__name__ == "FloorType":
-                type_of_wall = "Floor"
-
-            if type_of_wall == "OuterWall":
-                # or "GroundFloor" or "Rooftop" :
-                item = TrackableItem(
-                    "Type:\t".expandtabs(8) + type_of_wall +
-                    "\nconstruction_type:\t".expandtabs(11) +
-                    str(wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) +
-                    str(wall.building_age_group), wall_id)
-                self.element_model_update_xml.appendRow(item)
-            elif type_of_wall == "Floor" or "Ceiling" or "InnerWall":
-                item = TrackableItem(
-                    "Type:\t".expandtabs(8) + type_of_wall +
-                    "\nconstruction_type:\t".expandtabs(11) +
-                    str(wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) +
-                    str(wall.building_age_group), wall_id)
-                self.element_model_update_xml.appendRow(item)
-            elif type_of_wall == "Window":
-                item = TrackableItem(
-                    "Type:\t".expandtabs(8) + type_of_wall +
-                    "\nconstruction_type:\t".expandtabs(11) +
-                    str(wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) +
-                    str(wall.building_age_group), wall_id)
-                self.element_model_update_xml.appendRow(item)
-            wall_id += 1
-        '''
         for inner_wall in self.thermalZoneFromXML.inner_walls:
             if type(inner_wall).__name__ == "InnerWall":
                 item = TrackableItem(
@@ -1927,17 +1882,17 @@ class MainUI(QDialog):
                 self.xml_ui_wall_list_view, 1, 0, 2, 2)
         self.xml_window_layout_modify.addWidget(
                 self.xml_ui_del_button, 0, 0, 1, 1)
-        
+
         self.generate_new_xml_save_cancel_layout.addWidget(
             self.generate_new_xml_ui_save_button, 1, 0)
         self.generate_new_xml_save_cancel_layout.addWidget(
             self.generate_new_xml_ui_cancel_button, 1, 1)
-        
+
         self.modify_xml_save_cancel_layout.addWidget(
             self.modify_xml_ui_save_button, 1, 0)
         self.modify_xml_save_cancel_layout.addWidget(
             self.modify_xml_ui_cancel_button, 1, 1)
-        
+
         self.create_new_xml_ui_layout.addWidget(
             self.generate_new_xml_options_groupbox, 0, 0)
         self.create_new_xml_ui_layout.addWidget(
@@ -4456,16 +4411,7 @@ class MainUI(QDialog):
         self.wall_save_cancel_layoutGroupBox.setLayout(
             self.wall_save_cancel_layout)
         self.wall_save_cancel_layoutGroupBox.setMaximumHeight(48)
-
-        '''
-        current_item_from_index = self.element_model_update_xml.itemFromIndex(
-                                       item)
-        for wall in self.xml_element_list:
-                if self.xml_element_list.index(wall) == \
-                   current_item_from_index.internal_id:
-                        self.current_wall= wall
-                        break
-        '''
+        
         current_item_from_index = self.element_model_update_xml.itemFromIndex(
                                        item)
         if "InnerWall" in current_item_from_index.text():
@@ -4602,21 +4548,6 @@ class MainUI(QDialog):
                      self.delete_selected_layer_xml__modify_window)
 
         self.wall_layer_model.clear()
-        '''self.current_wall_layer = []
-        for wall in self.xml_element_list:
-                if self.xml_element_list.index(wall) == \
-                    current_item_from_index.internal_id:
-                    for layer in wall.Layers.layer:
-                        self.current_wall_layer.append(layer)
-                        item = TrackableItem("Material:\t".expandtabs(8) +
-                                             str(layer.Material.name) +
-                                             "\nThickness:\t".expandtabs(14) +
-                                             str(layer.thickness) +
-                                             "\t", layer.id)
-                        self.wall_layer_model.appendRow(item)
-                    break
-        '''
-
         for layer in self.current_wall.layer:
             item = TrackableItem("Material:\t".expandtabs(8) +
                                  str(layer.material.name) +
