@@ -437,7 +437,7 @@ class Controller():
                 wall.outer_convection = outerwall.outer_convection
                 wall.outer_radiation = outerwall.outer_radiation
                 for layerBind in outerwall.Layers.layer:
-                    layer = Layer(wall)
+                    layer = Layer()
                     layer.id = layerBind.id - 1
                     layer.thickness = layerBind.thickness
                     material = Material(layer)
@@ -458,7 +458,7 @@ class Controller():
                 wall.inner_convection = innerwall.inner_convection
                 wall.inner_radiation = innerwall.inner_radiation
                 for layerBind in innerwall.Layers.layer:
-                    layer = Layer(wall)
+                    layer = Layer()
                     layer.id = layerBind.id - 1
                     layer.thickness = layerBind.thickness
                     material = Material(layer)
@@ -481,7 +481,7 @@ class Controller():
                 wall.outer_convection = rooftop.outer_convection
                 wall.outer_radiation = rooftop.outer_radiation
                 for layerBind in rooftop.Layers.layer:
-                    layer = Layer(wall)
+                    layer = Layer()
                     layer.id = layerBind.id - 1
                     layer.thickness = layerBind.thickness
                     material = Material(layer)
@@ -502,7 +502,7 @@ class Controller():
                 wall.inner_convection = groundfloor.inner_convection
                 wall.inner_radiation = groundfloor.inner_radiation
                 for layerBind in groundfloor.Layers.layer:
-                    layer = Layer(wall)
+                    layer = Layer()
                     layer.id = layerBind.id - 1
                     layer.thickness = layerBind.thickness
                     material = Material(layer)
@@ -525,7 +525,7 @@ class Controller():
                 wall.outer_convection = window.outer_convection
                 wall.outer_radiation = window.outer_radiation
                 for layerBind in window.Layers.layer:
-                    layer = Layer(wall)
+                    layer = Layer()
                     layer.id = layerBind.id - 1
                     layer.thickness = layerBind.thickness
                     material = Material(layer)
@@ -546,7 +546,7 @@ class Controller():
                 wall.inner_convection = ceiling.inner_convection
                 wall.inner_radiation = ceiling.inner_radiation
                 for layerBind in ceiling.Layers.layer:
-                    layer = Layer(wall)
+                    layer = Layer()
                     layer.id = layerBind.id - 1
                     layer.thickness = layerBind.thickness
                     material = Material(layer)
@@ -567,7 +567,7 @@ class Controller():
                 wall.inner_convection = floor.inner_convection
                 wall.inner_radiation = floor.inner_radiation
                 for layerBind in floor.Layers.layer:
-                    layer = Layer(wall)
+                    layer = Layer()
                     layer.id = layerBind.id - 1
                     layer.thickness = layerBind.thickness
                     material = Material(layer)
@@ -577,7 +577,6 @@ class Controller():
                     material.heat_capac = layerBind.Material.heat_capac
                     wall.add_layer(layer, layer.id)
                 zone.add_element(wall)
-
 
         wall_list = []
         # print(inspect.getmembers(project.data.element_bind))
@@ -597,7 +596,8 @@ class Controller():
         for mat in project.data.element_bind.Floor:
             wall_list.append(mat)
 
-        return wall_list
+        # return wall_list
+        return zone
 
     @classmethod
     def switch_zone_type(self, zone_type, project, zone_id):
