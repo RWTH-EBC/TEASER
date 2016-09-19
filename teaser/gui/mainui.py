@@ -1413,7 +1413,7 @@ class MainUI(QDialog):
         elif check == "Update XML":
             num_layers = len(self.xml_layer_list) + 1
         elif check == "xml_modify_layer_window":
-            num_layers = len(self.current_wall_layer) + 1
+            num_layers = len(self.current_wall.layer) + 1
 
         if num_layers > 1:
             for x in range(0, num_layers):
@@ -3276,17 +3276,22 @@ class MainUI(QDialog):
                                     parent, position, thick, material, dens,
                                     therm, heat, solar, ir, trans))
             self.xml_layer_list[position].id = position + 1
-            
+
         elif check == "xml_modify_layer_window":
-            parent = None
             position = int(self.new_layer_position_combobox.currentText())
             material = self.new_layer_material_combobox.currentText()
-            self.current_wall_layer.insert(
-                position, Controller.click_add_new_layer(
+            """
+            parent = None
+            self.current_wall.layer.add_layer(
+                Controller.click_add_new_layer(
                                     parent, position, thick, material, dens,
                                     therm, heat, solar, ir, trans))
             self.current_wall_layer[position].id = position + 1
-
+            """
+            self.current_wall = Controller.click_add_new_layer(
+                                        self.current_wall, position, thick,
+                                        material, dens, therm, heat, solar,
+                                        ir, trans)
 
     def change_zone_values_ui(self, item):
         '''Displays attributes of a selected zone
