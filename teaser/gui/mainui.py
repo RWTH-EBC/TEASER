@@ -2615,23 +2615,23 @@ class MainUI(QDialog):
         the inputs from the text fields in set all construction window.
         '''
     
-        for layer in self.current_wall_layer:
+        for layer in self.current_wall.layer:
                 if layer.id == self.current_layer.id:
                                 layer.thickness = float(self.thickness_textbox.text())
-                                layer.Material.name =\
+                                layer.material.name =\
                                     self.material_combobox.currentText()
-                                layer.Material.density = \
+                                layer.material.density = \
                                     float(self.material_density_textbox.text())
-                                layer.Material.thermal_conduc = \
+                                layer.material.thermal_conduc = \
                                     float(self.material_thermal_conduc_textbox.text())
-                                layer.Material.heat_capac = \
+                                layer.material.heat_capac = \
                                     float(self.material_heat_capac_textbox.text())
-                                layer.Material.solar_absorp = \
+                                layer.material.solar_absorp = \
                                     float(self.material_solar_absorp_textbox.text())
-                                layer.Material.ir_emissivity = \
+                                layer.material.ir_emissivity = \
                                     float(self.material_ir_emissivity_textbox.text())
-                                layer.Material.transmittance = \
-                                    float(self.material_transmittance_textbox.text())
+                                #layer.Material.transmittance = \
+                                #    float(self.material_transmittance_textbox.text())
                                 break
 
     def save_changed_simulation_values(self):
@@ -4031,9 +4031,9 @@ class MainUI(QDialog):
         updates the window after layers have been changed.
         '''
         self.wall_layer_model.clear()
-        for layer in self.current_wall_layer:
+        for layer in self.current_wall.layer:
             item = TrackableItem(
-                "Material:\t".expandtabs(8) + str(layer.Material.name) +
+                "Material:\t".expandtabs(8) + str(layer.material.name) +
                 "\nThickness:\t".expandtabs(14) + str(layer.thickness) +
                 "\t", layer.id)
             self.wall_layer_model.appendRow(item)
@@ -5241,11 +5241,12 @@ class MainUI(QDialog):
         self.material_ir_emissivity_textbox.setText(
             str(self.current_layer.material.ir_emissivity))
 
+        '''
         self.material_transmittance_label = QtGui.QLabel("Transmittance")
         self.material_transmittance_textbox = QtGui.QLineEdit()
         self.material_transmittance_textbox.setObjectName(
             _fromUtf8("MaterialTransmittanceTextBox"))
-
+        '''
         self.layer_save_button = QtGui.QPushButton()
         self.layer_save_button.setText("Save")
         self.connect(self.layer_save_button, SIGNAL("clicked()"),
@@ -5286,10 +5287,12 @@ class MainUI(QDialog):
             self.material_ir_emissivity_label, 7, 0)
         self.layer_general_layout.addWidget(
             self.material_ir_emissivity_textbox, 7, 1)
+        '''
         self.layer_general_layout.addWidget(
             self.material_transmittance_label, 8, 0)
         self.layer_general_layout.addWidget(
             self.material_transmittance_textbox, 8, 1)
+        '''
         self.layer_general_layout.addWidget(self.layer_save_button, 9, 0)
         self.layer_general_layout.addWidget(self.layer_cancel_button, 9, 1)
 
