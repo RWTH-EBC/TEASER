@@ -1584,8 +1584,6 @@ class MainUI(QDialog):
         self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"Values")
         self.create_new_xml_ui_groupbox.setLayout(
             self.generate_new_xml_window_layout)
-        # self.xml_element_list =
-        # Controller.get_elements_from_file(self.project)
         self.thermalZoneFromXML = Controller.get_elements_from_file(self.project)
 
         self.generate_new_xml_options_layout = QtGui.QGridLayout()
@@ -1595,10 +1593,8 @@ class MainUI(QDialog):
         self.generate_new_xml_options_groupbox.setMaximumHeight(48)
 
         self.radio_button_xml_add = QtGui.QRadioButton(u"Add")
+        self.radio_button_xml_add.setChecked(True)
         self.radio_button_xml_add.toggled.connect(self.click_radio_button_add)
-        # self.radio_button_xml_delete = QtGui.QRadioButton(u"delete")
-        # self.radio_button_xml_delete.toggled.connect(
-        #     self.click_radio_button_modify)
         self.radio_button_xml_modify = QtGui.QRadioButton(u"Modify")
         self.radio_button_xml_modify.toggled.connect(
             self.click_radio_button_modify)
