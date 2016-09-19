@@ -6058,12 +6058,12 @@ class MainUI(QDialog):
         try:
             item = self.wall_layer_model.itemFromIndex(
                 self.wall_material_list_view.currentIndex())
-            for current_layer in self.current_wall_layer:
-                if (current_layer.internal_id == item.internal_id):
-                    ind = self.xml_layer_list.index(current_layer)
-                    del self.current_wall_layer[ind]
-                    self.update_xml_window_modify()
 
+            for layer in self.current_wall.layer:
+                if (layer.id == item.internal_id):
+                    ind = self.current_wall.layer.index(layer)
+                    del self.current_wall.layer[ind]
+                    self.update_xml_window_modify()
         except (ValueError, AttributeError):
             QtGui.QMessageBox.warning(self,
                                       u"No layer selected",
