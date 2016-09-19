@@ -5193,7 +5193,7 @@ class MainUI(QDialog):
         self.material_label = QtGui.QLabel("Material")
         self.material_combobox = QtGui.QComboBox()
         self.connect(self.material_combobox, QtCore.SIGNAL(
-            "currentIndexChanged(int)"), self.switch_material_xml)
+            "currentIndexChanged(int)"), self.switch_material)
         temp_list = []
         for material in self.materials:
             if material.name not in temp_list:
@@ -5897,31 +5897,6 @@ class MainUI(QDialog):
                         str(self.current_layer.material.thermal_conduc))
                     self.material_heat_capac_textbox.setText(
                         str(self.current_layer.material.heat_capac))
-
-    def switch_material_xml(self):
-        '''Switches between the materials
-
-        if the current material is swapped, this gets the values for the new
-        type and updates the window
-        '''
-
-        if self.is_switchable:
-            cIndex = self.material_combobox.currentText()
-            for material in self.materials:
-                fIndex = material.name
-                if fIndex == cIndex:
-                    self.current_layer.Material.name = material.name
-                    self.current_layer.Material.density = material.density
-                    self.current_layer.Material.thermal_conduc = \
-                        material.thermal_conduc
-                    self.current_layer.Material.heat_capac = \
-                        material.heat_capac
-                    self.material_density_textbox.setText(
-                        str(self.current_layer.Material.density))
-                    self.material_thermal_conduc_textbox.setText(
-                        str(self.current_layer.Material.thermal_conduc))
-                    self.material_heat_capac_textbox.setText(
-                        str(self.current_layer.Material.heat_capac))
 
     def add_thermal_zone(self):
         '''Adds a new thermal zone
