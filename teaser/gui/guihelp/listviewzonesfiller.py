@@ -5,7 +5,9 @@ from PyQt4.Qt import QItemDelegate
 from PyQt4.QtGui import QFont, QPen, QColor, QStyle, QBrush
 from PyQt4.QtCore import Qt, QSize
 
-class ListViewZonesFiller(QItemDelegate): 
+
+class ListViewZonesFiller(QItemDelegate):
+
     def __init__(self, parent=None, *args):
         QItemDelegate.__init__(self, parent, *args)
 
@@ -15,9 +17,8 @@ class ListViewZonesFiller(QItemDelegate):
         self.height = 45
         self.weight = 170
 
-
-    def sizeHint(self, option, index): 
-        return QSize(self.weight ,self.height)
+    def sizeHint(self, option, index):
+        return QSize(self.weight, self.height)
 
     def paint(self, painter, option, index):
         painter.save()
@@ -26,11 +27,11 @@ class ListViewZonesFiller(QItemDelegate):
         if option.state & QStyle.State_Selected:
             painter.setBrush(QBrush(QColor("#FF9999")))
         else:
-            painter.setBrush(QBrush(Qt.white))    
-        painter.drawRect(option.rect)   
+            painter.setBrush(QBrush(Qt.white))
+        painter.drawRect(option.rect)
         painter.setPen(QPen(Qt.black))
         painter.setFont(self.font)
-        text = index.data(Qt.DisplayRole)        
+        text = index.data(Qt.DisplayRole)
         try:
             painter.drawText(option.rect, Qt.AlignLeft, text.toString())
         except:
