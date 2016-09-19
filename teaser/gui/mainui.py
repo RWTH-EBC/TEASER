@@ -2958,14 +2958,17 @@ class MainUI(QDialog):
         building_age_group = [building_from, building_to]
         inner_con = float(
             self.wall_inner_convection_textbox.text())
-        outer_con = float(
-            self.wall_outer_convection_textbox.text())
         inner_rad = float(
             self.wall_inner_radiation_textbox.text())
-        outer_rad = float(
-            self.wall_outer_radiation_textbox.text())
-        layer_set = self.current_wall_layer
-        layer_set = []
+        if type_of_element == "Inner Wall" or "GroundFloor":
+            outer_con = 0
+            outer_rad = 0
+
+        else:
+            outer_con = float(self.wall_outer_convection_textbox.text())
+            outer_rad = float(self.wall_outer_radiation_textbox.text())
+
+        layer_set = self.current_wall.layer
         element = Controller.create_element(type_of_element, constr_type,
                                             building_age_group, inner_con,
                                             outer_con, inner_rad, outer_rad,
