@@ -25,6 +25,7 @@ from teaser.gui.guihelp.trackableitem import TrackableItem
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
 import teaser.logic.utilities as utilitis
 from teaser.project import Project
+from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
 
 
 try:
@@ -1411,7 +1412,7 @@ class MainUI(QDialog):
             num_layers = len(self.all_constr_layer_list) + 1
         elif check == "Update XML":
             num_layers = len(self.xml_layer_list) + 1
-        elif check =="xml_modify_layer_window":
+        elif check == "xml_modify_layer_window":
             num_layers = len(self.current_wall_layer) + 1
 
         if num_layers > 1:
@@ -1490,8 +1491,8 @@ class MainUI(QDialog):
         elif check == "Update XML":
             self.connect(self.new_layer_save_button, SIGNAL(
                 "clicked()"), self.update_xml_window)
-        
-        elif check =="xml_modify_layer_window":
+
+        elif check == "xml_modify_layer_window":
                 self.connect(self.new_layer_save_button, SIGNAL(
                 "clicked()"), self.update_xml_window_modify)
 
@@ -1583,7 +1584,9 @@ class MainUI(QDialog):
         self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"Values")
         self.create_new_xml_ui_groupbox.setLayout(
             self.generate_new_xml_window_layout)
-        self.xml_element_list = Controller.get_elements_from_file(self.project)
+        # self.xml_element_list =
+        # Controller.get_elements_from_file(self.project)
+        self.thermalZoneFromXML = Controller.get_elements_from_file(self.project)
 
         self.generate_new_xml_options_layout = QtGui.QGridLayout()
         self.generate_new_xml_options_groupbox = QtGui.QGroupBox()
@@ -1711,7 +1714,7 @@ class MainUI(QDialog):
         self.xml_ui_modify_groupbox.setLayout(
                    self.xml_window_layout_modify)
         self.xml_ui_modify_groupbox.setVisible(False)
-        
+
         self.xml_ui_del_button = QtGui.QPushButton()
         self.xml_ui_del_button.setText("Delete")
         # self.connect(self.xml_ui_del_button, SIGNAL("clicked()"),
@@ -1733,6 +1736,7 @@ class MainUI(QDialog):
 
         self.element_model_update_xml.clear()
         wall_id = 0
+        '''
         for wall in self.xml_element_list:
             type_of_wall = ""
             if type(wall).__name__ == "OuterWallType":
@@ -1750,33 +1754,101 @@ class MainUI(QDialog):
             elif type(wall).__name__ == "FloorType":
                 type_of_wall = "Floor"
 
-            if type_of_wall == "OuterWall": 
+            if type_of_wall == "OuterWall":
                 # or "GroundFloor" or "Rooftop" :
                 item = TrackableItem(
                     "Type:\t".expandtabs(8) + type_of_wall +
-                    "\nconstruction_type:\t".expandtabs(11) + 
+                    "\nconstruction_type:\t".expandtabs(11) +
                     str(wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) + 
+                    "\nbuilding_age_group:\t".expandtabs(11) +
                     str(wall.building_age_group), wall_id)
                 self.element_model_update_xml.appendRow(item)
             elif type_of_wall == "Floor" or "Ceiling" or "InnerWall":
                 item = TrackableItem(
                     "Type:\t".expandtabs(8) + type_of_wall +
-                    "\nconstruction_type:\t".expandtabs(11) + 
+                    "\nconstruction_type:\t".expandtabs(11) +
                     str(wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) + 
+                    "\nbuilding_age_group:\t".expandtabs(11) +
                     str(wall.building_age_group), wall_id)
                 self.element_model_update_xml.appendRow(item)
             elif type_of_wall == "Window":
                 item = TrackableItem(
                     "Type:\t".expandtabs(8) + type_of_wall +
-                    "\nconstruction_type:\t".expandtabs(11) + 
+                    "\nconstruction_type:\t".expandtabs(11) +
                     str(wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) + 
+                    "\nbuilding_age_group:\t".expandtabs(11) +
                     str(wall.building_age_group), wall_id)
                 self.element_model_update_xml.appendRow(item)
             wall_id += 1
-            
+        '''
+        for inner_wall in self.thermalZoneFromXML.inner_walls:
+            if type(inner_wall).__name__ == "InnerWall":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + inner_wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(inner_wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(inner_wall.building_age_group), wall_id)
+                self.element_model_update_xml.appendRow(item)
+                wall_id += 1
+            if type(inner_wall).__name__ == "Floor":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + inner_wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(inner_wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(inner_wall.building_age_group), wall_id)
+                self.element_model_update_xml.appendRow(item)
+                wall_id += 1
+            if type(inner_wall).__name__ == "Ceiling":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + inner_wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(inner_wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(inner_wall.building_age_group), wall_id)
+                self.element_model_update_xml.appendRow(item)
+                wall_id += 1
+        wall_id = 0
+        for wall in self.thermalZoneFromXML.outer_walls:
+            if type(wall).__name__ == "GroundFloor":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(wall.building_age_group), wall_id)
+                self.element_model_update_xml.appendRow(item)
+                wall_id += 1
+            if type(wall).__name__ == "Rooftop":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(wall.building_age_group), wall_id)
+                self.element_model_update_xml.appendRow(item)
+                wall_id += 1
+            if type(wall).__name__ == "OuterWall":
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + wall.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(wall.building_age_group), wall_id)
+                self.element_model_update_xml.appendRow(item)
+                wall_id += 1
+        wall_id = 0
+        for window in self.thermalZoneFromXML.windows:
+                item = TrackableItem(
+                    "Type:\t".expandtabs(8) + window.name +
+                    "\nconstruction_type:\t".expandtabs(11) +
+                    str(wall.construction_type) +
+                    "\nbuilding_age_group:\t".expandtabs(11) +
+                    str(wall.building_age_group), wall_id)
+                self.element_model_update_xml.appendRow(item)
+                wall_id += 1
+
         self.modify_xml_save_cancel_layout = QtGui.QGridLayout()
         self.modify_xml_save_cancel_layout_groupBox = QtGui.QGroupBox()
         self.modify_xml_save_cancel_layout_groupBox.setLayout(
@@ -1785,7 +1857,7 @@ class MainUI(QDialog):
 
         self.modify_xml_ui_save_button = QtGui.QPushButton()
         self.modify_xml_ui_save_button.setText("Save")
-        #self.connect(self.modify_xml_ui_save_button, SIGNAL(
+        # self.connect(self.modify_xml_ui_save_button, SIGNAL(
         #    "clicked()"), self.)
         self.connect(self.modify_xml_ui_save_button, SIGNAL(
             "clicked()"), self.create_new_xml_ui_page,
@@ -1799,7 +1871,7 @@ class MainUI(QDialog):
 
         self.generate_new_xml_options_layout.addWidget(
             self.radio_button_xml_add, 1, 0, Qt.AlignLeft)
-        #self.generate_new_xml_options_layout.addWidget(
+        # self.generate_new_xml_options_layout.addWidget(
         #    self.radio_button_xml_delete, 1, 1)
         self.generate_new_xml_options_layout.addWidget(
             self.radio_button_xml_modify, 1, 1, Qt.AlignRight)
@@ -2868,7 +2940,7 @@ class MainUI(QDialog):
                                             outer_con, inner_rad, outer_rad,
                                             layer_set)
         Controller.add_element_to_xml(element, path)
-        
+
     def modify_element_in_xml(self):
 
         # path = str(self.generate_new_xml_ui_path_line_edit.text())
@@ -4364,7 +4436,7 @@ class MainUI(QDialog):
         self.wall_build_ui.setFixedHeight(600)
         self.wall_build_ui_window_layout = QtGui.QGridLayout()
         self.wall_build_ui.setLayout(self.wall_build_ui_window_layout)
-        
+
         self.wall_general_layout = QtGui.QGridLayout()
         self.wall_general_layout_groupBox = QtGui.QGroupBox(
             "General Wall Values")
@@ -4377,6 +4449,7 @@ class MainUI(QDialog):
             self.wall_save_cancel_layout)
         self.wall_save_cancel_layoutGroupBox.setMaximumHeight(48)
 
+        '''
         current_item_from_index = self.element_model_update_xml.itemFromIndex(
                                        item)
         for wall in self.xml_element_list:
@@ -4384,6 +4457,51 @@ class MainUI(QDialog):
                    current_item_from_index.internal_id:
                         current_wall = wall
                         break
+        '''
+        current_item_from_index = self.element_model_update_xml.itemFromIndex(
+                                       item)
+        if "InnerWall" in current_item_from_index.text():
+            for element in self.thermalZoneFromXML.inner_walls:
+                if self.thermalZoneFromXML.inner_walls.index(element) == \
+                   current_item_from_index.internal_id:
+                        current_wall = element
+                        break
+        if "Floor" in current_item_from_index.text():
+            for element in self.thermalZoneFromXML.inner_walls:
+                if self.thermalZoneFromXML.inner_walls.index(element) == \
+                   current_item_from_index.internal_id:
+                    current_wall = element
+                    break
+        if "Ceiling" in current_item_from_index.text():
+            for element in self.thermalZoneFromXML.inner_walls:
+                if self.thermalZoneFromXML.inner_walls.index(element) == \
+                   current_item_from_index.internal_id:
+                    current_wall = element
+                    break
+        if "OuterWall" in current_item_from_index.text():
+            for element in self.thermalZoneFromXML.outer_walls:
+                if self.thermalZoneFromXML.outer_walls.index(element) == \
+                   current_item_from_index.internal_id:
+                    current_wall = element
+                    break
+        if "GroundFloor" in current_item_from_index.text():
+            for element in self.thermalZoneFromXML.outer_walls:
+                if self.thermalZoneFromXML.outer_walls.index(element) == \
+                   current_item_from_index.internal_id:
+                    current_wall = element
+                    break
+        if "Rooftop" in current_item_from_index.text():
+            for element in self.thermalZoneFromXML.outer_walls:
+                if self.thermalZoneFromXML.outer_walls.index(element) == \
+                   current_item_from_index.internal_id:
+                    current_wall = element
+                    break
+        if "Window" in current_item_from_index.text():
+            for element in self.thermalZoneFromXML.windows:
+                if self.thermalZoneFromXML.windows.index(element) == \
+                   current_item_from_index.internal_id:
+                    current_wall = element
+                    break
 
         self.wall_type_label = QtGui.QLabel("Type")
         self.wall_type_line_edit = QtGui.QLineEdit()
@@ -4476,7 +4594,7 @@ class MainUI(QDialog):
                      self.delete_selected_layer_xml__modify_window)
 
         self.wall_layer_model.clear()
-        self.current_wall_layer = []
+        '''self.current_wall_layer = []
         for wall in self.xml_element_list:
                 if self.xml_element_list.index(wall) == \
                     current_item_from_index.internal_id:
@@ -4489,6 +4607,15 @@ class MainUI(QDialog):
                                              "\t", layer.id)
                         self.wall_layer_model.appendRow(item)
                     break
+        '''
+
+        for layer in current_wall.layer:
+            item = TrackableItem("Material:\t".expandtabs(8) +
+                                 str(layer.material.name) +
+                                 "\nThickness:\t".expandtabs(14) +
+                                 str(layer.thickness) +
+                                 "\t", layer.id)
+            self.wall_layer_model.appendRow(item)
 
         self.wall_material_list_view = QtGui.QListView()
         self.wall_material_list_view.setGeometry(
@@ -5702,11 +5829,11 @@ class MainUI(QDialog):
 
     def switch_lib(self):
         if self.export_create_library_combobox.currentText() == "AixLib":
-            #self.export_model_groupbox = self.aixlib_groupbox
+            # self.export_model_groupbox = self.aixlib_groupbox
             self.annex_groupbox.setVisible(False)
             self.aixlib_groupbox.setVisible(True)
         else:
-            #self.export_model_groupbox = self.annex_groupbox
+            # self.export_model_groupbox = self.annex_groupbox
             self.aixlib_groupbox.setVisible(False)
             self.annex_groupbox.setVisible(True)
         """
