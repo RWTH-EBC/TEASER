@@ -1685,7 +1685,7 @@ class MainUI(QDialog):
         self.generate_new_xml_ui_path_line_edit.setObjectName(
             "generate_new_xml_ui_path_line_edit")
         self.generate_new_xml_ui_path_line_edit.setText(
-            utilitis.get_full_path("Data\Input\InputData\Test.xml"))
+            utilitis.get_full_path("Data\Input\InputData\TypeBuildingElements.xml"))
         self.generate_new_xml_ui_browse = QtGui.QPushButton("Browse")
         self.connect(self.generate_new_xml_ui_browse, SIGNAL(
             "clicked()"), self.click_browse_button_xml)
@@ -1814,7 +1814,7 @@ class MainUI(QDialog):
 
         self.element_model_update_xml.clear()
         wall_id = 0
-        
+
         self.element_model_update_xml.clear()
         for inner_wall in self.thermalZoneFromXML.inner_walls:
             if type(inner_wall).__name__ == "InnerWall":
@@ -1952,8 +1952,8 @@ class MainUI(QDialog):
 
         self.modify_xml_ui_save_button = QtGui.QPushButton()
         self.modify_xml_ui_save_button.setText("Save")
-        # self.connect(self.modify_xml_ui_save_button, SIGNAL(
-        #    "clicked()"), self.)
+        self.connect(self.modify_xml_ui_save_button, SIGNAL(
+            "clicked()"), self.delete_element_in_xml)
         self.connect(self.modify_xml_ui_save_button, SIGNAL(
             "clicked()"), self.create_new_xml_ui_page,
             QtCore.SLOT("close()"))
@@ -3054,7 +3054,7 @@ class MainUI(QDialog):
 
     def modify_element_in_xml(self):
 
-        # path = str(self.generate_new_xml_ui_path_line_edit.text())
+        path = str(self.generate_new_xml_ui_path_line_edit.text())
         type_of_element = self.wall_type_line_edit.text()
         if type_of_element == "InnerWall":
             type_of_element = "Inner Wall"
@@ -3084,7 +3084,11 @@ class MainUI(QDialog):
                                             building_age_group, inner_con,
                                             outer_con, inner_rad, outer_rad,
                                             layer_set)
-        Controller.modify_element_in_xml(element, path = None)
+        Controller.modify_element_in_xml(element, path = path)
+
+    def delete_element_in_xml(self):
+        path = str(self.generate_new_xml_ui_path_line_edit.text())
+        Controller.delete_element_in_xml(self.deleted_wall, path = path)
 
     def clear_input_values_set_all_constr(self):
         '''Clears layer values
@@ -6299,16 +6303,19 @@ class MainUI(QDialog):
             zone = self.thermalZoneFromXML
             for wall in self.thermalZoneFromXML.inner_walls:
                 if wall.internal_id == item.internal_id:
+                    self.deleted_wall = wall
                     ind = zone.inner_walls.index(wall)
                     del zone.inner_walls[ind]
                     self.update_wall_details()
             for wall in zone.outer_walls:
                 if wall.internal_id == item.internal_id:
+                    self.deleted_wall = wall
                     ind = zone.outer_walls.index(wall)
                     del zone.outer_walls[ind]
                     self.update_wall_details()
             for wall in self.thermalZoneFromXML.windows:
                 if wall.internal_id == item.internal_id:
+                    self.deleted_wall = wall
                     ind = zone.windows.index(wall)
                     del zone.windows[ind]
                     self.update_wall_details()
