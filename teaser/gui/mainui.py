@@ -1665,7 +1665,9 @@ class MainUI(QDialog):
         self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"Values")
         self.create_new_xml_ui_groupbox.setLayout(
             self.generate_new_xml_window_layout)
-        self.thermalZoneFromXML = Controller.get_elements_from_file(self.project)
+        self.project.data = self.project.instantiate_data_class()
+        self.thermalZoneFromXML = Controller.get_elements_from_file(
+                                                self.project)
 
         self.generate_new_xml_options_layout = QtGui.QGridLayout()
         self.generate_new_xml_options_groupbox = QtGui.QGroupBox()
@@ -1871,7 +1873,7 @@ class MainUI(QDialog):
                     "\nbuilding_age_group:\t".expandtabs(11) +
                     str(wall.building_age_group), window.internal_id)
                 self.element_model_update_xml.appendRow(item)
-       
+
         self.modify_xml_save_cancel_layout = QtGui.QGridLayout()
         self.modify_xml_save_cancel_layout_groupBox = QtGui.QGroupBox()
         self.modify_xml_save_cancel_layout_groupBox.setLayout(
@@ -3012,11 +3014,12 @@ class MainUI(QDialog):
                                             building_age_group, inner_con,
                                             outer_con, inner_rad, outer_rad,
                                             layer_set)
-        Controller.modify_element_in_xml(element, path = path)
+        Controller.modify_element_in_xml(element, path=path)
 
     def delete_element_in_xml(self):
         path = str(self.generate_new_xml_ui_path_line_edit.text())
-        Controller.delete_element_in_xml(self.deleted_wall, path = path)
+        Controller.delete_element_in_xml(self.deleted_wall, path=path)
+
 
     def clear_input_values_set_all_constr(self):
         '''Clears layer values
