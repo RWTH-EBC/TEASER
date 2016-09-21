@@ -6,6 +6,7 @@
 
 
 import warnings
+import os
 import teaser.logic.utilities as utilitis
 import teaser.data.input.teaserxml_input as txml_in
 import teaser.data.output.teaserxml_output as txml_out
@@ -837,7 +838,7 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = utilitis.get_full_path("OutputData") + "/" + name
+            new_path = os.path.join(utilitis.get_default_path(), name)
         else:
             new_path = path + "/" + name
             utilitis.create_path(utilitis.get_full_path(path))
@@ -882,7 +883,7 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = utilitis.get_full_path("OutputData") + "/" + name
+            new_path = os.path.join(utilitis.get_default_path(), name)
         else:
             new_path = path + "/" + name
             utilitis.create_path(utilitis.get_full_path(path))
@@ -1004,7 +1005,7 @@ class Project(object):
         '''
 
         if path is None:
-            path = "OutputData/"+self.name
+            path = os.path.join(utilitis.get_default_path(), self.name)
         else:
             path = path+"/"+self.name
 
