@@ -1813,9 +1813,6 @@ class MainUI(QDialog):
                     self.show_wall_build_ui)
 
         self.element_model_update_xml.clear()
-        wall_id = 0
-
-        self.element_model_update_xml.clear()
         for inner_wall in self.thermalZoneFromXML.inner_walls:
             if type(inner_wall).__name__ == "InnerWall":
                 item = TrackableItem(
@@ -1874,76 +1871,7 @@ class MainUI(QDialog):
                     "\nbuilding_age_group:\t".expandtabs(11) +
                     str(wall.building_age_group), window.internal_id)
                 self.element_model_update_xml.appendRow(item)
-        """
-        for inner_wall in self.thermalZoneFromXML.inner_walls:
-            if type(inner_wall).__name__ == "InnerWall":
-                item = TrackableItem(
-                    "Type:\t".expandtabs(8) + inner_wall.name +
-                    "\nconstruction_type:\t".expandtabs(11) +
-                    str(inner_wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) +
-                    str(inner_wall.building_age_group), wall_id)
-                self.element_model_update_xml.appendRow(item)
-                wall_id += 1
-            if type(inner_wall).__name__ == "Floor":
-                item = TrackableItem(
-                    "Type:\t".expandtabs(8) + inner_wall.name +
-                    "\nconstruction_type:\t".expandtabs(11) +
-                    str(inner_wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) +
-                    str(inner_wall.building_age_group), wall_id)
-                self.element_model_update_xml.appendRow(item)
-                wall_id += 1
-            if type(inner_wall).__name__ == "Ceiling":
-                item = TrackableItem(
-                    "Type:\t".expandtabs(8) + inner_wall.name +
-                    "\nconstruction_type:\t".expandtabs(11) +
-                    str(inner_wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) +
-                    str(inner_wall.building_age_group), wall_id)
-                self.element_model_update_xml.appendRow(item)
-                wall_id += 1
-        wall_id = 0
-        for wall in self.thermalZoneFromXML.outer_walls:
-            if type(wall).__name__ == "GroundFloor":
-                item = TrackableItem(
-                    "Type:\t".expandtabs(8) + wall.name +
-                    "\nconstruction_type:\t".expandtabs(11) +
-                    str(wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) +
-                    str(wall.building_age_group), wall_id)
-                self.element_model_update_xml.appendRow(item)
-                wall_id += 1
-            if type(wall).__name__ == "Rooftop":
-                item = TrackableItem(
-                    "Type:\t".expandtabs(8) + wall.name +
-                    "\nconstruction_type:\t".expandtabs(11) +
-                    str(wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) +
-                    str(wall.building_age_group), wall_id)
-                self.element_model_update_xml.appendRow(item)
-                wall_id += 1
-            if type(wall).__name__ == "OuterWall":
-                item = TrackableItem(
-                    "Type:\t".expandtabs(8) + wall.name +
-                    "\nconstruction_type:\t".expandtabs(11) +
-                    str(wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) +
-                    str(wall.building_age_group), wall_id)
-                self.element_model_update_xml.appendRow(item)
-                wall_id += 1
-        wall_id = 0
-        for window in self.thermalZoneFromXML.windows:
-                item = TrackableItem(
-                    "Type:\t".expandtabs(8) + window.name +
-                    "\nconstruction_type:\t".expandtabs(11) +
-                    str(wall.construction_type) +
-                    "\nbuilding_age_group:\t".expandtabs(11) +
-                    str(wall.building_age_group), wall_id)
-                self.element_model_update_xml.appendRow(item)
-                wall_id += 1
-        """
-
+       
         self.modify_xml_save_cancel_layout = QtGui.QGridLayout()
         self.modify_xml_save_cancel_layout_groupBox = QtGui.QGroupBox()
         self.modify_xml_save_cancel_layout_groupBox.setLayout(
