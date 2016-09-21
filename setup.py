@@ -58,5 +58,5 @@ setup(name='teaser',
 					'teaser.examples.examplefiles': ['*.teaserXML'],
 					'teaser.examples.examplefiles.MelatenXML': ['*.xml']},
       classifiers = ['License :: OSI Approved :: MIT License'],
-      setup_requires = ['mako', 'pyxb', 'pytest'],
-      install_requires = ['mako', 'pyxb', 'pytest'])
+      setup_requires = ['mako', 'pyxb==1.2.4', 'pytest'],
+      install_requires = ['mako', 'pyxb==1.2.4', 'pytest'])
