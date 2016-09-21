@@ -2955,13 +2955,17 @@ class MainUI(QDialog):
                                             building_age_group, inner_con,
                                             outer_con, inner_rad, outer_rad,
                                             layer_set)
-        Controller.modify_element_in_xml(element, path=path)
+        Controller.delete_element_in_xml(self.selected_wall, path)
+        Controller.add_element_to_xml(element, path)
+        self.project.data = self.project.instantiate_data_class()
+        self.thermalZoneFromXML = Controller.get_elements_from_file(
+                                                self.project)
+        self.update_wall_details()
 
     def delete_element_in_xml(self):
         path = str(self.generate_new_xml_ui_path_line_edit.text())
         Controller.delete_element_in_xml(self.deleted_wall, path=path)
         self.project.data = self.project.instantiate_data_class()
-
 
     def clear_input_values_set_all_constr(self):
         '''Clears layer values
@@ -3290,14 +3294,6 @@ class MainUI(QDialog):
         elif check == "xml_modify_layer_window":
             position = int(self.new_layer_position_combobox.currentText())
             material = self.new_layer_material_combobox.currentText()
-            """
-            parent = None
-            self.current_wall.layer.add_layer(
-                Controller.click_add_new_layer(
-                                    parent, position, thick, material, dens,
-                                    therm, heat, solar, ir, trans))
-            self.current_wall_layer[position].id = position + 1
-            """
             self.current_wall = Controller.click_add_new_layer(
                                         self.current_wall, position, thick,
                                         material, dens, therm, heat, solar,
@@ -4594,42 +4590,49 @@ class MainUI(QDialog):
                 if element.internal_id == \
                    current_item_from_index.internal_id:
                     self.current_wall = element
+                    self.selected_wall = element
                     break
         if "Floor" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.inner_walls:
                 if element.internal_id == \
                    current_item_from_index.internal_id:
-                    self.current_wall= element
+                    self.current_wall = element
+                    self.selected_wall = element
                     break
         if "Ceiling" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.inner_walls:
                 if element.internal_id == \
                    current_item_from_index.internal_id:
-                    self.current_wall= element
+                    self.current_wall = element
+                    self.selected_wall = element
                     break
         if "OuterWall" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.outer_walls:
                 if element.internal_id == \
                    current_item_from_index.internal_id:
-                    self.current_wall= element
+                    self.current_wall = element
+                    self.selected_wall = element
                     break
         if "GroundFloor" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.outer_walls:
                 if element.internal_id == \
                    current_item_from_index.internal_id:
-                    self.current_wall= element
+                    self.current_wall = element
+                    self.selected_wall = element
                     break
         if "Rooftop" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.outer_walls:
                 if element.internal_id == \
                    current_item_from_index.internal_id:
-                    self.current_wall= element
+                    self.current_wall = element
+                    self.selected_wall = element
                     break
         if "Window" in current_item_from_index.text():
             for element in self.thermalZoneFromXML.windows:
                 if element.internal_id == \
                    current_item_from_index.internal_id:
-                    self.current_wall= element
+                    self.current_wall = element
+                    self.selected_wall = element
                     break
 
         self.wall_type_label = QtGui.QLabel("Type")
