@@ -1665,7 +1665,6 @@ class MainUI(QDialog):
         self.create_new_xml_ui_groupbox = QtGui.QGroupBox(u"Values")
         self.create_new_xml_ui_groupbox.setLayout(
             self.generate_new_xml_window_layout)
-        self.project.data = self.project.instantiate_data_class()
         self.thermalZoneFromXML = Controller.get_elements_from_file(
                                                 self.project)
 
@@ -2961,6 +2960,7 @@ class MainUI(QDialog):
     def delete_element_in_xml(self):
         path = str(self.generate_new_xml_ui_path_line_edit.text())
         Controller.delete_element_in_xml(self.deleted_wall, path=path)
+        self.project.data = self.project.instantiate_data_class()
 
 
     def clear_input_values_set_all_constr(self):
