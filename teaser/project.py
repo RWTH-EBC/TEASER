@@ -115,7 +115,7 @@ class Project(object):
         '''
         return DataClass(type_element_file)
 
-    def calc_all_buildings(self):
+    def calc_all_buildings(self, raise_errors=False):
         '''Calculates values for all project buildings
 
         You need to set the following parameters in the Project class.
@@ -134,17 +134,23 @@ class Project(object):
             used library (AixLib and Annex60 are supported)
 
         '''
-
-
-        for bldg in reversed(self.buildings):
-            try:
+        if raise_errors is True:
+            for bldg in reversed(self.buildings):
                 bldg.calc_building_parameter(
                     number_of_elements=self._number_of_elements_calc,
                     merge_windows=self._merge_windows_calc,
                     used_library=self._used_library_calc)
-            except:
-                print(bldg.name)
-                self.buildings.remove(bldg)
+        else:
+            for bldg in reversed(self.buildings):
+                try:
+                    bldg.calc_building_parameter(
+                        number_of_elements=self._number_of_elements_calc,
+                        merge_windows=self._merge_windows_calc,
+                        used_library=self._used_library_calc)
+                except:
+                    print("Following building can't be calculated:", bldg.name)
+                    print("raise_errors=True to get python errors")
+                    self.buildings.remove(bldg)
 
     def retrofit_all_buildings(self,
                                year_of_retrofit,
