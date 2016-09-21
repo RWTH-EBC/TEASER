@@ -15,6 +15,7 @@ def celsius_to_kelvin(value):
         f_value = 0
     return f_value+273.15
 
+
 def create_path(path):
     '''Create a folder.
 
@@ -35,23 +36,25 @@ def create_path(path):
             os.makedirs(path)
 
         os.chdir(path)
-    
     return path
+
 
 def get_default_path():
     '''Function to construct default path to OutputData folder
-    
     This function constructs the default path to the OutputData folder
 
     '''
 
-    directory = os.path.dirname(__file__)
-    src = "teaser"
-    last_index = directory.rfind(src)
-    default_path = os.path.join(directory[:last_index], "teaser", "OutputData")
+    home_path = os.path.expanduser('~')
 
+    teaser_default_path = os.path.join(home_path, 'TEASEROutput')
 
-    return default_path
+    # directory = os.path.dirname(__file__)
+    # src = "teaser"
+    # last_index = directory.rfind(src)
+    # teaser_default_path = os.path.join(directory[:last_index], "teaser", "OutputData")
+
+    return teaser_default_path
 
 
 def get_full_path(rel_path):

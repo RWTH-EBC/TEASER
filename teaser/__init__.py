@@ -18,7 +18,7 @@ elif v >= (2, 7) and v < (3,):
 else:
     raise Exception('This software runs on python versions 2.7 or >=3.3 only!')
 
-new_path = utilitis.get_full_path("OutputData")
+new_path = os.path.join(os.path.expanduser('~'), ("TEASEROutput"))
 if not os.path.exists(new_path):
     os.makedirs(new_path)
 
