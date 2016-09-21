@@ -3061,7 +3061,7 @@ class MainUI(QDialog):
         if type_of_element == "OuterWall":
             type_of_element = "Outer Wall"
         constr_type = \
-            self.generate_new_xml_ui_constr_type_line_edit.text()
+            self.wall_construction_type_combobox.currentText()
         building_from = float(
             self.wall_Building_age_group_textbox_from.text())
         building_to = float(
