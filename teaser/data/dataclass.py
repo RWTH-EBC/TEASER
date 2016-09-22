@@ -11,6 +11,7 @@ import teaser.data.bindings.typeelement_bind as tb_bind
 import teaser.data.bindings.boundaryconditions_bind as uc_bind
 import teaser.data.bindings.material_bind as mat_bind
 import codecs
+import xml.etree.ElementTree as element_tree
 
 class DataClass(object):
     '''Class for XML data bindings
@@ -50,6 +51,9 @@ class DataClass(object):
             self.path_tb = utilitis.get_full_path("data/input/inputdata/"+str(
                 type_element_file))
 
+        version_parse = element_tree.parse(self.path_tb)
+        if version_parse.getroot().attrib['version'] == "ASD":
+            print("asd")
         __xml_file_tb = open(self.path_tb, 'r')
         self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
         self.path_uc = utilitis.get_full_path(
