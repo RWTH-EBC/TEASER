@@ -52,10 +52,12 @@ class DataClass(object):
                 type_element_file))
 
         version_parse = element_tree.parse(self.path_tb)
-        if version_parse.getroot().attrib['version'] == "ASD":
-            print("asd")
-        __xml_file_tb = open(self.path_tb, 'r')
-        self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
+        if version_parse.getroot().attrib['version'] == "0.3.9" or \
+                version_parse.getroot().attrib['version'] == "":
+            __xml_file_tb = open(self.path_tb, 'r')
+            self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
+        else:
+            print("aatttsch")
         self.path_uc = utilitis.get_full_path(
             "data/input/inputdata/UseConditions.xml")
         __xml_file_uc = open(self.path_uc, 'r')
