@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='teaser',
-      version='0.3.6',
+      version='0.3.9',
       description='Tool for Energy Analysis and Simulation for Efficient Retrofit ',
       url='https://github.com/RWTH-EBC/TEASER',
       author='RWTH Aachen University, E.ON Energy Research Center, Institute of Energy Efficient Buildings and Indoor Climate',
@@ -58,5 +58,5 @@ setup(name='teaser',
 					'teaser.examples.examplefiles': ['*.teaserXML'],
 					'teaser.examples.examplefiles.MelatenXML': ['*.xml']},
       classifiers = ['License :: OSI Approved :: MIT License'],
-      setup_requires = ['mako', 'pyxb', 'pytest'],
-      install_requires = ['mako', 'pyxb', 'pytest'])
+      setup_requires = ['mako', 'pyxb==1.2.4', 'pytest'],
+      install_requires = ['mako', 'pyxb==1.2.4', 'pytest'])

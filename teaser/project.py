@@ -6,6 +6,7 @@
 
 
 import warnings
+import os
 import teaser.logic.utilities as utilitis
 import teaser.data.input.teaserxml_input as txml_in
 import teaser.data.output.teaserxml_output as txml_out
@@ -79,8 +80,9 @@ class Project(object):
         self.modelica_info = ModelicaInfo()
 
         self.modelica_project = self.name
-        self.weather_file_header = ""
-        self.weather_file_path = ""
+        self.weather_file_header = "wetter"
+        self.weather_file_path = "modelica://AixLib/Resources/WeatherData/" \
+                                 "TRY2010_12_Jahr_Modelica-Library.txt"
         self.buildings = []
 
         self._calculation_method = "vdi"
@@ -114,7 +116,7 @@ class Project(object):
         '''
         return DataClass(type_element_file)
 
-    def calc_all_buildings(self):
+    def calc_all_buildings(self, raise_errors=False):
         '''Calculates values for all project buildings
 
         You need to set the following parameters in the Project class.
@@ -133,17 +135,23 @@ class Project(object):
             used library (AixLib and Annex60 are supported)
 
         '''
-
-
-        for bldg in reversed(self.buildings):
-            try:
+        if raise_errors is True:
+            for bldg in reversed(self.buildings):
                 bldg.calc_building_parameter(
                     number_of_elements=self._number_of_elements_calc,
                     merge_windows=self._merge_windows_calc,
                     used_library=self._used_library_calc)
-            except:
-                print("Can't calculate building:", bldg.name, bldg)
-                self.buildings.remove(bldg)
+        else:
+            for bldg in reversed(self.buildings):
+                try:
+                    bldg.calc_building_parameter(
+                        number_of_elements=self._number_of_elements_calc,
+                        merge_windows=self._merge_windows_calc,
+                        used_library=self._used_library_calc)
+                except:
+                    print("Following building can't be calculated:", bldg.name)
+                    print("raise_errors=True to get python errors")
+                    self.buildings.remove(bldg)
 
     def retrofit_all_buildings(self,
                                year_of_retrofit,
@@ -181,8 +189,7 @@ class Project(object):
         '''
 
         for bldg in self.buildings:
-            bldg.year_of_retrofit = year_of_retrofit
-            bldg.retrofit_building()
+            bldg.retrofit_building(year_of_retrofit, window_type, material)
 
     def type_bldg_office(self,
                          name,
@@ -251,9 +258,9 @@ class Project(object):
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_institute(self,
@@ -831,7 +838,7 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = utilitis.get_full_path("OutputData") + "/" + name
+            new_path = os.path.join(utilitis.get_default_path(), name)
         else:
             new_path = path + "/" + name
             utilitis.create_path(utilitis.get_full_path(path))
@@ -876,7 +883,7 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = utilitis.get_full_path("OutputData") + "/" + name
+            new_path = os.path.join(utilitis.get_default_path(), name)
         else:
             new_path = path + "/" + name
             utilitis.create_path(utilitis.get_full_path(path))
@@ -998,7 +1005,7 @@ class Project(object):
         '''
 
         if path is None:
-            path = "OutputData/"+self.name
+            path = os.path.join(utilitis.get_default_path(), self.name)
         else:
             path = path+"/"+self.name
 
@@ -1012,8 +1019,9 @@ class Project(object):
         self.name = "Project"
 
         self.modelica_project = self.name
-        self.weather_file_header = ""
-        self.weather_file_path = ""
+        self.weather_file_header = "wetter"
+        self.weather_file_path = "modelica://AixLib/Resources/WeatherData/" \
+                                 "TRY2010_12_Jahr_Modelica-Library.txt"
         self.buildings = []
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
