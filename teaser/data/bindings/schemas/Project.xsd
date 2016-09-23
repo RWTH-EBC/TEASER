@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.3.9">
-  <xs:include schemaLocation="D:\GIT\TEASER\teaser\Data\SchemaBindings\schemas\BoundaryConditions.xsd"/>
+  <xs:include schemaLocation="BoundaryConditions.xsd"/>
   <xs:element name="Project" type="ProjectType"/>
   <xs:complexType name="UseConditionType">
     <xs:sequence>
