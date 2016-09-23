@@ -236,7 +236,11 @@ class BuildingElement(object):
 
             self._layer.append(lay_count)
 
-    def load_type_element(self, year, construction, binding):
+    def load_type_element(self,
+                          year,
+                          construction,
+                          element_binding=None,
+                          mat_binding=None):
         '''Typical element loader.
 
         Loads typical building elements according to their construction
@@ -251,6 +255,14 @@ class BuildingElement(object):
 
         construction : str
             Construction type, code list ('heavy', 'light')
+
+        element_binding : pyxb Type Element binding
+            If binding is none, the Project binding will be used, otherwise you
+            can use a specific XML binding for your own purpose
+
+        mat_binding : pyxb Material binding
+            If binding is none, the Project binding will be used, otherwise you
+            can use a specific XML binding for your own purpose
 
         Raises
         ----------
@@ -268,7 +280,8 @@ class BuildingElement(object):
         buildingelement_input.load_type_element(element=self,
                                                 year=year,
                                                 construction=construction,
-                                                binding=binding)
+                                                element_binding=element_binding,
+                                                mat_binding=mat_binding)
 
     def save_type_element(self, path=None, file_name=None):
         '''Typical element saver.
