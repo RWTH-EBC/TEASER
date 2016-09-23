@@ -6,7 +6,7 @@
 This module contains function to save building element classes
 """
 
-import teaser.data.bindings.typeelement_bind as tb_bind
+import teaser.data.bindings.v_0_3_9.typeelement_bind as tb_bind
 import teaser.logic.utilities as utilitis
 import warnings
 
@@ -44,7 +44,7 @@ def save_type_element(element, path=None, file_name=None):
             xml_parse = tb_bind.CreateFromDocument(xml_file.read())
         except:
             xml_parse = tb_bind.TypeBuildingElements()
-
+    xml_parse.version = "0.3.9"
     add_to_xml = True
     warning_text = ("Construction Type and building age "
                     "group already exist in this XML, consider revising "
