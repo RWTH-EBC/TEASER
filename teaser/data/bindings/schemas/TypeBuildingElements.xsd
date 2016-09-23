@@ -6,9 +6,7 @@
       <xs:element type="xs:int" name="id"/>
       <xs:element type="xs:float" name="thickness"/>
       <xs:element name="Material">
-		<xs:complexType>
 			<xs:attribute type="xs:int" name="material_id"/>
-		</xs:complexType>
 	  </xs:element>
     </xs:sequence>
   </xs:complexType>

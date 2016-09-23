@@ -8,9 +8,10 @@ This module contains function to load building element classes
 
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
+import teaser.data.input.material_input as mat_input
 
 
-def load_type_element(element, year, construction):
+def load_type_element(element, year, construction, binding):
     '''Typical element loader.
 
     Loads typical building elements according to their construction
@@ -37,14 +38,13 @@ def load_type_element(element, year, construction):
 
     ass_error_1 = "You need to specify parents for element and thermalzone"
 
-    assert element.parent.parent.parent is not None, ass_error_1
+#    assert element.parent.parent.parent is not None, ass_error_1
 
     element.year_of_construction = year
 
     if type(element).__name__ == 'OuterWall':
 
-        for out_wall in element.parent.parent.parent.\
-                data.element_bind.OuterWall:
+        for out_wall in binding.OuterWall:
             if out_wall.building_age_group[0] <= year <= \
                     out_wall.building_age_group[1] and \
                     out_wall.construction_type == construction:
@@ -182,14 +182,8 @@ def _set_layer_data(element, material, layer, pyxb_class):
     layer.thickness = pyxb_class.thickness
     layer.id = pyxb_class.id
 
-    material.name = pyxb_class.Material.name
-    material.density = pyxb_class.Material.density
-    material.thermal_conduc = pyxb_class.Material.thermal_conduc
-    material.heat_capac = pyxb_class.Material.heat_capac
-    if pyxb_class.Material.solar_absorp is not None:
-        material.solar_absorp = pyxb_class.Material.solar_absorp
-    if pyxb_class.Material.ir_emissivity is not None:
-        material.ir_emissivity = pyxb_class.Material.ir_emissivity
+    mat_input.load_material_id(material, pyxb_class.material.material_id)
+
 
 def _set_basic_data(element, pyxb_class):
     '''Helper function for load_type_element to set the layer data.

@@ -59,6 +59,9 @@ class DataClass(object):
         elif version_parse.getroot().attrib['version'] == "0.3.9":
             import teaser.data.bindings.v_0_3_9.typeelement_bind as tb_bind
             self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
+        elif version_parse.getroot().attrib['version'] == "0.4":
+            import teaser.data.bindings.v_0_4.typeelement_bind as tb_bind
+            self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
 
 
         self.path_uc = utilitis.get_full_path(
@@ -87,5 +90,8 @@ class DataClass(object):
                 __xml_file_mat.read())
         elif version_parse.getroot().attrib['version'] == "0.3.9":
             import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
+            self.material_bind = mat_bind.CreateFromDocument(__xml_file_mat.read())
+        elif version_parse.getroot().attrib['version'] == "0.4":
+            import teaser.data.bindings.v_0_4.material_bind as mat_bind
             self.material_bind = mat_bind.CreateFromDocument(__xml_file_mat.read())
 

@@ -236,7 +236,7 @@ class BuildingElement(object):
 
             self._layer.append(lay_count)
 
-    def load_type_element(self, year, construction):
+    def load_type_element(self, year, construction, binding):
         '''Typical element loader.
 
         Loads typical building elements according to their construction
@@ -267,7 +267,8 @@ class BuildingElement(object):
 
         buildingelement_input.load_type_element(element=self,
                                                 year=year,
-                                                construction=construction)
+                                                construction=construction,
+                                                binding=binding)
 
     def save_type_element(self, path=None, file_name=None):
         '''Typical element saver.
