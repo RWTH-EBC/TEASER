@@ -59,7 +59,7 @@ class DataClass(object):
         elif version_parse.getroot().attrib['version'] == "0.3.9":
             import teaser.data.bindings.typeelement_bind as tb_bind
             self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
-        
+
 
         self.path_uc = utilitis.get_full_path(
             "data/input/inputdata/UseConditions.xml")
