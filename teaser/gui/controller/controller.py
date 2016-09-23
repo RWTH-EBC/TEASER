@@ -199,6 +199,46 @@ class Controller():
         Lets CalcProject create a new building with the given ID.
         """
         return Building(current_project, openId)
+    
+    @classmethod
+    def click_update_building_button(self,
+                                     project,
+                                     current_building,
+                                     name,
+                                     year_of_construction,
+                                     number_of_floors,
+                                     height_of_floors,
+                                     net_leased_area,
+                                     street,
+                                     location,
+                                     update_archtertype):  
+        for building in project.buildings:
+            if building.internal_id == current_building.internal_id:
+                building.net_leased_area = net_leased_area
+                building.name = name
+                building.street_name = street
+                building.city = location
+                building.year_of_construction = year_of_construction
+                building.number_of_floors = number_of_floors
+                building.height_of_floors = height_of_floors
+                if update_archtertype == True:
+                    building._thermal_zones = []
+                    building.generate_archetype()
+        return project
+    
+    @classmethod
+    def click_update_building(self, project, index):
+        """
+        Updates all changed attributes of selected building
+        """
+
+        last_index = len(project.buildings) - 1
+        updated_building = project.buildings[last_index]
+        project.buildings.pop(last_index)
+        project.buildings.pop(index)
+        project.buildings.insert(index, updated_building)
+
+        return project
 
     @classmethod
     def click_generate_type_building_button(self,
@@ -361,7 +401,7 @@ class Controller():
             print("Saved under: "+path)
 
     @classmethod
-    def click_load_button(self, path):
+    def click_load_button(self, project, path):
         '''
         Returns a project loaded from XML.
 
@@ -375,13 +415,12 @@ class Controller():
             project class filled with information from a file
         '''
 
-        loaded_prj = Project()
-        if path.endswith(".xml"):
-            loaded_prj.load_old_teaser(path)
         if path.endswith(".teaserXML"):
-            loaded_prj.load_project(path)
+            project.load_project(path)
+        elif path.endswith(".gml"):
+            project.load_citygml(path)
 
-        return loaded_prj
+        return project
 
     @classmethod
     def get_materials_from_file(self, project):

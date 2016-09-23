@@ -10,6 +10,7 @@ import teaser.logic.utilities as utilitis
 from mako.template import Template
 import scipy.io
 import teaser.logic.simulation.aixlib as aixlib
+import warnings
 
 def export_aixlib(prj,
                   building_model="None",
@@ -46,7 +47,7 @@ def export_aixlib(prj,
     assert zone_model in ["None", "ThermalZoneEquipped", "ThermalZone"]
     assert corG in [None, True, False]
 
-    uses = ['Modelica(version = "3.2.1")',
+    uses = ['Modelica(version = "3.2.2")',
             "AixLib(version=\"0.3.1\")"]
 
     # use the same zone templates for all exports
@@ -94,6 +95,15 @@ def export_aixlib(prj,
             _help_package(bldg_path, bldg.name, within=prj.name)
             _help_package_order(bldg_path, [bldg], None,
                                      bldg.name + "_DataBase")
+            if bldg.building_id is None:
+                bldg.building_id = 0
+            else:
+                try:
+                    bldg.building_id = int(bldg.building_id)
+                except ValueError:
+                    warnings.warn("Cannot convert building_id to integer, "
+                                  "is set to 0")
+                    bldg.building_id = 0
 
             out_file = open(utilitis.get_full_path
                             (bldg_path + bldg.name + ".mo"), 'w')
