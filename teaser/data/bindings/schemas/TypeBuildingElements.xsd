@@ -1,21 +1,15 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.3.9">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.4">
   <xs:element name="TypeBuildingElements" type="TypeBuildingElementsType"/>
-  <xs:complexType name="MaterialType">
-    <xs:sequence>
-      <xs:element type="xs:string" name="name"/>
-      <xs:element type="xs:float" name="density"/>
-      <xs:element type="xs:float" name="thermal_conduc"/>
-      <xs:element type="xs:float" name="heat_capac"/>
-      <xs:element type="xs:float" name="solar_absorp" maxOccurs="1" minOccurs="0"/>
-      <xs:element type="xs:float" name="ir_emissivity" maxOccurs="1" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
   <xs:complexType name="layerType">
     <xs:sequence>
       <xs:element type="xs:int" name="id"/>
       <xs:element type="xs:float" name="thickness"/>
-      <xs:element type="MaterialType" name="Material"/>
+      <xs:element name="Material">
+		<xs:complexType>
+			<xs:attribute type="xs:int" name="material_id"/>
+		</xs:complexType>
+	  </xs:element>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="LayersType">
