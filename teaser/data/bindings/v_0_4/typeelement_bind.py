@@ -1,7 +1,7 @@
 # .\typeelement_bind.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:e92452c8d3e28a9e27abfc9994d2007779e7f4c9
-# Generated 2016-09-23 15:16:17.509657 by PyXB version 1.2.4 using Python 3.5.2.final.0
+# Generated 2016-09-26 09:34:06.704842 by PyXB version 1.2.4 using Python 3.5.2.final.0
 # Namespace AbsentNamespace0
 
 from __future__ import unicode_literals
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:e9301040-818f-11e6-947d-2cd444b2e704')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:9b1db966-83bb-11e6-8801-2cd444b2e704')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
@@ -137,15 +137,15 @@ class CTD_ANON (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_SIMPLE
     _Abstract = False
     _ExpandedName = None
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\pyxb\\scripts\\TypeBuildingElements.xsd', 9, 3)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\pyxb\\scripts\\TypeBuildingElements.xsd', 9, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.string
     
     # Attribute material_id uses Python identifier material_id
-    __material_id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'material_id'), 'material_id', '__AbsentNamespace0_CTD_ANON_material_id', pyxb.binding.datatypes.int)
-    __material_id._DeclarationLocation = pyxb.utils.utility.Location('D:\\GIT\\pyxb\\scripts\\TypeBuildingElements.xsd', 12, 6)
-    __material_id._UseLocation = pyxb.utils.utility.Location('D:\\GIT\\pyxb\\scripts\\TypeBuildingElements.xsd', 12, 6)
+    __material_id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'material_id'), 'material_id', '__AbsentNamespace0_CTD_ANON_material_id', pyxb.binding.datatypes.string)
+    __material_id._DeclarationLocation = pyxb.utils.utility.Location('D:\\GIT\\pyxb\\scripts\\TypeBuildingElements.xsd', 12, 5)
+    __material_id._UseLocation = pyxb.utils.utility.Location('D:\\GIT\\pyxb\\scripts\\TypeBuildingElements.xsd', 12, 5)
     
     material_id = property(__material_id.value, __material_id.set, None, None)
 

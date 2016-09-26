@@ -62,6 +62,7 @@ def load_type_element(element,
         mat_binding = element.parent.parent.parent.data.material_bind
     else:
         pass
+
     element.year_of_construction = year
 
     if type(element).__name__ == 'OuterWall':
@@ -201,7 +202,7 @@ def _set_layer_data(material, layer, pyxb_class, mat_binding):
 
     layer.thickness = pyxb_class.thickness
     layer.id = pyxb_class.id
-
+    print(pyxb_class.material.material_id)
     mat_input.load_material_id(material,
                                pyxb_class.material.material_id,
                                mat_binding)

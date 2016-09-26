@@ -16,6 +16,6 @@ for mat in prj.data.material_bind.Material:
 
 out = OuterWall(parent=None)
 
-out.load_type_element(1900, 'heavy', prj.data.element_bind)
+out.load_type_element(1900, 'heavy', prj.data.element_bind, prj.data.material_bind)
 
 print(out)

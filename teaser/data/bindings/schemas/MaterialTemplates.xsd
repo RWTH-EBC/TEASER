@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.4">
   <xs:element name="MaterialTemplates" type="MaterialTemplatesType"/>
   <xs:complexType name="MaterialType">
-	<xs:attribute type="xs:int" name="material_id"/>
+	<xs:attribute type="xs:string" name="material_id"/>
     <xs:sequence>
       <xs:element type="xs:string" name="name"/>
       <xs:element type="xs:float" name="density"/>

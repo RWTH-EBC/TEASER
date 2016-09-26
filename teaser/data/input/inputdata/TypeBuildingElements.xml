@@ -11,18 +11,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<material material_id="1">Gipsputz</material>
-			</layer>
-			<layer>
-				<id>1</id>
-				<thickness>5</thickness>
-				<material material_id="1">Gipsputz</material>
-			</layer>
-
-			<layer>
-				<id>1</id>
-				<thickness>0.055</thickness>
-				<material material_id="1">Gipsputz</material>
+				<material material_id="asdasd">Gipsputz</material>
 			</layer>
 		</Layers>
 	</OuterWall>

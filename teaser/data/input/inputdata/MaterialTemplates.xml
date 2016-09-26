@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" ?>
 <MaterialTemplates version="0.4">
-	<Material material_id="1">
+	<Material material_id="asdasd">
 		<name>Gipsputz</name>
 		<density>20.0</density>
 		<thermal_conduc>0.035</thermal_conduc>

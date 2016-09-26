@@ -1,7 +1,7 @@
 # .\material_bind.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:e92452c8d3e28a9e27abfc9994d2007779e7f4c9
-# Generated 2016-09-23 14:53:48.561578 by PyXB version 1.2.4 using Python 3.5.2.final.0
+# Generated 2016-09-26 09:44:02.669237 by PyXB version 1.2.4 using Python 3.5.2.final.0
 # Namespace AbsentNamespace0
 
 from __future__ import unicode_literals
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:c52f4128-818c-11e6-99be-2cd444b2e704')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:fe5d63c8-83bc-11e6-9f44-2cd444b2e704')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
@@ -128,7 +128,7 @@ class MaterialType (pyxb.binding.basis.complexTypeDefinition):
 
     
     # Attribute material_id uses Python identifier material_id
-    __material_id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'material_id'), 'material_id', '__AbsentNamespace0_MaterialType_material_id', pyxb.binding.datatypes.int)
+    __material_id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'material_id'), 'material_id', '__AbsentNamespace0_MaterialType_material_id', pyxb.binding.datatypes.string)
     __material_id._DeclarationLocation = pyxb.utils.utility.Location('D:\\GIT\\pyxb\\scripts\\MaterialTemplates.xsd', 5, 1)
     __material_id._UseLocation = pyxb.utils.utility.Location('D:\\GIT\\pyxb\\scripts\\MaterialTemplates.xsd', 5, 1)
     
