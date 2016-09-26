@@ -62,7 +62,7 @@ def load_type_element(element,
                     _set_layer_data(material=material,
                                     layer=layer,
                                     pyxb_class=pyxb_layer,
-                                    mat_binding=mat_binding)
+                                    data_class=data_class)
 
     elif type(element).__name__ == 'InnerWall':
 
@@ -79,7 +79,7 @@ def load_type_element(element,
                     _set_layer_data(material=material,
                                     layer=layer,
                                     pyxb_class=pyxb_layer,
-                                    mat_binding=mat_binding)
+                                    data_class=data_class)
 
     elif type(element).__name__ == 'Floor':
 
@@ -96,7 +96,7 @@ def load_type_element(element,
                     _set_layer_data(material=material,
                                     layer=layer,
                                     pyxb_class=pyxb_layer,
-                                    mat_binding=mat_binding)
+                                    data_class=data_class)
 
     elif type(element).__name__ == 'Ceiling':
 
@@ -113,7 +113,7 @@ def load_type_element(element,
                     _set_layer_data(material=material,
                                     layer=layer,
                                     pyxb_class=pyxb_layer,
-                                    mat_binding=mat_binding)
+                                    data_class=data_class)
 
     elif type(element).__name__ == 'GroundFloor':
 
@@ -130,7 +130,7 @@ def load_type_element(element,
                     _set_layer_data(material=material,
                                     layer=layer,
                                     pyxb_class=pyxb_layer,
-                                    mat_binding=mat_binding)
+                                    data_class=data_class)
 
     elif type(element).__name__ == 'Rooftop':
 
@@ -147,7 +147,7 @@ def load_type_element(element,
                     _set_layer_data(material=material,
                                     layer=layer,
                                     pyxb_class=pyxb_layer,
-                                    mat_binding=mat_binding)
+                                    data_class=data_class)
 
     elif type(element).__name__ == 'Window':
 
@@ -164,10 +164,10 @@ def load_type_element(element,
                     _set_layer_data(material=material,
                                     layer=layer,
                                     pyxb_class=pyxb_layer,
-                                    mat_binding=mat_binding)
+                                    data_class=data_class)
 
 
-def _set_layer_data(material, layer, pyxb_class, mat_binding):
+def _set_layer_data(material, layer, pyxb_class, data_class):
     '''Helper function for load_type_element to set the layer data.
 
     Parameters
@@ -180,14 +180,30 @@ def _set_layer_data(material, layer, pyxb_class, mat_binding):
 
     pyxb_class :
         Pyxb class represantation of xml
+
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.
     '''
 
     layer.thickness = pyxb_class.thickness
     layer.id = pyxb_class.id
-    print(pyxb_class.material.material_id)
-    mat_input.load_material_id(material,
-                               pyxb_class.material.material_id,
-                               mat_binding)
+
+    if data_class.element_bind.version == "0.4":
+        mat_input.load_material_id(material,
+                                   pyxb_class.material.material_id,
+                                   data_class)
+    else:
+        material.name = pyxb_class.Material.name
+        material.density = pyxb_class.Material.density
+        material.thermal_conduc = pyxb_class.Material.thermal_conduc
+        material.heat_capac = pyxb_class.Material.heat_capac
+        if pyxb_class.Material.solar_absorp is not None:
+            material.solar_absorp = pyxb_class.Material.solar_absorp
+        if pyxb_class.Material.ir_emissivity is not None:
+            material.ir_emissivity = pyxb_class.Material.ir_emissivity
+
 
 
 def _set_basic_data(element, pyxb_class):

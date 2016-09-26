@@ -279,7 +279,7 @@ class BuildingElement(object):
                                                 construction=construction,
                                                 data_class=data_class)
 
-    def save_type_element(self, path=None, file_name=None):
+    def save_type_element(self, data_class=None):
         '''Typical element saver.
 
         Saves typical building elements according to their construction
@@ -303,8 +303,7 @@ class BuildingElement(object):
             buildingelement_output
 
         buildingelement_output.save_type_element(element=self,
-                                                 path=path,
-                                                 file_name=file_name)
+                                                 data_class=data_class)
 
     def delete_type_element(self, path=None, file_name=None):
         '''Deletes typical element.

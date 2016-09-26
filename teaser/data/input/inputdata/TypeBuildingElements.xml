@@ -1,28 +1,4 @@
 <?xml version="1.0" ?>
 <TypeBuildingElements version="0.4">
-	<OuterWall>
-		<building_age_group>0 1918</building_age_group>
-		<construction_type>heavy</construction_type>
-		<inner_convection>2.7</inner_convection>
-		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.0</outer_convection>
-		<outer_radiation>5.0</outer_radiation>
-		<Layers>
-			<layer>
-				<id>1</id>
-				<thickness>0.015</thickness>
-				<material material_id="asdasd">Gipsputz</material>
-			</layer>
-			<layer>
-				<id>1</id>
-				<thickness>0.015</thickness>
-				<material material_id="2">asddd</material>
-			</layer>
-			<layer>
-				<id>1</id>
-				<thickness>0.015</thickness>
-				<material material_id="1">as23</material>
-			</layer>
-		</Layers>
-	</OuterWall>
+
 </TypeBuildingElements>

@@ -1,27 +1,4 @@
 <?xml version="1.0" ?>
 <MaterialTemplates version="0.4">
-	<Material material_id="asdasd">
-		<name>Gipsputz</name>
-		<density>20.0</density>
-		<thermal_conduc>0.035</thermal_conduc>
-		<heat_capac>1.0</heat_capac>
-	</Material>
-	<Material material_id="af61ba7a-83e9-11e6-947d-2cd444b2e704">
-		<name>Gipsputz</name>
-		<density>0.0</density>
-		<thermal_conduc>0.0</thermal_conduc>
-		<heat_capac>0.0</heat_capac>
-	</Material>
-	<Material material_id="af622fae-83e9-11e6-b6d3-2cd444b2e704">
-		<name>asddd</name>
-		<density>0.0</density>
-		<thermal_conduc>0.0</thermal_conduc>
-		<heat_capac>0.0</heat_capac>
-	</Material>
-	<Material material_id="af62cbf0-83e9-11e6-9e0e-2cd444b2e704">
-		<name>as23</name>
-		<density>0.0</density>
-		<thermal_conduc>0.0</thermal_conduc>
-		<heat_capac>0.0</heat_capac>
-	</Material>
+
 </MaterialTemplates>

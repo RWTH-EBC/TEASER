@@ -33,7 +33,7 @@ def save_type_element(element, data_class):
     '''
 
     element_binding = data_class.element_bind
-    element_binding.version = "0.3.9"
+    element_binding.version = "0.4"
     add_to_xml = True
     warning_text = ("Construction Type and building age "
                     "group already exist in this XML, consider revising "
@@ -55,7 +55,6 @@ def save_type_element(element, data_class):
             pyxb_wall.Layers = tb_bind.LayersType()
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
-
 
             element_binding.OuterWall.append(pyxb_wall)
 
@@ -320,16 +319,8 @@ def _set_layer_data_pyxb(element, pyxb_class):
 
         pyxb_layer.id = layer.id
         pyxb_layer.thickness = layer.thickness
+        pyxb_layer.material = layer.material.name
+        pyxb_layer.material.material_id = layer.material.material_id
 
-        pyxb_material = tb_bind.MaterialType()
-
-        pyxb_material.name = layer.material.name
-        pyxb_material.density = layer.material.density
-        pyxb_material.thermal_conduc = layer.material.thermal_conduc
-        pyxb_material.heat_capac = layer.material.heat_capac
-        pyxb_material.solar_absorp = layer.material.solar_absorp
-        pyxb_material.ir_emissivity = layer.material.ir_emissivity
-
-        pyxb_layer.Material = pyxb_material
 
         pyxb_class.Layers.append(pyxb_layer)

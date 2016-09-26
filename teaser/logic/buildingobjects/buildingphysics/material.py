@@ -60,8 +60,9 @@ class Material(object):
         self._thermal_conduc = 0.0
         self._heat_capac = 0.0
         self._solar_absorp = 0.0
-        #if type(self.parent.parent).__name__ != "Window":
-        #    self._solar_absorp = 0.7
+        if parent is not None:
+            if type(self.parent.parent).__name__ != "Window":
+                self._solar_absorp = 0.7
         self._ir_emissivity = 0.9
         self._transmittance = 0.0
 
@@ -118,6 +119,9 @@ class Material(object):
             self.__parent = value
             self.__parent.material = self
 
+        else:
+            self.__parent = None
+
     @property
     def name(self):
         return self._name
@@ -154,12 +158,13 @@ class Material(object):
 
         if value is not None:
             self._thermal_conduc = float(value)
-            if self.parent.parent is not None:
-                if self.parent.thickness is not None and\
-                   self.parent.parent.inner_convection is not None and\
-                   self.parent.parent.inner_radiation is not None and\
-                   self.parent.parent.area is not None:
-                    self.parent.parent.calc_ua_value()
+            if self.parent is not None:
+                if self.parent.parent is not None:
+                    if self.parent.thickness is not None and\
+                       self.parent.parent.inner_convection is not None and\
+                       self.parent.parent.inner_radiation is not None and\
+                       self.parent.parent.area is not None:
+                        self.parent.parent.calc_ua_value()
 
     @property
     def density(self):
