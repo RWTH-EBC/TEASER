@@ -60,7 +60,7 @@ def load_material_id(material, mat_id, data_class):
         but the user can individually change that.
     """
 
-    binding = data_class.material_binding
+    binding = data_class.material_bind
 
     for mat in binding.Material:
 
@@ -71,3 +71,4 @@ def load_material_id(material, mat_id, data_class):
             material.density = mat.density
             material.thermal_conduc = float(mat.thermal_conduc)
             material.heat_capac = mat.heat_capac
+

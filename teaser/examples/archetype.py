@@ -36,15 +36,15 @@ def example_type_building():
                               construction_type="heavy",
                               dormer=1)
 
-    prj.type_bldg_office(name="Office1",
-                         year_of_construction=1988,
-                         number_of_floors=2,
-                         height_of_floors=3.5,
-                         net_leased_area=100,
-                         office_layout=1,
-                         window_layout=1,
-                         with_ahu=True,
-                         construction_type="heavy")
+    #prj.type_bldg_office(name="Office1",
+    #                     year_of_construction=1988,
+    #                     number_of_floors=2,
+    #                     height_of_floors=3.5,
+    #                     net_leased_area=100,
+    #                     office_layout=1,
+    #                     window_layout=1,
+    #                     with_ahu=True,
+    #                     construction_type="heavy")
 
     '''
     We need to set the projects calculation method. The library we want to
@@ -99,27 +99,27 @@ def example_type_building():
     to Retrofit"""
 
     prj.name = "Project_Retrofit"
-    prj.retrofit_all_buildings(2015)
-    prj.calc_all_buildings()
+#    prj.retrofit_all_buildings(2015)
+#    prj.calc_all_buildings()
 
     '''You could also change the exports here as seen above'''
 
-    prj.export_aixlib(building_model="MultizoneEquipped",
-                      zone_model="ThermalZoneEquipped",
-                      corG=True,
-                      internal_id=None,
-                      path=None)
+#    prj.export_aixlib(building_model="MultizoneEquipped",
+     #                 zone_model="ThermalZoneEquipped",
+    #                  corG=True,
+   #                   internal_id=None,
+  #                    path=None)
 
-    prj.save_project("Retrofit_Building",
-                     path=None)
+#    prj.save_project("Retrofit_Building",
+ #                    path=None)
 
     '''Save the human readable output txt'''
-    prj.export_parameters_txt(path=None)
+ #   prj.export_parameters_txt(path=None)
 
     '''
     Save the human readable output txt
     '''
-    prj.save_citygml(path=None)
+ #   prj.save_citygml(path=None)
 
 
 if __name__ == '__main__':

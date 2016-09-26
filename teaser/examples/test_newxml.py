@@ -95,6 +95,7 @@ for pyxb_wall in dc_old.element_bind.InnerWall:
     iw.save_type_element(data_class=dc_new)
 
 for pyxb_wall in dc_old.element_bind.Ceiling:
+    print(pyxb_wall.building_age_group[0])
     ce = Ceiling()
     ce.load_type_element(pyxb_wall.building_age_group[0] + 2,
                                pyxb_wall.construction_type,
@@ -102,7 +103,7 @@ for pyxb_wall in dc_old.element_bind.Ceiling:
     for lay in ce.layer:
         lay.material.material_id = material_dict[lay.material.name][1]
 
-        ce.save_type_element(data_class=dc_new)
+    ce.save_type_element(data_class=dc_new)
 
 for pyxb_wall in dc_old.element_bind.Floor:
     fl = Floor()
@@ -136,9 +137,5 @@ for key, value in material_dict.items():
     value[0].heat_capac = value[4]
     value[0].save_material_template(data_class=dc_new)
 
-
-
-        #mat.name = pyxb_layer.Material.name
-        #mat.save_material_template(data_class=dc_new)
 
 
