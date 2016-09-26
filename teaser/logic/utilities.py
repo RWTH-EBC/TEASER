@@ -79,3 +79,53 @@ def get_full_path(rel_path):
     full_path = os.path.join(first_path, rel_path)
 
     return full_path
+
+
+def clean_path(rel_path):
+    "Helperfunction which replaces all \ with / in a path"
+
+    new_path = ""
+    for index in rel_path:
+        # 92 is the asci code for \
+        if index == "\t":
+            new_path += "/t"
+        elif index == "\b":
+            new_path += "/b"
+        elif index == "\n":
+            new_path += "/n"
+        elif index == "\a":
+            new_path += "/a"
+        elif index == "\r":
+            new_path += "/r"
+        elif index == chr(92):
+            new_path += "/"
+        else:
+            new_path += index
+    return new_path
+
+
+def split_path(path):
+
+    path = clean_path(path)
+    count = 0
+    for index in path:
+        if index == "/":
+            count += 1
+
+    head = ""
+    tail = ""
+    count2 = 0
+    for index in path:
+        if index == "/":
+            count2 += 1
+        if count2 < count:
+            head += index
+        elif count2 >= count:
+            tail += index
+
+    tailList = tail.split(sep="/")
+    tail = tailList[1]
+    tailList = tail.split(sep=".")
+    tail = tailList[0]
+
+    return head, tail

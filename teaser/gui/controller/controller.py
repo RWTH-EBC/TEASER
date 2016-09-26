@@ -4,7 +4,7 @@ Created July 2015
 @author: TEASER 4 Development Team
 
 '''
-
+import inspect
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions
@@ -23,6 +23,7 @@ import teaser.data.output.teaserxml_output as teaser_xml
 import teaser.data.output.citygml_output as city_gml
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
+import teaser.logic.utilities as utilitis
 
 
 class Controller():
@@ -444,6 +445,200 @@ class Controller():
         return mat_list
 
     @classmethod
+    def get_elements_from_file(self, project):
+        '''
+        Get a list with material from a file.
+
+        project : project()
+            root class
+
+        Returns
+        ----------
+
+        wall_list : list
+            list with filled wall elements from a file
+        '''
+
+        # project.buildings[0].thermal_zones
+        # building = Building()
+        # zone = ThermalZone(project.buildings[1])
+        zone = ThermalZone()
+
+        for outerwall in project.data.element_bind.OuterWall:
+                wall = OuterWall()
+                wall.name = "OuterWall"
+                wall.construction_type = outerwall.construction_type
+                wall.year_of_construction = \
+                    outerwall.year_of_construction
+                wall.building_age_group = outerwall.building_age_group
+                wall.inner_convection = outerwall.inner_convection
+                wall.inner_radiation = outerwall.inner_radiation
+                wall.outer_convection = outerwall.outer_convection
+                wall.outer_radiation = outerwall.outer_radiation
+                for layerBind in outerwall.Layers.layer:
+                    layer = Layer()
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for innerwall in project.data.element_bind.InnerWall:
+                wall = InnerWall()
+                wall.name = "InnerWall"
+                wall.construction_type = innerwall.construction_type
+                wall.year_of_construction = \
+                    innerwall.year_of_construction
+                wall.building_age_group = innerwall.building_age_group
+                wall.inner_convection = innerwall.inner_convection
+                wall.inner_radiation = innerwall.inner_radiation
+                for layerBind in innerwall.Layers.layer:
+                    layer = Layer()
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for rooftop in project.data.element_bind.Rooftop:
+                wall = Rooftop()
+                wall.name = "Rooftop"
+                wall.construction_type = rooftop.construction_type
+                wall.year_of_construction = \
+                    rooftop.year_of_construction
+                wall.building_age_group = rooftop.building_age_group
+                wall.inner_convection = rooftop.inner_convection
+                wall.inner_radiation = rooftop.inner_radiation
+                wall.outer_convection = rooftop.outer_convection
+                wall.outer_radiation = rooftop.outer_radiation
+                for layerBind in rooftop.Layers.layer:
+                    layer = Layer()
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for groundfloor in project.data.element_bind.GroundFloor:
+                wall = GroundFloor()
+                wall.name = "GroundFloor"
+                wall.construction_type = groundfloor.construction_type
+                wall.year_of_construction = \
+                    groundfloor.year_of_construction
+                wall.building_age_group = groundfloor.building_age_group
+                wall.inner_convection = groundfloor.inner_convection
+                wall.inner_radiation = groundfloor.inner_radiation
+                for layerBind in groundfloor.Layers.layer:
+                    layer = Layer()
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for window in project.data.element_bind.Window:
+                wall = Window()
+                wall.name = "Window"
+                wall.construction_type = window.construction_type
+                wall.year_of_construction = \
+                    window.year_of_construction
+                wall.building_age_group = window.building_age_group
+                wall.inner_convection = window.inner_convection
+                wall.inner_radiation = window.inner_radiation
+                wall.outer_convection = window.outer_convection
+                wall.outer_radiation = window.outer_radiation
+                for layerBind in window.Layers.layer:
+                    layer = Layer()
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for ceiling in project.data.element_bind.Ceiling:
+                wall = Ceiling()
+                wall.name = "Ceiling"
+                wall.construction_type = ceiling.construction_type
+                wall.year_of_construction = \
+                    ceiling.year_of_construction
+                wall.building_age_group = ceiling.building_age_group
+                wall.inner_convection = ceiling.inner_convection
+                wall.inner_radiation = ceiling.inner_radiation
+                for layerBind in ceiling.Layers.layer:
+                    layer = Layer()
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        for floor in project.data.element_bind.Floor:
+                wall = Floor()
+                wall.name = "Floor"
+                wall.construction_type = floor.construction_type
+                wall.year_of_construction = \
+                    floor.year_of_construction
+                wall.building_age_group = floor.building_age_group
+                wall.inner_convection = floor.inner_convection
+                wall.inner_radiation = floor.inner_radiation
+                for layerBind in floor.Layers.layer:
+                    layer = Layer()
+                    layer.id = layerBind.id - 1
+                    layer.thickness = layerBind.thickness
+                    material = Material(layer)
+                    material.name = layerBind.Material.name
+                    material.density = layerBind.Material.density
+                    material.thermal_conduc = layerBind.Material.thermal_conduc
+                    material.heat_capac = layerBind.Material.heat_capac
+                    wall.add_layer(layer, layer.id)
+                zone.add_element(wall)
+
+        wall_list = []
+        # print(inspect.getmembers(project.data.element_bind))
+        print()
+        for mat in project.data.element_bind.OuterWall:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.InnerWall:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.Rooftop:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.GroundFloor:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.Window:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.Ceiling:
+            wall_list.append(mat)
+        for mat in project.data.element_bind.Floor:
+            wall_list.append(mat)
+
+        # return wall_list
+        return zone
+
+    @classmethod
     def switch_zone_type(self, zone_type, project, zone_id):
         '''
         Switch type of a selected zone, with its internal id.
@@ -677,3 +872,96 @@ class Controller():
 
         u_value = float(current_element.ua_value)/current_element.area
         return u_value
+
+    @classmethod
+    def create_element(self, type_of_element, constr_type, building_age_group,
+                       inner_con, outer_con, inner_rad, outer_rad, layer_set):
+
+        if type_of_element == "Outer Wall":
+            element = OuterWall()
+            element.name = type
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
+
+        elif type_of_element == "Inner Wall":
+            element = InnerWall()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
+
+        elif type_of_element == "Window":
+            element = Window()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
+
+        elif type_of_element == "GroundFloor":
+            element = GroundFloor()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
+
+        elif type_of_element == "Ceiling":
+            element = Ceiling()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
+
+        elif type_of_element == "Rooftop":
+            element = Rooftop()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
+
+        elif type_of_element == "Floor":
+            element = Floor()
+            element.name = type_of_element
+            element.construction_type = constr_type
+            element.inner_convection = inner_con
+            element.inner_radiation = inner_rad
+            element.outer_convection = outer_con
+            element.outer_radiation = outer_rad
+            element.building_age_group = building_age_group
+            element.add_layer_list(layer_set)
+
+        return element
+
+    @classmethod
+    def add_element_to_xml(self, element, path):
+        prefix_path, suffix_path = utilitis.split_path(path)
+        element.save_type_element(prefix_path, suffix_path)
+
+    @classmethod
+    def delete_element_in_xml(self, element, path):
+        prefix_path, suffix_path = utilitis.split_path(path)
+        element.delete_type_element(prefix_path, suffix_path)
