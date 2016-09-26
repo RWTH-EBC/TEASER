@@ -241,7 +241,7 @@ def example_create_building():
     the model with a central AHU (MultizoneEquipped) (only default for office
     and institute buildings)
     '''
-
+    
     prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,
