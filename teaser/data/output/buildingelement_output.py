@@ -11,7 +11,7 @@ import teaser.logic.utilities as utilitis
 import warnings
 
 
-def save_type_element(data_class, element):
+def save_type_element(element, data_class):
     '''Typical element saver.
 
     Saves typical building elements according to their construction
@@ -23,13 +23,13 @@ def save_type_element(data_class, element):
 
     Parameters
     ----------
+    element : BuildingElement()
+        Instance of BuildingElement or inherited Element of TEASER
+
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-
-    element : BuildingElement()
-        Instance of BuildingElement or inherited Element of TEASER
     '''
 
     element_binding = data_class.element_bind
@@ -185,7 +185,7 @@ def save_type_element(data_class, element):
 
         out_file.write(element_binding.toDOM().toprettyxml())
 
-def delete_type_element(data_class, element):
+def delete_type_element(element, data_class):
     '''Deletes typical element.
 
     Deletes typical building elements according to their construction
@@ -197,24 +197,17 @@ def delete_type_element(data_class, element):
 
     Parameters
     ----------
+    element : BuildingElement()
+        Instance of BuildingElement or inherited Element of TEASER
 
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
 
-    element : BuildingElement()
-        Instance of BuildingElement or inherited Element of TEASER
-
     '''
 
     element_binding = data_class.element_bind
-
-    if type(element).__name__ == "OuterWallType":
-        for check in element_binding.OuterWall:
-            if check is element:
-                element_binding.OuterWall.remove(check)
-                break
 
     if type(element).__name__ == "OuterWall":
         for check in element_binding.OuterWall:
@@ -228,7 +221,6 @@ def delete_type_element(data_class, element):
         for check in element_binding.InnerWall:
             if check.building_age_group == element.building_age_group and \
                             check.construction_type == element.construction_type:
-                ind = element_binding.InnerWall.index(check)
                 element_binding.InnerWall.remove(check)
                 break
 
@@ -237,8 +229,7 @@ def delete_type_element(data_class, element):
         for check in element_binding.Ceiling:
             if check.building_age_group == element.building_age_group and \
                             check.construction_type == element.construction_type:
-                ind = element_binding.Ceiling.remove(check)
-                element_binding.Ceiling.pop(ind)
+                element_binding.Ceiling.remove(check)
                 break
 
     elif type(element).__name__ == 'Floor':
@@ -246,8 +237,7 @@ def delete_type_element(data_class, element):
         for check in element_binding.Floor:
             if check.building_age_group == element.building_age_group and \
                             check.construction_type == element.construction_type:
-                ind = element_binding.Floor.remove(check)
-                element_binding.Floor.pop(ind)
+                element_binding.Floor.remove(check)
                 break
 
     elif type(element).__name__ == 'GroundFloor':
@@ -255,8 +245,7 @@ def delete_type_element(data_class, element):
         for check in element_binding.GroundFloor:
             if check.building_age_group == element.building_age_group and \
                             check.construction_type == element.construction_type:
-                ind = element_binding.GroundFloor.remove(check)
-                element_binding.GroundFloor.pop(ind)
+                element_binding.GroundFloor.remove(check)
                 break
 
     elif type(element).__name__ == 'Rooftop':
@@ -264,8 +253,7 @@ def delete_type_element(data_class, element):
         for check in element_binding.Rooftop:
             if check.building_age_group == element.building_age_group and \
                             check.construction_type == element.construction_type:
-                ind = element_binding.Rooftop.remove(check)
-                element_binding.Rooftop.pop(ind)
+                element_binding.Rooftop.remove(check)
                 break
 
     elif type(element).__name__ == 'Window':
@@ -273,7 +261,7 @@ def delete_type_element(data_class, element):
         for check in element_binding.Window:
             if check.building_age_group == element.building_age_group and \
                             check.construction_type == element.construction_type:
-                ind = element_binding.Window.remove(check)
+                element_binding.Window.remove(check)
                 break
 
     out_file = open(utilitis.get_full_path(data_class.path_tb),"w")

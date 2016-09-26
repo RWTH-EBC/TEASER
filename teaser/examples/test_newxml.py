@@ -5,6 +5,17 @@ import teaser.data.output.buildingelement_output as be
 print(uuid.uuid1())
 print(type(str(uuid.uuid1())))
 
+from teaser.data.dataclass import DataClass
+from teaser.logic.buildingobjects.buildingphysics.material import Material
+
+dc = DataClass()
+
+material_list = []
+
+for pyxb_wall in dc.element_bind.OuterWall:
+    for pyxb_layer in pyxb_wall.Layers.layer:
+        Material(parent=None)
+        mat.save_material_template(data_class=dc)
 
 prj = Project()
 

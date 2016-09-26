@@ -8,8 +8,9 @@ This module contains function to save material classes
 import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
 import teaser.logic.utilities as utilitis
 
-def save_material(material):
-    '''Material saver.
+
+def save_material(material, data_class):
+    """Material saver.
 
     Saves Material specified in the XML.
 
@@ -18,7 +19,12 @@ def save_material(material):
     material : Material()
         instance of TEASERS Material class
 
-    '''
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.
+
+    """
 
     mat_pyxb = mat_bind.MaterialType()
     mat_pyxb.version = "0.3.9"
@@ -26,12 +32,10 @@ def save_material(material):
     mat_pyxb.density = material.density
     mat_pyxb.thermal_conduc = material.thermal_conduc
     mat_pyxb.heat_capac = material.heat_capac
+    mat_pyxb.material_id = material.material_id
 
-    path = utilitis.get_full_path("inputdata/MaterialTemplates.xml")
-    xml_file = open(path, 'r')
+    mat_binding = data_class.material_binding
 
-    xml_parse = mat_bind.CreateFromDocument(xml_file.read())
-    xml_parse.Material.append(mat_pyxb)
-    out_file = open(path, 'w')
+    out_file = open(utilitis.get_full_path(data_class.path_mat), "w")
 
-    out_file.write(xml_parse.toDOM().toprettyxml())
+    out_file.write(mat_binding.toDOM().toprettyxml())

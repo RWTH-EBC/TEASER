@@ -83,14 +83,14 @@ class Material(object):
         material_input.load_material(material=self,
                                      mat_name=mat_name)
 
-    def save_material_template(self):
+    def save_material_template(self, data_class):
         '''Material saver.
 
         Saves Material specified in the XML.
 
         '''
 
-        material_output.save_material(material=self)
+        material_output.save_material(material=self, data_class=data_class)
 
 
     @property
