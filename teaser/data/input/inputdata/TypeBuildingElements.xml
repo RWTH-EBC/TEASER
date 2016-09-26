@@ -13,6 +13,16 @@
 				<thickness>0.015</thickness>
 				<material material_id="asdasd">Gipsputz</material>
 			</layer>
+			<layer>
+				<id>1</id>
+				<thickness>0.015</thickness>
+				<material material_id="2">asddd</material>
+			</layer>
+			<layer>
+				<id>1</id>
+				<thickness>0.015</thickness>
+				<material material_id="1">as23</material>
+			</layer>
 		</Layers>
 	</OuterWall>
 </TypeBuildingElements>

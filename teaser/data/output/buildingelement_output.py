@@ -6,7 +6,7 @@
 This module contains function to save building element classes
 """
 
-import teaser.data.bindings.v_0_3_9.typeelement_bind as tb_bind
+import teaser.data.bindings.v_0_4.typeelement_bind as tb_bind
 import teaser.logic.utilities as utilitis
 import warnings
 
