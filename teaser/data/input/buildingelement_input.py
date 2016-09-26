@@ -14,8 +14,7 @@ import teaser.data.input.material_input as mat_input
 def load_type_element(element,
                       year,
                       construction,
-                      element_binding,
-                      mat_binding):
+                      data_class):
     """Typical element loader.
 
     Loads typical building elements according to their construction
@@ -35,33 +34,16 @@ def load_type_element(element,
     construction : str
         Construction type, code list ('heavy', 'light')
 
-    element_binding : pyxb Type Element binding
-        If binding is none, the Project binding will be used, otherwise you
-        can use a specific XML binding for your own purpose
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.
 
-    mat_binding : pyxb Material binding
-        If binding is none, the Project binding will be used, otherwise you
-        can use a specific XML binding for your own purpose
 
-    Raises
-    ----------
-    Assert if parents to Building are not set
     """
-    if element_binding is None:
-        ass_error_1 = "You need to specify parents for element and thermalzone"
 
-        assert element.parent.parent.parent is not None, ass_error_1
-        element_binding = element.parent.parent.parent.data.element_bind
-    else:
-        pass
-
-    if mat_binding is None:
-        ass_error_1 = "You need to specify parents for element and thermalzone"
-
-        assert element.parent.parent.parent is not None, ass_error_1
-        mat_binding = element.parent.parent.parent.data.material_bind
-    else:
-        pass
+    element_binding = data_class.element_bind
+    mat_binding = data_class.material_bind
 
     element.year_of_construction = year
 

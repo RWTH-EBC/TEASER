@@ -1,7 +1,7 @@
 from teaser.project import Project
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 import uuid
-
+import teaser.data.output.buildingelement_output as be
 print(uuid.uuid1())
 print(type(str(uuid.uuid1())))
 
@@ -19,6 +19,5 @@ for mat in prj.data.material_bind.Material:
 
 out = OuterWall(parent=None)
 
-out.load_type_element(1900, 'heavy', prj.data.element_bind, prj.data.material_bind)
-
-print(out)
+out.load_type_element(1900, 'heavy', prj.data)
+be.delete_type_element(prj.data, out)

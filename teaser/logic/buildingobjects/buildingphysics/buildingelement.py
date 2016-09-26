@@ -239,8 +239,7 @@ class BuildingElement(object):
     def load_type_element(self,
                           year,
                           construction,
-                          element_binding=None,
-                          mat_binding=None):
+                          data_class):
         '''Typical element loader.
 
         Loads typical building elements according to their construction
@@ -256,13 +255,11 @@ class BuildingElement(object):
         construction : str
             Construction type, code list ('heavy', 'light')
 
-        element_binding : pyxb Type Element binding
-            If binding is none, the Project binding will be used, otherwise you
-            can use a specific XML binding for your own purpose
+        data_class : DataClass()
+            DataClass containing the bindings for TypeBuildingElement and
+            Material (typically this is the data class stored in prj.data,
+            but the user can individually change that.
 
-        mat_binding : pyxb Material binding
-            If binding is none, the Project binding will be used, otherwise you
-            can use a specific XML binding for your own purpose
 
         Raises
         ----------
@@ -280,8 +277,7 @@ class BuildingElement(object):
         buildingelement_input.load_type_element(element=self,
                                                 year=year,
                                                 construction=construction,
-                                                element_binding=element_binding,
-                                                mat_binding=mat_binding)
+                                                data_class=data_class)
 
     def save_type_element(self, path=None, file_name=None):
         '''Typical element saver.

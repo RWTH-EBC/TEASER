@@ -11,7 +11,7 @@ import teaser.logic.utilities as utilitis
 import warnings
 
 
-def save_type_element(element, path=None, file_name=None):
+def save_type_element(data_class, element):
     '''Typical element saver.
 
     Saves typical building elements according to their construction
@@ -23,35 +23,24 @@ def save_type_element(element, path=None, file_name=None):
 
     Parameters
     ----------
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.
 
     element : BuildingElement()
         Instance of BuildingElement or inherited Element of TEASER
-
-    path : str
-        path where unique file should be stored
-    name : strt
-        name of of unique file
-
     '''
 
-    if element.parent is not None:
-        path = element.parent.parent.parent.data.path_tb
-        xml_parse = element.parent.parent.parent.data.element_bind
-    else:
-        path = path + "/" + file_name + ".xml"
-        try:
-            xml_file = open(utilitis.get_full_path(path))
-            xml_parse = tb_bind.CreateFromDocument(xml_file.read())
-        except:
-            xml_parse = tb_bind.TypeBuildingElements()
-    xml_parse.version = "0.3.9"
+    element_binding = data_class.element_bind
+    element_binding.version = "0.3.9"
     add_to_xml = True
     warning_text = ("Construction Type and building age "
                     "group already exist in this XML, consider revising "
                     "your inputs. The Element is NOT saved into XML")
     if type(element).__name__ == "OuterWall":
 
-        for check in xml_parse.OuterWall:
+        for check in element_binding.OuterWall:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -68,11 +57,11 @@ def save_type_element(element, path=None, file_name=None):
                                  pyxb_class=pyxb_wall)
 
 
-            xml_parse.OuterWall.append(pyxb_wall)
+            element_binding.OuterWall.append(pyxb_wall)
 
     elif type(element).__name__ == 'InnerWall':
 
-        for check in xml_parse.InnerWall:
+        for check in element_binding.InnerWall:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -88,11 +77,11 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.InnerWall.append(pyxb_wall)
+            element_binding.InnerWall.append(pyxb_wall)
 
     elif type(element).__name__ == 'Ceiling':
 
-        for check in xml_parse.Ceiling:
+        for check in element_binding.Ceiling:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -108,11 +97,11 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.Ceiling.append(pyxb_wall)
+            element_binding.Ceiling.append(pyxb_wall)
 
     elif type(element).__name__ == 'Floor':
 
-        for check in xml_parse.Floor:
+        for check in element_binding.Floor:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -128,11 +117,11 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.Floor.append(pyxb_wall)
+            element_binding.Floor.append(pyxb_wall)
 
     elif type(element).__name__ == 'GroundFloor':
 
-        for check in xml_parse.GroundFloor:
+        for check in element_binding.GroundFloor:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -148,11 +137,11 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.GroundFloor.append(pyxb_wall)
+            element_binding.GroundFloor.append(pyxb_wall)
 
     elif type(element).__name__ == 'Rooftop':
 
-        for check in xml_parse.Rooftop:
+        for check in element_binding.Rooftop:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -168,11 +157,11 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.Rooftop.append(pyxb_wall)
+            element_binding.Rooftop.append(pyxb_wall)
 
     elif type(element).__name__ == 'Window':
 
-        for check in xml_parse.Window:
+        for check in element_binding.Window:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -188,15 +177,15 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.Window.append(pyxb_wall)
+            element_binding.Window.append(pyxb_wall)
 
     if add_to_xml is True:
 
-        out_file = open(utilitis.get_full_path(path),"w")
+        out_file = open(utilitis.get_full_path(data_class.path_tb),"w")
 
-        out_file.write(xml_parse.toDOM().toprettyxml())
+        out_file.write(element_binding.toDOM().toprettyxml())
 
-def delete_type_element(element, path=None, file_name=None):
+def delete_type_element(data_class, element):
     '''Deletes typical element.
 
     Deletes typical building elements according to their construction
@@ -209,106 +198,87 @@ def delete_type_element(element, path=None, file_name=None):
     Parameters
     ----------
 
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.
+
     element : BuildingElement()
         Instance of BuildingElement or inherited Element of TEASER
 
-    path : str
-        path where unique file should be stored
-    name : strt
-        name of of unique file
-
     '''
 
-    if element.parent is not None:
-        path = element.parent.parent.parent.data.path_tb
-        xml_parse = element.parent.parent.parent.data.element_bind
-    else:
-        path = path + "/" + file_name + ".xml"
-        try:
-            xml_file = open(utilitis.get_full_path(path))
-            xml_parse = tb_bind.CreateFromDocument(xml_file.read())
-        except:
-            xml_parse = tb_bind.TypeBuildingElements()
+    element_binding = data_class.element_bind
+
+    if type(element).__name__ == "OuterWallType":
+        for check in element_binding.OuterWall:
+            if check is element:
+                element_binding.OuterWall.remove(check)
+                break
 
     if type(element).__name__ == "OuterWall":
-        for check in xml_parse.OuterWall:
-            if check.building_age_group == element.building_age_group and\
-               check.construction_type == element.construction_type and\
-               check.inner_convection == element.inner_convection and\
-               check.inner_radiation == element.inner_radiation:
-                ind = xml_parse.OuterWall.index(check)
-                xml_parse.OuterWall.pop(ind)
+        for check in element_binding.OuterWall:
+            if check.building_age_group == element.building_age_group and \
+               check.construction_type == element.construction_type:
+                element_binding.OuterWall.remove(check)
                 break
 
     elif type(element).__name__ == 'InnerWall':
 
-        for check in xml_parse.InnerWall:
-            if check.building_age_group == element.building_age_group and\
-               check.construction_type == element.construction_type and\
-               check.inner_convection == element.inner_convection and\
-               check.inner_radiation == element.inner_radiation:
-                ind = xml_parse.InnerWall.index(check)
-                xml_parse.InnerWall.pop(ind)
+        for check in element_binding.InnerWall:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                ind = element_binding.InnerWall.index(check)
+                element_binding.InnerWall.remove(check)
                 break
 
     elif type(element).__name__ == 'Ceiling':
 
-        for check in xml_parse.Ceiling:
-            if check.building_age_group == element.building_age_group and\
-               check.construction_type == element.construction_type and\
-               check.inner_convection == element.inner_convection and\
-               check.inner_radiation == element.inner_radiation:
-                ind = xml_parse.Ceiling.index(check)
-                xml_parse.Ceiling.pop(ind)
+        for check in element_binding.Ceiling:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                ind = element_binding.Ceiling.remove(check)
+                element_binding.Ceiling.pop(ind)
                 break
 
     elif type(element).__name__ == 'Floor':
 
-        for check in xml_parse.Floor:
-            if check.building_age_group == element.building_age_group and\
-               check.construction_type == element.construction_type and\
-               check.inner_convection == element.inner_convection and\
-               check.inner_radiation == element.inner_radiation:
-                ind = xml_parse.Floor.index(check)
-                xml_parse.Floor.pop(ind)
+        for check in element_binding.Floor:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                ind = element_binding.Floor.remove(check)
+                element_binding.Floor.pop(ind)
                 break
 
     elif type(element).__name__ == 'GroundFloor':
 
-        for check in xml_parse.GroundFloor:
-            if check.building_age_group == element.building_age_group and\
-               check.construction_type == element.construction_type and\
-               check.inner_convection == element.inner_convection and\
-               check.inner_radiation == element.inner_radiation:
-                ind = xml_parse.GroundFloor.index(check)
-                xml_parse.GroundFloor.pop(ind)
+        for check in element_binding.GroundFloor:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                ind = element_binding.GroundFloor.remove(check)
+                element_binding.GroundFloor.pop(ind)
                 break
 
     elif type(element).__name__ == 'Rooftop':
 
-        for check in xml_parse.Rooftop:
-            if check.building_age_group == element.building_age_group and\
-               check.construction_type == element.construction_type and\
-               check.inner_convection == element.inner_convection and\
-               check.inner_radiation == element.inner_radiation:
-                ind = xml_parse.Rooftop.index(check)
-                xml_parse.Rooftop.pop(ind)
+        for check in element_binding.Rooftop:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                ind = element_binding.Rooftop.remove(check)
+                element_binding.Rooftop.pop(ind)
                 break
 
     elif type(element).__name__ == 'Window':
 
-        for check in xml_parse.Window:
-            if check.building_age_group == element.building_age_group and\
-               check.construction_type == element.construction_type and\
-               check.inner_convection == element.inner_convection and\
-               check.inner_radiation == element.inner_radiation:
-                ind = xml_parse.Window.index(check)
-                xml_parse.Window.pop(ind)
+        for check in element_binding.Window:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                ind = element_binding.Window.remove(check)
                 break
 
-    out_file = open(utilitis.get_full_path(path),"w")
+    out_file = open(utilitis.get_full_path(data_class.path_tb),"w")
 
-    out_file.write(xml_parse.toDOM().toprettyxml())
+    out_file.write(element_binding.toDOM().toprettyxml())
 
 def _set_basic_data_pyxb(element, pyxb_class):
     '''Helper function for save_type_element to set the layer data.
