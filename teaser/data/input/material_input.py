@@ -70,6 +70,7 @@ def load_material_id(material, mat_id, binding):
 
         if mat.material_id == mat_id:
 
+            material.material_id = mat.material_id
             material.name = mat.name
             material.density = mat.density
             material.thermal_conduc = float(mat.thermal_conduc)

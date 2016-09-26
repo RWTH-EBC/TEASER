@@ -3,7 +3,7 @@
 
 
 import re
-
+import uuid
 import teaser.data.input.material_input as material_input
 import teaser.data.output.material_output as material_output
 
@@ -42,6 +42,10 @@ class Material(object):
     transmittance : float
         Coefficient of transmittanve of material
 
+    material_id : str(uuid)
+        UUID of material, this is used to have similar behaviour like foreign
+        key in SQL data bases for use in TypeBuildingElements and Material xml
+
     '''
 
     def __init__(self, parent=None):
@@ -60,6 +64,8 @@ class Material(object):
             self._solar_absorp = 0.7
         self._ir_emissivity = 0.9
         self._transmittance = 0.0
+
+        self.material_id = str(uuid.uuid1())
 
     def load_material_template(self, mat_name):
         '''Material loader.
@@ -85,6 +91,16 @@ class Material(object):
         '''
 
         material_output.save_material(material=self)
+
+
+    @property
+    def material_id(self):
+        return self.__material_id
+
+    @material_id.setter
+    def material_id(self, value):
+        self.__material_id = value
+
 
     @property
     def parent(self):

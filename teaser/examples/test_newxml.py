@@ -1,6 +1,9 @@
 from teaser.project import Project
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+import uuid
 
+print(uuid.uuid1())
+print(type(str(uuid.uuid1())))
 
 
 prj = Project()
