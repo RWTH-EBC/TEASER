@@ -7,7 +7,7 @@ from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.window import Window
-dc_old = DataClass(type_element_file="TypeBuildingElements_039.xml")
+#dc_old = DataClass(type_element_file="TypeBuildingElements_039.xml")
 dc_new = DataClass()
 
 material_dict = {}

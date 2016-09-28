@@ -36,15 +36,15 @@ def example_type_building():
                               construction_type="heavy",
                               dormer=1)
 
-    #prj.type_bldg_office(name="Office1",
-    #                     year_of_construction=1988,
-    #                     number_of_floors=2,
-    #                     height_of_floors=3.5,
-    #                     net_leased_area=100,
-    #                     office_layout=1,
-    #                     window_layout=1,
-    #                     with_ahu=True,
-    #                     construction_type="heavy")
+    prj.type_bldg_office(name="Office1",
+                         year_of_construction=1988,
+                         number_of_floors=2,
+                         height_of_floors=3.5,
+                         net_leased_area=100,
+                         office_layout=1,
+                         window_layout=1,
+                         with_ahu=True,
+                         construction_type="heavy")
 
     '''
     We need to set the projects calculation method. The library we want to
