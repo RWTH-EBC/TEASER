@@ -1055,28 +1055,20 @@ class Test_teaser(object):
             1988,
             "Kunststofffenster, Isolierverglasung",
             prj.data)
-    """
+
     def test_save_type_element(self):
         '''test of save_type_element, no parameter checking'''
         import os
-        try:
-            os.remove(utilities.get_default_path() + "/" + "unitTestTB.xml")
-        except:
-            pass
-
         # test load function
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        path = utilities.get_default_path()
-        therm_zone.outer_walls[0].parent = None
-        therm_zone.outer_walls[0].save_type_element(path=path,
-                                                    file_name="unitTestTB")
-        therm_zone.inner_walls[0].parent = None
-        therm_zone.inner_walls[0].save_type_element(path=path,
-                                                    file_name="unitTestTB")
-        therm_zone.windows[0].parent = None
-        therm_zone.windows[0].save_type_element(path=path,
-                                                file_name="unitTestTB")
-    """
+        path = os.path.join(utilities.get_default_path(),
+                        'unitTestTB.xml')
+        prj.data.path_tb = path
+        prj.data.load_tb_binding()
+        therm_zone.outer_walls[0].save_type_element(data_class=prj.data)
+        therm_zone.inner_walls[0].save_type_element(data_class=prj.data)
+        therm_zone.windows[0].save_type_element(data_class=prj.data)
+
     #methods in Wall
 
     def test_calc_equivalent_res_wall(self):
