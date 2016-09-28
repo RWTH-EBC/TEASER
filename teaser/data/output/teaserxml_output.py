@@ -7,7 +7,7 @@ This module contains function to save Projects in the proprietary
 TEASER file format .tXML
 """
 
-import teaser.data.bindings.v_0_3_9.project_bind as pb
+import teaser.data.bindings.v_0_4.project_bind as pb
 import inspect
 from teaser.logic.archetypebuildings.residential import Residential
 
