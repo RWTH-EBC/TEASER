@@ -229,7 +229,7 @@ class BoundaryConditions(UseConditions):
         self.yearly_cooling_days = 250
         self.daily_operation_heating = 13
 
-        self.maintained_illuminace = 500
+        self.maintained_illuminance = 500
         self.usage_level_height = 0.8
         self.red_factor_visual = 0.84
         self.rel_absence = 0.3
