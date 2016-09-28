@@ -1888,7 +1888,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<material material_id="36eb3906-855e-11e6-a498-2cd444b2e704">Glas0_2016heavy_annex</material>
+				<material material_id="36eb3906-855e-11e6-a498-2cd444b2e704">Glas1995_2015EnEV</material>
 			</layer>
 		</Layers>
 	</Window>

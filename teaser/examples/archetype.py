@@ -45,7 +45,7 @@ def example_type_building():
                          window_layout=1,
                          with_ahu=True,
                          construction_type="heavy")
-
+    
     '''
     We need to set the projects calculation method. The library we want to
     use is AixLib, we are using a two element model and want an extra resistance
@@ -99,31 +99,31 @@ def example_type_building():
     to Retrofit"""
 
     prj.name = "Project_Retrofit"
-#    prj.retrofit_all_buildings(2015)
-#    prj.calc_all_buildings()
+    prj.retrofit_all_buildings(2015)
+    prj.calc_all_buildings()
 
     '''You could also change the exports here as seen above'''
 
-#    prj.export_aixlib(building_model="MultizoneEquipped",
-     #                 zone_model="ThermalZoneEquipped",
-    #                  corG=True,
-   #                   internal_id=None,
-  #                    path=None)
+    prj.export_aixlib(building_model="MultizoneEquipped",
+                      zone_model="ThermalZoneEquipped",
+                      corG=True,
+                      internal_id=None,
+                      path=None)
 
-#    prj.save_project("Retrofit_Building",
- #                    path=None)
+    prj.save_project("Retrofit_Building",
+                     path=None)
 
     '''Save the human readable output txt'''
- #   prj.export_parameters_txt(path=None)
+    prj.export_parameters_txt(path=None)
 
     '''
     Save the human readable output txt
     '''
- #   prj.save_citygml(path=None)
+    prj.save_citygml(path=None)
 
 
 if __name__ == '__main__':
-    #example_type_building()
+    example_type_building()
     import uuid
     print(uuid.uuid1())
     print("That's it! :)")
