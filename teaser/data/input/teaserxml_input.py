@@ -52,7 +52,11 @@ def load_teaser_xml(path, prj):
         import teaser.data.bindings.v_0_3_9.project_bind as pb
         project_bind = pb.CreateFromDocument(xml_file.read())
     elif version_parse.getroot().attrib['version'] == "0.3.9":
+        warnings.warn("You are using an old version of project XML file")
         import teaser.data.bindings.v_0_3_9.project_bind as pb
+        project_bind = pb.CreateFromDocument(xml_file.read())
+    elif version_parse.getroot().attrib['version'] == "0.4":
+        import teaser.data.bindings.v_0_4.project_bind as pb
         project_bind = pb.CreateFromDocument(xml_file.read())
 
 
