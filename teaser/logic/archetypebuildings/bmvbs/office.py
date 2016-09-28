@@ -268,7 +268,8 @@ class Office(NonResidential):
             zone.area = type_bldg_area * value[0]
             zone.name = key
             use_cond = UseCond(zone)
-            use_cond.load_use_conditions(value[1])
+            use_cond.load_use_conditions(value[1],
+                                         data_class=self.parent.data)
             zone.use_conditions = use_cond
 
             zone.use_conditions.persons = zone.area * 0.01 * \
@@ -448,7 +449,8 @@ class Office(NonResidential):
             zone.area = type_bldg_area * value[0]
             zone.name = key
             use_cond = UseCond(zone)
-            use_cond.load_use_conditions(value[1])
+            use_cond.load_use_conditions(value[1],
+                                         data_class=self.parent.data)
             zone.use_conditions = use_cond
             zone.use_conditions.with_ahu = False
             zone.use_conditions.persons *= zone.area * 0.01

@@ -94,7 +94,7 @@ class DataClass(object):
 
         try:
             __xml_file_uc = open(self.path_uc, 'r+')
-            version_parse = element_tree.parse(self.path_tb)
+            version_parse = element_tree.parse(self.path_uc)
         except:
             __xml_file_uc = open(self.path_uc, 'w')
             version_parse = False
