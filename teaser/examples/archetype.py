@@ -4,7 +4,7 @@
 """This module contains an example how to create an archetype Building, to retrofit
 that building and to export that building to internal XML and a Modelica record
 """
-
+import teaser.data.bindings.v_0_3_9
 
 def example_type_building():
     """"First thing we need to do is to import our Project API module"""
@@ -45,7 +45,7 @@ def example_type_building():
                          window_layout=1,
                          with_ahu=True,
                          construction_type="heavy")
-    
+
     '''
     We need to set the projects calculation method. The library we want to
     use is AixLib, we are using a two element model and want an extra resistance
