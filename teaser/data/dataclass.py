@@ -66,10 +66,10 @@ class DataClass(object):
         """
 
         try:
-            __xml_file_tb = open(self.path_tb, 'r+', encoding='utf-8')
+            __xml_file_tb = open(self.path_tb, 'r+')
             version_parse = element_tree.parse(self.path_tb)
         except:
-            __xml_file_tb = open(self.path_tb, 'w', encoding='utf-8')
+            __xml_file_tb = open(self.path_tb, 'w')
             version_parse = False
 
         if version_parse is False:
@@ -95,7 +95,7 @@ class DataClass(object):
         """
 
         version_parse = element_tree.parse(self.path_uc)
-        __xml_file_uc = open(self.path_uc, 'r', encoding='utf-8')
+        __xml_file_uc = open(self.path_uc, 'r')
 
         if bool(version_parse.getroot().attrib) is False:
             warnings.warn("You are using an old version of use condition data base XML file")
@@ -111,10 +111,10 @@ class DataClass(object):
 
         """
         try:
-            __xml_file_mat = open(self.path_mat, 'r+', encoding='utf-8')
+            __xml_file_mat = open(self.path_mat, 'r+')
             version_parse = element_tree.parse(self.path_tb)
         except:
-            __xml_file_mat = open(self.path_mat, 'w', encoding='utf-8')
+            __xml_file_mat = open(self.path_mat, 'w')
             version_parse = False
 
         if version_parse is False:
