@@ -38,7 +38,7 @@ class DataClass(object):
 
     '''
 
-    def __init__(self, type_element_file=None):
+    def __init__(self):
         '''Constructor of DataClass
         '''
 
@@ -46,15 +46,13 @@ class DataClass(object):
         self.material_bind = None
         self.conditions_bind = None
 
-        if type_element_file is None:
-            self.path_tb = utilitis.get_full_path(
-                "data/input/inputdata/TypeBuildingElements.xml")
-        else:
-            self.path_tb = utilitis.get_full_path("data/input/inputdata/"+str(
-                type_element_file))
 
-        self.path_uc = utilitis.get_full_path("data/input/inputdata/UseConditions.xml")
-        self.path_mat = utilitis.get_full_path("data/input/inputdata/MaterialTemplates.xml")
+        self.path_tb = utilitis.get_full_path(
+            "data/input/inputdata/TypeBuildingElements.xml")
+        self.path_uc = utilitis.get_full_path(
+            "data/input/inputdata/UseConditions.xml")
+        self.path_mat = utilitis.get_full_path(
+            "data/input/inputdata/MaterialTemplates.xml")
 
         self.load_tb_binding()
         self.load_uc_binding()

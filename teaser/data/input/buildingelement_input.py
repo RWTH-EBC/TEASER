@@ -43,7 +43,6 @@ def load_type_element(element,
     """
 
     element_binding = data_class.element_bind
-    mat_binding = data_class.material_bind
 
     element.year_of_construction = year
 
