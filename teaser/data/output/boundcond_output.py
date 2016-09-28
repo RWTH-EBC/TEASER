@@ -43,7 +43,7 @@ def save_bound_conditions(bound_cond, data_class):
                           "NOT saved into XML")
             add_to_xml = False
             break
-    uc_bind.version = "0.4"
+    conditions_bind.version = "0.4"
     if add_to_xml is True:
 
         usage_pyxb = uc_bind.BoundaryConditionsType()

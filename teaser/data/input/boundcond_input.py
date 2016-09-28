@@ -62,7 +62,7 @@ def load_boundary_conditions(bound_cond, zone_usage, data_class):
                 bound_cond.maintained_illuminance = \
                     usage.Lighting.maintained_illuminance
             else:
-                bound_cond.maintained_illuminace = \
+                bound_cond.maintained_illuminance = \
                     usage.Lighting.maintained_illuminace
             bound_cond.usage_level_height = usage.Lighting.usage_level_height
             bound_cond.red_factor_visual = usage.Lighting.red_factor_visual

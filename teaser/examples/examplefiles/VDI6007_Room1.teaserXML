@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<Project>
+<Project version="0.4">
 	<Building>
 		<name>VDI6007_1_TEASER_Matlab</name>
 		<street_name>none</street_name>
@@ -33,7 +33,7 @@
 						<daily_operation_heating>13</daily_operation_heating>
 					</UsageOperationTime>
 					<Lighting>
-						<maintained_illuminace>500.0</maintained_illuminace>
+						<maintained_illuminance>500.0</maintained_illuminance>
 						<usage_level_height>0.8</usage_level_height>
 						<red_factor_visual>0.84</red_factor_visual>
 						<rel_absence>0.3</rel_absence>

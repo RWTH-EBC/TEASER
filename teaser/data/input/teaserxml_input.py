@@ -182,7 +182,7 @@ def _load_building(prj, pyxb_bld, type, project_bind):
 
         if project_bind.version == "0.4":
             zone.use_conditions.maintained_illuminance = \
-                pyxb_use.Lighting.maintained_illuminace
+                pyxb_use.Lighting.maintained_illuminance
         else:
             zone.use_conditions.maintained_illuminance = \
                 pyxb_use.Lighting.maintained_illuminace
