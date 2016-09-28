@@ -1,5 +1,11 @@
 <?xml version="1.0" ?>
 <MaterialTemplates version="0.4">
+	<Material material_id="5b853868-855d-11e6-9874-2cd444b2e704">
+		<name>EPS035</name>
+		<density>20.0</density>
+		<thermal_conduc>0.035</thermal_conduc>
+		<heat_capac>1.0</heat_capac>
+	</Material>
 	<Material material_id="0abaa039-83ff-11e6-b385-2cd444b2e704">
 		<name>Tiledroof</name>
 		<density>1700.0</density>
@@ -430,6 +436,12 @@
 		<name>Glas0_2016heavy_annex</name>
 		<density>0.0</density>
 		<thermal_conduc>0.8</thermal_conduc>
+		<heat_capac>0.0</heat_capac>
+	</Material>
+	<Material material_id="36eb3906-855e-11e6-a498-2cd444b2e704">
+		<name>Glas1995_2015EnEV</name>
+		<density>0.0</density>
+		<thermal_conduc>0.04</thermal_conduc>
 		<heat_capac>0.0</heat_capac>
 	</Material>
 	<Material material_id="0abaee59-83ff-11e6-be84-2cd444b2e704">

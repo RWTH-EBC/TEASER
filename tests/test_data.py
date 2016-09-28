@@ -1049,12 +1049,13 @@ class Test_teaser(object):
 
         # test load function
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].load_type_element(1988, "heavy")
-        therm_zone.inner_walls[0].load_type_element(1988, "light")
+        therm_zone.outer_walls[0].load_type_element(1988, "heavy", prj.data)
+        therm_zone.inner_walls[0].load_type_element(1988, "light", prj.data)
         therm_zone.windows[0].load_type_element(
             1988,
-            "Kunststofffenster, Isolierverglasung")
-
+            "Kunststofffenster, Isolierverglasung",
+            prj.data)
+    """
     def test_save_type_element(self):
         '''test of save_type_element, no parameter checking'''
         import os
@@ -1075,7 +1076,7 @@ class Test_teaser(object):
         therm_zone.windows[0].parent = None
         therm_zone.windows[0].save_type_element(path=path,
                                                 file_name="unitTestTB")
-
+    """
     #methods in Wall
 
     def test_calc_equivalent_res_wall(self):

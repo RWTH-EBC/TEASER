@@ -27,7 +27,7 @@ def load_material(material, mat_name, data_class):
         but the user can individually change that.
     '''
 
-    binding = data_class.material_binding
+    binding = data_class.material_bind
 
     for mat in binding.Material:
 

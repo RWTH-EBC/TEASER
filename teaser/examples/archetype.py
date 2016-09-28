@@ -123,5 +123,7 @@ def example_type_building():
 
 
 if __name__ == '__main__':
-    example_type_building()
+    #example_type_building()
+    import uuid
+    print(uuid.uuid1())
     print("That's it! :)")
