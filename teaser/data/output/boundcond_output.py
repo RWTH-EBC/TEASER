@@ -113,8 +113,8 @@ def save_bound_conditions(bound_cond, data_class):
         usage_pyxb.typical_length = bound_cond.typical_length
         usage_pyxb.typical_width = bound_cond.typical_width
 
-        uc_bind.append(usage_pyxb)
+        conditions_bind.append(usage_pyxb)
 
-        out_file = open(utilitis.get_full_path(data_class.uc_path), 'w')
+        out_file = open(utilitis.get_full_path(data_class.path_uc), 'w')
 
-        out_file.write(uc_bind.toDOM().toprettyxml())
+        out_file.write(conditions_bind.toDOM().toprettyxml())
