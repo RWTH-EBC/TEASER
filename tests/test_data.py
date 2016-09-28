@@ -1005,19 +1005,19 @@ class Test_teaser(object):
     def test_load_use_conditions(self):
         '''test of load_use_conditions, no parameter checking'''
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        use_cond.load_use_conditions("Living")
+        use_cond.load_use_conditions("Living",
+                                     data_class=prj.data)
 
     def test_save_use_conditions(self):
         '''test of save_use_conditions, no parameter checking'''
         import os
-        try:
-            os.remove(utilities.get_default_path() + "/" + "UseCondUT.xml")
-        except:
-            pass
-        path = utilities.get_default_path()
+        
+        path = os.path.join(utilities.get_default_path(),
+                            'UseCondUT.xml')
+        prj.data.path_uc = path
+        prj.data.load_uc_binding()
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        use_cond.parent = None
-        use_cond.save_use_conditions(path=path, file_name="UseCondUT")
+        use_cond.save_use_conditions(data_class=prj.data)
 
    #methods in BuildingElement
 

@@ -7,7 +7,7 @@
 This module contains function to save boundary conditions classes
 """
 
-import teaser.data.bindings.v_0_3_9.boundaryconditions_bind as uc_bind
+import teaser.data.bindings.v_0_4.boundaryconditions_bind as uc_bind
 import teaser.logic.utilities as utilitis
 import warnings
 
@@ -33,10 +33,10 @@ def save_bound_conditions(bound_cond, data_class):
         but the user can individually change that.ile
     '''
 
-    uc_bind = data_class.conditions_bind
+    conditions_bind = data_class.conditions_bind
     add_to_xml = True
 
-    for check in uc_bind.BoundaryConditions:
+    for check in conditions_bind.BoundaryConditions:
         if check.usage == bound_cond.usage:
             warnings.warn("Usage already exist in this XML, consider " +
                           "revising your inputs. The UseConditions is  " +
