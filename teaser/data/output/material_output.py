@@ -5,7 +5,7 @@
 
 This module contains function to save material classes
 """
-import teaser.data.bindings.material_bind as mat_bind
+import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
 import teaser.logic.utilities as utilitis
 
 def save_material(material):
@@ -21,6 +21,7 @@ def save_material(material):
     '''
 
     mat_pyxb = mat_bind.MaterialType()
+    mat_pyxb.version = "0.3.9"
     mat_pyxb.name = material.name
     mat_pyxb.density = material.density
     mat_pyxb.thermal_conduc = material.thermal_conduc

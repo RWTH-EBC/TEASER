@@ -7,7 +7,7 @@
 This module contains function to save boundary conditions classes
 """
 
-import teaser.data.bindings.boundaryconditions_bind as uc_bind
+import teaser.data.bindings.v_0_3_9.boundaryconditions_bind as uc_bind
 import teaser.logic.utilities as utilitis
 import warnings
 
@@ -53,7 +53,7 @@ def save_bound_conditions(bound_cond, path=None, file_name=None):
                           "NOT saved into XML")
             add_to_xml = False
             break
-
+    uc_bind.version = "0.3.9"
     if add_to_xml is True:
 
         usage_pyxb = uc_bind.BoundaryConditionsType()

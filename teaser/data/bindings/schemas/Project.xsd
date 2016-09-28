@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
-  <xs:include schemaLocation="D:\GIT\TEASER\teaser\Data\SchemaBindings\schemas\BoundaryConditions.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.3.9">
+  <xs:include schemaLocation="BoundaryConditions.xsd"/>
   <xs:element name="Project" type="ProjectType"/>
   <xs:complexType name="UseConditionType">
     <xs:sequence>
@@ -269,6 +269,7 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ProjectType">
+    <xs:attribute type="xs:string" name="version"/>
     <xs:choice maxOccurs="unbounded" minOccurs="0">
       <xs:element type="BuildingType" name="Building"/>
 	  <xs:element type="OfficeType" name="Office"/>

@@ -957,8 +957,6 @@ class Project(object):
                                     path=path)
 
     def export_annex(self,
-                     number_of_elements=2,
-                     merge_windows=False,
                      internal_id=None,
                      path=None):
         """Exports values to a record file for Modelica simulation
@@ -966,12 +964,6 @@ class Project(object):
         Parameters
         ----------
 
-        number_of_elements : int
-            defines the number of elements, that area aggregated, between 1
-            and 4, default is 2
-        merge_windows : bool
-            True for merging the windows into the outer walls, False for
-            separate resistance for window, default is False
         internal_id : float
             setter of the used building which will be exported, if None then
             all buildings will be exported

@@ -7,9 +7,8 @@ This module contains function to load Projects in the proprietary
 TEASER file format .tXML
 """
 
-
-import teaser.data.bindings.project_bind as pb
-
+import xml.etree.ElementTree as element_tree
+import warnings
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFamilyDwelling
@@ -46,9 +45,16 @@ def load_teaser_xml(path, prj):
 
 
     '''
-
+    version_parse = element_tree.parse(path)
     xml_file = open(path, 'r')
-    project_bind = pb.CreateFromDocument(xml_file.read())
+    if bool(version_parse.getroot().attrib) is False:
+        warnings.warn("You are using an old version of project XML file")
+        import teaser.data.bindings.v_0_3_9.project_bind as pb
+        project_bind = pb.CreateFromDocument(xml_file.read())
+    elif version_parse.getroot().attrib['version'] == "0.3.9":
+        import teaser.data.bindings.v_0_3_9.project_bind as pb
+        project_bind = pb.CreateFromDocument(xml_file.read())
+
 
     for pyxb_bld in project_bind.Building:
         _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Building")

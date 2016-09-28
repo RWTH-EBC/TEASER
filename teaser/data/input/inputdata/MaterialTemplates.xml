@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" ?>
-<MaterialTemplates>
+<MaterialTemplates version="0.3.9">
 	<Material>
 		<name>EPS035</name>
 		<density>20.0</density>
