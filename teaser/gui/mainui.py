@@ -3122,7 +3122,7 @@ class MainUI(QDialog):
         self.lighting_label_1 = QtGui.QLabel("Lighting: ")
         self.lighting_line_edit = QtGui.QLineEdit()
         self.lighting_line_edit.setText(str(
-            self.current_zone.use_conditions.maintained_illuminace))
+            self.current_zone.use_conditions.maintained_illuminance))
         self.lighting_label_2 = QtGui.QLabel("W/m^2")
 
         self.mean_temp_out_label_1 = QtGui.QLabel("Mean Outdoor Temp: ")
@@ -3511,7 +3511,7 @@ class MainUI(QDialog):
         self.machines_line_edit.setText(str(
             self.current_zone.use_conditions.machines))
         self.lighting_line_edit.setText(str(
-            self.current_zone.use_conditions.maintained_illuminace))
+            self.current_zone.use_conditions.maintained_illuminance))
         self.mean_temp_outer_line_edit.setText(str(
             self.current_zone.t_outside))
         self.mean_temp_inner_line_edit.setText(str(
