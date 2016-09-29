@@ -347,7 +347,8 @@ class SingleFamilyDwelling(Residential):
             zone.name = key
             zone.area = type_bldg_area * value[0]
             use_cond = UseCond(zone)
-            use_cond.load_use_conditions(value[1])
+            use_cond.load_use_conditions(value[1],
+                                         data_class=self.parent.data)
 
             zone.use_conditions = use_cond
 
@@ -366,8 +367,10 @@ class SingleFamilyDwelling(Residential):
             for zone in self.thermal_zones:
                 # create wall and set building elements
                 outer_wall = OuterWall(zone)
-                outer_wall.load_type_element(self.year_of_construction,
-                                             self.construction_type)
+                outer_wall.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self.construction_type,
+                    data_class=self.parent.data)
                 outer_wall.name = key
                 outer_wall.tilt = value[0]
                 outer_wall.orientation = value[1]
@@ -392,7 +395,8 @@ class SingleFamilyDwelling(Residential):
                 window = Window(zone)
 
                 window.load_type_element(self.year_of_construction,
-                                        "Kunststofffenster, Isolierverglasung")
+                                        "Kunststofffenster, Isolierverglasung",
+                                        data_class=self.parent.data)
                 window.name = key
                 window.tilt = value[0]
                 window.orientation = value[1]
@@ -403,8 +407,10 @@ class SingleFamilyDwelling(Residential):
 
             for zone in self.thermal_zones:
                 roof = Rooftop(zone)
-                roof.load_type_element(self.year_of_construction, \
-                                       self.construction_type)
+                roof.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self.construction_type,
+                    data_class=self.parent.data)
                 roof.name = key
                 roof.tilt = value[0]
                 roof.orientation = value[1]
@@ -415,8 +421,10 @@ class SingleFamilyDwelling(Residential):
 
             for zone in self.thermal_zones:
                 ground_floor = GroundFloor(zone)
-                ground_floor.load_type_element(self.year_of_construction, \
-                                               self.construction_type)
+                ground_floor.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self.construction_type,
+                    data_class=self.parent.data)
                 ground_floor.name = key
                 ground_floor.tilt = value[0]
                 ground_floor.orientation = value[1]
@@ -425,8 +433,10 @@ class SingleFamilyDwelling(Residential):
 
             for zone in self.thermal_zones:
                 inner_wall = InnerWall(zone)
-                inner_wall.load_type_element(self.year_of_construction,
-                                             self.construction_type)
+                inner_wall.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self.construction_type,
+                    data_class=self.parent.data)
                 inner_wall.name = key
                 inner_wall.tilt = value[0]
                 inner_wall.orientation = value[1]
@@ -438,8 +448,10 @@ class SingleFamilyDwelling(Residential):
 
                 for zone in self.thermal_zones:
                     ceiling = Ceiling(zone)
-                    ceiling.load_type_element(self.year_of_construction,
-                                              self.construction_type)
+                    ceiling.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data)
                     ceiling.name = key
                     ceiling.tilt = value[0]
                     ceiling.orientation = value[1]
@@ -449,8 +461,10 @@ class SingleFamilyDwelling(Residential):
 
                 for zone in self.thermal_zones:
                     floor = Floor(zone)
-                    floor.load_type_element(self.year_of_construction,
-                                            self.construction_type)
+                    floor.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data)
                     floor.name = key
                     floor.tilt = value[0]
                     floor.orientation = value[1]
@@ -484,7 +498,8 @@ class SingleFamilyDwelling(Residential):
             zone.area = type_bldg_area * value[0]
             zone.name = key
             use_cond = UseCond(zone)
-            use_cond.load_use_conditions(value[1])
+            use_cond.load_use_conditions(value[1],
+                                         data_class=self.parent.data)
             zone.use_conditions = use_cond
             zone.use_conditions.with_ahu = False
             zone.use_conditions.persons *= zone.area * 0.01
@@ -494,15 +509,18 @@ class SingleFamilyDwelling(Residential):
                 if surface.surface_tilt is not None:
                     if surface.surface_tilt == 90:
                         outer_wall = OuterWall(zone)
-                        outer_wall.load_type_element(self.year_of_construction,
-                                                     self.construction_type)
+                        outer_wall.load_type_element(
+                            year=self.year_of_construction,
+                            construction=self.construction_type,
+                            data_class=self.parent.data)
                         outer_wall.name = surface.name
                         outer_wall.tilt = surface.surface_tilt
                         outer_wall.orientation = surface.surface_orientation
 
                         window = Window(zone)
                         window.load_type_element(self.year_of_construction,
-                                                "Kunststofffenster, Isolierverglasung")
+                                                "Kunststofffenster, Isolierverglasung",
+                                                 data_class=self.parent.data)
                         window.name = "asd"+str(surface.surface_tilt)
                         window.tilt = surface.surface_tilt
                         window.orientation = surface.surface_orientation
@@ -510,16 +528,20 @@ class SingleFamilyDwelling(Residential):
                     elif surface.surface_tilt == 0 and surface.surface_orientation ==\
                             -2:
                         outer_wall = GroundFloor(zone)
-                        outer_wall.load_type_element(self.year_of_construction,
-                                                     self.construction_type)
+                        outer_wall.load_type_element(
+                            year=self.year_of_construction,
+                            construction=self.construction_type,
+                            data_class=self.parent.data)
                         outer_wall.name = surface.name
                         outer_wall.tilt = surface.surface_tilt
                         outer_wall.orientation = surface.surface_orientation
 
                     else:
                         outer_wall = Rooftop(zone)
-                        outer_wall.load_type_element(self.year_of_construction,
-                                                     self.construction_type)
+                        outer_wall.load_type_element(
+                            year=self.year_of_construction,
+                            construction=self.construction_type,
+                            data_class=self.parent.data)
                         outer_wall.name = surface.name
                         outer_wall.tilt = surface.surface_tilt
                         outer_wall.orientation = surface.surface_orientation
@@ -528,8 +550,10 @@ class SingleFamilyDwelling(Residential):
 
                 for zone in self.thermal_zones:
                     inner_wall = InnerWall(zone)
-                    inner_wall.load_type_element(self.year_of_construction,
-                                                 self.construction_type)
+                    inner_wall.load_type_element(
+                            year=self.year_of_construction,
+                            construction=self.construction_type,
+                            data_class=self.parent.data)
                     inner_wall.name = key
                     inner_wall.tilt = value[0]
                     inner_wall.orientation = value[1]
@@ -540,8 +564,10 @@ class SingleFamilyDwelling(Residential):
 
                     for zone in self.thermal_zones:
                         ceiling = Ceiling(zone)
-                        ceiling.load_type_element(self.year_of_construction,
-                                                  self.construction_type)
+                        ceiling.load_type_element(
+                            year=self.year_of_construction,
+                            construction=self.construction_type,
+                            data_class=self.parent.data)
                         ceiling.name = key
                         ceiling.tilt = value[0]
                         ceiling.orientation = value[1]
@@ -550,8 +576,10 @@ class SingleFamilyDwelling(Residential):
 
                     for zone in self.thermal_zones:
                         floor = Floor(zone)
-                        floor.load_type_element(self.year_of_construction,
-                                                self.construction_type)
+                        floor.load_type_element(
+                            year=self.year_of_construction,
+                            construction=self.construction_type,
+                            data_class=self.parent.data)
                         floor.name = key
                         floor.tilt = value[0]
                         floor.orientation = value[1]

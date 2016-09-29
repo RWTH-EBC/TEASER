@@ -236,7 +236,10 @@ class BuildingElement(object):
 
             self._layer.append(lay_count)
 
-    def load_type_element(self, year, construction):
+    def load_type_element(self,
+                          year,
+                          construction,
+                          data_class):
         '''Typical element loader.
 
         Loads typical building elements according to their construction
@@ -251,6 +254,12 @@ class BuildingElement(object):
 
         construction : str
             Construction type, code list ('heavy', 'light')
+
+        data_class : DataClass()
+            DataClass containing the bindings for TypeBuildingElement and
+            Material (typically this is the data class stored in prj.data,
+            but the user can individually change that.
+
 
         Raises
         ----------
@@ -267,9 +276,10 @@ class BuildingElement(object):
 
         buildingelement_input.load_type_element(element=self,
                                                 year=year,
-                                                construction=construction)
+                                                construction=construction,
+                                                data_class=data_class)
 
-    def save_type_element(self, path=None, file_name=None):
+    def save_type_element(self, data_class=None):
         '''Typical element saver.
 
         Saves typical building elements according to their construction
@@ -293,9 +303,34 @@ class BuildingElement(object):
             buildingelement_output
 
         buildingelement_output.save_type_element(element=self,
-                                                 path=path,
-                                                 file_name=file_name)
+                                                 data_class=data_class)
 
+    def delete_type_element(self, path=None, file_name=None):
+        '''Deletes typical element.
+
+        Deletes typical building elements according to their construction
+        year and their construction type in the the XML file for type buidling
+        elements. If the Project parent is set, it automatically saves it to
+        the file given in Project.data. Alternatively you can specify a path to
+        a file of TypeBuildingElements. If this file does not exist,
+        a new file is created.
+
+        Parameters
+        ----------
+
+        path : str
+            path where unique file should be stored
+        name : strt
+            name of of unique file
+
+        '''
+
+        import teaser.data.output.buildingelement_output as \
+            buildingelement_output
+
+        buildingelement_output.delete_type_element(element=self,
+                                                   path=path,
+                                                   file_name=file_name)
 
     def set_calc_default(self):
         '''Sets all calculated values of the Building Element to zero

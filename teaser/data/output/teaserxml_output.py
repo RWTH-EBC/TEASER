@@ -7,7 +7,7 @@ This module contains function to save Projects in the proprietary
 TEASER file format .tXML
 """
 
-import teaser.data.bindings.v_0_3_9.project_bind as pb
+import teaser.data.bindings.v_0_4.project_bind as pb
 import inspect
 from teaser.logic.archetypebuildings.residential import Residential
 
@@ -30,7 +30,7 @@ def save_teaser_xml(path, project):
     out_file = open(new_path, 'w')
 
     teaser_out = pb.Project()
-    teaser_out.version = "0.3.9"
+    teaser_out.version = "0.4"
 
     for bldg in project.buildings:
 
@@ -128,8 +128,8 @@ def save_teaser_xml(path, project):
                 zone.use_conditions.daily_operation_heating
 
             pyxb_use.Lighting = pb.LightingType()
-            pyxb_use.Lighting.maintained_illuminace = \
-                zone.use_conditions.maintained_illuminace
+            pyxb_use.Lighting.maintained_illuminance = \
+                zone.use_conditions.maintained_illuminance
             pyxb_use.Lighting.usage_level_height = \
                 zone.use_conditions.usage_level_height
             pyxb_use.Lighting.red_factor_visual = \

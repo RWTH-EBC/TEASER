@@ -99,14 +99,8 @@ class Project(object):
         else:
             self.data = None
 
-    def instantiate_data_class(self, type_element_file=None):
+    def instantiate_data_class(self):
         '''Initialization of DataClass
-
-        Parameters
-        ----------
-
-        type_element_file: str
-            Name of project specific file (if needed). (default = None)
 
         Returns
         ----------
@@ -114,7 +108,7 @@ class Project(object):
         DataClass : Instance of DataClass()
 
         '''
-        return DataClass(type_element_file)
+        return DataClass()
 
     def calc_all_buildings(self, raise_errors=False):
         '''Calculates values for all project buildings
