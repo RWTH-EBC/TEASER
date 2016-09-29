@@ -1,59 +1,77 @@
 within ${mod_prj}.${bldg.name}.${bldg.name}_DataBase;
 record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.replace(" ", "")}"
-  extends AixLib.DataBase.Buildings.ZoneBaseRecord(
-    n = ${len(zone.tilt_wall)},
-    Heater_on = true,
-    Cooler_on = false,
-    l_cooler = ${zone.cooling_load},
-    RatioConvectiveHeatLighting = ${
-      zone.use_conditions.ratio_conv_rad_lighting},
-    zoneID = "${zone.name}",
-    usage = "${zone.use_conditions.usage}",
-    RoomArea = ${zone.area},
-    Vair = ${zone.volume},
-    alphaiwi = ${zone.alpha_comb_iw},
-    alphaowi = ${zone.alpha_comb_inner_ow},
-    alphaowo = ${zone.alpha_comb_outer_ow},
-    g = ${zone.weighted_g_value},
-    NrPeople = ${zone.use_conditions.persons},
-    NrPeopleMachines = ${zone.use_conditions.machines},
-    LightingPower = ${zone.use_conditions.lighting_power},
-    h_heater = ${zone.heating_load},
-    gsunblind = {${list_to_string(zone.g_sunblind_list)}},
-    Aw = {${list_to_string(zone.window_area_list)}},
-    withWindows = ${element_check(zone.windows)},
-    weightfactorswindow = {${list_to_string(zone.weightfactor_win)}},
-    weightfactorswall = {${list_to_string(zone.weightfactor_ow)}},
-    weightfactorground = ${list_to_string(zone.weightfactor_ground)},
-    orientationswallshorizontal = {${list_to_string(zone.tilt_wall)}},
-    Ai = ${zone.area_iw},
-    withInnerwalls = ${element_check(zone.inner_walls)},
-    R1i = ${zone.r1_iw},
-    C1i = ${zone.c1_iw},
+  extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
+    T_start = ${t_inside} TODO pre: Is this the intention of t_inside?,
+    VAir = ${zone.volume},
+    AZone = ${zone.area},
+    alphaRad = TODO aggregate individual values and weight by area,
+    lat = ${det_to_rad_list(bldg.latitude)}
+    nOrientations = ${len(zone.tilt_wall)},
+    AWin = {${list_to_string(zone.window_area_list)}},
+    ATransparent = {${list_to_string(zone.window_area_list)}},
+    alphaWin = ${alpha_conv_inner_win},
     RWin = ${zone.r1_win},
-    UWin = ${zone.ua_value_win/zone.area_win},
-    alphaConvWinInner = ${zone.alpha_conv_inner_win},
-    alphaConvWinOuter = ${zone.alpha_conv_outer_win},
-    Ao = ${zone.area_ow},
-    withOuterwalls = ${element_check(zone.outer_walls)},
-    R1o = ${zone.r1_ow},
-    RRest = ${zone.r_rest_ow},
-    C1o = ${zone.c1_ow},
-    ActivityTypePeople = ${zone.use_conditions.activity_type_persons},
-    RatioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
-    ActivityTypeMachines = ${zone.use_conditions.activity_type_machines},
-    RatioConvectiveHeatMachines = ${
+    gWin = ${zone.weighted_g_value},
+    UWin= ${zone.ua_value_win/zone.area_win},
+    ratioWinConRad = ${zone.windows[0].a_conv},
+    AExt = {${list_to_string(outer_walls_areas)}},
+    alphaExt = ${alpha_conv_inner_ow},
+    nExt = 1,
+    RExt = {${zone.r1_ow}},
+    RExtRem = ${zone.r_rest_ow},
+    CExt = {${zone.c1_ow}},
+    AInt = ${zone.area_iw},
+    alphaInt = ${alpha_conv_inner_iw},
+    nInt = 1,
+    RInt = {${zone.r1_iw}},
+    CInt = {${zone.c1_iw}},
+    AFloor = ${zone.area_gf},
+    alphaFloor = ${alpha_conv_inner_gf},
+    nFloor = 1,
+    RFloor = {${zone.r1_gf}},
+    RFloorRem =  ${zone.r_rest_gf},
+    CFloor = {${zone.c1_gf}},
+    ARoof = ${zone.area_rt},
+    alphaRoof = ${alpha_conv_inner_rt},
+    nRoof = 1,
+    RRoof = {${zone.r1_rt}},
+    RRoofRem = ${zone.r_rest_rt},
+    CRoof = {${zone.c1_rt}},
+    nOrientationsRoof = ${len(zone.tilt_rt)} TODO check if merged with
+    exterior walls. If yes, set erverything to default, resp. 0. If not,
+    set ext and rt values. If windows have rooftop orientation, for AExt,
+    AWin, wfWall and wfWin, add rooftop
+    windows to AWin and nOrientations, set additional elements for AExt and
+    wfWall to zero,
+    recalculate wfWin. Not sure if this is all. pre: How is this case
+    handled in TEASER calculations?
+    tiltRoof = {${list_to_string(deg_to_rad_list(zone.tilt_rt))}}
+    aziRoof = {${list_to_string(deg_to_rad_list(get_azimut(zone
+    .orientation_rt)))}}
+    wfRoof = {${list_to_string(zone.weightfactor_rt)}},
+    aRoof = ${solar_absorp_rt},
+    aExt = ${solar_absorp_ow},
+    TSoil = ${zone.t_ground},
+    alphaWallOut = ${alpha_conv_outer_ow},
+    alphaRadWall = ${alpha_rad_outer_ow},
+    alphaWinOut = ${alpha_conv_outer_win},
+    alphaRadWin = ${alpha_rad_outer_win},
+    alphaRoofOut = &{alpha_conv_outer_rt},
+    alphaRadRoof = ${alpha_rad_outer_rt},
+    tiltExtWalls = {${list_to_string(deg_to_rad_list(zone.tilt_wall))}}
+    aziExtWalls = {${list_to_string(deg_to_rad_list(get_azimut(zone
+    .orientation_wall)))}}
+    wfWall = {${list_to_string(zone.weightfactor_ow)}},
+    wfWin = {${list_to_string(zone.weightfactor_win)}},
+    wfGro = ${list_to_string(zone.weightfactor_ground)},
+    nrPeople = ${zone.use_conditions.persons},
+    ratioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
+    nrPeopleMachines = ${zone.use_conditions.machines},
+    ratioConvectiveHeatMachines = ${
       zone.use_conditions.ratio_conv_rad_machines},
-    rhoair = ${zone.density_air},
-    cair = ${zone.heat_capac_air},
-    temperatureground = ${zone.t_ground},
-    Imax = ${zone.windows[0].shading_max_irr},
-    splitfac = ${zone.windows[0].a_conv},
-    epso = ${zone.ir_emissivity_outer_ow},
-    epsi = ${zone.ir_emissivity_inner_ow},
-    epsw = ${zone.ir_emissivity_win},
-    awin = ${zone.solar_absorp_win},
-    aowo = ${zone.solar_absorp_ow},
+    lightingPower = ${zone.use_conditions.lighting_power},
+    ratioConvectiveHeatLighting = ${
+      zone.use_conditions.ratio_conv_rad_lighting},
     useConstantACHrate = ${str(get_true_false(
       zone.use_conditions.use_constant_ach_rate))},
     baseACH = ${zone.use_conditions.base_ach},
@@ -62,28 +80,24 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
       '[', '{').replace(']', '}')},
     maxSummerACH = ${str(zone.use_conditions.max_summer_ach).replace(
       '[', '{').replace(']', '}')},
-    winterReduction = ${str(zone.use_conditions.winter_reduction).replace(
+    winterReduction = {str(zone.use_conditions.winter_reduction).replace(
       '[', '{').replace(']', '}')},
     withAHU = ${get_true_false(zone.use_conditions.with_ahu)},
     minAHU = ${str(zone.use_conditions.min_ahu)},
-    maxAHU = ${str(zone.use_conditions.max_ahu)});
-
+    maxAHU = ${str(zone.use_conditions.max_ahu)},
+    hHeat = ${zone.heating_load},
+    lHeat = 0,
+    KRHeat = TODO,
+    TNHeat = TODO,
+    HeaterOn = true,
+    hCool = 0,
+    lCool = ${zone.cooling_load},
+    KRCool = TODO,
+    TNCool = TODO,
+    CoolerOn = false);
 
 
 end ${bldg.name}_${zone.name.replace(" ", "")};
-
-##get n
-<%def name="get_n(list)", filter="trim">
-  <%
-  n=0
-  for element in list:
-    if type(element).__name__ == "OuterWall" or type(element).__name__ == "Rooftop":
-      n += 1
-    else:
-      pass
-  return n
-  %>
-</%def>
 
 ##list to string
 <%def name="list_to_string(list)", filter="trim">
@@ -96,16 +110,6 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   %>
 </%def>
 
-##check if element is existent
-<%def name="element_check(element)", filter ="trim">
-  <%
-  if len(element)!= 0:
-    return "true"
-  else:
-    return "false"
-  %>
-</%def>
-
 ##get false
 <%def name="get_true_false(value)", filter="trim">
   <%
@@ -115,5 +119,41 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
     return "true"
   else:
     return value
+  %>
+</%def>
+
+##get azimut
+<%def name="get_azimut(list)", filter="trim">
+  <%
+  newlist = []
+  for element in list:
+    if 0 < element < 360:
+        newlist.append(-180.0+element)
+    elif element == 0:
+        newlist.append(180.0)
+    elif element == -1:
+        newlist.append(0.0)
+    elif element == -2:
+        newlist.append(0.0)
+  return newlist
+  %>
+</%def>
+
+##convert deg to rad for list
+<%def name="deg_to_rad_list(list)", filter="trim">
+  <%
+  newlist = []
+  for element in list:
+    newlist.append(deg_to_rad(element))
+  return newlist
+  %>
+</%def>
+
+##convert deg to rad
+<%def name="deg_to_rad(value)", filter="trim">
+  <%
+  from math import pi
+  return_value = value * pi/180
+  return return_value
   %>
 </%def>
