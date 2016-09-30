@@ -3,37 +3,50 @@ model ${bldg.name}
   "This is the simulation model of ${bldg.name}"
 
 % if model == "Multizone":
-	AixLib.Building.LowOrder.Multizone.Multizone multizone(
-      buildingParam=${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_base()
+  AixLib.ThermalZones.ReducedOrder.Multizone.Multizone multizone(
+    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    buildingID=${get_id(bldg.building_id)},
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
+             intWallRC(thermCapInt(each der_T(fixed=true))))),
+    T_start = ${bldg.zone[0].t_inside},
+    VAir = ${bldg.volume},
+    ABuilding=${bldg.net_leased_area},
+    ASurTot=${get_total_surface_area(bldg)},
+    numZones = ${get_n(bldg.thermal_zones)},
+    zoneParam = {
+      %for i in bldg.thermal_zones:
+	  %if i == bldg.thermal_zones[-1]:
+	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name
+	  .replace(" ", "")}()
+	  %else:
+	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name
+	  .replace(" ", "")}(),
+	  %endif
+      %endfor
+      }
 
 % if zone == "ThermalZone":
-  ,redeclare AixLib.Building.LowOrder.ThermalZone.ThermalZone zone
+    ,
+    AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone
 % else:
-  ,redeclare AixLib.Building.LowOrder.ThermalZone.ThermalZoneEquipped zone
-% endif
-
-% if physics == "vdi":
-  (redeclare 
-        AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
-        buildingPhysics
-% else:
-  (redeclare 
-        AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysics
-        buildingPhysics
-% endif 
+    ,
+    AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone
+%   endif
 
 % if gFac is True:
-  (redeclare 
-          AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
-          corG)
+    (redeclare
+    AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
+    corGDouPan)
 % else:
-   (redeclare 
-          AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
-          corG)
-% endif
-))
+    (redeclare
+    AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
+    corGDouPan)
+%   endif
+    )
 
-    annotation (Placement(transformation(extent={{-26,-14},{28,36}})));
+    "Multizone"
+	annotation (Placement(transformation(extent={{32,-8},{52,12}})));
 
   AixLib.Building.Components.Weather.Weather weather(
     Outopt=1,
@@ -342,3 +355,24 @@ return check
   %>
 </%def>
 
+##check if building id is integer
+<%def name="get_id(value)", filter="trim">
+  <%
+  try:
+    return_value = int(value)
+  except:
+    return_value = 0
+  return return_value
+  %>
+</%def>
+
+##get total surface area of all walls and windows
+<%def name="get_total_surface_area(bldg)", filter="trim">
+  <%
+  surface_area=0
+  for zone in bldg.thermal_zones:
+    surface_area += zone.area_ow + zone.area_iw + zone.area_rt + zone
+    .area_gf + zone.area_win
+  return surface_area
+  %>
+</%def>
