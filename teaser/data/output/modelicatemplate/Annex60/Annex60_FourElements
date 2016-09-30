@@ -415,26 +415,53 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   return newlist
 
   %>
-</%def>
-##transform deg to rad
-<%def name="deg_to_rad(value)", filter="trim">
+
+##get azimut
+<%def name="get_azimut(list)", filter="trim">
   <%
-  import math
-  value_rad=value*math.pi/180
-  return value_rad
+  newlist = []
+  for element in list:
+    if 0 < element < 360:
+        newlist.append(-180.0+element)
+    elif element == 0:
+        newlist.append(180.0)
+    elif element == -1:
+        newlist.append(0.0)
+    elif element == -2:
+        newlist.append(0.0)
+  return newlist
   %>
 </%def>
 
-##transform deg to rad for lists
+##convert deg to rad for list
 <%def name="deg_to_rad_list(list)", filter="trim">
   <%
-  import math
   newlist = []
   for element in list:
-
-    element_new=element*math.pi/180
-    newlist.append(element_new)
+    newlist.append(deg_to_rad(element))
   return newlist
+  %>
+</%def>
+
+##convert deg to rad
+<%def name="deg_to_rad(value)", filter="trim">
+  <%
+  from math import pi
+  return_value = value * pi/180
+  return return_value
+  %>
+</%def>
+
+##returns mean alphaRad for indoor calculations
+<%def name="mean_alphaRad(zone)", filter="trim">
+  <%
+  total_area = zone.area_ow + zone.area_iw + zone.area_win + zone.area_rt +
+  zone.area_gf
+  rad_mean = (zone.alpha_rad_inner_ow * zone.area_ow + zone.alpha_rad_inner_iw *
+  zone.area_iw + zone.alpha_rad_inner_win * zone.area_win + zone.area_rt *
+  zone.alpha_rad_inner_rt + zone.area_gf * zone.alpha_rad_inner_gf) /
+  total_area
+  return str(rad_mean)
   %>
 </%def>
 
@@ -442,26 +469,5 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
 <%def name="sum_list(list)", filter="trim">
   <%
   return sum(list)
-  %>
-</%def>
-
-##returns string of list of exterior walls
-<%def name="get_AExt_list(zone)", filter="trim">
-  <%
-  wall_list = []
-  for wall in zone.outer_walls:
-    wall_list.append(wall.area)
-  string_list = list_to_string(wall_list)
-  return string_list
-  %>
-</%def>
-
-##returns mean alphaRad for indoor calculations
-<%def name="mean_alphaRad(zone)", filter="trim">
-  <%
-  total_area = zone.area_ow + zone.area_iw + zone.area_win
-  rad_mean = (zone.alpha_rad_inner_ow * zone.area_ow + zone.alpha_rad_inner_iw *
-  zone.area_iw + zone.alpha_rad_inner_win * zone.area_win) / total_area
-  return str(rad_mean)
   %>
 </%def>

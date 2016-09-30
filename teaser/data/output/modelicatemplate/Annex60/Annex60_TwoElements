@@ -279,7 +279,8 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   return string_of_list
   %>
 </%def>
-##get azimut for modelica
+
+##get azimut
 <%def name="get_azimut(list)", filter="trim">
   <%
   newlist = []
@@ -288,51 +289,30 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
         newlist.append(-180.0+element)
     elif element == 0:
         newlist.append(180.0)
-    elif element == -1.0:
+    elif element == -1:
         newlist.append(0.0)
     elif element == -2:
         newlist.append(0.0)
   return newlist
-
-  %>
-</%def>
-##transform deg to rad
-<%def name="deg_to_rad(value)", filter="trim">
-  <%
-  import math
-  value_rad=value*math.pi/180
-  return value_rad
   %>
 </%def>
 
-##transform deg to rad for lists
+##convert deg to rad for list
 <%def name="deg_to_rad_list(list)", filter="trim">
   <%
-  import math
   newlist = []
   for element in list:
-
-    element_new=element*math.pi/180
-    newlist.append(element_new)
+    newlist.append(deg_to_rad(element))
   return newlist
   %>
 </%def>
 
-##sums entries of a list
-<%def name="sum_list(list)", filter="trim">
+##convert deg to rad
+<%def name="deg_to_rad(value)", filter="trim">
   <%
-  return sum(list)
-  %>
-</%def>
-
-##returns string of list of exterior walls
-<%def name="get_AExt_list(zone)", filter="trim">
-  <%
-  wall_list = []
-  for wall in zone.outer_walls:
-    wall_list.append(wall.area)
-  string_list = list_to_string(wall_list)
-  return string_list
+  from math import pi
+  return_value = value * pi/180
+  return return_value
   %>
 </%def>
 

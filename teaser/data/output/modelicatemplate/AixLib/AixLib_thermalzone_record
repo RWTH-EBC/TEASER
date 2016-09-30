@@ -1,10 +1,10 @@
 within ${mod_prj}.${bldg.name}.${bldg.name}_DataBase;
 record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.replace(" ", "")}"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
-    T_start = ${t_inside} TODO pre: Is this the intention of t_inside?,
+    T_start = ${t_inside},
     VAir = ${zone.volume},
     AZone = ${zone.area},
-    alphaRad = TODO aggregate individual values and weight by area,
+    alphaRad = ${mean_alphaRad(zone)},
     lat = ${det_to_rad_list(bldg.latitude)}
     nOrientations = ${len(zone.tilt_wall)},
     AWin = {${list_to_string(zone.window_area_list)}},
@@ -14,7 +14,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     gWin = ${zone.weighted_g_value},
     UWin= ${zone.ua_value_win/zone.area_win},
     ratioWinConRad = ${zone.windows[0].a_conv},
-    AExt = {${list_to_string(outer_walls_areas)}},
+    AExt = {${list_to_string(outer_walls_areas)}}, TODO in AixLib übernehmen
     alphaExt = ${alpha_conv_inner_ow},
     nExt = 1,
     RExt = {${zone.r1_ow}},
@@ -37,14 +37,8 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     RRoof = {${zone.r1_rt}},
     RRoofRem = ${zone.r_rest_rt},
     CRoof = {${zone.c1_rt}},
-    nOrientationsRoof = ${len(zone.tilt_rt)} TODO check if merged with
-    exterior walls. If yes, set erverything to default, resp. 0. If not,
-    set ext and rt values. If windows have rooftop orientation, for AExt,
-    AWin, wfWall and wfWin, add rooftop
-    windows to AWin and nOrientations, set additional elements for AExt and
-    wfWall to zero,
-    recalculate wfWin. Not sure if this is all. pre: How is this case
-    handled in TEASER calculations?
+    nOrientationsRoof = ${len(zone.tilt_rt)} TODO check if it works as
+    wished regarding windows, particularly rooftop windows
     tiltRoof = {${list_to_string(deg_to_rad_list(zone.tilt_rt))}}
     aziRoof = {${list_to_string(deg_to_rad_list(get_azimut(zone
     .orientation_rt)))}}
@@ -155,5 +149,18 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   from math import pi
   return_value = value * pi/180
   return return_value
+  %>
+</%def>
+
+##returns mean alphaRad for indoor calculations
+<%def name="mean_alphaRad(zone)", filter="trim">
+  <%
+  total_area = zone.area_ow + zone.area_iw + zone.area_win + zone.area_rt +
+  zone.area_gf
+  rad_mean = (zone.alpha_rad_inner_ow * zone.area_ow + zone.alpha_rad_inner_iw *
+  zone.area_iw + zone.alpha_rad_inner_win * zone.area_win + zone.area_rt *
+  zone.alpha_rad_inner_rt + zone.area_gf * zone.alpha_rad_inner_gf) /
+  total_area
+  return str(rad_mean)
   %>
 </%def>
