@@ -14,7 +14,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     gWin = ${zone.weighted_g_value},
     UWin= ${zone.ua_value_win/zone.area_win},
     ratioWinConRad = ${zone.windows[0].a_conv},
-    AExt = {${list_to_string(outer_walls_areas)}}, TODO in AixLib übernehmen
+    AExt = {${list_to_string(outer_walls_areas)}},
     alphaExt = ${alpha_conv_inner_ow},
     nExt = 1,
     RExt = {${zone.r1_ow}},
@@ -37,8 +37,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     RRoof = {${zone.r1_rt}},
     RRoofRem = ${zone.r_rest_rt},
     CRoof = {${zone.c1_rt}},
-    nOrientationsRoof = ${len(zone.tilt_rt)} TODO check if it works as
-    wished regarding windows, particularly rooftop windows
+    nOrientationsRoof = ${len(zone.tilt_rt)}
     tiltRoof = {${list_to_string(deg_to_rad_list(zone.tilt_rt))}}
     aziRoof = {${list_to_string(deg_to_rad_list(get_azimut(zone
     .orientation_rt)))}}
@@ -81,13 +80,13 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     maxAHU = ${str(zone.use_conditions.max_ahu)},
     hHeat = ${zone.heating_load},
     lHeat = 0,
-    KRHeat = TODO,
-    TNHeat = TODO,
+    KRHeat = 10000,
+    TNHeat = 1,
     HeaterOn = true,
     hCool = 0,
     lCool = ${zone.cooling_load},
-    KRCool = TODO,
-    TNCool = TODO,
+    KRCool = 10000,
+    TNCool = 1,
     CoolerOn = false);
 
 
