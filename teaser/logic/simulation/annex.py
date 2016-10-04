@@ -87,7 +87,7 @@ def compare_orientation(bldg, number_of_elements=3):
                     [zone.outer_walls_areas.append(x.area) for x in walls]
                     zone.tilt_wall.append(i[1])
                     zone.orientation_wall.append(i[0])
-                elif i[1] >= 90:
+                elif number_of_elements == 4 and i[1] >= 90:
                     zone.weightfactor_ow.append(
                         sum([wall.wf_out for wall in walls]))
                     [zone.outer_walls_areas.append(x.area) for x in walls]

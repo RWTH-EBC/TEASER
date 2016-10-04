@@ -218,10 +218,6 @@ end ${bldg.name};
 %   endif
     )
 
-    "Multizone"
-	annotation (Placement(transformation(extent={{32,-8},{52,12}})));
-)
-
 % if check_AHU(bldg.thermal_zones) == False:
     ,redeclare AixLib.Airflow.AirHandlingUnit.NoAHU AirHandlingUnit "AHU does
     not exist"
