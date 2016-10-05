@@ -9,7 +9,7 @@ model ${bldg.name}
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
              intWallRC(thermCapInt(each der_T(fixed=true))))),
-    T_start = ${bldg.zone[0].t_inside},
+    T_start = ${bldg.thermal_zones[0].t_inside},
     VAir = ${bldg.volume},
     ABuilding=${bldg.net_leased_area},
     ASurTot=${get_total_surface_area(bldg)},
@@ -17,11 +17,9 @@ model ${bldg.name}
     zoneParam = {
       %for i in bldg.thermal_zones:
 	  %if i == bldg.thermal_zones[-1]:
-	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name
-	  .replace(" ", "")}()
+	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}()
 	  %else:
-	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name
-	  .replace(" ", "")}(),
+	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
 	  %endif
       %endfor
       }
@@ -117,8 +115,8 @@ equation
           -23.4,-32},{0,-32},{0,1},{33,1}}, color={0,0,127}));
 
   annotation (experiment(
-      StopTime=${mod_prj.modelica_info.runtime_simulation},
-      Interval=${mod_prj.modelica_info.interval_output},
+      StopTime=${modelica_info.runtime_simulation},
+      Interval=${modelica_info.interval_output},
       __Dymola_Algorithm="${modelica_info.current_solver}"),
       __Dymola_experimentSetupOutput(events=${get_true_false(modelica_info
       .equidistant_output)}),
@@ -142,14 +140,14 @@ equation
           textString="TB")}));
 end ${bldg.name};
 
-% if model == "MultizoneEquipped":
+% elif model == "MultizoneEquipped":
   AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     buildingID=${get_id(bldg.building_id)},
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
              intWallRC(thermCapInt(each der_T(fixed=true))))),
-    T_start = ${bldg.zone[0].t_inside},
+    T_start = ${bldg.thermal_zones[0].t_inside},
     VAir = ${bldg.volume},
     ABuilding=${bldg.net_leased_area},
     ASurTot=${get_total_surface_area(bldg)},
@@ -157,11 +155,9 @@ end ${bldg.name};
     zoneParam = {
       %for i in bldg.thermal_zones:
 	  %if i == bldg.thermal_zones[-1]:
-	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name
-	  .replace(" ", "")}()
+	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}()
 	  %else:
-	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name
-	  .replace(" ", "")}(),
+	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
 	  %endif
       %endfor
       }
@@ -176,7 +172,7 @@ end ${bldg.name};
     sampleRateAHU=1800,
     effFanAHU_sup=0.7,
     effFanAHU_eta=0.7,
-    T_start=${bldg.zone[0].t_inside},
+    T_start=${bldg.thermal_zones[0].t_inside},
     effHRSAHU_enabled=${bldg.central_ahu.efficiency_recovery},
     effHRSAHU_disabled=${bldg.central_ahu.efficiency_revocery_false},
     dpAHU_sup=80000000,
@@ -192,7 +188,7 @@ end ${bldg.name};
 	sampleRateAHU=1800,
     effFanAHU_sup=0.7,
     effFanAHU_eta=0.7,
-    T_start=${bldg.zone[0].t_inside},
+    T_start=${bldg.thermal_zones[0].t_inside},
 	efficiencyHRS_enabled = 0.8,
 	efficiencyHRS_disabled = 0.2,
 	dpAHU_sup=80000000,
@@ -205,7 +201,7 @@ end ${bldg.name};
 % else:
     ,
     redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone
-%   endif
+% endif
 
 % if gFac is True:
     (redeclare
@@ -215,7 +211,7 @@ end ${bldg.name};
     (redeclare
     AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
     corGDouPan)
-%   endif
+% endif
     )
 
 % if check_AHU(bldg.thermal_zones) == False:
@@ -286,8 +282,8 @@ equation
           34.6,-82},{34.6,-9}}, color={0,0,127}));
 
   annotation (experiment(
-      StopTime=${mod_prj.modelica_info.runtime_simulation},
-      Interval=${mod_prj.modelica_info.interval_output},
+      StopTime=${modelica_info.runtime_simulation},
+      Interval=${modelica_info.interval_output},
       __Dymola_Algorithm="${modelica_info.current_solver}"),
       __Dymola_experimentSetupOutput(events=${get_true_false(modelica_info
       .equidistant_output)}),
@@ -366,8 +362,8 @@ return check
   <%
   surface_area=0
   for zone in bldg.thermal_zones:
-    surface_area += zone.area_ow + zone.area_iw + zone.area_rt + zone
-    .area_gf + zone.area_win
+    surface_area += zone.area_ow + zone.area_iw + zone.area_rt + \
+    zone.area_gf + zone.area_win
   return surface_area
   %>
 </%def>

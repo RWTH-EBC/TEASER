@@ -53,13 +53,10 @@ def export_aixlib(prj,
     # use the same zone templates for all exports
     zone_template = Template(
         filename=utilitis.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_zone"))
+            "data/output/modelicatemplate/AixLib/AixLib_ThermalZoneRecord"))
     model_template = Template(
         filename=utilitis.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_model"))
-    zone_base_template = Template(
-        filename=utilitis.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_base"))
+            "data/output/modelicatemplate/AixLib/AixLib_Multizone"))
     # list which contains exported buildings
     if internal_id is not None:
         exported_list_of_buildings = [bldg for bldg in
@@ -116,7 +113,8 @@ def export_aixlib(prj,
                            model=building_model,
                            zone=zone_model,
                            physics=calc_method,
-                           gFac=corG))
+                           gFac=corG,
+                           modelica_info=prj.modelica_info))
             out_file.close()
 
             for zone in bldg.thermal_zones:
@@ -137,23 +135,6 @@ def export_aixlib(prj,
             _help_package_order(zone_path,
                                 bldg.thermal_zones,
                                 bldg.name + "_", bldg.name + "_base")
-
-            out_file = open(utilitis.get_full_path
-                            (zone_path + bldg.name + "_base.mo"),
-                            'w')
-            if bldg.central_ahu:
-                out_file.write(zone_base_template.render_unicode(
-                    bldg=bldg,
-                    zone=zone,
-                    mod_prj=prj.modelica_project,
-                    central_ahu=bldg.central_ahu))
-                out_file.close()
-            else:
-                out_file.write(zone_base_template.render_unicode(
-                    bldg=bldg,
-                    zone=zone,
-                    mod_prj=prj.modelica_project))
-                out_file.close()
         print("Exports can be found here:")
         print(path)
 

@@ -1,80 +1,72 @@
 within ${mod_prj}.${bldg.name}.${bldg.name}_DataBase;
 record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.replace(" ", "")}"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
-    T_start = ${t_inside},
+    T_start = ${zone.t_inside},
     VAir = ${zone.volume},
     AZone = ${zone.area},
     alphaRad = ${mean_alphaRad(zone)},
-    lat = ${det_to_rad_list(bldg.latitude)}
+    lat = ${deg_to_rad(check_lat(bldg.latitude))},
     nOrientations = ${len(zone.tilt_wall)},
     AWin = {${list_to_string(zone.window_area_list)}},
     ATransparent = {${list_to_string(zone.window_area_list)}},
-    alphaWin = ${alpha_conv_inner_win},
+    alphaWin = ${zone.alpha_conv_inner_win},
     RWin = ${zone.r1_win},
     gWin = ${zone.weighted_g_value},
     UWin= ${zone.ua_value_win/zone.area_win},
     ratioWinConRad = ${zone.windows[0].a_conv},
-    AExt = {${list_to_string(outer_walls_areas)}},
-    alphaExt = ${alpha_conv_inner_ow},
+    AExt = {${list_to_string(zone.outer_walls_areas)}},
+    alphaExt = ${zone.alpha_conv_inner_ow},
     nExt = 1,
     RExt = {${zone.r1_ow}},
     RExtRem = ${zone.r_rest_ow},
     CExt = {${zone.c1_ow}},
     AInt = ${zone.area_iw},
-    alphaInt = ${alpha_conv_inner_iw},
+    alphaInt = ${zone.alpha_conv_inner_iw},
     nInt = 1,
     RInt = {${zone.r1_iw}},
     CInt = {${zone.c1_iw}},
     AFloor = ${zone.area_gf},
-    alphaFloor = ${alpha_conv_inner_gf},
+    alphaFloor = ${zone.alpha_conv_inner_gf},
     nFloor = 1,
     RFloor = {${zone.r1_gf}},
     RFloorRem =  ${zone.r_rest_gf},
     CFloor = {${zone.c1_gf}},
     ARoof = ${zone.area_rt},
-    alphaRoof = ${alpha_conv_inner_rt},
+    alphaRoof = ${zone.alpha_conv_inner_rt},
     nRoof = 1,
     RRoof = {${zone.r1_rt}},
     RRoofRem = ${zone.r_rest_rt},
     CRoof = {${zone.c1_rt}},
     nOrientationsRoof = ${len(zone.tilt_rt)}
-    tiltRoof = {${list_to_string(deg_to_rad_list(zone.tilt_rt))}}
-    aziRoof = {${list_to_string(deg_to_rad_list(get_azimut(zone
-    .orientation_rt)))}}
+    tiltRoof = {${list_to_string(deg_to_rad_list(zone.tilt_rt))}},
+    aziRoof = {${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_rt)))}},
     wfRoof = {${list_to_string(zone.weightfactor_rt)}},
-    aRoof = ${solar_absorp_rt},
-    aExt = ${solar_absorp_ow},
+    aRoof = ${zone.solar_absorp_rt},
+    aExt = ${zone.solar_absorp_ow},
     TSoil = ${zone.t_ground},
-    alphaWallOut = ${alpha_conv_outer_ow},
-    alphaRadWall = ${alpha_rad_outer_ow},
-    alphaWinOut = ${alpha_conv_outer_win},
-    alphaRadWin = ${alpha_rad_outer_win},
-    alphaRoofOut = &{alpha_conv_outer_rt},
-    alphaRadRoof = ${alpha_rad_outer_rt},
-    tiltExtWalls = {${list_to_string(deg_to_rad_list(zone.tilt_wall))}}
-    aziExtWalls = {${list_to_string(deg_to_rad_list(get_azimut(zone
-    .orientation_wall)))}}
+    alphaWallOut = ${zone.alpha_conv_outer_ow},
+    alphaRadWall = ${zone.alpha_rad_outer_ow},
+    alphaWinOut = ${zone.alpha_conv_outer_win},
+    alphaRadWin = ${zone.alpha_rad_outer_win},
+    alphaRoofOut = ${zone.alpha_conv_outer_rt},
+    alphaRadRoof = ${zone.alpha_rad_outer_rt},
+    tiltExtWalls = {${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
+    aziExtWalls = {${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_wall)))}},
     wfWall = {${list_to_string(zone.weightfactor_ow)}},
     wfWin = {${list_to_string(zone.weightfactor_win)}},
     wfGro = ${list_to_string(zone.weightfactor_ground)},
     nrPeople = ${zone.use_conditions.persons},
     ratioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
     nrPeopleMachines = ${zone.use_conditions.machines},
-    ratioConvectiveHeatMachines = ${
-      zone.use_conditions.ratio_conv_rad_machines},
+    ratioConvectiveHeatMachines = ${zone.use_conditions.ratio_conv_rad_machines},
     lightingPower = ${zone.use_conditions.lighting_power},
-    ratioConvectiveHeatLighting = ${
-      zone.use_conditions.ratio_conv_rad_lighting},
-    useConstantACHrate = ${str(get_true_false(
-      zone.use_conditions.use_constant_ach_rate))},
+    ratioConvectiveHeatLighting = ${zone.use_conditions.ratio_conv_rad_lighting},
+    useConstantACHrate = ${str(get_true_false(zone.use_conditions.use_constant_ach_rate))},
     baseACH = ${zone.use_conditions.base_ach},
     maxUserACH = ${zone.use_conditions.max_user_ach},
-    maxOverheatingACH = ${str(zone.use_conditions.max_overheating_ach).replace(
-      '[', '{').replace(']', '}')},
-    maxSummerACH = ${str(zone.use_conditions.max_summer_ach).replace(
-      '[', '{').replace(']', '}')},
-    winterReduction = {str(zone.use_conditions.winter_reduction).replace(
-      '[', '{').replace(']', '}')},
+    maxOverheatingACH = ${str(zone.use_conditions.max_overheating_ach).replace('[', '{').replace(']', '}')},
+    maxSummerACH = ${str(zone.use_conditions.max_summer_ach).replace('[', '{').replace(']', '}')},
+    winterReduction = ${str(zone.use_conditions.winter_reduction).replace('[', '{').replace(']', '}')},
     withAHU = ${get_true_false(zone.use_conditions.with_ahu)},
     minAHU = ${str(zone.use_conditions.min_ahu)},
     maxAHU = ${str(zone.use_conditions.max_ahu)},
@@ -88,8 +80,6 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     KRCool = 10000,
     TNCool = 1,
     CoolerOn = false);
-
-
 end ${bldg.name}_${zone.name.replace(" ", "")};
 
 ##list to string
@@ -154,12 +144,23 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
 ##returns mean alphaRad for indoor calculations
 <%def name="mean_alphaRad(zone)", filter="trim">
   <%
-  total_area = zone.area_ow + zone.area_iw + zone.area_win + zone.area_rt +
+  total_area = zone.area_ow + zone.area_iw + zone.area_win + zone.area_rt + \
   zone.area_gf
-  rad_mean = (zone.alpha_rad_inner_ow * zone.area_ow + zone.alpha_rad_inner_iw *
-  zone.area_iw + zone.alpha_rad_inner_win * zone.area_win + zone.area_rt *
-  zone.alpha_rad_inner_rt + zone.area_gf * zone.alpha_rad_inner_gf) /
-  total_area
+  rad_mean = (zone.alpha_rad_inner_ow * zone.area_ow + \
+  zone.alpha_rad_inner_iw * zone.area_iw + zone.alpha_rad_inner_win * \
+  zone.area_win + zone.area_rt * zone.alpha_rad_inner_rt + zone.area_gf * \
+  zone.alpha_rad_inner_gf) / total_area
   return str(rad_mean)
+  %>
+</%def>
+
+##checks if latitude is not None and set Aachen otherwise
+<%def name="check_lat(latitude)", filter="trim">
+  <%
+  if latitude is None:
+    return_value = 50.775466
+  else:
+    return_value = latitude
+  return return_value
   %>
 </%def>
