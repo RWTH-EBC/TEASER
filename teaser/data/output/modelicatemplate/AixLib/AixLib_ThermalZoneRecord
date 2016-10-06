@@ -6,41 +6,41 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     AZone = ${zone.area},
     alphaRad = ${mean_alphaRad(zone)},
     lat = ${deg_to_rad(check_lat(bldg.latitude))},
-    nOrientations = ${len(zone.tilt_wall)},
+    nOrientations = ${def_nOrientations(len(zone.tilt_wall))},
     AWin = {${list_to_string(zone.window_area_list)}},
     ATransparent = {${list_to_string(zone.window_area_list)}},
     alphaWin = ${zone.alpha_conv_inner_win},
-    RWin = ${zone.r1_win},
+    RWin = ${def_val(zone.r1_win)},
     gWin = ${zone.weighted_g_value},
     UWin= ${zone.ua_value_win/zone.area_win},
     ratioWinConRad = ${zone.windows[0].a_conv},
     AExt = {${list_to_string(zone.outer_walls_areas)}},
     alphaExt = ${zone.alpha_conv_inner_ow},
     nExt = 1,
-    RExt = {${zone.r1_ow}},
-    RExtRem = ${zone.r_rest_ow},
-    CExt = {${zone.c1_ow}},
+    RExt = {${def_val(zone.r1_ow)}},
+    RExtRem = ${def_val(zone.r_rest_ow)},
+    CExt = {${def_val(zone.c1_ow)}},
     AInt = ${zone.area_iw},
     alphaInt = ${zone.alpha_conv_inner_iw},
     nInt = 1,
-    RInt = {${zone.r1_iw}},
-    CInt = {${zone.c1_iw}},
+    RInt = {${def_val(zone.r1_iw)}},
+    CInt = {${def_val(zone.c1_iw)}},
     AFloor = ${zone.area_gf},
     alphaFloor = ${zone.alpha_conv_inner_gf},
     nFloor = 1,
-    RFloor = {${zone.r1_gf}},
-    RFloorRem =  ${zone.r_rest_gf},
-    CFloor = {${zone.c1_gf}},
+    RFloor = {${def_val(zone.r1_gf)}},
+    RFloorRem =  ${def_val(zone.r_rest_gf)},
+    CFloor = {${def_val(zone.c1_gf)}},
     ARoof = ${zone.area_rt},
     alphaRoof = ${zone.alpha_conv_inner_rt},
     nRoof = 1,
-    RRoof = {${zone.r1_rt}},
-    RRoofRem = ${zone.r_rest_rt},
-    CRoof = {${zone.c1_rt}},
-    nOrientationsRoof = ${len(zone.tilt_rt)}
-    tiltRoof = {${list_to_string(deg_to_rad_list(zone.tilt_rt))}},
-    aziRoof = {${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_rt)))}},
-    wfRoof = {${list_to_string(zone.weightfactor_rt)}},
+    RRoof = {${def_val(zone.r1_rt)}},
+    RRoofRem = ${def_val(zone.r_rest_rt)},
+    CRoof = {${def_val(zone.c1_rt)}},
+    nOrientationsRoof = ${def_nOrientations(len(zone.tilt_rt))},
+    tiltRoof = {${list_to_string(deg_to_rad_list(def_val_Roof_list(zone.tilt_rt,def_nOrientations(len(zone.tilt_rt)))))}},
+    aziRoof = {${list_to_string(deg_to_rad_list(def_val_Roof_list(get_azimut(zone.orientation_rt),def_nOrientations(len(zone.tilt_rt)))))}},
+    wfRoof = {${list_to_string(def_val_wfRoof(zone.weightfactor_rt,def_nOrientations(len(zone.tilt_rt))))}},
     aRoof = ${zone.solar_absorp_rt},
     aExt = ${zone.solar_absorp_ow},
     TSoil = ${zone.t_ground},
@@ -162,5 +162,62 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   else:
     return_value = latitude
   return return_value
+  %>
+</%def>
+
+##default values for nOrientations
+<%def name="def_nOrientations(value)", filter="trim">
+  <%
+  if value is None or value == 0:
+    return_value = 1
+  else:
+    return_value = value
+  return return_value
+  %>
+</%def>
+
+##default values for lists of C's or R's
+<%def name="def_val_list(list, req_len)", filter="trim">
+  <%
+  if not list or len(list) != req_len:
+    return_list = [0.00001] * req_len
+  else:
+    return_list = list
+    for element,i in enumerate(list):
+      return_list[i] = def_val(element)
+  return return_list
+  %>
+</%def>
+
+##default values for C's or R's
+<%def name="def_val(value)", filter="trim">
+  <%
+  if not value or value <= 0:
+     return_value = 0.00001
+  else:
+     return_value = value
+  return return_value
+  %>
+</%def>
+
+##default values for wfRoof
+<%def name="def_val_wfRoof(list, req_len)", filter="trim">
+  <%
+  if not list or len(list) != req_len:
+    return_list = [1 / req_len] * req_len
+  else:
+    return_list = list
+  return return_list
+  %>
+</%def>
+
+##default values for tiltRoof and aziRoof
+<%def name="def_val_Roof_list(list, req_len)", filter="trim">
+  <%
+  if not list or len(list) != req_len:
+    return_list = [0] * req_len
+  else:
+    return_list = list
+  return return_list
   %>
 </%def>

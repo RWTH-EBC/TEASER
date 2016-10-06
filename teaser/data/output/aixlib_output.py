@@ -134,7 +134,7 @@ def export_aixlib(prj,
                           within=prj.name + '.' + bldg.name)
             _help_package_order(zone_path,
                                 bldg.thermal_zones,
-                                bldg.name + "_", bldg.name + "_base")
+                                bldg.name + "_")
         print("Exports can be found here:")
         print(path)
 
@@ -173,7 +173,7 @@ def export_aixlib(prj,
                           within=prj.name + '.' + bldg.name)
             _help_package_order(zone_path,
                                 bldg.thermal_zones,
-                                bldg.name + "_", bldg.name + "_base")
+                                bldg.name + "_")
 
         print("Exports can be found here:")
         print(path)
