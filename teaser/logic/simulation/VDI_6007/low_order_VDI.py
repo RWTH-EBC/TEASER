@@ -162,7 +162,9 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
         Indoor air temperature in Kelvin
     Q_HC : Array of Float
         Heating (positive) and cooling (negative) loads in Watt
-    
+
+    #  TODO: Add further return values and descriptions
+
     Current limitations
     -------------------
     1. Only written for thermal zones with windows, internal walls and 
