@@ -5,9 +5,10 @@
 """
 
 import math
-import parser_buildings
 import numpy as np
 import re
+
+import teaser.logic.simulation.VDI_6007.sun as sun
 
 
 def eqAirTemp(weatherData, houseData, solarRad_in, method="vdi"):
@@ -167,7 +168,7 @@ def eqAirTemp(weatherData, houseData, solarRad_in, method="vdi"):
         # scalar
         T_eqLWs = ((T_earth - T_air) * (1 - phiprivate) + (
             T_sky - T_air) * phiprivate) * (
-                  eowo * alpharad / (alphaowo * 0.93))
+                      eowo * alpharad / (alphaowo * 0.93))
 
         for i in range(n):
             T_eqLW[i] = T_eqLWs * abs(sunblindsig[i] - unitvec[i])
@@ -229,7 +230,6 @@ def getTRYData(houseData):
         location = (latitude, longitude)
 
         # calculate orientation depending iradiation
-        import sun
         timeZone = 1
         albedo = 0.2
 
@@ -256,41 +256,3 @@ def getTRYData(houseData):
                                    albedo=albedo)
 
     return rad_sky, rad_earth, temp, SunRad
-
-
-# %%       
-if __name__ == "__main__":
-
-    # get building inputs
-    filename = "TEASER4_meine_Geo.mo"
-    houseData = parser_buildings.parse_record(filename)
-
-    # get weather inputs
-    raw_inputs = {}
-
-    (raw_inputs["solar_irrad_sky"],
-     raw_inputs["solar_irrad_earth"],
-     raw_inputs["temperature"], solarRad_in) = getTRYData(houseData)
-
-    # results
-    t_equiv = []
-
-    method = "vdi"
-    for i in range(len(raw_inputs["temperature"])):
-        if method == "ebcMod":
-            equalAirTemp, equalAirTempWindow = eqAirTemp(
-                [raw_inputs["temperature"][i],
-                 raw_inputs["solar_irrad_sky"][i],
-                 raw_inputs["solar_irrad_earth"][i]],
-                houseData,
-                solarRad_in[:, i],
-                method=method)
-            t_equiv.append((equalAirTemp, equalAirTempWindow))
-        else:
-            equalAirTemp = eqAirTemp([raw_inputs["temperature"][i],
-                                      raw_inputs["solar_irrad_sky"][i],
-                                      raw_inputs["solar_irrad_earth"][i]],
-                                     houseData,
-                                     solarRad_in[:, i],
-                                     method=method)
-            t_equiv.append(equalAirTemp)

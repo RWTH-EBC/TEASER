@@ -3,8 +3,8 @@
 """
 
 """
-from __future__ import division
 
+import os
 import numpy as np
 
 
@@ -37,7 +37,7 @@ def equal_air_temp(HSol, TBlaSky, TDryBul, sunblind, params):
 
     # Compute equivalent long wave and short wave temperatures
     delTEqLW = (TBlaSky - TDryBul) * (
-    eExt * alphaRadWall / (alphaRadWall + alphaWallOut * 0.93))
+        eExt * alphaRadWall / (alphaRadWall + alphaWallOut * 0.93))
     delTEqSW = HSol * aExt / (alphaRadWall + alphaWallOut)
 
     # Compute equivalent window and wall temperatures
@@ -58,15 +58,26 @@ def equal_air_temp(HSol, TBlaSky, TDryBul, sunblind, params):
 
 
 if __name__ == "__main__":
+
+    file1 = 'case08_t_amb.csv'
+    file2 = 'case08_q_sol_win.csv'
+    file3 = 'case08_q_sol_wall.csv'
+
+    this_path = os.path.dirname(os.path.abspath(__file__))
+
+    file1_path = os.path.join(this_path, 'input_weather', file1)
+    file2_path = os.path.join(this_path, 'input_weather', file2)
+    file3_path = os.path.join(this_path, 'input_weather', file3)
+
     times_per_hour = 60
     no_tile = 60
 
-    t_outside_raw = np.loadtxt("inputs/case08_t_amb.csv", delimiter=",")
+    t_outside_raw = np.loadtxt(file1_path, delimiter=",")
     t_outside = np.array([t_outside_raw[2 * i, 1] for i in range(24)])
     t_outside_adj = np.repeat(t_outside, times_per_hour)
     t_outside_tiled = np.tile(t_outside_adj, no_tile)
 
-    q_sol_rad_win_raw = np.loadtxt("inputs/case08_q_sol_win.csv",
+    q_sol_rad_win_raw = np.loadtxt(file2_path,
                                    usecols=(1, 2))
     solarRad_win = q_sol_rad_win_raw[0:24, :]
 
@@ -74,7 +85,7 @@ if __name__ == "__main__":
     sunblind_in[solarRad_win > 100] = 0.85
     sunblind_in_adj = np.repeat(sunblind_in, times_per_hour, axis=0)
 
-    q_sol_rad_wall_raw = np.loadtxt("inputs/case08_q_sol_wall.csv",
+    q_sol_rad_wall_raw = np.loadtxt(file3_path,
                                     usecols=(1, 2))
     solarRad_wall = q_sol_rad_wall_raw[0:24, :]
     solarRad_wall_adj = np.repeat(solarRad_wall, times_per_hour, axis=0)
@@ -94,3 +105,6 @@ if __name__ == "__main__":
 
     t_equal_air = equal_air_temp(solarRad_wall, t_black_sky, t_outside,
                                  sunblind_in, params)
+
+    print('Equivalent air temperature in Kelvin: ')
+    print(t_equal_air)
