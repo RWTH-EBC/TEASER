@@ -64,10 +64,15 @@ if __name__ == "__main__":
     file3 = 'case08_q_sol_wall.csv'
 
     this_path = os.path.dirname(os.path.abspath(__file__))
+    src_path = os.path.dirname(
+                os.path.dirname(os.path.dirname(this_path)))
 
-    file1_path = os.path.join(this_path, 'input_weather', file1)
-    file2_path = os.path.join(this_path, 'input_weather', file2)
-    file3_path = os.path.join(this_path, 'input_weather', file3)
+    file1_path = os.path.join(src_path, 'data', 'input',
+                                        'weather', file1)
+    file2_path = os.path.join(src_path, 'data', 'input',
+                                        'weather', file2)
+    file3_path = os.path.join(src_path, 'data', 'input',
+                                        'weather', file3)
 
     times_per_hour = 60
     no_tile = 60
