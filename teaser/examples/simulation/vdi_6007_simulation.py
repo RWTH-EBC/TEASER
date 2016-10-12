@@ -7,9 +7,60 @@ Example script for VDI 6007 simulation usage
 import numpy as np
 
 import teaser.logic.simulation.VDI_6007.low_order_VDI as low_order_VDI
+"""
+        self.internal_id = random.random()
+
+        self.parent = parent
+        self.name = name
+        self.building_id = None
+        self.street_name = ""
+        self.city = ""
+
+        self.type_of_building = type(self).__name__
+
+        self.year_of_construction = year_of_construction
+        self._central_ahu = None
+        self.with_ahu = with_ahu
+
+        if with_ahu is True:
+            self.central_ahu = BuildingAHU(self)
+
+        self.number_of_floors = None
+        self.height_of_floors = None
+        self.net_leased_area = net_leased_area
+        self.bldg_height = None
+
+        self._year_of_retrofit = None
+
+        self._thermal_zones = []
+        self._outer_area = {}
+        self._window_area = {}
+
+        self.gml_surfaces = []
+
+        self.volume = 0
+        self.sum_heating_load = 0
+        self.sum_cooling_load = 0
+
+        #additional simulation parameters
+        self.longitude = None
+        self.latitude = None
+
+        self.file_ahu = None
+        self.file_internal_gains = None
+        self.file_set_t = None
+        self.file_weather = None
+
+        self.orientation_bldg = []
+        self.tilt_bldg = []
+        self.orient_tilt = []
+        self._number_of_elements_calc = 2
+        self._merge_windows_calc = False
+        self._used_library_calc = "AixLib"
+"""
 
 
-def vdi_example_6007():
+def vdi_example_6007(thermal_zone):
     # Definition of time horizon
     times_per_hour = 60
     timesteps = 24 * 60 * times_per_hour  # 60 days
@@ -41,24 +92,32 @@ def vdi_example_6007():
 
     #  TODO: Substitute with TEASER type building call
     # Load constant house parameters
-    houseData = {"R1i": 0.000595693407511,
-                 "C1i": 14836354.6282,
-                 "Ai": 75.5,
-                 "RRest": 0.03895919557,
-                 "R1o": 0.00436791293674,
-                 "C1o": 1600848.94,
-                 "Ao": [10.5],
-                 "Aw": np.zeros(1),
-                 "At": np.zeros(1),
-                 "Vair": 52.5,
-                 "rhoair": 1.19,
-                 "cair": 0,
-                 "splitfac": 0.09,
-                 "g": 1,
-                 "alphaiwi": 2.24,
-                 "alphaowi": 2.7,
-                 "alphaWall": 25 * 10.5,  # 25 * sum(Ao)
-                 "withInnerwalls": True}
+    if len(thermal_zone.inner_walls)!= 0:
+        withInnerwalls="true"
+    else:
+        withInnerwalls="false"
+
+
+    houseData = {"R1i": thermal_zone.r1_iw,
+                 "C1i": thermal_zone.c1_iw,
+                 "Ai": thermal_zone.area_iw,
+                 "RRest": thermal_zone.r_rest_ow,
+                 "R1o": thermal_zone.r1_ow,
+                 "C1o": thermal_zone.c1_ow,
+                 "Ao": thermal_zone.area_ow,
+                 "Aw": thermal_zone.window_area_list,
+                 #"At": thermal_zone., #TODO
+                 "Vair": thermal_zone.volume,
+                 "rhoair": thermal_zone.density_air,
+                 "cair": thermal_zone.heat_capac_air,
+                 "splitfac": thermal_zone.windows[0].a_conv,
+                 "g": thermal_zone.weighted_g_value,
+                 "alphaiwi": thermal_zone.alpha_comb_iw,
+                 "alphaowi": thermal_zone.alpha_comb_inner_ow,
+                 #"alphaWall": thermal_zone.,  # 25 * sum(Ao)#TODO
+                 "withInnerwalls": withInnerwalls} #TODO is this correct?
+
+    print(houseData)
 
     #  TODO: What is krad?
     krad = 1
@@ -100,4 +159,40 @@ def vdi_example_6007():
 
 
 if __name__ == '__main__':
-    vdi_example_6007()
+
+    from teaser.project import Project
+    prj = Project(load_data=True)
+    prj.name = "ArchetypeBuildings"
+    prj.type_bldg_residential(name="ResidentialBuilding",
+                              year_of_construction=1988,
+                              number_of_floors=2,
+                              height_of_floors=3.5,
+                              net_leased_area=100,
+                              with_ahu=True,
+                              residential_layout=1,
+                              neighbour_buildings=1,
+                              attic=1,
+                              cellar=1,
+                              construction_type="heavy",
+                              dormer=1)
+
+    prj.type_bldg_office(name="Office1",
+                         year_of_construction=1988,
+                         number_of_floors=2,
+                         height_of_floors=3.5,
+                         net_leased_area=100,
+                         office_layout=1,
+                         window_layout=1,
+                         with_ahu=True,
+                         construction_type="heavy")
+
+
+
+
+    for i in range(len(prj.buildings)-1):
+        for j in range(len(prj.buildings[i].thermal_zones)-1):
+            thermal_zone=prj.buildings[i].thermal_zones[j]
+            vdi_example_6007(thermal_zone)
+
+    vdi_example_6007(prj.buildings[0].thermal_zones[0])
+
