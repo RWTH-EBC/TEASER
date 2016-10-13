@@ -933,7 +933,7 @@ class MainUI(QDialog):
         self.open_simulation_button.setToolTip("Opens simulation tab")
         self.open_simulation_label = QtGui.QLabel(self.ribbon_group_box)
         self.open_simulation_label.setGeometry(QtCore.QRect(685, 80, 70, 25))
-        self.open_simulation_label.setText("Simulation\n")
+        self.open_simulation_label.setText("Simulation\nSetup")
         self.open_simulation_label.setAlignment(QtCore.Qt.AlignCenter)
         self.open_export_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI/GUIImages/ExportTab.png")),
