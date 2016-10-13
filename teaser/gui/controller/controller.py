@@ -528,8 +528,11 @@ class Controller():
             path of the output location
         '''
 
-        project.calc_all_buildings(num_of_elem, merge_win, 'Annex60')
-        project.export_annex(num_of_elem, merge_win, internal_id,
+        project.number_of_elements_calc = num_of_elem
+        project.merge_windows_calc = merge_win
+        project.used_library_calc = 'Annex60'
+        project.calc_all_buildings()
+        project.export_annex(internal_id,
                              path_output_folder)
 
     @classmethod
