@@ -846,24 +846,24 @@ class MainUI(QDialog):
         self.mask_label_4.setVisible(False)
         self.mask_label_4.setStyleSheet("background-color:rgba(0,0,0,80)")
         self.new_type_building_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Haus1.png")),
+            utilitis.get_full_path("GUI/GUIImages/CreateTypeBuilding.png")),
             self.ribbon_widget)
         self.new_type_building_button.setGeometry(QtCore.QRect(10, 5, 70, 70))
         self.new_type_building_button.clicked.connect(
             self.generate_type_building_ui)
         self.new_type_building_button.setToolTip(
-            "Click to create a new typebuilding.")
+            "Create a new typebuilding")
         self.new_type_building_label = QtGui.QLabel(self.ribbon_group_box)
         self.new_type_building_label.setGeometry(QtCore.QRect(10, 80, 70, 25))
         self.new_type_building_label.setText("C" + "reate Type- \nBuilding")
         self.new_empty_building_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/NewEmptyBuilding.png")),
+            utilitis.get_full_path("GUI/GUIImages/CreateEmptyBuilding.png")),
             self.ribbon_widget)
         self.new_empty_building_button.setGeometry(QtCore.QRect(95, 5, 70, 70))
         self.new_empty_building_button.clicked.connect(
             self.create_new_building_ui)
         self.new_empty_building_button.setToolTip(
-            "Creates a new building without any zones or values.")
+            "Creates a new building without any zones or values")
         self.new_building_label = QtGui.QLabel(self.ribbon_group_box)
         self.new_building_label.setGeometry(QtCore.QRect(95, 80, 70, 25))
         self.new_building_label.setText("Create \nBuilding")
@@ -874,21 +874,21 @@ class MainUI(QDialog):
         self.add_zone_button.setGeometry(QtCore.QRect(180, 5, 70, 70))
         self.add_zone_button.clicked.connect(self.add_thermal_zone)
         self.add_zone_button.setToolTip(
-            "Click to create a new thermal zone for the currently displayed"
-            "building.")
+            "Creates a new thermal zone for the current "
+            "building")
         self.add_zone_label = QtGui.QLabel(self.ribbon_group_box)
         self.add_zone_label.setGeometry(QtCore.QRect(180, 80, 70, 25))
-        self.add_zone_label.setText("Create New \n Zone")
+        self.add_zone_label.setText("Create \n Zone")
         self.delete_zone_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI/GUIImages/DeleteZone.png")),
             self.ribbon_widget)
         self.delete_zone_button.setGeometry(QtCore.QRect(265, 5, 70, 70))
         self.delete_zone_button.clicked.connect(self.delete_thermal_zone)
         self.delete_zone_button.setToolTip(
-            "Deletes the currently selected zone from this building.")
+            "Deletes the selected zone of the current building")
         self.delete_label = QtGui.QLabel(self.ribbon_group_box)
         self.delete_label.setGeometry(QtCore.QRect(265, 80, 70, 25))
-        self.delete_label.setText("Delete Cur- \nrent Zone")
+        self.delete_label.setText("Delete \nZone")
         self.delete_building_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI/GUIImages/EditBuilding.png")),
             self.ribbon_widget)
@@ -896,59 +896,58 @@ class MainUI(QDialog):
         self.delete_building_button.clicked.connect(
             self.warning_delete_building)
         self.delete_building_button.setToolTip(
-            "Switches to edit-mode. Allows modification of general"
-            "building values.")
+            "Deletes current building")
         self.delete_label = QtGui.QLabel(self.ribbon_group_box)
         self.delete_label.setGeometry(QtCore.QRect(350, 80, 70, 25))
         self.delete_label.setText("Delete\nBuilding")
         self.load_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Load.png")),
+            utilitis.get_full_path("GUI/GUIImages/LoadBuilding.png")),
             self.ribbon_widget)
         self.load_button.setGeometry(QtCore.QRect(435, 5, 70, 70))
         self.load_button.clicked.connect(self.load_building_button)
-        self.load_button.setToolTip("Loads a building from a .xml file.")
+        self.load_button.setToolTip("Loads a building from an .xml file")
         self.load_label = QtGui.QLabel(self.ribbon_group_box)
         self.load_label.setGeometry(QtCore.QRect(435, 80, 70, 25))
         self.load_label.setText("Load\nBuilding")
         self.new_project_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Project_manager.png")),
+            utilitis.get_full_path("GUI/GUIImages/CreateProject.png")),
             self.ribbon_widget)
         self.new_project_button.setGeometry(QtCore.QRect(520, 5, 70, 70))
         self.new_project_button.clicked.connect(self.create_new_project_ui)
-        self.new_project_button.setToolTip("Creates a new Project.")
+        self.new_project_button.setToolTip("Creates a new project")
         self.new_project_label = QtGui.QLabel(self.ribbon_group_box)
         self.new_project_label.setGeometry(QtCore.QRect(520, 80, 70, 25))
-        self.new_project_label.setText("Create empty\nProject")
+        self.new_project_label.setText("Create \nProject")
         self.open_simulation_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Keyschedule_rc4.png")),
+            utilitis.get_full_path("GUI/GUIImages/SimulationTab.png")),
             self.ribbon_widget)
         self.open_simulation_button.setGeometry(QtCore.QRect(605, 5, 70, 70))
         self.open_simulation_button.clicked.connect(
             self.show_simulation_window)
-        self.open_simulation_button.setToolTip("opens the Simulation Tab.")
+        self.open_simulation_button.setToolTip("Opens simulation tab")
         self.open_simulation_label = QtGui.QLabel(self.ribbon_group_box)
         self.open_simulation_label.setGeometry(QtCore.QRect(605, 80, 70, 25))
-        self.open_simulation_label.setText("Open Simu-\n lation Tab")
+        self.open_simulation_label.setText("Simulation\n")
         self.open_export_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Keyschedule_rc4.png")),
+            utilitis.get_full_path("GUI/GUIImages/ExportTab.png")),
             self.ribbon_widget)
         self.open_export_button.setGeometry(QtCore.QRect(685, 5, 70, 70))
         self.open_export_button.clicked.connect(
             self.show_export_window)
-        self.open_export_button.setToolTip("opens the Export Tab.")
+        self.open_export_button.setToolTip("Opens export tab")
         self.open_export_label = QtGui.QLabel(self.ribbon_group_box)
         self.open_export_label.setGeometry(QtCore.QRect(685, 80, 70, 25))
-        self.open_export_label.setText("Open Ex-\n port Tab")
+        self.open_export_label.setText("Export\n")
         self.save_project_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Keyschedule_rc4.png")),
+            utilitis.get_full_path("GUI/GUIImages/SaveProject.png")),
             self.ribbon_widget)
         self.save_project_button.setGeometry(QtCore.QRect(765, 5, 70, 70))
         self.save_project_button.clicked.connect(
             self.click_save_current_project)
-        self.save_project_button.setToolTip("Saves the current project.")
+        self.save_project_button.setToolTip("Saves the current project")
         self.save_project_label = QtGui.QLabel(self.ribbon_group_box)
         self.save_project_label.setGeometry(QtCore.QRect(765, 80, 70, 25))
-        self.save_project_label.setText("Save Pro-\n ject Tab")
+        self.save_project_label.setText("Save Pro-\n ject")
 
         self.side_animation = QtCore.QPropertyAnimation(
             self.side_bar_widget, "geometry")
