@@ -944,7 +944,7 @@ class MainUI(QDialog):
         self.open_export_button.setToolTip("Opens export tab")
         self.open_export_label = QtGui.QLabel(self.ribbon_group_box)
         self.open_export_label.setGeometry(QtCore.QRect(765, 80, 70, 25))
-        self.open_export_label.setText("Export\n")
+        self.open_export_label.setText("Model \nExport")
         self.open_export_label.setAlignment(QtCore.Qt.AlignCenter)
         self.save_project_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI/GUIImages/SaveProject.png")),
