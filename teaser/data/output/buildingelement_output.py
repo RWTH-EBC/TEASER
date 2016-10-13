@@ -184,8 +184,9 @@ def save_type_element(element, data_class):
 
         out_file.write(element_binding.toDOM().toprettyxml())
 
+
 def delete_type_element(element, data_class):
-    '''Deletes typical element.
+    """Deletes typical element.
 
     Deletes typical building elements according to their construction
     year and their construction type in the the XML file for type buidling
@@ -204,7 +205,7 @@ def delete_type_element(element, data_class):
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
 
-    '''
+    """
 
     element_binding = data_class.element_bind
 

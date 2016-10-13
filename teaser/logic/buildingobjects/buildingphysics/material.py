@@ -68,7 +68,7 @@ class Material(object):
 
         self.material_id = str(uuid.uuid1())
 
-    def load_material_template(self, mat_name, data_class):
+    def load_material_template(self, mat_name, data_class=None):
         '''Material loader.
 
         Loads Material specified in the XML.
@@ -82,9 +82,15 @@ class Material(object):
         data_class : DataClass()
             DataClass containing the bindings for TypeBuildingElement and
             Material (typically this is the data class stored in prj.data,
-            but the user can individually change that.
+            but the user can individually change that. Default is
+            self.parent.parent.parent.parent.data which is data in project
 
         '''
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.parent.data
+        else:
+            data_class = data_class
 
         material_input.load_material(material=self,
                                      mat_name=mat_name,
@@ -95,7 +101,21 @@ class Material(object):
 
         Saves Material specified in the XML.
 
+        Parameters
+        ----------
+
+        data_class : DataClass()
+            DataClass containing the bindings for TypeBuildingElement and
+            Material (typically this is the data class stored in prj.data,
+            but the user can individually change that. Default is
+            self.parent.parent.parent.parent.data which is data in project
+
         '''
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.parent.data
+        else:
+            data_class = data_class
 
         material_output.save_material(material=self, data_class=data_class)
 

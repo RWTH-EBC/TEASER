@@ -239,7 +239,7 @@ class BuildingElement(object):
     def load_type_element(self,
                           year,
                           construction,
-                          data_class):
+                          data_class=None):
         '''Typical element loader.
 
         Loads typical building elements according to their construction
@@ -258,13 +258,19 @@ class BuildingElement(object):
         data_class : DataClass()
             DataClass containing the bindings for TypeBuildingElement and
             Material (typically this is the data class stored in prj.data,
-            but the user can individually change that.
-
+            but the user can individually change that. Default is
+            self.parent.parent.parent.data (which is data_class in current
+            project)
 
         Raises
         ----------
         Assert if parents to Building are not set
         '''
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
+        else:
+            data_class = data_class
 
         import teaser.data.input.buildingelement_input as buildingelement_input
 
@@ -292,12 +298,19 @@ class BuildingElement(object):
         Parameters
         ----------
 
-        path : str
-            path where unique file should be stored
-        name : strt
-            name of of unique file
+        data_class : DataClass()
+            DataClass containing the bindings for TypeBuildingElement and
+            Material (typically this is the data class stored in prj.data,
+            but the user can individually change that. Default is
+            self.parent.parent.parent.data (which is data_class in current
+            project)
 
         '''
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
+        else:
+            data_class = data_class
 
         import teaser.data.output.buildingelement_output as \
             buildingelement_output
@@ -305,7 +318,7 @@ class BuildingElement(object):
         buildingelement_output.save_type_element(element=self,
                                                  data_class=data_class)
 
-    def delete_type_element(self, path=None, file_name=None):
+    def delete_type_element(self, data_class=None):
         '''Deletes typical element.
 
         Deletes typical building elements according to their construction
@@ -318,19 +331,25 @@ class BuildingElement(object):
         Parameters
         ----------
 
-        path : str
-            path where unique file should be stored
-        name : strt
-            name of of unique file
+        data_class : DataClass()
+            DataClass containing the bindings for TypeBuildingElement and
+            Material (typically this is the data class stored in prj.data,
+            but the user can individually change that. Default is
+            self.parent.parent.parent.data (which is data_class in current
+            project)
 
         '''
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
+        else:
+            data_class = data_class
 
         import teaser.data.output.buildingelement_output as \
             buildingelement_output
 
         buildingelement_output.delete_type_element(element=self,
-                                                   path=path,
-                                                   file_name=file_name)
+                                                   data_class=data_class)
 
     def set_calc_default(self):
         '''Sets all calculated values of the Building Element to zero
