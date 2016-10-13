@@ -278,7 +278,7 @@ class BoundaryConditions(UseConditions):
 
     def load_use_conditions(self,
                             zone_usage,
-                            data_class):
+                            data_class=None):
         '''load typical use conditions
 
         loads Use conditions specified in the XML, according to 18599
@@ -289,15 +289,21 @@ class BoundaryConditions(UseConditions):
             code list for zone_usage according to 18599
 
         data_class : DataClass()
-            DataClass containing the bindings for TypeBuildingElement and
-            Material (typically this is the data class stored in prj.data,
-            but the user can individually change that.
+            DataClass containing the bindings for Use Conditions (typically
+            this is the data class stored in prj.data,
+            but the user can individually change that. Default is
+            self.parent.parent.parent.data (which is data_class in current
+            project)
         '''
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
+        else:
+            data_class = data_class
 
         boundcond_input.load_boundary_conditions(bound_cond=self,
                                                  zone_usage=zone_usage,
                                                  data_class=data_class)
-
 
     def save_use_conditions(self, data_class):
         '''Use conditions saver.
@@ -312,10 +318,17 @@ class BoundaryConditions(UseConditions):
         ----------
 
         data_class : DataClass()
-            DataClass containing the bindings for TypeBuildingElement and
-            Material (typically this is the data class stored in prj.data,
-            but the user can individually change that.
+            DataClass containing the bindings for UseConditions(typically this
+            is the data class stored in prj.data,
+            but the user can individually change that.Default is
+            self.parent.parent.parent.data (which is data_class in current
+            project)
         '''
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
+        else:
+            data_class = data_class
 
         boundcond_output.save_bound_conditions(bound_cond=self,
                                                data_class=data_class)
