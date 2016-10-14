@@ -504,7 +504,7 @@ class Controller():
 
         project.number_of_elements_calc = 2
         project.merge_windows_calc = False
-        project.used_library_calc = 'Annex60'
+        project.used_library_calc = 'AixLib'
         project.calc_all_buildings()
         project.export_aixlib(building_model, zone_model, corG,
                               internal_id, str(path_output_folder))
