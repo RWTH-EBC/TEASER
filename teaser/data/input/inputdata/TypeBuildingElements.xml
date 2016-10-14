@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<TypeBuildingElements version="0.4">
+<TypeBuildingElements version="0.4" xmlns="http://teaser.elements">
 	<OuterWall>
 		<building_age_group>0 1918</building_age_group>
 		<construction_type>heavy</construction_type>
