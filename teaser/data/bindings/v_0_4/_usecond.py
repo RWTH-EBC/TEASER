@@ -1,8 +1,8 @@
-# .\boundaryconditions_bind.py
+# .\_usecond.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:d789d1de16c05aa7dbcf7132bd9fe56c59a877fd
-# Generated 2016-10-14 14:55:29.345233 by PyXB version 1.2.4 using Python 3.5.2.final.0
-# Namespace http://teaser.boundary
+# Generated 2016-10-14 14:56:22.513549 by PyXB version 1.2.4 using Python 3.5.2.final.0
+# Namespace http://teaser.boundary [xmlns:usecond]
 
 from __future__ import unicode_literals
 import pyxb
@@ -15,7 +15,7 @@ import sys
 import pyxb.utils.six as _six
 
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:7be71ae2-920d-11e6-8913-2cd444b2e704')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:9b8490d0-920d-11e6-a719-2cd444b2e704')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.4'
