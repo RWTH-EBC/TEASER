@@ -87,8 +87,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     withLongwave=true,
     aExt=${zone.solar_absorp_ow},
     alphaWallOut=${zone.alpha_conv_outer_ow},
-    alphaRadWall=${zone.alpha_rad_outer_ow},
-    eExt=${zone.ir_emissivity_outer_ow},
+    alphaRad=${zone.alpha_rad_outer_ow},
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
@@ -100,12 +99,8 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     withLongwave=true,
     aExt=${zone.solar_absorp_ow},
     alphaWallOut=${zone.alpha_conv_outer_ow},
-    alphaRadWall=${zone.alpha_rad_outer_ow},
+    alphaRad=${zone.alpha_rad_outer_ow},
     alphaWinOut=${zone.alpha_conv_outer_win},
-    alphaRadWin=${zone.alpha_rad_outer_win},
-    aWin=${zone.solar_absorp_win},
-    eExt=${zone.ir_emissivity_outer_ow},
-    eWin=${zone.ir_emissivity_win},
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif

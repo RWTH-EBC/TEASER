@@ -393,6 +393,8 @@ class Controller():
             individual path where the xml file will be saved
         '''
 
+        path = str(path)
+
         if path.endswith("teaserXML"):
             teaser_xml.save_teaser_xml(path, project)
             print("Saved under: "+path)
@@ -414,6 +416,8 @@ class Controller():
         loaded_prj : project()
             project class filled with information from a file
         '''
+
+        path = str(path)
 
         if path.endswith(".teaserXML"):
             project.load_project(path)
@@ -498,8 +502,12 @@ class Controller():
             path of the output location
         '''
 
+        project.number_of_elements_calc = 2
+        project.merge_windows_calc = False
+        project.used_library_calc = 'Annex60'
+        project.calc_all_buildings()
         project.export_aixlib(building_model, zone_model, corG,
-                              internal_id, path_output_folder)
+                              internal_id, str(path_output_folder))
 
     @classmethod
     def click_export_button_annex(self, project, num_of_elem, merge_win,
@@ -533,7 +541,7 @@ class Controller():
         project.used_library_calc = 'Annex60'
         project.calc_all_buildings()
         project.export_annex(internal_id,
-                             path_output_folder)
+                             str(path_output_folder))
 
     @classmethod
     def click_change_all_constr(self,
