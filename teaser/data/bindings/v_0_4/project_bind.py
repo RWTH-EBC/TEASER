@@ -25,7 +25,7 @@ if pyxb.__version__ != _PyXBVersion:
 
 # Import bindings for namespaces imported into schema
 import pyxb.binding.datatypes
-import _usecond as _ImportedBinding__usecond
+import teaser.data.bindings.v_0_4.boundaryconditions_bind as _ImportedBinding__usecond
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://teaser.project', create_if_missing=True)
