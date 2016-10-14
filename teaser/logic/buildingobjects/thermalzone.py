@@ -506,6 +506,7 @@ class ThermalZone(object):
             pass
 
         if len(self.ground_floors) > 0:
+            with_ground_floors = True
             if len(self.ground_floors) == 1:
                 self.r1_gf = self.ground_floors[0].r1
                 self.c1_gf = self.ground_floors[0].c1_korr
@@ -513,7 +514,7 @@ class ThermalZone(object):
                 self.r1_gf, self.c1_gf = \
                     self.calc_chain_matrix(self.ground_floors, omega)
         else:
-            pass
+            with_ground_floors = False
 
         if len(self.inner_walls) > 0:
             if len(self.inner_walls) == 1:
@@ -534,18 +535,22 @@ class ThermalZone(object):
                 self.r1_win = 1/sum_r1_win
 
                 self.r1_ow = 1/(1/self.r1_ow)
-                self.r1_gf = 1/(1/self.r1_gf)
+                if with_ground_floors:
+                    self.r1_gf = 1/(1/self.r1_gf)
 
                 self.r_total_ow = 1/self.ua_value_ow
-                self.r_total_gf = 1/self.ua_value_gf
+                if with_ground_floors:
+                    self.r_total_gf = 1/self.ua_value_gf
 
                 self.r_rad_ow_iw = 1/(1/self.r_rad_inner_ow)
-                self.r_rad_gf_iw = 1/(1/self.r_rad_inner_gf)
+                if with_ground_floors:
+                    self.r_rad_gf_iw = 1/(1/self.r_rad_inner_gf)
 
                 self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
-                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
-                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
+                if with_ground_floors:
+                    self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                        1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
                 self.ir_emissivity_outer_ow =\
                     ((self.ir_emissivity_outer_ow * self.area_ow) +
                         (self.ir_emissivity_outer_rt *
@@ -569,20 +574,24 @@ class ThermalZone(object):
                     self.r1_win += 1/(win_count.r1/6)
 
                 self.r1_ow = 1/(1/self.r1_ow + (self.r1_win))
-                self.r1_gf = 1/(1/self.r1_gf)
+                if with_ground_floors:
+                    self.r1_gf = 1/(1/self.r1_gf)
 
                 self.r_total_ow = 1/(self.ua_value_ow + self.ua_value_win)
-                self.r_total_gf = 1/(self.ua_value_gf)
+                if with_ground_floors:
+                    self.r_total_gf = 1/(self.ua_value_gf)
 
                 self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
                                       (1/self.r_rad_inner_win))
-                self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
+                if with_ground_floors:
+                    self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
 
                 self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/((1/self.r_conv_inner_ow) +
                        (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
-                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
-                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
+                if with_ground_floors:
+                    self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                        1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
                 self.ir_emissivity_outer_ow =\
                     ((self.ir_emissivity_outer_ow * self.area_ow) +
                         (self.ir_emissivity_outer_rt * self.area_rt) +
@@ -632,6 +641,7 @@ class ThermalZone(object):
             pass
 
         if len(self.rooftops) > 0:
+            with_rooftops = True
             if len(self.rooftops) == 1:
                 self.r1_rt = self.rooftops[0].r1
                 self.c1_rt = self.rooftops[0].c1_korr
@@ -639,9 +649,10 @@ class ThermalZone(object):
                 self.r1_rt, self.c1_rt = \
                     self.calc_chain_matrix(self.rooftops, omega)
         else:
-            pass
+            with_rooftops = False
 
         if len(self.ground_floors) > 0:
+            with_ground_floors = True
             if len(self.ground_floors) == 1:
                 self.r1_gf = self.ground_floors[0].r1
                 self.c1_gf = self.ground_floors[0].c1_korr
@@ -649,7 +660,7 @@ class ThermalZone(object):
                 self.r1_gf, self.c1_gf = \
                     self.calc_chain_matrix(self.ground_floors, omega)
         else:
-            pass
+            with_ground_floors = False
 
         if len(self.inner_walls) > 0:
             if len(self.inner_walls) == 1:
@@ -670,23 +681,31 @@ class ThermalZone(object):
                 self.r1_win = 1/sum_r1_win
 
                 self.r1_ow = 1/(1/self.r1_ow)
-                self.r1_gf = 1/(1/self.r1_gf)
-                self.r1_rt = 1/(1/self.r1_rt)
+                if with_ground_floors:
+                    self.r1_gf = 1/(1/self.r1_gf)
+                if with_rooftops:
+                    self.r1_rt = 1/(1/self.r1_rt)
 
                 self.r_total_ow = 1/(self.ua_value_ow)
-                self.r_total_gf = 1/(self.ua_value_gf)
-                self.r_total_rt = 1/(self.ua_value_rt)
+                if with_ground_floors:
+                    self.r_total_gf = 1/(self.ua_value_gf)
+                if with_rooftops:
+                    self.r_total_rt = 1/(self.ua_value_rt)
 
                 self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow))
-                self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
-                self.r_rad_rt_iw = 1/((1/self.r_rad_inner_rt))
+                if with_ground_floors:
+                    self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
+                if with_rooftops:
+                    self.r_rad_rt_iw = 1/((1/self.r_rad_inner_rt))
 
                 self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/(1/self.r_conv_inner_ow+1/self.r_rad_ow_iw)
-                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
-                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
-                self.r_rest_rt = self.r_total_rt - self.r1_rt - \
-                    1/(1/self.r_conv_inner_rt+1/self.r_rad_rt_iw)
+                if with_ground_floors:
+                    self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                        1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
+                if with_rooftops:
+                    self.r_rest_rt = self.r_total_rt - self.r1_rt - \
+                        1/(1/self.r_conv_inner_rt+1/self.r_rad_rt_iw)
 
             else:
                 warnings.warn("As no outer walls or no windows are defined\
@@ -699,25 +718,33 @@ class ThermalZone(object):
                     self.r1_win += 1/(win_count.r1/6)
 
                 self.r1_ow = 1/(1/self.r1_ow + (self.r1_win))
-                self.r1_gf = 1/(1/self.r1_gf)
-                self.r1_rt = 1/(1/self.r1_rt)
+                if with_ground_floors:
+                    self.r1_gf = 1/(1/self.r1_gf)
+                if with_rooftops:
+                    self.r1_rt = 1/(1/self.r1_rt)
 
                 self.r_total_ow = 1/(self.ua_value_ow + self.ua_value_win)
-                self.r_total_gf = 1/(self.ua_value_gf)
-                self.r_total_rt = 1/(self.ua_value_rt)
+                if with_ground_floors:
+                    self.r_total_gf = 1/(self.ua_value_gf)
+                if with_rooftops:
+                    self.r_total_rt = 1/(self.ua_value_rt)
 
                 self.r_rad_ow_iw = 1/((1/self.r_rad_inner_ow) +
                                       (1/self.r_rad_inner_win))
-                self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
-                self.r_rad_rt_iw = 1/((1/self.r_rad_inner_rt))
+                if with_ground_floors:
+                    self.r_rad_gf_iw = 1/((1/self.r_rad_inner_gf))
+                if with_rooftops:
+                    self.r_rad_rt_iw = 1/((1/self.r_rad_inner_rt))
 
                 self.r_rest_ow = self.r_total_ow - self.r1_ow - \
                     1/((1/self.r_conv_inner_ow) +
                        (1/self.r_conv_inner_win)+(1/self.r_rad_ow_iw))
-                self.r_rest_gf = self.r_total_gf - self.r1_gf - \
-                    1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
-                self.r_rest_rt = self.r_total_rt - self.r1_rt - \
-                    1/(1/self.r_conv_inner_rt+1/self.r_rad_rt_iw)
+                if with_ground_floors:
+                    self.r_rest_gf = self.r_total_gf - self.r1_gf - \
+                        1/(1/self.r_conv_inner_gf+1/self.r_rad_gf_iw)
+                if with_rooftops:
+                    self.r_rest_rt = self.r_total_rt - self.r1_rt - \
+                        1/(1/self.r_conv_inner_rt+1/self.r_rad_rt_iw)
                 self.ir_emissivity_outer_ow =\
                     ((self.ir_emissivity_outer_ow * self.area_ow) +
                         (self.ir_emissivity_win * self.area_win)) /\
