@@ -104,9 +104,11 @@ equation
           {-24.38,8},{-24.38,7.5}}, color={0,0,127}));
 
   annotation (experiment(
-      StopTime=31536000,
-      Interval=3600,
-      __Dymola_Algorithm="Dassl"), __Dymola_experimentSetupOutput(events=false),
+StopTime=${modelica_info.runtime_simulation},
+Interval=${modelica_info.interval_output},
+__Dymola_Algorithm="${modelica_info.current_solver}"),
+__Dymola_experimentSetupOutput(events=${get_true_false(modelica_info
+.equidistant_output)}),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Line(points={{80,-82}}, color={28,108,200}),

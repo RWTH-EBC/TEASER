@@ -262,6 +262,9 @@ equation
   connect(corGDoublePane.solarRadWinTrans, thermalZoneTwoElements.solRad)
     annotation (Line(points={{27,64},{34,64},{40,64},{40,31},{43,31}}, color={0,
     0,127}));
+  annotation (experiment(
+  StopTime=${modelica_info.runtime_simulation},
+  Interval=${modelica_info.interval_output}));
 end ${bldg.name}_${zone.name.replace(" ", "")};
 
 ##list to string

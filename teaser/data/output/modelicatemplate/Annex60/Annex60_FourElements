@@ -382,6 +382,9 @@ equation
       string="%second",
       index=1,
       extent={{6,3},{6,3}}));
+  annotation (experiment(
+  StopTime=${modelica_info.runtime_simulation},
+  Interval=${modelica_info.interval_output}));
 end ${bldg.name}_${zone.name.replace(" ", "")};
 
 ##list to string

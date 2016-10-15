@@ -285,6 +285,9 @@ equation
     annotation (Line(points={{67,-6},{68,-6},{68,-2}}, color={191,0,0}));
   connect(prescribedTemperatureFloor.T, TSoil.y) annotation (Line(points={{67,-19.2},
           {72.5,-19.2},{72.5,-22},{79.6,-22}}, color={0,0,127}));
+  annotation (experiment(
+  StopTime=${modelica_info.runtime_simulation},
+  Interval=${modelica_info.interval_output}));
 end ${bldg.name}_${zone.name.replace(" ", "")};
 
 ##list to string
