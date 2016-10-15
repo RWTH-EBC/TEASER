@@ -116,7 +116,8 @@ def export_aixlib(prj,
                            model=building_model,
                            zone=zone_model,
                            physics=calc_method,
-                           gFac=corG))
+                           gFac=corG,
+                           modelica_info=prj.modelica_info))
             out_file.close()
 
             for zone in bldg.thermal_zones:

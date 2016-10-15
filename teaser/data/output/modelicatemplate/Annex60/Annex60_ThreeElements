@@ -8,29 +8,21 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     filNam="modelica://Annex60/Resources/weatherdata/USA_CA_San.Francisco.Intl.AP.724940_TMY3.mos")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${len(zone.orientation_wall)}](
+  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${def_nOrientations(len(zone.orientation_wall))}](
     each outSkyCon=true,
     each outGroCon=true,
     til={${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
-    % if bldg.latitude is None:
-    each  lat=0.87266462599716,
-    % else:
-    each  lat=${deg_to_rad(bldg.latitude)},
-    % endif
+    lat = ${deg_to_rad(check_lat(bldg.latitude))},
     azi={${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_wall)))}})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${len(zone.orientation_wall)}](
+  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${def_nOrientations(len(zone.orientation_wall))}](
     til={${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
-    % if bldg.latitude is None:
-    each  lat=0.87266462599716,
-    % else:
-    each  lat=${bldg.latitude},
-    % endif
+    lat = ${deg_to_rad(check_lat(bldg.latitude))},
     azi={${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_wall)))}})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${len(zone.orientation_wall)}, UWin=${zone.ua_value_win/zone.area_win})
+  Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${def_nOrientations(len(zone.orientation_wall))}, UWin=${zone.ua_value_win/zone.area_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
   Annex60.ThermalZones.ReducedOrder.RC.ThreeElements
@@ -58,9 +50,9 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     RFloor={${zone.r1_gf}},
     RFloorRem=${zone.r_rest_gf},
     CFloor={${zone.c1_gf}},
-    nOrientations=${len(zone.orientation_wall)},
+    nOrientations=${def_nOrientations(len(zone.orientation_wall))},
 % if merge_windows is True:
-    AWin={${list_to_string([0] * len(zone.orientation_wall))}},
+    AWin={${list_to_string([0] * def_nOrientations(len(zone.orientation_wall)))}},
 % else:
     AWin={${list_to_string(zone.window_areas)}},
 % endif
@@ -75,7 +67,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 % if merge_windows is True:
   Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
-    n=${len(zone.orientation_wall)},
+    n=${def_nOrientations(len(zone.orientation_wall))},
     wfGro=${list_to_string(zone.weightfactor_ground)},
     wfWall={${list_to_string(zone.weightfactor_ow)}},
     wfWin={${list_to_string(zone.weightfactor_win)}},
@@ -87,7 +79,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
   Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
-    n=${len(zone.orientation_wall)},
+    n=${def_nOrientations(len(zone.orientation_wall))},
     wfGro=${list_to_string(zone.weightfactor_ground)},
     wfWall={${list_to_string(zone.weightfactor_ow)}},
     wfWin={${list_to_string(zone.weightfactor_win)}},
@@ -99,7 +91,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif
-  Modelica.Blocks.Math.Add solRad[${len(zone.orientation_wall)}]
+  Modelica.Blocks.Math.Add solRad[${def_nOrientations(len(zone.orientation_wall))}]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,6},{-28,16}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature
@@ -116,7 +108,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
   Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWall
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{36,6},{26,-4}})));
-  Modelica.Blocks.Sources.Constant const[${len(zone.orientation_wall)}](each k=0)
+  Modelica.Blocks.Sources.Constant const[${def_nOrientations(len(zone.orientation_wall))}](each k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{-20,14},{-14,20}})));
   Annex60.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
@@ -229,7 +221,7 @@ equation
   connect(solRad.y, eqAirTemp.HSol)
     annotation (Line(points={{-27.5,11},{-26,11},{-26,2},{-26,2}},
     color={0,0,127}));
-  %for i, orient in enumerate(zone.orientation_wall):
+  %for i in range(max(1,len(zone.orientation_wall))):
     connect(weaDat.weaBus, HDifTil[${i+1}].weaBus)
     annotation (Line(
     points={{-78,62},{-74,62},{-74,30},{-68,30}},
@@ -317,25 +309,23 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
 
   %>
 </%def>
-##transform deg to rad
-<%def name="deg_to_rad(value)", filter="trim">
+
+##convert deg to rad for list
+<%def name="deg_to_rad_list(list)", filter="trim">
   <%
-  import math
-  value_rad=value*math.pi/180
-  return value_rad
+  newlist = []
+  for element in list:
+    newlist.append(deg_to_rad(element))
+  return newlist
   %>
 </%def>
 
-##transform deg to rad for lists
-<%def name="deg_to_rad_list(list)", filter="trim">
+##convert deg to rad
+<%def name="deg_to_rad(value)", filter="trim">
   <%
-  import math
-  newlist = []
-  for element in list:
-
-    element_new=element*math.pi/180
-    newlist.append(element_new)
-  return newlist
+  from math import pi
+  return_value = value * pi/180
+  return return_value
   %>
 </%def>
 
@@ -360,9 +350,45 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
 ##returns mean alphaRad for indoor calculations
 <%def name="mean_alphaRad(zone)", filter="trim">
   <%
-  total_area = zone.area_ow + zone.area_iw + zone.area_win
-  rad_mean = (zone.alpha_rad_inner_ow * zone.area_ow + zone.alpha_rad_inner_iw *
-  zone.area_iw + zone.alpha_rad_inner_win * zone.area_win) / total_area
+  total_area = zone.area_ow + zone.area_iw + zone.area_win + \
+  zone.area_gf
+  rad_mean = (zone.alpha_rad_inner_ow * zone.area_ow + \
+  zone.alpha_rad_inner_iw * zone.area_iw + zone.alpha_rad_inner_win * \
+  zone.area_win + zone.area_gf * \
+  zone.alpha_rad_inner_gf) / total_area
   return str(rad_mean)
+  %>
+</%def>
+
+##checks if latitude is not None and set Aachen otherwise
+<%def name="check_lat(latitude)", filter="trim">
+  <%
+  if latitude is None:
+    return_value = 50.775466
+  else:
+    return_value = latitude
+  return return_value
+  %>
+</%def>
+
+##default values for nOrientations
+<%def name="def_nOrientations(value)", filter="trim">
+  <%
+  if value is None or value == 0:
+    return_value = 1
+  else:
+    return_value = value
+  return return_value
+  %>
+</%def>
+
+##default values for nOrientations
+<%def name="def_nOrientations(value)", filter="trim">
+  <%
+  if value is None or value == 0:
+    return_value = 1
+  else:
+    return_value = value
+  return return_value
   %>
 </%def>
