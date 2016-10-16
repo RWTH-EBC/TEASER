@@ -56,6 +56,11 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     RRoof={${def_val(zone.r1_rt)}},
     RRoofRem=${def_val(zone.r_rest_rt)},
     CRoof={${def_val(zone.c1_rt)}},
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    extWallRC(thermCapExt(each der_T(fixed=true))),
+    intWallRC(thermCapInt(each der_T(fixed=true))),
+    floorRC(thermCapExt(each der_T(fixed=true))),
+    roofRC(thermCapExt(each der_T(fixed=true))),
     nOrientations=${def_nOrientations(len(zone.orientation_wall))},
 % if merge_windows is True:
     AWin={${list_to_string([0] * len(zone.orientation_wall))}},
