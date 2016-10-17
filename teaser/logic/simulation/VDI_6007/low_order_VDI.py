@@ -186,9 +186,7 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
     R1o = houseData["R1o"]  # Resistor 1 outer wall
     C1o = houseData["C1o"]  # Capacity 1 outer wall in Wh/K
     Ao = houseData["Ao"]  # Outer wall area
-    print(Ao)
     Aw = houseData["Aw"]  # Window area
-    print(Aw)
     At = houseData["At"]  # Transmitting area
 
     Vair = houseData["Vair"]  # Volume of the air in the zone
@@ -216,6 +214,7 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
     # %% Time variable inputs
     # convective heat entry from solar iradiation
     e_solar_conv = np.zeros((timesteps, len(At)))
+
     for i in range(len(At)):
         e_solar_conv[:, i] = solarRad_in[:, i] * splitfac * g * At[i]
     Q_solar_conv = np.sum(e_solar_conv, axis=1)
@@ -264,7 +263,7 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
     T_air_prev = T_air_init
 
     for t in range(timesteps):
-        print(t)
+
         if t == 360:
             pass
 
