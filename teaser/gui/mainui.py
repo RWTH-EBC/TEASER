@@ -2484,7 +2484,7 @@ class MainUI(QDialog):
                                                     thermal_zones.
                                                     index(zone)] = \
                     self.current_zone
-
+        Controller.set_zone_volume(self.current_zone)
         self.display_current_building()
 
     def save_changed_envelopes_values(self):

@@ -106,7 +106,7 @@ class Controller():
     @classmethod
     def click_add_zone_button(self, parent, name, area, zone_type):
         '''
-        creates a thermal zone with specified area and type and blawnco use
+        creates a thermal zone with specified area and type and blanco use
         conditions
 
         Parameters:
@@ -135,6 +135,7 @@ class Controller():
         zone.use_conditions.load_use_conditions(zone_type)
         zone.name = name
         zone.area = area
+        zone.set_volume_zone()
         return parent
 
     @classmethod
@@ -688,3 +689,16 @@ class Controller():
 
         u_value = float(current_element.ua_value)/current_element.area
         return u_value
+
+    @classmethod
+    def set_zone_volume(self, current_zone):
+        '''
+        Set zone volume for current zone
+
+        current_element : thermal_zone()
+            Current zone
+
+        '''
+
+        if not current_zone.volume:
+                current_zone.volume = current_zone.set_volume_zone()
