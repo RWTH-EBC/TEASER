@@ -8,8 +8,10 @@ TEASER file format .tXML
 """
 
 import teaser.data.bindings.v_0_4.project_bind as pb
+import teaser.data.bindings.v_0_4.boundaryconditions_bind as ucb
 import inspect
 from teaser.logic.archetypebuildings.residential import Residential
+import pyxb
 
 def save_teaser_xml(path, project):
     '''This function saves a project to a tXML
@@ -28,6 +30,11 @@ def save_teaser_xml(path, project):
     else:
         new_path = path + ".teaserXML"
     out_file = open(new_path, 'w')
+
+    pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
+        pb.Namespace, 'project')
+    pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
+        ucb.Namespace, 'usecond')
 
     teaser_out = pb.Project()
     teaser_out.version = "0.4"
@@ -102,10 +109,10 @@ def save_teaser_xml(path, project):
 
             pyxb_zone.UseCondition = pb.UseConditionType()
 
-            pyxb_use = pb.BoundaryConditionsType()
+            pyxb_use = ucb.BoundaryConditionsType()
 
             pyxb_use.usage = zone.use_conditions.usage
-            pyxb_use.UsageOperationTime = pb.UsageOperationTimeType()
+            pyxb_use.UsageOperationTime = ucb.UsageOperationTimeType()
             pyxb_use.UsageOperationTime.usage_time = \
                 zone.use_conditions.usage_time
             pyxb_use.UsageOperationTime.daily_usage_hours = \
@@ -127,7 +134,7 @@ def save_teaser_xml(path, project):
             pyxb_use.UsageOperationTime.daily_operation_heating = \
                 zone.use_conditions.daily_operation_heating
 
-            pyxb_use.Lighting = pb.LightingType()
+            pyxb_use.Lighting = ucb.LightingType()
             pyxb_use.Lighting.maintained_illuminance = \
                 zone.use_conditions.maintained_illuminance
             pyxb_use.Lighting.usage_level_height = \
@@ -143,7 +150,7 @@ def save_teaser_xml(path, project):
             pyxb_use.Lighting.ratio_conv_rad_lighting = \
                 zone.use_conditions.ratio_conv_rad_lighting
 
-            pyxb_use.RoomClimate = pb.RoomClimateType()
+            pyxb_use.RoomClimate = ucb.RoomClimateType()
             pyxb_use.RoomClimate.set_temp_heat = \
                 zone.use_conditions.set_temp_heat
             pyxb_use.RoomClimate.set_temp_cool = \
@@ -167,7 +174,7 @@ def save_teaser_xml(path, project):
             pyxb_use.RoomClimate.part_load_factor_ahu = \
                 zone.use_conditions.part_load_factor_ahu
 
-            pyxb_use.InternalGains = pb.InternalGainsType()
+            pyxb_use.InternalGains = ucb.InternalGainsType()
             pyxb_use.InternalGains.persons = \
                 zone.use_conditions.persons
             pyxb_use.InternalGains.profile_persons = \
@@ -181,7 +188,7 @@ def save_teaser_xml(path, project):
             pyxb_use.InternalGains.profile_lighting = \
                 zone.use_conditions.profile_lighting
 
-            pyxb_use.AHU = pb.AHUType()
+            pyxb_use.AHU = ucb.AHUType()
             pyxb_use.AHU.min_ahu = \
                 zone.use_conditions.min_ahu
             pyxb_use.AHU.max_ahu = \
