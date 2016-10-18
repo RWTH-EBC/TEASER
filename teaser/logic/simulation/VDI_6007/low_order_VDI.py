@@ -81,6 +81,7 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
                          cooler_limit=[-1e10, -1e10, -1e10],
                          heater_order=np.array([1, 2, 3]),
                          cooler_order=np.array([1, 2, 3]), dt=3600,
+                         timesteps=8760,
                          T_air_init=295.15, T_iw_init=295.15,
                          T_ow_init=295.15):
     """
@@ -147,8 +148,10 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
         Cooling set temperatures. If the air temperature without heating rises
         above this temperature, a cooling load that just fulfills this 
         temperature is computed
-    dt : Float
-        Length of one timestep in hours. Standard is 1 hour
+    dt : int, optional
+        Length of one timestep in seconds (default: 3600)
+    timesteps : int, optional
+        Number of timesteps (default: 8760)
     T_air_init : Float
         Initial air temperature in Kelvin
     T_iw_init : Float
@@ -171,9 +174,6 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
        external walls
     """
     # %% partialReducedOrderModel
-    # parameters
-
-    timesteps = len(alphaRad)
 
     withInnerwalls = houseData["withInnerwalls"]  # If inner walls are existent
     #    withWindows     = houseData["withWindows"]      # If windows are existent
@@ -263,7 +263,7 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
     T_air_prev = T_air_init
 
     for t in range(timesteps):
-
+        print(t)
         if t == 360:
             pass
 

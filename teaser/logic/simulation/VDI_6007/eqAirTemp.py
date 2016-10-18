@@ -12,7 +12,22 @@ import teaser.logic.simulation.VDI_6007.sun as sun
 
 
 def eqAirTemp(weatherData, houseData, solarRad_in, method="vdi"):
-    # %% partialEqAirTemp 
+    """
+    Calculates equivalent air temperature
+
+    Parameters
+    ----------
+    weatherData :
+    houseData :
+    solarRad_in :
+    method : str, optional
+        Defines calculation method (default: 'vdi')
+
+    Returns
+    -------
+    equalAirTemp :
+    """
+
     aowo = houseData["aowo"]  # Coefficient of absorption of the outer walls
     # TODO: is this the correct key word for the emission parameter?
     eowo = houseData["epso"]  # Coefficient of emission   of the outer walls
@@ -189,70 +204,66 @@ def eqAirTemp(weatherData, houseData, solarRad_in, method="vdi"):
             temp[i] for i in range(len(temp))) + T_ground * wf_ground
 
         return equalAirTemp
-    else:
-        pass
 
-
-# %%
-def getTRYData(houseData):
-    rad_sky = []
-    rad_earth = []
-    temp = []
-    sun_dir = []
-    sun_diff = []
-
-    # Parse all lines 
-    with open("TRY2010_12_Jahr.dat") as f:
-        # Read all lines at once
-        all_lines = f.readlines()
-
-        # Skip the first 38 lines
-        for i in range(38, len(all_lines)):
-            s = all_lines[i].split()
-
-            rad_sky.append(float(s[16]))
-            rad_earth.append(float(s[17]))
-            temp.append(float(s[8]))
-            sun_dir.append(float(s[13]))
-            sun_diff.append(float(s[14]))
-
-        # get location data
-        if re.match("Lage", all_lines[2]) != None:
-            i = all_lines[2].replace("<- B.", "").replace("<- L.", "").replace(
-                " ", "").split("N")
-            j = filter(None, re.split("[° \']+", i[0].replace("Lage:", "")))
-            latitude = float(j[0]) + float(j[1]) / 60
-            i = i[1].split("O")
-            j = filter(None, re.split("[° \']+", i[0]))
-            longitude = float(j[0]) + float(j[1]) / 60
-            altitude = float(i[1].replace("Meter\xfcber", ""))
-
-        location = (latitude, longitude)
-
-        # calculate orientation depending iradiation
-        timeZone = 1
-        albedo = 0.2
-
-        beta = houseData["orientationswallshorizontal"]
-        n = len(beta)
-        gamma = [0, 90, 180, 270]
-        if n == 4:
-            pass
-        elif n == 5:
-            gamma.append(0)
-        elif n == 6:
-            # in the current Teaser data file: beta = [45,90,90,45,90,90]
-            gamma = [0, 0, 90, 0, 180, 270]
-
-        # Sun radiation on surfaces
-        SunRad = sun.getSolarGains(0, 3600, 8760,
-                                   timeZone=timeZone,
-                                   location=location,
-                                   altitude=altitude,
-                                   beta=beta,
-                                   gamma=gamma,
-                                   beam=np.array(sun_dir),
-                                   diffuse=np.array(sun_diff),
-                                   albedo=albedo)
-
-    return rad_sky, rad_earth, temp, SunRad
+# def getTRYData(houseData):
+#     rad_sky = []
+#     rad_earth = []
+#     temp = []
+#     sun_dir = []
+#     sun_diff = []
+#
+#     # Parse all lines
+#     with open("TRY2010_12_Jahr.dat") as f:
+#         # Read all lines at once
+#         all_lines = f.readlines()
+#
+#         # Skip the first 38 lines
+#         for i in range(38, len(all_lines)):
+#             s = all_lines[i].split()
+#
+#             rad_sky.append(float(s[16]))
+#             rad_earth.append(float(s[17]))
+#             temp.append(float(s[8]))
+#             sun_dir.append(float(s[13]))
+#             sun_diff.append(float(s[14]))
+#
+#         # get location data
+#         if re.match("Lage", all_lines[2]) != None:
+#             i = all_lines[2].replace("<- B.", "").replace("<- L.", "").replace(
+#                 " ", "").split("N")
+#             j = filter(None, re.split("[° \']+", i[0].replace("Lage:", "")))
+#             latitude = float(j[0]) + float(j[1]) / 60
+#             i = i[1].split("O")
+#             j = filter(None, re.split("[° \']+", i[0]))
+#             longitude = float(j[0]) + float(j[1]) / 60
+#             altitude = float(i[1].replace("Meter\xfcber", ""))
+#
+#         location = (latitude, longitude)
+#
+#         # calculate orientation depending iradiation
+#         timeZone = 1
+#         albedo = 0.2
+#
+#         beta = houseData["orientationswallshorizontal"]
+#         n = len(beta)
+#         gamma = [0, 90, 180, 270]
+#         if n == 4:
+#             pass
+#         elif n == 5:
+#             gamma.append(0)
+#         elif n == 6:
+#             # in the current Teaser data file: beta = [45,90,90,45,90,90]
+#             gamma = [0, 0, 90, 0, 180, 270]
+#
+#         # Sun radiation on surfaces
+#         SunRad = sun.getSolarGains(0, 3600, 8760,
+#                                    timeZone=timeZone,
+#                                    location=location,
+#                                    altitude=altitude,
+#                                    beta=beta,
+#                                    gamma=gamma,
+#                                    beam=np.array(sun_dir),
+#                                    diffuse=np.array(sun_diff),
+#                                    albedo=albedo)
+#
+#     return rad_sky, rad_earth, temp, SunRad

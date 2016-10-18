@@ -8,9 +8,31 @@ import os
 import numpy as np
 import math
 
+import teaser.logic.simulation.VDI_6007.changeResolution as chres
+
 
 def getSolarGains(initialTime, timeDiscretization, timesteps, timeZone,
                   location, altitude, beta, gamma, beam, diffuse, albedo):
+    """
+
+    Parameters
+    ----------
+    initialTime
+    timeDiscretization
+    timesteps
+    timeZone
+    location
+    altitude
+    beta
+    gamma
+    beam
+    diffuse
+    albedo
+
+    Returns
+    -------
+
+    """
     # get geometry results for entire year
     geometry = getGeometry(initialTime, timeDiscretization,
                            timesteps, timeZone, location, altitude)
@@ -403,18 +425,28 @@ class Weather(object):
     Weather class of TEASER
     """
 
-    def __init__(self, beta, gamma, weather_path=None, albedo=0.2, timeZone=1,
-                 altitude=0, location=(49.5, 8.5)):
+    def __init__(self, weather_path=None, timestep=3600, nb_timesteps=8760,
+                 beta=[45, 90, 90, 45, 90, 90],
+                 gamma=-np.array([0, 0, 90, 0, 180, 270]), albedo=0.2,
+                 timeZone=1, altitude=0, location=(49.5, 8.5)):
         """
         Constructor of weather object
 
         Parameters
         ----------
-        beta
-        gamma
         weather_path : str, optional
             Path to weather file (default: None)
             If set to None, loads weather set TRY 2010, region 12
+        timestep : int, optional
+            Time discretization in seconds (default: 3600)
+        nb_timesteps : int, optional
+            Number of timesteps (default: 8760)
+        beta : list (of floats), optional
+            Incidence angle for different areas of building
+            (default: [45, 90, 90, 45, 90, 90])
+        gamma : array (of floats), optional
+            Orientation angle
+            (default: -np.array([0, 0, 90, 0, 180, 270]))
         albedo
         timeZone
         altitude
@@ -440,8 +472,30 @@ class Weather(object):
         self.rad_sky = weather_data[:, 3]
         self.rad_earth = weather_data[:, 4]
 
+        if timestep != 3600:
+            #  Change resolution to new timestep
+            self.temp = chres.changeResolution(self.temp, oldResolution=3600,
+                                               newResolution=timestep)
+            self.sun_dir = chres.changeResolution(self.sun_dir,
+                                                  oldResolution=3600,
+                                                  newResolution=timestep)
+            self.sun_diff = chres.changeResolution(self.sun_diff,
+                                                   oldResolution=3600,
+                                                   newResolution=timestep)
+            self.rad_sky = chres.changeResolution(self.rad_sky,
+                                                   oldResolution=3600,
+                                                   newResolution=timestep)
+            self.rad_earth = chres.changeResolution(self.rad_earth,
+                                                   oldResolution=3600,
+                                                   newResolution=timestep)
+
+            #  Recalculate nb_timesteps
+            nb_timesteps *= 3600 / timestep
+
         # Sun radiation on surfaces
-        self.sun_rad = getSolarGains(0, 3600, weather_data.shape[0],
+        self.sun_rad = getSolarGains(initialTime=0,
+                                     timeDiscretization=timestep,
+                                     timesteps=nb_timesteps,
                                      timeZone=timeZone,
                                      location=location,
                                      altitude=altitude,
@@ -453,10 +507,8 @@ class Weather(object):
 
 
 if __name__ == "__main__":
-    beta = [45, 90, 90, 45, 90, 90]
-    gamma = -np.array([0, 0, 90, 0, 180, 270])
 
-    weather_obj = Weather(beta=beta, gamma=gamma)
+    weather_obj = Weather(timestep=3600)
 
     print('Outdoor temperature in degree Celsius: ')
     print(weather_obj.temp)
