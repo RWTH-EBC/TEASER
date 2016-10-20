@@ -10,6 +10,7 @@ This module contains function to save boundary conditions classes
 import teaser.data.bindings.v_0_4.boundaryconditions_bind as uc_bind
 import teaser.logic.utilities as utilitis
 import warnings
+import pyxb
 
 def save_bound_conditions(bound_cond, data_class):
     '''Use conditions saver.
@@ -35,6 +36,9 @@ def save_bound_conditions(bound_cond, data_class):
 
     conditions_bind = data_class.conditions_bind
     add_to_xml = True
+
+    pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
+        uc_bind.Namespace, 'usecond')
 
     for check in conditions_bind.BoundaryConditions:
         if check.usage == bound_cond.usage:

@@ -8,6 +8,7 @@ This module contains function to save material classes
 import teaser.data.bindings.v_0_4.material_bind as mat_bind
 import teaser.logic.utilities as utilitis
 import warnings
+import pyxb
 
 def save_material(material, data_class):
     """Material saver.
@@ -31,6 +32,9 @@ def save_material(material, data_class):
     warning_text = ("Material with same name and same properties already "
                     "exists in XML, consider this material or revising your "
                     "properties")
+
+    pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
+        mat_bind.Namespace, 'materials')
 
     for check in mat_binding.Material:
         if check.name == material.name and \

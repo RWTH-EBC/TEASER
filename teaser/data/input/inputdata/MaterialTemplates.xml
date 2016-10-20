@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<MaterialTemplates version="0.4">
+<MaterialTemplates version="0.4" xmlns="http://teaser.material">
 	<Material material_id="5b853868-855d-11e6-9874-2cd444b2e704">
 		<name>EPS035</name>
 		<density>20.0</density>
