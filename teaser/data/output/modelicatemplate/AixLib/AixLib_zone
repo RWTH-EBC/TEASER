@@ -11,7 +11,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     usage = "${zone.use_conditions.usage}",
     RoomArea = ${zone.area},
     Vair = ${zone.volume},
-    alphaiwi = ${zone.alpha_comb_iw},
+    alphaiwi = ${zone.alpha_comb_inner_iw},
     alphaowi = ${zone.alpha_comb_inner_ow},
     alphaowo = ${zone.alpha_comb_outer_ow},
     g = ${zone.weighted_g_value},

@@ -48,7 +48,7 @@ def export_aixlib(prj,
     assert corG in [None, True, False]
 
     uses = ['Modelica(version = "3.2.2")',
-            "AixLib(version=\"0.3.1\")"]
+            "AixLib(version=\"0.3.2\")"]
 
     # use the same zone templates for all exports
     zone_template = Template(
@@ -116,7 +116,8 @@ def export_aixlib(prj,
                            model=building_model,
                            zone=zone_model,
                            physics=calc_method,
-                           gFac=corG))
+                           gFac=corG,
+                           modelica_info=prj.modelica_info))
             out_file.close()
 
             for zone in bldg.thermal_zones:
