@@ -38,7 +38,7 @@ def export_annex60(prj,
 
     """
 
-    uses = ['Modelica(version = "3.2.1")',
+    uses = ['Modelica(version = "3.2.2")',
             'Annex60(version="0.1")']
 
     if internal_id is not None:
@@ -89,7 +89,8 @@ def export_annex60(prj,
                                                                 bldg.name +
                                                                 '.' +
                                                                 bldg.name +
-                                                                "_Models")))
+                                                                "_Models"),
+                                                        modelica_info=prj.modelica_info))
 
             aixlib_output._help_package(zone_path,
                                         bldg.name + "_Models",

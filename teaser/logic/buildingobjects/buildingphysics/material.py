@@ -3,7 +3,7 @@
 
 
 import re
-
+import uuid
 import teaser.data.input.material_input as material_input
 import teaser.data.output.material_output as material_output
 
@@ -42,6 +42,10 @@ class Material(object):
     transmittance : float
         Coefficient of transmittanve of material
 
+    material_id : str(uuid)
+        UUID of material, this is used to have similar behaviour like foreign
+        key in SQL data bases for use in TypeBuildingElements and Material xml
+
     '''
 
     def __init__(self, parent=None):
@@ -56,12 +60,15 @@ class Material(object):
         self._thermal_conduc = 0.0
         self._heat_capac = 0.0
         self._solar_absorp = 0.0
-        if type(self.parent.parent).__name__ != "Window":
-            self._solar_absorp = 0.7
+        if parent is not None:
+            if type(self.parent.parent).__name__ != "Window":
+                self._solar_absorp = 0.7
         self._ir_emissivity = 0.9
         self._transmittance = 0.0
 
-    def load_material_template(self, mat_name):
+        self.material_id = str(uuid.uuid1())
+
+    def load_material_template(self, mat_name, data_class=None):
         '''Material loader.
 
         Loads Material specified in the XML.
@@ -72,19 +79,55 @@ class Material(object):
         mat_name : str
             Code list for Material
 
+        data_class : DataClass()
+            DataClass containing the bindings for TypeBuildingElement and
+            Material (typically this is the data class stored in prj.data,
+            but the user can individually change that. Default is
+            self.parent.parent.parent.parent.data which is data in project
+
         '''
 
-        material_input.load_material(material=self,
-                                     mat_name=mat_name)
+        if data_class is None:
+            data_class = self.parent.parent.parent.parent.data
+        else:
+            data_class = data_class
 
-    def save_material_template(self):
+        material_input.load_material(material=self,
+                                     mat_name=mat_name,
+                                     data_class=data_class)
+
+    def save_material_template(self, data_class):
         '''Material saver.
 
         Saves Material specified in the XML.
 
+        Parameters
+        ----------
+
+        data_class : DataClass()
+            DataClass containing the bindings for TypeBuildingElement and
+            Material (typically this is the data class stored in prj.data,
+            but the user can individually change that. Default is
+            self.parent.parent.parent.parent.data which is data in project
+
         '''
 
-        material_output.save_material(material=self)
+        if data_class is None:
+            data_class = self.parent.parent.parent.parent.data
+        else:
+            data_class = data_class
+
+        material_output.save_material(material=self, data_class=data_class)
+
+
+    @property
+    def material_id(self):
+        return self.__material_id
+
+    @material_id.setter
+    def material_id(self, value):
+        self.__material_id = value
+
 
     @property
     def parent(self):
@@ -101,6 +144,9 @@ class Material(object):
 
             self.__parent = value
             self.__parent.material = self
+
+        else:
+            self.__parent = None
 
     @property
     def name(self):
@@ -138,12 +184,13 @@ class Material(object):
 
         if value is not None:
             self._thermal_conduc = float(value)
-            if self.parent.parent is not None:
-                if self.parent.thickness is not None and\
-                   self.parent.parent.inner_convection is not None and\
-                   self.parent.parent.inner_radiation is not None and\
-                   self.parent.parent.area is not None:
-                    self.parent.parent.calc_ua_value()
+            if self.parent is not None:
+                if self.parent.parent is not None:
+                    if self.parent.thickness is not None and\
+                       self.parent.parent.inner_convection is not None and\
+                       self.parent.parent.inner_radiation is not None and\
+                       self.parent.parent.area is not None:
+                        self.parent.parent.calc_ua_value()
 
     @property
     def density(self):

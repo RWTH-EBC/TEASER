@@ -4,7 +4,7 @@
 """This module contains an example how to create an archetype Building, to retrofit
 that building and to export that building to internal XML and a Modelica record
 """
-
+import teaser.data.bindings.v_0_3_9
 
 def example_type_building():
     """"First thing we need to do is to import our Project API module"""
@@ -16,7 +16,7 @@ def example_type_building():
     This can take a few sec."""
 
     prj = Project(load_data=True)
-    prj.name = "ArchetypeBuildings"
+    prj.name = "ArchetypeBuildings_Ref"
 
     """The five functions starting with type_bldg giving us the opportunity to
     create the specific type building (e.g. type_bldg_residential). The function
@@ -98,7 +98,7 @@ def example_type_building():
     That includes new insulation layer and new windows. The name is changed \
     to Retrofit"""
 
-    prj.name = "Project_Retrofit"
+    prj.name = "ArchetypeBuildings_Retrofit"
     prj.retrofit_all_buildings(2015)
     prj.calc_all_buildings()
 

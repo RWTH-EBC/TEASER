@@ -1005,19 +1005,19 @@ class Test_teaser(object):
     def test_load_use_conditions(self):
         '''test of load_use_conditions, no parameter checking'''
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        use_cond.load_use_conditions("Living")
+        use_cond.load_use_conditions("Living",
+                                     data_class=prj.data)
 
     def test_save_use_conditions(self):
         '''test of save_use_conditions, no parameter checking'''
         import os
-        try:
-            os.remove(utilities.get_default_path() + "/" + "UseCondUT.xml")
-        except:
-            pass
-        path = utilities.get_default_path()
+        
+        path = os.path.join(utilities.get_default_path(),
+                            'UseCondUT.xml')
+        prj.data.path_uc = path
+        prj.data.load_uc_binding()
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
-        use_cond.parent = None
-        use_cond.save_use_conditions(path=path, file_name="UseCondUT")
+        use_cond.save_use_conditions(data_class=prj.data)
 
    #methods in BuildingElement
 
@@ -1049,32 +1049,25 @@ class Test_teaser(object):
 
         # test load function
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].load_type_element(1988, "heavy")
-        therm_zone.inner_walls[0].load_type_element(1988, "light")
+        therm_zone.outer_walls[0].load_type_element(1988, "heavy", prj.data)
+        therm_zone.inner_walls[0].load_type_element(1988, "light", prj.data)
         therm_zone.windows[0].load_type_element(
             1988,
-            "Kunststofffenster, Isolierverglasung")
+            "Kunststofffenster, Isolierverglasung",
+            prj.data)
 
     def test_save_type_element(self):
         '''test of save_type_element, no parameter checking'''
         import os
-        try:
-            os.remove(utilities.get_default_path() + "/" + "unitTestTB.xml")
-        except:
-            pass
-
         # test load function
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        path = utilities.get_default_path()
-        therm_zone.outer_walls[0].parent = None
-        therm_zone.outer_walls[0].save_type_element(path=path,
-                                                    file_name="unitTestTB")
-        therm_zone.inner_walls[0].parent = None
-        therm_zone.inner_walls[0].save_type_element(path=path,
-                                                    file_name="unitTestTB")
-        therm_zone.windows[0].parent = None
-        therm_zone.windows[0].save_type_element(path=path,
-                                                file_name="unitTestTB")
+        path = os.path.join(utilities.get_default_path(),
+                        'unitTestTB.xml')
+        prj.data.path_tb = path
+        prj.data.load_tb_binding()
+        therm_zone.outer_walls[0].save_type_element(data_class=prj.data)
+        therm_zone.inner_walls[0].save_type_element(data_class=prj.data)
+        therm_zone.windows[0].save_type_element(data_class=prj.data)
 
     #methods in Wall
 

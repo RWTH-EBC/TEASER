@@ -33,10 +33,10 @@ def example_create_building():
     specific building and all its future changes to the project.
     '''
     prj = Project(load_data=True)
+    prj.name = "SuperExampleBuilding"
     bldg = Building(parent=prj)
 
     '''Set some building parameters'''
-
     bldg.name = "SuperExampleBuilding"
     bldg.street_name = "Awesome Avenue 42"
     bldg.city = "46325 Fantastic Town"
@@ -241,7 +241,7 @@ def example_create_building():
     the model with a central AHU (MultizoneEquipped) (only default for office
     and institute buildings)
     '''
-
+    
     prj.export_aixlib(building_model="MultizoneEquipped",
                       zone_model="ThermalZoneEquipped",
                       corG=True,

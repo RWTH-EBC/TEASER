@@ -44,7 +44,6 @@ def load_gml(path, prj):
     gml_bind = citygml.CreateFromDocument(xml_file.read())
 
     for i, city_object in enumerate(gml_bind.featureMember):
-
         if city_object.Feature.consistsOfBuildingPart:
             for part in city_object.Feature.consistsOfBuildingPart:
                 if part.BuildingPart.function:
@@ -78,8 +77,9 @@ def load_gml(path, prj):
                     bldg = Building(parent=prj,
                                     name=city_object.Feature.id)
             else:
+
                 bldg = Building(parent=prj,
-                                    name=city_object.Feature.id)
+                                name=city_object.Feature.id)
 
             _create_building(bldg=bldg, city_object=city_object)
             _set_attributes(bldg=bldg, gml_bldg=city_object.Feature)
@@ -88,12 +88,19 @@ def load_gml(path, prj):
                 bldg.set_gml_attributes()
             except:
                 pass
+            try:
+                bldg.generate_from_gml()
+            except:
+                pass
 
 
 def _set_attributes(bldg, gml_bldg):
     """tries to set attributes for type building generation
     """
-
+    try:
+        bldg.name = gml_bldg.name[0].value()
+    except:
+        pass
     try:
         bldg.number_of_floors = gml_bldg.storeysAboveGround
     except:
@@ -104,6 +111,10 @@ def _set_attributes(bldg, gml_bldg):
         pass
     try:
         bldg.year_of_construction = gml_bldg.yearOfConstruction.year
+    except:
+        pass
+    try:
+        bldg.bldg_height = gml_bldg.measuredHeight.value()
     except:
         pass
 
@@ -162,6 +173,11 @@ def _convert_bldg(bldg, function):
         function from CityGML code list 1000 is residential 1120 is office
     """
     parent_help = bldg.parent
+    name_help = bldg.name
+    gml_surfaces_help = bldg.gml_surfaces
+    year_of_construction_help = bldg.year_of_construction
+    bldg_height_help = bldg.bldg_height
+
     if function == "1000":
         from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling \
             import SingleFamilyDwelling
@@ -169,14 +185,16 @@ def _convert_bldg(bldg, function):
     elif function == "1120":
         from teaser.logic.archetypebuildings.bmvbs.office import Office
         bldg.__class__ = Office
-    gml_surfaces_help = bldg.gml_surfaces
 
-    name_help = bldg.name
     bldg.__init__(parent=None)
     bldg.gml_surfaces = gml_surfaces_help
     bldg.parent = parent_help
-    bldg.__name = name_help
+    bldg.name = name_help
+    bldg.year_of_construction = year_of_construction_help
+    bldg.bldg_height = bldg_height_help
 
+    bldg.set_gml_attributes()
+    bldg.generate_from_gml()
 
 class SurfaceGML(object):
     """Class for calculating attributes of CityGML surfaces
@@ -255,7 +273,8 @@ class SurfaceGML(object):
 
         if self.surface_tilt == 180:
             self.surface_tilt = 0.0
-
+        elif str(self.surface_tilt) == "nan":
+            self.surface_tilt = None
         return self.surface_tilt
 
     def get_gml_orientation(self):
@@ -276,9 +295,12 @@ class SurfaceGML(object):
         gml2 = gml_surface[3:6]
         gml3 = gml_surface[6:9]
         gml4 = gml_surface[9:12]
-
-        vektor_1 = gml2-gml1
-        vektor_2 = gml3-gml1
+        if len(gml_surface) > 12:
+            vektor_1 = gml2-gml1
+            vektor_2 = gml4-gml1
+        else:
+            vektor_1 = gml2-gml1
+            vektor_2 = gml3-gml1
 
         normal_1 = np.cross(vektor_1, vektor_2)
         normal_uni = normal_1/LA.norm(normal_1)
@@ -293,7 +315,6 @@ class SurfaceGML(object):
             phi = np.pi/2
         elif normal_uni[0] == 0 > normal_uni[1]:
             phi = -np.pi/2
-
 
         if phi is None:
             pass

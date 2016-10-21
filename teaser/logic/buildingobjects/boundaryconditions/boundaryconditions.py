@@ -229,7 +229,7 @@ class BoundaryConditions(UseConditions):
         self.yearly_cooling_days = 250
         self.daily_operation_heating = 13
 
-        self.maintained_illuminace = 500
+        self.maintained_illuminance = 500
         self.usage_level_height = 0.8
         self.red_factor_visual = 0.84
         self.rel_absence = 0.3
@@ -276,7 +276,9 @@ class BoundaryConditions(UseConditions):
         self.max_summer_ach = [1.0, 273.15 + 10, 273.15 + 17]
         self.winter_reduction = [0.2, 273.15, 273.15 + 10]
 
-    def load_use_conditions(self, zone_usage):
+    def load_use_conditions(self,
+                            zone_usage,
+                            data_class=None):
         '''load typical use conditions
 
         loads Use conditions specified in the XML, according to 18599
@@ -285,13 +287,25 @@ class BoundaryConditions(UseConditions):
         ----------
         zone_usage : str
             code list for zone_usage according to 18599
+
+        data_class : DataClass()
+            DataClass containing the bindings for Use Conditions (typically
+            this is the data class stored in prj.data,
+            but the user can individually change that. Default is
+            self.parent.parent.parent.data (which is data_class in current
+            project)
         '''
 
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
+        else:
+            data_class = data_class
+
         boundcond_input.load_boundary_conditions(bound_cond=self,
-                                                 zone_usage=zone_usage)
+                                                 zone_usage=zone_usage,
+                                                 data_class=data_class)
 
-
-    def save_use_conditions(self, path=None, file_name=None):
+    def save_use_conditions(self, data_class):
         '''Use conditions saver.
 
         Saves use conditions according to their usage type in the the XML file
@@ -303,15 +317,21 @@ class BoundaryConditions(UseConditions):
         Parameters
         ----------
 
-        path : str
-            path where unique file should be stored
-        name : str
-            name of of unique file
+        data_class : DataClass()
+            DataClass containing the bindings for UseConditions(typically this
+            is the data class stored in prj.data,
+            but the user can individually change that.Default is
+            self.parent.parent.parent.data (which is data_class in current
+            project)
         '''
 
+        if data_class is None:
+            data_class = self.parent.parent.parent.data
+        else:
+            data_class = data_class
+
         boundcond_output.save_bound_conditions(bound_cond=self,
-                                               path=path,
-                                               file_name=file_name)
+                                               data_class=data_class)
 
     @property
     def typical_length(self):

@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://teaser.boundary"
+           targetNamespace="http://teaser.boundary" attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.4">
   <xs:element name="UseConditions" type="UseConditionsType"/>
   <xs:complexType name="UsageOperationTimeType">
     <xs:sequence>
@@ -17,7 +18,7 @@
   </xs:complexType>
   <xs:complexType name="LightingType">
     <xs:sequence>
-      <xs:element minOccurs="0" type="xs:float" name="maintained_illuminace"/>
+      <xs:element minOccurs="0" type="xs:float" name="maintained_illuminance"/>
       <xs:element minOccurs="0" type="xs:float" name="usage_level_height"/>
       <xs:element minOccurs="0" type="xs:float" name="red_factor_visual"/>
       <xs:element minOccurs="0" type="xs:float" name="rel_absence"/>
@@ -77,7 +78,8 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="UseConditionsType">
-    <xs:sequence>
+    <xs:attribute type="xs:string" name="version"/>
+	<xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" type="BoundaryConditionsType" name="BoundaryConditions"/>
     </xs:sequence>
   </xs:complexType>

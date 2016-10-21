@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='teaser',
-      version='0.3.9',
+      version='0.4.0',
       description='Tool for Energy Analysis and Simulation for Efficient Retrofit ',
       url='https://github.com/RWTH-EBC/TEASER',
       author='RWTH Aachen University, E.ON Energy Research Center, Institute of Energy Efficient Buildings and Indoor Climate',
@@ -27,6 +27,8 @@ setup(name='teaser',
                 'teaser.data.bindings.opengis.misc.raw',
                 'teaser.data.bindings.opengis.raw',
                 'teaser.data.bindings.schemas',
+				'teaser.data.bindings.v_0_3_9',
+				'teaser.data.bindings.v_0_4',
                 'teaser.data.input',
                 'teaser.data.input.inputdata',
                 'teaser.data.output',

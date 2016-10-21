@@ -6,12 +6,12 @@
 This module contains function to save building element classes
 """
 
-import teaser.data.bindings.typeelement_bind as tb_bind
+import teaser.data.bindings.v_0_4.typeelement_bind as tb_bind
 import teaser.logic.utilities as utilitis
 import warnings
+import pyxb
 
-
-def save_type_element(element, path=None, file_name=None):
+def save_type_element(element, data_class):
     '''Typical element saver.
 
     Saves typical building elements according to their construction
@@ -23,35 +23,28 @@ def save_type_element(element, path=None, file_name=None):
 
     Parameters
     ----------
-
     element : BuildingElement()
         Instance of BuildingElement or inherited Element of TEASER
 
-    path : str
-        path where unique file should be stored
-    name : strt
-        name of of unique file
-
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.
     '''
 
-    if element.parent is not None:
-        path = element.parent.parent.parent.data.path_tb
-        xml_parse = element.parent.parent.parent.data.element_bind
-    else:
-        path = path + "/" + file_name + ".xml"
-        try:
-            xml_file = open(utilitis.get_full_path(path))
-            xml_parse = tb_bind.CreateFromDocument(xml_file.read())
-        except:
-            xml_parse = tb_bind.TypeBuildingElements()
-
+    element_binding = data_class.element_bind
+    element_binding.version = "0.4"
     add_to_xml = True
+
+    pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
+        tb_bind.Namespace, 'elements')
+
     warning_text = ("Construction Type and building age "
                     "group already exist in this XML, consider revising "
                     "your inputs. The Element is NOT saved into XML")
     if type(element).__name__ == "OuterWall":
 
-        for check in xml_parse.OuterWall:
+        for check in element_binding.OuterWall:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -67,12 +60,11 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-
-            xml_parse.OuterWall.append(pyxb_wall)
+            element_binding.OuterWall.append(pyxb_wall)
 
     elif type(element).__name__ == 'InnerWall':
 
-        for check in xml_parse.InnerWall:
+        for check in element_binding.InnerWall:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -88,11 +80,11 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.InnerWall.append(pyxb_wall)
+            element_binding.InnerWall.append(pyxb_wall)
 
     elif type(element).__name__ == 'Ceiling':
 
-        for check in xml_parse.Ceiling:
+        for check in element_binding.Ceiling:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -108,11 +100,11 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.Ceiling.append(pyxb_wall)
+            element_binding.Ceiling.append(pyxb_wall)
 
     elif type(element).__name__ == 'Floor':
 
-        for check in xml_parse.Floor:
+        for check in element_binding.Floor:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -128,11 +120,11 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.Floor.append(pyxb_wall)
+            element_binding.Floor.append(pyxb_wall)
 
     elif type(element).__name__ == 'GroundFloor':
 
-        for check in xml_parse.GroundFloor:
+        for check in element_binding.GroundFloor:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -148,11 +140,11 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.GroundFloor.append(pyxb_wall)
+            element_binding.GroundFloor.append(pyxb_wall)
 
     elif type(element).__name__ == 'Rooftop':
 
-        for check in xml_parse.Rooftop:
+        for check in element_binding.Rooftop:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -168,11 +160,11 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.Rooftop.append(pyxb_wall)
+            element_binding.Rooftop.append(pyxb_wall)
 
     elif type(element).__name__ == 'Window':
 
-        for check in xml_parse.Window:
+        for check in element_binding.Window:
             if check.building_age_group == element.building_age_group and\
                check.construction_type == element.construction_type:
                 warnings.warn(warning_text)
@@ -188,13 +180,97 @@ def save_type_element(element, path=None, file_name=None):
             _set_layer_data_pyxb(element=element,
                                  pyxb_class=pyxb_wall)
 
-            xml_parse.Window.append(pyxb_wall)
+            element_binding.Window.append(pyxb_wall)
 
     if add_to_xml is True:
 
-        out_file = open(utilitis.get_full_path(path),"w")
+        out_file = open(utilitis.get_full_path(data_class.path_tb),"w")
 
-        out_file.write(xml_parse.toDOM().toprettyxml())
+        out_file.write(element_binding.toDOM().toprettyxml())
+
+
+def delete_type_element(element, data_class):
+    """Deletes typical element.
+
+    Deletes typical building elements according to their construction
+    year and their construction type in the the XML file for type buidling
+    elements. If the Project parent is set, it automatically saves it to
+    the file given in Project.data. Alternatively you can specify a path to
+    a file of TypeBuildingElements. If this file does not exist,
+    a new file is created.
+
+    Parameters
+    ----------
+    element : BuildingElement()
+        Instance of BuildingElement or inherited Element of TEASER
+
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.
+
+    """
+
+    element_binding = data_class.element_bind
+
+    if type(element).__name__ == "OuterWall":
+        for check in element_binding.OuterWall:
+            if check.building_age_group == element.building_age_group and \
+               check.construction_type == element.construction_type:
+                element_binding.OuterWall.remove(check)
+                break
+
+    elif type(element).__name__ == 'InnerWall':
+
+        for check in element_binding.InnerWall:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                element_binding.InnerWall.remove(check)
+                break
+
+    elif type(element).__name__ == 'Ceiling':
+
+        for check in element_binding.Ceiling:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                element_binding.Ceiling.remove(check)
+                break
+
+    elif type(element).__name__ == 'Floor':
+
+        for check in element_binding.Floor:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                element_binding.Floor.remove(check)
+                break
+
+    elif type(element).__name__ == 'GroundFloor':
+
+        for check in element_binding.GroundFloor:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                element_binding.GroundFloor.remove(check)
+                break
+
+    elif type(element).__name__ == 'Rooftop':
+
+        for check in element_binding.Rooftop:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                element_binding.Rooftop.remove(check)
+                break
+
+    elif type(element).__name__ == 'Window':
+
+        for check in element_binding.Window:
+            if check.building_age_group == element.building_age_group and \
+                            check.construction_type == element.construction_type:
+                element_binding.Window.remove(check)
+                break
+
+    out_file = open(utilitis.get_full_path(data_class.path_tb),"w")
+
+    out_file.write(element_binding.toDOM().toprettyxml())
 
 def _set_basic_data_pyxb(element, pyxb_class):
     '''Helper function for save_type_element to set the layer data.
@@ -248,16 +324,8 @@ def _set_layer_data_pyxb(element, pyxb_class):
 
         pyxb_layer.id = layer.id
         pyxb_layer.thickness = layer.thickness
+        pyxb_layer.material = layer.material.name
+        pyxb_layer.material.material_id = layer.material.material_id
 
-        pyxb_material = tb_bind.MaterialType()
-
-        pyxb_material.name = layer.material.name
-        pyxb_material.density = layer.material.density
-        pyxb_material.thermal_conduc = layer.material.thermal_conduc
-        pyxb_material.heat_capac = layer.material.heat_capac
-        pyxb_material.solar_absorp = layer.material.solar_absorp
-        pyxb_material.ir_emissivity = layer.material.ir_emissivity
-
-        pyxb_layer.Material = pyxb_material
 
         pyxb_class.Layers.append(pyxb_layer)

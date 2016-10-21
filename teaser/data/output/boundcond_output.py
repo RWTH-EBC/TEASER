@@ -7,11 +7,12 @@
 This module contains function to save boundary conditions classes
 """
 
-import teaser.data.bindings.boundaryconditions_bind as uc_bind
+import teaser.data.bindings.v_0_4.boundaryconditions_bind as uc_bind
 import teaser.logic.utilities as utilitis
 import warnings
+import pyxb
 
-def save_bound_conditions(bound_cond, path=None, file_name=None):
+def save_bound_conditions(bound_cond, data_class):
     '''Use conditions saver.
 
     Saves use conditions according to their usage type in the the XML file
@@ -27,33 +28,26 @@ def save_bound_conditions(bound_cond, path=None, file_name=None):
         Instance of TEASERs
         BuildingObjects.BoundaryConditions.BoundaryConditions
 
-    path : str
-        path where unique file should be stored
-    name : str
-        name of of unique file
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.ile
     '''
 
-    if bound_cond.parent is not None:
-        path = bound_cond.parent.parent.parent.data.path_uc
-        xml_parse = bound_cond.parent.parent.parent.data.conditions_bind
-    else:
-        path = path + "/" + file_name + ".xml"
-        try:
-            xml_file = open(utilitis.get_full_path(path))
-            xml_parse = uc_bind.CreateFromDocument(xml_file.read())
-        except:
-            xml_parse = uc_bind.UseConditions()
-
+    conditions_bind = data_class.conditions_bind
     add_to_xml = True
 
-    for check in xml_parse.BoundaryConditions:
+    pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
+        uc_bind.Namespace, 'usecond')
+
+    for check in conditions_bind.BoundaryConditions:
         if check.usage == bound_cond.usage:
             warnings.warn("Usage already exist in this XML, consider " +
                           "revising your inputs. The UseConditions is  " +
                           "NOT saved into XML")
             add_to_xml = False
             break
-
+    conditions_bind.version = "0.4"
     if add_to_xml is True:
 
         usage_pyxb = uc_bind.BoundaryConditionsType()
@@ -86,8 +80,8 @@ def save_bound_conditions(bound_cond, path=None, file_name=None):
         usage_pyxb.UsageOperationTime.daily_operation_heating = \
             bound_cond.daily_operation_heating
 
-        usage_pyxb.Lighting.maintained_illuminace = \
-            bound_cond.maintained_illuminace
+        usage_pyxb.Lighting.maintained_illuminance = \
+            bound_cond.maintained_illuminance
         usage_pyxb.Lighting.usage_level_height = bound_cond.usage_level_height
         usage_pyxb.Lighting.red_factor_visual = bound_cond.red_factor_visual
         usage_pyxb.Lighting.rel_absence = bound_cond.rel_absence
@@ -123,8 +117,8 @@ def save_bound_conditions(bound_cond, path=None, file_name=None):
         usage_pyxb.typical_length = bound_cond.typical_length
         usage_pyxb.typical_width = bound_cond.typical_width
 
-        xml_parse.append(usage_pyxb)
+        conditions_bind.append(usage_pyxb)
 
-        out_file = open(utilitis.get_full_path(path), 'w')
+        out_file = open(utilitis.get_full_path(data_class.path_uc), 'w')
 
-        out_file.write(xml_parse.toDOM().toprettyxml())
+        out_file.write(conditions_bind.toDOM().toprettyxml())

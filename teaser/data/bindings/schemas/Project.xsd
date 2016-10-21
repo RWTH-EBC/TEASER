@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
-  <xs:include schemaLocation="D:\GIT\TEASER\teaser\Data\SchemaBindings\schemas\BoundaryConditions.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://teaser.project" xmlns:usecond="http://teaser.boundary"
+           targetNamespace="http://teaser.project" attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.4">
+   <xs:import namespace="http://teaser.boundary" schemaLocation="BoundaryConditions.xsd"/>
   <xs:element name="Project" type="ProjectType"/>
   <xs:complexType name="UseConditionType">
     <xs:sequence>
-      <xs:element type="BoundaryConditionsType" name="BoundaryConditions" minOccurs="0"/>
+      <xs:element type="usecond:BoundaryConditionsType" name="BoundaryConditions" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="MaterialType">
@@ -160,10 +161,10 @@
       <xs:element type="xs:float" name="by_pass_dehumidification" minOccurs="0"/>     
       <xs:element type="xs:float" name="efficiency_recovery" minOccurs="0"/>
       <xs:element type="xs:float" name="efficiency_revocery_false" minOccurs="0"/>
-      <xs:element type="floatList" name="profile_min_relative_humidity" minOccurs="0"/>
-      <xs:element type="floatList" name="profile_max_relative_humidity" minOccurs="0"/>
-      <xs:element type="floatList" name="profile_v_flow" minOccurs="0"/>
-      <xs:element type="floatList" name="profile_temperature" minOccurs="0"/>
+      <xs:element type="usecond:floatList" name="profile_min_relative_humidity" minOccurs="0"/>
+      <xs:element type="usecond:floatList" name="profile_max_relative_humidity" minOccurs="0"/>
+      <xs:element type="usecond:floatList" name="profile_v_flow" minOccurs="0"/>
+      <xs:element type="usecond:floatList" name="profile_temperature" minOccurs="0"/>
 	</xs:sequence>  
   </xs:complexType>
   <xs:complexType name="BuildingType">
@@ -269,6 +270,7 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ProjectType">
+    <xs:attribute type="xs:string" name="version"/>
     <xs:choice maxOccurs="unbounded" minOccurs="0">
       <xs:element type="BuildingType" name="Building"/>
 	  <xs:element type="OfficeType" name="Office"/>

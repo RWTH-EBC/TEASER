@@ -99,14 +99,8 @@ class Project(object):
         else:
             self.data = None
 
-    def instantiate_data_class(self, type_element_file=None):
+    def instantiate_data_class(self):
         '''Initialization of DataClass
-
-        Parameters
-        ----------
-
-        type_element_file: str
-            Name of project specific file (if needed). (default = None)
 
         Returns
         ----------
@@ -114,7 +108,7 @@ class Project(object):
         DataClass : Instance of DataClass()
 
         '''
-        return DataClass(type_element_file)
+        return DataClass()
 
     def calc_all_buildings(self, raise_errors=False):
         '''Calculates values for all project buildings
@@ -957,8 +951,6 @@ class Project(object):
                                     path=path)
 
     def export_annex(self,
-                     number_of_elements=2,
-                     merge_windows=False,
                      internal_id=None,
                      path=None):
         """Exports values to a record file for Modelica simulation
@@ -966,12 +958,6 @@ class Project(object):
         Parameters
         ----------
 
-        number_of_elements : int
-            defines the number of elements, that area aggregated, between 1
-            and 4, default is 2
-        merge_windows : bool
-            True for merging the windows into the outer walls, False for
-            separate resistance for window, default is False
         internal_id : float
             setter of the used building which will be exported, if None then
             all buildings will be exported

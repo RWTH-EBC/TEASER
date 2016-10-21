@@ -7,7 +7,7 @@ This module contains function to load boundary conditions classes
 """
 
 
-def load_boundary_conditions(bound_cond, zone_usage):
+def load_boundary_conditions(bound_cond, zone_usage, data_class):
     '''load use conditions according to DIN 18599 and SIA2024
 
     loads Use conditions specified in the XML, according to DIN 18599,
@@ -22,15 +22,16 @@ def load_boundary_conditions(bound_cond, zone_usage):
 
     zone_usage : str
         code list for zone_usage according to 18599
+
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.
     '''
 
-    ass_error_1 = "you need to specify parents for use cond and thermal zone"
+    conditions_bind = data_class.conditions_bind
 
-    assert bound_cond.parent.parent.parent is not None, ass_error_1
-
-    for usage in \
-        bound_cond.parent.parent.parent.data.conditions_bind.\
-            BoundaryConditions:
+    for usage in conditions_bind.BoundaryConditions:
 
         if usage.usage == zone_usage:
 
@@ -57,9 +58,12 @@ def load_boundary_conditions(bound_cond, zone_usage):
                 usage.UsageOperationTime.yearly_cooling_days
             bound_cond.daily_operation_heating = \
                 usage.UsageOperationTime.daily_operation_heating
-
-            bound_cond.maintained_illuminace = \
-                usage.Lighting.maintained_illuminace
+            if data_class.conditions_bind.version == "0.4":
+                bound_cond.maintained_illuminance = \
+                    usage.Lighting.maintained_illuminance
+            else:
+                bound_cond.maintained_illuminance = \
+                    usage.Lighting.maintained_illuminace
             bound_cond.usage_level_height = usage.Lighting.usage_level_height
             bound_cond.red_factor_visual = usage.Lighting.red_factor_visual
             bound_cond.rel_absence = usage.Lighting.rel_absence

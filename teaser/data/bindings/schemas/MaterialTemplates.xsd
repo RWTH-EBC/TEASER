@@ -1,18 +1,21 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://teaser.material"
+           targetNamespace="http://teaser.material" attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.4">
   <xs:element name="MaterialTemplates" type="MaterialTemplatesType"/>
   <xs:complexType name="MaterialType">
+	<xs:attribute type="xs:string" name="material_id"/>
     <xs:sequence>
       <xs:element type="xs:string" name="name"/>
       <xs:element type="xs:float" name="density"/>
       <xs:element type="xs:float" name="thermal_conduc"/>
       <xs:element type="xs:float" name="heat_capac"/>
-      <xs:element type="xs:float" name="solar_absorp"/>
-      <xs:element type="xs:float" name="ir_emissivity"/>
+      <xs:element minOccurs="0" type="xs:float" name="solar_absorp"/>
+      <xs:element minOccurs="0" type="xs:float" name="ir_emissivity"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="MaterialTemplatesType">
-    <xs:choice maxOccurs="unbounded" minOccurs="0">
+    <xs:attribute type="xs:string" name="version"/>
+	<xs:choice maxOccurs="unbounded" minOccurs="0">
       <xs:element type="MaterialType" name="Material" />
     </xs:choice>
   </xs:complexType>

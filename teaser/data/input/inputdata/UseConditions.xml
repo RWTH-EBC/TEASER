@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<UseConditions>
+<UseConditions version="0.4" xmlns="http://teaser.boundary">
 	<BoundaryConditions>
 		<usage>Single office</usage>
 		<typical_length>3.0</typical_length>
@@ -17,7 +17,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.84</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
@@ -69,7 +69,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.92</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
@@ -121,7 +121,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -173,7 +173,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
@@ -225,7 +225,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>200.0</maintained_illuminace>
+			<maintained_illuminance>200.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.87</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -277,7 +277,7 @@
 			<daily_operation_heating>14</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -329,7 +329,7 @@
 			<daily_operation_heating>14</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -381,7 +381,7 @@
 			<daily_operation_heating>9</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.97</red_factor_visual>
 			<rel_absence>0.25</rel_absence>
@@ -433,7 +433,7 @@
 			<daily_operation_heating>12</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.92</red_factor_visual>
 			<rel_absence>0.25</rel_absence>
@@ -485,7 +485,7 @@
 			<daily_operation_heating>24</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -537,7 +537,7 @@
 			<daily_operation_heating>24</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>200.0</maintained_illuminace>
+			<maintained_illuminance>200.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.25</rel_absence>
@@ -589,7 +589,7 @@
 			<daily_operation_heating>9</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>200.0</maintained_illuminace>
+			<maintained_illuminance>200.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.97</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -641,7 +641,7 @@
 			<daily_operation_heating>16</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>200.0</maintained_illuminace>
+			<maintained_illuminance>200.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -693,7 +693,7 @@
 			<daily_operation_heating>15</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.96</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -745,7 +745,7 @@
 			<daily_operation_heating>15</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
@@ -797,7 +797,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>200.0</maintained_illuminace>
+			<maintained_illuminance>200.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.9</rel_absence>
@@ -849,7 +849,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
@@ -901,7 +901,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>100.0</maintained_illuminace>
+			<maintained_illuminance>100.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.9</rel_absence>
@@ -953,7 +953,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>100.0</maintained_illuminace>
+			<maintained_illuminance>100.0</maintained_illuminance>
 			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.8</rel_absence>
@@ -1005,7 +1005,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>100.0</maintained_illuminace>
+			<maintained_illuminance>100.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.98</rel_absence>
@@ -1057,7 +1057,7 @@
 			<daily_operation_heating>24</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.96</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
@@ -1109,7 +1109,7 @@
 			<daily_operation_heating>10</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.85</red_factor_visual>
 			<rel_absence>0.1</rel_absence>
@@ -1161,7 +1161,7 @@
 			<daily_operation_heating>10</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>400.0</maintained_illuminace>
+			<maintained_illuminance>400.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.85</red_factor_visual>
 			<rel_absence>0.1</rel_absence>
@@ -1213,7 +1213,7 @@
 			<daily_operation_heating>10</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.85</red_factor_visual>
 			<rel_absence>0.1</rel_absence>
@@ -1265,7 +1265,7 @@
 			<daily_operation_heating>6</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>200.0</maintained_illuminace>
+			<maintained_illuminance>200.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.97</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -1317,7 +1317,7 @@
 			<daily_operation_heating>6</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
@@ -1369,7 +1369,7 @@
 			<daily_operation_heating>12</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>1000.0</maintained_illuminace>
+			<maintained_illuminance>1000.0</maintained_illuminance>
 			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>0.9</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -1421,7 +1421,7 @@
 			<daily_operation_heating>11</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.93</red_factor_visual>
 			<rel_absence>0.5</rel_absence>
@@ -1473,7 +1473,7 @@
 			<daily_operation_heating>24</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>200.0</maintained_illuminace>
+			<maintained_illuminance>200.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.88</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -1525,7 +1525,7 @@
 			<daily_operation_heating>14</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>0.88</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -1577,7 +1577,7 @@
 			<daily_operation_heating>14</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>200.0</maintained_illuminace>
+			<maintained_illuminance>200.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -1629,7 +1629,7 @@
 			<daily_operation_heating>14</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>100.0</maintained_illuminace>
+			<maintained_illuminance>100.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.9</rel_absence>
@@ -1681,7 +1681,7 @@
 			<daily_operation_heating>17</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
@@ -1733,7 +1733,7 @@
 			<daily_operation_heating>0</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>75.0</maintained_illuminace>
+			<maintained_illuminance>75.0</maintained_illuminance>
 			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.95</rel_absence>
@@ -1785,7 +1785,7 @@
 			<daily_operation_heating>0</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>75.0</maintained_illuminace>
+			<maintained_illuminance>75.0</maintained_illuminance>
 			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.8</rel_absence>
@@ -1837,7 +1837,7 @@
 			<daily_operation_heating>14</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>200.0</maintained_illuminace>
+			<maintained_illuminance>200.0</maintained_illuminance>
 			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -1889,7 +1889,7 @@
 			<daily_operation_heating>17</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -1941,7 +1941,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>1.0</usage_level_height>
 			<red_factor_visual>0.92</red_factor_visual>
 			<rel_absence>0.3</rel_absence>
@@ -1993,7 +1993,7 @@
 			<daily_operation_heating>13</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -2045,7 +2045,7 @@
 			<daily_operation_heating>24</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>300.0</maintained_illuminace>
+			<maintained_illuminance>300.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -2097,7 +2097,7 @@
 			<daily_operation_heating>24</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>125.0</maintained_illuminace>
+			<maintained_illuminance>125.0</maintained_illuminance>
 			<usage_level_height>0.2</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.8</rel_absence>
@@ -2149,7 +2149,7 @@
 			<daily_operation_heating>12</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>500.0</maintained_illuminace>
+			<maintained_illuminance>500.0</maintained_illuminance>
 			<usage_level_height>0.8</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.0</rel_absence>
@@ -2201,7 +2201,7 @@
 			<daily_operation_heating>24</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>150.0</maintained_illuminace>
+			<maintained_illuminance>150.0</maintained_illuminance>
 			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.6</rel_absence>
@@ -2253,7 +2253,7 @@
 			<daily_operation_heating>24</daily_operation_heating>
 		</UsageOperationTime>
 		<Lighting>
-			<maintained_illuminace>150.0</maintained_illuminace>
+			<maintained_illuminance>150.0</maintained_illuminance>
 			<usage_level_height>0.0</usage_level_height>
 			<red_factor_visual>1.0</red_factor_visual>
 			<rel_absence>0.6</rel_absence>

@@ -52,6 +52,9 @@ class Building(object):
         year of last retrofit
     type_of_building : string
         Type of a Building (e.g. Building (unspecified), Office etc.)
+    building_id : None
+        ID of building, can be set by the user to keep track of a building
+        even outside of TEASER, e.g. in a simulation or in post-processing
     street_name : string
         name of the street the building is located at
     city : string
@@ -87,6 +90,7 @@ class Building(object):
 
         self.parent = parent
         self.name = name
+        self.building_id = None
         self.street_name = ""
         self.city = ""
 
@@ -139,14 +143,17 @@ class Building(object):
         of LoD 1 and LoD 2 buildings from CityGML data. All z-coordinates are
         evaluated and the minimum z-value is subtracted by the maximal value.
         """
-        max_help = 0
-        min_help = 9999
-        for surface in self.gml_surfaces:
-            z_value = surface.gml_surface[2::3]
-            max_help = max(max_help, max(z_value))
-            min_help = min(min_help, min(z_value))
+        if self.bldg_height is not None:
+            pass
+        else:
+            max_help = 0
+            min_help = 9999
+            for surface in self.gml_surfaces:
+                z_value = surface.gml_surface[2::3]
+                max_help = max(max_help, max(z_value))
+                min_help = min(min_help, min(z_value))
 
-        self.bldg_height = max_help - min_help
+            self.bldg_height = max_help - min_help
 
     def get_footprint_gml(self):
         """gets the footprint surface of a building from CityGML data
@@ -191,12 +198,16 @@ class Building(object):
 
 
         """
-        if self.height_of_floors is None:
-            self.height_of_floors = height_of_floor
-        else:
-            pass
         if self.bldg_height is None:
             raise AttributeError("building height needs to be defined for gml")
+
+        if self.height_of_floors is None and self.number_of_floors is None:
+            self.height_of_floors = height_of_floor
+        elif self.height_of_floors is None and self.number_of_floors is not \
+                None:
+            self.height_of_floors = self.bldg_height/self.number_of_floors
+        else:
+            pass
 
         if self.number_of_floors is not None:
             self.net_leased_area = self.get_footprint_gml() * \

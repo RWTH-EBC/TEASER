@@ -7,9 +7,8 @@ This module contains function to load Projects in the proprietary
 TEASER file format .tXML
 """
 
-
-import teaser.data.bindings.project_bind as pb
-
+import xml.etree.ElementTree as element_tree
+import warnings
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFamilyDwelling
@@ -46,30 +45,47 @@ def load_teaser_xml(path, prj):
 
 
     '''
-
+    version_parse = element_tree.parse(path)
     xml_file = open(path, 'r')
-    project_bind = pb.CreateFromDocument(xml_file.read())
+    if bool(version_parse.getroot().attrib) is False:
+        warnings.warn("You are using an old version of project XML file")
+        import teaser.data.bindings.v_0_3_9.project_bind as pb
+        project_bind = pb.CreateFromDocument(xml_file.read())
+    elif version_parse.getroot().attrib['version'] == "0.3.9":
+        warnings.warn("You are using an old version of project XML file")
+        import teaser.data.bindings.v_0_3_9.project_bind as pb
+        project_bind = pb.CreateFromDocument(xml_file.read())
+    elif version_parse.getroot().attrib['version'] == "0.4":
+        import teaser.data.bindings.v_0_4.project_bind as pb
+        project_bind = pb.CreateFromDocument(xml_file.read())
+
 
     for pyxb_bld in project_bind.Building:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Building")
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Building",
+                       project_bind=project_bind)
 
     for pyxb_bld in project_bind.Office:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Office")
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Office",
+                       project_bind=project_bind)
 
     for pyxb_bld in project_bind.Institute:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute")
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute",
+                       project_bind=project_bind)
 
     for pyxb_bld in project_bind.Institute4:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute4")
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute4",
+                       project_bind=project_bind)
 
     for pyxb_bld in project_bind.Institute8:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute8")
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Institute8",
+                       project_bind=project_bind)
 
     for pyxb_bld in project_bind.Residential:
-        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Residential")
+        _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Residential",
+                       project_bind=project_bind)
 
 
-def _load_building(prj, pyxb_bld, type):
+def _load_building(prj, pyxb_bld, type, project_bind):
 
     if type == "Building":
         bldg = Building(prj)
@@ -164,8 +180,13 @@ def _load_building(prj, pyxb_bld, type):
         zone.use_conditions.daily_operation_heating = \
             pyxb_use.UsageOperationTime.daily_operation_heating
 
-        zone.use_conditions.maintained_illuminace = \
-            pyxb_use.Lighting.maintained_illuminace
+        if project_bind.version == "0.4":
+            zone.use_conditions.maintained_illuminance = \
+                pyxb_use.Lighting.maintained_illuminance
+        else:
+            zone.use_conditions.maintained_illuminance = \
+                pyxb_use.Lighting.maintained_illuminace
+
         zone.use_conditions.usage_level_height = \
             pyxb_use.Lighting.usage_level_height
         zone.use_conditions.red_factor_visual = \

@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<TypeBuildingElements>
+<TypeBuildingElements version="0.4" xmlns="http://teaser.elements">
 	<OuterWall>
 		<building_age_group>0 1918</building_age_group>
 		<construction_type>heavy</construction_type>
@@ -11,32 +11,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.3</thickness>
-				<Material>
-					<name>Vollziegelmauerwerk</name>
-					<density>1800.0</density>
-					<thermal_conduc>0.81</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee50-83ff-11e6-8083-2cd444b2e704">Vollziegelmauerwerk</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -51,32 +36,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Lehmputz</name>
-					<density>1700.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee5a-83ff-11e6-a1cb-2cd444b2e704">Lehmputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Eichenfachwerk mit Strohlehmfachung</name>
-					<density>1150.0</density>
-					<thermal_conduc>0.56</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee59-83ff-11e6-be84-2cd444b2e704">EichenfachwerkmitStrohlehmfachung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Kalzputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0aba51fd-83ff-11e6-b93d-2cd444b2e704">Kalzputz</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -91,32 +61,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.3</thickness>
-				<Material>
-					<name>Vollziegelmauerwerk</name>
-					<density>1800.0</density>
-					<thermal_conduc>0.81</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee50-83ff-11e6-8083-2cd444b2e704">Vollziegelmauerwerk</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -131,32 +86,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Lehmputz</name>
-					<density>1700.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee5a-83ff-11e6-a1cb-2cd444b2e704">Lehmputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Eichenfachwerk mit Strohlehmfachung</name>
-					<density>1150.0</density>
-					<thermal_conduc>0.56</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abaee59-83ff-11e6-be84-2cd444b2e704">EichenfachwerkmitStrohlehmfachung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Lehmputz</name>
-					<density>1700.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee5a-83ff-11e6-a1cb-2cd444b2e704">Lehmputz</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -171,32 +111,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.3</thickness>
-				<Material>
-					<name>Leichtbeton-Hohlblockstein</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1551-83ff-11e6-8dae-2cd444b2e704">LeichtbetonHohlblockstein</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -211,32 +136,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Holzfaserplatte</name>
-					<density>700.0</density>
-					<thermal_conduc>0.17</thermal_conduc>
-					<heat_capac>1.7</heat_capac>
-				</Material>
+				<material material_id="0aba520d-83ff-11e6-b775-2cd444b2e704">Holzfaserplatte</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Mineralwolle-Daemmung</name>
-					<density>20.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0aba5208-83ff-11e6-abf6-2cd444b2e704">MineralwolleDaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -251,32 +161,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.175</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Polystyrol</name>
-					<density>20.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.45</heat_capac>
-				</Material>
+				<material material_id="0aba7913-83ff-11e6-b189-2cd444b2e704">Polystyrol</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.08</thickness>
-				<Material>
-					<name>Wetterschale aus Beton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0aba790e-83ff-11e6-8468-2cd444b2e704">WetterschaleausBeton</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -291,32 +186,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Holzfaserplatte</name>
-					<density>700.0</density>
-					<thermal_conduc>0.17</thermal_conduc>
-					<heat_capac>1.7</heat_capac>
-				</Material>
+				<material material_id="0aba520d-83ff-11e6-b775-2cd444b2e704">Holzfaserplatte</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.06</thickness>
-				<Material>
-					<name>EPS Hartschaum</name>
-					<density>20.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.45</heat_capac>
-				</Material>
+				<material material_id="0aba520e-83ff-11e6-920d-2cd444b2e704">EPSHartschaum</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -331,32 +211,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.175</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Polystyrol</name>
-					<density>20.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0aba7913-83ff-11e6-b189-2cd444b2e704">Polystyrol</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.08</thickness>
-				<Material>
-					<name>Wetterschale aus Beton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0aba790e-83ff-11e6-8468-2cd444b2e704">WetterschaleausBeton</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -371,32 +236,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.005</thickness>
-				<Material>
-					<name>Aluminium</name>
-					<density>2800.0</density>
-					<thermal_conduc>160.0</thermal_conduc>
-					<heat_capac>0.88</heat_capac>
-				</Material>
+				<material material_id="0aba7911-83ff-11e6-984d-2cd444b2e704">Aluminium</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.07</thickness>
-				<Material>
-					<name>Mineralwolle</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb156a-83ff-11e6-8fa3-2cd444b2e704">Mineralwolle</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.005</thickness>
-				<Material>
-					<name>Aluminium</name>
-					<density>2800.0</density>
-					<thermal_conduc>160.0</thermal_conduc>
-					<heat_capac>0.88</heat_capac>
-				</Material>
+				<material material_id="0aba7911-83ff-11e6-984d-2cd444b2e704">Aluminium</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -411,32 +261,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.175</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.06</thickness>
-				<Material>
-					<name>Polystyrol</name>
-					<density>20.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0aba7913-83ff-11e6-b189-2cd444b2e704">Polystyrol</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Wetterschale aus Beton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0aba790e-83ff-11e6-8468-2cd444b2e704">WetterschaleausBeton</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -451,32 +286,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.005</thickness>
-				<Material>
-					<name>Aluminium</name>
-					<density>2800.0</density>
-					<thermal_conduc>160.0</thermal_conduc>
-					<heat_capac>0.88</heat_capac>
-				</Material>
+				<material material_id="0aba7911-83ff-11e6-984d-2cd444b2e704">Aluminium</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.09</thickness>
-				<Material>
-					<name>Mineralwolle</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb156a-83ff-11e6-8fa3-2cd444b2e704">Mineralwolle</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.005</thickness>
-				<Material>
-					<name>Aluminium</name>
-					<density>2800.0</density>
-					<thermal_conduc>160.0</thermal_conduc>
-					<heat_capac>0.88</heat_capac>
-				</Material>
+				<material material_id="0aba7911-83ff-11e6-984d-2cd444b2e704">Aluminium</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -491,22 +311,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.175</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.07</thickness>
-				<Material>
-					<name>Polystyrol</name>
-					<density>20.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0aba7913-83ff-11e6-b189-2cd444b2e704">Polystyrol</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -521,22 +331,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.0125</thickness>
-				<Material>
-					<name>Gipskartonplatte</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a87-83ff-11e6-9dfa-2cd444b2e704">Gipskartonplatte</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.1</thickness>
-				<Material>
-					<name>Sandwichpaneel</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0aba7915-83ff-11e6-8883-2cd444b2e704">Sandwichpaneel</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -551,62 +351,27 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.1</thickness>
-				<Material>
-					<name>Highdensitybrick</name>
-					<density>1850.0</density>
-					<thermal_conduc>1.1</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb3c62-83ff-11e6-bd7a-2cd444b2e704">Highdensitybrick</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Aircavity</name>
-					<density>1.204</density>
-					<thermal_conduc>0.1667</thermal_conduc>
-					<heat_capac>1.005</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abaa03a-83ff-11e6-b755-2cd444b2e704">Aircavity</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.06</thickness>
-				<Material>
-					<name>MW</name>
-					<density>1850.0</density>
-					<thermal_conduc>0.036</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abaa036-83ff-11e6-af04-2cd444b2e704">MW</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.14</thickness>
-				<Material>
-					<name>Lowdensitybrick</name>
-					<density>850.0</density>
-					<thermal_conduc>0.41</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0aba7919-83ff-11e6-8d19-2cd444b2e704">Lowdensitybrick</material>
 			</layer>
 			<layer>
 				<id>5</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Plaster</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa2-83ff-11e6-95cb-2cd444b2e704">Plaster</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -621,50 +386,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.08</thickness>
-				<Material>
-					<name>Highdensitybrick</name>
-					<density>1850.0</density>
-					<thermal_conduc>1.1</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb3c62-83ff-11e6-bd7a-2cd444b2e704">Highdensitybrick</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>Aircavity</name>
-					<density>1.204</density>
-					<thermal_conduc>0.3125</thermal_conduc>
-					<heat_capac>1.005</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abaa03a-83ff-11e6-b755-2cd444b2e704">Aircavity</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.14</thickness>
-				<Material>
-					<name>Highdensitybrick</name>
-					<density>1850.0</density>
-					<thermal_conduc>0.9</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb3c62-83ff-11e6-bd7a-2cd444b2e704">Highdensitybrick</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Plaster</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa2-83ff-11e6-95cb-2cd444b2e704">Plaster</material>
 			</layer>
 		</Layers>
 	</OuterWall>
@@ -677,32 +414,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Vollziegelmauerwerk</name>
-					<density>1800.0</density>
-					<thermal_conduc>0.81</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee50-83ff-11e6-8083-2cd444b2e704">Vollziegelmauerwerk</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -715,32 +437,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Lehmputz</name>
-					<density>1700.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee5a-83ff-11e6-a1cb-2cd444b2e704">Lehmputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.1</thickness>
-				<Material>
-					<name>Eichenfachwerk mit Strohlehmfachung</name>
-					<density>1150.0</density>
-					<thermal_conduc>0.56</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abaee59-83ff-11e6-be84-2cd444b2e704">EichenfachwerkmitStrohlehmfachung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Lehmputz</name>
-					<density>1700.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee5a-83ff-11e6-a1cb-2cd444b2e704">Lehmputz</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -753,32 +460,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>VollziegelMauerwerk</name>
-					<density>1800.0</density>
-					<thermal_conduc>0.81</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee56-83ff-11e6-8ba2-2cd444b2e704">VollziegelMauerwerk</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -791,32 +483,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Lehmputz</name>
-					<density>1700.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee5a-83ff-11e6-a1cb-2cd444b2e704">Lehmputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.1</thickness>
-				<Material>
-					<name>Eichenfachwerk mit Strohlehmfachung</name>
-					<density>1150.0</density>
-					<thermal_conduc>0.56</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abaee59-83ff-11e6-be84-2cd444b2e704">EichenfachwerkmitStrohlehmfachung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Lehmputz</name>
-					<density>1700.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaee5a-83ff-11e6-a1cb-2cd444b2e704">Lehmputz</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -829,32 +506,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Leichtbeton-Hohlblockstein</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1551-83ff-11e6-8dae-2cd444b2e704">LeichtbetonHohlblockstein</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -867,32 +529,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Leichtbeton-Hohlblockstein</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1551-83ff-11e6-8dae-2cd444b2e704">LeichtbetonHohlblockstein</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -905,32 +552,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.1</thickness>
-				<Material>
-					<name>Beton</name>
-					<density>1300.0</density>
-					<thermal_conduc>1.15</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1554-83ff-11e6-bed8-2cd444b2e704">Beton</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -943,42 +575,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Putz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1559-83ff-11e6-9d28-2cd444b2e704">Putz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Holzfaserplatten</name>
-					<density>700.0</density>
-					<thermal_conduc>0.17</thermal_conduc>
-					<heat_capac>1.7</heat_capac>
-				</Material>
+				<material material_id="0abb1557-83ff-11e6-90cc-2cd444b2e704">Holzfaserplatten</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>Luft</name>
-					<density>1.25</density>
-					<thermal_conduc>0.025</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1558-83ff-11e6-bf80-2cd444b2e704">Luft</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Putz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1559-83ff-11e6-9d28-2cd444b2e704">Putz</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -991,32 +603,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Leicht-Hochlochziegel</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1567-83ff-11e6-a410-2cd444b2e704">LeichtHochlochziegel</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -1029,32 +626,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.0125</thickness>
-				<Material>
-					<name>Gipskartonplatten</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a87-83ff-11e6-9dfa-2cd444b2e704">Gipskartonplatte</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.07</thickness>
-				<Material>
-					<name>Mineralfaserdaemmung</name>
-					<density>700.0</density>
-					<thermal_conduc>0.17</thermal_conduc>
-					<heat_capac>1.7</heat_capac>
-				</Material>
+				<material material_id="0abb155e-83ff-11e6-9299-2cd444b2e704">Mineralfaserdaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.0125</thickness>
-				<Material>
-					<name>Gipskartonplatten</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a87-83ff-11e6-9dfa-2cd444b2e704">Gipskartonplatte</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -1067,32 +649,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Leicht-Hochlochziegel</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1567-83ff-11e6-a410-2cd444b2e704">LeichtHochlochziegel</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -1105,32 +672,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.0125</thickness>
-				<Material>
-					<name>Gipskartonplatte</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a87-83ff-11e6-9dfa-2cd444b2e704">Gipskartonplatte</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.07</thickness>
-				<Material>
-					<name>Mineralwolle</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb156a-83ff-11e6-8fa3-2cd444b2e704">Mineralwolle</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.0125</thickness>
-				<Material>
-					<name>Gipskartonplatte</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a87-83ff-11e6-9dfa-2cd444b2e704">Gipskartonplatte</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -1143,32 +695,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Leicht-Hochlochziegel</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1567-83ff-11e6-a410-2cd444b2e704">LeichtHochlochziegel</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -1181,32 +718,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.0125</thickness>
-				<Material>
-					<name>Gipskartonplatte</name>
-					<density>790.0</density>
-					<thermal_conduc>0.21</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a87-83ff-11e6-9dfa-2cd444b2e704">Gipskartonplatte</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.07</thickness>
-				<Material>
-					<name>Mineralwolle</name>
-					<density>20.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb156a-83ff-11e6-8fa3-2cd444b2e704">Mineralwolle</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.0125</thickness>
-				<Material>
-					<name>Gipskartonplatte</name>
-					<density>790.0</density>
-					<thermal_conduc>0.21</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a87-83ff-11e6-9dfa-2cd444b2e704">Gipskartonplatte</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -1219,38 +741,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Plaster</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa2-83ff-11e6-95cb-2cd444b2e704">Plaster</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.1</thickness>
-				<Material>
-					<name>Highdensitybrick</name>
-					<density>1850.0</density>
-					<thermal_conduc>1.1</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb3c62-83ff-11e6-bd7a-2cd444b2e704">Highdensitybrick</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Plaster</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa2-83ff-11e6-95cb-2cd444b2e704">Plaster</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -1263,38 +764,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Plaster</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa2-83ff-11e6-95cb-2cd444b2e704">Plaster</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.14</thickness>
-				<Material>
-					<name>Highdensitybrick</name>
-					<density>1850.0</density>
-					<thermal_conduc>1.1</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb3c62-83ff-11e6-bd7a-2cd444b2e704">Highdensitybrick</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Plaster</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa2-83ff-11e6-95cb-2cd444b2e704">Plaster</material>
 			</layer>
 		</Layers>
 	</InnerWall>
@@ -1309,22 +789,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele und Lagerholz</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6388-83ff-11e6-b8c2-2cd444b2e704">DieleundLagerholz</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1339,22 +809,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.025</thickness>
-				<Material>
-					<name>Spalierlatten</name>
-					<density>690.0</density>
-					<thermal_conduc>0.18</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0aba7921-83ff-11e6-b684-2cd444b2e704">Spalierlatten</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1369,22 +829,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele und Lagerholz</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6388-83ff-11e6-b8c2-2cd444b2e704">DieleundLagerholz</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1399,32 +849,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Putz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1559-83ff-11e6-9d28-2cd444b2e704">Putz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.025</thickness>
-				<Material>
-					<name>Holzwolle-Leichtbauplatte</name>
-					<density>400.0</density>
-					<thermal_conduc>0.1</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abaa02c-83ff-11e6-b0b6-2cd444b2e704">HolzwolleLeichtbauplatte</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.025</thickness>
-				<Material>
-					<name>Sparschalung</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6392-83ff-11e6-ad52-2cd444b2e704">Sparschalung</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1439,22 +874,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1469,32 +894,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Putz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1559-83ff-11e6-9d28-2cd444b2e704">Putz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.025</thickness>
-				<Material>
-					<name>Holzwolle-Leichtbauplatte</name>
-					<density>400.0</density>
-					<thermal_conduc>0.1</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abaa02c-83ff-11e6-b0b6-2cd444b2e704">HolzwolleLeichtbauplatte</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.025</thickness>
-				<Material>
-					<name>Sparschalung</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6392-83ff-11e6-ad52-2cd444b2e704">Sparschalung</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1509,32 +919,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.06</thickness>
-				<Material>
-					<name>Schaumglas</name>
-					<density>120.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a84-83ff-11e6-bd05-2cd444b2e704">Schaumglas</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Kiesschuettung</name>
-					<density>1800.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaa033-83ff-11e6-ae46-2cd444b2e704">Kiesschuettung</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1549,22 +944,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.0125</thickness>
-				<Material>
-					<name>Gipskartonplatte</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a87-83ff-11e6-9dfa-2cd444b2e704">Gipskartonplatte</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.14</thickness>
-				<Material>
-					<name>Sparren und Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.14</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaa022-83ff-11e6-befa-2cd444b2e704">SparrenundDaemmung</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1579,32 +964,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.07</thickness>
-				<Material>
-					<name>Schaumglas</name>
-					<density>120.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a84-83ff-11e6-bd05-2cd444b2e704">Schaumglas</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Kiesschuettung</name>
-					<density>1800.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaa033-83ff-11e6-ae46-2cd444b2e704">Kiesschuettung</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1619,22 +989,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>70.0</density>
-					<thermal_conduc>0.045</thermal_conduc>
-					<heat_capac>1.29</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Gipsputz</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb1552-83ff-11e6-872c-2cd444b2e704">Gipsputz</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1649,32 +1009,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.09</thickness>
-				<Material>
-					<name>Schaumglas</name>
-					<density>120.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a84-83ff-11e6-bd05-2cd444b2e704">Schaumglas</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Kiesschuettung</name>
-					<density>1800.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaa033-83ff-11e6-ae46-2cd444b2e704">Kiesschuettung</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1689,32 +1034,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.01</thickness>
-				<Material>
-					<name>Kalkgipsputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaa02b-83ff-11e6-9e2c-2cd444b2e704">Kalkgipsputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.025</thickness>
-				<Material>
-					<name>Holzwolle-Leichtbauplatte</name>
-					<density>400.0</density>
-					<thermal_conduc>0.1</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaa02c-83ff-11e6-b0b6-2cd444b2e704">HolzwolleLeichtbauplatte</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.14</thickness>
-				<Material>
-					<name>Sparren mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.07</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaa02d-83ff-11e6-8456-2cd444b2e704">SparrenmitDaemmung</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1729,32 +1059,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.12</thickness>
-				<Material>
-					<name>Schaumglas</name>
-					<density>120.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a84-83ff-11e6-bd05-2cd444b2e704">Schaumglas</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Kiesschuettung</name>
-					<density>1800.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaa033-83ff-11e6-ae46-2cd444b2e704">Kiesschuettung</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1769,32 +1084,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.0125</thickness>
-				<Material>
-					<name>Gipskartonplatte</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a87-83ff-11e6-9dfa-2cd444b2e704">Gipskartonplatte</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Fertigbalken mit Mineralwolleschicht</name>
-					<density>105.0</density>
-					<thermal_conduc>0.05</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abaa032-83ff-11e6-abf7-2cd444b2e704">FertigbalkenmitMineralwolleschicht</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Kiesschuettung</name>
-					<density>1800.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abaa033-83ff-11e6-ae46-2cd444b2e704">Kiesschuettung</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1809,62 +1109,27 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.025</thickness>
-				<Material>
-					<name>Tiledroof</name>
-					<density>1700.0</density>
-					<thermal_conduc>1.0</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abaa039-83ff-11e6-b385-2cd444b2e704">Tiledroof</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Aircavity</name>
-					<density>1.204</density>
-					<thermal_conduc>0.1875</thermal_conduc>
-					<heat_capac>1.005</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abaa03a-83ff-11e6-b755-2cd444b2e704">Aircavity</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.1</thickness>
-				<Material>
-					<name>MW</name>
-					<density>2100.0</density>
-					<thermal_conduc>0.036</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abaa036-83ff-11e6-af04-2cd444b2e704">MW</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Wood</name>
-					<density>550.0</density>
-					<thermal_conduc>0.11</thermal_conduc>
-					<heat_capac>1.88</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abaa037-83ff-11e6-808c-2cd444b2e704">Wood</material>
 			</layer>
 			<layer>
 				<id>5</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Plaster</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa2-83ff-11e6-95cb-2cd444b2e704">Plaster</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1879,38 +1144,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Tiledroof</name>
-					<density>1700.0</density>
-					<thermal_conduc>1.3</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abaa039-83ff-11e6-b385-2cd444b2e704">Tiledroof</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Aircavity</name>
-					<density>1.204</density>
-					<thermal_conduc>0.1875</thermal_conduc>
-					<heat_capac>1.005</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abaa03a-83ff-11e6-b755-2cd444b2e704">Aircavity</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Gypsumboard</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abac72e-83ff-11e6-aba6-2cd444b2e704">Gypsumboard</material>
 			</layer>
 		</Layers>
 	</Rooftop>
@@ -1923,22 +1167,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>Diele und Lagerholz</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6388-83ff-11e6-b8c2-2cd444b2e704">DieleundLagerholz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.18</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -1951,42 +1185,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Hobeldielen</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6390-83ff-11e6-9ec6-2cd444b2e704">Hobeldielen</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.16</thickness>
-				<Material>
-					<name>Holzbalken mit Luftschicht und Lehmschlag</name>
-					<density>1000.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb6391-83ff-11e6-8633-2cd444b2e704">HolzbalkenmitLuftschichtundLehmschlag</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Sparschalung</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6392-83ff-11e6-ad52-2cd444b2e704">Sparschalung</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -1999,22 +1213,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>Diele und Lagerholz</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6388-83ff-11e6-b8c2-2cd444b2e704">DieleundLagerholz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.18</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2027,42 +1231,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Hobeldielen</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6390-83ff-11e6-9ec6-2cd444b2e704">Hobeldielen</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Luftschicht und Lehmschlag</name>
-					<density>736.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abb6391-83ff-11e6-8633-2cd444b2e704">HolzbalkenmitLuftschichtundLehmschlag</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Sparschalung</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6392-83ff-11e6-ad52-2cd444b2e704">Sparschalung</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2075,22 +1259,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.18</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2103,42 +1277,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Hobeldielen</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6390-83ff-11e6-9ec6-2cd444b2e704">Hobeldielen</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Luftschicht und Lehmschlag</name>
-					<density>736.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abb6391-83ff-11e6-8633-2cd444b2e704">HolzbalkenmitLuftschichtundLehmschlag</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Sparschalung</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6392-83ff-11e6-ad52-2cd444b2e704">Sparschalung</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2151,32 +1305,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>PS-Daemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8e-83ff-11e6-a195-2cd444b2e704">PSDaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2189,22 +1328,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.2</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2217,32 +1346,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>PS-Daemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8e-83ff-11e6-a195-2cd444b2e704">PSDaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2255,22 +1369,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.2</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2283,32 +1387,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>PS-Daemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8e-83ff-11e6-a195-2cd444b2e704">PSDaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2321,42 +1410,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Trittschalldaemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a98-83ff-11e6-9c20-2cd444b2e704">Trittschalldaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Holzwerkstoffplatte</name>
-					<density>600.0</density>
-					<thermal_conduc>0.17</thermal_conduc>
-					<heat_capac>1.7</heat_capac>
-				</Material>
+				<material material_id="0abb8a99-83ff-11e6-b165-2cd444b2e704">Holzwerkstoffplatte</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.12</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2369,32 +1438,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Zementestrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a94-83ff-11e6-a3a7-2cd444b2e704">Zementestrich</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.06</thickness>
-				<Material>
-					<name>Polystyroldaemmschicht</name>
-					<density>20.0</density>
-					<thermal_conduc>0.035</thermal_conduc>
-					<heat_capac>1.45</heat_capac>
-				</Material>
+				<material material_id="0abb8a95-83ff-11e6-bab6-2cd444b2e704">Polystyroldaemmschicht</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.16</thickness>
-				<Material>
-					<name>Ortbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.0</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a96-83ff-11e6-99cf-2cd444b2e704">Ortbeton</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2407,42 +1461,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Trittschalldaemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a98-83ff-11e6-9c20-2cd444b2e704">Trittschalldaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Holzwerkstoffplatte</name>
-					<density>600.0</density>
-					<thermal_conduc>0.17</thermal_conduc>
-					<heat_capac>1.7</heat_capac>
-				</Material>
+				<material material_id="0abb8a99-83ff-11e6-b165-2cd444b2e704">Holzwerkstoffplatte</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.12</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2455,50 +1489,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Tiles</name>
-					<density>2100.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8a9b-83ff-11e6-b02d-2cd444b2e704">Tiles</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.06</thickness>
-				<Material>
-					<name>Screed</name>
-					<density>1100.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.86</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa0-83ff-11e6-9a00-2cd444b2e704">Screed</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>XPS</name>
-					<density>40.0</density>
-					<thermal_conduc>0.024</thermal_conduc>
-					<heat_capac>1.47</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abaee4a-83ff-11e6-ae56-2cd444b2e704">XPS</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Concrete</name>
-					<density>2400.0</density>
-					<thermal_conduc>1.7</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa1-83ff-11e6-b405-2cd444b2e704">Concrete</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2511,38 +1517,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Tiles</name>
-					<density>2100.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8a9b-83ff-11e6-b02d-2cd444b2e704">Tiles</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>Screed</name>
-					<density>1100.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.86</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa0-83ff-11e6-9a00-2cd444b2e704">Screed</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.12</thickness>
-				<Material>
-					<name>Concrete</name>
-					<density>2400.0</density>
-					<thermal_conduc>1.7</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa1-83ff-11e6-b405-2cd444b2e704">Concrete</material>
 			</layer>
 		</Layers>
 	</GroundFloor>
@@ -2561,12 +1546,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abb8aa3-83ff-11e6-bfa4-2cd444b2e704">Glas0_1978Holzfenstereinfach</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2585,12 +1565,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.12</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb194-83ff-11e6-a326-2cd444b2e704">Glas0_1978Holzfensterzweifach</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2609,12 +1584,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.147</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb195-83ff-11e6-9ec6-2cd444b2e704">Glas0_1978KunststofffensterIsolierverglasung</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2633,12 +1603,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.384</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb196-83ff-11e6-8079-2cd444b2e704">Glas0_1978AluoderStahlfensterIsolierverglasung</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2657,12 +1622,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.12</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb197-83ff-11e6-a5ea-2cd444b2e704">Glas1979_1983Holzfensterzweifach</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2681,12 +1641,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.147</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb198-83ff-11e6-a1b0-2cd444b2e704">Glas1979_1983KunststofffensterIsolierverglasung</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2705,12 +1660,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.384</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb199-83ff-11e6-96ec-2cd444b2e704">Glas1979_1983AluoderStahlfensterIsolierverglasung</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2729,12 +1679,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.12</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb19a-83ff-11e6-bace-2cd444b2e704">Glas1984_1994Holzfensterzweifach</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2753,12 +1698,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.147</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb19b-83ff-11e6-95f9-2cd444b2e704">Glas1984_1994KunststofffensterIsolierverglasung</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2777,12 +1717,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.168</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb19c-83ff-11e6-a925-2cd444b2e704">Glas1984_1994AluoderStahlfensterIsolierverglasung</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2801,12 +1736,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.053</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb19d-83ff-11e6-b8bb-2cd444b2e704">Glas1995_2015Holzfensterzweifach</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2825,12 +1755,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.067</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb19e-83ff-11e6-968a-2cd444b2e704">Glas1995_2015KunststofffensterIsolierverglasung</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2849,12 +1774,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb19f-83ff-11e6-986f-2cd444b2e704">Glas1995_2015EnEv</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2873,12 +1793,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.067</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb1a0-83ff-11e6-9986-2cd444b2e704">Glas1995_2015AluoderStahlfensterIsolierverglasung</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2897,12 +1812,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.038</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb1a1-83ff-11e6-b229-2cd444b2e704">Glas1995_2015AluoderStahlfensterWaermeschutzverglasungzweifach</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2921,12 +1831,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.0222</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb1a2-83ff-11e6-946a-2cd444b2e704">Glas1995_2015Waermeschutzverglasungdreifach</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2945,12 +1850,7 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.057</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb1a3-83ff-11e6-b878-2cd444b2e704">Glas0_2016light_annex</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2969,12 +1869,26 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Glas</name>
-					<density>0.0</density>
-					<thermal_conduc>0.80</thermal_conduc>
-					<heat_capac>0.0</heat_capac>
-				</Material>
+				<material material_id="0abbb1a4-83ff-11e6-96ae-2cd444b2e704">Glas0_2016heavy_annex</material>
+			</layer>
+		</Layers>
+	</Window>
+	<Window>
+		<building_age_group>1995 2015</building_age_group>
+		<construction_type>EnEv</construction_type>
+		<inner_convection>2.7</inner_convection>
+		<inner_radiation>5.0</inner_radiation>
+		<outer_convection>20.0</outer_convection>
+		<outer_radiation>5.0</outer_radiation>
+		<g_value>0.6</g_value>
+		<a_conv>0.03</a_conv>
+		<shading_g_total>1.0</shading_g_total>
+		<shading_max_irr>100.0</shading_max_irr>
+		<Layers>
+			<layer>
+				<id>1</id>
+				<thickness>0.024</thickness>
+				<material material_id="36eb3906-855e-11e6-a498-2cd444b2e704">Glas1995_2015EnEV</material>
 			</layer>
 		</Layers>
 	</Window>
@@ -2987,22 +1901,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.18</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3015,42 +1919,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Sparschalung</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6392-83ff-11e6-ad52-2cd444b2e704">Sparschalung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.16</thickness>
-				<Material>
-					<name>Holzbalken mit Luftschicht und Lehmschlag</name>
-					<density>736.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abb6391-83ff-11e6-8633-2cd444b2e704">HolzbalkenmitLuftschichtundLehmschlag</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Hobeldielen</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6390-83ff-11e6-9ec6-2cd444b2e704">Hobeldielen</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3063,22 +1947,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.18</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3091,42 +1965,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Sparschalung</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6392-83ff-11e6-ad52-2cd444b2e704">Sparschalung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.16</thickness>
-				<Material>
-					<name>Holzbalken mit Luftschicht und Lehmschlag</name>
-					<density>736.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abb6391-83ff-11e6-8633-2cd444b2e704">HolzbalkenmitLuftschichtundLehmschlag</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Hobeldielen</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6390-83ff-11e6-9ec6-2cd444b2e704">Hobeldielen</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3139,22 +1993,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.18</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3167,42 +2011,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Sparschalung</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6392-83ff-11e6-ad52-2cd444b2e704">Sparschalung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Luftschicht und Lehmschlag</name>
-					<density>736.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abb6391-83ff-11e6-8633-2cd444b2e704">HolzbalkenmitLuftschichtundLehmschlag</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Hobeldielen</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6390-83ff-11e6-9ec6-2cd444b2e704">Hobeldielen</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3215,22 +2039,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3243,32 +2057,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.0125</thickness>
-				<Material>
-					<name>Gipskartonplatte</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a87-83ff-11e6-9dfa-2cd444b2e704">Gipskartonplatte</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.2</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3281,32 +2080,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>PS-Daemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8e-83ff-11e6-a195-2cd444b2e704">PSDaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3319,22 +2103,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.2</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3347,32 +2121,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>PS-Daemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8e-83ff-11e6-a195-2cd444b2e704">PSDaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3385,42 +2144,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.12</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Holzwerkstoffplatte</name>
-					<density>600.0</density>
-					<thermal_conduc>0.17</thermal_conduc>
-					<heat_capac>1.7</heat_capac>
-				</Material>
+				<material material_id="0abb8a99-83ff-11e6-b165-2cd444b2e704">Holzwerkstoffplatte</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Trittschalldaemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a98-83ff-11e6-9c20-2cd444b2e704">Trittschalldaemmung</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3433,32 +2172,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.16</thickness>
-				<Material>
-					<name>Ortbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.0</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a96-83ff-11e6-99cf-2cd444b2e704">Ortbeton</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.06</thickness>
-				<Material>
-					<name>Polystyroldaemmschicht</name>
-					<density>20.0</density>
-					<thermal_conduc>0.035</thermal_conduc>
-					<heat_capac>1.45</heat_capac>
-				</Material>
+				<material material_id="0abb8a95-83ff-11e6-bab6-2cd444b2e704">Polystyroldaemmschicht</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Zementestrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a94-83ff-11e6-a3a7-2cd444b2e704">Zementestrich</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3471,42 +2195,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.12</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Holzwerkstoffplatte</name>
-					<density>600.0</density>
-					<thermal_conduc>0.17</thermal_conduc>
-					<heat_capac>1.7</heat_capac>
-				</Material>
+				<material material_id="0abb8a99-83ff-11e6-b165-2cd444b2e704">Holzwerkstoffplatte</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Trittschalldaemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a98-83ff-11e6-9c20-2cd444b2e704">Trittschalldaemmung</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3519,50 +2223,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Plaster</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa2-83ff-11e6-95cb-2cd444b2e704">Plaster</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Concrete</name>
-					<density>2400.0</density>
-					<thermal_conduc>1.7</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa1-83ff-11e6-b405-2cd444b2e704">Concrete</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.06</thickness>
-				<Material>
-					<name>Screed</name>
-					<density>1100.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.86</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa0-83ff-11e6-9a00-2cd444b2e704">Screed</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Tiles</name>
-					<density>2100.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8a9b-83ff-11e6-b02d-2cd444b2e704">Tiles</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3575,50 +2251,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Plaster</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa2-83ff-11e6-95cb-2cd444b2e704">Plaster</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Concrete</name>
-					<density>2400.0</density>
-					<thermal_conduc>1.7</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa1-83ff-11e6-b405-2cd444b2e704">Concrete</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.08</thickness>
-				<Material>
-					<name>Screed</name>
-					<density>1100.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.86</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa0-83ff-11e6-9a00-2cd444b2e704">Screed</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Woodenfloor</name>
-					<density>700.0</density>
-					<thermal_conduc>0.18</thermal_conduc>
-					<heat_capac>1.88</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8a9f-83ff-11e6-abd8-2cd444b2e704">Woodenfloor</material>
 			</layer>
 		</Layers>
 	</Ceiling>
@@ -3631,22 +2279,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>Diele und Lagerholz</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6388-83ff-11e6-b8c2-2cd444b2e704">DieleundLagerholz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.18</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -3659,42 +2297,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Hobeldielen</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6390-83ff-11e6-9ec6-2cd444b2e704">Hobeldielen</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.16</thickness>
-				<Material>
-					<name>Holzbalken mit Luftschicht und Lehmschlag</name>
-					<density>736.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abb6391-83ff-11e6-8633-2cd444b2e704">HolzbalkenmitLuftschichtundLehmschlag</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Sparschalung</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6392-83ff-11e6-ad52-2cd444b2e704">Sparschalung</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -3707,22 +2325,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>Diele und Lagerholz</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6388-83ff-11e6-b8c2-2cd444b2e704">DieleundLagerholz</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.18</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -3735,42 +2343,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Hobeldielen</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6390-83ff-11e6-9ec6-2cd444b2e704">Hobeldielen</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Luftschicht und Lehmschlag</name>
-					<density>736.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abb6391-83ff-11e6-8633-2cd444b2e704">HolzbalkenmitLuftschichtundLehmschlag</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Sparschalung</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6392-83ff-11e6-ad52-2cd444b2e704">Sparschalung</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -3783,22 +2371,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.18</thickness>
-				<Material>
-					<name>Normalbeton</name>
-					<density>2200.0</density>
-					<thermal_conduc>1.65</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">Normalbeton</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -3811,42 +2389,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Hobeldielen</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6390-83ff-11e6-9ec6-2cd444b2e704">Hobeldielen</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Luftschicht und Lehmschlag</name>
-					<density>736.0</density>
-					<thermal_conduc>0.7</thermal_conduc>
-					<heat_capac>1.06</heat_capac>
-				</Material>
+				<material material_id="0abb6391-83ff-11e6-8633-2cd444b2e704">HolzbalkenmitLuftschichtundLehmschlag</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.024</thickness>
-				<Material>
-					<name>Sparschalung</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb6392-83ff-11e6-ad52-2cd444b2e704">Sparschalung</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.015</thickness>
-				<Material>
-					<name>Kalkputz</name>
-					<density>1600.0</density>
-					<thermal_conduc>0.8</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a82-83ff-11e6-8ff5-2cd444b2e704">Kalkputz</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -3859,22 +2417,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.3</thickness>
-				<Material>
-					<name>Betondecke</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a83-83ff-11e6-8fd7-2cd444b2e704">Betondecke</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.05</thickness>
-				<Material>
-					<name>Schaumglas</name>
-					<density>120.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a84-83ff-11e6-bd05-2cd444b2e704">Schaumglas</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -3887,32 +2435,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.2</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.0125</thickness>
-				<Material>
-					<name>Gipskartonplatte</name>
-					<density>800.0</density>
-					<thermal_conduc>0.25</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a87-83ff-11e6-9dfa-2cd444b2e704">Gipskartonplatte</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -3925,32 +2458,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>PS-Daemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8e-83ff-11e6-a195-2cd444b2e704">PSDaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -3963,22 +2481,12 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Diele</name>
-					<density>600.0</density>
-					<thermal_conduc>0.13</thermal_conduc>
-					<heat_capac>1.6</heat_capac>
-				</Material>
+				<material material_id="0abb8a8b-83ff-11e6-9727-2cd444b2e704">Diele</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.2</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -3991,32 +2499,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>PS-Daemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8e-83ff-11e6-a195-2cd444b2e704">PSDaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Stahlbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.5</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a8f-83ff-11e6-a24a-2cd444b2e704">Stahlbeton</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -4029,42 +2522,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Trittschalldaemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a98-83ff-11e6-9c20-2cd444b2e704">Trittschalldaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Holzwerkstoffplatte</name>
-					<density>600.0</density>
-					<thermal_conduc>0.17</thermal_conduc>
-					<heat_capac>1.7</heat_capac>
-				</Material>
+				<material material_id="0abb8a99-83ff-11e6-b165-2cd444b2e704">Holzwerkstoffplatte</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.12</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -4077,32 +2550,17 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Zementestrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a94-83ff-11e6-a3a7-2cd444b2e704">Zementestrich</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.06</thickness>
-				<Material>
-					<name>Polystyroldaemmschicht</name>
-					<density>20.0</density>
-					<thermal_conduc>0.035</thermal_conduc>
-					<heat_capac>1.45</heat_capac>
-				</Material>
+				<material material_id="0abb8a95-83ff-11e6-bab6-2cd444b2e704">Polystyroldaemmschicht</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.16</thickness>
-				<Material>
-					<name>Ortbeton</name>
-					<density>2400.0</density>
-					<thermal_conduc>2.0</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a96-83ff-11e6-99cf-2cd444b2e704">Ortbeton</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -4115,42 +2573,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.04</thickness>
-				<Material>
-					<name>Estrich</name>
-					<density>2000.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a97-83ff-11e6-8deb-2cd444b2e704">Estrich</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.03</thickness>
-				<Material>
-					<name>Trittschalldaemmung</name>
-					<density>30.0</density>
-					<thermal_conduc>0.04</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a98-83ff-11e6-9c20-2cd444b2e704">Trittschalldaemmung</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Holzwerkstoffplatte</name>
-					<density>600.0</density>
-					<thermal_conduc>0.17</thermal_conduc>
-					<heat_capac>1.7</heat_capac>
-				</Material>
+				<material material_id="0abb8a99-83ff-11e6-b165-2cd444b2e704">Holzwerkstoffplatte</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.15</thickness>
-				<Material>
-					<name>Holzbalken mit Daemmung</name>
-					<density>50.0</density>
-					<thermal_conduc>0.12</thermal_conduc>
-					<heat_capac>1.0</heat_capac>
-				</Material>
+				<material material_id="0abb8a9a-83ff-11e6-8b7e-2cd444b2e704">HolzbalkenmitDaemmung</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -4163,50 +2601,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Tiles</name>
-					<density>2100.0</density>
-					<thermal_conduc>1.4</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8a9b-83ff-11e6-b02d-2cd444b2e704">Tiles</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.06</thickness>
-				<Material>
-					<name>Screed</name>
-					<density>1100.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.86</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa0-83ff-11e6-9a00-2cd444b2e704">Screed</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Concrete</name>
-					<density>2400.0</density>
-					<thermal_conduc>1.7</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa1-83ff-11e6-b405-2cd444b2e704">Concrete</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Plaster</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa2-83ff-11e6-95cb-2cd444b2e704">Plaster</material>
 			</layer>
 		</Layers>
 	</Floor>
@@ -4219,50 +2629,22 @@
 			<layer>
 				<id>1</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Woodenfloor</name>
-					<density>700.0</density>
-					<thermal_conduc>0.18</thermal_conduc>
-					<heat_capac>1.88</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8a9f-83ff-11e6-abd8-2cd444b2e704">Woodenfloor</material>
 			</layer>
 			<layer>
 				<id>2</id>
 				<thickness>0.08</thickness>
-				<Material>
-					<name>Screed</name>
-					<density>1100.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.86</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa0-83ff-11e6-9a00-2cd444b2e704">Screed</material>
 			</layer>
 			<layer>
 				<id>3</id>
 				<thickness>0.2</thickness>
-				<Material>
-					<name>Concrete</name>
-					<density>2400.0</density>
-					<thermal_conduc>1.7</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa1-83ff-11e6-b405-2cd444b2e704">Concrete</material>
 			</layer>
 			<layer>
 				<id>4</id>
 				<thickness>0.02</thickness>
-				<Material>
-					<name>Plaster</name>
-					<density>975.0</density>
-					<thermal_conduc>0.6</thermal_conduc>
-					<heat_capac>0.84</heat_capac>
-					<solar_absorp>0.7</solar_absorp>
-					<ir_emissivity>0.9</ir_emissivity>
-				</Material>
+				<material material_id="0abb8aa2-83ff-11e6-95cb-2cd444b2e704">Plaster</material>
 			</layer>
 		</Layers>
 	</Floor>

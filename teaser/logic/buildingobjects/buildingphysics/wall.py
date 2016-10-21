@@ -149,7 +149,8 @@ class Wall(BuildingElement):
 
         ext_layer = Layer(self)
         new_material = Material(ext_layer)
-        new_material.load_material_template(material)
+        new_material.load_material_template(material,
+                                            data_class=self.parent.parent.parent.data)
 
         if thickness is None:
             pass
