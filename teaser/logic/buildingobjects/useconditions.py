@@ -1,14 +1,14 @@
-'''
+"""
 Created June 2015
 
 @author: TEASER 4 Development Team
-'''
+"""
 
 import random
 
 
 class UseConditions(object):
-    '''Base class for all Use Conditions inside a thermal zone.
+    """Base class for all Use Conditions inside a thermal zone.
 
     All Use Conditions (boundary conditions assigned to user behavior and
     schedules should be inherited from this class)
@@ -26,11 +26,11 @@ class UseConditions(object):
 
     internal_id : float
         random id for the distinction between different use conditions
-    '''
+    """
 
     def __init__(self, parent=None):
-        '''Constructor for UseConditions
-        '''
+        """Constructor for UseConditions
+        """
 
         self.internal_id = random.random()
 

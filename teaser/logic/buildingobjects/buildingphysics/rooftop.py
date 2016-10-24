@@ -7,15 +7,14 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall \
 
 
 class Rooftop(OuterWall):
-    '''
+    """
     This class represents a roof top and is a child of OuterWall()
-    '''
+    """
 
     def __init__(self, parent=None):
-        '''
-        '''
+        """
+        """
         super(Rooftop, self).__init__(parent)
-
 
         self._tilt = 0.0
         self._orientation = -1.0
