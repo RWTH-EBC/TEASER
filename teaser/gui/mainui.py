@@ -232,20 +232,20 @@ class MainUI(QDialog):
         self.new_zone_gen_inf_groupbox.setPalette(palette)
         self.new_zone_name_label = QtGui.QLabel(self.new_zone_gen_inf_groupbox)
         self.new_zone_name_label.setGeometry(QtCore.QRect(10, 60, 90, 25))
-        self.new_zone_name_label.setText("Name:")
+        self.new_zone_name_label.setText("Name")
         self.new_zone_name_line_edit = QtGui.QLineEdit(
             self.new_zone_gen_inf_groupbox)
         self.new_zone_name_line_edit.setGeometry(QtCore.QRect(110, 60, 90, 25))
         self.new_zone_area_label = QtGui.QLabel(self.new_zone_gen_inf_groupbox)
         self.new_zone_area_label.setGeometry(QtCore.QRect(10, 95, 90, 25))
-        self.new_zone_area_label.setText("Area:")
+        self.new_zone_area_label.setText("Area")
         self.new_zone_area_line_edit = QtGui.QLineEdit(
             self.new_zone_gen_inf_groupbox)
         self.new_zone_area_line_edit.setGeometry(QtCore.QRect(110, 95, 90, 25))
         self.new_zone_usage_label = QtGui.QLabel(
             self.new_zone_gen_inf_groupbox)
         self.new_zone_usage_label.setGeometry(QtCore.QRect(10, 130, 90, 25))
-        self.new_zone_usage_label.setText("Usage type:")
+        self.new_zone_usage_label.setText("Usage type")
         self.new_zone_usage_line_edit = QtGui.QLineEdit(
             self.new_zone_gen_inf_groupbox)
         self.new_zone_usage_line_edit.setGeometry(
@@ -298,13 +298,13 @@ class MainUI(QDialog):
             _translate("MainWindow", "Usage", None))
         self.edit_zone_name_label = QtGui.QLabel(self.edit_gen_inf_tab)
         self.edit_zone_name_label.setGeometry(QtCore.QRect(10, 30, 90, 25))
-        self.edit_zone_name_label.setText("Name:")
+        self.edit_zone_name_label.setText("Name")
         self.edit_zone_name_line_edit = QtGui.QLineEdit(self.edit_gen_inf_tab)
         self.edit_zone_name_line_edit.setGeometry(
             QtCore.QRect(110, 30, 90, 25))
         self.edit_zone_area_label = QtGui.QLabel(self.edit_gen_inf_tab)
         self.edit_zone_area_label.setGeometry(QtCore.QRect(10, 65, 90, 25))
-        self.edit_zone_area_label.setText("Area:")
+        self.edit_zone_area_label.setText("Area")
         self.edit_zone_area_line_edit = QtGui.QLineEdit(self.edit_gen_inf_tab)
         self.edit_zone_area_line_edit.setGeometry(
             QtCore.QRect(110, 65, 90, 25))
@@ -312,7 +312,7 @@ class MainUI(QDialog):
             self.edit_gen_inf_tab)
         self.edit_zone_area_inner_wall_label.setGeometry(
             QtCore.QRect(10, 100, 90, 25))
-        self.edit_zone_area_inner_wall_label.setText("Inner Wall Area:")
+        self.edit_zone_area_inner_wall_label.setText("Inner Wall Area")
         self.edit_zone_area_inner_wall_line_edit = QtGui.QLineEdit(
             self.edit_gen_inf_tab)
         self.edit_zone_area_inner_wall_line_edit.setGeometry(
@@ -320,7 +320,7 @@ class MainUI(QDialog):
         self.edit_zone_area_ceiling_label = QtGui.QLabel(self.edit_gen_inf_tab)
         self.edit_zone_area_ceiling_label.setGeometry(
             QtCore.QRect(10, 135, 90, 25))
-        self.edit_zone_area_ceiling_label.setText("Ceiling Area:")
+        self.edit_zone_area_ceiling_label.setText("Ceiling Area")
         self.edit_zone_area_ceiling_line_edit = QtGui.QLineEdit(
             self.edit_gen_inf_tab)
         self.edit_zone_area_ceiling_line_edit.setGeometry(
@@ -328,14 +328,14 @@ class MainUI(QDialog):
         self.edit_zone_area_floor_label = QtGui.QLabel(self.edit_gen_inf_tab)
         self.edit_zone_area_floor_label.setGeometry(
             QtCore.QRect(10, 170, 90, 25))
-        self.edit_zone_area_floor_label.setText("Floor Area:")
+        self.edit_zone_area_floor_label.setText("Floor Area")
         self.edit_zone_area_floor_line_edit = QtGui.QLineEdit(
             self.edit_gen_inf_tab)
         self.edit_zone_area_floor_line_edit.setGeometry(
             QtCore.QRect(110, 170, 90, 25))
         self.edit_zone_volume_label = QtGui.QLabel(self.edit_gen_inf_tab)
         self.edit_zone_volume_label.setGeometry(QtCore.QRect(10, 205, 90, 25))
-        self.edit_zone_volume_label.setText("Volume:")
+        self.edit_zone_volume_label.setText("Volume")
         self.edit_zone_volume_line_edit = QtGui.QLineEdit(
             self.edit_gen_inf_tab)
         self.edit_zone_volume_line_edit.setGeometry(
@@ -345,7 +345,7 @@ class MainUI(QDialog):
             self.edit_usage_tab)
         self.edit_usage_infiltration_rate_label.setGeometry(
             QtCore.QRect(10, 20, 90, 25))
-        self.edit_usage_infiltration_rate_label.setText("Infiltration Rate:")
+        self.edit_usage_infiltration_rate_label.setText("Infiltration Rate")
         self.edit_usage_infiltration_rate_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_infiltration_rate_line_edit.setGeometry(
@@ -353,7 +353,7 @@ class MainUI(QDialog):
         self.edit_usage_cooling_time_label = QtGui.QLabel(self.edit_usage_tab)
         self.edit_usage_cooling_time_label.setGeometry(
             QtCore.QRect(5, 55, 50, 25))
-        self.edit_usage_cooling_time_label.setText("Cooling:")
+        self.edit_usage_cooling_time_label.setText("Cooling")
         self.edit_usage_cooling_time_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_cooling_time_line_edit.setGeometry(
@@ -361,7 +361,7 @@ class MainUI(QDialog):
         self.edit_usage_heating_time_label = QtGui.QLabel(self.edit_usage_tab)
         self.edit_usage_heating_time_label.setGeometry(
             QtCore.QRect(110, 55, 50, 25))
-        self.edit_usage_heating_time_label.setText("Heating:")
+        self.edit_usage_heating_time_label.setText("Heating")
         self.edit_usage_heating_time_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_heating_time_line_edit.setGeometry(
@@ -369,7 +369,7 @@ class MainUI(QDialog):
         self.edit_usage_set_temp_heat_label = QtGui.QLabel(self.edit_usage_tab)
         self.edit_usage_set_temp_heat_label.setGeometry(
             QtCore.QRect(5, 90, 50, 25))
-        self.edit_usage_set_temp_heat_label.setText("TempHeat:")
+        self.edit_usage_set_temp_heat_label.setText("TempHeat")
         self.edit_usage_set_temp_heat_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_set_temp_heat_line_edit.setGeometry(
@@ -377,7 +377,7 @@ class MainUI(QDialog):
         self.edit_usage_set_temp_cool_label = QtGui.QLabel(self.edit_usage_tab)
         self.edit_usage_set_temp_cool_label.setGeometry(
             QtCore.QRect(110, 90, 50, 25))
-        self.edit_usage_set_temp_cool_label.setText("TempCool:")
+        self.edit_usage_set_temp_cool_label.setText("TempCool")
         self.edit_usage_set_temp_cool_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_set_temp_cool_line_edit.setGeometry(
@@ -385,7 +385,7 @@ class MainUI(QDialog):
         self.edit_usage_temp_set_back_label = QtGui.QLabel(self.edit_usage_tab)
         self.edit_usage_temp_set_back_label.setGeometry(
             QtCore.QRect(10, 125, 90, 25))
-        self.edit_usage_temp_set_back_label.setText("Temp set back:")
+        self.edit_usage_temp_set_back_label.setText("Temp set back")
         self.edit_usage_temp_set_back_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_temp_set_back_line_edit.setGeometry(
@@ -394,14 +394,14 @@ class MainUI(QDialog):
             self.edit_usage_tab)
         self.edit_usage_min_air_exchange_label.setGeometry(
             QtCore.QRect(10, 160, 90, 25))
-        self.edit_usage_min_air_exchange_label.setText("Min Air Exchange:")
+        self.edit_usage_min_air_exchange_label.setText("Min Air Exchange")
         self.edit_usage_min_air_exchange_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_min_air_exchange_line_edit.setGeometry(
             QtCore.QRect(110, 160, 90, 25))
         self.edit_usage_min_ahu_label = QtGui.QLabel(self.edit_usage_tab)
         self.edit_usage_min_ahu_label.setGeometry(QtCore.QRect(5, 195, 50, 25))
-        self.edit_usage_min_ahu_label.setText("Min AHU:")
+        self.edit_usage_min_ahu_label.setText("Min AHU")
         self.edit_usage_min_ahu_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_min_ahu_line_edit.setGeometry(
@@ -409,7 +409,7 @@ class MainUI(QDialog):
         self.edit_usage_max_ahu_label = QtGui.QLabel(self.edit_usage_tab)
         self.edit_usage_max_ahu_label.setGeometry(
             QtCore.QRect(110, 195, 50, 25))
-        self.edit_usage_max_ahu_label.setText("Max AHU:")
+        self.edit_usage_max_ahu_label.setText("Max AHU")
         self.edit_usage_max_ahu_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_max_ahu_line_edit.setGeometry(
@@ -417,7 +417,7 @@ class MainUI(QDialog):
         self.edit_usage_with_ahu_label = QtGui.QLabel(self.edit_usage_tab)
         self.edit_usage_with_ahu_label.setGeometry(
             QtCore.QRect(10, 230, 90, 25))
-        self.edit_usage_with_ahu_label.setText("With AHU:")
+        self.edit_usage_with_ahu_label.setText("With AHU")
         self.edit_usage_with_ahu_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_with_ahu_line_edit.setGeometry(
@@ -425,7 +425,7 @@ class MainUI(QDialog):
         self.edit_usage_rel_humidity_label = QtGui.QLabel(self.edit_usage_tab)
         self.edit_usage_rel_humidity_label.setGeometry(
             QtCore.QRect(10, 265, 90, 25))
-        self.edit_usage_rel_humidity_label.setText("Rel Humidity:")
+        self.edit_usage_rel_humidity_label.setText("Rel Humidity")
         self.edit_usage_rel_humidity_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_rel_humidity_line_edit.setGeometry(
@@ -433,7 +433,7 @@ class MainUI(QDialog):
         self.edit_usage_persons_label = QtGui.QLabel(self.edit_usage_tab)
         self.edit_usage_persons_label.setGeometry(
             QtCore.QRect(10, 300, 90, 25))
-        self.edit_usage_persons_label.setText("Persons:")
+        self.edit_usage_persons_label.setText("Persons")
         self.edit_usage_persons_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_persons_line_edit.setGeometry(
@@ -441,7 +441,7 @@ class MainUI(QDialog):
         self.edit_usage_machines_label = QtGui.QLabel(self.edit_usage_tab)
         self.edit_usage_machines_label.setGeometry(
             QtCore.QRect(10, 335, 90, 25))
-        self.edit_usage_machines_label.setText("Machines:")
+        self.edit_usage_machines_label.setText("Machines")
         self.edit_usage_machines_line_edit = QtGui.QLineEdit(
             self.edit_usage_tab)
         self.edit_usage_machines_line_edit.setGeometry(
@@ -532,7 +532,7 @@ class MainUI(QDialog):
         self.edit_layer_name_label = QtGui.QLabel(
             self.edit_layer_general_information_group_box)
         self.edit_layer_name_label.setGeometry(QtCore.QRect(10, 60, 90, 25))
-        self.edit_layer_name_label.setText("Name:")
+        self.edit_layer_name_label.setText("Name")
         self.edit_layer_name_line_edit = QtGui.QLineEdit(
             self.edit_layer_general_information_group_box)
         self.edit_layer_name_line_edit.setGeometry(
@@ -541,7 +541,7 @@ class MainUI(QDialog):
             self.edit_layer_general_information_group_box)
         self.edit_layer_thickness_label.setGeometry(
             QtCore.QRect(10, 95, 90, 25))
-        self.edit_layer_thickness_label.setText("Thickness:")
+        self.edit_layer_thickness_label.setText("Thickness")
         self.edit_layer_thickness_line_edit = QtGui.QLineEdit(
             self.edit_layer_general_information_group_box)
         self.edit_layer_thickness_line_edit.setGeometry(
@@ -555,7 +555,7 @@ class MainUI(QDialog):
             self.edit_layer_general_information_group_box)
         self.edit_layer_material_name_label.setGeometry(
             QtCore.QRect(10, 135, 90, 25))
-        self.edit_layer_material_name_label.setText("Material:")
+        self.edit_layer_material_name_label.setText("Material")
         self.edit_layer_material_name_line_edit = QtGui.QLineEdit(
             self.edit_layer_general_information_group_box)
         self.edit_layer_material_name_line_edit.setGeometry(
@@ -564,7 +564,7 @@ class MainUI(QDialog):
             self.edit_layer_general_information_group_box)
         self.edit_layer_density_label.setGeometry(
             QtCore.QRect(10, 170, 90, 25))
-        self.edit_layer_density_label.setText("Density:")
+        self.edit_layer_density_label.setText("Density")
         self.edit_layer_density_line_edit = QtGui.QLineEdit(
             self.edit_layer_general_information_group_box)
         self.edit_layer_density_line_edit.setGeometry(
@@ -573,7 +573,7 @@ class MainUI(QDialog):
             self.edit_layer_general_information_group_box)
         self.edit_layer_thermal_conduct_label.setGeometry(
             QtCore.QRect(10, 205, 90, 25))
-        self.edit_layer_thermal_conduct_label.setText("Thermal Conduct:")
+        self.edit_layer_thermal_conduct_label.setText("Thermal Conduct")
         self.edit_layer_thermal_conduct_line_edit = QtGui.QLineEdit(
             self.edit_layer_general_information_group_box)
         self.edit_layer_thermal_conduct_line_edit.setGeometry(
@@ -582,7 +582,7 @@ class MainUI(QDialog):
             self.edit_layer_general_information_group_box)
         self.edit_layer_heat_capacity_label.setGeometry(
             QtCore.QRect(10, 240, 90, 25))
-        self.edit_layer_heat_capacity_label.setText("Heat Capacity:")
+        self.edit_layer_heat_capacity_label.setText("Heat Capacity")
         self.edit_layer_heat_capacity_line_edit = QtGui.QLineEdit(
             self.edit_layer_general_information_group_box)
         self.edit_layer_heat_capacity_line_edit.setGeometry(
@@ -591,7 +591,7 @@ class MainUI(QDialog):
             self.edit_layer_general_information_group_box)
         self.edit_layer_solar_absorp_label.setGeometry(
             QtCore.QRect(10, 275, 90, 25))
-        self.edit_layer_solar_absorp_label.setText("Solar Absorption:")
+        self.edit_layer_solar_absorp_label.setText("Solar Absorption")
         self.edit_layer_solar_absorp_line_edit = QtGui.QLineEdit(
             self.edit_layer_general_information_group_box)
         self.edit_layer_solar_absorp_line_edit.setGeometry(
@@ -600,7 +600,7 @@ class MainUI(QDialog):
             self.edit_layer_general_information_group_box)
         self.edit_layer_ir_emissivity_label.setGeometry(
             QtCore.QRect(10, 310, 90, 25))
-        self.edit_layer_ir_emissivity_label.setText("IR Emissivity:")
+        self.edit_layer_ir_emissivity_label.setText("IR Emissivity")
         self.edit_layer_ir_emissivity_line_edit = QtGui.QLineEdit(
             self.edit_layer_general_information_group_box)
         self.edit_layer_ir_emissivity_line_edit.setGeometry(
@@ -609,7 +609,7 @@ class MainUI(QDialog):
             self.edit_layer_general_information_group_box)
         self.edit_layer_transmittance_label.setGeometry(
             QtCore.QRect(10, 345, 90, 25))
-        self.edit_layer_transmittance_label.setText("Transmittance:")
+        self.edit_layer_transmittance_label.setText("Transmittance")
         self.edit_layer_transmittance_line_edit = QtGui.QLineEdit(
             self.edit_layer_general_information_group_box)
         self.edit_layer_transmittance_line_edit.setGeometry(
@@ -657,7 +657,7 @@ class MainUI(QDialog):
         self.edit_element_name_label = QtGui.QLabel(
             self.edit_element_gen_inf_groupbox)
         self.edit_element_name_label.setGeometry(QtCore.QRect(10, 60, 90, 25))
-        self.edit_element_name_label.setText("Name:")
+        self.edit_element_name_label.setText("Name")
         self.edit_element_name_line_edit = QtGui.QLineEdit(
             self.edit_element_gen_inf_groupbox)
         self.edit_element_name_line_edit.setGeometry(
@@ -665,7 +665,7 @@ class MainUI(QDialog):
         self.edit_element_type_label = QtGui.QLabel(
             self.edit_element_gen_inf_groupbox)
         self.edit_element_type_label.setGeometry(QtCore.QRect(10, 95, 90, 25))
-        self.edit_element_type_label.setText("Construction Type:")
+        self.edit_element_type_label.setText("Construction Type")
         self.edit_element_type_line_edit = QtGui.QLineEdit(
             self.edit_element_gen_inf_groupbox)
         self.edit_element_type_line_edit.setGeometry(
@@ -673,7 +673,7 @@ class MainUI(QDialog):
         self.edit_element_area_label = QtGui.QLabel(
             self.edit_element_gen_inf_groupbox)
         self.edit_element_area_label.setGeometry(QtCore.QRect(10, 130, 90, 25))
-        self.edit_element_area_label.setText("Area:")
+        self.edit_element_area_label.setText("Area")
         self.edit_element_area_line_edit = QtGui.QLineEdit(
             self.edit_element_gen_inf_groupbox)
         self.edit_element_area_line_edit.setGeometry(
@@ -757,7 +757,7 @@ class MainUI(QDialog):
             "currentIndexChanged(int)"), self.switch_building)
         self.side_bar_id_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_id_label.setGeometry(QtCore.QRect(5, 60, 90, 25))
-        self.side_bar_id_label.setText("Name:")
+        self.side_bar_id_label.setText("Name")
         self.side_bar_id_line_edit = QtGui.QLineEdit(self.side_bar_group_box)
         self.side_bar_id_line_edit.setGeometry(QtCore.QRect(105, 60, 90, 25))
         self.connect(self.side_bar_id_line_edit, QtCore.SIGNAL(
@@ -766,7 +766,7 @@ class MainUI(QDialog):
             "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_street_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_street_label.setGeometry(QtCore.QRect(5, 95, 90, 25))
-        self.side_bar_street_label.setText("Street/Nr.:")
+        self.side_bar_street_label.setText("Street/Nr.")
         self.side_bar_street_line_edit = QtGui.QLineEdit(
             self.side_bar_group_box)
         self.side_bar_street_line_edit.setGeometry(
@@ -777,7 +777,7 @@ class MainUI(QDialog):
             "editingFinished()"), self.clear_focus_line_edits)
         self.side_bar_location_label = QtGui.QLabel(self.side_bar_group_box)
         self.side_bar_location_label.setGeometry(QtCore.QRect(5, 130, 90, 25))
-        self.side_bar_location_label.setText("ZIP/City:")
+        self.side_bar_location_label.setText("ZIP/City")
         self.side_bar_location_line_edit = QtGui.QLineEdit(
             self.side_bar_group_box)
         self.side_bar_location_line_edit.setGeometry(
@@ -790,7 +790,7 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_construction_year_label.setGeometry(
             QtCore.QRect(5, 165, 90, 25))
-        self.side_bar_construction_year_label.setText("Construction Year:")
+        self.side_bar_construction_year_label.setText("Construction Year")
         self.side_bar_construction_year_line_edit = QtGui.QLineEdit(
             self.side_bar_group_box)
         self.side_bar_construction_year_line_edit.setGeometry(
@@ -803,7 +803,7 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_number_of_floors_label.setGeometry(
             QtCore.QRect(5, 200, 90, 25))
-        self.side_bar_number_of_floors_label.setText("Number of Floors:")
+        self.side_bar_number_of_floors_label.setText("Number of Floors")
         self.side_bar_number_of_floors_line_edit = QtGui.QLineEdit(
             self.side_bar_group_box)
         self.side_bar_number_of_floors_line_edit.setGeometry(
@@ -816,7 +816,7 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_height_of_floors_label.setGeometry(
             QtCore.QRect(5, 235, 90, 25))
-        self.side_bar_height_of_floors_label.setText("Height of Floors:")
+        self.side_bar_height_of_floors_label.setText("Height of Floors")
         self.side_bar_height_of_floors_line_edit = QtGui.QLineEdit(
             self.side_bar_group_box)
         self.side_bar_height_of_floors_line_edit.setGeometry(
@@ -829,7 +829,7 @@ class MainUI(QDialog):
             self.side_bar_group_box)
         self.side_bar_net_leased_area_label.setGeometry(
             QtCore.QRect(5, 270, 90, 25))
-        self.side_bar_net_leased_area_label.setText("Net leased Area:")
+        self.side_bar_net_leased_area_label.setText("Net leased Area")
         self.side_bar_net_leased_area_line_edit = QtGui.QLineEdit(
             self.side_bar_group_box)
         self.side_bar_net_leased_area_line_edit.setGeometry(
@@ -1067,23 +1067,23 @@ class MainUI(QDialog):
 
         validator = QtGui.QDoubleValidator()
 
-        self.generate_new_building_name_label = QtGui.QLabel("Name: ")
+        self.generate_new_building_name_label = QtGui.QLabel("Name")
         self.generate_new_building_name_line_edit = QtGui.QLineEdit()
         self.generate_new_building_name_line_edit.setObjectName(
             "generate_new_building_name_line_edit")
 
-        self.generate_new_building_street_label = QtGui.QLabel("Street/Nr: ")
+        self.generate_new_building_street_label = QtGui.QLabel("Street/Nr")
         self.generate_new_building_street_line_edit = QtGui.QLineEdit()
         self.generate_new_building_street_line_edit.setObjectName(
             "generate_new_building_street_line_edit")
 
-        self.generate_new_building_city_label = QtGui.QLabel("ZIP/City: ")
+        self.generate_new_building_city_label = QtGui.QLabel("ZIP/City")
         self.generate_new_building_city_line_edit = QtGui.QLineEdit()
         self.generate_new_building_city_line_edit.setObjectName(
             "generate_new_building_city_line_edit")
 
         self.generate_new_building_constr_year_label = QtGui.QLabel(
-             "Contruction Year: ")
+             "Contruction Year")
         self.generate_new_building_constr_year_line_edit = QtGui.QLineEdit()
         self.generate_new_building_constr_year_line_edit.setValidator(
              validator)
@@ -1091,7 +1091,7 @@ class MainUI(QDialog):
             "generate_new_building_constr_year_line_edit")
 
         self.generate_new_building_number_of_floors_label = QtGui.QLabel(
-             "Number of Floors: ")
+             "Number of Floors")
         self.generate_new_building_number_of_floors_line_edit =\
             QtGui.QLineEdit()
         self.generate_new_building_number_of_floors_line_edit.setValidator(
@@ -1100,7 +1100,7 @@ class MainUI(QDialog):
             "generate_new_building_number_of_floors_line_edit")
 
         self.generate_new_building_height_of_floors_label = QtGui.QLabel(
-             "Height of Floors: ")
+             "Height of Floors")
         self.generate_new_building_height_of_floors_line_edit =\
             QtGui.QLineEdit()
         self.generate_new_building_height_of_floors_line_edit.setValidator(
@@ -1109,7 +1109,7 @@ class MainUI(QDialog):
             "generate_new_building_height_of_floors_line_edit")
 
         self.generate_new_building_net_leased_area_label = QtGui.QLabel(
-             "Net leased Area: ")
+             "Net leased Area")
         self.generate_new_building_net_leased_area_line_edit =\
             QtGui.QLineEdit()
         self.generate_new_building_net_leased_area_line_edit.setValidator(
@@ -1183,11 +1183,11 @@ class MainUI(QDialog):
         self.generate_new_element_window_layout = QtGui.QGridLayout()
         self.create_new_element_ui_page.setLayout(
             self.generate_new_element_window_layout)
-        self.generate_new_element_name_label = QtGui.QLabel("Id: ")
+        self.generate_new_element_name_label = QtGui.QLabel("Id")
         self.generate_new_element_name_line_edit = QtGui.QLineEdit()
         self.generate_new_element_name_line_edit.setObjectName(
             "generate_new_element_name_line_edit")
-        self.generate_new_element_type_label = QtGui.QLabel("Type: ")
+        self.generate_new_element_type_label = QtGui.QLabel("Type")
         self.generate_new_element_type_combobox = QtGui.QComboBox()
         self.generate_new_element_type_combobox.setObjectName(
             "generate_new_element_type_line_edit")
@@ -1205,7 +1205,7 @@ class MainUI(QDialog):
             "Ceiling", userData=None)
         self.generate_new_element_type_combobox.addItem(
             "Floor", userData=None)
-        self.generate_new_element_area_label = QtGui.QLabel("Area: ")
+        self.generate_new_element_area_label = QtGui.QLabel("Area")
         self.generate_new_element_area_line_edit = QtGui.QLineEdit()
         self.generate_new_element_area_line_edit.setObjectName(
             "generate_new_element_area_line_edit")
@@ -1643,7 +1643,7 @@ class MainUI(QDialog):
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_type_label.setGeometry(
             QtCore.QRect(10, 25, 90, 25))
-        self.window_construct_building_type_label.setText("Type Building:")
+        self.window_construct_building_type_label.setText("Type Building")
         self.window_construct_building_combo_box = QtGui.QComboBox(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_combo_box.setGeometry(
@@ -1656,7 +1656,7 @@ class MainUI(QDialog):
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_name_label.setGeometry(
             QtCore.QRect(10, 65, 90, 25))
-        self.window_construct_building_name_label.setText("Name:")
+        self.window_construct_building_name_label.setText("Name")
         self.window_construct_building_name_line_edit = QtGui.QLineEdit(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_name_line_edit.setGeometry(
@@ -1665,7 +1665,7 @@ class MainUI(QDialog):
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_street_label.setGeometry(
             QtCore.QRect(10, 105, 90, 25))
-        self.window_construct_building_street_label.setText("Street/Nr.:")
+        self.window_construct_building_street_label.setText("Street/Nr.")
         self.window_construct_building_street_line_edit = QtGui.QLineEdit(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_street_line_edit.setGeometry(
@@ -1674,7 +1674,7 @@ class MainUI(QDialog):
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_location_label.setGeometry(
             QtCore.QRect(10, 145, 90, 25))
-        self.window_construct_building_location_label.setText("ZIP/City:")
+        self.window_construct_building_location_label.setText("ZIP/City")
         self.window_construct_building_location_line_edit = QtGui.QLineEdit(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_location_line_edit.setGeometry(
@@ -1683,7 +1683,7 @@ class MainUI(QDialog):
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_year_label.setGeometry(
             QtCore.QRect(10, 185, 90, 25))
-        self.window_construct_building_year_label.setText("Construction Year:")
+        self.window_construct_building_year_label.setText("Construction Year")
         self.window_construct_building_year_line_edit = QtGui.QLineEdit(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_year_line_edit.setGeometry(
@@ -1693,7 +1693,7 @@ class MainUI(QDialog):
         self.window_construct_building_number_of_floors_label.setGeometry(
             QtCore.QRect(10, 225, 90, 25))
         self.window_construct_building_number_of_floors_label.setText(
-            "Number of Floors:")
+            "Number of Floors")
         self.window_construct_building_number_of_floors_line_edit = \
             QtGui.QLineEdit(self.group_box_type_building_sidecontrols)
         self.window_construct_building_number_of_floors_line_edit.setGeometry(
@@ -1703,7 +1703,7 @@ class MainUI(QDialog):
         self.window_construct_building_height_of_floors_label.setGeometry(
             QtCore.QRect(10, 265, 90, 25))
         self.window_construct_building_height_of_floors_label.setText(
-            "Height of Floors:")
+            "Height of Floors")
         self.window_construct_building_height_of_floors_line_edit = \
             QtGui.QLineEdit(self.group_box_type_building_sidecontrols)
         self.window_construct_building_height_of_floors_line_edit.setGeometry(
@@ -1712,7 +1712,7 @@ class MainUI(QDialog):
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_area_label.setGeometry(
             QtCore.QRect(10, 305, 90, 25))
-        self.window_construct_building_area_label.setText("Net leased Area:")
+        self.window_construct_building_area_label.setText("Net leased Area")
         self.window_construct_building_area_line_edit = QtGui.QLineEdit(
             self.group_box_type_building_sidecontrols)
         self.window_construct_building_area_line_edit.setGeometry(
@@ -2112,17 +2112,17 @@ class MainUI(QDialog):
         self.generate_zone_window_layout = QtGui.QGridLayout()
         self.generate_zone_ui_page.setLayout(self.generate_zone_window_layout)
 
-        self.generate_zone_name_label = QtGui.QLabel("Name: ")
+        self.generate_zone_name_label = QtGui.QLabel("Name")
         self.generate_zone_name_line_edit = QtGui.QLineEdit()
         self.generate_zone_name_line_edit.setObjectName(
             "generate_zone_name_line_edit")
 
-        self.generate_zone_area_label = QtGui.QLabel("Area: ")
+        self.generate_zone_area_label = QtGui.QLabel("Area")
         self.generate_zone_area_line_edit = QtGui.QLineEdit()
         self.generate_zone_area_line_edit.setObjectName(
             "generate_zone_area_line_edit")
 
-        self.generate_zone_usage_label = QtGui.QLabel("Type: ")
+        self.generate_zone_usage_label = QtGui.QLabel("Type")
         self.generate_zone_usage_combobox = QtGui.QComboBox()
         self.generate_zone_usage_combobox.setObjectName(
             "generate_zone_usage_combobox")
@@ -2963,15 +2963,15 @@ class MainUI(QDialog):
         self.element_values_layout.addWidget(self.zone_element_list_view,
                                              1, 0, 1, 2)
 
-        self.cooling_ahu_start_label = QtGui.QLabel("Cooling AHU Start: ")
-        self.cooling_ahu_end_label = QtGui.QLabel("End: ")
+        self.cooling_ahu_start_label = QtGui.QLabel("Cooling AHU Start")
+        self.cooling_ahu_end_label = QtGui.QLabel("End")
         self.cooling_ahu_start_dropdown = QtGui.QComboBox()
         self.cooling_ahu_start_dropdown.setMaximumWidth(60)
         self.cooling_ahu_end_dropdown = QtGui.QComboBox()
         self.cooling_ahu_end_dropdown.setMaximumWidth(60)
 
-        self.heating_ahu_start_label = QtGui.QLabel("Heating AHU Start: ")
-        self.heating_ahu_end_label = QtGui.QLabel("End: ")
+        self.heating_ahu_start_label = QtGui.QLabel("Heating AHU Start")
+        self.heating_ahu_end_label = QtGui.QLabel("End")
         self.heating_ahu_start_dropdown = QtGui.QComboBox()
         self.heating_ahu_start_dropdown.setMaximumWidth(60)
         self.heating_ahu_end_dropdown = QtGui.QComboBox()
@@ -3031,43 +3031,43 @@ class MainUI(QDialog):
         self.connect(self.zone_element_cancel_button, SIGNAL(
             "clicked()"), self.zone_value_window, QtCore.SLOT("close()"))
 
-        self.set_temp_heat_label_1 = QtGui.QLabel("Set Temp Heating: ")
+        self.set_temp_heat_label_1 = QtGui.QLabel("Set Temp Heating")
         self.set_temp_heat_line_edit = QtGui.QLineEdit()
         self.set_temp_heat_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_heat))
         self.set_temp_heat_label_2 = QtGui.QLabel("K")
 
-        self.set_temp_cool_label_1 = QtGui.QLabel("Set Temp Cooling: ")
+        self.set_temp_cool_label_1 = QtGui.QLabel("Set Temp Cooling")
         self.set_temp_cool_line_edit = QtGui.QLineEdit()
         self.set_temp_cool_line_edit.setText(str(
             self.current_zone.use_conditions.set_temp_cool))
         self.set_temp_cool_label_2 = QtGui.QLabel("K")
 
-        self.temp_set_back_label_1 = QtGui.QLabel("Temp Setback: ")
+        self.temp_set_back_label_1 = QtGui.QLabel("Temp Setback")
         self.temp_set_back_line_edit = QtGui.QLineEdit()
         self.temp_set_back_line_edit.setText(str(
             self.current_zone.use_conditions.temp_set_back))
         self.temp_set_back_label_2 = QtGui.QLabel("K")
 
-        self.min_air_flow_label_1 = QtGui.QLabel("Minimal Airflow: ")
+        self.min_air_flow_label_1 = QtGui.QLabel("Minimal Airflow")
         self.min_air_flow_line_edit = QtGui.QLineEdit()
         self.min_air_flow_line_edit.setText(str(
             self.current_zone.use_conditions.min_air_exchange))
         self.min_air_flow_label_2 = QtGui.QLabel("m^3/(h m^2)")
 
-        self.min_ahu_label_1 = QtGui.QLabel("Minimal AHU: ")
+        self.min_ahu_label_1 = QtGui.QLabel("Minimal AHU")
         self.min_ahu_line_edit = QtGui.QLineEdit()
         self.min_ahu_line_edit.setText(str(
             self.current_zone.use_conditions.min_ahu))
         self.min_ahu_label_2 = QtGui.QLabel("m^3/(h m^2)")
 
-        self.max_ahu_label_1 = QtGui.QLabel("Maximal AHU: ")
+        self.max_ahu_label_1 = QtGui.QLabel("Maximal AHU")
         self.max_ahu_line_edit = QtGui.QLineEdit()
         self.max_ahu_line_edit.setText(str(
             self.current_zone.use_conditions.max_ahu))
         self.max_ahu_label_2 = QtGui.QLabel("m^3/(h m^2)")
 
-        self.with_ahu_label_1 = QtGui.QLabel("With AHU: ")
+        self.with_ahu_label_1 = QtGui.QLabel("With AHU")
         self.with_ahu_combobox = QtGui.QComboBox()
         self.with_ahu_combobox.addItem("False", userData=None)
         self.with_ahu_combobox.addItem("True", userData=None)
@@ -3078,13 +3078,13 @@ class MainUI(QDialog):
             self.with_ahu_combobox.setCurrentIndex(
                 self.with_ahu_combobox.findText("False"))
 
-        self.re_humidity_label_1 = QtGui.QLabel("Relative Humidity: ")
+        self.re_humidity_label_1 = QtGui.QLabel("Relative Humidity")
         self.re_humidity_line_edit = QtGui.QLineEdit()
         self.re_humidity_line_edit.setText(str(
             self.current_zone.use_conditions.rel_humidity))
         self.re_humidity_label_2 = QtGui.QLabel("%")
 
-        self.persons_label_1 = QtGui.QLabel("Persons: ")
+        self.persons_label_1 = QtGui.QLabel("Persons")
         self.persons_line_edit = QtGui.QLineEdit()
         self.persons_line_edit.setText(str(
             self.current_zone.use_conditions.persons))
@@ -3121,30 +3121,30 @@ class MainUI(QDialog):
         self.usage_pic_label = QtGui.QLabel()
         self.usage_pic_label.setPixmap(self.usagePicPixMap)
 
-        self.machines_label_1 = QtGui.QLabel("Machines: ")
+        self.machines_label_1 = QtGui.QLabel("Machines")
         self.machines_line_edit = QtGui.QLineEdit()
         self.machines_line_edit.setText(str(
             self.current_zone.use_conditions.machines))
         self.machines_label_2 = QtGui.QLabel("W/m^2")
 
-        self.lighting_label_1 = QtGui.QLabel("Lighting: ")
+        self.lighting_label_1 = QtGui.QLabel("Lighting")
         self.lighting_line_edit = QtGui.QLineEdit()
         self.lighting_line_edit.setText(str(
             self.current_zone.use_conditions.maintained_illuminance))
         self.lighting_label_2 = QtGui.QLabel("W/m^2")
 
-        self.mean_temp_out_label_1 = QtGui.QLabel("Mean Outdoor Temp: ")
+        self.mean_temp_out_label_1 = QtGui.QLabel("Mean Outdoor Temp")
         self.mean_temp_outer_line_edit = QtGui.QLineEdit()
         self.mean_temp_outer_line_edit.setText(
             str(self.current_zone.t_outside))
         self.mean_temp_out_label_2 = QtGui.QLabel("K")
 
-        self.mean_temp_in_label_1 = QtGui.QLabel("Mean Indoor Temp: ")
+        self.mean_temp_in_label_1 = QtGui.QLabel("Mean Indoor Temp")
         self.mean_temp_inner_line_edit = QtGui.QLineEdit()
         self.mean_temp_inner_line_edit.setText(str(self.current_zone.t_inside))
         self.mean_temp_in_label_2 = QtGui.QLabel("K")
 
-        self.infiltration_rate_label_1 = QtGui.QLabel("Infiltration Rate: ")
+        self.infiltration_rate_label_1 = QtGui.QLabel("Infiltration Rate")
         self.infiltration_rate_line_edit = QtGui.QLineEdit()
         if self.current_zone.infiltration_rate is not None:
             self.infiltration_rate_line_edit.setText(str(
@@ -4068,7 +4068,7 @@ class MainUI(QDialog):
         self.export_save_template_label = QtGui.QLabel(self.export_groupbox)
         self.export_save_template_label.setGeometry(
             QtCore.QRect(5, 90, 110, 25))
-        self.export_save_template_label.setText("File path:")
+        self.export_save_template_label.setText("File path")
         self.export_save_template_lineedit = QtGui.QLineEdit(
             self.export_groupbox)
         self.export_save_template_lineedit .setGeometry(
@@ -4093,7 +4093,7 @@ class MainUI(QDialog):
         self.export_label_library = QtGui.QLabel(self.export_groupbox)
         self.export_label_library.setGeometry(
             QtCore.QRect(5, 125, 120, 25))
-        self.export_label_library.setText("Library:")
+        self.export_label_library.setText("Library")
         self.export_create_library_combobox = QtGui.QComboBox(
             self.export_groupbox)
         self.export_create_library_combobox.setGeometry(
@@ -4102,7 +4102,7 @@ class MainUI(QDialog):
         self.export_template_label_model = QtGui.QLabel(self.aixlib_groupbox)
         self.export_template_label_model.setGeometry(
             QtCore.QRect(5, 20, 120, 25))
-        self.export_template_label_model.setText("Model type:")
+        self.export_template_label_model.setText("Model type")
         self.export_create_template_model_combobox = QtGui.QComboBox(
             self.aixlib_groupbox)
         self.export_create_template_model_combobox.setGeometry(
@@ -4110,7 +4110,7 @@ class MainUI(QDialog):
         self.export_template_label_zone = QtGui.QLabel(self.aixlib_groupbox)
         self.export_template_label_zone.setGeometry(
             QtCore.QRect(5, 55, 120, 25))
-        self.export_template_label_zone.setText("Zone type:")
+        self.export_template_label_zone.setText("Zone type")
         self.export_create_template_zone_combobox = QtGui.QComboBox(
             self.aixlib_groupbox)
         self.export_create_template_zone_combobox.setGeometry(
@@ -4118,7 +4118,7 @@ class MainUI(QDialog):
         self.export_template_label_corG = QtGui.QLabel(self.aixlib_groupbox)
         self.export_template_label_corG.setGeometry(
             QtCore.QRect(5, 90, 120, 25))
-        self.export_template_label_corG.setText("corG:")
+        self.export_template_label_corG.setText("corG")
         self.radio_button_corG_1 = QtGui.QRadioButton(self.aixlib_groupbox)
         self.radio_button_corG_1.setGeometry(QtCore.QRect(130, 90, 120, 25))
         self.radio_button_corG_1.setText("with CorG")
@@ -4193,7 +4193,7 @@ class MainUI(QDialog):
         self.project_name_groupbox.setMaximumSize(QtCore.QSize(315, 40))
         self.project_name_label = QtGui.QLabel(self.project_name_groupbox)
         self.project_name_label.setGeometry(QtCore.QRect(5, 10, 90, 25))
-        self.project_name_label.setText("Project Name:")
+        self.project_name_label.setText("Project Name")
         self.project_name_lineedit = QtGui.QLineEdit(
             self.project_name_groupbox)
         self.project_name_lineedit.setGeometry(QtCore.QRect(100, 10, 180, 25))
@@ -4208,7 +4208,7 @@ class MainUI(QDialog):
             self.simulation_groupbox)
         self.simulation_runtime_label_1.setGeometry(
             QtCore.QRect(5, 20, 90, 25))
-        self.simulation_runtime_label_1.setText("Runtime Simulation:")
+        self.simulation_runtime_label_1.setText("Runtime Simulation")
         self.simulation_runtime_lineedit = QtGui.QLineEdit(
             self.simulation_groupbox)
         self.simulation_runtime_lineedit.setGeometry(
@@ -4224,7 +4224,7 @@ class MainUI(QDialog):
             self.simulation_groupbox)
         self.simulation_interval_output_label_1.setGeometry(
             QtCore.QRect(5, 55, 90, 25))
-        self.simulation_interval_output_label_1.setText("Interval Output:")
+        self.simulation_interval_output_label_1.setText("Interval Output")
         self.simulation_interval_output_lineedit = QtGui.QLineEdit(
             self.simulation_groupbox)
         self.simulation_interval_output_lineedit.setGeometry(
@@ -4238,7 +4238,7 @@ class MainUI(QDialog):
         self.simulation_interval_output_label_2.setText("s")
         self.simulation_solver_label = QtGui.QLabel(self.simulation_groupbox)
         self.simulation_solver_label.setGeometry(QtCore.QRect(5, 90, 90, 25))
-        self.simulation_solver_label.setText("Solver:")
+        self.simulation_solver_label.setText("Solver")
         self.simulation_solver_combobox = QtGui.QComboBox(
             self.simulation_groupbox)
         self.simulation_solver_combobox.setGeometry(
