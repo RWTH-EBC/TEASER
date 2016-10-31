@@ -131,7 +131,7 @@ class DataClass(object):
         if version_parse is False:
             import teaser.data.bindings.v_0_4.material_bind as mat_bind
             self.material_bind = mat_bind.MaterialTemplates()
-        if bool(version_parse.getroot().attrib) is False:
+        elif bool(version_parse.getroot().attrib) is False:
             warnings.warn(
                 "You are using an old version of material data base XML file")
             import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
@@ -147,4 +147,3 @@ class DataClass(object):
             import teaser.data.bindings.v_0_4.material_bind as mat_bind
             self.material_bind = mat_bind.CreateFromDocument(
                 __xml_file_mat.read())
-
