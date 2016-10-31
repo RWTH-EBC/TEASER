@@ -65,10 +65,6 @@ class MainUI(QDialog):
 
         """ General layout and gui-global variables """
 
-        # Used to display the console inside the program.
-        sys.stdout = EmittingStream(textWritten=self.normal_output_written)
-        sys.stdin = EmittingStream(textWritten=self.normal_output_written)
-        sys.stderr = EmittingStream(textWritten=self.normal_output_written)
 
         self.setWindowFlags(self.windowFlags() | Qt.WindowMinMaxButtonsHint)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -113,7 +109,7 @@ class MainUI(QDialog):
         self.teaser_icon.addFile(utilitis.get_full_path(
                     'gui/guiimages/Teaser_logo.png'), QtCore.QSize(16, 16))
         self.setWindowIcon(self.teaser_icon)
-        teaserVersion = "0.3.6 beta"
+        teaserVersion = "0.4.1 beta"
         self.setWindowTitle("TEASER Version %s" % teaserVersion)
         self.central_widget = QtGui.QWidget(self)
         self.central_widget.setObjectName(_fromUtf8("central_widget"))
@@ -962,6 +958,11 @@ class MainUI(QDialog):
             self.side_bar_widget, "geometry")
         self.main_animation = QtCore.QPropertyAnimation(
             self.main_widget, "geometry")
+        
+        # Used to display the console inside the program.
+        sys.stdout = EmittingStream(textWritten=self.normal_output_written)
+        sys.stdin = EmittingStream(textWritten=self.normal_output_written)
+        sys.stderr = EmittingStream(textWritten=self.normal_output_written)
 
     def __del__(self):
         '''Destructor
