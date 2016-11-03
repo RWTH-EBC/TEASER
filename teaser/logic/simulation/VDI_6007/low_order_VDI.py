@@ -174,8 +174,7 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
     # parameters
 
     timesteps = len(alphaRad)
-    print('len(alphaRad) = timesteps')
-    print(timesteps)
+
     # input()
     # timesteps = 86400
 
@@ -267,7 +266,7 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
     T_air_prev = T_air_init
 
     for t in range(timesteps):
-        print(t)
+        #  print(t)
         if t == 360:
             pass
 

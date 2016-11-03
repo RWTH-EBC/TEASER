@@ -27,10 +27,10 @@ def gen_res_type_example_building():
                               year_of_construction=1988,
                               number_of_floors=2,
                               height_of_floors=2.8,
-                              net_leased_area=100,
+                              net_leased_area=200,
                               with_ahu=True,
-                              residential_layout=1,
-                              neighbour_buildings=1,
+                              residential_layout=0,
+                              neighbour_buildings=0,
                               attic=1,
                               cellar=1,
                               construction_type="heavy",
@@ -53,9 +53,8 @@ def vdi_example_6007(thermal_zone, weather):
 
     #  Solar radiation
     #  Solar radiation input on each external area in W/m2
-    solarRad_in = np.zeros((timesteps, 5))
-    # solarRad_in = np.transpose(
-    #     weather.sun_rad)  # TODO: Check, if this is correct
+    #  solarRad_in = np.zeros((timesteps, 5))
+    solarRad_in = np.transpose(weather.sun_rad)  # TODO: Check, if this is correct
 
     #  TODO: What is source_igRad
     source_igRad = np.zeros(timesteps)
@@ -76,6 +75,7 @@ def vdi_example_6007(thermal_zone, weather):
     #  Ventilation rate: Fresh air at temperature weatherTemperature in m3/s
     #  TODO: Substitute with TEASER call (or VDI call)
     ventRate = np.zeros(timesteps)
+    ventRate = np.zeros(timesteps) + thermal_zone.volume * 0.5 / 3600
 
     #  Internal convective gains in W
     #  TODO: Substitute with TEASER boundary conditions
@@ -117,7 +117,7 @@ def vdi_example_6007(thermal_zone, weather):
 
     # Define set points (prevent heating or cooling!)
     #  TODO: Calculate with function call
-    t_set_heating = np.zeros(timesteps) + 273.15 + 20  # in Kelvin
+    t_set_heating = np.zeros(timesteps) + 273.15 + 21  # in Kelvin
     t_set_cooling = np.zeros(timesteps) + 273.15 + 30  # in Kelvin
 
     heater_limit = np.zeros((timesteps, 3)) + 1e10
@@ -166,15 +166,24 @@ if __name__ == '__main__':
     print('Indoor air temperature in Kelvin:')
     print(T_air)
     print()
-    print('Length: ', len(T_air))
-    print()
 
     print('Heating(+) / cooling(-) load in Watt:')
     print(Q_hc)
     print()
-    print('Length: ', len(Q_hc))
 
-    print(sum(Q_hc)/(1000))
+    q_heat = np.zeros(len(Q_hc))
+    q_cool = np.zeros(len(Q_hc))
+    for i in range(len(Q_hc)):
+        if Q_hc[i] > 0:
+            q_heat[i] = Q_hc[i]
+        elif Q_hc[i] < 0:
+            q_cool[i] = Q_hc[i]
+
+    print('Sum of heating energy in kWh:')
+    print(sum(q_heat)/1000)
+
+    print('Sum of cooling energy in kWh:')
+    print(sum(q_cool) / 1000)
 
     import matplotlib.pyplot as plt
 
