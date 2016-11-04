@@ -403,7 +403,9 @@ class Weather(object):
     Weather class of TEASER
     """
 
-    def __init__(self, beta, gamma, weather_path=None, albedo=0.2, timeZone=1,
+    def __init__(self, beta=[45, 90, 90, 45, 90, 90],
+                 gamma=[0, 0, -90, 0, -180, -270], weather_path=None,
+                 albedo=0.2, timeZone=1,
                  altitude=0, location=(49.5, 8.5)):
         """
         Constructor of weather object

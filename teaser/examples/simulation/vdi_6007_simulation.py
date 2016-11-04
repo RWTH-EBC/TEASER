@@ -6,9 +6,10 @@ Example script for VDI 6007 simulation usage
 
 import numpy as np
 
-import teaser.logic.simulation.VDI_6007.low_order_VDI as low_order_VDI
-import teaser.logic.simulation.VDI_6007.weather as weat
 from teaser.project import Project
+import teaser.logic.simulation.VDI_6007.weather as weat
+import teaser.logic.simulation.VDI_6007.low_order_VDI as low_order_VDI
+import teaser.logic.simulation.VDI_6007.eqAirTemp as equ_air
 
 
 def gen_res_type_example_building():
@@ -51,36 +52,7 @@ def vdi_example_6007(thermal_zone, weather):
         Weather object of TEASER
     """
 
-    #  Solar radiation
-    #  Solar radiation input on each external area in W/m2
-    #  solarRad_in = np.zeros((timesteps, 5))
-    solarRad_in = np.transpose(weather.sun_rad)  # TODO: Check, if this is correct
-
-    #  TODO: What is source_igRad
-    source_igRad = np.zeros(timesteps)
-
-    #  TODO: What is krad?
-    krad = 1
-
-    #  TODO: Calculate with function call
-    #  Equal air temperature based on VDI in K
-    #  equalAirTemp = np.zeros(timesteps) + 273.15 + 10
-    equalAirTemp = weather.temp + 0.5  # TODO: Substitute with equAir call
-
-    #  Environment temperatures in K
-    #  weatherTemperature = np.zeros(timesteps) + 273.15 + 10  # in K
-    weatherTemperature = weather.temp
-    print(weatherTemperature)
-
-    #  Ventilation rate: Fresh air at temperature weatherTemperature in m3/s
-    #  TODO: Substitute with TEASER call (or VDI call)
-    ventRate = np.zeros(timesteps)
-    ventRate = np.zeros(timesteps) + thermal_zone.volume * 0.5 / 3600
-
-    #  Internal convective gains in W
-    #  TODO: Substitute with TEASER boundary conditions
-    Q_ig = np.zeros(timesteps)
-    #  Bisher keine Leistungen definiert
+    timesteps = 365 * 24
 
     #  TODO: Substitute with TEASER type building call
     # Load constant house parameters
@@ -89,12 +61,8 @@ def vdi_example_6007(thermal_zone, weather):
     else:
         withInnerwalls = False
 
-    # Radiative heat transfer coef. between inner and outer walls in W/m2K
-    #  TODO: Substitute with TEASER call (use conditions)
-    alphaRad = np.zeros(timesteps) + 5
-    #  Within VDI --> Set constant? as 5 W/m2K
-
     #  Convert into house data dictionary
+    #  #-------------------------------------------------------
     houseData = {"R1i": thermal_zone.r1_iw,
                  "C1i": thermal_zone.c1_iw,
                  "Ai": thermal_zone.area_iw,
@@ -104,7 +72,6 @@ def vdi_example_6007(thermal_zone, weather):
                  "Ao": [thermal_zone.area_ow],
                  "Aw": thermal_zone.window_area_list,
                  "At": thermal_zone.window_area_list,
-                 # Fixme: Is this correct?
                  "Vair": thermal_zone.volume,
                  "rhoair": thermal_zone.density_air,
                  "cair": thermal_zone.heat_capac_air,
@@ -114,11 +81,58 @@ def vdi_example_6007(thermal_zone, weather):
                  "alphaowi": thermal_zone.alpha_comb_inner_ow,
                  "alphaWall": thermal_zone.alpha_comb_outer_ow,
                  "withInnerwalls": withInnerwalls}
+    #  TODO: Add further parameters to house data to use equAirTemp.py
 
-    # Define set points (prevent heating or cooling!)
-    #  TODO: Calculate with function call
-    t_set_heating = np.zeros(timesteps) + 273.15 + 21  # in Kelvin
-    t_set_cooling = np.zeros(timesteps) + 273.15 + 30  # in Kelvin
+    #  Solar radiation input on each external area in W/m2
+    #  #-------------------------------------------------------
+    #  solarRad_in = np.zeros((timesteps, 5))
+    solarRad_in = np.transpose(weather.sun_rad)
+
+    #  TODO: What is source_igRad
+    source_igRad = np.zeros(timesteps)
+
+    #  TODO: What is krad?
+    krad = 1
+
+    #  Equal air temperature based on VDI in K
+    #  #-------------------------------------------------------
+    #  equalAirTemp = np.zeros(timesteps) + 273.15 + 10
+    equalAirTemp = weather.temp + 0.5
+
+    # equalAirTemp = equ_air.eqAirTemp(weather=weather, houseData=houseData,
+    #                                  solarRad_in=solarRad_in, method="vdi")
+
+    #  Environment temperatures in K
+    #  #-------------------------------------------------------
+    #  weatherTemperature = np.zeros(timesteps) + 273.15 + 10  # in K
+    weatherTemperature = weather.temp
+    print(weatherTemperature)
+
+    #  Ventilation rate: Fresh air at temperature weatherTemperature in m3/s
+    #  #-------------------------------------------------------
+    #  TODO: Substitute with TEASER call (or VDI call)
+    # ventRate = np.zeros(timesteps)
+    ventRate = np.zeros(timesteps) + thermal_zone.volume * 0.8 / 3600
+
+    #  Internal convective gains in W
+    #  #-------------------------------------------------------
+    #  TODO: Substitute with TEASER boundary conditions
+    Q_ig = np.zeros(timesteps)
+    #  Bisher keine Leistungen definiert
+
+    # Radiative heat transfer coef. between inner and outer walls in W/m2K
+    alphaRad = np.zeros(timesteps) + 5
+
+    # Define set points for heating
+    #  TODO: Calculate with function call (depending on occupancy)
+    # t_set_heating = np.zeros(timesteps) + 273.15 + 21  # in Kelvin
+    t_set_heat_day = \
+        np.array([18, 18, 18, 18, 18, 18, 21, 21, 21, 21, 21, 21,
+                 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 18]) + 273.15
+    t_set_heating = np.tile(t_set_heat_day, 365)
+
+    # Define set points for cooling
+    t_set_cooling = np.zeros(timesteps) + 273.15 + 70  # in Kelvin
 
     heater_limit = np.zeros((timesteps, 3)) + 1e10
     cooler_limit = np.zeros((timesteps, 3)) - 1e10
@@ -145,11 +159,8 @@ def vdi_example_6007(thermal_zone, weather):
 
 
 if __name__ == '__main__':
-    timesteps = 365 * 24
 
-    beta = [45, 90, 90, 45, 90, 90]  # TODO: As default values for weather
-    gamma = -np.array([0, 0, 90, 0, 180, 270])
-    weather = weat.Weather(beta, gamma)
+    weather = weat.Weather()
 
     #  Convert temperature to Kelvin
     weather.temp += 273.15
