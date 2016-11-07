@@ -406,7 +406,8 @@ class Weather(object):
     def __init__(self, beta=[45, 90, 90, 45, 90, 90],
                  gamma=[0, 0, -90, 0, -180, -270], weather_path=None,
                  albedo=0.2, timeZone=1,
-                 altitude=0, location=(49.5, 8.5)):
+                 altitude=0, location=(49.5, 8.5), timestep=3600,
+                 calc_sun_rad=True):
         """
         Constructor of weather object
 
@@ -421,7 +422,12 @@ class Weather(object):
         timeZone
         altitude
         location
+        calc_sun_rad : bool, optional
+            If True, calculate sun radiation on surface (default: True)
         """
+
+        #  Number of timesteps
+        nb_timesteps = 365 * 24 * 3600 / timestep
 
         if weather_path is None:
             #  If None, use default weather path
@@ -436,29 +442,48 @@ class Weather(object):
         # Load weather data
         weather_data = get_weather(weather_path)
 
+        self.timeZone = timeZone
+        self.location = location
+        self.altitude = altitude
+        self.beta = beta
+        self.gamma = gamma
+        self.albedo = albedo
+
         self.temp = weather_data[:, 0]  # Outdoor temperature in degree C
         self.sun_dir = weather_data[:, 1]  # Direct radiation
         self.sun_diff = weather_data[:, 2]  # Diffuse radiation
         self.rad_sky = weather_data[:, 3]
         self.rad_earth = weather_data[:, 4]
 
+        if calc_sun_rad:
+            self.calc_sun_rad(timestep=timestep, nb_timesteps=nb_timesteps)
+
+    def calc_sun_rad(self, timestep=3600, nb_timesteps=8760):
+        """
+        Calculate sun radiation on surface and save results to weather object.
+
+        Parameters
+        ----------
+        timestep : int, optional
+            Time discretization in seconds (default: 3600)
+        nb_timesteps : int, optional
+            Number of timesteps (default: 8760)
+        """
+
         # Sun radiation on surfaces
-        self.sun_rad = getSolarGains(0, 3600, weather_data.shape[0],
-                                     timeZone=timeZone,
-                                     location=location,
-                                     altitude=altitude,
-                                     beta=beta,
-                                     gamma=gamma,
+        self.sun_rad = getSolarGains(0, timestep, timesteps=nb_timesteps,
+                                     timeZone=self.timeZone,
+                                     location=self.location,
+                                     altitude=self.altitude,
+                                     beta=self.beta,
+                                     gamma=self.gamma,
                                      beam=self.sun_dir,
                                      diffuse=self.sun_diff,
-                                     albedo=albedo)
-
+                                     albedo=self.albedo)
 
 if __name__ == "__main__":
-    beta = [45, 90, 90, 45, 90, 90]
-    gamma = -np.array([0, 0, 90, 0, 180, 270])
 
-    weather_obj = Weather(beta=beta, gamma=gamma)
+    weather_obj = Weather()
 
     print('Outdoor temperature in degree Celsius: ')
     print(weather_obj.temp)
