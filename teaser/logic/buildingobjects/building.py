@@ -11,7 +11,6 @@ import scipy.io
 import teaser.logic.utilities as utilitis
 from teaser.logic.buildingobjects.buildingsystems.buildingahu \
     import BuildingAHU
-import teaser.logic.simulation.aixlib as aixlib
 
 
 class Building(object):
@@ -441,7 +440,8 @@ class Building(object):
             self.sum_heating_load += zone.heating_load
 
         if self.used_library_calc == 'AixLib':
-            aixlib.compare_orientation(self)
+            import teaser.logic.simulation.aixlib as aixlib
+            aixlib.compare_orientation(self, number_of_elements=number_of_elements)
         elif self.used_library_calc == 'Annex60':
             import teaser.logic.simulation.annex as annex
 

@@ -944,6 +944,7 @@ class Project(object):
         utilitis.create_path(path)
 
         aixlib_output.export_aixlib(prj=self,
+                                    number_of_elements=self.number_of_elements_calc,
                                     building_model=building_model,
                                     zone_model=zone_model,
                                     corG=corG,

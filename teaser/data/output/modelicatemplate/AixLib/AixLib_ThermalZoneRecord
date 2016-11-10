@@ -20,18 +20,30 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     RExt = {${def_val(zone.r1_ow)}},
     RExtRem = ${def_val(zone.r_rest_ow)},
     CExt = {${def_val(zone.c1_ow)}},
+% if number_of_elements < 2:
+    AInt = 0,
+% else:
     AInt = ${zone.area_iw},
+% endif
     alphaInt = ${zone.alpha_conv_inner_iw},
     nInt = 1,
     RInt = {${def_val(zone.r1_iw)}},
     CInt = {${def_val(zone.c1_iw)}},
+% if number_of_elements < 3:
+    AFloor = 0,
+% else:
     AFloor = ${zone.area_gf},
+% endif
     alphaFloor = ${zone.alpha_conv_inner_gf},
     nFloor = 1,
     RFloor = {${def_val(zone.r1_gf)}},
     RFloorRem =  ${def_val(zone.r_rest_gf)},
     CFloor = {${def_val(zone.c1_gf)}},
+% if number_of_elements < 4:
+    ARoof = 0,
+% else:
     ARoof = ${zone.area_rt},
+% endif
     alphaRoof = ${zone.alpha_conv_inner_rt},
     nRoof = 1,
     RRoof = {${def_val(zone.r1_rt)}},

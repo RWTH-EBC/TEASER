@@ -13,6 +13,7 @@ import teaser.logic.simulation.aixlib as aixlib
 import warnings
 
 def export_aixlib(prj,
+                  number_of_elements=2,
                   building_model="None",
                   zone_model="None",
                   corG=None,
@@ -126,7 +127,8 @@ def export_aixlib(prj,
                 out_file.write(zone_template.render_unicode(
                     bldg=bldg,
                     zone=zone,
-                    mod_prj=prj.modelica_project))
+                    mod_prj=prj.modelica_project,
+                    number_of_elements=number_of_elements))
                 out_file.close()
 
             _help_package(zone_path,
@@ -164,7 +166,8 @@ def export_aixlib(prj,
                     bldg=bldg,
                     zone=zone,
                     calc_core=bldg._calculation_method,
-                    mod_prj=prj.modelica_project))
+                    mod_prj=prj.modelica_project,
+                    number_of_elements=number_of_elements))
 
                 out_file.close()
 

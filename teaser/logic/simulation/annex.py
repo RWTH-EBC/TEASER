@@ -15,7 +15,7 @@ import teaser.logic.utilities as utilitis
 import numpy as np
 
 
-def compare_orientation(bldg, number_of_elements=3):
+def compare_orientation(bldg, number_of_elements=2):
     """Fills the zone weightfactors according to orientation and tilt of
         building
 

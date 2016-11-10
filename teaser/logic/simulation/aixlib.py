@@ -12,7 +12,7 @@ import teaser.logic.utilities as utilitis
 import numpy as np
 
 
-def compare_orientation1(bldg, number_of_elements=2):
+def compare_orientation(bldg, number_of_elements=2):
     """Fills the zone weightfactors according to orientation and tilt of
         building
 
@@ -29,31 +29,37 @@ def compare_orientation1(bldg, number_of_elements=2):
             The number of elements calculated
     """
 
-    orient_tilt_help = []
-    orient_tilt_building_help = []
+    orient_tilt_help1 = []
+    orient_tilt_help2 = []
     bldg.orientation_bldg = []
     bldg.tilt_bldg = []
 
     for zone in bldg.thermal_zones:
         for wall in zone.outer_walls:
             if wall.orientation != -2:
-                orient_tilt_help.append([wall.orientation, wall.tilt])
+                orient_tilt_help1.append([wall.orientation, wall.tilt])
             else:
                 pass
         for win in zone.windows:
             if win.orientation != -2:
-                orient_tilt_help.append([win.orientation, win.tilt])
+                orient_tilt_help1.append([win.orientation, win.tilt])
             else:
                 pass
 
-        orient_tilt_help = list(set(orient_tilt_help))
-        orient_tilt_help.sort(key=lambda x: x[0])  # Wofür das?
+        for i in orient_tilt_help1:
+            if i in orient_tilt_help2:
+                pass
+            else:
+                orient_tilt_help2.append(i)
 
-        if orient_tilt_help[0][0] == -1:  # Wofür das?
-            orient_tilt_help.insert(len(orient_tilt_help),
-                                    orient_tilt_help.pop(0))
+        orient_tilt_help2.sort(key=lambda x: x[0])
 
-        orient_tilt_building_help.append(orient_tilt_help)
+        if orient_tilt_help2[0][0] == -1:
+            orient_tilt_help2.insert(len(orient_tilt_help2), orient_tilt_help2.pop(0))
+
+        for i in orient_tilt_help2:
+            bldg.orientation_bldg.append(i[0])
+            bldg.tilt_bldg.append(i[1])
 
         groundfloors = zone.find_walls(-2, 0)
         if groundfloors == [] or number_of_elements in [3, 4]:
@@ -62,26 +68,25 @@ def compare_orientation1(bldg, number_of_elements=2):
             zone.weightfactor_ground.append(
                 sum([groundfl.wf_out for groundfl in groundfloors]))
 
-        for i in orient_tilt_help:
+        for i in orient_tilt_help2:
             walls = zone.find_walls(i[0], i[1])
             wins = zone.find_wins(i[0], i[1])
 
             rts = zone.find_rts(i[0], i[1])
 
-            if not walls:
+            if not walls and wins:
                 zone.weightfactor_ow.append(0.0)
                 zone.outer_walls_areas.append(0.0)
-            else:
+                zone.tilt_wall.append(i[1])
+                zone.orientation_wall.append(i[0])
+            elif walls:
                 if number_of_elements != 4:
                     zone.weightfactor_ow.append(
                         sum([wall.wf_out for wall in walls]))
                     [zone.outer_walls_areas.append(x.area) for x in walls]
-                    zone.tilt_wall.append(i[1])  # Macht das Sinn orientation
-                    #  und tilt zu trennen?
+                    zone.tilt_wall.append(i[1])
                     zone.orientation_wall.append(i[0])
-                elif number_of_elements == 4 and i[1] >= 90:  # Warum das if
-                    #  und elif? Ist das um gegen Böden zu sichern? Die
-                    # sollten doch sowieso nicht drin sein...
+                elif number_of_elements == 4 and i[1] >= 90:
                     zone.weightfactor_ow.append(
                         sum([wall.wf_out for wall in walls]))
                     [zone.outer_walls_areas.append(x.area) for x in walls]
@@ -89,19 +94,25 @@ def compare_orientation1(bldg, number_of_elements=2):
                     zone.orientation_wall.append(i[0])
                 else:
                     pass
-            if not wins:
+            else:
+                pass
+            if not wins and walls:
                 if number_of_elements != 4:
                     zone.weightfactor_win.append(0.0)
                     zone.window_area_list.append(0.0)
                     zone.g_sunblind_list.append(0.0)
                     zone.window_areas.append(0.0)
+                    zone.tilt_win.append(i[1])
+                    zone.orientation_win.append(i[0])
                 elif number_of_elements == 4 and i[1] >= 90:
                     zone.weightfactor_win.append(0.0)
                     zone.window_area_list.append(0.0)
                     zone.g_sunblind_list.append(0.0)
                     zone.window_areas.append(0.0)
+                    zone.tilt_win.append(i[1])
+                    zone.orientation_win.append(i[0])
 
-            else:
+            elif wins:
                 if number_of_elements != 4:
                     zone.weightfactor_win.append(
                         sum([win.wf_out for win in wins]))
@@ -129,100 +140,6 @@ def compare_orientation1(bldg, number_of_elements=2):
                 zone.orientation_rt.append(i[0])
                 zone.tilt_rt.append(i[1])
                 [zone.weightfactor_rt.append(x.wf_out) for x in rts]
-
-    orient_tilt_building_help = list(set(orient_tilt_building_help))
-    bldg.orientation_bldg = orient_tilt_building_help[:, 1] # Macht
-    # eigentlich keinen Sinn orientation und tilt zu trennen, nur zusammen
-    # ergibt sich eine sinnvolle Aussage
-    bldg.tilt_bldg = orient_tilt_building_help[:, 2]
-
-def compare_orientation(bldg):
-    """Fills the zone weightfactors according to orientation and tilt of
-        building
-
-        compares orientation and tilt of all outer building elements and then
-        creates lists for zone weightfactors and building orientation and tilt
-
-        Parameters
-        ----------
-
-        bldg: Building()
-            TEASER instance of Building()
-    """
-    
-
-    orient_tilt_help = []
-    bldg.orient_tilt = []
-    bldg.orientation_bldg = []
-    bldg.tilt_bldg = []
-
-    for zone in bldg.thermal_zones:
-        for wall in zone.outer_walls:
-            if wall.orientation != -2:
-                orient_tilt_help.append([wall.orientation, wall.tilt])
-            else:
-                pass
-        for win in zone.windows:
-            if win.orientation != -2:
-                orient_tilt_help.append([win.orientation, win.tilt])
-            else:
-                pass
-
-    for i in orient_tilt_help:
-        if i in bldg.orient_tilt:
-            pass
-        else:
-            bldg.orient_tilt.append(i)
-
-    bldg.orient_tilt.sort(key=lambda x: x[0])
-
-    if bldg.orient_tilt[0][0] == -1:
-        bldg.orient_tilt.insert(len(bldg.orient_tilt), bldg.orient_tilt.pop(0))
-
-    for i in bldg.orient_tilt:
-        bldg.orientation_bldg.append(i[0])
-        bldg.tilt_bldg.append(i[1])
-
-    for zone in bldg.thermal_zones:
-
-        groundfloors = zone.find_walls(-2, 0)
-        if groundfloors == []:
-            zone.weightfactor_ground.append(0.0)
-        else:
-            zone.weightfactor_ground.append(
-                sum([groundfl.wf_out for groundfl in groundfloors]))
-
-        for i in bldg.orient_tilt:
-            walls = zone.find_walls(i[0], i[1])
-            wins = zone.find_wins(i[0], i[1])
-
-
-            zone.tilt_wall.append(i[1])
-            zone.orientation_wall.append(i[0])
-
-            zone.tilt_win.append(i[1])
-            zone.orientation_win.append(i[0])
-
-            if walls == []:
-                zone.weightfactor_ow.append(0.0)
-                zone.outer_walls_areas.append(0.0)
-            else:
-                zone.weightfactor_ow.append(
-                    sum([wall.wf_out for wall in walls]))
-                [zone.outer_walls_areas.append(i.area) for i in walls]
-            if wins == []:
-                zone.weightfactor_win.append(0.0)
-                zone.window_area_list.append(0.0)
-                zone.g_sunblind_list.append(0.0)
-                zone.window_areas.append(0.0)
-            else:
-                zone.weightfactor_win.append(
-                    sum([win.wf_out for win in wins]))
-                zone.window_area_list.append(
-                    sum([win.area for win in wins]))
-                zone.g_sunblind_list.append(
-                    sum([win.shading_g_total for win in wins]))
-                [zone.window_areas.append(i.area) for i in wins]
 
 
 def create_timeline(bldg, duration_profile = 86400, time_step = 3600):

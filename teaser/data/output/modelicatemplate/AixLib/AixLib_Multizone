@@ -15,23 +15,27 @@ model ${bldg.name}
     zoneParam = {
       %for i in bldg.thermal_zones:
 	  %if i == bldg.thermal_zones[-1]:
-	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}()
+	   ${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}()
 	  %else:
-	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
+	   ${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
 	  %endif
       %endfor
       }
 
 % if zone == "ThermalZone":
     ,
-    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone(
+    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone[${get_n(bldg.thermal_zones)}](
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-             intWallRC(thermCapInt(each der_T(fixed=true))))
+             intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
+             (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
+             der_T(fixed=true))))
 % else:
     ,
-    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone(
+    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[${get_n(bldg.thermal_zones)}](
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-             intWallRC(thermCapInt(each der_T(fixed=true))))
+             intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
+             (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
+             der_T(fixed=true))))
 %   endif
 
 % if gFac is True:
@@ -155,9 +159,9 @@ end ${bldg.name};
     zoneParam = {
       %for i in bldg.thermal_zones:
 	  %if i == bldg.thermal_zones[-1]:
-	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}()
+	   ${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}()
 	  %else:
-	  ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
+	   ${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
 	  %endif
       %endfor
       }
@@ -195,14 +199,18 @@ end ${bldg.name};
 % endif
 % if zone == "ThermalZone":
     ,
-    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone(
+    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone[${get_n(bldg.thermal_zones)}](
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-             intWallRC(thermCapInt(each der_T(fixed=true))))
+             intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
+             (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
+             der_T(fixed=true))))
 % else:
     ,
-    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone(
+    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[${get_n(bldg.thermal_zones)}](
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-             intWallRC(thermCapInt(each der_T(fixed=true))))
+             intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
+             (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
+             der_T(fixed=true))))
 % endif
 % if gFac is True:
     ,redeclare
