@@ -9,7 +9,7 @@ This module contains function to save building element classes
 import teaser.data.bindings.v_0_4.typeelement_bind as tb_bind
 import teaser.logic.utilities as utilitis
 import warnings
-
+import pyxb
 
 def save_type_element(element, data_class):
     '''Typical element saver.
@@ -35,6 +35,10 @@ def save_type_element(element, data_class):
     element_binding = data_class.element_bind
     element_binding.version = "0.4"
     add_to_xml = True
+
+    pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
+        tb_bind.Namespace, 'elements')
+
     warning_text = ("Construction Type and building age "
                     "group already exist in this XML, consider revising "
                     "your inputs. The Element is NOT saved into XML")
@@ -184,8 +188,9 @@ def save_type_element(element, data_class):
 
         out_file.write(element_binding.toDOM().toprettyxml())
 
+
 def delete_type_element(element, data_class):
-    '''Deletes typical element.
+    """Deletes typical element.
 
     Deletes typical building elements according to their construction
     year and their construction type in the the XML file for type buidling
@@ -204,7 +209,7 @@ def delete_type_element(element, data_class):
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
 
-    '''
+    """
 
     element_binding = data_class.element_bind
 

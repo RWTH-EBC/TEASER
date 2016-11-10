@@ -43,6 +43,7 @@ def main():
     info_list = read_XMLs(input_path)
 
     prj = create_reference_project(info_list)
+    prj.name = "Melaten_Ref"
 
     '''
     We need to set the projects calculation method. The library we want to
@@ -92,6 +93,7 @@ def main():
     #prj.calc_all_buildings()
     #prj.export_annex()
 
+    prj.name = "Melaten_Retrofit"
     prj.retrofit_all_buildings(2015)
 
     '''You could also change the exports here as seen above'''

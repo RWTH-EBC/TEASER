@@ -106,7 +106,7 @@ class Controller():
     @classmethod
     def click_add_zone_button(self, parent, name, area, zone_type):
         '''
-        creates a thermal zone with specified area and type and blawnco use
+        creates a thermal zone with specified area and type and blanco use
         conditions
 
         Parameters:
@@ -135,6 +135,7 @@ class Controller():
         zone.use_conditions.load_use_conditions(zone_type)
         zone.name = name
         zone.area = area
+        zone.set_volume_zone()
         return parent
 
     @classmethod
@@ -393,6 +394,8 @@ class Controller():
             individual path where the xml file will be saved
         '''
 
+        path = str(path)
+
         if path.endswith("teaserXML"):
             teaser_xml.save_teaser_xml(path, project)
             print("Saved under: "+path)
@@ -414,6 +417,8 @@ class Controller():
         loaded_prj : project()
             project class filled with information from a file
         '''
+
+        path = str(path)
 
         if path.endswith(".teaserXML"):
             project.load_project(path)
@@ -498,8 +503,12 @@ class Controller():
             path of the output location
         '''
 
+        project.number_of_elements_calc = 2
+        project.merge_windows_calc = False
+        project.used_library_calc = 'AixLib'
+        project.calc_all_buildings()
         project.export_aixlib(building_model, zone_model, corG,
-                              internal_id, path_output_folder)
+                              internal_id, str(path_output_folder))
 
     @classmethod
     def click_export_button_annex(self, project, num_of_elem, merge_win,
@@ -528,9 +537,12 @@ class Controller():
             path of the output location
         '''
 
-        project.calc_all_buildings(num_of_elem, merge_win, 'Annex60')
-        project.export_annex(num_of_elem, merge_win, internal_id,
-                             path_output_folder)
+        project.number_of_elements_calc = num_of_elem
+        project.merge_windows_calc = merge_win
+        project.used_library_calc = 'Annex60'
+        project.calc_all_buildings()
+        project.export_annex(internal_id,
+                             str(path_output_folder))
 
     @classmethod
     def click_change_all_constr(self,
@@ -677,3 +689,16 @@ class Controller():
 
         u_value = float(current_element.ua_value)/current_element.area
         return u_value
+
+    @classmethod
+    def set_zone_volume(self, current_zone):
+        '''
+        Set zone volume for current zone
+
+        current_element : thermal_zone()
+            Current zone
+
+        '''
+
+        if not current_zone.volume:
+                current_zone.volume = current_zone.set_volume_zone()

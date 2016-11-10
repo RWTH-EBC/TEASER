@@ -169,17 +169,17 @@ def example_type_district():
     are"""
 
     outputdir_est1 = "D:/Dymola_workspace/EST1"
-    packagedir_est1 = "D:/GIT/TEASER/teaser/OutputData/EST1"
+    packagedir_est1 = "C:/Users\mla\TEASEROutput/EST1"
     outputdir_est1_retrofit = "D:/Dymola_workspace/EST1_Retrofit"
-    packagedir_est1_retrofit = "D:/GIT/TEASER/teaser/OutputData/EST1_Retrofit"
+    packagedir_est1_retrofit = "C:/Users\mla\TEASEROutput/EST1_Retrofit"
     outputdir_est4 = "D:/Dymola_workspace/EST4"
-    packagedir_est4 = "D:/GIT/TEASER/teaser/OutputData/EST4"
+    packagedir_est4 = "C:/Users\mla\TEASEROutput/EST4"
     outputdir_est4_retrofit = "D:/Dymola_workspace/EST4_Retrofit"
-    packagedir_est4_retrofit = "D:/GIT/TEASER/teaser/OutputData/EST4_Retrofit"
+    packagedir_est4_retrofit = "C:/Users\mla\TEASEROutput/EST4_Retrofit"
     outputdir_est7 = "D:/Dymola_workspace/EST7"
-    packagedir_est7 = "D:/GIT/TEASER/teaser/OutputData/EST7"
+    packagedir_est7 = "C:/Users\mla\TEASEROutput/EST7"
     outputdir_est7_retrofit = "D:/Dymola_workspace/EST7_Retrofit"
-    packagedir_est7_retrofit = "D:/GIT/TEASER/teaser/OutputData/EST7_Retrofit"
+    packagedir_est7_retrofit = "C:/Users\mla\TEASEROutput/EST7_Retrofit"
 
     """
     Now we need to create a simulation list for buildingspy
