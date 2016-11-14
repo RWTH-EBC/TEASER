@@ -90,7 +90,8 @@ def export_annex60(prj,
                                                                 '.' +
                                                                 bldg.name +
                                                                 "_Models"),
-                                                        modelica_info=prj.modelica_info))
+                                                        modelica_info=prj.modelica_info,
+                                                        weather=prj.weather_file_path))
 
             aixlib_output._help_package(zone_path,
                                         bldg.name + "_Models",

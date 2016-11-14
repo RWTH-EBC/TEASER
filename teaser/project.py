@@ -56,8 +56,6 @@ class Project(object):
         modelica_project : str
             name of the Modelica Project used in type building creation
             (default: self.name)
-        weather_file_header : str
-            header of weather file used for Modelica simulation
         weather_file_path : str
             path to weather file used for Modelica simulation
             (default: "TRY_5_Essen.txt")
@@ -80,9 +78,9 @@ class Project(object):
         self.modelica_info = ModelicaInfo()
 
         self.modelica_project = self.name
-        self.weather_file_header = "wetter"
+        # self.weather_file_header = "wetter"
         self.weather_file_path = "modelica://AixLib/Resources/WeatherData/" \
-                                 "TRY2010_12_Jahr_Modelica-Library.txt"
+                                 "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"
         self.buildings = []
 
         self._calculation_method = "vdi"

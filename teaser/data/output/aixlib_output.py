@@ -110,7 +110,6 @@ def export_aixlib(prj,
             out_file.write(model_template.render_unicode(
                            bldg=bldg, mod_prj=prj.modelica_project,
                            weather=prj.weather_file_path,
-                           weather_header=prj.weather_file_header,
                            model=building_model,
                            zone=zone_model,
                            physics=calc_method,
