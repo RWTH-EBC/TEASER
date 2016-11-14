@@ -18,7 +18,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     alphaExt = ${zone.alpha_conv_inner_ow},
     nExt = 1,
     RExt = {${def_val(zone.r1_ow)}},
-    RExtRem = ${def_val(zone.r_rest_ow)},
+    RExtRem = ${def_val(zone.r_rest_ow-R_zero(zone.alpha_comb_outer_ow,zone.area_ow))},
     CExt = {${def_val(zone.c1_ow)}},
 % if number_of_elements < 2:
     AInt = 0,
@@ -37,7 +37,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     alphaFloor = ${zone.alpha_conv_inner_gf},
     nFloor = 1,
     RFloor = {${def_val(zone.r1_gf)}},
-    RFloorRem =  ${def_val(zone.r_rest_gf)},
+    RFloorRem =  ${def_val(zone.r_rest_gf-R_zero(zone.alpha_comb_outer_gf,zone.area_gf))},
     CFloor = {${def_val(zone.c1_gf)}},
 % if number_of_elements < 4:
     ARoof = 0,
@@ -47,7 +47,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     alphaRoof = ${zone.alpha_conv_inner_rt},
     nRoof = 1,
     RRoof = {${def_val(zone.r1_rt)}},
-    RRoofRem = ${def_val(zone.r_rest_rt)},
+    RRoofRem = ${def_val(zone.r_rest_rt-R_zero(zone.alpha_comb_outer_rt,zone.area_rt))},
     CRoof = {${def_val(zone.c1_rt)}},
     nOrientationsRoof = ${def_nOrientations(len(zone.tilt_rt))},
     tiltRoof = {${list_to_string(deg_to_rad_list(def_val_Roof_list(zone.tilt_rt,def_nOrientations(len(zone.tilt_rt)))))}},
@@ -231,5 +231,16 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   else:
     return_list = list
   return return_list
+  %>
+</%def>
+
+##Guarded calculation of resistance out of conductance and area
+<%def name="R_zero(cond, area)", filter="trim">
+  <%
+  if cond * area != 0:
+    return_value = 1/(cond*area)
+  else:
+    return_value = 0
+  return return_value
   %>
 </%def>
