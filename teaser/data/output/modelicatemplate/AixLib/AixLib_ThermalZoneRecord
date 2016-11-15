@@ -10,7 +10,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     AWin = {${list_to_string(zone.window_area_list)}},
     ATransparent = {${list_to_string(zone.window_area_list)}},
     alphaWin = ${zone.alpha_conv_inner_win},
-    RWin = ${def_val(zone.r1_win)},
+    RWin = ${def_val(zone.r1_win-R_zero(zone.alpha_comb_outer_win,zone.area_win))},
     gWin = ${zone.weighted_g_value},
     UWin= ${zone.ua_value_win/zone.area_win},
     ratioWinConRad = ${zone.windows[0].a_conv},
