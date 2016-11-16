@@ -6,15 +6,15 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     AZone = ${zone.area},
     alphaRad = ${mean_alphaRad(zone)},
     lat = ${deg_to_rad(check_lat(bldg.latitude))},
-    nOrientations = ${def_nOrientations(len(zone.tilt_wall))},
-    AWin = {${list_to_string(zone.window_area_list)}},
-    ATransparent = {${list_to_string(zone.window_area_list)}},
+    nOrientations = ${def_nOrientations(add_gf(len(zone.tilt_wall),zone.area_gf,number_of_elements))},
+    AWin = {${list_to_string(add_gf_list(zone.window_area_list,zone.area_gf,number_of_elements))}},
+    ATransparent = {${list_to_string(add_gf_list(zone.window_area_list,zone.area_gf,number_of_elements))}},
     alphaWin = ${zone.alpha_conv_inner_win},
     RWin = ${def_val(zone.r1_win-R_zero(zone.alpha_comb_outer_win,zone.area_win))},
     gWin = ${zone.weighted_g_value},
     UWin= ${zone.ua_value_win/zone.area_win},
     ratioWinConRad = ${zone.windows[0].a_conv},
-    AExt = {${list_to_string(zone.outer_walls_areas)}},
+    AExt = {${list_to_string(add_gf_area(zone.outer_walls_areas,zone.area_gf,number_of_elements))}},
     alphaExt = ${zone.alpha_conv_inner_ow},
     nExt = 1,
     RExt = {${def_val(zone.r1_ow)}},
@@ -62,10 +62,10 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     alphaRadWin = ${zone.alpha_rad_outer_win},
     alphaRoofOut = ${zone.alpha_conv_outer_rt},
     alphaRadRoof = ${zone.alpha_rad_outer_rt},
-    tiltExtWalls = {${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
-    aziExtWalls = {${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_wall)))}},
-    wfWall = {${list_to_string(zone.weightfactor_ow)}},
-    wfWin = {${list_to_string(zone.weightfactor_win)}},
+    tiltExtWalls = {${list_to_string(deg_to_rad_list(add_gf_list(zone.tilt_wall,zone.area_gf,number_of_elements)))}},
+    aziExtWalls = {${list_to_string(deg_to_rad_list(add_gf_list(get_azimut(zone.orientation_wall),zone.area_gf,number_of_elements)))}},
+    wfWall = {${list_to_string(add_gf_list(zone.weightfactor_ow,zone.area_gf,number_of_elements))}},
+    wfWin = {${list_to_string(add_gf_list(zone.weightfactor_win,zone.area_gf,number_of_elements))}},
     wfGro = ${list_to_string(zone.weightfactor_ground)},
     nrPeople = ${zone.use_conditions.persons},
     ratioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
@@ -242,5 +242,40 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   else:
     return_value = 0
   return return_value
+  %>
+</%def>
+
+##Adds dummies to lists for extra orientations for ground floor
+<%def name="add_gf_list(list, area_gf, number_of_elements)", filter="trim">
+  <%
+  newlist=[]
+  for element in list:
+    newlist.append(element)
+  if area_gf != 0 and number_of_elements <= 2:
+    newlist.append(0)
+  return newlist
+  %>
+</%def>
+
+##Adds one to value for extra orientations for ground floor
+<%def name="add_gf(value, area_gf, number_of_elements)", filter="trim">
+  <%
+  if area_gf != 0 and number_of_elements <= 2:
+    return_value = value + 1
+  else:
+    return_value = value
+  return return_value
+  %>
+</%def>
+
+##Adds ground floor area to lists
+<%def name="add_gf_area(list, area_gf, number_of_elements)", filter="trim">
+  <%
+  newlist=[]
+  for element in list:
+    newlist.append(element)
+  if area_gf != 0 and number_of_elements <= 2:
+    newlist.append(area_gf)
+  return newlist
   %>
 </%def>
