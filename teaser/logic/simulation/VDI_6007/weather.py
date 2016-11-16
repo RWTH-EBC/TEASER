@@ -395,7 +395,7 @@ def get_weather(filepath):
         nd numpy array with weather data
     """
 
-    return np.loadtxt(filepath, skiprows=38, usecols=(8, 13, 14, 16, 17))
+    return np.genfromtxt(filepath, skip_header=38, usecols=(8, 13, 14, 16, 17))
 
 
 class Weather(object):

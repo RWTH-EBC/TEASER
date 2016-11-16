@@ -54,7 +54,6 @@ def vdi_example_6007(thermal_zone, weather):
 
     timesteps = 365 * 24
 
-    #  TODO: Substitute with TEASER type building call
     # Load constant house parameters
     if len(thermal_zone.inner_walls) != 0:
         withInnerwalls = True
@@ -88,10 +87,8 @@ def vdi_example_6007(thermal_zone, weather):
     #  solarRad_in = np.zeros((timesteps, 5))
     solarRad_in = np.transpose(weather.sun_rad)
 
-    #  TODO: What is source_igRad
     source_igRad = np.zeros(timesteps)
 
-    #  TODO: What is krad?
     krad = 1
 
     #  Equal air temperature based on VDI in K
@@ -117,13 +114,13 @@ def vdi_example_6007(thermal_zone, weather):
     #  Internal convective gains in W
     #  #-------------------------------------------------------
     #  TODO: Substitute with TEASER boundary conditions
-    Q_ig = np.zeros(timesteps)
-    #  Bisher keine Leistungen definiert
+    Q_ig = np.zeros(timesteps) + 200
 
     # Radiative heat transfer coef. between inner and outer walls in W/m2K
     alphaRad = np.zeros(timesteps) + 5
 
     # Define set points for heating
+    #  #-------------------------------------------------------
     #  TODO: Calculate with function call (depending on occupancy)
     # t_set_heating = np.zeros(timesteps) + 273.15 + 21  # in Kelvin
     t_set_heat_day = \
@@ -131,13 +128,14 @@ def vdi_example_6007(thermal_zone, weather):
                  21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 18]) + 273.15
     t_set_heating = np.tile(t_set_heat_day, 365)
 
-    # Define set points for cooling
+    # Define set points for cooling (cooling is disabled for high values)
+    #  #-------------------------------------------------------
     t_set_cooling = np.zeros(timesteps) + 273.15 + 70  # in Kelvin
 
     heater_limit = np.zeros((timesteps, 3)) + 1e10
     cooler_limit = np.zeros((timesteps, 3)) - 1e10
 
-    # Calculate indoor air temperature
+    # Calculate indoor air temperature with VDI model
     T_air, Q_hc, Q_iw, Q_ow = \
         low_order_VDI.reducedOrderModelVDI(houseData=houseData,
                                            weatherTemperature=weatherTemperature,
@@ -148,8 +146,8 @@ def vdi_example_6007(thermal_zone, weather):
                                            Q_ig=Q_ig,
                                            source_igRad=source_igRad,
                                            krad=krad,
-                                           heater_order=np.array([1]),
-                                           cooler_order=np.array([1]),
+                                           heater_order=np.array([1, 2, 3]),
+                                           cooler_order=np.array([1, 2, 3]),
                                            t_set_heating=t_set_heating,
                                            t_set_cooling=t_set_cooling,
                                            heater_limit=heater_limit,
@@ -168,8 +166,25 @@ if __name__ == '__main__':
     #  Get TEASER project with residential type building
     prj = gen_res_type_example_building()
 
+    #  Pointer to building object
+    building = prj.buildings[0]
+
     #  Extract thermal_zone
     thermal_zone = prj.buildings[0].thermal_zones[0]
+
+    print('UA value before retrofiting:')
+    print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
+    print('Inner resistance (VDI 6007) of thermal zone before retrofit:')
+    print(thermal_zone.r1_ow)
+    print()
+
+    building.retrofit_building(year_of_retrofit=2014)
+
+    print('UA value after retrofiting:')
+    print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
+    print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
+    print(thermal_zone.r1_ow)
+    print()
 
     #  Rund VDI 6007 example with thermal zone
     (T_air, Q_hc, Q_iw, Q_ow) = vdi_example_6007(thermal_zone, weather=weather)
@@ -194,7 +209,7 @@ if __name__ == '__main__':
     print(sum(q_heat)/1000)
 
     print('Sum of cooling energy in kWh:')
-    print(sum(q_cool) / 1000)
+    print(-sum(q_cool) / 1000)
 
     import matplotlib.pyplot as plt
 

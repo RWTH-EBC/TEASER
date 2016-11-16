@@ -267,8 +267,6 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
 
     for t in range(timesteps):
         #  print(t)
-        if t == 360:
-            pass
 
         # Common equations
         A = np.zeros((9, 9))
