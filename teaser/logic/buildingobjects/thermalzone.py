@@ -913,9 +913,9 @@ class ThermalZone(object):
         #self.r_rad_outer_iw = 1 / sum_r_rad_outer_iw
         #self.r_comb_outer_iw = 1 / sum_r_comb_outer_iw
 
-        self.alpha_conv_iw = 1/(self.r_conv_inner_iw * self.area_iw)
-        self.alpha_rad_iw = 1/(self.r_rad_inner_iw * self.area_iw)
-        self.alpha_comb_iw = 1/(self.r_comb_inner_iw * self.area_iw)
+        self.alpha_conv_inner_iw = 1/(self.r_conv_inner_iw * self.area_iw)
+        self.alpha_rad_inner_iw = 1/(self.r_rad_inner_iw * self.area_iw)
+        self.alpha_comb_inner_iw = 1/(self.r_comb_inner_iw * self.area_iw)
 
         for out_wall in self.outer_walls:
             if type(out_wall).__name__ == "OuterWall":

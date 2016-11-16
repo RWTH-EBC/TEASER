@@ -9,28 +9,29 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
       "${weather}"))
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${def_nOrientations(len(zone.orientation_wall))}](
+  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${def_nOrientations(add_gf(len(zone.orientation_wall),zone.area_gf))}](
     each outSkyCon=true,
     each outGroCon=true,
-    til={${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
+    til={${list_to_string(deg_to_rad_list(add_gf_list(zone.tilt_wall,zone.area_gf)))}},
     each lat = ${deg_to_rad(check_lat(bldg.latitude))},
-    azi={${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_wall)))}})
+    azi={${list_to_string(deg_to_rad_list(add_gf_list(get_azimut(zone.orientation_wall),zone.area_gf)))}})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${def_nOrientations(len(zone.orientation_wall))}](
-    til={${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
+  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${def_nOrientations(add_gf(len(zone.orientation_wall),zone.area_gf))}](
+    til={${list_to_string(deg_to_rad_list(add_gf_list(zone.tilt_wall,zone.area_gf)))}},
     each lat = ${deg_to_rad(check_lat(bldg.latitude))},
-    azi={${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_wall)))}})
+    azi={${list_to_string(deg_to_rad_list(add_gf_list(get_azimut(zone.orientation_wall),zone.area_gf)))}})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${def_nOrientations(len(zone.orientation_wall))}, UWin=${zone.ua_value_win/zone.area_win})
+  Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${def_nOrientations(add_gf(len(zone.orientation_wall),zone.area_gf))},
+  UWin=${zone.ua_value_win/zone.area_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
   Annex60.ThermalZones.ReducedOrder.RC.TwoElements
   thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     VAir=${zone.volume},
-    alphaExt=${def_alpha(zone.alpha_comb_inner_ow)},
+    alphaExt=${def_alpha(zone.alpha_conv_inner_ow)},
     alphaWin=${def_alpha(zone.alpha_conv_inner_win)},
     gWin=${zone.weighted_g_value},
     ratioWinConRad=${zone.windows[0].a_conv},
@@ -39,36 +40,36 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     CExt={${def_val(zone.c1_ow)}},
     alphaRad=${def_alpha(mean_alphaRad(zone))},
     AInt=${zone.area_iw},
-    alphaInt=${def_alpha(zone.alpha_comb_iw)},
+    alphaInt=${def_alpha(zone.alpha_conv_inner_iw)},
     nInt=1,
     RInt={${def_val(zone.r1_iw)}},
     CInt={${def_val(zone.c1_iw)}},
-    RWin=${def_val(zone.r1_win)},
+    RWin=${def_val(zone.r1_win-R_zero(zone.alpha_comb_outer_win,zone.area_win))},
     RExtRem=${def_val(zone.r_rest_ow-R_zero(zone.alpha_comb_outer_ow,zone.area_ow))},
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     extWallRC(thermCapExt(each der_T(fixed=true))),
     intWallRC(thermCapInt(each der_T(fixed=true))),
-    nOrientations=${def_nOrientations(len(zone.orientation_wall))},
+    nOrientations=${def_nOrientations(add_gf(len(zone.orientation_wall),zone.area_gf))},
 % if merge_windows is True:
-    AWin={${list_to_string([0] * len(zone.orientation_wall))}},
+    AWin={${list_to_string(add_gf_list([0] * len(zone.orientation_wall),zone.area_gf))}},
 % else:
-    AWin={${list_to_string(zone.window_areas)}},
+    AWin={${list_to_string(add_gf_list(zone.window_areas,zone.area_gf))}},
 % endif
-    ATransparent={${list_to_string(zone.window_areas)}},
+    ATransparent={${list_to_string(add_gf_list(zone.window_areas,zone.area_gf))}},
 % if merge_windows is True:
-    AExt={${list_to_string([a + b for a, b in zip(zone.window_areas, zone
-    .outer_walls_areas)])}})
+    AExt={${list_to_string(add_gf_area([a + b for a, b in zip(zone.window_areas, zone.outer_walls_areas)],zone.area_gf))}})
     "Thermal zone"
 % else:
-    AExt={${list_to_string(zone.outer_walls_areas)}}) "Thermal zone"
+    AExt={${list_to_string(add_gf_area(zone.outer_walls_areas,zone.area_gf))}}) "Thermal
+    zone"
 % endif
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 % if merge_windows is True:
   Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
-    n=${def_nOrientations(len(zone.orientation_wall))},
+    n=${def_nOrientations(add_gf(len(zone.orientation_wall),zone.area_gf))},
     wfGro=${list_to_string(zone.weightfactor_ground)},
-    wfWall={${list_to_string(zone.weightfactor_ow)}},
-    wfWin={${list_to_string(zone.weightfactor_win)}},
+    wfWall={${list_to_string(add_gf_list(zone.weightfactor_ow,zone.area_gf))}},
+    wfWin={${list_to_string(add_gf_list(zone.weightfactor_win,zone.area_gf))}},
     withLongwave=true,
     aExt=${zone.solar_absorp_ow},
     alphaWallOut=${def_alpha(zone.alpha_conv_outer_ow)},
@@ -77,10 +78,10 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
   Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
-    n=${def_nOrientations(len(zone.orientation_wall))},
+    n=${def_nOrientations(add_gf(len(zone.orientation_wall),zone.area_gf))},
     wfGro=${list_to_string(zone.weightfactor_ground)},
-    wfWall={${list_to_string(zone.weightfactor_ow)}},
-    wfWin={${list_to_string(zone.weightfactor_win)}},
+    wfWall={${list_to_string(add_gf_list(zone.weightfactor_ow,zone.area_gf))}},
+    wfWin={${list_to_string(add_gf_list(zone.weightfactor_win,zone.area_gf))}},
     withLongwave=true,
     aExt=${zone.solar_absorp_ow},
     alphaWallOut=${def_alpha(zone.alpha_conv_outer_ow)},
@@ -89,7 +90,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif
-  Modelica.Blocks.Math.Add solRad[${def_nOrientations(len(zone.orientation_wall))}]
+  Modelica.Blocks.Math.Add solRad[${def_nOrientations(add_gf(len(zone.orientation_wall),zone.area_gf))}]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,6},{-28,16}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature
@@ -106,7 +107,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
   Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWall
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{36,6},{26,-4}})));
-  Modelica.Blocks.Sources.Constant const[${def_nOrientations(len(zone.orientation_wall))}](each k=0)
+  Modelica.Blocks.Sources.Constant const[${def_nOrientations(add_gf(len(zone.orientation_wall),zone.area_gf))}](each k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{-20,14},{-14,20}})));
   Annex60.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
@@ -206,7 +207,7 @@ equation
   connect(solRad.y, eqAirTemp.HSol)
     annotation (Line(points={{-27.5,11},{-26,11},{-26,2},{-26,2}},
     color={0,0,127}));
-  %for i in range(max(1,len(zone.orientation_wall))):
+  %for i in range(max(1,add_gf(len(zone.orientation_wall),zone.area_gf))):
     connect(weaDat.weaBus, HDifTil[${i+1}].weaBus)
     annotation (Line(
     points={{-78,62},{-74,62},{-74,30},{-68,30}},
@@ -390,5 +391,51 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   else:
      return_value = value
   return return_value
+  %>
+</%def>
+
+##Guarded calculation of resistance out of conductance and area
+<%def name="R_zero(cond, area)", filter="trim">
+  <%
+  if cond * area != 0:
+    return_value = 1/(cond*area)
+  else:
+    return_value = 0
+  return return_value
+  %>
+</%def>
+
+##Adds dummies to lists for extra orientations for ground floor
+<%def name="add_gf_list(list, area_gf)", filter="trim">
+  <%
+  newlist=[]
+  for element in list:
+    newlist.append(element)
+  if area_gf != 0:
+    newlist.append(0)
+  return newlist
+  %>
+</%def>
+
+##Adds one to value for extra orientations for ground floor
+<%def name="add_gf(value, area_gf)", filter="trim">
+  <%
+  if area_gf != 0:
+    return_value = value + 1
+  else:
+    return_value = value
+  return return_value
+  %>
+</%def>
+
+##Adds ground floor area to lists
+<%def name="add_gf_area(list, area_gf)", filter="trim">
+  <%
+  newlist=[]
+  for element in list:
+    newlist.append(element)
+  if area_gf != 0:
+    newlist.append(area_gf)
+  return newlist
   %>
 </%def>
