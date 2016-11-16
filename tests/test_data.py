@@ -28,7 +28,7 @@ class Test_teaser(object):
         assert round(therm_zone.r1_iw, 13) == 0.0005956934075
         assert round(therm_zone.c1_iw / 1000, 7) == 14836.3546282
         assert round(therm_zone.area_iw, 1) == 75.5
-        assert round(therm_zone.alpha_conv_iw, 13) == 2.23642384105960
+        assert round(therm_zone.alpha_conv_inner_iw, 13) == 2.23642384105960
 
         #paremeters outer wall Typraum S
 
@@ -52,7 +52,7 @@ class Test_teaser(object):
         assert round(therm_zone.r1_iw, 13) == 0.003385649748
         assert round(therm_zone.c1_iw / 1000, 7) == 7445.3648976
         assert round(therm_zone.area_iw, 1) == 75.5
-        assert round(therm_zone.alpha_conv_iw, 13) == 2.23642384105960
+        assert round(therm_zone.alpha_conv_inner_iw, 13) == 2.23642384105960
 
         #parameters outer wall Typraum L
 
@@ -74,7 +74,7 @@ class Test_teaser(object):
         assert round(therm_zone.r1_iw, 13) == 0.0006688956391
         assert round(therm_zone.c1_iw / 1000, 7) == 12391.3638631
         assert round(therm_zone.area_iw, 1) == 60.5
-        assert round(therm_zone.alpha_conv_iw, 13) == 2.1214876033058
+        assert round(therm_zone.alpha_conv_inner_iw, 13) == 2.1214876033058
 
         assert round(therm_zone.r_rest_ow, 13) == 0.0207059264866
         assert round(therm_zone.r1_ow, 13) == 0.0017362530106
@@ -105,7 +105,7 @@ class Test_teaser(object):
         assert round(therm_zone.r1_iw, 11) == 4.62113e-06
         assert round(therm_zone.c1_iw, 2) == 1209810287.22
         assert round(therm_zone.area_iw, 5) == 9866.66667
-        assert round(therm_zone.alpha_conv_iw, 5) == 2.37568
+        assert round(therm_zone.alpha_conv_inner_iw, 5) == 2.37568
 
         assert round(therm_zone.r_rest_ow, 5) == 0.00183
         assert round(therm_zone.r1_ow, 10) == 3.06155e-05
@@ -833,9 +833,9 @@ class Test_teaser(object):
         assert round(therm_zone.r_conv_inner_iw, 18) == 0.010893246187363833
         assert round(therm_zone.r_rad_inner_iw, 19) == 0.0058823529411764705
         assert round(therm_zone.r_comb_inner_iw, 19) == 0.003819709702062643
-        assert round(therm_zone.alpha_conv_iw, 1) == 2.7
-        assert round(therm_zone.alpha_rad_iw, 1) == 5.0
-        assert round(therm_zone.alpha_comb_iw, 1) == 7.7
+        assert round(therm_zone.alpha_conv_inner_iw, 1) == 2.7
+        assert round(therm_zone.alpha_rad_inner_iw, 1) == 5.0
+        assert round(therm_zone.alpha_comb_inner_iw, 1) == 7.7
 
         # outerwall
         assert round(therm_zone.ua_value_ow, 16) == 19.83577523748189
