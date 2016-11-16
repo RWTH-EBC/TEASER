@@ -177,7 +177,6 @@ end ${bldg.name};
     sampleRateAHU=1800,
     effFanAHU_sup=0.7,
     effFanAHU_eta=0.7,
-    T_start=${bldg.thermal_zones[0].t_inside},
     effHRSAHU_enabled=${bldg.central_ahu.efficiency_recovery},
     effHRSAHU_disabled=${bldg.central_ahu.efficiency_revocery_false},
     dpAHU_sup=80000000,
