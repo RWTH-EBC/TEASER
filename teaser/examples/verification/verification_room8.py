@@ -42,7 +42,7 @@ print("Parameters for inner wall")
 print("r1_iw:", prj.buildings[0].thermal_zones[0].r1_iw, "K/W ---", "Rouvel: 0.000668640 K/W")
 print("c1_iw: ", prj.buildings[0].thermal_zones[0].c1_iw / 1000, "kJ/K ---", "Rouvel: 12391.2 kJ/K")
 print("area_iw: ", prj.buildings[0].thermal_zones[0].area_iw, "qm ---", "Rouvel: 60.50 qm")
-print("alpha_weight_conv_iw: ", prj.buildings[0].thermal_zones[0].alpha_conv_iw, "W/(qm*K) ---", "Rouvel: 2.121487317 W/(qm*K)")
+print("alpha_weight_conv_iw: ", prj.buildings[0].thermal_zones[0].alpha_conv_inner_iw, "W/(qm*K) ---", "Rouvel: 2.121487317 W/(qm*K)")
 
 '''
 parameters outer wall

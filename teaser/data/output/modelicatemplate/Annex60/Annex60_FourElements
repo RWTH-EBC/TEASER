@@ -29,7 +29,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
   thermalZoneFourElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
     VAir=${zone.volume},
-    alphaExt=${def_alpha(zone.alpha_comb_inner_ow)},
+    alphaExt=${def_alpha(zone.alpha_conv_inner_ow)},
     alphaWin=${def_alpha(zone.alpha_conv_inner_win)},
     gWin=${zone.weighted_g_value},
     ratioWinConRad=${zone.windows[0].a_conv},
@@ -38,12 +38,12 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     CExt={${def_val(zone.c1_ow)}},
     alphaRad=${def_alpha(mean_alphaRad(zone))},
     AInt=${zone.area_iw},
-    alphaInt=${def_alpha(zone.alpha_comb_iw)},
+    alphaInt=${def_alpha(zone.alpha_conv_inner_iw)},
     nInt=1,
     RInt={${def_val(zone.r1_iw)}},
     CInt={${def_val(zone.c1_iw)}},
-    RWin=${def_val(zone.r1_win)},
-    RExtRem=${def_val(zone.r_rest_ow)},
+    RWin=${def_val(zone.r1_win-R_zero(zone.alpha_comb_outer_win,zone.area_win))},
+    RExtRem=${def_val(zone.r_rest_ow-R_zero(zone.alpha_comb_outer_ow,zone.area_ow))},
     AFloor=${zone.area_gf},
     alphaFloor=${def_alpha(zone.alpha_conv_inner_gf)},
     nFloor=1,
@@ -54,7 +54,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     alphaRoof=${def_alpha(zone.alpha_conv_inner_rt)},
     nRoof=1,
     RRoof={${def_val(zone.r1_rt)}},
-    RRoofRem=${def_val(zone.r_rest_rt)},
+    RRoofRem=${def_val(zone.r_rest_rt-R_zero(zone.alpha_comb_outer_rt,zone.area_rt))},
     CRoof={${def_val(zone.c1_rt)}},
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     extWallRC(thermCapExt(each der_T(fixed=true))),
@@ -515,6 +515,17 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
      return_value = 0.00001
   else:
      return_value = value
+  return return_value
+  %>
+</%def>
+
+##Guarded calculation of resistance out of conductance and area
+<%def name="R_zero(cond, area)", filter="trim">
+  <%
+  if cond * area != 0:
+    return_value = 1/(cond*area)
+  else:
+    return_value = 0
   return return_value
   %>
 </%def>
