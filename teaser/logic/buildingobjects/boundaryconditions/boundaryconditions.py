@@ -10,10 +10,8 @@ import teaser.data.output.boundcond_output as boundcond_output
 import teaser.data.input.boundcond_input as boundcond_input
 
 
-
 class BoundaryConditions(UseConditions):
-
-    '''Use Conditions DIN 18599
+    """Use Conditions DIN 18599
 
     Class that contains the boundary conditions of use for non-residential
     buildings defined in DIN V 18599-10
@@ -205,11 +203,11 @@ class BoundaryConditions(UseConditions):
     winter_reduction : list
         reduction factor of userACH for cold weather with
         [infiltration_rate, Tmin, Tmax]
-    '''
+    """
 
     def __init__(self, parent=None):
-        '''Constructor UseConditions18599
-        '''
+        """Constructor UseConditions18599
+        """
 
         super(BoundaryConditions, self).__init__(parent)
 
@@ -259,8 +257,8 @@ class BoundaryConditions(UseConditions):
         self.activity_type_machines = 2
         self.ratio_conv_rad_machines = 0.5
         self._profile_machines = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.4,
-                                 0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
-                                 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+                                  0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
+                                  0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
         self._lighting_power = 15.9
         self._profile_lighting = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0,
                                   1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0,
@@ -279,7 +277,7 @@ class BoundaryConditions(UseConditions):
     def load_use_conditions(self,
                             zone_usage,
                             data_class=None):
-        '''load typical use conditions
+        """load typical use conditions
 
         loads Use conditions specified in the XML, according to 18599
 
@@ -294,7 +292,7 @@ class BoundaryConditions(UseConditions):
             but the user can individually change that. Default is
             self.parent.parent.parent.data (which is data_class in current
             project)
-        '''
+        """
 
         if data_class is None:
             data_class = self.parent.parent.parent.data
@@ -306,7 +304,7 @@ class BoundaryConditions(UseConditions):
                                                  data_class=data_class)
 
     def save_use_conditions(self, data_class):
-        '''Use conditions saver.
+        """Use conditions saver.
 
         Saves use conditions according to their usage type in the the XML file
         for use conditions in InputData. If the Project parent is set, it
@@ -323,7 +321,7 @@ class BoundaryConditions(UseConditions):
             but the user can individually change that.Default is
             self.parent.parent.parent.data (which is data_class in current
             project)
-        '''
+        """
 
         if data_class is None:
             data_class = self.parent.parent.parent.data
@@ -356,6 +354,7 @@ class BoundaryConditions(UseConditions):
             self.parent.typical_width = self._typical_width
 
         self._typical_width = value
+
     @property
     def profile_persons(self):
         return self._profile_persons
@@ -368,8 +367,8 @@ class BoundaryConditions(UseConditions):
         else:
             if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                               self.parent.parent.name +
-                                               ".mat")
+                                                          self.parent.parent.name +
+                                                          ".mat")
         self._profile_persons = value
 
     @property
@@ -384,8 +383,8 @@ class BoundaryConditions(UseConditions):
         else:
             if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                               self.parent.parent.name +
-                                               ".mat")
+                                                          self.parent.parent.name +
+                                                          ".mat")
         self._profile_machines = value
 
     @property
@@ -401,8 +400,8 @@ class BoundaryConditions(UseConditions):
         else:
             if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                               self.parent.parent.name +
-                                               ".mat")
+                                                          self.parent.parent.name +
+                                                          ".mat")
 
         self._profile_lighting = value
 
@@ -429,8 +428,8 @@ class BoundaryConditions(UseConditions):
             if self.parent is not None:
                 if self.parent.parent.file_set_t is None:
                     self.parent.parent.file_set_t = ("/TSet" +
-                                                   self.parent.parent.name +
-                                                   ".mat")
+                                                     self.parent.parent.name +
+                                                     ".mat")
             else:
                 pass
 
@@ -459,8 +458,8 @@ class BoundaryConditions(UseConditions):
             if self.parent is not None:
                 if self.parent.parent.file_set_t is None:
                     self.parent.parent.file_set_t = ("/TSet_" +
-                                                   self.parent.parent.name +
-                                                   ".mat")
+                                                     self.parent.parent.name +
+                                                     ".mat")
                 else:
                     pass
         self._set_temp_cool = value
@@ -500,6 +499,7 @@ class BoundaryConditions(UseConditions):
                 self._min_temp_heat = value
             except:
                 raise ValueError("Can't convert temperature to float")
+
     @property
     def max_temp_cool(self):
         return self._max_temp_cool
@@ -644,8 +644,8 @@ class BoundaryConditions(UseConditions):
         else:
             if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                               self.parent.parent.name +
-                                               ".mat")
+                                                          self.parent.parent.name +
+                                                          ".mat")
         self._persons = value
 
     @property
@@ -670,8 +670,8 @@ class BoundaryConditions(UseConditions):
         else:
             if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                               self.parent.parent.name +
-                                               ".mat")
+                                                          self.parent.parent.name +
+                                                          ".mat")
         self._machines = value
 
     @property
@@ -696,6 +696,6 @@ class BoundaryConditions(UseConditions):
         else:
             if self.parent.parent.file_internal_gains is None:
                 self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                               self.parent.parent.name +
-                                               ".mat")
+                                                          self.parent.parent.name +
+                                                          ".mat")
         self._lighting_power = value

@@ -7,15 +7,14 @@ from teaser.logic.buildingobjects.buildingphysics.wall \
 
 
 class OuterWall(Wall):
-    '''
+    """
     This class represents an outer wall and is a child of Wall()
-    '''
+    """
 
     def __init__(self, parent=None):
-        '''
-        '''
+        """
+        """
         super(OuterWall, self).__init__(parent)
-
 
         self._tilt = 90.0
         self._inner_convection = 2.7

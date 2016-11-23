@@ -2,14 +2,13 @@
 # by TEASER4 Development Team
 
 from teaser.logic.archetypebuildings.residential \
- import Residential
-
+    import Residential
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions as UseCond
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
-from teaser.logic.buildingobjects.buildingphysics.groundfloor\
- import GroundFloor
+from teaser.logic.buildingobjects.buildingphysics.groundfloor \
+    import GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
@@ -18,11 +17,11 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
 class SingleFamilyDwelling(Residential):
-    '''Type Building SingleFamilyDwelling.
+    """Type Building SingleFamilyDwelling.
 
-    Subclass from Building to represent SingleFamilyDwelling Buildings. Allows for
-    easier distinction between different building types and specific functions
-    and attributes.
+    Subclass from Building to represent SingleFamilyDwelling Buildings.
+    Allows for easier distinction between different building types and
+    specific functions and attributes.
 
     Parameters
     ----------
@@ -147,7 +146,7 @@ class SingleFamilyDwelling(Residential):
 
     est_factor_cellar_area : float
         estimation factor to calculate heated cellar area
-    '''
+    """
 
     def __init__(self,
                  parent,
@@ -164,12 +163,13 @@ class SingleFamilyDwelling(Residential):
                  dormer=None,
                  construction_type=None):
 
-        '''Constructor of SingleFamilyDwelling
+        """Constructor of SingleFamilyDwelling
 
 
-        '''
+        """
 
-        super(SingleFamilyDwelling, self).__init__(parent, name, year_of_construction,
+        super(SingleFamilyDwelling, self).__init__(parent, name,
+                                                   year_of_construction,
                                                    net_leased_area, with_ahu)
 
         self.residential_layout = residential_layout
@@ -288,57 +288,58 @@ class SingleFamilyDwelling(Residential):
             self._est_factor_dormer = 1.3
 
         if self.with_ahu is True:
-            self.central_ahu.profile_temperature = (7*[293.15] +
-                                                    12*[295.15] +
-                                                    6*[293.15])
-            self.central_ahu.profile_min_relative_humidity = (25*[0.45])
-            self.central_ahu.profile_max_relative_humidity = (25*[0.55])
-            self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] +  6*[0.0])
-
+            self.central_ahu.profile_temperature = (7 * [293.15] +
+                                                    12 * [295.15] +
+                                                    6 * [293.15])
+            self.central_ahu.profile_min_relative_humidity = (25 * [0.45])
+            self.central_ahu.profile_max_relative_humidity = (25 * [0.55])
+            self.central_ahu.profile_v_flow = (
+                7 * [0.0] + 12 * [1.0] + 6 * [0.0])
 
     def generate_archetype(self):
-        '''Generates a residential building.
+        """Generates a residential building.
 
         With given values, this class generates a type residential
         building according to TEASER requirements
         Berechnungsgrundlagen: IWU, "Kurzverfahren Energieprofil"; 2005.
 
-        '''
-        #help area for the correct building area setting while using typeBldgs
+        """
+        # help area for the correct building area setting while using typeBldgs
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
 
         self._number_of_heated_floors = self._est_factor_heated_cellar + \
-                    self.number_of_floors + self.est_living_area_factor\
-                     *self._est_factor_heated_attic
+            self.number_of_floors + self.est_living_area_factor \
+            * self._est_factor_heated_attic
 
         self._living_area_per_floor = type_bldg_area / \
-                self._number_of_heated_floors
+            self._number_of_heated_floors
 
         self._est_ground_floor_area = self.est_bottom_building_closure * \
-                    self._living_area_per_floor
+            self._living_area_per_floor
 
         self._est_roof_area = self.est_upper_building_closure * \
-                self._est_factor_dormer * self._est_area_per_floor * \
-                self._living_area_per_floor
+            self._est_factor_dormer * self._est_area_per_floor * \
+            self._living_area_per_floor
 
         self._top_floor_area = self._est_area_per_roof * \
-                self._living_area_per_floor
+            self._living_area_per_floor
 
         if self._est_roof_area == 0:
             self._est_roof_area = self._top_floor_area
 
         self._est_facade_area = self._est_facade_to_floor_area * \
-                self._living_area_per_floor + self._est_extra_floor_area
+            self._living_area_per_floor + self._est_extra_floor_area
 
         self._est_win_area = self.est_factor_win_area * type_bldg_area
 
         self._est_cellar_wall_area = self.est_factor_cellar_area * \
-                self._est_factor_heated_cellar * self._est_facade_area
+            self._est_factor_heated_cellar * self._est_facade_area
 
-        self._est_outer_wall_area = (self._number_of_heated_floors * \
-                self._est_facade_area) - self._est_cellar_wall_area - \
-                self._est_win_area
+        self._est_outer_wall_area = (self._number_of_heated_floors *
+                                     self._est_facade_area) - \
+            self._est_cellar_wall_area - \
+            self._est_win_area
 
         # self._est_factor_volume = type_bldg_area * 2.5
 
@@ -357,12 +358,12 @@ class SingleFamilyDwelling(Residential):
 
             if value[1] == 0 or value[1] == 180.0:
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                        self.nr_of_orientation
+                                            self.nr_of_orientation
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                        self.nr_of_orientation
+                                            self.nr_of_orientation
 
             for zone in self.thermal_zones:
                 # create wall and set building elements
@@ -380,12 +381,12 @@ class SingleFamilyDwelling(Residential):
             if value[1] == 0 or value[1] == 180:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                        self.nr_of_orientation
+                                             self.nr_of_orientation
 
             elif value[1] == 90 or value[1] == 270:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                        self.nr_of_orientation
+                                             self.nr_of_orientation
 
             '''
             There is no real classification for windows, so this is a bit hard
@@ -395,8 +396,9 @@ class SingleFamilyDwelling(Residential):
                 window = Window(zone)
 
                 window.load_type_element(self.year_of_construction,
-                                        "Kunststofffenster, Isolierverglasung",
-                                        data_class=self.parent.data)
+                                         "Kunststofffenster, "
+                                         "Isolierverglasung",
+                                         data_class=self.parent.data)
                 window.name = key
                 window.tilt = value[0]
                 window.orientation = value[1]
@@ -519,13 +521,15 @@ class SingleFamilyDwelling(Residential):
 
                         window = Window(zone)
                         window.load_type_element(self.year_of_construction,
-                                                "Kunststofffenster, Isolierverglasung",
+                                                 "Kunststofffenster, "
+                                                 "Isolierverglasung",
                                                  data_class=self.parent.data)
-                        window.name = "asd"+str(surface.surface_tilt)
+                        window.name = "asd" + str(surface.surface_tilt)
                         window.tilt = surface.surface_tilt
                         window.orientation = surface.surface_orientation
 
-                    elif surface.surface_tilt == 0 and surface.surface_orientation ==\
+                    elif surface.surface_tilt == 0 and \
+                        surface.surface_orientation == \
                             -2:
                         outer_wall = GroundFloor(zone)
                         outer_wall.load_type_element(
@@ -551,9 +555,9 @@ class SingleFamilyDwelling(Residential):
                 for zone in self.thermal_zones:
                     inner_wall = InnerWall(zone)
                     inner_wall.load_type_element(
-                            year=self.year_of_construction,
-                            construction=self.construction_type,
-                            data_class=self.parent.data)
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data)
                     inner_wall.name = key
                     inner_wall.tilt = value[0]
                     inner_wall.orientation = value[1]
@@ -588,17 +592,17 @@ class SingleFamilyDwelling(Residential):
 
         for surface in self.gml_surfaces:
             if surface.surface_tilt is not None:
-                if surface.surface_tilt != 0 and surface.surface_orientation !=\
-                        -2 and surface.surface_orientation != -1:
+                if surface.surface_tilt != 0 and surface.surface_orientation\
+                        != -2 and surface.surface_orientation != -1:
                     self.set_outer_wall_area(surface.surface_area *
-                                             (1- self.est_factor_win_area),
+                                             (1 - self.est_factor_win_area),
                                              surface.surface_orientation)
                 else:
                     self.set_outer_wall_area(surface.surface_area,
                                              surface.surface_orientation)
         for surface in self.gml_surfaces:
 
-            if surface.surface_tilt != 0 and surface.surface_orientation !=\
+            if surface.surface_tilt != 0 and surface.surface_orientation != \
                     -2 and surface.surface_orientation != -1:
                 self.set_window_area(surface.surface_area *
                                      self.est_factor_win_area,
