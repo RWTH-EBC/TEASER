@@ -353,7 +353,7 @@ class Office(NonResidential):
             for zone in self.thermal_zones:
                 window = Window(zone)
                 window.load_type_element(self.year_of_construction,
-                                         "Kunststofffenster,"
+                                         "Kunststofffenster, "
                                          "Isolierverglasung",
                                          data_class=self.parent.data)
                 window.name = key
