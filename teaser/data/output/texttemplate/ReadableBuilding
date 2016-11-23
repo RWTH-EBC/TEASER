@@ -49,7 +49,7 @@ number of thermal zones = ${get_number_of_zones(bldg.thermal_zones)} -
   * Inner Walls *
 
     inner wall area = ${round(zone.area_iw, 2)} m^2 (Ai)
-    inner wall's coefficient of heat transfer = ${zone.alpha_conv_iw} W/(m^2 K) (alphaiwi)
+    inner wall's coefficient of heat transfer = ${zone.alpha_conv_inner_iw} W/(m^2 K) (alphaiwi)
     inner walls functionality = ${on_off_checker(zone.inner_walls)} - (withInnerwalls)
     resistor 1 inner wall = ${zone.r1_iw} K/W (R1i)
     capacity 1 inner wall = ${zone.c1_iw} J/K  (C1i)

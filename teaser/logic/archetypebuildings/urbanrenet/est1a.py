@@ -77,7 +77,7 @@ class EST1a(Residential):
         """
 
         super(EST1a, self).__init__(parent, name, year_of_construction,
-                                    number_of_floors, with_ahu)
+                                    net_leased_area, with_ahu)
 
         self.neighbour_buildings = neighbour_buildings
         self.construction_type = construction_type
@@ -91,8 +91,8 @@ class EST1a(Residential):
         # [area factor, usage type(has to be set)]
         self.zone_area_factors = {}
         for value in range(1, self._number_of_apartments+1):
-            zone_name= "Apartment " + str(value)
-            zone={zone_name: [1/self._number_of_apartments, "Living"]}
+            zone_name = "Apartment " + str(value)
+            zone = {zone_name: [1/self._number_of_apartments, "Living"]}
             self.zone_area_factors.update(zone)
 
         self.outer_wall_names = {"Exterior Facade North": [90.0, 0.0],
@@ -162,14 +162,15 @@ class EST1a(Residential):
         self._est_roof_area = type_bldg_area / self.number_of_floors
 
         self._est_win_area = self.est_factor_win_area * type_bldg_area * \
-                             (1 - self._est_factor_neighbour / 4)
+            (1 - self._est_factor_neighbour / 4)
 
         self._est_outer_wall_area = (self.est_factor_facade_to_volume *
-            type_bldg_area *
-            self.height_of_floors -
-            self._est_ground_floor_area -
-            self._est_roof_area -
-            self._est_win_area)*(1 - self._est_factor_neighbour / 4)
+                                     type_bldg_area *
+                                     self.height_of_floors -
+                                     self._est_ground_floor_area -
+                                     self._est_roof_area -
+                                     self._est_win_area) *\
+            (1 - self._est_factor_neighbour / 4)
 
         for key, value in self.zone_area_factors.items():
             zone = ThermalZone(self)

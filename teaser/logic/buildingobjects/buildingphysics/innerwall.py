@@ -7,12 +7,12 @@ from teaser.logic.buildingobjects.buildingphysics.wall\
 
 
 class InnerWall(Wall):
-    '''This class represents an inner wall and is a child of Wall()
-    '''
+    """This class represents an inner wall and is a child of Wall()
+    """
 
     def __init__(self, parent=None):
-        '''
-        '''
+        """
+        """
         super(InnerWall, self).__init__(parent)
 
         self._tilt = 90.0

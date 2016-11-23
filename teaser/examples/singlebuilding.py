@@ -33,10 +33,10 @@ def example_create_building():
     specific building and all its future changes to the project.
     '''
     prj = Project(load_data=True)
+    prj.name = "SuperExampleBuilding"
     bldg = Building(parent=prj)
 
     '''Set some building parameters'''
-
     bldg.name = "SuperExampleBuilding"
     bldg.street_name = "Awesome Avenue 42"
     bldg.city = "46325 Fantastic Town"
@@ -75,8 +75,8 @@ def example_create_building():
 
     '''Set coefficient of heat transfer'''
     roof_south.inner_convection = 1.7
-    roof_south.outer_convection = 5.0
-    roof_south.inner_radiation = 20.0
+    roof_south.outer_convection = 20.0
+    roof_south.inner_radiation = 5.0
     roof_south.outer_radiation = 5.0
 
     '''Set layer and material'''
@@ -106,8 +106,8 @@ def example_create_building():
 
     '''Set coefficient of heat transfer'''
     roof_north.inner_convection = 1.7
-    roof_north.outer_convection = 5.0
-    roof_north.inner_radiation = 20.0
+    roof_north.outer_convection = 20.0
+    roof_north.inner_radiation = 5.0
     roof_north.outer_radiation = 5.0
 
     '''Set layer and material'''
@@ -263,12 +263,12 @@ def example_create_building():
     '''Or we use Annex60 method (e.g with four elements). Which exports one
     Model per zone'''
 
-    #prj.used_library_calc = 'Annex60'
-    #prj.number_of_elements_calc = 4
-    #prj.merge_windows_calc = False
-
-    #prj.calc_all_buildings()
-    #prj.export_annex()
+    # prj.used_library_calc = 'Annex60'
+    # prj.number_of_elements_calc = 4
+    # prj.merge_windows_calc = False
+    #
+    # prj.calc_all_buildings()
+    # prj.export_annex()
 
     '''
     Save new TEASER XML and cityGML

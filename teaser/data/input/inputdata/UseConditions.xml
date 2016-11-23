@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<UseConditions version="0.4">
+<UseConditions version="0.4" xmlns="http://teaser.boundary">
 	<BoundaryConditions>
 		<usage>Single office</usage>
 		<typical_length>3.0</typical_length>

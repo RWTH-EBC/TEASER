@@ -97,7 +97,10 @@ def load_gml(path, prj):
 def _set_attributes(bldg, gml_bldg):
     """tries to set attributes for type building generation
     """
-
+    try:
+        bldg.name = gml_bldg.name[0].value()
+    except:
+        pass
     try:
         bldg.number_of_floors = gml_bldg.storeysAboveGround
     except:
