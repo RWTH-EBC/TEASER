@@ -201,7 +201,7 @@ end ${bldg.name};
   Modelica.Blocks.Sources.CombiTimeTable tableTSet(
     tableOnFile=true,
     tableName="Tset",
-    extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     columns=2:${get_n(bldg.thermal_zones)+1},
     fileName=Modelica.Utilities.Files.loadResource(
         "modelica://${mod_prj}/${bldg.name}/${bldg.file_set_t}"))
