@@ -169,14 +169,22 @@ def modelica_set_temp(bldg, path = None):
     path = path + bldg.file_set_t
 
     t_set_heat = [0]
-
+    time_line = create_timeline(bldg)
     for zone_count in bldg.thermal_zones:
-        t_set_heat.append(zone_count.use_conditions.set_temp_heat)
+        for i, time in enumerate(time_line):
+            if time[0] < zone_count.use_conditions.heating_time[0] * 3600:
+                time.append(zone_count.use_conditions.set_temp_heat - zone_count
+                            .use_conditions.temp_set_back)
+            elif time[0] > zone_count.use_conditions.heating_time[1] * 3600:
+                time.append(zone_count.use_conditions.set_temp_heat - zone_count
+                            .use_conditions.temp_set_back)
+            else:
+                time.append(zone_count.use_conditions.set_temp_heat)
 
     scipy.io.savemat(path,
-                     mdict={'Tset': [t_set_heat]},
-                     appendmat = False,
-                     format = '4')
+                     mdict={'Tset': time_line},
+                     appendmat=False,
+                     format='4')
 
 
 def modelica_AHU_boundary(bldg,
