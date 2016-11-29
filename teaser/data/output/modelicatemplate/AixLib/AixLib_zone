@@ -34,7 +34,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     UWin = ${zone.ua_value_win/zone.area_win},
     alphaConvWinInner = ${zone.alpha_conv_inner_win},
     alphaConvWinOuter = ${zone.alpha_conv_outer_win},
-    Ao = ${zone.area_ow+sum(zone.window_area_list)},
+    Ao = ${zone.area_ow+zone.area_win},
     withOuterwalls = ${element_check(zone.outer_walls)},
     R1o = ${zone.r1_ow},
     RRest = ${zone.r_rest_ow},

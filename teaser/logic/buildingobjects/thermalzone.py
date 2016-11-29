@@ -1024,8 +1024,10 @@ class ThermalZone(object):
             sum_r_rad_outer_win += 1/ win.r_outer_rad
             sum_r_comb_outer_win += 1/ win.r_outer_comb
             sum_g_value += win.g_value * win.area
-            sum_solar_absorp_win += win.layer[-1].material.solar_absorp
-            sum_ir_emissivity_win += win.layer[-1].material.ir_emissivity
+            sum_solar_absorp_win += win.layer[-1].material.solar_absorp * \
+                                    win.area
+            sum_ir_emissivity_win += win.layer[-1].material.ir_emissivity * \
+                                     win.area
 
         self.r_conv_inner_win = 1 / sum_r_conv_inner_win
         self.r_rad_inner_win = 1 / sum_r_rad_inner_win
