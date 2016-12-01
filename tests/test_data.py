@@ -969,8 +969,17 @@ class Test_teaser(object):
         assert round(therm_zone.alpha_rad_inner_ow, 1) == 5.0
         assert round(therm_zone.r1_win, 1) == 301.5
         assert round(therm_zone.r1_ow, 15) == 0.000772773294534
+        assert round(therm_zone.c1_ow, 5) == 3648580.59312
         assert round(therm_zone.r1_iw, 15) == 0.009719561140816
+        assert round(therm_zone.c1_iw, 6) == 319983.518743
         assert round(therm_zone.r_rest_ow, 15) == 0.004740706924836
+        assert round(therm_zone.r_total_ow, 15) == 0.005936098763872
+        assert round(therm_zone.r_rad_ow_iw, 15) == 0.000578034682081
+        assert round(therm_zone.ir_emissivity_outer_ow, 15) == 0.834466019417476
+        assert round(therm_zone.ir_emissivity_inner_ow, 15) == 0.860982658959538
+        assert round(therm_zone.ir_emissivity_win, 2) == 0.15
+        assert round(therm_zone.solar_absorp_ow, 1) == 0.7
+        assert round(therm_zone.solar_absorp_win, 1) == 0.0
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.calc_zone_parameters(number_of_elements=2,
@@ -985,8 +994,17 @@ class Test_teaser(object):
         assert round(therm_zone.alpha_rad_inner_ow, 1) == 5.0
         assert round(therm_zone.r1_win, 15) == 0.02212271973466
         assert round(therm_zone.r1_ow, 15) == 0.001007515484109
+        assert round(therm_zone.c1_ow, 5) == 3648580.59312
         assert round(therm_zone.r1_iw, 15) == 0.009719561140816
+        assert round(therm_zone.c1_iw, 6) == 319983.518743
         assert round(therm_zone.r_rest_ow, 15) == 0.005922787404456
+        assert round(therm_zone.r_total_ow, 15) == 0.007375618171785
+        assert round(therm_zone.r_rad_ow_iw, 15) == 0.000609756097561
+        assert round(therm_zone.ir_emissivity_outer_ow, 2) == 0.9
+        assert round(therm_zone.ir_emissivity_inner_ow, 2) == 0.9
+        assert round(therm_zone.ir_emissivity_win, 2) == 0.15
+        assert round(therm_zone.solar_absorp_ow, 1) == 0.7
+        assert round(therm_zone.solar_absorp_win, 1) == 0.0
 
 
     def test_volume_zone(self):
