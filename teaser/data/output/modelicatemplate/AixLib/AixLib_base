@@ -12,10 +12,9 @@ record ${bldg.name}_base "${bldg.name}_base"
 		%endif
 		%endfor
 		},
-    Vair = ${bldg.volume} ,
-    BuildingArea = ${bldg.net_leased_area}
+    Vair = ${bldg.volume},
+    BuildingArea = ${bldg.net_leased_area},
 % if central_ahu:
-	,	
 	heatingAHU = ${get_true_false(central_ahu.heating)},
 	coolingAHU = ${get_true_false(central_ahu.cooling)},
 	dehumidificationAHU = ${get_true_false(central_ahu.dehumidification)},
@@ -25,7 +24,6 @@ record ${bldg.name}_base "${bldg.name}_base"
 	efficiencyHRS_enabled = ${central_ahu.efficiency_recovery},
 	efficiencyHRS_disabled = ${central_ahu.efficiency_revocery_false}
 % else:
-	,
 	heatingAHU = false,
 	coolingAHU = false,
 	dehumidificationAHU = false,

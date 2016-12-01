@@ -1140,7 +1140,6 @@ class Test_teaser(object):
                                   exp_bldg.name + '_Office.mo')
         templ = open(templ_path)
 
-
         template_values = {
             'n': '5',
             'Heater_on': 'true',
@@ -1163,8 +1162,15 @@ class Test_teaser(object):
             'Aw': '{78.82297995123126, 13.900261160095392, 78.82297995123126, '
                   '13.900261160095392, 0.0}',
             'withWindows': 'true',
-            'weightfactorswindow': '{0.17413588926545887, 0.030708485515682657, 0.17413588926545887, 0.030708485515682657, 0.0}',
-            'weightfactorswall': '{0.09119964920944966, 0.01608285987797947, 0.09119964920944966, 0.01608285987797947, 0.13872297063062167}',
+            'weightfactorswindow': '{0.17413588926545887, '
+                                   '0.030708485515682657, '
+                                   '0.17413588926545887, '
+                                   '0.030708485515682657, 0.0}',
+            'weightfactorswall': '{0.09119964920944966, '
+                                 '0.01608285987797947, '
+                                 '0.09119964920944966, '
+                                 '0.01608285987797947, '
+                                 '0.13872297063062167}',
             'weightfactorground': '0.23702326163223703',
             'orientationswallshorizontal': '{90.0, 90.0, 90.0, 90.0, 0.0}',
             'withInnerwalls': 'true',
@@ -1203,6 +1209,70 @@ class Test_teaser(object):
             'withAHU': 'false',
             'minAHU': '0.0',
             'maxAHU': '2.6'}
+
+        for line in templ.readlines():
+            value_start = '= '
+            value_end = ','
+            value = re.search('%s(.*)%s' % (value_start, value_end), line)
+
+            if value is not None:
+                value = value.group(1)
+
+            variable_start = '    '
+            variable_end = ' ='
+            variable = re.search('%s(.*)%s' % (variable_start, variable_end),
+                                 line)
+
+            if variable is not None:
+                variable = variable.group(1)
+
+            if value is not None and variable is not None:
+                print(template_values[variable], value)
+                assert (template_values[variable]) == value
+
+    def test_aix_lib_base(self):
+        """compares parameters in the template AixLib_base with given results"""
+        exp_prj = Project()
+        exp_prj.name = "AixLib_2_False"
+        exp_bldg = exp_prj.type_bldg_office(
+            name="UnitTest",
+            year_of_construction=1988,
+            number_of_floors=3,
+            height_of_floors=3,
+            net_leased_area=2500)
+        exp_prj.number_of_elements_calc = 2
+        exp_prj.merge_windows_calc = True
+        exp_prj.used_library_calc = 'AixLib'
+        exp_prj.calc_all_buildings()
+        exp_prj.export_aixlib(
+            building_model="MultizoneEquipped",
+            zone_model="ThermalZoneEquipped",
+            corG=True,
+            internal_id=None,
+            path=None)
+
+        templ_path = os.path.join(os.path.expanduser('~'),
+                                  ("TEASEROutput"),
+                                  "AixLib_2_False",
+                                  "UnitTest",
+                                  "UnitTest" + '_DataBase',
+                                  "UnitTest" + '_base.mo')
+
+        templ = open(templ_path)
+
+        template_values = {
+            'numZones': '6',
+            'buildingID': '0',
+            'Vair': '7500.0',
+            'BuildingArea': '2500.0',
+            'heatingAHU': 'true',
+            'coolingAHU': 'true',
+            'dehumidificationAHU': 'true',
+            'humidificationAHU': 'true',
+            'BPF_DeHu': '0.2',
+            'HRS': 'true',
+            'efficiencyHRS_enabled': '0.8',
+            'efficiencyHRS_disabled': '0.2'}
 
         for line in templ.readlines():
             value_start = '= '
