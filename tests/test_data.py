@@ -854,6 +854,9 @@ class Test_teaser(object):
         assert round(therm_zone.alpha_conv_outer_ow, 1) == 20.0
         assert round(therm_zone.alpha_rad_outer_ow, 5) == 5.0
         assert round(therm_zone.alpha_comb_outer_ow, 1) == 25.0
+        assert round(therm_zone.ir_emissivity_inner_ow, 1) == 0.9
+        assert round(therm_zone.ir_emissivity_outer_ow, 1) == 0.9
+        assert round(therm_zone.solar_absorp_ow, 1) == 0.7
 
         # groundfloor
         assert round(therm_zone.ua_value_gf, 16) == 58.351477449455686
@@ -864,6 +867,7 @@ class Test_teaser(object):
         assert round(therm_zone.alpha_conv_inner_gf, 5) == 1.7
         assert round(therm_zone.alpha_rad_inner_gf, 5) == 5.0
         assert round(therm_zone.alpha_comb_inner_gf, 5) == 6.7
+        assert round(therm_zone.ir_emissivity_inner_gf, 1) == 0.9
 
         # outerwall
         assert round(therm_zone.ua_value_rt, 16) == 57.394603194028036
@@ -880,6 +884,9 @@ class Test_teaser(object):
         assert round(therm_zone.alpha_conv_outer_rt, 1) == 20.0
         assert round(therm_zone.alpha_rad_outer_rt, 5) == 5.0
         assert round(therm_zone.alpha_comb_outer_rt, 1) == 25.0
+        assert round(therm_zone.ir_emissivity_inner_rt, 1) == 0.9
+        assert round(therm_zone.ir_emissivity_outer_rt, 1) == 0.9
+        assert round(therm_zone.solar_absorp_rt, 1) == 0.7
 
         #window
         assert round(therm_zone.ua_value_win, 16) == 32.87895310796074
@@ -894,6 +901,8 @@ class Test_teaser(object):
         assert round(therm_zone.alpha_comb_outer_win, 1) == 25.0
         assert round(therm_zone.alpha_conv_outer_win, 1) == 20.0
         assert round(therm_zone.weighted_g_value, 3) == 0.789
+        assert round(therm_zone.ir_emissivity_win, 2) == 0.15
+        assert round(therm_zone.solar_absorp_win, 1) == 0.0
 
     def test_calc_chain_matrix(self):
         '''test of calc_chain_matrix'''
@@ -1005,7 +1014,6 @@ class Test_teaser(object):
         assert round(therm_zone.ir_emissivity_win, 2) == 0.15
         assert round(therm_zone.solar_absorp_ow, 1) == 0.7
         assert round(therm_zone.solar_absorp_win, 1) == 0.0
-
 
     def test_volume_zone(self):
         '''test of volume_zone'''
