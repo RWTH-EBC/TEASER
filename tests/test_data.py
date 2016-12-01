@@ -7,6 +7,8 @@ Created July 2015
 from teaser.logic import utilities
 from teaser.project import Project
 import math
+import os
+import re
 
 import helptest
 prj = Project(True)
@@ -1108,3 +1110,116 @@ class Test_teaser(object):
         therm_zone.windows[0].calc_equivalent_res()
 
         assert round(therm_zone.windows[0].r1, 3) == 0.072
+
+    def test_aix_lib_zone(self):
+        """compares parameters in the template AixLib_zone with given results"""
+        exp_prj = Project()
+        exp_prj.name = "AixLib_2_False"
+        exp_bldg = exp_prj.type_bldg_office(
+            name="UnitTest",
+            year_of_construction=1988,
+            number_of_floors=3,
+            height_of_floors=3,
+            net_leased_area=2500)
+        exp_prj.number_of_elements_calc = 2
+        exp_prj.merge_windows_calc = True
+        exp_prj.used_library_calc = 'AixLib'
+        exp_prj.calc_all_buildings()
+        exp_prj.export_aixlib(
+            building_model="MultizoneEquipped",
+            zone_model="ThermalZoneEquipped",
+            corG=True,
+            internal_id=None,
+            path=None)
+
+        templ_path = os.path.join(os.path.expanduser('~'),
+                                  ("TEASEROutput"),
+                                  exp_prj.name,
+                                  exp_bldg.name,
+                                  exp_bldg.name + '_DataBase',
+                                  exp_bldg.name + '_Office.mo')
+        templ = open(templ_path)
+
+
+        template_values = {
+            'n': '5',
+            'Heater_on': 'true',
+            'Cooler_on': 'false',
+            'l_cooler': '0.0',
+            'RatioConvectiveHeatLighting': '0.9',
+            'zoneID': '"Office"',
+            'usage': '"Group Office (between 2 and 6 employees)"',
+            'RoomArea': '1250.0',
+            'Vair': '3750.0',
+            'alphaiwi': '2.229411764705883',
+            'alphaowi': '2.049244822312838',
+            'alphaowo': '24.999999999999996',
+            'g': '0.7799999999999999',
+            'NrPeople': '62.5',
+            'NrPeopleMachines': '87.5',
+            'LightingPower': '12.5',
+            'h_heater': '118630.4177767396',
+            'gsunblind': '{1.0, 1.0, 1.0, 1.0, 0.0}',
+            'Aw': '{78.82297995123126, 13.900261160095392, 78.82297995123126, '
+                  '13.900261160095392, 0.0}',
+            'withWindows': 'true',
+            'weightfactorswindow': '{0.17413588926545887, 0.030708485515682657, 0.17413588926545887, 0.030708485515682657, 0.0}',
+            'weightfactorswall': '{0.09119964920944966, 0.01608285987797947, 0.09119964920944966, 0.01608285987797947, 0.13872297063062167}',
+            'weightfactorground': '0.23702326163223703',
+            'orientationswallshorizontal': '{90.0, 90.0, 90.0, 90.0, 0.0}',
+            'withInnerwalls': 'true',
+            'Ai': '3541.666666666666',
+            'R1i': '1.10334214274e-05',
+            'C1i': '508884661.836',
+            'RWin': '6815.15822168',
+            'UWin': '3.0017821341055915',
+            'alphaConvWinInner': '2.6999999999999997',
+            'alphaConvWinOuter': '19.999999999999996',
+            'Ao': '1472.648034456413',
+            'withOuterwalls': 'true',
+            'R1o': '1.64408968896e-05',
+            'RRest': '0.000634841377589',
+            'C1o': '426410201.915',
+            'ActivityTypePeople': '3',
+            'RatioConvectiveHeatPeople': '0.5',
+            'ActivityTypeMachines': '2',
+            'RatioConvectiveHeatMachines': '0.5',
+            'rhoair': '1.19',
+            'temperatureground': '286.15',
+            'Imax': '100.0',
+            'cair': '1007',
+            'splitfac': '0.03',
+            'epso': '0.7614827582547394',
+            'epsi': '0.8015123490502466',
+            'epsw': '0.019412608731384392',
+            'awin': '0.0',
+            'aowo': '0.6217098083070355',
+            'useConstantACHrate': 'false',
+            'baseACH': '0.2',
+            'maxUserACH': '1.0',
+            'maxOverheatingACH': '{3.0, 2.0}',
+            'maxSummerACH': '{1.0, 283.15, 290.15}',
+            'winterReduction': '{0.2, 273.15, 283.15}',
+            'withAHU': 'false',
+            'minAHU': '0.0',
+            'maxAHU': '2.6'}
+
+        for line in templ.readlines():
+            value_start = '= '
+            value_end = ','
+            value = re.search('%s(.*)%s' % (value_start, value_end), line)
+
+            if value is not None:
+                value = value.group(1)
+
+            variable_start = '    '
+            variable_end = ' ='
+            variable = re.search('%s(.*)%s' % (variable_start, variable_end),
+                                 line)
+
+            if variable is not None:
+                variable = variable.group(1)
+
+            if value is not None and variable is not None:
+                print(template_values[variable], value)
+                assert (template_values[variable]) == value
