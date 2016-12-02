@@ -36,6 +36,8 @@ model ${bldg.name}
     annotation (Placement(transformation(extent={{-26,-14},{28,36}})));
 
   AixLib.Building.Components.Weather.Weather weather(
+    redeclare model RadOnTiltedSurface =
+        AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez,
     Outopt=1,
     Air_temp=true,
     Mass_frac=true,
@@ -173,6 +175,8 @@ end ${bldg.name};
     annotation (Placement(transformation(extent={{-26,-14},{28,36}})));
 
   AixLib.Building.Components.Weather.Weather weather(
+    redeclare model RadOnTiltedSurface =
+        AixLib.Building.Components.Weather.RadiationOnTiltedSurface.RadOnTiltedSurf_Perez,
     Outopt=1,
     Air_temp=true,
     Mass_frac=true,
