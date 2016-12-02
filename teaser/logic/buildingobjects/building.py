@@ -208,8 +208,7 @@ class Building(object):
                     0.0:
                 return surface.surface_area
 
-    def set_gml_attributes(self,
-                           height_of_floor=3.5):
+    def set_gml_attributes(self, height_of_floor=3.5):
         """Sets building attributes from CityGML data
 
         Computes the net_leased_area depending on the footprint area,
@@ -221,7 +220,6 @@ class Building(object):
 
         Parameters
         ----------
-
         height_of_floor : float
             average height of each floor of the building, the default value
             is 3.5 and is absolutely random.
@@ -255,9 +253,10 @@ class Building(object):
             if self.net_leased_area < 50.0:
                 self.net_leased_area = 50.0
 
-    def set_outer_wall_area(self,
-                            new_area,
-                            orientation):
+    def set_outer_wall_area(
+            self,
+            new_area,
+            orientation):
         """Outer area wall setter
 
         sets the outer wall area of all walls of one direction and weights
@@ -283,8 +282,10 @@ class Building(object):
                 if ground.orientation == orientation:
                     ground.area = ((new_area / self.net_leased_area) * zone.area)
 
-
-    def set_window_area(self, new_area, orientation):
+    def set_window_area(
+            self,
+            new_area,
+            orientation):
         """Window area setter
 
         sets the window area of all windows of one direction and weights
@@ -382,10 +383,11 @@ class Building(object):
         return sum_area
 
     #TODO is this function needed at all?
-    def set_specific_wall_area(self,
-                               spec_zone,
-                               spec_wall,
-                               new_area):
+    def set_specific_wall_area(
+            self,
+            spec_zone,
+            spec_wall,
+            new_area):
         """Set one specific wall area
 
         sets the area of a specific wall in a specific zone and weights the
@@ -456,10 +458,11 @@ class Building(object):
             self.window_area[key] = self.get_window_area(key)
 
     #TODO implement AixLib and Annex Classes (similar to thermal zone)
-    def calc_building_parameter(self,
-                                number_of_elements=2,
-                                merge_windows=False,
-                                used_library='AixLib'):
+    def calc_building_parameter(
+            self,
+            number_of_elements=2,
+            merge_windows=False,
+            used_library='AixLib'):
         """calc all building parameters
 
         This functions calculates the parameters of all zones in a building
