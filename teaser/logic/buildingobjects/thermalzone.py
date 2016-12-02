@@ -154,8 +154,6 @@ class ThermalZone(object):
             pass
         self.calc_heat_load(number_of_elements=number_of_elements)
 
-
-
     def find_walls(self, orientation, tilt):
         """
         this function returns a list of all wall elemnts with the same
@@ -176,6 +174,20 @@ class ThermalZone(object):
         """
         located = []
         for i in self.rooftops:
+            if i.orientation == orientation and i.tilt == tilt:
+                located.append(i)
+            else:
+                pass
+        return located
+
+
+    def find_gfs(self, orientation, tilt):
+        """
+        this function returns a list of all wall elemnts with the same
+        orientation and tilt to sum them in the building
+        """
+        located = []
+        for i in self.ground_floors:
             if i.orientation == orientation and i.tilt == tilt:
                 located.append(i)
             else:

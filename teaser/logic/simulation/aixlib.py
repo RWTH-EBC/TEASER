@@ -59,7 +59,7 @@ def compare_orientation(bldg):
 
     for zone in bldg.thermal_zones:
 
-        groundfloors = zone.find_walls(-2, 0)
+        groundfloors = zone.find_gfs(-2, 0)
         if groundfloors == []:
             zone.calc_attr.weightfactor_ground.append(0.0)
         else:
