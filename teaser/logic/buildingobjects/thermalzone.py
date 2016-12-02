@@ -218,21 +218,22 @@ class ThermalZone(object):
 
         assert self.parent is not None, ass_error_1
 
+        for floor in self.floors:
+            floor.area = ((self.parent.number_of_floors - 1) /
+                         self.parent.number_of_floors) * self.area
+        for ceiling in self.ceilings:
+            ceiling.area = ((self.parent.number_of_floors - 1) /
+                          self.parent.number_of_floors) * self.area
+
         for wall in self.inner_walls:
-            if type(wall).__name__ == "Ceiling" \
-                    or type(wall).__name__ == "Floor":
+            typical_area = self.typical_length * self.typical_width
 
-                wall.area = ((self.parent.number_of_floors - 1) /
-                             self.parent.number_of_floors) * self.area
-            else:
-                typical_area = self.typical_length * self.typical_width
+            avg_room_nr = self.area / typical_area
 
-                avg_room_nr = self.area / typical_area
-
-                wall.area = (avg_room_nr * (self.typical_length *
-                                            self.parent.height_of_floors +
-                                            2 * self.typical_width *
-                                            self.parent.height_of_floors))
+            wall.area = (avg_room_nr * (self.typical_length *
+                                        self.parent.height_of_floors +
+                                        2 * self.typical_width *
+                                        self.parent.height_of_floors))
 
     def set_volume_zone(self):
         """Sets the zone volume.

@@ -245,6 +245,13 @@ class Building(object):
             for wall in zone.outer_walls:
                 if wall.orientation == orientation:
                     wall.area = ((new_area / self.net_leased_area) * zone.area)
+            for roof in zone.rooftops:
+                if roof.orientation == orientation:
+                    roof.area = ((new_area / self.net_leased_area) * zone.area)
+            for ground in zone.ground_floors:
+                if ground.orientation == orientation:
+                    ground.area = ((new_area / self.net_leased_area) * zone.area)
+
 
     def set_window_area(self, new_area, orientation):
         """Window area setter
@@ -290,6 +297,14 @@ class Building(object):
                 if wall_count.orientation == orientation and\
                         wall_count.area is not None:
                     sum_area += wall_count.area
+            for roof_count in zone_count.rooftops:
+                if roof_count.orientation == orientation and \
+                        roof_count.area is not None:
+                    sum_area += roof_count.area
+            for ground_count in zone_count.ground_floors:
+                if ground_count.orientation == orientation and \
+                        ground_count.area is not None:
+                    sum_area += ground_count.area
         return sum_area
 
     def get_window_area(self, orientation):
