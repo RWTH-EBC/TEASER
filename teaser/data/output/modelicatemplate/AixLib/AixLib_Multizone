@@ -179,8 +179,8 @@ end ${bldg.name};
     effFanAHU_eta=0.7,
     effHRSAHU_enabled=${bldg.central_ahu.efficiency_recovery},
     effHRSAHU_disabled=${bldg.central_ahu.efficiency_revocery_false},
-    dpAHU_sup=80000000,
-    dpAHU_eta=80000000
+    dpAHU_sup=800,
+    dpAHU_eta=800
 % else:
 	,
 	heatAHU = false,
@@ -194,8 +194,8 @@ end ${bldg.name};
     effFanAHU_eta=0.7,
 	effHRSAHU_enabled = 0.8,
 	effHRSAHU_disabled = 0.2,
-	dpAHU_sup=80000000,
-    dpAHU_eta=80000000
+	dpAHU_sup=800,
+    dpAHU_eta=800
 % endif
 % if zone == "ThermalZone":
     ,
