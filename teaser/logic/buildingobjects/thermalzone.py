@@ -6,7 +6,7 @@ import math
 import random
 import warnings
 import re
-
+from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 
 class ThermalZone(object):
     """This class represents a Thermal Zone in a building
@@ -98,7 +98,7 @@ class ThermalZone(object):
 
         self.parent = parent
         self.internal_id = random.random()
-        self.calc_attr =
+        self.calc_attr = None
         self.name = None
         self._area = None
         self._volume = None
@@ -150,46 +150,20 @@ class ThermalZone(object):
             Time constant according to VDI 6007 (default t_bt = 5)
         """
 
-        self.set_calc_default()
-
-        if len(self.outer_walls) > 0:
-            for out_wall in self.outer_walls:
-                out_wall.calc_equivalent_res()
-                out_wall.calc_ua_value()
-        else:
-            warnings.warn("No outer walls are defined, this will cause you a "
-                          "lot of troubles")
-
-        if len(self.inner_walls) > 0:
-            for in_wall in self.inner_walls:
-                in_wall.calc_equivalent_res()
-                in_wall.calc_ua_value()
-        else:
-            warnings.warn("No inner walls are defined")
-
-        if len(self.windows) > 0:
-            for win in self.windows:
-                win.calc_equivalent_res()
-                win.calc_ua_value()
-        else:
-            warnings.warn("No window are defined, this may eventually cause "
-                          "you some troubles")
-
-        self.sum_building_elements()
         if number_of_elements == 1:
-            self.calc_one_element(merge_windows=merge_windows, t_bt=t_bt)
-            self.calc_wf_one_element(merge_windows=merge_windows)
+            pass
         elif number_of_elements == 2:
-            self.calc_two_element(merge_windows=merge_windows, t_bt=t_bt)
-            self.calc_wf_two_element(merge_windows=merge_windows)
+            self.calc_attr = TwoElement(
+                thermal_zone=self,
+                merge_windows=merge_windows,
+                t_bt=t_bt)
         elif number_of_elements == 3:
-            self.calc_three_element(merge_windows=merge_windows, t_bt=t_bt)
-            self.calc_wf_three_element(merge_windows=merge_windows)
+            pass
         elif number_of_elements == 4:
-            self.calc_four_element(merge_windows=merge_windows, t_bt=t_bt)
-            self.calc_wf_four_element(merge_windows=merge_windows)
-
+            pass
         self.calc_heat_load(number_of_elements=number_of_elements)
+
+
 
     def find_walls(self, orientation, tilt):
         """

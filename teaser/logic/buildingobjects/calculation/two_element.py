@@ -706,13 +706,20 @@ class TwoElement(object):
                        self.thermal_zone.ground_floors +
                        self.thermal_zone.rooftops)
 
+        for out_wall in outer_walls:
+            out_wall.calc_equivalent_res()
+            out_wall.calc_ua_value()
+        for win in self.thermal_zone.windows:
+            win.calc_equivalent_res()
+            win.calc_ua_value()
+
         if 0 < len(outer_walls) <= 1:
             # only one outer wall, no need to calculate chain matrix
             self.r1_ow = outer_walls[0].r1
             self.c1_ow = outer_walls[0].c1_korr
         elif len(outer_walls) > 1:
             # more than one outer wall, calculate chain matrix
-            self.r1_ow, self.c1_ow = self.calc_chain_matrix(outer_walls,
+            self.r1_ow, self.c1_ow = self._calc_chain_matrix(outer_walls,
                                                             omega)
         else:
             warnings.warn("No walls are defined as outer walls, please be "
@@ -794,14 +801,19 @@ class TwoElement(object):
                        self.thermal_zone.floors +
                        self.thermal_zone.ceilings)
 
+        for in_wall in inner_walls:
+            in_wall.calc_equivalent_res()
+            in_wall.calc_ua_value()
+
         if 0 < len(inner_walls) <= 1:
             # only one outer wall, no need to calculate chain matrix
             self.r1_1w = inner_walls[0].r1
             self.c1_1w = inner_walls[0].c1_korr
         elif len(inner_walls) > 1:
             # more than one outer wall, calculate chain matrix
-            self.r1_1w, self.c1_1w = self.calc_chain_matrix(inner_walls,
-                                                            omega)
+            self.r1_1w, self.c1_1w = self._calc_chain_matrix(
+                inner_walls,
+                omega)
         else:
             warnings.warn("No walls are defined as outer walls, please be "
                           "careful with results. In addition this might lead "
