@@ -383,39 +383,7 @@ class BuildingElement(object):
             except ValueError:
                 print("Can't convert name to string")
 
-    @property
-    def parent(self):
-        return self.__parent
 
-    @parent.setter
-    def parent(self, value):
-        if value is not None:
-
-            ass_error_1 = "Parent has to be an instance of ThermalZone()"
-
-            assert type(value).__name__ == "ThermalZone", ass_error_1
-
-            self.__parent = value
-
-            if type(self).__name__ == "OuterWall" \
-                    or type(self).__name__ == "Rooftop" \
-                    or type(self).__name__ == "GroundFloor":
-                self.__parent.outer_walls.append(self)
-            if type(self).__name__ == "InnerWall" \
-                    or type(self).__name__ == "Ceiling" \
-                    or type(self).__name__ == "Floor":
-                self.__parent.inner_walls.append(self)
-            if type(self).__name__ == "Window":
-                self.__parent.windows.append(self)
-
-            if self.parent.parent is not None:
-                self.year_of_construction = \
-                    self.parent.parent.year_of_construction
-            else:
-                pass
-        else:
-
-            self.__parent = None
 
     @property
     def year_of_retrofit(self):

@@ -89,6 +89,34 @@ class Window(BuildingElement):
                                self.parent.parent.parent.data)
 
     @property
+    def parent(self):
+        return self.__parent
+
+    @parent.setter
+    def parent(self, value):
+        if value is not None:
+
+            ass_error_1 = "Parent has to be an instance of ThermalZone()"
+
+            assert type(value).__name__ == "ThermalZone", ass_error_1
+
+            self.__parent = value
+
+            if type(self).__name__ == "Window":
+                self.__parent.windows.append(self)
+            else:
+                raise ValueError('Instance of Window not known')
+
+            if self.parent.parent is not None:
+                self.year_of_construction = \
+                    self.parent.parent.year_of_construction
+            else:
+                pass
+        else:
+
+            self.__parent = None
+
+    @property
     def g_value(self):
         return self._g_value
 
