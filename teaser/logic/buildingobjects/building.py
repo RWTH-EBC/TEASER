@@ -400,6 +400,10 @@ class Building(object):
         for zone_count in self.thermal_zones:
             for wall_count in zone_count.outer_walls:
                 self.outer_area[wall_count.orientation] = None
+            for roof in zone_count.rooftops:
+                self.outer_area[roof.orientation] = None
+            for ground in zone_count.ground_floors:
+                self.outer_area[ground.orientation] = None
 
         for key in self.outer_area:
             self.outer_area[key] = self.get_outer_wall_area(key)
