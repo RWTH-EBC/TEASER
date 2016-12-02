@@ -31,7 +31,7 @@ def compare_orientation(bldg):
     bldg.tilt_bldg = []
 
     for zone in bldg.thermal_zones:
-        for wall in zone.outer_walls:
+        for wall in zone.outer_walls+zone.rooftops:
             if wall.orientation != -2:
                 orient_tilt_help.append([wall.orientation, wall.tilt])
             else:
@@ -67,7 +67,7 @@ def compare_orientation(bldg):
                 sum([groundfl.wf_out for groundfl in groundfloors]))
 
         for i in bldg.orient_tilt:
-            walls = zone.find_walls(i[0], i[1])
+            walls = zone.find_walls(i[0], i[1]) + zone.find_rts(i[0], i[1])
             wins = zone.find_wins(i[0], i[1])
 
 

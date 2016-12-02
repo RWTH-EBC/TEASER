@@ -338,8 +338,7 @@ class TwoElement(object):
         self.r1_win = 0.0
 
         # Optical properties
-        self.ir_emissivity_outer_win = 0.0
-        self.ir_emissivity_inner_win = 0.0
+        self.ir_emissivity_win = 0.0
         self.solar_absorp_win = 0.0
 
         # Additional attributes
@@ -364,7 +363,7 @@ class TwoElement(object):
             win.calc_ua_value()
 
 
-
+        self.set_calc_default()
         self._sum_outer_wall_elements()
         self._sum_inner_wall_elements()
         self._sum_window_elements()
@@ -475,7 +474,7 @@ class TwoElement(object):
                    self.thermal_zone.ground_floors)
              + sum(roof.area for roof in
                    self.thermal_zone.rooftops))
-
+        self.ua_value_ow = 0.0
         self.ua_value_ow = \
             (sum(out_wall.ua_value for out_wall in
                  self.thermal_zone.outer_walls)
@@ -688,16 +687,16 @@ class TwoElement(object):
         self.r_comb_outer_win = (1 / (sum(1 / win.r_outer_comb for win in
                                          self.thermal_zone.windows)))
 
-        self.ir_emissivity_outer_win = sum(win.layer[-1].material.ir_emissivity
+        self.ir_emissivity_win = sum(win.layer[-1].material.ir_emissivity
                                            * win.area for win in
-                                          self.thermal_zone.windows)
+                                          self.thermal_zone.windows) / self.area_win
 
         self.solar_absorp_win = sum(win.layer[-1].material.solar_absorp
                                     * win.area for win in
-                                    self.thermal_zone.windows)
+                                    self.thermal_zone.windows) / self.area_win
 
         self.weighted_g_value = sum(win.g_value * win.area for win in
-                                    self.thermal_zone.windows)
+                                    self.thermal_zone.windows) / self.area_win
 
         self.alpha_conv_outer_win = (
             1 / (self.r_conv_outer_win * self.area_win))
@@ -872,3 +871,124 @@ class TwoElement(object):
 
         else:
             raise ValueError("specify merge window method correctly")
+
+    def set_calc_default(self):
+        '''sets default calculation parameters
+        '''
+        # Attributes of inner walls
+        self.area_iw = 0.0
+
+        # coefficient of heat transfer facing the inside of this thermal zone
+        self.alpha_conv_inner_iw = 0.0
+        self.alpha_rad_inner_iw = 0.0
+        self.alpha_comb_inner_iw = 0.0
+        # coefficient of heat transfer facing the adjacent thermal zone
+        self.alpha_conv_outer_iw = 0.0
+        self.alpha_rad_outer_iw = 0.0
+        self.alpha_comb_outer_iw = 0.0
+
+        # UA-Value
+        self.ua_value_iw = 0.0
+
+        # resistances for heat transfer facing the inside of this thermal zone
+        self.r_conv_inner_iw = 0.0
+        self.r_rad_inner_iw = 0.0
+        self.r_comb_inner_iw = 0.0
+        self.r_conv_outer_iw = 0.0
+        self.r_rad_outer_iw = 0.0
+        self.r_comb_outer_iw = 0.0
+
+        # lumped resistance/capacity
+        self.r1_iw = 0.0
+        self.c1_iw = 0.0
+
+        # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
+        self.area_ow = 0.0
+
+        # coefficient of heat transfer facing the inside of this thermal zone
+        self.alpha_conv_inner_ow = 0.0
+        self.alpha_rad_inner_ow = 0.0
+        self.alpha_comb_inner_ow = 0.0
+
+        # coefficient of heat transfer facing the ambient
+        self.alpha_conv_outer_ow = 0.0
+        self.alpha_rad_outer_ow = 0.0
+        self.alpha_comb_outer_ow = 0.0
+
+        # UA-Value
+        self.ua_value_ow = 0.0
+
+        # resistances for heat transfer facing the inside of this thermal zone
+        self.r_conv_inner_ow = 0.0
+        self.r_rad_inner_ow = 0.0
+        self.r_comb_inner_ow = 0.0
+
+        # resistances for heat transfer facing the ambient
+        self.r_conv_outer_ow = 0.0
+        self.r_rad_outer_ow = 0.0
+        self.r_comb_outer_ow = 0.0
+
+        # lumped resistances/capacity
+        self.r1_ow = 0.0
+        self.r_rest_ow = 0.0
+        self.c1_ow = 0.0
+        self.r_total_ow = 0.0
+
+        # Optical properties
+        self.ir_emissivity_outer_ow = 0.0
+        self.ir_emissivity_inner_ow = 0.0
+        self.solar_absorp_ow = 0.0
+
+        # Additional attributes
+        self.weightfactor_ow = []
+        self.weightfactor_ground = []
+        self.tilt_wall = []
+        self.orientation_wall = []
+        self.outer_walls_areas = []
+
+        # TODO: check this value
+        self.r_rad_ow_iw = 0.0
+
+        # Attributes for windows
+        self.area_win = 0.0
+
+        # coefficient of heat transfer facing the inside of this thermal zone
+        self.alpha_conv_inner_win = 0.0
+        self.alpha_rad_inner_win = 0.0
+        self.alpha_comb_inner_win = 0.0
+
+        # coefficient of heat transfer facing the ambient
+        self.alpha_conv_outer_win = 0.0
+        self.alpha_rad_outer_win = 0.0
+        self.alpha_comb_outer_win = 0.0
+
+        # UA-Value
+        self.ua_value_win = 0.0
+
+        # resistances for heat transfer facing the inside of this thermal zone
+        self.r_conv_inner_win = 0.0
+        self.r_rad_inner_win = 0.0
+        self.r_comb_inner_win = 0.0
+
+        # resistances for heat transfer facing the ambient
+        self.r_conv_outer_win = 0.0
+        self.r_rad_outer_win = 0.0
+        self.r_comb_outer_win = 0.0
+
+        # lumped resistances/capacity
+        self.r1_win = 0.0
+
+        # Optical properties
+        self.ir_emissivity_outer_win = 0.0
+        self.ir_emissivity_inner_win = 0.0
+        self.solar_absorp_win = 0.0
+
+        # Additional attributes
+        self.weightfactor_win = []
+        self.tilt_win = []
+        self.orientation_win = []
+        # TODO duplicated list???
+        self.window_area_list = []
+        self.window_areas = []
+        self.g_sunblind_list = []
+        self.weighted_g_value = 0.0
