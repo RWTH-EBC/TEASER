@@ -352,6 +352,19 @@ class TwoElement(object):
         self.g_sunblind_list = []
         self.weighted_g_value = 0.0
 
+        outer_walls = (self.thermal_zone.outer_walls +
+                       self.thermal_zone.ground_floors +
+                       self.thermal_zone.rooftops)
+
+        for out_wall in outer_walls:
+            out_wall.calc_equivalent_res()
+            out_wall.calc_ua_value()
+        for win in self.thermal_zone.windows:
+            win.calc_equivalent_res()
+            win.calc_ua_value()
+
+
+
         self._sum_outer_wall_elements()
         self._sum_inner_wall_elements()
         self._sum_window_elements()
@@ -515,6 +528,11 @@ class TwoElement(object):
         # values facing the ambient
         # ground floor does not have any coefficients on ambient side
 
+        _area_ow_rt = (sum(out_wall.area for out_wall in
+                           self.thermal_zone.outer_walls)
+                       + sum(roof.area for roof in
+                             self.thermal_zone.rooftops))
+
         self.r_conv_outer_ow = (1 /
                                 (sum(1 / out_wall.r_outer_conv for out_wall in
                                      self.thermal_zone.outer_walls)
@@ -541,14 +559,14 @@ class TwoElement(object):
             sum(out_wall.layer[-1].material.solar_absorp * out_wall.area for
                 out_wall in self.thermal_zone.outer_walls)
             + sum(roof.layer[-1].material.solar_absorp * roof.area for
-                  roof in self.thermal_zone.rooftops) / self.area_ow)
+                  roof in self.thermal_zone.rooftops) / _area_ow_rt)
 
         self.alpha_conv_outer_ow = (
-            1 / (self.r_conv_outer_ow * self.area_ow))
+            1 / (self.r_conv_outer_ow * _area_ow_rt))
         self.alpha_rad_outer_ow = (
-            1 / (self.r_rad_outer_ow * self.area_ow))
+            1 / (self.r_rad_outer_ow * _area_ow_rt))
         self.alpha_comb_outer_ow = (
-            1 / (self.r_comb_outer_ow * self.area_ow))
+            1 / (self.r_comb_outer_ow * _area_ow_rt))
 
     def _sum_inner_wall_elements(self):
         """Sum attributes for interior elements
@@ -705,16 +723,10 @@ class TwoElement(object):
         # TODO: documentation for omega
         omega = 2 * math.pi / 86400 / self.t_bt
 
+
         outer_walls = (self.thermal_zone.outer_walls +
                        self.thermal_zone.ground_floors +
                        self.thermal_zone.rooftops)
-
-        for out_wall in outer_walls:
-            out_wall.calc_equivalent_res()
-            out_wall.calc_ua_value()
-        for win in self.thermal_zone.windows:
-            win.calc_equivalent_res()
-            win.calc_ua_value()
 
         if 0 < len(outer_walls) <= 1:
             # only one outer wall, no need to calculate chain matrix
