@@ -361,12 +361,7 @@ class TwoElement(object):
                       self.thermal_zone.ground_floors
 
         # temporary attributes for outer walls
-        _sum_r_conv_inner_ow = 0
-        _sum_r_rad_inner_ow = 0
-        _sum_r_comb_inner_ow = 0
-        _sum_r_conv_outer_ow = 0
-        _sum_r_rad_outer_ow = 0
-        _sum_r_comb_outer_ow = 0
+
         _sum_ir_emissivity_outer_ow = 0.0
         _sum_ir_emissivity_inner_ow = 0.0
         _sum_solar_absorp_ow = 0.0
@@ -393,50 +388,43 @@ class TwoElement(object):
 
         self.ua_value_ow = sum(out_wall.ua_value for out_wall in outer_walls)
         self.area_ow = sum(out_wall.ua_value for out_wall in outer_walls)
-        self.r_conv_inner_ow = 1 / sum(1 / (sum(out_wall.r_inner_conv for out_wall in outer_walls)))
 
-        for out_wall in outer_walls:
+        self.r_conv_inner_ow = 1 / sum(1 / out_wall.r_inner_conv for
+                                       out_wall in outer_walls)
+        self.r_rad_inner_ow = 1 / sum(1 / out_wall.r_inner_rad for
+                                       out_wall in outer_walls)
+        self.r_comb_inner_ow = 1 / sum(1 / out_wall.r_comb_inner for
+                                       out_wall in outer_walls)
+        self.r_conv_outer_ow = 1 / sum(1 / out_wall.r_outer_conv for
+                                       out_wall in outer_walls)
+        self.r_rad_outer_ow = 1 / sum(1 / out_wall.r_outer_rad for
+                                       out_wall in outer_walls)
+        self.r_comb_outer_ow = 1 / sum(1 / out_wall.r_outer_comb for
+                                       out_wall in outer_walls)
 
-            self.ua_value_ow += out_wall.ua_value
-            self.area_ow += out_wall.area
-            _sum_r_conv_inner_ow += 1 / out_wall.r_inner_conv
-            _sum_r_rad_inner_ow += 1 / out_wall.r_inner_rad
-            _sum_r_comb_inner_ow += 1 / out_wall.r_inner_comb
-            _sum_r_conv_outer_ow += 1 / out_wall.r_outer_conv
-            _sum_r_rad_outer_ow += 1 / out_wall.r_outer_rad
-            _sum_r_comb_outer_ow += 1 / out_wall.r_outer_comb
-            _sum_ir_emissivity_outer_ow += \
-                out_wall.layer[-1].material.ir_emissivity * out_wall.area
-            _sum_ir_emissivity_inner_ow += \
-                out_wall.layer[0].material.ir_emissivity * out_wall.area
-            _sum_solar_absorp_ow += \
-                out_wall.layer[-1].material.solar_absorp * out_wall.area
-
-        if [_sum_r_comb_inner_ow, _sum_r_comb_outer_ow] != 0:
-            self.r_conv_inner_ow = 1 / _sum_r_conv_inner_ow
-            self.r_rad_inner_ow = 1 / _sum_r_rad_inner_ow
-            self.r_comb_inner_ow = 1 / _sum_r_comb_inner_ow
-            self.r_conv_outer_ow = 1 / _sum_r_conv_outer_ow
-            self.r_rad_outer_ow = 1 / _sum_r_rad_outer_ow
-            self.r_comb_outer_ow = 1 / _sum_r_comb_outer_ow
-            self.alpha_conv_inner_ow = (
-                1 / (self.r_conv_inner_ow * self.area_ow))
-            self.alpha_rad_inner_ow = (
-                1 / (self.r_rad_inner_ow * self.area_ow))
-            self.alpha_comb_inner_ow = (
-                1 / (self.r_comb_inner_ow * self.area_ow))
-            self.alpha_conv_outer_ow = (
-                1 / (self.r_conv_outer_ow * self.area_ow))
-            self.alpha_rad_outer_ow = (
-                1 / (self.r_rad_outer_ow * self.area_ow))
-            self.alpha_comb_outer_ow = (
-                1 / (self.r_comb_outer_ow * self.area_ow))
-            self.ir_emissivity_outer_ow = \
-                _sum_ir_emissivity_outer_ow / self.area_ow
-            self.ir_emissivity_inner_ow = \
-                _sum_ir_emissivity_inner_ow / self.area_ow
-            self.solar_absorp_ow = \
-                _sum_solar_absorp_ow / self.area_ow
+        self.alpha_conv_inner_ow = (
+            1 / (self.r_conv_inner_ow * self.area_ow))
+        self.alpha_rad_inner_ow = (
+            1 / (self.r_rad_inner_ow * self.area_ow))
+        self.alpha_comb_inner_ow = (
+            1 / (self.r_comb_inner_ow * self.area_ow))
+        self.alpha_conv_outer_ow = (
+            1 / (self.r_conv_outer_ow * self.area_ow))
+        self.alpha_rad_outer_ow = (
+            1 / (self.r_rad_outer_ow * self.area_ow))
+        self.alpha_comb_outer_ow = (
+            1 / (self.r_comb_outer_ow * self.area_ow))
+        self.ir_emissivity_outer_ow = \
+            _sum_ir_emissivity_outer_ow / self.area_ow
+        self.ir_emissivity_inner_ow = sum(
+            out_wall.layer[0].material.ir_emissivity for out_wall in
+            outer_walls) / self.area_ow
+        self.ir_emissivity_inner_ow = sum(
+            out_wall.layer[-1].material.ir_emissivity for out_wall in
+            outer_walls) / self.area_ow
+        self.solar_absorp_ow = sum(
+            out_wall.layer[-1].material.solar_absorp for out_wall in
+            outer_walls) / self.area_ow
 
         for in_wall in self.thermal_zone.inner_walls:
             self.ua_value_iw += in_wall.ua_value
