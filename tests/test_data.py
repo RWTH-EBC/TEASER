@@ -27,20 +27,20 @@ class Test_teaser(object):
 
         #parameters inner wall Typraum S
 
-        assert round(therm_zone.r1_iw, 13) == 0.0005956934075
-        assert round(therm_zone.c1_iw / 1000, 7) == 14836.3546282
-        assert round(therm_zone.area_iw, 1) == 75.5
-        assert round(therm_zone.alpha_conv_inner_iw, 13) == 2.23642384105960
+        assert round(therm_zone.calc_attr.r1_iw, 13) == 0.0005956934075
+        assert round(therm_zone.calc_attr.c1_iw / 1000, 7) == 14836.3546282
+        assert round(therm_zone.calc_attr.area_iw, 1) == 75.5
+        assert round(therm_zone.calc_attr.alpha_conv_inner_iw, 13) == 2.23642384105960
 
         #paremeters outer wall Typraum S
 
-        assert round(therm_zone.r_rest_ow, 13) == 0.0427687193786
-        assert round(therm_zone.r1_ow, 13) == 0.0043679129367
-        assert round(therm_zone.c1_ow / 1000, 7) == 1600.8489399
-        assert round(therm_zone.area_ow, 1) == 3.5
-        assert round(therm_zone.area_win, 1) == 7.0
-        assert round(therm_zone.alpha_conv_inner_ow, 1) == 2.7
-        assert round(therm_zone.alpha_comb_outer_ow, 1) == 25.0
+        assert round(therm_zone.calc_attr.r_rest_ow, 13) == 0.0427687193786
+        assert round(therm_zone.calc_attr.r1_ow, 13) == 0.0043679129367
+        assert round(therm_zone.calc_attr.c1_ow / 1000, 7) == 1600.8489399
+        assert round(therm_zone.calc_attr.area_ow, 1) == 3.5
+        assert round(therm_zone.calc_attr.area_win, 1) == 7.0
+        assert round(therm_zone.calc_attr.alpha_conv_inner_ow, 1) == 2.7
+        assert round(therm_zone.calc_attr.alpha_comb_outer_ow, 1) == 25.0
 
     def test_calc_vdi_room3(self):
         '''Parameter Verification for room 3'''

@@ -61,7 +61,7 @@ def compare_orientation(bldg):
 
         groundfloors = zone.find_walls(-2, 0)
         if groundfloors == []:
-            zone.weightfactor_ground.append(0.0)
+            zone.calc_attr.weightfactor_ground.append(0.0)
         else:
             zone.weightfactor_ground.append(
                 sum([groundfl.wf_out for groundfl in groundfloors]))
@@ -71,32 +71,32 @@ def compare_orientation(bldg):
             wins = zone.find_wins(i[0], i[1])
 
 
-            zone.tilt_wall.append(i[1])
-            zone.orientation_wall.append(i[0])
+            zone.calc_attr.tilt_wall.append(i[1])
+            zone.calc_attr.orientation_wall.append(i[0])
 
-            zone.tilt_win.append(i[1])
-            zone.orientation_win.append(i[0])
+            zone.calc_attr.tilt_win.append(i[1])
+            zone.calc_attr.orientation_win.append(i[0])
 
             if walls == []:
-                zone.weightfactor_ow.append(0.0)
-                zone.outer_walls_areas.append(0.0)
+                zone.calc_attr.weightfactor_ow.append(0.0)
+                zone.calc_attr.outer_walls_areas.append(0.0)
             else:
-                zone.weightfactor_ow.append(
+                zone.calc_attr.weightfactor_ow.append(
                     sum([wall.wf_out for wall in walls]))
-                [zone.outer_walls_areas.append(i.area) for i in walls]
+                [zone.calc_attr.outer_walls_areas.append(i.area) for i in walls]
             if wins == []:
-                zone.weightfactor_win.append(0.0)
-                zone.window_area_list.append(0.0)
-                zone.g_sunblind_list.append(0.0)
-                zone.window_areas.append(0.0)
+                zone.calc_attr.weightfactor_win.append(0.0)
+                zone.calc_attr.window_area_list.append(0.0)
+                zone.calc_attr.g_sunblind_list.append(0.0)
+                zone.calc_attr.window_areas.append(0.0)
             else:
-                zone.weightfactor_win.append(
+                zone.calc_attr.weightfactor_win.append(
                     sum([win.wf_out for win in wins]))
-                zone.window_area_list.append(
+                zone.calc_attr.window_area_list.append(
                     sum([win.area for win in wins]))
-                zone.g_sunblind_list.append(
+                zone.calc_attr.g_sunblind_list.append(
                     sum([win.shading_g_total for win in wins]))
-                [zone.window_areas.append(i.area) for i in wins]
+                [zone.calc_attr.window_areas.append(i.area) for i in wins]
 
 
 def create_timeline(bldg, duration_profile = 86400, time_step = 3600):

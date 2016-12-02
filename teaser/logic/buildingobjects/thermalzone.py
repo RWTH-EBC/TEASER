@@ -95,7 +95,7 @@ class ThermalZone(object):
         self._outer_walls = []
         self.rooftops = []
         self.ground_floors = []
-        self.windows = []
+        self._windows = []
         self._inner_walls = []
         self.floors = []
         self.ceilings = []
@@ -256,19 +256,20 @@ class ThermalZone(object):
         _density_air = 1.25
 
         if number_of_elements == 1 or number_of_elements == 2:
-            self.heating_load = ((self.ua_value_ow + self.ua_value_win) +
+            self.heating_load = ((self.calc_attr.ua_value_ow +
+                                  self.calc_attr.ua_value_win) +
                                  self.volume * self.infiltration_rate *
                                  _heat_capac_air * _density_air) * \
                                 (self.t_inside - self.t_outside)
         elif number_of_elements == 3:
-            self.heating_load = ((self.ua_value_ow + self.ua_value_gf +
-                                  self.ua_value_win) +
+            self.heating_load = ((self.calc_attr.ua_value_ow + self.calc_attr.ua_value_gf +
+                                  self.calc_attr.ua_value_win) +
                                  self.volume * self.infiltration_rate *
                                  _heat_capac_air * _density_air) * \
                                 (self.t_inside - self.t_outside)
         elif number_of_elements == 4:
-            self.heating_load = ((self.ua_value_ow + self.ua_value_gf +
-                                  self.ua_value_rt + self.ua_value_win) +
+            self.heating_load = ((self.calc_attr.ua_value_ow + self.calc_attr.ua_value_gf +
+                                  self.calc_attr.ua_value_rt + self.calc_attr.ua_value_win) +
                                  self.volume * self.infiltration_rate *
                                  _heat_capac_air * _density_air) * \
                                 (self.t_inside - self.t_outside)

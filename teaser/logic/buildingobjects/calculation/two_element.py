@@ -346,6 +346,7 @@ class TwoElement(object):
         self.weightfactor_win = []
         self.tilt_win = []
         self.orientation_win = []
+        self.window_area_list = []
         self.window_areas = []
         self.g_sunblind_list = []
         self.weighted_g_value = 0.0
@@ -354,6 +355,7 @@ class TwoElement(object):
         self._sum_inner_wall_elements()
         self._sum_window_elements()
         self._calc_outer_elements()
+        self._calc_inner_elements()
         self._calc_wf()
 
     def _calc_chain_matrix(self, element_list, omega):
@@ -639,10 +641,10 @@ class TwoElement(object):
         self.r_conv_inner_win = (1 / (sum(1 / win.r_inner_conv for win in
                                           self.thermal_zone.windows)))
 
-        self.r_rad_inner_ow = (1 / (sum(1 / win.r_inner_rad for win in
+        self.r_rad_inner_win = (1 / (sum(1 / win.r_inner_rad for win in
                                           self.thermal_zone.windows)))
 
-        self.r_comb_inner_ow = (1 / (sum(1 / win.r_inner_comb for win in
+        self.r_comb_inner_win = (1 / (sum(1 / win.r_inner_comb for win in
                                           self.thermal_zone.windows)))
 
         self.ir_emissivity_inner_ow = sum(win.layer[0].material.ir_emissivity
@@ -807,11 +809,11 @@ class TwoElement(object):
 
         if 0 < len(inner_walls) <= 1:
             # only one outer wall, no need to calculate chain matrix
-            self.r1_1w = inner_walls[0].r1
-            self.c1_1w = inner_walls[0].c1_korr
+            self.r1_iw = inner_walls[0].r1
+            self.c1_iw = inner_walls[0].c1_korr
         elif len(inner_walls) > 1:
             # more than one outer wall, calculate chain matrix
-            self.r1_1w, self.c1_1w = self._calc_chain_matrix(
+            self.r1_iw, self.c1_iw = self._calc_chain_matrix(
                 inner_walls,
                 omega)
         else:
