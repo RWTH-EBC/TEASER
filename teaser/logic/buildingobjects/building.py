@@ -1,7 +1,7 @@
 # created June 2015
 # by TEASER4 Development Team
 
-"""This module includes the Buidling class
+"""This module includes the Building class
 """
 import random
 import re
@@ -14,7 +14,9 @@ import teaser.logic.simulation.aixlib as aixlib
 class Building(object):
     """Building Class
 
-    This class represents a general building
+    This class is used to manage information and parameter calculation for
+    Buildings. It is the base class for all archetype buildings and holds a
+    list containing all ThermalZones instances.
 
     Parameters
     ----------
@@ -24,122 +26,152 @@ class Building(object):
         Allows for better control of hierarchical structures.
         (default: None)
     name : str
-        individual name (default: None)
+        Individual name (default: None)
     year_of_construction : int
-        year of first construction (default: None)
-    number_of_floors : int
-        number of floors above ground (default: None)
-    height_of_floors : float
-        average height of the floors (default: None)
-    net_leased_area = float
-        total net leased area of building (default: None)
+        Year of first construction (default: None)
+    net_leased_area : float [m2]
+        Total net leased area of building. This is area is NOT the footprint
+        of a building (default: None)
     with_ahu : Boolean
-        If set to True, an empty instance of BuildingAHU is instantiated, to be
-        filled with AHU information
-
-    Note: the listed attributes are just the ones that are set by the user
-          calculated values are not included in this list
+        If set to True, an empty instance of BuildingAHU is instantiated and
+        assigned to attribute central_ahu. This instance holds information for
+        central Air Handling units.
 
     Attributes
     ----------
-
+    number_of_floors : int
+        number of floors above ground (default: None)
+    height_of_floors : float [m]
+        Average height of the floors (default: None)
     internal_id : float
-        random id for the destinction between different buildings
+        Random id for the distinction between different buildings.
     year_of_retrofit : int
-        year of last retrofit
+        Year of last retrofit.
     type_of_building : string
-        Type of a Building (e.g. Building (unspecified), Office etc.)
+        Type of a Building (e.g. Building (unspecified), Office etc.).
     building_id : None
         ID of building, can be set by the user to keep track of a building
-        even outside of TEASER, e.g. in a simulation or in post-processing
+        even outside of TEASER, e.g. in a simulation or in post-processing.
+        This is not the same as internal_id, as internal_id is e.g. not
+        exported to Modelica models!
     street_name : string
-        name of the street the building is located at
+        Name of the street the building is located at. (optional)
     city : string
-        name of the city the building is located at
+        Name of the city the building is located at. (optional)
+    longitude : float [degree]
+        Longitude of building location.
+    latitude : float [degree]
+        Latitude of building location.
     thermal_zones : list
-        list of all containing thermal zones (ThermalZone())
+        List with instances of ThermalZone(), that are located in this building.
     gml_surfaces : list
-        list of all containing surfaces described by CityGML, the list
-        should be filled with SurfaceGML class from Data.Input.citygml_input
-    outer_area : dict
-        dict with outer wall area and orientation
-    window_area : dict
-        dict with window area and orientation
+        List of all containing surfaces described by CityGML, the list
+        should be filled with SurfaceGML class from Data.Input.citygml_input.
+        This list is only used if this instance of a building was instantiated
+        the CityGML Loader module.
+    outer_area : dict [degree: m2]
+        Dictionary with orientation as key and sum of outer wall areas of
+        that direction as value.
+    window_area : dict [degree: m2]
+        Dictionary with orientation as key and sum of window areas of
+        that direction as value.
+    bldg_height : float [m]
+        Total building height.
+    volume : float [m3]
+        Total volume of all thermal zones.
+    sum_heating_load : float [W]
+        Total heating load of all thermal zones.
+    sum_cooling_load : float [W]
+        Total heating load of all thermal zones. (currently not supported)
+    number_of_elements_calc : int
+        Number of elements that are used for thermal zone calculation in this
+        building.
+        1: OneElement
+        2: TwoElement
+        3: ThreeElement
+        4: FourElement
+    merge_windows_calc : boolean
+        True for merging the windows into the outer wall's RC-combination,
+        False for separate resistance for window, default is False
+    used_library_calc : str
+        'AixLib' for https://github.com/RWTH-EBC/AixLib
+        'Annex60' for https://github.com/iea-annex60/modelica-annex60
+
+
+    TODO: aixlib module into class!
     file_ahu : string
-        path of AHU Matlab file for boundary condition
+        Path of AHU Matlab file for boundary condition
     file_internal_gains : string
         path of internal gains Matlab file for boundary condition
     file_set_t : string
         path of temperature Matlab file for boundary condition
+    central_ahu : TODO add documentation
     """
 
-    def __init__(self,
-                 parent=None,
-                 name=None,
-                 year_of_construction=None,
-                 net_leased_area=None,
-                 with_ahu=False):
+    def __init__(
+            self,
+            parent=None,
+            name=None,
+            year_of_construction=None,
+            net_leased_area=None,
+            with_ahu=False):
 
         """Constructor of Building Class
         """
 
-        self.internal_id = random.random()
-
         self.parent = parent
         self.name = name
-        self.building_id = None
-        self.street_name = ""
-        self.city = ""
-
-        self.type_of_building = type(self).__name__
-
         self.year_of_construction = year_of_construction
-        self._central_ahu = None
+        self.net_leased_area = net_leased_area
         self.with_ahu = with_ahu
-
         if with_ahu is True:
             self.central_ahu = BuildingAHU(self)
+        else:
+            self._central_ahu = None
 
         self.number_of_floors = None
         self.height_of_floors = None
-        self.net_leased_area = net_leased_area
-        self.bldg_height = None
-
+        self.internal_id = random.random()
         self._year_of_retrofit = None
+        self.type_of_building = type(self).__name__
+        self.building_id = None
+        self.street_name = ""
+        self.city = ""
+        self.longitude = None
+        self.latitude = None
 
         self._thermal_zones = []
+        self.gml_surfaces = []
         self._outer_area = {}
         self._window_area = {}
 
-        self.gml_surfaces = []
-
+        self.bldg_height = None
         self.volume = 0
         self.sum_heating_load = 0
         self.sum_cooling_load = 0
 
+        self._number_of_elements_calc = 2
+        self._merge_windows_calc = False
+        self._used_library_calc = "AixLib"
+
         # additional simulation parameters
-        self.longitude = None
-        self.latitude = None
 
         self.file_ahu = None
         self.file_internal_gains = None
         self.file_set_t = None
         self.file_weather = None
-
         self.orientation_bldg = []
         self.tilt_bldg = []
         self.orient_tilt = []
-        self._number_of_elements_calc = 2
-        self._merge_windows_calc = False
-        self._used_library_calc = "AixLib"
 
     def set_height_gml(self):
-        """calculates the height of a building from CityGML data
+        """Calculates the height of a building from CityGML data
 
-        with given gml surfaces, this function computes the height of a
+        With given gml surfaces, this function computes the height of a
         building of LoD 1 and LoD 2 buildings from CityGML data. All
         z-coordinates are evaluated and the minimum z-value is subtracted
         by the maximal value.
+
         """
         if self.bldg_height is not None:
             pass
@@ -154,7 +186,7 @@ class Building(object):
             self.bldg_height = max_help - min_help
 
     def get_footprint_gml(self):
-        """gets the footprint surface of a building from CityGML data
+        """Gets the footprint surface of a building from CityGML data
 
         with given gml surfaces, this function computes and returns the
         footprint area of a building from LoD 0 to LoD2 from CityGML data.
@@ -162,9 +194,9 @@ class Building(object):
 
         Returns
         ----------
-
         surface area : float
             footprint area of a gml building
+
         """
 
         for surface in self.gml_surfaces:
@@ -178,9 +210,9 @@ class Building(object):
 
     def set_gml_attributes(self,
                            height_of_floor=3.5):
-        """sets building attributes from CityGML data
+        """Sets building attributes from CityGML data
 
-        computes the net_leased_area depending on the footprint area,
+        Computes the net_leased_area depending on the footprint area,
         the number and the height of floors. If the number of floors is
         specified before it will use this value, if not it will compute the
         number of floors based on the gml building height and the average
@@ -193,11 +225,10 @@ class Building(object):
         height_of_floor : float
             average height of each floor of the building, the default value
             is 3.5 and is absolutely random.
-
-
         """
+
         if self.bldg_height is None:
-            raise AttributeError("building height needs to be defined for gml")
+            raise AttributeError("Building height needs to be defined for gml")
 
         if self.height_of_floors is None and self.number_of_floors is None:
             self.height_of_floors = height_of_floor
@@ -230,11 +261,11 @@ class Building(object):
         """Outer area wall setter
 
         sets the outer wall area of all walls of one direction and weights
-        them according to zone size
+        them according to zone size. This function covers OuterWalls,
+        Rooftops, GroundFloors.
 
         Parameters
         ----------
-
         new_area : float
             new_area of all outer walls of one orientation
         orientation : float
@@ -261,7 +292,6 @@ class Building(object):
 
         Parameters
         ----------
-
         new_area : float
             new_area of all window of one orientation
         orientation : float
@@ -274,19 +304,17 @@ class Building(object):
                     win.area = ((new_area / self.net_leased_area) * zone.area)
 
     def get_outer_wall_area(self, orientation):
-        """Get aggregated outer wall area of one orientation
+        """Get aggregated wall area of one orientation
 
-        returns the area of all outer walls of one direction
+        Returns the area of all outer walls of one direction. This function
+        covers OuterWalls, GroundFloors and Rooftops.
 
         Parameters
         ----------
-
         orientation : float
             orientation of the obtained wall
-
         Returns
         ----------
-
         sum_area : float
             area of all walls of one direction
         """
@@ -314,16 +342,12 @@ class Building(object):
 
         Parameters
         ----------
-
         orientation : float
             orientation of the obtained windows
-
         Returns
         ----------
-
         sum_area : float
             area of all windows of one direction
-
         """
 
         sum_area = 0.0
@@ -335,28 +359,34 @@ class Building(object):
         return sum_area
 
     def get_inner_wall_area(self):
-        """get all inner wall area
+        """Get aggregated inner wall area
 
-        returns the area of all inner walls
+        Returns the area of all inner walls. This function covers InnerWalls,
+        Ceilings and Floors.
 
         Returns
         ----------
-
         sum_area : float
             area of all inner walls
+
         """
 
         sum_area = 0.0
         for zone_count in self.thermal_zones:
             for wall_count in zone_count.inner_walls:
                 sum_area += wall_count.area
+            for floor in zone_count.floors:
+                sum_area += floor.area
+            for ceiling in zone_count.ceilings:
+                sum_area += ceiling.area
         return sum_area
 
+    #TODO is this function needed at all?
     def set_specific_wall_area(self,
                                spec_zone,
                                spec_wall,
                                new_area):
-        """set one specific wall area
+        """Set one specific wall area
 
         sets the area of a specific wall in a specific zone and weights the
         rest of the walls according to their zone size
@@ -391,10 +421,12 @@ class Building(object):
                             (float(len(zone_count.outer_walls)))
 
     def fill_outer_area_dict(self):
-        """fill the outer area dict
+        """Fills the attribute outer_area
 
-        fills self.outer_area with the sum of outer wall area corresponding to
-        the orientations of the building
+        Fills the dictionary outer_area with the sum of outer wall area
+        corresponding to the orientations of the building. This function
+        covers OuterWalls, GroundFloors and Rooftops.
+
         """
         self.outer_area = {}
         for zone_count in self.thermal_zones:
@@ -409,10 +441,10 @@ class Building(object):
             self.outer_area[key] = self.get_outer_wall_area(key)
 
     def fill_window_area_dict(self):
-        """fill the window area dict
+        """Fills the attribute
 
-        fills self.window_area with all the sum of window area corresponding to
-        the orientations of the building
+        Fills the dictionary window_area with the sum of window area
+        corresponding to the orientations of the building.
 
         """
         self.window_area = {}
@@ -423,6 +455,7 @@ class Building(object):
         for key in self.window_area:
             self.window_area[key] = self.get_window_area(key)
 
+    #TODO implement AixLib and Annex Classes (similar to thermal zone)
     def calc_building_parameter(self,
                                 number_of_elements=2,
                                 merge_windows=False,
@@ -465,11 +498,12 @@ class Building(object):
             annex.compare_orientation(self, number_of_elements=
                                       number_of_elements)
 
-    def retrofit_building(self,
-                          year_of_retrofit=None,
-                          window_type=None,
-                          material=None):
-        """ Retrofits all zones in the building
+    def retrofit_building(
+            self,
+            window_type=None,
+            year_of_retrofit=None,
+            material=None):
+        """Retrofits all zones in the building
 
         Function call for each zone.
 
@@ -479,9 +513,12 @@ class Building(object):
         ----------
         window_type : str
             Default: EnEv 2014
+        year_of_retrofit : float
+            Year of last retrofit.
         material : str
             Default: EPS035
         """
+
         if year_of_retrofit is not None:
             self.year_of_retrofit = year_of_retrofit
         else:
@@ -496,25 +533,32 @@ class Building(object):
             used_library=self.used_library_calc)
 
     def rotate_building(self, angle):
-        """rotates the building to a given angle
+        """Rotates the building to a given angle
+
+        This function covers OuterWall, Rooftop (if not flatroof) and Windows.
 
         Parameters
         ----------
 
         angle: float
             rotation of the building clockwise, between 0 and 360 degrees
-
         """
 
         for zone_count in self.thermal_zones:
             new_angle = None
             for wall_count in zone_count.outer_walls:
-                if type(wall_count).__name__ == "OuterWall":
-                    new_angle = wall_count.orientation + angle
+                new_angle = wall_count.orientation + angle
+                if new_angle > 360.0:
+                    wall_count.orientation = new_angle - 360.0
+                else:
+                    wall_count.orientation = new_angle
+            for roof_count in zone_count.rooftops:
+                if roof_count.orientation != -1:
+                    new_angle = roof_count.orientation + angle
                     if new_angle > 360.0:
-                        wall_count.orientation = new_angle - 360.0
+                        roof_count.orientation = new_angle - 360.0
                     else:
-                        wall_count.orientation = new_angle
+                        roof_count.orientation = new_angle
                 else:
                     pass
             for win_count in zone_count.windows:
@@ -533,7 +577,6 @@ class Building(object):
         ----------
         thermal_zone : ThermalZone()
             ThermalZone() instance of TEASER
-
         """
 
         ass_error_1 = "Zone has to be an instance of ThermalZone()"
