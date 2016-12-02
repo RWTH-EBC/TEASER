@@ -63,7 +63,7 @@ def compare_orientation(bldg):
         if groundfloors == []:
             zone.calc_attr.weightfactor_ground.append(0.0)
         else:
-            zone.weightfactor_ground.append(
+            zone.calc_attr.weightfactor_ground.append(
                 sum([groundfl.wf_out for groundfl in groundfloors]))
 
         for i in bldg.orient_tilt:
