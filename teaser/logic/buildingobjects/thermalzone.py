@@ -29,64 +29,53 @@ class ThermalZone(object):
     ----------
 
     internal_id : float
-        Random id for the destinction between different zones
-
+        Random id for the distinction between different zones.
     name : str
-        Individual name
-
-    area : float
-        Area of zone im m^2
-
-    volume : float
-        Volume of zone in m^3
-
-    infiltration_rate : float
-        Infiltration rate of zone in 1/h
-
+        Individual name.
+    area : float [m2]
+        Thermal zone area.
+    volume : float [m3]
+        Thermal zone volume.
+    infiltration_rate : float [1/h]
+        Infiltration rate of zone.
     outer_walls : list
-        List with all outer walls including ground floor and rooftop
-
+        List of OuterWall instances.
     rooftops : list
-        List with rooftops if number of elements is 4
-
-    grounfdloors : list
-        List with grounfdloors if number of elements is >2
-
-    outerwalls_help : list
-        List with outer walls and rooftops if number of elements is >2
-        List with outer walls only if number of elements is 4
-
+        List of Rooftop instances.
+    groundfloors : list
+        List of GroundFloor instances.
     windows : list
-        List with windows
-
-    use_conditions : instance of UseConditions()
-        Class of UseConditions with all relevant information for the usage
-        of the thermal zone
-
+        List of Window instances.
     inner_walls : list
-        List with all inner walls including  floor and ceiling
+        List of InnerWall instances.
+    floors : list
+        List of Floor instances.
+    ceilings: list
+        List of Ceiling instances.
+    use_conditions : instance of UseConditions()
+        Instance of UseConditions with all relevant information for the usage
+        of the thermal zone
+    calc_attr : instance of OneElement(), TwoElement(), ThreeElement() or
+                FourElement()
+        Instance of OneElement(), TwoElement(), ThreeElement() or
+        FourElement(), that holds all calculation functions and attributes
+        needed for the specific model.
 
     typical_length : list
         normative typical length of the thermal zone
-
     typical_width : list
         normative typical width of the thermal zone
-
     t_inside : float
         normative indoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
-
     t_outside : float
         normative outdoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
-
     t_ground : float
         slab temperature directly at the outer side of ground floors.
         The input of t_ground is ALWAYS in Kelvin
-
     density_air : float
         average density of the air in the thermal zone
-
     heat_capac_air : float
         average heat capacity of the air in the thermal zone
     """
@@ -97,26 +86,28 @@ class ThermalZone(object):
         """
 
         self.parent = parent
+
         self.internal_id = random.random()
-        self.calc_attr = None
         self.name = None
         self._area = None
         self._volume = None
-        self._infiltration_rate = 0.5
+        self._infiltration_rate = 0.5 # TODO is this value actually used?
         self._outer_walls = []
-        self._inner_walls = []
         self.rooftops = []
         self.ground_floors = []
-        self._windows = []
-        self.outer_walls_help = []
+        self.windows = []
+        self._inner_walls = []
+        self.floors = []
+        self.ceilings = []
         self._use_conditions = None
-        self.typical_length = None
+        self.calc_attr = None
+        self.typical_length = None # TODO move this to use conditions?
         self.typical_width = None
         self._t_inside = 293.15
         self._t_outside = 261.15
         self.density_air = 1.19  # only export for now
         self.heat_capac_air = 1007  # only export for now
-        self.t_ground = 286.15  # groundtemperature of for the simulation
+        self.t_ground = 286.15  # Move this to building module?
 
 
     def calc_zone_parameters(self,
