@@ -96,6 +96,7 @@ def compare_orientation(bldg):
                     sum([win.area for win in wins]))
                 zone.calc_attr.g_sunblind_list.append(
                     sum([win.shading_g_total for win in wins]))
+                # TODO what is this value needed for?
                 [zone.calc_attr.window_areas.append(i.area) for i in wins]
 
 

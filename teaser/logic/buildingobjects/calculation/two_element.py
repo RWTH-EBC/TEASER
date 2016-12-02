@@ -346,6 +346,7 @@ class TwoElement(object):
         self.weightfactor_win = []
         self.tilt_win = []
         self.orientation_win = []
+        # TODO duplicated list???
         self.window_area_list = []
         self.window_areas = []
         self.g_sunblind_list = []
