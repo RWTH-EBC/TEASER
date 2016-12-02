@@ -1,5 +1,4 @@
-# created June 2015
-# by TEASER4 Development Team
+# created December 2016
 
 from __future__ import division
 import math
@@ -11,43 +10,57 @@ import re
 class TwoElement(object):
     """This class contains attributes and functions for two element model
 
-    short description of two element model
+    This model distinguishes between internal thermal masses and exterior walls.
+    While exterior walls contribute to heat transfer to the ambient, adiabatic
+    conditions apply to interior walls. This approach allows considering the
+    dynamic behaviour induced by internal heat storage. This class calculates
+    and holds all attributes given in documentation.
 
+    It treats Rooftops, GroundFloors and OuterWalls as one type of outer
+    walls and computes one RC-combination for these types.
+
+    Depending on the chosen method it will consider an extra resistance for
+    windows or merge all windows into the RC-Combination for outer walls.
 
     Parameters
     ----------
     thermal_zone: ThermalZone()
-
+        TEASER instance of ThermalZone
+    merge_windows : boolean
+        True for merging the windows into the outer wall's RC-combination,
+        False for separate resistance for window, default is False
+    t_bt : int
+        Time constant according to VDI 6007 (default t_bt = 5)
 
     Attributes
     ----------
     Interior Walls
 
     area_iw : float [m2]
-        Area of all interior walls
+        Area of all interior walls.
     alpha_conv_inner_iw : float [W/(m2K)]
-        Convective coefficient of heat transfer of interior walls facing the
-        inside of this thermal zone.
+        Area-weighted convective coefficient of heat transfer of interior
+        walls facing the inside of this thermal zone.
     alpha_rad_inner_iw : float [W/(m2K)]
-        Radiative coefficient of heat transfer of interior walls facing the
-        inside of this thermal zone.
+        Area-weighted radiative coefficient of heat transfer of interior
+        walls facing the inside of this thermal zone.
     alpha_comb_inner_iw : float [W/(m2K)]
-        Combined coefficient of heat transfer of interior walls facing the
-        inside of this thermal zone.
+        Area-weighted combined coefficient of heat transfer of interior walls
+        facing the inside of this thermal zone.
     alpha_conv_outer_iw : float [W/(m2K)]
-        Convective coefficient of heat transfer of interior walls facing the
-        adjacent thermal zone.
+        Area-weighted convective coefficient of heat transfer of interior
+        walls facing the adjacent thermal zone.
     alpha_rad_outer_iw : float [W/(m2K)]
-        Radiative coefficient of heat transfer of interior walls facing the
-        adjacent thermal zone.
+        Area-weighted radiative coefficient of heat transfer of interior
+        walls facing the adjacent thermal zone.
     alpha_comb_outer_iw : float [W/(m2K)]
-        Combined coefficient of heat transfer of interior walls facing the
-        adjacent thermal zone.
+        Area-weighted combined coefficient of heat transfer of interior walls
+        facing the adjacent thermal zone.
     ua_value_iw : float [W/(m2K)]
         U-Value times interior wall area.
     r_conv_inner_iw : float [K/W]
-        Sum of convective resistances for all interior walls facing the
-        inside of this thermal zone.
+        Sum of convective resistances for all interior walls
+        facing the inside of this thermal zone.
     r_rad_inner_iw : float [K/W]
         Sum of radiative resistances for all interior walls facing the
         inside of this thermal zone
@@ -59,28 +72,28 @@ class TwoElement(object):
     c1_iw : float [J/K]
         Lumped capacity of interior walls
 
-    Outer Walls
+    Outer Walls (OuterWall, Rooftop, GroundFloor)
 
     area_ow : float [m2]
-        Area of all outer walls
+        Area of all outer walls.
     alpha_conv_inner_ow : float [W/(m2K)]
-        Convective coefficient of heat transfer of outer walls facing the
-        inside of this thermal zone.
+        Area-weighted convective coefficient of heat transfer of outer walls
+        facing the inside of this thermal zone.
     alpha_rad_inner_ow : float [W/(m2K)]
-        Radiative coefficient of heat transfer of outer walls facing the
-        inside of this thermal zone.
+        Area-weighted radiative coefficient of heat transfer of outer walls
+        facing the inside of this thermal zone.
     alpha_comb_inner_ow : float [W/(m2K)]
-        Combined coefficient of heat transfer of outer walls facing the
-        inside of this thermal zone.
+        Area-weighted combined coefficient of heat transfer of outer walls
+        facing the inside of this thermal zone.
     alpha_conv_outer_ow : float [W/(m2K)]
-        Convective coefficient of heat transfer of outer walls facing the
-        ambient.
+        Area-weighted convective coefficient of heat transfer of outer walls
+        facing the ambient.
     alpha_rad_outer_ow : float [W/(m2K)]
-        Radiative coefficient of heat transfer of outer walls facing the
-        ambient.
+        Area-weighted radiative coefficient of heat transfer of outer walls
+        facing the ambient.
     alpha_comb_outer_ow : float [W/(m2K)]
-        Combined coefficient of heat transfer of outer walls facing the
-        ambient.
+        Area-weighted combined coefficient of heat transfer of outer walls
+        facing the ambient.
     ua_value_ow : float [W/(m2K)]
         U-Value times outer wall area.
     r_conv_inner_ow : float [K/W]
@@ -122,72 +135,114 @@ class TwoElement(object):
         180 - South
         270 - West
     outer_walls_areas : list of floats [m2]
-        Area of all outer walls in one list
+        Area of all outer walls in one list.
+    r_rad_ow_iw : float [K/W]
+        Resistance for radiative heat transfer between walls.
+        TODO: needs to be checked
+    ir_emissivity_outer_ow : float
+        Area-weighted ir emissivity of outer wall facing the ambient.
+    ir_emissivity_inner_ow : float
+        Area-weighted ir emissivity of outer walls facing the thermal zone.
+    solar_absorp_ow : float
+        Area-weighted solar absorption of outer walls facing the ambient.
 
     Windows
 
     area_win : float [m2]
-        Area of all outer walls
+        Area of all windows.
     alpha_conv_inner_win : float [W/(m2K)]
-        Convective coefficient of heat transfer of outer walls facing the
-        inside of this thermal zone.
+        Area-weighted convective coefficient of heat transfer of windows
+        facing the inside of this thermal zone.
     alpha_rad_inner_win : float [W/(m2K)]
-        Radiative coefficient of heat transfer of outer walls facing the
-        inside of this thermal zone.
+        Area-weighted radiative coefficient of heat transfer of windows
+        facing the inside of this thermal zone.
     alpha_comb_inner_win : float [W/(m2K)]
-        Combined coefficient of heat transfer of outer walls facing the
-        inside of this thermal zone.
+        Area-weighted combined coefficient of heat transfer of windows facing
+        the inside of this thermal zone.
     alpha_conv_outer_win : float [W/(m2K)]
-        Convective coefficient of heat transfer of outer walls facing the
-        ambient.
+        Area-weighted convective coefficient of heat transfer of windows
+        facing the ambient.
     alpha_rad_outer_win : float [W/(m2K)]
-        Radiative coefficient of heat transfer of outer walls facing the
-        ambient.
+        Area-weighted radiative coefficient of heat transfer of windows
+        facing the ambient.
     alpha_comb_outer_win : float [W/(m2K)]
-        Combined coefficient of heat transfer of outer walls facing the
-        ambient.
+        Area-weighted combined coefficient of heat transfer of windows facing
+        the ambient.
     ua_value_win : float [W/(m2K)]
         U-Value times outer wall area.
     r_conv_inner_win : float [K/W]
-        Sum of convective resistances for all outer walls facing the
+        Sum of convective resistances for all windows facing the
         inside of this thermal zone.
     r_rad_inner_win : float [K/W]
-        Sum of radiative resistances for all outer walls facing the
+        Sum of radiative resistances for all windows facing the
         inside of this thermal zone.
     r_comb_inner_win : float [K/W]
-        Sum of combined resistances for all outer walls facing the
+        Sum of combined resistances for all windows facing the
         inside of this thermal zone.
     r_conv_outer_win : float [K/W]
-        Sum of convective resistances for all outer walls facing the
+        Sum of convective resistances for all windows facing the
         ambient.
     r_rad_outer_win : float [K/W]
-        Sum of radiative resistances for all outer walls facing the
+        Sum of radiative resistances for all windows facing the
         ambient.
     r_comb_outer_win : float [K/W]
-        Sum of combined resistances for all outer walls facing the
+        Sum of combined resistances for all windows facing the
         ambient.
     r1_win : float [K/W]
-        Lumped resistance of outer walls.
+        Lumped resistance of windows.
     r_rest_win : float [K/W]
-        Lumped remaining resistance of outer walls between r1_win and c1_win.
+        Lumped remaining resistance of windows between r1_win and c1_win.
     c1_win : float [J/K]
-        Lumped capacity of outer walls.
-
-
-
+        Lumped capacity of windows.
+    weightfactor_win : list of floats
+        Weightfactors of windows (UA-Value of windows with same orientation
+        and tilt divided by ua_value_win or ua_value_win+ua_value_ow,
+        depending if windows is lumped/merged into the walls or not)
+    tilt_win : list of floats [degree]
+        Tilt of windows against the horizontal.
+    orientation_win : list of floats [degree]
+        Orientation of windows (Azimuth).
+        0 - North
+        90 - East
+        180 - South
+        270 - West
+    window_areas : list of floats [m2]
+        Area of all windows in one list.
+    solar_absorp_win : float
+        Area-weighted solar absorption for windows. (typically 0.0)
+    ir_emissivity_win : float
+        Area-weighted ir_emissivity for windows. Can be used for windows
+        facing the thermal zone and the ambient.
+    weighted_g_value : float
+        Area-weighted g-Value of all windows.
 
     """
 
-    def __init__(self, thermal_zone):
-        """Constructor for ThermalZone
+    def __init__(self, thermal_zone, merge_windows, t_bt):
+        """Constructor for TwoElement"""
 
-        """
-
-        self.thermal_zone = thermal_zone
         self.internal_id = random.random()
 
+        self.thermal_zone = thermal_zone
+        self.merge_windows = merge_windows
+        self.t_bt = t_bt
 
+        # Attributes of inner walls
+        self.area_iw = 0.0
 
+        # coefficient of heat transfer facing the inside of this thermal zone
+        self.alpha_conv_inner_iw = 0.0
+        self.alpha_rad_inner_iw = 0.0
+        self.alpha_comb_inner_iw = 0.0
+        # coefficient of heat transfer facing the adjacent thermal zone
+        self.alpha_conv_outer_iw = 0.0
+        self.alpha_rad_outer_iw = 0.0
+        self.alpha_comb_outer_iw = 0.0
+
+        # UA-Value
+        self.ua_value_iw = 0.0
+
+        # resistances for heat transfer facing the inside of this thermal zone
         self.r_conv_inner_iw = 0.0
         self.r_rad_inner_iw = 0.0
         self.r_comb_inner_iw = 0.0
@@ -195,162 +250,128 @@ class TwoElement(object):
         self.r_rad_outer_iw = 0.0
         self.r_comb_outer_iw = 0.0
 
-        self.alpha_conv_inner_iw = 0.0
-        self.alpha_rad_inner_iw = 0.0
-        self.alpha_comb_inner_iw = 0.0
+        # lumped resistance/capacity
+        self.r1_iw = 0.0
+        self.c1_iw = 0.0
 
-        self.alpha_conv_outer_iw = 0.0
-        self.alpha_rad_outer_iw = 0.0
-        self.alpha_comb_outer_iw = 0.0
+        # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
+        self.area_ow = 0.0
 
-        # Calculated values for OuterWall for each Zone
+        # coefficient of heat transfer facing the inside of this thermal zone
+        self.alpha_conv_inner_ow = 0.0
+        self.alpha_rad_inner_ow = 0.0
+        self.alpha_comb_inner_ow = 0.0
+
+        # coefficient of heat transfer facing the ambient
+        self.alpha_conv_outer_ow = 0.0
+        self.alpha_rad_outer_ow = 0.0
+        self.alpha_comb_outer_ow = 0.0
+
+        # UA-Value
+        self.ua_value_ow = 0.0
+
+        # resistances for heat transfer facing the inside of this thermal zone
+        self.r_conv_inner_ow = 0.0
+        self.r_rad_inner_ow = 0.0
+        self.r_comb_inner_ow = 0.0
+
+        # resistances for heat transfer facing the ambient
+        self.r_conv_outer_ow = 0.0
+        self.r_rad_outer_ow = 0.0
+        self.r_comb_outer_ow = 0.0
+
+        # lumped resistances/capacity
         self.r1_ow = 0.0
-        self.c1_ow = 0.0
         self.r_rest_ow = 0.0
+        self.c1_ow = 0.0
         self.r_total_ow = 0.0
 
+        # Optical properties
+        self.ir_emissivity_outer_ow = 0.0
+        self.ir_emissivity_inner_ow = 0.0
+        self.solar_absorp_ow = 0.0
+
+        # Additional attributes
         self.weightfactor_ow = []
         self.weightfactor_ground = []
         self.tilt_wall = []
         self.orientation_wall = []
         self.outer_walls_areas = []
 
-        self.ua_value_ow = 0.0
-        self.r_conv_inner_ow = 0.0
-        self.r_rad_inner_ow = 0.0
-        self.r_comb_inner_ow = 0.0
-        self.r_conv_outer_ow = 0.0
-        self.r_rad_outer_ow = 0.0
-        self.r_comb_outer_ow = 0.0
-        self.area_ow = 0.0
-
-        self.alpha_conv_inner_ow = 0.0
-        self.alpha_rad_inner_ow = 0.0
-        self.alpha_comb_inner_ow = 0.0
-
-        self.alpha_conv_outer_ow = 0.0
-        self.alpha_rad_outer_ow = 0.0
-        self.alpha_comb_outer_ow = 0.0
-
-        self.ir_emissivity_outer_ow = 0.0
-        self.ir_emissivity_inner_ow = 0.0
-        self.solar_absorp_ow = 0.0
-
+        # TODO: check this value
         self.r_rad_ow_iw = 0.0
 
-        # Calculated values for Rooftop for each Zone
-        self.r1_rt = 0.0
-        self.c1_rt = 0.0
-        self.r_rest_rt = 0.0
-        self.r_total_rt = 0.0
-        self.weightfactor_rt = []
-        self.tilt_rt = []
-        self.orientation_rt = []
-        self.ua_value_rt = 0.0
-        self.r_conv_inner_rt = 0.0
-        self.r_rad_inner_rt = 0.0
-        self.r_comb_inner_rt = 0.0
-        self.r_conv_outer_rt = 0.0
-        self.r_rad_outer_rt = 0.0
-        self.r_comb_outer_rt = 0.0
-        self.area_rt = 0.0
-
-        self.alpha_conv_inner_rt = 0.0
-        self.alpha_rad_inner_rt = 0.0
-        self.alpha_comb_inner_rt = 0.0
-
-        self.alpha_conv_outer_rt = 0.0
-        self.alpha_rad_outer_rt = 0.0
-        self.alpha_comb_outer_rt = 0.0
-
-        self.ir_emissivity_outer_rt = 0.0
-        self.ir_emissivity_inner_rt = 0.0
-        self.solar_absorp_rt = 0.0
-
-        self.r_rad_rt_iw = 0.0
-
-        # Calculated values for GroundFlor for each Zone
-        self.r1_gf = 0.0
-        self.c1_gf = 0.0
-        self.r_rest_gf = 0.0
-        self.r_total_gf = 0.0
-        self.weightfactor_gf = []
-        self.tilt_gf = []
-        self.orientation_gf = []
-        self.ua_value_gf = 0.0
-        self.r_conv_inner_gf = 0.0
-        self.r_rad_inner_gf = 0.0
-        self.r_comb_inner_gf = 0.0
-        self.r_conv_outer_gf = 0.0
-        self.r_rad_outer_gf = 0.0
-        self.r_comb_outer_gf = 0.0
-        self.area_gf = 0.0
-
-        self.alpha_conv_inner_gf = 0.0
-        self.alpha_rad_inner_gf = 0.0
-        self.alpha_comb_inner_gf = 0.0
-
-        self.alpha_conv_outer_gf = 0.0
-        self.alpha_rad_outer_gf = 0.0
-        self.alpha_comb_outer_gf = 0.0
-
-        self.ir_emissivity_inner_gf = 0.0
-        self.solar_absorp_gf = 0.0  # necessary? @PRemmen
-
-        self.r_rad_gf_iw = 0.0
-
-        # Calculated values for windows for each Zone
-        self.r1_win = 0.0
-        self.weightfactor_win = []
-        self.g_sunblind_list = []
-        self.window_areas = []
-        self.orientation_win = []
-        self.tilt_win = []
-        self.ua_value_win = 0.0
-        self.r_conv_inner_win = 0.0
-        self.r_rad_inner_win = 0.0
-        self.r_comb_inner_win = 0.0
-        self.r_conv_outer_win = 0.0
-        self.r_rad_outer_win = 0.0
-        self.r_comb_outer_win = 0.0
+        # Attributes for windows
         self.area_win = 0.0
 
+        # coefficient of heat transfer facing the inside of this thermal zone
         self.alpha_conv_inner_win = 0.0
         self.alpha_rad_inner_win = 0.0
         self.alpha_comb_inner_win = 0.0
 
+        # coefficient of heat transfer facing the ambient
         self.alpha_conv_outer_win = 0.0
         self.alpha_rad_outer_win = 0.0
         self.alpha_comb_outer_win = 0.0
-        self.solar_absorp_win = 0.0
-        self.ir_emissivity_win = 0.0
 
+        # UA-Value
+        self.ua_value_win = 0.0
+
+        # resistances for heat transfer facing the inside of this thermal zone
+        self.r_conv_inner_win = 0.0
+        self.r_rad_inner_win = 0.0
+        self.r_comb_inner_win = 0.0
+
+        # resistances for heat transfer facing the ambient
+        self.r_conv_outer_win = 0.0
+        self.r_rad_outer_win = 0.0
+        self.r_comb_outer_win = 0.0
+
+        # lumped resistances/capacity
+        self.r1_win = 0.0
+
+        # Optical properties
+        self.ir_emissivity_outer_win = 0.0
+        self.ir_emissivity_inner_win = 0.0
+        self.solar_absorp_win = 0.0
+
+        # Additional attributes
+        self.weightfactor_win = []
+        self.tilt_win = []
+        self.orientation_win = []
+        self.window_areas = []
+        self.g_sunblind_list = []
         self.weighted_g_value = 0.0
-        self.heating_load = 0.0
-        self.cooling_load = 0.0
 
     def sum_building_elements(self):
-        """sums values of several building elements to zone based parameters
+        """Sum attributes of several building elements
 
-        Sums UA-Values, R-Values and area. Calculates the weighted coefficient
-        of heat transfer for outer walls, inner walls, groundfloors, roofs and
-        windows
+        This function sums and computes the area-weighted values,
+        where necessary (the class doc string) for coefficients of heat
+        transfer, resistances, areas and UA-Values.
+
+        For TwoElement model it treats Rooftops, Groundfloor and OuterWalls
+        as one kind of wall type.
 
         """
-        # temporary attributes for outer walls
-        sum_r_conv_inner_ow = 0
-        sum_r_rad_inner_ow = 0
-        sum_r_comb_inner_ow = 0
-        sum_r_conv_outer_ow = 0
-        sum_r_rad_outer_ow = 0
-        sum_r_comb_outer_ow = 0
-        sum_ir_emissivity_outer_ow = 0.0
-        sum_ir_emissivity_inner_ow = 0.0
-        sum_solar_absorp_ow = 0.0
+        # treat all outer wall types identical
 
         outer_walls = self.thermal_zone.outer_walls + \
                       self.thermal_zone.rooftops + \
                       self.thermal_zone.ground_floors
+
+        # temporary attributes for outer walls
+        _sum_r_conv_inner_ow = 0
+        _sum_r_rad_inner_ow = 0
+        _sum_r_comb_inner_ow = 0
+        _sum_r_conv_outer_ow = 0
+        _sum_r_rad_outer_ow = 0
+        _sum_r_comb_outer_ow = 0
+        _sum_ir_emissivity_outer_ow = 0.0
+        _sum_ir_emissivity_inner_ow = 0.0
+        _sum_solar_absorp_ow = 0.0
+
+
 
         # temporary attributes for inner walls
 
@@ -370,30 +391,34 @@ class TwoElement(object):
         sum_solar_absorp_win = 0
         sum_ir_emissivity_win = 0
 
+        self.ua_value_ow = sum(out_wall.ua_value for out_wall in outer_walls)
+        self.area_ow = sum(out_wall.ua_value for out_wall in outer_walls)
+        self.r_conv_inner_ow = 1 / sum(1 / (sum(out_wall.r_inner_conv for out_wall in outer_walls)))
+
         for out_wall in outer_walls:
 
             self.ua_value_ow += out_wall.ua_value
             self.area_ow += out_wall.area
-            sum_r_conv_inner_ow += 1 / out_wall.r_inner_conv
-            sum_r_rad_inner_ow += 1 / out_wall.r_inner_rad
-            sum_r_comb_inner_ow += 1 / out_wall.r_inner_comb
-            sum_r_conv_outer_ow += 1 / out_wall.r_outer_conv
-            sum_r_rad_outer_ow += 1 / out_wall.r_outer_rad
-            sum_r_comb_outer_ow += 1 / out_wall.r_outer_comb
-            sum_ir_emissivity_outer_ow += \
+            _sum_r_conv_inner_ow += 1 / out_wall.r_inner_conv
+            _sum_r_rad_inner_ow += 1 / out_wall.r_inner_rad
+            _sum_r_comb_inner_ow += 1 / out_wall.r_inner_comb
+            _sum_r_conv_outer_ow += 1 / out_wall.r_outer_conv
+            _sum_r_rad_outer_ow += 1 / out_wall.r_outer_rad
+            _sum_r_comb_outer_ow += 1 / out_wall.r_outer_comb
+            _sum_ir_emissivity_outer_ow += \
                 out_wall.layer[-1].material.ir_emissivity * out_wall.area
-            sum_ir_emissivity_inner_ow += \
+            _sum_ir_emissivity_inner_ow += \
                 out_wall.layer[0].material.ir_emissivity * out_wall.area
-            sum_solar_absorp_ow += \
+            _sum_solar_absorp_ow += \
                 out_wall.layer[-1].material.solar_absorp * out_wall.area
 
-        if [sum_r_comb_inner_ow, sum_r_comb_outer_ow] != 0:
-            self.r_conv_inner_ow = 1 / sum_r_conv_inner_ow
-            self.r_rad_inner_ow = 1 / sum_r_rad_inner_ow
-            self.r_comb_inner_ow = 1 / sum_r_comb_inner_ow
-            self.r_conv_outer_ow = 1 / sum_r_conv_outer_ow
-            self.r_rad_outer_ow = 1 / sum_r_rad_outer_ow
-            self.r_comb_outer_ow = 1 / sum_r_comb_outer_ow
+        if [_sum_r_comb_inner_ow, _sum_r_comb_outer_ow] != 0:
+            self.r_conv_inner_ow = 1 / _sum_r_conv_inner_ow
+            self.r_rad_inner_ow = 1 / _sum_r_rad_inner_ow
+            self.r_comb_inner_ow = 1 / _sum_r_comb_inner_ow
+            self.r_conv_outer_ow = 1 / _sum_r_conv_outer_ow
+            self.r_rad_outer_ow = 1 / _sum_r_rad_outer_ow
+            self.r_comb_outer_ow = 1 / _sum_r_comb_outer_ow
             self.alpha_conv_inner_ow = (
                 1 / (self.r_conv_inner_ow * self.area_ow))
             self.alpha_rad_inner_ow = (
@@ -407,11 +432,11 @@ class TwoElement(object):
             self.alpha_comb_outer_ow = (
                 1 / (self.r_comb_outer_ow * self.area_ow))
             self.ir_emissivity_outer_ow = \
-                sum_ir_emissivity_outer_ow / self.area_ow
+                _sum_ir_emissivity_outer_ow / self.area_ow
             self.ir_emissivity_inner_ow = \
-                sum_ir_emissivity_inner_ow / self.area_ow
+                _sum_ir_emissivity_inner_ow / self.area_ow
             self.solar_absorp_ow = \
-                sum_solar_absorp_ow / self.area_ow
+                _sum_solar_absorp_ow / self.area_ow
 
         for in_wall in self.thermal_zone.inner_walls:
             self.ua_value_iw += in_wall.ua_value
