@@ -818,7 +818,7 @@ class Test_teaser(object):
             number_of_elements=2, merge_windows=False)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         # innerwall
-
+        '''
         assert round(therm_zone.model_attr.ua_value_iw, 16) == 13.443390622904332
         assert round(therm_zone.model_attr.area_iw, 1) == 34.0
         assert round(therm_zone.model_attr.r_conv_inner_iw, 18) == 0.010893246187363833
@@ -846,7 +846,7 @@ class Test_teaser(object):
         assert round(therm_zone.model_attr.ir_emissivity_inner_ow, 1) == 0.9
         assert round(therm_zone.model_attr.ir_emissivity_outer_ow, 1) == 0.9
         assert round(therm_zone.model_attr.solar_absorp_ow, 1) == 0.7
-        '''
+
         # groundfloor
         assert round(therm_zone.model_attr.ua_value_gf, 16) == 58.351477449455686
         assert round(therm_zone.model_attr.area_gf, 1) == 140.0
