@@ -32,8 +32,7 @@ except:
     warnings.warn("No CityGML module found, no CityGML import/export")
 
 class Project(object):
-
-    '''Base class for each project, serves also as API
+    """Base class for each project, serves also as API
 
         The Project class is the root class for each action in TEASER and
         should be instantiated only once for each project. It also contains
@@ -70,12 +69,11 @@ class Project(object):
         used_library_calc : str
             used library (AixLib and Annex60 are supported)
 
-    '''
+    """
 
     def __init__(self, load_data=True):
-        '''Constructor of Project Class.
-
-        '''
+        """Constructor of Project Class.
+        """
         self._name = "Project"
         self.modelica_info = ModelicaInfo()
 
@@ -100,18 +98,18 @@ class Project(object):
             self.data = None
 
     def instantiate_data_class(self):
-        '''Initialization of DataClass
+        """Initialization of DataClass
 
         Returns
         ----------
 
         DataClass : Instance of DataClass()
 
-        '''
+        """
         return DataClass()
 
     def calc_all_buildings(self, raise_errors=False):
-        '''Calculates values for all project buildings
+        """Calculates values for all project buildings
 
         You need to set the following parameters in the Project class.
 
@@ -128,7 +126,7 @@ class Project(object):
         used_library_calc : str
             used library (AixLib and Annex60 are supported)
 
-        '''
+        """
         if raise_errors is True:
             for bldg in reversed(self.buildings):
                 bldg.calc_building_parameter(
@@ -147,11 +145,12 @@ class Project(object):
                     print("raise_errors=True to get python errors")
                     self.buildings.remove(bldg)
 
-    def retrofit_all_buildings(self,
-                               year_of_retrofit,
-                               window_type=None,
-                               material=None):
-        ''' Retrofits all buildings in the project
+    def retrofit_all_buildings(
+            self,
+            year_of_retrofit,
+            window_type=None,
+            material=None):
+        """Retrofits all buildings in the project
 
         All Buildings in the project are retrofitted in the following manner:
 
@@ -180,22 +179,23 @@ class Project(object):
         material : str
             Default: EPS035
 
-        '''
+        """
 
         for bldg in self.buildings:
             bldg.retrofit_building(year_of_retrofit, window_type, material)
 
-    def type_bldg_office(self,
-                         name,
-                         year_of_construction,
-                         number_of_floors,
-                         height_of_floors,
-                         net_leased_area,
-                         with_ahu=True,
-                         office_layout=None,
-                         window_layout=None,
-                         construction_type=None):
-        '''Create and calculate an office building
+    def type_bldg_office(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu=True,
+            office_layout=None,
+            window_layout=None,
+            construction_type=None):
+        """Create and calculate an office building
 
         Parameters
         ----------
@@ -237,18 +237,19 @@ class Project(object):
 
         type_bldg : Instance of Office()
 
-        '''
+        """
 
-        type_bldg = Office(self,
-                           name,
-                           year_of_construction,
-                           number_of_floors,
-                           height_of_floors,
-                           net_leased_area,
-                           with_ahu,
-                           office_layout,
-                           window_layout,
-                           construction_type)
+        type_bldg = Office(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            office_layout,
+            window_layout,
+            construction_type)
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
@@ -257,17 +258,18 @@ class Project(object):
             used_library=self._used_library_calc)
         return type_bldg
 
-    def type_bldg_institute(self,
-                            name,
-                            year_of_construction,
-                            number_of_floors,
-                            height_of_floors,
-                            net_leased_area,
-                            with_ahu=True,
-                            office_layout=None,
-                            window_layout=None,
-                            construction_type=None):
-        '''Create and calculate an institute building
+    def type_bldg_institute(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu=True,
+            office_layout=None,
+            window_layout=None,
+            construction_type=None):
+        """Create and calculate an institute building
 
         Parameters
         ----------
@@ -309,17 +311,18 @@ class Project(object):
 
         type_bldg : Instance of Institute()
 
-        '''
-        type_bldg = Institute(self,
-                              name,
-                              year_of_construction,
-                              number_of_floors,
-                              height_of_floors,
-                              net_leased_area,
-                              with_ahu,
-                              office_layout,
-                              window_layout,
-                              construction_type)
+        """
+        type_bldg = Institute(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            office_layout,
+            window_layout,
+            construction_type)
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
@@ -328,17 +331,18 @@ class Project(object):
                 used_library=self._used_library_calc)
         return type_bldg
 
-    def type_bldg_institute4(self,
-                             name,
-                             year_of_construction,
-                             number_of_floors,
-                             height_of_floors,
-                             net_leased_area,
-                             with_ahu=True,
-                             office_layout=None,
-                             window_layout=None,
-                             construction_type=None):
-        '''Create and calculate an institute4 building
+    def type_bldg_institute4(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu=True,
+            office_layout=None,
+            window_layout=None,
+            construction_type=None):
+        """Create and calculate an institute4 building
 
         Parameters
         ----------
@@ -380,17 +384,18 @@ class Project(object):
 
         type_bldg : Instance of Institute4()
 
-        '''
-        type_bldg = Institute4(self,
-                               name,
-                               year_of_construction,
-                               number_of_floors,
-                               height_of_floors,
-                               net_leased_area,
-                               with_ahu,
-                               office_layout,
-                               window_layout,
-                               construction_type)
+        """
+        type_bldg = Institute4(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            office_layout,
+            window_layout,
+            construction_type)
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
@@ -399,17 +404,18 @@ class Project(object):
                 used_library=self._used_library_calc)
         return type_bldg
 
-    def type_bldg_institute8(self,
-                             name,
-                             year_of_construction,
-                             number_of_floors,
-                             height_of_floors,
-                             net_leased_area,
-                             with_ahu=True,
-                             office_layout=None,
-                             window_layout=None,
-                             construction_type=None):
-        '''Create and calculate an institute8 building
+    def type_bldg_institute8(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu=True,
+            office_layout=None,
+            window_layout=None,
+            construction_type=None):
+        """Create and calculate an institute8 building
 
         Parameters
         ----------
@@ -451,17 +457,18 @@ class Project(object):
 
         type_bldg : Instance of Institute8()
 
-        '''
-        type_bldg = Institute8(self,
-                               name,
-                               year_of_construction,
-                               number_of_floors,
-                               height_of_floors,
-                               net_leased_area,
-                               with_ahu,
-                               office_layout,
-                               window_layout,
-                               construction_type)
+        """
+        type_bldg = Institute8(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            office_layout,
+            window_layout,
+            construction_type)
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
@@ -470,16 +477,17 @@ class Project(object):
                 used_library=self._used_library_calc)
         return type_bldg
 
-    def type_bldg_est1a(self,
-                             name,
-                             year_of_construction,
-                             number_of_floors,
-                             height_of_floors,
-                             net_leased_area,
-                             with_ahu=False,
-                             neighbour_buildings=None,
-                             construction_type=None):
-        '''Create and calculate an est1a building
+    def type_bldg_est1a(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu=False,
+            neighbour_buildings=None,
+            construction_type=None):
+        """Create and calculate an est1a building
 
         Parameters
         ----------
@@ -513,16 +521,17 @@ class Project(object):
 
         type_bldg : Instance of EST1a()
 
-        '''
-        type_bldg = EST1a(self,
-                               name,
-                               year_of_construction,
-                               number_of_floors,
-                               height_of_floors,
-                               net_leased_area,
-                               with_ahu,
-                               neighbour_buildings,
-                               construction_type)
+        """
+        type_bldg = EST1a(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            neighbour_buildings,
+            construction_type)
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
@@ -531,17 +540,18 @@ class Project(object):
                 used_library=self._used_library_calc)
         return type_bldg
 
-    def type_bldg_est1b(self,
-                             name,
-                             year_of_construction,
-                             number_of_floors,
-                             height_of_floors,
-                             net_leased_area,
-                             with_ahu=False,
-                             neighbour_buildings=None,
-                             construction_type=None,
-                             number_of_apartments=None):
-        '''Create and calculate an est1a building
+    def type_bldg_est1b(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu=False,
+            neighbour_buildings=None,
+            construction_type=None,
+            number_of_apartments=None):
+        """Create and calculate an est1a building
 
         Parameters
         ----------
@@ -560,32 +570,33 @@ class Project(object):
             if building has a central AHU or not
         neighbour_buildings : int
             neighbour (default = 0)
-
             0: no neighbour
             1: one neighbour
             2: two neighbours
         construction_type : str (default = "heavy")
             construction type
-
             heavy: heavy construction
             light: light construction
+        number_of_apartments : int
+            number of apartments (default = 1)
 
         Returns
         ----------
 
         type_bldg : Instance of EST1a()
 
-        '''
-        type_bldg = EST1b(self,
-                               name,
-                               year_of_construction,
-                               number_of_floors,
-                               height_of_floors,
-                               net_leased_area,
-                               with_ahu,
-                               neighbour_buildings,
-                               construction_type,
-                               number_of_apartments)
+        """
+        type_bldg = EST1b(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            neighbour_buildings,
+            construction_type,
+            number_of_apartments)
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
@@ -594,17 +605,18 @@ class Project(object):
                 used_library=self._used_library_calc)
         return type_bldg
 
-    def type_bldg_est4b(self,
-                             name,
-                             year_of_construction,
-                             number_of_floors,
-                             height_of_floors,
-                             net_leased_area,
-                             with_ahu=False,
-                             neighbour_buildings=None,
-                             construction_type=None,
-                             number_of_apartments=None):
-        '''Create and calculate an est1a building
+    def type_bldg_est4b(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu=False,
+            neighbour_buildings=None,
+            construction_type=None,
+            number_of_apartments=None):
+        """Create and calculate an est1a building
 
         Parameters
         ----------
@@ -623,32 +635,33 @@ class Project(object):
             if building has a central AHU or not
         neighbour_buildings : int
             neighbour (default = 0)
-
             0: no neighbour
             1: one neighbour
             2: two neighbours
         construction_type : str (default = "heavy")
             construction type
-
             heavy: heavy construction
             light: light construction
+        number_of_apartments : int
+            number of apartments (default = 1)
 
         Returns
         ----------
 
         type_bldg : Instance of EST1a()
 
-        '''
-        type_bldg = EST4b(self,
-                               name,
-                               year_of_construction,
-                               number_of_floors,
-                               height_of_floors,
-                               net_leased_area,
-                               with_ahu,
-                               neighbour_buildings,
-                               construction_type,
-                               number_of_apartments)
+        """
+        type_bldg = EST4b(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            neighbour_buildings,
+            construction_type,
+            number_of_apartments)
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
@@ -657,17 +670,18 @@ class Project(object):
                 used_library=self._used_library_calc)
         return type_bldg
 
-    def type_bldg_est7(self,
-                             name,
-                             year_of_construction,
-                             number_of_floors,
-                             height_of_floors,
-                             net_leased_area,
-                             with_ahu=False,
-                             neighbour_buildings=None,
-                             construction_type=None,
-                             number_of_apartments=None):
-        '''Create and calculate an est1a building
+    def type_bldg_est7(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu=False,
+            neighbour_buildings=None,
+            construction_type=None,
+            number_of_apartments=None):
+        """Create and calculate an est1a building
 
         Parameters
         ----------
@@ -686,32 +700,33 @@ class Project(object):
             if building has a central AHU or not
         neighbour_buildings : int
             neighbour (default = 0)
-
             0: no neighbour
             1: one neighbour
             2: two neighbours
         construction_type : str (default = "heavy")
             construction type
-
             heavy: heavy construction
             light: light construction
+        number_of_apartments : int
+            number of apartments (default = None)
 
         Returns
         ----------
 
         type_bldg : Instance of EST1a()
 
-        '''
-        type_bldg = EST7(self,
-                               name,
-                               year_of_construction,
-                               number_of_floors,
-                               height_of_floors,
-                               net_leased_area,
-                               with_ahu,
-                               neighbour_buildings,
-                               construction_type,
-                               number_of_apartments)
+        """
+        type_bldg = EST7(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            neighbour_buildings,
+            construction_type,
+            number_of_apartments)
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
@@ -720,20 +735,21 @@ class Project(object):
                 used_library=self._used_library_calc)
         return type_bldg
 
-    def type_bldg_residential(self,
-                              name,
-                              year_of_construction,
-                              number_of_floors,
-                              height_of_floors,
-                              net_leased_area,
-                              with_ahu=False,
-                              residential_layout=None,
-                              neighbour_buildings=None,
-                              attic=None,
-                              cellar=None,
-                              dormer=None,
-                              construction_type=None):
-        '''Create and calculate an residential building
+    def type_bldg_residential(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu=False,
+            residential_layout=None,
+            neighbour_buildings=None,
+            attic=None,
+            cellar=None,
+            dormer=None,
+            construction_type=None):
+        """Create and calculate an residential building
 
         Parameters
         ----------
@@ -790,20 +806,21 @@ class Project(object):
         ----------
 
         type_bldg : Instance of SingleFamilyDwelling()
-        '''
-        type_bldg = SingleFamilyDwelling(self,
-                                         name,
-                                         year_of_construction,
-                                         number_of_floors,
-                                         height_of_floors,
-                                         net_leased_area,
-                                         with_ahu,
-                                         residential_layout,
-                                         neighbour_buildings,
-                                         attic,
-                                         cellar,
-                                         dormer,
-                                         construction_type)
+        """
+        type_bldg = SingleFamilyDwelling(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            residential_layout,
+            neighbour_buildings,
+            attic,
+            cellar,
+            dormer,
+            construction_type)
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
@@ -813,7 +830,7 @@ class Project(object):
         return type_bldg
 
     def save_project(self, file_name=None, path=None):
-        '''Saves the project to a tXML file
+        """Saves the project to a tXML file
 
         calls the function save_teaser_xml in data.TeaserXML.py
 
@@ -825,7 +842,7 @@ class Project(object):
         path : string
             if the Files should not be stored in OutputData, an alternative
             can be specified
-        '''
+        """
         if file_name is None:
             name = self.name
         else:
@@ -840,7 +857,7 @@ class Project(object):
         txml_out.save_teaser_xml(new_path, self)
 
     def load_project(self, path):
-        '''Loads the project from a teaserXML file (new format)
+        """Loads the project from a teaserXML file (new format)
 
         calls the function load_teaser_xml in data.TeaserXML.py
 
@@ -849,13 +866,12 @@ class Project(object):
         path : string
             full path to a teaserXML file
 
-        '''
+        """
 
         txml_in.load_teaser_xml(path, self)
 
-
     def save_citygml(self, file_name=None, path=None):
-        '''Saves the project to a citygml file
+        """Saves the project to a citygml file
 
         calls the function save_gml in data.CityGML we make use of CityGML core
         and EnergyADE to store semantic information
@@ -870,7 +886,7 @@ class Project(object):
             if the Files should not be stored in OutputData, an alternative
             can be specified
 
-        '''
+        """
         if file_name is None:
             name = self.name
         else:
@@ -884,19 +900,18 @@ class Project(object):
 
         citygml_out.save_gml(self, new_path)
 
-    def load_citygml(self,
-                     path=None):
-        '''Loads buildings from a citygml file
+    def load_citygml(self, path=None):
+        """Loads buildings from a citygml file
 
         calls the function load_gml in data.CityGML we make use of CityGML core
         and possibly not all kinds of CityGML modelling techniques are
         supported.
 
-        If the fucntion of the building is given as Residential (1000) or
+        If the function of the building is given as Residential (1000) or
         Office (1120) the importer directly converts the building to
-        archetype buildings. If not only the citygml geometry is imported and
+        archetype buildings. If not, only the citygml geometry is imported and
         you need take care of either the material properties and zoning or you
-        may use the _convert_bldg fucntion in citygml_input module. 
+        may use the _convert_bldg function in citygml_input module.
 
 
         Parameters
@@ -905,17 +920,20 @@ class Project(object):
         path : string
             full path to a CityGML file
 
-        '''
+        """
 
         citygml_in.load_gml(path, self)
 
-    def export_aixlib(self,
-                      building_model="None",
-                      zone_model="None",
-                      corG=None,
-                      internal_id=None,
-                      path=None):
+    def export_aixlib(
+            self,
+            building_model="None",
+            zone_model="None",
+            corG=None,
+            internal_id=None,
+            path=None):
         """Exports values to a record file for Modelica simulation
+
+        For AixLib library.
 
         Parameters
         ----------
@@ -943,17 +961,20 @@ class Project(object):
 
         utilitis.create_path(path)
 
-        aixlib_output.export_aixlib(prj=self,
-                                    building_model=building_model,
-                                    zone_model=zone_model,
-                                    corG=corG,
-                                    internal_id=internal_id,
-                                    path=path)
+        aixlib_output.export_aixlib(
+            prj=self,
+            building_model=building_model,
+            zone_model=zone_model,
+            corG=corG,
+            internal_id=internal_id,
+            path=path)
 
     def export_annex(self,
                      internal_id=None,
                      path=None):
         """Exports values to a record file for Modelica simulation
+
+        For Annex 60 Library
 
         Parameters
         ----------
@@ -973,14 +994,15 @@ class Project(object):
 
         utilitis.create_path(path)
 
-        annex60_output.export_annex60(prj=self,
-                                      number_of_elements=self.number_of_elements_calc,
-                                      merge_windows=self.merge_windows_calc,
-                                      internal_id=internal_id,
-                                      path=path)
+        annex60_output.export_annex60(
+            prj=self,
+            number_of_elements=self.number_of_elements_calc,
+            merge_windows=self.merge_windows_calc,
+            internal_id=internal_id,
+            path=path)
 
     def export_parameters_txt(self, path=None):
-        '''Exports parameters of all buildings in a readable text file
+        """Exports parameters of all buildings in a readable text file
 
         Parameters
         ----------
@@ -988,19 +1010,20 @@ class Project(object):
         path : string
             if the Files should not be stored in OutputData, an alternative
             can be specified
-        '''
+        """
 
         if path is None:
             path = os.path.join(utilitis.get_default_path(), self.name)
         else:
             path = path+"/"+self.name
 
-        text_out.export_parameters_txt(prj=self,
-                                       path=path)
+        text_out.export_parameters_txt(
+            prj=self,
+            path=path)
 
     def set_default(self):
-        '''sets all attributes except self.data to default
-        '''
+        """sets all attributes except self.data to default
+        """
 
         self.name = "Project"
 
@@ -1032,7 +1055,7 @@ class Project(object):
     @number_of_elements_calc.setter
     def number_of_elements_calc(self, value):
 
-        ass_error_1 = "calculation_method has to be 1,2,3 or 4"
+        ass_error_1 = "number_of_elements_calc has to be 1,2,3 or 4"
 
         assert value != [1, 2, 3, 4], ass_error_1
 
