@@ -216,12 +216,14 @@ class TwoElement(object):
         facing the thermal zone and the ambient.
     weighted_g_value : float
         Area-weighted g-Value of all windows.
+    heat_load : [W]
+        Static heat load of the thermal zone.
 
     Returns
     -------
 
     calc_success : boolean
-        True if calculation was successfull.
+        True if calculation was successful.
 
     """
 
@@ -351,6 +353,9 @@ class TwoElement(object):
         self.g_sunblind_list = []
         self.weighted_g_value = 0.0
 
+    def calc_attributes(self):
+        """Calls all necessary function to calculate model attributes"""
+
         outer_walls = (self.thermal_zone.outer_walls +
                        self.thermal_zone.ground_floors +
                        self.thermal_zone.rooftops)
@@ -362,7 +367,6 @@ class TwoElement(object):
             win.calc_equivalent_res()
             win.calc_ua_value()
 
-
         self.set_calc_default()
         self._sum_outer_wall_elements()
         self._sum_inner_wall_elements()
@@ -370,6 +374,9 @@ class TwoElement(object):
         self._calc_outer_elements()
         self._calc_inner_elements()
         self._calc_wf()
+        self._calc_heat_load()
+
+        return True
 
     def _calc_chain_matrix(self, element_list, omega):
         """Matrix calculation.
@@ -722,7 +729,6 @@ class TwoElement(object):
         # TODO: documentation for omega
         omega = 2 * math.pi / 86400 / self.t_bt
 
-
         outer_walls = (self.thermal_zone.outer_walls +
                        self.thermal_zone.ground_floors +
                        self.thermal_zone.rooftops)
@@ -871,6 +877,36 @@ class TwoElement(object):
 
         else:
             raise ValueError("specify merge window method correctly")
+
+    def _calc_heat_load(self):
+        """Static heat load calculation
+
+        This function calculates the static heat load of the thermal zone by
+        multiplying the UA-Value of the elements with the given Temperature
+        difference of t_inside and t_outside. And takes heat losses through
+        infiltration into account.
+
+        Attributes
+        ----------
+        ua_value_ow_temp : float [W/(m2*K)]
+            UA Value without GroundFloors
+        ua_value_gf_temp : float [W/(m2*K)]
+            UA Value of all GroundFloors
+        """
+        self.heat_load = 0.0
+        ua_value_gf_temp = sum(
+            ground.ua_value for ground in self.thermal_zone.ground_floors)
+        ua_value_ow_temp = self.ua_value_ow - ua_value_gf_temp
+        print(ua_value_gf_temp, ua_value_ow_temp)
+        self.heat_load = \
+            ((((ua_value_ow_temp + self.ua_value_win) +
+              self.thermal_zone.volume *
+             self.thermal_zone.infiltration_rate * 1/3600 *
+             self.thermal_zone.heat_capac_air *
+             self.thermal_zone.density_air) * (self.thermal_zone.t_inside -
+                                               self.thermal_zone.t_outside))
+             + (ua_value_gf_temp * (self.thermal_zone.t_inside -
+                                    self.thermal_zone.t_ground)))
 
     def set_calc_default(self):
         '''sets default calculation parameters

@@ -242,11 +242,11 @@ def example_create_building():
     and institute buildings)
     '''
     
-    prj.export_aixlib(building_model="MultizoneEquipped",
-                      zone_model="ThermalZoneEquipped",
-                      corG=True,
-                      internal_id=None,
-                      path=None)
+    #prj.export_aixlib(building_model="MultizoneEquipped",
+    #                  zone_model="ThermalZoneEquipped",
+    #                  corG=True,
+    #                  internal_id=None,
+    #                  path=None)
 
     '''
     For OpenModelica you need to exclude the centralAHU (because it is using

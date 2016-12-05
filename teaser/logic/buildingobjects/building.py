@@ -493,7 +493,7 @@ class Building(object):
             zone.calc_zone_parameters(number_of_elements=number_of_elements,
                                       merge_windows=merge_windows,
                                       t_bt=5)
-            self.sum_heat_load += zone.heat_load
+            self.sum_heat_load += zone.model_attr.heat_load
 
         if self.used_library_calc == 'AixLib':
             aixlib.compare_orientation(self)

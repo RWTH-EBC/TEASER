@@ -69,14 +69,13 @@ class ThermalZone(object):
         Normative outdoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
     t_ground : float [K]
-        Temperature directly at the outer side of ground floors.
+        Temperature directly at the outer side of ground floors for static
+        heat load calculation.
         The input of t_ground is ALWAYS in Kelvin
     density_air : float [kg/m3]
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]
         average heat capacity of the air in the thermal zone
-    heat_load : [W]
-        Static heat load of the thermal zone.
     """
 
     def __init__(self, parent=None):
@@ -103,10 +102,9 @@ class ThermalZone(object):
         self.typical_width = None
         self._t_inside = 293.15
         self._t_outside = 261.15
-        self.density_air = 1.19
-        self.heat_capac_air = 1007
+        self.density_air = 1.25
+        self.heat_capac_air = 1002
         self.t_ground = 286.15
-        self.heat_load = 0.0
 
     def calc_zone_parameters(
             self,
@@ -155,8 +153,6 @@ class ThermalZone(object):
             pass
         elif number_of_elements == 4:
             pass
-
-        self.calc_heat_load(number_of_elements=number_of_elements)
 
     def find_walls(self, orientation, tilt):
         """Returns all outer walls with given orientation and tilt
@@ -304,37 +300,6 @@ class ThermalZone(object):
         assert self.parent is not None, ass_error_1
 
         self.volume = self.area * self.parent.height_of_floors
-
-    def calc_heat_load(self, number_of_elements=2):
-        """Static heat load calculation
-
-        This function calculates the static heat load of the thermal zone by
-        multiplying the UA-Value of the elements with the given Temperature
-        difference of t_inside and t_outside. And takes heat losses through
-        infiltration into account. This functions requires attributes from
-        model_attr, thus these classes need to be instantiated and the
-        attributes calculated (see calc_zone_parameters).
-
-        """
-
-        if number_of_elements == 1 or number_of_elements == 2:
-            self.heat_load = ((self.model_attr.ua_value_ow +
-                               self.model_attr.ua_value_win) +
-                              self.volume * self.infiltration_rate *
-                              self.heat_capac_air * self.density_air) * \
-                             (self.t_inside - self.t_outside)
-        elif number_of_elements == 3:
-            self.heat_load = (
-                (self.model_attr.ua_value_ow + self.model_attr.ua_value_gf +
-                 self.model_attr.ua_value_win) + self.volume *
-                self.infiltration_rate * self.heat_capac_air *
-                self.density_air) * (self.t_inside - self.t_outside)
-        elif number_of_elements == 4:
-            self.heat_load = (
-            (self.model_attr.ua_value_ow + self.model_attr.ua_value_gf +
-             self.model_attr.ua_value_rt + self.model_attr.ua_value_win) +
-             self.volume * self.infiltration_rate * self.heat_capac_air *
-            self.density_air) * (self.t_inside - self.t_outside)
 
     def retrofit_zone(self, window_type=None, material=None):
         """Retrofits all walls and windows in the zone.
