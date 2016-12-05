@@ -1,16 +1,20 @@
 # created June 2015
 # by TEASER4 Development Team
 
+"""This module includes the ThermalZone class
+"""
 from __future__ import division
-import math
 import random
-import warnings
 import re
 from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 
 class ThermalZone(object):
-    """This class represents a Thermal Zone in a building
+    """Thermal zone class.
 
+    This class is used to manage information and parameter calculation for
+    thermal zones. Each thermal zone has one specific calculation method,
+    which is specific to the used model (model_attr). For new model
+    implementation this attribute can be assigned to new classes.
 
     Parameters
     ----------
@@ -18,12 +22,6 @@ class ThermalZone(object):
         The parent class of this object, the Building the zone belongs to.
         Allows for better control of hierarchical structures.
         Default is None
-
-    Note
-    ----------
-
-    The listed attributes are just the ones that are set by the user Calculated
-    values are not included in this list
 
     Attributes
     ----------
@@ -55,34 +53,32 @@ class ThermalZone(object):
     use_conditions : instance of UseConditions()
         Instance of UseConditions with all relevant information for the usage
         of the thermal zone
-    calc_attr : instance of OneElement(), TwoElement(), ThreeElement() or
+    model_attr : instance of OneElement(), TwoElement(), ThreeElement() or
                 FourElement()
         Instance of OneElement(), TwoElement(), ThreeElement() or
         FourElement(), that holds all calculation functions and attributes
         needed for the specific model.
-
-    typical_length : list
+    typical_length : float [m]
         normative typical length of the thermal zone
-    typical_width : list
+    typical_width : float [m]
         normative typical width of the thermal zone
-    t_inside : float
-        normative indoor temperature for static heat load calculation.
+    t_inside : float [K]
+        Normative indoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
-    t_outside : float
-        normative outdoor temperature for static heat load calculation.
+    t_outside : float [K]
+        Normative outdoor temperature for static heat load calculation.
         The input of t_inside is ALWAYS in Kelvin
-    t_ground : float
-        slab temperature directly at the outer side of ground floors.
+    t_ground : float [K]
+        Temperature directly at the outer side of ground floors.
         The input of t_ground is ALWAYS in Kelvin
-    density_air : float
+    density_air : float [kg/m3]
         average density of the air in the thermal zone
-    heat_capac_air : float
+    heat_capac_air : float [J/K]
         average heat capacity of the air in the thermal zone
     """
 
     def __init__(self, parent=None):
         """Constructor for ThermalZone
-
         """
 
         self.parent = parent
@@ -93,22 +89,21 @@ class ThermalZone(object):
         self._volume = None
         self._infiltration_rate = 0.5 # TODO is this value actually used?
         self._outer_walls = []
-        self.rooftops = []
-        self.ground_floors = []
+        self._rooftops = []
+        self._ground_floors = []
         self._windows = []
         self._inner_walls = []
-        self.floors = []
-        self.ceilings = []
+        self._floors = []
+        self._ceilings = []
         self._use_conditions = None
-        self.calc_attr = None
+        self.model_attr = None
         self.typical_length = None # TODO move this to use conditions?
         self.typical_width = None
         self._t_inside = 293.15
         self._t_outside = 261.15
-        self.density_air = 1.19  # only export for now
-        self.heat_capac_air = 1007  # only export for now
-        self.t_ground = 286.15  # Move this to building module?
-
+        self.density_air = 1.19
+        self.heat_capac_air = 1007
+        self.t_ground = 286.15
 
     def calc_zone_parameters(self,
                              number_of_elements=2,
@@ -116,13 +111,16 @@ class ThermalZone(object):
                              t_bt=5):
         """RC-Calculation for the thermal zone
 
-        This functions calculates and sets all necessary parameters for the
-        zone. The method distinguishes between the number of elements,
-        we distinguish between:
-            - one element: all walls are aggregated into one element
+        Based on the input parameters (used model) this function instantiates
+        the corresponding calculation Class (e.g. TwoElement) and calculates
+        the zone parameters. Currently the function is able to distinguishes
+        between the number of elements, we distinguish between:
+            - one element: all outer walls are aggregated into one element,
+            inner wall are neglected
             - two elements: exterior and interior walls are aggregated
-            - three elements: like 2, but floor are aggregated separately
-            - four elements: like 3 bit roofs are aggregated separately
+            - three elements: like 2, but floor or roofs are aggregated
+            separately
+            - four elements: roofs and floors are aggregated separately
 
         For all four options we can chose if the thermal conduction through
         the window is considered in a separate resistance or not.
@@ -137,81 +135,134 @@ class ThermalZone(object):
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False
 
-        t_bt : int
+        t_bt : float
             Time constant according to VDI 6007 (default t_bt = 5)
         """
 
         if number_of_elements == 1:
             pass
         elif number_of_elements == 2:
-            self.calc_attr = TwoElement(
+            self.model_attr = TwoElement(
                 thermal_zone=self,
                 merge_windows=merge_windows,
                 t_bt=t_bt)
+            self.model_attr.calc_attributes()
         elif number_of_elements == 3:
             pass
         elif number_of_elements == 4:
             pass
+
         self.calc_heat_load(number_of_elements=number_of_elements)
 
     def find_walls(self, orientation, tilt):
+        """Returns all outer walls with given orientation and tilt
+
+        This function returns a list of all OuterWall elements with the
+        same orientation and tilt.
+
+        Parameters
+        ----------
+        orientation : float [degree]
+            Azimuth of the desired walls.
+        tilt : float [degree]
+            Tilt against the horizontal of the desired walls.
+
+        Returns
+        -------
+        elements : list
+            List of OuterWalls instances with desired orientation and tilt.
         """
-        this function returns a list of all wall elemnts with the same
-        orientation and tilt to sum them in the building
-        """
-        located = []
+        elements = []
         for i in self.outer_walls:
             if i.orientation == orientation and i.tilt == tilt:
-                located.append(i)
+                elements.append(i)
             else:
                 pass
-        return located
+        return elements
 
     def find_rts(self, orientation, tilt):
+        """Returns all rooftops with given orientation and tilt
+
+        This function returns a list of all Rooftop elements with the
+        same orientation and tilt.
+
+        Parameters
+        ----------
+        orientation : float [degree]
+            Azimuth of the desired rooftops.
+        tilt : float [degree]
+            Tilt against the horizontal of the desired rooftops.
+
+        Returns
+        -------
+        elements : list
+            List of Rooftop instances with desired orientation and tilt.
         """
-        this function returns a list of all wall elemnts with the same
-        orientation and tilt to sum them in the building
-        """
-        located = []
+        elements = []
         for i in self.rooftops:
             if i.orientation == orientation and i.tilt == tilt:
-                located.append(i)
+                elements.append(i)
             else:
                 pass
-        return located
-
+        return elements
 
     def find_gfs(self, orientation, tilt):
+        """Returns all ground floors with given orientation and tilt
+
+        This function returns a list of all GroundFloor elements with the
+        same orientation and tilt.
+
+        Parameters
+        ----------
+        orientation : float [degree]
+            Azimuth of the desired ground floors.
+        tilt : float [degree]
+            Tilt against the horizontal of the desired ground floors.
+
+        Returns
+        -------
+        elements : list
+            List of GroundFloor instances with desired orientation and tilt.
         """
-        this function returns a list of all wall elemnts with the same
-        orientation and tilt to sum them in the building
-        """
-        located = []
+        elements = []
         for i in self.ground_floors:
             if i.orientation == orientation and i.tilt == tilt:
-                located.append(i)
+                elements.append(i)
             else:
                 pass
-        return located
+        return elements
 
     def find_wins(self, orientation, tilt):
+        """Returns all windows with given orientation and tilt
+
+        This function returns a list of all Window elements with the
+        same orientation and tilt.
+
+        Parameters
+        ----------
+        orientation : float [degree]
+            Azimuth of the desired windows.
+        tilt : float [degree]
+            Tilt against the horizontal of the desired windows.
+
+        Returns
+        -------
+        elements : list
+            List of Window instances with desired orientation and tilt.
         """
-        this function returns a list of all window elemnts with the same
-        orientation and tilt to sum them in the building
-        """
-        located = []
+        elements = []
         for i in self.windows:
             if i.orientation == orientation and i.tilt == tilt:
-                located.append(i)
+                elements.append(i)
             else:
                 pass
-        return located
+        return elements
 
     def set_inner_wall_area(self):
-        """Sets the inner wall area.
+        """Sets the inner wall area according to zone area
 
         Sets the inner wall area according to zone area size if type building
-        approach is used.
+        approach is used. This function covers Floors, Ceilings and InnerWalls.
         """
 
         ass_error_1 = "You need to specify parent for thermal zone"
@@ -236,7 +287,7 @@ class ThermalZone(object):
                                         self.parent.height_of_floors))
 
     def set_volume_zone(self):
-        """Sets the zone volume.
+        """Sets the zone volume according to area and height of floors
 
         Sets the volume of a zone according area and height of floors
         (building attribute).
@@ -247,58 +298,60 @@ class ThermalZone(object):
         assert self.parent is not None, ass_error_1
 
         self.volume = self.area * self.parent.height_of_floors
-        """
-        if len(self.parent.thermal_zones) == 1:
-            self.volume = self.area * self.parent.height_of_floors
-        else:
-            if self.typical_length == None \
-                and self.typical_width == None:
-                self.volume = self.area * self.parent.height_of_floors
-            else:
-                self.volume = self.typical_length*\
-                    self.typical_width * self.parent.height_of_floors
-        """
 
     def calc_heat_load(self, number_of_elements=2):
-        """Norm heat load calculation.
+        """Static heat load calculation
 
-        Calculates the norm heat load of the thermal zone.
+        This function calculates the static heat load of the thermal zone by
+        multiplying the UA-Value of the elements with the given Temperature
+        difference of t_inside and t_outside. And takes heat losses through
+        infiltration into account. This functions requires attributes from
+        model_attr, thus these classes need to be instantiated and the
+        attributes calculated (see calc_zone_parameters).
+
         """
 
-        _heat_capac_air = 1.002
-        _density_air = 1.25
-
         if number_of_elements == 1 or number_of_elements == 2:
-            self.heating_load = ((self.calc_attr.ua_value_ow +
-                                  self.calc_attr.ua_value_win) +
+            self.heating_load = ((self.model_attr.ua_value_ow +
+                                  self.model_attr.ua_value_win) +
                                  self.volume * self.infiltration_rate *
-                                 _heat_capac_air * _density_air) * \
+                                 self.heat_capac_air* self.density_air) * \
                                 (self.t_inside - self.t_outside)
         elif number_of_elements == 3:
-            self.heating_load = ((self.calc_attr.ua_value_ow + self.calc_attr.ua_value_gf +
-                                  self.calc_attr.ua_value_win) +
+            self.heating_load = ((self.model_attr.ua_value_ow + self.model_attr.ua_value_gf +
+                                  self.model_attr.ua_value_win) +
                                  self.volume * self.infiltration_rate *
                                  _heat_capac_air * _density_air) * \
                                 (self.t_inside - self.t_outside)
         elif number_of_elements == 4:
-            self.heating_load = ((self.calc_attr.ua_value_ow + self.calc_attr.ua_value_gf +
-                                  self.calc_attr.ua_value_rt + self.calc_attr.ua_value_win) +
+            self.heating_load = ((self.model_attr.ua_value_ow + self.model_attr.ua_value_gf +
+                                  self.model_attr.ua_value_rt + self.model_attr.ua_value_win) +
                                  self.volume * self.infiltration_rate *
                                  _heat_capac_air * _density_air) * \
                                 (self.t_inside - self.t_outside)
 
     def retrofit_zone(self, window_type=None, material=None):
         """Retrofits all walls and windows in the zone.
+
+        Function call for all elements facing the ambient or ground.
+
+        This function covers OuterWall, Rooftop, GroundFloor and Window.
         """
 
         for wall_count in self.outer_walls:
             wall_count.retrofit_wall(self.parent.year_of_retrofit, material)
+        for roof_count in self.rooftops:
+            roof_count.retrofit_wall(self.parent.year_of_retrofit, material)
+        for ground_count in self.ground_floors:
+            ground_count.retrofit_wall(self.parent.year_of_retrofit, material)
         for win_count in self.windows:
             win_count.replace_window(self.parent.year_of_retrofit, window_type)
 
     def delete(self):
-        """Deletes the actual thermal zone and refreshs the thermal zones of
-        the building
+        """Deletes the actual thermal zone savely.
+
+        This deletes the current thermal Zone and also refreshes the
+        thermal_zones list in the parent Building.
         """
         for index, tz in enumerate(self.parent.thermal_zones):
             if tz.internal_id == self.internal_id:
@@ -320,24 +373,28 @@ class ThermalZone(object):
 
         """
 
-        ass_error_1 = ("building element has to be an instance of OuterWall(),"
-                       " Rooftop(), GroundFloor(), Window(), InnerWall(), "
-                       "Ceiling() or Floor()")
+        ass_error_1 = ("building_element has to be an instance of OuterWall,"
+                       " Rooftop, GroundFloor, Window, InnerWall, "
+                       "Ceiling or Floor")
 
-        assert type(building_element).__name__ in ("OuterWall", "Rooftop",
-                                                   "GroundFloor", "InnerWall",
-                                                   "Ceiling", "Floor",
-                                                   "Window"), ass_error_1
+        assert type(building_element).__name__ in (
+            "OuterWall", "Rooftop", "GroundFloor",
+            "InnerWall", "Ceiling", "Floor",
+            "Window"), ass_error_1
 
-        if type(building_element).__name__ in ("OuterWall", "Rooftop",
-                                               "GroundFloor"):
+        if type(building_element).__name__ == "OuterWall":
             self._outer_walls.append(building_element)
-
-        elif type(building_element).__name__ in ("InnerWall",
-                                                 "Ceiling", "Floor"):
+        elif type(building_element).__name__ == "GroundFloor":
+            self._ground_floors.append(building_element)
+        elif type(building_element).__name__ == "Rooftop":
+            self._rooftops.append(building_element)
+        elif type(building_element).__name__ == "InnerWall":
             self._inner_walls.append(building_element)
-
-        elif type(building_element).__name__ in "Window":
+        elif type(building_element).__name__ == "Ceiling":
+            self._ceilings.append(building_element)
+        elif type(building_element).__name__ == "Floor":
+            self._floors.append(building_element)
+        elif type(building_element).__name__ == "Window":
             self._windows.append(building_element)
 
     @property
@@ -377,9 +434,45 @@ class ThermalZone(object):
 
     @outer_walls.setter
     def outer_walls(self, value):
-
         if value is None:
             self._outer_walls = []
+
+    @property
+    def rooftops(self):
+        return self._rooftops
+
+    @rooftops.setter
+    def rooftops(self, value):
+        if value is None:
+            self._rooftops = []
+
+    @property
+    def ground_floors(self):
+        return self._ground_floors
+
+    @ground_floors.setter
+    def ground_floors(self, value):
+        if value is None:
+            self._ground_floors = []
+
+    @property
+    def ceilings(self):
+        return self._ceilings
+
+    @ceilings.setter
+    def ceilings(self, value):
+        if value is None:
+            self._ceilings = []
+
+    @property
+    def floors(self):
+        return self._floors
+
+
+    @floors.setter
+    def floors(self, value):
+        if value is None:
+            self._floors = []
 
     @property
     def inner_walls(self):
