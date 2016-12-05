@@ -16,7 +16,9 @@ class Building(object):
 
     This class is used to manage information and parameter calculation for
     Buildings. It is the base class for all archetype buildings and holds a
-    list containing all ThermalZones instances.
+    list containing all ThermalZones instances. In addition it can hold an
+    optional attribute for CentralAHU instance, that is e.g. needed for
+    AixLib Simulation models.
 
     Parameters
     ----------
@@ -382,7 +384,7 @@ class Building(object):
                 sum_area += ceiling.area
         return sum_area
 
-    #TODO is this function needed at all?
+    # TODO is this function needed at all?
     def set_specific_wall_area(
             self,
             spec_zone,
@@ -457,7 +459,7 @@ class Building(object):
         for key in self.window_area:
             self.window_area[key] = self.get_window_area(key)
 
-    #TODO implement AixLib and Annex Classes (similar to thermal zone)
+    # TODO implement AixLib and Annex Classes (similar to thermal zone)
     def calc_building_parameter(
             self,
             number_of_elements=2,
@@ -498,8 +500,8 @@ class Building(object):
         elif self.used_library_calc == 'Annex60':
             import teaser.logic.simulation.annex as annex
 
-            annex.compare_orientation(self, number_of_elements=
-                                      number_of_elements)
+            annex.compare_orientation(
+                self, number_of_elements=number_of_elements)
 
     def retrofit_building(
             self,
@@ -538,7 +540,7 @@ class Building(object):
     def rotate_building(self, angle):
         """Rotates the building to a given angle
 
-        This function covers OuterWall, Rooftop (if not flatroof) and Windows.
+        This function covers OuterWall, Rooftop (if not flat roof) and Windows.
 
         Parameters
         ----------
@@ -717,28 +719,22 @@ class Building(object):
 
     @property
     def outer_area(self):
-        # some improvement needed here
-        # self._outer_area = collections.OrderedDict(self._outer_area.keys())
         return self._outer_area
 
     @outer_area.setter
     def outer_area(self, value):
-        # some improvement needed here
         self._outer_area = value
 
     @property
     def window_area(self):
-        # some improvement needed here
         return self._window_area
 
     @window_area.setter
     def window_area(self, value):
-        # some improvement needed here
         self._window_area = value
 
     @property
     def year_of_retrofit(self):
-        # some improvement needed here
         return self._year_of_retrofit
 
     @year_of_retrofit.setter
