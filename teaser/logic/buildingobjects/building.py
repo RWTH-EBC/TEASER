@@ -81,7 +81,7 @@ class Building(object):
         Total building height.
     volume : float [m3]
         Total volume of all thermal zones.
-    sum_heating_load : float [W]
+    sum_heat_load : float [W]
         Total heating load of all thermal zones.
     sum_cooling_load : float [W]
         Total heating load of all thermal zones. (currently not supported)
@@ -149,7 +149,7 @@ class Building(object):
 
         self.bldg_height = None
         self.volume = 0
-        self.sum_heating_load = 0
+        self.sum_heat_load = 0
         self.sum_cooling_load = 0
 
         self._number_of_elements_calc = 2
@@ -493,7 +493,7 @@ class Building(object):
             zone.calc_zone_parameters(number_of_elements=number_of_elements,
                                       merge_windows=merge_windows,
                                       t_bt=5)
-            self.sum_heating_load += zone.heating_load
+            self.sum_heat_load += zone.heat_load
 
         if self.used_library_calc == 'AixLib':
             aixlib.compare_orientation(self)

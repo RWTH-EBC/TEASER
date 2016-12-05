@@ -75,6 +75,8 @@ class ThermalZone(object):
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]
         average heat capacity of the air in the thermal zone
+    heat_load : [W]
+        Static heat load of the thermal zone.
     """
 
     def __init__(self, parent=None):
@@ -104,11 +106,13 @@ class ThermalZone(object):
         self.density_air = 1.19
         self.heat_capac_air = 1007
         self.t_ground = 286.15
+        self.heat_load = 0.0
 
-    def calc_zone_parameters(self,
-                             number_of_elements=2,
-                             merge_windows=False,
-                             t_bt=5):
+    def calc_zone_parameters(
+            self,
+            number_of_elements=2,
+            merge_windows=False,
+            t_bt=5):
         """RC-Calculation for the thermal zone
 
         Based on the input parameters (used model) this function instantiates
@@ -270,11 +274,13 @@ class ThermalZone(object):
         assert self.parent is not None, ass_error_1
 
         for floor in self.floors:
-            floor.area = ((self.parent.number_of_floors - 1) /
-                         self.parent.number_of_floors) * self.area
+            floor.area = (
+                (self.parent.number_of_floors - 1) /
+                self.parent.number_of_floors) * self.area
         for ceiling in self.ceilings:
-            ceiling.area = ((self.parent.number_of_floors - 1) /
-                          self.parent.number_of_floors) * self.area
+            ceiling.area = (
+                (self.parent.number_of_floors - 1) /
+                self.parent.number_of_floors) * self.area
 
         for wall in self.inner_walls:
             typical_area = self.typical_length * self.typical_width
@@ -312,23 +318,23 @@ class ThermalZone(object):
         """
 
         if number_of_elements == 1 or number_of_elements == 2:
-            self.heating_load = ((self.model_attr.ua_value_ow +
-                                  self.model_attr.ua_value_win) +
-                                 self.volume * self.infiltration_rate *
-                                 self.heat_capac_air* self.density_air) * \
-                                (self.t_inside - self.t_outside)
+            self.heat_load = ((self.model_attr.ua_value_ow +
+                               self.model_attr.ua_value_win) +
+                              self.volume * self.infiltration_rate *
+                              self.heat_capac_air * self.density_air) * \
+                             (self.t_inside - self.t_outside)
         elif number_of_elements == 3:
-            self.heating_load = ((self.model_attr.ua_value_ow + self.model_attr.ua_value_gf +
-                                  self.model_attr.ua_value_win) +
-                                 self.volume * self.infiltration_rate *
-                                 _heat_capac_air * _density_air) * \
-                                (self.t_inside - self.t_outside)
+            self.heat_load = (
+                (self.model_attr.ua_value_ow + self.model_attr.ua_value_gf +
+                 self.model_attr.ua_value_win) + self.volume *
+                self.infiltration_rate * self.heat_capac_air *
+                self.density_air) * (self.t_inside - self.t_outside)
         elif number_of_elements == 4:
-            self.heating_load = ((self.model_attr.ua_value_ow + self.model_attr.ua_value_gf +
-                                  self.model_attr.ua_value_rt + self.model_attr.ua_value_win) +
-                                 self.volume * self.infiltration_rate *
-                                 _heat_capac_air * _density_air) * \
-                                (self.t_inside - self.t_outside)
+            self.heat_load = (
+            (self.model_attr.ua_value_ow + self.model_attr.ua_value_gf +
+             self.model_attr.ua_value_rt + self.model_attr.ua_value_win) +
+             self.volume * self.infiltration_rate * self.heat_capac_air *
+            self.density_air) * (self.t_inside - self.t_outside)
 
     def retrofit_zone(self, window_type=None, material=None):
         """Retrofits all walls and windows in the zone.
