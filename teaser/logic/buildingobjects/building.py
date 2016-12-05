@@ -503,8 +503,8 @@ class Building(object):
 
     def retrofit_building(
             self,
-            window_type=None,
             year_of_retrofit=None,
+            window_type=None,
             material=None):
         """Retrofits all zones in the building
 
@@ -514,10 +514,10 @@ class Building(object):
 
         Parameters
         ----------
-        window_type : str
-            Default: EnEv 2014
         year_of_retrofit : float
             Year of last retrofit.
+        window_type : str
+            Default: EnEv 2014
         material : str
             Default: EPS035
         """
