@@ -143,7 +143,7 @@ class Annex60(object):
         """
 
         for i in orient_tilt:
-            if number_of_elements in [1,2,3]
+            if number_of_elements in [1,2,3]:
                 walls = thermal_zone.model_attr.find_walls(i[0], i[1]) + \
                         thermal_zone.model_attr.find_rts(i[0], i[1])
             elif number_of_elements == 4:

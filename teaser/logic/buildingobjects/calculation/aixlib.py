@@ -114,7 +114,7 @@ class AixLib(object):
                     sum([groundfl.wf_out for groundfl in ground_floors]))
 
             for i in self.parent.orient_tilt:
-                walls_roofs = zone.find_walls(i[0], i[1])
+                walls_roofs = zone.find_walls(i[0], i[1]) + zone.find_rts(i[0], i[1])
                 wins = zone.find_wins(i[0], i[1])
 
                 zone.model_attr.tilt_wall.append(i[1])
