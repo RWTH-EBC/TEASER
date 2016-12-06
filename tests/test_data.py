@@ -742,14 +742,15 @@ class Test_teaser(object):
 
     def test_fill_outer_wall_area_dict(self):
         '''test of fill_outer_wall_area_dict'''
-
+        prj.set_default()
+        helptest.building_test2(prj)
         prj.buildings[-1].fill_outer_area_dict()
         outwall_dict_round = {key: round(value, 2) for key, value in
                               prj.buildings[-1].outer_area.items()}
         assert outwall_dict_round == {-2.0: 140,
                                       -1.0: 140,
                                       0.0: 10.0,
-                                      90.0: 500.0,
+                                      90.0: 14.0,
                                       180.0: 10.0,
                                       270.0: 14.0}
 

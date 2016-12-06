@@ -39,6 +39,10 @@ self.orient_tilt = []
 
     """
 
+    def __init__(self, parent):
+
+        self.parent = parent
+
     def compare_orientation(self):
         """Compares orientation of walls of all zones and sorts them
 
@@ -75,7 +79,7 @@ self.orient_tilt = []
                                   "flat roofs or >= 0.0 for pitched roofs")
             for win in zone.windows:
                 if win.orientation >= -1.0:
-                    orient_tilt_help.append([win.orientation, win.tilt])
+                    orient_tilt_help.append((win.orientation, win.tilt))
                 else:
                     warnings.warn("Windows should have orientation -1 for "
                                   "windows in flat roofs or >= 0.0")
@@ -94,8 +98,8 @@ self.orient_tilt = []
                 self.parent.orient_tilt.pop(0))
 
         for i in self.parent.orient_tilt:
-            self.parent.orientation_self.parent.append(i[0])
-            self.parent.tilt_self.parent.append(i[1])
+            self.parent.orientation_bldg.append(i[0])
+            self.parent.tilt_bldg.append(i[1])
 
         for zone in self.parent.thermal_zones:
 
