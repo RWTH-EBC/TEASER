@@ -7,7 +7,7 @@ import inspect
 import random
 import re
 from teaser.logic.buildingobjects.calculation.aixlib import AixLib
-#from teaser.logic.buildingobjects.calculation.annex60 import Annex60
+from teaser.logic.buildingobjects.calculation.annex60 import Annex60
 
 
 from teaser.logic.buildingobjects.buildingsystems.buildingahu \
@@ -433,11 +433,9 @@ class Building(object):
         number_of_elements : int
             defines the number of elements, that area aggregated, between 1
             and 4, default is 2
-
         merge_windows : bool
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False
-
         used_library : str
             used library (AixLib and Annex60 are supported)
         """
@@ -447,9 +445,10 @@ class Building(object):
         self._used_library_calc = used_library
 
         for zone in self.thermal_zones:
-            zone.calc_zone_parameters(number_of_elements=number_of_elements,
-                                      merge_windows=merge_windows,
-                                      t_bt=5)
+            zone.calc_zone_parameters(
+                number_of_elements=number_of_elements,
+                merge_windows=merge_windows,
+                t_bt=5)
             self.sum_heat_load += zone.model_attr.heat_load
 
         if self.used_library_calc == 'AixLib':
@@ -457,7 +456,8 @@ class Building(object):
             self.library_attr.compare_orientation()
         elif self.used_library_calc == 'Annex60':
             self.library_attr = Annex60(parent=self)
-            self.library_attr.compare_orientation()
+            self.library_attr.compare_orientation(
+                number_of_elements=number_of_elements)
 
     def retrofit_building(
             self,

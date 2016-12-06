@@ -13,7 +13,7 @@ import warnings
 class AixLib(object):
     """AixLib Class
 
-    This class holds functions to sort and aprtly rewrite zone and building
+    This class holds functions to sort and partly rewrite zone and building
     attributes specific for AixLib Multizone and MultizoneEquipped
     simulation. This includes the export of boundary conditions and AHU
     operation values.
@@ -106,16 +106,15 @@ class AixLib(object):
 
         for zone in self.parent.thermal_zones:
 
-            groundfloors = zone.find_gfs(-2, 0)
-            if not groundfloors:
+            ground_floors = zone.find_gfs(-2, 0)
+            if not ground_floors:
                 zone.model_attr.weightfactor_ground.append(0.0)
             else:
                 zone.model_attr.weightfactor_ground.append(
-                    sum([groundfl.wf_out for groundfl in groundfloors]))
+                    sum([groundfl.wf_out for groundfl in ground_floors]))
 
             for i in self.parent.orient_tilt:
-                walls_roofs = zone.find_walls(i[0], i[1]) + \
-                              zone.find_rts(i[0], i[1])
+                walls_roofs = zone.find_walls(i[0], i[1])
                 wins = zone.find_wins(i[0], i[1])
 
                 zone.model_attr.tilt_wall.append(i[1])
