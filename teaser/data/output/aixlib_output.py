@@ -6,11 +6,13 @@
 This module contains function to call Templates for AixLib model generation
 """
 
-import teaser.logic.utilities as utilitis
-from mako.template import Template
-import scipy.io
-import teaser.logic.simulation.aixlib as aixlib
 import warnings
+
+from mako.template import Template
+
+import teaser.logic.buildingobjects.calculation.aixlib as aixlib
+import teaser.logic.utilities as utilitis
+
 
 def export_aixlib(prj,
                   building_model="None",

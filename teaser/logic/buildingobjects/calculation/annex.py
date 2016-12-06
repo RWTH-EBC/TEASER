@@ -10,6 +10,16 @@ This module contains functions to sort and partly rewrite zone attributes
 specific for annex simulation, including the export of boundary conditions
 and AHU operation values
 """
+# additional simulation parameters
+
+self.file_ahu = None
+self.file_internal_gains = None
+self.file_set_t = None
+self.file_weather = None
+self.orientation_bldg = []
+self.tilt_bldg = []
+self.orient_tilt = []
+
 import scipy.io
 import teaser.logic.utilities as utilitis
 import numpy as np

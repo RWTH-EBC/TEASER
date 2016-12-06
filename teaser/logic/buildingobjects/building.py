@@ -3,12 +3,15 @@
 
 """This module includes the Building class
 """
+import inspect
 import random
 import re
-import inspect
+from teaser.logic.buildingobjects.calculation.aixlib import AixLib
+#from teaser.logic.buildingobjects.calculation.annex60 import Annex60
+
+
 from teaser.logic.buildingobjects.buildingsystems.buildingahu \
     import BuildingAHU
-import teaser.logic.simulation.aixlib as aixlib
 
 
 class Building(object):
@@ -98,6 +101,9 @@ class Building(object):
     used_library_calc : str
         'AixLib' for https://github.com/RWTH-EBC/AixLib
         'Annex60' for https://github.com/iea-annex60/modelica-annex60
+    library_attr : Annex() or AixLib() instance
+        Classes with specific functions and attributes for building models in
+        Annex60 and AixLib. Python classes can be found in calculation package.
 
 
     TODO: aixlib module into class!
@@ -156,15 +162,7 @@ class Building(object):
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
 
-        # additional simulation parameters
-
-        self.file_ahu = None
-        self.file_internal_gains = None
-        self.file_set_t = None
-        self.file_weather = None
-        self.orientation_bldg = []
-        self.tilt_bldg = []
-        self.orient_tilt = []
+        self.library_attr = None
 
     def set_height_gml(self):
         """Calculates the height of a building from CityGML data
@@ -384,46 +382,6 @@ class Building(object):
                 sum_area += ceiling.area
         return sum_area
 
-    # TODO is this function needed at all?
-    def set_specific_wall_area(
-            self,
-            spec_zone,
-            spec_wall,
-            new_area):
-        """Set one specific wall area
-
-        sets the area of a specific wall in a specific zone and weights the
-        rest of the walls according to their zone size
-
-        Parameters
-        ----------
-
-        spec_zone : ThermalZone()
-            pointer to the corresponding zone
-        spec_wall : OuterWall()
-            pointer to the corresponding wall
-        new_area : float
-            new area of specific wall
-        """
-
-        spec_wall.area = new_area
-        actual_area = self.get_outer_wall_area(spec_wall.orientation)-new_area
-        for zone_count in self.thermal_zones:
-            for wall_count in zone_count.outer_walls:
-                if wall_count.orientation == spec_wall.orientation:
-                    if wall_count is spec_wall:
-                        pass
-                    elif zone_count is spec_zone:
-                        wall_count.area = \
-                            (actual_area * (zone_count.area /
-                                            self.net_leased_area)) / \
-                            (float(len(zone_count.outer_walls)) - 1)
-                    else:
-                        wall_count.area = \
-                            (actual_area * (zone_count.area /
-                                            self.net_leased_area)) / \
-                            (float(len(zone_count.outer_walls)))
-
     def fill_outer_area_dict(self):
         """Fills the attribute outer_area
 
@@ -459,7 +417,6 @@ class Building(object):
         for key in self.window_area:
             self.window_area[key] = self.get_window_area(key)
 
-    # TODO implement AixLib and Annex Classes (similar to thermal zone)
     def calc_building_parameter(
             self,
             number_of_elements=2,
@@ -496,12 +453,11 @@ class Building(object):
             self.sum_heat_load += zone.model_attr.heat_load
 
         if self.used_library_calc == 'AixLib':
-            aixlib.compare_orientation(self)
+            self.library_attr = AixLib(parent=self)
+            self.library_attr.compare_orientation()
         elif self.used_library_calc == 'Annex60':
-            import teaser.logic.simulation.annex as annex
-
-            annex.compare_orientation(
-                self, number_of_elements=number_of_elements)
+            self.library_attr = Annex60(parent=self)
+            self.library_attr.compare_orientation()
 
     def retrofit_building(
             self,

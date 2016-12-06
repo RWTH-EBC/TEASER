@@ -740,19 +740,6 @@ class Test_teaser(object):
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert round(therm_zone.windows[0].area, 3) == 1.0
 
-    def test_set_specific_wall_area(self):
-        '''test of set_specific_wall_area'''
-        prj.set_default()
-        helptest.building_test2(prj)
-        prj.buildings[-1].set_specific_wall_area(
-            prj.buildings[-1].thermal_zones[-1],
-            prj.buildings[-1].thermal_zones[-1].outer_walls[1],
-            500)
-
-        therm_zone = prj.buildings[-1].thermal_zones[-1]
-        assert round(therm_zone.outer_walls[0].area, 2) == 10.0
-        assert round(therm_zone.outer_walls[1].area, 1) == 500
-
     def test_fill_outer_wall_area_dict(self):
         '''test of fill_outer_wall_area_dict'''
 
