@@ -9,7 +9,9 @@ import teaser.data.output.material_output as material_output
 
 
 class Material(object):
-    """This class represents a Material.
+    """Material class
+
+    This class holds information of Material used for buidling element layer.
 
 
     Parameters
@@ -23,26 +25,19 @@ class Material(object):
     Attributes
     ----------
     name : str
-        Individual name
-
-    density : float
-        Density of material in kg/m^3
-
-    thermal_conduc : float
-        Thermal conductivity of material in W/(m*K)
-
-    heat_capac : float
-        Specific heat capacity of material in kJ/(kg*K)
-
+        Name of material
+    density : float [kg/m3]
+        Density of material
+    thermal_conduc : float [W/(m*K)]
+        Thermal conductivity of material
+    heat_capac : float [kJ/(kg*K)]
+        Specific heat capacity of material
     solar_absorp : float
         Coefficient of absorption of solar short wave
-
     ir_emissivity : float
         Coefficient of longwave emissivity of material
-
     transmittance : float
         Coefficient of transmittanve of material
-
     material_id : str(uuid)
         UUID of material, this is used to have similar behaviour like foreign
         key in SQL data bases for use in TypeBuildingElements and Material xml
