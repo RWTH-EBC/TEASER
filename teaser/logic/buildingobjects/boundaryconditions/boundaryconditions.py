@@ -249,7 +249,7 @@ class BoundaryConditions(UseConditions):
         self.heating_time = [5, 18]
 
         self._persons = 5.0
-        self.activity_type_persons = 3  # physical activity
+        self.activity_type_persons = 3
         self.ratio_conv_rad_persons = 0.5
         self._profile_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.4,
                                  0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
@@ -278,21 +278,21 @@ class BoundaryConditions(UseConditions):
     def load_use_conditions(self,
                             zone_usage,
                             data_class=None):
-        """load typical use conditions
+        """Load typical use conditions from XML data base
 
-        loads Use conditions specified in the XML, according to 18599
+        Loads Use conditions specified in the XML.
 
         Parameters
         ----------
         zone_usage : str
-            code list for zone_usage according to 18599
+            code list for zone_usage according to 18599 or self defined
 
         data_class : DataClass()
             DataClass containing the bindings for Use Conditions (typically
             this is the data class stored in prj.data,
-            but the user can individually change that. Default is
-            self.parent.parent.parent.data (which is data_class in current
-            project)
+            but the user can individually change that. Default is None which
+            leads to an automatic setter to self.parent.parent.parent.data (
+            which is DataClass in current project)
         """
 
         if data_class is None:
@@ -300,9 +300,10 @@ class BoundaryConditions(UseConditions):
         else:
             data_class = data_class
 
-        boundcond_input.load_boundary_conditions(bound_cond=self,
-                                                 zone_usage=zone_usage,
-                                                 data_class=data_class)
+        boundcond_input.load_boundary_conditions(
+            bound_cond=self,
+            zone_usage=zone_usage,
+            data_class=data_class)
 
     def save_use_conditions(self, data_class):
         """Use conditions saver.
@@ -311,7 +312,8 @@ class BoundaryConditions(UseConditions):
         for use conditions in InputData. If the Project parent is set, it
         automatically saves it to the file given in Project.data. Alternatively
         you can specify a path to a file of UseConditions. If this
-        file does not exist, a new file is created.
+        file does not exist, a new file is created. Use Conditions are not
+        overwritten if they already exist in XML!
 
         Parameters
         ----------
@@ -329,8 +331,9 @@ class BoundaryConditions(UseConditions):
         else:
             data_class = data_class
 
-        boundcond_output.save_bound_conditions(bound_cond=self,
-                                               data_class=data_class)
+        boundcond_output.save_bound_conditions(
+            bound_cond=self,
+            data_class=data_class)
 
     @property
     def typical_length(self):
@@ -367,9 +370,8 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
+                self.parent.parent.file_internal_gains = (
+                    "/InternalGains_" + self.parent.parent.name + ".mat")
         self._profile_persons = value
 
     @property
@@ -383,9 +385,8 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
+                self.parent.parent.file_internal_gains = (
+                    "/InternalGains_" + self.parent.parent.name + ".mat")
         self._profile_machines = value
 
     @property
@@ -400,9 +401,8 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
+                self.parent.parent.file_internal_gains = (
+                    "/InternalGains_" + self.parent.parent.name + ".mat")
 
         self._profile_lighting = value
 
@@ -428,9 +428,8 @@ class BoundaryConditions(UseConditions):
         else:
             if self.parent is not None:
                 if self.parent.parent.file_set_t is None:
-                    self.parent.parent.file_set_t = ("/TSet" +
-                                                     self.parent.parent.name +
-                                                     ".mat")
+                    self.parent.parent.file_set_t = (
+                        "/TSet" + self.parent.parent.name + ".mat")
             else:
                 pass
 
@@ -458,9 +457,8 @@ class BoundaryConditions(UseConditions):
         else:
             if self.parent is not None:
                 if self.parent.parent.file_set_t is None:
-                    self.parent.parent.file_set_t = ("/TSet_" +
-                                                     self.parent.parent.name +
-                                                     ".mat")
+                    self.parent.parent.file_set_t = (
+                        "/TSet_" + self.parent.parent.name + ".mat")
                 else:
                     pass
         self._set_temp_cool = value
@@ -540,9 +538,8 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("/AHU_" +
-                                               self.parent.parent.name +
-                                               ".mat")
+                self.parent.parent.file_ahu = (
+                    "/AHU_" + self.parent.parent.name + ".mat")
         self._rel_humidity = value
 
     @property
@@ -566,9 +563,8 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("/AHU_" +
-                                               self.parent.parent.name +
-                                               ".mat")
+                self.parent.parent.file_ahu = (
+                    "/AHU_" + self.parent.parent.name + ".mat")
         self._min_air_exchange = value
 
     @property
@@ -592,9 +588,8 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("/AHU_" +
-                                               self.parent.parent.name +
-                                               ".mat")
+                self.parent.parent.file_ahu = (
+                    "/AHU_" + self.parent.parent.name + ".mat")
         self._min_ahu = value
 
     @property
@@ -618,9 +613,8 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("/AHU_" +
-                                               self.parent.parent.name +
-                                               ".mat")
+                self.parent.parent.file_ahu = (
+                    "/AHU_" + self.parent.parent.name + ".mat")
         self._max_ahu = value
 
     @property
@@ -644,9 +638,8 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
+                self.parent.parent.file_internal_gains = (
+                    "/InternalGains_" + self.parent.parent.name + ".mat")
         self._persons = value
 
     @property
@@ -670,9 +663,8 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
+                self.parent.parent.file_internal_gains = (
+                    "/InternalGains_" + self.parent.parent.name + ".mat")
         self._machines = value
 
     @property
@@ -696,7 +688,6 @@ class BoundaryConditions(UseConditions):
             pass
         else:
             if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
+                self.parent.parent.file_internal_gains = (
+                    "/InternalGains_" + self.parent.parent.name + ".mat")
         self._lighting_power = value
