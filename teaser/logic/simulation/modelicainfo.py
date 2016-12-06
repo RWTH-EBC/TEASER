@@ -3,7 +3,25 @@
 
 
 class ModelicaInfo():
+    """ModelicaInfo Class
 
+    This class holds information specific for Modelica Simulation.
+
+
+    Attributes
+    ----------
+
+    runtime_simulation : str [s]
+        Total duration of simulation, default 31536000 for one year
+    interval_output : str [s]
+        Interval for one time step, default 3600 for one hour
+    solver : list
+        list of available solvers for Modelica, default ['Lsodar', 'dassl']
+    current_solver : str
+        solver that should be used in simulation, default 'dassl'
+    equidistant_output : bool
+        Use of Equidistant time grid flag in Modelica.
+    """
     def __init__(self):
         '''Constructor of Simulation Class.
 
