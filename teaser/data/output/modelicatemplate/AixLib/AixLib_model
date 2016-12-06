@@ -13,21 +13,21 @@ model ${bldg.name}
 % endif
 
 % if physics == "vdi":
-  (redeclare 
+  (redeclare
         AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysicsVDI
         buildingPhysics
 % else:
-  (redeclare 
+  (redeclare
         AixLib.Building.LowOrder.BaseClasses.BuildingPhysics.BuildingPhysics
         buildingPhysics
-% endif 
+% endif
 
 % if gFac is True:
-  (redeclare 
+  (redeclare
           AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.CorG_VDI6007
           corG)
 % else:
-   (redeclare 
+   (redeclare
           AixLib.Building.Components.WindowsDoors.BaseClasses.CorrectionSolarGain.NoCorG
           corG)
 % endif
@@ -67,7 +67,7 @@ model ${bldg.name}
     tableName="Internals",
     columns=2:${(3*get_n(bldg.thermal_zones))+1},
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/${bldg.name}/${bldg.file_internal_gains}"))
+        "modelica://${mod_prj}/${bldg.name}/${bldg.library_attr.file_internal_gains}"))
     annotation (Placement(transformation(extent={{84,18},{64,38}})));
 
   Modelica.Blocks.Sources.CombiTimeTable combiTimeTable(table=[
@@ -204,7 +204,7 @@ end ${bldg.name};
     extrapolation=Modelica.Blocks.Types.Extrapolation.HoldLastPoint,
     columns=2:${get_n(bldg.thermal_zones)+1},
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/${bldg.name}/${bldg.file_set_t}"))
+        "modelica://${mod_prj}/${bldg.name}/${bldg.library_attr.file_set_t}"))
     annotation (Placement(transformation(extent={{-92,8},{-72,28}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableAHU(
@@ -213,7 +213,7 @@ end ${bldg.name};
     tableName="AHU",
     columns=2:5,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/${bldg.name}/${bldg.file_ahu}"))
+        "modelica://${mod_prj}/${bldg.name}/${bldg.library_attr.file_ahu}"))
     annotation (Placement(transformation(extent={{66,-50},{46,-30}})));
 
   Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
@@ -222,7 +222,7 @@ end ${bldg.name};
     tableName="Internals",
     columns=2:${(3*get_n(bldg.thermal_zones))+1},
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/${bldg.name}/${bldg.file_internal_gains}"))
+        "modelica://${mod_prj}/${bldg.name}/${bldg.library_attr.file_internal_gains}"))
     annotation (Placement(transformation(extent={{84,18},{64,38}})));
 
   Modelica.Blocks.Sources.Constant const[${get_n(bldg.thermal_zones)}](each k=0)
@@ -343,4 +343,3 @@ end ${bldg.name};
 return check
   %>
 </%def>
-

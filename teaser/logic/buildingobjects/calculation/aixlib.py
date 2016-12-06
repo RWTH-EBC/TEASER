@@ -29,19 +29,22 @@ class AixLib(object):
     Attributes
     ----------
 
-    self.file_ahu = None
-self.file_internal_gains = None
-self.file_set_t = None
-self.file_weather = None
-self.orientation_bldg = []
-self.tilt_bldg = []
-self.orient_tilt = []
+    file_set_t : str
+        Filename for set temperature file
+    file_ahu : str
+        Filename for AHU boundary conditions file
+    file_intern_gains:
+        Filename for internal gains file
 
     """
 
     def __init__(self, parent):
 
         self.parent = parent
+
+        self.file_set_t = "/Tset_" + self.parent.name + ".mat"
+        self.file_ahu = "/AHU_" + self.parent.name + ".mat"
+        self.file_internal_gains = "/InternalGains_" + self.parent.name + ".mat"
 
     def compare_orientation(self):
         """Compares orientation of walls of all zones and sorts them
@@ -143,20 +146,20 @@ self.orient_tilt = []
                     # TODO what is this value needed for?
                     [zone.model_attr.window_areas.append(i.area) for i in wins]
 
+    @staticmethod
+    def create_profile(duration_profile=86400, time_step=3600):
+        """Creates a profile for building boundary conditions
 
-    def create_timeline(bldg, duration_profile = 86400, time_step = 3600):
-        ''' Creates a timeline for building boundary conditions
-
-        This function creates a list with a equidistant timeline given the
+        This function creates a list with an equidistant profile given the
         duration of the profile in seconds (default one day, 86400 s) and the
         time_step in seconds (default one hour, 3600 s). Needed for boundary
         input of the building for Modelica simulation
 
         Note
-        ----------
+        -----
         As Python starts from counting the range from zero, but Modelica needs
-        0 as start value and additional 24 entries. We add one interation
-        step in the time line.
+        0 as start value and additional 24 entries. We add one iteration
+        step in the profile.
 
         Parameters
         ----------
@@ -165,13 +168,12 @@ self.orient_tilt = []
         time_step : int
             time step used in the profile in seconds (default one hour, 3600 s)
 
-
         Returns
         ---------
         time_line : [[int]]
             list of time steps as preparation for the output of boundary
             conditions
-        '''
+        """
         ass_error_1 = "duration musst be a multiple of time_step"
 
         assert float(duration_profile/time_step).is_integer(), ass_error_1
@@ -182,13 +184,11 @@ self.orient_tilt = []
             time_line.append([i*time_step])
         return time_line
 
-    def modelica_set_temp(bldg, path = None):
-        '''creates .mat file for set temperatures for each zone
+    def modelica_set_temp(self, path=None):
+        """creates .mat file for set temperatures
 
         This function creates a matfile (-v4) for set temperatures of each
-        zone
-
-        !AixLib sepcific!
+        zone, that are all saved into one matrix.
 
         1. Row: heat set temperature of all zones
         2. Row: cool set temperature of all zones
@@ -197,13 +197,7 @@ self.orient_tilt = []
         ----------
         path : str
             optional path, when matfile is exported seperately
-
-        '''
-
-        if bldg.file_set_t is None:
-            bldg.file_set_t = "/Tset_"+bldg.name+".mat"
-        else:
-            pass
+        """
 
         if path is None:
             path = utilitis.get_default_path()
@@ -211,36 +205,29 @@ self.orient_tilt = []
             pass
 
         utilitis.create_path(path)
-        path = path + bldg.file_set_t
+        path += self.file_set_t
 
         t_set_heat = [0]
 
-        for zone_count in bldg.thermal_zones:
+        for zone_count in self.parent.thermal_zones:
             t_set_heat.append(zone_count.use_conditions.set_temp_heat)
 
         scipy.io.savemat(path,
                          mdict={'Tset': [t_set_heat]},
-                         appendmat = False,
-                         format = '4')
+                         appendmat=False,
+                         format='4')
 
-
-    def modelica_AHU_boundary(bldg,
-                              time_line = None,
-                              path = None):
-        '''creates .mat file for AHU boundary conditions (building)
+    def modelica_AHU_boundary(self, time_line=None, path=None):
+        """creates .mat file for AHU boundary conditions (building)
 
         This function creates a matfile (-v4) for building AHU boundary
         conditions
-
-        !AixLib sepcific!
-
-        Known limitation:
 
         1. Column : time step
         2. Column : desired AHU profile temperature
         3. Column : Desired minimal relative humidity
         4. Column : desired maximal relative humidity
-        5. Columb : AHU status (On/Off)
+        5. Column : AHU status (On/Off)
 
         Parameters
         ----------
@@ -260,12 +247,7 @@ self.orient_tilt = []
         profile_v_flow : [int]
             timeline of desired relative v_flow of the AHU simulation (0..1)
 
-        '''
-
-        if bldg.file_ahu is None:
-            bldg.file_ahu = "/AHU_"+bldg.name+".mat"
-        else:
-            pass
+        """
 
         if path is None:
             path = utilitis.get_default_path()
@@ -273,39 +255,38 @@ self.orient_tilt = []
             pass
 
         utilitis.create_path(path)
-        path = path + bldg.file_ahu
+        path += self.file_ahu
 
         if time_line is None:
-            time_line = create_timeline(bldg)
-        if bldg.with_ahu is True:
-            profile_temperature = \
-                        bldg.central_ahu.profile_temperature
-            profile_min_relative_humidity = \
-                        bldg.central_ahu.profile_min_relative_humidity
-            profile_max_relative_humidity = \
-                        bldg.central_ahu.profile_max_relative_humidity
-            profile_v_flow = \
-                        bldg.central_ahu.profile_v_flow
-        else:
-            #Dummy values for Input Table (based on discussion with pme)
-            time_line = [[0],[3600]]
-            profile_temperature = [293.15,293.15]
-            profile_min_relative_humidity = [0,0]
-            profile_max_relative_humidity = [1,1]
-            profile_v_flow = [0,1]
+            time_line = self.create_timeline()
 
+        if self.parent.with_ahu is True:
+            profile_temperature = \
+                self.parent.central_ahu.profile_temperature
+            profile_min_relative_humidity = \
+                self.parent.central_ahu.profile_min_relative_humidity
+            profile_max_relative_humidity = \
+                self.parent.central_ahu.profile_max_relative_humidity
+            profile_v_flow = \
+                self.parent.central_ahu.profile_v_flow
+        else:
+            # Dummy values for Input Table
+            time_line = [[0], [3600]]
+            profile_temperature = [293.15, 293.15]
+            profile_min_relative_humidity = [0, 0]
+            profile_max_relative_humidity = [1, 1]
+            profile_v_flow = [0, 1]
 
         ass_error_1 = "time line and input have to have the same length"
 
         assert len(time_line) == len(profile_temperature), \
-                            (ass_error_1 + ",profile_temperature_AHU")
+            (ass_error_1 + ",profile_temperature_AHU")
         assert len(time_line) == len(profile_min_relative_humidity), \
-                            (ass_error_1 + ",profile_min_relative_humidity")
-        assert len(time_line) == len(profile_max_relative_humidity), \
-                            (ass_error_1 + ",profile_max_relative_humidity")
+            (ass_error_1 + ",profile_min_relative_humidity")
+        assert len(time_line) == len(profile_max_relative_humidity),\
+            (ass_error_1 + ",profile_max_relative_humidity")
         assert len(time_line) == len(profile_v_flow), \
-                            (ass_error_1 + ",profile_status_AHU")
-
+            (ass_error_1 + ",profile_status_AHU")
 
         for i, time in enumerate(time_line):
 
@@ -318,20 +299,18 @@ self.orient_tilt = []
 
         scipy.io.savemat(path,
                          mdict={'AHU': ahu_boundary},
-                         appendmat = False,
-                         format = '4')
+                         appendmat=False,
+                         format='4')
 
-    def modelica_gains_boundary(bldg,
-                                time_line = None,
-                                path = None):
-        '''creates .mat file for internal gains boundary conditions (building)
+    def modelica_gains_boundary(self,
+                                time_line=None,
+                                path=None):
+        """creates .mat file for internal gains boundary conditions
 
         This function creates a matfile (-v4) for building internal gains
         boundary conditions. It collects all internal gain profiles of the
         zones and stores them into one file. The file is extended for each
         zone. Only applicable if zones are defined
-
-        !AixLib sepcific!
 
         1. Column : time step
         2,5,8,...  Column : profile_persons
@@ -349,13 +328,7 @@ self.orient_tilt = []
             list of time steps
         path : str
             optional path, when matfile is exported seperately
-
-        '''
-
-        if bldg.file_internal_gains is None:
-            bldg.file_internal_gains = "/InternalGains_"+bldg.name+".mat"
-        else:
-            pass
+        """
 
         if path is None:
             path = utilitis.get_default_path()
@@ -363,30 +336,27 @@ self.orient_tilt = []
             pass
 
         utilitis.create_path(path)
-        path = path + bldg.file_internal_gains
+        path += self.file_internal_gains
 
-        for zone_count in bldg.thermal_zones:
+        for zone_count in self.parent.thermal_zones:
             if time_line is None:
-                duration= len(zone_count.use_conditions.profile_persons) * \
+                duration = len(zone_count.use_conditions.profile_persons) * \
                             3600
-                time_line = create_timeline(bldg=bldg,
-                                            duration_profile = duration)
-
-    #            zone_count.use_conditions.profile_persons.insert(0,0)
-    #            zone_count.use_conditions.profile_machines.insert(0,0)
-    #            zone_count.use_conditions.profile_lighting.insert(0,0)
+                time_line = self.create_timeline(duration_profile=duration)
 
             ass_error_1 = "time line and input have to have the same length"
 
-            assert len(time_line)-1 == len(zone_count.use_conditions.profile_persons), \
-                                (ass_error_1 + ",profile_persons")
-            assert len(time_line)-1 == len(zone_count.use_conditions.profile_machines), \
-                                (ass_error_1 + ",profile_machines")
-            assert len(time_line)-1 == len(zone_count.use_conditions.profile_lighting), \
-                                (ass_error_1 + ",profile_lighting")
+            assert len(time_line)-1 == len(
+                zone_count.use_conditions.profile_persons), \
+                (ass_error_1 + ",profile_persons")
+            assert len(time_line)-1 == len(
+                zone_count.use_conditions.profile_machines), \
+                (ass_error_1 + ",profile_machines")
+            assert len(time_line)-1 == len(
+                zone_count.use_conditions.profile_lighting), \
+                (ass_error_1 + ",profile_lighting")
 
             for i, time in enumerate(time_line):
-
                 if i == 0:
                     time.append(0)
                     time.append(0)
@@ -396,9 +366,6 @@ self.orient_tilt = []
                     time.append(zone_count.use_conditions.profile_machines[i-1])
                     time.append(zone_count.use_conditions.profile_lighting[i-1])
 
-    #            zone_count.use_conditions.profile_persons.pop(0)
-    #            zone_count.use_conditions.profile_machines.pop(0)
-    #            zone_count.use_conditions.profile_lighting.pop(0)
         internal_boundary = np.array(time_line)
 
         scipy.io.savemat(path,
