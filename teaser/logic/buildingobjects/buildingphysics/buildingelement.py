@@ -14,10 +14,11 @@ import re
 
 
 class BuildingElement(object):
-
     """Building element class.
 
-    This is the base class for all building elements.
+    This is the base class for all building elements. Building elements are
+    all physical elements that may serve as boundaries for a thermal zone or
+    building.
 
     Parameters
     ----------
@@ -27,70 +28,98 @@ class BuildingElement(object):
         Allows for better control of hierarchical structures.
         Default is None.
 
-    Note
-    ----------
-
-    The listed attributes are just the ones that are set by the user Calculated
-    values are not included in this list
-
 
     Attributes
     ----------
 
-
     internal_id : float
-        Random id for the destinction between different elements
-
+        Random id for the distinction between different elements.
     name : str
         Individual name
-
     construction_type : str
-        Type of construction ("heavy" or "light")
-
-    year_of_refurbishment : int
-        Year of refurbishment
-
+        Type of construction (e.g. "heavy" or "light"). Needed for
+        distinction between different constructions types in the same
+        building age period.
+    year_of_retrofit : int
+        Year of last retrofit
     year_of_construction : int
         Year of first construction
-
-    area : float
+    building_age_group : list
+        Determines the building age period that this building
+        element belongs to [begin, end], e.g. [1984, 1994]
+    area : float [m2]
         Area of building element
-
-    tilt : float
+    tilt : float [degree]
         Tilt against horizontal
-
-    orientation : float
-        Compass direction of building element (0 : north, 90: est, 180: south,
+    orientation : float [degree]
+        Azimuth direction of building element (0 : north, 90: east, 180: south,
         270: west)
-
     inner_convection : float
-        Constant heat transfer coefficient of convection inner side
-
+        Constant heat transfer coefficient of convection inner side (facing
+        the zone)
     inner_radiation : float
-        Constant heat transfer coefficient of radiation inner side
-
+        Constant heat transfer coefficient of radiation inner side (facing
+        the zone)
     outer_convection : float
-        Constant heat transfer coefficient of convection outer side
-        for inner walls and ground floor zero
-
+        Constant heat transfer coefficient of convection outer side (facing
+        the ambient or adjacent zone). Currently for all InnerWalls and
+        GroundFloors this value is set to 0.0
     outer_radiation : float
-        Constant heat transfer coefficient of radiation outer side
-        for inner walls and ground floor zero
-
+        Constant heat transfer coefficient of radiation outer side (facing
+        the ambient or adjacent zone). Currently for all InnerWalls and
+        GroundFloors this value is set to 0.0
     layer : list
         List of all layers of a building element (to be filled with Layer
         objects). Use element.layer = None to delete all layers of the building
         element
 
-    Raises
-    ----------
-    None
+    Calculated Attributes
+
+    r1 : float [K/W]
+        equivalent resistance R1 of the analogous model given in VDI 6007
+    r2 : float [K/W]
+        equivalent resistance R2 of the analogous model given in VDI 6007
+    r3 : float [K/W]
+        equivalent resistance R3 of the analogous model given in VDI 6007
+    c1 : float [J/K]
+        equivalent capacity C1 of the analogous model given in VDI 6007
+    c2 : float [J/K]
+        equivalent capacity C2 of the analogous model given in VDI 6007
+    c1_korr : float [J/K]
+        corrected capacity C1,korr for building elements in the case of
+        asymmetrical thermal load given in VDI 6007
+    ua_value : float [W/K]
+        UA-Value of building elment (Area times U-Value)
+    r_inner_conv : float [K/W]
+        Convective resistance of building element on inner side (facing the
+        zone)
+    r_inner_rad : float [K/W]
+        Radiative resistance of building element on inner side (facing the
+        zone)
+    r_inner_conv : float [K/W]
+        Combined convective and radiative resistance of building element on
+        inner side (facing the zone)
+    r_outer_conv : float [K/W]
+        Convective resistance of building element on outer side (facing
+        the ambient or adjacent zone). Currently for all InnerWalls and
+        GroundFloors this value is set to 0.0
+    r_outer_rad : float [K/W]
+        Radiative resistance of building element on outer side (facing
+        the ambient or adjacent zone). Currently for all InnerWalls and
+        GroundFloors this value is set to 0.0
+    r_outer_conv : float [K/W]
+        Combined convective and radiative resistance of building element on
+        outer side (facing the ambient or adjacent zone). Currently for all
+        InnerWalls and GroundFloors this value is set to 0.0
+    wf_out : float
+        Weightfactor of building element ua_value/ua_value_zone
     """
 
     def __init__(self, parent=None):
-        """Constructor for Thermal zone
-
+        """Constructor for BuildingElement
         """
+
+        self.parent = parent
 
         self.internal_id = random.random()
 
@@ -110,12 +139,6 @@ class BuildingElement(object):
 
         self._layer = []
 
-        # values for the AixLib Export
-        self.emissivity = 0.0   # Should we use the ir_emissivity here?
-        # Better use in the thermal zone i think
-        self.parent = parent
-
-        # Calculated values for each Building Element
         self.r1 = 0.0
         self.r2 = 0.0
         self.r3 = 0.0
@@ -135,7 +158,8 @@ class BuildingElement(object):
     def calc_ua_value(self):
         """U*A value for building element.
 
-        Calculates the U*A value and thermal resistances of a building element.
+        Calculates the U*A value and resistances for radiative and
+        convective heat transfer of a building element.
         """
 
         self.ua_value = 0.0
@@ -148,8 +172,8 @@ class BuildingElement(object):
         self.r_outer_comb = 0.0
 
         for count_layer in self.layer:
-            self.r_conduc += (count_layer.thickness /
-                              count_layer.material.thermal_conduc)
+            self.r_conduc += (
+                count_layer.thickness / count_layer.material.thermal_conduc)
 
         self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
         self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
@@ -163,8 +187,9 @@ class BuildingElement(object):
             self.r_outer_comb = 1 / \
                 (1 / self.r_outer_conv + 1 / self.r_outer_rad)
 
-        self.ua_value = (1 / (self.r_inner_comb + self.r_conduc *
-                              (1 / self.area) + self.r_outer_comb))
+        self.ua_value = (1 / (
+            self.r_inner_comb + self.r_conduc * (1 / self.area) +
+            self.r_outer_comb))
 
     def gather_element_properties(self):
         """Helper function for matrix calculation.
@@ -175,11 +200,20 @@ class BuildingElement(object):
 
         Returns
         ----------
-        np.number_of_layer
-        np.density
-        np.thermal_conduc
-        np.heat_capac
-        np.thickness
+        number_of_layer : int
+            number of layer (length of layer list)
+        density : np.array
+            Numpy array with length of number of layer, filled with density
+            of each layer
+        thermal_conduc : np.array
+            Numpy array with length of number of layer, filled with
+            thermal_conduc of each layer
+        heat_capac : np.array
+            Numpy array with length of number of layer, filled with heat_capac
+            of each layer
+        thickness : np.array
+            Numpy array with length of number of layer, filled with thickness
+            of each layer
         """
 
         number_of_layer = len(self.layer)
@@ -205,6 +239,8 @@ class BuildingElement(object):
 
         Parameters
         ----------
+        layer : instance of Layer
+            Layer instance of TEASER
         position : int
             position in the wall starting from 0 (inner side)
 
@@ -221,10 +257,12 @@ class BuildingElement(object):
     def add_layer_list(self, layer_list):
         """Appends a layer set to the layer list
 
+        The layer list has to be in correct order
+
         Parameters
         ----------
-        layer_list : [Layer instance]
-            list of sorted layer instances
+        layer_list : list
+            list of sorted TEASER Layer instances
         """
         ass_error_1 = "Layer has to be an instance of Layer()"
         for lay_count in layer_list:
@@ -233,10 +271,11 @@ class BuildingElement(object):
 
             self._layer.append(lay_count)
 
-    def load_type_element(self,
-                          year,
-                          construction,
-                          data_class=None):
+    def load_type_element(
+            self,
+            year,
+            construction,
+            data_class=None):
         """Typical element loader.
 
         Loads typical building elements according to their construction
@@ -259,9 +298,6 @@ class BuildingElement(object):
             self.parent.parent.parent.data (which is data_class in current
             project)
 
-        Raises
-        ----------
-        Assert if parents to Building are not set
         """
 
         if data_class is None:
@@ -414,17 +450,7 @@ class BuildingElement(object):
 
     @orientation.setter
     def orientation(self, value):
-        """
-        if isinstance(value, float):
-            pass
-        elif value is None:
-            pass
-        else:
-            try:
-                value = float(value)
-            except:
-                raise ValueError("Can't convert orientation to float")
-        """
+
         self._orientation = value
         if type(self).__name__ == "OuterWall":
             if self.parent.parent is not None and self.area is not None:
