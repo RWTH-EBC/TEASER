@@ -899,7 +899,7 @@ class Test_teaser(object):
         omega=(2 * math.pi / 86400 / 5)
         element_list = therm_zone.outer_walls + therm_zone.rooftops + \
                        therm_zone.ground_floors
-        r1_ow, c1_ow = prj.buildings[-1].thermal_zones[-1].model_attr._calc_chain_matrix(
+        r1_ow, c1_ow = prj.buildings[-1].thermal_zones[-1].model_attr._calc_parallel_connection(
             element_list=element_list,
             omega=omega)
         assert round(r1_ow, 14) == 0.00100751548411
@@ -907,7 +907,7 @@ class Test_teaser(object):
         element_list = therm_zone.inner_walls + therm_zone.ceilings + \
                        therm_zone.floors
         r1_iw, c1_iw = prj.buildings[-1].thermal_zones[
-            -1].model_attr._calc_chain_matrix(
+            -1].model_attr._calc_parallel_connection(
             element_list=element_list,
             omega=omega)
         assert round(r1_iw, 13) == 0.0097195611408

@@ -29,7 +29,7 @@ class TwoElement(object):
     merge_windows : boolean
         True for merging the windows into the outer wall's RC-combination,
         False for separate resistance for window, default is False
-    t_bt : int
+    t_bt : float [d]
         Time constant according to VDI 6007 (default t_bt = 5)
 
     Attributes
@@ -378,29 +378,26 @@ class TwoElement(object):
 
         return True
 
-    def _calc_chain_matrix(self, element_list, omega):
-        """Matrix calculation.
+    @staticmethod
+    def _calc_parallel_connection(element_list, omega):
+        """Parallel connection of walls according to VDI 6007
 
-        This is a helper function for def parallel_connection() to keep the
-        code clean.
-
-        TODO move this to OneElement
+        Calculates the parallel connection of wall elements according to VDI
+        6007, resulting in R1 and C1 (equation 23, 24).
 
         Parameters
         ----------
-        wall_count : list
+        element_list : list
             List of inner or outer walls
-
         omega : float
             VDI 6007 frequency
 
         Returns
         ----------
-        r1 : float
-            VDI 6007 resistance for inner or outer walls
-
-        c1 : float
-            VDI 6007 capacity for inner or outer walls
+        r1 : float [K/W]
+            VDI 6007 resistance for all inner or outer walls
+        c1 : float [K/W]
+            VDI 6007 capacity all for inner or outer walls
         """
 
         for wall_count in range(len(element_list) - 1):
@@ -713,20 +710,20 @@ class TwoElement(object):
             1 / (self.r_comb_outer_win * self.area_win))
 
     def _calc_outer_elements(self):
-        """Lumped parameter for outer elements(walls, roof, grounfloor, windows)
+        """Lumped parameter for outer wall elements
 
-        Doc
-
+        Calculates all necessary parameters for outer walls. This includes
+        OuterWalls, GroundFloors and Rooftops.
         Attributes
         ----------
-        omega : float
-            TODO documentation for omega
+        omega : float [1/s]
+            angular frequency with given time period.
         outer_walls : list
             List containing all TEASER Wall instances that are treated as same
             outer wall type. In case of TwoElement model OuterWalls,
             GroundFloors, Rooftops
         """
-        # TODO: documentation for omega
+
         omega = 2 * math.pi / 86400 / self.t_bt
 
         outer_walls = (self.thermal_zone.outer_walls +
@@ -739,8 +736,8 @@ class TwoElement(object):
             self.c1_ow = outer_walls[0].c1_korr
         elif len(outer_walls) > 1:
             # more than one outer wall, calculate chain matrix
-            self.r1_ow, self.c1_ow = self._calc_chain_matrix(outer_walls,
-                                                            omega)
+            self.r1_ow, self.c1_ow = self._calc_parallel_connection(outer_walls,
+                                                                    omega)
         else:
             warnings.warn("No walls are defined as outer walls, please be "
                           "careful with results. In addition this might lead "
@@ -800,21 +797,21 @@ class TwoElement(object):
                       "parameter cannot be calculated")
 
     def _calc_inner_elements(self):
-        """Lumped parameter for inner walls
+        """Lumped parameter for outer wall elements
 
-        TODO: move this to one_element
+        Calculates all necessary parameters for inner walls. This includes
+        InnerWalls, Ceilings and Floors.
 
         Attributes
         ----------
-        omega : float
-            TODO documentation for omega
-        inner_walls : list
+        omega : float [1/s]
+            angular frequency with given time period.
+        outer_walls : list
             List containing all TEASER Wall instances that are treated as same
-            inner wall type. In case of TwoElement model InnerWall,
-            Floor, Ceiling
+            outer wall type. In case of TwoElement model OuterWalls,
+            GroundFloors, Rooftops
         """
 
-        # TODO: documentation for omega
         omega = 2 * math.pi / 86400 / self.t_bt
 
         inner_walls = (self.thermal_zone.inner_walls +
@@ -831,7 +828,7 @@ class TwoElement(object):
             self.c1_iw = inner_walls[0].c1_korr
         elif len(inner_walls) > 1:
             # more than one outer wall, calculate chain matrix
-            self.r1_iw, self.c1_iw = self._calc_chain_matrix(
+            self.r1_iw, self.c1_iw = self._calc_parallel_connection(
                 inner_walls,
                 omega)
         else:
@@ -909,8 +906,9 @@ class TwoElement(object):
                                     self.thermal_zone.t_ground)))
 
     def set_calc_default(self):
-        '''sets default calculation parameters
-        '''
+        """sets default calculation parameters
+        """
+
         # Attributes of inner walls
         self.area_iw = 0.0
 
@@ -982,7 +980,7 @@ class TwoElement(object):
         self.orientation_wall = []
         self.outer_walls_areas = []
 
-        # TODO: check this value
+
         self.r_rad_ow_iw = 0.0
 
         # Attributes for windows
@@ -1023,7 +1021,7 @@ class TwoElement(object):
         self.weightfactor_win = []
         self.tilt_win = []
         self.orientation_win = []
-        # TODO duplicated list???
+
         self.window_area_list = []
         self.window_areas = []
         self.g_sunblind_list = []
