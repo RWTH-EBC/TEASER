@@ -20,32 +20,26 @@ model ${bldg.name}
 	   ${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
 	  %endif
       %endfor
-      }
+      },
+    zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
+             intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
+             (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
+             der_T(fixed=true))))),
 
 % if zone == "ThermalZone":
-    ,
-    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone[${get_n(bldg.thermal_zones)}](
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-             intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
-             (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
-             der_T(fixed=true))))
+    redeclare model thermalZone =
+        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone,
 % else:
-    ,
-    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[${get_n(bldg.thermal_zones)}](
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-             intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
-             (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
-             der_T(fixed=true))))
+    redeclare model thermalZone =
+        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped,
 %   endif
 
 % if gFac is True:
-    ,redeclare
-    AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
-    corGDouPan)
+    redeclare model corG =
+        AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
 % else:
-    ,redeclare
-    AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
-    corGDouPan)
+    redeclare model corG =
+        AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
 %   endif
     )
 
@@ -165,9 +159,8 @@ end ${bldg.name};
 	   ${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
 	  %endif
       %endfor
-      }
+      },
 % if bldg.central_ahu:
-	,
 	heatAHU=${get_true_false(bldg.central_ahu.heating)},
     coolAHU=${get_true_false(bldg.central_ahu.cooling)},
     dehuAHU=${get_true_false(bldg.central_ahu.dehumidification)},
@@ -180,9 +173,8 @@ end ${bldg.name};
     effHRSAHU_enabled=${bldg.central_ahu.efficiency_recovery},
     effHRSAHU_disabled=${bldg.central_ahu.efficiency_revocery_false},
     dpAHU_sup=800,
-    dpAHU_eta=800
+    dpAHU_eta=800,
 % else:
-	,
 	heatAHU = false,
 	coolAHU = false,
 	dehuAHU = false,
@@ -195,37 +187,33 @@ end ${bldg.name};
 	effHRSAHU_enabled = 0.8,
 	effHRSAHU_disabled = 0.2,
 	dpAHU_sup=800,
-    dpAHU_eta=800
+    dpAHU_eta=800,
 % endif
+    zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
+             intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
+             (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
+             der_T(fixed=true))))),
+
 % if zone == "ThermalZone":
-    ,
-    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone zone[${get_n(bldg.thermal_zones)}](
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-             intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
-             (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
-             der_T(fixed=true))))
+    redeclare model thermalZone =
+        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone,
 % else:
-    ,
-    redeclare AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped zone[${get_n(bldg.thermal_zones)}](
-    ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-             intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
-             (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
-             der_T(fixed=true))))
-% endif
+    redeclare model thermalZone =
+        AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped,
+%   endif
+
 % if gFac is True:
-    ,redeclare
-    AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
-    corGDouPan)
+    redeclare model corG =
+        AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
 % else:
-    ,redeclare
-    AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane
-    corGDouPan)
-% endif
+    redeclare model corG =
+        AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
+%   endif
 % if check_AHU(bldg.thermal_zones) == False:
-    ,redeclare AixLib.Airflow.AirHandlingUnit.NoAHU AirHandlingUnit "AHU does
-    not exist"
+    redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.NoAHU)
+% else:
+    redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.AHU)
 % endif
-    )
     "Multizone"
     annotation (Placement(transformation(extent={{32,-8},{52,12}})));
 
