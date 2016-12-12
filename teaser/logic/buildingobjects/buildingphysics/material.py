@@ -11,16 +11,16 @@ import teaser.data.output.material_output as material_output
 class Material(object):
     """Material class
 
-    This class holds information of Material used for buidling element layer.
+    This class holds information of Material used for building element layer.
 
 
     Parameters
     ----------
     parent : Layer
         The parent class of this object, the layer the material
-        belongs to. Allows for better control of hierarchical structures.
+        belongs to. Allows for better control of hierarchical structures. If
+        not None this adds this Material to Layer.material.
         Default is None
-
 
     Attributes
     ----------
@@ -46,8 +46,6 @@ class Material(object):
 
     def __init__(self, parent=None):
         """Constructor of Material.
-
-
         """
 
         self.parent = parent

@@ -14,7 +14,8 @@ class Layer(object):
     ----------
     parent : BuildingElement
         The parent class of this object, the Building Element the layer
-        belongs to. Allows for better control of hierarchical structures.
+        belongs to. Allows for better control of hierarchical structures. If
+        not None this adds the Layer to BuildingElement.layers.
         Default is None
 
 

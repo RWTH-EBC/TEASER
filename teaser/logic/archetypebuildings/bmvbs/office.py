@@ -19,7 +19,7 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
 class Office(NonResidential):
-    """Archetype Office Building according
+    """Archetype Office Building according to BMVBS
 
     Subclass from NonResidential archetpye class to represent office buildings.
 
@@ -430,12 +430,10 @@ class Office(NonResidential):
             zone.set_volume_zone()
 
     def generate_from_gml(self):
-        """enriches lod1 or lod2 data from citygml
+        """Enriches lod1 or lod2 data from CityGML
 
-        adds Zones, BoundaryConditions, Material settings for walls and
+        Adds Zones, BoundaryConditions, Material settings for walls and
         windows to the geometric representation of CityGML
-
-        number or height of floors need to be specified
         """
 
         type_bldg_area = self.net_leased_area

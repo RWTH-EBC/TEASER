@@ -28,7 +28,6 @@ class BuildingElement(object):
         Allows for better control of hierarchical structures.
         Default is None.
 
-
     Attributes
     ----------
 
