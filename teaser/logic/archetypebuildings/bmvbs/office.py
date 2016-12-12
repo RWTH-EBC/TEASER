@@ -56,6 +56,10 @@ class Office(NonResidential):
         Individual name
     year_of_construction : int
         Year of first construction
+    height_of_floors : float [m]
+        Average height of the buildings' floors
+    number_of_floors : int
+        Number of building's floors above ground
     net_leased_area : float [m2]
         Total net leased area of building. This is area is NOT the footprint
         of a building

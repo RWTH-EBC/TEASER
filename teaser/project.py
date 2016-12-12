@@ -201,36 +201,36 @@ class Project(object):
         ----------
 
         name : str
-            individual name
+            Individual name
         year_of_construction : int
-            year of first construction
+            Year of first construction
+        height_of_floors : float [m]
+            Average height of the buildings' floors
         number_of_floors : int
-            number of floors above ground
-        height_of_floors : float
-            average height of the floors
-        net_leased_area : float
-            total net leased area of building
-        with_ahu : boolean
-            if building has a central AHU or not
+            Number of building's floors above ground
+        net_leased_area : float [m2]
+            Total net leased area of building. This is area is NOT the footprint
+            of a building
+        with_ahu : Boolean
+            If set to True, an empty instance of BuildingAHU is instantiated and
+            assigned to attribute central_ahu. This instance holds information
+            for central Air Handling units. Default is False.
         office_layout : int
-            type of floor plan (default = 0)
-
-            0: use default values
-            1: elongated 1 floor
-            2: elongated 2 floors
-            3: compact
+            Structure of the floor plan of office buildings, default is 1,
+            which is representative for one elongated floor.
+                1: elongated 1 floor
+                2: elongated 2 floors
+                3: compact (e.g. for a square base building)
         window_layout : int
-            type of window layout (default = 0)
-
-            0: use default values
-            1: punctuated facade
-            2: banner facade
-            3: full glazing
+            Structure of the window facade type, default is 1, which is
+            representative for a punctuated facade.
+                1: punctuated facade (individual windows)
+                2: banner facade (continuous windows)
+                3: full glazing
         construction_type : str
-            construction type (default = "heavy")
-
-            heavy: heavy construction
-            light: light construction
+            Construction type of used wall constructions default is "heavy")
+                heavy: heavy construction
+                light: light construction
 
         Returns
         ----------
@@ -275,36 +275,36 @@ class Project(object):
         ----------
 
         name : str
-            individual name
+            Individual name
         year_of_construction : int
-            year of first construction
+            Year of first construction
+        height_of_floors : float [m]
+            Average height of the buildings' floors
         number_of_floors : int
-            number of floors above ground
-        height_of_floors : float
-            average height of the floors
-        net_leased_area : float
-            total net leased area of building
-        with_ahu : boolean
-            if building has a central AHU or not
+            Number of building's floors above ground
+        net_leased_area : float [m2]
+            Total net leased area of building. This is area is NOT the footprint
+            of a building
+        with_ahu : Boolean
+            If set to True, an empty instance of BuildingAHU is instantiated and
+            assigned to attribute central_ahu. This instance holds information
+            for central Air Handling units. Default is False.
         office_layout : int
-            type of floor plan (default = 0)
-
-            0: use default values
-            1: elongated 1 floor
-            2: elongated 2 floors
-            3: compact
+            Structure of the floor plan of office buildings, default is 1,
+            which is representative for one elongated floor.
+                1: elongated 1 floor
+                2: elongated 2 floors
+                3: compact (e.g. for a square base building)
         window_layout : int
-            type of window layout (default = 0)
-
-            0: use default values
-            1: punctuated facade
-            2: banner facade
-            3: full glazing
-        construction_type : str (default = "heavy")
-            construction type
-
-            heavy: heavy construction
-            light: light construction
+            Structure of the window facade type, default is 1, which is
+            representative for a punctuated facade.
+                1: punctuated facade (individual windows)
+                2: banner facade (continuous windows)
+                3: full glazing
+        construction_type : str
+            Construction type of used wall constructions default is "heavy")
+                heavy: heavy construction
+                light: light construction
 
         Returns
         ----------
@@ -348,36 +348,36 @@ class Project(object):
         ----------
 
         name : str
-            individual name
+            Individual name
         year_of_construction : int
-            year of first construction
+            Year of first construction
+        height_of_floors : float [m]
+            Average height of the buildings' floors
         number_of_floors : int
-            number of floors above ground
-        height_of_floors : float
-            average height of the floors
-        net_leased_area : float
-            total net leased area of building
-        with_ahu : boolean
-            if building has a central AHU or not
+            Number of building's floors above ground
+        net_leased_area : float [m2]
+            Total net leased area of building. This is area is NOT the footprint
+            of a building
+        with_ahu : Boolean
+            If set to True, an empty instance of BuildingAHU is instantiated and
+            assigned to attribute central_ahu. This instance holds information
+            for central Air Handling units. Default is False.
         office_layout : int
-            type of floor plan (default = 0)
-
-            0: use default values
-            1: elongated 1 floor
-            2: elongated 2 floors
-            3: compact
+            Structure of the floor plan of office buildings, default is 1,
+            which is representative for one elongated floor.
+                1: elongated 1 floor
+                2: elongated 2 floors
+                3: compact (e.g. for a square base building)
         window_layout : int
-            type of window layout (default = 0)
-
-            0: use default values
-            1: punctuated facade
-            2: banner facade
-            3: full glazing
-        construction_type : str (default = "heavy")
-            construction type
-
-            heavy: heavy construction
-            light: light construction
+            Structure of the window facade type, default is 1, which is
+            representative for a punctuated facade.
+                1: punctuated facade (individual windows)
+                2: banner facade (continuous windows)
+                3: full glazing
+        construction_type : str
+            Construction type of used wall constructions default is "heavy")
+                heavy: heavy construction
+                light: light construction
 
         Returns
         ----------
@@ -421,36 +421,36 @@ class Project(object):
         ----------
 
         name : str
-            individual name
+            Individual name
         year_of_construction : int
-            year of first construction
+            Year of first construction
+        height_of_floors : float [m]
+            Average height of the buildings' floors
         number_of_floors : int
-            number of floors above ground
-        height_of_floors : float
-            average height of the floors
-        net_leased_area : float
-            total net leased area of building
-        with_ahu : boolean
-            if building has a central AHU or not
+            Number of building's floors above ground
+        net_leased_area : float [m2]
+            Total net leased area of building. This is area is NOT the footprint
+            of a building
+        with_ahu : Boolean
+            If set to True, an empty instance of BuildingAHU is instantiated and
+            assigned to attribute central_ahu. This instance holds information
+            for central Air Handling units. Default is False.
         office_layout : int
-            type of floor plan (default = 0)
-
-            0: use default values
-            1: elongated 1 floor
-            2: elongated 2 floors
-            3: compact
+            Structure of the floor plan of office buildings, default is 1,
+            which is representative for one elongated floor.
+                1: elongated 1 floor
+                2: elongated 2 floors
+                3: compact (e.g. for a square base building)
         window_layout : int
-            type of window layout (default = 0)
-
-            0: use default values
-            1: punctuated facade
-            2: banner facade
-            3: full glazing
-        construction_type : str (default = "heavy")
-            construction type
-
-            heavy: heavy construction
-            light: light construction
+            Structure of the window facade type, default is 1, which is
+            representative for a punctuated facade.
+                1: punctuated facade (individual windows)
+                2: banner facade (continuous windows)
+                3: full glazing
+        construction_type : str
+            Construction type of used wall constructions default is "heavy")
+                heavy: heavy construction
+                light: light construction
 
         Returns
         ----------
@@ -493,29 +493,31 @@ class Project(object):
         ----------
 
         name : str
-            individual name
+            Individual name
         year_of_construction : int
-            year of first construction
+            Year of first construction
+        height_of_floors : float [m]
+            Average height of the buildings' floors
         number_of_floors : int
-            number of floors above ground
-        height_of_floors : float
-            average height of the floors
-        net_leased_area : float
-            total net leased area of building
-        with_ahu : boolean
-            if building has a central AHU or not
+            Number of building's floors above ground
+        net_leased_area : float [m2]
+            Total net leased area of building. This is area is NOT the footprint
+            of a building
+        with_ahu : Boolean
+            If set to True, an empty instance of BuildingAHU is instantiated and
+            assigned to attribute central_ahu. This instance holds information for
+            central Air Handling units. Default is False.
         neighbour_buildings : int
-            neighbour (default = 0)
-
-            0: no neighbour
-            1: one neighbour
-            2: two neighbours
-        construction_type : str (default = "heavy")
-            construction type
-
-            heavy: heavy construction
-            light: light construction
-
+            Number of neighbour buildings. CAUTION: this will not change
+            the orientation of the buildings wall, but just the overall
+            exterior wall and window area(!) (default = 0)
+                0: no neighbour
+                1: one neighbour
+                2: two neighbours
+        construction_type : str
+            Construction type of used wall constructions default is "heavy")
+                heavy: heavy construction
+                light: light construction
         Returns
         ----------
 
@@ -551,39 +553,44 @@ class Project(object):
             neighbour_buildings=None,
             construction_type=None,
             number_of_apartments=None):
-        """Create and calculate an est1a building
+        """Create and calculate an est1b building
 
         Parameters
         ----------
 
         name : str
-            individual name
-        year_of_construction : int
-            year of first construction
+            Individual name
+        height_of_floors : float [m]
+            Average height of the buildings' floors
         number_of_floors : int
-            number of floors above ground
-        height_of_floors : float
-            average height of the floors
-        net_leased_area : float
-            total net leased area of building
-        with_ahu : boolean
-            if building has a central AHU or not
+            Number of building's floors above ground
+        year_of_construction : int
+            Year of first construction
+        net_leased_area : float [m2]
+            Total net leased area of building. This is area is NOT the footprint
+            of a building
+        with_ahu : Boolean
+            If set to True, an empty instance of BuildingAHU is instantiated and
+            assigned to attribute central_ahu. This instance holds information
+            for central Air Handling units. Default is False.
         neighbour_buildings : int
-            neighbour (default = 0)
-            0: no neighbour
-            1: one neighbour
-            2: two neighbours
-        construction_type : str (default = "heavy")
-            construction type
-            heavy: heavy construction
-            light: light construction
+            Number of neighbour buildings. CAUTION: this will not change
+            the orientation of the buildings wall, but just the overall
+            exterior wall and window area(!) (default = 0)
+                0: no neighbour
+                1: one neighbour
+                2: two neighbours
+        construction_type : str
+            Construction type of used wall constructions default is "heavy")
+                heavy: heavy construction
+                light: light construction
         number_of_apartments : int
-            number of apartments (default = 1)
+            number of apartments inside Building (default = 1)
 
         Returns
         ----------
 
-        type_bldg : Instance of EST1a()
+        type_bldg : Instance of EST1b()
 
         """
         type_bldg = EST1b(
@@ -616,39 +623,44 @@ class Project(object):
             neighbour_buildings=None,
             construction_type=None,
             number_of_apartments=None):
-        """Create and calculate an est1a building
+        """Create and calculate an est4b building
 
         Parameters
         ----------
 
         name : str
-            individual name
-        year_of_construction : int
-            year of first construction
+            Individual name
+        height_of_floors : float [m]
+            Average height of the buildings' floors
         number_of_floors : int
-            number of floors above ground
-        height_of_floors : float
-            average height of the floors
-        net_leased_area : float
-            total net leased area of building
-        with_ahu : boolean
-            if building has a central AHU or not
+            Number of building's floors above ground
+        year_of_construction : int
+            Year of first construction
+        net_leased_area : float [m2]
+            Total net leased area of building. This is area is NOT the footprint
+            of a building
+        with_ahu : Boolean
+            If set to True, an empty instance of BuildingAHU is instantiated and
+            assigned to attribute central_ahu. This instance holds
+            information for central Air Handling units. Default is False.
         neighbour_buildings : int
-            neighbour (default = 0)
-            0: no neighbour
-            1: one neighbour
-            2: two neighbours
-        construction_type : str (default = "heavy")
-            construction type
-            heavy: heavy construction
-            light: light construction
+            Number of neighbour buildings. CAUTION: this will not change
+            the orientation of the buildings wall, but just the overall
+            exterior wall and window area(!) (default = 0)
+                0: no neighbour
+                1: one neighbour
+                2: two neighbours
+        construction_type : str
+            Construction type of used wall constructions default is "heavy")
+                heavy: heavy construction
+                light: light construction
         number_of_apartments : int
-            number of apartments (default = 1)
+            number of apartments inside Building (default = 1)
 
         Returns
         ----------
 
-        type_bldg : Instance of EST1a()
+        type_bldg : Instance of EST4b()
 
         """
         type_bldg = EST4b(
@@ -681,39 +693,44 @@ class Project(object):
             neighbour_buildings=None,
             construction_type=None,
             number_of_apartments=None):
-        """Create and calculate an est1a building
+        """Create and calculate an est7 building
 
         Parameters
         ----------
 
         name : str
-            individual name
-        year_of_construction : int
-            year of first construction
+            Individual name
+        height_of_floors : float [m]
+            Average height of the buildings' floors
         number_of_floors : int
-            number of floors above ground
-        height_of_floors : float
-            average height of the floors
-        net_leased_area : float
-            total net leased area of building
-        with_ahu : boolean
-            if building has a central AHU or not
+            Number of building's floors above ground
+        year_of_construction : int
+            Year of first construction
+        net_leased_area : float [m2]
+            Total net leased area of building. This is area is NOT the footprint
+            of a building
+        with_ahu : Boolean
+            If set to True, an empty instance of BuildingAHU is instantiated and
+            assigned to attribute central_ahu. This instance holds
+            information for central Air Handling units. Default is False.
         neighbour_buildings : int
-            neighbour (default = 0)
-            0: no neighbour
-            1: one neighbour
-            2: two neighbours
-        construction_type : str (default = "heavy")
-            construction type
-            heavy: heavy construction
-            light: light construction
+            Number of neighbour buildings. CAUTION: this will not change
+            the orientation of the buildings wall, but just the overall
+            exterior wall and window area(!) (default = 0)
+                0: no neighbour
+                1: one neighbour
+                2: two neighbours
+        construction_type : str
+            Construction type of used wall constructions default is "heavy")
+                heavy: heavy construction
+                light: light construction
         number_of_apartments : int
-            number of apartments (default = None)
+            number of apartments inside Building (default = 1)
 
         Returns
         ----------
 
-        type_bldg : Instance of EST1a()
+        type_bldg : Instance of EST7()
 
         """
         type_bldg = EST7(
@@ -755,52 +772,57 @@ class Project(object):
         ----------
 
         name : str
-            individual name
+            Individual name
         year_of_construction : int
-            year of first construction
+            Year of first construction
+        height_of_floors : float [m]
+            Average height of the buildings' floors
         number_of_floors : int
-            number of floors above ground
-        height_of_floors : float
-            average height of the floors
-        net_leased_area : float
-            total net leased area of building
-        with_ahu : boolean
-            if building has a central AHU or not
+            Number of building's floors above ground
+        net_leased_area : float [m2]
+            Total net leased area of building. This is area is NOT the footprint
+            of a building
+        with_ahu : Boolean
+            If set to True, an empty instance of BuildingAHU is instantiated and
+            assigned to attribute central_ahu. This instance holds information
+            for central Air Handling units. Default is False.
         residential_layout : int
-            type of floor plan (default = 0)
-
-            0: compact
-            1: elongated/complex
+            Structure of floor plan (default = 0)
+                0: compact
+                1: elongated/complex
         neighbour_buildings : int
-            neighbour (default = 0)
-
-            0: no neighbour
-            1: one neighbour
-            2: two neighbours
+            Number of neighbour buildings. CAUTION: this will not change
+            the orientation of the buildings wall, but just the overall
+            exterior wall and window area(!) (default = 0)
+                0: no neighbour
+                1: one neighbour
+                2: two neighbours
         attic : int
-            type of attic (default = 0)
-
-            0: flat roof
-            1: non heated attic
-            2: partly heated attic
-            3: heated attic
+            Design of the attic. CAUTION: this will not change the orientation
+            or tilt of the roof instances, but just adapt the roof area(!) (
+            default = 0)
+                0: flat roof
+                1: non heated attic
+                2: partly heated attic
+                3: heated attic
         cellar : int
-            type of cellar (default = 0)
-
-            0: no cellar
-            1: non heated cellar
-            2: partly heated cellar
-            3: heated cellar
-        construction_type : str
-            construction type (default = "heavy")
-
-            heavy: heavy construction
-            light: light construction
+            Design of the of cellar CAUTION: this will not change the
+            orientation, tilt of GroundFloor instances, nor the number or area
+            of ThermalZones, but will change GroundFloor area(!) (default = 0)
+                0: no cellar
+                1: non heated cellar
+                2: partly heated cellar
+                3: heated cellar
         dormer : str
-            construction type
-
-            0: no dormer
-            1: dormer
+            Is a dormer attached to the roof? CAUTION: this will not
+            change roof or window orientation or tilt, but just adapt the roof
+            area(!) (default = 0)
+                0: no dormer
+                1: dormer
+        construction_type : str
+            Construction type of used wall constructions default is "heavy")
+                heavy: heavy construction
+                light: light construction
 
         Returns
         ----------
