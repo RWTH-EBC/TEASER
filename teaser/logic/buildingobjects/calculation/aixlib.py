@@ -1,7 +1,7 @@
-#Created December 2016
-#TEASER 4 Development Team
+# Created December 2016
+# TEASER 4 Development Team
 
-"""This module includes AixLib calcuation class
+"""This module includes AixLib calculation class
 """
 
 import scipy.io

@@ -1,12 +1,9 @@
-#Created December 2016
-#TEASER 4 Development Team
+# Created December 2016
+# TEASER 4 Development Team
 
 """This module includes Annex60 calcuation class
 """
 
-import scipy.io
-import teaser.logic.utilities as utilitis
-import numpy as np
 import warnings
 
 
@@ -32,7 +29,7 @@ class Annex60(object):
     def compare_orientation(self, number_of_elements=2):
         """Compares orientation of walls of all zones and sorts them
 
-        Fills the weighfactors of every zone according to orientation and
+        Fills the weightfactors of every zone according to orientation and
         tilt of all zones of the buildings. Therefore it compares orientation
         and tilt of all outer building elements and then creates lists for zone
         weightfactors, orientation, tilt, ares and sunblinds.
@@ -143,7 +140,7 @@ class Annex60(object):
         """
 
         for i in orient_tilt:
-            if number_of_elements in [1,2,3]:
+            if number_of_elements in [1, 2,     3]:
                 walls = thermal_zone.model_attr.find_walls(i[0], i[1]) + \
                         thermal_zone.model_attr.find_rts(i[0], i[1])
             elif number_of_elements == 4:
@@ -153,7 +150,6 @@ class Annex60(object):
 
             wins = thermal_zone.model_attr.find_wins(i[0], i[1])
 
-
             if not walls and wins:
                 thermal_zone.model_attr.weightfactor_ow.append(0.0)
                 thermal_zone.model_attr.outer_walls_areas.append(0.0)
@@ -162,7 +158,8 @@ class Annex60(object):
             elif walls:
                 thermal_zone.model_attr.weightfactor_ow.append(
                     sum([wall.wf_out for wall in walls]))
-                [thermal_zone.model_attr.outer_walls_areas.append(x.area) for x in walls]
+                [thermal_zone.model_attr.outer_walls_areas.append(x.area) for
+                 x in walls]
                 thermal_zone.model_attr.tilt_wall.append(i[1])
                 thermal_zone.model_attr.orientation_wall.append(i[0])
             elif wins:
@@ -172,7 +169,8 @@ class Annex60(object):
                     sum([win.area for win in wins]))
                 thermal_zone.model_attr.g_sunblind_list.append(
                     sum([win.shading_g_total for win in wins]))
-                [thermal_zone.model_attr.window_areas.append(x.area) for x in wins]
+                [thermal_zone.model_attr.window_areas.append(x.area) for
+                 x in wins]
                 thermal_zone.model_attr.tilt_win.append(i[1])
                 thermal_zone.model_attr.orientation_win.append(i[0])
             elif not wins and walls:
