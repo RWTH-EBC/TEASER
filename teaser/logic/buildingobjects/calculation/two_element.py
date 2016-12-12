@@ -780,7 +780,7 @@ class TwoElement(object):
 
                 self.ir_emissivity_outer_ow = (
                     (self.ir_emissivity_outer_ow * self.area_ow
-                     + self.ir_emissivity_outer_win * self.area_win)
+                     + self.ir_emissivity_win * self.area_win)
                     / (self.area_ow + self.area_win))
 
                 self.solar_absorp_ow = (

@@ -13,8 +13,7 @@ class Residential(Building):
     several parameters to be obligatory (parent, name, year_of_construction,
     net_leased_area)
 
-    Class as parent of specific type buildings. Subclass from Building to
-    represent Type Buildings. Superclass for every type building.
+    Please use this class to create new archetype methodologies.
 
     Parameters
     ----------
