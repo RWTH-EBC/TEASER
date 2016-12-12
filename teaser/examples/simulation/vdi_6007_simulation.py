@@ -73,10 +73,10 @@ def vdi_example_6007(thermal_zone, weather):
                  "At": thermal_zone.window_area_list,
                  "Vair": thermal_zone.volume,
                  "rhoair": thermal_zone.density_air,
-                 "cair": thermal_zone.heat_capac_air,
+                 "cair": thermal_zone.heat_capac_air,  # kJ/kgK?
                  "splitfac": thermal_zone.windows[0].a_conv,
                  "g": thermal_zone.weighted_g_value,
-                 "alphaiwi": thermal_zone.alpha_comb_iw,
+                 "alphaiwi": thermal_zone.alpha_comb_inner_iw,
                  "alphaowi": thermal_zone.alpha_comb_inner_ow,
                  "alphaWall": thermal_zone.alpha_comb_outer_ow,
                  "withInnerwalls": withInnerwalls}
@@ -114,6 +114,8 @@ def vdi_example_6007(thermal_zone, weather):
     #  Internal convective gains in W
     #  #-------------------------------------------------------
     #  TODO: Substitute with TEASER boundary conditions
+    #  logic/buildingobjects/boundaryconditions/boundaryconditions.py
+    #  Living (18599) / SIA for occupancy
     Q_ig = np.zeros(timesteps) + 200
 
     # Radiative heat transfer coef. between inner and outer walls in W/m2K
