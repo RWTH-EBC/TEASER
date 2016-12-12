@@ -28,7 +28,8 @@ class Building(object):
 
     parent: Project()
         The parent class of this object, the Project the Building belongs to.
-        Allows for better control of hierarchical structures.
+        Allows for better control of hierarchical structures. If not None it
+        adds this Building instance to Project.buildings.
         (default: None)
     name : str
         Individual name (default: None)

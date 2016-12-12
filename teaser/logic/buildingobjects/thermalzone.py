@@ -20,7 +20,8 @@ class ThermalZone(object):
     ----------
     parent: Building()
         The parent class of this object, the Building the zone belongs to.
-        Allows for better control of hierarchical structures.
+        Allows for better control of hierarchical structures. If not None it
+        adds this ThermalZone instance to Building.thermal_zones.
         Default is None
 
     Attributes

@@ -15,7 +15,8 @@ class Ceiling(InnerWall):
 
     parent : ThermalZone()
         The parent class of this object, the ThermalZone the BE belongs to.
-        Allows for better control of hierarchical structures.
+        Allows for better control of hierarchical structures. If not None it
+        adds this Ceiling to ThermalZone.ceilings.
         Default is None.
 
     Attributes
