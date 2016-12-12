@@ -4,7 +4,6 @@ from __future__ import division
 import math
 import random
 import warnings
-import re
 
 
 class TwoElement(object):
@@ -191,10 +190,6 @@ class TwoElement(object):
         ambient.
     r1_win : float [K/W]
         Lumped resistance of windows.
-    r_rest_win : float [K/W]
-        Lumped remaining resistance of windows between r1_win and c1_win.
-    c1_win : float [J/K]
-        Lumped capacity of windows.
     weightfactor_win : list of floats
         Weightfactors of windows (UA-Value of windows with same orientation
         and tilt divided by ua_value_win or ua_value_win+ua_value_ow,
@@ -515,11 +510,11 @@ class TwoElement(object):
 
         self.ir_emissivity_inner_ow = (
             (sum(out_wall.layer[0].material.ir_emissivity * out_wall.area for
-                out_wall in self.thermal_zone.outer_walls)
+                 out_wall in self.thermal_zone.outer_walls)
              + sum(ground.layer[0].material.ir_emissivity * ground.area for
-                  ground in self.thermal_zone.ground_floors)
+                   ground in self.thermal_zone.ground_floors)
              + sum(roof.layer[0].material.ir_emissivity * roof.area for
-                  roof in self.thermal_zone.rooftops)) / self.area_ow)
+                   roof in self.thermal_zone.rooftops)) / self.area_ow)
 
         self.alpha_conv_inner_ow = (
             1 / (self.r_conv_inner_ow * self.area_ow))
@@ -554,15 +549,15 @@ class TwoElement(object):
 
         self.ir_emissivity_outer_ow = (
             (sum(out_wall.layer[-1].material.ir_emissivity * out_wall.area for
-                out_wall in self.thermal_zone.outer_walls)
+                 out_wall in self.thermal_zone.outer_walls)
              + sum(roof.layer[-1].material.ir_emissivity * roof.area for
-                  roof in self.thermal_zone.rooftops)) / _area_ow_rt)
+                   roof in self.thermal_zone.rooftops)) / _area_ow_rt)
 
         self.solar_absorp_ow = (
             (sum(out_wall.layer[-1].material.solar_absorp * out_wall.area for
-                out_wall in self.thermal_zone.outer_walls)
+                 out_wall in self.thermal_zone.outer_walls)
              + sum(roof.layer[-1].material.solar_absorp * roof.area for
-                  roof in self.thermal_zone.rooftops)) / _area_ow_rt)
+                   roof in self.thermal_zone.rooftops)) / _area_ow_rt)
 
         self.alpha_conv_outer_ow = (
             1 / (self.r_conv_outer_ow * _area_ow_rt))
@@ -656,7 +651,8 @@ class TwoElement(object):
         """
 
         self.area_win = sum(win.area for win in self.thermal_zone.windows)
-        self.ua_value_win = sum(win.ua_value for win in self.thermal_zone.windows)
+        self.ua_value_win = sum(
+            win.ua_value for win in self.thermal_zone.windows)
 
         # values facing the inside of the thermal zone
 
@@ -664,14 +660,14 @@ class TwoElement(object):
                                           self.thermal_zone.windows)))
 
         self.r_rad_inner_win = (1 / (sum(1 / win.r_inner_rad for win in
-                                          self.thermal_zone.windows)))
+                                         self.thermal_zone.windows)))
 
         self.r_comb_inner_win = (1 / (sum(1 / win.r_inner_comb for win in
                                           self.thermal_zone.windows)))
 
         self.ir_emissivity_inner_win = sum(win.layer[0].material.ir_emissivity
-                                          * win.area for win in
-                                          self.thermal_zone.windows) / self.area_win
+                                           * win.area for win in
+                                           self.thermal_zone.windows) / self.area_win
 
         self.alpha_conv_inner_win = (
             1 / (self.r_conv_inner_win * self.area_win))
@@ -686,14 +682,14 @@ class TwoElement(object):
                                           self.thermal_zone.windows)))
 
         self.r_rad_outer_win = (1 / (sum(1 / win.r_outer_rad for win in
-                                        self.thermal_zone.windows)))
-
-        self.r_comb_outer_win = (1 / (sum(1 / win.r_outer_comb for win in
                                          self.thermal_zone.windows)))
 
+        self.r_comb_outer_win = (1 / (sum(1 / win.r_outer_comb for win in
+                                          self.thermal_zone.windows)))
+
         self.ir_emissivity_win = sum(win.layer[-1].material.ir_emissivity
-                                           * win.area for win in
-                                          self.thermal_zone.windows) / self.area_win
+                                     * win.area for win in
+                                     self.thermal_zone.windows) / self.area_win
 
         self.solar_absorp_win = sum(win.layer[-1].material.solar_absorp
                                     * win.area for win in
@@ -763,7 +759,7 @@ class TwoElement(object):
 
             try:
                 self.r1_win = (sum((1 / (win.r1 / 6)) for
-                                       win in self.thermal_zone.windows))
+                                   win in self.thermal_zone.windows))
 
                 self.r1_ow = 1 / (1 / self.r1_ow + self.r1_win)
                 self.r_total_ow = 1 / (self.ua_value_ow + self.ua_value_win)
@@ -780,17 +776,17 @@ class TwoElement(object):
                 self.ir_emissivity_inner_ow = (
                     (self.ir_emissivity_inner_ow * self.area_ow
                      + self.ir_emissivity_inner_win * self.area_win)
-                        / (self.area_ow + self.area_win))
+                    / (self.area_ow + self.area_win))
 
                 self.ir_emissivity_outer_ow = (
                     (self.ir_emissivity_outer_ow * self.area_ow
                      + self.ir_emissivity_outer_win * self.area_win)
-                        / (self.area_ow + self.area_win))
+                    / (self.area_ow + self.area_win))
 
                 self.solar_absorp_ow = (
                     (self.solar_absorp_ow * self.area_ow
                      + self.solar_absorp_win * self.area_win)
-                        / (self.area_ow + self.area_win))
+                    / (self.area_ow + self.area_win))
 
             except RuntimeError:
                 print("As no outer walls or no windows are defined lumped "
@@ -897,11 +893,11 @@ class TwoElement(object):
         print(ua_value_gf_temp, ua_value_ow_temp)
         self.heat_load = \
             ((((ua_value_ow_temp + self.ua_value_win) +
-              self.thermal_zone.volume *
-             self.thermal_zone.infiltration_rate * 1/3600 *
-             self.thermal_zone.heat_capac_air *
-             self.thermal_zone.density_air) * (self.thermal_zone.t_inside -
-                                               self.thermal_zone.t_outside))
+               self.thermal_zone.volume *
+               self.thermal_zone.infiltration_rate * 1 / 3600 *
+               self.thermal_zone.heat_capac_air *
+               self.thermal_zone.density_air) * (self.thermal_zone.t_inside -
+                                                 self.thermal_zone.t_outside))
              + (ua_value_gf_temp * (self.thermal_zone.t_inside -
                                     self.thermal_zone.t_ground)))
 
@@ -980,7 +976,6 @@ class TwoElement(object):
         self.orientation_wall = []
         self.outer_walls_areas = []
 
-
         self.r_rad_ow_iw = 0.0
 
         # Attributes for windows
@@ -1013,9 +1008,8 @@ class TwoElement(object):
         self.r1_win = 0.0
 
         # Optical properties
-        self.ir_emissivity_outer_win = 0.0
-        self.ir_emissivity_inner_win = 0.0
-        self.solar_absorp_win = 0.0
+        self.ir_emissivity_win = 0.0
+        self.solar_absorp_win = 0.00
 
         # Additional attributes
         self.weightfactor_win = []

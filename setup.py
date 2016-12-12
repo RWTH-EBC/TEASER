@@ -1,10 +1,12 @@
 from setuptools import setup
 
 setup(name='teaser',
-      version='0.4.2',
-      description='Tool for Energy Analysis and Simulation for Efficient Retrofit ',
+      version='0.5.0',
+      description='Tool for Energy Analysis and '
+                  'Simulation for Efficient Retrofit',
       url='https://github.com/RWTH-EBC/TEASER',
-      author='RWTH Aachen University, E.ON Energy Research Center, Institute of Energy Efficient Buildings and Indoor Climate',
+      author='RWTH Aachen University, E.ON Energy Research Center, '
+             'Institute of Energy Efficient Buildings and Indoor Climate',
       author_email='ebc-teaser@eonerc.rwth-aachen.de',
       license='MIT',
       packages=['teaser',
@@ -17,6 +19,7 @@ setup(name='teaser',
                 'teaser.logic.buildingobjects.boundaryconditions',
                 'teaser.logic.buildingobjects.buildingphysics',
                 'teaser.logic.buildingobjects.buildingsystems',
+                'teaser.logic.calculation',
                 'teaser.logic.simulation',
                 'teaser.data',
                 'teaser.data.bindings',
