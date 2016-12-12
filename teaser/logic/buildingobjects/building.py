@@ -40,10 +40,13 @@ class Building(object):
     with_ahu : Boolean
         If set to True, an empty instance of BuildingAHU is instantiated and
         assigned to attribute central_ahu. This instance holds information for
-        central Air Handling units.
+        central Air Handling units. Default is False.
 
     Attributes
     ----------
+    central_ahu : instance of BuildingAHU
+        Teaser Instance of BuildingAHU if a central AHU is embedded into the
+        building (currently mostly needed for AixLib simulation).
     number_of_floors : int
         number of floors above ground (default: None)
     height_of_floors : float [m]
@@ -105,15 +108,6 @@ class Building(object):
         Classes with specific functions and attributes for building models in
         Annex60 and AixLib. Python classes can be found in calculation package.
 
-
-    TODO: aixlib module into class!
-    file_ahu : string
-        Path of AHU Matlab file for boundary condition
-    file_internal_gains : string
-        path of internal gains Matlab file for boundary condition
-    file_set_t : string
-        path of temperature Matlab file for boundary condition
-    central_ahu : TODO add documentation
     """
 
     def __init__(
