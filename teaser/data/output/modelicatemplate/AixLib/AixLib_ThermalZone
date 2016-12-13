@@ -90,6 +90,6 @@ equation
         coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=${mod_prj.modelica_info.runtime_simulation},
       Interval=${mod_prj.modelica_info.interval_output},
       __Dymola_Algorithm="${modelica_info.current_solver}"),
-      __Dymola_experimentSetupOutput(events=${get_true_false(modelica_info
-      .equidistant_output)}));
+      __Dymola_experimentSetupOutput(__Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
+      events=${get_true_false(modelica_info.results_at_events)}));
 end ${bldg.name};

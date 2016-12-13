@@ -15,3 +15,4 @@ class ModelicaInfo():
         self.solver = ["Lsodar", "dassl","Radau"]
         self.current_solver = "Radau"
         self.equidistant_output = True
+        self.results_at_events = False

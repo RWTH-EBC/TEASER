@@ -288,7 +288,10 @@ equation
           {72.5,-19.2},{72.5,-22},{79.6,-22}}, color={0,0,127}));
   annotation (experiment(
   StopTime=${modelica_info.runtime_simulation},
-  Interval=${modelica_info.interval_output}));
+      Interval=${modelica_info.interval_output},
+      __Dymola_Algorithm="${modelica_info.current_solver}"),
+      __Dymola_experimentSetupOutput(__Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
+      events=${get_true_false(modelica_info.results_at_events)})));
 end ${bldg.name}_${zone.name.replace(" ", "")};
 
 ##list to string
