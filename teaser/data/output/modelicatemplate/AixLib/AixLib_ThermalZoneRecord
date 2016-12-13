@@ -2,6 +2,7 @@ within ${mod_prj}.${bldg.name}.${bldg.name}_DataBase;
 record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.replace(" ", "")}"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
     T_start = ${zone.t_inside},
+    withAirCap = ${get_true_false(zone.consider_air_capacity)},
     VAir = ${zone.volume},
     AZone = ${zone.area},
     alphaRad = ${mean_alphaRad(zone)},
@@ -277,5 +278,17 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   if area_gf != 0 and number_of_elements <= 2:
     newlist.append(area_gf)
   return newlist
+  %>
+</%def>
+
+##get false
+<%def name="get_true_false(value)", filter="trim">
+  <%
+  if value == False:
+    return "false"
+  elif value == True:
+    return "true"
+  else:
+    return value
   %>
 </%def>

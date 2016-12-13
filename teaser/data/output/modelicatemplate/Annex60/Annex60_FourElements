@@ -29,7 +29,11 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
   Annex60.ThermalZones.ReducedOrder.RC.FourElements
   thermalZoneFourElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
+% if zone.consider_air_capacity is True:
     VAir=${zone.volume},
+% else:
+    VAir=0.0,
+% endif
     alphaExt=${def_alpha(zone.alpha_conv_inner_ow)},
     alphaWin=${def_alpha(zone.alpha_conv_inner_win)},
     gWin=${zone.weighted_g_value},
