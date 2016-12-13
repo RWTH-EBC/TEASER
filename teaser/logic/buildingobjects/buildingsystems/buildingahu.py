@@ -68,6 +68,11 @@ class BuildingAHU(object):
         self.by_pass_dehumidification = 0.2
         self.efficiency_recovery = 0.8
         self.efficiency_revocery_false = 0.2
+        self.sample_rate = 1800
+        self.efficiency_fan_supply = 0.7
+        self.efficiency_fan_return = 0.7
+        self.pressure_drop_fan_supply = 800
+        self.pressure_drop_fan_return = 800
 
         self._profile_min_relative_humidity = None
         self._profile_max_relative_humidity = None
