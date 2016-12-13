@@ -24,6 +24,7 @@ def gen_res_type_example_building():
 
     prj = Project(load_data=True)
     prj.name = "ArchetypeBuildings"
+    prj.merge_windows_calc = True
     prj.type_bldg_residential(name="ResidentialBuilding",
                               year_of_construction=1988,
                               number_of_floors=2,
@@ -36,6 +37,7 @@ def gen_res_type_example_building():
                               cellar=1,
                               construction_type="heavy",
                               dormer=1)
+
 
     return prj
 
@@ -79,13 +81,23 @@ def vdi_example_6007(thermal_zone, weather):
                  "alphaiwi": thermal_zone.alpha_comb_inner_iw,
                  "alphaowi": thermal_zone.alpha_comb_inner_ow,
                  "alphaWall": thermal_zone.alpha_comb_outer_ow,
-                 "withInnerwalls": withInnerwalls}
+                 "alphaowo": 25.0,
+                 "withInnerwalls": withInnerwalls,
+                 "aowo": 0.9,
+                 "epso": 0.1,
+                 "orientationswallshorizontal": [90, 90, 90, 90, 0],
+                "temperatureground": 283.15,
+                "weightfactorswall": thermal_zone.weightfactor_ow,
+                "weightfactorswindow": thermal_zone.weightfactor_win,
+                "weightfactorground": thermal_zone.weightfactor_ground[0],
+                "gsunblind": thermal_zone.g_sunblind_list,
+                "Imax": 100}
     #  TODO: Add further parameters to house data to use equAirTemp.py
 
     #  Solar radiation input on each external area in W/m2
     #  #-------------------------------------------------------
     # solarRad_in = np.zeros((timesteps, 5))
-    solarRad_in = np.transpose(weather.sun_rad)
+    #solarRad_in = np.transpose(weather.sun_rad)
 
     source_igRad = np.zeros(timesteps)
 
@@ -94,10 +106,10 @@ def vdi_example_6007(thermal_zone, weather):
     #  Equal air temperature based on VDI in K
     #  #-------------------------------------------------------
     #  equalAirTemp = np.zeros(timesteps) + 273.15 + 10
-    equalAirTemp = weather.temp + 0.5
+    #equalAirTemp = weather.temp + 0.5
 
-    # equalAirTemp = equ_air.eqAirTemp(weather=weather, houseData=houseData,
-    #                                  solarRad_in=solarRad_in, method="vdi")
+    equalAirTemp = equ_air.eqAirTemp(weather=weather, houseData=houseData,
+                                     solarRad_in=weather.sun_rad, method="vdi")
 
     #  Environment temperatures in K
     #  #-------------------------------------------------------
@@ -160,14 +172,21 @@ def vdi_example_6007(thermal_zone, weather):
 
 if __name__ == '__main__':
 
-    weather = weat.Weather()
-
-    #  Convert temperature to Kelvin
-    weather.temp += 273.15
-
     #  Get TEASER project with residential type building
     prj = gen_res_type_example_building()
 
+    weather = weat.Weather(
+        beta=[90,90,90,90,0],
+        gamma=[-180, -90, 0, 90, 0], # north, east, south, west, horizontal
+        weather_path=None,
+        albedo=0.2,
+        timeZone=1,
+        altitude=0,
+        location=(49.5, 8.5),
+        timestep=3600,
+        calc_sun_rad=True)
+    #  Convert temperature to Kelvin
+    weather.temp += 273.15
     #  Pointer to building object
     building = prj.buildings[0]
 
@@ -179,14 +198,15 @@ if __name__ == '__main__':
     print('Inner resistance (VDI 6007) of thermal zone before retrofit:')
     print(thermal_zone.r1_ow)
     print()
+    (T_air, Q_hc, Q_iw, Q_ow) = vdi_example_6007(thermal_zone, weather=weather)
 
-    # building.retrofit_building(year_of_retrofit=2014)
+    building.retrofit_building(year_of_retrofit=2014)
     #
-    # print('UA value after retrofiting:')
-    # print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
-    # print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
-    # print(thermal_zone.r1_ow)
-    # print()
+    print('UA value after retrofiting:')
+    print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
+    print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
+    print(thermal_zone.r1_ow)
+    print()
 
     #  Rund VDI 6007 example with thermal zone
     (T_air, Q_hc, Q_iw, Q_ow) = vdi_example_6007(thermal_zone, weather=weather)
