@@ -82,29 +82,6 @@ def vdi_example_6007(thermal_zone, weather):
                  "withInnerwalls": withInnerwalls}
     #  TODO: Add further parameters to house data to use equAirTemp.py
 
-    houseDataval = {"R1i": 0.000779671554640369,
-                "C1i": 12333949.4129606,
-                "Ai": 58,
-                "RRest": 0.011638548,
-                "R1o": 0.00171957697767797,
-                "C1o": 4338751.41,
-                "Ao": [28],
-                "Aw": np.zeros(1),
-                "At": [7,],
-                "Vair": 52.5,
-                "rhoair": 1.19,
-                "cair": 0,
-                "splitfac": 0.09,
-                "g": 1,
-                "alphaiwi": 2.12,
-                "alphaowi": 2.398,
-                "alphaWall": 28 * 9.75, # 28 * sum(Ao)
-                "withInnerwalls": True}
-
-    for key in houseDataval:
-        if isinstance(houseData[key], float) or isinstance(houseData[key], int):
-            print(key, houseData[key] - houseDataval[key])
-
     #  Solar radiation input on each external area in W/m2
     #  #-------------------------------------------------------
     # solarRad_in = np.zeros((timesteps, 5))
@@ -139,7 +116,7 @@ def vdi_example_6007(thermal_zone, weather):
     #  TODO: Substitute with TEASER boundary conditions
     #  logic/buildingobjects/boundaryconditions/boundaryconditions.py
     #  Living (18599) / SIA for occupancy
-    Q_ig = np.zeros(timesteps)  # + 200
+    Q_ig = np.zeros(timesteps) + 200
 
     # Radiative heat transfer coef. between inner and outer walls in W/m2K
     alphaRad = np.zeros(timesteps) + 5
@@ -203,13 +180,13 @@ if __name__ == '__main__':
     print(thermal_zone.r1_ow)
     print()
 
-    # building.retrofit_building(year_of_retrofit=2014)
-    #
-    # print('UA value after retrofiting:')
-    # print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
-    # print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
-    # print(thermal_zone.r1_ow)
-    # print()
+    building.retrofit_building(year_of_retrofit=2014)
+
+    print('UA value after retrofiting:')
+    print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
+    print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
+    print(thermal_zone.r1_ow)
+    print()
 
     #  Rund VDI 6007 example with thermal zone
     (T_air, Q_hc, Q_iw, Q_ow) = vdi_example_6007(thermal_zone, weather=weather)

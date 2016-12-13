@@ -263,7 +263,7 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
     T_air_prev = T_air_init
 
     for t in range(timesteps):
-        print(t)
+        #print(t)
 
         # Common equations
         A = np.zeros((9, 9))
