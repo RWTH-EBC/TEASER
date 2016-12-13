@@ -63,17 +63,17 @@ def vdi_example_6007(thermal_zone, weather):
     #  Convert into house data dictionary
     #  #-------------------------------------------------------
     houseData = {"R1i": thermal_zone.r1_iw,
-                 "C1i": thermal_zone.c1_iw,
+                 "C1i": thermal_zone.c1_iw/3600,   # Convert Ws/K to Wh/K
                  "Ai": thermal_zone.area_iw,
                  "RRest": thermal_zone.r_rest_ow,
                  "R1o": thermal_zone.r1_ow,
-                 "C1o": thermal_zone.c1_ow,
+                 "C1o": thermal_zone.c1_ow/3600,  # Convert Ws/K to Wh/K
                  "Ao": [thermal_zone.area_ow],
                  "Aw": thermal_zone.window_area_list,
                  "At": thermal_zone.window_area_list,
                  "Vair": thermal_zone.volume,
                  "rhoair": thermal_zone.density_air,
-                 "cair": thermal_zone.heat_capac_air,  # kJ/kgK?
+                 "cair": thermal_zone.heat_capac_air/3600,  # Conv. Ws/kgK to Wh/kgK
                  "splitfac": thermal_zone.windows[0].a_conv,
                  "g": thermal_zone.weighted_g_value,
                  "alphaiwi": thermal_zone.alpha_comb_inner_iw,
@@ -82,9 +82,32 @@ def vdi_example_6007(thermal_zone, weather):
                  "withInnerwalls": withInnerwalls}
     #  TODO: Add further parameters to house data to use equAirTemp.py
 
+    houseDataval = {"R1i": 0.000779671554640369,
+                "C1i": 12333949.4129606,
+                "Ai": 58,
+                "RRest": 0.011638548,
+                "R1o": 0.00171957697767797,
+                "C1o": 4338751.41,
+                "Ao": [28],
+                "Aw": np.zeros(1),
+                "At": [7,],
+                "Vair": 52.5,
+                "rhoair": 1.19,
+                "cair": 0,
+                "splitfac": 0.09,
+                "g": 1,
+                "alphaiwi": 2.12,
+                "alphaowi": 2.398,
+                "alphaWall": 28 * 9.75, # 28 * sum(Ao)
+                "withInnerwalls": True}
+
+    for key in houseDataval:
+        if isinstance(houseData[key], float) or isinstance(houseData[key], int):
+            print(key, houseData[key] - houseDataval[key])
+
     #  Solar radiation input on each external area in W/m2
     #  #-------------------------------------------------------
-    #  solarRad_in = np.zeros((timesteps, 5))
+    # solarRad_in = np.zeros((timesteps, 5))
     solarRad_in = np.transpose(weather.sun_rad)
 
     source_igRad = np.zeros(timesteps)
@@ -109,14 +132,14 @@ def vdi_example_6007(thermal_zone, weather):
     #  #-------------------------------------------------------
     #  TODO: Substitute with TEASER call (or VDI call)
     # ventRate = np.zeros(timesteps)
-    ventRate = np.zeros(timesteps) + thermal_zone.volume * 0.8 / 3600
+    ventRate = np.zeros(timesteps) + thermal_zone.volume * 1 / 3600
 
     #  Internal convective gains in W
     #  #-------------------------------------------------------
     #  TODO: Substitute with TEASER boundary conditions
     #  logic/buildingobjects/boundaryconditions/boundaryconditions.py
     #  Living (18599) / SIA for occupancy
-    Q_ig = np.zeros(timesteps) + 200
+    Q_ig = np.zeros(timesteps)  # + 200
 
     # Radiative heat transfer coef. between inner and outer walls in W/m2K
     alphaRad = np.zeros(timesteps) + 5
@@ -132,7 +155,7 @@ def vdi_example_6007(thermal_zone, weather):
 
     # Define set points for cooling (cooling is disabled for high values)
     #  #-------------------------------------------------------
-    t_set_cooling = np.zeros(timesteps) + 273.15 + 70  # in Kelvin
+    t_set_cooling = np.zeros(timesteps) + 273.15 + 1000  # in Kelvin
 
     heater_limit = np.zeros((timesteps, 3)) + 1e10
     cooler_limit = np.zeros((timesteps, 3)) - 1e10
@@ -180,13 +203,13 @@ if __name__ == '__main__':
     print(thermal_zone.r1_ow)
     print()
 
-    building.retrofit_building(year_of_retrofit=2014)
-
-    print('UA value after retrofiting:')
-    print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
-    print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
-    print(thermal_zone.r1_ow)
-    print()
+    # building.retrofit_building(year_of_retrofit=2014)
+    #
+    # print('UA value after retrofiting:')
+    # print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
+    # print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
+    # print(thermal_zone.r1_ow)
+    # print()
 
     #  Rund VDI 6007 example with thermal zone
     (T_air, Q_hc, Q_iw, Q_ow) = vdi_example_6007(thermal_zone, weather=weather)

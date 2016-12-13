@@ -175,9 +175,6 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
 
     timesteps = len(alphaRad)
 
-    # input()
-    # timesteps = 86400
-
     withInnerwalls = houseData["withInnerwalls"]  # If inner walls are existent
     #    withWindows     = houseData["withWindows"]      # If windows are existent
     #    withOuterwalls  = houseData["withOuterwalls"]   # If outer walls (including windows) are existent
@@ -266,7 +263,7 @@ def reducedOrderModelVDI(houseData, weatherTemperature, solarRad_in,
     T_air_prev = T_air_init
 
     for t in range(timesteps):
-        #  print(t)
+        print(t)
 
         # Common equations
         A = np.zeros((9, 9))
