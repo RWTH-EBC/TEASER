@@ -80,7 +80,7 @@ def vdi_example_6007(thermal_zone, weather):
                  "g": thermal_zone.weighted_g_value,
                  "alphaiwi": thermal_zone.alpha_comb_inner_iw,
                  "alphaowi": thermal_zone.alpha_comb_inner_ow,
-                 "alphaWall": thermal_zone.alpha_comb_outer_ow,
+                 "alphaWall": thermal_zone.alpha_comb_outer_ow * thermal_zone.area_ow,
                  "alphaowo": 25.0,
                  "withInnerwalls": withInnerwalls,
                  "aowo": 0.9,
@@ -97,7 +97,7 @@ def vdi_example_6007(thermal_zone, weather):
     #  Solar radiation input on each external area in W/m2
     #  #-------------------------------------------------------
     # solarRad_in = np.zeros((timesteps, 5))
-    #solarRad_in = np.transpose(weather.sun_rad)
+    solarRad_in = np.transpose(weather.sun_rad)
 
     source_igRad = np.zeros(timesteps)
 
@@ -106,14 +106,14 @@ def vdi_example_6007(thermal_zone, weather):
     #  Equal air temperature based on VDI in K
     #  #-------------------------------------------------------
     #  equalAirTemp = np.zeros(timesteps) + 273.15 + 10
-    #equalAirTemp = weather.temp + 0.5
+    equalAirTemp = weather.temp + 0.5
 
-    equalAirTemp = equ_air.eqAirTemp(weather=weather, houseData=houseData,
-                                     solarRad_in=weather.sun_rad, method="vdi")
+    # equalAirTemp = equ_air.eqAirTemp(weather=weather, houseData=houseData,
+    #                                  solarRad_in=weather.sun_rad, method="vdi")
 
     #  Environment temperatures in K
     #  #-------------------------------------------------------
-    #  weatherTemperature = np.zeros(timesteps) + 273.15 + 10  # in K
+    # weatherTemperature = np.zeros(timesteps) + 273.15 + 10  # in K
     weatherTemperature = weather.temp
     print(weatherTemperature)
 
@@ -121,7 +121,7 @@ def vdi_example_6007(thermal_zone, weather):
     #  #-------------------------------------------------------
     #  TODO: Substitute with TEASER call (or VDI call)
     # ventRate = np.zeros(timesteps)
-    ventRate = np.zeros(timesteps) + thermal_zone.volume * 1 / 3600
+    ventRate = np.zeros(timesteps) + (thermal_zone.volume * 0.5 / 3600)
 
     #  Internal convective gains in W
     #  #-------------------------------------------------------
@@ -194,19 +194,29 @@ if __name__ == '__main__':
     thermal_zone = prj.buildings[0].thermal_zones[0]
 
     print('UA value before retrofiting:')
-    print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
+    print(prj.buildings[0].thermal_zones[0].outer_walls[0].ua_value)
     print('Inner resistance (VDI 6007) of thermal zone before retrofit:')
     print(thermal_zone.r1_ow)
     print()
-    (T_air, Q_hc, Q_iw, Q_ow) = vdi_example_6007(thermal_zone, weather=weather)
+    (T_air, Q_hc1, Q_iw, Q_ow) = vdi_example_6007(thermal_zone, weather=weather)
+
+    q_heat1 = np.zeros(len(Q_hc1))
+    q_cool = np.zeros(len(Q_hc1))
+    for i in range(len(Q_hc1)):
+        if Q_hc1[i] > 0:
+            q_heat1[i] = Q_hc1[i]
+        elif Q_hc1[i] < 0:
+            q_cool[i] = Q_hc1[i]
+
 
     building.retrofit_building(year_of_retrofit=2014)
-    #
+    # #
     print('UA value after retrofiting:')
-    print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
+    print(prj.buildings[0].thermal_zones[0].outer_walls[0].ua_value)
     print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
     print(thermal_zone.r1_ow)
-    print()
+    # print()
+    thermal_zone = prj.buildings[0].thermal_zones[0]
 
     #  Rund VDI 6007 example with thermal zone
     (T_air, Q_hc, Q_iw, Q_ow) = vdi_example_6007(thermal_zone, weather=weather)
@@ -246,7 +256,9 @@ if __name__ == '__main__':
     plt.plot(T_air - 273.15)
     plt.ylabel('Indoor air\ntemperature in\ndegree Celsius')
     fig.add_subplot(414)
+    plt.plot(Q_hc1 / 1000, color="Red")
     plt.plot(Q_hc / 1000)
+
     plt.ylabel('Heating/cooling\npower (+/-)\nin kW')
     plt.xlabel('Time in hours')
     plt.show()
