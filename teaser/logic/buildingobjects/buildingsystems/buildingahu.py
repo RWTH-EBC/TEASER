@@ -44,6 +44,17 @@ class BuildingAHU(object):
         taking a little heat transfer into account although HRS is disabled
         (in case that a HRS is physically installed in the AHU) in AixLib:
         "efficiencyHRS_disabled"
+    sample_rate : int (default = 1800)
+        sample rate of state machines in AHU model. Default is set to half
+        an hour as typical input is hourly
+    efficiency_fan_supply : float (default = 0.7)
+        Efficiency of supply fan
+    efficiency_fan_return: float (default = 0.7)
+        Efficiency of return fan
+    pressure_drop_fan_supply: float (default 800)
+        Pressure drop assigned to supply fan in Pascal
+    pressure_drop_fan_return: float (default 800)
+        Pressure drop assigned to return fan in Pascal
     profile_temperature : [float]
         timeline of temperatures requirements for AHU simulation
     profile_min_relative_humidity : [float]
