@@ -63,17 +63,17 @@ def vdi_example_6007(thermal_zone, weather):
     #  Convert into house data dictionary
     #  #-------------------------------------------------------
     houseData = {"R1i": thermal_zone.r1_iw,
-                 "C1i": thermal_zone.c1_iw/3600,   # Convert Ws/K to Wh/K
+                 "C1i": thermal_zone.c1_iw,
                  "Ai": thermal_zone.area_iw,
                  "RRest": thermal_zone.r_rest_ow,
                  "R1o": thermal_zone.r1_ow,
-                 "C1o": thermal_zone.c1_ow/3600,  # Convert Ws/K to Wh/K
+                 "C1o": thermal_zone.c1_ow,
                  "Ao": [thermal_zone.area_ow],
                  "Aw": thermal_zone.window_area_list,
                  "At": thermal_zone.window_area_list,
                  "Vair": thermal_zone.volume,
                  "rhoair": thermal_zone.density_air,
-                 "cair": thermal_zone.heat_capac_air/3600,  # Conv. Ws/kgK to Wh/kgK
+                 "cair": thermal_zone.heat_capac_air,
                  "splitfac": thermal_zone.windows[0].a_conv,
                  "g": thermal_zone.weighted_g_value,
                  "alphaiwi": thermal_zone.alpha_comb_inner_iw,
@@ -180,13 +180,13 @@ if __name__ == '__main__':
     print(thermal_zone.r1_ow)
     print()
 
-    building.retrofit_building(year_of_retrofit=2014)
-
-    print('UA value after retrofiting:')
-    print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
-    print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
-    print(thermal_zone.r1_ow)
-    print()
+    # building.retrofit_building(year_of_retrofit=2014)
+    #
+    # print('UA value after retrofiting:')
+    # print(prj.buildings[0]._thermal_zones[0]._outer_walls[0].ua_value)
+    # print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
+    # print(thermal_zone.r1_ow)
+    # print()
 
     #  Rund VDI 6007 example with thermal zone
     (T_air, Q_hc, Q_iw, Q_ow) = vdi_example_6007(thermal_zone, weather=weather)
