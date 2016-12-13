@@ -7,6 +7,7 @@
 
 import warnings
 import os
+import re
 import teaser.logic.utilities as utilitis
 import teaser.data.input.teaserxml_input as txml_in
 import teaser.data.output.teaserxml_output as txml_out
@@ -1078,6 +1079,15 @@ class Project(object):
 
     @name.setter
     def name(self, value):
+        if isinstance(value, str):
+            regex = re.compile('[^a-zA-z0-9]')
+            self._name = regex.sub('', value)
+        else:
+            try:
+                value = str(value)
+                regex = re.compile('[^a-zA-z0-9]')
+                self._name = regex.sub('', value)
+                self.modelica_project = regex.sub('', value)
 
-        self._name = value
-        self.modelica_project = value
+            except ValueError:
+                print("Can't convert name to string")

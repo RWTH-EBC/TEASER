@@ -1,6 +1,6 @@
 within ${within};
-model ${bldg.name}_${zone.name.replace(" ", "")}
-  "This is the simulation model of ${bldg.name}_${zone.name.replace(" ", "")}"
+model ${bldg.name}_${zone.name}
+  "This is the simulation model of ${bldg.name}_${zone.name}"
 
   Annex60.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=Annex60.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
@@ -381,7 +381,7 @@ equation
       __Dymola_Algorithm="${modelica_info.current_solver}"),
       __Dymola_experimentSetupOutput(__Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
       events=${get_true_false(modelica_info.results_at_events)})));
-end ${bldg.name}_${zone.name.replace(" ", "")};
+end ${bldg.name}_${zone.name};
 
 ##list to string
 <%def name="list_to_string(list)", filter="trim">

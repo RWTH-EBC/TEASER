@@ -6,8 +6,7 @@ model ${bldg.name}
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     zoneParam=
-    ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${zone.name
-	  .replace(" ", "")}(),
+    ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${zone.name}(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
         intWallRC(thermCapInt(each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
@@ -18,8 +17,7 @@ model ${bldg.name}
   AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped thermalZone(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
     zoneParam=
-    ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${zone.name
-	  .replace(" ", "")}(),
+    ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${zone.name}(),
     ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
         intWallRC(thermCapInt(each der_T(fixed=true)))),
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,

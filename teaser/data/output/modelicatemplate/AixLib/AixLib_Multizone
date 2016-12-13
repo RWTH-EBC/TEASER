@@ -15,9 +15,9 @@ model ${bldg.name}
     zoneParam = {
       %for i in bldg.thermal_zones:
 	  %if i == bldg.thermal_zones[-1]:
-	   ${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}()
+	   ${bldg.name}_DataBase.${bldg.name}_${i.name}()
 	  %else:
-	   ${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
+	   ${bldg.name}_DataBase.${bldg.name}_${i.name}(),
 	  %endif
       %endfor
       },
@@ -154,9 +154,9 @@ end ${bldg.name};
     zoneParam = {
       %for i in bldg.thermal_zones:
 	  %if i == bldg.thermal_zones[-1]:
-	   ${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}()
+	   ${bldg.name}_DataBase.${bldg.name}_${i.name}()
 	  %else:
-	   ${bldg.name}_DataBase.${bldg.name}_${i.name.replace(" ", "")}(),
+	   ${bldg.name}_DataBase.${bldg.name}_${i.name}(),
 	  %endif
       %endfor
       },

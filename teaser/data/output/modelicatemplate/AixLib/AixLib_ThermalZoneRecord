@@ -1,5 +1,5 @@
 within ${mod_prj}.${bldg.name}.${bldg.name}_DataBase;
-record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.replace(" ", "")}"
+record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
     T_start = ${zone.t_inside},
     withAirCap = ${get_true_false(zone.consider_air_capacity)},
@@ -93,7 +93,7 @@ record ${bldg.name}_${zone.name.replace(" ", "")} "${bldg.name}_${zone.name.repl
     KRCool = 10000,
     TNCool = 1,
     CoolerOn = false);
-end ${bldg.name}_${zone.name.replace(" ", "")};
+end ${bldg.name}_${zone.name};
 
 ##list to string
 <%def name="list_to_string(list)", filter="trim">

@@ -33,11 +33,11 @@ def example_create_building():
     specific building and all its future changes to the project.
     '''
     prj = Project(load_data=True)
-    prj.name = "SuperExampleBuilding"
+    prj.name = "Super Example Building"
     bldg = Building(parent=prj)
 
     '''Set some building parameters'''
-    bldg.name = "SuperExampleBuilding"
+    bldg.name = "Super Example Building"
     bldg.street_name = "Awesome Avenue 42"
     bldg.city = "46325 Fantastic Town"
     bldg.year_of_construction = 1988
