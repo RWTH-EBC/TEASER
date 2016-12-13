@@ -24,7 +24,15 @@ def load_res(filename):
     return (day1, day2, day3)
 
 
-def run_case1():
+def run_case1(plot_res=False):
+    """
+    Run test case 1
+
+    Parameters
+    ----------
+    plot_res : bool, optional
+        Defines, if results should be plotted (default: False)
+    """
     # Definition of time horizon
     times_per_hour = 60  # 60 minutes per hour
     timesteps = 24 * 60 * times_per_hour  # 60 days (with minute timestep)
@@ -138,9 +146,10 @@ def run_case1():
         plt.xlabel("Time in h")
         plt.show()
 
-    plot_result(T_air_1, T_air_ref_1, "Results day 1")
-    plot_result(T_air_10, T_air_ref_10, "Results day 10")
-    plot_result(T_air_60, T_air_ref_60, "Results day 60")
+    if plot_res:
+        plot_result(T_air_1, T_air_ref_1, "Results day 1")
+        plot_result(T_air_10, T_air_ref_10, "Results day 10")
+        plot_result(T_air_60, T_air_ref_60, "Results day 60")
 
     print(
         "Max. deviation day 1: " + str(np.max(np.abs(T_air_1 - T_air_ref_1))))
@@ -151,4 +160,4 @@ def run_case1():
 
 
 if __name__ == '__main__':
-    run_case1()
+    run_case1(plot_res=True)
