@@ -1082,6 +1082,7 @@ class Project(object):
         if isinstance(value, str):
             regex = re.compile('[^a-zA-z0-9]')
             self._name = regex.sub('', value)
+            self.modelica_project = regex.sub('', value)
         else:
             try:
                 value = str(value)
