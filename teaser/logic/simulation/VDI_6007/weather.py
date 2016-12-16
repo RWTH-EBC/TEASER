@@ -12,6 +12,7 @@ import math
 def getSolarGains(initialTime, timeDiscretization, timesteps, timeZone,
                   location, altitude, beta, gamma, beam, diffuse, albedo):
     # get geometry results for entire year
+
     geometry = getGeometry(initialTime, timeDiscretization,
                            timesteps, timeZone, location, altitude)
     (omega, delta, thetaZ, airmass, Gon) = geometry
@@ -407,7 +408,7 @@ class Weather(object):
                  gamma=[0, 0, -90, 0, -180, -270], weather_path=None,
                  albedo=0.2, timeZone=1,
                  altitude=0, location=(49.5, 8.5), timestep=3600,
-                 calc_sun_rad=True):
+                 do_sun_rad=True):
         """
         Constructor of weather object
 
@@ -422,7 +423,7 @@ class Weather(object):
         timeZone
         altitude
         location
-        calc_sun_rad : bool, optional
+        do_sun_rad : bool, optional
             If True, calculate sun radiation on surface (default: True)
         """
 
@@ -455,7 +456,7 @@ class Weather(object):
         self.rad_sky = weather_data[:, 3]
         self.rad_earth = weather_data[:, 4]
 
-        if calc_sun_rad:
+        if do_sun_rad:
             self.calc_sun_rad(timestep=timestep, nb_timesteps=nb_timesteps)
 
     def calc_sun_rad(self, timestep=3600, nb_timesteps=8760):
@@ -471,7 +472,9 @@ class Weather(object):
         """
 
         # Sun radiation on surfaces
-        self.sun_rad = getSolarGains(0, timestep, timesteps=nb_timesteps,
+        self.sun_rad = getSolarGains(initialTime=0,
+                                     timeDiscretization=timestep,
+                                     timesteps=nb_timesteps,
                                      timeZone=self.timeZone,
                                      location=self.location,
                                      altitude=self.altitude,

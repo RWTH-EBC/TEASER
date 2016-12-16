@@ -184,7 +184,7 @@ if __name__ == '__main__':
         altitude=0,
         location=(49.5, 8.5),
         timestep=3600,
-        calc_sun_rad=True)
+        do_sun_rad=True)
     #  Convert temperature to Kelvin
     weather.temp += 273.15
     #  Pointer to building object
