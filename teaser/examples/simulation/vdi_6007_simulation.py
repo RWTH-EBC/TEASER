@@ -26,7 +26,7 @@ def gen_res_type_example_building():
     prj.name = "ArchetypeBuildings"
     prj.merge_windows_calc = True
     prj.type_bldg_residential(name="ResidentialBuilding",
-                              year_of_construction=1988,
+                              year_of_construction=1962,
                               number_of_floors=2,
                               height_of_floors=2.8,
                               net_leased_area=200,
@@ -185,8 +185,10 @@ if __name__ == '__main__':
         location=(49.5, 8.5),
         timestep=3600,
         do_sun_rad=True)
+
     #  Convert temperature to Kelvin
     weather.temp += 273.15
+
     #  Pointer to building object
     building = prj.buildings[0]
 
@@ -198,19 +200,27 @@ if __name__ == '__main__':
     print('Inner resistance (VDI 6007) of thermal zone before retrofit:')
     print(thermal_zone.r1_ow)
     print()
+
+    #  Perform simulation for unretrofited model
     (T_air, Q_hc1, Q_iw, Q_ow) = vdi_example_6007(thermal_zone, weather=weather)
 
     q_heat1 = np.zeros(len(Q_hc1))
-    q_cool = np.zeros(len(Q_hc1))
+    q_cool1 = np.zeros(len(Q_hc1))
     for i in range(len(Q_hc1)):
         if Q_hc1[i] > 0:
             q_heat1[i] = Q_hc1[i]
         elif Q_hc1[i] < 0:
-            q_cool[i] = Q_hc1[i]
+            q_cool1[i] = Q_hc1[i]
 
+    print('Sum of heating energy in kWh:')
+    print(sum(q_heat1) / 1000)
 
+    print('Sum of cooling energy in kWh:')
+    print(-sum(q_cool1) / 1000)
+
+    #  Do retrofit of building
     building.retrofit_building(year_of_retrofit=2014)
-    # #
+
     print('UA value after retrofiting:')
     print(prj.buildings[0].thermal_zones[0].outer_walls[0].ua_value)
     print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
@@ -237,10 +247,10 @@ if __name__ == '__main__':
         elif Q_hc[i] < 0:
             q_cool[i] = Q_hc[i]
 
-    print('Sum of heating energy in kWh:')
+    print('Sum of heating energy in kWh (after retrofit):')
     print(sum(q_heat)/1000)
 
-    print('Sum of cooling energy in kWh:')
+    print('Sum of cooling energy in kWh (after retrofit):')
     print(-sum(q_cool) / 1000)
 
     import matplotlib.pyplot as plt
