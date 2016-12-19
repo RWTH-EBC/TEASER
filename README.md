@@ -37,21 +37,43 @@ and buildings, dynamic simulation is one key element, in particular when it
 comes to thermal energy demand on minutely or hourly scale.
 Sparse and limited access to detailed building information as well as computing
 times are challenges for building simulation on urban scale. In addition,
-data acquisition and modelling for Building Performance Simulation (BPS) are
+data acquisition and modeling for Building Performance Simulation (BPS) are
 time consuming and error-prone. To enable the use of BPS on urban scale we
-present the TEASER tool, an open framework for urban energy modelling of
+present the TEASER tool, an open framework for urban energy modeling of
 building stocks. TEASER provides an easy interface for multiple data sources,
 data enrichment, where necessary and export of ready-to-run Modelica simulation
-models for [AixLib] (https://github.com/RWTH-EBC/AixLib) and
+models for [AixLib](https://github.com/RWTH-EBC/AixLib) and
 IEA-EBC [Annex60](https://github.com/iea-annex60/modelica-annex60).
 
 ### Version
 
-The current version is 0.4.2, which is a pre-release.
+The current version is 0.5.0, which is a pre-release.
 
 ### How to cite TEASER
 
 A Journal Paper presenting TEASER is already submitted and is in review.
+
+If you are using TEASER, please cite us:
+
++ CityGML Import and Export for Dynamic Building Performance Simulation in Modelica. Remmen P., Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016, [link](http://www.ibpsa.org/proceedings/BSO2016/p1047.pdf)
+
+```
+@inproceedings{Remmen.2016,
+ author = {Remmen, Peter and Lauster, Moritz and Mans, Michael and Osterhage, Tanja and M{\"u}ller, Dirk},
+ title = {CityGML Import and Export for Dynamic Building Performance Simulation in Modelica},
+ pages = {329--336},
+ booktitle = {Building Simulation and Optimization conference (BSO16)},
+ editor = {Hamza, N. and Unerdwood, C.},
+ month = sept,
+ year = {2016},
+ publisher = {Newcastle University},
+ venue = {Newcastle upon Tyne, England},
+ isbn = {978-0-7017-0254-0},
+ }
+```
+
+### Contributions using TEASER
+
 
 
 ### How to use TEASER
