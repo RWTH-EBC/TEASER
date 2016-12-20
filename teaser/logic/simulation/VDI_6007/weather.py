@@ -433,7 +433,7 @@ class Weather(object):
         if weather_path is None:
             #  If None, use default weather path
 
-            wfile = 'TRY2010_12_Jahr.dat'
+            wfile = 'TRY2010_05_Jahr.dat'
             this_path = os.path.dirname(os.path.abspath(__file__))
             src_path = os.path.dirname(
                 os.path.dirname(os.path.dirname(this_path)))
