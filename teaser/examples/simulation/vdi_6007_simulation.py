@@ -123,10 +123,13 @@ def vdi_example_6007(thermal_zone, weather):
                      "wfWall": [0.05796831135677373, 0.13249899738691134],  # weight factors of the walls
                      "wfWin": [0.4047663456281575, 0.4047663456281575],  # weight factors of the windows
                      "wfGro": 0,  # weight factor of the ground (0 if not considered)
-                     "T_Gro": 273.15 + 12,
-                     "alpha_wall_out": 20,
-                     "alpha_rad_wall": 5,
+                     "T_Gro": 273.15 + 10,
+                     "alpha_wall_out": 20,  # _outer_convection? (outerwall)
+                     "alpha_rad_wall": 5,  # _outer_radiation? (outerwall)
                      "withLongwave": False}
+
+    #  aExt --> solar_absorp? (material)
+    #  eExt --> ir_emissivity? (material)
 
     equalAirTemp = equ_air.equal_air_temp(HSol=solarRad_in,
                                           TBlaSky=t_black_sky,
