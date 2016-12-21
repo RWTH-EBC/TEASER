@@ -9,7 +9,8 @@ import numpy as np
 from teaser.project import Project
 import teaser.logic.simulation.VDI_6007.weather as weat
 import teaser.logic.simulation.VDI_6007.low_order_VDI as low_order_VDI
-import teaser.logic.simulation.VDI_6007.eqAirTemp as equ_air
+# import teaser.logic.simulation.VDI_6007.eqAirTemp as equ_air
+import teaser.logic.simulation.VDI_6007.equal_air_temperature as equ_air
 
 
 def gen_res_type_example_building():
@@ -86,12 +87,12 @@ def vdi_example_6007(thermal_zone, weather):
                  "aowo": 0.9,
                  "epso": 0.1,
                  "orientationswallshorizontal": [90, 90, 90, 90, 0],
-                "temperatureground": 283.15,
-                "weightfactorswall": thermal_zone.weightfactor_ow,
-                "weightfactorswindow": thermal_zone.weightfactor_win,
-                "weightfactorground": thermal_zone.weightfactor_ground[0],
-                "gsunblind": thermal_zone.g_sunblind_list,
-                "Imax": 100}
+                 "temperatureground": 283.15,
+                 "weightfactorswall": thermal_zone.weightfactor_ow,
+                 "weightfactorswindow": thermal_zone.weightfactor_win,
+                 "weightfactorground": thermal_zone.weightfactor_ground[0],
+                 "gsunblind": thermal_zone.g_sunblind_list,
+                 "Imax": 100}
     #  TODO: Add further parameters to house data to use equAirTemp.py
 
     #  Solar radiation input on each external area in W/m2
@@ -105,11 +106,33 @@ def vdi_example_6007(thermal_zone, weather):
 
     #  Equal air temperature based on VDI in K
     #  #-------------------------------------------------------
-    #  equalAirTemp = np.zeros(timesteps) + 273.15 + 10
-    equalAirTemp = weather.temp + 0.5 + 273.15
+    # #  equalAirTemp = np.zeros(timesteps) + 273.15 + 10
+    # equalAirTemp = weather.temp + 0.5 + 273.15
 
     # equalAirTemp = equ_air.eqAirTemp(weather=weather, houseData=houseData,
     #                                  solarRad_in=weather.sun_rad, method="vdi")
+
+    t_black_sky = np.zeros(timesteps) + 273.15
+
+    sunblind_in = np.zeros_like(solarRad_in)
+    sunblind_in[solarRad_in > 100] = 0.85
+
+    #  Fixme: Extract values out of TEASER object instances
+    eq_air_params = {"aExt": 0.7,  # coefficient of absorption of exterior walls (outdoor)
+                     "eExt": 0.9,  # coefficient of emission of exterior walls (outdoor)
+                     "wfWall": [0.05796831135677373, 0.13249899738691134],  # weight factors of the walls
+                     "wfWin": [0.4047663456281575, 0.4047663456281575],  # weight factors of the windows
+                     "wfGro": 0,  # weight factor of the ground (0 if not considered)
+                     "T_Gro": 273.15 + 12,
+                     "alpha_wall_out": 20,
+                     "alpha_rad_wall": 5,
+                     "withLongwave": False}
+
+    equalAirTemp = equ_air.equal_air_temp(HSol=solarRad_in,
+                                          TBlaSky=t_black_sky,
+                                          TDryBul=weather.temp+273.15,
+                                          sunblind=sunblind_in,
+                                          params=eq_air_params)
 
     #  Environment temperatures in K
     #  #-------------------------------------------------------
