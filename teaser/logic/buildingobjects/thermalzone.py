@@ -1024,8 +1024,10 @@ class ThermalZone(object):
             sum_r_rad_outer_win += 1/ win.r_outer_rad
             sum_r_comb_outer_win += 1/ win.r_outer_comb
             sum_g_value += win.g_value * win.area
-            sum_solar_absorp_win += win.layer[-1].material.solar_absorp
-            sum_ir_emissivity_win += win.layer[-1].material.ir_emissivity
+            sum_solar_absorp_win += win.layer[-1].material.solar_absorp * \
+                                    win.area
+            sum_ir_emissivity_win += win.layer[-1].material.ir_emissivity * \
+                                     win.area
 
         self.r_conv_inner_win = 1 / sum_r_conv_inner_win
         self.r_rad_inner_win = 1 / sum_r_rad_inner_win
@@ -1251,19 +1253,19 @@ class ThermalZone(object):
 
         if number_of_elements == 1 or number_of_elements == 2:
             self.heating_load = ((self.ua_value_ow + self.ua_value_win) +
-                             self.volume * self.infiltration_rate *\
+                             self.volume * self.infiltration_rate / 3.6 *\
                                  _heat_capac_air * _density_air) * \
                             (self.t_inside - self.t_outside)
         elif number_of_elements == 3:
             self.heating_load = ((self.ua_value_ow + self.ua_value_gf +
                                      self.ua_value_win) +
-                             self.volume * self.infiltration_rate *\
+                             self.volume * self.infiltration_rate / 3.6 *\
                              _heat_capac_air * _density_air) * \
                             (self.t_inside - self.t_outside)
         elif number_of_elements == 4:
             self.heating_load = ((self.ua_value_ow + self.ua_value_gf +
                                   self.ua_value_rt + self.ua_value_win) +
-                             self.volume * self.infiltration_rate *\
+                             self.volume * self.infiltration_rate / 3.6 *\
                              _heat_capac_air*_density_air) * \
                             (self.t_inside - self.t_outside)
 

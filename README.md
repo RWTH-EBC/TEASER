@@ -1,3 +1,5 @@
+![E.ON EBC RWTH Aachen University](./doc/EBC_Logo.png)
+
 # TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
 
 The TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) tool
@@ -47,12 +49,18 @@ IEA-EBC [Annex60](https://github.com/iea-annex60/modelica-annex60).
 
 ### Version
 
-The current version is 0.4.2, which is a pre-release.
+The current version is 0.4.3, which is a pre-release.
 
 ### How to cite TEASER
 
 A Journal Paper presenting TEASER is already submitted and is in review.
 
+If you are using TEASER, please cite us:
+
++ CityGML Import and Export for Dynamic Building Performance Simulation in Modelica. Remmen P., 
+Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016, 
+[pdf](http://www.ibpsa.org/proceedings/BSO2016/p1047.pdf),
+[bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite.bib)
 
 ### How to use TEASER
 
