@@ -404,8 +404,9 @@ class Weather(object):
     Weather class of TEASER
     """
 
-    def __init__(self, beta=[45, 90, 90, 45, 90, 90],
-                 gamma=[0, 0, -90, 0, -180, -270], weather_path=None,
+    def __init__(self, beta=[90, 90, 90, 90, 0],
+                 gamma=[-180, -90, 0, 90, 0],
+                 weather_path=None,
                  albedo=0.2, timeZone=1,
                  altitude=0, location=(49.5, 8.5), timestep=3600,
                  do_sun_rad=True):
@@ -416,6 +417,7 @@ class Weather(object):
         ----------
         beta
         gamma
+            north, east, south, west, horizontal
         weather_path : str, optional
             Path to weather file (default: None)
             If set to None, loads weather set TRY 2010, region 12
