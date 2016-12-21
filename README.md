@@ -1,3 +1,5 @@
+![E.ON EBC RWTH Aachen University](./teaser/doc/EBC_Logo.png)
+
 # TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
 
 The TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) tool
