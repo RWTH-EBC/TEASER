@@ -106,7 +106,7 @@ def vdi_example_6007(thermal_zone, weather):
     #  Equal air temperature based on VDI in K
     #  #-------------------------------------------------------
     #  equalAirTemp = np.zeros(timesteps) + 273.15 + 10
-    equalAirTemp = weather.temp + 0.5
+    equalAirTemp = weather.temp + 0.5 + 273.15
 
     # equalAirTemp = equ_air.eqAirTemp(weather=weather, houseData=houseData,
     #                                  solarRad_in=weather.sun_rad, method="vdi")
@@ -114,7 +114,7 @@ def vdi_example_6007(thermal_zone, weather):
     #  Environment temperatures in K
     #  #-------------------------------------------------------
     # weatherTemperature = np.zeros(timesteps) + 273.15 + 10  # in K
-    weatherTemperature = weather.temp
+    weatherTemperature = weather.temp + 273.15
     print(weatherTemperature)
 
     #  Ventilation rate: Fresh air at temperature weatherTemperature in m3/s
@@ -176,8 +176,8 @@ if __name__ == '__main__':
     prj = gen_res_type_example_building()
 
     weather = weat.Weather(
-        beta=[90,90,90,90,0],
-        gamma=[-180, -90, 0, 90, 0], # north, east, south, west, horizontal
+        beta=[90, 90, 90, 90, 0],
+        gamma=[-180, -90, 0, 90, 0],  # north, east, south, west, horizontal
         weather_path=None,
         albedo=0.2,
         timeZone=1,
@@ -185,9 +185,6 @@ if __name__ == '__main__':
         location=(49.5, 8.5),
         timestep=3600,
         do_sun_rad=True)
-
-    #  Convert temperature to Kelvin
-    weather.temp += 273.15
 
     #  Pointer to building object
     building = prj.buildings[0]
@@ -257,7 +254,7 @@ if __name__ == '__main__':
 
     fig = plt.figure()
     fig.add_subplot(411)
-    plt.plot(weather.temp - 273.15)
+    plt.plot(weather.temp)
     plt.ylabel('Outdoor air\ntemperature in\ndegree Celsius')
     fig.add_subplot(412)
     plt.plot(weather.sun_rad[0])
