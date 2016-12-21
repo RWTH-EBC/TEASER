@@ -8,17 +8,14 @@ This module contains the Base class for all building elements.
 
 from __future__ import division
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
-
-
 import numpy as np
 import random
-import warnings
 import re
 
 
 class BuildingElement(object):
 
-    '''Building element class.
+    """Building element class.
 
     This is the base class for all building elements.
 
@@ -88,12 +85,12 @@ class BuildingElement(object):
     Raises
     ----------
     None
-    '''
+    """
 
     def __init__(self, parent=None):
-        '''Constructor for Thermal zone
+        """Constructor for Thermal zone
 
-        '''
+        """
 
         self.internal_id = random.random()
 
@@ -113,9 +110,9 @@ class BuildingElement(object):
 
         self._layer = []
 
-        #values for the AixLib Export
+        # values for the AixLib Export
         self.emissivity = 0.0   # Should we use the ir_emissivity here?
-                                # Better use in the thermal zone i think
+        # Better use in the thermal zone i think
         self.parent = parent
 
         # Calculated values for each Building Element
@@ -136,10 +133,10 @@ class BuildingElement(object):
         self.wf_out = 0.0
 
     def calc_ua_value(self):
-        '''U*A value for building element.
+        """U*A value for building element.
 
         Calculates the U*A value and thermal resistances of a building element.
-        '''
+        """
 
         self.ua_value = 0.0
         self.r_conduc = 0.0
@@ -170,7 +167,7 @@ class BuildingElement(object):
                               (1 / self.area) + self.r_outer_comb))
 
     def gather_element_properties(self):
-        '''Helper function for matrix calculation.
+        """Helper function for matrix calculation.
 
         Gathers all material properties of the building element and returns
         them as a np.array. Needed for the calculation of the matrix in
@@ -183,7 +180,7 @@ class BuildingElement(object):
         np.thermal_conduc
         np.heat_capac
         np.thickness
-        '''
+        """
 
         number_of_layer = len(self.layer)
         density = np.zeros(number_of_layer)
@@ -200,18 +197,18 @@ class BuildingElement(object):
 
         return number_of_layer, density, thermal_conduc, heat_capac, thickness
 
-
     def add_layer(self, layer, position=None):
-        '''Adds a layer at a certain position
+        """Adds a layer at a certain position
 
-        This function adds a Layer instance to the layer list at a given position
+        This function adds a Layer instance to the layer list at a given
+        position
 
         Parameters
         ----------
         position : int
             position in the wall starting from 0 (inner side)
 
-        '''
+        """
         ass_error_1 = "Layer has to be an instance of Layer()"
 
         assert isinstance(layer, Layer), ass_error_1
@@ -222,13 +219,13 @@ class BuildingElement(object):
             self._layer.insert(position, layer)
 
     def add_layer_list(self, layer_list):
-        '''Appends a layer set to the layer list
+        """Appends a layer set to the layer list
 
         Parameters
         ----------
         layer_list : [Layer instance]
             list of sorted layer instances
-        '''
+        """
         ass_error_1 = "Layer has to be an instance of Layer()"
         for lay_count in layer_list:
 
@@ -240,7 +237,7 @@ class BuildingElement(object):
                           year,
                           construction,
                           data_class=None):
-        '''Typical element loader.
+        """Typical element loader.
 
         Loads typical building elements according to their construction
         year and their construction type from a XML.
@@ -265,7 +262,7 @@ class BuildingElement(object):
         Raises
         ----------
         Assert if parents to Building are not set
-        '''
+        """
 
         if data_class is None:
             data_class = self.parent.parent.parent.data
@@ -286,7 +283,7 @@ class BuildingElement(object):
                                                 data_class=data_class)
 
     def save_type_element(self, data_class=None):
-        '''Typical element saver.
+        """Typical element saver.
 
         Saves typical building elements according to their construction
         year and their construction type in the the XML file for type buidling
@@ -305,7 +302,7 @@ class BuildingElement(object):
             self.parent.parent.parent.data (which is data_class in current
             project)
 
-        '''
+        """
 
         if data_class is None:
             data_class = self.parent.parent.parent.data
@@ -319,7 +316,7 @@ class BuildingElement(object):
                                                  data_class=data_class)
 
     def delete_type_element(self, data_class=None):
-        '''Deletes typical element.
+        """Deletes typical element.
 
         Deletes typical building elements according to their construction
         year and their construction type in the the XML file for type buidling
@@ -338,7 +335,7 @@ class BuildingElement(object):
             self.parent.parent.parent.data (which is data_class in current
             project)
 
-        '''
+        """
 
         if data_class is None:
             data_class = self.parent.parent.parent.data
@@ -352,8 +349,8 @@ class BuildingElement(object):
                                                    data_class=data_class)
 
     def set_calc_default(self):
-        '''Sets all calculated values of the Building Element to zero
-        '''
+        """Sets all calculated values of the Building Element to zero
+        """
         self.r1 = 0.0
         self.r2 = 0.0
         self.r3 = 0.0
@@ -443,7 +440,6 @@ class BuildingElement(object):
             else:
                 raise ValueError("Specify year of construction first")
 
-
     @property
     def orientation(self):
         return self._orientation
@@ -514,7 +510,6 @@ class BuildingElement(object):
 
     @inner_radiation.setter
     def inner_radiation(self, value):
-
 
         if isinstance(value, float):
             pass
@@ -601,8 +596,8 @@ class BuildingElement(object):
         if value is not None:
             self._area = value
         if type(self).__name__ == "OuterWall"\
-                    or type(self).__name__ == "Rooftop" \
-                    or type(self).__name__ == "GroundFloor":
+                or type(self).__name__ == "Rooftop" \
+                or type(self).__name__ == "GroundFloor":
             if self.parent.parent is not None and self.orientation is not None:
                 self.parent.parent.fill_outer_area_dict()
         elif type(self).__name__ == "Window":
@@ -648,7 +643,6 @@ class BuildingElement(object):
                 self._year_of_construction = value
             except:
                 raise ValueError("Can't convert year to int")
-
 
     @property
     def construction_type(self):

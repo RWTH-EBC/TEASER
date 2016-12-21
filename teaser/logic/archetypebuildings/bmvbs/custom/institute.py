@@ -6,8 +6,8 @@ from teaser.logic.archetypebuildings.bmvbs.office import Office
 
 
 class Institute(Office):
-    '''Type Institute Building (type 4)
-    '''
+    """Type Institute Building (type 4)
+    """
 
     def __init__(self,
                  parent=None,
@@ -21,11 +21,11 @@ class Institute(Office):
                  window_layout=None,
                  construction_type=None):
 
-        '''Constructor of Institute
+        """Constructor of Institute
 
         Adds an additional zone "Laboratory"
 
-        '''
+        """
 
         super(Institute, self).__init__(parent,
                                         name,
@@ -42,7 +42,8 @@ class Institute(Office):
             {"Meeting": [0.04, "Meeting, Conference, seminar"],
              "Storage": [0.1, "Stock, technical equipment, archives"],
              "Office": [0.4, "Group Office (between 2 and 6 employees)"],
-             "Sanitary": [0.04, "WC and sanitary rooms in non-residential buildings"],
+             "Sanitary": [0.04, "WC and sanitary rooms in non-residential "
+                                "buildings"],
              "ICT": [0.02, "Data center"],
              "Floor": [0.25, "Traffic area"],
              "Laboratory": [0.15, "Laboratory"]}
