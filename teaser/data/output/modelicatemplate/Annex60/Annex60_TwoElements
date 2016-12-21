@@ -446,3 +446,15 @@ end ${bldg.name}_${zone.name};
   return newlist
   %>
 </%def>
+
+##get false
+<%def name="get_true_false(value)", filter="trim">
+  <%
+  if value == False:
+    return "false"
+  elif value == True:
+    return "true"
+  else:
+    return value
+  %>
+</%def>
