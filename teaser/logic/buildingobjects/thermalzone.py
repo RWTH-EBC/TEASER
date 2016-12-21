@@ -1253,19 +1253,19 @@ class ThermalZone(object):
 
         if number_of_elements == 1 or number_of_elements == 2:
             self.heating_load = ((self.ua_value_ow + self.ua_value_win) +
-                             self.volume * self.infiltration_rate *\
+                             self.volume * self.infiltration_rate / 3.6 *\
                                  _heat_capac_air * _density_air) * \
                             (self.t_inside - self.t_outside)
         elif number_of_elements == 3:
             self.heating_load = ((self.ua_value_ow + self.ua_value_gf +
                                      self.ua_value_win) +
-                             self.volume * self.infiltration_rate *\
+                             self.volume * self.infiltration_rate / 3.6 *\
                              _heat_capac_air * _density_air) * \
                             (self.t_inside - self.t_outside)
         elif number_of_elements == 4:
             self.heating_load = ((self.ua_value_ow + self.ua_value_gf +
                                   self.ua_value_rt + self.ua_value_win) +
-                             self.volume * self.infiltration_rate *\
+                             self.volume * self.infiltration_rate / 3.6 *\
                              _heat_capac_air*_density_air) * \
                             (self.t_inside - self.t_outside)
 
