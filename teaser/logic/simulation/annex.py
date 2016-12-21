@@ -103,14 +103,14 @@ def compare_orientation(bldg, number_of_elements=3):
                 if number_of_elements != 4:
                     zone.weightfactor_win.append(0.0)
                     zone.window_area_list.append(0.0)
-                    zone.g_sunblind_list.append(0.0)
+                    zone.g_sunblind_list.append(1.0)
                     zone.window_areas.append(0.0)
                     zone.tilt_win.append(i[1])
                     zone.orientation_win.append(i[0])
                 elif number_of_elements == 4 and i[1] >= 90:
                     zone.weightfactor_win.append(0.0)
                     zone.window_area_list.append(0.0)
-                    zone.g_sunblind_list.append(0.0)
+                    zone.g_sunblind_list.append(1.0)
                     zone.window_areas.append(0.0)
                     zone.tilt_win.append(i[1])
                     zone.orientation_win.append(i[0])

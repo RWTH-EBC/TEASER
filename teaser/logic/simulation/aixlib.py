@@ -87,7 +87,7 @@ def compare_orientation(bldg):
             if wins == []:
                 zone.weightfactor_win.append(0.0)
                 zone.window_area_list.append(0.0)
-                zone.g_sunblind_list.append(0.0)
+                zone.g_sunblind_list.append(1.0)
                 zone.window_areas.append(0.0)
             else:
                 zone.weightfactor_win.append(

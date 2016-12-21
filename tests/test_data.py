@@ -781,7 +781,7 @@ class Test_teaser(object):
 
         assert round(prj.buildings[-1].volume, 1) == 490.0
         assert round(
-            prj.buildings[-1].sum_heating_load, 4) == 15210.3459
+            prj.buildings[-1].sum_heating_load, 4) == 8118.4126
 
     #methods in therm_zone
 
@@ -802,7 +802,7 @@ class Test_teaser(object):
         prj.buildings[-1].thermal_zones[-1].calc_heat_load()
         assert round(
             prj.buildings[-1].thermal_zones[-1].heating_load,
-            4) == 15210.3459
+            4) == 8118.4126
 
     def test_sum_building_elements(self):
         '''test of combine_building_elements'''
