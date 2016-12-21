@@ -9,7 +9,6 @@ import numpy as np
 from teaser.project import Project
 import teaser.logic.simulation.VDI_6007.weather as weat
 import teaser.logic.simulation.VDI_6007.low_order_VDI as low_order_VDI
-# import teaser.logic.simulation.VDI_6007.eqAirTemp as equ_air
 import teaser.logic.simulation.VDI_6007.equal_air_temperature as equ_air
 
 
@@ -63,6 +62,9 @@ def vdi_example_6007(thermal_zone, weather):
     else:
         withInnerwalls = False
 
+    #  Max. irradiation
+    i_max = 100
+
     #  Convert into house data dictionary
     #  #-------------------------------------------------------
     houseData = {"R1i": thermal_zone.r1_iw,
@@ -92,8 +94,7 @@ def vdi_example_6007(thermal_zone, weather):
                  "weightfactorswindow": thermal_zone.weightfactor_win,
                  "weightfactorground": thermal_zone.weightfactor_ground[0],
                  "gsunblind": thermal_zone.g_sunblind_list,
-                 "Imax": 100}
-    #  TODO: Add further parameters to house data to use equAirTemp.py
+                 "Imax": i_max}
 
     #  Solar radiation input on each external area in W/m2
     #  #-------------------------------------------------------
@@ -109,29 +110,22 @@ def vdi_example_6007(thermal_zone, weather):
     # #  equalAirTemp = np.zeros(timesteps) + 273.15 + 10
     # equalAirTemp = weather.temp + 0.5 + 273.15
 
-    # equalAirTemp = equ_air.eqAirTemp(weather=weather, houseData=houseData,
-    #                                  solarRad_in=weather.sun_rad, method="vdi")
-
     t_black_sky = np.zeros(timesteps) + 273.15
 
     sunblind_in = np.zeros_like(solarRad_in)
-    sunblind_in[solarRad_in > 100] = 0.85
+    sunblind_in[solarRad_in > i_max] = 0.85
 
-    #  Fixme: Extract values out of TEASER object instances
-    eq_air_params = {"aExt": 0.7,  # coefficient of absorption of exterior walls (outdoor)
-                     "eExt": 0.9,  # coefficient of emission of exterior walls (outdoor)
-                     "wfWall": [0.05796831135677373, 0.13249899738691134],  # weight factors of the walls
-                     "wfWin": [0.4047663456281575, 0.4047663456281575],  # weight factors of the windows
-                     "wfGro": 0,  # weight factor of the ground (0 if not considered)
+    eq_air_params = {"aExt": thermal_zone.solar_absorp_ow,  # coefficient of absorption of exterior walls (outdoor)
+                     "eExt": thermal_zone.ir_emissivity_outer_ow,  # coefficient of emission of exterior walls (outdoor)
+                     "wfWall": thermal_zone.weightfactor_ow,  # weight factors of the walls
+                     "wfWin": thermal_zone.weightfactor_win,  # weight factors of the windows
+                     "wfGro": thermal_zone.weightfactor_ground[0],  # weight factor of the ground (0 if not considered)
                      "T_Gro": 273.15 + 10,
-                     "alpha_wall_out": 20,  # _outer_convection? (outerwall)
-                     "alpha_rad_wall": 5,  # _outer_radiation? (outerwall)
+                     "alpha_wall_out": thermal_zone.alpha_conv_outer_ow,
+                     "alpha_rad_wall": thermal_zone.alpha_rad_outer_ow,
                      "withLongwave": False}
 
-    #  aExt --> solar_absorp? (material)
-    #  eExt --> ir_emissivity? (material)
-
-    equalAirTemp = equ_air.equal_air_temp(HSol=solarRad_in,
+    equalAirTemp = equ_air.equal_air_temp(HSol=solarRad_in,  # TODO: Is this correct?
                                           TBlaSky=t_black_sky,
                                           TDryBul=weather.temp+273.15,
                                           sunblind=sunblind_in,
@@ -141,7 +135,6 @@ def vdi_example_6007(thermal_zone, weather):
     #  #-------------------------------------------------------
     # weatherTemperature = np.zeros(timesteps) + 273.15 + 10  # in K
     weatherTemperature = weather.temp + 273.15
-    print(weatherTemperature)
 
     #  Ventilation rate: Fresh air at temperature weatherTemperature in m3/s
     #  #-------------------------------------------------------
