@@ -7,6 +7,7 @@
 
 import warnings
 import os
+import re
 import teaser.logic.utilities as utilitis
 import teaser.data.input.teaserxml_input as txml_in
 import teaser.data.output.teaserxml_output as txml_out
@@ -56,8 +57,6 @@ class Project(object):
         modelica_project : str
             name of the Modelica Project used in type building creation
             (default: self.name)
-        weather_file_header : str
-            header of weather file used for Modelica simulation
         weather_file_path : str
             path to weather file used for Modelica simulation
             (default: "TRY_5_Essen.txt")
@@ -80,9 +79,15 @@ class Project(object):
         self.modelica_info = ModelicaInfo()
 
         self.modelica_project = self.name
-        self.weather_file_header = "wetter"
-        self.weather_file_path = "modelica://AixLib/Resources/WeatherData/" \
-                                 "TRY2010_12_Jahr_Modelica-Library.txt"
+        # self.weather_file_header = "wetter"
+        self.weather_file_path = utilitis.get_full_path(
+            os.path.join(
+                "data",
+                "input",
+                "inputdata",
+                "weatherdata",
+                "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
+
         self.buildings = []
 
         self._calculation_method = "vdi"
@@ -944,6 +949,7 @@ class Project(object):
         utilitis.create_path(path)
 
         aixlib_output.export_aixlib(prj=self,
+                                    number_of_elements=self.number_of_elements_calc,
                                     building_model=building_model,
                                     zone_model=zone_model,
                                     corG=corG,
@@ -1079,6 +1085,16 @@ class Project(object):
 
     @name.setter
     def name(self, value):
+        if isinstance(value, str):
+            regex = re.compile('[^a-zA-z0-9]')
+            self._name = regex.sub('', value)
+            self.modelica_project = regex.sub('', value)
+        else:
+            try:
+                value = str(value)
+                regex = re.compile('[^a-zA-z0-9]')
+                self._name = regex.sub('', value)
+                self.modelica_project = regex.sub('', value)
 
-        self._name = value
-        self.modelica_project = value
+            except ValueError:
+                print("Can't convert name to string")

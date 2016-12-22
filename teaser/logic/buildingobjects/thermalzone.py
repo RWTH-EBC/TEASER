@@ -84,6 +84,9 @@ class ThermalZone(object):
         slab temperature directly at the outer side of ground floors.
         The input of t_ground is ALWAYS in Kelvin
 
+    consider_heat_capacity : bool
+        decides whether air capacity is considered or not within the simulation
+
     density_air : float
         average density of the air in the thermal zone
 
@@ -116,6 +119,7 @@ class ThermalZone(object):
         self.density_air = 1.19  # only export for now
         self.heat_capac_air = 1007  # only export for now
         self.t_ground = 286.15  # groundtemperature of for the simulation
+        self.consider_air_capacity = True
 
         # Calculated values for InnerWall for each Zone
         self.r1_iw = 0.0

@@ -1,0 +1,293 @@
+within ${mod_prj}.${bldg.name}.${bldg.name}_DataBase;
+record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
+  extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
+    T_start = ${zone.t_inside},
+    withAirCap = ${get_true_false(zone.consider_air_capacity)},
+    VAir = ${zone.volume},
+    AZone = ${zone.area},
+    alphaRad = ${mean_alphaRad(zone)},
+    lat = ${deg_to_rad(check_lat(bldg.latitude))},
+    nOrientations = ${def_nOrientations(add_gf(len(zone.tilt_wall),zone.area_gf,number_of_elements))},
+    AWin = {${list_to_string(add_gf_list(zone.window_area_list,zone.area_gf,number_of_elements))}},
+    ATransparent = {${list_to_string(add_gf_list(zone.window_area_list,zone.area_gf,number_of_elements))}},
+    alphaWin = ${zone.alpha_conv_inner_win},
+    RWin = ${def_val(zone.r1_win-R_zero(zone.alpha_comb_outer_win,zone.area_win))},
+    gWin = ${zone.weighted_g_value},
+    UWin= ${zone.ua_value_win/zone.area_win},
+    ratioWinConRad = ${zone.windows[0].a_conv},
+    AExt = {${list_to_string(add_gf_area(zone.outer_walls_areas,zone.area_gf,number_of_elements))}},
+    alphaExt = ${zone.alpha_conv_inner_ow},
+    nExt = 1,
+    RExt = {${def_val(zone.r1_ow)}},
+    RExtRem = ${def_val(zone.r_rest_ow-R_zero(zone.alpha_comb_outer_ow,zone.area_ow))},
+    CExt = {${def_val(zone.c1_ow)}},
+% if number_of_elements < 2:
+    AInt = 0,
+% else:
+    AInt = ${zone.area_iw},
+% endif
+    alphaInt = ${zone.alpha_conv_inner_iw},
+    nInt = 1,
+    RInt = {${def_val(zone.r1_iw)}},
+    CInt = {${def_val(zone.c1_iw)}},
+% if number_of_elements < 3:
+    AFloor = 0,
+% else:
+    AFloor = ${zone.area_gf},
+% endif
+    alphaFloor = ${zone.alpha_conv_inner_gf},
+    nFloor = 1,
+    RFloor = {${def_val(zone.r1_gf)}},
+    RFloorRem =  ${def_val(zone.r_rest_gf-R_zero(zone.alpha_comb_outer_gf,zone.area_gf))},
+    CFloor = {${def_val(zone.c1_gf)}},
+% if number_of_elements < 4:
+    ARoof = 0,
+% else:
+    ARoof = ${zone.area_rt},
+% endif
+    alphaRoof = ${zone.alpha_conv_inner_rt},
+    nRoof = 1,
+    RRoof = {${def_val(zone.r1_rt)}},
+    RRoofRem = ${def_val(zone.r_rest_rt-R_zero(zone.alpha_comb_outer_rt,zone.area_rt))},
+    CRoof = {${def_val(zone.c1_rt)}},
+    nOrientationsRoof = ${def_nOrientations(len(zone.tilt_rt))},
+    tiltRoof = {${list_to_string(deg_to_rad_list(def_val_Roof_list(zone.tilt_rt,def_nOrientations(len(zone.tilt_rt)))))}},
+    aziRoof = {${list_to_string(deg_to_rad_list(def_val_Roof_list(get_azimut(zone.orientation_rt),def_nOrientations(len(zone.tilt_rt)))))}},
+    wfRoof = {${list_to_string(def_val_wfRoof(zone.weightfactor_rt,def_nOrientations(len(zone.tilt_rt))))}},
+    aRoof = ${zone.solar_absorp_rt},
+    aExt = ${zone.solar_absorp_ow},
+    TSoil = ${zone.t_ground},
+    alphaWallOut = ${zone.alpha_conv_outer_ow},
+    alphaRadWall = ${(zone.alpha_rad_outer_ow*zone.area_ow+zone.alpha_rad_outer_win*zone.area_win)/(zone.area_ow+zone.area_win)},
+    alphaWinOut = ${zone.alpha_conv_outer_win},
+    alphaRoofOut = ${zone.alpha_conv_outer_rt},
+    alphaRadRoof = ${zone.alpha_rad_outer_rt},
+    tiltExtWalls = {${list_to_string(deg_to_rad_list(add_gf_list(zone.tilt_wall,zone.area_gf,number_of_elements)))}},
+    aziExtWalls = {${list_to_string(deg_to_rad_list(add_gf_list(get_azimut(zone.orientation_wall),zone.area_gf,number_of_elements)))}},
+    wfWall = {${list_to_string(add_gf_list(zone.weightfactor_ow,zone.area_gf,number_of_elements))}},
+    wfWin = {${list_to_string(add_gf_list(zone.weightfactor_win,zone.area_gf,number_of_elements))}},
+    wfGro = ${list_to_string(zone.weightfactor_ground)},
+    nrPeople = ${zone.use_conditions.persons},
+    ratioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
+    nrPeopleMachines = ${zone.use_conditions.machines},
+    ratioConvectiveHeatMachines = ${zone.use_conditions.ratio_conv_rad_machines},
+    lightingPower = ${zone.use_conditions.lighting_power},
+    ratioConvectiveHeatLighting = ${zone.use_conditions.ratio_conv_rad_lighting},
+    useConstantACHrate = ${str(get_true_false(zone.use_conditions.use_constant_ach_rate))},
+    baseACH = ${zone.use_conditions.base_ach},
+    maxUserACH = ${zone.use_conditions.max_user_ach},
+    maxOverheatingACH = ${str(zone.use_conditions.max_overheating_ach).replace('[', '{').replace(']', '}')},
+    maxSummerACH = ${str(zone.use_conditions.max_summer_ach).replace('[', '{').replace(']', '}')},
+    winterReduction = ${str(zone.use_conditions.winter_reduction).replace('[', '{').replace(']', '}')},
+    withAHU = ${get_true_false(zone.use_conditions.with_ahu)},
+    minAHU = ${str(zone.use_conditions.min_ahu)},
+    maxAHU = ${str(zone.use_conditions.max_ahu)},
+    hHeat = ${zone.heating_load},
+    lHeat = 0,
+    KRHeat = 10000,
+    TNHeat = 1,
+    HeaterOn = true,
+    hCool = 0,
+    lCool = ${zone.cooling_load},
+    KRCool = 10000,
+    TNCool = 1,
+    CoolerOn = false);
+end ${bldg.name}_${zone.name};
+
+##list to string
+<%def name="list_to_string(list)", filter="trim">
+  <%
+  string_of_list = ""
+  for item in list:
+    string_of_list += str(item) + ", "
+  string_of_list = string_of_list[:-2]
+  return string_of_list
+  %>
+</%def>
+
+##get false
+<%def name="get_true_false(value)", filter="trim">
+  <%
+  if value == False:
+    return "false"
+  elif value == True:
+    return "true"
+  else:
+    return value
+  %>
+</%def>
+
+##get azimut
+<%def name="get_azimut(list)", filter="trim">
+  <%
+  newlist = []
+  for element in list:
+    if 0 < element < 360:
+        newlist.append(-180.0+element)
+    elif element == 0:
+        newlist.append(180.0)
+    elif element == -1:
+        newlist.append(0.0)
+    elif element == -2:
+        newlist.append(0.0)
+  return newlist
+  %>
+</%def>
+
+##convert deg to rad for list
+<%def name="deg_to_rad_list(list)", filter="trim">
+  <%
+  newlist = []
+  for element in list:
+    newlist.append(deg_to_rad(element))
+  return newlist
+  %>
+</%def>
+
+##convert deg to rad
+<%def name="deg_to_rad(value)", filter="trim">
+  <%
+  from math import pi
+  return_value = value * pi/180
+  return return_value
+  %>
+</%def>
+
+##returns mean alphaRad for indoor calculations
+<%def name="mean_alphaRad(zone)", filter="trim">
+  <%
+  total_area = zone.area_ow + zone.area_iw + zone.area_win + zone.area_rt + \
+  zone.area_gf
+  rad_mean = (zone.alpha_rad_inner_ow * zone.area_ow + \
+  zone.alpha_rad_inner_iw * zone.area_iw + zone.alpha_rad_inner_win * \
+  zone.area_win + zone.area_rt * zone.alpha_rad_inner_rt + zone.area_gf * \
+  zone.alpha_rad_inner_gf) / total_area
+  return str(rad_mean)
+  %>
+</%def>
+
+##checks if latitude is not None and set Aachen otherwise
+<%def name="check_lat(latitude)", filter="trim">
+  <%
+  if latitude is None:
+    return_value = 50.775466
+  else:
+    return_value = latitude
+  return return_value
+  %>
+</%def>
+
+##default values for nOrientations
+<%def name="def_nOrientations(value)", filter="trim">
+  <%
+  if value is None or value == 0:
+    return_value = 1
+  else:
+    return_value = value
+  return return_value
+  %>
+</%def>
+
+##default values for lists of C's or R's
+<%def name="def_val_list(list, req_len)", filter="trim">
+  <%
+  if not list or len(list) != req_len:
+    return_list = [0.00001] * req_len
+  else:
+    return_list = list
+    for element,i in enumerate(list):
+      return_list[i] = def_val(element)
+  return return_list
+  %>
+</%def>
+
+##default values for C's or R's
+<%def name="def_val(value)", filter="trim">
+  <%
+  if not value or value <= 0:
+     return_value = 0.00001
+  else:
+     return_value = value
+  return return_value
+  %>
+</%def>
+
+##default values for wfRoof
+<%def name="def_val_wfRoof(list, req_len)", filter="trim">
+  <%
+  if not list or len(list) != req_len:
+    return_list = [1 / req_len] * req_len
+  else:
+    return_list = list
+  return return_list
+  %>
+</%def>
+
+##default values for tiltRoof and aziRoof
+<%def name="def_val_Roof_list(list, req_len)", filter="trim">
+  <%
+  if not list or len(list) != req_len:
+    return_list = [0] * req_len
+  else:
+    return_list = list
+  return return_list
+  %>
+</%def>
+
+##Guarded calculation of resistance out of conductance and area
+<%def name="R_zero(cond, area)", filter="trim">
+  <%
+  if cond * area != 0:
+    return_value = 1/(cond*area)
+  else:
+    return_value = 0
+  return return_value
+  %>
+</%def>
+
+##Adds dummies to lists for extra orientations for ground floor
+<%def name="add_gf_list(list, area_gf, number_of_elements)", filter="trim">
+  <%
+  newlist=[]
+  for element in list:
+    newlist.append(element)
+  if area_gf != 0 and number_of_elements <= 2:
+    newlist.append(0)
+  return newlist
+  %>
+</%def>
+
+##Adds one to value for extra orientations for ground floor
+<%def name="add_gf(value, area_gf, number_of_elements)", filter="trim">
+  <%
+  if area_gf != 0 and number_of_elements <= 2:
+    return_value = value + 1
+  else:
+    return_value = value
+  return return_value
+  %>
+</%def>
+
+##Adds ground floor area to lists
+<%def name="add_gf_area(list, area_gf, number_of_elements)", filter="trim">
+  <%
+  newlist=[]
+  for element in list:
+    newlist.append(element)
+  if area_gf != 0 and number_of_elements <= 2:
+    newlist.append(area_gf)
+  return newlist
+  %>
+</%def>
+
+##get false
+<%def name="get_true_false(value)", filter="trim">
+  <%
+  if value == False:
+    return "false"
+  elif value == True:
+    return "true"
+  else:
+    return value
+  %>
+</%def>

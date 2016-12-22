@@ -13,6 +13,7 @@ import teaser.logic.simulation.aixlib as aixlib
 import warnings
 
 def export_aixlib(prj,
+                  number_of_elements=2,
                   building_model="None",
                   zone_model="None",
                   corG=None,
@@ -48,18 +49,15 @@ def export_aixlib(prj,
     assert corG in [None, True, False]
 
     uses = ['Modelica(version = "3.2.2")',
-            "AixLib(version=\"0.3.2\")"]
+            "AixLib(version=\"0.4.0\")"]
 
     # use the same zone templates for all exports
     zone_template = Template(
         filename=utilitis.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_zone"))
+            "data/output/modelicatemplate/AixLib/AixLib_ThermalZoneRecord"))
     model_template = Template(
         filename=utilitis.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_model"))
-    zone_base_template = Template(
-        filename=utilitis.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_base"))
+            "data/output/modelicatemplate/AixLib/AixLib_Multizone"))
     # list which contains exported buildings
     if internal_id is not None:
         exported_list_of_buildings = [bldg for bldg in
@@ -112,7 +110,6 @@ def export_aixlib(prj,
             out_file.write(model_template.render_unicode(
                            bldg=bldg, mod_prj=prj.modelica_project,
                            weather=prj.weather_file_path,
-                           weather_header=prj.weather_file_header,
                            model=building_model,
                            zone=zone_model,
                            physics=calc_method,
@@ -129,7 +126,8 @@ def export_aixlib(prj,
                 out_file.write(zone_template.render_unicode(
                     bldg=bldg,
                     zone=zone,
-                    mod_prj=prj.modelica_project))
+                    mod_prj=prj.modelica_project,
+                    number_of_elements=number_of_elements))
                 out_file.close()
 
             _help_package(zone_path,
@@ -137,24 +135,7 @@ def export_aixlib(prj,
                           within=prj.name + '.' + bldg.name)
             _help_package_order(zone_path,
                                 bldg.thermal_zones,
-                                bldg.name + "_", bldg.name + "_base")
-
-            out_file = open(utilitis.get_full_path
-                            (zone_path + bldg.name + "_base.mo"),
-                            'w')
-            if bldg.central_ahu:
-                out_file.write(zone_base_template.render_unicode(
-                    bldg=bldg,
-                    zone=zone,
-                    mod_prj=prj.modelica_project,
-                    central_ahu=bldg.central_ahu))
-                out_file.close()
-            else:
-                out_file.write(zone_base_template.render_unicode(
-                    bldg=bldg,
-                    zone=zone,
-                    mod_prj=prj.modelica_project))
-                out_file.close()
+                                bldg.name + "_")
         print("Exports can be found here:")
         print(path)
 
@@ -184,7 +165,8 @@ def export_aixlib(prj,
                     bldg=bldg,
                     zone=zone,
                     calc_core=bldg._calculation_method,
-                    mod_prj=prj.modelica_project))
+                    mod_prj=prj.modelica_project,
+                    number_of_elements=number_of_elements))
 
                 out_file.close()
 
@@ -193,7 +175,7 @@ def export_aixlib(prj,
                           within=prj.name + '.' + bldg.name)
             _help_package_order(zone_path,
                                 bldg.thermal_zones,
-                                bldg.name + "_", bldg.name + "_base")
+                                bldg.name + "_")
 
         print("Exports can be found here:")
         print(path)

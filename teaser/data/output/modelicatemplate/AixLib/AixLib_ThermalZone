@@ -1,0 +1,93 @@
+within ${mod_prj}.${bldg.name};
+model ${bldg.name}
+  "This is the simulation model of ${bldg.name}"
+
+% if zone == "ThermalZone":
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZone thermalZone(
+    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    zoneParam=
+    ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${zone.name}(),
+    ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
+        intWallRC(thermCapInt(each der_T(fixed=true)))),
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    T_start=${zone.t_inside})
+    "Thermal zone"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+% else:
+  AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped thermalZone(
+    redeclare package Medium = Modelica.Media.Air.SimpleAir,
+    zoneParam=
+    ${mod_prj}.${bldg.name}.${bldg.name}_DataBase.${bldg.name}_${zone.name}(),
+    ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
+        intWallRC(thermCapInt(each der_T(fixed=true)))),
+    energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
+    T_start=${zone.t_inside})
+    "Thermal zone"
+    annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+
+  AixLib.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
+    calTSky=AixLib.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+    computeWetBulbTemperature=false,
+    filNam=Modelica.Utilities.Files.loadResource(
+      "${weather}"))
+    "Weather data reader"
+    annotation (Placement(transformation(extent={{-92,20},{-72,40}})));
+
+  AixLib.BoundaryConditions.WeatherData.Bus weaBus
+    "Weather data bus"
+    annotation (Placement(transformation(extent={{-78,-20},{-44,12}}),
+    iconTransformation(extent={{-70,-12},{-50,8}})));
+
+  Modelica.Blocks.Sources.CombiTimeTable tableInfiltrationRate(table=[
+  0
+  % for tz in bldg.thermal_zones:
+    ,${tz.infiltration_rate} ${';' if (loop.last) else ''}
+  %endfor
+  3600
+  % for tz in bldg.thermal_zones:
+    ,${tz.infiltration_rate}
+  %endfor
+  ])
+    annotation (Placement(transformation(extent={{-92,-40},{-72,-20}})));
+
+  Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    table=[0,0,0,0; 3600,0,0,0; 7200,0,0,0; 10800,0,0,0; 14400,0,0,0; 18000,0,0,
+        0; 21600,0,0,0; 25200,0,0,0; 25200,80,80,200; 28800,80,80,200; 32400,80,
+        80,200; 36000,80,80,200; 39600,80,80,200; 43200,80,80,200; 46800,80,80,200;
+        50400,80,80,200; 54000,80,80,200; 57600,80,80,200; 61200,80,80,200; 61200,
+        0,0,0; 64800,0,0,0; 72000,0,0,0; 75600,0,0,0; 79200,0,0,0; 82800,0,0,0;
+        86400,0,0,0],
+    columns={2,3,4})
+    "Table with profiles for internal gains"
+    annotation(Placement(transformation(extent={{-14,-59},{0,-45}})));
+
+equation
+  connect(weaDat.weaBus, thermalZone.weaBus) annotation (Line(
+      points={{-72,30},{-34,30},{-34,0},{-10,0}},
+      color={255,204,51},
+      thickness=0.5));
+  connect(weaDat.weaBus, weaBus) annotation (Line(
+      points={{-72,30},{-61,30},{-61,-4}},
+      color={255,204,51},
+      thickness=0.5), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(thermalZone.ventTemp, weaBus.TDryBul) annotation (Line(points={{-11.3,
+          -3.9},{-35.65,-3.9},{-35.65,-4},{-61,-4}}, color={0,0,127}), Text(
+      string="%second",
+      index=1,
+      extent={{6,3},{6,3}}));
+  connect(tableInfiltrationRate.y, thermalZone.ventRate) annotation (Line(points={{-71,-30},{-40,
+          -30},{-8,-30},{-7,-30},{-7,-20},{-7,-8.4}}, color={0,0,127}));
+  connect(internalGains.y, thermalZone.intGains)
+    annotation (Line(points={{0.7,-52},{8,-52},{8,-8.4}}, color={0,0,127}));
+
+  annotation (Icon(coordinateSystem(preserveAspectRatio=false)), Diagram(
+        coordinateSystem(preserveAspectRatio=false)),experiment(StopTime=${mod_prj.modelica_info.runtime_simulation},
+      Interval=${mod_prj.modelica_info.interval_output},
+      __Dymola_Algorithm="${modelica_info.current_solver}"),
+      __Dymola_experimentSetupOutput(__Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
+      events=${get_true_false(modelica_info.results_at_events)}));
+end ${bldg.name};
