@@ -49,7 +49,7 @@ def export_aixlib(prj,
     assert corG in [None, True, False]
 
     uses = ['Modelica(version = "3.2.2")',
-            "AixLib(version=\"0.3.2\")"]
+            "AixLib(version=\"0.4.0\")"]
 
     # use the same zone templates for all exports
     zone_template = Template(

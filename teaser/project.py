@@ -80,8 +80,9 @@ class Project(object):
 
         self.modelica_project = self.name
         # self.weather_file_header = "wetter"
-        self.weather_file_path = "modelica://AixLib/Resources/WeatherData/" \
-                                 "USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos"
+        self.weather_file_path = os.path.join(os.path.dirname(os.getcwd()),
+                                              "examples","weatherdata",
+                                              "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos").replace("\\","/")
         self.buildings = []
 
         self._calculation_method = "vdi"
