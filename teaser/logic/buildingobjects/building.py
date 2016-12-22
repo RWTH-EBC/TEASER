@@ -5,17 +5,13 @@
 """
 import random
 import re
-import numpy as np
 import inspect
-import scipy.io
-import teaser.logic.utilities as utilitis
 from teaser.logic.buildingobjects.buildingsystems.buildingahu \
     import BuildingAHU
-import teaser.logic.simulation.aixlib as aixlib
 
 
 class Building(object):
-    '''Building Class
+    """Building Class
 
     This class represents a general building
 
@@ -62,8 +58,8 @@ class Building(object):
     thermal_zones : list
         list of all containing thermal zones (ThermalZone())
     gml_surfaces : list
-        list of all containing surfaces described by CityGML, the list should be
-        filled with SurfaceGML class from Data.Input.citygml_input
+        list of all containing surfaces described by CityGML, the list
+        should be filled with SurfaceGML class from Data.Input.citygml_input
     outer_area : dict
         dict with outer wall area and orientation
     window_area : dict
@@ -74,7 +70,7 @@ class Building(object):
         path of internal gains Matlab file for boundary condition
     file_set_t : string
         path of temperature Matlab file for boundary condition
-    '''
+    """
 
     def __init__(self,
                  parent=None,
@@ -83,8 +79,8 @@ class Building(object):
                  net_leased_area=None,
                  with_ahu=False):
 
-        '''Constructor of Building Class
-        '''
+        """Constructor of Building Class
+        """
 
         self.internal_id = random.random()
 
@@ -120,7 +116,7 @@ class Building(object):
         self.sum_heating_load = 0
         self.sum_cooling_load = 0
 
-        #additional simulation parameters
+        # additional simulation parameters
         self.longitude = None
         self.latitude = None
 
@@ -139,9 +135,10 @@ class Building(object):
     def set_height_gml(self):
         """calculates the height of a building from CityGML data
 
-        with given gml surfaces, this function computes the height of a building
-        of LoD 1 and LoD 2 buildings from CityGML data. All z-coordinates are
-        evaluated and the minimum z-value is subtracted by the maximal value.
+        with given gml surfaces, this function computes the height of a
+        building of LoD 1 and LoD 2 buildings from CityGML data. All
+        z-coordinates are evaluated and the minimum z-value is subtracted
+        by the maximal value.
         """
         if self.bldg_height is not None:
             pass
@@ -221,7 +218,7 @@ class Building(object):
                 self.number_of_floors = 1
 
             self.net_leased_area = self.get_footprint_gml() * \
-                                    self.number_of_floors
+                self.number_of_floors
 
             if self.net_leased_area < 50.0:
                 self.net_leased_area = 50.0
@@ -229,7 +226,7 @@ class Building(object):
     def set_outer_wall_area(self,
                             new_area,
                             orientation):
-        '''Outer area wall setter
+        """Outer area wall setter
 
         sets the outer wall area of all walls of one direction and weights
         them according to zone size
@@ -241,7 +238,7 @@ class Building(object):
             new_area of all outer walls of one orientation
         orientation : float
             orientation of the obtained walls
-        '''
+        """
 
         for zone in self.thermal_zones:
             for wall in zone.outer_walls:
@@ -249,7 +246,7 @@ class Building(object):
                     wall.area = ((new_area / self.net_leased_area) * zone.area)
 
     def set_window_area(self, new_area, orientation):
-        '''Window area setter
+        """Window area setter
 
         sets the window area of all windows of one direction and weights
         them according to zone size
@@ -261,7 +258,7 @@ class Building(object):
             new_area of all window of one orientation
         orientation : float
             orientation of the obtained windows
-        '''
+        """
 
         for zone in self.thermal_zones:
             for win in zone.windows:
@@ -269,7 +266,7 @@ class Building(object):
                     win.area = ((new_area / self.net_leased_area) * zone.area)
 
     def get_outer_wall_area(self, orientation):
-        '''Get aggregated outer wall area of one orientation
+        """Get aggregated outer wall area of one orientation
 
         returns the area of all outer walls of one direction
 
@@ -284,18 +281,18 @@ class Building(object):
 
         sum_area : float
             area of all walls of one direction
-        '''
+        """
 
         sum_area = 0.0
         for zone_count in self.thermal_zones:
             for wall_count in zone_count.outer_walls:
                 if wall_count.orientation == orientation and\
                         wall_count.area is not None:
-                    sum_area += (wall_count.area)
+                    sum_area += wall_count.area
         return sum_area
 
     def get_window_area(self, orientation):
-        '''Get aggregated window area of one orientation
+        """Get aggregated window area of one orientation
 
         returns the area of all windows of one direction
 
@@ -311,18 +308,18 @@ class Building(object):
         sum_area : float
             area of all windows of one direction
 
-        '''
+        """
 
         sum_area = 0.0
         for zone_count in self.thermal_zones:
             for win_count in zone_count.windows:
                 if win_count.orientation == orientation and\
                         win_count.area is not None:
-                    sum_area += (win_count.area)
+                    sum_area += win_count.area
         return sum_area
 
     def get_inner_wall_area(self):
-        '''get all inner wall area
+        """get all inner wall area
 
         returns the area of all inner walls
 
@@ -331,19 +328,19 @@ class Building(object):
 
         sum_area : float
             area of all inner walls
-        '''
+        """
 
         sum_area = 0.0
         for zone_count in self.thermal_zones:
             for wall_count in zone_count.inner_walls:
-                sum_area += (wall_count.area)
+                sum_area += wall_count.area
         return sum_area
 
     def set_specific_wall_area(self,
                                spec_zone,
                                spec_wall,
                                new_area):
-        '''set one specific wall area
+        """set one specific wall area
 
         sets the area of a specific wall in a specific zone and weights the
         rest of the walls according to their zone size
@@ -357,7 +354,7 @@ class Building(object):
             pointer to the corresponding wall
         new_area : float
             new area of specific wall
-        '''
+        """
 
         spec_wall.area = new_area
         actual_area = self.get_outer_wall_area(spec_wall.orientation)-new_area
@@ -378,11 +375,11 @@ class Building(object):
                             (float(len(zone_count.outer_walls)))
 
     def fill_outer_area_dict(self):
-        '''fill the outer area dict
+        """fill the outer area dict
 
         fills self.outer_area with the sum of outer wall area corresponding to
         the orientations of the building
-        '''
+        """
         self.outer_area = {}
         for zone_count in self.thermal_zones:
             for wall_count in zone_count.outer_walls:
@@ -392,12 +389,12 @@ class Building(object):
             self.outer_area[key] = self.get_outer_wall_area(key)
 
     def fill_window_area_dict(self):
-        '''fill the window area dict
+        """fill the window area dict
 
         fills self.window_area with all the sum of window area corresponding to
         the orientations of the building
 
-        '''
+        """
         self.window_area = {}
         for zone_count in self.thermal_zones:
             for win_count in zone_count.windows:
@@ -441,18 +438,19 @@ class Building(object):
             self.sum_heating_load += zone.heating_load
 
         if self.used_library_calc == 'AixLib':
-            aixlib.compare_orientation(self)
+            import teaser.logic.simulation.aixlib as aixlib
+            aixlib.compare_orientation(self, number_of_elements=number_of_elements)
         elif self.used_library_calc == 'Annex60':
             import teaser.logic.simulation.annex as annex
 
-            annex.compare_orientation(self, number_of_elements=number_of_elements)
-
+            annex.compare_orientation(self, number_of_elements=
+                                      number_of_elements)
 
     def retrofit_building(self,
                           year_of_retrofit=None,
                           window_type=None,
                           material=None):
-        ''' Retrofits all zones in the building
+        """ Retrofits all zones in the building
 
         Function call for each zone.
 
@@ -464,7 +462,7 @@ class Building(object):
             Default: EnEv 2014
         material : str
             Default: EPS035
-        '''
+        """
         if year_of_retrofit is not None:
             self.year_of_retrofit = year_of_retrofit
         else:
@@ -479,7 +477,7 @@ class Building(object):
             used_library=self.used_library_calc)
 
     def rotate_building(self, angle):
-        '''rotates the building to a given angle
+        """rotates the building to a given angle
 
         Parameters
         ----------
@@ -487,7 +485,7 @@ class Building(object):
         angle: float
             rotation of the building clockwise, between 0 and 360 degrees
 
-        '''
+        """
 
         for zone_count in self.thermal_zones:
             new_angle = None
@@ -507,10 +505,8 @@ class Building(object):
                 else:
                     win_count.orientation = new_angle
 
-
-
     def add_zone(self, thermal_zone):
-        '''Adds a thermal zone to the corresponding list
+        """Adds a thermal zone to the corresponding list
 
         This function adds a ThermalZone instance to the the thermal_zones list
 
@@ -519,9 +515,9 @@ class Building(object):
         thermal_zone : ThermalZone()
             ThermalZone() instance of TEASER
 
-        '''
+        """
 
-        ass_error_1 = ("Zone has to be an instance of ThermalZone()")
+        ass_error_1 = "Zone has to be an instance of ThermalZone()"
 
         assert type(thermal_zone).__name__ == "ThermalZone", ass_error_1
 
@@ -696,7 +692,7 @@ class Building(object):
 
         ass_error_1 = "central AHU has to be an instance of BuildingAHU()"
 
-        assert type(value).__name__ == ("BuildingAHU"), ass_error_1
+        assert type(value).__name__ == "BuildingAHU", ass_error_1
 
         self._central_ahu = value
 

@@ -33,11 +33,11 @@ def example_create_building():
     specific building and all its future changes to the project.
     '''
     prj = Project(load_data=True)
-    prj.name = "SuperExampleBuilding"
+    prj.name = "Super Example Building"
     bldg = Building(parent=prj)
 
     '''Set some building parameters'''
-    bldg.name = "SuperExampleBuilding"
+    bldg.name = "Super Example Building"
     bldg.street_name = "Awesome Avenue 42"
     bldg.city = "46325 Fantastic Town"
     bldg.year_of_construction = 1988
@@ -57,7 +57,7 @@ def example_create_building():
     and load the use conditions for the usage 'Living' '''
 
     tz.use_conditions = BoundaryConditions(parent=tz)
-    tz.use_conditions.load_use_conditions("Living")
+    tz.use_conditions.load_use_conditions("Living",prj.data)
 
     '''Define two elements representing a pitched roof and define Layers and
     Materials explicitly'''
@@ -166,7 +166,7 @@ def example_create_building():
         '''load typical construction, based on year of construction and
         construction type'''
         out_wall.load_type_element(year=value[0],
-                                   construction=value[1])
+                                   construction=value[1], data_class=prj.data)
         out_wall.area = value[2]
         out_wall.tilt = value[3]
         out_wall.orientation = value[4]
@@ -178,7 +178,7 @@ def example_create_building():
         '''load typical construction, based on year of construction and
         construction type'''
         in_wall.load_type_element(year=value[0],
-                                  construction=value[1])
+                                  construction=value[1], data_class=prj.data)
         in_wall.area = value[2]
 
     for key, value in win_dict.items():
@@ -219,7 +219,7 @@ def example_create_building():
     '''
     ground = GroundFloor(parent=tz)
     ground.name = "Ground floor"
-    ground.load_type_element(bldg.year_of_construction, 'heavy')
+    ground.load_type_element(bldg.year_of_construction, 'heavy', prj.data)
     ground.area = 140.0
 
     '''

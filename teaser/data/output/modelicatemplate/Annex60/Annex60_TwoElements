@@ -1,11 +1,11 @@
 within ${within};
-model ${bldg.name}_${zone.name.replace(" ", "")}
-  "This is the simulation model of ${bldg.name}_${zone.name.replace(" ", "")}"
+model ${bldg.name}_${zone.name}
+  "This is the simulation model of ${bldg.name}_${zone.name}"
 
   Annex60.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=Annex60.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam="modelica://Annex60/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    filNam="${weather.replace("\\", "/")}")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
   Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${def_nOrientations(add_gf(len(zone.orientation_wall),zone.area_gf))}](
@@ -29,7 +29,11 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
   Annex60.ThermalZones.ReducedOrder.RC.TwoElements
   thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
+% if zone.consider_air_capacity is True:
     VAir=${zone.volume},
+% else:
+    VAir=0.0,
+% endif
     alphaExt=${def_alpha(zone.alpha_conv_inner_ow)},
     alphaWin=${def_alpha(zone.alpha_conv_inner_win)},
     gWin=${zone.weighted_g_value},
@@ -260,8 +264,11 @@ equation
     0,127}));
   annotation (experiment(
   StopTime=${modelica_info.runtime_simulation},
-  Interval=${modelica_info.interval_output}));
-end ${bldg.name}_${zone.name.replace(" ", "")};
+      Interval=${modelica_info.interval_output},
+      __Dymola_Algorithm="${modelica_info.current_solver}"),
+      __Dymola_experimentSetupOutput(__Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
+      events=${get_true_false(modelica_info.results_at_events)})));
+end ${bldg.name}_${zone.name};
 
 ##list to string
 <%def name="list_to_string(list)", filter="trim">
@@ -436,5 +443,17 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   if area_gf != 0:
     newlist.append(area_gf)
   return newlist
+  %>
+</%def>
+
+##get false
+<%def name="get_true_false(value)", filter="trim">
+  <%
+  if value == False:
+    return "false"
+  elif value == True:
+    return "true"
+  else:
+    return value
   %>
 </%def>

@@ -7,14 +7,13 @@ from teaser.logic.buildingobjects.buildingphysics.outerwall \
 
 
 class GroundFloor(OuterWall):
-    '''This class represents a GroundFloor and is a child of OuterWall()
-    '''
+    """This class represents a GroundFloor and is a child of OuterWall()
+    """
 
     def __init__(self, parent=None):
-        '''
-        '''
+        """
+        """
         super(GroundFloor, self).__init__(parent)
-
 
         self._tilt = 0.0
         self._orientation = -2.0
