@@ -1,11 +1,11 @@
 within ${within};
-model ${bldg.name}_${zone.name.replace(" ", "")}
-  "This is the simulation model of ${bldg.name}_${zone.name.replace(" ", "")}"
+model ${bldg.name}_${zone.name}
+  "This is the simulation model of ${bldg.name}_${zone.name}"
 
   Annex60.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=Annex60.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam="modelica://Annex60/Resources/weatherdata/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.mos")
+    filNam="${weather.replace("\\", "/")}")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
   Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${def_nOrientations(len(zone.orientation_wall))}](
@@ -28,7 +28,11 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
   Annex60.ThermalZones.ReducedOrder.RC.FourElements
   thermalZoneFourElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
+% if zone.consider_air_capacity is True:
     VAir=${zone.volume},
+% else:
+    VAir=0.0,
+% endif
     alphaExt=${def_alpha(zone.alpha_conv_inner_ow)},
     alphaWin=${def_alpha(zone.alpha_conv_inner_win)},
     gWin=${zone.weighted_g_value},
@@ -48,7 +52,7 @@ model ${bldg.name}_${zone.name.replace(" ", "")}
     alphaFloor=${def_alpha(zone.alpha_conv_inner_gf)},
     nFloor=1,
     RFloor={${def_val(zone.r1_gf)}},
-    RFloorRem=${def_val(zone.r_rest_gf)},
+    RFloorRem=${def_val(zone.r_rest_gf-R_zero(zone.alpha_comb_outer_gf,zone.area_gf))},
     CFloor={${def_val(zone.c1_gf)}},
     ARoof=${zone.area_rt},
     alphaRoof=${def_alpha(zone.alpha_conv_inner_rt)},
@@ -372,8 +376,11 @@ equation
       extent={{6,3},{6,3}}));
   annotation (experiment(
   StopTime=${modelica_info.runtime_simulation},
-  Interval=${modelica_info.interval_output}));
-end ${bldg.name}_${zone.name.replace(" ", "")};
+      Interval=${modelica_info.interval_output},
+      __Dymola_Algorithm="${modelica_info.current_solver}"),
+      __Dymola_experimentSetupOutput(__Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
+      events=${get_true_false(modelica_info.results_at_events)})));
+end ${bldg.name}_${zone.name};
 
 ##list to string
 <%def name="list_to_string(list)", filter="trim">
@@ -527,5 +534,17 @@ end ${bldg.name}_${zone.name.replace(" ", "")};
   else:
     return_value = 0
   return return_value
+  %>
+</%def>
+
+##get false
+<%def name="get_true_false(value)", filter="trim">
+  <%
+  if value == False:
+    return "false"
+  elif value == True:
+    return "true"
+  else:
+    return value
   %>
 </%def>
