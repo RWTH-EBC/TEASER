@@ -49,7 +49,7 @@ IEA-EBC [Annex60](https://github.com/iea-annex60/modelica-annex60).
 
 ### Version
 
-The current version is 0.4.3, which is a pre-release.
+The current version is 0.4.4, which is a pre-release.
 
 ### How to cite TEASER
 
