@@ -86,8 +86,7 @@ class Project(object):
                 "input",
                 "inputdata",
                 "weatherdata",
-                "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos")).replace(
-                    "\\", "/")
+                "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
 
         self.buildings = []
 
