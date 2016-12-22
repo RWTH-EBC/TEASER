@@ -82,7 +82,9 @@ class Project(object):
         # self.weather_file_header = "wetter"
         self.weather_file_path = utilitis.get_full_path(
             os.path.join(
-                "examples",
+                "data",
+                "input",
+                "inputdata",
                 "weatherdata",
                 "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos")).replace(
                     "\\", "/")
