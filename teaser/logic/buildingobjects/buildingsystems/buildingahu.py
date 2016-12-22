@@ -4,8 +4,9 @@
 """This module includes a class for central AHU
 """
 
+
 class BuildingAHU(object):
-    '''Building Class
+    """Building Class
 
     This class represents a BuildingAHU.
 
@@ -64,11 +65,11 @@ class BuildingAHU(object):
     profile_v_flow : [int]
         timeline of desired relative v_flow of the AHU simulation (0..1)
 
-    '''
+    """
 
     def __init__(self, parent=None):
-        '''Constructor of BuildingAHU Class
-        '''
+        """Constructor of BuildingAHU Class
+        """
         self.parent = parent
 
         self.heating = True
@@ -90,7 +91,6 @@ class BuildingAHU(object):
         self._profile_v_flow = None
         self._profile_temperature = None
 
-
     @property
     def parent(self):
         return self.__parent
@@ -102,7 +102,6 @@ class BuildingAHU(object):
         if inspect.isclass(Building):
             self.__parent = value
             self.__parent.central_ahu = self
-
 
     @property
     def profile_min_relative_humidity(self):
@@ -135,7 +134,6 @@ class BuildingAHU(object):
                                     ".mat")
 
         self._profile_max_relative_humidity = value
-
 
     @property
     def profile_v_flow(self):

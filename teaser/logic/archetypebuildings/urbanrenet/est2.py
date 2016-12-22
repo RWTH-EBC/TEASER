@@ -63,16 +63,15 @@ class EST2(EST1a):
                  neighbour_buildings=None,
                  construction_type=None,
                  number_of_apartments=None):
-
         """Constructor of EST1a
 
 
         """
 
         super(EST2, self).__init__(parent, name, year_of_construction,
-                                    number_of_floors, height_of_floors,
-                                    net_leased_area, with_ahu,
-                                    neighbour_buildings, construction_type)
+                                   number_of_floors, height_of_floors,
+                                   net_leased_area, with_ahu,
+                                   neighbour_buildings, construction_type)
 
         self.number_of_apartments = number_of_apartments
         self.est_factor_facade_to_volume = 0.56

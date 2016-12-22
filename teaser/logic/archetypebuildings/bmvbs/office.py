@@ -3,14 +3,14 @@
 
 
 import math
-
-from teaser.logic.archetypebuildings.nonresidential\
- import NonResidential
-from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions import BoundaryConditions as UseCond
+from teaser.logic.archetypebuildings.nonresidential \
+    import NonResidential
+from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+    import BoundaryConditions as UseCond
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
-from teaser.logic.buildingobjects.buildingphysics.groundfloor\
- import GroundFloor
+from teaser.logic.buildingobjects.buildingphysics.groundfloor \
+    import GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
@@ -19,7 +19,7 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
 class Office(NonResidential):
-    '''Type Office Building
+    """Type Office Building
 
     Subclass from TypeBuilding to represent office buildings. Allows for
     easier distinction between different building types and specific functions
@@ -136,7 +136,7 @@ class Office(NonResidential):
     est_exponent_win : float
         another estimation factor to calculate window area
 
-    '''
+    """
 
     def __init__(self,
                  parent=None,
@@ -149,10 +149,10 @@ class Office(NonResidential):
                  office_layout=None,
                  window_layout=None,
                  construction_type=None):
-        '''Constructor of Office
+        """Constructor of Office
 
 
-        '''
+        """
         super(Office, self).__init__(parent,
                                      name,
                                      year_of_construction,
@@ -172,7 +172,8 @@ class Office(NonResidential):
             {"Meeting": [0.04, "Meeting, Conference, seminar"],
              "Storage": [0.15, "Stock, technical equipment, archives"],
              "Office": [0.5, "Group Office (between 2 and 6 employees)"],
-             "Restroom": [0.04, "WC and sanitary rooms in non-residential buildings"],
+             "Restroom": [0.04, "WC and sanitary rooms in non-residential "
+                                "buildings"],
              "ICT": [0.02, "Data center"],
              "Floor": [0.25, "Traffic area"]}
 
@@ -234,32 +235,34 @@ class Office(NonResidential):
         elif self.office_layout == 3:
             self._est_width = math.sqrt((self.net_leased_area /
                                          self.number_of_floors) *
-                                         self.gross_factor)
+                                        self.gross_factor)
         else:
             raise ValueError("office_layout value has to be between 0 - 3")
         if self.net_leased_area is not None and self.number_of_floors is not \
                 None:
-            self._est_length = ((self.net_leased_area / self.number_of_floors) *
-                            self.gross_factor) / self._est_width
+            self._est_length = ((self.net_leased_area /
+                                 self.number_of_floors) *
+                                self.gross_factor) / self._est_width
         else:
             pass
 
         if self.with_ahu is True:
-            self.central_ahu.profile_temperature = (7*[293.15] +
-                                                    12*[295.15] +
-                                                    6*[293.15])
-            self.central_ahu.profile_min_relative_humidity = (25*[0.45])
-            self.central_ahu.profile_max_relative_humidity = (25*[0.55])
-            self.central_ahu.profile_v_flow = (7*[0.0] + 12*[1.0] + 6*[0.0])
+            self.central_ahu.profile_temperature = (7 * [293.15] +
+                                                    12 * [295.15] +
+                                                    6 * [293.15])
+            self.central_ahu.profile_min_relative_humidity = (25 * [0.45])
+            self.central_ahu.profile_max_relative_humidity = (25 * [0.55])
+            self.central_ahu.profile_v_flow = (
+                7 * [0.0] + 12 * [1.0] + 6 * [0.0])
 
     def generate_archetype(self):
-        '''Generates an office building.
+        """Generates an office building.
 
         With given values, this class generates a type building according to
         TEASER requirements.
 
-        '''
-        #help area for the correct building area setting while using typeBldgs
+        """
+        # help area for the correct building area setting while using typeBldgs
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
         # create zones with their corresponding area, name and usage
@@ -272,23 +275,21 @@ class Office(NonResidential):
                                          data_class=self.parent.data)
             zone.use_conditions = use_cond
 
-            zone.use_conditions.persons = zone.area * 0.01 * \
-                zone.use_conditions.persons
-            zone.use_conditions.machines = zone.area * 0.01 * \
-                zone.use_conditions.machines
+            zone.use_conditions.persons *= zone.area * 0.01
+            zone.use_conditions.machines *= zone.area * 0.01
 
             # self.thermal_zones.append(zone)
 
         # statistical estimation of the facade
 
         self._est_outer_wall_area = self.est_factor_wall_area * \
-                                type_bldg_area ** self.est_exponent_wall
+            type_bldg_area ** self.est_exponent_wall
         self._est_win_area = self.est_factor_win_area * \
-                             type_bldg_area ** self.est_exponent_win
+            type_bldg_area ** self.est_exponent_win
         self._est_roof_area = (type_bldg_area / self.number_of_floors) * \
-                              self.gross_factor
+            self.gross_factor
         self._est_floor_area = (type_bldg_area / self.number_of_floors) * \
-                               self.gross_factor
+            self.gross_factor
 
         # manipulation of wall according to facade design
         # (received from window_layout)
@@ -308,12 +309,16 @@ class Office(NonResidential):
             # North and South
             if value[1] == 0 or value[1] == 180:
                 self.outer_area[value[1]] = self._est_outer_wall_area * \
-                 (self._est_length / (2 * self._est_width + 2 * self._est_length))
+                                            (self._est_length / (
+                                                2 * self._est_width + 2 *
+                                                self._est_length))
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
                 self.outer_area[value[1]] = self._est_outer_wall_area * \
-                (self._est_width / (2 * self._est_width + 2 * self._est_length))
+                                            (self._est_width / (
+                                                2 * self._est_width + 2 *
+                                                self._est_length))
             for zone in self.thermal_zones:
                 # create wall and set building elements
                 outer_wall = OuterWall(zone)
@@ -330,12 +335,16 @@ class Office(NonResidential):
             if value[1] == 0 or value[1] == 180:
 
                 self.window_area[value[1]] = self._est_win_area * \
-                (self._est_length / (2 * self._est_width + 2 * self._est_length))
+                                             (self._est_length / (
+                                                 2 * self._est_width + 2 *
+                                                 self._est_length))
 
             elif value[1] == 90 or value[1] == 270:
 
                 self.window_area[value[1]] = self._est_win_area * \
-                (self._est_width / (2 * self._est_width + 2 * self._est_length))
+                                             (self._est_width / (
+                                                 2 * self._est_width + 2 *
+                                                 self._est_length))
 
             '''
             There is no real classification for windows, so this is a bit hard
@@ -344,8 +353,9 @@ class Office(NonResidential):
             for zone in self.thermal_zones:
                 window = Window(zone)
                 window.load_type_element(self.year_of_construction,
-                                        "Kunststofffenster, Isolierverglasung",
-                                        data_class=self.parent.data)
+                                         "Kunststofffenster, "
+                                         "Isolierverglasung",
+                                         data_class=self.parent.data)
                 window.name = key
                 window.tilt = value[0]
                 window.orientation = value[1]
@@ -473,11 +483,12 @@ class Office(NonResidential):
                             self.year_of_construction,
                             "Kunststofffenster, Isolierverglasung",
                             data_class=self.parent.data)
-                        window.name = "asd"+str(surface.surface_tilt)
+                        window.name = "asd" + str(surface.surface_tilt)
                         window.tilt = surface.surface_tilt
                         window.orientation = surface.surface_orientation
 
-                    elif surface.surface_tilt == 0 and surface.surface_orientation ==\
+                    elif surface.surface_tilt == 0 and \
+                            surface.surface_orientation == \
                             -2:
                         outer_wall = GroundFloor(zone)
                         outer_wall.load_type_element(
@@ -540,10 +551,10 @@ class Office(NonResidential):
 
         for surface in self.gml_surfaces:
             if surface.surface_tilt is not None:
-                if surface.surface_tilt != 0 and surface.surface_orientation !=\
-                        -2 and surface.surface_orientation != -1:
+                if surface.surface_tilt != 0 and surface.surface_orientation\
+                        != -2 and surface.surface_orientation != -1:
                     self.set_outer_wall_area(surface.surface_area *
-                                             (1- self.est_factor_win_area),
+                                             (1 - self.est_factor_win_area),
                                              surface.surface_orientation)
                 else:
                     self.set_outer_wall_area(surface.surface_area,
@@ -551,8 +562,8 @@ class Office(NonResidential):
 
         for surface in self.gml_surfaces:
             if surface.surface_tilt is not None:
-                if surface.surface_tilt != 0 and surface.surface_orientation !=\
-                        -2 and surface.surface_orientation != -1:
+                if surface.surface_tilt != 0 and surface.surface_orientation\
+                        != -2 and surface.surface_orientation != -1:
                     self.set_window_area(surface.surface_area *
                                          self.est_factor_win_area,
                                          surface.surface_orientation)

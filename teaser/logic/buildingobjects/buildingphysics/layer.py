@@ -6,7 +6,7 @@ import random
 
 
 class Layer(object):
-    '''This class represents a layer of a wall.
+    """This class represents a layer of a wall.
 
 
     Parameters
@@ -26,13 +26,13 @@ class Layer(object):
     thickness : float
         Thickness of the layer
 
-    '''
+    """
 
-    def __init__(self, parent=None, id = 0):
-        '''Constructor of Layer.
+    def __init__(self, parent=None, id=0):
+        """Constructor of Layer.
 
 
-        '''
+        """
         self.parent = parent
         self.internal_id = random.random()
         self.id = id
@@ -51,12 +51,12 @@ class Layer(object):
             ass_error_1 = "Parent has to be an instance of a BE"
 
             assert type(value).__name__ == "OuterWall" \
-                or type(value).__name__ == "Rooftop" \
-                or type(value).__name__ == "GroundFloor" \
-                or type(value).__name__ == "InnerWall" \
-                or type(value).__name__ == "Ceiling" \
-                or type(value).__name__ == "Floor"\
-                or type(value).__name__ == "Window", ass_error_1
+                   or type(value).__name__ == "Rooftop" \
+                   or type(value).__name__ == "GroundFloor" \
+                   or type(value).__name__ == "InnerWall" \
+                   or type(value).__name__ == "Ceiling" \
+                   or type(value).__name__ == "Floor" \
+                   or type(value).__name__ == "Window", ass_error_1
 
             self.__parent = value
             self.__parent.layer.append(self)
