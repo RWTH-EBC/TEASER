@@ -5,8 +5,7 @@ model ${bldg.name}_${zone.name}
   Annex60.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=Annex60.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam=Modelica.Utilities.Files.loadResource(
-      "${weather}"))
+    filNam=filNam="${weather.replace("\\", "/")}")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
   Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${def_nOrientations(len(zone.orientation_wall))}](
