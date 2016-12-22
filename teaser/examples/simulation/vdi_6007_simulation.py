@@ -38,7 +38,6 @@ def gen_res_type_example_building():
                               construction_type="heavy",
                               dormer=1)
 
-
     return prj
 
 
@@ -62,7 +61,7 @@ def vdi_example_6007(thermal_zone, weather):
     else:
         withInnerwalls = False
 
-    #  Max. irradiation
+    # Max. irradiation
     i_max = 100
 
     #  Convert into house data dictionary
@@ -115,19 +114,27 @@ def vdi_example_6007(thermal_zone, weather):
     sunblind_in = np.zeros_like(solarRad_in)
     sunblind_in[solarRad_in > i_max] = 0.85
 
-    eq_air_params = {"aExt": thermal_zone.solar_absorp_ow,  # coefficient of absorption of exterior walls (outdoor)
-                     "eExt": thermal_zone.ir_emissivity_outer_ow,  # coefficient of emission of exterior walls (outdoor)
-                     "wfWall": thermal_zone.weightfactor_ow,  # weight factors of the walls
-                     "wfWin": thermal_zone.weightfactor_win,  # weight factors of the windows
-                     "wfGro": thermal_zone.weightfactor_ground[0],  # weight factor of the ground (0 if not considered)
+    eq_air_params = {"aExt": thermal_zone.solar_absorp_ow,
+                     # coefficient of absorption of exterior walls (outdoor)
+                     "eExt": thermal_zone.ir_emissivity_outer_ow,
+                     # coefficient of emission of exterior walls (outdoor)
+                     "wfWall": thermal_zone.weightfactor_ow,
+                     # weight factors of the walls
+                     "wfWin": thermal_zone.weightfactor_win,
+                     # weight factors of the windows
+                     "wfGro": thermal_zone.weightfactor_ground[0],
+                     # weight factor of the ground (0 if not considered)
                      "T_Gro": 273.15 + 10,
                      "alpha_wall_out": thermal_zone.alpha_conv_outer_ow,
                      "alpha_rad_wall": thermal_zone.alpha_rad_outer_ow,
                      "withLongwave": False}
 
-    equalAirTemp = equ_air.equal_air_temp(HSol=solarRad_in,  # TODO: Is this correct?
+    t_dry_bulb = weather.temp + 273.15
+
+    equalAirTemp = equ_air.equal_air_temp(HSol=solarRad_in,
+                                          # TODO: Is this correct?
                                           TBlaSky=t_black_sky,
-                                          TDryBul=weather.temp+273.15,
+                                          TDryBul=t_dry_bulb,
                                           sunblind=sunblind_in,
                                           params=eq_air_params)
 
@@ -158,7 +165,7 @@ def vdi_example_6007(thermal_zone, weather):
     # t_set_heating = np.zeros(timesteps) + 273.15 + 21  # in Kelvin
     t_set_heat_day = \
         np.array([18, 18, 18, 18, 18, 18, 21, 21, 21, 21, 21, 21,
-                 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 18]) + 273.15
+                  21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 18]) + 273.15
     t_set_heating = np.tile(t_set_heat_day, 365)
 
     # Define set points for cooling (cooling is disabled for high values)
@@ -218,7 +225,8 @@ if __name__ == '__main__':
     print()
 
     #  Perform simulation for unretrofited model
-    (T_air, Q_hc1, Q_iw, Q_ow) = vdi_example_6007(thermal_zone, weather=weather)
+    (T_air, Q_hc1, Q_iw, Q_ow) = vdi_example_6007(thermal_zone,
+                                                  weather=weather)
 
     q_heat1 = np.zeros(len(Q_hc1))
     q_cool1 = np.zeros(len(Q_hc1))
@@ -264,7 +272,7 @@ if __name__ == '__main__':
             q_cool[i] = Q_hc[i]
 
     print('Sum of heating energy in kWh (after retrofit):')
-    print(sum(q_heat)/1000)
+    print(sum(q_heat) / 1000)
 
     print('Sum of cooling energy in kWh (after retrofit):')
     print(-sum(q_cool) / 1000)
