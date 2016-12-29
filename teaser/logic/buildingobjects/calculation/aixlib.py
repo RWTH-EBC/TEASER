@@ -35,6 +35,9 @@ class AixLib(object):
         Filename for AHU boundary conditions file
     file_intern_gains:
         Filename for internal gains file
+    version : str
+        Used AixLib version, default should always be current master version
+        of GitHub
 
     """
 
@@ -45,6 +48,7 @@ class AixLib(object):
         self.file_set_t = "/Tset_" + self.parent.name + ".mat"
         self.file_ahu = "/AHU_" + self.parent.name + ".mat"
         self.file_internal_gains = "/InternalGains_" + self.parent.name + ".mat"
+        self.version = "0.4.0"
 
     def compare_orientation(self):
         """Compares orientation of walls of all zones and sorts them
@@ -257,7 +261,7 @@ class AixLib(object):
         path += self.file_ahu
 
         if time_line is None:
-            time_line = self.create_timeline()
+            time_line = self.create_profile()
 
         if self.parent.with_ahu is True:
             profile_temperature = \

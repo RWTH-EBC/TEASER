@@ -959,7 +959,7 @@ class Project(object):
             path=None):
         """Exports values to a record file for Modelica simulation
 
-        Exports all one (if internal_id is not None) or all buildings for
+        Exports one (if internal_id is not None) or all buildings for
         AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
         using the ThermalZoneEquipped model with a correction of g-value (
         double pane glazing) and supporting models, like tables and weather
@@ -986,11 +986,18 @@ class Project(object):
 
         utilities.create_path(path)
 
-        aixlib_output.export_aixlib(
-            prj=self,
-            number_of_elements=self.number_of_elements_calc,
-            internal_id=internal_id,
-            path=path)
+        if internal_id is None:
+            aixlib_output.export_aixlib(
+                buildings=self.buildings,
+                path=path)
+        else:
+            for bldg in self.buildings:
+                if bldg.internal_id == internal_id:
+                    aixlib_output.export_aixlib(
+                        buildings=[bldg],
+                        path=path)
+                else:
+                    pass
 
     def export_annex(self,
                      internal_id=None,
