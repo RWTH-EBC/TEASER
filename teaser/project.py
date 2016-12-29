@@ -4,11 +4,10 @@
 """This module includes the Project class, which serves as base class and API
 """
 
-
 import warnings
 import os
 import re
-import teaser.logic.utilities as utilitis
+import teaser.logic.utilities as utilities
 import teaser.data.input.teaserxml_input as txml_in
 import teaser.data.output.teaserxml_output as txml_out
 import teaser.data.output.aixlib_output as aixlib_output
@@ -23,51 +22,55 @@ from teaser.logic.archetypebuildings.urbanrenet.est1a import EST1a
 from teaser.logic.archetypebuildings.urbanrenet.est1b import EST1b
 from teaser.logic.archetypebuildings.urbanrenet.est4b import EST4b
 from teaser.logic.archetypebuildings.urbanrenet.est7 import EST7
-from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFamilyDwelling
+from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
+    SingleFamilyDwelling
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
 
 try:
     import teaser.data.output.citygml_output as citygml_out
     import teaser.data.input.citygml_input as citygml_in
-except:
+except UserWarning:
     warnings.warn("No CityGML module found, no CityGML import/export")
+
 
 class Project(object):
     """Base class for each project, serves also as API
 
-        The Project class is the root class for each action in TEASER and
-        should be instantiated only once for each project. It also contains
-        all API function to use main functionality of TEASER4
+    The Project class is the root class for each action in TEASER and
+    should be instantiated only once for each project. It also contains
+    all API function to use main functionality of TEASER4
 
-        Parameters
-        ----------
-        load_data : boolean
-            boolean if data bindings for type elements and use conditions
-            should be loaded (default = True)
+    Parameters
+    ----------
+    load_data : boolean
+        boolean if data bindings for type elements and use conditions
+        should be loaded (default = True)
 
-        Attributes
-        ----------
+    Attributes
+    ----------
 
-        buildings : list
-            list of all buildings in one project, instances of Building()
-        data : list
-            instance of Data containing the XML binding classes, instance of
-            DataClass()
-        modelica_project : str
-            name of the Modelica Project used in type building creation
-            (default: self.name)
-        weather_file_path : str
-            path to weather file used for Modelica simulation
-            (default: "TRY_5_Essen.txt")
-        number_of_elements_calc : int
-            defines the number of elements, that area aggregated, between 1
-            and 4, default is 2
-        merge_windows_calc : bool
-            True for merging the windows into the outer walls, False for
-            separate resistance for window, default is False
-        used_library_calc : str
-            used library (AixLib and Annex60 are supported)
-
+    name : str
+        Name of the Project (default is 'Project')
+    modelica_info : instance of ModelicaInfo
+        TEASER instance of ModelicaInfo to store Modelica related
+        information, like used compiler, runtime, etc.
+    buildings : list
+        list of all buildings in one project, instances of Building()
+    data : instance of DataClass
+        TEASER instance of DataClass containing XML binding classes
+    weather_file_path : str
+        absolute path to weather file used for Modelica simulation
+        (default: "data/input/inputdata/weatherdata
+        /DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR")
+    number_of_elements_calc : int
+        defines the number of elements, that are aggregated (1, 2, 3 or 4),
+        default is 2
+    merge_windows_calc : bool
+        True for merging the windows into the outer walls, False for
+        separate resistance for window, default is False (only supported for
+        Annex60)
+    used_library_calc : str
+        used library (AixLib and Annex60 are supported)
     """
 
     def __init__(self, load_data=True):
@@ -76,9 +79,7 @@ class Project(object):
         self._name = "Project"
         self.modelica_info = ModelicaInfo()
 
-        self.modelica_project = self.name
-        # self.weather_file_header = "wetter"
-        self.weather_file_path = utilitis.get_full_path(
+        self.weather_file_path = utilities.get_full_path(
             os.path.join(
                 "data",
                 "input",
@@ -88,10 +89,7 @@ class Project(object):
 
         self.buildings = []
 
-        self._calculation_method = "vdi"
-
         self.load_data = load_data
-        self._type_element_file = None
 
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
@@ -102,6 +100,7 @@ class Project(object):
         else:
             self.data = None
 
+    @staticmethod
     def instantiate_data_class(self):
         """Initialization of DataClass
 
@@ -145,10 +144,13 @@ class Project(object):
                         number_of_elements=self._number_of_elements_calc,
                         merge_windows=self._merge_windows_calc,
                         used_library=self._used_library_calc)
-                except:
-                    print("Following building can't be calculated:", bldg.name)
-                    print("raise_errors=True to get python errors")
-                    self.buildings.remove(bldg)
+                except UserWarning:
+                    warnings.warn(
+                        "Following building can't be calculated and is "
+                        "removed from buildings list. Use raise_errors=True "
+                        "to get python errors and stop TEASER from deleting "
+                        "this building:",
+                        bldg, bldg.name)
 
     def retrofit_all_buildings(
             self,
@@ -331,9 +333,9 @@ class Project(object):
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_institute4(
@@ -404,9 +406,9 @@ class Project(object):
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_institute8(
@@ -477,9 +479,9 @@ class Project(object):
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est1a(
@@ -510,8 +512,8 @@ class Project(object):
             of a building
         with_ahu : Boolean
             If set to True, an empty instance of BuildingAHU is instantiated and
-            assigned to attribute central_ahu. This instance holds information for
-            central Air Handling units. Default is False.
+            assigned to attribute central_ahu. This instance holds information
+            for central Air Handling units. Default is False.
         neighbour_buildings : int
             Number of neighbour buildings. CAUTION: this will not change
             the orientation of the buildings wall, but just the overall
@@ -542,9 +544,9 @@ class Project(object):
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est1b(
@@ -612,9 +614,9 @@ class Project(object):
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est4b(
@@ -682,9 +684,9 @@ class Project(object):
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_est7(
@@ -752,9 +754,9 @@ class Project(object):
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
         return type_bldg
 
     def type_bldg_residential(
@@ -851,9 +853,9 @@ class Project(object):
 
         type_bldg.generate_archetype()
         type_bldg.calc_building_parameter(
-                number_of_elements=self._number_of_elements_calc,
-                merge_windows=self._merge_windows_calc,
-                used_library=self._used_library_calc)
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
         return type_bldg
 
     def save_project(self, file_name=None, path=None):
@@ -876,10 +878,10 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = os.path.join(utilitis.get_default_path(), name)
+            new_path = os.path.join(utilities.get_default_path(), name)
         else:
             new_path = path + "/" + name
-            utilitis.create_path(utilitis.get_full_path(path))
+            utilities.create_path(utilities.get_full_path(path))
 
         txml_out.save_teaser_xml(new_path, self)
 
@@ -898,7 +900,7 @@ class Project(object):
         txml_in.load_teaser_xml(path, self)
 
     def save_citygml(self, file_name=None, path=None):
-        """Saves the project to a citygml file
+        """Saves the project to a CityGML file
 
         calls the function save_gml in data.CityGML we make use of CityGML core
         and EnergyADE to store semantic information
@@ -920,10 +922,10 @@ class Project(object):
             name = file_name
 
         if path is None:
-            new_path = os.path.join(utilitis.get_default_path(), name)
+            new_path = os.path.join(utilities.get_default_path(), name)
         else:
             new_path = path + "/" + name
-            utilitis.create_path(utilitis.get_full_path(path))
+            utilities.create_path(utilities.get_full_path(path))
 
         citygml_out.save_gml(self, new_path)
 
@@ -953,48 +955,42 @@ class Project(object):
 
     def export_aixlib(
             self,
-            building_model="None",
-            zone_model="None",
-            corG=None,
             internal_id=None,
             path=None):
         """Exports values to a record file for Modelica simulation
 
-        For AixLib library.
+        Exports all one (if internal_id is not None) or all buildings for
+        AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
+        using the ThermalZoneEquipped model with a correction of g-value (
+        double pane glazing) and supporting models, like tables and weather
+        model. In contrast to versions < 0.5 TEASER now does not
+        support any model options, as we observed no need, since single
+        ThermalZones are identically with Annex60 models. If you miss one of
+        the old options please contact us.
 
         Parameters
         ----------
 
-        building_model : string
-            setter of the used Aixlib building model (None, MultizoneEquipped,
-            Multizone)
-        zone_model : string
-            setter of the used Aixlib zone model (ThermalZoneEquipped,
-            ThermalZone)
-        corG : boolean
-            setter of the used g value calculation in the model
         internal_id : float
-            setter of the used building which will be exported, if None then
+            setter of a specific building which will be exported, if None then
             all buildings will be exported
         path : string
-            if the Files should not be stored in OutputData, an alternative
-            path can be specified as a full and absolute path
+            if the Files should not be stored in default output path of TEASER,
+            an alternative path can be specified as a full path
         """
 
         if path is None:
-            path = utilitis.get_default_path() + "/" + self.name
+            path = utilities.get_default_path() + "/" + self.name
         else:
             path = path + "/" + self.name
 
-        utilitis.create_path(path)
+        utilities.create_path(path)
 
-        aixlib_output.export_aixlib(prj=self,
-                                    number_of_elements=self.number_of_elements_calc,
-                                    building_model=building_model,
-                                    zone_model=zone_model,
-                                    corG=corG,
-                                    internal_id=internal_id,
-                                    path=path)
+        aixlib_output.export_aixlib(
+            prj=self,
+            number_of_elements=self.number_of_elements_calc,
+            internal_id=internal_id,
+            path=path)
 
     def export_annex(self,
                      internal_id=None,
@@ -1007,19 +1003,19 @@ class Project(object):
         ----------
 
         internal_id : float
-            setter of the used building which will be exported, if None then
+            setter of a specific building which will be exported, if None then
             all buildings will be exported
         path : string
-            if the Files should not be stored in OutputData, an alternative
-            path can be specified as a full and absolute path
+            if the Files should not be stored in default output path of TEASER,
+            an alternative path can be specified as a full path
         """
 
         if path is None:
-            path = utilitis.get_default_path() + "/" + self.name
+            path = utilities.get_default_path() + "/" + self.name
         else:
             path = path + "/" + self.name
 
-        utilitis.create_path(path)
+        utilities.create_path(path)
 
         annex60_output.export_annex60(
             prj=self,
@@ -1040,21 +1036,52 @@ class Project(object):
         """
 
         if path is None:
-            path = os.path.join(utilitis.get_default_path(), self.name)
+            path = os.path.join(utilities.get_default_path(), self.name)
         else:
-            path = path+"/"+self.name
+            path = path + "/" + self.name
 
         text_out.export_parameters_txt(
             prj=self,
             path=path)
 
-    def set_default(self):
-        """sets all attributes except self.data to default
+    def set_default(self, load_data=True):
+        """Sets all attributes to default
+
+        Caution: this will delete all buildings.
+
+        Parameters
+        ----------
+        load_data : boolean
+            boolean if data bindings for type elements and use conditions
+            should be loaded (default = True)
         """
+
+        self._name = "Project"
+        self.modelica_info = ModelicaInfo()
+
+        self.weather_file_path = utilities.get_full_path(
+            os.path.join(
+                "data",
+                "input",
+                "inputdata",
+                "weatherdata",
+                "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
+
+        self.buildings = []
+
+        self.load_data = load_data
+
+        self._number_of_elements_calc = 2
+        self._merge_windows_calc = False
+        self._used_library_calc = "AixLib"
+
+        if load_data is True:
+            self.data = self.instantiate_data_class()
+        else:
+            self.data = None
 
         self.name = "Project"
 
-        self.modelica_project = self.name
         self.weather_file_header = "wetter"
         self.weather_file_path = "modelica://AixLib/Resources/WeatherData/" \
                                  "TRY2010_12_Jahr_Modelica-Library.txt"
@@ -1062,18 +1089,6 @@ class Project(object):
         self._number_of_elements_calc = 2
         self._merge_windows_calc = False
         self._used_library_calc = "AixLib"
-
-
-        self._type_element_file = None
-
-    @property
-    def type_element_file(self):
-        return self._type_element_file
-
-    @type_element_file.setter
-    def type_element_file(self, value):
-        self._type_element_file = value
-        self.instantiate_data_class(value)
 
     @property
     def number_of_elements_calc(self):
@@ -1132,13 +1147,11 @@ class Project(object):
         if isinstance(value, str):
             regex = re.compile('[^a-zA-z0-9]')
             self._name = regex.sub('', value)
-            self.modelica_project = regex.sub('', value)
         else:
             try:
                 value = str(value)
                 regex = re.compile('[^a-zA-z0-9]')
                 self._name = regex.sub('', value)
-                self.modelica_project = regex.sub('', value)
 
             except ValueError:
                 print("Can't convert name to string")

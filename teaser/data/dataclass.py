@@ -1,14 +1,13 @@
-#Created July 2015
-#TEASER 4 Development Team
+# Created July 2015
+# TEASER 4 Development Team
 
-"""DataClass
-
-This module holds file paths and bindings for XML data
+"""This module holds file paths and bindings for XML data
 """
 
 import teaser.logic.utilities as utils
 import warnings
 import xml.etree.ElementTree as et
+
 
 class DataClass(object):
     """Class for XML data bindings
