@@ -781,7 +781,7 @@ class Test_teaser(object):
 
         assert round(prj.buildings[-1].volume, 1) == 490.0
         assert round(
-            prj.buildings[-1].sum_heating_load, 4) == 8118.4126
+            prj.buildings[-1].sum_heating_load, 4) == 6481.8126
 
     #methods in therm_zone
 
@@ -797,8 +797,10 @@ class Test_teaser(object):
         '''test of heating_load'''
         prj.set_default()
         helptest.building_test2(prj)
-        prj.buildings[-1].thermal_zones[-1].calc_zone_parameters(number_of_elements=2,
-                                                                 merge_windows=True)
+        prj.buildings[-1].thermal_zones[-1].infiltration_rate = 0.5
+        prj.buildings[-1].thermal_zones[-1].calc_zone_parameters(
+            number_of_elements=2,
+            merge_windows=True)
         prj.buildings[-1].thermal_zones[-1].calc_heat_load()
         assert round(
             prj.buildings[-1].thermal_zones[-1].heating_load,
