@@ -38,6 +38,12 @@ class AixLib(object):
     version : str
         Used AixLib version, default should always be current master version
         of GitHub
+    total_surface_area : float [m2]
+        This is the total surface area of the building for interior and
+        exterior surfaces. That includes: OuterWalls, Rooftops, GroundFloors,
+        Windows for exterior surfaces, and InnerWalls, Ceilings, Floors for
+        interior walls.
+
 
     """
 
@@ -49,6 +55,8 @@ class AixLib(object):
         self.file_ahu = "/AHU_" + self.parent.name + ".mat"
         self.file_internal_gains = "/InternalGains_" + self.parent.name + ".mat"
         self.version = "0.4.0"
+
+        self.total_surface_area = None
 
     def compare_orientation(self):
         """Compares orientation of walls of all zones and sorts them
@@ -148,6 +156,19 @@ class AixLib(object):
                         sum([win.shading_g_total for win in wins]))
                     # TODO what is this value needed for?
                     [zone.model_attr.window_areas.append(i.area) for i in wins]
+
+    def calc_auxiliary_attr(self):
+        """Calls function to calculate all auxiliary attributes for AixLib"""
+
+        self._calc_surface_area()
+
+    def calc_surface_area(self):
+        """Calculates the total surface area of all surfaces"""
+        surf_area_temp = 0.0
+        for zone in self.parent.thermal_zones:
+            surf_area_temp += (zone.area_ow + zone.area_iw + zone.area_rt +
+                               zone.area_gf + zone.area_win)
+        self.total_surface_area = surf_area_temp
 
     @staticmethod
     def create_profile(duration_profile=86400, time_step=3600):
