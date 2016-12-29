@@ -1108,3 +1108,16 @@ class Test_teaser(object):
         therm_zone.windows[0].calc_equivalent_res()
 
         assert round(therm_zone.windows[0].r1, 3) == 0.072
+
+    def test_change_infiltration_rate(self):
+        '''test for change of infiltration_rate'''
+        prj.set_default()
+        helptest.building_test2(prj)
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
+        assert therm_zone.infiltration_rate == 0.2
+
+        therm_zone.infiltration_rate = 0.7
+        assert therm_zone.infiltration_rate == 0.7
+
+        therm_zone.use_conditions.base_ach = 0.5
+        assert therm_zone.infiltration_rate == 0.5
