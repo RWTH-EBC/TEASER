@@ -224,7 +224,11 @@ class TwoElement(object):
 
     alpha_rad_inner_mean : float [W/(m2K)]
         Area-weighted radiative coefficient of all surfaces facing the
-        inside of this thermal zone.
+        inside of this thermal zone (OuterWalls, Windows, InnerWalls, ...).
+    alpha_rad_outer_mean : float [W/(m2K)]
+        Area-weighted radiative coefficient of all surfaces facing the
+        ambient (OuterWalls, Windows, ...).
+
 
     Returns
     -------
@@ -907,6 +911,9 @@ class TwoElement(object):
                                      self.area_iw * self.alpha_rad_inner_iw) \
                                     / (self.area_ow + self.area_win +
                                        self.area_win)
+        self.alpha_rad_outer_mean = (self.area_ow * self.alpha_rad_inner_ow +
+                                     self.area_win * self.alpha_rad_inner_win) \
+                                    / (self.area_ow + self.area_win)
 
     def _calc_number_of_elements(self):
         """Calculates the number of outer elements with different tilt/orient
@@ -924,6 +931,8 @@ class TwoElement(object):
             tilt_orient.append((element.orientation, element.tilt))
         self.n_outer = len(list(set(tilt_orient)))
 
+    def _fill_zone_lists(self):
+        """"""
 
     def _calc_heat_load(self):
         """Static heat load calculation

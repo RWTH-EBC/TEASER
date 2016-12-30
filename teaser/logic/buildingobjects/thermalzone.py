@@ -91,7 +91,7 @@ class ThermalZone(object):
         self.name = None
         self._area = None
         self._volume = None
-        self._infiltration_rate = 0.5 # TODO is this value actually used?
+        self._infiltration_rate = 0.5 
         self._outer_walls = []
         self._rooftops = []
         self._ground_floors = []
