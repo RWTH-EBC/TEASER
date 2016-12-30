@@ -1,60 +1,50 @@
-within ${mod_prj}.${bldg.name}.${bldg.name}_DataBase;
-record ${bldg.name}_${zone.name} "${bldg.name}_${zone.name}"
+<%namespace file="/modelica_language/" import="get_true_false"/>
+<%namespace file="/conversion/" import="deg_to_rad"/>
+within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase;
+record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
     T_start = ${zone.t_inside},
     withAirCap = ${get_true_false(zone.consider_air_capacity)},
     VAir = ${zone.volume},
     AZone = ${zone.area},
-    alphaRad = ${mean_alphaRad(zone)},
-    lat = ${deg_to_rad(check_lat(bldg.latitude))},
-    nOrientations = ${def_nOrientations(add_gf(len(zone.tilt_wall),zone.area_gf,number_of_elements))},
-    AWin = {${list_to_string(add_gf_list(zone.window_area_list,zone.area_gf,number_of_elements))}},
-    ATransparent = {${list_to_string(add_gf_list(zone.window_area_list,zone.area_gf,number_of_elements))}},
-    alphaWin = ${zone.alpha_conv_inner_win},
-    RWin = ${def_val(zone.r1_win-R_zero(zone.alpha_comb_outer_win,zone.area_win))},
-    gWin = ${zone.weighted_g_value},
+    alphaRad = ${zone.model_attr.alpha_rad_inner_mean},
+    lat = ${deg_to_rad(zone.parent.latitude)},
+    nOrientations = ${zone.model_attr.n_outer},
+    AWin = ,
+    ATransparent = ,
+    alphaWin = ${zone.model_attr.alpha_conv_inner_win},
+    RWin = ,
+    gWin = ${zone.model_attr.weighted_g_value},
     UWin= ${zone.ua_value_win/zone.area_win},
-    ratioWinConRad = ${zone.windows[0].a_conv},
-    AExt = {${list_to_string(add_gf_area(zone.outer_walls_areas,zone.area_gf,number_of_elements))}},
+    ratioWinConRad = ${zone.model_attr.ratio_conv_rad_inner_win},
+    AExt = ,
     alphaExt = ${zone.alpha_conv_inner_ow},
     nExt = 1,
-    RExt = {${def_val(zone.r1_ow)}},
-    RExtRem = ${def_val(zone.r_rest_ow-R_zero(zone.alpha_comb_outer_ow,zone.area_ow))},
-    CExt = {${def_val(zone.c1_ow)}},
-% if number_of_elements < 2:
-    AInt = 0,
-% else:
-    AInt = ${zone.area_iw},
-% endif
-    alphaInt = ${zone.alpha_conv_inner_iw},
+    RExt = {${zone.model_attr.r1_ow}},
+    RExtRem = ,
+    CExt = {${zone.model_attr.c1_ow}},
+	AInt = ${zone.model_attr.area_iw},
+    alphaInt = ${zone.model_attr.alpha_conv_inner_iw},
     nInt = 1,
-    RInt = {${def_val(zone.r1_iw)}},
-    CInt = {${def_val(zone.c1_iw)}},
-% if number_of_elements < 3:
-    AFloor = 0,
-% else:
-    AFloor = ${zone.area_gf},
-% endif
-    alphaFloor = ${zone.alpha_conv_inner_gf},
+    RInt = {${zone.model_attr.r1_iw}},
+    CInt = {${zone.model_attr.c1_iw}},
+    AFloor = 0.0,
+    alphaFloor = 0.0,
     nFloor = 1,
-    RFloor = {${def_val(zone.r1_gf)}},
-    RFloorRem =  ${def_val(zone.r_rest_gf-R_zero(zone.alpha_comb_outer_gf,zone.area_gf))},
-    CFloor = {${def_val(zone.c1_gf)}},
-% if number_of_elements < 4:
-    ARoof = 0,
-% else:
-    ARoof = ${zone.area_rt},
-% endif
-    alphaRoof = ${zone.alpha_conv_inner_rt},
+    RFloor = {0.00001},
+    RFloorRem =  0.00001,
+    CFloor = {0.00001},
+	ARoof = 0.0,
+    alphaRoof = 0.0,
     nRoof = 1,
-    RRoof = {${def_val(zone.r1_rt)}},
-    RRoofRem = ${def_val(zone.r_rest_rt-R_zero(zone.alpha_comb_outer_rt,zone.area_rt))},
-    CRoof = {${def_val(zone.c1_rt)}},
-    nOrientationsRoof = ${def_nOrientations(len(zone.tilt_rt))},
-    tiltRoof = {${list_to_string(deg_to_rad_list(def_val_Roof_list(zone.tilt_rt,def_nOrientations(len(zone.tilt_rt)))))}},
-    aziRoof = {${list_to_string(deg_to_rad_list(def_val_Roof_list(get_azimut(zone.orientation_rt),def_nOrientations(len(zone.tilt_rt)))))}},
-    wfRoof = {${list_to_string(def_val_wfRoof(zone.weightfactor_rt,def_nOrientations(len(zone.tilt_rt))))}},
-    aRoof = ${zone.solar_absorp_rt},
+    RRoof = {0.00001},
+    RRoofRem = 0.00001,
+    CRoof = {0.00001},
+    nOrientationsRoof = 0,
+    tiltRoof = {0.0},
+    aziRoof = {0.0},
+    wfRoof = {0.0},
+    aRoof = 0.0,
     aExt = ${zone.solar_absorp_ow},
     TSoil = ${zone.t_ground},
     alphaWallOut = ${zone.alpha_conv_outer_ow},
@@ -144,14 +134,7 @@ end ${bldg.name}_${zone.name};
   %>
 </%def>
 
-##convert deg to rad
-<%def name="deg_to_rad(value)", filter="trim">
-  <%
-  from math import pi
-  return_value = value * pi/180
-  return return_value
-  %>
-</%def>
+
 
 ##returns mean alphaRad for indoor calculations
 <%def name="mean_alphaRad(zone)", filter="trim">

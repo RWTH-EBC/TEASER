@@ -9,3 +9,12 @@
     return value
   %>
 </%def>
+
+##convert deg to rad
+<%def name="deg_to_rad(value)", filter="trim">
+  <%
+  from math import pi
+  return_value = value * pi/180
+  return return_value
+  %>
+</%def>

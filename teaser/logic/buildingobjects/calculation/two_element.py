@@ -76,6 +76,9 @@ class TwoElement(object):
 
     area_ow : float [m2]
         Area of all outer walls.
+    n_outer : int
+        Number of total outer walls with different combination of tilt and
+        orientation, including Rooftops and GroundFloors
     alpha_conv_inner_ow : float [W/(m2K)]
         Area-weighted convective coefficient of heat transfer of outer walls
         facing the inside of this thermal zone.
@@ -159,6 +162,9 @@ class TwoElement(object):
     alpha_comb_inner_win : float [W/(m2K)]
         Area-weighted combined coefficient of heat transfer of windows facing
         the inside of this thermal zone.
+    ratio_conv_rad_inner_win : float [-]
+        Ratio for windows between convective and radiative heat emission,
+        given in VDI 6007-3
     alpha_conv_outer_win : float [W/(m2K)]
         Area-weighted convective coefficient of heat transfer of windows
         facing the ambient.
@@ -213,6 +219,12 @@ class TwoElement(object):
         Area-weighted g-Value of all windows.
     heat_load : [W]
         Static heat load of the thermal zone.
+
+    Mean values:
+
+    alpha_rad_inner_mean : float [W/(m2K)]
+        Area-weighted radiative coefficient of all surfaces facing the
+        inside of this thermal zone.
 
     Returns
     -------
@@ -312,6 +324,7 @@ class TwoElement(object):
         self.alpha_conv_inner_win = 0.0
         self.alpha_rad_inner_win = 0.0
         self.alpha_comb_inner_win = 0.0
+        self.ratio_conv_rad_inner_win = 0.0
 
         # coefficient of heat transfer facing the ambient
         self.alpha_conv_outer_win = 0.0
@@ -348,6 +361,11 @@ class TwoElement(object):
         self.g_sunblind_list = []
         self.weighted_g_value = 0.0
 
+        # Mean values
+
+        self.alpha_rad_inner_mean = 0.0
+        self.n_outer = 0
+
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
 
@@ -369,6 +387,8 @@ class TwoElement(object):
         self._calc_outer_elements()
         self._calc_inner_elements()
         self._calc_wf()
+        self._calc_mean_values()
+        self._calc_number_of_elements()
         self._calc_heat_load()
 
         return True
@@ -665,9 +685,9 @@ class TwoElement(object):
         self.r_comb_inner_win = (1 / (sum(1 / win.r_inner_comb for win in
                                           self.thermal_zone.windows)))
 
-        self.ir_emissivity_inner_win = sum(win.layer[0].material.ir_emissivity
-                                           * win.area for win in
-                                           self.thermal_zone.windows) / self.area_win
+        self.ir_emissivity_inner_win = sum(
+            win.layer[0].material.ir_emissivity * win.area for win in
+            self.thermal_zone.windows) / self.area_win
 
         self.alpha_conv_inner_win = (
             1 / (self.r_conv_inner_win * self.area_win))
@@ -675,6 +695,9 @@ class TwoElement(object):
             1 / (self.r_rad_inner_win * self.area_win))
         self.alpha_comb_inner_win = (
             1 / (self.r_comb_inner_win * self.area_win))
+        self.ratio_conv_rad_inner_win = sum(win.a_conv * win.area for win in
+                                            self.thermal_zone.windows) / \
+                                        self.area_win
 
         # values facing the ambient
 
@@ -870,6 +893,37 @@ class TwoElement(object):
 
         else:
             raise ValueError("specify merge window method correctly")
+
+    def _calc_mean_values(self):
+        """Calculates mean values for inner and outer elements
+
+        This function calculates mean values inside the thermal zone (e.g.
+        the mean value for coefficient of radiative heat transfer between
+        inner and outer walls
+        """
+
+        self.alpha_rad_inner_mean = (self.area_ow * self.alpha_rad_inner_ow +
+                                     self.area_win * self.alpha_rad_inner_win +
+                                     self.area_iw * self.alpha_rad_inner_iw) \
+                                    / (self.area_ow + self.area_win +
+                                       self.area_win)
+
+    def _calc_number_of_elements(self):
+        """Calculates the number of outer elements with different tilt/orient
+
+        This function calculates the number of outer elements with a
+        different combination of orientation and tilt, this includes the
+        rooftops and ground floors.
+        """
+
+        outer_walls = (self.thermal_zone.outer_walls +
+                       self.thermal_zone.ground_floors +
+                       self.thermal_zone.rooftops)
+        tilt_orient = []
+        for element in outer_walls:
+            tilt_orient.append((element.orientation, element.tilt))
+        self.n_outer = len(list(set(tilt_orient)))
+
 
     def _calc_heat_load(self):
         """Static heat load calculation
