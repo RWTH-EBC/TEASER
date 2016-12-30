@@ -269,7 +269,7 @@ class BoundaryConditions(UseConditions):
         self.with_ahu = False
 
         self.use_constant_ach_rate = False
-        self.base_ach = 0.2
+        self._base_ach = 0.2
         self.max_user_ach = 1.0
         self.max_overheating_ach = [3.0, 2.0]
         self.max_summer_ach = [1.0, 273.15 + 10, 273.15 + 17]
@@ -611,3 +611,15 @@ class BoundaryConditions(UseConditions):
                 raise ValueError("Can't convert lighting_power to float")
 
         self._lighting_power = value
+
+    @property
+    def base_ach(self):
+        return self._base_ach
+
+    @base_ach.setter
+    def base_ach(self, value):
+
+        self._base_ach = value
+
+        if self.parent is not None:
+            self.parent.infiltration_rate = self._base_ach

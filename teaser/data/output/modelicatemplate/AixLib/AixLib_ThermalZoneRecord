@@ -64,7 +64,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     lightingPower = ${zone.use_conditions.lighting_power},
     ratioConvectiveHeatLighting = ${zone.use_conditions.ratio_conv_rad_lighting},
     useConstantACHrate = ${str(get_true_false(zone.use_conditions.use_constant_ach_rate))},
-    baseACH = ${zone.use_conditions.base_ach},
+    baseACH = ${zone.infiltration_rate},
     maxUserACH = ${zone.use_conditions.max_user_ach},
     maxOverheatingACH = ${str(zone.use_conditions.max_overheating_ach).replace('[', '{').replace(']', '}')},
     maxSummerACH = ${str(zone.use_conditions.max_summer_ach).replace('[', '{').replace(']', '}')},
