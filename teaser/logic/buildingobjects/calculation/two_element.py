@@ -388,6 +388,7 @@ class TwoElement(object):
         self._calc_wf()
         self._calc_mean_values()
         self._calc_number_of_elements()
+        self._fill_zone_lists()
         self._calc_heat_load()
 
         return True
@@ -952,12 +953,12 @@ class TwoElement(object):
         tilt_orient = []
         for element in outer_elements:
             tilt_orient.append((element.orientation, element.tilt))
-
+        tilt_orient = list(set(tilt_orient))
         for i in tilt_orient:
             wall_rt = \
                 self.thermal_zone.find_walls(i[0], i[1]) + \
                 self.thermal_zone.find_rts(i[0], i[1])
-            win = self.thermal_zone.find_win(i[0], i[1])
+            win = self.thermal_zone.find_wins(i[0], i[1])
 
             self.orientation_wall.append(i[0])
             self.tilt_wall.append(i[1])
@@ -981,7 +982,6 @@ class TwoElement(object):
                     sum([win.shading_g_total for win in win]))
                 self.window_areas.append(
                     sum([win.area for win in win]))
-
 
     def _calc_heat_load(self):
         """Static heat load calculation
