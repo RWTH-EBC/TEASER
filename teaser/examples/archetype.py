@@ -46,6 +46,7 @@ def example_type_building():
                          with_ahu=True,
                          construction_type="heavy")
 
+
     '''
     We need to set the projects calculation method. The library we want to
     use is AixLib, we are using a two element model and want an extra resistance

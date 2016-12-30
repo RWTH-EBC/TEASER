@@ -987,13 +987,13 @@ class Project(object):
         utilities.create_path(path)
 
         if internal_id is None:
-            aixlib_output.export_aixlib(
+            aixlib_output.export_multizone(
                 buildings=self.buildings,
                 path=path)
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
-                    aixlib_output.export_aixlib(
+                    aixlib_output.export_multizone(
                         buildings=[bldg],
                         path=path)
                 else:

@@ -73,6 +73,8 @@ class ThermalZone(object):
         Temperature directly at the outer side of ground floors for static
         heat load calculation.
         The input of t_ground is ALWAYS in Kelvin
+    consider_heat_capacity : bool
+        decides whether air capacity is considered or not within the simulation
     density_air : float [kg/m3]
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]

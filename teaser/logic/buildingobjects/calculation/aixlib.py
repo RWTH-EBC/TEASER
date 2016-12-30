@@ -8,6 +8,7 @@ import scipy.io
 import teaser.logic.utilities as utilitis
 import numpy as np
 import warnings
+import os
 
 
 class AixLib(object):
@@ -51,9 +52,9 @@ class AixLib(object):
 
         self.parent = parent
 
-        self.file_set_t = "/Tset_" + self.parent.name + ".mat"
-        self.file_ahu = "/AHU_" + self.parent.name + ".mat"
-        self.file_internal_gains = "/InternalGains_" + self.parent.name + ".mat"
+        self.file_set_t = "Tset_" + self.parent.name + ".mat"
+        self.file_ahu = "AHU_" + self.parent.name + ".mat"
+        self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
         self.version = "0.4.0"
 
         self.total_surface_area = None
@@ -229,7 +230,7 @@ class AixLib(object):
             pass
 
         utilitis.create_path(path)
-        path += self.file_set_t
+        path = os.path.join(path, self.file_set_t)
 
         t_set_heat = [0]
 
@@ -279,7 +280,7 @@ class AixLib(object):
             pass
 
         utilitis.create_path(path)
-        path += self.file_ahu
+        path = os.path.join(path, self.file_ahu)
 
         if time_line is None:
             time_line = self.create_profile()
@@ -360,7 +361,7 @@ class AixLib(object):
             pass
 
         utilitis.create_path(path)
-        path += self.file_internal_gains
+        path = os.path.join(path, self.file_internal_gains)
 
         for zone_count in self.parent.thermal_zones:
             if time_line is None:

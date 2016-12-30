@@ -1,0 +1,11 @@
+##get false
+<%def name="get_true_false(value)", filter="trim">
+  <%
+  if value is False:
+    return "false"
+  elif value is True:
+    return "true"
+  else:
+    return value
+  %>
+</%def>

@@ -890,7 +890,6 @@ class TwoElement(object):
         ua_value_gf_temp = sum(
             ground.ua_value for ground in self.thermal_zone.ground_floors)
         ua_value_ow_temp = self.ua_value_ow - ua_value_gf_temp
-        print(ua_value_gf_temp, ua_value_ow_temp)
         self.heat_load = \
             ((((ua_value_ow_temp + self.ua_value_win) +
                self.thermal_zone.volume *

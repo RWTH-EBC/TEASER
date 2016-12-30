@@ -1,8 +1,7 @@
-<%namespace name="mo_lang" file="modelica_language"/>
-
+<%namespace file="/modelica_language/" import="get_true_false"/>
 within ${bldg.parent.name}.${bldg.name};
 model ${bldg.name}
-  "This is the simulation model of ${bldg.name} with traceable ${bldg.building_id}"
+  "This is the simulation model of ${bldg.name} with traceable ID ${bldg.building_id}"
 
   AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped multizone(
     redeclare package Medium = Modelica.Media.Air.SimpleAir,
@@ -11,20 +10,20 @@ model ${bldg.name}
     T_start = ${bldg.thermal_zones[0].t_inside},
     VAir = ${bldg.volume},
     ABuilding=${bldg.net_leased_area},
-    ##ASurTot=${bldg.library_attr.total_surface_area},
+    ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
     zoneParam = {
       %for zone in bldg.thermal_zones:
-      ${bldg.name}_DataBase.${bldg.name}_${zone.name}()
+      ${bldg.name}_DataBase.${bldg.name}_${zone.name}()${',' if not loop.last else ''}
       %endfor
       },
 % if bldg.central_ahu:
-	heatAHU=${mo_lang.get_true_false(bldg.central_ahu.heating)},
-  coolAHU=${mo_lang.get_true_false(bldg.central_ahu.cooling)},
-  dehuAHU=${mo_lang.get_true_false(bldg.central_ahu.dehumidification)},
-  huAHU=${mo_lang.get_true_false(bldg.central_ahu.humidification)},
+  heatAHU=${get_true_false(bldg.central_ahu.heating)},
+  coolAHU=${get_true_false(bldg.central_ahu.cooling)},
+  dehuAHU=${get_true_false(bldg.central_ahu.dehumidification)},
+  huAHU=${get_true_false(bldg.central_ahu.humidification)},
   BPFDehuAHU=${bldg.central_ahu.by_pass_dehumidification},
-  HRS=${mo_lang.get_true_false(bldg.central_ahu.heat_recovery)},
+  HRS=${get_true_false(bldg.central_ahu.heat_recovery)},
   sampleRateAHU=${bldg.central_ahu.sample_rate},
   effFanAHU_sup=${bldg.central_ahu.efficiency_fan_supply},
   effFanAHU_eta=${bldg.central_ahu.efficiency_fan_return},
@@ -33,30 +32,28 @@ model ${bldg.name}
   dpAHU_sup=${bldg.central_ahu.pressure_drop_fan_supply},
   dpAHU_eta=${bldg.central_ahu.pressure_drop_fan_return},
 % else:
-	heatAHU = false,
-	coolAHU = false,
-	dehuAHU = false,
-	huAHU = false,
-	BPFDehuAHU = 0.2,
-	HRS = false,
-	sampleRateAHU=1800,
+  heatAHU = false,
+  coolAHU = false,
+  dehuAHU = false,
+  huAHU = false,
+  BPFDehuAHU = 0.2,
+  HRS = false,
+  sampleRateAHU=1800,
   effFanAHU_sup=0.7,
   effFanAHU_eta=0.7,
-	effHRSAHU_enabled = 0.8,
-	effHRSAHU_disabled = 0.2,
-	dpAHU_sup=800,
+  effHRSAHU_enabled = 0.8,
+  effHRSAHU_disabled = 0.2,
+  dpAHU_sup=800,
   dpAHU_eta=800,
 % endif
-    zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
-             intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
-             (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
-             der_T(fixed=true))))),
-
-    redeclare model thermalZone =
+  zone(ROM(extWallRC(thermCapExt(each der_T(fixed=true))),
+           intWallRC(thermCapInt(each der_T(fixed=true))),floorRC
+           (thermCapExt(each der_T(fixed=true))),roofRC(thermCapExt(each
+           der_T(fixed=true))))),
+   redeclare model thermalZone =
         AixLib.ThermalZones.ReducedOrder.ThermalZone.ThermalZoneEquipped,
-    redeclare model corG =
+   redeclare model corG =
         AixLib.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane,
-
 % if bldg.central_ahu:
   redeclare model AHUMod = AixLib.Airflow.AirHandlingUnit.AHU)
 % else:
@@ -78,7 +75,7 @@ model ${bldg.name}
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     tableName="Internals",
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/${bldg.name}/${bldg.file_internal_gains}"),
+        "modelica://${bldg.parent.name}/${bldg.name}/${bldg.library_attr.file_internal_gains}"),
     columns=2:${(3*len(bldg.thermal_zones))+1})
     "Profiles for internal gains"
     annotation (Placement(transformation(extent={{72,-42},{56,-26}})));
@@ -89,7 +86,7 @@ model ${bldg.name}
     tableName="AHU",
     columns=2:5,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/${bldg.name}/${bldg.file_ahu}"))
+        "modelica://${bldg.parent.name}/${bldg.name}/${bldg.library_attr.file_ahu}"))
     "Boundary conditions for air handling unit"
     annotation (Placement(transformation(extent={{-64,-6},{-48,10}})));
 
@@ -98,8 +95,8 @@ model ${bldg.name}
     tableName="Tset",
     extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
     fileName=Modelica.Utilities.Files.loadResource(
-        "modelica://${mod_prj}/${bldg.name}/${bldg.file_set_t}"),
-    columns=2:${get_n(bldg.thermal_zones)+1})
+        "modelica://${bldg.parent.name}/${bldg.name}/${bldg.library_attr.file_set_t}"),
+    columns=2:${len(bldg.thermal_zones)+1})
     "Set points for heater"
     annotation (Placement(transformation(extent={{72,-66},{56,-50}})));
 
@@ -129,8 +126,8 @@ equation
       StopTime=${modelica_info.runtime_simulation},
       Interval=${modelica_info.interval_output},
       __Dymola_Algorithm="${modelica_info.current_solver}"),
-      __Dymola_experimentSetupOutput(equidistant=${mo_lang.get_true_false(modelica_info.equidistant_output)},
-      events=${mo_lang.get_true_false(modelica_info.results_at_events)}),
+      __Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
+      events=${get_true_false(modelica_info.results_at_events)}),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Line(points={{80,-82}}, color={28,108,200}),

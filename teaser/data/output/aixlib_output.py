@@ -9,11 +9,11 @@ This module contains function to call Templates for AixLib model generation
 import os
 import warnings
 from mako.template import Template
+from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
 
 
-def export_aixlib(buildings,
-                  path=None):
+def export_multizone(buildings, path=None):
     """Exports values to a model file for library AixLib
 
     Exports a building for
@@ -38,25 +38,39 @@ def export_aixlib(buildings,
     path : string
         if the Files should not be stored in default output path of TEASER,
         an alternative path can be specified as a full path
+
+    Attributes
+    ----------
+
+    lookup : TemplateLookup object
+        Instance of mako.TemplateLookup to store general functions for templates
+    zone_template : Template object
+        Template for ThermalZoneRecord
+    model_template : Template object
+        Tempalte for MultiZone model
     """
 
+    lookup = TemplateLookup(directories=[utilities.get_full_path(
+        "data/output/modelicatemplate/")])
     zone_template = Template(
         filename=utilities.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_ThermalZoneRecord"))
+            "data/output/modelicatemplate/AixLib/AixLib_ThermalZoneRecord"),
+        lookup=lookup)
     model_template = Template(
         filename=utilities.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_Multizone"))
+            "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
+        lookup=lookup)
 
     for i, bldg in enumerate(buildings):
 
         bldg_path = os.path.join(path, bldg.name)
         utilities.create_path(utilities.get_full_path(bldg_path))
         utilities.create_path(utilities.get_full_path
-                       (os.path.join(bldg_path,
-                                      bldg.name + "_DataBase")))
+                              (os.path.join(bldg_path,
+                                            bldg.name + "_DataBase")))
         bldg.library_attr.modelica_set_temp(path=os.path.join(
-                                                        bldg_path,
-                                                        bldg.name))
+            bldg_path,
+            bldg.name))
         bldg.library_attr.modelica_AHU_boundary(
             time_line=None,
             path=os.path.join(bldg_path, bldg.name))
@@ -65,7 +79,6 @@ def export_aixlib(buildings,
             path=os.path.join(bldg_path, bldg.name))
 
         _help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
-
         _help_package_order(
             path=bldg_path,
             package_list=[bldg],
@@ -80,21 +93,31 @@ def export_aixlib(buildings,
             except UserWarning:
                 warnings.warn("Cannot convert building_id to integer, "
                               "is set to ", i, "which is the enumeration "
-                              "number of the building in the project list.")
+                                               "number of the building in "
+                                               "the project list.")
                 bldg.building_id = i
 
         out_file = open(utilities.get_full_path
-                    (os.path.join(bldg_path, bldg.name + ".mo")), 'w')
+                        (os.path.join(bldg_path, bldg.name + ".mo")), 'w')
 
         out_file.write(model_template.render_unicode(
-                       bldg=bldg,
-                       weather=bldg.parent.weather_file_path,
-                       modelica_info=bldg.parent.modelica_info))
+            bldg=bldg,
+            weather=bldg.parent.weather_file_path,
+            modelica_info=bldg.parent.modelica_info))
         out_file.close()
 
+        for zone in bldg.thermal_zones:
+            zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
+
+            out_file = open(utilities.get_full_path(os.path.join(
+                zone_path, bldg.name + '_' + zone.name + '.mo'), 'w'))
+
+            out_file.write(zone_template.render_unicode(zone=zone))
+            out_file.close()
 
     print("Exports can be found here:")
     print(path)
+
 
 def _help_package(path, name, uses=None, within=None):
     '''creates a package.mo file
@@ -114,13 +137,14 @@ def _help_package(path, name, uses=None, within=None):
     '''
 
     package_template = Template(filename=utilities.get_full_path
-                                ("data/output/modelicatemplate/package"))
+    ("data/output/modelicatemplate/package"))
     out_file = open(
         utilities.get_full_path(path + "/" + "package" + ".mo"), 'w')
     out_file.write(package_template.render_unicode(name=name,
                                                    within=within,
                                                    uses=uses))
     out_file.close()
+
 
 def _help_package_order(path, package_list, addition=None, extra=None):
     '''creates a package.order file
@@ -143,7 +167,7 @@ def _help_package_order(path, package_list, addition=None, extra=None):
 
     '''
     order_template = Template(filename=utilities.get_full_path
-                              ("data/output/modelicatemplate/package_order"))
+    ("data/output/modelicatemplate/package_order"))
 
     out_file = open(
         utilities.get_full_path(path + "/" + "package" + ".order"), 'w')
