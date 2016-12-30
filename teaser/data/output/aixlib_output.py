@@ -68,15 +68,13 @@ def export_multizone(buildings, path=None):
         utilities.create_path(utilities.get_full_path
                               (os.path.join(bldg_path,
                                             bldg.name + "_DataBase")))
-        bldg.library_attr.modelica_set_temp(path=os.path.join(
-            bldg_path,
-            bldg.name))
+        bldg.library_attr.modelica_set_temp(path=bldg_path)
         bldg.library_attr.modelica_AHU_boundary(
             time_line=None,
-            path=os.path.join(bldg_path, bldg.name))
+            path=bldg_path)
         bldg.library_attr.modelica_gains_boundary(
             time_line=None,
-            path=os.path.join(bldg_path, bldg.name))
+            path=bldg_path)
 
         _help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
         _help_package_order(
@@ -110,7 +108,7 @@ def export_multizone(buildings, path=None):
             zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
             out_file = open(utilities.get_full_path(os.path.join(
-                zone_path, bldg.name + '_' + zone.name + '.mo'), 'w'))
+                zone_path, bldg.name + '_' + zone.name + '.mo')), 'w')
 
             out_file.write(zone_template.render_unicode(zone=zone))
             out_file.close()

@@ -448,7 +448,7 @@ class Building(object):
 
         if self.used_library_calc == 'AixLib':
             self.library_attr = AixLib(parent=self)
-            self.library_attr.compare_orientation()
+            #self.library_attr.compare_orientation()
         elif self.used_library_calc == 'Annex60':
             self.library_attr = Annex60(parent=self)
             self.library_attr.compare_orientation(

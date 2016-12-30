@@ -151,13 +151,10 @@ class AixLib(object):
                 else:
                     zone.model_attr.weightfactor_win.append(
                         sum([win.wf_out for win in wins]))
-                    zone.model_attr.window_area_list.append(
-                        sum([win.area for win in wins]))
                     zone.model_attr.g_sunblind_list.append(
                         sum([win.shading_g_total for win in wins]))
-                    # TODO what is this value needed for?
-                    [zone.model_attr.window_areas.append(i.area) for i in wins]
-
+                    zone.model_attr.window_areas.append(
+                        sum([win.area for win in wins]))
     def calc_auxiliary_attr(self):
         """Calls function to calculate all auxiliary attributes for AixLib"""
 

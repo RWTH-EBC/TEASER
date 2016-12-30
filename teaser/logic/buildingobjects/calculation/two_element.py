@@ -200,14 +200,6 @@ class TwoElement(object):
         Weightfactors of windows (UA-Value of windows with same orientation
         and tilt divided by ua_value_win or ua_value_win+ua_value_ow,
         depending if windows is lumped/merged into the walls or not)
-    tilt_win : list of floats [degree]
-        Tilt of windows against the horizontal.
-    orientation_win : list of floats [degree]
-        Orientation of windows (Azimuth).
-        0 - North
-        90 - East
-        180 - South
-        270 - West
     window_areas : list of floats [m2]
         Area of all windows in one list.
     solar_absorp_win : float
@@ -217,6 +209,11 @@ class TwoElement(object):
         facing the thermal zone and the ambient.
     weighted_g_value : float
         Area-weighted g-Value of all windows.
+    g_sunblind : list of floats
+        G-Value of all sunblinds of each window in a list
+
+    Zone specific values:
+
     heat_load : [W]
         Static heat load of the thermal zone.
 
@@ -313,7 +310,7 @@ class TwoElement(object):
 
         # Additional attributes
         self.weightfactor_ow = []
-        self.weightfactor_ground = []
+        self.weightfactor_ground = 0.0
         self.tilt_wall = []
         self.orientation_wall = []
         self.outer_walls_areas = []
@@ -357,13 +354,11 @@ class TwoElement(object):
 
         # Additional attributes
         self.weightfactor_win = []
-        self.tilt_win = []
-        self.orientation_win = []
-        # TODO duplicated list???
-        self.window_area_list = []
         self.window_areas = []
-        self.g_sunblind_list = []
+        self.g_sunblind = []
         self.weighted_g_value = 0.0
+
+        self.heat_load = 0.0
 
         # Mean values
 
@@ -887,6 +882,9 @@ class TwoElement(object):
                 win.wf_out = win.ua_value / (
                     self.ua_value_ow + self.ua_value_win)
 
+            self.weightfactor_ground = sum(gf.wf_out for gf in
+                                           self.thermal_zone.ground_floors)
+
         elif self.merge_windows is False:
 
             for wall in outer_walls:
@@ -894,6 +892,9 @@ class TwoElement(object):
 
             for win in self.thermal_zone.windows:
                 win.wf_out = win.ua_value / self.ua_value_win
+
+            self.weightfactor_ground = sum(gf.wf_out for gf in
+                                           self.thermal_zone.ground_floors)
 
         else:
             raise ValueError("specify merge window method correctly")
@@ -923,16 +924,64 @@ class TwoElement(object):
         rooftops and ground floors.
         """
 
-        outer_walls = (self.thermal_zone.outer_walls +
-                       self.thermal_zone.ground_floors +
-                       self.thermal_zone.rooftops)
+        outer_elements = (
+            self.thermal_zone.outer_walls +
+            self.thermal_zone.ground_floors +
+            self.thermal_zone.rooftops +
+            self.thermal_zone.windows)
+
         tilt_orient = []
-        for element in outer_walls:
+        for element in outer_elements:
             tilt_orient.append((element.orientation, element.tilt))
         self.n_outer = len(list(set(tilt_orient)))
 
     def _fill_zone_lists(self):
-        """"""
+        """Fills lists like weightfactors and tilt, orientation
+
+        Fills the lists of a zone  according to orientation and tilt of the
+        zone. Therefore it compares orientation and tilt of all outer
+        elements and then creates lists for zone weightfactors, orientation,
+        tilt, ares and sunblinds."""
+
+        outer_elements = (
+            self.thermal_zone.outer_walls +
+            self.thermal_zone.rooftops +
+            self.thermal_zone.windows +
+            self.thermal_zone.ground_floors)
+
+        tilt_orient = []
+        for element in outer_elements:
+            tilt_orient.append((element.orientation, element.tilt))
+
+        for i in tilt_orient:
+            wall_rt = \
+                self.thermal_zone.find_walls(i[0], i[1]) + \
+                self.thermal_zone.find_rts(i[0], i[1])
+            win = self.thermal_zone.find_win(i[0], i[1])
+
+            self.orientation_wall.append(i[0])
+            self.tilt_wall.append(i[1])
+
+            if not wall_rt:
+                self.weightfactor_ow.append(0.0)
+                self.outer_walls_areas.append(0.0)
+            else:
+                self.weightfactor_ow.append(
+                    sum([wall.wf_out for wall in wall_rt]))
+                [self.outer_walls_areas.append(
+                    i.area) for i in wall_rt]
+            if not win:
+                self.weightfactor_win.append(0.0)
+                self.g_sunblind.append(0.0)
+                self.window_areas.append(0.0)
+            else:
+                self.weightfactor_win.append(
+                    sum([win.wf_out for win in win]))
+                self.g_sunblind.append(
+                    sum([win.shading_g_total for win in win]))
+                self.window_areas.append(
+                    sum([win.area for win in win]))
+
 
     def _calc_heat_load(self):
         """Static heat load calculation
@@ -1078,7 +1127,6 @@ class TwoElement(object):
         self.tilt_win = []
         self.orientation_win = []
 
-        self.window_area_list = []
         self.window_areas = []
-        self.g_sunblind_list = []
+        self.g_sunblind = []
         self.weighted_g_value = 0.0
