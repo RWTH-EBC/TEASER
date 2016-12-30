@@ -186,10 +186,9 @@ class BoundaryConditions(UseConditions):
     use_constant_ach_rate : boolean
         choose if a constant infiltration rate should be used
         AixLib: Used on Zone level for ventilation.
-    base_ach : float
+    base_ach : float [1/h]
         base value for the infiltration rate
-        AixLib: Used on Zone level for ventilation. TODO: move this to
-        ThermalZone
+        AixLib: Used on Zone level for ventilation.
     max_user_ach : float
         Additional infiltration rate for maximum persons activity
         AixLib: Used on Zone level for ventilation.
