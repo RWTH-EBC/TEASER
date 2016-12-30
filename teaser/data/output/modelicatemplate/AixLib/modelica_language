@@ -1,0 +1,24 @@
+<%
+ str_emp = str()
+ pun_com = ','
+ pun_sem = ';'
+ pun_quo = '"'
+ pun_spa = ' '
+ pun_lin = '\n'
+ par_ope = '('
+ par_clo = ')'
+ bra_ope = '['
+ bra_clo = ']'
+%>
+
+##convert True and False to Modelica Language
+<%def name="get_true_false(value)">
+
+  if value is False:
+    return "false"
+  elif value is True:
+    return "true"
+  else:
+    return value
+
+</%def>

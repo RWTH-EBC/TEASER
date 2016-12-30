@@ -1,15 +1,5 @@
-<%
- str_emp = str()
- pun_com = ','
- pun_sem = ';'
- pun_quo = '"'
- pun_spa = ' '
- pun_lin = '\n'
- par_ope = '('
- par_clo = ')'
- bra_ope = '['
- bra_clo = ']'
-%>
+<%namespace name="mo_lang" file="modelica_language"/>
+
 within ${bldg.parent.name}.${bldg.name};
 model ${bldg.name}
   "This is the simulation model of ${bldg.name} with traceable ${bldg.building_id}"
@@ -21,20 +11,20 @@ model ${bldg.name}
     T_start = ${bldg.thermal_zones[0].t_inside},
     VAir = ${bldg.volume},
     ABuilding=${bldg.net_leased_area},
-    ASurTot=${bldg.library_attr.total_surface_area},
+    ##ASurTot=${bldg.library_attr.total_surface_area},
     numZones = ${len(bldg.thermal_zones)},
     zoneParam = {
       %for zone in bldg.thermal_zones:
-      ${bldg.name}_DataBase.${bldg.name}_${zone.name}()${pun_com if not loop.last else str_emp)
+      ${bldg.name}_DataBase.${bldg.name}_${zone.name}()
       %endfor
       },
 % if bldg.central_ahu:
-	heatAHU=${get_true_false(bldg.central_ahu.heating)},
-  coolAHU=${get_true_false(bldg.central_ahu.cooling)},
-  dehuAHU=${get_true_false(bldg.central_ahu.dehumidification)},
-  huAHU=${get_true_false(bldg.central_ahu.humidification)},
+	heatAHU=${mo_lang.get_true_false(bldg.central_ahu.heating)},
+  coolAHU=${mo_lang.get_true_false(bldg.central_ahu.cooling)},
+  dehuAHU=${mo_lang.get_true_false(bldg.central_ahu.dehumidification)},
+  huAHU=${mo_lang.get_true_false(bldg.central_ahu.humidification)},
   BPFDehuAHU=${bldg.central_ahu.by_pass_dehumidification},
-  HRS=${get_true_false(bldg.central_ahu.heat_recovery)},
+  HRS=${mo_lang.get_true_false(bldg.central_ahu.heat_recovery)},
   sampleRateAHU=${bldg.central_ahu.sample_rate},
   effFanAHU_sup=${bldg.central_ahu.efficiency_fan_supply},
   effFanAHU_eta=${bldg.central_ahu.efficiency_fan_return},
@@ -139,8 +129,8 @@ equation
       StopTime=${modelica_info.runtime_simulation},
       Interval=${modelica_info.interval_output},
       __Dymola_Algorithm="${modelica_info.current_solver}"),
-      __Dymola_experimentSetupOutput(equidistant=${get_true_false(modelica_info.equidistant_output)},
-      events=${get_true_false(modelica_info.results_at_events)}),
+      __Dymola_experimentSetupOutput(equidistant=${mo_lang.get_true_false(modelica_info.equidistant_output)},
+      events=${mo_lang.get_true_false(modelica_info.results_at_events)}),
     Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
         graphics={
         Line(points={{80,-82}}, color={28,108,200}),
@@ -160,16 +150,3 @@ equation
           fillPattern=FillPattern.Solid,
           textString="TB")}));
 end ${bldg.name};
-
-
-##get false
-<%def name="get_true_false(value)", filter="trim">
-  <%
-  if value == False:
-    return "false"
-  elif value == True:
-    return "true"
-  else:
-    return value
-  %>
-</%def>

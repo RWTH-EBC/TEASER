@@ -96,7 +96,7 @@ class Project(object):
         self._used_library_calc = "AixLib"
 
         if load_data is True:
-            self.data = self.instantiate_data_class()
+            self.data = self.instantiate_data_class(self)
         else:
             self.data = None
 

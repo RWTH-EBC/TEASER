@@ -366,7 +366,7 @@ class AixLib(object):
             if time_line is None:
                 duration = len(zone_count.use_conditions.profile_persons) * \
                             3600
-                time_line = self.create_timeline(duration_profile=duration)
+                time_line = self.create_profile(duration_profile=duration)
 
             ass_error_1 = "time line and input have to have the same length"
 

@@ -66,9 +66,7 @@ def example_type_building():
     and institute buildings)
     '''
 
-    prj.export_aixlib(building_model="MultizoneEquipped",
-                      zone_model="ThermalZoneEquipped",
-                      corG=True,
+    prj.export_aixlib(
                       internal_id=None,
                       path=None)
 
@@ -104,9 +102,7 @@ def example_type_building():
 
     '''You could also change the exports here as seen above'''
 
-    prj.export_aixlib(building_model="MultizoneEquipped",
-                      zone_model="ThermalZoneEquipped",
-                      corG=True,
+    prj.export_aixlib(
                       internal_id=None,
                       path=None)
 

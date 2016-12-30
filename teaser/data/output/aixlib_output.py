@@ -54,13 +54,13 @@ def export_aixlib(buildings,
         utilities.create_path(utilities.get_full_path
                        (os.path.join(bldg_path,
                                       bldg.name + "_DataBase")))
-        bldg.library_atrr.modelica_set_temp(path=os.path.join(
+        bldg.library_attr.modelica_set_temp(path=os.path.join(
                                                         bldg_path,
                                                         bldg.name))
-        bldg.library_atrr.modelica_AHU_boundary(
+        bldg.library_attr.modelica_AHU_boundary(
             time_line=None,
             path=os.path.join(bldg_path, bldg.name))
-        bldg.library_atrr.modelica_gains_boundary(
+        bldg.library_attr.modelica_gains_boundary(
             time_line=None,
             path=os.path.join(bldg_path, bldg.name))
 
@@ -90,76 +90,11 @@ def export_aixlib(buildings,
                        bldg=bldg,
                        weather=bldg.parent.weather_file_path,
                        modelica_info=bldg.parent.modelica_info))
-    out_file.close()
-
-    for zone in bldg.thermal_zones:
-        zone_path = bldg_path + bldg.name + "_DataBase" + "/"
-
-        out_file = open(utilities.get_full_path(
-            zone_path + "/" + bldg.name + "_" +
-            zone.name.replace(" ", "") + ".mo"), 'w')
-        out_file.write(zone_template.render_unicode(
-            bldg=bldg,
-            zone=zone,
-            mod_prj=prj.modelica_project,
-            number_of_elements=number_of_elements))
         out_file.close()
 
-    _help_package(zone_path,
-                  bldg.name + "_DataBase",
-                  within=prj.name + '.' + bldg.name)
-    _help_package_order(zone_path,
-                        bldg.thermal_zones,
-                            bldg.name + "_")
+
     print("Exports can be found here:")
     print(path)
-
-    elif building_model == "None" and zone_model == "None" and\
-        corG is None:
-        # only export the baserecords
-        _help_package(path, prj.name, uses)
-        _help_package_order(path, exported_list_of_buildings)
-        for bldg in exported_list_of_buildings:
-
-            bldg_path = path + "/" + bldg.name + "/"
-            utilities.create_path(utilities.get_full_path(bldg_path))
-            utilities.create_path(utilities.get_full_path
-                               (bldg_path + bldg.name + "_DataBase"))
-
-            _help_package(bldg_path, bldg.name, within=prj.name)
-            _help_package_order(bldg_path, [bldg], None,
-                                     bldg.name + "_DataBase")
-
-            for zone in bldg.thermal_zones:
-                zone_path = bldg_path + bldg.name + "_DataBase" + "/"
-
-                out_file = open(utilities.get_full_path(
-                    zone_path + "/" + bldg.name + "_" +
-                    zone.name.replace(" ", "") + ".mo"), 'w')
-                out_file.write(zone_template.render_unicode(
-                    bldg=bldg,
-                    zone=zone,
-                    calc_core=bldg._calculation_method,
-                    mod_prj=prj.modelica_project,
-                    number_of_elements=number_of_elements))
-
-                out_file.close()
-
-            _help_package(zone_path,
-                          bldg.name + "_DataBase",
-                          within=prj.name + '.' + bldg.name)
-            _help_package_order(zone_path,
-                                bldg.thermal_zones,
-                                bldg.name + "_")
-
-        print("Exports can be found here:")
-        print(path)
-
-    else:
-        # not clearly specified
-        print("please specify you export clearly")
-
-
 
 def _help_package(path, name, uses=None, within=None):
     '''creates a package.mo file
