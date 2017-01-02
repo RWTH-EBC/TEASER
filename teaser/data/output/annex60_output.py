@@ -5,6 +5,7 @@
 
 This module contains function to call Templates for Annex60 model generation
 """
+
 import teaser.data.output.aixlib_output as aixlib_output
 import os.path
 import teaser.logic.utilities as utilities
@@ -129,7 +130,6 @@ def export_annex60(
                 pass
             elif type(zone.model_attr).__name__ == "FourElement":
                 pass
-
 
             aixlib_output._help_package(zone_path,
                                         bldg.name + "_Models",

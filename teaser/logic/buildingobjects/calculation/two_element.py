@@ -979,7 +979,7 @@ class TwoElement(object):
                 self.thermal_zone.find_rts(i[0], i[1])
             win = self.thermal_zone.find_wins(i[0], i[1])
             gf = self.thermal_zone.find_gfs(i[0], i[1])
-            
+
             if self.merge_windows is True:
                 self.facade_areas.append(sum([element.area for element in (
                     wall_rt + win + gf)]))

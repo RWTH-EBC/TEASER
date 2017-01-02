@@ -1,28 +1,30 @@
-within ${within};
-model ${bldg.name}_${zone.name}
-  "This is the simulation model of ${bldg.name}_${zone.name}"
+<%namespace file="/modelica_language/" import="get_true_false, get_list"/> <%namespace file="/conversion/" import="deg_to_rad"/>
+within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_Models;
+model ${zone.parent.name}_${zone.name}
+  "This is the simulation model of ${zone.name} within building ${zone.parent.name} with traceable ID ${zone.parent.building_id}"
 
   Annex60.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
     calTSky=Annex60.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
-    filNam="${weather.replace("\\", "/")}")
+    filNam="${zone.parent.parent.weather_file_path.replace("\\", "/")}")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${def_nOrientations(len(zone.orientation_wall))}](
+  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${zone.model_attr.n_outer}](
     each outSkyCon=true,
     each outGroCon=true,
-    til={${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
-    each lat = ${deg_to_rad(check_lat(bldg.latitude))},
-    azi={${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_wall)))}})
+    til=${get_list(deg_to_rad(zone.model_attr.tilt_wall))},
+    each lat = ${deg_to_rad(zone.parent.latitude)},
+    azi = ${get_list(deg_to_rad(zone.model_attr.orientation_wall))})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${def_nOrientations(len(zone.orientation_wall))}](
-    til={${list_to_string(deg_to_rad_list(zone.tilt_wall))}},
-    each lat = ${deg_to_rad(check_lat(bldg.latitude))},
-    azi={${list_to_string(deg_to_rad_list(get_azimut(zone.orientation_wall)))}})
+  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${zone.model_attr.n_outer}](
+    til=${get_list(deg_to_rad(zone.model_attr.tilt_wall))},
+    each lat =  ${deg_to_rad(zone.parent.latitude)},
+    azi=${get_list(deg_to_rad(zone.model_attr.orientation_wall))})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${def_nOrientations(len(zone.orientation_wall))}, UWin=${zone.ua_value_win/zone.area_win})
+  Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${zone.model_attr.n_outer},
+  UWin=${zone.model_attr.ua_value_win/zone.model_attr.area_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
   Annex60.ThermalZones.ReducedOrder.RC.ThreeElements
