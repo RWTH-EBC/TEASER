@@ -364,6 +364,7 @@ class TwoElement(object):
         self.weighted_g_value = 0.0
 
         self.heat_load = 0.0
+        self.cool_load = 0.0
 
         # Mean values
 

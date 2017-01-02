@@ -13,10 +13,6 @@
 ##list to modelica list
 <%def name="get_list(list)", filter="trim">
   <%
-  string_of_list = ""
-  for item in list:
-    string_of_list += str(item) + ", "
-  string_of_list = string_of_list[:-2]
-  return string_of_list
+  return str(list).replace('[', '{').replace(']', '}')
   %>
 </%def>
