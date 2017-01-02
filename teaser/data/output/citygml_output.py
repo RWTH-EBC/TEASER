@@ -76,9 +76,7 @@ def save_gml(project, path, ref_coordinates=None):
         gml_bldg = _set_gml_building(bldg_count)
 
         bldg_center = [i * 80, 0, 0]
-        building_length = None
-        building_width = None
-        building_height = None
+
         if type(bldg_count).__name__ == "SingleFamilyDwelling":
             building_length = (bldg_count.thermal_zones[0].area /
                                bldg_count.thermal_zones[0].typical_width)
@@ -265,8 +263,8 @@ def _set_lod_2(gml_bldg, length, width, height, bldg_center):
     exterior_solid = gml.SurfacePropertyType()
     composite_surface = gml.CompositeSurface()
 
-    bldg_center[0] = bldg_center[0] - length / 2
-    bldg_center[1] = bldg_center[1] - width / 2
+    bldg_center[0] -= length / 2
+    bldg_center[1] -= width / 2
 
     # Ground surface
     coords = [[bldg_center[0], bldg_center[1], bldg_center[2]],
@@ -674,7 +672,8 @@ def _add_gml_layer(gml_surf_comp, element):
         element.ua_value / element.area)
     construction.Construction.uValue.uom = bd.datatypes.anyURI('W/(m^2*K)')
     if type(element).__name__ == "Window":
-        construction.Construction.opticalProperties = energy.OpticalPropertiesPropertyType()
+        construction.Construction.opticalProperties = \
+            energy.OpticalPropertiesPropertyType()
         construction.Construction.opticalProperties.append(
             energy.OpticalPropertiesType())
         construction.Construction.opticalProperties.OpticalProperties \
@@ -717,9 +716,9 @@ def _add_gml_opaque_material(gml_layer, teaser_layer):
     Parameters
     ----------
 
-    gml_surf_comp : energy.LayerComponentType()
+    gml_layer : energy.LayerComponentType()
         A Layer object with basic data
-    element : TEASER Layer
+    teaser_layer : TEASER Layer
         Instance of Layer
     """
     gml_layer.material = energy.AbstractMaterialPropertyType()
