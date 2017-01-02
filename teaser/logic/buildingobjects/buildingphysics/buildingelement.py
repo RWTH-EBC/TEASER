@@ -169,11 +169,12 @@ class BuildingElement(object):
         self.r_outer_conv = 0.0
         self.r_outer_rad = 0.0
         self.r_outer_comb = 0.0
-
+        r_conduc = 0.0
         for count_layer in self.layer:
-            self.r_conduc += (
-                count_layer.thickness / count_layer.material.thermal_conduc)
+            r_conduc += (
+                count_layer.thickness / count_layer.material.thermal_conduc) \
 
+        self.r_conduc = r_conduc * (1 / self.area)
         self.r_inner_conv = (1 / self.inner_convection) * (1 / self.area)
         self.r_inner_rad = (1 / self.inner_radiation) * (1 / self.area)
         self.r_inner_comb = 1 / (1 / self.r_inner_conv + 1 / self.r_inner_rad)
@@ -187,8 +188,7 @@ class BuildingElement(object):
                 (1 / self.r_outer_conv + 1 / self.r_outer_rad)
 
         self.ua_value = (1 / (
-            self.r_inner_comb + self.r_conduc * (1 / self.area) +
-            self.r_outer_comb))
+            self.r_inner_comb + self.r_conduc + self.r_outer_comb))
 
     def gather_element_properties(self):
         """Helper function for matrix calculation.

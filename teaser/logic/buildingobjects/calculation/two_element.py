@@ -508,6 +508,8 @@ class TwoElement(object):
              + sum(roof.ua_value for roof in
                    self.thermal_zone.rooftops))
 
+        self.r_total_ow = 1 / self.ua_value_ow
+
         # values facing the inside of the thermal zone
 
         self.r_conv_inner_ow = (1 /
@@ -770,20 +772,15 @@ class TwoElement(object):
 
         if self.merge_windows is False:
             try:
-
-                # self.r1_win = (1 / sum((1 / (win.r1 + win.r_outer_comb)) for
-                #                        win in self.thermal_zone.windows))
                 # TODO check if this is equivalent to old tempalte R_zero?
                 self.r1_win = (1 / sum((1 / win.r1) for
                                        win in self.thermal_zone.windows))
 
-                self.r_total_ow = 1 / self.ua_value_ow
+                conduction = (1 / sum((1/element.r_conduc) for element in
+                               outer_walls))
 
-                # TODO check if this is equivalent to old tempalte R_zero?
-                self.r_rest_ow = (self.r_total_ow - self.r1_ow - (
-                    1 / (1 / self.r_conv_inner_ow + 1 / self.r_rad_inner_ow))
-                    - (1 / (1 / self.r_conv_outer_ow + 1 /
-                            self.r_rad_outer_ow)))
+                self.r_rest_ow = (conduction - self.r1_ow)
+
 
             except RuntimeError:
                 print("As no outer walls or no windows are defined lumped "
