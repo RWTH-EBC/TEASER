@@ -161,12 +161,14 @@ class AixLib(object):
 
         self._calc_surface_area()
 
-    def calc_surface_area(self):
+    def _calc_surface_area(self):
         """Calculates the total surface area of all surfaces"""
         surf_area_temp = 0.0
         for zone in self.parent.thermal_zones:
-            surf_area_temp += (zone.area_ow + zone.area_iw + zone.area_rt +
-                               zone.area_gf + zone.area_win)
+            surf_area_temp += (
+                zone.model_attr.area_ow +
+                zone.model_attr.area_iw +
+                zone.model_attr.area_win)
         self.total_surface_area = surf_area_temp
 
     @staticmethod
