@@ -23,18 +23,14 @@ def example_type_building():
     automatically calculates all the necessary parameter. If not specified different
     it uses vdi calculation method."""
 
-    prj.type_bldg_residential(name="ResidentialBuilding",
-                              year_of_construction=1988,
-                              number_of_floors=2,
-                              height_of_floors=3.5,
-                              net_leased_area=100,
-                              with_ahu=True,
-                              residential_layout=1,
-                              neighbour_buildings=1,
-                              attic=1,
-                              cellar=1,
-                              construction_type="heavy",
-                              dormer=1)
+    prj.type_bldg_residential(
+                    name="ResidentialBuilding",
+                    year_of_construction=1988,
+                    number_of_floors=2,
+                    height_of_floors=3.5,
+                    net_leased_area=200,
+                    with_ahu=False)
+
 
     prj.type_bldg_office(
                     name="Institute",

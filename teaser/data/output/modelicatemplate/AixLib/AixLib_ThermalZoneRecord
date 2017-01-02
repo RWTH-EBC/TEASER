@@ -39,7 +39,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     RRoof = {0.00001},
     RRoofRem = 0.00001,
     CRoof = {0.00001},
-    nOrientationsRoof = 0,
+    nOrientationsRoof = 1,
     tiltRoof = {0.0},
     aziRoof = {0.0},
     wfRoof = {0.0},
