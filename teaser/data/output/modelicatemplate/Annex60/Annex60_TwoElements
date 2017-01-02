@@ -1,5 +1,5 @@
 <%namespace file="/modelica_language/" import="get_true_false, get_list"/> <%namespace file="/conversion/" import="deg_to_rad"/>
-within ${zone.parent.parent.name}${zone.parent.name}.${zone.parent.name}_Models;
+within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_Models;
 model ${zone.parent.name}_${zone.name}
   "This is the simulation model of ${zone.name} within building ${zone.parent.name} with traceable ID ${zone.parent.building_id}"
 
@@ -56,13 +56,7 @@ model ${zone.parent.name}_${zone.name}
     nOrientations=${zone.model_attr.n_outer},
     AWin=${get_list(zone.model_attr.window_areas)},
     ATransparent=${get_list(zone.model_attr.transparent_areas)},
-% if merge_windows is True:
-    AExt=${get_list([a + b for a, b in zip(zone.model_attr.window_areas, zone.model_attr.outer_walls_areas)]}))
-   "Thermal zone"
-% else:
-    AExt=${get_list(zone.outer_walls_areas)}) "Thermal
-    zone"
-% endif
+    AExt=${get_list(zone.model_attr.outer_wall_areas)}) "Thermal zone"
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 % if merge_windows is True:
   Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
@@ -139,12 +133,12 @@ model ${zone.parent.name}_${zone.name}
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConv
     "Convective heat flow of machines"
     annotation (Placement(transformation(extent={{48,-84},{68,-64}})));
-  Modelica.Blocks.Sources.CombiTimeTable tableInternalGains(
+  Modelica.Blocks.Sources.CombiTimeTable internalGains(
       tableOnFile=true,
       extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
       tableName="Internals",
       fileName=Modelica.Utilities.Files.loadResource(
-          "modelica://${zone.parent.parent.name}/${zone.parent.name}/${zone.parent.library_attr.file_internal_gains}"),
+          "modelica://${zone.parent.parent.name}/${zone.parent.name}/${zone.parent.name}_Models/${zone.parent.library_attr.file_internal_gains}"),
       columns={2,3,4})
       "Table with profiles for persons (radiative and convective) and machines (convective)"
       annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
@@ -261,5 +255,5 @@ equation
   Interval=${zone.parent.parent.modelica_info.interval_output},
   __Dymola_Algorithm="${zone.parent.parent.modelica_info.current_solver}"),
   __Dymola_experimentSetupOutput(equidistant=${get_true_false(zone.parent.parent.modelica_info.equidistant_output)},
-  events=${get_true_false(zone.parent.parent.modelica_info.results_at_events)})));
+  events=${get_true_false(zone.parent.parent.modelica_info.results_at_events)}));
 end ${zone.parent.name}_${zone.name};

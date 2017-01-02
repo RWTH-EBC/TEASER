@@ -1001,8 +1001,11 @@ class TwoElement(object):
                     sum([win.wf_out for win in win]))
                 self.g_sunblind.append(
                     sum([win.shading_g_total for win in win]))
+
                 if self.merge_windows is False:
                     self.window_areas.append(
+                        sum([win.area for win in win]))
+                    self.transparent_areas.append(
                         sum([win.area for win in win]))
                 else:
                     self.window_areas.append(0)

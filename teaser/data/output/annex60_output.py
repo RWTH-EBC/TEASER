@@ -111,6 +111,12 @@ def export_annex60(
             zone_path = os.path.join(
                 bldg_path,
                 bldg.name + "_Models")
+            zone.parent.library_attr.file_internal_gains = 'InternalGains_' +\
+                                                           bldg.name + \
+                                                           zone.name + '.mat'
+            bldg.library_attr.modelica_gains_boundary(
+                time_line=None,
+                path=zone_path)
 
             out_file = open(utilities.get_full_path(os.path.join(
                 zone_path, bldg.name + '_' + zone.name + '.mo')), 'w')
