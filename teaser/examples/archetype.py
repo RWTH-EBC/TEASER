@@ -52,11 +52,11 @@ def example_type_building():
     the records in TEASER'S Output folder
     '''
 
-    prj.used_library_calc = 'AixLib'
-    prj.number_of_elements_calc = 2
-    prj.merge_windows_calc = False
+    #prj.used_library_calc = 'AixLib'
+    #prj.number_of_elements_calc = 2
+    #prj.merge_windows_calc = False
 
-    prj.calc_all_buildings()
+    #prj.calc_all_buildings()
 
     '''
     Export the Modelica Record. If you have a Dymola License you can  export
@@ -64,9 +64,9 @@ def example_type_building():
     and institute buildings)
     '''
 
-    prj.export_aixlib(
-        internal_id=None,
-        path=None)
+    #prj.export_aixlib(
+    #    internal_id=None,
+    #    path=None)
 
     '''
     For OpenModelica you need to exclude the centralAHU (because it is using
@@ -83,37 +83,13 @@ def example_type_building():
     '''Or we use Annex60 method (e.g with four elements). Which exports one
     Model per zone'''
 
-    #prj.used_library_calc = 'Annex60'
-    #prj.number_of_elements_calc = 4
-    #prj.merge_windows_calc = False
+    prj.used_library_calc = 'Annex60'
+    prj.number_of_elements_calc = 2
+    prj.merge_windows_calc = False
 
-    #prj.calc_all_buildings()
-    #prj.export_annex()
-
-    """Now we retrofit all buildings in the year 2015 (EnEV2014). \
-    That includes new insulation layer and new windows. The name is changed \
-    to Retrofit"""
-
-    prj.name = "ArchetypeBuildings_Retrofit"
-    prj.retrofit_all_buildings(2015)
     prj.calc_all_buildings()
+    prj.export_annex()
 
-    '''You could also change the exports here as seen above'''
-
-    prj.export_aixlib(
-                      internal_id=None,
-                      path=None)
-
-    prj.save_project("Retrofit_Building",
-                     path=None)
-
-    '''Save the human readable output txt'''
-    prj.export_parameters_txt(path=None)
-
-    '''
-    Save the human readable output txt
-    '''
-    prj.save_citygml(path=None)
 
 
 if __name__ == '__main__':

@@ -451,8 +451,6 @@ class Building(object):
             self.library_attr.calc_auxiliary_attr()
         elif self.used_library_calc == 'Annex60':
             self.library_attr = Annex60(parent=self)
-            self.library_attr.compare_orientation(
-                number_of_elements=number_of_elements)
 
     def retrofit_building(
             self,

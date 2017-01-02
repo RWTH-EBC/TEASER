@@ -5,7 +5,7 @@
 """
 
 import scipy.io
-import teaser.logic.utilities as utilitis
+import teaser.logic.utilities as utilities
 import numpy as np
 import warnings
 import os
@@ -15,7 +15,7 @@ class AixLib(object):
     """AixLib Class
 
     This class holds functions to sort and partly rewrite zone and building
-    attributes specific for AixLib Multizone and MultizoneEquipped
+    attributes specific for AixLib MultizoneEquipped
     simulation. This includes the export of boundary conditions and AHU
     operation values.
 
@@ -60,102 +60,7 @@ class AixLib(object):
         self.total_surface_area = None
         self.consider_heat_capacity = True
 
-    def compare_orientation(self):
-        """Compares orientation of walls of all zones and sorts them
 
-        Fills the weighfactors of every zone according to orientation and
-        tilt of all zones of the buildings. Therefore it compares orientation
-        and tilt of all outer building elements and then creates lists for zone
-        weightfactors, orientation, tilt, ares and sunblinds.
-
-        Attributes
-        ----------
-
-        orient_tilt_help : list of tuples
-            List with of all occurring combinations of (orientation, tilt) of
-            all outer elements of the building
-        """
-
-        orient_tilt_help = []
-        self.parent.orient_tilt = []
-        self.parent.orientation_bldg = []
-        self.parent.tilt_bldg = []
-
-        for zone in self.parent.thermal_zones:
-            for wall in zone.outer_walls:
-                if wall.orientation >= 0.0:
-                    orient_tilt_help.append((wall.orientation, wall.tilt))
-                else:
-                    warnings.warn("OuterWalls should not have orientation "
-                                  "below zero")
-            for roof in zone.rooftops:
-                if roof.orientation >= -1.0:
-                    orient_tilt_help.append((roof.orientation, roof.tilt))
-                else:
-                    warnings.warn("Rooftops should have orientation -1 for "
-                                  "flat roofs or >= 0.0 for pitched roofs")
-            for win in zone.windows:
-                if win.orientation >= -1.0:
-                    orient_tilt_help.append((win.orientation, win.tilt))
-                else:
-                    warnings.warn("Windows should have orientation -1 for "
-                                  "windows in flat roofs or >= 0.0")
-
-        for i in orient_tilt_help:
-            if i in self.parent.orient_tilt:
-                pass
-            else:
-                self.parent.orient_tilt.append(i)
-
-        self.parent.orient_tilt.sort(key=lambda x: x[0])
-
-        if self.parent.orient_tilt[0][0] == -1:
-            self.parent.orient_tilt.insert(
-                len(self.parent.orient_tilt),
-                self.parent.orient_tilt.pop(0))
-
-        for i in self.parent.orient_tilt:
-            self.parent.orientation_bldg.append(i[0])
-            self.parent.tilt_bldg.append(i[1])
-
-        for zone in self.parent.thermal_zones:
-
-            ground_floors = zone.find_gfs(-2, 0)
-            if not ground_floors:
-                zone.model_attr.weightfactor_ground.append(0.0)
-            else:
-                zone.model_attr.weightfactor_ground.append(
-                    sum([groundfl.wf_out for groundfl in ground_floors]))
-
-            for i in self.parent.orient_tilt:
-                walls_roofs = zone.find_walls(i[0], i[1]) + zone.find_rts(i[0], i[1])
-                wins = zone.find_wins(i[0], i[1])
-
-                zone.model_attr.tilt_wall.append(i[1])
-                zone.model_attr.orientation_wall.append(i[0])
-
-                zone.model_attr.tilt_win.append(i[1])
-                zone.model_attr.orientation_win.append(i[0])
-
-                if not walls_roofs:
-                    zone.model_attr.weightfactor_ow.append(0.0)
-                    zone.model_attr.outer_walls_areas.append(0.0)
-                else:
-                    zone.model_attr.weightfactor_ow.append(
-                        sum([wall.wf_out for wall in walls_roofs]))
-                    [zone.model_attr.outer_walls_areas.append(i.area) for i in walls_roofs]
-                if not wins:
-                    zone.model_attr.weightfactor_win.append(0.0)
-                    zone.model_attr.window_area_list.append(0.0)
-                    zone.model_attr.g_sunblind_list.append(0.0)
-                    zone.model_attr.window_areas.append(0.0)
-                else:
-                    zone.model_attr.weightfactor_win.append(
-                        sum([win.wf_out for win in wins]))
-                    zone.model_attr.g_sunblind_list.append(
-                        sum([win.shading_g_total for win in wins]))
-                    zone.model_attr.window_areas.append(
-                        sum([win.area for win in wins]))
     def calc_auxiliary_attr(self):
         """Calls function to calculate all auxiliary attributes for AixLib"""
 
@@ -225,11 +130,11 @@ class AixLib(object):
         """
 
         if path is None:
-            path = utilitis.get_default_path()
+            path = utilities.get_default_path()
         else:
             pass
 
-        utilitis.create_path(path)
+        utilities.create_path(path)
         path = os.path.join(path, self.file_set_t)
 
         t_set_heat = [0]
@@ -237,10 +142,11 @@ class AixLib(object):
         for zone_count in self.parent.thermal_zones:
             t_set_heat.append(zone_count.use_conditions.set_temp_heat)
 
-        scipy.io.savemat(path,
-                         mdict={'Tset': [t_set_heat]},
-                         appendmat=False,
-                         format='4')
+        scipy.io.savemat(
+            path,
+            mdict={'Tset': [t_set_heat]},
+            appendmat=False,
+            format='4')
 
     def modelica_AHU_boundary(self, time_line=None, path=None):
         """creates .mat file for AHU boundary conditions (building)
@@ -275,11 +181,11 @@ class AixLib(object):
         """
 
         if path is None:
-            path = utilitis.get_default_path()
+            path = utilities.get_default_path()
         else:
             pass
 
-        utilitis.create_path(path)
+        utilities.create_path(path)
         path = os.path.join(path, self.file_ahu)
 
         if time_line is None:
@@ -322,14 +228,16 @@ class AixLib(object):
 
         ahu_boundary = np.array(time_line)
 
-        scipy.io.savemat(path,
-                         mdict={'AHU': ahu_boundary},
-                         appendmat=False,
-                         format='4')
+        scipy.io.savemat(
+            path,
+            mdict={'AHU': ahu_boundary},
+            appendmat=False,
+            format='4')
 
-    def modelica_gains_boundary(self,
-                                time_line=None,
-                                path=None):
+    def modelica_gains_boundary(
+            self,
+            time_line=None,
+            path=None):
         """creates .mat file for internal gains boundary conditions
 
         This function creates a matfile (-v4) for building internal gains
@@ -356,11 +264,11 @@ class AixLib(object):
         """
 
         if path is None:
-            path = utilitis.get_default_path()
+            path = utilities.get_default_path()
         else:
             pass
 
-        utilitis.create_path(path)
+        utilities.create_path(path)
         path = os.path.join(path, self.file_internal_gains)
 
         for zone_count in self.parent.thermal_zones:
@@ -393,7 +301,8 @@ class AixLib(object):
 
         internal_boundary = np.array(time_line)
 
-        scipy.io.savemat(path,
-                         mdict={'Internals': internal_boundary},
-                         appendmat=False,
-                         format='4')
+        scipy.io.savemat(
+            path,
+            mdict={'Internals': internal_boundary},
+            appendmat=False,
+            format='4')

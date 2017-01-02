@@ -14,16 +14,18 @@ import teaser.logic.utilities as utilities
 
 
 def export_multizone(buildings, prj, path=None):
-    """Exports values to a model file for library AixLib
+    """Exports models for AixLib library
 
     Exports a building for
     AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
     using the ThermalZoneEquipped and supporting models, like tables and weather
-    model. By default it uses the correction for solar glazing (corG) and
-    decoupled heat conduction through windows (merge_windows=False). In
-    contrast to versions < 0.5 TEASER now does not support any other model
-    options, as we observed no need, since single ThermalZones are identical
-    with Annex60 models. If you miss one of the old options please contact us.
+    model. Depending on chosen calculation method the parameter set to 1,2,
+    3 or 4 element model. By default it uses the  correction for solar
+    glazing (corG) and decoupled heat conduction through windows (
+    merge_windows=False). In contrast to versions < 0.5 TEASER now does not
+    support any other model options, as we observed no need, since single
+    ThermalZones are identical with Annex60 models. If you miss one of the
+    old options please contact us.
 
     This function uses Mako Templates specified in
     data.output.modelicatemplates.AixLib
@@ -48,7 +50,7 @@ def export_multizone(buildings, prj, path=None):
     lookup : TemplateLookup object
         Instance of mako.TemplateLookup to store general functions for templates
     zone_template_2 : Template object
-        Template for ThermalZoneRecord
+        Template for ThermalZoneRecord using 2 element model
     model_template : Template object
         Template for MultiZone model
     """
@@ -65,8 +67,9 @@ def export_multizone(buildings, prj, path=None):
             "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
         lookup=lookup)
 
-    uses = ['Modelica(version="' + prj.modelica_info.version + '")',
-            'AixLib(version="' + prj.buildings[-1].library_attr.version + '")']
+    uses = [
+        'Modelica(version="' + prj.modelica_info.version + '")',
+        'AixLib(version="' + prj.buildings[-1].library_attr.version + '")']
     _help_package(
         path=path,
         name=prj.name,
@@ -82,9 +85,9 @@ def export_multizone(buildings, prj, path=None):
 
         bldg_path = os.path.join(path, bldg.name)
         utilities.create_path(utilities.get_full_path(bldg_path))
-        utilities.create_path(utilities.get_full_path
-                              (os.path.join(bldg_path,
-                                            bldg.name + "_DataBase")))
+        utilities.create_path(utilities.get_full_path(
+            os.path.join(bldg_path,
+            bldg.name + "_DataBase")))
         bldg.library_attr.modelica_set_temp(path=bldg_path)
         bldg.library_attr.modelica_AHU_boundary(
             time_line=None,

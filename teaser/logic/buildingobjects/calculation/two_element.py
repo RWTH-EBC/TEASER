@@ -206,7 +206,12 @@ class TwoElement(object):
         and tilt divided by ua_value_win or ua_value_win+ua_value_ow,
         depending if windows is lumped/merged into the walls or not)
     window_areas : list of floats [m2]
-        Area of all windows in one list.
+        Area of all windows in one list, if the windows are merged into the
+        outer wall this list will be full of zeros
+    transparent_areas : list of floats [m2]
+        Area of all transparent elements (most likely windows) in one list,
+        this list will be always filled with the areas, independent if
+        windows are merged into walls or not.
     solar_absorp_win : float
         Area-weighted solar absorption for windows. (typically 0.0)
     ir_emissivity_win : float
@@ -360,6 +365,7 @@ class TwoElement(object):
         # Additional attributes
         self.weightfactor_win = []
         self.window_areas = []
+        self.transparent_areas = []
         self.g_sunblind = []
         self.weighted_g_value = 0.0
 
@@ -863,7 +869,7 @@ class TwoElement(object):
                           "to RunTimeErrors")
 
     def _calc_wf(self):
-        """Weightfactors for outer elements(walls, roof, grounfloor, windows)
+        """Weightfactors for outer elements(walls, roof, ground floor, windows)
 
         Calculates the weightfactors of the outer walls, including ground and
         windows.
@@ -989,13 +995,19 @@ class TwoElement(object):
                 self.weightfactor_win.append(0.0)
                 self.g_sunblind.append(0.0)
                 self.window_areas.append(0.0)
+                self.transparent_areas.append(0.0)
             else:
                 self.weightfactor_win.append(
                     sum([win.wf_out for win in win]))
                 self.g_sunblind.append(
                     sum([win.shading_g_total for win in win]))
-                self.window_areas.append(
-                    sum([win.area for win in win]))
+                if self.merge_windows is False:
+                    self.window_areas.append(
+                        sum([win.area for win in win]))
+                else:
+                    self.window_areas.append(0)
+                    self.transparent_areas.append(
+                        sum([win.area for win in win]))
 
     def _calc_heat_load(self):
         """Static heat load calculation

@@ -4,14 +4,18 @@
 """This module includes Annex60 calcuation class
 """
 
+import scipy.io
+import teaser.logic.utilities as utilities
+import numpy as np
 import warnings
-
+import os
 
 class Annex60(object):
     """Annex60 Class
 
     This class holds functions to sort and partly rewrite zone and building
-    attributes specific for Annex60.
+    attributes specific for Annex60 simulation. This includes the export of
+    boundary coniditons.
 
     Parameters
     ----------
@@ -19,164 +23,129 @@ class Annex60(object):
     parent: Building()
         The parent class of this object, the Building the attributes are
         calculated for. (default: None)
+    consider_heat_capacity : bool
+        decides whether air capacity is considered or not for all thermal
+        zones in the building
 
     """
 
     def __init__(self, parent):
 
         self.parent = parent
-
-    def compare_orientation(self, number_of_elements=2):
-        """Compares orientation of walls of all zones and sorts them
-
-        Fills the weightfactors of every zone according to orientation and
-        tilt of all zones of the buildings. Therefore it compares orientation
-        and tilt of all outer building elements and then creates lists for zone
-        weightfactors, orientation, tilt, ares and sunblinds.
-
-        Parameters
-        ----------
-        number_of_elements: int()
-            The number of elements calculated, default is 2
-        """
-
-        orient_tilt_help = []
-        orient_tilt_help2 = []
-        self.parent.orientation_bldg = []
-        self.parent.tilt_bldg = []
-
-        for zone in self.parent.thermal_zones:
-            for wall in zone.outer_walls:
-                if wall.orientation >= 0.0:
-                    orient_tilt_help.append((wall.orientation, wall.tilt))
-                else:
-                    warnings.warn("OuterWalls should not have orientation "
-                                  "below zero")
-            for roof in zone.rooftops:
-                if roof.orientation >= -1.0:
-                    orient_tilt_help.append((roof.orientation, roof.tilt))
-                else:
-                    warnings.warn("Rooftops should have orientation -1 for "
-                                  "flat roofs or >= 0.0 for pitched roofs")
-            for win in zone.windows:
-                if win.orientation >= -1.0:
-                    orient_tilt_help.append((win.orientation, win.tilt))
-                else:
-                    warnings.warn("Windows should have orientation -1 for "
-                                  "windows in flat roofs or >= 0.0")
-
-            for i in orient_tilt_help:
-                if i in orient_tilt_help2:
-                    pass
-                else:
-                    orient_tilt_help2.append(i)
-
-            orient_tilt_help2.sort(key=lambda x: x[0])
-
-            if orient_tilt_help2[0][0] == -1:
-                orient_tilt_help2.insert(
-                    len(orient_tilt_help2), orient_tilt_help2.pop(0))
-
-            for i in orient_tilt_help2:
-                self.parent.orientation_bldg.append(i[0])
-                self.parent.tilt_bldg.append(i[1])
-
-            self._compare_zone(
-                thermal_zone=zone,
-                orient_tilt=orient_tilt_help2,
-                number_of_elements=number_of_elements)
-
-            if number_of_elements == 1:
-
-                ground_floors = zone.find_gfs(-2, 0)
-                if not ground_floors:
-                    zone.model_attr.weightfactor_ground.append(0.0)
-                else:
-                    zone.model_attr.weightfactor_ground.append(
-                        sum([groundfl.wf_out for groundfl in ground_floors]))
-
-            elif number_of_elements == 2:
-
-                ground_floors = zone.find_gfs(-2, 0)
-                if not ground_floors:
-                    zone.model_attr.weightfactor_ground.append(0.0)
-                else:
-                    zone.model_attr.weightfactor_ground.append(
-                        sum([groundfl.wf_out for groundfl in ground_floors]))
-
-            elif number_of_elements == 3:
-
-                zone.model_attr.weightfactor_ground.append(0.0)
-
-            elif number_of_elements == 4:
-
-                zone.model_attr.weightfactor_ground.append(0.0)
-
-                rt = zone.model_attr.find_rts(i[0], i[1])
-                if rt:
-                    zone.orientation_rt.append(i[0])
-                    zone.tilt_rt.append(i[1])
-                    [zone.weightfactor_rt.append(x.wf_out) for x in rt]
+        self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
+        self.version = "0.1"
+        self.consider_heat_capacity = True
 
     @staticmethod
-    def _compare_zone(
-            thermal_zone,
-            orient_tilt,
-            number_of_elements):
-        """Compare helper function for orientation and tilt in zone
+    def create_profile(duration_profile=86400, time_step=3600):
+        """Creates a profile for building boundary conditions
 
-        compares and sorts thermal zone attributes for annex
-        models. Helper function!
+        This function creates a list with an equidistant profile given the
+        duration of the profile in seconds (default one day, 86400 s) and the
+        time_step in seconds (default one hour, 3600 s). Needed for boundary
+        input of the building for Modelica simulation
+
+        Note
+        -----
+        As Python starts from counting the range from zero, but Modelica needs
+        0 as start value and additional 24 entries. We add one iteration
+        step in the profile.
 
         Parameters
         ----------
+        duration_profile : int
+            duration of the profile in seconds (default one day, 86400 s)
+        time_step : int
+            time step used in the profile in seconds (default one hour, 3600 s)
 
-        thermal_zone : ThermalZone instance
-            Instance of current thermal zone
-        orient_tilt : list
-            orientation and tilt of current thermal zone [(orientation,tilt)]
-        number_of_elements: int()
-            The number of elements calculated
+        Returns
+        ---------
+        time_line : [[int]]
+            list of time steps as preparation for the output of boundary
+            conditions
+        """
+        ass_error_1 = "duration must be a multiple of time_step"
+
+        assert float(duration_profile / time_step).is_integer(), ass_error_1
+
+        time_line = []
+
+        for i in range(int(duration_profile / time_step) + 1):
+            time_line.append([i * time_step])
+        return time_line
+
+    def modelica_gains_boundary(
+            self,
+            time_line=None,
+            path=None):
+        """creates .mat file for internal gains boundary conditions
+
+        This function creates a matfile (-v4) for building internal gains
+        boundary conditions. It collects all internal gain profiles of the
+        zones and stores them into one file. The file is extended for each
+        zone. Only applicable if zones are defined
+
+        1. Column : time step
+        2,5,8,...  Column : profile_persons
+        3,6,9,...  Column : profile_machines
+        4,7,10,... Column : profile_lighting
+
+        Note
+        ----------
+        When time line is created, we need to add a 0 to first element of
+        all boundaries. This is due to to expected format in Modelica.
+
+        Parameters
+        ----------
+        time_line :[[int]]
+            list of time steps
+        path : str
+            optional path, when matfile is exported seperately
         """
 
-        for i in orient_tilt:
-            if number_of_elements in [1, 2,     3]:
-                walls = thermal_zone.model_attr.find_walls(i[0], i[1]) + \
-                        thermal_zone.model_attr.find_rts(i[0], i[1])
-            elif number_of_elements == 4:
-                walls = thermal_zone.model_attr.find_walls(i[0], i[1])
+        # TODO: calculate from relative to absolut W and pass over exact zone
+
+        if path is None:
+            path = utilities.get_default_path()
+        else:
+            pass
+
+        utilities.create_path(path)
+        path = os.path.join(path, self.file_internal_gains)
+
+        zone_count = self.parent.thermal_zones[-1]
+        if time_line is None:
+            duration = len(zone_count.use_conditions.profile_persons) * \
+                        3600
+            time_line = self.create_profile(duration_profile=duration)
+
+        ass_error_1 = "time line and input have to have the same length"
+
+        assert len(time_line)-1 == len(
+            zone_count.use_conditions.profile_persons), \
+            (ass_error_1 + ",profile_persons")
+        assert len(time_line)-1 == len(
+            zone_count.use_conditions.profile_machines), \
+            (ass_error_1 + ",profile_machines")
+        assert len(time_line)-1 == len(
+            zone_count.use_conditions.profile_lighting), \
+            (ass_error_1 + ",profile_lighting")
+
+        for i, time in enumerate(time_line):
+            if i == 0:
+                time.append(0)
+                time.append(0)
+                time.append(0)
             else:
-                walls = []
+                time.append(zone_count.use_conditions.profile_persons[i-1])
+                time.append(zone_count.use_conditions.profile_machines[i-1])
+                time.append(zone_count.use_conditions.profile_lighting[i-1])
 
-            wins = thermal_zone.model_attr.find_wins(i[0], i[1])
+        internal_boundary = np.array(time_line)
 
-            if not walls and wins:
-                thermal_zone.model_attr.weightfactor_ow.append(0.0)
-                thermal_zone.model_attr.outer_walls_areas.append(0.0)
-                thermal_zone.model_attr.tilt_wall.append(i[1])
-                thermal_zone.model_attr.orientation_wall.append(i[0])
-            elif walls:
-                thermal_zone.model_attr.weightfactor_ow.append(
-                    sum([wall.wf_out for wall in walls]))
-                [thermal_zone.model_attr.outer_walls_areas.append(x.area) for
-                 x in walls]
-                thermal_zone.model_attr.tilt_wall.append(i[1])
-                thermal_zone.model_attr.orientation_wall.append(i[0])
-            elif wins:
-                thermal_zone.model_attr.weightfactor_win.append(
-                    sum([win.wf_out for win in wins]))
-                thermal_zone.model_attr.window_area_list.append(
-                    sum([win.area for win in wins]))
-                thermal_zone.model_attr.g_sunblind_list.append(
-                    sum([win.shading_g_total for win in wins]))
-                [thermal_zone.model_attr.window_areas.append(x.area) for
-                 x in wins]
-                thermal_zone.model_attr.tilt_win.append(i[1])
-                thermal_zone.model_attr.orientation_win.append(i[0])
-            elif not wins and walls:
-                thermal_zone.model_attr.weightfactor_win.append(0.0)
-                thermal_zone.model_attr.window_area_list.append(0.0)
-                thermal_zone.model_attr.g_sunblind_list.append(0.0)
-                thermal_zone.model_attr.window_areas.append(0.0)
-                thermal_zone.model_attr.tilt_win.append(i[1])
-                thermal_zone.model_attr.orientation_win.append(i[0])
+        scipy.io.savemat(
+            path,
+            mdict={'Internals': internal_boundary},
+            appendmat=False,
+            format='4')
+

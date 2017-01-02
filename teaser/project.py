@@ -1001,9 +1001,10 @@ class Project(object):
                 else:
                     pass
 
-    def export_annex(self,
-                     internal_id=None,
-                     path=None):
+    def export_annex(
+            self,
+            internal_id=None,
+            path=None):
         """Exports values to a record file for Modelica simulation
 
         For Annex 60 Library
@@ -1026,12 +1027,21 @@ class Project(object):
 
         utilities.create_path(path)
 
-        annex60_output.export_annex60(
-            prj=self,
-            number_of_elements=self.number_of_elements_calc,
-            merge_windows=self.merge_windows_calc,
-            internal_id=internal_id,
-            path=path)
+        if internal_id is None:
+            annex60_output.export_annex60(
+                buildings=self.buildings,
+                prj=self,
+                path=path)
+        else:
+            for bldg in self.buildings:
+                if bldg.internal_id == internal_id:
+                    annex60_output.export_annex60(
+                        buildings=[bldg],
+                        prj=self,
+                        path=path)
+                else:
+                    pass
+
 
     def export_parameters_txt(self, path=None):
         """Exports parameters of all buildings in a readable text file

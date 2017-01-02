@@ -55,7 +55,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     aziExtWalls = ${get_list(deg_to_rad(zone.model_attr.orientation_wall))},
     wfWall = ${get_list(zone.model_attr.weightfactor_ow)},
     wfWin = ${get_list(zone.model_attr.weightfactor_win)},
-    wfGro = ${get_list(zone.model_attr.weightfactor_ground)},
+    wfGro = ${zone.model_attr.weightfactor_ground)},
     nrPeople = ${zone.use_conditions.persons},
     ratioConvectiveHeatPeople = ${zone.use_conditions.ratio_conv_rad_persons},
     nrPeopleMachines = ${zone.use_conditions.machines},
