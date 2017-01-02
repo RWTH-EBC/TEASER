@@ -47,8 +47,6 @@ class AixLib(object):
     consider_heat_capacity : bool
         decides whether air capacity is considered or not for all thermal
         zones in the building
-
-
     """
 
     def __init__(self, parent):

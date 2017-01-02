@@ -776,11 +776,10 @@ class TwoElement(object):
                 self.r1_win = (1 / sum((1 / win.r1) for
                                        win in self.thermal_zone.windows))
 
-                conduction = (1 / sum((1/element.r_conduc) for element in
-                               outer_walls))
+                conduction = (1 / sum((1 / element.r_conduc) for element in
+                                      outer_walls))
 
                 self.r_rest_ow = (conduction - self.r1_ow)
-
 
             except RuntimeError:
                 print("As no outer walls or no windows are defined lumped "

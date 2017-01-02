@@ -24,7 +24,7 @@ class ModelicaInfo():
         Use of Equidistant time grid flag in Modelica.
     variables_at_events : bool
         Use of events flag in Modelica.
-    modelica_version : str
+    version : str
         Version of Modelica and Modelica Standard Library
     """
 
@@ -39,4 +39,4 @@ class ModelicaInfo():
         self.current_solver = "Radau"
         self.equidistant_output = True
         self.results_at_events = False
-        self.modelica_Version = "3.2.2"
+        self.version = "3.2.2"

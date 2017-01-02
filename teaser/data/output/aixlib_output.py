@@ -13,7 +13,7 @@ from mako.lookup import TemplateLookup
 import teaser.logic.utilities as utilities
 
 
-def export_multizone(buildings, path=None):
+def export_multizone(buildings, prj, path=None):
     """Exports values to a model file for library AixLib
 
     Exports a building for
@@ -35,6 +35,9 @@ def export_multizone(buildings, path=None):
         list of TEASER instances of a Building that is exported to a AixLib
         MultizoneEquipped models. If you want to export a single building,
         please pass it over as a list containing only that building.
+    prj : instance of Project
+        Instance of TEASER Project object to access Project related
+        information, e.g. name or version of used libraries
     path : string
         if the Files should not be stored in default output path of TEASER,
         an alternative path can be specified as a full path
@@ -60,6 +63,19 @@ def export_multizone(buildings, path=None):
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
         lookup=lookup)
+
+    uses = ['Modelica(version="' + prj.modelica_info.version + '")',
+            'AixLib(version="' + prj.buildings[-1].library_attr.version + '")']
+    _help_package(
+        path=path,
+        name=prj.name,
+        uses=uses,
+        within=None)
+    _help_package_order(
+        path=path,
+        package_list=buildings,
+        addition=None,
+        extra=None)
 
     for i, bldg in enumerate(buildings):
 
@@ -104,14 +120,25 @@ def export_multizone(buildings, path=None):
             modelica_info=bldg.parent.modelica_info))
         out_file.close()
 
+        zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
+
         for zone in bldg.thermal_zones:
-            zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
             out_file = open(utilities.get_full_path(os.path.join(
                 zone_path, bldg.name + '_' + zone.name + '.mo')), 'w')
 
             out_file.write(zone_template.render_unicode(zone=zone))
             out_file.close()
+
+        _help_package(
+            path=zone_path,
+            name=bldg.name + '_DataBase',
+            within=prj.name + '.' + bldg.name)
+        _help_package_order(
+            path=zone_path,
+            package_list=bldg.thermal_zones,
+            addition=bldg.name + "_",
+            extra=None)
 
     print("Exports can be found here:")
     print(path)
@@ -137,10 +164,11 @@ def _help_package(path, name, uses=None, within=None):
     package_template = Template(filename=utilities.get_full_path
     ("data/output/modelicatemplate/package"))
     out_file = open(
-        utilities.get_full_path(path + "/" + "package" + ".mo"), 'w')
-    out_file.write(package_template.render_unicode(name=name,
-                                                   within=within,
-                                                   uses=uses))
+        utilities.get_full_path(os.path.join(path, "package.mo")), 'w')
+    out_file.write(package_template.render_unicode(
+        name=name,
+        within=within,
+        uses=uses))
     out_file.close()
 
 
