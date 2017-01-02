@@ -51,7 +51,7 @@ class EST2(EST1a):
 
     def __init__(self,
                  parent,
-                 name,
+                 name=None,
                  year_of_construction=None,
                  number_of_floors=None,
                  height_of_floors=None,

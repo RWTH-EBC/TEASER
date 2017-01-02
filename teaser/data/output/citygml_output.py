@@ -1,5 +1,5 @@
 # Created October 2015
-# TEASER 4 Development Team
+# TEASER Development Team
 
 """CityGML
 

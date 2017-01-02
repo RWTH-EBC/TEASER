@@ -10,7 +10,8 @@ class Institute8(Office):
 
     """
 
-    def __init__(self, parent=None,
+    def __init__(self,
+                 parent,
                  name=None,
                  year_of_construction=None,
                  number_of_floors=None,

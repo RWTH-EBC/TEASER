@@ -104,11 +104,11 @@ class EST1a(Residential):
     def __init__(
             self,
             parent,
-            name,
-            year_of_construction,
-            number_of_floors,
-            height_of_floors,
-            net_leased_area,
+            name=None,
+            year_of_construction=None,
+            number_of_floors=None,
+            height_of_floors=None,
+            net_leased_area=None,
             with_ahu=False,
             neighbour_buildings=None,
             construction_type=None):
