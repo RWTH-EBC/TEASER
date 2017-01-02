@@ -56,9 +56,10 @@ model ${zone.parent.name}_${zone.name}
     nOrientations=${zone.model_attr.n_outer},
     AWin=${get_list(zone.model_attr.window_areas)},
     ATransparent=${get_list(zone.model_attr.transparent_areas)},
-    AExt=${get_list(zone.model_attr.outer_wall_areas)}) "Thermal zone"
+    AExt=${get_list(zone.model_attr.facade_areas)})
+    "Thermal zone"
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
-% if merge_windows is True:
+% if zone.model_attr.merge_windows is True:
   Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
     n=${zone.model_attr.n_outer},
     wfGro=${zone.model_attr.weightfactor_ground},
@@ -90,7 +91,7 @@ model ${zone.parent.name}_${zone.name}
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,-6},{20,6}})));
-% if merge_windows is False:
+% if zone.model_attr.merge_windows is False:
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature1
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,14},{20,26}})));
@@ -115,7 +116,7 @@ model ${zone.parent.name}_${zone.name}
     extent={{-4,-4},{4,4}},
     rotation=90,
     origin={30,-16})));
-% if merge_windows is False:
+% if zone.model_attr.merge_windows is False:
   Modelica.Blocks.Sources.Constant alphaWin(k=${zone.model_attr.alpha_comb_outer_win}*${zone.model_attr.area_win})
     "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(
@@ -143,7 +144,7 @@ model ${zone.parent.name}_${zone.name}
       "Table with profiles for persons (radiative and convective) and machines (convective)"
       annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
 equation
-% if merge_windows is False:
+% if zone.model_attr.merge_windows is False:
   connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
     annotation (Line(
     points={{-3,-0.2},{0,-0.2},{0,20},{6.8,20}},   color={0,0,127}));
@@ -214,7 +215,7 @@ equation
     annotation (Line(
     points={{68,-32},{84,-32},{100,-32},{100,24},{92.2,24}},
     color={191,0,0}));
-% if merge_windows is False:
+% if zone.model_attr.merge_windows is False:
   connect(thermalConductorWin.solid, thermalZoneTwoElements.window)
     annotation (
      Line(points={{38,21},{40,21},{40,20},{43.8,20}}, color={191,0,0}));
@@ -228,7 +229,7 @@ equation
     annotation (Line(points={{26,1},{24,1},{24,0},{20,0}}, color={191,0,0}));
   connect(alphaWall.y, thermalConductorWall.Gc)
     annotation (Line(points={{30,-11.6},{30,-4},{31,-4}}, color={0,0,127}));
-% if merge_windows is False:
+% if zone.model_attr.merge_windows is False:
   connect(alphaWin.y, thermalConductorWin.Gc)
     annotation (Line(points={{32,33.6},{32,26},{33,26}}, color={0,0,127}));
 % endif

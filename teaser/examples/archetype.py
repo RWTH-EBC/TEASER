@@ -82,10 +82,18 @@ def example_type_building():
 
     '''Or we use Annex60 method (e.g with four elements). Which exports one
     Model per zone'''
-
+    prj.name = "projectfalse"
     prj.used_library_calc = 'Annex60'
     prj.number_of_elements_calc = 2
     prj.merge_windows_calc = False
+
+    prj.calc_all_buildings()
+    prj.export_annex()
+
+    prj.name = "projecttrue"
+    prj.used_library_calc = 'Annex60'
+    prj.number_of_elements_calc = 2
+    prj.merge_windows_calc = True
 
     prj.calc_all_buildings()
     prj.export_annex()

@@ -224,10 +224,9 @@ class TwoElement(object):
 
     Zone specific values:
 
-    heat_load : [W]
-        Static heat load of the thermal zone.
 
-    Mean values:
+
+    Misc values:
 
     alpha_rad_inner_mean : float [W/(m2K)]
         Area-weighted radiative coefficient of all surfaces facing the
@@ -235,6 +234,12 @@ class TwoElement(object):
     alpha_rad_outer_mean : float [W/(m2K)]
         Area-weighted radiative coefficient of all surfaces facing the
         ambient (OuterWalls, Windows, ...).
+    heat_load : [W]
+        Static heat load of the thermal zone.
+    facade_areas : list of floats [m2]
+        List containing the area of each facade (with same tilt and
+        orientation) this includes also roofs and ground floors and windows.
+
 
 
     Returns
@@ -369,13 +374,13 @@ class TwoElement(object):
         self.g_sunblind = []
         self.weighted_g_value = 0.0
 
-        self.heat_load = 0.0
-        self.cool_load = 0.0
-
-        # Mean values
+        # Misc values
 
         self.alpha_rad_inner_mean = 0.0
         self.n_outer = 0
+        self.facade_areas = []
+        self.heat_load = 0.0
+        self.cool_load = 0.0
 
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
@@ -973,12 +978,20 @@ class TwoElement(object):
                 self.thermal_zone.find_walls(i[0], i[1]) + \
                 self.thermal_zone.find_rts(i[0], i[1])
             win = self.thermal_zone.find_wins(i[0], i[1])
+            gf = self.thermal_zone.find_gfs(i[0], i[1])
+            
+            if self.merge_windows is True:
+                self.facade_areas.append(sum([element.area for element in (
+                    wall_rt + win + gf)]))
+            else:
+                self.facade_areas.append(sum([element.area for element in (
+                    wall_rt + gf)]))
 
             self.orientation_wall.append(i[0])
             self.tilt_wall.append(i[1])
 
             if not wall_rt:
-                gf = self.thermal_zone.find_gfs(i[0], i[1])
+
                 if not gf:
                     self.weightfactor_ow.append(0.0)
                     self.outer_wall_areas.append(0.0)
@@ -991,6 +1004,7 @@ class TwoElement(object):
                     sum([wall.wf_out for wall in wall_rt]))
                 self.outer_wall_areas.append(sum([wall.area for wall in
                                                   wall_rt]))
+
             if not win:
                 self.weightfactor_win.append(0.0)
                 self.g_sunblind.append(0.0)
@@ -1007,6 +1021,7 @@ class TwoElement(object):
                         sum([win.area for win in win]))
                     self.transparent_areas.append(
                         sum([win.area for win in win]))
+
                 else:
                     self.window_areas.append(0)
                     self.transparent_areas.append(
