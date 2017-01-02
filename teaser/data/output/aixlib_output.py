@@ -18,12 +18,12 @@ def export_multizone(buildings, prj, path=None):
 
     Exports a building for
     AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
-    using the ThermalZoneEquipped model with a correction of g-value (
-    double pane glazing) and supporting models, like tables and weather
-    model. In contrast to versions < 0.5 TEASER now does not
-    support any model options, as we observed no need, since single
-    ThermalZones are identically with Annex60 models. If you miss one of
-    the old options please contact us.
+    using the ThermalZoneEquipped and supporting models, like tables and weather
+    model. By default it uses the correction for solar glazing (corG) and
+    decoupled heat conduction through windows (merge_windows=False). In
+    contrast to versions < 0.5 TEASER now does not support any other model
+    options, as we observed no need, since single ThermalZones are identical
+    with Annex60 models. If you miss one of the old options please contact us.
 
     This function uses Mako Templates specified in
     data.output.modelicatemplates.AixLib
@@ -50,7 +50,7 @@ def export_multizone(buildings, prj, path=None):
     zone_template : Template object
         Template for ThermalZoneRecord
     model_template : Template object
-        Tempalte for MultiZone model
+        Template for MultiZone model
     """
 
     lookup = TemplateLookup(directories=[utilities.get_full_path(
@@ -145,7 +145,7 @@ def export_multizone(buildings, prj, path=None):
 
 
 def _help_package(path, name, uses=None, within=None):
-    '''creates a package.mo file
+    """creates a package.mo file
 
     private function, do not call
 
@@ -159,10 +159,10 @@ def _help_package(path, name, uses=None, within=None):
     within : string
         path of Modelica package containing this package
 
-    '''
+    """
 
-    package_template = Template(filename=utilities.get_full_path
-    ("data/output/modelicatemplate/package"))
+    package_template = Template(filename=utilities.get_full_path(
+        "data/output/modelicatemplate/package"))
     out_file = open(
         utilities.get_full_path(os.path.join(path, "package.mo")), 'w')
     out_file.write(package_template.render_unicode(
@@ -173,7 +173,7 @@ def _help_package(path, name, uses=None, within=None):
 
 
 def _help_package_order(path, package_list, addition=None, extra=None):
-    '''creates a package.order file
+    """creates a package.order file
 
     private function, do not call
 
@@ -191,9 +191,10 @@ def _help_package_order(path, package_list, addition=None, extra=None):
         an extra package or model not contained in package_list can be
         specified
 
-    '''
-    order_template = Template(filename=utilities.get_full_path
-    ("data/output/modelicatemplate/package_order"))
+    """
+
+    order_template = Template(filename=utilities.get_full_path(
+        "data/output/modelicatemplate/package_order"))
 
     out_file = open(
         utilities.get_full_path(path + "/" + "package" + ".order"), 'w')
