@@ -47,7 +47,7 @@ def export_multizone(buildings, prj, path=None):
 
     lookup : TemplateLookup object
         Instance of mako.TemplateLookup to store general functions for templates
-    zone_template : Template object
+    zone_template_2 : Template object
         Template for ThermalZoneRecord
     model_template : Template object
         Template for MultiZone model
@@ -55,9 +55,10 @@ def export_multizone(buildings, prj, path=None):
 
     lookup = TemplateLookup(directories=[utilities.get_full_path(
         "data/output/modelicatemplate/")])
-    zone_template = Template(
+    zone_template_2 = Template(
         filename=utilities.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_ThermalZoneRecord"),
+            "data/output/modelicatemplate/AixLib"
+            "/AixLib_ThermalZoneRecord_TwoElement"),
         lookup=lookup)
     model_template = Template(
         filename=utilities.get_full_path(
@@ -126,8 +127,15 @@ def export_multizone(buildings, prj, path=None):
 
             out_file = open(utilities.get_full_path(os.path.join(
                 zone_path, bldg.name + '_' + zone.name + '.mo')), 'w')
+            if type(zone.model_attr).__name__ == "OneElement":
+                pass
+            elif type(zone.model_attr).__name__ == "TwoElement":
+                out_file.write(zone_template_2.render_unicode(zone=zone))
+            elif type(zone.model_attr).__name__ == "ThreeElement":
+                pass
+            elif type(zone.model_attr).__name__ == "FourElement":
+                pass
 
-            out_file.write(zone_template.render_unicode(zone=zone))
             out_file.close()
 
         _help_package(
