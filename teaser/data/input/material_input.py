@@ -8,7 +8,7 @@ This module contains function to load material classes
 
 
 def load_material(material, mat_name, data_class):
-    '''Material loader.
+    """Material loader.
 
     Loads Material specified in the XML.
 
@@ -25,7 +25,7 @@ def load_material(material, mat_name, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-    '''
+    """
 
     binding = data_class.material_bind
 
