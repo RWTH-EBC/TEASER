@@ -68,7 +68,8 @@ class TwoElement(object):
         Sum of combined resistances for all interior walls facing the
         inside of this thermal zone
     r1_iw : float [K/W]
-        Lumped resistance of interior walls
+        Lumped resistance of interior walls no heat transfer coefficients for
+        convection and radiation are accounted in this resistance.
     c1_iw : float [J/K]
         Lumped capacity of interior walls
 
@@ -118,9 +119,12 @@ class TwoElement(object):
         Sum of combined resistances for all outer walls facing the
         ambient.
     r1_ow : float [K/W]
-        Lumped resistance of outer walls.
+        Lumped resistance of outer walls no heat transfer coefficients for
+        convection and radiation are accounted in this resistance.
     r_rest_ow : float [K/W]
-        Lumped remaining resistance of outer walls between r1_ow and c1_ow.
+        Lumped remaining resistance of outer walls between r1_ow and c1_ow no
+        heat transfer coefficients for convection and radiation are accounted
+        in this resistance.
     c1_ow : float [J/K]
         Lumped capacity of outer walls.
     weightfactor_ow : list of floats
@@ -137,7 +141,7 @@ class TwoElement(object):
         90 - East
         180 - South
         270 - West
-    outer_walls_areas : list of floats [m2]
+    outer_wall_areas : list of floats [m2]
         Area of all outer walls in one list.
     r_rad_ow_iw : float [K/W]
         Resistance for radiative heat transfer between walls.
@@ -195,7 +199,8 @@ class TwoElement(object):
         Sum of combined resistances for all windows facing the
         ambient.
     r1_win : float [K/W]
-        Lumped resistance of windows.
+        Lumped resistance of windows, no heat transfer coefficients for
+        convection and radiation are accounted in this resistance.
     weightfactor_win : list of floats
         Weightfactors of windows (UA-Value of windows with same orientation
         and tilt divided by ua_value_win or ua_value_win+ua_value_ow,
@@ -313,7 +318,7 @@ class TwoElement(object):
         self.weightfactor_ground = 0.0
         self.tilt_wall = []
         self.orientation_wall = []
-        self.outer_walls_areas = []
+        self.outer_wall_areas = []
 
         # TODO: check this value
         self.r_rad_ow_iw = 0.0
@@ -764,15 +769,20 @@ class TwoElement(object):
 
         if self.merge_windows is False:
             try:
-                self.r1_win = (1 / sum((1 / (win.r1 + win.r_outer_comb)) for
+
+                # self.r1_win = (1 / sum((1 / (win.r1 + win.r_outer_comb)) for
+                #                        win in self.thermal_zone.windows))
+                # TODO check if this is equivalent to old tempalte R_zero?
+                self.r1_win = (1 / sum((1 / win.r1) for
                                        win in self.thermal_zone.windows))
 
                 self.r_total_ow = 1 / self.ua_value_ow
-                # TODO check this value (does it needs to be class variable?)
-                self.r_rad_ow_iw = 1 / (1 / self.r_rad_inner_ow)
 
+                # TODO check if this is equivalent to old tempalte R_zero?
                 self.r_rest_ow = (self.r_total_ow - self.r1_ow - (
-                    1 / (1 / self.r_conv_inner_ow + 1 / self.r_rad_ow_iw)))
+                    1 / (1 / self.r_conv_inner_ow + 1 / self.r_rad_inner_ow))
+                    - (1 / (1 / self.r_conv_outer_ow + 1 /
+                            self.r_rad_outer_ow)))
 
             except RuntimeError:
                 print("As no outer walls or no windows are defined lumped "
@@ -912,9 +922,9 @@ class TwoElement(object):
                                      self.area_win * self.alpha_rad_inner_win +
                                      self.area_iw * self.alpha_rad_inner_iw) \
                                     / (self.area_ow + self.area_win +
-                                       self.area_win)
-        self.alpha_rad_outer_mean = (self.area_ow * self.alpha_rad_inner_ow +
-                                     self.area_win * self.alpha_rad_inner_win) \
+                                       self.area_iw)
+        self.alpha_rad_outer_mean = (self.area_ow * self.alpha_rad_outer_ow +
+                                     self.area_win * self.alpha_rad_outer_win) \
                                     / (self.area_ow + self.area_win)
 
     def _calc_number_of_elements(self):
@@ -954,6 +964,7 @@ class TwoElement(object):
         for element in outer_elements:
             tilt_orient.append((element.orientation, element.tilt))
         tilt_orient = list(set(tilt_orient))
+
         for i in tilt_orient:
             wall_rt = \
                 self.thermal_zone.find_walls(i[0], i[1]) + \
@@ -964,13 +975,19 @@ class TwoElement(object):
             self.tilt_wall.append(i[1])
 
             if not wall_rt:
-                self.weightfactor_ow.append(0.0)
-                self.outer_walls_areas.append(0.0)
+                gf = self.thermal_zone.find_gfs(i[0], i[1])
+                if not gf:
+                    self.weightfactor_ow.append(0.0)
+                    self.outer_wall_areas.append(0.0)
+                else:
+                    self.weightfactor_ow.append(0.0)
+                    self.outer_wall_areas.append((sum([element.area for element
+                                                       in gf])))
             else:
                 self.weightfactor_ow.append(
                     sum([wall.wf_out for wall in wall_rt]))
-                [self.outer_walls_areas.append(
-                    i.area) for i in wall_rt]
+                self.outer_wall_areas.append(sum([wall.area for wall in
+                                                  wall_rt]))
             if not win:
                 self.weightfactor_win.append(0.0)
                 self.g_sunblind.append(0.0)
@@ -1085,7 +1102,7 @@ class TwoElement(object):
         self.weightfactor_ground = []
         self.tilt_wall = []
         self.orientation_wall = []
-        self.outer_walls_areas = []
+        self.outer_wall_areas = []
 
         self.r_rad_ow_iw = 0.0
 

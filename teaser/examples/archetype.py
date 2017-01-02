@@ -36,15 +36,16 @@ def example_type_building():
                               construction_type="heavy",
                               dormer=1)
 
-    prj.type_bldg_office(name="Office1",
-                         year_of_construction=1988,
-                         number_of_floors=2,
-                         height_of_floors=3.5,
-                         net_leased_area=100,
-                         office_layout=1,
-                         window_layout=1,
-                         with_ahu=True,
-                         construction_type="heavy")
+    prj.type_bldg_office(
+                    name="Institute",
+                    year_of_construction=1988,
+                    number_of_floors=3,
+                    height_of_floors=3.5,
+                    net_leased_area=3500,
+                    office_layout=1,
+                    window_layout=1,
+                    with_ahu=True,
+                    construction_type="heavy")
 
 
     '''
@@ -68,8 +69,8 @@ def example_type_building():
     '''
 
     prj.export_aixlib(
-                      internal_id=None,
-                      path=None)
+        internal_id=None,
+        path=None)
 
     '''
     For OpenModelica you need to exclude the centralAHU (because it is using

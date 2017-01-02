@@ -44,6 +44,9 @@ class AixLib(object):
         exterior surfaces. That includes: OuterWalls, Rooftops, GroundFloors,
         Windows for exterior surfaces, and InnerWalls, Ceilings, Floors for
         interior walls.
+    consider_heat_capacity : bool
+        decides whether air capacity is considered or not for all thermal
+        zones in the building
 
 
     """
@@ -56,8 +59,8 @@ class AixLib(object):
         self.file_ahu = "AHU_" + self.parent.name + ".mat"
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
         self.version = "0.4.0"
-
         self.total_surface_area = None
+        self.consider_heat_capacity = True
 
     def compare_orientation(self):
         """Compares orientation of walls of all zones and sorts them

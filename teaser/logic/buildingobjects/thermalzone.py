@@ -73,8 +73,6 @@ class ThermalZone(object):
         Temperature directly at the outer side of ground floors for static
         heat load calculation.
         The input of t_ground is ALWAYS in Kelvin
-    consider_heat_capacity : bool
-        decides whether air capacity is considered or not within the simulation
     density_air : float [kg/m3]
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]
@@ -101,13 +99,14 @@ class ThermalZone(object):
         self._ceilings = []
         self._use_conditions = None
         self.model_attr = None
-        self.typical_length = None # TODO move this to use conditions?
+        self.typical_length = None
         self.typical_width = None
         self._t_inside = 293.15
         self._t_outside = 261.15
         self.density_air = 1.25
         self.heat_capac_air = 1002
         self.t_ground = 286.15
+
 
     def calc_zone_parameters(
             self,

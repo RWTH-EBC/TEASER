@@ -140,8 +140,8 @@ class Building(object):
         self.building_id = None
         self.street_name = ""
         self.city = ""
-        self.longitude = None
-        self.latitude = None
+        self.longitude = 6.05
+        self.latitude = 50.79
 
         self._thermal_zones = []
         self.gml_surfaces = []

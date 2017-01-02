@@ -10,11 +10,13 @@
   %>
 </%def>
 
-##convert deg to rad
-<%def name="deg_to_rad(value)", filter="trim">
+##list to modelica list
+<%def name="get_list(list)", filter="trim">
   <%
-  from math import pi
-  return_value = value * pi/180
-  return return_value
+  string_of_list = ""
+  for item in list:
+    string_of_list += str(item) + ", "
+  string_of_list = string_of_list[:-2]
+  return string_of_list
   %>
 </%def>

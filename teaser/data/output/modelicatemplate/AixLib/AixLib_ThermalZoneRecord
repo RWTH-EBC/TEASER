@@ -1,27 +1,26 @@
-<%namespace file="/modelica_language/" import="get_true_false"/>
-<%namespace file="/conversion/" import="deg_to_rad"/>
+<%namespace file="/modelica_language/" import="get_true_false, get_list"/> <%namespace file="/conversion/" import="deg_to_rad"/>
 within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase;
 record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
     T_start = ${zone.t_inside},
-    withAirCap = ,
+    withAirCap = ${get_true_false(zone.parent.library_attr.consider_heat_capacity)},
     VAir = ${zone.volume},
     AZone = ${zone.area},
     alphaRad = ${zone.model_attr.alpha_rad_inner_mean},
-    lat = ,
+    lat = ${deg_to_rad(zone.parent.latitude)},
     nOrientations = ${zone.model_attr.n_outer},
-    AWin = ,
-    ATransparent = ,
+    AWin = {${get_list(zone.model_attr.window_areas)}},
+    ATransparent = {${get_list(zone.model_attr.window_areas)}},
     alphaWin = ${zone.model_attr.alpha_conv_inner_win},
-    RWin = ,
+    RWin = ${zone.model_attr.r1_win},
     gWin = ${zone.model_attr.weighted_g_value},
     UWin= ${zone.model_attr.ua_value_win/zone.model_attr.area_win},
     ratioWinConRad = ${zone.model_attr.ratio_conv_rad_inner_win},
-    AExt = ,
+    AExt = {${get_list(zone.model_attr.outer_wall_areas)}},
     alphaExt = ${zone.model_attr.alpha_conv_inner_ow},
     nExt = 1,
     RExt = {${zone.model_attr.r1_ow}},
-    RExtRem = ,
+    RExtRem = ${zone.model_attr.r_rest_ow} ,
     CExt = {${zone.model_attr.c1_ow}},
     AInt = ${zone.model_attr.area_iw},
     alphaInt = ${zone.model_attr.alpha_conv_inner_iw},
