@@ -12,15 +12,15 @@ model ${zone.parent.name}_${zone.name}
   Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${zone.model_attr.n_outer}](
     each outSkyCon=true,
     each outGroCon=true,
-    til=${get_list(deg_to_rad(zone.model_attr.tilt_wall))},
+    til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
     each lat = ${deg_to_rad(zone.parent.latitude)},
-    azi = ${get_list(deg_to_rad(zone.model_attr.orientation_wall))})
+    azi = ${get_list(deg_to_rad(zone.model_attr.orientation_facade))})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
   Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${zone.model_attr.n_outer}](
-    til=${get_list(deg_to_rad(zone.model_attr.tilt_wall))},
+    til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
     each lat =  ${deg_to_rad(zone.parent.latitude)},
-    azi=${get_list(deg_to_rad(zone.model_attr.orientation_wall))})
+    azi=${get_list(deg_to_rad(zone.model_attr.orientation_facade))})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
   Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${zone.model_attr.n_outer},
