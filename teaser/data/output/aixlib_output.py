@@ -147,7 +147,7 @@ def export_multizone(buildings, prj, path=None):
             elif type(zone.model_attr).__name__ == "ThreeElement":
                 out_file.write(zone_template_3.render_unicode(zone=zone))
             elif type(zone.model_attr).__name__ == "FourElement":
-                pass
+                out_file.write(zone_template_4.render_unicode(zone=zone))
 
             out_file.close()
 

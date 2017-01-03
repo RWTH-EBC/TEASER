@@ -743,11 +743,11 @@ class FourElement(object):
 
         self.ir_emissivity_outer_ow = (
             (sum(out_wall.layer[-1].material.ir_emissivity * out_wall.area for
-                 out_wall in self.thermal_zone.outer_walls)))
+                 out_wall in self.thermal_zone.outer_walls))) / self.area_ow
 
         self.solar_absorp_ow = (
             (sum(out_wall.layer[-1].material.solar_absorp * out_wall.area for
-                 out_wall in self.thermal_zone.outer_walls)))
+                 out_wall in self.thermal_zone.outer_walls))) / self.area_ow
 
         self.alpha_conv_outer_ow = (
             1 / (self.r_conv_outer_ow * self.area_ow))
@@ -821,8 +821,8 @@ class FourElement(object):
 
         # values facing the inside of the thermal zone
 
-        self.r_conv_inner_rt = sum(1 / roof.r_inner_conv for roof in
-                                   self.thermal_zone.rooftops)
+        self.r_conv_inner_rt = (1 / sum(1 / roof.r_inner_conv for roof in
+                                   self.thermal_zone.rooftops))
 
         self.r_rad_inner_rt = (1 / sum(1 / roof.r_inner_rad for roof in
                                        self.thermal_zone.rooftops))
