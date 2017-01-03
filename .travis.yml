@@ -14,7 +14,6 @@ install:
 
 
 script:
-  py.test
   coverage run setup.py test
 
 after_success:
