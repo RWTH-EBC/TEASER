@@ -7,6 +7,7 @@ from __future__ import division
 import random
 import re
 from teaser.logic.buildingobjects.calculation.two_element import TwoElement
+from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 
 class ThermalZone(object):
     """Thermal zone class.
@@ -152,7 +153,11 @@ class ThermalZone(object):
                 t_bt=t_bt)
             self.model_attr.calc_attributes()
         elif number_of_elements == 3:
-            pass
+            self.model_attr = ThreeElement(
+                thermal_zone=self,
+                merge_windows=merge_windows,
+                t_bt=t_bt)
+            self.model_attr.calc_attributes()
         elif number_of_elements == 4:
             pass
 

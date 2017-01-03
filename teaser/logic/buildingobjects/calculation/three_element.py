@@ -467,9 +467,11 @@ class ThreeElement(object):
 
         self.set_calc_default()
         self._sum_outer_wall_elements()
+        self._sum_ground_floor_elements()
         self._sum_inner_wall_elements()
         self._sum_window_elements()
         self._calc_outer_elements()
+        self._calc_ground_floor_elements()
         self._calc_inner_elements()
         self._calc_wf()
         self._calc_mean_values()
@@ -935,9 +937,6 @@ class ThreeElement(object):
         ----------
         omega : float [1/s]
             angular frequency with given time period.
-        outer_walls : list
-            List containing all TEASER Wall instances that are treated as same
-            outer wall type. In case of TwoElement model OuterWalls, Rooftops
         """
 
         omega = 2 * math.pi / 86400 / self.t_bt
@@ -949,17 +948,19 @@ class ThreeElement(object):
         elif len(self.thermal_zone.ground_floors) > 1:
             # more than one outer wall, calculate chain matrix
             self.r1_gf, self.c1_gf = self._calc_parallel_connection(
-                self.thermal_zone.ground_floors,
-                omega)
+                self.thermal_zone.ground_floors, omega)
         else:
             warnings.warn("No walls are defined as ground floors, please be "
                           "careful with results. In addition this might lead "
                           "to RunTimeErrors")
+        try:
+            conduction = (1 / sum((1 / element.r_conduc) for element in
+                                self.thermal_zone.ground_floors))
 
-        conduction = (1 / sum((1 / element.r_conduc) for element in
-                              self.thermal_zone.ground_floors))
-
-        self.r_rest_gf = (conduction - self.r1_gf)
+            self.r_rest_gf = (conduction - self.r1_gf)
+        except RuntimeError:
+            print("As no ground floors are defined lumped "
+                  "parameter cannot be calculated")
 
     def _calc_inner_elements(self):
         """Lumped parameter for outer wall elements
@@ -1029,8 +1030,7 @@ class ThreeElement(object):
                 win.wf_out = win.ua_value / (
                     self.ua_value_ow + self.ua_value_win)
 
-            self.weightfactor_ground = sum(gf.wf_out for gf in
-                                           self.thermal_zone.ground_floors)
+            self.weightfactor_ground = 0.0
 
         elif self.merge_windows is False:
 
@@ -1040,9 +1040,7 @@ class ThreeElement(object):
             for win in self.thermal_zone.windows:
                 win.wf_out = win.ua_value / self.ua_value_win
 
-            self.weightfactor_ground = sum(gf.wf_out for gf in
-                                           self.thermal_zone.ground_floors)
-
+            self.weightfactor_ground = 0.0
         else:
             raise ValueError("specify merge window method correctly")
 
@@ -1064,7 +1062,7 @@ class ThreeElement(object):
                                     / (self.area_ow + self.area_win)
 
     def _calc_number_of_elements(self):
-        """Calculates the number of outer elements with different tilt/orient
+        """Calculates the number of facade elements with different tilt/orient
 
         This function calculates the number of outer elements with a
         different combination of orientation and tilt, this includes the
@@ -1073,7 +1071,6 @@ class ThreeElement(object):
 
         outer_elements = (
             self.thermal_zone.outer_walls +
-            self.thermal_zone.ground_floors +
             self.thermal_zone.rooftops +
             self.thermal_zone.windows)
 
@@ -1093,8 +1090,7 @@ class ThreeElement(object):
         outer_elements = (
             self.thermal_zone.outer_walls +
             self.thermal_zone.rooftops +
-            self.thermal_zone.windows +
-            self.thermal_zone.ground_floors)
+            self.thermal_zone.windows)
 
         tilt_orient = []
         for element in outer_elements:
@@ -1106,27 +1102,20 @@ class ThreeElement(object):
                 self.thermal_zone.find_walls(i[0], i[1]) + \
                 self.thermal_zone.find_rts(i[0], i[1])
             win = self.thermal_zone.find_wins(i[0], i[1])
-            gf = self.thermal_zone.find_gfs(i[0], i[1])
 
             if self.merge_windows is True:
                 self.facade_areas.append(sum([element.area for element in (
-                    wall_rt + win + gf)]))
+                    wall_rt + win)]))
             else:
                 self.facade_areas.append(sum([element.area for element in (
-                    wall_rt + gf)]))
+                    wall_rt)]))
 
             self.orientation_wall.append(i[0])
             self.tilt_wall.append(i[1])
 
             if not wall_rt:
-
-                if not gf:
-                    self.weightfactor_ow.append(0.0)
-                    self.outer_wall_areas.append(0.0)
-                else:
-                    self.weightfactor_ow.append(0.0)
-                    self.outer_wall_areas.append((sum([element.area for element
-                                                       in gf])))
+                self.weightfactor_ow.append(0.0)
+                self.outer_wall_areas.append(0.0)
             else:
                 self.weightfactor_ow.append(
                     sum([wall.wf_out for wall in wall_rt]))
