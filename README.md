@@ -66,6 +66,11 @@ Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016,
 [pdf](http://www.ibpsa.org/proceedings/BSO2016/p1047.pdf),
 [bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite.bib)
 
++ Scalable Design-Driven Parameterization of Reduced Order Models Using Archetype Buildings with TEASER. 
+Lauster M., Mans M., Remmen P., Fuchs M., Müller D.. BauSIM2016, p.535-542, September 2016,
+[pdf](https://www.researchgate.net/profile/Moritz_Lauster/publication/310465372_Scalable_Design-Driven_Parameterization_of_Reduced_Order_Models_using_Archetype_Buildings_with_TEASER/links/582ee96908ae004f74be1fb0.pdf?origin=publication_detail&ev=pub_int_prw_xdl&msrp=eEyK6WYemhC8wK7xkMEPRDO4obE4uxBN4-0BdBy1Ldwhy9FhCe1pXfNObJYubvC_aZN0IWDPf9uayBo3u79bsZvg3hzUoLoYRatES2ARH8c.B2cYwSICt0IOa7lD-4oAiEa_3TtrO-7k-1W9chuNQwr_VNMCpZ5ubSb-eY2D77rGUP4S6wS8m6vudUUbMlXbQQ.Cledgd1Q9fPp11nYGpcpKNhSS6bVTqAEXeMZPkiV3HsJxcVWTFj4Hr_jmLZ0MOzDxbDEZObcGiKfmTL_9k_59A)
+
+
 ### How to use TEASER
 
 For installation and usage we like to refer you to the README in the [teaser
