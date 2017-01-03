@@ -9,9 +9,12 @@ import warnings
 class ThreeElement(object):
     """This class contains attributes and functions for three element model
 
-    This model distinguishes between internal thermal masses and exterior
-    walls divided into thos who are exposed to the sun and ground plates.
-    While exterior walls contribute to heat transfer to the ambient, adiabatic
+    This model adds one further element for the floor plate. Long-term effects
+    dominate the excitation of the floor plate and thus the excitation
+    differs from excitation of outer walls. Thus the model distinguishes
+    between internal thermal masses and exterior walls divided into those
+    who are exposed to the sun and ground plates. While exterior walls
+    contribute to heat transfer to the ambient, adiabatic
     conditions apply to interior walls. This approach allows considering the
     dynamic behaviour induced by internal heat storage. This class calculates
     and holds all attributes given in documentation.
@@ -28,7 +31,7 @@ class ThreeElement(object):
     thermal_zone: ThermalZone()
         TEASER instance of ThermalZone
     merge_windows : boolean
-        True for merging the windows into the outer wall's RC-combination,
+        True for merging windows into the outer wall's RC-combination,
         False for separate resistance for window, default is False
     t_bt : float [d]
         Time constant according to VDI 6007 (default t_bt = 5)
@@ -78,68 +81,72 @@ class ThreeElement(object):
     Outer Walls (OuterWall, Rooftop)
 
     area_ow : float [m2]
-        Area of all outer walls.
+        Area of all outer walls (OuterWall, Rooftop).
     alpha_conv_inner_ow : float [W/(m2K)]
         Area-weighted convective coefficient of heat transfer of outer walls
-        facing the inside of this thermal zone.
+        facing the inside of this thermal zone (OuterWall, Rooftop).
     alpha_rad_inner_ow : float [W/(m2K)]
         Area-weighted radiative coefficient of heat transfer of outer walls
-        facing the inside of this thermal zone.
+        facing the inside of this thermal zone (OuterWall, Rooftop).
     alpha_comb_inner_ow : float [W/(m2K)]
         Area-weighted combined coefficient of heat transfer of outer walls
-        facing the inside of this thermal zone.
+        facing the inside of this thermal zone (OuterWall, Rooftop).
     alpha_conv_outer_ow : float [W/(m2K)]
         Area-weighted convective coefficient of heat transfer of outer walls
-        facing the ambient.
+        facing the ambient (OuterWall, Rooftop).
     alpha_rad_outer_ow : float [W/(m2K)]
         Area-weighted radiative coefficient of heat transfer of outer walls
-        facing the ambient.
+        facing the ambient (OuterWall, Rooftop).
     alpha_comb_outer_ow : float [W/(m2K)]
         Area-weighted combined coefficient of heat transfer of outer walls
-        facing the ambient.
+        facing the ambient (OuterWall, Rooftop).
     ua_value_ow : float [W/(m2K)]
-        U-Value times outer wall area.
+        U-Value times outer wall area (OuterWall, Rooftop).
     r_conv_inner_ow : float [K/W]
         Sum of convective resistances for all outer walls facing the
-        inside of this thermal zone.
+        inside of this thermal zone (OuterWall, Rooftop).
     r_rad_inner_ow : float [K/W]
         Sum of radiative resistances for all outer walls facing the
-        inside of this thermal zone.
+        inside of this thermal zone (OuterWall, Rooftop).
     r_comb_inner_ow : float [K/W]
         Sum of combined resistances for all outer walls facing the
-        inside of this thermal zone.
+        inside of this thermal zone (OuterWall, Rooftop).
     r_conv_outer_ow : float [K/W]
         Sum of convective resistances for all outer walls facing the
-        ambient.
+        ambient (OuterWall, Rooftop).
     r_rad_outer_ow : float [K/W]
         Sum of radiative resistances for all outer walls facing the
-        ambient.
+        ambient (OuterWall, Rooftop).
     r_comb_outer_ow : float [K/W]
         Sum of combined resistances for all outer walls facing the
-        ambient.
+        ambient (OuterWall, Rooftop).
     r1_ow : float [K/W]
         Lumped resistance of outer walls no heat transfer coefficients for
-        convection and radiation are accounted in this resistance.
+        convection and radiation are accounted in this resistance (OuterWall,
+        Rooftop).
     r_rest_ow : float [K/W]
         Lumped remaining resistance of outer walls between r1_ow and c1_ow no
         heat transfer coefficients for convection and radiation are accounted
-        in this resistance.
+        in this resistance (OuterWall, Rooftop).
     c1_ow : float [J/K]
-        Lumped capacity of outer walls.
+        Lumped capacity of outer walls (OuterWall, Rooftop).
     weightfactor_ow : list of floats
         Weightfactors of outer walls (UA-Value of walls with same orientation
-        and tilt divided by ua_value_ow)
+        and tilt divided by ua_value_ow) (OuterWall, Rooftop)
     outer_wall_areas : list of floats [m2]
-        Area of all outer walls in one list.
+        Area of all outer walls in one list (OuterWall, Rooftop).
     r_rad_ow_iw : float [K/W]
         Resistance for radiative heat transfer between walls.
         TODO: needs to be checked
     ir_emissivity_outer_ow : float
-        Area-weighted ir emissivity of outer wall facing the ambient.
+        Area-weighted ir emissivity of outer wall facing the ambient (OuterWall,
+        Rooftop).
     ir_emissivity_inner_ow : float
-        Area-weighted ir emissivity of outer walls facing the thermal zone.
+        Area-weighted ir emissivity of outer walls facing the thermal zone
+        (OuterWall, Rooftop).
     solar_absorp_ow : float
-        Area-weighted solar absorption of outer walls facing the ambient.
+        Area-weighted solar absorption of outer walls facing the ambient
+        (OuterWall, Rooftop).
 
     Ground Floors
 
@@ -278,12 +285,6 @@ class ThreeElement(object):
         90 - East
         180 - South
         270 - West
-
-    Returns
-    -------
-
-    calc_success : boolean
-        True if calculation was successful.
 
     """
 
