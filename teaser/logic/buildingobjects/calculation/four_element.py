@@ -6,8 +6,8 @@ import random
 import warnings
 
 
-class ThreeElement(object):
-    """This class contains attributes and functions for three element model
+class FourElement(object):
+    """This class contains attributes and functions for four element model
 
     This model adds another element for the roof. Roofs commonly exhibit the
     same excitations as exterior walls but have different coefficients of heat
@@ -251,6 +251,14 @@ class ThreeElement(object):
         Area-weighted ir emissivity of rooftops facing the thermal zone.
     solar_absorp_rt : float
         Area-weighted solar absorption of rooftops facing the ambient.
+    tilt_rt : list of floats [degree]
+        Tilt of rooftops against the horizontal.
+    orientation_rt : list of floats [degree]
+        Orientation of rooftops (Azimuth).
+        0 - North
+        90 - East
+        180 - South
+        270 - West
 
     Windows
 
@@ -501,6 +509,8 @@ class ThreeElement(object):
         # Additional attributes
         self.weightfactor_rt = []
         self.rooftop_areas = []
+        self.tilt_rt = []
+        self.orientation_rt = []
 
         # TODO: check this value
         self.r_rad_rt_iw = 0.0
@@ -576,10 +586,12 @@ class ThreeElement(object):
         self.set_calc_default()
         self._sum_outer_wall_elements()
         self._sum_ground_floor_elements()
+        self._sum_rooftop_elements()
         self._sum_inner_wall_elements()
         self._sum_window_elements()
         self._calc_outer_elements()
         self._calc_ground_floor_elements()
+        self._calc_rooftop_elements()
         self._calc_inner_elements()
         self._calc_wf()
         self._calc_mean_values()
@@ -1341,6 +1353,9 @@ class ThreeElement(object):
         for i in tilt_orient_rt:
             rts = self.thermal_zone.find_rts(i[0], i[1])
 
+            self.orientation_rt.append(i[0])
+            self.tilt_rt.append(i[1])
+
             if not rts:
                 self.weightfactor_rt.append(0.0)
                 self.rooftop_areas.append(0.0)
@@ -1522,6 +1537,8 @@ class ThreeElement(object):
         # Additional attributes
         self.weightfactor_rt = []
         self.rooftop_areas = []
+        self.tilt_rt = []
+        self.orientation_rt = []
 
         # TODO: check this value
         self.r_rad_rt_iw = 0.0

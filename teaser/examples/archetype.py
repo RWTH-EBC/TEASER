@@ -53,7 +53,7 @@ def example_type_building():
     '''
 
     prj.used_library_calc = 'AixLib'
-    prj.number_of_elements_calc = 3
+    prj.number_of_elements_calc = 4
     prj.merge_windows_calc = False
 
     prj.calc_all_buildings()

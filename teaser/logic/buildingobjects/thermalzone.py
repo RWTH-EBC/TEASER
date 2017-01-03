@@ -8,6 +8,7 @@ import random
 import re
 from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
+from teaser.logic.buildingobjects.calculation.four_element import FourElement
 
 class ThermalZone(object):
     """Thermal zone class.
@@ -159,7 +160,11 @@ class ThermalZone(object):
                 t_bt=t_bt)
             self.model_attr.calc_attributes()
         elif number_of_elements == 4:
-            pass
+            self.model_attr = FourElement(
+                thermal_zone=self,
+                merge_windows=merge_windows,
+                t_bt=t_bt)
+            self.model_attr.calc_attributes()
 
     def find_walls(self, orientation, tilt):
         """Returns all outer walls with given orientation and tilt
