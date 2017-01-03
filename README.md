@@ -2,6 +2,8 @@
 
 # TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
 
+[![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg?branch=issue359_Coveralls)](https://coveralls.io/github/RWTH-EBC/TEASER?branch=issue359_Coveralls)
+
 The TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) tool
 allows the creation of archetype buildings as well as the
 representation of existing buildings and the calculation of simulation
@@ -57,8 +59,8 @@ A Journal Paper presenting TEASER is already submitted and is in review.
 
 If you are using TEASER, please cite us:
 
-+ CityGML Import and Export for Dynamic Building Performance Simulation in Modelica. Remmen P., 
-Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016, 
++ CityGML Import and Export for Dynamic Building Performance Simulation in Modelica. Remmen P.,
+Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016,
 [pdf](http://www.ibpsa.org/proceedings/BSO2016/p1047.pdf),
 [bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite.bib)
 
