@@ -10,11 +10,12 @@ install:
   - pip install --only-binary=numpy,scipy numpy scipy
   - pip install pyxb
   - pip install -e .
-  - pip install coveralls
+  - pip install pytest-cov
+  - pip install python-coveralls
 
 
 script:
-  coverage run setup.py test
+  - py.test --cov=TEASER
 
 after_success:
-  coveralls
+  - coveralls
