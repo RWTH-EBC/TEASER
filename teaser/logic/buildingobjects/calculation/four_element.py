@@ -336,7 +336,10 @@ class ThreeElement(object):
         orientation) this includes also roofs and ground floors and windows.
     n_outer : int
         Number of total facades with different combination of tilt and
-        orientation, including Rooftops and GroundFloors
+        orientation, windows and outer walls
+    n_rt : int
+        Number of total facades with different combination of tilt and
+        orientation, Rooftops
     tilt_facade : list of floats [degree]
         Tilt of facades against the horizontal.
     orientation_facade : list of floats [degree]
@@ -384,7 +387,7 @@ class ThreeElement(object):
         self.r1_iw = 0.0
         self.c1_iw = 0.0
 
-        # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
+        # Attributes for outer walls
         self.area_ow = 0.0
 
         # coefficient of heat transfer facing the inside of this thermal zone
@@ -429,7 +432,7 @@ class ThreeElement(object):
         # TODO: check this value
         self.r_rad_ow_iw = 0.0
 
-        # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
+        # Attributes for GroundFloor
         self.area_gf = 0.0
 
         # coefficient of heat transfer facing the inside of this thermal zone
@@ -454,10 +457,53 @@ class ThreeElement(object):
         # Optical properties
         self.ir_emissivity_inner_gf = 0.0
 
-
         # Additional attributes
 
         self.weightfactor_ground = 0.0
+
+        # Attributes for rooftops
+        self.area_rt = 0.0
+
+        # coefficient of heat transfer facing the inside of this thermal zone
+        self.alpha_conv_inner_rt = 0.0
+        self.alpha_rad_inner_rt = 0.0
+        self.alpha_comb_inner_rt = 0.0
+
+        # coefficient of heat transfer facing the ambient
+        self.alpha_conv_outer_rt = 0.0
+        self.alpha_rad_outer_rt = 0.0
+        self.alpha_comb_outer_rt = 0.0
+
+        # UA-Value
+        self.ua_value_rt = 0.0
+
+        # resistances for heat transfer facing the inside of this thermal zone
+        self.r_conv_inner_rt = 0.0
+        self.r_rad_inner_rt = 0.0
+        self.r_comb_inner_rt = 0.0
+
+        # resistances for heat transfer facing the ambient
+        self.r_conv_outer_rt = 0.0
+        self.r_rad_outer_rt = 0.0
+        self.r_comb_outer_rt = 0.0
+
+        # lumped resistances/capacity
+        self.r1_rt = 0.0
+        self.r_rest_rt = 0.0
+        self.c1_rt = 0.0
+        self.r_total_rt = 0.0
+
+        # Optical properties
+        self.ir_emissivity_outer_rt = 0.0
+        self.ir_emissivity_inner_rt = 0.0
+        self.solar_absorp_rt = 0.0
+
+        # Additional attributes
+        self.weightfactor_rt = []
+        self.rooftop_areas = []
+
+        # TODO: check this value
+        self.r_rad_rt_iw = 0.0
 
         # Attributes for windows
         self.area_win = 0.0
@@ -504,6 +550,7 @@ class ThreeElement(object):
 
         self.alpha_rad_inner_mean = 0.0
         self.n_outer = 0
+        self.n_rt = 0
         self.facade_areas = []
         self.tilt_facade = []
         self.orientation_facade = []
@@ -636,15 +683,11 @@ class ThreeElement(object):
 
         self.area_ow = \
             (sum(out_wall.area for out_wall in
-                 self.thermal_zone.outer_walls)
-             + sum(roof.area for roof in
-                   self.thermal_zone.rooftops))
+                 self.thermal_zone.outer_walls))
 
         self.ua_value_ow = \
             (sum(out_wall.ua_value for out_wall in
-                 self.thermal_zone.outer_walls)
-             + sum(roof.ua_value for roof in
-                   self.thermal_zone.rooftops))
+                 self.thermal_zone.outer_walls))
 
         self.r_total_ow = 1 / self.ua_value_ow
 
@@ -652,27 +695,19 @@ class ThreeElement(object):
 
         self.r_conv_inner_ow = (1 /
                                 (sum(1 / out_wall.r_inner_conv for out_wall in
-                                     self.thermal_zone.outer_walls)
-                                 + sum(1 / roof.r_inner_conv for roof in
-                                       self.thermal_zone.rooftops)))
+                                     self.thermal_zone.outer_walls)))
 
         self.r_rad_inner_ow = (1 /
                                (sum(1 / out_wall.r_inner_rad for out_wall in
-                                    self.thermal_zone.outer_walls)
-                                + sum(1 / roof.r_inner_rad for roof in
-                                      self.thermal_zone.rooftops)))
+                                    self.thermal_zone.outer_walls)))
 
         self.r_comb_inner_ow = (1 /
                                 (sum(1 / out_wall.r_inner_comb for out_wall in
-                                     self.thermal_zone.outer_walls)
-                                 + sum(1 / roof.r_inner_comb for roof in
-                                       self.thermal_zone.rooftops)))
+                                     self.thermal_zone.outer_walls)))
 
         self.ir_emissivity_inner_ow = (
             (sum(out_wall.layer[0].material.ir_emissivity * out_wall.area for
-                 out_wall in self.thermal_zone.outer_walls)
-             + sum(roof.layer[0].material.ir_emissivity * roof.area for
-                   roof in self.thermal_zone.rooftops)) / self.area_ow)
+                 out_wall in self.thermal_zone.outer_walls)))
 
         self.alpha_conv_inner_ow = (
             1 / (self.r_conv_inner_ow * self.area_ow))
@@ -686,31 +721,21 @@ class ThreeElement(object):
 
         self.r_conv_outer_ow = (1 /
                                 (sum(1 / out_wall.r_outer_conv for out_wall in
-                                     self.thermal_zone.outer_walls)
-                                 + sum(1 / roof.r_outer_conv for roof in
-                                       self.thermal_zone.rooftops)))
+                                     self.thermal_zone.outer_walls)))
         self.r_rad_outer_ow = (1 /
                                (sum(1 / out_wall.r_outer_rad for out_wall in
-                                    self.thermal_zone.outer_walls)
-                                + sum(1 / roof.r_outer_rad for roof in
-                                      self.thermal_zone.rooftops)))
+                                    self.thermal_zone.outer_walls)))
         self.r_comb_outer_ow = (1 /
                                 (sum(1 / out_wall.r_outer_comb for out_wall in
-                                     self.thermal_zone.outer_walls)
-                                 + sum(1 / roof.r_outer_comb for roof in
-                                       self.thermal_zone.rooftops)))
+                                     self.thermal_zone.outer_walls)))
 
         self.ir_emissivity_outer_ow = (
             (sum(out_wall.layer[-1].material.ir_emissivity * out_wall.area for
-                 out_wall in self.thermal_zone.outer_walls)
-             + sum(roof.layer[-1].material.ir_emissivity * roof.area for
-                   roof in self.thermal_zone.rooftops)) / self.area_ow)
+                 out_wall in self.thermal_zone.outer_walls)))
 
         self.solar_absorp_ow = (
             (sum(out_wall.layer[-1].material.solar_absorp * out_wall.area for
-                 out_wall in self.thermal_zone.outer_walls)
-             + sum(roof.layer[-1].material.solar_absorp * roof.area for
-                   roof in self.thermal_zone.rooftops)) / self.area_ow)
+                 out_wall in self.thermal_zone.outer_walls)))
 
         self.alpha_conv_outer_ow = (
             1 / (self.r_conv_outer_ow * self.area_ow))
@@ -726,7 +751,6 @@ class ThreeElement(object):
         where necessary (the class doc string) for coefficients of heat
         transfer, resistances, areas and UA-Values.
 
-
         """
 
         self.area_gf = sum(ground.area for ground in
@@ -734,7 +758,7 @@ class ThreeElement(object):
 
         self.ua_value_gf = \
             (sum(ground.area for ground in
-                   self.thermal_zone.ground_floors))
+                 self.thermal_zone.ground_floors))
 
         self.r_total_gf = 1 / self.ua_value_gf
 
@@ -762,6 +786,73 @@ class ThreeElement(object):
             1 / (self.r_rad_inner_gf * self.area_gf))
         self.alpha_comb_inner_gf = (
             1 / (self.r_comb_inner_gf * self.area_gf))
+
+    def _sum_rooftop_elements(self):
+        """Sum attributes for rooftop elements
+
+        This function sums and computes the area-weighted values,
+        where necessary  for coefficients of heat
+        transfer, resistances, areas and UA-Values.
+
+        For ThreeElement model it treats rooftops and outer walls
+        as one kind of wall type.
+
+        """
+
+        self.area_rt = sum(roof.area for roof in
+                           self.thermal_zone.rooftops)
+
+        self.ua_value_rt = sum(roof.ua_value for roof in
+                               self.thermal_zone.rooftops)
+
+        self.r_total_rt = 1 / self.ua_value_rt
+
+        # values facing the inside of the thermal zone
+
+        self.r_conv_inner_rt = sum(1 / roof.r_inner_conv for roof in
+                                   self.thermal_zone.rooftops)
+
+        self.r_rad_inner_rt = (1 / sum(1 / roof.r_inner_rad for roof in
+                                       self.thermal_zone.rooftops))
+
+        self.r_comb_inner_rt = (1 / sum(1 / roof.r_inner_comb for roof in
+                                        self.thermal_zone.rooftops))
+
+        self.ir_emissivity_inner_rt = sum(
+            roof.layer[0].material.ir_emissivity * roof.area for
+            roof in self.thermal_zone.rooftops) / self.area_rt
+
+        self.alpha_conv_inner_rt = (
+            1 / (self.r_conv_inner_rt * self.area_rt))
+        self.alpha_rad_inner_rt = (
+            1 / (self.r_rad_inner_rt * self.area_rt))
+        self.alpha_comb_inner_rt = (
+            1 / (self.r_comb_inner_rt * self.area_rt))
+
+        # values facing the ambient
+        # ground floor does not have any coefficients on ambient side
+
+        self.r_conv_outer_rt = (1 / sum(1 / roof.r_outer_conv for roof in
+                                        self.thermal_zone.rooftops))
+        self.r_rad_outer_rt = (1 / sum(1 / roof.r_outer_rad for roof in
+                                       self.thermal_zone.rooftops))
+        self.r_comb_outer_rt = (1 / sum(1 / roof.r_outer_comb for roof in
+                                        self.thermal_zone.rooftops))
+
+        self.ir_emissivity_outer_rt = sum(
+            roof.layer[-1].material.ir_emissivity * roof.area for
+            roof in self.thermal_zone.rooftops) / self.area_rt
+
+        self.solar_absorp_rt = sum(
+            roof.layer[-1].material.solar_absorp * roof.area for
+            roof in self.thermal_zone.rooftops) / self.area_rt
+
+        self.alpha_conv_outer_rt = (
+            1 / (self.r_conv_outer_rt * self.area_rt))
+        self.alpha_rad_outer_rt = (
+            1 / (self.r_rad_outer_rt * self.area_rt))
+        self.alpha_comb_outer_rt = (
+            1 / (self.r_comb_outer_rt * self.area_rt))
 
     def _sum_inner_wall_elements(self):
         """Sum attributes for interior elements
@@ -922,8 +1013,7 @@ class ThreeElement(object):
 
         omega = 2 * math.pi / 86400 / self.t_bt
 
-        outer_walls = (self.thermal_zone.outer_walls +
-                       self.thermal_zone.rooftops)
+        outer_walls = (self.thermal_zone.outer_walls)
 
         if 0 < len(outer_walls) <= 1:
             # only one outer wall, no need to calculate chain matrix
@@ -993,7 +1083,8 @@ class ThreeElement(object):
     def _calc_ground_floor_elements(self):
         """Lumped parameter for ground floor elements
 
-        Calculates all necessary parameters for ground floors.
+        Calculates lumped parameters for ground floors. No windows in ground
+        floor allowed.
 
         Attributes
         ----------
@@ -1017,11 +1108,47 @@ class ThreeElement(object):
                           "to RunTimeErrors")
         try:
             conduction = (1 / sum((1 / element.r_conduc) for element in
-                                self.thermal_zone.ground_floors))
+                                  self.thermal_zone.ground_floors))
 
             self.r_rest_gf = (conduction - self.r1_gf)
         except RuntimeError:
             print("As no ground floors are defined lumped "
+                  "parameter cannot be calculated")
+
+    def _calc_rooftop_elements(self):
+        """Lumped parameter for ground floor elements
+
+        Calculates lumped parameters for rooftops. Windows are considered in
+        outer wall calculation. This results in an error concerning the
+        interior radiation distribution. But currently there is no other option.
+
+        Attributes
+        ----------
+        omega : float [1/s]
+            angular frequency with given time period.
+        """
+
+        omega = 2 * math.pi / 86400 / self.t_bt
+
+        if 0 < len(self.thermal_zone.rooftops) <= 1:
+            # only one outer wall, no need to calculate chain matrix
+            self.r1_rt = self.thermal_zone.rooftops[0].r1
+            self.c1_rt = self.thermal_zone.rooftops[0].c1_korr
+        elif len(self.thermal_zone.rooftops) > 1:
+            # more than one outer wall, calculate chain matrix
+            self.r1_rt, self.c1_rt = self._calc_parallel_connection(
+                self.thermal_zone.rooftops, omega)
+        else:
+            warnings.warn("No walls are defined as ground floors, please be "
+                          "careful with results. In addition this might lead "
+                          "to RunTimeErrors")
+        try:
+            conduction = (1 / sum((1 / element.r_conduc) for element in
+                                  self.thermal_zone.rooftops))
+
+            self.r_rest_rt = (conduction - self.r1_gf)
+        except RuntimeError:
+            print("As no rooftops are defined lumped "
                   "parameter cannot be calculated")
 
     def _calc_inner_elements(self):
@@ -1067,24 +1194,16 @@ class ThreeElement(object):
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)
 
-        Calculates the weightfactors of the outer walls, including ground and
-        windows.
+        Calculates the weightfactors of outer walls, rooftops, including
+        ground and windows.
 
-        Parameters
-        ----------
-        outer_walls : list
-            List containing all TEASER Wall instances that are treated as same
-            outer wall type. In case of TwoElement model OuterWalls,
-            GroundFloors, Rooftops
         """
 
-        outer_walls = (self.thermal_zone.outer_walls +
-                       self.thermal_zone.ground_floors +
-                       self.thermal_zone.rooftops)
+        self.weightfactor_ground = 0.0
 
         if self.merge_windows is True:
 
-            for wall in outer_walls:
+            for wall in self.thermal_zone.outer_walls:
                 wall.wf_out = wall.ua_value / (
                     self.ua_value_ow + self.ua_value_win)
 
@@ -1092,17 +1211,20 @@ class ThreeElement(object):
                 win.wf_out = win.ua_value / (
                     self.ua_value_ow + self.ua_value_win)
 
-            self.weightfactor_ground = 0.0
+            for rt in self.thermal_zone.rooftops:
+                rt.wf_out = rt.ua_value / self.ua_value_rt
 
         elif self.merge_windows is False:
 
-            for wall in outer_walls:
+            for wall in self.thermal_zone.outer_walls:
                 wall.wf_out = wall.ua_value / self.ua_value_ow
 
             for win in self.thermal_zone.windows:
                 win.wf_out = win.ua_value / self.ua_value_win
 
-            self.weightfactor_ground = 0.0
+            for rt in self.thermal_zone.rooftops:
+                rt.wf_out = rt.ua_value / self.ua_value_rt
+
         else:
             raise ValueError("specify merge window method correctly")
 
@@ -1116,12 +1238,17 @@ class ThreeElement(object):
 
         self.alpha_rad_inner_mean = (self.area_ow * self.alpha_rad_inner_ow +
                                      self.area_win * self.alpha_rad_inner_win +
+                                     self.area_gf * self.alpha_rad_inner_gf +
+                                     self.area_rt * self.alpha_rad_inner_rt +
                                      self.area_iw * self.alpha_rad_inner_iw) \
                                     / (self.area_ow + self.area_win +
-                                       self.area_iw)
+                                       self.area_iw + self.area_gf +
+                                       self.area_rt)
         self.alpha_rad_outer_mean = (self.area_ow * self.alpha_rad_outer_ow +
+                                     self.area_rt * self.alpha_rad_outer_rt +
                                      self.area_win * self.alpha_rad_outer_win) \
-                                    / (self.area_ow + self.area_win)
+                                    / (self.area_ow + self.area_rt +
+                                       self.area_win)
 
     def _calc_number_of_elements(self):
         """Calculates the number of facade elements with different tilt/orient
@@ -1132,14 +1259,17 @@ class ThreeElement(object):
         """
 
         outer_elements = (
-            self.thermal_zone.outer_walls +
-            self.thermal_zone.rooftops +
-            self.thermal_zone.windows)
+            self.thermal_zone.outer_walls + self.thermal_zone.windows)
 
         tilt_orient = []
         for element in outer_elements:
             tilt_orient.append((element.orientation, element.tilt))
         self.n_outer = len(list(set(tilt_orient)))
+
+        tilt_orient_rt = []
+        for roof in self.thermal_zone.rooftops:
+            tilt_orient_rt.append((roof.orientation, roof.tilt))
+        self.n_rt = len(list(set(tilt_orient_rt)))
 
     def _fill_zone_lists(self):
         """Fills lists like weightfactors and tilt, orientation
@@ -1151,7 +1281,6 @@ class ThreeElement(object):
 
         outer_elements = (
             self.thermal_zone.outer_walls +
-            self.thermal_zone.rooftops +
             self.thermal_zone.windows)
 
         tilt_orient = []
@@ -1160,51 +1289,65 @@ class ThreeElement(object):
         tilt_orient = list(set(tilt_orient))
 
         for i in tilt_orient:
-            wall_rt = \
-                self.thermal_zone.find_walls(i[0], i[1]) + \
-                self.thermal_zone.find_rts(i[0], i[1])
-            win = self.thermal_zone.find_wins(i[0], i[1])
+            walls = self.thermal_zone.find_walls(i[0], i[1])
+            wins = self.thermal_zone.find_wins(i[0], i[1])
 
             if self.merge_windows is True:
                 self.facade_areas.append(sum([element.area for element in (
-                    wall_rt + win)]))
+                    walls + wins)]))
             else:
                 self.facade_areas.append(sum([element.area for element in (
-                    wall_rt)]))
+                    walls)]))
 
             self.orientation_facade.append(i[0])
             self.tilt_facade.append(i[1])
 
-            if not wall_rt:
+            if not walls:
                 self.weightfactor_ow.append(0.0)
                 self.outer_wall_areas.append(0.0)
             else:
                 self.weightfactor_ow.append(
-                    sum([wall.wf_out for wall in wall_rt]))
+                    sum([wall.wf_out for wall in walls]))
                 self.outer_wall_areas.append(sum([wall.area for wall in
-                                                  wall_rt]))
+                                                  walls]))
 
-            if not win:
+            if not wins:
                 self.weightfactor_win.append(0.0)
                 self.g_sunblind.append(0.0)
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
             else:
                 self.weightfactor_win.append(
-                    sum([win.wf_out for win in win]))
+                    sum([win.wf_out for win in wins]))
                 self.g_sunblind.append(
-                    sum([win.shading_g_total for win in win]))
+                    sum([win.shading_g_total for win in wins]))
 
                 if self.merge_windows is False:
                     self.window_areas.append(
-                        sum([win.area for win in win]))
+                        sum([win.area for win in wins]))
                     self.transparent_areas.append(
-                        sum([win.area for win in win]))
+                        sum([win.area for win in wins]))
 
                 else:
                     self.window_areas.append(0)
                     self.transparent_areas.append(
-                        sum([win.area for win in win]))
+                        sum([win.area for win in wins]))
+
+        tilt_orient_rt = []
+        for roof in self.thermal_zone.rooftops:
+            tilt_orient_rt.append((roof.orientation, roof.tilt))
+        tilt_orient_rt = list(set(tilt_orient_rt))
+
+        for i in tilt_orient_rt:
+            rts = self.thermal_zone.find_rts(i[0], i[1])
+
+            if not rts:
+                self.weightfactor_rt.append(0.0)
+                self.rooftop_areas.append(0.0)
+            else:
+                self.weightfactor_rt.append(
+                    sum([rt.wf_out for rt in rts]))
+                self.rooftop_areas.append(sum([rt.area for rt in rts]))
 
     def _calc_heat_load(self):
         """Static heat load calculation
@@ -1222,9 +1365,8 @@ class ThreeElement(object):
             UA Value of all GroundFloors
         """
         self.heat_load = 0.0
-        ua_value_gf_temp = sum(
-            ground.ua_value for ground in self.thermal_zone.ground_floors)
-        ua_value_ow_temp = self.ua_value_ow - ua_value_gf_temp
+
+        ua_value_ow_temp = self.ua_value_rt + self.ua_value_ow
         self.heat_load = \
             ((((ua_value_ow_temp + self.ua_value_win) +
                self.thermal_zone.volume *
@@ -1232,7 +1374,7 @@ class ThreeElement(object):
                self.thermal_zone.heat_capac_air *
                self.thermal_zone.density_air) * (self.thermal_zone.t_inside -
                                                  self.thermal_zone.t_outside))
-             + (ua_value_gf_temp * (self.thermal_zone.t_inside -
+             + (self.ua_value_gf * (self.thermal_zone.t_inside -
                                     self.thermal_zone.t_ground)))
 
     def set_calc_default(self):
@@ -1266,7 +1408,7 @@ class ThreeElement(object):
         self.r1_iw = 0.0
         self.c1_iw = 0.0
 
-        # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
+        # Attributes for outer walls
         self.area_ow = 0.0
 
         # coefficient of heat transfer facing the inside of this thermal zone
@@ -1306,11 +1448,83 @@ class ThreeElement(object):
         # Additional attributes
         self.weightfactor_ow = []
         self.weightfactor_ground = 0.0
-        self.tilt_wall = []
-        self.orientation_wall = []
         self.outer_wall_areas = []
 
+        # TODO: check this value
         self.r_rad_ow_iw = 0.0
+
+        # Attributes for GroundFloor
+        self.area_gf = 0.0
+
+        # coefficient of heat transfer facing the inside of this thermal zone
+        self.alpha_conv_inner_gf = 0.0
+        self.alpha_rad_inner_gf = 0.0
+        self.alpha_comb_inner_gf = 0.0
+
+        # UA-Value
+        self.ua_value_gf = 0.0
+
+        # resistances for heat transfer facing the inside of this thermal zone
+        self.r_conv_inner_gf = 0.0
+        self.r_rad_inner_gf = 0.0
+        self.r_comb_inner_gf = 0.0
+
+        # lumped resistances/capacity
+        self.r1_gf = 0.0
+        self.r_rest_gf = 0.0
+        self.c1_gf = 0.0
+        self.r_total_gf = 0.0
+
+        # Optical properties
+        self.ir_emissivity_inner_gf = 0.0
+
+        # Additional attributes
+
+        self.weightfactor_ground = 0.0
+
+        # Attributes for rooftops
+        self.area_rt = 0.0
+
+        # coefficient of heat transfer facing the inside of this thermal zone
+        self.alpha_conv_inner_rt = 0.0
+        self.alpha_rad_inner_rt = 0.0
+        self.alpha_comb_inner_rt = 0.0
+
+        # coefficient of heat transfer facing the ambient
+        self.alpha_conv_outer_rt = 0.0
+        self.alpha_rad_outer_rt = 0.0
+        self.alpha_comb_outer_rt = 0.0
+
+        # UA-Value
+        self.ua_value_rt = 0.0
+
+        # resistances for heat transfer facing the inside of this thermal zone
+        self.r_conv_inner_rt = 0.0
+        self.r_rad_inner_rt = 0.0
+        self.r_comb_inner_rt = 0.0
+
+        # resistances for heat transfer facing the ambient
+        self.r_conv_outer_rt = 0.0
+        self.r_rad_outer_rt = 0.0
+        self.r_comb_outer_rt = 0.0
+
+        # lumped resistances/capacity
+        self.r1_rt = 0.0
+        self.r_rest_rt = 0.0
+        self.c1_rt = 0.0
+        self.r_total_rt = 0.0
+
+        # Optical properties
+        self.ir_emissivity_outer_rt = 0.0
+        self.ir_emissivity_inner_rt = 0.0
+        self.solar_absorp_rt = 0.0
+
+        # Additional attributes
+        self.weightfactor_rt = []
+        self.rooftop_areas = []
+
+        # TODO: check this value
+        self.r_rad_rt_iw = 0.0
 
         # Attributes for windows
         self.area_win = 0.0
@@ -1319,6 +1533,7 @@ class ThreeElement(object):
         self.alpha_conv_inner_win = 0.0
         self.alpha_rad_inner_win = 0.0
         self.alpha_comb_inner_win = 0.0
+        self.ratio_conv_rad_inner_win = 0.0
 
         # coefficient of heat transfer facing the ambient
         self.alpha_conv_outer_win = 0.0
@@ -1343,13 +1558,22 @@ class ThreeElement(object):
 
         # Optical properties
         self.ir_emissivity_win = 0.0
-        self.solar_absorp_win = 0.00
+        self.solar_absorp_win = 0.0
 
         # Additional attributes
         self.weightfactor_win = []
-        self.tilt_win = []
-        self.orientation_win = []
-
         self.window_areas = []
+        self.transparent_areas = []
         self.g_sunblind = []
         self.weighted_g_value = 0.0
+
+        # Misc values
+
+        self.alpha_rad_inner_mean = 0.0
+        self.n_outer = 0
+        self.n_rt = 0
+        self.facade_areas = []
+        self.tilt_facade = []
+        self.orientation_facade = []
+        self.heat_load = 0.0
+        self.cool_load = 0.0

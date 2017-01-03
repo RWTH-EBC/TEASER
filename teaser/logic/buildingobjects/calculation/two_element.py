@@ -984,12 +984,12 @@ class TwoElement(object):
             wall_rt = \
                 self.thermal_zone.find_walls(i[0], i[1]) + \
                 self.thermal_zone.find_rts(i[0], i[1])
-            win = self.thermal_zone.find_wins(i[0], i[1])
+            wins = self.thermal_zone.find_wins(i[0], i[1])
             gf = self.thermal_zone.find_gfs(i[0], i[1])
 
             if self.merge_windows is True:
                 self.facade_areas.append(sum([element.area for element in (
-                    wall_rt + win + gf)]))
+                    wall_rt + wins + gf)]))
             else:
                 self.facade_areas.append(sum([element.area for element in (
                     wall_rt + gf)]))
@@ -1012,27 +1012,27 @@ class TwoElement(object):
                 self.outer_wall_areas.append(sum([wall.area for wall in
                                                   wall_rt]))
 
-            if not win:
+            if not wins:
                 self.weightfactor_win.append(0.0)
                 self.g_sunblind.append(0.0)
                 self.window_areas.append(0.0)
                 self.transparent_areas.append(0.0)
             else:
                 self.weightfactor_win.append(
-                    sum([win.wf_out for win in win]))
+                    sum([win.wf_out for win in wins]))
                 self.g_sunblind.append(
-                    sum([win.shading_g_total for win in win]))
+                    sum([win.shading_g_total for win in wins]))
 
                 if self.merge_windows is False:
                     self.window_areas.append(
-                        sum([win.area for win in win]))
+                        sum([win.area for win in wins]))
                     self.transparent_areas.append(
-                        sum([win.area for win in win]))
+                        sum([win.area for win in wins]))
 
                 else:
                     self.window_areas.append(0)
                     self.transparent_areas.append(
-                        sum([win.area for win in win]))
+                        sum([win.area for win in wins]))
 
     def _calc_heat_load(self):
         """Static heat load calculation
@@ -1133,11 +1133,10 @@ class TwoElement(object):
 
         # Additional attributes
         self.weightfactor_ow = []
-        self.weightfactor_ground = []
-        self.tilt_facade = []
-        self.orientation_facade = []
+        self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
 
+        # TODO: check this value
         self.r_rad_ow_iw = 0.0
 
         # Attributes for windows
@@ -1147,6 +1146,7 @@ class TwoElement(object):
         self.alpha_conv_inner_win = 0.0
         self.alpha_rad_inner_win = 0.0
         self.alpha_comb_inner_win = 0.0
+        self.ratio_conv_rad_inner_win = 0.0
 
         # coefficient of heat transfer facing the ambient
         self.alpha_conv_outer_win = 0.0
@@ -1171,13 +1171,21 @@ class TwoElement(object):
 
         # Optical properties
         self.ir_emissivity_win = 0.0
-        self.solar_absorp_win = 0.00
+        self.solar_absorp_win = 0.0
 
         # Additional attributes
         self.weightfactor_win = []
-        self.tilt_win = []
-        self.orientation_win = []
-
         self.window_areas = []
+        self.transparent_areas = []
         self.g_sunblind = []
         self.weighted_g_value = 0.0
+
+        # Misc values
+
+        self.alpha_rad_inner_mean = 0.0
+        self.n_outer = 0
+        self.facade_areas = []
+        self.tilt_facade = []
+        self.orientation_facade = []
+        self.heat_load = 0.0
+        self.cool_load = 0.0
