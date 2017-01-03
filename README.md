@@ -3,8 +3,8 @@
 # TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
-[![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg?branch=development)](https://coveralls.io/github/RWTH-EBC/TEASER?branch=development)
-[![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=development)](https://travis-ci.org/RWTH-EBC/TEASER)
+[![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg)](https://coveralls.io/github/RWTH-EBC/TEASER)
+[![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg)](https://travis-ci.org/RWTH-EBC/TEASER)
 
 The TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) tool
 allows the creation of archetype buildings as well as the
