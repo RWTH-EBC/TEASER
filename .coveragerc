@@ -1,0 +1,5 @@
+[run]
+omit =
+    # omit everything in /usr
+    teaser/examples/*
+    teaser/gui/*
