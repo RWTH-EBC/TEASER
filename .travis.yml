@@ -15,7 +15,7 @@ install:
 
 script:
   - py.test
-  - coverage run --source=teaser tests/test_data.py test
+  - coverage run --source=teaser/logic,teaser/data tests/test_data.py test
 
 after_success:
   coveralls
