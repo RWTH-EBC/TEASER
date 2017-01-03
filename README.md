@@ -2,7 +2,7 @@
 
 # TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
 
-[![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg?branch=issue359_Coveralls)](https://coveralls.io/github/RWTH-EBC/TEASER?branch=issue359_Coveralls)
+[![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg?branch=development)](https://coveralls.io/github/RWTH-EBC/TEASER?branch=development)
 
 The TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) tool
 allows the creation of archetype buildings as well as the
