@@ -52,11 +52,11 @@ def example_type_building():
     the records in TEASER'S Output folder
     '''
 
-    #prj.used_library_calc = 'AixLib'
-    #prj.number_of_elements_calc = 2
-    #prj.merge_windows_calc = False
+    prj.used_library_calc = 'AixLib'
+    prj.number_of_elements_calc = 3
+    prj.merge_windows_calc = False
 
-    #prj.calc_all_buildings()
+    prj.calc_all_buildings()
 
     '''
     Export the Modelica Record. If you have a Dymola License you can  export
@@ -64,9 +64,9 @@ def example_type_building():
     and institute buildings)
     '''
 
-    #prj.export_aixlib(
-    #    internal_id=None,
-    #    path=None)
+    prj.export_aixlib(
+        internal_id=None,
+        path=None)
 
     '''
     For OpenModelica you need to exclude the centralAHU (because it is using

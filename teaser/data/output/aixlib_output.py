@@ -62,6 +62,11 @@ def export_multizone(buildings, prj, path=None):
             "data/output/modelicatemplate/AixLib"
             "/AixLib_ThermalZoneRecord_TwoElement"),
         lookup=lookup)
+    zone_template_3 = Template(
+        filename=utilities.get_full_path(
+            "data/output/modelicatemplate/AixLib"
+            "/AixLib_ThermalZoneRecord_ThreeElement"),
+        lookup=lookup)
     model_template = Template(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
@@ -135,7 +140,7 @@ def export_multizone(buildings, prj, path=None):
             elif type(zone.model_attr).__name__ == "TwoElement":
                 out_file.write(zone_template_2.render_unicode(zone=zone))
             elif type(zone.model_attr).__name__ == "ThreeElement":
-                pass
+                out_file.write(zone_template_3.render_unicode(zone=zone))
             elif type(zone.model_attr).__name__ == "FourElement":
                 pass
 

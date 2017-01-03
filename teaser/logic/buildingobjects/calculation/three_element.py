@@ -363,8 +363,6 @@ class ThreeElement(object):
         # Additional attributes
         self.weightfactor_ow = []
         self.weightfactor_ground = 0.0
-        self.tilt_wall = []
-        self.orientation_wall = []
         self.outer_wall_areas = []
 
         # TODO: check this value
@@ -446,6 +444,8 @@ class ThreeElement(object):
         self.alpha_rad_inner_mean = 0.0
         self.n_outer = 0
         self.facade_areas = []
+        self.tilt_facade = []
+        self.orientation_facade = []
         self.heat_load = 0.0
         self.cool_load = 0.0
 
@@ -1110,8 +1110,8 @@ class ThreeElement(object):
                 self.facade_areas.append(sum([element.area for element in (
                     wall_rt)]))
 
-            self.orientation_wall.append(i[0])
-            self.tilt_wall.append(i[1])
+            self.orientation_facade.append(i[0])
+            self.tilt_facade.append(i[1])
 
             if not wall_rt:
                 self.weightfactor_ow.append(0.0)
@@ -1243,7 +1243,7 @@ class ThreeElement(object):
 
         # Additional attributes
         self.weightfactor_ow = []
-        self.weightfactor_ground = []
+        self.weightfactor_ground = 0.0
         self.tilt_wall = []
         self.orientation_wall = []
         self.outer_wall_areas = []
