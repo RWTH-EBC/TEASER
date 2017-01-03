@@ -1,4 +1,5 @@
-<%namespace file="/modelica_language/" import="get_true_false, get_list"/> <%namespace file="/conversion/" import="deg_to_rad"/>
+<%namespace file="/modelica_language/" import="get_true_false, get_list"/>
+<%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
 within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase;
 record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
@@ -41,7 +42,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     CRoof = {${zone.model_attr.c1_rt}},
     nOrientationsRoof = ${zone.model_attr.n_rt},
     tiltRoof = ${get_list(deg_to_rad(zone.model_attr.tilt_rt))},
-    aziRoof = ${get_list(deg_to_rad(zone.model_attr.orientation_rt))},
+    aziRoof = ${get_list(azmiut_conv(zone.model_attr.orientation_rt))},
     wfRoof = ${get_list(zone.model_attr.weightfactor_rt)},
     aRoof = ${zone.model_attr.solar_absorp_rt},
     aExt = ${zone.model_attr.solar_absorp_ow},
@@ -52,7 +53,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     alphaRoofOut = ${zone.model_attr.alpha_conv_outer_rt},
     alphaRadRoof = ${zone.model_attr.alpha_rad_outer_rt},
     tiltExtWalls = ${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
-    aziExtWalls = ${get_list(deg_to_rad(zone.model_attr.orientation_facade))},
+    aziExtWalls = ${get_list(azmiut_conv(zone.model_attr.orientation_facade))},
     wfWall = ${get_list(zone.model_attr.weightfactor_ow)},
     wfWin = ${get_list(zone.model_attr.weightfactor_win)},
     wfGro = ${zone.model_attr.weightfactor_ground},
