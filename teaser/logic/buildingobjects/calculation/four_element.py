@@ -1058,20 +1058,19 @@ class FourElement(object):
         if self.merge_windows is True:
 
             try:
-                self.r1_win = (sum((1 / (win.r1 / 6)) for
-                                   win in self.thermal_zone.windows))
+                self.r1_win = 1 / sum(1 / (win.r1 / 6) for win in
+                                      self.thermal_zone.windows)
 
-                self.r1_ow = 1 / (1 / self.r1_ow + self.r1_win)
+                self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
                 self.r_total_ow = 1 / (self.ua_value_ow + self.ua_value_win)
                 self.r_rad_ow_iw = 1 / ((1 / self.r_rad_inner_ow) +
                                         (1 / self.r_rad_inner_win))
-
                 self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
                     ((1 / self.r_conv_inner_ow)
                      + (1 / self.r_conv_inner_win)
-                     + (1 / self.r_rad_ow_iw))))
-
-                # TODO: should we handle this in another way?
+                     + (1 / self.r_rad_inner_ow)
+                     + (1 / self.r_rad_inner_win)))) \
+                                 - 1 / (self.alpha_comb_outer_ow * self.area_ow)
 
                 self.ir_emissivity_inner_ow = (
                     (self.ir_emissivity_inner_ow * self.area_ow

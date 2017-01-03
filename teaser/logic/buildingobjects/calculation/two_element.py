@@ -700,6 +700,7 @@ class TwoElement(object):
         self.ua_value_win = sum(
             win.ua_value for win in self.thermal_zone.windows)
 
+        self.r_total_win = 1 / self.ua_value_win
         # values facing the inside of the thermal zone
 
         self.r_conv_inner_win = (1 / (sum(1 / win.r_inner_conv for win in
@@ -790,7 +791,7 @@ class TwoElement(object):
 
         if self.merge_windows is False:
             try:
-                # TODO check if this is equivalent to old tempalte R_zero?
+
                 self.r1_win = (1 / sum((1 / win.r1) for
                                        win in self.thermal_zone.windows))
 
@@ -806,20 +807,20 @@ class TwoElement(object):
         if self.merge_windows is True:
 
             try:
-                self.r1_win = (sum((1 / (win.r1 / 6)) for
-                                   win in self.thermal_zone.windows))
 
-                self.r1_ow = 1 / (1 / self.r1_ow + self.r1_win)
+                self.r1_win = 1 / sum(1 / (win.r1 / 6) for win in
+                                      self.thermal_zone.windows)
+
+                self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
                 self.r_total_ow = 1 / (self.ua_value_ow + self.ua_value_win)
                 self.r_rad_ow_iw = 1 / ((1 / self.r_rad_inner_ow) +
                                         (1 / self.r_rad_inner_win))
-
                 self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
                     ((1 / self.r_conv_inner_ow)
                      + (1 / self.r_conv_inner_win)
-                     + (1 / self.r_rad_ow_iw))))
-
-                # TODO: should we handle this in another way?
+                     + (1 / self.r_rad_inner_ow)
+                     + (1 / self.r_rad_inner_win)))) \
+                                 - 1 / (self.alpha_comb_outer_ow * self.area_ow)
 
                 self.ir_emissivity_inner_ow = (
                     (self.ir_emissivity_inner_ow * self.area_ow

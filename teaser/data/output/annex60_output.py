@@ -127,7 +127,7 @@ def export_annex60(
             elif type(zone.model_attr).__name__ == "TwoElement":
                 out_file.write(model_template_2.render_unicode(zone=zone))
             elif type(zone.model_attr).__name__ == "ThreeElement":
-                pass
+                out_file.write(model_template_2.render_unicode(zone=zone))
             elif type(zone.model_attr).__name__ == "FourElement":
                 pass
 
