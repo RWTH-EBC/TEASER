@@ -15,7 +15,7 @@ install:
 
 
 script:
-  - py.test --cov=TEASER
+  - py.test --cov
 
 after_success:
   - coveralls
