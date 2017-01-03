@@ -9,20 +9,18 @@ import warnings
 class ThreeElement(object):
     """This class contains attributes and functions for three element model
 
-    This model adds one further element for the floor plate. Long-term effects
-    dominate the excitation of the floor plate and thus the excitation
-    differs from excitation of outer walls. Thus the model distinguishes
-    between internal thermal masses and exterior walls divided into those
-    who are exposed to the sun and ground plates. While exterior walls
+    This model adds another element for the roof. Roofs commonly exhibit the
+    same excitations as exterior walls but have different coefficients of heat
+    transfer due to their orientation.  Thus the model distinguishes
+    between internal thermal masses and exterior walls divided into
+    outerwalls (vertical), rooftops and ground plates. While all exterior walls
     contribute to heat transfer to the ambient, adiabatic
     conditions apply to interior walls. This approach allows considering the
     dynamic behaviour induced by internal heat storage. This class calculates
     and holds all attributes given in documentation.
 
-    It treats Rooftops and OuterWalls as one type of outer
-    walls and distinguishes GroundFloors as a separatly resulting in two
-    RC-combination for these types.
-
+    It treats OuterWalls, Rooftops and GroundFloors separate resulting in three
+    RC-combination for these.
     Depending on the chosen method it will consider an extra resistance for
     windows or merge all windows into the RC-Combination for outer walls.
 
@@ -78,75 +76,71 @@ class ThreeElement(object):
     c1_iw : float [J/K]
         Lumped capacity of interior walls
 
-    Outer Walls (OuterWall, Rooftop)
+    Outer Walls
 
     area_ow : float [m2]
-        Area of all outer walls (OuterWall, Rooftop).
+        Area of all outer walls .
     alpha_conv_inner_ow : float [W/(m2K)]
         Area-weighted convective coefficient of heat transfer of outer walls
-        facing the inside of this thermal zone (OuterWall, Rooftop).
+        facing the inside of this thermal zone .
     alpha_rad_inner_ow : float [W/(m2K)]
         Area-weighted radiative coefficient of heat transfer of outer walls
-        facing the inside of this thermal zone (OuterWall, Rooftop).
+        facing the inside of this thermal zone .
     alpha_comb_inner_ow : float [W/(m2K)]
         Area-weighted combined coefficient of heat transfer of outer walls
-        facing the inside of this thermal zone (OuterWall, Rooftop).
+        facing the inside of this thermal zone .
     alpha_conv_outer_ow : float [W/(m2K)]
         Area-weighted convective coefficient of heat transfer of outer walls
-        facing the ambient (OuterWall, Rooftop).
+        facing the ambient.
     alpha_rad_outer_ow : float [W/(m2K)]
         Area-weighted radiative coefficient of heat transfer of outer walls
-        facing the ambient (OuterWall, Rooftop).
+        facing the ambient .
     alpha_comb_outer_ow : float [W/(m2K)]
         Area-weighted combined coefficient of heat transfer of outer walls
-        facing the ambient (OuterWall, Rooftop).
+        facing the ambient.
     ua_value_ow : float [W/(m2K)]
-        U-Value times outer wall area (OuterWall, Rooftop).
+        U-Value times outer wall area.
     r_conv_inner_ow : float [K/W]
         Sum of convective resistances for all outer walls facing the
-        inside of this thermal zone (OuterWall, Rooftop).
+        inside of this thermal zone .
     r_rad_inner_ow : float [K/W]
         Sum of radiative resistances for all outer walls facing the
-        inside of this thermal zone (OuterWall, Rooftop).
+        inside of this thermal zone .
     r_comb_inner_ow : float [K/W]
         Sum of combined resistances for all outer walls facing the
-        inside of this thermal zone (OuterWall, Rooftop).
+        inside of this thermal zone.
     r_conv_outer_ow : float [K/W]
         Sum of convective resistances for all outer walls facing the
-        ambient (OuterWall, Rooftop).
+        ambient.
     r_rad_outer_ow : float [K/W]
         Sum of radiative resistances for all outer walls facing the
-        ambient (OuterWall, Rooftop).
+        ambient.
     r_comb_outer_ow : float [K/W]
         Sum of combined resistances for all outer walls facing the
-        ambient (OuterWall, Rooftop).
+        ambient.
     r1_ow : float [K/W]
         Lumped resistance of outer walls no heat transfer coefficients for
-        convection and radiation are accounted in this resistance (OuterWall,
-        Rooftop).
+        convection and radiation are accounted in this resistance.
     r_rest_ow : float [K/W]
         Lumped remaining resistance of outer walls between r1_ow and c1_ow no
         heat transfer coefficients for convection and radiation are accounted
-        in this resistance (OuterWall, Rooftop).
+        in this resistance.
     c1_ow : float [J/K]
-        Lumped capacity of outer walls (OuterWall, Rooftop).
+        Lumped capacity of outer walls .
     weightfactor_ow : list of floats
         Weightfactors of outer walls (UA-Value of walls with same orientation
-        and tilt divided by ua_value_ow) (OuterWall, Rooftop)
+        and tilt divided by ua_value_ow)
     outer_wall_areas : list of floats [m2]
-        Area of all outer walls in one list (OuterWall, Rooftop).
+        Area of all outer walls in one list.
     r_rad_ow_iw : float [K/W]
         Resistance for radiative heat transfer between walls.
         TODO: needs to be checked
     ir_emissivity_outer_ow : float
-        Area-weighted ir emissivity of outer wall facing the ambient (OuterWall,
-        Rooftop).
+        Area-weighted ir emissivity of outer wall facing the ambient.
     ir_emissivity_inner_ow : float
-        Area-weighted ir emissivity of outer walls facing the thermal zone
-        (OuterWall, Rooftop).
+        Area-weighted ir emissivity of outer walls facing the thermal zone.
     solar_absorp_ow : float
-        Area-weighted solar absorption of outer walls facing the ambient
-        (OuterWall, Rooftop).
+        Area-weighted solar absorption of outer walls facing the ambient.
 
     Ground Floors
 
@@ -191,6 +185,72 @@ class ThreeElement(object):
         TODO: needs to be checked
     ir_emissivity_inner_gf : float
         Area-weighted ir emissivity of ground floors facing the thermal zone.
+
+    Rooftops
+
+    area_rt : float [m2]
+        Area of all rooftops .
+    alpha_conv_inner_rt : float [W/(m2K)]
+        Area-weighted convective coefficient of heat transfer of rooftops
+        facing the inside of this thermal zone .
+    alpha_rad_inner_rt : float [W/(m2K)]
+        Area-weighted radiative coefficient of heat transfer of rooftops
+        facing the inside of this thermal zone .
+    alpha_comb_inner_rt : float [W/(m2K)]
+        Area-weighted combined coefficient of heat transfer of rooftops
+        facing the inside of this thermal zone .
+    alpha_conv_outer_rt : float [W/(m2K)]
+        Area-weighted convective coefficient of heat transfer of rooftops
+        facing the ambient.
+    alpha_rad_outer_rt : float [W/(m2K)]
+        Area-weighted radiative coefficient of heat transfer of rooftops
+        facing the ambient .
+    alpha_comb_outer_rt : float [W/(m2K)]
+        Area-weighted combined coefficient of heat transfer of rooftops
+        facing the ambient.
+    ua_value_rt : float [W/(m2K)]
+        U-Value times outer wall area.
+    r_conv_inner_rt : float [K/W]
+        Sum of convective resistances for all rooftops facing the
+        inside of this thermal zone .
+    r_rad_inner_rt : float [K/W]
+        Sum of radiative resistances for all rooftops facing the
+        inside of this thermal zone .
+    r_comb_inner_rt : float [K/W]
+        Sum of combined resistances for all rooftops facing the
+        inside of this thermal zone.
+    r_conv_outer_rt : float [K/W]
+        Sum of convective resistances for all rooftops facing the
+        ambient.
+    r_rad_outer_rt : float [K/W]
+        Sum of radiative resistances for all rooftops facing the
+        ambient.
+    r_comb_outer_rt : float [K/W]
+        Sum of combined resistances for all rooftops facing the
+        ambient.
+    r1_rt : float [K/W]
+        Lumped resistance of rooftops no heat transfer coefficients for
+        convection and radiation are accounted in this resistance.
+    r_rest_rt : float [K/W]
+        Lumped remaining resistance of rooftops between r1_rt and c1_rt no
+        heat transfer coefficients for convection and radiation are accounted
+        in this resistance.
+    c1_rt : float [J/K]
+        Lumped capacity of rooftops .
+    weightfactor_rt : list of floats
+        Weightfactors of rooftops (UA-Value of walls with same orientation
+        and tilt divided by ua_value_rt)
+    outer_wall_areas : list of floats [m2]
+        Area of all rooftops in one list.
+    r_rad_rt_iw : float [K/W]
+        Resistance for radiative heat transfer between walls.
+        TODO: needs to be checked
+    ir_emissivity_outer_rt : float
+        Area-weighted ir emissivity of outer wall facing the ambient.
+    ir_emissivity_inner_rt : float
+        Area-weighted ir emissivity of rooftops facing the thermal zone.
+    solar_absorp_rt : float
+        Area-weighted solar absorption of rooftops facing the ambient.
 
     Windows
 
