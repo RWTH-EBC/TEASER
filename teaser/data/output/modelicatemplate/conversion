@@ -29,7 +29,7 @@
           return_value.append(deg_to_rad(0.0))
   else:
       if 0 < value < 360:
-          return_value = deg_to_rad(-180.0+element)
+          return_value = deg_to_rad(-180.0+value)
       elif value == 0:
           return_value = deg_to_rad(180.0)
       elif value == -1:
