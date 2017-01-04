@@ -30,19 +30,17 @@ def example_type_building():
                     net_leased_area=200,
                     with_ahu=False)
 
-    prj.add_non_residential(
-        method='bmvbs',
-        usage='office',
-        name="Institute",
-        year_of_construction=1988,
-        number_of_floors=3,
-        height_of_floors=3.5,
-        net_leased_area=3500,
-        office_layout=1,
-        window_layout=1,
-        with_ahu=True,
-        construction_type="heavy"
-    )
+
+    prj.type_bldg_office(
+                    name="Institute",
+                    year_of_construction=1988,
+                    number_of_floors=3,
+                    height_of_floors=3.5,
+                    net_leased_area=3500,
+                    office_layout=1,
+                    window_layout=1,
+                    with_ahu=True,
+                    construction_type="heavy")
 
 
     '''

@@ -213,7 +213,7 @@ class Project(object):
         specified. Currently TEASER supports four different types of
         non-residential buildings ('office', 'institute', 'institute4',
         'institute8'). For more information on specific archetype buildings and
-        methods, please read the docs of arcetype classes.
+        methods, please read the docs of archetype classes.
 
         This function also calculates the parameters of the buildings directly
         with the settings set in the project (e.g. used_library_calc or
@@ -224,7 +224,7 @@ class Project(object):
         method : str
             Used archetype method, currenlty only 'bmvbs' is supported
         usage : str
-            Main usage of the obtainend building, currently only 'office',
+            Main usage of the obtained building, currently only 'office',
             'institute', 'institute4', institute8' are supported
         name : str
             Individual name
@@ -337,6 +337,210 @@ class Project(object):
             number_of_elements=self._number_of_elements_calc,
             merge_windows=self._merge_windows_calc,
             used_library=self._used_library_calc)
+
+    def add_residential(
+            self,
+            method,
+            usage,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu=False,
+            residential_layout=None,
+            neighbour_buildings=None,
+            attic=None,
+            cellar=None,
+            dormer=None,
+            construction_type=None,
+            number_of_apartments=None):
+        """Adds a residential building to the TEASER project
+
+        This function adds a residential archetype building to the TEASER
+        project. You need to specify the method of the archetype generation.
+        Currently TEASER supports only method according 'iwu' and 'urbanrenet'
+        for residential buildings ('tabula_de' to follow soon). Further the type
+        of usage needs to be specified. Currently TEASER supports one type of
+        residential building for 'iwu' and eleven types for 'urbanrenet'. For
+        more information on specific archetype buildings and methods, please
+        read the docs of archetype classes.
+
+        This function also calculates the parameters of the buildings directly
+        with the settings set in the project (e.g. used_library_calc or
+        number_of_elements_calc).
+
+        Parameters
+        ----------
+        method : str
+            Used archetype method, currenlty only 'iwu' or 'urbanrenet' are
+            supported, 'tabula_de' to follow soon
+        usage : str
+            Main usage of the obtainend building, currently only
+            'single_family_dwelling' is supported for iwu and 'est1a', 'est1b',
+            'est2', 'est3', 'est4a', 'est4b', 'est5' 'est6', 'est7', 'est8a',
+            'est8b' for urbanrenet.
+        name : str
+            Individual name
+        year_of_construction : int
+            Year of first construction
+        height_of_floors : float [m]
+            Average height of the buildings' floors
+        number_of_floors : int
+            Number of building's floors above ground
+        net_leased_area : float [m2]
+            Total net leased area of building. This is area is NOT the footprint
+            of a building
+        with_ahu : Boolean
+            If set to True, an empty instance of BuildingAHU is instantiated and
+            assigned to attribute central_ahu. This instance holds information
+            for central Air Handling units. Default is False.
+        residential_layout : int
+            Structure of floor plan (default = 0) CAUTION only used for iwu
+                0: compact
+                1: elongated/complex
+        neighbour_buildings : int
+            Number of neighbour buildings. CAUTION: this will not change
+            the orientation of the buildings wall, but just the overall
+            exterior wall and window area(!) (default = 0)
+                0: no neighbour
+                1: one neighbour
+                2: two neighbours
+        attic : int
+            Design of the attic. CAUTION: this will not change the orientation
+            or tilt of the roof instances, but just adapt the roof area(!) (
+            default = 0) CAUTION only used for iwu
+                0: flat roof
+                1: non heated attic
+                2: partly heated attic
+                3: heated attic
+        cellar : int
+            Design of the of cellar CAUTION: this will not change the
+            orientation, tilt of GroundFloor instances, nor the number or area
+            of ThermalZones, but will change GroundFloor area(!) (default = 0)
+            CAUTION only used for iwu
+                0: no cellar
+                1: non heated cellar
+                2: partly heated cellar
+                3: heated cellar
+        dormer : str
+            Is a dormer attached to the roof? CAUTION: this will not
+            change roof or window orientation or tilt, but just adapt the roof
+            area(!) (default = 0) CAUTION only used for iwu
+                0: no dormer
+                1: dormer
+        construction_type : str
+            Construction type of used wall constructions default is "heavy")
+                heavy: heavy construction
+                light: light construction
+        number_of_apartments : int
+            number of apartments inside Building (default = 1). CAUTION only
+            used for urbanrenet
+
+        Returns
+        ----------
+
+        type_bldg : Instance of SingleFamilyDwelling()
+        """
+
+        ass_error_method = "only 'iwu' and 'urbanrenet' are valid methods for " \
+                           "residential archetype generation"
+
+        assert method in ['iwu', 'urbanrenet'], ass_error_method
+
+        if method == 'iwu':
+
+            ass_error_usage_iwu = "only 'single_family_dewlling' is a valid " \
+                                  "usage for iwu archetype method"
+            assert usage in ['single_family_dwelling'], ass_error_usage_iwu
+
+            if usage == 'single_family_dwelling':
+
+                type_bldg = SingleFamilyDwelling(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    residential_layout,
+                    neighbour_buildings,
+                    attic,
+                    cellar,
+                    dormer,
+                    construction_type)
+
+        elif method == 'urbanrenet':
+
+            ass_error_usage_urn = "only 'est1a', 'est1b', 'est2', 'est3', " \
+                                  "'est4a', 'est4b', 'est5' 'est6', 'est7', " \
+                                  "'est8a','est8b' is are valid usages for " \
+                                  "urbanrenet archetype method"
+            assert usage in ['est1a', 'est1b', 'est2', 'est3', 'est4a',
+                             'est4b', 'est5' 'est6', 'est7', 'est8a',
+                             'est8b'], ass_error_usage_urn
+            if usage == 'est1a':
+
+                type_bldg = EST1a(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    neighbour_buildings,
+                    construction_type)
+
+            elif usage == 'est1b':
+
+                type_bldg = EST1b(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    neighbour_buildings,
+                    construction_type,
+                    number_of_apartments)
+
+            elif usage == 'est4b':
+
+                type_bldg = EST4b(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    neighbour_buildings,
+                    construction_type,
+                    number_of_apartments)
+
+            elif usage == 'est7':
+
+                type_bldg = EST7(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    neighbour_buildings,
+                    construction_type,
+                    number_of_apartments)
+
+        type_bldg.generate_archetype()
+        type_bldg.calc_building_parameter(
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
+        return type_bldg
 
     def type_bldg_office(
             self,
@@ -514,43 +718,18 @@ class Project(object):
             with_ahu=False,
             neighbour_buildings=None,
             construction_type=None):
-        """Create and calculate an est1a building
+        """Old function, consider rewriting your code
 
-        Parameters
-        ----------
-
-        name : str
-            Individual name
-        year_of_construction : int
-            Year of first construction
-        height_of_floors : float [m]
-            Average height of the buildings' floors
-        number_of_floors : int
-            Number of building's floors above ground
-        net_leased_area : float [m2]
-            Total net leased area of building. This is area is NOT the footprint
-            of a building
-        with_ahu : Boolean
-            If set to True, an empty instance of BuildingAHU is instantiated and
-            assigned to attribute central_ahu. This instance holds information
-            for central Air Handling units. Default is False.
-        neighbour_buildings : int
-            Number of neighbour buildings. CAUTION: this will not change
-            the orientation of the buildings wall, but just the overall
-            exterior wall and window area(!) (default = 0)
-                0: no neighbour
-                1: one neighbour
-                2: two neighbours
-        construction_type : str
-            Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
-        Returns
-        ----------
-
-        type_bldg : Instance of EST1a()
-
+        This is an old function for archetype generation, consider rewriting
+        your code to use Project.add_non_residential(). This function will be
+        eliminated within the next versions
         """
+
+        warnings.warn("You are using an old function for archetype "
+                      "generation, consider rewriting you code to use "
+                      "Project.add_non_residential(). This function will be "
+                      "eliminated within the next versions")
+
         type_bldg = EST1a(
             self,
             name,
@@ -580,46 +759,18 @@ class Project(object):
             neighbour_buildings=None,
             construction_type=None,
             number_of_apartments=None):
-        """Create and calculate an est1b building
+        """Old function, consider rewriting your code
 
-        Parameters
-        ----------
-
-        name : str
-            Individual name
-        height_of_floors : float [m]
-            Average height of the buildings' floors
-        number_of_floors : int
-            Number of building's floors above ground
-        year_of_construction : int
-            Year of first construction
-        net_leased_area : float [m2]
-            Total net leased area of building. This is area is NOT the footprint
-            of a building
-        with_ahu : Boolean
-            If set to True, an empty instance of BuildingAHU is instantiated and
-            assigned to attribute central_ahu. This instance holds information
-            for central Air Handling units. Default is False.
-        neighbour_buildings : int
-            Number of neighbour buildings. CAUTION: this will not change
-            the orientation of the buildings wall, but just the overall
-            exterior wall and window area(!) (default = 0)
-                0: no neighbour
-                1: one neighbour
-                2: two neighbours
-        construction_type : str
-            Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
-        number_of_apartments : int
-            number of apartments inside Building (default = 1)
-
-        Returns
-        ----------
-
-        type_bldg : Instance of EST1b()
-
+        This is an old function for archetype generation, consider rewriting
+        your code to use Project.add_non_residential(). This function will be
+        eliminated within the next versions
         """
+
+        warnings.warn("You are using an old function for archetype "
+                      "generation, consider rewriting you code to use "
+                      "Project.add_non_residential(). This function will be "
+                      "eliminated within the next versions")
+
         type_bldg = EST1b(
             self,
             name,
@@ -650,46 +801,18 @@ class Project(object):
             neighbour_buildings=None,
             construction_type=None,
             number_of_apartments=None):
-        """Create and calculate an est4b building
+        """Old function, consider rewriting your code
 
-        Parameters
-        ----------
-
-        name : str
-            Individual name
-        height_of_floors : float [m]
-            Average height of the buildings' floors
-        number_of_floors : int
-            Number of building's floors above ground
-        year_of_construction : int
-            Year of first construction
-        net_leased_area : float [m2]
-            Total net leased area of building. This is area is NOT the footprint
-            of a building
-        with_ahu : Boolean
-            If set to True, an empty instance of BuildingAHU is instantiated and
-            assigned to attribute central_ahu. This instance holds
-            information for central Air Handling units. Default is False.
-        neighbour_buildings : int
-            Number of neighbour buildings. CAUTION: this will not change
-            the orientation of the buildings wall, but just the overall
-            exterior wall and window area(!) (default = 0)
-                0: no neighbour
-                1: one neighbour
-                2: two neighbours
-        construction_type : str
-            Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
-        number_of_apartments : int
-            number of apartments inside Building (default = 1)
-
-        Returns
-        ----------
-
-        type_bldg : Instance of EST4b()
-
+        This is an old function for archetype generation, consider rewriting
+        your code to use Project.add_non_residential(). This function will be
+        eliminated within the next versions
         """
+
+        warnings.warn("You are using an old function for archetype "
+                      "generation, consider rewriting you code to use "
+                      "Project.add_non_residential(). This function will be "
+                      "eliminated within the next versions")
+
         type_bldg = EST4b(
             self,
             name,
@@ -720,46 +843,18 @@ class Project(object):
             neighbour_buildings=None,
             construction_type=None,
             number_of_apartments=None):
-        """Create and calculate an est7 building
+        """Old function, consider rewriting your code
 
-        Parameters
-        ----------
-
-        name : str
-            Individual name
-        height_of_floors : float [m]
-            Average height of the buildings' floors
-        number_of_floors : int
-            Number of building's floors above ground
-        year_of_construction : int
-            Year of first construction
-        net_leased_area : float [m2]
-            Total net leased area of building. This is area is NOT the footprint
-            of a building
-        with_ahu : Boolean
-            If set to True, an empty instance of BuildingAHU is instantiated and
-            assigned to attribute central_ahu. This instance holds
-            information for central Air Handling units. Default is False.
-        neighbour_buildings : int
-            Number of neighbour buildings. CAUTION: this will not change
-            the orientation of the buildings wall, but just the overall
-            exterior wall and window area(!) (default = 0)
-                0: no neighbour
-                1: one neighbour
-                2: two neighbours
-        construction_type : str
-            Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
-        number_of_apartments : int
-            number of apartments inside Building (default = 1)
-
-        Returns
-        ----------
-
-        type_bldg : Instance of EST7()
-
+        This is an old function for archetype generation, consider rewriting
+        your code to use Project.add_non_residential(). This function will be
+        eliminated within the next versions
         """
+
+        warnings.warn("You are using an old function for archetype "
+                      "generation, consider rewriting you code to use "
+                      "Project.add_non_residential(). This function will be "
+                      "eliminated within the next versions")
+
         type_bldg = EST7(
             self,
             name,
@@ -793,69 +888,18 @@ class Project(object):
             cellar=None,
             dormer=None,
             construction_type=None):
-        """Create and calculate an residential building
+        """Old function, consider rewriting your code
 
-        Parameters
-        ----------
-
-        name : str
-            Individual name
-        year_of_construction : int
-            Year of first construction
-        height_of_floors : float [m]
-            Average height of the buildings' floors
-        number_of_floors : int
-            Number of building's floors above ground
-        net_leased_area : float [m2]
-            Total net leased area of building. This is area is NOT the footprint
-            of a building
-        with_ahu : Boolean
-            If set to True, an empty instance of BuildingAHU is instantiated and
-            assigned to attribute central_ahu. This instance holds information
-            for central Air Handling units. Default is False.
-        residential_layout : int
-            Structure of floor plan (default = 0)
-                0: compact
-                1: elongated/complex
-        neighbour_buildings : int
-            Number of neighbour buildings. CAUTION: this will not change
-            the orientation of the buildings wall, but just the overall
-            exterior wall and window area(!) (default = 0)
-                0: no neighbour
-                1: one neighbour
-                2: two neighbours
-        attic : int
-            Design of the attic. CAUTION: this will not change the orientation
-            or tilt of the roof instances, but just adapt the roof area(!) (
-            default = 0)
-                0: flat roof
-                1: non heated attic
-                2: partly heated attic
-                3: heated attic
-        cellar : int
-            Design of the of cellar CAUTION: this will not change the
-            orientation, tilt of GroundFloor instances, nor the number or area
-            of ThermalZones, but will change GroundFloor area(!) (default = 0)
-                0: no cellar
-                1: non heated cellar
-                2: partly heated cellar
-                3: heated cellar
-        dormer : str
-            Is a dormer attached to the roof? CAUTION: this will not
-            change roof or window orientation or tilt, but just adapt the roof
-            area(!) (default = 0)
-                0: no dormer
-                1: dormer
-        construction_type : str
-            Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
-
-        Returns
-        ----------
-
-        type_bldg : Instance of SingleFamilyDwelling()
+        This is an old function for archetype generation, consider rewriting
+        your code to use Project.add_non_residential(). This function will be
+        eliminated within the next versions
         """
+
+        warnings.warn("You are using an old function for archetype "
+                      "generation, consider rewriting you code to use "
+                      "Project.add_residential(). This function will be "
+                      "eliminated within the next versions")
+
         type_bldg = SingleFamilyDwelling(
             self,
             name,
