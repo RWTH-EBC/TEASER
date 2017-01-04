@@ -267,14 +267,14 @@ class Project(object):
         ass_error_method = "only 'bmvbs' is a valid method for " \
                            "non-residential archetype generation"
 
-        assert method not in ['bmvs'], ass_error_method
+        assert method in ['bmvbs'], ass_error_method
 
         ass_error_usage = "only 'office', 'institute', 'institute4', " \
                           "'institute8' are valid usagesfor archetype " \
                           "generation"
 
-        assert usage not in ['office', 'institute', 'institute4',
-                             'institute8'], ass_error_usage
+        assert usage in ['office', 'institute', 'institute4',
+                         'institute8'], ass_error_usage
 
         if usage == 'office':
 
