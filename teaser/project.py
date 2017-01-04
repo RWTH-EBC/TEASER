@@ -880,7 +880,7 @@ class Project(object):
         if path is None:
             new_path = os.path.join(utilities.get_default_path(), name)
         else:
-            new_path = path + "/" + name
+            new_path = os.path.join(utilities.get_default_path(), name)
             utilities.create_path(utilities.get_full_path(path))
 
         txml_out.save_teaser_xml(new_path, self)
@@ -924,7 +924,7 @@ class Project(object):
         if path is None:
             new_path = os.path.join(utilities.get_default_path(), name)
         else:
-            new_path = path + "/" + name
+            new_path = os.path.join(path, name)
             utilities.create_path(utilities.get_full_path(path))
 
         citygml_out.save_gml(self, new_path)
@@ -980,9 +980,13 @@ class Project(object):
         """
 
         if path is None:
-            path = utilities.get_default_path() + "/" + self.name
+            path = os.path.join(
+                utilities.get_default_path(),
+                self.name)
         else:
-            path = path + "/" + self.name
+            path = os.path.join(
+                path,
+                self.name)
 
         utilities.create_path(path)
 
@@ -1021,9 +1025,13 @@ class Project(object):
         """
 
         if path is None:
-            path = utilities.get_default_path() + "/" + self.name
+            path = os.path.join(
+                utilities.get_default_path(),
+                self.name)
         else:
-            path = path + "/" + self.name
+            path = os.path.join(
+                path,
+                self.name)
 
         utilities.create_path(path)
 
@@ -1055,9 +1063,13 @@ class Project(object):
         """
 
         if path is None:
-            path = os.path.join(utilities.get_default_path(), self.name)
+            path = os.path.join(
+                utilities.get_default_path(),
+                self.name)
         else:
-            path = path + "/" + self.name
+            path = os.path.join(
+                path,
+                self.name)
 
         text_out.export_parameters_txt(
             prj=self,
