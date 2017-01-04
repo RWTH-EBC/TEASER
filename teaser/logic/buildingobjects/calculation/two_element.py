@@ -819,8 +819,9 @@ class TwoElement(object):
                     ((1 / self.r_conv_inner_ow)
                      + (1 / self.r_conv_inner_win)
                      + (1 / self.r_rad_inner_ow)
-                     + (1 / self.r_rad_inner_win)))) \
-                                 - 1 / (self.alpha_comb_outer_ow * self.area_ow)
+                     + (1 / self.r_rad_inner_win))))# \
+                                # - 1 / (self.alpha_comb_outer_ow *
+                # self.area_ow)
 
                 self.ir_emissivity_inner_ow = (
                     (self.ir_emissivity_inner_ow * self.area_ow
