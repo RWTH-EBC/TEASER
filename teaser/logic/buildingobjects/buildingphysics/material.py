@@ -232,7 +232,7 @@ class Material(object):
         if isinstance(value, float):
             self._solar_absorp = value
         elif value is None:
-            self._solar_absorp = value
+            self._solar_absorp = 0.7
         else:
             try:
                 value = float(value)
@@ -250,7 +250,7 @@ class Material(object):
         if isinstance(value, float):
             self._ir_emissivity = value
         elif value is None:
-            self._ir_emissivity = value
+            self._ir_emissivity = 0.9
         else:
             try:
                 value = float(value)

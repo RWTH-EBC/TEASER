@@ -35,6 +35,7 @@
 		<density>1700.0</density>
 		<thermal_conduc>0.8</thermal_conduc>
 		<heat_capac>1.0</heat_capac>
+		<solar_absorp>0.5</solar_absorp>
 	</Material>
 	<Material material_id="0abb1554-83ff-11e6-bed8-2cd444b2e704">
 		<name>Beton</name>
@@ -47,6 +48,7 @@
 		<density>1800.0</density>
 		<thermal_conduc>0.81</thermal_conduc>
 		<heat_capac>1.0</heat_capac>
+		<solar_absorp>0.7</solar_absorp>
 	</Material>
 	<Material material_id="0abbb19b-83ff-11e6-95f9-2cd444b2e704">
 		<name>Glas1984_1994KunststofffensterIsolierverglasung</name>
@@ -77,6 +79,7 @@
 		<density>1600.0</density>
 		<thermal_conduc>0.8</thermal_conduc>
 		<heat_capac>1.0</heat_capac>
+		<solar_absorp>0.2</solar_absorp>
 	</Material>
 	<Material material_id="0abb8a96-83ff-11e6-99cf-2cd444b2e704">
 		<name>Ortbeton</name>
@@ -89,12 +92,14 @@
 		<density>1000.0</density>
 		<thermal_conduc>0.4</thermal_conduc>
 		<heat_capac>1.0</heat_capac>
+		<solar_absorp>0.2</solar_absorp>
 	</Material>
 	<Material material_id="0aba51fd-83ff-11e6-b93d-2cd444b2e704">
 		<name>Kalzputz</name>
 		<density>1600.0</density>
 		<thermal_conduc>0.8</thermal_conduc>
 		<heat_capac>1.0</heat_capac>
+		<solar_absorp>0.2</solar_absorp>
 	</Material>
 	<Material material_id="0abaa032-83ff-11e6-abf7-2cd444b2e704">
 		<name>FertigbalkenmitMineralwolleschicht</name>
@@ -227,6 +232,7 @@
 		<density>1800.0</density>
 		<thermal_conduc>0.81</thermal_conduc>
 		<heat_capac>1.0</heat_capac>
+		<solar_absorp>0.7</solar_absorp>
 	</Material>
 	<Material material_id="0abb6390-83ff-11e6-9ec6-2cd444b2e704">
 		<name>Hobeldielen</name>
@@ -335,6 +341,7 @@
 		<density>1600.0</density>
 		<thermal_conduc>0.8</thermal_conduc>
 		<heat_capac>1.0</heat_capac>
+		<solar_absorp>0.2</solar_absorp>
 	</Material>
 	<Material material_id="0abbb196-83ff-11e6-8079-2cd444b2e704">
 		<name>Glas0_1978AluoderStahlfensterIsolierverglasung</name>
@@ -353,6 +360,7 @@
 		<density>800.0</density>
 		<thermal_conduc>0.25</thermal_conduc>
 		<heat_capac>1.0</heat_capac>
+		<solar_absorp>0.2</solar_absorp>
 	</Material>
 	<Material material_id="0abb638f-83ff-11e6-8e6b-2cd444b2e704">
 		<name>Normalbeton</name>
@@ -431,6 +439,7 @@
 		<density>1600.0</density>
 		<thermal_conduc>0.8</thermal_conduc>
 		<heat_capac>1.0</heat_capac>
+		<solar_absorp>0.2</solar_absorp>
 	</Material>
 	<Material material_id="0abbb1a4-83ff-11e6-96ae-2cd444b2e704">
 		<name>Glas0_2016heavy_annex</name>
