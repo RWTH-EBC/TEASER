@@ -1,0 +1,5 @@
+[run]
+omit =
+    # omit everything in gui and example packages
+    teaser/examples/*
+    teaser/gui/*
