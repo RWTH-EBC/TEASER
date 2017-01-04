@@ -141,15 +141,15 @@ model ${zone.parent.name}_${zone.name}
   Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow machinesConv
     "Convective heat flow of machines"
     annotation (Placement(transformation(extent={{48,-84},{68,-64}})));
-    Modelica.Blocks.Sources.CombiTimeTable internalGains(
-        tableOnFile=true,
-        extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-        tableName="Internals",
-        fileName=Modelica.Utilities.Files.loadResource(
-            "modelica://${zone.parent.parent.name}/${zone.parent.name}/${zone.parent.name}_Models/${zone.parent.library_attr.file_internal_gains}"),
-        columns={2,3,4})
-        "Table with profiles for persons (radiative and convective) and machines (convective)"
-        annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
+  Modelica.Blocks.Sources.CombiTimeTable internalGains(
+    tableOnFile=true,
+    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+    tableName="Internals",
+    fileName=Modelica.Utilities.Files.loadResource(
+      "modelica://${zone.parent.parent.name}/${zone.parent.name}/${zone.parent.name}_Models/${zone.parent.library_attr.file_internal_gains}"),
+    columns={2,3,4})
+    "Table with profiles for persons (radiative and convective) and machines (convective)"
+    annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperatureFloor
     "Prescribed temperature for floor plate outdoor surface temperature"
     annotation (Placement(transformation(
@@ -219,7 +219,7 @@ equation
   connect(solRad.y, eqAirTemp.HSol)
     annotation (Line(points={{-27.5,11},{-26,11},{-26,2},{-26,2}},
     color={0,0,127}));
-  %for i in range(max(1,zone.model_attr.n_outer)):
+%for i in range(max(1,zone.model_attr.n_outer)):
     connect(weaDat.weaBus, HDifTil[${i+1}].weaBus)
     annotation (Line(
     points={{-78,62},{-74,62},{-74,30},{-68,30}},

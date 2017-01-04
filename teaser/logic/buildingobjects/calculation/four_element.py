@@ -240,6 +240,9 @@ class FourElement(object):
     weightfactor_rt : list of floats
         Weightfactors of rooftops (UA-Value of walls with same orientation
         and tilt divided by ua_value_rt)
+    weightfactor_win_rt : list of floats
+        Weightfactors of windows in rooftop. CAUTION: this will be always a
+        list full of zeors, as windows are always calculated separatly.
     outer_wall_areas : list of floats [m2]
         Area of all rooftops in one list.
     r_rad_rt_iw : float [K/W]
@@ -508,6 +511,7 @@ class FourElement(object):
 
         # Additional attributes
         self.weightfactor_rt = []
+        self.weightfactor_win_rt = []
         self.rooftop_areas = []
         self.tilt_rt = []
         self.orientation_rt = []
@@ -1354,7 +1358,7 @@ class FourElement(object):
 
             self.orientation_rt.append(i[0])
             self.tilt_rt.append(i[1])
-
+            self.weightfactor_win_rt.append(0)
             if not rts:
                 self.weightfactor_rt.append(0.0)
                 self.rooftop_areas.append(0.0)

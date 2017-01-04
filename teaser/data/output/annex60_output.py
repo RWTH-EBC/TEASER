@@ -129,11 +129,12 @@ def export_annex60(
             elif type(zone.model_attr).__name__ == "ThreeElement":
                 out_file.write(model_template_3.render_unicode(zone=zone))
             elif type(zone.model_attr).__name__ == "FourElement":
-                pass
+                out_file.write(model_template_4.render_unicode(zone=zone))
 
-            aixlib_output._help_package(zone_path,
-                                        bldg.name + "_Models",
-                                        within=prj.name + '.' + bldg.name)
+            aixlib_output._help_package(
+                zone_path,
+                bldg.name + "_Models",
+                within=prj.name + '.' + bldg.name)
 
             aixlib_output._help_package_order(zone_path,
                                               bldg.thermal_zones,
