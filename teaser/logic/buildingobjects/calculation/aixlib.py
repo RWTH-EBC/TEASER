@@ -114,7 +114,7 @@ class AixLib(object):
             time_line.append([i*time_step])
         return time_line
 
-    def modelica_set_temp(self, path=None):
+    def modelica_set_temp(self, use_set_back=True, path=None):
         """creates .mat file for set temperatures
 
         This function creates a matfile (-v4) for set temperatures of each
@@ -125,8 +125,12 @@ class AixLib(object):
 
         Parameters
         ----------
+        use_set_back : bool
+            True if night set back should be used. In this case the function
+            considers heating_time and temp_set_back defined in
+            use_conditions of zone
         path : str
-            optional path, when matfile is exported seperately
+            optional path, when matfile is exported separately
         """
 
         if path is None:
@@ -137,14 +141,28 @@ class AixLib(object):
         utilities.create_path(path)
         path = os.path.join(path, self.file_set_t)
 
-        t_set_heat = [0]
+        time_line = self.create_profile()
 
         for zone_count in self.parent.thermal_zones:
-            t_set_heat.append(zone_count.use_conditions.set_temp_heat)
+            for i, time in enumerate(time_line):
+                if use_set_back is False:
+                    time.append(zone_count.use_conditions.set_temp_heat)
+                else:
+                    if time[0] < zone_count.use_conditions.heating_time[0] * \
+                            3600:
+                        time.append(zone_count.use_conditions.set_temp_heat -
+                                    zone_count.use_conditions.temp_set_back)
+
+                    elif time[0] > (zone_count.use_conditions.heating_time[1]
+                                        + 1) * 3600:
+                        time.append(zone_count.use_conditions.set_temp_heat -
+                                    zone_count.use_conditions.temp_set_back)
+                    else:
+                        time.append(zone_count.use_conditions.set_temp_heat)
 
         scipy.io.savemat(
             path,
-            mdict={'Tset': [t_set_heat]},
+            mdict={'Tset': time_line},
             appendmat=False,
             format='4')
 

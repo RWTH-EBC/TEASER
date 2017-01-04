@@ -112,9 +112,8 @@ def export_annex60(
             zone_path = os.path.join(
                 bldg_path,
                 bldg.name + "_Models")
-            zone.parent.library_attr.file_internal_gains = 'InternalGains_' +\
-                                                           bldg.name + \
-                                                           zone.name + '.mat'
+            zone.parent.library_attr.file_internal_gains = \
+                'InternalGains_' + bldg.name + zone.name + '.mat'
             bldg.library_attr.modelica_gains_boundary(
                 time_line=None,
                 path=zone_path)
@@ -132,13 +131,14 @@ def export_annex60(
                 out_file.write(model_template_4.render_unicode(zone=zone))
 
             aixlib_output._help_package(
-                zone_path,
-                bldg.name + "_Models",
+                path=bldg_path,
+                name=bldg.name + "_Models",
                 within=prj.name + '.' + bldg.name)
 
-            aixlib_output._help_package_order(zone_path,
-                                              bldg.thermal_zones,
-                                              (bldg.name + "_"))
+            aixlib_output._help_package_order(
+                path=zone_path,
+                package_list=bldg.thermal_zones,
+                addition=(bldg.name + "_"))
 
             out_file.close()
 
