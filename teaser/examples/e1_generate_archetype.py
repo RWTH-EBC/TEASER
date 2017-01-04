@@ -70,5 +70,5 @@ def example_generate_archetype():
 
 if __name__ == '__main__':
     prj = example_generate_archetype()
-    
-    print("That's it! :)")
+
+    print("Example 1: That's it! :)")
