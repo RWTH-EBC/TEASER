@@ -57,7 +57,7 @@ model ${zone.parent.name}_${zone.name}
     RFloorRem=${zone.model_attr.r_rest_gf},
     CFloor={${zone.model_attr.c1_gf}},
     ARoof=${zone.model_attr.area_rt},
-    alphaRoof=${def_alpha(zone.model_attr.alpha_conv_inner_rt)},
+    alphaRoof=${zone.model_attr.alpha_conv_inner_rt},
     nRoof=1,
     RRoof={${zone.model_attr.r1_rt}},
     RRoofRem=${zone.model_attr.r_rest_rt},
@@ -73,7 +73,7 @@ model ${zone.parent.name}_${zone.name}
     AExt=${get_list(zone.model_attr.facade_areas)})
     "Thermal zone"
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
-% if merge_windows is True:
+% if zone.model_attr.merge_windows is True:
   Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
     n=${zone.model_attr.n_outer},
     wfGro=${zone.model_attr.weightfactor_ground},
@@ -105,7 +105,7 @@ model ${zone.parent.name}_${zone.name}
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature
     "Prescribed temperature for exterior walls outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,-6},{20,6}})));
-% if merge_windows is False:
+% if zone.model_attr.merge_windows is False:
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature1
     "Prescribed temperature for windows outdoor surface temperature"
     annotation (Placement(transformation(extent={{8,14},{20,26}})));
@@ -130,7 +130,7 @@ model ${zone.parent.name}_${zone.name}
     extent={{-4,-4},{4,4}},
     rotation=90,
     origin={30,-16})));
-% if merge_windows is False:
+% if zone.model_attr.merge_windows is False:
   Modelica.Blocks.Sources.Constant alphaWin(k=${zone.model_attr.alpha_comb_outer_win}*${zone.model_attr.area_win})
     "Outdoor coefficient of heat transfer for windows"
     annotation (Placement(
@@ -177,8 +177,8 @@ model ${zone.parent.name}_${zone.name}
     alphaWallOut=${zone.model_attr.alpha_conv_outer_rt},
     alphaRad=${zone.model_attr.alpha_rad_outer_rt},
     n=${zone.model_attr.n_rt},
-    wfWall={${list_to_string(zone.model_attr.weightfactor_rt)}},
-    wfWin={${list_to_string(zone.model_attr.weightfactor_win_rt)}},
+    wfWall=${get_list(zone.model_attr.weightfactor_rt)},
+    wfWin=${get_list(zone.model_attr.weightfactor_win_rt)},
     TGro=285.15) "Computes equivalent air temperature for roof"
     annotation (Placement(transformation(extent={{30,34},{50,54}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperatureRoof
@@ -189,11 +189,11 @@ model ${zone.parent.name}_${zone.name}
     "Outdoor convective heat transfer of roof"
     annotation (Placement(transformation(extent={{5,-5},{-5,5}},rotation=-90,
     origin={67,27})));
-  Modelica.Blocks.Sources.Constant alphaRoof(k=${def_alpha(zone.alpha_comb_outer_rt*zone.area_rt)})
+  Modelica.Blocks.Sources.Constant alphaRoof(k=${zone.model_attr.alpha_comb_outer_rt*zone.model_attr.area_rt})
     "Outdoor coefficient of heat transfer for roof"
     annotation (Placement(transformation(extent={{4,-4},{-4,4}},rotation=0,
     origin={86,27})));
-  Modelica.Blocks.Sources.Constant const1[${def_nOrientations(len(zone.rooftops))}](each k=0)
+  Modelica.Blocks.Sources.Constant const1[${zone.model_attr.n_rt}](each k=0)
     "Sets sunblind signal to zero (open)" annotation (Placement(transformation(
         extent={{3,-3},{-3,3}},
         rotation=90,
@@ -202,14 +202,14 @@ model ${zone.parent.name}_${zone.name}
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{4,76},{14,86}})));
   Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTilRoof[${zone.model_attr.n_rt}](
-    til={${get_list(deg_to_rad(zone.model_attr.tilt_rt))}},
-    each lat = ${deg_to_rad(bldg.latitude)},
+    til=${get_list(deg_to_rad(zone.model_attr.tilt_rt))},
+    each lat = ${deg_to_rad(zone.parent.latitude)},
     azi=${get_list(azmiut_conv(zone.model_attr.orientation_rt))})
     "Calculates direct solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,74},{-48,94}})));
   Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTilRoof[${zone.model_attr.n_rt}](
-    til={${get_list(deg_to_rad(zone.model_attr.tilt_rt))}},
-    each lat = ${deg_to_rad(bldg.latitude)},
+    til=${get_list(deg_to_rad(zone.model_attr.tilt_rt))},
+    each lat = ${deg_to_rad(zone.parent.latitude)},
     azi=${get_list(azmiut_conv(zone.model_attr.orientation_rt))})
     "Calculates diffuse solar radiation on titled surface for both directions"
     annotation (Placement(transformation(extent={{-68,48},{-48,68}})));
@@ -344,7 +344,7 @@ equation
     annotation (Line(points={{40,67.7},{40,56}}, color={0,0,127}));
   connect(eqAirTempVDI.TEqAir, prescribedTemperatureRoof.T) annotation (Line(
         points={{51,44},{56,44},{56,58},{67,58},{67,51.2}}, color={0,0,127}));
-  %for i in range(max(1,len(zone.model_attr.n_rt))):
+  %for i in range(max(1,zone.model_attr.n_rt)):
   connect(weaDat.weaBus, HDifTilRoof[${i+1}].weaBus) annotation (Line(
       points={{-76,22},{-74,22},{-74,58},{-68,58}},
       color={255,204,51},
