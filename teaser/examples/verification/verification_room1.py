@@ -2,10 +2,9 @@
 # TEASER Development Team
 
 """
-This Scripts loads the VDI 6007 Room as *.teaserXML and computes
+This Scripts loads the VDI 6007 Room 1 as *.teaserXML and computes
 parameters. The parameters are then compared with the ones from Rouvel
 """
-
 
 from teaser.project import Project
 import teaser.logic.utilities as utilities
