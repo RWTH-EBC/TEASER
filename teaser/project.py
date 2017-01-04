@@ -191,8 +191,10 @@ class Project(object):
         for bldg in self.buildings:
             bldg.retrofit_building(year_of_retrofit, window_type, material)
 
-    def type_bldg_office(
+    def add_non_residential(
             self,
+            method,
+            usage,
             name,
             year_of_construction,
             number_of_floors,
@@ -202,11 +204,28 @@ class Project(object):
             office_layout=None,
             window_layout=None,
             construction_type=None):
-        """Create and calculate an office building
+        """Adds a non-residential building to the TEASER project
+
+        This function adds a non-residential archetype building to the TEASER
+        project. You need to specify the method of the archetype generation.
+        Currently TEASER supports only method according to Lichtmess and BMVBS
+        for non-residential buildings. Further the type of usage needs to be
+        specified. Currently TEASER supports four different types of
+        non-residential buildings ('office', 'institute', 'institute4',
+        'institute8'). For more information on specific archetype buildings and
+        methods, please read the docs of arcetype classes.
+
+        This function also calculates the parameters of the buildings directly
+        with the settings set in the project (e.g. used_library_calc or
+        number_of_elements_calc).
 
         Parameters
         ----------
-
+        method : str
+            Used archetype method, currenlty only 'bmvbs' is supported
+        usage : str
+            Main usage of the obtainend building, currently only 'office',
+            'institute', 'institute4', institute8' are supported
         name : str
             Individual name
         year_of_construction : int
@@ -245,6 +264,102 @@ class Project(object):
         type_bldg : Instance of Office()
 
         """
+        ass_error_method = "only 'bmvbs' is a valid method for " \
+                           "non-residential archetype generation"
+
+        assert method not in ['bmvs'], ass_error_method
+
+        ass_error_usage = "only 'office', 'institute', 'institute4', " \
+                          "'institute8' are valid usagesfor archetype " \
+                          "generation"
+
+        assert usage not in ['office', 'institute', 'institute4',
+                             'institute8'], ass_error_usage
+
+        if usage == 'office':
+
+            type_bldg = Office(
+                self,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                office_layout,
+                window_layout,
+                construction_type)
+
+        elif usage == 'institute':
+
+            type_bldg = Institute(
+                self,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                office_layout,
+                window_layout,
+                construction_type)
+
+        elif usage == 'institute4':
+
+            type_bldg = Institute4(
+                self,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                office_layout,
+                window_layout,
+                construction_type)
+
+        elif usage == 'institute8':
+
+            type_bldg = Institute8(
+                self,
+                name,
+                year_of_construction,
+                number_of_floors,
+                height_of_floors,
+                net_leased_area,
+                with_ahu,
+                office_layout,
+                window_layout,
+                construction_type)
+
+        type_bldg.generate_archetype()
+        type_bldg.calc_building_parameter(
+            number_of_elements=self._number_of_elements_calc,
+            merge_windows=self._merge_windows_calc,
+            used_library=self._used_library_calc)
+
+    def type_bldg_office(
+            self,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu=True,
+            office_layout=None,
+            window_layout=None,
+            construction_type=None):
+        """Old function, consider rewriting your code
+
+        This is an old function for archetype generation, consider rewriting
+        your code to use Project.add_non_residential(). This function will be
+        eliminated within the next versions
+        """
+
+        warnings.warn("You are using an old function for archetype "
+                      "generation, consider rewriting you code to use "
+                      "Project.add_non_residential(). This function will be "
+                      "eliminated within the next versions")
 
         type_bldg = Office(
             self,
@@ -276,49 +391,17 @@ class Project(object):
             office_layout=None,
             window_layout=None,
             construction_type=None):
-        """Create and calculate an institute building
+        """Old function, consider rewriting your code
 
-        Parameters
-        ----------
-
-        name : str
-            Individual name
-        year_of_construction : int
-            Year of first construction
-        height_of_floors : float [m]
-            Average height of the buildings' floors
-        number_of_floors : int
-            Number of building's floors above ground
-        net_leased_area : float [m2]
-            Total net leased area of building. This is area is NOT the footprint
-            of a building
-        with_ahu : Boolean
-            If set to True, an empty instance of BuildingAHU is instantiated and
-            assigned to attribute central_ahu. This instance holds information
-            for central Air Handling units. Default is False.
-        office_layout : int
-            Structure of the floor plan of office buildings, default is 1,
-            which is representative for one elongated floor.
-                1: elongated 1 floor
-                2: elongated 2 floors
-                3: compact (e.g. for a square base building)
-        window_layout : int
-            Structure of the window facade type, default is 1, which is
-            representative for a punctuated facade.
-                1: punctuated facade (individual windows)
-                2: banner facade (continuous windows)
-                3: full glazing
-        construction_type : str
-            Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
-
-        Returns
-        ----------
-
-        type_bldg : Instance of Institute()
-
+        This is an old function for archetype generation, consider rewriting
+        your code to use Project.add_non_residential(). This function will be
+        eliminated within the next versions
         """
+
+        warnings.warn("You are using an old function for archetype "
+                      "generation, consider rewriting you code to use "
+                      "Project.add_non_residential(). This function will be "
+                      "eliminated within the next versions")
         type_bldg = Institute(
             self,
             name,
@@ -349,49 +432,18 @@ class Project(object):
             office_layout=None,
             window_layout=None,
             construction_type=None):
-        """Create and calculate an institute4 building
+        """Old function, consider rewriting your code
 
-        Parameters
-        ----------
-
-        name : str
-            Individual name
-        year_of_construction : int
-            Year of first construction
-        height_of_floors : float [m]
-            Average height of the buildings' floors
-        number_of_floors : int
-            Number of building's floors above ground
-        net_leased_area : float [m2]
-            Total net leased area of building. This is area is NOT the footprint
-            of a building
-        with_ahu : Boolean
-            If set to True, an empty instance of BuildingAHU is instantiated and
-            assigned to attribute central_ahu. This instance holds information
-            for central Air Handling units. Default is False.
-        office_layout : int
-            Structure of the floor plan of office buildings, default is 1,
-            which is representative for one elongated floor.
-                1: elongated 1 floor
-                2: elongated 2 floors
-                3: compact (e.g. for a square base building)
-        window_layout : int
-            Structure of the window facade type, default is 1, which is
-            representative for a punctuated facade.
-                1: punctuated facade (individual windows)
-                2: banner facade (continuous windows)
-                3: full glazing
-        construction_type : str
-            Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
-
-        Returns
-        ----------
-
-        type_bldg : Instance of Institute4()
-
+        This is an old function for archetype generation, consider rewriting
+        your code to use Project.add_non_residential(). This function will be
+        eliminated within the next versions
         """
+
+        warnings.warn("You are using an old function for archetype "
+                      "generation, consider rewriting you code to use "
+                      "Project.add_non_residential(). This function will be "
+                      "eliminated within the next versions")
+
         type_bldg = Institute4(
             self,
             name,
@@ -422,49 +474,17 @@ class Project(object):
             office_layout=None,
             window_layout=None,
             construction_type=None):
-        """Create and calculate an institute8 building
+        """Old function, consider rewriting your code
 
-        Parameters
-        ----------
-
-        name : str
-            Individual name
-        year_of_construction : int
-            Year of first construction
-        height_of_floors : float [m]
-            Average height of the buildings' floors
-        number_of_floors : int
-            Number of building's floors above ground
-        net_leased_area : float [m2]
-            Total net leased area of building. This is area is NOT the footprint
-            of a building
-        with_ahu : Boolean
-            If set to True, an empty instance of BuildingAHU is instantiated and
-            assigned to attribute central_ahu. This instance holds information
-            for central Air Handling units. Default is False.
-        office_layout : int
-            Structure of the floor plan of office buildings, default is 1,
-            which is representative for one elongated floor.
-                1: elongated 1 floor
-                2: elongated 2 floors
-                3: compact (e.g. for a square base building)
-        window_layout : int
-            Structure of the window facade type, default is 1, which is
-            representative for a punctuated facade.
-                1: punctuated facade (individual windows)
-                2: banner facade (continuous windows)
-                3: full glazing
-        construction_type : str
-            Construction type of used wall constructions default is "heavy")
-                heavy: heavy construction
-                light: light construction
-
-        Returns
-        ----------
-
-        type_bldg : Instance of Institute8()
-
+        This is an old function for archetype generation, consider rewriting
+        your code to use Project.add_non_residential(). This function will be
+        eliminated within the next versions
         """
+
+        warnings.warn("You are using an old function for archetype "
+                      "generation, consider rewriting you code to use "
+                      "Project.add_non_residential(). This function will be "
+                      "eliminated within the next versions")
         type_bldg = Institute8(
             self,
             name,
@@ -1049,7 +1069,6 @@ class Project(object):
                         path=path)
                 else:
                     pass
-
 
     def export_parameters_txt(self, path=None):
         """Exports parameters of all buildings in a readable text file
