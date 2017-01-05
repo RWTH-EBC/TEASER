@@ -1,4 +1,4 @@
-<%namespace file="/modelica_language/" import="get_true_false, get_list"/> <%namespace file="/conversion/" import="deg_to_rad"/>
+<%namespace file="/modelica_language/" import="get_true_false, get_list"/> <%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
 within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase;
 record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
@@ -52,7 +52,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     alphaRoofOut = 0.0,
     alphaRadRoof = 0.0,
     tiltExtWalls = ${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
-    aziExtWalls = ${get_list(deg_to_rad(zone.model_attr.orientation_facade))},
+    aziExtWalls = ${get_list(azmiut_conv(zone.model_attr.orientation_facade))},
     wfWall = ${get_list(zone.model_attr.weightfactor_ow)},
     wfWin = ${get_list(zone.model_attr.weightfactor_win)},
     wfGro = ${zone.model_attr.weightfactor_ground},

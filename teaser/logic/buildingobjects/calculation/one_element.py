@@ -6,7 +6,7 @@ import random
 import warnings
 
 
-class TwoElement(object):
+class OneElement(object):
     """This class contains attributes and functions for one element model
 
     his model merges all thermal masses into one element, parameterized by the
