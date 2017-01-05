@@ -4,6 +4,7 @@
 
 from teaser.logic.buildingobjects.buildingphysics.buildingelement \
     import BuildingElement
+import warnings
 
 
 class Window(BuildingElement):
@@ -155,7 +156,7 @@ class Window(BuildingElement):
         for layer_count in c_layer:
             self.c1 += layer_count
 
-    def replace_window(self, year_of_refurbishment, window_type=None):
+    def replace_window(self, year_of_retrofit, window_type=None):
         """Replace a window, with a newer one.
 
         Replaces all attributes from the window and replaces it with a high
@@ -163,7 +164,7 @@ class Window(BuildingElement):
 
         Parameters
         ----------
-        year_of_refurbishment: int
+        year_of_retrofit: int
             The year, the building was refurbished
 
         construction: str
@@ -175,9 +176,15 @@ class Window(BuildingElement):
         else:
             pass
 
+        if year_of_retrofit < 1995:
+            year_of_retrofit = 1995
+            warnings.warn("You are using a year of retrofit not supported\
+                    by teaser. We will change your year of retrofit to 1995\
+                    for the calculation. Be careful!")
+
         self.set_calc_default()
         self.layer = None
-        self.load_type_element(year_of_refurbishment,
+        self.load_type_element(year_of_retrofit,
                                window_type,
                                self.parent.parent.parent.data)
 

@@ -11,6 +11,7 @@ import teaser.logic.utilities as utilities
 import os
 
 
+
 def example_export_annex():
     """"This function demonstrates the export to Modelica library Annex60 using
     the API function of TEASER"""
@@ -63,5 +64,5 @@ def example_export_annex():
 if __name__ == '__main__':
 
     example_export_annex()
-    
+
     print("Example 3: That's it! :)")

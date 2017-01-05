@@ -10,7 +10,8 @@ def example_generate_archetype():
     """"This function demonstrates the generation of residential and
     non-residential archetype buildings using the API function of TEASER"""
 
-    # First step: Import the TEASER API (called Project) into your Python module
+    # First step: Import the TEASER API (called Project) into your Python
+    # module
 
     from teaser.project import Project
 
