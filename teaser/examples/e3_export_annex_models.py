@@ -8,6 +8,7 @@ models simulate in Dymola, OpenModelica and JModelica.
 
 import teaser.examples.e1_generate_archetype as e1
 
+
 def example_export_annex():
     """"This function demonstrates the export to Modelica library Annex60 using
     the API function of TEASER"""
@@ -49,5 +50,5 @@ def example_export_annex():
 if __name__ == '__main__':
 
     example_export_annex()
-    
+
     print("Example 3: That's it! :)")

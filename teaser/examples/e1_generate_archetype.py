@@ -5,18 +5,21 @@
 TEASER API functions.
 """
 
+
 def example_generate_archetype():
     """"This function demonstrates the generation of residential and
     non-residential archetype buildings using the API function of TEASER"""
 
-    # First step: Import the TEASER API (called Project) into your Python module
+    # First step: Import the TEASER API (called Project) into your Python
+    # module
 
     from teaser.project import Project
 
     # To use the API instantiate the Project class and rename the Project. The
     # parameter load_data=True indicates that we load archetype data into our
     #  Project (e.g. for Material properties and typical wall constructions.
-    #  This can take a few seconds, depending on the size of the used data base.
+    #  This can take a few seconds, depending on the size of the used data
+    # base
 
     prj = Project(load_data=True)
     prj.name = "ArchetypeExample"
