@@ -46,7 +46,7 @@ def example_generate_archetype():
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
     # Project.add_residential() is used. The meaning of compulsory parameters
-    # do not differ from the residential archetype building.
+    # does not differ from the residential archetype building.
 
     prj.add_non_residential(
         method='bmvbs',
