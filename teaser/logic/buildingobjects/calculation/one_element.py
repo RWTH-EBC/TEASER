@@ -1,4 +1,4 @@
-# created December 2016
+# created January 2017
 
 from __future__ import division
 import math
@@ -7,13 +7,13 @@ import warnings
 
 
 class TwoElement(object):
-    """This class contains attributes and functions for two element model
+    """This class contains attributes and functions for one element model
 
-    This model distinguishes between internal thermal masses and exterior walls.
-    While exterior walls contribute to heat transfer to the ambient, adiabatic
-    conditions apply to interior walls. This approach allows considering the
-    dynamic behaviour induced by internal heat storage. This class calculates
-    and holds all attributes given in documentation.
+    his model merges all thermal masses into one element, parameterized by the
+    length of the RC-chain nExt, the vector of the capacities CExt[nExt] that
+    is connected via the vector of resistances RExt[nExt] and RExtRem to the
+    ambient and indoor air. By default, the model neglects all internal thermal
+    masses that are not directly connected to the ambient.
 
     It treats Rooftops, GroundFloors and OuterWalls as one type of outer
     walls and computes one RC-combination for these types.
@@ -33,45 +33,6 @@ class TwoElement(object):
 
     Attributes
     ----------
-    Interior Walls
-
-    area_iw : float [m2]
-        Area of all interior walls.
-    alpha_conv_inner_iw : float [W/(m2K)]
-        Area-weighted convective coefficient of heat transfer of interior
-        walls facing the inside of this thermal zone.
-    alpha_rad_inner_iw : float [W/(m2K)]
-        Area-weighted radiative coefficient of heat transfer of interior
-        walls facing the inside of this thermal zone.
-    alpha_comb_inner_iw : float [W/(m2K)]
-        Area-weighted combined coefficient of heat transfer of interior walls
-        facing the inside of this thermal zone.
-    alpha_conv_outer_iw : float [W/(m2K)]
-        Area-weighted convective coefficient of heat transfer of interior
-        walls facing the adjacent thermal zone. (Currently not supported)
-    alpha_rad_outer_iw : float [W/(m2K)]
-        Area-weighted radiative coefficient of heat transfer of interior
-        walls facing the adjacent thermal zone. (Currently not supported)
-    alpha_comb_outer_iw : float [W/(m2K)]
-        Area-weighted combined coefficient of heat transfer of interior walls
-        facing the adjacent thermal zone. (Currently not supported)
-    ua_value_iw : float [W/(m2K)]
-        U-Value times interior wall area. (Does not take adjacent thermal
-        zones into account)
-    r_conv_inner_iw : float [K/W]
-        Sum of convective resistances for all interior walls
-        facing the inside of this thermal zone.
-    r_rad_inner_iw : float [K/W]
-        Sum of radiative resistances for all interior walls facing the
-        inside of this thermal zone
-    r_comb_inner_iw : float [K/W]
-        Sum of combined resistances for all interior walls facing the
-        inside of this thermal zone
-    r1_iw : float [K/W]
-        Lumped resistance of interior walls no heat transfer coefficients for
-        convection and radiation are accounted in this resistance.
-    c1_iw : float [J/K]
-        Lumped capacity of interior walls
 
     Outer Walls (OuterWall, Rooftop, GroundFloor)
 
@@ -143,6 +104,9 @@ class TwoElement(object):
         270 - West
     outer_wall_areas : list of floats [m2]
         Area of all outer walls in one list.
+    r_rad_ow_iw : float [K/W]
+        Resistance for radiative heat transfer between walls.
+        TODO: needs to be checked
     ir_emissivity_outer_ow : float
         Area-weighted ir emissivity of outer wall facing the ambient.
     ir_emissivity_inner_ow : float
@@ -255,33 +219,6 @@ class TwoElement(object):
         self.merge_windows = merge_windows
         self.t_bt = t_bt
 
-        # Attributes of inner walls
-        self.area_iw = 0.0
-
-        # coefficient of heat transfer facing the inside of this thermal zone
-        self.alpha_conv_inner_iw = 0.0
-        self.alpha_rad_inner_iw = 0.0
-        self.alpha_comb_inner_iw = 0.0
-        # coefficient of heat transfer facing the adjacent thermal zone
-        self.alpha_conv_outer_iw = 0.0
-        self.alpha_rad_outer_iw = 0.0
-        self.alpha_comb_outer_iw = 0.0
-
-        # UA-Value
-        self.ua_value_iw = 0.0
-
-        # resistances for heat transfer facing the inside of this thermal zone
-        self.r_conv_inner_iw = 0.0
-        self.r_rad_inner_iw = 0.0
-        self.r_comb_inner_iw = 0.0
-        self.r_conv_outer_iw = 0.0
-        self.r_rad_outer_iw = 0.0
-        self.r_comb_outer_iw = 0.0
-
-        # lumped resistance/capacity
-        self.r1_iw = 0.0
-        self.c1_iw = 0.0
-
         # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
         self.area_ow = 0.0
 
@@ -391,17 +328,13 @@ class TwoElement(object):
 
         self.set_calc_default()
         self._sum_outer_wall_elements()
-        self._sum_inner_wall_elements()
         self._sum_window_elements()
         self._calc_outer_elements()
-        self._calc_inner_elements()
         self._calc_wf()
         self._calc_mean_values()
         self._calc_number_of_elements()
         self._fill_zone_lists()
         self._calc_heat_load()
-
-        return True
 
     @staticmethod
     def _calc_parallel_connection(element_list, omega):
@@ -598,80 +531,6 @@ class TwoElement(object):
         self.alpha_comb_outer_ow = (
             1 / (self.r_comb_outer_ow * _area_ow_rt))
 
-    def _sum_inner_wall_elements(self):
-        """Sum attributes for interior elements
-
-        This function sums and computes the area-weighted values,
-        where necessary (the class doc string) for coefficients of heat
-        transfer, resistances, areas and UA-Values.
-
-        It treats all inner walls identical.
-
-        Function is identical for TwoElement, ThreeElement and FourElement.
-
-        Calculation of adjacent thermal zones and thus these attributes are
-        currently not supported.
-
-        """
-        self.area_iw = \
-            (sum(in_wall.area for in_wall in
-                 self.thermal_zone.inner_walls)
-             + sum(floor.area for floor in
-                   self.thermal_zone.floors)
-             + sum(ceiling.area for ceiling in
-                   self.thermal_zone.ceilings))
-
-        self.ua_value_iw = \
-            (sum(in_wall.ua_value for in_wall in
-                 self.thermal_zone.inner_walls)
-             + sum(floor.ua_value for floor in
-                   self.thermal_zone.floors)
-             + sum(ceiling.ua_value for ceiling in
-                   self.thermal_zone.ceilings))
-
-        # values facing the inside of the thermal zone
-
-        self.r_conv_inner_iw = (1 /
-                                (sum(1 / in_wall.r_inner_conv for in_wall in
-                                     self.thermal_zone.inner_walls)
-                                 + sum(1 / floor.r_inner_conv for floor in
-                                       self.thermal_zone.floors)
-                                 + sum(1 / ceiling.r_inner_conv for ceiling in
-                                       self.thermal_zone.ceilings)))
-
-        self.r_rad_inner_iw = (1 /
-                               (sum(1 / in_wall.r_inner_rad for in_wall in
-                                    self.thermal_zone.inner_walls)
-                                + sum(1 / floor.r_inner_rad for floor in
-                                      self.thermal_zone.floors)
-                                + sum(1 / ceiling.r_inner_rad for ceiling in
-                                      self.thermal_zone.ceilings)))
-
-        self.r_comb_inner_iw = (1 /
-                                (sum(1 / in_wall.r_inner_comb for in_wall in
-                                     self.thermal_zone.inner_walls)
-                                 + sum(1 / floor.r_inner_comb for floor in
-                                       self.thermal_zone.floors)
-                                 + sum(1 / ceiling.r_inner_comb for ceiling in
-                                       self.thermal_zone.ceilings)))
-
-        self.ir_emissivity_inner_iw = (
-            sum(in_wall.layer[0].material.ir_emissivity * in_wall.area for
-                in_wall in self.thermal_zone.inner_walls)
-            + sum(floor.layer[0].material.ir_emissivity * floor.area for
-                  floor in self.thermal_zone.floors)
-            + sum(ceiling.layer[0].material.ir_emissivity * ceiling.area for
-                  ceiling in self.thermal_zone.ceilings) / self.area_iw)
-
-        self.alpha_conv_inner_iw = (
-            1 / (self.r_conv_inner_iw * self.area_iw))
-        self.alpha_rad_inner_iw = (
-            1 / (self.r_rad_inner_iw * self.area_iw))
-        self.alpha_comb_inner_iw = (
-            1 / (self.r_comb_inner_iw * self.area_iw))
-
-        # adjacent thermal zones are not supported!
-
     def _sum_window_elements(self):
         """Sum attributes for window elements
 
@@ -799,7 +658,6 @@ class TwoElement(object):
 
                 self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
                 self.r_total_ow = 1 / (self.ua_value_ow + self.ua_value_win)
-
                 self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
                     ((1 / self.r_conv_inner_ow)
                      + (1 / self.r_conv_inner_win)
@@ -825,46 +683,6 @@ class TwoElement(object):
             except RuntimeError:
                 print("As no outer walls or no windows are defined lumped "
                       "parameter cannot be calculated")
-
-    def _calc_inner_elements(self):
-        """Lumped parameter for outer wall elements
-
-        Calculates all necessary parameters for inner walls. This includes
-        InnerWalls, Ceilings and Floors.
-
-        Attributes
-        ----------
-        omega : float [1/s]
-            angular frequency with given time period.
-        outer_walls : list
-            List containing all TEASER Wall instances that are treated as same
-            outer wall type. In case of TwoElement model OuterWalls,
-            GroundFloors, Rooftops
-        """
-
-        omega = 2 * math.pi / 86400 / self.t_bt
-
-        inner_walls = (self.thermal_zone.inner_walls +
-                       self.thermal_zone.floors +
-                       self.thermal_zone.ceilings)
-
-        for in_wall in inner_walls:
-            in_wall.calc_equivalent_res()
-            in_wall.calc_ua_value()
-
-        if 0 < len(inner_walls) <= 1:
-            # only one outer wall, no need to calculate chain matrix
-            self.r1_iw = inner_walls[0].r1
-            self.c1_iw = inner_walls[0].c1_korr
-        elif len(inner_walls) > 1:
-            # more than one outer wall, calculate chain matrix
-            self.r1_iw, self.c1_iw = self._calc_parallel_connection(
-                inner_walls,
-                omega)
-        else:
-            warnings.warn("No walls are defined as outer walls, please be "
-                          "careful with results. In addition this might lead "
-                          "to RunTimeErrors")
 
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)
@@ -920,10 +738,8 @@ class TwoElement(object):
         """
 
         self.alpha_rad_inner_mean = (self.area_ow * self.alpha_rad_inner_ow +
-                                     self.area_win * self.alpha_rad_inner_win +
-                                     self.area_iw * self.alpha_rad_inner_iw) \
-                                    / (self.area_ow + self.area_win +
-                                       self.area_iw)
+                                     self.area_win * self.alpha_rad_inner_win
+                                     ) / (self.area_ow + self.area_win)
         self.alpha_rad_outer_mean = (self.area_ow * self.alpha_rad_outer_ow +
                                      self.area_win * self.alpha_rad_outer_win) \
                                     / (self.area_ow + self.area_win)
@@ -1053,33 +869,6 @@ class TwoElement(object):
         """sets default calculation parameters
         """
 
-        # Attributes of inner walls
-        self.area_iw = 0.0
-
-        # coefficient of heat transfer facing the inside of this thermal zone
-        self.alpha_conv_inner_iw = 0.0
-        self.alpha_rad_inner_iw = 0.0
-        self.alpha_comb_inner_iw = 0.0
-        # coefficient of heat transfer facing the adjacent thermal zone
-        self.alpha_conv_outer_iw = 0.0
-        self.alpha_rad_outer_iw = 0.0
-        self.alpha_comb_outer_iw = 0.0
-
-        # UA-Value
-        self.ua_value_iw = 0.0
-
-        # resistances for heat transfer facing the inside of this thermal zone
-        self.r_conv_inner_iw = 0.0
-        self.r_rad_inner_iw = 0.0
-        self.r_comb_inner_iw = 0.0
-        self.r_conv_outer_iw = 0.0
-        self.r_rad_outer_iw = 0.0
-        self.r_comb_outer_iw = 0.0
-
-        # lumped resistance/capacity
-        self.r1_iw = 0.0
-        self.c1_iw = 0.0
-
         # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
         self.area_ow = 0.0
 
@@ -1121,6 +910,9 @@ class TwoElement(object):
         self.weightfactor_ow = []
         self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
+
+        # TODO: check this value
+        self.r_rad_ow_iw = 0.0
 
         # Attributes for windows
         self.area_win = 0.0

@@ -135,9 +135,6 @@ class ThreeElement(object):
         and tilt divided by ua_value_ow) (OuterWall, Rooftop)
     outer_wall_areas : list of floats [m2]
         Area of all outer walls in one list (OuterWall, Rooftop).
-    r_rad_ow_iw : float [K/W]
-        Resistance for radiative heat transfer between walls.
-        TODO: needs to be checked
     ir_emissivity_outer_ow : float
         Area-weighted ir emissivity of outer wall facing the ambient (OuterWall,
         Rooftop).
@@ -365,9 +362,6 @@ class ThreeElement(object):
         self.weightfactor_ow = []
         self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
-
-        # TODO: check this value
-        self.r_rad_ow_iw = 0.0
 
         # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
         self.area_gf = 0.0
@@ -901,14 +895,12 @@ class ThreeElement(object):
 
                 self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
                 self.r_total_ow = 1 / (self.ua_value_ow + self.ua_value_win)
-                self.r_rad_ow_iw = 1 / ((1 / self.r_rad_inner_ow) +
-                                        (1 / self.r_rad_inner_win))
                 self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
                     ((1 / self.r_conv_inner_ow)
                      + (1 / self.r_conv_inner_win)
                      + (1 / self.r_rad_inner_ow)
-                     + (1 / self.r_rad_inner_win)))) \
-                                 - 1 / (self.alpha_comb_outer_ow * self.area_ow)
+                     + (1 / self.r_rad_inner_win)))) - 1 / (
+                    self.alpha_comb_outer_ow * self.area_ow)
 
                 self.ir_emissivity_inner_ow = (
                     (self.ir_emissivity_inner_ow * self.area_ow
@@ -1243,9 +1235,6 @@ class ThreeElement(object):
         self.weightfactor_ow = []
         self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
-
-        # TODO: check this value
-        self.r_rad_ow_iw = 0.0
 
         # Attributes for outer walls (OuterWall, Rooftop, GroundFloor)
         self.area_gf = 0.0

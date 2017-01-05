@@ -132,9 +132,6 @@ class FourElement(object):
         and tilt divided by ua_value_ow)
     outer_wall_areas : list of floats [m2]
         Area of all outer walls in one list.
-    r_rad_ow_iw : float [K/W]
-        Resistance for radiative heat transfer between walls.
-        TODO: needs to be checked
     ir_emissivity_outer_ow : float
         Area-weighted ir emissivity of outer wall facing the ambient.
     ir_emissivity_inner_ow : float
@@ -440,9 +437,6 @@ class FourElement(object):
         self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
 
-        # TODO: check this value
-        self.r_rad_ow_iw = 0.0
-
         # Attributes for GroundFloor
         self.area_gf = 0.0
 
@@ -746,12 +740,18 @@ class FourElement(object):
                                      self.thermal_zone.outer_walls)))
 
         self.ir_emissivity_outer_ow = (
-            (sum(out_wall.layer[-1].material.ir_emissivity * out_wall.area for
-                 out_wall in self.thermal_zone.outer_walls))) / self.area_ow
+                                          (sum(out_wall.layer[
+                                                   -1].material.ir_emissivity * out_wall.area
+                                               for
+                                               out_wall in
+                                               self.thermal_zone.outer_walls))) / self.area_ow
 
         self.solar_absorp_ow = (
-            (sum(out_wall.layer[-1].material.solar_absorp * out_wall.area for
-                 out_wall in self.thermal_zone.outer_walls))) / self.area_ow
+                                   (sum(out_wall.layer[
+                                            -1].material.solar_absorp * out_wall.area
+                                        for
+                                        out_wall in
+                                        self.thermal_zone.outer_walls))) / self.area_ow
 
         self.alpha_conv_outer_ow = (
             1 / (self.r_conv_outer_ow * self.area_ow))
@@ -826,7 +826,7 @@ class FourElement(object):
         # values facing the inside of the thermal zone
 
         self.r_conv_inner_rt = (1 / sum(1 / roof.r_inner_conv for roof in
-                                   self.thermal_zone.rooftops))
+                                        self.thermal_zone.rooftops))
 
         self.r_rad_inner_rt = (1 / sum(1 / roof.r_inner_rad for roof in
                                        self.thermal_zone.rooftops))
@@ -1067,14 +1067,12 @@ class FourElement(object):
 
                 self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
                 self.r_total_ow = 1 / (self.ua_value_ow + self.ua_value_win)
-                self.r_rad_ow_iw = 1 / ((1 / self.r_rad_inner_ow) +
-                                        (1 / self.r_rad_inner_win))
                 self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
                     ((1 / self.r_conv_inner_ow)
                      + (1 / self.r_conv_inner_win)
                      + (1 / self.r_rad_inner_ow)
-                     + (1 / self.r_rad_inner_win)))) \
-                                 - 1 / (self.alpha_comb_outer_ow * self.area_ow)
+                     + (1 / self.r_rad_inner_win)))) - 1 / (
+                    self.alpha_comb_outer_ow * self.area_ow)
 
                 self.ir_emissivity_inner_ow = (
                     (self.ir_emissivity_inner_ow * self.area_ow
@@ -1467,9 +1465,6 @@ class FourElement(object):
         self.weightfactor_ow = []
         self.weightfactor_ground = 0.0
         self.outer_wall_areas = []
-
-        # TODO: check this value
-        self.r_rad_ow_iw = 0.0
 
         # Attributes for GroundFloor
         self.area_gf = 0.0
