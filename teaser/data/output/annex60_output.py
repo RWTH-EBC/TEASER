@@ -64,6 +64,10 @@ def export_annex60(
 
     lookup = TemplateLookup(directories=[utilities.get_full_path(
         "data/output/modelicatemplate/")])
+    model_template_1 = Template(
+        filename=utilities.get_full_path(
+            "data/output/modelicatemplate/Annex60/Annex60_OneElement"),
+        lookup=lookup)
     model_template_2 = Template(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/Annex60/Annex60_TwoElements"),
@@ -122,7 +126,7 @@ def export_annex60(
                 zone_path, bldg.name + '_' + zone.name + '.mo')), 'w')
 
             if type(zone.model_attr).__name__ == "OneElement":
-                pass
+                out_file.write(model_template_1.render_unicode(zone=zone))
             elif type(zone.model_attr).__name__ == "TwoElement":
                 out_file.write(model_template_2.render_unicode(zone=zone))
             elif type(zone.model_attr).__name__ == "ThreeElement":
