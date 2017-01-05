@@ -10,7 +10,8 @@ from PyQt4.Qt import QDialog, QStandardItemModel
 from PyQt4.Qt import Qt
 from PyQt4.QtCore import SIGNAL
 from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap
-from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as\
+    FigureCanvas
 import matplotlib.pyplot as plt
 from numpy.distutils.pathccompiler import PathScaleCCompiler
 from teaser.gui.guihelp.guiinfo import GUIInfo
@@ -64,7 +65,6 @@ class MainUI(QDialog):
         super(MainUI, self).__init__(parent)
 
         """ General layout and gui-global variables """
-
 
         self.setWindowFlags(self.windowFlags() | Qt.WindowMinMaxButtonsHint)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -844,19 +844,22 @@ class MainUI(QDialog):
         self.new_type_building_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI/GUIImages/CreateTypeBuilding.png")),
             self.ribbon_widget)
-        self.new_type_building_button.setGeometry(QtCore.QRect(265, 5, 70, 70))
+        self.new_type_building_button.setGeometry(
+            QtCore.QRect(265, 5, 70, 70))
         self.new_type_building_button.clicked.connect(
             self.generate_type_building_ui)
         self.new_type_building_button.setToolTip(
             "Create a new typebuilding")
         self.new_type_building_label = QtGui.QLabel(self.ribbon_group_box)
-        self.new_type_building_label.setGeometry(QtCore.QRect(265, 80, 70, 25))
+        self.new_type_building_label.setGeometry(
+            QtCore.QRect(265, 80, 70, 25))
         self.new_type_building_label.setText("Create \nType-Building")
         self.new_type_building_label.setAlignment(QtCore.Qt.AlignCenter)
         self.new_empty_building_button = PictureButton(QtGui.QPixmap(
             utilitis.get_full_path("GUI/GUIImages/CreateEmptyBuilding.png")),
             self.ribbon_widget)
-        self.new_empty_building_button.setGeometry(QtCore.QRect(350, 5, 70, 70))
+        self.new_empty_building_button.setGeometry(
+            QtCore.QRect(350, 5, 70, 70))
         self.new_empty_building_button.clicked.connect(
             self.create_new_building_ui)
         self.new_empty_building_button.setToolTip(
@@ -1084,37 +1087,37 @@ class MainUI(QDialog):
             "generate_new_building_city_line_edit")
 
         self.generate_new_building_constr_year_label = QtGui.QLabel(
-             "Contruction Year: ")
+            "Contruction Year: ")
         self.generate_new_building_constr_year_line_edit = QtGui.QLineEdit()
         self.generate_new_building_constr_year_line_edit.setValidator(
-             validator)
+            validator)
         self.generate_new_building_constr_year_line_edit.setObjectName(
             "generate_new_building_constr_year_line_edit")
 
         self.generate_new_building_number_of_floors_label = QtGui.QLabel(
-             "Number of Floors: ")
+            "Number of Floors: ")
         self.generate_new_building_number_of_floors_line_edit =\
             QtGui.QLineEdit()
         self.generate_new_building_number_of_floors_line_edit.setValidator(
-             validator)
+            validator)
         self.generate_new_building_number_of_floors_line_edit.setObjectName(
             "generate_new_building_number_of_floors_line_edit")
 
         self.generate_new_building_height_of_floors_label = QtGui.QLabel(
-             "Height of Floors: ")
+            "Height of Floors: ")
         self.generate_new_building_height_of_floors_line_edit =\
             QtGui.QLineEdit()
         self.generate_new_building_height_of_floors_line_edit.setValidator(
-             validator)
+            validator)
         self.generate_new_building_height_of_floors_line_edit.setObjectName(
             "generate_new_building_height_of_floors_line_edit")
 
         self.generate_new_building_net_leased_area_label = QtGui.QLabel(
-             "Net leased Area: ")
+            "Net leased Area: ")
         self.generate_new_building_net_leased_area_line_edit =\
             QtGui.QLineEdit()
         self.generate_new_building_net_leased_area_line_edit.setValidator(
-             validator)
+            validator)
         self.generate_new_building_net_leased_area_line_edit.setObjectName(
             ".generate_new_building_net_leased_area_line_edit")
 

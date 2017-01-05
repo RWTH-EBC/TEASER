@@ -14,15 +14,14 @@ from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
-from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
-from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+from teaser.logic.buildingobjects.buildingphysics.groundfloor import\
+    GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.project import Project
 import teaser.data.output.teaserxml_output as teaser_xml
 import teaser.data.output.citygml_output as city_gml
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
-from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
 
 
 class Controller():
@@ -222,7 +221,7 @@ class Controller():
                 building.year_of_construction = year_of_construction
                 building.number_of_floors = number_of_floors
                 building.height_of_floors = height_of_floors
-                if update_archtertype == True:
+                if update_archtertype is True:
                     building._thermal_zones = []
                     building.generate_archetype()
         return project
@@ -303,7 +302,9 @@ class Controller():
 
         if type_of_building == "Office":
 
-            building = parent.type_bldg_office(
+            building = parent.add_non_residential(
+                method="bmvbs",
+                usage="office",
                 name=name,
                 year_of_construction=year_of_construction,
                 number_of_floors=number_of_floors,
