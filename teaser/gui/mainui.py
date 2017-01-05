@@ -102,9 +102,9 @@ class MainUI(QDialog):
         self.is_empty_building_button = False
         self.file_path = ""
         self.setObjectName(_fromUtf8("MainWindow"))
-        self.resize(900, 800)
-        self.setMinimumSize(QtCore.QSize(900, 800))
-        self.setMaximumSize(QtCore.QSize(900, 800))
+        self.resize(900, 700)
+        self.setMinimumSize(QtCore.QSize(900, 700))
+        self.setMaximumSize(QtCore.QSize(900, 700))
         self.teaser_icon = QtGui.QIcon()
         self.teaser_icon.addFile(utilitis.get_full_path(
                     'gui/guiimages/Teaser_logo.png'), QtCore.QSize(16, 16))
@@ -118,7 +118,7 @@ class MainUI(QDialog):
         self.side_bar_widget = QtGui.QTabWidget(self.central_widget)
         self.side_bar_widget.setGeometry(QtCore.QRect(1, 110, 210, 590))
         self.main_widget = QtGui.QTabWidget(self.central_widget)
-        self.main_widget.setGeometry(QtCore.QRect(211, 110, 689, 590))
+        self.main_widget.setGeometry(QtCore.QRect(211, 110, 689, 490))
         self.standard_view_group_box = QtGui.QGroupBox(self.main_widget)
         self.standard_view_group_box.setGeometry(QtCore.QRect(0, 0, 689, 590))
         self.standard_view_group_box.setVisible(True)
@@ -144,7 +144,7 @@ class MainUI(QDialog):
                          QtGui.QColor(100, 100, 100, 20))
         self.ribbon_group_box.setPalette(palette)
         self.bottom_group_box = QtGui.QGroupBox(self)
-        self.bottom_group_box.setGeometry(QtCore.QRect(0, 700, 900, 100))
+        self.bottom_group_box.setGeometry(QtCore.QRect(0, 600, 900, 100))
         self.text_edit = QtGui.QTextEdit(self.bottom_group_box)
         self.text_edit.setGeometry(QtCore.QRect(0, 0, 900, 100))
 
@@ -730,7 +730,7 @@ class MainUI(QDialog):
         self.mask_label_3.setVisible(False)
         self.mask_label_3.setStyleSheet("background-color:rgba(0,0,0,80)")
         self.image_1 = QtGui.QPixmap()
-        self.image_1.load(utilitis.get_full_path("GUI/GUIImages/Bild1.png"))
+        self.image_1.load(utilitis.get_full_path("gui/guiimages/Bild1.png"))
         self.pix_label_1 = QtGui.QLabel(self.side_bar_group_box)
         self.pix_label_1.setPixmap(self.image_1)
         self.pix_label_1.setGeometry(QtCore.QRect(5, 500, 210, 137))
@@ -842,7 +842,7 @@ class MainUI(QDialog):
         self.mask_label_4.setVisible(False)
         self.mask_label_4.setStyleSheet("background-color:rgba(0,0,0,80)")
         self.new_type_building_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/CreateTypeBuilding.png")),
+            utilitis.get_full_path("gui/guiimages/CreateTypeBuilding.png")),
             self.ribbon_widget)
         self.new_type_building_button.setGeometry(
             QtCore.QRect(265, 5, 70, 70))
@@ -856,7 +856,7 @@ class MainUI(QDialog):
         self.new_type_building_label.setText("Create \nType-Building")
         self.new_type_building_label.setAlignment(QtCore.Qt.AlignCenter)
         self.new_empty_building_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/CreateEmptyBuilding.png")),
+            utilitis.get_full_path("gui/guiimages/CreateEmptyBuilding.png")),
             self.ribbon_widget)
         self.new_empty_building_button.setGeometry(
             QtCore.QRect(350, 5, 70, 70))
@@ -869,7 +869,7 @@ class MainUI(QDialog):
         self.new_building_label.setText("Create \nBuilding")
         self.new_building_label.setAlignment(QtCore.Qt.AlignCenter)
         self.add_zone_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/AddZone.png")),
+            utilitis.get_full_path("gui/guiimages/AddZone.png")),
             self.ribbon_widget)
         self.add_zone_button.setGeometry(QtCore.QRect(520, 5, 70, 70))
         self.add_zone_button.clicked.connect(self.add_thermal_zone)
@@ -881,7 +881,7 @@ class MainUI(QDialog):
         self.add_zone_label.setText("Create \n Zone")
         self.add_zone_label.setAlignment(QtCore.Qt.AlignCenter)
         self.delete_zone_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/DeleteZone.png")),
+            utilitis.get_full_path("gui/guiimages/DeleteZone.png")),
             self.ribbon_widget)
         self.delete_zone_button.setGeometry(QtCore.QRect(605, 5, 70, 70))
         self.delete_zone_button.clicked.connect(self.delete_thermal_zone)
@@ -892,7 +892,7 @@ class MainUI(QDialog):
         self.delete_label.setText("Delete \nZone")
         self.delete_label.setAlignment(QtCore.Qt.AlignCenter)
         self.delete_building_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/EditBuilding.png")),
+            utilitis.get_full_path("gui/guiimages/EditBuilding.png")),
             self.ribbon_widget)
         self.delete_building_button.setGeometry(QtCore.QRect(435, 5, 70, 70))
         self.delete_building_button.clicked.connect(
@@ -904,7 +904,7 @@ class MainUI(QDialog):
         self.delete_label.setText("Delete\nBuilding")
         self.delete_label.setAlignment(QtCore.Qt.AlignCenter)
         self.load_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/LoadProject.png")),
+            utilitis.get_full_path("gui/guiimages/LoadProject.png")),
             self.ribbon_widget)
         self.load_button.setGeometry(QtCore.QRect(95, 5, 70, 70))
         self.load_button.clicked.connect(self.load_building_button)
@@ -914,7 +914,7 @@ class MainUI(QDialog):
         self.load_label.setText("Load\nProject")
         self.load_label.setAlignment(QtCore.Qt.AlignCenter)
         self.new_project_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/CreateProject.png")),
+            utilitis.get_full_path("gui/guiimages/CreateProject.png")),
             self.ribbon_widget)
         self.new_project_button.setGeometry(QtCore.QRect(10, 5, 70, 70))
         self.new_project_button.clicked.connect(self.create_new_project_ui)
@@ -924,7 +924,7 @@ class MainUI(QDialog):
         self.new_project_label.setText("Create \nProject")
         self.new_project_label.setAlignment(QtCore.Qt.AlignCenter)
         self.open_simulation_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/SimulationTab.png")),
+            utilitis.get_full_path("gui/guiimages/SimulationTab.png")),
             self.ribbon_widget)
         self.open_simulation_button.setGeometry(QtCore.QRect(685, 5, 70, 70))
         self.open_simulation_button.clicked.connect(
@@ -935,7 +935,7 @@ class MainUI(QDialog):
         self.open_simulation_label.setText("Simulation\nSetup")
         self.open_simulation_label.setAlignment(QtCore.Qt.AlignCenter)
         self.open_export_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/ExportTab.png")),
+            utilitis.get_full_path("gui/guiimages/ExportTab.png")),
             self.ribbon_widget)
         self.open_export_button.setGeometry(QtCore.QRect(765, 5, 70, 70))
         self.open_export_button.clicked.connect(
@@ -946,7 +946,7 @@ class MainUI(QDialog):
         self.open_export_label.setText("Model \nExport")
         self.open_export_label.setAlignment(QtCore.Qt.AlignCenter)
         self.save_project_button = PictureButton(QtGui.QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/SaveProject.png")),
+            utilitis.get_full_path("gui/guiimages/SaveProject.png")),
             self.ribbon_widget)
         self.save_project_button.setGeometry(QtCore.QRect(180, 5, 70, 70))
         self.save_project_button.clicked.connect(
@@ -1632,7 +1632,7 @@ class MainUI(QDialog):
         self.popup_window_type_building.setWindowTitle(
             u"generate " + self.current_type_building + " ...")
         self.popup_window_type_building.setFixedWidth(520)
-        self.popup_window_type_building.setFixedHeight(800)
+        self.popup_window_type_building.setFixedHeight(700)
         self.popup_layout_type_building = QtGui.QGridLayout()
         self.popup_window_type_building.setLayout(
             self.popup_layout_type_building)
@@ -1768,15 +1768,15 @@ class MainUI(QDialog):
         self.picture_layout_office_3 = QtGui.QLabel()
         self.picture_layout_office_1.setPixmap(
             QtGui.QPixmap(utilitis.get_full_path(
-                "GUI/GUIImages/OfficeBuildings/elongated_1floor.png")).scaled(
+                "gui/guiimages/OfficeBuildings/elongated_1floor.png")).scaled(
                     70, 70))
         self.picture_layout_office_2.setPixmap(
             QtGui.QPixmap(utilitis.get_full_path(
-                "GUI/GUIImages/OfficeBuildings/elongated_2floors.png")).scaled(
+                "gui/guiimages/OfficeBuildings/elongated_2floors.png")).scaled(
                     70, 70))
         self.picture_layout_office_3.setPixmap(QtGui.QPixmap(
             utilitis.get_full_path(
-                "GUI/GUIImages/OfficeBuildings/compact_floor.png")).scaled(
+                "gui/guiimages/OfficeBuildings/compact_floor.png")).scaled(
                     70, 70))
         self.office_layout.addWidget(
             self.radio_button_office_layout_1, 1, 0)
@@ -1810,15 +1810,15 @@ class MainUI(QDialog):
         self.picture_window_area_office_4 = QtGui.QLabel()
         self.picture_window_area_office_2.setPixmap(QtGui.QPixmap(
             utilitis.get_full_path(
-                "GUI/GUIImages/OfficeBuildings/punctuatedFacade.png"))
+                "gui/guiimages/OfficeBuildings/punctuatedFacade.png"))
             .scaled(70, 70))
         self.picture_window_area_office_3.setPixmap(QtGui.QPixmap(
             utilitis.get_full_path(
-                "GUI/GUIImages/OfficeBuildings/bannerFacade.png"))
+                "gui/guiimages/OfficeBuildings/bannerFacade.png"))
             .scaled(70, 70))
         self.picture_window_area_office_4.setPixmap(QtGui.QPixmap(
             utilitis.get_full_path(
-                "GUI/GUIImages/OfficeBuildings/fullGlazing.png"))
+                "gui/guiimages/OfficeBuildings/fullGlazing.png"))
             .scaled(70, 70))
         self.office_layoutWindowArea.addWidget(
             self.radio_button_window_area_office_1, 1, 0)
@@ -1906,13 +1906,13 @@ class MainUI(QDialog):
         self.picture_neighbour_building_residential_2 = QtGui.QLabel()
         self.picture_neighbour_building_residential_3 = QtGui.QLabel()
         self.picture_neighbour_building_residential_1.setPixmap(QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "noNeighbour.png")).scaled(29, 23))
         self.picture_neighbour_building_residential_2.setPixmap(QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "oneNeighbour.png")).scaled(46, 23))
         self.picture_neighbour_building_residential_3.setPixmap(QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "twoNeighbours.png")).scaled(56, 23))
         self.layout_residential_neighbour_buildings.addWidget(
             self.radio_button_neighbour_1, 1, 0)
@@ -1940,11 +1940,11 @@ class MainUI(QDialog):
         self.picture_layout_residential_2 = QtGui.QLabel()
         self.picture_layout_residential_1.setPixmap(QPixmap(
 
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "compact.png")).scaled(28, 28))
         self.picture_layout_residential_2.setPixmap(QPixmap(
 
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "elongatedComplex.png")).scaled(28, 28))
         self.layout_residential_layout.addWidget(
             self.radio_button_residential_layout_1, 1, 0)
@@ -1975,16 +1975,16 @@ class MainUI(QDialog):
         self.picture_roof_residential_3 = QtGui.QLabel()
         self.picture_roof_residential_4 = QtGui.QLabel()
         self.picture_roof_residential_1.setPixmap(QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "flatRoof.png")).scaled(32, 23))
         self.picture_roof_residential_2.setPixmap(QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "nonHeatedAttic.png")).scaled(34, 23))
         self.picture_roof_residential_3.setPixmap(QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "partyHeatedAttic.png")).scaled(34, 23))
         self.picture_roof_residential_4.setPixmap(QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "heatedAttic.png")).scaled(34, 23))
         self.layout_residential_roof.addWidget(
             self.radio_button_residential_roof_1, 1, 0)
@@ -2031,16 +2031,16 @@ class MainUI(QDialog):
         self.picture_residential_basement_3 = QtGui.QLabel()
         self.picture_residential_basement_4 = QtGui.QLabel()
         self.picture_residential_basement_1.setPixmap(QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "noCellar.png")).scaled(32, 28))
         self.picture_residential_basement_2.setPixmap(QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "nonHeatedCellar.png")).scaled(32, 28))
         self.picture_residential_basement_3.setPixmap(QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "partlyHeatedCellar.png")).scaled(32, 28))
         self.picture_residential_basement_4.setPixmap(QPixmap(
-            utilitis.get_full_path("GUI/GUIImages/Residentials/"
+            utilitis.get_full_path("gui/guiimages/Residentials/"
                                  "heatedCellar.png")).scaled(32, 28))
         self.layout_residential_basement.addWidget(
             self.radio_button_residential_basement_1, 1, 0)
@@ -3121,7 +3121,7 @@ class MainUI(QDialog):
         # TODO: self.graph_label = QtGui.QLabel("Red: Machines, Blue: Persons"
         #                                         , Green: Lighting)
 
-        self.usagePicPixMap = QtGui.QPixmap("GUI/sheep_PNG2186.png")
+        self.usagePicPixMap = QtGui.QPixmap("gui/sheep_PNG2186.png")
         self.usage_pic_label = QtGui.QLabel()
         self.usage_pic_label.setPixmap(self.usagePicPixMap)
 
