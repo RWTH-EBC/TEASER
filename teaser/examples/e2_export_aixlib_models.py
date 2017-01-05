@@ -8,6 +8,9 @@ machines that are used in one AixLib specific AHU model.
 """
 
 import teaser.examples.e1_generate_archetype as e1
+import teaser.logic.utilities as utilities
+import os
+
 
 def example_export_aixlib():
     """"This function demonstrates the export to Modelica library AixLib using
@@ -22,10 +25,23 @@ def example_export_aixlib():
     # always set model settings in the Project.
     # Project().used_library_calc specifies the used Modelica library
     # Project().number_of_elements_calc sets the models order
-    # For more information on models we'd like to refer you to the docs.
+    # For more information on models we'd like to refer you to the docs. By
+    # default TEASER uses a weather file provided in
+    # teaser.data.input.inputdata.weatherdata. You can use your own weather
+    # file by setting Project().weather_file_path. However we will use default
+    # weather file.
+    # Be careful: Dymola does not like whitespaces in names and filenames,
+    # thus we will delete them anyway in TEASER.
 
     prj.used_library_calc = 'AixLib'
     prj.number_of_elements_calc = 2
+    prj.weather_file_path = utilities.get_full_path(
+        os.path.join(
+            "data",
+            "input",
+            "inputdata",
+            "weatherdata",
+            "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
 
     # To make sure the parameters are calculated correctly we recommend to
     # run calc_all_buildings() function

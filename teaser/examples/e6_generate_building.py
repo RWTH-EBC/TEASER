@@ -1,134 +1,152 @@
-#Created July 2015
-#TEASER 4 Development Team
-"""
-This scripts shows how to create a building from scratch (or arbitrary sources)
-calculate parameters for a Modelica model and save this example building in a
-XML based format. The used classes are imported one after another. Of course
-you can import all the classes at the beginning.
-"""
+# Created July 2015
+# TEASER Development Team
 
-'''
-First we need to import the classes we want to use
-'''
-
-from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-    import BoundaryConditions
-from teaser.logic.buildingobjects.building import Building
-from teaser.logic.buildingobjects.buildingphysics.groundfloor import\
-    GroundFloor
-from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
-from teaser.logic.buildingobjects.buildingphysics.layer import Layer
-from teaser.logic.buildingobjects.buildingphysics.material import Material
-from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
-from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
-from teaser.logic.buildingobjects.buildingphysics.window import Window
-from teaser.logic.buildingobjects.thermalzone import ThermalZone
-from teaser.project import Project
+"""This module contains an example that shows to create a building not using
+the archetype approach but adding all information separately. In this example
+we import all needed modules and classes where we need it in the code. For you
+application we suggest to use PEP008 and import them at the beginning of the
+script.
+"""
 
 
 def example_create_building():
-    '''
-    Instantiate a Project class (with load_data set to true), instantiate a
-    Building class, with the project as a parent. This automatically adds the
-    specific building and all its future changes to the project.
-    '''
-    prj = Project(load_data=True)
-    prj.name = "Super Example Building"
-    bldg = Building(parent=prj)
+    """"This function demonstrates generating a building adding all
+    information separately"""
 
-    '''Set some building parameters'''
-    bldg.name = "Super Example Building"
-    bldg.street_name = "Awesome Avenue 42"
-    bldg.city = "46325 Fantastic Town"
+    # First step: Import the TEASER API (called Project) into your Python module
+
+    from teaser.project import Project
+
+    # To use the API instantiate the Project class and rename the Project. The
+    # parameter load_data=True indicates that we load data into our
+    # Project (e.g. for Material properties and typical wall constructions.
+    # This can take a few seconds, depending on the size of the used data base.
+
+    prj = Project(load_data=True)
+    prj.name = "BuildingExample"
+
+    # Instantiate a Building class and set the Project API as a parent to
+    # this building. This will automatically add this building and all its
+    # future changes to the project. This is helpful as we can use the data
+    # base and API functions (like explained in e2 - e5). We also set some
+    # building parameters. Be careful: Dymola does not like whitespaces in
+    # names and filenames, thus we will delete them anyway in TEASER.
+
+    from teaser.logic.buildingobjects.building import Building
+
+    bldg = Building(parent=prj)
+    bldg.name = "SuperExampleBuilding"
+    bldg.street_name = "AwesomeAvenue42"
+    bldg.city = "46325FantasticTown"
     bldg.year_of_construction = 1988
     bldg.number_of_floors = 1
     bldg.height_of_floors = 3.5
 
-    '''Instantiate a ThermalZone class, with building as parent and set  some
-    parameters of the thermal zone'''
+    # Instantiate a ThermalZone class and set the Building as a parent of it.
+    # Set some parameters of the thermal zone. Be careful: Dymola does not
+    # like whitespaces in  names and filenames, thus we will delete them
+    # anyway in TEASER.
+
+    from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
     tz = ThermalZone(parent=bldg)
-    tz.name = "Living Room"
+    tz.name = "LivingRoom"
     tz.area = 140.0
     tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
     tz.infiltration_rate = 0.5
 
-    '''Instantiate UseConditions18599 class with thermal zone as parent,
-    and load the use conditions for the usage 'Living' '''
+    # Instantiate BoundaryConditions and load conditions for `Living`.
+
+    from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+        import BoundaryConditions
 
     tz.use_conditions = BoundaryConditions(parent=tz)
-    tz.use_conditions.load_use_conditions("Living",prj.data)
+    tz.use_conditions.load_use_conditions("Living", prj.data)
 
-    '''Define two elements representing a pitched roof and define Layers and
-    Materials explicitly'''
+    # Define two building elements reflecting a pitched roof (south = 180° and
+    # north = 0°). Setting the the ThermalZone as a parent will automatically
+    # assign this element to the thermal zone. We also set names, tilt and
+    # coefficients for heat transfer on the inner and outer side of the
+    # roofs. Please read the docs to get more information on these parameters.
+
+    from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 
     roof_south = Rooftop(parent=tz)
     roof_south.name = "Roof_South"
-
-    roof_north = Rooftop(parent=tz)
-    roof_north.name = "Roof_North"
-
-    '''Set area, orientation and tilt of South Roof'''
     roof_south.area = 75.0
     roof_south.orientation = 180.0
     roof_south.tilt = 55.0
-
-    '''Set coefficient of heat transfer'''
     roof_south.inner_convection = 1.7
     roof_south.outer_convection = 20.0
     roof_south.inner_radiation = 5.0
     roof_south.outer_radiation = 5.0
 
-    '''Set layer and material'''
-    layer_1s = Layer(parent=roof_south, id=0) # id indicates the order of
-                                              # layer from inside to outside
-    layer_1s.thickness = 0.15
-
-    material_1_2 = Material(layer_1s)
-    material_1_2.name = "Insulation"
-    material_1_2.density = 120.0
-    material_1_2.heat_capac = 0.04
-    material_1_2.thermal_conduc = 1.0
-
-    layer_2s = Layer(parent=roof_south, id=1)
-    layer_2s.thickness = 0.15
-
-    material_1_1 = Material(layer_2s)
-    material_1_1.name = "Tile"
-    material_1_1.density = 1400.0
-    material_1_1.heat_capac = 0.6
-    material_1_1.thermal_conduc = 2.5
-
-    '''Set area, orientation and tilt of North Roof'''
+    roof_north = Rooftop(parent=tz)
+    roof_north.name = "Roof_North"
     roof_north.area = 75.0
     roof_north.orientation = 0.0
     roof_north.tilt = 55.0
-
-    '''Set coefficient of heat transfer'''
     roof_north.inner_convection = 1.7
     roof_north.outer_convection = 20.0
     roof_north.inner_radiation = 5.0
     roof_north.outer_radiation = 5.0
 
-    '''Set layer and material'''
-    layer_1n = Layer(parent=roof_north, id=0)
-    layer_1n.thickness = 0.15
+    # To define the wall constructions we need to instantiate Layer and
+    # Material objects and set attributes. id indicates the order of wall
+    # construction from inside to outside (so 0 is on the inner surface). You
+    # need to set this value!
 
-    material_1_2 = Material(layer_1n)
-    material_1_2.name = "Insulation"
-    material_1_2.density = 120.0
-    material_1_2.heat_capac = 0.04
-    material_1_2.thermal_conduc = 1.0
+    from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 
-    layer_2n = Layer(parent=roof_north, id=1)
-    layer_2n.thickness = 0.15
-    layer_2n.position = 1
+    # First layer south
 
-    material_1_1 = Material(layer_2n)
-    material_1_1.name = "Tile"
-    material_1_1.density = 1400.0
-    material_1_1.heat_capac = 0.6
-    material_1_1.thermal_conduc = 2.5
+    layer_s1 = Layer(parent=roof_south, id=0)
+    layer_s1.thickness = 0.15
+
+    from teaser.logic.buildingobjects.buildingphysics.material import Material
+
+    material_s1 = Material(layer_s1)
+    material_s1.name = "Insulation"
+    material_s1.density = 120.0
+    material_s1.heat_capac = 0.04
+    material_s1.thermal_conduc = 1.0
+
+    # Second layer south
+
+    layer_s2 = Layer(parent=roof_south, id=1)
+    layer_s2.thickness = 0.15
+
+    material_s2 = Material(layer_s2)
+    material_s2.name = "Tile"
+    material_s2.density = 1400.0
+    material_s2.heat_capac = 0.6
+    material_s2.thermal_conduc = 2.5
+
+    # First layer north
+
+    layer_n1 = Layer(parent=roof_south, id=0)
+    layer_n1.thickness = 0.15
+
+    from teaser.logic.buildingobjects.buildingphysics.material import Material
+
+    material_n1 = Material(layer_n1)
+    material_n1.name = "Insulation"
+    material_n1.density = 120.0
+    material_n1.heat_capac = 0.04
+    material_n1.thermal_conduc = 1.0
+
+    # Second layer north
+
+    layer_n2 = Layer(parent=roof_south, id=1)
+    layer_n2.thickness = 0.15
+
+    material_n2 = Material(layer_n2)
+    material_n2.name = "Tile"
+    material_n2.density = 1400.0
+    material_n2.heat_capac = 0.6
+    material_n2.thermal_conduc = 2.5
+
+
 
     '''We save information of the Outer and Inner walls as well as Windows
     in dicts, the key is the name, while the value is a list (if applicable)

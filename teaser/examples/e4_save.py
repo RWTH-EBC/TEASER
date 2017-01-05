@@ -26,7 +26,7 @@ def example_save():
 
     prj.save_project(file_name=None, path=None)
 
-    # Seccond option is to use pickle from Python Standard Library ,
+    # Second option is to use pickle from Python Standard Library ,
     # which will save the whole Python classes and all attributes into a
     # binary file. There is no specific API function for this, but you can
     # simply create an empty file with open() and then use pickle.dump().

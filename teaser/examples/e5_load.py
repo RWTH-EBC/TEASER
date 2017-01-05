@@ -10,7 +10,7 @@ import os
 
 
 def example_save():
-    """"This function demonstrates different saving options of TEASER"""
+    """"This function demonstrates different loading options of TEASER"""
 
     # In example e4_save we saved two TEASER projects using *.teaserXML and
     # Python package pickle. This example shows how to import these
@@ -18,8 +18,8 @@ def example_save():
 
     # To load data from *.teaserXML we can use a simple API function. So
     # first we need to instantiate our API (similar to example
-    # e1_generate_archetype). The XML file is called `ArchetypeExample.teaserXML`
-    # and saved in the default path.
+    # e1_generate_archetype). The XML file is called
+    # `ArchetypeExample.teaserXML` and saved in the default path.
 
     from teaser.project import Project
 

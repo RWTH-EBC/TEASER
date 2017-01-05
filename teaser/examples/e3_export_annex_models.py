@@ -7,6 +7,9 @@ models simulate in Dymola, OpenModelica and JModelica.
 """
 
 import teaser.examples.e1_generate_archetype as e1
+import teaser.logic.utilities as utilities
+import os
+
 
 def example_export_annex():
     """"This function demonstrates the export to Modelica library Annex60 using
@@ -23,11 +26,22 @@ def example_export_annex():
     # Project().number_of_elements_calc sets the models order
     # Project().merge_windows_calc specifies if thermal conduction through
     # windows is lumped into outer walls or not.
-    # For more information on models we'd like to refer you to the docs.
+    # For more information on models we'd like to refer you to the docs. By
+    # default TEASER uses a weather file provided in
+    # teaser.data.input.inputdata.weatherdata. You can use your own weather
+    # file by setting Project().weather_file_path. However we will use default
+    # weather file.
 
     prj.used_library_calc = 'Annex60'
     prj.number_of_elements_calc = 4
     prj.merge_windows_calc = False
+    prj.weather_file_path = utilities.get_full_path(
+        os.path.join(
+            "data",
+            "input",
+            "inputdata",
+            "weatherdata",
+            "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
 
     # To make sure the parameters are calculated correctly we recommend to
     # run calc_all_buildings() function

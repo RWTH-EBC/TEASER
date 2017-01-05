@@ -5,6 +5,7 @@
 TEASER API functions.
 """
 
+
 def example_generate_archetype():
     """"This function demonstrates the generation of residential and
     non-residential archetype buildings using the API function of TEASER"""
@@ -15,8 +16,11 @@ def example_generate_archetype():
 
     # To use the API instantiate the Project class and rename the Project. The
     # parameter load_data=True indicates that we load archetype data into our
-    #  Project (e.g. for Material properties and typical wall constructions.
-    #  This can take a few seconds, depending on the size of the used data base.
+    # Project (e.g. for Material properties and typical wall constructions.
+    # This can take a few seconds, depending on the size of the used data base.
+    # Be careful: Dymola does not like whitespaces in names and filenames,
+    # thus we will delete them anyway in TEASER.
+
 
     prj = Project(load_data=True)
     prj.name = "ArchetypeExample"
