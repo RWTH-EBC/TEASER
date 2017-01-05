@@ -7,6 +7,7 @@ from teaser.logic.buildingobjects.buildingphysics.buildingelement \
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
 import numpy as np
+import warnings
 
 
 class Wall(BuildingElement):
@@ -118,8 +119,8 @@ class Wall(BuildingElement):
     def calc_equivalent_res(self, t_bt=7):
         """Equivalent resistance according to VDI 6007.
 
-        Calculates the equivalent resistance and capacity of a wall according to
-        VDI 6007 guideline. (Analogous model).
+        Calculates the equivalent resistance and capacity of a wall according
+        to VDI 6007 guideline. (Analogous model).
 
         Parameters
         ----------
@@ -286,6 +287,12 @@ class Wall(BuildingElement):
             material = "EPS035"
         else:
             pass
+
+        if year_of_retrofit < 1995:
+            year_of_retrofit = 1995
+            warnings.warn("You are using a year of retrofit not supported\
+                    by teaser. We will change your year of retrofit to 1995\
+                    for the calculation. Be careful!")
 
         if type(self).__name__ == 'OuterWall':
 
