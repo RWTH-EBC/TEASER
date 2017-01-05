@@ -70,10 +70,29 @@ class AixLib(object):
         """Calculates the total surface area of all surfaces"""
         surf_area_temp = 0.0
         for zone in self.parent.thermal_zones:
-            surf_area_temp += (
-                zone.model_attr.area_ow +
-                zone.model_attr.area_iw +
-                zone.model_attr.area_win)
+            if type(zone.model_attr).__name__ == "OneElement":
+                surf_area_temp += (
+                    zone.model_attr.area_ow +
+                    zone.model_attr.area_win)
+            elif type(zone.model_attr).__name__ == "TwoElement":
+                surf_area_temp += (
+                    zone.model_attr.area_ow +
+                    zone.model_attr.area_iw +
+                    zone.model_attr.area_win)
+            elif type(zone.model_attr).__name__ == "ThreeElement":
+                surf_area_temp += (
+                    zone.model_attr.area_ow +
+                    zone.model_attr.area_iw +
+                    zone.model_attr.area_gf +
+                    zone.model_attr.area_win)
+            elif type(zone.model_attr).__name__ == "FourElement":
+                surf_area_temp += (
+                    zone.model_attr.area_ow +
+                    zone.model_attr.area_iw +
+                    zone.model_attr.area_gf +
+                    zone.model_attr.area_rt +
+                    zone.model_attr.area_win)
+
         self.total_surface_area = surf_area_temp
 
     @staticmethod
