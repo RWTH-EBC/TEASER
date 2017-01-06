@@ -199,7 +199,7 @@ class Controller():
         Lets CalcProject create a new building with the given ID.
         """
         return Building(current_project, openId)
-    
+
     @classmethod
     def click_update_building_button(self,
                                      project,
@@ -211,7 +211,7 @@ class Controller():
                                      net_leased_area,
                                      street,
                                      location,
-                                     update_archtertype):  
+                                     update_archtertype):
         for building in project.buildings:
             if building.internal_id == current_building.internal_id:
                 building.net_leased_area = net_leased_area
@@ -225,7 +225,7 @@ class Controller():
                     building._thermal_zones = []
                     building.generate_archetype()
         return project
-    
+
     @classmethod
     def click_update_building(self, project, index):
         """
@@ -364,10 +364,10 @@ class Controller():
 
         if path.endswith("teaserXML"):
             teaser_xml.save_teaser_xml(path, project)
-            print("Saved under: "+path)
+            print("Saved under: " + path)
         elif path.endswith("gml"):
             city_gml.save_gml(project, path)
-            print("Saved under: "+path)
+            print("Saved under: " + path)
 
     @classmethod
     def click_load_button(self, project, path):
@@ -473,8 +473,7 @@ class Controller():
         project.merge_windows_calc = False
         project.used_library_calc = 'AixLib'
         project.calc_all_buildings()
-        project.export_aixlib(building_model, zone_model, corG,
-                              internal_id, str(path_output_folder))
+        project.export_aixlib(internal_id, path=str(path_output_folder))
 
     @classmethod
     def click_export_button_annex(self, project, num_of_elem, merge_win,
@@ -507,8 +506,7 @@ class Controller():
         project.merge_windows_calc = merge_win
         project.used_library_calc = 'Annex60'
         project.calc_all_buildings()
-        project.export_annex(internal_id,
-                             str(path_output_folder))
+        project.export_annex(internal_id, path=str(path_output_folder))
 
     @classmethod
     def click_change_all_constr(self,
@@ -653,7 +651,7 @@ class Controller():
                 returns the calculated u value
         '''
 
-        u_value = float(current_element.ua_value)/current_element.area
+        u_value = float(current_element.ua_value) / current_element.area
         return u_value
 
     @classmethod
