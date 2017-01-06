@@ -1,4 +1,4 @@
-project - teaser API
+TEASER API - Project class
 -------------------------
 
 .. automodule:: teaser.project

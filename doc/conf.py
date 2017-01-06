@@ -50,7 +50,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'TEASER'
-copyright = '2016, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate'
+copyright = '2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate'
 author = 'RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate'
 
 # The version info for the project you're documenting, acts as replacement for
