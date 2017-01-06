@@ -300,68 +300,17 @@ class Controller():
 
         int_id = 0
 
-        if type_of_building == "Office":
+        mapping_dict = {
+            'Office': 'office',
+            'Institute 4': 'institute4',
+            'Institute 8': 'institute8',
+            'Institute General': 'institute'
+        }
 
-            building = parent.add_non_residential(
-                method="bmvbs",
-                usage="office",
-                name=name,
-                year_of_construction=year_of_construction,
-                number_of_floors=number_of_floors,
-                height_of_floors=height_of_floors,
-                net_leased_area=net_leased_area,
-                office_layout=type_building_attributes['layoutArea'],
-                window_layout=type_building_attributes['layoutWindowArea'],
-                construction_type=type_building_attributes['constructionType'])
-            building.street_name = street
-            building.city = location
-            int_id = building.internal_id
-
-        if type_of_building == "Institute 4":
-            building = parent.type_bldg_institute4(
-                name=name,
-                year_of_construction=year_of_construction,
-                number_of_floors=number_of_floors,
-                height_of_floors=height_of_floors,
-                net_leased_area=net_leased_area,
-                office_layout=type_building_attributes['layoutArea'],
-                window_layout=type_building_attributes['layoutWindowArea'],
-                construction_type=type_building_attributes['constructionType'])
-            building.street_name = street
-            building.city = location
-            int_id = building.internal_id
-
-        if type_of_building == "Institute 8":
-            building = parent.type_bldg_institute8(
-                name=name,
-                year_of_construction=year_of_construction,
-                number_of_floors=number_of_floors,
-                height_of_floors=height_of_floors,
-                net_leased_area=net_leased_area,
-                office_layout=type_building_attributes['layoutArea'],
-                window_layout=type_building_attributes['layoutWindowArea'],
-                construction_type=type_building_attributes['constructionType'])
-            building.street_name = street
-            building.city = location
-            int_id = building.internal_id
-
-        if type_of_building == "Institute General":
-            building = parent.type_bldg_institute(
-                name=name,
-                year_of_construction=year_of_construction,
-                number_of_floors=number_of_floors,
-                height_of_floors=height_of_floors,
-                net_leased_area=net_leased_area,
-                office_layout=type_building_attributes['layoutArea'],
-                window_layout=type_building_attributes['layoutWindowArea'],
-                construction_type=type_building_attributes['constructionType'])
-
-            building.street_name = street
-            building.city = location
-            int_id = building.internal_id
-
-        if type_of_building == "SingleFamilyDwelling":
-            building = parent.type_bldg_residential(
+        if type_of_building == 'SingleFamilyDwelling':
+            building = parent.add_residential(
+                method='iwu',
+                usage='single_family_dwelling',
                 name=name,
                 year_of_construction=year_of_construction,
                 number_of_floors=number_of_floors,
@@ -375,6 +324,22 @@ class Controller():
                 dormer=type_building_attributes['dormer'],
                 construction_type=type_building_attributes['constructionType'])
 
+            building.street_name = street
+            building.city = location
+            int_id = building.internal_id
+
+        else:
+            building = parent.add_non_residential(
+                method='bmvbs',
+                usage=mapping_dict[type_of_building],
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                office_layout=type_building_attributes['layoutArea'],
+                window_layout=type_building_attributes['layoutWindowArea'],
+                construction_type=type_building_attributes['constructionType'])
             building.street_name = street
             building.city = location
             int_id = building.internal_id

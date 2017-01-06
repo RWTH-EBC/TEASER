@@ -337,6 +337,7 @@ class Project(object):
             number_of_elements=self._number_of_elements_calc,
             merge_windows=self._merge_windows_calc,
             used_library=self._used_library_calc)
+        return type_bldg
 
     def add_residential(
             self,
