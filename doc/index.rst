@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-teaser
-==================================
+TEASER
+======
 
 .. image:: teaser_logo.png
  :scale: 100 %
@@ -28,33 +28,26 @@ If you have any questions regarding TEASER feel free to contact us at
 
 
 Contents
-==================
+========
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    install_teaser
    teaser.Project
    archetypes
-   generate_archetype
-   export_aixlib
-   export_annex
    teaser.Examples
    teaser
+   acknowledgments
+   license
 
-People
-==================
-The following people have directly contributed to the implementation of
-TEASER:
 
-   - Michael Mans
-   - Moritz Lauster
-   - Marcus Fuchs
-   - Yasin Goerguelue
-   - Christoph Gingter
-   - Peter Remmen
+Publications
+============
 
- Special thanks goes to Gregor Hillebrand, who created the basis of TEASER (Retrofit Matrix).
+  - CityGML Import and Export for Dynamic Building Performance Simulation in Modelica. Remmen P., Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016, `pdf <http://www.ibpsa.org/proceedings/BSO2016/p1047.pdf>`_, `bibtex <https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite.bib>`_
+  - Scalable Design-Driven Parameterization of Reduced Order Models Using Archetype Buildings with TEASER. Lauster M., Mans M., Remmen P., Fuchs M., Müller D.. BauSIM2016, p.535-542, September 2016, `pdf <https://www.researchgate.net/profile/Moritz_Lauster/publication/310465372_Scalable_Design-Driven_Parameterization_of_Reduced_Order_Models_using_Archetype_Buildings_with_TEASER/links/582ee96908ae004f74be1fb0.pdf?origin=publication_detail&ev=pub_int_prw_xdl&msrp=eEyK6WYemhC8wK7xkMEPRDO4obE4uxBN4-0BdBy1Ldwhy9FhCe1pXfNObJYubvC_aZN0IWDPf9uayBo3u79bsZvg3hzUoLoYRatES2ARH8c.B2cYwSICt0IOa7lD-4oAiEa_3TtrO-7k-1W9chuNQwr_VNMCpZ5ubSb-eY2D77rGUP4S6wS8m6vudUUbMlXbQQ.Cledgd1Q9fPp11nYGpcpKNhSS6bVTqAEXeMZPkiV3HsJxcVWTFj4Hr_jmLZ0MOzDxbDEZObcGiKfmTL_9k_59A>`_
+
 
 Indices and tables
 ==================

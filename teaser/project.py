@@ -1,7 +1,7 @@
 # created June 2015
 # by TEASER4 Development Team
 
-"""This module includes the Project class, which serves as base class and API
+"""This module includes the Project class, which serves as an API for a TEASER Project
 """
 
 import warnings
@@ -34,16 +34,18 @@ except UserWarning:
 
 
 class Project(object):
-    """Base class for each project, serves also as API
+    """Top class for TEASER projects it serves as an API
 
-    The Project class is the root class for each action in TEASER and
-    should be instantiated only once for each project. It also contains
-    all API function to use main functionality of TEASER4
+    The Project class is the top class for all TEASER projects and serves as an
+    API for script based interface. It is highly recommended to always
+    instantiate the Project class before starting to work with TEASER. It
+    contains functions to generate archetype buildings, to export models and to
+    save information for later use.
 
     Parameters
     ----------
     load_data : boolean
-        boolean if data bindings for type elements and use conditions
+        boolean if data bases for materials, type elements and use conditions
         should be loaded (default = True)
 
     Attributes
@@ -55,15 +57,14 @@ class Project(object):
         TEASER instance of ModelicaInfo to store Modelica related
         information, like used compiler, runtime, etc.
     buildings : list
-        list of all buildings in one project, instances of Building()
+        List of all buildings in one project, instances of Building()
     data : instance of DataClass
         TEASER instance of DataClass containing XML binding classes
     weather_file_path : str
-        absolute path to weather file used for Modelica simulation
-        (default: "data/input/inputdata/weatherdata
-        /DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR")
+        Absolute path to weather file used for Modelica simulation. Default
+        weather file can be find in inputdata/weatherdata.
     number_of_elements_calc : int
-        defines the number of elements, that are aggregated (1, 2, 3 or 4),
+        Defines the number of elements, that are aggregated (1, 2, 3 or 4),
         default is 2
     merge_windows_calc : bool
         True for merging the windows into the outer walls, False for
