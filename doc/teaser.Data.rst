@@ -1,6 +1,10 @@
 data
 ===================
 
+
+The Data package holds modules and classes to interface with files for import or
+export.
+
 .. toctree::
    :maxdepth: 1
 

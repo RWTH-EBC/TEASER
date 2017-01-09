@@ -8,3 +8,4 @@ List of all TEASER modules.
    :maxdepth: 2
 
    teaser.Data
+   teaser.Logic
