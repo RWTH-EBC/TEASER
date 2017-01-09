@@ -1,11 +1,10 @@
-TEASER package structure
+TEASER modules
 ========================
 
-The following docs will guide you through the structure and every module of the Python package TEASER.
+List of all TEASER modules.
 
 
 .. toctree::
-  :maxdepth: 2
+   :maxdepth: 2
 
-  teaser.Data
-  teaser.Logic
+   teaser.Data

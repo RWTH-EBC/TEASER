@@ -28,7 +28,7 @@ Example 5: Load information
 
 .. literalinclude:: ../teaser/examples/e5_load.py
 
-Example 6: Load information
+Example 6: Retrofit buildings
 ----------------------------
 
 .. literalinclude:: ../teaser/examples/e7_retrofit.py
