@@ -28,7 +28,8 @@ _module_typeBindings = pyxb.utils.utility.Object()
 
 # Import bindings for namespaces imported into schema
 import pyxb.binding.datatypes
-teaser.data.bindings.v_0_4.boundaryconditions_bind as _ImportedBinding__usecond
+import teaser.data.bindings.v_0_4.boundaryconditions_bind as \
+    _ImportedBinding__usecond
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://teaser.project', create_if_missing=True)
