@@ -107,15 +107,17 @@ def export_annex60(
 
         aixlib_output._help_package_order(
             path=bldg_path,
-            package_list=[bldg],
+            package_list=[],
             addition=None,
             extra=bldg.name + "_Models")
 
+        zone_path = os.path.join(
+            bldg_path,
+            bldg.name + "_Models")
+
         for zone in bldg.thermal_zones:
 
-            zone_path = os.path.join(
-                bldg_path,
-                bldg.name + "_Models")
+
             zone.parent.library_attr.file_internal_gains = \
                 'InternalGains_' + bldg.name + zone.name + '.mat'
             bldg.library_attr.modelica_gains_boundary(
@@ -134,17 +136,19 @@ def export_annex60(
             elif type(zone.model_attr).__name__ == "FourElement":
                 out_file.write(model_template_4.render_unicode(zone=zone))
 
-            aixlib_output._help_package(
-                path=bldg_path,
-                name=bldg.name + "_Models",
-                within=prj.name + '.' + bldg.name)
-
-            aixlib_output._help_package_order(
-                path=zone_path,
-                package_list=bldg.thermal_zones,
-                addition=(bldg.name + "_"))
-
             out_file.close()
+
+        aixlib_output._help_package(
+            path=zone_path,
+            name=bldg.name + "_Models",
+            within=prj.name + '.' + bldg.name)
+
+        aixlib_output._help_package_order(
+            path=zone_path,
+            package_list=bldg.thermal_zones,
+            addition=bldg.name + "_")
+
+
 
     print("Exports can be found here:")
     print(path)
