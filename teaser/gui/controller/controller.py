@@ -553,29 +553,36 @@ class Controller():
         '''
 
         for zone in bldg.thermal_zones:
-            for wall in zone.outer_walls:
-                if element_type == "OuterWall" or element_type == "Rooftop":
-                    if wall.orientation == orientation:
-                        wall.tilt = tilt
-                        wall.inner_convection = inner_convection
-                        wall.inner_radiation = inner_radiation
-                        wall.outer_convection = outer_convection
-                        wall.outer_radiation = outer_radiation
-                        wall.layer = None
-                        for lay_count in layer_set:
-                            wall.add_layer(lay_count, lay_count.position)
-
-                else:
-                    if wall.orientation == orientation:
-                        wall.tilt = tilt
-                        wall.inner_convection = inner_convection
-                        wall.inner_radiation = inner_radiation
-                        wall.layer = None
-                        for lay_count in layer_set:
-                            wall.add_layer(lay_count, lay_count.position)
-
-            for win in zone.windows:
-                if element_type == "Window":
+            if element_type == "OuterWall":
+                for wall in zone.outer_walls:
+                    wall.tilt = tilt
+                    wall.inner_convection = inner_convection
+                    wall.inner_radiation = inner_radiation
+                    wall.outer_convection = outer_convection
+                    wall.outer_radiation = outer_radiation
+                    wall.layer = None
+                    for lay_count in layer_set:
+                        wall.add_layer(lay_count, lay_count.id)
+            if element_type == "Rooftop":
+                for roof in zone.rooftops:
+                    roof.tilt = tilt
+                    roof.inner_convection = inner_convection
+                    roof.inner_radiation = inner_radiation
+                    roof.outer_convection = outer_convection
+                    roof.outer_radiation = outer_radiation
+                    roof.layer = None
+                    for lay_count in layer_set:
+                        roof.add_layer(lay_count, lay_count.id)
+            if element_type == "Groundfloor":
+                for ground in zone.ground_floors:
+                    ground.tilt = tilt
+                    ground.inner_convection = inner_convection
+                    ground.inner_radiation = inner_radiation
+                    ground.layer = None
+                    for lay_count in layer_set:
+                        ground.add_layer(lay_count, lay_count.id)
+            if element_type == "Window":
+                for win in zone.windows:
                     if win.orientation == orientation:
                         win.tilt = tilt
                         win.inner_convection = inner_convection
@@ -584,7 +591,7 @@ class Controller():
                         win.outer_radiation = outer_radiation
                         win.layer = None
                         for lay_count in layer_set:
-                            win.add_layer(lay_count, lay_count.position)
+                            win.add_layer(lay_count, lay_count.id)
 
     @classmethod
     def click_save_envelopes(self, bldg, orientation_old,

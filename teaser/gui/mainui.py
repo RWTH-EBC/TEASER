@@ -4054,7 +4054,7 @@ class MainUI(QDialog):
         self.export_groupbox.setMaximumSize(QtCore.QSize(360, 155))
         self.export_groupbox.setObjectName(_fromUtf8("exportGroupBox"))
 
-        self.aixlib_groupbox = QtGui.QGroupBox("AixLib")
+        self.aixlib_groupbox = QtGui.QGroupBox()
         self.aixlib_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
         self.aixlib_groupbox.setMinimumSize(QtCore.QSize(360, 120))
         self.aixlib_groupbox.setMaximumSize(QtCore.QSize(360, 120))
@@ -4115,33 +4115,33 @@ class MainUI(QDialog):
         self.export_create_library_combobox.setGeometry(
             QtCore.QRect(130, 125, 215, 25))
 
-        self.export_template_label_model = QtGui.QLabel(self.aixlib_groupbox)
-        self.export_template_label_model.setGeometry(
-            QtCore.QRect(5, 20, 120, 25))
-        self.export_template_label_model.setText("Model type:")
-        self.export_create_template_model_combobox = QtGui.QComboBox(
-            self.aixlib_groupbox)
-        self.export_create_template_model_combobox.setGeometry(
-            QtCore.QRect(130, 20, 215, 25))
-        self.export_template_label_zone = QtGui.QLabel(self.aixlib_groupbox)
-        self.export_template_label_zone.setGeometry(
-            QtCore.QRect(5, 55, 120, 25))
-        self.export_template_label_zone.setText("Zone type:")
-        self.export_create_template_zone_combobox = QtGui.QComboBox(
-            self.aixlib_groupbox)
-        self.export_create_template_zone_combobox.setGeometry(
-            QtCore.QRect(130, 55, 215, 25))
-        self.export_template_label_corG = QtGui.QLabel(self.aixlib_groupbox)
-        self.export_template_label_corG.setGeometry(
-            QtCore.QRect(5, 90, 120, 25))
-        self.export_template_label_corG.setText("corG:")
-        self.radio_button_corG_1 = QtGui.QRadioButton(self.aixlib_groupbox)
-        self.radio_button_corG_1.setGeometry(QtCore.QRect(130, 90, 120, 25))
-        self.radio_button_corG_1.setText("with CorG")
-        self.radio_button_corG_2 = QtGui.QRadioButton(self.aixlib_groupbox)
-        self.radio_button_corG_2.setGeometry(QtCore.QRect(250, 90, 120, 25))
-        self.radio_button_corG_2.setText("without CorG")
-        self.radio_button_corG_1.setChecked(True)
+        # self.export_template_label_model = QtGui.QLabel(self.aixlib_groupbox)
+        # self.export_template_label_model.setGeometry(
+        #     QtCore.QRect(5, 20, 120, 25))
+        # self.export_template_label_model.setText("Model type:")
+        # self.export_create_template_model_combobox = QtGui.QComboBox(
+        #     self.aixlib_groupbox)
+        # self.export_create_template_model_combobox.setGeometry(
+        #     QtCore.QRect(130, 20, 215, 25))
+        # self.export_template_label_zone = QtGui.QLabel(self.aixlib_groupbox)
+        # self.export_template_label_zone.setGeometry(
+        #     QtCore.QRect(5, 55, 120, 25))
+        # self.export_template_label_zone.setText("Zone type:")
+        # self.export_create_template_zone_combobox = QtGui.QComboBox(
+        #     self.aixlib_groupbox)
+        # self.export_create_template_zone_combobox.setGeometry(
+        #     QtCore.QRect(130, 55, 215, 25))
+        # self.export_template_label_corG = QtGui.QLabel(self.aixlib_groupbox)
+        # self.export_template_label_corG.setGeometry(
+        #     QtCore.QRect(5, 90, 120, 25))
+        # self.export_template_label_corG.setText("corG:")
+        # self.radio_button_corG_1 = QtGui.QRadioButton(self.aixlib_groupbox)
+        # self.radio_button_corG_1.setGeometry(QtCore.QRect(130, 90, 120, 25))
+        # self.radio_button_corG_1.setText("with CorG")
+        # self.radio_button_corG_2 = QtGui.QRadioButton(self.aixlib_groupbox)
+        # self.radio_button_corG_2.setGeometry(QtCore.QRect(250, 90, 120, 25))
+        # self.radio_button_corG_2.setText("without CorG")
+        # self.radio_button_corG_1.setChecked(True)
 
         self.annex_number_of_elements = QtGui.QLabel(self.annex_groupbox)
         self.annex_number_of_elements.setGeometry(
@@ -4167,8 +4167,8 @@ class MainUI(QDialog):
         merging_windows_list = ["True", "False"]
 
         self.export_create_library_combobox.addItems(library_type_list)
-        self.export_create_template_model_combobox.addItems(modelTypeList)
-        self.export_create_template_zone_combobox.addItems(zoneTypeList)
+        # self.export_create_template_model_combobox.addItems(modelTypeList)
+        # self.export_create_template_zone_combobox.addItems(zoneTypeList)
         self.annex_create_number_of_elements_combobox.addItems(
             number_of_elements_list)
         self.annex_create_merge_windows_combobox.addItems(

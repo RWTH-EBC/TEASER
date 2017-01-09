@@ -44,7 +44,7 @@ class ThermalZone(object):
         List of OuterWall instances.
     rooftops : list
         List of Rooftop instances.
-    groundfloors : list
+    ground_floors : list
         List of GroundFloor instances.
     windows : list
         List of Window instances.
