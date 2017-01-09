@@ -27,7 +27,8 @@ if pyxb.__version__ != _PyXBVersion:
 _module_typeBindings = pyxb.utils.utility.Object()
 
 # Import bindings for namespaces imported into schema
-teaser.data.bindings.v_0_4.boundaryconditions_bind as _ImportedBinding__usecond
+import teaser.data.bindings.v_0_4.boundaryconditions_bind as \
+    _ImportedBinding__usecond
 import pyxb.binding.datatypes
 
 # NOTE: All namespace declarations are reserved within the binding
