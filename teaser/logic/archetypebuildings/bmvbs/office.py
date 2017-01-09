@@ -90,8 +90,8 @@ class Office(NonResidential):
     calculated values are not included in this list. Changing these values is
     expert mode.
 
-    Attributes of Office archetype Building
-    ---------------------------------------
+    Attributes
+    ----------
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
