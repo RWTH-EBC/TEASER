@@ -573,7 +573,7 @@ class Controller():
                     roof.layer = None
                     for lay_count in layer_set:
                         roof.add_layer(lay_count, lay_count.id)
-            if element_type == "Groundfloor":
+            if element_type == "GroundFloor":
                 for ground in zone.ground_floors:
                     ground.tilt = tilt
                     ground.inner_convection = inner_convection
