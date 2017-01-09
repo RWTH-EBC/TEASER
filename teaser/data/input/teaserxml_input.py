@@ -60,6 +60,9 @@ def load_teaser_xml(path, prj):
     elif version_parse.getroot().attrib['version'] == "0.4":
         import teaser.data.bindings.v_0_4.project_bind as pb
         project_bind = pb.CreateFromDocument(xml_file.read())
+    elif version_parse.getroot().attrib['version'] == "0.5":
+        import teaser.data.bindings.v_0_5.project_bind as pb
+        project_bind = pb.CreateFromDocument(xml_file.read())
 
     for pyxb_bld in project_bind.Building:
         _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Building",
@@ -130,10 +133,12 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         bldg.central_ahu.by_pass_dehumidification = \
             pyxb_ahu.by_pass_dehumidification
         bldg.central_ahu.efficiency_recovery = pyxb_ahu.efficiency_recovery
-        bldg.central_ahu.efficiency_revocery_false = \
-            pyxb_ahu.efficiency_revocery_false
-        bldg.central_ahu.profile_min_relative_humidity = \
-            pyxb_ahu.profile_min_relative_humidity
+        if float(project_bind.version) >= 0.5:
+            bldg.central_ahu.efficiency_recovery_false = \
+                pyxb_ahu.efficiency_recovery_false
+        else:
+            bldg.central_ahu.profile_min_relative_humidity = \
+                pyxb_ahu.profile_min_relative_humidity
         bldg.central_ahu.profile_max_relative_humidity = \
             pyxb_ahu.profile_max_relative_humidity
         bldg.central_ahu.profile_v_flow = \
@@ -180,7 +185,7 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         zone.use_conditions.daily_operation_heating = \
             pyxb_use.UsageOperationTime.daily_operation_heating
 
-        if project_bind.version == "0.4":
+        if float(project_bind.version) >= 0.4:
             zone.use_conditions.maintained_illuminance = \
                 pyxb_use.Lighting.maintained_illuminance
         else:
