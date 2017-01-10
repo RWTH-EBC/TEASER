@@ -25,7 +25,7 @@ def example_save():
 
     prj = Project()
 
-    load_xml =  pickle_file = os.path.join(
+    load_xml = pickle_file = os.path.join(
         utilities.get_default_path(),
         'ArchetypeExample.teaserXML')
 

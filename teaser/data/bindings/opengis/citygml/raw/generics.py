@@ -1,7 +1,7 @@
 # ./pyxb/bundles/opengis/citygml/raw/generics.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:9f733459c243bf6a0d311254ff6b626cd171f543
-# Generated 2016-04-07 16:03:36.321279 by PyXB version 1.2.4 using Python 2.7.11.final.0
+# Generated 2017-01-09 16:12:05.785593 by PyXB version 1.2.5 using Python 3.5.2.final.0
 # Namespace http://www.opengis.net/citygml/generics/2.0
 
 from __future__ import unicode_literals
@@ -13,20 +13,23 @@ import pyxb.utils.utility
 import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
-
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:84cb70aa-fcc9-11e5-af9e-000c29ce1afb')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:fad3296c-d67d-11e6-8d7b-100ba9a189d0')
 
 # Version of PyXB used to generate the bindings
-_PyXBVersion = '1.2.4'
+_PyXBVersion = '1.2.5'
 # Generated bindings are not compatible across PyXB versions
 if pyxb.__version__ != _PyXBVersion:
     raise pyxb.PyXBVersionError(_PyXBVersion)
 
+# A holder for module-level binding classes so we can access them from
+# inside class definitions where property names may conflict.
+_module_typeBindings = pyxb.utils.utility.Object()
+
 # Import bindings for namespaces imported into schema
-import teaser.data.bindings.opengis.citygml.raw.base
-import pyxb.binding.datatypes
 import teaser.data.bindings.opengis.raw.gml
+import pyxb.binding.datatypes
+import teaser.data.bindings.opengis.citygml.raw.base
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://www.opengis.net/citygml/generics/2.0', create_if_missing=True)
@@ -90,161 +93,161 @@ class GenericCityObjectType (teaser.data.bindings.opengis.citygml.raw.base.Abstr
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'GenericCityObjectType')
-    _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 24, 1)
+    _XSDLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 24, 1)
     _ElementMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._ElementMap.copy()
     _AttributeMap = teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType._AttributeMap.copy()
     # Base type is teaser.data.bindings.opengis.citygml.raw.base.AbstractCityObjectType
-
+    
     # Element creationDate ({http://www.opengis.net/citygml/2.0}creationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-
+    
     # Element terminationDate ({http://www.opengis.net/citygml/2.0}terminationDate) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-
+    
     # Element externalReference ({http://www.opengis.net/citygml/2.0}externalReference) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-
+    
     # Element generalizesTo ({http://www.opengis.net/citygml/2.0}generalizesTo) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-
+    
     # Element relativeToTerrain ({http://www.opengis.net/citygml/2.0}relativeToTerrain) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-
+    
     # Element relativeToWater ({http://www.opengis.net/citygml/2.0}relativeToWater) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-
+    
     # Element GenericApplicationPropertyOfCityObject ({http://www.opengis.net/citygml/2.0}_GenericApplicationPropertyOfCityObject) inherited from {http://www.opengis.net/citygml/2.0}AbstractCityObjectType
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}class uses Python identifier class_
-    __class = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'class'), 'class_', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0class', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 35, 5), )
+    __class = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'class'), 'class_', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0class', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 35, 5), )
 
-
+    
     class_ = property(__class.value, __class.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}function uses Python identifier function
-    __function = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'function'), 'function', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0function', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 36, 5), )
+    __function = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'function'), 'function', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0function', True, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 36, 5), )
 
-
+    
     function = property(__function.value, __function.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}usage uses Python identifier usage
-    __usage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usage'), 'usage', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0usage', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 37, 5), )
+    __usage = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'usage'), 'usage', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0usage', True, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 37, 5), )
 
-
+    
     usage = property(__usage.value, __usage.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod0Geometry uses Python identifier lod0Geometry
-    __lod0Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod0Geometry'), 'lod0Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod0Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 38, 5), )
+    __lod0Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod0Geometry'), 'lod0Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod0Geometry', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 38, 5), )
 
-
+    
     lod0Geometry = property(__lod0Geometry.value, __lod0Geometry.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod1Geometry uses Python identifier lod1Geometry
-    __lod1Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1Geometry'), 'lod1Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod1Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 39, 5), )
+    __lod1Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1Geometry'), 'lod1Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod1Geometry', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 39, 5), )
 
-
+    
     lod1Geometry = property(__lod1Geometry.value, __lod1Geometry.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod2Geometry uses Python identifier lod2Geometry
-    __lod2Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry'), 'lod2Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod2Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 40, 5), )
+    __lod2Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry'), 'lod2Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod2Geometry', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 40, 5), )
 
-
+    
     lod2Geometry = property(__lod2Geometry.value, __lod2Geometry.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod3Geometry uses Python identifier lod3Geometry
-    __lod3Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry'), 'lod3Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod3Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 41, 5), )
+    __lod3Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry'), 'lod3Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod3Geometry', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 41, 5), )
 
-
+    
     lod3Geometry = property(__lod3Geometry.value, __lod3Geometry.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod4Geometry uses Python identifier lod4Geometry
-    __lod4Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), 'lod4Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod4Geometry', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 42, 5), )
+    __lod4Geometry = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), 'lod4Geometry', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod4Geometry', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 42, 5), )
 
-
+    
     lod4Geometry = property(__lod4Geometry.value, __lod4Geometry.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod0TerrainIntersection uses Python identifier lod0TerrainIntersection
-    __lod0TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod0TerrainIntersection'), 'lod0TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod0TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 43, 5), )
+    __lod0TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod0TerrainIntersection'), 'lod0TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod0TerrainIntersection', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 43, 5), )
 
-
+    
     lod0TerrainIntersection = property(__lod0TerrainIntersection.value, __lod0TerrainIntersection.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod1TerrainIntersection uses Python identifier lod1TerrainIntersection
-    __lod1TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection'), 'lod1TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod1TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 44, 5), )
+    __lod1TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection'), 'lod1TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod1TerrainIntersection', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 44, 5), )
 
-
+    
     lod1TerrainIntersection = property(__lod1TerrainIntersection.value, __lod1TerrainIntersection.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod2TerrainIntersection uses Python identifier lod2TerrainIntersection
-    __lod2TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection'), 'lod2TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod2TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 45, 5), )
+    __lod2TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection'), 'lod2TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod2TerrainIntersection', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 45, 5), )
 
-
+    
     lod2TerrainIntersection = property(__lod2TerrainIntersection.value, __lod2TerrainIntersection.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod3TerrainIntersection uses Python identifier lod3TerrainIntersection
-    __lod3TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection'), 'lod3TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod3TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 46, 5), )
+    __lod3TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection'), 'lod3TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod3TerrainIntersection', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 46, 5), )
 
-
+    
     lod3TerrainIntersection = property(__lod3TerrainIntersection.value, __lod3TerrainIntersection.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod4TerrainIntersection uses Python identifier lod4TerrainIntersection
-    __lod4TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection'), 'lod4TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod4TerrainIntersection', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 47, 5), )
+    __lod4TerrainIntersection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection'), 'lod4TerrainIntersection', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod4TerrainIntersection', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 47, 5), )
 
-
+    
     lod4TerrainIntersection = property(__lod4TerrainIntersection.value, __lod4TerrainIntersection.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod0ImplicitRepresentation uses Python identifier lod0ImplicitRepresentation
-    __lod0ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod0ImplicitRepresentation'), 'lod0ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod0ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 48, 5), )
+    __lod0ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod0ImplicitRepresentation'), 'lod0ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod0ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 48, 5), )
 
-
+    
     lod0ImplicitRepresentation = property(__lod0ImplicitRepresentation.value, __lod0ImplicitRepresentation.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod1ImplicitRepresentation uses Python identifier lod1ImplicitRepresentation
-    __lod1ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1ImplicitRepresentation'), 'lod1ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod1ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 49, 5), )
+    __lod1ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod1ImplicitRepresentation'), 'lod1ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod1ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 49, 5), )
 
-
+    
     lod1ImplicitRepresentation = property(__lod1ImplicitRepresentation.value, __lod1ImplicitRepresentation.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod2ImplicitRepresentation uses Python identifier lod2ImplicitRepresentation
-    __lod2ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation'), 'lod2ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod2ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 50, 5), )
+    __lod2ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation'), 'lod2ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod2ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 50, 5), )
 
-
+    
     lod2ImplicitRepresentation = property(__lod2ImplicitRepresentation.value, __lod2ImplicitRepresentation.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod3ImplicitRepresentation uses Python identifier lod3ImplicitRepresentation
-    __lod3ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), 'lod3ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod3ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 51, 5), )
+    __lod3ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), 'lod3ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod3ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 51, 5), )
 
-
+    
     lod3ImplicitRepresentation = property(__lod3ImplicitRepresentation.value, __lod3ImplicitRepresentation.set, None, None)
 
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}lod4ImplicitRepresentation uses Python identifier lod4ImplicitRepresentation
-    __lod4ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), 'lod4ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod4ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 52, 5), )
+    __lod4ImplicitRepresentation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), 'lod4ImplicitRepresentation', '__httpwww_opengis_netcitygmlgenerics2_0_GenericCityObjectType_httpwww_opengis_netcitygmlgenerics2_0lod4ImplicitRepresentation', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 52, 5), )
 
-
+    
     lod4ImplicitRepresentation = property(__lod4ImplicitRepresentation.value, __lod4ImplicitRepresentation.set, None, None)
 
-
+    
     # Element boundedBy ({http://www.opengis.net/gml}boundedBy) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-
+    
     # Element location ({http://www.opengis.net/gml}location) inherited from {http://www.opengis.net/gml}AbstractFeatureType
-
+    
     # Element metaDataProperty ({http://www.opengis.net/gml}metaDataProperty) inherited from {http://www.opengis.net/gml}AbstractGMLType
-
+    
     # Element name ({http://www.opengis.net/gml}name) inherited from {http://www.opengis.net/gml}AbstractGMLType
-
+    
     # Element description ({http://www.opengis.net/gml}description) inherited from {http://www.opengis.net/gml}AbstractGMLType
-
+    
     # Attribute id inherited from {http://www.opengis.net/gml}AbstractGMLType
     _ElementMap.update({
         __class.name() : __class,
@@ -267,8 +270,9 @@ class GenericCityObjectType (teaser.data.bindings.opengis.citygml.raw.base.Abstr
         __lod4ImplicitRepresentation.name() : __lod4ImplicitRepresentation
     })
     _AttributeMap.update({
-
+        
     })
+_module_typeBindings.GenericCityObjectType = GenericCityObjectType
 Namespace.addCategoryObject('typeBinding', 'GenericCityObjectType', GenericCityObjectType)
 
 
@@ -282,24 +286,25 @@ class AbstractGenericAttributeType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_EMPTY
     _Abstract = True
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'AbstractGenericAttributeType')
-    _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 62, 1)
+    _XSDLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 62, 1)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-
+    
     # Attribute name uses Python identifier name
     __name = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'name'), 'name', '__httpwww_opengis_netcitygmlgenerics2_0_AbstractGenericAttributeType_name', pyxb.binding.datatypes.string, required=True)
-    __name._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 70, 2)
-    __name._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 70, 2)
-
+    __name._DeclarationLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 70, 2)
+    __name._UseLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 70, 2)
+    
     name = property(__name.value, __name.set, None, None)
 
     _ElementMap.update({
-
+        
     })
     _AttributeMap.update({
         __name.name() : __name
     })
+_module_typeBindings.AbstractGenericAttributeType = AbstractGenericAttributeType
 Namespace.addCategoryObject('typeBinding', 'AbstractGenericAttributeType', AbstractGenericAttributeType)
 
 
@@ -310,25 +315,26 @@ class StringAttributeType (AbstractGenericAttributeType):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'StringAttributeType')
-    _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 76, 1)
+    _XSDLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 76, 1)
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
-    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_StringAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 83, 5), )
+    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_StringAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 83, 5), )
 
-
+    
     value_ = property(__value.value, __value.set, None, None)
 
-
+    
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-
+        
     })
+_module_typeBindings.StringAttributeType = StringAttributeType
 Namespace.addCategoryObject('typeBinding', 'StringAttributeType', StringAttributeType)
 
 
@@ -339,25 +345,26 @@ class IntAttributeType (AbstractGenericAttributeType):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'IntAttributeType')
-    _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 91, 1)
+    _XSDLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 91, 1)
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
-    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_IntAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 98, 5), )
+    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_IntAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 98, 5), )
 
-
+    
     value_ = property(__value.value, __value.set, None, None)
 
-
+    
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-
+        
     })
+_module_typeBindings.IntAttributeType = IntAttributeType
 Namespace.addCategoryObject('typeBinding', 'IntAttributeType', IntAttributeType)
 
 
@@ -368,25 +375,26 @@ class DoubleAttributeType (AbstractGenericAttributeType):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'DoubleAttributeType')
-    _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 106, 1)
+    _XSDLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 106, 1)
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
-    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_DoubleAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 113, 5), )
+    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_DoubleAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 113, 5), )
 
-
+    
     value_ = property(__value.value, __value.set, None, None)
 
-
+    
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-
+        
     })
+_module_typeBindings.DoubleAttributeType = DoubleAttributeType
 Namespace.addCategoryObject('typeBinding', 'DoubleAttributeType', DoubleAttributeType)
 
 
@@ -397,25 +405,26 @@ class DateAttributeType (AbstractGenericAttributeType):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'DateAttributeType')
-    _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 121, 1)
+    _XSDLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 121, 1)
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
-    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_DateAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 128, 5), )
+    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_DateAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 128, 5), )
 
-
+    
     value_ = property(__value.value, __value.set, None, None)
 
-
+    
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-
+        
     })
+_module_typeBindings.DateAttributeType = DateAttributeType
 Namespace.addCategoryObject('typeBinding', 'DateAttributeType', DateAttributeType)
 
 
@@ -426,25 +435,26 @@ class UriAttributeType (AbstractGenericAttributeType):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'UriAttributeType')
-    _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 136, 1)
+    _XSDLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 136, 1)
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
-    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_UriAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 143, 5), )
+    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_UriAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 143, 5), )
 
-
+    
     value_ = property(__value.value, __value.set, None, None)
 
-
+    
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-
+        
     })
+_module_typeBindings.UriAttributeType = UriAttributeType
 Namespace.addCategoryObject('typeBinding', 'UriAttributeType', UriAttributeType)
 
 
@@ -455,25 +465,26 @@ class MeasureAttributeType (AbstractGenericAttributeType):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'MeasureAttributeType')
-    _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 151, 1)
+    _XSDLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 151, 1)
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}value uses Python identifier value_
-    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_MeasureAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 158, 5), )
+    __value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'value'), 'value_', '__httpwww_opengis_netcitygmlgenerics2_0_MeasureAttributeType_httpwww_opengis_netcitygmlgenerics2_0value', False, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 158, 5), )
 
-
+    
     value_ = property(__value.value, __value.set, None, None)
 
-
+    
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
     _ElementMap.update({
         __value.name() : __value
     })
     _AttributeMap.update({
-
+        
     })
+_module_typeBindings.MeasureAttributeType = MeasureAttributeType
 Namespace.addCategoryObject('typeBinding', 'MeasureAttributeType', MeasureAttributeType)
 
 
@@ -486,25 +497,25 @@ class GenericAttributeSetType (AbstractGenericAttributeType):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'GenericAttributeSetType')
-    _XSDLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 166, 1)
+    _XSDLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 166, 1)
     _ElementMap = AbstractGenericAttributeType._ElementMap.copy()
     _AttributeMap = AbstractGenericAttributeType._AttributeMap.copy()
     # Base type is AbstractGenericAttributeType
-
+    
     # Element {http://www.opengis.net/citygml/generics/2.0}_genericAttribute uses Python identifier genericAttribute
-    __genericAttribute = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_genericAttribute'), 'genericAttribute', '__httpwww_opengis_netcitygmlgenerics2_0_GenericAttributeSetType_httpwww_opengis_netcitygmlgenerics2_0_genericAttribute', True, pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 73, 1), )
+    __genericAttribute = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, '_genericAttribute'), 'genericAttribute', '__httpwww_opengis_netcitygmlgenerics2_0_GenericAttributeSetType_httpwww_opengis_netcitygmlgenerics2_0_genericAttribute', True, pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 73, 1), )
 
-
+    
     genericAttribute = property(__genericAttribute.value, __genericAttribute.set, None, None)
 
-
+    
     # Attribute name inherited from {http://www.opengis.net/citygml/generics/2.0}AbstractGenericAttributeType
-
+    
     # Attribute codeSpace uses Python identifier codeSpace
     __codeSpace = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'codeSpace'), 'codeSpace', '__httpwww_opengis_netcitygmlgenerics2_0_GenericAttributeSetType_codeSpace', pyxb.binding.datatypes.anyURI)
-    __codeSpace._DeclarationLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 177, 4)
-    __codeSpace._UseLocation = pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 177, 4)
-
+    __codeSpace._DeclarationLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 177, 4)
+    __codeSpace._UseLocation = pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 177, 4)
+    
     codeSpace = property(__codeSpace.value, __codeSpace.set, None, None)
 
     _ElementMap.update({
@@ -513,73 +524,74 @@ class GenericAttributeSetType (AbstractGenericAttributeType):
     _AttributeMap.update({
         __codeSpace.name() : __codeSpace
     })
+_module_typeBindings.GenericAttributeSetType = GenericAttributeSetType
 Namespace.addCategoryObject('typeBinding', 'GenericAttributeSetType', GenericAttributeSetType)
 
 
-GenericCityObject = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'GenericCityObject'), GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 58, 1))
+GenericCityObject = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'GenericCityObject'), GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 58, 1))
 Namespace.addCategoryObject('elementBinding', GenericCityObject.name().localName(), GenericCityObject)
 
-genericAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, '_genericAttribute'), AbstractGenericAttributeType, abstract=pyxb.binding.datatypes.boolean(1), location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 73, 1))
+genericAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, '_genericAttribute'), AbstractGenericAttributeType, abstract=pyxb.binding.datatypes.boolean(1), location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 73, 1))
 Namespace.addCategoryObject('elementBinding', genericAttribute.name().localName(), genericAttribute)
 
-stringAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'stringAttribute'), StringAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 89, 1))
+stringAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'stringAttribute'), StringAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 89, 1))
 Namespace.addCategoryObject('elementBinding', stringAttribute.name().localName(), stringAttribute)
 
-intAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'intAttribute'), IntAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 104, 1))
+intAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'intAttribute'), IntAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 104, 1))
 Namespace.addCategoryObject('elementBinding', intAttribute.name().localName(), intAttribute)
 
-doubleAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'doubleAttribute'), DoubleAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 119, 1))
+doubleAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'doubleAttribute'), DoubleAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 119, 1))
 Namespace.addCategoryObject('elementBinding', doubleAttribute.name().localName(), doubleAttribute)
 
-dateAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'dateAttribute'), DateAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 134, 1))
+dateAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'dateAttribute'), DateAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 134, 1))
 Namespace.addCategoryObject('elementBinding', dateAttribute.name().localName(), dateAttribute)
 
-uriAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'uriAttribute'), UriAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 149, 1))
+uriAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'uriAttribute'), UriAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 149, 1))
 Namespace.addCategoryObject('elementBinding', uriAttribute.name().localName(), uriAttribute)
 
-measureAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'measureAttribute'), MeasureAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 164, 1))
+measureAttribute = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'measureAttribute'), MeasureAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 164, 1))
 Namespace.addCategoryObject('elementBinding', measureAttribute.name().localName(), measureAttribute)
 
-genericAttributeSet = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'genericAttributeSet'), GenericAttributeSetType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 182, 1))
+genericAttributeSet = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'genericAttributeSet'), GenericAttributeSetType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 182, 1))
 Namespace.addCategoryObject('elementBinding', genericAttributeSet.name().localName(), genericAttributeSet)
 
 
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 35, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'class'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 35, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 36, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'function'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 36, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 37, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'usage'), teaser.data.bindings.opengis.raw.gml.CodeType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 37, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 38, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 38, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 39, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 39, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 40, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 40, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 41, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 41, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 42, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry'), teaser.data.bindings.opengis.raw.gml.GeometryPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 42, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 43, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 43, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 44, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 44, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 45, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 45, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 46, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 46, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 47, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection'), teaser.data.bindings.opengis.raw.gml.MultiCurvePropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 47, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 48, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod0ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 48, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 49, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod1ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 49, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 50, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 50, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 51, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 51, 5)))
 
-GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 52, 5)))
+GenericCityObjectType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation'), teaser.data.bindings.opengis.citygml.raw.base.ImplicitRepresentationPropertyType, scope=GenericCityObjectType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 52, 5)))
 
 def _BuildAutomaton ():
     # Remove this helper function from the namespace after it is invoked
@@ -588,215 +600,215 @@ def _BuildAutomaton ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 55, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 55, 3))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 56, 3))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 56, 3))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 57, 3))
+    cc_2 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 57, 3))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/feature.xsd', 28, 5))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/gml/3.1.1/base/feature.xsd', 28, 5))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/feature.xsd', 29, 5))
+    cc_4 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/gml/3.1.1/base/feature.xsd', 29, 5))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 62, 5))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 62, 5))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 63, 5))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 63, 5))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 64, 5))
+    cc_7 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 64, 5))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 65, 5))
+    cc_8 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 65, 5))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 66, 5))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 66, 5))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 67, 5))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 67, 5))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 68, 5))
+    cc_11 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 68, 5))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 35, 5))
+    cc_12 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 35, 5))
     counters.add(cc_12)
-    cc_13 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 36, 5))
+    cc_13 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 36, 5))
     counters.add(cc_13)
-    cc_14 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 37, 5))
+    cc_14 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 37, 5))
     counters.add(cc_14)
-    cc_15 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 38, 5))
+    cc_15 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 38, 5))
     counters.add(cc_15)
-    cc_16 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 39, 5))
+    cc_16 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 39, 5))
     counters.add(cc_16)
-    cc_17 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 40, 5))
+    cc_17 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 40, 5))
     counters.add(cc_17)
-    cc_18 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 41, 5))
+    cc_18 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 41, 5))
     counters.add(cc_18)
-    cc_19 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 42, 5))
+    cc_19 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 42, 5))
     counters.add(cc_19)
-    cc_20 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 43, 5))
+    cc_20 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 43, 5))
     counters.add(cc_20)
-    cc_21 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 44, 5))
+    cc_21 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 44, 5))
     counters.add(cc_21)
-    cc_22 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 45, 5))
+    cc_22 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 45, 5))
     counters.add(cc_22)
-    cc_23 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 46, 5))
+    cc_23 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 46, 5))
     counters.add(cc_23)
-    cc_24 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 47, 5))
+    cc_24 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 47, 5))
     counters.add(cc_24)
-    cc_25 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 48, 5))
+    cc_25 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 48, 5))
     counters.add(cc_25)
-    cc_26 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 49, 5))
+    cc_26 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 49, 5))
     counters.add(cc_26)
-    cc_27 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 50, 5))
+    cc_27 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 50, 5))
     counters.add(cc_27)
-    cc_28 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 51, 5))
+    cc_28 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 51, 5))
     counters.add(cc_28)
-    cc_29 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 52, 5))
+    cc_29 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 52, 5))
     counters.add(cc_29)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_gml, 'metaDataProperty')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 55, 3))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_gml, 'metaDataProperty')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 55, 3))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_1, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_gml, 'description')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 56, 3))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_gml, 'description')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 56, 3))
     st_1 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_1)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_2, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_gml, 'name')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 57, 3))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_gml, 'name')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/gml/3.1.1/base/gmlBase.xsd', 57, 3))
     st_2 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_3, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_gml, 'boundedBy')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/feature.xsd', 28, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_gml, 'boundedBy')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/gml/3.1.1/base/feature.xsd', 28, 5))
     st_3 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_4, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_gml, 'location')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/gml/3.1.1/base/feature.xsd', 29, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_gml, 'location')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/gml/3.1.1/base/feature.xsd', 29, 5))
     st_4 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_5, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'creationDate')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 62, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'creationDate')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 62, 5))
     st_5 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_6, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'terminationDate')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 63, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'terminationDate')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 63, 5))
     st_6 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'externalReference')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 64, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'externalReference')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 64, 5))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_8, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'generalizesTo')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 65, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'generalizesTo')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 65, 5))
     st_8 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_8)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_9, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'relativeToTerrain')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 66, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'relativeToTerrain')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 66, 5))
     st_9 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_9)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_10, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'relativeToWater')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 67, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, 'relativeToWater')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 67, 5))
     st_10 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_10)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_11, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, '_GenericApplicationPropertyOfCityObject')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 68, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(_Namespace_core, '_GenericApplicationPropertyOfCityObject')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/2.0/cityGMLBase.xsd', 68, 5))
     st_11 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_11)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_12, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'class')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 35, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'class')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 35, 5))
     st_12 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_12)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_13, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'function')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 36, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'function')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 36, 5))
     st_13 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_13)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_14, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'usage')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 37, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'usage')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 37, 5))
     st_14 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_14)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_15, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod0Geometry')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 38, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod0Geometry')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 38, 5))
     st_15 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_15)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_16, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod1Geometry')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 39, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod1Geometry')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 39, 5))
     st_16 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_16)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_17, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 40, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod2Geometry')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 40, 5))
     st_17 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_17)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_18, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 41, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod3Geometry')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 41, 5))
     st_18 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_18)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_19, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 42, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod4Geometry')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 42, 5))
     st_19 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_19)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_20, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod0TerrainIntersection')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 43, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod0TerrainIntersection')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 43, 5))
     st_20 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_20)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_21, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 44, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod1TerrainIntersection')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 44, 5))
     st_21 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_21)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_22, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 45, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod2TerrainIntersection')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 45, 5))
     st_22 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_22)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_23, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 46, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod3TerrainIntersection')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 46, 5))
     st_23 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_23)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_24, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 47, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod4TerrainIntersection')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 47, 5))
     st_24 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_24)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_25, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod0ImplicitRepresentation')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 48, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod0ImplicitRepresentation')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 48, 5))
     st_25 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_25)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_26, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod1ImplicitRepresentation')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 49, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod1ImplicitRepresentation')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 49, 5))
     st_26 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_26)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_27, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 50, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod2ImplicitRepresentation')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 50, 5))
     st_27 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_27)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_28, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 51, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod3ImplicitRepresentation')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 51, 5))
     st_28 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_28)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_29, False))
-    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 52, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericCityObjectType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'lod4ImplicitRepresentation')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 52, 5))
     st_29 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_29)
     transitions = []
@@ -1795,7 +1807,7 @@ GenericCityObjectType._Automaton = _BuildAutomaton()
 
 
 
-StringAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), pyxb.binding.datatypes.string, scope=StringAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 83, 5)))
+StringAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), pyxb.binding.datatypes.string, scope=StringAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 83, 5)))
 
 def _BuildAutomaton_ ():
     # Remove this helper function from the namespace after it is invoked
@@ -1806,7 +1818,7 @@ def _BuildAutomaton_ ():
     counters = set()
     states = []
     final_update = set()
-    symbol = pyxb.binding.content.ElementUse(StringAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 83, 5))
+    symbol = pyxb.binding.content.ElementUse(StringAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 83, 5))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -1817,7 +1829,7 @@ StringAttributeType._Automaton = _BuildAutomaton_()
 
 
 
-IntAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), pyxb.binding.datatypes.integer, scope=IntAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 98, 5)))
+IntAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), pyxb.binding.datatypes.integer, scope=IntAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 98, 5)))
 
 def _BuildAutomaton_2 ():
     # Remove this helper function from the namespace after it is invoked
@@ -1828,7 +1840,7 @@ def _BuildAutomaton_2 ():
     counters = set()
     states = []
     final_update = set()
-    symbol = pyxb.binding.content.ElementUse(IntAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 98, 5))
+    symbol = pyxb.binding.content.ElementUse(IntAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 98, 5))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -1839,7 +1851,7 @@ IntAttributeType._Automaton = _BuildAutomaton_2()
 
 
 
-DoubleAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), pyxb.binding.datatypes.double, scope=DoubleAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 113, 5)))
+DoubleAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), pyxb.binding.datatypes.double, scope=DoubleAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 113, 5)))
 
 def _BuildAutomaton_3 ():
     # Remove this helper function from the namespace after it is invoked
@@ -1850,7 +1862,7 @@ def _BuildAutomaton_3 ():
     counters = set()
     states = []
     final_update = set()
-    symbol = pyxb.binding.content.ElementUse(DoubleAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 113, 5))
+    symbol = pyxb.binding.content.ElementUse(DoubleAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 113, 5))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -1861,7 +1873,7 @@ DoubleAttributeType._Automaton = _BuildAutomaton_3()
 
 
 
-DateAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), pyxb.binding.datatypes.date, scope=DateAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 128, 5)))
+DateAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), pyxb.binding.datatypes.date, scope=DateAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 128, 5)))
 
 def _BuildAutomaton_4 ():
     # Remove this helper function from the namespace after it is invoked
@@ -1872,7 +1884,7 @@ def _BuildAutomaton_4 ():
     counters = set()
     states = []
     final_update = set()
-    symbol = pyxb.binding.content.ElementUse(DateAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 128, 5))
+    symbol = pyxb.binding.content.ElementUse(DateAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 128, 5))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -1883,7 +1895,7 @@ DateAttributeType._Automaton = _BuildAutomaton_4()
 
 
 
-UriAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), pyxb.binding.datatypes.anyURI, scope=UriAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 143, 5)))
+UriAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), pyxb.binding.datatypes.anyURI, scope=UriAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 143, 5)))
 
 def _BuildAutomaton_5 ():
     # Remove this helper function from the namespace after it is invoked
@@ -1894,7 +1906,7 @@ def _BuildAutomaton_5 ():
     counters = set()
     states = []
     final_update = set()
-    symbol = pyxb.binding.content.ElementUse(UriAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 143, 5))
+    symbol = pyxb.binding.content.ElementUse(UriAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 143, 5))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -1905,7 +1917,7 @@ UriAttributeType._Automaton = _BuildAutomaton_5()
 
 
 
-MeasureAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=MeasureAttributeType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 158, 5)))
+MeasureAttributeType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'value'), teaser.data.bindings.opengis.raw.gml.MeasureType, scope=MeasureAttributeType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 158, 5)))
 
 def _BuildAutomaton_6 ():
     # Remove this helper function from the namespace after it is invoked
@@ -1916,7 +1928,7 @@ def _BuildAutomaton_6 ():
     counters = set()
     states = []
     final_update = set()
-    symbol = pyxb.binding.content.ElementUse(MeasureAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 158, 5))
+    symbol = pyxb.binding.content.ElementUse(MeasureAttributeType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'value')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 158, 5))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []
@@ -1927,7 +1939,7 @@ MeasureAttributeType._Automaton = _BuildAutomaton_6()
 
 
 
-GenericAttributeSetType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, '_genericAttribute'), AbstractGenericAttributeType, abstract=pyxb.binding.datatypes.boolean(1), scope=GenericAttributeSetType, location=pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 73, 1)))
+GenericAttributeSetType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, '_genericAttribute'), AbstractGenericAttributeType, abstract=pyxb.binding.datatypes.boolean(1), scope=GenericAttributeSetType, location=pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 73, 1)))
 
 def _BuildAutomaton_7 ():
     # Remove this helper function from the namespace after it is invoked
@@ -1938,7 +1950,7 @@ def _BuildAutomaton_7 ():
     counters = set()
     states = []
     final_update = set()
-    symbol = pyxb.binding.content.ElementUse(GenericAttributeSetType._UseForTag(pyxb.namespace.ExpandedName(Namespace, '_genericAttribute')), pyxb.utils.utility.Location('/home/flo/remmen/PyXB-1.2.4/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 175, 5))
+    symbol = pyxb.binding.content.ElementUse(GenericAttributeSetType._UseForTag(pyxb.namespace.ExpandedName(Namespace, '_genericAttribute')), pyxb.utils.utility.Location('/home/micha/GIT/pyxb/pyxb/bundles/opengis/schemas/citygml/generics/2.0/generics.xsd', 175, 5))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []

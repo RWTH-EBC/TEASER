@@ -1,7 +1,7 @@
 # .\project_bind.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:f5ae7850b2e91390f964b3dcf48cd22f3d76364e
-# Generated 2017-01-09 16:25:18.350211 by PyXB version 1.2.5 using Python 3.5.2.final.0
+# Generated 2017-01-09 16:15:10.508433 by PyXB version 1.2.5 using Python 3.5.2.final.0
 # Namespace http://teaser.project
 
 from __future__ import unicode_literals
@@ -14,7 +14,7 @@ import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:d3a05e02-d67f-11e6-871f-2cd444b2e704')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:6952eb7e-d67e-11e6-a675-2cd444b2e704')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.5'
@@ -27,13 +27,13 @@ if pyxb.__version__ != _PyXBVersion:
 _module_typeBindings = pyxb.utils.utility.Object()
 
 # Import bindings for namespaces imported into schema
+import pyxb.binding.datatypes
 import teaser.data.bindings.v_0_4.boundaryconditions_bind as \
     _ImportedBinding__usecond
-import pyxb.binding.datatypes
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://teaser.project', create_if_missing=True)
-Namespace.configureCategories(['typeBinding', 'elementBinding'])
+Namespace.configureCategories(['typeBinding_05', 'elementBinding_05'])
 
 def CreateFromDocument (xml_text, default_namespace=None, location_base=None):
     """Parse the given XML and use the document element to create a
@@ -103,7 +103,7 @@ class UseConditionType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.UseConditionType = UseConditionType
-Namespace.addCategoryObject('typeBinding', 'UseConditionType', UseConditionType)
+Namespace.addCategoryObject('typeBinding_05', 'UseConditionType', UseConditionType)
 
 
 # Complex type {http://teaser.project}MaterialType with content type ELEMENT_ONLY
@@ -171,7 +171,7 @@ class MaterialType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.MaterialType = MaterialType
-Namespace.addCategoryObject('typeBinding', 'MaterialType', MaterialType)
+Namespace.addCategoryObject('typeBinding_05', 'MaterialType', MaterialType)
 
 
 # Complex type {http://teaser.project}LayerType with content type ELEMENT_ONLY
@@ -215,7 +215,7 @@ class LayerType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.LayerType = LayerType
-Namespace.addCategoryObject('typeBinding', 'LayerType', LayerType)
+Namespace.addCategoryObject('typeBinding_05', 'LayerType', LayerType)
 
 
 # Complex type {http://teaser.project}OuterWallType with content type ELEMENT_ONLY
@@ -331,7 +331,7 @@ class OuterWallType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.OuterWallType = OuterWallType
-Namespace.addCategoryObject('typeBinding', 'OuterWallType', OuterWallType)
+Namespace.addCategoryObject('typeBinding_05', 'OuterWallType', OuterWallType)
 
 
 # Complex type {http://teaser.project}RooftopType with content type ELEMENT_ONLY
@@ -447,7 +447,7 @@ class RooftopType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.RooftopType = RooftopType
-Namespace.addCategoryObject('typeBinding', 'RooftopType', RooftopType)
+Namespace.addCategoryObject('typeBinding_05', 'RooftopType', RooftopType)
 
 
 # Complex type {http://teaser.project}InnerWallType with content type ELEMENT_ONLY
@@ -547,7 +547,7 @@ class InnerWallType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.InnerWallType = InnerWallType
-Namespace.addCategoryObject('typeBinding', 'InnerWallType', InnerWallType)
+Namespace.addCategoryObject('typeBinding_05', 'InnerWallType', InnerWallType)
 
 
 # Complex type {http://teaser.project}CeilingType with content type ELEMENT_ONLY
@@ -647,7 +647,7 @@ class CeilingType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.CeilingType = CeilingType
-Namespace.addCategoryObject('typeBinding', 'CeilingType', CeilingType)
+Namespace.addCategoryObject('typeBinding_05', 'CeilingType', CeilingType)
 
 
 # Complex type {http://teaser.project}FloorType with content type ELEMENT_ONLY
@@ -747,7 +747,7 @@ class FloorType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.FloorType = FloorType
-Namespace.addCategoryObject('typeBinding', 'FloorType', FloorType)
+Namespace.addCategoryObject('typeBinding_05', 'FloorType', FloorType)
 
 
 # Complex type {http://teaser.project}GroundFloorType with content type ELEMENT_ONLY
@@ -847,7 +847,7 @@ class GroundFloorType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.GroundFloorType = GroundFloorType
-Namespace.addCategoryObject('typeBinding', 'GroundFloorType', GroundFloorType)
+Namespace.addCategoryObject('typeBinding_05', 'GroundFloorType', GroundFloorType)
 
 
 # Complex type {http://teaser.project}WindowType with content type ELEMENT_ONLY
@@ -995,7 +995,7 @@ class WindowType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.WindowType = WindowType
-Namespace.addCategoryObject('typeBinding', 'WindowType', WindowType)
+Namespace.addCategoryObject('typeBinding_05', 'WindowType', WindowType)
 
 
 # Complex type {http://teaser.project}ThermalZoneType with content type ELEMENT_ONLY
@@ -1127,7 +1127,7 @@ class ThermalZoneType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.ThermalZoneType = ThermalZoneType
-Namespace.addCategoryObject('typeBinding', 'ThermalZoneType', ThermalZoneType)
+Namespace.addCategoryObject('typeBinding_05', 'ThermalZoneType', ThermalZoneType)
 
 
 # Complex type {http://teaser.project}BuildingAHUType with content type ELEMENT_ONLY
@@ -1191,11 +1191,11 @@ class BuildingAHUType (pyxb.binding.basis.complexTypeDefinition):
     efficiency_recovery = property(__efficiency_recovery.value, __efficiency_recovery.set, None, None)
 
     
-    # Element {http://teaser.project}efficiency_revocery_false uses Python identifier efficiency_revocery_false
-    __efficiency_revocery_false = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'efficiency_revocery_false'), 'efficiency_revocery_false', '__httpteaser_project_BuildingAHUType_httpteaser_projectefficiency_revocery_false', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\Project.xsd', 164, 6), )
+    # Element {http://teaser.project}efficiency_recovery_false uses Python identifier efficiency_recovery_false
+    __efficiency_recovery_false = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'efficiency_recovery_false'), 'efficiency_recovery_false', '__httpteaser_project_BuildingAHUType_httpteaser_projectefficiency_recovery_false', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\Project.xsd', 164, 6), )
 
     
-    efficiency_revocery_false = property(__efficiency_revocery_false.value, __efficiency_revocery_false.set, None, None)
+    efficiency_recovery_false = property(__efficiency_recovery_false.value, __efficiency_recovery_false.set, None, None)
 
     
     # Element {http://teaser.project}profile_min_relative_humidity uses Python identifier profile_min_relative_humidity
@@ -1233,7 +1233,7 @@ class BuildingAHUType (pyxb.binding.basis.complexTypeDefinition):
         __heat_recovery.name() : __heat_recovery,
         __by_pass_dehumidification.name() : __by_pass_dehumidification,
         __efficiency_recovery.name() : __efficiency_recovery,
-        __efficiency_revocery_false.name() : __efficiency_revocery_false,
+        __efficiency_recovery_false.name() : __efficiency_recovery_false,
         __profile_min_relative_humidity.name() : __profile_min_relative_humidity,
         __profile_max_relative_humidity.name() : __profile_max_relative_humidity,
         __profile_v_flow.name() : __profile_v_flow,
@@ -1243,7 +1243,7 @@ class BuildingAHUType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.BuildingAHUType = BuildingAHUType
-Namespace.addCategoryObject('typeBinding', 'BuildingAHUType', BuildingAHUType)
+Namespace.addCategoryObject('typeBinding_05', 'BuildingAHUType', BuildingAHUType)
 
 
 # Complex type {http://teaser.project}BuildingType with content type ELEMENT_ONLY
@@ -1367,7 +1367,7 @@ class BuildingType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.BuildingType = BuildingType
-Namespace.addCategoryObject('typeBinding', 'BuildingType', BuildingType)
+Namespace.addCategoryObject('typeBinding_05', 'BuildingType', BuildingType)
 
 
 # Complex type {http://teaser.project}OfficeType with content type ELEMENT_ONLY
@@ -1491,7 +1491,7 @@ class OfficeType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.OfficeType = OfficeType
-Namespace.addCategoryObject('typeBinding', 'OfficeType', OfficeType)
+Namespace.addCategoryObject('typeBinding_05', 'OfficeType', OfficeType)
 
 
 # Complex type {http://teaser.project}ResidentialType with content type ELEMENT_ONLY
@@ -1615,7 +1615,7 @@ class ResidentialType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.ResidentialType = ResidentialType
-Namespace.addCategoryObject('typeBinding', 'ResidentialType', ResidentialType)
+Namespace.addCategoryObject('typeBinding_05', 'ResidentialType', ResidentialType)
 
 
 # Complex type {http://teaser.project}InstituteType with content type ELEMENT_ONLY
@@ -1739,7 +1739,7 @@ class InstituteType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.InstituteType = InstituteType
-Namespace.addCategoryObject('typeBinding', 'InstituteType', InstituteType)
+Namespace.addCategoryObject('typeBinding_05', 'InstituteType', InstituteType)
 
 
 # Complex type {http://teaser.project}Institute4Type with content type ELEMENT_ONLY
@@ -1863,7 +1863,7 @@ class Institute4Type (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.Institute4Type = Institute4Type
-Namespace.addCategoryObject('typeBinding', 'Institute4Type', Institute4Type)
+Namespace.addCategoryObject('typeBinding_05', 'Institute4Type', Institute4Type)
 
 
 # Complex type {http://teaser.project}Institute8Type with content type ELEMENT_ONLY
@@ -1987,7 +1987,7 @@ class Institute8Type (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.Institute8Type = Institute8Type
-Namespace.addCategoryObject('typeBinding', 'Institute8Type', Institute8Type)
+Namespace.addCategoryObject('typeBinding_05', 'Institute8Type', Institute8Type)
 
 
 # Complex type {http://teaser.project}ProjectType with content type ELEMENT_ONLY
@@ -2063,11 +2063,11 @@ class ProjectType (pyxb.binding.basis.complexTypeDefinition):
         __version.name() : __version
     })
 _module_typeBindings.ProjectType = ProjectType
-Namespace.addCategoryObject('typeBinding', 'ProjectType', ProjectType)
+Namespace.addCategoryObject('typeBinding_05', 'ProjectType', ProjectType)
 
 
 Project = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'Project'), ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\Project.xsd', 6, 2))
-Namespace.addCategoryObject('elementBinding', Project.name().localName(), Project)
+Namespace.addCategoryObject('elementBinding_05', Project.name().localName(), Project)
 
 
 
@@ -4512,7 +4512,7 @@ BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedNa
 
 BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'efficiency_recovery'), pyxb.binding.datatypes.float, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\Project.xsd', 163, 6)))
 
-BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'efficiency_revocery_false'), pyxb.binding.datatypes.float, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\Project.xsd', 164, 6)))
+BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'efficiency_recovery_false'), pyxb.binding.datatypes.float, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\Project.xsd', 164, 6)))
 
 BuildingAHUType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'profile_min_relative_humidity'), _ImportedBinding__usecond.floatList, scope=BuildingAHUType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\Project.xsd', 165, 6)))
 
@@ -4591,7 +4591,7 @@ def _BuildAutomaton_11 ():
     states.append(st_6)
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_7, False))
-    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'efficiency_revocery_false')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\Project.xsd', 164, 6))
+    symbol = pyxb.binding.content.ElementUse(BuildingAHUType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'efficiency_recovery_false')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\Project.xsd', 164, 6))
     st_7 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_7)
     final_update = set()

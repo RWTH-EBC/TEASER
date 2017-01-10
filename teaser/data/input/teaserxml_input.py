@@ -17,7 +17,8 @@ from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
-from teaser.logic.buildingobjects.buildingsystems.buildingahu import BuildingAHU
+from teaser.logic.buildingobjects.buildingsystems.buildingahu import\
+    BuildingAHU
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
@@ -59,6 +60,9 @@ def load_teaser_xml(path, prj):
         project_bind = pb.CreateFromDocument(xml_file.read())
     elif version_parse.getroot().attrib['version'] == "0.4":
         import teaser.data.bindings.v_0_4.project_bind as pb
+        project_bind = pb.CreateFromDocument(xml_file.read())
+    elif version_parse.getroot().attrib['version'] == "0.5":
+        import teaser.data.bindings.v_0_5.project_bind as pb
         project_bind = pb.CreateFromDocument(xml_file.read())
 
     for pyxb_bld in project_bind.Building:
@@ -130,8 +134,14 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         bldg.central_ahu.by_pass_dehumidification = \
             pyxb_ahu.by_pass_dehumidification
         bldg.central_ahu.efficiency_recovery = pyxb_ahu.efficiency_recovery
-        bldg.central_ahu.efficiency_revocery_false = \
-            pyxb_ahu.efficiency_revocery_false
+
+        if float(project_bind.version) >= 0.5:
+            bldg.central_ahu.efficiency_recovery_false = \
+                pyxb_ahu.efficiency_recovery_false
+        else:
+            bldg.central_ahu.efficiency_recovery_false = \
+                pyxb_ahu.efficiency_revocery_false
+
         bldg.central_ahu.profile_min_relative_humidity = \
             pyxb_ahu.profile_min_relative_humidity
         bldg.central_ahu.profile_max_relative_humidity = \
@@ -149,12 +159,13 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         zone.area = pyxb_zone.area
         zone.volume = pyxb_zone.volume
         zone.infiltration_rate = pyxb_zone.infiltration_rate
-        # zone.use_conditions.typical_length = pyxb_zone.typical_length
-        # zone.use_conditions.typical_width = pyxb_zone.typical_width
 
         zone.use_conditions = BoundaryConditions(zone)
 
         pyxb_use = pyxb_zone.UseCondition.BoundaryConditions
+
+        zone.use_conditions.typical_length = pyxb_zone.typical_length
+        zone.use_conditions.typical_width = pyxb_zone.typical_width
 
         zone.use_conditions.usage = \
             pyxb_use.usage
@@ -180,7 +191,7 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         zone.use_conditions.daily_operation_heating = \
             pyxb_use.UsageOperationTime.daily_operation_heating
 
-        if project_bind.version == "0.4":
+        if float(project_bind.version) >= 0.4:
             zone.use_conditions.maintained_illuminance = \
                 pyxb_use.Lighting.maintained_illuminance
         else:

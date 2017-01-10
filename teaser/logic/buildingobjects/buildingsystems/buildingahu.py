@@ -83,7 +83,7 @@ class BuildingAHU(object):
         self.heat_recovery = True
         self.by_pass_dehumidification = 0.2
         self.efficiency_recovery = 0.8
-        self.efficiency_revocery_false = 0.2
+        self.efficiency_recovery_false = 0.2
         self.sample_rate = 1800
         self.efficiency_fan_supply = 0.7
         self.efficiency_fan_return = 0.7
