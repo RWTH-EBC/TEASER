@@ -9,6 +9,7 @@ from teaser.project import Project
 import math
 
 import helptest
+
 prj = Project(True)
 
 
@@ -21,72 +22,75 @@ class Test_teaser(object):
         import teaser.examples.verification.verification_room1 as room1
 
         room1_prj = room1.parameter_room1()
-        therm_zone = room1_prj.buildings[0].thermal_zones[0]
+        zone_attr = room1_prj.buildings[0].thermal_zones[0].model_attr
 
-        #parameters inner wall Typraum S
+        # parameters inner wall Typraum S
 
-        assert round(therm_zone.r1_iw, 13) == 0.0005956934075
-        assert round(therm_zone.c1_iw / 1000, 7) == 14836.3546282
-        assert round(therm_zone.area_iw, 1) == 75.5
-        assert round(therm_zone.alpha_conv_inner_iw, 13) == 2.23642384105960
+        assert round(zone_attr.r1_iw, 13) == 0.0005956934075
+        assert round(zone_attr.c1_iw / 1000, 7) == 14836.3546282
+        assert round(zone_attr.area_iw, 1) == 75.5
+        assert round(zone_attr.alpha_conv_inner_iw, 13) == 2.23642384105960
 
-        #paremeters outer wall Typraum S
-
-        assert round(therm_zone.r_rest_ow, 13) == 0.0427687193786
-        assert round(therm_zone.r1_ow, 13) == 0.0043679129367
-        assert round(therm_zone.c1_ow / 1000, 7) == 1600.8489399
-        assert round(therm_zone.area_ow, 1) == 3.5
-        assert round(therm_zone.area_win, 1) == 7.0
-        assert round(therm_zone.alpha_conv_inner_ow, 1) == 2.7
-        assert round(therm_zone.alpha_comb_outer_ow, 1) == 25.0
+        # paremeters outer wall Typraum S
+        r_rest = zone_attr.r_rest_ow + 1 / (zone_attr.alpha_comb_outer_ow *
+                                            zone_attr.area_ow)
+        assert round(r_rest, 13) == 0.0427687193786
+        assert round(zone_attr.r1_ow, 13) == 0.0043679129367
+        assert round(zone_attr.c1_ow / 1000, 7) == 1600.8489399
+        assert round(zone_attr.area_ow, 1) == 3.5
+        assert round(zone_attr.area_win, 1) == 7.0
+        assert round(zone_attr.alpha_conv_inner_ow, 1) == 2.7
+        assert round(zone_attr.alpha_comb_outer_ow, 1) == 25.0
 
     def test_calc_vdi_room3(self):
         '''Parameter Verification for room 3'''
         import teaser.examples.verification.verification_room3 as room3
 
         room3_prj = room3.parameter_room3()
-        therm_zone = room3_prj.buildings[0].thermal_zones[0]
+        zone_attr = room3_prj.buildings[0].thermal_zones[0].model_attr
 
-        #parameters inner wall Typraum L
+        # parameters inner wall Typraum L
 
-        assert round(therm_zone.r1_iw, 13) == 0.003385649748
-        assert round(therm_zone.c1_iw / 1000, 7) == 7445.3648976
-        assert round(therm_zone.area_iw, 1) == 75.5
-        assert round(therm_zone.alpha_conv_inner_iw, 13) == 2.23642384105960
+        assert round(zone_attr.r1_iw, 13) == 0.003385649748
+        assert round(zone_attr.c1_iw / 1000, 7) == 7445.3648976
+        assert round(zone_attr.area_iw, 1) == 75.5
+        assert round(zone_attr.alpha_conv_inner_iw, 13) == 2.23642384105960
 
-        #parameters outer wall Typraum L
-
-        assert round(therm_zone.r_rest_ow, 13) == 0.0431403889233
-        assert round(therm_zone.r1_ow, 13) == 0.004049351608
-        assert round(therm_zone.c1_ow / 1000, 7) == 47.8617641
-        assert round(therm_zone.area_ow, 1) == 3.5
-        assert round(therm_zone.area_win, 1) == 7.0
-        assert round(therm_zone.alpha_conv_inner_ow, 1) == 2.7
-        assert round(therm_zone.alpha_comb_outer_ow, 1) == 25.0
+        # parameters outer wall Typraum L
+        r_rest = zone_attr.r_rest_ow + 1 / (zone_attr.alpha_comb_outer_ow *
+                                            zone_attr.area_ow)
+        assert round(r_rest, 13) == 0.0431403889233
+        assert round(zone_attr.r1_ow, 13) == 0.004049351608
+        assert round(zone_attr.c1_ow / 1000, 7) == 47.8617641
+        assert round(zone_attr.area_ow, 1) == 3.5
+        assert round(zone_attr.area_win, 1) == 7.0
+        assert round(zone_attr.alpha_conv_inner_ow, 1) == 2.7
+        assert round(zone_attr.alpha_comb_outer_ow, 1) == 25.0
 
     def test_calc_vdi_room8(self):
         '''Parameter Verification for room 8'''
         import teaser.examples.verification.verification_room8 as room8
 
         room8_prj = room8.parameter_room8()
-        therm_zone = room8_prj.buildings[0].thermal_zones[0]
+        zone_attr = room8_prj.buildings[0].thermal_zones[0].model_attr
 
-        assert round(therm_zone.r1_iw, 13) == 0.0006688956391
-        assert round(therm_zone.c1_iw / 1000, 7) == 12391.3638631
-        assert round(therm_zone.area_iw, 1) == 60.5
-        assert round(therm_zone.alpha_conv_inner_iw, 13) == 2.1214876033058
+        assert round(zone_attr.r1_iw, 13) == 0.0006688956391
+        assert round(zone_attr.c1_iw / 1000, 7) == 12391.3638631
+        assert round(zone_attr.area_iw, 1) == 60.5
+        assert round(zone_attr.alpha_conv_inner_iw, 13) == 2.1214876033058
+        r_rest = zone_attr.r_rest_ow + 1 / (zone_attr.alpha_comb_outer_ow *
+                                            zone_attr.area_ow)
+        assert round(r_rest, 13) == 0.0207059264866
+        assert round(zone_attr.r1_ow, 13) == 0.0017362530106
+        assert round(zone_attr.c1_ow / 1000, 7) == 5259.932231
+        assert round(zone_attr.area_ow, 1) == 11.5
+        assert round(zone_attr.area_win, 1) == 14.0
+        assert round(zone_attr.alpha_conv_inner_ow, 1) == 2.7
+        assert round(zone_attr.alpha_comb_outer_ow, 1) == 25.0
+        assert round(zone_attr.weightfactor_ow[1], 13) == 0.1324989973869
+        assert round(zone_attr.weightfactor_win[0], 13) == 0.4047663456282
 
-        assert round(therm_zone.r_rest_ow, 13) == 0.0207059264866
-        assert round(therm_zone.r1_ow, 13) == 0.0017362530106
-        assert round(therm_zone.c1_ow / 1000, 7) == 5259.932231
-        assert round(therm_zone.area_ow, 1) == 11.5
-        assert round(therm_zone.area_win, 1) == 14.0
-        assert round(therm_zone.alpha_conv_inner_ow, 1) == 2.7
-        assert round(therm_zone.alpha_comb_outer_ow, 1) == 25.0
-        assert round(therm_zone.weightfactor_ow[1], 13) == 0.1324989973869
-        assert round(therm_zone.weightfactor_win[0], 13) == 0.4047663456282
-
-    #EBC Calculation Verification, with parameters from TEASER3
+    # EBC Calculation Verification, with parameters from TEASER3
 
     def test_calc_ebc(self):
         '''
@@ -95,34 +99,34 @@ class Test_teaser(object):
         '''
         prj.set_default()
         prj.load_project(utilities.get_full_path("examples/examplefiles"
-                                              "/new.teaserXML"))
-        therm_zone = prj.buildings[0].thermal_zones[0]
+                                                 "/new.teaserXML"))
+
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = False
-        prj.used_library_calc = 'AixLib'
         prj.buildings[0].calc_building_parameter()
+        zone_attr = prj.buildings[0].thermal_zones[0].model_attr
 
-        assert round(therm_zone.r1_iw, 11) == 4.62113e-06
-        assert round(therm_zone.c1_iw, 2) == 1209810287.22
-        assert round(therm_zone.area_iw, 5) == 9866.66667
-        assert round(therm_zone.alpha_conv_inner_iw, 5) == 2.37568
+        assert round(zone_attr.r1_iw, 11) == 4.62113e-06
+        assert round(zone_attr.c1_iw, 2) == 1209810287.22
+        assert round(zone_attr.area_iw, 5) == 9866.66667
+        assert round(zone_attr.alpha_conv_inner_iw, 5) == 2.37568
 
-        assert round(therm_zone.r_rest_ow, 5) == 0.00183
-        assert round(therm_zone.r1_ow, 10) == 3.06155e-05
-        assert round(therm_zone.c1_ow, 3) == 226923157.846
-        assert round(therm_zone.area_ow, 5) == 920.0
+        assert round(zone_attr.r_rest_ow, 5) == 0.00181
+        assert round(zone_attr.r1_ow, 10) == 3.06155e-05
+        assert round(zone_attr.c1_ow, 3) == 226923157.846
+        assert round(zone_attr.area_ow, 5) == 920.0
 
-        assert round(therm_zone.alpha_conv_inner_ow, 5) == 1.83043
+        assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.83043
 
-        assert round(therm_zone.alpha_conv_outer_ow, 5) == 20.0
-        assert round(therm_zone.alpha_comb_outer_ow, 5) == 25.0
-        assert round(therm_zone.alpha_conv_inner_win, 5) == 2.7
-        assert round(therm_zone.alpha_conv_outer_win, 5) == 20.0
-        assert round(therm_zone.alpha_comb_outer_win, 5) == 25.0
+        assert round(zone_attr.alpha_conv_outer_ow, 5) == 20.0
+        assert round(zone_attr.alpha_comb_outer_ow, 5) == 25.0
+        assert round(zone_attr.alpha_conv_inner_win, 5) == 2.7
+        assert round(zone_attr.alpha_conv_outer_win, 5) == 20.0
+        assert round(zone_attr.alpha_comb_outer_win, 5) == 25.0
 
-        assert round(therm_zone.weightfactor_ow[0], 5) == 0.04588
-        assert round(therm_zone.weightfactor_win[0], 5) == 0.33333
-        assert round(therm_zone.weightfactor_ground[0], 5) == 0.54398
+        assert round(zone_attr.weightfactor_ow[0], 5) == 0.04588
+        assert round(zone_attr.weightfactor_win[0], 5) == 0.33333
+        assert round(zone_attr.weightfactor_ground, 5) == 0.54398
 
     def test_type_bldg_office_with_calc(self):
         '''
@@ -141,11 +145,11 @@ class Test_teaser(object):
 
         test_office.generate_archetype()
 
-        #general parameters
+        # general parameters
 
         assert len(test_office.thermal_zones) == 6
 
-        #zone specific parameters
+        # zone specific parameters
 
         for zone in test_office.thermal_zones:
             if zone.name == "Meeting":
@@ -161,7 +165,7 @@ class Test_teaser(object):
             if zone.name == "Floor":
                 assert zone.area == 625
 
-        #facade specific parameters
+        # facade specific parameters
 
         assert round(test_office.get_outer_wall_area(-2), 0) == 958
         assert round(test_office.get_outer_wall_area(-1), 0) == 958
@@ -187,7 +191,7 @@ class Test_teaser(object):
 
         test_office.generate_archetype()
 
-        #facade specific parameters
+        # facade specific parameters
 
         assert round(test_office.get_outer_wall_area(-2), 0) == 958
         assert round(test_office.get_outer_wall_area(-1), 0) == 958
@@ -213,7 +217,7 @@ class Test_teaser(object):
 
         test_office.generate_archetype()
 
-        #facade specific parameters
+        # facade specific parameters
 
         assert round(test_office.get_outer_wall_area(-2), 0) == 958
         assert round(test_office.get_outer_wall_area(-1), 0) == 958
@@ -239,7 +243,7 @@ class Test_teaser(object):
 
         test_office.generate_archetype()
 
-        #facade specific parameters
+        # facade specific parameters
 
         assert round(test_office.get_outer_wall_area(-2), 0) == 958
         assert round(test_office.get_outer_wall_area(-1), 0) == 958
@@ -273,11 +277,11 @@ class Test_teaser(object):
 
         test_institute4.generate_archetype()
 
-        #general parameters
+        # general parameters
 
         assert len(test_institute4.thermal_zones) == 7
 
-        #zone specific parameters
+        # zone specific parameters
 
         for zone in test_institute4.thermal_zones:
             if zone.name == "Meeting":
@@ -295,7 +299,7 @@ class Test_teaser(object):
             if zone.name == "Laboratory":
                 assert zone.area == 500
 
-        #facade specific parameters
+        # facade specific parameters
 
         assert round(test_institute4.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute4.get_outer_wall_area(-1), 0) == 958
@@ -329,11 +333,11 @@ class Test_teaser(object):
 
         test_institute8.generate_archetype()
 
-        #general parameters
+        # general parameters
 
         assert len(test_institute8.thermal_zones) == 7
 
-        #zone specific parameters
+        # zone specific parameters
 
         for zone in test_institute8.thermal_zones:
             if zone.name == "Meeting":
@@ -351,7 +355,7 @@ class Test_teaser(object):
             if zone.name == "Laboratory":
                 assert zone.area == 1500
 
-        #facade specific parameters
+        # facade specific parameters
 
         assert round(test_institute8.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute8.get_outer_wall_area(-1), 0) == 958
@@ -385,11 +389,11 @@ class Test_teaser(object):
 
         test_institute.generate_archetype()
 
-        #general parameters
+        # general parameters
 
         assert len(test_institute.thermal_zones) == 7
 
-        #zone specific parameters
+        # zone specific parameters
 
         for zone in test_institute.thermal_zones:
             if zone.name == "Meeting":
@@ -407,7 +411,7 @@ class Test_teaser(object):
             if zone.name == "Laboratory":
                 assert zone.area == 375
 
-        #facade specific parameters
+        # facade specific parameters
 
         assert round(test_institute.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute.get_outer_wall_area(-1), 0) == 958
@@ -438,17 +442,17 @@ class Test_teaser(object):
 
         test_residential.generate_archetype()
 
-        #general parameters
+        # general parameters
 
         assert len(test_residential.thermal_zones) == 1
 
-        #zone specific parameters
+        # zone specific parameters
 
         for zone in test_residential.thermal_zones:
             if zone.name == "SingleDwelling":
                 assert zone.area == 2500
 
-        #facade specific parameters
+        # facade specific parameters
 
         assert round(test_residential.get_outer_wall_area(-2), 0) == 1108
         assert round(test_residential.get_outer_wall_area(-1), 0) == 1108
@@ -477,7 +481,7 @@ class Test_teaser(object):
 
         test_residential.generate_archetype()
 
-        #facade specific parameters
+        # facade specific parameters
 
         assert round(test_residential.get_outer_wall_area(-2), 0) == 1108
         assert round(test_residential.get_outer_wall_area(-1), 0) == 1108
@@ -506,7 +510,7 @@ class Test_teaser(object):
 
         test_residential.generate_archetype()
 
-        #facade specific parameters
+        # facade specific parameters
 
         assert round(test_residential.get_outer_wall_area(-2), 0) == 858
         assert round(test_residential.get_outer_wall_area(-1), 0) == 484
@@ -535,7 +539,7 @@ class Test_teaser(object):
 
         test_residential.generate_archetype()
 
-        #facade specific parameters
+        # facade specific parameters
 
         assert round(test_residential.get_outer_wall_area(-2), 0) == 700
         assert round(test_residential.get_outer_wall_area(-1), 0) == 789
@@ -548,14 +552,14 @@ class Test_teaser(object):
         assert round(test_residential.get_window_area(90), 0) == 125
         assert round(test_residential.get_window_area(270), 0) == 125
 
-    #methods in Project, these tests only test if the API function works,
-    #not if it produces reliable results.
+    # methods in Project, these tests only test if the API function works,
+    # not if it produces reliable results.
 
     def test_load_save_project(self):
         '''test of load_project and save_project'''
 
         prj.load_project(utilities.get_full_path(("examples/examplefiles"
-                                               "/new.teaserXML")))
+                                                  "/new.teaserXML")))
         therm_zone = prj.buildings[-1].thermal_zones[0]
         assert therm_zone.outer_walls[0].area == 40.0
         tz_area = sum([tz.area for tz in prj.buildings[
@@ -564,8 +568,7 @@ class Test_teaser(object):
         prj.save_project("unitTest")
         prj.set_default()
 
-
-    #commented until we find solution for opengis PyXB bindings
+    # commented until we find solution for opengis PyXB bindings
     def test_save_citygml(self):
         '''test of save_gml'''
         helptest.building_test2(prj)
@@ -594,16 +597,29 @@ class Test_teaser(object):
     def test_export_aixlib(self):
         '''test of export_aixlib, no calculation verification'''
 
-        prj.number_of_elements_calc = 2
-        prj.merge_windows_calc = True
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
         prj.used_library_calc = 'AixLib'
         prj.calc_all_buildings()
-        prj.export_aixlib(building_model='MultizoneEquipped')
+        prj.export_aixlib()
+
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = False
         prj.used_library_calc = 'AixLib'
         prj.calc_all_buildings()
-        prj.export_aixlib(building_model='MultizoneEquipped')
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
 
     def test_export_annex(self):
         '''test of export_annex, no calculation verification'''
@@ -624,11 +640,11 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_annex()
 
-    def test_export_parameters_txt(self):
-        '''test of the export of the readable parameter output'''
+    # def test_export_parameters_txt(self):
+    #     '''test of the export of the readable parameter output'''
 
-        prj.export_parameters_txt()
-        prj.set_default()
+    #     prj.export_parameters_txt()
+    #     prj.set_default()
 
     def test_instantiate_data_class(self):
         '''test of instantiate_data_class'''
@@ -699,7 +715,7 @@ class Test_teaser(object):
                                   dormer=0,
                                   construction_type="heavy")
 
-    #methods in Building
+    # methods in Building
 
     def test_get_inner_wall_area(self):
         '''test of get_inner_wall_area'''
@@ -737,19 +753,6 @@ class Test_teaser(object):
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert round(therm_zone.windows[0].area, 3) == 1.0
 
-    def test_set_specific_wall_area(self):
-        '''test of set_specific_wall_area'''
-        prj.set_default()
-        helptest.building_test2(prj)
-        prj.buildings[-1].set_specific_wall_area(
-            prj.buildings[-1].thermal_zones[-1],
-            prj.buildings[-1].thermal_zones[-1].outer_walls[1],
-            500)
-
-        therm_zone = prj.buildings[-1].thermal_zones[-1]
-        assert round(therm_zone.outer_walls[0].area, 2) == 10.0
-        assert round(therm_zone.outer_walls[1].area, 1) == 500
-
     def test_fill_outer_wall_area_dict(self):
         '''test of fill_outer_wall_area_dict'''
 
@@ -767,8 +770,8 @@ class Test_teaser(object):
         '''test of fill_window_area_dict'''
         prj.buildings[-1].fill_window_area_dict()
         assert prj.buildings[-1].window_area == {90.0: 5.0,
-                                                         180.0: 8.0,
-                                                         270.0: 5.0}
+                                                 180.0: 8.0,
+                                                 270.0: 5.0}
 
     def test_calc_building_parameter(self):
         '''test of calc_building_parameter'''
@@ -776,14 +779,14 @@ class Test_teaser(object):
         helptest.building_test2(prj)
 
         prj.buildings[-1].calc_building_parameter(number_of_elements=2,
-                                                 merge_windows=True,
-                                                 used_library='AixLib')
+                                                  merge_windows=True,
+                                                  used_library='AixLib')
 
         assert round(prj.buildings[-1].volume, 1) == 490.0
         assert round(
             prj.buildings[-1].sum_heating_load, 4) == 6481.8126
 
-    #methods in therm_zone
+    # methods in therm_zone
 
     def test_calc_zone_parameters(self):
         '''test of calc zone parameter, no calculation verification'''
@@ -811,7 +814,7 @@ class Test_teaser(object):
         prj.set_default()
         helptest.building_test2(prj)
 
-        #execute zone parameters for therm_zone
+        # execute zone parameters for therm_zone
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         for out_wall in therm_zone.outer_walls:
@@ -881,7 +884,7 @@ class Test_teaser(object):
         assert round(therm_zone.alpha_rad_outer_rt, 5) == 5.0
         assert round(therm_zone.alpha_comb_outer_rt, 1) == 25.0
 
-        #window
+        # window
         assert round(therm_zone.ua_value_win, 16) == 32.87895310796074
         assert round(therm_zone.area_win, 1) == 18.0
         assert round(therm_zone.r_conv_inner_win, 19) == 0.032679738562091505
@@ -898,7 +901,7 @@ class Test_teaser(object):
     def test_calc_chain_matrix(self):
         '''test of calc_chain_matrix'''
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        omega=(2 * math.pi / 86400 / 5)
+        omega = (2 * math.pi / 86400 / 5)
         r1_ow, c1_ow = prj.buildings[-1].thermal_zones[-1].calc_chain_matrix(
             element_list=therm_zone.outer_walls,
             omega=omega)
@@ -991,7 +994,6 @@ class Test_teaser(object):
         assert round(zone_attr.r1_iw, 15) == 0.009719561140816
         assert round(zone_attr.r_rest_ow, 15) == 0.005922787404456
 
-
     def test_volume_zone(self):
         '''test of volume_zone'''
 
@@ -1005,7 +1007,7 @@ class Test_teaser(object):
         for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
             assert round(wall.area, 16) == 11.951219512195122
 
-   #methods in UseConditions18599()
+            # methods in UseConditions18599()
 
     def test_load_use_conditions(self):
         '''test of load_use_conditions, no parameter checking'''
@@ -1016,7 +1018,7 @@ class Test_teaser(object):
     def test_save_use_conditions(self):
         '''test of save_use_conditions, no parameter checking'''
         import os
-        
+
         path = os.path.join(utilities.get_default_path(),
                             'UseCondUT.xml')
         prj.data.path_uc = path
@@ -1024,7 +1026,7 @@ class Test_teaser(object):
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
         use_cond.save_use_conditions(data_class=prj.data)
 
-   #methods in BuildingElement
+        # methods in BuildingElement
 
     def test_ua_value(self):
         '''test of ua_value'''
@@ -1067,14 +1069,14 @@ class Test_teaser(object):
         # test load function
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         path = os.path.join(utilities.get_default_path(),
-                        'unitTestTB.xml')
+                            'unitTestTB.xml')
         prj.data.path_tb = path
         prj.data.load_tb_binding()
         therm_zone.outer_walls[0].save_type_element(data_class=prj.data)
         therm_zone.inner_walls[0].save_type_element(data_class=prj.data)
         therm_zone.windows[0].save_type_element(data_class=prj.data)
 
-    #methods in Wall
+    # methods in Wall
 
     def test_calc_equivalent_res_wall(self):
         '''test of calc_equivalent_res, wall'''
@@ -1084,7 +1086,7 @@ class Test_teaser(object):
 
         therm_zone.outer_walls[0].calc_equivalent_res()
 
-        #parameters for outwall
+        # parameters for outwall
 
         assert round(therm_zone.outer_walls[0].c1, 6) == 111237.213205
         assert round(therm_zone.outer_walls[0].c2, 7) == 59455.3856787
