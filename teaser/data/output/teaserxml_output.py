@@ -25,6 +25,7 @@ def save_teaser_xml(path, project):
     project: Project()
         Teaser instance of Project()
     '''
+
     if path.endswith("teaserXML"):
         new_path = path
     else:

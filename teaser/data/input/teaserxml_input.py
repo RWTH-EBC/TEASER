@@ -133,12 +133,16 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         bldg.central_ahu.by_pass_dehumidification = \
             pyxb_ahu.by_pass_dehumidification
         bldg.central_ahu.efficiency_recovery = pyxb_ahu.efficiency_recovery
+
         if float(project_bind.version) >= 0.5:
             bldg.central_ahu.efficiency_recovery_false = \
                 pyxb_ahu.efficiency_recovery_false
         else:
-            bldg.central_ahu.profile_min_relative_humidity = \
-                pyxb_ahu.profile_min_relative_humidity
+            bldg.central_ahu.efficiency_recovery_false = \
+                pyxb_ahu.efficiency_revocery_false
+
+        bldg.central_ahu.profile_min_relative_humidity = \
+            pyxb_ahu.profile_min_relative_humidity
         bldg.central_ahu.profile_max_relative_humidity = \
             pyxb_ahu.profile_max_relative_humidity
         bldg.central_ahu.profile_v_flow = \
