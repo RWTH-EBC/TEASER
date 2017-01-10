@@ -784,7 +784,7 @@ class Test_teaser(object):
 
         assert round(prj.buildings[-1].volume, 1) == 490.0
         assert round(
-            prj.buildings[-1].sum_heat_load, 4) == 6481.8126
+            prj.buildings[-1].sum_heat_load, 4) == 5023.0256
 
     # methods in therm_zone
 
