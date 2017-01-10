@@ -17,7 +17,8 @@ from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
-from teaser.logic.buildingobjects.buildingsystems.buildingahu import BuildingAHU
+from teaser.logic.buildingobjects.buildingsystems.buildingahu import\
+    BuildingAHU
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
@@ -158,12 +159,13 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         zone.area = pyxb_zone.area
         zone.volume = pyxb_zone.volume
         zone.infiltration_rate = pyxb_zone.infiltration_rate
-        # zone.use_conditions.typical_length = pyxb_zone.typical_length
-        # zone.use_conditions.typical_width = pyxb_zone.typical_width
 
         zone.use_conditions = BoundaryConditions(zone)
 
         pyxb_use = pyxb_zone.UseCondition.BoundaryConditions
+
+        zone.use_conditions.typical_length = pyxb_zone.typical_length
+        zone.use_conditions.typical_width = pyxb_zone.typical_width
 
         zone.use_conditions.usage = \
             pyxb_use.usage
