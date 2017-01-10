@@ -640,11 +640,11 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_annex()
 
-    def test_export_parameters_txt(self):
-        '''test of the export of the readable parameter output'''
+    # def test_export_parameters_txt(self):
+    #     '''test of the export of the readable parameter output'''
 
-        prj.export_parameters_txt()
-        prj.set_default()
+    #     prj.export_parameters_txt()
+    #     prj.set_default()
 
     def test_instantiate_data_class(self):
         '''test of instantiate_data_class'''
