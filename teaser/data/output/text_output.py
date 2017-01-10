@@ -24,7 +24,7 @@ def export_parameters_txt(prj, path):
     if path is None:
         path = os.path.join(os.path.expanduser('~'), "TEASEROutput/", prj.name)
     else:
-        path = path+"/"+prj.name
+        path = os.path.join(path, prj.name)
 
     for bldg in prj.buildings:
         bldg_path = os.path.join(
@@ -33,7 +33,11 @@ def export_parameters_txt(prj, path):
         utilities.create_path(bldg_path)
         readable_template = Template(
             filename=utilities.get_full_path(
-                "data/output/texttemplate/ReadableBuilding"))
+                os.path.join(
+                    'data',
+                    'output',
+                    'texttemplate',
+                    'ReadableBuilding')))
 
         out_file = open((bldg_path + "ReadableOutput.txt"), 'w')
         out_file.write(readable_template.render_unicode
