@@ -8,3 +8,4 @@ buildingobjects
     teaser.Logic.BuildingObjects.BoundaryConditions
     teaser.Logic.BuildingObjects.BuildingPhysics
     teaser.Logic.BuildingObjects.BuildingSystems
+    teaser.Logic.BuildingObjects.Calculation
