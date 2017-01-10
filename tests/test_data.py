@@ -761,15 +761,15 @@ class Test_teaser(object):
                               prj.buildings[-1].outer_area.items()}
         assert outwall_dict_round == {-2.0: 140,
                                       -1.0: 140,
-                                      0.0: 10.0,
-                                      90.0: 500.0,
+                                      0.0: 2.0,
+                                      90.0: 14.0,
                                       180.0: 10.0,
                                       270.0: 14.0}
 
     def test_fill_window_area_dict(self):
         '''test of fill_window_area_dict'''
         prj.buildings[-1].fill_window_area_dict()
-        assert prj.buildings[-1].window_area == {90.0: 5.0,
+        assert prj.buildings[-1].window_area == {90.0: 1.0,
                                                  180.0: 8.0,
                                                  270.0: 5.0}
 
@@ -784,7 +784,7 @@ class Test_teaser(object):
 
         assert round(prj.buildings[-1].volume, 1) == 490.0
         assert round(
-            prj.buildings[-1].sum_heating_load, 4) == 6481.8126
+            prj.buildings[-1].sum_heat_load, 4) == 6481.8126
 
     # methods in therm_zone
 
