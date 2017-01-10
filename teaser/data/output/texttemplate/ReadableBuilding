@@ -53,162 +53,46 @@ number of thermal zone.model_attrs = ${len(bldg.thermal_zones)} -
 
     Air Handling Unit
 
-    with_ahu = ${get_true_false(zone.use_conditions.with_ahu)}
+    with_ahu = ${zone.use_conditions.with_ahu}
     minimum specific air flow supplied by the AHU = ${zone.use_conditions.min_ahu} m^3/(h m^2)
     maximum specific air flow supplied by the AHU = ${zone.use_conditions.max_ahu} m^3/(h m^2)
-    constant infiltration usage = ${get_true_false(zone.use_conditions.use_constant_ach_rate)}
+    constant infiltration usage = ${zone.use_conditions.use_constant_ach_rate}
     base value for the infiltration rate = ${zone.use_conditions.base_ach} 1/h
     Additional infiltration rate for maximum persons activity = ${zone.use_conditions.max_user_ach} 1/h
     Additional infiltration rate when overheating appears  = ${zone.use_conditions.max_overheating_ach} 1/h
     Additional infiltration rate in the summer with  = ${zone.use_conditions.max_summer_ach} [infiltration_rate [1/h], Tmin [K], Tmax [K]]
     Reduction factor of userACH for cold weather with  = ${zone.use_conditions.winter_reduction} [infiltration_rate [1/h], Tmin [K], Tmax [K]]
 
-
-
-
-
-    minimum specific air flow supplied by the AHU =  (minAHU)
-    maximum specific air flow supplied by the AHU = (maxAHU)
-    AHU functionality =
-
-    total energy transmittance = ${zone.model_attr.weighted_g_value} - (g)
-
   * Windows *
 
-    energy transmittances if sunblind is closed = ${sunblind_string(zone.model_attr.windows)} - (gsunblind)
-    list of window areas = ${area_string(zone.windows)} - (Aw)
-    windows functionality = ${on_off_checker(zone.model_attr.windows)} - (withWindows)
-    weigthfactors for the windows = ${weightfactors_to_string(zone.model_attr.weightfactor_win)} - (weightfactorswindow)
-    coefficient of absorption of the window = 0.03 - (awin)
-    %if prj.merge_windows_calc == False:
-    resistor window = ${zone.model_attr.r1_win} K/W (RWin)
-    window's coefficient of heat transfer (inner side) = ${zone.model_attr.alpha_conv_inner_win} W/(m^2 K) (alphaConvWinInner)
-    window's coefficient of heat transfer (outer side) = ${zone.model_attr.alpha_conv_outer_win} W/(m^2 K) (alphaConvWinOuter)
-    %endif
-
+    energy transmittances if sunblind is closed = ${zone.model_attr.g_sunblind}
+    list of window areas = ${zone.model_attr.area_win}
+    weigthfactors for the windows = ${zone.model_attr.weightfactor_win}
+    coefficient of absorption of the window = ${zone.model_attr.ratio_conv_rad_inner_win}
+    resistor window = ${zone.model_attr.r1_win} K/W
+    window's coefficient of heat transfer (convective, inner side) = ${zone.model_attr.alpha_comb_inner_win} W/(m^2 K)
+    window's coefficient of heat transfer (convective, outer side) = ${zone.model_attr.alpha_comb_outer_win} W/(m^2 K)
+    window's ua_value = ${zone.model_attr.ua_value_win } W/(m^2 K)
 
   * Inner Walls *
 
-    inner wall area = ${round(zone.model_attr.area_iw, 2)} m^2 (Ai)
-    inner wall's coefficient of heat transfer = ${zone.model_attr.alpha_conv_inner_iw} W/(m^2 K) (alphaiwi)
-    inner walls functionality = ${on_off_checker(zone.model_attr.inner_walls)} - (withInnerwalls)
-    resistor 1 inner wall = ${zone.model_attr.r1_iw} K/W (R1i)
-    capacity 1 inner wall = ${zone.model_attr.c1_iw} J/K  (C1i)
+    inner wall area = ${zone.model_attr.area_iw} m^2 (Ai)
+    inner wall's coefficient of heat transfer (convective) = ${zone.model_attr.alpha_conv_inner_iw} W/(m^2 K)
+    resistor 1 inner wall = ${zone.model_attr.r1_iw} K/W
+    capacity 1 inner wall = ${zone.model_attr.c1_iw} J/K
 
   * Outer Walls *
 
-    outer wall area = ${round(zone.model_attr.area_ow, 2)} m^2 (Ao)
-    outer wall's coefficient of absorption = 0.7 - (aowo)
-    outer wall's coefficient of heat transfer (inner side) = ${zone.model_attr.alpha_conv_inner_ow} W/(m^2 K)  (alphaowi)
-    outer wall's coefficient of heat transfer (outer side) = ${zone.model_attr.alpha_comb_outer_ow} W/(m^2 K) (alphaowo)
-    weigthfactors for the walls = ${weightfactors_to_string(zone.model_attr.weightfactor_ow)} - (weightfactorswall)
-    weigthfactors for the ground = ${weightfactors_to_string_ground(zone.model_attr.weightfactor_ground)} - (weightfactorground)
-    outer walls functionality = ${on_off_checker(zone.model_attr.outer_walls)} - (withOuterwalls)
+    outer wall area = ${zone.model_attr.area_ow} m^2
+    outer wall's coefficient of absorption = ${zone.model_attr.solar_absorp_ow}
+    outer wall's coefficient of heat transfer (convective, inner side) = ${zone.model_attr.alpha_conv_inner_ow} W/(m^2 K)
+    outer wall's coefficient of heat transfer (convective, outer side) = ${zone.model_attr.alpha_comb_outer_ow} W/(m^2 K)
+    weigthfactors for the walls = ${zone.model_attr.weightfactor_ow}
+    weigthfactors for the ground = ${zone.model_attr.weightfactor_ground}
     resistor 1 outer wall = ${zone.model_attr.r1_ow} K/W (R1o)
-    capacity 1 outer wall = ${round(zone.model_attr.c1_ow, 2)} J/K  (C1o)
+    capacity 1 outer wall = ${zone.model_attr.c1_ow} J/K  (C1o)
     resistor "Rest" = ${zone.model_attr.r_rest_ow} K/W (RRest)
 
 
+
 %endfor
-
-##get n
-<%def name="get_n(list)", filter="trim">
-  <%
-  n=0
-  for element in list:
-    if type(element).__name__ == "OuterWall" or type(element).__name__ == "Rooftop":
-      n += 1
-    else:
-      pass
-  return n
-  %>
-</%def>
-
-##get n
-<%def name="get_number_of_zones(list)", filter="trim">
-  <%
-  n=0
-  for element in list:
-    if type(element).__name__ == "ThermalZone":
-      n += 1
-    else:
-      pass
-  return n
-  %>
-</%def>
-
-##on off checker
-<%def name="on_off_checker(state)", filter="trim">
-  <%
-  if state == True:
-    return "On"
-  else:
-    return "Off"
-  %>
-</%def>
-
-##convert sunblind to string
-<%def name="sunblind_string(list)", filter="trim">
-  <%
-  help = "["
-  for element in list:
-    if len(help) == 1:
-      help += str(element.shading_g_total)
-    else:
-      help += ", " + str(element.shading_g_total)
-  help += ", 0]"
-  help = help.replace("[", "{").replace("]", "}")
-  return help
-  %>
-</%def>
-
-##convert areas to string
-<%def name="area_string(list)", filter="trim">
-  <%
-  help = "["
-  for element in list:
-    if len(help) == 1:
-      help += str(element.area)
-    else:
-      help += ", " + str(element.area)
-  help += ", 0]"
-  help = help.replace("[", "{").replace("]", "}")
-  return help
-  %>
-
-</%def>
-
-##check if element is existent
-<%def name="element_check(element)", filter ="trim">
-  <%
-  if len(element)!= 0:
-    return "true"
-  else:
-    return "false"
-  %>
-</%def>
-
-##convert the weightfactors
-<%def name="weightfactors_to_string(list)", filter="trim">
-  <%
-  help = "["
-  for element in list:
-    if len(help) == 1:
-      help += str(element)
-    else:
-      help += ", " + str(element)
-  help += "]"
-  help = help.replace("[", "{").replace("]", "}")
-  return help
-  %>
-</%def>
-
-##convert the weightfactors
-<%def name="weightfactors_to_string_ground(list)", filter="trim">
-  <%
-  help = ""
-  for element in list:
-    help += str(element)
-  return help
-  %>
-</%def>

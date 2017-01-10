@@ -7,6 +7,7 @@ This module contains function to call Templates for textual output
 """
 import teaser.logic.utilities as utilities
 from mako.template import Template
+from mako.lookup import TemplateLookup
 import os
 
 
@@ -26,6 +27,9 @@ def export_parameters_txt(prj, path):
     else:
         path = os.path.join(path, prj.name)
 
+    lookup = TemplateLookup(directories=[utilities.get_full_path(
+        os.path.join('data', 'output', 'modelicatemplate'))])
+
     for bldg in prj.buildings:
         bldg_path = os.path.join(
             path,
@@ -37,7 +41,8 @@ def export_parameters_txt(prj, path):
                     'data',
                     'output',
                     'texttemplate',
-                    'ReadableBuilding')))
+                    'ReadableBuilding')),
+            lookup=lookup)
 
         out_file = open((bldg_path + "ReadableOutput.txt"), 'w')
         out_file.write(readable_template.render_unicode
