@@ -23,7 +23,7 @@ def example_save():
     # function is called Project().save_project() you can specify a file name
     #  and a save path. If both are non (as in this case) it will use the
     # projects name and default path in your home folder.
-
+    '''
     prj.save_project(file_name=None, path=None)
 
     # Second option is to use pickle from Python Standard Library ,
@@ -40,6 +40,8 @@ def example_save():
         'teaser_pickle.p')
 
     pickle.dump(prj, open(pickle_file, "wb"))
+    '''
+    prj.save_citygml(file_name=None, path=None)
 
 if __name__ == '__main__':
     example_save()
