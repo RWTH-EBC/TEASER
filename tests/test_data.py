@@ -22,7 +22,6 @@ class Test_teaser(object):
         import teaser.examples.verification.verification_room1 as room1
 
         room1_prj = room1.parameter_room1()
-        therm_zone = room1_prj.buildings[0].thermal_zones[0]
         zone_attr = room1_prj.buildings[0].thermal_zones[0].model_attr
 
         # parameters inner wall Typraum S
@@ -48,7 +47,6 @@ class Test_teaser(object):
         import teaser.examples.verification.verification_room3 as room3
 
         room3_prj = room3.parameter_room3()
-        therm_zone = room3_prj.buildings[0].thermal_zones[0]
         zone_attr = room3_prj.buildings[0].thermal_zones[0].model_attr
 
         # parameters inner wall Typraum L
@@ -74,7 +72,6 @@ class Test_teaser(object):
         import teaser.examples.verification.verification_room8 as room8
 
         room8_prj = room8.parameter_room8()
-        therm_zone = room8_prj.buildings[0].thermal_zones[0]
         zone_attr = room8_prj.buildings[0].thermal_zones[0].model_attr
 
         assert round(zone_attr.r1_iw, 13) == 0.0006688956391
@@ -103,33 +100,33 @@ class Test_teaser(object):
         prj.set_default()
         prj.load_project(utilities.get_full_path("examples/examplefiles"
                                                  "/new.teaserXML"))
-        therm_zone = prj.buildings[0].thermal_zones[0]
+
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = False
-        prj.used_library_calc = 'AixLib'
         prj.buildings[0].calc_building_parameter()
+        zone_attr = prj.buildings[0].thermal_zones[0].model_attr
 
-        assert round(therm_zone.r1_iw, 11) == 4.62113e-06
-        assert round(therm_zone.c1_iw, 2) == 1209810287.22
-        assert round(therm_zone.area_iw, 5) == 9866.66667
-        assert round(therm_zone.alpha_conv_inner_iw, 5) == 2.37568
+        assert round(zone_attr.r1_iw, 11) == 4.62113e-06
+        assert round(zone_attr.c1_iw, 2) == 1209810287.22
+        assert round(zone_attr.area_iw, 5) == 9866.66667
+        assert round(zone_attr.alpha_conv_inner_iw, 5) == 2.37568
 
-        assert round(therm_zone.r_rest_ow, 5) == 0.00183
-        assert round(therm_zone.r1_ow, 10) == 3.06155e-05
-        assert round(therm_zone.c1_ow, 3) == 226923157.846
-        assert round(therm_zone.area_ow, 5) == 920.0
+        assert round(zone_attr.r_rest_ow, 5) == 0.00181
+        assert round(zone_attr.r1_ow, 10) == 3.06155e-05
+        assert round(zone_attr.c1_ow, 3) == 226923157.846
+        assert round(zone_attr.area_ow, 5) == 920.0
 
-        assert round(therm_zone.alpha_conv_inner_ow, 5) == 1.83043
+        assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.83043
 
-        assert round(therm_zone.alpha_conv_outer_ow, 5) == 20.0
-        assert round(therm_zone.alpha_comb_outer_ow, 5) == 25.0
-        assert round(therm_zone.alpha_conv_inner_win, 5) == 2.7
-        assert round(therm_zone.alpha_conv_outer_win, 5) == 20.0
-        assert round(therm_zone.alpha_comb_outer_win, 5) == 25.0
+        assert round(zone_attr.alpha_conv_outer_ow, 5) == 20.0
+        assert round(zone_attr.alpha_comb_outer_ow, 5) == 25.0
+        assert round(zone_attr.alpha_conv_inner_win, 5) == 2.7
+        assert round(zone_attr.alpha_conv_outer_win, 5) == 20.0
+        assert round(zone_attr.alpha_comb_outer_win, 5) == 25.0
 
-        assert round(therm_zone.weightfactor_ow[0], 5) == 0.04588
-        assert round(therm_zone.weightfactor_win[0], 5) == 0.33333
-        assert round(therm_zone.weightfactor_ground[0], 5) == 0.54398
+        assert round(zone_attr.weightfactor_ow[0], 5) == 0.04588
+        assert round(zone_attr.weightfactor_win[0], 5) == 0.33333
+        assert round(zone_attr.weightfactor_ground, 5) == 0.54398
 
     def test_type_bldg_office_with_calc(self):
         '''
@@ -600,16 +597,29 @@ class Test_teaser(object):
     def test_export_aixlib(self):
         '''test of export_aixlib, no calculation verification'''
 
-        prj.number_of_elements_calc = 2
-        prj.merge_windows_calc = True
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
         prj.used_library_calc = 'AixLib'
         prj.calc_all_buildings()
-        prj.export_aixlib(building_model='MultizoneEquipped')
+        prj.export_aixlib()
+
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = False
         prj.used_library_calc = 'AixLib'
         prj.calc_all_buildings()
-        prj.export_aixlib(building_model='MultizoneEquipped')
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
 
     def test_export_annex(self):
         '''test of export_annex, no calculation verification'''
