@@ -97,12 +97,12 @@ class Project(object):
         self._used_library_calc = "AixLib"
 
         if load_data is True:
-            self.data = self.instantiate_data_class(self)
+            self.data = self.instantiate_data_class()
         else:
             self.data = None
 
     @staticmethod
-    def instantiate_data_class(self):
+    def instantiate_data_class():
         """Initialization of DataClass
 
         Returns
