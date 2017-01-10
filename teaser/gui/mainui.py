@@ -4815,36 +4815,34 @@ class MainUI(QDialog):
 
         if self.export_create_library_combobox.currentText() == "AixLib":
             sender = self.sender()
-            building_model = \
-                self.export_create_template_model_combobox.currentText()
-            zone_model = \
-                self.export_create_template_zone_combobox.currentText()
-            if self.radio_button_corG_1.isChecked():
-                corG = True
-            elif self.radio_button_corG_2.isChecked():
-                corG = False
-            elemInCombobox = \
-                self.export_create_template_model_combobox.currentText()
+            # building_model = \
+            #     self.export_create_template_model_combobox.currentText()
+            # zone_model = \
+            #     self.export_create_template_zone_combobox.currentText()
+            # if self.radio_button_corG_1.isChecked():
+            #     corG = True
+            # elif self.radio_button_corG_2.isChecked():
+            #     corG = False
+            # elemInCombobox = \
+            #     self.export_create_template_model_combobox.currentText()
 
             if(sender.text() == self.export_button.text()):
-                Controller.click_export_button(self.project, building_model,
-                                               zone_model, corG, None,
-                                               path_output_folder)
+                Controller.click_export_button(
+                    self.project,
+                    None,
+                    path_output_folder)
                 QtGui.QMessageBox.information(self, 'Message',
                                               "Export Modelica " +
-                                              "record " + elemInCombobox +
+                                              "record " + "Multizone" +
                                               " all building finished ")
             elif(sender.text() == self.export_button_one.text()):
                 Controller.click_export_button(
                     self.project,
-                    building_model,
-                    zone_model,
-                    corG,
                     self.current_building.internal_id,
                     path_output_folder)
                 QtGui.QMessageBox.information(self, 'Message',
                                               "Export Modelica " +
-                                              "record " + elemInCombobox +
+                                              "record " + "Multizone" +
                                               " for current building " +
                                               "finished ")
 
@@ -5502,7 +5500,9 @@ class MainUI(QDialog):
 
         # click_save_current_project
         path = QtGui.QFileDialog.getOpenFileName(
-            self, caption='Choose Filepath', directory='')
+            self,
+            caption='Choose Filepath',
+            directory=utilitis.get_default_path())
         if path:
             self.project = Controller.click_load_button(
                 self.project, str(path))

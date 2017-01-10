@@ -443,8 +443,7 @@ class Controller():
         return project
 
     @classmethod
-    def click_export_button(self, project, building_model, zone_model, corG,
-                            internal_id, path_output_folder):
+    def click_export_button(self, project, internal_id, path_output_folder):
         '''
         Execute an export with Aixlib model.
 
