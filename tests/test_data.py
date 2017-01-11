@@ -624,7 +624,27 @@ class Test_teaser(object):
     def test_export_annex(self):
         '''test of export_annex, no calculation verification'''
 
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'Annex60'
+        prj.calc_all_buildings()
+        prj.export_annex()
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'Annex60'
+        prj.calc_all_buildings()
+        prj.export_annex()
         prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'Annex60'
+        prj.calc_all_buildings()
+        prj.export_annex()
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'Annex60'
+        prj.calc_all_buildings()
+        prj.export_annex()
+        prj.number_of_elements_calc = 3
         prj.merge_windows_calc = True
         prj.used_library_calc = 'Annex60'
         prj.calc_all_buildings()
@@ -635,16 +655,60 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_annex()
         prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'Annex60'
+        prj.calc_all_buildings()
+        prj.export_annex()
+        prj.number_of_elements_calc = 4
         prj.merge_windows_calc = False
         prj.used_library_calc = 'Annex60'
         prj.calc_all_buildings()
         prj.export_annex()
+        prj.set_default()
 
-    # def test_export_parameters_txt(self):
-    #     '''test of the export of the readable parameter output'''
-
-    #     prj.export_parameters_txt()
-    #     prj.set_default()
+    def test_export_parameters_txt(self):
+         '''test of the export of the readable parameter output'''
+         prj.number_of_elements_calc = 1
+         prj.merge_windows_calc = True
+         prj.used_library_calc = 'AixLib'
+         prj.calc_all_buildings()
+         prj.export_parameters_txt()
+         prj.number_of_elements_calc = 1
+         prj.merge_windows_calc = False
+         prj.used_library_calc = 'AixLib'
+         prj.calc_all_buildings()
+         prj.export_parameters_txt()
+         prj.number_of_elements_calc = 2
+         prj.merge_windows_calc = True
+         prj.used_library_calc = 'AixLib'
+         prj.calc_all_buildings()
+         prj.export_parameters_txt()
+         prj.number_of_elements_calc = 2
+         prj.merge_windows_calc = False
+         prj.used_library_calc = 'AixLib'
+         prj.calc_all_buildings()
+         prj.export_parameters_txt()
+         prj.number_of_elements_calc = 3
+         prj.merge_windows_calc = True
+         prj.used_library_calc = 'AixLib'
+         prj.calc_all_buildings()
+         prj.export_parameters_txt()
+         prj.number_of_elements_calc = 3
+         prj.merge_windows_calc = False
+         prj.used_library_calc = 'AixLib'
+         prj.calc_all_buildings()
+         prj.export_parameters_txt()
+         prj.number_of_elements_calc = 4
+         prj.merge_windows_calc = True
+         prj.used_library_calc = 'AixLib'
+         prj.calc_all_buildings()
+         prj.export_parameters_txt()
+         prj.number_of_elements_calc = 4
+         prj.merge_windows_calc = False
+         prj.used_library_calc = 'AixLib'
+         prj.calc_all_buildings()
+         prj.export_parameters_txt()
+         prj.set_default()
 
     def test_instantiate_data_class(self):
         '''test of instantiate_data_class'''
