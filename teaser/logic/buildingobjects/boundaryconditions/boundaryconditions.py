@@ -189,19 +189,19 @@ class BoundaryConditions(UseConditions):
     base_ach : float [1/h]
         base value for the infiltration rate
         AixLib: Used on Zone level for ventilation.
-    max_user_ach : float
+    max_user_ach : float [1/h]
         Additional infiltration rate for maximum persons activity
         AixLib: Used on Zone level for ventilation.
-    max_overheating_ach : list
+    max_overheating_ach : list [1/h]
         Additional infiltration rate when overheating appears
         AixLib: Used on Zone level for ventilation.
     max_summer_ach : list
         Additional infiltration rate in the summer with
-        [infiltration_rate, Tmin, Tmax]
+        [infiltration_rate [1/h], Tmin [K], Tmax [K]]
         AixLib: Used on Zone level for ventilation.
     winter_reduction : list
         Reduction factor of userACH for cold weather with
-        [infiltration_rate, Tmin, Tmax]
+        [infiltration_rate [1/h], Tmin [K], Tmax [K]]
         AixLib: Used on Zone level for ventilation.
     """
 

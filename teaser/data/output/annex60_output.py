@@ -49,12 +49,14 @@ def export_annex60(
 
     lookup : TemplateLookup object
         Instance of mako.TemplateLookup to store general functions for templates
+    model_template_1 : Template object
+        Template for ThermalZoneRecord using 1 element model
     model_template_2 : Template object
         Template for ThermalZoneRecord using 2 element model
-    zone_template_3 : Template object
+    model_template_3 : Template object
+        Template for ThermalZoneRecord using 3 element model
+    model_template_4 : Template object
         Template for ThermalZoneRecord using 4 element model
-    zone_template_4 : Template object
-        Template for ThermalZoneRecord using 5 element model
 
     """
 
@@ -63,7 +65,7 @@ def export_annex60(
         'Annex60(version="' + prj.buildings[-1].library_attr.version + '")']
 
     lookup = TemplateLookup(directories=[utilities.get_full_path(
-        "data/output/modelicatemplate/")])
+        os.path.join('data', 'output', 'modelicatemplate'))])
     model_template_1 = Template(
         filename=utilities.get_full_path(
             "data/output/modelicatemplate/Annex60/Annex60_OneElement"),
@@ -116,7 +118,6 @@ def export_annex60(
             bldg.name + "_Models")
 
         for zone in bldg.thermal_zones:
-
 
             zone.parent.library_attr.file_internal_gains = \
                 'InternalGains_' + bldg.name + zone.name + '.mat'
