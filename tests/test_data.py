@@ -807,7 +807,7 @@ class Test_teaser(object):
         prj.buildings[-1].thermal_zones[-1].model_attr.calc_attributes()
         assert round(
             prj.buildings[-1].thermal_zones[-1].model_attr.heat_load,
-            4) == 8118.4126
+            4) == 6659.6256
 
     def test_sum_building_elements(self):
         '''test of combine_building_elements'''

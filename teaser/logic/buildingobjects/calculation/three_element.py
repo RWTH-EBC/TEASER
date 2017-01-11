@@ -1154,7 +1154,7 @@ class ThreeElement(object):
         """
         self.heat_load = 0.0
 
-        ua_value_ow_temp = self.ua_value_ow - self.ua_value_gf
+        ua_value_ow_temp = self.ua_value_ow
         self.heat_load = \
             ((((ua_value_ow_temp + self.ua_value_win) +
                self.thermal_zone.volume *
