@@ -46,7 +46,13 @@ class AixLib(object):
         interior walls.
     consider_heat_capacity : bool
         decides whether air capacity is considered or not for all thermal
-        zones in the building
+        zones in the building. Default is True, you need to export your
+        model again if changing this value
+    use_set_back : bool
+        True if night set back should be used. In this case the function
+        considers heating_time and temp_set_back defined in
+        use_conditions of zone. Default is True, you need to export your
+        model again if changing this value
     """
 
     def __init__(self, parent):
@@ -59,6 +65,7 @@ class AixLib(object):
         self.version = "0.4.0"
         self.total_surface_area = None
         self.consider_heat_capacity = True
+        self.use_set_back = True
 
 
     def calc_auxiliary_attr(self):
@@ -133,7 +140,7 @@ class AixLib(object):
             time_line.append([i*time_step])
         return time_line
 
-    def modelica_set_temp(self, use_set_back=True, path=None):
+    def modelica_set_temp(self, path=None):
         """creates .mat file for set temperatures
 
         This function creates a matfile (-v4) for set temperatures of each
@@ -144,10 +151,6 @@ class AixLib(object):
 
         Parameters
         ----------
-        use_set_back : bool
-            True if night set back should be used. In this case the function
-            considers heating_time and temp_set_back defined in
-            use_conditions of zone
         path : str
             optional path, when matfile is exported separately
         """
@@ -164,7 +167,7 @@ class AixLib(object):
 
         for zone_count in self.parent.thermal_zones:
             for i, time in enumerate(time_line):
-                if use_set_back is False:
+                if self.use_set_back is False:
                     time.append(zone_count.use_conditions.set_temp_heat)
                 else:
                     if time[0] < zone_count.use_conditions.heating_time[0] * \
