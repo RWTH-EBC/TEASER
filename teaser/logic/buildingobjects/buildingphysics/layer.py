@@ -6,14 +6,16 @@ import random
 
 
 class Layer(object):
-    '''This class represents a layer of a wall.
+    """Layer class
 
+    This class holds information of a layer of a specific building element.
 
     Parameters
     ----------
     parent : BuildingElement
         The parent class of this object, the Building Element the layer
-        belongs to. Allows for better control of hierarchical structures.
+        belongs to. Allows for better control of hierarchical structures. If
+        not None this adds the Layer to BuildingElement.layers.
         Default is None
 
 
@@ -23,16 +25,15 @@ class Layer(object):
         Position (starting from 1 and the inner side)
     material : Material()
         Material class of TEASER
-    thickness : float
+    thickness : float [m]
         Thickness of the layer
+    """
 
-    '''
-
-    def __init__(self, parent=None, id = 0):
-        '''Constructor of Layer.
+    def __init__(self, parent=None, id=0):
+        """Constructor of Layer.
 
 
-        '''
+        """
         self.parent = parent
         self.internal_id = random.random()
         self.id = id
@@ -51,12 +52,12 @@ class Layer(object):
             ass_error_1 = "Parent has to be an instance of a BE"
 
             assert type(value).__name__ == "OuterWall" \
-                or type(value).__name__ == "Rooftop" \
-                or type(value).__name__ == "GroundFloor" \
-                or type(value).__name__ == "InnerWall" \
-                or type(value).__name__ == "Ceiling" \
-                or type(value).__name__ == "Floor"\
-                or type(value).__name__ == "Window", ass_error_1
+                   or type(value).__name__ == "Rooftop" \
+                   or type(value).__name__ == "GroundFloor" \
+                   or type(value).__name__ == "InnerWall" \
+                   or type(value).__name__ == "Ceiling" \
+                   or type(value).__name__ == "Floor" \
+                   or type(value).__name__ == "Window", ass_error_1
 
             self.__parent = value
             self.__parent.layer.append(self)
@@ -70,7 +71,7 @@ class Layer(object):
 
     @material.setter
     def material(self, value):
-        ass_error_1 = "Outer wall has to be an instance of Material()"
+        ass_error_1 = "Material has to be an instance of Material()"
 
         assert type(value).__name__ == ("Material"), ass_error_1
 

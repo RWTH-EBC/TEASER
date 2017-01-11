@@ -6,206 +6,178 @@
 This module contains function to call Templates for AixLib model generation
 """
 
-import teaser.logic.utilities as utilitis
-from mako.template import Template
-import scipy.io
-import teaser.logic.simulation.aixlib as aixlib
+import os
 import warnings
+from mako.template import Template
+from mako.lookup import TemplateLookup
+import teaser.logic.utilities as utilities
 
-def export_aixlib(prj,
-                  building_model="None",
-                  zone_model="None",
-                  corG=None,
-                  internal_id=None,
-                  path=None):
-    '''Exports values to a record file for Modelica simulation
 
-    The Export function for creating a AixLib LOM Multizone model
+def export_multizone(buildings, prj, path=None):
+    """Exports models for AixLib library
+
+    Exports a building for
+    AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
+    using the ThermalZoneEquipped and supporting models, like tables and weather
+    model. Depending on chosen calculation method the parameter set to 1,2,
+    3 or 4 element model. By default it uses the  correction for solar
+    glazing (corG) and decoupled heat conduction through windows (
+    merge_windows=False). In contrast to versions < 0.5 TEASER now does not
+    support any other model options, as we observed no need, since single
+    ThermalZones are identical with Annex60 models. If you miss one of the
+    old options please contact us.
+
+    This function uses Mako Templates specified in
+    data.output.modelicatemplates.AixLib
 
     Parameters
     ----------
 
-    building_model : string
-        setter of the used Aixlib building model (None, MultizoneEquipped,
-        Multizone)
-    zone_model : string
-        setter of the used Aixlib zone model (ThermalZoneEquipped,
-        ThermalZone)
-    corG : boolean
-        setter of the used g value calculation in the model
-    internal_id : float
-        setter of the used building which will be exported, if None then
-        all buildings will be exported
+    buildings : list of instances of Building
+        list of TEASER instances of a Building that is exported to a AixLib
+        MultizoneEquipped models. If you want to export a single building,
+        please pass it over as a list containing only that building.
+    prj : instance of Project
+        Instance of TEASER Project object to access Project related
+        information, e.g. name or version of used libraries
     path : string
-        if the Files should not be stored in OutputData, an alternative
-        path can be specified as a full and absolute path
+        if the Files should not be stored in default output path of TEASER,
+        an alternative path can be specified as a full path
 
-    '''
+    Attributes
+    ----------
 
-    #check the arguments
-    assert building_model in ["None", "MultizoneEquipped", "Multizone"]
-    assert zone_model in ["None", "ThermalZoneEquipped", "ThermalZone"]
-    assert corG in [None, True, False]
+    lookup : TemplateLookup object
+        Instance of mako.TemplateLookup to store general functions for templates
+    zone_template_1 : Template object
+        Template for ThermalZoneRecord using 1 element model
+    zone_template_2 : Template object
+        Template for ThermalZoneRecord using 2 element model
+    zone_template_3 : Template object
+        Template for ThermalZoneRecord using 3 element model
+    zone_template_4 : Template object
+        Template for ThermalZoneRecord using 4 element model
+    model_template : Template object
+        Template for MultiZone model
+    """
 
-    uses = ['Modelica(version = "3.2.2")',
-            "AixLib(version=\"0.3.2\")"]
-
-    # use the same zone templates for all exports
-    zone_template = Template(
-        filename=utilitis.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_zone"))
+    lookup = TemplateLookup(directories=[utilities.get_full_path(
+        os.path.join('data', 'output', 'modelicatemplate'))])
+    zone_template_1 = Template(
+        filename=utilities.get_full_path(
+            "data/output/modelicatemplate/AixLib"
+            "/AixLib_ThermalZoneRecord_OneElement"),
+        lookup=lookup)
+    zone_template_2 = Template(
+        filename=utilities.get_full_path(
+            "data/output/modelicatemplate/AixLib"
+            "/AixLib_ThermalZoneRecord_TwoElement"),
+        lookup=lookup)
+    zone_template_3 = Template(
+        filename=utilities.get_full_path(
+            "data/output/modelicatemplate/AixLib"
+            "/AixLib_ThermalZoneRecord_ThreeElement"),
+        lookup=lookup)
+    zone_template_4 = Template(
+        filename=utilities.get_full_path(
+            "data/output/modelicatemplate/AixLib"
+            "/AixLib_ThermalZoneRecord_FourElement"),
+        lookup=lookup)
     model_template = Template(
-        filename=utilitis.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_model"))
-    zone_base_template = Template(
-        filename=utilitis.get_full_path(
-            "data/output/modelicatemplate/AixLib/AixLib_base"))
-    # list which contains exported buildings
-    if internal_id is not None:
-        exported_list_of_buildings = [bldg for bldg in
-                                      prj.buildings if
-                                      bldg.internal_id == internal_id]
-    else:
-        exported_list_of_buildings = prj.buildings
+        filename=utilities.get_full_path(
+            "data/output/modelicatemplate/AixLib/AixLib_Multizone"),
+        lookup=lookup)
 
-    # here we diff between zonerecord export and full model support
-    if building_model != "None" and zone_model != "None" and\
-        corG is not None:
-        # full model support here
-        print("full model support")
+    uses = [
+        'Modelica(version="' + prj.modelica_info.version + '")',
+        'AixLib(version="' + prj.buildings[-1].library_attr.version + '")']
+    _help_package(
+        path=path,
+        name=prj.name,
+        uses=uses,
+        within=None)
+    _help_package_order(
+        path=path,
+        package_list=buildings,
+        addition=None,
+        extra=None)
 
-        _help_package(path, prj.name, uses, within=None)
-        _help_package_order(path, exported_list_of_buildings)
+    for i, bldg in enumerate(buildings):
 
-        for bldg in exported_list_of_buildings:
+        bldg_path = os.path.join(path, bldg.name)
+        utilities.create_path(utilities.get_full_path(bldg_path))
+        utilities.create_path(utilities.get_full_path(
+            os.path.join(bldg_path,
+            bldg.name + "_DataBase")))
+        bldg.library_attr.modelica_set_temp(use_set_back=True, path=bldg_path)
+        bldg.library_attr.modelica_AHU_boundary(
+            time_line=None,
+            path=bldg_path)
+        bldg.library_attr.modelica_gains_boundary(
+            time_line=None,
+            path=bldg_path)
 
-            if bldg.merge_windows_calc is True:
-                calc_method = 'vdi'
-            elif bldg.merge_windows_calc is False:
-                calc_method = 'ebc'
+        _help_package(path=bldg_path, name=bldg.name, within=bldg.parent.name)
+        _help_package_order(
+            path=bldg_path,
+            package_list=[bldg],
+            addition=None,
+            extra=bldg.name + "_DataBase")
 
-            bldg_path = path + "/" + bldg.name + "/"
-            utilitis.create_path(utilitis.get_full_path(bldg_path))
-            utilitis.create_path(utilitis.get_full_path
-                               (bldg_path + bldg.name + "_DataBase"))
-            aixlib.modelica_set_temp(bldg=bldg, path=path + "/" + bldg.name)
-            aixlib.modelica_AHU_boundary(bldg=bldg, path=path + "/" + bldg.name)
-            aixlib.modelica_gains_boundary(bldg=bldg, path=path + "/" + bldg.name)
+        if bldg.building_id is None:
+            bldg.building_id = i
+        else:
+            try:
+                bldg.building_id = int(bldg.building_id)
+            except UserWarning:
+                warnings.warn("Cannot convert building_id to integer, "
+                              "is set to ", i, "which is the enumeration "
+                                               "number of the building in "
+                                               "the project list.")
+                bldg.building_id = i
 
-            _help_package(bldg_path, bldg.name, within=prj.name)
-            _help_package_order(bldg_path, [bldg], None,
-                                     bldg.name + "_DataBase")
-            if bldg.building_id is None:
-                bldg.building_id = 0
-            else:
-                try:
-                    bldg.building_id = int(bldg.building_id)
-                except ValueError:
-                    warnings.warn("Cannot convert building_id to integer, "
-                                  "is set to 0")
-                    bldg.building_id = 0
+        out_file = open(utilities.get_full_path
+                        (os.path.join(bldg_path, bldg.name + ".mo")), 'w')
 
-            out_file = open(utilitis.get_full_path
-                            (bldg_path + bldg.name + ".mo"), 'w')
+        out_file.write(model_template.render_unicode(
+            bldg=bldg,
+            weather=bldg.parent.weather_file_path,
+            modelica_info=bldg.parent.modelica_info))
+        out_file.close()
 
+        zone_path = os.path.join(bldg_path, bldg.name + "_DataBase")
 
-            out_file.write(model_template.render_unicode(
-                           bldg=bldg, mod_prj=prj.modelica_project,
-                           weather=prj.weather_file_path,
-                           weather_header=prj.weather_file_header,
-                           model=building_model,
-                           zone=zone_model,
-                           physics=calc_method,
-                           gFac=corG,
-                           modelica_info=prj.modelica_info))
+        for zone in bldg.thermal_zones:
+
+            out_file = open(utilities.get_full_path(os.path.join(
+                zone_path, bldg.name + '_' + zone.name + '.mo')), 'w')
+            if type(zone.model_attr).__name__ == "OneElement":
+                out_file.write(zone_template_1.render_unicode(zone=zone))
+            elif type(zone.model_attr).__name__ == "TwoElement":
+                out_file.write(zone_template_2.render_unicode(zone=zone))
+            elif type(zone.model_attr).__name__ == "ThreeElement":
+                out_file.write(zone_template_3.render_unicode(zone=zone))
+            elif type(zone.model_attr).__name__ == "FourElement":
+                out_file.write(zone_template_4.render_unicode(zone=zone))
+
             out_file.close()
 
-            for zone in bldg.thermal_zones:
-                zone_path = bldg_path + bldg.name + "_DataBase" + "/"
+        _help_package(
+            path=zone_path,
+            name=bldg.name + '_DataBase',
+            within=prj.name + '.' + bldg.name)
+        _help_package_order(
+            path=zone_path,
+            package_list=bldg.thermal_zones,
+            addition=bldg.name + "_",
+            extra=None)
 
-                out_file = open(utilitis.get_full_path(
-                    zone_path + "/" + bldg.name + "_" +
-                    zone.name.replace(" ", "") + ".mo"), 'w')
-                out_file.write(zone_template.render_unicode(
-                    bldg=bldg,
-                    zone=zone,
-                    mod_prj=prj.modelica_project))
-                out_file.close()
-
-            _help_package(zone_path,
-                          bldg.name + "_DataBase",
-                          within=prj.name + '.' + bldg.name)
-            _help_package_order(zone_path,
-                                bldg.thermal_zones,
-                                bldg.name + "_", bldg.name + "_base")
-
-            out_file = open(utilitis.get_full_path
-                            (zone_path + bldg.name + "_base.mo"),
-                            'w')
-            if bldg.central_ahu:
-                out_file.write(zone_base_template.render_unicode(
-                    bldg=bldg,
-                    zone=zone,
-                    mod_prj=prj.modelica_project,
-                    central_ahu=bldg.central_ahu))
-                out_file.close()
-            else:
-                out_file.write(zone_base_template.render_unicode(
-                    bldg=bldg,
-                    zone=zone,
-                    mod_prj=prj.modelica_project))
-                out_file.close()
-        print("Exports can be found here:")
-        print(path)
-
-    elif building_model == "None" and zone_model == "None" and\
-        corG is None:
-        # only export the baserecords
-        _help_package(path, prj.name, uses)
-        _help_package_order(path, exported_list_of_buildings)
-        for bldg in exported_list_of_buildings:
-
-            bldg_path = path + "/" + bldg.name + "/"
-            utilitis.create_path(utilitis.get_full_path(bldg_path))
-            utilitis.create_path(utilitis.get_full_path
-                               (bldg_path + bldg.name + "_DataBase"))
-
-            _help_package(bldg_path, bldg.name, within=prj.name)
-            _help_package_order(bldg_path, [bldg], None,
-                                     bldg.name + "_DataBase")
-
-            for zone in bldg.thermal_zones:
-                zone_path = bldg_path + bldg.name + "_DataBase" + "/"
-
-                out_file = open(utilitis.get_full_path(
-                    zone_path + "/" + bldg.name + "_" +
-                    zone.name.replace(" ", "") + ".mo"), 'w')
-                out_file.write(zone_template.render_unicode(
-                    bldg=bldg,
-                    zone=zone,
-                    calc_core=bldg._calculation_method,
-                    mod_prj=prj.modelica_project))
-
-                out_file.close()
-
-            _help_package(zone_path,
-                          bldg.name + "_DataBase",
-                          within=prj.name + '.' + bldg.name)
-            _help_package_order(zone_path,
-                                bldg.thermal_zones,
-                                bldg.name + "_", bldg.name + "_base")
-
-        print("Exports can be found here:")
-        print(path)
-
-    else:
-        # not clearly specified
-        print("please specify you export clearly")
-
+    print("Exports can be found here:")
+    print(path)
 
 
 def _help_package(path, name, uses=None, within=None):
-    '''creates a package.mo file
+    """creates a package.mo file
 
     private function, do not call
 
@@ -219,19 +191,21 @@ def _help_package(path, name, uses=None, within=None):
     within : string
         path of Modelica package containing this package
 
-    '''
+    """
 
-    package_template = Template(filename=utilitis.get_full_path
-                                ("data/output/modelicatemplate/package"))
+    package_template = Template(filename=utilities.get_full_path(
+        "data/output/modelicatemplate/package"))
     out_file = open(
-        utilitis.get_full_path(path + "/" + "package" + ".mo"), 'w')
-    out_file.write(package_template.render_unicode(name=name,
-                                                   within=within,
-                                                   uses=uses))
+        utilities.get_full_path(os.path.join(path, "package.mo")), 'w')
+    out_file.write(package_template.render_unicode(
+        name=name,
+        within=within,
+        uses=uses))
     out_file.close()
 
+
 def _help_package_order(path, package_list, addition=None, extra=None):
-    '''creates a package.order file
+    """creates a package.order file
 
     private function, do not call
 
@@ -249,12 +223,13 @@ def _help_package_order(path, package_list, addition=None, extra=None):
         an extra package or model not contained in package_list can be
         specified
 
-    '''
-    order_template = Template(filename=utilitis.get_full_path
-                              ("data/output/modelicatemplate/package_order"))
+    """
+
+    order_template = Template(filename=utilities.get_full_path(
+        "data/output/modelicatemplate/package_order"))
 
     out_file = open(
-        utilitis.get_full_path(path + "/" + "package" + ".order"), 'w')
+        utilities.get_full_path(path + "/" + "package" + ".order"), 'w')
     out_file.write(order_template.render_unicode
                    (list=package_list, addition=addition, extra=extra))
     out_file.close()

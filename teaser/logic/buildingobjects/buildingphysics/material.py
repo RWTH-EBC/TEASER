@@ -7,52 +7,46 @@ import uuid
 import teaser.data.input.material_input as material_input
 import teaser.data.output.material_output as material_output
 
+
 class Material(object):
-    '''This class represents a Material.
+    """Material class
+
+    This class holds information of Material used for building element layer.
 
 
     Parameters
     ----------
     parent : Layer
         The parent class of this object, the layer the material
-        belongs to. Allows for better control of hierarchical structures.
+        belongs to. Allows for better control of hierarchical structures. If
+        not None this adds this Material to Layer.material.
         Default is None
-
 
     Attributes
     ----------
     name : str
-        Individual name
-
-    density : float
-        Density of material in kg/m^3
-
-    thermal_conduc : float
-        Thermal conductivity of material in W/(m*K)
-
-    heat_capac : float
-        Specific heat capacity of material in kJ/(kg*K)
-
+        Name of material
+    density : float [kg/m3]
+        Density of material
+    thermal_conduc : float [W/(m*K)]
+        Thermal conductivity of material
+    heat_capac : float [kJ/(kg*K)]
+        Specific heat capacity of material
     solar_absorp : float
         Coefficient of absorption of solar short wave
-
     ir_emissivity : float
         Coefficient of longwave emissivity of material
-
     transmittance : float
         Coefficient of transmittanve of material
-
     material_id : str(uuid)
         UUID of material, this is used to have similar behaviour like foreign
         key in SQL data bases for use in TypeBuildingElements and Material xml
 
-    '''
+    """
 
     def __init__(self, parent=None):
-        '''Constructor of Material.
-
-
-        '''
+        """Constructor of Material.
+        """
 
         self.parent = parent
         self._name = ""
@@ -69,7 +63,7 @@ class Material(object):
         self.material_id = str(uuid.uuid1())
 
     def load_material_template(self, mat_name, data_class=None):
-        '''Material loader.
+        """Material loader.
 
         Loads Material specified in the XML.
 
@@ -85,7 +79,7 @@ class Material(object):
             but the user can individually change that. Default is
             self.parent.parent.parent.parent.data which is data in project
 
-        '''
+        """
 
         if data_class is None:
             data_class = self.parent.parent.parent.parent.data
@@ -97,7 +91,7 @@ class Material(object):
                                      data_class=data_class)
 
     def save_material_template(self, data_class):
-        '''Material saver.
+        """Material saver.
 
         Saves Material specified in the XML.
 
@@ -110,7 +104,7 @@ class Material(object):
             but the user can individually change that. Default is
             self.parent.parent.parent.parent.data which is data in project
 
-        '''
+        """
 
         if data_class is None:
             data_class = self.parent.parent.parent.parent.data
@@ -119,7 +113,6 @@ class Material(object):
 
         material_output.save_material(material=self, data_class=data_class)
 
-
     @property
     def material_id(self):
         return self.__material_id
@@ -127,7 +120,6 @@ class Material(object):
     @material_id.setter
     def material_id(self, value):
         self.__material_id = value
-
 
     @property
     def parent(self):
@@ -186,10 +178,12 @@ class Material(object):
             self._thermal_conduc = float(value)
             if self.parent is not None:
                 if self.parent.parent is not None:
-                    if self.parent.thickness is not None and\
-                       self.parent.parent.inner_convection is not None and\
-                       self.parent.parent.inner_radiation is not None and\
-                       self.parent.parent.area is not None:
+                    if self.parent.thickness is not None and \
+                                    self.parent.parent.inner_convection is \
+                                    not None and \
+                                    self.parent.parent.inner_radiation is \
+                                    not None and \
+                                    self.parent.parent.area is not None:
                         self.parent.parent.calc_ua_value()
 
     @property
@@ -209,6 +203,7 @@ class Material(object):
                 self._density = value
             except:
                 raise ValueError("Can't convert density to float")
+
     @property
     def heat_capac(self):
         return self._heat_capac
@@ -237,7 +232,7 @@ class Material(object):
         if isinstance(value, float):
             self._solar_absorp = value
         elif value is None:
-            self._solar_absorp = value
+            self._solar_absorp = 0.7
         else:
             try:
                 value = float(value)
@@ -255,7 +250,7 @@ class Material(object):
         if isinstance(value, float):
             self._ir_emissivity = value
         elif value is None:
-            self._ir_emissivity = value
+            self._ir_emissivity = 0.9
         else:
             try:
                 value = float(value)

@@ -1,5 +1,5 @@
-#Created April 2016
-#TEASER 4 Development Team
+# Created April 2016
+# TEASER Development Team
 
 """buildingelement_input.py
 

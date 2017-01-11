@@ -1,17 +1,13 @@
 data
 ===================
 
+
+The Data package holds modules and classes to interface with files for import or
+export.
+
 .. toctree::
+   :maxdepth: 1
 
-    teaser.Data.Input
-    teaser.Data.Output
-    teaser.Data.SchemaBindings
-
-
-DataClass module
-----------------------------
-
-.. automodule:: teaser.data.dataclass
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   teaser.Data.DataClass
+   teaser.Data.Input
+   teaser.Data.Output

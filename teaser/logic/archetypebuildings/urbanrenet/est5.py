@@ -8,53 +8,50 @@ from teaser.logic.archetypebuildings.urbanrenet.est1a \
 class EST5(EST1a):
     """Urban Fabric Type EST5.
 
-    Subclass from EST1a for urban fabric type EST5.
+    Subclass from EST1b for urban fabric type EST5. Differs in the facade
+    area to volume ratio.
+
 
     Parameters
     ----------
     parent: Project()
         The parent class of this object, the Project the Building belongs
-        to. Allows for better control of hierarchical structures.
+        to. Allows for better control of hierarchical structures. If not None it
+        adds this Building instance to Project.buildings.
         Default is None
-
     name : str
-        individual name
-
-    year_of_construction : int
-        year of first construction
-
+        Individual name
+    height_of_floors : float [m]
+        Average height of the buildings' floors
     number_of_floors : int
-        number of floors above ground
-
-    height_of_floors : float
-        average height of the floors
-
-    net_leased_area : float
-        total net leased area of building
-
-    with_ahu : boolean
-        if building has a central AHU or not
-
+        Number of building's floors above ground
+    year_of_construction : int
+        Year of first construction
+    net_leased_area : float [m2]
+        Total net leased area of building. This is area is NOT the footprint
+        of a building
+    with_ahu : Boolean
+        If set to True, an empty instance of BuildingAHU is instantiated and
+        assigned to attribute central_ahu. This instance holds information for
+        central Air Handling units. Default is False.
     neighbour_buildings : int
-        neighbour (default = 0)
-
-        0: no neighbour
-        1: one neighbour
-        2: two neighbours
-
+        Number of neighbour buildings. CAUTION: this will not change
+        the orientation of the buildings wall, but just the overall
+        exterior wall and window area(!) (default = 0)
+            0: no neighbour
+            1: one neighbour
+            2: two neighbours
     construction_type : str
-        construction type (default = "heavy")
-
-        heavy: heavy construction
-        light: light construction
-
+        Construction type of used wall constructions default is "heavy")
+            heavy: heavy construction
+            light: light construction
     number_of_apartments : int
-        number of apartments (default = 1)
+        number of apartments inside Building (default = 1)
     """
 
     def __init__(self,
                  parent,
-                 name,
+                 name=None,
                  year_of_construction=None,
                  number_of_floors=None,
                  height_of_floors=None,
@@ -63,16 +60,21 @@ class EST5(EST1a):
                  neighbour_buildings=None,
                  construction_type=None,
                  number_of_apartments=None):
-
-        """Constructor of EST1a
+        """Constructor of EST5
 
 
         """
 
-        super(EST5, self).__init__(parent, name, year_of_construction,
-                                    number_of_floors, height_of_floors,
-                                    net_leased_area, with_ahu,
-                                    neighbour_buildings, construction_type)
+        super(EST5, self).__init__(
+            parent,
+            name,
+            year_of_construction,
+            number_of_floors,
+            height_of_floors,
+            net_leased_area,
+            with_ahu,
+            neighbour_buildings,
+            construction_type)
 
         self.number_of_apartments = number_of_apartments
         self.est_factor_facade_to_volume = 0.39

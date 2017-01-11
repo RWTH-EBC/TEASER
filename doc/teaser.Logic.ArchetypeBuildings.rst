@@ -1,15 +1,16 @@
 archetypebuildings
 ==================================================
 
-Currently we implemented two methodologies to create archetype buildings:
+All new archetype buildings should inherit from either residential or
+nonresidential buildings:
 
 .. toctree::
+  :maxdepth: 1
 
   teaser.Logic.ArchetypeBuildings.bmvbs
   teaser.Logic.ArchetypeBuildings.urbanrenet
 
-All new archetype buildings should inherit from either residential or
-nonresidential buildings:
+
 
 residential
 ----------------------------

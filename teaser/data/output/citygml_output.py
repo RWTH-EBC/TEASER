@@ -1,5 +1,5 @@
 # Created October 2015
-# TEASER 4 Development Team
+# TEASER Development Team
 
 """CityGML
 
@@ -23,10 +23,11 @@ import teaser.data.bindings.opengis.citygml.raw.energy as energy
 
 
 def save_gml(project, path, ref_coordinates=None):
-    '''This function saves a project to a cityGML file
+    """This function saves a project to a cityGML file
 
     The function needs the Python Package PyXB. And the opengis bundle for GML
-    and CityGML.
+    and CityGML. This function underlies a lot of simplifications and
+    assumptions. Be careful using it.
 
     Parameters
     ----------
@@ -38,7 +39,7 @@ def save_gml(project, path, ref_coordinates=None):
         list with  lower and one upper reference coordinates. Each coordiante
         should contain 3 ints or floats for x, y, and z coordinates of the
         point. e.g: [[458877,,5438353, -0.2], [458889,5438363,6.317669]]
-    '''
+    """
 
     if path.endswith("gml"):
         out_file = open(path, 'w')
@@ -65,7 +66,7 @@ def save_gml(project, path, ref_coordinates=None):
                                           ref_coordinates[0],
                                           ref_coordinates[1])
     else:
-        bldg_center = [0,0,0]
+        bldg_center = [0, 0, 0]
         pass
 
     for i, bldg_count in enumerate(project.buildings):
@@ -74,10 +75,8 @@ def save_gml(project, path, ref_coordinates=None):
 
         gml_bldg = _set_gml_building(bldg_count)
 
-        bldg_center = [i*80, 0, 0]
-        building_length = None
-        building_width = None
-        building_height = None
+        bldg_center = [i * 80, 0, 0]
+
         if type(bldg_count).__name__ == "SingleFamilyDwelling":
             building_length = (bldg_count.thermal_zones[0].area /
                                bldg_count.thermal_zones[0].typical_width)
@@ -94,10 +93,10 @@ def save_gml(project, path, ref_coordinates=None):
                                bldg_count.height_of_floors)
 
         gml_bldg = _set_lod_2(gml_bldg,
-                                     building_length,
-                                     building_width,
-                                     building_height,
-                                     bldg_center)
+                              building_length,
+                              building_width,
+                              building_height,
+                              bldg_center)
 
         for zone_count in bldg_count.thermal_zones:
 
@@ -106,20 +105,18 @@ def save_gml(project, path, ref_coordinates=None):
             for out_wall_count in zone_count.outer_walls:
 
                 outer_bound = _set_gml_thermal_boundary(gml_zone,
-                                                               out_wall_count)
+                                                        out_wall_count)
 
                 for win_count in zone_count.windows:
 
-                    if out_wall_count.orientation == win_count.orientation and\
-                        out_wall_count.tilt == win_count.tilt:
-
+                    if out_wall_count.orientation == win_count.orientation and \
+                                    out_wall_count.tilt == win_count.tilt:
                         _set_gml_surface_component(outer_bound,
-                                                          win_count,
-                                                          "true",
-                                                          "false")
+                                                   win_count,
+                                                   "true",
+                                                   "false")
 
             for in_wall_count in zone_count.inner_walls:
-
                 _set_gml_thermal_boundary(gml_zone, in_wall_count)
 
             gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
@@ -151,34 +148,34 @@ def _set_gml_building(teaser_building):
     gml_bldg = bldg.Building()
 
     gml_bldg.name = [og.gml.CodeType(teaser_building.name)]
-    #gml_bldg.function = [bldg.BuildingFunctionType(1120)]
-    gml_bldg.yearOfConstruction =\
-                                bd.datatypes.gYear(teaser_building.\
-                                                   year_of_construction)
-    #gml_bldg.roofType = bldg.RoofTypeType(1000)
+    # gml_bldg.function = [bldg.BuildingFunctionType(1120)]
+    gml_bldg.yearOfConstruction = \
+        bd.datatypes.gYear(teaser_building.year_of_construction)
+    # gml_bldg.roofType = bldg.RoofTypeType(1000)
     gml_bldg.measuredHeight = gml.LengthType(teaser_building.number_of_floors *
                                              teaser_building.height_of_floors)
     gml_bldg.measuredHeight.uom = bd.datatypes.anyURI('m')
     gml_bldg.storeysAboveGround = teaser_building.number_of_floors
     gml_bldg.storeyHeightsAboveGround = gml.MeasureOrNullListType(
-                                        [teaser_building.height_of_floors]*
-                                        int(teaser_building.number_of_floors))
+        [teaser_building.height_of_floors] *
+        int(teaser_building.number_of_floors))
     gml_bldg.storeyHeightsAboveGround.uom = bd.datatypes.anyURI('m')
 
-    #building attributes from energyADE we can in principle provide
+    # building attributes from energyADE we can in principle provide
 
-    gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
-                    energy.atticType("None"))
-    gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
-                    energy.basementType("None"))
-#    gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
-#                    energy.constructionStyle(teaser_building.construction_type))
-    #gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+    # gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+    #     energy.atticType("None"))
+    # gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+    #    energy.basementType("None"))
+    #    gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
+    #                    energy.constructionStyle(teaser_building.construction_type))
+    # gml_bldg.GenericApplicationPropertyOfAbstractBuilding.append(
     #                energy.yearOfRefurbishment(
     #                bd.datatypes.gYear(teaser_building.year_of_construction)))
     return gml_bldg
 
-def set_reference_boundary(gml_out, lower_coords, upper_coords):
+
+def _set_reference_boundary(gml_out, lower_coords, upper_coords):
     """Adds a reference coordinate system with `Envelope`'s corners
 
     The gml file includes a reference coordinate system defined in the
@@ -230,6 +227,7 @@ def set_reference_boundary(gml_out, lower_coords, upper_coords):
 
     return gml_out
 
+
 def _set_lod_2(gml_bldg, length, width, height, bldg_center):
     """Adds a LOD 2 representation of the building based on building length,
     width and height
@@ -265,8 +263,8 @@ def _set_lod_2(gml_bldg, length, width, height, bldg_center):
     exterior_solid = gml.SurfacePropertyType()
     composite_surface = gml.CompositeSurface()
 
-    bldg_center[0] = bldg_center[0]-length/2
-    bldg_center[1] = bldg_center[1]-width/2
+    bldg_center[0] -= length / 2
+    bldg_center[1] -= width / 2
 
     # Ground surface
     coords = [[bldg_center[0], bldg_center[1], bldg_center[2]],
@@ -275,95 +273,97 @@ def _set_lod_2(gml_bldg, length, width, height, bldg_center):
               [bldg_center[0], width + bldg_center[1], bldg_center[2]]]
 
     composite_surface = _add_surface(composite_surface, coords)
-    composite_surface.surfaceMember[-1].Surface.id = gml_bldg.name[0].value()+"_ground"
-
+    composite_surface.surfaceMember[-1].Surface.id = gml_bldg.name[
+                                                         0].value() + "_ground"
 
     boundary_surface.append(bldg.BoundarySurfacePropertyType())
     boundary_surface[-1].BoundarySurface = bldg.FloorSurface()
 
     boundary_surface[-1].BoundarySurface = _add_gml_boundary(
-                            boundary_surface[-1].BoundarySurface,
-                            gml_bldg.name[0].value()+"_ground")
-
+        boundary_surface[-1].BoundarySurface,
+        gml_bldg.name[0].value() + "_ground")
 
     # Roof surface
-    coords = [[bldg_center[0], bldg_center[1], bldg_center[2]+height],
-              [length + bldg_center[0], bldg_center[1], bldg_center[2]+height],
+    coords = [[bldg_center[0], bldg_center[1], bldg_center[2] + height],
+              [length + bldg_center[0], bldg_center[1],
+               bldg_center[2] + height],
               [length + bldg_center[0], width + bldg_center[1],
-                                                        bldg_center[2]+height],
-              [bldg_center[0], width + bldg_center[1], bldg_center[2]+height]]
+               bldg_center[2] + height],
+              [bldg_center[0], width + bldg_center[1], bldg_center[2] + height]]
 
     composite_surface = _add_surface(composite_surface, coords)
-    composite_surface.surfaceMember[-1].Surface.id = (gml_bldg.name[0].value()+
+    composite_surface.surfaceMember[-1].Surface.id = (gml_bldg.name[0].value() +
                                                       "_roof")
 
     boundary_surface.append(bldg.BoundarySurfacePropertyType())
     boundary_surface[-1].BoundarySurface = bldg.RoofSurface()
 
     boundary_surface[-1].BoundarySurface = _add_gml_boundary(
-                            boundary_surface[-1].BoundarySurface,
-                            gml_bldg.name[0].value()+"_roof")
+        boundary_surface[-1].BoundarySurface,
+        gml_bldg.name[0].value() + "_roof")
 
     # Side a surface
     coords = [[bldg_center[0], bldg_center[1], bldg_center[2]],
               [length + bldg_center[0], bldg_center[1], bldg_center[2]],
-              [length + bldg_center[0], bldg_center[1], bldg_center[2]+height],
-              [bldg_center[0], bldg_center[1], bldg_center[2]+height]]
+              [length + bldg_center[0], bldg_center[1],
+               bldg_center[2] + height],
+              [bldg_center[0], bldg_center[1], bldg_center[2] + height]]
 
     composite_surface = _add_surface(composite_surface, coords)
-    composite_surface.surfaceMember[-1].Surface.id = (gml_bldg.name[0].value()+
+    composite_surface.surfaceMember[-1].Surface.id = (gml_bldg.name[0].value() +
                                                       "_a")
 
     boundary_surface.append(bldg.BoundarySurfacePropertyType())
     boundary_surface[-1].BoundarySurface = bldg.WallSurface()
 
     boundary_surface[-1].BoundarySurface = _add_gml_boundary(
-                            boundary_surface[-1].BoundarySurface,
-                            gml_bldg.name[0].value()+"_a")
+        boundary_surface[-1].BoundarySurface,
+        gml_bldg.name[0].value() + "_a")
 
     # Side b surface
 
     coords = [[bldg_center[0], width + bldg_center[1], bldg_center[2]],
               [length + bldg_center[0], width + bldg_center[1],
-                                                       bldg_center[2]],
+               bldg_center[2]],
               [length + bldg_center[0], width + bldg_center[1],
-                                                       bldg_center[2]+height],
-              [bldg_center[0], width + bldg_center[1], bldg_center[2]+height]]
+               bldg_center[2] + height],
+              [bldg_center[0], width + bldg_center[1], bldg_center[2] + height]]
 
     composite_surface = _add_surface(composite_surface, coords)
-    composite_surface.surfaceMember[-1].Surface.id = (gml_bldg.name[0].value()+
+    composite_surface.surfaceMember[-1].Surface.id = (gml_bldg.name[0].value() +
                                                       "_b")
 
     boundary_surface.append(bldg.BoundarySurfacePropertyType())
     boundary_surface[-1].BoundarySurface = bldg.WallSurface()
 
     boundary_surface[-1].BoundarySurface = _add_gml_boundary(
-                            boundary_surface[-1].BoundarySurface,
-                            gml_bldg.name[0].value()+"_b")
+        boundary_surface[-1].BoundarySurface,
+        gml_bldg.name[0].value() + "_b")
     # Side c surface
     coords = [[bldg_center[0], bldg_center[1], bldg_center[2]],
               [bldg_center[0], width + bldg_center[1], bldg_center[2]],
-              [bldg_center[0], width + bldg_center[1], bldg_center[2]+height],
-              [bldg_center[0], bldg_center[1], bldg_center[2]+height]]
+              [bldg_center[0], width + bldg_center[1], bldg_center[2] + height],
+              [bldg_center[0], bldg_center[1], bldg_center[2] + height]]
     composite_surface = _add_surface(composite_surface, coords)
-    composite_surface.surfaceMember[-1].Surface.id = (gml_bldg.name[0].value()+
+    composite_surface.surfaceMember[-1].Surface.id = (gml_bldg.name[0].value() +
                                                       "_c")
 
     boundary_surface.append(bldg.BoundarySurfacePropertyType())
     boundary_surface[-1].BoundarySurface = bldg.WallSurface()
 
     boundary_surface[-1].BoundarySurface = _add_gml_boundary(
-                            boundary_surface[-1].BoundarySurface,
-                            gml_bldg.name[0].value()+"_c")
+        boundary_surface[-1].BoundarySurface,
+        gml_bldg.name[0].value() + "_c")
     # Side d surface
     coords = [[length + bldg_center[0], bldg_center[1], bldg_center[2]],
               [length + bldg_center[0], width + bldg_center[1],
-                                                               bldg_center[2]],
+               bldg_center[2]],
               [length + bldg_center[0], width + bldg_center[1],
-                                                        bldg_center[2]+height],
-              [length + bldg_center[0], bldg_center[1], bldg_center[2]+height]]
+               bldg_center[2] + height],
+              [length + bldg_center[0], bldg_center[1],
+               bldg_center[2] + height]]
     composite_surface = _add_surface(composite_surface, coords)
-    composite_surface.surfaceMember[-1].Surface.id = (gml_bldg.name[0].value()+
+    composite_surface.surfaceMember[-1].Surface.id = (gml_bldg.name[0].value() +
                                                       "_d")
 
     boundary_surface.append(bldg.BoundarySurfacePropertyType())
@@ -371,8 +371,8 @@ def _set_lod_2(gml_bldg, length, width, height, bldg_center):
     boundary_surface[-1].BoundarySurface = bldg.WallSurface()
 
     boundary_surface[-1].BoundarySurface = _add_gml_boundary(
-                            boundary_surface[-1].BoundarySurface,
-                            gml_bldg.name[0].value()+"_d")
+        boundary_surface[-1].BoundarySurface,
+        gml_bldg.name[0].value() + "_d")
 
     exterior_solid.Surface = composite_surface
     lod_2_solid.Solid.exterior = exterior_solid
@@ -380,6 +380,7 @@ def _set_lod_2(gml_bldg, length, width, height, bldg_center):
     gml_bldg.lod2Solid = lod_2_solid
     gml_bldg.boundedBy_ = boundary_surface
     return gml_bldg
+
 
 def _add_surface(composite_surface, coords):
     """Adds a surface to the  LOD representation of the building
@@ -428,6 +429,7 @@ def _add_surface(composite_surface, coords):
 
     return composite_surface
 
+
 def _add_gml_boundary(boundary_surface, gml_id):
     """Adds a surface to the  LOD representation of the building
 
@@ -446,18 +448,20 @@ def _add_gml_boundary(boundary_surface, gml_id):
         Returns the modified boundary surface object
 
     """
-    boundary_surface.id = "b_"+gml_id
+    boundary_surface.id = "b_" + gml_id
     boundary_surface.lod2MultiSurface = gml.MultiSurfacePropertyType()
     boundary_surface.lod2MultiSurface.MultiSurface = gml.MultiSurfaceType()
     boundary_surface.lod2MultiSurface.MultiSurface.surfaceMember.append(
-                                                    gml.SurfacePropertyType())
-    boundary_surface.lod2MultiSurface.MultiSurface.surfaceMember[-1].href = gml_id
+        gml.SurfacePropertyType())
+    boundary_surface.lod2MultiSurface.MultiSurface.surfaceMember[
+        -1].href = gml_id
 
     boundary_surface.opening.append(bldg.OpeningPropertyType())
     boundary_surface.opening[-1].Opening = bldg.Window()
-    boundary_surface.opening[-1].Opening.id = gml_id+"_win"
+    boundary_surface.opening[-1].Opening.id = gml_id + "_win"
 
     return boundary_surface
+
 
 def _set_gml_thermal_zone(thermal_zone):
     """creates a citygml.energy instance of a thermal zone
@@ -478,18 +482,19 @@ def _set_gml_thermal_zone(thermal_zone):
         A thermalZone object, where energy is a reference to
         `pyxb.bundles.opengis.citygml.energy`.
     """
-    gml_zone = energy.thermalZones()
+    gml_zone = energy.thermalZone()
     gml_zone.ThermalZone = energy.ThermalZoneType()
     gml_zone.ThermalZone.id = thermal_zone.name
     gml_zone.ThermalZone.isCooled = bd.datatypes.boolean(True)
     gml_zone.ThermalZone.isHeated = bd.datatypes.boolean(True)
-    #gml_zone.ThermalZone.heatedFloorArea = gml.AreaType(thermal_zone.area)
-    #gml_zone.ThermalZone.heatedFloorArea.uom = bd.datatypes.anyURI('m^2')
+    # gml_zone.ThermalZone.heatedFloorArea = gml.AreaType(thermal_zone.area)
+    # gml_zone.ThermalZone.heatedFloorArea.uom = bd.datatypes.anyURI('m^2')
     gml_zone.ThermalZone.infiltrationRate = gml.MeasureType(
-                                        thermal_zone.infiltration_rate)
+        thermal_zone.infiltration_rate)
     gml_zone.ThermalZone.infiltrationRate.uom = bd.datatypes.anyURI('1/h')
 
     return gml_zone
+
 
 def _set_gml_thermal_boundary(gml_zone, wall):
     """Control function to add a thermal boundary surface to the thermal zone
@@ -522,100 +527,99 @@ def _set_gml_thermal_boundary(gml_zone, wall):
     if type(wall).__name__ == "OuterWall":
 
         gml_zone.ThermalZone.boundedBy_.append(
-                            energy.ThermalBoundaryPropertyType())
-        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary =\
-                            energy.ThermalBoundaryType()
+            energy.ThermalBoundaryPropertyType())
+        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary = \
+            energy.ThermalBoundaryType()
 
         _current_tb = gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary
         _current_tb.thermalBoundaryType = \
-            energy.ThermalBoundaryTypeValues("OuterWall")
+            energy.ThermalBoundaryTypeValue("OuterWall")
         _current_tb.azimuth = gml.AngleType(wall.orientation)
         _current_tb.azimuth.uom = bd.datatypes.anyURI('deg')
         _current_tb.inclination = gml.AngleType(wall.tilt)
         _current_tb.inclination.uom = bd.datatypes.anyURI('deg')
-        _current_tb.partOf.append(energy.ThermalZonePropertyType())
-        _current_tb.partOf[-1].href = gml_zone.ThermalZone.id
+        _current_tb.delimitsBy.append(energy.ThermalZonePropertyType())
+        _current_tb.delimitsBy[-1].href = gml_zone.ThermalZone.id
         _set_gml_surface_component(_current_tb,
-                                  wall,
-                                  sun_exp="true",
-                                  grnd_coupled="true")
+                                   wall,
+                                   sun_exp="true",
+                                   grnd_coupled="true")
 
         return _current_tb
 
     elif type(wall).__name__ == "Rooftop":
 
         gml_zone.ThermalZone.boundedBy_.append(
-                            energy.ThermalBoundaryPropertyType())
-        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary =\
-                            energy.ThermalBoundaryType()
+            energy.ThermalBoundaryPropertyType())
+        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary = \
+            energy.ThermalBoundaryType()
 
         _current_tb = gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary
         _current_tb.thermalBoundaryType = \
-            energy.ThermalBoundaryTypeValues("Roof")
+            energy.ThermalBoundaryTypeValue("Roof")
 
         _current_tb.inclination = gml.AngleType(wall.tilt)
         _current_tb.inclination.uom = bd.datatypes.anyURI('deg')
-        _current_tb.partOf.append(energy.ThermalZonePropertyType())
-        _current_tb.partOf[-1].href = gml_zone.ThermalZone.id
+        _current_tb.delimitsBy.append(energy.ThermalZonePropertyType())
+        _current_tb.delimitsBy[-1].href = gml_zone.ThermalZone.id
 
         _set_gml_surface_component(_current_tb,
-                                  wall,
-                                  sun_exp="true",
-                                  grnd_coupled="true")
+                                   wall,
+                                   sun_exp="true",
+                                   grnd_coupled="true")
 
         return _current_tb
 
     elif type(wall).__name__ == "GroundFloor":
 
         gml_zone.ThermalZone.boundedBy_.append(
-                            energy.ThermalBoundaryPropertyType())
-        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary =\
-                            energy.ThermalBoundaryType()
+            energy.ThermalBoundaryPropertyType())
+        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary = \
+            energy.ThermalBoundaryType()
 
         _current_tb = gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary
         _current_tb.thermalBoundaryType = \
-            energy.ThermalBoundaryTypeValues("BasementFloor")
+            energy.ThermalBoundaryTypeValue("BasementFloor")
 
         _current_tb.inclination = gml.AngleType(wall.tilt)
         _current_tb.inclination.uom = bd.datatypes.anyURI('deg')
-        _current_tb.partOf.append(energy.ThermalZonePropertyType())
-        _current_tb.partOf[-1].href = gml_zone.ThermalZone.id
+        _current_tb.delimitsBy.append(energy.ThermalZonePropertyType())
+        _current_tb.delimitsBy[-1].href = gml_zone.ThermalZone.id
 
         _set_gml_surface_component(_current_tb,
-                                  wall,
-                                  sun_exp="false",
-                                  grnd_coupled="true")
+                                   wall,
+                                   sun_exp="false",
+                                   grnd_coupled="true")
 
     elif type(wall).__name__ == "InnerWall" \
-            or type(wall).__name__ == "Ceiling"\
+            or type(wall).__name__ == "Ceiling" \
             or type(wall).__name__ == "Floor":
 
         gml_zone.ThermalZone.boundedBy_.append(
-                            energy.ThermalBoundaryPropertyType())
-        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary =\
-                            energy.ThermalBoundaryType()
+            energy.ThermalBoundaryPropertyType())
+        gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary = \
+            energy.ThermalBoundaryType()
 
         _current_tb = gml_zone.ThermalZone.boundedBy_[-1].ThermalBoundary
         _current_tb.thermalBoundaryType = \
-            energy.ThermalBoundaryTypeValues("InteriorWall")
+            energy.ThermalBoundaryTypeValue("InteriorWall")
         _current_tb.inclination = gml.AngleType(wall.tilt)
         _current_tb.inclination.uom = bd.datatypes.anyURI('deg')
         _current_tb.inclination = gml.AngleType(wall.tilt)
         _current_tb.inclination.uom = bd.datatypes.anyURI('deg')
-        _current_tb.partOf.append(energy.ThermalZonePropertyType())
-        _current_tb.partOf[-1].href = gml_zone.ThermalZone.id
+        _current_tb.delimitsBy.append(energy.ThermalZonePropertyType())
+        _current_tb.delimitsBy[-1].href = gml_zone.ThermalZone.id
 
         _set_gml_surface_component(_current_tb,
-                                  wall,
-                                  sun_exp="false",
-                                  grnd_coupled="false")
-
+                                   wall,
+                                   sun_exp="false",
+                                   grnd_coupled="false")
 
 
 def _set_gml_surface_component(thermal_boundary,
-                              element,
-                              sun_exp,
-                              grnd_coupled):
+                               element,
+                               sun_exp,
+                               grnd_coupled):
     """Adds a surface component to a citygml thermal_boundary
 
     A surface component is needed to store semantic information. This function
@@ -640,11 +644,13 @@ def _set_gml_surface_component(thermal_boundary,
     gml_surf_comp.ThermalComponent.area = gml.AreaType(element.area)
     gml_surf_comp.ThermalComponent.area.uom = bd.datatypes.anyURI('m^2')
     gml_surf_comp.ThermalComponent.isSunExposed = bd.datatypes.boolean(sun_exp)
-    gml_surf_comp.ThermalComponent.isGroundCoupled = bd.datatypes.boolean(grnd_coupled)
+    gml_surf_comp.ThermalComponent.isGroundCoupled = bd.datatypes.boolean(
+        grnd_coupled)
 
     _add_gml_layer(gml_surf_comp, element)
 
     thermal_boundary.composedOf.append(gml_surf_comp)
+
 
 def _add_gml_layer(gml_surf_comp, element):
     """Adds gml layer to a surface compomenent
@@ -659,46 +665,48 @@ def _add_gml_layer(gml_surf_comp, element):
     element : TEASER BuildingElement
         Instance of BuilingElement or inherited classes
     """
-    construction = energy.construction()
-    construction.Construction = energy.ConstructionType()
-    construction.Construction.name = [og.gml.CodeType(element.name)]
-    construction.Construction.uValue = gml.MeasureType(
-        element.ua_value/element.area)
-    construction.Construction.uValue.uom = bd.datatypes.anyURI('W/(m^2*K)')
+
+    cons = energy.AbstractConstructionPropertyType()
+    cons.AbstractConstruction = energy.Construction()
+    cons.AbstractConstruction.name = [og.gml.CodeType(element.name)]
+    cons.AbstractConstruction.uValue = gml.MeasureType(
+        element.ua_value / element.area)
+    cons.AbstractConstruction.uValue.uom = bd.datatypes.anyURI('W/(m^2*K)')
+
     if type(element).__name__ == "Window":
-        construction.Construction.opticalProperties = energy.OpticalPropertiesPropertyType()
-        construction.Construction.opticalProperties.append(
+        cons.AbstractConstruction.opticalProperties = \
+            energy.OpticalPropertiesPropertyType()
+        cons.AbstractConstruction.opticalProperties.append(
             energy.OpticalPropertiesType())
-        construction.Construction.opticalProperties.OpticalProperties\
+        cons.AbstractConstruction.opticalProperties.OpticalProperties \
             .transmittance.append(energy.TransmittancePropertyType())
-        construction.Construction.opticalProperties.OpticalProperties\
+        cons.AbstractConstruction.opticalProperties.OpticalProperties \
             .transmittance[-1].Transmittance = energy.TransmittanceType()
-        construction.Construction.opticalProperties.OpticalProperties\
+        cons.AbstractConstruction.opticalProperties.OpticalProperties \
             .transmittance[-1].Transmittance.fraction = element.g_value
-        construction.Construction.opticalProperties.OpticalProperties\
+        cons.AbstractConstruction.opticalProperties.OpticalProperties \
             .transmittance[-1].Transmittance.fraction.uom = \
             bd.datatypes.anyURI('g value')
-        construction.Construction.opticalProperties.OpticalProperties\
+        cons.AbstractConstruction.opticalProperties.OpticalProperties \
             .transmittance[-1].Transmittance.wavelengthRange = \
             energy.WavelengthRangeType("Solar")
 
     for lay_count in element.layer:
-
         layer = energy.LayerPropertyType()
         layer.Layer = energy.LayerType()
         layer.Layer.layerComponent.append(energy.LayerComponentPropertyType())
         layer.Layer.layerComponent[-1].LayerComponent = \
-                                          energy.LayerComponentType()
+            energy.LayerComponentType()
 
-        _current_layer =  layer.Layer.layerComponent[-1].LayerComponent
+        _current_layer = layer.Layer.layerComponent[-1].LayerComponent
 
         _current_layer.thickness = gml.LengthType(lay_count.thickness)
         _current_layer.thickness.uom = bd.datatypes.anyURI('m')
         _add_gml_opaque_material(_current_layer, lay_count)
 
-        construction.Construction.layer.append(layer)
+        cons.AbstractConstruction.layer.append(layer)
 
-    gml_surf_comp.ThermalComponent.append(construction)
+    gml_surf_comp.ThermalComponent.construction = cons
 
 def _add_gml_opaque_material(gml_layer, teaser_layer):
     """Adds gml opaque material to the given layer
@@ -709,9 +717,9 @@ def _add_gml_opaque_material(gml_layer, teaser_layer):
     Parameters
     ----------
 
-    gml_surf_comp : energy.LayerComponentType()
+    gml_layer : energy.LayerComponentType()
         A Layer object with basic data
-    element : TEASER Layer
+    teaser_layer : TEASER Layer
         Instance of Layer
     """
     gml_layer.material = energy.AbstractMaterialPropertyType()
@@ -720,10 +728,10 @@ def _add_gml_opaque_material(gml_layer, teaser_layer):
     _current_material = gml_layer.material.AbstractMaterial
     _current_material.name = [og.gml.CodeType(teaser_layer.material.name)]
     _current_material.conductivity = gml.MeasureType(
-                                        teaser_layer.material.thermal_conduc)
+        teaser_layer.material.thermal_conduc)
     _current_material.conductivity.uom = bd.datatypes.anyURI('W/mK')
     _current_material.density = gml.MeasureType(teaser_layer.material.density)
     _current_material.density.uom = bd.datatypes.anyURI('kg/m^3')
     _current_material.specificHeat = gml.MeasureType(
-                                        teaser_layer.material.heat_capac)
+        teaser_layer.material.heat_capac)
     _current_material.specificHeat.uom = bd.datatypes.anyURI('kJ/kg')
