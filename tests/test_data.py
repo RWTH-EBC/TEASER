@@ -1102,17 +1102,21 @@ class Test_teaser(object):
         assert round(r_outer_conv_ow_temp, 9) == 0.001041667
         assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.84634
         assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
-        r1_win_com = (
-            1 / sum((1 / win.r_outer_comb) for win in therm_zone.windows))
-        r1_temp = 1 / ((1 / r1_win_com) + (1 / zone_attr.r1_win))
-        print(r1_temp)
-        assert round(zone_attr.r1_win, 15) == 0.02212271973466
+        # old r1_win
+        sum_r1_win = 0
+        for win_count in therm_zone.windows:
+            sum_r1_win += 1 / (win_count.r1 + win_count.r_outer_comb)
+        r1_win_temp = 1 / sum_r1_win
+        # new r1_win
+        assert round(r1_win_temp, 15) == 0.02212271973466
+        assert round(zone_attr.r1_win, 15) == 0.019900497512438001
         assert round(zone_attr.r1_ow, 15) == 0.001007515484109
         assert round(zone_attr.r1_iw, 15) == 0.009719561140816
-        r_rest = zone_attr.r_rest_ow + 1 / (zone_attr.alpha_comb_outer_ow *
-                                            zone_attr.area_ow)
-        print(r_rest)
-        assert round(zone_attr.r_rest_ow, 15) == 0.005922787404456
+        # old r_rest
+        r_rest_ow = zone_attr.r_total_ow - zone_attr.r1_ow -\
+            1 / (1 / zone_attr.r_conv_inner_ow + 1 / zone_attr.r_rad_inner_ow)
+        assert round(r_rest_ow, 15) == 0.005922787404456
+        assert round(zone_attr.r_rest_ow, 15) == 0.005852240613452
 
     def test_volume_zone(self):
         '''test of volume_zone'''
