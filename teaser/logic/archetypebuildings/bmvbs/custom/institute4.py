@@ -10,8 +10,8 @@ class Institute4(Office):
 
     The institute type 4 module contains a multi zone building which is based
     on an office building with an additional laboratory zone. The area of the
-    laboratory zone is based on data from the Forschungszentrum Jülich
-    :cite:`Abschlussbericht`. According to the dataset from Jülich,
+    laboratory zone is based on data from the Forschungszentrum Juelich
+    :cite:`Abschlussbericht`. According to the dataset from Juelich,
     the typebuilding institute type 4 is based on the buildingsclass of BWZK
     with the number 2240 :cite:`Bauministerkonferenz.Dezember2010`.
     Laboratory zones are verntialed using a central AHU system with
