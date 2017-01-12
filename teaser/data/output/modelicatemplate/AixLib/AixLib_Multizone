@@ -28,7 +28,7 @@ model ${bldg.name}
   effFanAHU_sup=${bldg.central_ahu.efficiency_fan_supply},
   effFanAHU_eta=${bldg.central_ahu.efficiency_fan_return},
   effHRSAHU_enabled=${bldg.central_ahu.efficiency_recovery},
-  effHRSAHU_disabled=${bldg.central_ahu.efficiency_revocery_false},
+  effHRSAHU_disabled=${bldg.central_ahu.efficiency_recovery_false},
   dpAHU_sup=${bldg.central_ahu.pressure_drop_fan_supply},
   dpAHU_eta=${bldg.central_ahu.pressure_drop_fan_return},
 % else:

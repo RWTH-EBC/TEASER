@@ -10,8 +10,8 @@ class Institute8(Office):
 
     The institute type 8 module contains a multi zone building which is based
     on an office building with an additional laboratory zone. The area of the
-    laboratory zone is based on data from the Forschungszentrum Jülich
-    :cite:`Abschlussbericht`. According to the dataset from Jülich,
+    laboratory zone is based on data from the Forschungszentrum Juelich
+    :cite:`Abschlussbericht`. According to the dataset from Juelich,
     the typebuilding institute type 8 is based on the buildingsclass of BWZK
     with the number 2240 :cite:`Bauministerkonferenz.Dezember2010`.
     Laboratory zones are verntialed using a central AHU system with
@@ -151,6 +151,6 @@ class Institute8(Office):
              "Office": [0.1, "Group Office (between 2 and 6 employees)"],
              "Sanitary": [0.04, "WC and sanitary rooms in non-residential "
                                 "buildings"],
-             "ICT": [0.02,  "Data center"],
+             "ICT": [0.02, "Data center"],
              "Floor": [0.18, "Traffic area"],
              "Laboratory": [0.6, "Laboratory"]}
