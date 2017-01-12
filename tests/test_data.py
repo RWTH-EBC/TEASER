@@ -667,48 +667,48 @@ class Test_teaser(object):
         prj.set_default()
 
     def test_export_parameters_txt(self):
-         '''test of the export of the readable parameter output'''
-         prj.number_of_elements_calc = 1
-         prj.merge_windows_calc = True
-         prj.used_library_calc = 'AixLib'
-         prj.calc_all_buildings()
-         prj.export_parameters_txt()
-         prj.number_of_elements_calc = 1
-         prj.merge_windows_calc = False
-         prj.used_library_calc = 'AixLib'
-         prj.calc_all_buildings()
-         prj.export_parameters_txt()
-         prj.number_of_elements_calc = 2
-         prj.merge_windows_calc = True
-         prj.used_library_calc = 'AixLib'
-         prj.calc_all_buildings()
-         prj.export_parameters_txt()
-         prj.number_of_elements_calc = 2
-         prj.merge_windows_calc = False
-         prj.used_library_calc = 'AixLib'
-         prj.calc_all_buildings()
-         prj.export_parameters_txt()
-         prj.number_of_elements_calc = 3
-         prj.merge_windows_calc = True
-         prj.used_library_calc = 'AixLib'
-         prj.calc_all_buildings()
-         prj.export_parameters_txt()
-         prj.number_of_elements_calc = 3
-         prj.merge_windows_calc = False
-         prj.used_library_calc = 'AixLib'
-         prj.calc_all_buildings()
-         prj.export_parameters_txt()
-         prj.number_of_elements_calc = 4
-         prj.merge_windows_calc = True
-         prj.used_library_calc = 'AixLib'
-         prj.calc_all_buildings()
-         prj.export_parameters_txt()
-         prj.number_of_elements_calc = 4
-         prj.merge_windows_calc = False
-         prj.used_library_calc = 'AixLib'
-         prj.calc_all_buildings()
-         prj.export_parameters_txt()
-         prj.set_default()
+        '''test of the export of the readable parameter output'''
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_parameters_txt()
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_parameters_txt()
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_parameters_txt()
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_parameters_txt()
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_parameters_txt()
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_parameters_txt()
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_parameters_txt()
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_parameters_txt()
+        prj.set_default()
 
     def test_instantiate_data_class(self):
         '''test of instantiate_data_class'''
@@ -968,16 +968,29 @@ class Test_teaser(object):
 
     def test_calc_chain_matrix(self):
         '''test of calc_chain_matrix'''
+        from teaser.logic.buildingobjects.calculation.two_element import\
+            TwoElement
+
         therm_zone = prj.buildings[-1].thermal_zones[-1]
+
         omega = (2 * math.pi / 86400 / 5)
-        r1_ow, c1_ow = prj.buildings[-1].thermal_zones[-1].calc_chain_matrix(
-            element_list=therm_zone.outer_walls,
+
+        calc_attr = TwoElement(therm_zone, merge_windows=True, t_bt=5)
+
+        helplist_outer_walls = therm_zone.outer_walls + therm_zone.rooftops +\
+            therm_zone.ground_floors + therm_zone.windows
+
+        r1_ow, c1_ow = calc_attr._calc_parallel_connection(
+            element_list=helplist_outer_walls,
             omega=omega)
         assert round(r1_ow, 14) == 0.00100751548411
         assert round(c1_ow, 5) == 3648580.59312
 
-        r1_iw, c1_iw = prj.buildings[-1].thermal_zones[-1].calc_chain_matrix(
-            element_list=therm_zone.inner_walls,
+        helplist_inner_walls = therm_zone.inner_walls +\
+            therm_zone.ceilings + therm_zone.floors
+
+        r1_iw, c1_iw = calc_attr._calc_parallel_connection(
+            element_list=helplist_inner_walls,
             omega=omega)
         assert round(r1_iw, 13) == 0.0097195611408
         assert round(c1_iw, 6) == 319983.518743
@@ -1052,29 +1065,53 @@ class Test_teaser(object):
         assert round(zone_attr.ua_value_ow, 16) == 135.5818558809656
         assert round(zone_attr.r_conv_inner_ow, 16) == 0.0016512549537649
         assert round(zone_attr.r_rad_inner_ow, 16) == 0.000609756097561
-        assert round(zone_attr.r_conv_outer_ow, 9) == 0.001041667
+        outer_conv_roof_temp = sum(
+            1 / roof.r_outer_conv for roof in therm_zone.rooftops)
+        # old calc was only ow, in the new core we calc outer walls plus
+        # rooftops, therefore we need to subtract it.
+        r_outer_conv_ow_temp = 1 / (
+            (1 / zone_attr.r_conv_outer_ow) - outer_conv_roof_temp)
+        assert round(r_outer_conv_ow_temp, 9) == 0.001041667
         assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.84634
         assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
-        assert round(zone_attr.r1_win, 1) == 301.5
+        assert round(zone_attr.r1_win, 15) == 0.003316749585406
         assert round(zone_attr.r1_ow, 15) == 0.000772773294534
         assert round(zone_attr.r1_iw, 15) == 0.009719561140816
-        assert round(zone_attr.r_rest_ow, 15) == 0.004740706924836
+        # old calc core was without inner window radiation and without
+        # combined alpha
+        r_rest = zone_attr.r_rest_ow + 1 / (zone_attr.alpha_comb_outer_ow *
+                                            zone_attr.area_ow)
+        assert round(r_rest, 15) == 0.004740706924836
 
-        zone_attr = prj.buildings[-1].thermal_zones[-1]
-        zone_attr.calc_zone_parameters(
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
+        therm_zone.calc_zone_parameters(
             number_of_elements=2,
             merge_windows=False)
 
+        zone_attr = therm_zone.model_attr
         assert round(zone_attr.area_ow, 1) == 328.0
         assert round(zone_attr.ua_value_ow, 16) == 135.5818558809656
         assert round(zone_attr.r_conv_inner_ow, 16) == 0.0016512549537649
         assert round(zone_attr.r_rad_inner_ow, 16) == 0.000609756097561
-        assert round(zone_attr.r_conv_outer_ow, 9) == 0.001041667
+        outer_conv_roof_temp = sum(
+            1 / roof.r_outer_conv for roof in therm_zone.rooftops)
+        # old calc was only ow, in the new core we calc outer walls plus
+        # rooftops, therefore we need to subtract it.
+        r_outer_conv_ow_temp = 1 / (
+            (1 / zone_attr.r_conv_outer_ow) - outer_conv_roof_temp)
+        assert round(r_outer_conv_ow_temp, 9) == 0.001041667
         assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.84634
         assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
+        r1_win_com = (
+            1 / sum((1 / win.r_outer_comb) for win in therm_zone.windows))
+        r1_temp = 1 / ((1 / r1_win_com) + (1 / zone_attr.r1_win))
+        print(r1_temp)
         assert round(zone_attr.r1_win, 15) == 0.02212271973466
         assert round(zone_attr.r1_ow, 15) == 0.001007515484109
         assert round(zone_attr.r1_iw, 15) == 0.009719561140816
+        r_rest = zone_attr.r_rest_ow + 1 / (zone_attr.alpha_comb_outer_ow *
+                                            zone_attr.area_ow)
+        print(r_rest)
         assert round(zone_attr.r_rest_ow, 15) == 0.005922787404456
 
     def test_volume_zone(self):
