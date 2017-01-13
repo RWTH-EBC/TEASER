@@ -46,7 +46,13 @@ class AixLib(object):
         interior walls.
     consider_heat_capacity : bool
         decides whether air capacity is considered or not for all thermal
-        zones in the building
+        zones in the building. Default is True, you need to export your
+        model again if changing this value
+    use_set_back : bool
+        True if night set back should be used. In this case the function
+        considers heating_time and temp_set_back defined in
+        use_conditions of zone. Default is True, you need to export your
+        model again if changing this value
     """
 
     def __init__(self, parent):
@@ -59,7 +65,7 @@ class AixLib(object):
         self.version = "0.4.0"
         self.total_surface_area = None
         self.consider_heat_capacity = True
-
+        self.use_set_back = True
 
     def calc_auxiliary_attr(self):
         """Calls function to calculate all auxiliary attributes for AixLib"""
@@ -96,7 +102,7 @@ class AixLib(object):
         self.total_surface_area = surf_area_temp
 
     @staticmethod
-    def create_profile(duration_profile=86400, time_step=3600):
+    def create_profile(duration_profile=86400, time_step=3600, double=False):
         """Creates a profile for building boundary conditions
 
         This function creates a list with an equidistant profile given the
@@ -129,11 +135,17 @@ class AixLib(object):
 
         time_line = []
 
-        for i in range(int(duration_profile/time_step)+1):
-            time_line.append([i*time_step])
+        if double is True:
+            for i in range(int(duration_profile / time_step) + 1):
+                time_line.append([i * time_step])
+                time_line.append([i * time_step])
+        else:
+            for i in range(int(duration_profile / time_step) + 1):
+                time_line.append([i * time_step])
+
         return time_line
 
-    def modelica_set_temp(self, use_set_back=True, path=None):
+    def modelica_set_temp(self, path=None):
         """creates .mat file for set temperatures
 
         This function creates a matfile (-v4) for set temperatures of each
@@ -144,10 +156,6 @@ class AixLib(object):
 
         Parameters
         ----------
-        use_set_back : bool
-            True if night set back should be used. In this case the function
-            considers heating_time and temp_set_back defined in
-            use_conditions of zone
         path : str
             optional path, when matfile is exported separately
         """
@@ -160,24 +168,61 @@ class AixLib(object):
         utilities.create_path(path)
         path = os.path.join(path, self.file_set_t)
 
-        time_line = self.create_profile()
+        time_line = self.create_profile(double=True)
 
         for zone_count in self.parent.thermal_zones:
-            for i, time in enumerate(time_line):
-                if use_set_back is False:
-                    time.append(zone_count.use_conditions.set_temp_heat)
+            for i in range(len(time_line)):
+                if self.use_set_back is False:
+                    time_line[i].append(zone_count.use_conditions.set_temp_heat)
                 else:
-                    if time[0] < zone_count.use_conditions.heating_time[0] * \
-                            3600:
-                        time.append(zone_count.use_conditions.set_temp_heat -
-                                    zone_count.use_conditions.temp_set_back)
+                    i -= 1
+                    if i % 2 == 0:
+                        if zone_count.use_conditions.heating_time[0] == 0:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_heat)
+                            time_line[i + 1].append(
+                                zone_count.use_conditions.set_temp_heat)
+                        elif time_line[i][0] < \
+                            zone_count.use_conditions.heating_time[0] * 3600:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_heat -
+                                zone_count.use_conditions.temp_set_back)
+                            time_line[i+1].append(
+                                zone_count.use_conditions.set_temp_heat -
+                                zone_count.use_conditions.temp_set_back)
+                        elif time_line[i][0] == \
+                            zone_count.use_conditions.heating_time[0] * 3600:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_heat -
+                                zone_count.use_conditions.temp_set_back)
+                            time_line[i+1].append(
+                                zone_count.use_conditions.set_temp_heat)
+                        elif time_line[i][0] == \
+                            (zone_count.use_conditions.heating_time[1] + 1) * \
+                                        3600:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_heat)
+                            time_line[i+1].append(
+                                zone_count.use_conditions.set_temp_heat -
+                                zone_count.use_conditions.temp_set_back)
+                        elif time_line[i][0] > \
+                            (zone_count.use_conditions.heating_time[1] + 1) * \
+                                        3600:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_heat -
+                                zone_count.use_conditions.temp_set_back)
+                            time_line[i+1].append(
+                                zone_count.use_conditions.set_temp_heat -
+                                zone_count.use_conditions.temp_set_back)
+                        else:
+                            time_line[i].append(
+                                zone_count.use_conditions.set_temp_heat)
+                            time_line[i + 1].append(
+                                zone_count.use_conditions.set_temp_heat)
 
-                    elif time[0] > (zone_count.use_conditions.heating_time[1]
-                                        + 1) * 3600:
-                        time.append(zone_count.use_conditions.set_temp_heat -
-                                    zone_count.use_conditions.temp_set_back)
                     else:
-                        time.append(zone_count.use_conditions.set_temp_heat)
+                        pass
+
 
         scipy.io.savemat(
             path,
