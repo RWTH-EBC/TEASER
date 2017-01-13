@@ -30,7 +30,8 @@ class FourElement(object):
         TEASER instance of ThermalZone
     merge_windows : boolean
         True for merging windows into the outer wall's RC-combination,
-        False for separate resistance for window, default is False
+        False for separate resistance for window, default is False. (Only
+        supported for Annex60)
     t_bt : float [d]
         Time constant according to VDI 6007 (default t_bt = 5)
 
