@@ -1,74 +1,56 @@
 output
 ===================
 
-The output package holds python modules, files and folders needed for export out
-of teaser.
-
-ModelicaTemplate folder
-----------------------------
-
-This folder holds a collection of Modelica model templates. Currently we support
-the MultiZoneBuilding of AixLib, including boundary conditions and an optional
-central air handlingunit. Further the given examples of Annex library are
-supported, which can be then used for own purposes.
-
-TextTemplate folder
-----------------------------
-
-This folder holds one template for the output of model parameters in a text file.
-Currently only the two element model is supported, but more are to come.
-
-aixlib_export
-----------------------------
-
+Export AixLib models
+--------------------
 .. automodule:: teaser.data.output.aixlib_output
     :members:
     :show-inheritance:
 
-annex60_export
-----------------------------
+Export Annex60 models
+--------------------
 
 .. automodule:: teaser.data.output.annex60_output
     :members:
     :show-inheritance:
 
-TeaserXML_output
-----------------------------
+Saving *.teaserXML
+------------------
 
 .. automodule:: teaser.data.output.teaserxml_output
     :members:
     :show-inheritance:
 
-CityGML_output
-----------------------------
+Saving CityGML .*gml
+--------------------
 
 .. automodule:: teaser.data.output.citygml_output
     :members:
     :show-inheritance:
 
-Text_output
-----------------------------
+Saving text output
+------------------
 
 .. automodule:: teaser.data.output.text_output
     :members:
     :show-inheritance:
 
-boundcond_output
-----------------------------
+Saving boundary conditions
+--------------------------
 
 .. automodule:: teaser.data.output.boundcond_output
     :members:
     :show-inheritance:
 
-buildingelement_output
-----------------------------
+Saving building elements
+--------------------------
 
 .. automodule:: teaser.data.output.buildingelement_output
     :members:
     :show-inheritance:
 
-material_output
-----------------------------
+Saving materials
+----------------
 
 .. automodule:: teaser.data.output.material_output
     :members:

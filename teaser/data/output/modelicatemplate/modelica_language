@@ -1,0 +1,18 @@
+##get false
+<%def name="get_true_false(value)", filter="trim">
+  <%
+  if value is False:
+    return "false"
+  elif value is True:
+    return "true"
+  else:
+    return value
+  %>
+</%def>
+
+##list to modelica list
+<%def name="get_list(list)", filter="trim">
+  <%
+  return str(list).replace('[', '{').replace(']', '}')
+  %>
+</%def>

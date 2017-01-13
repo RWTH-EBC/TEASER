@@ -6,41 +6,45 @@
 
 
 class BuildingAHU(object):
-    """Building Class
+    """BuildingAHU Class
 
-    This class represents a BuildingAHU.
-
-    !AixLib sepcific!
+    This class holds information for a central Air Handling Unit (AHU). This
+    class is very AixLib specific and holds some parameters that are only
+    applicable to AixLib Central AHU model. If you are using other models
+    these values might have no effect.
 
     Parameters
     ----------
 
-    parent: Project()
+    parent: Building()
         The parent class of this object, the Building the AHU belongs to.
         Allows for better control of hierarchical structures.
         (default: None)
 
     Attributes
     ----------
-    heating : Boolean (default = True)
-        Heating Function of AHU
-    cooling : Boolean (default = True)
-        Cooling Function of AHU
-    dehumidification : Boolean (default = True)
+    heating : boolean
+        Heating Function of AHU (default = True)
+    cooling : boolean
+        Cooling Function of AHU (default = True)
+    dehumidification : boolean
         Dehumidification Function of AHU (Cooling and Heating must be enabled)
-    humidification : Boolean (default = True)
+        (default = True)
+    humidification : boolean
         Humidification Function of AHU (Cooling and Heating must be enabled)
-    heat_recovery : Boolean (default = True)
-        Is a HeatRecoverySystem physically integrated in the AHU? in AixLib:
-        "HRS"
-    by_pass_dehumidification : float (default = 0.2)
+        (default = True)
+    heat_recovery : boolean
+        Is a HeatRecoverySystem physically integrated in the AHU
+        AixLib: 'HRS'
+        (default = True)
+    by_pass_dehumidification : float
          By-pass factor of cooling coil during dehumidification. Necessary to
          calculate the real outgoing enthalpy flow of heat exchanger in
          dehumidification mode taking the surface enthalpy of the cooling
-         coil into account. In AixLib called "BPF_DeHu"
-    efficiency_recovery : float (default = 0.8)
-        efficiency of HRS in the AHU modes when HRS is enabled. in AixLib:
-        "efficiencyHRS_enabled"
+         coil into account. In AixLib called "BPF_DeHu" (default = 0.2)
+    efficiency_recovery : float
+        efficiency of HRS in the AHU modes if HRS is enabled.
+        AixLib: "efficiencyHRS_enabled" (default = 0.8)
     efficiency_revocery_false : float (default = 0.2)
         taking a little heat transfer into account although HRS is disabled
         (in case that a HRS is physically installed in the AHU) in AixLib:
@@ -79,7 +83,7 @@ class BuildingAHU(object):
         self.heat_recovery = True
         self.by_pass_dehumidification = 0.2
         self.efficiency_recovery = 0.8
-        self.efficiency_revocery_false = 0.2
+        self.efficiency_recovery_false = 0.2
         self.sample_rate = 1800
         self.efficiency_fan_supply = 0.7
         self.efficiency_fan_return = 0.7
@@ -113,9 +117,8 @@ class BuildingAHU(object):
         if self._profile_min_relative_humidity is None:
             pass
         else:
-            self.parent.file_ahu = ("/AHU_" +
-                                    self.parent.name +
-                                    ".mat")
+            self.parent.file_ahu = (
+                "/AHU_" + self.parent.name + ".mat")
 
         self._profile_min_relative_humidity = value
 
@@ -129,10 +132,8 @@ class BuildingAHU(object):
         if self._profile_max_relative_humidity is None:
             pass
         else:
-            self.parent.file_ahu = ("/AHU_" +
-                                    self.parent.name +
-                                    ".mat")
-
+            self.parent.file_ahu = (
+                "/AHU_" + self.parent.name + ".mat")
         self._profile_max_relative_humidity = value
 
     @property
@@ -145,9 +146,8 @@ class BuildingAHU(object):
         if self._profile_v_flow is None:
             pass
         else:
-            self.parent.file_ahu = ("/AHU_" +
-                                    self.parent.name +
-                                    ".mat")
+            self.parent.file_ahu = (
+                "/AHU_" + self.parent.name + ".mat")
 
         self._profile_v_flow = value
 
@@ -161,7 +161,6 @@ class BuildingAHU(object):
         if self._profile_temperature is None:
             pass
         else:
-            self.parent.file_ahu = ("/AHU_" +
-                                    self.parent.name +
-                                    ".mat")
+            self.parent.file_ahu = (
+                "/AHU_" + self.parent.name + ".mat")
         self._profile_temperature = value

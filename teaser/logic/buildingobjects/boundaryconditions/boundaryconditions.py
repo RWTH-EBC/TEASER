@@ -2,7 +2,7 @@
 # by TEASER4 Development Team
 """UseConditions18599
 
-This module is a container for UseConditions following 18599 and SIA
+This module is a container for UseConditions following 18599 and SIA2024
 """
 
 from teaser.logic.buildingobjects.useconditions import UseConditions
@@ -11,198 +11,198 @@ import teaser.data.input.boundcond_input as boundcond_input
 
 
 class BoundaryConditions(UseConditions):
-    """Use Conditions DIN 18599
+    """Extended Use Conditions from DIN 18599 and SIA2024
 
     Class that contains the boundary conditions of use for non-residential
-    buildings defined in DIN V 18599-10
+    buildings defined in DIN V 18599-10. Profiles for internal gains (
+    persons, lighting, machiens) are taken from SIA2024. In addition some
+    TEASER specific use conditions have been attached to this class.
 
+    The docstring also contains how the use conditions is used.
+
+    Note: Most attributes description are translations from DIN V 18599-10
+    standard
 
     Attributes
     ----------
 
-    Note: the attributes description are translations from DIN V 18599-10
-            standard
-
     USAGE AND OPERATION TIMES
 
     usage: str
-        usage type - Nutzungsart
-
-    typical_length:
-        typical length of a usage zone - typische Zonenlaenge
-
-    typical width:
-        typical width of a usage zone - typische Zonenbreite
-
-    usage_time : [int]
-        usage time [begin, end] (h) -  Nutzungszeit
-
-    daily_usage_hours : int
-        daily usage time (h) - taegliche Nutzungsstunden
-
-    yearly_usage_days : int
-        operating days per year (d) - jaehrliche Nutzungstage
-
-    yearly_usage_hours_day : int
-        operating hours per year during daytime (h) -
-        jaehrliche Nutzungsstunden zur Tagzeit
-
-    yearly_usage_hours_night : int
-        operating hours per year during nighttime (h) - jaehrliche
-        Nutzungsstunden zur Nachtzeit
-
+        usage type
+        AixLib usage: String to distinguish usages of a zone
+    typical_length : float [m]
+        typical length of a usage zone
+        Archetype usage: division of usage zones in rooms
+    typical width : float [m]
+        typical width of a usage zone
+        Archetype usage: division of usage zones in rooms
+    usage_time : list [h]
+        usage time [begin, end]
+        Currently not used
+    daily_usage_hours : int [h]
+        daily usage time
+        Currently not used
+    yearly_usage_days : int [d]
+        operating days per year
+        Currently not used
+    yearly_usage_hours_day : int [h]
+        operating hours per year during daytime
+        Currently not used
+    yearly_usage_hours_night : int [h]
+        operating hours per year during nighttime
+        Currently not used
     daily_operation_ahu_cooling: int
-        operating hours of AHU and cooling  - taegliche Betriebsstunden RLT und
-        Kuehlung
-
-    yearly_ahu_days : int
-       operating days AHU per year (d) -  jaehrliche Betriebstage fuer RLT
-
-    yearly_heating_days : int
-        operating days heating per year - jaehrliche Betriebstage fuer Heizung
-
-    yearly_cooling_days : int
-        operating days Cooling per year (h) - jaehrliche Betriebstage
-        fuer Kuehlung
-
-    daily_operation_heating : int
-        operating hours of heating (h) - taegliche Betriebsstunden Heizung
+        operating hours of AHU and cooling
+        Currently not used
+    yearly_ahu_days : int [d]
+       operating days AHU per year
+       Currently not used
+    yearly_heating_days : int [d]
+        operating days heating per year
+        Currently not used
+    yearly_cooling_days : int [h]
+        operating days Cooling per year
+        Currently not used
+    daily_operation_heating : int [h]
+        operating hours of heating
+        Currently not used
 
     LIGHTING
 
-    maintained_illuminace : int
-        maintained illuminance value (lx) - Wartungswert der
-        Beleuchtungsstaerke
-
-    usage_level_height: float
-        height of the usage level (m)  - Hoehe der Nutzebene
-
+    maintained_illuminance : int [Lx}
+        maintained illuminance value (lx)
+        Currently not used
+    usage_level_height: float [m]
+        height of the usage level (m)
+        Currently not used
     red_factor_visual : float
-       reduction factor for visual task sector -  Minderungsfaktor Bereich
-       Sehaufgabe
-
+       reduction factor for visual task sector
+       Currently not used
     rel_absence : float
-        relative absence - Raumindex
-
+        relative absence
+        Currently not used
     room_index : float
-        room index - jaehrliche Betriebstage fuer Kuehlung
-
+        room index
+        Currently not used
     part_load_factor_lighting : float
-        part load factor of building usage time for lighting -
-        Teilbetriebsfaktor der Gebaeudebetriebszeit fuer Beleuchtung
-
+        part load factor of building usage time for lighting
+        Currently not used
     ratio_conv_rad_lighting : float
         describes the ratio between convective and radiative heat transfer
         of the lighting
+        AixLib: Used in Zone record for internal gains, lighting
 
     ROOM CLIMATE
 
-    set_temp_heat: float
-        internal set temperature heating - Raum-Solltemperatur Heizung
-
-    set_temp_cool: float
-        internal set temperature cooling - Raum-Solltemperatur Kuehlung
-
-    temp_set_back: float
-        set back in reduced operation mode - Temperaturabsenkung reduzierter
-        Betrieb
-
-    min_temp_heat : float
-        design minimal temperature heating -  Minimaltemperatur
-        Auslegung Heizung
-
-    max_temp_cool : float
-        design maximal temperature cooling - Maximaltemperatur
-        Auslegung Kuehlung
-
+    set_temp_heat: float [K]
+        internal set temperature heating
+        AixLib: Used in simple Heater for set temperature
+    set_temp_cool: float [K}
+        internal set temperature cooling
+        Currently not used
+    temp_set_back: float [K]
+        set back in reduced operation mode
+        Currently not used (see issue #342)
+    min_temp_heat : float [K]
+        design minimal temperature heating
+        Currently not used
+    max_temp_cool : float [K]
+        design maximal temperature cooling
+        Currently not used
     rel_humidity : float
-        relative humidity - Feuchteanforderung d
-
-    min_air_exchange : float
-        required minimal air exchange, due to usage -
-        Mindestaussenluftvolumenstrom
-
+        relative humidity
+        Currently not used
+    min_air_exchange : float [m3/h]
+        required minimal air exchange, due to usage
+        Currently not used
     rel_absence_ahu : float
-        relative absence for AHU - Relative Abwesenheit RLT
-
+        relative absence for AHU
+        Currently not used
     part_load_factor_ahu: float
-        part load factor of building usage time for AHU  - Teilbetriebsfaktor
-        der Gebaeudebetriebszeit RLT
-
-    cooling_time : [int]
-      cooling time [begin, end] -  Beginn/Ende Betriebszeit RLT und Kuehlung
-
-    heating_time : [int]
+        part load factor of building usage time for AHU
+        Currently not used
+    cooling_time : list [h]
+      cooling time [begin, end]
+        Currently not used
+    heating_time : list [h]
         heating time [begin, end] - Beginn/End Betriebszeit Heizung
-
+        Currently not used (see issue #342)
     INTERNAL GAINS
 
     persons : int
-        number of persons - Personen
-
+        number of persons in the room
+        AixLib: Used in Zone record for internal gains, NrPeople
     activity_type_persons : int
-        persons activity
-
+        persons activity (1: light, 2: moderate, 3: high)
+        AixLib: Used in Zone for internal gains. The heat produced by people
+        in relation to zone temperature and person activity in [W/person]
     ratio_conv_rad_persons : float
         describes the ratio between convective and radiative heat transfer
         of the persons
-
-    profile_persons : [float]
-        timeline of internal gains (persons) from 0 - 100 - Nutzungsprofil
-        Personen
-
+        AixLib: Used in Zone record for internal gains
+    profile_persons : list
+        Relative presence of persons 0-1 (e.g. 0.5 means that 50% of the total
+        number of persons are currently in the room). Typically given
+        for 24h.
+        AixLib: Used for internal gains profile on top-level
     machines: float
-        number of Machines  - Arbeitshilfen
-
+        number of Machines
+        AixLib: Used in Zone record for internal gains
     activity_type_machines : int
-        machines activity
-
+        machines activity (1: light, 50W/machine, 2: moderate 100W/machine,
+        3: high 150W/machine)
+        AixLib: Used in Zone record for internal gains
     ratio_conv_rad_machines : float
         describes the ratio between convective and radiative heat transfer
-        of the lighting
-
-    profile_machines : [float]
-      timeline of internal gains (machines) from 0 - 100  -  Nutzungsprofil
-      Geraete
-
-    lighting_power : float
-        spec. electr. Power for lighting - spez. Elektr.
-        Leistung-Raumbeleuchtung
-
+        of the machines
+        AixLib: Used in Zone record for internal gains
+    profile_machines : list
+        Relative presence of machines 0-1 (e.g. 0.5 means that 50% of the total
+        number of machines are currently used in the room). Typically given
+        for 24h.
+        AixLib: Used for internal gains profile on top-level
+    lighting_power : float [W/m2]
+        spec. electr. Power for lighting
+        AixLib: Used in Zone record for internal gains
     profile_lighting : [float]
-      timeline of internal gains (lighting) from 0 - 100  -  Nutzungsprofil
-      Licht
+        Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total
+        lighting power are currently used). Typically given for 24h.
+        AixLib: Used for internal gains profile on top-level
 
     MISC/AHU
 
-    min_ahu: float
-        min ahu  - minAHU
-
+    min_ahu: float [m3/(m2*h)]
+        Zone specific minimum specific air flow supplied by the AHU
+        AixLib: Used on Multizone level for central AHU to determine total
+        volume flow of all zones.
     max_ahu : float
-      max ahu - maxAHU
-
+        Zone specific maximum specific air flow supplied by the AHU
+        AixLib: Used on Multizone level for central AHU to determine total
+        volume flow of all zones.
     with_ahu : boolean
-        with ahu - withAHU
-
+        Zone is connected to central air handling unit or not
+        AixLib: Used on Multizone level for central AHU.
     use_constant_ach_rate : boolean
-        choose if a constant ACH rate should be used
-
-    base_ach : float
+        choose if a constant infiltration rate should be used
+        AixLib: Used on Zone level for ventilation.
+    base_ach : float [1/h]
         base value for the infiltration rate
-
-    max_user_ach : float
-        additional infiltration rate for maximum persons activity
-
-    max_overheating_ach : list
-        additional infiltration rate when overheating appears
-
+        AixLib: Used on Zone level for ventilation.
+    max_user_ach : float [1/h]
+        Additional infiltration rate for maximum persons activity
+        AixLib: Used on Zone level for ventilation.
+    max_overheating_ach : list [1/h]
+        Additional infiltration rate when overheating appears
+        AixLib: Used on Zone level for ventilation.
     max_summer_ach : list
-        additional infiltration rate in the summer with
-        [infiltration_rate, Tmin, Tmax]
-
+        Additional infiltration rate in the summer with
+        [infiltration_rate [1/h], Tmin [K], Tmax [K]]
+        AixLib: Used on Zone level for ventilation.
     winter_reduction : list
-        reduction factor of userACH for cold weather with
-        [infiltration_rate, Tmin, Tmax]
+        Reduction factor of userACH for cold weather with
+        [infiltration_rate [1/h], Tmin [K], Tmax [K]]
+        AixLib: Used on Zone level for ventilation.
     """
 
     def __init__(self, parent=None):
@@ -248,7 +248,7 @@ class BoundaryConditions(UseConditions):
         self.heating_time = [5, 18]
 
         self._persons = 5.0
-        self.activity_type_persons = 3  # physical activity
+        self.activity_type_persons = 3
         self.ratio_conv_rad_persons = 0.5
         self._profile_persons = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.2, 0.4,
                                  0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
@@ -277,21 +277,21 @@ class BoundaryConditions(UseConditions):
     def load_use_conditions(self,
                             zone_usage,
                             data_class=None):
-        """load typical use conditions
+        """Load typical use conditions from XML data base
 
-        loads Use conditions specified in the XML, according to 18599
+        Loads Use conditions specified in the XML.
 
         Parameters
         ----------
         zone_usage : str
-            code list for zone_usage according to 18599
+            code list for zone_usage according to 18599 or self defined
 
         data_class : DataClass()
             DataClass containing the bindings for Use Conditions (typically
             this is the data class stored in prj.data,
-            but the user can individually change that. Default is
-            self.parent.parent.parent.data (which is data_class in current
-            project)
+            but the user can individually change that. Default is None which
+            leads to an automatic setter to self.parent.parent.parent.data (
+            which is DataClass in current project)
         """
 
         if data_class is None:
@@ -299,9 +299,10 @@ class BoundaryConditions(UseConditions):
         else:
             data_class = data_class
 
-        boundcond_input.load_boundary_conditions(bound_cond=self,
-                                                 zone_usage=zone_usage,
-                                                 data_class=data_class)
+        boundcond_input.load_boundary_conditions(
+            bound_cond=self,
+            zone_usage=zone_usage,
+            data_class=data_class)
 
     def save_use_conditions(self, data_class):
         """Use conditions saver.
@@ -310,7 +311,8 @@ class BoundaryConditions(UseConditions):
         for use conditions in InputData. If the Project parent is set, it
         automatically saves it to the file given in Project.data. Alternatively
         you can specify a path to a file of UseConditions. If this
-        file does not exist, a new file is created.
+        file does not exist, a new file is created. Use Conditions are not
+        overwritten if they already exist in XML!
 
         Parameters
         ----------
@@ -328,8 +330,9 @@ class BoundaryConditions(UseConditions):
         else:
             data_class = data_class
 
-        boundcond_output.save_bound_conditions(bound_cond=self,
-                                               data_class=data_class)
+        boundcond_output.save_bound_conditions(
+            bound_cond=self,
+            data_class=data_class)
 
     @property
     def typical_length(self):
@@ -362,13 +365,6 @@ class BoundaryConditions(UseConditions):
     @profile_persons.setter
     def profile_persons(self, value):
 
-        if self._profile_persons is None:
-            pass
-        else:
-            if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
         self._profile_persons = value
 
     @property
@@ -378,13 +374,6 @@ class BoundaryConditions(UseConditions):
     @profile_machines.setter
     def profile_machines(self, value):
 
-        if self._profile_machines is None:
-            pass
-        else:
-            if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
         self._profile_machines = value
 
     @property
@@ -394,14 +383,6 @@ class BoundaryConditions(UseConditions):
 
     @profile_lighting.setter
     def profile_lighting(self, value):
-
-        if self._profile_lighting is None:
-            pass
-        else:
-            if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
 
         self._profile_lighting = value
 
@@ -422,17 +403,6 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert temperature to float")
 
-        if self._set_temp_heat is None:
-            pass
-        else:
-            if self.parent is not None:
-                if self.parent.parent.file_set_t is None:
-                    self.parent.parent.file_set_t = ("/TSet" +
-                                                     self.parent.parent.name +
-                                                     ".mat")
-            else:
-                pass
-
         self._set_temp_heat = value
 
     @property
@@ -452,16 +422,6 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert temperature to float")
 
-        if self._set_temp_cool is None:
-            pass
-        else:
-            if self.parent is not None:
-                if self.parent.parent.file_set_t is None:
-                    self.parent.parent.file_set_t = ("/TSet_" +
-                                                     self.parent.parent.name +
-                                                     ".mat")
-                else:
-                    pass
         self._set_temp_cool = value
 
     @property
@@ -535,13 +495,6 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert humidity to float")
 
-        if self._rel_humidity is None:
-            pass
-        else:
-            if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("/AHU_" +
-                                               self.parent.parent.name +
-                                               ".mat")
         self._rel_humidity = value
 
     @property
@@ -561,13 +514,6 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert min_air_exchange to float")
 
-        if self._min_air_exchange is None:
-            pass
-        else:
-            if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("/AHU_" +
-                                               self.parent.parent.name +
-                                               ".mat")
         self._min_air_exchange = value
 
     @property
@@ -587,13 +533,6 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert AHU airflow to float")
 
-        if self._min_ahu is None:
-            pass
-        else:
-            if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("/AHU_" +
-                                               self.parent.parent.name +
-                                               ".mat")
         self._min_ahu = value
 
     @property
@@ -613,13 +552,6 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert AHU airflow to float")
 
-        if self._max_ahu is None:
-            pass
-        else:
-            if self.parent.parent.file_ahu is None:
-                self.parent.parent.file_ahu = ("/AHU_" +
-                                               self.parent.parent.name +
-                                               ".mat")
         self._max_ahu = value
 
     @property
@@ -639,13 +571,6 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert persons to float")
 
-        if self._persons is None:
-            pass
-        else:
-            if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
         self._persons = value
 
     @property
@@ -665,13 +590,6 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert machines to float")
 
-        if self._machines is None:
-            pass
-        else:
-            if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
         self._machines = value
 
     @property
@@ -691,13 +609,6 @@ class BoundaryConditions(UseConditions):
             except:
                 raise ValueError("Can't convert lighting_power to float")
 
-        if self._lighting_power is None:
-            pass
-        else:
-            if self.parent.parent.file_internal_gains is None:
-                self.parent.parent.file_internal_gains = ("/InternalGains_" +
-                                                          self.parent.parent.name +
-                                                          ".mat")
         self._lighting_power = value
 
     @property

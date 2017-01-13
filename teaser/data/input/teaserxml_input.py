@@ -11,12 +11,14 @@ import xml.etree.ElementTree as element_tree
 import warnings
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.archetypebuildings.bmvbs.office import Office
-from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import SingleFamilyDwelling
+from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
+    SingleFamilyDwelling
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
-from teaser.logic.buildingobjects.buildingsystems.buildingahu import BuildingAHU
+from teaser.logic.buildingobjects.buildingsystems.buildingahu import\
+    BuildingAHU
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
@@ -30,8 +32,9 @@ from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 
+
 def load_teaser_xml(path, prj):
-    '''This function loads a project from teaserXML
+    """This function loads a project from teaserXML
 
     TEASERs internal file format to store information.
 
@@ -44,7 +47,7 @@ def load_teaser_xml(path, prj):
         Teaser instance of Project()
 
 
-    '''
+    """
     version_parse = element_tree.parse(path)
     xml_file = open(path, 'r')
     if bool(version_parse.getroot().attrib) is False:
@@ -58,7 +61,9 @@ def load_teaser_xml(path, prj):
     elif version_parse.getroot().attrib['version'] == "0.4":
         import teaser.data.bindings.v_0_4.project_bind as pb
         project_bind = pb.CreateFromDocument(xml_file.read())
-
+    elif version_parse.getroot().attrib['version'] == "0.5":
+        import teaser.data.bindings.v_0_5.project_bind as pb
+        project_bind = pb.CreateFromDocument(xml_file.read())
 
     for pyxb_bld in project_bind.Building:
         _load_building(prj=prj, pyxb_bld=pyxb_bld, type="Building",
@@ -86,7 +91,6 @@ def load_teaser_xml(path, prj):
 
 
 def _load_building(prj, pyxb_bld, type, project_bind):
-
     if type == "Building":
         bldg = Building(prj)
 
@@ -128,18 +132,24 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         bldg.central_ahu.humidification = pyxb_ahu.humidification
         bldg.central_ahu.heat_recovery = pyxb_ahu.heat_recovery
         bldg.central_ahu.by_pass_dehumidification = \
-                            pyxb_ahu.by_pass_dehumidification
-        bldg.central_ahu.efficiency_recovery =pyxb_ahu.efficiency_recovery
-        bldg.central_ahu.efficiency_revocery_false = \
-                            pyxb_ahu.efficiency_revocery_false
+            pyxb_ahu.by_pass_dehumidification
+        bldg.central_ahu.efficiency_recovery = pyxb_ahu.efficiency_recovery
+
+        if float(project_bind.version) >= 0.5:
+            bldg.central_ahu.efficiency_recovery_false = \
+                pyxb_ahu.efficiency_recovery_false
+        else:
+            bldg.central_ahu.efficiency_recovery_false = \
+                pyxb_ahu.efficiency_revocery_false
+
         bldg.central_ahu.profile_min_relative_humidity = \
-                            pyxb_ahu.profile_min_relative_humidity
+            pyxb_ahu.profile_min_relative_humidity
         bldg.central_ahu.profile_max_relative_humidity = \
-                            pyxb_ahu.profile_max_relative_humidity
+            pyxb_ahu.profile_max_relative_humidity
         bldg.central_ahu.profile_v_flow = \
-                            pyxb_ahu.profile_v_flow
+            pyxb_ahu.profile_v_flow
         bldg.central_ahu.profile_temperature = \
-                            pyxb_ahu.profile_temperature
+            pyxb_ahu.profile_temperature
 
     for pyxb_zone in pyxb_bld.ThermalZone:
 
@@ -149,12 +159,13 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         zone.area = pyxb_zone.area
         zone.volume = pyxb_zone.volume
         zone.infiltration_rate = pyxb_zone.infiltration_rate
-        # zone.use_conditions.typical_length = pyxb_zone.typical_length
-        # zone.use_conditions.typical_width = pyxb_zone.typical_width
 
         zone.use_conditions = BoundaryConditions(zone)
 
         pyxb_use = pyxb_zone.UseCondition.BoundaryConditions
+
+        zone.use_conditions.typical_length = pyxb_zone.typical_length
+        zone.use_conditions.typical_width = pyxb_zone.typical_width
 
         zone.use_conditions.usage = \
             pyxb_use.usage
@@ -180,7 +191,7 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         zone.use_conditions.daily_operation_heating = \
             pyxb_use.UsageOperationTime.daily_operation_heating
 
-        if project_bind.version == "0.4":
+        if float(project_bind.version) >= 0.4:
             zone.use_conditions.maintained_illuminance = \
                 pyxb_use.Lighting.maintained_illuminance
         else:
@@ -256,7 +267,6 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             pyxb_use.AHU.winter_reduction
 
         for pyxb_wall in pyxb_zone.OuterWall:
-
             out_wall = OuterWall(zone)
 
             set_basic_data_teaser(pyxb_wall, out_wall)
@@ -265,7 +275,6 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             # zone.outer_walls.append(out_wall)
 
         for pyxb_wall in pyxb_zone.Rooftop:
-
             roof = Rooftop(zone)
 
             set_basic_data_teaser(pyxb_wall, roof)
@@ -274,7 +283,6 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             # zone.outer_walls.append(roof)
 
         for pyxb_wall in pyxb_zone.GroundFloor:
-
             gr_floor = GroundFloor(zone)
 
             set_basic_data_teaser(pyxb_wall, gr_floor)
@@ -283,7 +291,6 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             # zone.outer_walls.append(gr_floor)
 
         for pyxb_wall in pyxb_zone.InnerWall:
-
             in_wall = InnerWall(zone)
 
             set_basic_data_teaser(pyxb_wall, in_wall)
@@ -292,7 +299,6 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             # zone.inner_walls.append(in_wall)
 
         for pyxb_wall in pyxb_zone.Ceiling:
-
             ceiling = Ceiling(zone)
 
             set_basic_data_teaser(pyxb_wall, ceiling)
@@ -301,7 +307,6 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             # zone.inner_walls.append(ceiling)
 
         for pyxb_wall in pyxb_zone.Floor:
-
             floor = Floor(zone)
 
             set_basic_data_teaser(pyxb_wall, floor)
@@ -310,16 +315,14 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             # zone.inner_walls.append(floor)
 
         for pyxb_win in pyxb_zone.Window:
-
             win = Window(zone)
 
             set_basic_data_teaser(pyxb_win, win)
             set_layer_data_teaser(pyxb_win, win)
 
 
-
 def set_basic_data_teaser(pyxb_class, element):
-    '''Helper function for load_teaser_xml to set the basic data
+    """Helper function for load_teaser_xml to set the basic data
 
     Parameters
     ----------
@@ -329,7 +332,7 @@ def set_basic_data_teaser(pyxb_class, element):
     element : TEASERClass
         teaser class representation of a building element
 
-    '''
+    """
 
     if pyxb_class.year_of_construction is not None:
         element.year_of_construction = pyxb_class.year_of_construction
@@ -343,18 +346,17 @@ def set_basic_data_teaser(pyxb_class, element):
     element.tilt = pyxb_class.tilt
     element.orientation = pyxb_class.orientation
 
-    if type(element).__name__ == 'OuterWall' or \
-            type(element).__name__ == 'Rooftop':
+    if type(element).__name__ == 'OuterWall' or type(element).__name__ == \
+            'Rooftop':
 
         element.inner_radiation = pyxb_class.inner_radiation
         element.inner_convection = pyxb_class.inner_convection
         element.outer_radiation = pyxb_class.outer_radiation
         element.outer_convection = pyxb_class.outer_convection
 
-    elif type(element).__name__ == 'InnerWall' or \
-            type(element).__name__ == 'Ceiling' or \
-            type(element).__name__ == 'Floor' or \
-            type(element).__name__ == 'GroundFloor':
+    elif type(element).__name__ == 'InnerWall' or type(element).__name__ == \
+            'Ceiling' or type(element).__name__ == 'Floor' or type(
+                element).__name__ == 'GroundFloor':
 
         element.inner_radiation = pyxb_class.inner_radiation
         element.inner_convection = pyxb_class.inner_convection
@@ -372,7 +374,7 @@ def set_basic_data_teaser(pyxb_class, element):
 
 
 def set_layer_data_teaser(pyxb_class, element):
-    '''Helper function for load_teaser_xml to set the layer data
+    """Helper function for load_teaser_xml to set the layer data
 
     Parameters
     ----------
@@ -382,9 +384,8 @@ def set_layer_data_teaser(pyxb_class, element):
     element : TEASERClass
         teaser class representation of a building element
 
-    '''
+    """
     for pyxb_layer in pyxb_class.Layer:
-
         layer = Layer(element)
 
         layer.id = pyxb_layer.id

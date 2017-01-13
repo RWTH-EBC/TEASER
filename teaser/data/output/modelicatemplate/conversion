@@ -1,0 +1,43 @@
+
+##convert deg to rad
+<%def name="deg_to_rad(value)", filter="trim">
+  <%
+  from math import pi
+  if type(value) is list:
+    return_value = []
+    for i in value:
+      return_value.append(i * pi/180)
+  else:
+    return_value = value * pi/180
+  return return_value
+  %>
+</%def>
+
+##convert TEASER azimut
+<%def name="azmiut_conv(value)", filter="trim">
+  <%
+  if type(value) is list:
+    return_value = []
+    for element in value:
+      if 0 < element < 360:
+          return_value.append(deg_to_rad(-180.0+element))
+      elif element == 0:
+          return_value.append(deg_to_rad(180.0))
+      elif element == -1:
+          return_value.append(deg_to_rad(0.0))
+      elif element == -2:
+          return_value.append(deg_to_rad(0.0))
+  else:
+      if 0 < value < 360:
+          return_value = deg_to_rad(-180.0+value)
+      elif value == 0:
+          return_value = deg_to_rad(180.0)
+      elif value == -1:
+          return_value = deg_to_rad(0.0)
+      elif value == -2:
+          return_value = deg_to_rad(0.0)
+
+  return return_value
+
+  %>
+</%def>

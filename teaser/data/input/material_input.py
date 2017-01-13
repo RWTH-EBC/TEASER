@@ -8,7 +8,7 @@ This module contains function to load material classes
 
 
 def load_material(material, mat_name, data_class):
-    '''Material loader.
+    """Material loader.
 
     Loads Material specified in the XML.
 
@@ -25,7 +25,7 @@ def load_material(material, mat_name, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-    '''
+    """
 
     binding = data_class.material_bind
 
@@ -38,6 +38,8 @@ def load_material(material, mat_name, data_class):
             material.density = mat.density
             material.thermal_conduc = float(mat.thermal_conduc)
             material.heat_capac = mat.heat_capac
+            material.solar_absorp = mat.solar_absorp
+            material.ir_emissivity = mat.ir_emissivity
 
 
 def load_material_id(material, mat_id, data_class):
@@ -71,4 +73,6 @@ def load_material_id(material, mat_id, data_class):
             material.density = mat.density
             material.thermal_conduc = float(mat.thermal_conduc)
             material.heat_capac = mat.heat_capac
+            material.solar_absorp = mat.solar_absorp
+            material.ir_emissivity = mat.ir_emissivity
 
