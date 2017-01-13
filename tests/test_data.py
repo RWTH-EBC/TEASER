@@ -728,6 +728,19 @@ class Test_teaser(object):
                              window_layout=0,
                              construction_type="heavy")
 
+        prj.add_non_residential(
+            method='bmvbs',
+            usage='office',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            office_layout=0,
+            window_layout=0,
+            construction_type="heavy")
+
     def test_type_bldg_institute(self):
         '''test of type_bldg_institute, no calculation verification'''
 
@@ -739,6 +752,19 @@ class Test_teaser(object):
                                 office_layout=0,
                                 window_layout=0,
                                 construction_type="heavy")
+
+        prj.add_non_residential(
+            method='bmvbs',
+            usage='institute',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=True,
+            office_layout=0,
+            window_layout=0,
+            construction_type="heavy")
 
     def test_type_bldg_institute4(self):
         '''test of type_bldg_institute4, no calculation verification'''
@@ -752,6 +778,19 @@ class Test_teaser(object):
                                  window_layout=0,
                                  construction_type="heavy")
 
+        prj.add_non_residential(
+            method='bmvbs',
+            usage='institute4',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=True,
+            office_layout=0,
+            window_layout=0,
+            construction_type="heavy")
+
     def test_type_bldg_institute8(self):
         '''test of type_bldg_institute8, no calculation verification'''
 
@@ -763,6 +802,19 @@ class Test_teaser(object):
                                  office_layout=0,
                                  window_layout=0,
                                  construction_type="heavy")
+
+        prj.add_non_residential(
+            method='bmvbs',
+            usage='institute8',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=True,
+            office_layout=0,
+            window_layout=0,
+            construction_type="heavy")
 
     def test_type_bldg_residential(self):
         '''test of type_bldg_residential, no calculation verification'''
@@ -778,6 +830,212 @@ class Test_teaser(object):
                                   cellar=0,
                                   dormer=0,
                                   construction_type="heavy")
+
+        prj.add_residential(
+            method='iwu',
+            usage='single_family_dwelling',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy")
+
+    def test_est_bldgs(self):
+        '''test of type_bldg_residential, no calculation verification'''
+
+        prj.add_residential(
+            method='urbanrenet',
+            usage='est1a',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy",
+            number_of_apartments=1)
+
+        prj.add_residential(
+            method='urbanrenet',
+            usage='est1b',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy",
+            number_of_apartments=1)
+
+        prj.add_residential(
+            method='urbanrenet',
+            usage='est2',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy",
+            number_of_apartments=1)
+
+        prj.add_residential(
+            method='urbanrenet',
+            usage='est3',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy",
+            number_of_apartments=1)
+
+        prj.add_residential(
+            method='urbanrenet',
+            usage='est4a',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy",
+            number_of_apartments=1)
+
+        prj.add_residential(
+            method='urbanrenet',
+            usage='est4b',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy",
+            number_of_apartments=1)
+
+        prj.add_residential(
+            method='urbanrenet',
+            usage='est5',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy",
+            number_of_apartments=1)
+
+        prj.add_residential(
+            method='urbanrenet',
+            usage='est6',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy",
+            number_of_apartments=1)
+
+        prj.add_residential(
+            method='urbanrenet',
+            usage='est7',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy",
+            number_of_apartments=1)
+
+        prj.add_residential(
+            method='urbanrenet',
+            usage='est8a',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy",
+            number_of_apartments=1)
+
+        prj.add_residential(
+            method='urbanrenet',
+            usage='est8b',
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            residential_layout=0,
+            neighbour_buildings=0,
+            attic=0,
+            cellar=0,
+            dormer=0,
+            construction_type="heavy",
+            number_of_apartments=1)
 
     # methods in Building
 
