@@ -101,7 +101,8 @@ class Building(object):
         4: FourElement
     merge_windows_calc : boolean
         True for merging the windows into the outer wall's RC-combination,
-        False for separate resistance for window, default is False
+        False for separate resistance for window, default is False. (Only
+        supported for Annex60)
     used_library_calc : str
         'AixLib' for https://github.com/RWTH-EBC/AixLib
         'Annex60' for https://github.com/iea-annex60/modelica-annex60

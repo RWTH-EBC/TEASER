@@ -21,8 +21,15 @@ from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
 from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import Institute8
 from teaser.logic.archetypebuildings.urbanrenet.est1a import EST1a
 from teaser.logic.archetypebuildings.urbanrenet.est1b import EST1b
+from teaser.logic.archetypebuildings.urbanrenet.est2 import EST2
+from teaser.logic.archetypebuildings.urbanrenet.est3 import EST3
+from teaser.logic.archetypebuildings.urbanrenet.est4a import EST4a
 from teaser.logic.archetypebuildings.urbanrenet.est4b import EST4b
+from teaser.logic.archetypebuildings.urbanrenet.est5 import EST5
+from teaser.logic.archetypebuildings.urbanrenet.est6 import EST6
 from teaser.logic.archetypebuildings.urbanrenet.est7 import EST7
+from teaser.logic.archetypebuildings.urbanrenet.est8a import EST8a
+from teaser.logic.archetypebuildings.urbanrenet.est8b import EST8b
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
     SingleFamilyDwelling
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
@@ -456,6 +463,13 @@ class Project(object):
 
         assert method in ['iwu', 'urbanrenet'], ass_error_method
 
+        ass_error_apart = "The keyword number_of_apartmens does not have any " \
+                          "effect on archetype generation for 'iwu', see" \
+                          "docs for more information"
+
+        assert method == 'iwu' and number_of_apartments is not None, \
+            ass_error_apart
+
         if method == 'iwu':
 
             ass_error_usage_iwu = "only 'single_family_dewlling' is a valid " \
@@ -515,6 +529,48 @@ class Project(object):
                     construction_type,
                     number_of_apartments)
 
+            elif usage == 'est2':
+
+                type_bldg = EST2(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    neighbour_buildings,
+                    construction_type,
+                    number_of_apartments)
+
+            elif usage == 'est3':
+
+                type_bldg = EST3(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    neighbour_buildings,
+                    construction_type,
+                    number_of_apartments)
+
+            elif usage == 'est4a':
+
+                type_bldg = EST4a(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    neighbour_buildings,
+                    construction_type,
+                    number_of_apartments)
+
             elif usage == 'est4b':
 
                 type_bldg = EST4b(
@@ -529,9 +585,66 @@ class Project(object):
                     construction_type,
                     number_of_apartments)
 
+            elif usage == 'est5':
+
+                type_bldg = EST5(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    neighbour_buildings,
+                    construction_type,
+                    number_of_apartments)
+
+            elif usage == 'est6':
+
+                type_bldg = EST6(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    neighbour_buildings,
+                    construction_type,
+                    number_of_apartments)
+
+
             elif usage == 'est7':
 
                 type_bldg = EST7(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    neighbour_buildings,
+                    construction_type,
+                    number_of_apartments)
+
+            elif usage == 'est8a':
+
+                type_bldg = EST8a(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    neighbour_buildings,
+                    construction_type,
+                    number_of_apartments)
+
+            elif usage == 'est8b':
+
+                type_bldg = EST8b(
                     self,
                     name,
                     year_of_construction,
@@ -1027,6 +1140,9 @@ class Project(object):
 
     def export_aixlib(
             self,
+            building_model=None,
+            zone_model=None,
+            corG=None,
             internal_id=None,
             path=None):
         """Exports values to a record file for Modelica simulation
@@ -1050,6 +1166,14 @@ class Project(object):
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
         """
+
+        if building_model is not None or zone_model is not None or corG is \
+                not None:
+
+            warnings.warn("building_model, zone_model and corG are no longer "
+                          "supported for AixLib export and have no effect. "
+                          "The keywords will be deleted within the next "
+                          "version, consider rewriting your code.")
 
         if path is None:
             path = os.path.join(
