@@ -773,7 +773,7 @@ class FourElement(object):
                            self.thermal_zone.ground_floors)
 
         self.ua_value_gf = \
-            (sum(ground.area for ground in
+            (sum(ground.ua_value for ground in
                  self.thermal_zone.ground_floors))
 
         self.r_total_gf = 1 / self.ua_value_gf

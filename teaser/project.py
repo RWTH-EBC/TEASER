@@ -1,7 +1,8 @@
 # created June 2015
 # by TEASER4 Development Team
 
-"""This module includes the Project class, which serves as an API for a TEASER Project
+"""This module includes the Project class, which serves as an API for a
+TEASER Project
 """
 
 import warnings
@@ -97,12 +98,12 @@ class Project(object):
         self._used_library_calc = "AixLib"
 
         if load_data is True:
-            self.data = self.instantiate_data_class(self)
+            self.data = self.instantiate_data_class()
         else:
             self.data = None
 
     @staticmethod
-    def instantiate_data_class(self):
+    def instantiate_data_class():
         """Initialization of DataClass
 
         Returns
@@ -236,10 +237,12 @@ class Project(object):
         number_of_floors : int
             Number of building's floors above ground
         net_leased_area : float [m2]
-            Total net leased area of building. This is area is NOT the footprint
+            Total net leased area of building. This is area is NOT the
+            footprint
             of a building
         with_ahu : Boolean
-            If set to True, an empty instance of BuildingAHU is instantiated and
+            If set to True, an empty instance of BuildingAHU is instantiated
+            and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
         office_layout : int
@@ -362,7 +365,8 @@ class Project(object):
         This function adds a residential archetype building to the TEASER
         project. You need to specify the method of the archetype generation.
         Currently TEASER supports only method according 'iwu' and 'urbanrenet'
-        for residential buildings ('tabula_de' to follow soon). Further the type
+        for residential buildings ('tabula_de' to follow soon). Further the
+        type
         of usage needs to be specified. Currently TEASER supports one type of
         residential building for 'iwu' and eleven types for 'urbanrenet'. For
         more information on specific archetype buildings and methods, please
@@ -391,10 +395,12 @@ class Project(object):
         number_of_floors : int
             Number of building's floors above ground
         net_leased_area : float [m2]
-            Total net leased area of building. This is area is NOT the footprint
+            Total net leased area of building. This is area is NOT the
+            footprint
             of a building
         with_ahu : Boolean
-            If set to True, an empty instance of BuildingAHU is instantiated and
+            If set to True, an empty instance of BuildingAHU is instantiated
+            and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
         residential_layout : int
@@ -445,8 +451,8 @@ class Project(object):
         type_bldg : Instance of SingleFamilyDwelling()
         """
 
-        ass_error_method = "only 'iwu' and 'urbanrenet' are valid methods for " \
-                           "residential archetype generation"
+        ass_error_method = "only 'iwu' and 'urbanrenet' are valid methods"\
+            "for residential archetype generation"
 
         assert method in ['iwu', 'urbanrenet'], ass_error_method
 
@@ -1140,16 +1146,17 @@ class Project(object):
             prj=self,
             path=path)
 
-    def set_default(self, load_data=True):
+    def set_default(self, load_data=None):
         """Sets all attributes to default
 
         Caution: this will delete all buildings.
 
         Parameters
         ----------
-        load_data : boolean
+        load_data : boolean, None-type
             boolean if data bindings for type elements and use conditions
-            should be loaded (default = True)
+            should be loaded (default = True), in addition it could be a None-
+            type to use the already used data bindings
         """
 
         self._name = "Project"
@@ -1173,6 +1180,8 @@ class Project(object):
 
         if load_data is True:
             self.data = self.instantiate_data_class()
+        elif not load_data:
+            pass
         else:
             self.data = None
 

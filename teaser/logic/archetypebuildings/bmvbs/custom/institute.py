@@ -10,8 +10,8 @@ class Institute(Office):
 
     The institute module contains a multi zone building which is based on an
     office building with an additional laboratory zone. The area of the
-    laboratory zone is based on the data from the Forschungszentrum Jülich
-    :cite:`Abschlussbericht`. According to the dataset from Jülich,
+    laboratory zone is based on the data from the Forschungszentrum Juelich
+    :cite:`Abschlussbericht`. According to the dataset from Juelich,
     the typebuilding institute is based on the buildingsclass of BWZK with
     the number 2200 which represents all institute buildings which are not
     institute type 4 or institute type 8

@@ -667,7 +667,7 @@ class ThreeElement(object):
                            self.thermal_zone.ground_floors)
 
         self.ua_value_gf = \
-            (sum(ground.area for ground in
+            (sum(ground.ua_value for ground in
                    self.thermal_zone.ground_floors))
 
         self.r_total_gf = 1 / self.ua_value_gf
@@ -1143,6 +1143,8 @@ class ThreeElement(object):
         difference of t_inside and t_outside. And takes heat losses through
         infiltration into account.
 
+        Keep in mind that this is a rough approximation of the DIN Heat Demand
+
         Attributes
         ----------
         ua_value_ow_temp : float [W/(m2*K)]
@@ -1152,16 +1154,16 @@ class ThreeElement(object):
         """
         self.heat_load = 0.0
 
-        ua_value_ow_temp = self.ua_value_ow - self.ua_value_gf
+        ua_value_ow_temp = self.ua_value_ow
         self.heat_load = \
             ((((ua_value_ow_temp + self.ua_value_win) +
                self.thermal_zone.volume *
                self.thermal_zone.infiltration_rate * 1 / 3600 *
                self.thermal_zone.heat_capac_air *
-               self.thermal_zone.density_air) * (self.thermal_zone.t_inside -
-                                                 self.thermal_zone.t_outside))
-             + (self.ua_value_gf * (self.thermal_zone.t_inside -
-                                    self.thermal_zone.t_ground)))
+               self.thermal_zone.density_air) *
+               (self.thermal_zone.t_inside - self.thermal_zone.t_outside)) +
+               (self.ua_value_gf * (self.thermal_zone.t_inside -
+                self.thermal_zone.t_ground)))
 
     def set_calc_default(self):
         """sets default calculation parameters
