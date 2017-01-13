@@ -1140,6 +1140,9 @@ class Project(object):
 
     def export_aixlib(
             self,
+            building_model=None,
+            zone_model=None,
+            corG=None,
             internal_id=None,
             path=None):
         """Exports values to a record file for Modelica simulation
@@ -1163,6 +1166,14 @@ class Project(object):
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
         """
+
+        if building_model is not None or zone_model is not None or corG is \
+                not None:
+
+            warnings.warn("building_model, zone_model and corG are no longer "
+                          "supported for AixLib export and have no effect. "
+                          "The keywords will be deleted within the next "
+                          "version, consider rewriting your code.")
 
         if path is None:
             path = os.path.join(
