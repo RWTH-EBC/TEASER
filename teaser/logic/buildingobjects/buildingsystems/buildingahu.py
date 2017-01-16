@@ -45,17 +45,17 @@ class BuildingAHU(object):
     efficiency_recovery : float
         efficiency of HRS in the AHU modes if HRS is enabled.
         AixLib: "efficiencyHRS_enabled" (default = 0.8)
-    efficiency_revocery_false : float (default = 0.2)
+    efficiency_revocery_false : float
         taking a little heat transfer into account although HRS is disabled
         (in case that a HRS is physically installed in the AHU) in AixLib:
-        "efficiencyHRS_disabled"
-    sample_rate : int (default = 1800)
+        "efficiencyHRS_disabled" (default = 0.2)
+    sample_rate : int
         sample rate of state machines in AHU model. Default is set to half
-        an hour as typical input is hourly
-    efficiency_fan_supply : float (default = 0.7)
-        Efficiency of supply fan
-    efficiency_fan_return: float (default = 0.7)
-        Efficiency of return fan
+        an hour as typical input is hourly (default = 1800)
+    efficiency_fan_supply : float
+        Efficiency of supply fan (default = 0.7)
+    efficiency_fan_return: float
+        Efficiency of return fan (default = 0.7)
     pressure_drop_fan_supply: float (default 800)
         Pressure drop assigned to supply fan in Pascal
     pressure_drop_fan_return: float (default 800)

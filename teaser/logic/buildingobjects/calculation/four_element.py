@@ -59,7 +59,7 @@ class FourElement(object):
     alpha_comb_outer_iw : float [W/(m2K)]
         Area-weighted combined coefficient of heat transfer of interior walls
         facing the adjacent thermal zone. (Currently not supported)
-    ua_value_iw : float [W/(m2K)]
+    ua_value_iw : float [W/K]
         U-Value times interior wall area. (Does not take adjacent thermal
         zones into account)
     r_conv_inner_iw : float [K/W]
@@ -99,7 +99,7 @@ class FourElement(object):
     alpha_comb_outer_ow : float [W/(m2K)]
         Area-weighted combined coefficient of heat transfer of outer walls
         facing the ambient.
-    ua_value_ow : float [W/(m2K)]
+    ua_value_ow : float [W/K]
         U-Value times outer wall area.
     r_conv_inner_ow : float [K/W]
         Sum of convective resistances for all outer walls facing the
@@ -153,7 +153,7 @@ class FourElement(object):
     alpha_comb_inner_gf : float [W/(m2K)]
         Area-weighted combined coefficient of heat transfer of ground floors
         facing the inside of this thermal zone.
-    ua_value_gf : float [W/(m2K)]
+    ua_value_gf : float [W/K]
         U-Value times ground floor area.
     r_conv_inner_gf : float [K/W]
         Sum of convective resistances for all ground floors facing the
@@ -206,7 +206,7 @@ class FourElement(object):
     alpha_comb_outer_rt : float [W/(m2K)]
         Area-weighted combined coefficient of heat transfer of rooftops
         facing the ambient.
-    ua_value_rt : float [W/(m2K)]
+    ua_value_rt : float [W/K]
         U-Value times outer wall area.
     r_conv_inner_rt : float [K/W]
         Sum of convective resistances for all rooftops facing the
@@ -286,7 +286,7 @@ class FourElement(object):
     alpha_comb_outer_win : float [W/(m2K)]
         Area-weighted combined coefficient of heat transfer of windows facing
         the ambient.
-    ua_value_win : float [W/(m2K)]
+    ua_value_win : float [W/K]
         U-Value times outer wall area.
     r_conv_inner_win : float [K/W]
         Sum of convective resistances for all windows facing the
