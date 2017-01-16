@@ -76,6 +76,7 @@ class Annex60(object):
 
     def modelica_gains_boundary(
             self,
+            zone,
             time_line=None,
             path=None):
         """creates .mat file for internal gains boundary conditions
@@ -97,6 +98,10 @@ class Annex60(object):
 
         Parameters
         ----------
+        zone : ThermalZone()
+            TEASER instance of ThermalZone. As Annex60 computes single models
+            for single zones, we need to generate individual files for zones
+            and internal gains
         time_line :[[int]]
             list of time steps
         path : str
