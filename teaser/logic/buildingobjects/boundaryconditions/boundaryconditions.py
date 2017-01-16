@@ -52,7 +52,7 @@ class BoundaryConditions(UseConditions):
     yearly_usage_hours_night : int [h]
         operating hours per year during nighttime
         Currently not used
-    daily_operation_ahu_cooling: int
+    daily_operation_ahu_cooling: int [h]
         operating hours of AHU and cooling
         Currently not used
     yearly_ahu_days : int [d]
@@ -70,7 +70,7 @@ class BoundaryConditions(UseConditions):
 
     LIGHTING
 
-    maintained_illuminance : int [Lx}
+    maintained_illuminance : int [Lx]
         maintained illuminance value (lx)
         Currently not used
     usage_level_height: float [m]
@@ -103,7 +103,7 @@ class BoundaryConditions(UseConditions):
         Currently not used
     temp_set_back: float [K]
         set back in reduced operation mode
-        Currently not used (see issue #342)
+        AixLib: Used for night set-back for simple heater.
     min_temp_heat : float [K]
         design minimal temperature heating
         Currently not used
@@ -126,26 +126,32 @@ class BoundaryConditions(UseConditions):
       cooling time [begin, end]
         Currently not used
     heating_time : list [h]
-        heating time [begin, end] - Beginn/End Betriebszeit Heizung
-        Currently not used (see issue #342)
+        heating time [begin, end]
+        AixLib: Used for night set-back for simple heater.
     INTERNAL GAINS
 
     persons : int
         number of persons in the room
         AixLib: Used in Zone record for internal gains, NrPeople
+        Annex: Used for internal gains
     activity_type_persons : int
         persons activity (1: light, 2: moderate, 3: high)
         AixLib: Used in Zone for internal gains. The heat produced by people
         in relation to zone temperature and person activity in [W/person]
+        Annex: (1: light, 50W/person, 2: moderate 100W/person,
+        3: high 150W/person) For Annex models, the heat produced is not
+        dependent on zone temperature
     ratio_conv_rad_persons : float
         describes the ratio between convective and radiative heat transfer
         of the persons
         AixLib: Used in Zone record for internal gains
+        Annex: Used for internal gains
     profile_persons : list
         Relative presence of persons 0-1 (e.g. 0.5 means that 50% of the total
         number of persons are currently in the room). Typically given
         for 24h.
         AixLib: Used for internal gains profile on top-level
+        Annex: Used for internal gains
     machines: float
         number of Machines
         AixLib: Used in Zone record for internal gains
@@ -153,6 +159,7 @@ class BoundaryConditions(UseConditions):
         machines activity (1: light, 50W/machine, 2: moderate 100W/machine,
         3: high 150W/machine)
         AixLib: Used in Zone record for internal gains
+        Annex: Used for internal gains
     ratio_conv_rad_machines : float
         describes the ratio between convective and radiative heat transfer
         of the machines
@@ -162,13 +169,16 @@ class BoundaryConditions(UseConditions):
         number of machines are currently used in the room). Typically given
         for 24h.
         AixLib: Used for internal gains profile on top-level
+        Annex: Used for internal gains
     lighting_power : float [W/m2]
         spec. electr. Power for lighting
         AixLib: Used in Zone record for internal gains
+        Annex: Used for internal gains
     profile_lighting : [float]
         Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total
         lighting power are currently used). Typically given for 24h.
         AixLib: Used for internal gains profile on top-level
+        Annex: Used for internal gains
 
     MISC/AHU
 
@@ -176,7 +186,7 @@ class BoundaryConditions(UseConditions):
         Zone specific minimum specific air flow supplied by the AHU
         AixLib: Used on Multizone level for central AHU to determine total
         volume flow of all zones.
-    max_ahu : float
+    max_ahu : float [m3/(m2*h)]
         Zone specific maximum specific air flow supplied by the AHU
         AixLib: Used on Multizone level for central AHU to determine total
         volume flow of all zones.
