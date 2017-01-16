@@ -164,21 +164,22 @@ class BoundaryConditions(UseConditions):
         describes the ratio between convective and radiative heat transfer
         of the machines
         AixLib: Used in Zone record for internal gains
+        Annex: Not used, all machines are convective (see Annex examples)
     profile_machines : list
         Relative presence of machines 0-1 (e.g. 0.5 means that 50% of the total
         number of machines are currently used in the room). Typically given
         for 24h.
         AixLib: Used for internal gains profile on top-level
-        Annex: Used for internal gains
+        Annex: Not used (see Annex examples)
     lighting_power : float [W/m2]
         spec. electr. Power for lighting
         AixLib: Used in Zone record for internal gains
-        Annex: Used for internal gains
+        Annex: Not used (see Annex examples)
     profile_lighting : [float]
         Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total
         lighting power are currently used). Typically given for 24h.
         AixLib: Used for internal gains profile on top-level
-        Annex: Used for internal gains
+        Annex: Not used (see Annex examples)
 
     MISC/AHU
 
