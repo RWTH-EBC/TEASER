@@ -122,6 +122,7 @@ def export_annex60(
             zone.parent.library_attr.file_internal_gains = \
                 'InternalGains_' + bldg.name + zone.name + '.mat'
             bldg.library_attr.modelica_gains_boundary(
+                zone=zone,
                 time_line=None,
                 path=zone_path)
 
