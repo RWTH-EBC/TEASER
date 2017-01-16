@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Install TEASER &#8212; TEASER 0.5.0 documentation</title>
+    <title>Install TEASER &mdash; TEASER 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,15 +17,13 @@
         VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="TEASER 0.5.0 documentation" href="index.html" />
     <link rel="next" title="TEASER API - Project class" href="teaser.Project.html" />
     <link rel="prev" title="TEASER" href="index.html" /> 
   </head>
@@ -49,7 +47,7 @@
         <li class="right" >
           <a href="index.html" title="TEASER"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -63,18 +61,21 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/install_teaser.rst.txt"
+      <li><a href="_sources/install_teaser.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -88,15 +89,15 @@
   <div class="section" id="install-teaser">
 <h1>Install TEASER<a class="headerlink" href="#install-teaser" title="Permalink to this headline">¶</a></h1>
 <p>The best option to install TEASER is to use pip:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">teaser</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>pip install teaser
 </pre></div>
 </div>
 <p>If you actively develop TEASER you can clone this repository by using:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="p">[</span><span class="n">SSH</span><span class="o">-</span><span class="n">Key</span><span class="o">/</span><span class="n">Https</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>git clone [SSH-Key/Https]
 </pre></div>
 </div>
 <p>and then run:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="p">[</span><span class="n">Path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">your</span><span class="o">/</span><span class="n">Teaser</span><span class="o">/</span><span class="n">Clone</span><span class="p">]</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>pip install -e [Path/to/your/Teaser/Clone]
 </pre></div>
 </div>
 <p>which will install the local version of TEASER.</p>
@@ -113,17 +114,17 @@ TEASER code. Two examples of those distributions are:</p>
 <p>In addition, TEASER requires some specific Python packages:</p>
 <ol class="arabic">
 <li><p class="first">Mako: template Engine:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span><span class="o">-</span><span class="n">U</span> <span class="n">mako</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>pip install-U mako
 </pre></div>
 </div>
 </li>
 <li><p class="first">PyXB: XML binding Engine:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">pyxb</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>pip install -U pyxb
 </pre></div>
 </div>
 </li>
 <li><p class="first">pytest: Unit Tests engine:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">pytest</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span>pip install -U pytest
 </pre></div>
 </div>
 </li>
@@ -151,12 +152,12 @@ TEASER code. Two examples of those distributions are:</p>
         <li class="right" >
           <a href="index.html" title="TEASER"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &copy; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>
