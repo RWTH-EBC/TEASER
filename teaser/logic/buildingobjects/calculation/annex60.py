@@ -76,19 +76,24 @@ class Annex60(object):
 
     def modelica_gains_boundary(
             self,
+            zone,
             time_line=None,
             path=None):
         """creates .mat file for internal gains boundary conditions
 
         This function creates a matfile (-v4) for building internal gains
-        boundary conditions. It collects all internal gain profiles of the
-        zones and stores them into one file. The file is extended for each
-        zone. Only applicable if zones are defined
+        boundary conditions. It collects internal gain profiles of a specific
+        zones and stores them into one file. It also calculates the internal
+        gains from relative presence and values for heat output into W for
+        direct usage in Annex models.
+
+        Only person (convective and radiative) and machines (convective) are
+        used in the simple Annex 60 exmaples.
 
         1. Column : time step
-        2,5,8,...  Column : profile_persons
-        3,6,9,...  Column : profile_machines
-        4,7,10,... Column : profile_lighting
+        2 Column : profile_persons, radiative
+        3 Column : profile_persons, convective
+        4 Column : profile_machines, convective
 
         Note
         ----------
@@ -97,13 +102,15 @@ class Annex60(object):
 
         Parameters
         ----------
+        zone : ThermalZone()
+            TEASER instance of ThermalZone. As Annex60 computes single models
+            for single zones, we need to generate individual files for zones
+            and internal gains
         time_line :[[int]]
             list of time steps
         path : str
-            optional path, when matfile is exported seperately
+            optional path, when matfile is exported separately
         """
-
-        # TODO: calculate from relative to absolut W and pass over exact zone
 
         if path is None:
             path = utilities.get_default_path()
@@ -113,23 +120,19 @@ class Annex60(object):
         utilities.create_path(path)
         path = os.path.join(path, self.file_internal_gains)
 
-        zone_count = self.parent.thermal_zones[-1]
         if time_line is None:
-            duration = len(zone_count.use_conditions.profile_persons) * \
+            duration = len(zone.use_conditions.profile_persons) * \
                         3600
             time_line = self.create_profile(duration_profile=duration)
 
         ass_error_1 = "time line and input have to have the same length"
 
         assert len(time_line)-1 == len(
-            zone_count.use_conditions.profile_persons), \
+            zone.use_conditions.profile_persons), \
             (ass_error_1 + ",profile_persons")
         assert len(time_line)-1 == len(
-            zone_count.use_conditions.profile_machines), \
+            zone.use_conditions.profile_machines), \
             (ass_error_1 + ",profile_machines")
-        assert len(time_line)-1 == len(
-            zone_count.use_conditions.profile_lighting), \
-            (ass_error_1 + ",profile_lighting")
 
         for i, time in enumerate(time_line):
             if i == 0:
@@ -137,9 +140,17 @@ class Annex60(object):
                 time.append(0)
                 time.append(0)
             else:
-                time.append(zone_count.use_conditions.profile_persons[i-1])
-                time.append(zone_count.use_conditions.profile_machines[i-1])
-                time.append(zone_count.use_conditions.profile_lighting[i-1])
+                time.append(zone.use_conditions.profile_persons[i-1] *
+                            zone.use_conditions.persons *
+                            zone.use_conditions.activity_type_persons * 50 *
+                            (1 - zone.use_conditions.ratio_conv_rad_persons))
+                time.append(zone.use_conditions.profile_persons[i - 1] *
+                            zone.use_conditions.persons *
+                            zone.use_conditions.activity_type_persons * 50*
+                            zone.use_conditions.ratio_conv_rad_persons)
+                time.append(zone.use_conditions.profile_machines[i-1] *
+                            zone.use_conditions.machines *
+                            zone.use_conditions.activity_type_machines * 50)
 
         internal_boundary = np.array(time_line)
 

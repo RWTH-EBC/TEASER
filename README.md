@@ -16,7 +16,7 @@ for Energy Efficient Buildings and Indoor Climate](https://www.ebc.eonerc.rwth-a
 The full documentation of TEASER including examples and description of modules,
 classes and functions can be found at the website:
 
- * http://pythonhosted.org/teaser/
+ * http://rwth-ebc.github.io/TEASER/
 
 This GitHub page will be used to further develop the package and make it
 available under the
