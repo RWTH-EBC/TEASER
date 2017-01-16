@@ -467,8 +467,10 @@ class Project(object):
                           "effect on archetype generation for 'iwu', see" \
                           "docs for more information"
 
-        assert method == 'iwu' and number_of_apartments is not None, \
-            ass_error_apart
+
+
+        if method == 'iwu' and number_of_apartments is not None:
+            warnings.warn(ass_error_apart)
 
         if method == 'iwu':
 
@@ -500,7 +502,7 @@ class Project(object):
                                   "'est8a','est8b' is are valid usages for " \
                                   "urbanrenet archetype method"
             assert usage in ['est1a', 'est1b', 'est2', 'est3', 'est4a',
-                             'est4b', 'est5' 'est6', 'est7', 'est8a',
+                             'est4b', 'est5', 'est6', 'est7', 'est8a',
                              'est8b'], ass_error_usage_urn
             if usage == 'est1a':
 

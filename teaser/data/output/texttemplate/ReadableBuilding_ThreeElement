@@ -22,6 +22,7 @@ number of thermal zone.model_attrs = ${len(bldg.thermal_zones)} -
     number of rooftops = ${len(zone.rooftops)}
     number of ground floors = ${len(zone.ground_floors)}
     number of exterior orientations = ${zone.model_attr.n_outer}
+    linearized radiation exchange between walls = ${zone.model_attr.alpha_rad_inner_mean}
 
   * Activity, usage and systems engineering *
 
