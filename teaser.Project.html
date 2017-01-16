@@ -1,0 +1,667 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>TEASER API - Project class &#8212; TEASER 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Archetype Buildings" href="archetypes.html" />
+    <link rel="prev" title="Install TEASER" href="install_teaser.html" /> 
+  </head>
+  <body role="document">
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="archetypes.html" title="Archetype Buildings"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="install_teaser.html" title="Install TEASER"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="install_teaser.html"
+                        title="previous chapter">Install TEASER</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="archetypes.html"
+                        title="next chapter">Archetype Buildings</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Project.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="teaser-api-project-class">
+<h1>TEASER API - Project class<a class="headerlink" href="#teaser-api-project-class" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-teaser.project"></span><p>This module includes the Project class, which serves as an API for a
+TEASER Project</p>
+<dl class="class">
+<dt id="teaser.project.Project">
+<em class="property">class </em><code class="descclassname">teaser.project.</code><code class="descname">Project</code><span class="sig-paren">(</span><em>load_data=True</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Top class for TEASER projects it serves as an API</p>
+<p>The Project class is the top class for all TEASER projects and serves as an
+API for script based interface. It is highly recommended to always
+instantiate the Project class before starting to work with TEASER. It
+contains functions to generate archetype buildings, to export models and to
+save information for later use.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>load_data</strong> : boolean</p>
+<blockquote class="last">
+<div><p>boolean if data bases for materials, type elements and use conditions
+should be loaded (default = True)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>name</td>
+<td>(str) Name of the Project (default is &#8216;Project&#8217;)</td>
+</tr>
+<tr class="row-even"><td>modelica_info</td>
+<td>(instance of ModelicaInfo) TEASER instance of ModelicaInfo to store Modelica related information, like used compiler, runtime, etc.</td>
+</tr>
+<tr class="row-odd"><td>buildings</td>
+<td>(list) List of all buildings in one project, instances of Building()</td>
+</tr>
+<tr class="row-even"><td>data</td>
+<td>(instance of DataClass) TEASER instance of DataClass containing XML binding classes</td>
+</tr>
+<tr class="row-odd"><td>weather_file_path</td>
+<td>(str) Absolute path to weather file used for Modelica simulation. Default weather file can be find in inputdata/weatherdata.</td>
+</tr>
+<tr class="row-even"><td>number_of_elements_calc</td>
+<td>(int) Defines the number of elements, that are aggregated (1, 2, 3 or 4), default is 2</td>
+</tr>
+<tr class="row-odd"><td>merge_windows_calc</td>
+<td>(bool) True for merging the windows into the outer walls, False for separate resistance for window, default is False (only supported for Annex60)</td>
+</tr>
+<tr class="row-even"><td>used_library_calc</td>
+<td>(str) used library (AixLib and Annex60 are supported)</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.project.Project.add_non_residential">
+<code class="descname">add_non_residential</code><span class="sig-paren">(</span><em>method</em>, <em>usage</em>, <em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=True</em>, <em>office_layout=None</em>, <em>window_layout=None</em>, <em>construction_type=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.add_non_residential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a non-residential building to the TEASER project</p>
+<p>This function adds a non-residential archetype building to the TEASER
+project. You need to specify the method of the archetype generation.
+Currently TEASER supports only method according to Lichtmess and BMVBS
+for non-residential buildings. Further the type of usage needs to be
+specified. Currently TEASER supports four different types of
+non-residential buildings (&#8216;office&#8217;, &#8216;institute&#8217;, &#8216;institute4&#8217;,
+&#8216;institute8&#8217;). For more information on specific archetype buildings and
+methods, please read the docs of archetype classes.</p>
+<p>This function also calculates the parameters of the buildings directly
+with the settings set in the project (e.g. used_library_calc or
+number_of_elements_calc).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>method</strong> : str</p>
+<blockquote>
+<div><p>Used archetype method, currenlty only &#8216;bmvbs&#8217; is supported</p>
+</div></blockquote>
+<p><strong>usage</strong> : str</p>
+<blockquote>
+<div><p>Main usage of the obtained building, currently only &#8216;office&#8217;,
+&#8216;institute&#8217;, &#8216;institute4&#8217;, institute8&#8217; are supported</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote>
+<div><p>Individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>Year of first construction</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float [m]</p>
+<blockquote>
+<div><p>Average height of the buildings&#8217; floors</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>Number of building&#8217;s floors above ground</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float [m2]</p>
+<blockquote>
+<div><p>Total net leased area of building. This is area is NOT the
+footprint
+of a building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : Boolean</p>
+<blockquote>
+<div><p>If set to True, an empty instance of BuildingAHU is instantiated
+and
+assigned to attribute central_ahu. This instance holds information
+for central Air Handling units. Default is False.</p>
+</div></blockquote>
+<p><strong>office_layout</strong> : int</p>
+<blockquote>
+<div><p>Structure of the floor plan of office buildings, default is 1,
+which is representative for one elongated floor.</p>
+<blockquote>
+<div><p>1: elongated 1 floor
+2: elongated 2 floors
+3: compact (e.g. for a square base building)</p>
+</div></blockquote>
+</div></blockquote>
+<p><strong>window_layout</strong> : int</p>
+<blockquote>
+<div><p>Structure of the window facade type, default is 1, which is
+representative for a punctuated facade.</p>
+<blockquote>
+<div><p>1: punctuated facade (individual windows)
+2: banner facade (continuous windows)
+3: full glazing</p>
+</div></blockquote>
+</div></blockquote>
+<p><strong>construction_type</strong> : str</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Construction type of used wall constructions default is &#8220;heavy&#8221;)</dt>
+<dd><p class="first last">heavy: heavy construction
+light: light construction</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>type_bldg</strong> : Instance of Office()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.add_residential">
+<code class="descname">add_residential</code><span class="sig-paren">(</span><em>method</em>, <em>usage</em>, <em>name</em>, <em>year_of_construction</em>, <em>number_of_floors</em>, <em>height_of_floors</em>, <em>net_leased_area</em>, <em>with_ahu=False</em>, <em>residential_layout=None</em>, <em>neighbour_buildings=None</em>, <em>attic=None</em>, <em>cellar=None</em>, <em>dormer=None</em>, <em>construction_type=None</em>, <em>number_of_apartments=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.add_residential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a residential building to the TEASER project</p>
+<p>This function adds a residential archetype building to the TEASER
+project. You need to specify the method of the archetype generation.
+Currently TEASER supports only method according &#8216;iwu&#8217; and &#8216;urbanrenet&#8217;
+for residential buildings (&#8216;tabula_de&#8217; to follow soon). Further the
+type
+of usage needs to be specified. Currently TEASER supports one type of
+residential building for &#8216;iwu&#8217; and eleven types for &#8216;urbanrenet&#8217;. For
+more information on specific archetype buildings and methods, please
+read the docs of archetype classes.</p>
+<p>This function also calculates the parameters of the buildings directly
+with the settings set in the project (e.g. used_library_calc or
+number_of_elements_calc).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>method</strong> : str</p>
+<blockquote>
+<div><p>Used archetype method, currenlty only &#8216;iwu&#8217; or &#8216;urbanrenet&#8217; are
+supported, &#8216;tabula_de&#8217; to follow soon</p>
+</div></blockquote>
+<p><strong>usage</strong> : str</p>
+<blockquote>
+<div><p>Main usage of the obtainend building, currently only
+&#8216;single_family_dwelling&#8217; is supported for iwu and &#8216;est1a&#8217;, &#8216;est1b&#8217;,
+&#8216;est2&#8217;, &#8216;est3&#8217;, &#8216;est4a&#8217;, &#8216;est4b&#8217;, &#8216;est5&#8217; &#8216;est6&#8217;, &#8216;est7&#8217;, &#8216;est8a&#8217;,
+&#8216;est8b&#8217; for urbanrenet.</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote>
+<div><p>Individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>Year of first construction</p>
+</div></blockquote>
+<p><strong>height_of_floors</strong> : float [m]</p>
+<blockquote>
+<div><p>Average height of the buildings&#8217; floors</p>
+</div></blockquote>
+<p><strong>number_of_floors</strong> : int</p>
+<blockquote>
+<div><p>Number of building&#8217;s floors above ground</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float [m2]</p>
+<blockquote>
+<div><p>Total net leased area of building. This is area is NOT the
+footprint
+of a building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : Boolean</p>
+<blockquote>
+<div><p>If set to True, an empty instance of BuildingAHU is instantiated
+and
+assigned to attribute central_ahu. This instance holds information
+for central Air Handling units. Default is False.</p>
+</div></blockquote>
+<p><strong>residential_layout</strong> : int</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Structure of floor plan (default = 0) CAUTION only used for iwu</dt>
+<dd><p class="first last">0: compact
+1: elongated/complex</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>neighbour_buildings</strong> : int</p>
+<blockquote>
+<div><p>Number of neighbour buildings. CAUTION: this will not change
+the orientation of the buildings wall, but just the overall
+exterior wall and window area(!) (default = 0)</p>
+<blockquote>
+<div><p>0: no neighbour
+1: one neighbour
+2: two neighbours</p>
+</div></blockquote>
+</div></blockquote>
+<p><strong>attic</strong> : int</p>
+<blockquote>
+<div><p>Design of the attic. CAUTION: this will not change the orientation
+or tilt of the roof instances, but just adapt the roof area(!) (
+default = 0) CAUTION only used for iwu</p>
+<blockquote>
+<div><p>0: flat roof
+1: non heated attic
+2: partly heated attic
+3: heated attic</p>
+</div></blockquote>
+</div></blockquote>
+<p><strong>cellar</strong> : int</p>
+<blockquote>
+<div><p>Design of the of cellar CAUTION: this will not change the
+orientation, tilt of GroundFloor instances, nor the number or area
+of ThermalZones, but will change GroundFloor area(!) (default = 0)
+CAUTION only used for iwu</p>
+<blockquote>
+<div><p>0: no cellar
+1: non heated cellar
+2: partly heated cellar
+3: heated cellar</p>
+</div></blockquote>
+</div></blockquote>
+<p><strong>dormer</strong> : str</p>
+<blockquote>
+<div><p>Is a dormer attached to the roof? CAUTION: this will not
+change roof or window orientation or tilt, but just adapt the roof
+area(!) (default = 0) CAUTION only used for iwu</p>
+<blockquote>
+<div><p>0: no dormer
+1: dormer</p>
+</div></blockquote>
+</div></blockquote>
+<p><strong>construction_type</strong> : str</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Construction type of used wall constructions default is &#8220;heavy&#8221;)</dt>
+<dd><p class="first last">heavy: heavy construction
+light: light construction</p>
+</dd>
+</dl>
+</div></blockquote>
+<p><strong>number_of_apartments</strong> : int</p>
+<blockquote>
+<div><p>number of apartments inside Building (default = 1). CAUTION only
+used for urbanrenet</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>type_bldg</strong> : Instance of SingleFamilyDwelling()</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.calc_all_buildings">
+<code class="descname">calc_all_buildings</code><span class="sig-paren">(</span><em>raise_errors=False</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.calc_all_buildings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates values for all project buildings</p>
+<p>You need to set the following parameters in the Project class.</p>
+<dl class="docutils">
+<dt>number_of_elements_calc</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">int</span><dd>defines the number of elements, that area aggregated, between 1
+and 4, default is 2
+For AixLib you should always use 2 elements!!!</dd>
+<dt>merge_windows_calc</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">bool</span><dd>True for merging the windows into the outer walls, False for
+separate resistance for window, default is False
+For AixLib vdi calculation is True, ebc calculation is False</dd>
+<dt>used_library_calc</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">str</span><dd>used library (AixLib and Annex60 are supported)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.export_aixlib">
+<code class="descname">export_aixlib</code><span class="sig-paren">(</span><em>building_model=None</em>, <em>zone_model=None</em>, <em>corG=None</em>, <em>internal_id=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.export_aixlib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports values to a record file for Modelica simulation</p>
+<p>Exports one (if internal_id is not None) or all buildings for
+AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
+using the ThermalZoneEquipped model with a correction of g-value (
+double pane glazing) and supporting models, like tables and weather
+model. In contrast to versions &lt; 0.5 TEASER now does not
+support any model options, as we observed no need, since single
+ThermalZones are identically with Annex60 models. If you miss one of
+the old options please contact us.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>internal_id</strong> : float</p>
+<blockquote>
+<div><p>setter of a specific building which will be exported, if None then
+all buildings will be exported</p>
+</div></blockquote>
+<p><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in default output path of TEASER,
+an alternative path can be specified as a full path</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.export_annex">
+<code class="descname">export_annex</code><span class="sig-paren">(</span><em>internal_id=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.export_annex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports values to a record file for Modelica simulation</p>
+<p>For Annex 60 Library</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>internal_id</strong> : float</p>
+<blockquote>
+<div><p>setter of a specific building which will be exported, if None then
+all buildings will be exported</p>
+</div></blockquote>
+<p><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in default output path of TEASER,
+an alternative path can be specified as a full path</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.export_parameters_txt">
+<code class="descname">export_parameters_txt</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.export_parameters_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports parameters of all buildings in a readable text file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in OutputData, an alternative
+can be specified</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.load_citygml">
+<code class="descname">load_citygml</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.load_citygml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads buildings from a citygml file</p>
+<p>calls the function load_gml in data.CityGML we make use of CityGML core
+and possibly not all kinds of CityGML modelling techniques are
+supported.</p>
+<p>If the function of the building is given as Residential (1000) or
+Office (1120) the importer directly converts the building to
+archetype buildings. If not, only the citygml geometry is imported and
+you need take care of either the material properties and zoning or you
+may use the _convert_bldg function in citygml_input module.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>full path to a CityGML file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.load_project">
+<code class="descname">load_project</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.load_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the project from a teaserXML file (new format)</p>
+<p>calls the function load_teaser_xml in data.TeaserXML.py</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>full path to a teaserXML file</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.retrofit_all_buildings">
+<code class="descname">retrofit_all_buildings</code><span class="sig-paren">(</span><em>year_of_retrofit</em>, <em>window_type=None</em>, <em>material=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.retrofit_all_buildings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrofits all buildings in the project</p>
+<p>All Buildings in the project are retrofitted in the following manner:</p>
+<ul class="simple">
+<li>replace all windows of the building to retrofitted window according
+to the year of retrofit.</li>
+<li>add an additional insulation layer to all outer walls
+(including roof, and ground floor).
+The thickness of the insulation layer is calculated
+that the U-Value of the wall corresponds to the retrofit standard of
+the year of retrofit.</li>
+</ul>
+<p>The needed parameters for the Modelica Model are calculated
+automatically, using the calculation_method specified in the
+first scenario.</p>
+<p>Note: To Calculate U-Value, the standard TEASER coefficients for outer
+and inner heat transfer are used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>year_of_retrofit</strong> : int</p>
+<blockquote>
+<div><p>the year the buildings are retrofitted</p>
+</div></blockquote>
+<p><strong>window_type</strong> : str</p>
+<blockquote>
+<div><p>Default: EnEv 2014</p>
+</div></blockquote>
+<p><strong>material</strong> : str</p>
+<blockquote class="last">
+<div><p>Default: EPS035</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.save_citygml">
+<code class="descname">save_citygml</code><span class="sig-paren">(</span><em>file_name=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.save_citygml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the project to a CityGML file</p>
+<p>calls the function save_gml in data.CityGML we make use of CityGML core
+and EnergyADE to store semantic information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>file_name</strong> : string</p>
+<blockquote>
+<div><p>name of the new file</p>
+</div></blockquote>
+<p><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in OutputData, an alternative
+can be specified</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.save_project">
+<code class="descname">save_project</code><span class="sig-paren">(</span><em>file_name=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.save_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saves the project to a tXML file</p>
+<p>calls the function save_teaser_xml in data.TeaserXML.py</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>file_name</strong> : string</p>
+<blockquote>
+<div><p>name of the new file</p>
+</div></blockquote>
+<p><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in OutputData, an alternative
+can be specified</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.project.Project.set_default">
+<code class="descname">set_default</code><span class="sig-paren">(</span><em>load_data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.project.Project.set_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets all attributes to default</p>
+<p>Caution: this will delete all buildings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>load_data</strong> : boolean, None-type</p>
+<blockquote class="last">
+<div><p>boolean if data bindings for type elements and use conditions
+should be loaded (default = True), in addition it could be a None-
+type to use the already used data bindings</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="archetypes.html" title="Archetype Buildings"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="install_teaser.html" title="Install TEASER"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

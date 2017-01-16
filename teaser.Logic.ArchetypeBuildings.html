@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>archetypebuildings &#8212; TEASER 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="bmvbs" href="teaser.Logic.ArchetypeBuildings.bmvbs.html" />
+    <link rel="prev" title="Calculation" href="teaser.Logic.BuildingObjects.Calculation.html" /> 
+  </head>
+  <body role="document">
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.ArchetypeBuildings.bmvbs.html" title="bmvbs"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.Calculation.html" title="Calculation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" accesskey="U">logic</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">archetypebuildings</a><ul>
+<li><a class="reference internal" href="#module-teaser.logic.archetypebuildings.residential">residential</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.archetypebuildings.nonresidential">nonresidential</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.Calculation.html"
+                        title="previous chapter">Calculation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Logic.ArchetypeBuildings.bmvbs.html"
+                        title="next chapter">bmvbs</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Logic.ArchetypeBuildings.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="archetypebuildings">
+<h1>archetypebuildings<a class="headerlink" href="#archetypebuildings" title="Permalink to this headline">¶</a></h1>
+<p>All new archetype buildings should inherit from either residential or
+nonresidential buildings:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.bmvbs.html">bmvbs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="teaser.Logic.ArchetypeBuildings.urbanrenet.html">urbanrenet</a></li>
+</ul>
+</div>
+<div class="section" id="module-teaser.logic.archetypebuildings.residential">
+<span id="residential"></span><h2>residential<a class="headerlink" href="#module-teaser.logic.archetypebuildings.residential" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.archetypebuildings.residential.Residential">
+<em class="property">class </em><code class="descclassname">teaser.logic.archetypebuildings.residential.</code><code class="descname">Residential</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>year_of_construction</em>, <em>net_leased_area</em>, <em>with_ahu=False</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.residential.Residential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building" title="teaser.logic.buildingobjects.building.Building"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.building.Building</span></code></a></p>
+<p>Base class for each residential archetype.</p>
+<p>This is the base class for all residential archetype buildings (BMVBS,
+UrbanReNet, Tabula, etc.). It is a subclass of Building and introduces
+several parameters to be obligatory (parent, name, year_of_construction,
+net_leased_area)</p>
+<p>Please use this class to create new archetype methodologies.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Project()</strong></p>
+<blockquote>
+<div><p>The parent class of this object, the Project the Building belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this Building instance to Project.buildings.
+(default: None)</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote>
+<div><p>Individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>Year of first construction</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float [m2]</p>
+<blockquote>
+<div><p>Total net leased area of building. This is area is NOT the footprint
+of a building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : Boolean</p>
+<blockquote class="last">
+<div><p>If set to True, an empty instance of BuildingAHU is instantiated and
+assigned to attribute central_ahu. This instance holds information for
+central Air Handling units. Default is False.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>central_ahu</td>
+<td>(instance of BuildingAHU) Teaser Instance of BuildingAHU if a central AHU is embedded into the building (currently mostly needed for AixLib simulation).</td>
+</tr>
+<tr class="row-even"><td>number_of_floors</td>
+<td>(int) number of floors above ground (default: None)</td>
+</tr>
+<tr class="row-odd"><td>height_of_floors</td>
+<td>(float [m]) Average height of the floors (default: None)</td>
+</tr>
+<tr class="row-even"><td>internal_id</td>
+<td>(float) Random id for the distinction between different buildings.</td>
+</tr>
+<tr class="row-odd"><td>year_of_retrofit</td>
+<td>(int) Year of last retrofit.</td>
+</tr>
+<tr class="row-even"><td>type_of_building</td>
+<td>(string) Type of a Building (e.g. Building (unspecified), Office etc.).</td>
+</tr>
+<tr class="row-odd"><td>building_id</td>
+<td>(None) ID of building, can be set by the user to keep track of a building even outside of TEASER, e.g. in a simulation or in post-processing. This is not the same as internal_id, as internal_id is e.g. not exported to Modelica models!</td>
+</tr>
+<tr class="row-even"><td>street_name</td>
+<td>(string) Name of the street the building is located at. (optional)</td>
+</tr>
+<tr class="row-odd"><td>city</td>
+<td>(string) Name of the city the building is located at. (optional)</td>
+</tr>
+<tr class="row-even"><td>longitude</td>
+<td>(float [degree]) Longitude of building location.</td>
+</tr>
+<tr class="row-odd"><td>latitude</td>
+<td>(float [degree]) Latitude of building location.</td>
+</tr>
+<tr class="row-even"><td>thermal_zones</td>
+<td>(list) List with instances of ThermalZone(), that are located in this building.</td>
+</tr>
+<tr class="row-odd"><td>gml_surfaces</td>
+<td>(list) List of all containing surfaces described by CityGML, the list should be filled with SurfaceGML class from Data.Input.citygml_input. This list is only used if this instance of a building was instantiated the CityGML Loader module.</td>
+</tr>
+<tr class="row-even"><td>outer_area</td>
+<td>(dict [degree: m2]) Dictionary with orientation as key and sum of outer wall areas of that direction as value.</td>
+</tr>
+<tr class="row-odd"><td>window_area</td>
+<td>(dict [degree: m2]) Dictionary with orientation as key and sum of window areas of that direction as value.</td>
+</tr>
+<tr class="row-even"><td>bldg_height</td>
+<td>(float [m]) Total building height.</td>
+</tr>
+<tr class="row-odd"><td>volume</td>
+<td>(float [m3]) Total volume of all thermal zones.</td>
+</tr>
+<tr class="row-even"><td>sum_heat_load</td>
+<td>(float [W]) Total heating load of all thermal zones.</td>
+</tr>
+<tr class="row-odd"><td>sum_cooling_load</td>
+<td>(float [W]) Total heating load of all thermal zones. (currently not supported)</td>
+</tr>
+<tr class="row-even"><td>number_of_elements_calc</td>
+<td>(int) Number of elements that are used for thermal zone calculation in this building. 1: OneElement 2: TwoElement 3: ThreeElement 4: FourElement</td>
+</tr>
+<tr class="row-odd"><td>merge_windows_calc</td>
+<td>(boolean) True for merging the windows into the outer wall&#8217;s RC-combination, False for separate resistance for window, default is False</td>
+</tr>
+<tr class="row-even"><td>used_library_calc</td>
+<td>(str) &#8216;AixLib&#8217; for <a class="reference external" href="https://github.com/RWTH-EBC/AixLib">https://github.com/RWTH-EBC/AixLib</a> &#8216;Annex60&#8217; for <a class="reference external" href="https://github.com/iea-annex60/modelica-annex60">https://github.com/iea-annex60/modelica-annex60</a></td>
+</tr>
+<tr class="row-odd"><td>library_attr</td>
+<td>(Annex() or AixLib() instance) Classes with specific functions and attributes for building models in Annex60 and AixLib. Python classes can be found in calculation package.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.archetypebuildings.residential.Residential.generate_archetype">
+<code class="descname">generate_archetype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.residential.Residential.generate_archetype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an archetype building.</p>
+<p>If you want to define you own archetype methodology please use this
+function call to do so.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.logic.archetypebuildings.nonresidential">
+<span id="nonresidential"></span><h2>nonresidential<a class="headerlink" href="#module-teaser.logic.archetypebuildings.nonresidential" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.archetypebuildings.nonresidential.NonResidential">
+<em class="property">class </em><code class="descclassname">teaser.logic.archetypebuildings.nonresidential.</code><code class="descname">NonResidential</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>year_of_construction</em>, <em>net_leased_area</em>, <em>with_ahu=False</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.nonresidential.NonResidential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="teaser.Logic.BuildingObjects.Building.html#teaser.logic.buildingobjects.building.Building" title="teaser.logic.buildingobjects.building.Building"><code class="xref py py-class docutils literal"><span class="pre">teaser.logic.buildingobjects.building.Building</span></code></a></p>
+<p>Base class for each non-residential archetype.</p>
+<p>This is the base class for all non-residential archetype buildings (BMVBS,
+UrbanReNet, Tabula, etc.). It is a subclass of Building and introduces
+several parameters to be obligatory (parent, name, year_of_construction,
+net_leased_area).</p>
+<p>Please use this class to create new archetype methodologies.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Project()</strong></p>
+<blockquote>
+<div><p>The parent class of this object, the Project the Building belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this Building instance to Project.buildings.
+(default: None)</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote>
+<div><p>Individual name</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>Year of first construction</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float [m2]</p>
+<blockquote>
+<div><p>Total net leased area of building. This is area is NOT the footprint
+of a building</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : Boolean</p>
+<blockquote class="last">
+<div><p>If set to True, an empty instance of BuildingAHU is instantiated and
+assigned to attribute central_ahu. This instance holds information for
+central Air Handling units. Default is False.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>central_ahu</td>
+<td>(instance of BuildingAHU) Teaser Instance of BuildingAHU if a central AHU is embedded into the building (currently mostly needed for AixLib simulation).</td>
+</tr>
+<tr class="row-even"><td>number_of_floors</td>
+<td>(int) number of floors above ground (default: None)</td>
+</tr>
+<tr class="row-odd"><td>height_of_floors</td>
+<td>(float [m]) Average height of the floors (default: None)</td>
+</tr>
+<tr class="row-even"><td>internal_id</td>
+<td>(float) Random id for the distinction between different buildings.</td>
+</tr>
+<tr class="row-odd"><td>year_of_retrofit</td>
+<td>(int) Year of last retrofit.</td>
+</tr>
+<tr class="row-even"><td>type_of_building</td>
+<td>(string) Type of a Building (e.g. Building (unspecified), Office etc.).</td>
+</tr>
+<tr class="row-odd"><td>building_id</td>
+<td>(None) ID of building, can be set by the user to keep track of a building even outside of TEASER, e.g. in a simulation or in post-processing. This is not the same as internal_id, as internal_id is e.g. not exported to Modelica models!</td>
+</tr>
+<tr class="row-even"><td>street_name</td>
+<td>(string) Name of the street the building is located at. (optional)</td>
+</tr>
+<tr class="row-odd"><td>city</td>
+<td>(string) Name of the city the building is located at. (optional)</td>
+</tr>
+<tr class="row-even"><td>longitude</td>
+<td>(float [degree]) Longitude of building location.</td>
+</tr>
+<tr class="row-odd"><td>latitude</td>
+<td>(float [degree]) Latitude of building location.</td>
+</tr>
+<tr class="row-even"><td>thermal_zones</td>
+<td>(list) List with instances of ThermalZone(), that are located in this building.</td>
+</tr>
+<tr class="row-odd"><td>gml_surfaces</td>
+<td>(list) List of all containing surfaces described by CityGML, the list should be filled with SurfaceGML class from Data.Input.citygml_input. This list is only used if this instance of a building was instantiated the CityGML Loader module.</td>
+</tr>
+<tr class="row-even"><td>outer_area</td>
+<td>(dict [degree: m2]) Dictionary with orientation as key and sum of outer wall areas of that direction as value.</td>
+</tr>
+<tr class="row-odd"><td>window_area</td>
+<td>(dict [degree: m2]) Dictionary with orientation as key and sum of window areas of that direction as value.</td>
+</tr>
+<tr class="row-even"><td>bldg_height</td>
+<td>(float [m]) Total building height.</td>
+</tr>
+<tr class="row-odd"><td>volume</td>
+<td>(float [m3]) Total volume of all thermal zones.</td>
+</tr>
+<tr class="row-even"><td>sum_heat_load</td>
+<td>(float [W]) Total heating load of all thermal zones.</td>
+</tr>
+<tr class="row-odd"><td>sum_cooling_load</td>
+<td>(float [W]) Total heating load of all thermal zones. (currently not supported)</td>
+</tr>
+<tr class="row-even"><td>number_of_elements_calc</td>
+<td>(int) Number of elements that are used for thermal zone calculation in this building. 1: OneElement 2: TwoElement 3: ThreeElement 4: FourElement</td>
+</tr>
+<tr class="row-odd"><td>merge_windows_calc</td>
+<td>(boolean) True for merging the windows into the outer wall&#8217;s RC-combination, False for separate resistance for window, default is False</td>
+</tr>
+<tr class="row-even"><td>used_library_calc</td>
+<td>(str) &#8216;AixLib&#8217; for <a class="reference external" href="https://github.com/RWTH-EBC/AixLib">https://github.com/RWTH-EBC/AixLib</a> &#8216;Annex60&#8217; for <a class="reference external" href="https://github.com/iea-annex60/modelica-annex60">https://github.com/iea-annex60/modelica-annex60</a></td>
+</tr>
+<tr class="row-odd"><td>library_attr</td>
+<td>(Annex() or AixLib() instance) Classes with specific functions and attributes for building models in Annex60 and AixLib. Python classes can be found in calculation package.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.archetypebuildings.nonresidential.NonResidential.generate_archetype">
+<code class="descname">generate_archetype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.archetypebuildings.nonresidential.NonResidential.generate_archetype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates an archetype building.</p>
+<p>If you want to define you own archetype methodology please use this
+function call to do so.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.ArchetypeBuildings.bmvbs.html" title="bmvbs"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.Calculation.html" title="Calculation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>buildingsystems &#8212; TEASER 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Calculation" href="teaser.Logic.BuildingObjects.Calculation.html" />
+    <link rel="prev" title="buildingphysics" href="teaser.Logic.BuildingObjects.BuildingPhysics.html" /> 
+  </head>
+  <body role="document">
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.Calculation.html" title="Calculation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.BuildingPhysics.html" title="buildingphysics"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" accesskey="U">buildingobjects</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">buildingsystems</a><ul>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.buildingsystems.buildingahu">BuildingAHU</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.BuildingPhysics.html"
+                        title="previous chapter">buildingphysics</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.Calculation.html"
+                        title="next chapter">Calculation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Logic.BuildingObjects.BuildingSystems.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="buildingsystems">
+<h1>buildingsystems<a class="headerlink" href="#buildingsystems" title="Permalink to this headline">¶</a></h1>
+<p>More content to come :)</p>
+<div class="section" id="module-teaser.logic.buildingobjects.buildingsystems.buildingahu">
+<span id="buildingahu"></span><h2>BuildingAHU<a class="headerlink" href="#module-teaser.logic.buildingobjects.buildingsystems.buildingahu" title="Permalink to this headline">¶</a></h2>
+<p>This module includes a class for central AHU</p>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.buildingsystems.buildingahu.BuildingAHU">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.buildingsystems.buildingahu.</code><code class="descname">BuildingAHU</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.buildingsystems.buildingahu.BuildingAHU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>BuildingAHU Class</p>
+<p>This class holds information for a central Air Handling Unit (AHU). This
+class is very AixLib specific and holds some parameters that are only
+applicable to AixLib Central AHU model. If you are using other models
+these values might have no effect.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Building()</strong></p>
+<blockquote class="last">
+<div><p>The parent class of this object, the Building the AHU belongs to.
+Allows for better control of hierarchical structures.
+(default: None)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>heating</td>
+<td>(boolean) Heating Function of AHU (default = True)</td>
+</tr>
+<tr class="row-even"><td>cooling</td>
+<td>(boolean) Cooling Function of AHU (default = True)</td>
+</tr>
+<tr class="row-odd"><td>dehumidification</td>
+<td>(boolean) Dehumidification Function of AHU (Cooling and Heating must be enabled) (default = True)</td>
+</tr>
+<tr class="row-even"><td>humidification</td>
+<td>(boolean) Humidification Function of AHU (Cooling and Heating must be enabled) (default = True)</td>
+</tr>
+<tr class="row-odd"><td>heat_recovery</td>
+<td>(boolean) Is a HeatRecoverySystem physically integrated in the AHU AixLib: &#8216;HRS&#8217; (default = True)</td>
+</tr>
+<tr class="row-even"><td>by_pass_dehumidification</td>
+<td>(float) By-pass factor of cooling coil during dehumidification. Necessary to calculate the real outgoing enthalpy flow of heat exchanger in dehumidification mode taking the surface enthalpy of the cooling coil into account. In AixLib called &#8220;BPF_DeHu&#8221; (default = 0.2)</td>
+</tr>
+<tr class="row-odd"><td>efficiency_recovery</td>
+<td>(float) efficiency of HRS in the AHU modes if HRS is enabled. AixLib: &#8220;efficiencyHRS_enabled&#8221; (default = 0.8)</td>
+</tr>
+<tr class="row-even"><td>efficiency_revocery_false</td>
+<td>(float) taking a little heat transfer into account although HRS is disabled (in case that a HRS is physically installed in the AHU) in AixLib: &#8220;efficiencyHRS_disabled&#8221; (default = 0.2)</td>
+</tr>
+<tr class="row-odd"><td>sample_rate</td>
+<td>(int) sample rate of state machines in AHU model. Default is set to half an hour as typical input is hourly (default = 1800)</td>
+</tr>
+<tr class="row-even"><td>efficiency_fan_supply</td>
+<td>(float) Efficiency of supply fan (default = 0.7)</td>
+</tr>
+<tr class="row-odd"><td>efficiency_fan_return: float</td>
+<td>Efficiency of return fan (default = 0.7)</td>
+</tr>
+<tr class="row-even"><td>pressure_drop_fan_supply: float (default 800)</td>
+<td>Pressure drop assigned to supply fan in Pascal</td>
+</tr>
+<tr class="row-odd"><td>pressure_drop_fan_return: float (default 800)</td>
+<td>Pressure drop assigned to return fan in Pascal</td>
+</tr>
+<tr class="row-even"><td>profile_temperature</td>
+<td>([float]) timeline of temperatures requirements for AHU simulation</td>
+</tr>
+<tr class="row-odd"><td>profile_min_relative_humidity</td>
+<td>([float]) timeline of relative humidity requirements for AHU simulation</td>
+</tr>
+<tr class="row-even"><td>profile_max_relative_humidity</td>
+<td>([float]) timeline of relative humidity requirements for AHU simulation</td>
+</tr>
+<tr class="row-odd"><td>profile_v_flow</td>
+<td>([int]) timeline of desired relative v_flow of the AHU simulation (0..1)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.Calculation.html" title="Calculation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.BuildingPhysics.html" title="buildingphysics"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" >buildingobjects</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

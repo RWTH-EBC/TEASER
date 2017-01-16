@@ -1,0 +1,1694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Calculation &#8212; TEASER 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="archetypebuildings" href="teaser.Logic.ArchetypeBuildings.html" />
+    <link rel="prev" title="buildingsystems" href="teaser.Logic.BuildingObjects.BuildingSystems.html" /> 
+  </head>
+  <body role="document">
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.ArchetypeBuildings.html" title="archetypebuildings"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.BuildingSystems.html" title="buildingsystems"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" accesskey="U">buildingobjects</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Calculation</a><ul>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.calculation.aixlib">AixLib specific building class</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.calculation.annex60">Annex specific building class</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.calculation.one_element">One element model calculation</a></li>
+<li><a class="reference internal" href="#module-teaser.logic.buildingobjects.calculation.two_element">Two element model calculation</a></li>
+<li><a class="reference internal" href="#three-element-model-calculation">Three element model calculation</a></li>
+<li><a class="reference internal" href="#id1">One element model calculation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.BuildingSystems.html"
+                        title="previous chapter">buildingsystems</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Logic.ArchetypeBuildings.html"
+                        title="next chapter">archetypebuildings</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Logic.BuildingObjects.Calculation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="calculation">
+<h1>Calculation<a class="headerlink" href="#calculation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-teaser.logic.buildingobjects.calculation.aixlib">
+<span id="aixlib-specific-building-class"></span><h2>AixLib specific building class<a class="headerlink" href="#module-teaser.logic.buildingobjects.calculation.aixlib" title="Permalink to this headline">¶</a></h2>
+<p>This module includes AixLib calculation class</p>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.calculation.aixlib.AixLib">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.calculation.aixlib.</code><code class="descname">AixLib</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.aixlib.AixLib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>AixLib Class</p>
+<p>This class holds functions to sort and partly rewrite zone and building
+attributes specific for AixLib MultizoneEquipped
+simulation. This includes the export of boundary conditions and AHU
+operation values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Building()</strong></p>
+<blockquote class="last">
+<div><p>The parent class of this object, the Building the attributes are
+calculated for. (default: None)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>file_set_t</td>
+<td>(str) Filename for set temperature file</td>
+</tr>
+<tr class="row-even"><td>file_ahu</td>
+<td>(str) Filename for AHU boundary conditions file</td>
+</tr>
+<tr class="row-odd"><td>file_intern_gains:</td>
+<td>Filename for internal gains file</td>
+</tr>
+<tr class="row-even"><td>version</td>
+<td>(str) Used AixLib version, default should always be current master version of GitHub</td>
+</tr>
+<tr class="row-odd"><td>total_surface_area</td>
+<td>(float [m2]) This is the total surface area of the building for interior and exterior surfaces. That includes: OuterWalls, Rooftops, GroundFloors, Windows for exterior surfaces, and InnerWalls, Ceilings, Floors for interior walls.</td>
+</tr>
+<tr class="row-even"><td>consider_heat_capacity</td>
+<td>(bool) decides whether air capacity is considered or not for all thermal zones in the building. Default is True, you need to export your model again if changing this value</td>
+</tr>
+<tr class="row-odd"><td>use_set_back</td>
+<td>(bool) True if night set back should be used. In this case the function considers heating_time and temp_set_back defined in use_conditions of zone. Default is True, you need to export your model again if changing this value</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.aixlib.AixLib.calc_auxiliary_attr">
+<code class="descname">calc_auxiliary_attr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.aixlib.AixLib.calc_auxiliary_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls function to calculate all auxiliary attributes for AixLib</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="teaser.logic.buildingobjects.calculation.aixlib.AixLib.create_profile">
+<em class="property">static </em><code class="descname">create_profile</code><span class="sig-paren">(</span><em>duration_profile=86400</em>, <em>time_step=3600</em>, <em>double=False</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.aixlib.AixLib.create_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a profile for building boundary conditions</p>
+<p>This function creates a list with an equidistant profile given the
+duration of the profile in seconds (default one day, 86400 s) and the
+time_step in seconds (default one hour, 3600 s). Needed for boundary
+input of the building for Modelica simulation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>duration_profile</strong> : int</p>
+<blockquote>
+<div><p>duration of the profile in seconds (default one day, 86400 s)</p>
+</div></blockquote>
+<p><strong>time_step</strong> : int</p>
+<blockquote>
+<div><p>time step used in the profile in seconds (default one hour, 3600 s)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time_line</strong> : [[int]]</p>
+<blockquote class="last">
+<div><p>list of time steps as preparation for the output of boundary
+conditions</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_AHU_boundary">
+<code class="descname">modelica_AHU_boundary</code><span class="sig-paren">(</span><em>time_line=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_AHU_boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates .mat file for AHU boundary conditions (building)</p>
+<p>This function creates a matfile (-v4) for building AHU boundary
+conditions</p>
+<ol class="arabic simple">
+<li>Column : time step</li>
+<li>Column : desired AHU profile temperature</li>
+<li>Column : Desired minimal relative humidity</li>
+<li>Column : desired maximal relative humidity</li>
+<li>Column : AHU status (On/Off)</li>
+</ol>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time_line :[[int]]</strong></p>
+<blockquote>
+<div><p>list of time steps</p>
+</div></blockquote>
+<p><strong>path</strong> : str</p>
+<blockquote class="last">
+<div><p>optional path, when matfile is exported seperately</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>profile_temperature</td>
+<td>([float]) timeline of temperatures requirements for AHU simulation</td>
+</tr>
+<tr class="row-even"><td>profile_min_relative_humidity</td>
+<td>([float]) timeline of relative humidity requirements for AHU simulation</td>
+</tr>
+<tr class="row-odd"><td>profile_max_relative_humidity</td>
+<td>([float]) timeline of relative humidity requirements for AHU simulation</td>
+</tr>
+<tr class="row-even"><td>profile_v_flow</td>
+<td>([int]) timeline of desired relative v_flow of the AHU simulation (0..1)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_gains_boundary">
+<code class="descname">modelica_gains_boundary</code><span class="sig-paren">(</span><em>time_line=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_gains_boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates .mat file for internal gains boundary conditions</p>
+<p>This function creates a matfile (-v4) for building internal gains
+boundary conditions. It collects all internal gain profiles of the
+zones and stores them into one file. The file is extended for each
+zone. Only applicable if zones are defined</p>
+<p>1. Column : time step
+2,5,8,...  Column : profile_persons
+3,6,9,...  Column : profile_machines
+4,7,10,... Column : profile_lighting</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time_line :[[int]]</strong></p>
+<blockquote>
+<div><p>list of time steps</p>
+</div></blockquote>
+<p><strong>path</strong> : str</p>
+<blockquote class="last">
+<div><p>optional path, when matfile is exported seperately</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_set_temp">
+<code class="descname">modelica_set_temp</code><span class="sig-paren">(</span><em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.aixlib.AixLib.modelica_set_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates .mat file for set temperatures</p>
+<p>This function creates a matfile (-v4) for set temperatures of each
+zone, that are all saved into one matrix.</p>
+<ol class="arabic simple">
+<li>Row: heat set temperature of all zones</li>
+<li>Row: cool set temperature of all zones</li>
+</ol>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : str</p>
+<blockquote class="last">
+<div><p>optional path, when matfile is exported separately</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.logic.buildingobjects.calculation.annex60">
+<span id="annex-specific-building-class"></span><h2>Annex specific building class<a class="headerlink" href="#module-teaser.logic.buildingobjects.calculation.annex60" title="Permalink to this headline">¶</a></h2>
+<p>This module includes Annex60 calcuation class</p>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.calculation.annex60.Annex60">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.calculation.annex60.</code><code class="descname">Annex60</code><span class="sig-paren">(</span><em>parent</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.annex60.Annex60" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Annex60 Class</p>
+<p>This class holds functions to sort and partly rewrite zone and building
+attributes specific for Annex60 simulation. This includes the export of
+boundary coniditons.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Building()</strong></p>
+<blockquote>
+<div><p>The parent class of this object, the Building the attributes are
+calculated for. (default: None)</p>
+</div></blockquote>
+<p><strong>consider_heat_capacity</strong> : bool</p>
+<blockquote class="last">
+<div><p>decides whether air capacity is considered or not for all thermal
+zones in the building</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="staticmethod">
+<dt id="teaser.logic.buildingobjects.calculation.annex60.Annex60.create_profile">
+<em class="property">static </em><code class="descname">create_profile</code><span class="sig-paren">(</span><em>duration_profile=86400</em>, <em>time_step=3600</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.annex60.Annex60.create_profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a profile for building boundary conditions</p>
+<p>This function creates a list with an equidistant profile given the
+duration of the profile in seconds (default one day, 86400 s) and the
+time_step in seconds (default one hour, 3600 s). Needed for boundary
+input of the building for Modelica simulation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>duration_profile</strong> : int</p>
+<blockquote>
+<div><p>duration of the profile in seconds (default one day, 86400 s)</p>
+</div></blockquote>
+<p><strong>time_step</strong> : int</p>
+<blockquote>
+<div><p>time step used in the profile in seconds (default one hour, 3600 s)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>time_line</strong> : [[int]]</p>
+<blockquote class="last">
+<div><p>list of time steps as preparation for the output of boundary
+conditions</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.annex60.Annex60.modelica_gains_boundary">
+<code class="descname">modelica_gains_boundary</code><span class="sig-paren">(</span><em>time_line=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.annex60.Annex60.modelica_gains_boundary" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates .mat file for internal gains boundary conditions</p>
+<p>This function creates a matfile (-v4) for building internal gains
+boundary conditions. It collects all internal gain profiles of the
+zones and stores them into one file. The file is extended for each
+zone. Only applicable if zones are defined</p>
+<p>1. Column : time step
+2,5,8,...  Column : profile_persons
+3,6,9,...  Column : profile_machines
+4,7,10,... Column : profile_lighting</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time_line :[[int]]</strong></p>
+<blockquote>
+<div><p>list of time steps</p>
+</div></blockquote>
+<p><strong>path</strong> : str</p>
+<blockquote class="last">
+<div><p>optional path, when matfile is exported seperately</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.logic.buildingobjects.calculation.one_element">
+<span id="one-element-model-calculation"></span><h2>One element model calculation<a class="headerlink" href="#module-teaser.logic.buildingobjects.calculation.one_element" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.calculation.one_element.OneElement">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.calculation.one_element.</code><code class="descname">OneElement</code><span class="sig-paren">(</span><em>thermal_zone</em>, <em>merge_windows</em>, <em>t_bt</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.one_element.OneElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class contains attributes and functions for one element model</p>
+<p>his model merges all thermal masses into one element, parameterized by the
+length of the RC-chain nExt, the vector of the capacities CExt[nExt] that
+is connected via the vector of resistances RExt[nExt] and RExtRem to the
+ambient and indoor air. By default, the model neglects all internal thermal
+masses that are not directly connected to the ambient.</p>
+<p>It treats Rooftops, GroundFloors and OuterWalls as one type of outer
+walls and computes one RC-combination for these types.</p>
+<p>Depending on the chosen method it will consider an extra resistance for
+windows or merge all windows into the RC-Combination for outer walls.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>thermal_zone: ThermalZone()</strong></p>
+<blockquote>
+<div><p>TEASER instance of ThermalZone</p>
+</div></blockquote>
+<p><strong>merge_windows</strong> : boolean</p>
+<blockquote>
+<div><p>True for merging the windows into the outer wall&#8217;s RC-combination,
+False for separate resistance for window, default is False. (Only
+supported for Annex60)</p>
+</div></blockquote>
+<p><strong>t_bt</strong> : float [d]</p>
+<blockquote class="last">
+<div><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Outer Walls (OuterWall, Rooftop, GroundFloor)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>area_ow</td>
+<td>(float [m2]) Area of all outer walls.</td>
+</tr>
+<tr class="row-odd"><td>n_outer</td>
+<td>(int) Number of total outer walls with different combination of tilt and orientation, including Rooftops and GroundFloors</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of outer walls facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of outer walls facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of outer walls facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>ua_value_ow</td>
+<td>(float [W/K]) U-Value times outer wall area.</td>
+</tr>
+<tr class="row-odd"><td>r_conv_inner_ow</td>
+<td>(float [K/W]) Sum of convective resistances for all outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_rad_inner_ow</td>
+<td>(float [K/W]) Sum of radiative resistances for all outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_comb_inner_ow</td>
+<td>(float [K/W]) Sum of combined resistances for all outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_conv_outer_ow</td>
+<td>(float [K/W]) Sum of convective resistances for all outer walls facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_outer_ow</td>
+<td>(float [K/W]) Sum of radiative resistances for all outer walls facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>r_comb_outer_ow</td>
+<td>(float [K/W]) Sum of combined resistances for all outer walls facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r1_ow</td>
+<td>(float [K/W]) Lumped resistance of outer walls no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-even"><td>r_rest_ow</td>
+<td>(float [K/W]) Lumped remaining resistance of outer walls between r1_ow and c1_ow no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-odd"><td>c1_ow</td>
+<td>(float [J/K]) Lumped capacity of outer walls.</td>
+</tr>
+<tr class="row-even"><td>weightfactor_ow</td>
+<td>(list of floats) Weightfactors of outer walls (UA-Value of walls with same orientation and tilt divided by ua_value_ow)</td>
+</tr>
+<tr class="row-odd"><td>weightfactor_ground</td>
+<td>(list of floats) Weightfactors of groundfloors (UA-Value of groundfloor divided by ua_value_ow).</td>
+</tr>
+<tr class="row-even"><td>tilt_facade</td>
+<td>(list of floats [degree]) Tilt of outer walls against the horizontal.</td>
+</tr>
+<tr class="row-odd"><td>orientation_facade</td>
+<td>(list of floats [degree]) Orientation of outer walls (Azimuth). 0 - North 90 - East 180 - South 270 - West</td>
+</tr>
+<tr class="row-even"><td>outer_wall_areas</td>
+<td>(list of floats [m2]) Area of all outer walls in one list.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_ow_iw</td>
+<td>(float [K/W]) Resistance for radiative heat transfer between walls. TODO: needs to be checked</td>
+</tr>
+<tr class="row-even"><td>ir_emissivity_outer_ow</td>
+<td>(float) Area-weighted ir emissivity of outer wall facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>ir_emissivity_inner_ow</td>
+<td>(float) Area-weighted ir emissivity of outer walls facing the thermal zone.</td>
+</tr>
+<tr class="row-even"><td>solar_absorp_ow</td>
+<td>(float) Area-weighted solar absorption of outer walls facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>Windows</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>area_win</td>
+<td>(float [m2]) Area of all windows.</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>ratio_conv_rad_inner_win</td>
+<td>(float [-]) Ratio for windows between convective and radiative heat emission, given in VDI 6007-3</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>ua_value_win</td>
+<td>(float [W/K]) U-Value times outer wall area.</td>
+</tr>
+<tr class="row-odd"><td>r_conv_inner_win</td>
+<td>(float [K/W]) Sum of convective resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_rad_inner_win</td>
+<td>(float [K/W]) Sum of radiative resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_comb_inner_win</td>
+<td>(float [K/W]) Sum of combined resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_conv_outer_win</td>
+<td>(float [K/W]) Sum of convective resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_outer_win</td>
+<td>(float [K/W]) Sum of radiative resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>r_comb_outer_win</td>
+<td>(float [K/W]) Sum of combined resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r1_win</td>
+<td>(float [K/W]) Lumped resistance of windows, no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-even"><td>weightfactor_win</td>
+<td>(list of floats) Weightfactors of windows (UA-Value of windows with same orientation and tilt divided by ua_value_win or ua_value_win+ua_value_ow, depending if windows is lumped/merged into the walls or not)</td>
+</tr>
+<tr class="row-odd"><td>window_areas</td>
+<td>(list of floats [m2]) Area of all windows in one list, if the windows are merged into the outer wall this list will be full of zeros</td>
+</tr>
+<tr class="row-even"><td>transparent_areas</td>
+<td>(list of floats [m2]) Area of all transparent elements (most likely windows) in one list, this list will be always filled with the areas, independent if windows are merged into walls or not.</td>
+</tr>
+<tr class="row-odd"><td>solar_absorp_win</td>
+<td>(float) Area-weighted solar absorption for windows. (typically 0.0)</td>
+</tr>
+<tr class="row-even"><td>ir_emissivity_win</td>
+<td>(float) Area-weighted ir_emissivity for windows. Can be used for windows facing the thermal zone and the ambient.</td>
+</tr>
+<tr class="row-odd"><td>weighted_g_value</td>
+<td>(float) Area-weighted g-Value of all windows.</td>
+</tr>
+<tr class="row-even"><td>g_sunblind</td>
+<td>(list of floats) G-Value of all sunblinds of each window in a list</td>
+</tr>
+<tr class="row-odd"><td>Misc values:</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_inner_mean</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of all surfaces facing the inside of this thermal zone (OuterWalls, Windows, InnerWalls, ...).</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_outer_mean</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of all surfaces facing the ambient (OuterWalls, Windows, ...).</td>
+</tr>
+<tr class="row-even"><td>heat_load</td>
+<td>([W]) Static heat load of the thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>facade_areas</td>
+<td>(list of floats [m2]) List containing the area of each facade (with same tilt and orientation) this includes also roofs and ground floors and windows.</td>
+</tr>
+<tr class="row-even"><td>n_outer</td>
+<td>(int) Number of total facades with different combination of tilt and orientation, including Rooftops and GroundFloors</td>
+</tr>
+<tr class="row-odd"><td>tilt_facade</td>
+<td>(list of floats [degree]) Tilt of facades against the horizontal.</td>
+</tr>
+<tr class="row-even"><td>orientation_facade</td>
+<td>(list of floats [degree]) Orientation of facades (Azimuth). 0 - North 90 - East 180 - South 270 - West</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.one_element.OneElement.calc_attributes">
+<code class="descname">calc_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.one_element.OneElement.calc_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls all necessary function to calculate model attributes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.one_element.OneElement.set_calc_default">
+<code class="descname">set_calc_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.one_element.OneElement.set_calc_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets default calculation parameters</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.logic.buildingobjects.calculation.two_element">
+<span id="two-element-model-calculation"></span><h2>Two element model calculation<a class="headerlink" href="#module-teaser.logic.buildingobjects.calculation.two_element" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.calculation.two_element.TwoElement">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.calculation.two_element.</code><code class="descname">TwoElement</code><span class="sig-paren">(</span><em>thermal_zone</em>, <em>merge_windows</em>, <em>t_bt</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.two_element.TwoElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class contains attributes and functions for two element model</p>
+<p>This model distinguishes between internal thermal masses and exterior walls.
+While exterior walls contribute to heat transfer to the ambient, adiabatic
+conditions apply to interior walls. This approach allows considering the
+dynamic behaviour induced by internal heat storage. This class calculates
+and holds all attributes given in documentation.</p>
+<p>It treats Rooftops, GroundFloors and OuterWalls as one type of outer
+walls and computes one RC-combination for these types.</p>
+<p>Depending on the chosen method it will consider an extra resistance for
+windows or merge all windows into the RC-Combination for outer walls.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>thermal_zone: ThermalZone()</strong></p>
+<blockquote>
+<div><p>TEASER instance of ThermalZone</p>
+</div></blockquote>
+<p><strong>merge_windows</strong> : boolean</p>
+<blockquote>
+<div><p>True for merging the windows into the outer wall&#8217;s RC-combination,
+False for separate resistance for window, default is False. (Only
+supported for Annex60)</p>
+</div></blockquote>
+<p><strong>t_bt</strong> : float [d]</p>
+<blockquote class="last">
+<div><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Interior Walls</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>area_iw</td>
+<td>(float [m2]) Area of all interior walls.</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_inner_iw</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_inner_iw</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_inner_iw</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_outer_iw</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of interior walls facing the adjacent thermal zone. (Currently not supported)</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_outer_iw</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of interior walls facing the adjacent thermal zone. (Currently not supported)</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_outer_iw</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of interior walls facing the adjacent thermal zone. (Currently not supported)</td>
+</tr>
+<tr class="row-odd"><td>ua_value_iw</td>
+<td>(float [W/K]) U-Value times interior wall area. (Does not take adjacent thermal zones into account)</td>
+</tr>
+<tr class="row-even"><td>r_conv_inner_iw</td>
+<td>(float [K/W]) Sum of convective resistances for all interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_inner_iw</td>
+<td>(float [K/W]) Sum of radiative resistances for all interior walls facing the inside of this thermal zone</td>
+</tr>
+<tr class="row-even"><td>r_comb_inner_iw</td>
+<td>(float [K/W]) Sum of combined resistances for all interior walls facing the inside of this thermal zone</td>
+</tr>
+<tr class="row-odd"><td>r1_iw</td>
+<td>(float [K/W]) Lumped resistance of interior walls no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-even"><td>c1_iw</td>
+<td>(float [J/K]) Lumped capacity of interior walls</td>
+</tr>
+<tr class="row-odd"><td>Outer Walls (OuterWall, Rooftop, GroundFloor)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>area_ow</td>
+<td>(float [m2]) Area of all outer walls.</td>
+</tr>
+<tr class="row-odd"><td>n_outer</td>
+<td>(int) Number of total outer walls with different combination of tilt and orientation, including Rooftops and GroundFloors</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of outer walls facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of outer walls facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of outer walls facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>ua_value_ow</td>
+<td>(float [W/K]) U-Value times outer wall area.</td>
+</tr>
+<tr class="row-odd"><td>r_conv_inner_ow</td>
+<td>(float [K/W]) Sum of convective resistances for all outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_rad_inner_ow</td>
+<td>(float [K/W]) Sum of radiative resistances for all outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_comb_inner_ow</td>
+<td>(float [K/W]) Sum of combined resistances for all outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_conv_outer_ow</td>
+<td>(float [K/W]) Sum of convective resistances for all outer walls facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_outer_ow</td>
+<td>(float [K/W]) Sum of radiative resistances for all outer walls facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>r_comb_outer_ow</td>
+<td>(float [K/W]) Sum of combined resistances for all outer walls facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r1_ow</td>
+<td>(float [K/W]) Lumped resistance of outer walls no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-even"><td>r_rest_ow</td>
+<td>(float [K/W]) Lumped remaining resistance of outer walls between r1_ow and c1_ow no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-odd"><td>c1_ow</td>
+<td>(float [J/K]) Lumped capacity of outer walls.</td>
+</tr>
+<tr class="row-even"><td>weightfactor_ow</td>
+<td>(list of floats) Weightfactors of outer walls (UA-Value of walls with same orientation and tilt divided by ua_value_ow)</td>
+</tr>
+<tr class="row-odd"><td>weightfactor_ground</td>
+<td>(list of floats) Weightfactors of groundfloors (UA-Value of groundfloor divided by ua_value_ow).</td>
+</tr>
+<tr class="row-even"><td>tilt_facade</td>
+<td>(list of floats [degree]) Tilt of outer walls against the horizontal.</td>
+</tr>
+<tr class="row-odd"><td>orientation_facade</td>
+<td>(list of floats [degree]) Orientation of outer walls (Azimuth). 0 - North 90 - East 180 - South 270 - West</td>
+</tr>
+<tr class="row-even"><td>outer_wall_areas</td>
+<td>(list of floats [m2]) Area of all outer walls in one list.</td>
+</tr>
+<tr class="row-odd"><td>ir_emissivity_outer_ow</td>
+<td>(float) Area-weighted ir emissivity of outer wall facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>ir_emissivity_inner_ow</td>
+<td>(float) Area-weighted ir emissivity of outer walls facing the thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>solar_absorp_ow</td>
+<td>(float) Area-weighted solar absorption of outer walls facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>Windows</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>area_win</td>
+<td>(float [m2]) Area of all windows.</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>ratio_conv_rad_inner_win</td>
+<td>(float [-]) Ratio for windows between convective and radiative heat emission, given in VDI 6007-3</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>ua_value_win</td>
+<td>(float [W/K]) U-Value times outer wall area.</td>
+</tr>
+<tr class="row-even"><td>r_conv_inner_win</td>
+<td>(float [K/W]) Sum of convective resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_inner_win</td>
+<td>(float [K/W]) Sum of radiative resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_comb_inner_win</td>
+<td>(float [K/W]) Sum of combined resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_conv_outer_win</td>
+<td>(float [K/W]) Sum of convective resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>r_rad_outer_win</td>
+<td>(float [K/W]) Sum of radiative resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r_comb_outer_win</td>
+<td>(float [K/W]) Sum of combined resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>r1_win</td>
+<td>(float [K/W]) Lumped resistance of windows, no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-odd"><td>weightfactor_win</td>
+<td>(list of floats) Weightfactors of windows (UA-Value of windows with same orientation and tilt divided by ua_value_win or ua_value_win+ua_value_ow, depending if windows is lumped/merged into the walls or not)</td>
+</tr>
+<tr class="row-even"><td>window_areas</td>
+<td>(list of floats [m2]) Area of all windows in one list, if the windows are merged into the outer wall this list will be full of zeros</td>
+</tr>
+<tr class="row-odd"><td>transparent_areas</td>
+<td>(list of floats [m2]) Area of all transparent elements (most likely windows) in one list, this list will be always filled with the areas, independent if windows are merged into walls or not.</td>
+</tr>
+<tr class="row-even"><td>solar_absorp_win</td>
+<td>(float) Area-weighted solar absorption for windows. (typically 0.0)</td>
+</tr>
+<tr class="row-odd"><td>ir_emissivity_win</td>
+<td>(float) Area-weighted ir_emissivity for windows. Can be used for windows facing the thermal zone and the ambient.</td>
+</tr>
+<tr class="row-even"><td>weighted_g_value</td>
+<td>(float) Area-weighted g-Value of all windows.</td>
+</tr>
+<tr class="row-odd"><td>g_sunblind</td>
+<td>(list of floats) G-Value of all sunblinds of each window in a list</td>
+</tr>
+<tr class="row-even"><td>Misc values:</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_inner_mean</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of all surfaces facing the inside of this thermal zone (OuterWalls, Windows, InnerWalls, ...).</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_outer_mean</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of all surfaces facing the ambient (OuterWalls, Windows, ...).</td>
+</tr>
+<tr class="row-odd"><td>heat_load</td>
+<td>([W]) Static heat load of the thermal zone.</td>
+</tr>
+<tr class="row-even"><td>facade_areas</td>
+<td>(list of floats [m2]) List containing the area of each facade (with same tilt and orientation) this includes also roofs and ground floors and windows.</td>
+</tr>
+<tr class="row-odd"><td>n_outer</td>
+<td>(int) Number of total facades with different combination of tilt and orientation, including Rooftops and GroundFloors</td>
+</tr>
+<tr class="row-even"><td>tilt_facade</td>
+<td>(list of floats [degree]) Tilt of facades against the horizontal.</td>
+</tr>
+<tr class="row-odd"><td>orientation_facade</td>
+<td>(list of floats [degree]) Orientation of facades (Azimuth). 0 - North 90 - East 180 - South 270 - West</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.two_element.TwoElement.calc_attributes">
+<code class="descname">calc_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.two_element.TwoElement.calc_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls all necessary function to calculate model attributes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.two_element.TwoElement.set_calc_default">
+<code class="descname">set_calc_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.two_element.TwoElement.set_calc_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets default calculation parameters</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="three-element-model-calculation">
+<h2>Three element model calculation<a class="headerlink" href="#three-element-model-calculation" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-teaser.logic.buildingobjects.calculation.three_element"></span><dl class="class">
+<dt id="teaser.logic.buildingobjects.calculation.three_element.ThreeElement">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.calculation.three_element.</code><code class="descname">ThreeElement</code><span class="sig-paren">(</span><em>thermal_zone</em>, <em>merge_windows</em>, <em>t_bt</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.three_element.ThreeElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class contains attributes and functions for three element model</p>
+<p>This model adds one further element for the floor plate. Long-term effects
+dominate the excitation of the floor plate and thus the excitation
+differs from excitation of outer walls. Thus the model distinguishes
+between internal thermal masses and exterior walls divided into those
+who are exposed to the sun and ground plates. While exterior walls
+contribute to heat transfer to the ambient, adiabatic
+conditions apply to interior walls. This approach allows considering the
+dynamic behaviour induced by internal heat storage. This class calculates
+and holds all attributes given in documentation.</p>
+<p>It treats Rooftops and OuterWalls as one type of outer
+walls and distinguishes GroundFloors as a separatly resulting in two
+RC-combination for these types.</p>
+<p>Depending on the chosen method it will consider an extra resistance for
+windows or merge all windows into the RC-Combination for outer walls.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>thermal_zone: ThermalZone()</strong></p>
+<blockquote>
+<div><p>TEASER instance of ThermalZone</p>
+</div></blockquote>
+<p><strong>merge_windows</strong> : boolean</p>
+<blockquote>
+<div><p>True for merging windows into the outer wall&#8217;s RC-combination,
+False for separate resistance for window, default is False. (Only
+supported for Annex60)</p>
+</div></blockquote>
+<p><strong>t_bt</strong> : float [d]</p>
+<blockquote class="last">
+<div><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Interior Walls</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>area_iw</td>
+<td>(float [m2]) Area of all interior walls.</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_inner_iw</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_inner_iw</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_inner_iw</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_outer_iw</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of interior walls facing the adjacent thermal zone. (Currently not supported)</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_outer_iw</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of interior walls facing the adjacent thermal zone. (Currently not supported)</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_outer_iw</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of interior walls facing the adjacent thermal zone. (Currently not supported)</td>
+</tr>
+<tr class="row-odd"><td>ua_value_iw</td>
+<td>(float [W/K]) U-Value times interior wall area. (Does not take adjacent thermal zones into account)</td>
+</tr>
+<tr class="row-even"><td>r_conv_inner_iw</td>
+<td>(float [K/W]) Sum of convective resistances for all interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_inner_iw</td>
+<td>(float [K/W]) Sum of radiative resistances for all interior walls facing the inside of this thermal zone</td>
+</tr>
+<tr class="row-even"><td>r_comb_inner_iw</td>
+<td>(float [K/W]) Sum of combined resistances for all interior walls facing the inside of this thermal zone</td>
+</tr>
+<tr class="row-odd"><td>r1_iw</td>
+<td>(float [K/W]) Lumped resistance of interior walls no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-even"><td>c1_iw</td>
+<td>(float [J/K]) Lumped capacity of interior walls</td>
+</tr>
+<tr class="row-odd"><td>Outer Walls (OuterWall, Rooftop)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>area_ow</td>
+<td>(float [m2]) Area of all outer walls (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of outer walls facing the inside of this thermal zone (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of outer walls facing the inside of this thermal zone (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of outer walls facing the inside of this thermal zone (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of outer walls facing the ambient (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of outer walls facing the ambient (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of outer walls facing the ambient (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-odd"><td>ua_value_ow</td>
+<td>(float [W/K]) U-Value times outer wall area (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-even"><td>r_conv_inner_ow</td>
+<td>(float [K/W]) Sum of convective resistances for all outer walls facing the inside of this thermal zone (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-odd"><td>r_rad_inner_ow</td>
+<td>(float [K/W]) Sum of radiative resistances for all outer walls facing the inside of this thermal zone (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-even"><td>r_comb_inner_ow</td>
+<td>(float [K/W]) Sum of combined resistances for all outer walls facing the inside of this thermal zone (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-odd"><td>r_conv_outer_ow</td>
+<td>(float [K/W]) Sum of convective resistances for all outer walls facing the ambient (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-even"><td>r_rad_outer_ow</td>
+<td>(float [K/W]) Sum of radiative resistances for all outer walls facing the ambient (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-odd"><td>r_comb_outer_ow</td>
+<td>(float [K/W]) Sum of combined resistances for all outer walls facing the ambient (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-even"><td>r1_ow</td>
+<td>(float [K/W]) Lumped resistance of outer walls no heat transfer coefficients for convection and radiation are accounted in this resistance (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-odd"><td>r_rest_ow</td>
+<td>(float [K/W]) Lumped remaining resistance of outer walls between r1_ow and c1_ow no heat transfer coefficients for convection and radiation are accounted in this resistance (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-even"><td>c1_ow</td>
+<td>(float [J/K]) Lumped capacity of outer walls (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-odd"><td>weightfactor_ow</td>
+<td>(list of floats) Weightfactors of outer walls (UA-Value of walls with same orientation and tilt divided by ua_value_ow) (OuterWall, Rooftop)</td>
+</tr>
+<tr class="row-even"><td>outer_wall_areas</td>
+<td>(list of floats [m2]) Area of all outer walls in one list (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-odd"><td>ir_emissivity_outer_ow</td>
+<td>(float) Area-weighted ir emissivity of outer wall facing the ambient (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-even"><td>ir_emissivity_inner_ow</td>
+<td>(float) Area-weighted ir emissivity of outer walls facing the thermal zone (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-odd"><td>solar_absorp_ow</td>
+<td>(float) Area-weighted solar absorption of outer walls facing the ambient (OuterWall, Rooftop).</td>
+</tr>
+<tr class="row-even"><td>Ground Floors</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>area_gf</td>
+<td>(float [m2]) Area of all ground floors.</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_inner_gf</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_inner_gf</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_inner_gf</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>ua_value_gf</td>
+<td>(float [W/K]) U-Value times ground floor area.</td>
+</tr>
+<tr class="row-even"><td>r_conv_inner_gf</td>
+<td>(float [K/W]) Sum of convective resistances for all ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_inner_gf</td>
+<td>(float [K/W]) Sum of radiative resistances for all ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_comb_inner_gf</td>
+<td>(float [K/W]) Sum of combined resistances for all ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r1_gf</td>
+<td>(float [K/W]) Lumped resistance of ground floors no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-even"><td>r_rest_gf</td>
+<td>(float [K/W]) Lumped remaining resistance of ground floors between r1_gf and c1_gf no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-odd"><td>c1_gf</td>
+<td>(float [J/K]) Lumped capacity of ground floors.</td>
+</tr>
+<tr class="row-even"><td>weightfactor_gf</td>
+<td>(float) Weightfactor of ground floors (UA-Value of walls with same orientation and tilt divided by ua_value_gf)</td>
+</tr>
+<tr class="row-odd"><td>ground_floor_area</td>
+<td>(float [m2]) Area of all ground floors.</td>
+</tr>
+<tr class="row-even"><td>r_rad_gf_iw</td>
+<td>(float [K/W]) Resistance for radiative heat transfer between walls. TODO: needs to be checked</td>
+</tr>
+<tr class="row-odd"><td>ir_emissivity_inner_gf</td>
+<td>(float) Area-weighted ir emissivity of ground floors facing the thermal zone.</td>
+</tr>
+<tr class="row-even"><td>Windows</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>area_win</td>
+<td>(float [m2]) Area of all windows.</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>ratio_conv_rad_inner_win</td>
+<td>(float [-]) Ratio for windows between convective and radiative heat emission, given in VDI 6007-3</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>ua_value_win</td>
+<td>(float [W/K]) U-Value times outer wall area.</td>
+</tr>
+<tr class="row-even"><td>r_conv_inner_win</td>
+<td>(float [K/W]) Sum of convective resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_inner_win</td>
+<td>(float [K/W]) Sum of radiative resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_comb_inner_win</td>
+<td>(float [K/W]) Sum of combined resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_conv_outer_win</td>
+<td>(float [K/W]) Sum of convective resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>r_rad_outer_win</td>
+<td>(float [K/W]) Sum of radiative resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r_comb_outer_win</td>
+<td>(float [K/W]) Sum of combined resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>r1_win</td>
+<td>(float [K/W]) Lumped resistance of windows, no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-odd"><td>weightfactor_win</td>
+<td>(list of floats) Weightfactors of windows (UA-Value of windows with same orientation and tilt divided by ua_value_win or ua_value_win+ua_value_ow, depending if windows is lumped/merged into the walls or not)</td>
+</tr>
+<tr class="row-even"><td>window_areas</td>
+<td>(list of floats [m2]) Area of all windows in one list, if the windows are merged into the outer wall this list will be full of zeros</td>
+</tr>
+<tr class="row-odd"><td>transparent_areas</td>
+<td>(list of floats [m2]) Area of all transparent elements (most likely windows) in one list, this list will be always filled with the areas, independent if windows are merged into walls or not.</td>
+</tr>
+<tr class="row-even"><td>solar_absorp_win</td>
+<td>(float) Area-weighted solar absorption for windows. (typically 0.0)</td>
+</tr>
+<tr class="row-odd"><td>ir_emissivity_win</td>
+<td>(float) Area-weighted ir_emissivity for windows. Can be used for windows facing the thermal zone and the ambient.</td>
+</tr>
+<tr class="row-even"><td>weighted_g_value</td>
+<td>(float) Area-weighted g-Value of all windows.</td>
+</tr>
+<tr class="row-odd"><td>g_sunblind</td>
+<td>(list of floats) G-Value of all sunblinds of each window in a list</td>
+</tr>
+<tr class="row-even"><td>Misc values:</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_inner_mean</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of all surfaces facing the inside of this thermal zone (OuterWalls, Windows, InnerWalls, ...).</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_outer_mean</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of all surfaces facing the ambient (OuterWalls, Windows, ...).</td>
+</tr>
+<tr class="row-odd"><td>heat_load</td>
+<td>([W]) Static heat load of the thermal zone.</td>
+</tr>
+<tr class="row-even"><td>facade_areas</td>
+<td>(list of floats [m2]) List containing the area of each facade (with same tilt and orientation) this includes also roofs and ground floors and windows.</td>
+</tr>
+<tr class="row-odd"><td>n_outer</td>
+<td>(int) Number of total facades with different combination of tilt and orientation, windows and outer walls rooftops</td>
+</tr>
+<tr class="row-even"><td>tilt_facade</td>
+<td>(list of floats [degree]) Tilt of facades against the horizontal.</td>
+</tr>
+<tr class="row-odd"><td>orientation_facade</td>
+<td>(list of floats [degree]) Orientation of facades (Azimuth). 0 - North 90 - East 180 - South 270 - West</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.three_element.ThreeElement.calc_attributes">
+<code class="descname">calc_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.three_element.ThreeElement.calc_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls all necessary function to calculate model attributes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.three_element.ThreeElement.set_calc_default">
+<code class="descname">set_calc_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.three_element.ThreeElement.set_calc_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets default calculation parameters</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="id1">
+<h2>One element model calculation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-teaser.logic.buildingobjects.calculation.four_element"></span><dl class="class">
+<dt id="teaser.logic.buildingobjects.calculation.four_element.FourElement">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.calculation.four_element.</code><code class="descname">FourElement</code><span class="sig-paren">(</span><em>thermal_zone</em>, <em>merge_windows</em>, <em>t_bt</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.four_element.FourElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>This class contains attributes and functions for four element model</p>
+<p>This model adds another element for the roof. Roofs commonly exhibit the
+same excitations as exterior walls but have different coefficients of heat
+transfer due to their orientation.  Thus the model distinguishes
+between internal thermal masses and exterior walls divided into
+outerwalls (vertical), rooftops and ground plates. While all exterior walls
+contribute to heat transfer to the ambient, adiabatic
+conditions apply to interior walls. This approach allows considering the
+dynamic behaviour induced by internal heat storage. This class calculates
+and holds all attributes given in documentation.</p>
+<p>It treats OuterWalls, Rooftops and GroundFloors separate resulting in three
+RC-combination for these.
+Depending on the chosen method it will consider an extra resistance for
+windows or merge all windows into the RC-Combination for outer walls.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>thermal_zone: ThermalZone()</strong></p>
+<blockquote>
+<div><p>TEASER instance of ThermalZone</p>
+</div></blockquote>
+<p><strong>merge_windows</strong> : boolean</p>
+<blockquote>
+<div><p>True for merging windows into the outer wall&#8217;s RC-combination,
+False for separate resistance for window, default is False. (Only
+supported for Annex60)</p>
+</div></blockquote>
+<p><strong>t_bt</strong> : float [d]</p>
+<blockquote class="last">
+<div><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Interior Walls</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>area_iw</td>
+<td>(float [m2]) Area of all interior walls.</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_inner_iw</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_inner_iw</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_inner_iw</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_outer_iw</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of interior walls facing the adjacent thermal zone. (Currently not supported)</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_outer_iw</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of interior walls facing the adjacent thermal zone. (Currently not supported)</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_outer_iw</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of interior walls facing the adjacent thermal zone. (Currently not supported)</td>
+</tr>
+<tr class="row-odd"><td>ua_value_iw</td>
+<td>(float [W/K]) U-Value times interior wall area. (Does not take adjacent thermal zones into account)</td>
+</tr>
+<tr class="row-even"><td>r_conv_inner_iw</td>
+<td>(float [K/W]) Sum of convective resistances for all interior walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_inner_iw</td>
+<td>(float [K/W]) Sum of radiative resistances for all interior walls facing the inside of this thermal zone</td>
+</tr>
+<tr class="row-even"><td>r_comb_inner_iw</td>
+<td>(float [K/W]) Sum of combined resistances for all interior walls facing the inside of this thermal zone</td>
+</tr>
+<tr class="row-odd"><td>r1_iw</td>
+<td>(float [K/W]) Lumped resistance of interior walls no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-even"><td>c1_iw</td>
+<td>(float [J/K]) Lumped capacity of interior walls</td>
+</tr>
+<tr class="row-odd"><td>Outer Walls</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>area_ow</td>
+<td>(float [m2]) Area of all outer walls .</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of outer walls facing the inside of this thermal zone .</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of outer walls facing the inside of this thermal zone .</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_inner_ow</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of outer walls facing the inside of this thermal zone .</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of outer walls facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of outer walls facing the ambient .</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_outer_ow</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of outer walls facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>ua_value_ow</td>
+<td>(float [W/K]) U-Value times outer wall area.</td>
+</tr>
+<tr class="row-even"><td>r_conv_inner_ow</td>
+<td>(float [K/W]) Sum of convective resistances for all outer walls facing the inside of this thermal zone .</td>
+</tr>
+<tr class="row-odd"><td>r_rad_inner_ow</td>
+<td>(float [K/W]) Sum of radiative resistances for all outer walls facing the inside of this thermal zone .</td>
+</tr>
+<tr class="row-even"><td>r_comb_inner_ow</td>
+<td>(float [K/W]) Sum of combined resistances for all outer walls facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_conv_outer_ow</td>
+<td>(float [K/W]) Sum of convective resistances for all outer walls facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>r_rad_outer_ow</td>
+<td>(float [K/W]) Sum of radiative resistances for all outer walls facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r_comb_outer_ow</td>
+<td>(float [K/W]) Sum of combined resistances for all outer walls facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>r1_ow</td>
+<td>(float [K/W]) Lumped resistance of outer walls no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-odd"><td>r_rest_ow</td>
+<td>(float [K/W]) Lumped remaining resistance of outer walls between r1_ow and c1_ow no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-even"><td>c1_ow</td>
+<td>(float [J/K]) Lumped capacity of outer walls .</td>
+</tr>
+<tr class="row-odd"><td>weightfactor_ow</td>
+<td>(list of floats) Weightfactors of outer walls (UA-Value of walls with same orientation and tilt divided by ua_value_ow)</td>
+</tr>
+<tr class="row-even"><td>outer_wall_areas</td>
+<td>(list of floats [m2]) Area of all outer walls in one list.</td>
+</tr>
+<tr class="row-odd"><td>ir_emissivity_outer_ow</td>
+<td>(float) Area-weighted ir emissivity of outer wall facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>ir_emissivity_inner_ow</td>
+<td>(float) Area-weighted ir emissivity of outer walls facing the thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>solar_absorp_ow</td>
+<td>(float) Area-weighted solar absorption of outer walls facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>Ground Floors</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>area_gf</td>
+<td>(float [m2]) Area of all ground floors.</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_inner_gf</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_inner_gf</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_inner_gf</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>ua_value_gf</td>
+<td>(float [W/K]) U-Value times ground floor area.</td>
+</tr>
+<tr class="row-even"><td>r_conv_inner_gf</td>
+<td>(float [K/W]) Sum of convective resistances for all ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_inner_gf</td>
+<td>(float [K/W]) Sum of radiative resistances for all ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_comb_inner_gf</td>
+<td>(float [K/W]) Sum of combined resistances for all ground floors facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r1_gf</td>
+<td>(float [K/W]) Lumped resistance of ground floors no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-even"><td>r_rest_gf</td>
+<td>(float [K/W]) Lumped remaining resistance of ground floors between r1_gf and c1_gf no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-odd"><td>c1_gf</td>
+<td>(float [J/K]) Lumped capacity of ground floors.</td>
+</tr>
+<tr class="row-even"><td>weightfactor_gf</td>
+<td>(float) Weightfactor of ground floors (UA-Value of walls with same orientation and tilt divided by ua_value_gf)</td>
+</tr>
+<tr class="row-odd"><td>ground_floor_area</td>
+<td>(float [m2]) Area of all ground floors.</td>
+</tr>
+<tr class="row-even"><td>r_rad_gf_iw</td>
+<td>(float [K/W]) Resistance for radiative heat transfer between walls. TODO: needs to be checked</td>
+</tr>
+<tr class="row-odd"><td>ir_emissivity_inner_gf</td>
+<td>(float) Area-weighted ir emissivity of ground floors facing the thermal zone.</td>
+</tr>
+<tr class="row-even"><td>Rooftops</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>area_rt</td>
+<td>(float [m2]) Area of all rooftops .</td>
+</tr>
+<tr class="row-even"><td>alpha_conv_inner_rt</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of rooftops facing the inside of this thermal zone .</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_inner_rt</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of rooftops facing the inside of this thermal zone .</td>
+</tr>
+<tr class="row-even"><td>alpha_comb_inner_rt</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of rooftops facing the inside of this thermal zone .</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_outer_rt</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of rooftops facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_outer_rt</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of rooftops facing the ambient .</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_outer_rt</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of rooftops facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>ua_value_rt</td>
+<td>(float [W/K]) U-Value times outer wall area.</td>
+</tr>
+<tr class="row-odd"><td>r_conv_inner_rt</td>
+<td>(float [K/W]) Sum of convective resistances for all rooftops facing the inside of this thermal zone .</td>
+</tr>
+<tr class="row-even"><td>r_rad_inner_rt</td>
+<td>(float [K/W]) Sum of radiative resistances for all rooftops facing the inside of this thermal zone .</td>
+</tr>
+<tr class="row-odd"><td>r_comb_inner_rt</td>
+<td>(float [K/W]) Sum of combined resistances for all rooftops facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_conv_outer_rt</td>
+<td>(float [K/W]) Sum of convective resistances for all rooftops facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_outer_rt</td>
+<td>(float [K/W]) Sum of radiative resistances for all rooftops facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>r_comb_outer_rt</td>
+<td>(float [K/W]) Sum of combined resistances for all rooftops facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r1_rt</td>
+<td>(float [K/W]) Lumped resistance of rooftops no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-even"><td>r_rest_rt</td>
+<td>(float [K/W]) Lumped remaining resistance of rooftops between r1_rt and c1_rt no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-odd"><td>c1_rt</td>
+<td>(float [J/K]) Lumped capacity of rooftops .</td>
+</tr>
+<tr class="row-even"><td>weightfactor_rt</td>
+<td>(list of floats) Weightfactors of rooftops (UA-Value of walls with same orientation and tilt divided by ua_value_rt)</td>
+</tr>
+<tr class="row-odd"><td>weightfactor_win_rt</td>
+<td>(list of floats) Weightfactors of windows in rooftop. CAUTION: this will be always a list full of zeors, as windows are always calculated separatly.</td>
+</tr>
+<tr class="row-even"><td>outer_wall_areas</td>
+<td>(list of floats [m2]) Area of all rooftops in one list.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_rt_iw</td>
+<td>(float [K/W]) Resistance for radiative heat transfer between walls. TODO: needs to be checked</td>
+</tr>
+<tr class="row-even"><td>ir_emissivity_outer_rt</td>
+<td>(float) Area-weighted ir emissivity of outer wall facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>ir_emissivity_inner_rt</td>
+<td>(float) Area-weighted ir emissivity of rooftops facing the thermal zone.</td>
+</tr>
+<tr class="row-even"><td>solar_absorp_rt</td>
+<td>(float) Area-weighted solar absorption of rooftops facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>tilt_rt</td>
+<td>(list of floats [degree]) Tilt of rooftops against the horizontal.</td>
+</tr>
+<tr class="row-even"><td>orientation_rt</td>
+<td>(list of floats [degree]) Orientation of rooftops (Azimuth). 0 - North 90 - East 180 - South 270 - West</td>
+</tr>
+<tr class="row-odd"><td>Windows</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>area_win</td>
+<td>(float [m2]) Area of all windows.</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_inner_win</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>ratio_conv_rad_inner_win</td>
+<td>(float [-]) Ratio for windows between convective and radiative heat emission, given in VDI 6007-3</td>
+</tr>
+<tr class="row-odd"><td>alpha_conv_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted convective coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>alpha_comb_outer_win</td>
+<td>(float [W/(m2K)]) Area-weighted combined coefficient of heat transfer of windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>ua_value_win</td>
+<td>(float [W/K]) U-Value times outer wall area.</td>
+</tr>
+<tr class="row-odd"><td>r_conv_inner_win</td>
+<td>(float [K/W]) Sum of convective resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_rad_inner_win</td>
+<td>(float [K/W]) Sum of radiative resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>r_comb_inner_win</td>
+<td>(float [K/W]) Sum of combined resistances for all windows facing the inside of this thermal zone.</td>
+</tr>
+<tr class="row-even"><td>r_conv_outer_win</td>
+<td>(float [K/W]) Sum of convective resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r_rad_outer_win</td>
+<td>(float [K/W]) Sum of radiative resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-even"><td>r_comb_outer_win</td>
+<td>(float [K/W]) Sum of combined resistances for all windows facing the ambient.</td>
+</tr>
+<tr class="row-odd"><td>r1_win</td>
+<td>(float [K/W]) Lumped resistance of windows, no heat transfer coefficients for convection and radiation are accounted in this resistance.</td>
+</tr>
+<tr class="row-even"><td>weightfactor_win</td>
+<td>(list of floats) Weightfactors of windows (UA-Value of windows with same orientation and tilt divided by ua_value_win or ua_value_win+ua_value_ow, depending if windows is lumped/merged into the walls or not)</td>
+</tr>
+<tr class="row-odd"><td>window_areas</td>
+<td>(list of floats [m2]) Area of all windows in one list, if the windows are merged into the outer wall this list will be full of zeros</td>
+</tr>
+<tr class="row-even"><td>transparent_areas</td>
+<td>(list of floats [m2]) Area of all transparent elements (most likely windows) in one list, this list will be always filled with the areas, independent if windows are merged into walls or not.</td>
+</tr>
+<tr class="row-odd"><td>solar_absorp_win</td>
+<td>(float) Area-weighted solar absorption for windows. (typically 0.0)</td>
+</tr>
+<tr class="row-even"><td>ir_emissivity_win</td>
+<td>(float) Area-weighted ir_emissivity for windows. Can be used for windows facing the thermal zone and the ambient.</td>
+</tr>
+<tr class="row-odd"><td>weighted_g_value</td>
+<td>(float) Area-weighted g-Value of all windows.</td>
+</tr>
+<tr class="row-even"><td>g_sunblind</td>
+<td>(list of floats) G-Value of all sunblinds of each window in a list</td>
+</tr>
+<tr class="row-odd"><td>Misc values:</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>alpha_rad_inner_mean</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of all surfaces facing the inside of this thermal zone (OuterWalls, Windows, InnerWalls, ...).</td>
+</tr>
+<tr class="row-odd"><td>alpha_rad_outer_mean</td>
+<td>(float [W/(m2K)]) Area-weighted radiative coefficient of all surfaces facing the ambient (OuterWalls, Windows, ...).</td>
+</tr>
+<tr class="row-even"><td>heat_load</td>
+<td>([W]) Static heat load of the thermal zone.</td>
+</tr>
+<tr class="row-odd"><td>facade_areas</td>
+<td>(list of floats [m2]) List containing the area of each facade (with same tilt and orientation) this includes also roofs and ground floors and windows.</td>
+</tr>
+<tr class="row-even"><td>n_outer</td>
+<td>(int) Number of total facades with different combination of tilt and orientation, windows and outer walls</td>
+</tr>
+<tr class="row-odd"><td>n_rt</td>
+<td>(int) Number of total facades with different combination of tilt and orientation, Rooftops</td>
+</tr>
+<tr class="row-even"><td>tilt_facade</td>
+<td>(list of floats [degree]) Tilt of facades against the horizontal.</td>
+</tr>
+<tr class="row-odd"><td>orientation_facade</td>
+<td>(list of floats [degree]) Orientation of facades (Azimuth). 0 - North 90 - East 180 - South 270 - West</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.four_element.FourElement.calc_attributes">
+<code class="descname">calc_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.four_element.FourElement.calc_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls all necessary function to calculate model attributes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.calculation.four_element.FourElement.set_calc_default">
+<code class="descname">set_calc_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.four_element.FourElement.set_calc_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>sets default calculation parameters</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.ArchetypeBuildings.html" title="archetypebuildings"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.BuildingSystems.html" title="buildingsystems"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" >buildingobjects</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,613 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Building &#8212; TEASER 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ThermalZone" href="teaser.Logic.BuildingObjects.ThermalZone.html" />
+    <link rel="prev" title="buildingobjects" href="teaser.Logic.BuildingObjects.html" /> 
+  </head>
+  <body role="document">
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.ThermalZone.html" title="ThermalZone"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.html" title="buildingobjects"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" accesskey="U">buildingobjects</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.html"
+                        title="previous chapter">buildingobjects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.ThermalZone.html"
+                        title="next chapter">ThermalZone</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Logic.BuildingObjects.Building.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-teaser.logic.buildingobjects.building">
+<span id="building"></span><h1>Building<a class="headerlink" href="#module-teaser.logic.buildingobjects.building" title="Permalink to this headline">¶</a></h1>
+<p>This module includes the Building class</p>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.building.Building">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.building.</code><code class="descname">Building</code><span class="sig-paren">(</span><em>parent=None</em>, <em>name=None</em>, <em>year_of_construction=None</em>, <em>net_leased_area=None</em>, <em>with_ahu=False</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Building Class</p>
+<p>This class is used to manage information and parameter calculation for
+Buildings. It is the base class for all archetype buildings and holds a
+list containing all ThermalZones instances. In addition it can hold an
+optional attribute for CentralAHU instance, that is e.g. needed for
+AixLib Simulation models.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Project()</strong></p>
+<blockquote>
+<div><p>The parent class of this object, the Project the Building belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this Building instance to Project.buildings.
+(default: None)</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote>
+<div><p>Individual name (default: None)</p>
+</div></blockquote>
+<p><strong>year_of_construction</strong> : int</p>
+<blockquote>
+<div><p>Year of first construction (default: None)</p>
+</div></blockquote>
+<p><strong>net_leased_area</strong> : float [m2]</p>
+<blockquote>
+<div><p>Total net leased area of building. This is area is NOT the footprint
+of a building (default: None)</p>
+</div></blockquote>
+<p><strong>with_ahu</strong> : Boolean</p>
+<blockquote class="last">
+<div><p>If set to True, an empty instance of BuildingAHU is instantiated and
+assigned to attribute central_ahu. This instance holds information for
+central Air Handling units. Default is False.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="9%" />
+<col width="91%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>central_ahu</td>
+<td>(instance of BuildingAHU) Teaser Instance of BuildingAHU if a central AHU is embedded into the building (currently mostly needed for AixLib simulation).</td>
+</tr>
+<tr class="row-even"><td>number_of_floors</td>
+<td>(int) number of floors above ground (default: None)</td>
+</tr>
+<tr class="row-odd"><td>height_of_floors</td>
+<td>(float [m]) Average height of the floors (default: None)</td>
+</tr>
+<tr class="row-even"><td>internal_id</td>
+<td>(float) Random id for the distinction between different buildings.</td>
+</tr>
+<tr class="row-odd"><td>year_of_retrofit</td>
+<td>(int) Year of last retrofit.</td>
+</tr>
+<tr class="row-even"><td>type_of_building</td>
+<td>(string) Type of a Building (e.g. Building (unspecified), Office etc.).</td>
+</tr>
+<tr class="row-odd"><td>building_id</td>
+<td>(None) ID of building, can be set by the user to keep track of a building even outside of TEASER, e.g. in a simulation or in post-processing. This is not the same as internal_id, as internal_id is e.g. not exported to Modelica models!</td>
+</tr>
+<tr class="row-even"><td>street_name</td>
+<td>(string) Name of the street the building is located at. (optional)</td>
+</tr>
+<tr class="row-odd"><td>city</td>
+<td>(string) Name of the city the building is located at. (optional)</td>
+</tr>
+<tr class="row-even"><td>longitude</td>
+<td>(float [degree]) Longitude of building location.</td>
+</tr>
+<tr class="row-odd"><td>latitude</td>
+<td>(float [degree]) Latitude of building location.</td>
+</tr>
+<tr class="row-even"><td>thermal_zones</td>
+<td>(list) List with instances of ThermalZone(), that are located in this building.</td>
+</tr>
+<tr class="row-odd"><td>gml_surfaces</td>
+<td>(list) List of all containing surfaces described by CityGML, the list should be filled with SurfaceGML class from Data.Input.citygml_input. This list is only used if this instance of a building was instantiated the CityGML Loader module.</td>
+</tr>
+<tr class="row-even"><td>outer_area</td>
+<td>(dict [degree: m2]) Dictionary with orientation as key and sum of outer wall areas of that direction as value.</td>
+</tr>
+<tr class="row-odd"><td>window_area</td>
+<td>(dict [degree: m2]) Dictionary with orientation as key and sum of window areas of that direction as value.</td>
+</tr>
+<tr class="row-even"><td>bldg_height</td>
+<td>(float [m]) Total building height.</td>
+</tr>
+<tr class="row-odd"><td>volume</td>
+<td>(float [m3]) Total volume of all thermal zones.</td>
+</tr>
+<tr class="row-even"><td>sum_heat_load</td>
+<td>(float [W]) Total heating load of all thermal zones.</td>
+</tr>
+<tr class="row-odd"><td>sum_cooling_load</td>
+<td>(float [W]) Total heating load of all thermal zones. (currently not supported)</td>
+</tr>
+<tr class="row-even"><td>number_of_elements_calc</td>
+<td>(int) Number of elements that are used for thermal zone calculation in this building. 1: OneElement 2: TwoElement 3: ThreeElement 4: FourElement</td>
+</tr>
+<tr class="row-odd"><td>merge_windows_calc</td>
+<td>(boolean) True for merging the windows into the outer wall&#8217;s RC-combination, False for separate resistance for window, default is False. (Only supported for Annex60)</td>
+</tr>
+<tr class="row-even"><td>used_library_calc</td>
+<td>(str) &#8216;AixLib&#8217; for <a class="reference external" href="https://github.com/RWTH-EBC/AixLib">https://github.com/RWTH-EBC/AixLib</a> &#8216;Annex60&#8217; for <a class="reference external" href="https://github.com/iea-annex60/modelica-annex60">https://github.com/iea-annex60/modelica-annex60</a></td>
+</tr>
+<tr class="row-odd"><td>library_attr</td>
+<td>(Annex() or AixLib() instance) Classes with specific functions and attributes for building models in Annex60 and AixLib. Python classes can be found in calculation package.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.add_zone">
+<code class="descname">add_zone</code><span class="sig-paren">(</span><em>thermal_zone</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.add_zone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a thermal zone to the corresponding list</p>
+<p>This function adds a ThermalZone instance to the the thermal_zones list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>thermal_zone</strong> : ThermalZone()</p>
+<blockquote class="last">
+<div><p>ThermalZone() instance of TEASER</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.calc_building_parameter">
+<code class="descname">calc_building_parameter</code><span class="sig-paren">(</span><em>number_of_elements=2</em>, <em>merge_windows=False</em>, <em>used_library='AixLib'</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.calc_building_parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>calc all building parameters</p>
+<p>This functions calculates the parameters of all zones in a building
+sums norm heat load of all zones
+sums volume of all zones</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>number_of_elements</strong> : int</p>
+<blockquote>
+<div><p>defines the number of elements, that area aggregated, between 1
+and 4, default is 2</p>
+</div></blockquote>
+<p><strong>merge_windows</strong> : bool</p>
+<blockquote>
+<div><p>True for merging the windows into the outer walls, False for
+separate resistance for window, default is False</p>
+</div></blockquote>
+<p><strong>used_library</strong> : str</p>
+<blockquote class="last">
+<div><p>used library (AixLib and Annex60 are supported)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.central_ahu">
+<code class="descname">central_ahu</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.central_ahu" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.fill_outer_area_dict">
+<code class="descname">fill_outer_area_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.fill_outer_area_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills the attribute outer_area</p>
+<p>Fills the dictionary outer_area with the sum of outer wall area
+corresponding to the orientations of the building. This function
+covers OuterWalls, GroundFloors and Rooftops.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.fill_window_area_dict">
+<code class="descname">fill_window_area_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.fill_window_area_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills the attribute</p>
+<p>Fills the dictionary window_area with the sum of window area
+corresponding to the orientations of the building.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.get_footprint_gml">
+<code class="descname">get_footprint_gml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.get_footprint_gml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the footprint surface of a building from CityGML data</p>
+<p>with given gml surfaces, this function computes and returns the
+footprint area of a building from LoD 0 to LoD2 from CityGML data.
+This is done by either analysing the ground floor or the flat roof.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>surface area</strong> : float</p>
+<blockquote class="last">
+<div><p>footprint area of a gml building</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.get_inner_wall_area">
+<code class="descname">get_inner_wall_area</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.get_inner_wall_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get aggregated inner wall area</p>
+<p>Returns the area of all inner walls. This function covers InnerWalls,
+Ceilings and Floors.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sum_area</strong> : float</p>
+<blockquote class="last">
+<div><p>area of all inner walls</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.get_outer_wall_area">
+<code class="descname">get_outer_wall_area</code><span class="sig-paren">(</span><em>orientation</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.get_outer_wall_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get aggregated wall area of one orientation</p>
+<p>Returns the area of all outer walls of one direction. This function
+covers OuterWalls, GroundFloors and Rooftops.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>orientation</strong> : float</p>
+<blockquote>
+<div><p>orientation of the obtained wall</p>
+</div></blockquote>
+<p><strong>Returns</strong></p>
+<p><strong>&#8212;&#8212;&#8212;-</strong></p>
+<p><strong>sum_area</strong> : float</p>
+<blockquote class="last">
+<div><p>area of all walls of one direction</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.get_window_area">
+<code class="descname">get_window_area</code><span class="sig-paren">(</span><em>orientation</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.get_window_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get aggregated window area of one orientation</p>
+<p>returns the area of all windows of one direction</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>orientation</strong> : float</p>
+<blockquote>
+<div><p>orientation of the obtained windows</p>
+</div></blockquote>
+<p><strong>Returns</strong></p>
+<p><strong>&#8212;&#8212;&#8212;-</strong></p>
+<p><strong>sum_area</strong> : float</p>
+<blockquote class="last">
+<div><p>area of all windows of one direction</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.height_of_floors">
+<code class="descname">height_of_floors</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.height_of_floors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.merge_windows_calc">
+<code class="descname">merge_windows_calc</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.merge_windows_calc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.name">
+<code class="descname">name</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.net_leased_area">
+<code class="descname">net_leased_area</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.net_leased_area" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.number_of_elements_calc">
+<code class="descname">number_of_elements_calc</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.number_of_elements_calc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.number_of_floors">
+<code class="descname">number_of_floors</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.number_of_floors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.outer_area">
+<code class="descname">outer_area</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.outer_area" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.parent">
+<code class="descname">parent</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.parent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.retrofit_building">
+<code class="descname">retrofit_building</code><span class="sig-paren">(</span><em>year_of_retrofit=None</em>, <em>window_type=None</em>, <em>material=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.retrofit_building" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrofits all zones in the building</p>
+<p>Function call for each zone.</p>
+<p>After retrofit, all parameters are calculated directly.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>year_of_retrofit</strong> : float</p>
+<blockquote>
+<div><p>Year of last retrofit.</p>
+</div></blockquote>
+<p><strong>window_type</strong> : str</p>
+<blockquote>
+<div><p>Default: EnEv 2014</p>
+</div></blockquote>
+<p><strong>material</strong> : str</p>
+<blockquote class="last">
+<div><p>Default: EPS035</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.rotate_building">
+<code class="descname">rotate_building</code><span class="sig-paren">(</span><em>angle</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.rotate_building" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotates the building to a given angle</p>
+<p>This function covers OuterWall, Rooftop (if not flat roof) and Windows.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>angle: float</strong></p>
+<blockquote class="last">
+<div><p>rotation of the building clockwise, between 0 and 360 degrees</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.set_gml_attributes">
+<code class="descname">set_gml_attributes</code><span class="sig-paren">(</span><em>height_of_floor=3.5</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.set_gml_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets building attributes from CityGML data</p>
+<p>Computes the net_leased_area depending on the footprint area,
+the number and the height of floors. If the number of floors is
+specified before it will use this value, if not it will compute the
+number of floors based on the gml building height and the average
+height of the floors. If the number of floors is zero it&#8217;ll be set to
+one. If the net leased area is below 50.0 sqm it&#8217;ll be set to 50.0.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>height_of_floor</strong> : float</p>
+<blockquote class="last">
+<div><p>average height of each floor of the building, the default value
+is 3.5 and is absolutely random.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.set_height_gml">
+<code class="descname">set_height_gml</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.set_height_gml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the height of a building from CityGML data</p>
+<p>With given gml surfaces, this function computes the height of a
+building of LoD 1 and LoD 2 buildings from CityGML data. All
+z-coordinates are evaluated and the minimum z-value is subtracted
+by the maximal value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.set_outer_wall_area">
+<code class="descname">set_outer_wall_area</code><span class="sig-paren">(</span><em>new_area</em>, <em>orientation</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.set_outer_wall_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outer area wall setter</p>
+<p>sets the outer wall area of all walls of one direction and weights
+them according to zone size. This function covers OuterWalls,
+Rooftops, GroundFloors.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>new_area</strong> : float</p>
+<blockquote>
+<div><p>new_area of all outer walls of one orientation</p>
+</div></blockquote>
+<p><strong>orientation</strong> : float</p>
+<blockquote class="last">
+<div><p>orientation of the obtained walls</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.building.Building.set_window_area">
+<code class="descname">set_window_area</code><span class="sig-paren">(</span><em>new_area</em>, <em>orientation</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.set_window_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Window area setter</p>
+<p>sets the window area of all windows of one direction and weights
+them according to zone size</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>new_area</strong> : float</p>
+<blockquote>
+<div><p>new_area of all window of one orientation</p>
+</div></blockquote>
+<p><strong>orientation</strong> : float</p>
+<blockquote class="last">
+<div><p>orientation of the obtained windows</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.thermal_zones">
+<code class="descname">thermal_zones</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.thermal_zones" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.used_library_calc">
+<code class="descname">used_library_calc</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.used_library_calc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.window_area">
+<code class="descname">window_area</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.window_area" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.year_of_construction">
+<code class="descname">year_of_construction</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.year_of_construction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.building.Building.year_of_retrofit">
+<code class="descname">year_of_retrofit</code><a class="headerlink" href="#teaser.logic.buildingobjects.building.Building.year_of_retrofit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.ThermalZone.html" title="ThermalZone"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.html" title="buildingobjects"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" >buildingobjects</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

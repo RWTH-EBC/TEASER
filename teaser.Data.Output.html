@@ -1,0 +1,549 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>output &#8212; TEASER 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="logic" href="teaser.Logic.html" />
+    <link rel="prev" title="input" href="teaser.Data.Input.html" /> 
+  </head>
+  <body role="document">
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.html" title="logic"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Data.Input.html" title="input"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Data.html" accesskey="U">data</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">output</a><ul>
+<li><a class="reference internal" href="#module-teaser.data.output.aixlib_output">Export AixLib models</a></li>
+<li><a class="reference internal" href="#export-annex60-models">Export Annex60 models</a></li>
+<li><a class="reference internal" href="#saving-teaserxml">Saving *.teaserXML</a></li>
+<li><a class="reference internal" href="#module-teaser.data.output.citygml_output">Saving CityGML .*gml</a></li>
+<li><a class="reference internal" href="#module-teaser.data.output.text_output">Saving text output</a></li>
+<li><a class="reference internal" href="#module-teaser.data.output.boundcond_output">Saving boundary conditions</a></li>
+<li><a class="reference internal" href="#module-teaser.data.output.buildingelement_output">Saving building elements</a></li>
+<li><a class="reference internal" href="#module-teaser.data.output.material_output">Saving materials</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser.Data.Input.html"
+                        title="previous chapter">input</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Logic.html"
+                        title="next chapter">logic</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Data.Output.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="output">
+<h1>output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-teaser.data.output.aixlib_output">
+<span id="export-aixlib-models"></span><h2>Export AixLib models<a class="headerlink" href="#module-teaser.data.output.aixlib_output" title="Permalink to this headline">¶</a></h2>
+<p>aixlib_output</p>
+<p>This module contains function to call Templates for AixLib model generation</p>
+<dl class="function">
+<dt id="teaser.data.output.aixlib_output.export_multizone">
+<code class="descclassname">teaser.data.output.aixlib_output.</code><code class="descname">export_multizone</code><span class="sig-paren">(</span><em>buildings</em>, <em>prj</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.output.aixlib_output.export_multizone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports models for AixLib library</p>
+<p>Exports a building for
+AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
+using the ThermalZoneEquipped and supporting models, like tables and weather
+model. Depending on chosen calculation method the parameter set to 1,2,
+3 or 4 element model. By default it uses the  correction for solar
+glazing (corG) and decoupled heat conduction through windows (
+merge_windows=False). In contrast to versions &lt; 0.5 TEASER now does not
+support any other model options, as we observed no need, since single
+ThermalZones are identical with Annex60 models. If you miss one of the
+old options please contact us.</p>
+<p>This function uses Mako Templates specified in
+data.output.modelicatemplates.AixLib</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>buildings</strong> : list of instances of Building</p>
+<blockquote>
+<div><p>list of TEASER instances of a Building that is exported to a AixLib
+MultizoneEquipped models. If you want to export a single building,
+please pass it over as a list containing only that building.</p>
+</div></blockquote>
+<p><strong>prj</strong> : instance of Project</p>
+<blockquote>
+<div><p>Instance of TEASER Project object to access Project related
+information, e.g. name or version of used libraries</p>
+</div></blockquote>
+<p><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in default output path of TEASER,
+an alternative path can be specified as a full path</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>lookup</td>
+<td>(TemplateLookup object) Instance of mako.TemplateLookup to store general functions for templates</td>
+</tr>
+<tr class="row-even"><td>zone_template_1</td>
+<td>(Template object) Template for ThermalZoneRecord using 1 element model</td>
+</tr>
+<tr class="row-odd"><td>zone_template_2</td>
+<td>(Template object) Template for ThermalZoneRecord using 2 element model</td>
+</tr>
+<tr class="row-even"><td>zone_template_3</td>
+<td>(Template object) Template for ThermalZoneRecord using 3 element model</td>
+</tr>
+<tr class="row-odd"><td>zone_template_4</td>
+<td>(Template object) Template for ThermalZoneRecord using 4 element model</td>
+</tr>
+<tr class="row-even"><td>model_template</td>
+<td>(Template object) Template for MultiZone model</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="export-annex60-models">
+<h2>Export Annex60 models<a class="headerlink" href="#export-annex60-models" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-teaser.data.output.annex60_output"></span><p>annex60_output</p>
+<p>This module contains function to call Templates for Annex60 model generation</p>
+<dl class="function">
+<dt id="teaser.data.output.annex60_output.export_annex60">
+<code class="descclassname">teaser.data.output.annex60_output.</code><code class="descname">export_annex60</code><span class="sig-paren">(</span><em>buildings</em>, <em>prj</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.output.annex60_output.export_annex60" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports models for Annex60 library</p>
+<p>Export a building to several models for
+Annex60.ThermalZones.ReducedOrder. Depending on the chosen calculation
+method models for 1, 2, 3, or 4 element model are exported. In addition
+you can specify if windows should be lumped into the walls, like it is
+done in VDI 6007 (merge_windows=True) or not. For each zone, one model is
+exported, if you want to combine all thermal zones into one model, consider
+using AixLib. The export includes internal gains from use conditions (
+calculated in teaser.logic.calculation.annex60) but does not include any
+heating or cooling equipment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>buildings</strong> : list of instances of Building</p>
+<blockquote>
+<div><p>list of TEASER instances of a Building that are exoirted If you want to
+export a single building, please pass it over as a list containing
+only that building.</p>
+</div></blockquote>
+<p><strong>prj</strong> : instance of Project</p>
+<blockquote>
+<div><p>Instance of TEASER Project object to access Project related
+information, e.g. name or version of used libraries</p>
+</div></blockquote>
+<p><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in default output path of TEASER,
+an alternative path can be specified as a full path</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="86%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>lookup</td>
+<td>(TemplateLookup object) Instance of mako.TemplateLookup to store general functions for templates</td>
+</tr>
+<tr class="row-even"><td>model_template_1</td>
+<td>(Template object) Template for ThermalZoneRecord using 1 element model</td>
+</tr>
+<tr class="row-odd"><td>model_template_2</td>
+<td>(Template object) Template for ThermalZoneRecord using 2 element model</td>
+</tr>
+<tr class="row-even"><td>model_template_3</td>
+<td>(Template object) Template for ThermalZoneRecord using 3 element model</td>
+</tr>
+<tr class="row-odd"><td>model_template_4</td>
+<td>(Template object) Template for ThermalZoneRecord using 4 element model</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="saving-teaserxml">
+<h2>Saving <a href="#id1"><span class="problematic" id="id2">*</span></a>.teaserXML<a class="headerlink" href="#saving-teaserxml" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-teaser.data.output.teaserxml_output"></span><p>TeaserXML_output</p>
+<p>This module contains function to save Projects in the proprietary
+TEASER file format .tXML</p>
+<dl class="function">
+<dt id="teaser.data.output.teaserxml_output.save_teaser_xml">
+<code class="descclassname">teaser.data.output.teaserxml_output.</code><code class="descname">save_teaser_xml</code><span class="sig-paren">(</span><em>path</em>, <em>project</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.output.teaserxml_output.save_teaser_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function saves a project to a tXML</p>
+<p>The function needs the Python Package PyXB.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path: string</strong></p>
+<blockquote>
+<div><p>complete path to the output file</p>
+</div></blockquote>
+<p><strong>project: Project()</strong></p>
+<blockquote class="last">
+<div><p>Teaser instance of Project()</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.data.output.teaserxml_output.set_basic_data_pyxb">
+<code class="descclassname">teaser.data.output.teaserxml_output.</code><code class="descname">set_basic_data_pyxb</code><span class="sig-paren">(</span><em>pyxb_class</em>, <em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.output.teaserxml_output.set_basic_data_pyxb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for save_teaser_xml to set the basic data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pyxb_class</strong> : PyXBClass</p>
+<blockquote>
+<div><p>pyxb class represantation of xml</p>
+</div></blockquote>
+<p><strong>element</strong> : TEASERClass</p>
+<blockquote class="last">
+<div><p>teaser class representation of a building element</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.data.output.teaserxml_output.set_layer_data_pyxb">
+<code class="descclassname">teaser.data.output.teaserxml_output.</code><code class="descname">set_layer_data_pyxb</code><span class="sig-paren">(</span><em>pyxb_class</em>, <em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.output.teaserxml_output.set_layer_data_pyxb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for save_teaser_xml to set the layer data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pyxb_class</strong> : PyXBClass</p>
+<blockquote>
+<div><p>pyxb class represantation of xml</p>
+</div></blockquote>
+<p><strong>element</strong> : TEASERClass</p>
+<blockquote class="last">
+<div><p>teaser class representation of a building element</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.data.output.citygml_output">
+<span id="saving-citygml-gml"></span><h2>Saving CityGML .*gml<a class="headerlink" href="#module-teaser.data.output.citygml_output" title="Permalink to this headline">¶</a></h2>
+<p>CityGML</p>
+<p>This module contains function to save and load Projects in the non proprietary
+CityGML file format .gml</p>
+<dl class="function">
+<dt id="teaser.data.output.citygml_output.save_gml">
+<code class="descclassname">teaser.data.output.citygml_output.</code><code class="descname">save_gml</code><span class="sig-paren">(</span><em>project</em>, <em>path</em>, <em>ref_coordinates=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.output.citygml_output.save_gml" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function saves a project to a cityGML file</p>
+<p>The function needs the Python Package PyXB. And the opengis bundle for GML
+and CityGML. This function underlies a lot of simplifications and
+assumptions. Be careful using it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>project: Project()</strong></p>
+<blockquote>
+<div><p>Teaser instance of Project()</p>
+</div></blockquote>
+<p><strong>path: string</strong></p>
+<blockquote>
+<div><p>complete path to the output file</p>
+</div></blockquote>
+<p><strong>ref_coordinates: list</strong></p>
+<blockquote class="last">
+<div><p>list with  lower and one upper reference coordinates. Each coordiante
+should contain 3 ints or floats for x, y, and z coordinates of the
+point. e.g: [[458877,,5438353, -0.2], [458889,5438363,6.317669]]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.data.output.text_output">
+<span id="saving-text-output"></span><h2>Saving text output<a class="headerlink" href="#module-teaser.data.output.text_output" title="Permalink to this headline">¶</a></h2>
+<p>Text_output</p>
+<p>This module contains function to call Templates for textual output</p>
+<dl class="function">
+<dt id="teaser.data.output.text_output.export_parameters_txt">
+<code class="descclassname">teaser.data.output.text_output.</code><code class="descname">export_parameters_txt</code><span class="sig-paren">(</span><em>prj</em>, <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.output.text_output.export_parameters_txt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exports parameters of all buildings in a readable text file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path</strong> : string</p>
+<blockquote class="last">
+<div><p>if the Files should not be stored in OutputData, an alternative
+can be specified</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.data.output.boundcond_output">
+<span id="saving-boundary-conditions"></span><h2>Saving boundary conditions<a class="headerlink" href="#module-teaser.data.output.boundcond_output" title="Permalink to this headline">¶</a></h2>
+<p>boundcond_output.py</p>
+<p>This module contains function to save boundary conditions classes</p>
+<dl class="function">
+<dt id="teaser.data.output.boundcond_output.save_bound_conditions">
+<code class="descclassname">teaser.data.output.boundcond_output.</code><code class="descname">save_bound_conditions</code><span class="sig-paren">(</span><em>bound_cond</em>, <em>data_class</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.output.boundcond_output.save_bound_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use conditions saver.</p>
+<p>Saves use conditions according to their usage type in the the XML file
+for use conditions in InputData. If the Project parent is set, it
+automatically saves it to the file given in Project.data. Alternatively
+you can specify a path to a file of UseConditions. If this
+file does not exist, a new file is created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>bound_cond</strong> : BoundaryConditions()</p>
+<blockquote>
+<div><p>Instance of TEASERs
+BuildingObjects.BoundaryConditions.BoundaryConditions</p>
+</div></blockquote>
+<p><strong>data_class</strong> : DataClass()</p>
+<blockquote class="last">
+<div><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.ile</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.data.output.buildingelement_output">
+<span id="saving-building-elements"></span><h2>Saving building elements<a class="headerlink" href="#module-teaser.data.output.buildingelement_output" title="Permalink to this headline">¶</a></h2>
+<p>buildingelement_ouput.py</p>
+<p>This module contains function to save building element classes</p>
+<dl class="function">
+<dt id="teaser.data.output.buildingelement_output.delete_type_element">
+<code class="descclassname">teaser.data.output.buildingelement_output.</code><code class="descname">delete_type_element</code><span class="sig-paren">(</span><em>element</em>, <em>data_class</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.output.buildingelement_output.delete_type_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes typical element.</p>
+<p>Deletes typical building elements according to their construction
+year and their construction type in the the XML file for type buidling
+elements. If the Project parent is set, it automatically saves it to
+the file given in Project.data. Alternatively you can specify a path to
+a file of TypeBuildingElements. If this file does not exist,
+a new file is created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>element</strong> : BuildingElement()</p>
+<blockquote>
+<div><p>Instance of BuildingElement or inherited Element of TEASER</p>
+</div></blockquote>
+<p><strong>data_class</strong> : DataClass()</p>
+<blockquote class="last">
+<div><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.data.output.buildingelement_output.save_type_element">
+<code class="descclassname">teaser.data.output.buildingelement_output.</code><code class="descname">save_type_element</code><span class="sig-paren">(</span><em>element</em>, <em>data_class</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.output.buildingelement_output.save_type_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Typical element saver.</p>
+<p>Saves typical building elements according to their construction
+year and their construction type in the XML file for type buidling
+elements. If the Project parent is set, it automatically saves it to
+the file given in Project.data. Alternatively you can specify a path to
+a file of TypeBuildingElements. If this file does not exist,
+a new file is created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>element</strong> : BuildingElement()</p>
+<blockquote>
+<div><p>Instance of BuildingElement or inherited Element of TEASER</p>
+</div></blockquote>
+<p><strong>data_class</strong> : DataClass()</p>
+<blockquote class="last">
+<div><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.data.output.material_output">
+<span id="saving-materials"></span><h2>Saving materials<a class="headerlink" href="#module-teaser.data.output.material_output" title="Permalink to this headline">¶</a></h2>
+<p>material_output.py</p>
+<p>This module contains function to save material classes</p>
+<dl class="function">
+<dt id="teaser.data.output.material_output.save_material">
+<code class="descclassname">teaser.data.output.material_output.</code><code class="descname">save_material</code><span class="sig-paren">(</span><em>material</em>, <em>data_class</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.output.material_output.save_material" title="Permalink to this definition">¶</a></dt>
+<dd><p>Material saver.</p>
+<p>Saves material and their properties the XML file for type buidling
+elements. If the Project parent is set, it automatically saves it to
+the file given in Project.data. Alternatively you can specify a path to
+a file with Materials. If this file does not exist, a new file is created.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>material</strong> : Material()</p>
+<blockquote>
+<div><p>instance of TEASERS Material class</p>
+</div></blockquote>
+<p><strong>data_class</strong> : DataClass()</p>
+<blockquote class="last">
+<div><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.html" title="logic"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Data.Input.html" title="input"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Data.html" >data</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

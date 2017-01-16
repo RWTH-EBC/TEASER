@@ -1,0 +1,519 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ThermalZone &#8212; TEASER 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="boundaryconditions" href="teaser.Logic.BuildingObjects.BoundaryConditions.html" />
+    <link rel="prev" title="Building" href="teaser.Logic.BuildingObjects.Building.html" /> 
+  </head>
+  <body role="document">
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.BoundaryConditions.html" title="boundaryconditions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.Building.html" title="Building"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" accesskey="U">buildingobjects</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.Building.html"
+                        title="previous chapter">Building</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Logic.BuildingObjects.BoundaryConditions.html"
+                        title="next chapter">boundaryconditions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Logic.BuildingObjects.ThermalZone.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-teaser.logic.buildingobjects.thermalzone">
+<span id="thermalzone"></span><h1>ThermalZone<a class="headerlink" href="#module-teaser.logic.buildingobjects.thermalzone" title="Permalink to this headline">¶</a></h1>
+<p>This module includes the ThermalZone class</p>
+<dl class="class">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone">
+<em class="property">class </em><code class="descclassname">teaser.logic.buildingobjects.thermalzone.</code><code class="descname">ThermalZone</code><span class="sig-paren">(</span><em>parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Thermal zone class.</p>
+<p>This class is used to manage information and parameter calculation for
+thermal zones. Each thermal zone has one specific calculation method,
+which is specific to the used model (model_attr). For new model
+implementation this attribute can be assigned to new classes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>parent: Building()</strong></p>
+<blockquote class="last">
+<div><p>The parent class of this object, the Building the zone belongs to.
+Allows for better control of hierarchical structures. If not None it
+adds this ThermalZone instance to Building.thermal_zones.
+Default is None</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>internal_id</td>
+<td>(float) Random id for the distinction between different zones.</td>
+</tr>
+<tr class="row-even"><td>name</td>
+<td>(str) Individual name.</td>
+</tr>
+<tr class="row-odd"><td>area</td>
+<td>(float [m2]) Thermal zone area.</td>
+</tr>
+<tr class="row-even"><td>volume</td>
+<td>(float [m3]) Thermal zone volume.</td>
+</tr>
+<tr class="row-odd"><td>infiltration_rate</td>
+<td>(float [1/h]) Infiltration rate of zone.</td>
+</tr>
+<tr class="row-even"><td>outer_walls</td>
+<td>(list) List of OuterWall instances.</td>
+</tr>
+<tr class="row-odd"><td>rooftops</td>
+<td>(list) List of Rooftop instances.</td>
+</tr>
+<tr class="row-even"><td>ground_floors</td>
+<td>(list) List of GroundFloor instances.</td>
+</tr>
+<tr class="row-odd"><td>windows</td>
+<td>(list) List of Window instances.</td>
+</tr>
+<tr class="row-even"><td>inner_walls</td>
+<td>(list) List of InnerWall instances.</td>
+</tr>
+<tr class="row-odd"><td>floors</td>
+<td>(list) List of Floor instances.</td>
+</tr>
+<tr class="row-even"><td>ceilings: list</td>
+<td>List of Ceiling instances.</td>
+</tr>
+<tr class="row-odd"><td>use_conditions</td>
+<td>(instance of UseConditions()) Instance of UseConditions with all relevant information for the usage of the thermal zone</td>
+</tr>
+<tr class="row-even"><td>model_attr</td>
+<td>(instance of OneElement(), TwoElement(), ThreeElement() or) FourElement() Instance of OneElement(), TwoElement(), ThreeElement() or FourElement(), that holds all calculation functions and attributes needed for the specific model.</td>
+</tr>
+<tr class="row-odd"><td>typical_length</td>
+<td>(float [m]) normative typical length of the thermal zone</td>
+</tr>
+<tr class="row-even"><td>typical_width</td>
+<td>(float [m]) normative typical width of the thermal zone</td>
+</tr>
+<tr class="row-odd"><td>t_inside</td>
+<td>(float [K]) Normative indoor temperature for static heat load calculation. The input of t_inside is ALWAYS in Kelvin</td>
+</tr>
+<tr class="row-even"><td>t_outside</td>
+<td>(float [K]) Normative outdoor temperature for static heat load calculation. The input of t_inside is ALWAYS in Kelvin</td>
+</tr>
+<tr class="row-odd"><td>t_ground</td>
+<td>(float [K]) Temperature directly at the outer side of ground floors for static heat load calculation. The input of t_ground is ALWAYS in Kelvin</td>
+</tr>
+<tr class="row-even"><td>density_air</td>
+<td>(float [kg/m3]) average density of the air in the thermal zone</td>
+</tr>
+<tr class="row-odd"><td>heat_capac_air</td>
+<td>(float [J/K]) average heat capacity of the air in the thermal zone</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element">
+<code class="descname">add_element</code><span class="sig-paren">(</span><em>building_element</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.add_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a building element to the corresponding list</p>
+<p>This function adds a BuildingElement instance to the the list
+depending on the type of the Building Element</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>building_element</strong> : BuildingElement()</p>
+<blockquote class="last">
+<div><p>inherited objects of BuildingElement() instance of TEASER</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.area">
+<code class="descname">area</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.area" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters">
+<code class="descname">calc_zone_parameters</code><span class="sig-paren">(</span><em>number_of_elements=2</em>, <em>merge_windows=False</em>, <em>t_bt=5</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.calc_zone_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>RC-Calculation for the thermal zone</p>
+<p>Based on the input parameters (used model) this function instantiates
+the corresponding calculation Class (e.g. TwoElement) and calculates
+the zone parameters. Currently the function is able to distinguishes
+between the number of elements, we distinguish between:</p>
+<blockquote>
+<div><ul class="simple">
+<li>one element: all outer walls are aggregated into one element,</li>
+</ul>
+<p>inner wall are neglected
+- two elements: exterior and interior walls are aggregated
+- three elements: like 2, but floor or roofs are aggregated
+separately
+- four elements: roofs and floors are aggregated separately</p>
+</div></blockquote>
+<p>For all four options we can chose if the thermal conduction through
+the window is considered in a separate resistance or not.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>number_of_elements</strong> : int</p>
+<blockquote>
+<div><p>defines the number of elements, that area aggregated, between 1
+and 4, default is 2</p>
+</div></blockquote>
+<p><strong>merge_windows</strong> : bool</p>
+<blockquote>
+<div><p>True for merging the windows into the outer walls, False for
+separate resistance for window, default is False (Only
+supported for Annex60)</p>
+</div></blockquote>
+<p><strong>t_bt</strong> : float</p>
+<blockquote class="last">
+<div><p>Time constant according to VDI 6007 (default t_bt = 5)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.ceilings">
+<code class="descname">ceilings</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.ceilings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes the actual thermal zone savely.</p>
+<p>This deletes the current thermal Zone and also refreshes the
+thermal_zones list in the parent Building.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_gfs">
+<code class="descname">find_gfs</code><span class="sig-paren">(</span><em>orientation</em>, <em>tilt</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_gfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all ground floors with given orientation and tilt</p>
+<p>This function returns a list of all GroundFloor elements with the
+same orientation and tilt.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>orientation</strong> : float [degree]</p>
+<blockquote>
+<div><p>Azimuth of the desired ground floors.</p>
+</div></blockquote>
+<p><strong>tilt</strong> : float [degree]</p>
+<blockquote>
+<div><p>Tilt against the horizontal of the desired ground floors.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>elements</strong> : list</p>
+<blockquote class="last">
+<div><p>List of GroundFloor instances with desired orientation and tilt.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_rts">
+<code class="descname">find_rts</code><span class="sig-paren">(</span><em>orientation</em>, <em>tilt</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_rts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all rooftops with given orientation and tilt</p>
+<p>This function returns a list of all Rooftop elements with the
+same orientation and tilt.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>orientation</strong> : float [degree]</p>
+<blockquote>
+<div><p>Azimuth of the desired rooftops.</p>
+</div></blockquote>
+<p><strong>tilt</strong> : float [degree]</p>
+<blockquote>
+<div><p>Tilt against the horizontal of the desired rooftops.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>elements</strong> : list</p>
+<blockquote class="last">
+<div><p>List of Rooftop instances with desired orientation and tilt.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_walls">
+<code class="descname">find_walls</code><span class="sig-paren">(</span><em>orientation</em>, <em>tilt</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_walls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all outer walls with given orientation and tilt</p>
+<p>This function returns a list of all OuterWall elements with the
+same orientation and tilt.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>orientation</strong> : float [degree]</p>
+<blockquote>
+<div><p>Azimuth of the desired walls.</p>
+</div></blockquote>
+<p><strong>tilt</strong> : float [degree]</p>
+<blockquote>
+<div><p>Tilt against the horizontal of the desired walls.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>elements</strong> : list</p>
+<blockquote class="last">
+<div><p>List of OuterWalls instances with desired orientation and tilt.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.find_wins">
+<code class="descname">find_wins</code><span class="sig-paren">(</span><em>orientation</em>, <em>tilt</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.find_wins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all windows with given orientation and tilt</p>
+<p>This function returns a list of all Window elements with the
+same orientation and tilt.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>orientation</strong> : float [degree]</p>
+<blockquote>
+<div><p>Azimuth of the desired windows.</p>
+</div></blockquote>
+<p><strong>tilt</strong> : float [degree]</p>
+<blockquote>
+<div><p>Tilt against the horizontal of the desired windows.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>elements</strong> : list</p>
+<blockquote class="last">
+<div><p>List of Window instances with desired orientation and tilt.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.floors">
+<code class="descname">floors</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.floors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.ground_floors">
+<code class="descname">ground_floors</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.ground_floors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.infiltration_rate">
+<code class="descname">infiltration_rate</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.infiltration_rate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.inner_walls">
+<code class="descname">inner_walls</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.inner_walls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.name">
+<code class="descname">name</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.outer_walls">
+<code class="descname">outer_walls</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.outer_walls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.parent">
+<code class="descname">parent</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.parent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.retrofit_zone">
+<code class="descname">retrofit_zone</code><span class="sig-paren">(</span><em>window_type=None</em>, <em>material=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.retrofit_zone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrofits all walls and windows in the zone.</p>
+<p>Function call for all elements facing the ambient or ground.</p>
+<p>This function covers OuterWall, Rooftop, GroundFloor and Window.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.rooftops">
+<code class="descname">rooftops</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.rooftops" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.set_inner_wall_area">
+<code class="descname">set_inner_wall_area</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_inner_wall_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the inner wall area according to zone area</p>
+<p>Sets the inner wall area according to zone area size if type building
+approach is used. This function covers Floors, Ceilings and InnerWalls.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.set_volume_zone">
+<code class="descname">set_volume_zone</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.set_volume_zone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the zone volume according to area and height of floors</p>
+<p>Sets the volume of a zone according area and height of floors
+(building attribute).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.t_inside">
+<code class="descname">t_inside</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_inside" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.t_outside">
+<code class="descname">t_outside</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.t_outside" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.use_conditions">
+<code class="descname">use_conditions</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.use_conditions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.volume">
+<code class="descname">volume</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.volume" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="teaser.logic.buildingobjects.thermalzone.ThermalZone.windows">
+<code class="descname">windows</code><a class="headerlink" href="#teaser.logic.buildingobjects.thermalzone.ThermalZone.windows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.BoundaryConditions.html" title="boundaryconditions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Logic.BuildingObjects.Building.html" title="Building"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" >buildingobjects</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

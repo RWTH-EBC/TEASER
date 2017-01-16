@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>input &#8212; TEASER 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="output" href="teaser.Data.Output.html" />
+    <link rel="prev" title="DataClass" href="teaser.Data.DataClass.html" /> 
+  </head>
+  <body role="document">
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Data.Output.html" title="output"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Data.DataClass.html" title="DataClass"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Data.html" accesskey="U">data</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">input</a><ul>
+<li><a class="reference internal" href="#module-teaser.data.input.boundcond_input">Loading boundary conditions</a></li>
+<li><a class="reference internal" href="#module-teaser.data.input.buildingelement_input">Loading building elements</a></li>
+<li><a class="reference internal" href="#module-teaser.data.input.material_input">Loading materials</a></li>
+<li><a class="reference internal" href="#loading-teaserxml">Loading *.teaserXML</a></li>
+<li><a class="reference internal" href="#loading-citygml-gml">Loading CityGML *.gml</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser.Data.DataClass.html"
+                        title="previous chapter">DataClass</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.Data.Output.html"
+                        title="next chapter">output</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser.Data.Input.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="input">
+<h1>input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-teaser.data.input.boundcond_input">
+<span id="loading-boundary-conditions"></span><h2>Loading boundary conditions<a class="headerlink" href="#module-teaser.data.input.boundcond_input" title="Permalink to this headline">¶</a></h2>
+<p>boundcond_input.py</p>
+<p>This module contains function to load boundary conditions classes</p>
+<dl class="function">
+<dt id="teaser.data.input.boundcond_input.load_boundary_conditions">
+<code class="descclassname">teaser.data.input.boundcond_input.</code><code class="descname">load_boundary_conditions</code><span class="sig-paren">(</span><em>bound_cond</em>, <em>zone_usage</em>, <em>data_class</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.boundcond_input.load_boundary_conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>load use conditions according to DIN 18599 and SIA2024</p>
+<p>loads Use conditions specified in the XML, according to DIN 18599,
+SIA2024 in addition some AixLib specific use conditions for central AHU
+are defined.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>bound_cond</strong> : BoundaryConditions()</p>
+<blockquote>
+<div><p>Instance of TEASERs
+BuildingObjects.BoundaryConditions.BoundaryConditions</p>
+</div></blockquote>
+<p><strong>zone_usage</strong> : str</p>
+<blockquote>
+<div><p>code list for zone_usage according to 18599</p>
+</div></blockquote>
+<p><strong>data_class</strong> : DataClass()</p>
+<blockquote class="last">
+<div><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.data.input.buildingelement_input">
+<span id="loading-building-elements"></span><h2>Loading building elements<a class="headerlink" href="#module-teaser.data.input.buildingelement_input" title="Permalink to this headline">¶</a></h2>
+<p>buildingelement_input.py</p>
+<p>This module contains function to load building element classes</p>
+<dl class="function">
+<dt id="teaser.data.input.buildingelement_input.load_type_element">
+<code class="descclassname">teaser.data.input.buildingelement_input.</code><code class="descname">load_type_element</code><span class="sig-paren">(</span><em>element</em>, <em>year</em>, <em>construction</em>, <em>data_class</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.buildingelement_input.load_type_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Typical element loader.</p>
+<p>Loads typical building elements according to their construction
+year and their construction type from a XML. The elements are created by
+using IWU building characteristics combined with normative material data.</p>
+<p>This function will only work if the parents to Building are set.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>element</strong> : BuildingElement()</p>
+<blockquote>
+<div><p>Instance of BuildingElement or inherited Element of TEASER</p>
+</div></blockquote>
+<p><strong>year</strong> : int</p>
+<blockquote>
+<div><p>Year of construction</p>
+</div></blockquote>
+<p><strong>construction</strong> : str</p>
+<blockquote>
+<div><p>Construction type, code list (&#8216;heavy&#8217;, &#8216;light&#8217;)</p>
+</div></blockquote>
+<p><strong>data_class</strong> : DataClass()</p>
+<blockquote class="last">
+<div><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-teaser.data.input.material_input">
+<span id="loading-materials"></span><h2>Loading materials<a class="headerlink" href="#module-teaser.data.input.material_input" title="Permalink to this headline">¶</a></h2>
+<p>material_input.py</p>
+<p>This module contains function to load material classes</p>
+<dl class="function">
+<dt id="teaser.data.input.material_input.load_material">
+<code class="descclassname">teaser.data.input.material_input.</code><code class="descname">load_material</code><span class="sig-paren">(</span><em>material</em>, <em>mat_name</em>, <em>data_class</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.material_input.load_material" title="Permalink to this definition">¶</a></dt>
+<dd><p>Material loader.</p>
+<p>Loads Material specified in the XML.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>material</strong> : Material()</p>
+<blockquote>
+<div><p>instance of TEASERS Material class</p>
+</div></blockquote>
+<p><strong>mat_name</strong> : str</p>
+<blockquote>
+<div><p>Code list for Material</p>
+</div></blockquote>
+<p><strong>data_class</strong> : DataClass()</p>
+<blockquote class="last">
+<div><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.data.input.material_input.load_material_id">
+<code class="descclassname">teaser.data.input.material_input.</code><code class="descname">load_material_id</code><span class="sig-paren">(</span><em>material</em>, <em>mat_id</em>, <em>data_class</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.material_input.load_material_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Material loader by id.</p>
+<p>Loads Material specified in the XML by given material_id.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>material</strong> : Material()</p>
+<blockquote>
+<div><p>instance of TEASERS Material class</p>
+</div></blockquote>
+<p><strong>mat_id</strong> : name</p>
+<blockquote>
+<div><p>id of material from XML</p>
+</div></blockquote>
+<p><strong>data_class</strong> : DataClass()</p>
+<blockquote class="last">
+<div><p>DataClass containing the bindings for TypeBuildingElement and
+Material (typically this is the data class stored in prj.data,
+but the user can individually change that.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="loading-teaserxml">
+<h2>Loading <a href="#id1"><span class="problematic" id="id2">*</span></a>.teaserXML<a class="headerlink" href="#loading-teaserxml" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-teaser.data.input.teaserxml_input"></span><p>TeaserXML_input</p>
+<p>This module contains function to load Projects in the proprietary
+TEASER file format .tXML</p>
+<dl class="function">
+<dt id="teaser.data.input.teaserxml_input.load_teaser_xml">
+<code class="descclassname">teaser.data.input.teaserxml_input.</code><code class="descname">load_teaser_xml</code><span class="sig-paren">(</span><em>path</em>, <em>prj</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.teaserxml_input.load_teaser_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function loads a project from teaserXML</p>
+<p>TEASERs internal file format to store information.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path: string</strong></p>
+<blockquote>
+<div><p>path of teaserXML file</p>
+</div></blockquote>
+<p><strong>project: Project()</strong></p>
+<blockquote class="last">
+<div><p>Teaser instance of Project()</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.data.input.teaserxml_input.set_basic_data_teaser">
+<code class="descclassname">teaser.data.input.teaserxml_input.</code><code class="descname">set_basic_data_teaser</code><span class="sig-paren">(</span><em>pyxb_class</em>, <em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.teaserxml_input.set_basic_data_teaser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for load_teaser_xml to set the basic data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pyxb_class</strong> : PyXBClass</p>
+<blockquote>
+<div><p>pyxb class represantation of xml</p>
+</div></blockquote>
+<p><strong>element</strong> : TEASERClass</p>
+<blockquote class="last">
+<div><p>teaser class representation of a building element</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.data.input.teaserxml_input.set_layer_data_teaser">
+<code class="descclassname">teaser.data.input.teaserxml_input.</code><code class="descname">set_layer_data_teaser</code><span class="sig-paren">(</span><em>pyxb_class</em>, <em>element</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.teaserxml_input.set_layer_data_teaser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for load_teaser_xml to set the layer data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pyxb_class</strong> : PyXBClass</p>
+<blockquote>
+<div><p>pyxb class represantation of xml</p>
+</div></blockquote>
+<p><strong>element</strong> : TEASERClass</p>
+<blockquote class="last">
+<div><p>teaser class representation of a building element</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="loading-citygml-gml">
+<h2>Loading CityGML <a href="#id3"><span class="problematic" id="id4">*</span></a>.gml<a class="headerlink" href="#loading-citygml-gml" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-teaser.data.input.citygml_input"></span><p>CityGML</p>
+<p>This module contains function to load Buildings in the non proprietary
+CityGML file format .gml</p>
+<dl class="class">
+<dt id="teaser.data.input.citygml_input.SurfaceGML">
+<em class="property">class </em><code class="descclassname">teaser.data.input.citygml_input.</code><code class="descname">SurfaceGML</code><span class="sig-paren">(</span><em>gml_surface</em>, <em>boundary=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.citygml_input.SurfaceGML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Class for calculating attributes of CityGML surfaces</p>
+<p>this class automatically calculates surface area using an algorithm for
+polygons with arbitrary number of points. The Surface orientation by
+analysing the normal vector (caution: the orientations are then set to
+TEASER orientation). The Surface tilt by analysing the normal vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>gml_surface</strong> : list</p>
+<blockquote>
+<div><p>list of gml points with srsDimension=3 the first 3 and the last 3
+entries must describe the same point in CityGML</p>
+</div></blockquote>
+<p><strong>boundary</strong> : str</p>
+<blockquote class="last">
+<div><p>Name of the boundary surface</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="teaser.data.input.citygml_input.SurfaceGML.get_gml_area">
+<code class="descname">get_gml_area</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.citygml_input.SurfaceGML.get_gml_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>calc the area of a gml_surface defined by gml coordinates</p>
+<p>Surface needs to be planar</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>surface_area</strong> : float</p>
+<blockquote class="last">
+<div><p>returns the area of the surface</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.data.input.citygml_input.SurfaceGML.get_gml_orientation">
+<code class="descname">get_gml_orientation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.citygml_input.SurfaceGML.get_gml_orientation" title="Permalink to this definition">¶</a></dt>
+<dd><p>calc the orientation of a gml_surface defined by 4 or 5 gml
+coordinates</p>
+<p>Surface needs to be planar, the orientation returned is in TEASER
+coordinates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>surface_orientation</strong> : float</p>
+<blockquote class="last">
+<div><p>returns the orientation of the surface</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.data.input.citygml_input.SurfaceGML.get_gml_tilt">
+<code class="descname">get_gml_tilt</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.citygml_input.SurfaceGML.get_gml_tilt" title="Permalink to this definition">¶</a></dt>
+<dd><p>calc the tilt of a gml_surface defined by 4 or 5 gml coordinates</p>
+<p>Surface needs to be planar</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>surface_tilt</strong> : float</p>
+<blockquote class="last">
+<div><p>returns the orientation of the surface</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.data.input.citygml_input.SurfaceGML.poly_area">
+<code class="descname">poly_area</code><span class="sig-paren">(</span><em>poly</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.citygml_input.SurfaceGML.poly_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculates the area of a polygon with arbitrary points</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>poly</strong> : list</p>
+<blockquote>
+<div><p>polygon as a list in srsDimension = 3</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>area</strong> : float</p>
+<blockquote class="last">
+<div><p>returns the area of a polygon</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="teaser.data.input.citygml_input.SurfaceGML.unit_normal">
+<code class="descname">unit_normal</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.citygml_input.SurfaceGML.unit_normal" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculates the unit normal vector of a surface described by 3 points</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>a</strong> : float</p>
+<blockquote>
+<div><p>point 1</p>
+</div></blockquote>
+<p><strong>b</strong> : float</p>
+<blockquote>
+<div><p>point 2</p>
+</div></blockquote>
+<p><strong>c</strong> : float</p>
+<blockquote>
+<div><p>point 3</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>unit_normal</strong> : list</p>
+<blockquote class="last">
+<div><p>unit normal vector as a list</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="teaser.data.input.citygml_input.load_gml">
+<code class="descclassname">teaser.data.input.citygml_input.</code><code class="descname">load_gml</code><span class="sig-paren">(</span><em>path</em>, <em>prj</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.data.input.citygml_input.load_gml" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function loads buildings from a CityGML file</p>
+<p>This function is a proof of concept, be careful using it.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>path: string</strong></p>
+<blockquote>
+<div><p>path of CityGML file</p>
+</div></blockquote>
+<p><strong>prj: Project()</strong></p>
+<blockquote class="last">
+<div><p>Teaser instance of Project()</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.Data.Output.html" title="output"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser.Data.DataClass.html" title="DataClass"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Data.html" >data</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>

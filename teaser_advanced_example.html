@@ -1,0 +1,589 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Advanced examples &#8212; TEASER 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="TEASER modules" href="teaser.html" />
+    <link rel="prev" title="API examples" href="teaser_api_example.html" /> 
+  </head>
+  <body role="document">
+<div class="headerStyle">
+<img src="_static/EBC_Logo.png" alt="EBC_Logo" />
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.html" title="TEASER modules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="teaser_api_example.html" title="API examples"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.Examples.html" accesskey="U">Examples</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Advanced examples</a><ul>
+<li><a class="reference internal" href="#example-7-generate-single-building">Example 7: Generate single building</a></li>
+<li><a class="reference internal" href="#example-8-generate-multiple-building-from-data-base-information">Example 8: Generate multiple building from data base information</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="teaser_api_example.html"
+                        title="previous chapter">API examples</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="teaser.html"
+                        title="next chapter">TEASER modules</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/teaser_advanced_example.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="advanced-examples">
+<h1>Advanced examples<a class="headerlink" href="#advanced-examples" title="Permalink to this headline">¶</a></h1>
+<p>The following examples demonstrate how to generate a building without archetype functions and how to generate a whole set of buildings using data base information</p>
+<div class="section" id="example-7-generate-single-building">
+<h2>Example 7: Generate single building<a class="headerlink" href="#example-7-generate-single-building" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Created July 2015</span>
+<span class="c1"># TEASER Development Team</span>
+
+<span class="sd">&quot;&quot;&quot;This module contains an example that shows to create a building not using</span>
+<span class="sd">the archetype approach but adding all information separately. In this example</span>
+<span class="sd">we import all needed modules and classes where we need it in the code. For you</span>
+<span class="sd">application we suggest to use PEP008 and import them at the beginning of the</span>
+<span class="sd">script.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">example_create_building</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;&quot;This function demonstrates generating a building adding all</span>
+<span class="sd">    information separately&quot;&quot;&quot;</span>
+
+    <span class="c1"># First step: Import the TEASER API (called Project) into your Python module</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.project</span> <span class="k">import</span> <span class="n">Project</span>
+
+    <span class="c1"># To use the API instantiate the Project class and rename the Project. The</span>
+    <span class="c1"># parameter load_data=True indicates that we load data into our</span>
+    <span class="c1"># Project (e.g. for Material properties and typical wall constructions.</span>
+    <span class="c1"># This can take a few seconds, depending on the size of the used data base.</span>
+
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="n">load_data</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;BuildingExample&quot;</span>
+
+    <span class="c1"># Instantiate a Building class and set the Project API as a parent to</span>
+    <span class="c1"># this building. This will automatically add this building and all its</span>
+    <span class="c1"># future changes to the project. This is helpful as we can use the data</span>
+    <span class="c1"># base and API functions (like explained in e2 - e5). We also set some</span>
+    <span class="c1"># building parameters. Be careful: Dymola does not like whitespaces in</span>
+    <span class="c1"># names and filenames, thus we will delete them anyway in TEASER.</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.building</span> <span class="k">import</span> <span class="n">Building</span>
+
+    <span class="n">bldg</span> <span class="o">=</span> <span class="n">Building</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">prj</span><span class="p">)</span>
+    <span class="n">bldg</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;SuperExampleBuilding&quot;</span>
+    <span class="n">bldg</span><span class="o">.</span><span class="n">street_name</span> <span class="o">=</span> <span class="s2">&quot;AwesomeAvenue42&quot;</span>
+    <span class="n">bldg</span><span class="o">.</span><span class="n">city</span> <span class="o">=</span> <span class="s2">&quot;46325FantasticTown&quot;</span>
+    <span class="n">bldg</span><span class="o">.</span><span class="n">year_of_construction</span> <span class="o">=</span> <span class="mi">2015</span>
+    <span class="n">bldg</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">bldg</span><span class="o">.</span><span class="n">height_of_floors</span> <span class="o">=</span> <span class="mf">3.5</span>
+
+    <span class="c1"># Instantiate a ThermalZone class and set the Building as a parent of it.</span>
+    <span class="c1"># Set some parameters of the thermal zone. Be careful: Dymola does not</span>
+    <span class="c1"># like whitespaces in  names and filenames, thus we will delete them</span>
+    <span class="c1"># anyway in TEASER.</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.thermalzone</span> <span class="k">import</span> <span class="n">ThermalZone</span>
+
+    <span class="n">tz</span> <span class="o">=</span> <span class="n">ThermalZone</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">bldg</span><span class="p">)</span>
+    <span class="n">tz</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;LivingRoom&quot;</span>
+    <span class="n">tz</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">140.0</span>
+    <span class="n">tz</span><span class="o">.</span><span class="n">volume</span> <span class="o">=</span> <span class="n">tz</span><span class="o">.</span><span class="n">area</span> <span class="o">*</span> <span class="n">bldg</span><span class="o">.</span><span class="n">number_of_floors</span> <span class="o">*</span> <span class="n">bldg</span><span class="o">.</span><span class="n">height_of_floors</span>
+    <span class="n">tz</span><span class="o">.</span><span class="n">infiltration_rate</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+    <span class="c1"># Instantiate BoundaryConditions and load conditions for `Living`.</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.boundaryconditions.boundaryconditions</span> \
+        <span class="kn">import</span> <span class="nn">BoundaryConditions</span>
+
+    <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span> <span class="o">=</span> <span class="n">BoundaryConditions</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">tz</span><span class="o">.</span><span class="n">use_conditions</span><span class="o">.</span><span class="n">load_use_conditions</span><span class="p">(</span><span class="s2">&quot;Living&quot;</span><span class="p">,</span> <span class="n">prj</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># Define two building elements reflecting a pitched roof (south = 180° and</span>
+    <span class="c1"># north = 0°). Setting the the ThermalZone as a parent will automatically</span>
+    <span class="c1"># assign this element to the thermal zone. We also set names, tilt and</span>
+    <span class="c1"># coefficients for heat transfer on the inner and outer side of the</span>
+    <span class="c1"># roofs. If the building has a flat roof, please use -1 as</span>
+    <span class="c1"># orientation. Please read the docs to get more information on these</span>
+    <span class="c1"># parameters.</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.rooftop</span> <span class="k">import</span> <span class="n">Rooftop</span>
+
+    <span class="n">roof_south</span> <span class="o">=</span> <span class="n">Rooftop</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">roof_south</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Roof_South&quot;</span>
+    <span class="n">roof_south</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">75.0</span>
+    <span class="n">roof_south</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mf">180.0</span>
+    <span class="n">roof_south</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">55.0</span>
+    <span class="n">roof_south</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">1.7</span>
+    <span class="n">roof_south</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">20.0</span>
+    <span class="n">roof_south</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+    <span class="n">roof_south</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+
+    <span class="n">roof_north</span> <span class="o">=</span> <span class="n">Rooftop</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+    <span class="n">roof_north</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Roof_North&quot;</span>
+    <span class="n">roof_north</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="mf">75.0</span>
+    <span class="n">roof_north</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">roof_north</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="mf">55.0</span>
+    <span class="n">roof_north</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">1.7</span>
+    <span class="n">roof_north</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">20.0</span>
+    <span class="n">roof_north</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+    <span class="n">roof_north</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+
+    <span class="c1"># To define the wall constructions we need to instantiate Layer and</span>
+    <span class="c1"># Material objects and set attributes. id indicates the order of wall</span>
+    <span class="c1"># construction from inside to outside (so 0 is on the inner surface). You</span>
+    <span class="c1"># need to set this value!</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.layer</span> <span class="k">import</span> <span class="n">Layer</span>
+
+    <span class="c1"># First layer south</span>
+
+    <span class="n">layer_s1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">roof_south</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">layer_s1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span> <span class="k">import</span> <span class="n">Material</span>
+
+    <span class="n">material_s1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_s1</span><span class="p">)</span>
+    <span class="n">material_s1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Insulation&quot;</span>
+    <span class="n">material_s1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">120.0</span>
+    <span class="n">material_s1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">0.04</span>
+    <span class="n">material_s1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="c1"># Second layer south</span>
+
+    <span class="n">layer_s2</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">roof_south</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">layer_s2</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.15</span>
+
+    <span class="n">material_s2</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_s2</span><span class="p">)</span>
+    <span class="n">material_s2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Tile&quot;</span>
+    <span class="n">material_s2</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">1400.0</span>
+    <span class="n">material_s2</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">0.6</span>
+    <span class="n">material_s2</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">2.5</span>
+
+    <span class="c1"># First layer north</span>
+
+    <span class="n">layer_n1</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">roof_south</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">layer_n1</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.3</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.material</span> <span class="k">import</span> <span class="n">Material</span>
+
+    <span class="n">material_n1</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_n1</span><span class="p">)</span>
+    <span class="n">material_n1</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Insulation&quot;</span>
+    <span class="n">material_n1</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">120.0</span>
+    <span class="n">material_n1</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">0.04</span>
+    <span class="n">material_n1</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="c1"># Second layer north</span>
+
+    <span class="n">layer_n2</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">roof_south</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">layer_n2</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.15</span>
+
+    <span class="n">material_n2</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">layer_n2</span><span class="p">)</span>
+    <span class="n">material_n2</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Tile&quot;</span>
+    <span class="n">material_n2</span><span class="o">.</span><span class="n">density</span> <span class="o">=</span> <span class="mf">1400.0</span>
+    <span class="n">material_n2</span><span class="o">.</span><span class="n">heat_capac</span> <span class="o">=</span> <span class="mf">0.6</span>
+    <span class="n">material_n2</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">2.5</span>
+
+    <span class="c1"># Another option is to use the database for typical wall constructions,</span>
+    <span class="c1"># but set area, tilt, orientation individually. To simplifiy code,</span>
+    <span class="c1"># we save individual information for exterior walls, interior walls into</span>
+    <span class="c1"># dictionaries.</span>
+    <span class="c1"># outer walls</span>
+    <span class="c1"># {&#39;name_of_wall&#39;: [area, tilt, orientation]}</span>
+    <span class="c1"># interior walls</span>
+    <span class="c1"># {&#39;name_of_wall&#39;: [area, tilt, orientation]}</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.outerwall</span> <span class="k">import</span> <span class="n">OuterWall</span>
+
+    <span class="n">out_wall_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OuterWall_north&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+                     <span class="s2">&quot;OuterWall_east&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">14.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">],</span>
+                     <span class="s2">&quot;OuterWall_south&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">],</span>
+                     <span class="s2">&quot;OuterWall_west&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">14.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">270.0</span><span class="p">]}</span>
+
+    <span class="c1"># For ground floors the orientation is always -2</span>
+
+    <span class="n">ground_floor_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;GroundFloor&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]}</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.innerwall</span> <span class="k">import</span> <span class="n">InnerWall</span>
+
+    <span class="n">in_wall_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;InnerWall1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">],</span>
+                    <span class="s2">&quot;InnerWall2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span> <span class="s1">&#39;heavy&#39;</span><span class="p">,</span> <span class="mf">14.0</span><span class="p">],</span>
+                    <span class="s2">&quot;InnerWall3&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">bldg</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">]}</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">out_wall_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="c1"># Instantiate class, key is the name</span>
+        <span class="n">out_wall</span> <span class="o">=</span> <span class="n">OuterWall</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="c1"># Use load_type_element() function of the building element, and pass</span>
+        <span class="c1"># over the year of construction of the building and the type of</span>
+        <span class="c1"># construction (in this case `heavy`).</span>
+
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+            <span class="n">year</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+            <span class="n">construction</span><span class="o">=</span><span class="s1">&#39;heavy&#39;</span><span class="p">)</span>
+
+        <span class="c1"># area, tilt and orientation need to be set individually.</span>
+
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">out_wall</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1"># Repeat the procedure for inner walls and ground floors</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">in_wall_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+        <span class="n">in_wall</span> <span class="o">=</span> <span class="n">InnerWall</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+        <span class="n">in_wall</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="n">in_wall</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+            <span class="n">year</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+            <span class="n">construction</span><span class="o">=</span><span class="s1">&#39;heavy&#39;</span><span class="p">)</span>
+        <span class="n">in_wall</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.groundfloor</span> <span class="k">import</span> \
+        <span class="n">GroundFloor</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">ground_floor_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+        <span class="n">ground</span> <span class="o">=</span> <span class="n">GroundFloor</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">tz</span><span class="p">)</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">load_type_element</span><span class="p">(</span>
+            <span class="n">year</span><span class="o">=</span><span class="n">bldg</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+            <span class="n">construction</span><span class="o">=</span><span class="s1">&#39;heavy&#39;</span><span class="p">)</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ground</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="kn">from</span> <span class="nn">teaser.logic.buildingobjects.buildingphysics.window</span> <span class="k">import</span> <span class="n">Window</span>
+
+    <span class="n">win_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Window_east&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">],</span>
+                <span class="s2">&quot;Window_south&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">180.0</span><span class="p">],</span>
+                <span class="s2">&quot;Window_west&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">90.0</span><span class="p">,</span> <span class="mf">270.0</span><span class="p">]}</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">win_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+        <span class="n">win</span> <span class="o">=</span> <span class="n">Window</span><span class="p">(</span><span class="n">parent</span> <span class="o">=</span> <span class="n">tz</span><span class="p">)</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">tilt</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+        <span class="c1"># Additional to the already known attributes the window has</span>
+        <span class="c1"># additional attributes. Window.g_value describes the solar gain</span>
+        <span class="c1"># through windows, a_conv the convective heat transmission due to</span>
+        <span class="c1"># absorption of the window on the inner side. shading_g_total and</span>
+        <span class="c1"># shading_max_irr refers to the shading (solar gain reduction of the</span>
+        <span class="c1"># shading and shading_max_irr the threshold of irradiance to</span>
+        <span class="c1"># automatically apply shading).</span>
+
+        <span class="n">win</span><span class="o">.</span><span class="n">inner_convection</span> <span class="o">=</span> <span class="mf">1.7</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">inner_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">outer_convection</span> <span class="o">=</span> <span class="mf">20.0</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">outer_radiation</span> <span class="o">=</span> <span class="mf">5.0</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">g_value</span> <span class="o">=</span> <span class="mf">0.789</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">a_conv</span> <span class="o">=</span> <span class="mf">0.03</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">shading_g_total</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">win</span><span class="o">.</span><span class="n">shading_max_irr</span> <span class="o">=</span> <span class="mf">180.0</span>
+
+        <span class="c1"># One equivalent layer for windows</span>
+
+        <span class="n">win_layer</span> <span class="o">=</span> <span class="n">Layer</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">win</span><span class="p">)</span>
+        <span class="n">win_layer</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">win_layer</span><span class="o">.</span><span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.024</span>
+
+        <span class="c1"># Material for Glas</span>
+
+        <span class="n">win_material</span> <span class="o">=</span> <span class="n">Material</span><span class="p">(</span><span class="n">win_layer</span><span class="p">)</span>
+        <span class="n">win_material</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;GlasWindow&quot;</span>
+        <span class="n">win_material</span><span class="o">.</span><span class="n">thermal_conduc</span> <span class="o">=</span> <span class="mf">0.067</span>
+        <span class="n">win_material</span><span class="o">.</span><span class="n">transmittance</span> <span class="o">=</span> <span class="mf">0.9</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">example_create_building</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 6: That&#39;s it :)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-8-generate-multiple-building-from-data-base-information">
+<h2>Example 8: Generate multiple building from data base information<a class="headerlink" href="#example-8-generate-multiple-building-from-data-base-information" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Created July 2015</span>
+<span class="c1"># Marcus Fuchs</span>
+
+<span class="sd">&quot;&quot;&quot;This module contains an example how to generate a whole campus with 112</span>
+<span class="sd">buildings. The building information are stored in a data base. As we can&#39;t</span>
+<span class="sd">provide public access to the data base we exported available building</span>
+<span class="sd">information in XML files. The files can be found in</span>
+<span class="sd">examples.examplefiles.MelatenXML. To load we use the function read_XMLs and</span>
+<span class="sd">to handle data, we have a light-weight class called BuildingInfo.</span>
+<span class="sd">This example is not as well documented as the others. If you are new to</span>
+<span class="sd">TEASER please read examples e1 to e7 first.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
+<span class="kn">import</span> <span class="nn">teaser.logic.utilities</span> <span class="k">as</span> <span class="nn">utilities</span>
+<span class="kn">from</span> <span class="nn">teaser.project</span> <span class="k">import</span> <span class="n">Project</span>
+
+
+<span class="k">class</span> <span class="nc">BuildingInfo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Light-weight class to hold building info</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor for BuildingInfo</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year_of_construction</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">usage_type</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">building_number</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">floors</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height_of_floors</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">office_layout</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">read_XMLs</span><span class="p">(</span><span class="n">input_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reads the building XMLs to list of `BuildingInfo` objects</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    input_path : str</span>
+<span class="sd">        Path where the XMLs are located</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    info_list: list</span>
+<span class="sd">        A list of `BuildingInfo` objects with information about each building</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">info_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.xml&quot;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="n">this_building</span> <span class="o">=</span> <span class="n">BuildingInfo</span><span class="p">()</span>
+
+            <span class="n">this_XML</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">file</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">this_XML</span><span class="p">)</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Allgemein&#39;</span><span class="p">)</span>
+
+            <span class="n">this_building</span><span class="o">.</span><span class="n">year_of_construction</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Baujahr&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+            <span class="n">usage_type</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Gebaeudetyp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+            <span class="k">if</span> <span class="n">usage_type</span> <span class="o">==</span> <span class="s1">&#39;Buerogebaeude&#39;</span><span class="p">:</span>
+                <span class="n">this_building</span><span class="o">.</span><span class="n">usage_type</span> <span class="o">=</span> <span class="s1">&#39;office&#39;</span>
+            <span class="k">elif</span> <span class="n">usage_type</span> <span class="o">==</span> <span class="s1">&#39;Wohngebaeude&#39;</span><span class="p">:</span>
+                <span class="n">this_building</span><span class="o">.</span><span class="n">usage_type</span> <span class="o">=</span> <span class="s1">&#39;single_family_dwelling&#39;</span>
+            <span class="k">elif</span> <span class="n">usage_type</span> <span class="o">==</span> <span class="s1">&#39;Institut Allgemein&#39;</span><span class="p">:</span>
+                <span class="n">this_building</span><span class="o">.</span><span class="n">usage_type</span> <span class="o">=</span> <span class="s1">&#39;institute&#39;</span>
+            <span class="k">elif</span> <span class="n">usage_type</span> <span class="o">==</span> <span class="s1">&#39;Institut 4&#39;</span><span class="p">:</span>
+                <span class="n">this_building</span><span class="o">.</span><span class="n">usage_type</span> <span class="o">=</span> <span class="s1">&#39;institute4&#39;</span>
+            <span class="k">elif</span> <span class="n">usage_type</span> <span class="o">==</span> <span class="s1">&#39;Institut 8&#39;</span><span class="p">:</span>
+                <span class="n">this_building</span><span class="o">.</span><span class="n">usage_type</span> <span class="o">=</span> <span class="s1">&#39;institute8&#39;</span>
+
+            <span class="n">this_building</span><span class="o">.</span><span class="n">building_number</span> <span class="o">=</span> <span class="n">info</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Gebaeude&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+
+            <span class="n">this_building</span><span class="o">.</span><span class="n">floors</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Geschosszahl&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+            <span class="n">this_building</span><span class="o">.</span><span class="n">area</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Nettoflaeche&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+            <span class="n">this_building</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="s1">&#39;light&#39;</span>
+            <span class="n">this_building</span><span class="o">.</span><span class="n">height_of_floors</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">info</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+                <span class="s1">&#39;Geschosshoehe&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+            <span class="n">this_building</span><span class="o">.</span><span class="n">office_layout</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="n">this_XML</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+            <span class="n">info_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">this_building</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">info_list</span>
+
+
+<span class="k">def</span> <span class="nf">create_reference_project</span><span class="p">(</span><span class="n">info_list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reads BuildingInfo and creates type buildings into `prj`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">Project</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">building</span> <span class="ow">in</span> <span class="n">info_list</span><span class="p">[:]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------------&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">building</span><span class="o">.</span><span class="n">building_number</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">building</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">building</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">building</span><span class="o">.</span><span class="n">usage_type</span> <span class="o">==</span> <span class="s1">&#39;office&#39;</span> <span class="ow">or</span> <span class="n">building</span><span class="o">.</span><span class="n">usage_type</span> <span class="o">==</span> \
+                <span class="s1">&#39;institute&#39;</span> <span class="ow">or</span> <span class="n">building</span><span class="o">.</span><span class="n">usage_type</span> <span class="o">==</span> <span class="s1">&#39;institute4&#39;</span> <span class="ow">or</span> \
+                        <span class="n">building</span><span class="o">.</span><span class="n">usage_type</span> <span class="o">==</span> <span class="s1">&#39;institute8&#39;</span><span class="p">:</span>
+            <span class="n">prj</span><span class="o">.</span><span class="n">add_non_residential</span><span class="p">(</span>
+                <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bmvbs&#39;</span><span class="p">,</span>
+                <span class="n">usage</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">usage_type</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">building</span><span class="o">.</span><span class="n">building_number</span><span class="p">),</span>
+                <span class="n">year_of_construction</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                <span class="n">number_of_floors</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">floors</span><span class="p">,</span>
+                <span class="n">height_of_floors</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">height_of_floors</span><span class="p">,</span>
+                <span class="n">net_leased_area</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">area</span><span class="p">,</span>
+                <span class="n">construction_type</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">building</span><span class="o">.</span><span class="n">usage_type</span> <span class="o">==</span> <span class="s1">&#39;single_family_dwelling&#39;</span><span class="p">:</span>
+            <span class="n">prj</span><span class="o">.</span><span class="n">add_residential</span><span class="p">(</span>
+                <span class="n">method</span><span class="o">=</span><span class="s1">&#39;iwu&#39;</span><span class="p">,</span>
+                <span class="n">usage</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">usage_type</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">building</span><span class="o">.</span><span class="n">building_number</span><span class="p">),</span>
+                <span class="n">year_of_construction</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">year_of_construction</span><span class="p">,</span>
+                <span class="n">number_of_floors</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">floors</span><span class="p">,</span>
+                <span class="n">height_of_floors</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">height_of_floors</span><span class="p">,</span>
+                <span class="n">net_leased_area</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">area</span><span class="p">,</span>
+                <span class="n">construction_type</span><span class="o">=</span><span class="n">building</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">prj</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">this_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
+    <span class="n">input_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="n">this_path</span><span class="p">,</span>
+        <span class="s1">&#39;examplefiles&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;MelatenXML&#39;</span><span class="p">)</span>
+
+    <span class="n">info_list</span> <span class="o">=</span> <span class="n">read_XMLs</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span>
+    <span class="n">prj</span> <span class="o">=</span> <span class="n">create_reference_project</span><span class="p">(</span><span class="n">info_list</span><span class="p">)</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Melaten_Ref&quot;</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="s1">&#39;AixLib&#39;</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;input&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">))</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">calc_all_buildings</span><span class="p">()</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">export_aixlib</span><span class="p">(</span>
+        <span class="n">internal_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Melaten_Retrofit&quot;</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">retrofit_all_buildings</span><span class="p">(</span><span class="n">year_of_retrofit</span><span class="o">=</span><span class="mi">2015</span><span class="p">)</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">used_library_calc</span> <span class="o">=</span> <span class="s1">&#39;AixLib&#39;</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">number_of_elements_calc</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">prj</span><span class="o">.</span><span class="n">weather_file_path</span> <span class="o">=</span> <span class="n">utilities</span><span class="o">.</span><span class="n">get_full_path</span><span class="p">(</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="s2">&quot;data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;input&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;inputdata&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;weatherdata&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos&quot;</span><span class="p">))</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">calc_all_buildings</span><span class="p">()</span>
+
+    <span class="n">prj</span><span class="o">.</span><span class="n">export_aixlib</span><span class="p">(</span>
+        <span class="n">internal_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example 8: That&#39;s it! :)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="teaser.html" title="TEASER modules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="teaser_api_example.html" title="API examples"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.Examples.html" >Examples</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+    </div>
+  </body>
+</html>
