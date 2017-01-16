@@ -32,11 +32,11 @@ class Material(object):
         Thermal conductivity of material
     heat_capac : float [kJ/(kg*K)]
         Specific heat capacity of material
-    solar_absorp : float
+    solar_absorp : float [-]
         Coefficient of absorption of solar short wave
-    ir_emissivity : float
+    ir_emissivity : float [-]
         Coefficient of longwave emissivity of material
-    transmittance : float
+    transmittance : float [-]
         Coefficient of transmittanve of material
     material_id : str(uuid)
         UUID of material, this is used to have similar behaviour like foreign
