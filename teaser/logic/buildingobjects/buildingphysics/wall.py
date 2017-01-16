@@ -50,17 +50,17 @@ class Wall(BuildingElement):
     orientation : float [degree]
         Azimuth direction of building element (0 : north, 90: east, 180: south,
         270: west)
-    inner_convection : float
+    inner_convection : float [W/(m2*K)]
         Constant heat transfer coefficient of convection inner side (facing
         the zone)
-    inner_radiation : float
+    inner_radiation : float [W/(m2*K)]
         Constant heat transfer coefficient of radiation inner side (facing
         the zone)
-    outer_convection : float
+    outer_convection : float [W/(m2*K)]
         Constant heat transfer coefficient of convection outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
-    outer_radiation : float
+    outer_radiation : float [W/(m2*K)]
         Constant heat transfer coefficient of radiation outer side (facing
         the ambient or adjacent zone). Currently for all InnerWalls and
         GroundFloors this value is set to 0.0
