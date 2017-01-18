@@ -227,9 +227,9 @@ def example_create_building():
 
         win = Window(parent = tz)
         win.name = key
-        win.area = value[1]
-        win.tilt = value[2]
-        win.orientation = value[3]
+        win.area = value[0]
+        win.tilt = value[1]
+        win.orientation = value[2]
 
         # Additional to the already known attributes the window has
         # additional attributes. Window.g_value describes the solar gain
