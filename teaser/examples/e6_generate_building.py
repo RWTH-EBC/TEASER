@@ -215,7 +215,7 @@ def example_create_building():
             construction='heavy')
         ground.area = value[0]
         ground.tilt = value[1]
-        ground.orientation = value[1]
+        ground.orientation = value[2]
 
     from teaser.logic.buildingobjects.buildingphysics.window import Window
 
