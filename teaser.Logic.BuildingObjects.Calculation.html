@@ -374,27 +374,36 @@ conditions</p>
 
 <dl class="method">
 <dt id="teaser.logic.buildingobjects.calculation.annex60.Annex60.modelica_gains_boundary">
-<code class="descname">modelica_gains_boundary</code><span class="sig-paren">(</span><em>time_line=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.annex60.Annex60.modelica_gains_boundary" title="Permalink to this definition">¶</a></dt>
+<code class="descname">modelica_gains_boundary</code><span class="sig-paren">(</span><em>zone</em>, <em>time_line=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.annex60.Annex60.modelica_gains_boundary" title="Permalink to this definition">¶</a></dt>
 <dd><p>creates .mat file for internal gains boundary conditions</p>
 <p>This function creates a matfile (-v4) for building internal gains
-boundary conditions. It collects all internal gain profiles of the
-zones and stores them into one file. The file is extended for each
-zone. Only applicable if zones are defined</p>
+boundary conditions. It collects internal gain profiles of a specific
+zones and stores them into one file. It also calculates the internal
+gains from relative presence and values for heat output into W for
+direct usage in Annex models.</p>
+<p>Only person (convective and radiative) and machines (convective) are
+used in the simple Annex 60 exmaples.</p>
 <p>1. Column : time step
-2,5,8,...  Column : profile_persons
-3,6,9,...  Column : profile_machines
-4,7,10,... Column : profile_lighting</p>
+2 Column : profile_persons, radiative
+3 Column : profile_persons, convective
+4 Column : profile_machines, convective</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time_line :[[int]]</strong></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>zone</strong> : ThermalZone()</p>
+<blockquote>
+<div><p>TEASER instance of ThermalZone. As Annex60 computes single models
+for single zones, we need to generate individual files for zones
+and internal gains</p>
+</div></blockquote>
+<p><strong>time_line :[[int]]</strong></p>
 <blockquote>
 <div><p>list of time steps</p>
 </div></blockquote>
 <p><strong>path</strong> : str</p>
 <blockquote class="last">
-<div><p>optional path, when matfile is exported seperately</p>
+<div><p>optional path, when matfile is exported separately</p>
 </div></blockquote>
 </td>
 </tr>
