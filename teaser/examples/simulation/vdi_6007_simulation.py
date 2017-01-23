@@ -64,35 +64,41 @@ def vdi_example_6007(thermal_zone, weather):
     # Max. irradiation
     i_max = 100
 
+    list_window_areas = []
+    list_sunblind = []
+    for window in thermal_zone.windows:
+        list_window_areas.append(window.area)
+        list_sunblind.append(0.0)
+
     #  Convert into house data dictionary
     #  #-------------------------------------------------------
-    houseData = {"R1i": thermal_zone.r1_iw,
-                 "C1i": thermal_zone.c1_iw,
-                 "Ai": thermal_zone.area_iw,
-                 "RRest": thermal_zone.r_rest_ow,
-                 "R1o": thermal_zone.r1_ow,
-                 "C1o": thermal_zone.c1_ow,
-                 "Ao": [thermal_zone.area_ow],
-                 "Aw": thermal_zone.window_area_list,
-                 "At": thermal_zone.window_area_list,
+    houseData = {"R1i": thermal_zone.model_attr.r1_iw,
+                 "C1i": thermal_zone.model_attr.c1_iw,
+                 "Ai": thermal_zone.model_attr.area_iw,
+                 "RRest": thermal_zone.model_attr.r_rest_ow,
+                 "R1o": thermal_zone.model_attr.r1_ow,
+                 "C1o": thermal_zone.model_attr.c1_ow,
+                 "Ao": [thermal_zone.model_attr.area_ow],
+                 "Aw": list_window_areas,
+                 "At": list_window_areas,
                  "Vair": thermal_zone.volume,
                  "rhoair": thermal_zone.density_air,
                  "cair": thermal_zone.heat_capac_air,
                  "splitfac": thermal_zone.windows[0].a_conv,
-                 "g": thermal_zone.weighted_g_value,
-                 "alphaiwi": thermal_zone.alpha_comb_inner_iw,
-                 "alphaowi": thermal_zone.alpha_comb_inner_ow,
-                 "alphaWall": thermal_zone.alpha_comb_outer_ow * thermal_zone.area_ow,
-                 "alphaowo": 25.0,
+                 "g": thermal_zone.model_attr.weighted_g_value,
+                 "alphaiwi": thermal_zone.model_attr.alpha_comb_inner_iw,
+                 "alphaowi": thermal_zone.model_attr.alpha_comb_inner_ow,
+                 "alphaWall": thermal_zone.model_attr.alpha_comb_outer_ow * thermal_zone.model_attr.area_ow,
+                 "alphaowo": 25.0,  #  TODO: Substitute with TEASER call (misc or outer walls)
                  "withInnerwalls": withInnerwalls,
                  "aowo": 0.9,
                  "epso": 0.1,
                  "orientationswallshorizontal": [90, 90, 90, 90, 0],
                  "temperatureground": 283.15,
-                 "weightfactorswall": thermal_zone.weightfactor_ow,
-                 "weightfactorswindow": thermal_zone.weightfactor_win,
-                 "weightfactorground": thermal_zone.weightfactor_ground[0],
-                 "gsunblind": thermal_zone.g_sunblind_list,
+                 "weightfactorswall": thermal_zone.model_attr.weightfactor_ow,
+                 "weightfactorswindow": thermal_zone.model_attr.weightfactor_win,
+                 "weightfactorground": thermal_zone.model_attr.weightfactor_ground,
+                 "gsunblind": list_sunblind,
                  "Imax": i_max}
 
     #  Solar radiation input on each external area in W/m2
@@ -221,7 +227,7 @@ if __name__ == '__main__':
     print('UA value before retrofiting:')
     print(prj.buildings[0].thermal_zones[0].outer_walls[0].ua_value)
     print('Inner resistance (VDI 6007) of thermal zone before retrofit:')
-    print(thermal_zone.r1_ow)
+    print(thermal_zone.model_attr.r1_ow)
     print()
 
     #  Perform simulation for unretrofited model
