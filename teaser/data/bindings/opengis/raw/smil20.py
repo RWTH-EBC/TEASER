@@ -1,7 +1,7 @@
 # ./pyxb/bundles/opengis/raw/smil20.py
 # -*- coding: utf-8 -*-
 # PyXB bindings for NM:21ae4a2357cfe334f6a0ce0b0ea28423d22a1453
-# Generated 2016-04-07 16:02:40.462870 by PyXB version 1.2.4 using Python 2.7.11.final.0
+# Generated 2017-01-09 16:11:10.920302 by PyXB version 1.2.5 using Python 3.5.2.final.0
 # Namespace http://www.w3.org/2001/SMIL20/ [xmlns:smil20]
 
 from __future__ import unicode_literals
@@ -13,15 +13,18 @@ import pyxb.utils.utility
 import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
-
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:6373931a-fcc9-11e5-b0c9-000c29ce1afb')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:d9a6d838-d67d-11e6-8d7b-100ba9a189d0')
 
 # Version of PyXB used to generate the bindings
-_PyXBVersion = '1.2.4'
+_PyXBVersion = '1.2.5'
 # Generated bindings are not compatible across PyXB versions
 if pyxb.__version__ != _PyXBVersion:
     raise pyxb.PyXBVersionError(_PyXBVersion)
+
+# A holder for module-level binding classes so we can access them from
+# inside class definitions where property names may conflict.
+_module_typeBindings = pyxb.utils.utility.Object()
 
 # Import bindings for namespaces imported into schema
 import teaser.data.bindings.opengis.raw._nsgroup

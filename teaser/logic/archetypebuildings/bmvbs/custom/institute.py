@@ -6,11 +6,121 @@ from teaser.logic.archetypebuildings.bmvbs.office import Office
 
 
 class Institute(Office):
-    """Type Institute Building (type 4)
+    """Type Institute Building
+
+    The institute module contains a multi zone building which is based on an
+    office building with an additional laboratory zone. The area of the
+    laboratory zone is based on the data from the Forschungszentrum Juelich
+    :cite:`Abschlussbericht`. According to the dataset from Juelich,
+    the typebuilding institute is based on the buildingsclass of BWZK with
+    the number 2200 which represents all institute buildings which are not
+    institute type 4 or institute type 8
+    :cite:`Bauministerkonferenz.Dezember2010`. Laboratory zones are
+    verntialed using a central AHU system with humidification and
+    de-humidification.
+
+    In detail the net leased area is divided into the following thermal zone
+    areas:
+
+    #. Office (40% of net leased area)
+    #. Floor (25% of net leased area)
+    #. Storage (10% of net leased area)
+    #. Meeting (4% of net leased area)
+    #. Restroom (4% of net leased area)
+    #. ICT (2% of net leased area)
+    #. Laboratory (15% of the net leased area)
+
+    Parameters
+    ----------
+
+    parent: Project()
+        The parent class of this object, the Project the Building belongs to.
+        Allows for better control of hierarchical structures. If not None it
+        adds this Building instance to Project.buildings.
+        (default: None)
+    name : str
+        Individual name
+    year_of_construction : int
+        Year of first construction
+    height_of_floors : float [m]
+        Average height of the buildings' floors
+    number_of_floors : int
+        Number of building's floors above ground
+    net_leased_area : float [m2]
+        Total net leased area of building. This is area is NOT the footprint
+        of a building
+    with_ahu : Boolean
+        If set to True, an empty instance of BuildingAHU is instantiated and
+        assigned to attribute central_ahu. This instance holds information for
+        central Air Handling units. Default is False.
+    office_layout : int
+        Structure of the floor plan of office buildings, default is 1,
+        which is representative for one elongated floor.
+            1: elongated 1 floor
+            2: elongated 2 floors
+            3: compact (e.g. for a square base building)
+    window_layout : int
+        Structure of the window facade type, default is 1, which is
+        representative for a punctuated facade.
+            1: punctuated facade (individual windows)
+            2: banner facade (continuous windows)
+            3: full glazing
+    construction_type : str
+        Construction type of used wall constructions default is "heavy")
+            heavy: heavy construction
+            light: light construction
+
+    Note
+    ----------
+    The listed attributes are just the ones that are set by the user
+    calculated values are not included in this list. Changing these values is
+    expert mode.
+
+    Attributes
+    ----------
+
+    zone_area_factors : dict
+        This dictionary contains the name of the zone (str), the
+        zone area factor (float) and the zone usage from BoundaryConditions XML
+        (str). (Default see doc string above)
+    outer_wall_names : dict
+        This dictionary contains a random name for the outer walls,
+        their orientation and tilt. Default is a building in north-south
+        orientation)
+    roof_names : dict
+        This dictionary contains the name of the roofs, their orientation
+        and tilt. Default is one flat roof.
+    ground_floor_names : dict
+        This dictionary contains the name of the ground floors, their
+        orientation and tilt. Default is one ground floor.
+    window_names : dict
+        This dictionary contains the name of the window, their
+        orientation and tilt. Default is a building in north-south
+        orientation)
+    inner_wall_names : dict
+        This dictionary contains the name of the inner walls, their
+        orientation and tilt. Default is one cumulated inner wall.
+    ceiling_names : dict
+        This dictionary contains the name of the ceilings, their
+        orientation and tilt. Default is one cumulated ceiling.
+    floor_names : dict
+        This dictionary contains the name of the floors, their
+        orientation and tilt. Default is one cumulated floor.
+    gross_factor : float
+        gross factor used to correct the rooftop and floor area (default is
+        1.15)
+    est_factor_wall_area : float
+        estimation factor to calculate outer wall area
+    est_exponent_wall : float
+        estimation factor exponent to calculate outer wall area
+    est_factor_win_area : float
+        estimation factor to calculate window area
+    est_exponent_win : float
+        estimation factor exponent to calculate window area
     """
 
     def __init__(self,
-                 parent=None,
+                 parent,
                  name=None,
                  year_of_construction=None,
                  number_of_floors=None,

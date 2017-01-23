@@ -18,7 +18,8 @@ class UseConditions(object):
 
     parent: ThermalZone()
         The parent class of this object, the zone the use conditions belong
-        to. Allows for better control of hierarchical structures.
+        to. Allows for better control of hierarchical structures. If not None it
+        adds this UseConditions instance to ThermalZone.use_conditions.
         Default is None
 
     Attributes

@@ -17,83 +17,91 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
 class SingleFamilyDwelling(Residential):
-    """Type Building SingleFamilyDwelling.
+    """Archetype Residential Building according
 
-    Subclass from Building to represent SingleFamilyDwelling Buildings.
-    Allows for easier distinction between different building types and
-    specific functions and attributes.
+    Subclass from Residential archetpye class to represent
+    SingleFamilyDwelling according to IWU :cite:`KurzverfahrenIWU`.
+
+    The SingleFamilyDwelling module contains a singlezone building. It has 4
+    outer walls, 4 windows, a flat roof and a ground floor. Depending on (
+    typical length and width) the interior wall areas are assigned. It makes
+    number_of_floors and height_of_floors mandatory parameters.
+    Additional information can be passed
+    to the archetype (e.g. floor layout and number of neighbors).
+
+    Default values are given according to IWU.
+
+    In detail the net leased area is divided into the following thermal zone
+    area:
+
+    #. Single dwelling (100% of net leased area)
 
     Parameters
     ----------
+
     parent: Project()
-        The parent class of this object, the Project the Building belongs
-        to. Allows for better control of hierarchical structures.
-        Default is None
-
+        The parent class of this object, the Project the Building belongs to.
+        Allows for better control of hierarchical structures. If not None it
+        adds this Building instance to Project.buildings.
+        (default: None)
     name : str
-        individual name
-
+        Individual name
     year_of_construction : int
-        year of first construction
-
+        Year of first construction
+    height_of_floors : float [m]
+        Average height of the buildings' floors
     number_of_floors : int
-        number of floors above ground
-
-    height_of_floors : float
-        average height of the floors
-
-    net_leased_area : float
-        total net leased area of building
-
-    with_ahu : boolean
-        if building has a central AHU or not
-
+        Number of building's floors above ground
+    net_leased_area : float [m2]
+        Total net leased area of building. This is area is NOT the footprint
+        of a building
+    with_ahu : Boolean
+        If set to True, an empty instance of BuildingAHU is instantiated and
+        assigned to attribute central_ahu. This instance holds information for
+        central Air Handling units. Default is False.
     residential_layout : int
-        type of floor plan (default = 0)
-
-        0: compact
-        1: elongated/complex
-
+        Structure of floor plan (default = 0)
+            0: compact
+            1: elongated/complex
     neighbour_buildings : int
-        neighbour (default = 0)
-
-        0: no neighbour
-        1: one neighbour
-        2: two neighbours
-
+        Number of neighbour buildings. CAUTION: this will not change
+        the orientation of the buildings wall, but just the overall
+        exterior wall and window area(!) (default = 0)
+            0: no neighbour
+            1: one neighbour
+            2: two neighbours
     attic : int
-        type of attic (default = 0)
-
-        0: flat roof
-        1: non heated attic
-        2: partly heated attic
-        3: heated attic
-
+        Design of the attic. CAUTION: this will not change the orientation or
+        tilt of the roof instances, but just adapt the roof area(!) (default
+        = 0)
+            0: flat roof
+            1: non heated attic
+            2: partly heated attic
+            3: heated attic
     cellar : int
-        type of cellar (default = 0)
-
-        0: no cellar
-        1: non heated cellar
-        2: partly heated cellar
-        3: heated cellar
-
-    construction_type : str
-        construction type (default = "heavy")
-
-        heavy: heavy construction
-        light: light construction
-
+        Design of the of cellar CAUTION: this will not change the
+        orientation, tilt of GroundFloor instances, nor the number or area of
+        ThermalZones, but will change GroundFloor area(!) (default = 0)
+            0: no cellar
+            1: non heated cellar
+            2: partly heated cellar
+            3: heated cellar
     dormer : str
-        construction type
-
-        0: no dormer
-        1: dormer
+        Is a dormer attached to the roof? CAUTION: this will not
+        change roof or window orientation or tilt, but just adapt the roof
+        area(!) (default = 0)
+            0: no dormer
+            1: dormer
+    construction_type : str
+        Construction type of used wall constructions default is "heavy")
+            heavy: heavy construction
+            light: light construction
 
     Note
     ----------
-
     The listed attributes are just the ones that are set by the user
-    calculated values are not included in this list.
+    calculated values are not included in this list. Changing these values is
+    expert mode.
 
 
     Attributes
@@ -101,76 +109,68 @@ class SingleFamilyDwelling(Residential):
 
     zone_area_factors : dict
         This dictionary contains the name of the zone (str), the
-        zone area factor (float) and the zone usage (str). The values can be
-        taken from Lichtmess
-
+        zone area factor (float) and the zone usage from BoundaryConditions XML
+        (str). (Default see doc string above)
     outer_wall_names : dict
-        This dictionary contains the name of the outer walls, their orientation
-        and tilt
-
+        This dictionary contains a random name for the outer walls,
+        their orientation and tilt. Default is a building in north-south
+        orientation)
     roof_names : dict
         This dictionary contains the name of the roofs, their orientation
-        and tilt
-
+        and tilt. Default is one flat roof.
     ground_floor_names : dict
         This dictionary contains the name of the ground floors, their
-        orientation and tilt
-
+        orientation and tilt. Default is one ground floor.
     window_names : dict
         This dictionary contains the name of the window, their
-        orientation and tilt
-
+        orientation and tilt. Default is a building in north-south
+        orientation)
     inner_wall_names : dict
         This dictionary contains the name of the inner walls, their
-        orientation and tilt
-
+        orientation and tilt. Default is one cumulated inner wall.
     ceiling_names : dict
         This dictionary contains the name of the ceilings, their
-        orientation and tilt
-
+        orientation and tilt. Default is one cumulated ceiling.
     floor_names : dict
         This dictionary contains the name of the floors, their
-        orientation and tilt
-
+        orientation and tilt. Default is one cumulated floor.
     est_living_area_factor : float
-        estimation factor for calculation of number of heated floors
-
+        Estimation factor for calculation of number of heated floors
     est_bottom_building_closure : float
-        estimation factor to calculate ground floor area
-
+        Estimation factor to calculate ground floor area
     est_upper_building_closure : float
-        estimation factor to calculate attic area
-
+        Estimation factor to calculate attic area
     est_factor_win_area : float
-        estimation factor to calculate window area
-
+        Estimation factor to calculate window area
     est_factor_cellar_area : float
-        estimation factor to calculate heated cellar area
+        Estimation factor to calculate heated cellar area
     """
 
-    def __init__(self,
-                 parent,
-                 name=None,
-                 year_of_construction=None,
-                 number_of_floors=None,
-                 height_of_floors=None,
-                 net_leased_area=None,
-                 with_ahu=False,
-                 residential_layout=None,
-                 neighbour_buildings=None,
-                 attic=None,
-                 cellar=None,
-                 dormer=None,
-                 construction_type=None):
+    def __init__(
+            self,
+            parent,
+            name=None,
+            year_of_construction=None,
+            number_of_floors=None,
+            height_of_floors=None,
+            net_leased_area=None,
+            with_ahu=False,
+            residential_layout=None,
+            neighbour_buildings=None,
+            attic=None,
+            cellar=None,
+            dormer=None,
+            construction_type=None):
 
         """Constructor of SingleFamilyDwelling
-
-
         """
 
-        super(SingleFamilyDwelling, self).__init__(parent, name,
-                                                   year_of_construction,
-                                                   net_leased_area, with_ahu)
+        super(SingleFamilyDwelling, self).__init__(
+            parent,
+            name,
+            year_of_construction,
+            net_leased_area,
+            with_ahu)
 
         self.residential_layout = residential_layout
         self.neighbour_buildings = neighbour_buildings
@@ -297,12 +297,10 @@ class SingleFamilyDwelling(Residential):
                 7 * [0.0] + 12 * [1.0] + 6 * [0.0])
 
     def generate_archetype(self):
-        """Generates a residential building.
+        """Generates a SingleFamilyDwelling building.
 
-        With given values, this class generates a type residential
-        building according to TEASER requirements
-        Berechnungsgrundlagen: IWU, "Kurzverfahren Energieprofil"; 2005.
-
+        With given values, this class generates a archetype building for
+        single family dwellings according to TEASER requirements
         """
         # help area for the correct building area setting while using typeBldgs
         type_bldg_area = self.net_leased_area
@@ -484,12 +482,10 @@ class SingleFamilyDwelling(Residential):
             zone.set_volume_zone()
 
     def generate_from_gml(self):
-        """enriches lod1 or lod2 data from citygml
+        """Enriches lod1 or lod2 data from CityGML
 
-        adds Zones, BoundaryConditions, Material settings for walls and
+        Adds Zones, BoundaryConditions, Material settings for walls and
         windows to the geometric representation of CityGML
-
-        number or height of floors need to be specified
         """
 
         type_bldg_area = self.net_leased_area

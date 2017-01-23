@@ -9,40 +9,35 @@ import teaser.data.output.material_output as material_output
 
 
 class Material(object):
-    """This class represents a Material.
+    """Material class
+
+    This class holds information of Material used for building element layer.
 
 
     Parameters
     ----------
     parent : Layer
         The parent class of this object, the layer the material
-        belongs to. Allows for better control of hierarchical structures.
+        belongs to. Allows for better control of hierarchical structures. If
+        not None this adds this Material to Layer.material.
         Default is None
-
 
     Attributes
     ----------
     name : str
-        Individual name
-
-    density : float
-        Density of material in kg/m^3
-
-    thermal_conduc : float
-        Thermal conductivity of material in W/(m*K)
-
-    heat_capac : float
-        Specific heat capacity of material in kJ/(kg*K)
-
-    solar_absorp : float
+        Name of material
+    density : float [kg/m3]
+        Density of material
+    thermal_conduc : float [W/(m*K)]
+        Thermal conductivity of material
+    heat_capac : float [kJ/(kg*K)]
+        Specific heat capacity of material
+    solar_absorp : float [-]
         Coefficient of absorption of solar short wave
-
-    ir_emissivity : float
+    ir_emissivity : float [-]
         Coefficient of longwave emissivity of material
-
-    transmittance : float
+    transmittance : float [-]
         Coefficient of transmittanve of material
-
     material_id : str(uuid)
         UUID of material, this is used to have similar behaviour like foreign
         key in SQL data bases for use in TypeBuildingElements and Material xml
@@ -51,8 +46,6 @@ class Material(object):
 
     def __init__(self, parent=None):
         """Constructor of Material.
-
-
         """
 
         self.parent = parent
@@ -239,7 +232,7 @@ class Material(object):
         if isinstance(value, float):
             self._solar_absorp = value
         elif value is None:
-            self._solar_absorp = value
+            self._solar_absorp = 0.7
         else:
             try:
                 value = float(value)
@@ -257,7 +250,7 @@ class Material(object):
         if isinstance(value, float):
             self._ir_emissivity = value
         elif value is None:
-            self._ir_emissivity = value
+            self._ir_emissivity = 0.9
         else:
             try:
                 value = float(value)
