@@ -95,3 +95,10 @@ def load_boundary_conditions(bound_cond, zone_usage, data_class):
             bound_cond.min_ahu = usage.AHU.min_ahu
             bound_cond.max_ahu = usage.AHU.max_ahu
             bound_cond.with_ahu = usage.AHU.with_ahu
+            bound_cond.use_constant_ach_rate = usage.AHU.use_constant_ach_rate
+            bound_cond.base_ach = usage.AHU.base_ach
+            bound_cond.max_user_ach = usage.AHU.max_user_ach
+            bound_cond.max_overheating_ach = usage.AHU.max_overheating_ach
+            bound_cond.max_summer_ach = usage.AHU.max_summer_ach
+            bound_cond.winter_reduction = usage.AHU.winter_reduction
+
