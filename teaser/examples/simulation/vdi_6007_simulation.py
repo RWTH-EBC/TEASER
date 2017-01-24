@@ -25,18 +25,23 @@ def gen_res_type_example_building():
     prj = Project(load_data=True)
     prj.name = "ArchetypeBuildings"
     prj.merge_windows_calc = True
-    prj.type_bldg_residential(name="ResidentialBuilding",
-                              year_of_construction=1962,
-                              number_of_floors=2,
-                              height_of_floors=2.8,
-                              net_leased_area=200,
-                              with_ahu=True,
-                              residential_layout=0,
-                              neighbour_buildings=0,
-                              attic=1,
-                              cellar=1,
-                              construction_type="heavy",
-                              dormer=1)
+
+    prj.add_residential(
+        method='iwu',
+        usage='single_family_dwelling',
+        name='Test_res_building',
+        year_of_construction=1962,
+        number_of_floors=2,
+        height_of_floors=2.8,
+        net_leased_area=200,
+        with_ahu=False,
+        residential_layout=None,
+        neighbour_buildings=None,
+        attic=None,
+        cellar=None,
+        dormer=None,
+        construction_type=None,
+        number_of_apartments=None)
 
     return prj
 
