@@ -70,7 +70,7 @@ def vdi_example_6007(thermal_zone, weather):
         list_window_areas.append(window.area)
         list_sunblind.append(0.0)
 
-    #  Convert into house data dictionary
+    # Convert into house data dictionary
     #  #-------------------------------------------------------
     houseData = {"R1i": thermal_zone.model_attr.r1_iw,
                  "C1i": thermal_zone.model_attr.c1_iw,
@@ -89,7 +89,8 @@ def vdi_example_6007(thermal_zone, weather):
                  "alphaiwi": thermal_zone.model_attr.alpha_comb_inner_iw,
                  "alphaowi": thermal_zone.model_attr.alpha_comb_inner_ow,
                  "alphaWall": thermal_zone.model_attr.alpha_comb_outer_ow * thermal_zone.model_attr.area_ow,
-                 "alphaowo": 25.0,  #  TODO: Substitute with TEASER call (misc or outer walls)
+                 "alphaowo": 25.0,
+                 # TODO: Substitute with TEASER call (misc or outer walls)
                  "withInnerwalls": withInnerwalls,
                  "aowo": 0.9,
                  "epso": 0.1,
@@ -120,25 +121,24 @@ def vdi_example_6007(thermal_zone, weather):
     sunblind_in = np.zeros_like(solarRad_in)
     sunblind_in[solarRad_in > i_max] = 0.85
 
-    eq_air_params = {"aExt": thermal_zone.solar_absorp_ow,
+    eq_air_params = {"aExt": thermal_zone.model_attr.solar_absorp_ow,
                      # coefficient of absorption of exterior walls (outdoor)
-                     "eExt": thermal_zone.ir_emissivity_outer_ow,
+                     "eExt": thermal_zone.model_attr.ir_emissivity_outer_ow,
                      # coefficient of emission of exterior walls (outdoor)
-                     "wfWall": thermal_zone.weightfactor_ow,
+                     "wfWall": thermal_zone.model_attr.weightfactor_ow,
                      # weight factors of the walls
-                     "wfWin": thermal_zone.weightfactor_win,
+                     "wfWin": thermal_zone.model_attr.weightfactor_win,
                      # weight factors of the windows
-                     "wfGro": thermal_zone.weightfactor_ground[0],
+                     "wfGro": thermal_zone.model_attr.weightfactor_ground,
                      # weight factor of the ground (0 if not considered)
                      "T_Gro": 273.15 + 10,
-                     "alpha_wall_out": thermal_zone.alpha_conv_outer_ow,
-                     "alpha_rad_wall": thermal_zone.alpha_rad_outer_ow,
+                     "alpha_wall_out": thermal_zone.model_attr.alpha_conv_outer_ow,
+                     "alpha_rad_wall": thermal_zone.model_attr.alpha_rad_outer_ow,
                      "withLongwave": False}
 
     t_dry_bulb = weather.temp + 273.15
 
     equalAirTemp = equ_air.equal_air_temp(HSol=solarRad_in,
-                                          # TODO: Is this correct?
                                           TBlaSky=t_black_sky,
                                           TDryBul=t_dry_bulb,
                                           sunblind=sunblind_in,
@@ -207,9 +207,39 @@ if __name__ == '__main__':
     #  Get TEASER project with residential type building
     prj = gen_res_type_example_building()
 
+    #  Pointer to building object
+    building = prj.buildings[0]
+
+    #  Extract thermal_zone
+    thermal_zone = prj.buildings[0].thermal_zones[0]
+
+    #  Calculate beta angle
+    beta = thermal_zone.model_attr.tilt_facade
+
+    #  Calculate gamma angle
+    #  TEASER definition
+    #  orientation_facade: list of floats[degree]
+    #         Orientation of facades(Azimuth).
+    #         0 - North
+    #         90 - East
+    #         180 - South
+    #         270 - West
+    #   TEASER: [180.0, -1, 0.0, -2, 90.0, 270.0]
+    #   South, horizontal, North, ground, east, west
+    #  VDI: [-180, -90, 0, 90, 0, 0],  # north, east, south, west, horizontal
+    gamma = thermal_zone.model_attr.orientation_facade
+
+    #  Recalculate to VDI core azimuth usage
+    for i in range(len(gamma)):
+        angle = gamma[i]
+        if angle == -1 or angle == -2:
+            gamma[i] = 0.0
+        else:
+            gamma[i] = angle - 180
+
     weather = weat.Weather(
-        beta=[90, 90, 90, 90, 0],
-        gamma=[-180, -90, 0, 90, 0],  # north, east, south, west, horizontal
+        beta=beta,
+        gamma=gamma,
         weather_path=None,
         albedo=0.2,
         timeZone=1,
@@ -217,12 +247,6 @@ if __name__ == '__main__':
         location=(49.5, 8.5),
         timestep=3600,
         do_sun_rad=True)
-
-    #  Pointer to building object
-    building = prj.buildings[0]
-
-    #  Extract thermal_zone
-    thermal_zone = prj.buildings[0].thermal_zones[0]
 
     print('UA value before retrofiting:')
     print(prj.buildings[0].thermal_zones[0].outer_walls[0].ua_value)
@@ -254,7 +278,7 @@ if __name__ == '__main__':
     print('UA value after retrofiting:')
     print(prj.buildings[0].thermal_zones[0].outer_walls[0].ua_value)
     print('Inner resistance (VDI 6007) of thermal zone after retrofit:')
-    print(thermal_zone.r1_ow)
+    print(thermal_zone.model_attr.r1_ow)
     # print()
     thermal_zone = prj.buildings[0].thermal_zones[0]
 
