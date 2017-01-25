@@ -25,12 +25,12 @@ def example_save():
 
     prj = Project()
 
-    load_xml = pickle_file = os.path.join(
+    load_xml = os.path.join(
         utilities.get_default_path(),
         'ArchetypeExample.teaserXML')
 
-    prj.load_project(
-        path=load_xml)
+    #prj.load_project(
+    #    path=load_xml)
 
     # To reload data from a pickle file, we do not need to instantiate an
     # API, as pickle will automatically instantiate all classes as they have
@@ -38,11 +38,21 @@ def example_save():
 
     import pickle
 
-    load_pickle = pickle_file = os.path.join(
+    load_pickle = os.path.join(
         utilities.get_default_path(),
         'teaser_pickle.p')
 
     pickle_prj = pickle.load(open(load_pickle, "rb"))
+
+    prj_gml = Project()
+
+    load_gml = utilities.get_full_path(os.path.join(
+        'examples',
+        'examplefiles',
+        'CityGMLSample.gml'))
+
+    prj_gml.load_citygml(path=load_gml)
+
 
 if __name__ == '__main__':
     example_save()
