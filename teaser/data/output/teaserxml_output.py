@@ -222,21 +222,25 @@ def save_teaser_xml(path, project):
 
                     pyxb_zone.OuterWall.append(pyxb_wall)
 
-                if type(out_wall).__name__ == "Rooftop":
+            for roof in zone.rooftops:
+
+                if type(roof).__name__ == "Rooftop":
 
                     pyxb_wall = pb.RooftopType()
 
-                    set_basic_data_pyxb(pyxb_wall, out_wall)
-                    set_layer_data_pyxb(pyxb_wall, out_wall)
+                    set_basic_data_pyxb(pyxb_wall, roof)
+                    set_layer_data_pyxb(pyxb_wall, roof)
 
                     pyxb_zone.Rooftop.append(pyxb_wall)
 
-                if type(out_wall).__name__ == "GroundFloor":
+            for ground in zone.ground_floors:
+
+                if type(ground).__name__ == "GroundFloor":
 
                     pyxb_wall = pb.GroundFloorType()
 
-                    set_basic_data_pyxb(pyxb_wall, out_wall)
-                    set_layer_data_pyxb(pyxb_wall, out_wall)
+                    set_basic_data_pyxb(pyxb_wall, ground)
+                    set_layer_data_pyxb(pyxb_wall, ground)
 
                     pyxb_zone.GroundFloor.append(pyxb_wall)
 
@@ -251,21 +255,25 @@ def save_teaser_xml(path, project):
 
                     pyxb_zone.InnerWall.append(pyxb_wall)
 
-                if type(in_wall).__name__ == "Ceiling":
+            for ceil in zone.ceilings:
+
+                if type(ceil).__name__ == "Ceiling":
 
                     pyxb_wall = pb.CeilingType()
 
-                    set_basic_data_pyxb(pyxb_wall, in_wall)
-                    set_layer_data_pyxb(pyxb_wall, in_wall)
+                    set_basic_data_pyxb(pyxb_wall, ceil)
+                    set_layer_data_pyxb(pyxb_wall, ceil)
 
                     pyxb_zone.Ceiling.append(pyxb_wall)
 
-                if type(in_wall).__name__ == "Floor":
+            for floor in zone.floors:
+
+                if type(floor).__name__ == "Floor":
 
                     pyxb_wall = pb.FloorType()
 
-                    set_basic_data_pyxb(pyxb_wall, in_wall)
-                    set_layer_data_pyxb(pyxb_wall, in_wall)
+                    set_basic_data_pyxb(pyxb_wall, floor)
+                    set_layer_data_pyxb(pyxb_wall, floor)
 
                     pyxb_zone.Floor.append(pyxb_wall)
 

@@ -32,6 +32,22 @@ def example_save():
 
     prj.load_project(
         path=load_xml)
+    prj = Project()
+    prj.load_project(utilities.get_full_path(
+        "examples/examplefiles/VDI6007_Room1.teaserXML"))
+    prj.save_project(file_name="VDI6007_Room1", path=None)
+    prj = Project()
+    prj.load_project(utilities.get_full_path(
+        "examples/examplefiles/VDI6007_Room3.teaserXML"))
+    prj.save_project(file_name="VDI6007_Room3", path=None)
+    prj = Project()
+    prj.load_project(utilities.get_full_path(
+        "examples/examplefiles/VDI6007_Room8.teaserXML"))
+    prj.save_project(file_name="VDI6007_Room8", path=None)
+    prj = Project()
+    prj.load_project(utilities.get_full_path(
+        "examples/examplefiles/VDI6007_Room10.teaserXML"))
+    prj.save_project(file_name="VDI6007_Room10", path=None)
 
     # To reload data from a pickle file, we do not need to instantiate an
     # API, as pickle will automatically instantiate all classes as they have
