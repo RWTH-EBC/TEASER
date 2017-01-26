@@ -568,12 +568,17 @@ class Test_teaser(object):
         prj.save_project("unitTest")
         prj.set_default()
 
-    # commented until we find solution for opengis PyXB bindings
     def test_save_citygml(self):
         '''test of save_gml'''
         helptest.building_test2(prj)
         prj.save_citygml("unitTest")
         prj.set_default()
+
+    def test_load_citygml(self):
+        '''test of load_gml'''
+        prj.set_default()
+        prj.load_citygml(utilities.get_full_path(
+            "examples/examplefiles/CityGMLSample.gml"))
 
     def test_calc_all_buildings(self):
         '''test of calc_all_buildings, no calculation verification'''
