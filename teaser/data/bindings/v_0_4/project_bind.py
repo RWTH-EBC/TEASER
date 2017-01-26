@@ -33,7 +33,7 @@ import pyxb.binding.datatypes
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://teaser.project', create_if_missing=True)
-Namespace.configureCategories(['typeBinding', 'elementBinding'])
+Namespace.configureCategories(['typeBinding_04', 'elementBinding_04'])
 
 def CreateFromDocument (xml_text, default_namespace=None, location_base=None):
     """Parse the given XML and use the document element to create a
@@ -103,7 +103,7 @@ class UseConditionType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.UseConditionType = UseConditionType
-Namespace.addCategoryObject('typeBinding', 'UseConditionType', UseConditionType)
+Namespace.addCategoryObject('typeBinding_04', 'UseConditionType', UseConditionType)
 
 
 # Complex type {http://teaser.project}MaterialType with content type ELEMENT_ONLY
@@ -171,7 +171,7 @@ class MaterialType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.MaterialType = MaterialType
-Namespace.addCategoryObject('typeBinding', 'MaterialType', MaterialType)
+Namespace.addCategoryObject('typeBinding_04', 'MaterialType', MaterialType)
 
 
 # Complex type {http://teaser.project}LayerType with content type ELEMENT_ONLY
@@ -215,7 +215,7 @@ class LayerType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.LayerType = LayerType
-Namespace.addCategoryObject('typeBinding', 'LayerType', LayerType)
+Namespace.addCategoryObject('typeBinding_04', 'LayerType', LayerType)
 
 
 # Complex type {http://teaser.project}OuterWallType with content type ELEMENT_ONLY
@@ -331,7 +331,7 @@ class OuterWallType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.OuterWallType = OuterWallType
-Namespace.addCategoryObject('typeBinding', 'OuterWallType', OuterWallType)
+Namespace.addCategoryObject('typeBinding_04', 'OuterWallType', OuterWallType)
 
 
 # Complex type {http://teaser.project}RooftopType with content type ELEMENT_ONLY
@@ -447,7 +447,7 @@ class RooftopType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.RooftopType = RooftopType
-Namespace.addCategoryObject('typeBinding', 'RooftopType', RooftopType)
+Namespace.addCategoryObject('typeBinding_04', 'RooftopType', RooftopType)
 
 
 # Complex type {http://teaser.project}InnerWallType with content type ELEMENT_ONLY
@@ -547,7 +547,7 @@ class InnerWallType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.InnerWallType = InnerWallType
-Namespace.addCategoryObject('typeBinding', 'InnerWallType', InnerWallType)
+Namespace.addCategoryObject('typeBinding_04', 'InnerWallType', InnerWallType)
 
 
 # Complex type {http://teaser.project}CeilingType with content type ELEMENT_ONLY
@@ -647,7 +647,7 @@ class CeilingType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.CeilingType = CeilingType
-Namespace.addCategoryObject('typeBinding', 'CeilingType', CeilingType)
+Namespace.addCategoryObject('typeBinding_04', 'CeilingType', CeilingType)
 
 
 # Complex type {http://teaser.project}FloorType with content type ELEMENT_ONLY
@@ -747,7 +747,7 @@ class FloorType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.FloorType = FloorType
-Namespace.addCategoryObject('typeBinding', 'FloorType', FloorType)
+Namespace.addCategoryObject('typeBinding_04', 'FloorType', FloorType)
 
 
 # Complex type {http://teaser.project}GroundFloorType with content type ELEMENT_ONLY
@@ -847,7 +847,7 @@ class GroundFloorType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.GroundFloorType = GroundFloorType
-Namespace.addCategoryObject('typeBinding', 'GroundFloorType', GroundFloorType)
+Namespace.addCategoryObject('typeBinding_04', 'GroundFloorType', GroundFloorType)
 
 
 # Complex type {http://teaser.project}WindowType with content type ELEMENT_ONLY
@@ -995,7 +995,7 @@ class WindowType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.WindowType = WindowType
-Namespace.addCategoryObject('typeBinding', 'WindowType', WindowType)
+Namespace.addCategoryObject('typeBinding_04', 'WindowType', WindowType)
 
 
 # Complex type {http://teaser.project}ThermalZoneType with content type ELEMENT_ONLY
@@ -1127,7 +1127,7 @@ class ThermalZoneType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.ThermalZoneType = ThermalZoneType
-Namespace.addCategoryObject('typeBinding', 'ThermalZoneType', ThermalZoneType)
+Namespace.addCategoryObject('typeBinding_04', 'ThermalZoneType', ThermalZoneType)
 
 
 # Complex type {http://teaser.project}BuildingAHUType with content type ELEMENT_ONLY
@@ -1243,7 +1243,7 @@ class BuildingAHUType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.BuildingAHUType = BuildingAHUType
-Namespace.addCategoryObject('typeBinding', 'BuildingAHUType', BuildingAHUType)
+Namespace.addCategoryObject('typeBinding_04', 'BuildingAHUType', BuildingAHUType)
 
 
 # Complex type {http://teaser.project}BuildingType with content type ELEMENT_ONLY
@@ -1367,7 +1367,7 @@ class BuildingType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.BuildingType = BuildingType
-Namespace.addCategoryObject('typeBinding', 'BuildingType', BuildingType)
+Namespace.addCategoryObject('typeBinding_04', 'BuildingType', BuildingType)
 
 
 # Complex type {http://teaser.project}OfficeType with content type ELEMENT_ONLY
@@ -1491,7 +1491,7 @@ class OfficeType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.OfficeType = OfficeType
-Namespace.addCategoryObject('typeBinding', 'OfficeType', OfficeType)
+Namespace.addCategoryObject('typeBinding_04', 'OfficeType', OfficeType)
 
 
 # Complex type {http://teaser.project}ResidentialType with content type ELEMENT_ONLY
@@ -1615,7 +1615,7 @@ class ResidentialType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.ResidentialType = ResidentialType
-Namespace.addCategoryObject('typeBinding', 'ResidentialType', ResidentialType)
+Namespace.addCategoryObject('typeBinding_04', 'ResidentialType', ResidentialType)
 
 
 # Complex type {http://teaser.project}InstituteType with content type ELEMENT_ONLY
@@ -1739,7 +1739,7 @@ class InstituteType (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.InstituteType = InstituteType
-Namespace.addCategoryObject('typeBinding', 'InstituteType', InstituteType)
+Namespace.addCategoryObject('typeBinding_04', 'InstituteType', InstituteType)
 
 
 # Complex type {http://teaser.project}Institute4Type with content type ELEMENT_ONLY
@@ -1863,7 +1863,7 @@ class Institute4Type (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.Institute4Type = Institute4Type
-Namespace.addCategoryObject('typeBinding', 'Institute4Type', Institute4Type)
+Namespace.addCategoryObject('typeBinding_04', 'Institute4Type', Institute4Type)
 
 
 # Complex type {http://teaser.project}Institute8Type with content type ELEMENT_ONLY
@@ -1987,7 +1987,7 @@ class Institute8Type (pyxb.binding.basis.complexTypeDefinition):
         
     })
 _module_typeBindings.Institute8Type = Institute8Type
-Namespace.addCategoryObject('typeBinding', 'Institute8Type', Institute8Type)
+Namespace.addCategoryObject('typeBinding_04', 'Institute8Type', Institute8Type)
 
 
 # Complex type {http://teaser.project}ProjectType with content type ELEMENT_ONLY
@@ -2063,11 +2063,11 @@ class ProjectType (pyxb.binding.basis.complexTypeDefinition):
         __version.name() : __version
     })
 _module_typeBindings.ProjectType = ProjectType
-Namespace.addCategoryObject('typeBinding', 'ProjectType', ProjectType)
+Namespace.addCategoryObject('typeBinding_04', 'ProjectType', ProjectType)
 
 
 Project = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'Project'), ProjectType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\Project.xsd', 6, 2))
-Namespace.addCategoryObject('elementBinding', Project.name().localName(), Project)
+Namespace.addCategoryObject('elementBinding_04', Project.name().localName(), Project)
 
 
 
