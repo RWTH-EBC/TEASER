@@ -114,6 +114,14 @@ def save_bound_conditions(bound_cond, data_class):
         usage_pyxb.AHU.min_ahu = bound_cond.min_ahu
         usage_pyxb.AHU.max_ahu = bound_cond.max_ahu
         usage_pyxb.AHU.with_ahu = bound_cond.with_ahu
+        usage_pyxb.AHU.use_constant_ach_rate = bound_cond.use_constant_ach_rate
+        usage_pyxb.AHU.base_ach = bound_cond.base_ach
+        usage_pyxb.AHU.max_user_ach = bound_cond.max_user_ach
+        usage_pyxb.AHU.max_overheating_ach = bound_cond.max_overheating_ach
+        usage_pyxb.AHU.max_summer_ach = bound_cond.max_summer_ach
+        usage_pyxb.AHU.winter_reduction = bound_cond.winter_reduction
+
+
         usage_pyxb.typical_length = bound_cond.typical_length
         usage_pyxb.typical_width = bound_cond.typical_width
 

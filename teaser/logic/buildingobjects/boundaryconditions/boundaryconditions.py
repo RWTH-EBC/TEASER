@@ -632,4 +632,4 @@ class BoundaryConditions(UseConditions):
         self._base_ach = value
 
         if self.parent is not None:
-            self.parent.infiltration_rate = self._base_ach
+            self.parent.infiltration_rate = value
