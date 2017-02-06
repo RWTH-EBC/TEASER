@@ -32,10 +32,12 @@ class BoundaryConditions(UseConditions):
         usage type
         AixLib usage: String to distinguish usages of a zone
     typical_length : float [m]
-        typical length of a usage zone
+        typical length of a room in a usage zone. This value is taken from
+        SIA 2024.
         Archetype usage: division of usage zones in rooms
     typical width : float [m]
-        typical width of a usage zone
+        typical width of a usage zone. This value is taken from
+        SIA 2024.
         Archetype usage: division of usage zones in rooms
     usage_time : list [h]
         usage time [begin, end]
@@ -90,19 +92,20 @@ class BoundaryConditions(UseConditions):
         Currently not used
     ratio_conv_rad_lighting : float
         describes the ratio between convective and radiative heat transfer
-        of the lighting
+        of the lighting. It is not obvious where this value origins from.
         AixLib: Used in Zone record for internal gains, lighting
 
     ROOM CLIMATE
 
     set_temp_heat: float [K]
-        internal set temperature heating
+        internal set temperature heating. This value is taken from DIN 18599-10.
         AixLib: Used in simple Heater for set temperature
     set_temp_cool: float [K}
         internal set temperature cooling
         Currently not used
     temp_set_back: float [K]
-        set back in reduced operation mode
+        set back in reduced operation mode. This value is taken from
+        DIN 18599-10.
         AixLib: Used for night set-back for simple heater.
     min_temp_heat : float [K]
         design minimal temperature heating
@@ -126,58 +129,64 @@ class BoundaryConditions(UseConditions):
       cooling time [begin, end]
         Currently not used
     heating_time : list [h]
-        heating time [begin, end]
+        heating time [begin, end]. This value is taken from DIN 18599-10.
         AixLib: Used for night set-back for simple heater.
+
     INTERNAL GAINS
 
-    persons : int
-        number of persons in the room
+    persons : float [W/m2]
+        Average sensible heat transmission of people at 24 C with specific
+        heat transmission of 70 W/person, taken from SIA 2024.
         AixLib: Used in Zone record for internal gains, NrPeople
         Annex: Used for internal gains
-    activity_type_persons : int
-        persons activity (1: light, 2: moderate, 3: high)
-        AixLib: Used in Zone for internal gains. The heat produced by people
-        in relation to zone temperature and person activity in [W/person]
+    activity_type_persons : float [W/person]
+        persons activity (1: light, 2: moderate, 3: high). It is not obvious
+        where this value origins from.
+        AixLib: currently not used, it is always set to 100 W/person
         Annex: (1: light, 50W/person, 2: moderate 100W/person,
         3: high 150W/person) For Annex models, the heat produced is not
         dependent on zone temperature
     ratio_conv_rad_persons : float
         describes the ratio between convective and radiative heat transfer
-        of the persons
+        of the persons. It is not obvious where this value origins from.
         AixLib: Used in Zone record for internal gains
         Annex: Used for internal gains
     profile_persons : list
         Relative presence of persons 0-1 (e.g. 0.5 means that 50% of the total
         number of persons are currently in the room). Typically given
-        for 24h.
+        for 24h. This value is taken from SIA 2024.
         AixLib: Used for internal gains profile on top-level
         Annex: Used for internal gains
-    machines: float
-        number of Machines
+    machines: float [W/m2]
+        Specific eletrical load of machines per m2. This value is taken from
+        SIA 2024.
         AixLib: Used in Zone record for internal gains
-    activity_type_machines : int
+        Annex: Used for internal gains
+    activity_type_machines : float [W/machine]
         machines activity (1: light, 50W/machine, 2: moderate 100W/machine,
-        3: high 150W/machine)
-        AixLib: Used in Zone record for internal gains
+        3: high 150W/machine). It is not obvious where this value origins from.
+        AixLib: currently not used, it is always set to 100 W/machine
         Annex: Used for internal gains
     ratio_conv_rad_machines : float
         describes the ratio between convective and radiative heat transfer
-        of the machines
+        of the machines. It is not obvious
+        where this value origins from.
         AixLib: Used in Zone record for internal gains
         Annex: Not used, all machines are convective (see Annex examples)
     profile_machines : list
         Relative presence of machines 0-1 (e.g. 0.5 means that 50% of the total
         number of machines are currently used in the room). Typically given
-        for 24h.
+        for 24h. This value is taken from SIA 2024.
         AixLib: Used for internal gains profile on top-level
-        Annex: Not used (see Annex examples)
+        Annex: Used for internal gains
     lighting_power : float [W/m2]
-        spec. electr. Power for lighting
+        spec. electr. Power for lighting. This value is taken from SIA 2024.
         AixLib: Used in Zone record for internal gains
         Annex: Not used (see Annex examples)
     profile_lighting : [float]
         Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total
-        lighting power are currently used). Typically given for 24h.
+        lighting power are currently used). Typically given for 24h. It is not
+        obvious where this value origins from.
         AixLib: Used for internal gains profile on top-level
         Annex: Not used (see Annex examples)
 
