@@ -267,10 +267,13 @@ class Wall(BuildingElement):
 
         This function adds an additional layer of insulation and sets the
         thickness of the layer according to the retrofit standard in the
-        year of refurbishment. Refurbishment year must be newer then 1995
+        year of refurbishment. Refurbishment year must be newer then 1977
 
         Note: To Calculate thickness and U-Value, the standard TEASER
         coefficients for outer and inner heat transfer are used.
+
+        The used Standards are namely the Waermeschutzverordnung (WSVO) and
+        Energieeinsparverordnung (EnEv)
 
         Parameters
         ----------
