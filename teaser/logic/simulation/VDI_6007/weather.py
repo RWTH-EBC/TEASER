@@ -33,152 +33,6 @@ def getSolarGains(initialTime, timeDiscretization, timesteps, timeZone,
     return np.array(results)
 
 
-def getGeometry(initialTime, timeDiscretization, timesteps, timeZone=1,
-                location=(50.76, 6.07), altitude=0):
-    """
-    This function computes hour angle, declination, zenith angle of the sun
-    and solar azimuth angle for a given location and time.
-
-    The implemented equations can be found in:
-    Duffie, Beckman - Solar Engineering of Thermal Processes, 2013 (4th ed.)
-
-    Parameters
-    ----------
-    initialTime : integer
-        Time passed since January 1st, 00:00:00 in seconds
-    timeDiscretization : integer
-        Time between two consecutive time steps in seconds
-    timesteps : integer
-        Number of investigated / requested time steps
-    timeZone : integer, optional
-        Shift between the location's time and GMT in hours. CET would be 1.
-    location : tuple, optional
-        (latitude, longitude) of the simulated system's position. Standard
-        values (50.76, 6.07) represent Aachen, Germany.
-    altitude : float, optional
-        The locations altitude in meters
-
-    Returns
-    -------
-    omega : array_like
-        Hour angle. The angular displacement of the sun east or west of the
-        local meridian due to rotation of the earth on its axis at 15 degrees
-        per hour; morning negative, afternoon positive
-    delta : array_like
-        Declination. The angular position of the sun at solar noon (i.e., when
-        the sun is on the local meridian) with respect to the plane of the
-        equator, north positive; −23.45 <= delta <= 23.45
-    thetaZ : array_like
-        Zenith angle. The angle between the vertical and the line to the sun,
-        that is, the angle of incidence of beam radiation on a horizontal
-        surface; 0 <= thetaZ <= 90
-    """
-    # Define pi
-    pi = math.pi
-
-    # Notice:
-    # All inputs and outputs are given/expected in degrees. For the
-    # computation, radians are required. Angles are converted from degrees to
-    # radians via np.radians(angle). The resulting radian value is noted with
-    # an R-suffix. Converting radian values to degrees is done via
-    # np.rad2deg(angleR).
-    # This conversion can also be done by multiplying/dividing with 180°/pi
-
-    # Split location into latitude (phi) and longitude (lambda).
-    (latitude, longitude) = location
-
-    # Create time array
-    time = ((np.linspace(0, timesteps - 1, num=timesteps)) * timeDiscretization
-            + initialTime)
-
-    # Determine the day's number and standard time (neglect daylight saving)
-    numberDay = time / (3600 * 24)
-    standardTime = time / 3600 - np.floor(numberDay) * 24
-
-    # Equation 1.4.2, page 9
-    B = 360 / 365.26 * numberDay
-    BR = np.radians(B)
-    # Compute abbreviations for E and extraterrestrial irradiation (Gon)
-    cosB = np.cos(BR)
-    sinB = np.sin(BR)
-    cos2B = np.cos(2 * BR)
-    sin2B = np.sin(2 * BR)
-
-    # Convert local time into solar time
-    # Equation 1.5.3, page 11
-    E = 229.2 / 60 * (0.000075 +
-                      0.001868 * cosB -
-                      0.032077 * sinB -
-                      0.014615 * cos2B -
-                      0.040890 * sin2B)
-
-    # Compute standard meridian
-    # Footnote 5 of chapter 1. Can be found on page 11.
-    lambdaStandard = timeZone * 15
-
-    # Compute solar time
-    # Equation 1.5.2, page 11 (conversion to hours instead of minutes)
-    solarTime = (
-                    standardTime + 4 * (
-                        longitude - lambdaStandard) / 60 + E) - 0.5
-
-    # Hour angle
-    # The angular displacement of the sun east or west of the local meridian
-    # due to rotation of the earth on its axis at 15 degrees per hour; morning
-    # negative, afternoon positive
-    # Confirm page 13
-    omega = 360 / 24 * (solarTime - 12)
-    # Ensure: -180 <= omega <= 180
-    omega[omega < -180] = omega[omega < -180] + 360
-    omega[omega > 180] = omega[omega > 180] - 360
-    omegaR = np.radians(omega)
-
-    # Declination
-    # The angular position of the sun at solar noon (i.e., when the sun is on
-    # the local meridian) with respect to the plane of the equator, north
-    # positive; −23.45 <= delta <= 23.45
-    # Equation 1.6.1a, page 13
-    delta = 23.45 * np.sin((284 + numberDay) / 365 * 2 * pi)
-    deltaR = np.radians(delta)
-
-    # Zenith angle
-    # The angle between the vertical and the line to the sun, that is, the
-    # angle of incidence of beam radiation on a horizontal surface;
-    # 0 <= thetaZ <= 90. If thetaZ > 90, the sun is below the horizon.
-    # Equation 1.6.5 on page 15
-
-    # Introduce abbreviations to improve readability
-    latitudeR = math.radians(latitude)
-    cosPhi = math.cos(latitudeR)
-    sinPhi = math.sin(latitudeR)
-    cosDelta = np.cos(deltaR)
-    sinDelta = np.sin(deltaR)
-    cosOmega = np.cos(omegaR)
-    cosThetaZ = np.maximum(0, cosPhi * cosDelta * cosOmega + sinDelta * sinPhi)
-    thetaZR = np.arccos(cosThetaZ)
-    thetaZ = np.rad2deg(thetaZR)
-
-    # Compute airmass
-    # Footnote 3 on page 10
-    airmass = (math.exp(-0.0001184 * altitude) /
-               (cosThetaZ + 0.5057 * np.power(96.08 - thetaZ, -1.634)))
-
-    # Compute extraterrestrial irradiance (Gon)
-    # Extraterrestrial radiation incident on the plane normal to the radiation
-    # on the nth day of the year.
-    # Solar constant. Page 6
-    Gsc = 1367  # W/m2
-    # Equation 1.4.1b
-    Gon = Gsc * (1.000110 +
-                 0.034221 * cosB +
-                 0.001280 * sinB +
-                 0.000719 * cos2B +
-                 0.000077 * sin2B)
-
-    # Return results
-    return (omega, delta, thetaZ, airmass, Gon)
-
-
 def getIncidenceAngle(beta, gamma, phi, omega, delta):
     """
     Compute the incidence angle on a tilted surface.
@@ -384,110 +238,69 @@ def getTotalRadiationTiltedSurface(theta, thetaZ,
 
 
 class Weather(object):
-    """
+    """Computes weather data like solar radiation
+
     Weather class of TEASER
 
-        timeZone : integer, optional
+    Attributes
+    ----------
+    time_zone : int
         Shift between the location's time and GMT in hours. CET would be 1.
+    timestep : int [s]
+        duration of one timestep in sec. default is 3600
+    nb_timesteps : int
+        The number of calculated timesteps, default is 8760
+    omega : array_like
+        Hour angle. The angular displacement of the sun east or west of the
+        local meridian due to rotation of the earth on its axis at 15 degrees
+        per hour; morning negative, afternoon positive
+    delta : array_like
+        Declination. The angular position of the sun at solar noon (i.e., when
+        the sun is on the local meridian) with respect to the plane of the
+        equator, north positive; −23.45 <= delta <= 23.45
+    thetaZ : array_like
+        Zenith angle. The angle between the vertical and the line to the sun,
+        that is, the angle of incidence of beam radiation on a horizontal
+        surface; 0 <= thetaZ <= 90
+    albedo : float
+        Ground reflectance. 0 <= albedo <= 1
+    g_on : array like
+        extraterrestrial irradiance
+    airmass : array like
+        airmass
+
+
     """
 
     def __init__(self, thermal_zone):
         """
-        beta=[90, 90, 90, 90, 0],
-                 gamma=[-180, -90, 0, 90, 0],
-                 weather_path=None,
-                 albedo=0.2,
-                 timeZone=1,
-                 altitude=0,
-                 location=(49.5, 8.5),
-                 timestep=3600,
-                 do_sun_rad=True):
         Constructor of weather object
-
-        Parameters
-        ----------
-        beta
-        gamma
-            north, east, south, west, horizontal
-        weather_path : str, optional
-            Path to weather file (default: None)
-            If set to None, loads weather set TRY 2010, region 12
-        albedo
-        timeZone
-        altitude
-        location
-        do_sun_rad : bool, optional
-            If True, calculate sun radiation on surface (default: True)
         """
 
-        self.timestep = 3600
-        self.nb_timesteps = 365 * 24 * 3600 / self.timestep
+        self.timesteps = 3600
+        self.nb_timesteps = 365 * 24 * 3600 / self.timesteps
         self.time_zone = 1
         self.albedo = 0.2
+        self.g_on = None
+        self.omega = None
+        self.airmass = None
+        self.delta = None
+        self.theta_z = None
 
-
-    def calc_sun_rad(
-            initialTime,
-            timeDiscretization,
-            timesteps,
-            timeZone,
-            location,
-            altitude,
-            beta,
-            gamma,
-            beam,
-            diffuse,
-            albedo):
-    # get geometry results for entire year
-
-        geometry = getGeometry(initialTime, timeDiscretization,
-                               timesteps, timeZone, location, altitude)
-        (omega, delta, thetaZ, airmass, Gon) = geometry
-
-        # iterate over all surfaces (given in beta/gamma)
-        results = []
-        for i in range(len(gamma)):
-            # compute incidence angle on each surface
-            theta = getIncidenceAngle(beta[i], gamma[i], location[0], omega, delta)
-            theta = theta[1]  # cosTheta is not required
-
-            # compute radiation on tilted surface for each surface
-            radiation = getTotalRadiationTiltedSurface(theta, thetaZ, beam,
-                                                       diffuse, airmass, Gon,
-                                                       beta[i], albedo)
-            results.append(radiation)
-        # return radiation on each surface
-        return np.array(results)
-        """
-        Calculate sun radiation on surface and save results to weather object.
-
-        Parameters
-        ----------
-        timestep : int, optional
-            Time discretization in seconds (default: 3600)
-        nb_timesteps : int, optional
-            Number of timesteps (default: 8760)
-        """
-
-        # Sun radiation on surfaces
-        self.sun_rad = getSolarGains(initialTime=0,
-                                     timeDiscretization=timestep,
-                                     timesteps=nb_timesteps,
-                                     timeZone=self.timeZone,
-                                     location=self.location,
-                                     altitude=self.altitude,
-                                     beta=self.beta,
-                                     gamma=self.gamma,
-                                     beam=self.sun_dir,
-                                     diffuse=self.sun_diff,
-                                     albedo=self.albedo)
 
     def get_sun_geometry(self, initial_time, time_discretization):
         """Computes suns geometry for a certain location and time
 
-
         This function computes hour angle, declination, zenith angle of the sun
         and solar azimuth angle for a given location and time.
+
+        Notice:
+        All inputs and outputs are given/expected in degrees. For the
+        computation, radians are required. Angles are converted from degrees to
+        radians via np.radians(angle). The resulting radian value is noted with
+        an r-suffix. Converting radian values to degrees is done via
+        np.rad2deg(angle_r).
+        This conversion can also be done by multiplying/dividing with 180°/pi
 
         The implemented equations can be found in:
         Duffie, Beckman - Solar Engineering of Thermal Processes, 2013 (4th ed.)
@@ -515,114 +328,101 @@ class Weather(object):
             surface; 0 <= thetaZ <= 90
         """
 
-    # Define pi
-    pi = math.pi
+        pi = math.pi
 
-    # Notice:
-    # All inputs and outputs are given/expected in degrees. For the
-    # computation, radians are required. Angles are converted from degrees to
-    # radians via np.radians(angle). The resulting radian value is noted with
-    # an R-suffix. Converting radian values to degrees is done via
-    # np.rad2deg(angleR).
-    # This conversion can also be done by multiplying/dividing with 180°/pi
+        # Create time array
+        time = ((np.linspace(
+                    0,
+                    self.timesteps - 1,
+                    num=self.timesteps)) * time_discretization + initial_time)
 
-    # Split location into latitude (phi) and longitude (lambda).
-    (latitude, longitude) = (self.thermal_zone.parent.latitude,
-                             self.thermal_zone.parent.longitude)
+        # Determine the day's number and standard time (neglect daylight saving)
+        day_nr = time / (3600 * 24)
+        std_time = time / 3600 - np.floor(day_nr) * 24
 
-    # Create time array
-    time = (
-        (np.linspace(
+        # Equation 1.4.2, page 9
+        b = 360 / 365.26 * day_nr
+        b_r = np.radians(b)
+        # Compute abbreviations for E and extraterrestrial irradiation (Gon)
+        cos_b = np.cos(b_r)
+        sin_b = np.sin(b_r)
+        cos2_b = np.cos(2 * b_r)
+        sin2_b = np.sin(2 * b_r)
+
+        # Convert local time into solar time
+        # Equation 1.5.3, page 11
+        e = 229.2 / 60 * (
+            0.000075 +
+            0.001868 * cos_b -
+            0.032077 * sin_b -
+            0.014615 * cos2_b -
+            0.040890 * sin2_b)
+
+        # Compute standard meridian
+        # Footnote 5 of chapter 1. Can be found on page 11.
+        lambda_std = self.time_zone * 15
+
+        # Compute solar time
+        # Equation 1.5.2, page 11 (conversion to hours instead of minutes)
+        solar_time = (std_time + 4 * (
+            self.thermal_zone.parent.longitude - lambda_std) / 60 + e) - 0.5
+
+        # Hour angle
+        # The angular displacement of the sun east or west of the local meridian
+        # due to rotation of the earth on its axis at 15 degrees per hour;
+        # morning negative, afternoon positive
+        # Confirm page 13
+        self.omega = 360 / 24 * (solar_time - 12)
+        # Ensure: -180 <= omega <= 180
+        self.omega[self.omega < -180] += 360
+        self.omega[self.omega > 180] -= 360
+        omega_r = np.radians(self.omega)
+
+        # Declination
+        # The angular position of the sun at solar noon (i.e., when the sun is on
+        # the local meridian) with respect to the plane of the equator, north
+        # positive; −23.45 <= delta <= 23.45
+        # Equation 1.6.1a, page 13
+        self.delta = 23.45 * np.sin((284 + day_nr) / 365 * 2 * pi)
+        delta_r = np.radians(self.delta)
+
+        # Zenith angle
+        # The angle between the vertical and the line to the sun, that is, the
+        # angle of incidence of beam radiation on a horizontal surface;
+        # 0 <= thetaZ <= 90. If thetaZ > 90, the sun is below the horizon.
+        # Equation 1.6.5 on page 15
+
+        # Introduce abbreviations to improve readability
+        latitude_r = math.radians(self.thermal_zone.parent.latitude)
+        cos_phi = math.cos(latitude_r)
+        sin_phi = math.sin(latitude_r)
+        cos_delta = np.cos(delta_r)
+        sin_delta = np.sin(delta_r)
+        cos_omega = np.cos(omega_r)
+        cos_theta_z = np.maximum(
             0,
-            timesteps - 1,
-            num=timesteps)) * time_discretization + initial_time)
+            cos_phi * cos_delta * cos_omega + sin_delta * sin_phi)
+        theta_z_r = np.arccos(cos_theta_z)
+        self.theta_z = np.rad2deg(theta_z_r)
 
-    # Determine the day's number and standard time (neglect daylight saving)
-    numberDay = time / (3600 * 24)
-    standardTime = time / 3600 - np.floor(numberDay) * 24
+        # Compute airmass
+        # Footnote 3 on page 10
+        self.airmass = (math.exp(-0.0001184 *
+                                self.thermal_zone.parent.altitude) / (
+            cos_theta_z + 0.5057 * np.power(96.08 - self.theta_z, -1.634)))
 
-    # Equation 1.4.2, page 9
-    B = 360 / 365.26 * numberDay
-    BR = np.radians(B)
-    # Compute abbreviations for E and extraterrestrial irradiation (Gon)
-    cosB = np.cos(BR)
-    sinB = np.sin(BR)
-    cos2B = np.cos(2 * BR)
-    sin2B = np.sin(2 * BR)
-
-    # Convert local time into solar time
-    # Equation 1.5.3, page 11
-    E = 229.2 / 60 * (0.000075 +
-                      0.001868 * cosB -
-                      0.032077 * sinB -
-                      0.014615 * cos2B -
-                      0.040890 * sin2B)
-
-    # Compute standard meridian
-    # Footnote 5 of chapter 1. Can be found on page 11.
-    lambdaStandard = time_zone * 15
-
-    # Compute solar time
-    # Equation 1.5.2, page 11 (conversion to hours instead of minutes)
-    solarTime = (
-                    standardTime + 4 * (
-                        longitude - lambdaStandard) / 60 + E) - 0.5
-
-    # Hour angle
-    # The angular displacement of the sun east or west of the local meridian
-    # due to rotation of the earth on its axis at 15 degrees per hour; morning
-    # negative, afternoon positive
-    # Confirm page 13
-    omega = 360 / 24 * (solarTime - 12)
-    # Ensure: -180 <= omega <= 180
-    omega[omega < -180] = omega[omega < -180] + 360
-    omega[omega > 180] = omega[omega > 180] - 360
-    omegaR = np.radians(omega)
-
-    # Declination
-    # The angular position of the sun at solar noon (i.e., when the sun is on
-    # the local meridian) with respect to the plane of the equator, north
-    # positive; −23.45 <= delta <= 23.45
-    # Equation 1.6.1a, page 13
-    delta = 23.45 * np.sin((284 + numberDay) / 365 * 2 * pi)
-    deltaR = np.radians(delta)
-
-    # Zenith angle
-    # The angle between the vertical and the line to the sun, that is, the
-    # angle of incidence of beam radiation on a horizontal surface;
-    # 0 <= thetaZ <= 90. If thetaZ > 90, the sun is below the horizon.
-    # Equation 1.6.5 on page 15
-
-    # Introduce abbreviations to improve readability
-    latitudeR = math.radians(latitude)
-    cosPhi = math.cos(latitudeR)
-    sinPhi = math.sin(latitudeR)
-    cosDelta = np.cos(deltaR)
-    sinDelta = np.sin(deltaR)
-    cosOmega = np.cos(omegaR)
-    cosThetaZ = np.maximum(0, cosPhi * cosDelta * cosOmega + sinDelta * sinPhi)
-    thetaZR = np.arccos(cosThetaZ)
-    thetaZ = np.rad2deg(thetaZR)
-
-    # Compute airmass
-    # Footnote 3 on page 10
-    airmass = (math.exp(-0.0001184 * altitude) /
-               (cosThetaZ + 0.5057 * np.power(96.08 - thetaZ, -1.634)))
-
-    # Compute extraterrestrial irradiance (Gon)
-    # Extraterrestrial radiation incident on the plane normal to the radiation
-    # on the nth day of the year.
-    # Solar constant. Page 6
-    Gsc = 1367  # W/m2
-    # Equation 1.4.1b
-    Gon = Gsc * (1.000110 +
-                 0.034221 * cosB +
-                 0.001280 * sinB +
-                 0.000719 * cos2B +
-                 0.000077 * sin2B)
-
-    # Return results
-    return (omega, delta, thetaZ, airmass, Gon)
+        # Compute extraterrestrial irradiance (Gon)
+        # Extraterrestrial radiation incident on the plane normal to the radiation
+        # on the nth day of the year.
+        # Solar constant. Page 6
+        g_sc = 1367  # W/m2
+        # Equation 1.4.1b
+        self.g_on = g_sc * (
+            1.000110 +
+            0.034221 * cos_b +
+            0.001280 * sin_b +
+            0.000719 * cos2_b +
+            0.000077 * sin2_b)
 
 if __name__ == "__main__":
 
