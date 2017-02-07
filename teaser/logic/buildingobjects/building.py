@@ -71,6 +71,8 @@ class Building(object):
         Longitude of building location.
     latitude : float [degree]
         Latitude of building location.
+    altitude : float [m]
+        altitude above sea level
     thermal_zones : list
         List with instances of ThermalZone(), that are located in this building.
     gml_surfaces : list
@@ -143,6 +145,7 @@ class Building(object):
         self.city = ""
         self.longitude = 6.05
         self.latitude = 50.79
+        self.altitude = 0.0
 
         self._thermal_zones = []
         self.gml_surfaces = []
