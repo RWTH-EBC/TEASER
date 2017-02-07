@@ -7,9 +7,8 @@
 import teaser.logic.utilities as utils
 import warnings
 import xml.etree.ElementTree as et
-import os
 import numpy as np
-import math
+import os
 
 class DataClass(object):
     """Class for XML data bindings
@@ -169,14 +168,21 @@ class DataClass(object):
             self.material_bind = mat_bind.CreateFromDocument(
                 __xml_file_mat.read())
 
-    def load_weather(self, path):
+    def load_weather(
+            self,
+            path=utils.get_full_path(os.path.join(
+                'data',
+                'input',
+                'weather',
+                'TRY2010_05_Jahr.dat'))):
         """Loads Weather time series from TRY .dat file into dict
 
         Parameters
         ----------
 
         path : str
-            Full path to TRY .dat file
+            Full path to TRY .dat file, default is
+            teaser/data/input/weather/TRY2010_05_Jahr.dat
 
         """
 
