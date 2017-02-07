@@ -11,6 +11,7 @@ from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 from teaser.logic.buildingobjects.calculation.four_element import FourElement
 
+
 class ThermalZone(object):
     """Thermal zone class.
 
@@ -80,6 +81,9 @@ class ThermalZone(object):
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]
         average heat capacity of the air in the thermal zone
+    sim_model : instance of SimulationVDI6007()
+        Instance of the VDI Simulation Class containing simulation methods and
+        informations
     """
 
     def __init__(self, parent=None):
@@ -109,7 +113,6 @@ class ThermalZone(object):
         self.density_air = 1.25
         self.heat_capac_air = 1002
         self.t_ground = 286.15
-
 
     def calc_zone_parameters(
             self,
@@ -456,7 +459,6 @@ class ThermalZone(object):
     @property
     def floors(self):
         return self._floors
-
 
     @floors.setter
     def floors(self, value):
