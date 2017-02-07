@@ -19,6 +19,12 @@ def run_case4(plot_res=False):
     ----------
     plot_res : bool, optional
         Defines, if results should be plotted (default: False)
+
+    Returns
+    -------
+    result_tuple : tuple (of floats)
+        Results tuple with maximal temperature deviations
+        (max_dev_1, max_dev_10, max_dev_60)
     """
 
     # Definition of time horizon
@@ -141,12 +147,15 @@ def run_case4(plot_res=False):
         plot_result(T_air_10, T_air_ref_10, "Results day 10")
         plot_result(T_air_60, T_air_ref_60, "Results day 60")
 
-    print(
-        "Max. deviation day 1: " + str(np.max(np.abs(T_air_1 - T_air_ref_1))))
-    print("Max. deviation day 10: " + str(
-        np.max(np.abs(T_air_10 - T_air_ref_10))))
-    print("Max. deviation day 60: " + str(
-        np.max(np.abs(T_air_60 - T_air_ref_60))))
+    max_dev_1 = np.max(np.abs(T_air_1 - T_air_ref_1))
+    max_dev_10 = np.max(np.abs(T_air_10 - T_air_ref_10))
+    max_dev_60 = np.max(np.abs(T_air_60 - T_air_ref_60))
+
+    print("Max. deviation day 1: " + str(max_dev_1))
+    print("Max. deviation day 10: " + str(max_dev_10))
+    print("Max. deviation day 60: " + str(max_dev_60))
+
+    return (max_dev_1, max_dev_10, max_dev_60)
 
 
 if __name__ == '__main__':

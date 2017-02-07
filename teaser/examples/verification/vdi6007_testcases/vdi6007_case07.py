@@ -20,6 +20,12 @@ def run_case7(plot_res=False):
     ----------
     plot_res : bool, optional
         Defines, if results should be plotted (default: False)
+
+    Returns
+    -------
+    result_tuple : tuple (of floats)
+        Results tuple with maximal power deviations
+        (max_dev_1, max_dev_10, max_dev_60)
     """
 
     # Definition of time horizon
@@ -147,11 +153,15 @@ def run_case7(plot_res=False):
         plot_result(Q_hc_10, Q_hc_ref_10, "Results day 10")
         plot_result(Q_hc_60, Q_hc_ref_60, "Results day 60")
 
-    print("Max. deviation day 1: " + str(np.max(np.abs(Q_hc_1 - Q_hc_ref_1))))
-    print(
-        "Max. deviation day 10: " + str(np.max(np.abs(Q_hc_10 - Q_hc_ref_10))))
-    print(
-        "Max. deviation day 60: " + str(np.max(np.abs(Q_hc_60 - Q_hc_ref_60))))
+    max_dev_1 = np.max(np.abs(Q_hc_1 - Q_hc_ref_1))
+    max_dev_10 = np.max(np.abs(Q_hc_10 - Q_hc_ref_10))
+    max_dev_60 = np.max(np.abs(Q_hc_60 - Q_hc_ref_60))
+
+    print("Max. deviation day 1: " + str(max_dev_1))
+    print("Max. deviation day 10: " + str(max_dev_10))
+    print("Max. deviation day 60: " + str(max_dev_60))
+
+    return (max_dev_1, max_dev_10, max_dev_60)
 
 
 if __name__ == '__main__':
