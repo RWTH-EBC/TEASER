@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-# coding=utf-8
+# -*- coding: utf-8 -*-
 """
-Run VDI 6007 test case 3
+
 """
 
 import os
@@ -9,17 +9,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import teaser.logic.simulation.VDI_6007.low_order_VDI as low_order_VDI
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case1 as vdic
+import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
 
-def run_case3(plot_res=False):
+def run_case4(plot_res=False):
     """
-    Run test case 3
+    Run test case 4
 
     Parameters
     ----------
     plot_res : bool, optional
         Defines, if results should be plotted (default: False)
     """
+
     # Definition of time horizon
     times_per_hour = 60
     timesteps = 24 * 60 * times_per_hour  # 60 days
@@ -28,7 +29,7 @@ def run_case3(plot_res=False):
     # Zero inputs
     ventRate = np.zeros(timesteps)
     solarRad_in = np.zeros((timesteps, 1))
-    source_igRad = np.zeros(timesteps)
+    Q_ig = np.zeros(timesteps)
 
     # Constant inputs
     alphaRad = np.zeros(timesteps) + 5
@@ -36,10 +37,10 @@ def run_case3(plot_res=False):
     weatherTemperature = np.zeros(timesteps) + 295.15  # in K
 
     # Variable inputs
-    Q_ig = np.zeros(timesteps_day)
+    source_igRad = np.zeros(timesteps_day)
     for q in range(int(6 * timesteps_day / 24), int(18 * timesteps_day / 24)):
-        Q_ig[q] = 1000
-    Q_ig = np.tile(Q_ig, 60)
+        source_igRad[q] = 1000
+    source_igRad = np.tile(source_igRad, 60)
 
     # Load constant house parameters
     houseData = {"R1i": 0.003237138,
@@ -71,27 +72,28 @@ def run_case3(plot_res=False):
     cooler_limit = np.zeros((timesteps, 3)) - 1e10
 
     # Calculate indoor air temperature
-    T_air, Q_hc, Q_iw, Q_ow = low_order_VDI.reducedOrderModelVDI(houseData,
-                                                                 weatherTemperature,
-                                                                 solarRad_in,
-                                                                 equalAirTemp,
-                                                                 alphaRad,
-                                                                 ventRate,
-                                                                 Q_ig,
-                                                                 source_igRad,
-                                                                 krad,
-                                                                 t_set_heating,
-                                                                 t_set_cooling,
-                                                                 heater_limit,
-                                                                 cooler_limit,
-                                                                 heater_order=np.array(
-                                                                     [1, 2,
-                                                                      3]),
-                                                                 cooler_order=np.array(
-                                                                     [1, 2,
-                                                                      3]),
-                                                                 dt=int(
-                                                                     3600 / times_per_hour))
+    T_air, Q_hc, Q_iw, Q_ow = \
+        low_order_VDI.reducedOrderModelVDI(houseData,
+                                           weatherTemperature,
+                                           solarRad_in,
+                                           equalAirTemp,
+                                           alphaRad,
+                                           ventRate,
+                                           Q_ig,
+                                           source_igRad,
+                                           krad,
+                                           t_set_heating,
+                                           t_set_cooling,
+                                           heater_limit,
+                                           cooler_limit,
+                                           heater_order=np.array(
+                                               [1, 2,
+                                                3]),
+                                           cooler_order=np.array(
+                                               [1, 2,
+                                                3]),
+                                           dt=int(
+                                               3600 / times_per_hour))
 
     # Compute averaged results
     T_air_c = T_air - 273.15
@@ -104,7 +106,7 @@ def run_case3(plot_res=False):
     T_air_60 = T_air_mean[1416:1440]
 
     this_path = os.path.dirname(os.path.abspath(__file__))
-    ref_file = 'case03_res.csv'
+    ref_file = 'case04_res.csv'
     ref_path = os.path.join(this_path, 'inputs', ref_file)
 
     # Load reference results
@@ -132,6 +134,8 @@ def run_case3(plot_res=False):
         plt.xlim([1, 24])
         plt.xlabel("Time in h")
 
+        plt.show()
+
     if plot_res:
         plot_result(T_air_1, T_air_ref_1, "Results day 1")
         plot_result(T_air_10, T_air_ref_10, "Results day 10")
@@ -144,6 +148,6 @@ def run_case3(plot_res=False):
     print("Max. deviation day 60: " + str(
         np.max(np.abs(T_air_60 - T_air_ref_60))))
 
-if __name__ == '__main__':
 
-    run_case3(plot_res=True)
+if __name__ == '__main__':
+    run_case4(plot_res=True)
