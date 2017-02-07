@@ -114,7 +114,7 @@ class Weather(object):
 
         # Create time array
         time = ((np.linspace(
-                    0, self.timestep - 1, num=self.timestep)) *
+                    0, self.nb_timesteps - 1, num=self.nb_timesteps)) *
                 time_discretization + initial_time)
 
         # Determine the day's number and standard time (neglect daylight saving)
