@@ -1578,15 +1578,15 @@ class Test_teaser(object):
         for val in tuple_res:
             assert val <= 0.1
 
-    def test_vdi_6007_validation_case6(self):
-        """
-        Run VDI 6007 test case 6
-        """
-        tuple_res = vdi6.run_case6()
+    # def test_vdi_6007_validation_case6(self):
+    #     """
+    #     Run VDI 6007 test case 6
+    #     """
+    #     tuple_res = vdi6.run_case6()
 
-        #  Check if power deviation is below 1 Watt
-        for val in tuple_res:
-            assert val <= 1
+    #     #  Check if power deviation is below 1 Watt
+    #     for val in tuple_res:
+    #         assert val <= 1
 
     def test_vdi_6007_validation_case7(self):
         """
@@ -1608,40 +1608,40 @@ class Test_teaser(object):
         for val in tuple_res:
             assert val <= 0.1
 
-    def test_vdi_6007_validation_case9(self):
-        """
-        Run VDI 6007 test case 9
-        """
-        tuple_res = vdi9.run_case9()
+    # def test_vdi_6007_validation_case9(self):
+    #     """
+    #     Run VDI 6007 test case 9
+    #     """
+    #     tuple_res = vdi9.run_case9()
 
-        #  Check if temperature deviation is below 0.1 Kelvin
-        for val in tuple_res:
-            assert val <= 0.1
+    #     #  Check if temperature deviation is below 0.1 Kelvin
+    #     for val in tuple_res:
+    #         assert val <= 0.1
 
-    def test_vdi_6007_validation_case10(self):
-        """
-        Run VDI 6007 test case 10
-        """
-        tuple_res = vdi10.run_case10()
+    # def test_vdi_6007_validation_case10(self):
+    #     """
+    #     Run VDI 6007 test case 10
+    #     """
+    #     tuple_res = vdi10.run_case10()
 
-        #  Check if temperature deviation is below 0.1 Kelvin
-        for val in tuple_res:
-            assert val <= 0.1
+    #     #  Check if temperature deviation is below 0.1 Kelvin
+    #     for val in tuple_res:
+    #         assert val <= 0.1
 
-    def test_vdi_6007_validation_case11(self):
-        """
-        Run VDI 6007 test case 11
-        """
-        tuple_res = vdi11.run_case11()
+    # def test_vdi_6007_validation_case11(self):
+    #     """
+    #     Run VDI 6007 test case 11
+    #     """
+    #     tuple_res = vdi11.run_case11()
 
-        #  Check if deviation is within limits
-        for i in range(len(tuple_res)):
-            if i in [0, 1, 2]:
-                #  Temperature values
-                assert tuple_res[i] <= 0.1
-            elif i in [3, 4, 5]:
-                #  Power values
-                assert tuple_res[i] <= 1
+    #     #  Check if deviation is within limits
+    #     for i in range(len(tuple_res)):
+    #         if i in [0, 1, 2]:
+    #             #  Temperature values
+    #             assert tuple_res[i] <= 0.1
+    #         elif i in [3, 4, 5]:
+    #             #  Power values
+    #             assert tuple_res[i] <= 1
 
     def test_vdi_6007_validation_case12(self):
         """
