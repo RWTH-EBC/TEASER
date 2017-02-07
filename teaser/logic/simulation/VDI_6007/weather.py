@@ -9,28 +9,7 @@ import numpy as np
 import math
 
 
-def getSolarGains(initialTime, timeDiscretization, timesteps, timeZone,
-                  location, altitude, beta, gamma, beam, diffuse, albedo):
-    # get geometry results for entire year
 
-    geometry = getGeometry(initialTime, timeDiscretization,
-                           timesteps, timeZone, location, altitude)
-    (omega, delta, thetaZ, airmass, Gon) = geometry
-
-    # iterate over all surfaces (given in beta/gamma)
-    results = []
-    for i in range(len(gamma)):
-        # compute incidence angle on each surface
-        theta = getIncidenceAngle(beta[i], gamma[i], location[0], omega, delta)
-        theta = theta[1]  # cosTheta is not required
-
-        # compute radiation on tilted surface for each surface
-        radiation = getTotalRadiationTiltedSurface(theta, thetaZ, beam,
-                                                   diffuse, airmass, Gon,
-                                                   beta[i], albedo)
-        results.append(radiation)
-    # return radiation on each surface
-    return np.array(results)
 
 
 def getIncidenceAngle(beta, gamma, phi, omega, delta):
@@ -235,8 +214,6 @@ def getTotalRadiationTiltedSurface(theta, thetaZ,
     # Return total radiation on a tilted surface
     return totalRadTiltSurface
 
-
-
 class Weather(object):
     """Computes weather data like solar radiation
 
@@ -276,7 +253,7 @@ class Weather(object):
         """
         Constructor of weather object
         """
-
+        self.thermal_zone = thermal_zone
         self.timesteps = 3600
         self.nb_timesteps = 365 * 24 * 3600 / self.timesteps
         self.time_zone = 1
@@ -286,7 +263,7 @@ class Weather(object):
         self.airmass = None
         self.delta = None
         self.theta_z = None
-
+        self.rad_on_tilted_surfaces = []
 
     def get_sun_geometry(self, initial_time, time_discretization):
         """Computes suns geometry for a certain location and time
@@ -312,20 +289,6 @@ class Weather(object):
         time_discretization : integer
             Time between two consecutive time steps in seconds
 
-        Returns
-        -------
-        omega : array_like
-            Hour angle. The angular displacement of the sun east or west of the
-            local meridian due to rotation of the earth on its axis at 15 degrees
-            per hour; morning negative, afternoon positive
-        delta : array_like
-            Declination. The angular position of the sun at solar noon (i.e., when
-            the sun is on the local meridian) with respect to the plane of the
-            equator, north positive; −23.45 <= delta <= 23.45
-        thetaZ : array_like
-            Zenith angle. The angle between the vertical and the line to the sun,
-            that is, the angle of incidence of beam radiation on a horizontal
-            surface; 0 <= thetaZ <= 90
         """
 
         pi = math.pi
@@ -423,6 +386,63 @@ class Weather(object):
             0.001280 * sin_b +
             0.000719 * cos2_b +
             0.000077 * sin2_b)
+
+    def _convert_orientation(self, orientation_teaser):
+        """converts orientation from TEASER values to definition in sim
+
+        Parameters
+        ----------
+
+        orientation_teaser : list [degree]
+            TESAER orientation of all facades of thermal zone (win + wall)
+            0 - 360
+        Returns
+        -------
+
+        orientation_vdi : list [degree]
+            VDI Simulation of all facedes of thermal zone (win + wall)
+            -180 - 180
+
+        """
+
+        orientation_vdi = []
+
+        for orient in orientation_teaser:
+            if orient == -1 or orient == -2:
+                orientation_vdi.append(0.0)
+            else:
+                orientation_vdi.append(orient - 180)
+
+        return orientation_vdi
+
+    def get_solar_gains(self):
+        """computes solar gains on tilted surfaces"""
+
+        gamma = self.convert_orientation(orientation_teaser=
+            self.thermal_zone.parent.model_attr.orientation_facade)
+
+        for i in range(len(gamma)):
+            # compute incidence angle on each surface
+            theta = getIncidenceAngle(
+                self.thermal_zone.model_attr.tilt_facade[i],
+                gamma[i],
+                self.thermal_zone.parent.longitude,
+                self.omega,
+                self.delta)
+
+            theta = theta[1]  # cosTheta is not required
+
+            # compute radiation on tilted surface for each surface
+            radiation = getTotalRadiationTiltedSurface(
+                theta,
+                self.theta_z,
+                self.thermal_zone.parent.parent.data.weather['sun_dir'],
+                self.thermal_zone.parent.parent.data.weather['sun_diff'],
+                self.airmass,
+                self.g_on,
+                self.thermal_zone.model_attr.tilt_facade[i],
+                self.albedo)
+            self.rad_on_tilted_surfaces.append(radiation)
 
 if __name__ == "__main__":
 
