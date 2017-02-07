@@ -19,7 +19,11 @@ def simulate_vdi():
 
     prj.data.load_weather()
 
-    
+    from teaser.logic.simulation.VDI_6007.weather import Weather
+
+    test = Weather(prj.buildings[0].thermal_zones[0])
+    test.get_solar_gains()
+    None
 
 if __name__ == '__main__':
     simulate_vdi()
