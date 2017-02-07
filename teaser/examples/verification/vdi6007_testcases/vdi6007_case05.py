@@ -48,13 +48,21 @@ def run_case5(plot_res=False):
     Q_ig = np.tile(Q_ig, 60)
     source_igRad = np.tile(source_igRad, 60)
 
-    solarRad_raw = np.loadtxt("inputs/case05_q_sol.csv", usecols=(1,))
+    this_path = os.path.dirname(os.path.abspath(__file__))
+    ref_file = 'case05_q_sol.csv'
+    ref_path = os.path.join(this_path, 'inputs', ref_file)
+
+    solarRad_raw = np.loadtxt(ref_path, usecols=(1,))
     solarRad = solarRad_raw[0:24]
     solarRad[solarRad > 100] = solarRad[solarRad > 100] * 0.15
     solarRad_adj = np.repeat(solarRad, times_per_hour)
     solarRad_in = np.array([np.tile(solarRad_adj, 60)]).T
 
-    t_outside_raw = np.loadtxt("inputs/case05_t_amb.csv", delimiter=",")
+    this_path = os.path.dirname(os.path.abspath(__file__))
+    ref_file = 'case05_t_amb.csv'
+    ref_path = os.path.join(this_path, 'inputs', ref_file)
+
+    t_outside_raw = np.loadtxt(ref_path, delimiter=",")
     t_outside = ([t_outside_raw[2 * i, 1] for i in range(24)])
     t_outside_adj = np.repeat(t_outside, times_per_hour)
     weatherTemperature = np.tile(t_outside_adj, 60)
@@ -124,7 +132,6 @@ def run_case5(plot_res=False):
     T_air_10 = T_air_mean[216:240]
     T_air_60 = T_air_mean[1416:1440]
 
-    this_path = os.path.dirname(os.path.abspath(__file__))
     ref_file = 'case05_res.csv'
     ref_path = os.path.join(this_path, 'inputs', ref_file)
 
