@@ -94,12 +94,12 @@ class SimulationVDI6007(object):
         internal_gains_convective_radiative_split_factor : float
             split factor between convective and radiative internal gains
 
-        t_set_heating : list of floats [K]
+        t_set_heating : list of floats [K] (Move to Init?)
             Heating set temperatures. If the air temperature without heating
             drops below this temperature, a heating load that just
             fulfills this temperature is computed
 
-        t_set_cooling : list of floats [K]
+        t_set_cooling : list of floats [K] (Move to Init?)
             Cooling set temperatures. If the air temperature without heating
             rises above this temperature, a cooling load that just fulfills
             this temperature is computed
@@ -264,7 +264,7 @@ class SimulationVDI6007(object):
 
         return (np.array(t_air), np.array(q_air_hc))
 
-    def _calc_splitfactors(cols, a_array, a_ext, a_win):
+    def calc_splitfactors(cols, a_array, a_ext, a_win):
         """
         This function calculates the split factors
 
@@ -325,4 +325,565 @@ class SimulationVDI6007(object):
             i += 1
 
         return result
+
+    def calc_timestep(
+        A,
+        rhs,
+        t_set_heating=291.15,
+        t_set_cooling=300.15,
+        heater_order=np.array([1, 2, 3]),
+        cooler_order=np.array([1, 2, 3])):
+
+        """
+        Calculate the temperatures and heat flow rate for the current time step
+
+        Parameters
+        ----------
+        A : 2d array of floats
+            Coefficients describing the VDI model
+        rhs : Array of floats
+            Right hand side of these equations
+        t_set_heating : Float (Move to Init?)
+            Temperature below which heating demand is computed (in Kelvin)
+        t_set_cooling : Float (Move to Init?)
+            Temperature above which cooling demand is computed (in Kelvin)
+        """
+        # Calculate without further heat inputs to determine if heating 
+        # or cooling is needed
+        # x = [T_ow, T_owi, T_iw, T_iwi, T_air, Q_air, Q_HC]
+        x_noHeat = _calc_temperatue(
+            A, rhs, q_air_fix=0, q_iw_fix=0, q_ow_fix=0)
+
+        if x_noHeat[4] < t_set_heating:
+            # Indoor air temperature below heating set temperature
+
+            # Use primary heater
+            if np.argmax(heater_order == 1) == 0 and heater_limit[0] > 0:
+                x_heating_1 = _calc_heatflow(
+                    A,
+                    rhs,
+                    t_air_set=t_set_heating,
+                    q_air_fix=None,
+                    q_iw_fix=0,
+                    q_ow_fix=0)
+
+                if x_heating_1[6] > heater_limit[0]:
+                    x_maxheat_1 = _calc_temperatue(
+                        A,
+                        rhs,
+                        q_air_fix=heater_limit[0],
+                        q_iw_fix=0,
+                        q_ow_fix=0)
+
+                    if x_maxheat_1[4] < t_set_heating:
+                        if np.argmax(heater_order == 2) == 1 and\
+                           heater_limit[1] > 0:
+                            x_heating_2 = _calc_heatflow(
+                                A, rhs,
+                                t_air_set=t_set_heating,
+                                q_air_fix=heater_limit[0],
+                                q_iw_fix=None, q_ow_fix=0)
+
+                            if x_heating_2[7] > heater_limit[1]:
+                                x_maxheat_2 = _calc_temperatue(
+                                    A,
+                                    rhs,
+                                    q_air_fix=heater_limit[0],
+                                    q_iw_fix=heater_limit[1],
+                                    q_ow_fix=0)
+
+                                if x_maxheat_2[4] < t_set_heating and\
+                                   heater_limit[2] > 0:
+                                    x_heating_3 = _calc_heatflow(
+                                        A,
+                                        rhs,
+                                        t_air_set=t_set_heating,
+                                        q_air_fix=heater_limit[0],
+                                        q_iw_fix=heater_limit[1],
+                                        q_ow_fix=None)
+
+                                    if x_heating_3[8] > heater_limit[2]:
+                                        return _calc_temperatue(
+                                            A,
+                                            rhs,
+                                            q_air_fix=heater_limit[0],
+                                            q_iw_fix=heater_limit[1],
+                                            q_ow_fix=heater_limit[2])
+                                    else:
+                                        return x_heating_3
+                                else:
+                                    return x_maxheat_2
+                            else:
+                                return x_heating_2
+                        elif np.argmax(heater_order == 2) == 2 and\
+                             heater_limit[2] > 0:
+                            x_heating_2 = _calc_heatflow(
+                                A,
+                                rhs,
+                                 t_air_set=t_set_heating,
+                                 q_air_fix=heater_limit[0],
+                                 q_iw_fix=0, q_ow_fix=None)
+
+                            if x_heating_2[8] > heater_limit[2]:
+                                x_maxheat_2 = _calc_temperatue(
+                                    A,
+                                    rhs,
+                                    q_air_fix=heater_limit[0],
+                                    q_iw_fix=0,
+                                    q_ow_fix=heater_limit[2])
+
+                                if x_maxheat_2[4] < t_set_heating and\
+                                   heater_limit[1] > 0:
+                                    x_heating_3 = _calc_heatflow(
+                                        A,
+                                        rhs,
+                                        t_air_set=t_set_heating,
+                                        q_air_fix=heater_limit[0],
+                                        q_iw_fix=None,
+                                        q_ow_fix=heater_limit[2])
+
+                                    if x_heating_3[7] > heater_limit[1]:
+                                        return _calc_temperatue(
+                                            A,
+                                            rhs,
+                                            q_air_fix=heater_limit[0],
+                                            q_iw_fix=heater_limit[1],
+                                            q_ow_fix=heater_limit[2])
+                                    else:
+                                        return x_heating_3
+                                else:
+                                    return x_maxheat_2
+                            else:
+                                return x_heating_2
+                        else:
+                            return x_maxheat_1
+                else:
+                    return x_heating_1
+# work beginning here
+            elif np.argmax(heater_order == 1) == 1 and heater_limit[1] > 0:
+                x_heating_1 = _calc_heatflow(A, rhs, t_air_set=t_set_heating,
+                                             q_air_fix=0, q_iw_fix=None,
+                                             q_ow_fix=0)
+                if x_heating_1[7] > heater_limit[1]:
+                    x_maxheat_1 = _calc_temperatue(A, rhs, q_air_fix=0,
+                                                   q_iw_fix=heater_limit[1],
+                                                   q_ow_fix=0)
+
+                    if x_maxheat_1[4] < t_set_heating:
+                        if np.argmax(heater_order == 2) == 0 and heater_limit[
+                            0] > 0:
+                            x_heating_2 = _calc_heatflow(A, rhs,
+                                                         t_air_set=t_set_heating,
+                                                         q_air_fix=None,
+                                                         q_iw_fix=heater_limit[1],
+                                                         q_ow_fix=0)
+
+                            if x_heating_2[6] > heater_limit[0]:
+                                x_maxheat_2 = _calc_temperatue(A, rhs, q_air_fix=
+                                heater_limit[0], q_iw_fix=heater_limit[1],
+                                                               q_ow_fix=0)
+
+                                if x_maxheat_2[4] < t_set_heating and heater_limit[
+                                    2] > 0:
+                                    x_heating_3 = _calc_heatflow(A, rhs,
+                                                                 t_air_set=t_set_heating,
+                                                                 q_air_fix=
+                                                                 heater_limit[0],
+                                                                 q_iw_fix=
+                                                                 heater_limit[1],
+                                                                 q_ow_fix=None)
+
+                                    if x_heating_3[8] > heater_limit[2]:
+                                        return _calc_temperatue(A, rhs, q_air_fix=
+                                        heater_limit[0], q_iw_fix=heater_limit[1],
+                                                                q_ow_fix=
+                                                                heater_limit[2])
+                                    else:
+                                        return x_heating_3
+                                else:
+                                    return x_maxheat_2
+                            else:
+                                return x_heating_2
+                        elif np.argmax(heater_order == 2) == 2 and heater_limit[
+                            2] > 0:
+                            x_heating_2 = _calc_heatflow(A, rhs,
+                                                         t_air_set=t_set_heating,
+                                                         q_air_fix=0,
+                                                         q_iw_fix=heater_limit[1],
+                                                         q_ow_fix=None)
+
+                            if x_heating_2[8] > heater_limit[2]:
+                                x_maxheat_2 = _calc_temperatue(A, rhs, q_air_fix=0,
+                                                               q_iw_fix=
+                                                               heater_limit[1],
+                                                               q_ow_fix=
+                                                               heater_limit[2])
+
+                                if x_maxheat_2[4] < t_set_heating and heater_limit[
+                                    0] > 0:
+                                    x_heating_3 = _calc_heatflow(A, rhs,
+                                                                 t_air_set=t_set_heating,
+                                                                 q_air_fix=None,
+                                                                 q_iw_fix=
+                                                                 heater_limit[1],
+                                                                 q_ow_fix=
+                                                                 heater_limit[2])
+
+                                    if x_heating_3[6] > heater_limit[0]:
+                                        return _calc_temperatue(A, rhs, q_air_fix=
+                                        heater_limit[0], q_iw_fix=heater_limit[1],
+                                                                q_ow_fix=
+                                                                heater_limit[2])
+                                    else:
+                                        return x_heating_3
+                                else:
+                                    return x_maxheat_2
+                            else:
+                                return x_heating_2
+                        else:
+                            return x_maxheat_1
+                else:
+                    return x_heating_1
+            elif np.argmax(heater_order == 1) == 2 and heater_limit[
+                2] > 0:  # no else
+                x_heating_1 = _calc_heatflow(A, rhs, t_air_set=t_set_heating,
+                                             q_air_fix=0, q_iw_fix=0,
+                                             q_ow_fix=None)
+                if x_heating_1[8] > heater_limit[2]:
+                    x_maxheat_1 = _calc_temperatue(A, rhs, q_air_fix=0, q_iw_fix=0,
+                                                   q_ow_fix=heater_limit[2])
+
+                    if x_maxheat_1[4] < t_set_heating:
+                        if np.argmax(heater_order == 2) == 0 and heater_limit[
+                            0] > 0:
+                            x_heating_2 = _calc_heatflow(A, rhs,
+                                                         t_air_set=t_set_heating,
+                                                         q_air_fix=None,
+                                                         q_iw_fix=0,
+                                                         q_ow_fix=heater_limit[2])
+
+                            if x_heating_2[6] > heater_limit[0]:
+                                x_maxheat_2 = _calc_temperatue(A, rhs, q_air_fix=
+                                heater_limit[0], q_iw_fix=0, q_ow_fix=heater_limit[
+                                    1])
+
+                                if x_maxheat_2[4] < t_set_heating and heater_limit[
+                                    1] > 0:
+                                    x_heating_3 = _calc_heatflow(A, rhs,
+                                                                 t_air_set=t_set_heating,
+                                                                 q_air_fix=
+                                                                 heater_limit[0],
+                                                                 q_iw_fix=None,
+                                                                 q_ow_fix=
+                                                                 heater_limit[2])
+
+                                    if x_heating_3[7] > heater_limit[1]:
+                                        return _calc_temperatue(A, rhs, q_air_fix=
+                                        heater_limit[0], q_iw_fix=heater_limit[1],
+                                                                q_ow_fix=
+                                                                heater_limit[2])
+                                    else:
+                                        return x_heating_3
+                                else:
+                                    return x_maxheat_2
+                            else:
+                                return x_heating_2
+                        elif np.argmax(heater_order == 2) == 1 and heater_limit[
+                            1] > 0:
+                            x_heating_2 = _calc_heatflow(A, rhs,
+                                                         t_air_set=t_set_heating,
+                                                         q_air_fix=0,
+                                                         q_iw_fix=None,
+                                                         q_ow_fix=heater_limit[2])
+
+                            if x_heating_2[7] > heater_limit[1]:
+                                x_maxheat_2 = _calc_temperatue(A, rhs, q_air_fix=0,
+                                                               q_iw_fix=
+                                                               heater_limit[1],
+                                                               q_ow_fix=
+                                                               heater_limit[2])
+
+                                if x_maxheat_2[4] < t_set_heating and heater_limit[
+                                    0] > 0:
+                                    x_heating_3 = _calc_heatflow(A, rhs,
+                                                                 t_air_set=t_set_heating,
+                                                                 q_air_fix=None,
+                                                                 q_iw_fix=
+                                                                 heater_limit[1],
+                                                                 q_ow_fix=
+                                                                 heater_limit[2])
+
+                                    if x_heating_3[6] > heater_limit[0]:
+                                        return _calc_temperatue(A, rhs, q_air_fix=
+                                        heater_limit[0], q_iw_fix=heater_limit[1],
+                                                                q_ow_fix=
+                                                                heater_limit[2])
+                                    else:
+                                        return x_heating_3
+                                else:
+                                    return x_maxheat_2
+                            else:
+                                return x_heating_2
+                        else:
+                            return x_maxheat_1
+                else:
+                    return x_heating_1
+
+        elif x_noHeat[4] > t_set_cooling:
+            # Indoor air temperature above cooling set temperature
+
+            if np.argmax(cooler_order == 1) == 0 and cooler_limit[0] < 0:
+                x_cooling_1 = _calc_heatflow(A, rhs, t_air_set=t_set_cooling,
+                                             q_air_fix=None, q_iw_fix=0,
+                                             q_ow_fix=0)
+                if x_cooling_1[6] < cooler_limit[0]:
+                    x_maxcool_1 = _calc_temperatue(A, rhs,
+                                                   q_air_fix=cooler_limit[0],
+                                                   q_iw_fix=0, q_ow_fix=0)
+
+                    if x_maxcool_1[4] > t_set_cooling:
+                        if np.argmax(cooler_order == 2) == 1 and cooler_limit[
+                            1] < 0:
+                            x_cooling_2 = _calc_heatflow(A, rhs,
+                                                         t_air_set=t_set_cooling,
+                                                         q_air_fix=cooler_limit[0],
+                                                         q_iw_fix=None, q_ow_fix=0)
+
+                            if x_cooling_2[7] < cooler_limit[1]:
+                                x_maxcool_2 = _calc_temperatue(A, rhs, q_air_fix=
+                                cooler_limit[0], q_iw_fix=cooler_limit[1],
+                                                               q_ow_fix=0)
+
+                                if x_maxcool_2[4] > t_set_cooling and cooler_limit[
+                                    2] < 0:
+                                    x_cooling_3 = _calc_heatflow(A, rhs,
+                                                                 t_air_set=t_set_cooling,
+                                                                 q_air_fix=
+                                                                 cooler_limit[0],
+                                                                 q_iw_fix=
+                                                                 cooler_limit[1],
+                                                                 q_ow_fix=None)
+
+                                    if x_cooling_3[8] < cooler_limit[2]:
+                                        return _calc_temperatue(A, rhs, q_air_fix=
+                                        cooler_limit[0], q_iw_fix=cooler_limit[1],
+                                                                q_ow_fix=
+                                                                cooler_limit[2])
+                                    else:
+                                        return x_cooling_3
+                                else:
+                                    return x_maxcool_2
+                            else:
+                                return x_cooling_2
+                        elif np.argmax(cooler_order == 2) == 2 and cooler_limit[
+                            2] < 0:
+                            x_cooling_2 = _calc_heatflow(A, rhs,
+                                                         t_air_set=t_set_cooling,
+                                                         q_air_fix=cooler_limit[0],
+                                                         q_iw_fix=0, q_ow_fix=None)
+
+                            if x_cooling_2[8] < cooler_limit[2]:
+                                x_maxcool_2 = _calc_temperatue(A, rhs, q_air_fix=
+                                cooler_limit[0], q_iw_fix=0, q_ow_fix=cooler_limit[
+                                    2])
+
+                                if x_maxcool_2[4] > t_set_cooling and cooler_limit[
+                                    1] < 0:
+                                    x_cooling_3 = _calc_heatflow(A, rhs,
+                                                                 t_air_set=t_set_cooling,
+                                                                 q_air_fix=
+                                                                 cooler_limit[0],
+                                                                 q_iw_fix=None,
+                                                                 q_ow_fix=
+                                                                 cooler_limit[2])
+
+                                    if x_cooling_3[7] < cooler_limit[1]:
+                                        return _calc_temperatue(A, rhs, q_air_fix=
+                                        cooler_limit[0], q_iw_fix=cooler_limit[1],
+                                                                q_ow_fix=
+                                                                cooler_limit[2])
+                                    else:
+                                        return x_cooling_3
+                                else:
+                                    return x_maxcool_2
+                            else:
+                                return x_cooling_2
+                        else:
+                            return x_maxcool_1
+                else:
+                    return x_cooling_1
+            elif np.argmax(cooler_order == 1) == 1 and cooler_limit[1] < 0:
+                x_cooling_1 = _calc_heatflow(A, rhs, t_air_set=t_set_cooling,
+                                             q_air_fix=0, q_iw_fix=None,
+                                             q_ow_fix=0)
+                if x_cooling_1[7] < cooler_limit[1]:
+                    x_maxcool_1 = _calc_temperatue(A, rhs, q_air_fix=0,
+                                                   q_iw_fix=cooler_limit[1],
+                                                   q_ow_fix=0)
+
+                    if x_maxcool_1[4] > t_set_cooling:
+                        if np.argmax(cooler_order == 2) == 0 and cooler_limit[
+                            0] < 0:
+                            x_cooling_2 = _calc_heatflow(A, rhs,
+                                                         t_air_set=t_set_cooling,
+                                                         q_air_fix=None,
+                                                         q_iw_fix=cooler_limit[1],
+                                                         q_ow_fix=0)
+
+                            if x_cooling_2[6] < cooler_limit[0]:
+                                x_maxcool_2 = _calc_temperatue(A, rhs, q_air_fix=
+                                cooler_limit[0], q_iw_fix=cooler_limit[1],
+                                                               q_ow_fix=0)
+
+                                if x_maxcool_2[4] > t_set_cooling and cooler_limit[
+                                    2] < 0:
+                                    x_cooling_3 = _calc_heatflow(A, rhs,
+                                                                 t_air_set=t_set_cooling,
+                                                                 q_air_fix=
+                                                                 cooler_limit[0],
+                                                                 q_iw_fix=
+                                                                 cooler_limit[1],
+                                                                 q_ow_fix=None)
+
+                                    if x_cooling_3[8] < cooler_limit[2]:
+                                        return _calc_temperatue(A, rhs, q_air_fix=
+                                        cooler_limit[0], q_iw_fix=cooler_limit[1],
+                                                                q_ow_fix=
+                                                                cooler_limit[2])
+                                    else:
+                                        return x_cooling_3
+                                else:
+                                    return x_maxcool_2
+                            else:
+                                return x_cooling_2
+                        elif np.argmax(cooler_order == 2) == 2 and cooler_limit[
+                            2] < 0:
+                            x_cooling_2 = _calc_heatflow(A, rhs,
+                                                         t_air_set=t_set_cooling,
+                                                         q_air_fix=0,
+                                                         q_iw_fix=cooler_limit[1],
+                                                         q_ow_fix=None)
+
+                            if x_cooling_2[8] < cooler_limit[2]:
+                                x_maxcool_2 = _calc_temperatue(A, rhs, q_air_fix=0,
+                                                               q_iw_fix=
+                                                               cooler_limit[1],
+                                                               q_ow_fix=
+                                                               cooler_limit[2])
+
+                                if x_maxcool_2[4] > t_set_cooling and cooler_limit[
+                                    0] < 0:
+                                    x_cooling_3 = _calc_heatflow(A, rhs,
+                                                                 t_air_set=t_set_cooling,
+                                                                 q_air_fix=None,
+                                                                 q_iw_fix=
+                                                                 cooler_limit[1],
+                                                                 q_ow_fix=
+                                                                 cooler_limit[2])
+
+                                    if x_cooling_3[6] < cooler_limit[0]:
+                                        return _calc_temperatue(A, rhs, q_air_fix=
+                                        cooler_limit[0], q_iw_fix=cooler_limit[1],
+                                                                q_ow_fix=
+                                                                cooler_limit[2])
+                                    else:
+                                        return x_cooling_3
+                                else:
+                                    return x_maxcool_2
+                            else:
+                                return x_cooling_2
+                        else:
+                            return x_maxcool_1
+                else:
+                    return x_cooling_1
+
+            elif np.argmax(cooler_order == 1) == 2 and cooler_limit[2] < 0:
+                x_cooling_1 = _calc_heatflow(A, rhs, t_air_set=t_set_cooling,
+                                             q_air_fix=0, q_iw_fix=0,
+                                             q_ow_fix=None)
+                if x_cooling_1[8] < cooler_limit[2]:
+                    x_maxcool_1 = _calc_temperatue(A, rhs, q_air_fix=0, q_iw_fix=0,
+                                                   q_ow_fix=cooler_limit[2])
+
+                    if x_maxcool_1[4] > t_set_cooling:
+                        if np.argmax(cooler_order == 2) == 0 and cooler_limit[
+                            0] < 0:
+                            x_cooling_2 = _calc_heatflow(A, rhs,
+                                                         t_air_set=t_set_cooling,
+                                                         q_air_fix=None,
+                                                         q_iw_fix=0,
+                                                         q_ow_fix=cooler_limit[2])
+
+                            if x_cooling_2[6] < cooler_limit[0]:
+                                x_maxcool_2 = _calc_temperatue(A, rhs, q_air_fix=
+                                cooler_limit[0], q_iw_fix=0, q_ow_fix=cooler_limit[
+                                    2])
+
+                                if x_maxcool_2[4] > t_set_cooling and cooler_limit[
+                                    1] < 0:
+                                    x_cooling_3 = _calc_heatflow(A, rhs,
+                                                                 t_air_set=t_set_cooling,
+                                                                 q_air_fix=
+                                                                 cooler_limit[0],
+                                                                 q_iw_fix=None,
+                                                                 q_ow_fix=
+                                                                 cooler_limit[2])
+
+                                    if x_cooling_3[7] < cooler_limit[1]:
+                                        return _calc_temperatue(A, rhs, q_air_fix=
+                                        cooler_limit[0], q_iw_fix=cooler_limit[1],
+                                                                q_ow_fix=
+                                                                cooler_limit[2])
+                                    else:
+                                        return x_cooling_3
+                                else:
+                                    return x_maxcool_2
+                            else:
+                                return x_cooling_2
+                        elif np.argmax(cooler_order == 2) == 1 and cooler_limit[
+                            1] < 0:
+                            x_cooling_2 = _calc_heatflow(A, rhs,
+                                                         t_air_set=t_set_cooling,
+                                                         q_air_fix=0,
+                                                         q_iw_fix=None,
+                                                         q_ow_fix=cooler_limit[2])
+
+                            if x_cooling_2[7] < cooler_limit[1]:
+                                x_maxcool_2 = _calc_temperatue(A, rhs, q_air_fix=0,
+                                                               q_iw_fix=
+                                                               cooler_limit[1],
+                                                               q_ow_fix=
+                                                               cooler_limit[2])
+
+                                if x_maxcool_2[4] > t_set_cooling and cooler_limit[
+                                    0] < 0:
+                                    x_cooling_3 = _calc_heatflow(A, rhs,
+                                                                 t_air_set=t_set_cooling,
+                                                                 q_air_fix=None,
+                                                                 q_iw_fix=
+                                                                 cooler_limit[1],
+                                                                 q_ow_fix=
+                                                                 cooler_limit[2])
+
+                                    if x_cooling_3[6] < cooler_limit[0]:
+                                        return _calc_temperatue(A, rhs, q_air_fix=
+                                        cooler_limit[0], q_iw_fix=cooler_limit[1],
+                                                                q_ow_fix=
+                                                                cooler_limit[2])
+                                    else:
+                                        return x_cooling_3
+                                else:
+                                    return x_maxcool_2
+                            else:
+                                return x_cooling_2
+                        else:
+                            return x_maxcool_1
+                else:
+                    return x_cooling_1
+
+        else:
+            # Indoor air temperature between both set temperature -> no further 
+            # action required
+            return x_noHeat
+
 
