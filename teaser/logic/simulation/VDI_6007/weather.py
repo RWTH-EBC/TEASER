@@ -458,6 +458,8 @@ class Weather(object):
         self.rad_sky = weather_data[:, 3]
         self.rad_earth = weather_data[:, 4]
 
+        self.sun_rad = None
+
         if do_sun_rad:
             self.calc_sun_rad(timestep=timestep, nb_timesteps=nb_timesteps)
 
@@ -492,3 +494,4 @@ if __name__ == "__main__":
 
     print('Outdoor temperature in degree Celsius: ')
     print(weather_obj.temp)
+

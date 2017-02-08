@@ -1938,3 +1938,38 @@ class Test_teaser(object):
 
     #  ######################################################################
 
+    def test_weather_restructuring(self):
+        """
+        Compare old and new weather class after TEASER restructuring
+        #297
+        """
+
+        beta = [90.0, 0.0, 90.0, 0.0, 90.0, 90.0]
+        gamma = [0.0, 0.0, -180.0, 0.0, -90.0, 90.0]
+        weather_path = None
+        albedo = 0.2
+        time_zone = 1
+        altitude = 0
+        location = (49.5, 8.5)
+        timestep = 3600
+        do_sun_rad = True
+
+        weather = weat.Weather(beta=beta,
+                               gamma=gamma,
+                               weather_path=weather_path,
+                               albedo=albedo,
+                               timeZone=time_zone,
+                               altitude=altitude,
+                               location=location,
+                               timestep=timestep,
+                               do_sun_rad=do_sun_rad)
+
+        this_path = os.path.dirname(os.path.abspath(__file__))
+        filename = 'ref_radiation.txt'
+        load_path = os.path.join(this_path, 'inputs', filename)
+
+        rad_data = np.transpose(np.genfromtxt(fname=load_path, delimiter='\t',
+                                              skip_header=1))
+
+        np.testing.assert_array_almost_equal(weather.sun_rad, rad_data,
+                                             decimal=3)
