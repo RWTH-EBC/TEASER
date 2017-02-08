@@ -1915,7 +1915,7 @@ class Test_teaser(object):
         """
         Run VDI 6007 test case 11
 
-        Reference values are taken from VDI 2078 (not from VDI 6007)
+        Reference values are taken from VDI 6020 (not from VDI 6007)
         """
         tuple_res = vdi11.run_case11()
 
@@ -1923,10 +1923,10 @@ class Test_teaser(object):
         for i in range(len(tuple_res)):
             if i in [0, 1, 2]:
                 #  Temperature values
-                assert tuple_res[i] < 0.2
+                assert tuple_res[i] < 1
             elif i in [3, 4, 5]:
                 #  Power values
-                assert tuple_res[i] < 5
+                assert tuple_res[i] < 50
 
     def test_vdi_6007_validation_case12(self):
         """

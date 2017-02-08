@@ -30,7 +30,7 @@ def run_case11(plot_res=False):
     """
 
     # Definition of time horizon
-    times_per_hour = 3600
+    times_per_hour = 60
     timesteps = 24 * 60 * times_per_hour  # 60 days
     timesteps_day = int(24 * times_per_hour)
 
