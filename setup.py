@@ -92,4 +92,4 @@ setup(name='teaser',
           'Topic :: Software Development :: Code Generators',
           'Topic :: Scientific/Engineering',
           'Topic :: Utilities'],
-      install_requires=['mako', 'pyxb', 'pytest', 'scipy'])
+      install_requires=['mako', 'pyxb', 'pytest', 'scipy', 'matplotlib'])
