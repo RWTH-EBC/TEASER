@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 """
-Run VDI 6007 test case 3
+Run VDI 6007 test case 2
 """
 
 import os
@@ -9,17 +9,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import teaser.logic.simulation.VDI_6007.low_order_VDI as low_order_VDI
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case1 as vdic
+import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
 
-def run_case3(plot_res=False):
+def run_case2(plot_res=False):
     """
-    Run test case 3
+    Run test case 2
 
     Parameters
     ----------
     plot_res : bool, optional
         Defines, if results should be plotted (default: False)
+    Returns
+    -------
+    result_tuple : tuple (of floats)
+        Results tuple with maximal temperature deviations
+        (max_dev_1, max_dev_10, max_dev_60)
     """
+
     # Definition of time horizon
     times_per_hour = 60
     timesteps = 24 * 60 * times_per_hour  # 60 days
@@ -28,7 +34,7 @@ def run_case3(plot_res=False):
     # Zero inputs
     ventRate = np.zeros(timesteps)
     solarRad_in = np.zeros((timesteps, 1))
-    source_igRad = np.zeros(timesteps)
+    Q_ig = np.zeros(timesteps)
 
     # Constant inputs
     alphaRad = np.zeros(timesteps) + 5
@@ -36,18 +42,18 @@ def run_case3(plot_res=False):
     weatherTemperature = np.zeros(timesteps) + 295.15  # in K
 
     # Variable inputs
-    Q_ig = np.zeros(timesteps_day)
+    source_igRad = np.zeros(timesteps_day)
     for q in range(int(6 * timesteps_day / 24), int(18 * timesteps_day / 24)):
-        Q_ig[q] = 1000
-    Q_ig = np.tile(Q_ig, 60)
+        source_igRad[q] = 1000
+    source_igRad = np.tile(source_igRad, 60)
 
     # Load constant house parameters
-    houseData = {"R1i": 0.003237138,
-                "C1i": 7297100,
+    houseData = {"R1i": 0.000595693407511,
+                "C1i": 14836354.6282,
                 "Ai": 75.5,
-                "RRest": 0.039330865,
-                "R1o": 0.00404935160802,
-                "C1o": 47900,
+                "RRest": 0.03895919557,
+                "R1o": 0.00436791293674,
+                "C1o": 1600848.94,
                 "Ao": [10.5],
                 "Aw": np.zeros(1),
                 "At": np.zeros(1),
@@ -104,7 +110,7 @@ def run_case3(plot_res=False):
     T_air_60 = T_air_mean[1416:1440]
 
     this_path = os.path.dirname(os.path.abspath(__file__))
-    ref_file = 'case03_res.csv'
+    ref_file = 'case02_res.csv'
     ref_path = os.path.join(this_path, 'inputs', ref_file)
 
     # Load reference results
@@ -131,19 +137,23 @@ def run_case3(plot_res=False):
         plt.xticks([4 * i for i in range(7)])
         plt.xlim([1, 24])
         plt.xlabel("Time in h")
+        plt.show()
 
     if plot_res:
         plot_result(T_air_1, T_air_ref_1, "Results day 1")
         plot_result(T_air_10, T_air_ref_10, "Results day 10")
         plot_result(T_air_60, T_air_ref_60, "Results day 60")
 
-    print(
-        "Max. deviation day 1: " + str(np.max(np.abs(T_air_1 - T_air_ref_1))))
-    print("Max. deviation day 10: " + str(
-        np.max(np.abs(T_air_10 - T_air_ref_10))))
-    print("Max. deviation day 60: " + str(
-        np.max(np.abs(T_air_60 - T_air_ref_60))))
+    max_dev_1 = np.max(np.abs(T_air_1 - T_air_ref_1))
+    max_dev_10 = np.max(np.abs(T_air_10 - T_air_ref_10))
+    max_dev_60 = np.max(np.abs(T_air_60 - T_air_ref_60))
+
+    print("Max. deviation day 1: " + str(max_dev_1))
+    print("Max. deviation day 10: " + str(max_dev_10))
+    print("Max. deviation day 60: " + str(max_dev_60))
+
+    return (max_dev_1, max_dev_10, max_dev_60)
 
 if __name__ == '__main__':
 
-    run_case3(plot_res=True)
+    run_case2(plot_res=True)
