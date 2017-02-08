@@ -1,0 +1,7 @@
+#  Ignore everything 
+*
+
+#  Except
+!.gitignore
+!res_retrofited.txt
+!res_unretrofited.txt
