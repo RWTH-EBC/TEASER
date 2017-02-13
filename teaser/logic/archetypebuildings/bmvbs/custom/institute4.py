@@ -145,12 +145,17 @@ class Institute4(Office):
                                          office_layout,
                                          window_layout,
                                          construction_type)
-        self.zone_area_factors =\
-            {"Meeting": [0.04, "Meeting, Conference, seminar"],
-             "Storage": [0.1, "Stock, technical equipment, archives"],
-             "Office": [0.375, "Group Office (between 2 and 6 employees)"],
-             "Sanitary": [0.04, "WC and sanitary rooms in non-residential "
-                                "buildings"],
-             "ICT": [0.02, "Data center"],
-             "Floor": [0.225, "Traffic area"],
-             "Laboratory": [0.2, "Laboratory"]}
+        self.zone_area_factors["Office"] = \
+            [0.375, "Group Office (between 2 and 6 employees)"]
+        self.zone_area_factors["Floor"] = \
+            [0.225, "Traffic area"]
+        self.zone_area_factors["Laboratory"] = \
+            [0.2, "Laboratory"]
+        self.zone_area_factors["Storage"] = \
+            [0.1, "Stock, technical equipment, archives"]
+        self.zone_area_factors["Meeting"] = \
+            [0.04, "Meeting, Conference, seminar"]
+        self.zone_area_factors["Restroom"] = \
+            [0.04, "WC and sanitary rooms in non-residential buildings"]
+        self.zone_area_factors["ICT"] = \
+            [0.02, "Data center"]
