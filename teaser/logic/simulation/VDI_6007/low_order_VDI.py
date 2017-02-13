@@ -3,7 +3,7 @@
 """
 VDI 6007 low order model TEASER implementation
 """
-
+from __future__ import division
 import numpy as np
 
 
