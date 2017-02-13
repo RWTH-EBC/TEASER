@@ -3,7 +3,7 @@
 """
 TEASER weather class for VDI 6007 calculation
 """
-
+from __future__ import division
 import os
 import numpy as np
 import math
