@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Calculation &#8212; TEASER 0.5.0 documentation</title>
+    <title>Calculation &mdash; TEASER 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,15 +17,14 @@
         VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="TEASER 0.5.0 documentation" href="index.html" />
+    <link rel="up" title="buildingobjects" href="teaser.Logic.BuildingObjects.html" />
     <link rel="next" title="archetypebuildings" href="teaser.Logic.ArchetypeBuildings.html" />
     <link rel="prev" title="buildingsystems" href="teaser.Logic.BuildingObjects.BuildingSystems.html" /> 
   </head>
@@ -49,10 +48,10 @@
         <li class="right" >
           <a href="teaser.Logic.BuildingObjects.BuildingSystems.html" title="buildingsystems"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" accesskey="U">buildingobjects</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" accesskey="U">buildingobjects</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -79,18 +78,21 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/teaser.Logic.BuildingObjects.Calculation.rst.txt"
+      <li><a href="_sources/teaser.Logic.BuildingObjects.Calculation.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -372,27 +374,36 @@ conditions</p>
 
 <dl class="method">
 <dt id="teaser.logic.buildingobjects.calculation.annex60.Annex60.modelica_gains_boundary">
-<code class="descname">modelica_gains_boundary</code><span class="sig-paren">(</span><em>time_line=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.annex60.Annex60.modelica_gains_boundary" title="Permalink to this definition">¶</a></dt>
+<code class="descname">modelica_gains_boundary</code><span class="sig-paren">(</span><em>zone</em>, <em>time_line=None</em>, <em>path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#teaser.logic.buildingobjects.calculation.annex60.Annex60.modelica_gains_boundary" title="Permalink to this definition">¶</a></dt>
 <dd><p>creates .mat file for internal gains boundary conditions</p>
 <p>This function creates a matfile (-v4) for building internal gains
-boundary conditions. It collects all internal gain profiles of the
-zones and stores them into one file. The file is extended for each
-zone. Only applicable if zones are defined</p>
+boundary conditions. It collects internal gain profiles of a specific
+zones and stores them into one file. It also calculates the internal
+gains from relative presence and values for heat output into W for
+direct usage in Annex models.</p>
+<p>Only person (convective and radiative) and machines (convective) are
+used in the simple Annex 60 exmaples.</p>
 <p>1. Column : time step
-2,5,8,...  Column : profile_persons
-3,6,9,...  Column : profile_machines
-4,7,10,... Column : profile_lighting</p>
+2 Column : profile_persons, radiative
+3 Column : profile_persons, convective
+4 Column : profile_machines, convective</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>time_line :[[int]]</strong></p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>zone</strong> : ThermalZone()</p>
+<blockquote>
+<div><p>TEASER instance of ThermalZone. As Annex60 computes single models
+for single zones, we need to generate individual files for zones
+and internal gains</p>
+</div></blockquote>
+<p><strong>time_line :[[int]]</strong></p>
 <blockquote>
 <div><p>list of time steps</p>
 </div></blockquote>
 <p><strong>path</strong> : str</p>
 <blockquote class="last">
-<div><p>optional path, when matfile is exported seperately</p>
+<div><p>optional path, when matfile is exported separately</p>
 </div></blockquote>
 </td>
 </tr>
@@ -1680,15 +1691,15 @@ supported for Annex60)</p>
         <li class="right" >
           <a href="teaser.Logic.BuildingObjects.BuildingSystems.html" title="buildingsystems"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" >buildingobjects</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" >buildingobjects</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &copy; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>

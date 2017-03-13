@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>boundaryconditions &#8212; TEASER 0.5.0 documentation</title>
+    <title>boundaryconditions &mdash; TEASER 0.5.0 documentation</title>
     
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -17,15 +17,14 @@
         VERSION:     '0.5.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
-        HAS_SOURCE:  true,
-        SOURCELINK_SUFFIX: '.txt'
+        HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+    <link rel="top" title="TEASER 0.5.0 documentation" href="index.html" />
+    <link rel="up" title="buildingobjects" href="teaser.Logic.BuildingObjects.html" />
     <link rel="next" title="buildingphysics" href="teaser.Logic.BuildingObjects.BuildingPhysics.html" />
     <link rel="prev" title="ThermalZone" href="teaser.Logic.BuildingObjects.ThermalZone.html" /> 
   </head>
@@ -49,10 +48,10 @@
         <li class="right" >
           <a href="teaser.Logic.BuildingObjects.ThermalZone.html" title="ThermalZone"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" accesskey="U">buildingobjects</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" accesskey="U">buildingobjects</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -66,18 +65,21 @@
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/teaser.Logic.BuildingObjects.BoundaryConditions.rst.txt"
+      <li><a href="_sources/teaser.Logic.BuildingObjects.BoundaryConditions.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
@@ -235,16 +237,16 @@ standard</p>
 <td>(int) machines activity (1: light, 50W/machine, 2: moderate 100W/machine, 3: high 150W/machine) AixLib: Used in Zone record for internal gains Annex: Used for internal gains</td>
 </tr>
 <tr class="row-even"><td>ratio_conv_rad_machines</td>
-<td>(float) describes the ratio between convective and radiative heat transfer of the machines AixLib: Used in Zone record for internal gains</td>
+<td>(float) describes the ratio between convective and radiative heat transfer of the machines AixLib: Used in Zone record for internal gains Annex: Not used, all machines are convective (see Annex examples)</td>
 </tr>
 <tr class="row-odd"><td>profile_machines</td>
-<td>(list) Relative presence of machines 0-1 (e.g. 0.5 means that 50% of the total number of machines are currently used in the room). Typically given for 24h. AixLib: Used for internal gains profile on top-level Annex: Used for internal gains</td>
+<td>(list) Relative presence of machines 0-1 (e.g. 0.5 means that 50% of the total number of machines are currently used in the room). Typically given for 24h. AixLib: Used for internal gains profile on top-level Annex: Not used (see Annex examples)</td>
 </tr>
 <tr class="row-even"><td>lighting_power</td>
-<td>(float [W/m2]) spec. electr. Power for lighting AixLib: Used in Zone record for internal gains Annex: Used for internal gains</td>
+<td>(float [W/m2]) spec. electr. Power for lighting AixLib: Used in Zone record for internal gains Annex: Not used (see Annex examples)</td>
 </tr>
 <tr class="row-odd"><td>profile_lighting</td>
-<td>([float]) Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total lighting power are currently used). Typically given for 24h. AixLib: Used for internal gains profile on top-level Annex: Used for internal gains</td>
+<td>([float]) Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total lighting power are currently used). Typically given for 24h. AixLib: Used for internal gains profile on top-level Annex: Not used (see Annex examples)</td>
 </tr>
 <tr class="row-even"><td>MISC/AHU</td>
 <td>&nbsp;</td>
@@ -359,15 +361,15 @@ project)</p>
         <li class="right" >
           <a href="teaser.Logic.BuildingObjects.ThermalZone.html" title="ThermalZone"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" >buildingobjects</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">TEASER 0.5.0 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="teaser.html" >TEASER modules</a> &raquo;</li>
+          <li class="nav-item nav-item-2"><a href="teaser.Logic.html" >logic</a> &raquo;</li>
+          <li class="nav-item nav-item-3"><a href="teaser.Logic.BuildingObjects.html" >buildingobjects</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.1.
+        &copy; Copyright 2016-2017, RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficienct Buildings and Indoor Climate.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>
