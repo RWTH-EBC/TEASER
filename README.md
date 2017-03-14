@@ -94,7 +94,9 @@ The workflow for changes is described in our [Wiki](https://github.com/RWTH-EBC/
 
 ## How to cite TEASER
 
-A Journal Paper presenting TEASER is already submitted and is in review.
++ TEASER: an open tool for urban energy modelling of building stocks. Remmen P., Lauster M., Mans M., Fuchs M., Osterhage T., Müller D.. Journal of Building Performance Simulation, February 2017, 
+[pdf](http://dx.doi.org/10.1080/19401493.2017.1283539),
+[bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite_jbps.bib)
 
 ### TEASER related publications
 
