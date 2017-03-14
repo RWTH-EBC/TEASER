@@ -456,10 +456,11 @@ class Building(object):
         else:
             warnings.warn("You set conflicting options for the used library "
                           "in Building or Project class and "
-                          "calculation function. Your library attributes are "
-                          "set to default using the library you indicated "
-                          "in the function call, which is",
-                          self._used_library_calc)
+                          "calculation function of building. Your library "
+                          "attributes are set to default using the library "
+                          "you indicated in the function call, which is: " +
+                          self.used_library_calc)
+
             if self.used_library_calc == 'AixLib':
                 self.library_attr = AixLib(parent=self)
                 self.library_attr.calc_auxiliary_attr()
