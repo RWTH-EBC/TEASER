@@ -140,15 +140,15 @@ class BoundaryConditions(UseConditions):
         AixLib: Used in Zone record for internal gains, NrPeople
         Annex: Used for internal gains
     activity_type_persons : float [W/person]
-        persons activity (1: light, 2: moderate, 3: high). It is not obvious
-        where this value origins from.
+        persons activity (1: light, 2: moderate, 3: high). This value is
+        probably from VDI 2078.
         AixLib: currently not used, it is always set to 100 W/person
         Annex: (1: light, 50W/person, 2: moderate 100W/person,
         3: high 150W/person) For Annex models, the heat produced is not
         dependent on zone temperature
     ratio_conv_rad_persons : float
         describes the ratio between convective and radiative heat transfer
-        of the persons. It is not obvious where this value origins from.
+        of the persons. This value is probably from VDI 2078.
         AixLib: Used in Zone record for internal gains
         Annex: Used for internal gains
     profile_persons : list
@@ -164,13 +164,12 @@ class BoundaryConditions(UseConditions):
         Annex: Used for internal gains
     activity_type_machines : float [W/machine]
         machines activity (1: light, 50W/machine, 2: moderate 100W/machine,
-        3: high 150W/machine). It is not obvious where this value origins from.
+        3: high 150W/machine). This value is probably from VDI 2078.
         AixLib: currently not used, it is always set to 100 W/machine
         Annex: Used for internal gains
     ratio_conv_rad_machines : float
         describes the ratio between convective and radiative heat transfer
-        of the machines. It is not obvious
-        where this value origins from.
+        of the machines. This value is probably from VDI 2078.
         AixLib: Used in Zone record for internal gains
         Annex: Not used, all machines are convective (see Annex examples)
     profile_machines : list
