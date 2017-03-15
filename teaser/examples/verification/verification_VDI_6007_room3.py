@@ -2,7 +2,7 @@
 # TEASER Development Team
 
 """
-This Scripts loads the VDI 6007 Room 3 as *.teaserXML and computes
+This script loads the VDI 6007 Room 3 as *.teaserXML and computes
 parameters. The parameters are then compared with the ones from Rouvel
 """
 
