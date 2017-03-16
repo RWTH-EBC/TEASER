@@ -33,7 +33,7 @@ class Annex60(object):
 
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
-        self.version = "0.1"
+        self.version = "1.0.0"
         self.consider_heat_capacity = True
 
     @staticmethod
