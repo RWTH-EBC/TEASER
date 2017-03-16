@@ -370,7 +370,7 @@ def load_file():
     prj = Project(load_data=True)
 
     prj.load_project(utilities.get_full_path(
-        "examples/examplefiles/VDI6007_Room10.teaserXML"))
+        "examples/examplefiles/ASHRAE140_600.teaserXML"))
 
     return prj
 
