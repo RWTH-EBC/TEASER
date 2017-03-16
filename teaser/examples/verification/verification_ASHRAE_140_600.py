@@ -16,11 +16,36 @@ from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
+from teaser.logic.buildingobjects.buildingphysics.window import Window
 import teaser.logic.utilities as utilities
 
 
-def from_scratch():
+def main():
+    from_scratch(save=True)
 
+
+def from_scratch(save=False, path=utilities.get_default_path()):
+    """
+    This function creates the test room from scratch.
+
+    Notes: The standard defines an solar absorption coefficient for interior
+    surfaces of 0.6. We do not consider this, but we could by multiplying
+    the solar radiation after the window by 0.6.
+
+    Parameters
+    ----------
+    path: str (optional)
+        Path where Project should be stored as .teaserXML
+    save: bool (optional)
+        True if Project should be stored as .teaserXML at path
+
+    Returns
+    -------
+
+    prj: Project
+        Project that contains the building with the test room
+
+    """
     prj = Project(load_data=True)
     prj.name = "ASHRAE140Verification"
 
@@ -31,7 +56,7 @@ def from_scratch():
     tz.name = "TestRoom600"
     tz.area = 8.0 * 6.0
     tz.volume = tz.area * 2.7
-    tz.infiltration_rate = 0.41  # Check again with Peter
+    tz.infiltration_rate = 0.41
 
     # Let's see if it makes sense for completeness to define boundary
     # conditions here. They won't be exported when using only the Annex60
@@ -58,12 +83,13 @@ def from_scratch():
 
     material_r1 = Material(layer_r1)
     material_r1.name = "Plasterboard"
-    material_r1.density = 950.0  # Check with Peter if correct unit
-    material_r1.heat_capac = 840.0  # Check with Peter if correct unit
+    material_r1.density = 950.0
+    material_r1.heat_capac = 840.0
     material_r1.thermal_conduc = 0.16
+    material_r1.ir_emissivity = 0.9
 
     layer_r2 = Layer(parent=roof, id=1)
-    layer_r2.thickness = 0.112
+    layer_r2.thickness = 0.1118
 
     material_r2 = Material(layer_r2)
     material_r2.name = "Fiberglass"
@@ -79,11 +105,8 @@ def from_scratch():
     material_r3.density = 530
     material_r3.heat_capac = 900
     material_r3.thermal_conduc = 0.14
-    material_r3.solar_absorp = 0.6  # Check with Peter if this is
-    # absorption doefficient
-
-
-    # Peter: Is it possible to reuse material definition? If so, how?
+    material_r3.solar_absorp = 0.6
+    material_r3.ir_emissivity = 0.9
 
     out_wall_north = OuterWall(parent=tz)
     out_wall_north.name = "OuterWallNorth"
@@ -100,9 +123,10 @@ def from_scratch():
 
     material_own1 = Material(layer_own1)
     material_own1.name = "Plasterboard"
-    material_own1.density = 950.0  # Check with Peter if correct unit
-    material_own1.heat_capac = 840.0  # Check with Peter if correct unit
+    material_own1.density = 950.0
+    material_own1.heat_capac = 840.0
     material_own1.thermal_conduc = 0.16
+    material_own1.ir_emissivity = 0.9
 
     layer_own2 = Layer(parent=out_wall_north, id=1)
     layer_own2.thickness = 0.066
@@ -121,8 +145,8 @@ def from_scratch():
     material_own3.density = 530
     material_own3.heat_capac = 900
     material_own3.thermal_conduc = 0.14
-    material_own3.solar_absorp = 0.6  # Check with Peter if this is
-    # absorption doefficient
+    material_own3.solar_absorp = 0.6
+    material_own3.ir_emissivity = 0.9
 
     out_wall_east = OuterWall(parent=tz)
     out_wall_east.name = "OuterWallEast"
@@ -139,9 +163,10 @@ def from_scratch():
 
     material_owe1 = Material(layer_owe1)
     material_owe1.name = "Plasterboard"
-    material_owe1.density = 950.0  # Check with Peter if correct unit
-    material_owe1.heat_capac = 840.0  # Check with Peter if correct unit
+    material_owe1.density = 950.0
+    material_owe1.heat_capac = 840.0
     material_owe1.thermal_conduc = 0.16
+    material_owe1.ir_emissivity = 0.9
 
     layer_owe2 = Layer(parent=out_wall_east, id=1)
     layer_owe2.thickness = 0.066
@@ -160,8 +185,8 @@ def from_scratch():
     material_owe3.density = 530
     material_owe3.heat_capac = 900
     material_owe3.thermal_conduc = 0.14
-    material_owe3.solar_absorp = 0.6  # Check with Peter if this is
-    # absorption doefficient
+    material_owe3.solar_absorp = 0.6
+    material_owe3.ir_emissivity = 0.9
 
     out_wall_south = OuterWall(parent=tz)
     out_wall_south.name = "OuterWallSouth"
@@ -178,9 +203,10 @@ def from_scratch():
 
     material_ows1 = Material(layer_ows1)
     material_ows1.name = "Plasterboard"
-    material_ows1.density = 950.0  # Check with Peter if correct unit
-    material_ows1.heat_capac = 840.0  # Check with Peter if correct unit
+    material_ows1.density = 950.0
+    material_ows1.heat_capac = 840.0
     material_ows1.thermal_conduc = 0.16
+    material_ows1.ir_emissivity = 0.9
 
     layer_ows2 = Layer(parent=out_wall_south, id=1)
     layer_ows2.thickness = 0.066
@@ -199,8 +225,8 @@ def from_scratch():
     material_ows3.density = 530
     material_ows3.heat_capac = 900
     material_ows3.thermal_conduc = 0.14
-    material_ows3.solar_absorp = 0.6  # Check with Peter if this is
-    # absorption doefficient
+    material_ows3.solar_absorp = 0.6
+    material_ows3.ir_emissivity = 0.9
 
     out_wall_west = OuterWall(parent=tz)
     out_wall_west.name = "OuterWallWest"
@@ -217,9 +243,10 @@ def from_scratch():
 
     material_oww1 = Material(layer_oww1)
     material_oww1.name = "Plasterboard"
-    material_oww1.density = 950.0  # Check with Peter if correct unit
-    material_oww1.heat_capac = 840.0  # Check with Peter if correct unit
+    material_oww1.density = 950.0
+    material_oww1.heat_capac = 840.0
     material_oww1.thermal_conduc = 0.16
+    material_oww1.ir_emissivity = 0.9
 
     layer_oww2 = Layer(parent=out_wall_west, id=1)
     layer_oww2.thickness = 0.066
@@ -238,8 +265,8 @@ def from_scratch():
     material_oww3.density = 530
     material_oww3.heat_capac = 900
     material_oww3.thermal_conduc = 0.14
-    material_oww3.solar_absorp = 0.6  # Check with Peter if this is
-    # absorption doefficient
+    material_oww3.solar_absorp = 0.6
+    material_oww3.ir_emissivity = 0.9
 
     in_wall_floor = Floor(parent=tz)
     in_wall_floor.name = "InnerWallFloor"
@@ -248,3 +275,77 @@ def from_scratch():
     in_wall_floor.tilt = 0.0
     in_wall_floor.inner_convection = 3.16
     in_wall_floor.inner_radiation = 5.13
+
+    layer_iwf1 = Layer(parent=in_wall_floor, id=0)
+    layer_iwf1.thickness = 0.025
+
+    material_iwf1 = Material(layer_iwf1)
+    material_iwf1.name = "TimberFlooring"
+    material_iwf1.density = 650
+    material_iwf1.heat_capac = 1200
+    material_iwf1.thermal_conduc = 0.14
+    material_iwf1.ir_emissivity = 0.9
+
+    layer_iwf2 = Layer(parent=in_wall_floor, id=1)
+    layer_iwf2.thickness = 1.003
+
+    material_iwf2 = Material(layer_iwf2)
+    material_iwf2.name = "Insulation"
+    material_iwf2.density = 0  # 0.0001, as small as possible
+    material_iwf2.heat_capac = 0  # 0.0001, as small as possible
+    material_iwf2.thermal_conduc = 0.04
+
+    win_1 = Window(parent=tz)
+    win_1.name = "WindowSouthLeft"
+    win_1.area = 3 * 2
+    win_1.tilt = 90.0
+    win_1.orientation = 180.0
+    win_1.inner_convection = 3.16
+    win_1.inner_radiation = 5.13
+    win_1.outer_convection = 16.37
+    win_1.outer_radiation = 4.63
+    win_1.g_value = 0.789
+    win_1.a_conv = 0.03  # for the given U-value extracted from VDI 6007-2/-3
+
+    win_1_layer = Layer(parent=win_1)
+    win_1_layer.id = 1
+    win_1_layer.thickness = 0.024
+
+    win_1_material = Material(win_1_layer)
+    win_1_material.name = "GlasWindow"
+    win_1_material.thermal_conduc = 0.15
+    win_1_material.transmittance = 0.907
+    win_1_material.ir_emissivity = 0.9
+
+    win_2 = Window(parent=tz)
+    win_2.name = "WindowSouthRight"
+    win_2.area = 3 * 2
+    win_2.tilt = 90.0
+    win_2.orientation = 180.0
+    win_2.inner_convection = 3.16
+    win_2.inner_radiation = 5.13
+    win_2.outer_convection = 16.37
+    win_2.outer_radiation = 4.63
+    win_2.g_value = 0.789
+    win_2.a_conv = 0.03  # for the given U-value extracted from VDI 6007-2/-3
+
+    win_2_layer = Layer(parent=win_2)
+    win_2_layer.id = 1
+    win_2_layer.thickness = 0.024
+
+    win_2_material = Material(win_2_layer)
+    win_2_material.name = "GlasWindow"
+    win_2_material.thermal_conduc = 0.15
+    win_2_material.transmittance = 0.907
+    win_2_material.ir_emissivity = 0.9
+
+    if save:
+        prj.save_project(file_name='ASHRAE140_600', path=path)
+
+    return prj
+
+if __name__ == '__main__':
+    main()
+    print("ASHRAE 600: That's it!")
+
+
