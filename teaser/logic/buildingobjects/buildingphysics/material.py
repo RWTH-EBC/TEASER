@@ -59,6 +59,8 @@ class Material(object):
                 self._solar_absorp = 0.7
         self._ir_emissivity = 0.9
         self._transmittance = 0.0
+        self._thickness_default = 0.0
+        self._thickness_list = []
 
         self.material_id = str(uuid.uuid1())
 
@@ -275,3 +277,44 @@ class Material(object):
                 self._transmittance = value
             except:
                 raise ValueError("Can't convert transmittance to float")
+
+    @property
+    def thickness_default(self):
+        return self._thickness_default
+
+    @thickness_default.setter
+    def thickness_default(self, value):
+
+        if isinstance(value, float):
+            self._thickness_default = value
+        elif value is None:
+            pass
+        else:
+            try:
+                value = float(value)
+            except:
+                raise ValueError("Can't convert thickness to float")
+
+    @property
+    def thickness_list(self):
+        return self._thickness_list
+
+    @thickness_list.setter
+    def thickness_list(self, value):
+
+        if value is None:
+            self._thickness_list = []
+
+        elif type(value) != list:
+            raise TypeError("must be list, not ", type(value))
+
+        else:
+            for i in value:
+                if isinstance(value[i], float):
+                    pass
+                else:
+                    try:
+                        value = float(value)
+                    except:
+                        raise ValueError("Can't convert entry of thickness_list to float")
+

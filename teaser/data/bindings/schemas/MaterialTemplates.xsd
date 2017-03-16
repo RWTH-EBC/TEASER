@@ -11,6 +11,8 @@
       <xs:element type="xs:float" name="heat_capac"/>
       <xs:element minOccurs="0" type="xs:float" name="solar_absorp"/>
       <xs:element minOccurs="0" type="xs:float" name="ir_emissivity"/>
+      <xs:element type="xs:float" name="thickness_default"/>
+      <xs:element type="floatList" name="thickness_list"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="MaterialTemplatesType">
@@ -19,4 +21,7 @@
       <xs:element type="MaterialType" name="Material" />
     </xs:choice>
   </xs:complexType>
+    <xs:simpleType name="floatList">
+	<xs:list itemType="xs:float"/>
+  </xs:simpleType>
 </xs:schema>
