@@ -87,12 +87,13 @@ def modify_material(material, data_class):
 
     for mat in mat_binding.Material:
         if mat.material_id == material.material_id:
-            mat_binding.Material.remove(mat)
+            # mat_binding.Material.remove(mat)
+            mat.material_id = material.material_id
             mat.name = material.name
             mat.density = material.density
             mat.thermal_conduc = material.thermal_conduc
             mat.heat_capac = material.heat_capac
-            mat_binding.Material.append(mat)
+            # mat_binding.Material.append(mat)"""
             break
 
     out_file = open(utilities.get_full_path(data_class.path_mat), "w")
