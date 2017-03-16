@@ -8,6 +8,7 @@ that room within the code. The third one computes parameter with the help of
 one of the aforementioned functions.
 """
 
+import os
 from teaser.project import Project
 from teaser.logic.buildingobjects.building import Building
 from teaser.logic.buildingobjects.thermalzone import ThermalZone
@@ -17,11 +18,33 @@ from teaser.logic.buildingobjects.buildingphysics.material import Material
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.window import Window
+from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+    import BoundaryConditions
 import teaser.logic.utilities as utilities
 
 
 def main():
-    from_scratch(save=True)
+    # prj = from_scratch(save=False)
+    prj = load_file()
+
+    prj.buildings[0].calc_building_parameter(
+        number_of_elements=2,
+        merge_windows=False,
+        used_library='Annex60')
+
+    prj.used_library_calc = 'Annex60'
+    prj.number_of_elements_calc = 2
+    prj.merge_windows_calc = False
+    prj.weather_file_path = utilities.get_full_path(
+        os.path.join(
+            "data",
+            "input",
+            "inputdata",
+            "weatherdata",
+            "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
+
+    prj.export_parameters_txt()
+    prj.export_annex()
 
 
 def from_scratch(save=False, path=utilities.get_default_path()):
@@ -62,10 +85,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     # conditions here. They won't be exported when using only the Annex60
     # thermal zone model.
 
-    # from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-    #     import BoundaryConditions
-    #
-    # tz.use_conditions = BoundaryConditions(parent=tz)
+    tz.use_conditions = BoundaryConditions(parent=tz)
     # tz.use_conditions.load_use_conditions("Living", prj.data)
 
     roof = Rooftop(parent=tz)
@@ -73,7 +93,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     roof.area = 8.0 * 6.0
     roof.orientation = -1.0
     roof.tilt = 0.0
-    roof.inner_convection = 3.16
+    roof.inner_convection = 1
     roof.outer_convection = 24.67
     roof.inner_radiation = 5.13
     roof.outer_radiation = 4.63
@@ -84,7 +104,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_r1 = Material(layer_r1)
     material_r1.name = "Plasterboard"
     material_r1.density = 950.0
-    material_r1.heat_capac = 840.0
+    material_r1.heat_capac = 840.0/1000
     material_r1.thermal_conduc = 0.16
     material_r1.ir_emissivity = 0.9
 
@@ -94,7 +114,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_r2 = Material(layer_r2)
     material_r2.name = "Fiberglass"
     material_r2.density = 12
-    material_r2.heat_capac = 840
+    material_r2.heat_capac = 840/1000
     material_r2.thermal_conduc = 0.04
 
     layer_r3 = Layer(parent=roof, id=2)
@@ -103,7 +123,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_r3 = Material(layer_r3)
     material_r3.name = "Roofdeck"
     material_r3.density = 530
-    material_r3.heat_capac = 900
+    material_r3.heat_capac = 900/1000
     material_r3.thermal_conduc = 0.14
     material_r3.solar_absorp = 0.6
     material_r3.ir_emissivity = 0.9
@@ -124,7 +144,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_own1 = Material(layer_own1)
     material_own1.name = "Plasterboard"
     material_own1.density = 950.0
-    material_own1.heat_capac = 840.0
+    material_own1.heat_capac = 840.0/1000
     material_own1.thermal_conduc = 0.16
     material_own1.ir_emissivity = 0.9
 
@@ -134,7 +154,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_own2 = Material(layer_own2)
     material_own2.name = "Fiberglass"
     material_own2.density = 12
-    material_own2.heat_capac = 840
+    material_own2.heat_capac = 840/1000
     material_own2.thermal_conduc = 0.04
 
     layer_own3 = Layer(parent=out_wall_north, id=2)
@@ -143,7 +163,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_own3 = Material(layer_own3)
     material_own3.name = "WoodSiding"
     material_own3.density = 530
-    material_own3.heat_capac = 900
+    material_own3.heat_capac = 900/1000
     material_own3.thermal_conduc = 0.14
     material_own3.solar_absorp = 0.6
     material_own3.ir_emissivity = 0.9
@@ -164,7 +184,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_owe1 = Material(layer_owe1)
     material_owe1.name = "Plasterboard"
     material_owe1.density = 950.0
-    material_owe1.heat_capac = 840.0
+    material_owe1.heat_capac = 840.0/1000
     material_owe1.thermal_conduc = 0.16
     material_owe1.ir_emissivity = 0.9
 
@@ -174,7 +194,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_owe2 = Material(layer_owe2)
     material_owe2.name = "Fiberglass"
     material_owe2.density = 12
-    material_owe2.heat_capac = 840
+    material_owe2.heat_capac = 840/1000
     material_owe2.thermal_conduc = 0.04
 
     layer_owe3 = Layer(parent=out_wall_east, id=2)
@@ -183,7 +203,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_owe3 = Material(layer_owe3)
     material_owe3.name = "WoodSiding"
     material_owe3.density = 530
-    material_owe3.heat_capac = 900
+    material_owe3.heat_capac = 900/1000
     material_owe3.thermal_conduc = 0.14
     material_owe3.solar_absorp = 0.6
     material_owe3.ir_emissivity = 0.9
@@ -204,7 +224,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_ows1 = Material(layer_ows1)
     material_ows1.name = "Plasterboard"
     material_ows1.density = 950.0
-    material_ows1.heat_capac = 840.0
+    material_ows1.heat_capac = 840.0/1000
     material_ows1.thermal_conduc = 0.16
     material_ows1.ir_emissivity = 0.9
 
@@ -214,7 +234,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_ows2 = Material(layer_ows2)
     material_ows2.name = "Fiberglass"
     material_ows2.density = 12
-    material_ows2.heat_capac = 840
+    material_ows2.heat_capac = 840/1000
     material_ows2.thermal_conduc = 0.04
 
     layer_ows3 = Layer(parent=out_wall_south, id=2)
@@ -223,7 +243,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_ows3 = Material(layer_ows3)
     material_ows3.name = "WoodSiding"
     material_ows3.density = 530
-    material_ows3.heat_capac = 900
+    material_ows3.heat_capac = 900/1000
     material_ows3.thermal_conduc = 0.14
     material_ows3.solar_absorp = 0.6
     material_ows3.ir_emissivity = 0.9
@@ -244,7 +264,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_oww1 = Material(layer_oww1)
     material_oww1.name = "Plasterboard"
     material_oww1.density = 950.0
-    material_oww1.heat_capac = 840.0
+    material_oww1.heat_capac = 840.0/1000
     material_oww1.thermal_conduc = 0.16
     material_oww1.ir_emissivity = 0.9
 
@@ -254,7 +274,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_oww2 = Material(layer_oww2)
     material_oww2.name = "Fiberglass"
     material_oww2.density = 12
-    material_oww2.heat_capac = 840
+    material_oww2.heat_capac = 840/1000
     material_oww2.thermal_conduc = 0.04
 
     layer_oww3 = Layer(parent=out_wall_west, id=2)
@@ -263,7 +283,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_oww3 = Material(layer_oww3)
     material_oww3.name = "WoodSiding"
     material_oww3.density = 530
-    material_oww3.heat_capac = 900
+    material_oww3.heat_capac = 900/1000
     material_oww3.thermal_conduc = 0.14
     material_oww3.solar_absorp = 0.6
     material_oww3.ir_emissivity = 0.9
@@ -273,7 +293,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     in_wall_floor.area = 6 * 8
     in_wall_floor.orientation = -2.0
     in_wall_floor.tilt = 0.0
-    in_wall_floor.inner_convection = 3.16
+    in_wall_floor.inner_convection = 4.13
     in_wall_floor.inner_radiation = 5.13
 
     layer_iwf1 = Layer(parent=in_wall_floor, id=0)
@@ -282,7 +302,7 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     material_iwf1 = Material(layer_iwf1)
     material_iwf1.name = "TimberFlooring"
     material_iwf1.density = 650
-    material_iwf1.heat_capac = 1200
+    material_iwf1.heat_capac = 1200/1000
     material_iwf1.thermal_conduc = 0.14
     material_iwf1.ir_emissivity = 0.9
 
@@ -291,8 +311,8 @@ def from_scratch(save=False, path=utilities.get_default_path()):
 
     material_iwf2 = Material(layer_iwf2)
     material_iwf2.name = "Insulation"
-    material_iwf2.density = 0  # 0.0001, as small as possible
-    material_iwf2.heat_capac = 0  # 0.0001, as small as possible
+    material_iwf2.density = 0.000000000001  # 0.0001, as small as possible
+    material_iwf2.heat_capac = 0.000000000001  # 0.0001, as small as possible
     material_iwf2.thermal_conduc = 0.04
 
     win_1 = Window(parent=tz)
@@ -341,6 +361,16 @@ def from_scratch(save=False, path=utilities.get_default_path()):
 
     if save:
         prj.save_project(file_name='ASHRAE140_600', path=path)
+
+    return prj
+
+
+def load_file():
+
+    prj = Project(load_data=True)
+
+    prj.load_project(utilities.get_full_path(
+        "examples/examplefiles/VDI6007_Room10.teaserXML"))
 
     return prj
 
