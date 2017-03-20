@@ -17,6 +17,8 @@ from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
+from teaser.logic.buildingobjects.buildingphysics.groundfloor import \
+    GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
     import BoundaryConditions
@@ -24,16 +26,18 @@ import teaser.logic.utilities as utilities
 
 
 def main():
-    # prj = from_scratch(save=False)
-    prj = load_file()
+    number_of_elements = 4
+
+    prj = from_scratch(number_of_elements=number_of_elements, save=False)
+    # prj = load_file()
 
     prj.buildings[0].calc_building_parameter(
-        number_of_elements=2,
+        number_of_elements=number_of_elements,
         merge_windows=False,
         used_library='Annex60')
 
     prj.used_library_calc = 'Annex60'
-    prj.number_of_elements_calc = 2
+    prj.number_of_elements_calc = number_of_elements
     prj.merge_windows_calc = False
     prj.weather_file_path = utilities.get_full_path(
         os.path.join(
@@ -47,7 +51,8 @@ def main():
     prj.export_annex()
 
 
-def from_scratch(save=False, path=utilities.get_default_path()):
+def from_scratch(number_of_elements, save=False,
+                 path=utilities.get_default_path()):
     """
     This function creates the test room from scratch.
 
@@ -57,6 +62,8 @@ def from_scratch(save=False, path=utilities.get_default_path()):
 
     Parameters
     ----------
+    number_of_elements: int
+        Number of elements of model
     path: str (optional)
         Path where Project should be stored as .teaserXML
     save: bool (optional)
@@ -358,6 +365,28 @@ def from_scratch(save=False, path=utilities.get_default_path()):
     win_2_material.thermal_conduc = 0.15
     win_2_material.transmittance = 0.907
     win_2_material.ir_emissivity = 0.9
+
+    #  This is a dummy ground floor to export three and four elements models.
+    #  Please set values for floor plate in three element and four element
+    #  models to default.
+
+    if number_of_elements >= 3:
+        out_wall_gf = GroundFloor(parent=tz)
+        out_wall_gf.name = "ExtWallGroundFloor"
+        out_wall_gf.area = 6 * 8
+        out_wall_gf.orientation = -2.0
+        out_wall_gf.tilt = 0.0
+        out_wall_gf.inner_convection = 4.13
+        out_wall_gf.inner_radiation = 5.13
+
+        layer_ofgw1 = Layer(parent=out_wall_gf, id=0)
+        layer_ofgw1.thickness = 1.003
+
+        material_ofgw1 = Material(layer_ofgw1)
+        material_ofgw1.name = "Insulation"
+        material_ofgw1.density = 0.0001  # as small as possible
+        material_ofgw1.heat_capac = 0.0001  # as small as possible
+        material_ofgw1.thermal_conduc = 0.04
 
     if save:
         prj.save_project(file_name='ASHRAE140_600', path=path)
