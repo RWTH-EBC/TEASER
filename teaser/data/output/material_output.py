@@ -43,7 +43,9 @@ def save_material(material, data_class):
         if check.name == material.name and \
                 check.density == material.density and \
                 check.thermal_conduc == material.thermal_conduc and \
-                check.heat_capac == material.heat_capac:
+                check.heat_capac == material.heat_capac and \
+                check.thickness_default == material.thickness_default and \
+                check.thickness_list == material.thickness_list:
             warnings.warn(warning_text)
             add_to_xml = False
             break
@@ -56,6 +58,8 @@ def save_material(material, data_class):
         mat_pyxb.thermal_conduc = material.thermal_conduc
         mat_pyxb.heat_capac = material.heat_capac
         mat_pyxb.material_id = material.material_id
+        mat_pyxb.thickness_default = material.thickness_default
+        mat_pyxb.thickness_list = material.thickness_list
 
         mat_binding.Material.append(mat_pyxb)
         out_file = open(utilities.get_full_path(data_class.path_mat), "w")

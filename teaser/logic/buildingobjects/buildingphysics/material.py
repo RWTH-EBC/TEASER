@@ -38,6 +38,10 @@ class Material(object):
         Coefficient of longwave emissivity of material
     transmittance : float [-]
         Coefficient of transmittanve of material
+    thickness_default : float [m]
+        Default value for material thickness
+    thickness_list : list
+        List of usual values for material thickness, float [m]
     material_id : str(uuid)
         UUID of material, this is used to have similar behaviour like foreign
         key in SQL data bases for use in TypeBuildingElements and Material xml
