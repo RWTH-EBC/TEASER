@@ -1160,7 +1160,7 @@ class FourElement(object):
             conduction = (1 / sum((1 / element.r_conduc) for element in
                                   self.thermal_zone.rooftops))
 
-            self.r_rest_rt = (conduction - self.r1_gf)
+            self.r_rest_rt = (conduction - self.r1_rt)
         except RuntimeError:
             print("As no rooftops are defined lumped "
                   "parameter cannot be calculated")
