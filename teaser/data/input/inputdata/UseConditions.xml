@@ -1858,8 +1858,8 @@
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Gym (without spectator area)</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>40.0</typical_length>
+		<typical_width>20.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>8 23</usage_time>
 			<daily_usage_hours>15</daily_usage_hours>
@@ -2090,8 +2090,8 @@
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Exercise room</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>10.0</typical_length>
+		<typical_width>10.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>8 23</usage_time>
 			<daily_usage_hours>15</daily_usage_hours>
@@ -2148,8 +2148,8 @@
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Laboratory</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>7 18</usage_time>
 			<daily_usage_hours>11</daily_usage_hours>
@@ -2206,8 +2206,8 @@
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Examination- or treatment room</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>3.0</typical_length>
+		<typical_width>6.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>7 18</usage_time>
 			<daily_usage_hours>11</daily_usage_hours>
@@ -2264,8 +2264,8 @@
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Special care area</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>0 23</usage_time>
 			<daily_usage_hours>24</daily_usage_hours>
@@ -2322,8 +2322,8 @@
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Corridors in the general care area</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>2.0</typical_length>
+		<typical_width>12.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>0 23</usage_time>
 			<daily_usage_hours>24</daily_usage_hours>
@@ -2380,8 +2380,8 @@
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Medical and therapeutic practices</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>8 18</usage_time>
 			<daily_usage_hours>10</daily_usage_hours>
@@ -2438,8 +2438,8 @@
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Storehouse, logistics building</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>20.0</typical_length>
+		<typical_width>20.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>0 23</usage_time>
 			<daily_usage_hours>24</daily_usage_hours>
