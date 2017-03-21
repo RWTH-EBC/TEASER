@@ -569,12 +569,12 @@ class FourElement(object):
     def calc_attributes(self):
         """Calls all necessary function to calculate model attributes"""
 
-        outer_walls = (self.thermal_zone.outer_walls +
-                       self.thermal_zone.rooftops)
-
-        for out_wall in outer_walls:
+        for out_wall in self.thermal_zone.outer_walls:
             out_wall.calc_equivalent_res()
             out_wall.calc_ua_value()
+        for rt in self.thermal_zone.rooftops:
+            rt.calc_equivalent_res()
+            rt.calc_ua_value()
         for gf in self.thermal_zone.ground_floors:
             gf.calc_equivalent_res()
             gf.calc_ua_value()
