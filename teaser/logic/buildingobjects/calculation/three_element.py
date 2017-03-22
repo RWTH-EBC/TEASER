@@ -462,13 +462,34 @@ class ThreeElement(object):
             win.calc_ua_value()
 
         self.set_calc_default()
+        if len(outer_walls) < 1:
+            warnings.warn("No walls are defined as outer walls for thermal " +
+                          "zone " + self.thermal_zone.name + " in building " +
+                          self.thermal_zone.parent.name +
+                          ", please be careful with results. In addition " +
+                          "this might lead to RunTimeErrors")
         self._sum_outer_wall_elements()
-        self._sum_ground_floor_elements()
-        self._sum_inner_wall_elements()
-        self._sum_window_elements()
         self._calc_outer_elements()
-        self._calc_ground_floor_elements()
-        self._calc_inner_elements()
+        if len(self.thermal_zone.inner_walls) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no inner walls have been defined.')
+        else:
+            self._sum_inner_wall_elements()
+            self._calc_inner_elements()
+        if len(self.thermal_zone.windows) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no windows have been defined.')
+        else:
+            self._sum_window_elements()
+        if len(self.thermal_zone.ground_floors) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no ground floors have been defined.')
+        else:
+            self._sum_ground_floor_elements()
+            self._calc_ground_floor_elements()
         self._calc_wf()
         self._calc_mean_values()
         self._calc_number_of_elements()
@@ -868,10 +889,6 @@ class ThreeElement(object):
             # more than one outer wall, calculate chain matrix
             self.r1_ow, self.c1_ow = self._calc_parallel_connection(outer_walls,
                                                                     omega)
-        else:
-            warnings.warn("No walls are defined as outer walls, please be "
-                          "careful with results. In addition this might lead "
-                          "to RunTimeErrors")
 
         if self.merge_windows is False:
             try:
@@ -943,10 +960,6 @@ class ThreeElement(object):
             # more than one outer wall, calculate chain matrix
             self.r1_gf, self.c1_gf = self._calc_parallel_connection(
                 self.thermal_zone.ground_floors, omega)
-        else:
-            warnings.warn("No walls are defined as ground floors, please be "
-                          "careful with results. In addition this might lead "
-                          "to RunTimeErrors")
         try:
             conduction = (1 / sum((1 / element.r_conduc) for element in
                                 self.thermal_zone.ground_floors))
@@ -991,10 +1004,6 @@ class ThreeElement(object):
             self.r1_iw, self.c1_iw = self._calc_parallel_connection(
                 inner_walls,
                 omega)
-        else:
-            warnings.warn("No walls are defined as outer walls, please be "
-                          "careful with results. In addition this might lead "
-                          "to RunTimeErrors")
 
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)

@@ -583,15 +583,41 @@ class FourElement(object):
             win.calc_ua_value()
 
         self.set_calc_default()
+        if len(self.thermal_zone.outer_walls) < 1:
+            warnings.warn("No walls are defined as outer walls for thermal " +
+                          "zone " + self.thermal_zone.name + " in building " +
+                          self.thermal_zone.parent.name +
+                          ", please be careful with results. In addition " +
+                          "this might lead to RunTimeErrors")
         self._sum_outer_wall_elements()
-        self._sum_ground_floor_elements()
-        self._sum_rooftop_elements()
-        self._sum_inner_wall_elements()
-        self._sum_window_elements()
         self._calc_outer_elements()
-        self._calc_ground_floor_elements()
+        if len(self.thermal_zone.inner_walls) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no inner walls have been defined.')
+        else:
+            self._sum_inner_wall_elements()
+            self._calc_inner_elements()
+        if len(self.thermal_zone.windows) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no windows have been defined.')
+        else:
+            self._sum_window_elements()
+        if len(self.thermal_zone.ground_floors) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no ground floors have been defined.')
+        else:
+            self._sum_ground_floor_elements()
+            self._calc_ground_floor_elements()
+        if len(self.thermal_zone.ground_floors) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no rooftops have been defined.')
+        else:
+            self._sum_rooftop_elements()
         self._calc_rooftop_elements()
-        self._calc_inner_elements()
         self._calc_wf()
         self._calc_mean_values()
         self._calc_number_of_elements()

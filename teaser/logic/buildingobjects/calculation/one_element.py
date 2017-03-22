@@ -328,9 +328,20 @@ class OneElement(object):
             win.calc_ua_value()
 
         self.set_calc_default()
+        if len(outer_walls) < 1:
+            warnings.warn("No walls are defined as outer walls for thermal " +
+                          "zone " + self.thermal_zone.name + " in building " +
+                          self.thermal_zone.parent.name +
+                          ", please be careful with results. In addition " +
+                          "this might lead to RunTimeErrors")
         self._sum_outer_wall_elements()
-        self._sum_window_elements()
         self._calc_outer_elements()
+        if len(self.thermal_zone.windows) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no windows have been defined.')
+        else:
+            self._sum_window_elements()
         self._calc_wf()
         self._calc_mean_values()
         self._calc_number_of_elements()
@@ -630,10 +641,6 @@ class OneElement(object):
             # more than one outer wall, calculate chain matrix
             self.r1_ow, self.c1_ow = self._calc_parallel_connection(outer_walls,
                                                                     omega)
-        else:
-            warnings.warn("No walls are defined as outer walls, please be "
-                          "careful with results. In addition this might lead "
-                          "to RunTimeErrors")
 
         if self.merge_windows is False:
             try:
