@@ -893,8 +893,9 @@ class ThreeElement(object):
         if self.merge_windows is False:
             try:
 
-                self.r1_win = (1 / sum((1 / win.r1) for
-                                       win in self.thermal_zone.windows))
+                if len(self.thermal_zone.windows) > 0:
+                    self.r1_win = (1 / sum((1 / win.r1) for win in
+                                           self.thermal_zone.windows))
 
                 conduction = (1 / sum((1 / element.r_conduc) for element in
                                       outer_walls))
@@ -908,17 +909,20 @@ class ThreeElement(object):
         if self.merge_windows is True:
 
             try:
-                self.r1_win = 1 / sum(1 / (win.r1 / 6) for win in
-                                      self.thermal_zone.windows)
+                if len(self.thermal_zone.windows) > 0:
+                    self.r1_win = 1 / sum(1 / (win.r1 / 6) for win in
+                                          self.thermal_zone.windows)
 
-                self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
-                self.r_total_ow = 1 / (self.ua_value_ow + self.ua_value_win)
-                self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
-                    ((1 / self.r_conv_inner_ow)
-                     + (1 / self.r_conv_inner_win)
-                     + (1 / self.r_rad_inner_ow)
-                     + (1 / self.r_rad_inner_win)))) - 1 / (
-                    self.alpha_comb_outer_ow * self.area_ow)
+                    self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
+
+                    self.r_total_ow = 1 / (self.ua_value_ow +
+                                           self.ua_value_win)
+                    self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
+                        ((1 / self.r_conv_inner_ow)
+                         + (1 / self.r_conv_inner_win)
+                         + (1 / self.r_rad_inner_ow)
+                         + (1 / self.r_rad_inner_win)))) - 1 / (
+                        self.alpha_comb_outer_ow * self.area_ow)
 
                 self.ir_emissivity_inner_ow = (
                     (self.ir_emissivity_inner_ow * self.area_ow
