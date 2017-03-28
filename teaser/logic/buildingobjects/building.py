@@ -127,7 +127,7 @@ class Building(object):
         self.name = name
         self.year_of_construction = year_of_construction
         self.net_leased_area = net_leased_area
-        self.with_ahu = with_ahu
+        self._with_ahu = with_ahu
         if with_ahu is True:
             self.central_ahu = BuildingAHU(self)
         else:
@@ -695,17 +695,35 @@ class Building(object):
             raise ValueError("Specify year of construction first")
 
     @property
+    def with_ahu(self):
+        return self._with_ahu
+
+    @with_ahu.setter
+    def with_ahu(self, value):
+
+        if value is True and self.central_ahu is None:
+            self.central_ahu = BuildingAHU(self)
+            self._with_ahu = True
+        elif value is False and self.central_ahu:
+            self.central_ahu = None
+            self._with_ahu = False
+
+    @property
     def central_ahu(self):
         return self._central_ahu
 
     @central_ahu.setter
     def central_ahu(self, value):
 
-        ass_error_1 = "central AHU has to be an instance of BuildingAHU()"
+        if value is None:
+            self._central_ahu = value
+        else:
 
-        assert type(value).__name__ == "BuildingAHU", ass_error_1
+            ass_error_1 = "central AHU has to be an instance of BuildingAHU()"
 
-        self._central_ahu = value
+            assert type(value).__name__ == "BuildingAHU", ass_error_1
+
+            self._central_ahu = value
 
     @property
     def number_of_elements_calc(self):
