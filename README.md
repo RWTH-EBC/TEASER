@@ -122,3 +122,5 @@ under the
 Parts of TEASER have been developed within public funded projects
 and with financial support by BMWi (German Federal Ministry for Economic
 Affairs and Energy).
+
+<img src="http://www.innovation-beratung-foerderung.de/INNO/Redaktion/DE/Bilder/Titelbilder/titel_foerderlogo_bmwi.jpg;jsessionid=4BD60B6CD6337CDB6DE21DC1F3D6FEC5?__blob=poster&v=2)" width="200">
