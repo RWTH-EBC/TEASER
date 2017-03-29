@@ -96,6 +96,12 @@ def export_annex60(
 
     for i, bldg in enumerate(buildings):
 
+        ass_error = "You chose AixLib calculation, " \
+                    "but want to export Annex60 models, " \
+                    "this is not possible"
+
+        assert bldg.used_library_calc == 'Annex60', ass_error
+
         bldg_path = os.path.join(path, bldg.name)
 
         utilities.create_path(utilities.get_full_path(bldg_path))

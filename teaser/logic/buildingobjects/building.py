@@ -6,6 +6,7 @@
 import inspect
 import random
 import re
+import warnings
 from teaser.logic.buildingobjects.calculation.aixlib import AixLib
 from teaser.logic.buildingobjects.calculation.annex60 import Annex60
 
@@ -447,11 +448,30 @@ class Building(object):
                 t_bt=5)
             self.sum_heat_load += zone.model_attr.heat_load
 
-        if self.used_library_calc == 'AixLib':
-            self.library_attr = AixLib(parent=self)
-            self.library_attr.calc_auxiliary_attr()
-        elif self.used_library_calc == 'Annex60':
-            self.library_attr = Annex60(parent=self)
+        if self.used_library_calc == type(self.library_attr).__name__:
+            if self.used_library_calc == 'AixLib':
+                self.library_attr.calc_auxiliary_attr()
+            else:
+                pass
+        elif self.library_attr is None:
+            if self.used_library_calc == 'AixLib':
+                self.library_attr = AixLib(parent=self)
+                self.library_attr.calc_auxiliary_attr()
+            elif self.used_library_calc == 'Annex60':
+                self.library_attr = Annex60(parent=self)
+        else:
+            warnings.warn("You set conflicting options for the used library "
+                          "in Building or Project class and "
+                          "calculation function of building. Your library "
+                          "attributes are set to default using the library "
+                          "you indicated in the function call, which is: " +
+                          self.used_library_calc)
+
+            if self.used_library_calc == 'AixLib':
+                self.library_attr = AixLib(parent=self)
+                self.library_attr.calc_auxiliary_attr()
+            elif self.used_library_calc == 'Annex60':
+                self.library_attr = Annex60(parent=self)
 
     def retrofit_building(
             self,
@@ -776,8 +796,15 @@ class Building(object):
         assert value != ["AixLib", "Annex60"], ass_error_1
 
         if self.parent is None and value is None:
-            self._used_library_calc = 2
+            self._used_library_calc = "AixLib"
         elif self.parent is not None and value is None:
             self._used_library_calc = self.parent.used_library_calc
         elif value is not None:
             self._used_library_calc = value
+
+        if self.used_library_calc == 'AixLib':
+            self.library_attr = AixLib(parent=self)
+        elif self.used_library_calc == 'Annex60':
+            self.library_attr = Annex60(parent=self)
+
+
