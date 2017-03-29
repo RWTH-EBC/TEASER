@@ -7,7 +7,7 @@ Created July 2015
 from teaser.logic import utilities
 from teaser.project import Project
 import math
-
+import os
 import helptest
 
 prj = Project(True)
@@ -1586,3 +1586,27 @@ class Test_teaser(object):
 
         therm_zone.use_conditions.base_ach = 0.5
         assert therm_zone.infiltration_rate == 0.5
+
+    def test_load_save_material(self):
+        '''test of load_material_template and save_material_template,
+        no parameter checking'''
+
+        from teaser.logic.buildingobjects.buildingphysics.material import \
+            Material
+
+        path = os.path.join(utilities.get_default_path(),
+                            'MatUT.xml')
+
+        mat = Material(parent=None)
+        mat.load_material_template(mat_name='Tiledroof',
+                                   data_class=prj.data)
+
+        from teaser.data.dataclass import DataClass
+
+        dat = DataClass()
+        dat.path_mat = path
+        dat.load_mat_binding()
+
+        mat.save_material_template(data_class=dat)
+
+
