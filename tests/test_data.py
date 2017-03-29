@@ -1652,14 +1652,15 @@ class Test_teaser(object):
         prj.merge_windows_calc
         prj.used_library_calc
         prj.name = 123
-        prj.name = prj.data
 
     def test_warnings_prj(self):
         """Tests misc parts in project.py"""
 
         from teaser.logic.buildingobjects.building import Building
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
         # warnings for not calculated buidlings
         bld = Building(parent=prj)
+        tz = ThermalZone(parent=bld)
         prj.calc_all_buildings()
         prj.set_default()
         # warning if iwu and number_of_apartments is used
@@ -1672,10 +1673,16 @@ class Test_teaser(object):
                             net_leased_area=1988,
                             number_of_apartments=1)
         # not all buildings if internal id is passed over
-
+        prj.add_residential(method='iwu',
+                            usage="single_family_dwelling",
+                            name="test1",
+                            year_of_construction=1988,
+                            number_of_floors=1,
+                            height_of_floors=7,
+                            net_leased_area=1988,
+                            number_of_apartments=1)
         prj.calc_all_buildings()
         prj.export_aixlib(internal_id=prj.buildings[-1])
         prj.export_annex(internal_id=prj.buildings[-1])
 
         prj.set_default(load_data="Test")
-

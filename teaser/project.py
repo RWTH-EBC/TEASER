@@ -33,12 +33,8 @@ from teaser.logic.archetypebuildings.urbanrenet.est8b import EST8b
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
     SingleFamilyDwelling
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
-
-try:
-    import teaser.data.output.citygml_output as citygml_out
-    import teaser.data.input.citygml_input as citygml_in
-except UserWarning:
-    warnings.warn("No CityGML module found, no CityGML import/export")
+import teaser.data.output.citygml_output as citygml_out
+import teaser.data.input.citygml_input as citygml_in
 
 
 class Project(object):
@@ -153,13 +149,12 @@ class Project(object):
                         number_of_elements=self._number_of_elements_calc,
                         merge_windows=self._merge_windows_calc,
                         used_library=self._used_library_calc)
-                except UserWarning:
+                except ZeroDivisionError:
                     warnings.warn(
                         "Following building can't be calculated and is "
                         "removed from buildings list. Use raise_errors=True "
                         "to get python errors and stop TEASER from deleting "
-                        "this building:",
-                        bldg, bldg.name)
+                        "this building:" + bldg.name)
 
     def retrofit_all_buildings(
             self,
@@ -1379,10 +1374,6 @@ class Project(object):
             regex = re.compile('[^a-zA-z0-9]')
             self._name = regex.sub('', value)
         else:
-            try:
-                value = str(value)
-                regex = re.compile('[^a-zA-z0-9]')
-                self._name = regex.sub('', value)
-
-            except ValueError:
-                print("Can't convert name to string")
+            value = str(value)
+            regex = re.compile('[^a-zA-z0-9]')
+            self._name = regex.sub('', value)
