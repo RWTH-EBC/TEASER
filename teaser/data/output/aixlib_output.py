@@ -104,6 +104,12 @@ def export_multizone(buildings, prj, path=None):
 
     for i, bldg in enumerate(buildings):
 
+        ass_error = "You chose Annex60 calculation, " \
+                    "but want to export AixLib models, " \
+                    "this is not possible"
+
+        assert bldg.used_library_calc == 'AixLib', ass_error
+
         bldg_path = os.path.join(path, bldg.name)
         utilities.create_path(utilities.get_full_path(bldg_path))
         utilities.create_path(utilities.get_full_path(

@@ -3,6 +3,7 @@
 
 
 import math
+import collections
 from teaser.logic.archetypebuildings.nonresidential \
     import NonResidential
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
@@ -163,14 +164,19 @@ class Office(NonResidential):
         # calculation following Lichtmess
 
         # [area factor, usage type(has to be set)]
-        self.zone_area_factors = \
-            {"Meeting": [0.04, "Meeting, Conference, seminar"],
-             "Storage": [0.15, "Stock, technical equipment, archives"],
-             "Office": [0.5, "Group Office (between 2 and 6 employees)"],
-             "Restroom": [0.04, "WC and sanitary rooms in non-residential "
-                                "buildings"],
-             "ICT": [0.02, "Data center"],
-             "Floor": [0.25, "Traffic area"]}
+        self.zone_area_factors = collections.OrderedDict()
+        self.zone_area_factors["Office"] = \
+            [0.5, "Group Office (between 2 and 6 employees)"]
+        self.zone_area_factors["Floor"] = \
+            [0.25, "Traffic area"]
+        self.zone_area_factors["Storage"] = \
+            [0.15, "Stock, technical equipment, archives"]
+        self.zone_area_factors["Meeting"] = \
+            [0.04, "Meeting, Conference, seminar"]
+        self.zone_area_factors["Restroom"] = \
+            [0.04, "WC and sanitary rooms in non-residential buildings"]
+        self.zone_area_factors["ICT"] = \
+            [0.02, "Data center"]
 
         # [tilt, orientation]
         self.outer_wall_names = {"Exterior Facade North": [90, 0],
