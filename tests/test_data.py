@@ -1,8 +1,8 @@
-'''
+"""
 Created July 2015
 
 @author: TEASER 4 Development Team
-'''
+"""
 
 from teaser.logic import utilities
 from teaser.project import Project
@@ -18,7 +18,7 @@ class Test_teaser(object):
     global prj
 
     def test_calc_vdi_room1(self):
-        '''Parameter Verification for rouvel room1'''
+        """Parameter Verification for rouvel room1"""
         import teaser.examples.verification.verification_room1 as room1
 
         room1_prj = room1.parameter_room1()
@@ -43,7 +43,7 @@ class Test_teaser(object):
         assert round(zone_attr.alpha_comb_outer_ow, 1) == 25.0
 
     def test_calc_vdi_room3(self):
-        '''Parameter Verification for room 3'''
+        """Parameter Verification for room 3"""
         import teaser.examples.verification.verification_room3 as room3
 
         room3_prj = room3.parameter_room3()
@@ -68,7 +68,7 @@ class Test_teaser(object):
         assert round(zone_attr.alpha_comb_outer_ow, 1) == 25.0
 
     def test_calc_vdi_room8(self):
-        '''Parameter Verification for room 8'''
+        """Parameter Verification for room 8"""
         import teaser.examples.verification.verification_room8 as room8
 
         room8_prj = room8.parameter_room8()
@@ -93,10 +93,10 @@ class Test_teaser(object):
     # EBC Calculation Verification, with parameters from TEASER3
 
     def test_calc_ebc(self):
-        '''
+        """
         Parameter Verification for ebc calculation method. Values are compared
         with TEASER3 values.
-        '''
+        """
         prj.set_default()
         prj.load_project(utilities.get_full_path("examples/examplefiles"
                                                  "/new.teaserXML"))
@@ -129,10 +129,10 @@ class Test_teaser(object):
         assert round(zone_attr.weightfactor_ground, 5) == 0.54398
 
     def test_type_bldg_office_with_calc(self):
-        '''
+        """
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
-        '''
+        """
         from teaser.logic.archetypebuildings.bmvbs.office import Office
 
         prj.set_default()
@@ -257,10 +257,10 @@ class Test_teaser(object):
         assert round(test_office.get_window_area(270), 0) == 315
 
     def test_type_bldg_institute4_with_calc(self):
-        '''
+        """
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
-        '''
+        """
         from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import \
             Institute4
 
@@ -313,10 +313,10 @@ class Test_teaser(object):
         assert round(test_institute4.get_window_area(270), 0) == 28
 
     def test_type_bldg_institute8_with_calc(self):
-        '''
+        """
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
-        '''
+        """
         from teaser.logic.archetypebuildings.bmvbs.custom.institute8 import \
             Institute8
 
@@ -369,10 +369,10 @@ class Test_teaser(object):
         assert round(test_institute8.get_window_area(270), 0) == 28
 
     def test_type_bldg_institute_with_calc(self):
-        '''
+        """
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
-        '''
+        """
         from teaser.logic.archetypebuildings.bmvbs.custom.institute import \
             Institute
 
@@ -425,10 +425,10 @@ class Test_teaser(object):
         assert round(test_institute.get_window_area(270), 0) == 28
 
     def test_type_bldg_residential_with_calc(self):
-        '''
+        """
         Verification of the type building generation of an office building.
         Values are compared with TEASER3 values.
-        '''
+        """
         from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling \
             import SingleFamilyDwelling
 
@@ -556,7 +556,7 @@ class Test_teaser(object):
     # not if it produces reliable results.
 
     def test_load_save_project(self):
-        '''test of load_project and save_project'''
+        """test of load_project and save_project"""
 
         prj.load_project(utilities.get_full_path(("examples/examplefiles"
                                                   "/new.teaserXML")))
@@ -565,42 +565,44 @@ class Test_teaser(object):
         tz_area = sum([tz.area for tz in prj.buildings[
             -1].thermal_zones])
         assert prj.buildings[-1].net_leased_area == tz_area
-        prj.save_project("unitTest")
+        prj.save_project(file_name="unitTest", path=None)
+        prj.save_project(file_name=None, path=utilities.get_default_path())
         prj.set_default()
 
     def test_save_citygml(self):
-        '''test of save_gml'''
+        """test of save_gml"""
         helptest.building_test2(prj)
-        prj.save_citygml("unitTest")
+        prj.save_citygml(file_name="unitTest", path=None)
+        prj.save_citygml(file_name=None, path=utilities.get_default_path())
         prj.set_default()
 
     def test_load_citygml(self):
-        '''test of load_gml'''
+        """test of load_gml"""
         prj.set_default()
         prj.load_citygml(utilities.get_full_path(
             "examples/examplefiles/CityGMLSample.gml"))
 
     def test_calc_all_buildings(self):
-        '''test of calc_all_buildings, no calculation verification'''
+        """test of calc_all_buildings, no calculation verification"""
 
         helptest.building_test2(prj)
         helptest.building_test2(prj)
         prj.number_of_elements_calc = 2
-        prj.merge_windows_calc = True
+        prj.merge_windows_calc = False
         prj.used_library_calc = 'AixLib'
         prj.calc_all_buildings()
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = False
         prj.used_library_calc = 'AixLib'
-        prj.calc_all_buildings()
+        prj.calc_all_buildings(raise_errors=True)
 
     def test_retrofit_all_buildings(self):
-        '''test of retrofit_all_buildings, no calculation verification'''
+        """test of retrofit_all_buildings, no calculation verification"""
 
         prj.retrofit_all_buildings(2015)
 
     def test_export_aixlib(self):
-        '''test of export_aixlib, no calculation verification'''
+        """test of export_aixlib, no calculation verification"""
 
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = False
@@ -625,9 +627,29 @@ class Test_teaser(object):
         prj.used_library_calc = 'AixLib'
         prj.calc_all_buildings()
         prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib(building_model="Test",
+                          zone_model="Test",
+                          corG="Test")
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib(internal_id=prj.buildings[-1].internal_id)
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib(path=utilities.get_default_path())
 
     def test_export_annex(self):
-        '''test of export_annex, no calculation verification'''
+        """test of export_annex, no calculation verification"""
 
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = True
@@ -669,10 +691,20 @@ class Test_teaser(object):
         prj.used_library_calc = 'Annex60'
         prj.calc_all_buildings()
         prj.export_annex()
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'Annex60'
+        prj.calc_all_buildings()
+        prj.export_annex(internal_id=prj.buildings[-1].internal_id)
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'Annex60'
+        prj.calc_all_buildings()
+        prj.export_annex(path=utilities.get_default_path())
         prj.set_default()
 
     def test_export_parameters_txt(self):
-        '''test of the export of the readable parameter output'''
+        """test of the export of the readable parameter output"""
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = True
         prj.used_library_calc = 'AixLib'
@@ -713,16 +745,21 @@ class Test_teaser(object):
         prj.used_library_calc = 'AixLib'
         prj.calc_all_buildings()
         prj.export_parameters_txt()
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_parameters_txt(path=utilities.get_default_path())
         prj.set_default()
 
     def test_instantiate_data_class(self):
-        '''test of instantiate_data_class'''
+        """test of instantiate_data_class"""
 
         prj.instantiate_data_class()
 
     def test_type_bldg_office(self):
-        '''test of type_bldg_office, no calculation verification
-        '''
+        """test of type_bldg_office, no calculation verification
+        """
 
         prj.type_bldg_office(name="TestBuilding",
                              year_of_construction=1988,
@@ -747,7 +784,7 @@ class Test_teaser(object):
             construction_type="heavy")
 
     def test_type_bldg_institute(self):
-        '''test of type_bldg_institute, no calculation verification'''
+        """test of type_bldg_institute, no calculation verification"""
 
         prj.type_bldg_institute(name="TestBuilding",
                                 year_of_construction=1988,
@@ -772,7 +809,7 @@ class Test_teaser(object):
             construction_type="heavy")
 
     def test_type_bldg_institute4(self):
-        '''test of type_bldg_institute4, no calculation verification'''
+        """test of type_bldg_institute4, no calculation verification"""
 
         prj.type_bldg_institute4(name="TestBuilding",
                                  year_of_construction=1988,
@@ -797,7 +834,7 @@ class Test_teaser(object):
             construction_type="heavy")
 
     def test_type_bldg_institute8(self):
-        '''test of type_bldg_institute8, no calculation verification'''
+        """test of type_bldg_institute8, no calculation verification"""
 
         prj.type_bldg_institute8(name="TestBuilding",
                                  year_of_construction=1988,
@@ -822,7 +859,7 @@ class Test_teaser(object):
             construction_type="heavy")
 
     def test_type_bldg_residential(self):
-        '''test of type_bldg_residential, no calculation verification'''
+        """test of type_bldg_residential, no calculation verification"""
 
         prj.type_bldg_residential(name="TestBuilding",
                                   year_of_construction=1988,
@@ -853,7 +890,7 @@ class Test_teaser(object):
             construction_type="heavy")
 
     def test_est_bldgs(self):
-        '''test of type_bldg_est, no calculation verification'''
+        """test of type_bldg_est, no calculation verification"""
 
         prj.type_bldg_est1a(
             name="TestBuilding",
@@ -1089,14 +1126,14 @@ class Test_teaser(object):
     # methods in Building
 
     def test_get_inner_wall_area(self):
-        '''test of get_inner_wall_area'''
+        """test of get_inner_wall_area"""
         prj.set_default()
         helptest.building_test2(prj)
         sum_area = prj.buildings[-1].get_inner_wall_area()
         assert round(sum_area, 1) == 34.0
 
     def test_set_outer_wall_area(self):
-        '''test of set_outer_wall_area'''
+        """test of set_outer_wall_area"""
         print(prj.buildings[-1].thermal_zones[-1].outer_walls[1].area)
         prj.buildings[-1].set_outer_wall_area(2.0, 0.0)
 
@@ -1106,26 +1143,26 @@ class Test_teaser(object):
         assert round(therm_zone.outer_walls[1].area, 3) == 14.0
 
     def test_get_outer_wall_area(self):
-        '''test of get_outer_wall_area'''
+        """test of get_outer_wall_area"""
         prj.buildings[-1].get_outer_wall_area(0.0)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert round(therm_zone.outer_walls[0].area, 3) == 2.0
         assert round(therm_zone.outer_walls[1].area, 3) == 14.0
 
     def test_set_window_area(self):
-        '''test of set_window_area'''
+        """test of set_window_area"""
         prj.buildings[-1].set_window_area(1.0, 90.0)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert round(therm_zone.windows[0].area, 3) == 1.0
 
     def test_get_window_area(self):
-        '''test of get_window_area'''
+        """test of get_window_area"""
         prj.buildings[-1].get_window_area(90.0)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert round(therm_zone.windows[0].area, 3) == 1.0
 
     def test_fill_outer_wall_area_dict(self):
-        '''test of fill_outer_wall_area_dict'''
+        """test of fill_outer_wall_area_dict"""
 
         prj.buildings[-1].fill_outer_area_dict()
         outwall_dict_round = {key: round(value, 2) for key, value in
@@ -1138,14 +1175,14 @@ class Test_teaser(object):
                                       270.0: 14.0}
 
     def test_fill_window_area_dict(self):
-        '''test of fill_window_area_dict'''
+        """test of fill_window_area_dict"""
         prj.buildings[-1].fill_window_area_dict()
         assert prj.buildings[-1].window_area == {90.0: 1.0,
                                                  180.0: 8.0,
                                                  270.0: 5.0}
 
     def test_calc_building_parameter(self):
-        '''test of calc_building_parameter'''
+        """test of calc_building_parameter"""
         prj.set_default()
         helptest.building_test2(prj)
 
@@ -1160,7 +1197,7 @@ class Test_teaser(object):
     # methods in therm_zone
 
     def test_calc_zone_parameters(self):
-        '''test of calc zone parameter, no calculation verification'''
+        """test of calc zone parameter, no calculation verification"""
 
         prj.buildings[-1].thermal_zones[-1].calc_zone_parameters(
             number_of_elements=2, merge_windows=False)
@@ -1168,7 +1205,7 @@ class Test_teaser(object):
             number_of_elements=2, merge_windows=True)
 
     def test_heat_load(self):
-        '''test of heating_load'''
+        """test of heating_load"""
         prj.set_default()
         helptest.building_test2(prj)
         prj.buildings[-1].thermal_zones[-1].infiltration_rate = 0.5
@@ -1181,7 +1218,7 @@ class Test_teaser(object):
             4) == 6659.6256
 
     def test_sum_building_elements(self):
-        '''test of combine_building_elements'''
+        """test of combine_building_elements"""
         prj.set_default()
         helptest.building_test2(prj)
 
@@ -1274,7 +1311,7 @@ class Test_teaser(object):
         assert round(calc_attr.weighted_g_value, 3) == 0.789
 
     def test_calc_chain_matrix(self):
-        '''test of calc_chain_matrix'''
+        """test of calc_chain_matrix"""
         from teaser.logic.buildingobjects.calculation.two_element import\
             TwoElement
 
@@ -1303,7 +1340,7 @@ class Test_teaser(object):
         assert round(c1_iw, 6) == 319983.518743
 
     def test_calc_weightfactor(self):
-        '''test of calc_weightfactor'''
+        """test of calc_weightfactor"""
         prj.set_default()
         helptest.building_test2(prj)
         prj.buildings[-1].calc_building_parameter(number_of_elements=2,
@@ -1358,7 +1395,7 @@ class Test_teaser(object):
             weightfactors_test_list.sort()
 
     def test_calc_two_element(self):
-        '''test of calc_two_element'''
+        """test of calc_two_element"""
         prj.set_default()
         helptest.building_test2(prj)
 
@@ -1426,13 +1463,13 @@ class Test_teaser(object):
         assert round(zone_attr.r_rest_ow, 15) == 0.005852240613452
 
     def test_volume_zone(self):
-        '''test of volume_zone'''
+        """test of volume_zone"""
 
         prj.buildings[-1].thermal_zones[-1].set_volume_zone()
         assert prj.buildings[-1].thermal_zones[-1].volume == 490.0
 
     def test_set_inner_wall_area(self):
-        '''test of set_inner_wall_area'''
+        """test of set_inner_wall_area"""
 
         prj.buildings[-1].thermal_zones[-1].set_inner_wall_area()
         for wall in prj.buildings[-1].thermal_zones[-1].inner_walls:
@@ -1441,13 +1478,13 @@ class Test_teaser(object):
             # methods in UseConditions18599()
 
     def test_load_use_conditions(self):
-        '''test of load_use_conditions, no parameter checking'''
+        """test of load_use_conditions, no parameter checking"""
         use_cond = prj.buildings[-1].thermal_zones[-1].use_conditions
         use_cond.load_use_conditions("Living",
                                      data_class=prj.data)
 
     def test_save_use_conditions(self):
-        '''test of save_use_conditions, no parameter checking'''
+        """test of save_use_conditions, no parameter checking"""
         import os
 
         path = os.path.join(utilities.get_default_path(),
@@ -1460,7 +1497,7 @@ class Test_teaser(object):
         # methods in BuildingElement
 
     def test_ua_value(self):
-        '''test of ua_value'''
+        """test of ua_value"""
         prj.set_default()
         helptest.building_test2(prj)
 
@@ -1472,7 +1509,7 @@ class Test_teaser(object):
             15) == 4.132453174475393
 
     def test_gather_element_properties(self):
-        '''test of gather_element_properties'''
+        """test of gather_element_properties"""
         outerWalls = prj.buildings[-1].thermal_zones[-1].outer_walls[0]
         number_of_layer, density, thermal_conduc, heat_capac, thickness = \
             outerWalls.gather_element_properties()
@@ -1483,7 +1520,7 @@ class Test_teaser(object):
         assert (thickness == [5., 2.]).all()
 
     def test_load_type_element(self):
-        '''test of load_type_element, no parameter checking'''
+        """test of load_type_element, no parameter checking"""
 
         # test load function
         therm_zone = prj.buildings[-1].thermal_zones[-1]
@@ -1495,7 +1532,7 @@ class Test_teaser(object):
             prj.data)
 
     def test_save_type_element(self):
-        '''test of save_type_element, no parameter checking'''
+        """test of save_type_element, no parameter checking"""
         import os
         # test load function
         therm_zone = prj.buildings[-1].thermal_zones[-1]
@@ -1510,7 +1547,7 @@ class Test_teaser(object):
     # methods in Wall
 
     def test_calc_equivalent_res_wall(self):
-        '''test of calc_equivalent_res, wall'''
+        """test of calc_equivalent_res, wall"""
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
@@ -1527,13 +1564,13 @@ class Test_teaser(object):
         assert round(therm_zone.outer_walls[0].c1_korr, 6) == 111237.213205
 
     def test_insulate_wall(self):
-        '''test of insulate_wall'''
+        """test of insulate_wall"""
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].insulate_wall("EPS035", 0.04)
         assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.806838
 
     def test_retrofit_wall(self):
-        '''test of retrofit_wall'''
+        """test of retrofit_wall"""
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
@@ -1566,7 +1603,7 @@ class Test_teaser(object):
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
 
     def test_calc_equivalent_res_win(self):
-        '''test of calc_equivalent_res, win'''
+        """test of calc_equivalent_res, win"""
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
@@ -1575,8 +1612,8 @@ class Test_teaser(object):
         assert round(therm_zone.windows[0].r1, 3) == 0.072
 
     def test_change_infiltration_rate(self):
-        '''test for change of infiltration_rate'''
-        prj.set_default()
+        """test for change of infiltration_rate"""
+        prj.set_default(load_data=True)
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         assert therm_zone.infiltration_rate == 0.2
@@ -1588,8 +1625,8 @@ class Test_teaser(object):
         assert therm_zone.infiltration_rate == 0.5
 
     def test_load_save_material(self):
-        '''test of load_material_template and save_material_template,
-        no parameter checking'''
+        """test of load_material_template and save_material_template,
+        no parameter checking"""
 
         from teaser.logic.buildingobjects.buildingphysics.material import \
             Material
@@ -1609,4 +1646,10 @@ class Test_teaser(object):
 
         mat.save_material_template(data_class=dat)
 
+    def test_properties_project(self):
+        """Tests properties of project class"""
+        prj.number_of_elements_calc
+        prj.merge_windows_calc
+        prj.used_library_calc
+        prj.name = 123
 
