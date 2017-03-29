@@ -853,7 +853,18 @@ class Test_teaser(object):
             construction_type="heavy")
 
     def test_est_bldgs(self):
-        '''test of type_bldg_residential, no calculation verification'''
+        '''test of type_bldg_est, no calculation verification'''
+
+        prj.type_bldg_est1a(
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            neighbour_buildings=None,
+            construction_type=None)
+
 
         prj.add_residential(
             method='urbanrenet',
@@ -871,6 +882,17 @@ class Test_teaser(object):
             dormer=0,
             construction_type="heavy",
             number_of_apartments=1)
+
+        prj.type_bldg_est1b(
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            neighbour_buildings=None,
+            construction_type=None,
+            number_of_apartments=2)
 
         prj.add_residential(
             method='urbanrenet',
@@ -940,6 +962,17 @@ class Test_teaser(object):
             construction_type="heavy",
             number_of_apartments=1)
 
+        prj.type_bldg_est4b(
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            neighbour_buildings=None,
+            construction_type=None,
+            number_of_apartments=2)
+
         prj.add_residential(
             method='urbanrenet',
             usage='est4b',
@@ -990,6 +1023,17 @@ class Test_teaser(object):
             dormer=0,
             construction_type="heavy",
             number_of_apartments=1)
+
+        prj.type_bldg_est7(
+            name="TestBuilding",
+            year_of_construction=1988,
+            number_of_floors=7,
+            height_of_floors=1,
+            net_leased_area=1988,
+            with_ahu=False,
+            neighbour_buildings=None,
+            construction_type=None,
+            number_of_apartments=2)
 
         prj.add_residential(
             method='urbanrenet',
