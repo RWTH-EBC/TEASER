@@ -222,21 +222,25 @@ def save_teaser_xml(path, project):
 
                     pyxb_zone.OuterWall.append(pyxb_wall)
 
-                if type(out_wall).__name__ == "Rooftop":
+            for rt in zone.rooftops:
+
+                if type(rt).__name__ == "Rooftop":
 
                     pyxb_wall = pb.RooftopType()
 
-                    set_basic_data_pyxb(pyxb_wall, out_wall)
-                    set_layer_data_pyxb(pyxb_wall, out_wall)
+                    set_basic_data_pyxb(pyxb_wall, rt)
+                    set_layer_data_pyxb(pyxb_wall, rt)
 
                     pyxb_zone.Rooftop.append(pyxb_wall)
 
-                if type(out_wall).__name__ == "GroundFloor":
+            for gf in zone.ground_floors:
+
+                if type(gf).__name__ == "GroundFloor":
 
                     pyxb_wall = pb.GroundFloorType()
 
-                    set_basic_data_pyxb(pyxb_wall, out_wall)
-                    set_layer_data_pyxb(pyxb_wall, out_wall)
+                    set_basic_data_pyxb(pyxb_wall, gf)
+                    set_layer_data_pyxb(pyxb_wall, gf)
 
                     pyxb_zone.GroundFloor.append(pyxb_wall)
 
