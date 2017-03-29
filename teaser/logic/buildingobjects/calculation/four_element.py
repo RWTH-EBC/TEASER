@@ -289,7 +289,7 @@ class FourElement(object):
     ua_value_win : float [W/K]
         U-Value times outer wall area.
     u_value_win : float [W/(m2K)]
-        U-Value of windows.
+        Are weighted U-Value of windows.
     r_conv_inner_win : float [K/W]
         Sum of convective resistances for all windows facing the
         inside of this thermal zone.
@@ -1592,6 +1592,7 @@ class FourElement(object):
 
         # UA-Value
         self.ua_value_win = 0.0
+        self.u_value_win = 0.0
 
         # resistances for heat transfer facing the inside of this thermal zone
         self.r_conv_inner_win = 0.0

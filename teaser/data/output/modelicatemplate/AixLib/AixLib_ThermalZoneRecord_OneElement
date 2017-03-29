@@ -14,7 +14,7 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     alphaWin = ${zone.model_attr.alpha_conv_inner_win},
     RWin = ${zone.model_attr.r1_win},
     gWin = ${zone.model_attr.weighted_g_value},
-    UWin= ${zone.model_attr.ua_value_win},
+    UWin= ${zone.model_attr.u_value_win},
     ratioWinConRad = ${zone.model_attr.ratio_conv_rad_inner_win},
     AExt = ${get_list(zone.model_attr.facade_areas)},
     alphaExt = ${zone.model_attr.alpha_conv_inner_ow},
