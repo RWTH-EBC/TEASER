@@ -1677,12 +1677,15 @@ class Test_teaser(object):
                             usage="single_family_dwelling",
                             name="test1",
                             year_of_construction=1988,
-                            number_of_floors=1,
-                            height_of_floors=7,
-                            net_leased_area=1988,
-                            number_of_apartments=1)
+                            number_of_floors=15,
+                            height_of_floors=6,
+                            net_leased_area=1988)
         prj.calc_all_buildings()
-        prj.export_aixlib(internal_id=prj.buildings[-1])
-        prj.export_annex(internal_id=prj.buildings[-1])
+        prj.export_aixlib(internal_id=prj.buildings[-1].internal_id)
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'Annex60'
+        prj.calc_all_buildings()
+        prj.export_annex(internal_id=prj.buildings[-1].internal_id)
 
         prj.set_default(load_data="Test")

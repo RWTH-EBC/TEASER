@@ -1195,8 +1195,7 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
-                else:
-                    pass
+
 
     def export_annex(
             self,
@@ -1240,8 +1239,7 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
-                else:
-                    pass
+
 
     def export_parameters_txt(self, path=None):
         """Exports parameters of all buildings in a readable text file
