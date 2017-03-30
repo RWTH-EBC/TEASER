@@ -255,21 +255,25 @@ def save_teaser_xml(path, project):
 
                     pyxb_zone.InnerWall.append(pyxb_wall)
 
-                if type(in_wall).__name__ == "Ceiling":
+            for ceil in zone.ceilings:
+
+                if type(ceil).__name__ == "Ceiling":
 
                     pyxb_wall = pb.CeilingType()
 
-                    set_basic_data_pyxb(pyxb_wall, in_wall)
-                    set_layer_data_pyxb(pyxb_wall, in_wall)
+                    set_basic_data_pyxb(pyxb_wall, ceil)
+                    set_layer_data_pyxb(pyxb_wall, ceil)
 
                     pyxb_zone.Ceiling.append(pyxb_wall)
 
-                if type(in_wall).__name__ == "Floor":
+            for floor in zone.floors:
+
+                if type(floor).__name__ == "Floor":
 
                     pyxb_wall = pb.FloorType()
 
-                    set_basic_data_pyxb(pyxb_wall, in_wall)
-                    set_layer_data_pyxb(pyxb_wall, in_wall)
+                    set_basic_data_pyxb(pyxb_wall, floor)
+                    set_layer_data_pyxb(pyxb_wall, floor)
 
                     pyxb_zone.Floor.append(pyxb_wall)
 
