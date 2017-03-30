@@ -2388,7 +2388,7 @@ class Test_teaser(object):
                 'testfiles',
                 'teaser_v4.teaserXML'))
 
-    def test_v4_bindings(self):
+    def test_v39_bindings(self):
         """
         Tests the old v39 project bindings
         """
