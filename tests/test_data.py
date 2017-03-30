@@ -1917,6 +1917,48 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_rt == \
                [1]
 
+    def test_calc_one_element(self):
+        """test of calc_two_element"""
+        prj.set_default()
+        helptest.building_test2(prj)
+
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
+        therm_zone.calc_zone_parameters(
+            number_of_elements=1,
+            merge_windows=True)
+
+        zone_attr = therm_zone.model_attr
+        assert round(zone_attr.area_ow, 1) == 328.0
+        assert round(zone_attr.ua_value_ow, 16) == 135.5818558809656
+        assert round(zone_attr.r_conv_inner_ow, 16) == 0.0016512549537649
+        assert round(zone_attr.r_rad_inner_ow, 16) == 0.000609756097561
+
+        assert round(zone_attr.r_conv_outer_ow, 9) == 0.000265957
+        assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.84634
+        assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
+        assert round(zone_attr.r1_ow, 15) == 0.000772773294534
+        assert round(zone_attr.c1_ow, 5) == 3648580.59312
+        assert round(zone_attr.r_rest_ow, 14) == 0.00461875570532
+
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
+        therm_zone.calc_zone_parameters(
+            number_of_elements=1,
+            merge_windows=False)
+
+        zone_attr = therm_zone.model_attr
+        assert round(zone_attr.area_ow, 1) == 328.0
+        assert round(zone_attr.ua_value_ow, 16) == 135.5818558809656
+        assert round(zone_attr.r_conv_inner_ow, 16) == 0.0016512549537649
+        assert round(zone_attr.r_rad_inner_ow, 16) == 0.000609756097561
+
+        assert round(zone_attr.r_conv_outer_ow, 9) == 0.000265957
+        assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.84634
+        assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
+        assert round(zone_attr.r1_win, 13) == 0.0199004975124
+        assert round(zone_attr.r1_ow, 15) == 0.001007515484109
+        assert round(zone_attr.c1_ow, 5) == 3648580.59312
+        assert round(zone_attr.r_rest_ow, 14) == 0.00585224061345
+
     def test_calc_two_element(self):
         """test of calc_two_element"""
         prj.set_default()
@@ -1932,23 +1974,15 @@ class Test_teaser(object):
         assert round(zone_attr.ua_value_ow, 16) == 135.5818558809656
         assert round(zone_attr.r_conv_inner_ow, 16) == 0.0016512549537649
         assert round(zone_attr.r_rad_inner_ow, 16) == 0.000609756097561
-        outer_conv_roof_temp = sum(
-            1 / roof.r_outer_conv for roof in therm_zone.rooftops)
-        # old calc was only ow, in the new core we calc outer walls plus
-        # rooftops, therefore we need to subtract it.
-        r_outer_conv_ow_temp = 1 / (
-            (1 / zone_attr.r_conv_outer_ow) - outer_conv_roof_temp)
-        assert round(r_outer_conv_ow_temp, 9) == 0.001041667
+        assert round(zone_attr.r_conv_outer_ow, 9) == 0.000265957
         assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.84634
         assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
-        assert round(zone_attr.r1_win, 15) == 0.003316749585406
         assert round(zone_attr.r1_ow, 15) == 0.000772773294534
+        assert round(zone_attr.c1_ow, 5) == 3648580.59312
         assert round(zone_attr.r1_iw, 15) == 0.009719561140816
-        # old calc core was without inner window radiation and without
-        # combined alpha
-        r_rest = zone_attr.r_rest_ow + 1 / (zone_attr.alpha_comb_outer_ow *
-                                            zone_attr.area_ow)
-        assert round(r_rest, 15) == 0.004740706924836
+        assert round(zone_attr.c1_iw, 5) == 319983.51874
+
+        assert round(zone_attr.r_rest_ow, 14) == 0.00461875570532
 
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.calc_zone_parameters(
@@ -1960,30 +1994,161 @@ class Test_teaser(object):
         assert round(zone_attr.ua_value_ow, 16) == 135.5818558809656
         assert round(zone_attr.r_conv_inner_ow, 16) == 0.0016512549537649
         assert round(zone_attr.r_rad_inner_ow, 16) == 0.000609756097561
-        outer_conv_roof_temp = sum(
-            1 / roof.r_outer_conv for roof in therm_zone.rooftops)
-        # old calc was only ow, in the new core we calc outer walls plus
-        # rooftops, therefore we need to subtract it.
-        r_outer_conv_ow_temp = 1 / (
-            (1 / zone_attr.r_conv_outer_ow) - outer_conv_roof_temp)
-        assert round(r_outer_conv_ow_temp, 9) == 0.001041667
+        assert round(zone_attr.r_conv_outer_ow, 9) == 0.000265957
         assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.84634
         assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
-        # old r1_win
-        sum_r1_win = 0
-        for win_count in therm_zone.windows:
-            sum_r1_win += 1 / (win_count.r1 + win_count.r_outer_comb)
-        r1_win_temp = 1 / sum_r1_win
-        # new r1_win
-        assert round(r1_win_temp, 15) == 0.02212271973466
-        assert round(zone_attr.r1_win, 15) == 0.019900497512438001
+        assert round(zone_attr.r1_win, 13) == 0.0199004975124
         assert round(zone_attr.r1_ow, 15) == 0.001007515484109
+        assert round(zone_attr.c1_ow, 5) == 3648580.59312
         assert round(zone_attr.r1_iw, 15) == 0.009719561140816
-        # old r_rest
-        r_rest_ow = zone_attr.r_total_ow - zone_attr.r1_ow -\
-            1 / (1 / zone_attr.r_conv_inner_ow + 1 / zone_attr.r_rad_inner_ow)
-        assert round(r_rest_ow, 15) == 0.005922787404456
-        assert round(zone_attr.r_rest_ow, 15) == 0.005852240613452
+        assert round(zone_attr.r_rest_ow, 14) == 0.00585224061345
+
+    def test_calc_three_element(self):
+        """test of calc_two_element"""
+        prj.set_default()
+        helptest.building_test2(prj)
+
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
+        therm_zone.calc_zone_parameters(
+            number_of_elements=3,
+            merge_windows=True)
+
+        zone_attr = therm_zone.model_attr
+        assert round(zone_attr.area_ow, 1) == 188.0
+        assert round(zone_attr.ua_value_ow, 16) == 77.23037843150993
+        assert round(zone_attr.r_conv_inner_ow, 16) == 0.0027203482045702
+        assert round(zone_attr.r_rad_inner_ow, 16) == 0.001063829787234
+        assert round(zone_attr.r_conv_outer_ow, 9) == 0.000265957
+        assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.95532
+        assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
+        assert round(zone_attr.r1_ow, 14) == 0.00114890338306
+        assert round(zone_attr.c1_ow, 5) == 2091259.60825
+        assert round(zone_attr.r1_iw, 15) == 0.009719561140816
+        assert round(zone_attr.c1_iw, 5) == 319983.51874
+        assert round(zone_attr.r_rest_ow, 11) == 0.00702003101
+        assert round(zone_attr.area_gf, 1) == 140.0
+        assert round(zone_attr.ua_value_gf, 16) == 58.351477449455686
+        assert round(zone_attr.r_conv_inner_gf, 16) == 0.0042016806722689
+        assert round(zone_attr.r_rad_inner_gf, 16) == 0.0014285714285714
+        assert round(zone_attr.alpha_conv_inner_gf, 5) == 1.7
+        assert round(zone_attr.alpha_rad_inner_gf, 1) == 5.0
+        assert round(zone_attr.r1_gf, 14) == 0.00236046484848
+        assert round(zone_attr.c1_gf, 5) == 1557320.98487
+        assert round(zone_attr.r_rest_gf, 13) == 0.0137109637229
+
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
+        therm_zone.calc_zone_parameters(
+            number_of_elements=3,
+            merge_windows=False)
+
+        zone_attr = therm_zone.model_attr
+        assert round(zone_attr.area_ow, 1) == 188.0
+        assert round(zone_attr.ua_value_ow, 16) == 77.23037843150993
+        assert round(zone_attr.r_conv_inner_ow, 16) == 0.0027203482045702
+        assert round(zone_attr.r_rad_inner_ow, 16) == 0.001063829787234
+        assert round(zone_attr.r_conv_outer_ow, 9) == 0.000265957
+        assert round(zone_attr.alpha_conv_inner_ow, 5) == 1.95532
+        assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
+        assert round(zone_attr.r1_win, 13) == 0.0199004975124
+        assert round(zone_attr.r1_ow, 13) == 0.0017577929723
+        assert round(zone_attr.c1_ow, 5) == 2091259.60825
+        assert round(zone_attr.r1_iw, 15) == 0.009719561140816
+        assert round(zone_attr.c1_iw, 5) == 319983.51874
+        assert round(zone_attr.r_rest_ow, 13) == 0.0102102921341
+        assert round(zone_attr.area_gf, 1) == 140.0
+        assert round(zone_attr.ua_value_gf, 16) == 58.351477449455686
+        assert round(zone_attr.r_conv_inner_gf, 16) == 0.0042016806722689
+        assert round(zone_attr.r_rad_inner_gf, 16) == 0.0014285714285714
+        assert round(zone_attr.alpha_conv_inner_gf, 5) == 1.7
+        assert round(zone_attr.alpha_rad_inner_gf, 1) == 5.0
+        assert round(zone_attr.r1_gf, 14) == 0.00236046484848
+        assert round(zone_attr.c1_gf, 5) == 1557320.98487
+        assert round(zone_attr.r_rest_gf, 13) == 0.0137109637229
+
+    def test_calc_four_element(self):
+        """test of calc_two_element"""
+        prj.set_default()
+        helptest.building_test2(prj)
+
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
+        therm_zone.calc_zone_parameters(
+            number_of_elements=4,
+            merge_windows=True)
+
+        zone_attr = therm_zone.model_attr
+        assert round(zone_attr.area_ow, 1) == 48.0
+        assert round(zone_attr.ua_value_ow, 16) == 19.83577523748189
+        assert round(zone_attr.r_conv_inner_ow, 16) == 0.007716049382716
+        assert round(zone_attr.r_rad_inner_ow, 16) == 0.0041666666666667
+        assert round(zone_attr.r_conv_outer_ow, 9) == 0.001041667
+        assert round(zone_attr.alpha_conv_inner_ow, 5) == 2.7
+        assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
+        assert round(zone_attr.r1_ow, 14) == 0.00223838915931
+        assert round(zone_attr.c1_ow, 5) == 533938.62338
+        assert round(zone_attr.r1_iw, 14) == 0.00971956114082
+        assert round(zone_attr.c1_iw, 5) == 319983.51874
+        assert round(zone_attr.r_rest_ow, 13) == 0.0138583242416
+        assert round(zone_attr.area_gf, 1) == 140.0
+        assert round(zone_attr.ua_value_gf, 16) == 58.351477449455686
+        assert round(zone_attr.r_conv_inner_gf, 16) == 0.0042016806722689
+        assert round(zone_attr.r_rad_inner_gf, 16) == 0.0014285714285714
+        assert round(zone_attr.alpha_conv_inner_gf, 5) == 1.7
+        assert round(zone_attr.alpha_rad_inner_gf, 1) == 5.0
+        assert round(zone_attr.r1_gf, 14) == 0.00236046484848
+        assert round(zone_attr.c1_gf, 5) == 1557320.98487
+        assert round(zone_attr.r_rest_gf, 13) == 0.0137109637229
+
+        assert round(zone_attr.area_rt, 1) == 140.0
+        assert round(zone_attr.ua_value_rt, 16) == 57.394603194028036
+        assert round(zone_attr.r_conv_inner_rt, 16) == 0.0042016806722689
+        assert round(zone_attr.r_rad_inner_rt, 16) == 0.0014285714285714
+        assert round(zone_attr.r_conv_outer_rt, 9) == 0.000357143
+        assert round(zone_attr.alpha_conv_inner_rt, 5) == 1.7
+        assert round(zone_attr.alpha_rad_inner_rt, 1) == 5.0
+        assert round(zone_attr.r1_rt, 14) == 0.00236046484848
+        assert round(zone_attr.c1_rt, 5) == 1557320.98487
+        assert round(zone_attr.r_rest_rt, 13) == 0.0137109637229
+
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
+        therm_zone.calc_zone_parameters(
+            number_of_elements=4,
+            merge_windows=False)
+
+        zone_attr = therm_zone.model_attr
+        assert round(zone_attr.area_ow, 1) == 48.0
+        assert round(zone_attr.ua_value_ow, 16) == 19.83577523748189
+        assert round(zone_attr.r_conv_inner_ow, 16) == 0.007716049382716
+        assert round(zone_attr.r_rad_inner_ow, 16) == 0.0041666666666667
+        assert round(zone_attr.r_conv_outer_ow, 9) == 0.001041667
+        assert round(zone_attr.alpha_conv_inner_ow, 5) == 2.7
+        assert round(zone_attr.alpha_rad_inner_ow, 1) == 5.0
+        assert round(zone_attr.r1_win, 13) == 0.0199004975124
+        assert round(zone_attr.r1_ow, 14) == 0.00688468914141
+        assert round(zone_attr.c1_ow, 5) == 533938.62338
+        assert round(zone_attr.r1_iw, 14) == 0.00971956114082
+        assert round(zone_attr.c1_iw, 5) == 319983.51874
+        assert round(zone_attr.r_rest_ow, 13) == 0.0399903108586
+
+        assert round(zone_attr.area_gf, 1) == 140.0
+        assert round(zone_attr.ua_value_gf, 16) == 58.351477449455686
+        assert round(zone_attr.r_conv_inner_gf, 16) == 0.0042016806722689
+        assert round(zone_attr.r_rad_inner_gf, 16) == 0.0014285714285714
+        assert round(zone_attr.alpha_conv_inner_gf, 5) == 1.7
+        assert round(zone_attr.alpha_rad_inner_gf, 1) == 5.0
+        assert round(zone_attr.r1_gf, 14) == 0.00236046484848
+        assert round(zone_attr.c1_gf, 5) == 1557320.98487
+        assert round(zone_attr.r_rest_gf, 13) == 0.0137109637229
+
+        assert round(zone_attr.area_rt, 1) == 140.0
+        assert round(zone_attr.ua_value_rt, 16) == 57.394603194028036
+        assert round(zone_attr.r_conv_inner_rt, 16) == 0.0042016806722689
+        assert round(zone_attr.r_rad_inner_rt, 16) == 0.0014285714285714
+        assert round(zone_attr.r_conv_outer_rt, 9) == 0.000357143
+        assert round(zone_attr.alpha_conv_inner_rt, 5) == 1.7
+        assert round(zone_attr.alpha_rad_inner_rt, 1) == 5.0
+        assert round(zone_attr.r1_rt, 14) == 0.00236046484848
+        assert round(zone_attr.c1_rt, 5) == 1557320.98487
+        assert round(zone_attr.r_rest_rt, 13) == 0.0137109637229
 
     def test_volume_zone(self):
         """test of volume_zone"""
