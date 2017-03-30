@@ -1609,7 +1609,7 @@ class Test_teaser(object):
         assert round(calc_attr.alpha_conv_outer_win, 1) == 20.0
         assert round(calc_attr.weighted_g_value, 3) == 0.789
 
-    def test_calc_chain_matrix_three(self):
+    def test_calc_chain_matrix_four(self):
         """test of calc_chain_matrix"""
         from teaser.logic.buildingobjects.calculation.four_element import \
             FourElement
@@ -1645,33 +1645,117 @@ class Test_teaser(object):
         assert round(r1_iw, 13) == 0.0097195611408
         assert round(c1_iw, 6) == 319983.518743
 
-    def test_calc_weightfactor(self):
+    def test_calc_weightfactor_one(self):
         """test of calc_weightfactor"""
         prj.set_default()
         helptest.building_test2(prj)
-        prj.buildings[-1].calc_building_parameter(number_of_elements=2,
+        prj.buildings[-1].calc_building_parameter(number_of_elements=1,
                                                   merge_windows=True,
-                                                  used_library='AixLib')
+                                                  used_library='Annex60')
 
         calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
-        print(calc_attr.weightfactor_ow)
+
         weightfactors_test_list = [
+            0,
             0.024530650180761254,
             0.03434291025306576,
             0.024530650180761254,
             0.03434291025306576,
             0.3407000330729792]
 
-        assert calc_attr.weightfactor_ow.sort() == \
-            weightfactors_test_list.sort()
+        calc_attr.weightfactor_ow.sort()
+        weightfactors_test_list.sort()
+
+        assert calc_attr.weightfactor_ow == \
+            weightfactors_test_list
+
         weightfactors_test_list = [
+            0.08674342795625017,
+            0.0,
+            0.0,
+            0.0,
+            0.054214642472656345,
+            0.054214642472656345]
+        calc_attr.weightfactor_win.sort()
+        weightfactors_test_list.sort()
+
+        assert calc_attr.weightfactor_win ==\
+            weightfactors_test_list
+        assert calc_attr.weightfactor_ground == \
+               0.34638013315780397
+
+        prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
+        prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
+
+        prj.buildings[-1].calc_building_parameter(number_of_elements=1,
+                                                  merge_windows=False,
+                                                  used_library='AixLib')
+        calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
+
+        weightfactors_test_list = [
+            0.03047939672771178,
+            0.423320678280269,
+            0.03047939672771178,
+            0.0,
+            0.04267115541879649,
+            0.04267115541879649]
+        calc_attr.weightfactor_ow.sort()
+        weightfactors_test_list.sort()
+
+        assert calc_attr.weightfactor_ow ==\
+            weightfactors_test_list
+
+
+        weightfactors_test_list = [
+            0.44444444444444453,
+            0.0,
+            0.0,
+            0.0,
+            0.2777777777777778,
+            0.2777777777777778]
+
+        calc_attr.weightfactor_win.sort()
+        weightfactors_test_list.sort()
+        assert calc_attr.weightfactor_win.sort() ==\
+            weightfactors_test_list.sort()
+        assert calc_attr.weightfactor_ground == \
+               0.4303782174267145
+
+    def test_calc_weightfactor_two(self):
+        """test of calc_weightfactor"""
+        prj.set_default()
+        helptest.building_test2(prj)
+        prj.buildings[-1].calc_building_parameter(number_of_elements=2,
+                                                  merge_windows=True,
+                                                  used_library='Annex60')
+
+        calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
+
+        weightfactors_test_list = [
+            0.0,
+            0.024530650180761254,
+            0.03434291025306576,
+            0.024530650180761254,
+            0.03434291025306576,
+            0.3407000330729792]
+        calc_attr.weightfactor_ow.sort()
+        weightfactors_test_list.sort()
+
+        assert calc_attr.weightfactor_ow == \
+            weightfactors_test_list
+        weightfactors_test_list = [
+            0.0,
             0.0,
             0.054214642472656345,
             0.08674342795625017,
             0.054214642472656345,
             0.0]
-        assert calc_attr.weightfactor_win.sort() ==\
-            weightfactors_test_list.sort()
+        calc_attr.weightfactor_win.sort()
+        weightfactors_test_list.sort()
+        assert calc_attr.weightfactor_win ==\
+            weightfactors_test_list
+        assert calc_attr.weightfactor_ground == \
+               0.34638013315780397
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1682,23 +1766,156 @@ class Test_teaser(object):
         calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
 
         weightfactors_test_list = [
+            0.0,
             0.03047939672771178,
             0.04267115541879649,
             0.03047939672771178,
             0.04267115541879649,
             0.423320678280269]
-
-        assert calc_attr.weightfactor_ow.sort() ==\
-            weightfactors_test_list.sort()
+        calc_attr.weightfactor_ow.sort()
+        weightfactors_test_list.sort()
+        assert calc_attr.weightfactor_ow ==\
+            weightfactors_test_list
 
         weightfactors_test_list = [
+            0.0,
             0.0,
             0.27777777777777778,
             0.44444444444444453,
             0.27777777777777778,
             0.0]
-        assert calc_attr.weightfactor_win.sort() ==\
-            weightfactors_test_list.sort()
+
+        calc_attr.weightfactor_win.sort()
+        weightfactors_test_list.sort()
+        assert calc_attr.weightfactor_win ==\
+            weightfactors_test_list
+        assert calc_attr.weightfactor_ground == \
+               0.4303782174267145
+
+    def test_calc_weightfactor_three(self):
+        """test of calc_weightfactor"""
+        prj.set_default()
+        helptest.building_test2(prj)
+        prj.buildings[-1].calc_building_parameter(number_of_elements=3,
+                                                  merge_windows=True,
+                                                  used_library='Annex60')
+
+        calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
+        weightfactors_test_list = [
+            0.03753045374718346,
+            0.5212510365068732,
+            0.05254263524605685,
+            0.03753045374718346,
+            0.05254263524605685]
+        calc_attr.weightfactor_ow.sort()
+        weightfactors_test_list.sort()
+
+        assert calc_attr.weightfactor_ow == \
+            weightfactors_test_list
+        weightfactors_test_list = [
+            0.13271234911406493,
+            0.0,
+            0.08294521819629057,
+            0.0,
+            0.08294521819629057]
+        calc_attr.weightfactor_win.sort()
+        weightfactors_test_list.sort()
+        assert calc_attr.weightfactor_win ==\
+            weightfactors_test_list
+        assert calc_attr.weightfactor_ground == \
+               0
+
+        prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
+        prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
+
+        prj.buildings[-1].calc_building_parameter(number_of_elements=3,
+                                                  merge_windows=False,
+                                                  used_library='AixLib')
+        calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
+
+        weightfactors_test_list = [
+            0.05350813058801943,
+            0.7431609731775066,
+            0.07491138282322722,
+            0.05350813058801943,
+            0.07491138282322722]
+
+        calc_attr.weightfactor_ow.sort()
+        weightfactors_test_list.sort()
+
+        assert calc_attr.weightfactor_ow ==\
+            weightfactors_test_list
+
+        weightfactors_test_list = [
+            0.44444444444444453,
+            0.0,
+            0.2777777777777778,
+            0.0,
+            0.2777777777777778]
+        calc_attr.weightfactor_win.sort()
+        weightfactors_test_list.sort()
+        assert calc_attr.weightfactor_win ==\
+            weightfactors_test_list
+        assert calc_attr.weightfactor_ground == \
+               0
+
+    def test_calc_weightfactor_four(self):
+        """test of calc_weightfactor"""
+        prj.set_default()
+        helptest.building_test2(prj)
+        prj.buildings[-1].calc_building_parameter(number_of_elements=4,
+                                                  merge_windows=True,
+                                                  used_library='Annex60')
+
+        calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
+
+        weightfactors_test_list = [
+            0.07839276240589141, 0.10974986736824797, 0.07839276240589141,
+            0.10974986736824797]
+
+        calc_attr.weightfactor_ow.sort()
+        weightfactors_test_list.sort()
+
+        assert calc_attr.weightfactor_ow == \
+            weightfactors_test_list
+        weightfactors_test_list = [
+            0.27720655131187616, 0.17325409456992255, 0.0, 0.17325409456992255]
+        calc_attr.weightfactor_win.sort()
+        weightfactors_test_list.sort()
+        assert calc_attr.weightfactor_win ==\
+            weightfactors_test_list
+        assert calc_attr.weightfactor_ground == \
+               0
+        assert calc_attr.weightfactor_rt == \
+               [1]
+
+        prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
+        prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
+
+        prj.buildings[-1].calc_building_parameter(number_of_elements=4,
+                                                  merge_windows=False,
+                                                  used_library='AixLib')
+        calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
+
+        weightfactors_test_list = [
+            0.20833333333333331, 0.29166666666666663, 0.20833333333333331,
+            0.29166666666666663]
+        calc_attr.weightfactor_ow.sort()
+        weightfactors_test_list.sort()
+        assert calc_attr.weightfactor_ow ==\
+            weightfactors_test_list
+
+        weightfactors_test_list = [
+            0.44444444444444453, 0.2777777777777778, 0.0, 0.2777777777777778]
+
+        calc_attr.weightfactor_win.sort()
+        weightfactors_test_list.sort()
+        assert calc_attr.weightfactor_win ==\
+            weightfactors_test_list
+        assert calc_attr.weightfactor_ground == \
+               0
+        assert calc_attr.weightfactor_rt == \
+               [1]
 
     def test_calc_two_element(self):
         """test of calc_two_element"""
