@@ -24,7 +24,7 @@ model ${zone.parent.name}_${zone.name}
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
   Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${zone.model_attr.n_outer},
-  UWin=${zone.model_attr.ua_value_win/zone.model_attr.area_win})
+  UWin=${zone.model_attr.u_value_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
   Annex60.ThermalZones.ReducedOrder.RC.FourElements
