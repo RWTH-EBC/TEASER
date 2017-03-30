@@ -2377,3 +2377,12 @@ class Test_teaser(object):
         prj.export_annex(internal_id=prj.buildings[-1].internal_id)
 
         prj.set_default(load_data="Test")
+
+    def test_v4_bindings(self):
+        """
+        Tests the old v4 project bindings
+        """
+        prj.set_default()
+        prj.load_project(
+            os.path.join(os.path.dirname(__file__), 'testfiles',
+                'teaser_v4.teaserXML'))
