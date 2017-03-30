@@ -902,7 +902,6 @@ class Test_teaser(object):
             neighbour_buildings=None,
             construction_type=None)
 
-
         prj.add_residential(
             method='urbanrenet',
             usage='est1a',
@@ -2384,5 +2383,18 @@ class Test_teaser(object):
         """
         prj.set_default()
         prj.load_project(
-            os.path.join(os.path.dirname(__file__), 'testfiles',
+            os.path.join(
+                os.path.dirname(__file__),
+                'testfiles',
                 'teaser_v4.teaserXML'))
+
+    def test_v4_bindings(self):
+        """
+        Tests the old v39 project bindings
+        """
+        prj.set_default()
+        prj.load_project(
+            os.path.join(
+                os.path.dirname(__file__),
+                'testfiles',
+                'teaser_v39.teaserXML'))
