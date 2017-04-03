@@ -2,7 +2,7 @@ from setuptools import setup
 from sys import platform
 
 setup(name='teaser',
-      version='0.5.0',
+      version='0.5.1',
       description='Tool for Energy Analysis and Simulation for '
                   'Efficient Retrofit ',
       url='https://github.com/RWTH-EBC/TEASER',
@@ -36,7 +36,13 @@ setup(name='teaser',
           'teaser.data.bindings.v_0_4',
           'teaser.data.bindings.v_0_5',
           'teaser.data.input',
+          'teaser.data.input.inputdata',
+          'teaser.data.input.inputdata.weatherdata',
           'teaser.data.output',
+          'teaser.data.output.texttemplate',
+          'teaser.data.output.modelicatemplate',
+          'teaser.data.output.modelicatemplate.AixLib',
+          'teaser.data.output.modelicatemplate.IBPSA',
           'teaser.examples',
           'teaser.examples.simulation',
           'teaser.examples.verification',
