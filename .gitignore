@@ -36,6 +36,7 @@
 #####################
 .cache/
 __pycache__/
+.coverage
 
 #pip install #
 #####################
