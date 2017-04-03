@@ -73,9 +73,9 @@ class Project(object):
     merge_windows_calc : bool
         True for merging the windows into the outer walls, False for
         separate resistance for window, default is False (only supported for
-        Annex60)
+        IBPSA)
     used_library_calc : str
-        used library (AixLib and Annex60 are supported)
+        used library (AixLib and IBPSA are supported)
     """
 
     def __init__(self, load_data=True):
@@ -133,7 +133,7 @@ class Project(object):
             For AixLib vdi calculation is True, ebc calculation is False
 
         used_library_calc : str
-            used library (AixLib and Annex60 are supported)
+            used library (AixLib and IBPSA are supported)
 
         """
         if raise_errors is True:
@@ -1150,7 +1150,7 @@ class Project(object):
         double pane glazing) and supporting models, like tables and weather
         model. In contrast to versions < 0.5 TEASER now does not
         support any model options, as we observed no need, since single
-        ThermalZones are identically with Annex60 models. If you miss one of
+        ThermalZones are identically with IBPSA models. If you miss one of
         the old options please contact us.
 
         Parameters
@@ -1353,9 +1353,9 @@ class Project(object):
     @used_library_calc.setter
     def used_library_calc(self, value):
 
-        ass_error_1 = "used library needs to be AixLib or Annex60"
+        ass_error_1 = "used library needs to be AixLib or IBPSA"
 
-        assert value != ["AixLib", "Annex60"], ass_error_1
+        assert value != ["AixLib", "IBPSA"], ass_error_1
 
         self._used_library_calc = value
 
