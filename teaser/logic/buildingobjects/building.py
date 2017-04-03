@@ -8,7 +8,7 @@ import random
 import re
 import warnings
 from teaser.logic.buildingobjects.calculation.aixlib import AixLib
-from teaser.logic.buildingobjects.calculation.annex60 import Annex60
+from teaser.logic.buildingobjects.calculation.annex60 import IBPSA
 
 
 from teaser.logic.buildingobjects.buildingsystems.buildingahu \
@@ -103,13 +103,13 @@ class Building(object):
     merge_windows_calc : boolean
         True for merging the windows into the outer wall's RC-combination,
         False for separate resistance for window, default is False. (Only
-        supported for Annex60)
+        supported for IBPSA)
     used_library_calc : str
         'AixLib' for https://github.com/RWTH-EBC/AixLib
-        'Annex60' for https://github.com/iea-annex60/modelica-annex60
+        'IBPSA' for https://github.com/ibpsa/modelica
     library_attr : Annex() or AixLib() instance
         Classes with specific functions and attributes for building models in
-        Annex60 and AixLib. Python classes can be found in calculation package.
+        IBPSA and AixLib. Python classes can be found in calculation package.
 
     """
 
@@ -434,7 +434,7 @@ class Building(object):
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False
         used_library : str
-            used library (AixLib and Annex60 are supported)
+            used library (AixLib and IBPSA are supported)
         """
 
         self._number_of_elements_calc = number_of_elements
@@ -457,8 +457,8 @@ class Building(object):
             if self.used_library_calc == 'AixLib':
                 self.library_attr = AixLib(parent=self)
                 self.library_attr.calc_auxiliary_attr()
-            elif self.used_library_calc == 'Annex60':
-                self.library_attr = Annex60(parent=self)
+            elif self.used_library_calc == 'IBPSA':
+                self.library_attr = IBPSA(parent=self)
         else:
             warnings.warn("You set conflicting options for the used library "
                           "in Building or Project class and "
@@ -470,8 +470,8 @@ class Building(object):
             if self.used_library_calc == 'AixLib':
                 self.library_attr = AixLib(parent=self)
                 self.library_attr.calc_auxiliary_attr()
-            elif self.used_library_calc == 'Annex60':
-                self.library_attr = Annex60(parent=self)
+            elif self.used_library_calc == 'IBPSA':
+                self.library_attr = IBPSA(parent=self)
 
     def retrofit_building(
             self,
@@ -791,9 +791,9 @@ class Building(object):
     @used_library_calc.setter
     def used_library_calc(self, value):
 
-        ass_error_1 = "used library needs to be AixLib or Annex60"
+        ass_error_1 = "used library needs to be AixLib or IBPSA"
 
-        assert value != ["AixLib", "Annex60"], ass_error_1
+        assert value != ["AixLib", "IBPSA"], ass_error_1
 
         if self.parent is None and value is None:
             self._used_library_calc = "AixLib"
@@ -804,7 +804,7 @@ class Building(object):
 
         if self.used_library_calc == 'AixLib':
             self.library_attr = AixLib(parent=self)
-        elif self.used_library_calc == 'Annex60':
-            self.library_attr = Annex60(parent=self)
+        elif self.used_library_calc == 'IBPSA':
+            self.library_attr = IBPSA(parent=self)
 
 

@@ -141,7 +141,7 @@ class ThermalZone(object):
         merge_windows : bool
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False (Only
-            supported for Annex60)
+            supported for IBPSA)
 
         t_bt : float
             Time constant according to VDI 6007 (default t_bt = 5)
