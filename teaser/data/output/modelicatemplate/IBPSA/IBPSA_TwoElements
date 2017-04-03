@@ -3,13 +3,13 @@ within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_Models
 model ${zone.parent.name}_${zone.name}
   "This is the simulation model of ${zone.name} within building ${zone.parent.name} with traceable ID ${zone.parent.building_id}"
 
-  Annex60.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    calTSky=Annex60.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+  IBPSA.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
+    calTSky=IBPSA.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam="${zone.parent.parent.weather_file_path.replace("\\", "/")}")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${zone.model_attr.n_outer}](
+  IBPSA.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${zone.model_attr.n_outer}](
     each outSkyCon=true,
     each outGroCon=true,
     til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
@@ -17,17 +17,17 @@ model ${zone.parent.name}_${zone.name}
     azi = ${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${zone.model_attr.n_outer}](
+  IBPSA.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${zone.model_attr.n_outer}](
     til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
     each lat =  ${deg_to_rad(zone.parent.latitude)},
     azi=${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${zone.model_attr.n_outer},
+  IBPSA.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${zone.model_attr.n_outer},
   UWin=${zone.model_attr.u_value_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
-  Annex60.ThermalZones.ReducedOrder.RC.TwoElements
+  IBPSA.ThermalZones.ReducedOrder.RC.TwoElements
   thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
 % if zone.parent.library_attr.consider_heat_capacity is True:
@@ -60,7 +60,7 @@ model ${zone.parent.name}_${zone.name}
     "Thermal zone"
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 % if zone.model_attr.merge_windows is True:
-  Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
+  IBPSA.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
     n=${zone.model_attr.n_outer},
     wfGro=${zone.model_attr.weightfactor_ground},
     wfWall=${get_list(zone.model_attr.weightfactor_ow)},
@@ -72,7 +72,7 @@ model ${zone.parent.name}_${zone.name}
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
-  Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
+  IBPSA.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     n=${zone.model_attr.n_outer},
     wfGro=${zone.model_attr.weightfactor_ground},
     wfWall=${get_list(zone.model_attr.weightfactor_ow)},
@@ -105,7 +105,7 @@ model ${zone.parent.name}_${zone.name}
   Modelica.Blocks.Sources.Constant const[${zone.model_attr.n_outer}](each k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{-20,14},{-14,20}})));
-  Annex60.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
+  IBPSA.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(
     transformation(extent={{-100,-10},{-66,22}}),iconTransformation(
     extent={{-70,-12},{-50,8}})));

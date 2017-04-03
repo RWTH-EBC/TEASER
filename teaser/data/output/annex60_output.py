@@ -3,7 +3,7 @@
 
 """annex60_output
 
-This module contains function to call Templates for Annex60 model generation
+This module contains function to call Templates for IBPSA model generation
 """
 
 import teaser.data.output.aixlib_output as aixlib_output
@@ -17,10 +17,10 @@ def export_annex60(
         buildings,
         prj,
         path=None):
-    """Exports models for Annex60 library
+    """Exports models for IBPSA library
 
     Export a building to several models for
-    Annex60.ThermalZones.ReducedOrder. Depending on the chosen calculation
+    IBPSA.ThermalZones.ReducedOrder. Depending on the chosen calculation
     method models for 1, 2, 3, or 4 element model are exported. In addition
     you can specify if windows should be lumped into the walls, like it is
     done in VDI 6007 (merge_windows=True) or not. For each zone, one model is
@@ -62,25 +62,25 @@ def export_annex60(
 
     uses = uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
-        'Annex60(version="' + prj.buildings[-1].library_attr.version + '")']
+        'IBPSA(version="' + prj.buildings[-1].library_attr.version + '")']
 
     lookup = TemplateLookup(directories=[utilities.get_full_path(
         os.path.join('data', 'output', 'modelicatemplate'))])
     model_template_1 = Template(
         filename=utilities.get_full_path(
-            "data/output/modelicatemplate/Annex60/Annex60_OneElement"),
+            "data/output/modelicatemplate/IBPSA/IBPSA_OneElement"),
         lookup=lookup)
     model_template_2 = Template(
         filename=utilities.get_full_path(
-            "data/output/modelicatemplate/Annex60/Annex60_TwoElements"),
+            "data/output/modelicatemplate/IBPSA/IBPSA_TwoElements"),
         lookup=lookup)
     model_template_3 = Template(
         filename=utilities.get_full_path(
-            "data/output/modelicatemplate/Annex60/Annex60_ThreeElements"),
+            "data/output/modelicatemplate/IBPSA/IBPSA_ThreeElements"),
         lookup=lookup)
     model_template_4 = Template(
         filename=utilities.get_full_path(
-            "data/output/modelicatemplate/Annex60/Annex60_FourElements"),
+            "data/output/modelicatemplate/IBPSA/IBPSA_FourElements"),
         lookup=lookup)
 
     aixlib_output._help_package(
@@ -97,10 +97,10 @@ def export_annex60(
     for i, bldg in enumerate(buildings):
 
         ass_error = "You chose AixLib calculation, " \
-                    "but want to export Annex60 models, " \
+                    "but want to export IBPSA models, " \
                     "this is not possible"
 
-        assert bldg.used_library_calc == 'Annex60', ass_error
+        assert bldg.used_library_calc == 'IBPSA', ass_error
 
         bldg_path = os.path.join(path, bldg.name)
 
