@@ -1,7 +1,7 @@
 # Created May 2016
 # TEASER Development Team
 
-"""annex60_output
+"""ibpsa_output
 
 This module contains function to call Templates for IBPSA model generation
 """
@@ -13,7 +13,7 @@ from mako.template import Template
 from mako.lookup import TemplateLookup
 
 
-def export_annex60(
+def export_ibpsa(
         buildings,
         prj,
         path=None):
@@ -26,7 +26,7 @@ def export_annex60(
     done in VDI 6007 (merge_windows=True) or not. For each zone, one model is
     exported, if you want to combine all thermal zones into one model, consider
     using AixLib. The export includes internal gains from use conditions (
-    calculated in teaser.logic.calculation.annex60) but does not include any
+    calculated in teaser.logic.calculation.ibpsa) but does not include any
     heating or cooling equipment.
 
 
