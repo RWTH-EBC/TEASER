@@ -54,8 +54,10 @@ setup(name='teaser',
           'teaser.gui.guiimages',
           'teaser.gui.guiimages.OfficeBuildings',
           'teaser.gui.guiimages.Residentials',
-          'tests'],
+          'tests',
+          'tests.testfiles'],
       package_data={
+          'tests.testfiles': ['*.teaserXML'],
           'teaser.data.input.inputdata': ['*.xml'],
           'teaser.data.input.inputdata.weatherdata': [
               'DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos'],
