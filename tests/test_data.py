@@ -705,6 +705,7 @@ class Test_teaser(object):
 
     def test_export_parameters_txt(self):
         """test of the export of the readable parameter output"""
+        helptest.building_test2(prj)
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = True
         prj.used_library_calc = 'AixLib'
@@ -2230,6 +2231,19 @@ class Test_teaser(object):
         therm_zone.outer_walls[0].save_type_element(data_class=prj.data)
         therm_zone.inner_walls[0].save_type_element(data_class=prj.data)
         therm_zone.windows[0].save_type_element(data_class=prj.data)
+
+    def test_delete_type_element(self):
+        """test of save_type_element, no parameter checking"""
+        import os
+        # test load function
+        therm_zone = prj.buildings[-1].thermal_zones[-1]
+        path = os.path.join(utilities.get_default_path(),
+                            'unitTestTB.xml')
+        prj.data.path_tb = path
+        prj.data.load_tb_binding()
+        therm_zone.outer_walls[0].delete_type_element(data_class=prj.data)
+        therm_zone.inner_walls[0].delete_type_element(data_class=prj.data)
+        therm_zone.windows[0].delete_type_element(data_class=prj.data)
 
     # methods in Wall
 
