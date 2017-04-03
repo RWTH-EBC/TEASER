@@ -14,15 +14,14 @@ from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
-from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
-from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
+from teaser.logic.buildingobjects.buildingphysics.groundfloor import\
+    GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
 from teaser.project import Project
 import teaser.data.output.teaserxml_output as teaser_xml
 import teaser.data.output.citygml_output as city_gml
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
-from teaser.logic.buildingobjects.buildingphysics.groundfloor import GroundFloor
 
 
 class Controller():
@@ -200,7 +199,7 @@ class Controller():
         Lets CalcProject create a new building with the given ID.
         """
         return Building(current_project, openId)
-    
+
     @classmethod
     def click_update_building_button(self,
                                      project,
@@ -212,7 +211,7 @@ class Controller():
                                      net_leased_area,
                                      street,
                                      location,
-                                     update_archtertype):  
+                                     update_archtertype):
         for building in project.buildings:
             if building.internal_id == current_building.internal_id:
                 building.net_leased_area = net_leased_area
@@ -222,11 +221,11 @@ class Controller():
                 building.year_of_construction = year_of_construction
                 building.number_of_floors = number_of_floors
                 building.height_of_floors = height_of_floors
-                if update_archtertype == True:
+                if update_archtertype is True:
                     building._thermal_zones = []
                     building.generate_archetype()
         return project
-    
+
     @classmethod
     def click_update_building(self, project, index):
         """
@@ -301,66 +300,17 @@ class Controller():
 
         int_id = 0
 
-        if type_of_building == "Office":
+        mapping_dict = {
+            'Office': 'office',
+            'Institute 4': 'institute4',
+            'Institute 8': 'institute8',
+            'Institute General': 'institute'
+        }
 
-            building = parent.type_bldg_office(
-                name=name,
-                year_of_construction=year_of_construction,
-                number_of_floors=number_of_floors,
-                height_of_floors=height_of_floors,
-                net_leased_area=net_leased_area,
-                office_layout=type_building_attributes['layoutArea'],
-                window_layout=type_building_attributes['layoutWindowArea'],
-                construction_type=type_building_attributes['constructionType'])
-            building.street_name = street
-            building.city = location
-            int_id = building.internal_id
-
-        if type_of_building == "Institute 4":
-            building = parent.type_bldg_institute4(
-                name=name,
-                year_of_construction=year_of_construction,
-                number_of_floors=number_of_floors,
-                height_of_floors=height_of_floors,
-                net_leased_area=net_leased_area,
-                office_layout=type_building_attributes['layoutArea'],
-                window_layout=type_building_attributes['layoutWindowArea'],
-                construction_type=type_building_attributes['constructionType'])
-            building.street_name = street
-            building.city = location
-            int_id = building.internal_id
-
-        if type_of_building == "Institute 8":
-            building = parent.type_bldg_institute8(
-                name=name,
-                year_of_construction=year_of_construction,
-                number_of_floors=number_of_floors,
-                height_of_floors=height_of_floors,
-                net_leased_area=net_leased_area,
-                office_layout=type_building_attributes['layoutArea'],
-                window_layout=type_building_attributes['layoutWindowArea'],
-                construction_type=type_building_attributes['constructionType'])
-            building.street_name = street
-            building.city = location
-            int_id = building.internal_id
-
-        if type_of_building == "Institute General":
-            building = parent.type_bldg_institute(
-                name=name,
-                year_of_construction=year_of_construction,
-                number_of_floors=number_of_floors,
-                height_of_floors=height_of_floors,
-                net_leased_area=net_leased_area,
-                office_layout=type_building_attributes['layoutArea'],
-                window_layout=type_building_attributes['layoutWindowArea'],
-                construction_type=type_building_attributes['constructionType'])
-
-            building.street_name = street
-            building.city = location
-            int_id = building.internal_id
-
-        if type_of_building == "SingleFamilyDwelling":
-            building = parent.type_bldg_residential(
+        if type_of_building == 'SingleFamilyDwelling':
+            building = parent.add_residential(
+                method='iwu',
+                usage='single_family_dwelling',
                 name=name,
                 year_of_construction=year_of_construction,
                 number_of_floors=number_of_floors,
@@ -374,6 +324,22 @@ class Controller():
                 dormer=type_building_attributes['dormer'],
                 construction_type=type_building_attributes['constructionType'])
 
+            building.street_name = street
+            building.city = location
+            int_id = building.internal_id
+
+        else:
+            building = parent.add_non_residential(
+                method='bmvbs',
+                usage=mapping_dict[type_of_building],
+                name=name,
+                year_of_construction=year_of_construction,
+                number_of_floors=number_of_floors,
+                height_of_floors=height_of_floors,
+                net_leased_area=net_leased_area,
+                office_layout=type_building_attributes['layoutArea'],
+                window_layout=type_building_attributes['layoutWindowArea'],
+                construction_type=type_building_attributes['constructionType'])
             building.street_name = street
             building.city = location
             int_id = building.internal_id
@@ -398,10 +364,10 @@ class Controller():
 
         if path.endswith("teaserXML"):
             teaser_xml.save_teaser_xml(path, project)
-            print("Saved under: "+path)
+            print("Saved under: " + path)
         elif path.endswith("gml"):
             city_gml.save_gml(project, path)
-            print("Saved under: "+path)
+            print("Saved under: " + path)
 
     @classmethod
     def click_load_button(self, project, path):
@@ -477,8 +443,7 @@ class Controller():
         return project
 
     @classmethod
-    def click_export_button(self, project, building_model, zone_model, corG,
-                            internal_id, path_output_folder):
+    def click_export_button(self, project, internal_id, path_output_folder):
         '''
         Execute an export with Aixlib model.
 
@@ -507,14 +472,13 @@ class Controller():
         project.merge_windows_calc = False
         project.used_library_calc = 'AixLib'
         project.calc_all_buildings()
-        project.export_aixlib(building_model, zone_model, corG,
-                              internal_id, str(path_output_folder))
+        project.export_aixlib(internal_id, path=str(path_output_folder))
 
     @classmethod
     def click_export_button_annex(self, project, num_of_elem, merge_win,
                                   internal_id, path_output_folder):
         '''
-        Execute an export with Annex60 model.
+        Execute an export with IBPSA model.
 
         project : project()
             root class
@@ -539,10 +503,9 @@ class Controller():
 
         project.number_of_elements_calc = num_of_elem
         project.merge_windows_calc = merge_win
-        project.used_library_calc = 'Annex60'
+        project.used_library_calc = 'IBPSA'
         project.calc_all_buildings()
-        project.export_annex(internal_id,
-                             str(path_output_folder))
+        project.export_annex(internal_id, path=str(path_output_folder))
 
     @classmethod
     def click_change_all_constr(self,
@@ -589,29 +552,36 @@ class Controller():
         '''
 
         for zone in bldg.thermal_zones:
-            for wall in zone.outer_walls:
-                if element_type == "OuterWall" or element_type == "Rooftop":
-                    if wall.orientation == orientation:
-                        wall.tilt = tilt
-                        wall.inner_convection = inner_convection
-                        wall.inner_radiation = inner_radiation
-                        wall.outer_convection = outer_convection
-                        wall.outer_radiation = outer_radiation
-                        wall.layer = None
-                        for lay_count in layer_set:
-                            wall.add_layer(lay_count, lay_count.position)
-
-                else:
-                    if wall.orientation == orientation:
-                        wall.tilt = tilt
-                        wall.inner_convection = inner_convection
-                        wall.inner_radiation = inner_radiation
-                        wall.layer = None
-                        for lay_count in layer_set:
-                            wall.add_layer(lay_count, lay_count.position)
-
-            for win in zone.windows:
-                if element_type == "Window":
+            if element_type == "OuterWall":
+                for wall in zone.outer_walls:
+                    wall.tilt = tilt
+                    wall.inner_convection = inner_convection
+                    wall.inner_radiation = inner_radiation
+                    wall.outer_convection = outer_convection
+                    wall.outer_radiation = outer_radiation
+                    wall.layer = None
+                    for lay_count in layer_set:
+                        wall.add_layer(lay_count, lay_count.id)
+            if element_type == "Rooftop":
+                for roof in zone.rooftops:
+                    roof.tilt = tilt
+                    roof.inner_convection = inner_convection
+                    roof.inner_radiation = inner_radiation
+                    roof.outer_convection = outer_convection
+                    roof.outer_radiation = outer_radiation
+                    roof.layer = None
+                    for lay_count in layer_set:
+                        roof.add_layer(lay_count, lay_count.id)
+            if element_type == "GroundFloor":
+                for ground in zone.ground_floors:
+                    ground.tilt = tilt
+                    ground.inner_convection = inner_convection
+                    ground.inner_radiation = inner_radiation
+                    ground.layer = None
+                    for lay_count in layer_set:
+                        ground.add_layer(lay_count, lay_count.id)
+            if element_type == "Window":
+                for win in zone.windows:
                     if win.orientation == orientation:
                         win.tilt = tilt
                         win.inner_convection = inner_convection
@@ -620,7 +590,7 @@ class Controller():
                         win.outer_radiation = outer_radiation
                         win.layer = None
                         for lay_count in layer_set:
-                            win.add_layer(lay_count, lay_count.position)
+                            win.add_layer(lay_count, lay_count.id)
 
     @classmethod
     def click_save_envelopes(self, bldg, orientation_old,
@@ -687,7 +657,7 @@ class Controller():
                 returns the calculated u value
         '''
 
-        u_value = float(current_element.ua_value)/current_element.area
+        u_value = float(current_element.ua_value) / current_element.area
         return u_value
 
     @classmethod

@@ -7,22 +7,120 @@ from teaser.logic.buildingobjects.buildingphysics.buildingelement \
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.material import Material
 import numpy as np
+import warnings
 
 
 class Wall(BuildingElement):
-    """This class represents a wall and is a child of BuildingElement().
+    """Wall class
+
+    This class holds functions and information for walls. It inherits for
+    BuildingElement() and is a base class for all inner and outer walls.
+
+    Parameters
+    ----------
+
+    parent : ThermalZone()
+        The parent class of this object, the ThermalZone the BE belongs to.
+        Allows for better control of hierarchical structures.
+        Default is None.
+
+
+    Attributes
+    ----------
+
+    internal_id : float
+        Random id for the distinction between different elements.
+    name : str
+        Individual name
+    construction_type : str
+        Type of construction (e.g. "heavy" or "light"). Needed for
+        distinction between different constructions types in the same
+        building age period.
+    year_of_retrofit : int
+        Year of last retrofit
+    year_of_construction : int
+        Year of first construction
+    building_age_group : list
+        Determines the building age period that this building
+        element belongs to [begin, end], e.g. [1984, 1994]
+    area : float [m2]
+        Area of building element
+    tilt : float [degree]
+        Tilt against horizontal
+    orientation : float [degree]
+        Azimuth direction of building element (0 : north, 90: east, 180: south,
+        270: west)
+    inner_convection : float [W/(m2*K)]
+        Constant heat transfer coefficient of convection inner side (facing
+        the zone)
+    inner_radiation : float [W/(m2*K)]
+        Constant heat transfer coefficient of radiation inner side (facing
+        the zone)
+    outer_convection : float [W/(m2*K)]
+        Constant heat transfer coefficient of convection outer side (facing
+        the ambient or adjacent zone). Currently for all InnerWalls and
+        GroundFloors this value is set to 0.0
+    outer_radiation : float [W/(m2*K)]
+        Constant heat transfer coefficient of radiation outer side (facing
+        the ambient or adjacent zone). Currently for all InnerWalls and
+        GroundFloors this value is set to 0.0
+    layer : list
+        List of all layers of a building element (to be filled with Layer
+        objects). Use element.layer = None to delete all layers of the building
+        element
+
+    Calculated Attributes
+
+    r1 : float [K/W]
+        equivalent resistance R1 of the analogous model given in VDI 6007
+    r2 : float [K/W]
+        equivalent resistance R2 of the analogous model given in VDI 6007
+    r3 : float [K/W]
+        equivalent resistance R3 of the analogous model given in VDI 6007
+    c1 : float [J/K]
+        equivalent capacity C1 of the analogous model given in VDI 6007
+    c2 : float [J/K]
+        equivalent capacity C2 of the analogous model given in VDI 6007
+    c1_korr : float [J/K]
+        corrected capacity C1,korr for building elements in the case of
+        asymmetrical thermal load given in VDI 6007
+    ua_value : float [W/K]
+        UA-Value of building elment (Area times U-Value)
+    r_inner_conv : float [K/W]
+        Convective resistance of building element on inner side (facing the
+        zone)
+    r_inner_rad : float [K/W]
+        Radiative resistance of building element on inner side (facing the
+        zone)
+    r_inner_conv : float [K/W]
+        Combined convective and radiative resistance of building element on
+        inner side (facing the zone)
+    r_outer_conv : float [K/W]
+        Convective resistance of building element on outer side (facing
+        the ambient or adjacent zone). Currently for all InnerWalls and
+        GroundFloors this value is set to 0.0
+    r_outer_rad : float [K/W]
+        Radiative resistance of building element on outer side (facing
+        the ambient or adjacent zone). Currently for all InnerWalls and
+        GroundFloors this value is set to 0.0
+    r_outer_conv : float [K/W]
+        Combined convective and radiative resistance of building element on
+        outer side (facing the ambient or adjacent zone). Currently for all
+        InnerWalls and GroundFloors this value is set to 0.0
+    wf_out : float
+        Weightfactor of building element ua_value/ua_value_zone
     """
 
     def __init__(self, parent=None):
-        """
+        """Constructor of Wall
         """
         super(Wall, self).__init__(parent)
 
     def calc_equivalent_res(self, t_bt=7):
-        """Equivalent resistance VDI 6007.
+        """Equivalent resistance according to VDI 6007.
 
-        Calculates the equivalent resistance of a wall according to
-        VDI 6007 guideline.
+        Calculates the equivalent resistance and capacity of a wall according
+        to VDI 6007 guideline. (Analogous model).
 
         Parameters
         ----------
@@ -92,8 +190,7 @@ class Wall(BuildingElement):
         for count_layer in a_layer:
             new_mat = np.dot(new_mat, count_layer)
 
-        # print(self.parent.parent.name)
-        # -calculation of equivalent Resistance and capacities of each element
+        # calculation of equivalent Resistance and capacities of each element
         self.r1 = (1 / self.area) * ((new_mat[3][3] - 1) *
                                      new_mat[0][2] + new_mat[2][3] *
                                      new_mat[0][3]) / \
@@ -131,9 +228,10 @@ class Wall(BuildingElement):
                 or type(self).__name__ == "GroundFloor":
             self.c1 = self.c1_korr
 
-    def insulate_wall(self,
-                      material=None,
-                      thickness=None):
+    def insulate_wall(
+            self,
+            material=None,
+            thickness=None):
         """Retrofit the walls with an additional insulation layer
 
         Adds an additional layer on the wall, outer sight
@@ -142,7 +240,6 @@ class Wall(BuildingElement):
         ----------
         material : string
             Type of material, that is used for insulation, default = EPS035
-
         thickness : float
             thickness of the insulation layer, default = None
 
@@ -154,8 +251,9 @@ class Wall(BuildingElement):
 
         ext_layer = Layer(self)
         new_material = Material(ext_layer)
-        new_material.load_material_template(material,
-                                            data_class=self.parent.parent.parent.data)
+        new_material.load_material_template(
+            material,
+            data_class=self.parent.parent.parent.data)
 
         if thickness is None:
             pass
@@ -165,18 +263,22 @@ class Wall(BuildingElement):
         ext_layer.material = new_material
 
     def retrofit_wall(self, year_of_retrofit, material=None):
-        """This function adds an additional layer of insulation and sets the
+        """Retrofits wall to German refurbishment standards.
+
+        This function adds an additional layer of insulation and sets the
         thickness of the layer according to the retrofit standard in the
-        year of refurbishment. Refurbishment year must be newer then 1995
+        year of refurbishment. Refurbishment year must be newer then 1977
 
         Note: To Calculate thickness and U-Value, the standard TEASER
         coefficients for outer and inner heat transfer are used.
+
+        The used Standards are namely the Waermeschutzverordnung (WSVO) and
+        Energieeinsparverordnung (EnEv)
 
         Parameters
         ----------
         material : string
             Type of material, that is used for insulation
-
         year_of_refurbishment : int
             Year of the retrofit of the wall/building
 
@@ -189,48 +291,72 @@ class Wall(BuildingElement):
         else:
             pass
 
+        if year_of_retrofit < 1977:
+            year_of_retrofit = 1977
+            warnings.warn("You are using a year of retrofit not supported\
+                    by teaser. We will change your year of retrofit to 1977\
+                    for the calculation. Be careful!")
+
         if type(self).__name__ == 'OuterWall':
 
-            if 1995 <= year_of_retrofit <= 2001:
+            if 1977 <= year_of_retrofit <= 1981:
+                self.insulate_wall(material)
+                calc_u = 1.06 * self.area
+            elif 1982 <= year_of_retrofit <= 1994:
+                self.insulate_wall(material)
+                calc_u = 0.6 * self.area
+            elif 1995 <= year_of_retrofit <= 2001:
                 self.insulate_wall(material)
                 calc_u = 0.5 * self.area
-            if 2002 <= year_of_retrofit <= 2008:
+            elif 2002 <= year_of_retrofit <= 2008:
                 self.insulate_wall(material)
                 calc_u = 0.45 * self.area
-            if 2009 <= year_of_retrofit <= 2013:
+            elif 2009 <= year_of_retrofit <= 2013:
                 self.insulate_wall(material)
                 calc_u = 0.24 * self.area
-            if year_of_retrofit >= 2014:
+            elif year_of_retrofit >= 2014:
                 self.insulate_wall(material)
                 calc_u = 0.24 * self.area
 
         elif type(self).__name__ == 'Rooftop':
 
-            if 1995 <= year_of_retrofit <= 2001:
+            if 1977 <= year_of_retrofit <= 1981:
+                self.insulate_wall(material)
+                calc_u = 0.45 * self.area
+            elif 1982 <= year_of_retrofit <= 1994:
+                self.insulate_wall(material)
+                calc_u = 0.45 * self.area
+            elif 1995 <= year_of_retrofit <= 2001:
                 self.insulate_wall(material)
                 calc_u = 0.3 * self.area
-            if 2002 <= year_of_retrofit <= 2008:
+            elif 2002 <= year_of_retrofit <= 2008:
                 self.insulate_wall(material)
                 calc_u = 0.3 * self.area
-            if 2009 <= year_of_retrofit <= 2013:
+            elif 2009 <= year_of_retrofit <= 2013:
                 self.insulate_wall(material)
                 calc_u = 0.2 * self.area
-            if year_of_retrofit >= 2014:
+            elif year_of_retrofit >= 2014:
                 self.insulate_wall(material)
                 calc_u = 0.2 * self.area
 
         if type(self).__name__ == 'GroundFloor':
 
-            if 1995 <= year_of_retrofit <= 2001:
+            if 1977 <= year_of_retrofit <= 1981:
+                self.insulate_wall(material)
+                calc_u = 0.8 * self.area
+            elif 1982 <= year_of_retrofit <= 1994:
+                self.insulate_wall(material)
+                calc_u = 0.7 * self.area
+            elif 1995 <= year_of_retrofit <= 2001:
                 self.insulate_wall(material)
                 calc_u = 0.5 * self.area
-            if 2002 <= year_of_retrofit <= 2008:
+            elif 2002 <= year_of_retrofit <= 2008:
                 self.insulate_wall(material)
                 calc_u = 0.4 * self.area
-            if 2009 <= year_of_retrofit <= 2013:
+            elif 2009 <= year_of_retrofit <= 2013:
                 self.insulate_wall(material)
                 calc_u = 0.3 * self.area
-            if year_of_retrofit >= 2014:
+            elif year_of_retrofit >= 2014:
                 self.insulate_wall(material)
                 calc_u = 0.3 * self.area
 

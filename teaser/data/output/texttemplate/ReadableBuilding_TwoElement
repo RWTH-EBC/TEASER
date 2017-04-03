@@ -1,0 +1,101 @@
+<%namespace file="/modelica_language/" import="get_true_false, get_list"/> <%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
+---- General Building Information ----
+
+building name = ${bldg.name} -
+building type = ${bldg.type_of_building} -
+building year of construction = ${bldg.year_of_construction} -
+building number of floors = ${bldg.number_of_floors} -
+building height of floors = ${bldg.height_of_floors} m
+building net leased area = ${bldg.net_leased_area} m^2
+
+static heat load = ${round(bldg.sum_heat_load, 2)} W
+static cooling load = ${round(bldg.sum_cooling_load, 2)}
+
+number of thermal zone.model_attrs = ${len(bldg.thermal_zones)} -
+
+%for zone in bldg.thermal_zones:
+---- ${zone.name} ----
+
+    area = ${zone.area} m2
+    volume = ${zone.volume} m3
+    number of outer walls = ${len(zone.outer_walls)}
+    number of rooftops = ${len(zone.rooftops)}
+    number of ground floors = ${len(zone.ground_floors)}
+    number of exterior orientations = ${zone.model_attr.n_outer}
+    linearized radiation exchange between walls = ${zone.model_attr.alpha_rad_inner_mean}
+
+  * Activity, usage and systems engineering *
+
+    usage = ${zone.use_conditions.usage}
+    upper limit of heater = ${zone.model_attr.heat_load} W
+    upper limit of cooler = 0 W
+
+
+    Lighting
+
+    heating power of lighting = ${zone.use_conditions.lighting_power} W/m2
+    heating power of lighting = ${zone.use_conditions.profile_lighting} W/m2
+    Ratio of convective heat for lighting =${zone.use_conditions.ratio_conv_rad_lighting}
+    relative profile lighting =${zone.use_conditions.profile_lighting}
+
+    Persons
+
+    number of people in the zone= ${zone.use_conditions.persons}
+    activity type of persons = ${zone.use_conditions.activity_type_persons} W/person
+    Ratio of convective heat for persons =${zone.use_conditions.ratio_conv_rad_persons}
+    relative profile persons =${zone.use_conditions.profile_persons}
+
+    Machines
+
+    number of machines in the zone= ${zone.use_conditions.machines}
+    activity type of persons = ${zone.use_conditions.activity_type_machines} W/machine
+    Ratio of convective heat for persons =${zone.use_conditions.ratio_conv_rad_machines}
+    relative profile persons =${zone.use_conditions.profile_machines}
+
+    Air Handling Unit
+
+    with_ahu = ${zone.use_conditions.with_ahu}
+    minimum specific air flow supplied by the AHU = ${zone.use_conditions.min_ahu} m^3/(h m^2)
+    maximum specific air flow supplied by the AHU = ${zone.use_conditions.max_ahu} m^3/(h m^2)
+    constant infiltration usage = ${zone.use_conditions.use_constant_ach_rate}
+    base value for the infiltration rate = ${zone.use_conditions.base_ach} 1/h
+    Additional infiltration rate for maximum persons activity = ${zone.use_conditions.max_user_ach} 1/h
+    Additional infiltration rate when overheating appears  = ${zone.use_conditions.max_overheating_ach} 1/h
+    Additional infiltration rate in the summer with  = ${zone.use_conditions.max_summer_ach} [infiltration_rate [1/h], Tmin [K], Tmax [K]]
+    Reduction factor of userACH for cold weather with  = ${zone.use_conditions.winter_reduction} [infiltration_rate [1/h], Tmin [K], Tmax [K]]
+
+  * Windows *
+
+    sum of window areas = ${zone.model_attr.area_win}
+    window's coefficient of heat transfer (convective, inner side) = ${zone.model_attr.alpha_comb_inner_win} W/(m^2 K)
+    window's coefficient of heat transfer (convective, outer side) = ${zone.model_attr.alpha_comb_outer_win} W/(m^2 K)
+    resistor window = ${zone.model_attr.r1_win} K/W
+    weigthfactors for the windows = ${zone.model_attr.weightfactor_win}
+    window's U*A value = ${zone.model_attr.ua_value_win } W/(K)
+    convective heat transmission due to absorption of the window = ${zone.model_attr.ratio_conv_rad_inner_win}
+
+
+    energy transmittances if sunblind is closed = ${zone.model_attr.g_sunblind}
+
+  * Inner Walls *
+
+    inner wall area = ${zone.model_attr.area_iw} m^2 (Ai)
+    inner wall's coefficient of heat transfer (convective) = ${zone.model_attr.alpha_conv_inner_iw} W/(m^2 K)
+    resistor 1 inner wall = ${zone.model_attr.r1_iw} K/W
+    capacity 1 inner wall = ${zone.model_attr.c1_iw} J/K
+
+  * Outer Walls *
+
+    outer wall area = ${zone.model_attr.area_ow} m^2
+    outer wall's coefficient of absorption = ${zone.model_attr.solar_absorp_ow}
+    outer wall's coefficient of heat transfer (convective, inner side) = ${zone.model_attr.alpha_conv_inner_ow} W/(m^2 K)
+    outer wall's coefficient of heat transfer (convective, outer side) = ${zone.model_attr.alpha_comb_outer_ow} W/(m^2 K)
+    weigthfactors for the walls = ${zone.model_attr.weightfactor_ow}
+    weigthfactors for the ground = ${zone.model_attr.weightfactor_ground}
+    resistor 1 outer wall = ${zone.model_attr.r1_ow} K/W (R1o)
+    capacity 1 outer wall = ${zone.model_attr.c1_ow} J/K  (C1o)
+    resistor "Rest" = ${zone.model_attr.r_rest_ow} K/W (RRest)
+
+
+
+%endfor

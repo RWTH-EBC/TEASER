@@ -1,5 +1,5 @@
-#Created April 2016
-#TEASER 4 Development Team
+# Created April 2016
+# TEASER Development Team
 
 """buildingelement_ouput.py
 
@@ -7,15 +7,15 @@ This module contains function to save building element classes
 """
 
 import teaser.data.bindings.v_0_4.typeelement_bind as tb_bind
-import teaser.logic.utilities as utilitis
+import teaser.logic.utilities as utilities
 import warnings
 import pyxb
 
 def save_type_element(element, data_class):
-    '''Typical element saver.
+    """Typical element saver.
 
     Saves typical building elements according to their construction
-    year and their construction type in the the XML file for type buidling
+    year and their construction type in the XML file for type buidling
     elements. If the Project parent is set, it automatically saves it to
     the file given in Project.data. Alternatively you can specify a path to
     a file of TypeBuildingElements. If this file does not exist,
@@ -30,7 +30,7 @@ def save_type_element(element, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-    '''
+    """
 
     element_binding = data_class.element_bind
     element_binding.version = "0.4"
@@ -184,7 +184,7 @@ def save_type_element(element, data_class):
 
     if add_to_xml is True:
 
-        out_file = open(utilitis.get_full_path(data_class.path_tb),"w")
+        out_file = open(utilities.get_full_path(data_class.path_tb), "w")
 
         out_file.write(element_binding.toDOM().toprettyxml())
 
@@ -268,7 +268,7 @@ def delete_type_element(element, data_class):
                 element_binding.Window.remove(check)
                 break
 
-    out_file = open(utilitis.get_full_path(data_class.path_tb),"w")
+    out_file = open(utilities.get_full_path(data_class.path_tb), "w")
 
     out_file.write(element_binding.toDOM().toprettyxml())
 

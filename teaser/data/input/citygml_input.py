@@ -30,7 +30,9 @@ from teaser.logic.buildingobjects.building import Building
 
 
 def load_gml(path, prj):
-    '''This function loads buildings from a CityGML file
+    """This function loads buildings from a CityGML file
+
+    This function is a proof of concept, be careful using it.
 
     Parameters
     ----------
@@ -39,7 +41,8 @@ def load_gml(path, prj):
 
     prj: Project()
         Teaser instance of Project()
-    '''
+    """
+
     xml_file = open(path, 'r')
     gml_bind = citygml.CreateFromDocument(xml_file.read())
 
@@ -86,11 +89,13 @@ def load_gml(path, prj):
             bldg.set_height_gml()
             try:
                 bldg.set_gml_attributes()
-            except:
+            except UserWarning:
+                print("bldg.set_gml_attributes() did not work")
                 pass
             try:
                 bldg.generate_from_gml()
-            except:
+            except UserWarning:
+                print("bldg.generate_from_gml() did not work")
                 pass
 
 
@@ -99,23 +104,28 @@ def _set_attributes(bldg, gml_bldg):
     """
     try:
         bldg.name = gml_bldg.name[0].value()
-    except:
+    except UserWarning:
+        print("no name specified in gml file")
         pass
     try:
         bldg.number_of_floors = gml_bldg.storeysAboveGround
-    except:
+    except UserWarning:
+        print("no storeysAboveGround specified in gml file")
         pass
     try:
         bldg.height_of_floors = gml_bldg.storeyHeightsAboveGround.value()[0]
-    except:
+    except UserWarning:
+        print("no storeyHeightsAboveGround specified in gml file")
         pass
     try:
         bldg.year_of_construction = gml_bldg.yearOfConstruction.year
-    except:
+    except UserWarning:
+        print("no yearOfConstruction specified in gml file")
         pass
     try:
         bldg.bldg_height = gml_bldg.measuredHeight.value()
-    except:
+    except UserWarning:
+        print("no measuredHeight specified in gml file")
         pass
 
 
@@ -196,6 +206,7 @@ def _convert_bldg(bldg, function):
     bldg.set_gml_attributes()
     bldg.generate_from_gml()
 
+
 class SurfaceGML(object):
     """Class for calculating attributes of CityGML surfaces
 
@@ -260,13 +271,12 @@ class SurfaceGML(object):
         gml1 = gml_surface[0:3]
         gml2 = gml_surface[3:6]
         gml3 = gml_surface[6:9]
-        gml4 = gml_surface[9:12]
 
         vektor_1 = gml2-gml1
         vektor_2 = gml3-gml1
 
         normal_1 = np.cross(vektor_1, vektor_2)
-        z_axis = np.array([0,0,1])
+        z_axis = np.array([0, 0, 1])
 
         self.surface_tilt = np.arccos(np.dot(normal_1, z_axis)/(LA.norm(
             z_axis)*LA.norm(normal_1)))*360/(2*np.pi)
@@ -321,7 +331,7 @@ class SurfaceGML(object):
         elif phi < 0:
             self.surface_orientation = (phi+2*np.pi)*360/(2*np.pi)
         else:
-            self.surface_orientation = (phi)*360/(2*np.pi)
+            self.surface_orientation = phi * 360 / (2 * np.pi)
 
         if self.surface_orientation is None:
             pass
@@ -368,7 +378,7 @@ class SurfaceGML(object):
              [b[0],b[1],1],
              [c[0],c[1],1]])
         magnitude = (x**2 + y**2 + z**2)**.5
-        return (x/magnitude, y/magnitude, z/magnitude)
+        return x / magnitude, y / magnitude, z / magnitude
 
     def poly_area(self, poly):
         """calculates the area of a polygon with arbitrary points

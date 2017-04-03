@@ -1,5 +1,5 @@
-#Created April 2016
-#TEASER 4 Development Team
+# Created April 2016
+# TEASER Development Team
 
 
 """boundcond_output.py
@@ -8,12 +8,12 @@ This module contains function to save boundary conditions classes
 """
 
 import teaser.data.bindings.v_0_4.boundaryconditions_bind as uc_bind
-import teaser.logic.utilities as utilitis
+import teaser.logic.utilities as utilities
 import warnings
 import pyxb
 
 def save_bound_conditions(bound_cond, data_class):
-    '''Use conditions saver.
+    """Use conditions saver.
 
     Saves use conditions according to their usage type in the the XML file
     for use conditions in InputData. If the Project parent is set, it
@@ -32,7 +32,7 @@ def save_bound_conditions(bound_cond, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.ile
-    '''
+    """
 
     conditions_bind = data_class.conditions_bind
     add_to_xml = True
@@ -114,11 +114,19 @@ def save_bound_conditions(bound_cond, data_class):
         usage_pyxb.AHU.min_ahu = bound_cond.min_ahu
         usage_pyxb.AHU.max_ahu = bound_cond.max_ahu
         usage_pyxb.AHU.with_ahu = bound_cond.with_ahu
+        usage_pyxb.AHU.use_constant_ach_rate = bound_cond.use_constant_ach_rate
+        usage_pyxb.AHU.base_ach = bound_cond.base_ach
+        usage_pyxb.AHU.max_user_ach = bound_cond.max_user_ach
+        usage_pyxb.AHU.max_overheating_ach = bound_cond.max_overheating_ach
+        usage_pyxb.AHU.max_summer_ach = bound_cond.max_summer_ach
+        usage_pyxb.AHU.winter_reduction = bound_cond.winter_reduction
+
+
         usage_pyxb.typical_length = bound_cond.typical_length
         usage_pyxb.typical_width = bound_cond.typical_width
 
         conditions_bind.append(usage_pyxb)
 
-        out_file = open(utilitis.get_full_path(data_class.path_uc), 'w')
+        out_file = open(utilities.get_full_path(data_class.path_uc), 'w')
 
         out_file.write(conditions_bind.toDOM().toprettyxml())

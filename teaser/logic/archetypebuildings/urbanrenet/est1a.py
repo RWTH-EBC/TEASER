@@ -17,67 +17,111 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
 class EST1a(Residential):
-    """Urban Fabric Type EST1a.
+    """Archetype for Urban Fabric Type EST1a.
 
-    Subclass from Residential for urban fabric type EST1a.
+    Subclass from Residential for urban fabric type EST1a. Boundary values
+    for this archetype are taken from URBANRENET. The archetype calculation
+    is adapted from :cite:`KurzverfahrenIWU`, with the change of using the
+    facade area to volume ratio of the building. For further information see
+    Lauster BauSim.
 
     Parameters
     ----------
     parent: Project()
         The parent class of this object, the Project the Building belongs
-        to. Allows for better control of hierarchical structures.
-        Default is None
-
+        to. Allows for better control of hierarchical structures. If not None it
+        adds this Building instance to Project.buildings.
     name : str
-        individual name
-
-    year_of_construction : int
-        year of first construction
-
+        Individual name
+    height_of_floors : float [m]
+        Average height of the buildings' floors
     number_of_floors : int
-        number of floors above ground
-
-    height_of_floors : float
-        average height of the floors
-
-    net_leased_area : float
-        total net leased area of building
-
-    with_ahu : boolean
-        if building has a central AHU or not
-
+        Number of building's floors above ground
+    year_of_construction : int
+        Year of first construction
+    net_leased_area : float [m2]
+        Total net leased area of building. This is area is NOT the footprint
+        of a building
+    with_ahu : Boolean
+        If set to True, an empty instance of BuildingAHU is instantiated and
+        assigned to attribute central_ahu. This instance holds information for
+        central Air Handling units. Default is False.
     neighbour_buildings : int
-        neighbour (default = 0)
-
-        0: no neighbour
-        1: one neighbour
-        2: two neighbours
-
+        Number of neighbour buildings. CAUTION: this will not change
+        the orientation of the buildings wall, but just the overall
+        exterior wall and window area(!) (default = 0)
+            0: no neighbour
+            1: one neighbour
+            2: two neighbours
     construction_type : str
-        construction type (default = "heavy")
+        Construction type of used wall constructions default is "heavy")
+            heavy: heavy construction
+            light: light construction
 
-        heavy: heavy construction
-        light: light construction
+    Note
+    ----------
+    The listed attributes are just the ones that are set by the user
+    calculated values are not included in this list. Changing these values is
+    expert mode.
+
+    Attributes
+    ----------
+
+    zone_area_factors : dict
+        This dictionary contains the name of the zone (str), the
+        zone area factor (float) and the zone usage from BoundaryConditions XML
+        (str). (Default see doc string above)
+    outer_wall_names : dict
+        This dictionary contains a random name for the outer walls,
+        their orientation and tilt. Default is a building in north-south
+        orientation)
+    roof_names : dict
+        This dictionary contains the name of the roofs, their orientation
+        and tilt. Default is one flat roof.
+    ground_floor_names : dict
+        This dictionary contains the name of the ground floors, their
+        orientation and tilt. Default is one ground floor.
+    window_names : dict
+        This dictionary contains the name of the window, their
+        orientation and tilt. Default is a building in north-south
+        orientation)
+    inner_wall_names : dict
+        This dictionary contains the name of the inner walls, their
+        orientation and tilt. Default is one cumulated inner wall.
+    ceiling_names : dict
+        This dictionary contains the name of the ceilings, their
+        orientation and tilt. Default is one cumulated ceiling.
+    floor_names : dict
+        This dictionary contains the name of the floors, their
+        orientation and tilt. Default is one cumulated floor.
+    est_factor_win_area : float
+        Estimation factor to calculate window area
+    est_factor_facade_to_volume : float
+        Estimation factor to describe the facade area to volume ratio
+
     """
 
-    def __init__(self,
-                 parent,
-                 name,
-                 year_of_construction=None,
-                 number_of_floors=None,
-                 height_of_floors=None,
-                 net_leased_area=None,
-                 with_ahu=False,
-                 neighbour_buildings=None,
-                 construction_type=None):
+    def __init__(
+            self,
+            parent,
+            name=None,
+            year_of_construction=None,
+            number_of_floors=None,
+            height_of_floors=None,
+            net_leased_area=None,
+            with_ahu=False,
+            neighbour_buildings=None,
+            construction_type=None):
 
-        """Constructor of Residential
-
-
+        """Constructor of EST1a
         """
 
-        super(EST1a, self).__init__(parent, name, year_of_construction,
-                                    net_leased_area, with_ahu)
+        super(EST1a, self).__init__(
+            parent,
+            name,
+            year_of_construction,
+            net_leased_area,
+            with_ahu)
 
         self.neighbour_buildings = neighbour_buildings
         self.construction_type = construction_type

@@ -50,6 +50,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>2.6</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -102,6 +108,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>2.6</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -154,6 +166,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>3.6</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -206,6 +224,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>12.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -258,6 +282,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>2.5</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -310,6 +340,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -362,6 +398,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -414,6 +456,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -466,6 +514,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>15.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -518,6 +572,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -570,6 +630,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -622,6 +688,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>18.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -674,6 +746,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -726,6 +804,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>70.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -778,6 +862,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -830,6 +920,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>8.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -882,6 +978,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -934,6 +1036,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -986,6 +1094,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>2.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1038,6 +1152,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.5</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1090,6 +1210,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>130.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1142,6 +1268,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>10.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1194,6 +1326,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>10.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1246,6 +1384,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>10.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1298,6 +1442,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1350,6 +1500,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1402,6 +1558,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1454,6 +1616,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1506,6 +1674,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1558,6 +1732,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1610,6 +1790,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1662,12 +1848,18 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Gym (without spectator area)</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>40.0</typical_length>
+		<typical_width>20.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>8 23</usage_time>
 			<daily_usage_hours>15</daily_usage_hours>
@@ -1714,6 +1906,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1766,6 +1964,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1818,6 +2022,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -1870,12 +2080,18 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Exercise room</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>10.0</typical_length>
+		<typical_width>10.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>8 23</usage_time>
 			<daily_usage_hours>15</daily_usage_hours>
@@ -1922,12 +2138,18 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Laboratory</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>7 18</usage_time>
 			<daily_usage_hours>11</daily_usage_hours>
@@ -1974,12 +2196,18 @@
 			<min_ahu>24.0</min_ahu>
 			<max_ahu>48.0</max_ahu>
 			<with_ahu>true</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Examination- or treatment room</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>3.0</typical_length>
+		<typical_width>6.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>7 18</usage_time>
 			<daily_usage_hours>11</daily_usage_hours>
@@ -2026,12 +2254,18 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Special care area</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>0 23</usage_time>
 			<daily_usage_hours>24</daily_usage_hours>
@@ -2078,12 +2312,18 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Corridors in the general care area</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>2.0</typical_length>
+		<typical_width>12.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>0 23</usage_time>
 			<daily_usage_hours>24</daily_usage_hours>
@@ -2130,12 +2370,18 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Medical and therapeutic practices</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>6.0</typical_length>
+		<typical_width>6.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>8 18</usage_time>
 			<daily_usage_hours>10</daily_usage_hours>
@@ -2182,12 +2428,18 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
 		<usage>Storehouse, logistics building</usage>
-		<typical_length>1.0</typical_length>
-		<typical_width>1.0</typical_width>
+		<typical_length>20.0</typical_length>
+		<typical_width>20.0</typical_width>
 		<UsageOperationTime>
 			<usage_time>0 23</usage_time>
 			<daily_usage_hours>24</daily_usage_hours>
@@ -2234,6 +2486,12 @@
 			<min_ahu>0.0</min_ahu>
 			<max_ahu>0.0</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 	<BoundaryConditions>
@@ -2286,6 +2544,12 @@
 			<min_ahu>0.3</min_ahu>
 			<max_ahu>0.6</max_ahu>
 			<with_ahu>false</with_ahu>
+			<use_constant_ach_rate>false</use_constant_ach_rate>
+			<base_ach>0.2</base_ach>
+			<max_user_ach>1.0</max_user_ach>
+			<max_overheating_ach>3.0 2.0</max_overheating_ach>
+			<max_summer_ach>1.0 283.15 290.15</max_summer_ach>
+			<winter_reduction>0.2 273.15 283.15</winter_reduction>
 		</AHU>
 	</BoundaryConditions>
 </UseConditions>

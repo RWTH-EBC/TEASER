@@ -1,5 +1,5 @@
-#Created April 2016
-#TEASER 4 Development Team
+# Created April 2016
+# TEASER Development Team
 
 """boundcond_input.py
 
@@ -8,7 +8,7 @@ This module contains function to load boundary conditions classes
 
 
 def load_boundary_conditions(bound_cond, zone_usage, data_class):
-    '''load use conditions according to DIN 18599 and SIA2024
+    """load use conditions according to DIN 18599 and SIA2024
 
     loads Use conditions specified in the XML, according to DIN 18599,
     SIA2024 in addition some AixLib specific use conditions for central AHU
@@ -27,7 +27,7 @@ def load_boundary_conditions(bound_cond, zone_usage, data_class):
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-    '''
+    """
 
     conditions_bind = data_class.conditions_bind
 
@@ -95,3 +95,10 @@ def load_boundary_conditions(bound_cond, zone_usage, data_class):
             bound_cond.min_ahu = usage.AHU.min_ahu
             bound_cond.max_ahu = usage.AHU.max_ahu
             bound_cond.with_ahu = usage.AHU.with_ahu
+            bound_cond.use_constant_ach_rate = usage.AHU.use_constant_ach_rate
+            bound_cond.base_ach = usage.AHU.base_ach
+            bound_cond.max_user_ach = usage.AHU.max_user_ach
+            bound_cond.max_overheating_ach = usage.AHU.max_overheating_ach
+            bound_cond.max_summer_ach = usage.AHU.max_summer_ach
+            bound_cond.winter_reduction = usage.AHU.winter_reduction
+

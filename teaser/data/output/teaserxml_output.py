@@ -7,7 +7,7 @@ This module contains function to save Projects in the proprietary
 TEASER file format .tXML
 """
 
-import teaser.data.bindings.v_0_4.project_bind as pb
+import teaser.data.bindings.v_0_5.project_bind as pb
 import teaser.data.bindings.v_0_4.boundaryconditions_bind as ucb
 import inspect
 from teaser.logic.archetypebuildings.residential import Residential
@@ -25,6 +25,7 @@ def save_teaser_xml(path, project):
     project: Project()
         Teaser instance of Project()
     '''
+
     if path.endswith("teaserXML"):
         new_path = path
     else:
@@ -37,7 +38,7 @@ def save_teaser_xml(path, project):
         ucb.Namespace, 'usecond')
 
     teaser_out = pb.Project()
-    teaser_out.version = "0.4"
+    teaser_out.version = "0.5"
 
     for bldg in project.buildings:
 
@@ -82,8 +83,8 @@ def save_teaser_xml(path, project):
             pyxb_ahu.by_pass_dehumidification = \
                                 bldg.central_ahu.by_pass_dehumidification
             pyxb_ahu.efficiency_recovery = bldg.central_ahu.efficiency_recovery
-            pyxb_ahu.efficiency_revocery_false = \
-                                bldg.central_ahu.efficiency_revocery_false
+            pyxb_ahu.efficiency_recovery_false = \
+                                bldg.central_ahu.efficiency_recovery_false
             pyxb_ahu.profile_min_relative_humidity = \
                                 bldg.central_ahu.profile_min_relative_humidity
             pyxb_ahu.profile_max_relative_humidity = \
@@ -221,21 +222,25 @@ def save_teaser_xml(path, project):
 
                     pyxb_zone.OuterWall.append(pyxb_wall)
 
-                if type(out_wall).__name__ == "Rooftop":
+            for rt in zone.rooftops:
+
+                if type(rt).__name__ == "Rooftop":
 
                     pyxb_wall = pb.RooftopType()
 
-                    set_basic_data_pyxb(pyxb_wall, out_wall)
-                    set_layer_data_pyxb(pyxb_wall, out_wall)
+                    set_basic_data_pyxb(pyxb_wall, rt)
+                    set_layer_data_pyxb(pyxb_wall, rt)
 
                     pyxb_zone.Rooftop.append(pyxb_wall)
 
-                if type(out_wall).__name__ == "GroundFloor":
+            for gf in zone.ground_floors:
+
+                if type(gf).__name__ == "GroundFloor":
 
                     pyxb_wall = pb.GroundFloorType()
 
-                    set_basic_data_pyxb(pyxb_wall, out_wall)
-                    set_layer_data_pyxb(pyxb_wall, out_wall)
+                    set_basic_data_pyxb(pyxb_wall, gf)
+                    set_layer_data_pyxb(pyxb_wall, gf)
 
                     pyxb_zone.GroundFloor.append(pyxb_wall)
 
@@ -250,21 +255,25 @@ def save_teaser_xml(path, project):
 
                     pyxb_zone.InnerWall.append(pyxb_wall)
 
-                if type(in_wall).__name__ == "Ceiling":
+            for ceil in zone.ceilings:
+
+                if type(ceil).__name__ == "Ceiling":
 
                     pyxb_wall = pb.CeilingType()
 
-                    set_basic_data_pyxb(pyxb_wall, in_wall)
-                    set_layer_data_pyxb(pyxb_wall, in_wall)
+                    set_basic_data_pyxb(pyxb_wall, ceil)
+                    set_layer_data_pyxb(pyxb_wall, ceil)
 
                     pyxb_zone.Ceiling.append(pyxb_wall)
 
-                if type(in_wall).__name__ == "Floor":
+            for floor in zone.floors:
+
+                if type(floor).__name__ == "Floor":
 
                     pyxb_wall = pb.FloorType()
 
-                    set_basic_data_pyxb(pyxb_wall, in_wall)
-                    set_layer_data_pyxb(pyxb_wall, in_wall)
+                    set_basic_data_pyxb(pyxb_wall, floor)
+                    set_layer_data_pyxb(pyxb_wall, floor)
 
                     pyxb_zone.Floor.append(pyxb_wall)
 

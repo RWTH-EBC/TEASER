@@ -1,35 +1,31 @@
-![E.ON EBC RWTH Aachen University](./doc/EBC_Logo.png)
+![E.ON EBC RWTH Aachen University](./doc/_static/EBC_Logo.png)
 
 # TEASER - Tool for Energy Analysis and Simulation for Efficient Retrofit
 
-The TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) tool
-allows the creation of archetype buildings as well as the
-representation of existing buildings and the calculation of simulation
-parameters for reduced oder models. It is being developed at the RWTH Aachen University, E.ON Energy Research Center, Institute for Energy Efficient Buildings and Indoor Climate.
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+[![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg)](https://coveralls.io/github/RWTH-EBC/TEASER)
+[![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg)](https://travis-ci.org/RWTH-EBC/TEASER)
+
+TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) allows
+fast generation of archetype buildings with low input requirements and the
+export of individual dynamic simulation models for Modelica libraries [AixLib](https://github.com/RWTH-EBC/AixLib) and
+[Modelica IBPSA library](https://github.com/ibpsa/modelica). It is being
+developed at the [RWTH Aachen University, E.ON Energy Research Center, Institute
+for Energy Efficient Buildings and Indoor Climate](https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1).
 
 The full documentation of TEASER including examples and description of modules,
-classes and functions can be found [here](http://pythonhosted.org/teaser/).
+classes and functions can be found at the website:
 
-This GitHub page will be used to further develop the library and make it
+ * http://rwth-ebc.github.io/TEASER/
+
+This GitHub page will be used to further develop the package and make it
 available under the
 [MIT License](https://github.com/RWTH-EBC/TEASER/blob/master/License.md).
 
-If you have any questions regarding TEASER feel free to contact us at [ebc-teaser@eonerc.rwth-aachen.de](mailto:ebc-teaser@eonerc.rwth-aachen.de).
+If you have any questions regarding TEASER feel free to contact us at
+[ebc-teaser@eonerc.rwth-aachen.de](mailto:ebc-teaser@eonerc.rwth-aachen.de).
 
-### License
-
-TEASER is released by RWTH Aachen University, E.ON Energy
-Research Center, Institute for Energy Efficient Buildings and Indoor Climate,
-under the
-[MIT License](https://github.com/RWTH-EBC/TEASER/blob/master/License.md).
-
-### Acknowledgements
-
-Parts of TEASER have been developed within public funded projects
-and with financial support by BMWi (German Federal Ministry for Economic
-Affairs and Energy).
-
-### Description
+## Description
 
 Energy supply of buildings in urban context currently undergoes significant
 changes. The increase of renewable energy sources for electrical and thermal
@@ -39,42 +35,93 @@ and buildings, dynamic simulation is one key element, in particular when it
 comes to thermal energy demand on minutely or hourly scale.
 Sparse and limited access to detailed building information as well as computing
 times are challenges for building simulation on urban scale. In addition,
-data acquisition and modelling for Building Performance Simulation (BPS) are
+data acquisition and modeling for Building Performance Simulation (BPS) are
 time consuming and error-prone. To enable the use of BPS on urban scale we
-present the TEASER tool, an open framework for urban energy modelling of
+present the TEASER tool, an open framework for urban energy modeling of
 building stocks. TEASER provides an easy interface for multiple data sources,
-data enrichment, where necessary and export of ready-to-run Modelica simulation
-models for [AixLib] (https://github.com/RWTH-EBC/AixLib) and
-IEA-EBC [Annex60](https://github.com/iea-annex60/modelica-annex60).
+data enrichment (where necessary) and export of ready-to-run Modelica simulation
+models for [AixLib](https://github.com/RWTH-EBC/AixLib) and
+[Modelica IBPSA library](https://github.com/ibpsa/modelica).
 
-### Version
 
-The current version is 0.4.4, which is a pre-release.
+## Version
 
-### How to cite TEASER
+TEASER is a ongoing research project, the current version is 0.5.0, which is
+still a pre-release.
 
-A Journal Paper presenting TEASER is already submitted and is in review.
+## How to use TEASER
 
-If you are using TEASER, please cite us:
+### Dependencies
 
-+ CityGML Import and Export for Dynamic Building Performance Simulation in Modelica. Remmen P., 
-Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016, 
+TEASER uses Python 2.7 <= v >=3.3. Further using a Python distribution is
+recommended as they already contain (or easily support installation of) many
+Python packages (e.g. SciPy, NumPy, pip, PyQT, etc.) that are used in the
+TEASER code. Two examples of those distributions are:
+
+1. https://winpython.github.io/ WinPython comes along with a lot of Python
+packages (e.g. SciPy, NumPy, pip, PyQT, etc.)..
+2. http://conda.pydata.org/miniconda.html Conda is an open source package
+management  system and environment management system for installing multiple
+versions of software  packages and their dependencies and switching easily
+between them.
+
+In addition, TEASER requires some specific Python packages:
+
+1. Mako: template Engine
+  install on a python-enabled command line with `pip install -U mako`
+2. PyXB: XML binding Engine
+  install on a python-enabled command line with `pip install -U pyxb`
+3. pytest: Unit Tests engine
+  install on a python-enabled command line with `pip install -U pytest`
+
+### Installation
+
+The best option to install TEASER is to use pip:
+
+`pip install teaser`
+
+If you actively develop TEASER you can clone this repository by using:
+
+ `git clone [SSH-Key/Https]`
+
+and then run:
+
+ `pip install -e [Path/to/your/Teaser/Clone]` which will install the local version of TEASER.
+
+### How to contribute to the development of TEASER
+You are invited to contribute to the development of TEASER. You may report any issues by using the [Issues](https://github.com/RWTH-EBC/TEASER/issues) button.
+Furthermore, you are welcome to contribute via [Pull Requests](https://github.com/RWTH-EBC/TEASER/pulls).
+The workflow for changes is described in our [Wiki](https://github.com/RWTH-EBC/TEASER/wiki).
+
+## How to cite TEASER
+
++ TEASER: an open tool for urban energy modelling of building stocks. Remmen P., Lauster M., Mans M., Fuchs M., Osterhage T., Müller D.. Journal of Building Performance Simulation, February 2017,
+[pdf](http://dx.doi.org/10.1080/19401493.2017.1283539),
+[bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite_jbps.bib)
+
+### TEASER related publications
+
+
++ CityGML Import and Export for Dynamic Building Performance Simulation in Modelica. Remmen P.,
+Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016,
 [pdf](http://www.ibpsa.org/proceedings/BSO2016/p1047.pdf),
 [bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite.bib)
 
-+ Scalable Design-Driven Parameterization of Reduced Order Models Using Archetype Buildings with TEASER. 
++ Scalable Design-Driven Parameterization of Reduced Order Models Using Archetype Buildings with TEASER.
 Lauster M., Mans M., Remmen P., Fuchs M., Müller D.. BauSIM2016, p.535-542, September 2016,
 [pdf](https://www.researchgate.net/profile/Moritz_Lauster/publication/310465372_Scalable_Design-Driven_Parameterization_of_Reduced_Order_Models_using_Archetype_Buildings_with_TEASER/links/582ee96908ae004f74be1fb0.pdf?origin=publication_detail&ev=pub_int_prw_xdl&msrp=eEyK6WYemhC8wK7xkMEPRDO4obE4uxBN4-0BdBy1Ldwhy9FhCe1pXfNObJYubvC_aZN0IWDPf9uayBo3u79bsZvg3hzUoLoYRatES2ARH8c.B2cYwSICt0IOa7lD-4oAiEa_3TtrO-7k-1W9chuNQwr_VNMCpZ5ubSb-eY2D77rGUP4S6wS8m6vudUUbMlXbQQ.Cledgd1Q9fPp11nYGpcpKNhSS6bVTqAEXeMZPkiV3HsJxcVWTFj4Hr_jmLZ0MOzDxbDEZObcGiKfmTL_9k_59A)
 
+## License
 
-### How to use TEASER
+TEASER is released by RWTH Aachen University, E.ON Energy
+Research Center, Institute for Energy Efficient Buildings and Indoor Climate,
+under the
+[MIT License](https://github.com/RWTH-EBC/TEASER/blob/master/License.md).
 
-For installation and usage we like to refer you to the README in the [teaser
-package](https://github.com/RWTH-EBC/TEASER/blob/master/teaser/README.md) itself and to
-the [documentation](http://pythonhosted.org/teaser/install_teaser.html)
+## Acknowledgements
 
-### How to contribute to the development of TEASER
-You are invited to contribute to the development of TEASER.
-You may report any issues by using the [Issues](https://github.com/RWTH-EBC/TEASER/issues) button.
-Furthermore, you are welcome to contribute via [Pull Requests](https://github.com/RWTH-EBC/TEASER/pulls).
-The workflow for changes is described in our [Wiki](https://github.com/RWTH-EBC/TEASER/wiki).
+Parts of TEASER have been developed within public funded projects
+and with financial support by BMWi (German Federal Ministry for Economic
+Affairs and Energy).
+
+<img src="http://www.innovation-beratung-foerderung.de/INNO/Redaktion/DE/Bilder/Titelbilder/titel_foerderlogo_bmwi.jpg;jsessionid=4BD60B6CD6337CDB6DE21DC1F3D6FEC5?__blob=poster&v=2)" width="200">
