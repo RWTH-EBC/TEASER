@@ -1197,7 +1197,7 @@ class Project(object):
                         path=path)
 
 
-    def export_annex(
+    def export_ibpsa(
             self,
             internal_id=None,
             path=None):

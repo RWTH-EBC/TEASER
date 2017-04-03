@@ -648,59 +648,59 @@ class Test_teaser(object):
         prj.calc_all_buildings()
         prj.export_aixlib(path=utilities.get_default_path())
 
-    def test_export_annex(self):
-        """test of export_annex, no calculation verification"""
+    def test_export_ibpsa(self):
+        """test of export_ibpsa, no calculation verification"""
 
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = True
-        prj.used_library_calc = 'Annex60'
+        prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_annex()
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = False
-        prj.used_library_calc = 'Annex60'
+        prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_annex()
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = True
-        prj.used_library_calc = 'Annex60'
+        prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_annex()
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = False
-        prj.used_library_calc = 'Annex60'
+        prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_annex()
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 3
         prj.merge_windows_calc = True
-        prj.used_library_calc = 'Annex60'
+        prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_annex()
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 3
         prj.merge_windows_calc = False
-        prj.used_library_calc = 'Annex60'
+        prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_annex()
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = True
-        prj.used_library_calc = 'Annex60'
+        prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_annex()
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = False
-        prj.used_library_calc = 'Annex60'
+        prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_annex()
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = False
-        prj.used_library_calc = 'Annex60'
+        prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_annex(internal_id=prj.buildings[-1].internal_id)
+        prj.export_ibpsa(internal_id=prj.buildings[-1].internal_id)
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = False
-        prj.used_library_calc = 'Annex60'
+        prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_annex(path=utilities.get_default_path())
+        prj.export_ibpsa(path=utilities.get_default_path())
         prj.set_default()
 
     def test_export_parameters_txt(self):
@@ -1651,7 +1651,7 @@ class Test_teaser(object):
         helptest.building_test2(prj)
         prj.buildings[-1].calc_building_parameter(number_of_elements=1,
                                                   merge_windows=True,
-                                                  used_library='Annex60')
+                                                  used_library='IBPSA')
 
         calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
 
@@ -1727,7 +1727,7 @@ class Test_teaser(object):
         helptest.building_test2(prj)
         prj.buildings[-1].calc_building_parameter(number_of_elements=2,
                                                   merge_windows=True,
-                                                  used_library='Annex60')
+                                                  used_library='IBPSA')
 
         calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
 
@@ -1798,7 +1798,7 @@ class Test_teaser(object):
         helptest.building_test2(prj)
         prj.buildings[-1].calc_building_parameter(number_of_elements=3,
                                                   merge_windows=True,
-                                                  used_library='Annex60')
+                                                  used_library='IBPSA')
 
         calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
         weightfactors_test_list = [
@@ -1865,7 +1865,7 @@ class Test_teaser(object):
         helptest.building_test2(prj)
         prj.buildings[-1].calc_building_parameter(number_of_elements=4,
                                                   merge_windows=True,
-                                                  used_library='Annex60')
+                                                  used_library='IBPSA')
 
         calc_attr = prj.buildings[-1].thermal_zones[-1].model_attr
 
@@ -2385,9 +2385,9 @@ class Test_teaser(object):
         prj.export_aixlib(internal_id=prj.buildings[-1].internal_id)
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = True
-        prj.used_library_calc = 'Annex60'
+        prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_annex(internal_id=prj.buildings[-1].internal_id)
+        prj.export_ibpsa(internal_id=prj.buildings[-1].internal_id)
 
         prj.set_default(load_data="Test")
 
