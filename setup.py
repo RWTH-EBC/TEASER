@@ -2,7 +2,7 @@ from setuptools import setup
 from sys import platform
 
 setup(name='teaser',
-      version='0.5.0',
+      version='0.5.1',
       description='Tool for Energy Analysis and Simulation for '
                   'Efficient Retrofit ',
       url='https://github.com/RWTH-EBC/TEASER',
@@ -36,7 +36,13 @@ setup(name='teaser',
           'teaser.data.bindings.v_0_4',
           'teaser.data.bindings.v_0_5',
           'teaser.data.input',
+          'teaser.data.input.inputdata',
+          'teaser.data.input.inputdata.weatherdata',
           'teaser.data.output',
+          'teaser.data.output.texttemplate',
+          'teaser.data.output.modelicatemplate',
+          'teaser.data.output.modelicatemplate.AixLib',
+          'teaser.data.output.modelicatemplate.IBPSA',
           'teaser.examples',
           'teaser.examples.simulation',
           'teaser.examples.verification',
@@ -47,11 +53,10 @@ setup(name='teaser',
           'teaser.gui.guihelp',
           'teaser.gui.guiimages',
           'teaser.gui.guiimages.OfficeBuildings',
-          'teaser.gui.guiimages.Residentials',
-          'tests'],
+          'teaser.gui.guiimages.Residentials'],
       package_data={
           'teaser.data.input.inputdata': ['*.xml'],
-          'teaser.data.input.inputdata.weaterdata': [
+          'teaser.data.input.inputdata.weatherdata': [
               'DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos'],
           'teaser.data.output.modelicatemplate': [
               'package',
@@ -64,11 +69,11 @@ setup(name='teaser',
               'AixLib_ThermalZoneRecord_TwoElement',
               'AixLib_ThermalZoneRecord_ThreeElement',
               'AixLib_ThermalZoneRecord_FourElement'],
-          'teaser.data.output.modelicatemplate.Annex60': [
-              'Annex60_OneElement',
-              'Annex60_TwoElements',
-              'Annex60_ThreeElements',
-              'Annex60_FourElements'],
+          'teaser.data.output.modelicatemplate.IBPSA': [
+              'IBPSA_OneElement',
+              'IBPSA_TwoElements',
+              'IBPSA_ThreeElements',
+              'IBPSA_FourElements'],
           'teaser.data.output.texttemplate': [
               'ReadableBuilding_OneElement',
               'ReadableBuilding_TwoElement',
@@ -78,7 +83,7 @@ setup(name='teaser',
           'teaser.gui.guiimages': ['*.png'],
           'teaser.gui.guiimages.OfficeBuildings': ['*.png'],
           'teaser.gui.guiimages.Residentials': ['*.png'],
-          'teaser.examples.examplefiles': ['*.teaserXML'],
+          'teaser.examples.examplefiles': ['*.teaserXML', '*.gml'],
           'teaser.examples.examplefiles.MelatenXML': ['*.xml']},
       classifiers=[
           'License :: OSI Approved :: MIT License',
