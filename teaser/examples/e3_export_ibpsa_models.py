@@ -11,7 +11,6 @@ import teaser.logic.utilities as utilities
 import os
 
 
-
 def example_export_annex():
     """"This function demonstrates the export to Modelica library IBPSA using
     the API function of TEASER"""
