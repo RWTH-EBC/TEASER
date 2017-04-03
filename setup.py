@@ -51,7 +51,7 @@ setup(name='teaser',
           'tests'],
       package_data={
           'teaser.data.input.inputdata': ['*.xml'],
-          'teaser.data.input.inputdata.weaterdata': [
+          'teaser.data.input.inputdata.weatherdata': [
               'DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos'],
           'teaser.data.output.modelicatemplate': [
               'package',
@@ -64,11 +64,11 @@ setup(name='teaser',
               'AixLib_ThermalZoneRecord_TwoElement',
               'AixLib_ThermalZoneRecord_ThreeElement',
               'AixLib_ThermalZoneRecord_FourElement'],
-          'teaser.data.output.modelicatemplate.Annex60': [
-              'Annex60_OneElement',
-              'Annex60_TwoElements',
-              'Annex60_ThreeElements',
-              'Annex60_FourElements'],
+          'teaser.data.output.modelicatemplate.IBPSA': [
+              'IBPSA_OneElement',
+              'IBPSA_TwoElements',
+              'IBPSA_ThreeElements',
+              'IBPSA_FourElements'],
           'teaser.data.output.texttemplate': [
               'ReadableBuilding_OneElement',
               'ReadableBuilding_TwoElement',
@@ -78,7 +78,7 @@ setup(name='teaser',
           'teaser.gui.guiimages': ['*.png'],
           'teaser.gui.guiimages.OfficeBuildings': ['*.png'],
           'teaser.gui.guiimages.Residentials': ['*.png'],
-          'teaser.examples.examplefiles': ['*.teaserXML'],
+          'teaser.examples.examplefiles': ['*.teaserXML', '*.gml'],
           'teaser.examples.examplefiles.MelatenXML': ['*.xml']},
       classifiers=[
           'License :: OSI Approved :: MIT License',
