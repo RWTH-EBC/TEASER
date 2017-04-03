@@ -12,7 +12,7 @@ import teaser.logic.utilities as utilities
 import teaser.data.input.teaserxml_input as txml_in
 import teaser.data.output.teaserxml_output as txml_out
 import teaser.data.output.aixlib_output as aixlib_output
-import teaser.data.output.annex60_output as annex60_output
+import teaser.data.output.ibpsa_output as ibpsa_output
 import teaser.data.output.text_output as text_out
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.bmvbs.office import Office
@@ -1228,14 +1228,14 @@ class Project(object):
         utilities.create_path(path)
 
         if internal_id is None:
-            annex60_output.export_annex60(
+            ibpsa_output.export_ibpsa(
                 buildings=self.buildings,
                 prj=self,
                 path=path)
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
-                    annex60_output.export_annex60(
+                    ibpsa_output.export_ibpsa(
                         buildings=[bldg],
                         prj=self,
                         path=path)
