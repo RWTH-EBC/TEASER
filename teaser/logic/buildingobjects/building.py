@@ -8,7 +8,7 @@ import random
 import re
 import warnings
 from teaser.logic.buildingobjects.calculation.aixlib import AixLib
-from teaser.logic.buildingobjects.calculation.annex60 import IBPSA
+from teaser.logic.buildingobjects.calculation.ibpsa import IBPSA
 
 
 from teaser.logic.buildingobjects.buildingsystems.buildingahu \
