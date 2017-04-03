@@ -4062,7 +4062,7 @@ class MainUI(QDialog):
         self.aixlib_groupbox.setMaximumSize(QtCore.QSize(360, 120))
         self.aixlib_groupbox.setObjectName(_fromUtf8("AixLibGroupBox"))
 
-        self.annex_groupbox = QtGui.QGroupBox("Annex60")
+        self.annex_groupbox = QtGui.QGroupBox("IBPSA")
         self.annex_groupbox.setGeometry(QtCore.QRect(5, 5, 360, 120))
         self.annex_groupbox.setMinimumSize(QtCore.QSize(360, 120))
         self.annex_groupbox.setMaximumSize(QtCore.QSize(360, 120))
@@ -4162,7 +4162,7 @@ class MainUI(QDialog):
         self.annex_create_merge_windows_combobox.setGeometry(
             QtCore.QRect(130, 55, 215, 25))
 
-        library_type_list = ["AixLib", "Annex60"]
+        library_type_list = ["AixLib", "IBPSA"]
         modelTypeList = ["MultizoneEquipped", "Multizone", "None"]
         zoneTypeList = ["ThermalZoneEquipped", "ThermalZone", "None"]
         number_of_elements_list = ["2", "3", "4"]
@@ -4846,7 +4846,7 @@ class MainUI(QDialog):
                                               " for current building " +
                                               "finished ")
 
-        elif self.export_create_library_combobox.currentText() == "Annex60":
+        elif self.export_create_library_combobox.currentText() == "IBPSA":
             sender = self.sender()
             num_of_elem = int(
                 self.annex_create_number_of_elements_combobox.currentText())

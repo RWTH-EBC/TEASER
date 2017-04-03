@@ -96,10 +96,10 @@ class NonResidential(Building):
         False for separate resistance for window, default is False
     used_library_calc : str
         'AixLib' for https://github.com/RWTH-EBC/AixLib
-        'Annex60' for https://github.com/iea-annex60/modelica-annex60
+        'IBPSA' for https://github.com/ibpsa/modelica
     library_attr : Annex() or AixLib() instance
         Classes with specific functions and attributes for building models in
-        Annex60 and AixLib. Python classes can be found in calculation package.
+        IBPSA and AixLib. Python classes can be found in calculation package.
 
     """
 
