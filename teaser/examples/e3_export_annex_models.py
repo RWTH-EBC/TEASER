@@ -2,7 +2,7 @@
 # TEASER Development Team
 
 """This module contains an example how to export buildings from a TEASER
-project to ready-to-run simulation models for Modelica library Annex60. These
+project to ready-to-run simulation models for Modelica library IBPSA. These
 models simulate in Dymola, OpenModelica and JModelica.
 """
 
@@ -13,7 +13,7 @@ import os
 
 
 def example_export_annex():
-    """"This function demonstrates the export to Modelica library Annex60 using
+    """"This function demonstrates the export to Modelica library IBPSA using
     the API function of TEASER"""
 
     # In e1_generate_archetype we created a Project with three archetype
@@ -33,7 +33,7 @@ def example_export_annex():
     # file by setting Project().weather_file_path. However we will use default
     # weather file.
 
-    prj.used_library_calc = 'Annex60'
+    prj.used_library_calc = 'IBPSA'
     prj.number_of_elements_calc = 4
     prj.merge_windows_calc = False
     prj.weather_file_path = utilities.get_full_path(
