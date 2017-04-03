@@ -13,7 +13,7 @@ TEASER
 
 TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) allows
 fast generation of archetype buildings with low input requirements and the
-export of individual dynamic simulation models for Modelica libraries `AixLib <https://github.com/RWTH-EBC/AixLib>`_ and `IEA-EBC Annex60 <https://github.com/iea-annex60/modelica-annex60>`_. It is being
+export of individual dynamic simulation models for Modelica libraries `AixLib <https://github.com/RWTH-EBC/AixLib>`_ and `Modelica IBPSA library <https://github.com/ibpsa/modelica>`_. It is being
 developed at the `RWTH Aachen University, E.ON Energy Research Center, Institute
 for Energy Efficient Buildings and Indoor Climate <https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1>`_.
 

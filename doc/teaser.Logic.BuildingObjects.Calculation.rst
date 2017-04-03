@@ -9,10 +9,10 @@ AixLib specific building class
     :members:
     :show-inheritance:
 
-Annex specific building class
+IBPSA specific building class
 ----------------------------------
 
-.. automodule:: teaser.logic.buildingobjects.calculation.annex60
+.. automodule:: teaser.logic.buildingobjects.calculation.ibpsa
     :members:
     :show-inheritance:
 
