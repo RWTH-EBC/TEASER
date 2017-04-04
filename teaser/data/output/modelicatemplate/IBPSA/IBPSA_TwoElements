@@ -3,13 +3,13 @@ within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_Models
 model ${zone.parent.name}_${zone.name}
   "This is the simulation model of ${zone.name} within building ${zone.parent.name} with traceable ID ${zone.parent.building_id}"
 
-  Annex60.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    calTSky=Annex60.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+  IBPSA.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
+    calTSky=IBPSA.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam="${zone.parent.parent.weather_file_path.replace("\\", "/")}")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${zone.model_attr.n_outer}](
+  IBPSA.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${zone.model_attr.n_outer}](
     each outSkyCon=true,
     each outGroCon=true,
     til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
@@ -17,18 +17,18 @@ model ${zone.parent.name}_${zone.name}
     azi = ${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
-  Annex60.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${zone.model_attr.n_outer}](
+  IBPSA.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${zone.model_attr.n_outer}](
     til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
     each lat =  ${deg_to_rad(zone.parent.latitude)},
     azi=${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  Annex60.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${zone.model_attr.n_outer},
-  UWin=${zone.model_attr.ua_value_win/zone.model_attr.area_win})
+  IBPSA.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${zone.model_attr.n_outer},
+  UWin=${zone.model_attr.u_value_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
-  Annex60.ThermalZones.ReducedOrder.RC.ThreeElements
-  thermalZoneThreeElements(
+  IBPSA.ThermalZones.ReducedOrder.RC.TwoElements
+  thermalZoneTwoElements(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
 % if zone.parent.library_attr.consider_heat_capacity is True:
     VAir=${zone.volume},
@@ -50,16 +50,9 @@ model ${zone.parent.name}_${zone.name}
     CInt={${zone.model_attr.c1_iw}},
     RWin=${zone.model_attr.r1_win},
     RExtRem=${zone.model_attr.r_rest_ow},
-    AFloor=${zone.model_attr.area_gf},
-    alphaFloor=${zone.model_attr.alpha_conv_inner_gf},
-    nFloor=1,
-    RFloor={${zone.model_attr.r1_gf}},
-    RFloorRem=${zone.model_attr.r_rest_gf},
-    CFloor={${zone.model_attr.c1_gf}},
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     extWallRC(thermCapExt(each der_T(fixed=true))),
     intWallRC(thermCapInt(each der_T(fixed=true))),
-    floorRC(thermCapExt(each der_T(fixed=true))),
     nOrientations=${zone.model_attr.n_outer},
     AWin=${get_list(zone.model_attr.window_areas)},
     ATransparent=${get_list(zone.model_attr.transparent_areas)},
@@ -67,7 +60,7 @@ model ${zone.parent.name}_${zone.name}
     "Thermal zone"
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 % if zone.model_attr.merge_windows is True:
-  Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
+  IBPSA.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
     n=${zone.model_attr.n_outer},
     wfGro=${zone.model_attr.weightfactor_ground},
     wfWall=${get_list(zone.model_attr.weightfactor_ow)},
@@ -79,7 +72,7 @@ model ${zone.parent.name}_${zone.name}
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
-  Annex60.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
+  IBPSA.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     n=${zone.model_attr.n_outer},
     wfGro=${zone.model_attr.weightfactor_ground},
     wfWall=${get_list(zone.model_attr.weightfactor_ow)},
@@ -112,7 +105,7 @@ model ${zone.parent.name}_${zone.name}
   Modelica.Blocks.Sources.Constant const[${zone.model_attr.n_outer}](each k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{-20,14},{-14,20}})));
-  Annex60.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
+  IBPSA.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(
     transformation(extent={{-100,-10},{-66,22}}),iconTransformation(
     extent={{-70,-12},{-50,8}})));
@@ -142,27 +135,14 @@ model ${zone.parent.name}_${zone.name}
     "Convective heat flow of machines"
     annotation (Placement(transformation(extent={{48,-84},{68,-64}})));
   Modelica.Blocks.Sources.CombiTimeTable internalGains(
-    tableOnFile=true,
-    extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
-    tableName="Internals",
-    fileName=Modelica.Utilities.Files.loadResource(
-      "modelica://${zone.parent.parent.name}/${zone.parent.name}/${zone.parent.name}_Models/${zone.parent.library_attr.file_internal_gains}"),
-    columns={2,3,4})
-    "Table with profiles for persons (radiative and convective) and machines (convective)"
-    annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
-  Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperatureFloor
-    "Prescribed temperature for floor plate outdoor surface temperature"
-    annotation (Placement(transformation(
-    extent={{-6,-6},{6,6}},
-    rotation=90,
-    origin={67,-12})));
-  Modelica.Blocks.Sources.Constant TSoil(k=${zone.t_ground})
-    "Outdoor surface temperature for floor plate"
-    annotation (
-    Placement(transformation(
-    extent={{-4,-4},{4,4}},
-    rotation=180,
-    origin={84,-22})));
+      tableOnFile=true,
+      extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+      tableName="Internals",
+      fileName=Modelica.Utilities.Files.loadResource(
+          "modelica://${zone.parent.parent.name}/${zone.parent.name}/${zone.parent.name}_Models/${zone.parent.library_attr.file_internal_gains}"),
+      columns={2,3,4})
+      "Table with profiles for persons (radiative and convective) and machines (convective)"
+      annotation (Placement(transformation(extent={{6,-60},{22,-44}})));
 equation
 % if zone.model_attr.merge_windows is False:
   connect(eqAirTemp.TEqAirWin, prescribedTemperature1.T)
@@ -219,7 +199,7 @@ equation
   connect(solRad.y, eqAirTemp.HSol)
     annotation (Line(points={{-27.5,11},{-26,11},{-26,2},{-26,2}},
     color={0,0,127}));
-%for i in range(max(1,zone.model_attr.n_outer)):
+  %for i in range(max(1,zone.model_attr.n_outer)):
     connect(weaDat.weaBus, HDifTil[${i+1}].weaBus)
     annotation (Line(
     points={{-78,62},{-74,62},{-74,30},{-68,30}},
@@ -231,18 +211,18 @@ equation
     color={255,204,51},
     thickness=0.5));
   %endfor
-  connect(personsRad.port, thermalZoneThreeElements.intGainsRad)
+  connect(personsRad.port, thermalZoneTwoElements.intGainsRad)
     annotation (Line(
     points={{68,-32},{84,-32},{100,-32},{100,24},{92.2,24}},
     color={191,0,0}));
 % if zone.model_attr.merge_windows is False:
-  connect(thermalConductorWin.solid, thermalZoneThreeElements.window)
+  connect(thermalConductorWin.solid, thermalZoneTwoElements.window)
     annotation (
      Line(points={{38,21},{40,21},{40,20},{43.8,20}}, color={191,0,0}));
   connect(prescribedTemperature1.port, thermalConductorWin.fluid)
     annotation (Line(points={{20,20},{28,20},{28,21}}, color={191,0,0}));
 % endif
-  connect(thermalZoneThreeElements.extWall, thermalConductorWall.solid)
+  connect(thermalZoneTwoElements.extWall, thermalConductorWall.solid)
     annotation (Line(points={{43.8,12},{40,12},{40,1},{36,1}},
     color={191,0,0}));
   connect(thermalConductorWall.fluid, prescribedTemperature.port)
@@ -261,20 +241,16 @@ equation
     string="%first",
     index=-1,
     extent={{-6,3},{-6,3}}));
-  connect(machinesConv.port, thermalZoneThreeElements.intGainsConv)
+  connect(machinesConv.port, thermalZoneTwoElements.intGainsConv)
     annotation (
     Line(points={{68,-74},{82,-74},{96,-74},{96,20},{92,20}}, color={191,
     0,0}));
-  connect(personsConv.port, thermalZoneThreeElements.intGainsConv)
+  connect(personsConv.port, thermalZoneTwoElements.intGainsConv)
     annotation (
     Line(points={{68,-52},{96,-52},{96,20},{92,20}}, color={191,0,0}));
-  connect(corGDoublePane.solarRadWinTrans, thermalZoneThreeElements.solRad)
+  connect(corGDoublePane.solarRadWinTrans, thermalZoneTwoElements.solRad)
     annotation (Line(points={{27,64},{34,64},{40,64},{40,31},{43,31}}, color={0,
     0,127}));
-  connect(prescribedTemperatureFloor.port, thermalZoneThreeElements.floor)
-    annotation (Line(points={{67,-6},{68,-6},{68,-2}}, color={191,0,0}));
-  connect(prescribedTemperatureFloor.T, TSoil.y) annotation (Line(points={{67,-19.2},
-          {72.5,-19.2},{72.5,-22},{79.6,-22}}, color={0,0,127}));
   annotation (experiment(
   StopTime=${zone.parent.parent.modelica_info.runtime_simulation},
   Interval=${zone.parent.parent.modelica_info.interval_output},

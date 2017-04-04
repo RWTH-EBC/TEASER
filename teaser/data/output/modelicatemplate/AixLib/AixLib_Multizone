@@ -17,7 +17,7 @@ model ${bldg.name}
       ${bldg.name}_DataBase.${bldg.name}_${zone.name}()${',' if not loop.last else ''}
       %endfor
       },
-% if bldg.central_ahu:
+% if bldg.with_ahu:
   heatAHU=${get_true_false(bldg.central_ahu.heating)},
   coolAHU=${get_true_false(bldg.central_ahu.cooling)},
   dehuAHU=${get_true_false(bldg.central_ahu.dehumidification)},

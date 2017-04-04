@@ -478,7 +478,7 @@ class Controller():
     def click_export_button_annex(self, project, num_of_elem, merge_win,
                                   internal_id, path_output_folder):
         '''
-        Execute an export with Annex60 model.
+        Execute an export with IBPSA model.
 
         project : project()
             root class
@@ -503,7 +503,7 @@ class Controller():
 
         project.number_of_elements_calc = num_of_elem
         project.merge_windows_calc = merge_win
-        project.used_library_calc = 'Annex60'
+        project.used_library_calc = 'IBPSA'
         project.calc_all_buildings()
         project.export_annex(internal_id, path=str(path_output_folder))
 

@@ -123,7 +123,7 @@ class DataClass(object):
         """
         try:
             __xml_file_mat = open(self.path_mat, 'r+')
-            version_parse = et.parse(self.path_tb)
+            version_parse = et.parse(self.path_mat)
         except:
             __xml_file_mat = open(self.path_mat, 'w')
             version_parse = False

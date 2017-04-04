@@ -1,7 +1,7 @@
 # Created December 2016
 # TEASER 4 Development Team
 
-"""This module includes Annex60 calcuation class
+"""This module includes IBPSA calcuation class
 """
 
 import scipy.io
@@ -10,11 +10,11 @@ import numpy as np
 import warnings
 import os
 
-class Annex60(object):
-    """Annex60 Class
+class IBPSA(object):
+    """IBPSA Class
 
     This class holds functions to sort and partly rewrite zone and building
-    attributes specific for Annex60 simulation. This includes the export of
+    attributes specific for IBPSA simulation. This includes the export of
     boundary coniditons.
 
     Parameters
@@ -33,7 +33,7 @@ class Annex60(object):
 
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
-        self.version = "0.1"
+        self.version = "1.0.0"
         self.consider_heat_capacity = True
 
     @staticmethod
@@ -103,7 +103,7 @@ class Annex60(object):
         Parameters
         ----------
         zone : ThermalZone()
-            TEASER instance of ThermalZone. As Annex60 computes single models
+            TEASER instance of ThermalZone. As IBPSA computes single models
             for single zones, we need to generate individual files for zones
             and internal gains
         time_line :[[int]]

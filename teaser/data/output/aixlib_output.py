@@ -24,7 +24,7 @@ def export_multizone(buildings, prj, path=None):
     glazing (corG) and decoupled heat conduction through windows (
     merge_windows=False). In contrast to versions < 0.5 TEASER now does not
     support any other model options, as we observed no need, since single
-    ThermalZones are identical with Annex60 models. If you miss one of the
+    ThermalZones are identical with IBPSA models. If you miss one of the
     old options please contact us.
 
     This function uses Mako Templates specified in
@@ -103,6 +103,12 @@ def export_multizone(buildings, prj, path=None):
         extra=None)
 
     for i, bldg in enumerate(buildings):
+
+        ass_error = "You chose IBPSA calculation, " \
+                    "but want to export AixLib models, " \
+                    "this is not possible"
+
+        assert bldg.used_library_calc == 'AixLib', ass_error
 
         bldg_path = os.path.join(path, bldg.name)
         utilities.create_path(utilities.get_full_path(bldg_path))

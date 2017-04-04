@@ -12,7 +12,7 @@ import teaser.logic.utilities as utilities
 import teaser.data.input.teaserxml_input as txml_in
 import teaser.data.output.teaserxml_output as txml_out
 import teaser.data.output.aixlib_output as aixlib_output
-import teaser.data.output.annex60_output as annex60_output
+import teaser.data.output.ibpsa_output as ibpsa_output
 import teaser.data.output.text_output as text_out
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.bmvbs.office import Office
@@ -33,12 +33,8 @@ from teaser.logic.archetypebuildings.urbanrenet.est8b import EST8b
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
     SingleFamilyDwelling
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
-
-try:
-    import teaser.data.output.citygml_output as citygml_out
-    import teaser.data.input.citygml_input as citygml_in
-except UserWarning:
-    warnings.warn("No CityGML module found, no CityGML import/export")
+import teaser.data.output.citygml_output as citygml_out
+import teaser.data.input.citygml_input as citygml_in
 
 
 class Project(object):
@@ -77,9 +73,9 @@ class Project(object):
     merge_windows_calc : bool
         True for merging the windows into the outer walls, False for
         separate resistance for window, default is False (only supported for
-        Annex60)
+        IBPSA)
     used_library_calc : str
-        used library (AixLib and Annex60 are supported)
+        used library (AixLib and IBPSA are supported)
     """
 
     def __init__(self, load_data=True):
@@ -137,7 +133,7 @@ class Project(object):
             For AixLib vdi calculation is True, ebc calculation is False
 
         used_library_calc : str
-            used library (AixLib and Annex60 are supported)
+            used library (AixLib and IBPSA are supported)
 
         """
         if raise_errors is True:
@@ -153,13 +149,12 @@ class Project(object):
                         number_of_elements=self._number_of_elements_calc,
                         merge_windows=self._merge_windows_calc,
                         used_library=self._used_library_calc)
-                except UserWarning:
+                except ZeroDivisionError:
                     warnings.warn(
                         "Following building can't be calculated and is "
                         "removed from buildings list. Use raise_errors=True "
                         "to get python errors and stop TEASER from deleting "
-                        "this building:",
-                        bldg, bldg.name)
+                        "this building:" + bldg.name)
 
     def retrofit_all_buildings(
             self,
@@ -1155,7 +1150,7 @@ class Project(object):
         double pane glazing) and supporting models, like tables and weather
         model. In contrast to versions < 0.5 TEASER now does not
         support any model options, as we observed no need, since single
-        ThermalZones are identically with Annex60 models. If you miss one of
+        ThermalZones are identically with IBPSA models. If you miss one of
         the old options please contact us.
 
         Parameters
@@ -1200,10 +1195,9 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
-                else:
-                    pass
 
-    def export_annex(
+
+    def export_ibpsa(
             self,
             internal_id=None,
             path=None):
@@ -1234,19 +1228,18 @@ class Project(object):
         utilities.create_path(path)
 
         if internal_id is None:
-            annex60_output.export_annex60(
+            ibpsa_output.export_ibpsa(
                 buildings=self.buildings,
                 prj=self,
                 path=path)
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
-                    annex60_output.export_annex60(
+                    ibpsa_output.export_ibpsa(
                         buildings=[bldg],
                         prj=self,
                         path=path)
-                else:
-                    pass
+
 
     def export_parameters_txt(self, path=None):
         """Exports parameters of all buildings in a readable text file
@@ -1360,9 +1353,9 @@ class Project(object):
     @used_library_calc.setter
     def used_library_calc(self, value):
 
-        ass_error_1 = "used library needs to be AixLib or Annex60"
+        ass_error_1 = "used library needs to be AixLib or IBPSA"
 
-        assert value != ["AixLib", "Annex60"], ass_error_1
+        assert value != ["AixLib", "IBPSA"], ass_error_1
 
         self._used_library_calc = value
 
@@ -1379,10 +1372,6 @@ class Project(object):
             regex = re.compile('[^a-zA-z0-9]')
             self._name = regex.sub('', value)
         else:
-            try:
-                value = str(value)
-                regex = re.compile('[^a-zA-z0-9]')
-                self._name = regex.sub('', value)
-
-            except ValueError:
-                print("Can't convert name to string")
+            value = str(value)
+            regex = re.compile('[^a-zA-z0-9]')
+            self._name = regex.sub('', value)
