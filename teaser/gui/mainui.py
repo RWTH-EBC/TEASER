@@ -109,7 +109,7 @@ class MainUI(QDialog):
             utilitis.get_full_path(
                 'gui/guiimages/Teaser_logo.png'), QtCore.QSize(16, 16))
         self.setWindowIcon(self.teaser_icon)
-        teaserVersion = "0.5"
+        teaserVersion = "0.5.1"
         self.setWindowTitle("TEASER Version %s" % teaserVersion)
         self.central_widget = QtGui.QWidget(self)
         self.central_widget.setObjectName(_fromUtf8("central_widget"))
