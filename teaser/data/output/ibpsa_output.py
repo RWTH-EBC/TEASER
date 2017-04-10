@@ -144,13 +144,17 @@ def export_ibpsa(
                 zone_path, bldg.name + '_' + zone.name + '.mo')), 'w')
 
             if type(zone.model_attr).__name__ == "OneElement":
-                out_file.write(model_template_1.render_unicode(zone=zone))
+                out_file.write(model_template_1.render_unicode(zone=zone,
+                                                               library=library))
             elif type(zone.model_attr).__name__ == "TwoElement":
-                out_file.write(model_template_2.render_unicode(zone=zone))
+                out_file.write(model_template_2.render_unicode(zone=zone,
+                                                               library=library))
             elif type(zone.model_attr).__name__ == "ThreeElement":
-                out_file.write(model_template_3.render_unicode(zone=zone))
+                out_file.write(model_template_3.render_unicode(zone=zone,
+                                                               library=library))
             elif type(zone.model_attr).__name__ == "FourElement":
-                out_file.write(model_template_4.render_unicode(zone=zone))
+                out_file.write(model_template_4.render_unicode(zone=zone,
+                                                               library=library))
 
             out_file.close()
 
