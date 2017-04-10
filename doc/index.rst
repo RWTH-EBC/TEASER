@@ -24,9 +24,6 @@ for Energy Efficient Buildings and Indoor Climate <https://www.ebc.eonerc.rwth-a
    - `BuildingSystems <https://github.com/UdK-VPT/BuildingSystems>`_
    - `IDEAS <https://github.com/open-ideas/IDEAS>`_.
 
-
-
-
 This software is work-in-progress. Documentation will be incomplete or missing
 and the software may not run properly. In particular the Graphical User
 Interface is a beta release and not fully tested. If you find any bugs, please
@@ -34,6 +31,12 @@ report them in the issue section of the `repository <https://github.com/RWTH-EBC
 
 If you have any questions regarding TEASER feel free to contact us at
 `ebc-teaser@eonerc.rwth-aachen.de <ebc-teaser@eonerc.rwth-aachen.de>`_.
+
+Note that this documentation will always be auto-generated using the
+`development branch <https://github.com/RWTH-EBC/TEASER/tree/development>`_.
+That means, there might be new developments described in this docu that are not
+working in the master and pip installation of TEASER. A list of those issue can
+be found `here <development.html>`_
 
 
 Contents
@@ -49,6 +52,7 @@ Contents
    teaser
    acknowledgments
    license
+   development
 
 
 Publications
