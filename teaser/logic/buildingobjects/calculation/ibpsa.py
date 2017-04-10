@@ -43,7 +43,7 @@ class IBPSA(object):
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
         self.version = {'AixLib': '0.4.0', 'Buildings': '4.0.0',
-                        'BuildingSystems': '0.1', 'IDEAS': '1.0.0'}
+                        'BuildingSystems': '2.0.0-beta', 'IDEAS': '1.0.0'}
         self.consider_heat_capacity = True
 
     @staticmethod
