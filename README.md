@@ -4,7 +4,7 @@
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 [![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg)](https://coveralls.io/github/RWTH-EBC/TEASER)
-[![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg)](https://travis-ci.org/RWTH-EBC/TEASER)
+[![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=master)](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=master)
 
 TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) allows
 fast generation of archetype buildings with low input requirements and the
@@ -46,7 +46,7 @@ models for [AixLib](https://github.com/RWTH-EBC/AixLib) and
 
 ## Version
 
-TEASER is a ongoing research project, the current version is 0.5.0, which is
+TEASER is a ongoing research project, the current version is 0.5.1, which is
 still a pre-release.
 
 ## How to use TEASER
