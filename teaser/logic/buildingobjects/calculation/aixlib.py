@@ -34,7 +34,7 @@ class AixLib(object):
         Filename for set temperature file
     file_ahu : str
         Filename for AHU boundary conditions file
-    file_intern_gains:
+    file_internal_gains : str
         Filename for internal gains file
     version : str
         Used AixLib version, default should always be current master version
