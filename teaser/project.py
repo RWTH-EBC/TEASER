@@ -1226,7 +1226,7 @@ class Project(object):
         ass_error_1 = "library for IBPSA export has to be 'AixLib', " \
                       "'Buildings', 'BuildingSystems' or 'IDEAS'"
 
-        assert library != ['AixLib', 'Buildings', 'BuildingSystems',
+        assert library in ['AixLib', 'Buildings', 'BuildingSystems',
                            'IDEAS'], ass_error_1
 
         if path is None:
