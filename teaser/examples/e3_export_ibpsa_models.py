@@ -11,7 +11,7 @@ import teaser.logic.utilities as utilities
 import os
 
 
-def example_export_annex():
+def example_export_ibpsa():
     """"This function demonstrates the export to Modelica library IBPSA using
     the API function of TEASER"""
 
@@ -48,7 +48,12 @@ def example_export_annex():
 
     prj.calc_all_buildings()
 
-    # To export the ready-to-run models simply call Project.export_annex().
+    # To export the ready-to-run models simply call Project.export_ibpsa().
+    # First specify the IBPSA related library you want to export the models
+    # for. The models are identical in each library, but IBPSA Modelica
+    # library is  just a core set of models and should not be used
+    # standalone. Valid values are 'AixLib' (default), 'Buildings',
+    # 'BuildingSystems' and 'IDEAS'. We chose AixLib
     # You can specify the path, where the model files should be saved.
     # None means, that the default path in your home directory
     # will be used. If you only want to export one specific building, you can
@@ -57,11 +62,12 @@ def example_export_annex():
     # directory, thus we are passing over None for both parameters.
 
     prj.export_ibpsa(
+        library='AixLib',
         internal_id=None,
         path=None)
 
 if __name__ == '__main__':
 
-    example_export_annex()
+    example_export_ibpsa()
 
     print("Example 3: That's it! :)")

@@ -1,7 +1,7 @@
 # Created March 2016
 # TEASER Development Team
 
-"""aixlib_output
+"""ibpsa_output
 
 This module contains function to call Templates for AixLib model generation
 """

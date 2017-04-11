@@ -23,9 +23,18 @@ class IBPSA(object):
     parent: Building()
         The parent class of this object, the Building the attributes are
         calculated for. (default: None)
+
+    Attributes
+    ----------
+
+    file_internal_gains : str
+        Filename for internal gains file
+    version : dict
+        Dictionary with supportes library and their version number
     consider_heat_capacity : bool
         decides whether air capacity is considered or not for all thermal
         zones in the building
+
 
     """
 
@@ -33,7 +42,8 @@ class IBPSA(object):
 
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
-        self.version = "1.0.0"
+        self.version = {'AixLib': '0.4.0', 'Buildings': '4.0.0',
+                        'BuildingSystems': '2.0.0-beta', 'IDEAS': '1.0.0'}
         self.consider_heat_capacity = True
 
     @staticmethod
