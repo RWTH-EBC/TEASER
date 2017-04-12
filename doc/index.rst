@@ -38,6 +38,8 @@ That means, there might be new developments described in this docu that are not
 working in the master and pip installation of TEASER. A list of those issue can
 be found `here <development.html>`_
 
+Also have a look at the `FAQ section <faq.html>`_. If you feel your question should also be listed, please open an issue in the issue section of the `repository <https://github.com/RWTH-EBC/TEASER/issues>`_.
+
 
 Contents
 ========
@@ -52,6 +54,7 @@ Contents
    teaser
    acknowledgments
    license
+   faq
    development
 
 
