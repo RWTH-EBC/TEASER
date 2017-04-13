@@ -135,10 +135,14 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             pyxb_ahu.by_pass_dehumidification
         bldg.central_ahu.efficiency_recovery = pyxb_ahu.efficiency_recovery
 
-        if float(project_bind.version) >= 0.5:
-            bldg.central_ahu.efficiency_recovery_false = \
-                pyxb_ahu.efficiency_recovery_false
-        else:
+        try:
+            if float(project_bind.version) >= 0.5:
+                bldg.central_ahu.efficiency_recovery_false = \
+                    pyxb_ahu.efficiency_recovery_false
+            else:
+                bldg.central_ahu.efficiency_recovery_false = \
+                    pyxb_ahu.efficiency_revocery_false
+        except AttributeError:
             bldg.central_ahu.efficiency_recovery_false = \
                 pyxb_ahu.efficiency_revocery_false
 
@@ -191,10 +195,14 @@ def _load_building(prj, pyxb_bld, type, project_bind):
         zone.use_conditions.daily_operation_heating = \
             pyxb_use.UsageOperationTime.daily_operation_heating
 
-        if float(project_bind.version) >= 0.4:
-            zone.use_conditions.maintained_illuminance = \
-                pyxb_use.Lighting.maintained_illuminance
-        else:
+        try:
+            if float(project_bind.version) >= 0.4:
+                zone.use_conditions.maintained_illuminance = \
+                    pyxb_use.Lighting.maintained_illuminance
+            else:
+                zone.use_conditions.maintained_illuminance = \
+                    pyxb_use.Lighting.maintained_illuminace
+        except AttributeError:
             zone.use_conditions.maintained_illuminance = \
                 pyxb_use.Lighting.maintained_illuminace
 

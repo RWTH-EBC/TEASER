@@ -15,7 +15,7 @@ def building_test2(prj):
     """
     building which is hardcoded for testing
     """
-    bldg = Building(parent = prj)
+    bldg = Building(parent=prj)
 
     '''Set some building parameters'''
 
@@ -29,7 +29,7 @@ def building_test2(prj):
     '''Instantiate a ThermalZone class, with building as parent and set  some
     parameters of the thermal zone'''
 
-    tz = ThermalZone(parent = bldg)
+    tz = ThermalZone(parent=bldg)
     tz.name = "Living Room"
     tz.area = 140.0
     tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
@@ -37,13 +37,13 @@ def building_test2(prj):
 
     tz.use_conditions = BoundaryConditions(tz)
     tz.use_conditions.usage = "Living"
-    tz.use_conditions.cooling_time = [5,18]
-    tz.use_conditions.heating_time = [5,18]
+    tz.use_conditions.cooling_time = [5, 18]
+    tz.use_conditions.heating_time = [5, 18]
     tz.use_conditions.set_temp_heat = 288.15
     tz.use_conditions.set_temp_cool = 298.15
-    tz.use_conditions.temp_set_back= 4.0
-    tz.use_conditions.min_air_exchange= 0.0
-    tz.use_conditions.min_ahu= 0.0
+    tz.use_conditions.temp_set_back = 4.0
+    tz.use_conditions.min_air_exchange = 0.0
+    tz.use_conditions.min_ahu = 0.0
     tz.use_conditions.max_ahu = 2.6
     tz.use_conditions.with_ahu = True
     tz.use_conditions.persons = 3
@@ -82,7 +82,7 @@ def building_test2(prj):
     #out_wall_dict = collections.OrderedDict(sorted(out_wall_dict.items(), key=lambda t: t[0]))
     for value in out_wall_dict:
         '''instantiate OuterWall class'''
-        out_wall = OuterWall(parent = tz)
+        out_wall = OuterWall(parent=tz)
         out_wall.name = value[0]
         out_wall.year_of_construction = value[1][0]
         out_wall.construction_type = value[1][1]
@@ -121,7 +121,7 @@ def building_test2(prj):
 
     for value in in_wall_dict:
         '''instantiate OuterWall class'''
-        in_wall = InnerWall(parent = tz)
+        in_wall = InnerWall(parent=tz)
         in_wall.name = value[0]
         in_wall.year_of_construction = value[1][0]
         in_wall.construction_type = value[1][1]
@@ -156,7 +156,7 @@ def building_test2(prj):
                              5.0, 90.0, 270.0]]]
 
     for value in win_dict:
-        win = Window(parent = tz)
+        win = Window(parent=tz)
         win.construction_type = "Window"
         win.name = value[0]
         win.area = value[1][1]
@@ -172,7 +172,7 @@ def building_test2(prj):
         win.a_conv = 0.03
         win.shading_g_total = 1.0
         win.shading_max_irr = 180.0
-        win_layer = Layer(parent = win)
+        win_layer = Layer(parent=win)
         win_layer.id = 1
         win_layer.thickness = 0.024
 
@@ -181,7 +181,7 @@ def building_test2(prj):
         win_material.thermal_conduc = 0.067
         win_material.transmittance = 0.9
 
-    roof = Rooftop(parent = tz)
+    roof = Rooftop(parent=tz)
     roof.name = "Roof"
     roof.year_of_construction = bldg.year_of_construction
     roof.construction_type = "heavy"
@@ -205,7 +205,7 @@ def building_test2(prj):
     roof_material.thermal_conduc = 2.0
     roof_material.heat_capac = 0.84
 
-    ground = GroundFloor(parent = tz)
+    ground = GroundFloor(parent=tz)
     ground.name = "ground"
     ground.year_of_construction = bldg.year_of_construction
     ground.construction_type = "heavy"

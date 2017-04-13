@@ -7,10 +7,10 @@ Export AixLib models
     :members:
     :show-inheritance:
 
-Export Annex60 models
+Export IBPSA models
 --------------------
 
-.. automodule:: teaser.data.output.annex60_output
+.. automodule:: teaser.data.output.ibpsa_output
     :members:
     :show-inheritance:
 

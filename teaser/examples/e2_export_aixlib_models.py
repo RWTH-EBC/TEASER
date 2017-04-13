@@ -12,7 +12,6 @@ import teaser.logic.utilities as utilities
 import os
 
 
-
 def example_export_aixlib():
     """"This function demonstrates the export to Modelica library AixLib using
     the API function of TEASER"""

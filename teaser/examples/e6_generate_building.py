@@ -170,9 +170,9 @@ def example_create_building():
 
     from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
 
-    in_wall_dict = {"InnerWall1": [bldg.year_of_construction, 'light', 10.0],
-                    "InnerWall2": [bldg.year_of_construction, 'heavy', 14.0],
-                    "InnerWall3": [bldg.year_of_construction, 'light', 10.0]}
+    in_wall_dict = {"InnerWall1": [10.0],
+                    "InnerWall2": [14.0],
+                    "InnerWall3": [10.0]}
 
     for key, value in out_wall_dict.items():
         # Instantiate class, key is the name

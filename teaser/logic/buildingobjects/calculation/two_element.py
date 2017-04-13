@@ -28,7 +28,7 @@ class TwoElement(object):
     merge_windows : boolean
         True for merging the windows into the outer wall's RC-combination,
         False for separate resistance for window, default is False. (Only
-        supported for Annex60)
+        supported for IBPSA)
     t_bt : float [d]
         Time constant according to VDI 6007 (default t_bt = 5)
 
@@ -177,7 +177,9 @@ class TwoElement(object):
         Area-weighted combined coefficient of heat transfer of windows facing
         the ambient.
     ua_value_win : float [W/K]
-        U-Value times outer wall area.
+        U-Value times window wall area.
+    u_value_win : float [W/(m2K)]
+        Area weighted U-Value of windows.
     r_conv_inner_win : float [K/W]
         Sum of convective resistances for all windows facing the
         inside of this thermal zone.
@@ -341,6 +343,7 @@ class TwoElement(object):
 
         # UA-Value
         self.ua_value_win = 0.0
+        self.u_value_win = 0.0
 
         # resistances for heat transfer facing the inside of this thermal zone
         self.r_conv_inner_win = 0.0
@@ -391,11 +394,28 @@ class TwoElement(object):
             win.calc_ua_value()
 
         self.set_calc_default()
+        if len(outer_walls) < 1:
+            warnings.warn("No walls are defined as outer walls for thermal "
+                          "zone " + str(self.thermal_zone.name) +
+                          " in building " +
+                          str(self.thermal_zone.parent.name) +
+                          ", please be careful with results. In addition " +
+                          "this might lead to RunTimeErrors")
         self._sum_outer_wall_elements()
-        self._sum_inner_wall_elements()
-        self._sum_window_elements()
+        if len(self.thermal_zone.inner_walls) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name,
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no inner walls have been defined.')
+        else:
+            self._sum_inner_wall_elements()
+            self._calc_inner_elements()
+        if len(self.thermal_zone.windows) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no windows have been defined.')
+        else:
+            self._sum_window_elements()
         self._calc_outer_elements()
-        self._calc_inner_elements()
         self._calc_wf()
         self._calc_mean_values()
         self._calc_number_of_elements()
@@ -686,6 +706,7 @@ class TwoElement(object):
         self.area_win = sum(win.area for win in self.thermal_zone.windows)
         self.ua_value_win = sum(
             win.ua_value for win in self.thermal_zone.windows)
+        self.u_value_win = self.ua_value_win/self.area_win
 
         self.r_total_win = 1 / self.ua_value_win
         # values facing the inside of the thermal zone
@@ -771,16 +792,13 @@ class TwoElement(object):
             # more than one outer wall, calculate chain matrix
             self.r1_ow, self.c1_ow = self._calc_parallel_connection(outer_walls,
                                                                     omega)
-        else:
-            warnings.warn("No walls are defined as outer walls, please be "
-                          "careful with results. In addition this might lead "
-                          "to RunTimeErrors")
 
         if self.merge_windows is False:
             try:
 
-                self.r1_win = (1 / sum((1 / win.r1) for
-                                       win in self.thermal_zone.windows))
+                if len(self.thermal_zone.windows) > 0:
+                    self.r1_win = (1 / sum((1 / win.r1) for win in
+                                           self.thermal_zone.windows))
 
                 conduction = (1 / sum((1 / element.r_conduc) for element in
                                       outer_walls))
@@ -795,18 +813,20 @@ class TwoElement(object):
 
             try:
 
-                self.r1_win = 1 / sum(1 / (win.r1 / 6) for win in
-                                      self.thermal_zone.windows)
+                if len(self.thermal_zone.windows) > 0:
+                    self.r1_win = 1 / sum(1 / (win.r1 / 6) for win in
+                                          self.thermal_zone.windows)
 
-                self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
-                self.r_total_ow = 1 / (self.ua_value_ow + self.ua_value_win)
+                    self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
 
-                self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
-                    ((1 / self.r_conv_inner_ow)
-                     + (1 / self.r_conv_inner_win)
-                     + (1 / self.r_rad_inner_ow)
-                     + (1 / self.r_rad_inner_win)))) - 1 / (
-                    self.alpha_comb_outer_ow * self.area_ow)
+                    self.r_total_ow = 1 / (self.ua_value_ow +
+                                           self.ua_value_win)
+                    self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
+                        ((1 / self.r_conv_inner_ow)
+                         + (1 / self.r_conv_inner_win)
+                         + (1 / self.r_rad_inner_ow)
+                         + (1 / self.r_rad_inner_win)))) - 1 / (
+                        self.alpha_comb_outer_ow * self.area_ow)
 
                 self.ir_emissivity_inner_ow = (
                     (self.ir_emissivity_inner_ow * self.area_ow
@@ -862,10 +882,6 @@ class TwoElement(object):
             self.r1_iw, self.c1_iw = self._calc_parallel_connection(
                 inner_walls,
                 omega)
-        else:
-            warnings.warn("No walls are defined as outer walls, please be "
-                          "careful with results. In addition this might lead "
-                          "to RunTimeErrors")
 
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)
@@ -1139,6 +1155,7 @@ class TwoElement(object):
 
         # UA-Value
         self.ua_value_win = 0.0
+        self.u_value_win = 0.0
 
         # resistances for heat transfer facing the inside of this thermal zone
         self.r_conv_inner_win = 0.0
