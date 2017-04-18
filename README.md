@@ -46,7 +46,7 @@ models for [AixLib](https://github.com/RWTH-EBC/AixLib) and
 
 ## Version
 
-TEASER is a ongoing research project, the current version is 0.5.1, which is
+TEASER is a ongoing research project, the current version is 0.5.2, which is
 still a pre-release.
 
 ## How to use TEASER
