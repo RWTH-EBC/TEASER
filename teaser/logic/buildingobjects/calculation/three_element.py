@@ -391,7 +391,6 @@ class ThreeElement(object):
         # Optical properties
         self.ir_emissivity_inner_gf = 0.0
 
-
         # Additional attributes
 
         self.weightfactor_ground = 0.0

@@ -120,7 +120,6 @@ class Building(object):
             year_of_construction=None,
             net_leased_area=None,
             with_ahu=False):
-
         """Constructor of Building Class
         """
 

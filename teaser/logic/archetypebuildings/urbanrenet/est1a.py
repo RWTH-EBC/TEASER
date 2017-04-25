@@ -112,7 +112,6 @@ class EST1a(Residential):
             with_ahu=False,
             neighbour_buildings=None,
             construction_type=None):
-
         """Constructor of EST1a
         """
 

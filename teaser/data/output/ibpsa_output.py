@@ -168,7 +168,5 @@ def export_ibpsa(
             package_list=bldg.thermal_zones,
             addition=bldg.name + "_")
 
-
-
     print("Exports can be found here:")
     print(path)

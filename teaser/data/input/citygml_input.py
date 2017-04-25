@@ -130,18 +130,18 @@ def _set_attributes(bldg, gml_bldg):
 
 
 def _create_building(bldg, city_object):
-    #LOD2
+    # LOD2
     if city_object.Feature.boundedBy_:
         for bound_surf in city_object.Feature.boundedBy_:
             for comp_member in bound_surf.BoundarySurface.lod2MultiSurface.MultiSurface.surfaceMember:
-                try: #modelling option 1
+                try:  # modelling option 1
                     bldg.gml_surfaces.append(SurfaceGML(
                         comp_member.Surface.exterior.Ring.posList.value()))
-                except: #modelling option 2
+                except:  # modelling option 2
                     for pos_list in comp_member.Surface.surfaceMember:
                         bldg.gml_surfaces.append(SurfaceGML(
                             pos_list.Surface.exterior.Ring.posList.value()))
-    #if a building Feature has no boundedBy_ but a lod1solid it is LOD1
+    # if a building Feature has no boundedBy_ but a lod1solid it is LOD1
     elif city_object.Feature.lod1Solid:
         for member in city_object.Feature.lod1Solid.Solid.exterior\
                 .Surface.surfaceMember:
@@ -153,19 +153,20 @@ def _create_building_part(bldg, part):
     if part.BuildingPart.boundedBy_:
         for bound_surf in part.BuildingPart.boundedBy_:
             for comp_member in bound_surf.BoundarySurface.lod2MultiSurface.MultiSurface.surfaceMember:
-                try: #modelling option 1
+                try:  # modelling option 1
                     bldg.gml_surfaces.append(SurfaceGML(
                         comp_member.Surface.exterior.Ring.posList.value()))
-                except: #modelling option 2
+                except:  # modelling option 2
                     for pos_list in comp_member.Surface.surfaceMember:
                         bldg.gml_surfaces.append(SurfaceGML(
                             pos_list.Surface.exterior.Ring.posList.value()))
-    #if a building Feature has no boundedBy_ but a lod1solid it is LOD1
+    # if a building Feature has no boundedBy_ but a lod1solid it is LOD1
     elif part.BuildingPart.lod1Solid:
         for member in part.BuildingPart.lod1Solid.Solid.exterior\
                 .Surface.surfaceMember:
             bldg.gml_surfaces.append(SurfaceGML(
                 member.Surface.exterior.Ring.posList.value()))
+
 
 def _convert_bldg(bldg, function):
     """converts the instance to a specific archetype building
@@ -368,15 +369,15 @@ class SurfaceGML(object):
 
         """
 
-        x = np.linalg.det([[1,a[1],a[2]],
-             [1,b[1],b[2]],
-             [1,c[1],c[2]]])
-        y = np.linalg.det([[a[0],1,a[2]],
-             [b[0],1,b[2]],
-             [c[0],1,c[2]]])
-        z = np.linalg.det([[a[0],a[1],1],
-             [b[0],b[1],1],
-             [c[0],c[1],1]])
+        x = np.linalg.det([[1, a[1], a[2]],
+             [1, b[1], b[2]],
+             [1, c[1], c[2]]])
+        y = np.linalg.det([[a[0], 1, a[2]],
+             [b[0], 1, b[2]],
+             [c[0], 1, c[2]]])
+        z = np.linalg.det([[a[0], a[1], 1],
+             [b[0], b[1], 1],
+             [c[0], c[1], 1]])
         magnitude = (x**2 + y**2 + z**2)**.5
         return x / magnitude, y / magnitude, z / magnitude
 
@@ -396,7 +397,7 @@ class SurfaceGML(object):
             returns the area of a polygon
         """
 
-        if len(poly) < 3: # not a plane - no area
+        if len(poly) < 3:  # not a plane - no area
             return 0
         total = [0, 0, 0]
         length = len(poly)

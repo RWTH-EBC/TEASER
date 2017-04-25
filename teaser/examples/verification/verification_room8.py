@@ -9,6 +9,7 @@ parameters. The parameters are then compared with the ones from Rouvel
 from teaser.project import Project
 import teaser.logic.utilities as utilities
 
+
 def parameter_room8():
 
     prj = Project(False)
@@ -23,6 +24,7 @@ def parameter_room8():
         used_library='AixLib')
 
     return prj
+
 
 if __name__ == "__main__":
     prj = parameter_room8()

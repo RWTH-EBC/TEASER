@@ -161,7 +161,6 @@ class SingleFamilyDwelling(Residential):
             cellar=None,
             dormer=None,
             construction_type=None):
-
         """Constructor of SingleFamilyDwelling
         """
 

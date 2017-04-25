@@ -13,6 +13,7 @@ import inspect
 from teaser.logic.archetypebuildings.residential import Residential
 import pyxb
 
+
 def save_teaser_xml(path, project):
     '''This function saves a project to a tXML
 

@@ -4,6 +4,7 @@
 
 from PyQt4 import Qt, QtGui
 
+
 class PictureButton(QtGui.QAbstractButton):
 
     def __init__(self, pixmap, parent=None):

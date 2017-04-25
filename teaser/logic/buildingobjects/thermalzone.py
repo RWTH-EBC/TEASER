@@ -11,6 +11,7 @@ from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 from teaser.logic.buildingobjects.calculation.four_element import FourElement
 
+
 class ThermalZone(object):
     """Thermal zone class.
 
@@ -92,7 +93,7 @@ class ThermalZone(object):
         self.name = None
         self._area = None
         self._volume = None
-        self._infiltration_rate = 0.5 
+        self._infiltration_rate = 0.5
         self._outer_walls = []
         self._rooftops = []
         self._ground_floors = []
@@ -109,7 +110,6 @@ class ThermalZone(object):
         self.density_air = 1.25
         self.heat_capac_air = 1002
         self.t_ground = 286.15
-
 
     def calc_zone_parameters(
             self,
@@ -456,7 +456,6 @@ class ThermalZone(object):
     @property
     def floors(self):
         return self._floors
-
 
     @floors.setter
     def floors(self, value):

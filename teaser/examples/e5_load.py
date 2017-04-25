@@ -37,7 +37,6 @@ def example_save():
         "examples/examplefiles/new.teaserXML"))
     prj.save_project(file_name="new", path=None)
 
-
     # To reload data from a pickle file, we do not need to instantiate an
     # API, as pickle will automatically instantiate all classes as they have
     # been saved. The saved file from example e4 is called ´teaser_pickle.p´

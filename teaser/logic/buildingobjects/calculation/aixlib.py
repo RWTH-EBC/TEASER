@@ -223,7 +223,6 @@ class AixLib(object):
                     else:
                         pass
 
-
         scipy.io.savemat(
             path,
             mdict={'Tset': time_line},
