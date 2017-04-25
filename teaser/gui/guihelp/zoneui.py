@@ -21,7 +21,7 @@ class ZoneUI(QAbstractListModel):
             usage = wert.Nutzung
             nutzungDecoded = usage.decode('iso-8859-1') 
             self.selectionOfZones.append(nutzungDecoded)
-        
+
     def rowCount(self, parent=QModelIndex()): 
         return len(self.Zonenliste) 
     def data(self, index, role): 
@@ -31,4 +31,3 @@ class ZoneUI(QAbstractListModel):
             return QVariant(u" Name:       " + str(self.Zonenliste[index.row()].Name) + "\n" + u" Typ:            " + self.Zonenauswahl[self.Zonenliste[index.row()].Typ] + "\n" + label_Flaeche + str(self.Zonenliste[index.row()].Flaeche) + label_qm)
         else: 
             return QVariant()
-

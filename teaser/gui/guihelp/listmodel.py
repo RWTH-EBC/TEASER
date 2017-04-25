@@ -12,8 +12,8 @@ class ListModel(QAbstractListModel):
     def __init__(self, parent=None, *args):
         QAbstractListModel.__init__(self, parent, *args)
         self.listOfZonesForDisplay = []
-        
-        
+
+
     def rowCount(self, parent=QModelIndex()): 
         return len(self.listOfZonesForDisplay) 
     def data(self, index, role): 
@@ -21,4 +21,3 @@ class ListModel(QAbstractListModel):
             return QVariant("test")
         else: 
             return QVariant("test1")
-

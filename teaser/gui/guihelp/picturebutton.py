@@ -16,4 +16,3 @@ class PictureButton(QtGui.QAbstractButton):
 
     def sizeHint(self):
         return self.pixmap.size()
-
