@@ -806,5 +806,3 @@ class Building(object):
             self.library_attr = AixLib(parent=self)
         elif self.used_library_calc == 'IBPSA':
             self.library_attr = IBPSA(parent=self)
-
-

@@ -169,4 +169,3 @@ class IBPSA(object):
             mdict={'Internals': internal_boundary},
             appendmat=False,
             format='4')
-

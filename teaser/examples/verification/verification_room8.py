@@ -70,5 +70,3 @@ if __name__ == "__main__":
     print("weightfactor_win: ",
           prj.buildings[0].thermal_zones[0].model_attr.weightfactor_win,
           "Rouvel: 0.404766351, 0.404766351")
-
-

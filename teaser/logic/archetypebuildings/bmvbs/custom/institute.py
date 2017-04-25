@@ -162,4 +162,3 @@ class Institute(Office):
             [0.04, "WC and sanitary rooms in non-residential buildings"]
         self.zone_area_factors["ICT"] = \
             [0.02, "Data center"]
-
