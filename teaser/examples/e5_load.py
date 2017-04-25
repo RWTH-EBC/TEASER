@@ -48,7 +48,7 @@ def example_save():
         'teaser_pickle.p')
 
     pickle_prj = pickle.load(open(load_pickle, "rb"))
-
+    print(pickle_prj)
     # The last option to import data into TEASER is using a CityGML file. The
     # import of CityGML underlies some limitations e.g. concerning data
     # given in the file and the way the buildings are modeled.

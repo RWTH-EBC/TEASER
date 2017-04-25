@@ -60,7 +60,7 @@ def save_gml(project, path, ref_coordinates=None):
     gml_out = citygml.CityModel()
     gml_out.name = [og.gml.CodeType(project.name)]
 
-    if ref_coordinates != None:
+    if ref_coordinates is not None:
 
         gml_out = _set_reference_boundary(gml_out,
                                           ref_coordinates[0],

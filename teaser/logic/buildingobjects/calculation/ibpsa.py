@@ -7,7 +7,6 @@
 import scipy.io
 import teaser.logic.utilities as utilities
 import numpy as np
-import warnings
 import os
 
 
