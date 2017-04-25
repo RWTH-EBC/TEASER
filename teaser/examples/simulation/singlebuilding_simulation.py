@@ -119,8 +119,8 @@ def main():
 
 # Timer
     endtime = time.time()
-    print('Simulation lasts: ', endtime-starttime, ' seconds or ',
-          (endtime-starttime)/60, ' minutes! or', (endtime-starttime)/(60*60))
+    print('Simulation lasts: ', endtime - starttime, ' seconds or ',
+          (endtime - starttime) / 60, ' minutes! or', (endtime - starttime) / (60 * 60))
 
 
 def simulateCase(s):

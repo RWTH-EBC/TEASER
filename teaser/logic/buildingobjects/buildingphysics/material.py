@@ -179,11 +179,11 @@ class Material(object):
             if self.parent is not None:
                 if self.parent.parent is not None:
                     if self.parent.thickness is not None and \
-                                    self.parent.parent.inner_convection is \
-                                    not None and \
-                                    self.parent.parent.inner_radiation is \
-                                    not None and \
-                                    self.parent.parent.area is not None:
+                            self.parent.parent.inner_convection is \
+                            not None and \
+                            self.parent.parent.inner_radiation is \
+                            not None and \
+                            self.parent.parent.area is not None:
                         self.parent.parent.calc_ua_value()
 
     @property

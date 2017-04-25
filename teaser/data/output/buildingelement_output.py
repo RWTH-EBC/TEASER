@@ -225,7 +225,7 @@ def delete_type_element(element, data_class):
 
         for check in element_binding.InnerWall:
             if check.building_age_group == element.building_age_group and \
-                            check.construction_type == element.construction_type:
+                    check.construction_type == element.construction_type:
                 element_binding.InnerWall.remove(check)
                 break
 
@@ -233,7 +233,7 @@ def delete_type_element(element, data_class):
 
         for check in element_binding.Ceiling:
             if check.building_age_group == element.building_age_group and \
-                            check.construction_type == element.construction_type:
+                    check.construction_type == element.construction_type:
                 element_binding.Ceiling.remove(check)
                 break
 
@@ -241,7 +241,7 @@ def delete_type_element(element, data_class):
 
         for check in element_binding.Floor:
             if check.building_age_group == element.building_age_group and \
-                            check.construction_type == element.construction_type:
+                    check.construction_type == element.construction_type:
                 element_binding.Floor.remove(check)
                 break
 
@@ -249,7 +249,7 @@ def delete_type_element(element, data_class):
 
         for check in element_binding.GroundFloor:
             if check.building_age_group == element.building_age_group and \
-                            check.construction_type == element.construction_type:
+                    check.construction_type == element.construction_type:
                 element_binding.GroundFloor.remove(check)
                 break
 
@@ -257,7 +257,7 @@ def delete_type_element(element, data_class):
 
         for check in element_binding.Rooftop:
             if check.building_age_group == element.building_age_group and \
-                            check.construction_type == element.construction_type:
+                    check.construction_type == element.construction_type:
                 element_binding.Rooftop.remove(check)
                 break
 
@@ -265,7 +265,7 @@ def delete_type_element(element, data_class):
 
         for check in element_binding.Window:
             if check.building_age_group == element.building_age_group and \
-                            check.construction_type == element.construction_type:
+                    check.construction_type == element.construction_type:
                 element_binding.Window.remove(check)
                 break
 

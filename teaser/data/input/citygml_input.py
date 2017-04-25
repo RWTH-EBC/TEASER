@@ -24,7 +24,7 @@ import teaser.data.bindings.opengis.raw.smil20 as smil
 import teaser.data.bindings.opengis.misc.raw.xAL as xal
 
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling \
-                            import SingleFamilyDwelling
+    import SingleFamilyDwelling
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.buildingobjects.building import Building
 
@@ -75,7 +75,7 @@ def load_gml(path, prj):
 
                 elif city_object.Feature.function[0].value() == "1120":
                     bldg = Office(parent=prj,
-                                    name=city_object.Feature.id)
+                                  name=city_object.Feature.id)
                 else:
                     bldg = Building(parent=prj,
                                     name=city_object.Feature.id)
@@ -252,7 +252,7 @@ class SurfaceGML(object):
             returns the area of the surface
         """
 
-        split_surface = list(zip(*[iter(self.gml_surface)]*3))
+        split_surface = list(zip(*[iter(self.gml_surface)] * 3))
         self.surface_area = self.poly_area(poly=split_surface)
 
         return self.surface_area
@@ -273,14 +273,14 @@ class SurfaceGML(object):
         gml2 = gml_surface[3:6]
         gml3 = gml_surface[6:9]
 
-        vektor_1 = gml2-gml1
-        vektor_2 = gml3-gml1
+        vektor_1 = gml2 - gml1
+        vektor_2 = gml3 - gml1
 
         normal_1 = np.cross(vektor_1, vektor_2)
         z_axis = np.array([0, 0, 1])
 
-        self.surface_tilt = np.arccos(np.dot(normal_1, z_axis)/(LA.norm(
-            z_axis)*LA.norm(normal_1)))*360/(2*np.pi)
+        self.surface_tilt = np.arccos(np.dot(normal_1, z_axis) / (LA.norm(
+            z_axis) * LA.norm(normal_1))) * 360 / (2 * np.pi)
 
         if self.surface_tilt == 180:
             self.surface_tilt = 0.0
@@ -307,30 +307,30 @@ class SurfaceGML(object):
         gml3 = gml_surface[6:9]
         gml4 = gml_surface[9:12]
         if len(gml_surface) > 12:
-            vektor_1 = gml2-gml1
-            vektor_2 = gml4-gml1
+            vektor_1 = gml2 - gml1
+            vektor_2 = gml4 - gml1
         else:
-            vektor_1 = gml2-gml1
-            vektor_2 = gml3-gml1
+            vektor_1 = gml2 - gml1
+            vektor_2 = gml3 - gml1
 
         normal_1 = np.cross(vektor_1, vektor_2)
-        normal_uni = normal_1/LA.norm(normal_1)
+        normal_uni = normal_1 / LA.norm(normal_1)
         phi = None
         if normal_uni[0] > 0:
-            phi = np.arctan(normal_uni[1]/normal_uni[0])
+            phi = np.arctan(normal_uni[1] / normal_uni[0])
         elif normal_uni[0] < 0 <= normal_uni[1]:
-            phi = np.arctan(normal_uni[1]/normal_uni[0]) + np.pi
+            phi = np.arctan(normal_uni[1] / normal_uni[0]) + np.pi
         elif normal_uni[0] < 0 > normal_uni[1]:
-            phi = np.arctan(normal_uni[1]/normal_uni[0]) - np.pi
+            phi = np.arctan(normal_uni[1] / normal_uni[0]) - np.pi
         elif normal_uni[0] == 0 < normal_uni[1]:
-            phi = np.pi/2
+            phi = np.pi / 2
         elif normal_uni[0] == 0 > normal_uni[1]:
-            phi = -np.pi/2
+            phi = -np.pi / 2
 
         if phi is None:
             pass
         elif phi < 0:
-            self.surface_orientation = (phi+2*np.pi)*360/(2*np.pi)
+            self.surface_orientation = (phi + 2 * np.pi) * 360 / (2 * np.pi)
         else:
             self.surface_orientation = phi * 360 / (2 * np.pi)
 
@@ -370,14 +370,14 @@ class SurfaceGML(object):
         """
 
         x = np.linalg.det([[1, a[1], a[2]],
-             [1, b[1], b[2]],
-             [1, c[1], c[2]]])
+                           [1, b[1], b[2]],
+                           [1, c[1], c[2]]])
         y = np.linalg.det([[a[0], 1, a[2]],
-             [b[0], 1, b[2]],
-             [c[0], 1, c[2]]])
+                           [b[0], 1, b[2]],
+                           [c[0], 1, c[2]]])
         z = np.linalg.det([[a[0], a[1], 1],
-             [b[0], b[1], 1],
-             [c[0], c[1], 1]])
+                           [b[0], b[1], 1],
+                           [c[0], c[1], 1]])
         magnitude = (x**2 + y**2 + z**2)**.5
         return x / magnitude, y / magnitude, z / magnitude
 
@@ -403,10 +403,10 @@ class SurfaceGML(object):
         length = len(poly)
         for i in range(length):
             vi1 = poly[i]
-            vi2 = poly[(i+1) % length]
+            vi2 = poly[(i + 1) % length]
             prod = np.cross(vi1, vi2)
             total[0] += prod[0]
             total[1] += prod[1]
             total[2] += prod[2]
         result = np.dot(total, self.unit_normal(poly[0], poly[1], poly[2]))
-        return abs(result/2)
+        return abs(result / 2)

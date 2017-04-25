@@ -671,4 +671,4 @@ class Controller():
         '''
 
         if not current_zone.volume:
-                current_zone.volume = current_zone.set_volume_zone()
+            current_zone.volume = current_zone.set_volume_zone()

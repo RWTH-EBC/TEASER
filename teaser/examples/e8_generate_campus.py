@@ -108,7 +108,7 @@ def create_reference_project(info_list):
 
         if building.usage_type == 'office' or building.usage_type == \
                 'institute' or building.usage_type == 'institute4' or \
-                        building.usage_type == 'institute8':
+        building.usage_type == 'institute8':
             prj.add_non_residential(
                 method='bmvbs',
                 usage=building.usage_type,

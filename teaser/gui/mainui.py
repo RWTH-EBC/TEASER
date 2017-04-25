@@ -2250,23 +2250,23 @@ class MainUI(QDialog):
         '''
 
         for layer in self.all_constr_layer_list:
-                if layer.internal_id == self.current_layer.internal_id:
-                                layer.thickness = self.thickness_textbox.text()
-                                layer.material.name =\
-                                    self.material_combobox.currentText()
-                                layer.material.density = \
-                                    self.material_density_textbox.text()
-                                layer.material.thermal_conduc = \
-                                    self.material_thermal_conduc_textbox.text()
-                                layer.material.heat_capac = \
-                                    self.material_heat_capac_textbox.text()
-                                layer.material.solar_absorp = \
-                                    self.material_solar_absorp_textbox.text()
-                                layer.material.ir_emissivity = \
-                                    self.material_ir_emissivity_textbox.text()
-                                layer.material.transmittance = \
-                                    self.material_transmittance_textbox.text()
-                                break
+            if layer.internal_id == self.current_layer.internal_id:
+                layer.thickness = self.thickness_textbox.text()
+                layer.material.name =\
+                    self.material_combobox.currentText()
+                layer.material.density = \
+                    self.material_density_textbox.text()
+                layer.material.thermal_conduc = \
+                    self.material_thermal_conduc_textbox.text()
+                layer.material.heat_capac = \
+                    self.material_heat_capac_textbox.text()
+                layer.material.solar_absorp = \
+                    self.material_solar_absorp_textbox.text()
+                layer.material.ir_emissivity = \
+                    self.material_ir_emissivity_textbox.text()
+                layer.material.transmittance = \
+                    self.material_transmittance_textbox.text()
+                break
 
     def save_changed_simulation_values(self):
         '''Saves the inputs in the simulation window
@@ -2524,9 +2524,9 @@ class MainUI(QDialog):
                                              [orientation_value])
                     if self.envelope_orientation_combobox.currentText() == \
                             orientation_string:
-                            self.current_building.set_window_area(
-                                float(self.envelope_area_textbox.text()),
-                                orientation_value)
+                        self.current_building.set_window_area(
+                            float(self.envelope_area_textbox.text()),
+                            orientation_value)
             else:
                 for orientation_value in \
                         self.guiinfo.orientations_numbers.keys():
@@ -2534,9 +2534,9 @@ class MainUI(QDialog):
                                              [orientation_value])
                     if self.envelope_orientation_combobox.currentText() == \
                             orientation_string:
-                            self.current_building.set_outer_wall_area(
-                                float(self.envelope_area_textbox.text()),
-                                orientation_value)
+                        self.current_building.set_outer_wall_area(
+                            float(self.envelope_area_textbox.text()),
+                            orientation_value)
         else:
             orientation_number_before_changing = \
                 self.guiinfo.orientations_strings[orientation_before_changing]
@@ -2655,11 +2655,11 @@ class MainUI(QDialog):
             and self.edit_zone_name_line_edit.text() != ""\
                 and self.edit_zone_volume_line_edit.text() != "":
 
-                self.current_zone.area = self.edit_zone_area_line_edit.text()
-                self.current_zone.name = self.edit_zone_name_line_edit.text()
-                self.current_zone.volume = \
-                    self.edit_zone_volume_line_edit.text()
-                self.display_current_building()
+            self.current_zone.area = self.edit_zone_area_line_edit.text()
+            self.current_zone.name = self.edit_zone_name_line_edit.text()
+            self.current_zone.volume = \
+                self.edit_zone_volume_line_edit.text()
+            self.display_current_building()
 
     def check_inputs_typebuilding(self):
         '''checks inputs of a type building
@@ -2781,16 +2781,16 @@ class MainUI(QDialog):
             self.element_model.appendRow(item)
 
         for outerwall in self.current_zone.outer_walls:
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) +
-                    str(outerwall.name) +
-                    "\nType:\t".expandtabs(11) +
-                    "Outer Wall \n Area:\t".expandtabs(11) +
-                    str(outerwall.area) +
-                    "\n Orientation:\t".expandtabs(11) +
-                    str(outerwall.orientation),
-                    outerwall.internal_id)
-                self.element_model.appendRow(item)
+            item = TrackableItem(
+                "Name:\t".expandtabs(8) +
+                str(outerwall.name) +
+                "\nType:\t".expandtabs(11) +
+                "Outer Wall \n Area:\t".expandtabs(11) +
+                str(outerwall.area) +
+                "\n Orientation:\t".expandtabs(11) +
+                str(outerwall.orientation),
+                outerwall.internal_id)
+            self.element_model.appendRow(item)
 
         for element in self.current_zone.windows:
             item = TrackableItem(
@@ -2844,18 +2844,18 @@ class MainUI(QDialog):
             trans = 1
 
         if check == "Element Details Window":
-                self.current_element = Controller.click_add_new_layer(
-                    self.current_element,
-                    int(self.new_layer_position_combobox.currentText()),
-                    thick, self.new_layer_material_combobox.currentText(),
-                    dens, therm, heat, solar, ir, trans)
+            self.current_element = Controller.click_add_new_layer(
+                self.current_element,
+                int(self.new_layer_position_combobox.currentText()),
+                thick, self.new_layer_material_combobox.currentText(),
+                dens, therm, heat, solar, ir, trans)
 
         elif check == "set all construction window":
             position = int(self.new_layer_position_combobox.currentText())
             exists = False
             for layer in self.all_constr_layer_list:
                 if layer.position == position:
-                        exists = True
+                    exists = True
                 if exists:
                     layer.position = layer.position + 1
 
@@ -3454,16 +3454,16 @@ class MainUI(QDialog):
             self.element_model.appendRow(item)
 
         for outerwall in self.current_zone.outer_walls:
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) +
-                    str(outerwall.name) +
-                    "\nType:\t".expandtabs(11) +
-                    "Outer Wall \n Area:\t".expandtabs(11) +
-                    str(outerwall.area) +
-                    "\n Orientation:\t".expandtabs(11) +
-                    str(outerwall.orientation),
-                    outerwall.internal_id)
-                self.element_model.appendRow(item)
+            item = TrackableItem(
+                "Name:\t".expandtabs(8) +
+                str(outerwall.name) +
+                "\nType:\t".expandtabs(11) +
+                "Outer Wall \n Area:\t".expandtabs(11) +
+                str(outerwall.area) +
+                "\n Orientation:\t".expandtabs(11) +
+                str(outerwall.orientation),
+                outerwall.internal_id)
+            self.element_model.appendRow(item)
 
         for element in self.current_zone.windows:
             item = TrackableItem(
@@ -4702,16 +4702,16 @@ class MainUI(QDialog):
             self.element_model.appendRow(item)
 
         for outerwall in self.current_zone.outer_walls:
-                item = TrackableItem(
-                    "Name:\t".expandtabs(8) +
-                    str(outerwall.name) +
-                    "\nType:\t".expandtabs(11) +
-                    "Outer Wall \n Area:\t".expandtabs(11) +
-                    str(outerwall.area) +
-                    "\n Orientation:\t".expandtabs(11) +
-                    str(outerwall.orientation),
-                    outerwall.internal_id)
-                self.element_model.appendRow(item)
+            item = TrackableItem(
+                "Name:\t".expandtabs(8) +
+                str(outerwall.name) +
+                "\nType:\t".expandtabs(11) +
+                "Outer Wall \n Area:\t".expandtabs(11) +
+                str(outerwall.area) +
+                "\n Orientation:\t".expandtabs(11) +
+                str(outerwall.orientation),
+                outerwall.internal_id)
+            self.element_model.appendRow(item)
 
         for element in self.current_zone.windows:
             item = TrackableItem(
@@ -4852,9 +4852,9 @@ class MainUI(QDialog):
                 self.annex_create_number_of_elements_combobox.currentText())
             if self.annex_create_merge_windows_combobox.currentText() == \
                "True":
-                    merge_win = True
+                merge_win = True
             else:
-                    merge_win = False
+                merge_win = False
 
             if(sender.text() == self.export_button.text()):
                 Controller.click_export_button_annex(
@@ -5134,29 +5134,29 @@ class MainUI(QDialog):
             QtGui.QMessageBox.warning(self, u"No building error!",
                                       u"You need to specify a building first.")
         else:
-                for building in self.project.buildings:
-                    if (building.internal_id ==
-                            self.current_building.internal_id):
-                        ind = self.project.buildings.index(building)
-                self.project.buildings.pop(ind)
-                self.current_building = 0
-                self.current_zone = 0
-                self.current_element = 0
-                self.current_layer = 0
-                self.zone_model.clear()
-                self.outer_elements_model.clear()
-                self.element_model.clear()
-                self.layer_model.clear()
-                self.buildings_combo_box_model.removeColumn(ind + 1)
-                self.side_bar_buildings_combo_box.removeItem(ind)
-                self.side_bar_construction_year_line_edit.clear()
-                self.side_bar_height_of_floors_line_edit.clear()
-                self.side_bar_id_line_edit.clear()
-                self.side_bar_location_line_edit.clear()
-                self.side_bar_net_leased_area_line_edit.clear()
-                self.side_bar_number_of_floors_line_edit.clear()
-                self.side_bar_street_line_edit.clear()
-                self.display_current_building()
+            for building in self.project.buildings:
+                if (building.internal_id ==
+                        self.current_building.internal_id):
+                    ind = self.project.buildings.index(building)
+            self.project.buildings.pop(ind)
+            self.current_building = 0
+            self.current_zone = 0
+            self.current_element = 0
+            self.current_layer = 0
+            self.zone_model.clear()
+            self.outer_elements_model.clear()
+            self.element_model.clear()
+            self.layer_model.clear()
+            self.buildings_combo_box_model.removeColumn(ind + 1)
+            self.side_bar_buildings_combo_box.removeItem(ind)
+            self.side_bar_construction_year_line_edit.clear()
+            self.side_bar_height_of_floors_line_edit.clear()
+            self.side_bar_id_line_edit.clear()
+            self.side_bar_location_line_edit.clear()
+            self.side_bar_net_leased_area_line_edit.clear()
+            self.side_bar_number_of_floors_line_edit.clear()
+            self.side_bar_street_line_edit.clear()
+            self.display_current_building()
 
     def delete_thermal_zone(self):
         '''Deletes a thermal zone

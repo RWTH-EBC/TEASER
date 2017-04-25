@@ -27,35 +27,35 @@ def export_parameters_txt(prj, path):
 
     model_template_1 = Template(
         filename=utilities.get_full_path(
-                os.path.join(
-                    'data',
-                    'output',
-                    'texttemplate',
-                    'ReadableBuilding_OneElement')),
+            os.path.join(
+                'data',
+                'output',
+                'texttemplate',
+                'ReadableBuilding_OneElement')),
         lookup=lookup)
     model_template_2 = Template(
         filename=utilities.get_full_path(
-                os.path.join(
-                    'data',
-                    'output',
-                    'texttemplate',
-                    'ReadableBuilding_TwoElement')),
+            os.path.join(
+                'data',
+                'output',
+                'texttemplate',
+                'ReadableBuilding_TwoElement')),
         lookup=lookup)
     model_template_3 = Template(
         filename=utilities.get_full_path(
-                os.path.join(
-                    'data',
-                    'output',
-                    'texttemplate',
-                    'ReadableBuilding_ThreeElement')),
+            os.path.join(
+                'data',
+                'output',
+                'texttemplate',
+                'ReadableBuilding_ThreeElement')),
         lookup=lookup)
     model_template_4 = Template(
         filename=utilities.get_full_path(
-                os.path.join(
-                    'data',
-                    'output',
-                    'texttemplate',
-                    'ReadableBuilding_FourElement')),
+            os.path.join(
+                'data',
+                'output',
+                'texttemplate',
+                'ReadableBuilding_FourElement')),
         lookup=lookup)
 
     for bldg in prj.buildings:

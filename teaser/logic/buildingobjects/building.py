@@ -228,13 +228,13 @@ class Building(object):
             self.height_of_floors = height_of_floor
         elif self.height_of_floors is None and self.number_of_floors is not \
                 None:
-            self.height_of_floors = self.bldg_height/self.number_of_floors
+            self.height_of_floors = self.bldg_height / self.number_of_floors
         else:
             pass
 
         if self.number_of_floors is not None:
             self.net_leased_area = self.get_footprint_gml() * \
-                                    self.number_of_floors
+                self.number_of_floors
             return
 
         else:

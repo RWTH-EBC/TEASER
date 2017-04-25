@@ -57,7 +57,7 @@ if __name__ == "__main__":
     print("area_ow + area_win: ", prj.buildings[0].thermal_zones[
         0].model_attr.area_ow + prj.buildings[0].thermal_zones[
         0].model_attr.area_win,
-          "m2 ---", "Rouvel: 25.5 m2")
+        "m2 ---", "Rouvel: 25.5 m2")
     print("alpha_conv_inner_ow: ",
           prj.buildings[0].thermal_zones[0].model_attr.alpha_conv_inner_ow,
           "W/(m2*K) ---", "Rouvel: 2.7 W/(m2*K)")

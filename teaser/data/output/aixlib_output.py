@@ -114,7 +114,7 @@ def export_multizone(buildings, prj, path=None):
         utilities.create_path(utilities.get_full_path(bldg_path))
         utilities.create_path(utilities.get_full_path(
             os.path.join(bldg_path,
-            bldg.name + "_DataBase")))
+                         bldg.name + "_DataBase")))
         bldg.library_attr.modelica_set_temp(path=bldg_path)
         bldg.library_attr.modelica_AHU_boundary(
             time_line=None,
