@@ -28,7 +28,11 @@ class ZoneUI(QAbstractListModel):
     def data(self, index, role):
         if index.isValid() and role == Qt.DisplayRole:
             label_Flaeche = u" Flaeche:      "
-            label_qm = u" m�"
-            return QVariant(u" Name:       " + str(self.Zonenliste[index.row()].Name) + "\n" + u" Typ:            " + self.Zonenauswahl[self.Zonenliste[index.row()].Typ] + "\n" + label_Flaeche + str(self.Zonenliste[index.row()].Flaeche) + label_qm)
+            label_qm = u" m2"
+            return QVariant(u" Name:       " + str(self.Zonenliste[index.row(
+            )].Name) + "\n" + u" Typ:            " + self.Zonenauswahl[
+                self.Zonenliste[index.row()].Typ] + "\n" + label_Flaeche +
+                            str(self.Zonenliste[index.row()].Flaeche) +
+                            label_qm)
         else:
             return QVariant()

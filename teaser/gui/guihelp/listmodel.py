@@ -5,9 +5,11 @@ from PyQt4.QtCore import QAbstractListModel, QModelIndex, QVariant, Qt
 
 
 class ListModel(QAbstractListModel):
-    '''
-    QAbstractListModel is a nice interface for 1D Lists but since it is an abstract class we must subclass it which is where this class comes from.
-    '''
+    """
+    QAbstractListModel is a nice interface for 1D Lists but since
+    it is an abstract class we must subclass it which is where this class
+    comes from.
+    """
 
     def __init__(self, parent=None, *args):
         QAbstractListModel.__init__(self, parent, *args)

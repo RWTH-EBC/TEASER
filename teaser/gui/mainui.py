@@ -3,7 +3,6 @@
 # by TEASER4 Development Team
 
 import sys
-import inspect
 from PyQt4 import QtCore, QtGui
 from PyQt4.Qt import QDialog, QStandardItemModel
 from PyQt4.Qt import Qt
@@ -12,7 +11,6 @@ from PyQt4.QtGui import QStandardItem, QTabWidget, QPixmap
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as\
     FigureCanvas
 import matplotlib.pyplot as plt
-from numpy.distutils.pathccompiler import PathScaleCCompiler
 from teaser.gui.guihelp.guiinfo import GUIInfo
 from teaser.gui.guihelp.listviewzonesfiller import ListViewZonesFiller
 from teaser.gui.controller.controller import Controller
@@ -3132,7 +3130,7 @@ class MainUI(QDialog):
         axes = plt.gca()
         axes.set_ylim([0, 1])
         axes.set_xlim([0, 24])
-        leg = axes.legend(loc=1, ncol=1, borderaxespad=0.)
+        axes.legend(loc=1, ncol=1, borderaxespad=0.)
         self.canvas_profiles.draw()
 
         self.usagePicPixMap = QtGui.QPixmap("gui/sheep_PNG2186.png")
@@ -3564,7 +3562,7 @@ class MainUI(QDialog):
         axes = plt.gca()
         axes.set_ylim([0, 1])
         axes.set_xlim([0, 24])
-        leg = axes.legend(loc=1, ncol=1, borderaxespad=0.)
+        axes.legend(loc=1, ncol=1, borderaxespad=0.)
         self.canvas_profiles.draw()
 
     def update_element_details(self):
@@ -4163,8 +4161,8 @@ class MainUI(QDialog):
             QtCore.QRect(130, 55, 215, 25))
 
         library_type_list = ["AixLib", "IBPSA"]
-        modelTypeList = ["MultizoneEquipped", "Multizone", "None"]
-        zoneTypeList = ["ThermalZoneEquipped", "ThermalZone", "None"]
+        # modelTypeList = ["MultizoneEquipped", "Multizone", "None"]
+        # zoneTypeList = ["ThermalZoneEquipped", "ThermalZone", "None"]
         number_of_elements_list = ["2", "3", "4"]
         merging_windows_list = ["True", "False"]
 
