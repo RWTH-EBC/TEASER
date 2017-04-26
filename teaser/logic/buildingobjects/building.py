@@ -447,7 +447,7 @@ class Building(object):
                 t_bt=5)
             self.sum_heat_load += zone.model_attr.heat_load
 
-        if self.used_library_calc == type(self.library_attr).__name__:
+        if self.used_library_calc == self.library_attr.__class__.__name__:
             if self.used_library_calc == 'AixLib':
                 self.library_attr.calc_auxiliary_attr()
             else:

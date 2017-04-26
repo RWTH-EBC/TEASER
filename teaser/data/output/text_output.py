@@ -63,7 +63,7 @@ def export_parameters_txt(prj, path):
             path,
             bldg.name + "_txtOutput")
         utilities.create_path(bldg_path)
-        out_file = open(os.path.join(bldg_path,  bldg.name + ".txt"), 'w')
+        out_file = open(os.path.join(bldg_path, bldg.name + ".txt"), 'w')
 
         if type(bldg.thermal_zones[0].model_attr).__name__ == "OneElement":
             out_file.write(model_template_1.render_unicode(bldg=bldg))

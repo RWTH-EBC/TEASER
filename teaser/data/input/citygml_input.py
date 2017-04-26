@@ -51,124 +51,132 @@ def load_gml(path, prj):
             for part in city_object.Feature.consistsOfBuildingPart:
                 if part.BuildingPart.function:
                     if part.BuildingPart.function[0].value() == "1000":
-                        bldg = SingleFamilyDwelling(parent=prj,
-                                                    name=part.BuildingPart.id)
+                        bld = SingleFamilyDwelling(
+                            parent=prj,
+                            name=part.BuildingPart.id)
                     elif part.BuildingPart.function[0].value() == "1120":
-                        bldg = Office(parent=prj,
-                                      name=part.BuildingPart.id)
+                        bld = Office(
+                            parent=prj,
+                            name=part.BuildingPart.id)
                     else:
-                        bldg = Building(parent=prj,
-                                        name=part.BuildingPart.id)
+                        bld = Building(
+                            parent=prj,
+                            name=part.BuildingPart.id)
 
                 else:
-                    bldg = Building(parent=prj,
-                                    name=part.BuildingPart.id)
-                _create_building_part(bldg=bldg, part=part)
-                _set_attributes(bldg=bldg, gml_bldg=part.BuildingPart)
-                bldg.set_height_gml()
+                    bld = Building(
+                        parent=prj,
+                        name=part.BuildingPart.id)
+                _create_building_part(bld=bld, part=part)
+                _set_attributes(bld=bld, gml_bld=part.BuildingPart)
+                bld.set_height_gml()
         else:
 
             if city_object.Feature.function:
                 if city_object.Feature.function[0].value() == "1000":
-                    bldg = SingleFamilyDwelling(parent=prj,
-                                                name=city_object.Feature.id)
+                    bld = SingleFamilyDwelling(
+                        parent=prj,
+                        name=city_object.Feature.id)
 
                 elif city_object.Feature.function[0].value() == "1120":
-                    bldg = Office(parent=prj,
-                                  name=city_object.Feature.id)
+                    bld = Office(
+                        parent=prj,
+                        name=city_object.Feature.id)
                 else:
-                    bldg = Building(parent=prj,
-                                    name=city_object.Feature.id)
+                    bld = Building(
+                        parent=prj,
+                        name=city_object.Feature.id)
             else:
 
-                bldg = Building(parent=prj,
-                                name=city_object.Feature.id)
+                bld = Building(
+                    parent=prj,
+                    name=city_object.Feature.id)
 
-            _create_building(bldg=bldg, city_object=city_object)
-            _set_attributes(bldg=bldg, gml_bldg=city_object.Feature)
-            bldg.set_height_gml()
+            _create_building(bld=bld, city_object=city_object)
+            _set_attributes(bld=bld, gml_bld=city_object.Feature)
+            bld.set_height_gml()
             try:
-                bldg.set_gml_attributes()
+                bld.set_gml_attributes()
             except UserWarning:
-                print("bldg.set_gml_attributes() did not work")
+                print("bld.set_gml_attributes() did not work")
                 pass
             try:
-                bldg.generate_from_gml()
+                bld.generate_from_gml()
             except UserWarning:
-                print("bldg.generate_from_gml() did not work")
+                print("bld.generate_from_gml() did not work")
                 pass
 
 
-def _set_attributes(bldg, gml_bldg):
+def _set_attributes(bld, gml_bld):
     """tries to set attributes for type building generation
     """
     try:
-        bldg.name = gml_bldg.name[0].value()
+        bld.name = gml_bld.name[0].value()
     except UserWarning:
         print("no name specified in gml file")
         pass
     try:
-        bldg.number_of_floors = gml_bldg.storeysAboveGround
+        bld.number_of_floors = gml_bld.storeysAboveGround
     except UserWarning:
         print("no storeysAboveGround specified in gml file")
         pass
     try:
-        bldg.height_of_floors = gml_bldg.storeyHeightsAboveGround.value()[0]
+        bld.height_of_floors = gml_bld.storeyHeightsAboveGround.value()[0]
     except UserWarning:
         print("no storeyHeightsAboveGround specified in gml file")
         pass
     try:
-        bldg.year_of_construction = gml_bldg.yearOfConstruction.year
+        bld.year_of_construction = gml_bld.yearOfConstruction.year
     except UserWarning:
         print("no yearOfConstruction specified in gml file")
         pass
     try:
-        bldg.bldg_height = gml_bldg.measuredHeight.value()
+        bld.bld_height = gml_bld.measuredHeight.value()
     except UserWarning:
         print("no measuredHeight specified in gml file")
         pass
 
 
-def _create_building(bldg, city_object):
+def _create_building(bld, city_object):
     # LOD2
     if city_object.Feature.boundedBy_:
         for bound_surf in city_object.Feature.boundedBy_:
             for comp_member in bound_surf.BoundarySurface.lod2MultiSurface.MultiSurface.surfaceMember:
                 try:  # modelling option 1
-                    bldg.gml_surfaces.append(SurfaceGML(
+                    bld.gml_surfaces.append(SurfaceGML(
                         comp_member.Surface.exterior.Ring.posList.value()))
                 except:  # modelling option 2
                     for pos_list in comp_member.Surface.surfaceMember:
-                        bldg.gml_surfaces.append(SurfaceGML(
+                        bld.gml_surfaces.append(SurfaceGML(
                             pos_list.Surface.exterior.Ring.posList.value()))
     # if a building Feature has no boundedBy_ but a lod1solid it is LOD1
     elif city_object.Feature.lod1Solid:
         for member in city_object.Feature.lod1Solid.Solid.exterior\
                 .Surface.surfaceMember:
-            bldg.gml_surfaces.append(SurfaceGML(
+            bld.gml_surfaces.append(SurfaceGML(
                 member.Surface.exterior.Ring.posList.value()))
 
 
-def _create_building_part(bldg, part):
+def _create_building_part(bld, part):
     if part.BuildingPart.boundedBy_:
         for bound_surf in part.BuildingPart.boundedBy_:
             for comp_member in bound_surf.BoundarySurface.lod2MultiSurface.MultiSurface.surfaceMember:
                 try:  # modelling option 1
-                    bldg.gml_surfaces.append(SurfaceGML(
+                    bld.gml_surfaces.append(SurfaceGML(
                         comp_member.Surface.exterior.Ring.posList.value()))
                 except:  # modelling option 2
                     for pos_list in comp_member.Surface.surfaceMember:
-                        bldg.gml_surfaces.append(SurfaceGML(
+                        bld.gml_surfaces.append(SurfaceGML(
                             pos_list.Surface.exterior.Ring.posList.value()))
     # if a building Feature has no boundedBy_ but a lod1solid it is LOD1
     elif part.BuildingPart.lod1Solid:
         for member in part.BuildingPart.lod1Solid.Solid.exterior\
                 .Surface.surfaceMember:
-            bldg.gml_surfaces.append(SurfaceGML(
+            bld.gml_surfaces.append(SurfaceGML(
                 member.Surface.exterior.Ring.posList.value()))
 
 
-def _convert_bldg(bldg, function):
+def _convert_bld(bld, function):
     """converts the instance to a specific archetype building
 
     DANGEROUS function, should only be used in combination with CityGML
@@ -177,35 +185,35 @@ def _convert_bldg(bldg, function):
     Parameters
     ----------
 
-    bldg : Building()
+    bld : Building()
         TEASER instance of a building
 
     function : str
         function from CityGML code list 1000 is residential 1120 is office
     """
-    parent_help = bldg.parent
-    name_help = bldg.name
-    gml_surfaces_help = bldg.gml_surfaces
-    year_of_construction_help = bldg.year_of_construction
-    bldg_height_help = bldg.bldg_height
+    parent_help = bld.parent
+    name_help = bld.name
+    gml_surfaces_help = bld.gml_surfaces
+    year_of_construction_help = bld.year_of_construction
+    bld_height_help = bld.bld_height
 
     if function == "1000":
         from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling \
             import SingleFamilyDwelling
-        bldg.__class__ = SingleFamilyDwelling
+        bld.__class__ = SingleFamilyDwelling
     elif function == "1120":
         from teaser.logic.archetypebuildings.bmvbs.office import Office
-        bldg.__class__ = Office
+        bld.__class__ = Office
 
-    bldg.__init__(parent=None)
-    bldg.gml_surfaces = gml_surfaces_help
-    bldg.parent = parent_help
-    bldg.name = name_help
-    bldg.year_of_construction = year_of_construction_help
-    bldg.bldg_height = bldg_height_help
+    bld.__init__(parent=None)
+    bld.gml_surfaces = gml_surfaces_help
+    bld.parent = parent_help
+    bld.name = name_help
+    bld.year_of_construction = year_of_construction_help
+    bld.bld_height = bld_height_help
 
-    bldg.set_gml_attributes()
-    bldg.generate_from_gml()
+    bld.set_gml_attributes()
+    bld.generate_from_gml()
 
 
 class SurfaceGML(object):

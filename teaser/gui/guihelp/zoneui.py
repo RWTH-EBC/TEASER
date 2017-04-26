@@ -32,7 +32,7 @@ class ZoneUI(QAbstractListModel):
             return QVariant(u" Name:       " + str(self.Zonenliste[index.row(
             )].Name) + "\n" + u" Typ:            " + self.Zonenauswahl[
                 self.Zonenliste[index.row()].Typ] + "\n" + label_Flaeche +
-                            str(self.Zonenliste[index.row()].Flaeche) +
-                            label_qm)
+                str(self.Zonenliste[index.row()].Flaeche) +
+                label_qm)
         else:
             return QVariant()
