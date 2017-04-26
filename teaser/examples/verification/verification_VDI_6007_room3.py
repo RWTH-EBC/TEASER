@@ -22,8 +22,9 @@ def parameter_room3():
         number_of_elements=2,
         merge_windows=True,
         used_library='AixLib')
-    
+
     return prj
+
 
 if __name__ == "__main__":
     prj = parameter_room3()
@@ -55,12 +56,10 @@ if __name__ == "__main__":
     print("area_ow + area_win: ", prj.buildings[0].thermal_zones[
         0].model_attr.area_ow + prj.buildings[0].thermal_zones[
         0].model_attr.area_win,
-          "m2 ---", "Rouvel: 10.5 m2")
+        "m2 ---", "Rouvel: 10.5 m2")
     print("alpha_conv_inner_ow: ",
           prj.buildings[0].thermal_zones[0].model_attr.alpha_conv_inner_ow,
           "W/(m2*K) ---", "Rouvel: 2.7 W/(m2*K)")
     print("alpha_comb_outer_ow: ",
           prj.buildings[0].thermal_zones[0].model_attr.alpha_comb_outer_ow,
           "W/(m2*K) ---", "Rouvel: 25.0 W/(m2*K)")
-
-
