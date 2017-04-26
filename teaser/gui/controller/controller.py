@@ -18,7 +18,6 @@ from teaser.logic.buildingobjects.buildingphysics.groundfloor import\
     GroundFloor
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
-from teaser.project import Project
 import teaser.data.output.teaserxml_output as teaser_xml
 import teaser.data.output.citygml_output as city_gml
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
@@ -671,4 +670,4 @@ class Controller():
         '''
 
         if not current_zone.volume:
-                current_zone.volume = current_zone.set_volume_zone()
+            current_zone.volume = current_zone.set_volume_zone()

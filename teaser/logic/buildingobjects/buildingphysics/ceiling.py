@@ -110,8 +110,6 @@ class Ceiling(InnerWall):
 
         """
         super(Ceiling, self).__init__(parent)
-        
+
         self._tilt = 0.0
         self._orientation = -1.0
-
-

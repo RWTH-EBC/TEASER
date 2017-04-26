@@ -16,6 +16,7 @@ calculated parameter, however, the weightfactor needs to be copied from,
 from teaser.project import Project
 import teaser.logic.utilities as utilities
 
+
 def parameter_room10():
 
     prj = Project(load_data=True)
@@ -29,6 +30,7 @@ def parameter_room10():
         used_library='AixLib')
 
     prj.export_parameters_txt()
+
 
 if __name__ == '__main__':
     parameter_room10()

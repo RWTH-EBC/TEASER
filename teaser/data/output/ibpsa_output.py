@@ -69,7 +69,7 @@ def export_ibpsa(
 
     uses = uses = [
         'Modelica(version="' + prj.modelica_info.version + '")',
-        library+'(version="' + prj.buildings[-1].library_attr.version[
+        library + '(version="' + prj.buildings[-1].library_attr.version[
             library] + '")']
 
     lookup = TemplateLookup(directories=[utilities.get_full_path(
@@ -167,8 +167,6 @@ def export_ibpsa(
             path=zone_path,
             package_list=bldg.thermal_zones,
             addition=bldg.name + "_")
-
-
 
     print("Exports can be found here:")
     print(path)

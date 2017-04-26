@@ -101,4 +101,3 @@ def load_boundary_conditions(bound_cond, zone_usage, data_class):
             bound_cond.max_overheating_ach = usage.AHU.max_overheating_ach
             bound_cond.max_summer_ach = usage.AHU.max_summer_ach
             bound_cond.winter_reduction = usage.AHU.winter_reduction
-
