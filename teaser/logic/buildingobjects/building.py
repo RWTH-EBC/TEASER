@@ -270,7 +270,12 @@ class Building(object):
         for zone in self.thermal_zones:
             for wall in zone.outer_walls:
                 if wall.orientation == orientation:
-                    wall.area = ((new_area / self.net_leased_area) * zone.area)
+                    wall.area = (
+                        ((new_area / self.net_leased_area) *  zone.area)/
+                        sum(count.orientation == orientation for count in
+                            zone.outer_walls))
+
+
             for roof in zone.rooftops:
                 if roof.orientation == orientation:
                     roof.area = ((new_area / self.net_leased_area) * zone.area)
