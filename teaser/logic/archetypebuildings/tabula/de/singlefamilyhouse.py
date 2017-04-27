@@ -19,21 +19,21 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 class SingleFamilyHouse(Residential):
     """Archetype for TABULA Single Family House
 
-    Archetype according to TABULA building typology 
-    (http://webtool.building-typology.eu/#bm). 
-    
+    Archetype according to TABULA building typology
+    (http://webtool.building-typology.eu/#bm).
+
     Description of:
        - estimation factors
-       - always 4 walls, 1 roof, 1 floor, 4 windows, one door (default 
+       - always 4 walls, 1 roof, 1 floor, 4 windows, one door (default
        orientation?)
        - how we calcualte facade and window area
        - calcualte u-values
        - zones (one zone)
-       - differences between TABULA und our approach (net floor area, height 
+       - differences between TABULA und our approach (net floor area, height
        and number of storeys)
-       - how to proceed with rooftops (keep them as flat roofs or pitched 
+       - how to proceed with rooftops (keep them as flat roofs or pitched
        roofs? what orientation?)
-       
+
     Parameters
     ----------
 
@@ -58,14 +58,14 @@ class SingleFamilyHouse(Residential):
         assigned to attribute central_ahu. This instance holds information for
         central Air Handling units. Default is False.
     construction_type : str
-        Construction type of used wall constructions default is "existing 
+        Construction type of used wall constructions default is "existing
         state"
-            existing state: 
+            existing state:
                 construction of walls according to existing state in TABULA
-            usual refurbishment: 
+            usual refurbishment:
                 construction of walls according to usual refurbishment in TABULA
             advanced refurbishmet:
-                construction of walls according to advanced refurbishment in 
+                construction of walls according to advanced refurbishment in
                 TABULA
     """
 
@@ -99,7 +99,7 @@ class SingleFamilyHouse(Residential):
             "ExteriorFacadeSouth_1": [90.0, 180.0],
             "ExteriorFacadeWest_1": [90.0, 270.0]}
 
-        self._outer_wall_names_2 ={
+        self._outer_wall_names_2 = {
             "ExteriorFacadeNorth_2": [90.0, 0.0],
             "ExteriorFacadeEast_2": [90.0, 90.0],
             "ExteriorFacadeSouth_2": [90.0, 180.0],
@@ -113,14 +113,17 @@ class SingleFamilyHouse(Residential):
 
         self.door_names = {"Door": [90.0, 270]}
 
-        self.window_names = {"WindowFacadeNorth_1": [90.0, 0.0],
-                             "WindowFacadeEast_1": [90.0, 90.0],
-                             "WindowFacadeSouth_1": [90.0, 180.0],
-                             "WindowFacadeWest_1": [90.0, 270.0],
-                             "WindowFacadeNorth_2": [90.0, 0.0],
-                             "WindowFacadeEast_2": [90.0, 90.0],
-                             "WindowFacadeSouth_2": [90.0, 180.0],
-                             "WindowFacadeWest_2": [90.0, 270.0]}
+        self.window_names_1 = {
+            "WindowFacadeNorth_1": [90.0, 0.0],
+            "WindowFacadeEast_1": [90.0, 90.0],
+            "WindowFacadeSouth_1": [90.0, 180.0],
+            "WindowFacadeWest_1": [90.0, 270.0]}
+        self.window_names_2 = {
+            "WindowFacadeNorth_2": [90.0, 0.0],
+            "WindowFacadeEast_2": [90.0, 90.0],
+            "WindowFacadeSouth_2": [90.0, 180.0],
+            "WindowFacadeWest_2": [90.0, 270.0]}
+
         # [tilt, orientation]
 
         self.inner_wall_names = {"InnerWall": [90.0, 0.0]}
@@ -129,7 +132,7 @@ class SingleFamilyHouse(Residential):
 
         self.floor_names = {"Floor": [0.0, -2]}
 
-        # Rooftop1, Rooftop2, Wall1, Wall2, GroundFloor1, GroundFloor2, 
+        # Rooftop1, Rooftop2, Wall1, Wall2, GroundFloor1, GroundFloor2,
         # Window1, Window2, Door
         # Area/ReferenceFloorArea
         self.facade_estimation_factors = {
@@ -273,8 +276,8 @@ class SingleFamilyHouse(Residential):
 
     def generate_archetype(self):
         """Generates a SingleFamilyHouse archetype buildings
-        
-        With given values, this function generates an archetype building for 
+
+        With given values, this function generates an archetype building for
         Tabula Single Family House.
         """
 
@@ -297,43 +300,85 @@ class SingleFamilyHouse(Residential):
         for key, value in self._outer_wall_names_2.items():
             self.outer_area[value[1]] = 0.0
 
-        self.nr_of_orientation_1 = len(self._outer_wall_names_1)
-        self.nr_of_orientation_2 = len(self._outer_wall_names_2)
+        if self.facade_estimation_factors[self.building_age_group]['ow1'] != 0:
+            for key, value in self._outer_wall_names_1.items():
+                self.outer_area[value[1]] += (
+                    (self.facade_estimation_factors[
+                        self.building_age_group]['ow1'] * type_bldg_area) /
+                    len(self._outer_wall_names_1))
 
-        for key, value in self._outer_wall_names_1.items():
-            self.outer_area[value[1]] += (
-                (self.facade_estimation_factors[
-                     self.building_age_group]['ow1'] * type_bldg_area) /
-                self.nr_of_orientation_1)
+                for zone in self.thermal_zones:
+                    outer_wall = OuterWall(zone)
+                    outer_wall.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data)
+                    outer_wall.name = key
+                    outer_wall.tilt = value[0]
+                    outer_wall.orientation = value[1]
 
-            for zone in self.thermal_zones:
-                outer_wall = OuterWall(zone)
-                outer_wall.load_type_element(
-                    year=self.year_of_construction,
-                    construction=self.construction_type,
-                    data_class=self.parent.data)
-                outer_wall.name = key
-                outer_wall.tilt = value[0]
-                outer_wall.orientation = value[1]
+        if self.facade_estimation_factors[self.building_age_group]['ow2'] != 0:
+            for key, value in self._outer_wall_names_2.items():
+                self.outer_area[value[1]] += (
+                    (self.facade_estimation_factors[
+                        self.building_age_group]['ow2'] * type_bldg_area) /
+                    len(self._outer_wall_names_2))
 
-        for key, value in self._outer_wall_names_2.items():
-            self.outer_area[value[1]] += (
-                (self.facade_estimation_factors[
-                     self.building_age_group]['ow2'] * type_bldg_area) /
-                self.nr_of_orientation_2)
+                for zone in self.thermal_zones:
+                    outer_wall = OuterWall(zone)
+                    outer_wall.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data)
+                    outer_wall.name = key
+                    outer_wall.tilt = value[0]
+                    outer_wall.orientation = value[1]
 
-            for zone in self.thermal_zones:
-                outer_wall = OuterWall(zone)
-                outer_wall.load_type_element(
-                    year=self.year_of_construction,
-                    construction=self.construction_type,
-                    data_class=self.parent.data)
-                outer_wall.name = key
-                outer_wall.tilt = value[0]
-                outer_wall.orientation = value[1]
+        for key, value in self.window_names_1.items():
+            self.window_area[value[1]] = 0.0
+        for key, value in self.window_names_2.items():
+            self.window_area[value[1]] = 0.0
+
+        if self.facade_estimation_factors[self.building_age_group]['win1'] != 0:
+            for key, value in self.window_names_1.items():
+                self.window_area[value[1]] += (
+                    (self.facade_estimation_factors[
+                        self.building_age_group]['win1'] * type_bldg_area) /
+                    len(self.window_names_1))
+
+                for zone in self.thermal_zones:
+                    window = Window(zone)
+                    window.load_type_element(
+                        self.year_of_construction,
+                        "Kunststofffenster, "
+                        "Isolierverglasung",
+                        data_class=self.parent.data)
+                    window.name = key
+                    window.tilt = value[0]
+                    window.orientation = value[1]
+
+        if self.facade_estimation_factors[self.building_age_group]['win2'] != 0:
+            for key, value in self.window_names_2.items():
+                self.window_area[value[1]] += (
+                    (self.facade_estimation_factors[
+                        self.building_age_group]['win2'] * type_bldg_area) /
+                    len(self.window_names_2))
+
+                for zone in self.thermal_zones:
+                    window = Window(zone)
+                    window.load_type_element(
+                        self.year_of_construction,
+                        "Kunststofffenster, "
+                        "Isolierverglasung",
+                        data_class=self.parent.data)
+                    window.name = key
+                    window.tilt = value[0]
+                    window.orientation = value[1]
 
         for key, value in self.outer_area.items():
             self.set_outer_wall_area(value, key)
+        for key, value in self.window_area.items():
+            self.set_window_area(value, key)
 
         for zone in self.thermal_zones:
             zone.set_inner_wall_area()
