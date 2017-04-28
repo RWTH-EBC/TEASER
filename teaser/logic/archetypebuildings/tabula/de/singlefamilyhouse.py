@@ -105,11 +105,15 @@ class SingleFamilyHouse(Residential):
             "ExteriorFacadeSouth_2": [90.0, 180.0],
             "ExteriorFacadeWest_2": [90.0, 270.0]}
 
-        self.roof_names = {"Rooftop_1": [0, -1],
-                           "Rooftop_2": [0, -1]}  # [0, -1]
+        self.roof_names_1 = {"Rooftop_1": [0, -1]}  # [0, -1]
 
-        self.ground_floor_names = {"GroundFloor_1": [0, -2],
-                                   "GroundFloor_2": [0, -2]}  # [0, -2]
+        self.roof_names_2 = {"Rooftop_2": [0, -1]}
+
+        self.ground_floor_names_1 = {
+            "GroundFloor_1": [0, -2]}  # [0, -2]
+
+        self.ground_floor_names_2 = {
+            "GroundFloor_2": [0, -2]}
 
         self.door_names = {"Door": [90.0, 270]}
 
@@ -137,15 +141,15 @@ class SingleFamilyHouse(Residential):
         # Area/ReferenceFloorArea
         self.facade_estimation_factors = {
             (0, 1859): {
-                'rt1': 0.61,
-                'rt2': 0.61,
-                'ow1': 0.78,
-                'ow2': 0.78,
-                'gf1': 0.0,
-                'gf2': 0.39,
-                'win1': 0.13,
-                'win2': 0.0,
-                'door': 0.0091},
+                'rt1': 1,
+                'rt2': 1,
+                'ow1': 1,
+                'ow2': 1,
+                'gf1': 1,
+                'gf2': 1,
+                'win1': 1,
+                'win2': 1,
+                'door': 1},
             (1860, 1918): {
                 'rt1': 0.61,
                 'rt2': 0.61,
@@ -261,7 +265,7 @@ class SingleFamilyHouse(Residential):
 
         for key in self.facade_estimation_factors:
             if self.year_of_construction in range(key[0], key[1]) or \
-                    self.year_of_construction == key[1]:
+                            self.year_of_construction == key[1]:
                 self.building_age_group = (key[0], key[1])
 
         if self.with_ahu is True:
@@ -285,8 +289,6 @@ class SingleFamilyHouse(Residential):
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
 
-        self._living_area_per_floor = type_bldg_area / self.number_of_floors
-
         for key, value in self.zone_area_factors.items():
             zone = ThermalZone(parent=self)
             zone.name = key
@@ -304,7 +306,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self._outer_wall_names_1.items():
                 self.outer_area[value[1]] += (
                     (self.facade_estimation_factors[
-                        self.building_age_group]['ow1'] * type_bldg_area) /
+                         self.building_age_group]['ow1'] * type_bldg_area) /
                     len(self._outer_wall_names_1))
 
                 for zone in self.thermal_zones:
@@ -321,7 +323,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self._outer_wall_names_2.items():
                 self.outer_area[value[1]] += (
                     (self.facade_estimation_factors[
-                        self.building_age_group]['ow2'] * type_bldg_area) /
+                         self.building_age_group]['ow2'] * type_bldg_area) /
                     len(self._outer_wall_names_2))
 
                 for zone in self.thermal_zones:
@@ -343,7 +345,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self.window_names_1.items():
                 self.window_area[value[1]] += (
                     (self.facade_estimation_factors[
-                        self.building_age_group]['win1'] * type_bldg_area) /
+                         self.building_age_group]['win1'] * type_bldg_area) /
                     len(self.window_names_1))
 
                 for zone in self.thermal_zones:
@@ -361,7 +363,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self.window_names_2.items():
                 self.window_area[value[1]] += (
                     (self.facade_estimation_factors[
-                        self.building_age_group]['win2'] * type_bldg_area) /
+                         self.building_age_group]['win2'] * type_bldg_area) /
                     len(self.window_names_2))
 
                 for zone in self.thermal_zones:
@@ -375,6 +377,122 @@ class SingleFamilyHouse(Residential):
                     window.tilt = value[0]
                     window.orientation = value[1]
 
+        for key, value in self.ground_floor_names_1.items():
+            self.outer_area[value[1]] = 0.0
+        for key, value in self.ground_floor_names_2.items():
+            self.outer_area[value[1]] = 0.0
+
+        if self.facade_estimation_factors[self.building_age_group]['gf1'] != 0:
+            for key, value in self.ground_floor_names_1.items():
+                self.outer_area[value[1]] += (
+                    (self.facade_estimation_factors[
+                         self.building_age_group]['gf1'] * type_bldg_area) /
+                    len(self.ground_floor_names_1))
+
+                for zone in self.thermal_zones:
+                    gf = GroundFloor(zone)
+                    gf.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data)
+                    gf.name = key
+                    gf.tilt = value[0]
+                    gf.orientation = value[1]
+
+        if self.facade_estimation_factors[self.building_age_group]['gf2'] != 0:
+            for key, value in self.ground_floor_names_2.items():
+                self.outer_area[value[1]] += (
+                    (self.facade_estimation_factors[
+                         self.building_age_group]['gf2'] * type_bldg_area) /
+                    len(self.ground_floor_names_2))
+
+                for zone in self.thermal_zones:
+                    gf = GroundFloor(zone)
+                    gf.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data)
+                    gf.name = key
+                    gf.tilt = value[0]
+                    gf.orientation = value[1]
+
+        for key, value in self.roof_names_1.items():
+            self.outer_area[value[1]] = 0.0
+        for key, value in self.roof_names_2.items():
+            self.outer_area[value[1]] = 0.0
+
+        if self.facade_estimation_factors[self.building_age_group]['rt1'] != 0:
+            for key, value in self.roof_names_1.items():
+                self.outer_area[value[1]] += (
+                    (self.facade_estimation_factors[
+                         self.building_age_group]['rt1'] * type_bldg_area) /
+                    len(self.roof_names_1))
+
+                for zone in self.thermal_zones:
+                    rt = Rooftop(zone)
+                    rt.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data)
+                    rt.name = key
+                    rt.tilt = value[0]
+                    rt.orientation = value[1]
+
+        if self.facade_estimation_factors[self.building_age_group]['rt2'] != 0:
+            for key, value in self.roof_names_2.items():
+                self.outer_area[value[1]] += (
+                    (self.facade_estimation_factors[
+                         self.building_age_group]['rt2'] * type_bldg_area) /
+                    len(self.roof_names_2))
+
+                for zone in self.thermal_zones:
+                    rt = Rooftop(zone)
+                    rt.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data)
+                    rt.name = key
+                    rt.tilt = value[0]
+                    rt.orientation = value[1]
+
+        for key, value in self.inner_wall_names.items():
+
+            for zone in self.thermal_zones:
+                inner_wall = InnerWall(zone)
+                inner_wall.load_type_element(
+                    year=self.year_of_construction,
+                    construction=self.construction_type,
+                    data_class=self.parent.data)
+                inner_wall.name = key
+                inner_wall.tilt = value[0]
+                inner_wall.orientation = value[1]
+
+        if self.number_of_floors > 1:
+
+            for key, value in self.ceiling_names.items():
+
+                for zone in self.thermal_zones:
+                    ceiling = Ceiling(zone)
+                    ceiling.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data)
+                    ceiling.name = key
+                    ceiling.tilt = value[0]
+                    ceiling.orientation = value[1]
+
+            for key, value in self.floor_names.items():
+
+                for zone in self.thermal_zones:
+                    floor = Floor(zone)
+                    floor.load_type_element(
+                        year=self.year_of_construction,
+                        construction=self.construction_type,
+                        data_class=self.parent.data)
+                    floor.name = key
+                    floor.tilt = value[0]
+                    floor.orientation = value[1]
+
         for key, value in self.outer_area.items():
             self.set_outer_wall_area(value, key)
         for key, value in self.window_area.items():
@@ -383,3 +501,22 @@ class SingleFamilyHouse(Residential):
         for zone in self.thermal_zones:
             zone.set_inner_wall_area()
             zone.set_volume_zone()
+
+    @property
+    def construction_type(self):
+        return self._construction_type
+
+    @construction_type.setter
+    def construction_type(self, value):
+        if value is not None:
+            if value in [
+                    "tabula_standard",
+                    "tabula_refurbished",
+                    "tabula_advanced_refurbished"]:
+                self._construction_type = value
+            else:
+                raise ValueError("Construction_type has to be tabula_standard,"
+                                 "tabula_refurbished, "
+                                 "tabula_advanced_refurbished")
+        else:
+            self._construction_type = "heavy"
