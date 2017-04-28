@@ -52,7 +52,9 @@ class Project(object):
     ----------
     load_data : boolean
         boolean if data bases for materials, type elements and use conditions
-        should be loaded (default = True)
+        should be loaded. default = False but will be automatically loaded
+        once you add a archetype building. For building generation from
+        scratch, set to True
 
     Attributes
     ----------
@@ -80,7 +82,7 @@ class Project(object):
         used library (AixLib and IBPSA are supported)
     """
 
-    def __init__(self, load_data=True):
+    def __init__(self, load_data=False):
         """Constructor of Project Class.
         """
         self._name = "Project"
@@ -469,6 +471,8 @@ class Project(object):
             warnings.warn(ass_error_apart)
 
         if method == 'tabula_de':
+
+            self.data = DataClass(used_statistic=method)
 
             if usage == 'single_family_house':
 

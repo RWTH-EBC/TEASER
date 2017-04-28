@@ -513,10 +513,10 @@ class SingleFamilyHouse(Residential):
                     "tabula_standard",
                     "tabula_refurbished",
                     "tabula_advanced_refurbished"]:
-                self._construction_type = value
+                self._construction_type = value + "_SFH"
             else:
                 raise ValueError("Construction_type has to be tabula_standard,"
                                  "tabula_refurbished, "
                                  "tabula_advanced_refurbished")
         else:
-            self._construction_type = "heavy"
+            self._construction_type = "tabula_standard_SFH"

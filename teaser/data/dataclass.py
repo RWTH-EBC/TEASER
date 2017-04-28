@@ -7,6 +7,7 @@
 import teaser.logic.utilities as utils
 import warnings
 import xml.etree.ElementTree as et
+import os
 
 
 class DataClass(object):
@@ -15,6 +16,13 @@ class DataClass(object):
     This class loads all XML files with statistic or template data needed
     for statistical data enrichment. It creates the binding classes
     automatically with instantiation. The binding needs the Python Package PyXB.
+
+    Parameters
+    ----------
+
+    used_statistics : str
+        This parameter indicates which statistical data about building
+        elements should be used. Use 'iwu' or 'tabula_de'.
 
     Attributes
     ----------
@@ -39,13 +47,21 @@ class DataClass(object):
         teaser/data/input/inputdata/UseConditions.xml
     """
 
-    def __init__(self):
+    def __init__(
+            self,
+            used_statistic):
         """Constructor of DataClass
         """
 
         self.element_bind = None
-        self.path_tb = utils.get_full_path(
-            "data/input/inputdata/TypeBuildingElements.xml")
+        if used_statistic == 'iwu':
+            self.path_tb = utils.get_full_path(
+                "data/input/inputdata/TypeBuildingElements.xml")
+        elif used_statistic == 'tabula_de':
+            self.path_tb = utils.get_full_path(
+                os.path.join(
+                    'data', 'input', 'inputdata',
+                    'TypeBuildingElements_Tabula_de.xml'))
         self.material_bind = None
         self.path_mat = utils.get_full_path(
             "data/input/inputdata/MaterialTemplates.xml")
