@@ -57,11 +57,15 @@ class DataClass(object):
         if used_statistic == 'iwu':
             self.path_tb = utils.get_full_path(
                 "data/input/inputdata/TypeBuildingElements.xml")
+            self.load_tb_binding()
         elif used_statistic == 'tabula_de':
             self.path_tb = utils.get_full_path(
                 os.path.join(
                     'data', 'input', 'inputdata',
                     'TypeBuildingElements_Tabula_de.xml'))
+            self.load_tb_binding()
+        elif used_statistic is None:
+            pass
         self.material_bind = None
         self.path_mat = utils.get_full_path(
             "data/input/inputdata/MaterialTemplates.xml")
@@ -69,7 +73,7 @@ class DataClass(object):
         self.path_uc = utils.get_full_path(
             "data/input/inputdata/UseConditions.xml")
 
-        self.load_tb_binding()
+
         self.load_uc_binding()
         self.load_mat_binding()
 
@@ -80,10 +84,14 @@ class DataClass(object):
         try:
             __xml_file_tb = open(self.path_tb, 'r+')
             version_parse = et.parse(self.path_tb)
-        except:
+        except et.ParseError:
             __xml_file_tb = open(self.path_tb, 'w')
             version_parse = False
+        except FileNotFoundError:
+            __xml_file_tb = open(self.path_tb, 'w+')
+            version_parse = False
 
+        print("asd")
         if version_parse is False:
             import teaser.data.bindings.v_0_4.typeelement_bind as tb_bind
             self.element_bind = tb_bind.TypeBuildingElements()

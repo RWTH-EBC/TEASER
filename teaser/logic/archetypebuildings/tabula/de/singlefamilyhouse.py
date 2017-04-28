@@ -330,7 +330,7 @@ class SingleFamilyHouse(Residential):
                     outer_wall = OuterWall(zone)
                     outer_wall.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_type + "_2",
                         data_class=self.parent.data)
                     outer_wall.name = key
                     outer_wall.tilt = value[0]
@@ -352,8 +352,7 @@ class SingleFamilyHouse(Residential):
                     window = Window(zone)
                     window.load_type_element(
                         self.year_of_construction,
-                        "Kunststofffenster, "
-                        "Isolierverglasung",
+                        construction=self.construction_type,
                         data_class=self.parent.data)
                     window.name = key
                     window.tilt = value[0]
@@ -370,8 +369,7 @@ class SingleFamilyHouse(Residential):
                     window = Window(zone)
                     window.load_type_element(
                         self.year_of_construction,
-                        "Kunststofffenster, "
-                        "Isolierverglasung",
+                        construction=self.construction_type,
                         data_class=self.parent.data)
                     window.name = key
                     window.tilt = value[0]
@@ -449,7 +447,7 @@ class SingleFamilyHouse(Residential):
                     rt = Rooftop(zone)
                     rt.load_type_element(
                         year=self.year_of_construction,
-                        construction=self.construction_type,
+                        construction=self.construction_type + "_2",
                         data_class=self.parent.data)
                     rt.name = key
                     rt.tilt = value[0]
