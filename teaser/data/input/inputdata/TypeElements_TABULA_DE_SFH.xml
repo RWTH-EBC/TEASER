@@ -1,0 +1,3857 @@
+<?xml version="1.0" ?>
+<elements:TypeBuildingElements version="0.6" xmlns:elements="http://teaser.elements">
+	<elements:OuterWall>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.18</elements:thickness>
+				<elements:material material_id="0bd93d76-2c25-11e7-8fbf-2cd444b2e704">framework</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.38</elements:thickness>
+				<elements:material material_id="0bddaa64-2c25-11e7-b67c-2cd444b2e704">brickwork</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.38</elements:thickness>
+				<elements:material material_id="0be23e62-2c25-11e7-a6a3-2cd444b2e704">brickwork</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0be72082-2c25-11e7-bc59-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="0be72083-2c25-11e7-a451-2cd444b2e704">airlayer</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0be72084-2c25-11e7-88c9-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.26</elements:thickness>
+				<elements:material material_id="0bec77d4-2c25-11e7-a659-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.32</elements:thickness>
+				<elements:material material_id="0bf1cf28-2c25-11e7-afbb-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.32</elements:thickness>
+				<elements:material material_id="0bf6ff68-2c25-11e7-bfcb-2cd444b2e704">lighthollowbricks</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="0bfca4de-2c25-11e7-801b-2cd444b2e704">porousconcreteblocks</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0c029876-2c25-11e7-9585-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0c029877-2c25-11e7-b5d1-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0c029878-2c25-11e7-a876-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>2002 2009</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0c092852-2c25-11e7-971b-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0c092853-2c25-11e7-b836-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0c092854-2c25-11e7-9604-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>2010 2015</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="0c0fb82c-2c25-11e7-bb29-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0c0fb82d-2c25-11e7-9cc9-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0c0fb82e-2c25-11e7-a7a7-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="0c16bd3a-2c25-11e7-bf4d-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="0c16bd3b-2c25-11e7-ac54-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0c16bd3c-2c25-11e7-a7fb-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_standard_2_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0c1e5e8c-2c25-11e7-bbcf-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.05</elements:thickness>
+				<elements:material material_id="0c1e5e8d-2c25-11e7-bdc7-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.15</elements:thickness>
+				<elements:material material_id="0c1e5e8e-2c25-11e7-b78c-2cd444b2e704">airlayer</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="0e4fcbdc-2c25-11e7-9c68-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.18</elements:thickness>
+				<elements:material material_id="0e4fcbdd-2c25-11e7-ac19-2cd444b2e704">framework</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.38</elements:thickness>
+				<elements:material material_id="0e62df28-2c25-11e7-82e5-2cd444b2e704">brickwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0e62df29-2c25-11e7-bebc-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0e62df2a-2c25-11e7-adac-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.38</elements:thickness>
+				<elements:material material_id="0e77520c-2c25-11e7-b0bd-2cd444b2e704">brickwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0e77520d-2c25-11e7-af1e-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0e77520e-2c25-11e7-8a9e-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0e8caf5a-2c25-11e7-a18b-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="0e8caf5b-2c25-11e7-8844-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0e8caf5c-2c25-11e7-9040-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.26</elements:thickness>
+				<elements:material material_id="0ea25ac8-2c25-11e7-a535-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0ea25ac9-2c25-11e7-8ba9-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0ea25aca-2c25-11e7-b503-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.32</elements:thickness>
+				<elements:material material_id="0eb82d48-2c25-11e7-99d2-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0eb82d49-2c25-11e7-bd91-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0eb82d4a-2c25-11e7-bf84-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.32</elements:thickness>
+				<elements:material material_id="0ecdffc6-2c25-11e7-b749-2cd444b2e704">lighthollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0ecdffc7-2c25-11e7-9d47-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0ecdffc8-2c25-11e7-81c0-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="0ee81822-2c25-11e7-a3c2-2cd444b2e704">porousconcreteblocks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0ee81823-2c25-11e7-8739-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0ee81824-2c25-11e7-946a-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0effbf6c-2c25-11e7-a886-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0effbf6d-2c25-11e7-9e16-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0effbf6e-2c25-11e7-8aea-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0effbf6f-2c25-11e7-9837-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0effbf70-2c25-11e7-b452-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>2002 2010</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0f27e1e4-2c25-11e7-8f49-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0f27e1e5-2c25-11e7-b1be-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="0f27e1e6-2c25-11e7-9f80-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0f27e1e7-2c25-11e7-af0d-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0f2808f4-2c25-11e7-8d59-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>2010 2015</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="0f50527a-2c25-11e7-9ead-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.17</elements:thickness>
+				<elements:material material_id="0f50527b-2c25-11e7-9422-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0f50527c-2c25-11e7-ad15-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="0f673674-2c25-11e7-bc57-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.22</elements:thickness>
+				<elements:material material_id="0f673675-2c25-11e7-bec9-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0f673676-2c25-11e7-9847-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_2_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0f8c4b94-2c25-11e7-b1f3-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.17</elements:thickness>
+				<elements:material material_id="0f8c4b95-2c25-11e7-a8b3-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0f8c4b96-2c25-11e7-bc6e-2cd444b2e704">airlayer</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.18</elements:thickness>
+				<elements:material material_id="152b57ca-2c25-11e7-bec8-2cd444b2e704">framework</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="152b57cb-2c25-11e7-bedf-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="152b57cc-2c25-11e7-a330-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.38</elements:thickness>
+				<elements:material material_id="15515754-2c25-11e7-9930-2cd444b2e704">brickwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="15515755-2c25-11e7-8005-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="15515756-2c25-11e7-8665-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.38</elements:thickness>
+				<elements:material material_id="1578dd88-2c25-11e7-8fe3-2cd444b2e704">brickwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="1578dd89-2c25-11e7-991f-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="1578dd8a-2c25-11e7-b529-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="15a7b6e8-2c25-11e7-9444-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="15a7b6e9-2c25-11e7-b269-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="15a7b6ea-2c25-11e7-8fca-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="15a7b6eb-2c25-11e7-b9c1-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.26</elements:thickness>
+				<elements:material material_id="15cea0da-2c25-11e7-ab46-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="15cea0db-2c25-11e7-ad78-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="15cea0dc-2c25-11e7-b6db-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.32</elements:thickness>
+				<elements:material material_id="15f822e8-2c25-11e7-856e-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="15f822e9-2c25-11e7-a0e8-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="15f822ea-2c25-11e7-801e-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.32</elements:thickness>
+				<elements:material material_id="161fd02e-2c25-11e7-8a6b-2cd444b2e704">lighthollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="161fd02f-2c25-11e7-9a91-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="161fd030-2c25-11e7-9d6b-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="16656676-2c25-11e7-9ab9-2cd444b2e704">porousconcreteblocks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="16656677-2c25-11e7-bfdb-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="16656678-2c25-11e7-8140-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="16a5a568-2c25-11e7-9ca1-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="16a5a569-2c25-11e7-80ce-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="16a5a56a-2c25-11e7-8984-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="16a5a56b-2c25-11e7-9569-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="16a5a56c-2c25-11e7-ab0b-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>2002 2010</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="16dae798-2c25-11e7-9fdc-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="16dae799-2c25-11e7-b52c-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.115</elements:thickness>
+				<elements:material material_id="16dae79a-2c25-11e7-8076-2cd444b2e704">bricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="16db0ea8-2c25-11e7-afd0-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="16db0ea9-2c25-11e7-b9a1-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>2010 2015</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="170e06d8-2c25-11e7-843d-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.28</elements:thickness>
+				<elements:material material_id="170e06d9-2c25-11e7-8849-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="170e06da-2c25-11e7-8167-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.24</elements:thickness>
+				<elements:material material_id="173a2108-2c25-11e7-a6ed-2cd444b2e704">hollowbricks</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.28</elements:thickness>
+				<elements:material material_id="173a4818-2c25-11e7-b5e0-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="173a4819-2c25-11e7-9c16-2cd444b2e704">plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:OuterWall>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_2_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="17626a90-2c25-11e7-b74d-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.29</elements:thickness>
+				<elements:material material_id="17626a91-2c25-11e7-8829-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:Rooftop>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0bb9cdca-2c25-11e7-aec6-2cd444b2e704">reedmat</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.09</elements:thickness>
+				<elements:material material_id="0bb9cdcb-2c25-11e7-835e-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0bbab82e-2c25-11e7-96fd-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0bbab82f-2c25-11e7-8f7e-2cd444b2e704">puddle</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.09</elements:thickness>
+				<elements:material material_id="0bbab830-2c25-11e7-b456-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.035</elements:thickness>
+				<elements:material material_id="0bbbf0b6-2c25-11e7-8d1d-2cd444b2e704">fibreboard</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.09</elements:thickness>
+				<elements:material material_id="0bbbf0b7-2c25-11e7-8a8f-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0bbd5050-2c25-11e7-9072-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="0bbd5051-2c25-11e7-99cd-2cd444b2e704">pumice</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.09</elements:thickness>
+				<elements:material material_id="0bbd5052-2c25-11e7-9c40-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0bbefe0a-2c25-11e7-ba1a-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.05</elements:thickness>
+				<elements:material material_id="0bbefe0b-2c25-11e7-b2e2-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0bbefe0c-2c25-11e7-8ba1-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0bc120f8-2c25-11e7-bae3-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.06</elements:thickness>
+				<elements:material material_id="0bc120f9-2c25-11e7-993e-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0bc120fa-2c25-11e7-a4e9-2cd444b2e704">surfaceprotection</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0bc36af8-2c25-11e7-96aa-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="0bc36af9-2c25-11e7-a72b-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0bc36afa-2c25-11e7-b981-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0bc6031a-2c25-11e7-b56d-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0bc6031b-2c25-11e7-83bd-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0bc6031c-2c25-11e7-aa77-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0bc95e90-2c25-11e7-9011-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="0bc95e91-2c25-11e7-b39a-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0bc95e92-2c25-11e7-a7a8-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>2002 2009</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0bcd0826-2c25-11e7-871f-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0bcd0827-2c25-11e7-a36f-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0bcd0828-2c25-11e7-a1a1-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>2010 2015</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0bd0d8d0-2c25-11e7-b9a3-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0bd0d8d1-2c25-11e7-b04e-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.05</elements:thickness>
+				<elements:material material_id="0bd0d8d2-2c25-11e7-9a26-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0bd0d8d3-2c25-11e7-a728-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0bd4f79c-2c25-11e7-a6b6-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.27</elements:thickness>
+				<elements:material material_id="0bd4f79d-2c25-11e7-99c3-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0bd4f79e-2c25-11e7-b873-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0d740c3a-2c25-11e7-a1be-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0d740c3b-2c25-11e7-810a-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0d740c3c-2c25-11e7-a68c-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0d839d00-2c25-11e7-b0e8-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0d83c412-2c25-11e7-bb76-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0d83c413-2c25-11e7-b10f-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0d94182e-2c25-11e7-84a1-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0d94182f-2c25-11e7-97f6-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0d941830-2c25-11e7-bd50-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0da4e17a-2c25-11e7-af7a-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0da4e17b-2c25-11e7-b59f-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0da4e17c-2c25-11e7-bba2-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0db6470c-2c25-11e7-9fa4-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0db6470d-2c25-11e7-a700-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0db6470e-2c25-11e7-b79c-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0dc7376c-2c25-11e7-97f8-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.18</elements:thickness>
+				<elements:material material_id="0dc7376d-2c25-11e7-a0d2-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0dc7376e-2c25-11e7-aa06-2cd444b2e704">surfaceprotection</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0dd89cfe-2c25-11e7-b4e2-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0dd89cff-2c25-11e7-b367-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0dd89d00-2c25-11e7-95f8-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0dea0290-2c25-11e7-a70a-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0dea0291-2c25-11e7-b44d-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0dea0292-2c25-11e7-9120-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0e02e264-2c25-11e7-ad6d-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="0e02e265-2c25-11e7-877a-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0e02e266-2c25-11e7-917b-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>2002 2009</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0e15325c-2c25-11e7-93a4-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0e15596c-2c25-11e7-b32a-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0e15596d-2c25-11e7-80fd-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>2009 2015</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0e27f786-2c25-11e7-945f-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.25</elements:thickness>
+				<elements:material material_id="0e27f787-2c25-11e7-b086-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0e27f788-2c25-11e7-8419-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0e3b31e4-2c25-11e7-93ce-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.3</elements:thickness>
+				<elements:material material_id="0e3b31e5-2c25-11e7-987a-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="0e3b58f6-2c25-11e7-ac49-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="135ad1a6-2c25-11e7-a7dc-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="135ad1a7-2c25-11e7-8a55-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="135ad1a8-2c25-11e7-96f4-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="135ad1a9-2c25-11e7-975f-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="1387881c-2c25-11e7-9f8c-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="1387881d-2c25-11e7-9efe-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="1387881e-2c25-11e7-a97a-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="1387881f-2c25-11e7-ac71-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="13aa5340-2c25-11e7-889a-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="13aa5341-2c25-11e7-9901-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="13aa5342-2c25-11e7-9a9b-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="13aa5343-2c25-11e7-b596-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="13d18b52-2c25-11e7-9536-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="13d18b53-2c25-11e7-b2cf-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="13d18b54-2c25-11e7-ae4d-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="13d18b55-2c25-11e7-921c-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="13fd5762-2c25-11e7-a6b1-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="13fd5763-2c25-11e7-a11e-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="13fd5764-2c25-11e7-ac74-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="13fd5765-2c25-11e7-9212-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="142308c8-2c25-11e7-af51-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.3</elements:thickness>
+				<elements:material material_id="142308c9-2c25-11e7-9ff2-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="142308ca-2c25-11e7-90fb-2cd444b2e704">surfaceprotection</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="144585ca-2c25-11e7-8af5-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="144585cb-2c25-11e7-91b7-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="144585cc-2c25-11e7-a950-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="144585cd-2c25-11e7-951b-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="146850ee-2c25-11e7-863a-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="146850ef-2c25-11e7-946c-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="146850f0-2c25-11e7-a7bc-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="146850f1-2c25-11e7-916c-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="14946b1e-2c25-11e7-9a64-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="14946b1f-2c25-11e7-9cca-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="14946b20-2c25-11e7-8308-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="14946b21-2c25-11e7-ac05-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>2002 2009</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="14b8e3fe-2c25-11e7-92b8-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="14b8e3ff-2c25-11e7-a4ed-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="14b8e400-2c25-11e7-b3a2-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="14b8e401-2c25-11e7-a0cc-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>2009 2015</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="14e217ec-2c25-11e7-9100-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.39</elements:thickness>
+				<elements:material material_id="14e217ed-2c25-11e7-914a-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="14e217ee-2c25-11e7-971b-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:Rooftop>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="150690ca-2c25-11e7-ba3a-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.39</elements:thickness>
+				<elements:material material_id="150690cb-2c25-11e7-a777-2cd444b2e704">rafterinsulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="150690cc-2c25-11e7-b7a4-2cd444b2e704">roofing</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:GroundFloor>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.3</elements:thickness>
+				<elements:material material_id="0c25ffde-2c25-11e7-81ab-2cd444b2e704">stonefloor</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c2d7a1e-2c25-11e7-9bf4-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0c2d7a1f-2c25-11e7-ae8b-2cd444b2e704">airlayer</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0c2da130-2c25-11e7-b2d9-2cd444b2e704">fill</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0c2da131-2c25-11e7-a001-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c35b7b6-2c25-11e7-94a7-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0c35b7b7-2c25-11e7-b55c-2cd444b2e704">cavitydamping</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="0c35b7b8-2c25-11e7-b02c-2cd444b2e704">concrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c3e6a7e-2c25-11e7-b193-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0c3e6a7f-2c25-11e7-ba2d-2cd444b2e704">cavitydamping</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0c3e6a80-2c25-11e7-bcd5-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c471d48-2c25-11e7-851b-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0c471d49-2c25-11e7-b036-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.01</elements:thickness>
+				<elements:material material_id="0c471d4a-2c25-11e7-8249-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0c471d4b-2c25-11e7-a18c-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c506c54-2c25-11e7-ade1-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.01</elements:thickness>
+				<elements:material material_id="0c506c55-2c25-11e7-9226-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0c506c56-2c25-11e7-977c-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0c506c57-2c25-11e7-9718-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0c506c58-2c25-11e7-9d0a-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c5accd8-2c25-11e7-9d32-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0c5accd9-2c25-11e7-910c-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0c5accda-2c25-11e7-a478-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0c5accdb-2c25-11e7-bcd1-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c65064a-2c25-11e7-88e2-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0c65064b-2c25-11e7-8a56-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.06</elements:thickness>
+				<elements:material material_id="0c65064c-2c25-11e7-a4b4-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0c65064d-2c25-11e7-a9b8-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c705136-2c25-11e7-8767-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0c705137-2c25-11e7-a67b-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="0c705138-2c25-11e7-9078-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0c705139-2c25-11e7-a7d6-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>2002 2009</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c7b26ec-2c25-11e7-9f2c-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0c7b26ed-2c25-11e7-88d9-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0c7b26ee-2c25-11e7-b344-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0c7b26ef-2c25-11e7-bf33-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>2010 2015</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c86e70a-2c25-11e7-a076-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0c86e70b-2c25-11e7-aff2-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0c86e70c-2c25-11e7-be9c-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0c86e70d-2c25-11e7-873a-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c928014-2c25-11e7-9183-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0c928015-2c25-11e7-b856-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="0c928016-2c25-11e7-9528-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0c928017-2c25-11e7-8b46-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_standard_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0c9e4034-2c25-11e7-986e-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="0c9e4035-2c25-11e7-aa6b-2cd444b2e704">airlayer</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0c9e4036-2c25-11e7-8a80-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_standard_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0caa4e70-2c25-11e7-9a42-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0caa4e71-2c25-11e7-be2a-2cd444b2e704">cavitydamping</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0caa4e72-2c25-11e7-a615-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_standard_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0cb6f8f4-2c25-11e7-8757-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0cb6f8f5-2c25-11e7-9f61-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0cb72006-2c25-11e7-9f7c-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="0cb72007-2c25-11e7-ac0c-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0fa5eebe-2c25-11e7-aa56-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.06</elements:thickness>
+				<elements:material material_id="0fa5eebf-2c25-11e7-9527-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.3</elements:thickness>
+				<elements:material material_id="0fa5eec0-2c25-11e7-a013-2cd444b2e704">stonefloor</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0fbea780-2c25-11e7-86b8-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="0fbea781-2c25-11e7-a56f-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0fbea782-2c25-11e7-b174-2cd444b2e704">airlayer</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0fbea783-2c25-11e7-b5a3-2cd444b2e704">fill</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="0fbea784-2c25-11e7-9bb3-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0fd76040-2c25-11e7-a237-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="0fd76041-2c25-11e7-a060-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="0fd76042-2c25-11e7-8d36-2cd444b2e704">concrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="0fefcae2-2c25-11e7-95b9-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.0</elements:thickness>
+				<elements:material material_id="0fefcae3-2c25-11e7-813b-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>8.0</elements:thickness>
+				<elements:material material_id="0fefcae4-2c25-11e7-a6bd-2cd444b2e704">cavitydamping</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="0fefcae5-2c25-11e7-81fe-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="1008aab4-2c25-11e7-b024-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="1008aab5-2c25-11e7-808e-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="1008aab6-2c25-11e7-8e5b-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.01</elements:thickness>
+				<elements:material material_id="1008aab7-2c25-11e7-a0c4-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="1008aab8-2c25-11e7-8017-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="1021ffba-2c25-11e7-a52b-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.09</elements:thickness>
+				<elements:material material_id="1021ffbb-2c25-11e7-bf6d-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="1021ffbc-2c25-11e7-b9e0-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="1021ffbd-2c25-11e7-9ede-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="1021ffbe-2c25-11e7-a27f-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="103e8924-2c25-11e7-8809-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="103e8925-2c25-11e7-9e71-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="103e8926-2c25-11e7-8581-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="103e8927-2c25-11e7-a182-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="103e8928-2c25-11e7-9b59-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="105a9d5c-2c25-11e7-b1e7-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="105a9d5d-2c25-11e7-96c2-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="105a9d5e-2c25-11e7-b0a0-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.06</elements:thickness>
+				<elements:material material_id="105a9d5f-2c25-11e7-b467-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="105a9d60-2c25-11e7-a316-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="107f163a-2c25-11e7-9c08-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="107f163b-2c25-11e7-bbb5-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="107f163c-2c25-11e7-bcf4-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="107f163d-2c25-11e7-829f-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="107f163e-2c25-11e7-b6f2-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>2002 2009</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="1099a3ca-2c25-11e7-840b-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="1099a3cb-2c25-11e7-bc78-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="1099a3cc-2c25-11e7-b25c-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1099a3cd-2c25-11e7-abe1-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="1099a3ce-2c25-11e7-a09c-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>2010 2015</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="10b4f4ae-2c25-11e7-8a45-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="10b51bbe-2c25-11e7-a238-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="10b51bbf-2c25-11e7-a541-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="10b51bc0-2c25-11e7-ada1-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="10d0bac2-2c25-11e7-be55-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="10d0bac3-2c25-11e7-aa65-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.22</elements:thickness>
+				<elements:material material_id="10d0bac4-2c25-11e7-95fc-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="10d0bac5-2c25-11e7-8389-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="10ed1d1c-2c25-11e7-b8d0-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="10ed1d1d-2c25-11e7-adc3-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="10ed1d1e-2c25-11e7-bbed-2cd444b2e704">airlayer</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="10ed1d1f-2c25-11e7-8f6e-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="110a69dc-2c25-11e7-953f-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.0</elements:thickness>
+				<elements:material material_id="110a69dd-2c25-11e7-a140-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>8.0</elements:thickness>
+				<elements:material material_id="110a69de-2c25-11e7-b2ae-2cd444b2e704">cavitydamping</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="110a69df-2c25-11e7-ae07-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="112879f4-2c25-11e7-9266-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="112879f5-2c25-11e7-850b-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="112879f6-2c25-11e7-b1f9-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="1128a102-2c25-11e7-9130-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="1128a103-2c25-11e7-9e9f-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="1792f1ae-2c25-11e7-a3d8-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="1792f1af-2c25-11e7-a0c7-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.3</elements:thickness>
+				<elements:material material_id="1792f1b0-2c25-11e7-b85b-2cd444b2e704">stonefloor</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="17c5c2ca-2c25-11e7-a8a7-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="17c5c2cb-2c25-11e7-b46a-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="17c5c2cc-2c25-11e7-a0a6-2cd444b2e704">airlayer</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="17c5c2cd-2c25-11e7-902e-2cd444b2e704">fill</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="17c5c2ce-2c25-11e7-bc7f-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="17ef6bec-2c25-11e7-9cf4-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="17ef6bed-2c25-11e7-83f8-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.14</elements:thickness>
+				<elements:material material_id="17ef6bee-2c25-11e7-ab66-2cd444b2e704">concrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="18193c1c-2c25-11e7-9132-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.0</elements:thickness>
+				<elements:material material_id="18193c1d-2c25-11e7-a7fb-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>12.0</elements:thickness>
+				<elements:material material_id="18193c1e-2c25-11e7-8106-2cd444b2e704">cavitydamping</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="18193c1f-2c25-11e7-9fdb-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="184c5b5c-2c25-11e7-9e4f-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="184c5b5d-2c25-11e7-a259-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="184c5b5e-2c25-11e7-8503-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.01</elements:thickness>
+				<elements:material material_id="184c5b5f-2c25-11e7-9502-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="184c5b60-2c25-11e7-8a50-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="1876eee4-2c25-11e7-891f-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.13</elements:thickness>
+				<elements:material material_id="1876eee5-2c25-11e7-b989-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="1876eee6-2c25-11e7-b4fb-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="1876eee7-2c25-11e7-aa5a-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="1876eee8-2c25-11e7-90fe-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="18a1a97a-2c25-11e7-8739-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="18a1a97b-2c25-11e7-a2fe-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="18a1a97c-2c25-11e7-afbf-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="18a1a97d-2c25-11e7-a0bb-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="18a1a97e-2c25-11e7-921c-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="18cd4e78-2c25-11e7-9c4b-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="18cd4e79-2c25-11e7-a072-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="18cd4e7a-2c25-11e7-b039-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.06</elements:thickness>
+				<elements:material material_id="18cd4e7b-2c25-11e7-882c-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="18cd4e7c-2c25-11e7-a5b3-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="18f9dddc-2c25-11e7-8bfb-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="18f9dddd-2c25-11e7-8654-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="18f9ddde-2c25-11e7-bcbb-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.08</elements:thickness>
+				<elements:material material_id="18f9dddf-2c25-11e7-837a-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="18f9dde0-2c25-11e7-8b8e-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>2002 2009</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="192582dc-2c25-11e7-a15c-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="192582dd-2c25-11e7-883b-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="1925a9ec-2c25-11e7-841f-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1925a9ed-2c25-11e7-8692-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="1925a9ee-2c25-11e7-b0f8-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>2010 2015</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="195d3618-2c25-11e7-a93a-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="195d3619-2c25-11e7-8925-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.29</elements:thickness>
+				<elements:material material_id="195d361a-2c25-11e7-aa28-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="195d361b-2c25-11e7-8098-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="198a88d2-2c25-11e7-8bd3-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="198a88d3-2c25-11e7-83cb-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.29</elements:thickness>
+				<elements:material material_id="198a88d4-2c25-11e7-8669-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="198a88d5-2c25-11e7-81f7-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="19be6b64-2c25-11e7-8eae-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="19be6b65-2c25-11e7-8c32-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="19be6b66-2c25-11e7-b2fa-2cd444b2e704">airlayer</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="19be6b67-2c25-11e7-a691-2cd444b2e704">timberformwork</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="19ed6bda-2c25-11e7-8357-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.0</elements:thickness>
+				<elements:material material_id="19ed6bdb-2c25-11e7-a6d6-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>12.0</elements:thickness>
+				<elements:material material_id="19ed6bdc-2c25-11e7-a323-2cd444b2e704">cavitydamping</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="19ed92e8-2c25-11e7-9a9c-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:GroundFloor>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_2_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.03</elements:thickness>
+				<elements:material material_id="1a1b0cb4-2c25-11e7-a5ac-2cd444b2e704">covering</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.12</elements:thickness>
+				<elements:material material_id="1a1b0cb5-2c25-11e7-98eb-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="1a1b0cb6-2c25-11e7-bb00-2cd444b2e704">screed</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="1a1b0cb7-2c25-11e7-88c7-2cd444b2e704">insulation</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="1a1b0cb8-2c25-11e7-8820-2cd444b2e704">reinforcedconcrete</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:Window>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0cc48ddc-2c25-11e7-8eb9-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0cd13862-2c25-11e7-87f7-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0ce38858-2c25-11e7-a2cb-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0cf0cf1e-2c25-11e7-bfd2-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0cfeb228-2c25-11e7-b91b-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0d0c9536-2c25-11e7-83bf-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0d1b62a6-2c25-11e7-ba9b-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0d2945b0-2c25-11e7-be02-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0d3776de-2c25-11e7-94f6-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>2002 2009</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0d45f62e-2c25-11e7-a6bd-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>2010 2015</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0d5511c0-2c25-11e7-a7f1-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="0d6517b8-2c25-11e7-892f-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="114ddd36-2c25-11e7-867d-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="11758a7a-2c25-11e7-b377-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="119c2648-2c25-11e7-bf59-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="11c72f02-2c25-11e7-9902-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="11e6ecd2-2c25-11e7-a8ea-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1206f8c6-2c25-11e7-b604-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="122704b6-2c25-11e7-b6a8-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="124e8ae8-2c25-11e7-9024-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="12821f5c-2c25-11e7-806a-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>2002 2009</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="12a5fbf6-2c25-11e7-befe-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>2010 2015</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="12c67d1c-2c25-11e7-a7ba-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="130ed294-2c25-11e7-8676-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>0 1859</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1a49e618-2c25-11e7-adb4-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1860 1918</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1a82d1dc-2c25-11e7-aeb9-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1919 1948</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1ab10efa-2c25-11e7-abb5-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1949 1957</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1ae120e6-2c25-11e7-bfb2-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1958 1968</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1b11a806-2c25-11e7-95f4-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1969 1978</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1b403346-2c25-11e7-bb3b-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1979 1983</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1b704530-2c25-11e7-840f-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1984 1994</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1baa697e-2c25-11e7-8609-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1995 2001</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1bd9df24-2c25-11e7-a6b0-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>2002 2009</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1c0b77b8-2c25-11e7-8d32-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>2010 2015</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1c3d375e-2c25-11e7-b190-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="1c6e33b0-2c25-11e7-8f8f-2cd444b2e704">glas</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+</elements:TypeBuildingElements>
