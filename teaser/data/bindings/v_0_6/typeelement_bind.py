@@ -31,7 +31,7 @@ import pyxb.binding.datatypes
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://teaser.elements', create_if_missing=True)
-Namespace.configureCategories(['typeBinding_06', 'elementBinding_06'])
+Namespace.configureCategories(['typeBinding', 'elementBinding'])
 
 def CreateFromDocument (xml_text, default_namespace=None, location_base=None):
     """Parse the given XML and use the document element to create a
@@ -88,7 +88,7 @@ class integerList (pyxb.binding.basis.STD_list):
 
     _ItemType = pyxb.binding.datatypes.integer
 integerList._InitializeFacetMap()
-Namespace.addCategoryObject('typeBinding_06', 'integerList', integerList)
+Namespace.addCategoryObject('typeBinding', 'integerList', integerList)
 _module_typeBindings.integerList = integerList
 
 # Complex type {http://teaser.elements}layerType with content type ELEMENT_ONLY
@@ -132,7 +132,7 @@ class layerType (pyxb.binding.basis.complexTypeDefinition):
 
     })
 _module_typeBindings.layerType = layerType
-Namespace.addCategoryObject('typeBinding_06', 'layerType', layerType)
+Namespace.addCategoryObject('typeBinding', 'layerType', layerType)
 
 
 # Complex type [anonymous] with content type SIMPLE
@@ -188,7 +188,7 @@ class LayersType (pyxb.binding.basis.complexTypeDefinition):
 
     })
 _module_typeBindings.LayersType = LayersType
-Namespace.addCategoryObject('typeBinding_06', 'LayersType', LayersType)
+Namespace.addCategoryObject('typeBinding', 'LayersType', LayersType)
 
 
 # Complex type {http://teaser.elements}OuterWallType with content type ELEMENT_ONLY
@@ -272,7 +272,7 @@ class OuterWallType (pyxb.binding.basis.complexTypeDefinition):
 
     })
 _module_typeBindings.OuterWallType = OuterWallType
-Namespace.addCategoryObject('typeBinding_06', 'OuterWallType', OuterWallType)
+Namespace.addCategoryObject('typeBinding', 'OuterWallType', OuterWallType)
 
 
 # Complex type {http://teaser.elements}DoorType with content type ELEMENT_ONLY
@@ -356,7 +356,7 @@ class DoorType (pyxb.binding.basis.complexTypeDefinition):
 
     })
 _module_typeBindings.DoorType = DoorType
-Namespace.addCategoryObject('typeBinding_06', 'DoorType', DoorType)
+Namespace.addCategoryObject('typeBinding', 'DoorType', DoorType)
 
 
 # Complex type {http://teaser.elements}InnerWallType with content type ELEMENT_ONLY
@@ -424,7 +424,7 @@ class InnerWallType (pyxb.binding.basis.complexTypeDefinition):
 
     })
 _module_typeBindings.InnerWallType = InnerWallType
-Namespace.addCategoryObject('typeBinding_06', 'InnerWallType', InnerWallType)
+Namespace.addCategoryObject('typeBinding', 'InnerWallType', InnerWallType)
 
 
 # Complex type {http://teaser.elements}RooftopType with content type ELEMENT_ONLY
@@ -508,7 +508,7 @@ class RooftopType (pyxb.binding.basis.complexTypeDefinition):
 
     })
 _module_typeBindings.RooftopType = RooftopType
-Namespace.addCategoryObject('typeBinding_06', 'RooftopType', RooftopType)
+Namespace.addCategoryObject('typeBinding', 'RooftopType', RooftopType)
 
 
 # Complex type {http://teaser.elements}GroundFloorType with content type ELEMENT_ONLY
@@ -576,7 +576,7 @@ class GroundFloorType (pyxb.binding.basis.complexTypeDefinition):
 
     })
 _module_typeBindings.GroundFloorType = GroundFloorType
-Namespace.addCategoryObject('typeBinding_06', 'GroundFloorType', GroundFloorType)
+Namespace.addCategoryObject('typeBinding', 'GroundFloorType', GroundFloorType)
 
 
 # Complex type {http://teaser.elements}WindowType with content type ELEMENT_ONLY
@@ -692,7 +692,7 @@ class WindowType (pyxb.binding.basis.complexTypeDefinition):
 
     })
 _module_typeBindings.WindowType = WindowType
-Namespace.addCategoryObject('typeBinding_06', 'WindowType', WindowType)
+Namespace.addCategoryObject('typeBinding', 'WindowType', WindowType)
 
 
 # Complex type {http://teaser.elements}CeilingType with content type ELEMENT_ONLY
@@ -760,7 +760,7 @@ class CeilingType (pyxb.binding.basis.complexTypeDefinition):
 
     })
 _module_typeBindings.CeilingType = CeilingType
-Namespace.addCategoryObject('typeBinding_06', 'CeilingType', CeilingType)
+Namespace.addCategoryObject('typeBinding', 'CeilingType', CeilingType)
 
 
 # Complex type {http://teaser.elements}FloorType with content type ELEMENT_ONLY
@@ -828,7 +828,7 @@ class FloorType (pyxb.binding.basis.complexTypeDefinition):
 
     })
 _module_typeBindings.FloorType = FloorType
-Namespace.addCategoryObject('typeBinding_06', 'FloorType', FloorType)
+Namespace.addCategoryObject('typeBinding', 'FloorType', FloorType)
 
 
 # Complex type {http://teaser.elements}TypeBuildingElementsType with content type ELEMENT_ONLY
@@ -920,11 +920,11 @@ class TypeBuildingElementsType (pyxb.binding.basis.complexTypeDefinition):
         __version.name() : __version
     })
 _module_typeBindings.TypeBuildingElementsType = TypeBuildingElementsType
-Namespace.addCategoryObject('typeBinding_06', 'TypeBuildingElementsType', TypeBuildingElementsType)
+Namespace.addCategoryObject('typeBinding', 'TypeBuildingElementsType', TypeBuildingElementsType)
 
 
 TypeBuildingElements = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'TypeBuildingElements'), TypeBuildingElementsType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 4, 2))
-Namespace.addCategoryObject('elementBinding_06', TypeBuildingElements.name().localName(), TypeBuildingElements)
+Namespace.addCategoryObject('elementBinding', TypeBuildingElements.name().localName(), TypeBuildingElements)
 
 
 

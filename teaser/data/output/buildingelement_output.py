@@ -37,8 +37,7 @@ def save_type_element(element, data_class):
     element_binding.version = "0.6"
     add_to_xml = True
 
-    pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
-        tb_bind.Namespace, 'elements')
+
 
     warning_text = ("Construction Type and building age "
                     "group already exist in this XML, consider revising "
