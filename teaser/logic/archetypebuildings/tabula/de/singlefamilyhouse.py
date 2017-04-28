@@ -265,7 +265,7 @@ class SingleFamilyHouse(Residential):
 
         for key in self.facade_estimation_factors:
             if self.year_of_construction in range(key[0], key[1]) or \
-                            self.year_of_construction == key[1]:
+                    self.year_of_construction == key[1]:
                 self.building_age_group = (key[0], key[1])
 
         if self.with_ahu is True:
@@ -306,7 +306,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self._outer_wall_names_1.items():
                 self.outer_area[value[1]] += (
                     (self.facade_estimation_factors[
-                         self.building_age_group]['ow1'] * type_bldg_area) /
+                        self.building_age_group]['ow1'] * type_bldg_area) /
                     len(self._outer_wall_names_1))
 
                 for zone in self.thermal_zones:
@@ -323,7 +323,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self._outer_wall_names_2.items():
                 self.outer_area[value[1]] += (
                     (self.facade_estimation_factors[
-                         self.building_age_group]['ow2'] * type_bldg_area) /
+                        self.building_age_group]['ow2'] * type_bldg_area) /
                     len(self._outer_wall_names_2))
 
                 for zone in self.thermal_zones:
@@ -345,7 +345,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self.window_names_1.items():
                 self.window_area[value[1]] += (
                     (self.facade_estimation_factors[
-                         self.building_age_group]['win1'] * type_bldg_area) /
+                        self.building_age_group]['win1'] * type_bldg_area) /
                     len(self.window_names_1))
 
                 for zone in self.thermal_zones:
@@ -363,7 +363,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self.window_names_2.items():
                 self.window_area[value[1]] += (
                     (self.facade_estimation_factors[
-                         self.building_age_group]['win2'] * type_bldg_area) /
+                        self.building_age_group]['win2'] * type_bldg_area) /
                     len(self.window_names_2))
 
                 for zone in self.thermal_zones:
@@ -386,7 +386,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self.ground_floor_names_1.items():
                 self.outer_area[value[1]] += (
                     (self.facade_estimation_factors[
-                         self.building_age_group]['gf1'] * type_bldg_area) /
+                        self.building_age_group]['gf1'] * type_bldg_area) /
                     len(self.ground_floor_names_1))
 
                 for zone in self.thermal_zones:
@@ -403,7 +403,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self.ground_floor_names_2.items():
                 self.outer_area[value[1]] += (
                     (self.facade_estimation_factors[
-                         self.building_age_group]['gf2'] * type_bldg_area) /
+                        self.building_age_group]['gf2'] * type_bldg_area) /
                     len(self.ground_floor_names_2))
 
                 for zone in self.thermal_zones:
@@ -425,7 +425,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self.roof_names_1.items():
                 self.outer_area[value[1]] += (
                     (self.facade_estimation_factors[
-                         self.building_age_group]['rt1'] * type_bldg_area) /
+                        self.building_age_group]['rt1'] * type_bldg_area) /
                     len(self.roof_names_1))
 
                 for zone in self.thermal_zones:
@@ -442,7 +442,7 @@ class SingleFamilyHouse(Residential):
             for key, value in self.roof_names_2.items():
                 self.outer_area[value[1]] += (
                     (self.facade_estimation_factors[
-                         self.building_age_group]['rt2'] * type_bldg_area) /
+                        self.building_age_group]['rt2'] * type_bldg_area) /
                     len(self.roof_names_2))
 
                 for zone in self.thermal_zones:
