@@ -31,6 +31,7 @@ from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.window import Window
+from teaser.logic.buildingobjects.buildingphysics.door import Door
 
 
 def load_teaser_xml(path, prj):
@@ -59,10 +60,15 @@ def load_teaser_xml(path, prj):
         import teaser.data.bindings.v_0_3_9.project_bind as pb
         project_bind = pb.CreateFromDocument(xml_file.read())
     elif version_parse.getroot().attrib['version'] == "0.4":
+        warnings.warn("You are using an old version of project XML file")
         import teaser.data.bindings.v_0_4.project_bind as pb
         project_bind = pb.CreateFromDocument(xml_file.read())
     elif version_parse.getroot().attrib['version'] == "0.5":
+        warnings.warn("You are using an old version of project XML file")
         import teaser.data.bindings.v_0_5.project_bind as pb
+        project_bind = pb.CreateFromDocument(xml_file.read())
+    elif version_parse.getroot().attrib['version'] == "0.6":
+        import teaser.data.bindings.v_0_6.project_bind as pb
         project_bind = pb.CreateFromDocument(xml_file.read())
 
     for pyxb_bld in project_bind.Building:
@@ -280,7 +286,16 @@ def _load_building(prj, pyxb_bld, type, project_bind):
             set_basic_data_teaser(pyxb_wall, out_wall)
             set_layer_data_teaser(pyxb_wall, out_wall)
 
-            # zone.outer_walls.append(out_wall)
+        try:
+            if float(project_bind.version) >= 0.6:
+                for pyxb_wall in pyxb_zone.Door:
+                    out_wall = Door(zone)
+
+                    set_basic_data_teaser(pyxb_wall, out_wall)
+                    set_layer_data_teaser(pyxb_wall, out_wall)
+
+        except AttributeError:
+            pass
 
         for pyxb_wall in pyxb_zone.Rooftop:
             roof = Rooftop(zone)
@@ -355,7 +370,7 @@ def set_basic_data_teaser(pyxb_class, element):
     element.orientation = pyxb_class.orientation
 
     if type(element).__name__ == 'OuterWall' or type(element).__name__ == \
-            'Rooftop':
+            'Rooftop' or type(element).__name__ == 'Door':
 
         element.inner_radiation = pyxb_class.inner_radiation
         element.inner_convection = pyxb_class.inner_convection

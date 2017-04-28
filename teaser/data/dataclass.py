@@ -49,7 +49,7 @@ class DataClass(object):
 
     def __init__(
             self,
-            used_statistic):
+            used_statistic='iwu'):
         """Constructor of DataClass
         """
 
