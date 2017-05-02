@@ -140,7 +140,7 @@ class Door(OuterWall):
             elif type(self).__name__ == "GroundFloor":
                 self.__parent.ground_floors.append(self)
             if type(self).__name__ == "Door":
-                self.__parent.outer_walls.append(self)
+                self.__parent.doors.append(self)
             else:
                 raise ValueError('Instance of OuterWall not known')
 

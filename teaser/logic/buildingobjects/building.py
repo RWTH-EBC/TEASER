@@ -289,6 +289,13 @@ class Building(object):
                         sum(count.orientation == orientation for count in
                             zone.ground_floors))
 
+            for door in zone.doors:
+                if door.orientation == orientation:
+                    door.area = (
+                        ((new_area / self.net_leased_area) * zone.area) /
+                        sum(count.orientation == orientation for count in
+                            zone.doors))
+
     def set_window_area(
             self,
             new_area,

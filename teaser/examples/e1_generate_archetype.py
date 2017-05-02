@@ -37,22 +37,22 @@ def example_generate_archetype():
     # and net_leased_area need to be set to provide enough information for
     # archetype generation. For specific information on the parameters please
     # read the docs.
-    """
+
     prj.add_residential(
         method='tabula_de',
         usage='single_family_house',
         name="ResidentialBuilding",
-        year_of_construction=2015,
+        year_of_construction=1955,
         number_of_floors=2,
         height_of_floors=3.2,
-        net_leased_area=200)
+        net_leased_area=111)
     print("asd2")
-    """
+
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
     # Project.add_residential() is used. The meaning of compulsory parameters
     # does not differ from the residential archetype building.
-
+    """
     prj.add_non_residential(
         method='bmvbs',
         usage='office',
@@ -75,7 +75,7 @@ def example_generate_archetype():
         net_leased_area=3400)
 
     return prj
-
+    """
 
 if __name__ == '__main__':
     prj = example_generate_archetype()

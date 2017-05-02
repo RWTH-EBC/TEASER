@@ -52,7 +52,6 @@ class DataClass(object):
             used_statistic='iwu'):
         """Constructor of DataClass
         """
-
         self.element_bind = None
         if used_statistic == 'iwu':
             self.path_tb = utils.get_full_path(
@@ -61,8 +60,10 @@ class DataClass(object):
         elif used_statistic == 'tabula_de':
             self.path_tb = utils.get_full_path(
                 os.path.join(
-                    'data', 'input', 'inputdata',
-                    'TypeBuildingElements_Tabula_de.xml'))
+                    'data',
+                    'input',
+                    'inputdata',
+                    'TypeElements_TABULA_DE_SFH.xml'))
             self.load_tb_binding()
         elif used_statistic is None:
             pass
