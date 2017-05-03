@@ -2643,3 +2643,78 @@ class Test_teaser(object):
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
+
+        prj.add_residential(
+            method='tabula_de',
+            usage='single_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=2000,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=122)
+
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 115.5
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 126.6
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 84.3
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 32.5
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
+
+        prj.add_residential(
+            method='tabula_de',
+            usage='single_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=2008,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=147)
+
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 85.9
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 188.9
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 79.8
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 28.3
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
+
+        prj.add_residential(
+            method='tabula_de',
+            usage='single_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=2014,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=187)
+
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 131.9
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 227.6
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 107.8
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 42.0
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.6
