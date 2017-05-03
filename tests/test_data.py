@@ -16,7 +16,7 @@ prj = Project(True)
 class Test_teaser(object):
     """Unit Tests for TEASER"""
     global prj
-    '''
+
     def test_calc_vdi_room1(self):
         """Parameter Verification for rouvel room1"""
         import teaser.examples.verification.verification_room1 as room1
@@ -2718,3 +2718,4 @@ class Test_teaser(object):
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.6
+    '''
