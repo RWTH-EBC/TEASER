@@ -203,13 +203,6 @@ def _set_layer_data(material, layer, pyxb_class, data_class):
         but the user can individually change that.
     '''
 
-    layer.thickness = pyxb_class.thickness
-    layer.id = pyxb_class.id
-    material.name = "test"
-    material.density = 1000
-    material.thermal_conduc = 1000
-    material.heat_capac = 1000
-    '''
     if float(data_class.element_bind.version) >= 0.4:
         mat_input.load_material_id(material,
                                    pyxb_class.material.material_id,
@@ -224,7 +217,7 @@ def _set_layer_data(material, layer, pyxb_class, data_class):
         if pyxb_class.Material.ir_emissivity is not None:
             material.ir_emissivity = pyxb_class.Material.ir_emissivity
 
-    '''
+
 def _set_basic_data(element, pyxb_class):
     '''Helper function for load_type_element to set the layer data.
 
