@@ -472,7 +472,8 @@ class Project(object):
 
         if method == 'tabula_de':
 
-            self.data = DataClass(used_statistic=method)
+            if self.data is None:
+                self.data = DataClass(used_statistic=method)
 
             if usage == 'single_family_house':
 
