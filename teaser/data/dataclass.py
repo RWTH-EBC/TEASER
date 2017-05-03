@@ -7,7 +7,14 @@
 import teaser.logic.utilities as utils
 import warnings
 import xml.etree.ElementTree as et
-import os
+import os, sys
+
+v = sys.version_info
+if v >= (2, 7):
+    try:
+        FileNotFoundError
+    except NameError:
+        FileNotFoundError = IOError
 
 
 class DataClass(object):
