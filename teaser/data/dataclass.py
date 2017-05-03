@@ -7,7 +7,8 @@
 import teaser.logic.utilities as utils
 import warnings
 import xml.etree.ElementTree as et
-import os, sys
+import os
+import sys
 
 v = sys.version_info
 if v >= (2, 7):
