@@ -203,6 +203,9 @@ def _set_layer_data(material, layer, pyxb_class, data_class):
         but the user can individually change that.
     '''
 
+    layer.thickness = pyxb_class.thickness
+    layer.id = pyxb_class.id
+
     if float(data_class.element_bind.version) >= 0.4:
         mat_input.load_material_id(material,
                                    pyxb_class.material.material_id,
