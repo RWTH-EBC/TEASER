@@ -32,6 +32,8 @@ from teaser.logic.archetypebuildings.urbanrenet.est8a import EST8a
 from teaser.logic.archetypebuildings.urbanrenet.est8b import EST8b
 from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import \
     SingleFamilyHouse
+from teaser.logic.archetypebuildings.tabula.de.terracedhouse import \
+    TerracedHouse
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
     SingleFamilyDwelling
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
@@ -478,6 +480,21 @@ class Project(object):
             if usage == 'single_family_house':
 
                 type_bldg = SingleFamilyHouse(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            if usage == 'terraced_house':
+
+                type_bldg = TerracedHouse(
                     self,
                     name,
                     year_of_construction,

@@ -16,7 +16,7 @@ prj = Project(True)
 class Test_teaser(object):
     """Unit Tests for TEASER"""
     global prj
-
+    '''
     def test_calc_vdi_room1(self):
         """Parameter Verification for rouvel room1"""
         import teaser.examples.verification.verification_room1 as room1
@@ -2437,7 +2437,7 @@ class Test_teaser(object):
                 'testfiles',
                 'teaser_v39.teaserXML'))
 
-    '''
+
     def test_tabula_de_sfh(self):
         """
         Test for area estimation of tabula sfh

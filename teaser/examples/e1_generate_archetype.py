@@ -39,8 +39,8 @@ def example_generate_archetype():
     # read the docs.
 
     prj.add_residential(
-        method='iwu',
-        usage='single_family_dwelling',
+        method='tabula_de',
+        usage='terraced_house',
         name="ResidentialBuilding",
         year_of_construction=1988,
         number_of_floors=2,
