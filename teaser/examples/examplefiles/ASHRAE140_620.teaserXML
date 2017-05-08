@@ -9,7 +9,7 @@
 		<project:year_of_retrofit>None</project:year_of_retrofit>
 		<project:net_leased_area>48.0</project:net_leased_area>
 		<project:ThermalZone>
-			<project:name>TestRoom600</project:name>
+			<project:name>TestRoom620</project:name>
 			<project:area>48.0</project:area>
 			<project:volume>129.60000000000002</project:volume>
 			<project:infiltration_rate>0.41</project:infiltration_rate>
@@ -121,7 +121,7 @@
 			</project:OuterWall>
 			<project:OuterWall>
 				<project:name>OuterWallEast</project:name>
-				<project:area>16.200000000000003</project:area>
+				<project:area>10.200000000000003</project:area>
 				<project:tilt>90.0</project:tilt>
 				<project:orientation>90.0</project:orientation>
 				<project:inner_convection>3.16</project:inner_convection>
@@ -167,7 +167,7 @@
 			</project:OuterWall>
 			<project:OuterWall>
 				<project:name>OuterWallSouth</project:name>
-				<project:area>9.600000000000001</project:area>
+				<project:area>21.6</project:area>
 				<project:tilt>90.0</project:tilt>
 				<project:orientation>180.0</project:orientation>
 				<project:inner_convection>3.16</project:inner_convection>
@@ -213,7 +213,7 @@
 			</project:OuterWall>
 			<project:OuterWall>
 				<project:name>OuterWallWest</project:name>
-				<project:area>16.200000000000003</project:area>
+				<project:area>10.200000000000003</project:area>
 				<project:tilt>90.0</project:tilt>
 				<project:orientation>270.0</project:orientation>
 				<project:inner_convection>3.16</project:inner_convection>
@@ -336,10 +336,10 @@
 				</project:Layer>
 			</project:Floor>
 			<project:Window>
-				<project:name>WindowSouthLeft</project:name>
+				<project:name>WindowWest</project:name>
 				<project:area>6.0</project:area>
 				<project:tilt>90.0</project:tilt>
-				<project:orientation>180.0</project:orientation>
+				<project:orientation>270.0</project:orientation>
 				<project:inner_convection>3.16</project:inner_convection>
 				<project:inner_radiation>5.13</project:inner_radiation>
 				<project:outer_convection>16.37</project:outer_convection>
@@ -361,10 +361,10 @@
 				</project:Layer>
 			</project:Window>
 			<project:Window>
-				<project:name>WindowSouthRight</project:name>
+				<project:name>WindowEast</project:name>
 				<project:area>6.0</project:area>
 				<project:tilt>90.0</project:tilt>
-				<project:orientation>180.0</project:orientation>
+				<project:orientation>90.0</project:orientation>
 				<project:inner_convection>3.16</project:inner_convection>
 				<project:inner_radiation>5.13</project:inner_radiation>
 				<project:outer_convection>16.37</project:outer_convection>

@@ -3,7 +3,7 @@
 
 """
 This script contains of three functions. The first one loads the heavy-weight
-ASHRAE 140 test room 900 from a *.teaserXML file. The second one creates
+ASHRAE 140 test room 920 from a *.teaserXML file. The second one creates
 that room within the code. The third one computes parameter with the help of
 one of the aforementioned functions.
 """
@@ -31,11 +31,6 @@ def main():
     prj = from_scratch(number_of_elements=number_of_elements, save=False)
     # prj = load_file()
 
-    prj.buildings[0].calc_building_parameter(
-        number_of_elements=number_of_elements,
-        merge_windows=False,
-        used_library='IBPSA')
-
     prj.used_library_calc = 'IBPSA'
     prj.number_of_elements_calc = number_of_elements
     prj.merge_windows_calc = False
@@ -45,17 +40,22 @@ def main():
             "input",
             "inputdata",
             "weatherdata",
-            "DEU_BW_Mannheim_107290_TRY2010_12_Jahr_BBSR.mos"))
+            "ASHRAE140.mos"))
+
+    prj.buildings[0].calc_building_parameter(
+        number_of_elements=number_of_elements,
+        merge_windows=False,
+        used_library='IBPSA')
 
     prj.export_parameters_txt()
     prj.export_ibpsa()
-    # prj.export_aixlib()
 
 
-def from_scratch(number_of_elements, save=False,
-                 path=utilities.get_default_path()):
-    """
-    This function creates the test room from scratch.
+def from_scratch(
+        number_of_elements,
+        save=False,
+        path=utilities.get_default_path()):
+    """This function creates the test room from scratch.
 
     Notes: The standard defines an solar absorption coefficient for interior
     surfaces of 0.6. We do not consider this, but we could by multiplying
@@ -89,12 +89,7 @@ def from_scratch(number_of_elements, save=False,
     tz.volume = tz.area * 2.7
     tz.infiltration_rate = 0.41
 
-    # Let's see if it makes sense for completeness to define boundary
-    # conditions here. They won't be exported when using only the Annex60
-    # thermal zone model.
-
     tz.use_conditions = BoundaryConditions(parent=tz)
-    # tz.use_conditions.load_use_conditions("Living", prj.data)
 
     roof = Rooftop(parent=tz)
     roof.name = "Roof"
@@ -390,7 +385,7 @@ def from_scratch(number_of_elements, save=False,
         material_ofgw1.thermal_conduc = 0.04
 
     if save:
-        prj.save_project(file_name='ASHRAE140_900', path=path)
+        prj.save_project(file_name='ASHRAE140_920', path=path)
 
     return prj
 
@@ -399,13 +394,13 @@ def load_file():
 
     prj = Project(load_data=True)
 
-    prj.load_project(utilities.get_full_path(
-        "examples/examplefiles/ASHRAE140_900.teaserXML"))
+    prj.load_project(utilities.get_full_path(os.path.join("examples",
+                                                          "examplefiles",
+                                                          "ASHRAE140_920."
+                                                          "teaserXML")))
 
     return prj
 
 if __name__ == '__main__':
     main()
-    print("ASHRAE 900: That's it!")
-
-
+    print("ASHRAE 920: That's it!")

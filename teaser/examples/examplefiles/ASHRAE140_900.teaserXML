@@ -9,7 +9,7 @@
 		<project:year_of_retrofit>None</project:year_of_retrofit>
 		<project:net_leased_area>48.0</project:net_leased_area>
 		<project:ThermalZone>
-			<project:name>TestRoom600</project:name>
+			<project:name>TestRoom900</project:name>
 			<project:area>48.0</project:area>
 			<project:volume>129.60000000000002</project:volume>
 			<project:infiltration_rate>0.41</project:infiltration_rate>
@@ -84,24 +84,24 @@
 				<project:outer_radiation>4.63</project:outer_radiation>
 				<project:Layer>
 					<project:id>0</project:id>
-					<project:thickness>0.012</project:thickness>
+					<project:thickness>0.1</project:thickness>
 					<project:Material>
-						<project:name>Plasterboard</project:name>
-						<project:density>950.0</project:density>
-						<project:thermal_conduc>0.16</project:thermal_conduc>
-						<project:heat_capac>0.84</project:heat_capac>
+						<project:name>Concrete</project:name>
+						<project:density>1400.0</project:density>
+						<project:thermal_conduc>0.51</project:thermal_conduc>
+						<project:heat_capac>1.0</project:heat_capac>
 						<project:solar_absorp>0.7</project:solar_absorp>
 						<project:ir_emissivity>0.9</project:ir_emissivity>
 					</project:Material>
 				</project:Layer>
 				<project:Layer>
 					<project:id>1</project:id>
-					<project:thickness>0.066</project:thickness>
+					<project:thickness>0.062</project:thickness>
 					<project:Material>
-						<project:name>Fiberglass</project:name>
-						<project:density>12.0</project:density>
+						<project:name>FoamInsulation</project:name>
+						<project:density>10.0</project:density>
 						<project:thermal_conduc>0.04</project:thermal_conduc>
-						<project:heat_capac>0.84</project:heat_capac>
+						<project:heat_capac>1.4</project:heat_capac>
 						<project:solar_absorp>0.7</project:solar_absorp>
 						<project:ir_emissivity>0.9</project:ir_emissivity>
 					</project:Material>
@@ -130,24 +130,24 @@
 				<project:outer_radiation>4.63</project:outer_radiation>
 				<project:Layer>
 					<project:id>0</project:id>
-					<project:thickness>0.012</project:thickness>
+					<project:thickness>0.1</project:thickness>
 					<project:Material>
-						<project:name>Plasterboard</project:name>
-						<project:density>950.0</project:density>
-						<project:thermal_conduc>0.16</project:thermal_conduc>
-						<project:heat_capac>0.84</project:heat_capac>
+						<project:name>Concrete</project:name>
+						<project:density>1400.0</project:density>
+						<project:thermal_conduc>0.51</project:thermal_conduc>
+						<project:heat_capac>1.0</project:heat_capac>
 						<project:solar_absorp>0.7</project:solar_absorp>
 						<project:ir_emissivity>0.9</project:ir_emissivity>
 					</project:Material>
 				</project:Layer>
 				<project:Layer>
 					<project:id>1</project:id>
-					<project:thickness>0.066</project:thickness>
+					<project:thickness>0.062</project:thickness>
 					<project:Material>
-						<project:name>Fiberglass</project:name>
-						<project:density>12.0</project:density>
+						<project:name>FoamInsulation</project:name>
+						<project:density>10.0</project:density>
 						<project:thermal_conduc>0.04</project:thermal_conduc>
-						<project:heat_capac>0.84</project:heat_capac>
+						<project:heat_capac>1.4</project:heat_capac>
 						<project:solar_absorp>0.7</project:solar_absorp>
 						<project:ir_emissivity>0.9</project:ir_emissivity>
 					</project:Material>
@@ -176,24 +176,24 @@
 				<project:outer_radiation>4.63</project:outer_radiation>
 				<project:Layer>
 					<project:id>0</project:id>
-					<project:thickness>0.012</project:thickness>
+					<project:thickness>0.1</project:thickness>
 					<project:Material>
-						<project:name>Plasterboard</project:name>
-						<project:density>950.0</project:density>
-						<project:thermal_conduc>0.16</project:thermal_conduc>
-						<project:heat_capac>0.84</project:heat_capac>
+						<project:name>Concrete</project:name>
+						<project:density>1400.0</project:density>
+						<project:thermal_conduc>0.51</project:thermal_conduc>
+						<project:heat_capac>1.0</project:heat_capac>
 						<project:solar_absorp>0.7</project:solar_absorp>
 						<project:ir_emissivity>0.9</project:ir_emissivity>
 					</project:Material>
 				</project:Layer>
 				<project:Layer>
 					<project:id>1</project:id>
-					<project:thickness>0.066</project:thickness>
+					<project:thickness>0.062</project:thickness>
 					<project:Material>
-						<project:name>Fiberglass</project:name>
-						<project:density>12.0</project:density>
+						<project:name>FoamInsulation</project:name>
+						<project:density>10.0</project:density>
 						<project:thermal_conduc>0.04</project:thermal_conduc>
-						<project:heat_capac>0.84</project:heat_capac>
+						<project:heat_capac>1.4</project:heat_capac>
 						<project:solar_absorp>0.7</project:solar_absorp>
 						<project:ir_emissivity>0.9</project:ir_emissivity>
 					</project:Material>
@@ -222,24 +222,24 @@
 				<project:outer_radiation>4.63</project:outer_radiation>
 				<project:Layer>
 					<project:id>0</project:id>
-					<project:thickness>0.012</project:thickness>
+					<project:thickness>0.1</project:thickness>
 					<project:Material>
-						<project:name>Plasterboard</project:name>
-						<project:density>950.0</project:density>
-						<project:thermal_conduc>0.16</project:thermal_conduc>
-						<project:heat_capac>0.84</project:heat_capac>
+						<project:name>Concrete</project:name>
+						<project:density>1400.0</project:density>
+						<project:thermal_conduc>0.51</project:thermal_conduc>
+						<project:heat_capac>1.0</project:heat_capac>
 						<project:solar_absorp>0.7</project:solar_absorp>
 						<project:ir_emissivity>0.9</project:ir_emissivity>
 					</project:Material>
 				</project:Layer>
 				<project:Layer>
 					<project:id>1</project:id>
-					<project:thickness>0.066</project:thickness>
+					<project:thickness>0.062</project:thickness>
 					<project:Material>
-						<project:name>Fiberglass</project:name>
-						<project:density>12.0</project:density>
+						<project:name>FoamInsulation</project:name>
+						<project:density>10.0</project:density>
 						<project:thermal_conduc>0.04</project:thermal_conduc>
-						<project:heat_capac>0.84</project:heat_capac>
+						<project:heat_capac>1.4</project:heat_capac>
 						<project:solar_absorp>0.7</project:solar_absorp>
 						<project:ir_emissivity>0.9</project:ir_emissivity>
 					</project:Material>
@@ -314,17 +314,17 @@
 					<project:id>0</project:id>
 					<project:thickness>0.025</project:thickness>
 					<project:Material>
-						<project:name>TimberFlooring</project:name>
-						<project:density>650.0</project:density>
-						<project:thermal_conduc>0.14</project:thermal_conduc>
-						<project:heat_capac>1.2</project:heat_capac>
+						<project:name>Concrete</project:name>
+						<project:density>1400.0</project:density>
+						<project:thermal_conduc>1.13</project:thermal_conduc>
+						<project:heat_capac>1.0</project:heat_capac>
 						<project:solar_absorp>0.7</project:solar_absorp>
 						<project:ir_emissivity>0.9</project:ir_emissivity>
 					</project:Material>
 				</project:Layer>
 				<project:Layer>
 					<project:id>1</project:id>
-					<project:thickness>1.003</project:thickness>
+					<project:thickness>1.007</project:thickness>
 					<project:Material>
 						<project:name>Insulation</project:name>
 						<project:density>1e-12</project:density>

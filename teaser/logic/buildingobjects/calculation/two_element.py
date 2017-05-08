@@ -403,7 +403,7 @@ class TwoElement(object):
                           "this might lead to RunTimeErrors")
         self._sum_outer_wall_elements()
         if len(self.thermal_zone.inner_walls) < 1:
-            warnings.warn('For thermal zone ' + self.thermal_zone.name,
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
                           ' in building ' + self.thermal_zone.parent.name +
                           ', no inner walls have been defined.')
         else:
