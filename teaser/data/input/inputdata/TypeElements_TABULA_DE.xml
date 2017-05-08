@@ -4674,7 +4674,6 @@
 			</elements:layer>
 		</elements:Layers>
 	</elements:Window>
-
 	<elements:OuterWall>
 		<elements:building_age_group>1860 1918</elements:building_age_group>
 		<elements:construction_type>tabula_standard_1_TH</elements:construction_type>

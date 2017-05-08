@@ -271,6 +271,10 @@ class SingleFamilyHouse(Residential):
             if self.year_of_construction in range(key[0], key[1]) or \
                     self.year_of_construction == key[1]:
                 self.building_age_group = (key[0], key[1])
+            else:
+                raise RuntimeError(
+                    "Year of construction not supported for this archetype"
+                    "building")
 
         if self.with_ahu is True:
             self.central_ahu.profile_temperature = (
