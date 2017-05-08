@@ -204,7 +204,6 @@ def _set_layer_data(material, layer, pyxb_class, data_class):
             material.ir_emissivity = pyxb_class.Material.ir_emissivity
 
 
-
 def _set_basic_data(element, pyxb_class):
     '''Helper function for load_type_element to set the layer data.
 

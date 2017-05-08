@@ -22,7 +22,6 @@ def example_generate_archetype():
     # Be careful: Dymola does not like whitespaces in names and filenames,
     # thus we will delete them anyway in TEASER.
 
-
     prj = Project(load_data=True)
     prj.name = "ArchetypeExample"
 
@@ -72,6 +71,7 @@ def example_generate_archetype():
         net_leased_area=3400)
 
     return prj
+
 
 if __name__ == '__main__':
     prj = example_generate_archetype()

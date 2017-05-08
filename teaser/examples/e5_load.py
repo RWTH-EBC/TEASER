@@ -37,7 +37,6 @@ def example_save():
         "examples/examplefiles/new.teaserXML"))
     prj.save_project(file_name="new", path=None)
 
-
     # To reload data from a pickle file, we do not need to instantiate an
     # API, as pickle will automatically instantiate all classes as they have
     # been saved. The saved file from example e4 is called ´teaser_pickle.p´
@@ -49,7 +48,7 @@ def example_save():
         'teaser_pickle.p')
 
     pickle_prj = pickle.load(open(load_pickle, "rb"))
-
+    print(pickle_prj)
     # The last option to import data into TEASER is using a CityGML file. The
     # import of CityGML underlies some limitations e.g. concerning data
     # given in the file and the way the buildings are modeled.

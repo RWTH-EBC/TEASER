@@ -9,6 +9,7 @@ parameters. The parameters are then compared with the ones from Rouvel
 from teaser.project import Project
 import teaser.logic.utilities as utilities
 
+
 def parameter_room8():
 
     prj = Project(False)
@@ -23,6 +24,7 @@ def parameter_room8():
         used_library='AixLib')
 
     return prj
+
 
 if __name__ == "__main__":
     prj = parameter_room8()
@@ -55,7 +57,7 @@ if __name__ == "__main__":
     print("area_ow + area_win: ", prj.buildings[0].thermal_zones[
         0].model_attr.area_ow + prj.buildings[0].thermal_zones[
         0].model_attr.area_win,
-          "m2 ---", "Rouvel: 25.5 m2")
+        "m2 ---", "Rouvel: 25.5 m2")
     print("alpha_conv_inner_ow: ",
           prj.buildings[0].thermal_zones[0].model_attr.alpha_conv_inner_ow,
           "W/(m2*K) ---", "Rouvel: 2.7 W/(m2*K)")
@@ -70,5 +72,3 @@ if __name__ == "__main__":
     print("weightfactor_win: ",
           prj.buildings[0].thermal_zones[0].model_attr.weightfactor_win,
           "Rouvel: 0.404766351, 0.404766351")
-
-
