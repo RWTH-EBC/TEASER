@@ -128,7 +128,7 @@ class TerracedHouse(SingleFamilyHouse):
         # Window1, Window2, Door
         # Area/ReferenceFloorArea
         self.facade_estimation_factors = {
-            (1860, 1918): {
+            (0, 1918): {
                 'rt1': 0.625,
                 'rt2': 0.0,
                 'ow1': 0.77604,
