@@ -36,6 +36,8 @@ from teaser.logic.archetypebuildings.tabula.de.terracedhouse import \
     TerracedHouse
 from teaser.logic.archetypebuildings.tabula.de.multifamilyhouse import \
     MultiFamilyHouse
+from teaser.logic.archetypebuildings.tabula.de.apartmentblock import \
+    ApartmentBlock
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
     SingleFamilyDwelling
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
@@ -494,7 +496,7 @@ class Project(object):
                 type_bldg.generate_archetype()
                 return type_bldg
 
-            if usage == 'terraced_house':
+            elif usage == 'terraced_house':
 
                 type_bldg = TerracedHouse(
                     self,
@@ -509,9 +511,24 @@ class Project(object):
                 type_bldg.generate_archetype()
                 return type_bldg
 
-            if usage == 'multi_family_house':
+            elif usage == 'multi_family_house':
 
                 type_bldg = MultiFamilyHouse(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'apartment_block':
+
+                type_bldg = ApartmentBlock(
                     self,
                     name,
                     year_of_construction,

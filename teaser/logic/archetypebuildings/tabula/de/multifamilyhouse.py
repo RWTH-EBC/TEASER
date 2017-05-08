@@ -156,7 +156,7 @@ class MultiFamilyHouse(SingleFamilyHouse):
                 'win1': 0.17340,
                 'win2': 0.0,
                 'door': 0.00641},
-            (1919, 1949): {
+            (1919, 1948): {
                 'rt1': 0.41169,
                 'rt2': 0.08078,
                 'ow1': 0.84545,
@@ -258,15 +258,6 @@ class MultiFamilyHouse(SingleFamilyHouse):
                 'door': 0.0367}}
 
         self.building_age_group = None
-
-        for key in self.facade_estimation_factors:
-            if self.year_of_construction in range(key[0], key[1]) or \
-                    self.year_of_construction == key[1]:
-                self.building_age_group = (key[0], key[1])
-            else:
-                raise RuntimeError(
-                    "Year of construction not supported for this archetype"
-                    "building")
 
         if self.with_ahu is True:
             self.central_ahu.profile_temperature = (

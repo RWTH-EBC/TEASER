@@ -164,7 +164,7 @@ class SingleFamilyHouse(Residential):
                 'win1': 0.157,
                 'win2': 0.0,
                 'door': 0.014},
-            (1919, 1949): {
+            (1919, 1948): {
                 'rt1': 0.7063,
                 'rt2': 0.0,
                 'ow1': 0.7766,
@@ -267,15 +267,6 @@ class SingleFamilyHouse(Residential):
 
         self.building_age_group = None
 
-        for key in self.facade_estimation_factors:
-            if self.year_of_construction in range(key[0], key[1]) or \
-                    self.year_of_construction == key[1]:
-                self.building_age_group = (key[0], key[1])
-            else:
-                raise RuntimeError(
-                    "Year of construction not supported for this archetype"
-                    "building")
-
         if self.with_ahu is True:
             self.central_ahu.profile_temperature = (
                 7 * [293.15] +
@@ -286,6 +277,19 @@ class SingleFamilyHouse(Residential):
             self.central_ahu.profile_v_flow = (
                 7 * [0.0] + 12 * [1.0] + 6 * [0.0])
 
+    def _check_year_of_construction(self):
+        """Assignes the bldg age group according to year of construction"""
+
+        for key in self.facade_estimation_factors:
+            if self.year_of_construction in range(key[0], key[1]) or \
+                    self.year_of_construction == key[1]:
+                self.building_age_group = (key[0], key[1])
+
+        if self.building_age_group is None:
+            raise RuntimeError(
+                    "Year of construction not supported for this archetype"
+                    "building")
+
     def generate_archetype(self):
         """Generates a SingleFamilyHouse archetype buildings
 
@@ -293,6 +297,7 @@ class SingleFamilyHouse(Residential):
         Tabula Single Family House.
         """
 
+        self._check_year_of_construction()
         # help area for the correct building area setting while using typeBldgs
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0

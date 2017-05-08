@@ -128,7 +128,7 @@ class TerracedHouse(SingleFamilyHouse):
         # Window1, Window2, Door
         # Area/ReferenceFloorArea
         self.facade_estimation_factors = {
-            (0, 1918): {
+            (1860, 1918): {
                 'rt1': 0.625,
                 'rt2': 0.0,
                 'ow1': 0.77604,
@@ -138,7 +138,7 @@ class TerracedHouse(SingleFamilyHouse):
                 'win1': 0.18854,
                 'win2': 0.0,
                 'door': 0.02083},
-            (1919, 1949): {
+            (1919, 1948): {
                 'rt1': 0.44602,
                 'rt2': 0.0,
                 'ow1': 0.56726,
@@ -240,15 +240,6 @@ class TerracedHouse(SingleFamilyHouse):
                 'door': 0.01378}}
 
         self.building_age_group = None
-
-        for key in self.facade_estimation_factors:
-            if self.year_of_construction in range(key[0], key[1]) or \
-                    self.year_of_construction == key[1]:
-                self.building_age_group = (key[0], key[1])
-            else:
-                raise RuntimeError(
-                    "Year of construction not supported for this archetype"
-                    "building")
 
         if self.with_ahu is True:
             self.central_ahu.profile_temperature = (
