@@ -2412,3 +2412,586 @@ class Test_teaser(object):
                 os.path.dirname(__file__),
                 'testfiles',
                 'teaser_v39.teaserXML'))
+
+    def test_export_aixlib_only_iw(self):
+        """
+        Tests AixLib output for a building with inner walls only
+        """
+
+        from teaser.logic.buildingobjects.building import Building
+
+        bldg = Building(parent=prj)
+        bldg.name = "SuperExampleBuilding"
+        bldg.street_name = "AwesomeAvenue42"
+        bldg.city = "46325FantasticTown"
+        bldg.year_of_construction = 2015
+        bldg.number_of_floors = 1
+        bldg.height_of_floors = 3.5
+
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
+
+        tz = ThermalZone(parent=bldg)
+        tz.name = "LivingRoom"
+        tz.area = 140.0
+        tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+        tz.infiltration_rate = 0.5
+
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+            import BoundaryConditions
+
+        tz.use_conditions = BoundaryConditions(parent=tz)
+        tz.use_conditions.load_use_conditions("Living", prj.data)
+
+        from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
+
+        in_wall_dict = {"InnerWall1": [10.0],
+                        "InnerWall2": [14.0],
+                        "InnerWall3": [10.0]}
+
+        for key, value in in_wall_dict.items():
+
+            in_wall = InnerWall(parent=tz)
+            in_wall.name = key
+            in_wall.load_type_element(
+                year=bldg.year_of_construction,
+                construction='heavy')
+            in_wall.area = value[0]
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+    def test_export_only_ow(self):
+        """
+        Tests AixLib output for a building with outer walls only
+        """
+
+        from teaser.logic.buildingobjects.building import Building
+
+        bldg = Building(parent=prj)
+        bldg.name = "SuperExampleBuilding"
+        bldg.street_name = "AwesomeAvenue42"
+        bldg.city = "46325FantasticTown"
+        bldg.year_of_construction = 2015
+        bldg.number_of_floors = 1
+        bldg.height_of_floors = 3.5
+
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
+
+        tz = ThermalZone(parent=bldg)
+        tz.name = "LivingRoom"
+        tz.area = 140.0
+        tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+        tz.infiltration_rate = 0.5
+
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+            import BoundaryConditions
+
+        tz.use_conditions = BoundaryConditions(parent=tz)
+        tz.use_conditions.load_use_conditions("Living", prj.data)
+
+        from teaser.logic.buildingobjects.buildingphysics.outerwall import \
+            OuterWall
+
+        out_wall_dict={"OuterWall_north":[10.0,90.0,0.0],
+                       "OuterWall_east":[14.0,90.0,90.0],
+                       "OuterWall_south":[10.0,90.0,180.0],
+                       "OuterWall_west":[14.0,90.0,270.0]}
+
+        for key,value in out_wall_dict.items():
+            out_wall=OuterWall(parent=tz)
+            out_wall.name=key
+
+            out_wall.load_type_element(
+            year=bldg.year_of_construction,
+            construction='heavy')
+
+            out_wall.area=value[0]
+            out_wall.tilt=value[1]
+            out_wall.orientation=value[2]
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+    def test_export_only_win(self):
+        """
+        Tests AixLib output for a building with windows only
+        """
+
+        from teaser.logic.buildingobjects.building import Building
+
+        bldg = Building(parent=prj)
+        bldg.name = "SuperExampleBuilding"
+        bldg.street_name = "AwesomeAvenue42"
+        bldg.city = "46325FantasticTown"
+        bldg.year_of_construction = 2015
+        bldg.number_of_floors = 1
+        bldg.height_of_floors = 3.5
+
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
+
+        tz = ThermalZone(parent=bldg)
+        tz.name = "LivingRoom"
+        tz.area = 140.0
+        tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+        tz.infiltration_rate = 0.5
+
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+            import BoundaryConditions
+
+        tz.use_conditions = BoundaryConditions(parent=tz)
+        tz.use_conditions.load_use_conditions("Living", prj.data)
+
+        from teaser.logic.buildingobjects.buildingphysics.window import Window
+        from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+        from teaser.logic.buildingobjects.buildingphysics.material import \
+            Material
+
+        win_dict = {"Window_east": [5.0, 90.0, 90.0],
+                    "Window_south": [8.0, 90.0, 180.0],
+                    "Window_west": [5.0, 90.0, 270.0]}
+
+        for key, value in win_dict.items():
+
+            win = Window(parent=tz)
+            win.name = key
+            win.area = value[0]
+            win.tilt = value[1]
+            win.orientation = value[2]
+
+            win.inner_convection = 1.7
+            win.inner_radiation = 5.0
+            win.outer_convection = 20.0
+            win.outer_radiation = 5.0
+            win.g_value = 0.789
+            win.a_conv = 0.03
+            win.shading_g_total = 0.0
+            win.shading_max_irr = 180.0
+
+            win_layer = Layer(parent=win)
+            win_layer.id = 1
+            win_layer.thickness = 0.024
+
+            win_material = Material(win_layer)
+            win_material.name = "GlasWindow"
+            win_material.thermal_conduc = 0.067
+            win_material.transmittance = 0.9
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+    def test_export_only_rt(self):
+        """
+        Tests AixLib output for a building with rooftops only
+        """
+
+        from teaser.logic.buildingobjects.building import Building
+
+        bldg = Building(parent=prj)
+        bldg.name = "SuperExampleBuilding"
+        bldg.street_name = "AwesomeAvenue42"
+        bldg.city = "46325FantasticTown"
+        bldg.year_of_construction = 2015
+        bldg.number_of_floors = 1
+        bldg.height_of_floors = 3.5
+
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
+
+        tz = ThermalZone(parent=bldg)
+        tz.name = "LivingRoom"
+        tz.area = 140.0
+        tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+        tz.infiltration_rate = 0.5
+
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+            import BoundaryConditions
+
+        tz.use_conditions = BoundaryConditions(parent=tz)
+        tz.use_conditions.load_use_conditions("Living", prj.data)
+
+        from teaser.logic.buildingobjects.buildingphysics.rooftop import \
+            Rooftop
+
+        roof_south = Rooftop(parent=tz)
+        roof_south.name = "Roof_South"
+        roof_south.area = 75.0
+        roof_south.orientation = 180.0
+        roof_south.tilt = 55.0
+        roof_south.inner_convection = 1.7
+        roof_south.outer_convection = 20.0
+        roof_south.inner_radiation = 5.0
+        roof_south.outer_radiation = 5.0
+
+        roof_north = Rooftop(parent=tz)
+        roof_north.name = "Roof_North"
+        roof_north.area = 75.0
+        roof_north.orientation = 0.0
+        roof_north.tilt = 55.0
+        roof_north.inner_convection = 1.7
+        roof_north.outer_convection = 20.0
+        roof_north.inner_radiation = 5.0
+        roof_north.outer_radiation = 5.0
+
+        from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+
+        layer_s1 = Layer(parent=roof_south, id=0)
+        layer_s1.thickness = 0.3
+
+        from teaser.logic.buildingobjects.buildingphysics.material import \
+            Material
+
+        material_s1 = Material(layer_s1)
+        material_s1.name = "Insulation"
+        material_s1.density = 120.0
+        material_s1.heat_capac = 0.04
+        material_s1.thermal_conduc = 1.0
+
+        layer_s2 = Layer(parent=roof_south, id=1)
+        layer_s2.thickness = 0.15
+
+        material_s2 = Material(layer_s2)
+        material_s2.name = "Tile"
+        material_s2.density = 1400.0
+        material_s2.heat_capac = 0.6
+        material_s2.thermal_conduc = 2.5
+
+        layer_n1 = Layer(parent=roof_north, id=0)
+        layer_n1.thickness = 0.3
+
+        material_n1 = Material(layer_n1)
+        material_n1.name = "Insulation"
+        material_n1.density = 120.0
+        material_n1.heat_capac = 0.04
+        material_n1.thermal_conduc = 1.0
+
+        layer_n2 = Layer(parent=roof_north, id=1)
+        layer_n2.thickness = 0.15
+
+        material_n2 = Material(layer_n2)
+        material_n2.name = "Tile"
+        material_n2.density = 1400.0
+        material_n2.heat_capac = 0.6
+        material_n2.thermal_conduc = 2.5
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+    def test_export_only_gf(self):
+        """
+        Tests AixLib output for a building with ground floors only
+        """
+
+        from teaser.logic.buildingobjects.building import Building
+
+        bldg = Building(parent=prj)
+        bldg.name = "SuperExampleBuilding"
+        bldg.street_name = "AwesomeAvenue42"
+        bldg.city = "46325FantasticTown"
+        bldg.year_of_construction = 2015
+        bldg.number_of_floors = 1
+        bldg.height_of_floors = 3.5
+
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
+
+        tz = ThermalZone(parent=bldg)
+        tz.name = "LivingRoom"
+        tz.area = 140.0
+        tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+        tz.infiltration_rate = 0.5
+
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+            import BoundaryConditions
+
+        tz.use_conditions = BoundaryConditions(parent=tz)
+        tz.use_conditions.load_use_conditions("Living", prj.data)
+
+        from teaser.logic.buildingobjects.buildingphysics.groundfloor import \
+            GroundFloor
+
+        ground_floor_dict = {"GroundFloor": [100.0, 0.0, -2]}
+
+        for key, value in ground_floor_dict.items():
+
+            ground = GroundFloor(parent=tz)
+            ground.name = key
+            ground.load_type_element(
+                year=bldg.year_of_construction,
+                construction='heavy')
+            ground.area = value[0]
+            ground.tilt = value[1]
+            ground.orientation = value[2]
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()

@@ -429,6 +429,7 @@ class ThreeElement(object):
 
         # Optical properties
         self.ir_emissivity_win = 0.0
+        self.ir_emissivity_inner_win = 0.0
         self.solar_absorp_win = 0.0
 
         # Additional attributes
