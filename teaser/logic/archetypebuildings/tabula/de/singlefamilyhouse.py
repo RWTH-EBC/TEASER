@@ -503,12 +503,12 @@ class SingleFamilyHouse(Residential):
         if value is not None:
             if value in [
                 "tabula_standard",
-                "tabula_refurbished",
-                    "tabula_advanced_refurbished"]:
+                "tabula_retrofit",
+                    "tabula_adv_retrofit"]:
                 self._construction_type = value
             else:
                 raise ValueError("Construction_type has to be tabula_standard,"
-                                 "tabula_refurbished, "
-                                 "tabula_advanced_refurbished")
+                                 "tabula_retrofit, "
+                                 "tabula_adv_retrofit")
         else:
             self._construction_type = "tabula_standard"
