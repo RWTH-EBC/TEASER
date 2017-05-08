@@ -372,6 +372,7 @@ class TwoElement(object):
         # Misc values
 
         self.alpha_rad_inner_mean = 0.0
+        self.alpha_rad_outer_mean = 0.0
         self.n_outer = 0
         self.facade_areas = []
         self.tilt_facade = []
@@ -392,6 +393,11 @@ class TwoElement(object):
         for win in self.thermal_zone.windows:
             win.calc_equivalent_res()
             win.calc_ua_value()
+        for inner_wall in (self.thermal_zone.inner_walls +
+                           self.thermal_zone.floors +
+                           self.thermal_zone.ceilings):
+            inner_wall.calc_equivalent_res()
+            inner_wall.calc_ua_value()
 
         self.set_calc_default()
         if len(outer_walls) < 1:
@@ -401,7 +407,8 @@ class TwoElement(object):
                           str(self.thermal_zone.parent.name) +
                           ", please be careful with results. In addition " +
                           "this might lead to RunTimeErrors")
-        self._sum_outer_wall_elements()
+        else:
+            self._sum_outer_wall_elements()
         if len(self.thermal_zone.inner_walls + self.thermal_zone.floors +
                self.thermal_zone.ceilings) < 1:
             warnings.warn('For thermal zone ' + self.thermal_zone.name +
@@ -416,9 +423,10 @@ class TwoElement(object):
                           ', no windows have been defined.')
         else:
             self._sum_window_elements()
-        self._calc_outer_elements()
-        self._calc_wf()
-        self._calc_mean_values()
+        if len(outer_walls) >= 1 or len(self.thermal_zone.windows) >= 1:
+            self._calc_outer_elements()
+            self._calc_wf()
+            self._calc_mean_values()
         self._calc_number_of_elements()
         self._fill_zone_lists()
         self._calc_heat_load()
@@ -800,11 +808,11 @@ class TwoElement(object):
                 if len(self.thermal_zone.windows) > 0:
                     self.r1_win = (1 / sum((1 / win.r1) for win in
                                            self.thermal_zone.windows))
-
-                conduction = (1 / sum((1 / element.r_conduc) for element in
+                if len(self.thermal_zone.outer_walls) > 0:
+                    conduction = (1 / sum((1 / element.r_conduc) for element in
                                       outer_walls))
 
-                self.r_rest_ow = (conduction - self.r1_ow)
+                    self.r_rest_ow = (conduction - self.r1_ow)
 
             except RuntimeError:
                 print("As no outer walls or no windows are defined lumped "
@@ -814,7 +822,8 @@ class TwoElement(object):
 
             try:
 
-                if len(self.thermal_zone.windows) > 0:
+                if len(self.thermal_zone.windows) > 0 and  \
+                   len(self.thermal_zone.outer_walls) > 0:
                     self.r1_win = 1 / sum(1 / (win.r1 / 6) for win in
                                           self.thermal_zone.windows)
 
