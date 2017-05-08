@@ -3070,13 +3070,13 @@ class Test_teaser(object):
 
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 335
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 355.0
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 462
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 462.0
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 355
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 355.0
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].windows), 1) == 98.7
@@ -3123,7 +3123,7 @@ class Test_teaser(object):
                 prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 216.7
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 336.
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 336.0
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 216.7
@@ -3179,7 +3179,7 @@ class Test_teaser(object):
                 prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 249.4
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].windows), 1) == 161
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 161.0
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
@@ -3220,10 +3220,10 @@ class Test_teaser(object):
 
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 588
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 588.0
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 1698
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 1698.0
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 619.5
