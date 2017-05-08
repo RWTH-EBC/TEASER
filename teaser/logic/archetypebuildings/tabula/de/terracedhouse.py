@@ -52,7 +52,8 @@ class TerracedHouse(SingleFamilyHouse):
             existing state:
                 construction of walls according to existing state in TABULA
             usual refurbishment:
-                construction of walls according to usual refurbishment in TABULA
+                construction of walls according to usual refurbishment in
+                TABULA
             advanced refurbishmet:
                 construction of walls according to advanced refurbishment in
                 TABULA
@@ -254,5 +255,3 @@ class TerracedHouse(SingleFamilyHouse):
             self.central_ahu.profile_max_relative_humidity = (25 * [0.55])
             self.central_ahu.profile_v_flow = (
                 7 * [0.0] + 12 * [1.0] + 6 * [0.0])
-
-

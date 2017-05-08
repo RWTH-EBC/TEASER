@@ -307,7 +307,7 @@ class SingleFamilyHouse(Residential):
                     outer_wall = OuterWall(zone)
                     outer_wall.load_type_element(
                         year=self.year_of_construction,
-                        construction= self._construction_type_1,
+                        construction=self._construction_type_1,
                         data_class=self.parent.data)
                     outer_wall.name = key
                     outer_wall.tilt = value[0]
@@ -323,7 +323,7 @@ class SingleFamilyHouse(Residential):
                     outer_wall = OuterWall(zone)
                     outer_wall.load_type_element(
                         year=self.year_of_construction,
-                        construction= self._construction_type_2,
+                        construction=self._construction_type_2,
                         data_class=self.parent.data)
                     outer_wall.name = key
                     outer_wall.tilt = value[0]
@@ -339,7 +339,7 @@ class SingleFamilyHouse(Residential):
                     window = Window(zone)
                     window.load_type_element(
                         self.year_of_construction,
-                        construction= self._construction_type_1,
+                        construction=self._construction_type_1,
                         data_class=self.parent.data)
                     window.name = key
                     window.tilt = value[0]
@@ -356,7 +356,7 @@ class SingleFamilyHouse(Residential):
                     window = Window(zone)
                     window.load_type_element(
                         self.year_of_construction,
-                        construction= self._construction_type_2,
+                        construction=self._construction_type_2,
                         data_class=self.parent.data)
                     window.name = key
                     window.tilt = value[0]
@@ -374,7 +374,7 @@ class SingleFamilyHouse(Residential):
                     gf = GroundFloor(zone)
                     gf.load_type_element(
                         year=self.year_of_construction,
-                        construction= self._construction_type_1,
+                        construction=self._construction_type_1,
                         data_class=self.parent.data)
                     gf.name = key
                     gf.tilt = value[0]
@@ -391,7 +391,7 @@ class SingleFamilyHouse(Residential):
                     gf = GroundFloor(zone)
                     gf.load_type_element(
                         year=self.year_of_construction,
-                        construction= self._construction_type_2,
+                        construction=self._construction_type_2,
                         data_class=self.parent.data)
                     gf.name = key
                     gf.tilt = value[0]
@@ -408,7 +408,7 @@ class SingleFamilyHouse(Residential):
                     rt = Rooftop(zone)
                     rt.load_type_element(
                         year=self.year_of_construction,
-                        construction= self._construction_type_1,
+                        construction=self._construction_type_1,
                         data_class=self.parent.data)
                     rt.name = key
                     rt.tilt = value[0]
@@ -425,7 +425,7 @@ class SingleFamilyHouse(Residential):
                     rt = Rooftop(zone)
                     rt.load_type_element(
                         year=self.year_of_construction,
-                        construction= self._construction_type_2,
+                        construction=self._construction_type_2,
                         data_class=self.parent.data)
                     rt.name = key
                     rt.tilt = value[0]
@@ -442,7 +442,7 @@ class SingleFamilyHouse(Residential):
                     door = Door(zone)
                     door.load_type_element(
                         year=self.year_of_construction,
-                        construction= self._construction_type_1,
+                        construction=self._construction_type_1,
                         data_class=self.parent.data)
                     door.name = key
                     door.tilt = value[0]
@@ -458,7 +458,7 @@ class SingleFamilyHouse(Residential):
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction= self._construction_type_1,
+                    construction=self._construction_type_1,
                     data_class=self.parent.data)
                 inner_wall.name = key
                 inner_wall.tilt = value[0]
@@ -472,7 +472,7 @@ class SingleFamilyHouse(Residential):
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(
                         year=self.year_of_construction,
-                        construction= self._construction_type_1,
+                        construction=self._construction_type_1,
                         data_class=self.parent.data)
                     ceiling.name = key
                     ceiling.tilt = value[0]
@@ -484,7 +484,7 @@ class SingleFamilyHouse(Residential):
                     floor = Floor(zone)
                     floor.load_type_element(
                         year=self.year_of_construction,
-                        construction= self._construction_type_1,
+                        construction=self._construction_type_1,
                         data_class=self.parent.data)
                     floor.name = key
                     floor.tilt = value[0]
