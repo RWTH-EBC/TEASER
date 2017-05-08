@@ -1,8 +1,7 @@
 # created June 2015
 # by TEASER4 Development Team
 
-"""This module includes the Project class, which serves as an API for a
-TEASER Project
+"""This module includes the Project class, which is the API for TEASER.
 """
 
 import warnings
@@ -460,7 +459,7 @@ class Project(object):
         Returns
         ----------
 
-        type_bldg : Instance of SingleFamilyDwelling()
+        type_bldg : Instance of Archetype Building
         """
 
         ass_error_method = "only'tabula_de', 'iwu' and 'urbanrenet' " \
@@ -469,17 +468,25 @@ class Project(object):
 
         assert method in ['tabula_de', 'iwu', 'urbanrenet'], ass_error_method
 
-        ass_error_apart = "The keyword number_of_apartmens does not have any " \
-                          "effect on archetype generation for 'iwu', see" \
-                          "docs for more information"
+        ass_error_apart = (
+            "The keyword number_of_apartmens does not have any "
+            "effect on archetype generation for 'iwu' or"
+            "'tabula_de', see docs for more information")
 
-        if method == 'iwu' and number_of_apartments is not None:
+        if method in ['iwu', 'tabula_de'] and number_of_apartments is not None:
             warnings.warn(ass_error_apart)
 
         if method == 'tabula_de':
 
             if self.data is None:
                 self.data = DataClass(used_statistic=method)
+
+            ass_error_usage_tabula = "only 'single_family_house',"
+            "'terraced_house', 'multi_family_house', 'apartment_block' are"
+            "valid usages for iwu archetype method"
+            assert usage in ['single_family_dwelling', 'terraced_house',
+                             'multi_family_house',  'apartment_block'], \
+                ass_error_usage_tabula
 
             if usage == 'single_family_house':
 
@@ -493,9 +500,6 @@ class Project(object):
                     with_ahu,
                     construction_type)
 
-                type_bldg.generate_archetype()
-                return type_bldg
-
             elif usage == 'terraced_house':
 
                 type_bldg = TerracedHouse(
@@ -508,9 +512,6 @@ class Project(object):
                     with_ahu,
                     construction_type)
 
-                type_bldg.generate_archetype()
-                return type_bldg
-
             elif usage == 'multi_family_house':
 
                 type_bldg = MultiFamilyHouse(
@@ -522,9 +523,6 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     construction_type)
-
-                type_bldg.generate_archetype()
-                return type_bldg
 
             elif usage == 'apartment_block':
 
@@ -542,6 +540,9 @@ class Project(object):
                 return type_bldg
 
         elif method == 'iwu':
+
+            if self.data is None:
+                self.data = DataClass(used_statistic=method)
 
             ass_error_usage_iwu = "only 'single_family_dewlling' is a valid " \
                                   "usage for iwu archetype method"
@@ -565,6 +566,9 @@ class Project(object):
                     construction_type)
 
         elif method == 'urbanrenet':
+
+            if self.data is None:
+                self.data = DataClass(used_statistic='iwu')
 
             ass_error_usage_urn = "only 'est1a', 'est1b', 'est2', 'est3', " \
                                   "'est4a', 'est4b', 'est5' 'est6', 'est7', " \
