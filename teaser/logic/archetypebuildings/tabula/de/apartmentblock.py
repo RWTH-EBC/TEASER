@@ -84,8 +84,8 @@ class ApartmentBlock(SingleFamilyHouse):
         self.number_of_floors = number_of_floors
         self.height_of_floors = height_of_floors
 
-        self._construction_type_1 = self.construction_type + '_1_MFH'
-        self._construction_type_2 = self.construction_type + '_2_MFH'
+        self._construction_type_1 = self.construction_type + '_1_AB'
+        self._construction_type_2 = self.construction_type + '_2_AB'
 
         self.zone_area_factors = {"SingleDwelling": [1, "Living"]}
 
