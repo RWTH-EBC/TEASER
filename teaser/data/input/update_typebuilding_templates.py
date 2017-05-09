@@ -97,13 +97,16 @@ material_mapping_teaser_masea = {
     'Woodenfloor': 'Eichenholz alt'
 }
 
-material_mapping_english = {}
+excel_file = 'N:\Forschung\EBC0301_PtJ_Living_Roadmap_mfu\Students\jsc-tbe\MASEA_Typebuildings.xlsx'
+df = pd.read_excel(io=excel_file, skiprows=1)
+df = df.set_index('Material TEASER Typebuildings')
 
-file = "D:/jsc-tbe/TEASER/teaser/data/input/inputdata/TypeBuildingElements.xml"
+file = "D:/jsc-tbe/TEASER/teaser/data/input/inputdata/TypeBuildingElements_old.xml"
 
 elem_xml = et.parse(file)
 elem_tree = elem_xml.getroot()
 
+# TODO: fix problem with deleting MaterialTemplates when loading bindin
 # load old MaterialTemplates
 dataclass_old = DataClass()
 
@@ -132,6 +135,9 @@ gf_list = element_binding_old.GroundFloor
 w_list = element_binding_old.Window
 
 for ow in element_binding_old.OuterWall:
+    # eliminate old annex TypeBuilding
+    if 'annex' in ow.construction_type:
+        continue
     # load old element
     outer_wall_old = OuterWall()
     outer_wall_old.load_type_element(year=ow.building_age_group[1],
@@ -143,18 +149,53 @@ for ow in element_binding_old.OuterWall:
     for layer in outer_wall_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
-        mat_name_new = material_mapping_teaser_masea[mat_name_old]
-        mat_new = Material()
-        mat_new.load_material_template(mat_name=mat_name_new,
+
+        if mat_name_old == 'Sandwichpaneel':  # 3 layers
+            # layer one (inner covering layer)
+            mat_name_new_one = 'sheet_steel'
+            mat_new_one = Material()
+            mat_new_one.load_material_template(mat_name=mat_name_new_one)
+            layer_new_one = Layer()
+            layer_new_one.material = mat_new_one
+            layer_new_one.thickness = mat_new_one.thickness_default
+
+            # layer three (plaster)
+            mat_name_new_three = 'sheet_steel'
+            mat_new_three = Material()
+            mat_new_three.load_material_template(mat_name=mat_name_new_three)
+            layer_new_three = Layer()
+            layer_new_three.material = mat_new_three
+            layer_new_three.thickness = mat_new_three.thickness_default
+
+            # layer two (insulation e.g. XPS)
+            mat_name_new_two = 'XPS'
+            mat_new_two = Material()
+            mat_new_two.load_material_template(mat_name=mat_name_new_two)
+            layer_new_two = Layer()
+            layer_new_two.material = mat_new_two
+            layer_new_two.thickness = layer.thickness - layer_new_one.thickness - layer_new_three.thickness
+
+            # add layers to wall
+            outer_wall_new.add_layer(layer_new_one)
+            outer_wall_new.add_layer(layer_new_two)
+            outer_wall_new.add_layer(layer_new_three)
+
+        else:
+            mat_name_new = df.at[mat_name_old, 'Material MASEA Update']
+            mat_new = Material()
+            mat_new.load_material_template(mat_name=mat_name_new,
                                        data_class=dataclass_new)
-        layer_new = Layer()
-        layer_new.material = mat_new
-        layer_new.thickness = layer.thickness
-        outer_wall_new.add_layer(layer_new)
+            layer_new = Layer()
+            layer_new.material = mat_new
+            layer_new.thickness = layer.thickness
+            outer_wall_new.add_layer(layer_new)
 
     outer_wall_new.save_type_element(data_class=dataclass_new)
 
 for iw in element_binding_old.InnerWall:
+    # eliminate old annex TypeBuilding
+    if 'annex' in iw.construction_type:
+        continue
     # load old element
     inner_wall_old = InnerWall()
     inner_wall_old.load_type_element(year=iw.building_age_group[1],
@@ -166,18 +207,53 @@ for iw in element_binding_old.InnerWall:
     for layer in inner_wall_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
-        mat_name_new = material_mapping_teaser_masea[mat_name_old]
-        mat_new = Material()
-        mat_new.load_material_template(mat_name=mat_name_new,
-                                       data_class=dataclass_new)
-        layer_new = Layer()
-        layer_new.material = mat_new
-        layer_new.thickness = layer.thickness
-        inner_wall_new.add_layer(layer_new)
+
+        if mat_name_old == 'Sandwichpaneel':  # 3 layers
+            # layer one (inner covering layer)
+            mat_name_new_one = 'sheet_steel'
+            mat_new_one = Material()
+            mat_new_one.load_material_template(mat_name=mat_name_new_one)
+            layer_new_one = Layer()
+            layer_new_one.material = mat_new_one
+            layer_new_one.thickness = mat_new_one.thickness_default
+
+            # layer three (plaster)
+            mat_name_new_three = 'sheet_steel'
+            mat_new_three = Material()
+            mat_new_three.load_material_template(mat_name=mat_name_new_three)
+            layer_new_three = Layer()
+            layer_new_three.material = mat_new_three
+            layer_new_three.thickness = mat_new_three.thickness_default
+
+            # layer two (insulation e.g. XPS)
+            mat_name_new_two = 'XPS'
+            mat_new_two = Material()
+            mat_new_two.load_material_template(mat_name=mat_name_new_two)
+            layer_new_two = Layer()
+            layer_new_two.material = mat_new_two
+            layer_new_two.thickness = layer.thickness - layer_new_one.thickness - layer_new_three.thickness
+
+            # add layers to wall
+            inner_wall_new.add_layer(layer_new_one)
+            inner_wall_new.add_layer(layer_new_two)
+            inner_wall_new.add_layer(layer_new_three)
+
+        else:
+            mat_name_new = df.at[mat_name_old, 'Material MASEA Update']
+            mat_new = Material()
+            mat_new.load_material_template(mat_name=mat_name_new,
+                                           data_class=dataclass_new)
+            layer_new = Layer()
+            layer_new.material = mat_new
+            layer_new.thickness = layer.thickness
+            inner_wall_new.add_layer(layer_new)
 
     inner_wall_new.save_type_element(data_class=dataclass_new)
 
 for ce in element_binding_old.Ceiling:
+    # eliminate old annex TypeBuilding
+    if 'annex' in ce.construction_type:
+        continue
     # load old element
     ceiling_old = Ceiling()
     ceiling_old.load_type_element(year=ce.building_age_group[1],
@@ -189,7 +265,7 @@ for ce in element_binding_old.Ceiling:
     for layer in ceiling_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
-        mat_name_new = material_mapping_teaser_masea[mat_name_old]
+        mat_name_new = df.at[mat_name_old, 'Material MASEA Update']
         mat_new = Material()
         mat_new.load_material_template(mat_name=mat_name_new,
                                        data_class=dataclass_new)
@@ -201,6 +277,9 @@ for ce in element_binding_old.Ceiling:
     ceiling_new.save_type_element(data_class=dataclass_new)
 
 for f in element_binding_old.Floor:
+    # eliminate old annex TypeBuilding
+    if 'annex' in f.construction_type:
+        continue
     # load old element
     floor_old = Floor()
     floor_old.load_type_element(year=f.building_age_group[1],
@@ -212,7 +291,7 @@ for f in element_binding_old.Floor:
     for layer in floor_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
-        mat_name_new = material_mapping_teaser_masea[mat_name_old]
+        mat_name_new = df.at[mat_name_old, 'Material MASEA Update']
         mat_new = Material()
         mat_new.load_material_template(mat_name=mat_name_new,
                                        data_class=dataclass_new)
@@ -224,6 +303,9 @@ for f in element_binding_old.Floor:
     floor_new.save_type_element(data_class=dataclass_new)
 
 for r in element_binding_old.Rooftop:
+    # eliminate old annex TypeBuilding
+    if 'annex' in r.construction_type:
+        continue
     # load old element
     rooftop_old = Rooftop()
     rooftop_old.load_type_element(year=r.building_age_group[1],
@@ -235,7 +317,7 @@ for r in element_binding_old.Rooftop:
     for layer in rooftop_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
-        mat_name_new = material_mapping_teaser_masea[mat_name_old]
+        mat_name_new = df.at[mat_name_old, 'Material MASEA Update']
         mat_new = Material()
         mat_new.load_material_template(mat_name=mat_name_new,
                                        data_class=dataclass_new)
@@ -247,6 +329,9 @@ for r in element_binding_old.Rooftop:
     rooftop_new.save_type_element(data_class=dataclass_new)
 
 for gf in element_binding_old.GroundFloor:
+    # eliminate old annex TypeBuilding
+    if 'annex' in gf.construction_type:
+        continue
     # load old element
     ground_floor_old = GroundFloor()
     ground_floor_old.load_type_element(year=gf.building_age_group[1],
@@ -258,7 +343,7 @@ for gf in element_binding_old.GroundFloor:
     for layer in ground_floor_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
-        mat_name_new = material_mapping_teaser_masea[mat_name_old]
+        mat_name_new = df.at[mat_name_old, 'Material MASEA Update']
         mat_new = Material()
         mat_new.load_material_template(mat_name=mat_name_new,
                                        data_class=dataclass_new)
@@ -270,6 +355,9 @@ for gf in element_binding_old.GroundFloor:
     ground_floor_new.save_type_element(data_class=dataclass_new)
 
 for w in element_binding_old.Window:
+    # eliminate old annex TypeBuilding
+    if 'annex' in w.construction_type:
+        continue
     # load old element
     window_old = Window()
     window_old.load_type_element(year=w.building_age_group[1],
