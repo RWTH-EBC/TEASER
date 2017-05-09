@@ -187,5 +187,10 @@ material.heat_capac = 1.06
 material.solar_absorp = 0.5
 material.save_material_template(dataclass)
 
-
-
+material = Material()
+material.name = 'Trittschalldämmung'
+material.density = 30
+material.thermal_conduc = 0.04
+material.heat_capac = 1
+material.solar_absorp = 0.3
+material.save_material_template(dataclass)
