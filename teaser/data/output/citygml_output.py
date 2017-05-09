@@ -60,7 +60,7 @@ def save_gml(project, path, ref_coordinates=None):
     gml_out = citygml.CityModel()
     gml_out.name = [og.gml.CodeType(project.name)]
 
-    if ref_coordinates != None:
+    if ref_coordinates is not None:
 
         gml_out = _set_reference_boundary(gml_out,
                                           ref_coordinates[0],
@@ -110,7 +110,7 @@ def save_gml(project, path, ref_coordinates=None):
                 for win_count in zone_count.windows:
 
                     if out_wall_count.orientation == win_count.orientation and \
-                                    out_wall_count.tilt == win_count.tilt:
+                            out_wall_count.tilt == win_count.tilt:
                         _set_gml_surface_component(outer_bound,
                                                    win_count,
                                                    "true",
@@ -274,7 +274,7 @@ def _set_lod_2(gml_bldg, length, width, height, bldg_center):
 
     composite_surface = _add_surface(composite_surface, coords)
     composite_surface.surfaceMember[-1].Surface.id = gml_bldg.name[
-                                                         0].value() + "_ground"
+        0].value() + "_ground"
 
     boundary_surface.append(bldg.BoundarySurfacePropertyType())
     boundary_surface[-1].BoundarySurface = bldg.FloorSurface()
@@ -707,6 +707,7 @@ def _add_gml_layer(gml_surf_comp, element):
         cons.AbstractConstruction.layer.append(layer)
 
     gml_surf_comp.ThermalComponent.construction = cons
+
 
 def _add_gml_opaque_material(gml_layer, teaser_layer):
     """Adds gml opaque material to the given layer

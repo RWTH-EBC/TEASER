@@ -6,8 +6,9 @@
 import inspect
 import random
 import re
+import warnings
 from teaser.logic.buildingobjects.calculation.aixlib import AixLib
-from teaser.logic.buildingobjects.calculation.annex60 import Annex60
+from teaser.logic.buildingobjects.calculation.ibpsa import IBPSA
 
 
 from teaser.logic.buildingobjects.buildingsystems.buildingahu \
@@ -102,13 +103,13 @@ class Building(object):
     merge_windows_calc : boolean
         True for merging the windows into the outer wall's RC-combination,
         False for separate resistance for window, default is False. (Only
-        supported for Annex60)
+        supported for IBPSA)
     used_library_calc : str
         'AixLib' for https://github.com/RWTH-EBC/AixLib
-        'Annex60' for https://github.com/iea-annex60/modelica-annex60
+        'IBPSA' for https://github.com/ibpsa/modelica
     library_attr : Annex() or AixLib() instance
         Classes with specific functions and attributes for building models in
-        Annex60 and AixLib. Python classes can be found in calculation package.
+        IBPSA and AixLib. Python classes can be found in calculation package.
 
     """
 
@@ -119,7 +120,6 @@ class Building(object):
             year_of_construction=None,
             net_leased_area=None,
             with_ahu=False):
-
         """Constructor of Building Class
         """
 
@@ -127,7 +127,7 @@ class Building(object):
         self.name = name
         self.year_of_construction = year_of_construction
         self.net_leased_area = net_leased_area
-        self.with_ahu = with_ahu
+        self._with_ahu = with_ahu
         if with_ahu is True:
             self.central_ahu = BuildingAHU(self)
         else:
@@ -228,13 +228,13 @@ class Building(object):
             self.height_of_floors = height_of_floor
         elif self.height_of_floors is None and self.number_of_floors is not \
                 None:
-            self.height_of_floors = self.bldg_height/self.number_of_floors
+            self.height_of_floors = self.bldg_height / self.number_of_floors
         else:
             pass
 
         if self.number_of_floors is not None:
             self.net_leased_area = self.get_footprint_gml() * \
-                                    self.number_of_floors
+                self.number_of_floors
             return
 
         else:
@@ -433,7 +433,7 @@ class Building(object):
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False
         used_library : str
-            used library (AixLib and Annex60 are supported)
+            used library (AixLib and IBPSA are supported)
         """
 
         self._number_of_elements_calc = number_of_elements
@@ -447,11 +447,30 @@ class Building(object):
                 t_bt=5)
             self.sum_heat_load += zone.model_attr.heat_load
 
-        if self.used_library_calc == 'AixLib':
-            self.library_attr = AixLib(parent=self)
-            self.library_attr.calc_auxiliary_attr()
-        elif self.used_library_calc == 'Annex60':
-            self.library_attr = Annex60(parent=self)
+        if self.used_library_calc == self.library_attr.__class__.__name__:
+            if self.used_library_calc == 'AixLib':
+                self.library_attr.calc_auxiliary_attr()
+            else:
+                pass
+        elif self.library_attr is None:
+            if self.used_library_calc == 'AixLib':
+                self.library_attr = AixLib(parent=self)
+                self.library_attr.calc_auxiliary_attr()
+            elif self.used_library_calc == 'IBPSA':
+                self.library_attr = IBPSA(parent=self)
+        else:
+            warnings.warn("You set conflicting options for the used library "
+                          "in Building or Project class and "
+                          "calculation function of building. Your library "
+                          "attributes are set to default using the library "
+                          "you indicated in the function call, which is: " +
+                          self.used_library_calc)
+
+            if self.used_library_calc == 'AixLib':
+                self.library_attr = AixLib(parent=self)
+                self.library_attr.calc_auxiliary_attr()
+            elif self.used_library_calc == 'IBPSA':
+                self.library_attr = IBPSA(parent=self)
 
     def retrofit_building(
             self,
@@ -695,17 +714,35 @@ class Building(object):
             raise ValueError("Specify year of construction first")
 
     @property
+    def with_ahu(self):
+        return self._with_ahu
+
+    @with_ahu.setter
+    def with_ahu(self, value):
+
+        if value is True and self.central_ahu is None:
+            self.central_ahu = BuildingAHU(self)
+            self._with_ahu = True
+        elif value is False and self.central_ahu:
+            self.central_ahu = None
+            self._with_ahu = False
+
+    @property
     def central_ahu(self):
         return self._central_ahu
 
     @central_ahu.setter
     def central_ahu(self, value):
 
-        ass_error_1 = "central AHU has to be an instance of BuildingAHU()"
+        if value is None:
+            self._central_ahu = value
+        else:
 
-        assert type(value).__name__ == "BuildingAHU", ass_error_1
+            ass_error_1 = "central AHU has to be an instance of BuildingAHU()"
 
-        self._central_ahu = value
+            assert type(value).__name__ == "BuildingAHU", ass_error_1
+
+            self._central_ahu = value
 
     @property
     def number_of_elements_calc(self):
@@ -753,13 +790,18 @@ class Building(object):
     @used_library_calc.setter
     def used_library_calc(self, value):
 
-        ass_error_1 = "used library needs to be AixLib or Annex60"
+        ass_error_1 = "used library needs to be AixLib or IBPSA"
 
-        assert value != ["AixLib", "Annex60"], ass_error_1
+        assert value != ["AixLib", "IBPSA"], ass_error_1
 
         if self.parent is None and value is None:
-            self._used_library_calc = 2
+            self._used_library_calc = "AixLib"
         elif self.parent is not None and value is None:
             self._used_library_calc = self.parent.used_library_calc
         elif value is not None:
             self._used_library_calc = value
+
+        if self.used_library_calc == 'AixLib':
+            self.library_attr = AixLib(parent=self)
+        elif self.used_library_calc == 'IBPSA':
+            self.library_attr = IBPSA(parent=self)

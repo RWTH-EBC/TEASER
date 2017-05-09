@@ -10,6 +10,7 @@ import teaser.logic.utilities as utilities
 import warnings
 import pyxb
 
+
 def save_material(material, data_class):
     """Material saver.
 

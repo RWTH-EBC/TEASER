@@ -2,7 +2,8 @@
 # by TEASER4 Development Team
 
 
-from PyQt4 import Qt, QtGui
+from PyQt4 import QtGui
+
 
 class PictureButton(QtGui.QAbstractButton):
 
@@ -16,4 +17,3 @@ class PictureButton(QtGui.QAbstractButton):
 
     def sizeHint(self):
         return self.pixmap.size()
-
