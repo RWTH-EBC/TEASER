@@ -60,6 +60,7 @@ def save_material(material, data_class):
         mat_pyxb.material_id = material.material_id
         mat_pyxb.thickness_default = material.thickness_default
         mat_pyxb.thickness_list = material.thickness_list
+        mat_pyxb.solar_absorp = material.solar_absorp
 
         mat_binding.Material.append(mat_pyxb)
         out_file = open(utilities.get_full_path(data_class.path_mat), "w")

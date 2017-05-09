@@ -314,7 +314,7 @@ class Material(object):
 
         else:
             for i in value:
-                if isinstance(value[i], float):
+                if isinstance(i, float):
                     pass
                 else:
                     try:
@@ -322,3 +322,4 @@ class Material(object):
                     except:
                         raise ValueError("Can't convert entry of thickness_list to float")
 
+                self._thickness_list = value
