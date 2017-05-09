@@ -16,7 +16,7 @@ prj = Project(True)
 class Test_teaser(object):
     """Unit Tests for TEASER"""
     global prj
-    '''
+
     def test_calc_vdi_room1(self):
         """Parameter Verification for rouvel room1"""
         import teaser.examples.verification.verification_room1 as room1
@@ -1305,8 +1305,8 @@ class Test_teaser(object):
         calc_attr = OneElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1398,8 +1398,8 @@ class Test_teaser(object):
         calc_attr = TwoElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1513,8 +1513,8 @@ class Test_teaser(object):
         calc_attr = ThreeElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1643,8 +1643,8 @@ class Test_teaser(object):
         calc_attr = FourElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1706,7 +1706,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0.34638013315780397
+            0.34638013315780397
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1729,7 +1729,6 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_ow ==\
             weightfactors_test_list
 
-
         weightfactors_test_list = [
             0.44444444444444453,
             0.0,
@@ -1743,7 +1742,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win.sort() ==\
             weightfactors_test_list.sort()
         assert calc_attr.weightfactor_ground == \
-               0.4303782174267145
+            0.4303782174267145
 
     def test_calc_weightfactor_two(self):
         """test of calc_weightfactor"""
@@ -1779,7 +1778,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0.34638013315780397
+            0.34638013315780397
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1814,7 +1813,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0.4303782174267145
+            0.4303782174267145
 
     def test_calc_weightfactor_three(self):
         """test of calc_weightfactor"""
@@ -1847,7 +1846,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1881,7 +1880,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
 
     def test_calc_weightfactor_four(self):
         """test of calc_weightfactor"""
@@ -1909,9 +1908,9 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
         assert calc_attr.weightfactor_rt == \
-               [1]
+            [1]
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1937,9 +1936,9 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
         assert calc_attr.weightfactor_rt == \
-               [1]
+            [1]
 
     def test_calc_one_element(self):
         """test of calc_two_element"""
@@ -2436,8 +2435,7 @@ class Test_teaser(object):
                 os.path.dirname(__file__),
                 'testfiles',
                 'teaser_v39.teaserXML'))
-
-
+    '''
     def test_tabula_de_sfh(self):
         """
         Test for area estimation of tabula sfh
@@ -2458,7 +2456,7 @@ class Test_teaser(object):
                 prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 134.2
         assert round(
             sum(wall.area for wall in
-                 prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 169.8
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 169.8
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 85.5
@@ -2719,7 +2717,6 @@ class Test_teaser(object):
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.6
 
-
     def test_tabula_de_th(self):
         """
         Test for area estimation of tabula th
@@ -2976,7 +2973,6 @@ class Test_teaser(object):
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.7
-
 
     def test_tabula_de_mfh(self):
         """
@@ -3258,7 +3254,6 @@ class Test_teaser(object):
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 47.9
-        '''
 
     def test_tabula_de_ab(self):
         """
@@ -3391,3 +3386,4 @@ class Test_teaser(object):
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
+        '''

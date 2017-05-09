@@ -22,8 +22,7 @@ def example_generate_archetype():
     # Be careful: Dymola does not like whitespaces in names and filenames,
     # thus we will delete them anyway in TEASER.
 
-
-    prj = Project(load_data=True)
+    prj = Project()
     prj.name = "ArchetypeExample"
 
     # There are two different types of archetype groups: residential and
@@ -33,11 +32,11 @@ def example_generate_archetype():
     # To generate residential archetype buildings the function
     # Project.add_residential() is used. Seven parameters are compulsory,
     # additional parameters can be set according to the used method. `method`
-    # and `usage` are used to distinguish between different archetype
-    # methods. The name, year_of_construction, number and height of floors
-    # and net_leased_area need to be set to provide enough information for
-    # archetype generation. For specific information on the parameters please
-    # read the docs.
+    # and `usage` are used to distinguish between different archetype methods
+    # (iwu, urbanrenet or tabula_de). The name, year_of_construction, number
+    # and height of floors and net_leased_area need to be set to provide enough
+    # information for archetype generation. For specific information on the
+    # parameters please read the docs.
 
     prj.add_residential(
         method='iwu',
@@ -47,6 +46,19 @@ def example_generate_archetype():
         number_of_floors=2,
         height_of_floors=3.2,
         net_leased_area=200)
+
+    # For Tabula_de method you can specify all three different constructions
+    # specified in Tabula (standard, retrofit, adv. retrofit)
+
+    prj.add_residential(
+        method='tabula_de',
+        usage='multi_family_house',
+        name="ResidentialBuilding",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200,
+        construction_type='tabula_retrofit')
 
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
@@ -72,6 +84,7 @@ def example_generate_archetype():
         net_leased_area=3400)
 
     return prj
+
 
 if __name__ == '__main__':
     prj = example_generate_archetype()
