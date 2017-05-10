@@ -29,6 +29,10 @@ def example_generate_archetype():
     # non-residential buildings. Two API functions offer the opportunity to
     # generate specific archetypes.
 
+    # Please note: there are two different databases for building elements #
+    # implemented in TEASER ('iwu' and 'tabula_de'). Loading these databases
+    # will always consume some time. Please consider this when writing code.
+
     # To generate residential archetype buildings the function
     # Project.add_residential() is used. Seven parameters are compulsory,
     # additional parameters can be set according to the used method. `method`
@@ -46,19 +50,6 @@ def example_generate_archetype():
         number_of_floors=2,
         height_of_floors=3.2,
         net_leased_area=200)
-
-    # For Tabula_de method you can specify all three different constructions
-    # specified in Tabula (standard, retrofit, adv. retrofit)
-
-    prj.add_residential(
-        method='tabula_de',
-        usage='multi_family_house',
-        name="ResidentialBuilding",
-        year_of_construction=1988,
-        number_of_floors=2,
-        height_of_floors=3.2,
-        net_leased_area=200,
-        construction_type='tabula_retrofit')
 
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
@@ -82,6 +73,21 @@ def example_generate_archetype():
         number_of_floors=5,
         height_of_floors=4.0,
         net_leased_area=3400)
+
+    # For Tabula_de method you can specify all three different constructions
+    # specified in Tabula (standard, retrofit, adv. retrofit). This will
+    # automatically change data base for element constructions, so it will take
+    # some time.
+
+    prj.add_residential(
+        method='tabula_de',
+        usage='multi_family_house',
+        name="ResidentialBuildingTABULA",
+        year_of_construction=1988,
+        number_of_floors=2,
+        height_of_floors=3.2,
+        net_leased_area=200,
+        construction_type='tabula_retrofit')
 
     return prj
 

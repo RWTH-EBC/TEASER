@@ -158,12 +158,13 @@ class Project(object):
                         number_of_elements=self._number_of_elements_calc,
                         merge_windows=self._merge_windows_calc,
                         used_library=self._used_library_calc)
-                except ZeroDivisionError:
+                except Exception:
                     warnings.warn(
                         "Following building can't be calculated and is "
                         "removed from buildings list. Use raise_errors=True "
                         "to get python errors and stop TEASER from deleting "
                         "this building:" + bldg.name)
+                    self.buildings.remove(bldg)
 
     def retrofit_all_buildings(
             self,
