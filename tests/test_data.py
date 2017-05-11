@@ -1281,8 +1281,8 @@ class Test_teaser(object):
         calc_attr = OneElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1374,8 +1374,8 @@ class Test_teaser(object):
         calc_attr = TwoElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1489,8 +1489,8 @@ class Test_teaser(object):
         calc_attr = ThreeElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1619,8 +1619,8 @@ class Test_teaser(object):
         calc_attr = FourElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1682,7 +1682,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0.34638013315780397
+            0.34638013315780397
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1705,7 +1705,6 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_ow ==\
             weightfactors_test_list
 
-
         weightfactors_test_list = [
             0.44444444444444453,
             0.0,
@@ -1719,7 +1718,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win.sort() ==\
             weightfactors_test_list.sort()
         assert calc_attr.weightfactor_ground == \
-               0.4303782174267145
+            0.4303782174267145
 
     def test_calc_weightfactor_two(self):
         """test of calc_weightfactor"""
@@ -1755,7 +1754,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0.34638013315780397
+            0.34638013315780397
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1790,7 +1789,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0.4303782174267145
+            0.4303782174267145
 
     def test_calc_weightfactor_three(self):
         """test of calc_weightfactor"""
@@ -1823,7 +1822,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1857,7 +1856,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
 
     def test_calc_weightfactor_four(self):
         """test of calc_weightfactor"""
@@ -1885,9 +1884,9 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
         assert calc_attr.weightfactor_rt == \
-               [1]
+            [1]
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1913,9 +1912,9 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
         assert calc_attr.weightfactor_rt == \
-               [1]
+            [1]
 
     def test_calc_one_element(self):
         """test of calc_two_element"""
@@ -2419,6 +2418,7 @@ class Test_teaser(object):
         """
 
         from teaser.logic.buildingobjects.building import Building
+        prj.set_default(load_data=True)
 
         bldg = Building(parent=prj)
         bldg.name = "SuperExampleBuilding"
@@ -2537,22 +2537,22 @@ class Test_teaser(object):
         from teaser.logic.buildingobjects.buildingphysics.outerwall import \
             OuterWall
 
-        out_wall_dict={"OuterWall_north":[10.0,90.0,0.0],
-                       "OuterWall_east":[14.0,90.0,90.0],
-                       "OuterWall_south":[10.0,90.0,180.0],
-                       "OuterWall_west":[14.0,90.0,270.0]}
+        out_wall_dict = {"OuterWall_north": [10.0, 90.0, 0.0],
+                         "OuterWall_east": [14.0, 90.0, 90.0],
+                         "OuterWall_south": [10.0, 90.0, 180.0],
+                         "OuterWall_west": [14.0, 90.0, 270.0]}
 
-        for key,value in out_wall_dict.items():
-            out_wall=OuterWall(parent=tz)
-            out_wall.name=key
+        for key, value in out_wall_dict.items():
+            out_wall = OuterWall(parent=tz)
+            out_wall.name = key
 
             out_wall.load_type_element(
-            year=bldg.year_of_construction,
-            construction='heavy')
+                year=bldg.year_of_construction,
+                construction='heavy')
 
-            out_wall.area=value[0]
-            out_wall.tilt=value[1]
-            out_wall.orientation=value[2]
+            out_wall.area = value[0]
+            out_wall.tilt = value[1]
+            out_wall.orientation = value[2]
 
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = False
