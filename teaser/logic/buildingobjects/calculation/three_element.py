@@ -33,7 +33,7 @@ class ThreeElement(object):
     merge_windows : boolean
         True for merging windows into the outer wall's RC-combination,
         False for separate resistance for window, default is False. (Only
-        supported for Annex60)
+        supported for IBPSA)
     t_bt : float [d]
         Time constant according to VDI 6007 (default t_bt = 5)
 
@@ -217,6 +217,8 @@ class ThreeElement(object):
         the ambient.
     ua_value_win : float [W/K]
         U-Value times outer wall area.
+    u_value_win : float [W/(m2K)]
+        Area weighted U-Value of windows.
     r_conv_inner_win : float [K/W]
         Sum of convective resistances for all windows facing the
         inside of this thermal zone.
@@ -389,7 +391,6 @@ class ThreeElement(object):
         # Optical properties
         self.ir_emissivity_inner_gf = 0.0
 
-
         # Additional attributes
 
         self.weightfactor_ground = 0.0
@@ -410,6 +411,7 @@ class ThreeElement(object):
 
         # UA-Value
         self.ua_value_win = 0.0
+        self.u_value_win = 0.0
 
         # resistances for heat transfer facing the inside of this thermal zone
         self.r_conv_inner_win = 0.0
@@ -462,13 +464,34 @@ class ThreeElement(object):
             win.calc_ua_value()
 
         self.set_calc_default()
+        if len(outer_walls) < 1:
+            warnings.warn("No walls are defined as outer walls for thermal " +
+                          "zone " + self.thermal_zone.name + " in building " +
+                          self.thermal_zone.parent.name +
+                          ", please be careful with results. In addition " +
+                          "this might lead to RunTimeErrors")
         self._sum_outer_wall_elements()
-        self._sum_ground_floor_elements()
-        self._sum_inner_wall_elements()
-        self._sum_window_elements()
+        if len(self.thermal_zone.inner_walls) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no inner walls have been defined.')
+        else:
+            self._sum_inner_wall_elements()
+            self._calc_inner_elements()
+        if len(self.thermal_zone.windows) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no windows have been defined.')
+        else:
+            self._sum_window_elements()
+        if len(self.thermal_zone.ground_floors) < 1:
+            warnings.warn('For thermal zone ' + self.thermal_zone.name +
+                          ' in building ' + self.thermal_zone.parent.name +
+                          ', no ground floors have been defined.')
+        else:
+            self._sum_ground_floor_elements()
+            self._calc_ground_floor_elements()
         self._calc_outer_elements()
-        self._calc_ground_floor_elements()
-        self._calc_inner_elements()
         self._calc_wf()
         self._calc_mean_values()
         self._calc_number_of_elements()
@@ -549,12 +572,12 @@ class ThreeElement(object):
 
                 c1 = ((c1x + element_list[
                     wall_count + 1].c1) ** 2 + omega ** 2 *
-                      (r1x + element_list[wall_count + 1].r1) ** 2 * c1x ** 2 *
-                      element_list[wall_count + 1].c1 ** 2) / \
-                     (c1x + element_list[wall_count + 1].c1 + omega ** 2 *
-                      (r1x ** 2 * c1x + element_list[wall_count + 1].r1 **
-                       2 * element_list[wall_count + 1].c1) * c1x *
-                      element_list[wall_count + 1].c1)
+                    (r1x + element_list[wall_count + 1].r1) ** 2 * c1x ** 2 *
+                    element_list[wall_count + 1].c1 ** 2) / \
+                    (c1x + element_list[wall_count + 1].c1 + omega ** 2 *
+                     (r1x ** 2 * c1x + element_list[wall_count + 1].r1 **
+                      2 * element_list[wall_count + 1].c1) * c1x *
+                     element_list[wall_count + 1].c1)
         return r1, c1
 
     def _sum_outer_wall_elements(self):
@@ -669,7 +692,7 @@ class ThreeElement(object):
 
         self.ua_value_gf = \
             (sum(ground.ua_value for ground in
-                   self.thermal_zone.ground_floors))
+                 self.thermal_zone.ground_floors))
 
         self.r_total_gf = 1 / self.ua_value_gf
 
@@ -785,6 +808,7 @@ class ThreeElement(object):
         self.area_win = sum(win.area for win in self.thermal_zone.windows)
         self.ua_value_win = sum(
             win.ua_value for win in self.thermal_zone.windows)
+        self.u_value_win = self.ua_value_win / self.area_win
 
         # values facing the inside of the thermal zone
 
@@ -809,7 +833,7 @@ class ThreeElement(object):
             1 / (self.r_comb_inner_win * self.area_win))
         self.ratio_conv_rad_inner_win = sum(win.a_conv * win.area for win in
                                             self.thermal_zone.windows) / \
-                                        self.area_win
+            self.area_win
 
         # values facing the ambient
 
@@ -868,16 +892,13 @@ class ThreeElement(object):
             # more than one outer wall, calculate chain matrix
             self.r1_ow, self.c1_ow = self._calc_parallel_connection(outer_walls,
                                                                     omega)
-        else:
-            warnings.warn("No walls are defined as outer walls, please be "
-                          "careful with results. In addition this might lead "
-                          "to RunTimeErrors")
 
         if self.merge_windows is False:
             try:
 
-                self.r1_win = (1 / sum((1 / win.r1) for
-                                       win in self.thermal_zone.windows))
+                if len(self.thermal_zone.windows) > 0:
+                    self.r1_win = (1 / sum((1 / win.r1) for win in
+                                           self.thermal_zone.windows))
 
                 conduction = (1 / sum((1 / element.r_conduc) for element in
                                       outer_walls))
@@ -891,17 +912,20 @@ class ThreeElement(object):
         if self.merge_windows is True:
 
             try:
-                self.r1_win = 1 / sum(1 / (win.r1 / 6) for win in
-                                      self.thermal_zone.windows)
+                if len(self.thermal_zone.windows) > 0:
+                    self.r1_win = 1 / sum(1 / (win.r1 / 6) for win in
+                                          self.thermal_zone.windows)
 
-                self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
-                self.r_total_ow = 1 / (self.ua_value_ow + self.ua_value_win)
-                self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
-                    ((1 / self.r_conv_inner_ow)
-                     + (1 / self.r_conv_inner_win)
-                     + (1 / self.r_rad_inner_ow)
-                     + (1 / self.r_rad_inner_win)))) - 1 / (
-                    self.alpha_comb_outer_ow * self.area_ow)
+                    self.r1_ow = 1 / (1 / self.r1_ow + 1 / self.r1_win)
+
+                    self.r_total_ow = 1 / (self.ua_value_ow +
+                                           self.ua_value_win)
+                    self.r_rest_ow = (self.r_total_ow - self.r1_ow - 1 / (
+                        ((1 / self.r_conv_inner_ow)
+                         + (1 / self.r_conv_inner_win)
+                         + (1 / self.r_rad_inner_ow)
+                         + (1 / self.r_rad_inner_win)))) - 1 / (
+                        self.alpha_comb_outer_ow * self.area_ow)
 
                 self.ir_emissivity_inner_ow = (
                     (self.ir_emissivity_inner_ow * self.area_ow
@@ -943,13 +967,9 @@ class ThreeElement(object):
             # more than one outer wall, calculate chain matrix
             self.r1_gf, self.c1_gf = self._calc_parallel_connection(
                 self.thermal_zone.ground_floors, omega)
-        else:
-            warnings.warn("No walls are defined as ground floors, please be "
-                          "careful with results. In addition this might lead "
-                          "to RunTimeErrors")
         try:
             conduction = (1 / sum((1 / element.r_conduc) for element in
-                                self.thermal_zone.ground_floors))
+                                  self.thermal_zone.ground_floors))
 
             self.r_rest_gf = (conduction - self.r1_gf)
         except RuntimeError:
@@ -991,10 +1011,6 @@ class ThreeElement(object):
             self.r1_iw, self.c1_iw = self._calc_parallel_connection(
                 inner_walls,
                 omega)
-        else:
-            warnings.warn("No walls are defined as outer walls, please be "
-                          "careful with results. In addition this might lead "
-                          "to RunTimeErrors")
 
     def _calc_wf(self):
         """Weightfactors for outer elements(walls, roof, ground floor, windows)
@@ -1047,11 +1063,11 @@ class ThreeElement(object):
                                      self.area_win * self.alpha_rad_inner_win +
                                      self.area_gf * self.alpha_rad_inner_gf +
                                      self.area_iw * self.alpha_rad_inner_iw) \
-                                    / (self.area_ow + self.area_win +
-                                       self.area_iw + self.area_gf)
+            / (self.area_ow + self.area_win +
+               self.area_iw + self.area_gf)
         self.alpha_rad_outer_mean = (self.area_ow * self.alpha_rad_outer_ow +
                                      self.area_win * self.alpha_rad_outer_win) \
-                                    / (self.area_ow + self.area_win)
+            / (self.area_ow + self.area_win)
 
     def _calc_number_of_elements(self):
         """Calculates the number of facade elements with different tilt/orient
@@ -1162,9 +1178,9 @@ class ThreeElement(object):
                self.thermal_zone.infiltration_rate * 1 / 3600 *
                self.thermal_zone.heat_capac_air *
                self.thermal_zone.density_air) *
-               (self.thermal_zone.t_inside - self.thermal_zone.t_outside)) +
-               (self.ua_value_gf * (self.thermal_zone.t_inside -
-                self.thermal_zone.t_ground)))
+              (self.thermal_zone.t_inside - self.thermal_zone.t_outside)) +
+             (self.ua_value_gf * (self.thermal_zone.t_inside -
+                                  self.thermal_zone.t_ground)))
 
     def set_calc_default(self):
         """sets default calculation parameters
@@ -1284,6 +1300,7 @@ class ThreeElement(object):
 
         # UA-Value
         self.ua_value_win = 0.0
+        self.u_value_win = 0.0
 
         # resistances for heat transfer facing the inside of this thermal zone
         self.r_conv_inner_win = 0.0

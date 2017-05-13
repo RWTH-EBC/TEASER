@@ -12,6 +12,7 @@ import teaser.logic.utilities as utilities
 import warnings
 import pyxb
 
+
 def save_bound_conditions(bound_cond, data_class):
     """Use conditions saver.
 
@@ -120,7 +121,6 @@ def save_bound_conditions(bound_cond, data_class):
         usage_pyxb.AHU.max_overheating_ach = bound_cond.max_overheating_ach
         usage_pyxb.AHU.max_summer_ach = bound_cond.max_summer_ach
         usage_pyxb.AHU.winter_reduction = bound_cond.winter_reduction
-
 
         usage_pyxb.typical_length = bound_cond.typical_length
         usage_pyxb.typical_width = bound_cond.typical_width

@@ -170,9 +170,9 @@ def example_create_building():
 
     from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
 
-    in_wall_dict = {"InnerWall1": [bldg.year_of_construction, 'light', 10.0],
-                    "InnerWall2": [bldg.year_of_construction, 'heavy', 14.0],
-                    "InnerWall3": [bldg.year_of_construction, 'light', 10.0]}
+    in_wall_dict = {"InnerWall1": [10.0],
+                    "InnerWall2": [14.0],
+                    "InnerWall3": [10.0]}
 
     for key, value in out_wall_dict.items():
         # Instantiate class, key is the name
@@ -225,7 +225,7 @@ def example_create_building():
 
     for key, value in win_dict.items():
 
-        win = Window(parent = tz)
+        win = Window(parent=tz)
         win.name = key
         win.area = value[0]
         win.tilt = value[1]
@@ -260,6 +260,7 @@ def example_create_building():
         win_material.name = "GlasWindow"
         win_material.thermal_conduc = 0.067
         win_material.transmittance = 0.9
+
 
 if __name__ == '__main__':
     example_create_building()

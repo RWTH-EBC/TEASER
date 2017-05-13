@@ -3,6 +3,7 @@
 
 
 import math
+import collections
 from teaser.logic.archetypebuildings.nonresidential \
     import NonResidential
 from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
@@ -163,14 +164,19 @@ class Office(NonResidential):
         # calculation following Lichtmess
 
         # [area factor, usage type(has to be set)]
-        self.zone_area_factors = \
-            {"Meeting": [0.04, "Meeting, Conference, seminar"],
-             "Storage": [0.15, "Stock, technical equipment, archives"],
-             "Office": [0.5, "Group Office (between 2 and 6 employees)"],
-             "Restroom": [0.04, "WC and sanitary rooms in non-residential "
-                                "buildings"],
-             "ICT": [0.02, "Data center"],
-             "Floor": [0.25, "Traffic area"]}
+        self.zone_area_factors = collections.OrderedDict()
+        self.zone_area_factors["Office"] = \
+            [0.5, "Group Office (between 2 and 6 employees)"]
+        self.zone_area_factors["Floor"] = \
+            [0.25, "Traffic area"]
+        self.zone_area_factors["Storage"] = \
+            [0.15, "Stock, technical equipment, archives"]
+        self.zone_area_factors["Meeting"] = \
+            [0.04, "Meeting, Conference, seminar"]
+        self.zone_area_factors["Restroom"] = \
+            [0.04, "WC and sanitary rooms in non-residential buildings"]
+        self.zone_area_factors["ICT"] = \
+            [0.02, "Data center"]
 
         # [tilt, orientation]
         self.outer_wall_names = {"Exterior Facade North": [90, 0],
@@ -293,7 +299,7 @@ class Office(NonResidential):
 
         if not self.window_layout == 0:
             self._est_outer_wall_area = self._est_facade_area * \
-                                        self.corr_factor_wall
+                self.corr_factor_wall
             self._est_win_area = self._est_facade_area * self.corr_factor_win
         else:
             pass
@@ -304,16 +310,16 @@ class Office(NonResidential):
             # North and South
             if value[1] == 0 or value[1] == 180:
                 self.outer_area[value[1]] = self._est_outer_wall_area * \
-                                            (self._est_length / (
-                                                2 * self._est_width + 2 *
-                                                self._est_length))
+                    (self._est_length / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
                 self.outer_area[value[1]] = self._est_outer_wall_area * \
-                                            (self._est_width / (
-                                                2 * self._est_width + 2 *
-                                                self._est_length))
+                    (self._est_width / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
             for zone in self.thermal_zones:
                 # create wall and set building elements
                 outer_wall = OuterWall(zone)
@@ -330,16 +336,16 @@ class Office(NonResidential):
             if value[1] == 0 or value[1] == 180:
 
                 self.window_area[value[1]] = self._est_win_area * \
-                                             (self._est_length / (
-                                                 2 * self._est_width + 2 *
-                                                 self._est_length))
+                    (self._est_length / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
 
             elif value[1] == 90 or value[1] == 270:
 
                 self.window_area[value[1]] = self._est_win_area * \
-                                             (self._est_width / (
-                                                 2 * self._est_width + 2 *
-                                                 self._est_length))
+                    (self._est_width / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
 
             '''
             There is no real classification for windows, so this is a bit hard

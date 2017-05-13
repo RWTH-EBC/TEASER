@@ -44,6 +44,7 @@ class BuildingInfo(object):
     """
     Light-weight class to hold building info
     """
+
     def __init__(self):
         """
         Constructor for BuildinInfo
@@ -62,7 +63,7 @@ def main():
 
     starttime = time.time()
 
-    #create a office typebuilding
+    # create a office typebuilding
     prj = Project(load_data=True)
     prj.type_bldg_office(name="Office1",
                          year_of_construction=1988,
@@ -74,7 +75,7 @@ def main():
                          with_ahu=True,
                          construction_type="heavy")
 
-    #path where the export is stored
+    # path where the export is stored
     output_path = os.path.join('D:\Temp',
                                'OutputData')
 
@@ -106,7 +107,7 @@ def main():
 
     li = []
     for bld in prj.buildings:
-        #this is necessary for the correct names in the simulation script
+        # this is necessary for the correct names in the simulation script
         name = "Project." + bld.name + "." + bld.name
         s = si.Simulator(name, "dymola", outputDir, packageDir)
         li.append(s)
@@ -116,10 +117,10 @@ def main():
     # of the results
     po.map(simulateCase, li)
 
-### Timer
+# Timer
     endtime = time.time()
-    print('Simulation lasts: ', endtime-starttime, ' seconds or ',
-          (endtime-starttime)/60, ' minutes! or', (endtime-starttime)/(60*60))
+    print('Simulation lasts: ', endtime - starttime, ' seconds or ',
+          (endtime - starttime) / 60, ' minutes! or', (endtime - starttime) / (60 * 60))
 
 
 def simulateCase(s):
@@ -135,6 +136,7 @@ def simulateCase(s):
     s.setNumberOfIntervals(8760)
     s.getParameters()
     s.simulate()
+
 
 # Main function
 if __name__ == '__main__':

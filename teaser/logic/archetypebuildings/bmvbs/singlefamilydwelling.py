@@ -161,7 +161,6 @@ class SingleFamilyDwelling(Residential):
             cellar=None,
             dormer=None,
             construction_type=None):
-
         """Constructor of SingleFamilyDwelling
         """
 
@@ -356,12 +355,12 @@ class SingleFamilyDwelling(Residential):
 
             if value[1] == 0 or value[1] == 180.0:
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                                            self.nr_of_orientation
+                    self.nr_of_orientation
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                                            self.nr_of_orientation
+                    self.nr_of_orientation
 
             for zone in self.thermal_zones:
                 # create wall and set building elements
@@ -379,12 +378,12 @@ class SingleFamilyDwelling(Residential):
             if value[1] == 0 or value[1] == 180:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                                             self.nr_of_orientation
+                    self.nr_of_orientation
 
             elif value[1] == 90 or value[1] == 270:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                                             self.nr_of_orientation
+                    self.nr_of_orientation
 
             '''
             There is no real classification for windows, so this is a bit hard

@@ -110,6 +110,6 @@ class Floor(InnerWall):
         """
         """
         super(Floor, self).__init__(parent)
-        
+
         self._tilt = 0.0
         self._orientation = -2.0

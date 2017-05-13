@@ -96,7 +96,7 @@ class ThermalZone(object):
         self.name = None
         self._area = None
         self._volume = None
-        self._infiltration_rate = 0.5 
+        self._infiltration_rate = 0.5
         self._outer_walls = []
         self._rooftops = []
         self._ground_floors = []
@@ -144,7 +144,7 @@ class ThermalZone(object):
         merge_windows : bool
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False (Only
-            supported for Annex60)
+            supported for IBPSA)
 
         t_bt : float
             Time constant according to VDI 6007 (default t_bt = 5)
@@ -494,7 +494,7 @@ class ThermalZone(object):
         ass_error_1 = "Use condition has to be an instance of UseConditions()"
 
         assert type(value).__name__ == "UseConditions" or \
-               type(value).__name__ == "BoundaryConditions", ass_error_1
+            type(value).__name__ == "BoundaryConditions", ass_error_1
 
         if value is not None:
             self._use_conditions = value
