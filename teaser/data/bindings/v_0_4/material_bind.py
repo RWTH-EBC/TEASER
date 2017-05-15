@@ -14,7 +14,7 @@ import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:9adde918-0b02-11e7-98f9-901b0e0421f9')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:4f482dd2-d67f-11e6-9d44-2cd444b2e704')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.5'
@@ -76,21 +76,6 @@ def CreateFromDOM (node, default_namespace=None):
     return pyxb.binding.basis.element.AnyCreateFromDOM(node, default_namespace)
 
 
-# List simple type: {http://teaser.material}floatList
-# superclasses pyxb.binding.datatypes.anySimpleType
-class floatList (pyxb.binding.basis.STD_list):
-
-    """Simple type that is a list of pyxb.binding.datatypes.float."""
-
-    _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'floatList')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 24, 4)
-    _Documentation = None
-
-    _ItemType = pyxb.binding.datatypes.float
-floatList._InitializeFacetMap()
-Namespace.addCategoryObject('typeBinding', 'floatList', floatList)
-_module_typeBindings.floatList = floatList
-
 # Complex type {http://teaser.material}MaterialType with content type ELEMENT_ONLY
 class MaterialType (pyxb.binding.basis.complexTypeDefinition):
     """Complex type {http://teaser.material}MaterialType with content type ELEMENT_ONLY"""
@@ -145,20 +130,6 @@ class MaterialType (pyxb.binding.basis.complexTypeDefinition):
     ir_emissivity = property(__ir_emissivity.value, __ir_emissivity.set, None, None)
 
 
-    # Element {http://teaser.material}thickness_default uses Python identifier thickness_default
-    __thickness_default = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thickness_default'), 'thickness_default', '__httpteaser_material_MaterialType_httpteaser_materialthickness_default', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 14, 6), )
-
-
-    thickness_default = property(__thickness_default.value, __thickness_default.set, None, None)
-
-
-    # Element {http://teaser.material}thickness_list uses Python identifier thickness_list
-    __thickness_list = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thickness_list'), 'thickness_list', '__httpteaser_material_MaterialType_httpteaser_materialthickness_list', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 15, 6), )
-
-
-    thickness_list = property(__thickness_list.value, __thickness_list.set, None, None)
-
-
     # Attribute material_id uses Python identifier material_id
     __material_id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'material_id'), 'material_id', '__httpteaser_material_MaterialType_material_id', pyxb.binding.datatypes.string)
     __material_id._DeclarationLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 6, 1)
@@ -172,9 +143,7 @@ class MaterialType (pyxb.binding.basis.complexTypeDefinition):
         __thermal_conduc.name() : __thermal_conduc,
         __heat_capac.name() : __heat_capac,
         __solar_absorp.name() : __solar_absorp,
-        __ir_emissivity.name() : __ir_emissivity,
-        __thickness_default.name() : __thickness_default,
-        __thickness_list.name() : __thickness_list
+        __ir_emissivity.name() : __ir_emissivity
     })
     _AttributeMap.update({
         __material_id.name() : __material_id
@@ -190,13 +159,13 @@ class MaterialTemplatesType (pyxb.binding.basis.complexTypeDefinition):
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
     _ExpandedName = pyxb.namespace.ExpandedName(Namespace, 'MaterialTemplatesType')
-    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 18, 2)
+    _XSDLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 16, 2)
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
 
     # Element {http://teaser.material}Material uses Python identifier Material
-    __Material = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Material'), 'Material', '__httpteaser_material_MaterialTemplatesType_httpteaser_materialMaterial', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 21, 6), )
+    __Material = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Material'), 'Material', '__httpteaser_material_MaterialTemplatesType_httpteaser_materialMaterial', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 19, 6), )
 
 
     Material = property(__Material.value, __Material.set, None, None)
@@ -204,8 +173,8 @@ class MaterialTemplatesType (pyxb.binding.basis.complexTypeDefinition):
 
     # Attribute version uses Python identifier version
     __version = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'version'), 'version', '__httpteaser_material_MaterialTemplatesType_version', pyxb.binding.datatypes.string)
-    __version._DeclarationLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 19, 4)
-    __version._UseLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 19, 4)
+    __version._DeclarationLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 17, 4)
+    __version._UseLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 17, 4)
 
     version = property(__version.value, __version.set, None, None)
 
@@ -236,10 +205,6 @@ MaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(
 
 MaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'ir_emissivity'), pyxb.binding.datatypes.float, scope=MaterialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 13, 6)))
 
-MaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'thickness_default'), pyxb.binding.datatypes.float, scope=MaterialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 14, 6)))
-
-MaterialType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'thickness_list'), floatList, scope=MaterialType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 15, 6)))
-
 def _BuildAutomaton ():
     # Remove this helper function from the namespace after it is invoked
     global _BuildAutomaton
@@ -264,26 +229,20 @@ def _BuildAutomaton ():
     symbol = pyxb.binding.content.ElementUse(MaterialType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'thermal_conduc')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 10, 6))
     st_2 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_2)
-    final_update = None
+    final_update = set()
     symbol = pyxb.binding.content.ElementUse(MaterialType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'heat_capac')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 11, 6))
     st_3 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_3)
-    final_update = None
+    final_update = set()
+    final_update.add(fac.UpdateInstruction(cc_0, False))
     symbol = pyxb.binding.content.ElementUse(MaterialType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'solar_absorp')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 12, 6))
     st_4 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_4)
-    final_update = None
+    final_update = set()
+    final_update.add(fac.UpdateInstruction(cc_1, False))
     symbol = pyxb.binding.content.ElementUse(MaterialType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'ir_emissivity')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 13, 6))
     st_5 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
     states.append(st_5)
-    final_update = None
-    symbol = pyxb.binding.content.ElementUse(MaterialType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'thickness_default')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 14, 6))
-    st_6 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
-    states.append(st_6)
-    final_update = set()
-    symbol = pyxb.binding.content.ElementUse(MaterialType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'thickness_list')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 15, 6))
-    st_7 = fac.State(symbol, is_initial=False, final_update=final_update, is_unordered_catenation=False)
-    states.append(st_7)
     transitions = []
     transitions.append(fac.Transition(st_1, [
          ]))
@@ -301,36 +260,24 @@ def _BuildAutomaton ():
          ]))
     transitions.append(fac.Transition(st_5, [
          ]))
-    transitions.append(fac.Transition(st_6, [
-         ]))
     st_3._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_4, [
         fac.UpdateInstruction(cc_0, True) ]))
     transitions.append(fac.Transition(st_5, [
         fac.UpdateInstruction(cc_0, False) ]))
-    transitions.append(fac.Transition(st_6, [
-        fac.UpdateInstruction(cc_0, False) ]))
     st_4._set_transitionSet(transitions)
     transitions = []
     transitions.append(fac.Transition(st_5, [
         fac.UpdateInstruction(cc_1, True) ]))
-    transitions.append(fac.Transition(st_6, [
-        fac.UpdateInstruction(cc_1, False) ]))
     st_5._set_transitionSet(transitions)
-    transitions = []
-    transitions.append(fac.Transition(st_7, [
-         ]))
-    st_6._set_transitionSet(transitions)
-    transitions = []
-    st_7._set_transitionSet(transitions)
     return fac.Automaton(states, counters, False, containing_state=None)
 MaterialType._Automaton = _BuildAutomaton()
 
 
 
 
-MaterialTemplatesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'Material'), MaterialType, scope=MaterialTemplatesType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 21, 6)))
+MaterialTemplatesType._AddElement(pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'Material'), MaterialType, scope=MaterialTemplatesType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 19, 6)))
 
 def _BuildAutomaton_ ():
     # Remove this helper function from the namespace after it is invoked
@@ -339,12 +286,12 @@ def _BuildAutomaton_ ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 20, 1))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 18, 1))
     counters.add(cc_0)
     states = []
     final_update = set()
     final_update.add(fac.UpdateInstruction(cc_0, False))
-    symbol = pyxb.binding.content.ElementUse(MaterialTemplatesType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'Material')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 21, 6))
+    symbol = pyxb.binding.content.ElementUse(MaterialTemplatesType._UseForTag(pyxb.namespace.ExpandedName(Namespace, 'Material')), pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\MaterialTemplates.xsd', 19, 6))
     st_0 = fac.State(symbol, is_initial=True, final_update=final_update, is_unordered_catenation=False)
     states.append(st_0)
     transitions = []

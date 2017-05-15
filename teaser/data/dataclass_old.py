@@ -129,7 +129,7 @@ class DataClassOld(object):
             version_parse = False
 
         if version_parse is False:
-            import teaser.data.bindings.v_0_4.material_bind_old as mat_bind
+            import teaser.data.bindings.v_0_4.material_bind as mat_bind
             self.material_bind = mat_bind.MaterialTemplates()
         elif bool(version_parse.getroot().attrib) is False:
             warnings.warn(
@@ -144,6 +144,6 @@ class DataClassOld(object):
             self.material_bind = mat_bind.CreateFromDocument(
                 __xml_file_mat.read())
         elif version_parse.getroot().attrib['version'] == "0.4":
-            import teaser.data.bindings.v_0_4.material_bind_old as mat_bind
+            import teaser.data.bindings.v_0_4.material_bind as mat_bind
             self.material_bind = mat_bind.CreateFromDocument(
                 __xml_file_mat.read())

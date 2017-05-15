@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<materials:MaterialTemplates version="0.4" xmlns:materials="http://teaser.material">
+<materials:MaterialTemplates version="0.4" xmlns:materials="http://teaser.material06">
 	<materials:Material material_id="b9a4fd0c-396b-11e7-89fd-901b0e0421f9">
 		<materials:name>anti_must_plaster</materials:name>
 		<materials:density>465.4663</materials:density>
@@ -4245,6 +4245,159 @@
 		<materials:thermal_conduc>0.04</materials:thermal_conduc>
 		<materials:heat_capac>1.0</materials:heat_capac>
 		<materials:solar_absorp>0.3</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abb8aa3-83ff-11e6-bfa4-2cd444b2e704">
+		<materials:name>Glas0_1978Holzfenstereinfach</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.8</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb194-83ff-11e6-a326-2cd444b2e704">
+		<materials:name>Glas0_1978Holzfensterzweifach</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.12</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb195-83ff-11e6-9ec6-2cd444b2e704">
+		<materials:name>Glas0_1978KunststofffensterIsolierverglasung</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.147</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb196-83ff-11e6-8079-2cd444b2e704">
+		<materials:name>Glas0_1978AluoderStahlfensterIsolierverglasung</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.384</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb197-83ff-11e6-a5ea-2cd444b2e704">
+		<materials:name>Glas1979_1983Holzfensterzweifach</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.12</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb198-83ff-11e6-a1b0-2cd444b2e704">
+		<materials:name>Glas1979_1983KunststofffensterIsolierverglasung</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.147</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb199-83ff-11e6-96ec-2cd444b2e704">
+		<materials:name>Glas1979_1983AluoderStahlfensterIsolierverglasung</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.384</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb19a-83ff-11e6-bace-2cd444b2e704">
+		<materials:name>Glas1984_1994Holzfensterzweifach</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.12</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb19b-83ff-11e6-95f9-2cd444b2e704">
+		<materials:name>Glas1984_1994KunststofffensterIsolierverglasung</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.147</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb19c-83ff-11e6-a925-2cd444b2e704">
+		<materials:name>Glas1984_1994AluoderStahlfensterIsolierverglasung</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.168</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb19d-83ff-11e6-b8bb-2cd444b2e704">
+		<materials:name>Glas1995_2015Holzfensterzweifach</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.053</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb19e-83ff-11e6-968a-2cd444b2e704">
+		<materials:name>Glas1995_2015KunststofffensterIsolierverglasung</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.067</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb19f-83ff-11e6-986f-2cd444b2e704">
+		<materials:name>Glas1995_2015EnEv</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.04</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="36eb3906-855e-11e6-a498-2cd444b2e704">
+		<materials:name>Glas1995_2015EnEV</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.04</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb1a0-83ff-11e6-9986-2cd444b2e704">
+		<materials:name>Glas1995_2015AluoderStahlfensterIsolierverglasung</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.067</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb1a1-83ff-11e6-b229-2cd444b2e704">
+		<materials:name>Glas1995_2015AluoderStahlfensterWaermeschutzverglasungzweifach</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.038</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="0abbb1a2-83ff-11e6-946a-2cd444b2e704">
+		<materials:name>Glas1995_2015Waermeschutzverglasungdreifach</materials:name>
+		<materials:density>0.0</materials:density>
+		<materials:thermal_conduc>0.0222</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.7</materials:solar_absorp>
 		<materials:thickness_default>0.0</materials:thickness_default>
 		<materials:thickness_list></materials:thickness_list>
 	</materials:Material>

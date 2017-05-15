@@ -102,8 +102,10 @@ excel_file = 'N:\Forschung\EBC0301_PtJ_Living_Roadmap_mfu\Students\jsc-tbe\MASEA
 df = pd.read_excel(io=excel_file, skiprows=1)
 df = df.set_index('Material TEASER Typebuildings')
 
-file = "D:/jsc-tbe/TEASER/teaser/data/input/inputdata/TypeBuildingElements_old.xml"
-
+#file = "D:/jsc-tbe/TEASER/teaser/data/input/inputdata
+# /TypeBuildingElements_old.xml"
+file = utils.get_full_path(
+            "data/input/inputdata/MaterialTemplates_old.xml")
 elem_xml = et.parse(file)
 elem_tree = elem_xml.getroot()
 
@@ -156,7 +158,8 @@ for ow in element_binding_old.OuterWall:
             # layer one (inner covering layer)
             mat_name_new_one = 'sheet_steel'
             mat_new_one = Material()
-            mat_new_one.load_material_template(mat_name=mat_name_new_one)
+            mat_new_one.load_material_template(mat_name=mat_name_new_one,
+                                               data_class=dataclass_new)
             layer_new_one = Layer()
             layer_new_one.material = mat_new_one
             layer_new_one.thickness = mat_new_one.thickness_default
@@ -164,7 +167,8 @@ for ow in element_binding_old.OuterWall:
             # layer three (plaster)
             mat_name_new_three = 'sheet_steel'
             mat_new_three = Material()
-            mat_new_three.load_material_template(mat_name=mat_name_new_three)
+            mat_new_three.load_material_template(mat_name=mat_name_new_three,
+                                               data_class=dataclass_new)
             layer_new_three = Layer()
             layer_new_three.material = mat_new_three
             layer_new_three.thickness = mat_new_three.thickness_default
@@ -172,7 +176,8 @@ for ow in element_binding_old.OuterWall:
             # layer two (insulation e.g. XPS)
             mat_name_new_two = 'XPS'
             mat_new_two = Material()
-            mat_new_two.load_material_template(mat_name=mat_name_new_two)
+            mat_new_two.load_material_template(mat_name=mat_name_new_two,
+                                               data_class=dataclass_new)
             layer_new_two = Layer()
             layer_new_two.material = mat_new_two
             layer_new_two.thickness = layer.thickness - layer_new_one.thickness - layer_new_three.thickness

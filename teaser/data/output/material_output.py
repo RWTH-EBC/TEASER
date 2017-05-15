@@ -5,10 +5,12 @@
 
 This module contains function to save material classes
 """
-import teaser.data.bindings.v_0_4.material_bind as mat_bind
-import teaser.logic.utilities as utilities
 import warnings
+
 import pyxb
+
+import teaser.data.bindings.v_0_6.material_bind as mat_bind
+import teaser.logic.utilities as utilities
 
 
 def save_material(material, data_class):

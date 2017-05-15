@@ -4,9 +4,10 @@
 """This module holds file paths and bindings for XML data
 """
 
-import teaser.logic.utilities as utils
 import warnings
 import xml.etree.ElementTree as et
+
+import teaser.logic.utilities as utils
 
 
 class DataClass(object):
@@ -129,7 +130,7 @@ class DataClass(object):
             version_parse = False
 
         if version_parse is False:
-            import teaser.data.bindings.v_0_4.material_bind as mat_bind
+            import teaser.data.bindings.v_0_6.material_bind as mat_bind
             self.material_bind = mat_bind.MaterialTemplates()
         elif bool(version_parse.getroot().attrib) is False:
             warnings.warn(
@@ -143,7 +144,7 @@ class DataClass(object):
             import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
             self.material_bind = mat_bind.CreateFromDocument(
                 __xml_file_mat.read())
-        elif version_parse.getroot().attrib['version'] == "0.4":
-            import teaser.data.bindings.v_0_4.material_bind as mat_bind
+        elif version_parse.getroot().attrib['version'] == "0.6":
+            import teaser.data.bindings.v_0_6.material_bind as mat_bind
             self.material_bind = mat_bind.CreateFromDocument(
                 __xml_file_mat.read())
