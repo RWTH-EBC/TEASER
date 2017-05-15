@@ -150,6 +150,7 @@ for ow in element_binding_old.OuterWall:
     # create new element and exchange layer list
     outer_wall_new = deepcopy(outer_wall_old)
     outer_wall_new._layer = []
+    count_layer = 0
     for layer in outer_wall_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
@@ -160,7 +161,8 @@ for ow in element_binding_old.OuterWall:
             mat_new_one = Material()
             mat_new_one.load_material_template(mat_name=mat_name_new_one,
                                                data_class=dataclass_new)
-            layer_new_one = Layer()
+            layer_new_one = Layer(id=count_layer)
+            count_layer += 1
             layer_new_one.material = mat_new_one
             layer_new_one.thickness = mat_new_one.thickness_default
 
@@ -169,7 +171,8 @@ for ow in element_binding_old.OuterWall:
             mat_new_three = Material()
             mat_new_three.load_material_template(mat_name=mat_name_new_three,
                                                data_class=dataclass_new)
-            layer_new_three = Layer()
+            layer_new_three = Layer(id=count_layer)
+            count_layer += 1
             layer_new_three.material = mat_new_three
             layer_new_three.thickness = mat_new_three.thickness_default
 
@@ -178,7 +181,8 @@ for ow in element_binding_old.OuterWall:
             mat_new_two = Material()
             mat_new_two.load_material_template(mat_name=mat_name_new_two,
                                                data_class=dataclass_new)
-            layer_new_two = Layer()
+            layer_new_two = Layer(id=count_layer)
+            count_layer += 1
             layer_new_two.material = mat_new_two
             layer_new_two.thickness = layer.thickness - layer_new_one.thickness - layer_new_three.thickness
 
@@ -192,10 +196,11 @@ for ow in element_binding_old.OuterWall:
             mat_new = Material()
             mat_new.load_material_template(mat_name=mat_name_new,
                                        data_class=dataclass_new)
-            layer_new = Layer()
+            layer_new = Layer(id=count_layer)
             layer_new.material = mat_new
             layer_new.thickness = layer.thickness
             outer_wall_new.add_layer(layer_new)
+            count_layer += 1
 
     outer_wall_new.save_type_element(data_class=dataclass_new)
 
@@ -211,6 +216,7 @@ for iw in element_binding_old.InnerWall:
     # create new element and exchange layer list
     inner_wall_new = deepcopy(inner_wall_old)
     inner_wall_new._layer = []
+    count_layer = 0
     for layer in inner_wall_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
@@ -220,7 +226,8 @@ for iw in element_binding_old.InnerWall:
             mat_name_new_one = 'sheet_steel'
             mat_new_one = Material()
             mat_new_one.load_material_template(mat_name=mat_name_new_one)
-            layer_new_one = Layer()
+            layer_new_one = Layer(id=count_layer)
+            count_layer += 1
             layer_new_one.material = mat_new_one
             layer_new_one.thickness = mat_new_one.thickness_default
 
@@ -228,7 +235,8 @@ for iw in element_binding_old.InnerWall:
             mat_name_new_three = 'sheet_steel'
             mat_new_three = Material()
             mat_new_three.load_material_template(mat_name=mat_name_new_three)
-            layer_new_three = Layer()
+            layer_new_three = Layer(id=count_layer)
+            count_layer += 1
             layer_new_three.material = mat_new_three
             layer_new_three.thickness = mat_new_three.thickness_default
 
@@ -236,7 +244,8 @@ for iw in element_binding_old.InnerWall:
             mat_name_new_two = 'XPS'
             mat_new_two = Material()
             mat_new_two.load_material_template(mat_name=mat_name_new_two)
-            layer_new_two = Layer()
+            layer_new_two = Layer(id=count_layer)
+            count_layer += 1
             layer_new_two.material = mat_new_two
             layer_new_two.thickness = layer.thickness - layer_new_one.thickness - layer_new_three.thickness
 
@@ -250,10 +259,11 @@ for iw in element_binding_old.InnerWall:
             mat_new = Material()
             mat_new.load_material_template(mat_name=mat_name_new,
                                            data_class=dataclass_new)
-            layer_new = Layer()
+            layer_new = Layer(id=count_layer)
             layer_new.material = mat_new
             layer_new.thickness = layer.thickness
             inner_wall_new.add_layer(layer_new)
+            count_layer += 1
 
     inner_wall_new.save_type_element(data_class=dataclass_new)
 
@@ -269,6 +279,7 @@ for ce in element_binding_old.Ceiling:
     # create new element and exchange layer list
     ceiling_new = deepcopy(ceiling_old)
     ceiling_new._layer = []
+    count_layer = 0
     for layer in ceiling_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
@@ -276,10 +287,11 @@ for ce in element_binding_old.Ceiling:
         mat_new = Material()
         mat_new.load_material_template(mat_name=mat_name_new,
                                        data_class=dataclass_new)
-        layer_new = Layer()
+        layer_new = Layer(id=count_layer)
         layer_new.material = mat_new
         layer_new.thickness = layer.thickness
         ceiling_new.add_layer(layer_new)
+        count_layer += 1
 
     ceiling_new.save_type_element(data_class=dataclass_new)
 
@@ -295,6 +307,7 @@ for f in element_binding_old.Floor:
     # create new element and exchange layer list
     floor_new = deepcopy(floor_old)
     floor_new._layer = []
+    count_layer = 0
     for layer in floor_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
@@ -302,10 +315,11 @@ for f in element_binding_old.Floor:
         mat_new = Material()
         mat_new.load_material_template(mat_name=mat_name_new,
                                        data_class=dataclass_new)
-        layer_new = Layer()
+        layer_new = Layer(id=count_layer)
         layer_new.material = mat_new
         layer_new.thickness = layer.thickness
         floor_new.add_layer(layer_new)
+        count_layer += 1
 
     floor_new.save_type_element(data_class=dataclass_new)
 
@@ -321,6 +335,7 @@ for r in element_binding_old.Rooftop:
     # create new element and exchange layer list
     rooftop_new = deepcopy(rooftop_old)
     rooftop_new._layer = []
+    count_layer = 0
     for layer in rooftop_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
@@ -328,10 +343,11 @@ for r in element_binding_old.Rooftop:
         mat_new = Material()
         mat_new.load_material_template(mat_name=mat_name_new,
                                        data_class=dataclass_new)
-        layer_new = Layer()
+        layer_new = Layer(id=count_layer)
         layer_new.material = mat_new
         layer_new.thickness = layer.thickness
         rooftop_new.add_layer(layer_new)
+        count_layer += 1
 
     rooftop_new.save_type_element(data_class=dataclass_new)
 
@@ -347,6 +363,7 @@ for gf in element_binding_old.GroundFloor:
     # create new element and exchange layer list
     ground_floor_new = deepcopy(ground_floor_old)
     ground_floor_new._layer = []
+    count_layer = 0
     for layer in ground_floor_old.layer:
         mat_old = layer.material
         mat_name_old = mat_old.name
@@ -354,10 +371,11 @@ for gf in element_binding_old.GroundFloor:
         mat_new = Material()
         mat_new.load_material_template(mat_name=mat_name_new,
                                        data_class=dataclass_new)
-        layer_new = Layer()
+        layer_new = Layer(id=count_layer)
         layer_new.material = mat_new
         layer_new.thickness = layer.thickness
         ground_floor_new.add_layer(layer_new)
+        count_layer += 1
 
     ground_floor_new.save_type_element(data_class=dataclass_new)
 
@@ -371,6 +389,7 @@ for w in element_binding_old.Window:
                                  construction=w.construction_type,
                                  data_class=dataclass_old)
     # save window templates in new MaterialTemplate
+    count_layer = 0
     for layer in window_old.layer:
         mat = layer.material
         mat.save_material_template(data_class=dataclass_new)
@@ -383,9 +402,10 @@ for w in element_binding_old.Window:
         mat_new = Material()
         mat_new.load_material_template(mat_name=mat_name_new,
                                        data_class=dataclass_new)
-        layer_new = Layer()
+        layer_new = Layer(id=count_layer)
         layer_new.material = mat_new
         layer_new.thickness = layer.thickness
         window_new.add_layer(layer_new)
+        count_layer += 1
 
     window_new.save_type_element(data_class=dataclass_new)
