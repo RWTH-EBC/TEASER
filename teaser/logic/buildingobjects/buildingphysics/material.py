@@ -119,6 +119,29 @@ class Material(object):
 
         material_output.save_material(material=self, data_class=data_class)
 
+    def modify_material_template(self, data_class):
+        """Material modifier.
+
+        Modify Material specified in the XML.
+
+        Parameters
+        ----------
+
+        data_class : DataClass()
+            DataClass containing the bindings for TypeBuildingElement and
+            Material (typically this is the data class stored in prj.data,
+            but the user can individually change that. Default is
+            self.parent.parent.parent.parent.data which is data in project
+
+        """
+
+        if data_class is None:
+            data_class = self.parent.parent.parent.parent.data
+        else:
+            data_class = data_class
+
+        material_output.modify_material(material=self, data_class=data_class)
+
     @property
     def material_id(self):
         return self.__material_id
