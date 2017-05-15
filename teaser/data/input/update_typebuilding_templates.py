@@ -3,6 +3,7 @@ import pandas as pd
 from copy import deepcopy
 import teaser.logic.utilities as utils
 from teaser.data.dataclass import DataClass
+from teaser.data.dataclass_old import DataClassOld
 from teaser.logic.buildingobjects.buildingphysics.material import Material
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.buildingelement import BuildingElement
@@ -106,23 +107,24 @@ file = "D:/jsc-tbe/TEASER/teaser/data/input/inputdata/TypeBuildingElements_old.x
 elem_xml = et.parse(file)
 elem_tree = elem_xml.getroot()
 
-# TODO: fix problem with deleting MaterialTemplates when loading bindin
-# load old MaterialTemplates
-dataclass_old = DataClass()
+
 
 # load new MaterialTemplates
 dataclass_new = DataClass()
-dataclass_new.material_bind = None
-dataclass_new.path_mat = utils.get_full_path(
-            "data/input/inputdata/MaterialTemplates_new.xml")
-dataclass_new.load_mat_binding()
-dataclass_new.element_bind = None
-dataclass_new.path_tb = utils.get_full_path(
-            "data/input/inputdata/TypeBuildingElements_new.xml")
-dataclass_new.load_tb_binding()
+# dataclass_new.material_bind = None
+# dataclass_new.path_mat = utils.get_full_path(
+#             "data/input/inputdata/MaterialTemplates_new.xml")
+# dataclass_new.load_mat_binding()
+# dataclass_new.element_bind = None
+# dataclass_new.path_tb = utils.get_full_path(
+#             "data/input/inputdata/TypeBuildingElements_new.xml")
+# dataclass_new.load_tb_binding()
+
+# load old MaterialTemplates
+dataclass_old = DataClassOld()
 
 # read TypeBuildingElements XML and list all elements
-bums = []
+
 # load element
 element_binding_old = dataclass_old.element_bind
 element_binding_new = dataclass_new.element_bind
