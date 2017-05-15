@@ -78,5 +78,5 @@ def load_material_id(material, mat_id, data_class):
             material.solar_absorp = mat.solar_absorp
             material.ir_emissivity = mat.ir_emissivity
             material.thickness_default = mat.thickeness_default
-            material_thickness_list = mat.thickness_list
+            material.thickness_list = mat.thickness_list
 
