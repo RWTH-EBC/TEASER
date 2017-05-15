@@ -149,7 +149,7 @@ class Project(object):
                         number_of_elements=self._number_of_elements_calc,
                         merge_windows=self._merge_windows_calc,
                         used_library=self._used_library_calc)
-                except ZeroDivisionError:
+                except (ZeroDivisionError, TypeError):
                     warnings.warn(
                         "Following building can't be calculated and is "
                         "removed from buildings list. Use raise_errors=True "
@@ -462,8 +462,6 @@ class Project(object):
                           "effect on archetype generation for 'iwu', see" \
                           "docs for more information"
 
-
-
         if method == 'iwu' and number_of_apartments is not None:
             warnings.warn(ass_error_apart)
 
@@ -609,7 +607,6 @@ class Project(object):
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
-
 
             elif usage == 'est7':
 
@@ -1196,7 +1193,6 @@ class Project(object):
                         prj=self,
                         path=path)
 
-
     def export_ibpsa(
             self,
             internal_id=None,
@@ -1239,7 +1235,6 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
-
 
     def export_parameters_txt(self, path=None):
         """Exports parameters of all buildings in a readable text file
