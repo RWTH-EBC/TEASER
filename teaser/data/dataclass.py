@@ -138,7 +138,7 @@ class DataClass(object):
             version_parse = False
 
         if version_parse is False:
-            import teaser.data.bindings.v_0_4.boundaryconditions_bind as uc_bind
+            import teaser.data.bindings.v_0_6.boundaryconditions_bind as uc_bind
             self.conditions_bind = uc_bind.UseConditions()
         elif bool(version_parse.getroot().attrib) is False:
             warnings.warn("You are using an old version of use condition data "
