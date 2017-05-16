@@ -1,8 +1,8 @@
 # .\material_bind.py
 # -*- coding: utf-8 -*-
-# PyXB bindings for NM:4bd7aec7a8e28b88d1575a2488cce491df9d2470
-# Generated 2017-05-15 16:24:16.058356 by PyXB version 1.2.5 using Python 3.6.0.final.0
-# Namespace http://teaser.material06
+# PyXB bindings for NM:3cef5f9efd01e836b84ad7b358129582f47d5e36
+# Generated 2017-05-16 15:11:42.811254 by PyXB version 1.2.5 using Python 3.6.0.final.0
+# Namespace http://teaser/0.6/material
 
 from __future__ import unicode_literals
 import pyxb
@@ -14,7 +14,7 @@ import pyxb.utils.domutils
 import sys
 import pyxb.utils.six as _six
 # Unique identifier for bindings created at the same time
-_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:2ce479a8-397a-11e7-9a3e-2cd444b2e704')
+_GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:34903592-3a39-11e7-863f-2cd444b2e704')
 
 # Version of PyXB used to generate the bindings
 _PyXBVersion = '1.2.5'
@@ -30,7 +30,7 @@ _module_typeBindings = pyxb.utils.utility.Object()
 import pyxb.binding.datatypes
 
 # NOTE: All namespace declarations are reserved within the binding
-Namespace = pyxb.namespace.NamespaceForURI('http://teaser.material06', create_if_missing=True)
+Namespace = pyxb.namespace.NamespaceForURI('http://teaser/0.6/material', create_if_missing=True)
 Namespace.configureCategories(['typeBinding', 'elementBinding'])
 
 def CreateFromDocument (xml_text, default_namespace=None, location_base=None):
@@ -76,7 +76,7 @@ def CreateFromDOM (node, default_namespace=None):
     return pyxb.binding.basis.element.AnyCreateFromDOM(node, default_namespace)
 
 
-# List simple type: {http://teaser.material06}floatList
+# List simple type: {http://teaser/0.6/material}floatList
 # superclasses pyxb.binding.datatypes.anySimpleType
 class floatList (pyxb.binding.basis.STD_list):
 
@@ -91,9 +91,9 @@ floatList._InitializeFacetMap()
 Namespace.addCategoryObject('typeBinding', 'floatList', floatList)
 _module_typeBindings.floatList = floatList
 
-# Complex type {http://teaser.material06}MaterialType with content type ELEMENT_ONLY
+# Complex type {http://teaser/0.6/material}MaterialType with content type ELEMENT_ONLY
 class MaterialType (pyxb.binding.basis.complexTypeDefinition):
-    """Complex type {http://teaser.material06}MaterialType with content type ELEMENT_ONLY"""
+    """Complex type {http://teaser/0.6/material}MaterialType with content type ELEMENT_ONLY"""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
@@ -103,64 +103,64 @@ class MaterialType (pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
-    # Element {http://teaser.material06}name uses Python identifier name
-    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'name'), 'name', '__httpteaser_material06_MaterialType_httpteaser_material06name', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 10, 6), )
+    # Element {http://teaser/0.6/material}name uses Python identifier name
+    __name = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'name'), 'name', '__httpteaser0_6material_MaterialType_httpteaser0_6materialname', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 10, 6), )
 
     
     name = property(__name.value, __name.set, None, None)
 
     
-    # Element {http://teaser.material06}density uses Python identifier density
-    __density = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'density'), 'density', '__httpteaser_material06_MaterialType_httpteaser_material06density', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 11, 6), )
+    # Element {http://teaser/0.6/material}density uses Python identifier density
+    __density = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'density'), 'density', '__httpteaser0_6material_MaterialType_httpteaser0_6materialdensity', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 11, 6), )
 
     
     density = property(__density.value, __density.set, None, None)
 
     
-    # Element {http://teaser.material06}thermal_conduc uses Python identifier thermal_conduc
-    __thermal_conduc = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thermal_conduc'), 'thermal_conduc', '__httpteaser_material06_MaterialType_httpteaser_material06thermal_conduc', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 12, 6), )
+    # Element {http://teaser/0.6/material}thermal_conduc uses Python identifier thermal_conduc
+    __thermal_conduc = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thermal_conduc'), 'thermal_conduc', '__httpteaser0_6material_MaterialType_httpteaser0_6materialthermal_conduc', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 12, 6), )
 
     
     thermal_conduc = property(__thermal_conduc.value, __thermal_conduc.set, None, None)
 
     
-    # Element {http://teaser.material06}heat_capac uses Python identifier heat_capac
-    __heat_capac = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'heat_capac'), 'heat_capac', '__httpteaser_material06_MaterialType_httpteaser_material06heat_capac', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 13, 6), )
+    # Element {http://teaser/0.6/material}heat_capac uses Python identifier heat_capac
+    __heat_capac = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'heat_capac'), 'heat_capac', '__httpteaser0_6material_MaterialType_httpteaser0_6materialheat_capac', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 13, 6), )
 
     
     heat_capac = property(__heat_capac.value, __heat_capac.set, None, None)
 
     
-    # Element {http://teaser.material06}solar_absorp uses Python identifier solar_absorp
-    __solar_absorp = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'solar_absorp'), 'solar_absorp', '__httpteaser_material06_MaterialType_httpteaser_material06solar_absorp', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 14, 6), )
+    # Element {http://teaser/0.6/material}solar_absorp uses Python identifier solar_absorp
+    __solar_absorp = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'solar_absorp'), 'solar_absorp', '__httpteaser0_6material_MaterialType_httpteaser0_6materialsolar_absorp', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 14, 6), )
 
     
     solar_absorp = property(__solar_absorp.value, __solar_absorp.set, None, None)
 
     
-    # Element {http://teaser.material06}ir_emissivity uses Python identifier ir_emissivity
-    __ir_emissivity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ir_emissivity'), 'ir_emissivity', '__httpteaser_material06_MaterialType_httpteaser_material06ir_emissivity', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 15, 6), )
+    # Element {http://teaser/0.6/material}ir_emissivity uses Python identifier ir_emissivity
+    __ir_emissivity = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'ir_emissivity'), 'ir_emissivity', '__httpteaser0_6material_MaterialType_httpteaser0_6materialir_emissivity', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 15, 6), )
 
     
     ir_emissivity = property(__ir_emissivity.value, __ir_emissivity.set, None, None)
 
     
-    # Element {http://teaser.material06}thickness_default uses Python identifier thickness_default
-    __thickness_default = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thickness_default'), 'thickness_default', '__httpteaser_material06_MaterialType_httpteaser_material06thickness_default', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 16, 6), )
+    # Element {http://teaser/0.6/material}thickness_default uses Python identifier thickness_default
+    __thickness_default = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thickness_default'), 'thickness_default', '__httpteaser0_6material_MaterialType_httpteaser0_6materialthickness_default', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 16, 6), )
 
     
     thickness_default = property(__thickness_default.value, __thickness_default.set, None, None)
 
     
-    # Element {http://teaser.material06}thickness_list uses Python identifier thickness_list
-    __thickness_list = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thickness_list'), 'thickness_list', '__httpteaser_material06_MaterialType_httpteaser_material06thickness_list', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 17, 6), )
+    # Element {http://teaser/0.6/material}thickness_list uses Python identifier thickness_list
+    __thickness_list = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thickness_list'), 'thickness_list', '__httpteaser0_6material_MaterialType_httpteaser0_6materialthickness_list', False, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 17, 6), )
 
     
     thickness_list = property(__thickness_list.value, __thickness_list.set, None, None)
 
     
     # Attribute material_id uses Python identifier material_id
-    __material_id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'material_id'), 'material_id', '__httpteaser_material06_MaterialType_material_id', pyxb.binding.datatypes.string)
+    __material_id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'material_id'), 'material_id', '__httpteaser0_6material_MaterialType_material_id', pyxb.binding.datatypes.string)
     __material_id._DeclarationLocation = pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 8, 1)
     __material_id._UseLocation = pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 8, 1)
     
@@ -183,9 +183,9 @@ _module_typeBindings.MaterialType = MaterialType
 Namespace.addCategoryObject('typeBinding', 'MaterialType', MaterialType)
 
 
-# Complex type {http://teaser.material06}MaterialTemplatesType with content type ELEMENT_ONLY
+# Complex type {http://teaser/0.6/material}MaterialTemplatesType with content type ELEMENT_ONLY
 class MaterialTemplatesType (pyxb.binding.basis.complexTypeDefinition):
-    """Complex type {http://teaser.material06}MaterialTemplatesType with content type ELEMENT_ONLY"""
+    """Complex type {http://teaser/0.6/material}MaterialTemplatesType with content type ELEMENT_ONLY"""
     _TypeDefinition = None
     _ContentTypeTag = pyxb.binding.basis.complexTypeDefinition._CT_ELEMENT_ONLY
     _Abstract = False
@@ -195,15 +195,15 @@ class MaterialTemplatesType (pyxb.binding.basis.complexTypeDefinition):
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
     
-    # Element {http://teaser.material06}Material uses Python identifier Material
-    __Material = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Material'), 'Material', '__httpteaser_material06_MaterialTemplatesType_httpteaser_material06Material', True, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 23, 6), )
+    # Element {http://teaser/0.6/material}Material uses Python identifier Material
+    __Material = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Material'), 'Material', '__httpteaser0_6material_MaterialTemplatesType_httpteaser0_6materialMaterial', True, pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 23, 6), )
 
     
     Material = property(__Material.value, __Material.set, None, None)
 
     
     # Attribute version uses Python identifier version
-    __version = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'version'), 'version', '__httpteaser_material06_MaterialTemplatesType_version', pyxb.binding.datatypes.string)
+    __version = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'version'), 'version', '__httpteaser0_6material_MaterialTemplatesType_version', pyxb.binding.datatypes.string)
     __version._DeclarationLocation = pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 21, 4)
     __version._UseLocation = pyxb.utils.utility.Location('D:\\\\GIT\\\\TEASER\\\\teaser\\\\data\\\\bindings\\\\schemas\\\\MaterialTemplates.xsd', 21, 4)
     
