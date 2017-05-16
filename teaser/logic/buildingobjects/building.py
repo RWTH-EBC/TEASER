@@ -270,13 +270,31 @@ class Building(object):
         for zone in self.thermal_zones:
             for wall in zone.outer_walls:
                 if wall.orientation == orientation:
-                    wall.area = ((new_area / self.net_leased_area) * zone.area)
+                    wall.area = (
+                        ((new_area / self.net_leased_area) * zone.area) /
+                        sum(count.orientation == orientation for count in
+                            zone.outer_walls))
+
             for roof in zone.rooftops:
                 if roof.orientation == orientation:
-                    roof.area = ((new_area / self.net_leased_area) * zone.area)
+                    roof.area = (
+                        ((new_area / self.net_leased_area) * zone.area) /
+                        sum(count.orientation == orientation for count in
+                            zone.rooftops))
+
             for ground in zone.ground_floors:
                 if ground.orientation == orientation:
-                    ground.area = ((new_area / self.net_leased_area) * zone.area)
+                    ground.area = (
+                        ((new_area / self.net_leased_area) * zone.area) /
+                        sum(count.orientation == orientation for count in
+                            zone.ground_floors))
+
+            for door in zone.doors:
+                if door.orientation == orientation:
+                    door.area = (
+                        ((new_area / self.net_leased_area) * zone.area) /
+                        sum(count.orientation == orientation for count in
+                            zone.doors))
 
     def set_window_area(
             self,
@@ -298,7 +316,10 @@ class Building(object):
         for zone in self.thermal_zones:
             for win in zone.windows:
                 if win.orientation == orientation:
-                    win.area = ((new_area / self.net_leased_area) * zone.area)
+                    win.area = (
+                        ((new_area / self.net_leased_area) * zone.area) /
+                        sum(count.orientation == orientation for count in
+                            zone.windows))
 
     def get_outer_wall_area(self, orientation):
         """Get aggregated wall area of one orientation

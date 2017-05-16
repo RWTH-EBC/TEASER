@@ -63,6 +63,23 @@ def load_type_element(element,
                                     pyxb_class=pyxb_layer,
                                     data_class=data_class)
 
+    if type(element).__name__ == 'Door':
+
+        for out_wall in element_binding.Door:
+            if out_wall.building_age_group[0] <= year <= \
+                    out_wall.building_age_group[1] and \
+                    out_wall.construction_type == construction:
+                _set_basic_data(element=element,
+                                pyxb_class=out_wall)
+                for pyxb_layer in out_wall.Layers.layer:
+
+                    layer = Layer(element)
+                    material = Material(layer)
+                    _set_layer_data(material=material,
+                                    layer=layer,
+                                    pyxb_class=pyxb_layer,
+                                    data_class=data_class)
+
     elif type(element).__name__ == 'InnerWall':
 
         for in_wall in element_binding.InnerWall:
@@ -189,7 +206,12 @@ def _set_layer_data(material, layer, pyxb_class, data_class):
     layer.thickness = pyxb_class.thickness
     layer.id = pyxb_class.id
 
-    if data_class.element_bind.version == "0.4":
+    material.name = "test"
+    material.density = 100
+    material.thermal_conduc = 100
+    material.heat_capac = 100
+
+    if float(data_class.element_bind.version) >= 0.4:
         mat_input.load_material_id(material,
                                    pyxb_class.material.material_id,
                                    data_class)
@@ -219,7 +241,9 @@ def _set_basic_data(element, pyxb_class):
     element.inner_convection = pyxb_class.inner_convection
 
     if type(element).__name__ == 'OuterWall' or \
-            type(element).__name__ == 'Rooftop':
+            type(element).__name__ == 'Rooftop' or \
+            type(element).__name__ == 'Door':
+
         element.inner_radiation = pyxb_class.inner_radiation
         element.inner_convection = pyxb_class.inner_convection
         element.outer_radiation = pyxb_class.outer_radiation

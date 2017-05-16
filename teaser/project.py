@@ -30,6 +30,14 @@ from teaser.logic.archetypebuildings.urbanrenet.est6 import EST6
 from teaser.logic.archetypebuildings.urbanrenet.est7 import EST7
 from teaser.logic.archetypebuildings.urbanrenet.est8a import EST8a
 from teaser.logic.archetypebuildings.urbanrenet.est8b import EST8b
+from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import \
+    SingleFamilyHouse
+from teaser.logic.archetypebuildings.tabula.de.terracedhouse import \
+    TerracedHouse
+from teaser.logic.archetypebuildings.tabula.de.multifamilyhouse import \
+    MultiFamilyHouse
+from teaser.logic.archetypebuildings.tabula.de.apartmentblock import \
+    ApartmentBlock
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
     SingleFamilyDwelling
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
@@ -50,7 +58,9 @@ class Project(object):
     ----------
     load_data : boolean
         boolean if data bases for materials, type elements and use conditions
-        should be loaded (default = True)
+        should be loaded. default = False but will be automatically loaded
+        once you add a archetype building. For building generation from
+        scratch, set to True
 
     Attributes
     ----------
@@ -78,7 +88,7 @@ class Project(object):
         used library (AixLib and IBPSA are supported)
     """
 
-    def __init__(self, load_data=True):
+    def __init__(self, load_data=False):
         """Constructor of Project Class.
         """
         self._name = "Project"
@@ -453,10 +463,11 @@ class Project(object):
         type_bldg : Instance of SingleFamilyDwelling()
         """
 
-        ass_error_method = "only 'iwu' and 'urbanrenet' are valid methods"\
-            "for residential archetype generation"
+        ass_error_method = "only'tabula_de', 'iwu' and 'urbanrenet' " \
+                           "are valid methods for residential archetype " \
+                           "generation"
 
-        assert method in ['iwu', 'urbanrenet'], ass_error_method
+        assert method in ['tabula_de', 'iwu', 'urbanrenet'], ass_error_method
 
         ass_error_apart = "The keyword number_of_apartmens does not have any " \
                           "effect on archetype generation for 'iwu', see" \
@@ -465,7 +476,72 @@ class Project(object):
         if method == 'iwu' and number_of_apartments is not None:
             warnings.warn(ass_error_apart)
 
-        if method == 'iwu':
+        if method == 'tabula_de':
+
+            if self.data is None:
+                self.data = DataClass(used_statistic=method)
+
+            if usage == 'single_family_house':
+
+                type_bldg = SingleFamilyHouse(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'terraced_house':
+
+                type_bldg = TerracedHouse(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'multi_family_house':
+
+                type_bldg = MultiFamilyHouse(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'apartment_block':
+
+                type_bldg = ApartmentBlock(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+
+                type_bldg.generate_archetype()
+                return type_bldg
+
+        elif method == 'iwu':
 
             ass_error_usage_iwu = "only 'single_family_dewlling' is a valid " \
                                   "usage for iwu archetype method"
