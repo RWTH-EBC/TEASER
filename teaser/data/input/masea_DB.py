@@ -108,6 +108,7 @@ for xml_file in os.listdir(path_to_DB):
     df_list = df.at[material_name_masea, 'Schichtdicken']
     if type(df_list) == float and df_list == df_list:
         thickness_list = [df_list]
+        material.thickness_list = thickness_list
     elif type(df_list) == str:
         thickness_list = df_list.split(',')
         material.thickness_list = list(map(float, thickness_list))

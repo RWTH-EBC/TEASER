@@ -1761,25 +1761,6 @@
 	</Window>
 	<Window>
 		<building_age_group>1995 2015</building_age_group>
-		<construction_type>EnEv</construction_type>
-		<inner_convection>2.7</inner_convection>
-		<inner_radiation>5.0</inner_radiation>
-		<outer_convection>20.0</outer_convection>
-		<outer_radiation>5.0</outer_radiation>
-		<g_value>0.6</g_value>
-		<a_conv>0.03</a_conv>
-		<shading_g_total>1.0</shading_g_total>
-		<shading_max_irr>100.0</shading_max_irr>
-		<Layers>
-			<layer>
-				<id>1</id>
-				<thickness>0.024</thickness>
-				<material material_id="0abbb19f-83ff-11e6-986f-2cd444b2e704">Glas1995_2015EnEv</material>
-			</layer>
-		</Layers>
-	</Window>
-	<Window>
-		<building_age_group>1995 2015</building_age_group>
 		<construction_type>Alu- oder Stahlfenster, Isolierverglasung</construction_type>
 		<inner_convection>2.7</inner_convection>
 		<inner_radiation>5.0</inner_radiation>

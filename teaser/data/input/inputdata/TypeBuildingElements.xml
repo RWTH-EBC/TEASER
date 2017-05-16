@@ -11,17 +11,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.3</elements:thickness>
-				<elements:material material_id="76c62ff4-3a35-11e7-96d7-901b0e0421f9">solid_brick_k</elements:material>
+				<elements:material material_id="5e1eefa4-3a43-11e7-a5cf-2cd444b2e704">solid_brick_k</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="bf0252db-3a3a-11e7-a4a0-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -36,17 +36,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="bf044eb6-3a3a-11e7-b99c-2cd444b2e704"></elements:material>
+				<elements:material material_id="33d4c37a-3a43-11e7-a293-2cd444b2e704">clay_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="495b229a-3a35-11e7-b43e-901b0e0421f9">fibrous_loam_1200</elements:material>
+				<elements:material material_id="266228a4-3a43-11e7-acde-2cd444b2e704">fibrous_loam_1200</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="bf0475c9-3a3a-11e7-b7a6-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -61,17 +61,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.3</elements:thickness>
-				<elements:material material_id="76c62ff4-3a35-11e7-96d7-901b0e0421f9">solid_brick_k</elements:material>
+				<elements:material material_id="5e1eefa4-3a43-11e7-a5cf-2cd444b2e704">solid_brick_k</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="bf06e6d9-3a3a-11e7-ab8c-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -86,17 +86,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="bf0930d8-3a3a-11e7-9ae9-2cd444b2e704"></elements:material>
+				<elements:material material_id="33d4c37a-3a43-11e7-a293-2cd444b2e704">clay_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="495b229a-3a35-11e7-b43e-901b0e0421f9">fibrous_loam_1200</elements:material>
+				<elements:material material_id="266228a4-3a43-11e7-acde-2cd444b2e704">fibrous_loam_1200</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="bf097ef8-3a3a-11e7-a2b5-2cd444b2e704"></elements:material>
+				<elements:material material_id="33d4c37a-3a43-11e7-a293-2cd444b2e704">clay_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -111,17 +111,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.3</elements:thickness>
-				<elements:material material_id="712d6e1a-3a35-11e7-87c8-901b0e0421f9">hollow_CMU_Vermiculit_1200</elements:material>
+				<elements:material material_id="5751bba2-3a43-11e7-89db-2cd444b2e704">hollow_CMU_Vermiculit_1200</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="bf0c3e2d-3a3a-11e7-aa90-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -136,17 +136,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="69f33466-3a35-11e7-9db2-901b0e0421f9">fibreboard</elements:material>
+				<elements:material material_id="4eb565fa-3a43-11e7-a413-2cd444b2e704">fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="559b6d3a-3a35-11e7-bd1e-901b0e0421f9">mineral_wool_040</elements:material>
+				<elements:material material_id="35d01e70-3a43-11e7-a6cf-2cd444b2e704">mineral_wool_040</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bf0f7291-3a3a-11e7-9ca6-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -161,17 +161,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.175</elements:thickness>
-				<elements:material material_id="bf13915c-3a3a-11e7-8447-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.08</elements:thickness>
-				<elements:material material_id="bf13df7e-3a3a-11e7-93c1-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -186,17 +186,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="69f33466-3a35-11e7-9db2-901b0e0421f9">fibreboard</elements:material>
+				<elements:material material_id="4eb565fa-3a43-11e7-a413-2cd444b2e704">fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.06</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bf18e8ae-3a3a-11e7-9ea4-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -211,17 +211,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.175</elements:thickness>
-				<elements:material material_id="bf1d0778-3a3a-11e7-9a87-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.08</elements:thickness>
-				<elements:material material_id="bf1d2e8b-3a3a-11e7-bbb5-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -236,17 +236,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.005</elements:thickness>
-				<elements:material material_id="8253dcf4-3a35-11e7-b07c-901b0e0421f9">aluminium</elements:material>
+				<elements:material material_id="6bd7d77e-3a43-11e7-8488-2cd444b2e704">aluminium</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.07</elements:thickness>
-				<elements:material material_id="559b6d3a-3a35-11e7-bd1e-901b0e0421f9">mineral_wool_040</elements:material>
+				<elements:material material_id="35d01e70-3a43-11e7-a6cf-2cd444b2e704">mineral_wool_040</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.005</elements:thickness>
-				<elements:material material_id="8253dcf4-3a35-11e7-b07c-901b0e0421f9">aluminium</elements:material>
+				<elements:material material_id="6bd7d77e-3a43-11e7-8488-2cd444b2e704">aluminium</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -261,17 +261,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.175</elements:thickness>
-				<elements:material material_id="bf285264-3a3a-11e7-ac16-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.06</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="bf287975-3a3a-11e7-9cda-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -286,17 +286,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.005</elements:thickness>
-				<elements:material material_id="8253dcf4-3a35-11e7-b07c-901b0e0421f9">aluminium</elements:material>
+				<elements:material material_id="6bd7d77e-3a43-11e7-8488-2cd444b2e704">aluminium</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.09</elements:thickness>
-				<elements:material material_id="559b6d3a-3a35-11e7-bd1e-901b0e0421f9">mineral_wool_040</elements:material>
+				<elements:material material_id="35d01e70-3a43-11e7-a6cf-2cd444b2e704">mineral_wool_040</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.005</elements:thickness>
-				<elements:material material_id="8253dcf4-3a35-11e7-b07c-901b0e0421f9">aluminium</elements:material>
+				<elements:material material_id="6bd7d77e-3a43-11e7-8488-2cd444b2e704">aluminium</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -311,12 +311,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.175</elements:thickness>
-				<elements:material material_id="bf341280-3a3a-11e7-ac57-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.07</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -331,22 +331,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.0125</elements:thickness>
-				<elements:material material_id="49d115e8-3a35-11e7-806c-901b0e0421f9">plasterboard</elements:material>
+				<elements:material material_id="27068cc0-3a43-11e7-bc9e-2cd444b2e704">plasterboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.0</elements:thickness>
-				<elements:material material_id="bf3b65b1-3a3a-11e7-8c60-2cd444b2e704"></elements:material>
+				<elements:material material_id="231edea2-3a48-11e7-a563-2cd444b2e704"></elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.1</elements:thickness>
-				<elements:material material_id="bf3b8cc1-3a3a-11e7-97ef-2cd444b2e704"></elements:material>
+				<elements:material material_id="231f05b4-3a48-11e7-ad5e-2cd444b2e704"></elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.0</elements:thickness>
-				<elements:material material_id="bf3b8cc0-3a3a-11e7-bc35-2cd444b2e704"></elements:material>
+				<elements:material material_id="231edea3-3a48-11e7-9ac9-2cd444b2e704"></elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -359,17 +359,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="76c62ff4-3a35-11e7-96d7-901b0e0421f9">solid_brick_k</elements:material>
+				<elements:material material_id="5e1eefa4-3a43-11e7-a5cf-2cd444b2e704">solid_brick_k</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -382,17 +382,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="bf4a8142-3a3a-11e7-b04b-2cd444b2e704"></elements:material>
+				<elements:material material_id="33d4c37a-3a43-11e7-a293-2cd444b2e704">clay_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.1</elements:thickness>
-				<elements:material material_id="495b229a-3a35-11e7-b43e-901b0e0421f9">fibrous_loam_1200</elements:material>
+				<elements:material material_id="266228a4-3a43-11e7-acde-2cd444b2e704">fibrous_loam_1200</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="bf4aa855-3a3a-11e7-805b-2cd444b2e704"></elements:material>
+				<elements:material material_id="33d4c37a-3a43-11e7-a293-2cd444b2e704">clay_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -405,17 +405,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="76c62ff4-3a35-11e7-96d7-901b0e0421f9">solid_brick_k</elements:material>
+				<elements:material material_id="5e1eefa4-3a43-11e7-a5cf-2cd444b2e704">solid_brick_k</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -428,17 +428,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="bf59c3e6-3a3a-11e7-a6de-2cd444b2e704"></elements:material>
+				<elements:material material_id="33d4c37a-3a43-11e7-a293-2cd444b2e704">clay_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.1</elements:thickness>
-				<elements:material material_id="495b229a-3a35-11e7-b43e-901b0e0421f9">fibrous_loam_1200</elements:material>
+				<elements:material material_id="266228a4-3a43-11e7-acde-2cd444b2e704">fibrous_loam_1200</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="bf59eaf8-3a3a-11e7-aaa6-2cd444b2e704"></elements:material>
+				<elements:material material_id="33d4c37a-3a43-11e7-a293-2cd444b2e704">clay_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -451,17 +451,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="712d6e1a-3a35-11e7-87c8-901b0e0421f9">hollow_CMU_Vermiculit_1200</elements:material>
+				<elements:material material_id="5751bba2-3a43-11e7-89db-2cd444b2e704">hollow_CMU_Vermiculit_1200</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -474,17 +474,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="712d6e1a-3a35-11e7-87c8-901b0e0421f9">hollow_CMU_Vermiculit_1200</elements:material>
+				<elements:material material_id="5751bba2-3a43-11e7-89db-2cd444b2e704">hollow_CMU_Vermiculit_1200</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -497,17 +497,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bf767464-3a3a-11e7-a260-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.1</elements:thickness>
-				<elements:material material_id="bf769b74-3a3a-11e7-b019-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bf769b75-3a3a-11e7-bb3d-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -520,22 +520,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bf80add8-3a3a-11e7-9c00-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="69f33466-3a35-11e7-9db2-901b0e0421f9">fibreboard</elements:material>
+				<elements:material material_id="4eb565fa-3a43-11e7-a413-2cd444b2e704">fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.05</elements:thickness>
-				<elements:material material_id="830c7d2c-3a35-11e7-b6ca-901b0e0421f9">air</elements:material>
+				<elements:material material_id="6cb62e70-3a43-11e7-a790-2cd444b2e704">air</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bf80fbf8-3a3a-11e7-b6ba-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -548,17 +548,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bf8a4b06-3a3a-11e7-88fe-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="4b9a161a-3a35-11e7-b8a2-901b0e0421f9">vertical_core_brick_700</elements:material>
+				<elements:material material_id="291e6c06-3a43-11e7-ac4a-2cd444b2e704">vertical_core_brick_700</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bf8a9926-3a3a-11e7-b90f-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -571,17 +571,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.0125</elements:thickness>
-				<elements:material material_id="49d115e8-3a35-11e7-806c-901b0e0421f9">plasterboard</elements:material>
+				<elements:material material_id="27068cc0-3a43-11e7-bc9e-2cd444b2e704">plasterboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.07</elements:thickness>
-				<elements:material material_id="559b6d3a-3a35-11e7-bd1e-901b0e0421f9">mineral_wool_040</elements:material>
+				<elements:material material_id="35d01e70-3a43-11e7-a6cf-2cd444b2e704">mineral_wool_040</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.0125</elements:thickness>
-				<elements:material material_id="49d115e8-3a35-11e7-806c-901b0e0421f9">plasterboard</elements:material>
+				<elements:material material_id="27068cc0-3a43-11e7-bc9e-2cd444b2e704">plasterboard</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -594,17 +594,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bfa01d86-3a3a-11e7-b5dd-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="4b9a161a-3a35-11e7-b8a2-901b0e0421f9">vertical_core_brick_700</elements:material>
+				<elements:material material_id="291e6c06-3a43-11e7-ac4a-2cd444b2e704">vertical_core_brick_700</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bfa04495-3a3a-11e7-8f1b-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -617,17 +617,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.0125</elements:thickness>
-				<elements:material material_id="49d115e8-3a35-11e7-806c-901b0e0421f9">plasterboard</elements:material>
+				<elements:material material_id="27068cc0-3a43-11e7-bc9e-2cd444b2e704">plasterboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.07</elements:thickness>
-				<elements:material material_id="559b6d3a-3a35-11e7-bd1e-901b0e0421f9">mineral_wool_040</elements:material>
+				<elements:material material_id="35d01e70-3a43-11e7-a6cf-2cd444b2e704">mineral_wool_040</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.0125</elements:thickness>
-				<elements:material material_id="49d115e8-3a35-11e7-806c-901b0e0421f9">plasterboard</elements:material>
+				<elements:material material_id="27068cc0-3a43-11e7-bc9e-2cd444b2e704">plasterboard</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -640,17 +640,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bfb7017a-3a3a-11e7-ace3-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="4b9a161a-3a35-11e7-b8a2-901b0e0421f9">vertical_core_brick_700</elements:material>
+				<elements:material material_id="291e6c06-3a43-11e7-ac4a-2cd444b2e704">vertical_core_brick_700</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="bfb7288b-3a3a-11e7-97f6-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -663,17 +663,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.0125</elements:thickness>
-				<elements:material material_id="49d115e8-3a35-11e7-806c-901b0e0421f9">plasterboard</elements:material>
+				<elements:material material_id="27068cc0-3a43-11e7-bc9e-2cd444b2e704">plasterboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.07</elements:thickness>
-				<elements:material material_id="559b6d3a-3a35-11e7-bd1e-901b0e0421f9">mineral_wool_040</elements:material>
+				<elements:material material_id="35d01e70-3a43-11e7-a6cf-2cd444b2e704">mineral_wool_040</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.0125</elements:thickness>
-				<elements:material material_id="49d115e8-3a35-11e7-806c-901b0e0421f9">plasterboard</elements:material>
+				<elements:material material_id="27068cc0-3a43-11e7-bc9e-2cd444b2e704">plasterboard</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:InnerWall>
@@ -688,12 +688,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c1eb550c-3a3a-11e7-bb23-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -708,12 +708,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.025</elements:thickness>
-				<elements:material material_id="497a917a-3a35-11e7-92fa-901b0e0421f9">spruces_longitudinal</elements:material>
+				<elements:material material_id="26978852-3a43-11e7-ad37-2cd444b2e704">spruces_longitudinal</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="c20434de-3a3a-11e7-a255-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -728,12 +728,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c21bb51a-3a3a-11e7-99e5-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -748,17 +748,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="c2355840-3a3a-11e7-9b57-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.025</elements:thickness>
-				<elements:material material_id="4de899f8-3a35-11e7-b329-901b0e0421f9">wood_wool_board_gypsum_420</elements:material>
+				<elements:material material_id="2be841de-3a43-11e7-9a93-2cd444b2e704">wood_wool_board_gypsum_420</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.025</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -773,12 +773,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c24e3814-3a3a-11e7-8cb0-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -793,17 +793,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="c2678d1a-3a3a-11e7-b30b-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.025</elements:thickness>
-				<elements:material material_id="4de899f8-3a35-11e7-b329-901b0e0421f9">wood_wool_board_gypsum_420</elements:material>
+				<elements:material material_id="2be841de-3a43-11e7-9a93-2cd444b2e704">wood_wool_board_gypsum_420</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.025</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -818,17 +818,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c2806cee-3a3a-11e7-a40c-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.06</elements:thickness>
-				<elements:material material_id="6440d034-3a35-11e7-a541-901b0e0421f9">foam_glass_board_130</elements:material>
+				<elements:material material_id="48037df6-3a43-11e7-bd90-2cd444b2e704">foam_glass_board_130</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="c280bb10-3a3a-11e7-b215-2cd444b2e704"></elements:material>
+				<elements:material material_id="2f36c3b6-3a43-11e7-9a7e-2cd444b2e704">gravel_single_granular</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -843,12 +843,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.0125</elements:thickness>
-				<elements:material material_id="49d115e8-3a35-11e7-806c-901b0e0421f9">plasterboard</elements:material>
+				<elements:material material_id="27068cc0-3a43-11e7-bc9e-2cd444b2e704">plasterboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.14</elements:thickness>
-				<elements:material material_id="8346787e-3a35-11e7-b9f4-901b0e0421f9">rafters_and_insulation</elements:material>
+				<elements:material material_id="6cfc0654-3a43-11e7-8720-2cd444b2e704">rafters_and_insulation</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -863,17 +863,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c2b4ebc6-3a3a-11e7-88fd-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.07</elements:thickness>
-				<elements:material material_id="6440d034-3a35-11e7-a541-901b0e0421f9">foam_glass_board_130</elements:material>
+				<elements:material material_id="48037df6-3a43-11e7-bd90-2cd444b2e704">foam_glass_board_130</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="c2b539e6-3a3a-11e7-8ea5-2cd444b2e704"></elements:material>
+				<elements:material material_id="2f36c3b6-3a43-11e7-9a7e-2cd444b2e704">gravel_single_granular</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -888,12 +888,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="49b7254a-3a35-11e7-8c9b-901b0e0421f9">gypsum</elements:material>
+				<elements:material material_id="26ea0874-3a43-11e7-9488-2cd444b2e704">gypsum</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -908,17 +908,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c2f63c30-3a3a-11e7-a4e3-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.09</elements:thickness>
-				<elements:material material_id="6440d034-3a35-11e7-a541-901b0e0421f9">foam_glass_board_130</elements:material>
+				<elements:material material_id="48037df6-3a43-11e7-bd90-2cd444b2e704">foam_glass_board_130</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="c2f66342-3a3a-11e7-a8b4-2cd444b2e704"></elements:material>
+				<elements:material material_id="2f36c3b6-3a43-11e7-9a7e-2cd444b2e704">gravel_single_granular</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -933,17 +933,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.01</elements:thickness>
-				<elements:material material_id="c310c9c0-3a3a-11e7-840a-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.025</elements:thickness>
-				<elements:material material_id="4de899f8-3a35-11e7-b329-901b0e0421f9">wood_wool_board_gypsum_420</elements:material>
+				<elements:material material_id="2be841de-3a43-11e7-9a93-2cd444b2e704">wood_wool_board_gypsum_420</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.14</elements:thickness>
-				<elements:material material_id="4d3fafca-3a35-11e7-b432-901b0e0421f9">wood_fibreboard_light_200</elements:material>
+				<elements:material material_id="2b23145c-3a43-11e7-ad60-2cd444b2e704">wood_fibreboard_light_200</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -958,17 +958,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c32c41b4-3a3a-11e7-a820-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.12</elements:thickness>
-				<elements:material material_id="6440d034-3a35-11e7-a541-901b0e0421f9">foam_glass_board_130</elements:material>
+				<elements:material material_id="48037df6-3a43-11e7-bd90-2cd444b2e704">foam_glass_board_130</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="c32c68c6-3a3a-11e7-a637-2cd444b2e704"></elements:material>
+				<elements:material material_id="2f36c3b6-3a43-11e7-9a7e-2cd444b2e704">gravel_single_granular</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -983,17 +983,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.0125</elements:thickness>
-				<elements:material material_id="49d115e8-3a35-11e7-806c-901b0e0421f9">plasterboard</elements:material>
+				<elements:material material_id="27068cc0-3a43-11e7-bc9e-2cd444b2e704">plasterboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="559b6d3a-3a35-11e7-bd1e-901b0e0421f9">mineral_wool_040</elements:material>
+				<elements:material material_id="35d01e70-3a43-11e7-a6cf-2cd444b2e704">mineral_wool_040</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="c3494052-3a3a-11e7-aa2b-2cd444b2e704"></elements:material>
+				<elements:material material_id="2f36c3b6-3a43-11e7-9a7e-2cd444b2e704">gravel_single_granular</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -1006,12 +1006,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.05</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.18</elements:thickness>
-				<elements:material material_id="c3666601-3a3a-11e7-ae5b-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1024,22 +1024,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.16</elements:thickness>
-				<elements:material material_id="83bbf5b8-3a35-11e7-8c2a-901b0e0421f9">wooden_beams_with_air_and_clay</elements:material>
+				<elements:material material_id="6d915192-3a43-11e7-bb75-2cd444b2e704">wooden_beams_with_air_and_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="c3849d26-3a3a-11e7-a95c-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1052,12 +1052,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.05</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.18</elements:thickness>
-				<elements:material material_id="c3a3226e-3a3a-11e7-8264-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1070,22 +1070,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="83bbf5b8-3a35-11e7-8c2a-901b0e0421f9">wooden_beams_with_air_and_clay</elements:material>
+				<elements:material material_id="6d915192-3a43-11e7-bb75-2cd444b2e704">wooden_beams_with_air_and_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="c3c15994-3a3a-11e7-a2aa-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1098,12 +1098,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.18</elements:thickness>
-				<elements:material material_id="c3e02cfe-3a3a-11e7-9c8b-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1116,22 +1116,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="83bbf5b8-3a35-11e7-8c2a-901b0e0421f9">wooden_beams_with_air_and_clay</elements:material>
+				<elements:material material_id="6d915192-3a43-11e7-bb75-2cd444b2e704">wooden_beams_with_air_and_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="c3ff0069-3a3a-11e7-b293-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1144,17 +1144,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c41ff6c1-3a3a-11e7-8c49-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1167,12 +1167,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1185,17 +1185,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c46083d9-3a3a-11e7-be00-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1208,12 +1208,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1226,17 +1226,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.05</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c4ad6d51-3a3a-11e7-9ec3-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1249,22 +1249,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="83ff18ac-3a35-11e7-8dbd-901b0e0421f9">footstep_sound_insulation</elements:material>
+				<elements:material material_id="6de50a06-3a43-11e7-a3c8-2cd444b2e704">footstep_sound_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="69f33466-3a35-11e7-9db2-901b0e0421f9">fibreboard</elements:material>
+				<elements:material material_id="4eb565fa-3a43-11e7-a413-2cd444b2e704">fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1277,17 +1277,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.06</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.16</elements:thickness>
-				<elements:material material_id="c4f80cc8-3a3a-11e7-9a44-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1300,22 +1300,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="83ff18ac-3a35-11e7-8dbd-901b0e0421f9">footstep_sound_insulation</elements:material>
+				<elements:material material_id="6de50a06-3a43-11e7-a3c8-2cd444b2e704">footstep_sound_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="69f33466-3a35-11e7-9db2-901b0e0421f9">fibreboard</elements:material>
+				<elements:material material_id="4eb565fa-3a43-11e7-a413-2cd444b2e704">fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:GroundFloor>
@@ -1549,30 +1549,6 @@
 	</elements:Window>
 	<elements:Window>
 		<elements:building_age_group>1995 2015</elements:building_age_group>
-		<elements:construction_type>EnEv</elements:construction_type>
-		<elements:inner_convection>2.7</elements:inner_convection>
-		<elements:inner_radiation>5.0</elements:inner_radiation>
-		<elements:outer_convection>20.0</elements:outer_convection>
-		<elements:outer_radiation>5.0</elements:outer_radiation>
-		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.03</elements:a_conv>
-		<elements:shading_g_total>1.0</elements:shading_g_total>
-		<elements:shading_max_irr>100.0</elements:shading_max_irr>
-		<elements:Layers>
-			<elements:layer>
-				<elements:id>0</elements:id>
-				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="0abbb19f-83ff-11e6-986f-2cd444b2e704">Glas1995_2015EnEv</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>1</elements:id>
-				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="36eb3906-855e-11e6-a498-2cd444b2e704">Glas1995_2015EnEV</elements:material>
-			</elements:layer>
-		</elements:Layers>
-	</elements:Window>
-	<elements:Window>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
 		<elements:construction_type>Alu- oder Stahlfenster, Isolierverglasung</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -1628,6 +1604,25 @@
 			</elements:layer>
 		</elements:Layers>
 	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:construction_type>EnEv</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.6</elements:g_value>
+		<elements:a_conv>0.03</elements:a_conv>
+		<elements:shading_g_total>1.0</elements:shading_g_total>
+		<elements:shading_max_irr>100.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.024</elements:thickness>
+				<elements:material material_id="36eb3906-855e-11e6-a498-2cd444b2e704">Glas1995_2015EnEV</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
 	<elements:Ceiling>
 		<elements:building_age_group>0 1918</elements:building_age_group>
 		<elements:construction_type>heavy</elements:construction_type>
@@ -1637,12 +1632,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.18</elements:thickness>
-				<elements:material material_id="bfd89418-3a3a-11e7-b75f-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.05</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1655,22 +1650,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="bfe67722-3a3a-11e7-a075-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.16</elements:thickness>
-				<elements:material material_id="83bbf5b8-3a35-11e7-8c2a-901b0e0421f9">wooden_beams_with_air_and_clay</elements:material>
+				<elements:material material_id="6d915192-3a43-11e7-bb75-2cd444b2e704">wooden_beams_with_air_and_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1683,12 +1678,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.18</elements:thickness>
-				<elements:material material_id="bff3bde8-3a3a-11e7-9192-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.05</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1701,22 +1696,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="c00104ae-3a3a-11e7-aa22-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.16</elements:thickness>
-				<elements:material material_id="83bbf5b8-3a35-11e7-8c2a-901b0e0421f9">wooden_beams_with_air_and_clay</elements:material>
+				<elements:material material_id="6d915192-3a43-11e7-bb75-2cd444b2e704">wooden_beams_with_air_and_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1729,12 +1724,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.18</elements:thickness>
-				<elements:material material_id="c00e7288-3a3a-11e7-adef-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1747,22 +1742,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="c01e516e-3a3a-11e7-98fd-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="83bbf5b8-3a35-11e7-8c2a-901b0e0421f9">wooden_beams_with_air_and_clay</elements:material>
+				<elements:material material_id="6d915192-3a43-11e7-bb75-2cd444b2e704">wooden_beams_with_air_and_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1775,12 +1770,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c02e5768-3a3a-11e7-9804-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1793,17 +1788,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.0125</elements:thickness>
-				<elements:material material_id="49d115e8-3a35-11e7-806c-901b0e0421f9">plasterboard</elements:material>
+				<elements:material material_id="27068cc0-3a43-11e7-bc9e-2cd444b2e704">plasterboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1816,17 +1811,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c04e635a-3a3a-11e7-947c-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1839,12 +1834,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1857,17 +1852,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c06c9a80-3a3a-11e7-a0c4-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1880,22 +1875,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="69f33466-3a35-11e7-9db2-901b0e0421f9">fibreboard</elements:material>
+				<elements:material material_id="4eb565fa-3a43-11e7-a413-2cd444b2e704">fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="83ff18ac-3a35-11e7-8dbd-901b0e0421f9">footstep_sound_insulation</elements:material>
+				<elements:material material_id="6de50a06-3a43-11e7-a3c8-2cd444b2e704">footstep_sound_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1908,17 +1903,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.16</elements:thickness>
-				<elements:material material_id="c08fb3c6-3a3a-11e7-bccd-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.06</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1931,22 +1926,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="69f33466-3a35-11e7-9db2-901b0e0421f9">fibreboard</elements:material>
+				<elements:material material_id="4eb565fa-3a43-11e7-a413-2cd444b2e704">fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="83ff18ac-3a35-11e7-8dbd-901b0e0421f9">footstep_sound_insulation</elements:material>
+				<elements:material material_id="6de50a06-3a43-11e7-a3c8-2cd444b2e704">footstep_sound_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Ceiling>
@@ -1959,12 +1954,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.05</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.18</elements:thickness>
-				<elements:material material_id="c0b47ac8-3a3a-11e7-bcac-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -1977,22 +1972,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.16</elements:thickness>
-				<elements:material material_id="83bbf5b8-3a35-11e7-8c2a-901b0e0421f9">wooden_beams_with_air_and_clay</elements:material>
+				<elements:material material_id="6d915192-3a43-11e7-bb75-2cd444b2e704">wooden_beams_with_air_and_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="c0c8787a-3a3a-11e7-a7ec-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2005,12 +2000,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.05</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.18</elements:thickness>
-				<elements:material material_id="c0dbd9e8-3a3a-11e7-be74-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2023,22 +2018,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="83bbf5b8-3a35-11e7-8c2a-901b0e0421f9">wooden_beams_with_air_and_clay</elements:material>
+				<elements:material material_id="6d915192-3a43-11e7-bb75-2cd444b2e704">wooden_beams_with_air_and_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="c0ef6268-3a3a-11e7-bf2f-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2051,12 +2046,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.18</elements:thickness>
-				<elements:material material_id="c1022794-3a3a-11e7-b4c3-2cd444b2e704"></elements:material>
+				<elements:material material_id="249f131a-3a43-11e7-b4e6-2cd444b2e704">concrete_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2069,22 +2064,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="83bbf5b8-3a35-11e7-8c2a-901b0e0421f9">wooden_beams_with_air_and_clay</elements:material>
+				<elements:material material_id="6d915192-3a43-11e7-bb75-2cd444b2e704">wooden_beams_with_air_and_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.024</elements:thickness>
-				<elements:material material_id="4b51c27a-3a35-11e7-b403-901b0e0421f9">hardwood</elements:material>
+				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.015</elements:thickness>
-				<elements:material material_id="c1167368-3a3a-11e7-8f22-2cd444b2e704"></elements:material>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2097,12 +2092,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.3</elements:thickness>
-				<elements:material material_id="c129fbe8-3a3a-11e7-83b0-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.05</elements:thickness>
-				<elements:material material_id="6440d034-3a35-11e7-a541-901b0e0421f9">foam_glass_board_130</elements:material>
+				<elements:material material_id="48037df6-3a43-11e7-bd90-2cd444b2e704">foam_glass_board_130</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2115,17 +2110,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.0125</elements:thickness>
-				<elements:material material_id="49d115e8-3a35-11e7-806c-901b0e0421f9">plasterboard</elements:material>
+				<elements:material material_id="27068cc0-3a43-11e7-bc9e-2cd444b2e704">plasterboard</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2138,17 +2133,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c155a0e6-3a3a-11e7-9114-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2161,12 +2156,12 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="48ea867a-3a35-11e7-a958-901b0e0421f9">oak_radial</elements:material>
+				<elements:material material_id="25c7fc26-3a43-11e7-a87a-2cd444b2e704">oak_radial</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.2</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2179,17 +2174,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="c18d2d13-3a3a-11e7-90e5-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2202,22 +2197,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="83ff18ac-3a35-11e7-8dbd-901b0e0421f9">footstep_sound_insulation</elements:material>
+				<elements:material material_id="6de50a06-3a43-11e7-a3c8-2cd444b2e704">footstep_sound_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="69f33466-3a35-11e7-9db2-901b0e0421f9">fibreboard</elements:material>
+				<elements:material material_id="4eb565fa-3a43-11e7-a413-2cd444b2e704">fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2230,17 +2225,17 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.06</elements:thickness>
-				<elements:material material_id="48f38728-3a35-11e7-aa4f-901b0e0421f9">EPS_040_15</elements:material>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.16</elements:thickness>
-				<elements:material material_id="c1bb4323-3a3a-11e7-88b5-2cd444b2e704"></elements:material>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
@@ -2253,22 +2248,22 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="7e88f9a6-3a35-11e7-a420-901b0e0421f9">cement_floating_screed_2_bottom</elements:material>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="83ff18ac-3a35-11e7-8dbd-901b0e0421f9">footstep_sound_insulation</elements:material>
+				<elements:material material_id="6de50a06-3a43-11e7-a3c8-2cd444b2e704">footstep_sound_insulation</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="69f33466-3a35-11e7-9db2-901b0e0421f9">fibreboard</elements:material>
+				<elements:material material_id="4eb565fa-3a43-11e7-a413-2cd444b2e704">fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="838073c8-3a35-11e7-8b92-901b0e0421f9">wooden_beams_with_insulation</elements:material>
+				<elements:material material_id="6d473498-3a43-11e7-83d8-2cd444b2e704">wooden_beams_with_insulation</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Floor>
