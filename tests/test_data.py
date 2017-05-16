@@ -655,42 +655,66 @@ class Test_teaser(object):
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 3
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 3
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'

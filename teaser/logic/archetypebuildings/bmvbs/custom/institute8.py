@@ -127,7 +127,6 @@ class Institute8(Office):
                  office_layout=None,
                  window_layout=None,
                  construction_type=None):
-
         """Constructor of Institute8
 
         Adds an additional zone "Laboratory"

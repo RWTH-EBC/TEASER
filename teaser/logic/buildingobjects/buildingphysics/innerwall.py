@@ -3,7 +3,7 @@
 
 
 from teaser.logic.buildingobjects.buildingphysics.wall\
-     import Wall
+    import Wall
 
 
 class InnerWall(Wall):

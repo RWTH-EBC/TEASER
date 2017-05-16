@@ -4,13 +4,12 @@
 """This module holds file paths and bindings for XML data
 """
 
+import teaser.logic.utilities as utils
 import warnings
 import xml.etree.ElementTree as et
 
-import teaser.logic.utilities as utils
 
-
-class DataClass(object):
+class DataClassOld(object):
     """Class for XML data bindings
 
     This class loads all XML files with statistic or template data needed
@@ -46,10 +45,10 @@ class DataClass(object):
 
         self.element_bind = None
         self.path_tb = utils.get_full_path(
-            "data/input/inputdata/TypeBuildingElements.xml")
+            "data/input/inputdata/TypeBuildingElements_old.xml")
         self.material_bind = None
         self.path_mat = utils.get_full_path(
-            "data/input/inputdata/MaterialTemplates.xml")
+            "data/input/inputdata/MaterialTemplates_old.xml")
         self.conditions_bind = None
         self.path_uc = utils.get_full_path(
             "data/input/inputdata/UseConditions.xml")
@@ -124,13 +123,13 @@ class DataClass(object):
         """
         try:
             __xml_file_mat = open(self.path_mat, 'r+')
-            version_parse = et.parse(self.path_mat)
+            version_parse = et.parse(self.path_tb)
         except:
             __xml_file_mat = open(self.path_mat, 'w')
             version_parse = False
 
         if version_parse is False:
-            import teaser.data.bindings.v_0_6.material_bind as mat_bind
+            import teaser.data.bindings.v_0_4.material_bind as mat_bind
             self.material_bind = mat_bind.MaterialTemplates()
         elif bool(version_parse.getroot().attrib) is False:
             warnings.warn(
@@ -144,7 +143,7 @@ class DataClass(object):
             import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
             self.material_bind = mat_bind.CreateFromDocument(
                 __xml_file_mat.read())
-        elif version_parse.getroot().attrib['version'] == "0.6":
-            import teaser.data.bindings.v_0_6.material_bind as mat_bind
+        elif version_parse.getroot().attrib['version'] == "0.4":
+            import teaser.data.bindings.v_0_4.material_bind as mat_bind
             self.material_bind = mat_bind.CreateFromDocument(
                 __xml_file_mat.read())

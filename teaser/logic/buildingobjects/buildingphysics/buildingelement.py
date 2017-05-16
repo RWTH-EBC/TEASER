@@ -418,8 +418,6 @@ class BuildingElement(object):
             except ValueError:
                 print("Can't convert name to string")
 
-
-
     @property
     def year_of_retrofit(self):
         return self._year_of_retrofit

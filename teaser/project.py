@@ -462,8 +462,6 @@ class Project(object):
                           "effect on archetype generation for 'iwu', see" \
                           "docs for more information"
 
-
-
         if method == 'iwu' and number_of_apartments is not None:
             warnings.warn(ass_error_apart)
 
@@ -609,7 +607,6 @@ class Project(object):
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
-
 
             elif usage == 'est7':
 
@@ -1196,9 +1193,9 @@ class Project(object):
                         prj=self,
                         path=path)
 
-
     def export_ibpsa(
             self,
+            library='AixLib',
             internal_id=None,
             path=None):
         """Exports values to a record file for Modelica simulation
@@ -1208,6 +1205,12 @@ class Project(object):
         Parameters
         ----------
 
+        library : str
+            Used library within the framework of IBPSA library. The
+            models are identical in each library, but IBPSA Modelica library is
+            just a core set of models and should not be used standalone.
+            Valid values are 'AixLib' (default), 'Buildings',
+            'BuildingSystems' and 'IDEAS'.
         internal_id : float
             setter of a specific building which will be exported, if None then
             all buildings will be exported
@@ -1215,6 +1218,12 @@ class Project(object):
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
         """
+
+        ass_error_1 = "library for IBPSA export has to be 'AixLib', " \
+                      "'Buildings', 'BuildingSystems' or 'IDEAS'"
+
+        assert library in ['AixLib', 'Buildings', 'BuildingSystems',
+                           'IDEAS'], ass_error_1
 
         if path is None:
             path = os.path.join(
@@ -1231,7 +1240,8 @@ class Project(object):
             ibpsa_output.export_ibpsa(
                 buildings=self.buildings,
                 prj=self,
-                path=path)
+                path=path,
+                library=library)
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
@@ -1239,7 +1249,6 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
-
 
     def export_parameters_txt(self, path=None):
         """Exports parameters of all buildings in a readable text file

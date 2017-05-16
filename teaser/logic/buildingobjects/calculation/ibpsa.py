@@ -7,8 +7,8 @@
 import scipy.io
 import teaser.logic.utilities as utilities
 import numpy as np
-import warnings
 import os
+
 
 class IBPSA(object):
     """IBPSA Class
@@ -23,9 +23,18 @@ class IBPSA(object):
     parent: Building()
         The parent class of this object, the Building the attributes are
         calculated for. (default: None)
+
+    Attributes
+    ----------
+
+    file_internal_gains : str
+        Filename for internal gains file
+    version : dict
+        Dictionary with supportes library and their version number
     consider_heat_capacity : bool
         decides whether air capacity is considered or not for all thermal
         zones in the building
+
 
     """
 
@@ -33,7 +42,8 @@ class IBPSA(object):
 
         self.parent = parent
         self.file_internal_gains = "InternalGains_" + self.parent.name + ".mat"
-        self.version = "1.0.0"
+        self.version = {'AixLib': '0.4.0', 'Buildings': '4.0.0',
+                        'BuildingSystems': '2.0.0-beta', 'IDEAS': '1.0.0'}
         self.consider_heat_capacity = True
 
     @staticmethod
@@ -122,15 +132,15 @@ class IBPSA(object):
 
         if time_line is None:
             duration = len(zone.use_conditions.profile_persons) * \
-                        3600
+                3600
             time_line = self.create_profile(duration_profile=duration)
 
         ass_error_1 = "time line and input have to have the same length"
 
-        assert len(time_line)-1 == len(
+        assert len(time_line) - 1 == len(
             zone.use_conditions.profile_persons), \
             (ass_error_1 + ",profile_persons")
-        assert len(time_line)-1 == len(
+        assert len(time_line) - 1 == len(
             zone.use_conditions.profile_machines), \
             (ass_error_1 + ",profile_machines")
 
@@ -140,15 +150,15 @@ class IBPSA(object):
                 time.append(0)
                 time.append(0)
             else:
-                time.append(zone.use_conditions.profile_persons[i-1] *
+                time.append(zone.use_conditions.profile_persons[i - 1] *
                             zone.use_conditions.persons *
                             zone.use_conditions.activity_type_persons * 50 *
                             (1 - zone.use_conditions.ratio_conv_rad_persons))
                 time.append(zone.use_conditions.profile_persons[i - 1] *
                             zone.use_conditions.persons *
-                            zone.use_conditions.activity_type_persons * 50*
+                            zone.use_conditions.activity_type_persons * 50 *
                             zone.use_conditions.ratio_conv_rad_persons)
-                time.append(zone.use_conditions.profile_machines[i-1] *
+                time.append(zone.use_conditions.profile_machines[i - 1] *
                             zone.use_conditions.machines *
                             zone.use_conditions.activity_type_machines * 50)
 
@@ -159,4 +169,3 @@ class IBPSA(object):
             mdict={'Internals': internal_boundary},
             appendmat=False,
             format='4')
-
