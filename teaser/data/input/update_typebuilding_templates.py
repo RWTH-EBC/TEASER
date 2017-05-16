@@ -30,7 +30,13 @@ elem_tree = elem_xml.getroot()
 dataclass_new = DataClass()
 
 # load old MaterialTemplates
-dataclass_old = DataClassOld()
+dataclass_old = DataClass()
+dataclass_old.path_mat = utils.get_full_path(
+            "data/input/inputdata/MaterialTemplates_old.xml")
+dataclass_old.path_tb = utils.get_full_path(
+            "data/input/inputdata/TypeBuildingElements_old.xml")
+dataclass_old.load_tb_binding()
+dataclass_old.load_mat_binding()
 
 # read TypeBuildingElements XML and list all elements
 

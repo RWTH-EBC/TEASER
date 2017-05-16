@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
-<materials:MaterialTemplates version="0.4" xmlns:materials="http://teaser.material06">
+<materials:MaterialTemplates version="0.6"
+							 xmlns:materials="http://teaser/0.6/material">
 	<materials:Material material_id="47c651ca-3a35-11e7-9e6a-901b0e0421f9">
 		<materials:name>anti_must_plaster</materials:name>
 		<materials:density>465.4663</materials:density>

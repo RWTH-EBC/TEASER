@@ -153,6 +153,8 @@ class DataClass(object):
             self.conditions_bind = uc_bind.CreateFromDocument(
                 __xml_file_uc.read())
         elif version_parse.getroot().attrib['version'] == "0.4":
+            warnings.warn("You are using an old version of use condition data "
+                          "base XML file")
             import teaser.data.bindings.v_0_4.boundaryconditions_bind as uc_bind
             self.conditions_bind = uc_bind.CreateFromDocument(
                 __xml_file_uc.read())
@@ -187,6 +189,8 @@ class DataClass(object):
             self.material_bind = mat_bind.CreateFromDocument(
                 __xml_file_mat.read())
         elif version_parse.getroot().attrib['version'] == "0.4":
+            warnings.warn(
+                "You are using an old version of material data base XML file")
             import teaser.data.bindings.v_0_4.material_bind as mat_bind
             self.material_bind = mat_bind.CreateFromDocument(
                 __xml_file_mat.read())
