@@ -4,6 +4,7 @@ import lxml.etree as et
 import os
 import pandas as pd
 
+# after running this script change version in MaterialTemplates.xml from 0.4 to 0.6
 dataclass = DataClass()
 
 path_to_DB = 'N:\Forschung\EBC0301_PtJ_Living_Roadmap_mfu\Students\jsc-tbe\Materialdatenbank\masea-daten'
@@ -47,11 +48,22 @@ for xml_file in os.listdir(path_to_DB):
 
     for elem in phys_quant:
         if elem.text == 'Rohdichte':
-            material.density = elem.getparent().getparent().getparent().attrib['value']
+            # skip material, if value is missing (negative value)
+            if float(elem.getparent().getparent().getparent().attrib['value']) < 0:
+                continue
+            material.density = float(elem.getparent().getparent().getparent().attrib['value'])
+
         elif elem.text == 'Spezifische Wärmekapazität':
-            material.heat_capac = elem.getparent().getparent().getparent().attrib['value']
+            # skip material, if value is missing (negative value)
+            if float(elem.getparent().getparent().getparent().attrib['value']) < 0:
+                continue
+            material.heat_capac = float(elem.getparent().getparent().getparent().attrib['value']) / 1000
+
         elif elem.text == 'Wärmeleitfähigkeit':
-            material.thermal_conduc = elem.getparent().getparent().getparent().attrib['value']
+            # skip material, if value is missing (negative value)
+            if float(elem.getparent().getparent().getparent().attrib['value']) < 0:
+                continue
+            material.thermal_conduc = float(elem.getparent().getparent().getparent().attrib['value'])
 
     if material_tree.xpath('//Material/Name/Text')[0].text == 'Anstriche':
         material.solar_absorp = 0.5
@@ -87,12 +99,20 @@ for xml_file in os.listdir(path_to_DB):
         material.solar_absorp = 0.5
 
     # load thickness_default and thickness_list
-    material.thickness_default = df.at[material_name_masea, 'Standardschichtdicke']
-    try:
-        thickness_list = df.at[material_name_masea, 'Schichtdicken'].split(',')
-    except:
+    df_default = df.at[material_name_masea, 'Standardschichtdicke']
+    if type(df_default) == float and df_default == df_default:
+        material.thickness_default = df_default
+    else:
+        material.thickness_default = None
+
+    df_list = df.at[material_name_masea, 'Schichtdicken']
+    if type(df_list) == float and df_list == df_list:
+        thickness_list = [df_list]
+    elif type(df_list) == str:
+        thickness_list = df_list.split(',')
+        material.thickness_list = list(map(float, thickness_list))
+    else:
         thickness_list = []
-    material.thickness_list = list(map(float, thickness_list))
     material.save_material_template(dataclass)
 
 ## manual insertions ##
@@ -140,15 +160,7 @@ material.save_material_template(dataclass)
 
 # old special material combinations
 material = Material()
-material.name = 'Sparschalung'
-material.density = 600
-material.thermal_conduc = 0.13
-material.heat_capac = 1.6
-material.solar_absorp = 0.5
-material.save_material_template(dataclass)
-
-material = Material()
-material.name = 'SparrenundDaemmung'
+material.name = 'rafters_and_insulation'
 material.density = 50
 material.thermal_conduc = 0.14
 material.heat_capac = 1
@@ -156,7 +168,7 @@ material.solar_absorp = 0.4
 material.save_material_template(dataclass)
 
 material = Material()
-material.name = 'HolzbalkenmitDaemmung'
+material.name = 'wooden_beams_with_insulation'
 material.density = 50
 material.thermal_conduc = 0.12
 material.heat_capac = 1
@@ -164,23 +176,7 @@ material.solar_absorp = 0.5
 material.save_material_template(dataclass)
 
 material = Material()
-material.name = 'SparrenmitDaemmung'
-material.density = 50
-material.thermal_conduc = 0.07
-material.heat_capac = 1
-material.solar_absorp = 0.5
-material.save_material_template(dataclass)
-
-material = Material()
-material.name = 'FertigbalkenmitMineralwolleschicht'
-material.density = 105
-material.thermal_conduc = 0.05
-material.heat_capac = 1.06
-material.solar_absorp = 0.5
-material.save_material_template(dataclass)
-
-material = Material()
-material.name = 'HolzbalkenmitLuftschichtundLehmschlag'
+material.name = 'wooden_beams_with_air_and_clay'
 material.density = 736
 material.thermal_conduc = 0.7
 material.heat_capac = 1.06
@@ -188,7 +184,7 @@ material.solar_absorp = 0.5
 material.save_material_template(dataclass)
 
 material = Material()
-material.name = 'Trittschalldämmung'
+material.name = 'footstep_sound_insulation'
 material.density = 30
 material.thermal_conduc = 0.04
 material.heat_capac = 1
