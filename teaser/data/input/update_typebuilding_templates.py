@@ -3,7 +3,7 @@ import pandas as pd
 from copy import deepcopy
 import teaser.logic.utilities as utils
 from teaser.data.dataclass import DataClass
-from teaser.data.dataclass_old import DataClassOld
+#from teaser.data.dataclass_old import DataClassOld
 from teaser.logic.buildingobjects.buildingphysics.material import Material
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
