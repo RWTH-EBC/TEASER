@@ -31,7 +31,7 @@ import pyxb.binding.datatypes
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI('http://teaser.elements', create_if_missing=True)
-Namespace.configureCategories(['typeBinding', 'elementBinding'])
+Namespace.configureCategories(['typeBinding_04', 'elementBinding_04'])
 
 def CreateFromDocument (xml_text, default_namespace=None, location_base=None):
     """Parse the given XML and use the document element to create a
@@ -88,7 +88,7 @@ class integerList (pyxb.binding.basis.STD_list):
 
     _ItemType = pyxb.binding.datatypes.integer
 integerList._InitializeFacetMap()
-Namespace.addCategoryObject('typeBinding', 'integerList', integerList)
+Namespace.addCategoryObject('typeBinding_04', 'integerList', integerList)
 _module_typeBindings.integerList = integerList
 
 # Complex type {http://teaser.elements}layerType with content type ELEMENT_ONLY
@@ -102,25 +102,25 @@ class layerType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://teaser.elements}id uses Python identifier id
     __id = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'id'), 'id', '__httpteaser_elements_layerType_httpteaser_elementsid', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 7, 6), )
 
-    
+
     id = property(__id.value, __id.set, None, None)
 
-    
+
     # Element {http://teaser.elements}thickness uses Python identifier thickness
     __thickness = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'thickness'), 'thickness', '__httpteaser_elements_layerType_httpteaser_elementsthickness', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 8, 6), )
 
-    
+
     thickness = property(__thickness.value, __thickness.set, None, None)
 
-    
+
     # Element {http://teaser.elements}material uses Python identifier material
     __material = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'material'), 'material', '__httpteaser_elements_layerType_httpteaser_elementsmaterial', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 9, 6), )
 
-    
+
     material = property(__material.value, __material.set, None, None)
 
     _ElementMap.update({
@@ -129,10 +129,10 @@ class layerType (pyxb.binding.basis.complexTypeDefinition):
         __material.name() : __material
     })
     _AttributeMap.update({
-        
+
     })
 _module_typeBindings.layerType = layerType
-Namespace.addCategoryObject('typeBinding', 'layerType', layerType)
+Namespace.addCategoryObject('typeBinding_04', 'layerType', layerType)
 
 
 # Complex type [anonymous] with content type SIMPLE
@@ -146,16 +146,16 @@ class CTD_ANON (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.string
-    
+
     # Attribute material_id uses Python identifier material_id
     __material_id = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'material_id'), 'material_id', '__httpteaser_elements_CTD_ANON_material_id', pyxb.binding.datatypes.string)
     __material_id._DeclarationLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 13, 5)
     __material_id._UseLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 13, 5)
-    
+
     material_id = property(__material_id.value, __material_id.set, None, None)
 
     _ElementMap.update({
-        
+
     })
     _AttributeMap.update({
         __material_id.name() : __material_id
@@ -174,21 +174,21 @@ class LayersType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://teaser.elements}layer uses Python identifier layer
     __layer = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'layer'), 'layer', '__httpteaser_elements_LayersType_httpteaser_elementslayer', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 22, 6), )
 
-    
+
     layer = property(__layer.value, __layer.set, None, None)
 
     _ElementMap.update({
         __layer.name() : __layer
     })
     _AttributeMap.update({
-        
+
     })
 _module_typeBindings.LayersType = LayersType
-Namespace.addCategoryObject('typeBinding', 'LayersType', LayersType)
+Namespace.addCategoryObject('typeBinding_04', 'LayersType', LayersType)
 
 
 # Complex type {http://teaser.elements}OuterWallType with content type ELEMENT_ONLY
@@ -202,60 +202,60 @@ class OuterWallType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://teaser.elements}year_of_construction uses Python identifier year_of_construction
     __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'year_of_construction'), 'year_of_construction', '__httpteaser_elements_OuterWallType_httpteaser_elementsyear_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 27, 6), )
 
-    
+
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
-    
+
     # Element {http://teaser.elements}building_age_group uses Python identifier building_age_group
     __building_age_group = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'building_age_group'), 'building_age_group', '__httpteaser_elements_OuterWallType_httpteaser_elementsbuilding_age_group', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 28, 3), )
 
-    
+
     building_age_group = property(__building_age_group.value, __building_age_group.set, None, None)
 
-    
+
     # Element {http://teaser.elements}construction_type uses Python identifier construction_type
     __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'construction_type'), 'construction_type', '__httpteaser_elements_OuterWallType_httpteaser_elementsconstruction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 29, 6), )
 
-    
+
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_convection uses Python identifier inner_convection
     __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_convection'), 'inner_convection', '__httpteaser_elements_OuterWallType_httpteaser_elementsinner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 30, 6), )
 
-    
+
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_radiation uses Python identifier inner_radiation
     __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_radiation'), 'inner_radiation', '__httpteaser_elements_OuterWallType_httpteaser_elementsinner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 31, 6), )
 
-    
+
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
-    
+
     # Element {http://teaser.elements}outer_convection uses Python identifier outer_convection
     __outer_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'outer_convection'), 'outer_convection', '__httpteaser_elements_OuterWallType_httpteaser_elementsouter_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 32, 6), )
 
-    
+
     outer_convection = property(__outer_convection.value, __outer_convection.set, None, None)
 
-    
+
     # Element {http://teaser.elements}outer_radiation uses Python identifier outer_radiation
     __outer_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'outer_radiation'), 'outer_radiation', '__httpteaser_elements_OuterWallType_httpteaser_elementsouter_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 33, 6), )
 
-    
+
     outer_radiation = property(__outer_radiation.value, __outer_radiation.set, None, None)
 
-    
+
     # Element {http://teaser.elements}Layers uses Python identifier Layers
     __Layers = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Layers'), 'Layers', '__httpteaser_elements_OuterWallType_httpteaser_elementsLayers', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 34, 6), )
 
-    
+
     Layers = property(__Layers.value, __Layers.set, None, None)
 
     _ElementMap.update({
@@ -269,10 +269,10 @@ class OuterWallType (pyxb.binding.basis.complexTypeDefinition):
         __Layers.name() : __Layers
     })
     _AttributeMap.update({
-        
+
     })
 _module_typeBindings.OuterWallType = OuterWallType
-Namespace.addCategoryObject('typeBinding', 'OuterWallType', OuterWallType)
+Namespace.addCategoryObject('typeBinding_04', 'OuterWallType', OuterWallType)
 
 
 # Complex type {http://teaser.elements}InnerWallType with content type ELEMENT_ONLY
@@ -286,46 +286,46 @@ class InnerWallType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://teaser.elements}year_of_construction uses Python identifier year_of_construction
     __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'year_of_construction'), 'year_of_construction', '__httpteaser_elements_InnerWallType_httpteaser_elementsyear_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 39, 6), )
 
-    
+
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
-    
+
     # Element {http://teaser.elements}building_age_group uses Python identifier building_age_group
     __building_age_group = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'building_age_group'), 'building_age_group', '__httpteaser_elements_InnerWallType_httpteaser_elementsbuilding_age_group', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 40, 3), )
 
-    
+
     building_age_group = property(__building_age_group.value, __building_age_group.set, None, None)
 
-    
+
     # Element {http://teaser.elements}construction_type uses Python identifier construction_type
     __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'construction_type'), 'construction_type', '__httpteaser_elements_InnerWallType_httpteaser_elementsconstruction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 41, 6), )
 
-    
+
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_convection uses Python identifier inner_convection
     __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_convection'), 'inner_convection', '__httpteaser_elements_InnerWallType_httpteaser_elementsinner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 42, 6), )
 
-    
+
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_radiation uses Python identifier inner_radiation
     __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_radiation'), 'inner_radiation', '__httpteaser_elements_InnerWallType_httpteaser_elementsinner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 43, 6), )
 
-    
+
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
-    
+
     # Element {http://teaser.elements}Layers uses Python identifier Layers
     __Layers = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Layers'), 'Layers', '__httpteaser_elements_InnerWallType_httpteaser_elementsLayers', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 44, 6), )
 
-    
+
     Layers = property(__Layers.value, __Layers.set, None, None)
 
     _ElementMap.update({
@@ -337,10 +337,10 @@ class InnerWallType (pyxb.binding.basis.complexTypeDefinition):
         __Layers.name() : __Layers
     })
     _AttributeMap.update({
-        
+
     })
 _module_typeBindings.InnerWallType = InnerWallType
-Namespace.addCategoryObject('typeBinding', 'InnerWallType', InnerWallType)
+Namespace.addCategoryObject('typeBinding_04', 'InnerWallType', InnerWallType)
 
 
 # Complex type {http://teaser.elements}RooftopType with content type ELEMENT_ONLY
@@ -354,60 +354,60 @@ class RooftopType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://teaser.elements}year_of_construction uses Python identifier year_of_construction
     __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'year_of_construction'), 'year_of_construction', '__httpteaser_elements_RooftopType_httpteaser_elementsyear_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 49, 6), )
 
-    
+
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
-    
+
     # Element {http://teaser.elements}building_age_group uses Python identifier building_age_group
     __building_age_group = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'building_age_group'), 'building_age_group', '__httpteaser_elements_RooftopType_httpteaser_elementsbuilding_age_group', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 50, 3), )
 
-    
+
     building_age_group = property(__building_age_group.value, __building_age_group.set, None, None)
 
-    
+
     # Element {http://teaser.elements}construction_type uses Python identifier construction_type
     __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'construction_type'), 'construction_type', '__httpteaser_elements_RooftopType_httpteaser_elementsconstruction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 51, 6), )
 
-    
+
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_convection uses Python identifier inner_convection
     __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_convection'), 'inner_convection', '__httpteaser_elements_RooftopType_httpteaser_elementsinner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 52, 6), )
 
-    
+
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_radiation uses Python identifier inner_radiation
     __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_radiation'), 'inner_radiation', '__httpteaser_elements_RooftopType_httpteaser_elementsinner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 53, 6), )
 
-    
+
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
-    
+
     # Element {http://teaser.elements}outer_convection uses Python identifier outer_convection
     __outer_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'outer_convection'), 'outer_convection', '__httpteaser_elements_RooftopType_httpteaser_elementsouter_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 54, 6), )
 
-    
+
     outer_convection = property(__outer_convection.value, __outer_convection.set, None, None)
 
-    
+
     # Element {http://teaser.elements}outer_radiation uses Python identifier outer_radiation
     __outer_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'outer_radiation'), 'outer_radiation', '__httpteaser_elements_RooftopType_httpteaser_elementsouter_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 55, 6), )
 
-    
+
     outer_radiation = property(__outer_radiation.value, __outer_radiation.set, None, None)
 
-    
+
     # Element {http://teaser.elements}Layers uses Python identifier Layers
     __Layers = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Layers'), 'Layers', '__httpteaser_elements_RooftopType_httpteaser_elementsLayers', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 56, 6), )
 
-    
+
     Layers = property(__Layers.value, __Layers.set, None, None)
 
     _ElementMap.update({
@@ -421,10 +421,10 @@ class RooftopType (pyxb.binding.basis.complexTypeDefinition):
         __Layers.name() : __Layers
     })
     _AttributeMap.update({
-        
+
     })
 _module_typeBindings.RooftopType = RooftopType
-Namespace.addCategoryObject('typeBinding', 'RooftopType', RooftopType)
+Namespace.addCategoryObject('typeBinding_04', 'RooftopType', RooftopType)
 
 
 # Complex type {http://teaser.elements}GroundFloorType with content type ELEMENT_ONLY
@@ -438,46 +438,46 @@ class GroundFloorType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://teaser.elements}year_of_construction uses Python identifier year_of_construction
     __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'year_of_construction'), 'year_of_construction', '__httpteaser_elements_GroundFloorType_httpteaser_elementsyear_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 61, 6), )
 
-    
+
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
-    
+
     # Element {http://teaser.elements}building_age_group uses Python identifier building_age_group
     __building_age_group = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'building_age_group'), 'building_age_group', '__httpteaser_elements_GroundFloorType_httpteaser_elementsbuilding_age_group', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 62, 3), )
 
-    
+
     building_age_group = property(__building_age_group.value, __building_age_group.set, None, None)
 
-    
+
     # Element {http://teaser.elements}construction_type uses Python identifier construction_type
     __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'construction_type'), 'construction_type', '__httpteaser_elements_GroundFloorType_httpteaser_elementsconstruction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 63, 6), )
 
-    
+
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_convection uses Python identifier inner_convection
     __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_convection'), 'inner_convection', '__httpteaser_elements_GroundFloorType_httpteaser_elementsinner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 64, 6), )
 
-    
+
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_radiation uses Python identifier inner_radiation
     __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_radiation'), 'inner_radiation', '__httpteaser_elements_GroundFloorType_httpteaser_elementsinner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 65, 6), )
 
-    
+
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
-    
+
     # Element {http://teaser.elements}Layers uses Python identifier Layers
     __Layers = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Layers'), 'Layers', '__httpteaser_elements_GroundFloorType_httpteaser_elementsLayers', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 66, 6), )
 
-    
+
     Layers = property(__Layers.value, __Layers.set, None, None)
 
     _ElementMap.update({
@@ -489,10 +489,10 @@ class GroundFloorType (pyxb.binding.basis.complexTypeDefinition):
         __Layers.name() : __Layers
     })
     _AttributeMap.update({
-        
+
     })
 _module_typeBindings.GroundFloorType = GroundFloorType
-Namespace.addCategoryObject('typeBinding', 'GroundFloorType', GroundFloorType)
+Namespace.addCategoryObject('typeBinding_04', 'GroundFloorType', GroundFloorType)
 
 
 # Complex type {http://teaser.elements}WindowType with content type ELEMENT_ONLY
@@ -506,88 +506,88 @@ class WindowType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://teaser.elements}year_of_construction uses Python identifier year_of_construction
     __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'year_of_construction'), 'year_of_construction', '__httpteaser_elements_WindowType_httpteaser_elementsyear_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 71, 6), )
 
-    
+
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
-    
+
     # Element {http://teaser.elements}building_age_group uses Python identifier building_age_group
     __building_age_group = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'building_age_group'), 'building_age_group', '__httpteaser_elements_WindowType_httpteaser_elementsbuilding_age_group', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 72, 3), )
 
-    
+
     building_age_group = property(__building_age_group.value, __building_age_group.set, None, None)
 
-    
+
     # Element {http://teaser.elements}construction_type uses Python identifier construction_type
     __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'construction_type'), 'construction_type', '__httpteaser_elements_WindowType_httpteaser_elementsconstruction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 73, 6), )
 
-    
+
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_convection uses Python identifier inner_convection
     __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_convection'), 'inner_convection', '__httpteaser_elements_WindowType_httpteaser_elementsinner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 74, 6), )
 
-    
+
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_radiation uses Python identifier inner_radiation
     __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_radiation'), 'inner_radiation', '__httpteaser_elements_WindowType_httpteaser_elementsinner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 75, 6), )
 
-    
+
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
-    
+
     # Element {http://teaser.elements}outer_convection uses Python identifier outer_convection
     __outer_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'outer_convection'), 'outer_convection', '__httpteaser_elements_WindowType_httpteaser_elementsouter_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 76, 6), )
 
-    
+
     outer_convection = property(__outer_convection.value, __outer_convection.set, None, None)
 
-    
+
     # Element {http://teaser.elements}outer_radiation uses Python identifier outer_radiation
     __outer_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'outer_radiation'), 'outer_radiation', '__httpteaser_elements_WindowType_httpteaser_elementsouter_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 77, 6), )
 
-    
+
     outer_radiation = property(__outer_radiation.value, __outer_radiation.set, None, None)
 
-    
+
     # Element {http://teaser.elements}g_value uses Python identifier g_value
     __g_value = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'g_value'), 'g_value', '__httpteaser_elements_WindowType_httpteaser_elementsg_value', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 78, 6), )
 
-    
+
     g_value = property(__g_value.value, __g_value.set, None, None)
 
-    
+
     # Element {http://teaser.elements}a_conv uses Python identifier a_conv
     __a_conv = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'a_conv'), 'a_conv', '__httpteaser_elements_WindowType_httpteaser_elementsa_conv', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 79, 6), )
 
-    
+
     a_conv = property(__a_conv.value, __a_conv.set, None, None)
 
-    
+
     # Element {http://teaser.elements}shading_g_total uses Python identifier shading_g_total
     __shading_g_total = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'shading_g_total'), 'shading_g_total', '__httpteaser_elements_WindowType_httpteaser_elementsshading_g_total', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 80, 6), )
 
-    
+
     shading_g_total = property(__shading_g_total.value, __shading_g_total.set, None, None)
 
-    
+
     # Element {http://teaser.elements}shading_max_irr uses Python identifier shading_max_irr
     __shading_max_irr = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'shading_max_irr'), 'shading_max_irr', '__httpteaser_elements_WindowType_httpteaser_elementsshading_max_irr', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 81, 6), )
 
-    
+
     shading_max_irr = property(__shading_max_irr.value, __shading_max_irr.set, None, None)
 
-    
+
     # Element {http://teaser.elements}Layers uses Python identifier Layers
     __Layers = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Layers'), 'Layers', '__httpteaser_elements_WindowType_httpteaser_elementsLayers', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 82, 6), )
 
-    
+
     Layers = property(__Layers.value, __Layers.set, None, None)
 
     _ElementMap.update({
@@ -605,10 +605,10 @@ class WindowType (pyxb.binding.basis.complexTypeDefinition):
         __Layers.name() : __Layers
     })
     _AttributeMap.update({
-        
+
     })
 _module_typeBindings.WindowType = WindowType
-Namespace.addCategoryObject('typeBinding', 'WindowType', WindowType)
+Namespace.addCategoryObject('typeBinding_04', 'WindowType', WindowType)
 
 
 # Complex type {http://teaser.elements}CeilingType with content type ELEMENT_ONLY
@@ -622,46 +622,46 @@ class CeilingType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://teaser.elements}year_of_construction uses Python identifier year_of_construction
     __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'year_of_construction'), 'year_of_construction', '__httpteaser_elements_CeilingType_httpteaser_elementsyear_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 87, 6), )
 
-    
+
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
-    
+
     # Element {http://teaser.elements}building_age_group uses Python identifier building_age_group
     __building_age_group = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'building_age_group'), 'building_age_group', '__httpteaser_elements_CeilingType_httpteaser_elementsbuilding_age_group', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 88, 3), )
 
-    
+
     building_age_group = property(__building_age_group.value, __building_age_group.set, None, None)
 
-    
+
     # Element {http://teaser.elements}construction_type uses Python identifier construction_type
     __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'construction_type'), 'construction_type', '__httpteaser_elements_CeilingType_httpteaser_elementsconstruction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 89, 6), )
 
-    
+
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_convection uses Python identifier inner_convection
     __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_convection'), 'inner_convection', '__httpteaser_elements_CeilingType_httpteaser_elementsinner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 90, 6), )
 
-    
+
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_radiation uses Python identifier inner_radiation
     __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_radiation'), 'inner_radiation', '__httpteaser_elements_CeilingType_httpteaser_elementsinner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 91, 6), )
 
-    
+
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
-    
+
     # Element {http://teaser.elements}Layers uses Python identifier Layers
     __Layers = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Layers'), 'Layers', '__httpteaser_elements_CeilingType_httpteaser_elementsLayers', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 92, 6), )
 
-    
+
     Layers = property(__Layers.value, __Layers.set, None, None)
 
     _ElementMap.update({
@@ -673,10 +673,10 @@ class CeilingType (pyxb.binding.basis.complexTypeDefinition):
         __Layers.name() : __Layers
     })
     _AttributeMap.update({
-        
+
     })
 _module_typeBindings.CeilingType = CeilingType
-Namespace.addCategoryObject('typeBinding', 'CeilingType', CeilingType)
+Namespace.addCategoryObject('typeBinding_04', 'CeilingType', CeilingType)
 
 
 # Complex type {http://teaser.elements}FloorType with content type ELEMENT_ONLY
@@ -690,46 +690,46 @@ class FloorType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://teaser.elements}year_of_construction uses Python identifier year_of_construction
     __year_of_construction = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'year_of_construction'), 'year_of_construction', '__httpteaser_elements_FloorType_httpteaser_elementsyear_of_construction', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 97, 6), )
 
-    
+
     year_of_construction = property(__year_of_construction.value, __year_of_construction.set, None, None)
 
-    
+
     # Element {http://teaser.elements}building_age_group uses Python identifier building_age_group
     __building_age_group = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'building_age_group'), 'building_age_group', '__httpteaser_elements_FloorType_httpteaser_elementsbuilding_age_group', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 98, 3), )
 
-    
+
     building_age_group = property(__building_age_group.value, __building_age_group.set, None, None)
 
-    
+
     # Element {http://teaser.elements}construction_type uses Python identifier construction_type
     __construction_type = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'construction_type'), 'construction_type', '__httpteaser_elements_FloorType_httpteaser_elementsconstruction_type', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 99, 6), )
 
-    
+
     construction_type = property(__construction_type.value, __construction_type.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_convection uses Python identifier inner_convection
     __inner_convection = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_convection'), 'inner_convection', '__httpteaser_elements_FloorType_httpteaser_elementsinner_convection', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 100, 6), )
 
-    
+
     inner_convection = property(__inner_convection.value, __inner_convection.set, None, None)
 
-    
+
     # Element {http://teaser.elements}inner_radiation uses Python identifier inner_radiation
     __inner_radiation = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'inner_radiation'), 'inner_radiation', '__httpteaser_elements_FloorType_httpteaser_elementsinner_radiation', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 101, 6), )
 
-    
+
     inner_radiation = property(__inner_radiation.value, __inner_radiation.set, None, None)
 
-    
+
     # Element {http://teaser.elements}Layers uses Python identifier Layers
     __Layers = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Layers'), 'Layers', '__httpteaser_elements_FloorType_httpteaser_elementsLayers', False, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 102, 6), )
 
-    
+
     Layers = property(__Layers.value, __Layers.set, None, None)
 
     _ElementMap.update({
@@ -741,10 +741,10 @@ class FloorType (pyxb.binding.basis.complexTypeDefinition):
         __Layers.name() : __Layers
     })
     _AttributeMap.update({
-        
+
     })
 _module_typeBindings.FloorType = FloorType
-Namespace.addCategoryObject('typeBinding', 'FloorType', FloorType)
+Namespace.addCategoryObject('typeBinding_04', 'FloorType', FloorType)
 
 
 # Complex type {http://teaser.elements}TypeBuildingElementsType with content type ELEMENT_ONLY
@@ -758,61 +758,61 @@ class TypeBuildingElementsType (pyxb.binding.basis.complexTypeDefinition):
     _ElementMap = {}
     _AttributeMap = {}
     # Base type is pyxb.binding.datatypes.anyType
-    
+
     # Element {http://teaser.elements}OuterWall uses Python identifier OuterWall
     __OuterWall = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'OuterWall'), 'OuterWall', '__httpteaser_elements_TypeBuildingElementsType_httpteaser_elementsOuterWall', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 108, 6), )
 
-    
+
     OuterWall = property(__OuterWall.value, __OuterWall.set, None, None)
 
-    
+
     # Element {http://teaser.elements}InnerWall uses Python identifier InnerWall
     __InnerWall = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'InnerWall'), 'InnerWall', '__httpteaser_elements_TypeBuildingElementsType_httpteaser_elementsInnerWall', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 109, 6), )
 
-    
+
     InnerWall = property(__InnerWall.value, __InnerWall.set, None, None)
 
-    
+
     # Element {http://teaser.elements}Rooftop uses Python identifier Rooftop
     __Rooftop = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Rooftop'), 'Rooftop', '__httpteaser_elements_TypeBuildingElementsType_httpteaser_elementsRooftop', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 110, 6), )
 
-    
+
     Rooftop = property(__Rooftop.value, __Rooftop.set, None, None)
 
-    
+
     # Element {http://teaser.elements}GroundFloor uses Python identifier GroundFloor
     __GroundFloor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'GroundFloor'), 'GroundFloor', '__httpteaser_elements_TypeBuildingElementsType_httpteaser_elementsGroundFloor', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 111, 6), )
 
-    
+
     GroundFloor = property(__GroundFloor.value, __GroundFloor.set, None, None)
 
-    
+
     # Element {http://teaser.elements}Window uses Python identifier Window
     __Window = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Window'), 'Window', '__httpteaser_elements_TypeBuildingElementsType_httpteaser_elementsWindow', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 112, 6), )
 
-    
+
     Window = property(__Window.value, __Window.set, None, None)
 
-    
+
     # Element {http://teaser.elements}Ceiling uses Python identifier Ceiling
     __Ceiling = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Ceiling'), 'Ceiling', '__httpteaser_elements_TypeBuildingElementsType_httpteaser_elementsCeiling', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 113, 6), )
 
-    
+
     Ceiling = property(__Ceiling.value, __Ceiling.set, None, None)
 
-    
+
     # Element {http://teaser.elements}Floor uses Python identifier Floor
     __Floor = pyxb.binding.content.ElementDeclaration(pyxb.namespace.ExpandedName(Namespace, 'Floor'), 'Floor', '__httpteaser_elements_TypeBuildingElementsType_httpteaser_elementsFloor', True, pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 114, 6), )
 
-    
+
     Floor = property(__Floor.value, __Floor.set, None, None)
 
-    
+
     # Attribute version uses Python identifier version
     __version = pyxb.binding.content.AttributeUse(pyxb.namespace.ExpandedName(None, 'version'), 'version', '__httpteaser_elements_TypeBuildingElementsType_version', pyxb.binding.datatypes.string)
     __version._DeclarationLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 106, 1)
     __version._UseLocation = pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 106, 1)
-    
+
     version = property(__version.value, __version.set, None, None)
 
     _ElementMap.update({
@@ -828,11 +828,11 @@ class TypeBuildingElementsType (pyxb.binding.basis.complexTypeDefinition):
         __version.name() : __version
     })
 _module_typeBindings.TypeBuildingElementsType = TypeBuildingElementsType
-Namespace.addCategoryObject('typeBinding', 'TypeBuildingElementsType', TypeBuildingElementsType)
+Namespace.addCategoryObject('typeBinding_04', 'TypeBuildingElementsType', TypeBuildingElementsType)
 
 
 TypeBuildingElements = pyxb.binding.basis.element(pyxb.namespace.ExpandedName(Namespace, 'TypeBuildingElements'), TypeBuildingElementsType, location=pyxb.utils.utility.Location('D:\\GIT\\TEASER\\teaser\\data\\bindings\\schemas\\TypeBuildingElements.xsd', 4, 2))
-Namespace.addCategoryObject('elementBinding', TypeBuildingElements.name().localName(), TypeBuildingElements)
+Namespace.addCategoryObject('elementBinding_04', TypeBuildingElements.name().localName(), TypeBuildingElements)
 
 
 

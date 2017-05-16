@@ -30,6 +30,14 @@ from teaser.logic.archetypebuildings.urbanrenet.est6 import EST6
 from teaser.logic.archetypebuildings.urbanrenet.est7 import EST7
 from teaser.logic.archetypebuildings.urbanrenet.est8a import EST8a
 from teaser.logic.archetypebuildings.urbanrenet.est8b import EST8b
+from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import \
+    SingleFamilyHouse
+from teaser.logic.archetypebuildings.tabula.de.terracedhouse import \
+    TerracedHouse
+from teaser.logic.archetypebuildings.tabula.de.multifamilyhouse import \
+    MultiFamilyHouse
+from teaser.logic.archetypebuildings.tabula.de.apartmentblock import \
+    ApartmentBlock
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
     SingleFamilyDwelling
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
@@ -50,7 +58,9 @@ class Project(object):
     ----------
     load_data : boolean
         boolean if data bases for materials, type elements and use conditions
-        should be loaded (default = True)
+        should be loaded. default = False but will be automatically loaded
+        once you add a archetype building. For building generation from
+        scratch, set to True
 
     Attributes
     ----------
@@ -78,7 +88,7 @@ class Project(object):
         used library (AixLib and IBPSA are supported)
     """
 
-    def __init__(self, load_data=True):
+    def __init__(self, load_data=False):
         """Constructor of Project Class.
         """
         self._name = "Project"
@@ -453,21 +463,85 @@ class Project(object):
         type_bldg : Instance of SingleFamilyDwelling()
         """
 
-        ass_error_method = "only 'iwu' and 'urbanrenet' are valid methods"\
-            "for residential archetype generation"
+        ass_error_method = "only'tabula_de', 'iwu' and 'urbanrenet' " \
+                           "are valid methods for residential archetype " \
+                           "generation"
 
-        assert method in ['iwu', 'urbanrenet'], ass_error_method
+        assert method in ['tabula_de', 'iwu', 'urbanrenet'], ass_error_method
 
         ass_error_apart = "The keyword number_of_apartmens does not have any " \
                           "effect on archetype generation for 'iwu', see" \
                           "docs for more information"
 
-
-
         if method == 'iwu' and number_of_apartments is not None:
             warnings.warn(ass_error_apart)
 
-        if method == 'iwu':
+        if method == 'tabula_de':
+
+            if self.data is None:
+                self.data = DataClass(used_statistic=method)
+
+            if usage == 'single_family_house':
+
+                type_bldg = SingleFamilyHouse(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'terraced_house':
+
+                type_bldg = TerracedHouse(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'multi_family_house':
+
+                type_bldg = MultiFamilyHouse(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'apartment_block':
+
+                type_bldg = ApartmentBlock(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+
+                type_bldg.generate_archetype()
+                return type_bldg
+
+        elif method == 'iwu':
 
             ass_error_usage_iwu = "only 'single_family_dewlling' is a valid " \
                                   "usage for iwu archetype method"
@@ -609,7 +683,6 @@ class Project(object):
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
-
 
             elif usage == 'est7':
 
@@ -1196,9 +1269,9 @@ class Project(object):
                         prj=self,
                         path=path)
 
-
     def export_ibpsa(
             self,
+            library='AixLib',
             internal_id=None,
             path=None):
         """Exports values to a record file for Modelica simulation
@@ -1208,6 +1281,12 @@ class Project(object):
         Parameters
         ----------
 
+        library : str
+            Used library within the framework of IBPSA library. The
+            models are identical in each library, but IBPSA Modelica library is
+            just a core set of models and should not be used standalone.
+            Valid values are 'AixLib' (default), 'Buildings',
+            'BuildingSystems' and 'IDEAS'.
         internal_id : float
             setter of a specific building which will be exported, if None then
             all buildings will be exported
@@ -1215,6 +1294,12 @@ class Project(object):
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
         """
+
+        ass_error_1 = "library for IBPSA export has to be 'AixLib', " \
+                      "'Buildings', 'BuildingSystems' or 'IDEAS'"
+
+        assert library in ['AixLib', 'Buildings', 'BuildingSystems',
+                           'IDEAS'], ass_error_1
 
         if path is None:
             path = os.path.join(
@@ -1231,7 +1316,8 @@ class Project(object):
             ibpsa_output.export_ibpsa(
                 buildings=self.buildings,
                 prj=self,
-                path=path)
+                path=path,
+                library=library)
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
@@ -1239,7 +1325,6 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
-
 
     def export_parameters_txt(self, path=None):
         """Exports parameters of all buildings in a readable text file

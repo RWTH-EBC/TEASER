@@ -1,5 +1,4 @@
 from setuptools import setup
-from sys import platform
 
 setup(name='teaser',
       version='0.5.1',

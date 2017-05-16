@@ -13,10 +13,16 @@ TEASER
 
 TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) allows
 fast generation of archetype buildings with low input requirements and the
-export of individual dynamic simulation models for Modelica libraries `AixLib <https://github.com/RWTH-EBC/AixLib>`_ and `Modelica IBPSA library <https://github.com/ibpsa/modelica>`_. It is being
+export of individual dynamic simulation models for the below-mentioned Modelica
+libraries. These libraries all use the framework of `Modelica IBPSA
+library <https://github.com/ibpsa/modelica>`_. TEASER is being
 developed at the `RWTH Aachen University, E.ON Energy Research Center, Institute
 for Energy Efficient Buildings and Indoor Climate <https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1>`_.
 
+   - `AixLib <https://github.com/RWTH-EBC/AixLib>`_
+   - `Buildings <https://github.com/lbl-srg/modelica-buildings>`_
+   - `BuildingSystems <https://github.com/UdK-VPT/BuildingSystems>`_
+   - `IDEAS <https://github.com/open-ideas/IDEAS>`_.
 
 This software is work-in-progress. Documentation will be incomplete or missing
 and the software may not run properly. In particular the Graphical User
@@ -25,6 +31,14 @@ report them in the issue section of the `repository <https://github.com/RWTH-EBC
 
 If you have any questions regarding TEASER feel free to contact us at
 `ebc-teaser@eonerc.rwth-aachen.de <ebc-teaser@eonerc.rwth-aachen.de>`_.
+
+Note that this documentation will always be auto-generated using the
+`development branch <https://github.com/RWTH-EBC/TEASER/tree/development>`_.
+That means, there might be new developments described in this docu that are not
+working in the master and pip installation of TEASER. A list of those issue can
+be found `here <development.html>`_
+
+Also have a look at the `FAQ section <faq.html>`_. If you feel your question should also be listed, please open an issue in the issue section of the `repository <https://github.com/RWTH-EBC/TEASER/issues>`_.
 
 
 Contents
@@ -40,6 +54,8 @@ Contents
    teaser
    acknowledgments
    license
+   faq
+   development
 
 
 Publications

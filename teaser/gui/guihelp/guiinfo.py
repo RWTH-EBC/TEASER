@@ -25,10 +25,10 @@ class GUIInfo():
 
         self.orientations_numbers = \
             OrderedDict([(0, 'North'), (45, 'North-East'), (90, "East"),
-                        (135, "South-East"), (180, "South"),
-                        (225, "South-West"), (270, "West"),
-                        (315, "North-West"), (- 1, "Roof"),
-                        (-2, "Floor")])
+                         (135, "South-East"), (180, "South"),
+                         (225, "South-West"), (270, "West"),
+                         (315, "North-West"), (- 1, "Roof"),
+                         (-2, "Floor")])
 
         self.orientations_strings = {"North": 0, "North-East": 45,
                                      "East": 90, "South-East": 135,

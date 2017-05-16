@@ -42,6 +42,22 @@
       <xs:element type="LayerType" name="Layer" maxOccurs="unbounded" minOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
+    <xs:complexType name="DoorType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
+      <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:float" name="area" minOccurs="0"/>
+      <xs:element type="xs:float" name="tilt" minOccurs="0"/>
+      <xs:element type="xs:float" name="orientation" minOccurs="0"/>
+      <xs:element type="xs:float" name="inner_convection" minOccurs="0"/>
+      <xs:element type="xs:float" name="inner_radiation" minOccurs="0"/>
+      <xs:element type="xs:float" name="outer_convection" minOccurs="0"/>
+      <xs:element type="xs:float" name="outer_radiation" minOccurs="0"/>
+      <xs:element type="LayerType" name="Layer" maxOccurs="unbounded" minOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
    <xs:complexType name="RooftopType">
     <xs:sequence>
       <xs:element type="xs:string" name="name" minOccurs="0"/>
@@ -144,6 +160,7 @@
 	 <xs:element type="xs:float" name="typical_width" minOccurs="0"/>
       <xs:element type="UseConditionType" name="UseCondition" minOccurs="0"/>
       <xs:element type="OuterWallType" name="OuterWall" minOccurs="0" maxOccurs = "unbounded"/>
+      <xs:element type="DoorType" name="Door" minOccurs="0" maxOccurs = "unbounded"/>
       <xs:element type="RooftopType" name="Rooftop" minOccurs="0" maxOccurs = "unbounded"/>
       <xs:element type="GroundFloorType" name="GroundFloor" minOccurs="0" maxOccurs = "unbounded"/>
       <xs:element type="InnerWallType" name="InnerWall" minOccurs="0" maxOccurs = "unbounded"/>

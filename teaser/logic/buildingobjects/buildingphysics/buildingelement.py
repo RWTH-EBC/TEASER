@@ -8,6 +8,7 @@ This module contains the Base class for all building elements.
 
 from __future__ import division
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+import teaser.data.input.buildingelement_input as buildingelement_input
 import numpy as np
 import random
 import re
@@ -304,8 +305,6 @@ class BuildingElement(object):
         else:
             data_class = data_class
 
-        import teaser.data.input.buildingelement_input as buildingelement_input
-
         self.layer = None
         self._inner_convection = None
         self._inner_radiation = None
@@ -417,8 +416,6 @@ class BuildingElement(object):
                 self._name = regex.sub('', value)
             except ValueError:
                 print("Can't convert name to string")
-
-
 
     @property
     def year_of_retrofit(self):
