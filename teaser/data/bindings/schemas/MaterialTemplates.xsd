@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns="http://teaser.material06"
-           targetNamespace="http://teaser.material06"
+           xmlns="http://teaser/0.6/material"
+           targetNamespace="http://teaser/0.6/material"
            attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.6">
   <xs:element name="MaterialTemplates" type="MaterialTemplatesType"/>
   <xs:complexType name="MaterialType">
