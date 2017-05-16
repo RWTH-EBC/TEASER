@@ -8,7 +8,7 @@ TEASER file format .tXML
 """
 
 import teaser.data.bindings.v_0_6.project_bind as pb
-import teaser.data.bindings.v_0_4.boundaryconditions_bind as ucb
+import teaser.data.bindings.v_0_6.boundaryconditions_bind as ucb
 import inspect
 from teaser.logic.archetypebuildings.residential import Residential
 import pyxb

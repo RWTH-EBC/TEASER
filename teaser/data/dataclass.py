@@ -156,6 +156,10 @@ class DataClass(object):
             import teaser.data.bindings.v_0_4.boundaryconditions_bind as uc_bind
             self.conditions_bind = uc_bind.CreateFromDocument(
                 __xml_file_uc.read())
+        elif version_parse.getroot().attrib['version'] == "0.6":
+            import teaser.data.bindings.v_0_6.boundaryconditions_bind as uc_bind
+            self.conditions_bind = uc_bind.CreateFromDocument(
+                __xml_file_uc.read())
 
     def load_mat_binding(self):
         """Loads MaterialTemplates XML into binding classes
@@ -180,6 +184,10 @@ class DataClass(object):
             warnings.warn(
                 "You are using an old version of material data base XML file")
             import teaser.data.bindings.v_0_3_9.material_bind as mat_bind
+            self.material_bind = mat_bind.CreateFromDocument(
+                __xml_file_mat.read())
+        elif version_parse.getroot().attrib['version'] == "0.4":
+            import teaser.data.bindings.v_0_4.material_bind as mat_bind
             self.material_bind = mat_bind.CreateFromDocument(
                 __xml_file_mat.read())
         elif version_parse.getroot().attrib['version'] == "0.6":

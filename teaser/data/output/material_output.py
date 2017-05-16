@@ -34,7 +34,7 @@ def save_material(material, data_class):
     """
     mat_binding = data_class.material_bind
     add_to_xml = True
-    mat_binding.version = "0.4"
+    mat_binding.version = "0.6"
     warning_text = ("Material with same name and same properties already "
                     "exists in XML, consider this material or revising your "
                     "properties")
