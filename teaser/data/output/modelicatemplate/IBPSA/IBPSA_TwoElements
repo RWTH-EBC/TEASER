@@ -1,4 +1,4 @@
-<%namespace file="/modelica_language/" import="get_true_false, get_list"/> <%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
+<%namespace file="/modelica_language/" import="get_true_false, get_list, min_orientations"/> <%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
 within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_Models;
 model ${zone.parent.name}_${zone.name}
   "This is the simulation model of ${zone.name} within building ${zone.parent.name} with traceable ID ${zone.parent.building_id}"
@@ -9,22 +9,19 @@ model ${zone.parent.name}_${zone.name}
     filNam="${zone.parent.parent.weather_file_path.replace("\\", "/")}")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
-  ${library}.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${zone.model_attr.n_outer}](
-    each outSkyCon=true,
+  ${library}.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${min_orientations(zone.model_attr.n_outer)}](    each outSkyCon=true,
     each outGroCon=true,
     til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
     each lat = ${deg_to_rad(zone.parent.latitude)},
     azi = ${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
-  ${library}.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${zone.model_attr.n_outer}](
-    til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
+  ${library}.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${min_orientations(zone.model_attr.n_outer)}](    til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
     each lat =  ${deg_to_rad(zone.parent.latitude)},
     azi=${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  ${library}.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${zone.model_attr.n_outer},
-  UWin=${zone.model_attr.u_value_win})
+  ${library}.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${min_orientations(zone.model_attr.n_outer)},  UWin=${zone.model_attr.u_value_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
   ${library}.ThermalZones.ReducedOrder.RC.TwoElements
@@ -53,7 +50,7 @@ model ${zone.parent.name}_${zone.name}
     energyDynamics=Modelica.Fluid.Types.Dynamics.FixedInitial,
     extWallRC(thermCapExt(each der_T(fixed=true))),
     intWallRC(thermCapInt(each der_T(fixed=true))),
-    nOrientations=${zone.model_attr.n_outer},
+    nOrientations=${min_orientations(zone.model_attr.n_outer)},
     AWin=${get_list(zone.model_attr.window_areas)},
     ATransparent=${get_list(zone.model_attr.transparent_areas)},
     AExt=${get_list(zone.model_attr.facade_areas)})
@@ -61,7 +58,7 @@ model ${zone.parent.name}_${zone.name}
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 % if zone.model_attr.merge_windows is True:
   ${library}.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
-    n=${zone.model_attr.n_outer},
+    n=${min_orientations(zone.model_attr.n_outer)},
     wfGro=${zone.model_attr.weightfactor_ground},
     wfWall=${get_list(zone.model_attr.weightfactor_ow)},
     wfWin=${get_list(zone.model_attr.weightfactor_win)},
@@ -73,7 +70,7 @@ model ${zone.parent.name}_${zone.name}
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
   ${library}.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
-    n=${zone.model_attr.n_outer},
+    n=${min_orientations(zone.model_attr.n_outer)},
     wfGro=${zone.model_attr.weightfactor_ground},
     wfWall=${get_list(zone.model_attr.weightfactor_ow)},
     wfWin=${get_list(zone.model_attr.weightfactor_win)},
@@ -85,7 +82,7 @@ model ${zone.parent.name}_${zone.name}
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % endif
-  Modelica.Blocks.Math.Add solRad[${zone.model_attr.n_outer}]
+  Modelica.Blocks.Math.Add solRad[${min_orientations(zone.model_attr.n_outer)}]
     "Sums up solar radiation of both directions"
     annotation (Placement(transformation(extent={{-38,6},{-28,16}})));
   Modelica.Thermal.HeatTransfer.Sources.PrescribedTemperature prescribedTemperature
@@ -102,7 +99,7 @@ model ${zone.parent.name}_${zone.name}
   Modelica.Thermal.HeatTransfer.Components.Convection thermalConductorWall
     "Outdoor convective heat transfer of walls"
     annotation (Placement(transformation(extent={{36,6},{26,-4}})));
-  Modelica.Blocks.Sources.Constant const[${zone.model_attr.n_outer}](each k=0)
+  Modelica.Blocks.Sources.Constant const[${min_orientations(zone.model_attr.n_outer)}](each k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{-20,14},{-14,20}})));
   ${library}.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
