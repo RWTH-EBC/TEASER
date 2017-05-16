@@ -6,7 +6,6 @@ from teaser.data.dataclass import DataClass
 from teaser.data.dataclass_old import DataClassOld
 from teaser.logic.buildingobjects.buildingphysics.material import Material
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
-from teaser.logic.buildingobjects.buildingphysics.buildingelement import BuildingElement
 from teaser.logic.buildingobjects.buildingphysics.ceiling import Ceiling
 from teaser.logic.buildingobjects.buildingphysics.floor import Floor
 from teaser.logic.buildingobjects.buildingphysics.groundfloor \
@@ -15,88 +14,6 @@ from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
 from teaser.logic.buildingobjects.buildingphysics.outerwall import OuterWall
 from teaser.logic.buildingobjects.buildingphysics.rooftop import Rooftop
 from teaser.logic.buildingobjects.buildingphysics.window import Window
-
-material_mapping_teaser_masea = {
-    'Gipsputz':	'Gips',
-    'Vollziegelmauerwerk': 'Vollziegel_ZK',
-    'Kalkputz':	'Kalkputz',
-    'Lehmputz':	'Lehmputz',
-    'EichenfachwerkmitStrohlehmfachung': 'Faserlehm_mit_reichlichem_Faseranteil_1200',
-    'Kalzputz': 'Kalkputz',
-    'LeichtbetonHohlblockstein': 'VermiculitBeton_1200',
-    'Holzfaserplatte': 'Spanplatte_v100/E1F0',
-    'MineralwolleDaemmung': 'Mineralfaser_040',
-    'Stahlbeton': 'CEM II B-S 32,5R NB w/z = 0.50',
-    'Polystyrol': '	EPS_040.15',
-    'WetterschaleausBeton': 'BetonWZ05',
-    'EPSHartschaum': 'EPS_040.15',
-    'Aluminium': '',
-    'Mineralwolle': 'Mineralfaser_040',
-    'Gipskartonplatte': 'Gipskartonplatte',
-    'Sandwichpaneel': '',
-    'Highdensitybrick': '',
-    'Aircavity': '',
-    'MW': '',
-    'Lowdensitybrick': '',
-    'Plaster': 'Gips',
-    'VollziegelMauerwerk': 'VollziegelZK',
-    'Beton': 'Beton W/Z=0.5',
-    'Putz': 'Kalkputz',
-    'Holzfaserplatten': 'Spanplatte v100/E1F0',
-    'Luft': '',
-    'LeichtHochlochziegel': 'Hochdämmender Ziegel 700',
-    'Mineralfaserdaemmung': '',
-    'Normalbeton': 'Beton W/Z=0.5',
-    'DieleundLagerholz': 'Eiche radial',
-    'Spalierlatten': 'Eichenholz alt',
-    'HolzwolleLeichtbauplatte': 'Holzwolle-Leichtbauplatten_gipsgebunden_420',
-    'Sparschalung': '',
-    'Diele': 'Eiche radial',
-    'Schaumglas': 'Schaumglasplatten_130',
-    'Kiesschuettung': 'Kies, einkörnig_1500',
-    'SparrenundDaemmung': '',
-    'HolzbalkenmitDaemmung': '',
-    'Kalkgipsputz': 'Kalkputz',
-    'SparrenmitDaemmung': '',
-    'FertigbalkenmitMineralwolleschicht': '',
-    'Tiledroof': '',
-    'Wood': '',
-    'Gypsumboard': '',
-    'Hobeldielen': 'Eiche radial',
-    'HolzbalkenmitLuftschichtundLehmschlag': '',
-    'Estrich': 'Zement-Fließestrich Typ2 Unterschicht',
-    'PSDaemmung': 'EPS_040.15',
-    'Trittschalldaemmung': '',
-    'Holzwerkstoffplatte': 'Spanplatte V100/E1F0',
-    'Zementestrich': 'Zement-Fließestrich Typ2 Unterschicht',
-    'Polystyroldaemmschicht': 'EPS_040.15',
-    'Ortbeton': 'CEM II B-S 32,5R NB w/z = 0.50',
-    'Tiles': '',
-    'Screed': '',
-    'XPS': 'XPS_Kernschicht 3',
-    'Concrete': '',
-    'Glas0_1978Holzfenstereinfach': '',
-    'Glas0_1978Holzfensterzweifach': '',
-    'Glas0_1978KunststofffensterIsolierverglasung': '',
-    'Glas0_1978AluoderStahlfensterIsolierverglasung': '',
-    'Glas1979_1983Holzfensterzweifach': '',
-    'Glas1979_1983KunststofffensterIsolierverglasung': '',
-    'Glas1979_1983AluoderStahlfensterIsolierverglasung': '',
-    'Glas1984_1994Holzfensterzweifach': '',
-    'Glas1984_1994KunststofffensterIsolierverglasung': '',
-    'Glas1984_1994AluoderStahlfensterIsolierverglasung': '',
-    'Glas1995_2015Holzfensterzweifach': '',
-    'Glas1995_2015KunststofffensterIsolierverglasung': '',
-    'Glas1995_2015EnEv': '',
-    'Glas1995_2015AluoderStahlfensterIsolierverglasung': '',
-    'Glas1995_2015AluoderStahlfensterWaermeschutzverglasungzweifach': '',
-    'Glas1995_2015Waermeschutzverglasungdreifach': '',
-    'Glas0_2016light_annex': '',
-    'Glas0_2016heavy_annex': '',
-    'Glas1995_2015EnEV': '',
-    'Betondecke': 'CEM II B-S 32,5R NB w/z = 0.50',
-    'Woodenfloor': 'Eichenholz alt'
-}
 
 excel_file = 'N:\Forschung\EBC0301_PtJ_Living_Roadmap_mfu\Students\jsc-tbe\MASEA_Typebuildings.xlsx'
 df = pd.read_excel(io=excel_file, skiprows=1)
@@ -109,18 +26,8 @@ file = utils.get_full_path(
 elem_xml = et.parse(file)
 elem_tree = elem_xml.getroot()
 
-
-
 # load new MaterialTemplates
 dataclass_new = DataClass()
-# dataclass_new.material_bind = None
-# dataclass_new.path_mat = utils.get_full_path(
-#             "data/input/inputdata/MaterialTemplates_new.xml")
-# dataclass_new.load_mat_binding()
-# dataclass_new.element_bind = None
-# dataclass_new.path_tb = utils.get_full_path(
-#             "data/input/inputdata/TypeBuildingElements_new.xml")
-# dataclass_new.load_tb_binding()
 
 # load old MaterialTemplates
 dataclass_old = DataClassOld()
