@@ -1,7 +1,7 @@
 # Created January 2016
 # TEASER 4 Development Team
 
-"""This module loads test case 10 given in VDI 6007-1 form a teaserXML file,
+"""This script loads test case 10 given in VDI 6007-1 from a teaserXML file,
 calculates all parameters and exports them as .txt. Differently to the other
 test cases, we don't have the original parameter calculated by Rouvel. This test
 case defines the floor as connected to an adjacent room with a fixed
