@@ -3019,3 +3019,43 @@ class Test_teaser(object):
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
         prj.export_ibpsa()
+
+    def test_ashrae_140_600(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_600 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)
+
+    def test_ashrae_140_620(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_620 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)
+
+    def test_ashrae_140_900(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_900 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)
+
+    def test_ashrae_140_920(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_920 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)

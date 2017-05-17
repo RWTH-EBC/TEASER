@@ -25,8 +25,7 @@ from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
 import teaser.logic.utilities as utilities
 
 
-def main():
-    number_of_elements = 2
+def main(number_of_elements=2):
 
     prj = from_scratch(number_of_elements=number_of_elements, save=False)
     # prj = load_file()
