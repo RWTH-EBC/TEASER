@@ -19,7 +19,7 @@ class Test_teaser(object):
 
     def test_calc_vdi_room1(self):
         """Parameter Verification for rouvel room1"""
-        import teaser.examples.verification.verification_room1 as room1
+        import teaser.examples.verification.verification_VDI_6007_room1 as room1
 
         room1_prj = room1.parameter_room1()
         zone_attr = room1_prj.buildings[0].thermal_zones[0].model_attr
@@ -44,7 +44,7 @@ class Test_teaser(object):
 
     def test_calc_vdi_room3(self):
         """Parameter Verification for room 3"""
-        import teaser.examples.verification.verification_room3 as room3
+        import teaser.examples.verification.verification_VDI_6007_room3 as room3
 
         room3_prj = room3.parameter_room3()
         zone_attr = room3_prj.buildings[0].thermal_zones[0].model_attr
@@ -69,7 +69,7 @@ class Test_teaser(object):
 
     def test_calc_vdi_room8(self):
         """Parameter Verification for room 8"""
-        import teaser.examples.verification.verification_room8 as room8
+        import teaser.examples.verification.verification_VDI_6007_room8 as room8
 
         room8_prj = room8.parameter_room8()
         zone_attr = room8_prj.buildings[0].thermal_zones[0].model_attr
@@ -3019,3 +3019,43 @@ class Test_teaser(object):
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
         prj.export_ibpsa()
+
+    def test_ashrae_140_600(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_600 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)
+
+    def test_ashrae_140_620(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_620 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)
+
+    def test_ashrae_140_900(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_900 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)
+
+    def test_ashrae_140_920(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_920 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)

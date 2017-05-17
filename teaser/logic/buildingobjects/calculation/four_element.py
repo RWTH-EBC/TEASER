@@ -1094,7 +1094,7 @@ class FourElement(object):
                                            self.thermal_zone.windows))
                 if len(self.thermal_zone.outer_walls) > 0:
                     conduction = (1 / sum((1 / element.r_conduc) for element in
-                                      outer_walls))
+                                  outer_walls))
 
                     self.r_rest_ow = (conduction - self.r1_ow)
 
