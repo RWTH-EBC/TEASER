@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<project:Project version="0.5" xmlns:project="http://teaser.project" xmlns:usecond="http://teaser.boundary">
+<project:Project version="0.6" xmlns:project="http://teaser/0.6/project" xmlns:usecond="http://teaser/0.6/boundary">
 	<project:Building>
 		<project:name>TestBuilding</project:name>
 		<project:street_name></project:street_name>
 		<project:city></project:city>
 		<project:type_of_building>Building</project:type_of_building>
-		<project:year_of_construction>None</project:year_of_construction>
-		<project:year_of_retrofit>None</project:year_of_retrofit>
+		<project:year_of_construction>9999</project:year_of_construction>
+		<project:year_of_retrofit>9999</project:year_of_retrofit>
 		<project:net_leased_area>48.0</project:net_leased_area>
 		<project:ThermalZone>
 			<project:name>TestRoom600</project:name>
