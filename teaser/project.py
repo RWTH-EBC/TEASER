@@ -489,8 +489,8 @@ class Project(object):
             ass_error_usage_tabula = "only 'single_family_house',"
             "'terraced_house', 'multi_family_house', 'apartment_block' are"
             "valid usages for iwu archetype method"
-            assert usage in ['single_family_dwelling', 'terraced_house',
-                             'multi_family_house',  'apartment_block'], \
+            assert usage in ['single_family_house', 'terraced_house',
+                             'multi_family_house', 'apartment_block'], \
                 ass_error_usage_tabula
 
             if usage == 'single_family_house':

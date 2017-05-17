@@ -2291,7 +2291,7 @@ class Test_teaser(object):
         """test of insulate_wall"""
         therm_zone = prj.buildings[-1].thermal_zones[-1]
         therm_zone.outer_walls[0].insulate_wall("EPS_040_15", 0.04)
-        assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.806838
+        assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.924088
 
     def test_retrofit_wall(self):
         """test of retrofit_wall"""
@@ -3068,7 +3068,7 @@ class Test_teaser(object):
         prj.data = None
         prj.add_residential(
             method='tabula_de',
-            usage='multi_family_house',
+            usage='single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1858,
             number_of_floors=2,
@@ -3093,7 +3093,7 @@ class Test_teaser(object):
 
         prj.add_residential(
             method='tabula_de',
-            usage='multi_family_house',
+            usage='single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1918,
             number_of_floors=2,
@@ -3118,7 +3118,7 @@ class Test_teaser(object):
 
         prj.add_residential(
             method='tabula_de',
-            usage='multi_family_house',
+            usage='single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1947,
             number_of_floors=2,
@@ -3143,7 +3143,7 @@ class Test_teaser(object):
 
         prj.add_residential(
             method='tabula_de',
-            usage='multi_family_house',
+            usage='single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1956,
             number_of_floors=2,
@@ -3168,7 +3168,7 @@ class Test_teaser(object):
 
         prj.add_residential(
             method='tabula_de',
-            usage='multi_family_house',
+            usage='single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1967,
             number_of_floors=2,
@@ -3193,7 +3193,7 @@ class Test_teaser(object):
 
         prj.add_residential(
             method='tabula_de',
-            usage='multi_family_house',
+            usage='single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1977,
             number_of_floors=2,
@@ -3218,7 +3218,7 @@ class Test_teaser(object):
 
         prj.add_residential(
             method='tabula_de',
-            usage='multi_family_house',
+            usage='single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1982,
             number_of_floors=2,
@@ -3243,7 +3243,7 @@ class Test_teaser(object):
 
         prj.add_residential(
             method='tabula_de',
-            usage='multi_family_house',
+            usage='single_family_house',
             name="ResidentialBuilding",
             year_of_construction=1993,
             number_of_floors=2,
@@ -3268,7 +3268,7 @@ class Test_teaser(object):
 
         prj.add_residential(
             method='tabula_de',
-            usage='multi_family_house',
+            usage='single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2000,
             number_of_floors=2,
@@ -3293,7 +3293,7 @@ class Test_teaser(object):
 
         prj.add_residential(
             method='tabula_de',
-            usage='multi_family_house',
+            usage='single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2008,
             number_of_floors=2,
@@ -3318,7 +3318,7 @@ class Test_teaser(object):
 
         prj.add_residential(
             method='tabula_de',
-            usage='multi_family_house',
+            usage='single_family_house',
             name="ResidentialBuilding",
             year_of_construction=2014,
             number_of_floors=2,

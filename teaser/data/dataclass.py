@@ -8,6 +8,7 @@ import warnings
 import xml.etree.ElementTree as et
 import os
 import sys
+import teaser.logic.utilities as utils
 
 v = sys.version_info
 if v >= (2, 7):
@@ -15,8 +16,6 @@ if v >= (2, 7):
         FileNotFoundError
     except NameError:
         FileNotFoundError = IOError
-
-import teaser.logic.utilities as utils
 
 
 class DataClass(object):
@@ -109,22 +108,26 @@ class DataClass(object):
                 "You are using an old version of type building element data "
                 "base XML file")
             import teaser.data.bindings.v_0_3_9.typeelement_bind as tb_bind
-            self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
+            self.element_bind = tb_bind.CreateFromDocument(
+                __xml_file_tb.read())
         elif version_parse.getroot().attrib['version'] == "0.3.9":
             warnings.warn(
                 "You are using an old version of type building element data "
                 "base XML file")
             import teaser.data.bindings.v_0_3_9.typeelement_bind as tb_bind
-            self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
+            self.element_bind = tb_bind.CreateFromDocument(
+                __xml_file_tb.read())
         elif version_parse.getroot().attrib['version'] == "0.4":
             warnings.warn(
                 "You are using an old version of type building element data "
                 "base XML file")
             import teaser.data.bindings.v_0_4.typeelement_bind as tb_bind
-            self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
+            self.element_bind = tb_bind.CreateFromDocument(
+                __xml_file_tb.read())
         elif version_parse.getroot().attrib['version'] == "0.6":
             import teaser.data.bindings.v_0_6.typeelement_bind as tb_bind
-            self.element_bind = tb_bind.CreateFromDocument(__xml_file_tb.read())
+            self.element_bind = tb_bind.CreateFromDocument(
+                __xml_file_tb.read())
 
     def load_uc_binding(self):
         """Loads UseConditions XML into binding classes
