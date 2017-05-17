@@ -16,7 +16,7 @@ prj = Project(True)
 class Test_teaser(object):
     """Unit Tests for TEASER"""
     global prj
-    '''
+
     def test_calc_vdi_room1(self):
         """Parameter Verification for rouvel room1"""
         import teaser.examples.verification.verification_VDI_6007_room1 as room1
@@ -2436,8 +2436,6 @@ class Test_teaser(object):
                 'testfiles',
                 'teaser_v39.teaserXML'))
 
-
-
     def test_export_aixlib_only_iw(self):
         """
         Tests AixLib output for a building with inner walls only
@@ -3061,7 +3059,8 @@ class Test_teaser(object):
         exmain(number_of_elements=2)
         exmain(number_of_elements=3)
         exmain(number_of_elements=4)
-def test_tabula_de_sfh(self):
+
+    def test_tabula_de_sfh(self):
         """
         Test for area estimation of tabula sfh
         """
@@ -3081,7 +3080,7 @@ def test_tabula_de_sfh(self):
                 prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 134.2
         assert round(
             sum(wall.area for wall in
-                 prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 169.8
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 169.8
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 85.5
@@ -3342,7 +3341,6 @@ def test_tabula_de_sfh(self):
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.6
 
-
     def test_tabula_de_th(self):
         """
         Test for area estimation of tabula th
@@ -3599,7 +3597,6 @@ def test_tabula_de_sfh(self):
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.7
-
 
     def test_tabula_de_mfh(self):
         """
@@ -3881,7 +3878,6 @@ def test_tabula_de_sfh(self):
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 47.9
-        '''
 
     def test_tabula_de_ab(self):
         """
