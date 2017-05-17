@@ -2290,7 +2290,7 @@ class Test_teaser(object):
     def test_insulate_wall(self):
         """test of insulate_wall"""
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].insulate_wall("EPS035", 0.04)
+        therm_zone.outer_walls[0].insulate_wall("EPS_040_15", 0.04)
         assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.806838
 
     def test_retrofit_wall(self):
@@ -2298,32 +2298,32 @@ class Test_teaser(object):
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(2016, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(2016, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.4
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(2010, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(2010, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.4
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(2005, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(2005, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(1998, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(1998, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(1990, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(1990, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(1980, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(1980, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
 
     def test_calc_equivalent_res_win(self):

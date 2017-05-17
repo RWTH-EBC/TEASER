@@ -1,8 +1,7 @@
 # created June 2015
 # by TEASER4 Development Team
 
-"""This module includes the Project class, which serves as an API for a
-TEASER Project
+"""This module includes the Project class, which is the API for TEASER.
 """
 
 import warnings
@@ -165,6 +164,7 @@ class Project(object):
                         "removed from buildings list. Use raise_errors=True "
                         "to get python errors and stop TEASER from deleting "
                         "this building:" + bldg.name)
+                    self.buildings.remove(bldg)
 
     def retrofit_all_buildings(
             self,
@@ -218,7 +218,7 @@ class Project(object):
             office_layout=None,
             window_layout=None,
             construction_type=None):
-        """Adds a non-residential building to the TEASER project
+        """Add a non-residential building to the TEASER project.
 
         This function adds a non-residential archetype building to the TEASER
         project. You need to specify the method of the archetype generation.
@@ -276,7 +276,6 @@ class Project(object):
 
         Returns
         ----------
-
         type_bldg : Instance of Office()
 
         """
@@ -291,6 +290,11 @@ class Project(object):
 
         assert usage in ['office', 'institute', 'institute4',
                          'institute8'], ass_error_usage
+
+        if self.data is None:
+            self.data = DataClass(used_statistic='iwu')
+        elif self.data.used_statistic != 'iwu':
+            self.data = DataClass(used_statistic='iwu')
 
         if usage == 'office':
 
@@ -372,7 +376,7 @@ class Project(object):
             dormer=None,
             construction_type=None,
             number_of_apartments=None):
-        """Adds a residential building to the TEASER project
+        """Add a residential building to the TEASER project.
 
         This function adds a residential archetype building to the TEASER
         project. You need to specify the method of the archetype generation.
@@ -383,7 +387,6 @@ class Project(object):
         residential building for 'iwu' and eleven types for 'urbanrenet'. For
         more information on specific archetype buildings and methods, please
         read the docs of archetype classes.
-
         This function also calculates the parameters of the buildings directly
         with the settings set in the project (e.g. used_library_calc or
         number_of_elements_calc).
@@ -459,27 +462,36 @@ class Project(object):
 
         Returns
         ----------
+        type_bldg : Instance of Archetype Building
 
-        type_bldg : Instance of SingleFamilyDwelling()
         """
-
         ass_error_method = "only'tabula_de', 'iwu' and 'urbanrenet' " \
                            "are valid methods for residential archetype " \
                            "generation"
 
         assert method in ['tabula_de', 'iwu', 'urbanrenet'], ass_error_method
 
-        ass_error_apart = "The keyword number_of_apartmens does not have any " \
-                          "effect on archetype generation for 'iwu', see" \
-                          "docs for more information"
+        ass_error_apart = (
+            "The keyword number_of_apartmens does not have any "
+            "effect on archetype generation for 'iwu' or"
+            "'tabula_de', see docs for more information")
 
-        if method == 'iwu' and number_of_apartments is not None:
+        if method in ['iwu', 'tabula_de'] and number_of_apartments is not None:
             warnings.warn(ass_error_apart)
 
         if method == 'tabula_de':
 
             if self.data is None:
                 self.data = DataClass(used_statistic=method)
+            elif self.data.used_statistic != 'tabula_de':
+                self.data = DataClass(used_statistic=method)
+
+            ass_error_usage_tabula = "only 'single_family_house',"
+            "'terraced_house', 'multi_family_house', 'apartment_block' are"
+            "valid usages for iwu archetype method"
+            assert usage in ['single_family_dwelling', 'terraced_house',
+                             'multi_family_house',  'apartment_block'], \
+                ass_error_usage_tabula
 
             if usage == 'single_family_house':
 
@@ -492,7 +504,6 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     construction_type)
-
                 type_bldg.generate_archetype()
                 return type_bldg
 
@@ -507,7 +518,6 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     construction_type)
-
                 type_bldg.generate_archetype()
                 return type_bldg
 
@@ -522,7 +532,6 @@ class Project(object):
                     net_leased_area,
                     with_ahu,
                     construction_type)
-
                 type_bldg.generate_archetype()
                 return type_bldg
 
@@ -542,6 +551,11 @@ class Project(object):
                 return type_bldg
 
         elif method == 'iwu':
+
+            if self.data is None:
+                self.data = DataClass(used_statistic=method)
+            elif self.data.used_statistic != 'iwu':
+                self.data = DataClass(used_statistic=method)
 
             ass_error_usage_iwu = "only 'single_family_dewlling' is a valid " \
                                   "usage for iwu archetype method"
@@ -565,6 +579,11 @@ class Project(object):
                     construction_type)
 
         elif method == 'urbanrenet':
+
+            if self.data is None:
+                self.data = DataClass(used_statistic='iwu')
+            elif self.data.used_statistic != 'iwu':
+                self.data = DataClass(used_statistic='iwu')
 
             ass_error_usage_urn = "only 'est1a', 'est1b', 'est2', 'est3', " \
                                   "'est4a', 'est4b', 'est5' 'est6', 'est7', " \

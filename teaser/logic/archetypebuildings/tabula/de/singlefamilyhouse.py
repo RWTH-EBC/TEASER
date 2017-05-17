@@ -18,22 +18,37 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 
 
 class SingleFamilyHouse(Residential):
-    """Archetype for TABULA Single Family House
+    """Archetype for German TABULA Single Family House.
 
-    Archetype according to TABULA building typology
-    (http://webtool.building-typology.eu/#bm).
+    This is an archetype building for german single family house according to
+    TABULA building typology (http://webtool.building-typology.eu/#bm). As
+    TABULA defines one reference building, whereas TEASER wants to provide a
+    methodology to generate individual building informations, this archetype
+    underlies some assumptions. The made assumptions are explained in the
+    following:
 
-    Description of:
-       - estimation factors
-       - always 4 walls, 1 roof, 1 floor, 4 windows, one door (default
-       orientation?)
-       - how we calcualte facade and window area
-       - calcualte u-values
-       - zones (one zone)
-       - differences between TABULA und our approach (net floor area, height
-       and number of storeys)
-       - how to proceed with rooftops (keep them as flat roofs or pitched
-       roofs? what orientation?)
+    Each building has four orientations for outer walls and windows (north,
+    east, south and west), two orientations for rooftops (south and north), with
+    tilt of 35 degree and one orientaion for ground floors and one door (default
+    orientation is west). The area of each surface is calculated using the
+    product of the given net_leased_area and specific estimation factors. These
+    estimation factors where build by dividing the given 'surface area' by the
+    'reference floor area' in TABULA. The estimation factors are calculated for
+    each building period ('construction year class'). Please note that the
+    number and height of the floors given in TEASER does not have any effect on
+    the surface area for heat transmission, but is only used to calculate the
+    interior wall area, which is not specified in TABULA at all. Further, TABULA
+    does not specify any specific user profile, by default the SingleFamilyHouse
+    class has exactly one usage zone, which is 'Living'. TABULA also does not
+    always specify the exact construction of building elements, but always
+    provides a prescribed U-Value. We used the U-Value and the given material
+    information to calculate thickness of each layer and implemented it into
+    elements XML ('teaser.data.input.inputdata.TypeElements_TABULA_DE.xml'). The
+    material properties have been taken from MASEA Material data base
+    (http://www.masea-ensan.de/). As there might be some differences in the
+    assumptions for material properties from TABULA and MASEA the U-Value might
+    not always be exactly the same as in TABULA but is always in an acceptable
+    range. The U-Value has been calculated using DIN-4108.
 
     Parameters
     ----------
@@ -109,12 +124,14 @@ class SingleFamilyHouse(Residential):
             "ExteriorFacadeSouth_2": [90.0, 180.0],
             "ExteriorFacadeWest_2": [90.0, 270.0]}
 
-        self.roof_names_1 = {"Rooftop_1": [0, -1]}  # [0, -1]
+        self.roof_names_1 = {"RooftopNorth_1": [35.0, 0.0],
+                             "RooftopSouth_1": [35.0, 90.0]}
 
-        self.roof_names_2 = {"Rooftop_2": [0, -1]}
+        self.roof_names_2 = {"RooftopNorth_2": [35.0, 0.0],
+                             "RooftopSouth_2": [35.0, 90.0]}
 
         self.ground_floor_names_1 = {
-            "GroundFloor_1": [0, -2]}  # [0, -2]
+            "GroundFloor_1": [0, -2]}
 
         self.ground_floor_names_2 = {
             "GroundFloor_2": [0, -2]}
@@ -287,8 +304,8 @@ class SingleFamilyHouse(Residential):
 
         if self.building_age_group is None:
             raise RuntimeError(
-                    "Year of construction not supported for this archetype"
-                    "building")
+                "Year of construction not supported for this archetype"
+                "building")
 
     def generate_archetype(self):
         """Generates a SingleFamilyHouse archetype buildings
@@ -309,6 +326,7 @@ class SingleFamilyHouse(Residential):
             use_cond = UseCond(parent=zone)
             use_cond.load_use_conditions(
                 zone_usage=value[1])
+            print(use_cond)
 
         if self.facade_estimation_factors[self.building_age_group]['ow1'] != 0:
             for key, value in self._outer_wall_names_1.items():
