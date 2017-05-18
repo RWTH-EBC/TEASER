@@ -62,3 +62,39 @@ def save_material(material, data_class):
         out_file = open(utilities.get_full_path(data_class.path_mat), "w")
 
         out_file.write(mat_binding.toDOM().toprettyxml())
+
+
+def modify_material(material, data_class):
+    """Material modifier.
+
+    Modifies material and their properties the XML file for type buidling
+    elements. If the Project parent is set, it automatically modifies it to
+    the file given in Project.data.
+
+    Parameters
+    ----------
+    material : Material()
+        instance of TEASERS Material class
+
+    data_class : DataClass()
+        DataClass containing the bindings for TypeBuildingElement and
+        Material (typically this is the data class stored in prj.data,
+        but the user can individually change that.
+
+    """
+
+    mat_binding = data_class.material_bind
+
+    for mat in mat_binding.Material:
+        if mat.material_id == material.material_id:
+            # mat_binding.Material.remove(mat)
+            mat.material_id = material.material_id
+            mat.name = material.name
+            mat.density = material.density
+            mat.thermal_conduc = material.thermal_conduc
+            mat.heat_capac = material.heat_capac
+            # mat_binding.Material.append(mat)"""
+            break
+
+    out_file = open(utilities.get_full_path(data_class.path_mat), "w")
+    out_file.write(mat_binding.toDOM().toprettyxml())
