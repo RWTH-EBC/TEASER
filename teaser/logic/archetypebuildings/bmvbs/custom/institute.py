@@ -162,5 +162,6 @@ class Institute(Office):
             [0.04, "WC and sanitary rooms in non-residential buildings"]
         self.zone_area_factors["ICT"] = \
             [0.02, "Data center"]
+
         self.est_exponent_wall = 0.6601
         self.est_factor_wall_area = 11.243
