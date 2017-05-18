@@ -16,7 +16,7 @@ Example 2: Export Modelica models for AixLib library using TEASER API
 Example 3: Export Modelica models for AixLib library using TEASER API
 ---------------------------------------------------------------------
 
-.. literalinclude:: ../teaser/examples/e3_export_annex_models.py
+.. literalinclude:: ../teaser/examples/e3_export_ibpsa_models.py
 
 Example 4: Save information
 ---------------------------

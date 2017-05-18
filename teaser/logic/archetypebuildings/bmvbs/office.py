@@ -299,7 +299,7 @@ class Office(NonResidential):
 
         if not self.window_layout == 0:
             self._est_outer_wall_area = self._est_facade_area * \
-                                        self.corr_factor_wall
+                self.corr_factor_wall
             self._est_win_area = self._est_facade_area * self.corr_factor_win
         else:
             pass
@@ -310,16 +310,16 @@ class Office(NonResidential):
             # North and South
             if value[1] == 0 or value[1] == 180:
                 self.outer_area[value[1]] = self._est_outer_wall_area * \
-                                            (self._est_length / (
-                                                2 * self._est_width + 2 *
-                                                self._est_length))
+                    (self._est_length / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
                 self.outer_area[value[1]] = self._est_outer_wall_area * \
-                                            (self._est_width / (
-                                                2 * self._est_width + 2 *
-                                                self._est_length))
+                    (self._est_width / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
             for zone in self.thermal_zones:
                 # create wall and set building elements
                 outer_wall = OuterWall(zone)
@@ -336,16 +336,16 @@ class Office(NonResidential):
             if value[1] == 0 or value[1] == 180:
 
                 self.window_area[value[1]] = self._est_win_area * \
-                                             (self._est_length / (
-                                                 2 * self._est_width + 2 *
-                                                 self._est_length))
+                    (self._est_length / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
 
             elif value[1] == 90 or value[1] == 270:
 
                 self.window_area[value[1]] = self._est_win_area * \
-                                             (self._est_width / (
-                                                 2 * self._est_width + 2 *
-                                                 self._est_length))
+                    (self._est_width / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
 
             '''
             There is no real classification for windows, so this is a bit hard

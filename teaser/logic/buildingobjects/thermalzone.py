@@ -11,6 +11,7 @@ from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 from teaser.logic.buildingobjects.calculation.four_element import FourElement
 
+
 class ThermalZone(object):
     """Thermal zone class.
 
@@ -92,7 +93,7 @@ class ThermalZone(object):
         self.name = None
         self._area = None
         self._volume = None
-        self._infiltration_rate = 0.5 
+        self._infiltration_rate = 0.5
         self._outer_walls = []
         self._rooftops = []
         self._ground_floors = []
@@ -109,7 +110,6 @@ class ThermalZone(object):
         self.density_air = 1.25
         self.heat_capac_air = 1002
         self.t_ground = 286.15
-
 
     def calc_zone_parameters(
             self,
@@ -141,7 +141,7 @@ class ThermalZone(object):
         merge_windows : bool
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False (Only
-            supported for Annex60)
+            supported for IBPSA)
 
         t_bt : float
             Time constant according to VDI 6007 (default t_bt = 5)
@@ -457,7 +457,6 @@ class ThermalZone(object):
     def floors(self):
         return self._floors
 
-
     @floors.setter
     def floors(self, value):
         if value is None:
@@ -492,7 +491,7 @@ class ThermalZone(object):
         ass_error_1 = "Use condition has to be an instance of UseConditions()"
 
         assert type(value).__name__ == "UseConditions" or \
-               type(value).__name__ == "BoundaryConditions", ass_error_1
+            type(value).__name__ == "BoundaryConditions", ass_error_1
 
         if value is not None:
             self._use_conditions = value

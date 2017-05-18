@@ -5,7 +5,6 @@ teaser
 Tool for Energy Analysis and Simulation for Efficient Retrofit
 '''
 import sys
-import teaser.logic.utilities as utilitis
 import os
 
 v = sys.version_info

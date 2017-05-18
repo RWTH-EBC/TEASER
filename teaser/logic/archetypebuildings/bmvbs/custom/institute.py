@@ -130,7 +130,6 @@ class Institute(Office):
                  office_layout=None,
                  window_layout=None,
                  construction_type=None):
-
         """Constructor of Institute
 
         Adds an additional zone "Laboratory"

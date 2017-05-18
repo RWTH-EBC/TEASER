@@ -4,14 +4,21 @@
 
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 [![Coverage Status](https://coveralls.io/repos/github/RWTH-EBC/TEASER/badge.svg)](https://coveralls.io/github/RWTH-EBC/TEASER)
-[![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg)](https://travis-ci.org/RWTH-EBC/TEASER)
+[![Build Status](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=master)](https://travis-ci.org/RWTH-EBC/TEASER.svg?branch=master)
 
 TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) allows
 fast generation of archetype buildings with low input requirements and the
-export of individual dynamic simulation models for Modelica libraries [AixLib](https://github.com/RWTH-EBC/AixLib) and
-[IEA-EBC Annex60](https://github.com/iea-annex60/modelica-annex60). It is being
-developed at the [RWTH Aachen University, E.ON Energy Research Center, Institute
-for Energy Efficient Buildings and Indoor Climate](https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1).
+export of individual dynamic simulation models for the below-mentioned Modelica
+libraries. These libraries all use the framework of [Modelica IBPSA
+library](https://github.com/ibpsa/modelica). TEASER is being developed at the
+[RWTH Aachen University, E.ON Energy Research Center, Institute for Energy
+Efficient Buildings and Indoor
+Climate](https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1).
+
+ * [AixLib](https://github.com/RWTH-EBC/AixLib)
+ * [Buildings](https://github.com/lbl-srg/modelica-buildings)
+ * [BuildingSystems](https://github.com/UdK-VPT/BuildingSystems)
+ * [IDEAS](https://github.com/open-ideas/IDEAS).
 
 The full documentation of TEASER including examples and description of modules,
 classes and functions can be found at the website:
@@ -40,13 +47,14 @@ time consuming and error-prone. To enable the use of BPS on urban scale we
 present the TEASER tool, an open framework for urban energy modeling of
 building stocks. TEASER provides an easy interface for multiple data sources,
 data enrichment (where necessary) and export of ready-to-run Modelica simulation
-models for [AixLib](https://github.com/RWTH-EBC/AixLib) and
-[IEA-EBC Annex60](https://github.com/iea-annex60/modelica-annex60).
+models for all libraries supporting the
+[Modelica IBPSA library](https://github.com/ibpsa/modelica).
 
 
 ## Version
 
-The current version is 0.5, which is a pre-release.
+TEASER is a ongoing research project, the current version is 0.5.2, which is
+still a pre-release.
 
 ## How to use TEASER
 
@@ -94,7 +102,7 @@ The workflow for changes is described in our [Wiki](https://github.com/RWTH-EBC/
 
 ## How to cite TEASER
 
-+ TEASER: an open tool for urban energy modelling of building stocks. Remmen P., Lauster M., Mans M., Fuchs M., Osterhage T., Müller D.. Journal of Building Performance Simulation, February 2017, 
++ TEASER: an open tool for urban energy modelling of building stocks. Remmen P., Lauster M., Mans M., Fuchs M., Osterhage T., Müller D.. Journal of Building Performance Simulation, February 2017,
 [pdf](http://dx.doi.org/10.1080/19401493.2017.1283539),
 [bibtex](https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite_jbps.bib)
 
@@ -122,3 +130,5 @@ under the
 Parts of TEASER have been developed within public funded projects
 and with financial support by BMWi (German Federal Ministry for Economic
 Affairs and Energy).
+
+<img src="http://www.innovation-beratung-foerderung.de/INNO/Redaktion/DE/Bilder/Titelbilder/titel_foerderlogo_bmwi.jpg;jsessionid=4BD60B6CD6337CDB6DE21DC1F3D6FEC5?__blob=poster&v=2)" width="200">
