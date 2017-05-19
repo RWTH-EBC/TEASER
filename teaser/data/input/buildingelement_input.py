@@ -206,11 +206,6 @@ def _set_layer_data(material, layer, pyxb_class, data_class):
     layer.thickness = pyxb_class.thickness
     layer.id = pyxb_class.id
 
-    material.name = "test"
-    material.density = 100
-    material.thermal_conduc = 100
-    material.heat_capac = 100
-
     if float(data_class.element_bind.version) >= 0.4:
         mat_input.load_material_id(material,
                                    pyxb_class.material.material_id,
