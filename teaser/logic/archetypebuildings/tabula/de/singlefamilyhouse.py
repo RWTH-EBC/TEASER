@@ -326,7 +326,6 @@ class SingleFamilyHouse(Residential):
             use_cond = UseCond(parent=zone)
             use_cond.load_use_conditions(
                 zone_usage=value[1])
-            print(use_cond)
 
         if self.facade_estimation_factors[self.building_age_group]['ow1'] != 0:
             for key, value in self._outer_wall_names_1.items():

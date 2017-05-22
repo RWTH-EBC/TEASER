@@ -42,7 +42,7 @@ def example_generate_archetype():
         method='tabula_de',
         usage='single_family_house',
         name="ResidentialBuilding",
-        year_of_construction=1858,
+        year_of_construction=1956,
         number_of_floors=2,
         height_of_floors=3.2,
         net_leased_area=219)
