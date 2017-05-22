@@ -1,6 +1,7 @@
 from teaser.project import Project
 prj = Project(False)
 
+
 class Test_tabula(object):
     global prj
     '''
@@ -958,8 +959,238 @@ class Test_tabula(object):
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
-    '''
-    def test_tabula_uvalue_sfh(self):
+
+
+assert round(
+    prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value, 1) == 2.9
+assert round(
+    prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.8
+assert round(
+    prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+prj.add_residential(
+    method='tabula_de',
+    usage='single_family_house',
+    name="ResidentialBuilding",
+    year_of_construction=1917,
+    number_of_floors=2,
+    height_of_floors=3.2,
+    net_leased_area=219)
+
+# assert round(
+# prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 1.3
+assert round(
+    prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value, 1) == 1.7
+assert round(
+    prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value, 1) == 0.88
+assert round(
+    prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.8
+assert round(
+    prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+prj.add_residential(
+    method='tabula_de',
+    usage='single_family_house',
+    name="ResidentialBuilding",
+    year_of_construction=1947,
+    number_of_floors=2,
+    height_of_floors=3.2,
+    net_leased_area=219)
+
+# assert round(
+# prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 1.4
+assert round(
+    prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value, 1) == 1.7
+assert round(
+    prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value, 1) == 0.77
+assert round(
+    prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.8
+assert round(
+    prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+prj.add_residential(
+    method='tabula_de',
+    usage='single_family_house',
+    name="ResidentialBuilding",
+    year_of_construction=1956,
+    number_of_floors=2,
+    height_of_floors=3.2,
+    net_leased_area=219)
+
+# assert round(
+# prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 1.4
+assert round(
+    prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value, 1) == 1.4
+for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+    if "_1_" in floor.construction_type:
+        assert round(floor.u_value, 1) == 0.78
+    elif "_2_" in floor.construction_type:
+        assert round(floor.u_value, 1) == 1.01
+assert round(
+    prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.8
+assert round(
+    prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+prj.add_residential(
+    method='tabula_de',
+    usage='single_family_house',
+    name="ResidentialBuilding",
+    year_of_construction=1967,
+    number_of_floors=2,
+    height_of_floors=3.2,
+    net_leased_area=219)
+
+# assert round(
+# prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.8
+for ow in prj.buildings[-1].thermal_zones[-1].outer_walls:
+    if "_1_" in ow.construction_type:
+        assert round(ow.u_value, 1) == 1.2
+    elif "_2_" in ow.construction_type:
+        assert round(ow.u_value, 1) == 0.8
+assert round(
+    prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+    1) == 1.08
+assert round(
+    prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.8
+assert round(
+    prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+prj.add_residential(
+    method='tabula_de',
+    usage='single_family_house',
+    name="ResidentialBuilding",
+    year_of_construction=1977,
+    number_of_floors=2,
+    height_of_floors=3.2,
+    net_leased_area=219)
+
+# assert round(
+# prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.5
+assert round(
+    prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+    1) == 1.0
+for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+    if "_1_" in floor.construction_type:
+        assert round(floor.u_value, 1) == 0.77
+    elif "_2_" in floor.construction_type:
+        assert round(floor.u_value, 1) == 1.0
+assert round(
+    prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.0
+assert round(
+    prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+prj.add_residential(
+    method='tabula_de',
+    usage='single_family_house',
+    name="ResidentialBuilding",
+    year_of_construction=1982,
+    number_of_floors=2,
+    height_of_floors=3.2,
+    net_leased_area=219)
+
+# assert round(
+# prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.5
+assert round(
+    prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+    1) == 0.8
+assert round(
+    prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+    1) == 0.65
+assert round(
+    prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 4.3
+assert round(
+    prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+prj.add_residential(
+    method='tabula_de',
+    usage='single_family_house',
+    name="ResidentialBuilding",
+    year_of_construction=1982,
+    number_of_floors=2,
+    height_of_floors=3.2,
+    net_leased_area=219)
+
+# assert round(
+# prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.4
+assert round(
+    prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+    1) == 0.5
+assert round(
+    prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+    1) == 0.51
+assert round(
+    prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 3.2
+assert round(
+    prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+prj.add_residential(
+    method='tabula_de',
+    usage='single_family_house',
+    name="ResidentialBuilding",
+    year_of_construction=2000,
+    number_of_floors=2,
+    height_of_floors=3.2,
+    net_leased_area=219)
+
+# assert round(
+# prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.35
+assert round(
+    prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+    1) == 0.3
+assert round(
+    prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+    1) == 0.4
+assert round(
+    prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 1.9
+assert round(
+    prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 2.0
+
+prj.add_residential(
+    method='tabula_de',
+    usage='single_family_house',
+    name="ResidentialBuilding",
+    year_of_construction=2008,
+    number_of_floors=2,
+    height_of_floors=3.2,
+    net_leased_area=219)
+
+# assert round(
+# prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.25
+assert round(
+    prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+    1) == 0.3
+assert round(
+    prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+    1) == 0.28
+assert round(
+    prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 1.4
+assert round(
+    prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 2.0
+
+prj.add_residential(
+    method='tabula_de',
+    usage='single_family_house',
+    name="ResidentialBuilding",
+    year_of_construction=2014,
+    number_of_floors=2,
+    height_of_floors=3.2,
+    net_leased_area=219)
+
+# assert round(
+# prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.2
+assert round(
+    prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+    1) == 0.28
+assert round(
+    prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+    1) == 0.35
+assert round(
+    prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 1.3
+assert round(
+    prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 1.8
+'''
+
+    def test_tabula_uvalue_standard_sfh(self):
         prj.set_default()
         prj.data = None
         prj.add_residential(
@@ -972,5 +1203,241 @@ class Test_tabula(object):
             net_leased_area=219)
 
         assert round(
-            prj.buildings[-1].thermal_zones[-1].outer_walls[-1], 1) == 2.6
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 2.0 - 0.17)), 1)
 
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
+            1) == round((1 / (1 / 2.9 - 0.34)), 1)
+
+        '''
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value, 1) == 2.9
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.8
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+            prj.add_residential(
+                method='tabula_de',
+                usage='single_family_house',
+                name="ResidentialBuilding",
+                year_of_construction=1917,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219)
+
+            # assert round(
+            # prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 1.3
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value, 1) == 1.7
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value, 1) == 0.88
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.8
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+            prj.add_residential(
+                method='tabula_de',
+                usage='single_family_house',
+                name="ResidentialBuilding",
+                year_of_construction=1947,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219)
+
+            # assert round(
+            # prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 1.4
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value, 1) == 1.7
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value, 1) == 0.77
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.8
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+            prj.add_residential(
+                method='tabula_de',
+                usage='single_family_house',
+                name="ResidentialBuilding",
+                year_of_construction=1956,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219)
+
+            # assert round(
+            # prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 1.4
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value, 1) == 1.4
+            for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+                if "_1_" in floor.construction_type:
+                    assert round(floor.u_value, 1) == 0.78
+                elif "_2_" in floor.construction_type:
+                    assert round(floor.u_value, 1) == 1.01
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.8
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+            prj.add_residential(
+                method='tabula_de',
+                usage='single_family_house',
+                name="ResidentialBuilding",
+                year_of_construction=1967,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219)
+
+            # assert round(
+            # prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.8
+            for ow in prj.buildings[-1].thermal_zones[-1].outer_walls:
+                if "_1_" in ow.construction_type:
+                    assert round(ow.u_value, 1) == 1.2
+                elif "_2_" in ow.construction_type:
+                    assert round(ow.u_value, 1) == 0.8
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+                1) == 1.08
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.8
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+            prj.add_residential(
+                method='tabula_de',
+                usage='single_family_house',
+                name="ResidentialBuilding",
+                year_of_construction=1977,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219)
+
+            # assert round(
+            # prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.5
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+                1) == 1.0
+            for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+                if "_1_" in floor.construction_type:
+                    assert round(floor.u_value, 1) == 0.77
+                elif "_2_" in floor.construction_type:
+                    assert round(floor.u_value, 1) == 1.0
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 2.0
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+            prj.add_residential(
+                method='tabula_de',
+                usage='single_family_house',
+                name="ResidentialBuilding",
+                year_of_construction=1982,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219)
+
+            # assert round(
+            # prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.5
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+                1) == 0.8
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+                1) == 0.65
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 4.3
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+            prj.add_residential(
+                method='tabula_de',
+                usage='single_family_house',
+                name="ResidentialBuilding",
+                year_of_construction=1982,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219)
+
+            # assert round(
+            # prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.4
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+                1) == 0.5
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+                1) == 0.51
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 3.2
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 3.0
+
+            prj.add_residential(
+                method='tabula_de',
+                usage='single_family_house',
+                name="ResidentialBuilding",
+                year_of_construction=2000,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219)
+
+            # assert round(
+            # prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.35
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+                1) == 0.3
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+                1) == 0.4
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 1.9
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 2.0
+
+            prj.add_residential(
+                method='tabula_de',
+                usage='single_family_house',
+                name="ResidentialBuilding",
+                year_of_construction=2008,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219)
+
+            # assert round(
+            # prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.25
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+                1) == 0.3
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+                1) == 0.28
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 1.4
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 2.0
+
+            prj.add_residential(
+                method='tabula_de',
+                usage='single_family_house',
+                name="ResidentialBuilding",
+                year_of_construction=2014,
+                number_of_floors=2,
+                height_of_floors=3.2,
+                net_leased_area=219)
+
+            # assert round(
+            # prj.buildings[-1].thermal_zones[-1].rooftops[-1].u_value, 1) == 0.2
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].outer_walls[-1].u_value,
+                1) == 0.28
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].ground_floors[-1].u_value,
+                1) == 0.35
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].windows[-1].u_value, 1) == 1.3
+            assert round(
+                prj.buildings[-1].thermal_zones[-1].doors[-1].u_value, 1) == 1.8
+            '''

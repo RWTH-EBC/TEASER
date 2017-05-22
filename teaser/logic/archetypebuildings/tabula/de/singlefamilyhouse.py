@@ -427,7 +427,7 @@ class SingleFamilyHouse(Residential):
                         (self.facade_estimation_factors[
                             self.building_age_group]['gf2'] * type_bldg_area) /
                         len(self.ground_floor_names_2))
-
+        '''
         if self.facade_estimation_factors[self.building_age_group]['rt1'] != 0:
             for key, value in self.roof_names_1.items():
 
@@ -461,7 +461,7 @@ class SingleFamilyHouse(Residential):
                         (self.facade_estimation_factors[
                             self.building_age_group]['rt2'] * type_bldg_area) /
                         len(self.roof_names_2))
-
+        '''
         if self.facade_estimation_factors[self.building_age_group]['door'] != 0:
             for key, value in self.door_names.items():
 

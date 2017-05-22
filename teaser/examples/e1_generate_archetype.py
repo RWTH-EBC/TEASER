@@ -42,11 +42,13 @@ def example_generate_archetype():
         method='tabula_de',
         usage='single_family_house',
         name="ResidentialBuilding",
-        year_of_construction=1988,
+        year_of_construction=1858,
         number_of_floors=2,
         height_of_floors=3.2,
-        net_leased_area=200)
+        net_leased_area=219)
 
+    print(None)
+    '''
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
     # Project.add_residential() is used. The meaning of compulsory parameters
@@ -60,7 +62,7 @@ def example_generate_archetype():
         number_of_floors=4,
         height_of_floors=3.5,
         net_leased_area=4500)
-    
+
 
     prj.add_non_residential(
         method='bmvbs',
@@ -72,6 +74,7 @@ def example_generate_archetype():
         net_leased_area=3400)
 
     return prj
+    '''
 
 
 if __name__ == '__main__':

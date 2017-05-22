@@ -12,11 +12,11 @@ import helptest
 
 prj = Project(True)
 
-
+'''
 class Test_teaser(object):
     """Unit Tests for TEASER"""
     global prj
-    '''
+
     def test_calc_vdi_room1(self):
         """Parameter Verification for rouvel room1"""
         import teaser.examples.verification.verification_VDI_6007_room1 as room1
@@ -3059,6 +3059,7 @@ class Test_teaser(object):
         exmain(number_of_elements=2)
         exmain(number_of_elements=3)
         exmain(number_of_elements=4)
-    '''
 
 
+
+'''

@@ -88,6 +88,8 @@ class BuildingElement(object):
     c1_korr : float [J/K]
         corrected capacity C1,korr for building elements in the case of
         asymmetrical thermal load given in VDI 6007
+    u_value : float [W/m2K)
+        U-Value of building element
     ua_value : float [W/K]
         UA-Value of building elment (Area times U-Value)
     r_inner_conv : float [K/W]
@@ -190,6 +192,7 @@ class BuildingElement(object):
 
         self.ua_value = (1 / (
             self.r_inner_comb + self.r_conduc + self.r_outer_comb))
+        self.u_value = self.ua_value / self.area
 
     def gather_element_properties(self):
         """Helper function for matrix calculation.
