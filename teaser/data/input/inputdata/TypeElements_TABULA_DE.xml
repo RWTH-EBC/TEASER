@@ -9454,7 +9454,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.03</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="25b5d680-3a43-11e7-ba46-2cd444b2e704">oak_old</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9742,12 +9742,12 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.03</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="25b5d680-3a43-11e7-ba46-2cd444b2e704">oak_old</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.03</elements:thickness>
+				<elements:thickness>0.028</elements:thickness>
 				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -13299,7 +13299,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.142285714</elements:thickness>
+				<elements:thickness>0.14222857142857143</elements:thickness>
 				<elements:material material_id="0abbb19a-83ff-11e6-bace-2cd444b2e704">glas_generic</elements:material>
 			</elements:layer>
 		</elements:Layers>
