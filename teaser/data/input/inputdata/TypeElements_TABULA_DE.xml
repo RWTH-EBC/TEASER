@@ -10,7 +10,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.18</elements:thickness>
+				<elements:thickness>0.16</elements:thickness>
 				<elements:material material_id="266228a4-3a43-11e7-acde-2cd444b2e704">fibrous_loam_1200</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -3112,7 +3112,7 @@
 	</elements:OuterWall>
 	<elements:Door>
 		<elements:building_age_group>0 1859</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3120,14 +3120,14 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1860 1918</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3135,14 +3135,14 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1919 1948</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3150,14 +3150,14 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1949 1957</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3165,14 +3165,14 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1958 1968</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3180,14 +3180,14 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1969 1978</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3195,14 +3195,14 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1979 1983</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3210,14 +3210,14 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1984 1994</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3225,14 +3225,14 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1995 2001</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3257,7 +3257,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>2002 2009</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3282,7 +3282,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>2010 2015</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3307,7 +3307,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>2016 2100</elements:building_age_group>
-		<elements:construction_type>tabula_standard_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3332,7 +3332,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>0 1859</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3357,7 +3357,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1860 1918</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3382,7 +3382,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1919 1948</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3407,7 +3407,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1949 1957</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3432,7 +3432,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1958 1968</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3457,7 +3457,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1969 1978</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3482,7 +3482,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1979 1983</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3507,7 +3507,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1984 1994</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3532,7 +3532,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1995 2001</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3557,7 +3557,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>2002 2009</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3582,7 +3582,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>2010 2015</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3607,7 +3607,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>2016 2100</elements:building_age_group>
-		<elements:construction_type>tabula_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3632,7 +3632,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>0 1859</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3657,7 +3657,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1860 1918</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3682,7 +3682,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1919 1948</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3707,7 +3707,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1949 1957</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3732,7 +3732,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1958 1968</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3757,7 +3757,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1969 1978</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3782,7 +3782,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1979 1983</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3807,7 +3807,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1984 1994</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3832,7 +3832,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>1995 2001</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3857,7 +3857,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>2002 2009</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3882,7 +3882,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>2010 2015</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -3907,7 +3907,7 @@
 	</elements:Door>
 	<elements:Door>
 		<elements:building_age_group>2016 2100</elements:building_age_group>
-		<elements:construction_type>tabula_adv_retrofit_Door_SFH</elements:construction_type>
+		<elements:construction_type>tabula_adv_retrofit_1_SFH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
@@ -13299,7 +13299,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.12413333333333332</elements:thickness>
+				<elements:thickness>0.142285714</elements:thickness>
 				<elements:material material_id="0abbb19a-83ff-11e6-bace-2cd444b2e704">glas_generic</elements:material>
 			</elements:layer>
 		</elements:Layers>
