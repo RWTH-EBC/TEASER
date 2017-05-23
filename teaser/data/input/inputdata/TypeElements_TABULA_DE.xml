@@ -195,7 +195,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.11</elements:thickness>
+				<elements:thickness>0.12</elements:thickness>
 				<elements:material material_id="62e3d262-3a43-11e7-b595-2cd444b2e704">XPS_1_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -295,7 +295,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="61cf5890-3a43-11e7-864c-2cd444b2e704">insulating_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -320,7 +320,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="61cf5890-3a43-11e7-864c-2cd444b2e704">insulating_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -480,7 +480,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>4</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="61cf5890-3a43-11e7-864c-2cd444b2e704">insulating_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -515,7 +515,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>4</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="61cf5890-3a43-11e7-864c-2cd444b2e704">insulating_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -3345,7 +3345,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.045</elements:thickness>
 				<elements:material material_id="2cb5f992-3a43-11e7-8a6c-2cd444b2e704">wood_wool_board_magnesia_460</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -3370,7 +3370,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.045</elements:thickness>
 				<elements:material material_id="2cb5f992-3a43-11e7-8a6c-2cd444b2e704">wood_wool_board_magnesia_460</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -3595,7 +3595,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.04</elements:thickness>
+				<elements:thickness>0.037</elements:thickness>
 				<elements:material material_id="2cb5f992-3a43-11e7-8a6c-2cd444b2e704">wood_wool_board_magnesia_460</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9660,7 +9660,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.09</elements:thickness>
+				<elements:thickness>0.1</elements:thickness>
 				<elements:material material_id="62e3d262-3a43-11e7-b595-2cd444b2e704">XPS_1_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9826,7 +9826,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.03</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="25b5d680-3a43-11e7-ba46-2cd444b2e704">oak_old</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9836,6 +9836,11 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>3</elements:id>
 				<elements:thickness>0.14</elements:thickness>
 				<elements:material material_id="2497c138-3a43-11e7-9e0f-2cd444b2e704">concrete</elements:material>
 			</elements:layer>
@@ -9854,17 +9859,17 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.0</elements:thickness>
+				<elements:thickness>0.08</elements:thickness>
 				<elements:material material_id="62e3d262-3a43-11e7-b595-2cd444b2e704">XPS_1_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>8.0</elements:thickness>
+				<elements:thickness>0.04</elements:thickness>
 				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
-				<elements:thickness>0.04</elements:thickness>
+				<elements:thickness>0.16</elements:thickness>
 				<elements:material material_id="2497c138-3a43-11e7-9e0f-2cd444b2e704">concrete</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -9991,7 +9996,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
-				<elements:thickness>0.06</elements:thickness>
+				<elements:thickness>0.05</elements:thickness>
 				<elements:material material_id="62e3d262-3a43-11e7-b595-2cd444b2e704">XPS_1_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -10187,17 +10192,17 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.0</elements:thickness>
+				<elements:thickness>0.08</elements:thickness>
 				<elements:material material_id="62e3d262-3a43-11e7-b595-2cd444b2e704">XPS_1_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>8.0</elements:thickness>
+				<elements:thickness>0.028</elements:thickness>
 				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
-				<elements:thickness>0.03</elements:thickness>
+				<elements:thickness>0.016</elements:thickness>
 				<elements:material material_id="2497c138-3a43-11e7-9e0f-2cd444b2e704">concrete</elements:material>
 			</elements:layer>
 		</elements:Layers>
