@@ -4383,4 +4383,13 @@
 		<materials:thickness_default>0.0</materials:thickness_default>
 		<materials:thickness_list></materials:thickness_list>
 	</materials:Material>
+	<materials:Material material_id="b362502c-3f99-11e7-b117-2cd444b2e704">
+		<materials:name>air_layer</materials:name>
+		<materials:density>1184.0</materials:density>
+		<materials:thermal_conduc>0.35</materials:thermal_conduc>
+		<materials:heat_capac>1.005</materials:heat_capac>
+		<materials:solar_absorp>0.0</materials:solar_absorp>
+		<materials:thickness_default>0.04</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
 </materials:MaterialTemplates>
