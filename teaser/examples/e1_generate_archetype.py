@@ -40,9 +40,9 @@ def example_generate_archetype():
 
     prj.add_residential(
         method='tabula_de',
-        usage='single_family_house',
+        usage='terraced_house',
         name="ResidentialBuilding",
-        year_of_construction=1956,
+        year_of_construction=1918,
         number_of_floors=2,
         height_of_floors=3.2,
         net_leased_area=219)
