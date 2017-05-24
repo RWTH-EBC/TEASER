@@ -1105,7 +1105,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="61cf5890-3a43-11e7-864c-2cd444b2e704">insulating_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -1120,7 +1120,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.24</elements:thickness>
+				<elements:thickness>0.20</elements:thickness>
 				<elements:material material_id="570be3be-3a43-11e7-b769-2cd444b2e704">lightweight_concrete_Vermiculit_1100</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -1130,7 +1130,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="61cf5890-3a43-11e7-864c-2cd444b2e704">insulating_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -1170,7 +1170,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="61cf5890-3a43-11e7-864c-2cd444b2e704">insulating_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -1185,7 +1185,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.24</elements:thickness>
+				<elements:thickness>0.20</elements:thickness>
 				<elements:material material_id="570be3be-3a43-11e7-b769-2cd444b2e704">lightweight_concrete_Vermiculit_1100</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -1195,7 +1195,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="61cf5890-3a43-11e7-864c-2cd444b2e704">insulating_plaster</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -4050,7 +4050,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.03</elements:thickness>
+				<elements:thickness>0.031</elements:thickness>
 				<elements:material material_id="2cb5f992-3a43-11e7-8a6c-2cd444b2e704">wood_wool_board_magnesia_460</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -4075,7 +4075,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.03</elements:thickness>
+				<elements:thickness>0.031</elements:thickness>
 				<elements:material material_id="2cb5f992-3a43-11e7-8a6c-2cd444b2e704">wood_wool_board_magnesia_460</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -4100,7 +4100,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.04</elements:thickness>
+				<elements:thickness>0.037</elements:thickness>
 				<elements:material material_id="2cb5f992-3a43-11e7-8a6c-2cd444b2e704">wood_wool_board_magnesia_460</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -10871,7 +10871,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.06</elements:thickness>
+				<elements:thickness>0.05</elements:thickness>
 				<elements:material material_id="62e3d262-3a43-11e7-b595-2cd444b2e704">XPS_1_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -14170,8 +14170,46 @@
 		</elements:Layers>
 	</elements:Window>
 	<elements:Window>
+		<elements:building_age_group>2010 2015</elements:building_age_group>
+		<elements:construction_type>tabula_standard_2_TH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.45541538461538456</elements:thickness>
+				<elements:material material_id="0abbb19a-83ff-11e6-bace-2cd444b2e704">glas_generic</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
 		<elements:building_age_group>2016 2100</elements:building_age_group>
 		<elements:construction_type>tabula_standard_1_TH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.0</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.5617090909090908</elements:thickness>
+				<elements:material material_id="0abbb19a-83ff-11e6-bace-2cd444b2e704">glas_generic</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:Window>
+		<elements:building_age_group>2016 2100</elements:building_age_group>
+		<elements:construction_type>tabula_standard_2_TH</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:outer_convection>20.0</elements:outer_convection>
