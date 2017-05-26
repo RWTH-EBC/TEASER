@@ -4374,7 +4374,7 @@
 		<materials:thickness_default>0.0</materials:thickness_default>
 		<materials:thickness_list></materials:thickness_list>
 	</materials:Material>
-	<materials:Material material_id="0abbb19a-83ff-11e6-bace-2cd444b2e704">
+	<materials:Material material_id="0abbb19a-83ff-11e6-bacd-2cd444b2e704">
 		<materials:name>glas_generic</materials:name>
 		<materials:density>0.0</materials:density>
 		<materials:thermal_conduc>0.76</materials:thermal_conduc>
