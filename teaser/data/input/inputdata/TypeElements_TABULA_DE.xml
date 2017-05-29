@@ -751,7 +751,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.32</elements:thickness>
+				<elements:thickness>0.34</elements:thickness>
 				<elements:material material_id="3b63ca24-3a43-11e7-ae3c-2cd444b2e704">polysterene_lightweight_concrete_900</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9540,7 +9540,7 @@
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
+				<elements:material material_id="6377221c-3a43-11e7-9599-2cd444b2e704">XPS_2_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
@@ -9567,8 +9567,8 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.06</elements:thickness>
-				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
+				<elements:thickness>0.058</elements:thickness>
+				<elements:material material_id="6377221c-3a43-11e7-9599-2cd444b2e704">XPS_2_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
@@ -9955,7 +9955,7 @@
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
+				<elements:material material_id="6377221c-3a43-11e7-9599-2cd444b2e704">XPS_2_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>4</elements:id>
@@ -9987,8 +9987,8 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
-				<elements:thickness>0.06</elements:thickness>
-				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
+				<elements:thickness>0.058</elements:thickness>
+				<elements:material material_id="6377221c-3a43-11e7-9599-2cd444b2e704">XPS_2_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>4</elements:id>
@@ -10410,7 +10410,7 @@
 			<elements:layer>
 				<elements:id>3</elements:id>
 				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
+				<elements:material material_id="6377221c-3a43-11e7-9599-2cd444b2e704">XPS_2_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>4</elements:id>
@@ -10442,8 +10442,8 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
-				<elements:thickness>0.06</elements:thickness>
-				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
+				<elements:thickness>0.058</elements:thickness>
+				<elements:material material_id="6377221c-3a43-11e7-9599-2cd444b2e704">XPS_2_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>4</elements:id>
