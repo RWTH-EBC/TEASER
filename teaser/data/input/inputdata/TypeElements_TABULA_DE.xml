@@ -5847,12 +5847,7 @@
 			<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="43d8529a-3a43-11e7-91fa-2cd444b2e704">reef_mat_170</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>1</elements:id>
-				<elements:thickness>0.09</elements:thickness>
-				<elements:material material_id="c88189d8-3eef-11e7-ae24-2cd444b2e704"></elements:material>
+				<elements:material material_id="258fb6be-3a43-11e7-81b6-2cd444b2e704">vapourpermeable_wood_fibreboard</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -5873,11 +5868,6 @@
 				<elements:id>1</elements:id>
 				<elements:thickness>0.12</elements:thickness>
 				<elements:material material_id="24e6234c-3a43-11e7-b8ec-2cd444b2e704">expanded_clay_2</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
-				<elements:thickness>0.09</elements:thickness>
-				<elements:material material_id="c881ff0a-3eef-11e7-b186-2cd444b2e704"></elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
