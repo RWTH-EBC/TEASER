@@ -360,7 +360,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.26</elements:thickness>
+				<elements:thickness>0.32</elements:thickness>
 				<elements:material material_id="570be3be-3a43-11e7-b769-2cd444b2e704">lightweight_concrete_Vermiculit_1100</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -385,7 +385,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.32</elements:thickness>
+				<elements:thickness>0.4</elements:thickness>
 				<elements:material material_id="570be3be-3a43-11e7-b769-2cd444b2e704">lightweight_concrete_Vermiculit_1100</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -410,7 +410,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.32</elements:thickness>
+				<elements:thickness>0.34</elements:thickness>
 				<elements:material material_id="3b63ca24-3a43-11e7-ae3c-2cd444b2e704">polysterene_lightweight_concrete_900</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -435,7 +435,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.3</elements:thickness>
+				<elements:thickness>0.19</elements:thickness>
 				<elements:material material_id="3c2dd8e6-3a43-11e7-8dd3-2cd444b2e704">autoclaved_aerated_concrete_400</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9431,7 +9431,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.01</elements:thickness>
+				<elements:thickness>0.03</elements:thickness>
 				<elements:material material_id="25b5d680-3a43-11e7-ba46-2cd444b2e704">oak_old</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9454,7 +9454,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.01</elements:thickness>
+				<elements:thickness>0.03</elements:thickness>
 				<elements:material material_id="25b5d680-3a43-11e7-ba46-2cd444b2e704">oak_old</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9576,7 +9576,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.06</elements:thickness>
 				<elements:material material_id="62e3d262-3a43-11e7-b595-2cd444b2e704">XPS_1_core_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9742,12 +9742,12 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.01</elements:thickness>
+				<elements:thickness>0.03</elements:thickness>
 				<elements:material material_id="25b5d680-3a43-11e7-ba46-2cd444b2e704">oak_old</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.028</elements:thickness>
+				<elements:thickness>0.04</elements:thickness>
 				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
 			</elements:layer>
 			<elements:layer>
