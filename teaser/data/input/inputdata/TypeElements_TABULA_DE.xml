@@ -9436,7 +9436,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.04</elements:thickness>
+				<elements:thickness>0.03</elements:thickness>
 				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9836,7 +9836,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.04</elements:thickness>
+				<elements:thickness>0.03</elements:thickness>
 				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -10291,7 +10291,7 @@
 			</elements:layer>
 						<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.04</elements:thickness>
+				<elements:thickness>0.03</elements:thickness>
 				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
 			</elements:layer>
 			<elements:layer>
