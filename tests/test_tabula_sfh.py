@@ -5,7 +5,7 @@ prj = Project(False)
 class Test_tabula_sfh(object):
     global prj
 
-    def test_tabula_uvalue_standard_sfh(self):
+    def test_tabula_uvalue_standard_sfh_1859(self):
         prj.set_default()
         prj.data = None
         prj.add_residential(
@@ -36,6 +36,8 @@ class Test_tabula_sfh(object):
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
+
+    def test_tabula_uvalue_standard_sfh_1918(self):
 
         prj.add_residential(
             method='tabula_de',
@@ -73,6 +75,8 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
+    def test_tabula_uvalue_standard_sfh_1948(self):
+
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -87,12 +91,10 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 1.7 - 0.17)), 1)
 
-        """
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
             1) == round((1 / (1 / 0.77 - 0.34)), 1)
-        """
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -104,6 +106,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
+    def test_tabula_uvalue_standard_sfh_1957(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -140,6 +143,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
+    def test_tabula_uvalue_standard_sfh_1968(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -175,6 +179,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
+    def test_tabula_uvalue_standard_sfh_1978(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -210,6 +215,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
+    def test_tabula_uvalue_standard_sfh_1983(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -239,6 +245,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
+    def test_tabula_uvalue_standard_sfh_1994(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -268,6 +275,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
+    def test_tabula_uvalue_standard_sfh_2001(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -297,6 +305,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 2.0 - 0.17)), 1)
 
+    def test_tabula_uvalue_standard_sfh_2009(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -326,6 +335,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 2.0 - 0.17)), 1)
 
+    def test_tabula_uvalue_standard_sfh_2015(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -355,6 +365,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_standard_sfh_2100(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -384,7 +395,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_sfh(self):
+    def test_tabula_uvalue_retrofit_sfh_1859(self):
 
         prj.add_residential(
             method='tabula_de',
@@ -416,6 +427,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.6 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_sfh_1918(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -451,6 +463,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.6 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_sfh_1948(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -480,6 +493,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_sfh_1957(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -514,6 +528,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_sfh_1968(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -548,6 +563,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_sfh_1978(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -579,6 +595,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_sfh_1983(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -608,6 +625,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_sfh_1994(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -637,6 +655,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_sfh_2001(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -666,6 +685,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_sfh_2009(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -695,6 +715,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_sfh_2015(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -724,6 +745,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_sfh_2100(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -753,7 +775,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_sfh(self):
+    def test_tabula_uvalue_retrofit_adv_sfh_1859(self):
 
         prj.add_residential(
             method='tabula_de',
@@ -785,6 +807,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_adv_sfh_1918(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -819,6 +842,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_adv_sfh_1948(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -849,6 +873,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_adv_sfh_1957(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -884,6 +909,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_adv_sfh_1968(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -918,6 +944,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_adv_sfh_1978(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -952,6 +979,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_adv_sfh_1983(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -981,6 +1009,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_adv_sfh_1994(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -1010,6 +1039,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_adv_sfh_2001(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -1039,6 +1069,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_adv_sfh_2009(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
@@ -1068,6 +1099,7 @@ class Test_tabula_sfh(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
+    def test_tabula_uvalue_retrofit_adv_sfh_2015(self):
         prj.add_residential(
             method='tabula_de',
             usage='single_family_house',
