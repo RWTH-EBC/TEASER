@@ -245,13 +245,8 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.15</elements:thickness>
-				<elements:material material_id="b362502c-3f99-11e7-b117-2cd444b2e704">air_layer</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
 				<elements:thickness>0.05</elements:thickness>
-				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
+				<elements:material material_id="2797e0fa-3a43-11e7-ae72-2cd444b2e704">glass_fibre_batt_40</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:OuterWall>
@@ -583,13 +578,9 @@
 				<elements:thickness>0.02</elements:thickness>
 				<elements:material material_id="258fb6be-3a43-11e7-81b6-2cd444b2e704">vapourpermeable_wood_fibreboard</elements:material>
 			</elements:layer>
+
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="b362502c-3f99-11e7-b117-2cd444b2e704">air_layer</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
 				<elements:thickness>0.17</elements:thickness>
 				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
 			</elements:layer>
@@ -710,7 +701,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.26</elements:thickness>
+				<elements:thickness>0.32</elements:thickness>
 				<elements:material material_id="570be3be-3a43-11e7-b769-2cd444b2e704">lightweight_concrete_Vermiculit_1100</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9487,7 +9478,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.01</elements:thickness>
+				<elements:thickness>0.011</elements:thickness>
 				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9897,7 +9888,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
-				<elements:thickness>0.01</elements:thickness>
+				<elements:thickness>0.011</elements:thickness>
 				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -10352,7 +10343,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>3</elements:id>
-				<elements:thickness>0.01</elements:thickness>
+				<elements:thickness>0.011</elements:thickness>
 				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
