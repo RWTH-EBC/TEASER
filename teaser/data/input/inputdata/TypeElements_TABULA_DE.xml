@@ -726,7 +726,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.32</elements:thickness>
+				<elements:thickness>0.4</elements:thickness>
 				<elements:material material_id="570be3be-3a43-11e7-b769-2cd444b2e704">lightweight_concrete_Vermiculit_1100</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -9501,7 +9501,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.01</elements:thickness>
+				<elements:thickness>0.005</elements:thickness>
 				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
