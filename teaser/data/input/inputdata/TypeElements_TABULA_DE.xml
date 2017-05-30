@@ -5984,11 +5984,6 @@
 				<elements:thickness>0.12</elements:thickness>
 				<elements:material material_id="2797e0fa-3a43-11e7-ae72-2cd444b2e704">glass_fibre_batt_40</elements:material>
 			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
-				<elements:thickness>0.13</elements:thickness>
-				<elements:material material_id="c884701e-3eef-11e7-a80a-2cd444b2e704"></elements:material>
-			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
 	<elements:Rooftop>
@@ -6006,13 +6001,8 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.14</elements:thickness>
-				<elements:material material_id="2797e0fa-3a43-11e7-ae72-2cd444b2e704">glass_fibre_batt_40</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
 				<elements:thickness>0.13</elements:thickness>
-				<elements:material material_id="c884e54d-3eef-11e7-bb62-2cd444b2e704"></elements:material>
+				<elements:material material_id="2797e0fa-3a43-11e7-ae72-2cd444b2e704">glass_fibre_batt_40</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -6034,11 +6024,6 @@
 				<elements:thickness>0.16</elements:thickness>
 				<elements:material material_id="2797e0fa-3a43-11e7-ae72-2cd444b2e704">glass_fibre_batt_40</elements:material>
 			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
-				<elements:thickness>0.13</elements:thickness>
-				<elements:material material_id="c8855a81-3eef-11e7-af05-2cd444b2e704"></elements:material>
-			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
 	<elements:Rooftop>
@@ -6057,17 +6042,12 @@
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.16</elements:thickness>
-				<elements:material material_id="2797e0fa-3a43-11e7-ae72-2cd444b2e704">glass_fibre_batt_40</elements:material>
+				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
 				<elements:thickness>0.05</elements:thickness>
 				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>3</elements:id>
-				<elements:thickness>0.13</elements:thickness>
-				<elements:material material_id="c885f6c6-3eef-11e7-af44-2cd444b2e704"></elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -6087,12 +6067,7 @@
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.27</elements:thickness>
-				<elements:material material_id="2797e0fa-3a43-11e7-ae72-2cd444b2e704">glass_fibre_batt_40</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
-				<elements:thickness>0.13</elements:thickness>
-				<elements:material material_id="c8866bf9-3eef-11e7-acae-2cd444b2e704"></elements:material>
+				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
