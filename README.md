@@ -120,6 +120,8 @@ under the
 
 ## Acknowledgements
 
+This  work  was  supported  by  the  Helmholtz  Association  under  the  Joint  Initiative  “Energy System 2050 – A Contribution of the Research Field Energy”.
+
 Parts of TEASER have been developed within public funded projects
 and with financial support by BMWi (German Federal Ministry for Economic
 Affairs and Energy).
