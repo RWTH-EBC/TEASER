@@ -97,6 +97,11 @@ class Test_tabula_sfh(object):
             net_leased_area=219)
 
         assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
+            1) == round((1 / (1 / 1.4 - 0.21)), 1)
+
+        assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 1.7 - 0.17)), 1)
@@ -125,6 +130,11 @@ class Test_tabula_sfh(object):
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
+            1) == round((1 / (1 / 1.4 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -162,6 +172,11 @@ class Test_tabula_sfh(object):
             height_of_floors=3.2,
             net_leased_area=219)
 
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
+            1) == round((1 / (1 / 0.8 - 0.21)), 1)
+
         for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
 
             if "_1_" in wall.construction_type:
@@ -196,6 +211,11 @@ class Test_tabula_sfh(object):
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
+            1) == round((1 / (1 / 0.5 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -234,6 +254,11 @@ class Test_tabula_sfh(object):
             net_leased_area=219)
 
         assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
+            1) == round((1 / (1 / 0.5 - 0.21)), 1)
+
+        assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
@@ -262,6 +287,11 @@ class Test_tabula_sfh(object):
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
+            1) == round((1 / (1 / 0.4 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc

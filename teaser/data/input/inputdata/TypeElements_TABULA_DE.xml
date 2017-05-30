@@ -5846,7 +5846,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.0245</elements:thickness>
 				<elements:material material_id="258fb6be-3a43-11e7-81b6-2cd444b2e704">vapourpermeable_wood_fibreboard</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -5861,12 +5861,12 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.024</elements:thickness>
 				<elements:material material_id="258fb6be-3a43-11e7-81b6-2cd444b2e704">vapourpermeable_wood_fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.12</elements:thickness>
+				<elements:thickness>0.10</elements:thickness>
 				<elements:material material_id="24e6234c-3a43-11e7-b8ec-2cd444b2e704">expanded_clay_2</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -5881,13 +5881,8 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.035</elements:thickness>
+				<elements:thickness>0.0275</elements:thickness>
 				<elements:material material_id="2b23145c-3a43-11e7-ad60-2cd444b2e704">wood_fibreboard_light_200</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>1</elements:id>
-				<elements:thickness>0.09</elements:thickness>
-				<elements:material material_id="c8824d2f-3eef-11e7-b505-2cd444b2e704"></elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -5909,11 +5904,6 @@
 				<elements:thickness>0.08</elements:thickness>
 				<elements:material material_id="2d9931c6-3a43-11e7-bc13-2cd444b2e704">groundgranulated_blastfurnace_slag_750</elements:material>
 			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
-				<elements:thickness>0.09</elements:thickness>
-				<elements:material material_id="c882c262-3eef-11e7-9c79-2cd444b2e704"></elements:material>
-			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
 	<elements:Rooftop>
@@ -5931,13 +5921,8 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.044</elements:thickness>
 				<elements:material material_id="2797e0fa-3a43-11e7-ae72-2cd444b2e704">glass_fibre_batt_40</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
-				<elements:thickness>0.13</elements:thickness>
-				<elements:material material_id="c8833792-3eef-11e7-9284-2cd444b2e704"></elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -5951,18 +5936,13 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.16</elements:thickness>
+				<elements:thickness>0.26</elements:thickness>
 				<elements:material material_id="2497c138-3a43-11e7-9e0f-2cd444b2e704">concrete</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.06</elements:thickness>
-				<elements:material material_id="2797e0fa-3a43-11e7-ae72-2cd444b2e704">glass_fibre_batt_40</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
-				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="c88385b8-3eef-11e7-8f94-2cd444b2e704"></elements:material>
+				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -5983,11 +5963,6 @@
 				<elements:id>1</elements:id>
 				<elements:thickness>0.08</elements:thickness>
 				<elements:material material_id="2797e0fa-3a43-11e7-ae72-2cd444b2e704">glass_fibre_batt_40</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
-				<elements:thickness>0.13</elements:thickness>
-				<elements:material material_id="c883faea-3eef-11e7-83a4-2cd444b2e704"></elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
