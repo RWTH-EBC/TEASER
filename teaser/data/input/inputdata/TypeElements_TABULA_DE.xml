@@ -1916,7 +1916,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.18</elements:thickness>
+				<elements:thickness>0.16</elements:thickness>
 				<elements:material material_id="266228a4-3a43-11e7-acde-2cd444b2e704">fibrous_loam_1200</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -4686,7 +4686,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -7435,13 +7435,8 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.02</elements:thickness>
-				<elements:material material_id="43d8529a-3a43-11e7-91fa-2cd444b2e704">reef_mat_170</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>1</elements:id>
-				<elements:thickness>0.09</elements:thickness>
-				<elements:material material_id="c8a825a4-3eef-11e7-bea0-2cd444b2e704"></elements:material>
+				<elements:thickness>0.0245</elements:thickness>
+				<elements:material material_id="258fb6be-3a43-11e7-81b6-2cd444b2e704">vapourpermeable_wood_fibreboard</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -11247,12 +11242,12 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.01</elements:thickness>
 				<elements:material material_id="b362502c-3f99-11e7-b117-2cd444b2e704">air_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.1</elements:thickness>
+				<elements:thickness>0.07</elements:thickness>
 				<elements:material material_id="2b6edec8-3a43-11e7-9a49-2cd444b2e704">wood_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -11573,7 +11568,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.12</elements:thickness>
+				<elements:thickness>0.07</elements:thickness>
 				<elements:material material_id="b362502c-3f99-11e7-b117-2cd444b2e704">air_layer</elements:material>
 			</elements:layer>
 			<elements:layer>

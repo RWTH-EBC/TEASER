@@ -1,308 +1,383 @@
+
 from teaser.project import Project
 prj = Project(False)
 
 
-class Test_tabula_th(object):
+class Test_tabula_mfh(object):
     global prj
-
-    def test_tabula_de_th_area_1919(self):
+    '''
+    def test_tabula_de_mfh_area_1859(self):
         """
-        Test for area estimation of tabula th
+        Test for area estimation of tabula mfh
         """
         prj.set_default()
         prj.data = None
-
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=677)
+
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 284.1
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 749.3
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 173.8
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 107
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
+
+    def test_tabula_de_mfh_area_1919(self):
+        """
+        Test for area estimation of tabula mfh
+        """
+        prj.add_residential(
+            method='tabula_de',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1918,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=96)
+            net_leased_area=312)
 
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 60
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 102.8
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 74.5
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 146
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 60.0
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 102.8
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].windows), 1) == 18.1
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 54.1
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_th_area_1948(self):
+    def test_tabula_de_mfh_area_1948(self):
         """
-        Test for area estimation of tabula th
+        Test for area estimation of tabula mfh
         """
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1947,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=113)
+            net_leased_area=385)
 
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 50.4
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 189.6
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 64.1
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 325.5
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 50.4
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 158.5
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].windows), 1) == 21.5
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 71.2
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_th_area_1956(self):
+    def test_tabula_de_mfh_area_1957(self):
         """
-        Test for area estimation of tabula th
+        Test for area estimation of tabula mfh
         """
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1956,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=150)
+            net_leased_area=632)
 
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 81.2
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 355.0
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 134.7
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 462.0
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 81.2
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 355.0
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].windows), 1) == 46.7
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 98.7
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_th_area_1968(self):
+    def test_tabula_de_mfh_area_1968(self):
         """
-        Test for area estimation of tabula th
+        Test for area estimation of tabula mfh
         """
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1967,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=117)
+            net_leased_area=3129)
 
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 46.2
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 971.1
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 40.4
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 2039
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 46.2
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 971.1
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].windows), 1) == 13.5
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 507.5
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_th_area_1977(self):
+    def test_tabula_de_mfh_area_1978(self):
         """
-        Test for area estimation of tabula th
-        """
+        Test for area estimation of tabula mfh
+        """ def test_tabula_de_mfh_area_1859(self):
+            """
+            Test for area estimation of tabula mfh
+            """
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1977,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=106)
+            net_leased_area=469)
 
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 60.9
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 216.7
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 53.7
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 336.0
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 60.9
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 216.7
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].windows), 1) == 23.4
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 81.3
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_th_area_1983(self):
+    def test_tabula_de_mfh_area_1983(self):
         """
-        Test for area estimation of tabula th
+        Test for area estimation of tabula mfh
         """
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1982,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=108)
+            net_leased_area=654)
 
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 97.6
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 248.3
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 54.1
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 447.1
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 73.0
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 248.3
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].windows), 1) == 20.3
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 99.4
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_th_area_1994(self):
+    def test_tabula_de_mfh_area_1994(self):
         """
-        Test for area estimation of tabula th
+        Test for area estimation of tabula mfh
         """
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1993,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=128)
+            net_leased_area=778)
 
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 64.9
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 249.4
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 50.9
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 774.8
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 56.1
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 249.4
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].windows), 1) == 18.8
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 161.0
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_th_area_2001(self):
+    def test_tabula_de_mfh_area_2001(self):
         """
-        Test for area estimation of tabula th
+        Test for area estimation of tabula mfh
         """
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2000,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=149)
+            net_leased_area=835)
 
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 77.4
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 283.7
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 59.1
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 695.8
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 51.9
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 283.7
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].windows), 1) == 22.4
-        assert round(
-            sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.5
-
-    def test_tabula_de_th_area_2009(self):
-        """
-        Test for area estimation of tabula th
-        """
-        prj.add_residential(
-            method='tabula_de',
-            usage='terraced_house',
-            name="ResidentialBuilding",
-            year_of_construction=2008,
-            number_of_floors=2,
-            height_of_floors=3.2,
-            net_leased_area=152)
-
-        assert round(
-            sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 91.3
-        assert round(
-            sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 140.7
-        assert round(
-            sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 70.7
-        assert round(
-            sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].windows), 1) == 36.3
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 162.8
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
 
-    def test_tabula_de_th_area_2015(self):
+    def test_tabula_de_mfh_area_2009(self):
         """
-        Test for area estimation of tabula th
+        Test for area estimation of tabula mfh
         """
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=2008,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=2190)
+
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 588.0
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 1698.0
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 619.5
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 308.7
+        assert round(
+            sum(wall.area for wall in
+                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
+
+    def test_tabula_de_mfh_area_2015(self):
+        """
+        Test for area estimation of tabula mfh
+        """
+        prj.add_residential(
+            method='tabula_de',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2014,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=196)
+            net_leased_area=1305)
 
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 75.7
+                prj.buildings[-1].thermal_zones[-1].rooftops), 1) == 321.1
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 207.0
+                prj.buildings[-1].thermal_zones[-1].outer_walls), 1) == 1193.2
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 67.8
+                prj.buildings[-1].thermal_zones[-1].ground_floors), 1) == 321.1
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].windows), 1) == 28.1
+                prj.buildings[-1].thermal_zones[-1].windows), 1) == 243.6
         assert round(
             sum(wall.area for wall in
-                prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.7
+                prj.buildings[-1].thermal_zones[-1].doors), 1) == 47.9
+    '''
 
-    def test_tabula_uvalue_standard_th_1919(self):
+    def test_tabula_uvalue_standard_mfh_1859(self):
 
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
+            1) == round((1 / (1 / 2.6 - 0.21)), 1)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 2.0 - 0.17)), 1)
+
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+            if "_1_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.88 - 0.34)), 1)
+
+            elif "_2_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 1.2 - 0.34)), 1)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
+            1) == round((1 / (1 / 2.8 - 0.17)), 1)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
+            1) == round((1 / (1 / 3.0 - 0.17)), 1)
+
+    def test_tabula_uvalue_standard_mfh_1918(self):
+
+        prj.add_residential(
+            method='tabula_de',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1918,
             number_of_floors=2,
@@ -312,32 +387,40 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.77 - 0.17)), 1)
+            1) == round((1 / (1 / 1.3 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 1.7 - 0.17)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.88 - 0.17)), 1)
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+
+            if "_1_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.88 - 0.34)), 1)
+
+            elif "_2_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 1.2 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
-            1) == round((1 / (1 / 2.7 - 0.17)), 1)
+            1) == round((1 / (1 / 2.8 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_1948(self):
+    def test_tabula_uvalue_standard_mfh_1948(self):
+
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1947,
             number_of_floors=2,
@@ -347,7 +430,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.65 - 0.17)), 1)
+            1) == round((1 / (1 / 1.4 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -357,7 +440,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.77 - 0.17)), 1)
+            1) == round((1 / (1 / 0.77 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -369,10 +452,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_1957(self):
+    def test_tabula_uvalue_standard_mfh_1957(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1956,
             number_of_floors=2,
@@ -382,17 +465,23 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.65 - 0.17)), 1)
+            1) == round((1 / (1 / 1.4 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 1.2 - 0.17)), 1)
+            1) == round((1 / (1 / 1.4 - 0.17)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 1.29 - 0.17)), 1)
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+            if "_1_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.78 - 0.34)), 1)
+
+            elif "_2_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 1.0 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -404,10 +493,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_1968(self):
+    def test_tabula_uvalue_standard_mfh_1968(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1967,
             number_of_floors=2,
@@ -417,17 +506,22 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.51 - 0.17)), 1)
+            1) == round((1 / (1 / 0.8 - 0.21)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 1.2 - 0.17)), 1)
+        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
+
+            if "_1_" in wall.construction_type:
+                assert round(1 / (wall.r_conduc * wall.area),
+                             1) == round((1 / (1 / 1.2 - 0.17)), 1)
+
+            if "_2_" in wall.construction_type:
+                assert round(1 / (wall.r_conduc * wall.area),
+                             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 1.08 - 0.17)), 1)
+            1) == round((1 / (1 / 1.08 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -439,10 +533,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_1978(self):
+    def test_tabula_uvalue_standard_mfh_1978(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1977,
             number_of_floors=2,
@@ -452,17 +546,23 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.51 - 0.17)), 1)
+            1) == round((1 / (1 / 0.5 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 1.0 - 0.17)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.77 - 0.17)), 1)
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+            if "_1_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.77 - 0.34)), 1)
+
+            elif "_2_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 1.0 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -474,10 +574,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_1983(self):
+    def test_tabula_uvalue_standard_mfh_1983(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1982,
             number_of_floors=2,
@@ -497,22 +597,22 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.65 - 0.17)), 1)
+            1) == round((1 / (1 / 0.65 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
-            1) == round((1 / (1 / 2.8 - 0.17)), 1)
+            1) == round((1 / (1 / 4.3 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_1994(self):
+    def test_tabula_uvalue_standard_mfh_1994(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1993,
             number_of_floors=2,
@@ -527,27 +627,27 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.6 - 0.17)), 1)
+            1) == round((1 / (1 / 0.5 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.51 - 0.17)), 1)
+            1) == round((1 / (1 / 0.51 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
-            1) == round((1 / (1 / 2.8 - 0.17)), 1)
+            1) == round((1 / (1 / 3.2 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_2001(self):
+    def test_tabula_uvalue_standard_mfh_2001(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2000,
             number_of_floors=2,
@@ -559,35 +659,30 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
             1) == round((1 / (1 / 0.35 - 0.21)), 1)
 
-        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-
-            if "_1_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.6 - 0.17)), 1)
-
-            if "_2_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.6 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.3 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.45 - 0.17)), 1)
+            1) == round((1 / (1 / 0.4 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
-            1) == round((1 / (1 / 1.6 - 0.17)), 1)
+            1) == round((1 / (1 / 1.9 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 2.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_2008(self):
+    def test_tabula_uvalue_standard_mfh_2009(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2008,
             number_of_floors=2,
@@ -597,7 +692,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.2 - 0.21)), 1)
+            1) == round((1 / (1 / 0.25 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -607,22 +702,22 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.28 - 0.17)), 1)
+            1) == round((1 / (1 / 0.28 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
-            1) == round((1 / (1 / 1.3 - 0.17)), 1)
+            1) == round((1 / (1 / 1.4 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 2.0 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_2015(self):
+    def test_tabula_uvalue_standard_mfh_2015(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2014,
             number_of_floors=2,
@@ -634,39 +729,30 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
             1) == round((1 / (1 / 0.2 - 0.21)), 1)
 
-        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-
-            if "_1_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.28 - 0.17)), 1)
-
-            if "_2_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.28 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.28 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.35 - 0.17)), 1)
+            1) == round((1 / (1 / 0.35 - 0.34)), 1)
 
-        for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 1.3 - 0.17)), 1)
-
-            if "_2_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 1.3 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
+            1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_standard_th_2100(self):
+    def test_tabula_uvalue_standard_mfh_2100(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2099,
             number_of_floors=2,
@@ -676,42 +762,69 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.13 - 0.21)), 1)
+            1) == round((1 / (1 / 0.15 - 0.21)), 1)
 
-        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-
-            if "_1_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.16 - 0.17)), 1)
-
-            if "_2_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.16 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.17 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.16 - 0.17)), 1)
+            1) == round((1 / (1 / 0.17 - 0.34)), 1)
 
-        for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 1.1 - 0.17)), 1)
-
-            if "_2_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 1.1 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
+            1) == round((1 / (1 / 1.1 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_1919(self):
+    def test_tabula_uvalue_retrofit_mfh_1859(self):
 
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219,
+            construction_type="tabula_retrofit")
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
+            1) == round((1 / (1 / 0.41 - 0.21)), 1)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.35 - 0.17)), 1)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
+            1) == round((1 / (1 / 0.49 - 0.17)), 1)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
+            1) == round((1 / (1 / 1.6 - 0.17)), 1)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
+            1) == round((1 / (1 / 1.6 - 0.17)), 1)
+
+    def test_tabula_uvalue_retrofit_mfh_1918(self):
+        prj.add_residential(
+            method='tabula_de',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1918,
             number_of_floors=2,
@@ -722,17 +835,22 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.21 - 0.17)), 1)
+            1) == round((1 / (1 / 0.41 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.34 - 0.17)), 1)
+            1) == round((1 / (1 / 0.25 - 0.17)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.29 - 0.17)), 1)
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+            if "_1_" in floor.construction_type:
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.29 - 0.34)), 1)
+
+            elif "_2_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.32 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -744,11 +862,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.6 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_1948(self):
-
+    def test_tabula_uvalue_retrofit_mfh_1948(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1947,
             number_of_floors=2,
@@ -758,7 +875,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.2 - 0.17)), 1)
+            1) == round((1 / (1 / 0.41 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -768,7 +885,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.28 - 0.17)), 1)
+            1) == round((1 / (1 / 0.28 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -780,11 +897,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_1957(self):
-
+    def test_tabula_uvalue_retrofit_mfh_1957(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1956,
             number_of_floors=2,
@@ -794,17 +910,22 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.2 - 0.17)), 1)
+            1) == round((1 / (1 / 0.41 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.23 - 0.17)), 1)
+            1) == round((1 / (1 / 0.4 - 0.17)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.33 - 0.17)), 1)
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+
+            if "_1_" in floor.construction_type:
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.28 - 0.34)), 1)
+
+            elif "_2_" in floor.construction_type:
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.31 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -816,11 +937,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_1968(self):
-
+    def test_tabula_uvalue_retrofit_mfh_1968(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1967,
             number_of_floors=2,
@@ -830,17 +950,22 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.19 - 0.17)), 1)
+            1) == round((1 / (1 / 0.41 - 0.21)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.23 - 0.17)), 1)
+        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
+
+            if "_1_" in wall.construction_type:
+                assert round(1 / (wall.r_conduc * wall.area),
+                             1) == round((1 / (1 / 0.23 - 0.17)), 1)
+
+            if "_2_" in wall.construction_type:
+                assert round(1 / (wall.r_conduc * wall.area),
+                             1) == round((1 / (1 / 0.21 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.31 - 0.17)), 1)
+            1) == round((1 / (1 / 0.31 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -852,11 +977,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_1978(self):
-
+    def test_tabula_uvalue_retrofit_mfh_1978(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1977,
             number_of_floors=2,
@@ -866,17 +990,20 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.19 - 0.17)), 1)
+            1) == round((1 / (1 / 0.18 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.22 - 0.17)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.28 - 0.17)), 1)
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+            if "_1_" in floor.construction_type:
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.28 - 0.34)), 1)
+            elif "_2_" in floor.construction_type:
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.3 - 0.34)), 1)
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
@@ -887,11 +1014,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_1983(self):
-
+    def test_tabula_uvalue_retrofit_mfh_1983(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1982,
             number_of_floors=2,
@@ -911,7 +1037,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.26 - 0.17)), 1)
+            1) == round((1 / (1 / 0.26 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -923,11 +1049,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_1994(self):
-
+    def test_tabula_uvalue_retrofit_mfh_1994(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1993,
             number_of_floors=2,
@@ -942,12 +1067,12 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.2 - 0.17)), 1)
+            1) == round((1 / (1 / 0.18 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.24 - 0.17)), 1)
+            1) == round((1 / (1 / 0.24 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -959,11 +1084,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_2001(self):
-
+    def test_tabula_uvalue_retrofit_mfh_2001(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2000,
             number_of_floors=2,
@@ -975,20 +1099,15 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
             1) == round((1 / (1 / 0.35 - 0.21)), 1)
 
-        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-
-            if "_1_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.2 - 0.17)), 1)
-
-            if "_2_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.2 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.15 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.22 - 0.17)), 1)
+            1) == round((1 / (1 / 0.21 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1000,11 +1119,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_2009(self):
-
+    def test_tabula_uvalue_retrofit_mfh_2009(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2008,
             number_of_floors=2,
@@ -1014,7 +1132,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.2 - 0.21)), 1)
+            1) == round((1 / (1 / 0.25 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -1024,7 +1142,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.17 - 0.17)), 1)
+            1) == round((1 / (1 / 0.17 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1036,11 +1154,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_2015(self):
-
+    def test_tabula_uvalue_retrofit_mfh_2015(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2014,
             number_of_floors=2,
@@ -1052,40 +1169,30 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
             1) == round((1 / (1 / 0.16 - 0.21)), 1)
 
-        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-
-            if "_1_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.2 - 0.17)), 1)
-
-            if "_2_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.2 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.2 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.25 - 0.17)), 1)
+            1) == round((1 / (1 / 0.24 - 0.34)), 1)
 
-        for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 1.3 - 0.17)), 1)
-
-            if "_2_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 1.3 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
+            1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_th_2100(self):
-
+    def test_tabula_uvalue_retrofit_mfh_2100(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2099,
             number_of_floors=2,
@@ -1097,40 +1204,67 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
             1) == round((1 / (1 / 0.13 - 0.21)), 1)
 
-        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-
-            if "_1_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.15 - 0.17)), 1)
-
-            if "_2_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.15 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.15 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.15 - 0.17)), 1)
+            1) == round((1 / (1 / 0.15 - 0.34)), 1)
 
-        for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 1.1 - 0.17)), 1)
-
-            if "_2_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 1.1 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
+            1) == round((1 / (1 / 1.1 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 1.3 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_1919(self):
+    def test_tabula_uvalue_retrofit_adv_mfh_1859(self):
 
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219,
+            construction_type="tabula_adv_retrofit")
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
+            1) == round((1 / (1 / 0.14 - 0.21)), 1)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.14 - 0.17)), 1)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
+            1) == round((1 / (1 / 0.27 - 0.17)), 1)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
+            1) == round((1 / (1 / 0.8 - 0.17)), 1)
+
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
+            1) == round((1 / (1 / 0.8 - 0.17)), 1)
+
+    def test_tabula_uvalue_retrofit_adv_mfh_1918(self):
+        prj.add_residential(
+            method='tabula_de',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1918,
             number_of_floors=2,
@@ -1141,17 +1275,21 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.1 - 0.17)), 1)
+            1) == round((1 / (1 / 0.14 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.13 - 0.17)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.22 - 0.17)), 1)
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+            if "_1_" in floor.construction_type:
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.22 - 0.34)), 1)
+
+            elif "_2_" in floor.construction_type:
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.23 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1163,11 +1301,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_1948(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_1948(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1947,
             number_of_floors=2,
@@ -1178,7 +1315,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.1 - 0.17)), 1)
+            1) == round((1 / (1 / 0.14 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -1188,7 +1325,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.21 - 0.17)), 1)
+            1) == round((1 / (1 / 0.21 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1200,11 +1337,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_1957(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_1957(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1956,
             number_of_floors=2,
@@ -1215,17 +1351,22 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.1 - 0.17)), 1)
+            1) == round((1 / (1 / 0.14 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.13 - 0.17)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.24 - 0.17)), 1)
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+
+            if "_1_" in floor.construction_type:
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.21 - 0.34)), 1)
+
+            if "_2_" in floor.construction_type:
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.23 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1237,11 +1378,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_1968(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_1968(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1967,
             number_of_floors=2,
@@ -1251,12 +1391,17 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.09 - 0.17)), 1)
+            1) == round((1 / (1 / 0.14 - 0.21)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.13 - 0.17)), 1)
+        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
+
+            if "_1_" in wall.construction_type:
+                assert round(1 / (wall.r_conduc * wall.area),
+                             1) == round((1 / (1 / 0.13 - 0.34)), 1)
+
+            if "_2_" in wall.construction_type:
+                assert round(1 / (wall.r_conduc * wall.area),
+                             1) == round((1 / (1 / 0.12 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
@@ -1273,11 +1418,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_1978(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_1978(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1977,
             number_of_floors=2,
@@ -1294,10 +1438,15 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.13 - 0.17)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.21 - 0.17)), 1)
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+
+            if "_1_" in floor.construction_type:
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.21 - 0.34)), 1)
+
+            if "_2_" in floor.construction_type:
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.23 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1309,11 +1458,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_1983(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_1983(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1982,
             number_of_floors=2,
@@ -1333,7 +1481,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.20 - 0.17)), 1)
+            1) == round((1 / (1 / 0.20 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1345,11 +1493,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_1994(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_1994(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=1993,
             number_of_floors=2,
@@ -1369,7 +1516,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.19 - 0.17)), 1)
+            1) == round((1 / (1 / 0.19 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1381,11 +1528,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_2001(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_2001(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2000,
             number_of_floors=2,
@@ -1397,20 +1543,15 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
             1) == round((1 / (1 / 0.14 - 0.21)), 1)
 
-        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-
-            if "_1_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.14 - 0.17)), 1)
-
-            if "_2_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.14 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.14 - 0.17)), 1)
         """
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.17 - 0.17)), 1)
+            1) == round((1 / (1 / 0.17 - 0.34)), 1)
         """
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1422,11 +1563,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_2008(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_2009(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2008,
             number_of_floors=2,
@@ -1446,7 +1586,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.17 - 0.17)), 1)
+            1) == round((1 / (1 / 0.17 - 0.34)), 1)
         """
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1458,11 +1598,10 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_2015(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_2015(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
             year_of_construction=2014,
             number_of_floors=2,
@@ -1474,42 +1613,32 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
             1) == round((1 / (1 / 0.1 - 0.21)), 1)
 
-        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-
-            if "_1_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.12 - 0.17)), 1)
-
-            if "_2_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.12 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.12 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.12 - 0.17)), 1)
+            1) == round((1 / (1 / 0.12 - 0.34)), 1)
 
-        for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 0.7 - 0.17)), 1)
-
-            if "_2_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 1.0 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
+            1) == round((1 / (1 / 0.7 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
 
-    def test_tabula_uvalue_retrofit_adv_th_2100(self):
-
+    def test_tabula_uvalue_retrofit_adv_mfh_2100(self):
         prj.add_residential(
             method='tabula_de',
-            usage='terraced_house',
+            usage='multi_family_house',
             name="ResidentialBuilding",
-            year_of_construction=2099,
+            year_of_construction=2100,
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219, construction_type="tabula_adv_retrofit")
@@ -1519,29 +1648,20 @@ class Test_tabula_th(object):
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
             1) == round((1 / (1 / 0.1 - 0.21)), 1)
 
-        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-
-            if "_1_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.12 - 0.17)), 1)
-
-            if "_2_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.12 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.12 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.12 - 0.17)), 1)
+            1) == round((1 / (1 / 0.12 - 0.34)), 1)
 
-        for win in prj.buildings[-1].thermal_zones[-1].windows:
-            if "_1_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 0.7 - 0.17)), 1)
-
-            if "_2_" in win.construction_type:
-                assert round(1 / (win.r_conduc * win.area),
-                             1) == round((1 / (1 / 1.0 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
+            1) == round((1 / (1 / 0.7 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
