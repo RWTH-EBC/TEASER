@@ -586,7 +586,7 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
-            1) == round((1 / (1 / 3 - 0.17)), 1)
+            1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
@@ -1231,10 +1231,16 @@ class Test_tabula_mfh(object):
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.14 - 0.17)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.27 - 0.17)), 1)
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+            if "_1_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.22 - 0.34)), 1)
+
+            elif "_2_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.23 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1265,16 +1271,12 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.13 - 0.17)), 1)
+            1) == round((1 / (1 / 0.14 - 0.17)), 1)
 
-        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
-            if "_1_" in floor.construction_type:
-                assert round(1 / (floor.r_conduc * floor.area),
-                             1) == round((1 / (1 / 0.22 - 0.34)), 1)
-
-            elif "_2_" in floor.construction_type:
-                assert round(1 / (floor.r_conduc * floor.area),
-                             1) == round((1 / (1 / 0.23 - 0.34)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
+            1) == round((1 / (1 / 0.22 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1294,23 +1296,34 @@ class Test_tabula_mfh(object):
             year_of_construction=1947,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_type="tabula_adv_retrofit")
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.14 - 0.21)), 1)
+        for roof in prj.buildings[-1].thermal_zones[-1].rooftops:
+            if "_1_" in roof.construction_type:
+
+                assert round(1 / (roof.r_conduc * roof.area),
+                             1) == round((1 / (1 / 0.14 - 0.21)), 1)
+
+            elif "_2_" in roof.construction_type:
+
+                assert round(1 / (roof.r_conduc * roof.area),
+                             1) == round((1 / (1 / 0.1 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.13 - 0.17)), 1)
 
-        assert round(
-            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
-                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.21 - 0.34)), 1)
+        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
+            if "_1_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.21 - 0.34)), 1)
+
+            elif "_2_" in floor.construction_type:
+
+                assert round(1 / (floor.r_conduc * floor.area),
+                             1) == round((1 / (1 / 0.23 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1330,28 +1343,22 @@ class Test_tabula_mfh(object):
             year_of_construction=1956,
             number_of_floors=2,
             height_of_floors=3.2,
-            net_leased_area=219,
-            construction_type="tabula_adv_retrofit")
+            net_leased_area=219, construction_type="tabula_adv_retrofit")
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.14 - 0.21)), 1)
+            1) == round((1 / (1 / 0.11 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.13 - 0.17)), 1)
 
-        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
-
-            if "_1_" in floor.construction_type:
-                assert round(1 / (floor.r_conduc * floor.area),
-                             1) == round((1 / (1 / 0.21 - 0.34)), 1)
-
-            if "_2_" in floor.construction_type:
-                assert round(1 / (floor.r_conduc * floor.area),
-                             1) == round((1 / (1 / 0.23 - 0.34)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
+            1) == round((1 / (1 / 0.24 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1376,22 +1383,17 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.14 - 0.21)), 1)
+            1) == round((1 / (1 / 0.09 - 0.21)), 1)
 
-        for wall in prj.buildings[-1].thermal_zones[-1].outer_walls:
-
-            if "_1_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.13 - 0.34)), 1)
-
-            if "_2_" in wall.construction_type:
-                assert round(1 / (wall.r_conduc * wall.area),
-                             1) == round((1 / (1 / 0.12 - 0.34)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
+            1) == round((1 / (1 / 0.13 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.23 - 0.17)), 1)
+            1) == round((1 / (1 / 0.23 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1423,15 +1425,10 @@ class Test_tabula_mfh(object):
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.13 - 0.17)), 1)
 
-        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
-
-            if "_1_" in floor.construction_type:
-                assert round(1 / (floor.r_conduc * floor.area),
-                             1) == round((1 / (1 / 0.21 - 0.34)), 1)
-
-            if "_2_" in floor.construction_type:
-                assert round(1 / (floor.r_conduc * floor.area),
-                             1) == round((1 / (1 / 0.23 - 0.34)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
+            1) == round((1 / (1 / 0.21 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1456,7 +1453,7 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.14 - 0.21)), 1)
+            1) == round((1 / (1 / 0.09 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -1466,7 +1463,7 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.20 - 0.34)), 1)
+            1) == round((1 / (1 / 0.2 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1491,12 +1488,12 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.14 - 0.21)), 1)
+            1) == round((1 / (1 / 0.09 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.11 - 0.17)), 1)
+            1) == round((1 / (1 / 0.12 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
@@ -1526,18 +1523,18 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.14 - 0.21)), 1)
+            1) == round((1 / (1 / 0.11 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.14 - 0.17)), 1)
-        """
+
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
             1) == round((1 / (1 / 0.17 - 0.34)), 1)
-        """
+
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
@@ -1567,12 +1564,12 @@ class Test_tabula_mfh(object):
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.14 - 0.17)), 1)
-        """
+
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
             1) == round((1 / (1 / 0.17 - 0.34)), 1)
-        """
+
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
@@ -1596,7 +1593,7 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.1 - 0.21)), 1)
+            1) == round((1 / (1 / 0.08 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -1623,7 +1620,7 @@ class Test_tabula_mfh(object):
             method='tabula_de',
             usage='multi_family_house',
             name="ResidentialBuilding",
-            year_of_construction=2100,
+            year_of_construction=2099,
             number_of_floors=2,
             height_of_floors=3.2,
             net_leased_area=219, construction_type="tabula_adv_retrofit")
@@ -1636,7 +1633,7 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.12 - 0.17)), 1)
+            1) == round((1 / (1 / 0.11 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
