@@ -1931,7 +1931,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.25</elements:thickness>
+				<elements:thickness>0.26</elements:thickness>
 				<elements:material material_id="5bebc464-3a43-11e7-b575-2cd444b2e704">solid_brick_c</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -1961,7 +1961,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.26</elements:thickness>
+				<elements:thickness>0.32</elements:thickness>
 				<elements:material material_id="570be3be-3a43-11e7-b769-2cd444b2e704">lightweight_concrete_Vermiculit_1100</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -1976,7 +1976,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.26</elements:thickness>
+				<elements:thickness>0.32</elements:thickness>
 				<elements:material material_id="570be3be-3a43-11e7-b769-2cd444b2e704">lightweight_concrete_Vermiculit_1100</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -4701,7 +4701,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -4716,7 +4716,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -4731,7 +4731,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -4746,7 +4746,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -7450,18 +7450,13 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.02</elements:thickness>
+				<elements:thickness>0.024</elements:thickness>
 				<elements:material material_id="258fb6be-3a43-11e7-81b6-2cd444b2e704">vapourpermeable_wood_fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.1</elements:thickness>
+				<elements:thickness>0.10</elements:thickness>
 				<elements:material material_id="24e6234c-3a43-11e7-b8ec-2cd444b2e704">expanded_clay_2</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
-				<elements:thickness>0.09</elements:thickness>
-				<elements:material material_id="c8a873c9-3eef-11e7-9277-2cd444b2e704"></elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -7475,13 +7470,8 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.035</elements:thickness>
+				<elements:thickness>0.0275</elements:thickness>
 				<elements:material material_id="2b23145c-3a43-11e7-ad60-2cd444b2e704">wood_fibreboard_light_200</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>1</elements:id>
-				<elements:thickness>0.09</elements:thickness>
-				<elements:material material_id="c8a8c1e9-3eef-11e7-a4d6-2cd444b2e704"></elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -7495,18 +7485,13 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.16</elements:thickness>
+				<elements:thickness>0.26</elements:thickness>
 				<elements:material material_id="2497c138-3a43-11e7-9e0f-2cd444b2e704">concrete</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.01</elements:thickness>
+				<elements:thickness>0.025</elements:thickness>
 				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
-				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="c8a9371c-3eef-11e7-b02b-2cd444b2e704"></elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -7520,18 +7505,13 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.16</elements:thickness>
+				<elements:thickness>0.26</elements:thickness>
 				<elements:material material_id="2497c138-3a43-11e7-9e0f-2cd444b2e704">concrete</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.05</elements:thickness>
-				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
-				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="c8a9ac50-3eef-11e7-95ec-2cd444b2e704"></elements:material>
+				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -7719,44 +7699,29 @@
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:Layers>
 			<elements:layer>
-				<elements:id>0</elements:id>
-				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="34036d6e-3a43-11e7-9b12-2cd444b2e704">light_clay_with_straw_1000</elements:material>
-			</elements:layer>
-			<elements:layer>
 				<elements:id>1</elements:id>
 				<elements:thickness>0.02</elements:thickness>
 				<elements:material material_id="258fb6be-3a43-11e7-81b6-2cd444b2e704">vapourpermeable_wood_fibreboard</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.1</elements:thickness>
-				<elements:material material_id="b362502c-3f99-11e7-b117-2cd444b2e704">air_layer</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>3</elements:id>
 				<elements:thickness>0.02</elements:thickness>
 				<elements:material material_id="28d22c7e-3a43-11e7-9085-2cd444b2e704">hardwood</elements:material>
 			</elements:layer>
 			<elements:layer>
-				<elements:id>4</elements:id>
-				<elements:thickness>0.1</elements:thickness>
+				<elements:id>3</elements:id>
+				<elements:thickness>0.14</elements:thickness>
 				<elements:material material_id="2b6edec8-3a43-11e7-9a49-2cd444b2e704">wood_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
-				<elements:id>5</elements:id>
+				<elements:id>4</elements:id>
 				<elements:thickness>0.04</elements:thickness>
 				<elements:material material_id="b362502c-3f99-11e7-b117-2cd444b2e704">air_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
-				<elements:id>6</elements:id>
+				<elements:id>5</elements:id>
 				<elements:thickness>0.02</elements:thickness>
 				<elements:material material_id="258fb6be-3a43-11e7-81b6-2cd444b2e704">vapourpermeable_wood_fibreboard</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>7</elements:id>
-				<elements:thickness>0.03</elements:thickness>
-				<elements:material material_id="c8ad7cf9-3eef-11e7-9735-2cd444b2e704"></elements:material>
 			</elements:layer>
 		</elements:Layers>
 	</elements:Rooftop>
@@ -11270,16 +11235,11 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.04</elements:thickness>
-				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
-			</elements:layer>
-			<elements:layer>
-				<elements:id>2</elements:id>
 				<elements:thickness>0.075</elements:thickness>
 				<elements:material material_id="2b6edec8-3a43-11e7-9a49-2cd444b2e704">wood_clay</elements:material>
 			</elements:layer>
 			<elements:layer>
-				<elements:id>3</elements:id>
+				<elements:id>2</elements:id>
 				<elements:thickness>0.12</elements:thickness>
 				<elements:material material_id="5993ffc0-3a43-11e7-af66-2cd444b2e704">solid_brick_ARB</elements:material>
 			</elements:layer>
@@ -11291,19 +11251,19 @@
 		<elements:inner_convection>1.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
 		<elements:Layers>
-			<elements:layer>
+		<elements:layer>
 				<elements:id>0</elements:id>
 				<elements:thickness>0.03</elements:thickness>
 				<elements:material material_id="25b5d680-3a43-11e7-ba46-2cd444b2e704">oak_old</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.04</elements:thickness>
+				<elements:thickness>0.03</elements:thickness>
 				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.16</elements:thickness>
+				<elements:thickness>0.14</elements:thickness>
 				<elements:material material_id="2497c138-3a43-11e7-9e0f-2cd444b2e704">concrete</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -11326,6 +11286,11 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
+				<elements:thickness>0.006</elements:thickness>
+				<elements:material material_id="26101da2-3a43-11e7-a528-2cd444b2e704">XPS_55</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>3</elements:id>
 				<elements:thickness>0.16</elements:thickness>
 				<elements:material material_id="2497c138-3a43-11e7-9e0f-2cd444b2e704">concrete</elements:material>
 			</elements:layer>
@@ -11349,7 +11314,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.01</elements:thickness>
+				<elements:thickness>0.018</elements:thickness>
 				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -11591,12 +11556,12 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.03</elements:thickness>
+				<elements:thickness>0.025</elements:thickness>
 				<elements:material material_id="27a720e4-3a43-11e7-8394-2cd444b2e704">glass_fibre_batt_70</elements:material>
 			</elements:layer>
 			<elements:layer>
 				<elements:id>2</elements:id>
-				<elements:thickness>0.16</elements:thickness>
+				<elements:thickness>0.14</elements:thickness>
 				<elements:material material_id="2497c138-3a43-11e7-9e0f-2cd444b2e704">concrete</elements:material>
 			</elements:layer>
 		</elements:Layers>
