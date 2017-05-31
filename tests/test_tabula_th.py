@@ -322,7 +322,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.88 - 0.17)), 1)
+            1) == round((1 / (1 / 0.88 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -357,7 +357,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.77 - 0.17)), 1)
+            1) == round((1 / (1 / 0.77 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -392,7 +392,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 1.29 - 0.17)), 1)
+            1) == round((1 / (1 / 1.29 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -427,7 +427,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 1.08 - 0.17)), 1)
+            1) == round((1 / (1 / 1.08 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -462,7 +462,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.77 - 0.17)), 1)
+            1) == round((1 / (1 / 0.77 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -497,7 +497,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.65 - 0.17)), 1)
+            1) == round((1 / (1 / 0.65 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -532,7 +532,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.51 - 0.17)), 1)
+            1) == round((1 / (1 / 0.51 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -572,7 +572,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.45 - 0.17)), 1)
+            1) == round((1 / (1 / 0.45 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -607,7 +607,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.28 - 0.17)), 1)
+            1) == round((1 / (1 / 0.28 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -647,7 +647,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.35 - 0.17)), 1)
+            1) == round((1 / (1 / 0.35 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
             if "_1_" in win.construction_type:
@@ -691,7 +691,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.16 - 0.17)), 1)
+            1) == round((1 / (1 / 0.16 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
             if "_1_" in win.construction_type:
@@ -732,7 +732,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.29 - 0.17)), 1)
+            1) == round((1 / (1 / 0.29 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -768,7 +768,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.28 - 0.17)), 1)
+            1) == round((1 / (1 / 0.28 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -804,7 +804,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.33 - 0.17)), 1)
+            1) == round((1 / (1 / 0.33 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -840,7 +840,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.31 - 0.17)), 1)
+            1) == round((1 / (1 / 0.31 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -876,7 +876,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.28 - 0.17)), 1)
+            1) == round((1 / (1 / 0.28 - 0.34)), 1)
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
@@ -911,7 +911,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.26 - 0.17)), 1)
+            1) == round((1 / (1 / 0.26 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -947,7 +947,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.24 - 0.17)), 1)
+            1) == round((1 / (1 / 0.24 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -988,7 +988,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.22 - 0.17)), 1)
+            1) == round((1 / (1 / 0.22 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1024,7 +1024,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.17 - 0.17)), 1)
+            1) == round((1 / (1 / 0.17 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1065,7 +1065,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.25 - 0.17)), 1)
+            1) == round((1 / (1 / 0.25 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
             if "_1_" in win.construction_type:
@@ -1110,7 +1110,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.15 - 0.17)), 1)
+            1) == round((1 / (1 / 0.15 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
             if "_1_" in win.construction_type:
@@ -1151,7 +1151,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.22 - 0.17)), 1)
+            1) == round((1 / (1 / 0.22 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1188,7 +1188,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.21 - 0.17)), 1)
+            1) == round((1 / (1 / 0.21 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1225,7 +1225,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.24 - 0.17)), 1)
+            1) == round((1 / (1 / 0.24 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1261,7 +1261,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.23 - 0.17)), 1)
+            1) == round((1 / (1 / 0.23 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1297,7 +1297,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.21 - 0.17)), 1)
+            1) == round((1 / (1 / 0.21 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1333,7 +1333,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.20 - 0.17)), 1)
+            1) == round((1 / (1 / 0.20 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1369,7 +1369,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.19 - 0.17)), 1)
+            1) == round((1 / (1 / 0.19 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -1406,12 +1406,12 @@ class Test_tabula_th(object):
             if "_2_" in wall.construction_type:
                 assert round(1 / (wall.r_conduc * wall.area),
                              1) == round((1 / (1 / 0.14 - 0.17)), 1)
-        """
+
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.17 - 0.17)), 1)
-        """
+            1) == round((1 / (1 / 0.17 - 0.34)), 1)
+
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
@@ -1442,12 +1442,12 @@ class Test_tabula_th(object):
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 0.14 - 0.17)), 1)
-        """
+
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.17 - 0.17)), 1)
-        """
+            1) == round((1 / (1 / 0.17 - 0.34)), 1)
+
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
@@ -1487,7 +1487,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.12 - 0.17)), 1)
+            1) == round((1 / (1 / 0.12 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
             if "_1_" in win.construction_type:
@@ -1532,7 +1532,7 @@ class Test_tabula_th(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.12 - 0.17)), 1)
+            1) == round((1 / (1 / 0.12 - 0.34)), 1)
 
         for win in prj.buildings[-1].thermal_zones[-1].windows:
             if "_1_" in win.construction_type:

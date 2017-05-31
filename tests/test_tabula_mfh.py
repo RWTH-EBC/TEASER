@@ -515,7 +515,7 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 1.08 - 0.17)), 1)
+            1) == round((1 / (1 / 1.08 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -540,33 +540,27 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.5 - 0.17)), 1)
+            1) == round((1 / (1 / 0.51 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
             1) == round((1 / (1 / 1.0 - 0.17)), 1)
 
-        for floor in prj.buildings[-1].thermal_zones[-1].ground_floors:
-            if "_1_" in floor.construction_type:
-
-                assert round(1 / (floor.r_conduc * floor.area),
-                             1) == round((1 / (1 / 0.77 - 0.34)), 1)
-
-            elif "_2_" in floor.construction_type:
-
-                assert round(1 / (floor.r_conduc * floor.area),
-                             1) == round((1 / (1 / 1.0 - 0.17)), 1)
+        assert round(
+            1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
+                 * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
+            1) == round((1 / (1 / 0.77 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
-            1) == round((1 / (1 / 2.8 - 0.17)), 1)
+            1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-            1) == round((1 / (1 / 3.0 - 0.17)), 1)
+            1) == round((1 / (1 / 4.0 - 0.17)), 1)
 
     def test_tabula_uvalue_standard_mfh_1983(self):
         prj.add_residential(
@@ -581,7 +575,7 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.5 - 0.21)), 1)
+            1) == round((1 / (1 / 0.43 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -596,12 +590,12 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
-            1) == round((1 / (1 / 4.3 - 0.17)), 1)
+            1) == round((1 / (1 / 3 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-            1) == round((1 / (1 / 3.0 - 0.17)), 1)
+            1) == round((1 / (1 / 4.0 - 0.17)), 1)
 
     def test_tabula_uvalue_standard_mfh_1994(self):
         prj.add_residential(
@@ -616,12 +610,12 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.4 - 0.21)), 1)
+            1) == round((1 / (1 / 0.36 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.5 - 0.17)), 1)
+            1) == round((1 / (1 / 0.6 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
@@ -631,12 +625,12 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].windows[-1].area),
-            1) == round((1 / (1 / 3.2 - 0.17)), 1)
+            1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-            1) == round((1 / (1 / 3.0 - 0.17)), 1)
+            1) == round((1 / (1 / 4.0 - 0.17)), 1)
 
     def test_tabula_uvalue_standard_mfh_2001(self):
         prj.add_residential(
@@ -651,12 +645,12 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.35 - 0.21)), 1)
+            1) == round((1 / (1 / 0.32 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.3 - 0.17)), 1)
+            1) == round((1 / (1 / 0.4 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
@@ -686,17 +680,17 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.25 - 0.21)), 1)
+            1) == round((1 / (1 / 0.2 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.3 - 0.17)), 1)
+            1) == round((1 / (1 / 0.25 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.28 - 0.34)), 1)
+            1) == round((1 / (1 / 0.32 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
@@ -706,7 +700,7 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
-            1) == round((1 / (1 / 2.0 - 0.17)), 1)
+            1) == round((1 / (1 / 3.0 - 0.17)), 1)
 
     def test_tabula_uvalue_standard_mfh_2015(self):
         prj.add_residential(
@@ -756,17 +750,17 @@ class Test_tabula_mfh(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.15 - 0.21)), 1)
+            1) == round((1 / (1 / 0.25 - 0.21)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].outer_walls[-1].area),
-            1) == round((1 / (1 / 0.17 - 0.17)), 1)
+            1) == round((1 / (1 / 0.29 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].ground_floors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].ground_floors[-1].area),
-            1) == round((1 / (1 / 0.17 - 0.34)), 1)
+            1) == round((1 / (1 / 0.29 - 0.34)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].windows[-1].r_conduc
