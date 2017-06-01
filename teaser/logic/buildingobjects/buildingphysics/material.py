@@ -332,7 +332,7 @@ class Material(object):
         if value is None:
             self._thickness_list = []
 
-        #elif type(value) != list:
+        # elif type(value) != list:
         #    raise TypeError("must be list, not ", type(value))
 
         else:
@@ -343,6 +343,7 @@ class Material(object):
                     try:
                         value = float(value)
                     except:
-                        raise ValueError("Can't convert entry of thickness_list to float")
+                        raise ValueError(
+                            "Can't convert entry of thickness_list to float")
 
                 self._thickness_list = value
