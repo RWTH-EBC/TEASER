@@ -332,8 +332,8 @@ class Material(object):
         if value is None:
             self._thickness_list = []
 
-        elif type(value) != list:
-            raise TypeError("must be list, not ", type(value))
+        #elif type(value) != list:
+        #    raise TypeError("must be list, not ", type(value))
 
         else:
             for i in value:

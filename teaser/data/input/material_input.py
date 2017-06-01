@@ -42,7 +42,7 @@ def load_material(material, mat_name, data_class):
             material.ir_emissivity = mat.ir_emissivity
             if float(data_class.material_bind.version) >= 0.6:
                 try:
-                    material.thickness_default = mat.thickeness_default
+                    material.thickness_default = mat.thickness_default
                     material.thickness_list = mat.thickness_list
                 except AttributeError:
                     pass
@@ -83,7 +83,7 @@ def load_material_id(material, mat_id, data_class):
             material.ir_emissivity = mat.ir_emissivity
             if float(data_class.material_bind.version) >= 0.6:
                 try:
-                    material.thickness_default = mat.thickeness_default
+                    material.thickness_default = mat.thickness_default
                     material.thickness_list = mat.thickness_list
                 except AttributeError:
                     pass
