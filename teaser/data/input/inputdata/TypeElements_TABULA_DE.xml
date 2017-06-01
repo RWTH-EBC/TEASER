@@ -5536,7 +5536,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -5551,7 +5551,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -5566,7 +5566,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -5581,7 +5581,7 @@
 		<elements:Layers>
 			<elements:layer>
 				<elements:id>0</elements:id>
-				<elements:thickness>0.05</elements:thickness>
+				<elements:thickness>0.049</elements:thickness>
 				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
 			</elements:layer>
 		</elements:Layers>
@@ -5601,7 +5601,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.03</elements:thickness>
+				<elements:thickness>0.028</elements:thickness>
 				<elements:material material_id="b362502c-3f99-11e7-b117-2cd444b2e704">air_layer</elements:material>
 			</elements:layer>
 			<elements:layer>
@@ -12352,7 +12352,7 @@
 			</elements:layer>
 			<elements:layer>
 				<elements:id>1</elements:id>
-				<elements:thickness>0.08</elements:thickness>
+				<elements:thickness>0.0065</elements:thickness>
 				<elements:material material_id="25eb5d36-3a43-11e7-a085-2cd444b2e704">EPS_perimeter_insulation_top_layer</elements:material>
 			</elements:layer>
 			<elements:layer>

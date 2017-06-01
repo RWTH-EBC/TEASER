@@ -2,7 +2,7 @@ from teaser.project import Project
 prj = Project(False)
 
 
-class Test_tabula_th(object):
+class Test_tabula_ab(object):
     global prj
     '''
     def test_tabula_de_ab_area_1919(self):
