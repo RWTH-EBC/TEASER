@@ -12,7 +12,7 @@ import helptest
 
 prj = Project(True)
 
-'''
+
 class Test_teaser(object):
     """Unit Tests for TEASER"""
     global prj
@@ -3059,7 +3059,3 @@ class Test_teaser(object):
         exmain(number_of_elements=2)
         exmain(number_of_elements=3)
         exmain(number_of_elements=4)
-
-
-
-'''
