@@ -525,7 +525,7 @@ class Test_tabula_ab(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.1 - 0.17)), 1)
+            1) == round((1 / (1 / 0.14 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
@@ -599,7 +599,7 @@ class Test_tabula_ab(object):
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].rooftops[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].rooftops[-1].area),
-            1) == round((1 / (1 / 0.1 - 0.17)), 1)
+            1) == round((1 / (1 / 0.11 - 0.17)), 1)
 
         assert round(
             1 / (prj.buildings[-1].thermal_zones[-1].outer_walls[-1].r_conduc
