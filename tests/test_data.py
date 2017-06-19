@@ -598,7 +598,14 @@ class Test_teaser(object):
 
     def test_retrofit_all_buildings(self):
         """test of retrofit_all_buildings, no calculation verification"""
-
+        prj.add_residential(
+            method='tabula_de',
+            usage='single_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219)
         prj.retrofit_all_buildings(2015)
 
     def test_export_aixlib(self):

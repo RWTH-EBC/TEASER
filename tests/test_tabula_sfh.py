@@ -1657,3 +1657,58 @@ class Test_tabula_sfh(object):
             1 / (prj.buildings[-1].thermal_zones[-1].doors[-1].r_conduc
                  * prj.buildings[-1].thermal_zones[-1].doors[-1].area),
             1) == round((1 / (1 / 0.8 - 0.17)), 1)
+
+    def test_tabula_retrofit(self):
+        """
+        Test for retrofit of tabula
+        """
+        prj.set_default()
+        prj.data = None
+        prj.add_residential(
+            method='tabula_de',
+            usage='single_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219)
+        prj.add_residential(
+            method='iwu',
+            usage='single_family_dwelling',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219)
+
+        prj.retrofit_all_buildings(2015)
+
+        prj.set_default()
+        prj.data = None
+        prj.add_residential(
+            method='tabula_de',
+            usage='single_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219)
+
+        prj.retrofit_all_buildings(
+            year_of_retrofit=2015,
+            type_of_retrofit="retrofit",
+            window_type="None",
+            material="None")
+
+        prj.add_residential(
+            method='tabula_de',
+            usage='single_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219,
+            construction_type="tabula_retrofit")
+
+        prj.retrofit_all_buildings(
+            type_of_retrofit="adv_retrofit")

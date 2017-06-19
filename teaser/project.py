@@ -222,13 +222,15 @@ class Project(object):
             if isinstance(bldg, SingleFamilyHouse):
                 if self.data.used_statistic != 'tabula_de':
                     self.data = DataClass(used_statistic='tabula_de')
-                if window_type is not None or material is not None:
+                if year_of_retrofit is not None or window_type is not None or \
+                        material is not None:
                     warnings.warn("you are retrofitting archetype building of "
-                                  "type 'tabula' and want to use attribute "
-                                  "'window_type' or 'material', this is not "
-                                  "possible. This building will be "
+                                  "type 'tabula' and want to use attribute"
+                                  "'year_of_retrofit' 'window_type' or"
+                                  "'material', this is not "
+                                  "possible. However, this building will be "
                                   "retrofitted as described in the docs" +
-                                  bldg.name + bldg)
+                                  bldg.name)
                 bldg.retrofit_building(
                     year_of_retrofit,
                     type_of_retrofit,
@@ -242,8 +244,8 @@ class Project(object):
                                   "type 'iwu' and want to use attribute "
                                   "'type_of_retrofit', this is not possible "
                                   "(only for TABULA). This building will be "
-                                  "retrofitted as described in the docs" +
-                                  bldg.name + bldg)
+                                  "retrofitted as described in the docs " +
+                                  bldg.name)
 
                 bldg.retrofit_building(
                     year_of_retrofit,

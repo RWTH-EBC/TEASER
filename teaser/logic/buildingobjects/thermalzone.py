@@ -374,6 +374,9 @@ class ThermalZone(object):
             Default: EPS035
         """
 
+        if type_of_retrofit is None:
+            type_of_retrofit = 'retrofit'
+
         if type(self.parent).__name__ in [
             "SingleFamilyHouse", "TerracedHouse", "MultiFamilyHouse",
                 "ApartmentBlock"]:
@@ -387,12 +390,12 @@ class ThermalZone(object):
                         wall_count)
                 elif "standard" in wall_count.construction_type:
                     wall_count.load_type_element(
-                        year=self.parent.year_of_retrofit,
+                        year=self.parent.year_of_construction,
                         construction=wall_count.construction_type.replace(
                             "standard", type_of_retrofit))
                 else:
                     wall_count.load_type_element(
-                        year=self.parent.year_of_retrofit,
+                        year=self.parent.year_of_construction,
                         construction=wall_count.construction_type.replace(
                             "retrofit", type_of_retrofit))
         else:
