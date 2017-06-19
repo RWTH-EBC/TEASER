@@ -147,11 +147,11 @@ class Institute8(Office):
         self.zone_area_factors["Office"] = \
             [0.1, "Group Office (between 2 and 6 employees)"]
         self.zone_area_factors["Floor"] = \
-            [0.18, "Traffic area"]
+            [0.2, "Traffic area"]
         self.zone_area_factors["Laboratory"] = \
-            [0.6, "Laboratory"]
+            [0.5, "Laboratory"]
         self.zone_area_factors["Storage"] = \
-            [0.02, "Stock, technical equipment, archives"]
+            [0.1, "Stock, technical equipment, archives"]
         self.zone_area_factors["Meeting"] = \
             [0.04, "Meeting, Conference, seminar"]
         self.zone_area_factors["Restroom"] = \

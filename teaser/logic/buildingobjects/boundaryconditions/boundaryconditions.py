@@ -252,7 +252,7 @@ class BoundaryConditions(UseConditions):
         self.rel_absence = 0.3
         self.room_index = 0.9
         self.part_load_factor_lighting = 0.7
-        self.ratio_conv_rad_lighting = 0.5  # 0.4 according to source
+        self.ratio_conv_rad_lighting = 0.4  # 0.4 according to source
 
         self._set_temp_heat = 294.15
         self._set_temp_cool = 297.15
@@ -274,7 +274,7 @@ class BoundaryConditions(UseConditions):
                                  0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self._machines = 7.0
         self.activity_type_machines = 2
-        self.ratio_conv_rad_machines = 0.5  # 0.75 according to source
+        self.ratio_conv_rad_machines = 0.75  # 0.75 according to source
         self._profile_machines = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.4,
                                   0.6, 0.8, 0.8, 0.4, 0.6, 0.8, 0.8, 0.4, 0.2,
                                   0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
