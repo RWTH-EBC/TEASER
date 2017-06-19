@@ -484,7 +484,7 @@ class SingleFamilyHouse(Residential):
                 inner_wall = InnerWall(zone)
                 inner_wall.load_type_element(
                     year=self.year_of_construction,
-                    construction=self._construction_type_1,
+                    construction="tabula_standard",
                     data_class=self.parent.data)
                 inner_wall.name = key
                 inner_wall.tilt = value[0]
@@ -498,7 +498,7 @@ class SingleFamilyHouse(Residential):
                     ceiling = Ceiling(zone)
                     ceiling.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction="tabula_standard",
                         data_class=self.parent.data)
                     ceiling.name = key
                     ceiling.tilt = value[0]
@@ -510,7 +510,7 @@ class SingleFamilyHouse(Residential):
                     floor = Floor(zone)
                     floor.load_type_element(
                         year=self.year_of_construction,
-                        construction=self._construction_type_1,
+                        construction="tabula_standard",
                         data_class=self.parent.data)
                     floor.name = key
                     floor.tilt = value[0]
