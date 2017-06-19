@@ -22,7 +22,7 @@ def example_generate_archetype():
     # Be careful: Dymola does not like whitespaces in names and filenames,
     # thus we will delete them anyway in TEASER.
 
-    prj = Project(load_data=False)
+    prj = Project(load_data=True)
     prj.name = "ArchetypeExample"
 
     # There are two different types of archetype groups: residential and
@@ -39,19 +39,14 @@ def example_generate_archetype():
     # read the docs.
 
     prj.add_residential(
-        method='tabula_de',
-        usage='terraced_house',
+        method='iwu',
+        usage='single_family_dwelling',
         name="ResidentialBuilding",
-        year_of_construction=1918,
+        year_of_construction=1988,
         number_of_floors=2,
         height_of_floors=3.2,
-        net_leased_area=219)
-    print(None)
-    prj.retrofit_all_buildings(
-        2016,'adv_retrofit')
+        net_leased_area=200)
 
-    print(None)
-    '''
     # To generate non-residential archetype buildings (in this case an
     # office and a laboratory (a.k.a. institute)) the function
     # Project.add_residential() is used. The meaning of compulsory parameters
@@ -66,7 +61,6 @@ def example_generate_archetype():
         height_of_floors=3.5,
         net_leased_area=4500)
 
-
     prj.add_non_residential(
         method='bmvbs',
         usage='institute',
@@ -77,7 +71,6 @@ def example_generate_archetype():
         net_leased_area=3400)
 
     return prj
-    '''
 
 
 if __name__ == '__main__':
