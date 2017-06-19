@@ -496,6 +496,7 @@ class Building(object):
     def retrofit_building(
             self,
             year_of_retrofit=None,
+            type_of_retrofit=None,
             window_type=None,
             material=None):
         """Retrofits all zones in the building
@@ -508,6 +509,9 @@ class Building(object):
         ----------
         year_of_retrofit : float
             Year of last retrofit.
+        type_of_retrofit : str
+            The classification of retrofit, if the archetype building
+            approach of TABULA is used.
         window_type : str
             Default: EnEv 2014
         material : str
@@ -520,7 +524,7 @@ class Building(object):
             pass
 
         for zone in self.thermal_zones:
-            zone.retrofit_zone(window_type, material)
+            zone.retrofit_zone(type_of_retrofit, window_type, material)
 
         self.calc_building_parameter(
             number_of_elements=self.number_of_elements_calc,

@@ -46,6 +46,9 @@ def example_generate_archetype():
         number_of_floors=2,
         height_of_floors=3.2,
         net_leased_area=219)
+    print(None)
+    prj.retrofit_all_buildings(
+        2016,'adv_retrofit')
 
     print(None)
     '''
