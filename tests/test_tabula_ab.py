@@ -4,7 +4,7 @@ prj = Project(False)
 
 class Test_tabula_ab(object):
     global prj
-    '''
+
     def test_tabula_de_ab_area_1919(self):
         """
         Test for area estimation of tabula ab
@@ -152,7 +152,6 @@ class Test_tabula_ab(object):
         assert round(
             sum(wall.area for wall in
                 prj.buildings[-1].thermal_zones[-1].doors), 1) == 2.0
-    '''
 
     def test_tabula_uvalue_standard_ab_1919(self):
 

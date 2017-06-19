@@ -42,13 +42,17 @@ class SingleFamilyHouse(Residential):
     class has exactly one usage zone, which is 'Living'. TABULA also does not
     always specify the exact construction of building elements, but always
     provides a prescribed U-Value. We used the U-Value and the given material
-    information to calculate thickness of each layer and implemented it into
+    information to determine thickness of each layer and implemented it into
     elements XML ('teaser.data.input.inputdata.TypeElements_TABULA_DE.xml'). The
     material properties have been taken from MASEA Material data base
     (http://www.masea-ensan.de/). As there might be some differences in the
     assumptions for material properties from TABULA and MASEA the U-Value might
     not always be exactly the same as in TABULA but is always in an acceptable
-    range. The U-Value has been calculated using DIN-4108.
+    range. The U-Value has been calculated using combined constant values for
+    interior and exterior heat transmission, we used a resistance of 0.17
+    (m2*K)/W for outer walls, windows, flat roofs and doors; 0.34 (m2*K)/W  for
+    ground floors to unheated cellars and 0.17 (m2*K)/W  to direct ground
+    coupled floors, 0.21 (m2*K)/W  was taken for pitched roofs.
 
     Parameters
     ----------
