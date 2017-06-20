@@ -2218,7 +2218,7 @@
 		<materials:name>polysterene_lightweight_concrete_900</materials:name>
 		<materials:density>900.0</materials:density>
 		<materials:thermal_conduc>0.307</materials:thermal_conduc>
-		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:heat_capac>1.38</materials:heat_capac>
 		<materials:solar_absorp>0.5</materials:solar_absorp>
 		<materials:thickness_default>0.2</materials:thickness_default>
 		<materials:thickness_list>0.065 0.1 0.15 0.25 0.3 0.35</materials:thickness_list>
