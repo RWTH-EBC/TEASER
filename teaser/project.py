@@ -168,7 +168,7 @@ class Project(object):
 
     def retrofit_all_buildings(
             self,
-            year_of_retrofit,
+            year_of_retrofit=None,
             type_of_retrofit=None,
             window_type=None,
             material=None):

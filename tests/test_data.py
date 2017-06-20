@@ -792,7 +792,7 @@ class Test_teaser(object):
     def test_type_bldg_office(self):
         """test of type_bldg_office, no calculation verification
         """
-
+        prj.set_default(load_data=True)
         prj.type_bldg_office(name="TestBuilding",
                              year_of_construction=1988,
                              number_of_floors=7,
