@@ -102,7 +102,7 @@ def load_gml(path, prj):
                 pass
             try:
                 bld.generate_from_gml()
-            except UserWarning:
+            except (UserWarning, AttributeError):
                 print("bld.generate_from_gml() did not work")
                 pass
 
@@ -112,22 +112,22 @@ def _set_attributes(bld, gml_bld):
     """
     try:
         bld.name = gml_bld.name[0].value()
-    except UserWarning:
+    except (UserWarning, IndexError):
         print("no name specified in gml file")
         pass
     try:
         bld.number_of_floors = gml_bld.storeysAboveGround
-    except UserWarning:
+    except (UserWarning, AttributeError):
         print("no storeysAboveGround specified in gml file")
         pass
     try:
         bld.height_of_floors = gml_bld.storeyHeightsAboveGround.value()[0]
-    except UserWarning:
+    except (UserWarning, AttributeError):
         print("no storeyHeightsAboveGround specified in gml file")
         pass
     try:
         bld.year_of_construction = gml_bld.yearOfConstruction.year
-    except UserWarning:
+    except (UserWarning, AttributeError):
         print("no yearOfConstruction specified in gml file")
         pass
     try:
@@ -195,7 +195,7 @@ def _convert_bld(bld, function):
     name_help = bld.name
     gml_surfaces_help = bld.gml_surfaces
     year_of_construction_help = bld.year_of_construction
-    bld_height_help = bld.bld_height
+    bld_height_help = bld.bldg_height
 
     if function == "1000":
         from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling \
@@ -210,7 +210,7 @@ def _convert_bld(bld, function):
     bld.parent = parent_help
     bld.name = name_help
     bld.year_of_construction = year_of_construction_help
-    bld.bld_height = bld_height_help
+    bld.bldg_height = bld_height_help
 
     bld.set_gml_attributes()
     bld.generate_from_gml()
