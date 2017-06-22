@@ -253,7 +253,7 @@ class Office(NonResidential):
                                                     12 * [295.15] +
                                                     6 * [293.15])
             self.central_ahu.profile_min_relative_humidity = (25 * [0.45])
-            self.central_ahu.profile_max_relative_humidity = (25 * [0.55])
+            self.central_ahu.profile_max_relative_humidity = (25 * [0.65])
             self.central_ahu.profile_v_flow = (
                 7 * [0.0] + 12 * [1.0] + 6 * [0.0])
 
