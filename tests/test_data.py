@@ -2421,6 +2421,17 @@ class Test_teaser(object):
 
         prj.set_default(load_data="Test")
 
+    def test_v5_bindings(self):
+        """
+        Tests the old v4 project bindings
+        """
+        prj.set_default()
+        prj.load_project(
+            os.path.join(
+                os.path.dirname(__file__),
+                'testfiles',
+                'teaser_v5.teaserXML'))
+
     def test_v4_bindings(self):
         """
         Tests the old v4 project bindings
@@ -2431,6 +2442,21 @@ class Test_teaser(object):
                 os.path.dirname(__file__),
                 'testfiles',
                 'teaser_v4.teaserXML'))
+        prj.data.path_tb = os.path.join(
+            os.path.dirname(__file__),
+            'testfiles',
+            'TypeBuildingElements_v4.xml')
+        prj.data.path_mat = os.path.join(
+            os.path.dirname(__file__),
+            'testfiles',
+            'MaterialTemplates_v4.xml')
+        prj.data.path_uc = os.path.join(
+            os.path.dirname(__file__),
+            'testfiles',
+            'UseConditions_v4.xml')
+        prj.data.load_tb_binding()
+        prj.data.load_uc_binding()
+        prj.data.load_mat_binding()
 
     def test_v39_bindings(self):
         """
@@ -2467,8 +2493,7 @@ class Test_teaser(object):
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
         tz.infiltration_rate = 0.5
 
-        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-            import BoundaryConditions
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions import BoundaryConditions
 
         tz.use_conditions = BoundaryConditions(parent=tz)
         tz.use_conditions.load_use_conditions("Living", prj.data)
