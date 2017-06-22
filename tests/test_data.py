@@ -2436,7 +2436,7 @@ class Test_teaser(object):
         """
         Tests the old v4 project bindings
         """
-        prj.set_default()
+        prj.set_default(load_data=True)
         prj.load_project(
             os.path.join(
                 os.path.dirname(__file__),
