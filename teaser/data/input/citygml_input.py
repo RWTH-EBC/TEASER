@@ -95,17 +95,18 @@ def load_gml(path, prj):
             _create_building(bld=bld, city_object=city_object)
             _set_attributes(bld=bld, gml_bld=city_object.Feature)
             bld.set_height_gml()
-            try:
-                bld.set_gml_attributes()
-            except UserWarning:
-                print("bld.set_gml_attributes() did not work")
-                pass
-            try:
-                bld.generate_from_gml()
-            except (UserWarning, AttributeError):
-                print("bld.generate_from_gml() did not work")
-                pass
 
+        try:
+            bld.set_gml_attributes()
+        except UserWarning:
+            print("bld.set_gml_attributes() did not work")
+            pass
+        try:
+            bld.generate_from_gml()
+        except (UserWarning, AttributeError):
+            print("bld.generate_from_gml() did not work for building ",
+                  str(bld.name))
+            pass
 
 def _set_attributes(bld, gml_bld):
     """tries to set attributes for type building generation
