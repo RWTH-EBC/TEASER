@@ -4383,13 +4383,13 @@
 		<materials:thickness_default>0.0</materials:thickness_default>
 		<materials:thickness_list></materials:thickness_list>
 	</materials:Material>
-	<materials:Material material_id="b362502c-3f99-11e7-b117-2cd444b2e704">
-		<materials:name>air_layer</materials:name>
-		<materials:density>1184.0</materials:density>
-		<materials:thermal_conduc>0.35</materials:thermal_conduc>
-		<materials:heat_capac>1.005</materials:heat_capac>
-		<materials:solar_absorp>0.0</materials:solar_absorp>
-		<materials:thickness_default>0.04</materials:thickness_default>
-		<materials:thickness_list></materials:thickness_list>
+	<materials:Material material_id="d5db029e-5a81-11e7-bb47-901b0e0421f9">
+		<materials:name>fibre_cement_board_Eternit_asbestos</materials:name>
+		<materials:density>1900.0</materials:density>
+		<materials:thermal_conduc>0.56</materials:thermal_conduc>
+		<materials:heat_capac>0.0</materials:heat_capac>
+		<materials:solar_absorp>0.5</materials:solar_absorp>
+		<materials:thickness_default>0.005</materials:thickness_default>
+		<materials:thickness_list>0.003 0.008 0.012</materials:thickness_list>
 	</materials:Material>
 </materials:MaterialTemplates>
