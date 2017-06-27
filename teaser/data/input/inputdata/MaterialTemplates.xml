@@ -4392,7 +4392,7 @@
 		<materials:thickness_default>0.005</materials:thickness_default>
 		<materials:thickness_list>0.003 0.008 0.012</materials:thickness_list>
 	</materials:Material>
-		<materials:Material material_id="b362502c-3f99-11e7-b117-2cd444b2e704">
+	<materials:Material material_id="b362502c-3f99-11e7-b117-2cd444b2e704">
 		<materials:name>air_layer</materials:name>
 		<materials:density>1184.0</materials:density>
 		<materials:thermal_conduc>0.35</materials:thermal_conduc>
@@ -4400,5 +4400,23 @@
 		<materials:solar_absorp>0.5</materials:solar_absorp>
 		<materials:thickness_default>0.04</materials:thickness_default>
 		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="ef4fc286-5b2b-11e7-a44d-901b0e0421f9">
+		<materials:name>fibre_cement_board</materials:name>
+		<materials:density>1700.0</materials:density>
+		<materials:thermal_conduc>0.06</materials:thermal_conduc>
+		<materials:heat_capac>1.0</materials:heat_capac>
+		<materials:solar_absorp>0.5</materials:solar_absorp>
+		<materials:thickness_default>0.008</materials:thickness_default>
+		<materials:thickness_list>0.006 0.012</materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="ef4fc286-5b2b-11e7-a44d-901b0e0421f9">
+		<materials:name>Trespa_high_pressure_laminate</materials:name>
+		<materials:density>1350.0</materials:density>
+		<materials:thermal_conduc>0.3</materials:thermal_conduc>
+		<materials:heat_capac>1.0</materials:heat_capac>
+		<materials:solar_absorp>0.5</materials:solar_absorp>
+		<materials:thickness_default>0.008</materials:thickness_default>
+		<materials:thickness_list>0.006 0.01 0.013</materials:thickness_list>
 	</materials:Material>
 </materials:MaterialTemplates>
