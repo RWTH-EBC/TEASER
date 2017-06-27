@@ -58,7 +58,7 @@ def load_boundary_conditions(bound_cond, zone_usage, data_class):
                 usage.UsageOperationTime.yearly_cooling_days
             bound_cond.daily_operation_heating = \
                 usage.UsageOperationTime.daily_operation_heating
-            if data_class.conditions_bind.version == "0.4":
+            if float(data_class.conditions_bind.version) >= 0.4:
                 bound_cond.maintained_illuminance = \
                     usage.Lighting.maintained_illuminance
             else:
