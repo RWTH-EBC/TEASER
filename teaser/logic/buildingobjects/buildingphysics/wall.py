@@ -287,7 +287,7 @@ class Wall(BuildingElement):
         self.calc_ua_value()
 
         if material is None:
-            material = "EPS035"
+            material = "EPS_040_15"
         else:
             pass
 

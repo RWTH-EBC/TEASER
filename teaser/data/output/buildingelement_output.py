@@ -6,7 +6,7 @@
 This module contains function to save building element classes
 """
 
-import teaser.data.bindings.v_0_4.typeelement_bind as tb_bind
+import teaser.data.bindings.v_0_6.typeelement_bind as tb_bind
 import teaser.logic.utilities as utilities
 import warnings
 import pyxb
@@ -34,7 +34,7 @@ def save_type_element(element, data_class):
     """
 
     element_binding = data_class.element_bind
-    element_binding.version = "0.4"
+    element_binding.version = "0.6"
     add_to_xml = True
 
     pyxb.utils.domutils.BindingDOMSupport.DeclareNamespace(
@@ -62,6 +62,26 @@ def save_type_element(element, data_class):
                                  pyxb_class=pyxb_wall)
 
             element_binding.OuterWall.append(pyxb_wall)
+
+    if type(element).__name__ == "Door":
+
+        for check in element_binding.Door:
+            if check.building_age_group == element.building_age_group and\
+               check.construction_type == element.construction_type:
+                warnings.warn(warning_text)
+                add_to_xml = False
+                break
+
+        if add_to_xml is True:
+
+            pyxb_wall = tb_bind.DoorType()
+            _set_basic_data_pyxb(element=element,
+                                 pyxb_class=pyxb_wall)
+            pyxb_wall.Layers = tb_bind.LayersType()
+            _set_layer_data_pyxb(element=element,
+                                 pyxb_class=pyxb_wall)
+
+            element_binding.Door.append(pyxb_wall)
 
     elif type(element).__name__ == 'InnerWall':
 
@@ -221,6 +241,13 @@ def delete_type_element(element, data_class):
                 element_binding.OuterWall.remove(check)
                 break
 
+    if type(element).__name__ == "Door":
+        for check in element_binding.Door:
+            if check.building_age_group == element.building_age_group and \
+               check.construction_type == element.construction_type:
+                element_binding.Door.remove(check)
+                break
+
     elif type(element).__name__ == 'InnerWall':
 
         for check in element_binding.InnerWall:
@@ -306,7 +333,8 @@ def _set_basic_data_pyxb(element, pyxb_class):
         pyxb_class.shading_max_irr = element.shading_max_irr
 
     elif type(element).__name__ == 'OuterWall' or\
-            type(element).__name__ == 'Rooftop':
+            type(element).__name__ == 'Rooftop' or\
+            type(element).__name__ == 'Door':
 
         pyxb_class.outer_radiation = element.outer_radiation
         pyxb_class.outer_convection = element.outer_convection
