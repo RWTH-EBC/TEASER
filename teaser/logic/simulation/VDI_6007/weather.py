@@ -440,7 +440,7 @@ class Weather(object):
             src_path = os.path.dirname(
                 os.path.dirname(os.path.dirname(this_path)))
             weather_path = os.path.join(src_path, 'data', 'input',
-                                        'weather', wfile)
+                                        'inputdata', 'weatherdata', wfile)
 
         # Load weather data
         weather_data = get_weather(weather_path)
