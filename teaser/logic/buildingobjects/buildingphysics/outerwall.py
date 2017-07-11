@@ -146,4 +146,3 @@ class OuterWall(Wall):
         else:
 
             self.__parent = None
-

@@ -7,10 +7,11 @@
 This module contains function to save boundary conditions classes
 """
 
-import teaser.data.bindings.v_0_4.boundaryconditions_bind as uc_bind
+import teaser.data.bindings.v_0_6.boundaryconditions_bind as uc_bind
 import teaser.logic.utilities as utilities
 import warnings
 import pyxb
+
 
 def save_bound_conditions(bound_cond, data_class):
     """Use conditions saver.
@@ -47,7 +48,7 @@ def save_bound_conditions(bound_cond, data_class):
                           "NOT saved into XML")
             add_to_xml = False
             break
-    conditions_bind.version = "0.4"
+    conditions_bind.version = "0.6"
     if add_to_xml is True:
 
         usage_pyxb = uc_bind.BoundaryConditionsType()
@@ -120,7 +121,6 @@ def save_bound_conditions(bound_cond, data_class):
         usage_pyxb.AHU.max_overheating_ach = bound_cond.max_overheating_ach
         usage_pyxb.AHU.max_summer_ach = bound_cond.max_summer_ach
         usage_pyxb.AHU.winter_reduction = bound_cond.winter_reduction
-
 
         usage_pyxb.typical_length = bound_cond.typical_length
         usage_pyxb.typical_width = bound_cond.typical_width

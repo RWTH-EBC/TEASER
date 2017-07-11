@@ -13,10 +13,16 @@ TEASER
 
 TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) allows
 fast generation of archetype buildings with low input requirements and the
-export of individual dynamic simulation models for Modelica libraries `AixLib <https://github.com/RWTH-EBC/AixLib>`_ and `IEA-EBC Annex60 <https://github.com/iea-annex60/modelica-annex60>`_. It is being
+export of individual dynamic simulation models for the below-mentioned Modelica
+libraries. These libraries all use the framework of `Modelica IBPSA
+library <https://github.com/ibpsa/modelica>`_. TEASER is being
 developed at the `RWTH Aachen University, E.ON Energy Research Center, Institute
 for Energy Efficient Buildings and Indoor Climate <https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1>`_.
 
+   - `AixLib <https://github.com/RWTH-EBC/AixLib>`_
+   - `Buildings <https://github.com/lbl-srg/modelica-buildings>`_
+   - `BuildingSystems <https://github.com/UdK-VPT/BuildingSystems>`_
+   - `IDEAS <https://github.com/open-ideas/IDEAS>`_.
 
 This software is work-in-progress. Documentation will be incomplete or missing
 and the software may not run properly. In particular the Graphical User
@@ -25,6 +31,14 @@ report them in the issue section of the `repository <https://github.com/RWTH-EBC
 
 If you have any questions regarding TEASER feel free to contact us at
 `ebc-teaser@eonerc.rwth-aachen.de <ebc-teaser@eonerc.rwth-aachen.de>`_.
+
+Note that this documentation will always be auto-generated using the
+`development branch <https://github.com/RWTH-EBC/TEASER/tree/development>`_.
+That means, there might be new developments described in this docu that are not
+working in the master and pip installation of TEASER. A list of those issue can
+be found `here <development.html>`_
+
+Also have a look at the `FAQ section <faq.html>`_. If you feel your question should also be listed, please open an issue in the issue section of the `repository <https://github.com/RWTH-EBC/TEASER/issues>`_.
 
 
 Contents
@@ -40,11 +54,13 @@ Contents
    teaser
    acknowledgments
    license
+   faq
+   development
 
 
 Publications
 ============
-
+  - TEASER: an open tool for urban energy modelling of building stocks. Remmen P., Lauster M., Mans M., Fuchs M., Osterhage T., Müller D.. Journal of Building Performance Simulation, February 2017, `pdf <http://dx.doi.org/10.1080/19401493.2017.1283539>`_, `bibtex <https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite_jbps.bib>`_
   - CityGML Import and Export for Dynamic Building Performance Simulation in Modelica. Remmen P., Lauster M., Mans M., Osterhage T., Müller D.. BSO16, p.329-336, September 2016, `pdf <http://www.ibpsa.org/proceedings/BSO2016/p1047.pdf>`_, `bibtex <https://github.com/RWTH-EBC/TEASER/tree/master/doc/cite.bib>`_
   - Scalable Design-Driven Parameterization of Reduced Order Models Using Archetype Buildings with TEASER. Lauster M., Mans M., Remmen P., Fuchs M., Müller D.. BauSIM2016, p.535-542, September 2016, `pdf <https://www.researchgate.net/profile/Moritz_Lauster/publication/310465372_Scalable_Design-Driven_Parameterization_of_Reduced_Order_Models_using_Archetype_Buildings_with_TEASER/links/582ee96908ae004f74be1fb0.pdf?origin=publication_detail&ev=pub_int_prw_xdl&msrp=eEyK6WYemhC8wK7xkMEPRDO4obE4uxBN4-0BdBy1Ldwhy9FhCe1pXfNObJYubvC_aZN0IWDPf9uayBo3u79bsZvg3hzUoLoYRatES2ARH8c.B2cYwSICt0IOa7lD-4oAiEa_3TtrO-7k-1W9chuNQwr_VNMCpZ5ubSb-eY2D77rGUP4S6wS8m6vudUUbMlXbQQ.Cledgd1Q9fPp11nYGpcpKNhSS6bVTqAEXeMZPkiV3HsJxcVWTFj4Hr_jmLZ0MOzDxbDEZObcGiKfmTL_9k_59A>`_
 

@@ -27,35 +27,35 @@ def export_parameters_txt(prj, path):
 
     model_template_1 = Template(
         filename=utilities.get_full_path(
-                os.path.join(
-                    'data',
-                    'output',
-                    'texttemplate',
-                    'ReadableBuilding_OneElement')),
+            os.path.join(
+                'data',
+                'output',
+                'texttemplate',
+                'ReadableBuilding_OneElement')),
         lookup=lookup)
     model_template_2 = Template(
         filename=utilities.get_full_path(
-                os.path.join(
-                    'data',
-                    'output',
-                    'texttemplate',
-                    'ReadableBuilding_TwoElement')),
+            os.path.join(
+                'data',
+                'output',
+                'texttemplate',
+                'ReadableBuilding_TwoElement')),
         lookup=lookup)
     model_template_3 = Template(
         filename=utilities.get_full_path(
-                os.path.join(
-                    'data',
-                    'output',
-                    'texttemplate',
-                    'ReadableBuilding_ThreeElement')),
+            os.path.join(
+                'data',
+                'output',
+                'texttemplate',
+                'ReadableBuilding_ThreeElement')),
         lookup=lookup)
     model_template_4 = Template(
         filename=utilities.get_full_path(
-                os.path.join(
-                    'data',
-                    'output',
-                    'texttemplate',
-                    'ReadableBuilding_FourElement')),
+            os.path.join(
+                'data',
+                'output',
+                'texttemplate',
+                'ReadableBuilding_FourElement')),
         lookup=lookup)
 
     for bldg in prj.buildings:
@@ -63,7 +63,7 @@ def export_parameters_txt(prj, path):
             path,
             bldg.name + "_txtOutput")
         utilities.create_path(bldg_path)
-        out_file = open(os.path.join(bldg_path,  bldg.name + ".txt"), 'w')
+        out_file = open(os.path.join(bldg_path, bldg.name + ".txt"), 'w')
 
         if type(bldg.thermal_zones[0].model_attr).__name__ == "OneElement":
             out_file.write(model_template_1.render_unicode(bldg=bldg))

@@ -1,4 +1,4 @@
-<%namespace file="/modelica_language/" import="get_true_false, get_list"/> <%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
+<%namespace file="/modelica_language/" import="get_true_false, get_list, min_orientations"/> <%namespace file="/conversion/" import="deg_to_rad, azmiut_conv"/>
 within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_DataBase;
 record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
   extends AixLib.DataBase.ThermalZones.ZoneBaseRecord(
@@ -8,13 +8,13 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     AZone = ${zone.area},
     alphaRad = ${zone.model_attr.alpha_rad_inner_mean},
     lat = ${deg_to_rad(zone.parent.latitude)},
-    nOrientations = ${zone.model_attr.n_outer},
+    nOrientations = ${min_orientations(zone.model_attr.n_outer)},
     AWin = ${get_list(zone.model_attr.window_areas)},
     ATransparent = ${get_list(zone.model_attr.window_areas)},
     alphaWin = ${zone.model_attr.alpha_conv_inner_win},
     RWin = ${zone.model_attr.r1_win},
     gWin = ${zone.model_attr.weighted_g_value},
-    UWin= ${zone.model_attr.ua_value_win/zone.model_attr.area_win},
+    UWin= ${zone.model_attr.u_value_win},
     ratioWinConRad = ${zone.model_attr.ratio_conv_rad_inner_win},
     AExt = ${get_list(zone.model_attr.facade_areas)},
     alphaExt = ${zone.model_attr.alpha_conv_inner_ow},

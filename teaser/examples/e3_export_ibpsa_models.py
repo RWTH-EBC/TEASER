@@ -2,7 +2,7 @@
 # TEASER Development Team
 
 """This module contains an example how to export buildings from a TEASER
-project to ready-to-run simulation models for Modelica library Annex60. These
+project to ready-to-run simulation models for Modelica library IBPSA. These
 models simulate in Dymola, OpenModelica and JModelica.
 """
 
@@ -11,9 +11,8 @@ import teaser.logic.utilities as utilities
 import os
 
 
-
-def example_export_annex():
-    """"This function demonstrates the export to Modelica library Annex60 using
+def example_export_ibpsa():
+    """"This function demonstrates the export to Modelica library IBPSA using
     the API function of TEASER"""
 
     # In e1_generate_archetype we created a Project with three archetype
@@ -33,7 +32,7 @@ def example_export_annex():
     # file by setting Project().weather_file_path. However we will use default
     # weather file.
 
-    prj.used_library_calc = 'Annex60'
+    prj.used_library_calc = 'IBPSA'
     prj.number_of_elements_calc = 4
     prj.merge_windows_calc = False
     prj.weather_file_path = utilities.get_full_path(
@@ -49,7 +48,12 @@ def example_export_annex():
 
     prj.calc_all_buildings()
 
-    # To export the ready-to-run models simply call Project.export_annex().
+    # To export the ready-to-run models simply call Project.export_ibpsa().
+    # First specify the IBPSA related library you want to export the models
+    # for. The models are identical in each library, but IBPSA Modelica
+    # library is  just a core set of models and should not be used
+    # standalone. Valid values are 'AixLib' (default), 'Buildings',
+    # 'BuildingSystems' and 'IDEAS'. We chose AixLib
     # You can specify the path, where the model files should be saved.
     # None means, that the default path in your home directory
     # will be used. If you only want to export one specific building, you can
@@ -57,12 +61,14 @@ def example_export_annex():
     # exported. In this case we want to export all buildings to our home
     # directory, thus we are passing over None for both parameters.
 
-    prj.export_annex(
+    prj.export_ibpsa(
+        library='AixLib',
         internal_id=None,
         path=None)
 
+
 if __name__ == '__main__':
 
-    example_export_annex()
+    example_export_ibpsa()
 
     print("Example 3: That's it! :)")

@@ -202,13 +202,13 @@ class Wall(BuildingElement):
         self.c1 = self.area * ((new_mat[3][3] - 1) ** 2 +
                                (new_mat[2][3]) ** 2) / \
             (omega * (new_mat[0][2] * new_mat[2][3] -
-             (new_mat[3][3] - 1) * new_mat[0][3]))
+                      (new_mat[3][3] - 1) * new_mat[0][3]))
         self.c2 = self.area * ((new_mat[0][0] - 1) ** 2 +
                                (new_mat[0][1]) ** 2) / (
-                  omega * (new_mat[0][2] *
-                           new_mat[0][1] -
-                           (new_mat[0][0] - 1) *
-                           new_mat[0][3]))
+            omega * (new_mat[0][2] *
+                     new_mat[0][1] -
+                     (new_mat[0][0] - 1) *
+                     new_mat[0][3]))
         self.r3 = (1 / self.area) * (np.sum(r_layer)) - self.r1 - self.r2
 
         r_wall = self.r1 + self.r2 + self.r3
@@ -287,7 +287,7 @@ class Wall(BuildingElement):
         self.calc_ua_value()
 
         if material is None:
-            material = "EPS035"
+            material = "EPS_040_15"
         else:
             pass
 

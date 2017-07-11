@@ -1,8 +1,7 @@
 # created June 2015
 # by TEASER4 Development Team
 
-"""This module includes the Project class, which serves as an API for a
-TEASER Project
+"""This module includes the Project class, which is the API for TEASER.
 """
 
 import warnings
@@ -12,7 +11,7 @@ import teaser.logic.utilities as utilities
 import teaser.data.input.teaserxml_input as txml_in
 import teaser.data.output.teaserxml_output as txml_out
 import teaser.data.output.aixlib_output as aixlib_output
-import teaser.data.output.annex60_output as annex60_output
+import teaser.data.output.ibpsa_output as ibpsa_output
 import teaser.data.output.text_output as text_out
 from teaser.data.dataclass import DataClass
 from teaser.logic.archetypebuildings.bmvbs.office import Office
@@ -30,15 +29,19 @@ from teaser.logic.archetypebuildings.urbanrenet.est6 import EST6
 from teaser.logic.archetypebuildings.urbanrenet.est7 import EST7
 from teaser.logic.archetypebuildings.urbanrenet.est8a import EST8a
 from teaser.logic.archetypebuildings.urbanrenet.est8b import EST8b
+from teaser.logic.archetypebuildings.tabula.de.singlefamilyhouse import \
+    SingleFamilyHouse
+from teaser.logic.archetypebuildings.tabula.de.terracedhouse import \
+    TerracedHouse
+from teaser.logic.archetypebuildings.tabula.de.multifamilyhouse import \
+    MultiFamilyHouse
+from teaser.logic.archetypebuildings.tabula.de.apartmentblock import \
+    ApartmentBlock
 from teaser.logic.archetypebuildings.bmvbs.singlefamilydwelling import \
     SingleFamilyDwelling
 from teaser.logic.simulation.modelicainfo import ModelicaInfo
-
-try:
-    import teaser.data.output.citygml_output as citygml_out
-    import teaser.data.input.citygml_input as citygml_in
-except UserWarning:
-    warnings.warn("No CityGML module found, no CityGML import/export")
+import teaser.data.output.citygml_output as citygml_out
+import teaser.data.input.citygml_input as citygml_in
 
 
 class Project(object):
@@ -54,7 +57,9 @@ class Project(object):
     ----------
     load_data : boolean
         boolean if data bases for materials, type elements and use conditions
-        should be loaded (default = True)
+        should be loaded. default = False but will be automatically loaded
+        once you add a archetype building. For building generation from
+        scratch, set to True
 
     Attributes
     ----------
@@ -77,12 +82,12 @@ class Project(object):
     merge_windows_calc : bool
         True for merging the windows into the outer walls, False for
         separate resistance for window, default is False (only supported for
-        Annex60)
+        IBPSA)
     used_library_calc : str
-        used library (AixLib and Annex60 are supported)
+        used library (AixLib and IBPSA are supported)
     """
 
-    def __init__(self, load_data=True):
+    def __init__(self, load_data=False):
         """Constructor of Project Class.
         """
         self._name = "Project"
@@ -137,7 +142,7 @@ class Project(object):
             For AixLib vdi calculation is True, ebc calculation is False
 
         used_library_calc : str
-            used library (AixLib and Annex60 are supported)
+            used library (AixLib and IBPSA are supported)
 
         """
         if raise_errors is True:
@@ -153,22 +158,31 @@ class Project(object):
                         number_of_elements=self._number_of_elements_calc,
                         merge_windows=self._merge_windows_calc,
                         used_library=self._used_library_calc)
-                except UserWarning:
+                except (ZeroDivisionError, TypeError):
                     warnings.warn(
                         "Following building can't be calculated and is "
                         "removed from buildings list. Use raise_errors=True "
                         "to get python errors and stop TEASER from deleting "
-                        "this building:",
-                        bldg, bldg.name)
+                        "this building:" + bldg.name)
+                    self.buildings.remove(bldg)
 
     def retrofit_all_buildings(
             self,
-            year_of_retrofit,
+            year_of_retrofit=None,
+            type_of_retrofit=None,
             window_type=None,
             material=None):
         """Retrofits all buildings in the project
 
-        All Buildings in the project are retrofitted in the following manner:
+        Depending on the used Archetype approach this function will retrofit
+        the building.
+
+        If TABULA approach is used, it will replace the current construction
+        with the construction specified in 'type_of_retrofit',
+        where 'retrofit' and 'adv_retrofit' are allowed.
+
+        'iwu' or 'BMVBS' Buildings in the project are retrofitted in the
+        following manner:
 
         - replace all windows of the building to retrofitted window according
           to the year of retrofit.
@@ -190,15 +204,54 @@ class Project(object):
 
         year_of_retrofit : int
             the year the buildings are retrofitted
+        type_of_retrofit : str
+            The classification of retrofit, if the archetype building
+            approach of TABULA is used.
         window_type : str
-            Default: EnEv 2014
+            Default: EnEv 2014, only 'iwu' archetype approach.
         material : str
-            Default: EPS035
+            Default: EPS035, only 'iwu' archetype approach.
 
         """
 
+        ass_error_type = "only 'retrofit' and 'adv_retrofit' are valid "
+        assert type_of_retrofit in [None, 'adv_retrofit', 'retrofit'], \
+            ass_error_type
+
         for bldg in self.buildings:
-            bldg.retrofit_building(year_of_retrofit, window_type, material)
+            if isinstance(bldg, SingleFamilyHouse):
+                if self.data.used_statistic != 'tabula_de':
+                    self.data = DataClass(used_statistic='tabula_de')
+                if year_of_retrofit is not None or window_type is not None or \
+                        material is not None:
+                    warnings.warn("you are retrofitting archetype building of "
+                                  "type 'tabula' and want to use attribute"
+                                  "'year_of_retrofit' 'window_type' or"
+                                  "'material', this is not "
+                                  "possible. However, this building will be "
+                                  "retrofitted as described in the docs" +
+                                  bldg.name)
+                bldg.retrofit_building(
+                    year_of_retrofit,
+                    type_of_retrofit,
+                    window_type,
+                    material)
+            else:
+                if self.data.used_statistic != 'iwu':
+                    self.data = DataClass(used_statistic='iwu')
+                if type_of_retrofit is not None:
+                    warnings.warn("you are retrofitting archetype building of "
+                                  "type 'iwu' and want to use attribute "
+                                  "'type_of_retrofit', this is not possible "
+                                  "(only for TABULA). This building will be "
+                                  "retrofitted as described in the docs " +
+                                  bldg.name)
+
+                bldg.retrofit_building(
+                    year_of_retrofit,
+                    type_of_retrofit,
+                    window_type,
+                    material)
 
     def add_non_residential(
             self,
@@ -213,7 +266,7 @@ class Project(object):
             office_layout=None,
             window_layout=None,
             construction_type=None):
-        """Adds a non-residential building to the TEASER project
+        """Add a non-residential building to the TEASER project.
 
         This function adds a non-residential archetype building to the TEASER
         project. You need to specify the method of the archetype generation.
@@ -271,7 +324,6 @@ class Project(object):
 
         Returns
         ----------
-
         type_bldg : Instance of Office()
 
         """
@@ -286,6 +338,11 @@ class Project(object):
 
         assert usage in ['office', 'institute', 'institute4',
                          'institute8'], ass_error_usage
+
+        if self.data is None:
+            self.data = DataClass(used_statistic='iwu')
+        elif self.data.used_statistic != 'iwu':
+            self.data = DataClass(used_statistic='iwu')
 
         if usage == 'office':
 
@@ -367,7 +424,7 @@ class Project(object):
             dormer=None,
             construction_type=None,
             number_of_apartments=None):
-        """Adds a residential building to the TEASER project
+        """Add a residential building to the TEASER project.
 
         This function adds a residential archetype building to the TEASER
         project. You need to specify the method of the archetype generation.
@@ -378,7 +435,6 @@ class Project(object):
         residential building for 'iwu' and eleven types for 'urbanrenet'. For
         more information on specific archetype buildings and methods, please
         read the docs of archetype classes.
-
         This function also calculates the parameters of the buildings directly
         with the settings set in the project (e.g. used_library_calc or
         number_of_elements_calc).
@@ -454,25 +510,100 @@ class Project(object):
 
         Returns
         ----------
+        type_bldg : Instance of Archetype Building
 
-        type_bldg : Instance of SingleFamilyDwelling()
         """
+        ass_error_method = "only'tabula_de', 'iwu' and 'urbanrenet' " \
+                           "are valid methods for residential archetype " \
+                           "generation"
 
-        ass_error_method = "only 'iwu' and 'urbanrenet' are valid methods"\
-            "for residential archetype generation"
+        assert method in ['tabula_de', 'iwu', 'urbanrenet'], ass_error_method
 
-        assert method in ['iwu', 'urbanrenet'], ass_error_method
+        ass_error_apart = (
+            "The keyword number_of_apartmens does not have any "
+            "effect on archetype generation for 'iwu' or"
+            "'tabula_de', see docs for more information")
 
-        ass_error_apart = "The keyword number_of_apartmens does not have any " \
-                          "effect on archetype generation for 'iwu', see" \
-                          "docs for more information"
-
-
-
-        if method == 'iwu' and number_of_apartments is not None:
+        if method in ['iwu', 'tabula_de'] and number_of_apartments is not None:
             warnings.warn(ass_error_apart)
 
-        if method == 'iwu':
+        if method == 'tabula_de':
+
+            if self.data is None:
+                self.data = DataClass(used_statistic=method)
+            elif self.data.used_statistic != 'tabula_de':
+                self.data = DataClass(used_statistic=method)
+
+            ass_error_usage_tabula = "only 'single_family_house',"
+            "'terraced_house', 'multi_family_house', 'apartment_block' are"
+            "valid usages for iwu archetype method"
+            assert usage in ['single_family_house', 'terraced_house',
+                             'multi_family_house', 'apartment_block'], \
+                ass_error_usage_tabula
+
+            if usage == 'single_family_house':
+
+                type_bldg = SingleFamilyHouse(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'terraced_house':
+
+                type_bldg = TerracedHouse(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'multi_family_house':
+
+                type_bldg = MultiFamilyHouse(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+                type_bldg.generate_archetype()
+                return type_bldg
+
+            elif usage == 'apartment_block':
+
+                type_bldg = ApartmentBlock(
+                    self,
+                    name,
+                    year_of_construction,
+                    number_of_floors,
+                    height_of_floors,
+                    net_leased_area,
+                    with_ahu,
+                    construction_type)
+
+                type_bldg.generate_archetype()
+                return type_bldg
+
+        elif method == 'iwu':
+
+            if self.data is None:
+                self.data = DataClass(used_statistic=method)
+            elif self.data.used_statistic != 'iwu':
+                self.data = DataClass(used_statistic=method)
 
             ass_error_usage_iwu = "only 'single_family_dewlling' is a valid " \
                                   "usage for iwu archetype method"
@@ -496,6 +627,11 @@ class Project(object):
                     construction_type)
 
         elif method == 'urbanrenet':
+
+            if self.data is None:
+                self.data = DataClass(used_statistic='iwu')
+            elif self.data.used_statistic != 'iwu':
+                self.data = DataClass(used_statistic='iwu')
 
             ass_error_usage_urn = "only 'est1a', 'est1b', 'est2', 'est3', " \
                                   "'est4a', 'est4b', 'est5' 'est6', 'est7', " \
@@ -614,7 +750,6 @@ class Project(object):
                     neighbour_buildings,
                     construction_type,
                     number_of_apartments)
-
 
             elif usage == 'est7':
 
@@ -1155,7 +1290,7 @@ class Project(object):
         double pane glazing) and supporting models, like tables and weather
         model. In contrast to versions < 0.5 TEASER now does not
         support any model options, as we observed no need, since single
-        ThermalZones are identically with Annex60 models. If you miss one of
+        ThermalZones are identically with IBPSA models. If you miss one of
         the old options please contact us.
 
         Parameters
@@ -1200,11 +1335,10 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
-                else:
-                    pass
 
-    def export_annex(
+    def export_ibpsa(
             self,
+            library='AixLib',
             internal_id=None,
             path=None):
         """Exports values to a record file for Modelica simulation
@@ -1214,6 +1348,12 @@ class Project(object):
         Parameters
         ----------
 
+        library : str
+            Used library within the framework of IBPSA library. The
+            models are identical in each library, but IBPSA Modelica library is
+            just a core set of models and should not be used standalone.
+            Valid values are 'AixLib' (default), 'Buildings',
+            'BuildingSystems' and 'IDEAS'.
         internal_id : float
             setter of a specific building which will be exported, if None then
             all buildings will be exported
@@ -1221,6 +1361,12 @@ class Project(object):
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
         """
+
+        ass_error_1 = "library for IBPSA export has to be 'AixLib', " \
+                      "'Buildings', 'BuildingSystems' or 'IDEAS'"
+
+        assert library in ['AixLib', 'Buildings', 'BuildingSystems',
+                           'IDEAS'], ass_error_1
 
         if path is None:
             path = os.path.join(
@@ -1234,19 +1380,18 @@ class Project(object):
         utilities.create_path(path)
 
         if internal_id is None:
-            annex60_output.export_annex60(
+            ibpsa_output.export_ibpsa(
                 buildings=self.buildings,
                 prj=self,
-                path=path)
+                path=path,
+                library=library)
         else:
             for bldg in self.buildings:
                 if bldg.internal_id == internal_id:
-                    annex60_output.export_annex60(
+                    ibpsa_output.export_ibpsa(
                         buildings=[bldg],
                         prj=self,
                         path=path)
-                else:
-                    pass
 
     def export_parameters_txt(self, path=None):
         """Exports parameters of all buildings in a readable text file
@@ -1360,9 +1505,9 @@ class Project(object):
     @used_library_calc.setter
     def used_library_calc(self, value):
 
-        ass_error_1 = "used library needs to be AixLib or Annex60"
+        ass_error_1 = "used library needs to be AixLib or IBPSA"
 
-        assert value != ["AixLib", "Annex60"], ass_error_1
+        assert value != ["AixLib", "IBPSA"], ass_error_1
 
         self._used_library_calc = value
 
@@ -1379,10 +1524,6 @@ class Project(object):
             regex = re.compile('[^a-zA-z0-9]')
             self._name = regex.sub('', value)
         else:
-            try:
-                value = str(value)
-                regex = re.compile('[^a-zA-z0-9]')
-                self._name = regex.sub('', value)
-
-            except ValueError:
-                print("Can't convert name to string")
+            value = str(value)
+            regex = re.compile('[^a-zA-z0-9]')
+            self._name = regex.sub('', value)

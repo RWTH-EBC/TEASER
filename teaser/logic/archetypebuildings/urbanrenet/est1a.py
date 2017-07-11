@@ -112,7 +112,6 @@ class EST1a(Residential):
             with_ahu=False,
             neighbour_buildings=None,
             construction_type=None):
-
         """Constructor of EST1a
         """
 
@@ -134,9 +133,9 @@ class EST1a(Residential):
 
         # [area factor, usage type(has to be set)]
         self.zone_area_factors = {}
-        for value in range(1, self._number_of_apartments+1):
+        for value in range(1, self._number_of_apartments + 1):
             zone_name = "Apartment " + str(value)
-            zone = {zone_name: [1/self._number_of_apartments, "Living"]}
+            zone = {zone_name: [1 / self._number_of_apartments, "Living"]}
             self.zone_area_factors.update(zone)
 
         self.outer_wall_names = {"Exterior Facade North": [90.0, 0.0],
@@ -230,12 +229,12 @@ class EST1a(Residential):
 
             if value[1] == 0 or value[1] == 180.0:
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                                            self.nr_of_orientation
+                    self.nr_of_orientation
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                                            self.nr_of_orientation
+                    self.nr_of_orientation
 
             for zone in self.thermal_zones:
                 # create wall and set building elements
@@ -251,12 +250,12 @@ class EST1a(Residential):
             if value[1] == 0 or value[1] == 180:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                                             self.nr_of_orientation
+                    self.nr_of_orientation
 
             elif value[1] == 90 or value[1] == 270:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                                             self.nr_of_orientation
+                    self.nr_of_orientation
 
             '''
             There is no real classification for windows, so this is a bit hard
