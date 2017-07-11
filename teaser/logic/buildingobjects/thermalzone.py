@@ -399,6 +399,8 @@ class ThermalZone(object):
                         construction=wall_count.construction_type.replace(
                             "retrofit", type_of_retrofit))
         else:
+
+
             for wall_count in self.outer_walls:
                 wall_count.retrofit_wall(
                     self.parent.year_of_retrofit,
