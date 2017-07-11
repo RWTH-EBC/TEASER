@@ -108,6 +108,7 @@ def load_gml(path, prj):
                   str(bld.name))
             pass
 
+
 def _set_attributes(bld, gml_bld):
     """tries to set attributes for type building generation
     """
