@@ -13,7 +13,7 @@ install:
   - pip install flake8
 
 before_script:
-  - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests --max-line-length=120
+  # - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests --max-line-length=120
 
 script:
 - py.test --cov=teaser
