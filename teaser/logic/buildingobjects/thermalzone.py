@@ -386,8 +386,7 @@ class ThermalZone(object):
                 if "adv_retrofit" in wall_count.construction_type:
                     warnings.warn(
                         "already highest available standard"
-                        + self.parent.name + wall_count.name + self.parent +
-                        wall_count)
+                        + self.parent.name + wall_count.name)
                 elif "standard" in wall_count.construction_type:
                     wall_count.load_type_element(
                         year=self.parent.year_of_construction,
