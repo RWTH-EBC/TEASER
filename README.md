@@ -60,10 +60,10 @@ still a pre-release.
 
 ### Dependencies
 
-TEASER uses Python 2.7 <= v >=3.3. Further using a Python distribution is
-recommended as they already contain (or easily support installation of) many
-Python packages (e.g. SciPy, NumPy, pip, PyQT, etc.) that are used in the
-TEASER code. Two examples of those distributions are:
+TEASER is tested against Python versions 2.7, 3.4, 3.5 and 3.6. Further
+using a Python distribution is recommended as they already contain (or easily
+support installation of) many Python packages (e.g. SciPy, NumPy, pip, PyQT,
+etc.) that are used in the TEASER code. Two examples of those distributions are:
 
 1. https://winpython.github.io/ WinPython comes along with a lot of Python
 packages (e.g. SciPy, NumPy, pip, PyQT, etc.)..
