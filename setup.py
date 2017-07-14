@@ -97,4 +97,4 @@ setup(name='teaser',
           'Topic :: Software Development :: Code Generators',
           'Topic :: Scientific/Engineering',
           'Topic :: Utilities'],
-      install_requires=['mako', 'pyxb>=1.2.5', 'pytest', 'scipy'])
+      install_requires=['mako', 'pyxb==1.2.5', 'pytest', 'scipy'])
