@@ -67,8 +67,10 @@ number of thermal zone.model_attrs = ${len(bldg.thermal_zones)} -
   * Windows *
 
     sum of window areas = ${zone.model_attr.area_win}
-    window's coefficient of heat transfer (convective, inner side) = ${zone.model_attr.alpha_comb_inner_win} W/(m^2 K)
-    window's coefficient of heat transfer (convective, outer side) = ${zone.model_attr.alpha_comb_outer_win} W/(m^2 K)
+    window's coefficient of heat transfer (convective, inner side) = ${zone.model_attr.alpha_conv_inner_win} W/(m^2 K)
+    window's coefficient of heat transfer (convective, outer side) = ${zone.model_attr.alpha_conv_outer_win} W/(m^2 K)
+    window's coefficient of heat transfer (radiative, inner side) = ${zone.model_attr.alpha_rad_inner_win} W/(m^2 K)
+    window's coefficient of heat transfer (radiative, outer side) = ${zone.model_attr.alpha_rad_outer_win} W/(m^2 K)
     resistor window = ${zone.model_attr.r1_win} K/W
     weigthfactors for the windows = ${zone.model_attr.weightfactor_win}
     window's U*A value = ${zone.model_attr.ua_value_win } W/(K)
