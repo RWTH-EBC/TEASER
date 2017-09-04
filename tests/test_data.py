@@ -4,33 +4,13 @@ Created July 2015
 @author: TEASER 4 Development Team
 """
 
+from teaser.logic import utilities
+from teaser.project import Project
 import math
 import os
 import helptest
 
-from teaser.logic import utilities
-from teaser.project import Project
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdi1
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case02 as vdi2
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case03 as vdi3
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case04 as vdi4
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case05 as vdi5
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case06 as vdi6
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case07 as vdi7
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case08 as vdi8
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case09 as vdi9
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case10 as vdi10
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case11 as vdi11
-import teaser.examples.verification.vdi6007_testcases.vdi6007_case12 as vdi12
-
 prj = Project(True)
-
-import os
-import numpy as np
-from teaser.project import Project
-import teaser.logic.simulation.VDI_6007.weather as weat
-import teaser.logic.simulation.VDI_6007.low_order_VDI as low_order_VDI
-import teaser.logic.simulation.VDI_6007.equal_air_temperature as equ_air
 
 
 class Test_teaser(object):
@@ -675,66 +655,42 @@ class Test_teaser(object):
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa(library='AixLib')
-        prj.export_ibpsa(library='Buildings')
-        prj.export_ibpsa(library='BuildingSystems')
-        prj.export_ibpsa(library='IDEAS')
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa(library='AixLib')
-        prj.export_ibpsa(library='Buildings')
-        prj.export_ibpsa(library='BuildingSystems')
-        prj.export_ibpsa(library='IDEAS')
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa(library='AixLib')
-        prj.export_ibpsa(library='Buildings')
-        prj.export_ibpsa(library='BuildingSystems')
-        prj.export_ibpsa(library='IDEAS')
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa(library='AixLib')
-        prj.export_ibpsa(library='Buildings')
-        prj.export_ibpsa(library='BuildingSystems')
-        prj.export_ibpsa(library='IDEAS')
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 3
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa(library='AixLib')
-        prj.export_ibpsa(library='Buildings')
-        prj.export_ibpsa(library='BuildingSystems')
-        prj.export_ibpsa(library='IDEAS')
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 3
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa(library='AixLib')
-        prj.export_ibpsa(library='Buildings')
-        prj.export_ibpsa(library='BuildingSystems')
-        prj.export_ibpsa(library='IDEAS')
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa(library='AixLib')
-        prj.export_ibpsa(library='Buildings')
-        prj.export_ibpsa(library='BuildingSystems')
-        prj.export_ibpsa(library='IDEAS')
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa(library='AixLib')
-        prj.export_ibpsa(library='Buildings')
-        prj.export_ibpsa(library='BuildingSystems')
-        prj.export_ibpsa(library='IDEAS')
+        prj.export_ibpsa()
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
@@ -1325,8 +1281,8 @@ class Test_teaser(object):
         calc_attr = OneElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1418,8 +1374,8 @@ class Test_teaser(object):
         calc_attr = TwoElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1533,8 +1489,8 @@ class Test_teaser(object):
         calc_attr = ThreeElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1663,8 +1619,8 @@ class Test_teaser(object):
         calc_attr = FourElement(therm_zone, merge_windows=False, t_bt=5)
 
         helplist = therm_zone.outer_walls + therm_zone.rooftops + \
-                   therm_zone.ground_floors + therm_zone.inner_walls + \
-                   therm_zone.ceilings + therm_zone.floors + therm_zone.windows
+            therm_zone.ground_floors + therm_zone.inner_walls + \
+            therm_zone.ceilings + therm_zone.floors + therm_zone.windows
 
         for element in helplist:
             element.calc_equivalent_res()
@@ -1726,7 +1682,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0.34638013315780397
+            0.34638013315780397
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1749,7 +1705,6 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_ow ==\
             weightfactors_test_list
 
-
         weightfactors_test_list = [
             0.44444444444444453,
             0.0,
@@ -1763,7 +1718,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win.sort() ==\
             weightfactors_test_list.sort()
         assert calc_attr.weightfactor_ground == \
-               0.4303782174267145
+            0.4303782174267145
 
     def test_calc_weightfactor_two(self):
         """test of calc_weightfactor"""
@@ -1799,7 +1754,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0.34638013315780397
+            0.34638013315780397
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1834,7 +1789,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0.4303782174267145
+            0.4303782174267145
 
     def test_calc_weightfactor_three(self):
         """test of calc_weightfactor"""
@@ -1867,7 +1822,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1901,7 +1856,7 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
 
     def test_calc_weightfactor_four(self):
         """test of calc_weightfactor"""
@@ -1929,9 +1884,9 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
         assert calc_attr.weightfactor_rt == \
-               [1]
+            [1]
 
         prj.buildings[-1].thermal_zones[-1].weightfactor_ow = []
         prj.buildings[-1].thermal_zones[-1].weightfactor_win = []
@@ -1957,9 +1912,9 @@ class Test_teaser(object):
         assert calc_attr.weightfactor_win ==\
             weightfactors_test_list
         assert calc_attr.weightfactor_ground == \
-               0
+            0
         assert calc_attr.weightfactor_rt == \
-               [1]
+            [1]
 
     def test_calc_one_element(self):
         """test of calc_two_element"""
@@ -2369,389 +2324,6 @@ class Test_teaser(object):
         therm_zone.use_conditions.base_ach = 0.5
         assert therm_zone.infiltration_rate == 0.5
 
-
-    def test_sim_results(self):
-
-        #  Generate project and add residential building
-
-        prj = Project(load_data=True)
-        prj.name = "ArchetypeBuildings"
-        prj.merge_windows_calc = True
-
-        prj.add_residential(
-            method='iwu',
-            usage='single_family_dwelling',
-            name='Test_res_building',
-            year_of_construction=1962,
-            number_of_floors=2,
-            height_of_floors=2.8,
-            net_leased_area=100,
-            with_ahu=False,
-            residential_layout=0,
-            neighbour_buildings=0,
-            attic=1,
-            cellar=1,
-            dormer=0,
-            construction_type='heavy',
-            number_of_apartments=None)
-
-        #  Extract thermal_zone
-        thermal_zone = prj.buildings[0].thermal_zones[0]
-
-        #  Calculate beta angle
-        beta = thermal_zone.model_attr.tilt_facade
-
-        gamma = thermal_zone.model_attr.orientation_facade
-
-        #  Recalculate to VDI core azimuth usage
-        for i in range(len(gamma)):
-            angle = gamma[i]
-            if angle == -1 or angle == -2:
-                gamma[i] = 0.0
-            else:
-                gamma[i] = angle - 180
-
-        weather = weat.Weather(
-            beta=beta,
-            gamma=gamma,
-            weather_path=None,
-            albedo=0.2,
-            timeZone=1,
-            altitude=0,
-            location=(49.5, 8.5),
-            timestep=3600,
-            do_sun_rad=True)
-
-        timesteps = 365 * 24
-
-        # Load constant house parameters
-        if len(thermal_zone.inner_walls) != 0:
-            withInnerwalls = True
-        else:
-            withInnerwalls = False
-
-        # Max. irradiation
-        i_max = 100
-
-        list_window_areas = []
-        list_sunblind = []
-        for window in thermal_zone.windows:
-            list_window_areas.append(window.area)
-            list_sunblind.append(0.0)
-
-        # Convert into house data dictionary
-        #  #-------------------------------------------------------
-        houseData = {"R1i": thermal_zone.model_attr.r1_iw,
-                     "C1i": thermal_zone.model_attr.c1_iw,
-                     "Ai": thermal_zone.model_attr.area_iw,
-                     "RRest": thermal_zone.model_attr.r_rest_ow,
-                     "R1o": thermal_zone.model_attr.r1_ow,
-                     "C1o": thermal_zone.model_attr.c1_ow,
-                     "Ao": [thermal_zone.model_attr.area_ow],
-                     "Aw": thermal_zone.model_attr.window_areas,
-                     "At": thermal_zone.model_attr.transparent_areas,
-                     "Vair": thermal_zone.volume,
-                     "rhoair": thermal_zone.density_air,
-                     "cair": thermal_zone.heat_capac_air,
-                     "splitfac": thermal_zone.model_attr.ratio_conv_rad_inner_win,
-                     "g": thermal_zone.model_attr.weighted_g_value,
-                     "alphaiwi": thermal_zone.model_attr.alpha_comb_inner_iw,
-                     "alphaowi": thermal_zone.model_attr.alpha_comb_inner_ow,
-                     "alphaWall": thermal_zone.model_attr.alpha_comb_outer_ow * thermal_zone.model_attr.area_ow,
-                     "withInnerwalls": withInnerwalls,
-                     "aowo": thermal_zone.model_attr.solar_absorp_ow,
-                     "temperatureground": thermal_zone.t_ground,
-                     "weightfactorswall": thermal_zone.model_attr.weightfactor_ow,
-                     "weightfactorswindow": thermal_zone.model_attr.weightfactor_win,
-                     "weightfactorground": thermal_zone.model_attr.weightfactor_ground,
-                     "gsunblind": thermal_zone.model_attr.g_sunblind,
-                     "Imax": i_max}
-
-        #  Solar radiation input on each external area in W/m2
-        #  #-------------------------------------------------------
-        # solarRad_in = np.zeros((timesteps, 5))
-        solarRad_in = np.transpose(weather.sun_rad)
-
-        source_igRad = np.zeros(timesteps)
-
-        krad = 1
-
-        #  Equal air temperature based on VDI in K
-        #  #-------------------------------------------------------
-        # #  equalAirTemp = np.zeros(timesteps) + 273.15 + 10
-        # equalAirTemp = weather.temp + 0.5 + 273.15
-
-        t_black_sky = np.zeros(timesteps) + 273.15
-
-        sunblind_in = np.zeros_like(solarRad_in)
-        sunblind_in[solarRad_in > i_max] = 0.85
-
-        eq_air_params = {"aExt": thermal_zone.model_attr.solar_absorp_ow,
-                         # coefficient of absorption of exterior walls (outdoor)
-                         "eExt": thermal_zone.model_attr.ir_emissivity_outer_ow,
-                         # coefficient of emission of exterior walls (outdoor)
-                         "wfWall": thermal_zone.model_attr.weightfactor_ow,
-                         # weight factors of the walls
-                         "wfWin": thermal_zone.model_attr.weightfactor_win,
-                         # weight factors of the windows
-                         "wfGro": thermal_zone.model_attr.weightfactor_ground,
-                         # weight factor of the ground (0 if not considered)
-                         "T_Gro": thermal_zone.t_ground,
-                         "alpha_wall_out": thermal_zone.model_attr.alpha_conv_outer_ow,
-                         "alpha_rad_wall": thermal_zone.model_attr.alpha_rad_outer_ow,
-                         "withLongwave": False}
-
-        t_dry_bulb = weather.temp + 273.15
-
-        equalAirTemp = equ_air.equal_air_temp(HSol=solarRad_in,
-                                              TBlaSky=t_black_sky,
-                                              TDryBul=t_dry_bulb,
-                                              sunblind=sunblind_in,
-                                              params=eq_air_params)
-
-        #  Environment temperatures in K
-        #  #-------------------------------------------------------
-        # weatherTemperature = np.zeros(timesteps) + 273.15 + 10  # in K
-        weatherTemperature = weather.temp + 273.15
-
-        #  Ventilation rate: Fresh air at temperature weatherTemperature in m3/s
-        #  #-------------------------------------------------------
-        # ventRate = np.zeros(timesteps)
-        ventRate = np.zeros(timesteps) + (thermal_zone.volume *
-                                          thermal_zone.infiltration_rate / 3600)
-
-        #  Internal convective gains in W
-        #  #-------------------------------------------------------
-        #  TODO: Substitute with TEASER boundary conditions
-        #  logic/buildingobjects/boundaryconditions/boundaryconditions.py
-        #  Living (18599) / SIA for occupancy
-        Q_ig = np.zeros(timesteps) + 200
-
-        # Radiative heat transfer coef. between inner and outer walls in W/m2K
-        alphaRad = np.zeros(timesteps) + \
-                   thermal_zone.model_attr.alpha_rad_inner_mean
-
-        # Define set points for heating
-        #  #-------------------------------------------------------
-        #  TODO: Calculate with function call (depending on occupancy)
-        # t_set_heating = np.zeros(timesteps) + 273.15 + 21  # in Kelvin
-        t_set_heat_day = \
-            np.array([18, 18, 18, 18, 18, 18, 21, 21, 21, 21, 21, 21,
-                      21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 18]) + 273.15
-        t_set_heating = np.tile(t_set_heat_day, 365)
-
-        # Define set points for cooling (cooling is disabled for high values)
-        #  #-------------------------------------------------------
-        t_set_cooling = np.zeros(timesteps) + 273.15 + 1000  # in Kelvin
-
-        heater_limit = np.zeros((timesteps, 3)) + 1e10
-        cooler_limit = np.zeros((timesteps, 3)) - 1e10
-
-        # Calculate indoor air temperature with VDI model
-        t_air, q_hc, q_iw, q_ow = \
-            low_order_VDI.reducedOrderModelVDI(houseData=houseData,
-                                               weatherTemperature=weatherTemperature,
-                                               solarRad_in=solarRad_in,
-                                               equalAirTemp=equalAirTemp,
-                                               alphaRad=alphaRad,
-                                               ventRate=ventRate,
-                                               Q_ig=Q_ig,
-                                               source_igRad=source_igRad,
-                                               krad=krad,
-                                               heater_order=np.array(
-                                                   [1, 2, 3]),
-                                               cooler_order=np.array(
-                                                   [1, 2, 3]),
-                                               t_set_heating=t_set_heating,
-                                               t_set_cooling=t_set_cooling,
-                                               heater_limit=heater_limit,
-                                               cooler_limit=cooler_limit)
-
-        #  Load reference values
-        this_path = os.path.dirname(os.path.abspath(__file__))
-        filename = 'res_unretrofited.txt'
-        load_path = os.path.join(this_path, 'inputs', filename)
-
-        load_array = np.genfromtxt(fname=load_path, delimiter='\t',
-                                   skip_header=1)
-
-        temp_ref = load_array[:, 0]
-        q_hc_ref = load_array[:, 1]
-
-        np.testing.assert_array_almost_equal(t_air, temp_ref, decimal=3)
-        np.testing.assert_array_almost_equal(q_hc, q_hc_ref, decimal=3)
-
-        #  Do retrofit of building
-        prj.buildings[0].retrofit_building(year_of_retrofit=2014)
-
-        # Calculate indoor air temperature with VDI model
-        t_air2, q_hc2, q_iw, q_ow = \
-            low_order_VDI.reducedOrderModelVDI(houseData=houseData,
-                                               weatherTemperature=weatherTemperature,
-                                               solarRad_in=solarRad_in,
-                                               equalAirTemp=equalAirTemp,
-                                               alphaRad=alphaRad,
-                                               ventRate=ventRate,
-                                               Q_ig=Q_ig,
-                                               source_igRad=source_igRad,
-                                               krad=krad,
-                                               heater_order=np.array(
-                                                   [1, 2, 3]),
-                                               cooler_order=np.array(
-                                                   [1, 2, 3]),
-                                               t_set_heating=t_set_heating,
-                                               t_set_cooling=t_set_cooling,
-                                               heater_limit=heater_limit,
-                                               cooler_limit=cooler_limit)
-
-        #  Load reference values
-        this_path = os.path.dirname(os.path.abspath(__file__))
-        filename2 = 'res_retrofited.txt'
-        load_path2 = os.path.join(this_path, 'inputs', filename2)
-
-        load_array2 = np.genfromtxt(fname=load_path2, delimiter='\t',
-                                    skip_header=1)
-
-        temp_ref2 = load_array2[:, 0]
-        q_hc_ref2 = load_array2[:, 1]
-
-        np.testing.assert_array_almost_equal(t_air2, temp_ref2, decimal=3)
-        np.testing.assert_array_almost_equal(q_hc2, q_hc_ref2, decimal=3)
-
-    #  VDI 6007 validation test cases
-    #  ######################################################################
-
-    def test_vdi_6007_validation_case1(self):
-        """
-        Run VDI 6007 test case 1
-        """
-
-        tuple_res = vdi1.run_case1()
-
-        #  Check if temperature deviation is below 0.1 Kelvin
-        for val in tuple_res:
-            assert val < 0.15
-
-    def test_vdi_6007_validation_case2(self):
-        """
-        Run VDI 6007 test case 2
-        """
-        tuple_res = vdi2.run_case2()
-
-        #  Check if temperature deviation is below 0.1 Kelvin
-        for val in tuple_res:
-            assert val < 0.15
-
-    def test_vdi_6007_validation_case3(self):
-        """
-        Run VDI 6007 test case 3
-        """
-        tuple_res = vdi3.run_case3()
-
-        #  Check if temperature deviation is below 0.1 Kelvin
-        for val in tuple_res:
-            assert val < 0.15
-
-    def test_vdi_6007_validation_case4(self):
-        """
-        Run VDI 6007 test case 4
-        """
-        tuple_res = vdi4.run_case4()
-
-        #  Check if temperature deviation is below 0.1 Kelvin
-        for val in tuple_res:
-            assert val < 0.15
-
-    def test_vdi_6007_validation_case5(self):
-        """
-        Run VDI 6007 test case 5
-        """
-        tuple_res = vdi5.run_case5()
-
-        #  Check if temperature deviation is below 0.1 Kelvin
-        for val in tuple_res:
-            assert val < 0.15
-
-    def test_vdi_6007_validation_case6(self):
-        """
-        Run VDI 6007 test case 6
-        """
-        tuple_res = vdi6.run_case6()
-
-        #  Check if power deviation is below 1 Watt
-        for val in tuple_res:
-            assert val < 1.5
-
-    def test_vdi_6007_validation_case7(self):
-        """
-        Run VDI 6007 test case 7
-        """
-        tuple_res = vdi7.run_case7()
-
-        #  Check if power deviation is below 1 Watt
-        for val in tuple_res:
-            assert val < 1.5
-
-    def test_vdi_6007_validation_case8(self):
-        """
-        Run VDI 6007 test case 8
-        """
-        tuple_res = vdi8.run_case8()
-
-        #  Check if temperature deviation is below 0.1 Kelvin
-        for val in tuple_res:
-            assert val < 0.15
-
-    def test_vdi_6007_validation_case9(self):
-        """
-        Run VDI 6007 test case 9
-        """
-        tuple_res = vdi9.run_case9()
-
-        #  Check if temperature deviation is below 0.1 Kelvin
-        for val in tuple_res:
-            assert val < 0.15
-
-    def test_vdi_6007_validation_case10(self):
-        """
-        Run VDI 6007 test case 10
-        """
-        tuple_res = vdi10.run_case10()
-
-        #  Check if temperature deviation is below 0.1 Kelvin
-        for val in tuple_res:
-            assert val < 0.15
-
-    def test_vdi_6007_validation_case11(self):
-        """
-        Run VDI 6007 test case 11
-
-        Reference values are taken from VDI 6020 (not from VDI 6007)
-        """
-        tuple_res = vdi11.run_case11()
-
-        #  Check if deviation is within limits
-        for i in range(len(tuple_res)):
-            if i in [0, 1, 2]:
-                #  Temperature values
-                assert tuple_res[i] < 1
-            elif i in [3, 4, 5]:
-                #  Power values
-                assert tuple_res[i] < 50
-
-    def test_vdi_6007_validation_case12(self):
-        """
-        Run VDI 6007 test case 12
-        """
-        tuple_res = vdi12.run_case12()
-
-        #  Check if temperature deviation is below 0.1 Kelvin
-        for val in tuple_res:
-            assert val < 0.15
-
-    #  ######################################################################
-
-
     def test_load_save_material(self):
         """test of load_material_template and save_material_template,
         no parameter checking"""
@@ -2840,4 +2412,586 @@ class Test_teaser(object):
                 'testfiles',
                 'teaser_v39.teaserXML'))
 
+    def test_export_aixlib_only_iw(self):
+        """
+        Tests AixLib output for a building with inner walls only
+        """
 
+        from teaser.logic.buildingobjects.building import Building
+        prj.set_default(load_data=True)
+
+        bldg = Building(parent=prj)
+        bldg.name = "SuperExampleBuilding"
+        bldg.street_name = "AwesomeAvenue42"
+        bldg.city = "46325FantasticTown"
+        bldg.year_of_construction = 2015
+        bldg.number_of_floors = 1
+        bldg.height_of_floors = 3.5
+
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
+
+        tz = ThermalZone(parent=bldg)
+        tz.name = "LivingRoom"
+        tz.area = 140.0
+        tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+        tz.infiltration_rate = 0.5
+
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+            import BoundaryConditions
+
+        tz.use_conditions = BoundaryConditions(parent=tz)
+        tz.use_conditions.load_use_conditions("Living", prj.data)
+
+        from teaser.logic.buildingobjects.buildingphysics.innerwall import InnerWall
+
+        in_wall_dict = {"InnerWall1": [10.0],
+                        "InnerWall2": [14.0],
+                        "InnerWall3": [10.0]}
+
+        for key, value in in_wall_dict.items():
+
+            in_wall = InnerWall(parent=tz)
+            in_wall.name = key
+            in_wall.load_type_element(
+                year=bldg.year_of_construction,
+                construction='heavy')
+            in_wall.area = value[0]
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+    def test_export_only_ow(self):
+        """
+        Tests AixLib output for a building with outer walls only
+        """
+
+        from teaser.logic.buildingobjects.building import Building
+
+        bldg = Building(parent=prj)
+        bldg.name = "SuperExampleBuilding"
+        bldg.street_name = "AwesomeAvenue42"
+        bldg.city = "46325FantasticTown"
+        bldg.year_of_construction = 2015
+        bldg.number_of_floors = 1
+        bldg.height_of_floors = 3.5
+
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
+
+        tz = ThermalZone(parent=bldg)
+        tz.name = "LivingRoom"
+        tz.area = 140.0
+        tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+        tz.infiltration_rate = 0.5
+
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+            import BoundaryConditions
+
+        tz.use_conditions = BoundaryConditions(parent=tz)
+        tz.use_conditions.load_use_conditions("Living", prj.data)
+
+        from teaser.logic.buildingobjects.buildingphysics.outerwall import \
+            OuterWall
+
+        out_wall_dict = {"OuterWall_north": [10.0, 90.0, 0.0],
+                         "OuterWall_east": [14.0, 90.0, 90.0],
+                         "OuterWall_south": [10.0, 90.0, 180.0],
+                         "OuterWall_west": [14.0, 90.0, 270.0]}
+
+        for key, value in out_wall_dict.items():
+            out_wall = OuterWall(parent=tz)
+            out_wall.name = key
+
+            out_wall.load_type_element(
+                year=bldg.year_of_construction,
+                construction='heavy')
+
+            out_wall.area = value[0]
+            out_wall.tilt = value[1]
+            out_wall.orientation = value[2]
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+    def test_export_only_win(self):
+        """
+        Tests AixLib output for a building with windows only
+        """
+
+        from teaser.logic.buildingobjects.building import Building
+
+        bldg = Building(parent=prj)
+        bldg.name = "SuperExampleBuilding"
+        bldg.street_name = "AwesomeAvenue42"
+        bldg.city = "46325FantasticTown"
+        bldg.year_of_construction = 2015
+        bldg.number_of_floors = 1
+        bldg.height_of_floors = 3.5
+
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
+
+        tz = ThermalZone(parent=bldg)
+        tz.name = "LivingRoom"
+        tz.area = 140.0
+        tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+        tz.infiltration_rate = 0.5
+
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+            import BoundaryConditions
+
+        tz.use_conditions = BoundaryConditions(parent=tz)
+        tz.use_conditions.load_use_conditions("Living", prj.data)
+
+        from teaser.logic.buildingobjects.buildingphysics.window import Window
+        from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+        from teaser.logic.buildingobjects.buildingphysics.material import \
+            Material
+
+        win_dict = {"Window_east": [5.0, 90.0, 90.0],
+                    "Window_south": [8.0, 90.0, 180.0],
+                    "Window_west": [5.0, 90.0, 270.0]}
+
+        for key, value in win_dict.items():
+
+            win = Window(parent=tz)
+            win.name = key
+            win.area = value[0]
+            win.tilt = value[1]
+            win.orientation = value[2]
+
+            win.inner_convection = 1.7
+            win.inner_radiation = 5.0
+            win.outer_convection = 20.0
+            win.outer_radiation = 5.0
+            win.g_value = 0.789
+            win.a_conv = 0.03
+            win.shading_g_total = 0.0
+            win.shading_max_irr = 180.0
+
+            win_layer = Layer(parent=win)
+            win_layer.id = 1
+            win_layer.thickness = 0.024
+
+            win_material = Material(win_layer)
+            win_material.name = "GlasWindow"
+            win_material.thermal_conduc = 0.067
+            win_material.transmittance = 0.9
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = True
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+    def test_export_only_rt(self):
+        """
+        Tests AixLib output for a building with rooftops only
+        """
+
+        from teaser.logic.buildingobjects.building import Building
+
+        bldg = Building(parent=prj)
+        bldg.name = "SuperExampleBuilding"
+        bldg.street_name = "AwesomeAvenue42"
+        bldg.city = "46325FantasticTown"
+        bldg.year_of_construction = 2015
+        bldg.number_of_floors = 1
+        bldg.height_of_floors = 3.5
+
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
+
+        tz = ThermalZone(parent=bldg)
+        tz.name = "LivingRoom"
+        tz.area = 140.0
+        tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+        tz.infiltration_rate = 0.5
+
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+            import BoundaryConditions
+
+        tz.use_conditions = BoundaryConditions(parent=tz)
+        tz.use_conditions.load_use_conditions("Living", prj.data)
+
+        from teaser.logic.buildingobjects.buildingphysics.rooftop import \
+            Rooftop
+
+        roof_south = Rooftop(parent=tz)
+        roof_south.name = "Roof_South"
+        roof_south.area = 75.0
+        roof_south.orientation = 180.0
+        roof_south.tilt = 55.0
+        roof_south.inner_convection = 1.7
+        roof_south.outer_convection = 20.0
+        roof_south.inner_radiation = 5.0
+        roof_south.outer_radiation = 5.0
+
+        roof_north = Rooftop(parent=tz)
+        roof_north.name = "Roof_North"
+        roof_north.area = 75.0
+        roof_north.orientation = 0.0
+        roof_north.tilt = 55.0
+        roof_north.inner_convection = 1.7
+        roof_north.outer_convection = 20.0
+        roof_north.inner_radiation = 5.0
+        roof_north.outer_radiation = 5.0
+
+        from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+
+        layer_s1 = Layer(parent=roof_south, id=0)
+        layer_s1.thickness = 0.3
+
+        from teaser.logic.buildingobjects.buildingphysics.material import \
+            Material
+
+        material_s1 = Material(layer_s1)
+        material_s1.name = "Insulation"
+        material_s1.density = 120.0
+        material_s1.heat_capac = 0.04
+        material_s1.thermal_conduc = 1.0
+
+        layer_s2 = Layer(parent=roof_south, id=1)
+        layer_s2.thickness = 0.15
+
+        material_s2 = Material(layer_s2)
+        material_s2.name = "Tile"
+        material_s2.density = 1400.0
+        material_s2.heat_capac = 0.6
+        material_s2.thermal_conduc = 2.5
+
+        layer_n1 = Layer(parent=roof_north, id=0)
+        layer_n1.thickness = 0.3
+
+        material_n1 = Material(layer_n1)
+        material_n1.name = "Insulation"
+        material_n1.density = 120.0
+        material_n1.heat_capac = 0.04
+        material_n1.thermal_conduc = 1.0
+
+        layer_n2 = Layer(parent=roof_north, id=1)
+        layer_n2.thickness = 0.15
+
+        material_n2 = Material(layer_n2)
+        material_n2.name = "Tile"
+        material_n2.density = 1400.0
+        material_n2.heat_capac = 0.6
+        material_n2.thermal_conduc = 2.5
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+    def test_export_only_gf(self):
+        """
+        Tests AixLib output for a building with ground floors only
+        """
+
+        from teaser.logic.buildingobjects.building import Building
+
+        bldg = Building(parent=prj)
+        bldg.name = "SuperExampleBuilding"
+        bldg.street_name = "AwesomeAvenue42"
+        bldg.city = "46325FantasticTown"
+        bldg.year_of_construction = 2015
+        bldg.number_of_floors = 1
+        bldg.height_of_floors = 3.5
+
+        from teaser.logic.buildingobjects.thermalzone import ThermalZone
+
+        tz = ThermalZone(parent=bldg)
+        tz.name = "LivingRoom"
+        tz.area = 140.0
+        tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
+        tz.infiltration_rate = 0.5
+
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
+            import BoundaryConditions
+
+        tz.use_conditions = BoundaryConditions(parent=tz)
+        tz.use_conditions.load_use_conditions("Living", prj.data)
+
+        from teaser.logic.buildingobjects.buildingphysics.groundfloor import \
+            GroundFloor
+
+        ground_floor_dict = {"GroundFloor": [100.0, 0.0, -2]}
+
+        for key, value in ground_floor_dict.items():
+
+            ground = GroundFloor(parent=tz)
+            ground.name = key
+            ground.load_type_element(
+                year=bldg.year_of_construction,
+                construction='heavy')
+            ground.area = value[0]
+            ground.tilt = value[1]
+            ground.orientation = value[2]
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'AixLib'
+        prj.calc_all_buildings()
+        prj.export_aixlib()
+
+        prj.number_of_elements_calc = 1
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 2
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 3
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()
+
+        prj.number_of_elements_calc = 4
+        prj.merge_windows_calc = False
+        prj.used_library_calc = 'IBPSA'
+        prj.calc_all_buildings()
+        prj.export_ibpsa()

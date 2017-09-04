@@ -126,7 +126,7 @@ def example_create_building():
 
     # First layer north
 
-    layer_n1 = Layer(parent=roof_south, id=0)
+    layer_n1 = Layer(parent=roof_north, id=0)
     layer_n1.thickness = 0.3
 
     from teaser.logic.buildingobjects.buildingphysics.material import Material
@@ -139,7 +139,7 @@ def example_create_building():
 
     # Second layer north
 
-    layer_n2 = Layer(parent=roof_south, id=1)
+    layer_n2 = Layer(parent=roof_north, id=1)
     layer_n2.thickness = 0.15
 
     material_n2 = Material(layer_n2)

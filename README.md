@@ -53,7 +53,7 @@ models for all libraries supporting the
 
 ## Version
 
-TEASER is a ongoing research project, the current version is 0.5.1, which is
+TEASER is a ongoing research project, the current version is 0.5.3, which is
 still a pre-release.
 
 ## How to use TEASER
@@ -126,6 +126,8 @@ under the
 [MIT License](https://github.com/RWTH-EBC/TEASER/blob/master/License.md).
 
 ## Acknowledgements
+
+This  work  was  supported  by  the  Helmholtz  Association  under  the  Joint  Initiative  “Energy System 2050 – A Contribution of the Research Field Energy”.
 
 Parts of TEASER have been developed within public funded projects
 and with financial support by BMWi (German Federal Ministry for Economic
