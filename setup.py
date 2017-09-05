@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='teaser',
-      version='0.5.2',
+      version='0.5.3',
       description='Tool for Energy Analysis and Simulation for '
                   'Efficient Retrofit ',
       url='https://github.com/RWTH-EBC/TEASER',
@@ -96,4 +96,4 @@ setup(name='teaser',
           'Topic :: Software Development :: Code Generators',
           'Topic :: Scientific/Engineering',
           'Topic :: Utilities'],
-      install_requires=['mako', 'pyxb', 'pytest', 'scipy', 'matplotlib'])
+      install_requires=['mako', 'pyxb==1.2.5', 'pytest', 'scipy'])
