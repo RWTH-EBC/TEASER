@@ -6,7 +6,6 @@ Run VDI 6007 test case 2
 
 import os
 import numpy as np
-import matplotlib.pyplot as plt
 
 import teaser.logic.simulation.VDI_6007.low_order_VDI as low_order_VDI
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
@@ -121,6 +120,9 @@ def run_case2(plot_res=False):
 
     # Plot comparisons
     def plot_result(res, ref, title="Results day 1"):
+        
+        import matplotlib.pyplot as plt
+
         plt.figure()
         ax_top = plt.subplot(211)
         plt.plot(res, label="Reference", color="black", linestyle="--")
