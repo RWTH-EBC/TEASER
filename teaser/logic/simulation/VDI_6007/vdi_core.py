@@ -833,8 +833,6 @@ class VDICore(object):
             self.indoor_air_temperature = np.array(t_air)
             self.q_flow_heater_cooler = np.array(q_air_hc)
 
-        print()
-
         return (np.array(t_air), np.array(q_air_hc))
 
     def calc_splitfactors(self, cols, a_array, a_ext, a_win):
