@@ -148,9 +148,7 @@ class VDICore(object):
         # Return result
         return t_eq_air
 
-    def _solar_radiation(self, beta=[90, 90, 90, 90, 0],
-                         gamma=[-180, -90, 0, 90, 0],
-                         albedo=0.2, time_zone=1,
+    def _solar_radiation(self, albedo=0.2, time_zone=1,
                          altitude=0, location=(49.5, 8.5)):
         """
         Calculates solar radiation on tilted surface
@@ -159,8 +157,6 @@ class VDICore(object):
 
         Parameters
         ----------
-        beta
-        gamma
         albedo
         time_zone
         altitude
@@ -174,6 +170,31 @@ class VDICore(object):
         timesteps = 365 * 24
         dt = 3600
         initial_time = 0
+
+        #  Get beta angle
+        beta = self.thermal_zone.model_attr.tilt_facade
+        gamma = self.thermal_zone.model_attr.orientation_facace
+
+        #  Calculate gamma angle
+        #  TEASER definition
+        #  orientation_facade: list of floats[degree]
+        #         Orientation of facades(Azimuth).
+        #         0 - North
+        #         90 - East
+        #         180 - South
+        #         270 - West
+        #   TEASER: [180.0, -1, 0.0, -2, 90.0, 270.0]
+        #   South, horizontal, North, ground, east, west
+        #  VDI: [-180, -90, 0, 90, 0, 0],  # north, east, south, west,
+        #  horizontal
+
+        #  Recalculate to VDI core azimuth usage
+        for i in range(len(gamma)):
+            angle = gamma[i]
+            if angle == -1 or angle == -2:
+                gamma[i] = 0.0
+            else:
+                gamma[i] = angle - 180
 
         #  Get weather data
         #  TODO: Check weather
@@ -590,7 +611,20 @@ class VDICore(object):
         """Simulates VDI 6007 with hourly timestep for given thermal_zone
 
         corresponds to function: calc_reduced_order_model from
-        simulation_vdi_6007 """
+        simulation_vdi_6007
+
+        Returns
+        -------
+        res_tuple : tuple (of np.arrays)
+            Result tuple (t_indoor, q_heat_cool)
+            First entry:
+            t_indoor : np.array
+                Indoor air temperature in degree Celsius per timestep
+            Second entry:
+            q_heat_cool : np.array
+                Array with heating/cooling values in Watt (positiv: heating;
+                negative: cooling)
+        """
 
         #  Fix number of timesteps
         timesteps = 365 * 24
