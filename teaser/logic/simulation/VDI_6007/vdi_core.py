@@ -68,8 +68,9 @@ class VDICore(object):
         self.heater_order = np.array([1, 2, 3])
         self.cooler_order = np.array([1, 2, 3])
 
-    def _eq_air_temp(self, h_sol, sunblind, params):
-        """Calculates equal air temperature
+    def _eq_air_temp(self, h_sol, with_longwave=False, i_max=100):
+        """
+        Calculates equal air temperature
 
         corresponds to function eqAirTemp from eqAirTemp
 
@@ -77,11 +78,18 @@ class VDICore(object):
         sunblind - opening factor of sunblinds for each direction
         (0 = open to
         1 = closed)
-        params - misc. constant input parameters
-        ----------------------------------------
-        Outputs:
-        TEqAir - equivalent air temperature
+        with_longwave
 
+        Parameters
+        ----------
+        h_sol
+        sunblind
+        with_longwave
+        i_max
+
+        Returns
+        -------
+        t_eq_air
         """
         #  Todo: Cleanup docstring
 
@@ -91,42 +99,54 @@ class VDICore(object):
         t_black_sky = np.zeros(timesteps) + 273.15
         t_dry_bulb = self.weather_data.air_temp + 273.15  # in Kelvin
 
-        # Read parameters to improve readability in the equations
-        eExt = params[
-            "eExt"]  # coefficient of emission of exterior walls (outdoor)
-        aExt = params[
-            "aExt"]  # coefficient of absorption of exterior walls (outdoor)
-        alphaRadWall = params["alpha_rad_wall"]
-        alphaWallOut = params["alpha_wall_out"]
-        wfWall = params["wfWall"]  # weight factors of the walls
-        wfWin = params["wfWin"]  # weight factors of the windows
-        wfGro = params[
-            "wfGro"]  # weight factor of the ground (0 if not considered)
-        TGro = params["T_Gro"]  #
-        n = len(wfWall)
+        list_window_areas = []
+        list_sunblind = []
+        for window in self.thermal_zone.windows:
+            list_window_areas.append(window.area)
+            list_sunblind.append(0.0)
+
+        sunblind_in = np.zeros_like(h_sol)
+        sunblind_in[h_sol > i_max] = 0.85
+
+        sunblind_in = np.zeros_like(h_sol)
+        sunblind_in[h_sol > i_max] = 0.85
+
+        #  Todo: Check inputs (set correctly?)
+        a_ext = self.thermal_zone.model_attr.solar_absorp_ow
+        e_ext = self.thermal_zone.model_attr.ir_emissivity_outer_ow
+        wf_wall = self.thermal_zone.model_attr.weightfactor_ow
+        wf_win = self.thermal_zone.model_attr.weightfactor_win
+        wf_ground = self.thermal_zone.model_attr.weightfactor_ground
+        t_ground = self.thermal_zone.t_ground
+        alpha_wall_out = self.thermal_zone.model_attr.alpha_conv_outer_ow
+        alpha_rad_wall = self.thermal_zone.model_attr.alpha_rad_outer_ow
+
+        n = len(wf_wall)
 
         # Compute equivalent long wave and short wave temperatures
-        delTEqLW = (t_black_sky - t_dry_bulb) * (
-            eExt * alphaRadWall / (alphaRadWall + alphaWallOut * 0.93))
-        delTEqSW = h_sol * aExt / (alphaRadWall + alphaWallOut)
+        del_t_eq_lw = (t_black_sky - t_dry_bulb) * (
+            e_ext * alpha_rad_wall / (alpha_rad_wall + alpha_wall_out * 0.93))
+        del_t_eq_sw = h_sol * a_ext / (alpha_rad_wall + alpha_wall_out)
 
         # Compute equivalent window and wall temperatures
-        if params["withLongwave"]:
-            TEqWin = np.array(
-                [t_dry_bulb + delTEqLW * (1 - sunblind[:, i]) for i in
+        if with_longwave:
+            t_eq_win = np.array(
+                [t_dry_bulb + del_t_eq_lw * (1 - sunblind_in[:, i]) for i in
                  range(n)]).T
-            TEqWall = np.array(
-                [t_dry_bulb + delTEqLW[:, i] + delTEqSW[:, i] for i in
+            t_eq_wall = np.array(
+                [t_dry_bulb + del_t_eq_lw[:, i] + del_t_eq_sw[:, i] for i in
                  range(n)]).T
         else:
-            TEqWin = np.array([t_dry_bulb for i in range(n)]).T
-            TEqWall = np.array([t_dry_bulb + delTEqSW[:, i] for i in range(n)]).T
+            t_eq_win = np.array([t_dry_bulb for i in range(n)]).T
+            t_eq_wall = np.array(
+                [t_dry_bulb + del_t_eq_sw[:, i] for i in range(n)]).T
 
         # Compute equivalent air temperature
-        TEqAir = np.dot(TEqWall, wfWall) + np.dot(TEqWin, wfWin) + TGro * wfGro
+        t_eq_air = np.dot(t_eq_wall, wf_wall) + np.dot(t_eq_win,
+                                                       wf_win) + t_ground * wf_ground
 
         # Return result
-        return TEqAir
+        return t_eq_air
 
     def _solar_radiation(self, beta=[90, 90, 90, 90, 0],
                          gamma=[-180, -90, 0, 90, 0],
@@ -604,36 +624,36 @@ class VDICore(object):
         r_rest_ow = r_rest_ow + 1 / alpha_wall
 
         #  Get weather temperature of weather in Kelvin
-        air_temp = self.weather_data.air_temp
+        outdoor_temp = self.weather_data.air_temp
 
-        #  Get weather direct_radiation
-        direct_radiation = self.weather_data.direct_radiation
-        diffuse_ratiation = self.weather_data.diffuse_radiation
+        # #  Get weather direct_radiation
+        # direct_radiation = self.weather_data.direct_radiation
+        # diffuse_ratiation = self.weather_data.diffuse_radiation
 
         #  Calculate solar_rad_in with weather
         #  Todo: Set further inputs for _solar_radiation()?
+        #  Todo: Store solar_rad_in on self.?
         solar_rad_in = np.transpose(self._solar_radiation())
 
-        # Max. irradiation
-        #  Todo: Where to store max irradiation value?
-        i_max = 100
-
-        list_window_areas = []
-        list_sunblind = []
-        for window in self.thermal_zone.windows:
-            list_window_areas.append(window.area)
-            list_sunblind.append(0.0)
-
-        sunblind_in = np.zeros_like(solar_rad_in)
-        sunblind_in[solar_rad_in > i_max] = 0.85
-
         #  Calculate equal_air_temp
-        equal_air_temp = self._eq_air_temp(h_sol=solar_rad_in,
-                                           t_black_sky=t_black_sky,
-                                           sunblind=sunblind_in,
-                                           params)
-        #  Todo: Replace params input with single thermal zone inputs
+        equal_air_temp = self._eq_air_temp(h_sol=solar_rad_in)
 
+        #  Get ventilation rate
+        #  Todo: Replace dummy ventilation rate value
+        vent_rate = np.zeros(timesteps) + (self.thermal_zone.volume *
+                                           self.thermal_zone.infiltration_rate
+                                           / 3600)
+
+        #  Get internal gains
+        #  Todo: Replae dummy value for internal gains with bound. conditions
+        q_ig = np.zeros(timesteps) + 200
+
+        #  Radiative heat transfer coefficient between inner and outer walls
+        #  in W/m2K
+        alpha_rad = np.zeros(timesteps) + \
+                    self.thermal_zone.model_attr.alpha_rad_inner_mean
+
+        #  convective heat entry from solar irradiation
         e_solar_conv = np.zeros((timesteps, len(transparent_areas)))
 
         for i in range(len(transparent_areas)):
@@ -664,8 +684,34 @@ class VDICore(object):
                 q_solar_rad[:, i, j] = -e_solar_rad[:, i] * split_fac_solar[
                     j, i]
 
-        q_solarRadToInnerWall = np.sum(q_solar_rad[:, :, 1], axis=1)
-        q_solarRadToOuterWalli = np.sum(q_solar_rad[:, :, 0], axis=1)
+        q_solar_rad_to_in_wall = np.sum(q_solar_rad[:, :, 1], axis=1)
+        q_solar_rad_to_outer_wall = np.sum(q_solar_rad[:, :, 0], axis=1)
+
+        #  Todo: What is krad?
+        krad = 1
+        source_ig_rad = np.zeros(timesteps)
+
+        # therm. splitter loads radiative:
+        Q_loads_rad = krad * source_ig_rad
+        splitFacLoads = self._calc_splitfactors(1, area_ar, [0], [0])
+
+        q_loads_to_inner_wall = Q_loads_rad * splitFacLoads[1, 0]
+        q_loads_to_outer_wall = Q_loads_rad * splitFacLoads[0, 0]
+
+        #  TODO: Calculate with function call (depending on occupancy)
+        # t_set_heating = np.zeros(timesteps) + 273.15 + 21  # in Kelvin
+        t_set_heat_day = \
+            np.array([18, 18, 18, 18, 18, 18, 21, 21, 21, 21, 21, 21,
+                      21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
+                      18]) + 273.15
+        t_set_heating = np.tile(t_set_heat_day, 365)
+        heater_order = np.array([1, 2, 3])
+        cooler_order = np.array([1, 2, 3])
+
+        #  Todo: Move set_temperature values to inputs
+        # Define set points for cooling (cooling is disabled for high values)
+        #  #-------------------------------------------------------
+        t_set_cooling = np.zeros(timesteps) + 273.15 + 1000  # in Kelvin
 
         # Results' initialization
         t_ow = []
@@ -692,24 +738,24 @@ class VDICore(object):
             A[0, 0] = c1_ow / dt + 1 / r_rest_ow + 1 / r1_ow
             A[0, 1] = -1 / r1_ow
             A[1, 0] = 1 / r1_ow
-            A[1, 1] = - min(area_o_tot, area_iw) * alphaRad[t] - area_o_tot * \
-                                                             alpha_comb_inner_ow - 1 / r1_ow
-            A[1, 3] = min(area_o_tot, area_iw) * alphaRad[t]
+            A[1, 1] = - min(area_o_tot, area_iw) * alpha_rad[t] - area_o_tot * \
+                                                                  alpha_comb_inner_ow - 1 / r1_ow
+            A[1, 3] = min(area_o_tot, area_iw) * alpha_rad[t]
             A[1, 4] = area_o_tot * alpha_comb_inner_ow
             A[1, 8] = 1
             A[2, 2] = c1_iw / dt + 1 / r1_iw
             A[2, 3] = -1 / r1_iw
-            A[3, 1] = min(area_o_tot, area_iw) * alphaRad[t]
+            A[3, 1] = min(area_o_tot, area_iw) * alpha_rad[t]
             A[3, 2] = 1 / r1_iw
-            A[3, 3] = -min(area_o_tot, area_iw) * alphaRad[t] - area_iw * \
-                                                            alpha_comb_inner_iw - 1 / r1_iw
+            A[3, 3] = -min(area_o_tot, area_iw) * alpha_rad[t] - area_iw * \
+                                                                 alpha_comb_inner_iw - 1 / r1_iw
             A[3, 4] = area_iw * alpha_comb_inner_iw
             A[3, 7] = 1
             A[4, 1] = area_o_tot * alpha_comb_inner_ow
             A[4, 3] = area_iw * alpha_comb_inner_iw
             A[4, 4] = -area_o_tot * alpha_comb_inner_ow - area_iw * \
-                                                      alpha_comb_inner_iw - \
-                      ventRate[t] * heat_capac_air * \
+                                                          alpha_comb_inner_iw - \
+                      vent_rate[t] * heat_capac_air * \
                       density_air
             A[4, 5] = -1
             A[4, 6] = 1
@@ -717,24 +763,24 @@ class VDICore(object):
             A[5, 5] = -1
 
             # Fill right hand side
-            rhs[0] = equalAirTemp[t] / r_rest_ow + c1_ow * t_ow_prev / dt
-            rhs[1] = -q_solarRadToOuterWalli[t] - Q_loadsToOuterWalli[t]
+            rhs[0] = equal_air_temp[t] / r_rest_ow + c1_ow * t_ow_prev / dt
+            rhs[1] = -q_solar_rad_to_outer_wall[t] - q_loads_to_outer_wall[t]
             rhs[2] = c1_iw * t_iw_prev / dt
-            rhs[3] = -q_solarRadToInnerWall[t] - Q_loadsToInnerWall[t]
-            rhs[4] = -ventRate[t] * heat_capac_air * density_air * \
-                     weatherTemperature[t] - q_solar_conv[t] - Q_ig[t]
+            rhs[3] = -q_solar_rad_to_in_wall[t] - q_loads_to_inner_wall[t]
+            rhs[4] = -vent_rate[t] * heat_capac_air * density_air * \
+                     outdoor_temp[t] - q_solar_conv[t] - q_ig[t]
             rhs[5] = density_air * heat_capac_air * volume * t_air_prev / dt
 
             # Calculate current time step
             x = self.calc_timestep(
-                A,
-                rhs,
-                t_set_heating[t],
-                t_set_cooling[t],
-                heater_limit[t, :],
-                cooler_limit[t, :],
-                heater_order,
-                cooler_order)
+                A=A,
+                rhs=rhs,
+                t_set_heating=t_set_heating[t],
+                t_set_cooling=t_set_cooling[t],
+                heater_limit=self.heater_limit[t, :],
+                cooler_limit=self.cooler_limit[t, :],
+                heater_order=heater_order,
+                cooler_order=cooler_order)
 
             # Retrieve results
             t_ow.append(x[0])
@@ -757,7 +803,7 @@ class VDICore(object):
 
         return (np.array(t_air), np.array(q_air_hc))
 
-    def calc_splitfactors(cols, a_array, a_ext, a_win):
+    def calc_splitfactors(self, cols, a_array, a_ext, a_win):
         """
         This function calculates the split factors
 
@@ -819,13 +865,15 @@ class VDICore(object):
 
         return result
 
-    def calc_timestep(
-            A,
-            rhs,
-            t_set_heating=291.15,
-            t_set_cooling=300.15,
-            heater_order=np.array([1, 2, 3]),
-            cooler_order=np.array([1, 2, 3])):
+    def calc_timestep(self,
+                      A,
+                      rhs,
+                      t_set_heating=291.15,
+                      t_set_cooling=300.15,
+                      heater_limit=[1e10, 1e10, 1e10],
+                      cooler_limit=[-1e10, -1e10, -1e10],
+                      heater_order=np.array([1, 2, 3]),
+                      cooler_order=np.array([1, 2, 3])):
 
         """
         Calculate the temperatures and heat flow rate for the current time step
@@ -841,10 +889,12 @@ class VDICore(object):
         t_set_cooling : Float (Move to Init?)
             Temperature above which cooling demand is computed (in Kelvin)
         """
+        #  Todo: Correct docstring
+
         # Calculate without further heat inputs to determine if heating
         # or cooling is needed
         # x = [T_ow, T_owi, T_iw, T_iwi, T_air, Q_air, Q_HC]
-        x_noHeat = _calc_temperatue(
+        x_noHeat = self._calc_temperatue(
             A, rhs, q_air_fix=0, q_iw_fix=0, q_ow_fix=0)
 
         if x_noHeat[4] < t_set_heating:
@@ -852,7 +902,7 @@ class VDICore(object):
 
             # Use primary heater
             if np.argmax(heater_order == 1) == 0 and heater_limit[0] > 0:
-                x_heating_1 = _calc_heatflow(
+                x_heating_1 = self._calc_heatflow(
                     A,
                     rhs,
                     t_air_set=t_set_heating,
@@ -861,7 +911,7 @@ class VDICore(object):
                     q_ow_fix=0)
 
                 if x_heating_1[6] > heater_limit[0]:
-                    x_maxheat_1 = _calc_temperatue(
+                    x_maxheat_1 = self._calc_temperatue(
                         A,
                         rhs,
                         q_air_fix=heater_limit[0],
@@ -871,14 +921,14 @@ class VDICore(object):
                     if x_maxheat_1[4] < t_set_heating:
                         if np.argmax(heater_order == 2) == 1 and \
                                         heater_limit[1] > 0:
-                            x_heating_2 = _calc_heatflow(
+                            x_heating_2 = self._calc_heatflow(
                                 A, rhs,
                                 t_air_set=t_set_heating,
                                 q_air_fix=heater_limit[0],
                                 q_iw_fix=None, q_ow_fix=0)
 
                             if x_heating_2[7] > heater_limit[1]:
-                                x_maxheat_2 = _calc_temperatue(
+                                x_maxheat_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=heater_limit[0],
@@ -887,7 +937,7 @@ class VDICore(object):
 
                                 if x_maxheat_2[4] < t_set_heating and \
                                                 heater_limit[2] > 0:
-                                    x_heating_3 = _calc_heatflow(
+                                    x_heating_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_heating,
@@ -896,7 +946,7 @@ class VDICore(object):
                                         q_ow_fix=None)
 
                                     if x_heating_3[8] > heater_limit[2]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=heater_limit[0],
@@ -910,7 +960,7 @@ class VDICore(object):
                                 return x_heating_2
                         elif np.argmax(heater_order == 2) == 2 and \
                                         heater_limit[2] > 0:
-                            x_heating_2 = _calc_heatflow(
+                            x_heating_2 = self._calc_heatflow(
                                 A,
                                 rhs,
                                 t_air_set=t_set_heating,
@@ -918,7 +968,7 @@ class VDICore(object):
                                 q_iw_fix=0, q_ow_fix=None)
 
                             if x_heating_2[8] > heater_limit[2]:
-                                x_maxheat_2 = _calc_temperatue(
+                                x_maxheat_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=heater_limit[0],
@@ -927,7 +977,7 @@ class VDICore(object):
 
                                 if x_maxheat_2[4] < t_set_heating and \
                                                 heater_limit[1] > 0:
-                                    x_heating_3 = _calc_heatflow(
+                                    x_heating_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_heating,
@@ -936,7 +986,7 @@ class VDICore(object):
                                         q_ow_fix=heater_limit[2])
 
                                     if x_heating_3[7] > heater_limit[1]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=heater_limit[0],
@@ -953,7 +1003,7 @@ class VDICore(object):
                 else:
                     return x_heating_1
             elif np.argmax(heater_order == 1) == 1 and heater_limit[1] > 0:
-                x_heating_1 = _calc_heatflow(
+                x_heating_1 = self._calc_heatflow(
                     A,
                     rhs,
                     t_air_set=t_set_heating,
@@ -962,7 +1012,7 @@ class VDICore(object):
                     q_ow_fix=0)
 
                 if x_heating_1[7] > heater_limit[1]:
-                    x_maxheat_1 = _calc_temperatue(
+                    x_maxheat_1 = self._calc_temperatue(
                         A,
                         rhs,
                         q_air_fix=0,
@@ -972,7 +1022,7 @@ class VDICore(object):
                     if x_maxheat_1[4] < t_set_heating:
                         if np.argmax(heater_order == 2) == 0 and \
                                         heater_limit[0] > 0:
-                            x_heating_2 = _calc_heatflow(
+                            x_heating_2 = self._calc_heatflow(
                                 A,
                                 rhs,
                                 t_air_set=t_set_heating,
@@ -981,7 +1031,7 @@ class VDICore(object):
                                 q_ow_fix=0)
 
                             if x_heating_2[6] > heater_limit[0]:
-                                x_maxheat_2 = _calc_temperatue(
+                                x_maxheat_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=heater_limit[0],
@@ -990,7 +1040,7 @@ class VDICore(object):
 
                                 if x_maxheat_2[4] < t_set_heating and \
                                                 heater_limit[2] > 0:
-                                    x_heating_3 = _calc_heatflow(
+                                    x_heating_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_heating,
@@ -999,7 +1049,7 @@ class VDICore(object):
                                         q_ow_fix=None)
 
                                     if x_heating_3[8] > heater_limit[2]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=heater_limit[0],
@@ -1013,7 +1063,7 @@ class VDICore(object):
                                 return x_heating_2
                         elif np.argmax(heater_order == 2) == 2 and \
                                         heater_limit[2] > 0:
-                            x_heating_2 = _calc_heatflow(
+                            x_heating_2 = self._calc_heatflow(
                                 A,
                                 rhs,
                                 t_air_set=t_set_heating,
@@ -1022,7 +1072,7 @@ class VDICore(object):
                                 q_ow_fix=None)
 
                             if x_heating_2[8] > heater_limit[2]:
-                                x_maxheat_2 = _calc_temperatue(
+                                x_maxheat_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=0,
@@ -1031,7 +1081,7 @@ class VDICore(object):
 
                                 if x_maxheat_2[4] < t_set_heating and \
                                                 heater_limit[0] > 0:
-                                    x_heating_3 = _calc_heatflow(
+                                    x_heating_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_heating,
@@ -1040,7 +1090,7 @@ class VDICore(object):
                                         q_ow_fix=heater_limit[2])
 
                                     if x_heating_3[6] > heater_limit[0]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=heater_limit[0],
@@ -1058,7 +1108,7 @@ class VDICore(object):
                     return x_heating_1
             elif np.argmax(heater_order == 1) == 2 and \
                             heater_limit[2] > 0:  # no else
-                x_heating_1 = _calc_heatflow(
+                x_heating_1 = self._calc_heatflow(
                     A,
                     rhs,
                     t_air_set=t_set_heating,
@@ -1067,7 +1117,7 @@ class VDICore(object):
                     q_ow_fix=None)
 
                 if x_heating_1[8] > heater_limit[2]:
-                    x_maxheat_1 = _calc_temperatue(
+                    x_maxheat_1 = self._calc_temperatue(
                         A,
                         rhs,
                         q_air_fix=0,
@@ -1077,7 +1127,7 @@ class VDICore(object):
                     if x_maxheat_1[4] < t_set_heating:
                         if np.argmax(heater_order == 2) == 0 and \
                                         heater_limit[0] > 0:
-                            x_heating_2 = _calc_heatflow(
+                            x_heating_2 = self._calc_heatflow(
                                 A,
                                 rhs,
                                 t_air_set=t_set_heating,
@@ -1086,7 +1136,7 @@ class VDICore(object):
                                 q_ow_fix=heater_limit[2])
 
                             if x_heating_2[6] > heater_limit[0]:
-                                x_maxheat_2 = _calc_temperatue(
+                                x_maxheat_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=heater_limit[0],
@@ -1095,7 +1145,7 @@ class VDICore(object):
 
                                 if x_maxheat_2[4] < t_set_heating and \
                                                 heater_limit[1] > 0:
-                                    x_heating_3 = _calc_heatflow(
+                                    x_heating_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_heating,
@@ -1104,7 +1154,7 @@ class VDICore(object):
                                         q_ow_fix=heater_limit[2])
 
                                     if x_heating_3[7] > heater_limit[1]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=heater_limit[0],
@@ -1118,7 +1168,7 @@ class VDICore(object):
                                 return x_heating_2
                         elif np.argmax(heater_order == 2) == 1 and \
                                         heater_limit[1] > 0:
-                            x_heating_2 = _calc_heatflow(
+                            x_heating_2 = self._calc_heatflow(
                                 A,
                                 rhs,
                                 t_air_set=t_set_heating,
@@ -1127,7 +1177,7 @@ class VDICore(object):
                                 q_ow_fix=heater_limit[2])
 
                             if x_heating_2[7] > heater_limit[1]:
-                                x_maxheat_2 = _calc_temperatue(
+                                x_maxheat_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=0,
@@ -1136,7 +1186,7 @@ class VDICore(object):
 
                                 if x_maxheat_2[4] < t_set_heating and \
                                                 heater_limit[0] > 0:
-                                    x_heating_3 = _calc_heatflow(
+                                    x_heating_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_heating,
@@ -1145,7 +1195,7 @@ class VDICore(object):
                                         q_ow_fix=heater_limit[2])
 
                                     if x_heating_3[6] > heater_limit[0]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=heater_limit[0],
@@ -1166,7 +1216,7 @@ class VDICore(object):
             # Indoor air temperature above cooling set temperature
 
             if np.argmax(cooler_order == 1) == 0 and cooler_limit[0] < 0:
-                x_cooling_1 = _calc_heatflow(
+                x_cooling_1 = self._calc_heatflow(
                     A,
                     rhs,
                     t_air_set=t_set_cooling,
@@ -1175,7 +1225,7 @@ class VDICore(object):
                     q_ow_fix=0)
 
                 if x_cooling_1[6] < cooler_limit[0]:
-                    x_maxcool_1 = _calc_temperatue(
+                    x_maxcool_1 = self._calc_temperatue(
                         A,
                         rhs,
                         q_air_fix=cooler_limit[0],
@@ -1185,7 +1235,7 @@ class VDICore(object):
                     if x_maxcool_1[4] > t_set_cooling:
                         if np.argmax(cooler_order == 2) == 1 and \
                                         cooler_limit[1] < 0:
-                            x_cooling_2 = _calc_heatflow(
+                            x_cooling_2 = self._calc_heatflow(
                                 A,
                                 rhs,
                                 t_air_set=t_set_cooling,
@@ -1194,7 +1244,7 @@ class VDICore(object):
                                 q_ow_fix=0)
 
                             if x_cooling_2[7] < cooler_limit[1]:
-                                x_maxcool_2 = _calc_temperatue(
+                                x_maxcool_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=cooler_limit[0],
@@ -1203,7 +1253,7 @@ class VDICore(object):
 
                                 if x_maxcool_2[4] > t_set_cooling and \
                                                 cooler_limit[2] < 0:
-                                    x_cooling_3 = _calc_heatflow(
+                                    x_cooling_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_cooling,
@@ -1212,7 +1262,7 @@ class VDICore(object):
                                         q_ow_fix=None)
 
                                     if x_cooling_3[8] < cooler_limit[2]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=cooler_limit[0],
@@ -1226,7 +1276,7 @@ class VDICore(object):
                                 return x_cooling_2
                         elif np.argmax(cooler_order == 2) == 2 and \
                                         cooler_limit[2] < 0:
-                            x_cooling_2 = _calc_heatflow(
+                            x_cooling_2 = self._calc_heatflow(
                                 A,
                                 rhs,
                                 t_air_set=t_set_cooling,
@@ -1235,7 +1285,7 @@ class VDICore(object):
                                 q_ow_fix=None)
 
                             if x_cooling_2[8] < cooler_limit[2]:
-                                x_maxcool_2 = _calc_temperatue(
+                                x_maxcool_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=cooler_limit[0],
@@ -1244,7 +1294,7 @@ class VDICore(object):
 
                                 if x_maxcool_2[4] > t_set_cooling and \
                                                 cooler_limit[1] < 0:
-                                    x_cooling_3 = _calc_heatflow(
+                                    x_cooling_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_cooling,
@@ -1253,7 +1303,7 @@ class VDICore(object):
                                         q_ow_fix=cooler_limit[2])
 
                                     if x_cooling_3[7] < cooler_limit[1]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=cooler_limit[0],
@@ -1271,7 +1321,7 @@ class VDICore(object):
                     return x_cooling_1
 
             elif np.argmax(cooler_order == 1) == 1 and cooler_limit[1] < 0:
-                x_cooling_1 = _calc_heatflow(
+                x_cooling_1 = self._calc_heatflow(
                     A,
                     rhs,
                     t_air_set=t_set_cooling,
@@ -1280,7 +1330,7 @@ class VDICore(object):
                     q_ow_fix=0)
 
                 if x_cooling_1[7] < cooler_limit[1]:
-                    x_maxcool_1 = _calc_temperatue(
+                    x_maxcool_1 = self._calc_temperatue(
                         A,
                         rhs,
                         q_air_fix=0,
@@ -1290,7 +1340,7 @@ class VDICore(object):
                     if x_maxcool_1[4] > t_set_cooling:
                         if np.argmax(cooler_order == 2) == 0 and \
                                         cooler_limit[0] < 0:
-                            x_cooling_2 = _calc_heatflow(
+                            x_cooling_2 = self._calc_heatflow(
                                 A,
                                 rhs,
                                 t_air_set=t_set_cooling,
@@ -1299,7 +1349,7 @@ class VDICore(object):
                                 q_ow_fix=0)
 
                             if x_cooling_2[6] < cooler_limit[0]:
-                                x_maxcool_2 = _calc_temperatue(
+                                x_maxcool_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=cooler_limit[0],
@@ -1308,7 +1358,7 @@ class VDICore(object):
 
                                 if x_maxcool_2[4] > t_set_cooling and \
                                                 cooler_limit[2] < 0:
-                                    x_cooling_3 = _calc_heatflow(
+                                    x_cooling_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_cooling,
@@ -1317,7 +1367,7 @@ class VDICore(object):
                                         q_ow_fix=None)
 
                                     if x_cooling_3[8] < cooler_limit[2]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=cooler_limit[0],
@@ -1331,7 +1381,7 @@ class VDICore(object):
                                 return x_cooling_2
                         elif np.argmax(cooler_order == 2) == 2 and \
                                         cooler_limit[2] < 0:
-                            x_cooling_2 = _calc_heatflow(
+                            x_cooling_2 = self._calc_heatflow(
                                 A,
                                 rhs,
                                 t_air_set=t_set_cooling,
@@ -1340,7 +1390,7 @@ class VDICore(object):
                                 q_ow_fix=None)
 
                             if x_cooling_2[8] < cooler_limit[2]:
-                                x_maxcool_2 = _calc_temperatue(
+                                x_maxcool_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=0,
@@ -1349,7 +1399,7 @@ class VDICore(object):
 
                                 if x_maxcool_2[4] > t_set_cooling and \
                                                 cooler_limit[0] < 0:
-                                    x_cooling_3 = _calc_heatflow(
+                                    x_cooling_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_cooling,
@@ -1358,7 +1408,7 @@ class VDICore(object):
                                         q_ow_fix=cooler_limit[2])
 
                                     if x_cooling_3[6] < cooler_limit[0]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=cooler_limit[0],
@@ -1376,7 +1426,7 @@ class VDICore(object):
                     return x_cooling_1
 
             elif np.argmax(cooler_order == 1) == 2 and cooler_limit[2] < 0:
-                x_cooling_1 = _calc_heatflow(
+                x_cooling_1 = self._calc_heatflow(
                     A,
                     rhs,
                     t_air_set=t_set_cooling,
@@ -1384,7 +1434,7 @@ class VDICore(object):
                     q_iw_fix=0,
                     q_ow_fix=None)
                 if x_cooling_1[8] < cooler_limit[2]:
-                    x_maxcool_1 = _calc_temperatue(
+                    x_maxcool_1 = self._calc_temperatue(
                         A,
                         rhs,
                         q_air_fix=0,
@@ -1394,7 +1444,7 @@ class VDICore(object):
                     if x_maxcool_1[4] > t_set_cooling:
                         if np.argmax(cooler_order == 2) == 0 and \
                                         cooler_limit[0] < 0:
-                            x_cooling_2 = _calc_heatflow(
+                            x_cooling_2 = self._calc_heatflow(
                                 A,
                                 rhs,
                                 t_air_set=t_set_cooling,
@@ -1403,7 +1453,7 @@ class VDICore(object):
                                 q_ow_fix=cooler_limit[2])
 
                             if x_cooling_2[6] < cooler_limit[0]:
-                                x_maxcool_2 = _calc_temperatue(
+                                x_maxcool_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=cooler_limit[0],
@@ -1412,7 +1462,7 @@ class VDICore(object):
 
                                 if x_maxcool_2[4] > t_set_cooling and \
                                                 cooler_limit[1] < 0:
-                                    x_cooling_3 = _calc_heatflow(
+                                    x_cooling_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_cooling,
@@ -1421,7 +1471,7 @@ class VDICore(object):
                                         q_ow_fix=cooler_limit[2])
 
                                     if x_cooling_3[7] < cooler_limit[1]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=cooler_limit[0],
@@ -1435,7 +1485,7 @@ class VDICore(object):
                                 return x_cooling_2
                         elif np.argmax(cooler_order == 2) == 1 and \
                                         cooler_limit[1] < 0:
-                            x_cooling_2 = _calc_heatflow(
+                            x_cooling_2 = self._calc_heatflow(
                                 A,
                                 rhs,
                                 t_air_set=t_set_cooling,
@@ -1444,7 +1494,7 @@ class VDICore(object):
                                 q_ow_fix=cooler_limit[2])
 
                             if x_cooling_2[7] < cooler_limit[1]:
-                                x_maxcool_2 = _calc_temperatue(
+                                x_maxcool_2 = self._calc_temperatue(
                                     A,
                                     rhs,
                                     q_air_fix=0,
@@ -1453,7 +1503,7 @@ class VDICore(object):
 
                                 if x_maxcool_2[4] > t_set_cooling and \
                                                 cooler_limit[0] < 0:
-                                    x_cooling_3 = _calc_heatflow(
+                                    x_cooling_3 = self._calc_heatflow(
                                         A,
                                         rhs,
                                         t_air_set=t_set_cooling,
@@ -1462,7 +1512,7 @@ class VDICore(object):
                                         q_ow_fix=cooler_limit[2])
 
                                     if x_cooling_3[6] < cooler_limit[0]:
-                                        return _calc_temperatue(
+                                        return self._calc_temperatue(
                                             A,
                                             rhs,
                                             q_air_fix=cooler_limit[0],
