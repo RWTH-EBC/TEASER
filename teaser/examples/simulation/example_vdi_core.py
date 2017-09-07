@@ -76,7 +76,6 @@ def vdi_example_6007(thermal_zone):
 if __name__ == '__main__':
 
     import teaser.data.weatherdata as weatherdata
-    import matplotlib.pyplot as plt
 
     #  Get TEASER project with residential type building
     prj = gen_res_type_example_building()
@@ -87,11 +86,9 @@ if __name__ == '__main__':
     #  Extract thermal_zone
     thermal_zone = prj.buildings[0].thermal_zones[0]
 
-    #  Todo: Necessary to generate separate weather?
+    #  Todo: Necessary to generate separate weather and store on prj?
     weather = weatherdata.WeatherData()
-
-    #  Todo: Define weather path
-    # weather.load_weather(path=path_try)
+    prj.weather_data = weather
 
     print('UA value before retrofiting:')
     print(prj.buildings[0].thermal_zones[0].outer_walls[0].ua_value)
@@ -100,15 +97,15 @@ if __name__ == '__main__':
     print()
 
     #  Perform simulation for unretrofited model
-    (T_air, Q_hc1) = vdi_example_6007(thermal_zone)
+    (t_indoor, q_heat_cool_1) = vdi_example_6007(thermal_zone)
 
-    q_heat1 = np.zeros(len(Q_hc1))
-    q_cool1 = np.zeros(len(Q_hc1))
-    for i in range(len(Q_hc1)):
-        if Q_hc1[i] > 0:
-            q_heat1[i] = Q_hc1[i]
-        elif Q_hc1[i] < 0:
-            q_cool1[i] = Q_hc1[i]
+    q_heat1 = np.zeros(len(q_heat_cool_1))
+    q_cool1 = np.zeros(len(q_heat_cool_1))
+    for i in range(len(q_heat_cool_1)):
+        if q_heat_cool_1[i] > 0:
+            q_heat1[i] = q_heat_cool_1[i]
+        elif q_heat_cool_1[i] < 0:
+            q_cool1[i] = q_heat_cool_1[i]
 
     print('Sum of heating energy in kWh:')
     print(sum(q_heat1) / 1000)
@@ -127,23 +124,23 @@ if __name__ == '__main__':
     thermal_zone = prj.buildings[0].thermal_zones[0]
 
     #  Rund VDI 6007 example with thermal zone
-    (T_air, Q_hc) = vdi_example_6007(thermal_zone, weather=weather)
+    (t_indoor, q_heat_cool_2) = vdi_example_6007(thermal_zone)
 
     print('Indoor air temperature in Kelvin:')
-    print(T_air)
+    print(t_indoor)
     print()
 
     print('Heating(+) / cooling(-) load in Watt:')
-    print(Q_hc)
+    print(q_heat_cool_2)
     print()
 
-    q_heat = np.zeros(len(Q_hc))
-    q_cool = np.zeros(len(Q_hc))
-    for i in range(len(Q_hc)):
-        if Q_hc[i] > 0:
-            q_heat[i] = Q_hc[i]
-        elif Q_hc[i] < 0:
-            q_cool[i] = Q_hc[i]
+    q_heat = np.zeros(len(q_heat_cool_2))
+    q_cool = np.zeros(len(q_heat_cool_2))
+    for i in range(len(q_heat_cool_2)):
+        if q_heat_cool_2[i] > 0:
+            q_heat[i] = q_heat_cool_2[i]
+        elif q_heat_cool_2[i] < 0:
+            q_cool[i] = q_heat_cool_2[i]
 
     print('Sum of heating energy in kWh (after retrofit):')
     print(sum(q_heat) / 1000)
@@ -155,17 +152,17 @@ if __name__ == '__main__':
 
     fig = plt.figure()
     fig.add_subplot(411)
-    plt.plot(weather.temp)
+    plt.plot(weather.air_temp)
     plt.ylabel('Outdoor air\ntemperature in\ndegree Celsius')
     fig.add_subplot(412)
-    plt.plot(weather.sun_rad[0])
-    plt.ylabel('Sun radiation\non surface 0')  # TODO: Add unit
+    plt.plot(weather.direct_radiation)
+    plt.ylabel('Direct radiation in W/m2')  # TODO: Add unit
     fig.add_subplot(413)
-    plt.plot(T_air - 273.15)
+    plt.plot(t_indoor - 273.15)
     plt.ylabel('Indoor air\ntemperature in\ndegree Celsius')
     fig.add_subplot(414)
-    plt.plot(Q_hc1 / 1000, color="Red")
-    plt.plot(Q_hc / 1000)
+    plt.plot(q_heat_cool_1 / 1000, color="Red")
+    plt.plot(q_heat_cool_2 / 1000)
 
     plt.ylabel('Heating/cooling\npower (+/-)\nin kW')
     plt.xlabel('Time in hours')
