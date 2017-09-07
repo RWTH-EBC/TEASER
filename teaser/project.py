@@ -14,6 +14,7 @@ import teaser.data.output.aixlib_output as aixlib_output
 import teaser.data.output.ibpsa_output as ibpsa_output
 import teaser.data.output.text_output as text_out
 from teaser.data.dataclass import DataClass
+from teaser.data.weatherdata import WeatherData
 from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.archetypebuildings.bmvbs.custom.institute import Institute
 from teaser.logic.archetypebuildings.bmvbs.custom.institute4 import Institute4
@@ -73,6 +74,8 @@ class Project(object):
         List of all buildings in one project, instances of Building()
     data : instance of DataClass
         TEASER instance of DataClass containing XML binding classes
+    weather_data : instance of WeatherData class
+        TEASER isntance of WeatherData class containing TRY weather data.
     weather_file_path : str
         Absolute path to weather file used for Modelica simulation. Default
         weather file can be find in inputdata/weatherdata.
@@ -113,6 +116,7 @@ class Project(object):
             self.data = self.instantiate_data_class()
         else:
             self.data = None
+        self.weather_data = None
 
     @staticmethod
     def instantiate_data_class():
@@ -126,23 +130,42 @@ class Project(object):
         """
         return DataClass()
 
+    def instantiatie_weather_data(self, path=None):
+        """Instantiate WeatherData class to calculate VDI core
+
+        Instantiates the WeatherData class and stores it as class attribute.
+
+        Parameters
+        ----------
+
+        weather_file_path : string
+            Path to TRY weather data, default is self.weather_file_path
+        """
+        if path is None:
+            path = self.weather_file_path
+
+        ass_error_type = "wrong weather data type "
+        assert path.endswith('.mos'), ass_error_type
+
+        self.weather_data = WeatherData(path=path)
+
     def calc_all_buildings(self, raise_errors=False):
         """Calculates values for all project buildings
 
         You need to set the following parameters in the Project class.
 
-        number_of_elements_calc : int
+        number_of_elements_calc: int
             defines the number of elements, that area aggregated, between 1
             and 4, default is 2
             For AixLib you should always use 2 elements!!!
 
-        merge_windows_calc : bool
+        merge_windows_calc: bool
             True for merging the windows into the outer walls, False for
             separate resistance for window, default is False
             For AixLib vdi calculation is True, ebc calculation is False
 
-        used_library_calc : str
-            used library (AixLib and IBPSA are supported)
+        used_library_calc: str
+            used library(AixLib and IBPSA are supported)
 
         """
         if raise_errors is True:
@@ -189,27 +212,27 @@ class Project(object):
         - add an additional insulation layer to all outer walls
           (including roof, and ground floor).
           The thickness of the insulation layer is calculated
-          that the U-Value of the wall corresponds to the retrofit standard of
+          that the U - Value of the wall corresponds to the retrofit standard of
           the year of retrofit.
 
         The needed parameters for the Modelica Model are calculated
         automatically, using the calculation_method specified in the
         first scenario.
 
-        Note: To Calculate U-Value, the standard TEASER coefficients for outer
+        Note: To Calculate U - Value, the standard TEASER coefficients for outer
         and inner heat transfer are used.
 
         Parameters
         ----------
 
-        year_of_retrofit : int
+        year_of_retrofit: int
             the year the buildings are retrofitted
-        type_of_retrofit : str
+        type_of_retrofit: str
             The classification of retrofit, if the archetype building
             approach of TABULA is used.
-        window_type : str
+        window_type: str
             Default: EnEv 2014, only 'iwu' archetype approach.
-        material : str
+        material: str
             Default: EPS035, only 'iwu' archetype approach.
 
         """
@@ -266,65 +289,65 @@ class Project(object):
             office_layout=None,
             window_layout=None,
             construction_type=None):
-        """Add a non-residential building to the TEASER project.
+        """Add a non - residential building to the TEASER project.
 
-        This function adds a non-residential archetype building to the TEASER
+        This function adds a non - residential archetype building to the TEASER
         project. You need to specify the method of the archetype generation.
         Currently TEASER supports only method according to Lichtmess and BMVBS
-        for non-residential buildings. Further the type of usage needs to be
+        for non - residential buildings. Further the type of usage needs to be
         specified. Currently TEASER supports four different types of
-        non-residential buildings ('office', 'institute', 'institute4',
+        non - residential buildings('office', 'institute', 'institute4',
         'institute8'). For more information on specific archetype buildings and
         methods, please read the docs of archetype classes.
 
         This function also calculates the parameters of the buildings directly
-        with the settings set in the project (e.g. used_library_calc or
+        with the settings set in the project(e.g. used_library_calc or
         number_of_elements_calc).
 
         Parameters
         ----------
-        method : str
+        method: str
             Used archetype method, currenlty only 'bmvbs' is supported
-        usage : str
+        usage: str
             Main usage of the obtained building, currently only 'office',
             'institute', 'institute4', institute8' are supported
-        name : str
+        name: str
             Individual name
-        year_of_construction : int
+        year_of_construction: int
             Year of first construction
-        height_of_floors : float [m]
+        height_of_floors: float[m]
             Average height of the buildings' floors
-        number_of_floors : int
+        number_of_floors: int
             Number of building's floors above ground
-        net_leased_area : float [m2]
+        net_leased_area: float[m2]
             Total net leased area of building. This is area is NOT the
             footprint
             of a building
-        with_ahu : Boolean
+        with_ahu: Boolean
             If set to True, an empty instance of BuildingAHU is instantiated
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
-        office_layout : int
+        office_layout: int
             Structure of the floor plan of office buildings, default is 1,
             which is representative for one elongated floor.
                 1: elongated 1 floor
                 2: elongated 2 floors
-                3: compact (e.g. for a square base building)
-        window_layout : int
+                3: compact(e.g. for a square base building)
+        window_layout: int
             Structure of the window facade type, default is 1, which is
             representative for a punctuated facade.
-                1: punctuated facade (individual windows)
-                2: banner facade (continuous windows)
+                1: punctuated facade(individual windows)
+                2: banner facade(continuous windows)
                 3: full glazing
-        construction_type : str
+        construction_type: str
             Construction type of used wall constructions default is "heavy")
                 heavy: heavy construction
                 light: light construction
 
         Returns
-        ----------
-        type_bldg : Instance of Office()
+        - ---------
+        type_bldg: Instance of Office()
 
         """
         ass_error_method = "only 'bmvbs' is a valid method for " \
@@ -429,88 +452,88 @@ class Project(object):
         This function adds a residential archetype building to the TEASER
         project. You need to specify the method of the archetype generation.
         Currently TEASER supports only method according 'iwu' and 'urbanrenet'
-        for residential buildings ('tabula_de' to follow soon). Further the
+        for residential buildings('tabula_de' to follow soon). Further the
         type
         of usage needs to be specified. Currently TEASER supports one type of
         residential building for 'iwu' and eleven types for 'urbanrenet'. For
         more information on specific archetype buildings and methods, please
         read the docs of archetype classes.
         This function also calculates the parameters of the buildings directly
-        with the settings set in the project (e.g. used_library_calc or
+        with the settings set in the project(e.g. used_library_calc or
         number_of_elements_calc).
 
         Parameters
-        ----------
-        method : str
+        - ---------
+        method: str
             Used archetype method, currenlty only 'iwu' or 'urbanrenet' are
             supported, 'tabula_de' to follow soon
-        usage : str
+        usage: str
             Main usage of the obtainend building, currently only
             'single_family_dwelling' is supported for iwu and 'est1a', 'est1b',
             'est2', 'est3', 'est4a', 'est4b', 'est5' 'est6', 'est7', 'est8a',
             'est8b' for urbanrenet.
-        name : str
+        name: str
             Individual name
-        year_of_construction : int
+        year_of_construction: int
             Year of first construction
-        height_of_floors : float [m]
+        height_of_floors: float[m]
             Average height of the buildings' floors
-        number_of_floors : int
+        number_of_floors: int
             Number of building's floors above ground
-        net_leased_area : float [m2]
+        net_leased_area: float[m2]
             Total net leased area of building. This is area is NOT the
             footprint
             of a building
-        with_ahu : Boolean
+        with_ahu: Boolean
             If set to True, an empty instance of BuildingAHU is instantiated
             and
             assigned to attribute central_ahu. This instance holds information
             for central Air Handling units. Default is False.
-        residential_layout : int
-            Structure of floor plan (default = 0) CAUTION only used for iwu
+        residential_layout: int
+            Structure of floor plan(default = 0) CAUTION only used for iwu
                 0: compact
-                1: elongated/complex
-        neighbour_buildings : int
+                1: elongated / complex
+        neighbour_buildings: int
             Number of neighbour buildings. CAUTION: this will not change
             the orientation of the buildings wall, but just the overall
-            exterior wall and window area(!) (default = 0)
+            exterior wall and window area(!)(default = 0)
                 0: no neighbour
                 1: one neighbour
                 2: two neighbours
-        attic : int
+        attic: int
             Design of the attic. CAUTION: this will not change the orientation
-            or tilt of the roof instances, but just adapt the roof area(!) (
+            or tilt of the roof instances, but just adapt the roof area(!)(
             default = 0) CAUTION only used for iwu
                 0: flat roof
                 1: non heated attic
                 2: partly heated attic
                 3: heated attic
-        cellar : int
+        cellar: int
             Design of the of cellar CAUTION: this will not change the
             orientation, tilt of GroundFloor instances, nor the number or area
-            of ThermalZones, but will change GroundFloor area(!) (default = 0)
+            of ThermalZones, but will change GroundFloor area(!)(default = 0)
             CAUTION only used for iwu
                 0: no cellar
                 1: non heated cellar
                 2: partly heated cellar
                 3: heated cellar
-        dormer : str
+        dormer: str
             Is a dormer attached to the roof? CAUTION: this will not
             change roof or window orientation or tilt, but just adapt the roof
-            area(!) (default = 0) CAUTION only used for iwu
+            area(!)(default = 0) CAUTION only used for iwu
                 0: no dormer
                 1: dormer
-        construction_type : str
+        construction_type: str
             Construction type of used wall constructions default is "heavy")
                 heavy: heavy construction
                 light: light construction
-        number_of_apartments : int
-            number of apartments inside Building (default = 1). CAUTION only
+        number_of_apartments: int
+            number of apartments inside Building(default=1). CAUTION only
             used for urbanrenet
 
         Returns
-        ----------
-        type_bldg : Instance of Archetype Building
+        - ---------
+        type_bldg: Instance of Archetype Building
 
         """
         ass_error_method = "only'tabula_de', 'iwu' and 'urbanrenet' " \
@@ -1186,11 +1209,11 @@ class Project(object):
         calls the function save_teaser_xml in data.TeaserXML.py
 
         Parameters
-        ----------
+        - ---------
 
-        file_name : string
+        file_name: string
             name of the new file
-        path : string
+        path: string
             if the Files should not be stored in OutputData, an alternative
             can be specified
         """
@@ -1208,13 +1231,13 @@ class Project(object):
         txml_out.save_teaser_xml(new_path, self)
 
     def load_project(self, path):
-        """Loads the project from a teaserXML file (new format)
+        """Loads the project from a teaserXML file(new format)
 
         calls the function load_teaser_xml in data.TeaserXML.py
 
         Parameters
-        ----------
-        path : string
+        - ---------
+        path: string
             full path to a teaserXML file
 
         """
@@ -1229,11 +1252,11 @@ class Project(object):
 
 
         Parameters
-        ----------
+        - ---------
 
-        file_name : string
+        file_name: string
             name of the new file
-        path : string
+        path: string
             if the Files should not be stored in OutputData, an alternative
             can be specified
 
@@ -1258,17 +1281,17 @@ class Project(object):
         and possibly not all kinds of CityGML modelling techniques are
         supported.
 
-        If the function of the building is given as Residential (1000) or
-        Office (1120) the importer directly converts the building to
+        If the function of the building is given as Residential(1000) or
+        Office(1120) the importer directly converts the building to
         archetype buildings. If not, only the citygml geometry is imported and
         you need take care of either the material properties and zoning or you
         may use the _convert_bldg function in citygml_input module.
 
 
         Parameters
-        ----------
+        - ---------
 
-        path : string
+        path: string
             full path to a CityGML file
 
         """
@@ -1284,9 +1307,9 @@ class Project(object):
             path=None):
         """Exports values to a record file for Modelica simulation
 
-        Exports one (if internal_id is not None) or all buildings for
+        Exports one(if internal_id is not None) or all buildings for
         AixLib.ThermalZones.ReducedOrder.Multizone.MultizoneEquipped models
-        using the ThermalZoneEquipped model with a correction of g-value (
+        using the ThermalZoneEquipped model with a correction of g - value(
         double pane glazing) and supporting models, like tables and weather
         model. In contrast to versions < 0.5 TEASER now does not
         support any model options, as we observed no need, since single
@@ -1294,12 +1317,12 @@ class Project(object):
         the old options please contact us.
 
         Parameters
-        ----------
+        - ---------
 
-        internal_id : float
+        internal_id: float
             setter of a specific building which will be exported, if None then
             all buildings will be exported
-        path : string
+        path: string
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
         """
@@ -1346,18 +1369,18 @@ class Project(object):
         For Annex 60 Library
 
         Parameters
-        ----------
+        - ---------
 
-        library : str
+        library: str
             Used library within the framework of IBPSA library. The
             models are identical in each library, but IBPSA Modelica library is
             just a core set of models and should not be used standalone.
             Valid values are 'AixLib' (default), 'Buildings',
             'BuildingSystems' and 'IDEAS'.
-        internal_id : float
+        internal_id: float
             setter of a specific building which will be exported, if None then
             all buildings will be exported
-        path : string
+        path: string
             if the Files should not be stored in default output path of TEASER,
             an alternative path can be specified as a full path
         """
@@ -1397,9 +1420,9 @@ class Project(object):
         """Exports parameters of all buildings in a readable text file
 
         Parameters
-        ----------
+        - ---------
 
-        path : string
+        path: string
             if the Files should not be stored in OutputData, an alternative
             can be specified
         """
@@ -1423,10 +1446,10 @@ class Project(object):
         Caution: this will delete all buildings.
 
         Parameters
-        ----------
-        load_data : boolean, None-type
+        - ---------
+        load_data: boolean, None - type
             boolean if data bindings for type elements and use conditions
-            should be loaded (default = True), in addition it could be a None-
+            should be loaded(default=True), in addition it could be a None -
             type to use the already used data bindings
         """
 
