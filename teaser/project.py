@@ -130,7 +130,7 @@ class Project(object):
         """
         return DataClass()
 
-    def instantiatie_weather_data(self, path=None):
+    def instantiate_weather_data(self, path=None):
         """Instantiate WeatherData class to calculate VDI core
 
         Instantiates the WeatherData class and stores it as class attribute.
