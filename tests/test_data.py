@@ -3490,4 +3490,3 @@ class Test_teaser(object):
         #  Check if temperature deviation is below 0.1 Kelvin
         for val in tuple_res:
             assert val < 0.15
-

@@ -665,6 +665,7 @@ class VDICore(object):
         #  Calculate solar_rad_in with weather
         #  Todo: Set further inputs for _solar_radiation()?
         #  Todo: Store solar_rad_in on self.?
+        #  e.g. albedo=0.2, time_zone=1, altitude=0, location=(49.5, 8.5)
         solar_rad_in = np.transpose(self._solar_radiation())
 
         #  Calculate equal_air_temp
@@ -724,11 +725,11 @@ class VDICore(object):
         source_ig_rad = np.zeros(timesteps)
 
         # therm. splitter loads radiative:
-        Q_loads_rad = krad * source_ig_rad
-        splitFacLoads = self.calc_splitfactors(1, area_ar, [0], [0])
+        q_loads_rad = krad * source_ig_rad
+        split_fac_loads = self.calc_splitfactors(1, area_ar, [0], [0])
 
-        q_loads_to_inner_wall = Q_loads_rad * splitFacLoads[1, 0]
-        q_loads_to_outer_wall = Q_loads_rad * splitFacLoads[0, 0]
+        q_loads_to_inner_wall = q_loads_rad * split_fac_loads[1, 0]
+        q_loads_to_outer_wall = q_loads_rad * split_fac_loads[0, 0]
 
         #  TODO: Calculate with function call (depending on occupancy)
         # t_set_heating = np.zeros(timesteps) + 273.15 + 21  # in Kelvin
