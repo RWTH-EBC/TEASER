@@ -11,6 +11,7 @@ from teaser.logic.buildingobjects.calculation.one_element import OneElement
 from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 from teaser.logic.buildingobjects.calculation.four_element import FourElement
+from teaser.logic.simulation.VDI_6007.vdi_core import VDICore
 
 
 class ThermalZone(object):
@@ -84,7 +85,7 @@ class ThermalZone(object):
         average density of the air in the thermal zone
     heat_capac_air : float [J/K]
         average heat capacity of the air in the thermal zone
-    sim_model : instance of SimulationVDI6007()
+    vdi_sim_model : instance of VDICore()
         Instance of the VDI Simulation Class containing simulation methods and
         informations
     """
@@ -110,6 +111,7 @@ class ThermalZone(object):
         self._ceilings = []
         self._use_conditions = None
         self.model_attr = None
+        self.vdi_sim_model = None
         self.typical_length = None
         self.typical_width = None
         self._t_inside = 293.15
@@ -178,6 +180,12 @@ class ThermalZone(object):
                 merge_windows=merge_windows,
                 t_bt=t_bt)
             self.model_attr.calc_attributes()
+
+    def simulate_zone(self):
+        """Instantiate VDICore class and start simulation for this zone"""
+
+        self.vdi_sim_model = VDICore(thermal_zone=self)
+        self.vdi_sim_model.simulate()
 
     def find_walls(self, orientation, tilt):
         """Returns all outer walls with given orientation and tilt

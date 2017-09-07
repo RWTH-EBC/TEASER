@@ -189,6 +189,12 @@ class Project(object):
                         "this building:" + bldg.name)
                     self.buildings.remove(bldg)
 
+    def simulate_all_buildings(self):
+        """Simulates all buildings in this Project with VDICore"""
+
+        for bldg in self.buildings:
+            bldg.simulate_building()
+
     def retrofit_all_buildings(
             self,
             year_of_retrofit=None,

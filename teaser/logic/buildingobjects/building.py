@@ -493,6 +493,12 @@ class Building(object):
             elif self.used_library_calc == 'IBPSA':
                 self.library_attr = IBPSA(parent=self)
 
+    def simulate_building(self):
+        """Simulates all zones in this building with VDICore"""
+
+        for zone in self.thermal_zones:
+            zone.simulate_zone()
+
     def retrofit_building(
             self,
             year_of_retrofit=None,
