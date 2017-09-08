@@ -7,8 +7,6 @@ Run VDI 6007 test case 1
 import os
 import numpy as np
 
-import teaser.logic.simulation.low_order_VDI as low_order_VDI
-
 
 def load_res(filename):
     res = np.loadtxt(filename, delimiter=",", skiprows=1)  # Skip time step 0
@@ -61,6 +59,55 @@ def run_case1(plot_res=False):
         Q_ig[q] = 1000
     Q_ig = np.tile(Q_ig, 60)
 
+    # new core
+    from teaser.project import Project
+    from teaser.logic.buildingobjects.building import Building
+    from teaser.logic.buildingobjects.thermalzone import ThermalZone
+    from teaser.logic.buildingobjects.calculation.two_element import TwoElement
+    from teaser.logic.simulation.vdi_core import VDICore
+
+    # import customized weather class
+    from teaser.data.weatherdata import WeatherData
+
+    weather = WeatherData()
+    weather.air_temp = np.zeros(timesteps) + 295.15
+
+    prj = Project()
+    prj.weather_data = weather
+
+    bldg = Building(prj)
+
+    tz = ThermalZone(bldg)
+
+    model_data = TwoElement(tz, merge_windows=False, t_bt=5)
+
+    #  Store building parameters for testcase 1
+    model_data.r1_iw = 0.000595693407511
+    model_data.c1_iw = 14836354.6282
+    model_data.area_iw = 75.5
+    model_data.r_rest_ow = 0.03895919557
+    model_data.r1_ow = 0.00436791293674
+    model_data.c1_ow = 1600848.94
+    model_data.area_ow = 10.5
+    model_data.window_areas = np.zeros(1)
+    model_data.transparent_areas = np.zeros(1)
+    tz.volume = 52.5
+    tz.density_air = 1.19
+    tz.heat_capac_air = 0
+    model_data.ratio_conv_rad_inner_win = 0.09
+    model_data.weighted_g_value = 1
+    model_data.alpha_comb_inner_iw = 2.24
+    model_data.alpha_comb_inner_ow = 2.7
+    model_data.alpha_comb_outer_ow = 25
+    # model_data.alpha_wall = 25 * 10.5
+
+    tz.model_attr = model_data
+
+    calc = VDICore(tz)
+    t_air, q_air_hc = calc.simulate()
+
+    # new core end
+
     houseData = {"R1i": 0.000595693407511,
                  "C1i": 14836354.6282,
                  "Ai": 75.5,
@@ -111,6 +158,7 @@ def run_case1(plot_res=False):
                                                3600 / times_per_hour))
 
     # Compute averaged results
+    import pdb; pdb.set_trace()  # breakpoint d4187220 //
     T_air_c = T_air - 273.15
     T_air_mean = np.array(
         [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in

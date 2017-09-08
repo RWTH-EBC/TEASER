@@ -11,7 +11,7 @@ from teaser.logic.buildingobjects.calculation.one_element import OneElement
 from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 from teaser.logic.buildingobjects.calculation.four_element import FourElement
-from teaser.logic.simulation.VDI_6007.vdi_core import VDICore
+from teaser.logic.simulation.vdi_core import VDICore
 
 
 class ThermalZone(object):
