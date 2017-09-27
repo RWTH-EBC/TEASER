@@ -1202,8 +1202,7 @@ class Project(object):
         if path is None:
             new_path = os.path.join(utilities.get_default_path(), name)
         else:
-            new_path = os.path.join(utilities.get_default_path(), name)
-            utilities.create_path(utilities.get_full_path(path))
+            new_path = os.path.join(path, name)
 
         txml_out.save_teaser_xml(new_path, self)
 
