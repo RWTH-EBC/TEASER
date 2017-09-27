@@ -287,7 +287,7 @@ class Wall(BuildingElement):
         self.calc_ua_value()
 
         if material is None:
-            material = "EPS_040_15"
+            material = "EPS_perimeter_insulation_top_layer"
         else:
             pass
 
