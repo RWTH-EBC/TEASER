@@ -116,6 +116,11 @@ def run_case1(plot_res=False):
         [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
          range(24 * 60)])
 
+    # import matplotlib.pyplot as plt
+    # plt.figure()
+    # plt.plot(T_air_c)
+    # plt.show()
+
     T_air_1 = T_air_mean[0:24]
     T_air_10 = T_air_mean[216:240]
     T_air_60 = T_air_mean[1416:1440]
@@ -138,8 +143,8 @@ def run_case1(plot_res=False):
 
         plt.figure()
         ax_top = plt.subplot(211)
-        plt.plot(res, label="Reference", color="black", linestyle="--")
-        plt.plot(ref, label="Simulation", color="blue", linestyle="-")
+        plt.plot(res, label="Simulation", color="black", linestyle="--")
+        plt.plot(ref, label="Reference", color="blue", linestyle="-")
         plt.legend()
         plt.ylabel("Temperature in degC")
 

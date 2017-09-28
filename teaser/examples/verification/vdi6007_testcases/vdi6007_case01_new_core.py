@@ -98,71 +98,97 @@ def run_case1(plot_res=False):
     model_data.weighted_g_value = 1
     model_data.alpha_comb_inner_iw = 2.24
     model_data.alpha_comb_inner_ow = 2.7
+    model_data.alpha_conv_outer_ow = 20
+    model_data.alpha_rad_outer_ow = 5
     model_data.alpha_comb_outer_ow = 25
+    model_data.alpha_rad_inner_mean = 5
+    # model_data.tilt_facade = []
+    # model_data.orientation_facade = [180.0, -1, 0.0, -2, 90.0, 270.0]
     # model_data.alpha_wall = 25 * 10.5
 
     tz.model_attr = model_data
 
     calc = VDICore(tz)
+    calc.equal_air_temp = np.zeros(timesteps) + 295.15
+    calc.solar_rad_in = np.zeros((timesteps, 1))
+
+    calc.t_set_heating = np.zeros(timesteps)  # in Kelvin
+    calc.t_set_cooling = np.zeros(timesteps) + 600  # in Kelvin
+
+    calc.heater_limit = np.zeros((timesteps, 3)) + 1e10
+    calc.cooler_limit = np.zeros((timesteps, 3)) - 1e10
+
+    q_ig = np.zeros(timesteps_day)
+    for q in range(int(6 * timesteps_day / 24), int(18 * timesteps_day / 24)):
+        q_ig[q] = 1000
+    q_ig = np.tile(q_ig, 60)
+
+    calc.internal_gains = q_ig
+
     t_air, q_air_hc = calc.simulate()
 
     # new core end
 
-    houseData = {"R1i": 0.000595693407511,
-                 "C1i": 14836354.6282,
-                 "Ai": 75.5,
-                 "RRest": 0.03895919557,
-                 "R1o": 0.00436791293674,
-                 "C1o": 1600848.94,
-                 "Ao": [10.5],
-                 "Aw": np.zeros(1),
-                 "At": np.zeros(1),
-                 "Vair": 52.5,
-                 "rhoair": 1.19,
-                 "cair": 0,
-                 "splitfac": 0.09,
-                 "g": 1,
-                 "alphaiwi": 2.24,
-                 "alphaowi": 2.7,
-                 "alphaWall": 25 * 10.5,  # 25 * sum(Ao)
-                 "withInnerwalls": True}
+    # houseData = {"R1i": 0.000595693407511,
+    #              "C1i": 14836354.6282,
+    #              "Ai": 75.5,
+    #              "RRest": 0.03895919557,
+    #              "R1o": 0.00436791293674,
+    #              "C1o": 1600848.94,
+    #              "Ao": [10.5],
+    #              "Aw": np.zeros(1),
+    #              "At": np.zeros(1),
+    #              "Vair": 52.5,
+    #              "rhoair": 1.19,
+    #              "cair": 0,
+    #              "splitfac": 0.09,
+    #              "g": 1,
+    #              "alphaiwi": 2.24,
+    #              "alphaowi": 2.7,
+    #              "alphaWall": 25 * 10.5,  # 25 * sum(Ao)
+    #              "withInnerwalls": True}
 
-    krad = 1
+    # krad = 1
 
-    # Define set points (prevent heating or cooling!)
-    t_set_heating = np.zeros(timesteps)  # in Kelvin
-    t_set_cooling = np.zeros(timesteps) + 600  # in Kelvin
+    # # Define set points (prevent heating or cooling!)
+    # t_set_heating = np.zeros(timesteps)  # in Kelvin
+    # t_set_cooling = np.zeros(timesteps) + 600  # in Kelvin
 
-    heater_limit = np.zeros((timesteps, 3)) + 1e10
-    cooler_limit = np.zeros((timesteps, 3)) - 1e10
+    # heater_limit = np.zeros((timesteps, 3)) + 1e10
+    # cooler_limit = np.zeros((timesteps, 3)) - 1e10
 
-    # Calculate indoor air temperature
-    T_air, Q_hc, Q_iw, Q_ow = \
-        low_order_VDI.reducedOrderModelVDI(houseData,
-                                           weatherTemperature,
-                                           solarRad_in,
-                                           equalAirTemp,
-                                           alphaRad,
-                                           ventRate, Q_ig,
-                                           source_igRad,
-                                           krad,
-                                           t_set_heating,
-                                           t_set_cooling,
-                                           heater_limit,
-                                           cooler_limit,
-                                           heater_order=np.array(
-                                               [1, 2, 3]),
-                                           cooler_order=np.array(
-                                               [1, 2, 3]),
-                                           dt=int(
-                                               3600 / times_per_hour))
+    # # Calculate indoor air temperature
+    # T_air, Q_hc, Q_iw, Q_ow = \
+    #     low_order_VDI.reducedOrderModelVDI(houseData,
+    #                                        weatherTemperature,
+    #                                        solarRad_in,
+    #                                        equalAirTemp,
+    #                                        alphaRad,
+    #                                        ventRate, Q_ig,
+    #                                        source_igRad,
+    #                                        krad,
+    #                                        t_set_heating,
+    #                                        t_set_cooling,
+    #                                        heater_limit,
+    #                                        cooler_limit,
+    #                                        heater_order=np.array(
+    #                                            [1, 2, 3]),
+    #                                        cooler_order=np.array(
+    #                                            [1, 2, 3]),
+    #                                        dt=int(
+    #                                            3600 / times_per_hour))
 
     # Compute averaged results
-    import pdb; pdb.set_trace()  # breakpoint d4187220 //
-    T_air_c = T_air - 273.15
+    T_air_c = t_air - 273.15
     T_air_mean = np.array(
         [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
          range(24 * 60)])
+
+    # import matplotlib.pyplot as plt
+    # plt.figure()
+    # plt.plot(T_air_c)
+    # plt.show()
+
 
     T_air_1 = T_air_mean[0:24]
     T_air_10 = T_air_mean[216:240]
@@ -186,8 +212,8 @@ def run_case1(plot_res=False):
 
         plt.figure()
         ax_top = plt.subplot(211)
-        plt.plot(res, label="Reference", color="black", linestyle="--")
-        plt.plot(ref, label="Simulation", color="blue", linestyle="-")
+        plt.plot(res, label="Simulation", color="black", linestyle="--")
+        plt.plot(ref, label="Reference", color="blue", linestyle="-")
         plt.legend()
         plt.ylabel("Temperature in degC")
 

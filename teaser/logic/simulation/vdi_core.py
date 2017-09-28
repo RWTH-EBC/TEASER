@@ -59,12 +59,31 @@ class VDICore(object):
         self.heater_limit = [1e10, 1e10, 1e10]
         self.cooler_limit = [-1e10, -1e10, -1e10]
 
+        #### time setting for simulation
+        self.timesteps = 60 * 60 * 24
+
+
         self.initial_air_temp = 295.15
         self.initial_inner_wall_temp = 295.15
         self.initial_outer_wall_temp = 295.15
 
         self.heater_order = np.array([1, 2, 3])
         self.cooler_order = np.array([1, 2, 3])
+
+        self.internal_gains = np.zeros(self.timesteps) + 200
+
+        self.solar_rad_in = np.transpose(self._solar_radiation())
+        self.equal_air_temp = self._eq_air_temp(h_sol=self.solar_rad_in)
+
+        self.t_set_heat_day = \
+            np.array([18, 18, 18, 18, 18, 18, 21, 21, 21, 21, 21, 21,
+                      21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
+                      18]) + 273.15
+        self.t_set_heating = np.tile(self.t_set_heat_day, 365)
+        self.t_set_cooling = np.zeros(self.timesteps) + 273.15 + 1000
+        self.heater_order = np.array([1, 2, 3])
+        self.cooler_order = np.array([1, 2, 3])
+
 
     def _eq_air_temp(self, h_sol, with_longwave=False, i_max=100):
         """
@@ -91,7 +110,7 @@ class VDICore(object):
         """
         #  Todo: Cleanup docstring
 
-        timesteps = 365 * 24
+        timesteps = 60 * 60 * 24
 
         #  Todo: Where to store t_balck_sky?
         t_black_sky = np.zeros(timesteps) + 273.15
@@ -116,15 +135,17 @@ class VDICore(object):
         wf_win = self.thermal_zone.model_attr.weightfactor_win
         wf_ground = self.thermal_zone.model_attr.weightfactor_ground
         t_ground = self.thermal_zone.t_ground
-        alpha_wall_out = self.thermal_zone.model_attr.alpha_conv_outer_ow
-        alpha_rad_wall = self.thermal_zone.model_attr.alpha_rad_outer_ow
+        alpha_conv_outer_ow = self.thermal_zone.model_attr.alpha_conv_outer_ow
+        alpha_rad_outer_ow = self.thermal_zone.model_attr.alpha_rad_outer_ow
+
+        # 
 
         n = len(wf_wall)
 
         # Compute equivalent long wave and short wave temperatures
         del_t_eq_lw = (t_black_sky - t_dry_bulb) * (
-            e_ext * alpha_rad_wall / (alpha_rad_wall + alpha_wall_out * 0.93))
-        del_t_eq_sw = h_sol * a_ext / (alpha_rad_wall + alpha_wall_out)
+            e_ext * alpha_rad_outer_ow / (alpha_rad_outer_ow + alpha_conv_outer_ow * 0.93))
+        del_t_eq_sw = h_sol * a_ext / (alpha_rad_outer_ow + alpha_conv_outer_ow)
 
         # Compute equivalent window and wall temperatures
         if with_longwave:
@@ -165,7 +186,7 @@ class VDICore(object):
 
         """
         #  FIXME: Deal with input values (to weather / project?)
-        timesteps = 365 * 24
+        timesteps = 60 * 60 * 24
         dt = 3600
         initial_time = 0
 
@@ -625,8 +646,8 @@ class VDICore(object):
         """
 
         #  Fix number of timesteps
-        timesteps = 365 * 24
-        dt = 3600
+        timesteps = 24 * 60 * 60
+        dt = 60
 
         #  Get building parameters
         r1_iw = self.thermal_zone.model_attr.r1_iw
@@ -666,10 +687,10 @@ class VDICore(object):
         #  Todo: Set further inputs for _solar_radiation()?
         #  Todo: Store solar_rad_in on self.?
         #  e.g. albedo=0.2, time_zone=1, altitude=0, location=(49.5, 8.5)
-        solar_rad_in = np.transpose(self._solar_radiation())
+        # solar_rad_in = np.transpose(self._solar_radiation())
 
         #  Calculate equal_air_temp
-        equal_air_temp = self._eq_air_temp(h_sol=solar_rad_in)
+        # self.equal_air_temp = self._eq_air_temp(h_sol=self.solar_rad_in)
 
         #  Get ventilation rate
         #  Todo: Replace dummy ventilation rate value
@@ -679,7 +700,7 @@ class VDICore(object):
 
         #  Get internal gains
         #  Todo: Replae dummy value for internal gains with bound. conditions
-        q_ig = np.zeros(timesteps) + 200
+        # self.internal_gains = np.zeros(timesteps) + 200
 
         #  Radiative heat transfer coefficient between inner and outer walls
         #  in W/m2K
@@ -690,9 +711,7 @@ class VDICore(object):
         e_solar_conv = np.zeros((timesteps, len(transparent_areas)))
 
         for i in range(len(transparent_areas)):
-            e_solar_conv[:, i] = solar_rad_in[:, i] * \
-                                 ratio_conv_rad_inner_win * weighted_g_value * \
-                                 transparent_areas[i]
+            e_solar_conv[:, i] = self.solar_rad_in[:, i] * ratio_conv_rad_inner_win * weighted_g_value * transparent_areas[i]
         q_solar_conv = np.sum(e_solar_conv, axis=1)
 
         # splitters:
@@ -705,7 +724,7 @@ class VDICore(object):
         # therm. splitter solar radiative:
         e_solar_rad = np.zeros((timesteps, len(transparent_areas)))
         for i in range(len(transparent_areas)):
-            e_solar_rad[:, i] = solar_rad_in[:, i] * (
+            e_solar_rad[:, i] = self.solar_rad_in[:, i] * (
                 ratio_conv_rad_inner_win - 1) * weighted_g_value * \
                                 transparent_areas[i]
         q_solar_rad = np.zeros((
@@ -731,20 +750,39 @@ class VDICore(object):
         q_loads_to_inner_wall = q_loads_rad * split_fac_loads[1, 0]
         q_loads_to_outer_wall = q_loads_rad * split_fac_loads[0, 0]
 
+
+
+############-----------------------Attention revision neccessary!
+############-----------------------Attention revision neccessary!
+
         #  TODO: Calculate with function call (depending on occupancy)
         # t_set_heating = np.zeros(timesteps) + 273.15 + 21  # in Kelvin
-        t_set_heat_day = \
-            np.array([18, 18, 18, 18, 18, 18, 21, 21, 21, 21, 21, 21,
-                      21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
-                      18]) + 273.15
-        t_set_heating = np.tile(t_set_heat_day, 365)
-        heater_order = np.array([1, 2, 3])
-        cooler_order = np.array([1, 2, 3])
+
+        #whether as self or as 
+
+        # t_set_heat_day = \
+        #     np.array([18, 18, 18, 18, 18, 18, 21, 21, 21, 21, 21, 21,
+        #               21, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,
+        #               18]) + 273.15
+        # t_set_heating = np.tile(t_set_heat_day, 365)
+        # heater_order = np.array([1, 2, 3])
+        # cooler_order = np.array([1, 2, 3])
+
+
 
         #  Todo: Move set_temperature values to inputs
         # Define set points for cooling (cooling is disabled for high values)
         #  #-------------------------------------------------------
-        t_set_cooling = np.zeros(timesteps) + 273.15 + 1000  # in Kelvin
+        # t_set_cooling = np.zeros(timesteps) + 273.15 + 1000  # in Kelvin
+
+
+
+############-----------------------Attention revision neccessary!
+############-----------------------Attention revision neccessary!
+
+
+
+
 
         # Results' initialization
         t_ow = []
@@ -796,24 +834,24 @@ class VDICore(object):
             A[5, 5] = -1
 
             # Fill right hand side
-            rhs[0] = equal_air_temp[t] / r_rest_ow + c1_ow * t_ow_prev / dt
+            rhs[0] = self.equal_air_temp[t] / r_rest_ow + c1_ow * t_ow_prev / dt
             rhs[1] = -q_solar_rad_to_outer_wall[t] - q_loads_to_outer_wall[t]
             rhs[2] = c1_iw * t_iw_prev / dt
             rhs[3] = -q_solar_rad_to_in_wall[t] - q_loads_to_inner_wall[t]
             rhs[4] = -vent_rate[t] * heat_capac_air * density_air * \
-                     outdoor_temp[t] - q_solar_conv[t] - q_ig[t]
+                     outdoor_temp[t] - q_solar_conv[t] - self.internal_gains[t]
             rhs[5] = density_air * heat_capac_air * volume * t_air_prev / dt
 
             # Calculate current time step
             x = self.calc_timestep(
                 A=A,
                 rhs=rhs,
-                t_set_heating=t_set_heating[t],
-                t_set_cooling=t_set_cooling[t],
-                heater_limit=self.heater_limit,
-                cooler_limit=self.cooler_limit,
-                heater_order=heater_order,
-                cooler_order=cooler_order)
+                t_set_heating=self.t_set_heating[t],
+                t_set_cooling=self.t_set_cooling[t],
+                heater_limit=self.heater_limit[t, :],
+                cooler_limit=self.cooler_limit[t, :],
+                heater_order=self.heater_order,
+                cooler_order=self.cooler_order)
 
             # Retrieve results
             t_ow.append(x[0])
@@ -831,8 +869,11 @@ class VDICore(object):
             t_iw_prev = x[2]
             t_air_prev = x[4]
 
-            self.indoor_air_temperature = np.array(t_air)
-            self.q_flow_heater_cooler = np.array(q_air_hc)
+
+            ### what is this for????
+
+        # self.indoor_air_temperature = np.array(t_air)
+        # self.q_flow_heater_cooler = np.array(q_air_hc)
 
         return (np.array(t_air), np.array(q_air_hc))
 
