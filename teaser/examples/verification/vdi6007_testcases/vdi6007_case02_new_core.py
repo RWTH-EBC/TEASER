@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 """
-Run VDI 6007 test case 1
+Run VDI 6007 test case 2
 """
 
 import os
@@ -16,51 +16,38 @@ from teaser.logic.simulation.vdi_core import VDICore
 # import customized weather class
 from teaser.data.weatherdata import WeatherData
 
-def load_res(filename):
-    res = np.loadtxt(filename, delimiter=",", skiprows=1)  # Skip time step 0
-
-    # ignore time
-    result = res[:, 1:res.shape[1]]
-
-    day1 = result[0:24, :]
-    day2 = result[24:48, :]
-    day3 = result[48:72, :]
-
-    return (day1, day2, day3)
+import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
 
 
-def run_case1(plot_res=False):
+def run_case2(plot_res=False):
     """
-    Run test case 1
+    Run test case 2
 
     Parameters
     ----------
     plot_res : bool, optional
         Defines, if results should be plotted (default: False)
-
     Returns
     -------
     result_tuple : tuple (of floats)
         Results tuple with maximal temperature deviations
         (max_dev_1, max_dev_10, max_dev_60)
     """
+
     # Definition of time horizon
-    times_per_hour = 60  # 60 minutes per hour
-    timesteps = 24 * 60 * times_per_hour  # 60 days (with minute timestep)
-    #  timesteps = 24 * 365 * times_per_hour  # 60 days (with minute timestep)
-    timesteps_day = int(
-        24 * times_per_hour)  # 24 * 60 minuten timesteps per day
+    times_per_hour = 60
+    timesteps = 24 * 60 * times_per_hour  # 60 days
+    timesteps_day = int(24 * times_per_hour)
 
     # Zero inputs
     ventRate = np.zeros(timesteps)
     solarRad_in = np.zeros((timesteps, 1))
-    source_igRad = np.zeros(timesteps)
 
     # Constant inputs
     alphaRad = np.zeros(timesteps) + 5
     equalAirTemp = np.zeros(timesteps) + 295.15  # all temperatures in K
     weatherTemperature = np.zeros(timesteps) + 295.15  # in K
- 
+
     # new core
 
     weather = WeatherData()
@@ -112,35 +99,48 @@ def run_case1(plot_res=False):
     calc.heater_limit = np.zeros((timesteps, 3)) + 1e10
     calc.cooler_limit = np.zeros((timesteps, 3)) - 1e10
 
-    q_ig = np.zeros(timesteps_day)
+    source_igRad = np.zeros(timesteps_day)
     for q in range(int(6 * timesteps_day / 24), int(18 * timesteps_day / 24)):
-        q_ig[q] = 1000
-    q_ig = np.tile(q_ig, 60)
+        source_igRad[q] = 1000
+    source_igRad = np.tile(source_igRad, 60)
 
-    calc.internal_gains = q_ig
+    calc.internal_gains_rad = source_igRad
 
     t_air, q_air_hc = calc.simulate()
 
-    # new core end
+    T_air_c = t_air - 273.15
+    T_air_mean = np.array(
+        [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
+         range(24 * 60)])
 
+
+
+
+
+
+
+
+
+
+    # # Load constant house parameters
     # houseData = {"R1i": 0.000595693407511,
-    #              "C1i": 14836354.6282,
-    #              "Ai": 75.5,
-    #              "RRest": 0.03895919557,
-    #              "R1o": 0.00436791293674,
-    #              "C1o": 1600848.94,
-    #              "Ao": [10.5],
-    #              "Aw": np.zeros(1),
-    #              "At": np.zeros(1),
-    #              "Vair": 52.5,
-    #              "rhoair": 1.19,
-    #              "cair": 0,
-    #              "splitfac": 0.09,
-    #              "g": 1,
-    #              "alphaiwi": 2.24,
-    #              "alphaowi": 2.7,
-    #              "alphaWall": 25 * 10.5,  # 25 * sum(Ao)
-    #              "withInnerwalls": True}
+    #             "C1i": 14836354.6282,
+    #             "Ai": 75.5,
+    #             "RRest": 0.03895919557,
+    #             "R1o": 0.00436791293674,
+    #             "C1o": 1600848.94,
+    #             "Ao": [10.5],
+    #             "Aw": np.zeros(1),
+    #             "At": np.zeros(1),
+    #             "Vair": 52.5,
+    #             "rhoair": 1.19,
+    #             "cair": 0,
+    #             "splitfac": 0.09,
+    #             "g": 1,
+    #             "alphaiwi": 2.24,
+    #             "alphaowi": 2.7,
+    #             "alphaWall": 25 * 10.5, # 25 * sum(Ao)
+    #             "withInnerwalls": True}
 
     # krad = 1
 
@@ -152,49 +152,44 @@ def run_case1(plot_res=False):
     # cooler_limit = np.zeros((timesteps, 3)) - 1e10
 
     # # Calculate indoor air temperature
-    # T_air, Q_hc, Q_iw, Q_ow = \
-    #     low_order_VDI.reducedOrderModelVDI(houseData,
-    #                                        weatherTemperature,
-    #                                        solarRad_in,
-    #                                        equalAirTemp,
-    #                                        alphaRad,
-    #                                        ventRate, Q_ig,
-    #                                        source_igRad,
-    #                                        krad,
-    #                                        t_set_heating,
-    #                                        t_set_cooling,
-    #                                        heater_limit,
-    #                                        cooler_limit,
-    #                                        heater_order=np.array(
-    #                                            [1, 2, 3]),
-    #                                        cooler_order=np.array(
-    #                                            [1, 2, 3]),
-    #                                        dt=int(
-    #                                            3600 / times_per_hour))
+    # T_air, Q_hc, Q_iw, Q_ow = low_order_VDI.reducedOrderModelVDI(houseData,
+    #                                                              weatherTemperature,
+    #                                                              solarRad_in,
+    #                                                              equalAirTemp,
+    #                                                              alphaRad,
+    #                                                              ventRate,
+    #                                                              Q_ig,
+    #                                                              source_igRad,
+    #                                                              krad,
+    #                                                              t_set_heating,
+    #                                                              t_set_cooling,
+    #                                                              heater_limit,
+    #                                                              cooler_limit,
+    #                                                              heater_order=np.array(
+    #                                                                  [1, 2,
+    #                                                                   3]),
+    #                                                              cooler_order=np.array(
+    #                                                                  [1, 2,
+    #                                                                   3]),
+    #                                                              dt=int(
+    #                                                                  3600 / times_per_hour))
 
     # Compute averaged results
-    T_air_c = t_air - 273.15
-    T_air_mean = np.array(
-        [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
-         range(24 * 60)])
-
-    # import matplotlib.pyplot as plt
-    # plt.figure()
-    # plt.plot(T_air_c)
-    # plt.show()
-
+    # T_air_c = T_air - 273.15
+    # T_air_mean = np.array(
+    #     [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
+    #      range(24 * 60)])
 
     T_air_1 = T_air_mean[0:24]
     T_air_10 = T_air_mean[216:240]
     T_air_60 = T_air_mean[1416:1440]
 
     this_path = os.path.dirname(os.path.abspath(__file__))
-    ref_file = 'case01_res.csv'
+    ref_file = 'case02_res.csv'
     ref_path = os.path.join(this_path, 'inputs', ref_file)
 
     # Load reference results
-    (T_air_ref_1, T_air_ref_10, T_air_ref_60) = load_res(ref_path)
-
+    (T_air_ref_1, T_air_ref_10, T_air_ref_60) = vdic.load_res(ref_path)
     T_air_ref_1 = T_air_ref_1[:, 0]
     T_air_ref_10 = T_air_ref_10[:, 0]
     T_air_ref_60 = T_air_ref_60[:, 0]
@@ -206,8 +201,8 @@ def run_case1(plot_res=False):
 
         plt.figure()
         ax_top = plt.subplot(211)
-        plt.plot(res, label="Simulation", color="black", linestyle="--")
-        plt.plot(ref, label="Reference", color="blue", linestyle="-")
+        plt.plot(res, label="Reference", color="black", linestyle="--")
+        plt.plot(ref, label="Simulation", color="blue", linestyle="-")
         plt.legend()
         plt.ylabel("Temperature in degC")
 
@@ -238,4 +233,5 @@ def run_case1(plot_res=False):
     return (max_dev_1, max_dev_10, max_dev_60)
 
 if __name__ == '__main__':
-    run_case1(plot_res=True)
+
+    run_case2(plot_res=True)

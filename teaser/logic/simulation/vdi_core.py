@@ -70,7 +70,8 @@ class VDICore(object):
         self.heater_order = np.array([1, 2, 3])
         self.cooler_order = np.array([1, 2, 3])
 
-        self.internal_gains = np.zeros(self.timesteps) + 200
+        self.internal_gains = np.zeros(self.timesteps)
+        self.internal_gains_rad = np.zeros(self.timesteps)
 
         self.solar_rad_in = np.transpose(self._solar_radiation())
         self.equal_air_temp = self._eq_air_temp(h_sol=self.solar_rad_in)
@@ -741,10 +742,9 @@ class VDICore(object):
 
         #  Todo: What is krad?
         krad = 1
-        source_ig_rad = np.zeros(timesteps)
 
         # therm. splitter loads radiative:
-        q_loads_rad = krad * source_ig_rad
+        q_loads_rad = krad * self.internal_gains_rad
         split_fac_loads = self.calc_splitfactors(1, area_ar, [0], [0])
 
         q_loads_to_inner_wall = q_loads_rad * split_fac_loads[1, 0]

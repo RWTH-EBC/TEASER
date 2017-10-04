@@ -12,6 +12,7 @@ from teaser.logic import utilities
 from teaser.project import Project
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdi1
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01_new_core as vdi1_new_core
+import teaser.examples.verification.vdi6007_testcases.vdi6007_case02_new_core as vdi2_new_core
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case02 as vdi2
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case03 as vdi3
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case04 as vdi4
@@ -3389,15 +3390,15 @@ class Test_teaser(object):
 ##### step by step reintegration of the tests
 
 
-    # def test_vdi_6007_validation_case2(self):
-    #     """
-    #     Run VDI 6007 test case 2
-    #     """
-    #     tuple_res = vdi2.run_case2()
+    def test_vdi_6007_validation_case2(self):
+        """
+        Run VDI 6007 test case 2
+        """
+        tuple_res = vdi2_new_core.run_case2()
 
-    #     #  Check if temperature deviation is below 0.1 Kelvin
-    #     for val in tuple_res:
-    #         assert val < 0.15
+        #  Check if temperature deviation is below 0.1 Kelvin
+        for val in tuple_res:
+            assert val < 0.15
 
     # def test_vdi_6007_validation_case3(self):
     #     """
