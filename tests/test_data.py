@@ -13,6 +13,8 @@ from teaser.project import Project
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdi1
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01_new_core as vdi1_new_core
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case02_new_core as vdi2_new_core
+import teaser.examples.verification.vdi6007_testcases.vdi6007_case03_new_core as vdi3_new_core
+import teaser.examples.verification.vdi6007_testcases.vdi6007_case04_new_core as vdi4_new_core
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case02 as vdi2
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case03 as vdi3
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case04 as vdi4
@@ -3400,25 +3402,25 @@ class Test_teaser(object):
         for val in tuple_res:
             assert val < 0.15
 
-    # def test_vdi_6007_validation_case3(self):
-    #     """
-    #     Run VDI 6007 test case 3
-    #     """
-    #     tuple_res = vdi3.run_case3()
+    def test_vdi_6007_validation_case3(self):
+        """
+        Run VDI 6007 test case 3
+        """
+        tuple_res = vdi3_new_core.run_case3()
 
-    #     #  Check if temperature deviation is below 0.1 Kelvin
-    #     for val in tuple_res:
-    #         assert val < 0.15
+        #  Check if temperature deviation is below 0.1 Kelvin
+        for val in tuple_res:
+            assert val < 0.15
 
-    # def test_vdi_6007_validation_case4(self):
-    #     """
-    #     Run VDI 6007 test case 4
-    #     """
-    #     tuple_res = vdi4.run_case4()
+    def test_vdi_6007_validation_case4(self):
+        """
+        Run VDI 6007 test case 4
+        """
+        tuple_res = vdi4_new_core.run_case4()
 
-    #     #  Check if temperature deviation is below 0.1 Kelvin
-    #     for val in tuple_res:
-    #         assert val < 0.15
+        #  Check if temperature deviation is below 0.1 Kelvin
+        for val in tuple_res:
+            assert val < 0.15
 
     # def test_vdi_6007_validation_case5(self):
     #     """
