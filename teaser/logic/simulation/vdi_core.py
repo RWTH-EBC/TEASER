@@ -59,9 +59,8 @@ class VDICore(object):
         self.heater_limit = [1e10, 1e10, 1e10]
         self.cooler_limit = [-1e10, -1e10, -1e10]
 
-        #### time setting for simulation
+        # time setting for simulation
         self.timesteps = 60 * 60 * 24
-
 
         self.initial_air_temp = 295.15
         self.initial_inner_wall_temp = 295.15
