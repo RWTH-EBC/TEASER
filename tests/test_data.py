@@ -17,6 +17,8 @@ import teaser.examples.verification.vdi6007_testcases.vdi6007_case03_new_core as
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case04_new_core as vdi4_new_core
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case05_new_core as vdi5_new_core
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case06_new_core as vdi6_new_core
+import teaser.examples.verification.vdi6007_testcases.vdi6007_case07_new_core as vdi7_new_core
+import teaser.examples.verification.vdi6007_testcases.vdi6007_case08_new_core as vdi8_new_core
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case02 as vdi2
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case03 as vdi3
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case04 as vdi4
@@ -3444,21 +3446,21 @@ class Test_teaser(object):
         for val in tuple_res:
             assert val < 1.5
 
-    # def test_vdi_6007_validation_case7(self):
-    #     """
-    #     Run VDI 6007 test case 7
-    #     """
-    #     tuple_res = vdi7.run_case7()
+    def test_vdi_6007_validation_case7(self):
+        """
+        Run VDI 6007 test case 7
+        """
+        tuple_res = vdi7_new_core.run_case7()
 
-    #     #  Check if power deviation is below 1 Watt
-    #     for val in tuple_res:
-    #         assert val < 1.5
+        #  Check if power deviation is below 1 Watt
+        for val in tuple_res:
+            assert val < 1.5
 
     # def test_vdi_6007_validation_case8(self):
     #     """
     #     Run VDI 6007 test case 8
     #     """
-    #     tuple_res = vdi8.run_case8()
+    #     tuple_res = vdi8_new_core.run_case8()
 
     #     #  Check if temperature deviation is below 0.1 Kelvin
     #     for val in tuple_res:
