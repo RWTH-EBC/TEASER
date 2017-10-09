@@ -70,6 +70,7 @@ def run_case2(plot_res=False):
     model_data.r1_ow = 0.00436791293674
     model_data.c1_ow = 1600848.94
     model_data.area_ow = 10.5
+    model_data.outer_wall_areas = [10.5]
     model_data.window_areas = np.zeros(1)
     model_data.transparent_areas = np.zeros(1)
     tz.volume = 52.5
@@ -112,15 +113,6 @@ def run_case2(plot_res=False):
     T_air_mean = np.array(
         [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
          range(24 * 60)])
-
-
-
-
-
-
-
-
-
 
     # # Load constant house parameters
     # houseData = {"R1i": 0.000595693407511,
@@ -196,7 +188,7 @@ def run_case2(plot_res=False):
 
     # Plot comparisons
     def plot_result(res, ref, title="Results day 1"):
-        
+
         import matplotlib.pyplot as plt
 
         plt.figure()
@@ -231,6 +223,7 @@ def run_case2(plot_res=False):
     print("Max. deviation day 60: " + str(max_dev_60))
 
     return (max_dev_1, max_dev_10, max_dev_60)
+
 
 if __name__ == '__main__':
 

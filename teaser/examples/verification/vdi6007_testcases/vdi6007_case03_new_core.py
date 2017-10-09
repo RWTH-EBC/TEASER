@@ -71,6 +71,7 @@ def run_case3(plot_res=False):
     model_data.r1_ow = 0.00404935160802
     model_data.c1_ow = 47900
     model_data.area_ow = 10.5
+    model_data.outer_wall_areas = [10.5]
     model_data.window_areas = np.zeros(1)
     model_data.transparent_areas = np.zeros(1)
     tz.volume = 52.5
@@ -231,6 +232,7 @@ def run_case3(plot_res=False):
     print("Max. deviation day 60: " + str(max_dev_60))
 
     return (max_dev_1, max_dev_10, max_dev_60)
+
 
 if __name__ == '__main__':
 

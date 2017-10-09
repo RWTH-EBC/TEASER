@@ -17,6 +17,7 @@ from teaser.data.weatherdata import WeatherData
 
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
 
+
 def run_case8(plot_res=False):
     """
     Run test case 8
@@ -63,10 +64,10 @@ def run_case8(plot_res=False):
     solarRad_win_adj = np.repeat(solarRad_win, times_per_hour, axis=0)
     solarRad_win_in = np.tile(solarRad_win_adj.T, 60).T
 
-    sunblind_in = np.zeros_like(solarRad_win)
-    sunblind_in[solarRad_win > 100] = 0.85
-    sunblind_in_adj = np.repeat(sunblind_in, times_per_hour, axis=0)
-    sunblind_in_tiled = np.tile(sunblind_in_adj.T, 60).T
+    # sunblind_in = np.zeros_like(solarRad_win)
+    # sunblind_in[solarRad_win > 100] = 0.85
+    # sunblind_in_adj = np.repeat(sunblind_in, times_per_hour, axis=0)
+    # sunblind_in_tiled = np.tile(sunblind_in_adj.T, 60).T
 
     ref_file = 'case08_q_sol_wall.csv'
     ref_path = os.path.join(this_path, 'inputs', ref_file)
@@ -100,7 +101,6 @@ def run_case8(plot_res=False):
     #                                           sunblind=sunblind_in_tiled,
     #                                           params=equ_air_params)
 
-
     # new core
 
     weather = WeatherData()
@@ -123,6 +123,7 @@ def run_case8(plot_res=False):
     model_data.r1_ow = 0.0017362530106
     model_data.c1_ow = 5259932.23
     model_data.area_ow = 25.5
+    model_data.outer_wall_areas = [10.5, 15]
     model_data.window_areas = [0, 0]
     model_data.transparent_areas = [7, 7]
     tz.volume = 52.5
@@ -143,7 +144,6 @@ def run_case8(plot_res=False):
     model_data.weightfactor_ow = [0.05796831135677373, 0.13249899738691134]
     model_data.weightfactor_win = [0.4047663456281575, 0.4047663456281575]
     model_data.weightfactor_ground = 0
-
 
     # model_data.tilt_facade = []
     # model_data.orientation_facade = [180.0, -1, 0.0, -2, 90.0, 270.0]
@@ -177,7 +177,6 @@ def run_case8(plot_res=False):
     Q_hc_mean = np.array(
         [np.mean(q_air_hc[i * times_per_hour:(i + 1) * times_per_hour]) for i in
          range(24 * 60)])
-
 
     # # Load constant house parameters
     # houseData = {"R1i": 0.000668895639141,

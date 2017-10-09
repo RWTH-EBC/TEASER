@@ -98,6 +98,7 @@ def run_case5(plot_res=False):
     model_data.r1_ow = 0.00436791293674
     model_data.c1_ow = 1600848.94
     model_data.area_ow = 10.5
+    model_data.outer_wall_areas = [10.5]
     model_data.window_areas = np.zeros(1)
     model_data.transparent_areas = [7]
     tz.volume = 52.5
@@ -138,10 +139,6 @@ def run_case5(plot_res=False):
     T_air_mean = np.array(
         [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
          range(24 * 60)])
-
-
-
-
 
     # # Load constant house parameters
     # houseData = {"R1i": 0.000595693407511,

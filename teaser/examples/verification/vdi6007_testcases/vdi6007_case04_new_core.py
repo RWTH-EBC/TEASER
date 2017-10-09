@@ -18,6 +18,7 @@ from teaser.data.weatherdata import WeatherData
 
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
 
+
 def run_case4(plot_res=False):
     """
     Run test case 4
@@ -71,6 +72,7 @@ def run_case4(plot_res=False):
     model_data.r1_ow = 0.00404935160802
     model_data.c1_ow = 47900
     model_data.area_ow = 10.5
+    model_data.outer_wall_areas = [10.5]
     model_data.window_areas = np.zeros(1)
     model_data.transparent_areas = np.zeros(1)
     tz.volume = 52.5
@@ -114,8 +116,6 @@ def run_case4(plot_res=False):
     T_air_mean = np.array(
         [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
          range(24 * 60)])
-
-
 
     # # Load constant house parameters
     # houseData = {"R1i": 0.003237138,

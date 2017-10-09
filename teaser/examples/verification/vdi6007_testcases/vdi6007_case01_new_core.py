@@ -16,6 +16,7 @@ from teaser.logic.simulation.vdi_core import VDICore
 # import customized weather class
 from teaser.data.weatherdata import WeatherData
 
+
 def load_res(filename):
     res = np.loadtxt(filename, delimiter=",", skiprows=1)  # Skip time step 0
 
@@ -60,7 +61,7 @@ def run_case1(plot_res=False):
     alphaRad = np.zeros(timesteps) + 5
     equalAirTemp = np.zeros(timesteps) + 295.15  # all temperatures in K
     weatherTemperature = np.zeros(timesteps) + 295.15  # in K
- 
+
     # new core
 
     weather = WeatherData()
@@ -83,6 +84,7 @@ def run_case1(plot_res=False):
     model_data.r1_ow = 0.00436791293674
     model_data.c1_ow = 1600848.94
     model_data.area_ow = 10.5
+    model_data.outer_wall_areas = [10.5]
     model_data.window_areas = np.zeros(1)
     model_data.transparent_areas = np.zeros(1)
     tz.volume = 52.5
@@ -183,7 +185,6 @@ def run_case1(plot_res=False):
     # plt.plot(T_air_c)
     # plt.show()
 
-
     T_air_1 = T_air_mean[0:24]
     T_air_10 = T_air_mean[216:240]
     T_air_60 = T_air_mean[1416:1440]
@@ -201,7 +202,7 @@ def run_case1(plot_res=False):
 
     # Plot comparisons
     def plot_result(res, ref, title="Results day 1"):
-        
+
         import matplotlib.pyplot as plt
 
         plt.figure()
@@ -236,6 +237,7 @@ def run_case1(plot_res=False):
     print("Max. deviation day 60: " + str(max_dev_60))
 
     return (max_dev_1, max_dev_10, max_dev_60)
+
 
 if __name__ == '__main__':
     run_case1(plot_res=True)
