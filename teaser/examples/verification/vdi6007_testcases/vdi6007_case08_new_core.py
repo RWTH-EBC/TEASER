@@ -104,7 +104,7 @@ def run_case8(plot_res=False):
     # new core
 
     weather = WeatherData()
-    weather.air_temp = np.zeros(timesteps) + 295.15
+    weather.air_temp = weatherTemperature
 
     prj = Project()
     prj.weather_data = weather
@@ -113,7 +113,7 @@ def run_case8(plot_res=False):
 
     tz = ThermalZone(bldg)
 
-    model_data = TwoElement(tz, merge_windows=False, t_bt=5)
+    model_data = TwoElement(tz, merge_windows=True, t_bt=5)
 
     #  Store building parameters for testcase 1
     model_data.r1_iw = 0.000668895639141
@@ -123,11 +123,12 @@ def run_case8(plot_res=False):
     model_data.r1_ow = 0.0017362530106
     model_data.c1_ow = 5259932.23
     model_data.area_ow = 25.5
-    model_data.window_areas = np.zeros(2)
+    model_data.window_areas = [0, 0]
     model_data.transparent_areas = [7, 7]
     tz.volume = 52.5
     tz.density_air = 1.19
     tz.heat_capac_air = 0
+    tz.t_ground = 285.15
     model_data.ratio_conv_rad_inner_win = 0.09
     model_data.weighted_g_value = 1
     model_data.alpha_comb_inner_iw = 2.12
@@ -136,6 +137,14 @@ def run_case8(plot_res=False):
     model_data.alpha_rad_outer_ow = 5
     model_data.alpha_comb_outer_ow = 25
     model_data.alpha_rad_inner_mean = 5
+
+    model_data.solar_absorp_ow = 0.7
+    model_data.ir_emissivity_outer_ow = 0.9
+    model_data.weightfactor_ow = [0.05796831135677373, 0.13249899738691134]
+    model_data.weightfactor_win = [0.4047663456281575, 0.4047663456281575]
+    model_data.weightfactor_ground = 0
+
+
     # model_data.tilt_facade = []
     # model_data.orientation_facade = [180.0, -1, 0.0, -2, 90.0, 270.0]
     # model_data.alpha_wall = 25 * 10.5
@@ -143,8 +152,7 @@ def run_case8(plot_res=False):
     tz.model_attr = model_data
 
     calc = VDICore(tz)
-    calc.equal_air_temp = np.zeros(timesteps) + 295.15
-    calc.solar_rad_in = np.zeros((timesteps, 1))
+    # calc.equal_air_temp = np.zeros(timesteps) + 295.15
 
     calc.t_set_heating = np.zeros(timesteps)  # in Kelvin
     calc.t_set_cooling = np.zeros(timesteps) + 600  # in Kelvin
@@ -154,6 +162,10 @@ def run_case8(plot_res=False):
 
     calc.internal_gains_rad = source_igRad
     calc.internal_gains = Q_ig
+
+    calc.solar_rad_in = solarRad_win_in
+
+    calc.equal_air_temp = calc._eq_air_temp(h_sol=solarRad_wall_tiled)
 
     t_air, q_air_hc = calc.simulate()
 
@@ -221,10 +233,10 @@ def run_case8(plot_res=False):
     #                                            3600 / times_per_hour))
 
     # Compute averaged results
-    T_air_c = T_air - 273.15
-    T_air_mean = np.array(
-        [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
-         range(24 * 60)])
+    # T_air_c = T_air - 273.15
+    # T_air_mean = np.array(
+    #     [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
+    #      range(24 * 60)])
 
     T_air_1 = T_air_mean[0:24]
     T_air_10 = T_air_mean[216:240]
@@ -246,8 +258,8 @@ def run_case8(plot_res=False):
 
         plt.figure()
         ax_top = plt.subplot(211)
-        plt.plot(res, label="Reference", color="black", linestyle="--")
-        plt.plot(ref, label="Simulation", color="blue", linestyle="-")
+        plt.plot(res, label="Simulation", color="black", linestyle="--")
+        plt.plot(ref, label="Reference", color="blue", linestyle="-")
         plt.legend()
         plt.ylabel("Temperature in degC")
 

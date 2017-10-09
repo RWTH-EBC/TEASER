@@ -73,7 +73,7 @@ class VDICore(object):
         self.internal_gains_rad = np.zeros(self.timesteps)
 
         self.solar_rad_in = np.transpose(self._solar_radiation())
-        self.equal_air_temp = self._eq_air_temp(h_sol=self.solar_rad_in)
+        # self.equal_air_temp = self._eq_air_temp(h_sol=self.solar_rad_in)
 
         self.t_set_heat_day = \
             np.array([18, 18, 18, 18, 18, 18, 21, 21, 21, 21, 21, 21,
@@ -114,7 +114,7 @@ class VDICore(object):
 
         #  Todo: Where to store t_balck_sky?
         t_black_sky = np.zeros(timesteps) + 273.15
-        t_dry_bulb = self.weather_data.air_temp + 273.15  # in Kelvin
+        t_dry_bulb = self.weather_data.air_temp  # in Kelvin
 
         list_window_areas = []
         list_sunblind = []
@@ -124,9 +124,11 @@ class VDICore(object):
 
         sunblind_in = np.zeros_like(h_sol)
         sunblind_in[h_sol > i_max] = 0.85
+        # sunblind_in = np.repeat(sunblind_in, 60, axis=0)
+        # sunblind_in = np.tile(sunblind_in.T, 60).T
 
-        sunblind_in = np.zeros_like(h_sol)
-        sunblind_in[h_sol > i_max] = 0.85
+        # sunblind_in = np.zeros_like(h_sol)
+        # sunblind_in[h_sol > i_max] = 0.85
 
         #  Todo: Check inputs (set correctly?)
         a_ext = self.thermal_zone.model_attr.solar_absorp_ow
