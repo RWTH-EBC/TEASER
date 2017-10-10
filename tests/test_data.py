@@ -19,6 +19,7 @@ import teaser.examples.verification.vdi6007_testcases.vdi6007_case05_new_core as
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case06_new_core as vdi6_new_core
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case07_new_core as vdi7_new_core
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case08_new_core as vdi8_new_core
+import teaser.examples.verification.vdi6007_testcases.vdi6007_case09_new_core as vdi9_new_core
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case02 as vdi2
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case03 as vdi3
 # import teaser.examples.verification.vdi6007_testcases.vdi6007_case04 as vdi4
@@ -3466,15 +3467,15 @@ class Test_teaser(object):
         for val in tuple_res:
             assert val < 0.15
 
-    # def test_vdi_6007_validation_case9(self):
-    #     """
-    #     Run VDI 6007 test case 9
-    #     """
-    #     tuple_res = vdi9.run_case9()
+    def test_vdi_6007_validation_case9(self):
+        """
+        Run VDI 6007 test case 9
+        """
+        tuple_res = vdi9_new_core.run_case9()
 
-    #     #  Check if temperature deviation is below 0.1 Kelvin
-    #     for val in tuple_res:
-    #         assert val < 0.15
+        #  Check if temperature deviation is below 0.1 Kelvin
+        for val in tuple_res:
+            assert val < 0.15
 
     # def test_vdi_6007_validation_case10(self):
     #     """

@@ -85,7 +85,7 @@ class VDICore(object):
         self.heater_order = np.array([1, 2, 3])
         self.cooler_order = np.array([1, 2, 3])
 
-    def _eq_air_temp(self, h_sol, with_longwave=False, i_max=100):
+    def _eq_air_temp(self, h_sol, t_black_sky, with_longwave=False, i_max=100):
         """
         Calculates equal air temperature
 
@@ -113,7 +113,7 @@ class VDICore(object):
         timesteps = 60 * 60 * 24
 
         #  Todo: Where to store t_balck_sky?
-        t_black_sky = np.zeros(timesteps) + 273.15
+        # t_black_sky = np.zeros(timesteps) + 273.15
         t_dry_bulb = self.weather_data.air_temp  # in Kelvin
 
         list_window_areas = []
