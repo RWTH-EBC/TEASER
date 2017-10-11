@@ -82,8 +82,12 @@ class VDICore(object):
                       18]) + 273.15
         self.t_set_heating = np.tile(self.t_set_heat_day, 365)
         self.t_set_cooling = np.zeros(self.timesteps) + 273.15 + 1000
-        self.heater_order = np.array([1, 2, 3])
-        self.cooler_order = np.array([1, 2, 3])
+
+        self.vent_rate = np.zeros(self.timesteps) + (
+            self.thermal_zone.volume *
+            self.thermal_zone.infiltration_rate / 3600)
+        # self.heater_order = np.array([1, 2, 3])
+        # self.cooler_order = np.array([1, 2, 3])
 
     def _eq_air_temp(self, h_sol, t_black_sky, with_longwave=False, i_max=100):
         """
@@ -672,6 +676,10 @@ class VDICore(object):
         alpha_wall = self.thermal_zone.model_attr.alpha_comb_outer_ow * \
             self.thermal_zone.model_attr.area_ow
 
+        # how to handle groundfloors as outerwalls and so a reduce outer
+        # wall! area?
+        # alpha_wall = 28 * 9.75
+
         area_win_tot = sum(window_areas)
         area_o_tot = sum(area_ow)
         area_ar = [area_o_tot, area_win_tot, area_iw]
@@ -696,9 +704,6 @@ class VDICore(object):
 
         #  Get ventilation rate
         #  Todo: Replace dummy ventilation rate value
-        vent_rate = np.zeros(timesteps) + (self.thermal_zone.volume *
-                                           self.thermal_zone.infiltration_rate
-                                           / 3600)
 
         #  Get internal gains
         #  Todo: Replae dummy value for internal gains with bound. conditions
@@ -821,7 +826,7 @@ class VDICore(object):
             A[4, 3] = area_iw * alpha_comb_inner_iw
             A[4, 4] = -area_o_tot * alpha_comb_inner_ow - area_iw * \
                 alpha_comb_inner_iw - \
-                vent_rate[t] * heat_capac_air * \
+                self.vent_rate[t] * heat_capac_air * \
                 density_air
             A[4, 5] = -1
             A[4, 6] = 1
@@ -833,7 +838,7 @@ class VDICore(object):
             rhs[1] = -q_solar_rad_to_outer_wall[t] - q_loads_to_outer_wall[t]
             rhs[2] = c1_iw * t_iw_prev / dt
             rhs[3] = -q_solar_rad_to_in_wall[t] - q_loads_to_inner_wall[t]
-            rhs[4] = -vent_rate[t] * heat_capac_air * density_air * \
+            rhs[4] = -self.vent_rate[t] * heat_capac_air * density_air * \
                 outdoor_temp[t] - q_solar_conv[t] - self.internal_gains[t]
             rhs[5] = density_air * heat_capac_air * volume * t_air_prev / dt
 
@@ -849,6 +854,8 @@ class VDICore(object):
                 cooler_order=self.cooler_order)
 
             # Retrieve results
+            if x is None:
+                print("help me", t, timesteps)
             t_ow.append(x[0])
             t_owi.append(x[1])
             t_iw.append(x[2])

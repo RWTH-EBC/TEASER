@@ -3,7 +3,6 @@
 """
 
 """
-
 import os
 import numpy as np
 
@@ -19,9 +18,9 @@ from teaser.data.weatherdata import WeatherData
 import teaser.examples.verification.vdi6007_testcases.vdi6007_case01 as vdic
 
 
-def run_case5(plot_res=False):
+def run_case10(plot_res=False):
     """
-    Run test case 5
+    Run test case 10
 
     Parameters
     ----------
@@ -42,9 +41,12 @@ def run_case5(plot_res=False):
 
     # Zero inputs
     ventRate = np.zeros(timesteps)
+    sunblind_in = np.zeros((timesteps, 1))
+    solarRad_wall = np.zeros((timesteps, 1))
 
     # Constant inputs
     alphaRad = np.zeros(timesteps) + 5
+    t_black_sky = np.zeros(timesteps) + 273.15
 
     # Variable inputs
     Q_ig = np.zeros(timesteps_day)
@@ -56,17 +58,16 @@ def run_case5(plot_res=False):
     source_igRad = np.tile(source_igRad, 60)
 
     this_path = os.path.dirname(os.path.abspath(__file__))
-    ref_file = 'case05_q_sol.csv'
+    ref_file = 'case10_q_sol.csv'
     ref_path = os.path.join(this_path, 'inputs', ref_file)
 
-    solarRad_raw = np.loadtxt(ref_path, usecols=(1,))
-    solarRad = solarRad_raw[0:24]
-    solarRad[solarRad > 100] = solarRad[solarRad > 100] * 0.15
-    solarRad_adj = np.repeat(solarRad, times_per_hour)
-    solarRad_in = np.array([np.tile(solarRad_adj, 60)]).T
+    q_sol_rad_win_raw = np.loadtxt(ref_path, usecols=(1,))
+    solarRad_win = q_sol_rad_win_raw[0:24]
+    solarRad_win[solarRad_win > 100] = solarRad_win[solarRad_win > 100] * 0.15
+    solarRad_win_adj = np.repeat(solarRad_win, times_per_hour)
+    solarRad_win_in = np.array([np.tile(solarRad_win_adj, 60)]).T
 
-    this_path = os.path.dirname(os.path.abspath(__file__))
-    ref_file = 'case05_t_amb.csv'
+    ref_file = 'case10_t_amb.csv'
     ref_path = os.path.join(this_path, 'inputs', ref_file)
 
     t_outside_raw = np.loadtxt(ref_path, delimiter=",")
@@ -74,12 +75,11 @@ def run_case5(plot_res=False):
     t_outside_adj = np.repeat(t_outside, times_per_hour)
     weatherTemperature = np.tile(t_outside_adj, 60)
 
-    equalAirTemp = weatherTemperature
 
     # new core
 
     weather = WeatherData()
-    weather.air_temp = np.zeros(timesteps) + 295.15
+    weather.air_temp = weatherTemperature
 
     prj = Project()
     prj.weather_data = weather
@@ -88,37 +88,50 @@ def run_case5(plot_res=False):
 
     tz = ThermalZone(bldg)
 
-    model_data = TwoElement(tz, merge_windows=False, t_bt=5)
+    model_data = TwoElement(tz, merge_windows=True, t_bt=5)
 
-    #  Store building parameters for testcase 5
-    model_data.r1_iw = 0.000595693407511
-    model_data.c1_iw = 14836354.6282
-    model_data.area_iw = 75.5
-    model_data.r_rest_ow = 0.03895919557
-    model_data.r1_ow = 0.00436791293674
-    model_data.c1_ow = 1600848.94
-    model_data.area_ow = 10.5
-    model_data.outer_wall_areas = [10.5]
+    #  Store building parameters for testcase 10
+    model_data.r1_iw = 0.000779671554640369
+    model_data.c1_iw = 12333949.4129606
+    model_data.area_iw = 58
+    model_data.r_rest_ow = 0.011638548
+    model_data.r1_ow = 0.00171957697767797
+    model_data.c1_ow = 4338751.41
+    model_data.area_ow = 28
+    model_data.outer_wall_areas = [28]
     model_data.window_areas = np.zeros(1)
     model_data.transparent_areas = [7]
     tz.volume = 52.5
     tz.density_air = 1.19
     tz.heat_capac_air = 0
+    tz.t_ground = 288.15
     model_data.ratio_conv_rad_inner_win = 0.09
     model_data.weighted_g_value = 1
-    model_data.alpha_comb_inner_iw = 2.24
-    model_data.alpha_comb_inner_ow = 2.7
+    model_data.alpha_comb_inner_iw = 2.12
+    model_data.alpha_comb_inner_ow = 2.398
     model_data.alpha_conv_outer_ow = 20
     model_data.alpha_rad_outer_ow = 5
-    model_data.alpha_comb_outer_ow = 25
+    model_data.alpha_comb_outer_ow = 28
     model_data.alpha_rad_inner_mean = 5
-    # model_data.tilt_facade = [7]
+
+    model_data.solar_absorp_ow = 0.7
+    model_data.ir_emissivity_outer_ow = 0.9
+    model_data.weightfactor_ow = [0.04646093176283288]
+    model_data.weightfactor_win = [0.32441554918476245]
+    model_data.weightfactor_ground = 0.6291235190524047
+
+    # model_data.tilt_facade = []
     # model_data.orientation_facade = [180.0, -1, 0.0, -2, 90.0, 270.0]
     # model_data.alpha_wall = 25 * 10.5
 
     tz.model_attr = model_data
 
     calc = VDICore(tz)
+
+    calc.initial_air_temp = 273.15 + 17.6
+    calc.initial_outer_wall_temp = 273.15 + 17.6
+    calc.initial_inner_wall_temp = 273.15 + 17.6
+
     calc.equal_air_temp = np.zeros(timesteps) + 295.15
 
     calc.t_set_heating = np.zeros(timesteps)  # in Kelvin
@@ -130,8 +143,11 @@ def run_case5(plot_res=False):
     calc.internal_gains_rad = source_igRad
     calc.internal_gains = Q_ig
 
-    calc.equal_air_temp = equalAirTemp
-    calc.solar_rad_in = solarRad_in
+    calc.solar_rad_in = solarRad_win_in
+
+    calc.equal_air_temp = weatherTemperature
+
+    calc.equal_air_temp = calc._eq_air_temp(h_sol=solarRad_wall, t_black_sky=t_black_sky)
 
     t_air, q_air_hc = calc.simulate()
 
@@ -140,24 +156,40 @@ def run_case5(plot_res=False):
         [np.mean(T_air_c[i * times_per_hour:(i + 1) * times_per_hour]) for i in
          range(24 * 60)])
 
+    # equ_air_params = {"aExt": 0.7,
+    #                   "eExt": 0.9,
+    #                   "wfWall": [0.04646093176283288, ],
+    #                   "wfWin": [0.32441554918476245, ],
+    #                   "wfGro": 0.6291235190524047,
+    #                   "T_Gro": 273.15 + 15,
+    #                   "alpha_wall_out": 20,
+    #                   "alpha_rad_wall": 5,
+    #                   "withLongwave": False}
+
+    # equalAirTemp = eq_air_temp.equal_air_temp(HSol=solarRad_wall,
+    #                                           TBlaSky=t_black_sky,
+    #                                           TDryBul=weatherTemperature,
+    #                                           sunblind=sunblind_in,
+    #                                           params=equ_air_params)
+
     # # Load constant house parameters
-    # houseData = {"R1i": 0.000595693407511,
-    #              "C1i": 14836354.6282,
-    #              "Ai": 75.5,
-    #              "RRest": 0.03895919557,
-    #              "R1o": 0.00436791293674,
-    #              "C1o": 1600848.94,
-    #              "Ao": [10.5],
+    # houseData = {"R1i": 0.000779671554640369,
+    #              "C1i": 12333949.4129606,
+    #              "Ai": 58,
+    #              "RRest": 0.011638548,
+    #              "R1o": 0.00171957697767797,
+    #              "C1o": 4338751.41,
+    #              "Ao": [28],
     #              "Aw": np.zeros(1),
-    #              "At": [7],
-    #              "Vair": 0,
+    #              "At": [7, ],
+    #              "Vair": 52.5,
     #              "rhoair": 1.19,
-    #              "cair": 1007,
+    #              "cair": 0,
     #              "splitfac": 0.09,
     #              "g": 1,
-    #              "alphaiwi": 2.24,
-    #              "alphaowi": 2.7,
-    #              "alphaWall": 25 * 10.5,  # 25 * sum(Ao)
+    #              "alphaiwi": 2.12,
+    #              "alphaowi": 2.398,
+    #              "alphaWall": 28 * 9.75,  # 28 * sum(Ao)
     #              "withInnerwalls": True}
 
     # krad = 1
@@ -173,7 +205,7 @@ def run_case5(plot_res=False):
     # T_air, Q_hc, Q_iw, Q_ow = \
     #     low_order_VDI.reducedOrderModelVDI(houseData,
     #                                        weatherTemperature,
-    #                                        solarRad_in,
+    #                                        solarRad_win_in,
     #                                        equalAirTemp,
     #                                        alphaRad,
     #                                        ventRate,
@@ -191,7 +223,10 @@ def run_case5(plot_res=False):
     #                                            [1, 2,
     #                                             3]),
     #                                        dt=int(
-    #                                            3600 / times_per_hour))
+    #                                            3600 / times_per_hour),
+    #                                        T_air_init=273.15 + 17.6,
+    #                                        T_iw_init=273.15 + 17.6,
+    #                                        T_ow_init=273.15 + 17.6)
 
     # # Compute averaged results
     # T_air_c = T_air - 273.15
@@ -203,7 +238,7 @@ def run_case5(plot_res=False):
     T_air_10 = T_air_mean[216:240]
     T_air_60 = T_air_mean[1416:1440]
 
-    ref_file = 'case05_res.csv'
+    ref_file = 'case10_res.csv'
     ref_path = os.path.join(this_path, 'inputs', ref_file)
 
     # Load reference results
@@ -253,4 +288,4 @@ def run_case5(plot_res=False):
 
 
 if __name__ == '__main__':
-    run_case5(plot_res=True)
+    run_case10(plot_res=True)
