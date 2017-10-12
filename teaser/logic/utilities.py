@@ -8,6 +8,7 @@ classes
 import os
 import shutil
 
+
 def celsius_to_kelvin(value):
     try:
         f_value = float(value)
@@ -52,7 +53,8 @@ def get_default_path():
     # directory = os.path.dirname(__file__)
     # src = "teaser"
     # last_index = directory.rfind(src)
-    # teaser_default_path = os.path.join(directory[:last_index], "teaser", "OutputData")
+    # teaser_default_path = os.path.join(directory[:last_index], "teaser",
+    # "OutputData")
 
     return teaser_default_path
 
@@ -106,5 +108,3 @@ def clear_directory(dir_path=None):
                 shutil.rmtree(file_path)
     else:
         print('The directory path does not exist.')
-
-
