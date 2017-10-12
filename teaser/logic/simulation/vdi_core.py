@@ -687,7 +687,7 @@ class VDICore(object):
         r_rest_ow = r_rest_ow + 1 / alpha_wall
 
         #  Get weather temperature of weather in Kelvin
-        outdoor_temp = self.weather_data.air_temp + 273.15
+        outdoor_temp = self.weather_data.air_temp
 
         # #  Get weather direct_radiation
         # direct_radiation = self.weather_data.direct_radiation

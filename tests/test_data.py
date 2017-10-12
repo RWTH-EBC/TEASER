@@ -3479,15 +3479,15 @@ class Test_teaser(object):
         for val in tuple_res:
             assert val < 0.15
 
-    # def test_vdi_6007_validation_case10(self):
-    #     """
-    #     Run VDI 6007 test case 10
-    #     """
-    #     tuple_res = vdi10_new_core.run_case10()
+    def test_vdi_6007_validation_case10(self):
+        """
+        Run VDI 6007 test case 10
+        """
+        tuple_res = vdi10_new_core.run_case10()
 
-    #     #  Check if temperature deviation is below 0.1 Kelvin
-    #     for val in tuple_res:
-    #         assert val < 0.15
+        #  Check if temperature deviation is below 0.1 Kelvin
+        for val in tuple_res:
+            assert val < 0.15
 
     def test_vdi_6007_validation_case11(self):
         """

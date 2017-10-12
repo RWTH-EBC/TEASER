@@ -31,7 +31,7 @@ def run_case12(plot_res=False):
 
     # Definition of time horizon
     times_per_hour = 60
-    timesteps = 24 * 60 * times_per_hour # 60 days
+    timesteps = 24 * 60 * times_per_hour  # 60 days
     timesteps_day = int(24 * times_per_hour)
 
     # Constant inputs
@@ -40,14 +40,14 @@ def run_case12(plot_res=False):
     # Variable inputs
     Q_ig = np.zeros(timesteps_day)
     source_igRad = np.zeros(timesteps_day)
-    for q in range(int(7*timesteps_day/24), int(17*timesteps_day/24)):
+    for q in range(int(7 * timesteps_day / 24), int(17 * timesteps_day / 24)):
         Q_ig[q] = 200 + 80
         source_igRad[q] = 80
     Q_ig = np.tile(Q_ig, 60)
     source_igRad = np.tile(source_igRad, 60)
 
     this_path = os.path.dirname(os.path.abspath(__file__))
-    ref_file = 'case12_q_sol.csv'
+    ref_file = 'case05_q_sol.csv'
     ref_path = os.path.join(this_path, 'inputs', ref_file)
 
     solarRad_raw = np.loadtxt(ref_path, usecols=(1,))
@@ -56,11 +56,12 @@ def run_case12(plot_res=False):
     solarRad_adj = np.repeat(solarRad, times_per_hour)
     solarRad_in = np.array([np.tile(solarRad_adj, 60)]).T
 
-    ref_file = 'case12_t_amb.csv'
+    this_path = os.path.dirname(os.path.abspath(__file__))
+    ref_file = 'case05_t_amb.csv'
     ref_path = os.path.join(this_path, 'inputs', ref_file)
 
     t_outside_raw = np.loadtxt(ref_path, delimiter=",")
-    t_outside = ([t_outside_raw[2*i,1] for i in range(24)])
+    t_outside = ([t_outside_raw[2 * i, 1] for i in range(24)])
     t_outside_adj = np.repeat(t_outside, times_per_hour)
     weatherTemperature = np.tile(t_outside_adj, 60)
 
@@ -75,7 +76,7 @@ def run_case12(plot_res=False):
     # new core
 
     weather = WeatherData()
-    weather.air_temp = np.zeros(timesteps) + 295.15
+    weather.air_temp = weatherTemperature
 
     prj = Project()
     prj.weather_data = weather
@@ -97,9 +98,9 @@ def run_case12(plot_res=False):
     model_data.outer_wall_areas = [10.5]
     model_data.window_areas = np.zeros(1)
     model_data.transparent_areas = [7]
-    tz.volume = 52.5
+    tz.volume = 0
     tz.density_air = 1.19
-    tz.heat_capac_air = 0
+    tz.heat_capac_air = 1007
     model_data.ratio_conv_rad_inner_win = 0.09
     model_data.weighted_g_value = 1
     model_data.alpha_comb_inner_iw = 2.24
@@ -115,7 +116,7 @@ def run_case12(plot_res=False):
     tz.model_attr = model_data
 
     calc = VDICore(tz)
-    calc.equal_air_temp = np.zeros(timesteps) + 295.15
+    # calc.equal_air_temp = np.zeros(timesteps) + 295.15
 
     calc.t_set_heating = np.zeros(timesteps)  # in Kelvin
     calc.t_set_cooling = np.zeros(timesteps) + 600  # in Kelvin
