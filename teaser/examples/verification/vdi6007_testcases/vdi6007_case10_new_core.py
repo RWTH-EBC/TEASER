@@ -75,7 +75,6 @@ def run_case10(plot_res=False):
     t_outside_adj = np.repeat(t_outside, times_per_hour)
     weatherTemperature = np.tile(t_outside_adj, 60)
 
-
     # new core
 
     weather = WeatherData()
@@ -109,9 +108,11 @@ def run_case10(plot_res=False):
     model_data.weighted_g_value = 1
     model_data.alpha_comb_inner_iw = 2.12
     model_data.alpha_comb_inner_ow = 2.398
-    model_data.alpha_conv_outer_ow = 20
+    # alpha_conv_outer_ow needs to be area weighted for groundfloor ((1.7 *
+    # 17.5 + 20* 3.5)/21)=4.75
+    model_data.alpha_conv_outer_ow = 4.75
     model_data.alpha_rad_outer_ow = 5
-    model_data.alpha_comb_outer_ow = 28
+    model_data.alpha_comb_outer_ow = 9.75
     model_data.alpha_rad_inner_mean = 5
 
     model_data.solar_absorp_ow = 0.7
@@ -147,7 +148,8 @@ def run_case10(plot_res=False):
 
     calc.equal_air_temp = weatherTemperature
 
-    calc.equal_air_temp = calc._eq_air_temp(h_sol=solarRad_wall, t_black_sky=t_black_sky)
+    calc.equal_air_temp = calc._eq_air_temp(
+        h_sol=solarRad_wall, t_black_sky=t_black_sky)
 
     t_air, q_air_hc = calc.simulate()
 

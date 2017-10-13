@@ -676,10 +676,6 @@ class VDICore(object):
         alpha_wall = self.thermal_zone.model_attr.alpha_comb_outer_ow * \
             self.thermal_zone.model_attr.area_ow
 
-        # how to handle groundfloors as outerwalls and so a reduce outer
-        # wall! area?
-        # alpha_wall = 28 * 9.75
-
         area_win_tot = sum(window_areas)
         area_o_tot = sum(area_ow)
         area_ar = [area_o_tot, area_win_tot, area_iw]
