@@ -3110,7 +3110,6 @@ class Test_teaser(object):
             return 0
 
         from teaser.logic.buildingobjects.calculation.ibpsa import IBPSA
-
         from teaser.logic.archetypebuildings.bmvbs.office import Office
 
         prj.set_default()
@@ -3123,7 +3122,14 @@ class Test_teaser(object):
 
         ibpsa = IBPSA(test_office)
 
-        git = Github()
+        try:
+            token = os.environ['GH_Token']
+        except:
+            token = None
+        if token:
+            git = Github(login_or_token=token)
+        else:
+            git = Github()
 
         aixlib = git.search_repositories('AixLib')[0].get_tags()[0].name
         assert aixlib.replace('v', '') == ibpsa.version['AixLib']
