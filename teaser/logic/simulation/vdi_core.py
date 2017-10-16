@@ -850,8 +850,6 @@ class VDICore(object):
                 cooler_order=self.cooler_order)
 
             # Retrieve results
-            if x is None:
-                print("help me", t, timesteps)
             t_ow.append(x[0])
             t_owi.append(x[1])
             t_iw.append(x[2])

@@ -117,7 +117,7 @@ def run_case11(plot_res=False):
     calc.heater_order = np.array([1, 2, 3])
     calc.cooler_limit = np.zeros((timesteps, 3))
     calc.cooler_limit[:, 0] = - 500
-    calc.cooler_order = np.array([2, 1, 3])
+    calc.cooler_order = [2, 1, 3]
 
     source_igRad = np.zeros(timesteps_day)
     for q in range(int(6 * timesteps_day / 24), int(18 * timesteps_day / 24)):
