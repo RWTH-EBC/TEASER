@@ -606,7 +606,7 @@ class Project(object):
             elif self.data.used_statistic != 'iwu':
                 self.data = DataClass(used_statistic=method)
 
-            ass_error_usage_iwu = "only 'single_family_dewlling' is a valid " \
+            ass_error_usage_iwu = "only 'single_family_dwelling' is a valid " \
                                   "usage for iwu archetype method"
             assert usage in ['single_family_dwelling'], ass_error_usage_iwu
 
@@ -1335,6 +1335,7 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
+        return path
 
     def export_ibpsa(
             self,
@@ -1392,6 +1393,7 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
+        return path
 
     def export_parameters_txt(self, path=None):
         """Exports parameters of all buildings in a readable text file
@@ -1416,6 +1418,7 @@ class Project(object):
         text_out.export_parameters_txt(
             prj=self,
             path=path)
+        return path
 
     def set_default(self, load_data=None):
         """Sets all attributes to default
