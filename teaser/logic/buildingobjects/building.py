@@ -7,6 +7,9 @@ import inspect
 import random
 import re
 import warnings
+import math
+import numpy as np
+from decimal import *
 from teaser.logic.buildingobjects.calculation.aixlib import AixLib
 from teaser.logic.buildingobjects.calculation.ibpsa import IBPSA
 
@@ -85,6 +88,12 @@ class Building(object):
     window_area : dict [degree: m2]
         Dictionary with orientation as key and sum of window areas of
         that direction as value.
+    deleted_surface_area : float
+        Total area that has been deleted after checking for adjacent buildings
+    number_of_deleted_surfaces : int
+        Number of deleted Wall instances
+    list_of_neighbours : list [string]
+        List with names of adjacent buildings
     bldg_height : float [m]
         Total building height.
     volume : float [m3]
@@ -148,6 +157,10 @@ class Building(object):
         self.gml_surfaces = []
         self._outer_area = {}
         self._window_area = {}
+
+        self.deleted_surface_area = 0.0
+        self.number_of_deleted_surfaces = 0
+        self.list_of_neighbours = []
 
         self.bldg_height = None
         self.volume = 0
@@ -320,6 +333,264 @@ class Building(object):
                         ((new_area / self.net_leased_area) * zone.area) /
                         sum(count.orientation == orientation for count in
                             zone.windows))
+
+    def reset_outer_wall_area(
+            self,
+            gml_surface):
+        """ Resetter for the outer_walls
+        for each vertical gml_surface, this function is called
+        we loop all other vertical gml_surfaces in this project
+        and look for coplanar surfaces.
+        if surface is coplanar, then we calculate the common area.
+
+        Parameters
+        ----------
+        gml_surface : SurfaceGML()
+            SurfaceGML() instance of TEASER
+            (we check if any other surface within the project overlaps with this one)
+        """
+        for bldg in self.parent.buildings:
+            if bldg.internal_id == self.internal_id:  # don't compare to surfaces within the building itself
+                pass
+            else:
+                for neighbour_gml_surface in bldg.gml_surfaces:
+                    # loop each SurfaceGML() in the list of this building and check if coplanar
+                    # first check if neighbour_gml_surface is a wall (reduce computation time)
+                    if neighbour_gml_surface.surface_tilt == 90 and \
+                                    gml_surface.internal_id != neighbour_gml_surface.internal_id:
+                        if self.check_if_coplanar(gml_surface, neighbour_gml_surface):
+                            # so unit_normal and constant are exactly the same
+                            orientation = gml_surface.surface_orientation
+                            self.number_of_deleted_surfaces += 1
+                            # add to list of neighbours
+                            if bldg.name.replace(" ", "") not in self.list_of_neighbours:
+                                self.list_of_neighbours.append(bldg.name.replace(" ", ""))
+
+                            common_area = self.calculate_common_area(gml_surface=gml_surface,
+                                                                     neighbour_gml_surface=neighbour_gml_surface)
+                            if common_area == 0:
+                                pass  # walls are coplanar, but do not overlap
+                            else:
+                                # if walls overlap: delete window of basewall, add the deleted window area to the wall area and reduce the wall area by the common_area
+                                for zone in self.thermal_zones:
+                                    zone_common_area = common_area * zone.area / self.net_leased_area  # reduce total wall area to area allocated to this zone
+                                    for window in zone.windows:
+                                        if window.orientation == orientation:
+                                            window_area = window.area
+                                            print("An window of " + self.name + " with orientation " + str(
+                                                orientation) + " was deleted as a whole, window area was " + str(
+                                                window_area))
+                                            zone.windows.remove(window)
+                                            # add deleted window area to wall area
+                                            for wall in zone.outer_walls:
+                                                if wall.orientation == orientation:
+                                                    wall.area += window_area
+                                                    print("A window with orientation " + str(
+                                                        orientation) + " was deleted, area of " + str(
+                                                        window_area) + " was added to the corresponding wall")
+                                    for wall in zone.outer_walls:
+                                        if wall.orientation == orientation:
+                                            wall.area -= zone_common_area
+                                            self.deleted_surface_area += zone_common_area
+                                            if wall.area < 0.0001 or \
+                                                    math.isnan(
+                                                        wall.area):  # rounding errors are possible (smaller than 1 sq cm is considered to be 0)
+                                                print("An outer wall of " + self.name + " with orientation " + str(
+                                                    orientation) + " was deleted as a whole, common area was " + str(
+                                                    common_area))
+                                                zone.outer_walls.remove(wall)
+                                            else:
+                                                print("An outer wall of " + self.name + " with orientation " + str(
+                                                    orientation) + " was reduced from " + str(
+                                                    wall.area + common_area) + " to " + str(wall.area))
+                                                pass
+
+    def check_if_coplanar(self, gml_surface, neighbour_gml_surface, tolerance=False):
+        ''' Coplanarity checker
+
+        checks if two gml_surfaces are coplanar or not
+
+        Parameters
+        ----------
+        gml_surface : SurfaceGML()
+            gml_surface that represents the basewall
+        neighbour_gml_surface : SurfaceGML()
+            gml_surface that represents the wall of the adjacent building
+        tolerance : bool
+            if false, then surfaces need to be an exact match, if true, then there is some tolerance allowed
+            (tolerance is still in dummy version)
+        Returns
+        ----------
+        is_coplanar : bool
+            true is both gml_surfaces are coplanar
+        '''
+        basewall_unit_normal = gml_surface.unit_normal_vector  # this is the unit normal vector of the considered wall
+        basewall_constant = gml_surface.plane_equation_constant  # this is the plane equation constant of the considered wall
+        basewall_equation = [elem for elem in basewall_unit_normal]
+        basewall_equation.append(basewall_constant)  # now, we have a list [normal_x, normal_y, normal_z, constant]
+
+        neighbour_help = neighbour_gml_surface.gml_surface  # this is the coordinate list of this possible neighbour
+        neighbour_unit_normal = neighbour_gml_surface.unit_normal_vector
+        neighbour_constant = neighbour_gml_surface.plane_equation_constant
+        neighbour_equation = [elem for elem in neighbour_unit_normal]
+        neighbour_equation.append(neighbour_constant)
+
+        if tolerance == True:  # THIS DUMMY VERSION DOES NOT WORK FOR ALL CASES !!!
+            tolerance_normal = Decimal.from_float(0.005)  # tolerance in radians
+            tolerance_constant = Decimal.from_float(0.005)  # tolerance in metres
+            angle_between = np.arctan((neighbour_equation[0] / neighbour_equation[1])) - np.arctan(
+                (basewall_equation[0] / basewall_equation[1]))  # angle between planes in radians
+            # distance between points on surface and intersection line of planes
+            dist_to_intersect = np.absolute(((basewall_equation[0] - neighbour_equation[0]) * neighbour_help[0] + \
+                                             (basewall_equation[1] - neighbour_equation[1]) * neighbour_help[1] - \
+                                             (basewall_equation[3] - neighbour_equation[3]))) / \
+                                np.sqrt(np.square(basewall_equation[0] - neighbour_equation[0]) + \
+                                        np.square(basewall_equation[1] - neighbour_equation[1]))
+            dist_to_surface = np.tan(angle_between) * dist_to_intersect
+            a = np.absolute((((basewall_equation[0] - neighbour_equation[0]) * neighbour_help[0]) + \
+                             ((basewall_equation[1] - neighbour_equation[1]) * neighbour_help[1]) + \
+                             (((-1) * basewall_equation[3]) + neighbour_equation[3])))
+            c = ((basewall_equation[0] - neighbour_equation[0]) * neighbour_help[0])
+            d = (basewall_equation[1] - neighbour_equation[1]) * neighbour_help[1]
+            e = (basewall_equation[3] - neighbour_equation[3])
+            b = np.sqrt(np.square(basewall_equation[0] - neighbour_equation[0]) + \
+                        np.square(basewall_equation[1] - neighbour_equation[1]))
+
+            # check if equal
+            if ((((-1) * tolerance_normal) <= angle_between <= tolerance_normal) \
+                        and (((-1) * tolerance_constant) <= dist_to_surface <= tolerance_constant)):
+                is_coplanar = True
+            else:
+                is_coplanar = False
+        else:
+            # NO tolerance on surface > exact match ! Watch out for floats > Decimals
+            # elements from the equations arrays are floats, we convert them to decimal (correct comparison test)
+            # transform floats to decimals
+            b_eq = [Decimal.from_float(i) for i in basewall_equation]
+            n_eq = [Decimal.from_float(i) for i in neighbour_equation]
+            # round these decimals
+            b_eq = [i.quantize(Decimal('0.001'), rounding=ROUND_HALF_DOWN) for i in b_eq]
+            n_eq = [i.quantize(Decimal('0.001'), rounding=ROUND_HALF_DOWN) for i in n_eq]
+            # check if equal
+            if (b_eq[0] == (-1) * n_eq[0] and b_eq[1] == (-1) * n_eq[1] and b_eq[2] == (-1) * n_eq[2] \
+                        and b_eq[3] == (-1) * n_eq[3]) or (
+                                    b_eq[0] == n_eq[0] and b_eq[1] == n_eq[1] and b_eq[2] == n_eq[2] \
+                            and b_eq[3] == n_eq[
+                        3]):  # actually, we know surface normals should point outwards, but we check both
+                is_coplanar = True
+            else:
+                is_coplanar = False
+
+        return is_coplanar
+
+    def calculate_common_area(self, gml_surface, neighbour_gml_surface):
+        ''' calculator of common area between 2 gml_surfaces
+        !!! ONLY CALL THIS FUNCTION IF YOU ARE SURE THAT THE SURFACES ARE COPLANAR
+
+        calculates common area between 2 gml_surfaces
+
+        Parameters
+        ----------
+        gml_surface : SurfaceGML()
+            gml_surface that represents the basewall
+        neighbour_gml_surface : SurfaceGML()
+            gml_surface that represents the wall of the adjacent building
+
+        Returns
+        ----------
+        common_area : float
+            area of common part of the two gml_surfaces
+        '''
+        import teaser.data.input.citygml_input as citygml_in
+        from shapely.geometry import Polygon
+
+        basewall_help = gml_surface.gml_surface  # this is the coordinate list of the considered wall
+        basewall_unit_normal = gml_surface.unit_normal_vector  # this is the unit normal vector of the considered wall
+        basewall_constant = gml_surface.plane_equation_constant  # this is the plane equation constant of the considered wall
+
+        # we transform basewall_help to format: [(x0,y0,z0),(x1,y1,z1), ...]
+        basewall = [tuple(basewall_help[x:x + 3]) for x in xrange(0, len(basewall_help) - 3, 3)]
+        neighbour_help = neighbour_gml_surface.gml_surface  # this is the coordinate list of this possible neighbour
+        # we transform neighbour_help to format: [(x0,y0,z0),(x1,y1,z1), ...]
+        neighbour = [tuple(neighbour_help[x:x + 3]) for x in xrange(0, len(neighbour_help) - 3, 3)]
+
+        # CALCULATION OF COMMON AREA (only possible in 2D, so project surfaces on 2D plane)
+        # proj_axis is 'largest' element of the unit_normal_vector (always one none-zero component)
+        # proj_axis should be any direction for which the unit_normal_vector is not zero
+        proj_axis = max(range(3), key=lambda i: abs(basewall_unit_normal[i]))
+        # project returns a tuple of 2 coordinates in the projection plane
+        proj_basewall = [self.project(x, proj_axis) for x in basewall]
+        proj_neighbour = [self.project(x, proj_axis) for x in neighbour]
+        # Shapely-package is deployed to perform the intersection, returns the intersection polygon
+        proj_intersection = Polygon(proj_basewall).intersection(Polygon(proj_neighbour))
+        if proj_intersection.area == 0:
+            common_area = 0
+        else:
+            # return the coordinate list of the intersection in the format [(x0,y0),(x1,y1), ...] with xy = projection plane
+            if type(proj_intersection).__name__ == "Polygon":
+                proj_intersection_better = list(
+                    proj_intersection.exterior.coords)  # 5 points, last = first > closed polygon
+            elif type(proj_intersection).__name__ == "LineString":
+                proj_intersection_better = list(
+                    proj_intersection.coords)  # 5 points, last = first > closed polygon
+            else:
+                proj_intersection_better = list(
+                    proj_intersection.coords)  # 5 points, last = first > closed polygon
+            # return the projection, so we have real coordinate list of the intersection polygon
+            intersection = [self.project_inv(x, proj_axis, basewall_unit_normal, basewall_constant) for x in
+                            proj_intersection_better]
+            # we make an SurfaceGML() for this intersection, other representation is required [x0, y0, z0, ...]
+            intersection_better = [coordinate for tuplepair in intersection for coordinate in tuplepair]
+            intersection_gml = citygml_in.SurfaceGML(intersection_better)
+            common_area = intersection_gml.surface_area
+        return common_area
+
+    # some helper functions for calculate_common_area
+    def project(self, x, proj_axis):
+        ''' projects the coordinates of a point along a projection axis
+
+        Parameters
+        ----------
+        x : tuple
+            tuple with coordinates of a point in the format (x0,y0,z0)
+        proj_axis : int
+            int that represents the position of the projection axis in the coordinate tuple
+        Returns
+        ----------
+        tuple of 2 coordinates in the projection plane
+        '''
+        # Project onto either the xy, yz, or xz plane.
+        # (We choose the one that avoids degenerate configurations, which is the purpose of proj_axis)
+        return tuple(c for i, c in enumerate(x) if i != proj_axis)
+
+    def project_inv(self, x, proj_axis, unit_normal, plane_equation_constant):
+        ''' projects the coordinates of a projectec point back to 3D
+
+        Parameters
+        ----------
+        x : tuple
+            tuple with coordinates of a point in the format (_,_)
+            (not always (x,y), (y,z) or (x,z), depends on proj_axis)
+        proj_axis : int
+            int that represents the position of the projection axis in the coordinate tuple
+        unit_normal: list
+            unit normal vector as a list
+        plane_equation_constant: int
+            constant in the equation of the plane
+
+        Returns
+        ----------
+        tuple of 3 coordinates
+        '''
+        # Returns the vector w in the walls' plane such that project(w) equals x.
+        w = list(x)
+        w[proj_axis:proj_axis] = [0.0]
+        c = plane_equation_constant
+        for i in range(3):
+            c -= w[i] * unit_normal[i]
+        c /= unit_normal[proj_axis]
+        w[proj_axis] = c
+        return tuple(w)
 
     def get_outer_wall_area(self, orientation):
         """Get aggregated wall area of one orientation

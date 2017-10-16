@@ -6,6 +6,7 @@
 This module contains function to load Buildings in the non proprietary
 CityGML file format .gml
 """
+import random
 import numpy as np
 from numpy import linalg as LA
 import pyxb
@@ -29,7 +30,7 @@ from teaser.logic.archetypebuildings.bmvbs.office import Office
 from teaser.logic.buildingobjects.building import Building
 
 
-def load_gml(path, prj):
+def load_gml(path, prj, checkadjacentbuildings=False):
     """This function loads buildings from a CityGML file
 
     This function is a proof of concept, be careful using it.
@@ -105,7 +106,14 @@ def load_gml(path, prj):
             except UserWarning:
                 print("bld.generate_from_gml() did not work")
                 pass
-
+    if checkadjacentbuildings is True:
+        print("Searching for adjacent buildings and deleting shared walls")
+        for bldg in prj.buildings:
+            for surface in bldg.gml_surfaces:
+                if surface.surface_tilt == 90:  # it's an OuterWall
+                    bldg.reset_outer_wall_area(surface)
+    else:
+        pass
 
 def _set_attributes(bld, gml_bld):
     """tries to set attributes for type building generation
@@ -241,6 +249,7 @@ class SurfaceGML(object):
                  boundary=None):
         self.gml_surface = gml_surface
         self.name = boundary
+        self.internal_id = random.random()
         self.surface_area = None
         self.surface_orientation = None
         self.surface_tilt = None
@@ -248,6 +257,13 @@ class SurfaceGML(object):
         self.surface_area = self.get_gml_area()
         self.surface_orientation = self.get_gml_orientation()
         self.surface_tilt = self.get_gml_tilt()
+
+        # required to check for adjacent buildings (neighbours)
+        split_surface = list(zip(*[iter(self.gml_surface)] * 3))
+        self.unit_normal_vector = self.unit_normal(a=split_surface[0], b=split_surface[1], c=split_surface[2])
+        self.plane_equation_constant = self.unit_normal_vector[0] * self.gml_surface[0] + self.unit_normal_vector[1] * \
+                                                                                          self.gml_surface[1] + \
+                                       self.unit_normal_vector[2] * self.gml_surface[2]
 
     def get_gml_area(self):
         """calc the area of a gml_surface defined by gml coordinates

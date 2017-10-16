@@ -1251,7 +1251,7 @@ class Project(object):
 
         citygml_out.save_gml(self, new_path)
 
-    def load_citygml(self, path=None):
+    def load_citygml(self, path=None, checkadjacentbuildings=False):
         """Loads buildings from a citygml file
 
         calls the function load_gml in data.CityGML we make use of CityGML core
@@ -1273,7 +1273,7 @@ class Project(object):
 
         """
 
-        citygml_in.load_gml(path, self)
+        citygml_in.load_gml(path, self, checkadjacentbuildings)
 
     def export_aixlib(
             self,
