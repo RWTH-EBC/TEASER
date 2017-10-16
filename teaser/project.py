@@ -606,7 +606,7 @@ class Project(object):
             elif self.data.used_statistic != 'iwu':
                 self.data = DataClass(used_statistic=method)
 
-            ass_error_usage_iwu = "only 'single_family_dewlling' is a valid " \
+            ass_error_usage_iwu = "only 'single_family_dwelling' is a valid " \
                                   "usage for iwu archetype method"
             assert usage in ['single_family_dwelling'], ass_error_usage_iwu
 
