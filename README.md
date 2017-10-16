@@ -8,10 +8,17 @@
 
 TEASER (Tool for Energy Analysis and Simulation for Efficient Retrofit) allows
 fast generation of archetype buildings with low input requirements and the
-export of individual dynamic simulation models for Modelica libraries [AixLib](https://github.com/RWTH-EBC/AixLib) and
-[Modelica IBPSA library](https://github.com/ibpsa/modelica). It is being
-developed at the [RWTH Aachen University, E.ON Energy Research Center, Institute
-for Energy Efficient Buildings and Indoor Climate](https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1).
+export of individual dynamic simulation models for the below-mentioned Modelica
+libraries. These libraries all use the framework of [Modelica IBPSA
+library](https://github.com/ibpsa/modelica). TEASER is being developed at the
+[RWTH Aachen University, E.ON Energy Research Center, Institute for Energy
+Efficient Buildings and Indoor
+Climate](https://www.ebc.eonerc.rwth-aachen.de/cms/~dmzz/E-ON-ERC-EBC/?lidx=1).
+
+ * [AixLib](https://github.com/RWTH-EBC/AixLib)
+ * [Buildings](https://github.com/lbl-srg/modelica-buildings)
+ * [BuildingSystems](https://github.com/UdK-VPT/BuildingSystems)
+ * [IDEAS](https://github.com/open-ideas/IDEAS).
 
 The full documentation of TEASER including examples and description of modules,
 classes and functions can be found at the website:
@@ -40,7 +47,7 @@ time consuming and error-prone. To enable the use of BPS on urban scale we
 present the TEASER tool, an open framework for urban energy modeling of
 building stocks. TEASER provides an easy interface for multiple data sources,
 data enrichment (where necessary) and export of ready-to-run Modelica simulation
-models for [AixLib](https://github.com/RWTH-EBC/AixLib) and
+models for all libraries supporting the
 [Modelica IBPSA library](https://github.com/ibpsa/modelica).
 
 
@@ -53,10 +60,10 @@ still a pre-release.
 
 ### Dependencies
 
-TEASER uses Python 2.7 <= v >=3.3. Further using a Python distribution is
-recommended as they already contain (or easily support installation of) many
-Python packages (e.g. SciPy, NumPy, pip, PyQT, etc.) that are used in the
-TEASER code. Two examples of those distributions are:
+TEASER is tested against Python versions 2.7, 3.4, 3.5 and 3.6. Further
+using a Python distribution is recommended as they already contain (or easily
+support installation of) many Python packages (e.g. SciPy, NumPy, pip, PyQT,
+etc.) that are used in the TEASER code. Two examples of those distributions are:
 
 1. https://winpython.github.io/ WinPython comes along with a lot of Python
 packages (e.g. SciPy, NumPy, pip, PyQT, etc.)..

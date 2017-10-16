@@ -225,7 +225,7 @@ def example_create_building():
 
     for key, value in win_dict.items():
 
-        win = Window(parent = tz)
+        win = Window(parent=tz)
         win.name = key
         win.area = value[0]
         win.tilt = value[1]
@@ -260,6 +260,7 @@ def example_create_building():
         win_material.name = "GlasWindow"
         win_material.thermal_conduc = 0.067
         win_material.transmittance = 0.9
+
 
 if __name__ == '__main__':
     example_create_building()

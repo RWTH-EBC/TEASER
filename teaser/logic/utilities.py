@@ -6,6 +6,7 @@ classes
 """
 
 import os
+import shutil
 
 
 def celsius_to_kelvin(value):
@@ -13,7 +14,7 @@ def celsius_to_kelvin(value):
         f_value = float(value)
     except TypeError:
         f_value = 0
-    return f_value+273.15
+    return f_value + 273.15
 
 
 def create_path(path):
@@ -52,7 +53,8 @@ def get_default_path():
     # directory = os.path.dirname(__file__)
     # src = "teaser"
     # last_index = directory.rfind(src)
-    # teaser_default_path = os.path.join(directory[:last_index], "teaser", "OutputData")
+    # teaser_default_path = os.path.join(directory[:last_index], "teaser",
+    # "OutputData")
 
     return teaser_default_path
 
@@ -79,3 +81,30 @@ def get_full_path(rel_path):
     full_path = os.path.join(first_path, rel_path)
 
     return full_path
+
+
+def clear_directory(dir_path=None):
+    '''Function to delete all files inside a directory.
+
+    Parameters
+    ----------
+    dir_path : str
+        Path of directory to be deleted. By default the teaser default
+        directory is cleared
+
+    '''
+
+    if dir_path is None:
+        dir_path = get_default_path()
+    else:
+        pass
+
+    if os.path.exists(dir_path):
+        for file in os.listdir(path=dir_path):
+            file_path = os.path.join(dir_path, file)
+            if os.path.isfile(file_path):
+                os.remove(os.path.join(dir_path, file))
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+    else:
+        print('The directory path does not exist.')

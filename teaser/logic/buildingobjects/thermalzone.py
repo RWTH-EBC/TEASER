@@ -6,10 +6,12 @@
 from __future__ import division
 import random
 import re
+import warnings
 from teaser.logic.buildingobjects.calculation.one_element import OneElement
 from teaser.logic.buildingobjects.calculation.two_element import TwoElement
 from teaser.logic.buildingobjects.calculation.three_element import ThreeElement
 from teaser.logic.buildingobjects.calculation.four_element import FourElement
+
 
 class ThermalZone(object):
     """Thermal zone class.
@@ -42,6 +44,8 @@ class ThermalZone(object):
         Infiltration rate of zone.
     outer_walls : list
         List of OuterWall instances.
+    doors : list
+        List of Door instances.
     rooftops : list
         List of Rooftop instances.
     ground_floors : list
@@ -92,8 +96,9 @@ class ThermalZone(object):
         self.name = None
         self._area = None
         self._volume = None
-        self._infiltration_rate = 0.5 
+        self._infiltration_rate = 0.5
         self._outer_walls = []
+        self._doors = []
         self._rooftops = []
         self._ground_floors = []
         self._windows = []
@@ -109,7 +114,6 @@ class ThermalZone(object):
         self.density_air = 1.25
         self.heat_capac_air = 1002
         self.t_ground = 286.15
-
 
     def calc_zone_parameters(
             self,
@@ -192,6 +196,32 @@ class ThermalZone(object):
         """
         elements = []
         for i in self.outer_walls:
+            if i.orientation == orientation and i.tilt == tilt:
+                elements.append(i)
+            else:
+                pass
+        return elements
+
+    def find_doors(self, orientation, tilt):
+        """Returns all outer walls with given orientation and tilt
+
+        This function returns a list of all Doors elements with the
+        same orientation and tilt.
+
+        Parameters
+        ----------
+        orientation : float [degree]
+            Azimuth of the desired walls.
+        tilt : float [degree]
+            Tilt against the horizontal of the desired walls.
+
+        Returns
+        -------
+        elements : list
+            List of Doors instances with desired orientation and tilt.
+        """
+        elements = []
+        for i in self.doors:
             if i.orientation == orientation and i.tilt == tilt:
                 elements.append(i)
             else:
@@ -319,22 +349,72 @@ class ThermalZone(object):
 
         self.volume = self.area * self.parent.height_of_floors
 
-    def retrofit_zone(self, window_type=None, material=None):
+    def retrofit_zone(
+            self,
+            type_of_retrofit=None,
+            window_type=None,
+            material=None):
         """Retrofits all walls and windows in the zone.
 
         Function call for all elements facing the ambient or ground.
+        Distinguishes if the parent building is a archetype of type 'iwu' or
+        'tabula_de'. If TABULA is used, it will use the pre-defined wall
+        constructions of TABULA.
 
         This function covers OuterWall, Rooftop, GroundFloor and Window.
+
+        Parameters
+        ----------
+        type_of_retrofit : str
+            The classification of retrofit, if the archetype building
+            approach of TABULA is used.
+        window_type : str
+            Default: EnEv 2014
+        material : str
+            Default: EPS035
         """
 
-        for wall_count in self.outer_walls:
-            wall_count.retrofit_wall(self.parent.year_of_retrofit, material)
-        for roof_count in self.rooftops:
-            roof_count.retrofit_wall(self.parent.year_of_retrofit, material)
-        for ground_count in self.ground_floors:
-            ground_count.retrofit_wall(self.parent.year_of_retrofit, material)
-        for win_count in self.windows:
-            win_count.replace_window(self.parent.year_of_retrofit, window_type)
+        if type_of_retrofit is None:
+            type_of_retrofit = 'retrofit'
+
+        if type(self.parent).__name__ in [
+            "SingleFamilyHouse", "TerracedHouse", "MultiFamilyHouse",
+                "ApartmentBlock"]:
+            for wall_count in self.outer_walls \
+                    + self.rooftops + self.ground_floors + self.doors + \
+                    self.windows:
+                if "adv_retrofit" in wall_count.construction_type:
+                    warnings.warn(
+                        "already highest available standard"
+                        + self.parent.name + wall_count.name)
+                elif "standard" in wall_count.construction_type:
+                    wall_count.load_type_element(
+                        year=self.parent.year_of_construction,
+                        construction=wall_count.construction_type.replace(
+                            "standard", type_of_retrofit))
+                else:
+                    wall_count.load_type_element(
+                        year=self.parent.year_of_construction,
+                        construction=wall_count.construction_type.replace(
+                            "retrofit", type_of_retrofit))
+        else:
+
+            for wall_count in self.outer_walls:
+                wall_count.retrofit_wall(
+                    self.parent.year_of_retrofit,
+                    material)
+            for roof_count in self.rooftops:
+                roof_count.retrofit_wall(
+                    self.parent.year_of_retrofit,
+                    material)
+            for ground_count in self.ground_floors:
+                ground_count.retrofit_wall(
+                    self.parent.year_of_retrofit,
+                    material)
+            for win_count in self.windows:
+                win_count.replace_window(
+                    self.parent.year_of_retrofit,
+                    window_type)
 
     def delete(self):
         """Deletes the actual thermal zone savely.
@@ -427,6 +507,15 @@ class ThermalZone(object):
             self._outer_walls = []
 
     @property
+    def doors(self):
+        return self._doors
+
+    @doors.setter
+    def doors(self, value):
+        if value is None:
+            self._doors = []
+
+    @property
     def rooftops(self):
         return self._rooftops
 
@@ -456,7 +545,6 @@ class ThermalZone(object):
     @property
     def floors(self):
         return self._floors
-
 
     @floors.setter
     def floors(self, value):
@@ -492,7 +580,7 @@ class ThermalZone(object):
         ass_error_1 = "Use condition has to be an instance of UseConditions()"
 
         assert type(value).__name__ == "UseConditions" or \
-               type(value).__name__ == "BoundaryConditions", ass_error_1
+            type(value).__name__ == "BoundaryConditions", ass_error_1
 
         if value is not None:
             self._use_conditions = value
