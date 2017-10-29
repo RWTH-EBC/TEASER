@@ -36,7 +36,7 @@ def save_gml(project, path, ref_coordinates=None):
     path: string
         complete path to the output file
     ref_coordinates: list
-        list with  lower and one upper reference coordinates. Each coordiante
+        list with  lower and one upper reference coordinates. Each coordinate
         should contain 3 ints or floats for x, y, and z coordinates of the
         point. e.g: [[458877,,5438353, -0.2], [458889,5438363,6.317669]]
     """
@@ -131,7 +131,7 @@ def _set_gml_building(teaser_building):
     """Creates an instance of a citygml Building with attributes
 
     creates a citygml.building.Building object. And fills the attributes of
-    this instance with attributes of the TEASER buidling
+    this instance with attributes of the TEASER building
 
     Parameters
     ----------
@@ -499,10 +499,10 @@ def _set_gml_thermal_zone(thermal_zone):
 def _set_gml_thermal_boundary(gml_zone, wall):
     """Control function to add a thermal boundary surface to the thermal zone
 
-    The thermal zone instance of citygml is modidified and thermal boundary
+    The thermal zone instance of citygml is modified and thermal boundary
     surfaces are added. The thermal boundaries are chosen according to their
     type (OuterWall, InnerWall, Roof, etc.). For outer walls (including roof)
-    the thermal boundary is returnd to add windows.
+    the thermal boundary is returned to add windows.
 
     Parameters
     ----------
@@ -511,7 +511,7 @@ def _set_gml_thermal_boundary(gml_zone, wall):
         A thermalZone object, where energy is a reference to
         `pyxb.bundles.opengis.citygml.energy`.
 
-    wall : TEASER isntance of Wall()
+    wall : TEASER instance of Wall()
         Teaser instance of Wall of its inherited classes
 
     Returns
@@ -631,7 +631,7 @@ def _set_gml_surface_component(thermal_boundary,
     thermal_boundary : energy.ThermalBoundary()
         A ThermalBoundarySurface object
     element : TEASER BuildingElement
-        Instance of BuilingElement or inherited classes
+        Instance of BuildingElement or inherited classes
     sun_exp : str
         "true" if the surface is exposed to sun, else "false"
     grnd_coupled : str
@@ -653,7 +653,7 @@ def _set_gml_surface_component(thermal_boundary,
 
 
 def _add_gml_layer(gml_surf_comp, element):
-    """Adds gml layer to a surface compomenent
+    """Adds gml layer to a surface component
 
     Adds all layer of the element to the gml surface component
 
@@ -663,7 +663,7 @@ def _add_gml_layer(gml_surf_comp, element):
     gml_surf_comp : energy.SurfaceComponent()
         A SurfaceComponent object with basic data
     element : TEASER BuildingElement
-        Instance of BuilingElement or inherited classes
+        Instance of BuildingElement or inherited classes
     """
 
     cons = energy.AbstractConstructionPropertyType()

@@ -44,7 +44,7 @@ def load_teaser_xml(path, prj):
     path: string
         path of teaserXML file
 
-    project: Project()
+    prj: Project()
         Teaser instance of Project()
 
 
@@ -350,7 +350,7 @@ def set_basic_data_teaser(pyxb_class, element):
     Parameters
     ----------
     pyxb_class : PyXBClass
-        pyxb class represantation of xml
+        pyxb class representation of xml
 
     element : TEASERClass
         teaser class representation of a building element
@@ -402,7 +402,7 @@ def set_layer_data_teaser(pyxb_class, element):
     Parameters
     ----------
     pyxb_class : PyXBClass
-        pyxb class represantation of xml
+        pyxb class representation of xml
 
     element : TEASERClass
         teaser class representation of a building element

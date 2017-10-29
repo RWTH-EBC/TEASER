@@ -15,7 +15,7 @@ import pyxb
 
 
 def save_teaser_xml(path, project):
-    '''This function saves a project to a tXML
+    """This function saves a project to a tXML
 
     The function needs the Python Package PyXB.
 
@@ -25,7 +25,7 @@ def save_teaser_xml(path, project):
         complete path to the output file
     project: Project()
         Teaser instance of Project()
-    '''
+    """
 
     if path.endswith("teaserXML"):
         new_path = path
@@ -330,18 +330,18 @@ def save_teaser_xml(path, project):
 
 
 def set_basic_data_pyxb(pyxb_class, element):
-    '''Helper function for save_teaser_xml to set the basic data
+    """Helper function for save_teaser_xml to set the basic data
 
     Parameters
     ----------
     pyxb_class : PyXBClass
-        pyxb class represantation of xml
+        pyxb class representation of xml
 
     element : TEASERClass
         teaser class representation of a building element
 
 
-    '''
+    """
     if type(element).__name__ == 'OuterWall' or \
             type(element).__name__ == 'Rooftop' or \
             type(element).__name__ == 'Door':
@@ -399,17 +399,17 @@ def set_basic_data_pyxb(pyxb_class, element):
 
 
 def set_layer_data_pyxb(pyxb_class, element):
-    '''Helper function for save_teaser_xml to set the layer data
+    """Helper function for save_teaser_xml to set the layer data
 
     Parameters
     ----------
     pyxb_class : PyXBClass
-        pyxb class represantation of xml
+        pyxb class representation of xml
 
     element : TEASERClass
         teaser class representation of a building element
 
-    '''
+    """
     for layer in element.layer:
 
         pyxb_layer = pb.LayerType()

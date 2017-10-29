@@ -35,7 +35,8 @@ def export_ibpsa(
     ----------
 
     buildings : list of instances of Building
-        list of TEASER instances of a Building that are exoirted If you want to
+        list of TEASER instances of a Building that are exported If you
+        want to
         export a single building, please pass it over as a list containing
         only that building.
     prj : instance of Project

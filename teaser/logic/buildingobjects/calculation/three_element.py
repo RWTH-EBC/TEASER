@@ -20,7 +20,7 @@ class ThreeElement(object):
     and holds all attributes given in documentation.
 
     It treats Rooftops and OuterWalls as one type of outer
-    walls and distinguishes GroundFloors as a separatly resulting in two
+    walls and distinguishes GroundFloors as a separately resulting in two
     RC-combination for these types.
 
     Depending on the chosen method it will consider an extra resistance for

@@ -1,13 +1,13 @@
 # Created July 2015
 # TEASER 4 Development Team
 
-'''
+"""
 This script demonstrates a automated creation of a office typebuilding and its
 simulation with dymola and the AixLib controlled by the python package
 buildingspy
 
 General Requirements:
-- Buildingspy (pypi version not recommendend / use github version instead)
+- Buildingspy (pypi version not recommended / use github version instead)
 - Dymola (with dymola.exe set to your environment variable PATH)
 - AixLib (the actual master from the github repository)
 - installed version of TEASER (sure you have this, your using it, but if not
@@ -29,7 +29,7 @@ Links:
 Buildingspy 2.7: https://github.com/lbl-srg/BuildingsPy
 Buildingspy 3.0: https://github.com/MichaMans/BuildingsPy/tree/python3
 AixLib master: https://github.com/RWTH-EBC/AixLib
-'''
+"""
 
 import os
 import time
@@ -48,7 +48,7 @@ class BuildingInfo(object):
 
     def __init__(self):
         """
-        Constructor for BuildinInfo
+        Constructor for BuildingInfo
         """
         self.year_of_construction = None
         self.usage_type = None
@@ -253,11 +253,11 @@ def create_reference_project(info_list):
 
 
 def simulateCase(s):
-    ''' Set common parameters and run a simulation.
+    """ Set common parameters and run a simulation.
 
     :param s: A simulator object.
 
-    '''
+    """
     s.showGUI(show=False)
     s.setStopTime(3.1536e7)
     s.setSolver("Dassl")
