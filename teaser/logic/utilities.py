@@ -18,7 +18,7 @@ def celsius_to_kelvin(value):
 
 
 def create_path(path):
-    '''Create a folder.
+    """Create a folder.
 
     Creates a new folder.
 
@@ -26,7 +26,7 @@ def create_path(path):
     ----------
     path : str
 
-    '''
+    """
     path = os.path.normpath(path)
     # if directory exists change into that directory
     if(os.path.isdir(path)):
@@ -41,10 +41,10 @@ def create_path(path):
 
 
 def get_default_path():
-    '''Function to construct default path to OutputData folder
+    """Function to construct default path to OutputData folder
     This function constructs the default path to the OutputData folder
 
-    '''
+    """
 
     home_path = os.path.expanduser('~')
 
@@ -60,7 +60,7 @@ def get_default_path():
 
 
 def get_full_path(rel_path):
-    '''Helperfunction to construct pathes to files within teaser.
+    """Helperfunction to construct pathes to files within teaser.
 
     Parameters
     ----------
@@ -72,7 +72,7 @@ def get_full_path(rel_path):
     ----------
     full_path : str
 
-    '''
+    """
 
     directory = os.path.dirname(__file__)
     src = "teaser"
@@ -84,7 +84,7 @@ def get_full_path(rel_path):
 
 
 def clear_directory(dir_path=None):
-    '''Function to delete all files inside a directory.
+    """Function to delete all files inside a directory.
 
     Parameters
     ----------
@@ -92,7 +92,7 @@ def clear_directory(dir_path=None):
         Path of directory to be deleted. By default the teaser default
         directory is cleared
 
-    '''
+    """
 
     if dir_path is None:
         dir_path = get_default_path()

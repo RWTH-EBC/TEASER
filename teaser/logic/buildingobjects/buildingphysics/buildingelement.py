@@ -91,7 +91,7 @@ class BuildingElement(object):
     u_value : float [W/m2K)
         U-Value of building element
     ua_value : float [W/K]
-        UA-Value of building elment (Area times U-Value)
+        UA-Value of building element (Area times U-Value)
     r_inner_conv : float [K/W]
         Convective resistance of building element on inner side (facing the
         zone)
@@ -323,7 +323,7 @@ class BuildingElement(object):
         """Typical element saver.
 
         Saves typical building elements according to their construction
-        year and their construction type in the the XML file for type buidling
+        year and their construction type in the the XML file for type building
         elements. If the Project parent is set, it automatically saves it to
         the file given in Project.data. Alternatively you can specify a path to
         a file of TypeBuildingElements. If this file does not exist,
@@ -356,7 +356,7 @@ class BuildingElement(object):
         """Deletes typical element.
 
         Deletes typical building elements according to their construction
-        year and their construction type in the the XML file for type buidling
+        year and their construction type in the the XML file for type building
         elements. If the Project parent is set, it automatically saves it to
         the file given in Project.data. Alternatively you can specify a path to
         a file of TypeBuildingElements. If this file does not exist,

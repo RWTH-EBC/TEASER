@@ -16,7 +16,7 @@ def save_type_element(element, data_class):
     """Typical element saver.
 
     Saves typical building elements according to their construction
-    year and their construction type in the XML file for type buidling
+    year and their construction type in the XML file for type building
     elements. If the Project parent is set, it automatically saves it to
     the file given in Project.data. Alternatively you can specify a path to
     a file of TypeBuildingElements. If this file does not exist,
@@ -214,7 +214,7 @@ def delete_type_element(element, data_class):
     """Deletes typical element.
 
     Deletes typical building elements according to their construction
-    year and their construction type in the the XML file for type buidling
+    year and their construction type in the the XML file for type building
     elements. If the Project parent is set, it automatically saves it to
     the file given in Project.data. Alternatively you can specify a path to
     a file of TypeBuildingElements. If this file does not exist,
@@ -302,13 +302,13 @@ def delete_type_element(element, data_class):
 
 
 def _set_basic_data_pyxb(element, pyxb_class):
-    '''Helper function for save_type_element to set the layer data.
+    """Helper function for save_type_element to set the layer data.
 
     Parameters
     ----------
     pyxb_class :
-        Pyxb class represantation of xml
-    '''
+        Pyxb class representation of xml
+    """
 
     pyxb_class.building_age_group = element.building_age_group
     pyxb_class.construction_type = element.construction_type
@@ -341,13 +341,13 @@ def _set_basic_data_pyxb(element, pyxb_class):
 
 
 def _set_layer_data_pyxb(element, pyxb_class):
-    '''Helper function for save_type_element to set the layer data.
+    """Helper function for save_type_element to set the layer data.
 
     Parameters
     ----------
     pyxb_class
-        pyxb class represantation of xml
-    '''
+        pyxb class representation of xml
+    """
 
     for layer in element.layer:
 

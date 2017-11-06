@@ -84,7 +84,7 @@ def example_generate_archetype():
     # rather big for TABULA, switching from one typology to another in the same
     # Project takes some seconds. If you know from beginning you will only use
     # TABULA typology you should instantiate you Project class without loading
-    # data. Project(laod_data=False).
+    # data. Project(load_data=False).
 
     prj.add_residential(
         method='tabula_de',

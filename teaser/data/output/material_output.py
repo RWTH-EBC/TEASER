@@ -16,7 +16,7 @@ import teaser.logic.utilities as utilities
 def save_material(material, data_class):
     """Material saver.
 
-    Saves material and their properties the XML file for type buidling
+    Saves material and their properties the XML file for type building
     elements. If the Project parent is set, it automatically saves it to
     the file given in Project.data. Alternatively you can specify a path to
     a file with Materials. If this file does not exist, a new file is created.
@@ -74,7 +74,7 @@ def save_material(material, data_class):
 def modify_material(material, data_class):
     """Material modifier.
 
-    Modifies material and their properties the XML file for type buidling
+    Modifies material and their properties the XML file for type building
     elements. If the Project parent is set, it automatically modifies it to
     the file given in Project.data.
 

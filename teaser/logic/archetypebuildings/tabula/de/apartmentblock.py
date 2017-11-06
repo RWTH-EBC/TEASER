@@ -15,8 +15,8 @@ class ApartmentBlock(SingleFamilyHouse):
        - estimation factors
        - always 4 walls, 1 roof, 1 floor, 4 windows, one door (default
        orientation?)
-       - how we calcualte facade and window area
-       - calcualte u-values
+       - how we calculate facade and window area
+       - calculate u-values
        - zones (one zone)
        - differences between TABULA und our approach (net floor area, height
        and number of storeys)
@@ -54,7 +54,7 @@ class ApartmentBlock(SingleFamilyHouse):
             usual refurbishment:
                 construction of walls according to usual refurbishment in
                 TABULA
-            advanced refurbishmet:
+            advanced refurbishment:
                 construction of walls according to advanced refurbishment in
                 TABULA
     """
