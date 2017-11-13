@@ -285,7 +285,7 @@ class Project(object):
         Parameters
         ----------
         method : str
-            Used archetype method, currenlty only 'bmvbs' is supported
+            Used archetype method, currently only 'bmvbs' is supported
         usage : str
             Main usage of the obtained building, currently only 'office',
             'institute', 'institute4', institute8' are supported
@@ -334,7 +334,7 @@ class Project(object):
         assert method in ['bmvbs'], ass_error_method
 
         ass_error_usage = "only 'office', 'institute', 'institute4', " \
-                          "'institute8' are valid usagesfor archetype " \
+                          "'institute8' are valid usages for archetype " \
                           "generation"
 
         assert usage in ['office', 'institute', 'institute4',
@@ -443,10 +443,10 @@ class Project(object):
         Parameters
         ----------
         method : str
-            Used archetype method, currenlty only 'iwu' or 'urbanrenet' are
+            Used archetype method, currently only 'iwu' or 'urbanrenet' are
             supported, 'tabula_de' to follow soon
         usage : str
-            Main usage of the obtainend building, currently only
+            Main usage of the obtained building, currently only
             'single_family_dwelling' is supported for iwu and 'est1a', 'est1b',
             'est2', 'est3', 'est4a', 'est4b', 'est5' 'est6', 'est7', 'est8a',
             'est8b' for urbanrenet.
@@ -521,7 +521,7 @@ class Project(object):
         assert method in ['tabula_de', 'iwu', 'urbanrenet'], ass_error_method
 
         ass_error_apart = (
-            "The keyword number_of_apartmens does not have any "
+            "The keyword number_of_apartments does not have any "
             "effect on archetype generation for 'iwu' or"
             "'tabula_de', see docs for more information")
 
@@ -606,7 +606,7 @@ class Project(object):
             elif self.data.used_statistic != 'iwu':
                 self.data = DataClass(used_statistic=method)
 
-            ass_error_usage_iwu = "only 'single_family_dewlling' is a valid " \
+            ass_error_usage_iwu = "only 'single_family_dwelling' is a valid " \
                                   "usage for iwu archetype method"
             assert usage in ['single_family_dwelling'], ass_error_usage_iwu
 
@@ -1335,6 +1335,7 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
+        return path
 
     def export_ibpsa(
             self,
@@ -1392,6 +1393,7 @@ class Project(object):
                         buildings=[bldg],
                         prj=self,
                         path=path)
+        return path
 
     def export_parameters_txt(self, path=None):
         """Exports parameters of all buildings in a readable text file
@@ -1416,6 +1418,7 @@ class Project(object):
         text_out.export_parameters_txt(
             prj=self,
             path=path)
+        return path
 
     def set_default(self, load_data=None):
         """Sets all attributes to default
