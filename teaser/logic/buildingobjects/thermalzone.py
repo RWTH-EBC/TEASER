@@ -417,7 +417,7 @@ class ThermalZone(object):
                     window_type)
 
     def delete(self):
-        """Deletes the actual thermal zone savely.
+        """Deletes the actual thermal zone safely.
 
         This deletes the current thermal Zone and also refreshes the
         thermal_zones list in the parent Building.

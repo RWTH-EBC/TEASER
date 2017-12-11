@@ -1,7 +1,7 @@
 # Created December 2016
 # TEASER 4 Development Team
 
-"""This module includes IBPSA calcuation class
+"""This module includes IBPSA calculation class
 """
 
 import scipy.io
@@ -15,7 +15,7 @@ class IBPSA(object):
 
     This class holds functions to sort and partly rewrite zone and building
     attributes specific for IBPSA simulation. This includes the export of
-    boundary coniditons.
+    boundary conditions.
 
     Parameters
     ----------
@@ -30,7 +30,7 @@ class IBPSA(object):
     file_internal_gains : str
         Filename for internal gains file
     version : dict
-        Dictionary with supportes library and their version number
+        Dictionary with supported libraries and their version numbers
     consider_heat_capacity : bool
         decides whether air capacity is considered or not for all thermal
         zones in the building
@@ -98,7 +98,7 @@ class IBPSA(object):
         direct usage in Annex models.
 
         Only person (convective and radiative) and machines (convective) are
-        used in the simple Annex 60 exmaples.
+        used in the simple Annex 60 examples.
 
         1. Column : time step
         2 Column : profile_persons, radiative

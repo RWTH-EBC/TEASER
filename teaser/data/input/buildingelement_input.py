@@ -184,7 +184,7 @@ def load_type_element(element,
 
 
 def _set_layer_data(material, layer, pyxb_class, data_class):
-    '''Helper function for load_type_element to set the layer data.
+    """Helper function for load_type_element to set the layer data.
 
     Parameters
     ----------
@@ -195,13 +195,13 @@ def _set_layer_data(material, layer, pyxb_class, data_class):
         Layer() instance of TEASER
 
     pyxb_class :
-        Pyxb class represantation of xml
+        Pyxb class representation of xml
 
     data_class : DataClass()
         DataClass containing the bindings for TypeBuildingElement and
         Material (typically this is the data class stored in prj.data,
         but the user can individually change that.
-    '''
+    """
 
     layer.thickness = pyxb_class.thickness
     layer.id = pyxb_class.id
@@ -222,13 +222,13 @@ def _set_layer_data(material, layer, pyxb_class, data_class):
 
 
 def _set_basic_data(element, pyxb_class):
-    '''Helper function for load_type_element to set the layer data.
+    """Helper function for load_type_element to set the layer data.
 
     Parameters
     ----------
     pyxb_class :
-        Pyxb class represantation of xml
-    '''
+        Pyxb class representation of xml
+    """
 
     element.building_age_group = pyxb_class.building_age_group
     element.construction_type = pyxb_class.construction_type
