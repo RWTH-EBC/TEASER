@@ -302,6 +302,7 @@ class SingleFamilyDwelling(Residential):
         single family dwellings according to TEASER requirements
         """
         # help area for the correct building area setting while using typeBldgs
+        self.thermal_zones = None
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
 
