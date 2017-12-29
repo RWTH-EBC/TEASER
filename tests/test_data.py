@@ -3101,3 +3101,47 @@ class Test_teaser(object):
         exmain(number_of_elements=2)
         exmain(number_of_elements=3)
         exmain(number_of_elements=4)
+
+    def test_modelica_export_version(self):
+
+        try:
+            from github import Github
+        except ImportError:
+            return 0
+
+        from teaser.logic.buildingobjects.calculation.ibpsa import IBPSA
+        from teaser.logic.archetypebuildings.bmvbs.office import Office
+
+        prj.set_default()
+        test_office = Office(parent=prj,
+                             name="TestBuilding",
+                             year_of_construction=1988,
+                             number_of_floors=3,
+                             height_of_floors=3,
+                             net_leased_area=2500)
+
+        ibpsa = IBPSA(test_office)
+
+        try:
+            token = os.environ['GH_Token']
+        except:
+            token = None
+        if token:
+            git = Github(login_or_token=token)
+        else:
+            git = Github()
+
+        aixlib = git.search_repositories('AixLib')[0].get_tags()[0].name
+        assert aixlib.replace('v', '') == ibpsa.version['AixLib']
+
+        buildings = git.search_repositories(
+            'modelica/Buildings')[0].get_tags()[0].name
+        assert buildings.replace('v', '') == ibpsa.version['Buildings']
+
+        buildingsys = git.search_repositories(
+            'UdK-VPT/BuildingSystems')[0].get_tags()[0].name
+        assert buildingsys.replace('v', '') == ibpsa.version[
+            'BuildingSystems']
+        ideas = git.search_repositories(
+            'open-ideas/ideas')[0].get_tags()[0].name
+        assert ideas.replace('v', '') == ibpsa.version['IDEAS']
