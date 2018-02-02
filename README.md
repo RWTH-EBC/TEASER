@@ -25,6 +25,17 @@ available under the
 If you have any questions regarding TEASER feel free to contact us at
 [ebc-teaser@eonerc.rwth-aachen.de](mailto:ebc-teaser@eonerc.rwth-aachen.de).
 
+---
+
+## Updates
+TEASER Online Released
+If you want to generate fast and easily archetype building models you can simulate with the Modelica-IBPSA related libraries, follow
+this link:
+
+ * [http://teaser.eonerc.rwth-aachen.de](http://teaser.eonerc.rwth-aachen.de)
+
+---
+
 ## Description
 
 Energy supply of buildings in urban context currently undergoes significant
