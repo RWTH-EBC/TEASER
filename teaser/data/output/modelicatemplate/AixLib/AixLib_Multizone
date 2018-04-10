@@ -119,8 +119,8 @@ equation
   connect(tableTSet.y, multizone.TSetHeat) annotation (Line(points={{55.2,-58},
           {36.8,-58},{36.8,-9}}, color={0,0,127}));
 
-  connect(const.y, multizone.TSetCool) annotation (Line(points={{55.2,-82},{
-          34.6,-82},{34.6,-9}}, color={0,0,127}));
+  connect(tableTSet.y, multizone.TSetCool) annotation (Line(points={{55.2,-58},
+          {36.8,-58},{36.8,-9}}, color={0,0,127}));
 
   annotation (experiment(
       StopTime=${modelica_info.runtime_simulation},
