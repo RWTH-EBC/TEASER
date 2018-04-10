@@ -80,5 +80,5 @@ record ${zone.parent.name}_${zone.name} "${zone.parent.name}_${zone.name}"
     lCool = ${zone.model_attr.cool_load},
     KRCool = 10000,
     TNCool = 1,
-    CoolerOn = false);
+    CoolerOn = true);
 end ${zone.parent.name}_${zone.name};
