@@ -35,8 +35,8 @@ class ModelicaInfo():
         # Base-Values for the simulation tab
         self.runtime_simulation = "31536000"
         self.interval_output = "3600"
-        self.solver = ["Lsodar", "dassl", "Radau"]
-        self.current_solver = "Radau"
+        self.solver = ["Lsodar", "dassl", "Radau", "Cvode"]
+        self.current_solver = "Cvode"
         self.equidistant_output = True
         self.results_at_events = False
         self.version = "3.2.2"
