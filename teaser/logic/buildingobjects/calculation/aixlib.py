@@ -272,16 +272,16 @@ class AixLib(object):
                         elif time_line[i][0] < \
                                 zone_count.use_conditions.cooling_time[0] * 3600:
                             time_line[i].append(
-                                zone_count.use_conditions.set_temp_cool -
-                                zone_count.use_conditions.temp_set_back)
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
                             time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_cool -
-                                zone_count.use_conditions.temp_set_back)
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
                         elif time_line[i][0] == \
                                 zone_count.use_conditions.cooling_time[0] * 3600:
                             time_line[i].append(
-                                zone_count.use_conditions.set_temp_cool -
-                                zone_count.use_conditions.temp_set_back)
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
                             time_line[i + 1].append(
                                 zone_count.use_conditions.set_temp_cool)
                         elif time_line[i][0] == \
@@ -290,17 +290,17 @@ class AixLib(object):
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_cool)
                             time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_cool -
-                                zone_count.use_conditions.temp_set_back)
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
                         elif time_line[i][0] > \
                             (zone_count.use_conditions.cooling_time[1] + 1) * \
                                 3600:
                             time_line[i].append(
-                                zone_count.use_conditions.set_temp_cool -
-                                zone_count.use_conditions.temp_set_back)
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
                             time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_cool -
-                                zone_count.use_conditions.temp_set_back)
+                                zone_count.use_conditions.set_temp_cool +
+                                zone_count.use_conditions.temp_set_back_cool)
                         else:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_cool)
