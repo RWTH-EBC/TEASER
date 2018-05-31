@@ -1527,6 +1527,12 @@ class Project(object):
             regex = re.compile('[^a-zA-z0-9]')
             self._name = regex.sub('', value)
         else:
-            value = str(value)
-            regex = re.compile('[^a-zA-z0-9]')
-            self._name = regex.sub('', value)
+            try:
+                value = str(value)
+                regex = re.compile('[^a-zA-z0-9]')
+                self._name = regex.sub('', value)
+            except ValueError:
+                print("Can't convert name to string")
+
+        if self._name[0].isdigit():
+            self._name = "P" + self._name

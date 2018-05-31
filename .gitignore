@@ -37,6 +37,7 @@
 .cache/
 __pycache__/
 .coverage
+.pytest_cache
 
 #pip install #
 #####################
