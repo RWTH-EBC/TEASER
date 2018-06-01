@@ -104,6 +104,30 @@ model ${bldg.name}
     "Set point for cooler"
     annotation (Placement(transformation(extent={{72,-90},{56,-74}})));
 
+    Modelica.Blocks.Sources.CombiTimeTable tableInternalGains_ibpsa_13790(
+        tableOnFile=true,
+        extrapolation=Modelica.Blocks.Types.Extrapolation.Periodic,
+        tableName="Internals",
+        fileName=Modelica.Utilities.Files.loadResource("modelica://${bldg.parent.name}/${bldg.name}/ibpsa_13790_${bldg.name}.mat"),
+
+        columns=2:${len(bldg.thermal_zones)+1}) "Total internal gains" annotation (Placement(
+            transformation(
+            extent={{8,8},{-8,-8}},
+            rotation=180,
+            origin={-72,-64})));
+      Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow flowRad[${len(bldg.thermal_zones)}]
+        "Radiative heat flow of additional internal gains"
+        annotation (Placement(transformation(extent={{-14,-64},{6,-44}})));
+      Modelica.Thermal.HeatTransfer.Sources.PrescribedHeatFlow flowConv[${len(bldg.thermal_zones)}]
+        "Convective heat flow of additional internal gains"
+        annotation (Placement(transformation(extent={{-14,-86},{6,-66}})));
+      Modelica.Blocks.Math.Gain gainConv[${len(bldg.thermal_zones)}](each k=0.5)
+        "Split additional internal gains into radiative an convective"
+        annotation (Placement(transformation(extent={{-44,-82},{-32,-70}})));
+      Modelica.Blocks.Math.Gain gainRad[${len(bldg.thermal_zones)}](each k=0.5)
+        "Split additional internal gains into radiative an convective"
+        annotation (Placement(transformation(extent={{-44,-60},{-32,-48}})));
+
 equation
   connect(weaDat.weaBus, multizone.weaBus) annotation (Line(
       points={{-62,40},{-32,40},{-32,6},{34,6}},
