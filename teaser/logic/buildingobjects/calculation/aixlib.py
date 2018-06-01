@@ -7,7 +7,6 @@
 import scipy.io
 import teaser.logic.utilities as utilities
 import numpy as np
-import warnings
 import os
 
 
@@ -34,7 +33,7 @@ class AixLib(object):
         Filename for set temperature file
     file_ahu : str
         Filename for AHU boundary conditions file
-    file_intern_gains:
+    file_internal_gains : str
         Filename for internal gains file
     version : str
         Used AixLib version, default should always be current master version
@@ -122,6 +121,9 @@ class AixLib(object):
             duration of the profile in seconds (default one day, 86400 s)
         time_step : int
             time step used in the profile in seconds (default one hour, 3600 s)
+        double : bool
+            True if values should be taken into account twice to create
+            stepwise functions without interpolation in Modelica
 
         Returns
         ---------
@@ -129,9 +131,9 @@ class AixLib(object):
             list of time steps as preparation for the output of boundary
             conditions
         """
-        ass_error_1 = "duration musst be a multiple of time_step"
+        ass_error_1 = "duration must be a multiple of time_step"
 
-        assert float(duration_profile/time_step).is_integer(), ass_error_1
+        assert float(duration_profile / time_step).is_integer(), ass_error_1
 
         time_line = []
 
@@ -183,35 +185,35 @@ class AixLib(object):
                             time_line[i + 1].append(
                                 zone_count.use_conditions.set_temp_heat)
                         elif time_line[i][0] < \
-                            zone_count.use_conditions.heating_time[0] * 3600:
+                                zone_count.use_conditions.heating_time[0] * 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_heat -
                                 zone_count.use_conditions.temp_set_back)
-                            time_line[i+1].append(
+                            time_line[i + 1].append(
                                 zone_count.use_conditions.set_temp_heat -
                                 zone_count.use_conditions.temp_set_back)
                         elif time_line[i][0] == \
-                            zone_count.use_conditions.heating_time[0] * 3600:
+                                zone_count.use_conditions.heating_time[0] * 3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_heat -
                                 zone_count.use_conditions.temp_set_back)
-                            time_line[i+1].append(
+                            time_line[i + 1].append(
                                 zone_count.use_conditions.set_temp_heat)
                         elif time_line[i][0] == \
                             (zone_count.use_conditions.heating_time[1] + 1) * \
-                                        3600:
+                                3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_heat)
-                            time_line[i+1].append(
+                            time_line[i + 1].append(
                                 zone_count.use_conditions.set_temp_heat -
                                 zone_count.use_conditions.temp_set_back)
                         elif time_line[i][0] > \
                             (zone_count.use_conditions.heating_time[1] + 1) * \
-                                        3600:
+                                3600:
                             time_line[i].append(
                                 zone_count.use_conditions.set_temp_heat -
                                 zone_count.use_conditions.temp_set_back)
-                            time_line[i+1].append(
+                            time_line[i + 1].append(
                                 zone_count.use_conditions.set_temp_heat -
                                 zone_count.use_conditions.temp_set_back)
                         else:
@@ -222,7 +224,6 @@ class AixLib(object):
 
                     else:
                         pass
-
 
         scipy.io.savemat(
             path,
@@ -247,7 +248,7 @@ class AixLib(object):
         time_line :[[int]]
             list of time steps
         path : str
-            optional path, when matfile is exported seperately
+            optional path, when matfile is exported separately
 
         Attributes
         ----------
@@ -342,7 +343,7 @@ class AixLib(object):
         time_line :[[int]]
             list of time steps
         path : str
-            optional path, when matfile is exported seperately
+            optional path, when matfile is exported separately
         """
 
         if path is None:
@@ -356,18 +357,18 @@ class AixLib(object):
         for zone_count in self.parent.thermal_zones:
             if time_line is None:
                 duration = len(zone_count.use_conditions.profile_persons) * \
-                            3600
+                    3600
                 time_line = self.create_profile(duration_profile=duration)
 
             ass_error_1 = "time line and input have to have the same length"
 
-            assert len(time_line)-1 == len(
+            assert len(time_line) - 1 == len(
                 zone_count.use_conditions.profile_persons), \
                 (ass_error_1 + ",profile_persons")
-            assert len(time_line)-1 == len(
+            assert len(time_line) - 1 == len(
                 zone_count.use_conditions.profile_machines), \
                 (ass_error_1 + ",profile_machines")
-            assert len(time_line)-1 == len(
+            assert len(time_line) - 1 == len(
                 zone_count.use_conditions.profile_lighting), \
                 (ass_error_1 + ",profile_lighting")
 
@@ -377,9 +378,9 @@ class AixLib(object):
                     time.append(0)
                     time.append(0)
                 else:
-                    time.append(zone_count.use_conditions.profile_persons[i-1])
-                    time.append(zone_count.use_conditions.profile_machines[i-1])
-                    time.append(zone_count.use_conditions.profile_lighting[i-1])
+                    time.append(zone_count.use_conditions.profile_persons[i - 1])
+                    time.append(zone_count.use_conditions.profile_machines[i - 1])
+                    time.append(zone_count.use_conditions.profile_lighting[i - 1])
 
         internal_boundary = np.array(time_line)
 

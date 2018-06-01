@@ -120,7 +120,6 @@ class Building(object):
             year_of_construction=None,
             net_leased_area=None,
             with_ahu=False):
-
         """Constructor of Building Class
         """
 
@@ -229,13 +228,13 @@ class Building(object):
             self.height_of_floors = height_of_floor
         elif self.height_of_floors is None and self.number_of_floors is not \
                 None:
-            self.height_of_floors = self.bldg_height/self.number_of_floors
+            self.height_of_floors = self.bldg_height / self.number_of_floors
         else:
             pass
 
         if self.number_of_floors is not None:
             self.net_leased_area = self.get_footprint_gml() * \
-                                    self.number_of_floors
+                self.number_of_floors
             return
 
         else:
@@ -271,13 +270,31 @@ class Building(object):
         for zone in self.thermal_zones:
             for wall in zone.outer_walls:
                 if wall.orientation == orientation:
-                    wall.area = ((new_area / self.net_leased_area) * zone.area)
+                    wall.area = (
+                        ((new_area / self.net_leased_area) * zone.area) /
+                        sum(count.orientation == orientation for count in
+                            zone.outer_walls))
+
             for roof in zone.rooftops:
                 if roof.orientation == orientation:
-                    roof.area = ((new_area / self.net_leased_area) * zone.area)
+                    roof.area = (
+                        ((new_area / self.net_leased_area) * zone.area) /
+                        sum(count.orientation == orientation for count in
+                            zone.rooftops))
+
             for ground in zone.ground_floors:
                 if ground.orientation == orientation:
-                    ground.area = ((new_area / self.net_leased_area) * zone.area)
+                    ground.area = (
+                        ((new_area / self.net_leased_area) * zone.area) /
+                        sum(count.orientation == orientation for count in
+                            zone.ground_floors))
+
+            for door in zone.doors:
+                if door.orientation == orientation:
+                    door.area = (
+                        ((new_area / self.net_leased_area) * zone.area) /
+                        sum(count.orientation == orientation for count in
+                            zone.doors))
 
     def set_window_area(
             self,
@@ -299,7 +316,10 @@ class Building(object):
         for zone in self.thermal_zones:
             for win in zone.windows:
                 if win.orientation == orientation:
-                    win.area = ((new_area / self.net_leased_area) * zone.area)
+                    win.area = (
+                        ((new_area / self.net_leased_area) * zone.area) /
+                        sum(count.orientation == orientation for count in
+                            zone.windows))
 
     def get_outer_wall_area(self, orientation):
         """Get aggregated wall area of one orientation
@@ -448,7 +468,7 @@ class Building(object):
                 t_bt=5)
             self.sum_heat_load += zone.model_attr.heat_load
 
-        if self.used_library_calc == type(self.library_attr).__name__:
+        if self.used_library_calc == self.library_attr.__class__.__name__:
             if self.used_library_calc == 'AixLib':
                 self.library_attr.calc_auxiliary_attr()
             else:
@@ -476,6 +496,7 @@ class Building(object):
     def retrofit_building(
             self,
             year_of_retrofit=None,
+            type_of_retrofit=None,
             window_type=None,
             material=None):
         """Retrofits all zones in the building
@@ -488,6 +509,9 @@ class Building(object):
         ----------
         year_of_retrofit : float
             Year of last retrofit.
+        type_of_retrofit : str
+            The classification of retrofit, if the archetype building
+            approach of TABULA is used.
         window_type : str
             Default: EnEv 2014
         material : str
@@ -500,7 +524,7 @@ class Building(object):
             pass
 
         for zone in self.thermal_zones:
-            zone.retrofit_zone(window_type, material)
+            zone.retrofit_zone(type_of_retrofit, window_type, material)
 
         self.calc_building_parameter(
             number_of_elements=self.number_of_elements_calc,
@@ -806,5 +830,3 @@ class Building(object):
             self.library_attr = AixLib(parent=self)
         elif self.used_library_calc == 'IBPSA':
             self.library_attr = IBPSA(parent=self)
-
-

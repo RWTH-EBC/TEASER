@@ -8,6 +8,7 @@ This module contains the Base class for all building elements.
 
 from __future__ import division
 from teaser.logic.buildingobjects.buildingphysics.layer import Layer
+import teaser.data.input.buildingelement_input as buildingelement_input
 import numpy as np
 import random
 import re
@@ -87,8 +88,10 @@ class BuildingElement(object):
     c1_korr : float [J/K]
         corrected capacity C1,korr for building elements in the case of
         asymmetrical thermal load given in VDI 6007
+    u_value : float [W/m2K)
+        U-Value of building element
     ua_value : float [W/K]
-        UA-Value of building elment (Area times U-Value)
+        UA-Value of building element (Area times U-Value)
     r_inner_conv : float [K/W]
         Convective resistance of building element on inner side (facing the
         zone)
@@ -189,6 +192,7 @@ class BuildingElement(object):
 
         self.ua_value = (1 / (
             self.r_inner_comb + self.r_conduc + self.r_outer_comb))
+        self.u_value = self.ua_value / self.area
 
     def gather_element_properties(self):
         """Helper function for matrix calculation.
@@ -304,8 +308,6 @@ class BuildingElement(object):
         else:
             data_class = data_class
 
-        import teaser.data.input.buildingelement_input as buildingelement_input
-
         self.layer = None
         self._inner_convection = None
         self._inner_radiation = None
@@ -321,7 +323,7 @@ class BuildingElement(object):
         """Typical element saver.
 
         Saves typical building elements according to their construction
-        year and their construction type in the the XML file for type buidling
+        year and their construction type in the the XML file for type building
         elements. If the Project parent is set, it automatically saves it to
         the file given in Project.data. Alternatively you can specify a path to
         a file of TypeBuildingElements. If this file does not exist,
@@ -354,7 +356,7 @@ class BuildingElement(object):
         """Deletes typical element.
 
         Deletes typical building elements according to their construction
-        year and their construction type in the the XML file for type buidling
+        year and their construction type in the the XML file for type building
         elements. If the Project parent is set, it automatically saves it to
         the file given in Project.data. Alternatively you can specify a path to
         a file of TypeBuildingElements. If this file does not exist,
@@ -417,8 +419,6 @@ class BuildingElement(object):
                 self._name = regex.sub('', value)
             except ValueError:
                 print("Can't convert name to string")
-
-
 
     @property
     def year_of_retrofit(self):
@@ -594,7 +594,7 @@ class BuildingElement(object):
             if self.parent.parent is not None and self.orientation is not None:
                 self.parent.parent.fill_outer_area_dict()
         elif type(self).__name__ == "Window":
-            if self.parent.parent is not None and self.orientation is not None:
+            if self.parent is not None and self.orientation is not None:
                 self.parent.parent.fill_window_area_dict()
         if self.inner_convection is not None and\
                 self.inner_radiation is not None and\

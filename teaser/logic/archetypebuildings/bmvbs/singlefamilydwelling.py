@@ -19,10 +19,10 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 class SingleFamilyDwelling(Residential):
     """Archetype Residential Building according
 
-    Subclass from Residential archetpye class to represent
+    Subclass from Residential archetype class to represent
     SingleFamilyDwelling according to IWU :cite:`KurzverfahrenIWU`.
 
-    The SingleFamilyDwelling module contains a singlezone building. It has 4
+    The SingleFamilyDwelling module contains a single zone building. It has 4
     outer walls, 4 windows, a flat roof and a ground floor. Depending on (
     typical length and width) the interior wall areas are assigned. It makes
     number_of_floors and height_of_floors mandatory parameters.
@@ -161,7 +161,6 @@ class SingleFamilyDwelling(Residential):
             cellar=None,
             dormer=None,
             construction_type=None):
-
         """Constructor of SingleFamilyDwelling
         """
 
@@ -303,6 +302,7 @@ class SingleFamilyDwelling(Residential):
         single family dwellings according to TEASER requirements
         """
         # help area for the correct building area setting while using typeBldgs
+        self.thermal_zones = None
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
 
@@ -356,12 +356,12 @@ class SingleFamilyDwelling(Residential):
 
             if value[1] == 0 or value[1] == 180.0:
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                                            self.nr_of_orientation
+                    self.nr_of_orientation
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                                            self.nr_of_orientation
+                    self.nr_of_orientation
 
             for zone in self.thermal_zones:
                 # create wall and set building elements
@@ -379,12 +379,12 @@ class SingleFamilyDwelling(Residential):
             if value[1] == 0 or value[1] == 180:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                                             self.nr_of_orientation
+                    self.nr_of_orientation
 
             elif value[1] == 90 or value[1] == 270:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                                             self.nr_of_orientation
+                    self.nr_of_orientation
 
             '''
             There is no real classification for windows, so this is a bit hard

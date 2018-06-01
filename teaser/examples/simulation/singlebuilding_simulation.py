@@ -1,13 +1,13 @@
 # Created July 2015
 # TEASER 4 Development Team
 
-'''
+"""
 This script demonstrates a automated creation of a office typebuilding and its
 simulation with dymola and the AixLib controlled by the python package
 buildingspy
 
 General Requirements:
-- Buildingspy (pypi version not recommendend / use github version instead)
+- Buildingspy (pypi version not recommended / use github version instead)
 - Dymola (with dymola.exe set to your environment variable PATH)
 - AixLib (the actual master from the github repository)
 - installed version of TEASER (sure you have this, your using it, but if not
@@ -29,7 +29,7 @@ Links:
 Buildingspy 2.7: https://github.com/lbl-srg/BuildingsPy
 Buildingspy 3.0: https://github.com/MichaMans/BuildingsPy/tree/python3
 AixLib master: https://github.com/RWTH-EBC/AixLib
-'''
+"""
 
 import os
 import time
@@ -44,9 +44,10 @@ class BuildingInfo(object):
     """
     Light-weight class to hold building info
     """
+
     def __init__(self):
         """
-        Constructor for BuildinInfo
+        Constructor for BuildingInfo
         """
         self.year_of_construction = None
         self.usage_type = None
@@ -62,7 +63,7 @@ def main():
 
     starttime = time.time()
 
-    #create a office typebuilding
+    # create a office typebuilding
     prj = Project(load_data=True)
     prj.type_bldg_office(name="Office1",
                          year_of_construction=1988,
@@ -74,7 +75,7 @@ def main():
                          with_ahu=True,
                          construction_type="heavy")
 
-    #path where the export is stored
+    # path where the export is stored
     output_path = os.path.join('D:\Temp',
                                'OutputData')
 
@@ -106,7 +107,7 @@ def main():
 
     li = []
     for bld in prj.buildings:
-        #this is necessary for the correct names in the simulation script
+        # this is necessary for the correct names in the simulation script
         name = "Project." + bld.name + "." + bld.name
         s = si.Simulator(name, "dymola", outputDir, packageDir)
         li.append(s)
@@ -116,18 +117,18 @@ def main():
     # of the results
     po.map(simulateCase, li)
 
-### Timer
+# Timer
     endtime = time.time()
-    print('Simulation lasts: ', endtime-starttime, ' seconds or ',
-          (endtime-starttime)/60, ' minutes! or', (endtime-starttime)/(60*60))
+    print('Simulation lasts: ', endtime - starttime, ' seconds or ',
+          (endtime - starttime) / 60, ' minutes! or', (endtime - starttime) / (60 * 60))
 
 
 def simulateCase(s):
-    ''' Set common parameters and run a simulation.
+    """ Set common parameters and run a simulation.
 
     :param s: A simulator object.
 
-    '''
+    """
     s.showGUI(show=False)
     s.setStopTime(3.1536e7)
     s.setSolver("Dassl")
@@ -135,6 +136,7 @@ def simulateCase(s):
     s.setNumberOfIntervals(8760)
     s.getParameters()
     s.simulate()
+
 
 # Main function
 if __name__ == '__main__':

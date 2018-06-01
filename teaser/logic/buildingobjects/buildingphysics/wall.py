@@ -85,7 +85,7 @@ class Wall(BuildingElement):
         corrected capacity C1,korr for building elements in the case of
         asymmetrical thermal load given in VDI 6007
     ua_value : float [W/K]
-        UA-Value of building elment (Area times U-Value)
+        UA-Value of building element (Area times U-Value)
     r_inner_conv : float [K/W]
         Convective resistance of building element on inner side (facing the
         zone)
@@ -202,13 +202,13 @@ class Wall(BuildingElement):
         self.c1 = self.area * ((new_mat[3][3] - 1) ** 2 +
                                (new_mat[2][3]) ** 2) / \
             (omega * (new_mat[0][2] * new_mat[2][3] -
-             (new_mat[3][3] - 1) * new_mat[0][3]))
+                      (new_mat[3][3] - 1) * new_mat[0][3]))
         self.c2 = self.area * ((new_mat[0][0] - 1) ** 2 +
                                (new_mat[0][1]) ** 2) / (
-                  omega * (new_mat[0][2] *
-                           new_mat[0][1] -
-                           (new_mat[0][0] - 1) *
-                           new_mat[0][3]))
+            omega * (new_mat[0][2] *
+                     new_mat[0][1] -
+                     (new_mat[0][0] - 1) *
+                     new_mat[0][3]))
         self.r3 = (1 / self.area) * (np.sum(r_layer)) - self.r1 - self.r2
 
         r_wall = self.r1 + self.r2 + self.r3
@@ -279,7 +279,7 @@ class Wall(BuildingElement):
         ----------
         material : string
             Type of material, that is used for insulation
-        year_of_refurbishment : int
+        year_of_retrofit : int
             Year of the retrofit of the wall/building
 
         """
@@ -287,7 +287,7 @@ class Wall(BuildingElement):
         self.calc_ua_value()
 
         if material is None:
-            material = "EPS035"
+            material = "EPS_perimeter_insulation_top_layer"
         else:
             pass
 

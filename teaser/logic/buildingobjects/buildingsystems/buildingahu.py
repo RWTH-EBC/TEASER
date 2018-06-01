@@ -45,7 +45,7 @@ class BuildingAHU(object):
     efficiency_recovery : float
         efficiency of HRS in the AHU modes if HRS is enabled.
         AixLib: "efficiencyHRS_enabled" (default = 0.8)
-    efficiency_revocery_false : float
+    efficiency_recovery_false : float
         taking a little heat transfer into account although HRS is disabled
         (in case that a HRS is physically installed in the AHU) in AixLib:
         "efficiencyHRS_disabled" (default = 0.2)
