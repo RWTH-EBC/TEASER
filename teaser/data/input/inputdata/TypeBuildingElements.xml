@@ -301,7 +301,7 @@
 		</elements:Layers>
 	</elements:OuterWall>
 	<elements:OuterWall>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>heavy</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -321,7 +321,7 @@
 		</elements:Layers>
 	</elements:OuterWall>
 	<elements:OuterWall>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>light</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -632,7 +632,7 @@
 		</elements:Layers>
 	</elements:InnerWall>
 	<elements:InnerWall>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>heavy</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -655,7 +655,7 @@
 		</elements:Layers>
 	</elements:InnerWall>
 	<elements:InnerWall>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>light</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -948,7 +948,7 @@
 		</elements:Layers>
 	</elements:Rooftop>
 	<elements:Rooftop>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>heavy</elements:construction_type>
 		<elements:inner_convection>1.7000000000000002</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -973,7 +973,7 @@
 		</elements:Layers>
 	</elements:Rooftop>
 	<elements:Rooftop>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>light</elements:construction_type>
 		<elements:inner_convection>1.7000000000000002</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -1269,7 +1269,7 @@
 		</elements:Layers>
 	</elements:GroundFloor>
 	<elements:GroundFloor>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>heavy</elements:construction_type>
 		<elements:inner_convection>1.7000000000000002</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -1292,7 +1292,7 @@
 		</elements:Layers>
 	</elements:GroundFloor>
 	<elements:GroundFloor>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>light</elements:construction_type>
 		<elements:inner_convection>1.7000000000000002</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -1510,7 +1510,7 @@
 		</elements:Layers>
 	</elements:Window>
 	<elements:Window>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>Holzfenster, zweifach</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -1529,7 +1529,7 @@
 		</elements:Layers>
 	</elements:Window>
 	<elements:Window>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>Kunststofffenster, Isolierverglasung</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -1548,7 +1548,7 @@
 		</elements:Layers>
 	</elements:Window>
 	<elements:Window>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>Alu- oder Stahlfenster, Isolierverglasung</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -1567,7 +1567,7 @@
 		</elements:Layers>
 	</elements:Window>
 	<elements:Window>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>Alu- oder Stahlfenster, Waermeschutzverglasung, zweifach</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -1586,7 +1586,7 @@
 		</elements:Layers>
 	</elements:Window>
 	<elements:Window>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>Waermeschutzverglasung, dreifach</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -1605,7 +1605,7 @@
 		</elements:Layers>
 	</elements:Window>
 	<elements:Window>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>EnEv</elements:construction_type>
 		<elements:inner_convection>2.7</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -1895,7 +1895,7 @@
 		</elements:Layers>
 	</elements:Ceiling>
 	<elements:Ceiling>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>heavy</elements:construction_type>
 		<elements:inner_convection>1.7000000000000002</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -1918,7 +1918,7 @@
 		</elements:Layers>
 	</elements:Ceiling>
 	<elements:Ceiling>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>light</elements:construction_type>
 		<elements:inner_convection>1.7000000000000002</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -2217,7 +2217,7 @@
 		</elements:Layers>
 	</elements:Floor>
 	<elements:Floor>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>heavy</elements:construction_type>
 		<elements:inner_convection>1.7000000000000002</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
@@ -2240,7 +2240,7 @@
 		</elements:Layers>
 	</elements:Floor>
 	<elements:Floor>
-		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:building_age_group>1995 2030</elements:building_age_group>
 		<elements:construction_type>light</elements:construction_type>
 		<elements:inner_convection>1.7000000000000002</elements:inner_convection>
 		<elements:inner_radiation>5.0</elements:inner_radiation>
