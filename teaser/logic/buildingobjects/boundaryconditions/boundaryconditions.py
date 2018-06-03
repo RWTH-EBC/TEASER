@@ -98,7 +98,8 @@ class BoundaryConditions(UseConditions):
     ROOM CLIMATE
 
     set_temp_heat: float [K]
-        internal set temperature heating. This value is taken from DIN 18599-10.
+        internal set temperature heating. This value is taken from DIN
+        18599-10.
         AixLib: Used in simple Heater for set temperature
     set_temp_cool: float [K}
         internal set temperature cooling
@@ -131,6 +132,8 @@ class BoundaryConditions(UseConditions):
     heating_time : list [h]
         heating time [begin, end]. This value is taken from DIN 18599-10.
         AixLib: Used for night set-back for simple heater.
+    set_temp_heating_list: list [K]
+        list of set temperatures for one day
 
     INTERNAL GAINS
 
@@ -265,6 +268,11 @@ class BoundaryConditions(UseConditions):
         self.part_load_factor_ahu = 1.0
         self.cooling_time = [5, 18]
         self.heating_time = [5, 18]
+        self.set_temp_heating_list = [294.15, 294.15, 294.15, 294.15, 294.15,
+                                      294.15, 294.15, 294.15, 294.15, 294.15,
+                                      294.15, 294.15, 294.15, 294.15, 294.15,
+                                      294.15, 294.15, 294.15, 294.15, 294.15,
+                                      294.15, 294.15, 294.15, 294.15]
 
         self._persons = 5.0
         self.activity_type_persons = 3
