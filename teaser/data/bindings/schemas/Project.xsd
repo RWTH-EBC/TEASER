@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://teaser.project" xmlns:usecond="http://teaser.boundary"
-           targetNamespace="http://teaser.project" attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.5">
-   <xs:import namespace="http://teaser.boundary"
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://teaser/0.6/project" xmlns:usecond="http://teaser/0.6/boundary"
+           targetNamespace="http://teaser/0.6/project"
+           attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.6">
+   <xs:import namespace="http://teaser/0.6/boundary"
               schemaLocation="../../TEASER/teaser/data/bindings/schemas/BoundaryConditions.xsd"/>
   <xs:element name="Project" type="ProjectType"/>
   <xs:complexType name="UseConditionType">
@@ -27,6 +28,22 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="OuterWallType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="name" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
+      <xs:element type="xs:string" name="construction_type" minOccurs="0"/>
+      <xs:element type="xs:int" name="year_of_retrofit" minOccurs="0"/>
+      <xs:element type="xs:float" name="area" minOccurs="0"/>
+      <xs:element type="xs:float" name="tilt" minOccurs="0"/>
+      <xs:element type="xs:float" name="orientation" minOccurs="0"/>
+      <xs:element type="xs:float" name="inner_convection" minOccurs="0"/>
+      <xs:element type="xs:float" name="inner_radiation" minOccurs="0"/>
+      <xs:element type="xs:float" name="outer_convection" minOccurs="0"/>
+      <xs:element type="xs:float" name="outer_radiation" minOccurs="0"/>
+      <xs:element type="LayerType" name="Layer" maxOccurs="unbounded" minOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+    <xs:complexType name="DoorType">
     <xs:sequence>
       <xs:element type="xs:string" name="name" minOccurs="0"/>
       <xs:element type="xs:int" name="year_of_construction" minOccurs="0"/>
@@ -144,6 +161,7 @@
 	 <xs:element type="xs:float" name="typical_width" minOccurs="0"/>
       <xs:element type="UseConditionType" name="UseCondition" minOccurs="0"/>
       <xs:element type="OuterWallType" name="OuterWall" minOccurs="0" maxOccurs = "unbounded"/>
+      <xs:element type="DoorType" name="Door" minOccurs="0" maxOccurs = "unbounded"/>
       <xs:element type="RooftopType" name="Rooftop" minOccurs="0" maxOccurs = "unbounded"/>
       <xs:element type="GroundFloorType" name="GroundFloor" minOccurs="0" maxOccurs = "unbounded"/>
       <xs:element type="InnerWallType" name="InnerWall" minOccurs="0" maxOccurs = "unbounded"/>

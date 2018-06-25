@@ -22,13 +22,14 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 class Office(NonResidential):
     """Archetype Office Building according to BMVBS
 
-    Subclass from NonResidential archetpye class to represent office buildings.
+    Subclass from NonResidential archetype class to represent office buildings.
 
     The office module contains a multi zone building according to BMVBS (see
     :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`).
     This German office building contains 6 usage zones (zones with similar
     thermal behaviour). Each zone has 4 outer walls, 4 windows, a roof and a
-    ground floor. Depending on zone usage (typical length and wicth) an interior
+    ground floor. Depending on zone usage (typical length and width) an
+    interior
     wall area is assigned to. It make number_of_floors and height_of_floors
     mandatory parameters. Additional information can be passed
     to the archetype (e.g. floor layout and window layout).
@@ -264,6 +265,7 @@ class Office(NonResidential):
         according to TEASER requirements.
         """
         # help area for the correct building area setting while using typeBldgs
+        self.thermal_zones = None
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
         # create zones with their corresponding area, name and usage

@@ -6,6 +6,7 @@ classes
 """
 
 import os
+import shutil
 
 
 def celsius_to_kelvin(value):
@@ -17,7 +18,7 @@ def celsius_to_kelvin(value):
 
 
 def create_path(path):
-    '''Create a folder.
+    """Create a folder.
 
     Creates a new folder.
 
@@ -25,7 +26,7 @@ def create_path(path):
     ----------
     path : str
 
-    '''
+    """
     path = os.path.normpath(path)
     # if directory exists change into that directory
     if(os.path.isdir(path)):
@@ -40,10 +41,10 @@ def create_path(path):
 
 
 def get_default_path():
-    '''Function to construct default path to OutputData folder
+    """Function to construct default path to OutputData folder
     This function constructs the default path to the OutputData folder
 
-    '''
+    """
 
     home_path = os.path.expanduser('~')
 
@@ -52,13 +53,14 @@ def get_default_path():
     # directory = os.path.dirname(__file__)
     # src = "teaser"
     # last_index = directory.rfind(src)
-    # teaser_default_path = os.path.join(directory[:last_index], "teaser", "OutputData")
+    # teaser_default_path = os.path.join(directory[:last_index], "teaser",
+    # "OutputData")
 
     return teaser_default_path
 
 
 def get_full_path(rel_path):
-    '''Helperfunction to construct pathes to files within teaser.
+    """Helperfunction to construct pathes to files within teaser.
 
     Parameters
     ----------
@@ -70,7 +72,7 @@ def get_full_path(rel_path):
     ----------
     full_path : str
 
-    '''
+    """
 
     directory = os.path.dirname(__file__)
     src = "teaser"
@@ -79,3 +81,30 @@ def get_full_path(rel_path):
     full_path = os.path.join(first_path, rel_path)
 
     return full_path
+
+
+def clear_directory(dir_path=None):
+    """Function to delete all files inside a directory.
+
+    Parameters
+    ----------
+    dir_path : str
+        Path of directory to be deleted. By default the teaser default
+        directory is cleared
+
+    """
+
+    if dir_path is None:
+        dir_path = get_default_path()
+    else:
+        pass
+
+    if os.path.exists(dir_path):
+        for file in os.listdir(path=dir_path):
+            file_path = os.path.join(dir_path, file)
+            if os.path.isfile(file_path):
+                os.remove(os.path.join(dir_path, file))
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+    else:
+        print('The directory path does not exist.')

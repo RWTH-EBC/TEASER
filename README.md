@@ -53,17 +53,17 @@ models for all libraries supporting the
 
 ## Version
 
-TEASER is a ongoing research project, the current version is 0.5.2, which is
+TEASER is a ongoing research project, the current version is 0.5.4, which is
 still a pre-release.
 
 ## How to use TEASER
 
 ### Dependencies
 
-TEASER uses Python 2.7 <= v >=3.3. Further using a Python distribution is
-recommended as they already contain (or easily support installation of) many
-Python packages (e.g. SciPy, NumPy, pip, PyQT, etc.) that are used in the
-TEASER code. Two examples of those distributions are:
+TEASER is tested against Python versions 2.7, 3.4, 3.5 and 3.6. Further
+using a Python distribution is recommended as they already contain (or easily
+support installation of) many Python packages (e.g. SciPy, NumPy, pip, PyQT,
+etc.) that are used in the TEASER code. Two examples of those distributions are:
 
 1. https://winpython.github.io/ WinPython comes along with a lot of Python
 packages (e.g. SciPy, NumPy, pip, PyQT, etc.)..
@@ -126,6 +126,8 @@ under the
 [MIT License](https://github.com/RWTH-EBC/TEASER/blob/master/License.md).
 
 ## Acknowledgements
+
+This  work  was  supported  by  the  Helmholtz  Association  under  the  Joint  Initiative  “Energy System 2050 – A Contribution of the Research Field Energy”.
 
 Parts of TEASER have been developed within public funded projects
 and with financial support by BMWi (German Federal Ministry for Economic
