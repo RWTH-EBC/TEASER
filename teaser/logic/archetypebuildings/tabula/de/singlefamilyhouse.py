@@ -318,7 +318,7 @@ class SingleFamilyHouse(Residential):
         With given values, this function generates an archetype building for
         Tabula Single Family House.
         """
-
+        self.thermal_zones = None
         self._check_year_of_construction()
         # help area for the correct building area setting while using typeBldgs
         type_bldg_area = self.net_leased_area
