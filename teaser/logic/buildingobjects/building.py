@@ -518,10 +518,12 @@ class Building(object):
             Default: EPS035
         """
 
+        #  Set self.sum_heat_load to zero to prevent summing up of old and new
+        #  design heat load calculation values (see #518)
+        self.sum_heat_load = 0
+
         if year_of_retrofit is not None:
             self.year_of_retrofit = year_of_retrofit
-        else:
-            pass
 
         for zone in self.thermal_zones:
             zone.retrofit_zone(type_of_retrofit, window_type, material)

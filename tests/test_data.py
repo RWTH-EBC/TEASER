@@ -2393,6 +2393,7 @@ class Test_teaser(object):
         prj.merge_windows_calc
         prj.used_library_calc
         prj.name = 123
+        assert prj.name == "P123"
 
     def test_warnings_prj(self):
         """Tests misc parts in project.py"""
