@@ -287,7 +287,7 @@ class Test_teaser(object):
             if zone.name == "Meeting":
                 assert zone.area == 100
             if zone.name == "Storage":
-                assert zone.area == 700
+                assert round(zone.area) == 700
             if zone.name == "Office":
                 assert zone.area == 550
             if zone.name == "Restroom":
@@ -359,8 +359,8 @@ class Test_teaser(object):
 
         assert round(test_institute8.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute8.get_outer_wall_area(-1), 0) == 958
-        assert round(test_institute8.get_outer_wall_area(0), 0) == 437
-        assert round(test_institute8.get_outer_wall_area(180), 0) == 437
+        assert round(test_institute8.get_outer_wall_area(0), 0) == 742
+        assert round(test_institute8.get_outer_wall_area(180), 0) == 742
         assert round(test_institute8.get_outer_wall_area(90), 0) == 77
         assert round(test_institute8.get_outer_wall_area(270), 0) == 77
         assert round(test_institute8.get_window_area(0), 0) == 158
@@ -399,7 +399,7 @@ class Test_teaser(object):
             if zone.name == "Meeting":
                 assert zone.area == 100
             if zone.name == "Storage":
-                assert zone.area == 100
+                assert zone.area == 1000
             if zone.name == "Office":
                 assert zone.area == 400
             if zone.name == "Restroom":
