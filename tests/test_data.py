@@ -303,10 +303,10 @@ class Test_teaser(object):
 
         assert round(test_institute4.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute4.get_outer_wall_area(-1), 0) == 958
-        assert round(test_institute4.get_outer_wall_area(0), 0) == 437
-        assert round(test_institute4.get_outer_wall_area(180), 0) == 437
-        assert round(test_institute4.get_outer_wall_area(90), 0) == 77
-        assert round(test_institute4.get_outer_wall_area(270), 0) == 77
+        assert round(test_institute4.get_outer_wall_area(0), 0) == 742
+        assert round(test_institute4.get_outer_wall_area(180), 0) == 742
+        assert round(test_institute4.get_outer_wall_area(90), 0) == 131
+        assert round(test_institute4.get_outer_wall_area(270), 0) == 131
         assert round(test_institute4.get_window_area(0), 0) == 158
         assert round(test_institute4.get_window_area(180), 0) == 158
         assert round(test_institute4.get_window_area(90), 0) == 28
@@ -361,8 +361,8 @@ class Test_teaser(object):
         assert round(test_institute8.get_outer_wall_area(-1), 0) == 958
         assert round(test_institute8.get_outer_wall_area(0), 0) == 742
         assert round(test_institute8.get_outer_wall_area(180), 0) == 742
-        assert round(test_institute8.get_outer_wall_area(90), 0) == 77
-        assert round(test_institute8.get_outer_wall_area(270), 0) == 77
+        assert round(test_institute8.get_outer_wall_area(90), 0) == 131
+        assert round(test_institute8.get_outer_wall_area(270), 0) == 131
         assert round(test_institute8.get_window_area(0), 0) == 158
         assert round(test_institute8.get_window_area(180), 0) == 158
         assert round(test_institute8.get_window_area(90), 0) == 28
@@ -415,8 +415,8 @@ class Test_teaser(object):
 
         assert round(test_institute.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute.get_outer_wall_area(-1), 0) == 958
-        assert round(test_institute.get_outer_wall_area(0), 0) == 437
-        assert round(test_institute.get_outer_wall_area(180), 0) == 437
+        assert round(test_institute.get_outer_wall_area(0), 0) == 836
+        assert round(test_institute.get_outer_wall_area(180), 0) == 836
         assert round(test_institute.get_outer_wall_area(90), 0) == 77
         assert round(test_institute.get_outer_wall_area(270), 0) == 77
         assert round(test_institute.get_window_area(0), 0) == 158
