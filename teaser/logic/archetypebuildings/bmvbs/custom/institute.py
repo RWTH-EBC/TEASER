@@ -9,22 +9,23 @@ class Institute(Office):
     """Type Institute Building
 
     The institute module contains a multi zone building which is based on an
-    office building with an additional laboratory zone. The area of the
-    laboratory zone is based on the data from the Forschungszentrum Juelich
-    :cite:`Abschlussbericht`. According to the dataset from Juelich,
+    office building with an additional laboratory zone. The zonal
+    distribution is based on investigations of the Forschungszentrum Juelich
+    :cite:`Lauster.2018`. According to the dataset from Juelich,
     the typebuilding institute is based on the buildingsclass of BWZK with
-    the number 2200 which represents all institute buildings which are not
-    institute type 4 or institute type 8
-    :cite:`Bauministerkonferenz.Dezember2010`. Laboratory zones are
-    verntialed using a central AHU system with humidification and
-    de-humidification.
+    the number 2000 and all subsets, which represents all institute buildings
+    which are not institute type 4 (2230, 2240 and 2250) or institute type 8 (
+    2280)
+    :cite:`Bauministerkonferenz.Dezember2010`. The estimation of exterior
+    wall surfaces follows the approach for office buildings, but with adapted
+    parameters :cite:`Lauster.2018`.
 
     In detail the net leased area is divided into the following thermal zone
     areas:
 
-    #. Office (40% of net leased area)
-    #. Floor (25% of net leased area)
-    #. Storage (10% of net leased area)
+    #. Office (16% of net leased area)
+    #. Floor (19% of net leased area)
+    #. Storage (40% of net leased area)
     #. Meeting (4% of net leased area)
     #. Restroom (4% of net leased area)
     #. ICT (2% of net leased area)

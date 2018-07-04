@@ -287,15 +287,15 @@ class Test_teaser(object):
             if zone.name == "Meeting":
                 assert zone.area == 100
             if zone.name == "Storage":
-                assert zone.area == 250
+                assert zone.area == 700
             if zone.name == "Office":
-                assert zone.area == 937.5
+                assert zone.area == 550
             if zone.name == "Restroom":
                 assert zone.area == 100
             if zone.name == "ICT":
                 assert zone.area == 50
             if zone.name == "Floor":
-                assert zone.area == 562.5
+                assert zone.area == 500
             if zone.name == "Laboratory":
                 assert zone.area == 500
 
@@ -343,17 +343,17 @@ class Test_teaser(object):
             if zone.name == "Meeting":
                 assert zone.area == 100
             if zone.name == "Storage":
-                assert zone.area == 50
+                assert zone.area == 750
             if zone.name == "Office":
-                assert zone.area == 250
+                assert zone.area == 100
             if zone.name == "Restroom":
                 assert zone.area == 100
             if zone.name == "ICT":
                 assert zone.area == 50
             if zone.name == "Floor":
-                assert zone.area == 450
+                assert zone.area == 150
             if zone.name == "Laboratory":
-                assert zone.area == 1500
+                assert zone.area == 1250
 
         # facade specific parameters
 
@@ -399,15 +399,15 @@ class Test_teaser(object):
             if zone.name == "Meeting":
                 assert zone.area == 100
             if zone.name == "Storage":
-                assert zone.area == 250
+                assert zone.area == 100
             if zone.name == "Office":
-                assert zone.area == 1000
+                assert zone.area == 400
             if zone.name == "Restroom":
                 assert zone.area == 100
             if zone.name == "ICT":
                 assert zone.area == 50
             if zone.name == "Floor":
-                assert zone.area == 625
+                assert zone.area == 475
             if zone.name == "Laboratory":
                 assert zone.area == 375
 
