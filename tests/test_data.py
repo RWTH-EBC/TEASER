@@ -417,8 +417,8 @@ class Test_teaser(object):
         assert round(test_institute.get_outer_wall_area(-1), 0) == 958
         assert round(test_institute.get_outer_wall_area(0), 0) == 836
         assert round(test_institute.get_outer_wall_area(180), 0) == 836
-        assert round(test_institute.get_outer_wall_area(90), 0) == 77
-        assert round(test_institute.get_outer_wall_area(270), 0) == 77
+        assert round(test_institute.get_outer_wall_area(90), 0) == 147
+        assert round(test_institute.get_outer_wall_area(270), 0) == 147
         assert round(test_institute.get_window_area(0), 0) == 158
         assert round(test_institute.get_window_area(180), 0) == 158
         assert round(test_institute.get_window_area(90), 0) == 28

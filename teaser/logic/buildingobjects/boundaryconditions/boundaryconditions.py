@@ -14,8 +14,13 @@ class BoundaryConditions(UseConditions):
     """Extended Use Conditions from DIN 18599 and SIA2024
 
     Class that contains the boundary conditions of use for non-residential
-    buildings defined in DIN V 18599-10. Profiles for internal gains (
-    persons, lighting, machines) are taken from SIA2024. In addition some
+    buildings defined in DIN V 18599-10 (
+    :cite:`DeutschesInstitutfurNormung.2016`) and
+    VDI 2078 (:cite:`VereinDeutscherIngenieure.2015c`). Profiles for internal
+    gains (
+    persons, lighting, machines) are taken from SIA2024 (
+    :cite:`SwissSocietyofEngineersandArchitects.March2006`). In addition
+    some
     TEASER specific use conditions have been attached to this class.
 
     The docstring also contains how the use conditions is used.
@@ -92,7 +97,8 @@ class BoundaryConditions(UseConditions):
         Currently not used
     ratio_conv_rad_lighting : float
         describes the ratio between convective and radiative heat transfer
-        of the lighting. It is not obvious where this value origins from.
+        of the lighting. Default values are derived from
+        :cite:`DiLaura.2011`.
         AixLib: Used in Zone record for internal gains, lighting
 
     ROOM CLIMATE
@@ -148,7 +154,8 @@ class BoundaryConditions(UseConditions):
         dependent on zone temperature
     ratio_conv_rad_persons : float
         describes the ratio between convective and radiative heat transfer
-        of the persons. This value is probably from VDI 2078.
+        of the persons. Default values are derived from
+        :cite:`VereinDeutscherIngenieure.2015c`.
         AixLib: Used in Zone record for internal gains
         Annex: Used for internal gains
     profile_persons : list
@@ -169,7 +176,8 @@ class BoundaryConditions(UseConditions):
         Annex: Used for internal gains
     ratio_conv_rad_machines : float
         describes the ratio between convective and radiative heat transfer
-        of the machines. This value is probably from VDI 2078.
+        of the machines. Default values are derived from
+        :cite:`Davies.2004`.
         AixLib: Used in Zone record for internal gains
         Annex: Not used, all machines are convective (see Annex examples)
     profile_machines : list
@@ -184,8 +192,8 @@ class BoundaryConditions(UseConditions):
         Annex: Not used (see Annex examples)
     profile_lighting : [float]
         Relative presence of lighting 0-1 (e.g. 0.5 means that 50% of the total
-        lighting power are currently used). Typically given for 24h. It is not
-        obvious where this value origins from.
+        lighting power are currently used). Typically given for 24h. This is
+        aligned to the user profile.
         AixLib: Used for internal gains profile on top-level
         Annex: Not used (see Annex examples)
 
@@ -252,7 +260,7 @@ class BoundaryConditions(UseConditions):
         self.rel_absence = 0.3
         self.room_index = 0.9
         self.part_load_factor_lighting = 0.7
-        self.ratio_conv_rad_lighting = 0.4  # 0.4 according to source
+        self.ratio_conv_rad_lighting = 0.4
 
         self._set_temp_heat = 294.15
         self._set_temp_cool = 297.15
