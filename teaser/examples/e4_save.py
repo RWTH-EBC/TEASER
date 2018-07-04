@@ -18,7 +18,7 @@ def example_save():
 
     prj = e1.example_generate_archetype()
 
-    # First option is to use TEASERs own XML format to save all relevenat
+    # First option is to use TEASERs own XML format to save all relevant
     # data into a more or less human readable format. The corresponding
     # function is called Project().save_project() you can specify a file name
     #  and a save path. If both are non (as in this case) it will use the

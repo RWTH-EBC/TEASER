@@ -19,10 +19,10 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 class SingleFamilyDwelling(Residential):
     """Archetype Residential Building according
 
-    Subclass from Residential archetpye class to represent
+    Subclass from Residential archetype class to represent
     SingleFamilyDwelling according to IWU :cite:`KurzverfahrenIWU`.
 
-    The SingleFamilyDwelling module contains a singlezone building. It has 4
+    The SingleFamilyDwelling module contains a single zone building. It has 4
     outer walls, 4 windows, a flat roof and a ground floor. Depending on (
     typical length and width) the interior wall areas are assigned. It makes
     number_of_floors and height_of_floors mandatory parameters.
@@ -302,6 +302,7 @@ class SingleFamilyDwelling(Residential):
         single family dwellings according to TEASER requirements
         """
         # help area for the correct building area setting while using typeBldgs
+        self.thermal_zones = None
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
 
@@ -349,6 +350,9 @@ class SingleFamilyDwelling(Residential):
                                          data_class=self.parent.data)
 
             zone.use_conditions = use_cond
+            zone.use_conditions.with_ahu = False
+            zone.use_conditions.persons *= zone.area * 0.01
+            zone.use_conditions.machines *= zone.area * 0.01
 
         for key, value in self.outer_wall_names.items():
             # North and South

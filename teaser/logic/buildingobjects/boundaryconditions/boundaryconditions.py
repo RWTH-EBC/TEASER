@@ -15,7 +15,7 @@ class BoundaryConditions(UseConditions):
 
     Class that contains the boundary conditions of use for non-residential
     buildings defined in DIN V 18599-10. Profiles for internal gains (
-    persons, lighting, machiens) are taken from SIA2024. In addition some
+    persons, lighting, machines) are taken from SIA2024. In addition some
     TEASER specific use conditions have been attached to this class.
 
     The docstring also contains how the use conditions is used.

@@ -3,6 +3,7 @@ python:
 - 2.7
 - 3.4
 - 3.5
+- 3.6
 install:
   - pip install --upgrade pip setuptools wheel
   - pip install --only-binary=numpy,scipy numpy scipy
@@ -10,7 +11,8 @@ install:
   - pip install -e .
   - pip install pytest-cov
   - pip install coveralls
-  - pip install flake8
+  - pip install PyGithub
+  - pip install flake8==3.4.1
 
 before_script:
   - flake8 --count --ignore W503,F401 --exclude teaser/data/bindings,doc,tests --max-line-length=120

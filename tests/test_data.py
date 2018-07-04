@@ -598,8 +598,25 @@ class Test_teaser(object):
 
     def test_retrofit_all_buildings(self):
         """test of retrofit_all_buildings, no calculation verification"""
-
-        prj.retrofit_all_buildings(2015)
+        prj.add_residential(
+            method='iwu',
+            usage='single_family_dwelling',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219)
+        prj.add_residential(
+            method='tabula_de',
+            usage='single_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219)
+        prj.retrofit_all_buildings(
+            year_of_retrofit=2015,
+            type_of_retrofit='retrofit')
 
     def test_export_aixlib(self):
         """test of export_aixlib, no calculation verification"""
@@ -785,7 +802,7 @@ class Test_teaser(object):
     def test_type_bldg_office(self):
         """test of type_bldg_office, no calculation verification
         """
-
+        prj.set_default(load_data=True)
         prj.type_bldg_office(name="TestBuilding",
                              year_of_construction=1988,
                              number_of_floors=7,
@@ -2290,40 +2307,40 @@ class Test_teaser(object):
     def test_insulate_wall(self):
         """test of insulate_wall"""
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].insulate_wall("EPS035", 0.04)
-        assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.806838
+        therm_zone.outer_walls[0].insulate_wall("EPS_040_15", 0.04)
+        assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.924088
 
     def test_retrofit_wall(self):
         """test of retrofit_wall"""
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(2016, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(2016, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.4
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(2010, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(2010, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.4
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(2005, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(2005, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(1998, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(1998, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(1990, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(1990, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(1980, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(1980, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
 
     def test_calc_equivalent_res_win(self):
@@ -2376,6 +2393,7 @@ class Test_teaser(object):
         prj.merge_windows_calc
         prj.used_library_calc
         prj.name = 123
+        assert prj.name == "P123"
 
     def test_warnings_prj(self):
         """Tests misc parts in project.py"""
@@ -2414,7 +2432,7 @@ class Test_teaser(object):
 
         prj.set_default(load_data="Test")
 
-    def test_v4_bindings(self):
+    def test_v5_bindings(self):
         """
         Tests the old v4 project bindings
         """
@@ -2423,7 +2441,33 @@ class Test_teaser(object):
             os.path.join(
                 os.path.dirname(__file__),
                 'testfiles',
+                'teaser_v5.teaserXML'))
+
+    def test_v4_bindings(self):
+        """
+        Tests the old v4 project bindings
+        """
+        prj.set_default(load_data=True)
+        prj.load_project(
+            os.path.join(
+                os.path.dirname(__file__),
+                'testfiles',
                 'teaser_v4.teaserXML'))
+        prj.data.path_tb = os.path.join(
+            os.path.dirname(__file__),
+            'testfiles',
+            'TypeBuildingElements_v4.xml')
+        prj.data.path_mat = os.path.join(
+            os.path.dirname(__file__),
+            'testfiles',
+            'MaterialTemplates_v4.xml')
+        prj.data.path_uc = os.path.join(
+            os.path.dirname(__file__),
+            'testfiles',
+            'UseConditions_v4.xml')
+        prj.data.load_tb_binding()
+        prj.data.load_uc_binding()
+        prj.data.load_mat_binding()
 
     def test_v39_bindings(self):
         """
@@ -2460,8 +2504,7 @@ class Test_teaser(object):
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
         tz.infiltration_rate = 0.5
 
-        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-            import BoundaryConditions
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions import BoundaryConditions
 
         tz.use_conditions = BoundaryConditions(parent=tz)
         tz.use_conditions.load_use_conditions("Living", prj.data)
@@ -3059,3 +3102,47 @@ class Test_teaser(object):
         exmain(number_of_elements=2)
         exmain(number_of_elements=3)
         exmain(number_of_elements=4)
+
+    def test_modelica_export_version(self):
+
+        try:
+            from github import Github
+        except ImportError:
+            return 0
+
+        from teaser.logic.buildingobjects.calculation.ibpsa import IBPSA
+        from teaser.logic.archetypebuildings.bmvbs.office import Office
+
+        prj.set_default()
+        test_office = Office(parent=prj,
+                             name="TestBuilding",
+                             year_of_construction=1988,
+                             number_of_floors=3,
+                             height_of_floors=3,
+                             net_leased_area=2500)
+
+        ibpsa = IBPSA(test_office)
+
+        try:
+            token = os.environ['GH_Token']
+        except:
+            token = None
+        if token:
+            git = Github(login_or_token=token)
+        else:
+            git = Github()
+
+        aixlib = git.search_repositories('AixLib')[0].get_tags()[0].name
+        assert aixlib.replace('v', '') == ibpsa.version['AixLib']
+
+        buildings = git.search_repositories(
+            'modelica/Buildings')[0].get_tags()[0].name
+        assert buildings.replace('v', '') == ibpsa.version['Buildings']
+
+        buildingsys = git.search_repositories(
+            'UdK-VPT/BuildingSystems')[0].get_tags()[0].name
+        assert buildingsys.replace('v', '') == ibpsa.version[
+            'BuildingSystems']
+        ideas = git.search_repositories(
+            'open-ideas/ideas')[0].get_tags()[0].name
+        assert ideas.replace('v', '') == ibpsa.version['IDEAS']
