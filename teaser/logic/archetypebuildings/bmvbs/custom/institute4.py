@@ -19,7 +19,7 @@ class Institute4(Office):
     :cite:`Bauministerkonferenz.Dezember2010`. The estimation of exterior
     wall surfaces follows the approach for office buildings, but with adapted
     parameters :cite:`Lauster.2018`. This building type is by default
-    equipped with an air handling unit.
+    equipped with an air handling unit without humidification.
 
     In detail the net leased area is divided into the following thermal zone
     areas:
@@ -165,3 +165,5 @@ class Institute4(Office):
             [0.02, "Data center"]
         self.est_exponent_wall = 0.6177
         self.est_factor_wall_area = 13.895
+
+        self.central_ahu.humidification = False

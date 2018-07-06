@@ -41,7 +41,8 @@ class ThermalZone(object):
     volume : float [m3]
         Thermal zone volume.
     infiltration_rate : float [1/h]
-        Infiltration rate of zone.
+        Infiltration rate of zone. Default value aligned to
+        :cite:`DeutschesInstitutfurNormung.2007`
     outer_walls : list
         List of OuterWall instances.
     doors : list
@@ -96,7 +97,7 @@ class ThermalZone(object):
         self.name = None
         self._area = None
         self._volume = None
-        self._infiltration_rate = 0.5
+        self._infiltration_rate = 0.4
         self._outer_walls = []
         self._doors = []
         self._rooftops = []

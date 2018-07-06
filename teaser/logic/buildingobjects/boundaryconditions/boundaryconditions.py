@@ -224,12 +224,15 @@ class BoundaryConditions(UseConditions):
         AixLib: Used on Zone level for ventilation.
     max_summer_ach : list
         Additional infiltration rate in the summer with
-        [infiltration_rate [1/h], Tmin [K], Tmax [K]]
+        [infiltration_rate [1/h], Tmin [K], Tmax [K]]. Default values are
+        aligned to :cite:`DINV1859910`.
         AixLib: Used on Zone level for ventilation.
     winter_reduction : list
         Reduction factor of userACH for cold weather with
         [infiltration_rate [1/h], Tmin [K], Tmax [K]]
         AixLib: Used on Zone level for ventilation.
+        Default values are
+        aligned to :cite:`DINV1859910`.
     """
 
     def __init__(self, parent=None):
@@ -268,7 +271,7 @@ class BoundaryConditions(UseConditions):
         self._min_temp_heat = 20.0
         self._max_temp_cool = 26.0
         self._rel_humidity = 45
-        self._min_air_exchange = 0.5
+        self._min_air_exchange = 0.4
         self.rel_absence_ahu = 0.3
         self.part_load_factor_ahu = 1.0
         self.cooling_time = [5, 18]
@@ -299,7 +302,7 @@ class BoundaryConditions(UseConditions):
         self.max_user_ach = 1.0
         self.max_overheating_ach = [3.0, 2.0]
         self.max_summer_ach = [1.0, 273.15 + 10, 273.15 + 17]
-        self.winter_reduction = [0.2, 273.15, 273.15 + 10]
+        self.winter_reduction = [0.5, 273.15, 273.15 + 10]
 
     def load_use_conditions(self,
                             zone_usage,
