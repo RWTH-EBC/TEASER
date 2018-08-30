@@ -10,7 +10,10 @@ This module contains function to load material classes
 def load_material(material, mat_name, data_class):
     """Material loader.
 
-    Loads Material specified in the XML.
+    Loads Material specified in the XML. Sources are
+    :cite:`DeutschesInstitutfurNormung.Juli2000`,
+    DeutschesInstitutfurNormung.Februar2013, :cite:`Schramek.2009` and
+    :cite:`VereinDeutscherIngenieure.2015c`.
 
     Parameters
     ----------
