@@ -9,6 +9,7 @@ from teaser.project import Project
 import math
 import os
 import helptest
+import warnings as warnings
 
 prj = Project(True)
 
@@ -3131,18 +3132,30 @@ class Test_teaser(object):
             git = Github(login_or_token=token)
         else:
             git = Github()
+        try:
+            aixlib = git.search_repositories('AixLib')[0].get_tags()[0].name
+            assert aixlib.replace('v', '') == ibpsa.version['AixLib']
+        except IndexError:
+            warnings.warn('There was an index error for AixLib', UserWarning)
 
-        aixlib = git.search_repositories('AixLib')[0].get_tags()[0].name
-        assert aixlib.replace('v', '') == ibpsa.version['AixLib']
+        try:
+            buildings = git.search_repositories(
+                'modelica/Buildings')[0].get_tags()[0].name
+            assert buildings.replace('v', '') == ibpsa.version['Buildings']
+        except IndexError:
+            warnings.warn('There was an index error for Buildings', UserWarning)
 
-        buildings = git.search_repositories(
-            'modelica/Buildings')[0].get_tags()[0].name
-        assert buildings.replace('v', '') == ibpsa.version['Buildings']
-
-        buildingsys = git.search_repositories(
-            'UdK-VPT/BuildingSystems')[0].get_tags()[0].name
-        assert buildingsys.replace('v', '') == ibpsa.version[
-            'BuildingSystems']
-        ideas = git.search_repositories(
-            'open-ideas/ideas')[0].get_tags()[0].name
-        assert ideas.replace('v', '') == ibpsa.version['IDEAS']
+        try:
+            buildingsys = git.search_repositories(
+                'UdK-VPT/BuildingSystems')[0].get_tags()[0].name
+            assert buildingsys.replace('v', '') == ibpsa.version[
+                'BuildingSystems']
+        except IndexError:
+            warnings.warn('There was an index error for BuildingSys',
+                          UserWarning)
+        try:
+            ideas = git.search_repositories(
+                'open-ideas/ideas')[0].get_tags()[0].name
+            assert ideas.replace('v', '') == ibpsa.version['IDEAS']
+        except IndexError:
+            warnings.warn('There was an index error for IDEAS', UserWarning)
