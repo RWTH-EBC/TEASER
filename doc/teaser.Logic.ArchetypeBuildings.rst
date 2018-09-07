@@ -9,6 +9,7 @@ nonresidential buildings:
 
   teaser.Logic.ArchetypeBuildings.bmvbs
   teaser.Logic.ArchetypeBuildings.urbanrenet
+  teaser.Logic.ArchetypeBuildings.tabula
 
 
 
