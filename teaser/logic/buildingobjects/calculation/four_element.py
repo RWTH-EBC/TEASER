@@ -712,12 +712,12 @@ class FourElement(object):
 
                 c1 = ((c1x + element_list[
                     wall_count + 1].c1) ** 2 + omega ** 2 *
-                      (r1x + element_list[wall_count + 1].r1) ** 2 * c1x ** 2 *
-                      element_list[wall_count + 1].c1 ** 2) / \
-                     (c1x + element_list[wall_count + 1].c1 + omega ** 2 *
-                      (r1x ** 2 * c1x + element_list[wall_count + 1].r1 **
-                       2 * element_list[wall_count + 1].c1) * c1x *
-                      element_list[wall_count + 1].c1)
+                    (r1x + element_list[wall_count + 1].r1) ** 2 * c1x ** 2 *
+                    element_list[wall_count + 1].c1 ** 2) / \
+                    (c1x + element_list[wall_count + 1].c1 + omega ** 2 *
+                     (r1x ** 2 * c1x + element_list[wall_count + 1].r1 **
+                      2 * element_list[wall_count + 1].c1) * c1x *
+                     element_list[wall_count + 1].c1)
         return r1, c1
 
     def _sum_outer_wall_elements(self):
@@ -781,18 +781,18 @@ class FourElement(object):
                                      self.thermal_zone.outer_walls)))
 
         self.ir_emissivity_outer_ow = (
-                                          (sum(out_wall.layer[
-                                                   -1].material.ir_emissivity * out_wall.area
-                                               for
-                                               out_wall in
-                                               self.thermal_zone.outer_walls))) / self.area_ow
+            (sum(out_wall.layer[
+                -1].material.ir_emissivity * out_wall.area
+                for
+                out_wall in
+                self.thermal_zone.outer_walls))) / self.area_ow
 
         self.solar_absorp_ow = (
-                                   (sum(out_wall.layer[
-                                            -1].material.solar_absorp * out_wall.area
-                                        for
-                                        out_wall in
-                                        self.thermal_zone.outer_walls))) / self.area_ow
+            (sum(out_wall.layer[
+                -1].material.solar_absorp * out_wall.area
+                for
+                out_wall in
+                self.thermal_zone.outer_walls))) / self.area_ow
 
         self.alpha_conv_outer_ow = (
             1 / (self.r_conv_outer_ow * self.area_ow))
@@ -998,7 +998,7 @@ class FourElement(object):
         self.area_win = sum(win.area for win in self.thermal_zone.windows)
         self.ua_value_win = sum(
             win.ua_value for win in self.thermal_zone.windows)
-        self.u_value_win = self.ua_value_win/self.area_win
+        self.u_value_win = self.ua_value_win / self.area_win
 
         # values facing the inside of the thermal zone
 
@@ -1023,7 +1023,7 @@ class FourElement(object):
             1 / (self.r_comb_inner_win * self.area_win))
         self.ratio_conv_rad_inner_win = sum(win.a_conv * win.area for win in
                                             self.thermal_zone.windows) / \
-                                        self.area_win
+            self.area_win
 
         # values facing the ambient
 
@@ -1094,7 +1094,7 @@ class FourElement(object):
                                            self.thermal_zone.windows))
                 if len(self.thermal_zone.outer_walls) > 0:
                     conduction = (1 / sum((1 / element.r_conduc) for element in
-                                      outer_walls))
+                                  outer_walls))
 
                     self.r_rest_ow = (conduction - self.r1_ow)
 
@@ -1301,14 +1301,14 @@ class FourElement(object):
                                      self.area_gf * self.alpha_rad_inner_gf +
                                      self.area_rt * self.alpha_rad_inner_rt +
                                      self.area_iw * self.alpha_rad_inner_iw) \
-                                    / (self.area_ow + self.area_win +
-                                       self.area_iw + self.area_gf +
-                                       self.area_rt)
+            / (self.area_ow + self.area_win +
+               self.area_iw + self.area_gf +
+               self.area_rt)
         self.alpha_rad_outer_mean = (self.area_ow * self.alpha_rad_outer_ow +
                                      self.area_rt * self.alpha_rad_outer_rt +
                                      self.area_win * self.alpha_rad_outer_win) \
-                                    / (self.area_ow + self.area_rt +
-                                       self.area_win)
+            / (self.area_ow + self.area_rt +
+               self.area_win)
 
     def _calc_number_of_elements(self):
         """Calculates the number of facade elements with different tilt/orient

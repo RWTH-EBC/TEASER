@@ -9,6 +9,7 @@ from teaser.project import Project
 import math
 import os
 import helptest
+import warnings as warnings
 
 prj = Project(True)
 
@@ -19,7 +20,7 @@ class Test_teaser(object):
 
     def test_calc_vdi_room1(self):
         """Parameter Verification for rouvel room1"""
-        import teaser.examples.verification.verification_room1 as room1
+        import teaser.examples.verification.verification_VDI_6007_room1 as room1
 
         room1_prj = room1.parameter_room1()
         zone_attr = room1_prj.buildings[0].thermal_zones[0].model_attr
@@ -44,7 +45,7 @@ class Test_teaser(object):
 
     def test_calc_vdi_room3(self):
         """Parameter Verification for room 3"""
-        import teaser.examples.verification.verification_room3 as room3
+        import teaser.examples.verification.verification_VDI_6007_room3 as room3
 
         room3_prj = room3.parameter_room3()
         zone_attr = room3_prj.buildings[0].thermal_zones[0].model_attr
@@ -69,7 +70,7 @@ class Test_teaser(object):
 
     def test_calc_vdi_room8(self):
         """Parameter Verification for room 8"""
-        import teaser.examples.verification.verification_room8 as room8
+        import teaser.examples.verification.verification_VDI_6007_room8 as room8
 
         room8_prj = room8.parameter_room8()
         zone_attr = room8_prj.buildings[0].thermal_zones[0].model_attr
@@ -287,15 +288,15 @@ class Test_teaser(object):
             if zone.name == "Meeting":
                 assert zone.area == 100
             if zone.name == "Storage":
-                assert zone.area == 250
+                assert round(zone.area) == 700
             if zone.name == "Office":
-                assert zone.area == 937.5
+                assert zone.area == 550
             if zone.name == "Restroom":
                 assert zone.area == 100
             if zone.name == "ICT":
                 assert zone.area == 50
             if zone.name == "Floor":
-                assert zone.area == 562.5
+                assert zone.area == 500
             if zone.name == "Laboratory":
                 assert zone.area == 500
 
@@ -303,10 +304,10 @@ class Test_teaser(object):
 
         assert round(test_institute4.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute4.get_outer_wall_area(-1), 0) == 958
-        assert round(test_institute4.get_outer_wall_area(0), 0) == 437
-        assert round(test_institute4.get_outer_wall_area(180), 0) == 437
-        assert round(test_institute4.get_outer_wall_area(90), 0) == 77
-        assert round(test_institute4.get_outer_wall_area(270), 0) == 77
+        assert round(test_institute4.get_outer_wall_area(0), 0) == 742
+        assert round(test_institute4.get_outer_wall_area(180), 0) == 742
+        assert round(test_institute4.get_outer_wall_area(90), 0) == 131
+        assert round(test_institute4.get_outer_wall_area(270), 0) == 131
         assert round(test_institute4.get_window_area(0), 0) == 158
         assert round(test_institute4.get_window_area(180), 0) == 158
         assert round(test_institute4.get_window_area(90), 0) == 28
@@ -343,26 +344,26 @@ class Test_teaser(object):
             if zone.name == "Meeting":
                 assert zone.area == 100
             if zone.name == "Storage":
-                assert zone.area == 50
+                assert zone.area == 750
             if zone.name == "Office":
-                assert zone.area == 250
+                assert zone.area == 100
             if zone.name == "Restroom":
                 assert zone.area == 100
             if zone.name == "ICT":
                 assert zone.area == 50
             if zone.name == "Floor":
-                assert zone.area == 450
+                assert zone.area == 150
             if zone.name == "Laboratory":
-                assert zone.area == 1500
+                assert zone.area == 1250
 
         # facade specific parameters
 
         assert round(test_institute8.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute8.get_outer_wall_area(-1), 0) == 958
-        assert round(test_institute8.get_outer_wall_area(0), 0) == 437
-        assert round(test_institute8.get_outer_wall_area(180), 0) == 437
-        assert round(test_institute8.get_outer_wall_area(90), 0) == 77
-        assert round(test_institute8.get_outer_wall_area(270), 0) == 77
+        assert round(test_institute8.get_outer_wall_area(0), 0) == 742
+        assert round(test_institute8.get_outer_wall_area(180), 0) == 742
+        assert round(test_institute8.get_outer_wall_area(90), 0) == 131
+        assert round(test_institute8.get_outer_wall_area(270), 0) == 131
         assert round(test_institute8.get_window_area(0), 0) == 158
         assert round(test_institute8.get_window_area(180), 0) == 158
         assert round(test_institute8.get_window_area(90), 0) == 28
@@ -399,15 +400,15 @@ class Test_teaser(object):
             if zone.name == "Meeting":
                 assert zone.area == 100
             if zone.name == "Storage":
-                assert zone.area == 250
-            if zone.name == "Office":
                 assert zone.area == 1000
+            if zone.name == "Office":
+                assert zone.area == 400
             if zone.name == "Restroom":
                 assert zone.area == 100
             if zone.name == "ICT":
                 assert zone.area == 50
             if zone.name == "Floor":
-                assert zone.area == 625
+                assert zone.area == 475
             if zone.name == "Laboratory":
                 assert zone.area == 375
 
@@ -415,10 +416,10 @@ class Test_teaser(object):
 
         assert round(test_institute.get_outer_wall_area(-2), 0) == 958
         assert round(test_institute.get_outer_wall_area(-1), 0) == 958
-        assert round(test_institute.get_outer_wall_area(0), 0) == 437
-        assert round(test_institute.get_outer_wall_area(180), 0) == 437
-        assert round(test_institute.get_outer_wall_area(90), 0) == 77
-        assert round(test_institute.get_outer_wall_area(270), 0) == 77
+        assert round(test_institute.get_outer_wall_area(0), 0) == 836
+        assert round(test_institute.get_outer_wall_area(180), 0) == 836
+        assert round(test_institute.get_outer_wall_area(90), 0) == 147
+        assert round(test_institute.get_outer_wall_area(270), 0) == 147
         assert round(test_institute.get_window_area(0), 0) == 158
         assert round(test_institute.get_window_area(180), 0) == 158
         assert round(test_institute.get_window_area(90), 0) == 28
@@ -598,8 +599,25 @@ class Test_teaser(object):
 
     def test_retrofit_all_buildings(self):
         """test of retrofit_all_buildings, no calculation verification"""
-
-        prj.retrofit_all_buildings(2015)
+        prj.add_residential(
+            method='iwu',
+            usage='single_family_dwelling',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219)
+        prj.add_residential(
+            method='tabula_de',
+            usage='single_family_house',
+            name="ResidentialBuilding",
+            year_of_construction=1858,
+            number_of_floors=2,
+            height_of_floors=3.2,
+            net_leased_area=219)
+        prj.retrofit_all_buildings(
+            year_of_retrofit=2015,
+            type_of_retrofit='retrofit')
 
     def test_export_aixlib(self):
         """test of export_aixlib, no calculation verification"""
@@ -655,42 +673,66 @@ class Test_teaser(object):
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 1
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 2
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 3
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 3
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = True
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
-        prj.export_ibpsa()
+        prj.export_ibpsa(library='AixLib')
+        prj.export_ibpsa(library='Buildings')
+        prj.export_ibpsa(library='BuildingSystems')
+        prj.export_ibpsa(library='IDEAS')
         prj.number_of_elements_calc = 4
         prj.merge_windows_calc = False
         prj.used_library_calc = 'IBPSA'
@@ -761,7 +803,7 @@ class Test_teaser(object):
     def test_type_bldg_office(self):
         """test of type_bldg_office, no calculation verification
         """
-
+        prj.set_default(load_data=True)
         prj.type_bldg_office(name="TestBuilding",
                              year_of_construction=1988,
                              number_of_floors=7,
@@ -2266,40 +2308,40 @@ class Test_teaser(object):
     def test_insulate_wall(self):
         """test of insulate_wall"""
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].insulate_wall("EPS035", 0.04)
-        assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.806838
+        therm_zone.outer_walls[0].insulate_wall("EPS_040_15", 0.04)
+        assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.924088
 
     def test_retrofit_wall(self):
         """test of retrofit_wall"""
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(2016, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(2016, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.4
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(2010, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(2010, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 6) == 2.4
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(2005, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(2005, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(1998, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(1998, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(1990, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(1990, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
         prj.set_default()
         helptest.building_test2(prj)
         therm_zone = prj.buildings[-1].thermal_zones[-1]
-        therm_zone.outer_walls[0].retrofit_wall(1980, "EPS035")
+        therm_zone.outer_walls[0].retrofit_wall(1980, "EPS_040_15")
         assert round(therm_zone.outer_walls[0].ua_value, 2) == 4.13
 
     def test_calc_equivalent_res_win(self):
@@ -2352,6 +2394,7 @@ class Test_teaser(object):
         prj.merge_windows_calc
         prj.used_library_calc
         prj.name = 123
+        assert prj.name == "P123"
 
     def test_warnings_prj(self):
         """Tests misc parts in project.py"""
@@ -2390,7 +2433,7 @@ class Test_teaser(object):
 
         prj.set_default(load_data="Test")
 
-    def test_v4_bindings(self):
+    def test_v5_bindings(self):
         """
         Tests the old v4 project bindings
         """
@@ -2399,7 +2442,33 @@ class Test_teaser(object):
             os.path.join(
                 os.path.dirname(__file__),
                 'testfiles',
+                'teaser_v5.teaserXML'))
+
+    def test_v4_bindings(self):
+        """
+        Tests the old v4 project bindings
+        """
+        prj.set_default(load_data=True)
+        prj.load_project(
+            os.path.join(
+                os.path.dirname(__file__),
+                'testfiles',
                 'teaser_v4.teaserXML'))
+        prj.data.path_tb = os.path.join(
+            os.path.dirname(__file__),
+            'testfiles',
+            'TypeBuildingElements_v4.xml')
+        prj.data.path_mat = os.path.join(
+            os.path.dirname(__file__),
+            'testfiles',
+            'MaterialTemplates_v4.xml')
+        prj.data.path_uc = os.path.join(
+            os.path.dirname(__file__),
+            'testfiles',
+            'UseConditions_v4.xml')
+        prj.data.load_tb_binding()
+        prj.data.load_uc_binding()
+        prj.data.load_mat_binding()
 
     def test_v39_bindings(self):
         """
@@ -2436,8 +2505,7 @@ class Test_teaser(object):
         tz.volume = tz.area * bldg.number_of_floors * bldg.height_of_floors
         tz.infiltration_rate = 0.5
 
-        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions \
-            import BoundaryConditions
+        from teaser.logic.buildingobjects.boundaryconditions.boundaryconditions import BoundaryConditions
 
         tz.use_conditions = BoundaryConditions(parent=tz)
         tz.use_conditions.load_use_conditions("Living", prj.data)
@@ -2995,3 +3063,99 @@ class Test_teaser(object):
         prj.used_library_calc = 'IBPSA'
         prj.calc_all_buildings()
         prj.export_ibpsa()
+
+    def test_ashrae_140_600(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_600 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)
+
+    def test_ashrae_140_620(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_620 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)
+
+    def test_ashrae_140_900(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_900 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)
+
+    def test_ashrae_140_920(self):
+
+        from teaser.examples.verification.verification_ASHRAE_140_920 import\
+            main as exmain
+
+        exmain(number_of_elements=1)
+        exmain(number_of_elements=2)
+        exmain(number_of_elements=3)
+        exmain(number_of_elements=4)
+
+    def test_modelica_export_version(self):
+
+        try:
+            from github import Github
+        except ImportError:
+            return 0
+
+        from teaser.logic.buildingobjects.calculation.ibpsa import IBPSA
+        from teaser.logic.archetypebuildings.bmvbs.office import Office
+
+        prj.set_default()
+        test_office = Office(parent=prj,
+                             name="TestBuilding",
+                             year_of_construction=1988,
+                             number_of_floors=3,
+                             height_of_floors=3,
+                             net_leased_area=2500)
+
+        ibpsa = IBPSA(test_office)
+
+        try:
+            token = os.environ['GH_Token']
+        except:
+            token = None
+        if token:
+            git = Github(login_or_token=token)
+        else:
+            git = Github()
+        try:
+            aixlib = git.search_repositories('AixLib')[0].get_tags()[0].name
+            assert aixlib.replace('v', '') == ibpsa.version['AixLib']
+        except IndexError:
+            warnings.warn('There was an index error for AixLib', UserWarning)
+
+        try:
+            buildings = git.search_repositories(
+                'modelica/Buildings')[0].get_tags()[0].name
+            assert buildings.replace('v', '') == ibpsa.version['Buildings']
+        except IndexError:
+            warnings.warn('There was an index error for Buildings', UserWarning)
+
+        try:
+            buildingsys = git.search_repositories(
+                'UdK-VPT/BuildingSystems')[0].get_tags()[0].name
+            assert buildingsys.replace('v', '') == ibpsa.version[
+                'BuildingSystems']
+        except IndexError:
+            warnings.warn('There was an index error for BuildingSys',
+                          UserWarning)
+        try:
+            ideas = git.search_repositories(
+                'open-ideas/ideas')[0].get_tags()[0].name
+            assert ideas.replace('v', '') == ibpsa.version['IDEAS']
+        except IndexError:
+            warnings.warn('There was an index error for IDEAS', UserWarning)

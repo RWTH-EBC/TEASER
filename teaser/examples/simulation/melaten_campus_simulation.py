@@ -1,13 +1,13 @@
 # Created July 2015
 # TEASER 4 Development Team
 
-'''
+"""
 This script demonstrates a automated creation of a office typebuilding and its
 simulation with dymola and the AixLib controlled by the python package
 buildingspy
 
 General Requirements:
-- Buildingspy (pypi version not recommendend / use github version instead)
+- Buildingspy (pypi version not recommended / use github version instead)
 - Dymola (with dymola.exe set to your environment variable PATH)
 - AixLib (the actual master from the github repository)
 - installed version of TEASER (sure you have this, your using it, but if not
@@ -29,7 +29,7 @@ Links:
 Buildingspy 2.7: https://github.com/lbl-srg/BuildingsPy
 Buildingspy 3.0: https://github.com/MichaMans/BuildingsPy/tree/python3
 AixLib master: https://github.com/RWTH-EBC/AixLib
-'''
+"""
 
 import os
 import time
@@ -45,9 +45,10 @@ class BuildingInfo(object):
     """
     Light-weight class to hold building info
     """
+
     def __init__(self):
         """
-        Constructor for BuildinInfo
+        Constructor for BuildingInfo
         """
         self.year_of_construction = None
         self.usage_type = None
@@ -62,13 +63,13 @@ class BuildingInfo(object):
 def main():
 
     starttime = time.time()
-    #Adjust this path to your TEASER teaser Examples path or whatever you want
+    # Adjust this path to your TEASER teaser Examples path or whatever you want
     this_path = "D:/GIT/TEASER/teaser/Examples"
-    #path of the buildings xmls
+    # path of the buildings xmls
     input_path = os.path.join(this_path,
                               'ExampleInputFiles',
                               'MelatenXML')
-    #path where the export is stored
+    # path where the export is stored
     output_path = os.path.join(os.path.dirname(this_path),
                                'OutputData'
                                )
@@ -103,7 +104,7 @@ def main():
 
     li = []
     for bld in prj.buildings:
-        #this is necessary for the correct names in the simulation script
+        # this is necessary for the correct names in the simulation script
         name = "Project." + bld.name + "." + bld.name
         s = si.Simulator(name, "dymola", outputDir, packageDir)
         li.append(s)
@@ -111,10 +112,10 @@ def main():
     po = Pool(processes=3)
     po.map(simulateCase, li)
 
-### Timer
+# Timer
     endtime = time.time()
-    print('Simulation lasts: ', endtime-starttime, ' seconds or ',
-          (endtime-starttime)/60, ' minutes! or', (endtime-starttime)/(60*60))
+    print('Simulation lasts: ', endtime - starttime, ' seconds or ',
+          (endtime - starttime) / 60, ' minutes! or', (endtime - starttime) / (60 * 60))
 
 
 def read_XMLs(input_path):
@@ -252,11 +253,11 @@ def create_reference_project(info_list):
 
 
 def simulateCase(s):
-    ''' Set common parameters and run a simulation.
+    """ Set common parameters and run a simulation.
 
     :param s: A simulator object.
 
-    '''
+    """
     s.showGUI(show=False)
     s.setStopTime(3.1536e7)
     s.setSolver("Dassl")
@@ -264,6 +265,7 @@ def simulateCase(s):
     s.setNumberOfIntervals(8760)
     s.getParameters()
     s.simulate()
+
 
 # Main function
 if __name__ == '__main__':

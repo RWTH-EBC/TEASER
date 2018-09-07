@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://teaser.boundary"
-           targetNamespace="http://teaser.boundary" attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.4">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://teaser/0.6/boundary"
+           targetNamespace="http://teaser/0.6/boundary"
+           attributeFormDefault="unqualified" elementFormDefault="qualified" version="0.6">
   <xs:element name="UseConditions" type="UseConditionsType"/>
   <xs:complexType name="UsageOperationTimeType">
     <xs:sequence>

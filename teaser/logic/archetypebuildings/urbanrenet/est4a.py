@@ -60,7 +60,6 @@ class EST4a(EST1a):
                  neighbour_buildings=None,
                  construction_type=None,
                  number_of_apartments=None):
-
         """Constructor of EST4a
         """
 

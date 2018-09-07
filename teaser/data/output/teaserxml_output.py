@@ -7,14 +7,15 @@ This module contains function to save Projects in the proprietary
 TEASER file format .tXML
 """
 
-import teaser.data.bindings.v_0_5.project_bind as pb
-import teaser.data.bindings.v_0_4.boundaryconditions_bind as ucb
+import teaser.data.bindings.v_0_6.project_bind as pb
+import teaser.data.bindings.v_0_6.boundaryconditions_bind as ucb
 import inspect
 from teaser.logic.archetypebuildings.residential import Residential
 import pyxb
 
+
 def save_teaser_xml(path, project):
-    '''This function saves a project to a tXML
+    """This function saves a project to a tXML
 
     The function needs the Python Package PyXB.
 
@@ -24,7 +25,7 @@ def save_teaser_xml(path, project):
         complete path to the output file
     project: Project()
         Teaser instance of Project()
-    '''
+    """
 
     if path.endswith("teaserXML"):
         new_path = path
@@ -38,7 +39,7 @@ def save_teaser_xml(path, project):
         ucb.Namespace, 'usecond')
 
     teaser_out = pb.Project()
-    teaser_out.version = "0.5"
+    teaser_out.version = "0.6"
 
     for bldg in project.buildings:
 
@@ -81,18 +82,18 @@ def save_teaser_xml(path, project):
             pyxb_ahu.humidification = bldg.central_ahu.humidification
             pyxb_ahu.heat_recovery = bldg.central_ahu.heat_recovery
             pyxb_ahu.by_pass_dehumidification = \
-                                bldg.central_ahu.by_pass_dehumidification
+                bldg.central_ahu.by_pass_dehumidification
             pyxb_ahu.efficiency_recovery = bldg.central_ahu.efficiency_recovery
             pyxb_ahu.efficiency_recovery_false = \
-                                bldg.central_ahu.efficiency_recovery_false
+                bldg.central_ahu.efficiency_recovery_false
             pyxb_ahu.profile_min_relative_humidity = \
-                                bldg.central_ahu.profile_min_relative_humidity
+                bldg.central_ahu.profile_min_relative_humidity
             pyxb_ahu.profile_max_relative_humidity = \
-                                bldg.central_ahu.profile_max_relative_humidity
+                bldg.central_ahu.profile_max_relative_humidity
             pyxb_ahu.profile_v_flow = \
-                                bldg.central_ahu.profile_v_flow
+                bldg.central_ahu.profile_v_flow
             pyxb_ahu.profile_temperature = \
-                                bldg.central_ahu.profile_temperature
+                bldg.central_ahu.profile_temperature
             pyxb_bld.CentralAHU = pyxb_ahu
         else:
             pass
@@ -222,6 +223,15 @@ def save_teaser_xml(path, project):
 
                     pyxb_zone.OuterWall.append(pyxb_wall)
 
+                elif type(out_wall).__name__ == "Door":
+
+                    pyxb_wall = pb.DoorType()
+
+                    set_basic_data_pyxb(pyxb_wall, out_wall)
+                    set_layer_data_pyxb(pyxb_wall, out_wall)
+
+                    pyxb_zone.Door.append(pyxb_wall)
+
             for rt in zone.rooftops:
 
                 if type(rt).__name__ == "Rooftop":
@@ -320,20 +330,21 @@ def save_teaser_xml(path, project):
 
 
 def set_basic_data_pyxb(pyxb_class, element):
-    '''Helper function for save_teaser_xml to set the basic data
+    """Helper function for save_teaser_xml to set the basic data
 
     Parameters
     ----------
     pyxb_class : PyXBClass
-        pyxb class represantation of xml
+        pyxb class representation of xml
 
     element : TEASERClass
         teaser class representation of a building element
 
 
-    '''
+    """
     if type(element).__name__ == 'OuterWall' or \
-            type(element).__name__ == 'Rooftop':
+            type(element).__name__ == 'Rooftop' or \
+            type(element).__name__ == 'Door':
 
         pyxb_class.name = element.name
         pyxb_class.year_of_construction = element.year_of_construction
@@ -388,17 +399,17 @@ def set_basic_data_pyxb(pyxb_class, element):
 
 
 def set_layer_data_pyxb(pyxb_class, element):
-    '''Helper function for save_teaser_xml to set the layer data
+    """Helper function for save_teaser_xml to set the layer data
 
     Parameters
     ----------
     pyxb_class : PyXBClass
-        pyxb class represantation of xml
+        pyxb class representation of xml
 
     element : TEASERClass
         teaser class representation of a building element
 
-    '''
+    """
     for layer in element.layer:
 
         pyxb_layer = pb.LayerType()

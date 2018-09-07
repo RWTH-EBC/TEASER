@@ -20,10 +20,11 @@ class EST1a(Residential):
     """Archetype for Urban Fabric Type EST1a.
 
     Subclass from Residential for urban fabric type EST1a. Boundary values
-    for this archetype are taken from URBANRENET. The archetype calculation
+    for this archetype are taken from :cite:`Hegger.2014`. The archetype
+    calculation
     is adapted from :cite:`KurzverfahrenIWU`, with the change of using the
     facade area to volume ratio of the building. For further information see
-    Lauster BauSim.
+    :cite:`Lauster.2016`.
 
     Parameters
     ----------
@@ -112,7 +113,6 @@ class EST1a(Residential):
             with_ahu=False,
             neighbour_buildings=None,
             construction_type=None):
-
         """Constructor of EST1a
         """
 
@@ -134,9 +134,9 @@ class EST1a(Residential):
 
         # [area factor, usage type(has to be set)]
         self.zone_area_factors = {}
-        for value in range(1, self._number_of_apartments+1):
+        for value in range(1, self._number_of_apartments + 1):
             zone_name = "Apartment " + str(value)
-            zone = {zone_name: [1/self._number_of_apartments, "Living"]}
+            zone = {zone_name: [1 / self._number_of_apartments, "Living"]}
             self.zone_area_factors.update(zone)
 
         self.outer_wall_names = {"Exterior Facade North": [90.0, 0.0],
@@ -185,10 +185,14 @@ class EST1a(Residential):
             self.central_ahu.profile_temperature = (7 * [293.15] +
                                                     12 * [295.15] +
                                                     6 * [293.15])
+            #  according to :cite:`DeutschesInstitutfurNormung.2016`
             self.central_ahu.profile_min_relative_humidity = (25 * [0.45])
-            self.central_ahu.profile_max_relative_humidity = (25 * [0.55])
-            self.central_ahu.profile_v_flow = \
-                (7 * [0.0] + 12 * [1.0] + 6 * [0.0])
+            #  according to :cite:`DeutschesInstitutfurNormung.2016b`  and
+            # :cite:`DeutschesInstitutfurNormung.2016`
+            self.central_ahu.profile_max_relative_humidity = (25 * [0.65])
+            self.central_ahu.profile_v_flow = (
+                7 * [0.0] + 12 * [1.0] + 6 * [0.0])  # according to user  #
+            # profile in :cite:`DeutschesInstitutfurNormung.2016`
 
     def generate_archetype(self):
         """Generates a residential building.
@@ -198,6 +202,7 @@ class EST1a(Residential):
 
         """
         # help area for the correct building area setting while using typeBldgs
+        self.thermal_zones = None
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
 
@@ -230,12 +235,12 @@ class EST1a(Residential):
 
             if value[1] == 0 or value[1] == 180.0:
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                                            self.nr_of_orientation
+                    self.nr_of_orientation
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
                 self.outer_area[value[1]] = self._est_outer_wall_area / \
-                                            self.nr_of_orientation
+                    self.nr_of_orientation
 
             for zone in self.thermal_zones:
                 # create wall and set building elements
@@ -251,12 +256,12 @@ class EST1a(Residential):
             if value[1] == 0 or value[1] == 180:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                                             self.nr_of_orientation
+                    self.nr_of_orientation
 
             elif value[1] == 90 or value[1] == 270:
 
                 self.window_area[value[1]] = self._est_win_area / \
-                                             self.nr_of_orientation
+                    self.nr_of_orientation
 
             '''
             There is no real classification for windows, so this is a bit hard

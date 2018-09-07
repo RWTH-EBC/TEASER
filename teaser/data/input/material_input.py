@@ -1,5 +1,5 @@
-#Created April 2016
-#TEASER 4 Development Team
+# Created April 2016
+# TEASER 4 Development Team
 
 """material_input.py
 
@@ -10,7 +10,10 @@ This module contains function to load material classes
 def load_material(material, mat_name, data_class):
     """Material loader.
 
-    Loads Material specified in the XML.
+    Loads Material specified in the XML. Sources are
+    :cite:`DeutschesInstitutfurNormung.Juli2000`,
+    DeutschesInstitutfurNormung.Februar2013, :cite:`Schramek.2009` and
+    :cite:`VereinDeutscherIngenieure.2015c`.
 
     Parameters
     ----------
@@ -40,6 +43,12 @@ def load_material(material, mat_name, data_class):
             material.heat_capac = mat.heat_capac
             material.solar_absorp = mat.solar_absorp
             material.ir_emissivity = mat.ir_emissivity
+            if float(data_class.material_bind.version) >= 0.6:
+                try:
+                    material.thickness_default = mat.thickness_default
+                    material.thickness_list = mat.thickness_list
+                except AttributeError:
+                    pass
 
 
 def load_material_id(material, mat_id, data_class):
@@ -75,4 +84,9 @@ def load_material_id(material, mat_id, data_class):
             material.heat_capac = mat.heat_capac
             material.solar_absorp = mat.solar_absorp
             material.ir_emissivity = mat.ir_emissivity
-
+            if float(data_class.material_bind.version) >= 0.6:
+                try:
+                    material.thickness_default = mat.thickness_default
+                    material.thickness_list = mat.thickness_list
+                except AttributeError:
+                    pass

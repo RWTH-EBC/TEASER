@@ -1,8 +1,7 @@
 from setuptools import setup
-from sys import platform
 
 setup(name='teaser',
-      version='0.5.5',
+      version='0.6.0',
       description='Tool for Energy Analysis and Simulation for '
                   'Efficient Retrofit ',
       url='https://github.com/RWTH-EBC/TEASER',
@@ -47,13 +46,7 @@ setup(name='teaser',
           'teaser.examples.simulation',
           'teaser.examples.verification',
           'teaser.examples.examplefiles',
-          'teaser.examples.examplefiles.MelatenXML',
-          'teaser.gui',
-          'teaser.gui.controller',
-          'teaser.gui.guihelp',
-          'teaser.gui.guiimages',
-          'teaser.gui.guiimages.OfficeBuildings',
-          'teaser.gui.guiimages.Residentials'],
+          'teaser.examples.examplefiles.MelatenXML'],
       package_data={
           'teaser.data.input.inputdata': ['*.xml'],
           'teaser.data.input.inputdata.weatherdata': [
@@ -80,9 +73,6 @@ setup(name='teaser',
               'ReadableBuilding_ThreeElement',
               'ReadableBuilding_FourElement'],
           'teaser.data.bindings.schemas': ['*.xsd'],
-          'teaser.gui.guiimages': ['*.png'],
-          'teaser.gui.guiimages.OfficeBuildings': ['*.png'],
-          'teaser.gui.guiimages.Residentials': ['*.png'],
           'teaser.examples.examplefiles': ['*.teaserXML', '*.gml'],
           'teaser.examples.examplefiles.MelatenXML': ['*.xml']},
       classifiers=[

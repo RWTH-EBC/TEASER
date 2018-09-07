@@ -22,18 +22,25 @@ from teaser.logic.buildingobjects.thermalzone import ThermalZone
 class Office(NonResidential):
     """Archetype Office Building according to BMVBS
 
-    Subclass from NonResidential archetpye class to represent office buildings.
+    Subclass from NonResidential archetype class to represent office buildings.
 
     The office module contains a multi zone building according to BMVBS (see
     :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`).
     This German office building contains 6 usage zones (zones with similar
     thermal behaviour). Each zone has 4 outer walls, 4 windows, a roof and a
-    ground floor. Depending on zone usage (typical length and wicth) an interior
-    wall area is assigned to. It make number_of_floors and height_of_floors
+    ground floor. Depending on zone usage (typical length and width), an
+    interior
+    wall area is assigned. Exterior wall
+    surfaces are estimated based on
+    :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010`.
+    Refinements of the archetype follow the approach of :cite:`Kaag.March2008`.
+    number_of_floors and height_of_floors are
     mandatory parameters. Additional information can be passed
     to the archetype (e.g. floor layout and window layout).
 
-    Default values are given according to BMVBS.
+    All default values are given according to
+    :cite:`BundesministeriumfurVerkehrBauundStadtentwicklung.December2010` and
+    :cite:`Kaag.March2008` if not stated otherwise.
 
     In detail the net leased area is divided into the following thermal zone
     areas:
@@ -199,7 +206,7 @@ class Office(NonResidential):
 
         self.floor_names = {"Floor": [0, -2]}
 
-        self.gross_factor = 1.15
+        self.gross_factor = 1.15  # based on :cite:`Liebchen.2007`
         self.est_factor_wall_area = 0.7658
         self.est_exponent_wall = 0.9206
         self.est_factor_win_area = 0.074
@@ -252,10 +259,14 @@ class Office(NonResidential):
             self.central_ahu.profile_temperature = (7 * [293.15] +
                                                     12 * [295.15] +
                                                     6 * [293.15])
-            self.central_ahu.profile_min_relative_humidity = (25 * [0.45])
-            self.central_ahu.profile_max_relative_humidity = (25 * [0.55])
+            #  according to :cite:`DeutschesInstitutfurNormung.2016`
+            self.central_ahu.profile_min_relative_humidity = (25 * [0.45])  #
+            #  according to :cite:`DeutschesInstitutfurNormung.2016b`  and
+            # :cite:`DeutschesInstitutfurNormung.2016`
+            self.central_ahu.profile_max_relative_humidity = (25 * [0.65])
             self.central_ahu.profile_v_flow = (
-                7 * [0.0] + 12 * [1.0] + 6 * [0.0])
+                7 * [0.0] + 12 * [1.0] + 6 * [0.0])  # according to user
+            # profile in :cite:`DeutschesInstitutfurNormung.2016`
 
     def generate_archetype(self):
         """Generates an office building.
@@ -264,6 +275,7 @@ class Office(NonResidential):
         according to TEASER requirements.
         """
         # help area for the correct building area setting while using typeBldgs
+        self.thermal_zones = None
         type_bldg_area = self.net_leased_area
         self.net_leased_area = 0.0
         # create zones with their corresponding area, name and usage
@@ -299,7 +311,7 @@ class Office(NonResidential):
 
         if not self.window_layout == 0:
             self._est_outer_wall_area = self._est_facade_area * \
-                                        self.corr_factor_wall
+                self.corr_factor_wall
             self._est_win_area = self._est_facade_area * self.corr_factor_win
         else:
             pass
@@ -310,16 +322,16 @@ class Office(NonResidential):
             # North and South
             if value[1] == 0 or value[1] == 180:
                 self.outer_area[value[1]] = self._est_outer_wall_area * \
-                                            (self._est_length / (
-                                                2 * self._est_width + 2 *
-                                                self._est_length))
+                    (self._est_length / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
             # East and West
             elif value[1] == 90 or value[1] == 270:
 
                 self.outer_area[value[1]] = self._est_outer_wall_area * \
-                                            (self._est_width / (
-                                                2 * self._est_width + 2 *
-                                                self._est_length))
+                    (self._est_width / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
             for zone in self.thermal_zones:
                 # create wall and set building elements
                 outer_wall = OuterWall(zone)
@@ -336,16 +348,16 @@ class Office(NonResidential):
             if value[1] == 0 or value[1] == 180:
 
                 self.window_area[value[1]] = self._est_win_area * \
-                                             (self._est_length / (
-                                                 2 * self._est_width + 2 *
-                                                 self._est_length))
+                    (self._est_length / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
 
             elif value[1] == 90 or value[1] == 270:
 
                 self.window_area[value[1]] = self._est_win_area * \
-                                             (self._est_width / (
-                                                 2 * self._est_width + 2 *
-                                                 self._est_length))
+                    (self._est_width / (
+                        2 * self._est_width + 2 *
+                        self._est_length))
 
             '''
             There is no real classification for windows, so this is a bit hard

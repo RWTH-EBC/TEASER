@@ -3,31 +3,28 @@ within ${zone.parent.parent.name}.${zone.parent.name}.${zone.parent.name}_Models
 model ${zone.parent.name}_${zone.name}
   "This is the simulation model of ${zone.name} within building ${zone.parent.name} with traceable ID ${zone.parent.building_id}"
 
-  IBPSA.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
-    calTSky=IBPSA.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
+  ${library}.BoundaryConditions.WeatherData.ReaderTMY3 weaDat(
+    calTSky=${library}.BoundaryConditions.Types.SkyTemperatureCalculation.HorizontalRadiation,
     computeWetBulbTemperature=false,
     filNam="${zone.parent.parent.weather_file_path.replace("\\", "/")}")
     "Weather data reader"
     annotation (Placement(transformation(extent={{-98,52},{-78,72}})));
-  IBPSA.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${min_orientations(zone.model_attr.n_outer)}](
-    each outSkyCon=true,
+  ${library}.BoundaryConditions.SolarIrradiation.DiffusePerez HDifTil[${min_orientations(zone.model_attr.n_outer)}](    each outSkyCon=true,
     each outGroCon=true,
     til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
     each lat = ${deg_to_rad(zone.parent.latitude)},
     azi = ${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates diffuse solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,20},{-48,40}})));
-  IBPSA.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${min_orientations(zone.model_attr.n_outer)}](
-    til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
+  ${library}.BoundaryConditions.SolarIrradiation.DirectTiltedSurface HDirTil[${min_orientations(zone.model_attr.n_outer)}](    til=${get_list(deg_to_rad(zone.model_attr.tilt_facade))},
     each lat =  ${deg_to_rad(zone.parent.latitude)},
     azi=${get_list(azmiut_conv(zone.model_attr.orientation_facade))})
     "Calculates direct solar radiation on titled surface for all directions"
     annotation (Placement(transformation(extent={{-68,52},{-48,72}})));
-  IBPSA.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${min_orientations(zone.model_attr.n_outer)},
-  UWin=${zone.model_attr.u_value_win})
+  ${library}.ThermalZones.ReducedOrder.SolarGain.CorrectionGDoublePane corGDoublePane(n=${min_orientations(zone.model_attr.n_outer)},  UWin=${zone.model_attr.u_value_win})
     "Correction factor for solar transmission"
     annotation (Placement(transformation(extent={{6,54},{26,74}})));
-  IBPSA.ThermalZones.ReducedOrder.RC.OneElement
+  ${library}.ThermalZones.ReducedOrder.RC.OneElement
   thermalZoneOneElement(
     redeclare package Medium = Modelica.Media.Air.DryAirNasa,
 % if zone.parent.library_attr.consider_heat_capacity is True:
@@ -54,7 +51,7 @@ model ${zone.parent.name}_${zone.name}
     "Thermal zone"
     annotation (Placement(transformation(extent={{44,-2},{92,34}})));
 % if zone.model_attr.merge_windows is True:
-  IBPSA.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
+  ${library}.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007 eqAirTemp(
     n=${min_orientations(zone.model_attr.n_outer)},
     wfGro=${zone.model_attr.weightfactor_ground},
     wfWall=${get_list(zone.model_attr.weightfactor_ow)},
@@ -66,7 +63,7 @@ model ${zone.parent.name}_${zone.name}
     TGro=${zone.t_ground}) "Computes equivalent air temperature"
     annotation (Placement(transformation(extent={{-24,-14},{-4,6}})));
 % else:
-  IBPSA.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
+  ${library}.ThermalZones.ReducedOrder.EquivalentAirTemperature.VDI6007WithWindow eqAirTemp(
     n=${min_orientations(zone.model_attr.n_outer)},
     wfGro=${zone.model_attr.weightfactor_ground},
     wfWall=${get_list(zone.model_attr.weightfactor_ow)},
@@ -99,7 +96,7 @@ model ${zone.parent.name}_${zone.name}
   Modelica.Blocks.Sources.Constant const[${min_orientations(zone.model_attr.n_outer)}](each k=0)
     "Sets sunblind signal to zero (open)"
     annotation (Placement(transformation(extent={{-20,14},{-14,20}})));
-  IBPSA.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
+  ${library}.BoundaryConditions.WeatherData.Bus weaBus "Weather data bus"
     annotation (Placement(
     transformation(extent={{-100,-10},{-66,22}}),iconTransformation(
     extent={{-70,-12},{-50,8}})));
