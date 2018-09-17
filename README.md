@@ -64,7 +64,7 @@ models for all libraries supporting the
 
 ## Version
 
-TEASER is a ongoing research project, the current version is 0.6.0, which is
+TEASER is a ongoing research project, the current version is 0.6.1, which is
 still a pre-release.
 
 ## How to use TEASER
