@@ -74,6 +74,14 @@ class DataClass(object):
                     'inputdata',
                     'TypeElements_TABULA_DE.xml'))
             self.load_tb_binding()
+        elif self.used_statistic == 'tabula_dk':
+            self.path_tb = utils.get_full_path(
+                os.path.join(
+                    'data',
+                    'input',
+                    'inputdata',
+                    'TypeElements_TABULA_DK.xml'))
+            self.load_tb_binding()
         elif self.used_statistic is None:
             pass
         self.material_bind = None

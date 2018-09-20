@@ -1,0 +1,179 @@
+<?xml version="1.0" ?>
+<elements:TypeBuildingElements version="0.6" xmlns:elements="http://teaser/0.6/elements">
+	<elements:OuterWall>
+		<elements:building_age_group>2007 2010</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="ca3f72e2-bbdf-11e8-a9b9-08002700bc00">brick_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="a3b2c3d4-bb52-11e8-b061-08002700bc00">insulation037_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="ca3f72e2-bbdf-11e8-a9b9-08002700bc00">brick_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:OuterWall>
+	<elements:Rooftop>
+		<elements:building_age_group>2007 2010</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.02</elements:thickness>
+				<elements:material material_id="4a28a438-bb51-11e8-b2fe-08002700bc00">gypsum_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.3</elements:thickness>
+				<elements:material material_id="a3b2c3d4-bb52-11e8-b061-08002700bc00">insulation037_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.2</elements:thickness>
+				<elements:material material_id="daf0cf28-bb52-11e8-8cfc-08002700bc00">air_layer_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Rooftop>
+	<elements:GroundFloor>
+		<elements:building_age_group>2007 2010</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.022</elements:thickness>
+				<elements:material material_id="b38b12e6-bbea-11e8-ba5c-08002700bc00">wood_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.1</elements:thickness>
+				<elements:material material_id="ed7bec46-bbea-11e8-a68c-08002700bc00">concrete_DK</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.3</elements:thickness>
+				<elements:material material_id="a3b2c3d4-bb52-11e8-b061-08002700bc00">insulation037_DK</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:GroundFloor>
+	<elements:Door>
+		<elements:building_age_group>2007 2010</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.049</elements:thickness>
+				<elements:material material_id="25be60b0-3a43-11e7-aece-2cd444b2e704">oak_longitudinal</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Door>
+	<elements:Window>
+		<elements:building_age_group>2007 2010</elements:building_age_group>
+		<elements:construction_type>tabula_standard_1_SFH</elements:construction_type>
+		<elements:inner_convection>1.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:outer_convection>20.0</elements:outer_convection>
+		<elements:outer_radiation>5.0</elements:outer_radiation>
+		<elements:g_value>0.63</elements:g_value>
+		<elements:a_conv>0.0</elements:a_conv>
+		<elements:shading_g_total>0.0</elements:shading_g_total>
+		<elements:shading_max_irr>0.0</elements:shading_max_irr>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.375</elements:thickness>
+				<elements:material material_id="0abbb19a-83ff-11e6-bacd-2cd444b2e704">glas_generic</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Window>
+	<elements:InnerWall>
+		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:construction_type>tabula_standard</elements:construction_type>
+		<elements:inner_convection>2.7</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.01</elements:thickness>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.15</elements:thickness>
+				<elements:material material_id="291e6c06-3a43-11e7-ac4a-2cd444b2e704">vertical_core_brick_700</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.01</elements:thickness>
+				<elements:material material_id="2e2c8180-3a43-11e7-a6be-2cd444b2e704">lime_plaster</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:InnerWall>
+	<elements:Ceiling>
+		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:construction_type>tabula_standard</elements:construction_type>
+		<elements:inner_convection>1.7000000000000002</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.06</elements:thickness>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Ceiling>
+	<elements:Floor>
+		<elements:building_age_group>1995 2015</elements:building_age_group>
+		<elements:construction_type>tabula_standard</elements:construction_type>
+		<elements:inner_convection>1.7000000000000002</elements:inner_convection>
+		<elements:inner_radiation>5.0</elements:inner_radiation>
+		<elements:Layers>
+			<elements:layer>
+				<elements:id>0</elements:id>
+				<elements:thickness>0.04</elements:thickness>
+				<elements:material material_id="6755e6e6-3a43-11e7-adad-2cd444b2e704">cement_floating_screed_2_bottom</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>1</elements:id>
+				<elements:thickness>0.06</elements:thickness>
+				<elements:material material_id="25d281da-3a43-11e7-8191-2cd444b2e704">EPS_040_15</elements:material>
+			</elements:layer>
+			<elements:layer>
+				<elements:id>2</elements:id>
+				<elements:thickness>0.16</elements:thickness>
+				<elements:material material_id="253f8030-3a43-11e7-8735-2cd444b2e704">concrete_CEM_II_BS325R_wz05</elements:material>
+			</elements:layer>
+		</elements:Layers>
+	</elements:Floor>
+</elements:TypeBuildingElements>

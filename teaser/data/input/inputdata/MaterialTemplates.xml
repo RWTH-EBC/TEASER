@@ -4033,7 +4033,7 @@
 		<materials:thickness_list>0.2</materials:thickness_list>
 	</materials:Material>
 	<materials:Material material_id="68243ac0-3a43-11e7-b403-2cd444b2e704">
-		<materials:name>brick_chipping_concrete_closed_cell_2000</materials:name>
+		<materials:name>_chipping_concrete_closed_cell_2000</materials:name>
 		<materials:density>2000.0</materials:density>
 		<materials:thermal_conduc>1.105</materials:thermal_conduc>
 		<materials:heat_capac>1.05</materials:heat_capac>
@@ -4042,7 +4042,7 @@
 		<materials:thickness_list>0.2</materials:thickness_list>
 	</materials:Material>
 	<materials:Material material_id="686a60b8-3a43-11e7-9a8e-2cd444b2e704">
-		<materials:name>brick_chipping_concrete_porous_1200</materials:name>
+		<materials:name>_chipping_concrete_porous_1200</materials:name>
 		<materials:density>1200.0</materials:density>
 		<materials:thermal_conduc>0.593</materials:thermal_conduc>
 		<materials:heat_capac>1.05</materials:heat_capac>
@@ -4051,7 +4051,7 @@
 		<materials:thickness_list>0.2</materials:thickness_list>
 	</materials:Material>
 	<materials:Material material_id="68bd2eee-3a43-11e7-92ba-2cd444b2e704">
-		<materials:name>brick_chipping_concrete_porous_1400</materials:name>
+		<materials:name>_chipping_concrete_porous_1400</materials:name>
 		<materials:density>1400.0</materials:density>
 		<materials:thermal_conduc>0.616</materials:thermal_conduc>
 		<materials:heat_capac>1.05</materials:heat_capac>
@@ -4060,7 +4060,7 @@
 		<materials:thickness_list>0.2</materials:thickness_list>
 	</materials:Material>
 	<materials:Material material_id="6902b8c0-3a43-11e7-9a2b-2cd444b2e704">
-		<materials:name>brick_chipping_concrete_porous_1600</materials:name>
+		<materials:name>_chipping_concrete_porous_1600</materials:name>
 		<materials:density>1600.0</materials:density>
 		<materials:thermal_conduc>0.779</materials:thermal_conduc>
 		<materials:heat_capac>1.05</materials:heat_capac>
@@ -4069,7 +4069,7 @@
 		<materials:thickness_list>0.2</materials:thickness_list>
 	</materials:Material>
 	<materials:Material material_id="69497ade-3a43-11e7-b7fc-2cd444b2e704">
-		<materials:name>brick_1</materials:name>
+		<materials:name>_1</materials:name>
 		<materials:density>1644.0</materials:density>
 		<materials:thermal_conduc>0.68</materials:thermal_conduc>
 		<materials:heat_capac>1.0</materials:heat_capac>
@@ -4418,5 +4418,68 @@
 		<materials:solar_absorp>0.5</materials:solar_absorp>
 		<materials:thickness_default>0.008</materials:thickness_default>
 		<materials:thickness_list>0.006 0.01 0.013</materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="34881c24-bb21-11e8-b887-08002700bc00">
+		<materials:name>Insulation_DK_2</materials:name>
+		<materials:density>1500.0</materials:density>
+		<materials:thermal_conduc>1.0</materials:thermal_conduc>
+		<materials:heat_capac>0.04</materials:heat_capac>
+		<materials:solar_absorp>0.0</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="4a28a438-bb51-11e8-b2fe-08002700bc00">
+		<materials:name>gypsum_DK</materials:name>
+		<materials:density>850.0</materials:density>
+		<materials:thermal_conduc>0.25</materials:thermal_conduc>
+		<materials:heat_capac>1.0</materials:heat_capac>
+		<materials:solar_absorp>0.5</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="a3b2c3d4-bb52-11e8-b061-08002700bc00">
+		<materials:name>insulation037_DK</materials:name>
+		<materials:density>850.0</materials:density>
+		<materials:thermal_conduc>0.037</materials:thermal_conduc>
+		<materials:heat_capac>1.0</materials:heat_capac>
+		<materials:solar_absorp>0.5</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="daf0cf28-bb52-11e8-8cfc-08002700bc00">
+		<materials:name>air_layer_DK</materials:name>
+		<materials:density>1184.0</materials:density>
+		<materials:thermal_conduc>0.35</materials:thermal_conduc>
+		<materials:heat_capac>1.0</materials:heat_capac>
+		<materials:solar_absorp>0.5</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="ca3f72e2-bbdf-11e8-a9b9-08002700bc00">
+		<materials:name>brick_DK</materials:name>
+		<materials:density>1800.0</materials:density>
+		<materials:thermal_conduc>0.6</materials:thermal_conduc>
+		<materials:heat_capac>0.85</materials:heat_capac>
+		<materials:solar_absorp>0.5</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="b38b12e6-bbea-11e8-ba5c-08002700bc00">
+		<materials:name>wood_DK</materials:name>
+		<materials:density>700.0</materials:density>
+		<materials:thermal_conduc>0.13</materials:thermal_conduc>
+		<materials:heat_capac>1.6</materials:heat_capac>
+		<materials:solar_absorp>0.5</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
+	</materials:Material>
+	<materials:Material material_id="ed7bec46-bbea-11e8-a68c-08002700bc00">
+		<materials:name>concrete_DK</materials:name>
+		<materials:density>2100.0</materials:density>
+		<materials:thermal_conduc>1.9</materials:thermal_conduc>
+		<materials:heat_capac>0.8</materials:heat_capac>
+		<materials:solar_absorp>0.5</materials:solar_absorp>
+		<materials:thickness_default>0.0</materials:thickness_default>
+		<materials:thickness_list></materials:thickness_list>
 	</materials:Material>
 </materials:MaterialTemplates>
