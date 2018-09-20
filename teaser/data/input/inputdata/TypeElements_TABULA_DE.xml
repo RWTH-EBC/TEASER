@@ -13469,7 +13469,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13488,7 +13488,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13507,7 +13507,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13526,7 +13526,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13545,7 +13545,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13564,7 +13564,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13583,7 +13583,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13602,7 +13602,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13621,7 +13621,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13640,7 +13640,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13659,7 +13659,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13678,7 +13678,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13697,7 +13697,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13716,7 +13716,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13735,7 +13735,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13754,7 +13754,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13773,7 +13773,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13792,7 +13792,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13811,7 +13811,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13830,7 +13830,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13849,7 +13849,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13868,7 +13868,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13887,7 +13887,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13906,7 +13906,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13925,7 +13925,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13944,7 +13944,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13963,7 +13963,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -13982,7 +13982,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14001,7 +14001,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14020,7 +14020,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14039,7 +14039,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14058,7 +14058,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14077,7 +14077,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14096,7 +14096,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14115,7 +14115,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14134,7 +14134,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14153,7 +14153,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14172,7 +14172,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14191,7 +14191,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14210,7 +14210,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14229,7 +14229,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14248,7 +14248,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14267,7 +14267,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14286,7 +14286,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14305,7 +14305,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14324,7 +14324,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14343,7 +14343,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14362,7 +14362,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14381,7 +14381,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14400,7 +14400,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14419,7 +14419,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14438,7 +14438,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14457,7 +14457,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14476,7 +14476,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14495,7 +14495,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14514,7 +14514,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14533,7 +14533,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14552,7 +14552,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14571,7 +14571,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14590,7 +14590,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14609,7 +14609,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14628,7 +14628,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14647,7 +14647,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14666,7 +14666,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14685,7 +14685,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14704,7 +14704,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14723,7 +14723,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14742,7 +14742,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14761,7 +14761,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14780,7 +14780,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14799,7 +14799,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14818,7 +14818,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14837,7 +14837,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14856,7 +14856,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14875,7 +14875,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14894,7 +14894,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14913,7 +14913,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14932,7 +14932,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14951,7 +14951,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14970,7 +14970,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -14989,7 +14989,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15008,7 +15008,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15027,7 +15027,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15046,7 +15046,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15065,7 +15065,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15084,7 +15084,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15103,7 +15103,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15122,7 +15122,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15141,7 +15141,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15160,7 +15160,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15179,7 +15179,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15198,7 +15198,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15217,7 +15217,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15236,7 +15236,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15255,7 +15255,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15274,7 +15274,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15293,7 +15293,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.75</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15312,7 +15312,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15331,7 +15331,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15350,7 +15350,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15369,7 +15369,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15388,7 +15388,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15407,7 +15407,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15426,7 +15426,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15445,7 +15445,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15464,7 +15464,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15483,7 +15483,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15502,7 +15502,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15521,7 +15521,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15540,7 +15540,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15559,7 +15559,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15578,7 +15578,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15597,7 +15597,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15616,7 +15616,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15635,7 +15635,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15654,7 +15654,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15673,7 +15673,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15692,7 +15692,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15711,7 +15711,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15730,7 +15730,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15749,7 +15749,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15768,7 +15768,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15787,7 +15787,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15806,7 +15806,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15825,7 +15825,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.6</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
@@ -15844,7 +15844,7 @@
 		<elements:outer_convection>20.0</elements:outer_convection>
 		<elements:outer_radiation>5.0</elements:outer_radiation>
 		<elements:g_value>0.5</elements:g_value>
-		<elements:a_conv>0.0</elements:a_conv>
+		<elements:a_conv>0.02</elements:a_conv>
 		<elements:shading_g_total>0.0</elements:shading_g_total>
 		<elements:shading_max_irr>0.0</elements:shading_max_irr>
 		<elements:Layers>
