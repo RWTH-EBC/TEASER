@@ -4033,7 +4033,7 @@
 		<materials:thickness_list>0.2</materials:thickness_list>
 	</materials:Material>
 	<materials:Material material_id="68243ac0-3a43-11e7-b403-2cd444b2e704">
-		<materials:name>_chipping_concrete_closed_cell_2000</materials:name>
+		<materials:name>brick_chipping_concrete_closed_cell_2000</materials:name>
 		<materials:density>2000.0</materials:density>
 		<materials:thermal_conduc>1.105</materials:thermal_conduc>
 		<materials:heat_capac>1.05</materials:heat_capac>
@@ -4042,7 +4042,7 @@
 		<materials:thickness_list>0.2</materials:thickness_list>
 	</materials:Material>
 	<materials:Material material_id="686a60b8-3a43-11e7-9a8e-2cd444b2e704">
-		<materials:name>_chipping_concrete_porous_1200</materials:name>
+		<materials:name>brick_chipping_concrete_porous_1200</materials:name>
 		<materials:density>1200.0</materials:density>
 		<materials:thermal_conduc>0.593</materials:thermal_conduc>
 		<materials:heat_capac>1.05</materials:heat_capac>
@@ -4051,7 +4051,7 @@
 		<materials:thickness_list>0.2</materials:thickness_list>
 	</materials:Material>
 	<materials:Material material_id="68bd2eee-3a43-11e7-92ba-2cd444b2e704">
-		<materials:name>_chipping_concrete_porous_1400</materials:name>
+		<materials:name>brick_chipping_concrete_porous_1400</materials:name>
 		<materials:density>1400.0</materials:density>
 		<materials:thermal_conduc>0.616</materials:thermal_conduc>
 		<materials:heat_capac>1.05</materials:heat_capac>
@@ -4060,7 +4060,7 @@
 		<materials:thickness_list>0.2</materials:thickness_list>
 	</materials:Material>
 	<materials:Material material_id="6902b8c0-3a43-11e7-9a2b-2cd444b2e704">
-		<materials:name>_chipping_concrete_porous_1600</materials:name>
+		<materials:name>brick_chipping_concrete_porous_1600</materials:name>
 		<materials:density>1600.0</materials:density>
 		<materials:thermal_conduc>0.779</materials:thermal_conduc>
 		<materials:heat_capac>1.05</materials:heat_capac>
@@ -4069,7 +4069,7 @@
 		<materials:thickness_list>0.2</materials:thickness_list>
 	</materials:Material>
 	<materials:Material material_id="69497ade-3a43-11e7-b7fc-2cd444b2e704">
-		<materials:name>_1</materials:name>
+		<materials:name>brick_1</materials:name>
 		<materials:density>1644.0</materials:density>
 		<materials:thermal_conduc>0.68</materials:thermal_conduc>
 		<materials:heat_capac>1.0</materials:heat_capac>
