@@ -233,6 +233,7 @@ class AixLib(object):
 
                         else:
                             pass
+            # This exports the profile, currently test status
             else:
                 for index, i in enumerate(time_line):
                     index -= 1
