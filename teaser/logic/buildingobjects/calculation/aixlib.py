@@ -210,7 +210,7 @@ class AixLib(object):
                                     zone_count.use_conditions.set_temp_heat)
                             elif time_line[i][0] == \
                                 (zone_count.use_conditions.heating_time[
-                                        1] + 1) * 3600:
+                                    1] + 1) * 3600:
                                 time_line[i].append(
                                     zone_count.use_conditions.set_temp_heat)
                                 time_line[i + 1].append(
@@ -218,7 +218,7 @@ class AixLib(object):
                                     zone_count.use_conditions.temp_set_back)
                             elif time_line[i][0] > \
                                 (zone_count.use_conditions.heating_time[
-                                        1] + 1) * 3600:
+                                    1] + 1) * 3600:
                                 time_line[i].append(
                                     zone_count.use_conditions.set_temp_heat -
                                     zone_count.use_conditions.temp_set_back)
