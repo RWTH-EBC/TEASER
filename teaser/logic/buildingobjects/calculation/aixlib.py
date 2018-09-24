@@ -52,6 +52,10 @@ class AixLib(object):
         considers heating_time and temp_set_back defined in
         use_conditions of zone. Default is True, you need to export your
         model again if changing this value
+    use_set_point_temperature_profile_heating : bool
+        Standard is False. True if the set_point temperature profile heating
+        should be used for the export. Then, the night set back and everything
+        except the set point profile will be ignored.
     """
 
     def __init__(self, parent):
@@ -65,6 +69,7 @@ class AixLib(object):
         self.total_surface_area = None
         self.consider_heat_capacity = True
         self.use_set_back = True
+        self.use_set_point_temperature_profile_heating = False
 
     def calc_auxiliary_attr(self):
         """Calls function to calculate all auxiliary attributes for AixLib"""
@@ -173,58 +178,73 @@ class AixLib(object):
         time_line = self.create_profile(double=True)
 
         for zone_count in self.parent.thermal_zones:
-            for i in range(len(time_line)):
-                if self.use_set_back is False:
-                    time_line[i].append(zone_count.use_conditions.set_temp_heat)
-                else:
-                    i -= 1
-                    if i % 2 == 0:
-                        if zone_count.use_conditions.heating_time[0] == 0:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_heat)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_heat)
-                        elif time_line[i][0] < \
-                                zone_count.use_conditions.heating_time[0] * 3600:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_heat -
-                                zone_count.use_conditions.temp_set_back)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_heat -
-                                zone_count.use_conditions.temp_set_back)
-                        elif time_line[i][0] == \
-                                zone_count.use_conditions.heating_time[0] * 3600:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_heat -
-                                zone_count.use_conditions.temp_set_back)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_heat)
-                        elif time_line[i][0] == \
-                            (zone_count.use_conditions.heating_time[1] + 1) * \
-                                3600:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_heat)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_heat -
-                                zone_count.use_conditions.temp_set_back)
-                        elif time_line[i][0] > \
-                            (zone_count.use_conditions.heating_time[1] + 1) * \
-                                3600:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_heat -
-                                zone_count.use_conditions.temp_set_back)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_heat -
-                                zone_count.use_conditions.temp_set_back)
-                        else:
-                            time_line[i].append(
-                                zone_count.use_conditions.set_temp_heat)
-                            time_line[i + 1].append(
-                                zone_count.use_conditions.set_temp_heat)
+            if self.use_set_point_temperature_profile_heating is False:
+                for i in range(len(time_line)):
+                    if self.use_set_back is False:
+                        time_line[i].append(
+                            zone_count.use_conditions.set_temp_heat)
+                    else:
+                        i -= 1
+                        if i % 2 == 0:
+                            if zone_count.use_conditions.heating_time[0] == 0:
+                                time_line[i].append(
+                                    zone_count.use_conditions.set_temp_heat)
+                                time_line[i + 1].append(
+                                    zone_count.use_conditions.set_temp_heat)
+                            elif time_line[i][0] < \
+                                    zone_count.use_conditions.heating_time[
+                                        0] * 3600:
+                                time_line[i].append(
+                                    zone_count.use_conditions.set_temp_heat -
+                                    zone_count.use_conditions.temp_set_back)
+                                time_line[i + 1].append(
+                                    zone_count.use_conditions.set_temp_heat -
+                                    zone_count.use_conditions.temp_set_back)
+                            elif time_line[i][0] == \
+                                    zone_count.use_conditions.heating_time[
+                                        0] * 3600:
+                                time_line[i].append(
+                                    zone_count.use_conditions.set_temp_heat -
+                                    zone_count.use_conditions.temp_set_back)
+                                time_line[i + 1].append(
+                                    zone_count.use_conditions.set_temp_heat)
+                            elif time_line[i][0] == \
+                                (zone_count.use_conditions.heating_time[
+                                        1] + 1) * 3600:
+                                time_line[i].append(
+                                    zone_count.use_conditions.set_temp_heat)
+                                time_line[i + 1].append(
+                                    zone_count.use_conditions.set_temp_heat -
+                                    zone_count.use_conditions.temp_set_back)
+                            elif time_line[i][0] > \
+                                (zone_count.use_conditions.heating_time[
+                                    1] + 1) * 3600:
+                                time_line[i].append(
+                                    zone_count.use_conditions.set_temp_heat -
+                                    zone_count.use_conditions.temp_set_back)
+                                time_line[i + 1].append(
+                                    zone_count.use_conditions.set_temp_heat -
+                                    zone_count.use_conditions.temp_set_back)
+                            else:
+                                time_line[i].append(
+                                    zone_count.use_conditions.set_temp_heat)
+                                time_line[i + 1].append(
+                                    zone_count.use_conditions.set_temp_heat)
 
+                        else:
+                            pass
+            else:
+                for index, i in enumerate(time_line):
+                    index -= 1
+                    if index % 2 == 0:
+                        time_line[index].append(
+                            zone_count.use_conditions.profile_heating_temp[
+                                int(i[0]/3600)])
+                        time_line[index + 1].append(
+                            zone_count.use_conditions.profile_heating_temp[
+                                int(i[0]/3600)])
                     else:
                         pass
-
         scipy.io.savemat(
             path,
             mdict={'Tset': time_line},
