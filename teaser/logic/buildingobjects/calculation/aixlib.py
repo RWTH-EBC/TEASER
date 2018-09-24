@@ -218,7 +218,7 @@ class AixLib(object):
                                     zone_count.use_conditions.temp_set_back)
                             elif time_line[i][0] > \
                                 (zone_count.use_conditions.heating_time[
-                                    1] + 1) * 3600:
+                                        1] + 1) * 3600:
                                 time_line[i].append(
                                     zone_count.use_conditions.set_temp_heat -
                                     zone_count.use_conditions.temp_set_back)
@@ -240,10 +240,10 @@ class AixLib(object):
                     if index % 2 == 0:
                         time_line[index].append(
                             zone_count.use_conditions.profile_heating_temp[
-                                int(i[0]/3600)])
+                                int(i[0] / 3600)])
                         time_line[index + 1].append(
                             zone_count.use_conditions.profile_heating_temp[
-                                int(i[0]/3600)])
+                                int(i[0] / 3600)])
                     else:
                         pass
         scipy.io.savemat(
