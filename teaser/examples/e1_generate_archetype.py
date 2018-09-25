@@ -80,7 +80,7 @@ def example_generate_archetype():
     # `tabula_retrofit` or `tabula_adv_retrofit`. In this case we generate one
     # single and one multi family house with TABULA typology.
 
-    # Please not: as we need to load ne construction information which are
+    # Please not: as we need to load the construction information which are
     # rather big for TABULA, switching from one typology to another in the same
     # Project takes some seconds. If you know from beginning you will only use
     # TABULA typology you should instantiate you Project class without loading
