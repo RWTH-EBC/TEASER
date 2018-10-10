@@ -41,14 +41,17 @@ class BuildingAHU(object):
          By-pass factor of cooling coil during dehumidification. Necessary to
          calculate the real outgoing enthalpy flow of heat exchanger in
          dehumidification mode taking the surface enthalpy of the cooling
-         coil into account. In AixLib called "BPF_DeHu" (default = 0.2)
+         coil into account. In AixLib called "BPF_DeHu" (default = 0.2,
+         according to :cite:`Lindeburg.2013`)
     efficiency_recovery : float
         efficiency of HRS in the AHU modes if HRS is enabled.
-        AixLib: "efficiencyHRS_enabled" (default = 0.8)
+        AixLib: "efficiencyHRS_enabled" (default = 0.65, according to
+        :cite:`.20012001`)
     efficiency_recovery_false : float
         taking a little heat transfer into account although HRS is disabled
         (in case that a HRS is physically installed in the AHU) in AixLib:
-        "efficiencyHRS_disabled" (default = 0.2)
+        "efficiencyHRS_disabled" (default = 0.2, according to
+        :cite:`Mehrfeld.2014`)
     sample_rate : int
         sample rate of state machines in AHU model. Default is set to half
         an hour as typical input is hourly (default = 1800)
@@ -82,7 +85,7 @@ class BuildingAHU(object):
         self.humidification = True
         self.heat_recovery = True
         self.by_pass_dehumidification = 0.2
-        self.efficiency_recovery = 0.8
+        self.efficiency_recovery = 0.65
         self.efficiency_recovery_false = 0.2
         self.sample_rate = 1800
         self.efficiency_fan_supply = 0.7
